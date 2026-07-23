@@ -44,7 +44,7 @@ prove, the theorems of two research manuscripts (see
 The library is the proof backend for two companion papers. Each has a
 dedicated folder containing the LaTeX source, a machine-checked statement
 inventory (`statements.json`) mapping every named statement of the paper to
-the Lean identifiers that prove it, and a reviewer-oriented README with the
+the Lean identifiers that prove it, and a README with the
 full verification summary.
 
 ### 1. Renewal Spectral Geometry and the Emergence of Lorentzian Spacetime
