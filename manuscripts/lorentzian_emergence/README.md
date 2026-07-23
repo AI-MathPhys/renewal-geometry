@@ -87,8 +87,7 @@ category.
 ## Headline theorems
 
 A guide to the main results and where to inspect them.
-(Statement labels are the `\label`s in the manuscript; Lean names are
-`Ctrl+F`-able in `NCG/`.)
+(Statement labels are the `\label`s in the manuscript)
 
 * **The predictive spectral triple** (`thm:triple`) — the renewal data
 assembles into a genuine spectral triple; the commutator formula
