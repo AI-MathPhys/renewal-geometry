@@ -51,7 +51,7 @@ full verification summary.
 
 **→ [`manuscripts/lorentzian_emergence/`](manuscripts/lorentzian_emergence/)**
 
-The main paper: from a renewal process and its channel monoid to a predictive
+From a renewal process and its channel monoid to a predictive
 spectral triple; the positivity obstruction forcing a *signed* (Krein) sector
 classified by `H¹(G, ℤ/2)`; the canonical signed modular Dirac operator;
 operator-level Lorentzian continuum limits (flat, curved, band-limited,
