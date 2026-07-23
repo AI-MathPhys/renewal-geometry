@@ -1,8 +1,8 @@
 # Noncommutative & Renewal Geometry in Lean 4
 
 This repository is a [Lean 4](https://lean-lang.org/) / [Mathlib](https://github.com/leanprover-community/mathlib4)
-library formalizing **noncommutative geometry** (NCG) in Alain Connes'
-spectral-triple formulation together with **renewal spectral geometry** — the
+library formalizing **noncommutative geometry** (NCG) in [Alain Connes'
+spectral-triple](https://en.wikipedia.org/wiki/Spectral_triple) formulation together with **renewal spectral geometry** — the
 operational framework in which spacetime structure (Krein signature, Clifford
 blocks, Lorentzian continuum limits, `3+1` dimension selection) *emerges* from
 the predictive structure of renewal processes and completely positive channel
