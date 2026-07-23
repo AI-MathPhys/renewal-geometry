@@ -40,7 +40,7 @@ prove, the theorems of companions research manuscripts [companions research manu
 
 ## Related manuscripts
 
-The library is the proof backend for two companion papers. Each has a
+The library is the proof backend for several companion papers. Each has a
 dedicated folder containing the LaTeX source, a machine-checked statement
 inventory (`statements.json`) mapping every named statement of the paper to
 the Lean identifiers that prove it, and a README with the
