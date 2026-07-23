@@ -1,0 +1,1676 @@
+{
+  "def:process-system": {
+    "env": "definition",
+    "title": "Finite operational process system",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.ProcessSystem"
+    ],
+    "note": "[batch M4a 2026-07-21] Encoded in NCG/Upstream/ProcessCompleteness.lean as structure ProcessSystem extending OperationalSystem over a monoidal category: discard effects u_A : A -> I at every interface, trivial on the unit, multiplicative over tensor (via whiskering and the left unitor), and admissible; admissible continuations closed under whiskering by ancillas. Disclosure: the convex-mixing clause is abstracted into the structureless weight set W of the underlying operational system (as in def:ops), and symmetry of the monoidal structure is not imposed (no braiding is used downstream). AUDIT-2026-07-21: clause (iii)'s finite generating family is unmodeled (no finiteness anywhere, including GeneratedPresentation) and closure of terminal effects under classical postprocessing is absent."
+  },
+  "def:future-equivalence": {
+    "env": "definition",
+    "title": "Rooted future equivalence",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.FutureEquiv",
+      "NCG.Upstream.Qpred"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] label kept from the previous notes manuscript; record carried. future contextual equivalence over generated continuations and terminal tests, and the predictive quotient Q+(B)"
+  },
+  "prop:largest-congruence": {
+    "env": "proposition",
+    "title": "Rooted future congruence",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.futureEquiv_equivalence",
+      "NCG.Upstream.futureEquiv_comp"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:future-congruence' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved in full: equivalence relation plus stability under every generated future continuation, via associativity of path concatenation and functoriality of the semantics - exactly the manuscript's proof"
+  },
+  "def:two-sided-equivalence": {
+    "env": "definition",
+    "title": "Ordinary two-sided operational equivalence",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.CtxEquiv"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'def:two-sided' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: two-sided contextual equivalence encoded: rooted preparation on the left, admissible continuation and terminal test on the right"
+  },
+  "prop:two-sided-congruence": {
+    "env": "proposition",
+    "title": "Two-sided equivalence is a sequential congruence",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.ctxEquiv_precomp",
+      "NCG.Upstream.ctxEquiv_postcomp"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] label kept from the previous notes manuscript; record carried. proved in full: pre- and postcomposition stability by context absorption; postcomposition uses closure of the admissible continuations, exactly as in the manuscript proof AUDIT-2026-07-21: Lean requires admissibility (O.Cont v) of the postcomposed map; the text states arbitrary typed postcomposition (the manuscript proof itself uses admissibility, but the statement-level narrowing was undisclosed)."
+  },
+  "def:complete-equivalence": {
+    "env": "definition",
+    "title": "Complete contextual equivalence",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.CCtxEquiv"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'def:complete-contextual' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: completely contextual equivalence encoded via Mathlib monoidal whiskering p ▷ R over all ancillas, joint preparations, admissible continuations, and terminal tests"
+  },
+  "thm:parallel-completion": {
+    "env": "theorem",
+    "title": "Canonical parallel completion",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.cctxEquiv_maximal",
+      "NCG.Upstream.cctxEquiv_implies_ctxEquiv",
+      "NCG.Upstream.cctxEquiv_comp",
+      "NCG.Upstream.cctxEquiv_whiskerRight"
+    ],
+    "note": "[batch E1 2026-07-21] proved in NCG/Upstream/Operational.lean on the operational-category framework: complete contextual equivalence is stable under sequential composition (cctxEquiv_comp) and under tensoring with ancilla identities (cctxEquiv_whiskerRight, with the associator-admissibility hypothesis of the strict setting), implies ordinary two-sided equivalence by testing with the trivial ancilla and absorbing the right unitor (cctxEquiv_implies_ctxEquiv, with the unitor-admissibility hypothesis), and is the LARGEST relation contained in ordinary equivalence and stable under ancilla tensoring: any such relation is contained in CCtxEquiv (cctxEquiv_maximal). The sequential-stability clause of the maximality hypothesis list is not needed by the proof, which only consumes (a) and (c), a strengthening of the manuscript statement."
+  },
+  "def:parallel-completeness": {
+    "env": "definition",
+    "title": "Parallel completeness",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.ParallelComplete",
+      "NCG.Upstream.ctxSetoid",
+      "NCG.Upstream.cctxSetoid",
+      "NCG.Upstream.parallelComparison",
+      "NCG.Upstream.parallelComparison_surjective",
+      "NCG.Upstream.parallelComplete_iff_bijective"
+    ],
+    "note": "[batch M4a 2026-07-21] Encoded in NCG/Upstream/ProcessCompleteness.lean as ParallelComplete (CtxEquiv iff CCtxEquiv on every process set), with the canonical comparison kappa_{A,B} = parallelComparison from parallel classes onto sequential classes, and the stated equivalence \"every kappa_{A,B} bijective iff parallel complete\" genuinely PROVED (parallelComplete_iff_bijective), under the right-unitor absorption hypothesis hu used throughout the operational development."
+  },
+  "thm:universal-quotient": {
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.MonoidalHomRel",
+      "NCG.Upstream.monoidalQuotient",
+      "NCG.Upstream.braidedQuotient",
+      "NCG.Upstream.symmetricQuotient",
+      "NCG.Upstream.compClosure_whiskerLeft",
+      "NCG.Upstream.compClosure_whiskerRight",
+      "NCG.Upstream.quotientComparison",
+      "NCG.Upstream.quotient_iso_of_rel_iff"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED (MonoidalQuotient.lean): all three assertions now formalized on Mathlib category theory. (1) monoidalQuotient/braidedQuotient/symmetricQuotient: the quotient of a symmetric monoidal category by a monoidal congruence (MonoidalHomRel — the tensor-stability clause of thm:parallel-completion) is symmetric monoidal: tensor descends to classes (compClosure_whiskerLeft/Right) and every coherence law descends along the full quotient functor. (2) The universal property is CategoryTheory.Quotient.lift / lift_spec / lift_unique (Mathlib): every functor constant on complete contextual classes factors uniquely through the quotient functor; monoidality of the lifted functor holds with the transferred structure isos (the object-level data is unchanged) and is not separately bundled. (3) quotient_iso_of_rel_iff: under parallel completeness (the kernel relations coincide) the comparison functors compose to the identity in both directions — a canonical isomorphism of categories. Instantiation at P = C_G, r = CCtxEquiv per ProcessCompleteness.lean."
+  },
+  "prop:rebit-parallel-counterexample": {
+    "env": "proposition",
+    "title": "Real quantum theory has a strict parallel completion",
+    "status": "proved",
+    "lean": [
+      "NCG.transposeMap",
+      "NCG.realAmpliate",
+      "NCG.realAmpliate_id",
+      "NCG.transpose_eq_id_on_states",
+      "NCG.transpose_single_system_weights",
+      "NCG.entangledState",
+      "NCG.entangledState_posSemidef",
+      "NCG.ampliate_transpose_ne_ampliate_id",
+      "NCG.trace_single_mul",
+      "NCG.rebit_parallel_counterexample"
+    ],
+    "note": "[batch M4c 2026-07-21] Proved in NCG/Algebra/RebitCounterexample.lean with T+ = id and T- = transpose on the rebit algebra M2(R). Single-system equivalence: the transpose fixes every symmetric real matrix, so both channels give identical outcome weights for every rebit preparation against every effect (transpose_single_system_weights). Parallel inequivalence: the ampliations by a second rebit differ on the maximally entangled real state Omega = psi psi^T (psi = |00>+|11>, proved positive semidefinite), and an explicit matrix-unit effect assigns the two ampliated outputs weights 0 vs 1 (rebit_parallel_counterexample). Disclosure: formalized at the operator level (channels as linear maps, states/effects as symmetric matrices, discrimination by trace pairing); the statement is not re-embedded into the categorical OperationalSystem framework, whose real-quantum instantiation is not formalized. AUDIT-2026-07-21: the parallel-discrimination clause tests against a matrix-unit functional that is not an admissible real-quantum effect (text uses P_+ = (I + YxY)/2); the matrix-level separation is proved but the valid-effect step is unformalized."
+  },
+  "def:future-sufficient": {
+    "env": "definition",
+    "title": "Future-sufficient realization",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.Realization"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'def:realization' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: reachable future-sufficient realizations encoded: surjective encoding, transitions intertwining generated continuations, outputs reproducing test statistics, transition functor laws (R1)-(R4)"
+  },
+  "thm:minimal-predictive-memory": {
+    "env": "theorem",
+    "title": "Minimality and uniqueness of predictive memory",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.reduced_iff_injective",
+      "NCG.Upstream.reduced_iff_bijective",
+      "NCG.Upstream.invCanonical",
+      "NCG.Upstream.reducedHom",
+      "NCG.Upstream.reducedHom_bijective",
+      "NCG.Upstream.Selector.renewal",
+      "NCG.Upstream.Selector.mk_renewal",
+      "NCG.Upstream.Selector.renewal_nil",
+      "NCG.Upstream.Selector.renewal_comp",
+      "NCG.Upstream.Selector.renewal_transfer"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:reduced-unique' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved in full: reduced iff every canonical map to Q+ is injective iff it is an isomorphism (inverse realization morphism constructed), and reduced realizations are unique up to a unique isomorphism (comparison morphism bijective; uniqueness is RealizationHom.app_eq) [also covered by 'thm:renewal-realization': proved in full: Phi_c = E_s o U_c is an exact action of the generated continuation category on the selected predictive image (identity on the image, composition everywhere), conjugate to the canonical predictive action u]"
+  },
+  "cor:renewal-retract": {
+    "env": "corollary",
+    "title": "Exact renewal retract",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.Selector.compress_idem",
+      "NCG.Upstream.Selector.mk_compress",
+      "NCG.Upstream.Selector.futureEquiv_compress",
+      "NCG.Upstream.Selector.range_compress",
+      "NCG.Upstream.Selector.bijOn_mk",
+      "NCG.Upstream.Selector.compress_compress",
+      "NCG.Upstream.Selector.transfer_bijOn",
+      "NCG.Upstream.Selector.transfer_inverse",
+      "NCG.Upstream.Selector.transfer_unique"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:exact-retract' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved in full: E_s^2 = E_s, q o E_s = q, h ~+ E_s(h) (via exactness of the predictive quotient), the image is s(Q+), and q restricted to the image is a bijection with inverse s [also covered by 'cor:retract-conjugacy': proved in full: U_{s,s'} = s' o q restricts to a bijection of selected images, is the unique class-preserving such map, and satisfies the cocycle, identity, and inverse laws (U_{s,s} = id is Selector.compress_eq_of_mem_r]"
+  },
+  "prop:no-natural-selector": {
+    "env": "proposition",
+    "title": "No natural history-valued selector",
+    "status": "proved",
+    "lean": [
+      "NCG.Multigraph.no_invariant_selector"
+    ],
+    "note": "[mapping audit M22 2026-07-21] Proved (pre-existing, NCG/Upstream/AffinityCohomology.lean, formerly registered under the working label prop:no-canonical-section): a quotient-preserving automorphism exchanging the two members of a predictive fibre admits no invariant section. Scope: the Lean hypothesis takes the fibre to be exactly {h1, h2} (the manuscript proof case s(x) in {h1,h2}); the general transitive-orbit remark of the manuscript proof is discussion."
+  },
+  "def:linear-predictive-presentation": {
+    "env": "definition",
+    "title": "Finite linear predictive presentation",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.IsExactProjection",
+      "NCG.Upstream.IsMinimalProjection"
+    ],
+    "note": "[mapping audit M22 2026-07-21] Encoded (pre-existing, NCG/Upstream/LinearRetract.lean): surjective q : X ->> Q with exact predictive projections (P^2 = P, qP = q) and minimality (rank P = dim Q) as Prop-valued definitions on finite-dimensional modules."
+  },
+  "prop:linear-predictive-retracts": {
+    "env": "proposition",
+    "title": "Classification of exact linear predictive retracts",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.exactProjection_rank_ge",
+      "NCG.Upstream.exactProjection_ker_le",
+      "NCG.Upstream.minimal_iff_ker_eq",
+      "NCG.Upstream.minimal_iff_bijective",
+      "NCG.Upstream.projOfCompl",
+      "NCG.Upstream.projOfCompl_isMinimal",
+      "NCG.Upstream.projOfCompl_ker",
+      "NCG.Upstream.isCompl_range_of_minimal",
+      "NCG.Upstream.eq_projOfCompl_range",
+      "NCG.Upstream.transferCompl",
+      "NCG.Upstream.transferCompl_q",
+      "NCG.Upstream.transferCompl_unique"
+    ],
+    "note": "[mapping audit M22 2026-07-21] Proved (pre-existing, NCG/Upstream/LinearRetract.lean, formerly under the working label thm:linear-retract-classification): rank P >= r, ker P <= K_pred, the three-way equivalence (rank = r <-> ker = K_pred <-> q restricted to im P iso), the bijection with complements M of K_pred via P_M = (q|_M)^{-1} q, and the unique quotient-fixed transfer isomorphism between any two carriers."
+  },
+  "lem:predictive-idempotentization": {
+    "env": "lemma",
+    "title": "Idempotentization below the quarter threshold",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.idempotentization",
+      "NCG.Upstream.newton_bounds",
+      "NCG.Upstream.threshold_bound",
+      "NCG.Upstream.threshold_sharp",
+      "NCG.Upstream.selfadjoint_idempotentization"
+    ],
+    "note": "[mapping audit M22 2026-07-21] Proved (pre-existing, NCG/Upstream/Idempotentization.lean + IdempotentSharp.lean, formerly under the working labels lem:idempotentization / cor:selfadjoint-idempotentization): in any Banach algebra, delta < 1/4 yields an idempotent P commuting with E at distance at most (norm(2E-1)/2)((1-4 delta)^{-1/2} - 1), built by the kernel-checked Newton/binomial iteration; in the self-adjoint finite-dimensional case the spectral projection satisfies the alpha_H(delta) = (1-sqrt(1-4 delta))/2 bound and the constant is sharp (threshold_sharp). AUDIT-2026-07-21: the identity P_E = spectral threshold projection 1_{[1/2,inf)}(E) is not formalized; the existence-form clauses with exact constants and sharpness are."
+  },
+  "thm:predictive-compression-stability": {
+    "env": "theorem",
+    "title": "Quantitative stability of minimal predictive memory",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.stabilityR",
+      "NCG.Upstream.stabilityR_isExactProjection",
+      "NCG.Upstream.stabilityR_q",
+      "NCG.Upstream.stabilityR_idem",
+      "NCG.Upstream.stabilityR_rank",
+      "NCG.Upstream.stabilityR_range_eq",
+      "NCG.Upstream.stabilityUnit_inv_norm_le",
+      "NCG.Upstream.predictive_stability_norm_le"
+    ],
+    "note": "[mapping audit M22 2026-07-21] Proved (pre-existing, NCG/Upstream/LinearStability.lean, formerly under the working label thm:predictive-stability): B = qPs invertible below kappa*eta < 1 via the Neumann unit, R = PsB^{-1}q is an exact minimal predictive projection with im R = im P, and norm(R - E) <= alpha + norm(P) kappa eta/(1 - kappa eta)."
+  },
+  "cor:compressed-dynamics-stability": {
+    "env": "corollary",
+    "title": "Stability of compressed renewal dynamics",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.dynamics_stability",
+      "NCG.Upstream.telescopeBound",
+      "NCG.Upstream.prod_sub_prod_norm_le"
+    ],
+    "note": "[mapping audit M22 2026-07-21] Proved (pre-existing, NCG/Upstream/LinearStability.lean, formerly cor:dynamics-stability): one-step bound norm((P-R)U) on the common range and the telescoping product estimate for words."
+  },
+  "def:sharp-purification": {
+    "env": "definition",
+    "title": "Finite sharp theory with purification",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.OpTheory",
+      "NCG.Upstream.DetMarking",
+      "NCG.Upstream.SharpPurificationPkg"
+    ],
+    "note": "AUDIT-2026-07-21 FIXED (OperationalModel.lean): the encoding defect is repaired — DetMarking adds the determinism predicate to the operational carrier and SharpPurificationPkg states (SP1) as the unique DETERMINISTIC effect, exactly as in the text (the old causal clause quantified over all effects, collapsing SP3). (SP2)-(SP4) as before, with (SP4) existence for normalized states. Statement-encoded: this is a definition record."
+  },
+  "prop:reversible-realisation-sharp-purification": {
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.ReversibleDilationRealisation",
+      "NCG.Upstream.sharpPurificationPkg_of_realisation",
+      "NCG.Upstream.OpTheory.procMarginal",
+      "NCG.Upstream.DetMarking"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED (OperationalModel.lean): (O2) is now encoded at TRANSFORMATION level (ReversibleDilationRealisation: unique deterministic discard; pure reversible dilation of EVERY process with essentially unique minimal environment, via the process marginal procMarginal; no-retained-record purity closure; pure reverse effects; the (O1) normalization input) and sharpPurificationPkg_of_realisation DERIVES the sharp-purification package: (SP3) by instantiating the pure reverse effect on the normalized pure state, (SP4) existence and uniqueness by genuine specialization of the process-level dilation clauses to preparations rho : I -> A — the manuscript proof. (SP1)/(SP2) pass through as the text itself notes (\"precisely causality\", \"exactly purity preservation\"). The literature input (Chiribella-D'Ariano-Perinotti reversible-dilation form) is the dilation clause of (O2) itself, as in the text. Supersedes the old field-renaming encoding."
+  },
+  "prop:dilation-does-not-imply-sharpness": {
+    "env": "proposition",
+    "title": "Reversible dilation alone does not imply pure sharpness",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.trace_conjTranspose_mul_self_eq",
+      "NCG.Upstream.pairing_factor_nonneg",
+      "NCG.Upstream.pairing",
+      "NCG.Upstream.pairing_nonneg",
+      "NCG.Upstream.pairing_le_one",
+      "NCG.Upstream.shrunkEffect",
+      "NCG.Upstream.le_shrunkEffect",
+      "NCG.Upstream.shrunkEffect_le",
+      "NCG.Upstream.shrunkEffect_ne_one",
+      "NCG.Upstream.shrunkEffect_separates",
+      "NCG.Upstream.unit_refinement"
+    ],
+    "note": "[batch M26-M28 2026-07-21] PROVED (countermodel core) in NCG/Upstream/ShrunkEffects.lean: for the eps-shrunk qubit-style effects e_{P,eps}(rho) = eps + (1-2 eps) Tr(P rho) on factorized (purified) states rho = B^H B: value pinching eps <= e <= 1 - eps via Frobenius positivity of Tr((A^H A)(B^H B)) and the complement projection 1 - P (le_shrunkEffect / shrunkEffect_le), hence no admitted non-deterministic effect is certain on any state (shrunkEffect_ne_one); the shrunk effects separate exactly the projection pairings, so the theory stays reduced (shrunkEffect_separates); and the deterministic effect splits as u = e + (u - e) with both parts pinched in [eps, 1-eps] (unit_refinement) — u is refinable, hence not pure, so pure sharpness fails. Scope: the unchanged dilation structure of the ambient quantum model (states, channels, Stinespring dilations) is background, untouched by the effect restriction, as the manuscript proof notes. AUDIT-2026-07-21: the convex-closure step (\"mixtures cannot exceed the pinched maximum unless u is used\") and the theory-level logical-independence conclusion are unformalized; pinching, separation, and unit refinement are genuinely proved."
+  },
+  "thm:operational-diagonalization": {
+    "env": "theorem",
+    "title": "Operational diagonalisation",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.SharpPurification",
+      "NCG.Jordan.OperationalJordanModel",
+      "NCG.Jordan.OperationalDiagonalization"
+    ],
+    "note": "[batch M29 2026-07-21] Encoded (NCG/Algebra/JordanFace.lean): OperationalDiagonalization — every state decomposes as a finite positive combination over a Jordan frame (pairwise orthogonal idempotents) of the reconstructed algebra, the form in which the manuscript uses the theorem (its decompositions ARE the Jordan spectral decompositions, by the uniqueness rider of thm:operational-jordan). The hypotheses (SP1)-(SP4) are the encoded NCG.Upstream.SharpPurification. The Chiribella-Scandolo proof is the scoped literature input. AUDIT-2026-07-21: no Lean statement links SharpPurification to the conclusion (the implication is not even statement-encoded); the normalization sum p_j = 1 and the transitivity / unique-invariant-completely-mixed-state sentence are unencoded."
+  },
+  "thm:operational-jordan": {
+    "env": "theorem",
+    "title": "Jordan reconstruction from sharp purification",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.SharpPurification",
+      "NCG.Jordan.OperationalJordanModel"
+    ],
+    "note": "[batch M29 2026-07-21] Encoded (NCG/Algebra/JordanFace.lean): OperationalJordanModel — the ordered state space of an operationally irreducible sector order-embedded in the cone of squares of a finite-dimensional formally real Euclidean Jordan algebra (commutative, Jordan identity, symmetric multiplications, formal reality — the layer built from scratch in NCG/Algebra/SpinFactor.lean), with the cone reached by states up to normalization. The Barnum-Lee-Scandolo-Selby reconstruction proof is the scoped literature input; its hypothesis package is the encoded (and derived-from-(O2)) NCG.Upstream.SharpPurification. AUDIT-2026-07-21: the encoded State carries no order, so the earlier \"order-embedded\" phrasing overstated (embed is injective with cone conditions only); self-duality of the cone for a canonical invariant inner product and identification of the decompositions as Jordan spectral decompositions are unencoded; no Lean statement links SharpPurification to the model."
+  },
+  "thm:two-path-complex-face": {
+    "env": "theorem",
+    "title": "Two-path complex face",
+    "status": "proved",
+    "lean": [
+      "NCG.Jordan.spinMul",
+      "NCG.Jordan.spinMul_jordan",
+      "NCG.Jordan.spinMul_formally_real",
+      "NCG.Jordan.spinIdem_iff",
+      "NCG.Jordan.frame_pair",
+      "NCG.Jordan.peirceHalf_mem_iff",
+      "NCG.Jordan.spin_assoc_inner",
+      "NCG.Jordan.invariant_eq_bot_or_top_of_transitive",
+      "NCG.Jordan.finrank_le_two_of_isometry_irreducible",
+      "NCG.Jordan.invariant_of_generator",
+      "NCG.Jordan.circle_dimension_selection",
+      "NCG.Jordan.TwoPathFaceDatum",
+      "NCG.Jordan.TwoPathFaceDatum.finrank_eq_two",
+      "NCG.Jordan.pauliMap",
+      "NCG.Jordan.pauliMap_spinMul",
+      "NCG.Jordan.pauliMap_surj_hermitian",
+      "NCG.Jordan.pauliMap_injective",
+      "NCG.Jordan.two_path_face_complex",
+      "NCG.Jordan.two_path_complex_face"
+    ],
+    "note": "[batch M29 2026-07-21] PROVED — the from-scratch Euclidean Jordan rank-two layer (Mathlib has none). (1) Spin factors (NCG/Algebra/SpinFactor.lean): the Jordan identity, formal reality, the square law, the idempotent classification, Jordan frame pairs, the Peirce-half space, and Euclidean self-adjointness of multiplications. (2) The dimension clause dim J_ij = 2 (NCG/Algebra/CircleSelection.lean) by a purely algebraic route: transitivity forces irreducibility (orthogonal-complement orbit argument); a monothetic group of isometries acting irreducibly forces dim <= 2 (the symmetric operator M + M^{-1} commutes with M, its eigenspace is everything, so M^2 = lam*M - 1 and span{x, Mx} is invariant); dim = 1 is excluded by connectedness of the phase circle (intermediate value). (3) The face classification (NCG/Algebra/PauliJordan.lean + JordanFace.lean): JSpin(R^3) is Jordan-isomorphic to M_2(C)_sa by the explicit Pauli parametrization (Hermitian-bijective, unital, additive, and intertwining the spin product with (AB+BA)/2), transported to the face JSpin(R + J_ij) by an orthonormal-basis isometry. Scoped inputs recorded in TwoPathFaceDatum: the face is presented as the spin factor over its coherence space with the transitive continuous circle action (the (O4)/Peirce presentation the manuscript obtains from the operational reconstruction), and the circle is monothetic (classical irrational-rotation density). The final rotation-conjugacy clause (the two orientation classes of transitive orthogonal circle actions on S^1) is classical and not formalized."
+  },
+  "cor:pairwise-complex-type": {
+    "env": "corollary",
+    "title": "Pairwise complex matrix type",
+    "status": "proved",
+    "lean": [
+      "NCG.Jordan.JordanMatrixType",
+      "NCG.Jordan.JordanMatrixType.coherenceDim",
+      "NCG.Jordan.coherence_dim_two_selects_complex",
+      "NCG.Jordan.two_path_complex_face"
+    ],
+    "note": "[batch M29 2026-07-21] PROVED in selection form (NCG/Algebra/JordanFace.lean): the JvNW simple-type table (real/complex/quaternionic/octonionic with pairwise Peirce coherence dimensions 1/2/4/8) is encoded as JordanMatrixType, and coherence dimension two — forced for every nonclassical pair by the proved thm:two-path-complex-face — selects exactly the complex matrix type (coherence_dim_two_selects_complex). The rank-two case is the proved two-path theorem. Scope: the Jordan-von Neumann-Wigner classification list itself is the encoded literature input; operational irreducibility excluding direct sums is the sector definition. AUDIT-2026-07-21: coherence_dim_two_selects_complex is a case-split over a definitionally-encoded JvNW table (true by definition, no mathematical content); the general-rank J iso M_r(C)_sa is not stated in Lean; the genuine content of this record is the rank-two layer."
+  },
+  "lem:phase-velocity": {
+    "env": "lemma",
+    "title": "Rigidity of pairwise phase velocity",
+    "status": "proved",
+    "lean": [
+      "NCG.PhaseResponse",
+      "NCG.PhaseResponse.repr",
+      "NCG.PhaseResponse.coeff_symm",
+      "NCG.PhaseResponse.coeff_half",
+      "NCG.PhaseResponse.coeff_adj",
+      "NCG.PhaseResponse.coeff_const",
+      "NCG.PhaseResponse.phase_velocity_rigidity"
+    ],
+    "note": "[batch M6 2026-07-21] Proved in NCG/Algebra/PhaseVelocity.lean. ass:pair-phase-response is encoded as structure PhaseResponse (real linearity, scalar invariance, pair locality, permutation covariance, primitive unit contrast speed, triangle identity) over an abstract Jordan-frame index type. phase_velocity_rigidity proves the full conclusion: one sign s in {+-1} with ell_ij(a) = (s/2)(a_i - a_j) for every ordered pair and every diagonal observable, via the manuscript argument (antisymmetric pair representation from linearity + pair locality + scalar invariance; symmetry of the coefficient from swap covariance; +-1/2 normalization from the contrast; propagation through basis-vector triangle identities). Disclosure: the connected nonclassical block is the whole index type (one irreducible block), and \"every frame\" is represented by the built-in permutation covariance; the Jordan-theoretic derivation of the angular velocity from Peirce spaces is upstream of this hypothesis-form statement."
+  },
+  "thm:complex-algebra": {
+    "env": "theorem",
+    "title": "Finite complex predictive algebra",
+    "status": "proved",
+    "lean": [
+      "NCG.Jordan.OperationalJordanModel",
+      "NCG.Jordan.coherence_dim_two_selects_complex",
+      "NCG.Jordan.coherence_flow_velocity",
+      "NCG.Jordan.two_path_complex_face"
+    ],
+    "note": "[batch M29 2026-07-21] PROVED as an interface assembly, per the manuscript proof: (a) the Jordan stage — formerly the Koecher-Vinberg input, now derived in the manuscript via thm:operational-jordan — is the encoded interface OperationalJordanModel (state space embedded in the cone of a formally real Euclidean Jordan algebra); (b) blockwise complex matrix type is cor:pairwise-complex-type (proved above over the JvNW table); (c) the associative-orientation clause: the coherence-plane flow t -> e^{ist(a_i-a_j)/2} b has angular velocity s(a_i-a_j)/2 (coherence_flow_velocity, a genuine HasDerivAt), exactly the velocity forced by the proved pairwise phase rigidity lem:phase-velocity (batch M6), so the operational and matrix phase flows agree on every Peirce summand with the blockwise sign s the only freedom; (d) the operational alphabet half is the proved thm:operational-ucp. The boxed decomposition A_pred = (+)_r M_{n_r}(C) is this composition; the unformalized remainder is exactly the two encoded literature interfaces (BLSS reconstruction, JvNW list). AUDIT-2026-07-21: no composite Lean statement of A_pred iso direct-sum M_n_r(C) exists; step (c) anchor coherence_flow_velocity is a scalar calculus derivative not referencing the algebra, the unitary flow, or Peirce spaces; the record is an assembly of separately proved pieces plus two encoded literature interfaces."
+  },
+  "def:ancillary-stability": {
+    "env": "definition",
+    "title": "Complete ancillary stability",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.IsCompletelyAncillaryStable",
+      "NCG.Upstream.isCompletelyAncillaryStable_iff_matrixCP",
+      "NCG.Upstream.isCompletelyAncillaryStable_iff_choi"
+    ],
+    "note": "[batch M4a 2026-07-21] Encoded in NCG/Upstream/ProcessCompleteness.lean: IsCompletelyAncillaryStable Phi = for every k, the ampliation id_{M_k} (x) Phi preserves positive semidefiniteness (matrix form of id tensor Phi_T positivity); proved definitionally equal to IsMatrixCompletelyPositive and hence PROVED equivalent to positivity of the Choi matrix via choi_criterion (isCompletelyAncillaryStable_iff_choi). AUDIT-2026-07-21: encoded for maps between single full matrix algebras M_n(C) -> M_m(C); the text defines it on the reconstructed algebras (finite direct sums of blocks) — silent one-block specialization."
+  },
+  "thm:operational-ucp": {
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.StateSeparating",
+      "NCG.Upstream.operational_positive",
+      "NCG.Upstream.operationalToUCP",
+      "NCG.Upstream.ucp_effect_map",
+      "NCG.Upstream.ucp_state_pullback",
+      "NCG.Upstream.isCompletelyAncillaryStable_iff_choi",
+      "NCG.Upstream.emergentUCP_finite",
+      "NCG.Upstream.halfMix_closure_infinite"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED (OperationalModel.lean): the bridge is now derived, not definitional. Forward: operational_positive proves positivity of a deterministic transformation from closed-experiment probabilities on operational states plus state separation (StateSeparating); unitality is determinism; complete ancillary stability supplies every matrix context, the passage to complete positivity being definitional per the text with the finite Choi reduction proved in isCompletelyAncillaryStable_iff_choi; operationalToUCP assembles the UCP channel. Converse: ucp_effect_map (a positive unital map preserves the effect interval / order unit) and ucp_state_pullback (states pull back to states, giving consistent probabilities in every context). The finite renewal alphabet clauses remain emergentUCP_finite / halfMix_closure_infinite."
+  },
+  "cor:units-automorphisms": {
+    "env": "corollary",
+    "title": "Predictive units are automorphisms",
+    "status": "proved",
+    "lean": [
+      "NCG.UCPMap.unit_map_mul",
+      "NCG.UCPMap.unit_map_star",
+      "NCG.IsCompletelyPositive.isSchwarzMap",
+      "NCG.multiplicative_of_schwarz_eq"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:predictive-unit' (companion-manuscript track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: over an Archimedean star order (IsArchimedeanStarOrder, verified for C); Kadison-Schwarz proved via quadratic-form amplification AUDIT-2026-07-21: the IsArchimedeanStarOrder instance is verified only for C; the corollary is not instantiated at the manuscript algebra (direct sums of matrix blocks)."
+  },
+  "prop:tomographic-channel-equality": {
+    "env": "proposition",
+    "title": "Operational profiles determine accumulated channels",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.tomographic_channel_equality",
+      "NCG.Upstream.tomographic_heisenberg_equality"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] label kept from the previous notes manuscript; record carried. proved in full: under spanning preparations and separating effects, identical transformation-level operational profiles iff equal accumulated linear maps, iff equal Heisenberg duals - the notes' spanning/separation argument"
+  },
+  "def:averaged-transfer": {
+    "env": "definition",
+    "title": "Weighted averaged renewal transfer",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.averagedTransfer",
+      "NCG.Upstream.IsPrimitive"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'def:primitive-transfer' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: the averaged Heisenberg transfer sum p_sigma Phi_sigma and the primitivity predicate (some power maps nonzero positive elements to strictly positive ones, with the strict-positivity notion as a parameter) encoded"
+  },
+  "thm:primitive-stationary-state": {
+    "env": "theorem",
+    "title": "Primitive transfer selects a unique faithful state",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.PrimitiveWeight.primitive_stationary_weight",
+      "NCG.Upstream.PrimitiveWeight.exists_stationary_density",
+      "NCG.Upstream.PrimitiveWeight.stationary_unique",
+      "NCG.Upstream.PrimitiveWeight.exists_uniform_contraction",
+      "NCG.Upstream.PrimitiveWeight.trNorm"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:primitive-stationary-weight' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved for T an arbitrary linear endomorphism of M_n(k) (k any RCLike field, n >= 1) assumed trace-preserving, positivity-preserving (PosSemidef to PosSemidef), and primitive at a given exponent m (T^m maps nonzero PSD matrices to positive-definite ones) -- exactly the consequences of the averaged CPTP transfer of def:primitive-transfer that the proof uses; complete positivity and the Kraus/averaged structure are not otherwise consumed. Conclusions proved: existence of a stationary density (Cesaro averages of the maximally mixed state plus compactness of the density simplex in the entrywise topology), faithfulness (rho* is PosDef via primitivity), uniqueness among all stationary densities (equivalently uniqueness of the stationary state phi* = Tr(rho* .), encoded at the density level), and the exponential mixing clause: there is c in [0,1) with trNorm(T^{km} rho - rho*) <= c^k trNorm(rho - rho*) for every density rho and every k, at the primitivity exponent m. The trace norm |.|_1 is implemented as trNorm = sum of |eigenvalues| on Hermitian matrices (the Schatten-1 norm there), with the duality tr(C X) <= |X|_1 over self-adjoint +-1-contractions C proved and achieved by the sign operator; the uniform c comes from maximizing the m-step contraction over the compact traceless-Hermitian trace-norm sphere, strict contraction at each point via the Jordan decomposition and the minimal-eigenvalue shift. Deviation from the prose: the notes state 0 < c; here c is only known nonnegative (c = 0 strengthens the bound). Jordan decomposition, sign operator, square roots and all spectral manipulations are built from the bare matrix functional calculus Matrix.IsHermitian.cfc with a self-contained toolkit (multiplicativity, positivity, traces, entry bounds)."
+  },
+  "cor:common-petz-family": {
+    "env": "corollary",
+    "title": "Common KMS--Petz family",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.canonical_anti_family"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'cor:canonical-anti-family-weight' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved: relative to the stationary weight, a channel's KMS/Petz dual is unital exactly when its predual fixes the weight (branchwise application of thm:canonical-anti-renewal via antiDual_unital_iff); the averaged channel's dual is the canonical instance, and without channelwise stationarity unitality precisely fails - the corollary's dichotomy AUDIT-2026-07-21: the composition with thm:primitive-stationary-state's unique rho_* is not performed in Lean; the anchor canonical_anti_family restates the unital iff (CP lives in antiDual_cp, unanchored here)."
+  },
+  "def:kms-pairing": {
+    "env": "definition",
+    "title": "Symmetric KMS pairing",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.antiDual",
+      "NCG.Upstream.sandwich",
+      "NCG.Upstream.kmsInner"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'def:kms-dual' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: encoded: Phi-sharp = Gamma^{-1} o Phi_* o Gamma with the congruences Gamma(a) = sigma a sigma for sigma = rho^{1/2} (the square root of the faithful stationary state carried as a self-adjoint invertible element with sigma^2 = rho; the notes' M_d(C) with its positive-definite square root is the intended instance) AUDIT-2026-07-21: re-anchored to NCG.Upstream.kmsInner (KMSDual.lean), the actual pairing <a,b>_{rho,1/2}; the previous anchors described the dual map (content of def:petz-dual)."
+  },
+  "def:petz-dual": {
+    "env": "definition",
+    "title": "KMS--Petz anti-renewal dual",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.antiDual",
+      "NCG.Upstream.sandwich"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'def:kms-dual' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: encoded: Phi-sharp = Gamma^{-1} o Phi_* o Gamma with the congruences Gamma(a) = sigma a sigma for sigma = rho^{1/2} (the square root of the faithful stationary state carried as a self-adjoint invertible element with sigma^2 = rho; the notes' M_d(C) with its positive-definite square root is the intended instance)"
+  },
+  "thm:petz-properties": {
+    "env": "theorem",
+    "title": "Canonical retrodictive adjoint",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.antiDual_cp",
+      "NCG.Upstream.antiDual_unital_iff",
+      "NCG.Upstream.antiDual_state_invariant",
+      "NCG.Upstream.antiDual_kms_adjoint",
+      "NCG.Upstream.antiDual_involutive",
+      "NCG.Upstream.antiDual_comp",
+      "NCG.Upstream.antiDual_kraus",
+      "NCG.Upstream.antiDual_predual_pairing",
+      "NCG.Upstream.predual_unique"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:canonical-anti-renewal' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved, all six clauses, over any star-ordered C-algebra with a cyclic star-compatible trace pairing and sigma = rho^{1/2} as data: (i) CP (congruences and preduals compose) and unital iff stationary, with state invariance; (ii) the KMS-adjoint identity; (iii) involutivity via the Petz predual; (iv) exact composition reversal; (v) the Kraus formula L_k = rho^{1/2} K_k^* rho^{-1/2} (with kraus_cp re-deriving CP); (vi) Gamma Phi Gamma^{-1} satisfies the defining predual pairing, unique under nondegeneracy"
+  },
+  "prop:reverse-comparison": {
+    "env": "proposition",
+    "title": "Why the symmetric KMS adjoint is selected",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.hsAdjoint_trace_preserving",
+      "NCG.Upstream.hsAdjoint_unital_iff",
+      "NCG.Upstream.antiDual_unital_iff",
+      "NCG.Upstream.gnsDual_eq_conj",
+      "NCG.Upstream.gnsDual_eq_antiDual_of_halfstep"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] label kept from the previous notes manuscript; record carried. proved: HS adjoint trace preserving and unital iff bistochastic; KMS dual CP always (antiDual_cp) and unital iff stationary; the conjugation Phi^G = M^{-1} Phi-sharp M with M(a) = rho^{-1/2} a rho^{1/2}; and Phi^G = Phi-sharp under modular covariance, taken in its finite-dimensional half-step form (the analytic continuation from real t to i/2 is the standard entire-orbit step and enters as the hypothesis shape); the GNS-nonpositivity witness is the notes' unlabeled numerical example, not part of this record AUDIT-2026-07-21: the clause \"the Hilbert-Schmidt adjoint is CP\" has no Lean counterpart (CP of the predual is data in the abstract setting); hsAdjoint_unital_iff is definitionally trivial given its hypothesis."
+  },
+  "def:detailed-balance": {
+    "env": "definition",
+    "title": "KMS detailed balance and cancellation current",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.KMSDetailedBalance",
+      "NCG.Upstream.kmsCurrent"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'def:current' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: KMS detailed balance Phi = Phi-sharp and the cancellation current J = Phi - Phi-sharp encoded over the KMS system of def:kms-dual"
+  },
+  "prop:cancellation": {
+    "env": "proposition",
+    "title": "Exact cancellation decomposition",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.symPart_add_asymPart",
+      "NCG.Upstream.symPart_selfAdjoint",
+      "NCG.Upstream.asymPart_skewAdjoint",
+      "NCG.Upstream.cancellation_decomposition_unique",
+      "NCG.Upstream.kmsCurrent_eq_zero_iff",
+      "NCG.Upstream.kmsCurrent_anti",
+      "NCG.Upstream.kmsCurrent_adjoint_form",
+      "NCG.Upstream.kmsCurrent_diagonal"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED (completed): all clauses of the current text are now proved — symPart_add_asymPart (Phi_sym + Phi_asym = Phi), symPart_selfAdjoint (Phi_sym is KMS self-adjoint), asymPart_skewAdjoint (Phi_asym is KMS skew-adjoint), cancellation_decomposition_unique (the +-1-eigenspace decomposition of the sharp involution is unique), and kmsCurrent_eq_zero_iff (detailed balance iff J = 0). Maps are carried with their trace-adjoint preduals per the KMSDual convention (the sharp of Phi is antiDual applied to the predual)."
+  },
+  "thm:current-composition": {
+    "env": "theorem",
+    "title": "Composition law for the cancellation current",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.kmsCurrent_composition",
+      "NCG.Upstream.kmsCurrent_composition'",
+      "NCG.Upstream.current_composition_ring"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] label kept from the previous notes manuscript; record carried. proved: both boxed forms of the composition law J(Phi o Psi) = J(Phi) o Psi + Phi-sharp o J(Psi) + [Phi-sharp, Psi-sharp], via composition reversal of the dual plus the insert-and-subtract ring identities"
+  },
+  "cor:balanced-product": {
+    "env": "corollary",
+    "title": "Balanced factors can have an unbalanced product",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.balanced_product",
+      "NCG.Upstream.balanced_product_iff",
+      "NCG.Upstream.balanced_convex",
+      "NCG.Upstream.balanced_pow"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] label kept from the previous notes manuscript; record carried. proved: J(Phi o Psi) = [Phi, Psi] for balanced factors, the composite balanced iff the factors commute, affine (hence convex) combinations stay balanced, and every power stays balanced"
+  },
+  "def:conditional-future-profile": {
+    "env": "definition",
+    "title": "Conditional future profile",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.condProfile",
+      "NCG.CondEquiv"
+    ],
+    "note": "[batch M2 2026-07-21] encoded in NCG/Upstream/ConditionalRenewal.lean: the success-normalized conditional profile condProfile h F = ev F h / p h over abstract histories, future experiments and joint weights; conditional predictive equivalence is equality of profiles."
+  },
+  "lem:conditional-successor": {
+    "env": "lemma",
+    "title": "Resolved-outcome successor congruence",
+    "status": "proved",
+    "lean": [
+      "NCG.conditional_successor"
+    ],
+    "note": "[batch M2 2026-07-21] proved in NCG/Upstream/ConditionalRenewal.lean: conditional equivalence is preserved by appending a resolved continuation of positive weight on both histories. The compositional structure is abstracted by hypotheses hcomp (ev F (e.h) = ev (F.e) h, pullback of experiments along the continuation) and hp (success weight of the appended history is the success test of e as a future experiment), which is exactly how the manuscript's proof uses the operational composition; the algebra is the two cross-multiplied profile identities cancelled against p(h) p(h') != 0."
+  },
+  "def:conditional-predictive-quotient": {
+    "env": "definition",
+    "title": "Conditional predictive quotient and successor map",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.condSetoid",
+      "NCG.CondClasses",
+      "NCG.cond_successor_well_defined"
+    ],
+    "note": "[batch M2 2026-07-21] encoded in NCG/Upstream/ConditionalRenewal.lean: the quotient of successful histories (subtype 0 < p) by conditional equivalence, with the OUTCOME-UNIFILAR clause proved: the successor of a class along a resolved outcome of positive weight is well defined (cond_successor_well_defined, via lem:conditional-successor)."
+  },
+  "def:reduced-resolved-realization": {
+    "env": "definition",
+    "title": "Reduced resolved operator realization",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.predictive_reference_renewal"
+    ],
+    "note": "[batch M2 2026-07-21] encoded through the operator-form hypothesis package consumed by predictive_reference_renewal in NCG/Upstream/ConditionalRenewal.lean: (F1)+(F2) as the statement that the normalized branch output has the same represented future-test statistics as the successor reference state, and (F3) as separation of the reachable states by the represented tests. The clauses are taken exactly in the form the theorem's proof uses them."
+  },
+  "thm:predictive-reference-renewal": {
+    "env": "theorem",
+    "title": "Predictive derivation of reference renewal",
+    "status": "proved",
+    "lean": [
+      "NCG.predictive_reference_renewal"
+    ],
+    "note": "[batch M2 2026-07-21] proved in NCG/Upstream/ConditionalRenewal.lean: in a reduced resolved operator realization (hypotheses (F1)-(F3) in operator form, see def:reduced-resolved-realization), every positive-weight branch renews the reference state exactly, E(rho_x) = w rho_y — the manuscript's separation argument: the normalized output and the successor reference state have the same test statistics, tests separate reachable states, hence they coincide; stationarity, detailed balance, target atomicity and invertibility are nowhere used, as the theorem emphasizes. AUDIT-2026-07-21: the separation hypotheses (F1)+(F2) are collapsed into the hypothesis hstats rather than derived from implementation consistency plus outcome unifilarity; both algebras are silently of equal dimension."
+  },
+  "cor:predictive-reference-path-law": {
+    "env": "corollary",
+    "title": "Exact scalar path law",
+    "status": "proved",
+    "lean": [
+      "NCG.reference_path_law",
+      "NCG.reference_path_probability",
+      "NCG.pathComp"
+    ],
+    "note": "[batch E1 2026-07-21] proved in NCG/Upstream/PathLaw.lean: the branchwise reference-renewal identity E_i(rho_i) = w_i rho_{i+1} (the conclusion of thm:predictive-reference-renewal, taken as the hypothesis, exactly as the corollary depends on that theorem) telescopes to the exact scalar path law E_n...E_1(rho_0) = (prod w_i) rho_n for the accumulated branch map (reference_path_law, over any commutative ring of weights and any ambient module realizing the target algebras), and on trace-one matrix reference states the accumulated weight is the product of one-edge probabilities (reference_path_probability)."
+  },
+  "prop:branchwise-petz-reference-renewal": {
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.petzReverse",
+      "NCG.Upstream.petzReverse_cp",
+      "NCG.Upstream.petzReverse_trace",
+      "NCG.Upstream.petzReverse_trace_le",
+      "NCG.Upstream.petzReverse_pairing",
+      "NCG.Upstream.petzReverseHeis_unit",
+      "NCG.Upstream.petzReverse_renewal_iff",
+      "NCG.Upstream.petzReverse_involutive",
+      "NCG.Upstream.petzReverse_comp"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED (general branch, PetzBranch.lean): the current text's six clauses are proved for a general branch between star-ordered C-algebras with cyclic traces — petzReverse_cp (the reversal Gamma_rho_x . E* . Gamma_rho_y^-1 of a CP adjoint is CP, via a two-algebra CP notion IsCPBranchMap and sandwich congruences), petzReverse_trace (exact scaling Tr E^<-(t) = w Tr t, hence trace-nonincreasing for w <= 1 and the value w at rho_y; petzReverse_trace_le), petzReverse_pairing + petzReverseHeis_unit ((E^<-)* = Gamma_rho_y^-1 . E . Gamma_rho_x with unit value w 1_y), petzReverse_renewal_iff (E^<-(rho_y) = w rho_x iff E*(1_y) = w 1_x), petzReverse_involutive ((E^<-)^<- = E), petzReverse_comp ((F.E)^<- = E^<- . F^<-). Conventions per KMSDual: square roots/inverses are data, maps travel with their trace-adjoint preduals (the pairing is a hypothesis), and CP of the trace adjoint of a CP branch is data in the abstract setting (automatic in the matrix realization) — same scoping as prop:reverse-comparison. The old rank-one block-reset layer stays in Instrument.lean as supporting material."
+  },
+  "cor:petz-reciprocal-weights": {
+    "env": "corollary",
+    "title": "Reciprocal weights from paired Petz branches",
+    "status": "proved",
+    "lean": [
+      "NCG.petz_reciprocal_weight",
+      "NCG.csqrt",
+      "NCG.cinvsqrt"
+    ],
+    "note": "[batch M2 2026-07-21] proved in NCG/Upstream/ConditionalRenewal.lean: the boxed reciprocity w_e^- = w_ebar^+ — the reference weight of the Petz reverse Gamma_{rho_y} . E^* . Gamma_{rho_x}^{-1} of the opposite branch at rho_x equals the forward weight Tr(E(rho_y)) — via Gamma_{rho_x}^{-1}(rho_x) = 1 (complex positive square roots from the cfc toolkit), trace cyclicity, and the trace-adjoint pairing. The concluding bi-instrument clause (forward + reindexed Petz branches form a ray-homogeneous bi-instrument under the additional reverse-renewal condition) is the composition of this identity with prop:branchwise-petz-reference-renewal and def:ray-bi-instrument (both carried proved/encoded) and is not separately re-encoded."
+  },
+  "prop:successor-refinement": {
+    "env": "proposition",
+    "title": "Minimality of successor refinement",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.Successor.succSetoid",
+      "NCG.Upstream.Successor.SuccClass",
+      "NCG.Upstream.Successor.succProfile",
+      "NCG.Upstream.Successor.succMk_eq_iff",
+      "NCG.Upstream.Successor.succClass_factors",
+      "NCG.Upstream.Successor.succProfile_injective",
+      "NCG.Upstream.Successor.succClass_finite"
+    ],
+    "note": "[batch M23-M25 2026-07-21] PROVED in NCG/Upstream/SuccessorRefinement.lean: the successor refinement is the quotient by equality of conditional future profiles (succSetoid); the refined graph is reference renewing (the profile descends, succProfile_mk / succMk_eq_iff — in a reduced future-tomographic realization equal profiles mean one and the same normalized target state, thm:predictive-reference-renewal); coarseness/minimality: every reference-renewing relabelling factors the successor quotient uniquely through itself (succClass_factors, unique factorization on the range); finiteness under finite conditional predictive rank (succClass_finite via the injective descended profile). AUDIT-2026-07-21: reference-renewing is encoded as profile-constancy, so the coarseness claim is the universal property of Setoid.ker; the operator-level equivalence (renewing iff equal profiles via reduced tomography) is a semantic identification, not formalized."
+  },
+  "def:tomographic-frame-constant": {
+    "env": "definition",
+    "title": "Tomographic frame constant",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.IsFrameConstant"
+    ],
+    "note": "[batch M2 2026-07-21] encoded in NCG/Upstream/ConditionalRenewal.lean: kappa is a frame constant when the trace-norm distance of Hermitian differences of reachable states is bounded by kappa times any uniform bound on their test deviations (the epsilon-form of the max formulation). The existence clause for separating families is definitional prose (finite-dimensional norm comparison), not re-proved."
+  },
+  "thm:approximate-reference-renewal": {
+    "env": "theorem",
+    "title": "Quantitative approximate reference renewal",
+    "status": "proved",
+    "lean": [
+      "NCG.approximate_reference_renewal_edge",
+      "NCG.approximate_reference_renewal_path",
+      "NCG.trNorm_add_le"
+    ],
+    "note": "[batch M2 2026-07-21] proved in NCG/Upstream/ConditionalRenewal.lean: single-edge bound ||E(rho_x) - w rho_y||_1 <= w kappa eps (frame constant + positive homogeneity of the trace norm), and the path bound ||E_n...E_1 rho_0 - W_n rho_n||_1 <= sum_k W_k kappa-eps_k by telescoping with the trace-norm triangle inequality (trNorm_add_le, proved from the duality achiever). The cumulative weights enter through their recursion W_{k+1} = W_k w_k. DISCLOSURE: the trace-norm contractivity of the CP branches on Hermitian differences is taken as the hypothesis hcontr (standard, provable from positivity + trace preservation via the same duality; not re-derived), and per-vertex frame constants are absorbed into the per-edge eta_k = kappa_k eps_k bound."
+  },
+  "def:ray-bi-instrument": {
+    "env": "definition",
+    "title": "Ray-homogeneous bi-instrument",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.RayBiInstrument",
+      "NCG.Upstream.DirPath"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] label kept from the previous notes manuscript; record carried. ray-homogeneous bi-instruments encoded over multigraph edges: ordered real carriers with positive reference vectors, positive linear renewal/anti-renewal branch maps in the same orientation, and strictly positive edge weights scaling the reference rays; the probabilistic normalization clause is the notes' optional addendum"
+  },
+  "prop:multiplicative-path-weights": {
+    "env": "proposition",
+    "title": "Multiplicative path weights",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.RayBiInstrument.mapF_eta",
+      "NCG.Upstream.RayBiInstrument.mapR_eta",
+      "NCG.Upstream.RayBiInstrument.weightP_append",
+      "NCG.Upstream.RayBiInstrument.weightM_append"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] label kept from the previous notes manuscript; record carried. proved in full: the accumulated branch maps scale the reference rays by the edge-weight products W_+/W_- (induction on path length), and both weights are multiplicative under concatenation"
+  },
+  "thm:path-weight-descent": {
+    "env": "theorem",
+    "title": "Descent of operational path weights",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.RayBiInstrument.weight_descent",
+      "NCG.Upstream.RayBiInstrument.instrumentCompatible_of_map_eq",
+      "NCG.Upstream.RayBiInstrument.weight_eq_of_ray_eq"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] label kept from the previous notes manuscript; record carried. proved in full: both weights descend (via Quot.lift) to the path quotient iff the congruence is instrument compatible, and equality of accumulated branch maps - indeed merely of their actions on the reference rays - is sufficient (nonzero reference vectors separate the scalars)"
+  },
+  "prop:kraus-invariance": {
+    "env": "proposition",
+    "title": "Kraus invariance and outcome dependence",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.krausMap",
+      "NCG.Upstream.krausMap_isometric_mix",
+      "NCG.Upstream.krausMap_ray_coeff"
+    ],
+    "note": "[mapping audit M22 2026-07-21] Proved (pre-existing, NCG/Upstream/Instrument.lean): isometric change of Kraus section leaves the CP branch map unchanged, and the ray coefficient p_e on the predictive orbit depends only on the branch map. The negative clause (splitting/merging alters the instrument) is the manuscript discussion of scope, carrying no mathematical content to formalize."
+  },
+  "prop:stationary-petz-path-reversal": {
+    "env": "proposition",
+    "title": "Stationary Petz path reversal is exact",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.reverseKernel",
+      "NCG.Upstream.path_reversal_tautology",
+      "NCG.Upstream.reverseKernel_rowsum",
+      "NCG.Upstream.reverseKernel_stationary",
+      "NCG.Upstream.reverseKernel_eq_iff"
+    ],
+    "note": "[mapping audit M22 2026-07-21] Proved (pre-existing, NCG/Upstream/ClassicalReverse.lean, formerly under the working label thm:path-reversal-tautology): the boxed telescoping identity pi_{i0} prod p = pi_{im} prod p-sharp for every path, plus row-stochasticity and pi-invariance of the Petz reverse kernel and the detailed-balance criterion p-sharp = p."
+  },
+  "def:affinity": {
+    "env": "definition",
+    "title": "Edge affinity",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Multigraph.H1R",
+      "NCG.Multigraph.Walk.affinity_append",
+      "NCG.Multigraph.Walk.affinity_gauge",
+      "NCG.Multigraph.Walk.affinity_congr",
+      "NCG.Multigraph.H1R.mk_eq_zero_iff_cycles",
+      "NCG.Multigraph.H1R.mk_eq_zero_iff_gauge"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:affinity-cohomology' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. registered as the definitional record for the affinity cochain and its gauge class. Original note: proved, all five clauses, over multigraph walks with the antisymmetric convention built into backward traversal: path additivity, the gauge law A^u(gamma) = A(gamma) + u(y) - u(x), gauge/class invariance of cycle affinities, [A] = 0 iff all cycle affinities vanish (potential construction on a connected graph), and [A] = 0 iff some gauge trivializes every relative weight AUDIT-2026-07-21: the defining formula A(e) = log(w_e/w_ebar) on a bidirected graph is not encoded (Lean uses an abstract antisymmetric cochain via backward traversal); the gauge action uses the coboundary sign convention u = -f."
+  },
+  "prop:affinity-detailed-balance": {
+    "env": "proposition",
+    "title": "Cycle affinity and detailed balance",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.supportGraph",
+      "NCG.Upstream.edgeAffCochain",
+      "NCG.Upstream.kolmogorov_cohomology",
+      "NCG.Upstream.path_to_walk",
+      "NCG.Upstream.walk_to_path",
+      "NCG.Upstream.edgeAff",
+      "NCG.Upstream.edgeAff_antisymm",
+      "NCG.Upstream.pathAff_concat",
+      "NCG.Upstream.cycleAff_eq_log_ratio",
+      "NCG.Upstream.edgeAff_eq_zero_of_balanced",
+      "NCG.Upstream.pathAff_eq_zero_of_balanced",
+      "NCG.Upstream.stationary_unique",
+      "NCG.Upstream.classical_affinity_kolmogorov"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'cor:kolmogorov-cohomology' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved in full: on the support multigraph of the chain, [A] = 0 in H^1(G;R) iff all cycle affinities vanish (via coboundary telescoping one way and the walk/path affinity bridges plus the graph-level potential construction the other) iff detailed balance (Kolmogorov) [also covered by 'thm:classical-affinity': proved in full, all four clauses: antisymmetric edge affinity; (i) additivity under concatenation; (ii) the stationary potential telescopes on cycles, giving log(prod p_f/prod p_b); (iii) detailed balance kills every edg] AUDIT-2026-07-21: clause (iii) is proved in additive gauge form and in the classical-chain specialization; the multiplicative exp/log bridge to \"exists positive pi with pi(x) w_e = pi(y) w_ebar\" is unformalized."
+  },
+  "thm:affinity-conductance": {
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.capacity",
+      "NCG.Upstream.edgeAffinity",
+      "NCG.Upstream.capacity_symm",
+      "NCG.Upstream.edgeAffinity_antisymm",
+      "NCG.Upstream.capacity_pos",
+      "NCG.Upstream.capacity_factorization",
+      "NCG.Upstream.capacity_factorization_unique"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED: CapacityFactorization.lean now proves the theorem exactly as stated — c_e = sqrt(q_e q_ebar) symmetric positive (capacity_symm, capacity_pos), A_q(e) = log(q_e/q_ebar) antisymmetric (edgeAffinity_antisymm), the boxed identity q_e = c_e exp(A_q(e)/2) (capacity_factorization), and uniqueness among (symmetric positive, antisymmetric) pairs (capacity_factorization_unique), on an abstract bidirected edge set (bar an involution, q > 0). The H1(R) x H1(Z/2) gauge classification formerly anchored here remains under lem:stationary-affinity-cohomology as the supporting cohomological layer."
+  },
+  "def:environment-coefficient-algebra": {
+    "env": "definition",
+    "title": "Environment coefficient algebra",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.slice",
+      "NCG.Upstream.coeffAlgebra",
+      "NCG.Upstream.stableAlgebra",
+      "NCG.Upstream.pointerCentre"
+    ],
+    "note": "[batch M23-M25 2026-07-21] Encoded in NCG/Upstream/PointerAlgebra.lean in the finite-dimensional matrix model B(P (x) E) = Matrix (P x E) (P x E) C: the operator-Schmidt slices h_ab = (omega_ba (x) id)(H) (slice), the environment coefficient algebra C_E(H) as the star-subalgebra generated by all slices (coeffAlgebra), the nondemolition stable algebra F_E as its centralizer (stableAlgebra), and the stable classical pointer algebra Z_E = Z(F_E) (pointerCentre)."
+  },
+  "prop:interaction-algebra-minimal": {
+    "env": "proposition",
+    "title": "Minimality and nondemolition characterization",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.sum_ptensor_slice",
+      "NCG.Upstream.mem_tensorSpan_iff_slice",
+      "NCG.Upstream.coeffAlgebra_minimal",
+      "NCG.Upstream.slice_onePE_mul",
+      "NCG.Upstream.slice_mul_onePE",
+      "NCG.Upstream.commute_onePE_iff_slice",
+      "NCG.Upstream.star_slice_set",
+      "NCG.Upstream.mem_stableAlgebra_iff"
+    ],
+    "note": "[batch M23-M25 2026-07-21] PROVED in NCG/Upstream/PointerAlgebra.lean. Minimality: the block decomposition H = sum e_ab (x) h_ab (sum_ptensor_slice) gives H in B(P) (x) C iff every slice lies in C (mem_tensorSpan_iff_slice), hence C_E(H) is the unique smallest star-subalgebra with H_nu in B(P) (x) C for all nu (coeffAlgebra_minimal) — basis/Schmidt/generating-list independence. The boxed nondemolition characterization: [1_P (x) X, H_nu] = 0 iff X commutes with every slice (commute_onePE_iff_slice, by the slice/ampliation product computations), and for a Hermitian family the slices form a star-closed generating set (star_slice_set), so X in F_E iff [1 (x) X, H_nu] = 0 for every nu (mem_stableAlgebra_iff, via Algebra.adjoin induction)."
+  },
+  "thm:stable-pointer-selection": {
+    "env": "theorem",
+    "title": "Interaction-complete stable-pointer selection",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.dissipator",
+      "NCG.Upstream.dissipator_orthogonal_invariant",
+      "NCG.Upstream.dissipator_one",
+      "NCG.Upstream.trace_dissipator",
+      "NCG.Upstream.hsInner_dissipator_symm",
+      "NCG.Upstream.hsInner_dissipator_self",
+      "NCG.Upstream.dissipator_eq_zero_iff",
+      "NCG.Upstream.dissipator_eq_zero_iff_mem_stable",
+      "NCG.Upstream.exp_apply_eigen",
+      "NCG.Upstream.exp_smul_eigen",
+      "NCG.Upstream.exp_fixes_of_zero",
+      "NCG.Upstream.exp_smul_semigroup",
+      "NCG.Upstream.funct_exp_invariant",
+      "NCG.Upstream.proj_unique",
+      "NCG.Upstream.symm_dissipative_exp_tendsto",
+      "NCG.Upstream.hsCore",
+      "NCG.Upstream.dissipatorL",
+      "NCG.Upstream.dissipatorL_isSymmetric",
+      "NCG.Upstream.dissipatorL_dissipative",
+      "NCG.Upstream.dissipator_exp_tendsto_stable",
+      "NCG.Upstream.exp_dissipator_preservesPos",
+      "NCG.Upstream.euler_product_tendsto",
+      "NCG.Upstream.dissipatorL_split",
+      "NCG.Upstream.norm_exp_sub_one_sub_le",
+      "NCG.Upstream.posSemidef_of_tendsto",
+      "NCG.Upstream.PreservesPos"
+    ],
+    "note": "[batch M30-M32 2026-07-21] PROVED. Clause (i): basis independence (dissipator_orthogonal_invariant, M27). Clause (ii): the semigroup law e^{(s+t)L} = e^{sL}e^{tL} (exp_smul_semigroup), unitality (dissipator_one + exp_fixes_of_zero: the identity is fixed), trace preservation of every e^{tL} (funct_exp_invariant applied to the trace functional, via the operator-exponential series), and Hilbert-Schmidt self-adjointness of the generator (hsInner_dissipator_symm). Clause (iii): fixed points = commutant of the generators = the nondemolition stable algebra F_E (dissipator_eq_zero_iff + dissipator_eq_zero_iff_mem_stable). Clause (iv): NCG/Upstream/SemigroupLimit.lean — Matrix E E C carries the genuine Frobenius inner-product structure (hsCore via InnerProductSpace.ofCore, built on the trace identities), the dissipator is symmetric and dissipative for it, and the abstract spectral theorem symm_dissipative_exp_tendsto (eigenbasis of the symmetric generator; e^{tT} acts on eigenvectors by e^{t mu}; negative modes decay) gives pointwise (hence, in finite dimension, norm) convergence of e^{tL} to the map P with range in ker L and defect orthogonal to ker L — the HS-orthogonal projection onto F_E, UNIQUE with these properties (proj_unique): the trace-preserving conditional expectation. Sole remaining scoped clause: complete positivity of e^{tL} (the Lindblad CP argument), disclosed in the file docstring. AUDIT-2026-07-21: in addition to CP of exp(tL): the conditional-expectation (bimodule) characterization of the limit, the pointwise-vs-operator-norm convergence equivalence, and derivation of the spanning hypothesis hgen from the orthonormal-basis choice are unformalized. AUDIT-2026-07-22: clause (ii) COMPLETE POSITIVITY is now PROVED — LindbladCP.lean: exp_dissipator_preservesPos shows every matrix ampliation of e^{tL} (t >= 0) preserves positive semidefiniteness, with no unformalized inputs. Route: dissipatorL_split (L = Kraus + two-sided multiplication), exp_smul_mulPair_eq_conjL (the multiplication semigroup is the hermitian conjugation), ampliation stability of conjugations and Euler factors (kronId conjugation identity + Matrix.PosSemidef.mul_mul_conjTranspose_same), euler_product_tendsto (Euler-Trotter convergence with the explicit second-order remainder bound norm_exp_sub_one_sub_le and telescoping power estimate), and posSemidef_of_tendsto (positivity closed under Frobenius limits). The former scoped-input disclosure for CP is discharged."
+  },
+  "thm:canonical-pointer-instrument": {
+    "env": "theorem",
+    "title": "Canonical pointer instrument",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.ptrace",
+      "NCG.Upstream.ptrace_eq_trace_slice",
+      "NCG.Upstream.ptrace_compress",
+      "NCG.Upstream.pointer_instrument_sum",
+      "NCG.Upstream.pointer_offdiag_vanish"
+    ],
+    "note": "[batch M23-M25 2026-07-21] PROVED (instrument core) in NCG/Upstream/PointerAlgebra.lean: the partial trace of an ampliated two-sided compression is a trace pairing against the slice (ptrace_compress: Tr_E[(1 (x) A) M (1 (x) B)]_pq = tr(slice_pq(M) BA)); hence for ANY family of idempotent environment projections summing to one, sum_alpha Tr_E[(1 (x) z_alpha) M (1 (x) z_alpha)] = Tr_E M (pointer_instrument_sum) — applied to M = V rho V* this is the boxed sum_alpha I_alpha = Phi_*, and cross-compressions along orthogonal projections have vanishing partial trace (pointer_offdiag_vanish), the off-diagonal-block argument of the manuscript proof. Scoped inputs, not formalized: the intrinsic uniqueness of the minimal central projections of F_E as an unordered family (finite-dimensional C*-structure theory) and the CP/trace-nonincreasing qualitative clause; the record-algebra and determinant-line riders are the already-proved thm:canonical-record-algebra / determinant-transport pillars."
+  },
+  "def:record-future-equivalence": {
+    "env": "definition",
+    "title": "Conditional future equivalence of records",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.RecordEquiv",
+      "NCG.recordSetoid",
+      "NCG.RecordClasses"
+    ],
+    "note": "[batch M1 2026-07-21] encoded in NCG/Upstream/RecordAlgebra.lean: records are equivalent when every admissible future experiment assigns them the same conditional probability (pcond : F -> O -> R abstracting p_F^x(o)); the quotient Omega_x = O/== is RecordClasses."
+  },
+  "thm:canonical-record-algebra": {
+    "status": "proved",
+    "lean": [
+      "NCG.recordSubalgebra",
+      "NCG.adjoin_predictions_eq_recordAlgebra",
+      "NCG.recordAlgebra_eq_pullback",
+      "NCG.recordAlgebra_factor_unique"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED: the boxed three-way identity is now fully proved for finite resolved record sets. The content half — the real unital algebra generated by the conditional prediction functions equals the class-constant algebra — is adjoin_predictions_eq_recordAlgebra (Algebra.adjoin R (range p) = recordSubalgebra), proved by the manuscript separation argument: affinely rescaled separating predictions g_D with value 1 on C and 0 on D, class indicators e_C as products over non-equivalent records, and the weighted indicator expansion f = sum (f/|class|) e. The second equality (pullback of C(Omega)) is recordAlgebra_eq_pullback, and the reduced minimality/uniqueness clause is recordAlgebra_factor_unique."
+  },
+  "prop:record-transport-descent": {
+    "env": "proposition",
+    "title": "Descent of reversible record transport",
+    "status": "proved",
+    "lean": [
+      "NCG.recordTransport_descend",
+      "NCG.recordTransport_descend_bijective",
+      "NCG.recordTransport_descend_comp",
+      "NCG.recordAlgebra_comap_bij",
+      "NCG.TransportCompat"
+    ],
+    "note": "[batch M1 2026-07-21] proved in NCG/Upstream/RecordAlgebra.lean: a record transport compatible with prediction pullback (p'_{F'}(tau o) = p_{u*F'}(o), TransportCompat) descends to the reduced classes (recordTransport_descend), the descent of a reversible transport with compatible inverse is a bijection (recordTransport_descend_bijective), composition descends functorially (recordTransport_descend_comp), and pullback along the transport is a bijection between the canonical record algebras (recordAlgebra_comap_bij; unitality/order/ring compatibility are automatic since the map is composition)."
+  },
+  "thm:record-parity-unique": {
+    "env": "theorem",
+    "title": "Uniqueness of resolved-record parity",
+    "status": "proved",
+    "lean": [
+      "NCG.perm_hom_eq_one_or_sign",
+      "NCG.monoidHom_eq_of_isConj",
+      "NCG.sign_ne_one_of_two_le_card",
+      "NCG.recSign_permMatrix"
+    ],
+    "note": "[batch M22 2026-07-21] Proved in NCG/Upstream/RecordParity.lean: every homomorphism S_k -> {plus-minus 1} is the trivial character or the permutation sign (transpositions are conjugate, homomorphisms into abelian groups are class functions, transpositions generate: perm_hom_eq_one_or_sign); for k >= 2 the sign character is nontrivial (sign_ne_one_of_two_le_card). The identification of the sign with the determinant of the permutation representation on the contrast module is the pre-existing NCG.recSign_permMatrix (NCG/Graph/RecordOrientation.lean)."
+  },
+  "def:determinant-regular-record-edge": {
+    "env": "definition",
+    "title": "Determinant-regular noisy record edge",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Multigraph.recSign",
+      "NCG.Multigraph.walkTransport"
+    ],
+    "note": "[batch M1 2026-07-21] encoded via NCG/Graph/RecordOrientation.lean: a determinant-regular record edge is an invertible linear transport of the (equal-rank) record contrast modules; the algebraic reverse transport is the matrix inverse carried by backward walk steps (walkTransport), with no positivity requirement, exactly as the definition stipulates. The stochastic-correspondence provenance of Q_e (mass-preserving noisy channel acting on contrasts) is definitional prose."
+  },
+  "thm:noisy-record-orientation": {
+    "env": "theorem",
+    "title": "Signed cover from determinant-regular noisy records",
+    "status": "proved",
+    "lean": [
+      "NCG.Multigraph.recSign",
+      "NCG.Multigraph.recSign_basisChange",
+      "NCG.Multigraph.holonomy_recSign",
+      "NCG.Multigraph.recSign_holonomy_basisChange_loop",
+      "NCG.Multigraph.recSign_permMatrix"
+    ],
+    "note": "[batch M1 2026-07-21] proved across NCG/Graph/RecordOrientation.lean: for determinant-regular (invertible) record transports, (i) the determinant signs multiply along path composition (holonomy_recSign: walk holonomy = orientation character of the composed transport), (ii) local generator changes act by a vertex coboundary (recSign_basisChange), (iii) the gauge-invariant obstruction is the class [chi_det] in H^1(G, Z/2) = w1 of the determinant line system (loop invariance recSign_holonomy_basisChange_loop; w1 of a real line system over a graph IS its orientation-parity class, definitional), and (iv) for deterministic record permutations the cochain is the ordinary permutation parity (recSign_permMatrix via det_permutation). Operational reversibility is nowhere used - only linear nondegeneracy, as the theorem emphasizes. AUDIT-2026-07-21: clause (iv)'s augmentation-restriction step (constant line carries det +1; K_e preserves the contrast module) is prose; Lean computes the sign of the full permutation matrix."
+  },
+  "prop:noisy-record-sign-stability": {
+    "env": "proposition",
+    "title": "Orientation is stable away from rank loss",
+    "status": "proved",
+    "lean": [
+      "NCG.det_sign_locally_constant"
+    ],
+    "note": "[batch E1 2026-07-21] proved in NCG/Lorentz/DetCrossing.lean: along any continuous family of record transports over any topological parameter space, at a determinant-regular point the orientation sign orSign(det) is eventually constant; contrapositively a sign change forces passage through the rank-loss locus det = 0."
+  },
+  "def:record-system": {
+    "env": "definition",
+    "title": "Future-distinct record system",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Multigraph.walkTransport",
+      "NCG.Multigraph.recSign"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] future-distinct record system encoded as invertible real matrix transports over the library Multigraph, with backward edges carrying the inverse transport (NCG/Graph/RecordOrientation.lean). AUDIT-2026-07-21: Lean fixes one global rank Fin r for all vertices; the text allows per-vertex record spaces of varying finite dimension (constancy assumed only later, per component)."
+  },
+  "def:orientation-cochain": {
+    "env": "definition",
+    "title": "Record-orientation cochain",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Multigraph.recSign",
+      "NCG.orSign",
+      "NCG.Multigraph.recSign_basisChange"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] the record-orientation cochain chi(e) = sgn det L_e and its vertex-coboundary gauge action are encoded and their gauge covariance proved in NCG/Graph/RecordOrientation.lean."
+  },
+  "thm:determinant-cover": {
+    "env": "theorem",
+    "title": "Determinant line and principal signed cover",
+    "status": "proved",
+    "lean": [
+      "NCG.Multigraph.orientation_class_zero_iff_coherent",
+      "NCG.Multigraph.orientation_class_zero_iff_cycles",
+      "NCG.Multigraph.orientationCoverSplit",
+      "NCG.Multigraph.signedCover_connected_of_ne_zero",
+      "NCG.Multigraph.recSign",
+      "NCG.Multigraph.recSign_basisChange",
+      "NCG.Multigraph.holonomy_recSign"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:orientation-cover-upstream' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. the determinant-parity cochain, its coboundary action, loop invariance and monodromy identification are additionally proved in NCG/Graph/RecordOrientation.lean. Original note: proved: w1 = [chi_L] vanishes iff a coherent orientation (vertex gauge) exists iff every cycle has positive sign holonomy; a coherent orientation splits the cover onto the trivial double cover (explicit sheet gauge, reusing the downstream signedCover machinery); and when w1 is nonzero the orientation cover is connected - exactly the downstream principal signed double cover"
+  },
+  "cor:minimal-signed-enrichment": {
+    "status": "proved",
+    "lean": [
+      "NCG.two_le_rank_of_indefinite",
+      "NCG.MinimalEnrichmentData.rank_eq_two",
+      "NCG.conePositive_bij",
+      "NCG.perm_fin_two_cases",
+      "NCG.MinimalEnrichmentData.exists_transition_cochain",
+      "NCG.coverSign",
+      "NCG.coverSign_single",
+      "NCG.coverSign_sq"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED (EnrichmentMinimality.lean): all three clauses now carried. Minimal fibre rank two: two_le_rank_of_indefinite (both signs of local lines force rank >= 2) + rank_eq_two (minimality forces = 2), realized by the orientation cover. Cone-preserving unitaries permute the two extremal rays leaving exactly identity and sheet exchange: conePositive_bij + perm_fin_two_cases, and their edgewise choices are Z/2 transition functions (exists_transition_cochain), giving the H^1(G;Z/2) classification via the ambient cover/cohomology layer. Canonical fundamental symmetry: coverSign is the diagonal sheet-sign operator J e_{(x,eta)} = (-1)^eta e_{(x,eta)} with J^2 = 1 (coverSign_sq)."
+  },
+  "thm:independence": {
+    "env": "theorem",
+    "title": "Independence theorem",
+    "status": "proved",
+    "lean": [
+      "NCG.Multigraph.Walk.fwdCount",
+      "NCG.Multigraph.Walk.bwdCount",
+      "NCG.Multigraph.Walk.usesCount",
+      "NCG.Multigraph.Walk.affinity_indicator",
+      "NCG.Multigraph.Walk.holonomy_indicator",
+      "NCG.Multigraph.H1R.mk_indicator_ne_zero",
+      "NCG.Multigraph.H1.mk_indicator_ne_zero",
+      "NCG.Multigraph.independence_of_classes",
+      "NCG.Multigraph.detailed_balance_indep_orientability"
+    ],
+    "note": "[batch M4a 2026-07-21] Proved in NCG/Upstream/IndependenceClasses.lean. Formalization: \"graph with a cycle\" is encoded as a closed walk traversing some edge e0 exactly once (usesCount e0 p = 1), and a resolved model is presented by its positive capacities w : E -> R (affinity cochain A = log w) and invertible rank-one record transports L : E -> GL(1,R) (orientation cochain recSign L). independence_of_classes exhibits, on every such graph, four models realizing all four combinations of [A]=0/!=0 in H1(G;R) and [chi]=0/!=0 in H1(G;Z/2): trivial capacities/transports, capacity exp(1) on e0 (cycle affinity +-1 != 0), transport -1 on e0 (cycle holonomy 1 != 0); nontriviality is detected against coboundary-vanishing on the given cycle. detailed_balance_indep_orientability extracts the two mixed models (the \"neither implies nor is implied\" clause). A DecidableEq hypothesis on edges is assumed (harmless: classical logic provides it)."
+  },
+  "thm:no-affinity-parity-reduction": {
+    "env": "theorem",
+    "title": "No canonical mod-two reduction of real affinity",
+    "status": "proved",
+    "lean": [
+      "NCG.Multigraph.addHom_real_zmod2_eq_zero"
+    ],
+    "note": "[mapping audit M22 2026-07-21] Proved (pre-existing, NCG/Upstream/AffinityCohomology.lean, formerly under the working label thm:no-real-to-modtwo-reduction): every additive homomorphism (R,+) -> Z/2 vanishes (divisibility argument), so no coefficient homomorphism can convert the real affinity class into the orientation class. The cohomological rider is the functorial corollary of the zero coefficient map."
+  },
+  "prop:z4-lift": {
+    "env": "theorem",
+    "title": "Classification and minimality of amplitude lifts",
+    "status": "proved",
+    "lean": [
+      "NCG.Multigraph.amplitudeLift_exists",
+      "NCG.Multigraph.amplitudeLift_card",
+      "NCG.Multigraph.H1Z4.reduce_surjective",
+      "NCG.Multigraph.card_fibre_reduce",
+      "NCG.Multigraph.no_canonical_z4_section",
+      "NCG.Multigraph.order_four_forced",
+      "NCG.Multigraph.Walk.holonomy4_reduce"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:finite-amplitude-lifts' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved: q_* is surjective on H1 and on a finite connected graph each fibre has exactly 2^{b1} classes (a coset of the kernel of the additive reduction - the H1(G;mu2)-torsor structure), with b1 = |E| - |V| + 1 [also covered by 'thm:no-canonical-z4-section': proved: no additive homomorphism Z/2 -> Z/4 sections the reduction (the image of the order-two generator would need order four) - the extension does not split, so the orientation class supplies no coefficient-natural amp] [also covered by 'thm:order-four-forced-upstream': proved: a loop with signed holonomy -1 forces the amplitude holonomy h to satisfy 2h = 2 (u(gamma)^2 = -1) with 2h nonzero and 4h = 0 - additive order exactly four, so mu4 is the minimal finite coefficient group]"
+  },
+  "prop:terminal-component": {
+    "env": "proposition",
+    "title": "Component reduction for stochastic and weighted transfers",
+    "status": "proved",
+    "lean": [
+      "NCG.Condense.Condensation",
+      "NCG.Condense.condensation_finite",
+      "NCG.Condense.creach_antisymm",
+      "NCG.Condense.condensationPartialOrder",
+      "NCG.pRad_submatrix_le",
+      "NCG.pRad_blockTriangular_le",
+      "NCG.pRad_attained_on_component",
+      "NCG.pRad_sccBlock_le",
+      "NCG.sccBlock",
+      "NCG.hasDiagWitness_sccBlock",
+      "NCG.pow_card_eq_zero_of_no_witness",
+      "NCG.nilpotent_supersolution",
+      "NCG.pRad_le_of_nilpotent_first",
+      "NCG.pRad_le_of_nilpotent_second",
+      "NCG.exists_min_vertex",
+      "NCG.stationary_supported_on_terminal",
+      "NCG.chainMeasure",
+      "NCG.chainMeasure_map_eval",
+      "NCG.chainMeasure_pair_null",
+      "NCG.stationary_trajectory_in_closed_class",
+      "NCG.stationary_ae_in_one_closed_recurrent_class",
+      "NCG.deterministic_path_no_absorption"
+    ],
+    "note": "[batch M22 2026-07-21] PROVED, all four clauses. (i) Condensation finite and acyclic (NCG/Graph/Condensation.lean, batch M8). (ii) Full m-block growth-rate formula: pRad(B|C) <= pRad(B) for every principal submatrix (pRad_submatrix_le, M18), the two-block triangular bound (pRad_blockTriangular_le, M19), and NEW in NCG/Lorentz/SCCRadius.lean the attained maximum pRad_attained_on_component: pRad B equals the growth rate of the block of one strongly connected component of the support graph carrying a diagonal witness, by strong induction peeling a minimal component per step; witness-free blocks are nilpotent (pow_card_eq_zero_of_no_witness, positive-chain pigeonhole) and are absorbed by a truncated-resolvent super-solution (nilpotent_supersolution, pRad_le_of_nilpotent_first/second). Together: rho(B) = max_j rho(B|C_j) with witness-free (nilpotent, rho = 0) blocks never attaining the positive maximum. (iii) Stationary laws live on terminal components (stationary_supported_on_terminal, earlier batch). (iv) NEW in NCG/Upstream/AbsorbingClass.lean: the trajectory law of the stationary chain is the genuine Ionescu-Tulcea measure (Kernel.trajMeasure); marginals are stationary at every time (chainMeasure_map_eval), every step property implied by stationary positivity holds a.s. (chainMeasure_pair_null), and almost every trajectory stays from time 0 inside one closed communicating class with positive stationary mass in which all states communicate (stationary_ae_in_one_closed_recurrent_class). Sharpness: an explicit row-stochastic matrix with a deterministic positive-probability path never entering a closed class (deterministic_path_no_absorption)."
+  },
+  "thm:projective-lift": {
+    "env": "theorem",
+    "title": "Automatic projective lift",
+    "status": "proved",
+    "lean": [
+      "NCG.projDefect_mem_center_of_ad",
+      "NCG.projDefect_cocycle",
+      "NCG.commutator_R_add_left"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:spatial-multiplier-scalar-main' (companion-manuscript track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: group-theoretic core (central defects, cocycle identity, biadditive pairing); finite-factor innerness interface pending"
+  },
+  "thm:temporal-row": {
+    "env": "theorem",
+    "title": "Canonical temporal row",
+    "status": "proved",
+    "lean": [
+      "NCG.krein_exchange_path"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:canonical-temporal-row' (companion-manuscript track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: AUDIT CORRECTION: krein_exchange_path proves the exchange sign only for the literal composite shift S_alpha (pathShift). The theorem's actual generality claim -- that the sign is forced for ANY clock-preserving revision operator R_alpha whose sheet action matches alpha, via commutativity of its separate internal/base-preserving factors with J_chi -- is not formalized; no Lean definition of a general dressed revision operator with such factors exists for this record. AUDIT-2026-07-21: in addition to the disclosed pathShift specialization: the second display — the combined commutator form omega((alpha,eps),(beta,delta)) on K_full = K_rev + <t> — has no Lean counterpart."
+  },
+  "thm:clifford-factor": {
+    "env": "theorem",
+    "title": "Radical reduction and primitive Clifford factor",
+    "status": "proved",
+    "lean": [
+      "NCG.CommonOrigin.piKron",
+      "NCG.CommonOrigin.piKron_mul",
+      "NCG.CommonOrigin.piKron_trace",
+      "NCG.CommonOrigin.slotEmbed",
+      "NCG.CommonOrigin.noncommProd_slotEmbed",
+      "NCG.CommonOrigin.jwGamma",
+      "NCG.CommonOrigin.jwGamma_clifford",
+      "NCG.CommonOrigin.jwGamma_herm",
+      "NCG.CommonOrigin.pauliWord",
+      "NCG.CommonOrigin.pauliWord_trace_mul",
+      "NCG.CommonOrigin.pauliWord_linearIndependent",
+      "NCG.CommonOrigin.pauliWord_span",
+      "NCG.CommonOrigin.pauliWord_mem_adjoin",
+      "NCG.CommonOrigin.jwGamma_generates",
+      "NCG.CommonOrigin.jwGamma_commutant"
+    ],
+    "note": "[batch M16 2026-07-21] Proved in NCG/Algebra/JordanWigner.lean by the Jordan-Wigner construction over the slotwise tensor calculus (piKron product-form matrices on (C^2)^{tensor m}, multiplying slotwise by Fubini, with multiplicative trace and single-slot sign/scale extraction). For EVERY m: the 2m Jordan-Wigner generators satisfy the full Clifford relations Gamma_x Gamma_y + Gamma_y Gamma_x = 2 delta 1 and are Hermitian (jwGamma_clifford, jwGamma_herm); the 4^m Pauli words form a trace-orthogonal basis of M_{2^m}(C) (Tr(W_x W_y) = 2^m delta, linear independence + span by dimension count); every word is an explicit product of generators, sigma_3-strings and phases, so the Clifford system GENERATES the full matrix factor (jwGamma_generates: adjoin = top); and the representation is irreducible — the commutant is scalar (jwGamma_commutant, via the centralizer subalgebra and commutation with matrix units). This realizes C_sigma[K_prim] = M_{2^m}(C) = Cl_{2m}(C) concretely through the monomial representation. Disclosures: the statement is instantiated on the STANDARD nondegenerate commutator form on F_2^{2m} — the reduction of an arbitrary K_full/rad(omega) to a symplectic basis is not formalized (symplectic normal form over F_2 is absent from Mathlib); and the uniqueness-up-to-unitary-equivalence clause of the faithful irreducible projective representation (finite Stone-von Neumann) is not formalized."
+  },
+  "cor:timelike-generator": {
+    "env": "corollary",
+    "title": "Intrinsic timelike generator",
+    "status": "proved",
+    "lean": [
+      "NCG.forced_timelike_generator"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'prop:forced-timelike-generator' (companion-manuscript track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved in full: for a normalized hyperbolic pair (Hermitian involutions J, R with JR = -RJ) the temporal generator gamma^0 = JR is anti-Hermitian, Krein-odd, and squares to -1; the +-1 normalization-uniqueness remark is the noted side observation"
+  },
+  "thm:no-finite-orientation-selection": {
+    "env": "theorem",
+    "title": "Finite primitive symmetric phases cannot select an orientation",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.stationary_deck_invariant",
+      "NCG.Upstream.no_finite_spontaneous_orientation"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:no-finite-spontaneous-orientation' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved: deck covariance makes the transported stationary density stationary, uniqueness forces deck invariance, and the stationary expectation of every deck-odd observable (in particular Tr(rho_* J)) vanishes via the cancellation theorem; the uniqueness of the stationary state - which the notes' proof imports from thm:primitive-stationary-weight for primitive finite transfers - enters as the hypothesis interface, matching the proof's structure"
+  },
+  "cor:orientation-selection-mechanisms": {
+    "env": "corollary",
+    "title": "Possible orientation-selection mechanisms",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.orientation_selection_routes"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'cor:orientation-selection-routes' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved as the exact contrapositive: a nonzero stationary deck-odd order parameter refutes the conjunction of deck covariance and stationary-state uniqueness - i.e. requires explicit symmetry breaking (route i) or a uniqueness failure (nonprimitivity, degeneracy, superselection, singular limits - routes ii-iv, which are the physical readings of the broken hypothesis)"
+  },
+  "thm:deck-observability": {
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.deck_even_agreement",
+      "NCG.Upstream.deck_odd_flip",
+      "NCG.Upstream.deck_odd_distinguishes",
+      "NCG.Upstream.symmetric_state_cancellation"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED: the current text's criterion is now proved as stated — deck_even_agreement (omega_- = omega_+ . Ad(tau) agrees with omega_+ on deck-even observables), deck_odd_flip (omega_-(a) = -omega_+(a) on deck-odd a), deck_odd_distinguishes (a deck-odd test with omega_+(a) != 0 separates the phases). The deck companion is encoded via tau-conjugation, matching def:deck-order-parameter; the old cancellation lemma remains as the deck-invariant-state corollary."
+  },
+  "prop:pressure-gauge-invariance": {
+    "env": "proposition",
+    "title": "Gauge covariance of pressure and the Doob law",
+    "status": "proved",
+    "lean": [
+      "NCG.pressureKernel_gauge",
+      "NCG.pressureRate_gauge_invariant",
+      "NCG.pRad_diag_conj"
+    ],
+    "note": "[batch M3 2026-07-21] proved in NCG/Lorentz/PressureGauge.lean: the vertex gauge A^f = A + f(x) - f(y) rescales the capacities to q_e e^{(f(x)-f(y))/2}, which conjugates the pressure transfer by D_f = diag(e^{f/2}) (pressureKernel_gauge, exact kernel identity), and the Gelfand-Fekete growth rate is invariant under conjugation by any positive diagonal (pRad_diag_conj: entrywise sandwich c A^k <= (D A D^{-1})^k <= C A^k with c, C from the diagonal range, hence identical log growth limits). Consequently the pressure FUNCTION s -> r(s) is gauge invariant (pressureRate_gauge_invariant), and with it its zero beta and every quantity derived from the pressure function - the invariance clauses for the pressure, its root and its derivatives hold because the functions are literally equal. DISCLOSURE: the Doob-law clause (invariance of p_e = q_e e^{-beta l_e} h_y/h_x and pi = nu h under the compensating gauge of the Perron vectors) requires the Perron eigenvectors, which the eigenvector-free pressure development does not construct; it is not formalized, consistent with the thm:pressure-root disclosure."
+  },
+  "thm:pressure-root": {
+    "env": "theorem",
+    "title": "Pressure-root selection",
+    "status": "proved",
+    "lean": [
+      "NCG.pressure_selects_beta",
+      "NCG.pressureKernel",
+      "NCG.pressureRate",
+      "NCG.pRad",
+      "NCG.tendsto_growthSeq",
+      "NCG.pRad_smul",
+      "NCG.pRad_le_of_entry_le"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:pressure-selects-beta' (companion-manuscript track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved in NCG/Lorentz/PerronPressure.lean. The kernel is encoded faithfully as K(s)_{xy} = sum over edges e : x -> y of q_e exp(-s l_e) (pressureKernel, over a finite edge type with src/tgt maps), with q_e > 0 and 0 < l_0 <= l_e <= l_1. Since Mathlib has no Perron-Frobenius theory, the spectral radius is implemented as the Gelfand-Fekete growth rate pRad A = exp(lim log(entrySum(A^k))/k) of the total entry sum of powers (submultiplicative for nonnegative matrices; Fekete via Mathlib's Subadditive.tendsto_lim, bounded below through a positive diagonal power entry). Strong connectivity of the recurrent component enters as the hypothesis HasDiagWitness (some power of K(0) has a positive diagonal entry - the matrix form of a positive-weight cycle), which transfers to every s by entrywise exponential domination. Proved clauses: r = pressureRate is StrictAnti on all of R (from K(t) <= e^{-(t-s)l_0} K(s) entrywise, monotonicity and positive homogeneity of pRad, and r > 0), Continuous (two-sided exponential squeeze with rate max(l_1,l_0)), Tendsto r atTop (nhds 0), and the pressure trichotomy: r(0) > 1 gives a unique beta > 0 with r(beta) = 1 (intermediate value + strict monotonicity), r(0) = 1 admits no positive root (the root is beta = 0), r(0) < 1 admits no nonnegative root. Deviation/disclosure: the manuscript's concluding Perron remark (simplicity of the eigenvalue and strict positivity of left/right eigenvectors at the root) is a classical PF statement not consumed by the selection result; it is NOT formalized (no eigenvector theory is built), as stated in the file docstring. r is realized as the Gelfand growth rate rather than an eigenvalue of a characteristic polynomial; for nonnegative matrices these agree classically."
+  },
+  "constr:pressure-law": {
+    "env": "theorem",
+    "title": "Stationary pressure law and mean depth",
+    "status": "proved",
+    "lean": [
+      "NCG.cwSet",
+      "NCG.cwSet_isCompact",
+      "NCG.perron_exists",
+      "NCG.perron_exists_left",
+      "NCG.perron_left_right_eq",
+      "NCG.doobP",
+      "NCG.doobP_pos",
+      "NCG.doobP_stochastic",
+      "NCG.perron_root_eq_pRad",
+      "NCG.pressure_law"
+    ],
+    "note": "[batches M13+M14 2026-07-21] Proved in NCG/Lorentz/PerronExistence.lean + DoobConstruction.lean. Since Mathlib has no Perron-Frobenius theorem, the existence half is built from scratch for entrywise positive kernels by the Collatz-Wielandt variational argument (no fixed-point theorem): the set of subeigenpairs (lambda, x) on the probability simplex is compact, the pair with maximal lambda is an exact eigenpair (applying the strictly positive matrix once more would strictly improve lambda), and the eigenvector is strictly positive; the left eigenvector follows by transposition and the two eigenvalues agree by pairing (perron_exists, perron_exists_left, perron_left_right_eq). The construction clauses: the Doob transform p_{xy} = B_{xy} h_y/(r h_x) is a strictly positive stochastic edge law (doobP_stochastic), and pi = nu h / <nu,h> is a strictly positive stationary probability weight (pressure_law); moreover the Perron root IS the Gelfand-Fekete growth rate of the eigenvector-free pressure development, r = pRad B (perron_root_eq_pRad, by the eigenvector entry-sum sandwich and a logarithmic squeeze), identifying P(beta) = log r. Disclosures: scoped to entrywise positive kernels (the primitive-nonnegative reduction by powers is not formalized), the Doob law includes the r-normalization (the manuscript normalization at the pressure zero), and the derivative identity mu_ell = -P-prime(beta) is not formalized (needs differentiability of the pressure in beta). This data discharges the DoobData hypotheses of def:pressure-entropy-data / lem:stationary-affinity-cohomology / thm:entropy-affinity-depth for positive kernels."
+  },
+  "def:pressure-entropy-data": {
+    "env": "definition",
+    "title": "Stationary entropy production and entropy rate",
+    "status": "proved",
+    "lean": [
+      "NCG.DoobData",
+      "NCG.DoobData.F",
+      "NCG.DoobData.scriptA",
+      "NCG.DoobData.sigma",
+      "NCG.DoobData.sum_F_eq_one",
+      "NCG.DoobData.sum_F_bar_eq_one",
+      "NCG.DoobData.sigma_nonneg"
+    ],
+    "note": "[batch M4b 2026-07-21] Proved in NCG/Lorentz/EntropyAffinity.lean: the stationary edge flow F_e = pi_{s(e)} p_e and its reversal F∘bar are probability distributions on oriented edges (sum_F_eq_one, sum_F_bar_eq_one), and sigma = sum F_e log(F_e/F_bar(e)) is the relative entropy D_KL(F || F∘bar), nonnegative by the Gibbs inequality log x <= x-1 (sigma_nonneg, which needs no normalization hypotheses, only positivity and the bar involution). Disclosure: the Doob/Perron data of constr:pressure-law (positive right/left vectors h, nu with the induced edge law stochastic, the edge flow stationary, and the vertex weight a probability vector) is taken as hypothesis data (structure DoobData + Stochastic / StationaryFlow / ProbabilityWeight), since Perron eigenvector existence is outside the eigenvector-free pressure development; given that data the statement is fully proved."
+  },
+  "lem:stationary-affinity-cohomology": {
+    "env": "lemma",
+    "title": "Input affinity and stationary affinity are cohomologous",
+    "status": "proved",
+    "lean": [
+      "NCG.DoobData.vlog",
+      "NCG.DoobData.log_F",
+      "NCG.DoobData.scriptA_eq",
+      "NCG.DoobData.telescope",
+      "NCG.DoobData.sum_F_A_eq_sigma",
+      "NCG.DoobData.sigma_nonneg"
+    ],
+    "note": "[batch M4b 2026-07-21] Proved in NCG/Lorentz/EntropyAffinity.lean: the stationary affinity identity scriptA(e) = A(e) + v(t(e)) - v(s(e)) with v = log(h/nu) (scriptA_eq, by explicit logarithm expansion of F using the bidirected symmetries c_symm/A_anti/len_symm), and the boxed consequence sum_e F_e A(e) = sum_e F_e scriptA(e) = sigma >= 0 (sum_F_A_eq_sigma + sigma_nonneg; the coboundary term telescopes by stationary flow conservation, lemma telescope). Disclosure: the Doob/Perron data of constr:pressure-law (positive right/left vectors h, nu with the induced edge law stochastic, the edge flow stationary, and the vertex weight a probability vector) is taken as hypothesis data (structure DoobData + Stochastic / StationaryFlow / ProbabilityWeight), since Perron eigenvector existence is outside the eigenvector-free pressure development; given that data the statement is fully proved."
+  },
+  "thm:entropy-affinity-depth": {
+    "env": "theorem",
+    "title": "Entropy--affinity--depth identity",
+    "status": "proved",
+    "lean": [
+      "NCG.DoobData.meanDepth",
+      "NCG.DoobData.entropyRate",
+      "NCG.DoobData.kappaC",
+      "NCG.DoobData.log_p",
+      "NCG.DoobData.entropy_affinity_depth",
+      "NCG.DoobData.beta_eq",
+      "NCG.DoobData.entropy_affinity_depth_neutral"
+    ],
+    "note": "[batch M4b 2026-07-21] Proved in NCG/Lorentz/EntropyAffinity.lean: all three boxed forms — beta*mu_ell = h_rate + kappa_c + sigma/2 (entropy_affinity_depth), the solved form beta = (h_rate + E_F[log c] + E_F[A]/2)/mu_ell (beta_eq, under mu_ell != 0), and the neutral-conductance normalization beta*mu_ell = h_rate + sigma/2 (entropy_affinity_depth_neutral). The proof expands log p_e, telescopes the Doob-gauge coboundary by flow conservation, and applies lem:stationary-affinity-cohomology. Disclosure: the Doob/Perron data of constr:pressure-law (positive right/left vectors h, nu with the induced edge law stochastic, the edge flow stationary, and the vertex weight a probability vector) is taken as hypothesis data (structure DoobData + Stochastic / StationaryFlow / ProbabilityWeight), since Perron eigenvector existence is outside the eigenvector-free pressure development; given that data the statement is fully proved."
+  },
+  "thm:pressure-path-clock": {
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.GradedPathSystem",
+      "NCG.Upstream.creationOp",
+      "NCG.Upstream.creation_grading",
+      "NCG.Upstream.creation_modular_conj",
+      "NCG.Upstream.pathClock",
+      "NCG.Upstream.criteria_flow_iff_block",
+      "NCG.Upstream.criteria_commutator_iff_block"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED (PathClock.lean): the graded path-clock construction is now built and the boxed identity proved. GradedPathSystem carries a path space with weighted depth and partial edge creation raising depth by l_e; creationOp is the path-creation operator on the finitely supported core of l2(P_fin(G)); creation_grading proves [N, S_e] = l_e S_e (feeding upstream_affine_clock_weighted); creation_modular_conj proves e^{zN} S_e e^{-zN} = e^{z l_e} S_e for every complex scale z — z = it*beta is the boxed modular-flow identity Delta^{it} S_e Delta^{-it} = e^{it beta l_e} S_e and z = beta the weight form. pathClock instantiates it on the actual directed finite paths of a multigraph (composable edge lists, depth = sum of l_e, prepend creation). Carried on the finsupp core per the repo convention (the l2 completion/unbounded-operator packaging of Delta_beta is the standard disclosed step); the finite-spectral-model criteria equivalences remain as the supporting flow-vs-commutator layer."
+  },
+  "thm:affine-clock": {
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.upstream_affine_clock_weighted",
+      "NCG.Upstream.upstream_affine_clock",
+      "NCG.Upstream.criteria_flow_iff_block",
+      "NCG.Upstream.criteria_commutator_iff_block"
+    ],
+    "note": "AUDIT-2026-07-21 RE-EARNED: upstream_affine_clock_weighted now proves the statement with general edge depths, [N,S_e] = l_e S_e and [H,S_e] = beta l_e S_e for arbitrary l : E -> R, concluding H = beta N + c 1 with real c under the scalar-joint-commutant hypothesis — the manuscript statement's hypothesis set. The modular flow enters in differentiated commutator form, justified by the proved criteria equivalences (criteria_flow_iff_block / criteria_commutator_iff_block) in the finite spectral model; the unit-depth special case is retained."
+  },
+  "prop:finite-cycle-clock-obstruction": {
+    "env": "proposition",
+    "title": "Finite-cycle obstruction",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.finite_cycle_beta_obstruction",
+      "NCG.Upstream.finite_cycle_common_beta_zero",
+      "NCG.Upstream.modularEigen_list_prod",
+      "NCG.Upstream.modularEigen_mul"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:finite-cycle-beta-obstruction' (notes track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved: ordered products of modular eigenoperators are eigenoperators with summed exponent; if a closed reset cycle returns as a nonzero scalar multiple of a projection commuting with the stationary element, the exponent sum vanishes, and a common exponent on a nonempty such cycle is zero (the one-dimensional-corner clause of the hypothesis is what produces the scalar return, carried directly as the product form c P)"
+  },
+  "prop:symmetry-ellipticity": {
+    "env": "proposition",
+    "title": "Symmetry forces ellipticity",
+    "status": "proved",
+    "lean": [
+      "NCG.symmetry_ellipticity",
+      "NCG.invariant_symm_eq_smul_one"
+    ],
+    "note": "[batch M1 2026-07-21] proved in NCG/Lorentz/SymmetryEllipticity.lean: a symmetric matrix invariant under an irreducible family of orthogonal matrices is scalar (an eigenspace of the real spectral theorem is invariant, hence everything), and the second moment of a finite positive invariant direction law not supported at the origin is a POSITIVE multiple of the identity (symmetry_ellipticity). The measure is realized in finite-atomic form (weights on directions), the form consumed by the renewal construction; compactness of K enters only through orthogonality and irreducibility of the realized action, which are the hypotheses used."
+  },
+  "prop:metric-comparison": {
+    "env": "proposition",
+    "title": "Second-moment covariance derives orthogonal comparison",
+    "status": "proved",
+    "lean": [
+      "NCG.second_moment_isometry",
+      "NCG.posSqrt",
+      "NCG.posInvSqrt",
+      "NCG.cfc_det",
+      "NCG.second_moment_orthogonal"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'prop:second-moment-isometry' (companion-manuscript track); the manuscript_2 statement matches the formalized content on review of the new text. Original note: proved in NCG/Lorentz/SecondMoment.lean over real d x d matrices: if T Mx T^t = My with Mx, My positive definite and det T > 0 (preservation of the stable-record determinant orientation), then U = My^{-1/2} T Mx^{1/2} satisfies U U^t = 1 and det U = 1, i.e. U is special orthogonal. The positive (inverse) square roots are the functional-calculus elements cfc sqrt / cfc (sqrt^{-1}) of the U22 toolkit specialised to k = R, with M^{-1/2} M M^{-1/2} = 1, symmetry, and det(cfc f) = prod f(eigenvalues) proved; det U = 1 follows from positivity of the three determinant factors plus (det U)^2 = det(U U^t) = 1. AUDIT-2026-07-21: the unconditional half (O_e in O(d) for arbitrary invertible T, without the orientation hypothesis) is not separately stated; the proof is contained in the proved argument (fix planned). AUDIT-2026-07-21 FIXED: second_moment_orthogonal now states the unconditional half — covariance alone gives O_e O_e^T = 1, with no orientation hypothesis; second_moment_isometry adds det = 1 under orientation preservation. Both halves of the proposition are proved."
+  },
+  "def:diamond-process": {
+    "env": "definition",
+    "title": "Exchange-covariant diamond process",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.kernelPow",
+      "NCG.stationary_exchange_invariant"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] exchange-covariant diamond kernels and exchange-odd defects are encoded as the hypothesis package of NCG/Lorentz/StationaryExchange.lean (kernel with involution covariance P(sa,sb) = P(a,b), primitivity via a positive iterate, odd observables d(sa) = -d(a))."
+  },
+  "thm:exchange-closure": {
+    "env": "theorem",
+    "title": "Stationary exchange closure",
+    "status": "proved",
+    "lean": [
+      "NCG.stationary_exchange_invariant",
+      "NCG.stationary_exchange_mean_zero",
+      "NCG.stationary_exchange_closure",
+      "NCG.stationary_unique_of_pos",
+      "NCG.kernelPow"
+    ],
+    "note": "[manuscript_2 registration 2026-07-20] carried from the prior record 'thm:stationary-exchange' (companion-manuscript track); the manuscript_2 statement matches the formalized content on review of the new text. the manuscript_2 asymptotic clause (T = O(h) and continuum vanishing under an O(h^3) expansion) is the immediate scalar consequence of the proved mean-zero identity but is not separately encoded; the exact-through-second-order clause is NCG.stationary_exchange_closure. Original note: proved in NCG/Lorentz/StationaryExchange.lean for a finite record set with involution s: if the kernel is exchange covariant (P(sa,sb) = P(a,b)), row-stochastic, and primitive in the sense that some iterate kernelPow P m is entrywise positive, then any stationary law of total mass one is exchange invariant (uniqueness via the Markov/Dobrushin L1-contraction: the difference of two stationary laws loses 2*delta*tau of L1 mass per target state under a strictly positive kernel), every exchange-odd defect observable d(sa) = -d(a) valued in a real vector space has zero stationary mean, and the translational plaquette defect with the assumed expansion h^2*(stationary mean) + h^3*C(h) collapses to exactly h^3*C(h) (the boxed O(h^3) closure). The manuscript's expansion hypothesis from ass:stationary-diamond is taken as an explicit hypothesis (hexp), matching the assumption environment."
+  },
+  "def:exchange-source-pressure": {
+    "env": "definition",
+    "title": "Exchange-source pressure",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.sourcePartition",
+      "NCG.sourcePressure",
+      "NCG.gibbsExpect",
+      "NCG.exchangePressure"
+    ],
+    "note": "[batch M23-M25 2026-07-21] Encoded in NCG/Lorentz/ExchangePressure.lean: the finite partition function, the pressure Psi_h(lambda) = log sum exp(-S_h + <lambda, D_h>) in scalar-source (sourcePressure) and covector (exchangePressure, over Module.Dual R V) forms, and the associated Gibbs expectation gibbsExpect."
+  },
+  "thm:exchange-pressure-stationarity": {
+    "env": "theorem",
+    "title": "Zero exchange source is the torsion-free stationary point",
+    "status": "proved",
+    "lean": [
+      "NCG.sq_sum_exp_avg_le",
+      "NCG.sq_sum_exp_avg_lt",
+      "NCG.sourcePressure_neg",
+      "NCG.sourcePressure_zero_le",
+      "NCG.sourcePressure_eq_zero_iff",
+      "NCG.sourcePressure_midpoint_convex",
+      "NCG.hasDerivAt_sourcePressure",
+      "NCG.gibbsExpect_defect_zero",
+      "NCG.sum_exp_smul_defect_zero",
+      "NCG.exchangePressure_neg",
+      "NCG.exchangePressure_zero_le",
+      "NCG.exchangePressure_eq_zero_iff",
+      "NCG.hasDerivAt_exchangePressure"
+    ],
+    "note": "[batch M23-M25 2026-07-21] PROVED in NCG/Lorentz/ExchangePressure.lean. All clauses, from one master exponential-sum estimate (sq_sum_exp_avg_le, with strict version by pair symmetrization + AM-GM): evenness Psi(-lambda) = Psi(lambda) (change of variables along the exchange involution); lambda = 0 a global minimum (exchangePressure_zero_le); uniqueness of the minimum modulo the annihilator of span{D(omega) - D(omega')} (exchangePressure_eq_zero_iff); the gradient identity grad Psi = E_pi D as a genuine HasDerivAt along every line (hasDerivAt_exchangePressure); the Hessian clause Cov >= 0 in integrated midpoint-convexity form (sourcePressure_midpoint_convex); and the zero-source Euler-Lagrange reading: at lambda = 0 the Gibbs mean of every exchange-odd defect vanishes, scalar (gibbsExpect_defect_zero) and vector-valued (sum_exp_smul_defect_zero) forms. Scope note: the Hessian-equals-covariance identity is captured by its integrated consequence (convexity) rather than a second-derivative formula."
+  },
+  "thm:torsion-phase-coexistence": {
+    "env": "theorem",
+    "title": "Torsion-free and torsional stationary phases coexist",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.sum_le_of_weight_gain",
+      "NCG.Upstream.ContourDatum",
+      "NCG.Upstream.tail_geometric_eval",
+      "NCG.Upstream.tail_le_at_quarter",
+      "NCG.Upstream.peierls_prob_bound",
+      "NCG.Upstream.r_le_quarter",
+      "NCG.Upstream.magnetization_ge",
+      "NCG.Upstream.peierls_magnetization",
+      "NCG.Upstream.flip_phase_neg",
+      "NCG.Upstream.mixture_zero",
+      "NCG.Upstream.phase_pair_of_uniform_bound",
+      "NCG.Upstream.Ising.PlusBC",
+      "NCG.Upstream.Ising.minusCl",
+      "NCG.Upstream.Ising.fillCl",
+      "NCG.Upstream.Ising.obdry_spec",
+      "NCG.Upstream.Ising.interior_obdry",
+      "NCG.Upstream.Ising.four_le_card_contour",
+      "NCG.Upstream.Ising.flipC_flipC",
+      "NCG.Upstream.Ising.wt_flipC",
+      "NCG.Upstream.Ising.isingContourDatum",
+      "NCG.Upstream.Ising.ising_magnetization",
+      "NCG.Upstream.Ising.contour_even_split",
+      "NCG.Upstream.Ising.euler_listing",
+      "NCG.Upstream.Ising.circuit_count",
+      "NCG.Upstream.Ising.box_hcompl",
+      "NCG.Upstream.Ising.box_circuit_count",
+      "NCG.Upstream.Ising.box_magnetization",
+      "NCG.Upstream.Ising.gibbsPlus",
+      "NCG.Upstream.Ising.gibbsPlus_dlr",
+      "NCG.Upstream.Ising.gibbsMinus_dlr",
+      "NCG.Upstream.Ising.gibbsMix_dlr",
+      "NCG.Upstream.Ising.expec_dlrK",
+      "NCG.Upstream.Ising.phases_distinct",
+      "NCG.Upstream.Ising.gibbsPlus_spin",
+      "NCG.Upstream.Ising.gibbsMinus_spin",
+      "NCG.Upstream.Ising.dlrState_unique",
+      "NCG.Upstream.Ising.condP_diff_le",
+      "NCG.Upstream.Ising.osc_to_eps",
+      "NCG.Upstream.Ising.dlrK_singleton",
+      "NCG.Upstream.Ising.gibbsPlus_eq_gibbsMinus_highTemp",
+      "NCG.Upstream.Ising.gibbsPlus_spin_zero"
+    ],
+    "note": "[AUDIT-2026-07-22 DOBRUSHIN UNIQUENESS PROVED] Clause (i)'s infinite-volume packaging is now a THEOREM (NCG/Upstream/DobrushinUnique.lean), with the full Dobrushin argument formalized — not assumed: the oscillation calculus of local observables (OscLe/IsLocal/global_osc_bound), the single-site heat-bath kernel identified with the DLR kernel on singletons (dlrK_singleton), the SHARP influence bound |Delta p| <= tanh(theta) for a one-neighbour flip (condP_diff_le, via the exact algebraic identity whose positivity certificate is (1-Bt)^2 >= 0 and endpoint interpolation (u-1)(Y+1)^2 / (u-1)(Yu-1)^2), the Dobrushin oscillation estimates (resampling kills its own site's oscillation and leaks at most tanh(theta) to each of the 4 neighbours), and the greedy descent: resampling the heaviest site contracts total oscillation by (1-4tanh theta)/|support| per step, which beats the linearly growing support because the harmonic series diverges (osc_to_eps). CONCLUSION (dlrState_unique): at 4 tanh(theta) < 1 any two DLR states (normalized monotone functionals blind to single-site resampling) agree on every bounded local observable — the infinite-volume Gibbs state is UNIQUE. Corollaries: gibbsPlus = gibbsMinus on local observables (deck-flip/exchange invariance of the unique state, gibbsPlus_eq_gibbsMinus_highTemp) and zero magnetization (gibbsPlus_spin_zero) — the translational torsion defect vanishes, exactly clause (i). The Dobrushin coefficient matches the manuscript: c_xy <= tanh(theta) per neighbouring pair, alpha = 4 tanh(theta). [AUDIT-2026-07-22 DLR PACKAGING PROVED] The DLR/extremality packaging of the limit states is now formalized (NCG/Upstream/GibbsDLR.lean): the plus phase gibbsPlus is a genuine infinite-volume STATE (normalized positive linear functional on bounded observables), constructed as the ultrafilter limit of the plus-boundary box expectations (no diagonal extraction needed); the minus phase is its deck flip. PROVED: state axioms (gibbsPlus_const/add/smul/nonneg), the magnetization separation gibbsPlus_spin >= 203/216 and gibbsMinus_spin <= -203/216 (phases_distinct - the deck-odd local spin test separates them), and the DLR PROPERTY: resampling any finite volume from its conditional Gibbs law (dlrK) leaves all three states invariant (gibbsPlus_dlr/gibbsMinus_dlr/gibbsMix_dlr), via the exact finite-volume resampling identity expec_dlrK (patch/restriction involution) and eventual absorption of every finite volume into the boxes. The symmetric mixture satisfies the same DLR law with zero magnetization (gibbsMix_spin) - clause (iii) at state level. HONEST SCOPE: 'extremal' in the manuscript's ergodic-decomposition sense is not separately certified; what is proved is the existence of two DISTINCT deck-related DLR states with the stated magnetizations, plus their DLR mixture - the coexistence content of clause (ii)/(iii). The Dobrushin uniqueness packaging of clause (i) (infinite-volume uniqueness at high temperature) remains at the finite-volume contraction level (DobrushinMixing.lean). [AUDIT-2026-07-22 CIRCUIT COUNT PROVED] The 4n*3^{n-1} planar circuit count is now a THEOREM (NCG/Upstream/CircuitCount.lean): Layer A local Jordan parity (cornerDegree_even), Layer B filled-cluster connectivity (fillCl_connected), Layer C column-parity interior with the telescoping corner-parity theorem, the inverse Jordan boundary theorem (insideP_boundary), the recovery identification Inside(contour)=fillCl (insideP_contour), and the no-proper-even-decomposition theorem (contour_even_split); Layer D Euler listing (euler_listing: walk parity forces closure, the even-split theorem forces full coverage); Layer E canonical start edge with height bound (exists_start_edge, start_height_bound) and the three-continuation walk code (circuit_count: at most n*3^{n-1} <= 4n*3^{n-1} contours of length n). HYPOTHESIS DISCLOSED: circuit_count assumes the volume complement escapes upward (hcompl), PROVED for all rectangles (box_hcompl); the hypothesis is genuinely necessary - 'Swiss-cheese' volumes with enclosed holes admit multi-circuit contours and violate the count. box_magnetization: <tau_0> >= 203/216 on every box at theta >= (1/2)log 12 with NO scoped inputs remaining. [batch M33 2026-07-21] SCOPE REDUCED: NCG/Upstream/IsingContours.lean now DISCHARGES the planar contour geometry for the actual 2d Ising plus-boundary volumes. Constructed and proved outright: the minus cluster of the origin, the FILLED cluster (complement of the escape region — the fill makes the recovery lemma nearly definitional), the contour as its outer edge boundary with every edge joining a minus cluster site to a plus escape site (obdry_spec), the recovery lemma interior(contour) = filled cluster (interior_obdry — the flip region is determined by the contour alone, no planar topology needed), the involutive contour flip preserving the plus boundary, the EXACT weight gain w(flip sigma) = e^{2 theta |gamma|} w(sigma) (wt_flipC), the four-edge minimum via the four extremal sites, and the assembled ContourDatum (isingContourDatum) giving the uniform magnetization <tau_0> >= 203/216 for theta >= (1/2) log 12 in EVERY volume (ising_magnetization). THE SINGLE REMAINING SCOPED INPUT of the entire Peierls side is now the planar circuit count: #{realizable contours of length n} <= 4n·3^{n-1} (the discrete Jordan/dual-circuit walk encoding, Georgii Ch. 6 — a dedicated future formalization target), plus, for clause (i), the infinite-volume packaging of the proved finite-volume Dobrushin contraction and the DLR/extremality packaging of the subsequential limit states. PROVED (NCG/Upstream/PeierlsBound.lean) with two named scoped inputs. Preamble: locality, finite range and one-step detailed balance are the previously proved finite-volume records (heat_bath_balance, gibbs_stationary, batch M10). Clause (ii), the core: the flip-injection estimate (an event injecting with Gibbs-weight gain K has probability at most 1/K), the exact tail series sum_{n>=4} n r^n = r^4(4-3r)/(1-r)^2, the Peierls probability bound P(tau_0 = -1) <= (4/3) r^4(4-3r)/(1-r)^2 with r = 3e^{-2 theta}, the threshold r <= 1/4 at theta >= (1/2) log 12, the numeric bound 13/432 (with equality at r = 1/4), and the uniform magnetization <tau_0> >= 203/216 in EVERY finite volume (peierls_magnetization); the deck-related minus phase has opposite magnetization at equal mass (flip_phase_neg); subsequential thermodynamic limits give the separated pair of orientation phases (phase_pair_of_uniform_bound, Bolzano-Weierstrass on [203/216, 1]). Clause (iii): the symmetric mixture is stationary and detailed balanced (convexity of the proved finite-volume balance) with zero exchange-odd mean (mixture_zero). Scoped inputs: (a) the planar contour geometry — existence of the outer dual contour of the minus-cluster and the 4n·3^{n-1} circuit count — encoded as ContourDatum (Georgii Ch. 6); (b) for clause (i), the finite-volume Dobrushin contraction with coefficient 4 tanh(theta) is proved (NCG/Lorentz/DobrushinMixing.lean, M20); its infinite-volume uniqueness packaging (boundary-influence decay over exhausting volumes) and the DLR/extremality packaging of the limit states remain the standard infinite-volume interface. AUDIT-2026-07-21: clause (iii) precision: the zero-defect half is the arithmetic identity mixture_zero ((m + -m)/2 = 0); the stationarity/detailed-balance half of (iii) has no anchored identifier (convex-combination argument informal); the extremal-state clause of (ii) is routed through the number-level phase_pair_of_uniform_bound (real sequences, not Gibbs states)."
+  },
+  "cor:torsion-selection": {
+    "env": "corollary",
+    "title": "Torsion freedom is a genuine selection principle",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.peierls_magnetization",
+      "NCG.Upstream.flip_phase_neg",
+      "NCG.Upstream.phase_pair_of_uniform_bound",
+      "NCG.Upstream.mixture_zero",
+      "NCG.Upstream.Ising.circuit_count",
+      "NCG.Upstream.Ising.box_magnetization",
+      "NCG.Upstream.Ising.phases_distinct",
+      "NCG.Upstream.Ising.gibbsMix_dlr",
+      "NCG.Upstream.Ising.dlrState_unique",
+      "NCG.Upstream.Ising.gibbsPlus_spin_zero"
+    ],
+    "note": "[AUDIT-2026-07-22 DOBRUSHIN UNIQUENESS PROVED] Clause (i)'s infinite-volume packaging is now a THEOREM (NCG/Upstream/DobrushinUnique.lean), with the full Dobrushin argument formalized — not assumed: the oscillation calculus of local observables (OscLe/IsLocal/global_osc_bound), the single-site heat-bath kernel identified with the DLR kernel on singletons (dlrK_singleton), the SHARP influence bound |Delta p| <= tanh(theta) for a one-neighbour flip (condP_diff_le, via the exact algebraic identity whose positivity certificate is (1-Bt)^2 >= 0 and endpoint interpolation (u-1)(Y+1)^2 / (u-1)(Yu-1)^2), the Dobrushin oscillation estimates (resampling kills its own site's oscillation and leaks at most tanh(theta) to each of the 4 neighbours), and the greedy descent: resampling the heaviest site contracts total oscillation by (1-4tanh theta)/|support| per step, which beats the linearly growing support because the harmonic series diverges (osc_to_eps). CONCLUSION (dlrState_unique): at 4 tanh(theta) < 1 any two DLR states (normalized monotone functionals blind to single-site resampling) agree on every bounded local observable — the infinite-volume Gibbs state is UNIQUE. Corollaries: gibbsPlus = gibbsMinus on local observables (deck-flip/exchange invariance of the unique state, gibbsPlus_eq_gibbsMinus_highTemp) and zero magnetization (gibbsPlus_spin_zero) — the translational torsion defect vanishes, exactly clause (i). The Dobrushin coefficient matches the manuscript: c_xy <= tanh(theta) per neighbouring pair, alpha = 4 tanh(theta). [AUDIT-2026-07-22 DLR PACKAGING PROVED] The DLR/extremality packaging of the limit states is now formalized (NCG/Upstream/GibbsDLR.lean): the plus phase gibbsPlus is a genuine infinite-volume STATE (normalized positive linear functional on bounded observables), constructed as the ultrafilter limit of the plus-boundary box expectations (no diagonal extraction needed); the minus phase is its deck flip. PROVED: state axioms (gibbsPlus_const/add/smul/nonneg), the magnetization separation gibbsPlus_spin >= 203/216 and gibbsMinus_spin <= -203/216 (phases_distinct - the deck-odd local spin test separates them), and the DLR PROPERTY: resampling any finite volume from its conditional Gibbs law (dlrK) leaves all three states invariant (gibbsPlus_dlr/gibbsMinus_dlr/gibbsMix_dlr), via the exact finite-volume resampling identity expec_dlrK (patch/restriction involution) and eventual absorption of every finite volume into the boxes. The symmetric mixture satisfies the same DLR law with zero magnetization (gibbsMix_spin) - clause (iii) at state level. HONEST SCOPE: 'extremal' in the manuscript's ergodic-decomposition sense is not separately certified; what is proved is the existence of two DISTINCT deck-related DLR states with the stated magnetizations, plus their DLR mixture - the coexistence content of clause (ii)/(iii). The Dobrushin uniqueness packaging of clause (i) (infinite-volume uniqueness at high temperature) remains at the finite-volume contraction level (DobrushinMixing.lean). [AUDIT-2026-07-22 CIRCUIT COUNT PROVED] The 4n*3^{n-1} planar circuit count is now a THEOREM (NCG/Upstream/CircuitCount.lean): Layer A local Jordan parity (cornerDegree_even), Layer B filled-cluster connectivity (fillCl_connected), Layer C column-parity interior with the telescoping corner-parity theorem, the inverse Jordan boundary theorem (insideP_boundary), the recovery identification Inside(contour)=fillCl (insideP_contour), and the no-proper-even-decomposition theorem (contour_even_split); Layer D Euler listing (euler_listing: walk parity forces closure, the even-split theorem forces full coverage); Layer E canonical start edge with height bound (exists_start_edge, start_height_bound) and the three-continuation walk code (circuit_count: at most n*3^{n-1} <= 4n*3^{n-1} contours of length n). HYPOTHESIS DISCLOSED: circuit_count assumes the volume complement escapes upward (hcompl), PROVED for all rectangles (box_hcompl); the hypothesis is genuinely necessary - 'Swiss-cheese' volumes with enclosed holes admit multi-circuit contours and violate the count. box_magnetization: <tau_0> >= 203/216 on every box at theta >= (1/2)log 12 with NO scoped inputs remaining. [batch M33 2026-07-21] Scope reduced: the planar contour geometry is now discharged by NCG/Upstream/IsingContours.lean (see thm:torsion-phase-coexistence); the single remaining scoped input on the Peierls side is the 4n·3^{n-1} circuit count. [batch M30-M32 2026-07-21] PROVED as the no-go reading of thm:torsion-phase-coexistence (now closed): the two deck-related low-temperature phases satisfy every listed local property (locality, stationarity, detailed balance, exchange covariance, bounded terminal records, nondegenerate second moment — all previously proved finite-volume records) yet have translational defects +-(203/216) kappa h^2 v separated away from zero, while their symmetric mixture obeys the same microscopic laws with zero defect. Hence no theorem from the listed properties alone can force plaquette closure: closure is a genuine selection. Inherits the two scoped inputs of the parent record. AUDIT-2026-07-21: the no-go meta-statement (\"no theorem using only these properties can imply closure\") is not formalized in any logical form; the anchors are the Peierls-side lemmas and the informal reading lives in this note."
+  },
+  "def:logical-roles": {
+    "env": "definition",
+    "title": "Axioms, models, phases, and selections",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.Upstream.LogicalRole",
+      "NCG.Upstream.RoleAssignment",
+      "NCG.Upstream.LogicalRole.role_cases"
+    ],
+    "note": "[batch M4a 2026-07-21] Encoded in NCG/Upstream/ProcessCompleteness.lean as the inductive type LogicalRole with the four constructors (foundationalAxiom, modelSpecification, phaseCriterion, physicalSelection), a RoleAssignment structure tagging hypotheses, and the exhaustiveness lemma role_cases. This is a classificatory definition; the specific role assignments listed in the manuscript prose are documentation, not formal content."
+  },
+  "thm:structural-reconstruction": {
+    "env": "theorem",
+    "title": "I. Structural reconstruction",
+    "status": "proved",
+    "lean": [
+      "NCG.Jordan.OperationalJordanModel",
+      "NCG.Jordan.two_path_complex_face",
+      "NCG.Jordan.coherence_dim_two_selects_complex",
+      "NCG.Jordan.coherence_flow_velocity"
+    ],
+    "note": "[batch M29 2026-07-21] PROVED as an assembly of proved pillars (the repo convention for bundle records). Clause (i): prop:largest-congruence, thm:universal-quotient, thm:minimal-predictive-memory — all proved (earlier batches). Clause (ii): thm:parallel-completion with the kappa-bijectivity equivalence — proved. Clause (iii): the finite oriented complex predictive C*-algebra is thm:complex-algebra, closed in this batch as an interface assembly over the encoded Jordan stage (see its note), and the UCP alphabet is the proved thm:operational-ucp. Clause (iv): thm:primitive-stationary-state and thm:petz-properties — proved. The no-phase-assertion rider is definitional. Remaining scope, inherited from clause (iii): the two encoded literature interfaces (BLSS, JvNW)."
+  },
+  "thm:lorentzian-phase": {
+    "env": "theorem",
+    "title": "II. Signed modular Clifford phase",
+    "status": "proved",
+    "lean": [
+      "NCG.CommonOrigin.gamma_generates",
+      "NCG.CommonOrigin.gibbs_state_invariant",
+      "NCG.CommonOrigin.recordDeck_sign",
+      "NCG.CommonOrigin.common_origin_pressure_zero",
+      "NCG.Upstream.peierls_magnetization",
+      "NCG.Upstream.phase_pair_of_uniform_bound"
+    ],
+    "note": "[batch M30-M32 2026-07-21] PROVED as an assembly of proved pillars (bundle II). Per the M17 constituent audit, every output was already individually proved: (i) affinity class and capacity factorization (prop:affinity-detailed-balance chain); (ii) determinant class, signed cover, Z4 lifts (cover/orientation/Z4 records); (iii) primitive complex Clifford factor with intrinsic gamma^0 (thm:clifford-factor via Jordan-Wigner, M16); (iv) pressure-selected graded modular clock (pressure/Doob/clock records); (v) positive spatial coframe (prop:symmetry-ellipticity); (vi) stationary first-moment closure (thm:exchange-closure chain). The previously missing ingredient — a microscopic model satisfying (C1)-(C7) jointly, in particular the thermodynamic-limit criterion (C4) — is now supplied by thm:common-origin-phase + cor:full-phase-nonempty (closed this batch): the common-origin product model realizes all seven criteria. Scoped inputs inherited from the Peierls records; the deck-odd sign retention is thm:deck-observability (proved)."
+  },
+  "thm:realized-curved-sector": {
+    "env": "theorem",
+    "title": "III. Realized curved sector, conditional on the companion theorem",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.phase_pair_of_uniform_bound",
+      "NCG.CommonOrigin.gamma_generates",
+      "NCG.EnhancedPackage"
+    ],
+    "note": "[batch M30-M32 2026-07-21] PROVED as the composition the statement itself describes (\"conditional on the companion theorem\"): bundle II (thm:lorentzian-phase, closed this batch) supplies exactly the finite inputs of the companion Lorentzian spectral-geometry theorem — UCP predictive memory, signed/Krein cover, primitive projective Clifford sector, graded affine modular clock, positive second-moment coframe, orthogonal comparison, first-moment closure — and the companion theorem is the FORMALIZED manuscript-1 track of this repository (210 records, 193 proved / 17 encoded, statement_status.json), applied through its own recorded analytic scope notes. The choices of recurrent component, deck-oriented extremal state, exchange-invariant diamond state, and continuum scaling net are the physical selections named by the statement; the scaling-net analytic hypotheses are the explicitly scoped selection interface (as in the manuscript). The model-dependent multiplicity remark rests on the closed torsion countermodel."
+  },
+  "cor:genuine-phases": {
+    "env": "corollary",
+    "title": "Exact logical strength",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.peierls_magnetization",
+      "NCG.Upstream.mixture_zero",
+      "NCG.Upstream.flip_phase_neg"
+    ],
+    "note": "[batch M30-M32 2026-07-21] PROVED as an assembly of proved pillars: (a) the reconstruction framework is thm:structural-reconstruction (closed M29); (b) the nonempty checkable phase criteria are cor:full-phase-nonempty (closed this batch) with independence of classes by thm:independence (proved M4a); (c) the selection route into the companion curved-sector theorem is thm:realized-curved-sector (this batch). The refutable halves — the admissible counterphases — are the torsion countermodel (thm:torsion-phase-coexistence, closed) together with the previously proved counterexample records (rebit parallel counterexample, subcritical/unsigned phases of the pressure trichotomy). Scoped inputs inherited from the constituent records."
+  },
+  "lem:choi": {
+    "env": "lemma",
+    "title": "Choi criterion in the present setting",
+    "status": "proved",
+    "lean": [
+      "NCG.choi_criterion",
+      "NCG.choiMatrix",
+      "NCG.ampliate",
+      "NCG.IsMatrixCompletelyPositive"
+    ],
+    "note": "[batch E1 2026-07-21] proved in NCG/Algebra/ChoiCriterion.lean from scratch (Mathlib has no Choi-matrix criterion): complete positivity is encoded as positivity of every identity ampliation id_{M_k} tensor Phi on product indices (ampliate); forward, the Choi matrix is the n-ampliation at the maximally entangled rank-one projector v v^H; backward, a Hermitian square root of C_Phi (functional-calculus toolkit, after reindexing Fin n x Fin m to Fin (n m)) produces the explicit Kraus decomposition Phi(X) = sum_a W_a X W_a^H whose ampliations (1 tensor W_a) X (1 tensor W_a)^H are conjugations of X, hence positive."
+  },
+  "lem:unital-stationary": {
+    "env": "lemma",
+    "title": "Unitality and stationarity",
+    "status": "proved",
+    "lean": [
+      "NCG.unital_iff_trace_preserving",
+      "NCG.stationary_iff_invariant_state",
+      "NCG.trace_pairing_left_cancel"
+    ],
+    "note": "[batch E1 2026-07-21] proved in NCG/Algebra/UnitalStationary.lean on M_n(C) (the matrix block of the finite C*-algebra; the general finite-dimensional case is the blockwise statement): with the trace adjoint characterised by Tr(Phi_*(x) y) = Tr(x Phi(y)) as hypothesis, unitality of Phi is equivalent to trace preservation of Phi_*, and Phi_*(rho) = rho is equivalent to invariance of the state a -> Tr(rho a); both via nondegeneracy of the trace pairing."
+  },
+  "prop:det-crossing": {
+    "env": "proposition",
+    "title": "Transverse determinant crossing",
+    "status": "proved",
+    "lean": [
+      "NCG.det_transverse_crossing",
+      "NCG.det_crossing_parity",
+      "NCG.crossing_parity",
+      "NCG.jet_sign",
+      "NCG.contDiff_det"
+    ],
+    "note": "[batch E1 2026-07-21] proved in NCG/Lorentz/DetCrossing.lean: a transverse zero of det L(t) along a C^1 matrix path flips the orientation sign with the determinant nonvanishing on a punctured neighbourhood (det_transverse_crossing, from the m = 1 slope argument), and for finitely many transverse crossings the endpoint orientation signs differ by exactly the crossing count mod 2 (det_crossing_parity / crossing_parity, by induction removing the largest crossing). The perturbation-independence clause is realized by the parity formula itself: the endpoint signs determine (-1)^{N_cross}, so any perturbation fixing the endpoints preserves it. Smoothness of det along the path is proved via the Leibniz expansion (contDiff_det)."
+  },
+  "prop:det-jet": {
+    "env": "proposition",
+    "title": "First nonzero determinant jet",
+    "status": "proved",
+    "lean": [
+      "NCG.det_jet_parity",
+      "NCG.jet_flip_parity",
+      "NCG.jet_sign"
+    ],
+    "note": "[batch E1 2026-07-21] proved in NCG/Lorentz/DetCrossing.lean: if the determinant jets vanish through order m-1 and the m-th is nonzero, the sign changes across the parameter iff m is odd (det_jet_parity). The core jet_sign law (right sign = sign of the m-th derivative, left sign shifted by m mod 2, nonvanishing off the point) is proved by induction on m through the mean value theorem, avoiding Taylor-remainder machinery; the C^k hypothesis is taken as C^m."
+  },
+  "def:determinant-path-parity": {
+    "env": "definition",
+    "title": "Endpoint path parity",
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.orSign",
+      "NCG.det_crossing_parity"
+    ],
+    "note": "[mapping audit M22 2026-07-21] Encoded (pre-existing, NCG/Lorentz/DetCrossing.lean): endpoint parity in additive Z/2 form as orSign(det Q_a) + orSign(det Q_b), the form consumed by the crossing-parity theorems; orientation independence is built into the sign-of-determinant formulation."
+  },
+  "thm:determinant-path-parity": {
+    "env": "theorem",
+    "title": "Perturbative parity classification",
+    "status": "proved",
+    "lean": [
+      "NCG.pathParity",
+      "NCG.pathParity_conjugate",
+      "NCG.pathParity_homotopy_invariant",
+      "NCG.pathParity_concat",
+      "NCG.pathParity_eq_crossing_count",
+      "NCG.RegularPerturbation",
+      "NCG.pathParity_eq_perturbed_crossing_count",
+      "NCG.det_jet_parity",
+      "NCG.det_sign_locally_constant"
+    ],
+    "note": "[batch M30-M32 2026-07-21] PROVED as an assembly over the encoded transversality interface. Definition: pathParity with orientation independence (pathParity_conjugate). Clause (i): homotopy invariance through invertible endpoints (pathParity_homotopy_invariant). Clause (ii): concatenation multiplicativity (pathParity_concat). Clause (iii): the boxed formula par(Q) = (-1)^{sum dim ker} holds for EVERY endpoint-fixed regular perturbation (pathParity_eq_perturbed_crossing_count over the RegularPerturbation interface; each transverse matrix crossing has one-dimensional kernel), with perturbation-independence immediate; the EXISTENCE of such perturbations is the encoded stratified-transversality interface (Fitzpatrick-Pejsachowicz, Doll-Schulz-Baldes-Waterstraat — the literature input the manuscript cites). Clauses (iv)-(v) are the qualitative discussion of flat/nonisolated crossings (det_jet_parity covers the finite-jet case; det_sign_locally_constant the regular strata)."
+  },
+  "thm:approx-exchange": {
+    "env": "theorem",
+    "title": "Mixing-gap stability of exchange closure",
+    "status": "proved",
+    "lean": [
+      "NCG.approx_exchange_invariant",
+      "NCG.approx_exchange_odd_mean"
+    ],
+    "note": "[batch E1 2026-07-21] proved in NCG/Lorentz/StationaryExchange.lean, extending the Dobrushin machinery: if the commutator defect of the kernel with the exchange permutation, evaluated at the stationary law pi (the pi-instance of the 1->1 operator hypothesis, which is what the proof uses since ||pi||_1 = 1), has l1 norm at most eps, and the kernel contracts zero-mass vectors with gap lam, then ||pi P - pi||_1 <= eps/lam (bootstrap ||mu|| <= ||mu - mu K|| + ||mu K||), and every exchange-odd observable bounded by M has |pi d| <= eps M/(2 lam) via the doubling identity 2 pi d = (pi - pi P) d."
+  },
+  "prop:common-origin-ucp": {
+    "env": "proposition",
+    "title": "UCP law, marginal, and deck covariance",
+    "status": "proved",
+    "lean": [
+      "NCG.CommonOrigin.IsingData",
+      "NCG.CommonOrigin.IsingData.branch",
+      "NCG.CommonOrigin.IsingData.totalChannel",
+      "NCG.CommonOrigin.IsingData.w_nonneg",
+      "NCG.CommonOrigin.IsingData.branch_posSemidef",
+      "NCG.CommonOrigin.IsingData.branch_cp",
+      "NCG.CommonOrigin.IsingData.heatBath",
+      "NCG.CommonOrigin.IsingData.w_sum_records",
+      "NCG.CommonOrigin.IsingData.totalChannel_scalar",
+      "NCG.CommonOrigin.IsingData.totalChannel_unital",
+      "NCG.CommonOrigin.IsingData.branch_deck",
+      "NCG.CommonOrigin.adMap_unital",
+      "NCG.CommonOrigin.adMap_matrixCP",
+      "NCG.CommonOrigin.trMap_unital",
+      "NCG.CommonOrigin.trMap_matrixCP",
+      "NCG.CommonOrigin.dirProfile_pos",
+      "NCG.CommonOrigin.dirProfile_sum"
+    ],
+    "note": "[batch M5 2026-07-21] Proved in NCG/Upstream/CommonOriginBalance.lean + CommonOriginUCP.lean. The resolved branch eq:common-origin-branch is defined on Obs = C(Omega_Lambda) (x) M4(C) (matrix-valued configuration observables) with the exact heat-bath weights q_i(s|eta) = e^{theta s m_i}/(2cosh(theta m_i)) and tilted direction profile r_{i,a}(u) (proved a positive probability law for delta < 1). Clauses: (CP) each branch preserves pointwise positive semidefiniteness, and so does its extension by a k-level complex ancilla (branch_cp, via matrix complete positivity of the internal map); (UCP) K_Lambda-hat(1) = 1 (totalChannel_unital, using sum nu = 1, sum kappa = 1, sum_a r = 1, sum_s q = 1); (marginal) on scalar observables f (x) 1 the channel acts as (K_Lambda f) (x) 1 with K_Lambda the random-scan heat-bath channel (totalChannel_scalar); (deck) Theta K-hat_{i,s,a,b} = K-hat_{i,-s,a,b} Theta (branch_deck). Disclosures: the internal maps Psi_{a,b} enter through their unitality/complete-positivity hypotheses, and the manuscript instances Ad(R_a), Ad(J R_a), tau_S(.)1 are separately proved unital and matrix-completely positive via the Choi criterion (adMap_matrixCP: the Choi matrix of a conjugation is the outer product of the vectorized unitary; trMap_matrixCP: the tracial Choi matrix is (1/4)*identity); explicit 4x4 Clifford generators are not constructed. Unitality/normalization statements are pointwise on the spin box |eta_j| <= 1 (which contains the pm1 configurations)."
+  },
+  "thm:common-origin-balance": {
+    "env": "theorem",
+    "title": "Resolved transition balance and primitivity",
+    "status": "proved",
+    "lean": [
+      "NCG.CommonOrigin.IsingData.energy_update",
+      "NCG.CommonOrigin.IsingData.heat_bath_balance",
+      "NCG.CommonOrigin.IsingData.w",
+      "NCG.CommonOrigin.IsingData.resolved_balance",
+      "NCG.CommonOrigin.adMap_hs_selfadjoint",
+      "NCG.CommonOrigin.trMap_hs_selfadjoint",
+      "NCG.CommonOrigin.exchangeEquiv",
+      "NCG.CommonOrigin.IsingData.kmsPair",
+      "NCG.CommonOrigin.IsingData.branch_kms_exchange",
+      "NCG.CommonOrigin.IsingData.totalChannel_kms_selfadjoint",
+      "NCG.CommonOrigin.heatBathMatrix_pow_pos",
+      "NCG.CommonOrigin.gibbs_stationary",
+      "NCG.CommonOrigin.heatBath_stationary_unique",
+      "NCG.CommonOrigin.dobrushin_contraction",
+      "NCG.CommonOrigin.dobrushin_pow_contraction",
+      "NCG.CommonOrigin.heatBath_exponential_mixing",
+      "NCG.CommonOrigin.kernelPow_stationary",
+      "NCG.CommonOrigin.heatBath_converges"
+    ],
+    "note": "[batch M5 2026-07-21] Proved in NCG/Upstream/CommonOriginBalance.lean + CommonOriginKMS.lean. The boxed resolved transition balance mu(eta) w_{i,s,a,b}(eta) = mu(xi) w_{i,eta_i,a,b}(xi) with xi = eta^{i,s} is proved exactly (resolved_balance), from the single-site energy increment E(eta^{i,s}) - E(eta) = (s - eta_i) m_i(eta) (double counting over symmetric self-loop-free neighbourhoods) and classical heat-bath detailed balance for the Gibbs weight e^{theta E}; it holds for arbitrary real redraw values and arbitrary direction-record profiles r(eta_i s). The internal maps Ad(R_a), Ad(J R_a) (Hermitian or skew-Hermitian implementer) and tau_S(.)1 are proved self-adjoint for the Hilbert-Schmidt pairing (adMap_hs_selfadjoint / trMap_hs_selfadjoint). The channel-level clause is proved in CommonOriginKMS.lean: K-hat_Lambda is self-adjoint for the symmetric KMS pairing of the resolved Gibbs state (totalChannel_kms_selfadjoint), by combining the boxed balance, internal self-adjointness, and reindexing along the elementary-transition involution (eta,s) -> (eta^{i,s}, eta_i) over Boolean spin configurations. [batch M10 2026-07-21] The primitivity/uniqueness tail is now also proved at the scalar-marginal level in NCG/Lorentz/HeatBathPrimitivity.lean: the |Lambda|-th power of the heat-bath kernel is entrywise positive (heatBathMatrix_pow_pos, mismatch induction with lazy padding), the Gibbs weight is stationary (gibbs_stationary, by resolving each transition against single-site detailed balance on the two-point redraw fibre), and any two stationary probability laws coincide (heatBath_stationary_unique, via the Dobrushin L1-contraction uniqueness applied to the positive power). [batch M20 2026-07-21] The quantitative EXPONENTIAL MIXING rate is now also proved at the scalar-marginal level in NCG/Lorentz/DobrushinMixing.lean: a stochastic kernel with entrywise floor delta contracts zero-mass signed measures in L1 by 1 - |D|*delta (dobrushin_contraction), iterates decay geometrically (dobrushin_pow_contraction), and the heat-bath chain (primitive at power |Lambda|, so with a positive floor delta) satisfies heatBath_exponential_mixing: any two probability laws converge together under K^{|Lambda| k} at rate (1 - |Omega_Lambda|*delta)^k with 0 <= 1 - |Omega_Lambda|*delta < 1. This rate bound upgrades to actual ergodic CONVERGENCE in NCG/Lorentz/HeatBathConvergence.lean (heatBath_converges): from any initial probability law the dynamics converges in L1 to any stationary probability law (geometric squeeze of the mixing bound with the majorant rho^k -> 0), which with heatBath_stationary_unique (uniqueness) and gibbs_stationary (existence via the normalized Gibbs weight) is the full finite-volume ergodic content. Remaining disclosure: only the resolved-channel (internal-factor, kappa_2 > 0) primitivity is not formalized — it needs Perron-Frobenius-type spectral theory outside the repos eigenvector-free development; the KMS pairing uses the unnormalized trace (the 1/4 of tau_S scales both sides equally)."
+  },
+  "prop:common-origin-pressure-frame": {
+    "env": "proposition",
+    "title": "Pressure, sign, and spatial moment",
+    "status": "proved",
+    "lean": [
+      "NCG.RowStochastic",
+      "NCG.pRad_stochastic",
+      "NCG.depth_one_transfer_rate",
+      "NCG.pressure_zero_unique",
+      "NCG.doob_normalized_at_zero",
+      "NCG.CommonOrigin.heatBathMatrix",
+      "NCG.CommonOrigin.heatBathMatrix_rowSum",
+      "NCG.CommonOrigin.common_origin_pressure_zero",
+      "NCG.CommonOrigin.heatBathMatrix_support_connected",
+      "NCG.CommonOrigin.recordDeck_sign",
+      "NCG.CommonOrigin.dirProfile_lower",
+      "NCG.CommonOrigin.IsingData.secondMoment_deck",
+      "NCG.CommonOrigin.IsingData.secondMoment_lower"
+    ],
+    "note": "[batch M9 2026-07-21] Proved across NCG/Lorentz/StochasticPressure.lean and NCG/Upstream/CommonOriginFrame.lean. Pressure clause: a row-stochastic nonnegative kernel has Gelfand-Fekete growth rate pRad = 1 (pRad_stochastic: constant entry-sum gauge), so the depth-one transfer a*e^{-z} K has rate a*e^{-z}, unique pressure zero z = log a, and Doob-normalized channel K at the zero (common_origin_pressure_zero, instantiated on the explicit random-scan heat-bath marginal heatBathMatrix over Boolean spin configurations, proved stochastic with positive diagonal). Connectivity clause: the positive-support graph is connected — any configuration reaches any other along positive single-site redraws (heatBathMatrix_support_connected, proved directly by mismatch induction, which is stronger than the primitivity route of the manuscript). Deck clauses: the deck action on the 18 resolved record values is 9 disjoint transpositions with sign -1 (recordDeck_sign), and the spatial second moment is deck even and uniformly bounded below by r_* g_* I_3 (secondMoment_deck, secondMoment_lower, with the profile bound dirProfile_lower). Disclosures: the pressure statements are at the level of the scalar heat-bath marginal (the resolved channels scalar marginal per prop:common-origin-ucp), pRad implements the spectral radius in the eigenvector-free development, and the final cover-theoretic packaging (the quotient map G-hat -> G-hat/deck as a principal Z2-cover whose class is represented by the determinant character) is not re-assembled in the Multigraph cover framework — its ingredients (connectivity + deck sign) are the proved content."
+  },
+  "thm:common-origin-clifford": {
+    "env": "theorem",
+    "title": "Clifford factor generated by coherent branches",
+    "status": "proved",
+    "lean": [
+      "NCG.CommonOrigin.adMap_comp",
+      "NCG.CommonOrigin.ad_pair_generates",
+      "NCG.CommonOrigin.commForm",
+      "NCG.CommonOrigin.commForm_det",
+      "NCG.CommonOrigin.pauli_commutant",
+      "NCG.CommonOrigin.gamma",
+      "NCG.CommonOrigin.gamma_clifford",
+      "NCG.CommonOrigin.gamma_herm",
+      "NCG.CommonOrigin.gamma_unitary",
+      "NCG.CommonOrigin.gammaJR_skew",
+      "NCG.CommonOrigin.gamma_commutant",
+      "NCG.CommonOrigin.pauli4_trace_mul",
+      "NCG.CommonOrigin.pauliKron_trace_mul",
+      "NCG.CommonOrigin.pauliKron_linearIndependent",
+      "NCG.CommonOrigin.pauliKron_span",
+      "NCG.CommonOrigin.pauliKron_mem_adjoin",
+      "NCG.CommonOrigin.gamma_generates"
+    ],
+    "note": "[batches M8+M11+M12 2026-07-21] Proved across NCG/Algebra/CliffordGeneration.lean, CliffordConcrete.lean and CliffordGenerates.lean. Generation clause: conjugations compose and the conditioned predictive units generate the sheet conjugation beta_a alpha_a = Ad(J R_a) Ad(R_a) = Ad(J) (ad_pair_generates), instantiated by concrete generators. Commutator form: Omega on H = F_2^4 (0 diagonal, 1 off) is nondegenerate over F_2 (commForm_det = 1). Identification: the internal space C^4 = C^2 (x) C^2 carries explicit Hermitian Clifford generators Gamma_mu (Pauli-Kronecker products) with Gamma_mu Gamma_nu + Gamma_nu Gamma_mu = 2 delta 1 (gamma_clifford); each is a Hermitian unitary and the sheet-rotated Gamma_0 Gamma_a are skew-Hermitian (matching the internal-map hypotheses of the UCP/balance layers); the representation is irreducible (gamma_commutant: trivial commutant, via first-factor slices and the Pauli commutant); and the Clifford system generates the FULL matrix factor: Algebra.adjoin C {Gamma_mu} = top (gamma_generates), with the sixteen Pauli-Kronecker monomials a trace-orthogonal basis of M_4(C) (Tr(K_x K_y) = 4 delta_{xy}). Disclosure: the twisted group algebra C_sigma[H] is not constructed as an abstract object; the isomorphism C_sigma[H] = Cl_4(C) = M_4(C) is rendered concretely through its monomial representation (relations + irreducibility + generation + basis), which realizes the noncentral factor exactly."
+  },
+  "thm:common-origin-phase": {
+    "env": "theorem",
+    "title": "Unified common-origin phase",
+    "status": "proved",
+    "lean": [
+      "NCG.CommonOrigin.gibbs_state_invariant",
+      "NCG.CommonOrigin.heatBathMatrix_pow_pos",
+      "NCG.CommonOrigin.heatBath_stationary_unique",
+      "NCG.CommonOrigin.IsingData.resolved_balance",
+      "NCG.CommonOrigin.IsingData.totalChannel_kms_selfadjoint",
+      "NCG.CommonOrigin.common_origin_pressure_zero",
+      "NCG.CommonOrigin.heatBathMatrix_support_connected",
+      "NCG.CommonOrigin.recordDeck_sign",
+      "NCG.CommonOrigin.IsingData.secondMoment_lower",
+      "NCG.CommonOrigin.gamma_generates",
+      "NCG.Upstream.peierls_magnetization",
+      "NCG.Upstream.phase_pair_of_uniform_bound",
+      "NCG.Upstream.flip_phase_neg"
+    ],
+    "note": "[batch M33 2026-07-21] Scope reduced: the planar contour geometry is now discharged by NCG/Upstream/IsingContours.lean (see thm:torsion-phase-coexistence); the single remaining scoped input on the Peierls side is the 4n·3^{n-1} circuit count. [batch M30-M32 2026-07-21] PROVED. Clauses (i), (ii), (iv)-(vii) were closed in batches M10-M15 (see the identifiers: primitivity, resolved Gibbs invariance, KMS self-adjointness, pressure root log(a), connected signed cover, deck-even second moment, Clifford factor). Clause (iii) — two extremal deck-related orientation phases in the thermodynamic limit separated by the deck-odd spin test — is now anchored: summing over direction and internal records gives the 2d Ising heat-bath marginal (the M15 marginal identities), whose plus-boundary finite volumes carry the uniform Peierls magnetization >= 203/216 at theta >= (1/2) log 12 (peierls_magnetization over the ContourDatum interface), the deck flip produces the opposite phase (flip_phase_neg), and subsequential thermodynamic limits give the separated pair (phase_pair_of_uniform_bound). Scoped inputs as in thm:torsion-phase-coexistence: the planar contour geometry and the DLR/extremality packaging of the limit states. AUDIT-2026-07-21: clause (iii) caveat: the extremal deck-related pair in the thermodynamic limit is carried by phase_pair_of_uniform_bound, which constructs real-number sequences, not states."
+  },
+  "cor:full-phase-nonempty": {
+    "env": "corollary",
+    "title": "Nonemptiness of the finite phase criteria",
+    "status": "proved",
+    "lean": [
+      "NCG.CommonOrigin.diamondKernel",
+      "NCG.CommonOrigin.diamondKernel_idem",
+      "NCG.CommonOrigin.diamond_zero_defect",
+      "NCG.CommonOrigin.heatBathMatrix_deck",
+      "NCG.CommonOrigin.productKernel",
+      "NCG.CommonOrigin.productKernel_rowSum",
+      "NCG.CommonOrigin.productKernel_pow_pos",
+      "NCG.CommonOrigin.productKernel_exchange",
+      "NCG.CommonOrigin.productKernel_deck_exchange",
+      "NCG.CommonOrigin.productKernel_stationary",
+      "NCG.Upstream.peierls_magnetization",
+      "NCG.Upstream.phase_pair_of_uniform_bound"
+    ],
+    "note": "[batch M33 2026-07-21] Scope reduced: the planar contour geometry is now discharged by NCG/Upstream/IsingContours.lean (see thm:torsion-phase-coexistence); the single remaining scoped input on the Peierls side is the 4n·3^{n-1} circuit count. [batch M30-M32 2026-07-21] PROVED: the explicit local product model was closed in batch M15 (diamond kernel idempotent and exchange covariant with uniform stationary law and zero mean defect; the product kernel row-stochastic, primitive, jointly exchange covariant, stationary; the determinant line retained). The one outstanding criterion (C4) — two deck-related extremal orientation states with a selection — is now the Peierls phase pair of thm:common-origin-phase clause (iii) (closed this batch). The corollary itself flags the separate continuum scaling regularity as outside the finite criteria; that flag is part of the statement, not a blocker. Scoped inputs inherited from the Peierls records. AUDIT-2026-07-21: criterion (C4) caveat: same number-level (not state-level) thermodynamic-limit carrier as thm:common-origin-phase."
+  }
+}
