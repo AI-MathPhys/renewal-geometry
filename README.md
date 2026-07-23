@@ -11,8 +11,7 @@ monoids.
 Mathlib contains no formalization of noncommutative geometry — no spectral
 triples, no Krein spaces, no completely positive map monoids. This library
 builds that foundation from first principles and uses it to formalize, and
-prove, the theorems of two research manuscripts (see
-[The two manuscripts](#the-two-manuscripts) below).
+prove, the theorems of companions research manuscripts [companions research manuscript](##Related manuscripts).
 
 **Verification guarantees.**
 
