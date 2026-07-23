@@ -48,6 +48,7 @@ def KMSDetailedBalance (Φ Φstar : A →ₗ[ℂ] A) : Prop :=
 def kmsCurrent (Φ Φstar : A →ₗ[ℂ] A) : A →ₗ[ℂ] A :=
   Φ - antiDual σ σi Φstar
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Theorem `thm:cancellation-criterion` (i)**: the current
 vanishes exactly at detailed balance. -/
 theorem kmsCurrent_eq_zero_iff (Φ Φstar : A →ₗ[ℂ] A) :
@@ -55,49 +56,54 @@ theorem kmsCurrent_eq_zero_iff (Φ Φstar : A →ₗ[ℂ] A) :
       KMSDetailedBalance σ σi Φ Φstar :=
   sub_eq_zero
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- The anti-renewal dual is linear in the predual: differences pass
 through. -/
 theorem antiDual_sub (f g : A →ₗ[ℂ] A) :
     antiDual σ σi (f - g) = antiDual σ σi f - antiDual σ σi g := by
   apply LinearMap.ext
   intro a
-  show σi * ((f - g) (σ * a * σ)) * σi = _
+  change σi * ((f - g) (σ * a * σ)) * σi = _
   rw [LinearMap.sub_apply]
-  show σi * (f (σ * a * σ) - g (σ * a * σ)) * σi
+  change σi * (f (σ * a * σ) - g (σ * a * σ)) * σi
       = σi * f (σ * a * σ) * σi - σi * g (σ * a * σ) * σi
   noncomm_ring
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 theorem antiDual_add (f g : A →ₗ[ℂ] A) :
     antiDual σ σi (f + g) = antiDual σ σi f + antiDual σ σi g := by
   apply LinearMap.ext
   intro a
-  show σi * ((f + g) (σ * a * σ)) * σi = _
+  change σi * ((f + g) (σ * a * σ)) * σi = _
   rw [LinearMap.add_apply]
-  show σi * (f (σ * a * σ) + g (σ * a * σ)) * σi
+  change σi * (f (σ * a * σ) + g (σ * a * σ)) * σi
       = σi * f (σ * a * σ) * σi + σi * g (σ * a * σ) * σi
   noncomm_ring
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 theorem antiDual_smul (c : ℂ) (f : A →ₗ[ℂ] A) :
     antiDual σ σi (c • f) = c • antiDual σ σi f := by
   apply LinearMap.ext
   intro a
-  show σi * ((c • f) (σ * a * σ)) * σi = _
+  change σi * ((c • f) (σ * a * σ)) * σi = _
   rw [LinearMap.smul_apply]
-  show σi * (c • f (σ * a * σ)) * σi = c • (σi * f (σ * a * σ) * σi)
+  change σi * (c • f (σ * a * σ)) * σi = c • (σi * f (σ * a * σ) * σi)
   rw [mul_smul_comm, smul_mul_assoc]
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- The dual of the identity is the identity. -/
 theorem antiDual_one :
     antiDual σ σi (1 : Module.End ℂ A) = 1 := by
   apply LinearMap.ext
   intro a
-  show σi * (σ * a * σ) * σi = a
+  change σi * (σ * a * σ) * σi = a
   calc σi * (σ * a * σ) * σi = (σi * σ) * a * (σ * σi) := by
         noncomm_ring
     _ = a := by rw [hiσ, hσi, one_mul, mul_one]
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Theorem `thm:cancellation-criterion` (ii)**: the current is
 KMS anti-self-adjoint, `𝒥^♯ = −𝒥` (its predual is the difference
 of the two preduals, per clause (vi) of
@@ -109,6 +115,7 @@ theorem kmsCurrent_anti (Φ Φstar : A →ₗ[ℂ] A) :
   rw [antiDual_sub, antiDual_involutive σ σi hσi hiσ, kmsCurrent,
     neg_sub]
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:cancellation` (decomposition sums to `Φ`)**:
 `Φ_sym + Φ_asym = Φ` with `Φ_sym = ½(Φ + Φ^♯)` and `Φ_asym = ½𝒥_ρ(Φ)`. -/
 theorem symPart_add_asymPart (Φ Φstar : A →ₗ[ℂ] A) :
@@ -123,6 +130,7 @@ theorem symPart_add_asymPart (Φ Φstar : A →ₗ[ℂ] A) :
   norm_num
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:cancellation` (`Φ_sym` is KMS self-adjoint)**:
 the sharp of the symmetric part — computed via its predual
 `½(Φ* + σ(·)σ ∘ Φ ∘ σ⁻¹(·)σ⁻¹)` — is the symmetric part itself. -/
@@ -134,6 +142,7 @@ theorem symPart_selfAdjoint (Φ Φstar : A →ₗ[ℂ] A) :
     antiDual_involutive σ σi hσi hiσ, add_comm]
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:cancellation` (`Φ_asym` is KMS
 skew-adjoint)**: the sharp of the antisymmetric part is its
 negative. -/
@@ -143,6 +152,7 @@ theorem asymPart_skewAdjoint (Φ Φstar : A →ₗ[ℂ] A) :
       = -((1/2 : ℂ) • kmsCurrent σ σi Φ Φstar) := by
   rw [antiDual_smul, kmsCurrent_anti σ σi hσi hiσ Φ Φstar, smul_neg]
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:cancellation` (uniqueness)**: the
 decomposition of a channel into a KMS self-adjoint and a KMS
 skew-adjoint part (each recorded with its predual, the preduals
@@ -174,11 +184,13 @@ theorem cancellation_decomposition_unique
   rw [hSS] at h6
   exact add_left_cancel h6
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 theorem kmsInner_sub_right (a x y : A) :
     kmsInner τ σ a (x - y) = kmsInner τ σ a x - kmsInner τ σ a y := by
   unfold kmsInner
   rw [mul_sub, map_sub]
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 theorem kmsInner_sub_left (x y b : A) :
     kmsInner τ σ (x - y) b = kmsInner τ σ x b - kmsInner τ σ y b := by
   unfold kmsInner
@@ -189,6 +201,7 @@ theorem kmsInner_sub_left (x y b : A) :
   rw [h1, map_sub]
 
 include hτc hτs hσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 /-- Hermitian symmetry of the KMS inner product. -/
 theorem kmsInner_conj (x y : A) :
     star (kmsInner τ σ x y) = kmsInner τ σ y x := by
@@ -204,6 +217,7 @@ theorem kmsInner_conj (x y : A) :
     _ = τ ((σ * star y * σ) * x) := by congr 1; noncomm_ring
 
 include hτc in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 /-- The KMS pairing of two self-adjoint elements is symmetric. -/
 theorem kmsInner_symm_of_selfAdjoint (u v : A) (hu : star u = u)
     (hv : star v = v) :
@@ -217,14 +231,15 @@ theorem kmsInner_symm_of_selfAdjoint (u v : A) (hu : star u = u)
 
 variable {Φ Φstar : A →ₗ[ℂ] A}
 
-include hσ hσi hiσ in
+include hσ hσi in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 /-- The Petz predual `Γ Φ Γ⁻¹` preserves the star when `Φ` does. -/
 theorem sandwich_star_preserving
     (hΦsp : ∀ x : A, Φ (star x) = star (Φ x)) (x : A) :
     ((sandwich σ) ∘ₗ Φ ∘ₗ (sandwich σi)) (star x)
       = star (((sandwich σ) ∘ₗ Φ ∘ₗ (sandwich σi)) x) := by
   have hσi' : star σi = σi := star_sigmaInv σ σi hσ hσi
-  show σ * Φ (σi * star x * σi) * σ = star (σ * Φ (σi * x * σi) * σ)
+  change σ * Φ (σi * star x * σi) * σ = star (σ * Φ (σi * x * σi) * σ)
   rw [star_mul, star_mul, hσ, ← hΦsp]
   have h1 : star (σi * x * σi) = σi * star x * σi := by
     rw [star_mul, star_mul, hσi', ← mul_assoc]
@@ -232,6 +247,7 @@ theorem sandwich_star_preserving
   noncomm_ring
 
 include hτc hσ hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 /-- **Theorem `thm:cancellation-criterion` (iii)**: the adjoint form
 `⟨a, 𝒥b⟩ = −⟨𝒥a, b⟩`. -/
 theorem kmsCurrent_adjoint_form
@@ -249,18 +265,18 @@ theorem kmsCurrent_adjoint_form
     have h := antiDual_kms_adjoint τ σ σi hσ hσi hiσ
       (Φ := antiDual σ σi Φstar)
       (Φstar := (sandwich σ) ∘ₗ Φ ∘ₗ (sandwich σi))
-      (antiDual_predual_pairing τ σ σi hτc hσi hiσ hpair)
-      (sandwich_star_preserving σ σi hσ hσi hiσ hΦsp) x y
+      (antiDual_predual_pairing τ σ σi hτc hpair)
+      (sandwich_star_preserving σ σi hσ hσi hΦsp) x y
     rw [antiDual_involutive σ σi hσi hiσ] at h
     exact h
-  show kmsInner τ σ a ((Φ - antiDual σ σi Φstar) b) = _
+  change kmsInner τ σ a ((Φ - antiDual σ σi Φstar) b) = _
   have hsplit : (Φ - antiDual σ σi Φstar) b
       = Φ b - antiDual σ σi Φstar b := rfl
   rw [hsplit, kmsInner_sub_right, hAdj1, hAdj2]
   have hsplit2 : kmsInner τ σ (kmsCurrent σ σi Φ Φstar a) b
       = kmsInner τ σ (Φ a) b
         - kmsInner τ σ (antiDual σ σi Φstar a) b := by
-    show kmsInner τ σ ((Φ - antiDual σ σi Φstar) a) b = _
+    change kmsInner τ σ ((Φ - antiDual σ σi Φstar) a) b = _
     have h : (Φ - antiDual σ σi Φstar) a
         = Φ a - antiDual σ σi Φstar a := rfl
     rw [h, kmsInner_sub_left]
@@ -268,6 +284,7 @@ theorem kmsCurrent_adjoint_form
   ring
 
 include hτc hτs hσ hσi hiσ in
+omit hτs [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 /-- **Theorem `thm:cancellation-criterion` (iv)**: diagonal
 cancellation — `⟨a, 𝒥a⟩ = 0` for every self-adjoint `a`: the
 mismatch is an oriented off-diagonal component, not a positive
@@ -282,7 +299,7 @@ theorem kmsCurrent_diagonal
   -- the current preserves self-adjointness
   have hJa : star (kmsCurrent σ σi Φ Φstar a)
       = kmsCurrent σ σi Φ Φstar a := by
-    show star ((Φ - antiDual σ σi Φstar) a) = _
+    change star ((Φ - antiDual σ σi Φstar) a) = _
     have h0 : (Φ - antiDual σ σi Φstar) a
         = Φ a - antiDual σ σi Φstar a := rfl
     rw [h0, star_sub]
@@ -326,6 +343,7 @@ theorem current_composition_ring' {R : Type*} [Ring R] (Φ Ψ S T : R) :
   noncomm_ring
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Theorem `thm:current-composition`**: the composition law with
 the noncommutative curvature term, first displayed form —
 `𝒥(Φ∘Ψ) = 𝒥(Φ)∘Ψ + Φ^♯∘𝒥(Ψ) + [Φ^♯,Ψ^♯]`. -/
@@ -335,12 +353,13 @@ theorem kmsCurrent_composition (Φ Ψ Φs Ψs : A →ₗ[ℂ] A) :
         + (antiDual σ σi Φs ∘ₗ (kmsCurrent σ σi Ψ Ψs))
         + ((antiDual σ σi Φs ∘ₗ antiDual σ σi Ψs)
            - (antiDual σ σi Ψs ∘ₗ antiDual σ σi Φs)) := by
-  show (Φ ∘ₗ Ψ) - antiDual σ σi (Ψs ∘ₗ Φs) = _
+  change (Φ ∘ₗ Ψ) - antiDual σ σi (Ψs ∘ₗ Φs) = _
   rw [antiDual_comp σ σi hσi hiσ]
   exact current_composition_ring (R := Module.End ℂ A) Φ Ψ
     (antiDual σ σi Φs) (antiDual σ σi Ψs)
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Theorem `thm:current-composition`**: second displayed form —
 `𝒥(Φ∘Ψ) = Φ∘𝒥(Ψ) + 𝒥(Φ)∘Ψ^♯ + [Φ^♯,Ψ^♯]`. -/
 theorem kmsCurrent_composition' (Φ Ψ Φs Ψs : A →ₗ[ℂ] A) :
@@ -349,12 +368,13 @@ theorem kmsCurrent_composition' (Φ Ψ Φs Ψs : A →ₗ[ℂ] A) :
         + ((kmsCurrent σ σi Φ Φs) ∘ₗ antiDual σ σi Ψs)
         + ((antiDual σ σi Φs ∘ₗ antiDual σ σi Ψs)
            - (antiDual σ σi Ψs ∘ₗ antiDual σ σi Φs)) := by
-  show (Φ ∘ₗ Ψ) - antiDual σ σi (Ψs ∘ₗ Φs) = _
+  change (Φ ∘ₗ Ψ) - antiDual σ σi (Ψs ∘ₗ Φs) = _
   rw [antiDual_comp σ σi hσi hiσ]
   exact current_composition_ring' (R := Module.End ℂ A) Φ Ψ
     (antiDual σ σi Φs) (antiDual σ σi Ψs)
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Corollary `cor:balanced-product` (commutator formula)**: for
 detailed-balanced factors, `𝒥(Φ∘Ψ) = [Φ, Ψ]`. -/
 theorem balanced_product (Φ Ψ Φs Ψs : A →ₗ[ℂ] A)
@@ -362,10 +382,11 @@ theorem balanced_product (Φ Ψ Φs Ψs : A →ₗ[ℂ] A)
     (hbΨ : KMSDetailedBalance σ σi Ψ Ψs) :
     kmsCurrent σ σi (Φ ∘ₗ Ψ) (Ψs ∘ₗ Φs)
       = (Φ ∘ₗ Ψ) - (Ψ ∘ₗ Φ) := by
-  show (Φ ∘ₗ Ψ) - antiDual σ σi (Ψs ∘ₗ Φs) = _
+  change (Φ ∘ₗ Ψ) - antiDual σ σi (Ψs ∘ₗ Φs) = _
   rw [antiDual_comp σ σi hσi hiσ, ← hbΦ, ← hbΨ]
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Corollary `cor:balanced-product` (commutation criterion)**:
 the composite of two detailed-balanced maps is detailed-balanced iff
 they commute. -/
@@ -377,6 +398,7 @@ theorem balanced_product_iff (Φ Ψ Φs Ψs : A →ₗ[ℂ] A)
   rw [balanced_product σ σi hσi hiσ Φ Ψ Φs Ψs hbΦ hbΨ]
   exact sub_eq_zero
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Corollary `cor:balanced-product` (convexity)**: convex (indeed
 arbitrary affine) combinations of detailed-balanced maps remain
 detailed-balanced. -/
@@ -389,6 +411,7 @@ theorem balanced_convex (Φ Ψ Φs Ψs : A →ₗ[ℂ] A) (c : ℂ)
   rw [antiDual_add, antiDual_smul, antiDual_smul, ← hbΦ, ← hbΨ]
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Corollary `cor:balanced-product` (powers)**: every power of a
 detailed-balanced map is detailed-balanced. -/
 theorem balanced_pow (Φ Φs : A →ₗ[ℂ] A)

@@ -8,9 +8,9 @@ import NCG.Upstream.CircuitCount
 /-!
 # DLR/extremality packaging: the infinite-volume Ising phases
 
-The last scoped input of `thm:torsion-phase-coexistence` clause (ii):
-package the finite-volume plus-boundary Peierls bound into genuine
-**infinite-volume states**.  A state is a normalized positive linear
+The infinite-volume packaging of `thm:torsion-phase-coexistence`
+clause (ii): the finite-volume plus-boundary Peierls bound becomes a
+statement about genuine **infinite-volume states**.  A state is a normalized positive linear
 functional on bounded observables of the spin field, obtained as the
 limit of the plus-boundary box expectations along a fixed ultrafilter
 extending the tail filter (so every bounded observable converges — no
@@ -198,7 +198,7 @@ theorem gibbsPlus_smul (θ c : ℝ) {f : (V2 → Bool) → ℝ} {C : ℝ}
 theorem gibbsPlus_nonneg (θ : ℝ) {f : (V2 → Bool) → ℝ} {C : ℝ}
     (hb : ∀ τ, |f τ| ≤ C) (hf : ∀ τ, 0 ≤ f τ) :
     0 ≤ gibbsPlus θ f :=
-  ge_of_tendsto' (gibbsPlus_spec (θ := θ) hb) (fun n => expec_nonneg θ hf)
+  ge_of_tendsto' (gibbsPlus_spec (θ := θ) hb) (fun _n => expec_nonneg θ hf)
 
 theorem spin_abs_le (b : Bool) : |spin b| ≤ 1 := by
   cases b <;> simp [spin]
@@ -207,7 +207,7 @@ theorem spin_abs_le (b : Bool) : |spin b| ≤ 1 := by
 temperature. -/
 theorem gibbsPlus_spin (θ : ℝ) (hθ : (1 / 2) * Real.log 12 ≤ θ) :
     (203 : ℝ) / 216 ≤ gibbsPlus θ (fun τ => spin (τ 0)) :=
-  ge_of_tendsto' (gibbsPlus_spec (θ := θ) (fun τ => spin_abs_le _))
+  ge_of_tendsto' (gibbsPlus_spec (θ := θ) (fun _τ => spin_abs_le _))
     (fun n =>
       show (203 : ℝ) / 216 ≤ expec
         (Finset.Icc (-(n : ℤ)) (n : ℤ)
@@ -272,7 +272,7 @@ noncomputable def gibbsMix (θ : ℝ) (f : (V2 → Bool) → ℝ) : ℝ :=
 
 /-- Clause (iii), state level: the symmetric mixture has zero
 magnetization. -/
-theorem gibbsMix_spin (θ : ℝ) (hθ : (1 / 2) * Real.log 12 ≤ θ) :
+theorem gibbsMix_spin (θ : ℝ) (_hθ : (1 / 2) * Real.log 12 ≤ θ) :
     gibbsMix θ (fun τ => spin (τ 0))
       = -gibbsMix θ (fun τ => spin (τ 0)) := by
   unfold gibbsMix gibbsMinus
@@ -310,7 +310,7 @@ noncomputable def zLoc (V : Finset V2) (θ : ℝ) (τ : V2 → Bool) : ℝ :=
 
 theorem zLoc_pos (V : Finset V2) (θ : ℝ) (τ : V2 → Bool) :
     0 < zLoc V θ τ :=
-  Finset.sum_pos (fun η _ => eLoc_pos V θ _) Finset.univ_nonempty
+  Finset.sum_pos (fun _η _ => eLoc_pos V θ _) Finset.univ_nonempty
 
 /-- **The DLR kernel**: resample `V` from its conditional Gibbs law
 with the ambient configuration as boundary condition. -/
@@ -347,7 +347,7 @@ theorem resV_patchV (V : Finset V2) (η : ↥V → Bool)
     (τ : V2 → Bool) :
     resV V (patchV V η τ) = η := by
   funext v
-  show (if h : (v : V2) ∈ V then η ⟨(v : V2), h⟩ else τ (v : V2))
+  change (if h : (v : V2) ∈ V then η ⟨(v : V2), h⟩ else τ (v : V2))
     = η v
   rw [dif_pos v.2]
 
@@ -431,9 +431,9 @@ theorem expec_dlrK (θ : ℝ) {V Λ : Finset V2} (hVΛ : V ⊆ Λ)
     rintro ⟨σ, η⟩
     refine Prod.ext ?_ ?_
     · refine Subtype.ext ?_
-      show patchV V (resV V σ.1) (patchV V η σ.1) = σ.1
+      change patchV V (resV V σ.1) (patchV V η σ.1) = σ.1
       rw [patchV_patchV, patchV_resV]
-    · show resV V (patchV V η σ.1) = η
+    · change resV V (patchV V η σ.1) = η
       rw [resV_patchV]
   have key : (∑ σ : PlusBC Λ, wt Λ θ σ * dlrK V θ f σ.1)
       = ∑ p : PlusBC Λ × (↥V → Bool),
@@ -540,7 +540,7 @@ theorem patchV_flipAll (V : Finset V2) (η : ↥V → Bool)
     (τ : V2 → Bool) :
     patchV V (flipEta η) (flipAll τ) = flipAll (patchV V η τ) := by
   funext v
-  show (if h : v ∈ V then flipEta η ⟨v, h⟩ else flipAll τ v)
+  change (if h : v ∈ V then flipEta η ⟨v, h⟩ else flipAll τ v)
     = !(if h : v ∈ V then η ⟨v, h⟩ else τ v)
   by_cases h : v ∈ V
   · rw [dif_pos h, dif_pos h]
@@ -554,7 +554,7 @@ theorem eLoc_flipAll (V : Finset V2) (θ : ℝ) (τ : V2 → Bool) :
   unfold eLoc
   congr 2
   refine Finset.sum_congr rfl fun e _ => ?_
-  show spin (!(τ (ep0 e))) * spin (!(τ (ep1 e))) = _
+  change spin (!(τ (ep0 e))) * spin (!(τ (ep1 e))) = _
   rw [spin_not, spin_not]
   ring
 
@@ -566,7 +566,7 @@ theorem zLoc_flipAll (V : Finset V2) (θ : ℝ) (τ : V2 → Bool) :
     (flipEta_involutive V))
     (fun η => eLoc V θ (patchV V η (flipAll τ)))]
   refine Finset.sum_congr rfl fun η _ => ?_
-  show eLoc V θ (patchV V (flipEta η) (flipAll τ)) = _
+  change eLoc V θ (patchV V (flipEta η) (flipAll τ)) = _
   rw [patchV_flipAll, eLoc_flipAll]
 
 /-- **The kernel commutes with the deck flip.** -/
@@ -582,7 +582,7 @@ theorem dlrK_flipAll (V : Finset V2) (θ : ℝ)
     (fun η => eLoc V θ (patchV V η (flipAll τ))
       * f (patchV V η (flipAll τ)))]
   refine Finset.sum_congr rfl fun η _ => ?_
-  show eLoc V θ (patchV V η τ) * f (flipAll (patchV V η τ))
+  change eLoc V θ (patchV V η τ) * f (flipAll (patchV V η τ))
       = eLoc V θ (patchV V (flipEta η) (flipAll τ))
         * f (patchV V (flipEta η) (flipAll τ))
   rw [patchV_flipAll, eLoc_flipAll]

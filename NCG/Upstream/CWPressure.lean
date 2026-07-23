@@ -135,7 +135,7 @@ theorem lt_artanh {m : ℝ} (hm : m ∈ Ioo (0 : ℝ) 1) :
   rwa [Real.tanh_artanh ⟨by linarith [hm.1], hm.2⟩] at h2
 
 /-- Below the oriented root: `artanh m < λm`. -/
-theorem artanh_lt_mul_of_lt_root {lam mstar : ℝ} (hlam : 1 < lam)
+theorem artanh_lt_mul_of_lt_root {lam mstar : ℝ} (_hlam : 1 < lam)
     (hmstar : mstar ∈ Ioo (0 : ℝ) 1)
     (hfix : Real.tanh (lam * mstar) = mstar) {m : ℝ}
     (hm : m ∈ Ioo (0 : ℝ) mstar) : Real.artanh m < lam * m := by
@@ -162,7 +162,7 @@ theorem artanh_lt_mul_of_lt_root {lam mstar : ℝ} (hlam : 1 < lam)
   nlinarith [hcp]
 
 /-- Above the oriented root: `λm < artanh m`. -/
-theorem mul_lt_artanh_of_root_lt {lam mstar : ℝ} (hlam : 1 < lam)
+theorem mul_lt_artanh_of_root_lt {lam mstar : ℝ} (_hlam : 1 < lam)
     (hmstar : mstar ∈ Ioo (0 : ℝ) 1)
     (hfix : Real.tanh (lam * mstar) = mstar) {m : ℝ}
     (hm : m ∈ Ioo mstar (1 : ℝ)) : lam * m < Real.artanh m := by
@@ -191,7 +191,7 @@ theorem mul_lt_artanh_of_root_lt {lam mstar : ℝ} (hlam : 1 < lam)
 
 /-- **Theorem `thm:cw-phase-diagram` (i)**: for `0 ≤ λ ≤ 1` the
 pressure has its unique maximum on `[-1,1]` at the unoriented point. -/
-theorem cw_phase_subcritical {lam : ℝ} (hlam0 : 0 ≤ lam)
+theorem cw_phase_subcritical {lam : ℝ} (_hlam0 : 0 ≤ lam)
     (hlam : lam ≤ 1) {m : ℝ} (hm : m ∈ Icc (-1 : ℝ) 1)
     (hne : m ≠ 0) :
     cwPressure lam 0 m < cwPressure lam 0 0 := by
@@ -388,7 +388,7 @@ theorem continuousOn_gapDefect (lam : ℝ) {a b : ℝ} (ha : -1 < a)
     exact continuousOn_empty _
 
 /-- The gap defect is strictly convex on any `[0, b] ⊂ [0, 1)`. -/
-theorem gapDefect_strictConvexOn (lam : ℝ) {b : ℝ} (hb0 : 0 ≤ b)
+theorem gapDefect_strictConvexOn (lam : ℝ) {b : ℝ} (_hb0 : 0 ≤ b)
     (hb : b < 1) :
     StrictConvexOn ℝ (Icc (0 : ℝ) b) (gapDefect lam) := by
   refine StrictMonoOn.strictConvexOn_of_deriv (convex_Icc _ _)
@@ -424,7 +424,7 @@ theorem cw_field_max_properties (hlam0 : 0 ≤ lam) (hh : 0 < h)
   -- not negative
   have hnonneg : 0 ≤ m₀ := by
     by_contra hneg
-    push_neg at hneg
+    push Not at hneg
     have h1 := hmax (show -m₀ ∈ Icc (-1 : ℝ) 1 from
       ⟨by linarith [hm₀.2], by linarith [hm₀.1]⟩)
     simp only [Set.mem_setOf_eq] at h1
@@ -580,7 +580,7 @@ theorem cw_phase_field (hlam0 : 0 ≤ lam) (hh : 0 < h) :
 /-- Negative field by reflection: maximizers at `-h` are exactly the
 negatives of maximizers at `h`. -/
 theorem cw_field_reflect (lam h : ℝ) {m₀ : ℝ}
-    (hm₀ : m₀ ∈ Icc (-1 : ℝ) 1)
+    (_hm₀ : m₀ ∈ Icc (-1 : ℝ) 1)
     (hmax : IsMaxOn (cwPressure lam h) (Icc (-1 : ℝ) 1) m₀) :
     IsMaxOn (cwPressure lam (-h)) (Icc (-1 : ℝ) 1) (-m₀) := by
   intro x hx
@@ -630,7 +630,7 @@ theorem cw_field_limit (hlam : 1 < lam)
       rw [hKe]
       exact Set.notMem_empty m₀
     rw [hK_def] at hmem
-    simp only [Set.mem_diff, Set.mem_union, not_and, not_not] at hmem
+    simp only [Set.mem_sdiff, Set.mem_union, not_and, not_not] at hmem
     rcases hmem hm₀ with hw | hw
     · have habs : |m₀ - mstar| < ε' :=
         abs_lt.mpr ⟨by linarith [hw.1], by linarith [hw.2]⟩
@@ -688,7 +688,7 @@ theorem cw_field_limit (hlam : 1 < lam)
       -- Ψ_h(m₀) ≤ Ψ₀(xK) + h < Ψ₀(m⋆) ≤ Ψ_h(m⋆) ≤ Ψ_h(m₀)
       nlinarith [h1, h2, h3, h4]
     rw [hK_def] at hnotK
-    simp only [Set.mem_diff, Set.mem_union, not_and, not_not] at hnotK
+    simp only [Set.mem_sdiff, Set.mem_union, not_and, not_not] at hnotK
     rcases hnotK hm₀ with hw | hw
     · have habs : |m₀ - mstar| < ε' :=
         abs_lt.mpr ⟨by linarith [hw.1], by linarith [hw.2]⟩

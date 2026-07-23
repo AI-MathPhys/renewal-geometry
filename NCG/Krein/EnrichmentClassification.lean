@@ -56,7 +56,7 @@ theorem gaugeEquiv_iff_sub_mem {c c' : EnrichmentDatum G} :
   constructor
   · rintro ⟨a, rfl⟩
     refine ⟨a, funext fun e => ?_⟩
-    show coboundaryMap G a e = (c - (c + coboundaryMap G a)) e
+    change coboundaryMap G a e = (c - (c + coboundaryMap G a)) e
     simp only [Pi.sub_apply, Pi.add_apply]
     have h : c e - (c e + coboundaryMap G a e)
         = -(coboundaryMap G a e) := by ring
@@ -65,7 +65,7 @@ theorem gaugeEquiv_iff_sub_mem {c c' : EnrichmentDatum G} :
     refine ⟨a, funext fun e => ?_⟩
     have he := congrFun ha e
     simp only [Pi.sub_apply] at he
-    show c' e = (c + coboundaryMap G a) e
+    change c' e = (c + coboundaryMap G a) e
     simp only [Pi.add_apply]
     have h : c' e = c e - (c e - c' e) := by ring
     rw [h, ← he, sub_eq_add_neg, hneg]

@@ -109,6 +109,7 @@ def _root_.NCG.Multigraph.Walk.edges :
   | _, _, .fwd e p => e :: p.edges
   | _, _, .bwd e p => e :: p.edges
 
+omit [DecidableEq G.V] in
 /-- The exchange sign of `krein_exchange_path` along the edge list of a
 walk is exactly the walk's `χ`-holonomy.  For closed walks the holonomy is
 gauge-invariant (`NCG.Multigraph.Walk.holonomy_gauge_loop`), so the Krein

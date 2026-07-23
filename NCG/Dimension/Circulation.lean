@@ -142,7 +142,7 @@ with a genuine handedness. -/
 theorem chirality_of_circulation_ne_zero (p : ι → ι → ℝ) (θ : ι → V)
     (h : circulation p θ ≠ 0) : ∃ a b, p a b ≠ p b a := by
   by_contra hall
-  push_neg at hall
+  push Not at hall
   exact h (circulation_eq_zero_of_symm p θ hall)
 
 /-- **Definition `def:degree-k-observable`** (algebraic encoding): the

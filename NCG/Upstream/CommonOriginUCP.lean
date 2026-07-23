@@ -55,14 +55,14 @@ abbrev Obs (ι : Type*) := (ι → ℝ) → Matrix (Fin 4) (Fin 4) ℂ
 
 /-- Positive semidefiniteness is preserved by nonnegative real
 scalars (arbitrary index type). -/
-theorem posSemidef_ofReal_smul {n : Type*} [Fintype n]
+theorem posSemidef_ofReal_smul {n : Type*}
     {A : Matrix n n ℂ} (hA : A.PosSemidef) {c : ℝ} (hc : 0 ≤ c) :
     (((c : ℝ) : ℂ) • A).PosSemidef := by
   refine ⟨?_, fun x => ?_⟩
   · have h1 : star ((c : ℝ) : ℂ) = ((c : ℝ) : ℂ) := by
       rw [Complex.star_def, Complex.conj_ofReal]
     have h2 : Aᴴ = A := hA.1
-    show (((c : ℝ) : ℂ) • A)ᴴ = ((c : ℝ) : ℂ) • A
+    change (((c : ℝ) : ℂ) • A)ᴴ = ((c : ℝ) : ℂ) • A
     rw [Matrix.conjTranspose_smul, h1, h2]
   · have h2 := hA.2 x
     have h3 : (x.sum fun i xi => x.sum fun j xj =>
@@ -104,6 +104,7 @@ noncomputable def totalChannel (ν : ι → ℝ) (r : ι → Fin 3 → ℝ → �
     (D.branch ν r κ Ψ i 1 a b F η
       + D.branch ν r κ Ψ i (-1) a b F η)
 
+omit [DecidableEq ι] [Fintype ι] in
 /-- The resolved transition weight is nonnegative on the spin box. -/
 theorem w_nonneg {ν : ι → ℝ} {r : ι → Fin 3 → ℝ → ℝ}
     {κ : Fin 3 → ℝ} (hν : ∀ i, 0 ≤ ν i)
@@ -120,6 +121,7 @@ theorem w_nonneg {ν : ι → ℝ} {r : ι → Fin 3 → ℝ → ℝ}
   exact mul_nonneg (mul_nonneg (mul_nonneg (hν i)
     (D.q_pos i s η).le) (hr i a _ hu)) (hκ b)
 
+omit [Fintype ι] in
 /-- **Proposition `prop:common-origin-ucp` (positivity)**: every
 resolved branch preserves pointwise positive semidefiniteness. -/
 theorem branch_posSemidef {ν : ι → ℝ} {r : ι → Fin 3 → ℝ → ℝ}
@@ -137,6 +139,7 @@ theorem branch_posSemidef {ν : ι → ℝ} {r : ι → Fin 3 → ℝ → ℝ}
   posSemidef_ofReal_smul
     (hΨ _ (hF _)) (D.w_nonneg hν hr hκ i a b hs hη)
 
+omit [Fintype ι] in
 /-- **Proposition `prop:common-origin-ucp` (complete positivity)**:
 the extension of every resolved branch by the identity on a
 `k`-level complex ancilla preserves pointwise positive
@@ -166,6 +169,7 @@ noncomputable def heatBath (ν : ι → ℝ) (f : (ι → ℝ) → ℂ) :
       + (((ν i * D.q i (-1) η : ℝ)) : ℂ)
           * f (Function.update η i (-1)))
 
+omit [DecidableEq ι] [Fintype ι] in
 /-- The branch weights collapse over the direction and internal
 records: `Σ_{a,b} w_{i,s,a,b}(η) = ν_i q_i(s|η)`. -/
 theorem w_sum_records {ν : ι → ℝ} {r : ι → Fin 3 → ℝ → ℝ}
@@ -211,7 +215,7 @@ theorem totalChannel_scalar {ν : ι → ℝ} {r : ι → Fin 3 → ℝ → ℝ}
         = (((D.w ν r κ i s a b η : ℝ) : ℂ)
             * f (Function.update η i s)) • 1 := by
     intro i s a b
-    show ((D.w ν r κ i s a b η : ℝ) : ℂ)
+    change ((D.w ν r κ i s a b η : ℝ) : ℂ)
         • Ψ a b (f (Function.update η i s) • 1) = _
     rw [map_smul, hΨ1, smul_smul]
   have hcollapse : ∀ (i : ι) (s : ℝ), |s| ≤ 1 →
@@ -233,7 +237,7 @@ theorem totalChannel_scalar {ν : ι → ℝ} {r : ι → Fin 3 → ℝ → ℝ}
       push_cast [← h6]
       norm_cast
     rw [h4, h5]
-  show ∑ i, ∑ a, ∑ b,
+  change ∑ i, ∑ a, ∑ b,
       (D.branch ν r κ Ψ i 1 a b (fun η' => f η' • 1) η
         + D.branch ν r κ Ψ i (-1) a b (fun η' => f η' • 1) η)
       = D.heatBath ν f η • 1
@@ -312,6 +316,7 @@ theorem totalChannel_unital {ν : ι → ℝ} {r : ι → Fin 3 → ℝ → ℝ}
 /-- Deck reversal on resolved observables `(ΘF)(η) = F(−η)`. -/
 def deck (F : Obs ι) : Obs ι := fun η => F (-η)
 
+omit [Fintype ι] in
 /-- **Proposition `prop:common-origin-ucp` (deck covariance)**:
 `Θ K̂_{i,s,a,b} = K̂_{i,−s,a,b} Θ` — the record transforms as
 `(s,a,b) ↦ (−s,a,b)` under deck reversal. -/
@@ -323,7 +328,7 @@ theorem branch_deck {ν : ι → ℝ} {r : ι → Fin 3 → ℝ → ℝ}
     deck (D.branch ν r κ Ψ i s a b F)
       = D.branch ν r κ Ψ i (-s) a b (deck F) := by
   funext η
-  show ((D.w ν r κ i s a b (-η) : ℝ) : ℂ)
+  change ((D.w ν r κ i s a b (-η) : ℝ) : ℂ)
       • Ψ a b (F (Function.update (-η) i s))
     = ((D.w ν r κ i (-s) a b η : ℝ) : ℂ)
         • Ψ a b (F (-(Function.update η i (-s))))
@@ -409,7 +414,7 @@ theorem adMap_matrixCP (U : Matrix (Fin 4) (Fin 4) ℂ) :
       = vecMulVec (fun p : Fin 4 × Fin 4 => U p.2 p.1)
           (star fun p : Fin 4 × Fin 4 => U p.2 p.1) := by
     ext ⟨p1, p2⟩ ⟨q1, q2⟩
-    show (U * Matrix.single p1 q1 (1 : ℂ) * Uᴴ) p2 q2 = _
+    change (U * Matrix.single p1 q1 (1 : ℂ) * Uᴴ) p2 q2 = _
     rw [vecMulVec_apply]
     have h2 : (Matrix.single p1 q1 (1 : ℂ) * Uᴴ) p1 q2
         = Uᴴ q1 q2 := by
@@ -437,7 +442,7 @@ theorem trMap_matrixCP : IsMatrixCompletelyPositive trMap := by
       = (((1 / 4 : ℝ)) : ℂ)
           • (1 : Matrix (Fin 4 × Fin 4) (Fin 4 × Fin 4) ℂ) := by
     ext p q
-    show (((Matrix.single p.1 q.1 (1 : ℂ)).trace / 4)
+    change (((Matrix.single p.1 q.1 (1 : ℂ)).trace / 4)
         • (1 : Matrix (Fin 4) (Fin 4) ℂ)) p.2 q.2
       = ((((1 / 4 : ℝ)) : ℂ)
           • (1 : Matrix (Fin 4 × Fin 4) (Fin 4 × Fin 4) ℂ)) p q
@@ -466,7 +471,7 @@ or skew-Hermitian (the `J R_a`). -/
 theorem adMap_hs_selfadjoint {U : Matrix (Fin 4) (Fin 4) ℂ}
     (hU : Uᴴ = U ∨ Uᴴ = -U) (X Y : Matrix (Fin 4) (Fin 4) ℂ) :
     ((adMap U X)ᴴ * Y).trace = (Xᴴ * adMap U Y).trace := by
-  show ((U * X * Uᴴ)ᴴ * Y).trace = (Xᴴ * (U * Y * Uᴴ)).trace
+  change ((U * X * Uᴴ)ᴴ * Y).trace = (Xᴴ * (U * Y * Uᴴ)).trace
   rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_mul,
     Matrix.conjTranspose_conjTranspose]
   rcases hU with h | h
@@ -475,7 +480,7 @@ theorem adMap_hs_selfadjoint {U : Matrix (Fin 4) (Fin 4) ℂ}
     rw [Matrix.trace_mul_comm U (Xᴴ * (U * Y))]
     simp only [Matrix.mul_assoc]
   · rw [h]
-    simp only [Matrix.neg_mul, Matrix.mul_neg, neg_neg,
+    simp only [Matrix.neg_mul, Matrix.mul_neg,
       Matrix.trace_neg, Matrix.mul_assoc]
     rw [neg_inj]
     rw [Matrix.trace_mul_comm U (Xᴴ * (U * Y))]
@@ -486,7 +491,7 @@ self-adjointness, tracial mode)**: the tracial internal mode is
 self-adjoint for the Hilbert–Schmidt trace pairing. -/
 theorem trMap_hs_selfadjoint (X Y : Matrix (Fin 4) (Fin 4) ℂ) :
     ((trMap X)ᴴ * Y).trace = (Xᴴ * trMap Y).trace := by
-  show (((X.trace / 4) • (1 : Matrix (Fin 4) (Fin 4) ℂ))ᴴ
+  change (((X.trace / 4) • (1 : Matrix (Fin 4) (Fin 4) ℂ))ᴴ
       * Y).trace = (Xᴴ * ((Y.trace / 4)
         • (1 : Matrix (Fin 4) (Fin 4) ℂ))).trace
   rw [Matrix.conjTranspose_smul, Matrix.conjTranspose_one,

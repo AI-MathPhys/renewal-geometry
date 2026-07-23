@@ -197,7 +197,7 @@ theorem sign_diag (x : G.V) :
   have hij : i ≠ j := fun h => by rw [h, hj] at hi; norm_num at hi
   refine ⟨i, j, hij, hi, hj, fun k => ?_⟩
   by_contra hk
-  push_neg at hk
+  push Not at hk
   have h3 : ({i, j, k} : Finset (Fin (D.rank x))).card = 3 := by
     rw [Finset.card_insert_of_notMem (by
         simp only [Finset.mem_insert, Finset.mem_singleton]

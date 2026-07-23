@@ -44,7 +44,7 @@ theorem continuous_tanh : Continuous Real.tanh := by
 theorem tanh_strictMono : StrictMono Real.tanh := by
   intro x y hxy
   by_contra hle
-  push_neg at hle
+  push Not at hle
   have h2 : Real.artanh (Real.tanh y) ≤ Real.artanh (Real.tanh x) :=
     Real.artanh_le_artanh (Real.neg_one_lt_tanh y)
       (Real.tanh_lt_one x) hle
@@ -117,7 +117,7 @@ theorem comparison_strictMonoOn :
 (subcritical fixed points)**: for `λ ≤ 1` the only self-consistent
 orientation in `(-1,1)` is the unoriented one. -/
 theorem gap_subcritical {lam : ℝ} (hlam : lam ≤ 1) {m : ℝ}
-    (hm : m ∈ Ioo (-1 : ℝ) 1)
+    (_hm : m ∈ Ioo (-1 : ℝ) 1)
     (hfix : Real.tanh (lam * m) = m) : m = 0 := by
   have key : ∀ m' : ℝ, 0 < m' → Real.tanh (lam * m') = m' → False := by
     intro m' hm' hfix'
@@ -128,7 +128,7 @@ theorem gap_subcritical {lam : ℝ} (hlam : lam ≤ 1) {m : ℝ}
         tanh_strictMono.le_iff_le.mpr hx
       rw [Real.tanh_zero, hfix'] at h1
       linarith
-    · push_neg at hl0
+    · push Not at hl0
       have h1 := tanh_lt_self (mul_pos hl0 hm')
       rw [hfix'] at h1
       nlinarith

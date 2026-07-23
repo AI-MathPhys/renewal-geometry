@@ -54,6 +54,8 @@ def IsCPBranchMap (φ : Ax →ₗ[ℂ] Ay) : Prop :=
   ∀ (k : ℕ) (M : Matrix (Fin k) (Fin k) Ax),
     MatrixQF M → MatrixQF (M.map φ)
 
+omit [StarModule ℂ Ax] [StarModule ℂ Ay] [StarModule ℂ Az] [StarOrderedRing Ax] [StarOrderedRing
+  Ay] [StarOrderedRing Az] in
 /-- CP branch maps compose. -/
 theorem IsCPBranchMap.comp {φ : Ax →ₗ[ℂ] Ay} {ψ : Ay →ₗ[ℂ] Az}
     (hφ : IsCPBranchMap φ) (hψ : IsCPBranchMap ψ) :
@@ -65,6 +67,7 @@ theorem IsCPBranchMap.comp {φ : Ax →ₗ[ℂ] Ay} {ψ : Ay →ₗ[ℂ] Az}
   rw [h]
   exact hψ k _ (hφ k M hM)
 
+omit [StarModule ℂ Ax] [StarOrderedRing Ax] in
 /-- On a single algebra the branch notion coincides with
 `NCG.IsCompletelyPositive`. -/
 theorem isCPBranchMap_iff_cp (φ : Ax →ₗ[ℂ] Ax) :
@@ -82,6 +85,8 @@ with `Γ_ρ = sandwich ρ^{1/2}`. -/
 def petzReverse : Ay →ₗ[ℂ] Ax :=
   (sandwich σx) ∘ₗ Estar ∘ₗ (sandwich σyi)
 
+omit [PartialOrder Ax] [PartialOrder Ay] [StarModule ℂ Ax] [StarModule ℂ Ay] [StarOrderedRing Ax]
+  [StarOrderedRing Ay] [StarRing Ax] [StarRing Ay] in
 theorem petzReverse_apply (t : Ay) :
     petzReverse σx σyi Estar t = σx * Estar (σyi * t * σyi) * σx := rfl
 
@@ -90,9 +95,12 @@ theorem petzReverse_apply (t : Ay) :
 def petzReverseHeis : Ax →ₗ[ℂ] Ay :=
   (sandwich σyi) ∘ₗ E ∘ₗ (sandwich σx)
 
+omit [PartialOrder Ax] [PartialOrder Ay] [StarModule ℂ Ax] [StarModule ℂ Ay] [StarOrderedRing Ax]
+  [StarOrderedRing Ay] [StarRing Ax] [StarRing Ay] in
 theorem petzReverseHeis_apply (a : Ax) :
     petzReverseHeis σx σyi E a = σyi * E (σx * a * σx) * σyi := rfl
 
+omit [StarModule ℂ Ax] [StarModule ℂ Ay] [StarOrderedRing Ax] [StarOrderedRing Ay] in
 /-- **`prop:branchwise-petz-reference-renewal` (CP)**: the reversal
 of a CP branch is a CP branch — a composition of the two sandwich
 congruences with the CP trace adjoint. -/
@@ -105,6 +113,8 @@ theorem petzReverse_cp (hσx : star σx = σx) (hσyi : star σyi = σyi)
     sandwich_cp_self σx hσx
   exact IsCPBranchMap.comp (IsCPBranchMap.comp h1 hE) h2
 
+omit [PartialOrder Ax] [PartialOrder Ay] [StarModule ℂ Ax] [StarModule ℂ Ay] [StarOrderedRing Ax]
+  [StarOrderedRing Ay] [StarRing Ax] [StarRing Ay] in
 /-- **`prop:branchwise-petz-reference-renewal` (exact trace
 scaling)**: `Tr ℰ^←(τ) = w Tr τ` for every `τ` — reference renewal
 `ℰ(ρ_x) = w ρ_y` plus the trace pairing.  Trace-nonincrease for
@@ -136,6 +146,8 @@ theorem petzReverse_trace
         noncomm_ring
     _ = τy t := by rw [hσy2, mul_one]
 
+omit [PartialOrder Ax] [PartialOrder Ay] [StarModule ℂ Ax] [StarModule ℂ Ay] [StarOrderedRing Ax]
+  [StarOrderedRing Ay] [StarRing Ax] [StarRing Ay] in
 /-- **`prop:branchwise-petz-reference-renewal`
 (trace-nonincreasing)**: for `0 < w ≤ 1` the reversed branch does
 not increase the trace of any density with real nonnegative
@@ -157,6 +169,8 @@ theorem petzReverse_trace_le
     push_cast
     ring
 
+omit [PartialOrder Ax] [PartialOrder Ay] [StarModule ℂ Ax] [StarModule ℂ Ay] [StarOrderedRing Ax]
+  [StarOrderedRing Ay] [StarRing Ax] [StarRing Ay] in
 /-- **`prop:branchwise-petz-reference-renewal` (adjoint pairing)**:
 `Γ_{ρ_y}^{-1} ∘ ℰ ∘ Γ_{ρ_x}` is the trace adjoint of the reversal,
 `Tr_x(ℰ^←(τ) a) = Tr_y(τ (ℰ^←)^*(a))`. -/
@@ -183,6 +197,8 @@ theorem petzReverse_pairing
   congr 1
   noncomm_ring
 
+omit [PartialOrder Ax] [PartialOrder Ay] [StarModule ℂ Ax] [StarModule ℂ Ay] [StarOrderedRing Ax]
+  [StarOrderedRing Ay] [StarRing Ax] [StarRing Ay] in
 /-- **`prop:branchwise-petz-reference-renewal` (adjoint unit
 value)**: `(ℰ^←)^*(1_x) = w 1_y`. -/
 theorem petzReverseHeis_unit
@@ -197,6 +213,8 @@ theorem petzReverseHeis_unit
         noncomm_ring
     _ = 1 := by rw [hσy1, hσy2, one_mul]
 
+omit [PartialOrder Ax] [PartialOrder Ay] [StarModule ℂ Ax] [StarModule ℂ Ay] [StarOrderedRing Ax]
+  [StarOrderedRing Ay] [StarRing Ax] [StarRing Ay] in
 /-- **`prop:branchwise-petz-reference-renewal` (reverse renewal
 iff)**: `ℰ^←(ρ_y) = w ρ_x` if and only if `ℰ^*(1_y) = w 1_x`. -/
 theorem petzReverse_renewal_iff
@@ -226,6 +244,8 @@ theorem petzReverse_renewal_iff
     rw [petzReverse_apply, hu, h, mul_smul_comm, smul_mul_assoc,
       mul_one]
 
+omit [PartialOrder Ax] [PartialOrder Ay] [StarModule ℂ Ax] [StarModule ℂ Ay] [StarOrderedRing Ax]
+  [StarOrderedRing Ay] [StarRing Ax] [StarRing Ay] in
 /-- **`prop:branchwise-petz-reference-renewal` (involutivity)**:
 reversing the reversed branch (with its established adjoint
 `petzReverseHeis`, the roles of `x` and `y` exchanged) recovers the
@@ -236,7 +256,7 @@ theorem petzReverse_involutive
     petzReverse σy σxi (petzReverseHeis σx σyi E) = E := by
   apply LinearMap.ext
   intro a
-  show σy * (σyi * E (σx * (σxi * a * σxi) * σx) * σyi) * σy = E a
+  change σy * (σyi * E (σx * (σxi * a * σxi) * σx) * σyi) * σy = E a
   have h1 : σx * (σxi * a * σxi) * σx = a := by
     calc σx * (σxi * a * σxi) * σx = (σx * σxi) * a * (σxi * σx) := by
           noncomm_ring
@@ -246,6 +266,9 @@ theorem petzReverse_involutive
         noncomm_ring
     _ = E a := by rw [hσy1, hσy2, one_mul, mul_one]
 
+omit [PartialOrder Ax] [PartialOrder Ay] [PartialOrder Az] [StarModule ℂ Ax] [StarModule ℂ Ay]
+  [StarModule ℂ Az] [StarOrderedRing Ax] [StarOrderedRing Ay] [StarOrderedRing Az] [StarRing Ax]
+  [StarRing Ay] [StarRing Az] in
 /-- **`prop:branchwise-petz-reference-renewal` (contravariant
 composition)**: for composable branches `ℰ : x → y` and `𝓕 : y → z`
 (composite adjoint `ℰ^* ∘ 𝓕^*`), the reversal composes
@@ -257,7 +280,7 @@ theorem petzReverse_comp (Fstar : Az →ₗ[ℂ] Ay) (σzi : Az)
           (petzReverse σy σzi Fstar) := by
   apply LinearMap.ext
   intro t
-  show σx * Estar (Fstar (σzi * t * σzi)) * σx
+  change σx * Estar (Fstar (σzi * t * σzi)) * σx
     = σx * Estar (σyi * (σy * Fstar (σzi * t * σzi) * σy) * σyi) * σx
   have h : σyi * (σy * Fstar (σzi * t * σzi) * σy) * σyi
       = Fstar (σzi * t * σzi) := by

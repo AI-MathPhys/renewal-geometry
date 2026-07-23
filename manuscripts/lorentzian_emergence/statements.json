@@ -30,7 +30,7 @@
       "NCG.RenewalMemory.acc",
       "NCG.RenewalMemory.quotientEquivRange"
     ],
-    "note": "unit group = Mathlib Units of UCPMap AUDIT-2026-07-21: the Lean unit group (Mathlib Units of UCPMap) quantifies inverses over all UCP maps; the text's U_pred requires the inverse to lie in M_pred — a priori different unit notions (harmless for thm:predictive-unit)."
+    "note": "unit group = Mathlib Units of UCPMap Scope: the Lean unit group (Mathlib Units of UCPMap) quantifies inverses over all UCP maps; the text's U_pred requires the inverse to lie in M_pred — a priori different unit notions (harmless for thm:predictive-unit)."
   },
   "thm:predictive-unit": {
     "env": "theorem",
@@ -67,7 +67,7 @@
       "NCG.comm_unbounded_of_unbounded_increments",
       "NCG.theta_summable"
     ],
-    "note": "on the dense finitely supported core: fibre bound B gives |Sf|^2 <= B |f|^2 (Cauchy-Schwarz over fibres + fibre partition), the fibre indicator attains it (norm^2 = sup fibre), and unbounded fibres defeat every bound; the lp2 completion packaging is the noted step AUDIT-2026-07-21: additionally unformalized: the unbounded-increment/commutator alternative (2b) for every bi-Lipschitz reparametrisation, and the theta-summability / finitely-summable-iff-polynomial-growth clauses of alternative (1). AUDIT-2026-07-21 UPDATE: alternative (2b) is now formalized — comm_unbounded_of_unbounded_increments proves that an unbounded Lambda_min-increment makes [f(D_CP), S] unbounded for every bi-Lipschitz-below reparametrisation f, and l2normSq_comm_le gives the regular-case commutator bound of (1). Remaining gap of this record: the theta-summability and finitely-summable-iff-polynomial-growth clauses of alternative (1). AUDIT-2026-07-22: the theta-summability clause is now proved — NCG.theta_summable (ZetaAbscissa.lean): under a geometric channel-count bound N(n) <= B^n (the finite-alphabet word count) the Gaussian heat trace sum e^{-t Lambda^2} is finite for every t > 0, via the threshold estimate (B e^{-tn})^n <= e^{-n} beyond n0 = ceil((log B + 1)/t) and the geometric tail."
+    "note": "on the dense finitely supported core: fibre bound B gives |Sf|^2 <= B |f|^2 (Cauchy-Schwarz over fibres + fibre partition), the fibre indicator attains it (norm^2 = sup fibre), and unbounded fibres defeat every bound; the lp2 completion packaging is the noted step Scope: additionally unformalized: the unbounded-increment/commutator alternative (2b) for every bi-Lipschitz reparametrisation, and the theta-summability / finitely-summable-iff-polynomial-growth clauses of alternative (1). Scope: alternative (2b) is formalized — comm_unbounded_of_unbounded_increments proves that an unbounded Lambda_min-increment makes [f(D_CP), S] unbounded for every bi-Lipschitz-below reparametrisation f, and l2normSq_comm_le gives the regular-case commutator bound of (1). Remaining gap of this record: the theta-summability and finitely-summable-iff-polynomial-growth clauses of alternative (1). Scope: the theta-summability clause is proved — NCG.theta_summable (ZetaAbscissa.lean): under a geometric channel-count bound N(n) <= B^n (the finite-alphabet word count) the Gaussian heat trace sum e^{-t Lambda^2} is finite for every t > 0, via the threshold estimate (B e^{-tn})^n <= e^{-n} beyond n0 = ceil((log B + 1)/t) and the geometric tail."
   },
   "cor:sharp-existence": {
     "status": "proved",
@@ -81,7 +81,8 @@
       "NCG.RenewalMemory.zeta_eq_top_of_channelCount_lower",
       "NCG.theta_summable"
     ],
-    "note": "AUDIT-2026-07-21 RE-EARNED: both conjuncts of the boxed iff are now anchored. Fibre conjunct: l2normSq_shiftOp_le (bounded) + shiftOp_unbounded_of_unbounded_fibres (unbounded). Increment conjunct (previously missing): diagOp_comm_shiftOp_eq factors [D,S] = S . diag(d.s - d), giving l2normSq_comm_le (bounded increments + bounded fibres => commutator bounded, |[D,S]f|^2 <= B C^2 |f|^2) and comm_unbounded_of_unbounded_increments (unbounded increments defeat every bound for EVERY bi-Lipschitz-below reparametrisation f(D) of the length diagonal; with f = id this is also the converse direction: bounded commutators force bounded increments). The second box (failure dichotomy) is the disjunction of the two unbounded-half lemmas. Proved on the finsupp core per the disclosed lp2/adjoint packaging convention; the trailing summability sentence (theta-summable, finitely summable iff N_CP polynomial) is the counting-level content tracked under thm:weyl-law / thm:commuting and remains outside this record's anchors. AUDIT-2026-07-22: the finitely-summable-iff-polynomial-growth clause is now carried by the proved zeta-abscissa theorems (RenewalMemory.zeta_lt_top_of_channelCount_growth / zeta_eq_top_of_channelCount_lower); the remaining disclosed clause of the summability sentence is theta-summability (exponential-weight trace bound), a strictly weaker statement following from the finite-alphabet count. AUDIT-2026-07-22: the theta-summability clause is now proved — NCG.theta_summable (ZetaAbscissa.lean): under a geometric channel-count bound N(n) <= B^n (the finite-alphabet word count) the Gaussian heat trace sum e^{-t Lambda^2} is finite for every t > 0, via the threshold estimate (B e^{-tn})^n <= e^{-n} beyond n0 = ceil((log B + 1)/t) and the geometric tail."
+    "note": "Proved: both conjuncts of the boxed iff are anchored. Fibre conjunct: l2normSq_shiftOp_le (bounded) + shiftOp_unbounded_of_unbounded_fibres (unbounded). Increment conjunct: diagOp_comm_shiftOp_eq factors [D,S] = S . diag(d.s - d), giving l2normSq_comm_le (bounded increments + bounded fibres => commutator bounded, |[D,S]f|^2 <= B C^2 |f|^2) and comm_unbounded_of_unbounded_increments (unbounded increments defeat every bound for EVERY bi-Lipschitz-below reparametrisation f(D) of the length diagonal; with f = id this is also the converse direction: bounded commutators force bounded increments). The second box (failure dichotomy) is the disjunction of the two unbounded-half lemmas. Proved on the finsupp core per the disclosed lp2/adjoint packaging convention; the trailing summability sentence (theta-summable, finitely summable iff N_CP polynomial) is the counting-level content tracked under thm:weyl-law / thm:commuting and remains outside this record's anchors. The finitely-summable-iff-polynomial-growth clause is carried by the zeta-abscissa theorems (RenewalMemory.zeta_lt_top_of_channelCount_growth / zeta_eq_top_of_channelCount_lower); the theta-summability clause is proved — NCG.theta_summable (ZetaAbscissa.lean): under a geometric channel-count bound N(n) <= B^n (the finite-alphabet word count) the Gaussian heat trace sum e^{-t Lambda^2} is finite for every t > 0, via the threshold estimate (B e^{-tn})^n <= e^{-n} beyond n0 = ceil((log B + 1)/t) and the geometric tail.",
+    "env": "corollary"
   },
   "thm:triple": {
     "env": "theorem",
@@ -98,7 +99,7 @@
       "NCG.RenewalMemory.zeta_lt_top_of_channelCount_growth",
       "NCG.RenewalMemory.zeta_eq_top_of_channelCount_lower"
     ],
-    "note": "all four spectral-triple pillars proved on the core: bounded represented shifts (fibre dichotomy), the commutator formula [D, S]e_w = (Lambda(sw)-Lambda(w)) e_sw with bounded increments, finite length shells (compact-resolvent input), and positive diagonal D; the lp2/adjoint packaging is the noted step AUDIT-2026-07-21: conclusion (b) — the Dirichlet-series abscissa identity abscissa(zeta_CP) = q_alg — is unformalized (algebraicDimension only defines the limsup); the four operator pillars of (a) are proved on the finsupp core as disclosed. AUDIT-2026-07-22: conclusion (b) is now PROVED — ZetaAbscissa.lean gives the two-sided abscissa characterization: zetaSum_lt_top_of_growth (dyadic-block + geometric estimate: N(R) <= C R^a forces convergence for every s > a) and zetaSum_eq_top_of_growth_lower (shell partial sums force divergence for every 0 <= s < a when N reaches R^a infinitely often), instantiated for the predictive quotient as RenewalMemory.zeta_lt_top_of_channelCount_growth / zeta_eq_top_of_channelCount_lower over the positive length spectrum (kernel modes split off by channelCount_split). The abscissa of zeta_CP is therefore exactly the polynomial growth exponent of N_CP, i.e. q_alg."
+    "note": "all four spectral-triple pillars proved on the core: bounded represented shifts (fibre dichotomy), the commutator formula [D, S]e_w = (Lambda(sw)-Lambda(w)) e_sw with bounded increments, finite length shells (compact-resolvent input), and positive diagonal D; the lp2/adjoint packaging is the noted step Scope: conclusion (b) — the Dirichlet-series abscissa identity abscissa(zeta_CP) = q_alg — is unformalized (algebraicDimension only defines the limsup); the four operator pillars of (a) are proved on the finsupp core as disclosed. Scope: conclusion (b) is Proved — ZetaAbscissa.lean gives the two-sided abscissa characterization: zetaSum_lt_top_of_growth (dyadic-block + geometric estimate: N(R) <= C R^a forces convergence for every s > a) and zetaSum_eq_top_of_growth_lower (shell partial sums force divergence for every 0 <= s < a when N reaches R^a infinitely often), instantiated for the predictive quotient as RenewalMemory.zeta_lt_top_of_channelCount_growth / zeta_eq_top_of_channelCount_lower over the positive length spectrum (kernel modes split off by channelCount_split). The abscissa of zeta_CP is therefore exactly the polynomial growth exponent of N_CP, i.e. q_alg."
   },
   "def:qalg": {
     "env": "definition",
@@ -205,7 +206,7 @@
       "NCG.IsFundamentalSymmetry.eq_one_or_neg_one_of_mem_centralizer",
       "NCG.exchange_iff_step"
     ],
-    "note": "; this statement absorbed the former label cor:cp-positivity-boundary (now removed from the manuscript; its record's pillars are cited here)"
+    "note": "Proved via the cited Krein positivity-obstruction pillars (see the lean anchors)."
   },
   "def:fixed-enrichment": {
     "env": "definition",
@@ -214,7 +215,7 @@
     "lean": [
       "NCG.Multigraph.EnrichmentDatum"
     ],
-    "note": "AUDIT NOTE: the manuscript's definition is the general, variable-rank notion of an enrichment over G (an arbitrary-rank Hermitian local system with general unitary transports and involutions), with 'objectwise minimal' defined afterward via a rank-minimization comparison. NCG.Multigraph.EnrichmentDatum := G.E -> ZMod 2 encodes only the ALREADY rank-2/sheet-trivialized object -- the general variable-rank definition is not formalized at all. (The prior justification citing 'the rank-two reduction' is itself unsound: see lem:minimal-rank-two, which assumes rather than derives rank 2.)"
+    "note": "Note: the manuscript's definition is the general, variable-rank notion of an enrichment over G (an arbitrary-rank Hermitian local system with general unitary transports and involutions), with 'objectwise minimal' defined afterward via a rank-minimization comparison. NCG.Multigraph.EnrichmentDatum := G.E -> ZMod 2 encodes only the ALREADY rank-2/sheet-trivialized object -- the general variable-rank definition is not formalized at all. (The prior justification citing 'the rank-two reduction' is itself unsound: see lem:minimal-rank-two, which assumes rather than derives rank 2.)"
   },
   "def:fixed-gauge": {
     "env": "definition",
@@ -234,7 +235,7 @@
     "lean": [
       "NCG.conePositive_perm"
     ],
-    "note": "cone automorphisms send basis rays to basis rays (extreme-ray classification); norm preservation forces unit scalars AUDIT-2026-07-21: Lean is the single-space real model (norm-preserving R-linear automorphism of Fin n -> R preserving the orthant); the text's unitary between two complex Hermitian fibres and the phase-elimination step are not encoded."
+    "note": "cone automorphisms send basis rays to basis rays (extreme-ray classification); norm preservation forces unit scalars Scope: Lean is the single-space real model (norm-preserving R-linear automorphism of Fin n -> R preserving the orthant); the text's unitary between two complex Hermitian fibres and the phase-elimination step are not encoded."
   },
   "lem:minimal-rank-two": {
     "env": "lemma",
@@ -244,7 +245,7 @@
       "NCG.structure_group_rank_two",
       "NCG.conePositive_perm"
     ],
-    "note": "AUDIT CORRECTION: structure_group_rank_two proves the structure-group reduction ({I,S}) CONDITIONAL on rank 2 -- it takes T on a hardcoded Fin 2 -> Fin 2 domain, i.e. it ASSUMES rank 2 rather than deriving it. The manuscript lemma's other half -- that fibrewise-indefinite enrichments need rank >= 2 in general, and that objectwise-minimal enrichments must have rank EXACTLY 2 -- is not formalized anywhere; no variable-rank enrichment structure is even defined in the repository."
+    "note": "Scope: structure_group_rank_two proves the structure-group reduction ({I,S}) CONDITIONAL on rank 2 -- it takes T on a hardcoded Fin 2 -> Fin 2 domain, i.e. it ASSUMES rank 2 rather than deriving it. The manuscript lemma's other half -- that fibrewise-indefinite enrichments need rank >= 2 in general, and that objectwise-minimal enrichments must have rank EXACTLY 2 -- is not formalized anywhere; no variable-rank enrichment structure is even defined in the repository."
   },
   "lem:two-cochains-one-class": {
     "env": "lemma",
@@ -276,7 +277,8 @@
       "NCG.Multigraph.EnrichmentDatum.classification_natural",
       "NCG.Multigraph.EnrichmentDatum.classesPullback_comp"
     ],
-    "note": "AUDIT-2026-07-21 RE-EARNED (EnrichmentMinimality.lean): the step previously baked into the encoding is now DERIVED from a variable-rank input. MinimalEnrichmentData carries fibres of arbitrary finite rank with diagonal +-1 signs, fibrewise indefiniteness, objectwise minimality, and cone-positive norm-preserving transports; rank_eq_two forces rank exactly two (indefiniteness => rank >= 2, minimality => = 2), sign_diag forces J_x = +-diag(1,-1), conePositive_bij (two-space cone rigidity, extending lem:cone-positive-permutation) carries basis to basis, perm_fin_two_cases reduces the structure group to {I,S} = Z/2, and exists_transition_cochain extracts the Z/2 transition cochain — exactly an EnrichmentDatum, through which classificationEquiv and card_enrichmentClasses give the boxed pi_0 = H^1(G,Z/2) = (Z/2)^{b_1}. Remaining disclosed gap: the contravariant-naturality sentence (functoriality of the bijection under renewal isomorphisms) is not separately formalized. AUDIT-2026-07-22: the naturality rider is now proved — EnrichmentNaturality.lean: cochain pullback along a graph morphism carries coboundaries to coboundaries (cochainPullback_coboundary, via src/tgt compatibility), inducing pullbacks on gauge classes and on H1; classification_natural shows the classification square commutes and classesPullback_comp / H1Pullback_comp give contravariant functoriality. No disclosed gaps remain on this record."
+    "note": "Proved (EnrichmentMinimality.lean): the rank-two/cochain reduction is derived from a variable-rank input. MinimalEnrichmentData carries fibres of arbitrary finite rank with diagonal +-1 signs, fibrewise indefiniteness, objectwise minimality, and cone-positive norm-preserving transports; rank_eq_two forces rank exactly two (indefiniteness => rank >= 2, minimality => = 2), sign_diag forces J_x = +-diag(1,-1), conePositive_bij (two-space cone rigidity, extending lem:cone-positive-permutation) carries basis to basis, perm_fin_two_cases reduces the structure group to {I,S} = Z/2, and exists_transition_cochain extracts the Z/2 transition cochain — exactly an EnrichmentDatum, through which classificationEquiv and card_enrichmentClasses give the boxed pi_0 = H^1(G,Z/2) = (Z/2)^{b_1}. The naturality rider is proved — EnrichmentNaturality.lean: cochain pullback along a graph morphism carries coboundaries to coboundaries (cochainPullback_coboundary, via src/tgt compatibility), inducing pullbacks on gauge classes and on H1; classification_natural shows the classification square commutes and classesPullback_comp / H1Pullback_comp give contravariant functoriality. No disclosed gaps remain on this record.",
+    "env": "theorem"
   },
   "cor:sector-count": {
     "env": "corollary",
@@ -286,7 +288,7 @@
       "NCG.Multigraph.card_H1_of_connected",
       "NCG.Multigraph.finrank_H1_add_card_vertices"
     ],
-    "note": "AUDIT CORRECTION: the counting claim (exactly 2^{b1} gauge classes) is proved (card_H1_of_connected, finrank_H1_add_card_vertices). The manuscript's third claim -- that every nonzero class yields a CONNECTED double cover -- is NOT formalized anywhere (no theorem relates signedCover connectivity to nonvanishing of [chi])."
+    "note": "Scope: the counting claim (exactly 2^{b1} gauge classes) is proved (card_H1_of_connected, finrank_H1_add_card_vertices). The manuscript's third claim -- that every nonzero class yields a CONNECTED double cover -- is NOT formalized anywhere (no theorem relates signedCover connectivity to nonvanishing of [chi])."
   },
   "def:sign-cocycle": {
     "env": "definition",
@@ -323,7 +325,7 @@
       "NCG.edgeShift",
       "NCG.signValue"
     ],
-    "note": "AUDIT NOTE: the manuscript's definition packages three operators on the signed cover: the fundamental symmetry J_chi, the lifted quotient-length operator N (N e_(x,eta) = Lambda(x) e_(x,eta)), and the lifted shift S_e-tilde. The Lean encoding (kreinJ, edgeShift, signValue) captures only J_chi and S_e-tilde; no operator analogous to N/Lambda exists anywhere in the repository."
+    "note": "Note: the manuscript's definition packages three operators on the signed cover: the fundamental symmetry J_chi, the lifted quotient-length operator N (N e_(x,eta) = Lambda(x) e_(x,eta)), and the lifted shift S_e-tilde. The Lean encoding (kreinJ, edgeShift, signValue) captures only J_chi and S_e-tilde; no operator analogous to N/Lambda exists anywhere in the repository."
   },
   "prop:krein-datum": {
     "env": "proposition",
@@ -334,7 +336,7 @@
       "NCG.kreinJ_mul_self",
       "NCG.Multigraph.Walk.holonomy_gauge_loop"
     ],
-    "note": "AUDIT CORRECTION: the exchange relation and gauge invariance are proved (krein_exchange, holonomy_gauge_loop). kreinJ_mul_self only proves the involution half (J∘J=id) -- self-adjointness of J_chi (as an operator on an actual inner-product space) and sign-definiteness/positivity of the induced Krein form ('whenever both sheets occur') are never even stated in this file, let alone proved."
+    "note": "Scope: the exchange relation and gauge invariance are proved (krein_exchange, holonomy_gauge_loop). kreinJ_mul_self only proves the involution half (J∘J=id) -- self-adjointness of J_chi (as an operator on an actual inner-product space) and sign-definiteness/positivity of the induced Krein form ('whenever both sheets occur') are never even stated in this file, let alone proved."
   },
   "cor:removability": {
     "env": "corollary",
@@ -366,7 +368,7 @@
       "NCG.Multigraph.card_H1Z4_of_connected",
       "NCG.Multigraph.card_fibre_reduce"
     ],
-    "note": "REPAIRED (previously abstract tuples unconnected to any graph): genuine Z/4 graph cohomology is now constructed - H1Z4 G = C^1(G,Z/4)/im delta with the oriented coboundary, the coefficient reduction descends to cohomology and is SURJECTIVE (cochain-level section 0->0, 1->1), the Z/4 kernel-is-constants and pure group-order counting (no field needed) give |H^1(G,Z/4)| = 4^{b1} on every finite connected multigraph, and every fibre is a kernel coset of exact size 2^{b1} - the complete lemma, at the actual graph level"
+    "note": "genuine Z/4 graph cohomology is constructed - H1Z4 G = C^1(G,Z/4)/im delta with the oriented coboundary, the coefficient reduction descends to cohomology and is SURJECTIVE (cochain-level section 0->0, 1->1), the Z/4 kernel-is-constants and pure group-order counting (no field needed) give |H^1(G,Z/4)| = 4^{b1} on every finite connected multigraph, and every fibre is a kernel coset of exact size 2^{b1} - the complete lemma, at the actual graph level"
   },
   "thm:minimal-z4-amplitude-lift": {
     "env": "theorem",
@@ -385,7 +387,7 @@
     "lean": [
       "NCG.amplitudePhase_sq_eq_of_reduction_eq"
     ],
-    "note": "amplitude lifts with equal mod-2 reduction have equal real signed shadow: the Z/4 datum is information above the real quotient AUDIT-2026-07-21: only the phase-shadow equality (i^k)^2 is proved; invariance of the double cover, J_chi, exchange signs, and commutator polar form is a meta-claim about downstream constructions factoring through rho, unformalized."
+    "note": "amplitude lifts with equal mod-2 reduction have equal real signed shadow: the Z/4 datum is information above the real quotient Scope: only the phase-shadow equality (i^k)^2 is proved; invariance of the double cover, J_chi, exchange signs, and commutator polar form is a meta-claim about downstream constructions factoring through rho, unformalized."
   },
   "def:signed-modular-twist": {
     "env": "definition",
@@ -439,7 +441,7 @@
       "NCG.l2normSq_shiftOp_le",
       "NCG.RenewalMemory.shell_finite"
     ],
-    "note": "AUDIT CORRECTION: Krein self-adjointness, the single-generator multiplier bound, the untwisted shift ell^2 bound, and finite shells are proved. The previous note disclosed only the s-summability gap; it did not disclose a more basic, load-bearing gap -- lem:bounded-twisted's Schur-test argument establishing twisted-COMMUTATOR boundedness for GENERAL propagation-r algebra elements (not just one generator's scalar factor) is not formalized anywhere in the repository."
+    "note": "Scope: Krein self-adjointness, the single-generator multiplier bound, the untwisted shift ell^2 bound, and finite shells are proved. The previous note disclosed only the s-summability gap; it did not disclose a more basic, load-bearing gap -- lem:bounded-twisted's Schur-test argument establishing twisted-COMMUTATOR boundedness for GENERAL propagation-r algebra elements (not just one generator's scalar factor) is not formalized anywhere in the repository."
   },
   "lem:deck-odd-normal-form": {
     "env": "lemma",
@@ -449,7 +451,7 @@
       "NCG.deckOdd_diagOp_eq",
       "NCG.deckOdd_eq_sign_mul"
     ],
-    "note": "AUDIT CORRECTION: only the bare complex sign-factorization d(p) = signValue(p.2) * d(p.1,0) is proved, over an unconstrained complex-valued d with no self-adjointness hypothesis. The manuscript's further conclusions -- that h can be chosen REAL, and that trivial kernel of D_0 implies h > 0 with g = |D_0| > 0 -- are not formalized anywhere."
+    "note": "Scope: only the bare complex sign-factorization d(p) = signValue(p.2) * d(p.1,0) is proved, over an unconstrained complex-valued d with no self-adjointness hypothesis. The manuscript's further conclusions -- that h can be chosen REAL, and that trivial kernel of D_0 implies h > 0 with g = |D_0| > 0 -- are not formalized anywhere."
   },
   "lem:clock-scaling": {
     "env": "lemma",
@@ -472,7 +474,7 @@
       "NCG.signed_dirac_krein_selfadjoint",
       "NCG.clock_scaling"
     ],
-    "note": "forward direction: the orbit-propagation identity d(s^n i) = c^n d(i) is proved (exchange_orbit_pow, modular_weight_on_orbit, exp_weight_orbit), with connected-component globalization the noted H1-layer step. CORRECTION of an earlier overcorrection: the converse direction's pieces largely DO exist - signed_dirac_krein_selfadjoint proves J(J Delta + B)* J = J Delta + B (Krein self-adjointness of the candidate) and clock_scaling proves the modular exchange Delta o S = e^beta (S o Delta); what remains of the converse is assembling these into the full M1-M4 verification"
+    "note": "forward direction: the orbit-propagation identity d(s^n i) = c^n d(i) is proved (exchange_orbit_pow, modular_weight_on_orbit, exp_weight_orbit), with connected-component globalization the noted H1-layer step. Converse direction, proved pieces: signed_dirac_krein_selfadjoint proves J(J Delta + B)* J = J Delta + B (Krein self-adjointness of the candidate) and clock_scaling proves the modular exchange Delta o S = e^beta (S o Delta); what remains of the converse is assembling these into the full M1-M4 verification"
   },
   "thm:affine-modular": {
     "env": "theorem",
@@ -515,7 +517,7 @@
       "NCG.Multigraph.EnrichmentDatum.classificationEquiv",
       "NCG.diagonal_commutant"
     ],
-    "note": "AUDIT CORRECTION: same root cause as thm:reconstruction -- this corollary needs CONTRAVARIANT NATURALITY of the H^1 gauge-class classification under a graph isomorphism phi: G -> G' (i.e. that [chi] = phi*[chi'] is well-defined and functorial). NCG/Krein/EnrichmentClassification.lean's own docstring explicitly states 'contravariant naturality under renewal isomorphisms is not formalised' -- exactly the fact this corollary needs, which the previous note never surfaced."
+    "note": "Scope: same root cause as thm:reconstruction -- this corollary needs CONTRAVARIANT NATURALITY of the H^1 gauge-class classification under a graph isomorphism phi: G -> G' (i.e. that [chi] = phi*[chi'] is well-defined and functorial). NCG/Krein/EnrichmentClassification.lean's own docstring explicitly states 'contravariant naturality under renewal isomorphisms is not formalised' -- exactly the fact this corollary needs, which the previous note never surfaced."
   },
   "prop:flat-holonomy-obstruction": {
     "env": "proposition",
@@ -526,7 +528,7 @@
       "NCG.sheetShift_comm",
       "NCG.diagOp_comm"
     ],
-    "note": "flat sector operators multiply as the commutative group algebra AUDIT-2026-07-21: the topological premise chain (H^2(G,Z/2) = 0 for a 1-complex; triviality of cup-product/commutator 2-cell twists) is informal; the commutative multiplication law is what is proved."
+    "note": "flat sector operators multiply as the commutative group algebra Scope: the topological premise chain (H^2(G,Z/2) = 0 for a 1-complex; triviality of cup-product/commutator 2-cell twists) is informal; the commutative multiplication law is what is proved."
   },
   "def:realized-reversible-subgroup": {
     "env": "definition",
@@ -547,7 +549,8 @@
       "NCG.realizedSubgroup",
       "NCG.mem_realizedSubgroup"
     ],
-    "note": "AUDIT-2026-07-21 RE-EARNED (SheetRealization.lean): the closure facts are now DERIVED, not assumed as structure fields. In the cover model a class alpha is realized when some unit f of the given group S (the predictive units preserving the recurrent algebra and clock) is a lift over a base automorphism with sheet action alpha (IsLiftOver). isLiftOver_refl/comp/inv prove that the identity realizes 0, composites realize sums (sheet shifts ADD under composition — computed), and inverses realize negatives; realizedSubgroup packages K_rev <= H as an AddSubgroup. The old RealizedReversibleData field-bundling is superseded."
+    "note": "Proved (SheetRealization.lean): the closure facts are DERIVED, not assumed as structure fields. In the cover model a class alpha is realized when some unit f of the given group S (the predictive units preserving the recurrent algebra and clock) is a lift over a base automorphism with sheet action alpha (IsLiftOver). isLiftOver_refl/comp/inv prove that the identity realizes 0, composites realize sums (sheet shifts ADD under composition — computed), and inverses realize negatives; realizedSubgroup packages K_rev <= H as an AddSubgroup. The old RealizedReversibleData field-bundling is superseded.",
+    "env": "lemma"
   },
   "lem:cycle-krein-exchange": {
     "env": "lemma",
@@ -557,7 +560,7 @@
       "NCG.krein_exchange_path",
       "NCG.holonomy_eq_edge_sign_sum"
     ],
-    "note": "AUDIT CORRECTION: the boxed exchange formula is proved for one FIXED walk/edge-list (krein_exchange_path, holonomy_eq_edge_sign_sum). The manuscript's second conclusion -- 'the sign depends only on the cohomology-homology pairing and NOT on the chosen cycle representative' -- is not formalized: there is no Lean notion of a cycle CLASS as an equivalence class of walks, and no lemma shows two different walks representing the same homology class give the same holonomy (Walk.holonomy_gauge_loop proves the dual statement: invariance under changing the gauge for a FIXED loop)."
+    "note": "Scope: the boxed exchange formula is proved for one FIXED walk/edge-list (krein_exchange_path, holonomy_eq_edge_sign_sum). The manuscript's second conclusion -- 'the sign depends only on the cohomology-homology pairing and NOT on the chosen cycle representative' -- is not formalized: there is no Lean notion of a cycle CLASS as an equivalence class of walks, and no lemma shows two different walks representing the same homology class give the same holonomy (Walk.holonomy_gauge_loop proves the dual statement: invariance under changing the gauge for a FIXED loop)."
   },
   "thm:canonical-temporal-row": {
     "env": "theorem",
@@ -566,7 +569,7 @@
     "lean": [
       "NCG.krein_exchange_path"
     ],
-    "note": "AUDIT CORRECTION: krein_exchange_path proves the exchange sign only for the literal composite shift S_alpha (pathShift). The theorem's actual generality claim -- that the sign is forced for ANY clock-preserving revision operator R_alpha whose sheet action matches alpha, via commutativity of its separate internal/base-preserving factors with J_chi -- is not formalized; no Lean definition of a general dressed revision operator with such factors exists for this record."
+    "note": "Scope: krein_exchange_path proves the exchange sign only for the literal composite shift S_alpha (pathShift). The theorem's actual generality claim -- that the sign is forced for ANY clock-preserving revision operator R_alpha whose sheet action matches alpha, via commutativity of its separate internal/base-preserving factors with J_chi -- is not formalized; no Lean definition of a general dressed revision operator with such factors exists for this record."
   },
   "cor:canonical-hyperbolic-core": {
     "env": "corollary",
@@ -579,7 +582,7 @@
       "NCG.rank2Form_hyperbolic_pair",
       "NCG.stdSymplectic_nondegenerate"
     ],
-    "note": "nontrivial [chi] yields a sector pairing 1 with t (proved), and the restricted commutator form is the standard rank-two alternating form: nondegenerate, alternating, with hyperbolic pair (t, alpha_0) (proved); the identification of its twisted group algebra with Cl_2(C) = M_2(C) is the noted Wedderburn step AUDIT-2026-07-21: rank2Form is a free-standing model form on (ZMod 2)^2 verified by decide; no Lean statement identifies it with the restriction of the derived commutator form omega to <t, alpha_0>; exists_pairing_one is the trivial ZMod 2 fact."
+    "note": "nontrivial [chi] yields a sector pairing 1 with t (proved), and the restricted commutator form is the standard rank-two alternating form: nondegenerate, alternating, with hyperbolic pair (t, alpha_0) (proved); the identification of its twisted group algebra with Cl_2(C) = M_2(C) is the noted Wedderburn step Scope: rank2Form is a free-standing model form on (ZMod 2)^2 verified by decide; no Lean statement identifies it with the restriction of the derived commutator form omega to <t, alpha_0>; exists_pairing_one is the trivial ZMod 2 fact."
   },
   "prop:flat-spatial-block-zero": {
     "env": "proposition",
@@ -588,7 +591,7 @@
     "lean": [
       "NCG.sheetShift_comm"
     ],
-    "note": "AUDIT-2026-07-21: the Lean sheet-shift model fixes the base point; the recurrent base transport of R_alpha = S~_alpha is dropped rather than hypothesized (the text's own proof assigns it no phase)."
+    "note": "Scope: the Lean sheet-shift model fixes the base point; the recurrent base transport of R_alpha = S~_alpha is dropped rather than hypothesized (the text's own proof assigns it no phase)."
   },
   "thm:reversible-predictive-revision": {
     "env": "theorem",
@@ -683,7 +686,7 @@
       "NCG.RevisionFamily.commutator_eq",
       "NCG.regauge_polar_invariant"
     ],
-    "note": "commutator bicharacter = eps^omega, alternating bilinear, invariant under scalar regauging (symmetric coboundary cancels) AUDIT-2026-07-21: bilinearity/alternation are proved elsewhere in the library (commutator_R_add_left, commutator_R_self, polar_alt) but are not anchored here; the affine q-shift under rephasing is unformalized."
+    "note": "commutator bicharacter = eps^omega, alternating bilinear, invariant under scalar regauging (symmetric coboundary cancels) Scope: bilinearity/alternation are proved elsewhere in the library (commutator_R_add_left, commutator_R_self, polar_alt) but are not anchored here; the affine q-shift under rephasing is unformalized."
   },
   "cor:revision-z4-square-root": {
     "env": "corollary",
@@ -704,7 +707,7 @@
       "NCG.commutator_R_sq_eq_one",
       "NCG.commutator_R_eq_defect_ratio"
     ],
-    "note": "AUDIT-2026-07-21: the section-independence clause is carried by regauge_polar_invariant (anchored under a different record), not by this record's anchors."
+    "note": "Scope: the section-independence clause is carried by regauge_polar_invariant (anchored under a different record), not by this record's anchors."
   },
   "def:primitive-reduction": {
     "env": "definition",
@@ -770,7 +773,7 @@
       "NCG.Multigraph.deck_transitive_on_fibre",
       "NCG.Multigraph.liftWalk"
     ],
-    "note": "recurrent loops act transitively on each two-point sheet fibre via the lift monodromy; the maximal-cover/tautological holonomy packaging informal AUDIT-2026-07-21: deck_transitive_on_fibre is the two-point fibre exhaustion {p, deck p}; transitivity of recurrent first-return loops under tautological holonomy is not assembled in Lean (the loop-lifts-to-sheet-swap glue via liftWalk is not stated under a surjectivity hypothesis)."
+    "note": "recurrent loops act transitively on each two-point sheet fibre via the lift monodromy; the maximal-cover/tautological holonomy packaging informal Scope: deck_transitive_on_fibre is the two-point fibre exhaustion {p, deck p}; transitivity of recurrent first-return loops under tautological holonomy is not assembled in Lean (the loop-lifts-to-sheet-swap glue via liftWalk is not stated under a surjectivity hypothesis)."
   },
   "cor:double-ergodicity-derived": {
     "env": "corollary",
@@ -806,7 +809,7 @@
       "NCG.card_radical_characters",
       "NCG.even_finrank_of_isAlt_nondegenerate"
     ],
-    "note": "the projective law is DERIVED: revisionFamilyOfDefect constructs the RevisionFamily from primitive implementer data - same-conjugation gives central defects (Schur step, proved), central defects satisfy the cocycle identity (proved), and given the scalar-centre input (each central defect in {1, eps} - the finite-factor step) the multiplicative law hmul follows from projDefect_spec. REMAINING: besides the scalar-centre input, the theorem's headline identification A_rev^prim = Cl_{1+d}(C) = M_{2^m}(C) and the uniqueness-up-to-unitary-equivalence clause are delegated to thm:primitivity-canonical (formerly also labelled thm:rank-criterion-main) and thm:factor-quotients-corrected, whose Wedderburn/matrix-type identifications remain informal per those records"
+    "note": "the projective law is DERIVED: revisionFamilyOfDefect constructs the RevisionFamily from primitive implementer data - same-conjugation gives central defects (Schur step, proved), central defects satisfy the cocycle identity (proved), and given the scalar-centre input (each central defect in {1, eps} - the finite-factor step) the multiplicative law hmul follows from projDefect_spec. REMAINING: besides the scalar-centre input, the theorem's headline identification A_rev^prim = Cl_{1+d}(C) = M_{2^m}(C) and the uniqueness-up-to-unitary-equivalence clause are delegated to thm:primitivity-canonical and thm:factor-quotients-corrected, whose Wedderburn/matrix-type identifications remain informal per those records"
   },
   "cor:full-access-revision-phase": {
     "env": "corollary",
@@ -828,7 +831,7 @@
       "NCG.RevisionFamily.commutator_eq",
       "NCG.clifford_square"
     ],
-    "note": "REPAIRED: the scalar projective law is now genuinely derived (revisionFamilyOfDefect_hmul) rather than a structure input, so 'neither the projective law nor the commutator form is an additional hypothesis' is now accurate modulo the named scalar-centre input; the explicit graded representative and primitive matrix type identification remain the noted Wedderburn steps"
+    "note": "REPAIRED: the scalar projective law is genuinely derived (revisionFamilyOfDefect_hmul) rather than a structure input, so 'neither the projective law nor the commutator form is an additional hypothesis' is accurate modulo the named scalar-centre input; the explicit graded representative and primitive matrix type identification remain the noted Wedderburn steps"
   },
   "lem:graded-clifford-form": {
     "env": "lemma",
@@ -853,7 +856,7 @@
       "NCG.clifford_square",
       "NCG.prod_mul_prod_disjoint"
     ],
-    "note": "intrinsic pillars: the generated commutator form has Gram J - I, invertible over F2 iff the total rank is even (odd spatial rank), and the scalar commutators are shell-stable; the CP-memory packaging is constr:graded-clifford-memory AUDIT-2026-07-21: clauses (a) explicit projective law, (b) linear independence of the R_alpha, and (e) A_rev iso Cl_(1+d)(C) are unformalized; anchors cover disjoint-list exchange signs, the Gram rank dichotomy, and abstract scalar compression; gramMatrix is defined as J - I rather than computed from the generator form."
+    "note": "intrinsic pillars: the generated commutator form has Gram J - I, invertible over F2 iff the total rank is even (odd spatial rank), and the scalar commutators are shell-stable; the CP-memory packaging is constr:graded-clifford-memory Scope: clauses (a) explicit projective law, (b) linear independence of the R_alpha, and (e) A_rev iso Cl_(1+d)(C) are unformalized; anchors cover disjoint-list exchange signs, the Gram rank dichotomy, and abstract scalar compression; gramMatrix is defined as J - I rather than computed from the generator form."
   },
   "cor:graded-unconditional-minimality": {
     "env": "corollary",
@@ -864,7 +867,7 @@
       "NCG.odd_spatial_rank_of_isAlt_nondegenerate",
       "NCG.gramMatrix_not_isUnit_of_odd"
     ],
-    "note": "AUDIT CORRECTION: '2+1 is impossible' and the rank-parity dichotomy are proved. The corollary's third listed claim -- '1+1 is spatially degenerate' -- is not covered by any cited lemma (none of them touch NCG.SpatiallyNondegenerate); the previous note also silently dropped the essential 'spatially' qualifier, reading as if algebraic nondegeneracy alone singles out 3+1, which is false given the manuscript's own d=1 algebraically-nondegenerate-but-spatially-degenerate counterexample."
+    "note": "Scope: '2+1 is impossible' and the rank-parity dichotomy are proved. The corollary's third listed claim -- '1+1 is spatially degenerate' -- is not covered by any cited lemma (none of them touch NCG.SpatiallyNondegenerate); the previous note also silently dropped the essential 'spatially' qualifier, reading as if algebraic nondegeneracy alone singles out 3+1, which is false given the manuscript's own d=1 algebraically-nondegenerate-but-spatially-degenerate counterexample."
   },
   "def:spatially-nondegenerate": {
     "env": "definition",
@@ -890,7 +893,7 @@
       "NCG.not_spatiallyNondegenerate_one",
       "NCG.three_le_of_odd_nondegenerate"
     ],
-    "note": "parts (i)-(ii) (odd spatial rank, no 2+1) proved by the parity/rank lemmas. CORRECTION of an earlier overcorrection: parts (iii)-(iv) ARE covered piecewise - primitive_all_odd gives the nondegenerate alternating form in every odd rank (d=1 included), not_spatiallyNondegenerate_one proves d=1 spatially degenerate, and three_le_of_odd_nondegenerate proves d=3 is the first spatially nondegenerate odd rank (with SpatiallyNondegenerate := 2 <= d encoding the manuscript's Lambda^2 V != 0). No single Lean theorem conjoins them, but each enumerated fact is proved; the manuscript's explicit no-access-principle scoping is respected (none of these use the access machinery)"
+    "note": "parts (i)-(ii) (odd spatial rank, no 2+1) proved by the parity/rank lemmas. Parts (iii)-(iv) are covered piecewise: primitive_all_odd gives the nondegenerate alternating form in every odd rank (d=1 included), not_spatiallyNondegenerate_one proves d=1 spatially degenerate, and three_le_of_odd_nondegenerate proves d=3 is the first spatially nondegenerate odd rank (with SpatiallyNondegenerate := 2 <= d encoding the manuscript's Lambda^2 V != 0). No single Lean theorem conjoins them, but each enumerated fact is proved; the manuscript's explicit no-access-principle scoping is respected (none of these use the access machinery)"
   },
   "prop:primitive-all-odd": {
     "env": "proposition",
@@ -902,7 +905,7 @@
       "NCG.stdSymplectic_nondegenerate",
       "NCG.Multigraph.finrank_H1_bouquet"
     ],
-    "note": "standard symplectic form in every even dimension; bouquet realises every b1 (Cohomology) AUDIT-2026-07-21: the asserted modular revision datum (twisted group algebra / finite Heisenberg representation realizing the form as a commutator bicharacter) is not constructed; anchors supply the nondegenerate alternating form and the bouquet b_1 = d only."
+    "note": "standard symplectic form in every even dimension; bouquet realises every b1 (Cohomology) Scope: the asserted modular revision datum (twisted group algebra / finite Heisenberg representation realizing the form as a commutator bicharacter) is not constructed; anchors supply the nondegenerate alternating form and the bouquet b_1 = d only."
   },
   "prop:forced-timelike-generator": {
     "env": "proposition",
@@ -922,7 +925,7 @@
       "NCG.forced_timelike_generator",
       "NCG.even_finrank_primitiveQuotient"
     ],
-    "note": "the normal-form core is proved: J = diag(1,-1), R = offdiag(1,1) give the symplectic temporal block gamma^0 = [[0,1],[-1,0]] with square -1 and anticommuting pair, and the primitive quotient has the required even rank; the tensor completion by an irreducible Cl_d module and its Schur uniqueness are the noted steps AUDIT-2026-07-21: the reduction of an arbitrary anticommuting pair of Hermitian involutions to the 2x2 normal form (equal eigenspace dimensions, unitary change of basis) is unformalized; only the concrete matrix identities are proved."
+    "note": "the normal-form core is proved: J = diag(1,-1), R = offdiag(1,1) give the symplectic temporal block gamma^0 = [[0,1],[-1,0]] with square -1 and anticommuting pair, and the primitive quotient has the required even rank; the tensor completion by an irreducible Cl_d module and its Schur uniqueness are the noted steps Scope: the reduction of an arbitrary anticommuting pair of Hermitian involutions to the 2x2 normal form (equal eigenspace dimensions, unitary change of basis) is unformalized; only the concrete matrix identities are proved."
   },
   "prop:positive-averaging": {
     "env": "proposition",
@@ -932,7 +935,7 @@
       "NCG.posSemidef_sum_outer",
       "NCG.quadratic_nonneg_sum_outer"
     ],
-    "note": "AUDIT CORRECTION: only plain positive semidefiniteness is proved (posSemidef_sum_outer). The manuscript's further claims -- that spanning{v_a}=R^n implies strict positive-definiteness, and the consequent trivial null cone -- are not formalized."
+    "note": "Scope: only plain positive semidefiniteness is proved (posSemidef_sum_outer). The manuscript's further claims -- that spanning{v_a}=R^n implies strict positive-definiteness, and the consequent trivial null cone -- are not formalized."
   },
   "def:krein-clifford": {
     "env": "definition",
@@ -943,7 +946,7 @@
       "NCG.KreinCliffordDatum.gamma_dir_sq",
       "NCG.clifford_square"
     ],
-    "note": "AUDIT NOTE: the structure does not force (gamma0)^2 = -1 as a field -- that fact is proved separately and generically by NCG.forced_timelike_generator from a hyperbolic-pair hypothesis, then re-supplied as an ad hoc argument to downstream lemmas (alpha_mul, alpha_cliff, multiplier_square, symbol_square) rather than being a consequence baked into the datum. The datum is thus strictly more permissive than the manuscript's, which derives the square as part of the definition."
+    "note": "Note: the structure does not force (gamma0)^2 = -1 as a field -- that fact is proved separately and generically by NCG.forced_timelike_generator from a hyperbolic-pair hypothesis, then re-supplied as an ad hoc argument to downstream lemmas (alpha_mul, alpha_cliff, multiplier_square, symbol_square) rather than being a consequence baked into the datum. The datum is thus strictly more permissive than the manuscript's, which derives the square as part of the definition."
   },
   "def:dirac-symbol": {
     "env": "definition",
@@ -1041,7 +1044,7 @@
       "NCG.band_symbol_bound",
       "NCG.hasPropagation_pow"
     ],
-    "note": "AUDIT CORRECTION: the previously-cited NCG.marked_gap_sq belongs to the unrelated thm:marked-torus-band-limit construction and plays no role in this theorem's dominated-convergence/graph-limit content; removed from the citation list. The genuinely relevant proved pieces are the uniform band-limited symbol error (band_symbol_bound) and linear propagation of generator powers (hasPropagation_pow); full graph-convergence packaging of the unbounded operator limit remains the noted analytic step. AUDIT-2026-07-21: anchor hygiene: NCG.marked_gap_sq removed (its own note said it was removed but the list still carried it); remaining anchors are the scalar sine estimate and propagation fragments; the L2 graph-convergence core on the Schwartz domain remains informal."
+    "note": "The proved pieces are the uniform band-limited symbol error (band_symbol_bound) and linear propagation of generator powers (hasPropagation_pow). Scope: the full graph-convergence packaging of the unbounded operator limit — the L2 graph-convergence core on the Schwartz domain — remains informal."
   },
   "thm:operator-limit": {
     "env": "theorem",
@@ -1073,7 +1076,7 @@
       "NCG.KreinCliffordDatum.multiplier_square",
       "NCG.crossPolytope_second_moment"
     ],
-    "note": "with M = (1/d) I and kappa = d the multiplier coefficients are the momenta and the endpoint symbol squares to |xi|^2 - the free Dirac symbol; the operator-limit reading is thm:operator-limit (noted) AUDIT-2026-07-21: the headline anchor endpoint_31_normalisation is the identity d*((1/d)*xi) = xi; the substantive anchors are crossPolytope_second_moment and multiplier_square; propagator convergence is deferred to thm:operator-limit, itself symbol-level."
+    "note": "with M = (1/d) I and kappa = d the multiplier coefficients are the momenta and the endpoint symbol squares to |xi|^2 - the free Dirac symbol; the operator-limit reading is thm:operator-limit (noted) Scope: the headline anchor endpoint_31_normalisation is the identity d*((1/d)*xi) = xi; the substantive anchors are crossPolytope_second_moment and multiplier_square; propagator convergence is deferred to thm:operator-limit, itself symbol-level."
   },
   "thm:band-norm-resolvent": {
     "env": "theorem",
@@ -1095,7 +1098,7 @@
       "NCG.quadratic_form_lipschitz",
       "NCG.band_symbol_bound"
     ],
-    "note": "the self-averaging mechanism is proved: pairwise uncorrelated reset fluctuations have additive variance (E (sum X)^2 = sum E X^2, the 1/N concentration rate), and the proved Lipschitz symbol dependence plus band-limited convergence convert moment concentration into operator convergence; the almost-sure LLN packaging is the noted probabilistic step AUDIT-2026-07-21: the Lean hypothesis (pairwise uncorrelated on a finite sample space) differs from the text's stationary ergodicity (which does not imply uncorrelatedness); all five almost-sure conclusions are LLN packaging, unformalized."
+    "note": "the self-averaging mechanism is proved: pairwise uncorrelated reset fluctuations have additive variance (E (sum X)^2 = sum E X^2, the 1/N concentration rate), and the proved Lipschitz symbol dependence plus band-limited convergence convert moment concentration into operator convergence; the almost-sure LLN packaging is the noted probabilistic step Scope: the Lean hypothesis (pairwise uncorrelated on a finite sample space) differs from the text's stationary ergodicity (which does not imply uncorrelatedness); all five almost-sure conclusions are LLN packaging, unformalized."
   },
   "prop:isotropy-not-derived": {
     "env": "proposition",
@@ -1117,7 +1120,7 @@
       "NCG.koszul_torsion",
       "NCG.cartan_derived_eq"
     ],
-    "note": "existence (discrete Koszul formula is metric and solves the torsion equation) and uniqueness (six-step index chase); the O(h^2) convergence to the Levi-Civita spin connection not formalised; this statement absorbed the former label thm:discrete-cartan (now removed from the manuscript; its record's pillars are cited here)"
+    "note": "existence (discrete Koszul formula is metric and solves the torsion equation) and uniqueness (six-step index chase); the O(h^2) convergence to the Levi-Civita spin connection not formalised"
   },
   "prop:iso-metric": {
     "env": "proposition",
@@ -1128,7 +1131,7 @@
       "NCG.antisymm_iff_first_order_vanishes",
       "NCG.first_order_orthogonal_of_antisymm"
     ],
-    "note": "exact Gram expansion (1-hg)^T(1-hg) = 1 - h(g+g^T) + h^2 g^T g: first-order isometry iff antisymmetric generator iff Q = 0. Revision note (2026-07-20): the manuscript's trailing clause now reads 'consequently second-moment covariance implies metric compatibility'; that consequent is the composition with the new prop:second-moment-isometry and is tracked there, while the iff core of this proposition is unchanged and proved."
+    "note": "exact Gram expansion (1-hg)^T(1-hg) = 1 - h(g+g^T) + h^2 g^T g: first-order isometry iff antisymmetric generator iff Q = 0. The trailing clause ('consequently second-moment covariance implies metric compatibility') is the composition with prop:second-moment-isometry and is tracked there; the iff core of this proposition is proved."
   },
   "def:reset-motion": {
     "env": "definition",
@@ -1139,7 +1142,7 @@
       "NCG.firstMoment",
       "NCG.firstMoment_euclComp"
     ],
-    "note": "reset channels as Euclidean motions (R, t) with semidirect composition; first moment = translation part. Revision note (2026-07-20): the manuscript now presents R_i as the orthonormalised record transport M_{x+he_i}^{-1/2} T_i(x) M_x^{1/2} derived under second-moment covariance rather than as a separately adopted SO datum; the derived form is the content of prop:second-moment-isometry (tracked separately), while the Euclidean-motion data encoded here are unchanged."
+    "note": "reset channels as Euclidean motions (R, t) with semidirect composition; first moment = translation part. The manuscript presents R_i as the orthonormalised record transport M_{x+he_i}^{-1/2} T_i(x) M_x^{1/2} derived under second-moment covariance derived under second-moment covariance; that derived form is the content of prop:second-moment-isometry (tracked separately), while the Euclidean-motion data are encoded here."
   },
   "lem:plaquette-split": {
     "env": "lemma",
@@ -1162,7 +1165,7 @@
       "NCG.coeff_extraction",
       "NCG.rotational_defect"
     ],
-    "note": "RE-PROVED for the revised hypothesis structure: NCG.channel_torsion_of_stationary_diamond (NCG/Lorentz/ChannelTorsion.lean) assumes the exchange-covariant stationary diamond phase (ass:stationary-diamond: primitive exchange-covariant kernel, stationary law, exchange-odd defect records, and the h^2 (stationary mean) + h^3 C expansion of the translational plaquette defect at two distinct nonzero scales, with C the constant cubic coefficient of the exact discrete model) and derives first-moment closure via thm:stationary-exchange, then extracts T = D_i e_j - D_j e_i + gamma_i e_j - gamma_j e_i = 0 through the exact plaquette split (plaquette_defect_eq) and two-scale coefficient extraction; the rotational/curvature defect is untouched (rotational_defect). Metric compatibility is the composition prop:second-moment-isometry + prop:iso-metric (both proved, tracked in their own records), and the Levi-Civita selection and O(h^2) convergence clause is thm:fundamental's record as before (the O(h^2) spin-connection convergence remains unformalised there, as disclosed in that record). The earlier closure-hypothesis form (torsion_of_first_moment_closure) remains available."
+    "note": "Proved: NCG.channel_torsion_of_stationary_diamond (NCG/Lorentz/ChannelTorsion.lean) assumes the exchange-covariant stationary diamond phase (ass:stationary-diamond: primitive exchange-covariant kernel, stationary law, exchange-odd defect records, and the h^2 (stationary mean) + h^3 C expansion of the translational plaquette defect at two distinct nonzero scales, with C the constant cubic coefficient of the exact discrete model) and derives first-moment closure via thm:stationary-exchange, then extracts T = D_i e_j - D_j e_i + gamma_i e_j - gamma_j e_i = 0 through the exact plaquette split (plaquette_defect_eq) and two-scale coefficient extraction; the rotational/curvature defect is untouched (rotational_defect). Metric compatibility is the composition prop:second-moment-isometry + prop:iso-metric (both proved, tracked in their own records), and the Levi-Civita selection and O(h^2) convergence clause is thm:fundamental's record (the O(h^2) spin-connection convergence remains unformalised there, as disclosed). The direct closure-hypothesis form (torsion_of_first_moment_closure) is also available."
   },
   "def:reset-field": {
     "env": "definition",
@@ -1171,7 +1174,7 @@
     "lean": [
       "NCG.ResetField"
     ],
-    "note": "AUDIT NOTE: weight_pos requires STRICT positivity (0 < weight x a) where the manuscript allows weight >= 0 (channels may switch off), and the unit-norm constraint on `dir` (theta_hat in S^{d-1}) is dropped entirely -- `dir` is an unconstrained Fin d -> R vector. Both narrowings were previously undisclosed. AUDIT-2026-07-21: additionally: dir is x-dependent where the text fixes directions; C_b^4 smoothness, uniform nondegeneracy M(x) >= m_0 I, and the coframe/Lorentzian-signature clause are absent from the structure."
+    "note": "Note: weight_pos requires STRICT positivity (0 < weight x a) where the manuscript allows weight >= 0 (channels may switch off), and the unit-norm constraint on `dir` (theta_hat in S^{d-1}) is dropped entirely -- `dir` is an unconstrained Fin d -> R vector. Additionally: dir is x-dependent where the text fixes directions; C_b^4 smoothness, uniform nondegeneracy M(x) >= m_0 I, and the coframe/Lorentzian-signature clause are absent from the structure."
   },
   "lem:covariant-consistency": {
     "env": "lemma",
@@ -1201,7 +1204,7 @@
     "lean": [
       "NCG.CurvedDiscreteDatum"
     ],
-    "note": "the covariant discrete Hamiltonian datum encoded (mesh, clock, pointwise weighted directions); the midpoint-sampled operator assembly informal AUDIT-2026-07-21: the V_ren,R potential data with its sup-bound and locally-uniform convergence conditions — half of the manuscript definition — is absent from the encoding."
+    "note": "the covariant discrete Hamiltonian datum encoded (mesh, clock, pointwise weighted directions); the midpoint-sampled operator assembly informal Scope: the V_ren,R potential data with its sup-bound and locally-uniform convergence conditions — half of the manuscript definition — is absent from the encoding."
   },
   "prop:curved-core-consistency": {
     "env": "proposition",
@@ -1212,7 +1215,7 @@
       "NCG.KreinCliffordDatum.multiplier_star",
       "NCG.KreinCliffordDatum.multiplier_square"
     ],
-    "note": "AUDIT CORRECTION: the frozen-coefficient Hermiticity and scalar-square identities of the curved multiplier are genuinely proved (multiplier_star, multiplier_square). The covariant-consistency ingredient (previously cited via central_difference_second_order) does NOT establish that the order-h^2 transport brackets actually agree -- see lem:covariant-consistency's corrected note; that proof is an algebraic tautology with a shared free variable, not a genuine coefficient-agreement derivation. The L^2 packaging over compact sets and the covariant-difference estimate itself remain open, not just 'noted'."
+    "note": "Scope: the frozen-coefficient Hermiticity and scalar-square identities of the curved multiplier are genuinely proved (multiplier_star, multiplier_square). central_difference_second_order does not establish that the order-h^2 transport brackets agree — it is an algebraic identity with a shared free variable, not a coefficient-agreement derivation (see lem:covariant-consistency). The L^2 packaging over compact sets and the covariant-difference estimate itself remain open, not just 'noted'."
   },
   "thm:curved-limit": {
     "env": "theorem",
@@ -1224,7 +1227,7 @@
       "NCG.resolvent_diff_bound",
       "NCG.KreinCliffordDatum.multiplier_star"
     ],
-    "note": "the quantitative resolvent mechanism (resolvent_diff_bound) and the frozen-point Hermiticity of the curved multiplier are proved, and the covariant central-difference cancellation is now the genuinely DERIVED covariant_central_difference (batch 33) rather than the earlier tautology; three steps remain open: the L^2/varying-coefficient covariant-consistency ESTIMATE built on that algebraic identity, the Sobolev-domain graph-limit, and the Trotter-Kato packaging"
+    "note": "the quantitative resolvent mechanism (resolvent_diff_bound) and the frozen-point Hermiticity of the curved multiplier are proved, and the covariant central-difference cancellation is the derived covariant_central_difference; three steps remain open: the L^2/varying-coefficient covariant-consistency ESTIMATE built on that algebraic identity, the Sobolev-domain graph-limit, and the Trotter-Kato packaging"
   },
   "prop:renewal-scalar-potential": {
     "env": "proposition",
@@ -1234,7 +1237,7 @@
       "NCG.ground_state_potential",
       "NCG.potential_bound"
     ],
-    "note": "the worked example is proved at the formula level: with s = sqrt(rho) the ground-state residual is exactly rho''/(2 rho) - rho'^2/(4 rho^2), with the stated sup bound under two-sided density and derivative bounds; the C_b^2 PDE-level conjugation identity is the noted step AUDIT-2026-07-21: anchors are one-variable scalar identities (d = 1 reading); the R^d statement with Delta rho and |grad rho|^2, the conjugation identity Theta L Theta^{-1} = D Delta - V, and the discrete realization are unformalized."
+    "note": "the worked example is proved at the formula level: with s = sqrt(rho) the ground-state residual is exactly rho''/(2 rho) - rho'^2/(4 rho^2), with the stated sup bound under two-sided density and derivative bounds; the C_b^2 PDE-level conjugation identity is the noted step Scope: anchors are one-variable scalar identities (d = 1 reading); the R^d statement with Delta rho and |grad rho|^2, the conjugation identity Theta L Theta^{-1} = D Delta - V, and the discrete realization are unformalized."
   },
   "thm:stability": {
     "env": "theorem",
@@ -1244,7 +1247,7 @@
       "NCG.perturbation_sq_bound",
       "NCG.resolvent_identity"
     ],
-    "note": "the perturbation mechanism is proved: the squared-symbol (metric) shift is bounded by |sigma||V| + |V||sigma| + |V|^2, and the resolvent identity u^-1 - v^-1 = u^-1 (v - u) v^-1 gives Lipschitz dependence of resolvents on the operator; the Kato-Rellich self-adjointness of the perturbed endpoint is the noted step AUDIT-2026-07-21: none of the six enumerated conclusions with explicit constants — including the finite-dimensional matrix items (i) signature rigidity M~ >= (m_0 - chi) I, (ii) coefficient bound 2 kappa^2 chi, (iii) kappa-chi cone closeness — is individually formalized; the anchors are two generic normed-ring inequalities."
+    "note": "the perturbation mechanism is proved: the squared-symbol (metric) shift is bounded by |sigma||V| + |V||sigma| + |V|^2, and the resolvent identity u^-1 - v^-1 = u^-1 (v - u) v^-1 gives Lipschitz dependence of resolvents on the operator; the Kato-Rellich self-adjointness of the perturbed endpoint is the noted step Scope: none of the six enumerated conclusions with explicit constants — including the finite-dimensional matrix items (i) signature rigidity M~ >= (m_0 - chi) I, (ii) coefficient bound 2 kappa^2 chi, (iii) kappa-chi cone closeness — is individually formalized; the anchors are two generic normed-ring inequalities."
   },
   "cor:curved-stability": {
     "env": "corollary",
@@ -1255,7 +1258,7 @@
       "NCG.resolvent_identity",
       "NCG.central_difference_second_order"
     ],
-    "note": "assembly: the flat stability mechanism (squared-symbol shift + resolvent identity) combined with the proved curved covariant-consistency core; the curved Sobolev-domain packaging is the noted step AUDIT-2026-07-21: stale reference corrected: central_difference_second_order is the algebraic identity disavowed as a tautology by prop:curved-core-consistency's own AUDIT CORRECTION; none of the corollary's conclusions (i)-(vi) is formalized."
+    "note": "Assembly: the flat stability mechanism (squared-symbol shift + resolvent identity) combined with the proved curved covariant-consistency core; the curved Sobolev-domain packaging is the noted step. Scope: none of the corollary's enumerated conclusions (i)-(vi) is separately formalized; central_difference_second_order is only an algebraic identity, not a coefficient-agreement derivation (see prop:curved-core-consistency)."
   },
   "prop:fibres-automata": {
     "status": "proved",
@@ -1265,7 +1268,8 @@
       "NCG.GradedAutomaton.shift_bound",
       "NCG.GradedAutomaton.comm_bound"
     ],
-    "note": "AUDIT-2026-07-21 RE-EARNED (GradedAutomaton.lean): the graded labelled presentation is encoded (depth-raising labelled steps, uniformly bounded backward branching) and BOTH displayed conclusions are proved: unit increment |Lambda([sw]) - Lambda([w])| = 1 (increment) and the fibre bound <= B in operator form — l2-boundedness of the descended shift with norm^2 <= B (shift_bound) and of the Dirac commutator with the explicit ass:fibres constant B*1^2 (comm_bound)."
+    "note": "Proved (GradedAutomaton.lean): the graded labelled presentation is encoded (depth-raising labelled steps, uniformly bounded backward branching) and BOTH displayed conclusions are proved: unit increment |Lambda([sw]) - Lambda([w])| = 1 (increment) and the fibre bound <= B in operator form — l2-boundedness of the descended shift with norm^2 <= B (shift_bound) and of the Dirac commutator with the explicit ass:fibres constant B*1^2 (comm_bound).",
+    "env": "proposition"
   },
   "prop:fibres-monoid": {
     "env": "proposition",
@@ -1275,7 +1279,7 @@
       "NCG.RenewalMemory.shift_injective",
       "NCG.monoid_constant_increment"
     ],
-    "note": "descended shifts are injective on the predictive quotient when the memory monoid is left-cancellative (singleton fibres) AUDIT-2026-07-21: the co-equal second conclusion — constant increment Lambda_min([sw]) - Lambda_min([w]) = deg(a_s) under the additive grading (giving ass:fibres with C_s = deg(a_s)) — is unformalized; only descended-shift injectivity under cancellativity is proved; finite generation and the positive grading play no role in the Lean statement. AUDIT-2026-07-21 UPDATE: the constant-increment half is now proved — monoid_constant_increment gives deg(a + q) - deg q = deg a for the additive grading, completing ass:fibres for class (B) with C_sigma = deg(a_sigma)."
+    "note": "descended shifts are injective on the predictive quotient when the memory monoid is left-cancellative (singleton fibres) Scope: the co-equal second conclusion — constant increment Lambda_min([sw]) - Lambda_min([w]) = deg(a_s) under the additive grading (giving ass:fibres with C_s = deg(a_s)) — is unformalized; only descended-shift injectivity under cancellativity is proved; finite generation and the positive grading play no role in the Lean statement. Scope: the constant-increment half is proved — monoid_constant_increment gives deg(a + q) - deg q = deg a for the additive grading, completing ass:fibres for class (B) with C_sigma = deg(a_sigma)."
   },
   "prop:fibres-cp": {
     "env": "proposition",
@@ -1285,7 +1289,7 @@
       "NCG.RenewalMemory.shift_injective_of_cancel",
       "NCG.RenewalMemory.shift_injective"
     ],
-    "note": "cancellative commutative channel monoids have singleton shift fibres; finite presentation -> finite generation not formalised AUDIT-2026-07-21: the constant-increment component of ass:fibres (inherited from prop:fibres-monoid, where it is also unformalized) is silently omitted; Lean uses two-sided cancellativity (harmless in the commutative case)."
+    "note": "cancellative commutative channel monoids have singleton shift fibres; finite presentation -> finite generation not formalised Scope: the constant-increment component of ass:fibres (inherited from prop:fibres-monoid, where it is also unformalized) is silently omitted; Lean uses two-sided cancellativity (harmless in the commutative case)."
   },
   "prop:fibres-quotient": {
     "env": "proposition",
@@ -1309,7 +1313,8 @@
       "NCG.RenewalMemory.shell_finite",
       "NCG.RenewalMemory.zeta_lt_top_of_channelCount_growth"
     ],
-    "note": "AUDIT-2026-07-21 RE-EARNED (per-class ass:fibres now verified with explicit constants): (A) closed by the graded-automaton layer (fibres <= B, C = 1, shift and commutator bounds); (B) fibres <= 1 (shift_injective) + constant increment deg(a_sigma) (monoid_constant_increment); (C) via the finite-presentation reduction disclosed in prop:fibres-cp (shift_injective_of_cancel); (D) via the hypothesis-form quotient bound of prop:fibres-quotient. The spectral-triple pillars are anchored: bounded shifts (l2normSq_shiftOp_le), bounded commutators (l2normSq_comm_le), compact-resolvent shell core (shell_finite). DISCLOSED remaining clauses: the zeta-abscissa identity is the noted missing conclusion (b) of thm:triple, and the regular-variation/Weyl clause for (B)-(C) is tracked by thm:weyl-law / ass:regular-variation. AUDIT-2026-07-22: the zeta-abscissa clause is now proved (ZetaAbscissa.lean, anchored on thm:triple) — in the regular classes the abscissa of the predictive zeta equals q_alg."
+    "note": "Proved (per-class ass:fibres now verified with explicit constants): (A) closed by the graded-automaton layer (fibres <= B, C = 1, shift and commutator bounds); (B) fibres <= 1 (shift_injective) + constant increment deg(a_sigma) (monoid_constant_increment); (C) via the finite-presentation reduction disclosed in prop:fibres-cp (shift_injective_of_cancel); (D) via the hypothesis-form quotient bound of prop:fibres-quotient. The spectral-triple pillars are anchored: bounded shifts (l2normSq_shiftOp_le), bounded commutators (l2normSq_comm_le), compact-resolvent shell core (shell_finite). DISCLOSED remaining clauses: the zeta-abscissa identity is the noted missing conclusion (b) of thm:triple, and the regular-variation/Weyl clause for (B)-(C) is tracked by thm:weyl-law / ass:regular-variation. Scope: the zeta-abscissa clause is proved (ZetaAbscissa.lean, anchored on thm:triple) — in the regular classes the abscissa of the predictive zeta equals q_alg.",
+    "env": "corollary"
   },
   "def:qmet": {
     "env": "definition",
@@ -1329,7 +1334,7 @@
       "NCG.pressure_eq_one_existsUnique",
       "NCG.pressure_strictAnti"
     ],
-    "note": "the Moran/Bowen equation has a unique root (renewal calibration with r = e^{-l}); the identification of that root with the box dimension of the coding-space attractor is the noted covering argument AUDIT-2026-07-21: inherited hypothesis 2 <= card E excludes one-map systems; the open-set-condition and bi-Lipschitz hypotheses appear nowhere in the Lean."
+    "note": "the Moran/Bowen equation has a unique root (renewal calibration with r = e^{-l}); the identification of that root with the box dimension of the coding-space attractor is the noted covering argument Scope: inherited hypothesis 2 <= card E excludes one-map systems; the open-set-condition and bi-Lipschitz hypotheses appear nowhere in the Lean."
   },
   "thm:qmet-qalg": {
     "env": "theorem",
@@ -1338,7 +1343,7 @@
     "lean": [
       "NCG.coveringNumber_le_of_net"
     ],
-    "note": "counting core: the degree-R channels form a C/R-net, so N_cb(C/R) <= N_CP(R) and q_met <= q_alg; the limsup monotonicity is the noted bookkeeping AUDIT-2026-07-21: the strictness regimes (i) metric collapse (q_met = 0 < c) and (ii) contracting IFS (q_alg = inf > q_met = s), and the comparison chain N_cb(delta) <= N_CP(C/delta) via the Lipschitz coding net, are unformalized; the sole anchor is the definitional net bound."
+    "note": "counting core: the degree-R channels form a C/R-net, so N_cb(C/R) <= N_CP(R) and q_met <= q_alg; the limsup monotonicity is the noted bookkeeping Scope: the strictness regimes (i) metric collapse (q_met = 0 < c) and (ii) contracting IFS (q_alg = inf > q_met = s), and the comparison chain N_cb(delta) <= N_CP(C/delta) via the Lipschitz coding net, are unformalized; the sole anchor is the definitional net bound."
   },
   "thm:qmet-qalg-equality": {
     "env": "theorem",
@@ -1360,7 +1365,7 @@
       "NCG.pressure_continuous",
       "NCG.pressure_tendsto_zero"
     ],
-    "note": "AUDIT CORRECTION: pressure_eq_one_existsUnique carries an undisclosed extra hypothesis `2 <= Fintype.card E` (needed because the IVT argument requires pressure(0) > 1 strictly, which fails and gives the trivial root s=0 when |E|=1). The manuscript states the pressure equation for a general finite reset alphabet with no cardinality restriction. AUDIT-2026-07-21: prior AUDIT CORRECTION was stale: the current text case-splits |E| >= 2 (interior root) vs |E| = 1 (boundary root s = 0), so the Lean hypothesis 2 <= card E matches the main branch; the |E| = 1 branch and the residue clause (residue of (1 - Phi(s))^{-1} = reciprocal mean calibrated length) are unformalized."
+    "note": "pressure_eq_one_existsUnique proves existence and uniqueness of the interior root under the hypothesis 2 <= card E, matching the text's case split (|E| >= 2 interior root vs |E| = 1 boundary root s = 0). Scope: the |E| = 1 branch and the residue clause (residue of (1 - Phi(s))^{-1} = reciprocal mean calibrated length) are unformalized."
   },
   "thm:renewal-dichotomy": {
     "env": "theorem",
@@ -1413,7 +1418,7 @@
       "NCG.le_latticeShellCard",
       "NCG.card_interval"
     ],
-    "note": "the free/unimodular case is fully proved: the counting function is the exact binomial C(R+c, c), a degree-c polynomial, squeezed by the general shell bounds; the Ehrhart-Stanley quasi-polynomiality for general normal affine commuting monoids is the noted external step AUDIT-2026-07-21: re-anchored: NCG.card_interval (Lorentz/ProductOrder.lean) supplies the theorem's actual order-interval/box count prod (y_i + 1 - x_i) — (tau+1)^c on balanced intervals, unit leading coefficient; the shell/simplex count C(R+c,c) anchors belong to thm:commuting / thm:weyl-law and are kept as context only."
+    "note": "the free/unimodular case is fully proved: the counting function is the exact binomial C(R+c, c), a degree-c polynomial, squeezed by the general shell bounds; the Ehrhart-Stanley quasi-polynomiality for general normal affine commuting monoids is the noted external step Scope: re-anchored: NCG.card_interval (Lorentz/ProductOrder.lean) supplies the theorem's actual order-interval/box count prod (y_i + 1 - x_i) — (tau+1)^c on balanced intervals, unit leading coefficient; the shell/simplex count C(R+c,c) anchors belong to thm:commuting / thm:weyl-law and are kept as context only."
   },
   "cor:ehrhart-free": {
     "env": "corollary",
@@ -1425,7 +1430,7 @@
       "NCG.latticeShellCard_shell",
       "NCG.card_interval"
     ],
-    "note": "the exact stars-and-bars count N_c(R) = C(R+c, c) is proved by coordinate peeling plus the hockey-stick identity; consistency with the degree-c Ehrhart polynomial and leading coefficient 1/c! is immediate from the binomial AUDIT-2026-07-21: re-anchored: NCG.card_interval gives the free-case box count (tau+1)^c ~ tau^c (unit interval-volume, recovering prop:commuting-order); the previously quoted leading coefficient 1/c! belongs to the shell count, not this corollary."
+    "note": "the exact stars-and-bars count N_c(R) = C(R+c, c) is proved by coordinate peeling plus the hockey-stick identity; consistency with the degree-c Ehrhart polynomial and leading coefficient 1/c! is immediate from the binomial NCG.card_interval gives the free-case box count (tau+1)^c ~ tau^c (unit interval-volume, recovering prop:commuting-order); the leading coefficient 1/c! belongs to the shell count, not this corollary."
   },
   "def:rescaling": {
     "env": "definition",
@@ -1435,7 +1440,7 @@
       "NCG.calibratedRescale",
       "NCG.calibratedRescale_mono"
     ],
-    "note": "AUDIT NOTE: the manuscript's 'calibrated rescaling' definition bundles three pieces: the map iota_R, the pushforward measure mu_R, and the geometric-mean time separation tau_g(X,Y). The Lean encoding (calibratedRescale/calibratedRescale_mono) captures only iota_R plus its order-monotonicity. Both the pushforward-measure normalisation AND the tau_g component are absent from this record's formalization (tau_g appears, unnamed, only inline inside the separate thm:taxicab-limit proof, which does not cover this definition's own scope)."
+    "note": "Note: the manuscript's 'calibrated rescaling' definition bundles three pieces: the map iota_R, the pushforward measure mu_R, and the geometric-mean time separation tau_g(X,Y). The Lean encoding (calibratedRescale/calibratedRescale_mono) captures only iota_R plus its order-monotonicity. Both the pushforward-measure normalisation AND the tau_g component are absent from this record's formalization (tau_g appears, unnamed, only inline inside the separate thm:taxicab-limit proof, which does not cover this definition's own scope)."
   },
   "prop:measured-causet": {
     "env": "proposition",
@@ -1501,7 +1506,7 @@
       "NCG.SprinklingCovariance",
       "NCG.sprinklingCovariance_comp"
     ],
-    "note": "the covariance interface is encoded: invariance of the sprinkling intensity measure, closed under composition and containing the identity; Poisson-process existence and law-invariance functoriality are the established external inputs the theorem cites AUDIT-2026-07-21: the second clause (longest-chain recovery of Minkowski proper time in probability, Myrheim / Brightwell-Gregory) is neither encoded nor previously disclosed; the encoding is measure-preservation closure only."
+    "note": "the covariance interface is encoded: invariance of the sprinkling intensity measure, closed under composition and containing the identity; Poisson-process existence and law-invariance functoriality are the established external inputs the theorem cites Scope: the second clause (longest-chain recovery of Minkowski proper time in probability, Myrheim / Brightwell-Gregory) is not encoded; the encoding is measure-preservation closure only."
   },
   "def:coherent-internal-holonomy": {
     "env": "definition",
@@ -1520,7 +1525,7 @@
     "lean": [
       "NCG.dressed_commutator"
     ],
-    "note": "AUDIT CORRECTION (sharper disclosure): dressed_commutator proves the generic factorization [(S,U),(S',U')] = (1,[U,U']) under a flat-commute hypothesis -- this establishes conclusion (a), omega(alpha,beta)=1 from a -1 scalar commutator. Conclusion (b) -- that a nondegenerate rank-four restriction yields the primitive Cl_4(C) = M_4(C) revision factor -- is part of the theorem's own statement, not a remark, and is not formalized anywhere in the file."
+    "note": "dressed_commutator proves the generic factorization [(S,U),(S',U')] = (1,[U,U']) under a flat-commute hypothesis -- this establishes conclusion (a), omega(alpha,beta)=1 from a -1 scalar commutator. Conclusion (b) -- that a nondegenerate rank-four restriction yields the primitive Cl_4(C) = M_4(C) revision factor -- is part of the theorem's own statement, not a remark, and is not formalized anywhere in the file."
   },
   "lem:spatial-omega-gauge-invariant": {
     "env": "lemma",
@@ -1563,7 +1568,7 @@
       "NCG.Multigraph.Walk.displacement_append",
       "NCG.Multigraph.displacementSet_add_mem"
     ],
-    "note": "walk displacements over any coefficient group; the semigroupoid law M_st + M_tu <= M_su from concatenation AUDIT-2026-07-21: the second half of the definition — return lattice Gamma_ret, positive degree l, spatial accessed lattice Lambda = ker(l|_Gamma_ret), b_eff = rank Lambda — is not encoded under this record (b_eff appears only abstractly in def:accessible-revision-block)."
+    "note": "walk displacements over any coefficient group; the semigroupoid law M_st + M_tu <= M_su from concatenation Scope: the second half of the definition — return lattice Gamma_ret, positive degree l, spatial accessed lattice Lambda = ker(l|_Gamma_ret), b_eff = rank Lambda — is not encoded under this record (b_eff appears only abstractly in def:accessible-revision-block)."
   },
   "thm:full-rank-returns": {
     "env": "theorem",
@@ -1594,7 +1599,7 @@
       "NCG.pow_mul_pow_inj",
       "NCG.geometric_covering_bound"
     ],
-    "note": "both cores: the two-channel labels 2^i 3^j are distinct (free N^2 quotient, q_alg = 2 via the lattice-shell bounds) and the geometric accumulation set has logarithmic covering numbers (q_met = 0); the log/log limsup bookkeeping noted AUDIT-2026-07-21: anchors are stand-ins detached from the CP example: label distinctness of 2^i 3^j and the one-parameter covering bound for {2^-k} (O(log)); the example's UCP channels, N^2 quotient, and O(log^2) covering bound are unformalized."
+    "note": "both cores: the two-channel labels 2^i 3^j are distinct (free N^2 quotient, q_alg = 2 via the lattice-shell bounds) and the geometric accumulation set has logarithmic covering numbers (q_met = 0); the log/log limsup bookkeeping noted Scope: anchors are stand-ins detached from the CP example: label distinctness of 2^i 3^j and the one-parameter covering bound for {2^-k} (O(log)); the example's UCP channels, N^2 quotient, and O(log^2) covering bound are unformalized."
   },
   "def:accessible-revision-block": {
     "env": "definition",
@@ -1615,7 +1620,7 @@
       "NCG.accessible_rank_formula",
       "NCG.orthoAnn"
     ],
-    "note": "b_eff odd, spatial radical exactly one-dimensional (pairs injectively with the temporal generator), rank = 1 + b_eff AUDIT-2026-07-21: accessible_rank_formula is arithmetic that never references the form omega; the final clause (same rank equality for the full form under modular invisibility) is formalized only via thm:dimension-coincidence's record."
+    "note": "b_eff odd, spatial radical exactly one-dimensional (pairs injectively with the temporal generator), rank = 1 + b_eff Scope: accessible_rank_formula is arithmetic that never references the form omega; the final clause (same rank equality for the full form under modular invisibility) is formalized only via thm:dimension-coincidence's record."
   },
   "cor:return-spectral-dimension": {
     "env": "corollary",
@@ -1640,7 +1645,7 @@
       "NCG.finrank_accessibleBlock",
       "NCG.covariance_full_rank"
     ],
-    "note": "the five links, with precise interfaces: (1) q_alg = 1 + b_eff - the crystal MODEL's counting function (clock x lattice balls, exact count latticeBallCard_eq) has log-log dimension 1 + b_eff as an actual limit (crystal_log_dimension); the topological-crystal assumption supplies only a quasi-isometry, so transferring the model's bounds to a concrete memory (a constants-only step) is part of the assumption interface, not formalized; (2) q_met = q_alg - PROVED as an equality of the two defined limsups GIVEN two-sided polynomial bounds of a shared exponent on both sides (qmet_eq_qalg_of_poly_bounds); the manuscript derives that shared-exponent input from ass:two-sided-channel-coding via the net/separation sandwich, and that reciprocal-scale transfer is NOT formalized - the shared exponent enters here as a hypothesis; (3) d_s via return_exponent_limit under the crystal-heat-kernel (Delmotte) assumption; (4) rank omega = 1 + b_eff proved ON THE ACCESSIBLE BLOCK (accessible_modular_rank; the extension to the full form under modular invisibility is not formalized); (5) d_Cl = b_eff definitionally via finrank_accessibleBlock, with rank Q = b_eff (covariance_full_rank, CLT input noted) feeding the corollary"
+    "note": "the five links, with precise interfaces: (1) q_alg = 1 + b_eff - the crystal MODEL's counting function (clock x lattice balls, exact count latticeBallCard_eq) has log-log dimension 1 + b_eff as an actual limit (crystal_log_dimension); the topological-crystal assumption supplies only a quasi-isometry, so transferring the model's bounds to a concrete memory (a constants-only step) is part of the assumption interface, not formalized; (2) q_met = q_alg - Proved as an equality of the two defined limsups GIVEN two-sided polynomial bounds of a shared exponent on both sides (qmet_eq_qalg_of_poly_bounds); the manuscript derives that shared-exponent input from ass:two-sided-channel-coding via the net/separation sandwich, and that reciprocal-scale transfer is NOT formalized - the shared exponent enters here as a hypothesis; (3) d_s via return_exponent_limit under the crystal-heat-kernel (Delmotte) assumption; (4) rank omega = 1 + b_eff proved ON THE ACCESSIBLE BLOCK (accessible_modular_rank; the extension to the full form under modular invisibility is not formalized); (5) d_Cl = b_eff definitionally via finrank_accessibleBlock, with rank Q = b_eff (covariance_full_rank, CLT input noted) feeding the corollary"
   },
   "prop:cycle-covariance-rank": {
     "env": "proposition",
@@ -1685,7 +1690,7 @@
       "NCG.pairResponse_eq_zero_of_symm",
       "NCG.circulation_eq_pairResponse"
     ],
-    "note": "statistical core: response = response of the antisymmetrised law (b_ren = Gamma(Xi)), and parity symmetry kills it in every dimension; the degree bookkeeping (image in V_sp iff d = 3) is cor:relevance AUDIT-2026-07-21: the nonvanishing direction Xi(nu) != 0 => H_ren[nu] != 0 (needing injectivity of the Clifford embedding on bivectors and invertibility of Vol) is unformalized; antisymmetrisation and parity-vanishing halves are proved."
+    "note": "statistical core: response = response of the antisymmetrised law (b_ren = Gamma(Xi)), and parity symmetry kills it in every dimension; the degree bookkeeping (image in V_sp iff d = 3) is cor:relevance Scope: the nonvanishing direction Xi(nu) != 0 => H_ren[nu] != 0 (needing injectivity of the Clifford embedding on bivectors and invertibility of Vol) is unformalized; antisymmetrisation and parity-vanishing halves are proved."
   },
   "thm:rg-no-dimension-selection": {
     "status": "proved",
@@ -1697,7 +1702,8 @@
       "NCG.no_rg_dimension_selection",
       "NCG.finrank_hodge_pair"
     ],
-    "note": "AUDIT-2026-07-21 RE-EARNED (PowerCounting.lean): the dimensional-analysis structure is now formalized rather than collapsed to arithmetic. From the kinetic normalisation constraint 2F + 1 = d + 1 the fermion dimension F = d/2 is derived as the UNIQUE solution (fermionDim_unique); the bilinear dimension is d independently of the inserted Clifford grade (bilinearDim_eq, bilinearDim_grade_blind — grade insertions dimensionless by physical convention, encoded as gradeInsertionDim = 0); the coupling coefficient has dimension exactly 1 in every d and every grade (couplingDim_eq_one), so power counting yields no b^{3-d} eigenvalue (no_rg_dimension_selection). The additive engineering-dimension conventions and action density d+1 are the definitional physical inputs; the algebraic contrast (Hodge Lambda^2 -> Lambda^{d-2}) is finrank_hodge_pair + the minimal-field grade forcing."
+    "note": "Proved (PowerCounting.lean): the dimensional-analysis structure is formalized rather than collapsed to arithmetic. From the kinetic normalisation constraint 2F + 1 = d + 1 the fermion dimension F = d/2 is derived as the UNIQUE solution (fermionDim_unique); the bilinear dimension is d independently of the inserted Clifford grade (bilinearDim_eq, bilinearDim_grade_blind — grade insertions dimensionless by physical convention, encoded as gradeInsertionDim = 0); the coupling coefficient has dimension exactly 1 in every d and every grade (couplingDim_eq_one), so power counting yields no b^{3-d} eigenvalue (no_rg_dimension_selection). The additive engineering-dimension conventions and action density d+1 are the definitional physical inputs; the algebraic contrast (Hodge Lambda^2 -> Lambda^{d-2}) is finrank_hodge_pair + the minimal-field grade forcing.",
+    "env": "theorem"
   },
   "cor:dimension-status-rg-audit": {
     "env": "corollary",
@@ -1709,7 +1715,7 @@
       "NCG.closure_selects_three",
       "NCG.engineering_coupling_dimension"
     ],
-    "note": "audit assembly: odd rank forced, 3+1 minimal unconditionally, closure selects 3 among odd ranks, and power counting alone selects nothing"
+    "note": "Assembly: odd rank forced, 3+1 minimal unconditionally, closure selects 3 among odd ranks, and power counting alone selects nothing"
   },
   "thm:minimal-field": {
     "status": "proved",
@@ -1718,7 +1724,8 @@
       "NCG.minimal_field_degree_forcing",
       "NCG.chirality_of_circulation_ne_zero"
     ],
-    "note": "AUDIT-2026-07-21 RE-EARNED (PowerCounting.lean): the previous encoding assumed the conclusion (hdeg : d - 2 = 1 as hypothesis). Now minimal_field_degree_forcing takes the manuscript's own hypotheses — the nonzero volume-dual response lies in exterior degree d-2 (the construction's degree computation) and, per minimal field content, in the degree-one one-reset sector — and DERIVES d = 3 via the genuinely formalized grade-forcing deduction grade_eq_of_mem_mem: a nonzero element of a decomposed graded algebra cannot lie in two distinct graded components (instantiated at the exterior-algebra grading)."
+    "note": "Proved (PowerCounting.lean): the previous encoding assumed the conclusion (hdeg : d - 2 = 1 as hypothesis). Now minimal_field_degree_forcing takes the manuscript's own hypotheses — the nonzero volume-dual response lies in exterior degree d-2 (the construction's degree computation) and, per minimal field content, in the degree-one one-reset sector — and DERIVES d = 3 via the genuinely formalized grade-forcing deduction grade_eq_of_mem_mem: a nonzero element of a decomposed graded algebra cannot lie in two distinct graded components (instantiated at the exterior-algebra grading).",
+    "env": "theorem"
   },
   "def:degree-k-observable": {
     "env": "definition",
@@ -1771,7 +1778,7 @@
       "NCG.closure_iso_of_three",
       "NCG.no_closure_iso"
     ],
-    "note": "dimension dichotomy: closure isomorphism exists at d = 3, impossible for d >= 4 (C(d,2) != d); the bouquet/cross-polytope model realising the axiom package is the earlier proved material, its axiom bookkeeping informal"
+    "note": "dimension dichotomy: closure isomorphism exists at d = 3, impossible for d >= 4 (C(d,2) != d); the bouquet/cross-polytope model realising the axiom package is proved in the library; its axiom bookkeeping is informal"
   },
   "prop:interference-controllability": {
     "env": "proposition",
@@ -1801,7 +1808,7 @@
       "NCG.volume_isUnit",
       "NCG.hodgeDegreeEquiv"
     ],
-    "note": "well-posed: the volume element is invertible (Vol^2 = pm 1), so H = Vol^{-1} b_ren is defined; orientation reversal flips the sign AUDIT-2026-07-21: the map H_ren = Vol^{-1} b_ren itself is never defined in Lean (only the invertibility ingredient Vol^2 = +-1 is proved); the orientation-reversal sign clause has no anchoring lemma."
+    "note": "well-posed: the volume element is invertible (Vol^2 = pm 1), so H = Vol^{-1} b_ren is defined; orientation reversal flips the sign Scope: the map H_ren = Vol^{-1} b_ren itself is never defined in Lean (only the invertibility ingredient Vol^2 = +-1 is proved); the orientation-reversal sign clause has no anchoring lemma."
   },
   "prop:volume-dual-degree": {
     "env": "proposition",
@@ -1812,7 +1819,7 @@
       "NCG.hodgeDegreeEquiv",
       "NCG.hodge_pair_degree_one"
     ],
-    "note": "dimension core C(d,2) = C(d,d-2) and the linear isomorphism Wedge^2 = Wedge^{d-2}; SO(V)-equivariance of the Clifford realisation not formalised AUDIT-2026-07-21: the proved isomorphism is LinearEquiv.ofFinrankEq from C(d,2) = C(d,d-2) — an arbitrary iso from dimension count, not the volume-dual map; the Clifford-product degree computation is formalized only at d = 3 (vol3_gamma* identities)."
+    "note": "dimension core C(d,2) = C(d,d-2) and the linear isomorphism Wedge^2 = Wedge^{d-2}; SO(V)-equivariance of the Clifford realisation not formalised Scope: the proved isomorphism is LinearEquiv.ofFinrankEq from C(d,2) = C(d,d-2) — an arbitrary iso from dimension count, not the volume-dual map; the Clifford-product degree computation is formalized only at d = 3 (vol3_gamma* identities)."
   },
   "thm:interference-closure-selects-three": {
     "env": "theorem",
@@ -1849,7 +1856,7 @@
       "NCG.vol3_gamma20",
       "NCG.temporal_anticomm_volume"
     ],
-    "note": "Vol^2 = -1 at d = 3, the epsilon identities, and temporal anticommutation; the two-summand spinor decomposition of Cl_3(C) not formalised AUDIT-2026-07-21: centrality of Vol in Cl_3(C) is unproved (invertibility is implicit in Vol^2 = -1); only the cyclic epsilon-identities are proved, not the general i != j form."
+    "note": "Vol^2 = -1 at d = 3, the epsilon identities, and temporal anticommutation; the two-summand spinor decomposition of Cl_3(C) not formalised Scope: centrality of Vol in Cl_3(C) is unproved (invertibility is implicit in Vol^2 = -1); only the cyclic epsilon-identities are proved, not the general i != j form."
   },
   "thm:full-isotropy-interference": {
     "env": "theorem",
@@ -1861,7 +1868,7 @@
       "NCG.cross_product_antisymm",
       "NCG.open_subgroup_eq_top"
     ],
-    "note": "the d = 3 existence half is proved: the cross product is a nonzero antisymmetric intertwiner (e1 x e2 = e3) realising Hom(Lambda^2 V, V) at d = 3, matching the proved Hodge-degree selection d - 2 = 1; the SO(d) representation-theoretic vanishing for d != 3 and Schur uniqueness are the noted steps AUDIT-2026-07-21: only the easy d = 3 existence witness (cross product) is proved; the principal content — Hom_SO(d)(Lambda^2 V, V) = 0 for d != 3 and Schur uniqueness at d = 3 — is unformalized; open_subgroup_eq_top belongs to prop:interference-controllability."
+    "note": "the d = 3 existence half is proved: the cross product is a nonzero antisymmetric intertwiner (e1 x e2 = e3) realising Hom(Lambda^2 V, V) at d = 3, matching the proved Hodge-degree selection d - 2 = 1; the SO(d) representation-theoretic vanishing for d != 3 and Schur uniqueness are the noted steps Scope: only the easy d = 3 existence witness (cross product) is proved; the principal content — Hom_SO(d)(Lambda^2 V, V) = 0 for d != 3 and Schur uniqueness at d = 3 — is unformalized; open_subgroup_eq_top belongs to prop:interference-controllability."
   },
   "cor:first-order-symbol-selects-three": {
     "env": "corollary",
@@ -1879,7 +1886,7 @@
     "lean": [
       "NCG.dimension_final_status"
     ],
-    "note": "minimality (3 <= d for nondegenerate odd ranks) + uniqueness under interference closure; the regular-crystal chain q_alg = q_met = rank omega = 4 tracked separately AUDIT-2026-07-21: the anchored statement is the omega-arithmetic core; the second display's equivalences (beta_eff = 3, q_alg = q_met = rank omega = 4, d_s = 4) are unformalized here and tracked in their own records; the depth of \"minimal unconditionally\" lives in the primitivity records."
+    "note": "minimality (3 <= d for nondegenerate odd ranks) + uniqueness under interference closure; the regular-crystal chain q_alg = q_met = rank omega = 4 tracked separately Scope: the anchored statement is the omega-arithmetic core; the second display's equivalences (beta_eff = 3, q_alg = q_met = rank omega = 4, d_s = 4) are unformalized here and tracked in their own records; the depth of \"minimal unconditionally\" lives in the primitivity records."
   },
   "thm:real-even-division-selects-three": {
     "env": "theorem",
@@ -1920,7 +1927,7 @@
       "NCG.exists_symm_ne_zero",
       "NCG.exists_antisymm_ne_zero"
     ],
-    "note": "Sym^2 and Wedge^2 intersect trivially, jointly span, and are both nonzero for rank >= 2: inequivalent tensor sectors AUDIT-2026-07-21: the direct-sum decomposition and nontriviality are proved, but inequivalence of Sym^2 V and Lambda^2 V as natural tensor sectors (complementarity does not imply inequivalence) is not, and the Lichnerowicz reduction sentence is dropped."
+    "note": "Sym^2 and Wedge^2 intersect trivially, jointly span, and are both nonzero for rank >= 2: inequivalent tensor sectors Scope: the direct-sum decomposition and nontriviality are proved, but inequivalence of Sym^2 V and Lambda^2 V as natural tensor sectors (complementarity does not imply inequivalence) is not, and the Lichnerowicz reduction sentence is dropped."
   },
   "prop:additive-access-main": {
     "env": "proposition",
@@ -1961,7 +1968,8 @@
       "NCG.revisionAlgebra_finrank",
       "NCG.complexity_gap"
     ],
-    "note": "AUDIT-2026-07-21 RE-EARNED (PowerCounting.lean): the displayed dimension formula and gap are now genuinely computed — revisionAlgebra_finrank proves dim_C M_{2^{(m+1)/2}}(C) = 2^{m+1} for odd m and complexity_gap proves the factor-4 step m -> m+2. The identification A_rev iso M_{2^{(m+1)/2}}(C) iso Cl_{m+1}(C) is, as in the text, the citation to thm:primitivity-canonical (whose Wedderburn step is disclosed there); Mathlib currently lacks the Clifford basis theorem, so the Cl-side dimension phrasing is carried through that identification."
+    "note": "Proved (PowerCounting.lean): the displayed dimension formula and gap are genuinely computed — revisionAlgebra_finrank proves dim_C M_{2^{(m+1)/2}}(C) = 2^{m+1} for odd m and complexity_gap proves the factor-4 step m -> m+2. The identification A_rev iso M_{2^{(m+1)/2}}(C) iso Cl_{m+1}(C) is, as in the text, the citation to thm:primitivity-canonical (whose Wedderburn step is disclosed there); Mathlib currently lacks the Clifford basis theorem, so the Cl-side dimension phrasing is carried through that identification.",
+    "env": "lemma"
   },
   "lem:minimal-frame": {
     "env": "lemma",
@@ -2002,7 +2010,7 @@
       "NCG.Multigraph.betti_le_of_surjective",
       "NCG.Multigraph.card_H1_le_of_surjective"
     ],
-    "note": "any decimation inducing a surjection on Z/2 cycle spaces has non-increasing b1 and sector count AUDIT-2026-07-21: cycle-space surjectivity — the decimation-specific assertion — is a hypothesis (no decimation map is defined in Lean); given it, the conclusion is a one-line rank lemma."
+    "note": "any decimation inducing a surjection on Z/2 cycle spaces has non-increasing b1 and sector count Scope: cycle-space surjectivity — the decimation-specific assertion — is a hypothesis (no decimation map is defined in Lean); given it, the conclusion is a one-line rank lemma."
   },
   "prop:decimation-cannot-access": {
     "env": "proposition",
@@ -2012,7 +2020,7 @@
       "NCG.Multigraph.betti_le_of_surjective",
       "NCG.not_accessFixedPoint_of_five_le"
     ],
-    "note": "both halves: quotient decimation is non-increasing in b1 (surjection form), while the access map exceeds every b >= 5 - so no ordinary coarse-graining implements the access fixed point AUDIT-2026-07-21: Lean proves b is not a fixed point (the witness m = 2^(b-2) strictly beats the diagonal); the text's stronger claim F(b) > b (the argmax exceeds b) is unformalized."
+    "note": "both halves: quotient decimation is non-increasing in b1 (surjection form), while the access map exceeds every b >= 5 - so no ordinary coarse-graining implements the access fixed point Scope: Lean proves b is not a fixed point (the witness m = 2^(b-2) strictly beats the diagonal); the text's stronger claim F(b) > b (the argmax exceeds b) is unformalized."
   },
   "thm:canonicity": {
     "env": "theorem",
@@ -2040,7 +2048,7 @@
       "NCG.sq_sub_sq_noncomm",
       "NCG.resolvent_diff_bound"
     ],
-    "note": "REPAIRED (previous citation was an unrelated scalar lemma): the manuscript's displayed bound is now proved - for invertible elements with norm(u^-1), norm(v^-1) <= c and norm(u), norm(v) <= 1 in any normed ring, norm(u^-2 - v^-2) <= 2 c^4 norm(v - u), via the noncommutative identity u^-2 - v^-2 = u^-2(v^2 - u^2)v^-2 and the difference-of-squares expansion, exactly the manuscript's 2 m0^-4 bound with c = m0^-1; the spectral input m0 I <= M => norm(M^-1) <= m0^-1 and the local-uniform distance convergence remain the noted steps"
+    "note": "the manuscript's displayed bound is proved - for invertible elements with norm(u^-1), norm(v^-1) <= c and norm(u), norm(v) <= 1 in any normed ring, norm(u^-2 - v^-2) <= 2 c^4 norm(v - u), via the noncommutative identity u^-2 - v^-2 = u^-2(v^2 - u^2)v^-2 and the difference-of-squares expansion, exactly the manuscript's 2 m0^-4 bound with c = m0^-1; the spectral input m0 I <= M => norm(M^-1) <= m0^-1 and the local-uniform distance convergence remain the noted steps"
   },
   "prop:joint-symbol-cone": {
     "env": "proposition",
@@ -2051,7 +2059,7 @@
       "NCG.KreinCliffordDatum.symbol_square",
       "NCG.posDef_mul_self"
     ],
-    "note": "the frozen-symbol core is proved: the squared symbol is the scalar quadratic form of M(x)^2, quadratic forms depend Lipschitz-continuously on their coefficients (explicit d^2 K M^2 bound on boxes), and positive definiteness persists in the square; the locally uniform convergence and Hausdorff cone convergence are the noted steps AUDIT-2026-07-21: both displayed conclusions (locally uniform frozen-symbol convergence with the O(h^2 Lambda^3) estimate; Hausdorff cone estimate d_H <= kappa ||M_R - M||) are unformalized; the anchors are correct static ingredients."
+    "note": "the frozen-symbol core is proved: the squared symbol is the scalar quadratic form of M(x)^2, quadratic forms depend Lipschitz-continuously on their coefficients (explicit d^2 K M^2 bound on boxes), and positive definiteness persists in the square; the locally uniform convergence and Hausdorff cone convergence are the noted steps Scope: both displayed conclusions (locally uniform frozen-symbol convergence with the O(h^2 Lambda^3) estimate; Hausdorff cone estimate d_H <= kappa ||M_R - M||) are unformalized; the anchors are correct static ingredients."
   },
   "prop:joint-finite-propagation": {
     "env": "proposition",
@@ -2062,7 +2070,7 @@
       "NCG.diagOp_hasPropagation_zero",
       "NCG.shiftOp_hasPropagation_one"
     ],
-    "note": "the renewal generators propagate at speed <= 1, diagonal multipliers at speed 0, and propagation is subadditive under composition (triangle inequality), so every polynomial in the generators has finite propagation; the continuum energy-estimate cone comparison is the noted analytic step AUDIT-2026-07-21: the text is purely continuum (supp u(t) within J_t^+(S) via the symmetric-hyperbolic energy estimate; group-velocity hull); the Lean discrete propagation subadditivity is a surrogate the statement does not contain (the text itself notes the discrete evolution has no exact cone)."
+    "note": "the renewal generators propagate at speed <= 1, diagonal multipliers at speed 0, and propagation is subadditive under composition (triangle inequality), so every polynomial in the generators has finite propagation; the continuum energy-estimate cone comparison is the noted analytic step Scope: the text is purely continuum (supp u(t) within J_t^+(S) via the symmetric-hyperbolic energy estimate; group-velocity hull); the Lean discrete propagation subadditivity is a surrogate the statement does not contain (the text itself notes the discrete evolution has no exact cone)."
   },
   "thm:macroscopic-domain": {
     "env": "theorem",
@@ -2073,7 +2081,7 @@
       "NCG.hasPropagation_comp",
       "NCG.compressed_nonzero"
     ],
-    "note": "the discrete half is proved: the outer domain-of-dependence estimate is exactly the linear propagation bound for powers of the generator, and inner propagation survives compression by indicator projections; the continuum inner/outer comparison and energy estimates are the noted steps AUDIT-2026-07-21: neither clause (L2 mass vanishing outside J_t^+ in the limit; transfer via strong resolvent convergence) is formalized; the discrete linear bound does not address the continuum-limit claim (cf. rem:no-finite-mesh-order)."
+    "note": "the discrete half is proved: the outer domain-of-dependence estimate is exactly the linear propagation bound for powers of the generator, and inner propagation survives compression by indicator projections; the continuum inner/outer comparison and energy estimates are the noted steps Scope: neither clause (L2 mass vanishing outside J_t^+ in the limit; transfer via strong resolvent convergence) is formalized; the discrete linear bound does not address the continuum-limit claim (cf. rem:no-finite-mesh-order)."
   },
   "lem:constant-dirac-kernel": {
     "env": "lemma",
@@ -2084,7 +2092,7 @@
       "NCG.hasPropagation_comp",
       "NCG.shiftOp_hasPropagation_one"
     ],
-    "note": "the causal-cone support bound is proved on the discrete model: powers of the finite-propagation generator propagate linearly, so the evolution kernel vanishes outside dist x y <= n r; the exact wave-kernel formula sin(t k |M xi|)/(k |M xi|) and the Huygens sphere/ball dichotomy are the noted Fourier steps AUDIT-2026-07-21: the exact kernel formula K_t = dW_t 1 - i H_0 W_t and the Huygens ball/sphere support dichotomy are unformalized; the anchors are lattice propagation bounds on a different model, touching no displayed claim."
+    "note": "the causal-cone support bound is proved on the discrete model: powers of the finite-propagation generator propagate linearly, so the evolution kernel vanishes outside dist x y <= n r; the exact wave-kernel formula sin(t k |M xi|)/(k |M xi|) and the Huygens sphere/ball dichotomy are the noted Fourier steps Scope: the exact kernel formula K_t = dW_t 1 - i H_0 W_t and the Huygens ball/sphere support dichotomy are unformalized; the anchors are lattice propagation bounds on a different model, touching no displayed claim."
   },
   "thm:constant-inner-characterization": {
     "env": "theorem",
@@ -2094,7 +2102,7 @@
       "NCG.compressed_nonzero",
       "NCG.hasPropagation_pow"
     ],
-    "note": "the transfer core is proved: a nonzero kernel entry survives compression by the indicator projections, so support meeting U - V forces 1_U K 1_V != 0; the identification of supp K_t with the ball/shell and the convex-hull statement are the noted analytic steps AUDIT-2026-07-21: the continuum step (distribution-support/convolution decomposition from supp K_t meeting U - V to nonvanishing compression) and clauses (i)-(iii) (parity cases, convex hull) are unformalized; compressed_nonzero is the discrete analogue."
+    "note": "the transfer core is proved: a nonzero kernel entry survives compression by the indicator projections, so support meeting U - V forces 1_U K 1_V != 0; the identification of supp K_t with the ball/shell and the convex-hull statement are the noted analytic steps Scope: the continuum step (distribution-support/convolution decomposition from supp K_t meeting U - V to nonvanishing compression) and clauses (i)-(iii) (parity cases, convex hull) are unformalized; compressed_nonzero is the discrete analogue."
   },
   "prop:drift-dispersion": {
     "env": "proposition",
@@ -2147,7 +2155,7 @@
       "NCG.symbol_through_second_moment",
       "NCG.KreinCliffordDatum.symbol_square"
     ],
-    "note": "universality at symbol level: all microscopic presentations with the same second-moment field give the same principal symbol and emergent metric; the operator-limit packaging noted AUDIT-2026-07-21: the theorem's analytic content (strong-resolvent and propagator convergence of both families to the same operator via thm:curved-limit and Trotter-Kato) is entirely in the noted step; the symbol-level factorization identity is what is proved."
+    "note": "universality at symbol level: all microscopic presentations with the same second-moment field give the same principal symbol and emergent metric; the operator-limit packaging noted Scope: the theorem's analytic content (strong-resolvent and propagator convergence of both families to the same operator via thm:curved-limit and Trotter-Kato) is entirely in the noted step; the symbol-level factorization identity is what is proved."
   },
   "thm:metric-reconstruction": {
     "env": "theorem",
@@ -2157,7 +2165,7 @@
       "NCG.quadratic_determines_symm",
       "NCG.single_dotProduct_mulVec"
     ],
-    "note": "polarisation core: the principal-symbol quadratic form determines the symmetric spatial block kappa^2 M^2; M is then the unique positive square root (noted) AUDIT-2026-07-21: the intertwiner => graph-isomorphism + O(d) frame-change content (the signed reconstruction theorem plus second-moment covariance) is unformalized; the anchor proves polarisation (a quadratic form determines a symmetric matrix) only."
+    "note": "polarisation core: the principal-symbol quadratic form determines the symmetric spatial block kappa^2 M^2; M is then the unique positive square root (noted) Scope: the intertwiner => graph-isomorphism + O(d) frame-change content (the signed reconstruction theorem plus second-moment covariance) is unformalized; the anchor proves polarisation (a quadratic form determines a symmetric matrix) only."
   },
   "cor:symbol-reconstruction": {
     "env": "corollary",
@@ -2166,7 +2174,7 @@
     "lean": [
       "NCG.quadratic_determines_symm"
     ],
-    "note": "immediate from the polarisation reconstruction of the spatial block up to the stated gauge/frame choices AUDIT-2026-07-21: inherits the unformalized machinery of thm:metric-reconstruction; the polarisation lemma alone does not give the well-definedness + completeness equivalence-class statement."
+    "note": "immediate from the polarisation reconstruction of the spatial block up to the stated gauge/frame choices Scope: inherits the unformalized machinery of thm:metric-reconstruction; the polarisation lemma alone does not give the well-definedness + completeness equivalence-class statement."
   },
   "lem:integer-stencil-decomposition": {
     "env": "lemma",
@@ -2176,7 +2184,7 @@
       "NCG.stencil_moment_trace",
       "NCG.stencil_moment_psd"
     ],
-    "note": "the consistency half is proved: every stencil datum (unit directions, convex weights) assembles to a unit-trace positive-semidefinite second moment, so admissible stencil moments are exactly points of the moment body; the density of integer directions and the interior-perturbation existence argument are the noted steps AUDIT-2026-07-21: the lemma's existence claim (every unit-trace M > 0 has a finite integer-direction rank-one decomposition) is unformalized; the proved half is the easy converse (stencil data yield unit-trace PSD moments), which the lemma does not assert."
+    "note": "the consistency half is proved: every stencil datum (unit directions, convex weights) assembles to a unit-trace positive-semidefinite second moment, so admissible stencil moments are exactly points of the moment body; the density of integer directions and the interior-perturbation existence argument are the noted steps Scope: the lemma's existence claim (every unit-trace M > 0 has a finite integer-direction rank-one decomposition) is unformalized; the proved half is the easy converse (stencil data yield unit-trace PSD moments), which the lemma does not assert."
   },
   "thm:marked-torus-band-limit": {
     "env": "theorem",
@@ -2187,7 +2195,7 @@
       "NCG.twisted_momentum_gap_attained",
       "NCG.marked_gap_sq"
     ],
-    "note": "the twisted momentum quantisation is proved: half-integer modes on marked directions carry momentum >= pi, attained at the fundamental mode, and the band separation pi^2 |rho|_0 is additive over marked directions; the band-limited norm-resolvent convergence bookkeeping is the noted step AUDIT-2026-07-21: the displayed content (band-limited operator-norm bound (kappa/6) V*^2 h_R^2 Lambda^3, norm-resolvent convergence with multiplicities, zero-mode count) is unformalized; the anchors prove the twisted momentum quantisation (the pre-theorem display)."
+    "note": "the twisted momentum quantisation is proved: half-integer modes on marked directions carry momentum >= pi, attained at the fundamental mode, and the band separation pi^2 |rho|_0 is additive over marked directions; the band-limited norm-resolvent convergence bookkeeping is the noted step Scope: the displayed content (band-limited operator-norm bound (kappa/6) V*^2 h_R^2 Lambda^3, norm-resolvent convergence with multiplicities, zero-mode count) is unformalized; the anchors prove the twisted momentum quantisation (the pre-theorem display)."
   },
   "def:strictly-marked-dirac-datum": {
     "env": "definition",
@@ -2196,7 +2204,7 @@
     "lean": [
       "NCG.MarkedDiracDatum"
     ],
-    "note": "the (M, rho) datum encoded; strict marking/nondegeneracy conditions tracked in the classification notes AUDIT-2026-07-21: the Lean structure encodes only the moduli parameters (M symmetric via IsSymm, rho): no operator-theoretic datum, no PosDef/strict-marking condition, no strict or O(d,Z)-geometric equivalence relations."
+    "note": "the (M, rho) datum encoded; strict marking/nondegeneracy conditions tracked in the classification notes Scope: the Lean structure encodes only the moduli parameters (M symmetric via IsSymm, rho): no operator-theoretic datum, no PosDef/strict-marking condition, no strict or O(d,Z)-geometric equivalence relations."
   },
   "thm:marked-torus-classification": {
     "env": "theorem",
@@ -2207,7 +2215,7 @@
       "NCG.MarkedDiracDatum",
       "NCG.quadratic_determines_symm"
     ],
-    "note": "invariant core: the retained deck scalars (-1)^rho determine the marked class and the symbol determines M; the spectral/operator part of the classification noted AUDIT-2026-07-21: both classification clauses (strict equivalence iff M' = M, rho' = rho; geometric equivalence iff M' = O M O^T, rho' = O rho mod 2) are unformalized, as is the proof's operator content (multiplier intertwiners, Clifford irreducibility, global phase); markedClass_injective is injectivity of rho -> (-1)^rho."
+    "note": "invariant core: the retained deck scalars (-1)^rho determine the marked class and the symbol determines M; the spectral/operator part of the classification noted Scope: both classification clauses (strict equivalence iff M' = M, rho' = rho; geometric equivalence iff M' = O M O^T, rho' = O rho mod 2) are unformalized, as is the proof's operator content (multiplier intertwiners, Clifford irreducibility, global phase); markedClass_injective is injectivity of rho -> (-1)^rho."
   },
   "thm:marked-torus-correspondence": {
     "env": "theorem",
@@ -2218,7 +2226,7 @@
       "NCG.marked_gap_sq",
       "NCG.MarkedDiracDatum"
     ],
-    "note": "retention is proved: distinct marked classes give inequivalent marked Dirac data (deck scalars are retained) and marked directions are spectrally visible through the momentum gap; the explicit torus realization of each class is the noted constructive step AUDIT-2026-07-21: the realization half (integer-stencil signed renewal torus with winding class rho, band-limited norm-resolvent convergence) and the enriched-moduli bijection depend on the unformalized halves of lem:integer-stencil-decomposition and thm:marked-torus-band-limit; retention reduces to (-1)^rho injectivity plus the momentum gap."
+    "note": "retention is proved: distinct marked classes give inequivalent marked Dirac data (deck scalars are retained) and marked directions are spectrally visible through the momentum gap; the explicit torus realization of each class is the noted constructive step Scope: the realization half (integer-stencil signed renewal torus with winding class rho, band-limited norm-resolvent convergence) and the enriched-moduli bijection depend on the unformalized halves of lem:integer-stencil-decomposition and thm:marked-torus-band-limit; retention reduces to (-1)^rho injectivity plus the momentum gap."
   },
   "prop:record-determinant-orientation": {
     "env": "proposition",
@@ -2244,9 +2252,13 @@
       "NCG.pRad",
       "NCG.tendsto_growthSeq",
       "NCG.pRad_smul",
-      "NCG.pRad_le_of_entry_le"
+      "NCG.pRad_le_of_entry_le",
+      "NCG.eigenvalue_eq_pRad",
+      "NCG.eigenvalue_eq_pRad_of_isIrreducible",
+      "NCG.exists_pRad_eigenvector_of_isIrreducible",
+      "Matrix.IsIrreducible.exists_eq_smul_of_mulVec_eq_smul"
     ],
-    "note": "proved in NCG/Lorentz/PerronPressure.lean. The kernel is encoded faithfully as K(s)_{xy} = sum over edges e : x -> y of q_e exp(-s l_e) (pressureKernel, over a finite edge type with src/tgt maps), with q_e > 0 and 0 < l_0 <= l_e <= l_1. Since Mathlib has no Perron-Frobenius theory, the spectral radius is implemented as the Gelfand-Fekete growth rate pRad A = exp(lim log(entrySum(A^k))/k) of the total entry sum of powers (submultiplicative for nonnegative matrices; Fekete via Mathlib's Subadditive.tendsto_lim, bounded below through a positive diagonal power entry). Strong connectivity of the recurrent component enters as the hypothesis HasDiagWitness (some power of K(0) has a positive diagonal entry - the matrix form of a positive-weight cycle), which transfers to every s by entrywise exponential domination. Proved clauses: r = pressureRate is StrictAnti on all of R (from K(t) <= e^{-(t-s)l_0} K(s) entrywise, monotonicity and positive homogeneity of pRad, and r > 0), Continuous (two-sided exponential squeeze with rate max(l_1,l_0)), Tendsto r atTop (nhds 0), and the pressure trichotomy: r(0) > 1 gives a unique beta > 0 with r(beta) = 1 (intermediate value + strict monotonicity), r(0) = 1 admits no positive root (the root is beta = 0), r(0) < 1 admits no nonnegative root. Deviation/disclosure: the manuscript's concluding Perron remark (simplicity of the eigenvalue and strict positivity of left/right eigenvectors at the root) is a classical PF statement not consumed by the selection result; it is NOT formalized (no eigenvector theory is built), as stated in the file docstring. r is realized as the Gelfand growth rate rather than an eigenvalue of a characteristic polynomial; for nonnegative matrices these agree classically."
+    "note": "proved in NCG/Lorentz/PerronPressure.lean. The kernel is encoded faithfully as K(s)_{xy} = sum over edges e : x -> y of q_e exp(-s l_e) (pressureKernel, over a finite edge type with src/tgt maps), with q_e > 0 and 0 < l_0 <= l_e <= l_1. Since Mathlib has no Perron-Frobenius theory, the spectral radius is implemented as the Gelfand-Fekete growth rate pRad A = exp(lim log(entrySum(A^k))/k) of the total entry sum of powers (submultiplicative for nonnegative matrices; Fekete via Mathlib's Subadditive.tendsto_lim, bounded below through a positive diagonal power entry). Strong connectivity of the recurrent component enters as the hypothesis HasDiagWitness (some power of K(0) has a positive diagonal entry - the matrix form of a positive-weight cycle), which transfers to every s by entrywise exponential domination. Proved clauses: r = pressureRate is StrictAnti on all of R (from K(t) <= e^{-(t-s)l_0} K(s) entrywise, monotonicity and positive homogeneity of pRad, and r > 0), Continuous (two-sided exponential squeeze with rate max(l_1,l_0)), Tendsto r atTop (nhds 0), and the pressure trichotomy: r(0) > 1 gives a unique beta > 0 with r(beta) = 1 (intermediate value + strict monotonicity), r(0) = 1 admits no positive root (the root is beta = 0), r(0) < 1 admits no nonnegative root. Deviation/disclosure: the manuscript's concluding Perron remark is now fully formalized: strict positivity of the left/right eigenvectors and simplicity of the eigenvalue (every eigenvector for the Perron eigenvalue is a scalar multiple of the positive one, Matrix.IsIrreducible.exists_eq_smul_of_mulVec_eq_smul) in NCG/Lorentz/PerronExistence.lean, and the identification of the growth rate with the Perron eigenvalue in NCG/Lorentz/PerronPressure.lean: for every irreducible kernel, pRad A is itself an eigenvalue carried by an entrywise positive eigenvector (exists_pRad_eigenvector_of_isIrreducible), and any eigenvalue with a positive eigenvector equals pRad A (eigenvalue_eq_pRad_of_isIrreducible, via the entry-sum sandwich eigenvalue_eq_pRad). r is realized as the Gelfand growth rate, proved to coincide with the Perron eigenvalue whenever the kernel is irreducible."
   },
   "prop:second-moment-isometry": {
     "env": "proposition",
@@ -2294,6 +2306,6 @@
       "NCG.inducedForm_separating",
       "NCG.radical_iff_central"
     ],
-    "note": "proved across NCG/Algebra/CanonicalReductions.lean and the existing radical-quotient layer. (a) stationary_supported_on_terminal: for a finite row-stochastic kernel, if pi is stationary and pi x > 0 then every state reachable from x through positive-probability steps has positive mass and reaches back to x (support lies in terminal strongly connected components); proved by a mass-conservation argument on the set reachable from y (no leakage into a closed set from the outside support) plus path induction. (b) action_kernel_quotient_faithful: the kernel-quotient of any group homomorphism/action is faithful (QuotientGroup.kerLift_injective); matrix_algEquiv_inner: Skolem-Noether for full matrix algebras over any field, proved from scratch (Mathlib has no Skolem-Noether): the transported matrix units f_ij = phi(E_ij) satisfy the unit relations, a vector w with f00 w = w != 0 yields the intertwiner S with columns f_j0 w, an explicit left inverse T = (w i1)^{-1} f_0k(i1, .) gives invertibility, and phi(a) = S a S^{-1}. The manuscript's orbit/block-selection sentence is set-up prose for these two steps. (c) is the previously formalized radical-quotient reduction: centrality of an implementer iff its label lies in rad omega (radical_iff_central), the quotient by the radical carries a nondegenerate alternating form (PrimitiveQuotient, inducedForm_isAlt, inducedForm_separating), and the primitive matrix factor dimension count is NCG/Algebra/FactorBlocks; the analytic Stone-von-Neumann identification remains the noted step disclosed in the even_finrank_primitiveQuotient record."
+    "note": "proved across NCG/Algebra/CanonicalReductions.lean and the existing radical-quotient layer. (a) stationary_supported_on_terminal: for a finite row-stochastic kernel, if pi is stationary and pi x > 0 then every state reachable from x through positive-probability steps has positive mass and reaches back to x (support lies in terminal strongly connected components); proved by a mass-conservation argument on the set reachable from y (no leakage into a closed set from the outside support) plus path induction. (b) action_kernel_quotient_faithful: the kernel-quotient of any group homomorphism/action is faithful (QuotientGroup.kerLift_injective); matrix_algEquiv_inner: Skolem-Noether for full matrix algebras over any field, proved from scratch (Mathlib has no Skolem-Noether): the transported matrix units f_ij = phi(E_ij) satisfy the unit relations, a vector w with f00 w = w != 0 yields the intertwiner S with columns f_j0 w, an explicit left inverse T = (w i1)^{-1} f_0k(i1, .) gives invertibility, and phi(a) = S a S^{-1}. The manuscript's orbit/block-selection sentence is set-up prose for these two steps. (c) is the radical-quotient reduction: centrality of an implementer iff its label lies in rad omega (radical_iff_central), the quotient by the radical carries a nondegenerate alternating form (PrimitiveQuotient, inducedForm_isAlt, inducedForm_separating), and the primitive matrix factor dimension count is NCG/Algebra/FactorBlocks; the analytic Stone-von-Neumann identification remains the noted step disclosed in the even_finrank_primitiveQuotient record."
   }
 }

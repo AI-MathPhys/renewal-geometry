@@ -52,7 +52,7 @@ theorem perm_hom_eq_one_or_sign (f : Perm α →* ℤˣ) :
     · intro g x y hxy ih
       rw [map_mul, hswap x y hxy, one_mul, ih]
   · right
-    push_neg at hswap
+    push Not at hswap
     obtain ⟨a, b, hab, hfab⟩ := hswap
     have hval : f (swap a b) = -1 := by
       rcases Int.units_eq_one_or (f (swap a b)) with h | h

@@ -43,16 +43,17 @@ def spinVal (t : Bool) : ℝ := if t then 1 else -1
 /-- The spin configuration of a Boolean assignment. -/
 def spinCfg (β : ι → Bool) : ι → ℝ := fun j => spinVal (β j)
 
+omit [Fintype ι] in
 theorem spinCfg_update (β : ι → Bool) (i : ι) (t : Bool) :
     spinCfg (Function.update β i t)
       = Function.update (spinCfg β) i (spinVal t) := by
   funext j
   by_cases hj : j = i
   · rw [hj]
-    show spinVal (Function.update β i t i)
+    change spinVal (Function.update β i t i)
       = Function.update (spinCfg β) i (spinVal t) i
     rw [Function.update_self, Function.update_self]
-  · show spinVal (Function.update β i t j)
+  · change spinVal (Function.update β i t j)
       = Function.update (spinCfg β) i (spinVal t) j
     rw [Function.update_of_ne hj, Function.update_of_ne hj]
     rfl
@@ -62,16 +63,17 @@ def exchangeMap (i : ι) :
     ((ι → Bool) × Bool) → ((ι → Bool) × Bool) :=
   fun p => (Function.update p.1 i p.2, p.1 i)
 
+omit [Fintype ι] in
 theorem exchangeMap_involutive (i : ι) :
     Function.Involutive (exchangeMap (ι := ι) i) := by
   rintro ⟨β, t⟩
   refine Prod.ext ?_ ?_
-  · show Function.update (Function.update β i t) i (β i) = β
+  · change Function.update (Function.update β i t) i (β i) = β
     funext j
     by_cases hj : j = i
     · rw [hj, Function.update_self]
     · rw [Function.update_of_ne hj, Function.update_of_ne hj]
-  · show (Function.update β i t) i = t
+  · change (Function.update β i t) i = t
     rw [Function.update_self]
 
 /-- The exchange as a permutation of elementary transitions. -/
@@ -79,6 +81,7 @@ def exchangeEquiv (i : ι) :
     Equiv.Perm ((ι → Bool) × Bool) :=
   Function.Involutive.toPerm _ (exchangeMap_involutive i)
 
+omit [Fintype ι] in
 @[simp] theorem exchangeEquiv_apply (i : ι)
     (p : (ι → Bool) × Bool) :
     exchangeEquiv i p = (Function.update p.1 i p.2, p.1 i) := rfl
@@ -162,6 +165,7 @@ theorem branch_kms_exchange (ν : ι → ℝ) (r : ι → Fin 3 → ℝ → ℝ)
     _ = ∑ p : (ι → Bool) × Bool, Rf p :=
         Equiv.sum_comp (exchangeEquiv i) Rf
 
+omit [Fintype ι] in
 /-- Trace expansion of a single branch against a test observable. -/
 theorem branch_trace_left (ν : ι → ℝ) (r : ι → Fin 3 → ℝ → ℝ)
     (κ : Fin 3 → ℝ)
@@ -171,12 +175,13 @@ theorem branch_trace_left (ν : ι → ℝ) (r : ι → Fin 3 → ℝ → ℝ)
     ((D.branch ν r κ Ψ i s a b F η)ᴴ * G η).trace
       = ((D.w ν r κ i s a b η : ℝ) : ℂ)
         * ((Ψ a b (F (Function.update η i s)))ᴴ * G η).trace := by
-  show ((((D.w ν r κ i s a b η : ℝ) : ℂ)
+  change ((((D.w ν r κ i s a b η : ℝ) : ℂ)
       • Ψ a b (F (Function.update η i s)))ᴴ * G η).trace = _
   rw [Matrix.conjTranspose_smul, Matrix.smul_mul,
     Matrix.trace_smul, smul_eq_mul, Complex.star_def,
     Complex.conj_ofReal]
 
+omit [Fintype ι] in
 /-- Trace expansion of a test observable against a single branch. -/
 theorem branch_trace_right (ν : ι → ℝ) (r : ι → Fin 3 → ℝ → ℝ)
     (κ : Fin 3 → ℝ)
@@ -187,7 +192,7 @@ theorem branch_trace_right (ν : ι → ℝ) (r : ι → Fin 3 → ℝ → ℝ)
       = ((D.w ν r κ i s a b η : ℝ) : ℂ)
         * ((F η)ᴴ
           * Ψ a b (G (Function.update η i s))).trace := by
-  show ((F η)ᴴ * (((D.w ν r κ i s a b η : ℝ) : ℂ)
+  change ((F η)ᴴ * (((D.w ν r κ i s a b η : ℝ) : ℂ)
       • Ψ a b (G (Function.update η i s)))).trace = _
   rw [Matrix.mul_smul, Matrix.trace_smul, smul_eq_mul]
 
@@ -260,7 +265,7 @@ theorem totalChannel_kms_selfadjoint (ν : ι → ℝ)
                   * G (spinCfg β)).trace
                 + ((D.branch ν r κ Ψ i (-1) a b F (spinCfg β))ᴴ
                     * G (spinCfg β)).trace) := by
-        show ((∑ i, ∑ a, ∑ b,
+        change ((∑ i, ∑ a, ∑ b,
             (D.branch ν r κ Ψ i 1 a b F (spinCfg β)
               + D.branch ν r κ Ψ i (-1) a b F (spinCfg β)))ᴴ
           * G (spinCfg β)).trace = _
@@ -321,7 +326,7 @@ theorem totalChannel_kms_selfadjoint (ν : ι → ℝ)
                 + ((F (spinCfg β))ᴴ
                     * D.branch ν r κ Ψ i (-1) a b G
                         (spinCfg β)).trace) := by
-        show ((F (spinCfg β))ᴴ * (∑ i, ∑ a, ∑ b,
+        change ((F (spinCfg β))ᴴ * (∑ i, ∑ a, ∑ b,
             (D.branch ν r κ Ψ i 1 a b G (spinCfg β)
               + D.branch ν r κ Ψ i (-1) a b G
                   (spinCfg β)))).trace = _

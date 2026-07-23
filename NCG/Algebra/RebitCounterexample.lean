@@ -52,7 +52,7 @@ def realAmpliate
     Φ (Matrix.of fun i j => X (p.1, i) (q.1, j)) p.2 q.2
   map_add' X Y := by
     ext ⟨p1, p2⟩ ⟨q1, q2⟩
-    show Φ (Matrix.of fun i j => (X + Y) (p1, i) (q1, j)) p2 q2
+    change Φ (Matrix.of fun i j => (X + Y) (p1, i) (q1, j)) p2 q2
       = Φ (Matrix.of fun i j => X (p1, i) (q1, j)) p2 q2
         + Φ (Matrix.of fun i j => Y (p1, i) (q1, j)) p2 q2
     have h1 : (Matrix.of fun i j => (X + Y) (p1, i) (q1, j))
@@ -63,7 +63,7 @@ def realAmpliate
     rw [h1, map_add, Matrix.add_apply]
   map_smul' c X := by
     ext ⟨p1, p2⟩ ⟨q1, q2⟩
-    show Φ (Matrix.of fun i j => (c • X) (p1, i) (q1, j)) p2 q2
+    change Φ (Matrix.of fun i j => (c • X) (p1, i) (q1, j)) p2 q2
       = (c • Φ (Matrix.of fun i j => X (p1, i) (q1, j))) p2 q2
     have h1 : (Matrix.of fun i j => (c • X) (p1, i) (q1, j))
         = c • Matrix.of fun i j => X (p1, i) (q1, j) := by

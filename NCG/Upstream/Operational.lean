@@ -278,7 +278,7 @@ theorem Qmap_nil {G : GeneratedPresentation O} (B : P) :
     Qmap (G := G) (Hist.nil B) = id := by
   funext x
   induction x using Quot.ind with | _ h =>
-  show Quot.mk _ (h.comp (Hist.nil B)) = Quot.mk _ h
+  change Quot.mk _ (h.comp (Hist.nil B)) = Quot.mk _ h
   rw [Hist.comp_nil]
 
 /-- **Corollary `cor:quotient-action` (composition law)**: `Q₊` is a
@@ -289,7 +289,7 @@ theorem Qmap_comp {G : GeneratedPresentation O} {B C D : P}
     Qmap (G := G) (k.comp d) = Qmap d ∘ Qmap k := by
   funext x
   induction x using Quot.ind with | _ h =>
-  show Quot.mk _ (h.comp (k.comp d)) = Quot.mk _ ((h.comp k).comp d)
+  change Quot.mk _ (h.comp (k.comp d)) = Quot.mk _ ((h.comp k).comp d)
   rw [Hist.comp_assoc]
 
 /-- **Theorem `thm:reduction-to-equality`**: if the generated future

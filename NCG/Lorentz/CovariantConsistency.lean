@@ -56,7 +56,7 @@ theorem covariant_central_difference {V : Type*} [AddCommGroup V]
       - linkTransport Ω (-h) (taylorValue (-h) ψ dψ ddψ)
     = (2 * h) • (dψ + Ω ψ) + (h ^ 3) • (Ω ddψ + Ω (Ω dψ)) := by
   simp only [linkTransport, taylorValue, map_add, map_smul, map_neg,
-    Even.neg_pow even_two, neg_neg, neg_smul, smul_neg]
+    Even.neg_pow even_two, neg_smul]
   module
 
 /-- **Lemma `lem:covariant-consistency` (division by `2h`)**: for
@@ -74,6 +74,6 @@ theorem covariant_central_difference_div {V : Type*} [AddCommGroup V]
   have h2 : (2 * h) ≠ 0 := mul_ne_zero two_ne_zero hh
   rw [inv_mul_cancel₀ h2, one_smul,
     show (2 * h)⁻¹ * h ^ 3 = h ^ 2 / 2 from by
-      field_simp <;> ring]
+      field_simp]
 
 end NCG

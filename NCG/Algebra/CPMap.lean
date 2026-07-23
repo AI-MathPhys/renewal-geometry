@@ -69,6 +69,7 @@ def IsCompletelyPositive (φ : A →ₗ[ℂ] A) : Prop :=
 
 namespace IsCompletelyPositive
 
+omit [StarOrderedRing A] in
 /-- The identity map is completely positive. -/
 protected theorem id : IsCompletelyPositive (LinearMap.id : A →ₗ[ℂ] A) := by
   intro k M hM
@@ -78,6 +79,7 @@ protected theorem id : IsCompletelyPositive (LinearMap.id : A →ₗ[ℂ] A) := 
   rw [h]
   exact hM
 
+omit [StarOrderedRing A] in
 /-- Completely positive maps are closed under (diagrammatic) composition. -/
 protected theorem comp {φ ψ : A →ₗ[ℂ] A} (hφ : IsCompletelyPositive φ)
     (hψ : IsCompletelyPositive ψ) : IsCompletelyPositive (ψ ∘ₗ φ) := by

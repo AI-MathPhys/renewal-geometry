@@ -43,9 +43,10 @@ open Matrix Kronecker
 
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
+omit [DecidableEq ι] [Fintype ι] in
 /-- The spin box bound for Boolean configurations. -/
 theorem spinCfg_box (β : ι → Bool) (j : ι) : |spinCfg β j| ≤ 1 := by
-  show |spinVal (β j)| ≤ 1
+  change |spinVal (β j)| ≤ 1
   cases hb : β j <;> norm_num [spinVal]
 
 /-- **Clause (i) of `thm:common-origin-phase` (stationarity)**: the
@@ -113,10 +114,11 @@ theorem diamond_zero_defect (d : Bool → ℝ)
 
 /-! ## Deck covariance of the heat-bath marginal -/
 
+omit [DecidableEq ι] [Fintype ι] in
 theorem spinCfg_flip (γ : ι → Bool) :
     spinCfg (fun j => !γ j) = -(spinCfg γ) := by
   funext j
-  show spinVal (!γ j) = -(spinVal (γ j))
+  change spinVal (!γ j) = -(spinVal (γ j))
   cases hb : γ j <;> norm_num [spinVal]
 
 theorem spinVal_not (t : Bool) : spinVal (!t) = -spinVal t := by
@@ -158,7 +160,7 @@ theorem heatBathMatrix_deck (D : IsingData ι) (ν : ι → ℝ)
         rw [h1, Bool.not_not]
       · rw [Function.update_of_ne hj] at h1 ⊢
         rw [h1]
-  show (∑ i, ∑ t : Bool,
+  change (∑ i, ∑ t : Bool,
       (if (fun j => !β' j) = Function.update (fun j => !β j) i t
         then ν i * D.q i (spinVal t) (spinCfg fun j => !β j)
         else 0))
@@ -170,7 +172,7 @@ theorem heatBathMatrix_deck (D : IsingData ι) (ν : ι → ℝ)
     (Equiv.sum_comp notPerm (fun t : Bool =>
       if β' = Function.update β i t
         then ν i * D.q i (spinVal t) (spinCfg β) else 0))
-  show (if (fun j => !β' j) = Function.update (fun j => !β j) i t
+  change (if (fun j => !β' j) = Function.update (fun j => !β j) i t
       then ν i * D.q i (spinVal t) (spinCfg fun j => !β j)
       else 0)
     = (if β' = Function.update β i (!t)
@@ -237,7 +239,7 @@ theorem productKernel_pow_pos [Nonempty ι] (D : IsingData ι)
   rw [productKernel, kron_pow, diamondKernel_pow _ hN]
   rcases p with ⟨β, z⟩
   rcases p' with ⟨β', z'⟩
-  show 0 < (heatBathMatrix D ν ^ Fintype.card ι) β β'
+  change 0 < (heatBathMatrix D ν ^ Fintype.card ι) β β'
     * diamondKernel z z'
   exact mul_pos (heatBathMatrix_pow_pos D ν hν β β')
     (diamondKernel_pos z z')
@@ -279,7 +281,7 @@ theorem productKernel_stationary (D : IsingData ι) (ν : ι → ℝ)
             * (heatBathMatrix D ν β p'.1
               * diamondKernel z p'.2) from rfl]
     rw [Fintype.sum_bool]
-    show π β * (1 / 2) * (heatBathMatrix D ν β p'.1 * (1 / 2))
+    change π β * (1 / 2) * (heatBathMatrix D ν β p'.1 * (1 / 2))
         + π β * (1 / 2) * (heatBathMatrix D ν β p'.1 * (1 / 2))
       = π β * heatBathMatrix D ν β p'.1 * (1 / 2)
     ring

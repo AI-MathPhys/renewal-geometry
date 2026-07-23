@@ -76,6 +76,7 @@ theorem capacity_factorization (e : E) :
     Real.exp_log hle]
 
 include hbar hq in
+omit hbar in
 /-- **Theorem `thm:affinity-conductance` (uniqueness)**: any
 factorization `q_e = c_e · exp(A_e/2)` with `c` symmetric positive and
 `A` antisymmetric coincides with the canonical capacity/affinity

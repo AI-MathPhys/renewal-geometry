@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import NCG.Lorentz.PerronExistence
 
 /-!
 # Perron pressure selects the modular exponent
 
-Covers `thm:pressure-selects-beta` from `manuscripts/lorentzian_emergence/lorentzian_emergence.tex`: for the
+Covers `thm:pressure-selects-beta` from
+`manuscripts/lorentzian_emergence/lorentzian_emergence.tex`: for the
 length-weighted transfer kernel
 `K(s)_{xy} = ∑_{e : x→y} q_e e^{−s ℓ_e}` (`q_e > 0`,
 `0 < ℓ₀ ≤ ℓ_e ≤ ℓ₁`) on a strongly connected recurrent component, the
@@ -28,9 +30,13 @@ power, which bounds the growth from below and keeps every quantity
 finite.  Strict monotonicity in `s` comes from the entrywise
 exponential domination `K(t) ≤ e^{−(t−s)ℓ₀}·K(s)` together with
 positive homogeneity of the growth rate — no eigenvector theory is
-needed.  The concluding Perron remark of the manuscript (simplicity of
-the eigenvalue and positivity of the eigenvectors at the root) is not
-consumed by the selection statement and is not formalized here.
+needed for the selection statement.  The Perron eigenvector theory
+itself (existence, positivity, simplicity for irreducible matrices)
+lives in `NCG.Lorentz.PerronExistence`; the final section here
+identifies the Perron eigenvalue with the growth rate
+(`eigenvalue_eq_pRad`), so `pRad` **is** the Perron root for every
+irreducible nonnegative matrix
+(`exists_pRad_eigenvector_of_isIrreducible`).
 -/
 
 namespace NCG
@@ -47,11 +53,13 @@ def entrySum (A : Matrix V V ℝ) : ℝ := ∑ x, ∑ y, A x y
 /-- Entrywise nonnegativity. -/
 def EntryNonneg (A : Matrix V V ℝ) : Prop := ∀ x y, 0 ≤ A x y
 
+omit [DecidableEq V] [Nonempty V] in
 theorem entrySum_nonneg {A : Matrix V V ℝ} (hA : EntryNonneg A) :
     0 ≤ entrySum A :=
   Finset.sum_nonneg fun x _ =>
     Finset.sum_nonneg fun y _ => hA x y
 
+omit [DecidableEq V] [Nonempty V] in
 theorem le_entrySum {A : Matrix V V ℝ} (hA : EntryNonneg A)
     (x y : V) : A x y ≤ entrySum A := by
   calc A x y ≤ ∑ y', A x y' :=
@@ -62,6 +70,7 @@ theorem le_entrySum {A : Matrix V V ℝ} (hA : EntryNonneg A)
           (fun x' _ => Finset.sum_nonneg fun y' _ => hA x' y')
           (Finset.mem_univ x)
 
+omit [DecidableEq V] [Nonempty V] in
 theorem colSum_le_entrySum {A : Matrix V V ℝ} (hA : EntryNonneg A)
     (y : V) : (∑ x, A x y) ≤ entrySum A := by
   calc (∑ x, A x y) ≤ ∑ y', ∑ x, A x y' :=
@@ -71,12 +80,14 @@ theorem colSum_le_entrySum {A : Matrix V V ℝ} (hA : EntryNonneg A)
           (Finset.mem_univ y)
     _ = entrySum A := Finset.sum_comm
 
+omit [DecidableEq V] [Nonempty V] in
 theorem entryNonneg_mul {A B : Matrix V V ℝ} (hA : EntryNonneg A)
     (hB : EntryNonneg B) : EntryNonneg (A * B) := by
   intro x y
   rw [Matrix.mul_apply]
   exact Finset.sum_nonneg fun z _ => mul_nonneg (hA x z) (hB z y)
 
+omit [Nonempty V] in
 theorem entryNonneg_pow {A : Matrix V V ℝ} (hA : EntryNonneg A) :
     ∀ k, EntryNonneg (A ^ k) := by
   intro k
@@ -92,6 +103,7 @@ theorem entryNonneg_pow {A : Matrix V V ℝ} (hA : EntryNonneg A) :
     rw [pow_succ]
     exact entryNonneg_mul ih hA
 
+omit [DecidableEq V] [Nonempty V] in
 theorem entrySum_mul_le {A B : Matrix V V ℝ} (hA : EntryNonneg A)
     (hB : EntryNonneg B) :
     entrySum (A * B) ≤ entrySum A * entrySum B := by
@@ -116,12 +128,14 @@ theorem entrySum_mul_le {A B : Matrix V V ℝ} (hA : EntryNonneg A)
         rw [← Finset.mul_sum]
         rfl
 
+omit [Nonempty V] in
 theorem entrySum_pow_add_le {A : Matrix V V ℝ} (hA : EntryNonneg A)
     (j k : ℕ) :
     entrySum (A ^ (j + k)) ≤ entrySum (A ^ j) * entrySum (A ^ k) := by
   rw [pow_add]
   exact entrySum_mul_le (entryNonneg_pow hA j) (entryNonneg_pow hA k)
 
+omit [Nonempty V] in
 theorem entrySum_pow_mul_le {A : Matrix V V ℝ} (hA : EntryNonneg A)
     (k : ℕ) : ∀ m : ℕ, 1 ≤ m →
     entrySum (A ^ (k * m)) ≤ entrySum (A ^ k) ^ m := by
@@ -162,6 +176,7 @@ entry. -/
 def HasDiagWitness (A : Matrix V V ℝ) : Prop :=
   ∃ (x : V) (m : ℕ), 0 < m ∧ 0 < (A ^ m) x x
 
+omit [Nonempty V] in
 theorem diag_pow_add {A : Matrix V V ℝ} (hA : EntryNonneg A)
     (x : V) (j k : ℕ) :
     (A ^ j) x x * (A ^ k) x x ≤ (A ^ (j + k)) x x := by
@@ -172,6 +187,7 @@ theorem diag_pow_add {A : Matrix V V ℝ} (hA : EntryNonneg A)
       (entryNonneg_pow hA k z x))
     (Finset.mem_univ x)
 
+omit [Nonempty V] in
 theorem diag_pow_mul_pos {A : Matrix V V ℝ} (hA : EntryNonneg A)
     {x : V} {m : ℕ} (hm : 0 < (A ^ m) x x) :
     ∀ k : ℕ, 1 ≤ k → (A ^ m) x x ^ k ≤ (A ^ (k * m)) x x := by
@@ -252,6 +268,7 @@ theorem growthSeq_subadditive {A : Matrix V V ℝ}
     _ = Real.log (entrySum (A ^ j)) + Real.log (entrySum (A ^ k)) :=
         Real.log_mul h2.ne' h3.ne'
 
+omit [Nonempty V] in
 theorem growthSeq_div_bddBelow {A : Matrix V V ℝ}
     (hA : EntryNonneg A) (hw : HasDiagWitness A) :
     BddBelow (Set.range fun k : ℕ => growthSeq A k / k) := by
@@ -286,6 +303,7 @@ implementation of its spectral radius. -/
 noncomputable def pRad (A : Matrix V V ℝ) : ℝ :=
   Real.exp (sInf ((fun k : ℕ => growthSeq A k / k) '' Set.Ici 1))
 
+omit [Nonempty V] in
 theorem pRad_pos (A : Matrix V V ℝ) : 0 < pRad A := Real.exp_pos _
 
 theorem tendsto_growthSeq {A : Matrix V V ℝ} (hA : EntryNonneg A)
@@ -385,12 +403,14 @@ theorem pRad_smul {A : Matrix V V ℝ} (hA : EntryNonneg A)
     _ = c * pRad A := by
         rw [Real.exp_add, Real.exp_log hc, Real.exp_log (pRad_pos A)]
 
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 theorem entryNonneg_smul {A : Matrix V V ℝ} (hA : EntryNonneg A)
     {c : ℝ} (hc : 0 ≤ c) : EntryNonneg (c • A) := by
   intro x y
   rw [Matrix.smul_apply, smul_eq_mul]
   exact mul_nonneg hc (hA x y)
 
+omit [Nonempty V] in
 theorem hasDiagWitness_smul {A : Matrix V V ℝ} {c : ℝ} (hc : 0 < c)
     (hw : HasDiagWitness A) : HasDiagWitness (c • A) := by
   obtain ⟨x, m, hm, hpos⟩ := hw
@@ -398,6 +418,7 @@ theorem hasDiagWitness_smul {A : Matrix V V ℝ} {c : ℝ} (hc : 0 < c)
   rw [smul_pow, Matrix.smul_apply, smul_eq_mul]
   exact mul_pos (pow_pos hc m) hpos
 
+omit [Nonempty V] in
 theorem entry_pow_le {A B : Matrix V V ℝ} (hA : EntryNonneg A)
     (hAB : ∀ x y, A x y ≤ B x y) :
     ∀ k, ∀ x y, (A ^ k) x y ≤ (B ^ k) x y := by
@@ -430,12 +451,15 @@ noncomputable def pressureKernel (src tgt : E → V) (q ℓ : E → ℝ)
 
 variable {src tgt : E → V} {q ℓ : E → ℝ}
 
+omit [Fintype V] [Nonempty V] in
 theorem pressureKernel_nonneg (hq : ∀ e, 0 ≤ q e) (s : ℝ) :
     EntryNonneg (pressureKernel src tgt q ℓ s) := by
   intro x y
   refine Finset.sum_nonneg fun e _ => ?_
   exact mul_nonneg (hq e) (Real.exp_pos _).le
 
+omit [Fintype V] in
+omit [Fintype V] [Nonempty V] in
 /-- Entrywise exponential domination, upper form:
 `K(t) ≤ e^{−(t−s)ℓ₀} K(s)` for `s ≤ t`. -/
 theorem pressureKernel_le (hq : ∀ e, 0 ≤ q e) {ℓ₀ : ℝ}
@@ -445,7 +469,7 @@ theorem pressureKernel_le (hq : ∀ e, 0 ≤ q e) {ℓ₀ : ℝ}
           • pressureKernel src tgt q ℓ s) x y := by
   intro x y
   rw [Matrix.smul_apply, smul_eq_mul]
-  show (∑ e ∈ Finset.univ.filter
+  change (∑ e ∈ Finset.univ.filter
       (fun e => src e = x ∧ tgt e = y), q e * Real.exp (-(t * ℓ e)))
     ≤ Real.exp (-((t - s) * ℓ₀)) * ∑ e ∈ Finset.univ.filter
       (fun e => src e = x ∧ tgt e = y), q e * Real.exp (-(s * ℓ e))
@@ -461,6 +485,8 @@ theorem pressureKernel_le (hq : ∀ e, 0 ≤ q e) {ℓ₀ : ℝ}
     mul_le_mul_of_nonneg_left (hℓ₀ e) (sub_nonneg.mpr hst)
   linarith
 
+omit [Fintype V] in
+omit [Fintype V] [Nonempty V] in
 /-- Entrywise exponential domination, lower form:
 `e^{−(t−s)ℓ₁} K(s) ≤ K(t)` for `s ≤ t`. -/
 theorem pressureKernel_ge (hq : ∀ e, 0 ≤ q e) {ℓ₁ : ℝ}
@@ -470,7 +496,7 @@ theorem pressureKernel_ge (hq : ∀ e, 0 ≤ q e) {ℓ₁ : ℝ}
       ≤ pressureKernel src tgt q ℓ t x y := by
   intro x y
   rw [Matrix.smul_apply, smul_eq_mul]
-  show Real.exp (-((t - s) * ℓ₁)) * (∑ e ∈ Finset.univ.filter
+  change Real.exp (-((t - s) * ℓ₁)) * (∑ e ∈ Finset.univ.filter
       (fun e => src e = x ∧ tgt e = y), q e * Real.exp (-(s * ℓ e)))
     ≤ ∑ e ∈ Finset.univ.filter
       (fun e => src e = x ∧ tgt e = y), q e * Real.exp (-(t * ℓ e))
@@ -486,6 +512,7 @@ theorem pressureKernel_ge (hq : ∀ e, 0 ≤ q e) {ℓ₁ : ℝ}
     mul_le_mul_of_nonneg_left (hℓ₁ e) (sub_nonneg.mpr hst)
   linarith
 
+omit [Nonempty V] in
 /-- The diagonal witness of the recurrent component transfers from
 `s = 0` to every inverse temperature. -/
 theorem pressureKernel_witness (hq : ∀ e, 0 ≤ q e)
@@ -767,5 +794,217 @@ theorem pressure_selects_beta
       linarith
 
 end Kernel
+
+/-! ## The Perron root is the growth rate -/
+
+section PerronRoot
+
+open Matrix
+
+/-- **The eigenvalue sandwich**: for a nonnegative matrix with a
+diagonal witness, any eigenvalue carrying an entrywise positive
+eigenvector equals the Gelfand–Fekete growth rate `pRad`.  The
+eigenvector squeezes the entry sum of powers between two multiples of
+`r ^ k`, and taking logarithmic averages identifies the limits. -/
+theorem eigenvalue_eq_pRad {A : Matrix V V ℝ}
+    (hA : EntryNonneg A) (hw : HasDiagWitness A) {r : ℝ} (hr : 0 < r)
+    {h : V → ℝ} (hh : ∀ i, 0 < h i)
+    (heig : A.mulVec h = r • h) :
+    r = pRad A := by
+  classical
+  -- A^k h = r^k h
+  have hpow : ∀ k : ℕ, (A ^ k).mulVec h = (r ^ k) • h := by
+    intro k
+    induction k with
+    | zero =>
+      rw [pow_zero, pow_zero, Matrix.one_mulVec, one_smul]
+    | succ k ih =>
+      rw [pow_succ', pow_succ']
+      rw [← Matrix.mulVec_mulVec, ih]
+      rw [Matrix.mulVec_smul, heig, smul_smul, mul_comm]
+  -- entrywise sandwich for the entry sum
+  set hmin := Finset.univ.inf' Finset.univ_nonempty h with hhmin
+  set hmax := Finset.univ.sup' Finset.univ_nonempty h with hhmax
+  have hminpos : 0 < hmin := by
+    rw [hhmin, Finset.lt_inf'_iff]
+    intro i _
+    exact hh i
+  have hmaxpos : 0 < hmax :=
+    lt_of_lt_of_le (hh (Classical.arbitrary V))
+      (Finset.le_sup' _ (Finset.mem_univ _))
+  have hminle : ∀ i, hmin ≤ h i := by
+    intro i
+    rw [hhmin]
+    exact Finset.inf'_le _ (Finset.mem_univ i)
+  have hlemax : ∀ i, h i ≤ hmax := by
+    intro i
+    rw [hhmax]
+    exact Finset.le_sup' _ (Finset.mem_univ i)
+  -- hmin * entrySum(A^k) ≤ Σ_x r^k h x ≤ hmax * entrySum(A^k)
+  have hsand : ∀ k : ℕ,
+      hmin * entrySum (A ^ k) ≤ (∑ x, r ^ k * h x)
+      ∧ (∑ x, r ^ k * h x) ≤ hmax * entrySum (A ^ k) := by
+    intro k
+    have hAk : ∀ x y, 0 ≤ (A ^ k) x y := entryNonneg_pow hA k
+    have h4 : ∀ x, r ^ k * h x = ∑ y, (A ^ k) x y * h y := by
+      intro x
+      have h5 := congrFun (hpow k) x
+      rw [Matrix.mulVec, dotProduct] at h5
+      rw [Pi.smul_apply, smul_eq_mul] at h5
+      exact h5.symm
+    constructor
+    · rw [entrySum, Finset.mul_sum]
+      refine Finset.sum_le_sum fun x _ => ?_
+      rw [h4 x, Finset.mul_sum]
+      refine Finset.sum_le_sum fun y _ => ?_
+      rw [mul_comm hmin ((A ^ k) x y)]
+      exact mul_le_mul_of_nonneg_left (hminle y) (hAk x y)
+    · rw [entrySum, Finset.mul_sum]
+      refine Finset.sum_le_sum fun x _ => ?_
+      rw [h4 x, Finset.mul_sum]
+      refine Finset.sum_le_sum fun y _ => ?_
+      rw [mul_comm hmax ((A ^ k) x y)]
+      exact mul_le_mul_of_nonneg_left (hlemax y) (hAk x y)
+  set H := ∑ x, h x with hH
+  have hHpos : 0 < H := by
+    rw [hH]
+    exact Finset.sum_pos (fun i _ => hh i) Finset.univ_nonempty
+  have hsum : ∀ k : ℕ, ∑ x, r ^ k * h x = r ^ k * H := by
+    intro k
+    rw [hH, Finset.mul_sum]
+  -- squeeze the growth sequence
+  have hgrow : Tendsto (fun k : ℕ => growthSeq A k / k) atTop
+      (nhds (Real.log r)) := by
+    have hES : ∀ k : ℕ, 0 < entrySum (A ^ k) :=
+      fun k => entrySum_pow_pos hA hw k
+    have hlow : ∀ k : ℕ,
+        Real.log (r ^ k * H) - Real.log hmax
+          ≤ growthSeq A k := by
+      intro k
+      have h6 := (hsand k).2
+      rw [hsum k] at h6
+      have h7 : Real.log (r ^ k * H)
+          ≤ Real.log (hmax * entrySum (A ^ k)) :=
+        Real.log_le_log (by positivity) h6
+      rw [Real.log_mul hmaxpos.ne' (hES k).ne'] at h7
+      rw [growthSeq]
+      linarith
+    have hup : ∀ k : ℕ,
+        growthSeq A k ≤ Real.log (r ^ k * H)
+          - Real.log hmin := by
+      intro k
+      have h6 := (hsand k).1
+      rw [hsum k] at h6
+      have h7 : Real.log (hmin * entrySum (A ^ k))
+          ≤ Real.log (r ^ k * H) :=
+        Real.log_le_log (mul_pos hminpos (hES k)) h6
+      rw [Real.log_mul hminpos.ne' (hES k).ne'] at h7
+      rw [growthSeq]
+      linarith
+    have hloglin : ∀ k : ℕ, Real.log (r ^ k * H)
+        = k * Real.log r + Real.log H := by
+      intro k
+      rw [Real.log_mul (by positivity) hHpos.ne',
+        Real.log_pow]
+    have hsq : Tendsto (fun k : ℕ =>
+        (k * Real.log r + Real.log H - Real.log hmax) / k)
+        atTop (nhds (Real.log r)) := by
+      have h8 : Tendsto (fun k : ℕ => Real.log r
+          + (Real.log H - Real.log hmax) / k) atTop
+          (nhds (Real.log r + 0)) :=
+        tendsto_const_nhds.add
+          (tendsto_const_div_atTop_nhds_zero_nat _)
+      rw [add_zero] at h8
+      refine Tendsto.congr' ?_ h8
+      filter_upwards [eventually_ne_atTop 0] with k hk
+      have hkR : (k : ℝ) ≠ 0 := by exact_mod_cast hk
+      field_simp
+      ring
+    have hsq2 : Tendsto (fun k : ℕ =>
+        (k * Real.log r + Real.log H - Real.log hmin) / k)
+        atTop (nhds (Real.log r)) := by
+      have h8 : Tendsto (fun k : ℕ => Real.log r
+          + (Real.log H - Real.log hmin) / k) atTop
+          (nhds (Real.log r + 0)) :=
+        tendsto_const_nhds.add
+          (tendsto_const_div_atTop_nhds_zero_nat _)
+      rw [add_zero] at h8
+      refine Tendsto.congr' ?_ h8
+      filter_upwards [eventually_ne_atTop 0] with k hk
+      have hkR : (k : ℝ) ≠ 0 := by exact_mod_cast hk
+      field_simp
+      ring
+    refine tendsto_of_tendsto_of_tendsto_of_le_of_le' hsq hsq2
+      ?_ ?_
+    · filter_upwards [eventually_gt_atTop 0] with k hk
+      have hkR : (0 : ℝ) < k := by exact_mod_cast hk
+      have h10 := hlow k
+      rw [hloglin k] at h10
+      rw [div_le_div_iff₀ hkR hkR]
+      exact mul_le_mul_of_nonneg_right h10 hkR.le
+    · filter_upwards [eventually_gt_atTop 0] with k hk
+      have hkR : (0 : ℝ) < k := by exact_mod_cast hk
+      have h10 := hup k
+      rw [hloglin k] at h10
+      rw [div_le_div_iff₀ hkR hkR]
+      exact mul_le_mul_of_nonneg_right h10 hkR.le
+  have h11 := tendsto_growthSeq hA hw
+  have h12 : Real.log r = Real.log (pRad A) :=
+    tendsto_nhds_unique hgrow h11
+  have h13 : r = Real.exp (Real.log r) :=
+    (Real.exp_log hr).symm
+  rw [h13, h12, Real.exp_log (pRad_pos A)]
+
+/-- Irreducibility provides a diagonal witness: some power has a
+positive diagonal entry. -/
+theorem hasDiagWitness_of_isIrreducible {A : Matrix V V ℝ}
+    (hA : A.IsIrreducible) : HasDiagWitness A := by
+  obtain ⟨k, hk, hpos⟩ :=
+    ((Matrix.isIrreducible_iff_exists_pow_pos hA.nonneg).1 hA)
+      (Classical.arbitrary V) (Classical.arbitrary V)
+  exact ⟨Classical.arbitrary V, k, hk, hpos⟩
+
+omit [DecidableEq V] in
+/-- An eigenvalue of an irreducible matrix carrying an entrywise
+positive eigenvector is strictly positive. -/
+theorem eigenvalue_pos_of_isIrreducible {A : Matrix V V ℝ}
+    (hA : A.IsIrreducible) {r : ℝ} {x : V → ℝ}
+    (hx : ∀ i, 0 < x i) (heig : A.mulVec x = r • x) : 0 < r := by
+  have i := Classical.arbitrary V
+  obtain ⟨j₀, hj₀⟩ := hA.exists_pos_entry i
+  have h1 : 0 < A.mulVec x i := by
+    rw [Matrix.mulVec, dotProduct]
+    exact Finset.sum_pos'
+      (fun j _ => mul_nonneg (hA.nonneg i j) (hx j).le)
+      ⟨j₀, Finset.mem_univ j₀, mul_pos hj₀ (hx j₀)⟩
+  rw [heig, Pi.smul_apply, smul_eq_mul] at h1
+  rcases mul_pos_iff.mp h1 with ⟨hr, _⟩ | ⟨_, hxneg⟩
+  · exact hr
+  · linarith [hx i]
+
+/-- **The Perron root of an irreducible matrix is the growth rate**:
+any eigenvalue with an entrywise positive eigenvector equals
+`pRad A`. -/
+theorem eigenvalue_eq_pRad_of_isIrreducible {A : Matrix V V ℝ}
+    (hA : A.IsIrreducible) {r : ℝ} {x : V → ℝ}
+    (hx : ∀ i, 0 < x i) (heig : A.mulVec x = r • x) :
+    r = pRad A :=
+  eigenvalue_eq_pRad hA.nonneg (hasDiagWitness_of_isIrreducible hA)
+    (eigenvalue_pos_of_isIrreducible hA hx heig) hx heig
+
+/-- **The Perron–Frobenius package for irreducible matrices**: the
+Gelfand–Fekete growth rate `pRad A` is itself an eigenvalue, carried
+by an entrywise positive eigenvector (which is unique up to a scalar
+by `Matrix.IsIrreducible.exists_eq_smul_of_mulVec_eq_smul`, and whose
+eigenvalue is the unique one admitting a positive eigenvector by
+`Matrix.IsIrreducible.eigenvalue_eq_of_pos_eigenvectors`). -/
+theorem exists_pRad_eigenvector_of_isIrreducible {A : Matrix V V ℝ}
+    (hA : A.IsIrreducible) :
+    ∃ x : V → ℝ, (∀ i, 0 < x i) ∧ A.mulVec x = pRad A • x := by
+  obtain ⟨r, x, _, hx, heig⟩ := hA.exists_pos_eigenvector
+  rw [← eigenvalue_eq_pRad_of_isIrreducible hA hx heig]
+  exact ⟨x, hx, heig⟩
+
+end PerronRoot
 
 end NCG

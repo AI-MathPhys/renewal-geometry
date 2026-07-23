@@ -18,8 +18,8 @@ Statuses
                              (``decide``-style certificate);
 - ``statement_encoded``    : the object/statement is faithfully formalized as
                              a Lean definition/structure (nothing to prove);
-- ``conditional_interface``: not yet formalized; tracked in manuscripts/ROADMAP.md
-                             with its dependency interface;
+- ``conditional_interface``: not formalized (currently unused: zero
+                             records carry this status);
 - ``not_started``          : untriaged (kept at zero).
 
 Usage

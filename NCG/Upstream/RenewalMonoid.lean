@@ -8,7 +8,8 @@ import NCG.Upstream.Retract
 /-!
 # The finite renewal monoid in the recurrent one-interface case
 
-Covers `cor:finite-renewal-monoid` of `manuscripts/renewal_emergence/renewal_emergence.tex`: with one
+Covers `cor:finite-renewal-monoid` of `manuscripts/renewal_emergence/renewal_emergence.tex`: with
+one
 recurrent interface `B` and a finite predictive quotient, the
 renewal maps `Φ_σ^{(s)} = E_s ∘ U_σ` generate a finite
 transformation monoid on the minimal predictive memory
@@ -73,7 +74,7 @@ theorem Selector.renewalEnd_wordHist (s : Selector G) {B : P} :
             (fun σ f => f ∘ s.renewalEnd (singleEdge σ)) id
   | [] => s.renewalEnd_nil B
   | σ :: l => by
-    show s.renewalEnd ((singleEdge σ).comp (wordHist l)) = _
+    change s.renewalEnd ((singleEdge σ).comp (wordHist l)) = _
     rw [s.renewalEnd_comp, s.renewalEnd_wordHist l]
     rfl
 

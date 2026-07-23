@@ -44,7 +44,7 @@ variable {A : Type*} [Ring A] [StarRing A]
 modular Dirac `D = JΔ + B` satisfies `J D* J = D`. -/
 theorem signed_dirac_krein_selfadjoint (J Δ B : A)
     (hJstar : star J = J) (hJsq : J * J = 1)
-    (hΔstar : star Δ = Δ) (hcomm : J * Δ = Δ * J)
+    (hΔstar : star Δ = Δ) (_hcomm : J * Δ = Δ * J)
     (hB : J * star B * J = B) :
     J * star (J * Δ + B) * J = J * Δ + B := by
   rw [star_add, star_mul, hΔstar, hJstar, mul_add, add_mul]
@@ -53,6 +53,7 @@ theorem signed_dirac_krein_selfadjoint (J Δ B : A)
         rw [← mul_assoc J Δ J, mul_assoc (J * Δ) J J]
     _ = J * Δ := by rw [hJsq, mul_one]
 
+omit [StarRing A] in
 /-- **Theorem `thm:signed-dirac`** (modular collapse): the twisted
 commutator of the modular part vanishes for the canonical twist
 `ρ(a) = JΔ a Δ⁻¹ J`:  `JΔ·a − ρ(a)·JΔ = 0`. -/
@@ -72,6 +73,7 @@ theorem twisted_commutator_collapse (J : A) (u : Aˣ) (a : A)
           rw [Units.inv_mul, mul_one]
   rw [hkey, sub_self]
 
+omit [StarRing A] in
 /-- **Theorem `thm:signed-dirac` / Lemma `lem:bounded-twisted`**
 (reduction): the twisted commutator of `D = JΔ + B` equals that of the
 bounded part alone, `[D, a]_ρ = [B, a]_ρ`. -/

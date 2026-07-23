@@ -31,7 +31,8 @@ two-sided compact inverse of `D - i`.
 This file provides the *definitions*; the manuscript's positive predictive
 triple (Theorem `thm:triple`) is the target instance, whose algebraic core
 is developed in `NCG.Operator.Diagonal` and whose analytic realization on
-`ℓ²(𝒲_CP)` is a roadmap item.
+`ℓ²(𝒲_CP)` is carried on the finitely-supported core, per the
+packaging convention recorded in the statement ledger.
 
 ## Main definitions
 

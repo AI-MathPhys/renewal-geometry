@@ -140,11 +140,11 @@ theorem affinity_reverse (A : G.E → ℝ) :
   induction p with
   | nil _ => simp [Walk.reverse]
   | fwd e p ih =>
-    show (p.reverse.append (singleRev e)).affinity A = _
+    change (p.reverse.append (singleRev e)).affinity A = _
     rw [affinity_append, ih]
     simp [Walk.singleRev]
   | bwd e p ih =>
-    show (p.reverse.append (single e)).affinity A = _
+    change (p.reverse.append (single e)).affinity A = _
     rw [affinity_append, ih]
     simp [Walk.single]
 
@@ -332,7 +332,7 @@ theorem lineSign_gauge (g : G.V → ℝˣ) (lam : G.E → ℝˣ) :
     lineSign G (lineGauge G g lam)
       = lineSign G lam + coboundaryMap G (fun x => unitSign (g x)) := by
   funext e
-  show unitSign (g (G.src e) * (g (G.tgt e))⁻¹ * lam e) = _
+  change unitSign (g (G.src e) * (g (G.tgt e))⁻¹ * lam e) = _
   rw [unitSign_mul, unitSign_mul, unitSign_inv]
   simp only [Pi.add_apply, coboundaryMap_apply, lineSign_eq_unitSign]
   ring
@@ -539,7 +539,7 @@ theorem signedCover_connected_of_ne_zero {v₀ : G.V}
   have h2 : ∀ a : ZMod 2, a = 0 ∨ a = 1 := by decide
   have hloop : ∃ p : G.Walk v₀ v₀, p.holonomy χ = 1 := by
     by_contra hno
-    push_neg at hno
+    push Not at hno
     refine hne (H1.mk_eq_zero_of_holonomy_eq_zero hconn fun p => ?_)
     rcases h2 (p.holonomy χ) with h | h
     · exact h
@@ -594,7 +594,7 @@ theorem positive_comparison_trivial_sign (lam : G.E → ℝˣ)
     lineSign G lam = 0 ∧ H1.mk G (lineSign G lam) = 0 := by
   have h1 : lineSign G lam = 0 := by
     funext e
-    show (if 0 < (lam e : ℝ) then (0 : ZMod 2) else 1) = 0
+    change (if 0 < (lam e : ℝ) then (0 : ZMod 2) else 1) = 0
     rw [if_pos (hpos e)]
   exact ⟨h1, by rw [h1, map_zero]⟩
 
@@ -621,7 +621,7 @@ theorem coboundR_bouquet_one :
   rintro A ⟨u, rfl⟩
   funext e
   have h1 : (bouquet 1).tgt e = (bouquet 1).src e := rfl
-  show u ((bouquet 1).tgt e) - u ((bouquet 1).src e) = 0
+  change u ((bouquet 1).tgt e) - u ((bouquet 1).src e) = 0
   rw [h1, sub_self]
 
 theorem H1R_bouquet_mk_eq_zero_iff (A : (bouquet 1).E → ℝ) :
@@ -654,24 +654,24 @@ theorem independence_one_loop (a : ℝ) (ha : a ≠ 0) :
       ∧ H1.mk (bouquet 1) (lineSign _ fun _ => unitOf a 1) ≠ 0) := by
   have hmag1 : lineMagnitude (bouquet 1) (fun _ => (1 : ℝˣ)) = 0 := by
     funext e
-    show Real.log |((1 : ℝˣ) : ℝ)| = 0
+    change Real.log |((1 : ℝˣ) : ℝ)| = 0
     rw [Units.val_one]
     simp
   have hmagneg1 : lineMagnitude (bouquet 1) (fun _ => (-1 : ℝˣ)) = 0 := by
     funext e
-    show Real.log |((-1 : ℝˣ) : ℝ)| = 0
+    change Real.log |((-1 : ℝˣ) : ℝ)| = 0
     rw [Units.val_neg, Units.val_one]
     simp
   have hsign1 : lineSign (bouquet 1) (fun _ => (1 : ℝˣ)) = 0 := by
     funext e
-    show (if 0 < ((1 : ℝˣ) : ℝ) then (0 : ZMod 2) else 1) = 0
+    change (if 0 < ((1 : ℝˣ) : ℝ) then (0 : ZMod 2) else 1) = 0
     rw [Units.val_one]
     norm_num
   have hsignneg1 : lineSign (bouquet 1) (fun _ => (-1 : ℝˣ)) ≠ 0 := by
     intro h
     have he := congrFun h (0 : Fin 1)
     revert he
-    show ¬((if 0 < ((-1 : ℝˣ) : ℝ) then (0 : ZMod 2) else 1) = 0)
+    change ¬((if 0 < ((-1 : ℝˣ) : ℝ) then (0 : ZMod 2) else 1) = 0)
     rw [Units.val_neg, Units.val_one]
     norm_num
   have hmaga : ∀ ε : ZMod 2,
@@ -729,7 +729,7 @@ theorem three_levels_distinct :
 `h₁ ≠ h₂` of one predictive class (the class containing nothing
 else), then no selector invariant under `α` exists. -/
 theorem no_invariant_selector {H Q : Type*} (q : H → Q) (α : H → H)
-    (hq : ∀ h, q (α h) = q h) (h₁ h₂ : H) (hne : h₁ ≠ h₂)
+    (_hq : ∀ h, q (α h) = q h) (h₁ h₂ : H) (hne : h₁ ≠ h₂)
     (hswap₁ : α h₁ = h₂) (hswap₂ : α h₂ = h₁)
     (hclass : ∀ h, q h = q h₁ → h = h₁ ∨ h = h₂) :
     ¬∃ s : Q → H, (∀ x, q (s x) = x) ∧ ∀ x, α (s x) = s x := by

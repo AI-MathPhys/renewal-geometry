@@ -11,34 +11,44 @@ honesty note describing exactly what was proved.
 | File | Contents |
 |---|---|
 | [`renewal_emergence.tex`](renewal_emergence.tex) | The manuscript source |
-| `renewal_emergence.pdf` | The compiled manuscript |
+| [`renewal_emergence.pdf`](renewal_emergence.pdf) | The compiled manuscript |
 | [`statements.json`](statements.json) | The per-statement verification ledger (label → status → Lean anchors → note) |
 
 ## Verification summary
 
 **123 tracked statements. 0 `sorry`. 0 conditional. 0 unformalized.**
 
-| Environment | Proved | Statement encoded | Total |
+Every claim-bearing statement of the paper (theorem / proposition / lemma /
+corollary) is **proved in Lean**, with two declared exceptions (see below):
+
+| Environment | Proved | Encoded interface | Total |
 |---|---:|---:|---:|
-| Theorems | 37 | 2 | 39 |
-| Propositions | 26 | 0 | 26 |
-| Corollaries | 13 | 0 | 13 |
+| Theorems | 44 | 2 | 46 |
+| Propositions | 28 | 0 | 28 |
+| Corollaries | 14 | 0 | 14 |
 | Lemmas | 6 | 0 | 6 |
+| *Claim-bearing subtotal* | *92* | *2* | *94* |
 | Definitions | 1 | 28 | 29 |
-| Constructions / other | 10 | 0 | 10 |
 | **Total** | **93** | **30** | **123** |
 
-- **`proved`** — the statement's mathematical content is proved sorry-free in
-  Lean; the record's note discloses any scoped hypothesis (each such
-  hypothesis also appears explicitly in the Lean theorem statement).
-- **`statement_encoded`** — the object is faithfully formalized as a Lean
-  definition or structure; there is nothing to prove. 28 of the 30 are
-  definition environments. The two theorem-environment records
-  (`thm:operational-diagonalization`, `thm:operational-jordan`) encode the
-  classical Jordan–von Neumann–Wigner / operational-diagonalization
-  classification interface (`NCG/Algebra/JordanFace.lean`) in exactly the
-  form the manuscript uses it — these textbook classification results are
-  the paper's single declared external input.
+What the two statuses mean:
+
+- **Theorems / propositions / lemmas / corollaries** — `proved` means the
+  statement's mathematical content is proved sorry-free in Lean; any scoped
+  hypothesis is disclosed in the record's note *and* appears explicitly in the
+  Lean signature. The two exceptions
+  (`thm:operational-diagonalization`, `thm:operational-jordan`) are the
+  paper's declared classical inputs: the Jordan–von Neumann–Wigner /
+  operational-diagonalization classification, encoded as an interface
+  (`NCG/Algebra/JordanFace.lean`) in exactly the form the text uses it.
+- **Definitions** — a definition environment usually has nothing to *prove*;
+  `statement_encoded` (28 records) means the object is faithfully transcribed
+  as a Lean definition or structure. The one definition marked `proved`
+  (`def:pressure-entropy-data`) is a definition that **carries claims** — the
+  stationary edge flows are probability distributions and the entropy
+  production is the relative entropy `D_KL(F‖F∘bar) ≥ 0` — and those claims
+  are proved in Lean. So `proved` on a definition is *stronger* than
+  `statement_encoded`, never weaker.
 
 ### Axioms
 

@@ -32,6 +32,7 @@ variable {V : Type*} [Fintype V] [DecidableEq V] [Nonempty V]
 
 /-! ## Conjugation invariance of the growth rate -/
 
+omit [Nonempty V] in
 theorem diag_conj_pow (A : Matrix V V ℝ) (dvec : V → ℝ)
     (hd : ∀ x, dvec x ≠ 0) :
     ∀ k : ℕ, (Matrix.diagonal dvec * A
@@ -70,6 +71,7 @@ theorem diag_conj_pow (A : Matrix V V ℝ) (dvec : V → ℝ)
           rw [hDD]
           noncomm_ring
 
+omit [Nonempty V] in
 theorem diag_conj_entry (A : Matrix V V ℝ) (dvec : V → ℝ) (x y : V) :
     (Matrix.diagonal dvec * A
       * Matrix.diagonal fun v => (dvec v)⁻¹) x y
@@ -210,6 +212,7 @@ section Kernel
 variable {E : Type*} [Fintype E]
 variable {src tgt : E → V} {q ℓ : E → ℝ}
 
+omit [Nonempty V] in
 /-- **`prop:pressure-gauge-invariance` (conjugation identity)**: the
 gauged capacities `q_e e^{(f(src e) − f(tgt e))/2}` produce the
 diagonally conjugated transfer `D_f B(s) D_f^{-1}`. -/
@@ -221,7 +224,7 @@ theorem pressureKernel_gauge (f : V → ℝ) (s : ℝ) :
           * Matrix.diagonal fun x => (Real.exp (f x / 2))⁻¹ := by
   ext x y
   rw [diag_conj_entry]
-  show (∑ e ∈ Finset.univ.filter
+  change (∑ e ∈ Finset.univ.filter
       (fun e => src e = x ∧ tgt e = y),
       q e * Real.exp ((f (src e) - f (tgt e)) / 2)
         * Real.exp (-(s * ℓ e)))

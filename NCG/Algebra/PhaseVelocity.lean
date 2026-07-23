@@ -91,10 +91,10 @@ theorem repr (i j : ι) (hij : i ≠ j) (a : ι → ℝ) :
     have h3 : P.vel i j (delta i + delta j)
         = P.vel i j (fun _ => (1 : ℝ)) := by
       refine P.pairLocal i j _ _ ?_ ?_
-      · show delta i i + delta j i = 1
+      · change delta i i + delta j i = 1
         rw [e1, e2]
         norm_num
-      · show delta i j + delta j j = 1
+      · change delta i j + delta j j = 1
         rw [e3, e4]
         norm_num
     rw [← P.add, h3, hone]
@@ -102,10 +102,10 @@ theorem repr (i j : ι) (hij : i ≠ j) (a : ι → ℝ) :
   have hpair : P.vel i j a
       = P.vel i j (a i • delta i + a j • delta j) := by
     refine P.pairLocal i j _ _ ?_ ?_
-    · show a i = a i * delta i i + a j * delta j i
+    · change a i = a i * delta i i + a j * delta j i
       rw [e1, e2]
       ring
-    · show a j = a i * delta i j + a j * delta j j
+    · change a j = a i * delta i j + a j * delta j j
       rw [e3, e4]
       ring
   rw [hpair, P.add, P.smul, P.smul]
@@ -123,7 +123,7 @@ theorem coeff_symm (i j : ι) : P.coeff j i = P.coeff i j := by
       = delta j := by
     funext k
     rw [Equiv.symm_swap]
-    show (if Equiv.swap i j k = i then (1 : ℝ) else 0)
+    change (if Equiv.swap i j k = i then (1 : ℝ) else 0)
       = (if k = j then (1 : ℝ) else 0)
     by_cases hk : k = j
     · rw [if_pos hk, hk, Equiv.swap_apply_right, if_pos rfl]
@@ -147,7 +147,7 @@ theorem coeff_half (i j : ι) (hij : i ≠ j) :
   have h2 : (fun k => if k = i then (1 : ℝ) else if k = j then -1
       else 0) = fun k => delta i k - delta j k := by
     funext k
-    show (if k = i then (1 : ℝ) else if k = j then -1 else 0)
+    change (if k = i then (1 : ℝ) else if k = j then -1 else 0)
       = (if k = i then (1 : ℝ) else 0)
         - (if k = j then (1 : ℝ) else 0)
     by_cases hki : k = i
@@ -226,7 +226,7 @@ theorem phase_velocity_rigidity :
     · intro i j a hij
       rw [P.repr i j hij, P.coeff_const i j i₀ j₀ hij h₀]
       ring
-  · push_neg at hex
+  · push Not at hex
     refine ⟨1, Or.inl rfl, ?_⟩
     intro i j a hij
     exact absurd (hex (i, j)) hij

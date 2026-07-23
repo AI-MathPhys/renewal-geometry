@@ -80,7 +80,7 @@ theorem leftMulL_pow (B : 𝕄) (n : ℕ) (X : 𝕄) :
   induction n with
   | zero => simp
   | succ n ih =>
-      rw [_root_.pow_succ', ContinuousLinearMap.mul_apply, ih,
+      rw [_root_.pow_succ', mul_apply_eq_comp, ih,
         leftMulL_apply, ← mul_assoc, ← _root_.pow_succ']
 
 theorem rightMulL_pow (B : 𝕄) (n : ℕ) (X : 𝕄) :
@@ -88,7 +88,7 @@ theorem rightMulL_pow (B : 𝕄) (n : ℕ) (X : 𝕄) :
   induction n with
   | zero => simp
   | succ n ih =>
-      rw [_root_.pow_succ', ContinuousLinearMap.mul_apply, ih,
+      rw [_root_.pow_succ', mul_apply_eq_comp, ih,
         rightMulL_apply, mul_assoc, ← _root_.pow_succ]
 
 /-- The matrix exponential (via the operator exponential of left
@@ -116,9 +116,9 @@ theorem exp_leftMul (B X : 𝕄) :
       (ContinuousLinearMap.apply ℂ 𝕄 (1 : 𝕄)).toLinearMap.toAddMonoidHom
       (ContinuousLinearMap.apply ℂ 𝕄 (1 : 𝕄)).continuous
     refine h4.congr fun n => ?_
-    show ((n !⁻¹ : ℂ) • (leftMulL B) ^ n) (1 : 𝕄)
+    change ((n !⁻¹ : ℂ) • (leftMulL B) ^ n) (1 : 𝕄)
       = (n !⁻¹ : ℂ) • B ^ n
-    rw [ContinuousLinearMap.smul_apply, leftMulL_pow, mul_one]
+    rw [_root_.smul_apply, leftMulL_pow, mul_one]
   rw [show (∑' n : ℕ, (n !⁻¹ : ℂ) • B ^ n) * X
       = rightMulL X (∑' n : ℕ, (n !⁻¹ : ℂ) • B ^ n) from rfl]
   rw [(rightMulL X).map_tsum hsummable]
@@ -138,9 +138,9 @@ theorem matExp_summable (B : 𝕄) :
     (ContinuousLinearMap.apply ℂ 𝕄 (1 : 𝕄)).toLinearMap.toAddMonoidHom
     (ContinuousLinearMap.apply ℂ 𝕄 (1 : 𝕄)).continuous
   refine h4.congr fun n => ?_
-  show ((n !⁻¹ : ℂ) • (leftMulL B) ^ n) (1 : 𝕄)
+  change ((n !⁻¹ : ℂ) • (leftMulL B) ^ n) (1 : 𝕄)
     = (n !⁻¹ : ℂ) • B ^ n
-  rw [ContinuousLinearMap.smul_apply, leftMulL_pow, mul_one]
+  rw [_root_.smul_apply, leftMulL_pow, mul_one]
 
 /-- `e^{R_B} X = X · e^B`. -/
 theorem exp_rightMul (B X : 𝕄) :
@@ -159,7 +159,7 @@ theorem exp_rightMul (B X : 𝕄) :
 theorem commute_leftMul_rightMul (B C : 𝕄) :
     Commute (leftMulL B) (rightMulL C) := by
   refine ContinuousLinearMap.ext fun X => ?_
-  show leftMulL B (rightMulL C X) = rightMulL C (leftMulL B X)
+  change leftMulL B (rightMulL C X) = rightMulL C (leftMulL B X)
   rw [rightMulL_apply, leftMulL_apply, rightMulL_apply,
     leftMulL_apply, Matrix.mul_assoc]
 
@@ -172,7 +172,7 @@ theorem exp_mulPair (B C X : 𝕄) :
   letI : NormedAlgebra ℚ (𝕄 →L[ℂ] 𝕄) :=
     NormedAlgebra.restrictScalars ℚ ℂ _
   rw [NormedSpace.exp_add_of_commute (commute_leftMul_rightMul B C)]
-  rw [ContinuousLinearMap.mul_apply, exp_rightMul, exp_leftMul,
+  rw [mul_apply_eq_comp, exp_rightMul, exp_leftMul,
     Matrix.mul_assoc]
 
 /-- The Kraus part of the dissipator as a continuous linear map. -/
@@ -190,6 +190,7 @@ noncomputable def krausL {m : Type*} [Fintype m] (A : m → 𝕄) :
         exact Finset.sum_congr rfl fun j _ => by
           rw [Matrix.mul_smul, Matrix.smul_mul] }
 
+omit [DecidableEq E] in
 @[simp]
 theorem krausL_apply {m : Type*} [Fintype m] (A : m → 𝕄) (X : 𝕄) :
     krausL A X = ∑ j, A j * X * A j := rfl
@@ -216,7 +217,7 @@ theorem dissipatorL_split {m : Type*} [Fintype m] (A : m → 𝕄) :
          + rightMulL ((-(1 / 2) : ℂ) • ∑ j, A j * A j)) X
       = ∑ j, ((-(1 / 2) : ℂ) • (A j * (A j * X)) + A j * (X * A j)
           + (-(1 / 2) : ℂ) • (X * (A j * A j))) := by
-    rw [ContinuousLinearMap.add_apply, krausL_apply, leftMulL_apply,
+    rw [_root_.add_apply, krausL_apply, leftMulL_apply,
       rightMulL_apply]
     rw [Matrix.smul_mul, Matrix.mul_smul, Finset.sum_mul,
       Finset.mul_sum, Finset.smul_sum, Finset.smul_sum]
@@ -224,7 +225,7 @@ theorem dissipatorL_split {m : Type*} [Fintype m] (A : m → 𝕄) :
     refine Finset.sum_congr rfl fun j _ => ?_
     simp only [Matrix.mul_assoc]
     module
-  show dissipator A X = _
+  change dissipator A X = _
   rw [hL, ← hR]
   rfl
 
@@ -239,7 +240,7 @@ noncomputable def ampliateE (k : ℕ) (Φ : 𝕄 →ₗ[ℂ] 𝕄) :
     Φ (Matrix.of fun i j => X (p.1, i) (q.1, j)) p.2 q.2
   map_add' X Y := by
     ext p q
-    show Φ (Matrix.of fun i j => (X + Y) (p.1, i) (q.1, j)) p.2 q.2
+    change Φ (Matrix.of fun i j => (X + Y) (p.1, i) (q.1, j)) p.2 q.2
       = _
     rw [show (Matrix.of fun i j => (X + Y) (p.1, i) (q.1, j))
         = (Matrix.of fun i j => X (p.1, i) (q.1, j))
@@ -248,19 +249,21 @@ noncomputable def ampliateE (k : ℕ) (Φ : 𝕄 →ₗ[ℂ] 𝕄) :
     rfl
   map_smul' c X := by
     ext p q
-    show Φ (Matrix.of fun i j => (c • X) (p.1, i) (q.1, j)) p.2 q.2
+    change Φ (Matrix.of fun i j => (c • X) (p.1, i) (q.1, j)) p.2 q.2
       = _
     rw [show (Matrix.of fun i j => (c • X) (p.1, i) (q.1, j))
         = c • Matrix.of fun i j => X (p.1, i) (q.1, j) from rfl,
       map_smul]
     rfl
 
+omit [DecidableEq E] [Fintype E] in
 @[simp]
 theorem ampliateE_apply (k : ℕ) (Φ : 𝕄 →ₗ[ℂ] 𝕄)
     (X : Matrix (Fin k × E) (Fin k × E) ℂ) (p q : Fin k × E) :
     ampliateE k Φ X p q
       = Φ (Matrix.of fun i j => X (p.1, i) (q.1, j)) p.2 q.2 := rfl
 
+omit [DecidableEq E] [Fintype E] in
 /-- Ampliation is multiplicative in the transformation. -/
 theorem ampliateE_comp (k : ℕ) (Φ Ψ : 𝕄 →ₗ[ℂ] 𝕄) :
     ampliateE k (Φ ∘ₗ Ψ) = ampliateE k Φ ∘ₗ ampliateE k Ψ := by
@@ -268,25 +271,28 @@ theorem ampliateE_comp (k : ℕ) (Φ Ψ : 𝕄 →ₗ[ℂ] 𝕄) :
   ext p q
   rfl
 
+omit [DecidableEq E] [Fintype E] in
 theorem ampliateE_id (k : ℕ) :
     ampliateE (E := E) k LinearMap.id = LinearMap.id := by
   refine LinearMap.ext fun X => ?_
   ext p q
   rfl
 
+omit [DecidableEq E] [Fintype E] in
 theorem ampliateE_add (k : ℕ) (Φ Ψ : 𝕄 →ₗ[ℂ] 𝕄) :
     ampliateE k (Φ + Ψ) = ampliateE k Φ + ampliateE k Ψ := by
   refine LinearMap.ext fun X => ?_
   ext p q
-  show (Φ + Ψ) _ p.2 q.2 = _
+  change (Φ + Ψ) _ p.2 q.2 = _
   rw [LinearMap.add_apply]
   rfl
 
+omit [DecidableEq E] [Fintype E] in
 theorem ampliateE_smul (k : ℕ) (c : ℂ) (Φ : 𝕄 →ₗ[ℂ] 𝕄) :
     ampliateE k (c • Φ) = c • ampliateE k Φ := by
   refine LinearMap.ext fun X => ?_
   ext p q
-  show (c • Φ) _ p.2 q.2 = _
+  change (c • Φ) _ p.2 q.2 = _
   rw [LinearMap.smul_apply]
   rfl
 
@@ -294,10 +300,11 @@ theorem ampliateE_smul (k : ℕ) (c : ℂ) (Φ : 𝕄 →ₗ[ℂ] 𝕄) :
 def kronId (k : ℕ) (B : 𝕄) : Matrix (Fin k × E) (Fin k × E) ℂ :=
   Matrix.of fun p q => if p.1 = q.1 then B p.2 q.2 else 0
 
+omit [DecidableEq E] [Fintype E] in
 theorem kronId_conjTranspose (k : ℕ) {B : 𝕄} (hB : Bᴴ = B) :
     (kronId k B)ᴴ = kronId k B := by
   ext p q
-  show star (kronId k B q p) = kronId k B p q
+  change star (kronId k B q p) = kronId k B p q
   simp only [kronId, Matrix.of_apply]
   by_cases h : q.1 = p.1
   · rw [if_pos h, if_pos h.symm]
@@ -305,6 +312,7 @@ theorem kronId_conjTranspose (k : ℕ) {B : 𝕄} (hB : Bᴴ = B) :
     exact hb ▸ rfl
   · rw [if_neg h, if_neg (fun hh => h hh.symm), star_zero]
 
+omit [DecidableEq E] in
 theorem kronId_mul_apply (k : ℕ) (B : 𝕄)
     (X : Matrix (Fin k × E) (Fin k × E) ℂ) (p s : Fin k × E) :
     (kronId k B * X) p s = ∑ a, B p.2 a * X (p.1, a) s := by
@@ -316,17 +324,18 @@ theorem kronId_mul_apply (k : ℕ) (B : 𝕄)
     by_cases h : p.1 = r1
     · rw [if_pos h]
       exact Finset.sum_congr rfl fun ra _ => by
-        show (if p.1 = r1 then B p.2 ra else 0) * _ = _
+        change (if p.1 = r1 then B p.2 ra else 0) * _ = _
         rw [if_pos h]
     · rw [if_neg h]
       refine Finset.sum_eq_zero fun ra _ => ?_
-      show (if p.1 = r1 then B p.2 ra else 0) * _ = 0
+      change (if p.1 = r1 then B p.2 ra else 0) * _ = 0
       rw [if_neg h, zero_mul]
   rw [Finset.sum_congr rfl (fun r1 _ => hcollapse r1)]
   rw [Finset.sum_ite_eq (Finset.univ) p.1
     (fun r1 => ∑ ra, B p.2 ra * X (r1, ra) s),
     if_pos (Finset.mem_univ _)]
 
+omit [DecidableEq E] in
 theorem mul_kronId_apply (k : ℕ) (C : 𝕄)
     (X : Matrix (Fin k × E) (Fin k × E) ℂ) (p q : Fin k × E) :
     (X * kronId k C) p q = ∑ b, X p (q.1, b) * C b q.2 := by
@@ -338,17 +347,18 @@ theorem mul_kronId_apply (k : ℕ) (C : 𝕄)
     by_cases h : s1 = q.1
     · rw [if_pos h]
       exact Finset.sum_congr rfl fun sb _ => by
-        show _ * (if s1 = q.1 then C sb q.2 else 0) = _
+        change _ * (if s1 = q.1 then C sb q.2 else 0) = _
         rw [if_pos h]
     · rw [if_neg h]
       refine Finset.sum_eq_zero fun sb _ => ?_
-      show _ * (if s1 = q.1 then C sb q.2 else 0) = 0
+      change _ * (if s1 = q.1 then C sb q.2 else 0) = 0
       rw [if_neg h, mul_zero]
   rw [Finset.sum_congr rfl (fun s1 _ => hcollapse s1)]
   rw [Finset.sum_ite_eq' (Finset.univ) q.1
     (fun s1 => ∑ sb, X p (s1, sb) * C sb q.2),
     if_pos (Finset.mem_univ _)]
 
+omit [DecidableEq E] in
 /-- The ampliation of a two-sided multiplication is the two-sided
 multiplication by the ancilla extensions. -/
 theorem kronId_conj_entry (k : ℕ) (B C : 𝕄)
@@ -367,6 +377,7 @@ theorem kronId_conj_entry (k : ℕ) (B C : 𝕄)
 
 /-! ### Ampliation stability of the building blocks -/
 
+omit [DecidableEq E] [Fintype E] in
 theorem posSemidef_sum {ι : Type*} (s : Finset ι)
     (f : ι → Matrix (Fin k × E) (Fin k × E) ℂ)
     (h : ∀ i ∈ s, (f i).PosSemidef) :
@@ -381,6 +392,7 @@ theorem posSemidef_sum {ι : Type*} (s : Finset ι)
 
 variable {k : ℕ}
 
+omit [DecidableEq E] in
 /-- The ampliation of a Kraus map is the Kraus map of the ancilla
 extensions. -/
 theorem ampliateE_kraus {m : Type*} [Fintype m] (A : m → 𝕄)
@@ -389,12 +401,13 @@ theorem ampliateE_kraus {m : Type*} [Fintype m] (A : m → 𝕄)
       = ∑ j, kronId k (A j) * X * kronId k (A j) := by
   ext p q
   rw [ampliateE_apply]
-  show krausL A _ p.2 q.2 = _
+  change krausL A _ p.2 q.2 = _
   rw [krausL_apply]
   rw [Matrix.sum_apply, Matrix.sum_apply]
   exact Finset.sum_congr rfl fun j _ =>
     (kronId_conj_entry k (A j) (A j) X p q).symm
 
+omit [DecidableEq E] in
 /-- **Ampliation stability of the Kraus part**: with hermitian
 jumps, every ampliation of `X ↦ Σ_j A_j X A_j` preserves positive
 semidefiniteness. -/
@@ -414,7 +427,7 @@ noncomputable def conjL (K : 𝕄) : 𝕄 →L[ℂ] 𝕄 :=
 
 @[simp]
 theorem conjL_apply (K X : 𝕄) : conjL K X = K * X * K := by
-  show leftMulL K (rightMulL K X) = K * X * K
+  change leftMulL K (rightMulL K X) = K * X * K
   rw [rightMulL_apply, leftMulL_apply, Matrix.mul_assoc]
 
 /-- The ampliation of a conjugation is the conjugation by the
@@ -425,7 +438,7 @@ theorem ampliateE_conj (K : 𝕄)
       = kronId k K * X * kronId k K := by
   ext p q
   rw [ampliateE_apply]
-  show conjL K _ p.2 q.2 = _
+  change conjL K _ p.2 q.2 = _
   rw [conjL_apply]
   exact (kronId_conj_entry k K K X p q).symm
 
@@ -437,6 +450,7 @@ theorem ampliateE_conj_posSemidef {K : 𝕄} (hK : Kᴴ = K)
   have h := hX.mul_mul_conjTranspose_same (kronId k K)
   rwa [kronId_conjTranspose k hK] at h
 
+omit [DecidableEq E] in
 /-- **Ampliation stability of the Euler factor** `1 + s·Φ` for
 `s ≥ 0` and a hermitian Kraus part. -/
 theorem ampliateE_euler_posSemidef {m : Type*} [Fintype m]
@@ -459,13 +473,13 @@ theorem ampliateE_euler_posSemidef {m : Type*} [Fintype m]
 theorem leftMulL_smul (c : ℂ) (B : 𝕄) :
     leftMulL (c • B) = c • leftMulL B := by
   refine ContinuousLinearMap.ext fun X => ?_
-  rw [leftMulL_apply, ContinuousLinearMap.smul_apply, leftMulL_apply,
+  rw [leftMulL_apply, _root_.smul_apply, leftMulL_apply,
     Matrix.smul_mul]
 
 theorem rightMulL_smul (c : ℂ) (B : 𝕄) :
     rightMulL (c • B) = c • rightMulL B := by
   refine ContinuousLinearMap.ext fun X => ?_
-  rw [rightMulL_apply, ContinuousLinearMap.smul_apply, rightMulL_apply,
+  rw [rightMulL_apply, _root_.smul_apply, rightMulL_apply,
     Matrix.mul_smul]
 
 /-- Conjugate transpose as a continuous `ℝ`-linear map on the
@@ -478,6 +492,7 @@ noncomputable def ctR : 𝕄 →L[ℝ] 𝕄 :=
         simp only [RingHom.id_apply]
         rw [Matrix.conjTranspose_smul, star_trivial] }
 
+omit [DecidableEq E] in
 @[simp]
 theorem ctR_apply (X : 𝕄) : ctR X = Xᴴ := rfl
 
@@ -494,6 +509,7 @@ theorem matExp_conjTranspose {B : 𝕄} (hB : Bᴴ = B) :
   congr 1
   rw [star_inv₀, star_natCast]
 
+omit [DecidableEq E] in
 /-- Hermiticity of the two-sided generator matrix `G = −½ Σ A_j²`. -/
 theorem sumSq_conjTranspose {m : Type*} [Fintype m] (A : m → 𝕄)
     (hA : ∀ j, (A j)ᴴ = A j) :
@@ -524,6 +540,7 @@ theorem isClosed_nonneg_complex : IsClosed {z : ℂ | 0 ≤ z} := by
   exact (isClosed_Ici.preimage Complex.continuous_re).inter
     (isClosed_singleton.preimage Complex.continuous_im)
 
+omit [DecidableEq E] in
 /-- **Positive semidefiniteness is closed under limits** in the
 Frobenius topology. -/
 theorem posSemidef_of_tendsto {Y : ℕ → 𝕄} {L : 𝕄}
@@ -561,7 +578,7 @@ theorem posSemidef_of_tendsto {Y : ℕ → 𝕄} {L : 𝕄}
     have hq : Filter.Tendsto (fun n => qf (Y n)) Filter.atTop
         (nhds (qf L)) := (qf.continuous.tendsto L).comp hlim
     have hmem : ∀ n, qf (Y n) ∈ {z : ℂ | 0 ≤ z} := fun n => by
-      show (0 : ℂ) ≤ qf (Y n)
+      change (0 : ℂ) ≤ qf (Y n)
       exact (hY n).2 x
     have hLmem := isClosed_nonneg_complex.mem_of_tendsto hq
       (Filter.Eventually.of_forall hmem)
@@ -570,7 +587,10 @@ theorem posSemidef_of_tendsto {Y : ℕ → 𝕄} {L : 𝕄}
 /-! ### The second-order remainder bound for the exponential -/
 
 set_option maxHeartbeats 2000000 in
+-- The exponential-series elaboration in this proof is large.
 set_option synthInstance.maxHeartbeats 400000 in
+-- Instance search inside the exponential-series elaboration is large.
+omit [DecidableEq E] in
 theorem norm_exp_sub_one_sub_le (z : 𝕄 →L[ℂ] 𝕄) :
     ‖NormedSpace.exp z - 1 - z‖ ≤ ‖z‖ ^ 2 * Real.exp ‖z‖ := by
   have hf : NormedSpace.exp z = ∑' n : ℕ, (n !⁻¹ : ℂ) • z ^ n :=
@@ -637,6 +657,7 @@ theorem norm_exp_sub_one_sub_le (z : 𝕄 →L[ℂ] 𝕄) :
 
 /-! ### Telescoping power estimate and the exponential norm bound -/
 
+omit [DecidableEq E] in
 theorem norm_pow_le_of_le {y : 𝕄 →L[ℂ] 𝕄} {K : ℝ} (hy : ‖y‖ ≤ K)
     (n : ℕ) : ‖y ^ n‖ ≤ K ^ n := by
   induction n with
@@ -650,6 +671,7 @@ theorem norm_pow_le_of_le {y : 𝕄 →L[ℂ] 𝕄} {K : ℝ} (hy : ‖y‖ ≤ 
             mul_le_mul ih hy (norm_nonneg _)
               (pow_nonneg (le_trans (norm_nonneg _) hy) n)
 
+omit [DecidableEq E] in
 /-- Telescoping estimate for powers. -/
 theorem norm_pow_sub_pow_le (x y : 𝕄 →L[ℂ] 𝕄) (K : ℝ)
     (hx : ‖x‖ ≤ K) (hy : ‖y‖ ≤ K) (n : ℕ) :
@@ -688,6 +710,7 @@ theorem norm_pow_sub_pow_le (x y : 𝕄 →L[ℂ] 𝕄) (K : ℝ)
               push_cast
               ring
 
+omit [DecidableEq E] in
 /-- `‖e^z‖ ≤ e^{‖z‖}`. -/
 theorem norm_exp_le_exp_norm (z : 𝕄 →L[ℂ] 𝕄) :
     ‖NormedSpace.exp z‖ ≤ Real.exp ‖z‖ := by
@@ -715,6 +738,7 @@ def PreservesPos (f : 𝕄 →ₗ[ℂ] 𝕄) : Prop :=
   ∀ (k : ℕ) (X : Matrix (Fin k × E) (Fin k × E) ℂ),
     X.PosSemidef → (ampliateE k f X).PosSemidef
 
+omit [DecidableEq E] [Fintype E] in
 theorem PreservesPos.comp {f g : 𝕄 →ₗ[ℂ] 𝕄}
     (hf : PreservesPos f) (hg : PreservesPos g) :
     PreservesPos (f ∘ₗ g) := by
@@ -722,11 +746,13 @@ theorem PreservesPos.comp {f g : 𝕄 →ₗ[ℂ] 𝕄}
   rw [ampliateE_comp]
   exact hf k _ (hg k X hX)
 
+omit [DecidableEq E] [Fintype E] in
 theorem PreservesPos.id : PreservesPos (LinearMap.id : 𝕄 →ₗ[ℂ] 𝕄) := by
   intro k X hX
   rw [ampliateE_id]
   exact hX
 
+omit [DecidableEq E] in
 theorem PreservesPos.pow {f : 𝕄 →L[ℂ] 𝕄} (hf : PreservesPos f.toLinearMap)
     (p : ℕ) : PreservesPos (f ^ p).toLinearMap := by
   induction p with
@@ -743,14 +769,16 @@ theorem PreservesPos.pow {f : 𝕄 →L[ℂ] 𝕄} (hf : PreservesPos f.toLinear
       exact hf.comp ih
 
 theorem preservesPos_conjL {K : 𝕄} (hK : Kᴴ = K) :
-    PreservesPos (conjL K).toLinearMap := fun k X hX =>
+    PreservesPos (conjL K).toLinearMap := fun _k _X hX =>
   ampliateE_conj_posSemidef hK hX
 
+omit [DecidableEq E] in
 theorem preservesPos_euler {m : Type*} [Fintype m] (A : m → 𝕄)
     (hA : ∀ j, (A j)ᴴ = A j) {s : ℝ} (hs : 0 ≤ s) :
     PreservesPos (LinearMap.id + (s : ℂ) • (krausL A).toLinearMap) :=
-  fun k X hX => ampliateE_euler_posSemidef A hA hs hX
+  fun _k _X hX => ampliateE_euler_posSemidef A hA hs hX
 
+omit [DecidableEq E] in
 /-- The real-scalar Euler factor as a continuous map, with its
 underlying linear map in the stable form. -/
 theorem eulerCLM_toLinearMap {m : Type*} [Fintype m] (A : m → 𝕄)
@@ -758,24 +786,26 @@ theorem eulerCLM_toLinearMap {m : Type*} [Fintype m] (A : m → 𝕄)
     ((1 : 𝕄 →L[ℂ] 𝕄) + s • krausL A).toLinearMap
       = LinearMap.id + (s : ℂ) • (krausL A).toLinearMap := by
   refine LinearMap.ext fun X => ?_
-  show (1 : 𝕄 →L[ℂ] 𝕄) X + (s • krausL A) X = X + (s : ℂ) • krausL A X
-  rw [ContinuousLinearMap.smul_apply, Complex.coe_smul]
+  change (1 : 𝕄 →L[ℂ] 𝕄) X + (s • krausL A) X = X + (s : ℂ) • krausL A X
+  rw [_root_.smul_apply, Complex.coe_smul]
   rfl
 
 theorem leftMulL_real_smul (r : ℝ) (B : 𝕄) :
     r • leftMulL B = leftMulL (r • B) := by
   refine ContinuousLinearMap.ext fun X => ?_
-  rw [ContinuousLinearMap.smul_apply, leftMulL_apply, leftMulL_apply,
+  rw [_root_.smul_apply, leftMulL_apply, leftMulL_apply,
     smul_mul_assoc]
 
 theorem rightMulL_real_smul (r : ℝ) (B : 𝕄) :
     r • rightMulL B = rightMulL (r • B) := by
   refine ContinuousLinearMap.ext fun X => ?_
-  rw [ContinuousLinearMap.smul_apply, rightMulL_apply, rightMulL_apply]
+  rw [_root_.smul_apply, rightMulL_apply, rightMulL_apply]
   rw [show X * (r • B) = r • (X * B) from by
     rw [mul_smul_comm]]
 
+-- The elaboration of this proof is large; a higher heartbeat limit is required.
 set_option synthInstance.maxHeartbeats 400000 in
+-- The exponential-series elaboration in this proof is large.
 /-- The exponential of the real-scaled two-sided generator is the
 hermitian conjugation. -/
 theorem exp_smul_mulPair_eq_conjL (r : ℝ) (G : 𝕄) :
@@ -784,9 +814,9 @@ theorem exp_smul_mulPair_eq_conjL (r : ℝ) (G : 𝕄) :
   have harg : r • (leftMulL G + rightMulL G)
       = leftMulL (r • G) + rightMulL (r • G) := by
     refine ContinuousLinearMap.ext fun Y => ?_
-    show r • ((leftMulL G + rightMulL G) Y)
+    change r • ((leftMulL G + rightMulL G) Y)
       = leftMulL (r • G) Y + rightMulL (r • G) Y
-    rw [ContinuousLinearMap.add_apply, leftMulL_apply,
+    rw [_root_.add_apply, leftMulL_apply,
       rightMulL_apply, leftMulL_apply, rightMulL_apply, smul_add,
       smul_mul_assoc, mul_smul_comm]
   rw [harg]
@@ -801,7 +831,10 @@ theorem matExp_real_smul_conjTranspose {G : 𝕄} (hG : Gᴴ = G)
 /-! ### The Euler product converges to the semigroup -/
 
 set_option maxHeartbeats 4000000 in
+-- The exponential-series elaboration in this proof is large.
 set_option synthInstance.maxHeartbeats 800000 in
+-- Instance search inside the exponential-series elaboration is large.
+omit [DecidableEq E] in
 /-- **Euler–Trotter convergence**: the split Euler products converge
 in operator norm to the full semigroup. -/
 theorem euler_product_tendsto (P Q : 𝕄 →L[ℂ] 𝕄) (t : ℝ) :
@@ -853,10 +886,10 @@ theorem euler_product_tendsto (P Q : 𝕄 →L[ℂ] 𝕄) (t : ℝ) :
     have hnb2 : ‖b‖ ≤ c := le_trans hnb hcN
     have hsum : a + b = (t / N) • (P + Q) := by
       refine ContinuousLinearMap.ext fun Y => ?_
-      show a Y + b Y = (t / N) • ((P + Q) Y)
+      change a Y + b Y = (t / N) • ((P + Q) Y)
       rw [ha, hb]
-      show (t / N) • P Y + (t / N) • Q Y = _
-      rw [ContinuousLinearMap.add_apply, smul_add]
+      change (t / N) • P Y + (t / N) • Q Y = _
+      rw [_root_.add_apply, smul_add]
     have hexp_pow : NormedSpace.exp (a + b) ^ (n + 1)
         = NormedSpace.exp (t • (P + Q)) := by
       rw [hsum, ← NormedSpace.exp_nsmul]
@@ -983,7 +1016,10 @@ theorem euler_product_tendsto (P Q : 𝕄 →L[ℂ] 𝕄) (t : ℝ) :
 /-! ### Complete positivity of the Lindblad semigroup -/
 
 set_option maxHeartbeats 4000000 in
+-- The exponential-series elaboration in this proof is large.
 set_option synthInstance.maxHeartbeats 800000 in
+-- Instance search inside the exponential-series elaboration is large.
+omit [DecidableEq E] in
 /-- **`thm:stable-pointer-selection` clause (ii)**: the Lindblad
 semigroup `e^{tℒ}` of the symmetric dissipator with hermitian jumps
 is **completely positive** — every matrix ampliation preserves
@@ -996,6 +1032,7 @@ theorem exp_dissipator_preservesPos {m : Type*} [Fintype m]
     (A : m → 𝕄) (hA : ∀ j, (A j)ᴴ = A j) {t : ℝ} (ht : 0 ≤ t) :
     PreservesPos
       (NormedSpace.exp (t • clm (dissipatorL A))).toLinearMap := by
+  classical
   intro k X hX
   set G : 𝕄 := (-(1 / 2) : ℂ) • ∑ j, A j * A j with hG
   have hGh : Gᴴ = G := sumSq_conjTranspose A hA

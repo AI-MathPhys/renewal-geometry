@@ -112,7 +112,7 @@ finite transfers by `thm:primitive-stationary-weight`), the
 stationary expectation of every deck-odd observable — in particular
 of the sheet sign `J` — vanishes: no spontaneous orientation. -/
 theorem no_finite_spontaneous_orientation (ρs : A)
-    (hτi : τ * τi = 1) (hiτ : τi * τ = 1)
+    (_hτi : τ * τi = 1) (_hiτ : τi * τ = 1)
     (htr : ∀ x y : A, tr (x * y) = tr (y * x))
     (hstat : T ρs = ρs)
     (hcov : ∀ x : A, T (deckAd τ τi x) = deckAd τ τi (T x))
@@ -125,7 +125,7 @@ theorem no_finite_spontaneous_orientation (ρs : A)
   have hstate : DeckInvariantState
       ((tr.comp (LinearMap.mulLeft ℂ ρs))) τ τi := by
     intro a
-    show tr (ρs * (τ * a * τi)) = tr (ρs * a)
+    change tr (ρs * (τ * a * τi)) = tr (ρs * a)
     calc tr (ρs * (τ * a * τi))
         = tr ((ρs * τ * a) * τi) := by congr 1; noncomm_ring
       _ = tr (τi * (ρs * τ * a)) := htr _ _

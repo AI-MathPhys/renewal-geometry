@@ -33,6 +33,7 @@ open Matrix Filter Topology
 
 variable {D : Type*} [Fintype D] [DecidableEq D] [Nonempty D]
 
+omit [Nonempty D] in
 /-- A stationary law of a kernel is stationary for all iterates. -/
 theorem kernelPow_stationary {Q : D → D → ℝ} {π : D → ℝ}
     (hstat : ∀ b, ∑ a, π a * Q a b = π b) :
@@ -44,7 +45,7 @@ theorem kernelPow_stationary {Q : D → D → ℝ} {π : D → ℝ}
     have h : ∀ a, π a * (kernelPow Q 0) a b
         = if a = b then π a else 0 := by
       intro a
-      show π a * (if a = b then (1 : ℝ) else 0)
+      change π a * (if a = b then (1 : ℝ) else 0)
         = if a = b then π a else 0
       split <;> simp
     rw [Finset.sum_congr rfl fun a _ => h a,

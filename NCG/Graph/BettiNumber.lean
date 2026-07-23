@@ -75,12 +75,12 @@ theorem ker_coboundaryMap {v₀ : G.V} (hconn : G.ConnectedTo v₀) :
   · rintro ⟨c, rfl⟩
     rw [LinearMap.mem_ker]
     funext e
-    show c + c = 0
+    change c + c = 0
     exact CharTwo.add_self_eq_zero c
 
 /-- The constant embedding is injective (the graph has a vertex). -/
 theorem constMap_injective (v₀ : G.V) :
-    Function.Injective (constMap G) := fun c c' h => congrFun h v₀
+    Function.Injective (constMap G) := fun _c _c' h => congrFun h v₀
 
 /-- **The Betti-number formula** (Theorem `thm:cover`, general connected
 case): for every finite connected multigraph,

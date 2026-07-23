@@ -44,7 +44,7 @@ generators with `gᵢgⱼ + gⱼgᵢ = 2δᵢⱼ` (Definition `def:krein-cliffor
 `h(ξ)² = |Mξ|²·1`). -/
 theorem clifford_square {d : ℕ} (g : Fin d → A)
     (hrel : ∀ i j, g i * g j + g j * g i
-      = (if i = j then (2:ℝ) else 0) • 1)
+      = (if i = j then (2 : ℝ) else 0) • 1)
     (a : Fin d → ℝ) :
     (∑ i, a i • g i) * (∑ i, a i • g i) = (∑ i, a i ^ 2) • 1 := by
   have hexp : ∀ b c : Fin d → ℝ,
@@ -57,8 +57,8 @@ theorem clifford_square {d : ℕ} (g : Fin d → A)
     refine Finset.sum_congr rfl fun j _ => ?_
     rw [smul_mul_smul_comm]
   have hdouble :
-      (2:ℝ) • ((∑ i, a i • g i) * (∑ i, a i • g i))
-        = (2:ℝ) • ((∑ i, a i ^ 2) • (1 : A)) := by
+      (2 : ℝ) • ((∑ i, a i • g i) * (∑ i, a i • g i))
+        = (2 : ℝ) • ((∑ i, a i ^ 2) • (1 : A)) := by
     rw [two_smul, two_smul]
     calc (∑ i, a i • g i) * (∑ i, a i • g i)
           + (∑ i, a i • g i) * (∑ i, a i • g i)
@@ -115,7 +115,7 @@ structure KreinCliffordDatum (A : Type*) [Ring A] [Algebra ℝ A]
   γ_star : ∀ i, star (γ i) = γ i
   anticomm0 : ∀ i, γ0 * γ i = -(γ i * γ0)
   cliff : ∀ i j, γ i * γ j + γ j * γ i
-    = (if i = j then (2:ℝ) else 0) • 1
+    = (if i = j then (2 : ℝ) else 0) • 1
 
 namespace KreinCliffordDatum
 
@@ -157,7 +157,7 @@ theorem alpha_mul (hq : D.γ0 * D.γ0 = (-1 : ℝ) • 1) (i j : Fin d) :
 theorem alpha_cliff (hq : D.γ0 * D.γ0 = (-1 : ℝ) • 1) (i j : Fin d) :
     (D.γ0 * D.γ i) * (D.γ0 * D.γ j)
       + (D.γ0 * D.γ j) * (D.γ0 * D.γ i)
-      = (if i = j then (2:ℝ) else 0) • 1 := by
+      = (if i = j then (2 : ℝ) else 0) • 1 := by
   rw [alpha_mul D hq, alpha_mul D hq, D.cliff]
 
 variable [StarModule ℝ A]
@@ -171,6 +171,7 @@ theorem multiplier_star (a : Fin d → ℝ) :
   refine Finset.sum_congr rfl fun i _ => ?_
   rw [star_smul, alpha_star, star_trivial]
 
+omit [StarModule ℝ A] in
 /-- **Lemma `lem:alpha-selfadjoint`**: the multiplier squares to the
 scalar `|a|²·1` — with `a = κMξ` this is
 `h(ξ)² = κ²·ξᵀM²ξ·1`. -/
@@ -180,6 +181,7 @@ theorem multiplier_square (hq : D.γ0 * D.γ0 = (-1 : ℝ) • 1)
       = (∑ i, a i ^ 2) • 1 :=
   clifford_square (fun i => D.γ0 * D.γ i) (alpha_cliff D hq) a
 
+omit [StarModule ℝ A] in
 /-- **Lemma `lem:symbol-square`**: the spacetime symbol squares to a
 scalar — the emergent inverse metric.  With `q = (γ⁰)²` and spatial
 coefficients `a = κMξ`,

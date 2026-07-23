@@ -34,8 +34,7 @@ This file formalizes the order-theoretic heart of that proof:
 The remaining steps of `thm:predictive-unit` — that complete positivity
 implies the Schwarz inequality (Kadison–Schwarz, via 2-positivity), and that
 equality in the Schwarz inequality places `x` in the multiplicative domain
-(Choi) — need C⋆-algebra machinery not yet in Mathlib and are tracked in the
-roadmap.
+(Choi) — are proved in `NCG/Algebra/KadisonSchwarz.lean`.
 -/
 
 namespace NCG
@@ -102,7 +101,8 @@ then
 
 `u⁻¹(u(x)⋆ u(x)) = x⋆ x`.
 
-Together with the multiplicative-domain step (roadmap) this makes every
+Together with the multiplicative-domain step
+(`NCG/Algebra/KadisonSchwarz.lean`) this makes every
 predictive unit a `*`-automorphism: `𝖴_pred ⊆ Aut(𝒜_int)`. -/
 theorem unit_sandwich_eq (u : (UCPMap A)ˣ)
     (hval : IsSchwarzMap (u.val : UCPMap A).toLinearMap)

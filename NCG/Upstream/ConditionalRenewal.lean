@@ -74,7 +74,7 @@ theorem conditional_successor {E : Type*}
     (hpe : p (app e h) ≠ 0) (hpe' : p (app e h') ≠ 0) :
     CondEquiv ev p (app e h) (app e h') := by
   funext F
-  show ev F (app e h) / p (app e h) = ev F (app e h') / p (app e h')
+  change ev F (app e h) / p (app e h) = ev F (app e h') / p (app e h')
   rw [hcomp F e h, hcomp F e h', hp e h, hp e h']
   have h3 : ev (succF e) h ≠ 0 := by
     rw [← hp e h]

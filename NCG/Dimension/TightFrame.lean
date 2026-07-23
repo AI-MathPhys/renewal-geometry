@@ -30,6 +30,7 @@ open Module RealInnerProductSpace
 variable {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V]
   [FiniteDimensional ℝ V]
 
+omit [FiniteDimensional ℝ V] in
 /-- **Lemma `lem:minimal-frame`, lower bound**: a tight frame
 (`∑ₐ ⟪uₐ, x⟫ uₐ = c·x` with `c ≠ 0`) for a `d`-dimensional real inner
 product space has at least `d` vectors — hence an isotropic antipodal

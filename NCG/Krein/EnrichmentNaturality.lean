@@ -106,10 +106,10 @@ theorem classesPullback_comp (φ : Hom G G') (ψ : Hom G' G'')
       = classesPullback
           ⟨ψ.vmap ∘ φ.vmap, ψ.emap ∘ φ.emap,
             fun e => by
-              show G''.src (ψ.emap (φ.emap e)) = ψ.vmap (φ.vmap _)
+              change G''.src (ψ.emap (φ.emap e)) = ψ.vmap (φ.vmap _)
               rw [ψ.src_comm, φ.src_comm],
             fun e => by
-              show G''.tgt (ψ.emap (φ.emap e)) = ψ.vmap (φ.vmap _)
+              change G''.tgt (ψ.emap (φ.emap e)) = ψ.vmap (φ.vmap _)
               rw [ψ.tgt_comm, φ.tgt_comm]⟩ x := by
   induction x using Quotient.ind with | _ c => rfl
 
@@ -120,10 +120,10 @@ theorem H1Pullback_comp (φ : Hom G G') (ψ : Hom G' G'')
       = H1Pullback
           ⟨ψ.vmap ∘ φ.vmap, ψ.emap ∘ φ.emap,
             fun e => by
-              show G''.src (ψ.emap (φ.emap e)) = ψ.vmap (φ.vmap _)
+              change G''.src (ψ.emap (φ.emap e)) = ψ.vmap (φ.vmap _)
               rw [ψ.src_comm, φ.src_comm],
             fun e => by
-              show G''.tgt (ψ.emap (φ.emap e)) = ψ.vmap (φ.vmap _)
+              change G''.tgt (ψ.emap (φ.emap e)) = ψ.vmap (φ.vmap _)
               rw [ψ.tgt_comm, φ.tgt_comm]⟩ x := by
   induction x using Quotient.ind with | _ c => rfl
 

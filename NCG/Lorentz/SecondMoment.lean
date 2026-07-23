@@ -8,7 +8,8 @@ import NCG.Upstream.PrimitiveWeight
 /-!
 # Second-moment covariance derives isometric comparison
 
-Covers `prop:second-moment-isometry` from `manuscripts/lorentzian_emergence/lorentzian_emergence.tex`: if
+Covers `prop:second-moment-isometry` from
+`manuscripts/lorentzian_emergence/lorentzian_emergence.tex`: if
 the invertible record transport `T` intertwines the positive-definite
 spatial second moments of neighbouring local record laws,
 `T Mₓ Tᵀ = M_y`, and preserves the determinant orientation

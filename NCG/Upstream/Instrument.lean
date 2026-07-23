@@ -103,6 +103,7 @@ namespace RayBiInstrument
 
 variable (I : RayBiInstrument G X)
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 theorem η_ne_zero (x : G.V) : I.η x ≠ 0 := (I.η_pos x).ne'
 
 /-! ## `prop:multiplicative-path-weights` -/
@@ -117,19 +118,23 @@ def weightM : ∀ {x y : G.V}, DirPath G x y → ℝ
   | _, _, .nil _ => 1
   | _, _, .cons e p => I.wm e * weightM p
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 @[simp] theorem weightP_nil (v : G.V) :
     I.weightP (DirPath.nil v) = 1 := by
   simp [weightP]
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 @[simp] theorem weightP_cons (e : G.E) {w : G.V}
     (p : DirPath G (G.tgt e) w) :
     I.weightP (DirPath.cons e p) = I.wp e * I.weightP p := by
   simp [weightP]
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 @[simp] theorem weightM_nil (v : G.V) :
     I.weightM (DirPath.nil v) = 1 := by
   simp [weightM]
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 @[simp] theorem weightM_cons (e : G.E) {w : G.V}
     (p : DirPath G (G.tgt e) w) :
     I.weightM (DirPath.cons e p) = I.wm e * I.weightM p := by
@@ -145,24 +150,29 @@ def mapR : ∀ {x y : G.V}, DirPath G x y → (X x →ₗ[ℝ] X y)
   | _, _, .nil _ => LinearMap.id
   | _, _, .cons e p => (mapR p).comp (I.R e)
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 @[simp] theorem mapF_nil (v : G.V) :
     I.mapF (DirPath.nil v) = LinearMap.id := by
   simp [mapF]
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 @[simp] theorem mapF_cons (e : G.E) {w : G.V}
     (p : DirPath G (G.tgt e) w) :
     I.mapF (DirPath.cons e p) = (I.mapF p).comp (I.F e) := by
   simp [mapF]
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 @[simp] theorem mapR_nil (v : G.V) :
     I.mapR (DirPath.nil v) = LinearMap.id := by
   simp [mapR]
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 @[simp] theorem mapR_cons (e : G.E) {w : G.V}
     (p : DirPath G (G.tgt e) w) :
     I.mapR (DirPath.cons e p) = (I.mapR p).comp (I.R e) := by
   simp [mapR]
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 /-- **Proposition `prop:multiplicative-path-weights` (renewal)**:
 `F_γ η_{s(γ)} = W₊(γ) η_{t(γ)}`. -/
 theorem mapF_eta : ∀ {x y : G.V} (γ : DirPath G x y),
@@ -172,6 +182,7 @@ theorem mapF_eta : ∀ {x y : G.V} (γ : DirPath G x y),
     rw [mapF_cons, LinearMap.comp_apply, I.hF e, map_smul,
       mapF_eta p, smul_smul, weightP_cons]
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 /-- **Proposition `prop:multiplicative-path-weights`
 (anti-renewal)**: `R_γ η_{s(γ)} = W₋(γ) η_{t(γ)}`. -/
 theorem mapR_eta : ∀ {x y : G.V} (γ : DirPath G x y),
@@ -181,6 +192,7 @@ theorem mapR_eta : ∀ {x y : G.V} (γ : DirPath G x y),
     rw [mapR_cons, LinearMap.comp_apply, I.hR e, map_smul,
       mapR_eta p, smul_smul, weightM_cons]
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 /-- **Proposition `prop:multiplicative-path-weights`
 (multiplicativity)**: `W₊(γ₂γ₁) = W₊(γ₂) W₊(γ₁)`. -/
 theorem weightP_append : ∀ {u v w : G.V} (p : DirPath G u v)
@@ -193,6 +205,7 @@ theorem weightP_append : ∀ {u v w : G.V} (p : DirPath G u v)
       weightP_cons]
     ring
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 theorem weightM_append : ∀ {u v w : G.V} (p : DirPath G u v)
     (q : DirPath G v w),
     I.weightM (p.append q) = I.weightM p * I.weightM q
@@ -214,6 +227,7 @@ def InstrumentCompatible
   ∀ {x y : G.V} (γ γ' : DirPath G x y), rel γ γ' →
     I.weightP γ = I.weightP γ' ∧ I.weightM γ = I.weightM γ'
 
+omit [∀ (x : G.V), NoZeroSMulDivisors ℝ (X x)] in
 /-- **Theorem `thm:path-weight-descent` (descent criterion)**: the
 weights descend (uniquely) to the path quotient iff the congruence
 is instrument compatible. -/

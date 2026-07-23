@@ -69,7 +69,7 @@ theorem hyp_count_identity {N r j k : ℕ} (hjr : j ≤ r) (hrN : r ≤ N)
         _ = N.choose k * (k ! * (N - k)!) := by rw [h3, h4]
         _ = N ! := by rw [← h5]; ring
     rw [hL, hR]
-  · push_neg at hcase
+  · push Not at hcase
     have hz1 : (N - r).choose (k - j) = 0 :=
       Nat.choose_eq_zero_of_lt hcase
     have hz2 : (N - k).descFactorial (r - j) = 0 := by
@@ -177,7 +177,7 @@ theorem abs_prod_sub_prod_le {ι : Type*} (s : Finset ι)
 
 /-- The product form of the hypergeometric weight. -/
 theorem hypWeight_eq_prod {N r j k : ℕ} (hjr : j ≤ r) (hrN : r ≤ N)
-    (hjk : j ≤ k) (hkN : k ≤ N) :
+    (_hjk : j ≤ k) (hkN : k ≤ N) :
     hypWeight N r j k
       = (∏ i ∈ Finset.range j, ((k : ℝ) - i) / ((N : ℝ) - i))
         * ∏ i ∈ Finset.range (r - j),
@@ -469,7 +469,7 @@ theorem hypWeight_approx {N r j k : ℕ} (hjr : j ≤ r) (hjk : j ≤ k)
           nlinarith [hj0, hjR,
             mul_nonneg hj0 (by positivity : (0:ℝ) ≤ (r:ℝ))]
   · -- degenerate regime: the weight vanishes and `q < r/N`
-    push_neg at hwin
+    push Not at hwin
     have hz : hypWeight N r j k = 0 := by
       unfold hypWeight
       rw [Nat.descFactorial_eq_zero_iff_lt.mpr hwin]

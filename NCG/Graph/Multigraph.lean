@@ -30,6 +30,9 @@ namespace NCG
 
 universe u v
 
+-- Vertex and edge types deliberately live in independent universes;
+-- collapsing them would restrict downstream instantiations.
+set_option linter.checkUnivs false in
 /-- A **directed multigraph**: a type of vertices, a type of (oriented)
 edges, and source/target maps.  Parallel edges and loops are allowed, as
 required for predictive graphs. -/

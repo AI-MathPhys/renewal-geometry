@@ -61,6 +61,7 @@ variable (τ : A →ₗ[ℂ] ℂ) (σ σi : A)
 variable (hσi : σ * σi = 1) (hiσ : σi * σ = 1)
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Corollary `cor:canonical-anti-family-weight`**: relative to
 the faithful stationary weight of the transfer law, every elementary
 channel whose predual fixes the weight has a *unital* KMS/Petz
@@ -87,6 +88,7 @@ structure IsSpectralResolution : Prop where
 
 variable {r P}
 
+omit [Algebra ℂ A] in
 /-- Block decomposition `S = ∑_{jk} P_j S P_k`. -/
 theorem block_decomposition (hP : IsSpectralResolution P) (S : A) :
     S = ∑ j, ∑ k, P j * S * P k := by
@@ -359,6 +361,7 @@ section AffineClock
 variable [StarRing A] [StarModule ℂ A] [NoZeroSMulDivisors ℂ A]
   [Nontrivial A]
 
+omit [NoZeroSMulDivisors ℂ A] in
 /-- **Theorem `thm:upstream-affine-clock` (the affine clock)**: a
 common modular exponent on the graded resets with scalar joint
 commutant forces `H_ρ = β N + c 1` with real `c`. -/
@@ -409,6 +412,7 @@ theorem upstream_affine_clock (H N : A) (hHsa : star H = H)
   rw [← hcre, ← hc, hX]
   abel
 
+omit [NoZeroSMulDivisors ℂ A] in
 /-- **Theorem `thm:affine-clock` (weighted affine clock)**: with
 depth-weighted grading `[N, S_e] = ℓ_e S_e` and matching modular
 eigenvalue relation `[H, S_e] = β ℓ_e S_e` on every elementary reset

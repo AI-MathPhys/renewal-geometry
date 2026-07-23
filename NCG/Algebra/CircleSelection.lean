@@ -170,7 +170,7 @@ theorem finrank_le_two_of_isometry_irreducible (M : V ≃ₗᵢ[ℝ] V)
         subst hy
         rw [hMsq x]
         exact W.sub_mem (W.smul_mem _ hMxW) hxW
-    | zero => simpa using W.zero_mem
+    | zero => simp
     | add y z _ _ hy hz =>
       rw [map_add]
       exact W.add_mem hy hz

@@ -60,7 +60,7 @@ def shellSigmaEquiv (c R : ℕ) :
         have := f.2
         omega⟩,
       ⟨fun i => f.1 i.succ, by
-        show ∑ i : Fin c, f.1 i.succ ≤ R - f.1 0
+        change ∑ i : Fin c, f.1 i.succ ≤ R - f.1 0
         have h := f.2
         rw [Fin.sum_univ_succ] at h
         omega⟩⟩
@@ -76,14 +76,14 @@ def shellSigmaEquiv (c R : ℕ) :
   right_inv p := by
     rcases p with ⟨a, g⟩
     refine Sigma.ext (Fin.ext ?_) ?_
-    · show (Fin.cons a.val g.1 : Fin (c + 1) → ℕ) 0 = a.val
+    · change (Fin.cons a.val g.1 : Fin (c + 1) → ℕ) 0 = a.val
       exact Fin.cons_zero _ _
     · rw [Subtype.heq_iff_coe_eq (fun x => by
-        show (∑ i, x i ≤ R - (Fin.cons a.val g.1 : Fin (c + 1) → ℕ) 0)
+        change (∑ i, x i ≤ R - (Fin.cons a.val g.1 : Fin (c + 1) → ℕ) 0)
           ↔ ∑ i, x i ≤ R - a.val
         rw [Fin.cons_zero])]
       funext i
-      show (Fin.cons a.val g.1 : Fin (c + 1) → ℕ) i.succ = g.1 i
+      change (Fin.cons a.val g.1 : Fin (c + 1) → ℕ) i.succ = g.1 i
       exact Fin.cons_succ _ _ _
 
 /-- Fibre recursion for the shell count:
@@ -133,7 +133,7 @@ theorem latticeShellCard_eq_choose (c R : ℕ) :
             (fun m => (m + c).choose c) (R + 1)
           rw [← h]
           refine Finset.sum_congr rfl fun a ha => ?_
-          congr 1 <;> omega
+          congr 1
       _ = (R + c + 1).choose (c + 1) := sum_range_choose_add c R
 
 /-- **Corollary `cor:ehrhart-free` / Proposition `prop:spectral-action`

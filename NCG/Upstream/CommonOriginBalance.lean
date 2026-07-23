@@ -75,12 +75,15 @@ noncomputable def gibbs (η : ι → ℝ) : ℝ :=
 noncomputable def q (i : ι) (s : ℝ) (η : ι → ℝ) : ℝ :=
   Real.exp (D.θ * s * D.m i η) / (2 * Real.cosh (D.θ * D.m i η))
 
+omit [DecidableEq ι] in
 theorem gibbs_pos (η : ι → ℝ) : 0 < D.gibbs η := Real.exp_pos _
 
+omit [DecidableEq ι] [Fintype ι] in
 theorem q_pos (i : ι) (s : ℝ) (η : ι → ℝ) : 0 < D.q i s η :=
   div_pos (Real.exp_pos _)
     (mul_pos two_pos (Real.cosh_pos _))
 
+omit [DecidableEq ι] [Fintype ι] in
 /-- The heat-bath law is normalized over the two redraw values. -/
 theorem q_sum (i : ι) (η : ι → ℝ) :
     D.q i 1 η + D.q i (-1) η = 1 := by
@@ -92,6 +95,7 @@ theorem q_sum (i : ι) (η : ι → ℝ) :
     Real.cosh_eq]
   field_simp
 
+omit [Fintype ι] in
 /-- Locality: the local field at `i` does not see the spin at `i`. -/
 theorem m_update_self (i : ι) (η : ι → ℝ) (s : ℝ) :
     D.m i (Function.update η i s) = D.m i η := by
@@ -99,12 +103,14 @@ theorem m_update_self (i : ι) (η : ι → ℝ) (s : ℝ) :
   have hji : j ≠ i := fun h => D.N_irrefl i (h ▸ hj)
   exact Function.update_of_ne hji s η
 
+omit [DecidableEq ι] [Fintype ι] in
 /-- Oddness of the local field under deck reversal. -/
 theorem m_neg (i : ι) (η : ι → ℝ) : D.m i (-η) = -(D.m i η) := by
   rw [m, m, ← Finset.sum_neg_distrib]
   refine Finset.sum_congr rfl fun j _ => ?_
   simp
 
+omit [DecidableEq ι] [Fintype ι] in
 /-- Deck reversal of the heat-bath law: `q_i(s|−η) = q_i(−s|η)`. -/
 theorem q_deck (i : ι) (s : ℝ) (η : ι → ℝ) :
     D.q i s (-η) = D.q i (-s) η := by
@@ -113,6 +119,7 @@ theorem q_deck (i : ι) (s : ℝ) (η : ι → ℝ) :
     show D.θ * -D.m i η = -(D.θ * D.m i η) by ring,
     Real.cosh_neg]
 
+omit [Fintype ι] in
 /-- Deck reversal commutes with single-site redraw:
 `(−η)^{i,s} = −(η^{i,−s})`. -/
 theorem update_neg (i : ι) (η : ι → ℝ) (s : ℝ) :
@@ -174,7 +181,7 @@ theorem energy_update (i : ι) (η : ι → ℝ) (s : ℝ) :
     have h6 : (Finset.univ.erase i) ∩ D.N i = D.N i := by
       ext k
       simp only [Finset.mem_inter, Finset.mem_erase,
-        Finset.mem_univ, and_true, true_and,
+        Finset.mem_univ, and_true,
         and_iff_right_iff_imp]
       intro hk hki
       rw [hki] at hk

@@ -74,9 +74,9 @@ def z4Section (x : ZMod 2) : ZMod 4 :=
 @[simp] theorem z4ToZ2_z4Section (x : ZMod 2) :
     z4ToZ2 (z4Section x) = x := by
   fin_cases x
-  · show z4ToZ2 (z4Section 0) = 0
+  · change z4ToZ2 (z4Section 0) = 0
     rw [z4Section, if_pos rfl, map_zero]
-  · show z4ToZ2 (z4Section 1) = 1
+  · change z4ToZ2 (z4Section 1) = 1
     rw [z4Section, if_neg (by decide), map_one]
 
 variable {G}
@@ -88,7 +88,7 @@ theorem z4ToZ2_coboundary (g : G.V → ZMod 4) :
     (fun e => z4ToZ2 (coboundaryMap4 G g e))
       = coboundaryMap G (fun v => z4ToZ2 (g v)) := by
   funext e
-  show z4ToZ2 (g (G.tgt e) - g (G.src e))
+  change z4ToZ2 (g (G.tgt e) - g (G.src e))
     = z4ToZ2 (g (G.src e)) + z4ToZ2 (g (G.tgt e))
   rw [map_sub]
   have h2 : ∀ a b : ZMod 2, a - b = b + a := by decide
@@ -135,7 +135,7 @@ theorem H1Z4.reduce_surjective :
   obtain ⟨c, rfl⟩ := Submodule.Quotient.mk_surjective _ y
   refine ⟨H1Z4.mk G (fun e => z4Section (c e)), ?_⟩
   rw [H1Z4.reduce_mk]
-  show Submodule.Quotient.mk (fun e => z4ToZ2 (z4Section (c e)))
+  change Submodule.Quotient.mk (fun e => z4ToZ2 (z4Section (c e)))
     = Submodule.Quotient.mk c
   congr 1
   funext e
@@ -146,7 +146,7 @@ an additive cochain map, so fibres are cosets of its kernel. -/
 def H1Z4.reduceHom : H1Z4 G →+ H1 G where
   toFun := H1Z4.reduce G
   map_zero' := by
-    show H1Z4.reduce G (H1Z4.mk G 0) = _
+    change H1Z4.reduce G (H1Z4.mk G 0) = _
     rw [H1Z4.reduce_mk]
     have h0 : (fun e => z4ToZ2 ((0 : G.E → ZMod 4) e))
         = (0 : G.E → ZMod 2) := by
@@ -157,7 +157,7 @@ def H1Z4.reduceHom : H1Z4 G →+ H1 G where
   map_add' x y := by
     obtain ⟨c, rfl⟩ := Submodule.Quotient.mk_surjective _ x
     obtain ⟨d, rfl⟩ := Submodule.Quotient.mk_surjective _ y
-    show H1Z4.reduce G (H1Z4.mk G (c + d)) = _
+    change H1Z4.reduce G (H1Z4.mk G (c + d)) = _
     rw [H1Z4.reduce_mk]
     have hsum : (fun e => z4ToZ2 ((c + d) e))
         = (fun e => z4ToZ2 (c e)) + fun e => z4ToZ2 (d e) := by
@@ -210,7 +210,7 @@ theorem ker_coboundaryMap4 {v₀ : G.V} (hconn : G.ConnectedTo v₀) :
   · rintro ⟨c, rfl⟩
     rw [LinearMap.mem_ker]
     funext e
-    show c - c = 0
+    change c - c = 0
     exact sub_self c
 
 /-- **`|H¹(G, ℤ/4)| = 4^{b₁}` on every finite connected multigraph** —
@@ -250,9 +250,7 @@ theorem card_H1Z4_of_connected [Fintype G.V] [Fintype G.E]
         * Nat.card (LinearMap.range (coboundaryMap4 G)) := by
     have hq := Submodule.card_eq_card_quotient_mul_card
       (LinearMap.range (coboundaryMap4 G))
-    first
-    | exact hq
-    | exact hq.trans (Nat.mul_comm _ _)
+    exact hq.trans (Nat.mul_comm _ _)
   -- assemble: |H¹| · 4^{|V|} = 4^{|E|+1}
   have hpowV : Nat.card (G.V → ZMod 4) = 4 ^ Fintype.card G.V := by
     rw [Nat.card_eq_fintype_card, Fintype.card_fun, ZMod.card]
@@ -314,10 +312,10 @@ theorem card_fibre_reduce [Fintype G.V] [Fintype G.E]
         show H1Z4.reduceHom G x₀ = H1Z4.reduce G x₀ from rfl,
         k.2, hx₀, zero_add]
     · apply Subtype.ext
-      show x.1 - x₀ + x₀ = x.1
+      change x.1 - x₀ + x₀ = x.1
       abel
     · apply Subtype.ext
-      show k.1 + x₀ - x₀ = k.1
+      change k.1 + x₀ - x₀ = k.1
       abel
   rw [hfib]
   -- |ker| from the order equation 4^{b₁} = 2^{b₁}·|ker|
@@ -334,9 +332,7 @@ theorem card_fibre_reduce [Fintype G.V] [Fintype G.E]
       (H1Z4.reduceHom G).ker
     rw [Nat.card_congr (QuotientAddGroup.quotientKerEquivOfSurjective
       (H1Z4.reduceHom G) (H1Z4.reduce_surjective G)).toEquiv] at hq
-    first
-    | exact hq
-    | exact hq.trans (Nat.mul_comm _ _)
+    exact hq
   set b := Fintype.card G.E + 1 - Fintype.card G.V
   have h4 : (4:ℕ) ^ b = 2 ^ b * 2 ^ b := by
     rw [← pow_add, ← two_mul]

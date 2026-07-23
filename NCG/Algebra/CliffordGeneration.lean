@@ -41,7 +41,7 @@ the conditioned predictive units generate the sheet conjugation —
 `β_a α_a = Ad(JR_a) Ad(R_a) = Ad(J)` whenever the direction
 implementer is Hermitian and involutive. -/
 theorem ad_pair_generates (J R : Matrix (Fin 4) (Fin 4) ℂ)
-    (hR : Rᴴ = R) (hRR : R * R = 1)
+    (_hR : Rᴴ = R) (hRR : R * R = 1)
     (X : Matrix (Fin 4) (Fin 4) ℂ) :
     adMap (J * R) (adMap R X) = adMap J X := by
   rw [adMap_comp]

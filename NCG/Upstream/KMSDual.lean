@@ -55,10 +55,12 @@ variable {A : Type*} [Ring A] [PartialOrder A] [StarRing A]
 def congrMap (c : A) : A →ₗ[ℂ] A where
   toFun a := star c * a * c
   map_add' a b := by simp [mul_add, add_mul]
-  map_smul' r a := by simp [mul_smul_comm, smul_mul_assoc]
+  map_smul' r a := by simp []
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 theorem congrMap_apply (c a : A) : congrMap c a = star c * a * c := rfl
 
+omit [StarModule ℂ A] [StarOrderedRing A] in
 /-- Star-congruences are completely positive. -/
 theorem congrMap_cp (c : A) : IsCompletelyPositive (congrMap c) := by
   intro k M hM x
@@ -73,10 +75,12 @@ theorem congrMap_cp (c : A) : IsCompletelyPositive (congrMap c) := by
   rw [heq]
   exact h
 
+omit [StarModule ℂ A] [StarOrderedRing A] in
 theorem cp_zero : IsCompletelyPositive (0 : A →ₗ[ℂ] A) := by
   intro k M hM x
   simp
 
+omit [StarModule ℂ A] in
 theorem cp_add {φ ψ : A →ₗ[ℂ] A} (hφ : IsCompletelyPositive φ)
     (hψ : IsCompletelyPositive ψ) : IsCompletelyPositive (φ + ψ) := by
   intro k M hM x
@@ -91,6 +95,7 @@ theorem cp_add {φ ψ : A →ₗ[ℂ] A} (hφ : IsCompletelyPositive φ)
   rw [heq]
   exact add_nonneg (hφ k M hM x) (hψ k M hM x)
 
+omit [StarModule ℂ A] in
 /-- Finite sums of completely positive maps are completely
 positive. -/
 theorem cp_sum {ι : Type*} (s : Finset ι) (f : ι → (A →ₗ[ℂ] A))
@@ -104,6 +109,7 @@ theorem cp_sum {ι : Type*} (s : Finset ι) (f : ι → (A →ₗ[ℂ] A))
     exact cp_add (h a (Finset.mem_insert_self a s))
       (ih fun i hi => h i (Finset.mem_insert_of_mem hi))
 
+omit [StarModule ℂ A] in
 /-- **Kraus form implies complete positivity**: any map
 `a ↦ ∑ₖ Kₖ* a Kₖ` is CP. -/
 theorem kraus_cp {ι : Type*} [Fintype ι] (K : ι → A)
@@ -131,11 +137,13 @@ variable (hσ : star σ = σ) (hσi : σ * σi = 1) (hiσ : σi * σ = 1)
 def sandwich (c : A) : A →ₗ[ℂ] A where
   toFun a := c * a * c
   map_add' a b := by simp [mul_add, add_mul]
-  map_smul' r a := by simp [mul_smul_comm, smul_mul_assoc]
+  map_smul' r a := by simp []
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 theorem sandwich_apply (c a : A) : sandwich c a = c * a * c := rfl
 
 include hσ in
+omit [StarModule ℂ A] [StarOrderedRing A] in
 theorem sandwich_cp_self : IsCompletelyPositive (sandwich σ) := by
   have h : sandwich σ = congrMap σ := by
     apply LinearMap.ext
@@ -145,6 +153,7 @@ theorem sandwich_cp_self : IsCompletelyPositive (sandwich σ) := by
   exact congrMap_cp σ
 
 include hσ hσi in
+omit [Algebra ℂ A] [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 theorem star_sigmaInv : star σi = σi := by
   have h1 : star σi * star σ = 1 := by
     rw [← star_mul, hσi, star_one]
@@ -159,6 +168,7 @@ theorem star_sigmaInv : star σi = σi := by
 def antiDual (Φstar : A →ₗ[ℂ] A) : A →ₗ[ℂ] A :=
   (sandwich σi) ∘ₗ Φstar ∘ₗ (sandwich σ)
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 theorem antiDual_apply (Φstar : A →ₗ[ℂ] A) (a : A) :
     antiDual σ σi Φstar a = σi * Φstar (σ * a * σ) * σi := rfl
 
@@ -169,6 +179,7 @@ def kmsInner (a b : A) : ℂ := τ ((σ * star a * σ) * b)
 variable {Φ Φstar : A →ₗ[ℂ] A}
 
 include hσ hσi in
+omit [StarModule ℂ A] [StarOrderedRing A] in
 /-- **Theorem `thm:canonical-anti-renewal` (i, complete
 positivity)**: the dual of a CP predual is CP. -/
 theorem antiDual_cp (hCP : IsCompletelyPositive Φstar) :
@@ -179,6 +190,7 @@ theorem antiDual_cp (hCP : IsCompletelyPositive Φstar) :
     (sandwich_cp_self σi hσi')
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Theorem `thm:canonical-anti-renewal` (i, unitality)** /
 **Proposition `prop:reverse-comparison` (KMS clause)**: the dual is
 unital *iff* `ρ = σ²` is stationary
@@ -200,6 +212,7 @@ theorem antiDual_unital_iff :
       _ = 1 := by rw [hiσ, hσi, one_mul]
 
 include hτc hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Theorem `thm:canonical-anti-renewal` (i, invariance)**: `ρ` is
 stationary for the dual: `Tr(ρ Φ^♯(b)) = Tr(ρ b)`. -/
 theorem antiDual_state_invariant
@@ -221,6 +234,7 @@ theorem antiDual_state_invariant
     _ = τ ((σ * σ) * b) := by rw [mul_assoc, hτc b (σ * σ)]
 
 include hσ hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 /-- **Theorem `thm:canonical-anti-renewal` (ii, KMS adjoint
 identity)**: `⟨a, Φ(b)⟩_{ρ,1/2} = ⟨Φ^♯(a), b⟩_{ρ,1/2}`. -/
 theorem antiDual_kms_adjoint
@@ -242,6 +256,7 @@ theorem antiDual_kms_adjoint
   rw [hR, hpair]
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Theorem `thm:canonical-anti-renewal` (iii, involutivity)**:
 applying the anti-renewal construction to the dual's own predual
 `Γ ∘ Φ ∘ Γ⁻¹` (clause (vi)) returns `Φ` — `(Φ^♯)^♯ = Φ`. -/
@@ -249,7 +264,7 @@ theorem antiDual_involutive (Φheis : A →ₗ[ℂ] A) :
     antiDual σ σi ((sandwich σ) ∘ₗ Φheis ∘ₗ (sandwich σi)) = Φheis := by
   apply LinearMap.ext
   intro a
-  show σi * (σ * Φheis (σi * (σ * a * σ) * σi) * σ) * σi = Φheis a
+  change σi * (σ * Φheis (σi * (σ * a * σ) * σi) * σ) * σi = Φheis a
   have hin : σi * (σ * a * σ) * σi = a := by
     calc σi * (σ * a * σ) * σi = (σi * σ) * a * (σ * σi) := by
           noncomm_ring
@@ -260,6 +275,7 @@ theorem antiDual_involutive (Φheis : A →ₗ[ℂ] A) :
     _ = Φheis a := by rw [hiσ, hσi, one_mul, mul_one]
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Theorem `thm:canonical-anti-renewal` (iv, composition
 reversal)**: `(Φ ∘ Ψ)^♯ = Ψ^♯ ∘ Φ^♯` (the predual of `Φ ∘ Ψ` is
 `Ψ_* ∘ Φ_*`). -/
@@ -268,7 +284,7 @@ theorem antiDual_comp (Φs Ψs : A →ₗ[ℂ] A) :
       = (antiDual σ σi Ψs) ∘ₗ (antiDual σ σi Φs) := by
   apply LinearMap.ext
   intro a
-  show σi * Ψs (Φs (σ * a * σ)) * σi
+  change σi * Ψs (Φs (σ * a * σ)) * σi
       = σi * Ψs (σ * (σi * Φs (σ * a * σ) * σi) * σ) * σi
   have h : σ * (σi * Φs (σ * a * σ) * σi) * σ = Φs (σ * a * σ) := by
     calc σ * (σi * Φs (σ * a * σ) * σi) * σ
@@ -277,6 +293,7 @@ theorem antiDual_comp (Φs Ψs : A →ₗ[ℂ] A) :
   rw [h]
 
 include hσ hσi in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 /-- **Theorem `thm:canonical-anti-renewal` (v, Kraus form)**: if
 `Φ_*(x) = ∑ₖ Kₖ x Kₖ*` (Heisenberg `Φ(a) = ∑ₖ Kₖ* a Kₖ`), then
 `Φ^♯(a) = ∑ₖ Lₖ* a Lₖ` with `Lₖ = ρ^{1/2} Kₖ* ρ^{-1/2}` — with
@@ -292,6 +309,7 @@ theorem antiDual_kraus {ι : Type*} [Fintype ι] (K : ι → A)
   noncomm_ring
 
 include hτc hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] hiσ hσi in
 /-- **Theorem `thm:canonical-anti-renewal` (vi, Petz-transpose
 predual)**: `Γ ∘ Φ ∘ Γ⁻¹` satisfies the defining trace pairing of
 the predual of `Φ^♯` — the KMS adjoint in the Heisenberg picture
@@ -301,7 +319,7 @@ theorem antiDual_predual_pairing
     (hpair : ∀ x a : A, τ (Φstar x * a) = τ (x * Φ a)) (x a : A) :
     τ (((sandwich σ) ∘ₗ Φ ∘ₗ (sandwich σi)) x * a)
       = τ (x * antiDual σ σi Φstar a) := by
-  show τ ((σ * Φ (σi * x * σi) * σ) * a)
+  change τ ((σ * Φ (σi * x * σi) * σ) * a)
       = τ (x * (σi * Φstar (σ * a * σ) * σi))
   calc τ ((σ * Φ (σi * x * σi) * σ) * a)
       = τ (σ * (Φ (σi * x * σi) * σ * a)) := by
@@ -323,6 +341,7 @@ theorem antiDual_predual_pairing
         noncomm_ring
 
 include hτc in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] hτc in
 /-- The predual of `Φ^♯` is unique under nondegeneracy of the trace
 pairing (so clause (vi) identifies it exactly). -/
 theorem predual_unique
@@ -349,8 +368,9 @@ def hsAdjoint (Φs : A →ₗ[ℂ] A) : A →ₗ[ℂ] A := Φs
 def gnsDual (Φs : A →ₗ[ℂ] A) : A →ₗ[ℂ] A where
   toFun a := Φs (a * (σ * σ)) * (σi * σi)
   map_add' a b := by simp [add_mul]
-  map_smul' r a := by simp [smul_mul_assoc]
+  map_smul' r a := by simp []
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 theorem gnsDual_apply (Φs : A →ₗ[ℂ] A) (a : A) :
     gnsDual σ σi Φs a = Φs (a * (σ * σ)) * (σi * σi) := rfl
 
@@ -359,6 +379,7 @@ def Bistochastic (Φheis Φs : A →ₗ[ℂ] A) : Prop :=
   Φheis 1 = 1 ∧ Φs 1 = 1
 
 include hτc in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] hτc in
 /-- **Proposition `prop:reverse-comparison` (HS clause, trace
 preservation)**: the Hilbert–Schmidt adjoint is trace preserving. -/
 theorem hsAdjoint_trace_preserving
@@ -369,6 +390,7 @@ theorem hsAdjoint_trace_preserving
     _ = τ (x * Φ 1) := hpair _ _
     _ = τ x := by rw [hΦ1, mul_one]
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:reverse-comparison` (HS clause,
 unitality)**: given `Φ(1) = 1`, the HS adjoint is unital exactly
 when `Φ` is bistochastic. -/
@@ -377,6 +399,7 @@ theorem hsAdjoint_unital_iff (hΦ1 : Φ 1 = 1) :
   ⟨fun h => ⟨hΦ1, h⟩, fun h => h.2⟩
 
 include hσi in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:reverse-comparison` (GNS/KMS relation)**:
 `Φ^G = 𝓜_ρ⁻¹ ∘ Φ^♯ ∘ 𝓜_ρ` with `𝓜_ρ(a) = ρ^{-1/2} a ρ^{1/2}`. -/
 theorem gnsDual_eq_conj (a : A) :
@@ -394,6 +417,7 @@ theorem gnsDual_eq_conj (a : A) :
     _ = σ * (σi * Φstar (a * (σ * σ)) * σi) * σi := by noncomm_ring
 
 include hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:reverse-comparison` (modular covariance)**:
 if the predual commutes with the imaginary half-step of the modular
 group (`𝓜_ρ`-covariance, the finite-dimensional extension of real
@@ -416,6 +440,7 @@ theorem gnsDual_eq_antiDual_of_halfstep
 /-! ## `prop:unitary-reverse` -/
 
 include hσ hσi hiσ in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 /-- **Proposition `prop:unitary-reverse`**: for reversible unitary
 evolution `Φ(a) = U* a U` with stationary `ρ` (equivalently `U`
 commuting with `ρ^{1/2}`), the anti-renewal dual is inverse
@@ -448,6 +473,7 @@ theorem unitary_antiDual (U : A) (hcomm : U * σ = σ * U)
     _ = U * a * star U := by rw [mul_assoc U σi σ, hiσ, mul_one,
         mul_assoc (star U) σ σi, hσi, mul_one]
 
+omit [Algebra ℂ A] [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] in
 /-- **Proposition `prop:unitary-reverse` (inverse property)**: the
 dual undoes the unitary evolution. -/
 theorem unitary_antiDual_inverse (U : A) (hU : U * star U = 1)
@@ -464,12 +490,14 @@ def replacementMap : A →ₗ[ℂ] A where
   toFun a := τ (σ * a * σ) • 1
   map_add' a b := by simp [mul_add, add_mul, add_smul]
   map_smul' r a := by
-    simp [mul_smul_comm, smul_mul_assoc, smul_smul]
+    simp [smul_smul]
 
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 theorem replacementMap_apply (a : A) :
     replacementMap τ σ a = τ (σ * a * σ) • 1 := rfl
 
 include hτc in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 theorem replacementMap_apply' (a : A) :
     replacementMap τ σ a = τ ((σ * σ) * a) • 1 := by
   rw [replacementMap_apply]
@@ -477,12 +505,14 @@ theorem replacementMap_apply' (a : A) :
   rw [hτc (σ * a) σ, ← mul_assoc]
 
 include hτc in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:replacement-self-dual` (unitality)**. -/
 theorem replacementMap_unital (hτρ : τ (σ * σ) = 1) :
     replacementMap τ σ 1 = 1 := by
   rw [replacementMap_apply' τ σ hτc, mul_one, hτρ, one_smul]
 
 include hσi hiσ hτc in
+omit hτc [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:replacement-self-dual` (self-duality)**: the
 anti-renewal dual of the replacement channel (with predual
 `x ↦ Tr(x) ρ`) is the replacement channel itself — KMS detailed
@@ -494,13 +524,14 @@ theorem antiDual_replacement (a : A) :
         map_smul' := by simp [smul_smul] } a
       = replacementMap τ σ a := by
   rw [antiDual_apply, replacementMap_apply]
-  show σi * (τ (σ * a * σ) • (σ * σ)) * σi = τ (σ * a * σ) • 1
+  change σi * (τ (σ * a * σ) • (σ * σ)) * σi = τ (σ * a * σ) • 1
   rw [mul_smul_comm, smul_mul_assoc]
   congr 1
   calc σi * (σ * σ) * σi = (σi * σ) * (σ * σi) := by noncomm_ring
     _ = 1 := by rw [hiσ, hσi, one_mul]
 
 include hτc in
+omit [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- The replacement predual satisfies the defining trace pairing. -/
 theorem replacement_predual_pairing (x a : A) :
     τ ((τ x • (σ * σ)) * a) = τ (x * replacementMap τ σ a) := by
@@ -509,6 +540,7 @@ theorem replacement_predual_pairing (x a : A) :
     mul_comm]
 
 include hτc in
+omit hτc [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:replacement-self-dual` (idempotency)**. -/
 theorem replacementMap_idem (hτρ : τ (σ * σ) = 1) (a : A) :
     replacementMap τ σ (replacementMap τ σ a)
@@ -517,6 +549,7 @@ theorem replacementMap_idem (hτρ : τ (σ * σ) = 1) (a : A) :
     replacementMap_apply τ σ 1, mul_one, hτρ, one_smul]
 
 include hτc in
+omit hτc [PartialOrder A] [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **Proposition `prop:replacement-self-dual` (noninvertibility)**:
 every centred element is annihilated, so the channel is not
 injective as soon as some element is not a scalar (`d > 1`). -/
@@ -528,6 +561,7 @@ theorem replacementMap_not_injective (hτρ : τ (σ * σ) = 1)
 
 open scoped ComplexOrder in
 include hτc in
+omit hτc in
 /-- **Proposition `prop:replacement-self-dual` (positivity)**: the
 replacement channel of a positive faithful state is a positive
 map. -/
@@ -572,7 +606,7 @@ theorem single_sandwich (X : Matrix (Fin d) (Fin d) ℂ) (i j : Fin d) :
   ext x y
   simp only [Matrix.mul_apply, Matrix.single_apply]
   by_cases hx : j = x <;> by_cases hy : j = y <;>
-    simp [hx, hy, ite_and, Finset.sum_ite_eq, Finset.sum_ite_eq',
+    simp [hx, hy, ite_and, Finset.sum_ite_eq,
       mul_ite, ite_mul, mul_one, one_mul, mul_zero, zero_mul]
 
 /-- Matrix units sandwich identity:

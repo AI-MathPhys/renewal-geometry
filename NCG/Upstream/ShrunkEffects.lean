@@ -41,6 +41,7 @@ open Matrix
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
+omit [DecidableEq n] in
 /-- The trace of `MᴴM` is the (real, nonnegative) Frobenius square
 sum. -/
 theorem trace_conjTranspose_mul_self_eq (M : Matrix n n ℂ) :
@@ -54,6 +55,7 @@ theorem trace_conjTranspose_mul_self_eq (M : Matrix n n ℂ) :
   rw [Matrix.conjTranspose_apply, Complex.star_def,
     ← Complex.normSq_eq_conj_mul_self]
 
+omit [DecidableEq n] in
 /-- Pairing positivity in factorized form:
 `Tr((AᴴA)(BᴴB))` is real and nonnegative. -/
 theorem pairing_factor_nonneg (A B : Matrix n n ℂ) :
@@ -76,6 +78,7 @@ theorem pairing_factor_nonneg (A B : Matrix n n ℂ) :
 noncomputable def pairing (P ρ : Matrix n n ℂ) : ℝ :=
   ((P * ρ).trace).re
 
+omit [DecidableEq n] in
 /-- Positivity of the pairing of a projection against a state. -/
 theorem pairing_nonneg {P ρ : Matrix n n ℂ}
     (hP1 : Pᴴ = P) (hP2 : P * P = P) (hρ : ∃ B, ρ = Bᴴ * B) :
@@ -87,11 +90,13 @@ theorem pairing_nonneg {P ρ : Matrix n n ℂ}
   rw [hB, hPfac, hr]
   simpa using hr0
 
+omit [DecidableEq n] in
 /-- The pairing of a projection against a normalized state is at most
 one: the complement `1 − P` is again a Hermitian idempotent. -/
 theorem pairing_le_one {P ρ : Matrix n n ℂ}
     (hP1 : Pᴴ = P) (hP2 : P * P = P) (hρ : ∃ B, ρ = Bᴴ * B)
     (hτ : ρ.trace = 1) : pairing P ρ ≤ 1 := by
+  classical
   have h1 : (1 - P)ᴴ = 1 - P := by
     rw [Matrix.conjTranspose_sub, Matrix.conjTranspose_one, hP1]
   have h2 : (1 - P) * (1 - P) = 1 - P := by
@@ -120,6 +125,8 @@ variable (hρ : ∃ B, ρ = Bᴴ * B) (hτ : ρ.trace = 1)
 
 include hP1 hP2 hρ hτ
 
+omit [DecidableEq n] in
+omit hτ in
 /-- **Value pinching, lower bound**: `ε ≤ e_{P,ε}(ρ)`. -/
 theorem le_shrunkEffect (hε2 : ε ≤ 1 / 2) :
     ε ≤ shrunkEffect ε P ρ := by
@@ -127,6 +134,7 @@ theorem le_shrunkEffect (hε2 : ε ≤ 1 / 2) :
   have h1 := pairing_nonneg hP1 hP2 hρ
   nlinarith
 
+omit [DecidableEq n] in
 /-- **Value pinching, upper bound**: `e_{P,ε}(ρ) ≤ 1 − ε`. -/
 theorem shrunkEffect_le (hε2 : ε ≤ 1 / 2) :
     shrunkEffect ε P ρ ≤ 1 - ε := by
@@ -135,6 +143,7 @@ theorem shrunkEffect_le (hε2 : ε ≤ 1 / 2) :
   have h2 := pairing_le_one hP1 hP2 hρ hτ
   nlinarith
 
+omit [DecidableEq n] in
 /-- **No shrunk effect is certain on any state**: pure sharpness
 fails for the admitted non-deterministic effects. -/
 theorem shrunkEffect_ne_one (hε : 0 < ε) (hε2 : ε ≤ 1 / 2) :
@@ -146,6 +155,7 @@ theorem shrunkEffect_ne_one (hε : 0 < ε) (hε2 : ε ≤ 1 / 2) :
 
 end Pinching
 
+omit [DecidableEq n] in
 /-- **State separation**: the shrunk effects distinguish exactly what
 the projection pairings distinguish (`1 − 2ε ≠ 0`), so the shrunk
 theory remains reduced. -/
@@ -165,6 +175,7 @@ theorem shrunkEffect_separates {ε : ℝ} (hε : ε ≠ 1 / 2)
   · intro h
     rw [h]
 
+omit [DecidableEq n] in
 /-- **The deterministic effect is refinable**: `u = e_{P,ε} +
 (u − e_{P,ε})` with both summands pinched in `[ε, 1 − ε]` — a
 nontrivial decomposition into admitted nonzero effects, so `u` is
@@ -173,13 +184,13 @@ effect of the shrunk theory is certain on a normalized pure
 state. -/
 theorem unit_refinement {ε : ℝ} {P ρ : Matrix n n ℂ}
     (hP1 : Pᴴ = P) (hP2 : P * P = P) (hρ : ∃ B, ρ = Bᴴ * B)
-    (hτ : ρ.trace = 1) (hε : 0 < ε) (hε2 : ε ≤ 1 / 2) :
+    (hτ : ρ.trace = 1) (_hε : 0 < ε) (hε2 : ε ≤ 1 / 2) :
     (1 : ℝ) = shrunkEffect ε P ρ + (1 - shrunkEffect ε P ρ)
       ∧ ε ≤ shrunkEffect ε P ρ
       ∧ shrunkEffect ε P ρ ≤ 1 - ε
       ∧ ε ≤ 1 - shrunkEffect ε P ρ
       ∧ 1 - shrunkEffect ε P ρ ≤ 1 - ε := by
-  have h1 := le_shrunkEffect hP1 hP2 hρ hτ hε2
+  have h1 := le_shrunkEffect hP1 hP2 hρ hε2
   have h2 := shrunkEffect_le hP1 hP2 hρ hτ hε2
   refine ⟨by ring, h1, h2, by linarith, by linarith⟩
 

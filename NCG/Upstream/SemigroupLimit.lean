@@ -36,7 +36,7 @@ converges to the Hilbert–Schmidt orthogonal projection onto
 `ker ℒ` — the nondemolition stable algebra `ℱ_E` by
 `dissipator_eq_zero_iff_mem_stable` — while fixing `ℱ_E` pointwise,
 satisfying the semigroup law, and preserving the trace.  Complete
-positivity of `e^{tℒ}` is the remaining scoped clause of (ii).
+positivity of `e^{tℒ}` is proved in `NCG/Upstream/LindbladCP.lean`.
 -/
 
 namespace NCG.Upstream
@@ -64,7 +64,7 @@ theorem exp_apply_tsum (A : V →L[ℂ] V) (x : V) :
     (ContinuousLinearMap.apply ℂ V x).map_tsum hsummable
   rw [hexpA, heval]
   exact tsum_congr fun n => by
-    rw [ContinuousLinearMap.smul_apply]
+    rw [_root_.smul_apply]
 
 /-- The exponential acts on eigenvectors by the scalar
 exponential. -/
@@ -104,7 +104,7 @@ theorem exp_smul_eigen {T : V →L[ℂ] V} {x : V} {μ : ℝ}
     NormedSpace.exp (t • T) x
       = (((Real.exp (t * μ) : ℝ) : ℂ)) • x := by
   have h1 : (t • T) x = ((t * μ : ℝ) : ℂ) • x := by
-    rw [ContinuousLinearMap.smul_apply, h, ← smul_assoc]
+    rw [_root_.smul_apply, h, ← smul_assoc]
     congr 1
     rw [Complex.real_smul, Complex.ofReal_mul]
   rw [exp_apply_eigen h1]
@@ -169,6 +169,7 @@ noncomputable def clm (T : V →ₗ[ℂ] V) : V →L[ℂ] V :=
 
 theorem clm_apply (T : V →ₗ[ℂ] V) (x : V) : clm T x = T x := rfl
 
+omit [FiniteDimensional ℂ V] in
 /-- **Uniqueness of the orthogonal projection characterization**:
 two vectors in the kernel whose defects from `x` are orthogonal to
 the kernel coincide — "the unique trace-preserving conditional
@@ -265,7 +266,7 @@ theorem symm_dissipative_exp_tendsto :
           refine Tendsto.smul_const ?_ _ |>.const_smul _
           exact (Complex.continuous_ofReal.tendsto 0).comp h2
         simpa using h3
-    have hsum := tendsto_finset_sum Finset.univ fun i _ => hlim i
+    have hsum := tendsto_finsetSum Finset.univ fun i _ => hlim i
     have hPsum : P x = ∑ i, (if μ i = 0
         then (inner ℂ (b i) x : ℂ) • b i else 0) := by
       rw [hP]
@@ -320,24 +321,24 @@ variable {E : Type*} [Fintype E] [DecidableEq E]
 
 /-- The Frobenius (Hilbert–Schmidt) inner-product core on
 `Matrix E E ℂ`: `⟪X, Y⟫ = Tr(XᴴY)`. -/
-noncomputable def hsCore : InnerProductSpace.Core ℂ (Matrix E E ℂ) where
+@[reducible] noncomputable def hsCore : InnerProductSpace.Core ℂ (Matrix E E ℂ) where
   inner X Y := (Xᴴ * Y).trace
   conj_inner_symm X Y := by
-    show star ((Yᴴ * X).trace) = (Xᴴ * Y).trace
+    change star ((Yᴴ * X).trace) = (Xᴴ * Y).trace
     rw [← Matrix.trace_conjTranspose, Matrix.conjTranspose_mul,
       Matrix.conjTranspose_conjTranspose]
   re_inner_nonneg X := by
-    show 0 ≤ ((Xᴴ * X).trace).re
+    change 0 ≤ ((Xᴴ * X).trace).re
     rw [trace_conjTranspose_mul_self_eq]
     rw [Complex.ofReal_re]
     exact Finset.sum_nonneg fun d _ =>
       Finset.sum_nonneg fun i _ => Complex.normSq_nonneg _
   definite X h := eq_zero_of_trace_conjTranspose_mul_self h
   add_left X Y Z := by
-    show ((X + Y)ᴴ * Z).trace = (Xᴴ * Z).trace + (Yᴴ * Z).trace
+    change ((X + Y)ᴴ * Z).trace = (Xᴴ * Z).trace + (Yᴴ * Z).trace
     rw [Matrix.conjTranspose_add, Matrix.add_mul, Matrix.trace_add]
   smul_left X Y r := by
-    show ((r • X)ᴴ * Y).trace = (starRingEnd ℂ) r * (Xᴴ * Y).trace
+    change ((r • X)ᴴ * Y).trace = (starRingEnd ℂ) r * (Xᴴ * Y).trace
     rw [Matrix.conjTranspose_smul, Matrix.smul_mul,
       Matrix.trace_smul]
     rfl
@@ -351,9 +352,11 @@ noncomputable local instance : TopologicalSpace (Matrix E E ℂ) :=
 noncomputable local instance : InnerProductSpace ℂ (Matrix E E ℂ) :=
   InnerProductSpace.ofCore hsCore.toCore
 
+omit [DecidableEq E] in
 theorem hs_inner_def (X Y : Matrix E E ℂ) :
     (inner ℂ X Y : ℂ) = (Xᴴ * Y).trace := rfl
 
+omit [DecidableEq E] in
 theorem comm_add_right' (A X Y : Matrix E E ℂ) :
     comm A (X + Y) = comm A X + comm A Y := by
   simp only [comm, Matrix.mul_add, Matrix.add_mul]
@@ -379,18 +382,21 @@ noncomputable def dissipatorL {m : Type*} [Fintype m]
     refine Finset.sum_congr rfl fun j _ => ?_
     rw [comm_smul_right, comm_smul_right]
 
+omit [DecidableEq E] in
 theorem dissipatorL_apply {m : Type*} [Fintype m]
     (A : m → Matrix E E ℂ) (X : Matrix E E ℂ) :
     dissipatorL A X = dissipator A X := rfl
 
+omit [DecidableEq E] in
 /-- The dissipator is Hilbert–Schmidt symmetric. -/
 theorem dissipatorL_isSymmetric {m : Type*} [Fintype m]
     {A : m → Matrix E E ℂ} (hA : ∀ j, (A j)ᴴ = A j) :
     (dissipatorL A).IsSymmetric := by
   intro X Y
-  show ((dissipator A X)ᴴ * Y).trace = (Xᴴ * dissipator A Y).trace
+  change ((dissipator A X)ᴴ * Y).trace = (Xᴴ * dissipator A Y).trace
   exact hsInner_dissipator_symm hA X Y
 
+omit [DecidableEq E] in
 /-- The dissipator is dissipative for the Hilbert–Schmidt pairing. -/
 theorem dissipatorL_dissipative {m : Type*} [Fintype m]
     {A : m → Matrix E E ℂ} (hA : ∀ j, (A j)ᴴ = A j)
@@ -417,6 +423,7 @@ theorem dissipatorL_dissipative {m : Type*} [Fintype m]
   rw [h3]
   nlinarith
 
+omit [DecidableEq E] in
 /-- **Theorem `thm:stable-pointer-selection` (iv), packaged**: the
 monitoring semigroup `e^{tℒ}` converges pointwise to the
 Hilbert–Schmidt orthogonal projection onto the fixed space `ker ℒ`
@@ -455,7 +462,7 @@ theorem dissipator_exp_tendsto_stable {m : Type*} [Fintype m]
       with hfdef
     have hf : ∀ Y, f ((t • clm (dissipatorL A)) Y) = 0 := by
       intro Y
-      show ((t • clm (dissipatorL A)) Y).trace = 0
+      change ((t • clm (dissipatorL A)) Y).trace = 0
       have h1 : (t • clm (dissipatorL A)) Y
           = t • dissipator A Y := rfl
       rw [h1, Matrix.trace_smul, trace_dissipator, smul_zero]

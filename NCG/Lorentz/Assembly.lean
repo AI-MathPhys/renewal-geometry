@@ -83,7 +83,7 @@ theorem dirac_krein : K.J * star K.dirac * K.J = K.dirac :=
 /-- **Theorem `thm:assembly`** (twisted-commutator reduction): when the
 modular weight is invertible, the twisted commutators of the assembled
 Dirac reduce to those of the bounded part. -/
-theorem twisted_reduction (u : Aˣ) (hu : (u : A) = K.Δ) (a : A) :
+theorem twisted_reduction (u : Aˣ) (_hu : (u : A) = K.Δ) (a : A) :
     (K.J * (u : A) + K.B) * a
         - (K.J * (u : A) * a * (↑u⁻¹ : A) * K.J)
           * (K.J * (u : A) + K.B)

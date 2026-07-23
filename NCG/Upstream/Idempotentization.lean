@@ -12,7 +12,8 @@ import Mathlib.Analysis.SpecificLimits.Basic
 /-!
 # Banach-algebra idempotentization below the quarter threshold
 
-Covers `lem:idempotentization` from `manuscripts/renewal_emergence/renewal_emergence.tex`: if `E` is an
+Covers `lem:idempotentization` from `manuscripts/renewal_emergence/renewal_emergence.tex`: if `E`
+is an
 element of a unital Banach algebra with
 `δ := ‖E² − E‖ < 1/4`, there is an idempotent `P` commuting with `E`
 such that
@@ -221,12 +222,14 @@ noncomputable def newtonZ (n : ℕ) : A := Polynomial.aeval E (zPoly n)
 /-- The operator error `1 − Z_n² W`. -/
 noncomputable def newtonEr (n : ℕ) : A := Polynomial.aeval E (erPoly n)
 
+omit [CompleteSpace A] [NormOneClass A] in
 theorem newtonEr_zero : newtonEr E 0 = (-4 : ℝ) • (E ^ 2 - E) := by
   unfold newtonEr
   rw [erPoly_zero, map_mul, map_sub, map_pow, Polynomial.aeval_X,
     Polynomial.aeval_C]
   rw [Algebra.smul_def]
 
+omit [CompleteSpace A] [NormOneClass A] in
 theorem newtonEr_succ (n : ℕ) :
     newtonEr E (n + 1) = (3 / 4 : ℝ) • newtonEr E n ^ 2
       + (1 / 4 : ℝ) • newtonEr E n ^ 3 := by
@@ -235,6 +238,7 @@ theorem newtonEr_succ (n : ℕ) :
     Polynomial.aeval_C, Polynomial.aeval_C]
   rw [Algebra.smul_def, Algebra.smul_def]
 
+omit [CompleteSpace A] [NormOneClass A] in
 theorem newtonZ_succ_sub (n : ℕ) :
     newtonZ E (n + 1) - newtonZ E n
       = (1 / 2 : ℝ) • (newtonZ E n * newtonEr E n) := by
@@ -243,10 +247,12 @@ theorem newtonZ_succ_sub (n : ℕ) :
     Polynomial.aeval_C]
   rw [Algebra.smul_def]
 
+omit [CompleteSpace A] [NormOneClass A] in
 theorem newtonZ_zero : newtonZ E 0 = 1 := by
   unfold newtonZ zPoly
   exact map_one _
 
+omit [CompleteSpace A] [NormOneClass A] in
 theorem newtonZ_sq_mul (n : ℕ) :
     newtonZ E n ^ 2 * Polynomial.aeval E wPoly
       = 1 - newtonEr E n := by
@@ -256,12 +262,14 @@ theorem newtonZ_sq_mul (n : ℕ) :
   unfold newtonZ newtonEr
   rw [← map_pow, ← map_mul, hpoly, map_sub, map_one]
 
+omit [CompleteSpace A] [NormOneClass A] in
 theorem newton_commutes (n : ℕ) (q : Polynomial ℝ) :
     Commute (newtonZ E n) (Polynomial.aeval E q) :=
   (Commute.all (zPoly n) q).map (Polynomial.aeval E)
 
 variable {E}
 
+omit [CompleteSpace A] in
 /-- The norm invariants: the scalar pair majorizes the operator
 iteration. -/
 theorem newton_bounds {δ : ℝ} (hδnorm : ‖E ^ 2 - E‖ ≤ δ)

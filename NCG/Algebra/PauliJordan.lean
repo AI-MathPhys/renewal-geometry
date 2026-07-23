@@ -65,7 +65,7 @@ theorem pauliMap_one :
   unfold pauliMap spinOne
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [Matrix.one_apply, Complex.ext_iff]
+    simp []
 
 /-- Real additivity. -/
 theorem pauliMap_add (x y : ℝ × EuclideanSpace ℝ (Fin 3)) :
@@ -83,13 +83,13 @@ theorem pauliMap_injective : Function.Injective
   have h01 := congrFun (congrFun h 0) 1
   have h11 := congrFun (congrFun h 1) 1
   simp only [pauliMap, Matrix.of_apply, Matrix.cons_val_zero,
-    Matrix.cons_val_one, Matrix.head_cons, Matrix.cons_val',
+    Matrix.cons_val_one, Matrix.cons_val',
     Matrix.empty_val', Matrix.cons_val_fin_one,
-    Matrix.head_fin_const, Complex.ext_iff, Complex.add_re,
+    Complex.ext_iff, Complex.add_re,
     Complex.add_im, Complex.sub_re, Complex.sub_im, Complex.mul_re,
     Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
-    Complex.I_re, Complex.I_im, mul_zero, mul_one, zero_mul,
-    sub_zero, add_zero, zero_sub, zero_add, neg_neg] at h00 h01 h11
+    Complex.I_re, Complex.I_im, mul_zero, mul_one,
+    sub_zero, add_zero, zero_sub] at h00 h01 h11
   obtain ⟨ha, -⟩ := h00
   obtain ⟨hb, -⟩ := h11
   obtain ⟨hc, hd⟩ := h01
@@ -97,13 +97,13 @@ theorem pauliMap_injective : Function.Injective
   refine Prod.ext hs ?_
   ext i
   fin_cases i
-  · show x.2 0 = y.2 0
+  · change x.2 0 = y.2 0
     linarith
-  · show x.2 1 = y.2 1
+  · change x.2 1 = y.2 1
     have hd' : -(x.2 1) = -(y.2 1) := by
       simpa using hd
     linarith
-  · show x.2 2 = y.2 2
+  · change x.2 2 = y.2 2
     linarith
 
 /-- Surjectivity onto the Hermitian matrices. -/
@@ -138,19 +138,19 @@ theorem pauliMap_surj_hermitian (A : Matrix (Fin 2) (Fin 2) ℂ)
   ext i j
   fin_cases i <;> fin_cases j <;>
   · simp only [Fin.zero_eta, Fin.mk_one, Matrix.of_apply,
-      Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+      Matrix.cons_val_zero, Matrix.cons_val_one,
       Matrix.cons_val', Matrix.empty_val', Matrix.cons_val_fin_one,
-      Matrix.head_fin_const, WithLp.ofLp_toLp]
+      ]
     rw [Complex.ext_iff]
     constructor <;>
     · try simp only [Complex.add_re, Complex.add_im, Complex.sub_re,
         Complex.sub_im, Complex.mul_re, Complex.mul_im,
         Complex.ofReal_re, Complex.ofReal_im, Complex.I_re,
-        Complex.I_im, Matrix.cons_val_zero, Matrix.cons_val_one,
+        Complex.I_im,
         Matrix.cons_val_two, Matrix.tail_cons, Matrix.head_cons,
         him00, him11, hre01, him01, mul_zero,
-        mul_one, zero_mul, sub_zero, add_zero, zero_add, zero_sub,
-        neg_neg]
+        mul_one, sub_zero, add_zero, zero_add, zero_sub,
+        ]
       try ring
       try rfl
 
@@ -175,9 +175,9 @@ theorem pauliMap_spinMul (x y : ℝ × EuclideanSpace ℝ (Fin 3)) :
   fin_cases i <;> fin_cases j <;>
   · simp only [hinner, Matrix.smul_apply, Matrix.add_apply,
       Matrix.mul_apply, Fin.sum_univ_two, Matrix.of_apply,
-      Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+      Matrix.cons_val_zero, Matrix.cons_val_one,
       Matrix.cons_val', Matrix.empty_val', Matrix.cons_val_fin_one,
-      Matrix.head_fin_const, PiLp.add_apply, PiLp.smul_apply,
+      PiLp.add_apply, PiLp.smul_apply,
       smul_eq_mul]
     rw [Complex.ext_iff]
     push_cast

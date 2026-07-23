@@ -50,8 +50,8 @@ variable {d : ℕ} (g : Fin d → A)
 /-- Reversal rule from the Clifford relation. -/
 theorem clifford_swap
     (hrel : ∀ i j, g i * g j + g j * g i
-      = (if i = j then (2:ℝ) else 0) • 1) (a b : Fin d) :
-    g b * g a = (if a = b then (2:ℝ) else 0) • 1 - g a * g b :=
+      = (if i = j then (2 : ℝ) else 0) • 1) (a b : Fin d) :
+    g b * g a = (if a = b then (2 : ℝ) else 0) • 1 - g a * g b :=
   eq_sub_of_add_eq' (hrel a b)
 
 /-- **Lemma `lem:interference-lorentz-pair`**, mixed bracket:
@@ -59,25 +59,25 @@ theorem clifford_swap
 revision sector by the standard `𝔰𝔬` rotation action. -/
 theorem bivector_vector_bracket
     (hrel : ∀ i j, g i * g j + g j * g i
-      = (if i = j then (2:ℝ) else 0) • 1) (i j k : Fin d) :
+      = (if i = j then (2 : ℝ) else 0) • 1) (i j k : Fin d) :
     (g i * g j) * g k - g k * (g i * g j)
-      = (if j = k then (2:ℝ) else 0) • g i
-        - (if i = k then (2:ℝ) else 0) • g j := by
+      = (if j = k then (2 : ℝ) else 0) • g i
+        - (if i = k then (2 : ℝ) else 0) • g j := by
   have hexp : g k * (g i * g j)
-      = (if i = k then (2:ℝ) else 0) • g j
-        - (if j = k then (2:ℝ) else 0) • g i
+      = (if i = k then (2 : ℝ) else 0) • g j
+        - (if j = k then (2 : ℝ) else 0) • g i
         + (g i * g j) * g k := by
     calc g k * (g i * g j) = (g k * g i) * g j := (mul_assoc _ _ _).symm
-      _ = ((if i = k then (2:ℝ) else 0) • 1 - g i * g k) * g j := by
+      _ = ((if i = k then (2 : ℝ) else 0) • 1 - g i * g k) * g j := by
           rw [clifford_swap g hrel i k]
-      _ = (if i = k then (2:ℝ) else 0) • g j
+      _ = (if i = k then (2 : ℝ) else 0) • g j
           - g i * (g k * g j) := by
           rw [sub_mul, smul_mul_assoc, one_mul, mul_assoc]
-      _ = (if i = k then (2:ℝ) else 0) • g j
-          - g i * ((if j = k then (2:ℝ) else 0) • 1 - g j * g k) := by
+      _ = (if i = k then (2 : ℝ) else 0) • g j
+          - g i * ((if j = k then (2 : ℝ) else 0) • 1 - g j * g k) := by
           rw [clifford_swap g hrel j k]
-      _ = (if i = k then (2:ℝ) else 0) • g j
-          - (if j = k then (2:ℝ) else 0) • g i
+      _ = (if i = k then (2 : ℝ) else 0) • g j
+          - (if j = k then (2 : ℝ) else 0) • g i
           + (g i * g j) * g k := by
           rw [mul_sub, mul_smul_comm, mul_one, ← mul_assoc]
           abel
@@ -89,7 +89,7 @@ theorem bivector_vector_bracket
 the interference sector, the Cartan relation of `𝔰𝔬(d,1)`. -/
 theorem boost_bracket
     (hrel : ∀ i j, g i * g j + g j * g i
-      = (if i = j then (2:ℝ) else 0) • 1) (i j : Fin d) (hij : i ≠ j) :
+      = (if i = j then (2 : ℝ) else 0) • 1) (i j : Fin d) (hij : i ≠ j) :
     ((1/2 : ℝ) • g i) * ((1/2 : ℝ) • g j)
       - ((1/2 : ℝ) • g j) * ((1/2 : ℝ) • g i)
       = (1/2 : ℝ) • (g i * g j) := by
@@ -165,6 +165,8 @@ section VolUnit
 
 variable {ι : Type*} [DecidableEq ι]
 
+omit [DecidableEq ι] in
+omit [Algebra ℝ A] in
 /-- **Definition `def:volume-dual-response`** (well-posedness): the
 volume element is invertible — `Vol² = ±1` — so the volume-dual map
 `H = Vol⁻¹·b_ren : ⋀²V_sp → Cl(V_sp)` is defined. -/
@@ -206,9 +208,11 @@ variable (g : Fin 3 → A)
 /-- The spatial volume element at `d = 3`. -/
 def vol3 : A := (([0, 1, 2] : List (Fin 3)).map g).prod
 
+omit [Algebra ℝ A] in
 theorem vol3_eq : vol3 g = g 0 * (g 1 * g 2) := by
   simp [vol3, List.prod_cons]
 
+omit [Algebra ℝ A] in
 /-- **Proposition `prop:clifford-internal-interference`**:
 `Vol² = −1` at `d = 3`. -/
 theorem vol3_sq
@@ -220,12 +224,14 @@ theorem vol3_sq
   rw [vol3_eq g]
   exact h
 
+omit [Algebra ℝ A] in
 /-- `Γ₀Γ₁ = Vol·Γ₂` (Propositions `prop:hodge-interference-closure` /
 `prop:clifford-internal-interference`, `ε`-identity). -/
 theorem vol3_gamma01 (hsq : ∀ i, g i * g i = 1) :
     g 0 * g 1 = vol3 g * g 2 := by
   rw [vol3_eq, mul_assoc, mul_assoc, hsq 2, mul_one]
 
+omit [Algebra ℝ A] in
 /-- The timelike-free volume commutes with `Γ₀`-conjugation pattern:
 `Γ₀` anticommutes with `Γ₁` and `Γ₂` separately, hence commutes with
 the bivector `Γ₁Γ₂`. -/
@@ -240,6 +246,7 @@ theorem g0_comm_bivec
     _ = (g 1 * g 2) * g 0 := by
         rw [mul_neg, neg_neg, ← mul_assoc]
 
+omit [Algebra ℝ A] in
 /-- `Γ₁Γ₂ = Vol·Γ₀` (`ε`-identity). -/
 theorem vol3_gamma12
     (hanti : ∀ i j : Fin 3, i ≠ j → g i * g j = -(g j * g i))
@@ -252,6 +259,7 @@ theorem vol3_gamma12
         rw [g0_comm_bivec g hanti]
     _ = g 0 * (g 1 * g 2) * g 0 := (mul_assoc _ _ _).symm
 
+omit [Algebra ℝ A] in
 /-- `Γ₂Γ₀ = Vol·Γ₁` (`ε`-identity). -/
 theorem vol3_gamma20
     (hanti : ∀ i j : Fin 3, i ≠ j → g i * g j = -(g j * g i))

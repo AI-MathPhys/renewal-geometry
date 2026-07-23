@@ -19,7 +19,9 @@ clause (iii) of `thm:common-origin-phase`, criterion (C4) of
 * `ContourDatum` — the contour interface for a finite-volume plus
   phase: every minus-at-origin configuration exhibits a contour of
   length `≥ 4`, with at most `4n·3^{n−1}` contours of length `n`
-  (the classical planar dual-circuit geometry, the scoped input),
+  (the classical planar dual-circuit geometry, discharged for the
+  2d Ising model in `NCG/Upstream/IsingContours.lean` and
+  `NCG/Upstream/CircuitCount.lean`),
   each carrying a weight-gaining flip injection;
 * `tail_geometric_eval` — the exact tail series
   `∑_{n≥4} n rⁿ = r⁴(4−3r)/(1−r)²`;
@@ -49,11 +51,12 @@ open Filter
 configuration space with uniform weight gain `K` has weight at most
 `1/K` of the total. -/
 theorem sum_le_of_weight_gain {Ω : Type*} [Fintype Ω]
-    [DecidableEq Ω] (w : Ω → ℝ) (hw : ∀ σ, 0 ≤ w σ)
+    (w : Ω → ℝ) (hw : ∀ σ, 0 ≤ w σ)
     (A : Finset Ω) (F : Ω → Ω) (hinj : Set.InjOn F A)
-    {K : ℝ} (hK : 0 < K)
+    {K : ℝ} (_hK : 0 < K)
     (hgain : ∀ σ ∈ A, K * w σ ≤ w (F σ)) :
     K * ∑ σ ∈ A, w σ ≤ ∑ σ, w σ := by
+  classical
   calc K * ∑ σ ∈ A, w σ = ∑ σ ∈ A, K * w σ := Finset.mul_sum _ _ _
     _ ≤ ∑ σ ∈ A, w (F σ) := Finset.sum_le_sum hgain
     _ = ∑ τ ∈ A.image F, w τ := by
@@ -300,7 +303,7 @@ theorem r_le_quarter {θ : ℝ} (hθ : (1 / 2) * Real.log 12 ≤ θ) :
 
 /-- Magnetization from the bad-event bound:
 `⟨s⟩ = 1 − 2·P(s = −1) ≥ 203/216`. -/
-theorem magnetization_ge {Ω : Type*} [Fintype Ω] [DecidableEq Ω]
+theorem magnetization_ge {Ω : Type*} [Fintype Ω]
     (w s : Ω → ℝ) (hs : ∀ σ, s σ = 1 ∨ s σ = -1)
     (hbad : ∑ σ ∈ Finset.univ.filter (fun σ => s σ = -1), w σ
       ≤ (13 / 432) * ∑ σ, w σ) :

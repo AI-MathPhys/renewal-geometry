@@ -11,7 +11,7 @@ monoids.
 Mathlib contains no formalization of noncommutative geometry — no spectral
 triples, no Krein spaces, no completely positive map monoids. This library
 builds that foundation from first principles and uses it to formalize, and
-prove, the theorems of companions research manuscripts [companions research manuscript](# Related manuscripts).
+prove, the theorems of the [companion research manuscripts](#related-manuscripts).
 
 **Verification guarantees.**
 
@@ -34,9 +34,34 @@ prove, the theorems of companions research manuscripts [companions research manu
 | **Graph cohomology & covers** (`NCG/Graph`) | Directed multigraphs, sign cocycles, principal `ℤ/2`-covers with deck actions, `H¹(G, ℤ/2)` and `ℤ/4` cohomology, Betti numbers, record orientation, condensation and decimation |
 | **Krein geometry** (`NCG/Krein`) | Fundamental symmetries, Krein forms and the positivity obstruction, the irreducible no-go, signed covers as Krein data, the canonical temporal row, the signed modular Dirac operator, enrichment classification via `H¹(G, ℤ/2)` (with naturality and minimality), amplitude lifts |
 | **Spectral triples** (`NCG/SpectralTriple`, `NCG/Operator`) | Spectral triples, diagonal/length operators, clock scaling, fibre dichotomy |
-| **Lorentzian emergence** (`NCG/Lorentz`) | Discrete Cartan calculus (Levi–Civita derived, not assumed), Clifford rounding, operator-level and band-limited norm-resolvent continuum limits, curved strong-resolvent limits, frame universality, marked-torus classification, Perron pressure and modular-exponent selection, heat-bath convergence/primitivity, Dobrushin mixing, interference closure and `3+1` selection, polyhedral obstructions, 2d Minkowski emergence |
+| **Lorentzian emergence** (`NCG/Lorentz`) | Discrete Cartan calculus (Levi–Civita derived, not assumed), Clifford rounding, operator-level and band-limited norm-resolvent continuum limits, curved strong-resolvent limits, frame universality, marked-torus classification, a complete **Perron–Frobenius theorem** (see below), Perron pressure and modular-exponent selection, heat-bath convergence/primitivity, Dobrushin mixing, interference closure and `3+1` selection, polyhedral obstructions, 2d Minkowski emergence |
 | **Dimension selection** (`NCG/Dimension`) | Access-efficiency selection of `3+1`, even-rank theorems, isotropy dimension-blindness, engineering power counting |
 | **Operational / statistical-mechanics program** (`NCG/Upstream`) | The operational process system and UCP bridge, sharp purification, Petz retrodiction and KMS duality, record algebras and pointer selection, complete positivity of the Lindblad semigroup `e^{tℒ}` (full Euler–Trotter proof), the symmetric monoidal quotient category, Curie–Weiss phases, and the **2d Ising phase-coexistence suite**: Peierls bound with the *proved* planar circuit count `4n·3^{n−1}`, infinite-volume Gibbs states with the DLR property, phase separation `±203/216`, and Dobrushin uniqueness at high temperature |
+
+### Highlight: a complete, Mathlib-ready Perron–Frobenius theorem
+
+Mathlib defines irreducible nonnegative matrices (`Matrix.IsIrreducible`)
+but has **no Perron–Frobenius theorem**. This library proves the full
+package, stated in the `Matrix` namespace over an arbitrary finite index
+type, directly against Mathlib's definitions and ready for upstreaming:
+
+- **Existence & positivity**
+  ([`PerronExistence.lean`](NCG/Lorentz/PerronExistence.lean)): every
+  irreducible nonnegative real matrix has a strictly positive eigenvalue
+  with an entrywise positive right (and left) eigenvector
+  (`Matrix.IsIrreducible.exists_pos_eigenvector`), by the Collatz–Wielandt
+  variational argument — no fixed-point theorem. Key stepping stone:
+  `1 + A` is primitive (`Matrix.IsIrreducible.isPrimitive_one_add`).
+- **Uniqueness & simplicity**: the Perron eigenvalue is the only
+  eigenvalue with a positive eigenvector, and its eigenspace is
+  one-dimensional
+  (`Matrix.IsIrreducible.exists_eq_smul_of_mulVec_eq_smul`).
+- **Spectral-radius characterization**
+  ([`PerronPressure.lean`](NCG/Lorentz/PerronPressure.lean)): the Perron
+  eigenvalue equals the Gelfand–Fekete growth rate of the matrix powers
+  (`NCG.exists_pRad_eigenvector_of_isIrreducible`), connecting the
+  eigenvector theory to the eigenvector-free pressure calculus used by the
+  manuscripts.
 
 ## Related manuscripts
 
@@ -49,6 +74,7 @@ full verification summary.
 ### 1. Renewal Spectral Geometry and the Emergence of Lorentzian Spacetime
 
 **→ [`manuscripts/lorentzian_emergence/`](manuscripts/lorentzian_emergence/)**
+· [PDF](manuscripts/lorentzian_emergence/lorentzian_emergence.pdf)
 
 From a renewal process and its channel monoid to a predictive
 spectral triple; the positivity obstruction forcing a *signed* (Krein) sector
@@ -61,6 +87,7 @@ self-averaged); and the selection of `3+1` dimensions.
 ### 2. From Operational Prediction to Signed Renewal Memory
 
 **→ [`manuscripts/renewal_emergence/`](manuscripts/renewal_emergence/)**
+· [PDF](manuscripts/renewal_emergence/renewal_emergence.pdf)
 
 The upstream operational paper: why predictive compression of an operational
 process forces renewal memory, complex predictive algebras, retrodictive
@@ -143,8 +170,7 @@ NCG/
 manuscripts/
 ├── lorentzian_emergence/   -- paper 1: source, statement inventory, verification README
 ├── renewal_emergence/      -- paper 2: source, statement inventory, verification README
-├── ROADMAP.md              -- historical theorem-by-theorem plan
-└── faithfulness_audit_2026-07-21.md  -- the adversarial statement-by-statement audit
+└── faithfulness_audit_2026-07-22.md  -- the adversarial statement-by-statement audit
 scripts/
 └── check_statement_coverage.py       -- the coverage checker
 ```
@@ -160,7 +186,7 @@ scripts/
    Mathlib's standard three. Anything not yet formalized is recorded as such
    in the statement inventories — never assumed silently.
 3. **Faithfulness over coverage.** An adversarial audit
-   ([`manuscripts/faithfulness_audit_2026-07-21.md`](manuscripts/faithfulness_audit_2026-07-21.md))
+   ([`manuscripts/faithfulness_audit_2026-07-22.md`](manuscripts/faithfulness_audit_2026-07-22.md))
    compared every record against the manuscript text; every mismatch was
    either re-proved in full or honestly downgraded and disclosed in the
    record's note. Scoped hypotheses (e.g. the upward-escape hypothesis of the

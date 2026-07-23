@@ -112,7 +112,7 @@ theorem pauliKron_mem_adjoin (x : Fin 4 × Fin 4) :
   have hprod01 : gamma 0 * gamma 1
       = Complex.I • (pauli3 ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℂ))
       := by
-    show pauli1 ⊗ₖ 1 * (pauli2 ⊗ₖ 1)
+    change pauli1 ⊗ₖ 1 * (pauli2 ⊗ₖ 1)
       = Complex.I • (pauli3 ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℂ))
     rw [← Matrix.mul_kronecker_mul, Matrix.one_mul,
       pauli12_eq_I_pauli3, Matrix.smul_kronecker]
@@ -129,7 +129,7 @@ theorem pauliKron_mem_adjoin (x : Fin 4 × Fin 4) :
     have h4 : (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ pauli1
         = (pauli3 ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℂ)) * gamma 2
         := by
-      show (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ pauli1
+      change (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ pauli1
         = pauli3 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli1)
       rw [← Matrix.mul_kronecker_mul, pauli3_sq, Matrix.one_mul]
     rw [h4]
@@ -138,7 +138,7 @@ theorem pauliKron_mem_adjoin (x : Fin 4 × Fin 4) :
     have h4 : (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ pauli2
         = (pauli3 ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℂ)) * gamma 3
         := by
-      show (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ pauli2
+      change (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ pauli2
         = pauli3 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli2)
       rw [← Matrix.mul_kronecker_mul, pauli3_sq, Matrix.one_mul]
     rw [h4]
@@ -164,7 +164,7 @@ theorem pauliKron_mem_adjoin (x : Fin 4 × Fin 4) :
       pauli4 p ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℂ) ∈ S := by
     intro p
     fin_cases p
-    · show (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ 1 ∈ S
+    · change (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ 1 ∈ S
       rw [Matrix.one_kronecker_one]
       exact one_mem S
     · exact h10
@@ -174,7 +174,7 @@ theorem pauliKron_mem_adjoin (x : Fin 4 × Fin 4) :
       (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ pauli4 q ∈ S := by
     intro q
     fin_cases q
-    · show (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ 1 ∈ S
+    · change (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ 1 ∈ S
       rw [Matrix.one_kronecker_one]
       exact one_mem S
     · exact h01

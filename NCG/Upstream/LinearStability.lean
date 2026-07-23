@@ -54,6 +54,7 @@ variable (q : X →L[ℝ] Q) (s : Q →L[ℝ] X) (P E : X →L[ℝ] X)
 noncomputable def stabilityB : Q →L[ℝ] Q :=
   (q.comp P).comp s
 
+omit [FiniteDimensional ℝ Q] [FiniteDimensional ℝ X] in
 /-- `‖qP − q‖ ≤ η = ε + ‖q‖α`. -/
 theorem qP_sub_q_norm_le :
     ‖q.comp P - q‖ ≤ suffDefect q E + ‖q‖ * ‖P - E‖ := by
@@ -66,6 +67,7 @@ theorem qP_sub_q_norm_le :
   gcongr
   exact ContinuousLinearMap.opNorm_comp_le q (P - E)
 
+omit [FiniteDimensional ℝ Q] [FiniteDimensional ℝ X] in
 /-- `‖B − 1‖ ≤ κη` (using `qs = 1`). -/
 theorem stabilityB_sub_one_norm_le
     (hs : q.comp s = ContinuousLinearMap.id ℝ Q) :
@@ -80,6 +82,7 @@ theorem stabilityB_sub_one_norm_le
 
 variable {q s P E}
 
+omit [FiniteDimensional ℝ Q] [FiniteDimensional ℝ X] in
 /-- Under `κη < 1`, `‖1 − B‖ < 1`. -/
 theorem one_sub_stabilityB_norm_lt
     (hs : q.comp s = ContinuousLinearMap.id ℝ Q)
@@ -93,20 +96,22 @@ noncomputable def stabilityUnit
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) : (Q →L[ℝ] Q)ˣ :=
   Units.oneSub ((1 : Q →L[ℝ] Q) - stabilityB q s P) h
 
+omit [FiniteDimensional ℝ X] in
 theorem stabilityUnit_val
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) :
     ((stabilityUnit h : (Q →L[ℝ] Q)ˣ) : Q →L[ℝ] Q)
       = stabilityB q s P := by
-  show ((Units.oneSub _ h : (Q →L[ℝ] Q)ˣ) : Q →L[ℝ] Q) = _
+  change ((Units.oneSub _ h : (Q →L[ℝ] Q)ˣ) : Q →L[ℝ] Q) = _
   rw [Units.val_oneSub, sub_sub_cancel]
 
+omit [FiniteDimensional ℝ X] in
 /-- **Theorem `thm:predictive-stability` (Neumann bound)**:
 `‖B⁻¹‖ ≤ (1 − ‖1 − B‖)⁻¹`. -/
 theorem stabilityUnit_inv_norm_le [Nontrivial Q]
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) :
     ‖(((stabilityUnit h)⁻¹ : (Q →L[ℝ] Q)ˣ) : Q →L[ℝ] Q)‖
       ≤ (1 - ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖)⁻¹ := by
-  show ‖∑' n : ℕ, ((1 : Q →L[ℝ] Q) - stabilityB q s P) ^ n‖ ≤ _
+  change ‖∑' n : ℕ, ((1 : Q →L[ℝ] Q) - stabilityB q s P) ^ n‖ ≤ _
   have hgeom := tsum_geometric_le_of_norm_lt_one _ h
   have hone : ‖(1 : Q →L[ℝ] Q)‖ = 1 := by
     rw [ContinuousLinearMap.one_def]
@@ -121,12 +126,14 @@ noncomputable def stabilityR
   ((P.comp s).comp
     (((stabilityUnit h)⁻¹ : (Q →L[ℝ] Q)ˣ) : Q →L[ℝ] Q)).comp q
 
+omit [FiniteDimensional ℝ X] in
 theorem stabilityR_apply
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) (x : X) :
     stabilityR h x
       = P (s ((((stabilityUnit h)⁻¹ : (Q →L[ℝ] Q)ˣ)
           : Q →L[ℝ] Q) (q x))) := rfl
 
+omit [FiniteDimensional ℝ X] in
 theorem stabilityB_apply_inv
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) (y : Q) :
     stabilityB q s P
@@ -139,30 +146,34 @@ theorem stabilityB_apply_inv
   have h2 := congrFun (congrArg DFunLike.coe hmul) y
   simpa using h2
 
+omit [FiniteDimensional ℝ X] in
 /-- **Theorem `thm:predictive-stability` (`qR = q`)**. -/
 theorem stabilityR_q
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) :
     q.comp (stabilityR h) = q := by
   ext x
-  show q (stabilityR h x) = q x
+  change q (stabilityR h x) = q x
   rw [stabilityR_apply]
   exact stabilityB_apply_inv h (q x)
 
+omit [FiniteDimensional ℝ X] in
 theorem stabilityR_q_apply
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) (x : X) :
     q (stabilityR h x) = q x :=
   congrFun (congrArg DFunLike.coe (stabilityR_q h)) x
 
+omit [FiniteDimensional ℝ X] in
 /-- **Theorem `thm:predictive-stability` (`R² = R`)**. -/
 theorem stabilityR_idem
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) :
     (stabilityR h).comp (stabilityR h) = stabilityR h := by
   ext x
-  show stabilityR h (stabilityR h x) = stabilityR h x
+  change stabilityR h (stabilityR h x) = stabilityR h x
   conv_lhs => rw [stabilityR_apply h (stabilityR h x),
     stabilityR_q_apply h x]
   rw [← stabilityR_apply]
 
+omit [FiniteDimensional ℝ X] in
 /-- `R` at the `LinearMap` level is an exact projection. -/
 theorem stabilityR_isExactProjection
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) :
@@ -171,6 +182,7 @@ theorem stabilityR_isExactProjection
   ⟨congrArg ContinuousLinearMap.toLinearMap (stabilityR_idem h),
    congrArg ContinuousLinearMap.toLinearMap (stabilityR_q h)⟩
 
+omit [FiniteDimensional ℝ X] in
 theorem stabilityR_range_le
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) :
     LinearMap.range ((stabilityR h : X →L[ℝ] X) : X →ₗ[ℝ] X)
@@ -205,6 +217,7 @@ theorem stabilityR_rank
   rw [stabilityR_range_eq hq hrank h]
   exact hrank
 
+omit [FiniteDimensional ℝ X] in
 /-- Elements of `im R` vanish when their `q`-value vanishes. -/
 theorem stabilityR_q_injOn
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) {x : X}
@@ -212,7 +225,7 @@ theorem stabilityR_q_injOn
       LinearMap.range ((stabilityR h : X →L[ℝ] X) : X →ₗ[ℝ] X))
     (hqx : q x = 0) : x = 0 := by
   obtain ⟨y, rfl⟩ := hx
-  show stabilityR h y = 0
+  change stabilityR h y = 0
   have hfix : stabilityR h (stabilityR h y) = stabilityR h y :=
     congrFun (congrArg DFunLike.coe (stabilityR_idem h)) y
   have hqy : q (stabilityR h y) = 0 := hqx
@@ -228,7 +241,7 @@ theorem stabilityR_comp_P
     (h : ‖(1 : Q →L[ℝ] Q) - stabilityB q s P‖ < 1) :
     (stabilityR h).comp P = P := by
   ext x
-  show stabilityR h (P x) = P x
+  change stabilityR h (P x) = P x
   have hmemA : stabilityR h (P x) ∈
       LinearMap.range ((stabilityR h : X →L[ℝ] X) : X →ₗ[ℝ] X) :=
     ⟨P x, rfl⟩
@@ -332,6 +345,7 @@ end Stability
 
 section Dynamics
 
+omit [FiniteDimensional ℝ X] in
 /-- **Corollary `cor:dynamics-stability` (one step)**: on the common
 carrier `M = im P = im R` the compressed dynamics of two idempotents
 differ by at most `‖P − R‖ ‖U_σ‖` in norm. -/
@@ -353,8 +367,8 @@ theorem dynamics_stability (U : X →L[ℝ] X) {P R : X →L[ℝ] X}
     exact congrFun (congrArg DFunLike.coe hR) y
   have hval : (P.comp (U.comp P)) x - (R.comp (U.comp R)) x
       = (P - R) (U x) := by
-    show P (U (P x)) - R (U (R x)) = (P - R) (U x)
-    rw [hPx, hRx, ContinuousLinearMap.sub_apply]
+    change P (U (P x)) - R (U (R x)) = (P - R) (U x)
+    rw [hPx, hRx, sub_apply]
   rw [hval]
   calc ‖(P - R) (U x)‖ ≤ ‖P - R‖ * ‖U x‖ :=
         ContinuousLinearMap.le_opNorm _ _
@@ -371,6 +385,7 @@ noncomputable def telescopeBound :
   | p :: l => ‖p.1‖ * telescopeBound l
       + ‖p.1 - p.2‖ * ‖(l.map Prod.snd).prod‖
 
+omit [FiniteDimensional ℝ X] in
 /-- **Corollary `cor:dynamics-stability` (word estimate)**: the
 difference of two ordered products of one-step maps is bounded by
 the standard telescoping sum
@@ -391,7 +406,7 @@ theorem prod_sub_prod_norm_le :
       noncomm_ring
     rw [key]
     refine (norm_add_le _ _).trans ?_
-    show _ ≤ ‖p.1‖ * telescopeBound l
+    change _ ≤ ‖p.1‖ * telescopeBound l
       + ‖p.1 - p.2‖ * ‖(l.map Prod.snd).prod‖
     have h1 : ‖p.1 * ((l.map Prod.fst).prod - (l.map Prod.snd).prod)‖
         ≤ ‖p.1‖ * telescopeBound l :=

@@ -55,7 +55,7 @@ variable {J : H →L[ℂ] H}
 
 theorem apply_apply (hJ : IsFundamentalSymmetry J) (x : H) : J (J x) = x := by
   have h := congrArg (fun T : H →L[ℂ] H => T x) hJ.mul_self
-  simpa [ContinuousLinearMap.mul_apply] using h
+  simpa [mul_apply_eq_comp] using h
 
 /-- A fundamental symmetry is a unitary involution; in particular it is
 injective. -/
@@ -70,6 +70,7 @@ end IsFundamentalSymmetry
 (Proposition `prop:krein-datum`). -/
 noncomputable def kreinForm (J : H →L[ℂ] H) (x y : H) : ℂ := ⟪x, J y⟫
 
+omit [CompleteSpace H] in
 theorem kreinForm_def (J : H →L[ℂ] H) (x y : H) :
     kreinForm J x y = ⟪x, J y⟫ := rfl
 
@@ -121,7 +122,7 @@ theorem isKreinSelfAdjoint_iff {J T : H →L[ℂ] H}
   have hstar : star J = J := hJ.isSelfAdjoint
   constructor
   · intro h
-    show star (J * T) = J * T
+    change star (J * T) = J * T
     rw [star_mul, hstar]
     -- from `J T⋆ J = T`: multiply by `J` on the left
     have h' : J * (J * star T * J) = J * T := by rw [h]
@@ -133,7 +134,7 @@ theorem isKreinSelfAdjoint_iff {J T : H →L[ℂ] H}
     have h' : star T * J = J * T := by
       have hs := h.star_eq
       rwa [star_mul, hstar] at hs
-    show J * star T * J = T
+    change J * star T * J = T
     calc J * star T * J = J * (star T * J) := by rw [mul_assoc]
       _ = J * (J * T) := by rw [h']
       _ = (J * J) * T := by rw [mul_assoc]

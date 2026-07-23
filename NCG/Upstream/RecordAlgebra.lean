@@ -118,9 +118,10 @@ generator is constant on `≡`-classes; the reverse is the manuscript's
 separation argument — affinely rescaled separating predictions give
 `g_D` with value `1` on `C` and `0` on `D`, the products
 `e_C = ∏ g_D` are the class indicators, and the indicators span. -/
-theorem adjoin_predictions_eq_recordAlgebra [Fintype O] :
+theorem adjoin_predictions_eq_recordAlgebra [Finite O] :
     Algebra.adjoin ℝ (Set.range pcond) = recordSubalgebra pcond := by
   classical
+  cases nonempty_fintype O
   apply le_antisymm
   · rw [Algebra.adjoin_le_iff]
     rintro _ ⟨Fe, rfl⟩ o o' h
@@ -341,7 +342,7 @@ theorem recordAlgebra_comap (τ : O → O') (upull : F' → F)
 
 theorem recordAlgebra_comap_bij
     (τ : O → O') (τinv : O' → O) (upull : F' → F) (upush : F → F')
-    (hτ : TransportCompat τ upull pcond pcond')
+    (_hτ : TransportCompat τ upull pcond pcond')
     (hτinv : TransportCompat τinv upush pcond' pcond)
     (hleft : ∀ o, τinv (τ o) = o) (hright : ∀ o', τ (τinv o') = o') :
     ∀ g ∈ recordAlgebra pcond, ∃! f ∈ recordAlgebra pcond',

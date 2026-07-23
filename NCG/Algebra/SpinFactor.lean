@@ -106,7 +106,7 @@ theorem sq_eq_norm_smul_one_add (x : ℝ × V) :
       real_inner_self_eq_norm_sq]
     ring
   · simp only [Prod.snd_add, Prod.smul_snd, smul_zero, zero_add,
-      two_smul, smul_smul]
+      ]
     module
 
 /-- **The Jordan identity** `(x ∘ y) ∘ x² = x ∘ (y ∘ x²)`: spin

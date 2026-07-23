@@ -138,6 +138,7 @@ theorem stateCone_pointed {v : Module.Dual ℝ ↥A}
   exact eq_zero_of_unitFunctional_eq_zero A Ω hu hv (le_antisymm
     (by linarith) h1)
 
+omit hu in
 /-- **Theorem `thm:ordered-state-representation` (i, generating)**:
 the cone spans `V`. -/
 theorem stateCone_generating :
@@ -159,6 +160,7 @@ theorem unitFunctional_pos {v : Module.Dual ℝ ↥A}
   lt_of_le_of_ne (unitFunctional_nonneg A Ω hu hv)
     (fun h0 => hne (eq_zero_of_unitFunctional_eq_zero A Ω hu hv h0.symm))
 
+omit hu in
 /-- **Theorem `thm:ordered-state-representation` (iii,
 injectivity)**: effect separation makes evaluation injective. -/
 theorem evalDual_injOn
@@ -267,7 +269,7 @@ theorem stateMap_unitFunctional
     apply Subtype.ext
     ext x
     rfl
-  show v (pullbackEffect A T hTA (unitEffect A hu)) = v (unitEffect A hu)
+  change v (pullbackEffect A T hTA (unitEffect A hu)) = v (unitEffect A hu)
   rw [hunit]
 
 /-- **Theorem `thm:ordered-state-representation` (v, unitality)**:
@@ -318,7 +320,7 @@ theorem stateMap_comp (hTA'' :
       = stateMap A T hTA (stateMap A T' hTA' v) := by
   apply LinearMap.ext
   intro a
-  show v (pullbackEffect A (T.comp T') hTA'' a) = _
+  change v (pullbackEffect A (T.comp T') hTA'' a) = _
   have hcomp : pullbackEffect A (T.comp T') hTA'' a
       = pullbackEffect A T' hTA' (pullbackEffect A T hTA a) := by
     apply Subtype.ext

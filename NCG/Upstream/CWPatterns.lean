@@ -100,7 +100,7 @@ theorem cw_pattern_decomposition (lam h : ℝ) (r t : ℕ)
       = W (countTrue N η) := by
     intro η
     rw [hW_def]
-    show cwWeight N lam h η = Real.exp ((N : ℝ)
+    change cwWeight N lam h η = Real.exp ((N : ℝ)
       * (cwPressure lam h (mGrid N (countTrue N η))
         - cwEntropy (mGrid N (countTrue N η))))
     unfold cwWeight
@@ -171,7 +171,7 @@ theorem cw_pattern_decomposition (lam h : ℝ) (r t : ℕ)
       → hypWeight N r j k * ((N.choose k : ℝ) * W k) = 0 := by
     intro k hk hnot
     rw [Finset.mem_Ico] at hnot
-    push_neg at hnot
+    push Not at hnot
     rcases lt_or_ge k j with hlt | hge
     · rw [hypWeight_eq_zero_of_lt hlt, zero_mul]
     · have hgt : j + t + 1 ≤ k := hnot hge

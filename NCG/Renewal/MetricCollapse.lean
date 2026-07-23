@@ -41,7 +41,7 @@ theorem pow_mul_pow_inj :
       (pow_ne_zero j (by norm_num))]
     rw [Nat.Prime.factorization_pow Nat.prime_two,
       Nat.Prime.factorization_pow Nat.prime_three]
-    constructor <;> simp [Finsupp.single_apply]
+    constructor <;> simp []
   obtain ⟨ha2, ha3⟩ := hfact a b
   obtain ⟨hc2, hc3⟩ := hfact c d
   rw [ha2, hc2] at h2

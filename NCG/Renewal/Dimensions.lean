@@ -23,7 +23,7 @@ import NCG.Renewal.PredictiveQuotient
   box dimension of the accumulated-channel set, encoded abstractly for
   a pseudometric space via covering numbers
   (`NCG.coveringNumber`, `NCG.upperBoxDimension`).  The completely
-  bounded norm geometry on channels is not yet formalised, so `q_met`
+  bounded norm geometry on channels is not formalised here, so `q_met`
   is stated for an abstract metric model. -/
 
 namespace NCG.RenewalMemory
@@ -61,7 +61,7 @@ count is positive. -/
 theorem channelCount_pos [Finite E] {n : ℕ} (hn : 1 ≤ n) :
     0 < R.channelCount n := by
   have hmem : R.mkQ 1 ∈ R.shell n := by
-    show R.quotLength (R.mkQ 1) ≤ n
+    change R.quotLength (R.mkQ 1) ≤ n
     rw [R.quotLength_one]
     exact hn
   exact Set.ncard_pos (R.shell_finite n) |>.mpr ⟨R.mkQ 1, hmem⟩

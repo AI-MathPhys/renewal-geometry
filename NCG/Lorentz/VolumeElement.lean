@@ -26,6 +26,7 @@ namespace NCG
 
 variable {A : Type*} [Ring A] {ι : Type*} [DecidableEq ι]
 
+omit [DecidableEq ι] in
 /-- **Proposition `prop:renewal-volume-element`, square identity**: a
 product of `n` distinct anticommuting square-one generators satisfies
 `(γ₁⋯γₙ)² = (−1)^{n(n−1)/2}·1`. -/
@@ -70,11 +71,12 @@ theorem volume_element_sq (γ : ι → A)
               cases l.length with
               | zero => rfl
               | succ m =>
-                  show (m + 2) * (m + 1) = (m + 1) * m + (m + 1) * 2
+                  change (m + 2) * (m + 1) = (m + 1) * m + (m + 1) * 2
                   ring
             rw [hexp, Nat.add_mul_div_right _ _ (by norm_num : 0 < 2)]
             omega
 
+omit [DecidableEq ι] in
 /-- Moving an element that anticommutes with **all** members of a family
 through their product costs `(−1)^{length}` — the temporal-move lemma
 (no distinctness needed). -/
@@ -103,6 +105,7 @@ theorem gen0_mul_prod (γ : ι → A) (γ0 : A)
             rw [pow_succ]
             ring
 
+omit [DecidableEq ι] in
 /-- **Proposition `prop:renewal-volume-element`, odd rank**: the
 temporal generator anticommutes with the volume element, so `Vol` is not
 central in the full spacetime Clifford algebra. -/

@@ -45,6 +45,7 @@ noncomputable def doobP (B : Matrix (Fin n) (Fin n) ℝ) (r : ℝ)
     (h : Fin n → ℝ) : Matrix (Fin n) (Fin n) ℝ :=
   Matrix.of fun x y => B x y * h y / (r * h x)
 
+omit [NeZero n] in
 theorem doobP_pos {B : Matrix (Fin n) (Fin n) ℝ}
     (hB : ∀ i j, 0 < B i j) {r : ℝ} (hr : 0 < r)
     {h : Fin n → ℝ} (hh : ∀ i, 0 < h i) (x y : Fin n) :
@@ -52,6 +53,7 @@ theorem doobP_pos {B : Matrix (Fin n) (Fin n) ℝ}
   rw [doobP, Matrix.of_apply]
   exact div_pos (mul_pos (hB x y) (hh y)) (mul_pos hr (hh x))
 
+omit [NeZero n] in
 /-- **The Doob law is stochastic** at a right Perron pair. -/
 theorem doobP_stochastic {B : Matrix (Fin n) (Fin n) ℝ} {r : ℝ}
     (hr : 0 < r) {h : Fin n → ℝ} (hh : ∀ i, 0 < h i)
@@ -68,163 +70,17 @@ theorem doobP_stochastic {B : Matrix (Fin n) (Fin n) ℝ} {r : ℝ}
   rw [h1, h2]
   exact div_self (mul_pos hr (hh x)).ne'
 
-/-- **The Perron root is the Gelfand–Fekete growth rate**: the
-eigenvector sandwich identifies `r` with `pRad B`, so the pressure
-of the eigenvector-free development is `log r`. -/
+/-- **The Perron root is the Gelfand–Fekete growth rate** for a
+positive kernel — the special case of `NCG.eigenvalue_eq_pRad`, so
+the pressure of the eigenvector-free development is `log r`. -/
 theorem perron_root_eq_pRad {B : Matrix (Fin n) (Fin n) ℝ}
     (hB : ∀ i j, 0 < B i j) {r : ℝ} (hr : 0 < r)
     {h : Fin n → ℝ} (hh : ∀ i, 0 < h i)
     (heig : B.mulVec h = r • h) :
-    r = pRad B := by
-  classical
-  have hBnn : EntryNonneg B := fun i j => (hB i j).le
-  have hw : HasDiagWitness B :=
-    ⟨⟨0, Nat.pos_of_ne_zero (NeZero.ne n)⟩, 1, le_refl 1, by
-      rw [pow_one]
-      exact hB _ _⟩
-  -- B^k h = r^k h
-  have hpow : ∀ k : ℕ, (B ^ k).mulVec h = (r ^ k) • h := by
-    intro k
-    induction k with
-    | zero =>
-      rw [pow_zero, pow_zero, Matrix.one_mulVec, one_smul]
-    | succ k ih =>
-      rw [pow_succ', pow_succ']
-      rw [← Matrix.mulVec_mulVec, ih]
-      rw [Matrix.mulVec_smul, heig, smul_smul, mul_comm]
-  -- entrywise sandwich for the entry sum
-  set hmin := Finset.univ.inf' Finset.univ_nonempty h with hhmin
-  set hmax := Finset.univ.sup' Finset.univ_nonempty h with hhmax
-  have hminpos : 0 < hmin := by
-    rw [hhmin, Finset.lt_inf'_iff]
-    intro i _
-    exact hh i
-  have hmaxpos : 0 < hmax :=
-    lt_of_lt_of_le (hh ⟨0, Nat.pos_of_ne_zero (NeZero.ne n)⟩)
-      (Finset.le_sup' _ (Finset.mem_univ _))
-  have hminle : ∀ i, hmin ≤ h i := by
-    intro i
-    rw [hhmin]
-    exact Finset.inf'_le _ (Finset.mem_univ i)
-  have hlemax : ∀ i, h i ≤ hmax := by
-    intro i
-    rw [hhmax]
-    exact Finset.le_sup' _ (Finset.mem_univ i)
-  -- hmin * entrySum(B^k) ≤ Σ_x r^k h x ≤ hmax * entrySum(B^k)
-  have hsand : ∀ k : ℕ,
-      hmin * entrySum (B ^ k) ≤ (∑ x, r ^ k * h x)
-      ∧ (∑ x, r ^ k * h x) ≤ hmax * entrySum (B ^ k) := by
-    intro k
-    have hBk : ∀ x y, 0 ≤ (B ^ k) x y := entryNonneg_pow hBnn k
-    have h4 : ∀ x, r ^ k * h x = ∑ y, (B ^ k) x y * h y := by
-      intro x
-      have h5 := congrFun (hpow k) x
-      rw [Matrix.mulVec, dotProduct] at h5
-      rw [Pi.smul_apply, smul_eq_mul] at h5
-      exact h5.symm
-    constructor
-    · rw [entrySum, Finset.mul_sum]
-      refine Finset.sum_le_sum fun x _ => ?_
-      rw [h4 x, Finset.mul_sum]
-      refine Finset.sum_le_sum fun y _ => ?_
-      rw [mul_comm hmin ((B ^ k) x y)]
-      exact mul_le_mul_of_nonneg_left (hminle y) (hBk x y)
-    · rw [entrySum, Finset.mul_sum]
-      refine Finset.sum_le_sum fun x _ => ?_
-      rw [h4 x, Finset.mul_sum]
-      refine Finset.sum_le_sum fun y _ => ?_
-      rw [mul_comm hmax ((B ^ k) x y)]
-      exact mul_le_mul_of_nonneg_left (hlemax y) (hBk x y)
-  set H := ∑ x, h x with hH
-  have hHpos : 0 < H := by
-    rw [hH]
-    exact Finset.sum_pos (fun i _ => hh i) Finset.univ_nonempty
-  have hsum : ∀ k : ℕ, ∑ x, r ^ k * h x = r ^ k * H := by
-    intro k
-    rw [hH, Finset.mul_sum]
-  -- squeeze the growth sequence
-  have hgrow : Tendsto (fun k : ℕ => growthSeq B k / k) atTop
-      (nhds (Real.log r)) := by
-    have hES : ∀ k : ℕ, 0 < entrySum (B ^ k) :=
-      fun k => entrySum_pow_pos hBnn hw k
-    have hlow : ∀ k : ℕ,
-        Real.log (r ^ k * H) - Real.log hmax
-          ≤ growthSeq B k := by
-      intro k
-      have h6 := (hsand k).2
-      rw [hsum k] at h6
-      have h7 : Real.log (r ^ k * H)
-          ≤ Real.log (hmax * entrySum (B ^ k)) :=
-        Real.log_le_log (by positivity) h6
-      rw [Real.log_mul hmaxpos.ne' (hES k).ne'] at h7
-      rw [growthSeq]
-      linarith
-    have hup : ∀ k : ℕ,
-        growthSeq B k ≤ Real.log (r ^ k * H)
-          - Real.log hmin := by
-      intro k
-      have h6 := (hsand k).1
-      rw [hsum k] at h6
-      have h7 : Real.log (hmin * entrySum (B ^ k))
-          ≤ Real.log (r ^ k * H) :=
-        Real.log_le_log (mul_pos hminpos (hES k)) h6
-      rw [Real.log_mul hminpos.ne' (hES k).ne'] at h7
-      rw [growthSeq]
-      linarith
-    have hloglin : ∀ k : ℕ, Real.log (r ^ k * H)
-        = k * Real.log r + Real.log H := by
-      intro k
-      rw [Real.log_mul (by positivity) hHpos.ne',
-        Real.log_pow]
-    -- (k log r + log H − log hmax)/k → log r, similarly above
-    have hsq : Tendsto (fun k : ℕ =>
-        (k * Real.log r + Real.log H - Real.log hmax) / k)
-        atTop (nhds (Real.log r)) := by
-      have h8 : Tendsto (fun k : ℕ => Real.log r
-          + (Real.log H - Real.log hmax) / k) atTop
-          (nhds (Real.log r + 0)) :=
-        tendsto_const_nhds.add
-          (tendsto_const_div_atTop_nhds_zero_nat _)
-      rw [add_zero] at h8
-      refine Tendsto.congr' ?_ h8
-      filter_upwards [eventually_ne_atTop 0] with k hk
-      have hkR : (k : ℝ) ≠ 0 := by exact_mod_cast hk
-      field_simp
-      ring
-    have hsq2 : Tendsto (fun k : ℕ =>
-        (k * Real.log r + Real.log H - Real.log hmin) / k)
-        atTop (nhds (Real.log r)) := by
-      have h8 : Tendsto (fun k : ℕ => Real.log r
-          + (Real.log H - Real.log hmin) / k) atTop
-          (nhds (Real.log r + 0)) :=
-        tendsto_const_nhds.add
-          (tendsto_const_div_atTop_nhds_zero_nat _)
-      rw [add_zero] at h8
-      refine Tendsto.congr' ?_ h8
-      filter_upwards [eventually_ne_atTop 0] with k hk
-      have hkR : (k : ℝ) ≠ 0 := by exact_mod_cast hk
-      field_simp
-      ring
-    refine tendsto_of_tendsto_of_tendsto_of_le_of_le' hsq hsq2
-      ?_ ?_
-    · filter_upwards [eventually_gt_atTop 0] with k hk
-      have hkR : (0 : ℝ) < k := by exact_mod_cast hk
-      have h10 := hlow k
-      rw [hloglin k] at h10
-      rw [div_le_div_iff₀ hkR hkR]
-      exact mul_le_mul_of_nonneg_right h10 hkR.le
-    · filter_upwards [eventually_gt_atTop 0] with k hk
-      have hkR : (0 : ℝ) < k := by exact_mod_cast hk
-      have h10 := hup k
-      rw [hloglin k] at h10
-      rw [div_le_div_iff₀ hkR hkR]
-      exact mul_le_mul_of_nonneg_right h10 hkR.le
-  have h11 := tendsto_growthSeq hBnn hw
-  have h12 : Real.log r = Real.log (pRad B) :=
-    tendsto_nhds_unique hgrow h11
-  have h13 : r = Real.exp (Real.log r) :=
-    (Real.exp_log hr).symm
-  rw [h13, h12, Real.exp_log (pRad_pos B)]
+    r = pRad B :=
+  eigenvalue_eq_pRad (fun i j => (hB i j).le)
+    ⟨Classical.arbitrary (Fin n), 1, one_pos, by
+      rw [pow_one]; exact hB _ _⟩ hr hh heig
 
 /-- **Construction `constr:pressure-law`** for positive transfer
 kernels: the full Doob package — Perron root and gauges, strictly
@@ -241,9 +97,9 @@ theorem pressure_law {B : Matrix (Fin n) (Fin n) ℝ}
         ∧ (∀ y, ∑ x, π x * doobP B r h x y = π y)
         ∧ r = pRad B := by
   classical
-  obtain ⟨r, h, hr, hh, heig⟩ := perron_exists hB
-  obtain ⟨s, ν, hs, hν, heig'⟩ := perron_exists_left hB
-  have hrs : r = s := perron_left_right_eq hh hν heig heig'
+  obtain ⟨r, h, hr, hh, heig⟩ := exists_pos_eigenvector_of_pos hB
+  obtain ⟨s, ν, hs, hν, heig'⟩ := exists_pos_left_eigenvector_of_pos hB
+  have hrs : r = s := left_right_eigenvalue_eq hh hν heig heig'
   subst hrs
   set Z := ∑ i, ν i * h i with hZ
   have hZpos : 0 < Z := by

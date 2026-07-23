@@ -37,6 +37,8 @@ a state when their composite is the unit scalar.
 
 namespace NCG.Upstream
 
+-- Systems and processes deliberately live in independent universes.
+set_option linter.checkUnivs false in
 /-- A minimal finite operational process-theory carrier. -/
 structure OpTheory where
   /-- Systems. -/

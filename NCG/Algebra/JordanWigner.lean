@@ -154,7 +154,7 @@ def slotEmbed (j : Fin m) (A : Matrix (Fin 2) (Fin 2) ℂ) :
 theorem slotEmbed_commute {j k : Fin m} (hjk : j ≠ k)
     (A B : Matrix (Fin 2) (Fin 2) ℂ) :
     Commute (slotEmbed j A) (slotEmbed k B) := by
-  show slotEmbed j A * slotEmbed k B
+  change slotEmbed j A * slotEmbed k B
     = slotEmbed k B * slotEmbed j A
   rw [slotEmbed, slotEmbed, piKron_mul, piKron_mul]
   congr 1
@@ -202,7 +202,7 @@ theorem noncommProd_slotEmbed (s : Finset (Fin m))
           if_pos (Finset.mem_insert_of_mem hjs)]
       · rw [if_neg hjs, if_neg (by
           rw [Finset.mem_insert]
-          push_neg
+          push Not
           exact ⟨hja, hjs⟩)]
 
 /-! ## Product-form Clifford algebra -/
@@ -466,7 +466,7 @@ theorem jwGamma_prod_site (i : Fin m) :
       · rw [if_neg h3, if_neg h3, if_neg h4, if_neg h4,
           Function.update_of_ne h4, Matrix.one_mul]
   rw [h2, pauli12_eq_I_pauli3]
-  show slotEmbed i (Complex.I • pauli3)
+  change slotEmbed i (Complex.I • pauli3)
     = Complex.I • slotEmbed i pauli3
   exact slotEmbed_smul i Complex.I pauli3
 
@@ -485,7 +485,7 @@ theorem jwString_mul_gamma (i : Fin m) (b : Bool) :
       = piKron (jwSlots i (if b then pauli2 else pauli1))
       from rfl,
     piKron_mul]
-  show piKron _ = piKron _
+  change piKron _ = piKron _
   congr 1
   funext j
   rw [jwSlots]
@@ -543,20 +543,20 @@ theorem slotEmbed_mem_adjoin (i : Fin m) (p : Fin 4) :
     exact Submonoid.noncommProd_mem
       S.toSubsemiring.toSubmonoid _ _ _ fun j _ => h3 j
   fin_cases p
-  · show slotEmbed i (1 : Matrix (Fin 2) (Fin 2) ℂ) ∈ S
+  · change slotEmbed i (1 : Matrix (Fin 2) (Fin 2) ℂ) ∈ S
     have h7 : slotEmbed i (1 : Matrix (Fin 2) (Fin 2) ℂ) = 1
         := by
       rw [slotEmbed, Function.update_eq_self, piKron_one]
     rw [h7]
     exact one_mem S
-  · show slotEmbed i pauli1 ∈ S
+  · change slotEmbed i pauli1 ∈ S
     have h8 : slotEmbed i pauli1
         = jwString i * jwGamma (i, false) := by
       rw [jwString_mul_gamma]
       rfl
     rw [h8]
     exact mul_mem (hstring i) (hg _)
-  · show slotEmbed i pauli2 ∈ S
+  · change slotEmbed i pauli2 ∈ S
     have h8 : slotEmbed i pauli2
         = jwString i * jwGamma (i, true) := by
       rw [jwString_mul_gamma]

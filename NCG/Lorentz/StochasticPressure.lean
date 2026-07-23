@@ -43,6 +43,7 @@ variable {V : Type*} [Fintype V] [DecidableEq V] [Nonempty V]
 /-- Row-stochasticity of a kernel. -/
 def RowStochastic (P : Matrix V V ℝ) : Prop := ∀ x, ∑ y, P x y = 1
 
+omit [Nonempty V] in
 theorem rowStochastic_pow {P : Matrix V V ℝ}
     (hP : RowStochastic P) : ∀ k : ℕ, RowStochastic (P ^ k) := by
   intro k
@@ -68,6 +69,7 @@ theorem rowStochastic_pow {P : Matrix V V ℝ}
     rw [Finset.sum_congr rfl fun z _ => h2 z]
     exact hP x
 
+omit [Nonempty V] in
 /-- The entry-sum gauge of a stochastic power is the state count. -/
 theorem entrySum_pow_stochastic {P : Matrix V V ℝ}
     (hP : RowStochastic P) (k : ℕ) :
@@ -121,6 +123,8 @@ theorem pressure_zero_unique {P : Matrix V V ℝ}
     rw [h]
     ring
 
+omit [DecidableEq V] [Fintype V] in
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 /-- **Doob normalization at the pressure zero**: at `z = log 𝔞` the
 depth-one transfer is the channel itself. -/
 theorem doob_normalized_at_zero {𝔞 : ℝ} (h𝔞 : 0 < 𝔞)

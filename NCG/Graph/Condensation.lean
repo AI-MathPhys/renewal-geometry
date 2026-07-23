@@ -89,7 +89,7 @@ theorem creach_antisymm {a b : Condensation adj}
 
 /-- **Proposition `prop:terminal-component` (i)**: the condensation
 carries the reachability partial order — finite and acyclic. -/
-noncomputable def condensationPartialOrder :
+@[reducible] noncomputable def condensationPartialOrder :
     PartialOrder (Condensation adj) where
   le := creach adj
   le_refl := creach_refl adj

@@ -19,7 +19,7 @@ over the strongly connected components `C_j` of the support graph of
 `B`.  The two halves are
 
 * `pRad_sccBlock_le` — every component block is dominated
-  (`pRad_submatrix_le`, batch M18);
+  (`pRad_submatrix_le`);
 * `pRad_attained_on_component` — **the maximum is attained**: there
   is a component whose block carries a diagonal witness and realizes
   the full growth rate.
@@ -30,7 +30,7 @@ component reaches) per step.  Since no edge enters `P` from outside,
 the matrix is block triangular for the split `P / ¬P`, and
 
 * if both blocks carry diagonal witnesses, the two-block bound
-  `pRad_blockTriangular_le` (batch M19) applies and the induction
+  `pRad_blockTriangular_le` applies and the induction
   continues in the block attaining the maximum;
 * a block without a diagonal witness is **nilpotent**
   (`pow_card_eq_zero_of_no_witness` — a long positive chain must
@@ -64,9 +64,11 @@ support graph of `B`. -/
 def sccMem (B : Matrix V V ℝ) (x y : V) : Prop :=
   Condense.MutualReach (supportAdj B) x y
 
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 theorem sccMem_refl (B : Matrix V V ℝ) (x : V) : sccMem B x x :=
   (Condense.mutualReach_equivalence (supportAdj B)).refl x
 
+omit [DecidableEq V] [Fintype V] in
 instance (B : Matrix V V ℝ) (x : V) : Nonempty {y // sccMem B x y} :=
   ⟨⟨x, sccMem_refl B x⟩⟩
 
@@ -75,16 +77,19 @@ def sccBlock (B : Matrix V V ℝ) (x : V) :
     Matrix {y // sccMem B x y} {y // sccMem B x y} ℝ :=
   B.submatrix (Function.Embedding.subtype _) (Function.Embedding.subtype _)
 
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 theorem sccBlock_nonneg {B : Matrix V V ℝ} (hB : EntryNonneg B) (x : V) :
-    EntryNonneg (sccBlock B x) := fun a b => hB _ _
+    EntryNonneg (sccBlock B x) := fun _a _b => hB _ _
 
 /-- A positive-entry chain of length `k` from `x` to `y`. -/
 def PosChain (B : Matrix V V ℝ) (k : ℕ) (x y : V) : Prop :=
   ∃ p : ℕ → V, p 0 = x ∧ p k = y ∧ ∀ t, t < k → 0 < B (p t) (p (t + 1))
 
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 theorem posChain_zero (B : Matrix V V ℝ) (x : V) : PosChain B 0 x x :=
   ⟨fun _ => x, rfl, rfl, fun t ht => absurd ht (Nat.not_lt_zero t)⟩
 
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 theorem posChain_single {B : Matrix V V ℝ} {a b : V} (h : 0 < B a b) :
     PosChain B 1 a b := by
   refine ⟨fun t => if t = 0 then a else b, if_pos rfl, if_neg one_ne_zero, ?_⟩
@@ -92,6 +97,8 @@ theorem posChain_single {B : Matrix V V ℝ} {a b : V} (h : 0 < B a b) :
   interval_cases t
   simpa using h
 
+omit [DecidableEq V] [Fintype V] in
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 /-- Chains concatenate. -/
 theorem PosChain.trans {B : Matrix V V ℝ} {k l : ℕ} {x y z : V}
     (h1 : PosChain B k x y) (h2 : PosChain B l y z) :
@@ -128,6 +135,7 @@ theorem PosChain.trans {B : Matrix V V ℝ} {k l : ℕ} {x y z : V}
       rw [h10]
       exact hqs (t - k) (by omega)
 
+omit [Nonempty V] in
 /-- Entry products along a split dominate the entry of the summed
 power. -/
 theorem pow_add_entry_ge {B : Matrix V V ℝ} (hB : EntryNonneg B)
@@ -140,6 +148,7 @@ theorem pow_add_entry_ge {B : Matrix V V ℝ} (hB : EntryNonneg B)
       (entryNonneg_pow hB k w z))
     (Finset.mem_univ y)
 
+omit [Nonempty V] in
 /-- A positive entry of a matrix power yields a positive chain. -/
 theorem chain_of_pow_pos {B : Matrix V V ℝ} (hB : EntryNonneg B) :
     ∀ (k : ℕ) (x y : V), 0 < (B ^ k) x y → PosChain B k x y := by
@@ -157,26 +166,27 @@ theorem chain_of_pow_pos {B : Matrix V V ℝ} (hB : EntryNonneg B) :
     rw [pow_succ, Matrix.mul_apply] at hpos
     have h1 : ∃ z, 0 < (B ^ k) x z * B z y := by
       by_contra hno
-      push_neg at hno
+      push Not at hno
       have h2 : ∑ z, (B ^ k) x z * B z y ≤ 0 :=
         Finset.sum_nonpos fun z _ => hno z
       linarith
     obtain ⟨z, hz⟩ := h1
     have hxz : 0 < (B ^ k) x z := by
       by_contra hle
-      push_neg at hle
+      push Not at hle
       have h3 : (B ^ k) x z = 0 :=
         le_antisymm hle (entryNonneg_pow hB k x z)
       rw [h3, zero_mul] at hz
       exact lt_irrefl 0 hz
     have hzy : 0 < B z y := by
       by_contra hle
-      push_neg at hle
+      push Not at hle
       have h3 : B z y = 0 := le_antisymm hle (hB z y)
       rw [h3, mul_zero] at hz
       exact lt_irrefl 0 hz
     exact (ih x z hxz).trans (posChain_single hzy)
 
+omit [Nonempty V] in
 /-- A positive chain between indexed points yields a positive entry
 of the corresponding matrix power. -/
 theorem pow_entry_pos_of_chain {B : Matrix V V ℝ} (hB : EntryNonneg B)
@@ -201,6 +211,7 @@ theorem pow_entry_pos_of_chain {B : Matrix V V ℝ} (hB : EntryNonneg B)
     rw [pow_one]
     exact mul_pos h1 h2
 
+omit [Nonempty V] in
 /-- A positive chain yields a positive entry of the power. -/
 theorem pow_pos_of_chain {B : Matrix V V ℝ} (hB : EntryNonneg B)
     {k : ℕ} {x y : V} (hc : PosChain B k x y) : 0 < (B ^ k) x y := by
@@ -210,6 +221,8 @@ theorem pow_pos_of_chain {B : Matrix V V ℝ} (hB : EntryNonneg B)
   rw [Nat.sub_zero, hp0, hpk] at h1
   exact h1
 
+omit [DecidableEq V] [Fintype V] in
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 /-- Chains generate reachability in the support graph. -/
 theorem reaches_of_chain {B : Matrix V V ℝ} {p : ℕ → V} {i j : ℕ}
     (hij : i ≤ j)
@@ -221,6 +234,7 @@ theorem reaches_of_chain {B : Matrix V V ℝ} {p : ℕ → V} {i j : ℕ}
     have h1 := ih fun t ht htj => hstep t ht (htj.trans (Nat.lt_succ_self j))
     exact h1.tail (hstep j hij (Nat.lt_succ_self j))
 
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 theorem reaches_of_posChain {B : Matrix V V ℝ} {k : ℕ} {x y : V}
     (hc : PosChain B k x y) :
     Condense.Reaches (supportAdj B) x y := by
@@ -231,6 +245,8 @@ theorem reaches_of_posChain {B : Matrix V V ℝ} {k : ℕ} {x y : V}
 
 /-! ## Restriction of chains to forward-closed sets -/
 
+omit [DecidableEq V] [Fintype V] in
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 /-- A chain starting in a forward-closed vertex set restricts to the
 principal block on that set. -/
 theorem chain_restrict {B : Matrix V V ℝ} {Q : V → Prop}
@@ -261,6 +277,8 @@ theorem chain_restrict {B : Matrix V V ℝ} {Q : V → Prop}
     rw [dif_pos (hall t htk.le), dif_pos (hall (t + 1) htk)]
     exact hstep t htk
 
+omit [DecidableEq V] [Fintype V] in
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 /-- Reachability restricts to a forward-closed vertex set. -/
 theorem reaches_restrict {B : Matrix V V ℝ} {Q : V → Prop}
     (hQ : ∀ a b, Q a → 0 < B a b → Q b) {x y : V}
@@ -274,6 +292,8 @@ theorem reaches_restrict {B : Matrix V V ℝ} {Q : V → Prop}
     obtain ⟨hz, hrz⟩ := ih
     exact ⟨hQ _ _ hz hstep, hrz.tail hstep⟩
 
+omit [DecidableEq V] [Fintype V] in
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 /-- Reachability in a principal block maps to reachability in the
 ambient support graph. -/
 theorem reaches_of_restrict {B : Matrix V V ℝ} {Q : V → Prop}
@@ -288,6 +308,7 @@ theorem reaches_of_restrict {B : Matrix V V ℝ} {Q : V → Prop}
 
 /-! ## Witness localization into the strongly connected component -/
 
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
 /-- A chain with a positive return chain lifts into the block of the
 strongly connected component of its starting point. -/
 theorem chain_scc_lift {B : Matrix V V ℝ} {x : V} :
@@ -320,6 +341,7 @@ theorem chain_scc_lift {B : Matrix V V ℝ} {x : V} :
     refine ⟨hz, hblockchain.trans (posChain_single ?_)⟩
     exact hwz
 
+omit [Nonempty V] in
 /-- **Witness localization**: a diagonal witness of `B` localizes to
 the block of the strongly connected component of its base point. -/
 theorem hasDiagWitness_sccBlock {B : Matrix V V ℝ}
@@ -335,6 +357,7 @@ theorem hasDiagWitness_sccBlock {B : Matrix V V ℝ}
 
 /-! ## Blocks without witnesses are nilpotent -/
 
+omit [Nonempty V] in
 /-- **No witness forces nilpotency**: a long positive chain revisits
 a vertex and closes a positive cycle, which would be a diagonal
 witness. -/
@@ -361,8 +384,8 @@ theorem pow_card_eq_zero_of_no_witness {N : Matrix V V ℝ}
     rw [← hpeq] at h1
     exact hw ⟨p i, (j : ℕ) - (i : ℕ), by omega, h1⟩
   rcases lt_or_gt_of_ne hne with h | h
-  · exact hkey i j (Fin.lt_iff_val_lt_val.mp h) heq
-  · exact hkey j i (Fin.lt_iff_val_lt_val.mp h) heq.symm
+  · exact hkey i j (Fin.lt_def.mp h) heq
+  · exact hkey j i (Fin.lt_def.mp h) heq.symm
 
 /-- **Truncated resolvent through a nilpotent block**: an exact
 super-solution equation `Nw + u + 1 = μw` with `w` bounded below. -/
@@ -464,6 +487,7 @@ theorem pow_submatrix_equiv (e : S ≃ T) (B : Matrix T T ℝ) (k : ℕ) :
   | succ k ih =>
     rw [pow_succ, pow_succ, ih, Matrix.submatrix_mul_equiv]
 
+omit [DecidableEq S] [DecidableEq T] in
 theorem entrySum_submatrix_equiv (e : S ≃ T) (B : Matrix T T ℝ) :
     entrySum (B.submatrix ⇑e ⇑e) = entrySum B := by
   unfold entrySum
@@ -492,9 +516,11 @@ theorem hasDiagWitness_submatrix_equiv (e : S ≃ T) {B : Matrix T T ℝ}
   obtain ⟨x, m, hm, hpos⟩ := hw
   refine ⟨e.symm x, m, hm, ?_⟩
   rw [pow_submatrix_equiv]
-  show 0 < (B ^ m) (e (e.symm x)) (e (e.symm x))
+  change 0 < (B ^ m) (e (e.symm x)) (e (e.symm x))
   rwa [Equiv.apply_symm_apply]
 
+omit [DecidableEq S] [DecidableEq T] [DecidableEq V] [Fintype S] [Fintype T] [Fintype V] [Nonempty
+  V] in
 /-- Embeddings with equal range induce an equiv intertwining them. -/
 theorem embedding_range_congr (e₁ : S ↪ V) (e₂ : T ↪ V)
     (hr : Set.range ⇑e₁ = Set.range ⇑e₂) :
@@ -506,6 +532,8 @@ theorem embedding_range_congr (e₁ : S ↪ V) (e₂ : T ↪ V)
   rw [Equiv.apply_ofInjective_symm e₂.injective]
   rfl
 
+omit [DecidableEq S] [DecidableEq T] [DecidableEq V] [Fintype S] [Fintype T] [Fintype V] [Nonempty
+  V] in
 theorem submatrix_range_congr (e₁ : S ↪ V) (e₂ : T ↪ V)
     (hr : Set.range ⇑e₁ = Set.range ⇑e₂) (B : Matrix V V ℝ) :
     ∃ f : S ≃ T, B.submatrix ⇑e₁ ⇑e₁
@@ -515,19 +543,23 @@ theorem submatrix_range_congr (e₁ : S ↪ V) (e₂ : T ↪ V)
   ext a b
   simp only [Matrix.submatrix_apply, hf]
 
-theorem pRad_submatrix_range_congr [Nonempty S] (e₁ : S ↪ V)
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
+theorem pRad_submatrix_range_congr [Finite V] [Nonempty S] (e₁ : S ↪ V)
     (e₂ : T ↪ V) (hr : Set.range ⇑e₁ = Set.range ⇑e₂)
     (B : Matrix V V ℝ) :
     pRad (B.submatrix ⇑e₁ ⇑e₁) = pRad (B.submatrix ⇑e₂ ⇑e₂) := by
+  cases nonempty_fintype V
   obtain ⟨f, hmat⟩ := submatrix_range_congr e₁ e₂ hr B
   haveI : Nonempty T := ⟨f (Classical.arbitrary S)⟩
   rw [hmat, pRad_submatrix_equiv]
 
-theorem hasDiagWitness_submatrix_range_congr (e₁ : S ↪ V)
+omit [DecidableEq V] [Fintype V] [Nonempty V] in
+theorem hasDiagWitness_submatrix_range_congr [Finite V] (e₁ : S ↪ V)
     (e₂ : T ↪ V) (hr : Set.range ⇑e₁ = Set.range ⇑e₂)
     {B : Matrix V V ℝ}
     (hw : HasDiagWitness (B.submatrix ⇑e₂ ⇑e₂)) :
     HasDiagWitness (B.submatrix ⇑e₁ ⇑e₁) := by
+  cases nonempty_fintype V
   obtain ⟨f, hmat⟩ := submatrix_range_congr e₁ e₂ hr B
   rw [hmat]
   exact hasDiagWitness_submatrix_equiv f hw
@@ -630,7 +662,7 @@ theorem pRad_le_of_nilpotent_first
         exact hvCsup ⟨x, hx⟩
     exact pRad_le_of_supersolution hB hw hμpos hwpos hsup
   by_contra hcon
-  push_neg at hcon
+  push Not at hcon
   have h1 := key ((pRad BC + pRad B) / 2) (by linarith)
   linarith
 
@@ -762,7 +794,7 @@ theorem pRad_le_of_nilpotent_second
         linarith [heq]
     exact pRad_le_of_supersolution hB hw hμpos hwpos hsup
   by_contra hcon
-  push_neg at hcon
+  push Not at hcon
   have h1 := key ((pRad BS + pRad B) / 2) (by linarith)
   linarith
 
@@ -770,11 +802,13 @@ end Nilpotent
 
 /-! ## A minimal strongly connected component -/
 
+omit [DecidableEq V] [Fintype V] in
 /-- Every finite graph has a vertex whose component is minimal for
 reachability: whatever reaches it is reached back. -/
-theorem exists_min_vertex (adj : V → V → Prop) :
+theorem exists_min_vertex [Finite V] (adj : V → V → Prop) :
     ∃ x₀ : V, ∀ y, Condense.Reaches adj y x₀ →
       Condense.Reaches adj x₀ y := by
+  cases nonempty_fintype V
   obtain ⟨x₀, _, hmin⟩ := Finset.exists_min_image Finset.univ
     (fun x => (Finset.univ.filter
       (fun z => Condense.Reaches adj z x)).card)
@@ -859,7 +893,7 @@ private theorem pRad_attained_aux : ∀ (n : ℕ) (V : Type u)
       · rw [hmat]
         exact hasDiagWitness_submatrix_equiv _ hw
       · rw [hmat, pRad_submatrix_equiv]
-    · push_neg at hPall
+    · push Not at hPall
       obtain ⟨x₁, hx₁⟩ := hPall
       haveI : Nonempty {y // ¬P y} := ⟨⟨x₁, hx₁⟩⟩
       haveI : Nonempty {y // P y} := ⟨⟨x₀, hPx₀⟩⟩
@@ -948,13 +982,13 @@ private theorem pRad_attained_aux : ∀ (n : ℕ) (V : Type u)
           ext a b
           rfl
         refine ⟨x'.val, ?_, ?_⟩
-        · show HasDiagWitness (B.submatrix
+        · change HasDiagWitness (B.submatrix
             ⇑(Function.Embedding.subtype (sccMem B x'.val))
             ⇑(Function.Embedding.subtype (sccMem B x'.val)))
           refine hasDiagWitness_submatrix_range_congr _ e₂ hrange ?_
           rw [hmat2]
           exact hwx'
-        · show pRad B ≤ pRad (B.submatrix
+        · change pRad B ≤ pRad (B.submatrix
             ⇑(Function.Embedding.subtype (sccMem B x'.val))
             ⇑(Function.Embedding.subtype (sccMem B x'.val)))
           rw [pRad_submatrix_range_congr _ e₂ hrange, hmat2]

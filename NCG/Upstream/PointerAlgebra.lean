@@ -49,30 +49,36 @@ def slice (a b : P) (H : Matrix (P × E) (P × E) ℂ) :
     Matrix E E ℂ :=
   Matrix.of fun c d => H (a, c) (b, d)
 
+omit [DecidableEq E] [DecidableEq P] [Fintype E] [Fintype P] in
 @[simp] theorem slice_apply (a b : P) (H : Matrix (P × E) (P × E) ℂ)
     (c d : E) : slice a b H c d = H (a, c) (b, d) := rfl
 
+omit [DecidableEq E] [DecidableEq P] [Fintype E] [Fintype P] in
 theorem slice_add (a b : P) (H K : Matrix (P × E) (P × E) ℂ) :
     slice a b (H + K) = slice a b H + slice a b K := by
   ext c d
   simp [slice]
 
+omit [DecidableEq E] [DecidableEq P] [Fintype E] [Fintype P] in
 theorem slice_smul (a b : P) (t : ℂ) (H : Matrix (P × E) (P × E) ℂ) :
     slice a b (t • H) = t • slice a b H := by
   ext c d
   simp [slice]
 
+omit [DecidableEq E] [DecidableEq P] [Fintype E] [Fintype P] in
 theorem slice_zero (a b : P) :
     slice a b (0 : Matrix (P × E) (P × E) ℂ) = 0 := by
   ext c d
   simp [slice]
 
+omit [DecidableEq E] [DecidableEq P] [Fintype E] [Fintype P] in
 /-- Slices of a Kronecker product. -/
 theorem slice_kronecker (a b : P) (M : Matrix P P ℂ)
     (X : Matrix E E ℂ) : slice a b (M ⊗ₖ X) = M a b • X := by
   ext c d
   simp [slice, Matrix.kroneckerMap_apply]
 
+omit [DecidableEq E] [DecidableEq P] [Fintype E] [Fintype P] in
 /-- Slices of a Hermitian interaction are conjugate-symmetric:
 `(h_{ab})ᴴ = h_{ba}`. -/
 theorem slice_conjTranspose (a b : P)
@@ -81,6 +87,7 @@ theorem slice_conjTranspose (a b : P)
   ext c d
   simp [slice, Matrix.conjTranspose_apply]
 
+omit [DecidableEq E] [Fintype E] in
 /-- **Block decomposition** `H = ∑_{ab} e_{ab} ⊗ h_{ab}`: every
 interaction is the sum of matrix units tensored with its slices. -/
 theorem sum_ptensor_slice (H : Matrix (P × E) (P × E) ℂ) :
@@ -116,14 +123,18 @@ def tensorSpan (C : Set (Matrix E E ℂ)) :
   Submodule.span ℂ
     {Y | ∃ M : Matrix P P ℂ, ∃ X ∈ C, Y = M ⊗ₖ X}
 
+omit [DecidableEq E] [DecidableEq P] [Fintype E] [Fintype P] in
 /-- **Membership in `𝔅(P) ⊗ 𝒞` is a slice condition**: for a
 subalgebra-like set (a submodule of coefficients), `H ∈ 𝔅(P) ⊗ 𝒞`
 iff every slice of `H` lies in `𝒞`. -/
-theorem mem_tensorSpan_iff_slice
+theorem mem_tensorSpan_iff_slice [Finite P] [Finite E]
     (C : Submodule ℂ (Matrix E E ℂ))
     (H : Matrix (P × E) (P × E) ℂ) :
     H ∈ tensorSpan (P := P) (C : Set (Matrix E E ℂ))
       ↔ ∀ a b : P, slice a b H ∈ C := by
+  classical
+  cases nonempty_fintype P
+  cases nonempty_fintype E
   constructor
   · intro hH
     induction hH using Submodule.span_induction with
@@ -162,18 +173,22 @@ def coeffAlgebra : StarSubalgebra ℂ (Matrix E E ℂ) :=
   StarAlgebra.adjoin ℂ
     {X | ∃ (ν : ι) (a b : P), X = slice a b (H ν)}
 
+omit [DecidableEq P] [Fintype P] in
 theorem slice_mem_coeffAlgebra (ν : ι) (a b : P) :
     slice a b (H ν) ∈ coeffAlgebra H :=
   StarAlgebra.subset_adjoin ℂ _ ⟨ν, a, b, rfl⟩
 
+omit [DecidableEq P] [Fintype P] in
 /-- **Proposition `prop:interaction-algebra-minimal` (minimality)**:
 `𝒞_E(ℋ)` is the smallest star-subalgebra `𝒞` such that every
 interaction lies in `𝔅(P) ⊗ 𝒞`.  In particular it is independent of
 the probe basis, the operator-Schmidt decomposition, and the
 generating list. -/
-theorem coeffAlgebra_minimal (C : StarSubalgebra ℂ (Matrix E E ℂ)) :
+theorem coeffAlgebra_minimal [Finite P] (C : StarSubalgebra ℂ (Matrix E E ℂ)) :
     (∀ ν, H ν ∈ tensorSpan (P := P) (C : Set (Matrix E E ℂ)))
       ↔ coeffAlgebra H ≤ C := by
+  classical
+  cases nonempty_fintype P
   constructor
   · intro hall
     rw [coeffAlgebra, StarAlgebra.adjoin_le_iff]
@@ -196,6 +211,7 @@ end CoeffAlgebra
 def onePE (X : Matrix E E ℂ) : Matrix (P × E) (P × E) ℂ :=
   (1 : Matrix P P ℂ) ⊗ₖ X
 
+omit [DecidableEq E] in
 /-- Left multiplication by an ampliation acts on slices from the
 left. -/
 theorem slice_onePE_mul (X : Matrix E E ℂ)
@@ -211,7 +227,7 @@ theorem slice_onePE_mul (X : Matrix E E ℂ)
   rw [h1, Finset.sum_eq_single a]
   · refine Finset.sum_congr rfl fun c' _ => ?_
     congr 1
-    simp [onePE, Matrix.kroneckerMap_apply, Matrix.one_apply]
+    simp [onePE, Matrix.kroneckerMap_apply]
   · intro a' _ ha'
     refine Finset.sum_eq_zero fun c' _ => ?_
     have h2 : onePE (P := P) X (a, c) (a', c') = 0 := by
@@ -221,6 +237,7 @@ theorem slice_onePE_mul (X : Matrix E E ℂ)
   · intro ha
     exact absurd (Finset.mem_univ a) ha
 
+omit [DecidableEq E] in
 /-- Right multiplication by an ampliation acts on slices from the
 right. -/
 theorem slice_mul_onePE (X : Matrix E E ℂ)
@@ -236,7 +253,7 @@ theorem slice_mul_onePE (X : Matrix E E ℂ)
   rw [h1, Finset.sum_eq_single b]
   · refine Finset.sum_congr rfl fun d' _ => ?_
     congr 1
-    simp [onePE, Matrix.kroneckerMap_apply, Matrix.one_apply]
+    simp [onePE, Matrix.kroneckerMap_apply]
   · intro b' _ hb'
     refine Finset.sum_eq_zero fun d' _ => ?_
     have h2 : onePE (P := P) X (b', d') (b, d) = 0 := by
@@ -246,6 +263,7 @@ theorem slice_mul_onePE (X : Matrix E E ℂ)
   · intro hb
     exact absurd (Finset.mem_univ b) hb
 
+omit [DecidableEq E] in
 /-- **The boxed nondemolition criterion, slice form**:
 `[1_P ⊗ X, H] = 0` iff `X` commutes with every slice of `H`. -/
 theorem commute_onePE_iff_slice (X : Matrix E E ℂ)
@@ -258,7 +276,7 @@ theorem commute_onePE_iff_slice (X : Matrix E E ℂ)
     rwa [slice_onePE_mul, slice_mul_onePE] at h1
   · intro h
     ext ⟨p, c⟩ ⟨q, d⟩
-    show slice p q (onePE (P := P) X * H) c d
+    change slice p q (onePE (P := P) X * H) c d
       = slice p q (H * onePE (P := P) X) c d
     rw [slice_onePE_mul, slice_mul_onePE, h p q]
 
@@ -276,6 +294,7 @@ def pointerCentre : Subalgebra ℂ (Matrix E E ℂ) :=
   stableAlgebra H ⊓ Subalgebra.centralizer ℂ
     ((stableAlgebra H : Set (Matrix E E ℂ)))
 
+omit [DecidableEq E] [DecidableEq P] [Fintype E] [Fintype P] in
 /-- The generating slices are closed under star for a Hermitian
 interaction family. -/
 theorem star_slice_set (hH : ∀ ν, (H ν)ᴴ = H ν) :
@@ -291,7 +310,7 @@ theorem star_slice_set (hH : ∀ ν, (H ν)ᴴ = H ν) :
   refine ⟨ν, b, a, ?_⟩
   have h1 : Y = star (star Y) := (star_star Y).symm
   rw [h1, hab]
-  show (slice a b (H ν))ᴴ = slice b a (H ν)
+  change (slice a b (H ν))ᴴ = slice b a (H ν)
   rw [slice_conjTranspose, hH ν]
 
 /-- **Proposition `prop:interaction-algebra-minimal`, boxed
@@ -340,10 +359,12 @@ end Stable
 def ptrace (M : Matrix (P × E) (P × E) ℂ) : Matrix P P ℂ :=
   Matrix.of fun p q => ∑ c, M (p, c) (q, c)
 
+omit [DecidableEq E] [DecidableEq P] [Fintype P] in
 theorem ptrace_eq_trace_slice (M : Matrix (P × E) (P × E) ℂ)
     (p q : P) : ptrace M p q = (slice p q M).trace := by
   simp [ptrace, slice, Matrix.trace, Matrix.diag]
 
+omit [DecidableEq E] in
 /-- Partial trace of a two-sided ampliated compression. -/
 theorem ptrace_compress (A B : Matrix E E ℂ)
     (M : Matrix (P × E) (P × E) ℂ) (p q : P) :
@@ -378,6 +399,7 @@ theorem pointer_instrument_sum {κ : Type*} [Fintype κ]
     (Matrix.trace_sum _ _).symm
   rw [h2, ← Finset.mul_sum, hsum, mul_one, ptrace_eq_trace_slice]
 
+omit [DecidableEq E] in
 /-- **Off-diagonal blocks are invisible to the partial trace**:
 cross-compressions along orthogonal projections vanish. -/
 theorem pointer_offdiag_vanish (z z' : Matrix E E ℂ)

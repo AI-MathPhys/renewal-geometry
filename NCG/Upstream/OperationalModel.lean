@@ -167,6 +167,7 @@ def StateSeparating (S : Set (A →ₗ[ℂ] ℂ)) : Prop :=
   ∀ a : A, star a = a →
     (∀ ω ∈ S, ∃ r : ℝ, 0 ≤ r ∧ ω a = (r : ℂ)) → 0 ≤ a
 
+omit [StarModule ℂ A] in
 /-- **`thm:operational-ucp` (forward, positivity)**: a deterministic
 predictive transformation with nonnegative closed-experiment
 probabilities on every operational state is a positive map — by
@@ -195,6 +196,7 @@ noncomputable def operationalToUCP (Φ : A →ₗ[ℂ] A) (hdet : Φ 1 = 1)
     (hstab : IsCompletelyPositive Φ) : UCPMap A :=
   contextStableUCP Φ hdet hstab
 
+omit [StarModule ℂ A] in
 /-- **`thm:operational-ucp` (converse, effects map to effects)**: a
 positive unital map preserves the operational effect interval
 `0 ≤ a ≤ 1` — it preserves the order unit and sends effects to
@@ -207,6 +209,7 @@ theorem ucp_effect_map (Φ : A →ₗ[ℂ] A) (hpos : IsPositiveMap Φ)
   rw [map_sub, hu] at h2
   exact sub_nonneg.mp h2
 
+omit [StarModule ℂ A] [StarOrderedRing A] [StarRing A] in
 /-- **`thm:operational-ucp` (converse, state pullback)**: composing
 an operational state with a positive transformation yields
 nonnegative closed-experiment probabilities — pairing with states

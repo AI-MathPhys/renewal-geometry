@@ -8,7 +8,8 @@ import Mathlib
 /-!
 # Realized reversible sheet classes form a subgroup
 
-Covers `lem:realized-reversible-subgroup` from `manuscripts/lorentzian_emergence/lorentzian_emergence.tex`:
+Covers `lem:realized-reversible-subgroup` from
+`manuscripts/lorentzian_emergence/lorentzian_emergence.tex`:
 in the signed-cover model a class `α ∈ H` is *realized reversibly*
 when some predictive unit — an invertible transformation of the cover
 belonging to the given group `S` of units preserving the recurrent
@@ -49,9 +50,9 @@ theorem isLiftOver_comp {f g : Equiv.Perm (V × H)}
     (hf : IsLiftOver f b α) (hg : IsLiftOver g c β) :
     IsLiftOver (f * g) (b * c) (β + α) := by
   intro v η
-  show f (g (v, η)) = _
+  change f (g (v, η)) = _
   rw [hg v η, hf (c v) (η + β)]
-  show (b (c v), η + β + α) = (b (c v), η + (β + α))
+  change (b (c v), η + β + α) = (b (c v), η + (β + α))
   rw [add_assoc]
 
 /-- **Sheet actions negate under inversion**: the inverse unit is a
@@ -61,7 +62,7 @@ theorem isLiftOver_inv {f : Equiv.Perm (V × H)} {b : Equiv.Perm V}
     IsLiftOver f⁻¹ b⁻¹ (-α) := by
   intro v η
   apply f.injective
-  show f (f⁻¹ (v, η)) = f (b⁻¹ v, η + -α)
+  change f (f⁻¹ (v, η)) = f (b⁻¹ v, η + -α)
   rw [show f⁻¹ = f.symm from rfl, Equiv.apply_symm_apply,
     hf (b⁻¹ v) (η + -α)]
   show (v, η) = (b (b⁻¹ v), η + -α + α)

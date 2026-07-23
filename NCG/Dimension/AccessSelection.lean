@@ -126,8 +126,8 @@ theorem sum_outer_single (d : ℕ) :
       = (1 : Matrix (Fin d) (Fin d) ℝ) := by
   ext j k
   simp only [Matrix.sum_apply, vecMulVec_apply, Pi.single_apply, mul_ite,
-    ite_mul, one_mul, mul_one, zero_mul, mul_zero, Matrix.one_apply]
-  simp [Finset.sum_ite_eq, Finset.sum_ite_eq', eq_comm]
+    mul_one, mul_zero, Matrix.one_apply]
+  simp [Finset.sum_ite_eq]
 
 /-- **Theorem `thm:isotropy-dimension-blind`**: the cross-polytope reset
 frame `{±e₁, …, ±e_d}` with equal weights `1/(2d)` has second moment

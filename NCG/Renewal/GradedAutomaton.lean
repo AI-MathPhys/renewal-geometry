@@ -55,6 +55,7 @@ namespace GradedAutomaton
 
 variable (A : GradedAutomaton Q E)
 
+omit [DecidableEq Q] in
 /-- The general constant-increment computation: a shift raising a
 `ℕ`-grading by exactly `c` has real increment exactly `c`. -/
 theorem depth_increment_of_add {L : Q → ℕ} {s : Q → Q} {c : ℕ}

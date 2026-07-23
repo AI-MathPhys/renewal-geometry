@@ -37,6 +37,7 @@ section Generators
 
 variable {A : Type*} [Ring A] {ι : Type*} [DecidableEq ι] (γ : ι → A)
 
+omit [DecidableEq ι] in
 /-- Moving a generator across a product of `k` distinct anticommuting
 generators costs `(−1)^k` (Lemma `lem:graded-clifford-form`, single-move
 case). -/
@@ -67,6 +68,7 @@ theorem gen_mul_prod
             rw [pow_succ]
             ring
 
+omit [DecidableEq ι] in
 /-- **Bilinear exchange sign on disjoint supports**
 (Lemma `lem:graded-clifford-form`): products of anticommuting generators
 over disjoint index lists exchange with the sign `(−1)^{k₁·k₂}` — the

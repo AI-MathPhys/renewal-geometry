@@ -30,6 +30,8 @@ open Filter
 
 variable {V : Type*} [Fintype V] [DecidableEq V] [Nonempty V]
 
+omit [DecidableEq V] in
+omit [DecidableEq V] [Nonempty V] in
 /-- Nonnegative matrices act monotonically. -/
 theorem mulVec_mono {B : Matrix V V ℝ} (hB : EntryNonneg B)
     {u v : V → ℝ} (huv : ∀ x, u x ≤ v x) (x : V) :
@@ -38,11 +40,12 @@ theorem mulVec_mono {B : Matrix V V ℝ} (hB : EntryNonneg B)
   exact Finset.sum_le_sum fun y _ =>
     mul_le_mul_of_nonneg_left (huv y) (hB x y)
 
+omit [Nonempty V] in
 /-- A super-solution propagates through powers:
 `B^k v ≤ μ^k v`. -/
 theorem pow_mulVec_le_of_supersolution {B : Matrix V V ℝ}
     (hB : EntryNonneg B) {μ : ℝ} (hμ : 0 ≤ μ) {v : V → ℝ}
-    (hv : ∀ x, 0 ≤ v x)
+    (_hv : ∀ x, 0 ≤ v x)
     (hsup : ∀ x, B.mulVec v x ≤ μ * v x) :
     ∀ (k : ℕ) (x : V), (B ^ k).mulVec v x ≤ μ ^ k * v x := by
   intro k
@@ -327,7 +330,7 @@ theorem pRad_blockTriangular_le
   have hBSnn : EntryNonneg BS := fun x y => hB _ _
   have hBCnn : EntryNonneg BC := fun x y => hB _ _
   by_contra hcon
-  push_neg at hcon
+  push Not at hcon
   set M := max (pRad BS) (pRad BC) with hM
   set μ₂ := (M + pRad B) / 2 with hμ₂
   set μ₁ := (M + μ₂) / 2 with hμ₁

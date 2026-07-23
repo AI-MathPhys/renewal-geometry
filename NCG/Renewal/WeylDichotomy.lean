@@ -111,8 +111,8 @@ theorem renewal_ratio_tendsto (N : ℕ) (f : ℕ → ℝ)
       (nhds (∑ n ∈ Finset.range N, f n * n)) := by
   have hQcont : Continuous (fun z : ℝ =>
       ∑ n ∈ Finset.range N, f n * (∑ k ∈ Finset.range n, z ^ k)) := by
-    refine continuous_finset_sum _ fun n _ => Continuous.mul
-      continuous_const (continuous_finset_sum _ fun k _ => ?_)
+    refine continuous_finsetSum _ fun n _ => Continuous.mul
+      continuous_const (continuous_finsetSum _ fun k _ => ?_)
     exact continuous_pow k
   have hQ1 : ∑ n ∈ Finset.range N, f n * (∑ k ∈ Finset.range n, (1:ℝ) ^ k)
       = ∑ n ∈ Finset.range N, f n * n := renewal_mean_at_one N f

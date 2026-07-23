@@ -119,11 +119,11 @@ instance monoidalQuotient :
     rfl
   id_tensorHom_id := by
     rintro ⟨X₁⟩ ⟨X₂⟩
-    show Quot.mk _ _ = Quot.mk _ _
+    change Quot.mk _ _ = Quot.mk _ _
     exact congrArg (Quot.mk _) (by cat_disch)
   tensorHom_comp_tensorHom := by
     rintro ⟨X₁⟩ ⟨Y₁⟩ ⟨Z₁⟩ ⟨X₂⟩ ⟨Y₂⟩ ⟨Z₂⟩ ⟨f₁⟩ ⟨f₂⟩ ⟨g₁⟩ ⟨g₂⟩
-    show Quot.mk _ _ = Quot.mk _ _
+    change Quot.mk _ _ = Quot.mk _ _
     refine congrArg (Quot.mk _) ?_
     dsimp only
     rw [← MonoidalCategory.tensorHom_def,
@@ -138,7 +138,7 @@ instance monoidalQuotient :
     exact congrArg (Quot.mk _) (MonoidalCategory.id_whiskerRight X Y)
   associator_naturality := by
     rintro ⟨X₁⟩ ⟨X₂⟩ ⟨X₃⟩ ⟨Y₁⟩ ⟨Y₂⟩ ⟨Y₃⟩ ⟨f₁⟩ ⟨f₂⟩ ⟨f₃⟩
-    show Quot.mk _ _ = Quot.mk _ _
+    change Quot.mk _ _ = Quot.mk _ _
     refine congrArg (Quot.mk _) ?_
     dsimp only
     rw [← MonoidalCategory.tensorHom_def,
@@ -148,28 +148,28 @@ instance monoidalQuotient :
     exact MonoidalCategory.associator_naturality f₁ f₂ f₃
   leftUnitor_naturality := by
     rintro ⟨X⟩ ⟨Y⟩ ⟨f⟩
-    show CategoryTheory.Quotient.comp r _ _
+    change CategoryTheory.Quotient.comp r _ _
       = CategoryTheory.Quotient.comp r _ _
-    show Quot.mk _ _ = Quot.mk _ _
+    change Quot.mk _ _ = Quot.mk _ _
     exact congrArg (Quot.mk _)
       (MonoidalCategory.leftUnitor_naturality f)
   rightUnitor_naturality := by
     rintro ⟨X⟩ ⟨Y⟩ ⟨f⟩
-    show CategoryTheory.Quotient.comp r _ _
+    change CategoryTheory.Quotient.comp r _ _
       = CategoryTheory.Quotient.comp r _ _
-    show Quot.mk _ _ = Quot.mk _ _
+    change Quot.mk _ _ = Quot.mk _ _
     exact congrArg (Quot.mk _)
       (MonoidalCategory.rightUnitor_naturality f)
   pentagon := by
     rintro ⟨W⟩ ⟨X⟩ ⟨Y⟩ ⟨Z⟩
-    show CategoryTheory.Quotient.comp r _ _
+    change CategoryTheory.Quotient.comp r _ _
       = CategoryTheory.Quotient.comp r _ _
-    show Quot.mk _ _ = Quot.mk _ _
+    change Quot.mk _ _ = Quot.mk _ _
     exact congrArg (Quot.mk _) (MonoidalCategory.pentagon W X Y Z)
   triangle := by
     rintro ⟨X⟩ ⟨Y⟩
-    show CategoryTheory.Quotient.comp r _ _ = _
-    show Quot.mk _ _ = Quot.mk _ _
+    change CategoryTheory.Quotient.comp r _ _ = _
+    change Quot.mk _ _ = Quot.mk _ _
     exact congrArg (Quot.mk _) (MonoidalCategory.triangle X Y)
 
 section Symmetric
@@ -184,29 +184,29 @@ instance braidedQuotient :
     (CategoryTheory.Quotient.functor r).mapIso (β_ X.as Y.as)
   braiding_naturality_right := by
     rintro ⟨X⟩ ⟨Y⟩ ⟨Z⟩ ⟨f⟩
-    show CategoryTheory.Quotient.comp r _ _
+    change CategoryTheory.Quotient.comp r _ _
       = CategoryTheory.Quotient.comp r _ _
-    show Quot.mk _ _ = Quot.mk _ _
+    change Quot.mk _ _ = Quot.mk _ _
     exact congrArg (Quot.mk _)
       (BraidedCategory.braiding_naturality_right X f)
   braiding_naturality_left := by
     rintro ⟨X⟩ ⟨Y⟩ ⟨f⟩ ⟨Z⟩
-    show CategoryTheory.Quotient.comp r _ _
+    change CategoryTheory.Quotient.comp r _ _
       = CategoryTheory.Quotient.comp r _ _
-    show Quot.mk _ _ = Quot.mk _ _
+    change Quot.mk _ _ = Quot.mk _ _
     exact congrArg (Quot.mk _)
       (BraidedCategory.braiding_naturality_left f Z)
   hexagon_forward := by
     rintro ⟨X⟩ ⟨Y⟩ ⟨Z⟩
-    show CategoryTheory.Quotient.comp r _ _
+    change CategoryTheory.Quotient.comp r _ _
       = CategoryTheory.Quotient.comp r _ _
-    show Quot.mk _ _ = Quot.mk _ _
+    change Quot.mk _ _ = Quot.mk _ _
     exact congrArg (Quot.mk _) (BraidedCategory.hexagon_forward X Y Z)
   hexagon_reverse := by
     rintro ⟨X⟩ ⟨Y⟩ ⟨Z⟩
-    show CategoryTheory.Quotient.comp r _ _
+    change CategoryTheory.Quotient.comp r _ _
       = CategoryTheory.Quotient.comp r _ _
-    show Quot.mk _ _ = Quot.mk _ _
+    change Quot.mk _ _ = Quot.mk _ _
     exact congrArg (Quot.mk _) (BraidedCategory.hexagon_reverse X Y Z)
 
 /-- **`thm:universal-quotient` (symmetry)**: the quotient of a
@@ -216,8 +216,8 @@ instance symmetricQuotient :
     SymmetricCategory (CategoryTheory.Quotient r) where
   symmetry := by
     rintro ⟨X⟩ ⟨Y⟩
-    show CategoryTheory.Quotient.comp r _ _ = _
-    show Quot.mk _ _ = Quot.mk _ _
+    change CategoryTheory.Quotient.comp r _ _ = _
+    change Quot.mk _ _ = Quot.mk _ _
     exact congrArg (Quot.mk _) (SymmetricCategory.symmetry X Y)
 
 end Symmetric
@@ -232,6 +232,7 @@ def quotientComparison {r r' : HomRel P}
   CategoryTheory.Quotient.lift r (CategoryTheory.Quotient.functor r')
     (fun _ _ f g hr => CategoryTheory.Quotient.sound r' (h f g hr))
 
+omit [MonoidalCategory P] in
 /-- **`thm:universal-quotient` (parallel-completeness
 isomorphism)**: if the two kernel relations coincide — the
 parallel-completeness hypothesis `≡₁ = ≡∥` — the comparison functors

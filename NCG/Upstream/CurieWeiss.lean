@@ -367,10 +367,10 @@ theorem cwKernel_stationary (hN : 0 < N) (lam h : ℝ)
       intro q
       simp only [hPhi]
       refine Prod.ext ?_ ?_
-      · show Function.update (Function.update q.1 i q.2) i (q.1 i)
+      · change Function.update (Function.update q.1 i q.2) i (q.1 i)
           = q.1
         rw [Function.update_idem, Function.update_eq_self]
-      · show (Function.update q.1 i q.2) i = q.2
+      · change (Function.update q.1 i q.2) i = q.2
         rw [Function.update_self]
     calc ∑ η : Fin N → Bool, ∑ s : Bool,
           cwMeasure N lam h η * cwCond N lam h η i s
@@ -457,7 +457,7 @@ theorem cwKernel_reachable (hN : 0 < N) (lam h : ℝ)
         by_cases hlt : (j : ℕ) < k
         · rw [if_pos hlt, if_pos (Nat.lt_succ_of_lt hlt)]
         · rw [if_neg hlt, if_neg (by omega)]
-    show 0 < cwKernel N lam h
+    change 0 < cwKernel N lam h
       (fun j : Fin N => if (j : ℕ) < k then η' j else η j)
       (fun j : Fin N => if (j : ℕ) < k + 1 then η' j else η j)
     rw [hupdate]
@@ -536,6 +536,8 @@ theorem cwHeatBath_deck_covariant (lam : ℝ)
 
 section Independence
 
+-- `simp` here normalizes Bool-indexed `if` branches; a pinned simp set is brittle across goals.
+set_option linter.flexible false in
 /-- **Theorem `thm:no-affinity-orientation-implication` (orientation
 without affinity)**: the biased two-sheet chain is exactly
 reversible — every edge affinity vanishes — yet its stationary
@@ -558,13 +560,13 @@ theorem orientation_without_affinity (a b : ℝ) (ha : 0 < a)
     cases x <;> simp <;> positivity
   · intro x
     rw [Fintype.sum_bool]
-    cases x <;> simp <;> ring
+    cases x <;> simp
   · intro x y
-    cases x <;> cases y <;> simp <;> field_simp <;> ring
+    cases x <;> cases y <;> simp <;> field_simp
   · intro x y
     apply edgeAff_eq_zero_of_balanced
     intro x' y'
-    cases x' <;> cases y' <;> simp <;> field_simp <;> ring
+    cases x' <;> cases y' <;> simp <;> field_simp
   · rw [Fintype.sum_bool]
     have key : b / (a + b) * 1 + a / (a + b) * (-1) ≠ 0 := by
       intro hzero
@@ -604,7 +606,7 @@ symmetric two-sheet chain has uniform-product stationary law, zero
 deck-odd order parameter, and a directed cycle of affinity
 `3 log(a/b) ≠ 0` — nonzero circulation with no selected sheet. -/
 theorem affinity_without_orientation (a b σ : ℝ) (ha : 0 < a)
-    (hb : 0 < b) (hab : a ≠ b) (hσ0 : 0 < σ) (hσ1 : σ < 1) :
+    (hb : 0 < b) (hab : a ≠ b) (_hσ0 : 0 < σ) (hσ1 : σ < 1) :
     ∃ (π : (ZMod 3 × Bool) → ℝ) (J : (ZMod 3 × Bool) → ℝ)
       (γ : ℕ → (ZMod 3 × Bool)) (M : ℕ),
       (∀ x, 0 < π x)

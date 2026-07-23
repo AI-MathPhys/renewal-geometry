@@ -9,7 +9,8 @@ import NCG.Graph.SignCocycle
 # The stable-record determinant orientation class
 
 Covers `prop:record-determinant-orientation` from
-`manuscripts/lorentzian_emergence/lorentzian_emergence.tex`: assigning to every edge of a predictive graph
+`manuscripts/lorentzian_emergence/lorentzian_emergence.tex`: assigning to every edge of a
+predictive graph
 an invertible record transport `L_e` on a constant-rank real record
 space defines the determinant-parity sign cochain
 `χ_rec(e) = sgn det L_e` (written additively in `ℤ/2`, so the
@@ -85,7 +86,7 @@ theorem recSign_basisChange (L : G.E → Matrix (Fin r) (Fin r) ℝ)
     recSign (fun e => (C (G.tgt e))⁻¹ * L e * C (G.src e))
       = gaugeAct (fun v => orSign (C v).det) (recSign L) := by
   funext e
-  show orSign ((C (G.tgt e))⁻¹ * L e * C (G.src e)).det
+  change orSign ((C (G.tgt e))⁻¹ * L e * C (G.src e)).det
       = orSign (L e).det + orSign (C (G.src e)).det
         + orSign (C (G.tgt e)).det
   rw [Matrix.det_mul, Matrix.det_mul, Matrix.det_nonsing_inv, Ring.inverse_eq_inv]
@@ -124,15 +125,15 @@ theorem walkTransport_det_ne_zero
   intro u v p
   induction p with
   | nil w =>
-    show (1 : Matrix (Fin r) (Fin r) ℝ).det ≠ 0
+    change (1 : Matrix (Fin r) (Fin r) ℝ).det ≠ 0
     rw [Matrix.det_one]
     exact one_ne_zero
   | fwd e p ih =>
-    show (walkTransport L p * L e).det ≠ 0
+    change (walkTransport L p * L e).det ≠ 0
     rw [Matrix.det_mul]
     exact mul_ne_zero ih (hL e)
   | bwd e p ih =>
-    show (walkTransport L p * (L e)⁻¹).det ≠ 0
+    change (walkTransport L p * (L e)⁻¹).det ≠ 0
     rw [Matrix.det_mul, Matrix.det_nonsing_inv, Ring.inverse_eq_inv]
     exact mul_ne_zero ih (inv_ne_zero (hL e))
 
@@ -149,10 +150,10 @@ theorem holonomy_recSign {L : G.E → Matrix (Fin r) (Fin r) ℝ}
   intro u v p
   induction p with
   | nil w =>
-    show (0 : ZMod 2) = orSign (1 : Matrix (Fin r) (Fin r) ℝ).det
+    change (0 : ZMod 2) = orSign (1 : Matrix (Fin r) (Fin r) ℝ).det
     rw [Matrix.det_one, orSign_one]
   | fwd e p ih =>
-    show recSign L e + p.holonomy (recSign L)
+    change recSign L e + p.holonomy (recSign L)
         = orSign (walkTransport L p * L e).det
     rw [Matrix.det_mul,
       orSign_mul (walkTransport_det_ne_zero hL p) (hL e), ih]
@@ -161,7 +162,7 @@ theorem holonomy_recSign {L : G.E → Matrix (Fin r) (Fin r) ℝ}
     rw [recSign]
     ring
   | bwd e p ih =>
-    show recSign L e + p.holonomy (recSign L)
+    change recSign L e + p.holonomy (recSign L)
         = orSign (walkTransport L p * (L e)⁻¹).det
     rw [Matrix.det_mul, Matrix.det_nonsing_inv, Ring.inverse_eq_inv,
       orSign_mul (walkTransport_det_ne_zero hL p)

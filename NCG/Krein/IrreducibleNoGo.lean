@@ -49,8 +49,8 @@ theorem eq_one_or_neg_one_of_scalar {J : H →L[ℂ] H}
   obtain ⟨x, hx⟩ := exists_ne (0 : H)
   have hsq : (c * c) • x = x := by
     have h := congrArg (fun T : H →L[ℂ] H => T x) hJ.mul_self
-    simp only [ContinuousLinearMap.mul_apply, ContinuousLinearMap.one_apply,
-      hc, ContinuousLinearMap.smul_apply] at h
+    simp only [mul_apply_eq_comp, one_apply_eq_self,
+      hc, smul_apply] at h
     simpa [smul_smul] using h
   have hc2 : c * c = 1 := by
     have h0 : (c * c - 1) • x = 0 := by

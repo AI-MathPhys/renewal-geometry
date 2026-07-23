@@ -80,7 +80,7 @@ theorem even_finrank_of_isAlt_nondegenerate' :
     obtain ⟨x, hx⟩ := exists_ne (0 : V)
     have hy : ∃ y₀, B x y₀ ≠ 0 := by
       by_contra h
-      push_neg at h
+      push Not at h
       exact hx (hnd.1 x h)
     obtain ⟨y₀, hy₀⟩ := hy
     obtain ⟨y, hxy⟩ : ∃ y : V, B x y = 1 :=

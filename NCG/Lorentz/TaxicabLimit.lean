@@ -57,7 +57,7 @@ theorem geomMean_superadditive {c : ℕ} (hc : 0 < c) (a b : Fin c → ℝ)
         have h1 := ha i
         have h2 := hb i
         linarith) _
-  · push_neg at hzero
+  · push Not at hzero
     have hs : ∀ i, 0 < a i + b i := fun i =>
       lt_of_le_of_ne (by
         have h1 := ha i

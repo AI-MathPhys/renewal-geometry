@@ -99,11 +99,11 @@ noncomputable def mixCfg (T : Finset V2) (τ' τ : V2 → Bool) :
   fun w => if w ∈ T then τ' w else τ w
 
 open Classical in
-theorem mixCfg_insert {a : V2} {T : Finset V2} (ha : a ∉ T)
+theorem mixCfg_insert {a : V2} {T : Finset V2} (_ha : a ∉ T)
     (τ' τ : V2 → Bool) :
     mixCfg (insert a T) τ' τ = setSite a (τ' a) (mixCfg T τ' τ) := by
   funext w
-  show (if w ∈ insert a T then τ' w else τ w)
+  change (if w ∈ insert a T then τ' w else τ w)
     = if w = a then τ' a else (if w ∈ T then τ' w else τ w)
   by_cases h : w = a
   · rw [if_pos (by rw [h]; exact Finset.mem_insert_self a T),
@@ -178,11 +178,11 @@ theorem card_nbrs (v : V2) : (nbrs v).card = 4 := by
   obtain ⟨x, y⟩ := v
   rw [nbrs]
   rw [Finset.card_insert_of_notMem (by
-    simp [Prod.ext_iff] <;> omega)]
+    simp [Prod.ext_iff] ; omega)]
   rw [Finset.card_insert_of_notMem (by
-    simp [Prod.ext_iff] <;> omega)]
+    simp [Prod.ext_iff])]
   rw [Finset.card_insert_of_notMem (by
-    simp [Prod.ext_iff] <;> omega)]
+    simp [Prod.ext_iff] ; omega)]
   rw [Finset.card_singleton]
 
 /-- The neighbour field: the sum of the four adjacent spins. -/
@@ -221,7 +221,7 @@ theorem patchV_singleton (v : V2)
     patchV {v} η τ
       = setSite v (η ⟨v, Finset.mem_singleton_self v⟩) τ := by
   funext w
-  show (if h : w ∈ ({v} : Finset V2) then η ⟨w, h⟩ else τ w)
+  change (if h : w ∈ ({v} : Finset V2) then η ⟨w, h⟩ else τ w)
     = if w = v then η ⟨v, Finset.mem_singleton_self v⟩ else τ w
   by_cases h : w = v
   · subst h
@@ -248,26 +248,26 @@ theorem eLoc_singleton (v : V2) (θ : ℝ) (b : Bool)
     unfold eVol
     rw [Finset.singleton_biUnion]
   rw [hbi]
-  rw [Finset.sum_insert (by simp [Prod.ext_iff] <;> omega),
-    Finset.sum_insert (by simp [Prod.ext_iff] <;> omega),
-    Finset.sum_insert (by simp [Prod.ext_iff] <;> omega),
+  rw [Finset.sum_insert (by simp [Prod.ext_iff] ; omega),
+    Finset.sum_insert (by simp [Prod.ext_iff] ; omega),
+    Finset.sum_insert (by simp [Prod.ext_iff]),
     Finset.sum_singleton]
   have hep1t : ep1 ((((x, y) : V2), true) : IEdge)
       = ((x, y) : V2) + ((1 : ℤ), (0 : ℤ)) := by
-    show ((x, y) : V2) + edir true = _
+    change ((x, y) : V2) + edir true = _
     rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
   have hep1f : ep1 ((((x, y) : V2), false) : IEdge)
       = ((x, y) : V2) + ((0 : ℤ), (1 : ℤ)) := by
-    show ((x, y) : V2) + edir false = _
+    change ((x, y) : V2) + edir false = _
     rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
   have hep3 : ep1 ((((x, y) : V2) - ((1 : ℤ), (0 : ℤ)), true)
       : IEdge) = ((x, y) : V2) := by
-    show ((x, y) : V2) - ((1 : ℤ), (0 : ℤ)) + edir true = _
+    change ((x, y) : V2) - ((1 : ℤ), (0 : ℤ)) + edir true = _
     rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
     exact sub_add_cancel _ _
   have hep4 : ep1 ((((x, y) : V2) - ((0 : ℤ), (1 : ℤ)), false)
       : IEdge) = ((x, y) : V2) := by
-    show ((x, y) : V2) - ((0 : ℤ), (1 : ℤ)) + edir false = _
+    change ((x, y) : V2) - ((0 : ℤ), (1 : ℤ)) + edir false = _
     rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
     exact sub_add_cancel _ _
   have hne1 : ((x, y) : V2) + ((1 : ℤ), (0 : ℤ)) ≠ ((x, y) : V2) := by
@@ -358,7 +358,7 @@ theorem tanh_form (θ : ℝ) :
   rw [h3, div_eq_div_iff hp.ne' hp2.ne', h2]
   linear_combination (-2 * Real.exp θ) * h1
 
-theorem tanh_nonneg' {θ : ℝ} (hθ : 0 ≤ θ) : 0 ≤ Real.tanh θ := by
+theorem tanh_nonneg {θ : ℝ} (hθ : 0 ≤ θ) : 0 ≤ Real.tanh θ := by
   rw [tanh_form]
   have h1 : (1 : ℝ) ≤ Real.exp (2 * θ) := by
     calc (1 : ℝ) = Real.exp 0 := Real.exp_zero.symm
@@ -529,8 +529,8 @@ theorem nbrField_gap {u v : V2} (hu : u ∈ nbrs v)
   all_goals rw [setSite_self, setSite_self,
     setSite_other (by simp [Prod.ext_iff] <;> omega) true τ,
     setSite_other (by simp [Prod.ext_iff] <;> omega) false τ,
-    setSite_other (by simp [Prod.ext_iff] <;> omega) true τ,
-    setSite_other (by simp [Prod.ext_iff] <;> omega) false τ,
+    setSite_other (by simp [Prod.ext_iff]) true τ,
+    setSite_other (by simp [Prod.ext_iff]) false τ,
     setSite_other (by simp [Prod.ext_iff] <;> omega) true τ,
     setSite_other (by simp [Prod.ext_iff] <;> omega) false τ]
   all_goals rw [hs1, hs2, abs_le]
@@ -542,13 +542,13 @@ oscillation to each neighbour and preserves the rest. -/
 theorem oscLe_oneSite_other {u v : V2} (huv : u ≠ v) {θ : ℝ}
     (hθ : 0 ≤ θ) {f : (V2 → Bool) → ℝ} {δu δv : ℝ}
     (hu : OscLe f u δu) (hv : OscLe f v δv)
-    (hδu : 0 ≤ δu) (hδv : 0 ≤ δv) :
+    (_hδu : 0 ≤ δu) (_hδv : 0 ≤ δv) :
     OscLe (oneSite v θ f) u
       (δu + (if u ∈ nbrs v then Real.tanh θ else 0) * δv) := by
   have hcoeff : 0 ≤ (if u ∈ nbrs v then Real.tanh θ else 0) := by
     by_cases h : u ∈ nbrs v
     · rw [if_pos h]
-      exact tanh_nonneg' hθ
+      exact tanh_nonneg hθ
     · rw [if_neg h]
   intro τ
   have hp1 := condP_pos v θ (setSite u true τ)
@@ -809,7 +809,7 @@ theorem greedy_step {θ C : ℝ} (hθ : 0 ≤ θ)
     · rw [if_neg h1]
       by_cases h2 : u ∈ nbrs v
       · rw [if_pos h2]
-        have h3 := mul_nonneg (tanh_nonneg' hθ) (D.hm v)
+        have h3 := mul_nonneg (tanh_nonneg hθ) (D.hm v)
         have h4 := D.hm u
         linarith
       · rw [if_neg h2]
@@ -1062,23 +1062,23 @@ theorem gibbsPlus_mono (θ : ℝ) {f g : (V2 → Bool) → ℝ}
     {Cf Cg : ℝ} (hf : ∀ τ, |f τ| ≤ Cf) (hg : ∀ τ, |g τ| ≤ Cg)
     (h : ∀ τ, f τ ≤ g τ) : gibbsPlus θ f ≤ gibbsPlus θ g :=
   le_of_tendsto_of_tendsto' (gibbsPlus_spec (θ := θ) hf)
-    (gibbsPlus_spec (θ := θ) hg) (fun n => expec_mono θ h)
+    (gibbsPlus_spec (θ := θ) hg) (fun _n => expec_mono θ h)
 
 /-- **The plus phase is a DLR state.** -/
 noncomputable def gibbsPlusState (θ : ℝ) : DLRState θ where
   val := gibbsPlus θ
   const := gibbsPlus_const θ
-  mono := fun {f g Cf Cg} hf hg h => gibbsPlus_mono θ hf hg h
-  dlr := fun v {f C} hf => gibbsPlus_dlr θ {v} hf
+  mono := fun {_f _g _Cf _Cg} hf hg h => gibbsPlus_mono θ hf hg h
+  dlr := fun v {_f _C} hf => gibbsPlus_dlr θ {v} hf
 
 /-- **The minus phase is a DLR state.** -/
 noncomputable def gibbsMinusState (θ : ℝ) : DLRState θ where
   val := gibbsMinus θ
   const := gibbsMinus_const θ
-  mono := fun {f g Cf Cg} hf hg h =>
+  mono := fun {_f _g _Cf _Cg} hf hg h =>
     gibbsPlus_mono θ (fun τ => hf (flipAll τ))
       (fun τ => hg (flipAll τ)) (fun τ => h (flipAll τ))
-  dlr := fun v {f C} hf => gibbsMinus_dlr θ {v} hf
+  dlr := fun v {_f _C} hf => gibbsMinus_dlr θ {v} hf
 
 /-- **Clause (i), uniqueness**: at high temperature the plus and
 minus phases coincide on every bounded local observable — the
@@ -1100,7 +1100,7 @@ theorem gibbsPlus_spin_zero {θ : ℝ} (hθ : 0 ≤ θ)
     gibbsPlus θ (fun τ => spin (τ 0)) = 0 := by
   have hloc : IsLocal {(0 : V2)} (fun τ => spin (τ 0)) := by
     intro τ τ' h
-    show spin (τ 0) = spin (τ' 0)
+    change spin (τ 0) = spin (τ' 0)
     rw [h 0 (Finset.mem_singleton_self 0)]
   have h1 := gibbsPlus_eq_gibbsMinus_highTemp hθ hα
     (fun τ => spin_abs_le _) hloc

@@ -20,8 +20,8 @@ because powers of the submatrix are entrywise dominated by the
 corresponding entries of powers of `B` (paths inside `C` are a
 subset of all paths, `entry_pow_submatrix_le`), so the entry-sum
 gauges compare and the growth limits follow.  The upper-bound half
-(`ρ(B) = max_j ρ(B|C_j)` needs the block-triangular first-passage
-decomposition) remains open.
+(`ρ(B) = max_j ρ(B|C_j)`) is completed in `NCG/Lorentz/SCCRadius.lean`
+(`pRad_attained_on_component`).
 -/
 
 namespace NCG
@@ -31,6 +31,7 @@ open Filter
 variable {V : Type*} [Fintype V] [DecidableEq V] [Nonempty V]
 variable {S : Type*} [Fintype S] [DecidableEq S] [Nonempty S]
 
+omit [Nonempty S] [Nonempty V] in
 /-- Powers of a principal submatrix are entrywise dominated by the
 corresponding entries of powers of the matrix. -/
 theorem entry_pow_submatrix_le {B : Matrix V V ℝ}
@@ -69,6 +70,7 @@ theorem entry_pow_submatrix_le {B : Matrix V V ℝ}
       (Finset.subset_univ _) fun w _ _ => ?_
     exact mul_nonneg (entryNonneg_pow hB k _ _) (hB _ _)
 
+omit [Nonempty S] [Nonempty V] in
 /-- The entry-sum gauges compare. -/
 theorem entrySum_pow_submatrix_le {B : Matrix V V ℝ}
     (hB : EntryNonneg B) (e : S ↪ V) (k : ℕ) :

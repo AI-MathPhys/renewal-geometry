@@ -93,16 +93,20 @@ noncomputable def piw (x : V) : ℝ := D.ν x * D.h x
 /-- The stationary edge flow `F_e = π_{s(e)} p_e`. -/
 noncomputable def F (e : E) : ℝ := D.piw (D.src e) * D.p e
 
+omit [DecidableEq V] in
 theorem q_pos (e : E) : 0 < D.q e :=
   mul_pos (D.c_pos e) (Real.exp_pos _)
 
+omit [DecidableEq V] in
 theorem p_pos (e : E) : 0 < D.p e :=
   div_pos (mul_pos (mul_pos (D.q_pos e) (Real.exp_pos _))
     (D.h_pos _)) (D.h_pos _)
 
+omit [DecidableEq V] in
 theorem piw_pos (x : V) : 0 < D.piw x :=
   mul_pos (D.ν_pos x) (D.h_pos x)
 
+omit [DecidableEq V] in
 theorem F_pos (e : E) : 0 < D.F e :=
   mul_pos (D.piw_pos _) (D.p_pos e)
 
@@ -110,6 +114,7 @@ theorem F_pos (e : E) : 0 < D.F e :=
 def barEquiv : Equiv.Perm E :=
   Function.Involutive.toPerm D.bar D.bar_invol
 
+omit [DecidableEq V] in
 @[simp] theorem barEquiv_apply (e : E) : D.barEquiv e = D.bar e := rfl
 
 /-- **Hypothesis (from `constr:pressure-law`)**: the Doob edge law is
@@ -152,6 +157,7 @@ theorem sum_F_eq_one (hst : D.Stochastic)
   rw [Finset.sum_congr rfl fun x _ => h2 x]
   exact hprob
 
+omit [DecidableEq V] in
 /-- The reversed flow has the same total mass. -/
 theorem sum_F_bar_eq_sum : ∑ e, D.F (D.bar e) = ∑ e, D.F e :=
   Equiv.sum_comp D.barEquiv D.F
@@ -170,6 +176,7 @@ noncomputable def scriptA (e : E) : ℝ :=
 /-- The entropy production `σ = Σ F_e 𝒜(e) = D(F ‖ F∘bar)`. -/
 noncomputable def sigma : ℝ := ∑ e, D.F e * D.scriptA e
 
+omit [DecidableEq V] in
 /-- **Definition `def:pressure-entropy-data` (Gibbs inequality)**:
 the entropy production is nonnegative. -/
 theorem sigma_nonneg : 0 ≤ D.sigma := by
@@ -219,6 +226,7 @@ theorem sigma_nonneg : 0 ≤ D.sigma := by
 noncomputable def vlog (x : V) : ℝ :=
   Real.log (D.h x) - Real.log (D.ν x)
 
+omit [DecidableEq V] in
 /-- Explicit logarithm of the stationary edge flow. -/
 theorem log_F (e : E) : Real.log (D.F e)
     = Real.log (D.ν (D.src e)) + Real.log (D.c e) + D.A e / 2
@@ -240,6 +248,7 @@ theorem log_F (e : E) : Real.log (D.F e)
     Real.log_mul hν hc, Real.log_exp, Real.log_exp]
   ring
 
+omit [DecidableEq V] in
 /-- **Lemma `lem:stationary-affinity-cohomology` (identity)**: the
 stationary affinity is the resolved affinity up to the coboundary of
 the Doob gauge potential: `𝒜(e) = A(e) + v(t(e)) − v(s(e))`. -/
@@ -321,6 +330,7 @@ noncomputable def entropyRate : ℝ := -∑ e, D.F e * Real.log (D.p e)
 /-- The conductance flux `κ_c = Σ F_e log c_e`. -/
 noncomputable def kappaC : ℝ := ∑ e, D.F e * Real.log (D.c e)
 
+omit [DecidableEq V] in
 /-- Explicit logarithm of the Doob edge law. -/
 theorem log_p (e : E) : Real.log (D.p e)
     = Real.log (D.c e) + D.A e / 2 - D.β * D.len e

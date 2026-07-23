@@ -165,6 +165,7 @@ theorem quadratic_refinement
   rw [hBl, hBr, hBr]
   abel
 
+omit [AddCommGroup L] in
 /-- The polar form is alternating. -/
 theorem polar_alt (γ : L) : B γ γ + B γ γ = 0 :=
   CharTwo.add_self_eq_zero _
@@ -254,6 +255,7 @@ theorem full_cocycle (J : G) (χ : L → ZMod 2) (hJ2 : J * J = 1)
 
 end RevisionFamily
 
+omit [AddCommGroup L] in
 /-- **Proposition `prop:full-revision-cocycle-main`** (assembled polar
 form): the alternating form of the extended multiplier is
 `ω̂((α,e),(β,d)) = ω(α,β) + e·χ(β) + d·χ(α)`. -/

@@ -233,7 +233,7 @@ theorem odd_access_fixed_points {d : ℕ} (hodd : Odd d) (hpos : 0 < d) :
   constructor
   · intro hfix
     by_contra hne
-    push_neg at hne
+    push Not at hne
     have hd5 : 5 ≤ d := by
       obtain ⟨k, rfl⟩ := hodd
       omega

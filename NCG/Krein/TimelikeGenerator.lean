@@ -66,6 +66,6 @@ theorem hyperbolic_pair_normal_form :
   refine ⟨?_, ?_, ?_⟩ <;>
     · ext i j
       fin_cases i <;> fin_cases j <;>
-        simp [Matrix.mul_apply, Fin.sum_univ_two, Matrix.one_apply]
+        simp [Matrix.mul_apply, Fin.sum_univ_two]
 
 end NCG

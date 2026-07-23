@@ -41,9 +41,11 @@ variable {ι : Type*} [DecidableEq ι]
 noncomputable def l2normSq (f : ι →₀ ℂ) : ℝ :=
   ∑ i ∈ f.support, ‖f i‖ ^ 2
 
+omit [DecidableEq ι] in
 theorem l2normSq_nonneg (f : ι →₀ ℂ) : 0 ≤ l2normSq f :=
-  Finset.sum_nonneg fun i _ => sq_nonneg _
+  Finset.sum_nonneg fun _i _ => sq_nonneg _
 
+omit [DecidableEq ι] in
 /-- The `ℓ²`-norm may be computed over any finite superset of the
 support. -/
 theorem l2normSq_eq_sum_subset (f : ι →₀ ℂ) {T : Finset ι}
@@ -58,12 +60,13 @@ theorem l2normSq_eq_sum_subset (f : ι →₀ ℂ) {T : Finset ι}
 theorem shiftOp_apply_sum (s : ι → ι) (f : ι →₀ ℂ) (y : ι) :
     (shiftOp s f) y
       = ∑ x ∈ f.support.filter (fun x => s x = y), f x := by
-  show (Finsupp.mapDomain s f) y = _
+  change (Finsupp.mapDomain s f) y = _
   rw [Finsupp.mapDomain, Finsupp.sum_apply, Finsupp.sum,
     Finset.sum_filter]
   refine Finset.sum_congr rfl fun x _ => ?_
   rw [Finsupp.single_apply]
 
+omit [DecidableEq ι] in
 /-- Cauchy–Schwarz for complex sums:
 `‖Σ_A f‖² ≤ |A|·Σ_A ‖f‖²`. -/
 theorem normSq_sum_le (A : Finset ι) (f : ι → ℂ) :
@@ -87,7 +90,7 @@ theorem l2normSq_shiftOp_le (s : ι → ι) {B : ℕ}
     (f : ι →₀ ℂ) :
     l2normSq (shiftOp s f) ≤ (B : ℝ) * l2normSq f := by
   have hsupp : (shiftOp s f).support ⊆ f.support.image s := by
-    show (Finsupp.mapDomain s f).support ⊆ _
+    change (Finsupp.mapDomain s f).support ⊆ _
     exact Finsupp.mapDomain_support
   rw [l2normSq_eq_sum_subset _ hsupp]
   calc ∑ y ∈ f.support.image s, ‖(shiftOp s f) y‖ ^ 2
@@ -126,10 +129,12 @@ theorem fibreIndicator_apply (A : Finset ι) (i : ι) :
     fibreIndicator A i = if i ∈ A then (1:ℂ) else 0 := by
   unfold fibreIndicator
   rw [Finset.sum_apply']
-  simp [Finsupp.single_apply, Finset.sum_ite_eq]
+  simp [Finsupp.single_apply]
 
+omit [DecidableEq ι] in
 theorem l2normSq_fibreIndicator (A : Finset ι) :
     l2normSq (fibreIndicator A) = A.card := by
+  classical
   have hsupp : (fibreIndicator A).support ⊆ A := by
     intro i hi
     by_contra hiA
@@ -141,6 +146,7 @@ theorem l2normSq_fibreIndicator (A : Finset ι) :
     rw [fibreIndicator_apply, if_pos hi, norm_one, one_pow]]
   rw [Finset.sum_const, nsmul_eq_mul, mul_one]
 
+omit [DecidableEq ι] in
 /-- **Theorem `thm:fibre-dichotomy`, sharpness**: a fibre with `k`
 points carries the indicator witness with `‖Ŝf‖² = k·‖f‖²` — the shift
 norm² equals the supremal fibre cardinality. -/
@@ -171,6 +177,7 @@ theorem l2normSq_shiftOp_indicator (s : ι → ι) (y : ι) (A : Finset ι)
   rw [hsingle]
   ring
 
+omit [DecidableEq ι] in
 /-- **Theorem `thm:fibre-dichotomy`, unbounded half** (with
 `cor:sharp-existence`): unbounded fibres defeat every candidate bound —
 the descended shift extends to no bounded operator on `ℓ²`.  Combined
@@ -201,6 +208,7 @@ increment multiplier, so bounded increments bound it and unbounded
 increments defeat every bound — for **every** bi-Lipschitz
 reparametrisation of the length diagonal. -/
 
+omit [DecidableEq ι] in
 /-- Pointwise action of the diagonal operator. -/
 theorem diagOp_apply (w : ι → ℂ) (f : ι →₀ ℂ) (i : ι) :
     diagOp w f i = w i * f i := by
@@ -214,8 +222,9 @@ theorem diagOp_apply (w : ι → ℂ) (f : ι →₀ ℂ) (i : ι) :
       rcases eq_or_ne j i with h | h
       · subst h
         rw [Finsupp.single_eq_same, Finsupp.single_eq_same]
-      · simp [Finsupp.single_apply, h]
+      · simp [h]
 
+omit [DecidableEq ι] in
 /-- **Commutator factorization**: `[diagOp d, shiftOp s]` is the shift
 composed with the diagonal increment multiplier `d∘s − d`. -/
 theorem diagOp_comm_shiftOp_eq (d : ι → ℂ) (s : ι → ι) :
@@ -226,6 +235,7 @@ theorem diagOp_comm_shiftOp_eq (d : ι → ℂ) (s : ι → ι) :
   rw [diagOp_comm_shiftOp_single, LinearMap.comp_apply, diagOp_single,
     shiftOp_single, Finsupp.smul_single, smul_eq_mul]
 
+omit [DecidableEq ι] in
 /-- A diagonal with uniformly bounded symbol is `ℓ²`-bounded with
 norm² at most the symbol bound squared. -/
 theorem l2normSq_diagOp_le (w : ι → ℂ) (C : ℝ)
@@ -264,11 +274,13 @@ theorem l2normSq_comm_le (d : ι → ℂ) (s : ι → ι) {B : ℕ} (C : ℝ)
           (l2normSq_diagOp_le _ C hC f) (Nat.cast_nonneg B)
     _ = (B : ℝ) * C ^ 2 * l2normSq f := by ring
 
+omit [DecidableEq ι] in
 theorem l2normSq_single_one (x : ι) :
     l2normSq (Finsupp.single x (1 : ℂ)) = 1 := by
   rw [l2normSq_eq_sum_subset _ Finsupp.support_single_subset,
     Finset.sum_singleton, Finsupp.single_eq_same, norm_one, one_pow]
 
+omit [DecidableEq ι] in
 /-- The commutator on a basis vector has `ℓ²`-norm² exactly the
 squared increment. -/
 theorem l2normSq_comm_single (d : ι → ℂ) (s : ι → ι) (x : ι) :
@@ -283,6 +295,7 @@ theorem l2normSq_comm_single (d : ι → ℂ) (s : ι → ι) (x : ι) :
   · rw [l2normSq_eq_sum_subset _ Finsupp.support_single_subset,
       Finset.sum_singleton, Finsupp.single_eq_same]
 
+omit [DecidableEq ι] in
 /-- **`thm:fibre-dichotomy` (2b) / `cor:sharp-existence` (increment
 half, unbounded direction)**: unbounded `Λ_min`-increments defeat
 every candidate commutator bound for **every** bi-Lipschitz-below

@@ -180,10 +180,10 @@ theorem isExtremeDir_lorentzCone [StrictConvexSpace ℝ E] {v : E}
     (sameRay_iff_norm_add.mpr hadd).exists_eq_smul_add
   rw [h2] at ha2
   refine ⟨s, Prod.ext_iff.mpr ⟨?_, ?_⟩⟩
-  · show a₁ = (s • ((‖v‖ : ℝ), v)).1
+  · change a₁ = (s • ((‖v‖ : ℝ), v)).1
     rw [Prod.smul_fst, smul_eq_mul, ← hea, ha2, norm_smul,
       Real.norm_eq_abs, abs_of_nonneg hs]
-  · show a₂ = (s • ((‖v‖ : ℝ), v)).2
+  · change a₂ = (s • ((‖v‖ : ℝ), v)).2
     rw [Prod.smul_snd]
     exact ha2
 

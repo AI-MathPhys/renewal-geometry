@@ -56,7 +56,6 @@ theorem fibreWeight_pos (k : ℕ) (hk : k ≤ N) :
   have h2 : (0 : ℝ) < (N.choose k : ℝ) := Nat.cast_pos.mpr h1
   positivity
 
-include hN in
 theorem fibreMass_eq_weight_div (k : ℕ) :
     fibreMass N lam h k
       = fibreWeight N lam h k / cwPartition N lam h := by
@@ -94,7 +93,6 @@ theorem fibreWeight_reflect (k : ℕ) (hk : k ≤ N) :
   rw [Nat.cast_sub hk]
   ring
 
-include hN in
 /-- The partition function is the total fibre weight. -/
 theorem cwPartition_eq_sum_fibreWeight :
     cwPartition N lam h
@@ -102,7 +100,7 @@ theorem cwPartition_eq_sum_fibreWeight :
   have h1 : ∀ k ∈ Finset.range (N + 1),
       fibreMass N lam h k
         = fibreWeight N lam h k / cwPartition N lam h :=
-    fun k _ => fibreMass_eq_weight_div hN lam h k
+    fun k _ => fibreMass_eq_weight_div lam h k
   have h2 := fibreMass_total (N := N) (lam := lam) (h := h)
   rw [Finset.sum_congr rfl h1, ← Finset.sum_div] at h2
   have hZ := cwPartition_pos N lam h
@@ -195,7 +193,7 @@ theorem hypWeight_le_one {N r j k : ℕ} (hjr : j ≤ r) (hrN : r ≤ N)
             have hden : (0 : ℝ) < ((N : ℝ) - j) - i := by linarith
             positivity
         _ = 1 := one_mul _
-    · push_neg at hwin
+    · push Not at hwin
       rw [show hypWeight N r j k = 0 from by
         unfold hypWeight
         rw [Nat.descFactorial_eq_zero_iff_lt.mpr hwin]
@@ -818,7 +816,7 @@ theorem cw_well_mass_bound
       rw [not_or] at h5
       exact ⟨h5.1, h5.2⟩
   have hZsum : cwPartition N lam h = Tp + Tm + R := by
-    rw [cwPartition_eq_sum_fibreWeight hN lam h]
+    rw [cwPartition_eq_sum_fibreWeight lam h]
     have hsplit1 := Finset.sum_filter_add_sum_filter_not
       (Finset.range (N + 1)) Pp (fibreWeight N lam h)
     have hsplit2 := Finset.sum_filter_add_sum_filter_not
@@ -988,14 +986,14 @@ theorem cw_well_mass_bound
   have hρ_eq : R = ρ * (Tp + Tm + R) := by
     rw [hρ, hR]
     rw [Finset.sum_congr rfl fun k hk =>
-      fibreMass_eq_weight_div hN lam h k]
+      fibreMass_eq_weight_div lam h k]
     rw [← Finset.sum_div, ← hZsum]
     field_simp [hZ.ne']
   -- assemble via the fraction sandwich
   have hmass : ∑ k ∈ Wp, fibreMass N lam h k
       = Tp / (Tp + Tm + R) := by
     rw [Finset.sum_congr rfl fun k hk =>
-      fibreMass_eq_weight_div hN lam h k]
+      fibreMass_eq_weight_div lam h k]
     rw [← Finset.sum_div, ← hZsum, hTp]
   rw [hmass]
   have hρ0 : 0 ≤ ρ := by
@@ -2002,10 +2000,10 @@ theorem cw_weak_conv_pure (hlam : 1 < lam)
   have hmassWm_eq : massWm = Tm / cwPartition N lam (hseq N) := by
     rw [hmWm, hTm]
     rw [Finset.sum_congr rfl fun k hk =>
-      fibreMass_eq_weight_div hNpos lam (hseq N) k]
+      fibreMass_eq_weight_div lam (hseq N) k]
     rw [← Finset.sum_div]
   have hTp_le_Z : Tp ≤ cwPartition N lam (hseq N) := by
-    rw [cwPartition_eq_sum_fibreWeight hNpos lam (hseq N), hTp]
+    rw [cwPartition_eq_sum_fibreWeight lam (hseq N), hTp]
     refine Finset.sum_le_sum_of_subset_of_nonneg
       (Finset.filter_subset _ _) fun k hk _ => ?_
     exact (fibreWeight_pos lam (hseq N) k (Nat.lt_succ_iff.mp
@@ -2378,7 +2376,7 @@ variable {lam h mhat : ℝ}
 
 /-- Gap of the field pressure outside the unique maximizer well. -/
 theorem cw_gap_field
-    (hmem : mhat ∈ Set.Icc (-1 : ℝ) 1)
+    (_hmem : mhat ∈ Set.Icc (-1 : ℝ) 1)
     (hmax : IsMaxOn (cwPressure lam h) (Set.Icc (-1 : ℝ) 1) mhat)
     (huniq : ∀ m₁ ∈ Set.Icc (-1 : ℝ) 1,
       IsMaxOn (cwPressure lam h) (Set.Icc (-1 : ℝ) 1) m₁
@@ -2434,7 +2432,7 @@ theorem cw_gap_field
 /-- Fixed-field off-well mass decay. -/
 theorem cw_rest_decay_fixed (lam h : ℝ)
     (hmem : mhat ∈ Set.Icc (-1 : ℝ) 1)
-    (hint : mhat ∈ Set.Ioo (-1 : ℝ) 1)
+    (_hint : mhat ∈ Set.Ioo (-1 : ℝ) 1)
     (hmax : IsMaxOn (cwPressure lam h) (Set.Icc (-1 : ℝ) 1) mhat)
     (huniq : ∀ m₁ ∈ Set.Icc (-1 : ℝ) 1,
       IsMaxOn (cwPressure lam h) (Set.Icc (-1 : ℝ) 1) m₁

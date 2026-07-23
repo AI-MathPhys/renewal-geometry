@@ -170,7 +170,7 @@ noncomputable def pathClock (G : Multigraph) [DecidableEq G.V]
     by_cases hc : G.tgt e = v
     · rw [dif_pos hc, Option.some.injEq] at h
       subst h
-      show ((e :: l).map ℓ).sum = (l.map ℓ).sum + ℓ e
+      change ((e :: l).map ℓ).sum = (l.map ℓ).sum + ℓ e
       rw [List.map_cons, List.sum_cons]
       ring
     · rw [dif_neg hc] at h

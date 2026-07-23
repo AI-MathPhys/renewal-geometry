@@ -36,7 +36,7 @@ theorem isotropy_not_derived {d : ℕ} (hd : 2 ≤ d) :
   set i0 : Fin d := ⟨0, by omega⟩ with hi0
   refine ⟨fun i => (if i = i0 then 2 else 1) / ((d : ℝ) + 1),
     fun i => ?_, ?_, ?_⟩
-  · show (0:ℝ) < (if i = i0 then (2:ℝ) else 1) / ((d : ℝ) + 1)
+  · change (0:ℝ) < (if i = i0 then (2:ℝ) else 1) / ((d : ℝ) + 1)
     rcases eq_or_ne i i0 with rfl | hi
     · rw [if_pos rfl]
       positivity

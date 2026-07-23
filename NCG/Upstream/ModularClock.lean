@@ -35,6 +35,7 @@ variable {A : Type*} [Ring A] [Algebra ℂ A] [NoZeroSMulDivisors ℂ A]
 def IsModularEigen (ρ : A) (S : A) (β : ℝ) : Prop :=
   ρ * S = (Real.exp β : ℂ) • (S * ρ)
 
+omit [NoZeroSMulDivisors ℂ A] in
 /-- **Proposition `prop:transitive-common-beta` (uniqueness)**: the
 modular exponent of a nonzero eigenoperator is unique (for a regular
 stationary element). -/
@@ -53,6 +54,7 @@ theorem modularEigen_unique {ρ S : A} {β β' : ℝ}
     exact Real.exp_injective h6
   · exact absurd (hreg S h) hS
 
+omit [NoZeroSMulDivisors ℂ A] in
 /-- **Proposition `prop:transitive-common-beta` (transport)**: a
 unitary commuting with `ρ` transports the eigenoperator relation,
 with the same exponent, onto the phase-permuted reset operator. -/
@@ -85,6 +87,7 @@ theorem modularEigen_conjugate {ρ U Ui S S' : A} {β : ℝ} (ζ : ℂ)
   rw [hperm, mul_smul_comm, smul_mul_assoc, smul_comm] at hkey
   exact smul_right_injective A hζ hkey
 
+omit [NoZeroSMulDivisors ℂ A] in
 /-- **Proposition `prop:transitive-common-beta`**: if a group of
 unitaries commuting with the stationary element permutes the nonzero
 reset operators up to phase and acts transitively on labels, all
@@ -102,6 +105,7 @@ theorem transitive_common_beta {ι : Type*} (ρ : A) (S : ι → A)
     (modularEigen_conjugate ζ hζ hUiU hUUi hUcomm hperm (heig e))
     (heig e')
 
+omit [NoZeroSMulDivisors ℂ A] in
 /-- **Theorem `thm:finite-cycle-beta-obstruction` (product law)**:
 products of modular eigenoperators are eigenoperators with summed
 exponent. -/
@@ -124,12 +128,14 @@ theorem modularEigen_mul {ρ S T : A} {β γ : ℝ}
         congr 1
         noncomm_ring
 
+omit [NoZeroSMulDivisors ℂ A] in
 /-- The identity is an eigenoperator with exponent zero. -/
 theorem modularEigen_one (ρ : A) : IsModularEigen ρ 1 0 := by
   unfold IsModularEigen
   rw [mul_one, one_mul, Real.exp_zero]
   norm_num
 
+omit [NoZeroSMulDivisors ℂ A] in
 /-- **Theorem `thm:finite-cycle-beta-obstruction` (cycle
 products)**: the ordered product of a list of eigenoperators is an
 eigenoperator whose exponent is the sum. -/
@@ -144,6 +150,7 @@ theorem modularEigen_list_prod (ρ : A) :
         (modularEigen_list_prod ρ l fun q hq =>
           h q (List.mem_cons_of_mem p hq))
 
+omit [NoZeroSMulDivisors ℂ A] in
 /-- **Theorem `thm:finite-cycle-beta-obstruction`**: if a closed
 reset cycle of modular eigenoperators has product a nonzero scalar
 multiple of a projection commuting with the stationary element (the
@@ -178,6 +185,7 @@ theorem finite_cycle_beta_obstruction (ρ : A) (l : List (A × ℝ))
       _ = 0 := by rw [h5, Real.log_one]
   · exact absurd (hreg P h) hPne
 
+omit [NoZeroSMulDivisors ℂ A] in
 /-- **Theorem `thm:finite-cycle-beta-obstruction` (common
 exponent)**: if all exponents on a nonempty scalar-return cycle
 share one value `β`, then `β = 0`. -/

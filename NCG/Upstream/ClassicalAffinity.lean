@@ -42,6 +42,7 @@ variable {V : Type*} [Fintype V] [DecidableEq V]
 noncomputable def edgeAff (i j : V) : ℝ :=
   Real.log (π i * p i j / (π j * p j i))
 
+omit [DecidableEq V] [Fintype V] in
 /-- Edge affinity is antisymmetric, `A_{ji} = −A_{ij}`. -/
 theorem edgeAff_antisymm (i j : V) :
     edgeAff p π j i = -edgeAff p π i j := by
@@ -58,6 +59,7 @@ noncomputable def pathAff (γ : ℕ → V) (M : ℕ) : ℝ :=
 def pathConcat (γ₁ γ₂ : ℕ → V) (m₁ : ℕ) : ℕ → V :=
   fun k => if k < m₁ then γ₁ k else γ₂ (k - m₁)
 
+omit [DecidableEq V] [Fintype V] in
 theorem pathConcat_left {γ₁ γ₂ : ℕ → V} {m₁ : ℕ}
     (hseam : γ₂ 0 = γ₁ m₁) {k : ℕ} (hk : k ≤ m₁) :
     pathConcat γ₁ γ₂ m₁ k = γ₁ k := by
@@ -67,12 +69,14 @@ theorem pathConcat_left {γ₁ γ₂ : ℕ → V} {m₁ : ℕ}
   · subst h
     rw [if_neg (lt_irrefl k), Nat.sub_self, hseam]
 
+omit [DecidableEq V] [Fintype V] in
 theorem pathConcat_right {γ₁ γ₂ : ℕ → V} {m₁ : ℕ} {k : ℕ}
     (hk : m₁ ≤ k) :
     pathConcat γ₁ γ₂ m₁ k = γ₂ (k - m₁) := by
   unfold pathConcat
   rw [if_neg (not_lt.mpr hk)]
 
+omit [DecidableEq V] [Fintype V] in
 /-- **Theorem `thm:classical-affinity` (i)**: affinity is additive
 under concatenation (of paths, in particular of based cycles). -/
 theorem pathAff_concat (γ₁ γ₂ : ℕ → V) (m₁ m₂ : ℕ)
@@ -104,6 +108,7 @@ theorem pathAff_concat (γ₁ γ₂ : ℕ → V) (m₁ m₂ : ℕ)
     rw [Finset.sum_range_succ]
     ring
 
+omit [DecidableEq V] [Fintype V] in
 /-- Positivity of edges along a concatenation. -/
 theorem pathConcat_pos {γ₁ γ₂ : ℕ → V} {m₁ m₂ : ℕ}
     (hseam : γ₂ 0 = γ₁ m₁)
@@ -121,6 +126,7 @@ theorem pathConcat_pos {γ₁ γ₂ : ℕ → V} {m₁ m₂ : ℕ}
       show k + 1 - m₁ = (k - m₁) + 1 from by omega]
     exact h2 (k - m₁) (by omega)
 
+omit [DecidableEq V] [Fintype V] in
 /-- Path reversal negates affinity (antisymmetry is
 unconditional). -/
 theorem pathAff_reverse (γ : ℕ → V) (M : ℕ) :
@@ -138,6 +144,7 @@ theorem pathAff_reverse (γ : ℕ → V) (M : ℕ) :
     show M - (k + 1) = M - 1 - k from by omega]
   exact edgeAff_antisymm p π (γ (M - 1 - k)) (γ (M - k))
 
+omit [DecidableEq V] [Fintype V] in
 /-- Positivity of edges along a reversal, from bidirected
 support. -/
 theorem pathReverse_pos {γ : ℕ → V} {M : ℕ}
@@ -153,12 +160,15 @@ theorem pathReverse_pos {γ : ℕ → V} {M : ℕ}
 def singleStep (a b : V) : ℕ → V :=
   fun k => if k = 0 then a else b
 
+omit [DecidableEq V] [Fintype V] in
 @[simp] theorem singleStep_zero (a b : V) :
     singleStep a b 0 = a := rfl
 
+omit [DecidableEq V] [Fintype V] in
 @[simp] theorem singleStep_succ (a b : V) (k : ℕ) :
     singleStep a b (k + 1) = b := rfl
 
+omit [DecidableEq V] [Fintype V] in
 theorem pathAff_singleStep (a b : V) :
     pathAff p π (singleStep a b) 1 = edgeAff p π a b := by
   unfold pathAff
@@ -167,6 +177,7 @@ theorem pathAff_singleStep (a b : V) :
 
 /-! ## `thm:classical-affinity` (ii) and (iii) -/
 
+omit [DecidableEq V] [Fintype V] in
 /-- **Theorem `thm:classical-affinity` (ii)**: on a cycle the
 stationary potential telescopes, so the cycle affinity is
 `log(∏ p_forward / ∏ p_backward)`. -/
@@ -210,6 +221,7 @@ theorem cycleAff_eq_log_ratio (hπ : ∀ i, 0 < π i)
         (fun k hk => (hbid _ _).mp
           (hpos k (Finset.mem_range.mp hk)))).ne']
 
+omit [DecidableEq V] [Fintype V] in
 /-- **Theorem `thm:classical-affinity` (iii)**: detailed balance
 makes every edge affinity zero (hence every cycle affinity). -/
 theorem edgeAff_eq_zero_of_balanced
@@ -221,6 +233,7 @@ theorem edgeAff_eq_zero_of_balanced
   · rw [h, div_zero, Real.log_zero]
   · rw [div_self h, Real.log_one]
 
+omit [DecidableEq V] [Fintype V] in
 theorem pathAff_eq_zero_of_balanced
     (hbal : ∀ i j, π i * p i j = π j * p j i) (γ : ℕ → V)
     (M : ℕ) : pathAff p π γ M = 0 := by
@@ -230,11 +243,12 @@ theorem pathAff_eq_zero_of_balanced
 
 /-! ## Uniqueness of the stationary law (ratio-minimum argument) -/
 
+omit [DecidableEq V] in
 /-- **Theorem `thm:classical-affinity` (iv), uniqueness input**:
 positive stationary laws of an irreducible chain are proportional —
 the ratio-minimum/zero-propagation argument, self-contained. -/
 theorem stationary_unique
-    (hp : ∀ i j, 0 ≤ p i j) (hrow : ∀ i, ∑ j, p i j = 1)
+    (hp : ∀ i j, 0 ≤ p i j) (_hrow : ∀ i, ∑ j, p i j = 1)
     (hπ : ∀ i, 0 < π i) (hπs : ∀ j, ∑ i, π i * p i j = π j)
     (m : V → ℝ) (hm : ∀ i, 0 < m i)
     (hms : ∀ j, ∑ i, m i * p i j = m j)
@@ -254,17 +268,17 @@ theorem stationary_unique
       have h2 : c * π i ≤ m i := by
         rw [← le_div_iff₀ (hπ i)]
         exact h1
-      show 0 ≤ m i - c * π i
+      change 0 ≤ m i - c * π i
       linarith
     have hm'stat : ∀ j, ∑ i, m' i * p i j = m' j := by
       intro j
-      show ∑ i, (m i - c * π i) * p i j = m j - c * π j
+      change ∑ i, (m i - c * π i) * p i j = m j - c * π j
       have hsplit : ∀ i, (m i - c * π i) * p i j
           = m i * p i j - c * (π i * p i j) := fun i => by ring
       rw [Finset.sum_congr rfl fun i _ => hsplit i,
         Finset.sum_sub_distrib, hms j, ← Finset.mul_sum, hπs j]
     have hm'zero : m' i₀ = 0 := by
-      show m i₀ - c * π i₀ = 0
+      change m i₀ - c * π i₀ = 0
       rw [hc, div_mul_cancel₀ _ (hπ i₀).ne', sub_self]
     have hprop : ∀ (L : ℕ) (γ : ℕ → V),
         (∀ k < L, 0 < p (γ k) (γ (k + 1))) → m' (γ L) = 0 →
@@ -298,6 +312,7 @@ theorem stationary_unique
 
 /-! ## `thm:classical-affinity` (iv): the Kolmogorov criterion -/
 
+omit [DecidableEq V] [Fintype V] in
 /-- The affinity of a positive edge is a potential difference of
 path affinities from a common base (via one closed cycle). -/
 theorem edgeAff_eq_potential_sub
@@ -314,7 +329,7 @@ theorem edgeAff_eq_potential_sub
     rw [singleStep_zero, haM]
   have hseam2 : (fun k => γb (Mb - k)) 0
       = pathConcat γa (singleStep a b) Ma (Ma + 1) := by
-    show γb (Mb - 0) = _
+    change γb (Mb - 0) = _
     rw [Nat.sub_zero, hbM,
       pathConcat_right (by omega : Ma ≤ Ma + 1),
       show Ma + 1 - Ma = 1 from by omega]
@@ -349,6 +364,7 @@ theorem edgeAff_eq_potential_sub
     pathAff_singleStep, pathAff_reverse] at hzero
   linarith
 
+omit [DecidableEq V] in
 /-- **Theorem `thm:classical-affinity` (iv), Kolmogorov's
 criterion**: for an irreducible chain (positive-path reachability)
 with bidirected support and stationary positive law `π`, vanishing
@@ -403,7 +419,7 @@ theorem classical_affinity_kolmogorov
         rw [Real.exp_sub] at hratio
         rw [div_eq_div_iff (mul_pos (hπ b) hba).ne'
           (Real.exp_pos (F a)).ne'] at hratio
-        show π a * Real.exp (F a) * p a b
+        change π a * Real.exp (F a) * p a b
           = π b * Real.exp (F b) * p b a
         linear_combination hratio
       · have h1 : p a b = 0 := le_antisymm (not_lt.mp hab) (hp a b)
@@ -440,6 +456,7 @@ def supportGraph (p : V → V → ℝ) : Multigraph where
 noncomputable def edgeAffCochain : (supportGraph p).E → ℝ :=
   fun e => edgeAff p π e.1.1 e.1.2
 
+omit [DecidableEq V] [Fintype V] in
 /-- Shift lemma for path affinity. -/
 theorem pathAff_shift (γ : ℕ → V) (M : ℕ) :
     pathAff p π γ (M + 1)
@@ -449,9 +466,10 @@ theorem pathAff_shift (γ : ℕ → V) (M : ℕ) :
   rw [Finset.sum_range_succ']
   rw [add_comm]
 
+omit [DecidableEq V] [Fintype V] in
 /-- Every positive path realizes a walk in the support graph with
 the same affinity. -/
-theorem path_to_walk (hbid : ∀ i j, 0 < p i j ↔ 0 < p j i) :
+theorem path_to_walk (_hbid : ∀ i j, 0 < p i j ↔ 0 < p j i) :
     ∀ (M : ℕ) (γ : ℕ → V),
       (∀ k < M, 0 < p (γ k) (γ (k + 1))) →
       ∃ w : (supportGraph p).Walk (γ 0) (γ M),
@@ -461,7 +479,7 @@ theorem path_to_walk (hbid : ∀ i j, 0 < p i j ↔ 0 < p j i) :
   | zero =>
     intro γ _
     refine ⟨Multigraph.Walk.nil (G := supportGraph p) (γ 0), ?_⟩
-    show (0 : ℝ) = pathAff p π γ 0
+    change (0 : ℝ) = pathAff p π γ 0
     unfold pathAff
     simp
   | succ M ih =>
@@ -471,7 +489,7 @@ theorem path_to_walk (hbid : ∀ i j, 0 < p i j ↔ 0 < p j i) :
       (fun k hk => hpos (k + 1) (by omega))
     refine ⟨Multigraph.Walk.fwd (G := supportGraph p)
       (⟨(γ 0, γ 1), h0⟩ : (supportGraph p).E) w', ?_⟩
-    show edgeAffCochain p π (⟨(γ 0, γ 1), h0⟩ : (supportGraph p).E)
+    change edgeAffCochain p π (⟨(γ 0, γ 1), h0⟩ : (supportGraph p).E)
         + w'.affinity (edgeAffCochain p π) = pathAff p π γ (M + 1)
     rw [hw', pathAff_shift]
     rfl
@@ -481,12 +499,15 @@ def pathPrepend (x : V) (γ : ℕ → V) : ℕ → V
   | 0 => x
   | k + 1 => γ k
 
+omit [DecidableEq V] [Fintype V] in
 @[simp] theorem pathPrepend_zero (x : V) (γ : ℕ → V) :
     pathPrepend x γ 0 = x := rfl
 
+omit [DecidableEq V] [Fintype V] in
 @[simp] theorem pathPrepend_succ (x : V) (γ : ℕ → V)
     (k : ℕ) : pathPrepend x γ (k + 1) = γ k := rfl
 
+omit [DecidableEq V] [Fintype V] in
 theorem pathAff_prepend (x : V) (γ : ℕ → V) (M : ℕ) :
     pathAff p π (pathPrepend x γ) (M + 1)
       = edgeAff p π x (γ 0) + pathAff p π γ M := by
@@ -494,6 +515,7 @@ theorem pathAff_prepend (x : V) (γ : ℕ → V) (M : ℕ) :
   rw [Finset.sum_range_succ', add_comm]
   congr 1
 
+omit [DecidableEq V] [Fintype V] in
 /-- Every walk in the support graph is realized by a positive path
 with the same affinity. -/
 theorem walk_to_path (hbid : ∀ i j, 0 < p i j ↔ 0 < p j i) :
@@ -510,13 +532,13 @@ theorem walk_to_path (hbid : ∀ i j, 0 < p i j ↔ 0 < p j i) :
     · intro k hk
       match k with
       | 0 =>
-        show 0 < p e.1.1 (γ 0)
+        change 0 < p e.1.1 (γ 0)
         rw [hγ0]
         exact e.2
       | k + 1 =>
-        show 0 < p (γ k) (γ (k + 1))
+        change 0 < p (γ k) (γ (k + 1))
         exact hγpos k (by omega)
-    · show pathAff p π (pathPrepend e.1.1 γ) (M + 1)
+    · change pathAff p π (pathPrepend e.1.1 γ) (M + 1)
         = edgeAffCochain p π e + q.affinity (edgeAffCochain p π)
       rw [pathAff_prepend, hγ0, hγaff]
       rfl
@@ -526,13 +548,13 @@ theorem walk_to_path (hbid : ∀ i j, 0 < p i j ↔ 0 < p j i) :
     · intro k hk
       match k with
       | 0 =>
-        show 0 < p e.1.2 (γ 0)
+        change 0 < p e.1.2 (γ 0)
         rw [hγ0]
         exact (hbid _ _).mp e.2
       | k + 1 =>
-        show 0 < p (γ k) (γ (k + 1))
+        change 0 < p (γ k) (γ (k + 1))
         exact hγpos k (by omega)
-    · show pathAff p π (pathPrepend e.1.2 γ) (M + 1)
+    · change pathAff p π (pathPrepend e.1.2 γ) (M + 1)
         = -edgeAffCochain p π e + q.affinity (edgeAffCochain p π)
       rw [pathAff_prepend, hγ0, hγaff]
       have h2 : edgeAff p π e.1.2 ((supportGraph p).src e)
@@ -540,6 +562,7 @@ theorem walk_to_path (hbid : ∀ i j, 0 < p i j ↔ 0 < p j i) :
         edgeAff_antisymm p π e.1.1 e.1.2
       rw [h2]
 
+omit [DecidableEq V] in
 /-- **Corollary `cor:kolmogorov-cohomology`**: for an irreducible
 chain with bidirected support and stationary positive law, the
 following are equivalent: `[A] = 0` in `H¹` of the support graph,

@@ -70,7 +70,7 @@ def deck (χ : G.E → ZMod 2) : Hom (G.signedCover χ) (G.signedCover χ) where
   emap := fun p => (p.1, p.2 + 1)
   src_comm := fun _ => rfl
   tgt_comm := fun e => by
-    show (G.tgt e.1, e.2 + 1 + χ e.1) = (G.tgt e.1, e.2 + χ e.1 + 1)
+    change (G.tgt e.1, e.2 + 1 + χ e.1) = (G.tgt e.1, e.2 + χ e.1 + 1)
     rw [add_right_comm]
 
 /-- The deck transformation is an involution on vertices. -/
@@ -79,7 +79,7 @@ theorem deck_deck_vmap (χ : G.E → ZMod 2) (p : (G.signedCover χ).V) :
     (deck χ).vmap ((deck χ).vmap p) = p := by
   cases p with
   | mk x η =>
-      show (x, η + 1 + 1) = (x, η)
+      change (x, η + 1 + 1) = (x, η)
       rw [add_assoc, CharTwo.add_self_eq_zero, add_zero]
 
 /-- The deck transformation acts freely: it fixes no vertex. -/
@@ -91,7 +91,7 @@ theorem deck_vmap_ne (χ : G.E → ZMod 2) (p : (G.signedCover χ).V) :
       have hsnd : η + 1 = η := congrArg Prod.snd h
       have h1 : (1 : ZMod 2) = 0 := by
         have := congrArg (fun t => t - η) hsnd
-        simpa [add_comm, add_sub_cancel_right] using this
+        simp at this
       exact one_ne_zero h1
 
 /-- The deck transformation commutes with the covering projection. -/
@@ -117,7 +117,7 @@ theorem deck_transitive_on_fibre (χ : G.E → ZMod 2) (x : G.V)
             exact h2 qη pη
           rcases hcases with h | h
           · exact Or.inl (by rw [h])
-          · exact Or.inr (by show (qx, qη) = (qx, pη + 1); rw [h])
+          · exact Or.inr (by change (qx, qη) = (qx, pη + 1); rw [h])
 
 /-- If `χ` is the coboundary of a vertex sign `g`, the signed cover is
 isomorphic over `G` to the trivial double cover `G^0` via the sheet gauge
@@ -131,7 +131,7 @@ def trivializeHom (χ : G.E → ZMod 2) (g : G.V → ZMod 2)
   emap := fun p => (p.1, p.2 + g (G.src p.1))
   src_comm := fun _ => rfl
   tgt_comm := fun e => by
-    show (G.tgt e.1, e.2 + g (G.src e.1) + 0)
+    change (G.tgt e.1, e.2 + g (G.src e.1) + 0)
       = (G.tgt e.1, e.2 + χ e.1 + g (G.tgt e.1))
     have h2 : ∀ x : ZMod 2, x + x = 0 := fun x => CharTwo.add_self_eq_zero x
     rw [hg e.1]

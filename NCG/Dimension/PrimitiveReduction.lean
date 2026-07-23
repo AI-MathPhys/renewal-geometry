@@ -69,7 +69,7 @@ noncomputable def inducedForm :
     rw [LinearMap.mem_ker] at hr
     refine LinearMap.ext fun z => ?_
     obtain ⟨v, rfl⟩ := Submodule.mkQ_surjective _ z
-    show dualDescend B halt r (Submodule.mkQ _ v) = 0
+    change dualDescend B halt r (Submodule.mkQ _ v) = 0
     simp only [dualDescend, LinearMap.coe_mk, AddHom.coe_mk,
       Submodule.mkQ_apply, Submodule.liftQ_apply]
     rw [hr]

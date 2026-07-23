@@ -188,14 +188,14 @@ theorem independence_of_classes {v : G.V} {e₀ : G.E}
     · rw [Real.log_one]
   have hrec_triv : recSign Ltriv = (0 : G.E → ZMod 2) := by
     funext e
-    show orSign (Ltriv e).det = 0
+    change orSign (Ltriv e).det = 0
     rw [hLtriv]
     dsimp only
     rw [hdet_one, orSign_one]
   have hrec_non : recSign Lnon
       = fun e => if e = e₀ then (1 : ZMod 2) else 0 := by
     funext e
-    show orSign (Lnon e).det = _
+    change orSign (Lnon e).det = _
     rw [hLnon]
     dsimp only
     split

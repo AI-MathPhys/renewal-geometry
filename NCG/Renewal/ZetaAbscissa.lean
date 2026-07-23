@@ -74,7 +74,7 @@ theorem lengthShellCount_eq_sum (R : ℕ) :
       unfold lengthShellCount lengthCount
       congr 1
       ext i
-      simp [Nat.le_zero]
+      simp []
   | succ R ih =>
       have hsplit : {i | Λ i ≤ R + 1}
           = {i | Λ i ≤ R} ∪ {i | Λ i = R + 1} := by
@@ -160,7 +160,7 @@ theorem zetaSum_lt_top_of_growth (C : ℝ≥0) {a s : ℝ} (ha : 0 ≤ a)
         ≤ (C : ℝ≥0∞) * (2 : ℝ≥0∞) ^ a * r ^ k := by
     intro k
     have hpow_ne : ((2 : ℕ) ^ k : ℝ≥0∞) ≠ 0 := by
-      simp [pow_ne_zero]
+      simp []
     have hstep1 : ∀ n ∈ Finset.Ico (2 ^ k) (2 ^ (k + 1)),
         f n ≤ (lengthCount Λ n : ℝ≥0∞)
           * (((2 : ℕ) ^ k : ℝ≥0∞)) ^ (-s) := by
@@ -231,7 +231,6 @@ theorem zetaSum_lt_top_of_growth (C : ℝ≥0) {a s : ℝ} (ha : 0 ≤ a)
           refine le_of_eq ?_
           congr 1
           congr 1
-          push_cast
           ring
   -- partial sums up to a dyadic height
   have hpartial : ∀ K : ℕ,
@@ -242,7 +241,7 @@ theorem zetaSum_lt_top_of_growth (C : ℝ≥0) {a s : ℝ} (ha : 0 ≤ a)
     induction K with
     | zero =>
         rw [pow_zero, Finset.sum_range_one, Finset.sum_range_zero]
-        show (lengthCount Λ 0 : ℝ≥0∞) * (((0 : ℕ) : ℝ≥0∞)) ^ (-s) ≤ 0
+        change (lengthCount Λ 0 : ℝ≥0∞) * (((0 : ℕ) : ℝ≥0∞)) ^ (-s) ≤ 0
         rw [lengthCount_zero Λ hΛ1]
         simp
     | succ K ih =>
@@ -386,7 +385,9 @@ theorem tsum_length_comp (f : ℕ → ℝ≥0∞) :
   rw [tsum_congr hconst, tsum_fintype, Finset.sum_const, nsmul_eq_mul,
     hc]
 
+-- The elaboration of this proof is large; a higher heartbeat limit is required.
 set_option maxHeartbeats 1000000 in
+-- The exponential-series elaboration in this proof is large.
 include hfin in
 /-- **θ-summability** (the summability rider of `thm:fibre-dichotomy`
 (1) and `cor:sharp-existence`): under a geometric channel-count bound
@@ -575,7 +576,7 @@ theorem channelCount_split (n : ℕ) :
   rw [hsplit, Set.ncard_union_eq hdisj
     ((R.shell_finite n).subset (by
       intro x hx
-      show R.quotLength x ≤ n
+      change R.quotLength x ≤ n
       simp only [Set.mem_setOf_eq] at hx
       omega))
     ((R.shell_finite n).subset (by

@@ -28,6 +28,7 @@ namespace NCG
 
 variable {ι : Type*} [DecidableEq ι]
 
+omit [DecidableEq ι] in
 /-- Pointwise formula for the diagonal operator:
 `(diagOp d f)(j) = d(j)·f(j)`. -/
 theorem diagOp_apply (d : ι → ℂ) (f : ι →₀ ℂ) (j : ι) :
@@ -38,9 +39,10 @@ theorem diagOp_apply (d : ι → ℂ) (f : ι →₀ ℂ) (j : ι) :
   | single i c =>
       rw [diagOp_single]
       rcases eq_or_ne i j with rfl | hij
-      · simp [Finsupp.single_apply]
-      · simp [Finsupp.single_apply, hij]
+      · simp []
+      · simp [hij]
 
+omit [DecidableEq ι] in
 /-- **Lemma `lem:atom`** (diagonal-commutant rigidity): an operator
 commuting with every diagonal multiplier is diagonal — it maps each
 basis ray into itself.  The atomic diagonal is maximal abelian, which
@@ -50,6 +52,7 @@ theorem diagonal_commutant (T : (ι →₀ ℂ) →ₗ[ℂ] (ι →₀ ℂ))
     (hT : ∀ d : ι → ℂ, T ∘ₗ diagOp d = diagOp d ∘ₗ T) (x : ι) :
     T (Finsupp.single x 1)
       = Finsupp.single x ((T (Finsupp.single x 1)) x) := by
+  classical
   have h := congrArg (fun L => L (Finsupp.single x (1:ℂ)))
     (hT (Pi.single x 1))
   simp only [LinearMap.comp_apply, diagOp_single, Pi.single_eq_same,
@@ -72,6 +75,7 @@ def HasPropagation (dist : ι → ι → ℕ)
     (T : (ι →₀ ℂ) →ₗ[ℂ] (ι →₀ ℂ)) (r : ℕ) : Prop :=
   ∀ x y : ι, r < dist x y → (T (Finsupp.single x 1)) y = 0
 
+omit [DecidableEq ι] in
 /-- Diagonal multipliers have propagation `0`
 (Definition `def:finite-propagation`). -/
 theorem diagOp_hasPropagation_zero (dist : ι → ι → ℕ)
@@ -84,8 +88,9 @@ theorem diagOp_hasPropagation_zero (dist : ι → ι → ℕ)
     subst hxy
     rw [hdist x] at h
     omega
-  simp [Finsupp.single_apply, hne]
+  simp [hne]
 
+omit [DecidableEq ι] in
 /-- Lifted shifts along distance-`≤ 1` transitions have propagation `1`
 (Definition `def:finite-propagation`: the generators of the
 finite-propagation renewal algebra). -/
@@ -98,8 +103,9 @@ theorem shiftOp_hasPropagation_one (dist : ι → ι → ℕ) (s : ι → ι)
     intro he
     subst he
     exact absurd (hs x) (by omega)
-  simp [Finsupp.single_apply, hne]
+  simp [hne]
 
+omit [DecidableEq ι] in
 /-- **Proposition `prop:joint-finite-propagation` (core)**: propagation
 is subadditive under composition — if `T` propagates at speed `r` and
 `U` at speed `s`, the composite `T ∘ U` propagates at speed `r + s`.
@@ -133,6 +139,7 @@ theorem hasPropagation_comp (dist : ι → ι → ℕ)
     rw [hT z y hzy, mul_zero]
   · rw [hU x z hxz, zero_mul]
 
+omit [DecidableEq ι] in
 /-- **Lemma `lem:constant-dirac-kernel` (causal-cone core)**: powers of
 a finite-propagation operator propagate linearly — `T^n` has
 propagation `n·r`, so the discrete evolution kernel is supported in
@@ -152,13 +159,14 @@ theorem hasPropagation_pow (dist : ι → ι → ℕ)
       rw [hdist0 x] at hxy
       omega
     rw [pow_zero]
-    simp [Module.End.one_apply, Finsupp.single_apply, hne]
+    simp [Module.End.one_apply, hne]
   | succ n ih =>
     have hcomp := hasPropagation_comp dist htri ih hT
     rw [show (n + 1) * r = n * r + r from by ring, pow_succ,
       Module.End.mul_eq_comp]
     exact hcomp
 
+omit [DecidableEq ι] in
 /-- **Theorem `thm:constant-inner-characterization` (transfer core)**:
 a nonzero kernel entry survives compression by the diagonal indicator
 projections — if `⟨e_y, T e_x⟩ ≠ 0` with `x ∈ Q`, `y ∈ P`, then the
@@ -179,15 +187,17 @@ theorem compressed_nonzero (T : (ι →₀ ℂ) →ₗ[ℂ] (ι →₀ ℂ))
   rw [diagOp_apply, if_pos hy, one_mul] at h
   exact h
 
+omit [DecidableEq ι] in
 /-- **Theorem `thm:reconstruction` (shift intertwining core)**: if the
 basis bijection `φ` intertwines the lifted shifts `S` and `S'` on
 basis vectors, the underlying transition maps are conjugate:
 `φ(s·x) = s'·φ(x)` — the descended map is a graph isomorphism. -/
-theorem shift_conjugation {ι' : Type*} [DecidableEq ι'] (φ : ι ≃ ι')
+theorem shift_conjugation {ι' : Type*} (φ : ι ≃ ι')
     (s : ι → ι) (s' : ι' → ι')
     (h : ∀ x : ι, Finsupp.mapDomain φ (shiftOp s (Finsupp.single x 1))
       = shiftOp s' (Finsupp.mapDomain φ (Finsupp.single x (1:ℂ)))) :
     ∀ x, φ (s x) = s' (φ x) := by
+  classical
   intro x
   have hx := h x
   rw [shiftOp_single, Finsupp.mapDomain_single, Finsupp.mapDomain_single,
@@ -198,14 +208,16 @@ theorem shift_conjugation {ι' : Type*} [DecidableEq ι'] (φ : ι ≃ ι')
   rw [if_neg (fun hh => hne hh.symm)] at hval
   exact one_ne_zero hval
 
+omit [DecidableEq ι] in
 /-- **Theorem `thm:reconstruction` (grading core)**: if the basis
 bijection `φ` intertwines the diagonal length operators, the gradings
 correspond: `Λ(x) = Λ'(φ(x))`. -/
-theorem grading_conjugation {ι' : Type*} [DecidableEq ι'] (φ : ι ≃ ι')
+theorem grading_conjugation {ι' : Type*} (φ : ι ≃ ι')
     (Λ : ι → ℂ) (Λ' : ι' → ℂ)
     (h : ∀ x : ι, Finsupp.mapDomain φ (diagOp Λ (Finsupp.single x 1))
       = diagOp Λ' (Finsupp.mapDomain φ (Finsupp.single x (1:ℂ)))) :
     ∀ x, Λ x = Λ' (φ x) := by
+  classical
   intro x
   have hx := h x
   rw [diagOp_single, Finsupp.mapDomain_single, Finsupp.mapDomain_single,

@@ -158,7 +158,7 @@ theorem coboundaryMap_bouquet (r : ℕ) :
   apply LinearMap.ext
   intro g
   funext e
-  show g (()) + g (()) = 0
+  change g (()) + g (()) = 0
   exact CharTwo.add_self_eq_zero _
 
 /-- **`H¹` of the bouquet** (Theorem `thm:cover` for the bouquet):
@@ -172,13 +172,13 @@ noncomputable def H1BouquetEquiv (r : ℕ) :
 theorem finrank_H1_bouquet (r : ℕ) :
     Module.finrank (ZMod 2) (H1 (bouquet r)) = r := by
   rw [LinearEquiv.finrank_eq (H1BouquetEquiv r)]
-  simp [Module.finrank_pi]
+  simp []
 
 /-- **Corollary `cor:sector-count`** for the bouquet: there are exactly
 `2^{b₁}` gauge classes of signed sectors. -/
 theorem card_H1_bouquet (r : ℕ) :
     Nat.card (H1 (bouquet r)) = 2 ^ r := by
   rw [Nat.card_congr (H1BouquetEquiv r).toEquiv]
-  simp [Nat.card_eq_fintype_card, Fintype.card_fun, ZMod.card]
+  simp [Nat.card_eq_fintype_card, ZMod.card]
 
 end NCG.Multigraph

@@ -73,7 +73,7 @@ theorem card_interval (x y : Fin c → ℕ) :
 order are finite (Proposition `prop:measured-causet`). -/
 theorem interval_finite (x y : Fin c → ℕ) :
     ∃ s : Finset (Fin c → ℕ), ∀ z, z ∈ s ↔ x ≤ z ∧ z ≤ y :=
-  ⟨Finset.Icc x y, fun z => Finset.mem_Icc⟩
+  ⟨Finset.Icc x y, fun _z => Finset.mem_Icc⟩
 
 /-! ### Two-dimensional Minkowski emergence -/
 
@@ -105,7 +105,7 @@ theorem minkowski_causal_order (du dv : ℝ) :
 /-- The proper time vanishes exactly on the null faces: for causal
 increments, `Δu Δv = 0` iff one of the null coordinates is constant
 (Theorem `thm:minkowski-2d`, null boundary of the cone). -/
-theorem proper_time_eq_zero_iff (du dv : ℝ) (hdu : 0 ≤ du) (hdv : 0 ≤ dv) :
+theorem proper_time_eq_zero_iff (du dv : ℝ) (_hdu : 0 ≤ du) (_hdv : 0 ≤ dv) :
     du * dv = 0 ↔ du = 0 ∨ dv = 0 :=
   mul_eq_zero
 

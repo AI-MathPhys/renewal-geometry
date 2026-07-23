@@ -35,9 +35,9 @@ prove, with no planar-topology input:
 * `wt_flipC` — **the exact Peierls weight gain**
   `w(flip σ) = e^{2θ|γ|}·w(σ)`;
 * `isingContourDatum` — the assembled `ContourDatum`, taking as its
-  **single scoped input** the planar circuit count
-  `#{realizable contours of length n} ≤ 4n·3^{n−1}` (the discrete
-  Jordan/dual-circuit encoding, Georgii Ch. 6);
+  `hcount` input the planar circuit count
+  `#{realizable contours of length n} ≤ 4n·3^{n−1}`, proved in
+  `NCG/Upstream/CircuitCount.lean`;
 * `ising_magnetization` — the endpoint: for `θ ≥ ½·log 12`, the
   plus-boundary volume `Λ` has `⟨τ₀⟩ ≥ 203/216`, uniformly in `Λ`.
 -/
@@ -115,11 +115,11 @@ theorem mem_eVol {e : IEdge} :
     · left; exact hv
     · left; exact hv
     · right
-      show (v - ((1:ℤ), (0:ℤ))) + edir true ∈ Λ
+      change (v - ((1:ℤ), (0:ℤ))) + edir true ∈ Λ
       rw [show edir true = ((1:ℤ), (0:ℤ)) from rfl, sub_add_cancel]
       exact hv
     · right
-      show (v - ((0:ℤ), (1:ℤ))) + edir false ∈ Λ
+      change (v - ((0:ℤ), (1:ℤ))) + edir false ∈ Λ
       rw [show edir false = ((0:ℤ), (1:ℤ)) from rfl, sub_add_cancel]
       exact hv
   · intro h
@@ -135,11 +135,11 @@ theorem mem_eVol {e : IEdge} :
       rcases e with ⟨u, b⟩
       cases b
       · right; right; right
-        show (u, false) = ((u + edir false) - ((0:ℤ),(1:ℤ)), false)
+        change (u, false) = ((u + edir false) - ((0:ℤ),(1:ℤ)), false)
         rw [show edir false = ((0:ℤ), (1:ℤ)) from rfl,
           add_sub_cancel_right]
       · right; right; left
-        show (u, true) = ((u + edir true) - ((1:ℤ),(0:ℤ)), true)
+        change (u, true) = ((u + edir true) - ((1:ℤ),(0:ℤ)), true)
         rw [show edir true = ((1:ℤ), (0:ℤ)) from rfl,
           add_sub_cancel_right]
 
@@ -242,7 +242,7 @@ theorem obdry_spec {σ : PlusBC Λ} (h0 : σ.1 0 = false) {p q : V2}
     p ∈ minusCl σ ∧ σ.1 p = false ∧ σ.1 q = true := by
   have hqO : q ∉ minusCl σ ∧ escV σ q := by
     by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     rcases Classical.em (q ∈ minusCl σ) with h | h
     · exact hq (Or.inl h)
     · exact hq (Or.inr (hcon h))
@@ -277,7 +277,7 @@ theorem interior_obdry {σ : PlusBC Λ} (h0 : σ.1 0 = false) :
     -- never touches a contour edge
     have hvO : v ∉ minusCl σ ∧ escV σ v := by
       by_contra hcon
-      push_neg at hcon
+      push Not at hcon
       rcases Classical.em (v ∈ minusCl σ) with h | h
       · exact hvout (Or.inl h)
       · exact hvout (Or.inr (hcon h))
@@ -389,13 +389,13 @@ theorem four_le_card_contour {σ : PlusBC Λ} (h0 : σ.1 0 = false) :
     refine Or.inl ⟨(hmem u).mp huT, fun hc => ?_⟩
     have h1 := humax _ ((hmem _).mpr hc)
     have h2 : (ep1 e₁).1 = u.1 + 1 := by
-      show (u + edir true).1 = u.1 + 1
+      change (u + edir true).1 = u.1 + 1
       rw [show edir true = ((1:ℤ), (0:ℤ)) from rfl]
       rfl
     omega
   have hb₂ : e₂ ∈ obdry (fillCl σ) := by
     have hep1 : ep1 e₂ = v := by
-      show (v - ((1:ℤ),(0:ℤ))) + edir true = v
+      change (v - ((1:ℤ),(0:ℤ))) + edir true = v
       rw [show edir true = ((1:ℤ), (0:ℤ)) from rfl, sub_add_cancel]
     refine Or.inr ⟨fun hc => ?_, hep1 ▸ (hmem v).mp hvT⟩
     have h1 := hvmin _ ((hmem _).mpr hc)
@@ -405,13 +405,13 @@ theorem four_le_card_contour {σ : PlusBC Λ} (h0 : σ.1 0 = false) :
     refine Or.inl ⟨(hmem p).mp hpT, fun hc => ?_⟩
     have h1 := hpmax _ ((hmem _).mpr hc)
     have h2 : (ep1 e₃).2 = p.2 + 1 := by
-      show (p + edir false).2 = p.2 + 1
+      change (p + edir false).2 = p.2 + 1
       rw [show edir false = ((0:ℤ), (1:ℤ)) from rfl]
       rfl
     omega
   have hb₄ : e₄ ∈ obdry (fillCl σ) := by
     have hep1 : ep1 e₄ = q := by
-      show (q - ((0:ℤ),(1:ℤ))) + edir false = q
+      change (q - ((0:ℤ),(1:ℤ))) + edir false = q
       rw [show edir false = ((0:ℤ), (1:ℤ)) from rfl, sub_add_cancel]
     refine Or.inr ⟨fun hc => ?_, hep1 ▸ (hmem q).mp hqT⟩
     have h1 := hqmin _ ((hmem _).mpr hc)
@@ -451,11 +451,11 @@ theorem four_le_card_contour {σ : PlusBC Λ} (h0 : σ.1 0 = false) :
   have hcard : ({e₁, e₂, e₃, e₄} : Finset IEdge).card = 4 := by
     rw [Finset.card_insert_of_notMem (by
         simp only [Finset.mem_insert, Finset.mem_singleton]
-        push_neg
+        push Not
         exact ⟨h12, h13, h14⟩),
       Finset.card_insert_of_notMem (by
         simp only [Finset.mem_insert, Finset.mem_singleton]
-        push_neg
+        push Not
         exact ⟨h23, h24⟩),
       Finset.card_insert_of_notMem (by
         simp only [Finset.mem_singleton]
@@ -472,7 +472,7 @@ noncomputable def flipC (γ : Finset IEdge) (σ : PlusBC Λ) :
   ⟨fun v => if v ∈ interior (Λ := Λ) (↑γ : Set IEdge)
       then !(σ.1 v) else σ.1 v, by
     intro v hv
-    show (if v ∈ interior (Λ := Λ) (↑γ : Set IEdge)
+    change (if v ∈ interior (Λ := Λ) (↑γ : Set IEdge)
       then !(σ.1 v) else σ.1 v) = true
     rw [if_neg, σ.2 v hv]
     intro hvint
@@ -504,7 +504,7 @@ theorem wt_flipC {σ : PlusBC Λ} (h0 : σ.1 0 = false) (θ : ℝ) :
   have hval : ∀ v : V2, (flipC (contour σ) σ).1 v
       = if v ∈ fillCl σ then !(σ.1 v) else σ.1 v := by
     intro v
-    show (if v ∈ interior (Λ := Λ) (↑(contour σ) : Set IEdge)
+    change (if v ∈ interior (Λ := Λ) (↑(contour σ) : Set IEdge)
       then !(σ.1 v) else σ.1 v) = _
     rw [hint]
   have hγsub : contour σ ⊆ eVol Λ := Finset.filter_subset _ _
@@ -636,8 +636,10 @@ noncomputable def isingContourDatum (θ : ℝ)
 
 /-- **The uniform Ising magnetization bound**: for `θ ≥ ½·log 12`,
 every plus-boundary volume has `⟨τ₀⟩ ≥ 203/216` — the constant of
-`thm:torsion-phase-coexistence` (ii), with the planar circuit count
-as the single remaining scoped input. -/
+`thm:torsion-phase-coexistence` (ii), parameterized by the planar
+circuit count `hcount`, which is proved in
+`NCG/Upstream/CircuitCount.lean` (see `box_magnetization` there for
+the hypothesis-free box form). -/
 theorem ising_magnetization (θ : ℝ)
     (hθ : (1 / 2) * Real.log 12 ≤ θ)
     (hcount : ∀ n, ((contours Λ).filter
@@ -645,6 +647,6 @@ theorem ising_magnetization (θ : ℝ)
     (203 / 216) * ∑ σ : PlusBC Λ, wt Λ θ σ
       ≤ ∑ σ : PlusBC Λ, wt Λ θ σ * spin (σ.1 0) :=
   peierls_magnetization (fun σ => (wt_pos Λ θ σ).le)
-    (fun σ => spin_sq_vals _) (isingContourDatum Λ θ hcount) hθ
+    (fun _σ => spin_sq_vals _) (isingContourDatum Λ θ hcount) hθ
 
 end NCG.Upstream.Ising

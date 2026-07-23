@@ -32,9 +32,12 @@ open Matrix
 
 variable {D : Type*} [Fintype D] [DecidableEq D] [Nonempty D]
 
+omit [Nonempty D] in
 theorem kernelPow_succ (Q : D → D → ℝ) (k : ℕ) (a b : D) :
     kernelPow Q (k + 1) a b = ∑ c, Q a c * kernelPow Q k c b := rfl
 
+omit [DecidableEq D] in
+omit [DecidableEq D] [Nonempty D] in
 /-- **Dobrushin `ℓ¹`-contraction**: a kernel with entrywise floor
 `δ` contracts zero-mass vectors by `1 − |D|δ`. -/
 theorem dobrushin_contraction (Q : D → D → ℝ) {δ : ℝ}
@@ -78,6 +81,8 @@ theorem dobrushin_contraction (Q : D → D → ℝ) {δ : ℝ}
         rw [Finset.sum_congr rfl fun a _ => h2 a,
           ← Finset.mul_sum]
 
+omit [DecidableEq D] in
+omit [DecidableEq D] [Nonempty D] in
 /-- Zero mass is preserved by a stochastic kernel. -/
 theorem zero_mass_step (Q : D → D → ℝ)
     (hrow : ∀ a, ∑ b, Q a b = 1) {μ : D → ℝ}
@@ -113,7 +118,7 @@ theorem dobrushin_pow_contraction (Q : D → D → ℝ) {δ : ℝ}
       have hthis : ∀ a, μ a * (kernelPow Q 0) a b
           = if a = b then μ a else 0 := by
         intro a
-        show μ a * (if a = b then (1 : ℝ) else 0)
+        change μ a * (if a = b then (1 : ℝ) else 0)
           = if a = b then μ a else 0
         split <;> simp
       rw [Finset.sum_congr rfl fun a _ => hthis a,
@@ -139,7 +144,7 @@ theorem dobrushin_pow_contraction (Q : D → D → ℝ) {δ : ℝ}
       rw [Finset.sum_congr rfl fun a _ => hexpand a,
         Finset.sum_comm]
       refine Finset.sum_congr rfl fun c _ => ?_
-      show ∑ a, μ a * Q a c * (kernelPow Q k) c b
+      change ∑ a, μ a * Q a c * (kernelPow Q k) c b
         = (∑ a, μ a * Q a c) * (kernelPow Q k) c b
       rw [Finset.sum_mul]
     have hgoal : ∑ b, |∑ a, μ a * (kernelPow Q (k + 1)) a b|

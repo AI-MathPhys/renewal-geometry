@@ -6,11 +6,11 @@ Authors: Aurélien Pélissier
 import NCG.Upstream.IsingContours
 
 /-!
-# Toward the planar circuit count: local contour structure
+# The planar circuit count: contour structure and walk coding
 
-Foundation layers for the last Peierls scoped input — the planar
-circuit count `#{realizable contours of length n} ≤ 4n·3^{n−1}`
-(the `hcount` hypothesis of `isingContourDatum`).
+The planar circuit count
+`#{realizable contours of length n} ≤ 4n·3^{n−1}` — the `hcount`
+input of `isingContourDatum` — proved here in full.
 
 **Layer A (this file's first section)**: the discrete local Jordan
 property — around every dual vertex (plaquette corner), the number of
@@ -69,21 +69,21 @@ theorem cornerEdges_endpoints (v : V2) :
     ∧ ep0 ((v.1 + 1, v.2), false) = (v.1 + 1, v.2)
     ∧ ep1 ((v.1 + 1, v.2), false) = (v.1 + 1, v.2 + 1) := by
   refine ⟨rfl, ?_, rfl, ?_, rfl, ?_, rfl, ?_⟩
-  · show (v.1, v.2) + edir true = (v.1 + 1, v.2)
+  · change (v.1, v.2) + edir true = (v.1 + 1, v.2)
     rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
-    show (v.1 + 1, v.2 + 0) = (v.1 + 1, v.2)
+    change (v.1 + 1, v.2 + 0) = (v.1 + 1, v.2)
     rw [add_zero]
-  · show (v.1, v.2 + 1) + edir true = (v.1 + 1, v.2 + 1)
+  · change (v.1, v.2 + 1) + edir true = (v.1 + 1, v.2 + 1)
     rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
-    show (v.1 + 1, v.2 + 1 + 0) = (v.1 + 1, v.2 + 1)
+    change (v.1 + 1, v.2 + 1 + 0) = (v.1 + 1, v.2 + 1)
     rw [add_zero]
-  · show (v.1, v.2) + edir false = (v.1, v.2 + 1)
+  · change (v.1, v.2) + edir false = (v.1, v.2 + 1)
     rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
-    show (v.1 + 0, v.2 + 1) = (v.1, v.2 + 1)
+    change (v.1 + 0, v.2 + 1) = (v.1, v.2 + 1)
     rw [add_zero]
-  · show (v.1 + 1, v.2) + edir false = (v.1 + 1, v.2 + 1)
+  · change (v.1 + 1, v.2) + edir false = (v.1 + 1, v.2 + 1)
     rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
-    show (v.1 + 1 + 0, v.2 + 1) = (v.1 + 1, v.2 + 1)
+    change (v.1 + 1 + 0, v.2 + 1) = (v.1 + 1, v.2 + 1)
     rw [add_zero]
 
 open Classical in
@@ -115,8 +115,7 @@ theorem cornerDegree_even (S : Set V2) (v : V2) :
              first
                | rfl
                | (exfalso
-                  simp at this)
-               | simp)
+                  simp at this))
   exact hcnt
 
 /-- The two dual endpoints (corners) of a primal edge. -/
@@ -168,9 +167,9 @@ theorem lattice_connected (a b : V2) :
               (ih (a.1, a.2 + 1) b (by simp; omega))
             constructor
             · rfl
-            · show (a.1, a.2) + edir false = (a.1, a.2 + 1)
+            · change (a.1, a.2) + edir false = (a.1, a.2 + 1)
               rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
-              show (a.1 + 0, a.2 + 1) = (a.1, a.2 + 1)
+              change (a.1 + 0, a.2 + 1) = (a.1, a.2 + 1)
               rw [add_zero]
           · refine Relation.ReflTransGen.head
               (b := (a.1, a.2 - 1))
@@ -178,9 +177,9 @@ theorem lattice_connected (a b : V2) :
               (ih (a.1, a.2 - 1) b (by simp; omega))
             constructor
             · rfl
-            · show (a.1, a.2 - 1) + edir false = (a.1, a.2)
+            · change (a.1, a.2 - 1) + edir false = (a.1, a.2)
               rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
-              show (a.1 + 0, a.2 - 1 + 1) = (a.1, a.2)
+              change (a.1 + 0, a.2 - 1 + 1) = (a.1, a.2)
               rw [add_zero]
               congr 1
               ring
@@ -190,9 +189,9 @@ theorem lattice_connected (a b : V2) :
               (ih (a.1 + 1, a.2) b (by simp; omega))
             constructor
             · rfl
-            · show (a.1, a.2) + edir true = (a.1 + 1, a.2)
+            · change (a.1, a.2) + edir true = (a.1 + 1, a.2)
               rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
-              show (a.1 + 1, a.2 + 0) = (a.1 + 1, a.2)
+              change (a.1 + 1, a.2 + 0) = (a.1 + 1, a.2)
               rw [add_zero]
           · refine Relation.ReflTransGen.head
               (b := (a.1 - 1, a.2))
@@ -200,9 +199,9 @@ theorem lattice_connected (a b : V2) :
               (ih (a.1 - 1, a.2) b (by simp; omega))
             constructor
             · rfl
-            · show (a.1 - 1, a.2) + edir true = (a.1, a.2)
+            · change (a.1 - 1, a.2) + edir true = (a.1, a.2)
               rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
-              show (a.1 - 1 + 1, a.2 + 0) = (a.1, a.2)
+              change (a.1 - 1 + 1, a.2 + 0) = (a.1, a.2)
               rw [add_zero]
               congr 1
               ring
@@ -472,9 +471,9 @@ theorem colCount_horiz (C : Finset IEdge)
             with hW | hW <;>
           rcases Classical.em ((((x₁ + 1, y), false) : IEdge) ∈ C)
             with hE | hE <;>
-          simp only [hS, hN, hW, hE, if_pos, if_neg, decide_eq_true_eq,
+          simp only [hS, hN, hW, hE, if_pos, if_neg,
             not_false_eq_true, decide_true, decide_false,
-            if_true, if_false, Bool.false_eq_true]
+            Bool.false_eq_true]
             at hstepW hstepE hIH hc ⊢ <;>
           omega
 
@@ -524,17 +523,17 @@ theorem insideP_boundary (C : Finset IEdge)
   cases β
   · have hp0 : ep0 (((x, y), false) : IEdge) = (x, y) := rfl
     have hp1 : ep1 (((x, y), false) : IEdge) = (x, y + 1) := by
-      show (x, y) + edir false = (x, y + 1)
+      change (x, y) + edir false = (x, y + 1)
       rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
-      show (x + 0, y + 1) = (x, y + 1)
+      change (x + 0, y + 1) = (x, y + 1)
       rw [add_zero]
     rw [hp0, hp1]
     exact insideP_flip_vert C x y
   · have hp0 : ep0 (((x, y), true) : IEdge) = (x, y) := rfl
     have hp1 : ep1 (((x, y), true) : IEdge) = (x + 1, y) := by
-      show (x, y) + edir true = (x + 1, y)
+      change (x, y) + edir true = (x + 1, y)
       rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
-      show (x + 1, y + 0) = (x + 1, y)
+      change (x + 1, y + 0) = (x + 1, y)
       rw [add_zero]
     rw [hp0, hp1]
     exact insideP_flip_horiz C hev x y
@@ -560,28 +559,28 @@ theorem insideP_contour {σ : PlusBC Λ} (h0 : σ.1 0 = false)
     have heV : e ∈ eVol Λ := (Finset.mem_filter.mp he).1
     rcases (mem_eVol Λ).mp heV with h | h
     · have := hYΛ _ h
-      show e.1.2 < Y + 1
+      change e.1.2 < Y + 1
       unfold ep0 at this
       omega
     · have := hYΛ _ h
       obtain ⟨⟨e1, e2⟩, eb⟩ := e
       cases eb
       · have h1 : ep1 (((e1, e2), false) : IEdge) = (e1, e2 + 1) := by
-          show (e1, e2) + edir false = (e1, e2 + 1)
+          change (e1, e2) + edir false = (e1, e2 + 1)
           rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
-          show (e1 + 0, e2 + 1) = (e1, e2 + 1)
+          change (e1 + 0, e2 + 1) = (e1, e2 + 1)
           rw [add_zero]
         rw [h1] at this
-        show e2 < Y + 1
+        change e2 < Y + 1
         simp at this
         omega
       · have h1 : ep1 (((e1, e2), true) : IEdge) = (e1 + 1, e2) := by
-          show (e1, e2) + edir true = (e1 + 1, e2)
+          change (e1, e2) + edir true = (e1 + 1, e2)
           rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
-          show (e1 + 1, e2 + 0) = (e1 + 1, e2)
+          change (e1 + 1, e2 + 0) = (e1 + 1, e2)
           rw [add_zero]
         rw [h1] at this
-        show e2 < Y + 1
+        change e2 < Y + 1
         simp at this
         omega
   obtain ⟨x₁, y⟩ := x
@@ -638,9 +637,9 @@ theorem insideP_contour {σ : PlusBC Λ} (h0 : σ.1 0 = false)
               exact this
           rw [hmem]
           have hp1 : ep1 (((x₁, z), false) : IEdge) = (x₁, z + 1) := by
-            show (x₁, z) + edir false = (x₁, z + 1)
+            change (x₁, z) + edir false = (x₁, z + 1)
             rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
-            show (x₁ + 0, z + 1) = (x₁, z + 1)
+            change (x₁ + 0, z + 1) = (x₁, z + 1)
             rw [add_zero]
           constructor
           · intro hiff
@@ -766,19 +765,19 @@ theorem cornerDegF_sdiff (C D : Finset IEdge) (hCD : C ⊆ D)
         have haDC : a ∉ D \ C := by
           simp [Finset.mem_sdiff, haC]
         simp only [haC, haD, haDC, decide_true, decide_false,
-          if_true, if_false, Bool.false_eq_true, ite_true, ite_false]
+          if_true, if_false, Bool.false_eq_true]
         omega
       · rcases Classical.em (a ∈ D) with haD | haD
         · have haDC : a ∈ D \ C := Finset.mem_sdiff.mpr ⟨haD, haC⟩
           simp only [haC, haD, haDC, decide_true, decide_false,
-            if_true, if_false, Bool.false_eq_true, ite_true,
-            ite_false]
+            if_true, if_false, Bool.false_eq_true,
+            ]
           omega
         · have haDC : a ∉ D \ C := by
             simp [Finset.mem_sdiff, haD]
-          simp only [haC, haD, haDC, decide_true, decide_false,
-            if_true, if_false, Bool.false_eq_true, ite_true,
-            ite_false]
+          simp only [haC, haD, haDC, decide_false,
+            if_false, Bool.false_eq_true,
+            ]
           omega
 
 open Classical in
@@ -862,21 +861,21 @@ theorem eVol_base_lt {Y : ℤ} (hY : ∀ v ∈ Λ, v.2 < Y) :
     obtain ⟨⟨e1, e2⟩, eb⟩ := e
     cases eb
     · have h1 : ep1 (((e1, e2), false) : IEdge) = (e1, e2 + 1) := by
-        show (e1, e2) + edir false = (e1, e2 + 1)
+        change (e1, e2) + edir false = (e1, e2 + 1)
         rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
-        show (e1 + 0, e2 + 1) = (e1, e2 + 1)
+        change (e1 + 0, e2 + 1) = (e1, e2 + 1)
         rw [add_zero]
       rw [h1] at this
-      show e2 < Y
+      change e2 < Y
       simp at this
       omega
     · have h1 : ep1 (((e1, e2), true) : IEdge) = (e1 + 1, e2) := by
-        show (e1, e2) + edir true = (e1 + 1, e2)
+        change (e1, e2) + edir true = (e1 + 1, e2)
         rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
-        show (e1 + 1, e2 + 0) = (e1 + 1, e2)
+        change (e1 + 1, e2 + 0) = (e1 + 1, e2)
         rw [add_zero]
       rw [h1] at this
-      show e2 < Y
+      change e2 < Y
       simp at this
       omega
 
@@ -935,7 +934,7 @@ interior misses the origin is empty.  The hypothesis `hcompl` says
 the complement of the volume escapes upward — the volumes of the
 manuscript (boxes) satisfy it; "Swiss-cheese" volumes genuinely
 violate the circuit count. -/
-theorem even_subset_eq_empty {σ : PlusBC Λ} (h0 : σ.1 0 = false)
+theorem even_subset_eq_empty {σ : PlusBC Λ} (_h0 : σ.1 0 = false)
     (hcompl : ∀ w : V2, w ∉ Λ → ∃ z : V2,
       (∀ v ∈ Λ, v.2 < z.2) ∧
       Relation.ReflTransGen (fun a b => IAdj a b ∧ b ∉ Λ) w z)
@@ -1084,7 +1083,7 @@ theorem walkEnd_append (e : IEdge) :
 /-- The two corners of an edge are distinct. -/
 theorem corner0_ne_corner1 (e : IEdge) : corner0 e ≠ corner1 e := by
   obtain ⟨⟨x, y⟩, β⟩ := e
-  cases β <;> simp [corner0, corner1, Prod.ext_iff] <;> omega
+  cases β <;> simp [corner0, corner1, Prod.ext_iff]
 
 /-- Pivoting exchanges the two corners. -/
 theorem otherCorner_cases {e : IEdge} {v : V2}
@@ -1132,15 +1131,15 @@ theorem countP_mem_insert :
       by_cases ha : a = e
       · subst ha
         have h1 : a ∈ insert a T := Finset.mem_insert_self a T
-        simp only [h1, he, eq_self_iff_true, decide_true,
+        simp only [h1, he, decide_true,
           decide_false, if_true, if_false, Bool.false_eq_true,
-          ite_true, ite_false]
+          ]
         omega
       · have h1 : (a ∈ insert e T) ↔ (a ∈ T) := by
           rw [Finset.mem_insert]
           exact ⟨fun h => h.resolve_left ha, Or.inr⟩
         simp only [h1, ha, decide_false, Bool.false_eq_true,
-          if_false, ite_false]
+          if_false]
         omega
 
 open Classical in
@@ -1222,35 +1221,18 @@ theorem walk_parity :
           rw [if_neg hu1] at hIH
           omega
 
-/-- Appending a fresh element preserves freedom from duplicates. -/
-theorem nodup_append_single :
-    ∀ {L : List IEdge} {e : IEdge}, L.Nodup → e ∉ L →
-    (L ++ [e]).Nodup
-  | [], e, _, _ => by simp
-  | a :: l, e, h, he => by
-      rw [List.nodup_cons] at h
-      rw [List.cons_append, List.nodup_cons]
-      refine ⟨?_, nodup_append_single h.2
-        (fun hm => he (List.mem_cons_of_mem a hm))⟩
-      intro hm
-      rcases List.mem_append.mp hm with h1 | h1
-      · exact h.1 h1
-      · rw [List.mem_singleton] at h1
-        subst h1
-        exact he List.mem_cons_self
-
 /-- Walks extend across an incident edge. -/
 theorem walk_append {e : IEdge} :
     ∀ (L : List IEdge) (v₀ : V2), Walk v₀ L →
     (walkEnd v₀ L = corner0 e ∨ walkEnd v₀ L = corner1 e) →
     Walk v₀ (L ++ [e])
   | [], v₀, _, he => by
-      show (v₀ = corner0 e ∨ v₀ = corner1 e)
+      change (v₀ = corner0 e ∨ v₀ = corner1 e)
         ∧ Walk (otherCorner e v₀) []
       exact ⟨he, trivial⟩
   | a :: l, v₀, hW, he => by
       obtain ⟨h1, h2⟩ := hW
-      show (v₀ = corner0 a ∨ v₀ = corner1 a)
+      change (v₀ = corner0 a ∨ v₀ = corner1 a)
         ∧ Walk (otherCorner a v₀) (l ++ [e])
       exact ⟨h1, walk_append l _ h2 he⟩
 
@@ -1275,7 +1257,8 @@ theorem exists_max_trail (γ : Finset IEdge) (v₀ : V2) :
       · rw [List.append_nil]; exact hsub
       · rw [List.append_nil]
         intro e heγ heL hinc
-        have hnd' : (L ++ [e]).Nodup := nodup_append_single hnd heL
+        have hnd' : (L ++ [e]).Nodup :=
+          hnd.append (List.nodup_singleton _) (List.disjoint_singleton.2 heL)
         have hsub' : (L ++ [e]).toFinset ⊆ γ := by
           intro x hx
           rw [List.mem_toFinset] at hx
@@ -1302,7 +1285,7 @@ theorem exists_max_trail (γ : Finset IEdge) (v₀ : V2) :
             exact heγ
         obtain ⟨M, h1, h2, h3, h4⟩ := ih (L ++ [e])
           (walk_append L v₀ hW hinc)
-          (nodup_append_single hnd heL) hsub'
+          (hnd.append (List.nodup_singleton _) (List.disjoint_singleton.2 heL)) hsub'
           (by rw [List.length_append, List.length_singleton]; omega)
         refine ⟨[e] ++ M, ?_, ?_, ?_, ?_⟩
         · rw [← List.append_assoc]; exact h1
@@ -1329,7 +1312,7 @@ theorem euler_listing {σ : PlusBC Λ} (h0 : σ.1 0 = false)
     ∃ L : List IEdge, Walk v₀ L ∧ L.Nodup ∧
       L.toFinset = contour σ ∧ L.head? = some s := by
   have hW1 : Walk v₀ [s] := by
-    show (v₀ = corner0 s ∨ v₀ = corner1 s)
+    change (v₀ = corner0 s ∨ v₀ = corner1 s)
       ∧ Walk (otherCorner s v₀) []
     exact ⟨hv, trivial⟩
   have hsub1 : ∀ e ∈ [s], e ∈ contour σ := by
@@ -1356,7 +1339,7 @@ theorem euler_listing {σ : PlusBC Λ} (h0 : σ.1 0 = false)
       refine List.countP_congr ?_
       intro e he
       have hinc := (mem_cornerEdges_iff e _).mp he
-      show decide (e ∈ ([s] ++ M).toFinset) = true
+      change decide (e ∈ ([s] ++ M).toFinset) = true
         ↔ decide (e ∈ contour σ) = true
       by_cases heT : e ∈ ([s] ++ M).toFinset
       · exact iff_of_true (decide_eq_true heT)
@@ -1492,7 +1475,7 @@ open Classical in
 horizontal contour edge, so the start height is below the contour
 length. -/
 theorem start_height_bound {σ : PlusBC Λ} (h0 : σ.1 0 = false)
-    {k : ℤ} (hk0 : 0 ≤ k)
+    {k : ℤ} (_hk0 : 0 ≤ k)
     (hsites : ∀ j : ℤ, 0 ≤ j → j ≤ k →
       (((0 : ℤ), j) : V2) ∈ fillCl σ) :
     k + 1 ≤ ((contour σ).card : ℤ) := by
@@ -1530,9 +1513,9 @@ theorem start_height_bound {σ : PlusBC Λ} (h0 : σ.1 0 = false)
       omega
     have hep : ep1 ((((xm - 1 : ℤ), j), true) : IEdge)
         = ((xm, j) : V2) := by
-      show ((xm - 1, j) : V2) + edir true = ((xm, j) : V2)
+      change ((xm - 1, j) : V2) + edir true = ((xm, j) : V2)
       rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
-      show ((xm - 1 + 1 : ℤ), (j + 0 : ℤ)) = ((xm, j) : V2)
+      change ((xm - 1 + 1 : ℤ), (j + 0 : ℤ)) = ((xm, j) : V2)
       rw [add_zero]
       norm_num
     refine ⟨xm - 1, ?_⟩
@@ -1542,13 +1525,13 @@ theorem start_height_bound {σ : PlusBC Λ} (h0 : σ.1 0 = false)
       right
       rw [hep]
       exact fillCl_subset h0 hxmem
-    · show (ep0 ((((xm - 1 : ℤ), j), true) : IEdge) ∈ fillCl σ
+    · change (ep0 ((((xm - 1 : ℤ), j), true) : IEdge) ∈ fillCl σ
           ∧ ep1 ((((xm - 1 : ℤ), j), true) : IEdge) ∉ fillCl σ)
         ∨ (ep0 ((((xm - 1 : ℤ), j), true) : IEdge) ∉ fillCl σ
           ∧ ep1 ((((xm - 1 : ℤ), j), true) : IEdge) ∈ fillCl σ)
       right
       constructor
-      · show ((xm - 1, j) : V2) ∉ fillCl σ
+      · change ((xm - 1, j) : V2) ∉ fillCl σ
         exact hleft
       · rw [hep]
         exact hxmem
@@ -1750,7 +1733,7 @@ theorem circuit_count
       · intro i h1 h2
         rw [List.getElem_ofFn]
         exact List.getD_eq_getElem _ _ h2
-    show (decode ((⟨k, hkn⟩ : Fin n) : ℕ) (List.ofFn fun i =>
+    change (decode ((⟨k, hkn⟩ : Fin n) : ℕ) (List.ofFn fun i =>
       ts.getD (i : ℕ) (⟨0, by norm_num⟩ : Fin 3))).toFinset = γ
     rw [hofn, ← hdec]
   have hbound : ((contours Λ).filter (fun γ => γ.card = n)).card
@@ -1793,10 +1776,10 @@ theorem ray_up {Λ : Finset V2} {x y : ℤ}
       refine (ray_up h m).tail ?_
       have hep : ep1 (((x, y + (m : ℤ)), false) : IEdge)
           = ((x, y + ((m + 1 : ℕ) : ℤ)) : V2) := by
-        show ((x, y + (m : ℤ)) : V2) + edir false
+        change ((x, y + (m : ℤ)) : V2) + edir false
           = ((x, y + ((m + 1 : ℕ) : ℤ)) : V2)
         rw [show edir false = ((0 : ℤ), (1 : ℤ)) from rfl]
-        show ((x + 0, y + (m : ℤ) + 1) : V2)
+        change ((x + 0, y + (m : ℤ) + 1) : V2)
           = ((x, y + ((m + 1 : ℕ) : ℤ)) : V2)
         rw [Prod.mk.injEq]
         exact ⟨by omega, by omega⟩
@@ -1817,14 +1800,14 @@ theorem ray_left {Λ : Finset V2} {x y : ℤ}
       refine (ray_left h m).tail ?_
       constructor
       · refine ⟨((x - (m : ℤ) - 1, y), true), Or.inr ⟨?_, ?_⟩⟩
-        · show ((x - (m : ℤ) - 1, y) : V2)
+        · change ((x - (m : ℤ) - 1, y) : V2)
             = ((x - ((m + 1 : ℕ) : ℤ), y) : V2)
           rw [Prod.mk.injEq]
           exact ⟨by omega, by omega⟩
-        · show ((x - (m : ℤ) - 1, y) : V2) + edir true
+        · change ((x - (m : ℤ) - 1, y) : V2) + edir true
             = ((x - (m : ℤ), y) : V2)
           rw [show edir true = ((1 : ℤ), (0 : ℤ)) from rfl]
-          show ((x - (m : ℤ) - 1 + 1, y + 0) : V2)
+          change ((x - (m : ℤ) - 1 + 1, y + 0) : V2)
             = ((x - (m : ℤ), y) : V2)
           rw [Prod.mk.injEq]
           exact ⟨by omega, by omega⟩
@@ -1851,7 +1834,7 @@ theorem box_hcompl (a b c d : ℤ) :
       ray_up ?_ (d + 1 - wy).toNat⟩
     · intro v hv
       rw [Finset.mem_product, Finset.mem_Icc, Finset.mem_Icc] at hv
-      show v.2 < wy + ((d + 1 - wy).toNat : ℤ)
+      change v.2 < wy + ((d + 1 - wy).toNat : ℤ)
       omega
     · intro y' hy'
       rw [hmem]
@@ -1862,7 +1845,7 @@ theorem box_hcompl (a b c d : ℤ) :
         ray_up ?_ (d + 1 - wy).toNat⟩
       · intro v hv
         rw [Finset.mem_product, Finset.mem_Icc, Finset.mem_Icc] at hv
-        show v.2 < wy + ((d + 1 - wy).toNat : ℤ)
+        change v.2 < wy + ((d + 1 - wy).toNat : ℤ)
         omega
       · intro y' hy'
         rw [hmem]
@@ -1890,7 +1873,7 @@ theorem box_hcompl (a b c d : ℤ) :
           (ray_up hcol (d + 1 - wy).toNat)⟩
       intro v hv
       rw [Finset.mem_product, Finset.mem_Icc, Finset.mem_Icc] at hv
-      show v.2 < wy + ((d + 1 - wy).toNat : ℤ)
+      change v.2 < wy + ((d + 1 - wy).toNat : ℤ)
       omega
 
 open Classical in

@@ -9,7 +9,8 @@ import Mathlib
 # Canonical reduction of the global standing conditions
 
 Covers `prop:canonical-condition-reductions` from
-`manuscripts/lorentzian_emergence/lorentzian_emergence.tex` (Appendix: logical status of the hypotheses):
+`manuscripts/lorentzian_emergence/lorentzian_emergence.tex` (Appendix: logical status of the
+hypotheses):
 
 * **(a)** `stationary_supported_on_terminal`: every stationary law of
   a finite Markov branch kernel is supported on **terminal** strongly
@@ -53,6 +54,7 @@ def stepRel (P : S → S → ℝ) (x y : S) : Prop := 0 < P x y
 def Reaches (P : S → S → ℝ) : S → S → Prop :=
   Relation.ReflTransGen (stepRel P)
 
+omit [DecidableEq S] in
 /-- The support of a stationary law is closed under one positive
 step. -/
 theorem support_step {P : S → S → ℝ} (hP0 : ∀ a b, 0 ≤ P a b)
@@ -65,6 +67,7 @@ theorem support_step {P : S → S → ℝ} (hP0 : ∀ a b, 0 ≤ P a b)
   rw [hπ y] at h1
   exact lt_of_lt_of_le (mul_pos hx hxy) h1
 
+omit [DecidableEq S] in
 /-- The support of a stationary law is closed under reachability. -/
 theorem support_reaches {P : S → S → ℝ} (hP0 : ∀ a b, 0 ≤ P a b)
     {π : S → ℝ} (hπ0 : ∀ a, 0 ≤ π a)
@@ -74,6 +77,7 @@ theorem support_reaches {P : S → S → ℝ} (hP0 : ∀ a b, 0 ≤ P a b)
   | refl => exact hx
   | tail _ hstep ih => exact support_step hP0 hπ0 hπ ih hstep
 
+omit [DecidableEq S] in
 /-- **Proposition `prop:canonical-condition-reductions` (a)**: a
 stationary law of a row-stochastic kernel is supported on terminal
 strongly connected components: everything reachable from the support

@@ -41,9 +41,10 @@ open MeasureTheory ProbabilityTheory Finset Preorder
 variable {S : Type*} [Fintype S] [DecidableEq S] [Nonempty S]
 variable [MeasurableSpace S] [MeasurableSingletonClass S]
 
+omit [DecidableEq S] [Fintype S] [Nonempty S] in
 /-- Every subset of a finite measurable-singleton space is
 measurable. -/
-theorem measurableSet_of_finite (s : Set S) : MeasurableSet s :=
+theorem measurableSet_of_finite [Finite S] (s : Set S) : MeasurableSet s :=
   s.toFinite.measurableSet
 
 section Chain
@@ -67,9 +68,11 @@ noncomputable def stepKernel : Kernel S S where
 instance : IsMarkovKernel (stepKernel P hP0 hrow) :=
   ⟨fun _ => PMF.toMeasure.isProbabilityMeasure _⟩
 
+omit [DecidableEq S] [Nonempty S] in
 theorem stepKernel_apply (s : S) :
     stepKernel P hP0 hrow s = (rowPMF P hP0 hrow s).toMeasure := rfl
 
+omit [DecidableEq S] [Nonempty S] in
 theorem stepKernel_singleton (s t : S) :
     stepKernel P hP0 hrow s {t} = ENNReal.ofReal (P s t) := by
   rw [stepKernel_apply,
@@ -87,6 +90,7 @@ instance (n : ℕ) : IsMarkovKernel (chainKernel P hP0 hrow n) := by
   unfold chainKernel
   infer_instance
 
+omit [DecidableEq S] [Nonempty S] in
 theorem chainKernel_apply (n : ℕ) (x : Π _i : Iic n, S) :
     chainKernel P hP0 hrow n x
       = (rowPMF P hP0 hrow (x ⟨n, mem_Iic.mpr le_rfl⟩)).toMeasure :=
@@ -101,6 +105,7 @@ noncomputable def initMeasure : Measure S :=
 instance : IsProbabilityMeasure (initMeasure π hπ0 hπ1) :=
   PMF.toMeasure.isProbabilityMeasure _
 
+omit [DecidableEq S] [Nonempty S] in
 theorem initMeasure_singleton (a : S) :
     initMeasure π hπ0 hπ1 {a} = ENNReal.ofReal (π a) := by
   rw [initMeasure,
@@ -117,6 +122,8 @@ instance : IsProbabilityMeasure (chainMeasure P π hP0 hrow hπ0 hπ1) := by
   unfold chainMeasure
   infer_instance
 
+omit [DecidableEq S] in
+omit [DecidableEq S] [Nonempty S] in
 /-- The law of the position at time `0` is the initial law. -/
 theorem chainMeasure_map_eval_zero :
     (chainMeasure P π hP0 hrow hπ0 hπ1).map (fun ω => ω 0)
@@ -153,6 +160,8 @@ theorem chainMeasure_map_eval_zero :
     simp [hdef]
   rw [hcomp, hfr, hcomp2, hid, Measure.map_id]
 
+omit [DecidableEq S] in
+omit [DecidableEq S] [Nonempty S] in
 /-- The two-time marginal: the pair `(history to n, position n+1)`
 has law `map (frestrictLe n) ⊗ₘ κ n`. -/
 theorem chainMeasure_pair (n : ℕ) :
@@ -162,6 +171,7 @@ theorem chainMeasure_pair (n : ℕ) :
         (fun x => (frestrictLe n x, x (n + 1))) :=
   Kernel.map_frestrictLe_trajMeasure_compProd_eq_map_trajMeasure
 
+omit [DecidableEq S] [Nonempty S] in
 /-- **Stationary marginals**: at every time the marginal law of the
 chain is the stationary law. -/
 theorem chainMeasure_map_eval
@@ -238,6 +248,7 @@ theorem chainMeasure_map_eval
           (fun s _ => mul_nonneg (hπ0 s) (hP0 s t)), hstat t]
     rw [← hRHS, ← hpair, hLHS, initMeasure_singleton]
 
+omit [DecidableEq S] [Nonempty S] in
 /-- **Almost-sure step property**: any pairwise property implied by
 stationary positivity of the current state together with positivity
 of the transition fails on a null set, at every time. -/
@@ -328,6 +339,7 @@ theorem chainMeasure_pair_null
     rw [Finset.sum_congr rfl h7, Finset.sum_const, smul_zero,
       zero_mul]
 
+omit [DecidableEq S] [Nonempty S] in
 /-- **Clause (iv), core event**: almost surely every state of the
 trajectory carries positive stationary mass and communicates with the
 starting state — the trajectory stays inside one communicating class
@@ -346,7 +358,7 @@ theorem stationary_trajectory_in_closed_class
     intro ω hω
     by_contra hnot
     rw [Set.mem_iUnion] at hnot
-    push_neg at hnot
+    push Not at hnot
     have hall : ∀ n, Q (ω n) (ω (n + 1)) := by
       intro n
       have h1 := hnot n
@@ -366,6 +378,7 @@ theorem stationary_trajectory_in_closed_class
   exact measure_iUnion_null fun n =>
     chainMeasure_pair_null P π hP0 hrow hπ0 hπ1 hstat n hQ
 
+omit [DecidableEq S] [Nonempty S] in
 /-- **Proposition `prop:terminal-component` (iv)**: under a
 stationary Markov law, almost every trajectory lies — from time `0`
 on — inside one closed communicating class in which all states
@@ -438,3 +451,5 @@ theorem deterministic_path_no_absorption :
         · norm_num at hstep
         · rfl
     exact Bool.noConfusion (hkey false hreach)
+
+end NCG

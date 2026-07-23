@@ -10,7 +10,8 @@ import Mathlib.Topology.Instances.Matrix
 /-!
 # The primitive transfer selects a unique faithful stationary weight
 
-Covers `thm:primitive-stationary-weight` from `manuscripts/renewal_emergence/renewal_emergence.tex`: a
+Covers `thm:primitive-stationary-weight` from
+`manuscripts/renewal_emergence/renewal_emergence.tex`: a
 trace-preserving, positivity-preserving, star-preserving linear map
 `T` on `M_n(𝕜)` that is *primitive* (some power `T^m` sends every
 nonzero positive-semidefinite matrix to a positive-definite one) has
@@ -528,15 +529,15 @@ theorem continuous_entry (i j : Fin n) :
 theorem continuous_matrix_trace :
     Continuous fun A : Matrix (Fin n) (Fin n) 𝕜 => A.trace := by
   simp only [Matrix.trace, Matrix.diag]
-  exact continuous_finset_sum _ fun i _ => continuous_entry i i
+  exact continuous_finsetSum _ fun i _ => continuous_entry i i
 
 theorem continuous_quadForm (x : Fin n → 𝕜) :
     Continuous fun A : Matrix (Fin n) (Fin n) 𝕜 =>
       star x ⬝ᵥ (A *ᵥ x) := by
   simp only [dotProduct, Matrix.mulVec, Pi.star_apply]
-  refine continuous_finset_sum _ fun i _ =>
+  refine continuous_finsetSum _ fun i _ =>
     Continuous.mul continuous_const ?_
-  exact continuous_finset_sum _ fun j _ =>
+  exact continuous_finsetSum _ fun j _ =>
     Continuous.mul (continuous_entry i j) continuous_const
 
 theorem isClosed_posSemidef :
@@ -816,7 +817,7 @@ theorem posDef_exists_smul_one_le {A : Matrix (Fin n) (Fin n) 𝕜}
 semidefiniteness. -/
 theorem shift_mono {A : Matrix (Fin n) (Fin n) 𝕜} {a : ℝ}
     (hA : (A - ((a : ℝ) : 𝕜) • 1).PosSemidef) {e : ℝ}
-    (he : 0 ≤ e) (hea : e ≤ a) :
+    (_he : 0 ≤ e) (hea : e ≤ a) :
     (A - ((e : ℝ) : 𝕜) • 1).PosSemidef := by
   have h1 : A - ((e : ℝ) : 𝕜) • 1
       = (A - ((a : ℝ) : 𝕜) • 1) + ((a - e : ℝ) : 𝕜) • 1 := by
@@ -1065,8 +1066,8 @@ theorem continuousOn_trNorm :
   have hgcont : Continuous fun Z : Matrix (Fin n) (Fin n) 𝕜 =>
       (n : ℝ) * ∑ i, ∑ j, ‖(Z - X) i j‖ := by
     refine Continuous.mul continuous_const ?_
-    refine continuous_finset_sum _ fun i _ => ?_
-    refine continuous_finset_sum _ fun j _ => ?_
+    refine continuous_finsetSum _ fun i _ => ?_
+    refine continuous_finsetSum _ fun j _ => ?_
     exact ((continuous_entry i j).sub continuous_const).norm
   have hg0 : Tendsto
       (fun Z : Matrix (Fin n) (Fin n) 𝕜 =>
@@ -1186,8 +1187,8 @@ theorem exists_uniform_contraction (hn : 0 < n) {m : ℕ}
         have hgcont : Continuous fun Z : Matrix (Fin n) (Fin n) 𝕜 =>
             (n : ℝ) * ∑ i, ∑ j, ‖(Z - X) i j‖ := by
           refine Continuous.mul continuous_const ?_
-          refine continuous_finset_sum _ fun i _ => ?_
-          refine continuous_finset_sum _ fun j _ => ?_
+          refine continuous_finsetSum _ fun i _ => ?_
+          refine continuous_finsetSum _ fun j _ => ?_
           exact ((continuous_entry i j).sub continuous_const).norm
         have hg0 : Tendsto
             (fun k => (n : ℝ) * ∑ i, ∑ j, ‖(x k - X) i j‖) atTop

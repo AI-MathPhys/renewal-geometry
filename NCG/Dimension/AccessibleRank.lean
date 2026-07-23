@@ -105,7 +105,7 @@ theorem accessible_modular_rank
       at hnotnd
     have hex : ∃ w : ↥H, w ≠ 0 ∧ ∀ y : ↥H, B.restrict H w y = 0 := by
       by_contra hall
-      push_neg at hall
+      push Not at hall
       exact hnotnd fun w hw => by
         by_contra hne
         obtain ⟨y, hy⟩ := hall w hne
@@ -124,6 +124,7 @@ theorem accessible_modular_rank
       (Module.finrank_pos_iff (R := K)).mpr hnontriv
     omega
 
+omit [FiniteDimensional K V] in
 /-- **Theorem `thm:accessible-modular-rank`, rank formula**: the full
 accessible modular rank is `1 + b_eff` — a nondegenerate form has full
 rank `dim V = dim H + 1`. -/

@@ -9,7 +9,8 @@ import NCG.Upstream.AffinityCohomology
 /-!
 # Finite amplitude lifts and complex amplitude square roots
 
-Covers, from `manuscripts/renewal_emergence/renewal_emergence.tex` (with `μ₄ ≅ ℤ/4`, `μ₂ ≅ ℤ/2` and the
+Covers, from `manuscripts/renewal_emergence/renewal_emergence.tex` (with `μ₄ ≅ ℤ/4`, `μ₂ ≅ ℤ/2` and
+the
 squaring map as reduction of the exponent modulo two, as the notes
 identify):
 
@@ -162,26 +163,26 @@ theorem phaseOf_sq (h : ZMod 4) (χ : ZMod 2) (hred : z4ToZ2 h = χ) :
   · have hχ : χ = 0 := by rw [← hred]; decide
     subst hχ
     rw [if_pos rfl]
-    show (Complex.I ^ (0 : ℕ)) ^ 2 = 1
+    change (Complex.I ^ (0 : ℕ)) ^ 2 = 1
     norm_num
   · have hχ : χ = 1 := by rw [← hred]; decide
     subst hχ
     rw [if_neg (by decide)]
-    show (Complex.I ^ (1 : ℕ)) ^ 2 = -1
+    change (Complex.I ^ (1 : ℕ)) ^ 2 = -1
     rw [pow_one, Complex.I_sq]
   · have hχ : χ = 0 := by rw [← hred]; decide
     subst hχ
     rw [if_pos rfl]
-    show (Complex.I ^ (2 : ℕ)) ^ 2 = 1
+    change (Complex.I ^ (2 : ℕ)) ^ 2 = 1
     rw [show Complex.I ^ (2 : ℕ) = Complex.I ^ 2 from rfl,
       Complex.I_sq]
     ring
   · have hχ : χ = 1 := by rw [← hred]; decide
     subst hχ
     rw [if_neg (by decide)]
-    show (Complex.I ^ (3 : ℕ)) ^ 2 = -1
+    change (Complex.I ^ (3 : ℕ)) ^ 2 = -1
     rw [← pow_mul]
-    show Complex.I ^ (6 : ℕ) = -1
+    change Complex.I ^ (6 : ℕ) = -1
     rw [show (6 : ℕ) = 2 * 3 from rfl, pow_mul, Complex.I_sq]
     ring
 
@@ -195,7 +196,7 @@ theorem amplitude_root_construction (lam : G.E → ℝˣ)
       (fun e => (Real.exp (lineMagnitude G lam e / 2) : ℂ)
         * phaseOf (u e)) lam := by
   intro e
-  show ((Real.exp (lineMagnitude G lam e / 2) : ℂ)
+  change ((Real.exp (lineMagnitude G lam e / 2) : ℂ)
     * phaseOf (u e)) ^ 2 = _
   rw [mul_pow, phaseOf_sq (u e) (lineSign G lam e) (hlift e)]
   have hexp : ((Real.exp (lineMagnitude G lam e / 2) : ℝ) : ℂ) ^ 2
@@ -305,7 +306,7 @@ theorem amplitude_root_mul_sign (z : G.E → ℂ) (lam : G.E → ℝˣ)
     (hε : ∀ e, ε e = 1 ∨ ε e = -1) :
     IsComplexAmplitudeRoot (fun e => ε e * z e) lam := by
   intro e
-  show (ε e * z e) ^ 2 = _
+  change (ε e * z e) ^ 2 = _
   have hsq : (ε e) ^ 2 = 1 := by
     rcases hε e with h | h <;> rw [h] <;> ring
   rw [mul_pow, hsq, one_mul]

@@ -56,16 +56,19 @@ def IsMinimalProjection (q : X →ₗ[𝕜] Q) (P : X →ₗ[𝕜] X) : Prop :=
   IsExactProjection q P ∧
     finrank 𝕜 (LinearMap.range P) = finrank 𝕜 Q
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 theorem IsExactProjection.apply_apply {q : X →ₗ[𝕜] Q}
     {P : X →ₗ[𝕜] X} (hP : IsExactProjection q P) (x : X) :
     P (P x) = P x :=
   congrFun (congrArg DFunLike.coe hP.1) x
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 theorem IsExactProjection.q_apply {q : X →ₗ[𝕜] Q}
     {P : X →ₗ[𝕜] X} (hP : IsExactProjection q P) (x : X) :
     q (P x) = q x :=
   congrFun (congrArg DFunLike.coe hP.2) x
 
+omit [FiniteDimensional 𝕜 Q] in
 /-- **Theorem `thm:linear-retract-classification` (i, rank bound)**:
 `rank P ≥ r` for every exact predictive projection. -/
 theorem exactProjection_rank_ge {q : X →ₗ[𝕜] Q}
@@ -80,6 +83,7 @@ theorem exactProjection_rank_ge {q : X →ₗ[𝕜] Q}
         rw [hrange]; exact (finrank_top 𝕜 Q).symm
     _ ≤ finrank 𝕜 (LinearMap.range P) := finrank_map_le q _
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 /-- **Theorem `thm:linear-retract-classification` (i, kernel
 inclusion)**: `ker P ⊆ K_pred`. -/
 theorem exactProjection_ker_le {q : X →ₗ[𝕜] Q} {P : X →ₗ[𝕜] X}
@@ -90,6 +94,7 @@ theorem exactProjection_ker_le {q : X →ₗ[𝕜] Q} {P : X →ₗ[𝕜] X}
   rw [LinearMap.mem_ker.mp hx, map_zero] at h1
   exact LinearMap.mem_ker.mpr h1.symm
 
+omit [FiniteDimensional 𝕜 Q] in
 /-- **Theorem `thm:linear-retract-classification` (ii, rank =
 kernel)**: for an exact predictive projection, `rank P = r` iff
 `ker P = K_pred`. -/
@@ -113,6 +118,7 @@ theorem minimal_iff_ker_eq {q : X →ₗ[𝕜] Q}
     rw [hker] at hX
     omega
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 /-- **Theorem `thm:linear-retract-classification` (ii, restricted
 surjectivity)**: `q` restricted to `im P` is always surjective. -/
 theorem exactProjection_domRestrict_surjective {q : X →ₗ[𝕜] Q}
@@ -123,6 +129,7 @@ theorem exactProjection_domRestrict_surjective {q : X →ₗ[𝕜] Q}
   obtain ⟨x, rfl⟩ := hq y
   exact ⟨⟨P x, LinearMap.mem_range_self P x⟩, hP.q_apply x⟩
 
+omit [FiniteDimensional 𝕜 Q] in
 /-- **Theorem `thm:linear-retract-classification` (ii,
 isomorphism)**: for an exact predictive projection, `rank P = r` iff
 `q|_{im P} : im P → Q_lin` is an isomorphism. -/
@@ -155,6 +162,7 @@ variable (M : Submodule 𝕜 X) (hM : IsCompl M (LinearMap.ker q))
 
 include hq hM
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 /-- For a complement `M` of the null space, `q|_M` is bijective. -/
 theorem domRestrict_bijective_of_isCompl :
     Function.Bijective (q.domRestrict M) := by
@@ -171,7 +179,7 @@ theorem domRestrict_bijective_of_isCompl :
       rw [hM.sup_eq_top]; trivial
     obtain ⟨m, hm, k, hk, rfl⟩ := Submodule.mem_sup.mp hx
     refine ⟨⟨m, hm⟩, ?_⟩
-    show q m = q (m + k)
+    change q m = q (m + k)
     rw [map_add, LinearMap.mem_ker.mp hk, add_zero]
 
 /-- The isomorphism `q|_M : M ≃ Q_lin` for a complement `M`. -/
@@ -179,6 +187,7 @@ noncomputable def complEquiv : M ≃ₗ[𝕜] Q :=
   LinearEquiv.ofBijective (q.domRestrict M)
     (domRestrict_bijective_of_isCompl q hq M hM)
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 theorem q_complEquiv_symm (y : Q) :
     q ((complEquiv q hq M hM).symm y : X) = y :=
   (complEquiv q hq M hM).apply_symm_apply y
@@ -193,18 +202,22 @@ projection)**: `P_M = m ∘ q : X → X`. -/
 noncomputable def projOfCompl : X →ₗ[𝕜] X :=
   M.subtype ∘ₗ projToCompl q hq M hM
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 theorem projOfCompl_mem (x : X) : projOfCompl q hq M hM x ∈ M :=
   ((complEquiv q hq M hM).symm (q x)).2
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 theorem q_projOfCompl (x : X) :
     q (projOfCompl q hq M hM x) = q x :=
   q_complEquiv_symm q hq M hM (q x)
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 theorem projOfCompl_of_mem {m : X} (hm : m ∈ M) :
     projOfCompl q hq M hM m = m :=
   congrArg Subtype.val
     ((complEquiv q hq M hM).symm_apply_apply ⟨m, hm⟩)
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 theorem projOfCompl_range :
     LinearMap.range (projOfCompl q hq M hM) = M := by
   apply le_antisymm
@@ -213,6 +226,7 @@ theorem projOfCompl_range :
   · intro m hm
     exact ⟨m, projOfCompl_of_mem q hq M hM hm⟩
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 /-- **Theorem `thm:linear-retract-classification` (iii, exactness
 and minimality)**: `P_M` is a minimal exact predictive
 projection. -/
@@ -225,6 +239,7 @@ theorem projOfCompl_isMinimal :
   · rw [projOfCompl_range]
     exact (complEquiv q hq M hM).finrank_eq
 
+omit [FiniteDimensional 𝕜 Q] in
 /-- **Theorem `thm:linear-retract-classification` (iii, kernel)**:
 `ker P_M = K_pred`. -/
 theorem projOfCompl_ker :
@@ -234,6 +249,7 @@ theorem projOfCompl_ker :
 
 end Complement
 
+omit [FiniteDimensional 𝕜 Q] in
 /-- **Theorem `thm:linear-retract-classification` (iii, converse)**:
 the image of every minimal exact predictive projection is a linear
 complement of `K_pred`. -/
@@ -250,7 +266,7 @@ theorem isCompl_range_of_minimal {q : X →ₗ[𝕜] Q}
     · rintro ⟨hxP, hxq⟩
       have h1 : q.domRestrict (LinearMap.range P) ⟨x, hxP⟩
           = q.domRestrict (LinearMap.range P) 0 := by
-        show q x = q 0
+        change q x = q 0
         rw [LinearMap.mem_ker.mp hxq, map_zero]
       exact congrArg Subtype.val (hbij.1 h1)
     · rintro rfl
@@ -263,6 +279,7 @@ theorem isCompl_range_of_minimal {q : X →ₗ[𝕜] Q}
     rw [hx2]
     exact Submodule.add_mem_sup (LinearMap.mem_range_self P x) hker
 
+omit [FiniteDimensional 𝕜 Q] in
 /-- **Theorem `thm:linear-retract-classification` (iii, bijection)**:
 a minimal exact predictive projection equals the projection built
 from its own image — so `P ↦ im P` and `M ↦ P_M` are mutually
@@ -282,7 +299,7 @@ theorem eq_projOfCompl_range {q : X →ₗ[𝕜] Q}
       = q.domRestrict (LinearMap.range P)
         ⟨projOfCompl q hq (LinearMap.range P) hcompl x,
           projOfCompl_mem q hq (LinearMap.range P) hcompl x⟩ := by
-    show q (P x) = q (projOfCompl q hq (LinearMap.range P) hcompl x)
+    change q (P x) = q (projOfCompl q hq (LinearMap.range P) hcompl x)
     rw [hP.1.q_apply, q_projOfCompl]
   exact congrArg Subtype.val (hbij.1 h1)
 
@@ -300,6 +317,7 @@ conjugacy)**: `U = (q|_N)^{-1} ∘ q|_M : M ≃ N`. -/
 noncomputable def transferCompl : M ≃ₗ[𝕜] N :=
   (complEquiv q hq M hM).trans (complEquiv q hq N hN).symm
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 /-- **Theorem `thm:linear-retract-classification` (iv, quotient
 fixed)**: `q ∘ U = q|_M` — the conjugacy acts trivially on the
 predictive quotient. -/
@@ -307,6 +325,7 @@ theorem transferCompl_q (m : M) :
     q (transferCompl q hq M N hM hN m : X) = q (m : X) :=
   q_complEquiv_symm q hq N hN ((complEquiv q hq M hM) m)
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 /-- **Theorem `thm:linear-retract-classification` (iv,
 uniqueness)**: `U` is the unique quotient-fixed linear map
 `M → N`. -/
@@ -316,6 +335,7 @@ theorem transferCompl_unique (F : M →ₗ[𝕜] N)
   (complEquiv q hq N hN).injective
     ((hF m).trans (transferCompl_q q hq M N hM hN m).symm)
 
+omit [FiniteDimensional 𝕜 Q] [FiniteDimensional 𝕜 X] in
 /-- **Theorem `thm:linear-retract-classification` (iv, conjugation
 of the projections)**: `U ∘ (m_M ∘ q) = m_N ∘ q` — the conjugacy
 intertwines the two minimal predictive carriers, so both realize the

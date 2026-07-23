@@ -23,7 +23,8 @@ This file formalizes the order-theoretic layer of the positive sector
 
 The causal-set reading of this order (Proposition `prop:causal-skeleton`)
 and the chain-counting renewal resolvent (Proposition `prop:incidence-zeta`)
-are downstream targets; see the roadmap.
+are developed in `NCG/Renewal/CausalSkeleton.lean` and
+`NCG/Renewal/IncidenceZeta.lean`.
 -/
 
 namespace NCG

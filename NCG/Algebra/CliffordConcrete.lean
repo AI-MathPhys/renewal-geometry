@@ -55,20 +55,20 @@ theorem pauli1_sq : pauli1 * pauli1 = 1 := by
   rw [pauli1]
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [Matrix.mul_apply, Fin.sum_univ_two, Matrix.one_apply]
+    simp [Matrix.mul_apply, Fin.sum_univ_two]
 
 theorem pauli2_sq : pauli2 * pauli2 = 1 := by
   rw [pauli2]
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [Matrix.mul_apply, Fin.sum_univ_two, Matrix.one_apply,
+    simp [Matrix.mul_apply, Fin.sum_univ_two,
       Complex.I_mul_I]
 
 theorem pauli3_sq : pauli3 * pauli3 = 1 := by
   rw [pauli3]
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [Matrix.mul_apply, Fin.sum_univ_two, Matrix.one_apply]
+    simp [Matrix.mul_apply, Fin.sum_univ_two]
 
 theorem pauli12_anticomm : pauli1 * pauli2 = -(pauli2 * pauli1) := by
   rw [pauli1, pauli2]
@@ -152,20 +152,20 @@ theorem pauli_commutant (Y : Matrix (Fin 2) (Fin 2) ℂ)
     linear_combination -h5
   ext i j
   fin_cases i <;> fin_cases j
-  · show Y 0 0 = (Y 0 0 • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 0 0
+  · change Y 0 0 = (Y 0 0 • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 0 0
     rw [Matrix.smul_apply, Matrix.one_apply_eq, smul_eq_mul,
       mul_one]
-  · show Y 0 1 = (Y 0 0 • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 0 1
+  · change Y 0 1 = (Y 0 0 • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 0 1
     rw [Matrix.smul_apply,
       Matrix.one_apply_ne (by decide : (0 : Fin 2) ≠ 1),
       smul_eq_mul, mul_zero]
     exact e01
-  · show Y 1 0 = (Y 0 0 • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 1 0
+  · change Y 1 0 = (Y 0 0 • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 1 0
     rw [Matrix.smul_apply,
       Matrix.one_apply_ne (by decide : (1 : Fin 2) ≠ 0),
       smul_eq_mul, mul_zero]
     exact e10
-  · show Y 1 1 = (Y 0 0 • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 1 1
+  · change Y 1 1 = (Y 0 0 • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 1 1
     rw [Matrix.smul_apply, Matrix.one_apply_eq, smul_eq_mul,
       mul_one]
     exact e11
@@ -191,16 +191,16 @@ theorem kron_neg (A B : Matrix (Fin 2) (Fin 2) ℂ) :
 /-- **The Clifford squares**: `Γ_μ² = 1`. -/
 theorem gamma_sq (μ : Fin 4) : gamma μ * gamma μ = 1 := by
   fin_cases μ
-  · show pauli1 ⊗ₖ 1 * (pauli1 ⊗ₖ 1) = 1
+  · change pauli1 ⊗ₖ 1 * (pauli1 ⊗ₖ 1) = 1
     rw [← Matrix.mul_kronecker_mul, pauli1_sq, Matrix.one_mul,
       Matrix.one_kronecker_one]
-  · show pauli2 ⊗ₖ 1 * (pauli2 ⊗ₖ 1) = 1
+  · change pauli2 ⊗ₖ 1 * (pauli2 ⊗ₖ 1) = 1
     rw [← Matrix.mul_kronecker_mul, pauli2_sq, Matrix.one_mul,
       Matrix.one_kronecker_one]
-  · show pauli3 ⊗ₖ pauli1 * (pauli3 ⊗ₖ pauli1) = 1
+  · change pauli3 ⊗ₖ pauli1 * (pauli3 ⊗ₖ pauli1) = 1
     rw [← Matrix.mul_kronecker_mul, pauli3_sq, pauli1_sq,
       Matrix.one_kronecker_one]
-  · show pauli3 ⊗ₖ pauli2 * (pauli3 ⊗ₖ pauli2) = 1
+  · change pauli3 ⊗ₖ pauli2 * (pauli3 ⊗ₖ pauli2) = 1
     rw [← Matrix.mul_kronecker_mul, pauli3_sq, pauli2_sq,
       Matrix.one_kronecker_one]
 
@@ -209,61 +209,61 @@ theorem gamma_anticomm (μ ν : Fin 4) (h : μ ≠ ν) :
     gamma μ * gamma ν = -(gamma ν * gamma μ) := by
   fin_cases μ <;> fin_cases ν
   · exact absurd rfl h
-  · show pauli1 ⊗ₖ 1 * (pauli2 ⊗ₖ 1)
+  · change pauli1 ⊗ₖ 1 * (pauli2 ⊗ₖ 1)
       = -(pauli2 ⊗ₖ 1 * (pauli1 ⊗ₖ 1))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli12_anticomm, neg_kron]
-  · show pauli1 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli1)
+  · change pauli1 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli1)
       = -(pauli3 ⊗ₖ pauli1 * (pauli1 ⊗ₖ 1))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli13_anticomm, Matrix.one_mul, Matrix.mul_one,
       neg_kron]
-  · show pauli1 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli2)
+  · change pauli1 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli2)
       = -(pauli3 ⊗ₖ pauli2 * (pauli1 ⊗ₖ 1))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli13_anticomm, Matrix.one_mul, Matrix.mul_one,
       neg_kron]
-  · show pauli2 ⊗ₖ 1 * (pauli1 ⊗ₖ 1)
+  · change pauli2 ⊗ₖ 1 * (pauli1 ⊗ₖ 1)
       = -(pauli1 ⊗ₖ 1 * (pauli2 ⊗ₖ 1))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli21_anticomm, neg_kron]
   · exact absurd rfl h
-  · show pauli2 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli1)
+  · change pauli2 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli1)
       = -(pauli3 ⊗ₖ pauli1 * (pauli2 ⊗ₖ 1))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli23_anticomm, Matrix.one_mul, Matrix.mul_one,
       neg_kron]
-  · show pauli2 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli2)
+  · change pauli2 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli2)
       = -(pauli3 ⊗ₖ pauli2 * (pauli2 ⊗ₖ 1))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli23_anticomm, Matrix.one_mul, Matrix.mul_one,
       neg_kron]
-  · show pauli3 ⊗ₖ pauli1 * (pauli1 ⊗ₖ 1)
+  · change pauli3 ⊗ₖ pauli1 * (pauli1 ⊗ₖ 1)
       = -(pauli1 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli1))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli31_anticomm, Matrix.one_mul, Matrix.mul_one,
       neg_kron]
-  · show pauli3 ⊗ₖ pauli1 * (pauli2 ⊗ₖ 1)
+  · change pauli3 ⊗ₖ pauli1 * (pauli2 ⊗ₖ 1)
       = -(pauli2 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli1))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli32_anticomm, Matrix.one_mul, Matrix.mul_one,
       neg_kron]
   · exact absurd rfl h
-  · show pauli3 ⊗ₖ pauli1 * (pauli3 ⊗ₖ pauli2)
+  · change pauli3 ⊗ₖ pauli1 * (pauli3 ⊗ₖ pauli2)
       = -(pauli3 ⊗ₖ pauli2 * (pauli3 ⊗ₖ pauli1))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli12_anticomm, kron_neg]
-  · show pauli3 ⊗ₖ pauli2 * (pauli1 ⊗ₖ 1)
+  · change pauli3 ⊗ₖ pauli2 * (pauli1 ⊗ₖ 1)
       = -(pauli1 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli2))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli31_anticomm, Matrix.one_mul, Matrix.mul_one,
       neg_kron]
-  · show pauli3 ⊗ₖ pauli2 * (pauli2 ⊗ₖ 1)
+  · change pauli3 ⊗ₖ pauli2 * (pauli2 ⊗ₖ 1)
       = -(pauli2 ⊗ₖ 1 * (pauli3 ⊗ₖ pauli2))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli32_anticomm, Matrix.one_mul, Matrix.mul_one,
       neg_kron]
-  · show pauli3 ⊗ₖ pauli2 * (pauli3 ⊗ₖ pauli1)
+  · change pauli3 ⊗ₖ pauli2 * (pauli3 ⊗ₖ pauli1)
       = -(pauli3 ⊗ₖ pauli1 * (pauli3 ⊗ₖ pauli2))
     rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul,
       pauli21_anticomm, kron_neg]
@@ -295,15 +295,15 @@ theorem kron_conjTranspose (A B : Matrix (Fin 2) (Fin 2) ℂ) :
 /-- Each generator is Hermitian. -/
 theorem gamma_herm (μ : Fin 4) : (gamma μ)ᴴ = gamma μ := by
   fin_cases μ
-  · show (pauli1 ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℂ))ᴴ
+  · change (pauli1 ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℂ))ᴴ
       = pauli1 ⊗ₖ 1
     rw [kron_conjTranspose, pauli1_herm, Matrix.conjTranspose_one]
-  · show (pauli2 ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℂ))ᴴ
+  · change (pauli2 ⊗ₖ (1 : Matrix (Fin 2) (Fin 2) ℂ))ᴴ
       = pauli2 ⊗ₖ 1
     rw [kron_conjTranspose, pauli2_herm, Matrix.conjTranspose_one]
-  · show (pauli3 ⊗ₖ pauli1)ᴴ = pauli3 ⊗ₖ pauli1
+  · change (pauli3 ⊗ₖ pauli1)ᴴ = pauli3 ⊗ₖ pauli1
     rw [kron_conjTranspose, pauli3_herm, pauli1_herm]
-  · show (pauli3 ⊗ₖ pauli2)ᴴ = pauli3 ⊗ₖ pauli2
+  · change (pauli3 ⊗ₖ pauli2)ᴴ = pauli3 ⊗ₖ pauli2
     rw [kron_conjTranspose, pauli3_herm, pauli2_herm]
 
 /-- Each generator is a Hermitian unitary. -/
@@ -339,7 +339,7 @@ theorem gamma_commutant
     have h1 := congrFun (congrFun hcomm (m, k)) (j, l)
     simp only [Matrix.mul_apply, Fintype.sum_prod_type,
       Matrix.kroneckerMap_apply, Matrix.one_apply, mul_ite,
-      ite_mul, mul_one, one_mul, mul_zero, zero_mul,
+      ite_mul, mul_one, mul_zero, zero_mul,
       Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ,
       if_true, Matrix.of_apply] at h1 ⊢
     linear_combination h1

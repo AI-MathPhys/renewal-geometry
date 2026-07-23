@@ -50,21 +50,24 @@ theorem pressure_strictAnti (ℓ : E → ℝ) (hℓ : ∀ σ, 0 < ℓ σ) :
   have := hℓ σ
   nlinarith
 
+omit [Nonempty E] in
 /-- The pressure is continuous. -/
 theorem pressure_continuous (ℓ : E → ℝ) : Continuous (pressure ℓ) := by
-  apply continuous_finset_sum
+  apply continuous_finsetSum
   intro σ _
   exact Real.continuous_exp.comp ((continuous_id.neg).mul continuous_const)
 
+omit [Nonempty E] in
 /-- The pressure tends to `0` at infinity. -/
 theorem pressure_tendsto_zero (ℓ : E → ℝ) (hℓ : ∀ σ, 0 < ℓ σ) :
     Tendsto (pressure ℓ) atTop (nhds 0) := by
   rw [show (0 : ℝ) = ∑ _σ : E, 0 by simp]
-  apply tendsto_finset_sum
+  apply tendsto_finsetSum
   intro σ _
   apply Real.tendsto_exp_atBot.comp
   exact Tendsto.atBot_mul_const (hℓ σ) tendsto_neg_atTop_atBot
 
+omit [Nonempty E] in
 /-- At `s = 0` the pressure is the number of reset symbols. -/
 theorem pressure_zero (ℓ : E → ℝ) :
     pressure ℓ 0 = Fintype.card E := by
@@ -89,7 +92,7 @@ theorem pressure_eq_one_existsUnique (ℓ : E → ℝ) (hℓ : ∀ σ, 0 < ℓ �
     linarith
   have hM0 : 0 < M := by
     by_contra hle
-    push_neg at hle
+    push Not at hle
     have := (pressure_strictAnti ℓ hℓ).antitone hle
     linarith
   -- intermediate value between `0` and `M`

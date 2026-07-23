@@ -12,32 +12,44 @@ honesty note describing exactly what was proved.
 | File | Contents |
 |---|---|
 | [`lorentzian_emergence.tex`](lorentzian_emergence.tex) | The manuscript source |
-| `lorentzian_emergence.pdf` | The compiled manuscript |
+| [`lorentzian_emergence.pdf`](lorentzian_emergence.pdf) | The compiled manuscript |
 | [`statements.json`](statements.json) | The per-statement verification ledger (label → status → Lean anchors → note) |
 
 ## Verification summary
 
 **210 tracked statements. 0 `sorry`. 0 conditional. 0 unformalized.**
 
-| Environment | Proved | Statement encoded | Total |
+Every claim-bearing statement of the paper (theorem / proposition / lemma /
+corollary) is **proved in Lean**, with a single declared exception (see below):
+
+| Environment | Proved | Encoded interface | Total |
 |---|---:|---:|---:|
-| Theorems | 74 | 1 | 75 |
-| Propositions | 38 | 0 | 38 |
-| Lemmas | 28 | 0 | 28 |
-| Corollaries | 26 | 0 | 26 |
+| Theorems | 77 | 1 | 78 |
+| Propositions | 39 | 0 | 39 |
+| Lemmas | 30 | 0 | 30 |
+| Corollaries | 28 | 0 | 28 |
+| *Claim-bearing subtotal* | *174* | *1* | *175* |
 | Definitions | 19 | 16 | 35 |
-| Constructions / other | 8 | 0 | 8 |
 | **Total** | **193** | **17** | **210** |
 
-- **`proved`** — the statement's mathematical content is proved sorry-free in
-  Lean; the record's note discloses any scoped hypothesis (each such
-  hypothesis also appears explicitly in the Lean theorem statement).
-- **`statement_encoded`** — the object is faithfully formalized as a Lean
-  definition or structure; there is nothing to prove. 16 of the 17 are
-  definition environments; the one theorem-environment record
-  (`thm:sprinkling`) encodes the Poisson-sprinkling covariance interface,
-  with the standard Poisson-process existence results as its disclosed
-  external input.
+What the two statuses mean:
+
+- **Theorems / propositions / lemmas / corollaries** — `proved` means the
+  statement's mathematical content is proved sorry-free in Lean; any scoped
+  hypothesis is disclosed in the record's note *and* appears explicitly in the
+  Lean signature. The one exception, `thm:sprinkling`, is the paper's declared
+  classical input: the Poisson-sprinkling covariance interface is encoded in
+  exactly the form the text uses it, with textbook Poisson-process existence as
+  the cited external result.
+- **Definitions** — a definition environment usually has nothing to *prove*;
+  `statement_encoded` (16 records) means the object is faithfully transcribed
+  as a Lean definition or structure. A definition is marked `proved`
+  (19 records) when the manuscript's definition **carries claims** — that a
+  quantity is well-posed, that a minimum is attained, that a quotient or
+  monoid structure is well-defined — and those embedded claims are proved in
+  Lean (e.g. `def:qalg`, whose growth exponent requires the finite-shell
+  theorem for well-posedness). So `proved` on a definition is *stronger* than
+  `statement_encoded`, never weaker.
 
 ### Axioms
 

@@ -51,7 +51,7 @@ theorem single_dotProduct_mulVec (M : Matrix (Fin n) (Fin n) ℝ)
     (i j : Fin n) :
     (Pi.single i (1:ℝ)) ⬝ᵥ (M *ᵥ Pi.single j 1) = M i j := by
   simp [dotProduct, Matrix.mulVec, Pi.single_apply, mul_ite, ite_mul,
-    mul_zero, zero_mul, mul_one, one_mul, Finset.sum_ite_eq,
+    mul_zero, zero_mul, mul_one, one_mul,
     Finset.sum_ite_eq']
 
 /-- **Theorem `thm:metric-reconstruction`** (polarisation core): the

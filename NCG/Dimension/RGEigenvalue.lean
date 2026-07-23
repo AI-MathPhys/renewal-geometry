@@ -77,7 +77,7 @@ vanishes — `⋀²V_sp = 0`, so the two-reset response has empty domain. -/
 theorem alternating_rank_one_eq_zero (B : ℝ →ₗ[ℝ] ℝ →ₗ[ℝ] ℝ)
     (halt : ∀ v, B v v = 0) : B = 0 := by
   refine LinearMap.ext fun x => LinearMap.ext fun y => ?_
-  show B x y = 0
+  change B x y = 0
   have hxy : B x y = (x * y) * B 1 1 := by
     have hx1 : x • (1:ℝ) = x := by rw [smul_eq_mul, mul_one]
     have hy1 : y • (1:ℝ) = y := by rw [smul_eq_mul, mul_one]

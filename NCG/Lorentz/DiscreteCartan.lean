@@ -113,12 +113,12 @@ theorem cartan_derived_eq {C : ι → ι → ι → ℝ}
     (fun d a e => by
       have h1 := hγQ d a e
       have h2 := koszul_antisym hC d a e
-      show γ d a e - koszul C d a e = -(γ d e a - koszul C d e a)
+      change γ d a e - koszul C d a e = -(γ d e a - koszul C d e a)
       linarith)
     (fun d a e => by
       have h1 := hγT d a e
       have h2 := koszul_torsion hC d a e
-      show γ d a e - koszul C d a e = γ e a d - koszul C e a d
+      change γ d a e - koszul C d a e = γ e a d - koszul C e a d
       linarith)
     d a e
   have hzero' : γ d a e - koszul C d a e = 0 := hzero
@@ -142,7 +142,7 @@ theorem first_order_orthogonal (γ : Matrix (Fin n) (Fin n) ℝ) (h : ℝ) :
       = 1 - h • (γ + γᵀ) + (h ^ 2) • (γᵀ * γ) := by
   rw [Matrix.transpose_sub, Matrix.transpose_one, Matrix.transpose_smul]
   simp only [Matrix.sub_mul, Matrix.mul_sub, Matrix.one_mul,
-    Matrix.mul_one, Matrix.smul_mul, Matrix.mul_smul, smul_smul,
+    Matrix.mul_one, Matrix.smul_mul, Matrix.mul_smul,
     smul_add]
   ext i j
   simp only [Matrix.sub_apply, Matrix.add_apply, Matrix.smul_apply,
@@ -255,7 +255,7 @@ theorem rot_expand (h : ℝ) (γi γj Dij : A) :
       = 1 - h • γi - h • γj + (h ^ 2) • (γj * γi)
         - (h ^ 2) • Dij + (h ^ 3) • (Dij * γi) := by
   simp only [sub_mul, mul_sub, one_mul, mul_one, smul_mul_assoc,
-    mul_smul_comm, smul_smul]
+    mul_smul_comm]
   module
 
 /-- **Lemma `lem:plaquette-split`, rotational half** (exact form): the

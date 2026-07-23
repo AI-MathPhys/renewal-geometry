@@ -98,7 +98,7 @@ theorem reduced_iff_injective (Rz : Realization G) :
     exact hE C c t
   · intro hinj B x y hne
     by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     apply hne
     apply hinj B
     obtain ⟨h, rfl⟩ := Rz.enc_surj B x
@@ -268,7 +268,7 @@ not change the predictive class. -/
 /-- Compression fixes the chosen representatives. -/
 @[simp] theorem Selector.compress_sec (s : Selector G) {B : P}
     (x : Qpred G B) : s.compress (s.sec x) = s.sec x := by
-  show s.sec (Quot.mk _ (s.sec x) : Qpred G B) = s.sec x
+  change s.sec (Quot.mk _ (s.sec x) : Qpred G B) = s.sec x
   rw [s.sec_mk]
 
 /-- **Theorem `thm:exact-retract` (idempotency)**: `E_s² = E_s`. -/
@@ -463,7 +463,7 @@ theorem Selector.transfer_bijOn (s s' : Selector G) (B : P) :
     exact congrArg (fun x : Qpred G B => s.sec x) hq
   · intro h hmem
     refine ⟨s.compress h, ⟨h, rfl⟩, ?_⟩
-    show s'.compress (s.compress h) = h
+    change s'.compress (s.compress h) = h
     rw [Selector.compress_compress s s']
     exact s'.compress_eq_of_mem_range hmem
 
@@ -514,7 +514,7 @@ theorem Selector.renewal_nil (s : Selector G) {B : P}
     {h : Hist G O.root B}
     (hmem : h ∈ Set.range (fun h : Hist G O.root B => s.compress h)) :
     s.renewal (Hist.nil B) h = h := by
-  show s.compress (h.comp (Hist.nil B)) = h
+  change s.compress (h.comp (Hist.nil B)) = h
   rw [Hist.comp_nil]
   exact s.compress_eq_of_mem_range hmem
 
@@ -529,7 +529,7 @@ theorem Selector.renewal_comp (s : Selector G) {B C D : P}
     have h2 : (Quot.mk _ ((s.compress (h.comp c)).comp d) : Qpred G D)
         = Qmap d (Quot.mk _ (s.compress (h.comp c))) := rfl
     rw [h2, s.mk_compress]
-    show Quot.mk _ ((h.comp c).comp d) = _
+    change Quot.mk _ ((h.comp c).comp d) = _
     rw [Hist.comp_assoc]
   exact congrArg (fun x : Qpred G D => s.sec x) h1
 
@@ -548,7 +548,7 @@ theorem Selector.renewal_transfer (s s' : Selector G) {B C : P}
         = Qmap c (Quot.mk _ (s'.compress h)) := rfl
     rw [h3, s'.mk_compress]
     rfl
-  show s'.sec (Quot.mk _ (s.renewal c h) : Qpred G C)
+  change s'.sec (Quot.mk _ (s.renewal c h) : Qpred G C)
       = s'.sec (Quot.mk _ ((s'.compress h).comp c) : Qpred G C)
   rw [h1, h2]
 

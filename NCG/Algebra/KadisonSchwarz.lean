@@ -79,7 +79,7 @@ theorem isArchimedeanStarOrder_complex : IsArchimedeanStarOrder ℂ := by
   -- the real part is nonpositive, by the Archimedean property of `ℝ`
   have hle : a.re ≤ 0 := by
     by_contra hpos
-    push_neg at hpos
+    push Not at hpos
     obtain ⟨n, hn⟩ := exists_nat_gt (d.re / a.re)
     have hmul : d.re < (n : ℝ) * a.re := by
       rw [div_lt_iff₀ hpos] at hn
@@ -113,6 +113,7 @@ theorem sq_natCast_smul_mono (m : ℕ) {x y : A} (h : x ≤ y) :
   rw [smul_sub] at h0
   exact sub_nonneg.mp h0
 
+omit [Algebra ℂ A] [StarModule ℂ A] in
 /-- Cancellation of selfadjoint outer terms: if `a + t + b` is selfadjoint
 with `a` and `b` selfadjoint, so is the middle term `t`. -/
 theorem star_middle_eq {a t b : A} (ha : IsSelfAdjoint a)
@@ -128,6 +129,7 @@ Kadison–Schwarz argument. -/
 def pairMatrix (a b : A) : Matrix (Fin 2) (Fin 2) A :=
   Matrix.of ![![star a * a, star a * b], ![star b * a, star b * b]]
 
+omit [Algebra ℂ A] [StarModule ℂ A] in
 /-- The Gram matrix of a pair is quadratic-form positive: the sandwich sum
 is the explicit square `(a u₀ + b u₁)⋆ (a u₀ + b u₁)`. -/
 theorem matrixQF_pair (a b : A) : MatrixQF (pairMatrix a b) := by
@@ -148,6 +150,7 @@ section CP
 
 variable {φ : A →ₗ[ℂ] A}
 
+omit [PartialOrder A] [StarOrderedRing A] in
 /-- The sandwich sum of the amplified Gram matrix `[[1,x],[x⋆,x⋆x]].map φ`
 at the vector `(c•1, 1)`, in middle-grouped form. -/
 private theorem gram_sandwich_sum (φ : A →ₗ[ℂ] A) (x : A) (c : ℂ) :
@@ -157,7 +160,7 @@ private theorem gram_sandwich_sum (φ : A →ₗ[ℂ] A) (x : A) (c : ℂ) :
       = (c * star c) • φ 1 + (star c • φ x + c • φ (star x))
         + φ (star x * x) := by
   simp only [Fin.sum_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one,
-    Matrix.head_cons, Matrix.map_apply, pairMatrix, Matrix.of_apply,
+    Matrix.map_apply, pairMatrix, Matrix.of_apply,
     star_smul, star_one, one_mul, mul_one, smul_mul_assoc, mul_smul_comm,
     smul_smul]
   module
@@ -170,7 +173,7 @@ theorem IsCompletelyPositive.map_star (hφ : IsCompletelyPositive φ) (x : A) :
   have hN := hφ 2 (pairMatrix 1 x) (matrixQF_pair 1 x)
   have hφ1 : IsSelfAdjoint (φ 1) :=
     IsSelfAdjoint.of_nonneg (hφ.isPositiveMap 1
-      (by simpa using star_mul_self_nonneg (1 : A)))
+      (by simp))
   have hφxx : IsSelfAdjoint (φ (star x * x)) :=
     IsSelfAdjoint.of_nonneg (hφ.isPositiveMap _ (star_mul_self_nonneg x))
   -- the middle term of the sandwich sum is selfadjoint, for every `c`
@@ -192,13 +195,13 @@ theorem IsCompletelyPositive.map_star (hφ : IsCompletelyPositive φ) (x : A) :
   have hB : star (φ x) - star (φ (star x)) = -φ x + φ (star x) := by
     have h := hmid Complex.I
     simp only [star_add, star_neg, star_smul, Complex.star_def,
-      Complex.conj_I, map_neg, neg_neg, neg_smul] at h
+      Complex.conj_I, neg_neg, neg_smul] at h
     -- h : I • star (φ x) + -(I • star (φ (star x)))
     --       = -(I • φ x) + I • φ (star x)
     have e1 : (-Complex.I) * Complex.I = 1 := by
       rw [neg_mul, Complex.I_mul_I, neg_neg]
     have h' := congrArg (fun v => (-Complex.I) • v) h
-    simp only [smul_add, smul_neg, smul_smul, e1, one_smul, neg_neg] at h'
+    simp only [smul_add, smul_neg, smul_smul, e1, one_smul] at h'
     -- h' : star (φ x) + -star (φ (star x)) = -φ x + φ (star x)
     rw [sub_eq_add_neg]
     exact h'
@@ -230,7 +233,7 @@ theorem IsCompletelyPositive.isSchwarzMap (hφ : IsCompletelyPositive φ)
       * ((![-(φ x), (1 : A)] : Fin 2 → A) j))
       = φ (star x * x) - star (φ x) * φ x := by
     simp only [Fin.sum_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one,
-      Matrix.head_cons, Matrix.map_apply, pairMatrix, Matrix.of_apply,
+      Matrix.map_apply, pairMatrix, Matrix.of_apply,
       star_one, one_mul, mul_one, h1, hφ.map_star x, star_neg, neg_mul,
       mul_neg, neg_neg]
     abel
@@ -242,6 +245,7 @@ end CP
 
 /-! ### Choi's multiplicative-domain theorem -/
 
+omit [PartialOrder A] [StarOrderedRing A] in
 /-- Polarization expansion of the Schwarz defect
 `D(z) = φ(z⋆z) − φ(z)⋆φ(z)` at `z = x + l•w`. -/
 private theorem schwarz_defect_expand (φ : A →ₗ[ℂ] A) (x w : A) (l : ℂ) :
@@ -252,7 +256,7 @@ private theorem schwarz_defect_expand (φ : A →ₗ[ℂ] A) (x w : A) (l : ℂ)
         + (star l • (φ (star w * x) - star (φ w) * φ x)
         + (star l * l) • (φ (star w * w) - star (φ w) * φ w))) := by
   simp only [star_add, star_smul, add_mul, mul_add, smul_mul_assoc,
-    mul_smul_comm, smul_smul, map_add, map_smul, smul_sub]
+    mul_smul_comm, map_add, map_smul, smul_sub]
   module
 
 /-- **Choi's multiplicative-domain theorem** (final step of
@@ -290,7 +294,7 @@ theorem multiplicative_of_schwarz_eq {φ : A →ₗ[ℂ] A}
   -- the scalars `1/(n+1)` are star-fixed and nonzero
   have hstarc : ∀ n : ℕ, star ((((n : ℂ)) + 1)⁻¹) = (((n : ℂ)) + 1)⁻¹ := by
     intro n
-    simp [Complex.star_def, map_inv₀, map_add, map_natCast, map_one]
+    simp []
   have hcne : ∀ n : ℕ, ((n : ℂ)) + 1 ≠ 0 := by
     intro n
     have h : ((n + 1 : ℕ) : ℂ) ≠ 0 := by

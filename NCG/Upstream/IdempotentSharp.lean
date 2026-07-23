@@ -8,7 +8,8 @@ import Mathlib.Analysis.InnerProductSpace.Spectrum
 /-!
 # The sharp self-adjoint idempotentization bound
 
-Covers `cor:selfadjoint-idempotentization` from `manuscripts/renewal_emergence/renewal_emergence.tex`:
+Covers `cor:selfadjoint-idempotentization` from
+`manuscripts/renewal_emergence/renewal_emergence.tex`:
 for a symmetric operator `T` on a finite-dimensional inner product
 space with `‖T² − T‖ ≤ δ < 1/4`, the spectral threshold projection
 `P = 1_{[1/2,∞)}(T)` is a symmetric idempotent commuting with `T`
@@ -68,7 +69,7 @@ theorem threshold_bound {μ δ : ℝ} (hδ0 : 0 ≤ δ) (hδ : δ < 1 / 4)
         nlinarith
       have h7 : 2 * μ - 1 ≤ s' := by
         by_contra hc
-        push_neg at hc
+        push Not at hc
         nlinarith
       linarith
     · -- 1 − μ ≤ α: from (2μ−1)² ≥ s² and 2μ−1 ≥ 0
@@ -78,11 +79,11 @@ theorem threshold_bound {μ δ : ℝ} (hδ0 : 0 ≤ δ) (hδ : δ < 1 / 4)
       have h2 : 0 ≤ 2 * μ - 1 := by linarith
       have h3 : s ≤ 2 * μ - 1 := by
         by_contra hc
-        push_neg at hc
+        push Not at hc
         nlinarith
       linarith
   · rw [if_neg hthr]
-    push_neg at hthr
+    push Not at hthr
     rw [abs_le]
     constructor
     · -- −α ≤ −μ, i.e. μ ≤ α: from (1−2μ)² ≥ s², 1−2μ > 0
@@ -92,7 +93,7 @@ theorem threshold_bound {μ δ : ℝ} (hδ0 : 0 ≤ δ) (hδ : δ < 1 / 4)
       have h2 : 0 < 1 - 2 * μ := by linarith
       have h3 : s ≤ 1 - 2 * μ := by
         by_contra hc
-        push_neg at hc
+        push Not at hc
         nlinarith
       linarith
     · -- 0 − μ ≤ α, i.e. −μ ≤ α: only needs work for μ < 0
@@ -112,7 +113,7 @@ theorem threshold_bound {μ δ : ℝ} (hδ0 : 0 ≤ δ) (hδ : δ < 1 / 4)
           nlinarith [hs2]
         have h8 : t ≤ α := by
           by_contra hc
-          push_neg at hc
+          push Not at hc
           nlinarith
         rw [ht_def] at h8
         rw [hα_def] at h8
@@ -176,9 +177,11 @@ noncomputable def diagOp (c : Fin n → 𝕜) : V →ₗ[𝕜] V where
     congr 1
     ring
 
+omit [FiniteDimensional 𝕜 V] in
 theorem diagOp_apply (c : Fin n → 𝕜) (x : V) :
     diagOp b c x = ∑ i, (c i * ⟪b i, x⟫) • b i := rfl
 
+omit [FiniteDimensional 𝕜 V] in
 theorem inner_basis_sum (a : Fin n → 𝕜) (i : Fin n) :
     ⟪b i, ∑ j, a j • b j⟫ = a i := by
   rw [inner_sum]
@@ -191,6 +194,7 @@ theorem inner_basis_sum (a : Fin n → 𝕜) (i : Fin n) :
   · intro habs
     exact absurd (Finset.mem_univ _) habs
 
+omit [FiniteDimensional 𝕜 V] in
 theorem diagOp_comp (c d : Fin n → 𝕜) :
     diagOp b c ∘ₗ diagOp b d = diagOp b fun i => c i * d i := by
   apply LinearMap.ext
@@ -201,6 +205,7 @@ theorem diagOp_comp (c d : Fin n → 𝕜) :
   congr 1
   ring
 
+omit [FiniteDimensional 𝕜 V] in
 theorem diagOp_isSymmetric (c : Fin n → 𝕜)
     (hc : ∀ i, (starRingEnd 𝕜) (c i) = c i) :
     (diagOp b c).IsSymmetric := by
@@ -211,6 +216,7 @@ theorem diagOp_isSymmetric (c : Fin n → 𝕜)
   rw [map_mul, hc i, ← inner_conj_symm x (b i)]
   ring
 
+omit [FiniteDimensional 𝕜 V] in
 /-- Parseval-type computation: the squared norm of an orthonormal
 expansion. -/
 theorem norm_sq_sum_smul (a : Fin n → 𝕜) :
@@ -227,11 +233,13 @@ theorem norm_sq_sum_smul (a : Fin n → 𝕜) :
   rw [RCLike.conj_mul]
   rw [← RCLike.ofReal_pow, RCLike.ofReal_re]
 
+omit [FiniteDimensional 𝕜 V] in
 theorem parseval (x : V) : ∑ i, ‖(⟪b i, x⟫ : 𝕜)‖ ^ 2 = ‖x‖ ^ 2 := by
   have h1 := norm_sq_sum_smul b fun i => (⟪b i, x⟫ : 𝕜)
   rw [b.sum_repr'] at h1
   exact h1.symm
 
+omit [FiniteDimensional 𝕜 V] in
 /-- The diagonal operator bound by the largest coefficient. -/
 theorem diagOp_norm_le (c : Fin n → 𝕜) {M : ℝ} (hM0 : 0 ≤ M)
     (hM : ∀ i, ‖c i‖ ≤ M) (x : V) :

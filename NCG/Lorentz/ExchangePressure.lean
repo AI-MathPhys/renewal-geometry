@@ -87,6 +87,7 @@ theorem two_exp_avg_lt {x y : ℝ} (hxy : x ≠ y) :
     positivity
   nlinarith
 
+omit [Nonempty Ω] in
 /-- **The master estimate**: `(∑ e^{(u+v)/2})² ≤ (∑ e^u)(∑ e^v)` —
 the integrated positive-semidefinite-Hessian inequality of the
 exchange-source pressure. -/
@@ -117,6 +118,7 @@ theorem sq_sum_exp_avg_le (u v : Ω → ℝ) :
         rw [Finset.sum_congr rfl fun ω _ => h3 ω,
           Finset.sum_congr rfl fun ω _ => h4 ω]
 
+omit [Nonempty Ω] in
 /-- **Strict master estimate**: strict whenever `u − v` is not
 constant — pair symmetrization plus strict AM–GM on one pair. -/
 theorem sq_sum_exp_avg_lt {u v : Ω → ℝ} {ω₀ ω₁ : Ω}
@@ -190,7 +192,7 @@ noncomputable def sourcePartition (S b : Ω → ℝ) : ℝ :=
 
 theorem sourcePartition_pos (S b : Ω → ℝ) :
     0 < sourcePartition S b :=
-  Finset.sum_pos (fun ω _ => Real.exp_pos _) Finset.univ_nonempty
+  Finset.sum_pos (fun _ω _ => Real.exp_pos _) Finset.univ_nonempty
 
 /-- **Definition `def:exchange-source-pressure`** (scalar-source
 form): the pressure `log ∑ exp (−S + b)`. -/
@@ -207,6 +209,7 @@ variable {ϑ : Ω → Ω} (hinv : Function.Involutive ϑ)
 
 include hinv
 
+omit [Nonempty Ω] in
 /-- Change of variables along the exchange involution. -/
 theorem sourcePartition_exchange {S b : Ω → ℝ}
     (hS : ∀ ω, S (ϑ ω) = S ω) (hb : ∀ ω, b (ϑ ω) = -b ω) :
@@ -218,6 +221,7 @@ theorem sourcePartition_exchange {S b : Ω → ℝ}
   have h1 : (Function.Involutive.toPerm ϑ hinv) ω = ϑ ω := rfl
   rw [h1, hS ω, hb ω]
 
+omit [Nonempty Ω] in
 /-- **`thm:exchange-pressure-stationarity`, evenness**:
 `Ψ(−b) = Ψ(b)`. -/
 theorem sourcePressure_neg {S b : Ω → ℝ}
@@ -267,7 +271,7 @@ theorem sourcePressure_eq_zero_iff {S b : Ω → ℝ}
   constructor
   · intro heq
     by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     obtain ⟨ω₀, ω₁, hne⟩ := hcon
     -- strict master estimate
     have h1 := sq_sum_exp_avg_lt (Ω := Ω)
@@ -334,6 +338,7 @@ theorem sourcePressure_midpoint_convex (S b₁ b₂ : Ω → ℝ) :
   simp only [Nat.cast_ofNat] at h4
   linarith
 
+omit [Nonempty Ω] in
 /-- **Zero exchange source closes the first moment**: at `b = 0` the
 Gibbs expectation of every exchange-odd scalar observable vanishes. -/
 theorem gibbsExpect_defect_zero {S m : Ω → ℝ}
@@ -357,6 +362,7 @@ theorem gibbsExpect_defect_zero {S m : Ω → ℝ}
   have h3 := h1.trans h2
   linarith
 
+omit [Nonempty Ω] in
 /-- **Vector form of the zero mean defect**: at zero source the Gibbs
 mean of the exchange-odd vector defect vanishes in the value module —
 the Euler–Lagrange condition for first-moment plaquette closure. -/
@@ -464,6 +470,7 @@ variable {S : Ω → ℝ} {D : Ω → V}
 variable (hS : ∀ ω, S (ϑ ω) = S ω) (hD : ∀ ω, D (ϑ ω) = -D ω)
 
 include hinv hS hD in
+omit [Nonempty Ω] in
 /-- Evenness `Ψ(−λ) = Ψ(λ)`. -/
 theorem exchangePressure_neg (l : Module.Dual ℝ V) :
     exchangePressure S D (-l) = exchangePressure S D l := by

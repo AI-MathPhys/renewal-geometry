@@ -47,14 +47,14 @@ theorem Walk.displacement_append (ξ : G.E → Γ) {u v w : G.V}
   induction p with
   | nil v => simp [Walk.nil_append]
   | fwd e p ih =>
-      show ξ _ + (p.append q).displacement ξ = _
+      change ξ _ + (p.append q).displacement ξ = _
       rw [ih]
-      show _ = ξ _ + p.displacement ξ + q.displacement ξ
+      change _ = ξ _ + p.displacement ξ + q.displacement ξ
       abel
   | bwd e p ih =>
-      show -ξ _ + (p.append q).displacement ξ = _
+      change -ξ _ + (p.append q).displacement ξ = _
       rw [ih]
-      show _ = -ξ _ + p.displacement ξ + q.displacement ξ
+      change _ = -ξ _ + p.displacement ξ + q.displacement ξ
       abel
 
 /-- The **displacement set** `𝓜_{uv}` of a state pair
@@ -91,7 +91,7 @@ theorem infDist_smul_submodule (W : Submodule ℝ V) (u : V) {c : ℝ}
       exact W.smul_mem c hy
     · intro hw
       exact ⟨c⁻¹ • w, W.smul_mem c⁻¹ hw, by
-        show c • (c⁻¹ • w) = w
+        change c • (c⁻¹ • w) = w
         rw [smul_smul, mul_inv_cancel₀ hc, one_smul]⟩
   calc Metric.infDist (c • u) (W : Set V)
       = Metric.infDist (c • u) (c • (W : Set V)) := by rw [hset]

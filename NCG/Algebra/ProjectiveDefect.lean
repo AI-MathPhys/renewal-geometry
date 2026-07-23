@@ -114,6 +114,7 @@ theorem projDefect_cocycle (R : L → G)
           rw [add_assoc]
   exact mul_right_cancel key
 
+omit [AddCommGroup L] in
 /-- The **commutator pairing** of the implementers controls the exchange
 relation: `R_α R_β = ⁅R_α, R_β⁆ · R_β R_α`. -/
 theorem commutator_R_mul (R : L → G) (α β : L) :
@@ -188,6 +189,7 @@ theorem commutator_R_sq_eq_one (R : L → G)
   rw [commutatorElement_def]
   group
 
+omit [AddCommGroup L] in
 /-- Alternation of the pairing: `⁅R_α, R_α⁆ = 1`. -/
 @[simp]
 theorem commutator_R_self (R : L → G) (α : L) : ⁅R α, R α⁆ = 1 := by

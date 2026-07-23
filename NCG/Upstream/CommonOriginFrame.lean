@@ -38,6 +38,7 @@ open Matrix
 
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
+omit [DecidableEq ι] [Fintype ι] in
 /-- The uniform lower bound for the tilted direction profile on the
 spin box: `r_{i,a}(u) ≥ λ₋(1−δ)/(3λ₊(1+δ))`. -/
 theorem dirProfile_lower (lam : ι → Fin 3 → ℝ) (ε : ℝ)
@@ -96,7 +97,6 @@ theorem dirProfile_lower (lam : ι → Fin 3 → ℝ) (ε : ℝ)
       _ = 3 * (lamp * (1 + |ε| * B)) := by
           rw [Finset.sum_const]
           simp
-
   have hdenpos : 0 < ∑ c, dirWeight lam ε bb i c u :=
     Finset.sum_pos (fun c _ => dirWeight_pos lam ε bb
       (fun i' a' => lt_of_lt_of_le hlamm0 (hlamm i' a'))
@@ -126,6 +126,7 @@ noncomputable def secondMoment (r : ι → Fin 3 → ℝ → ℝ)
     + ∑ a, (D.q i (-1) η * r i a (η i * (-1)))
         • vecMulVec (v i a) (v i a)
 
+omit [DecidableEq ι] [Fintype ι] in
 /-- **Deck evenness**: `M_i(−η) = M_i(η)` — deck-related
 orientation phases have the same spatial second moment. -/
 theorem secondMoment_deck (r : ι → Fin 3 → ℝ → ℝ)
@@ -148,6 +149,7 @@ theorem secondMoment_deck (r : ι → Fin 3 → ℝ → ℝ)
       rw [Pi.neg_apply]; ring]
   rw [h1, h2, add_comm]
 
+omit [DecidableEq ι] [Fintype ι] in
 /-- The single-redraw direction average dominates `r_* g_* I`. -/
 theorem dirAverage_lower (r : ι → Fin 3 → ℝ → ℝ)
     (v : ι → Fin 3 → (Fin 3 → ℝ)) (i : ι) {rstar gstar : ℝ}
@@ -179,6 +181,7 @@ theorem dirAverage_lower (r : ι → Fin 3 → ℝ → ℝ)
       (fun a => sub_nonneg.mpr (hrlow a u hu)) _
   · exact Matrix.PosSemidef.smul hgram hrstar
 
+omit [DecidableEq ι] [Fintype ι] in
 /-- **The uniform spatial ellipticity clause of
 `prop:common-origin-pressure-frame`**: on the spin box,
 `M_i(η) ⪰ r_* g_* I₃`. -/

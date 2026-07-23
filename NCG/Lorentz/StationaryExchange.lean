@@ -9,7 +9,8 @@ import Mathlib
 # The stationary exchange theorem and the detailed-balance counterexample
 
 Covers `thm:stationary-exchange` and
-`prop:detailed-balance-not-torsion` from `manuscripts/lorentzian_emergence/lorentzian_emergence.tex`.
+`prop:detailed-balance-not-torsion` from
+`manuscripts/lorentzian_emergence/lorentzian_emergence.tex`.
 
 For a primitive Markov kernel on a finite set of resolved diamond
 records that is covariant under the history-exchange involution, the
@@ -97,6 +98,7 @@ theorem kernelPow_stationary {P : D → D → ℝ} {π : D → ℝ}
 
 /-! ## Uniqueness of the stationary law for positive kernels -/
 
+omit [DecidableEq D] in
 /-- A strictly positive stochastic kernel has at most one stationary
 signed law of total mass one (Markov/Dobrushin `L¹`-contraction). -/
 theorem stationary_unique_of_pos {Q : D → D → ℝ}
@@ -402,6 +404,7 @@ section ApproxExchange
 
 variable {P : D → D → ℝ} {s : D → D} {π : D → ℝ}
 
+omit [DecidableEq D] in
 /-- **Theorem `thm:approx-exchange` (invariance defect)**: if the
 kernel `ε`-almost commutes with the exchange permutation at the
 stationary law, and the kernel contracts zero-mass signed vectors in
@@ -462,6 +465,7 @@ theorem approx_exchange_invariant (hs : Function.Involutive s)
   rw [le_div_iff₀ hlam]
   linarith [h10]
 
+omit [DecidableEq D] in
 /-- **Theorem `thm:approx-exchange` (odd means)**: every bounded
 exchange-odd observable has stationary mean at most
 `ε‖d‖_∞/(2λ)`. -/
