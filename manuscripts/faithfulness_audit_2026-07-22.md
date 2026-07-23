@@ -1,6 +1,6 @@
 # Faithfulness audit — 2026-07-22
 
-Does every tracked record correspond **exactly** to the statement as written in the
+This audit checks if every tracked record correspond **exactly** to the statement as written in the
 current manuscript text — no undisclosed narrowing, no extra assumptions, no
 tautological anchors? This file is the current audit of all **333 records**:
 
