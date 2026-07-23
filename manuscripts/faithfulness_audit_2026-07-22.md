@@ -1,6 +1,6 @@
 # Faithfulness audit — 2026-07-22
 
-Does every tracked record correspond **exactly** to the statement as written in the current manuscript text — no undisclosed narrowing, no extra assumptions, no tautological anchors? This file audits all **333 records**:
+This automated audit verifies if every tracked record correspond **exactly** to the statement as written in the current manuscript text, with no undisclosed narrowing, no extra assumptions and no tautological anchors. This file audits all **333 records**:
 
 - **210** in [`lorentzian_emergence/statements.json`](lorentzian_emergence/statements.json)
   against [`lorentzian_emergence/lorentzian_emergence.tex`](lorentzian_emergence/lorentzian_emergence.tex)
