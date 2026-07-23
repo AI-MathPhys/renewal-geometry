@@ -72,10 +72,11 @@ custom axioms. This can be reproduced for any theorem with, e.g.:
 ### Reproducing the check
 
 ```bash
-lake build                                    # kernel-checks the library
-python scripts/check_statement_coverage.py    # verifies this inventory
-# Statement coverage passed (210 records): computer_certified=0,
-#   conditional_interface=0, not_started=0, proved=193, statement_encoded=17
+lake build                        # kernel-checks the library
+python scripts/check_statement_coverage.py lorentzian_emergence
+# Statement coverage passed for lorentzian_emergence (210 records):
+#   computer_certified=0, conditional_interface=0, not_started=0,
+#   proved=193, statement_encoded=17
 ```
 
 The checker parses every named statement out of the `.tex`, requires a

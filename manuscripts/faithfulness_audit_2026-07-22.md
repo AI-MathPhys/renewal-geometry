@@ -163,11 +163,12 @@ form the text uses them:
 
 ```bash
 python scripts/check_statement_coverage.py
-# Statement coverage passed (210 records): computer_certified=0,
-#   conditional_interface=0, not_started=0, proved=193, statement_encoded=17
-python scripts/check_statement_coverage.py --notes
-# Statement coverage passed (123 records): computer_certified=0,
-#   conditional_interface=0, not_started=0, proved=93, statement_encoded=30
+# Statement coverage passed for lorentzian_emergence (210 records):
+#   computer_certified=0, conditional_interface=0, not_started=0,
+#   proved=193, statement_encoded=17
+# Statement coverage passed for renewal_emergence (123 records):
+#   computer_certified=0, conditional_interface=0, not_started=0,
+#   proved=93, statement_encoded=30
 lake build     # Build completed successfully — 0 sorry
 ```
 

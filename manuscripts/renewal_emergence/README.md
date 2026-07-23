@@ -71,10 +71,11 @@ custom axioms. Reproduce for any theorem with, e.g.:
 ### Reproducing the check
 
 ```bash
-lake build                                            # kernel-checks the library
-python scripts/check_statement_coverage.py --notes    # verifies this inventory
-# Statement coverage passed (123 records): computer_certified=0,
-#   conditional_interface=0, not_started=0, proved=93, statement_encoded=30
+lake build                        # kernel-checks the library
+python scripts/check_statement_coverage.py renewal_emergence
+# Statement coverage passed for renewal_emergence (123 records):
+#   computer_certified=0, conditional_interface=0, not_started=0,
+#   proved=93, statement_encoded=30
 ```
 
 ## Headline theorems

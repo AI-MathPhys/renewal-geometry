@@ -2,12 +2,20 @@
 """Statement-coverage checker for the NCG formalization.
 
 Parses every named statement environment (theorem / proposition / lemma /
-corollary / definition) out of the manuscript ``.tex`` sources under ``manuscripts/`` and checks it against
-the curated status map ``statements.json`` next to each manuscript:
+corollary / definition) out of each manuscript ``.tex`` source under
+``manuscripts/`` and checks it against the curated status map
+``statements.json`` next to that manuscript:
 
 * every manuscript statement must have a status record (no gaps);
 * no stale records (entries whose label no longer exists in the manuscript);
 * every Lean identifier referenced by a record must exist in ``NCG/``.
+
+Tracked manuscripts
+-------------------
+- ``lorentzian_emergence`` — *Renewal Spectral Geometry and the Emergence of
+  Lorentzian Spacetime* (``manuscripts/lorentzian_emergence/``);
+- ``renewal_emergence`` — *From Operational Prediction to Signed Renewal
+  Memory* (``manuscripts/renewal_emergence/``).
 
 Statuses
 --------
@@ -24,10 +32,14 @@ Statuses
 
 Usage
 -----
-    python scripts/check_statement_coverage.py          # check + summary
-    python scripts/check_statement_coverage.py --init   # add missing records
-                                                        # as conditional_interface
-    python scripts/check_statement_coverage.py --list proved   # list a status
+    python scripts/check_statement_coverage.py
+        # check both manuscripts + summaries
+    python scripts/check_statement_coverage.py lorentzian_emergence
+        # check a single manuscript (also accepts renewal_emergence)
+    python scripts/check_statement_coverage.py renewal_emergence --list proved
+        # list the records of one status
+    python scripts/check_statement_coverage.py lorentzian_emergence --init
+        # add missing records as conditional_interface
 """
 
 from __future__ import annotations
@@ -39,9 +51,9 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-MANUSCRIPT = ROOT / "manuscripts" / "lorentzian_emergence" / "lorentzian_emergence.tex"
-STATUS_FILE = ROOT / "manuscripts" / "lorentzian_emergence" / "statements.json"
 LEAN_DIR = ROOT / "NCG"
+
+MANUSCRIPTS = ("lorentzian_emergence", "renewal_emergence")
 
 ENVS = ("theorem", "proposition", "lemma", "corollary", "definition")
 STATUSES = (
@@ -58,14 +70,19 @@ BEGIN_RE = re.compile(
 LABEL_RE = re.compile(r"\s*\\label\{([^}]+)\}")
 
 
+def manuscript_paths(name: str) -> tuple[Path, Path]:
+    folder = ROOT / "manuscripts" / name
+    return folder / f"{name}.tex", folder / "statements.json"
+
+
 def slugify(title: str) -> str:
     slug = re.sub(r"\\[a-zA-Z@]+", "", title)
     slug = re.sub(r"[^a-zA-Z0-9]+", "-", slug).strip("-").lower()
     return slug or "untitled"
 
 
-def parse_manuscript() -> list[dict]:
-    text = MANUSCRIPT.read_text(encoding="utf-8")
+def parse_manuscript(tex_file: Path) -> list[dict]:
+    text = tex_file.read_text(encoding="utf-8")
     records = []
     seen_keys: set[str] = set()
     for m in BEGIN_RE.finditer(text):
@@ -106,49 +123,12 @@ def lean_identifiers() -> set[str]:
     return names
 
 
-def main() -> int:
-    global MANUSCRIPT, STATUS_FILE
-    args = sys.argv[1:]
-    if "--notes" in args:
-        # Track the upstream-program companion document instead of the
-        # main manuscript
-        # (renewal_emergence.tex <-> its statements.json).
-        MANUSCRIPT = ROOT / "manuscripts" / "renewal_emergence" / "renewal_emergence.tex"
-        STATUS_FILE = ROOT / "manuscripts" / "renewal_emergence" / "statements.json"
-    records = parse_manuscript()
+def check_manuscript(name: str, names: set[str]) -> int:
+    tex_file, status_file = manuscript_paths(name)
+    records = parse_manuscript(tex_file)
     status_map: dict[str, dict] = {}
-    if STATUS_FILE.exists():
-        status_map = json.loads(STATUS_FILE.read_text(encoding="utf-8"))
-
-    if "--init" in args:
-        added = 0
-        for rec in records:
-            if rec["key"] not in status_map:
-                status_map[rec["key"]] = {
-                    "env": rec["env"],
-                    "title": rec["title"],
-                    "status": "conditional_interface",
-                    "lean": [],
-                    "note": "",
-                }
-                added += 1
-        ordered = {r["key"]: status_map[r["key"]] for r in records}
-        STATUS_FILE.write_text(
-            json.dumps(ordered, indent=2, ensure_ascii=False) + "\n",
-            encoding="utf-8",
-        )
-        print(f"Initialized {STATUS_FILE.name}: {added} records added, "
-              f"{len(ordered)} total.")
-        return 0
-
-    if "--list" in args:
-        wanted = args[args.index("--list") + 1]
-        for key, entry in status_map.items():
-            if entry["status"] == wanted:
-                lean = ", ".join(entry.get("lean", []))
-                print(f"  {key}  [{entry['env']}]  {entry['title']}"
-                      + (f"  ->  {lean}" if lean else ""))
-        return 0
+    if status_file.exists():
+        status_map = json.loads(status_file.read_text(encoding="utf-8"))
 
     errors: list[str] = []
     keys = {r["key"] for r in records}
@@ -162,7 +142,6 @@ def main() -> int:
         if entry.get("status") not in STATUSES:
             errors.append(f"invalid status for {key}: {entry.get('status')}")
 
-    names = lean_identifiers()
     for key, entry in status_map.items():
         if entry.get("status") in ("proved", "computer_certified",
                                    "statement_encoded"):
@@ -180,13 +159,94 @@ def main() -> int:
     summary = ", ".join(f"{s}={counts[s]}" for s in sorted(counts))
 
     if errors:
-        print(f"Statement coverage FAILED ({len(records)} records): {summary}")
+        print(f"Statement coverage FAILED for {name} "
+              f"({len(records)} records): {summary}")
         for err in errors:
             print(f"  - {err}")
         return 1
 
-    print(f"Statement coverage passed ({len(records)} records): {summary}")
+    print(f"Statement coverage passed for {name} "
+          f"({len(records)} records): {summary}")
     return 0
+
+
+def init_manuscript(name: str) -> int:
+    tex_file, status_file = manuscript_paths(name)
+    records = parse_manuscript(tex_file)
+    status_map: dict[str, dict] = {}
+    if status_file.exists():
+        status_map = json.loads(status_file.read_text(encoding="utf-8"))
+    added = 0
+    for rec in records:
+        if rec["key"] not in status_map:
+            status_map[rec["key"]] = {
+                "env": rec["env"],
+                "title": rec["title"],
+                "status": "conditional_interface",
+                "lean": [],
+                "note": "",
+            }
+            added += 1
+    ordered = {r["key"]: status_map[r["key"]] for r in records}
+    status_file.write_text(
+        json.dumps(ordered, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    print(f"Initialized {name}/statements.json: {added} records added, "
+          f"{len(ordered)} total.")
+    return 0
+
+
+def list_manuscript(name: str, wanted: str) -> int:
+    _, status_file = manuscript_paths(name)
+    status_map: dict[str, dict] = {}
+    if status_file.exists():
+        status_map = json.loads(status_file.read_text(encoding="utf-8"))
+    for key, entry in status_map.items():
+        if entry["status"] == wanted:
+            lean = ", ".join(entry.get("lean", []))
+            print(f"  {key}  [{entry['env']}]  {entry['title']}"
+                  + (f"  ->  {lean}" if lean else ""))
+    return 0
+
+
+def main() -> int:
+    args = sys.argv[1:]
+
+    positional: list[str] = []
+    skip_next = False
+    for a in args:
+        if skip_next:
+            skip_next = False
+            continue
+        if a == "--list":
+            skip_next = True
+            continue
+        if a.startswith("--"):
+            continue
+        positional.append(a)
+    selected = [a for a in positional if a in MANUSCRIPTS]
+    unknown = [a for a in positional if a not in MANUSCRIPTS]
+    if unknown:
+        print(f"Unknown manuscript(s): {', '.join(unknown)}. "
+              f"Expected one of: {', '.join(MANUSCRIPTS)}.")
+        return 2
+    targets = tuple(selected) or MANUSCRIPTS
+
+    if "--init" in args:
+        return max(init_manuscript(name) for name in targets)
+
+    if "--list" in args:
+        wanted = args[args.index("--list") + 1]
+        rc = 0
+        for name in targets:
+            if len(targets) > 1:
+                print(f"== {name} ==")
+            rc = max(rc, list_manuscript(name, wanted))
+        return rc
+
+    names = lean_identifiers()
+    return max(check_manuscript(name, names) for name in targets)
 
 
 if __name__ == "__main__":

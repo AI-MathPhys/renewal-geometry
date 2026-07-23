@@ -143,8 +143,9 @@ theorem to see its statement; `Ctrl+Click` jumps to Mathlib definitions.
 Every named statement environment of each manuscript is tracked and checked:
 
 ```bash
-python scripts/check_statement_coverage.py           # lorentzian_emergence
-python scripts/check_statement_coverage.py --notes   # renewal_emergence
+python scripts/check_statement_coverage.py                       # both papers
+python scripts/check_statement_coverage.py lorentzian_emergence  # only paper 1
+python scripts/check_statement_coverage.py renewal_emergence     # only paper 2
 ```
 
 The checker fails if a manuscript statement has no status record, if a record
