@@ -69,7 +69,7 @@ python scripts/check_statement_coverage.py --notes    # verifies this inventory
 
 ## Headline theorems
 
-**Phase coexistence — the paper's centerpiece**
+* **Phase coexistence — the paper's centerpiece**
 (`thm:torsion-phase-coexistence`, `cor:torsion-selection`). One microscopic
 detailed-balanced law admits both torsion-free and torsional stationary
 phases, so plaquette closure (torsion freedom) is a genuine *selection
@@ -101,7 +101,7 @@ model, with **no scoped statistical-mechanics inputs remaining**:
 - *Clause (iii)* — the symmetric mixture satisfies the same DLR law with
   zero defect (`gibbsMix_dlr`, `gibbsMix_spin`).
 
-**Complete positivity of the Lindblad semigroup**
+* **Complete positivity of the Lindblad semigroup**
 (`thm:stable-pointer-selection` clause (ii)) — `e^{tℒ}` is completely
 positive, proved from scratch: Kraus/conjugation splitting of the
 dissipator, a Banach-algebra second-order exponential remainder bound
@@ -110,13 +110,13 @@ constants, and closedness of the ampliation-stable cone.
 *Lean:* `NCG/Upstream/LindbladCP.lean`
 (`NCG.Upstream.exp_dissipator_preservesPos`).
 
-**Predictive compression forces renewal memory**
+* **Predictive compression forces renewal memory**
 (`thm:minimal-predictive-memory`, `thm:predictive-compression-stability`,
 `cor:renewal-retract`) — minimality and uniqueness of predictive memory,
 with quantitative stability of the compressed dynamics.
 *Lean:* `NCG/Upstream/Retract.lean`, `LinearStability.lean`.
 
-**The complex predictive algebra** (`thm:complex-algebra`,
+* **The complex predictive algebra** (`thm:complex-algebra`,
 `thm:structural-reconstruction`, `thm:two-path-complex-face`) — the
 operational state space embeds in a formally real Euclidean Jordan algebra;
 two-path interference forces complex matrix faces; the finite predictive
@@ -124,26 +124,26 @@ algebra is reconstructed structurally.
 *Lean:* `NCG/Algebra/JordanFace.lean`, `SpinFactor.lean`,
 `NCG/Upstream/CommonOriginUCP.lean`.
 
-**Retrodiction and KMS structure** (`thm:petz-properties`,
+* **Retrodiction and KMS structure** (`thm:petz-properties`,
 `cor:common-petz-family`, `thm:predictive-reference-renewal`) — the
 canonical Petz adjoint, the common KMS–Petz family, and the predictive
 derivation of reference renewal with exact scalar path laws.
 *Lean:* `NCG/Upstream/KMSDual.lean`, `PetzBranch.lean`, `PathLaw.lean`.
 
-**Signed covers from records** (`thm:determinant-cover`,
+* **Signed covers from records** (`thm:determinant-cover`,
 `thm:noisy-record-orientation`, `thm:record-parity-unique`) — the
 determinant line induces the principal signed cover; determinant-regular
 noisy records still orient it; resolved-record parity is unique.
 *Lean:* `NCG/Graph/RecordOrientation.lean`, `NCG/Upstream/RecordParity.lean`.
 
-**Pressure and the modular clock** (`thm:pressure-root`,
+* **Pressure and the modular clock** (`thm:pressure-root`,
 `thm:entropy-affinity-depth`, `thm:exchange-pressure-stationarity`) — the
 stationary pressure law selects a unique root; the entropy–affinity–depth
 identity; zero exchange source is exactly the torsion-free stationary point.
 *Lean:* `NCG/Upstream/CWPressure.lean`, `EntropyAffinity.lean`,
 `ExchangePressure.lean`.
 
-**The common-origin phase** (`thm:common-origin-phase`,
+* **The common-origin phase** (`thm:common-origin-phase`,
 `cor:full-phase-nonempty`) — the unified finite phase satisfying all the
 paper's criteria simultaneously exists: resolved balance + primitivity +
 Clifford factor + KMS, assembled and nonempty.
