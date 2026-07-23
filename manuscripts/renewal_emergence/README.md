@@ -80,6 +80,9 @@ python scripts/check_statement_coverage.py renewal_emergence
 
 ## Headline theorems
 
+A guide to the main results and where to inspect them.
+(Statement labels are the `\label`s in the manuscript)
+
 * **Phase coexistence — the paper's centerpiece**
 (`thm:torsion-phase-coexistence`, `cor:torsion-selection`). One microscopic
 detailed-balanced law admits both torsion-free and torsional stationary
