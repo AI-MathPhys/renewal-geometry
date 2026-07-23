@@ -39,7 +39,7 @@ prove, the theorems of two research manuscripts (see
 | **Dimension selection** (`NCG/Dimension`) | Access-efficiency selection of `3+1`, even-rank theorems, isotropy dimension-blindness, engineering power counting |
 | **Operational / statistical-mechanics program** (`NCG/Upstream`) | The operational process system and UCP bridge, sharp purification, Petz retrodiction and KMS duality, record algebras and pointer selection, complete positivity of the Lindblad semigroup `e^{tℒ}` (full Euler–Trotter proof), the symmetric monoidal quotient category, Curie–Weiss phases, and the **2d Ising phase-coexistence suite**: Peierls bound with the *proved* planar circuit count `4n·3^{n−1}`, infinite-volume Gibbs states with the DLR property, phase separation `±203/216`, and Dobrushin uniqueness at high temperature |
 
-## The two manuscripts
+## Related manuscripts
 
 The library is the proof backend for two companion papers. Each has a
 dedicated folder containing the LaTeX source, a machine-checked statement
