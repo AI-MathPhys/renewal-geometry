@@ -79,7 +79,7 @@ python scripts/check_statement_coverage.py --notes    # verifies this inventory
 
 ## Headline theorems
 
-* **Phase coexistence — the paper's centerpiece**
+**Phase coexistence — the paper's centerpiece**
 (`thm:torsion-phase-coexistence`, `cor:torsion-selection`). One microscopic
 detailed-balanced law admits both torsion-free and torsional stationary
 phases, so plaquette closure (torsion freedom) is a genuine *selection
@@ -88,7 +88,7 @@ exchange covariance, bounded records, and nondegenerate second moments alone
 can force it. All three clauses are formalized end to end on the 2d Ising
 model, with **no scoped statistical-mechanics inputs remaining**:
 
-(1) *Clause (ii), low temperature* — the Peierls argument in full: contour
+- *Clause (ii), low temperature* — the Peierls argument in full: contour
   geometry (`NCG/Upstream/IsingContours.lean`), the planar circuit count
   `#{contours of length n} ≤ 4n·3^{n−1}` **proved** as a theorem
   (`NCG/Upstream/CircuitCount.lean`: a discrete Jordan theory via
@@ -101,14 +101,14 @@ model, with **no scoped statistical-mechanics inputs remaining**:
   property** (`NCG/Upstream/GibbsDLR.lean`: `gibbsPlus`, `gibbsMinus`,
   `gibbsPlus_dlr`), separated by the deck-odd spin test
   (`phases_distinct`: magnetizations `≥ 203/216` and `≤ −203/216`).
-(2) *Clause (i), high temperature* — **Dobrushin uniqueness proved in full**
+- *Clause (i), high temperature* — **Dobrushin uniqueness proved in full**
   (`NCG/Upstream/DobrushinUnique.lean`): the sharp single-site influence
   bound `tanh θ`, the oscillation-contraction descent against the harmonic
   series, and `dlrState_unique` — at `4·tanh θ < 1` any two DLR states
   coincide on all bounded local observables; the unique state is deck-flip
   invariant with zero magnetization (`gibbsPlus_spin_zero`), so the torsion
   defect vanishes.
-(3) *Clause (iii)* — the symmetric mixture satisfies the same DLR law with
+- *Clause (iii)* — the symmetric mixture satisfies the same DLR law with
   zero defect (`gibbsMix_dlr`, `gibbsMix_spin`).
 
 * **Complete positivity of the Lindblad semigroup**
