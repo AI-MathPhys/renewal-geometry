@@ -1,4 +1,4 @@
-# Faithfulness audit — 2026-07-22 (post-remediation re-audit)
+# Faithfulness audit — 2026-07-22
 
 Does every tracked record correspond **exactly** to the statement as written in the
 current manuscript text — no undisclosed narrowing, no extra assumptions, no
