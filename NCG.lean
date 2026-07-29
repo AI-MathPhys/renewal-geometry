@@ -159,6 +159,7 @@ import NCG.Upstream.DiamondProduct
 import NCG.Algebra.JordanWigner
 import NCG.Lorentz.SubmatrixRadius
 import NCG.Lorentz.BlockRadius
+import NCG.Lorentz.CycleRadius
 import NCG.Lorentz.DobrushinMixing
 import NCG.Lorentz.HeatBathConvergence
 import NCG.Lorentz.SCCRadius

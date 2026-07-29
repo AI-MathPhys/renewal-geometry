@@ -1,0 +1,2468 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.02in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{enumitem}
+\usepackage{booktabs,array,longtable,tabularx}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,capitalise]{cleveref}
+\setlength{\emergencystretch}{4em}
+\raggedbottom
+\hbadness=10000
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{openproblem}[theorem]{Open Problem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{construction}[theorem]{Construction}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{assessment}[theorem]{Assessment}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\F}{\mathbb F}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\rad}{\operatorname{rad}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\UCP}{\mathrm{UCP}}
+\newcommand{\CP}{\mathrm{CP}}
+\newcommand{\Ztwo}{\mathbb Z/2}
+\newcommand{\Zfour}{\mathbb Z/4}
+\newcommand{\A}{\mathcal A}
+\newcommand{\Hh}{\mathcal H}
+\newcommand{\K}{\mathcal K}
+\newcommand{\M}{\mathcal M}
+\newcommand{\Qq}{\mathsf Q}
+\newcommand{\W}{\mathcal W}
+\newcommand{\J}{\mathsf J}
+\newcommand{\Ham}{\mathsf H}
+\newcommand{\Dirac}{\mathsf D}
+\newcommand{\Store}{\mathsf{Store}}
+\newcommand{\Read}{\mathsf{Read}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\spat}{\mathrm{sp}}
+\newcommand{\rev}{\mathrm{rev}}
+\newcommand{\pred}{\mathrm{pred}}
+\newcommand{\ext}{\mathrm{ext}}
+\newcommand{\intr}{\mathrm{int}}
+\newcommand{\LC}{\mathrm{LC}}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\Alt}{\operatorname{Alt}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\Dom}{\operatorname{Dom}}
+\newcommand{\Sch}{\mathcal S}
+\newcommand{\Sphere}{\mathbb S}
+\newcommand{\so}{\mathfrak{so}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\definecolor{deepgreen}{RGB}{28,110,70}
+\definecolor{deepred}{RGB}{150,45,45}
+\definecolor{deepblue}{RGB}{30,70,145}
+\newcommand{\lowrisk}{\textcolor{deepgreen}{\textbf{low}}}
+\newcommand{\mediumrisk}{\textcolor{deepblue}{\textbf{medium}}}
+\newcommand{\highrisk}{\textcolor{deepred}{\textbf{high}}}
+
+\title{\textbf{Predictive Renewal Geometry and Lorentzian Spacetime}\\[0.35em]
+\Large Flagship Theorems, Complete Hypothesis Ledger, Current Fit-Risk Assessment,\\[0.15em]
+and Rigorous Proof Appendix\\[0.3em]
+\large Version V053}
+\author{A.~P\'elissier -- standalone current-state note}
+\date{28 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note states the current renewal-spacetime construction as one self-contained
+conditional theorem architecture.  The most primitive formulation begins with
+composable operational processes and identifies histories that no admissible
+future experiment can distinguish.  A shorter entry begins directly with a
+finite complete resolved operator instrument.  Both routes lead to a finite
+complex predictive algebra acted on by completely positive renewal maps.
+
+A distinguished recurrent Store--Read phase then supplies the finite structures
+needed for Lorentzian geometry.  A coherent binary Store interaction and its
+retained completed records generate a nontrivial determinant orientation line;
+reversible predictive units generate a projective commutator form; pressure on
+a branching positive-depth recurrent graph selects an affine renewal clock; and
+the marked primitive revision sector contains a minimal external
+$M_4(\C)\cong\Cl_4(\C)$ factor.  Its canonical resolved direction instrument
+has three external spatial directions and a positive second moment.  Under
+controlled scaling, the resulting signed Hamiltonians converge to flat or
+slowly varying Lorentzian Dirac dynamics.  In a primitive common-source
+exchange phase, translational plaquette defects cancel while rotational
+holonomy remains free, selecting Levi--Civita spin transport without imposing
+flatness.
+
+The theorem is a universality-class statement rather than a parameter-free
+prediction of one universe.  The note lists every foundational, microscopic,
+phase, analytic, selection, and metrological premise used by the current
+formulation and gives a direct assessment of which premises remain physically
+selective or potentially fit-like.  The central conclusion is a minimal
+external $(3+1)$ Lorentzian core and controlled Dirac kinematics; uniqueness of
+the total primitive dimension, a unique macroscopic metric, global topology,
+an intrinsic choice of temporal orientation, Einstein dynamics, and matter
+content are not asserted.
+\end{abstract}
+
+\tableofcontents
+
+% =============================================================================
+\section{Current flagship claim}
+% =============================================================================
+
+\begin{assessment}[Present mathematical status]
+The current theorem chain supports the following statement.
+\begin{quote}
+A finite predictive renewal process in a coherent, record-retaining,
+reversibly accessible Store--Read phase carries a canonical positive spectral
+geometry and predictive order, a minimal signed/Krein enrichment, a
+pressure-selected modular clock, and a marked primitive Clifford sector with a
+minimal external $(3+1)$ factor.  Under regular coarse-graining it converges to
+flat or Levi--Civita curved Lorentzian Dirac dynamics.
+\end{quote}
+The statement is conditional on a specified microscopic phase and on the
+analytic regularity of the selected continuum scaling.  It does not say that
+every operational theory, every quantum channel family, or every recurrent
+renewal process belongs to this phase.
+\end{assessment}
+
+\subsection{Exact scope of the word ``emergence''}
+
+The theorem uses no prior manifold, metric tensor, causal cone, time coordinate,
+spin structure, or spacetime dimension in the construction of the predictive
+quotient, the signed cover, the projective revision algebra, or the renewal
+pressure root.  The Lorentzian principal symbol and the limiting Dirac
+Hamiltonian are reconstructed from finite predictive data.
+
+The theorem nevertheless depends on a model being in a particular recurrent
+phase.  Emergence therefore means:
+\[
+\boxed{
+\begin{gathered}
+\text{finite predictive Store--Read data}\
+\Longrightarrow\
+\text{Lorentzian Dirac geometry in a selected scaling phase}
+\end{gathered}}
+\]
+It does not mean that the phase itself is forced by bare composition or that
+all microscopic data are uniquely determined.
+
+% =============================================================================
+\section{Logical roles of the hypotheses}
+% =============================================================================
+
+\begin{definition}[Six logical roles]
+Every premise in the theorem chain belongs to one of the following classes.
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.8em]
+\item A \emph{foundational reconstruction condition} is used only when the
+      finite complex operator description is itself reconstructed from a
+      prelinear operational theory.
+\item A \emph{microscopic model datum} specifies the concrete finite process:
+      local Store coefficients, resolved branches, depths, capacities, record
+      transports, and control operations.
+\item A \emph{phase criterion} is a checkable property of the specified model,
+      such as recurrent branching, coherent binary coupling, determinant-odd
+      record transport, reversible accessibility, or exchange covariance.
+\item An \emph{analytic scaling condition} controls a continuum limit, including
+      finite range, uniform ellipticity, coefficient regularity, common cores,
+      form convergence, and bounded subprincipal terms.
+\item A \emph{physical selection} chooses one recurrent component, boundary
+      condition, zero-source state, orientation sector, or scaling net when
+      several admissible choices coexist.
+\item A \emph{metrological calibration} converts dimensionless renewal depth
+      into conventional time, length, or energy units.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Fit-like premise]
+A premise is called \emph{fit-like} when its content is tailored mainly to force
+an intended target---for example exactly one negative direction, exactly three
+spatial directions, a round spatial metric, a positive clock exponent, or
+vanishing torsion---rather than describing an independently motivated
+microscopic phase or an ordinary analytic domain.
+\end{definition}
+
+\begin{remark}[Restrictive is not synonymous with fit-like]
+A phase criterion may be restrictive without being a numerical or structural
+fit.  A coherent Store interaction, a noncycle recurrent graph, or a
+common-source exchange law excludes consistent counterphases, but none of these
+conditions explicitly inserts a Lorentzian metric or the number three.  The
+fit-risk assessment in \Cref{sec:fit-risk} therefore records both the degree of
+physical selectivity and how directly a premise resembles the desired
+conclusion.
+\end{remark}
+
+% =============================================================================
+\section{Primitive objects and the two entry routes}
+% =============================================================================
+
+\subsection{Operational primitive}
+
+\begin{definition}[Finite operational process datum]
+A finite operational process datum consists of:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.6em]
+\item a finite typed symmetric monoidal process category generated by finitely
+      many preparations, transformations, resolved outcomes, swaps, identities,
+      and discards;
+\item convex mixing and real weights in $[0,1]$ for every closed experiment;
+\item a specified family of admissible future continuations and terminal tests,
+      closed under composition, classical postprocessing, and tensoring with
+      identities;
+\item a finite-dimensional reduced predictive sector after identifying all
+      process differences invisible to the admitted experiments.
+\end{enumerate}
+A history is a generated composite.  The word ``future'' refers to admissible
+postcomposition and does not presuppose physical time.
+\end{definition}
+
+\begin{definition}[Future predictive quotient]
+Two rooted histories $h,h'$ ending at the same operational type are future
+equivalent when
+\[
+  \Pr(e\circ r\circ h)=\Pr(e\circ r\circ h')
+\]
+for every admissible continuation $r$ and terminal test $e$.  The quotient is
+denoted $\Qq_+$.  Complete contextual equivalence is defined by the same rule
+after adjoining arbitrary admitted ancillary systems and joint tests.
+\end{definition}
+
+\begin{assumption}[Operational reconstruction package]
+\label{ass:operational-package}
+When the complex operator description is reconstructed rather than directly
+supplied, assume:
+\begin{enumerate}[label=\textup{(O\arabic*)},leftmargin=3em]
+\item the operational process datum is causal, finite dimensional, convex, and
+      reduced by complete contextual future equivalence;
+\item pure processes are stable under admitted sequential and parallel
+      composition, and every normalized state has a pure reversible dilation
+      with the usual essential uniqueness on a minimal environment;
+\item every reversible pure-state orbit contains one pure repeatable atomic
+      observation branch, providing the preparation--observation sharp seed;
+\item every nonclassical two-outcome face carries an effective transitive
+      connected one-dimensional phase action with a consistent associative
+      orientation across overlapping faces;
+\item once the generated complex qubit block is present, ordinary physical
+      monoidal closure under finite qubit-power ancillas is available;
+\item if the complete composite operator theory is claimed, locally invisible
+      holistic fibres are either absent or retained explicitly.  For the
+      external Lorentzian calculus it is sufficient that all external
+      Store--Read observables factor through the locally observable quotient.
+\end{enumerate}
+\end{assumption}
+
+\subsection{Direct operator primitive}
+
+\begin{definition}[Finite complete resolved renewal instrument]
+A finite complete resolved renewal instrument is a tuple
+\[
+ \mathfrak R=
+ \bigl(G,\{\A_x\}_{x\in V},\{\rho_x\}_{x\in V},
+       \{\mathcal E_e\}_{e\in E_G},\ell,q,\mathscr H_{\Store}\bigr)
+\]
+with:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.6em]
+\item a finite directed resolved graph $G$;
+\item a finite-dimensional complex $C^*$-algebra $\A_x$ and a faithful
+      normalized reference state $\rho_x$ at every reachable predictive vertex;
+\item a CP trace-nonincreasing branch map
+      $\mathcal E_e:\A_{s(e)}\to\A_{t(e)}$ for every resolved edge, with outgoing
+      branches summing to a trace-preserving update;
+\item positive finite depths $\ell_e$ and positive capacities $q_e$ on the
+      supported edges;
+\item an actual finite analytic probe-coupled Store Hamiltonian family
+      $\mathscr H_{\Store}$ whose coefficient algebra determines the admitted
+      local coherent controls and stable record algebra;
+\item complete outcome resolution at the level of the physical pointer records
+      used by the theorem.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Common finite object]
+\label{prop:common-object}
+Under \Cref{ass:operational-package}, the future quotient admits a finite complex
+operator realization: a finite direct sum of matrix algebras acted on by a
+finite alphabet of UCP predictive updates and resolved CP branches.  Conversely,
+a finite complete resolved renewal instrument already supplies this object.
+All Lorentzian theorems below begin from the common finite object and do not
+otherwise depend on which entry route is used.
+\end{proposition}
+
+\begin{proof}
+See the detailed proof in \Cref{app:proof-common-object}.
+\end{proof}
+
+% =============================================================================
+\section{Complete present hypothesis ledger}
+% =============================================================================
+
+\begin{assumption}[Finite Store--Read Lorentzian phase]
+\label{ass:finite-phase}
+Select one finite recurrent support and assume the following current
+microscopic and phase conditions.
+
+\paragraph{Recurrent renewal support.}
+\begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=3em]
+\item The supported resolved graph is strongly connected after restriction to
+      the selected recurrent component, is not a single directed cycle, and has
+      positive finite depths $0<\ell_{\min}\le\ell_e\le\ell_{\max}<\infty$.
+\item Local Store actions and supported branch capacities have finite barriers
+      on the selected compact control phase.  Consequently all supported
+      equilibrium edges have positive weight and the relevant Perron transfer
+      is irreducible.
+\end{enumerate}
+
+\paragraph{Coherent Store seed and active closure.}
+\begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=3em,start=3]
+\item The actual analytic Store coefficient algebra has an isolated binary
+      commutant closure: at the reference control value it resolves two pointer
+      sectors, while on a punctured neighbourhood the common commutant on the
+      active block is scalar.  Equivalently, some finite Taylor jet has a
+      nonzero cross-support coefficient.
+\item The KMS reverse of the active Store--Read calculus is retained; completed
+      returns are one-leg local; and the retained diagonal controls act
+      irreducibly on the active factor generated by the Store coefficients.
+\item The interaction-complete monitoring and fresh-Read operations associated
+      with the Store coefficient algebra are physically admitted.  Their stable
+      pointer centre and its resolved branches are retained in the predictive
+      record algebra.
+\end{enumerate}
+
+\paragraph{Order-sensitive records and reversible accessibility.}
+\begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=3em,start=6]
+\item The two completed order records generated by the binary Store event are
+      future distinct and survive the predictive quotient.  Their contrast
+      transport is determinant regular, and at least one recurrent physical
+      Read-leg-interchange loop acts by the transposition of the two records;
+      equivalently its determinant holonomy is $-1$.
+\item The active control orbit contains the predictive units generated by the
+      Store closure.  After quotienting labels acting trivially, the realized
+      nontrivial revision labels form a finite elementary abelian two-group
+      $K_{\rev}$ whose composition law agrees with addition.  Each label is
+      represented by a recurrent return and has a clock-preserving signed lift
+      whose sheet shift is its determinant-holonomy pairing with $[\chi]$.
+      Restricting to the generated simple block gives a faithful action.  After
+      deriving the projective commutator form and quotienting its radical, the
+      marked temporal label survives as a complement to the image $K$ of
+      $K_{\rev}$: $H_{\rm prim}=K\oplus\F_2t$.  The determinant functional
+      $k\mapsto\langle[\chi],k\rangle=\omega(t,k)$ is nonzero on $K$, and
+      $K_0:=K\cap t^\perp$ is nonzero.
+\end{enumerate}
+
+\paragraph{Spatial records and diamonds.}
+\begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=3em,start=8]
+\item The spectral half-records of the marked external Clifford frame are
+      physically realized as resolved Read outcomes, or more generally the
+      external direction record has a positive-definite second moment.
+\item Every elementary two-direction diamond is generated from a common stored
+      source followed by two fresh conditionally independent and identically
+      distributed Reads.  More precisely, on its recurrent support there are a
+      finite latent source set $Z$, a primitive source kernel $P$, and conditional
+      Read laws $R_z$ such that
+      \[
+        K_\diamond((z,a,b),(z',a',b'))
+        =P(z,z')R_{z'}(a')R_{z'}(b').
+      \]
+      The developed translational defect is odd under $(a,b)\leftrightarrow(b,a)$.
+      No exchange condition is imposed on the rotational record.
+\end{enumerate}
+\end{assumption}
+
+\begin{assumption}[Continuum scaling package]
+\label{ass:scaling-package}
+For a scaling family indexed by $R\to\infty$, assume:
+\begin{enumerate}[label=\textup{(A\arabic*)},leftmargin=3em]
+\item the spatial mesh $h_R\downarrow0$, the reset stencil has uniformly finite
+      range, and all matrix coefficients and bounded internal terms are
+      uniformly controlled;
+\item the external second-moment fields $M_R(x)$ converge locally uniformly to
+      a uniformly positive field $M(x)\succeq m_0 I_3$;
+\item in the flat theorem, $M$ is constant; in the curved theorem,
+      $M\in C_b^4$, neighbouring record transports satisfy second-moment
+      covariance $T_eM_xT_e^{\mathsf T}=M_y$ and preserve the selected
+      determinant orientation, and the resulting discrete links are uniformly
+      regular through the required order;
+\item after the specified sampling/interpolation identification, all discrete
+      Hamiltonians act on one Hilbert space and are self-adjoint on a common
+      graph domain, or arise from closed forms with a common coercive bound;
+      smooth compactly supported spinors lie in every domain and form a core for
+      the limiting Hamiltonian;
+\item the developed channel plaquettes admit, locally uniformly, the
+      translational/rotational expansions
+      \[
+        \Pi_{\rm tr}\mathscr P_{ij}^{(h_R)}
+        =h_R^2T_{ij}+O(h_R^3),
+        \qquad
+        \Pi_{\rm rot}\mathscr P_{ij}^{(h_R)}
+        =-h_R^2F_{ij}+O(h_R^3),
+      \]
+      with the translational coefficient equal to the stationary developed
+      defect; after the metric-compatible torsion-free connection is
+      constructed, the discrete moment coefficients, their adjoints, the
+      midpoint spin links, and the covariant differences satisfy the local
+      consistency and compactness estimates needed through subprincipal order;
+\item the residual scalar renewal term converges locally uniformly to a bounded
+      real potential $V_{\rm ren}$.
+\end{enumerate}
+\end{assumption}
+
+\begin{assumption}[Selections and calibration]
+\label{ass:selections}
+The following are imposed only when the associated physical claim is made.
+\begin{enumerate}[label=\textup{(S\arabic*)},leftmargin=3em]
+\item Choose one recurrent component when several closed supports coexist.
+\item Choose one deck-oriented extremal state, boundary condition, or
+      superselection sector when a realized arrow of time is claimed.  The
+      signed geometry and its two deck-related orientations exist without this
+      state selection.
+\item Choose the zero-source exchange phase when a torsion-free realized sector
+      is claimed; other stationary phases may carry torsion.
+\item Fix one conversion between renewal depth and conventional physical units.
+      This sets the numerical values of the lapse and propagation speed in the
+      chosen units but does not change the dimensionless theorem.
+\end{enumerate}
+\end{assumption}
+
+\begin{remark}[What is not assumed]
+The package does not postulate a Lorentzian metric, a causal cone, a Krein
+fundamental symmetry, a Clifford algebra, a total factor of size four, a round
+spatial covariance, a value of the pressure root, or a torsion-free connection.
+Those objects appear as conclusions in the phase described above.
+\end{remark}
+
+% =============================================================================
+\section{Flagship theorem I: predictive and signed finite geometry}
+% =============================================================================
+
+\begin{theorem}[Predictive reconstruction and positive geometry]
+\label{thm:predictive-geometry}
+Assume either the operational entry of \Cref{ass:operational-package} or the
+direct resolved instrument entry.  Then:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.7em]
+\item future equivalence produces the unique reduced future-sufficient memory;
+\item resolved-outcome conditioning gives a well-defined successor map, and in
+      every reduced future-tomographic realization
+      \[
+        \mathcal E_e(\rho_x)=w_e\rho_{t(e)},
+        \qquad
+        w_e=\Tr\mathcal E_e(\rho_x),
+      \]
+      so resolved path weights multiply;
+\item the accumulated UCP maps form a predictive monoid and every unit of that
+      monoid is a $*$-automorphism;
+\item if the descended predictive shifts have uniformly finite fibres and
+      bounded quotient-length increments, the quotient length defines a
+      positive spectral triple whose zeta abscissa is the predictive growth
+      exponent;
+\item divisibility in the predictive monoid, after quotienting mutual
+      reachability, defines a partial order and an intrinsic increasing renewal
+      time function on every regular graded component;
+\item the irreducible positive sector cannot functorially produce a nonconstant
+      fundamental symmetry.  Every compatible nonconstant diagonal involution
+      contains additional $\Ztwo$ cocycle data.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+See the detailed proof in \Cref{app:proof-predictive-geometry}.
+\end{proof}
+
+\begin{theorem}[Minimal signed cover and modular clock]
+\label{thm:signed-clock}
+Under \Cref{ass:finite-phase}\textup{(P1)--(P6)}:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.7em]
+\item the determinant signs of the future-distinct record contrast define a
+      nontrivial class
+      \[
+        [\chi]\in H^1(G;\Ztwo);
+      \]
+\item the objectwise-minimal cone-preserving fibrewise-indefinite enrichment is
+      the principal double cover $G^\chi\to G$, with fibre rank two and
+      fundamental symmetry
+      \[
+        J_\chi e_{(x,\eta)}=\eta e_{(x,\eta)};
+      \]
+\item a finite amplitude square-root lift exists in $H^1(G;\Zfour)$, but the
+      real Lorentzian conclusions depend only on $[\chi]$;
+\item the unweighted depth transfer
+      \[
+        B(s)_{xy}=\sum_{e:x\to y}e^{-s\ell_e}
+      \]
+      has a unique positive root $\beta_{\rm top}$ satisfying
+      $\rho(B(\beta_{\rm top}))=1$;
+\item for any positive weighted transfer in the same finite-depth phase, a
+      positive root $\beta$ is unique whenever its zero-depth Perron radius is
+      greater than one;
+\item on the graded signed path cover, let $N$ be accumulated renewal
+      depth, so an edge $e$ raises $N$ by $\ell_e$.  Within the natural
+      atomic-diagonal class, let $D_0$ be an invertible self-adjoint deck-odd
+      unbounded operator whose positive magnitude implements the
+      depth-homogeneous pressure character,
+      \[
+        \Ad(|D_0|)(\widetilde S_e)
+        =e^{\beta\ell_e}\widetilde S_e.
+      \]
+      Then, after a flat sheet gauge,
+      \[
+        D_0=J_\chi e^{\beta N}
+      \]
+      up to one overall positive magnitude normalization.  A bounded
+      $J_\chi$-self-adjoint finite-propagation term carries the remaining
+      differential content.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+See the detailed proof in \Cref{app:proof-signed-clock}.
+\end{proof}
+
+% =============================================================================
+\section{Flagship theorem II: the finite external Lorentzian core}
+% =============================================================================
+
+\begin{theorem}[Automatic projective revision algebra]
+\label{thm:projective-revision}
+Under \Cref{ass:finite-phase}\textup{(P3)--(P7)}, let $K_{\rev}$ be the realized
+elementary-two revision group on the selected active matrix factor.  Choose
+unitary implementers $R_\alpha$ of its automorphisms.  Then:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.7em]
+\item there is a normalized scalar cocycle $\sigma$ such that
+      \[
+        R_\alpha R_\beta
+        =\sigma(\alpha,\beta)R_{\alpha+\beta};
+      \]
+\item its antisymmetric ratio defines an intrinsic alternating form
+      \[
+        \sigma(\alpha,\beta)\sigma(\beta,\alpha)^{-1}
+        =(-1)^{\omega_{\spat}(\alpha,\beta)},
+        \qquad
+        \omega_{\spat}\in\Alt^2(K_{\rev},\F_2);
+      \]
+\item adjoining the temporal label $t$ represented by $J_\chi$ gives the full
+      form
+      \[
+      \omega((\alpha,\epsilon),(\beta,\delta))
+      =\omega_{\spat}(\alpha,\beta)
+       +\epsilon\langle[\chi],\beta\rangle
+       +\delta\langle[\chi],\alpha\rangle;
+      \]
+\item quotienting $\rad\omega$ gives a nondegenerate finite symplectic module
+      $H_{\rm prim}$ and a canonical primitive matrix type
+      \[
+        \C_\sigma[H_{\rm prim}]
+        \cong M_{2^m}(\C)
+        \cong\Cl_{2m}(\C),
+        \qquad \dim_{\F_2}H_{\rm prim}=2m.
+      \]
+\end{enumerate}
+The cocycle, alternating form, radical, and primitive Clifford type are
+consequences of the reversible action; they are not separately specified data.
+\end{theorem}
+
+\begin{proof}
+See the detailed proof in \Cref{app:proof-projective-revision}.
+\end{proof}
+
+\begin{theorem}[Minimal external $M_4(\C)$ core]
+\label{thm:external-core}
+Under \Cref{ass:finite-phase}\textup{(P3)--(P8)}, write the marked
+nondegenerate primitive module as
+\[
+  H_{\rm prim}=K\oplus\F_2t,
+  \qquad K_0:=K\cap t^\perp\ne0.
+\]
+There is a unique nonzero $r\in\rad(\omega|_K)$, it satisfies
+$\omega(t,r)=1$, and $K_0$ is nondegenerate.  Choosing any nonzero
+$b\in K_0$ and $c\in K_0$ with $\omega(b,c)=1$ gives an orthogonal
+symplectic decomposition
+\[
+  H_{\rm prim}=W_{\ext}\perp H_{\intr},
+  \qquad W_{\ext}=\Span\{t,r,b,c\},
+  \qquad \dim_{\F_2}W_{\ext}=4,
+\]
+with corresponding factorization
+\[
+  \boxed{
+  \A_{\rm act}
+  \cong
+  \underbrace{M_4(\C)}_{\A_{\ext}\cong\Cl_4(\C)}
+  \otimes
+  \underbrace{M_{2^{m-2}}(\C)}_{\A_{\intr}}.}
+\]
+The external factor contains:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.7em]
+\item a Hermitian grading generator $J_\chi$;
+\item a realized revision $R_{\alpha_0}$ with
+      $J_\chi R_{\alpha_0}=-R_{\alpha_0}J_\chi$;
+\item the anti-Hermitian temporal Clifford generator
+      \[
+        \gamma^0=J_\chi R_{\alpha_0},
+        \qquad (\gamma^0)^2=-\one;
+      \]
+\item three Hermitian spatial Clifford generators
+      $\gamma^1,\gamma^2,\gamma^3$.
+\end{enumerate}
+Thus $(3+1)$ is the minimal spatially nondegenerate external Lorentzian core.
+The theorem does not require $H_{\intr}=0$ and therefore does not assert
+uniqueness of the total primitive dimension.
+\end{theorem}
+
+\begin{proof}
+See the detailed proof in \Cref{app:proof-external-core}.
+\end{proof}
+
+\begin{theorem}[Canonical external direction record]
+\label{thm:octahedral-record}
+On the marked external factor, let
+\[
+  P_{i,\pm}=\frac12(\one\pm\gamma^i),
+  \qquad i=1,2,3,
+\]
+and define
+\[
+  E_{i,\pm}=\frac13P_{i,\pm},
+  \qquad K_{i,\pm}=\frac1{\sqrt3}P_{i,\pm},
+  \qquad
+  \mathcal I_{i,\pm}(\rho)=K_{i,\pm}\rho K_{i,\pm}^*.
+\]
+Whenever these spectral Read outcomes are physically admitted,
+$\{\mathcal I_{i,\pm}\}$ is a trace-preserving resolved Lueders instrument
+with direction labels $\theta_{i,\pm}=\pm e_i\in\Sphere^2$.  For every external density matrix $\rho$,
+\[
+  \sum_{i,\pm}\Tr(\rho E_{i,\pm})\,
+       \theta_{i,\pm}\theta_{i,\pm}^{\mathsf T}
+  =\frac13 I_3.
+\]
+Consequently the external spatial second moment is positive definite and
+state independent, and with frame normalization $\kappa_{\rm frame}=3$ the
+finite resolved record gives the exact principal symbol
+\[
+  i\left(\gamma^0\xi_0+\sum_{i=1}^3\gamma^i\xi_i\right),
+\]
+whose square is
+\[
+  (\xi_0^2-|\vec\xi|^2)\one.
+\]
+\end{theorem}
+
+\begin{proof}
+See the detailed proof in \Cref{app:proof-octahedral-record}.
+\end{proof}
+
+\begin{remark}[General anisotropic phase]
+The continuum theorem does not require the octahedral realization.  Any
+positive-definite external second moment $M$ defines a spatial vielbein and is
+constant-frame equivalent to the standard flat Dirac Hamiltonian.  The
+spectral instrument above gives a particularly canonical finite representative
+of the external frame when it is physically available.
+\end{remark}
+
+% =============================================================================
+\section{Flagship theorem III: flat Lorentzian Dirac continuum}
+% =============================================================================
+
+\begin{definition}[External signed principal symbol]
+For a symmetric positive-definite external second moment
+$M\in\operatorname{Sym}_3(\R)$ and $\kappa>0$, define
+\[
+ \sigma_M(\xi)
+ :=i\left(\gamma^0\xi_0+
+          \kappa\sum_{i,j=1}^3\gamma^iM^{ij}\xi_j\right).
+\]
+\end{definition}
+
+\begin{theorem}[Lorentzian symbol and flat Hamiltonian limit]
+\label{thm:flat-limit}
+Assume \Cref{ass:finite-phase}\textup{(P1)--(P8)} and the flat specialization of
+\Cref{ass:scaling-package}.  Then:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.7em]
+\item the principal symbol obeys
+      \[
+        \boxed{
+        \sigma_M(\xi)^2
+        =\left(\xi_0^2-
+          \kappa^2\vec\xi^{\,\mathsf T}M^2\vec\xi\right)\one,}
+      \]
+      so $M\succ0$ gives signature $(1,3)$;
+\item constant anisotropy is an external frame choice: after the spatial linear
+      change $y=\kappa^{-1}M^{-1}x$, the limiting Hamiltonian is unitarily
+      equivalent to the standard massless $(3+1)$ Dirac Hamiltonian;
+\item the covariant discrete spacetime Dirac operators converge on a common
+      smooth core to the continuum first-order operator;
+\item the associated self-adjoint spatial Hamiltonians $\Ham_R$ converge in
+      strong-resolvent sense to
+      \[
+        \Ham_M=\kappa\sum_{i,j=1}^3
+        (\gamma^0\gamma^i)M^{ij}(-i\partial_j);
+      \]
+\item the propagators converge strongly, uniformly for time in compact
+      intervals, and $f(\Ham_R)\to f(\Ham_M)$ strongly for every
+      $f\in C_0(\R)$;
+\item on every fixed compact momentum band, the symmetric finite-difference
+      scheme converges in norm resolvent, with second-order consistency for an
+      exact centered frame.
+\end{enumerate}
+No full norm-resolvent statement is asserted for the unmodified symmetric mesh
+on the entire momentum space.
+\end{theorem}
+
+\begin{proof}
+See the detailed proof in \Cref{app:proof-flat-limit}.
+\end{proof}
+
+\begin{corollary}[Self-averaged flat endpoint]
+\label{cor:self-averaged-flat}
+Let $(\theta_a)_{a\ge1}$ be a stationary ergodic sequence of external reset
+directions with marginal law $\zeta_*$ and second moment
+\[
+  M_*:=\int_{\Sphere^2}\theta\theta^{\mathsf T}\,\dd\zeta_*(\theta)\succ0.
+\]
+For any $m_R\to\infty$ and $h_R\downarrow0$, form the empirical direction law
+from $\theta_1,\ldots,\theta_{m_R}$ and the corresponding centered-difference
+Hamiltonian.  Then, almost surely, the empirical second moments converge to
+$M_*$ and the random discrete Hamiltonians converge in strong-resolvent sense
+to the deterministic flat Lorentzian Hamiltonian $\Ham_{M_*}$.  Rotational
+invariance of the microscopic direction law is unnecessary.
+\end{corollary}
+
+\begin{proof}
+See the detailed proof in \Cref{app:proof-self-averaging}.
+\end{proof}
+
+% =============================================================================
+\section{Flagship theorem IV: curved Levi--Civita continuum}
+% =============================================================================
+
+\begin{definition}[Renewal coframe and metric]
+For a smooth uniformly positive moment field $M(x)$, define
+\[
+  e_a{}^j(x)=\kappa M^{aj}(x),
+  \qquad
+  g^{-1}(x)=\diag\bigl(1,-\kappa^2M(x)^2\bigr).
+\]
+The normalized comparison of neighboring moment frames is the orthogonal part
+of their polar decomposition.
+\end{definition}
+
+\begin{theorem}[Exchange-selected torsion cancellation]
+\label{thm:torsion-cancellation}
+Under \Cref{ass:finite-phase}\textup{(P9)}, let $\pi_Z$ be the unique
+stationary law of the latent source kernel $P$ and let $\widetilde\pi_{ij}$ be
+the stationary law of the elementary common-source diamond kernel.  Then
+\[
+ \widetilde\pi_{ij}(z,a,b)
+ =\pi_Z(z)R_z(a)R_z(b)
+ =\widetilde\pi_{ij}(z,b,a).
+\]
+If $d^{\rm tr}_{ij}(z,b,a)=-d^{\rm tr}_{ij}(z,a,b)$, then
+\[
+  \sum_{z,a,b}\widetilde\pi_{ij}(z,a,b)
+  d^{\rm tr}_{ij}(z,a,b)=0.
+\]
+The rotational plaquette record is not constrained by this cancellation and
+may have nonzero holonomy.
+\end{theorem}
+
+\begin{proof}
+See the detailed proof in \Cref{app:proof-torsion-cancellation}.
+\end{proof}
+
+\begin{theorem}[Curved Levi--Civita strong-resolvent limit]
+\label{thm:curved-limit}
+Assume \Cref{ass:finite-phase}, \Cref{ass:scaling-package}, and the zero-source
+selection of \Cref{ass:selections}\textup{(S3)}.  Then:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.7em]
+\item transported second-moment covariance makes the normalized neighboring
+      frame comparison lie in $SO(3)$ and therefore derives metric
+      compatibility;
+\item the discrete translational Cartan defect vanishes through the required
+      order by \Cref{thm:torsion-cancellation};
+\item metric compatibility and translational closure determine the discrete
+      Levi--Civita spin connection, while rotational plaquette holonomy remains
+      available as curvature;
+\item the covariant renewal Hamiltonians $\Ham_R^{\LC}$ converge in
+      strong-resolvent sense to
+      \[
+        \Ham_g^{\LC}+V_{\rm ren};
+      \]
+\item the propagators converge strongly and uniformly on compact time
+      intervals, and smooth compactly supported spinors have the stated
+      subprincipal consistency;
+\item the limiting operator depends on the microscopic direction law only
+      through the renormalized moment field $M(x)$, the external Clifford datum,
+      the clock normalization, and the bounded scalar renewal potential.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+See the detailed proof in \Cref{app:proof-curved-limit}.
+\end{proof}
+
+\begin{corollary}[Curvature is not suppressed]
+\label{cor:curvature-survives}
+The torsion-free conclusion does not imply flatness.  The translational defect
+and rotational record belong to distinct plaquette components.  Exchange
+symmetry cancels the translational component and leaves the rotational component unconstrained, so the limiting
+Levi--Civita connection may have nonzero curvature.
+\end{corollary}
+
+\begin{proof}
+See \Cref{app:proof-curvature-survives}.
+\end{proof}
+
+% =============================================================================
+\section{Integrated flagship master theorem}
+% =============================================================================
+
+\begin{theorem}[Flagship master theorem]
+\label{thm:master}
+Let the common finite predictive renewal object be supplied through either
+entry route of \Cref{prop:common-object}.  Assume the finite Store--Read
+Lorentzian phase of \Cref{ass:finite-phase}.  For continuum conclusions, also
+assume \Cref{ass:scaling-package}; for a realized oriented torsion-free sector,
+make the corresponding choices in \Cref{ass:selections}.
+
+Then the system canonically determines:
+\begin{enumerate}[label=\textup{(\Roman*)},leftmargin=3em]
+\item a unique reduced predictive memory, resolved successor law,
+      multiplicative path weights, finite complex predictive algebra, and UCP
+      renewal dynamics;
+\item a positive predictive spectral geometry and intrinsic divisibility-order
+      skeleton on every regular quotient-length component;
+\item a nontrivial determinant orientation class, its minimal principal
+      $\Ztwo$ cover, and a Krein fundamental symmetry;
+\item a unique positive dimensionless pressure clock on every branching
+      finite-depth recurrent support and the affine modular magnitude
+      $e^{\beta N}$;
+\item a projective revision algebra whose canonical radical quotient is a
+      primitive complex Clifford matrix factor;
+\item a marked external factor
+      \[
+        \A_{\ext}\cong M_4(\C)\cong\Cl_4(\C)
+      \]
+      with one temporal and three spatial Clifford directions, together with a
+      commuting internal complement;
+\item a positive external second moment and a Lorentzian principal symbol of
+      signature $(1,3)$;
+\item strong-resolvent and propagator convergence to the flat external Dirac
+      Hamiltonian in the constant phase;
+\item a variable Lorentzian metric, metric-compatible frame transport,
+      exchange-selected torsion cancellation, Levi--Civita spin transport, and
+      strong-resolvent convergence to the curved Dirac Hamiltonian through
+      subprincipal order in the slowly varying zero-source phase.
+\end{enumerate}
+
+The theorem establishes a minimal external $(3+1)$ Lorentzian Dirac
+universality class.  It does not establish that every admissible microscopic
+model lies in this class, that the total primitive factor has no internal
+complement, that one orientation is selected by finite deck-symmetric dynamics,
+that the moment field or global topology is unique, or that the reconstructed
+curvature obeys a gravitational field equation.
+\end{theorem}
+
+\begin{proof}
+See the detailed assembly proof in \Cref{app:proof-master}.
+\end{proof}
+
+\begin{corollary}[Exact logical strength]
+\label{cor:logical-strength}
+The theorem proves three nested statements.
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.7em]
+\item The operational or direct finite input determines a broad predictive UCP
+      renewal framework.
+\item The Store--Read phase criteria select a nonempty signed modular Clifford
+      universality class with a minimal external $(3+1)$ core.
+\item A regular scaling net and physical state selections realize a particular
+      flat or curved oriented continuum sector.
+\end{enumerate}
+Unsigned, block-superselected, purely dissipative, single-cycle, spatially
+degenerate, unoriented, torsional, and analytically singular phases remain
+mathematically admissible outside the theorem's Lorentzian sector.
+\end{corollary}
+
+\begin{proof}
+See \Cref{app:proof-logical-strength}.
+\end{proof}
+
+% =============================================================================
+\section{Dependency map}
+% =============================================================================
+
+The current logical chain can be read as
+\[
+\begin{aligned}
+&\text{operational futures or resolved operator instrument}
+\\[-1mm]
+&\qquad\Downarrow
+\\[-1mm]
+&\text{minimal predictive memory and UCP renewal maps}
+\\[-1mm]
+&\qquad\Downarrow
+\\[-1mm]
+&\text{coherent binary Store closure + retained completed records}
+\\[-1mm]
+&\qquad\Downarrow
+\\[-1mm]
+&\text{determinant-odd signed cover + pressure clock + reversible projective action}
+\\[-1mm]
+&\qquad\Downarrow
+\\[-1mm]
+&\text{external }M_4(\C)\text{ factor + three spatial records + one temporal generator}
+\\[-1mm]
+&\qquad\Downarrow
+\\[-1mm]
+&\text{Lorentzian principal symbol and flat Dirac convergence}
+\\[-1mm]
+&\qquad\Downarrow
+\\[-1mm]
+&\text{slow variation + common-source exchange}
+\\[-1mm]
+&\qquad\Downarrow
+\\[-1mm]
+&\text{Levi--Civita curved Dirac continuum.}
+\end{aligned}
+\]
+No arrow in this diagram uses a preassigned Lorentzian metric or a
+chosen number of spacetime coordinates.
+
+% =============================================================================
+\section{Current fit-risk assessment}
+\label{sec:fit-risk}
+% =============================================================================
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{L{0.25\textwidth}L{0.13\textwidth}L{0.26\textwidth}L{0.28\textwidth}}
+\toprule
+\textbf{Current premise} & \textbf{Risk} & \textbf{Why it is selective} & \textbf{Why it is or is not target-facing} \\
+\midrule
+\endhead
+
+Finite operational reconstruction package
+& \mediumrisk
+& It selects complex finite quantum operator structure from a broader class of operational theories.
+& It does not mention Lorentzian sign, dimension, spatial rank, pressure, or torsion.  It can be bypassed by the direct resolved operator entry. \\
+\addlinespace
+
+One coherently noncommutative binary Store event
+& \highrisk
+& A block-superselected or purely classical Store does not enter the active Lorentzian phase.
+& This is the deepest present microscopic phase premise.  It is qualitative and has a sharp counterphase, but it is deliberately chosen to ensure a coherent bridge exists. \\
+\addlinespace
+
+Isolated binary commutant closure and irreducible active controls
+& \mediumrisk
+& It requires the actual Store coefficients to connect and exhaust one generated active block.
+& It does not prescribe the matrix $M_4(\C)$; the external factor follows from the marked symplectic closure.  The premise nevertheless encodes substantial microscopic richness. \\
+\addlinespace
+
+Physically retained completed order records
+& \mediumrisk
+& If outcome order is erased, the determinant contrast and signed cover are operationally invisible.
+& The premise does not insert a sign value.  The sign is the determinant of the physical leg exchange on the retained contrast line. \\
+\addlinespace
+
+Odd pairing with a realized reversible revision
+& \mediumrisk
+& Sign holonomy and reversible dynamics must act on the same active factor.
+& The condition is close to the temporal conclusion, although it is expressed as an independently checkable pairing of record transport and dynamics rather than as $(\gamma^0)^2=-1$. \\
+\addlinespace
+
+Nonzero spatial symplectic pair
+& \mediumrisk
+& It excludes the spatially one-dimensional primitive phase.
+& It does not insert three directions.  Even primitive rank makes the spatial rank odd, and a nontrivial spatial bivector makes three the minimum. \\
+\addlinespace
+
+Reading the marked $M_4(\C)$ factor as external spacetime
+& \mediumrisk
+& A higher-rank active factor may contain a commuting internal complement, and the physical external/internal distinction must be tied to the marked Store--Read coupling.
+& The factorization is exact, but identifying which factor carries macroscopic propagation is a physical interpretation unless the coupling theorem uniquely marks it. \\
+\addlinespace
+
+Noncycle positive-depth recurrent support
+& \lowrisk
+& A single deterministic cycle has zero counting pressure and insufficient branching.
+& The premise is a standard complexity/recurrence condition.  It does not tune $\beta$; the Perron equation fixes the dimensionless value. \\
+\addlinespace
+
+Positive-definite spatial second moment
+& \lowrisk
+& Degenerate records do not span a three-dimensional external coframe.
+& In the canonical external spectral instrument the moment is $I_3/3$.  In the general theorem, positivity is the ordinary ellipticity condition of the continuum phase. \\
+\addlinespace
+
+Common-source fresh-Read exchange phase
+& \mediumrisk
+& Memory between the two Read legs or exchange-symmetry breaking can support torsional stationary phases.
+& The premise does not say ``torsion equals zero.''  It specifies a microscopic symmetry whose stationary consequence is cancellation of the exchange-odd translational defect. \\
+\addlinespace
+
+Selection of one deck orientation
+& \highrisk
+& A finite primitive deck-symmetric transfer selects the symmetric mixture, not one oriented extremal state.
+& This is a genuine physical selection rather than a numerical fit.  A realized arrow requires boundary data, degeneracy, superselection, explicit breaking, or a singular limit. \\
+\addlinespace
+
+Smooth uniformly elliptic scaling field $M(x)$
+& \lowrisk
+& It restricts attention to a regular macroscopic continuum rather than a singular or lower-rank phase.
+& These are standard analytic hypotheses.  They determine existence and stability of the limit, not its Lorentzian sign or external dimension. \\
+\addlinespace
+
+Specific macroscopic profile $M(x)$
+& \mediumrisk
+& Different microscopic Store--Read statistics produce different metrics.
+& The theorem reconstructs the metric from $M(x)$ but does not select a unique profile from the finite axioms.  Matching a particular observed geometry is model dependent. \\
+\addlinespace
+
+Bounded differential term or renewal potential
+& \mediumrisk
+& The abstract modular operator is differentially degenerate without finite-propagation content.
+& Its operator class is constrained but not unique at the abstract level.  A concrete microscopic difference operator lowers the ambiguity; an arbitrary fitted $B$ would not be an emergence result. \\
+\addlinespace
+
+Physical-unit conversion
+& \lowrisk
+& A dimensionless renewal clock must be related to seconds, metres, or energy units.
+& This is metrology rather than structural fitting.  It does not change dimensionless relations or the Lorentzian isometry class. \\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\begin{assessment}[Most important current residual]
+The most target-sensitive premise is not the number three or the Lorentzian
+signature.  It is the combined microscopic claim that one recurrent binary
+Store event is coherently noncommutative, that its completed order records are
+physically retained, and that its active control orbit is reversibly accessible.
+This premise identifies the nonclassical Store--Read universality class from
+which the sign and external Clifford factor follow.
+\end{assessment}
+
+\begin{assessment}[Second major residual]
+A realized arrow of time is not selected by the finite signed geometry itself.
+The double cover determines two deck-related orientations and an intrinsic
+odd observable, but a finite primitive deck-symmetric stationary law is
+orientation symmetric.  The choice of one temporal orientation is therefore an
+additional physical state selection.
+\end{assessment}
+
+\begin{assessment}[Geometric model dependence]
+The theorem determines how a positive second-moment field becomes a Lorentzian
+metric and how exchange closure becomes Levi--Civita transport.  It does not
+determine a unique field $M(x)$ from no model data.  The particular curved
+spacetime is selected by the microscopic renewal statistics, boundary data,
+and scaling phase.
+\end{assessment}
+
+% =============================================================================
+\section{Conclusions that are not fitted parameters}
+% =============================================================================
+
+Within the stated phase, the following quantities are theorem outputs rather
+than adjustable targets:
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.7em]
+\item the $\Ztwo$ orientation sign of the retained binary order contrast;
+\item the minimal two-sheeted Krein cover;
+\item the projective cocycle and its alternating commutator form;
+\item the radical quotient and primitive Clifford matrix type;
+\item the existence of an external $M_4(\C)$ factor once the marked temporal and
+      spatial symplectic pairs exist;
+\item the number three as the minimal nondegenerate external spatial rank;
+\item the pressure exponent $\beta$ once the finite transfer, depths, and
+      capacities are specified;
+\item the Lorentzian sign of the principal symbol once the signed temporal
+      generator and positive spatial moment are present;
+\item exact octahedral second moment $I_3/3$ for the canonical external spectral
+      Read instrument;
+\item vanishing stationary translational defect in the primitive common-source
+      exchange phase;
+\item the Levi--Civita connection once metric compatibility and translational
+      closure are established.
+\end{enumerate}
+
+\begin{remark}[Minimality versus uniqueness]
+The theorem derives $(3+1)$ as the minimal external spatially nondegenerate
+endpoint.  Higher odd primitive ranks are compatible with the algebra and may
+appear as internal factors or additional sectors.  A theorem that the total
+primitive rank is exactly four would require a further physical principle that
+excludes or decouples every internal complement.
+\end{remark}
+
+% =============================================================================
+\section{Precise nonclaims and open boundaries}
+% =============================================================================
+
+\begin{proposition}[No-overstatement boundary]
+\label{prop:no-overstatement}
+The present flagship theorem does not imply any of the following.
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.7em]
+\item Every finite operational or quantum process becomes Lorentzian spacetime.
+\item The total primitive factor is uniquely $M_4(\C)$.
+\item The predictive spectral growth dimension is automatically four.
+\item A finite direction record produces convergence of the discrete order cone
+      to the smooth Lorentzian causal cone without an additional density or
+      refinement theorem.
+\item A nontrivial signed cover dynamically chooses one orientation in a finite
+      symmetric stationary phase.
+\item Stationarity, reversibility, or detailed balance alone removes torsion.
+\item The symmetric lattice Hamiltonian converges in full norm resolvent on the
+      entire momentum space.
+\item The limiting metric profile or global topology is uniquely fixed by the
+      primitive operational conditions.
+\item The Levi--Civita curvature satisfies Einstein's equations or any other
+      gravitational field equation.
+\item Matter multiplets, gauge interactions, quantum measurement, black-hole
+      thermodynamics, or cosmological dynamics follow from the kinematic theorem.
+\item The dimensionless pressure clock fixes an absolute number of seconds or
+      an absolute energy without calibration.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+See the countermodel and independence proof in \Cref{app:proof-nonclaims}.
+\end{proof}
+
+\begin{remark}[Order cone and Dirac cone]
+The characteristic cone of the signed Dirac symbol is quadratic and Lorentzian.
+A finite deterministic predictive divisibility cone can remain polyhedral.
+Equating these two notions requires a separate continuum comparison of the
+order structure, not merely convergence of the Hamiltonian symbol.
+\end{remark}
+
+\begin{remark}[Predictive dimension and Clifford dimension]
+The growth exponent of distinguishable accumulated channels and the rank of the
+external Clifford factor measure different structures.  Their equality in a
+regular spacetime-crystal phase is an additional conclusion under corresponding
+growth and coding hypotheses, not part of the core Lorentzian emergence theorem.
+\end{remark}
+
+\begin{remark}[Continuous Hamiltonian time]
+The continuum operator theorem uses a self-adjoint Hamiltonian and a continuous
+evolution parameter.  It does not construct a fully discrete unitary evolution
+with the timelike direction itself placed on the same spatial mesh.  Such a
+construction requires a separate stability or CFL theorem.
+\end{remark}
+
+% =============================================================================
+\section{Compact insert-ready theorem}
+% =============================================================================
+
+\begin{theorem}[Compact journal statement]
+\label{thm:compact-journal}
+Let a finite complete resolved predictive Store--Read system be supplied either
+from the finite operational reconstruction package or directly as a complex CP
+instrument.  Select a branching recurrent support with positive finite depths
+and bounded local Store barriers.  Suppose the actual analytic Store coefficient
+algebra has an isolated binary commutant closure, its KMS reverse and irreducible
+active controls are retained, and the interaction-complete monitoring, fresh
+Reads, and completed order records are physically available.  Assume that the
+completed binary order records are future distinct and exchanged by physical
+Read-leg interchange, that the generated active factor is reversibly accessible
+and spatially nondegenerate, and that the primitive diamond process has the
+common-source fresh-Read form of \Cref{ass:finite-phase}	extup{(P9)}.  For continuum
+conclusions assume finite range, uniform
+external ellipticity, the stated smooth moment convergence, and the common-core
+or form estimates required by the flat or curved Hamiltonian limit.
+
+Then future equivalence gives a unique finite predictive memory, resolved
+successors, multiplicative branch weights, and UCP renewal dynamics.  The
+retained order contrast has determinant-odd monodromy and generates the minimal
+principal signed cover and Krein symmetry.  The branching depth transfer selects
+a unique positive dimensionless renewal pressure.  Reversible predictive units
+lift projectively, and radical reduction produces a primitive Clifford algebra
+containing a marked external
+\[
+  M_4(\C)\cong\Cl_4(\C)
+\]
+factor with one temporal and three spatial directions; every orthogonal
+projective direction belongs to a commuting internal complement.  The marked
+external spectral Read instrument has state-independent second moment $I_3/3$.
+
+The coarse external symbol has signature $(1,3)$.  In the constant phase the
+renewal Hamiltonians converge in strong-resolvent sense to the massless
+$(3+1)$ Dirac Hamiltonian and in norm resolvent on every fixed momentum band.
+In the slowly varying phase, moment covariance derives metric compatibility,
+common-source exchange cancels the translational plaquette defect while leaving
+rotational holonomy free, and the discrete fundamental theorem selects the
+Levi--Civita spin connection.  The covariant Hamiltonians converge strongly
+through subprincipal order to the corresponding curved Lorentzian Dirac
+Hamiltonian, up to a bounded real renewal potential.
+
+This theorem identifies a signed Store--Read Lorentzian universality class and
+a minimal external $(3+1)$ core.  It does not determine a unique total primitive
+rank, orientation state, metric profile, global topology, physical unit scale,
+curvature dynamics, or matter sector.
+\end{theorem}
+
+\begin{proof}
+This is the compact restatement proved in \Cref{app:proof-compact-journal}.
+\end{proof}
+
+% =============================================================================
+\section{Final assessment}
+% =============================================================================
+
+\begin{assessment}[One-sentence current status]
+The present construction derives Lorentzian sign, a minimal external $(3+1)$
+Clifford core, a pressure clock, a positive external coframe, and
+Levi--Civita Dirac transport inside a coherent record-retaining Store--Read
+phase; the principal remaining physical inputs are membership in that phase,
+reversible active-sector accessibility, the common-source fresh-Read
+architecture, orientation-state selection, the macroscopic moment profile, and
+ordinary continuum
+regularity.
+\end{assessment}
+
+\begin{assessment}[Recommended headline]
+A precise headline for the unified work is:
+\begin{quote}
+\emph{Predictive renewal memory in a coherent Store--Read phase generates a
+minimal external $(3+1)$ Lorentzian Clifford core and converges, under controlled
+scaling, to flat or Levi--Civita curved Dirac dynamics.}
+\end{quote}
+\end{assessment}
+
+
+\clearpage
+\appendix
+
+% =============================================================================
+\section{Proof status and established mathematical inputs}
+\label{app:proof-status}
+% =============================================================================
+
+The appendices prove every implication specific to the flagship theorem chain.
+Several broad mathematical results are used as established inputs rather than
+reproved from first principles.  Their exact roles are isolated here so that no
+subsequent proof hides an additional physical premise.
+
+\paragraph{Operational reconstruction input.}
+A finite causal sharp theory with purification, purity preservation, and a
+separating state--effect pairing has homogeneous self-dual finite state cones
+and hence Euclidean Jordan-algebra state spaces.  This is the finite
+sharp-purification reconstruction theorem.  We use it only in
+\Cref{app:proof-common-object}; the direct operator entry bypasses it.
+
+\paragraph{Classification input.}
+The finite simple Euclidean Jordan algebras are the real, complex, and
+quaternionic Hermitian matrix algebras, spin factors, and the exceptional
+Albert algebra.  Their nonclassical pair-face Peirce dimensions are,
+respectively, $1,2,4$ and $8$, with the rank-two spin-factor cases included in
+the same pair-face analysis.  This finite classification is used only to infer
+complex matrix type from the one-dimensional transitive phase orbit.
+
+\paragraph{Operator-theoretic inputs.}
+We use Choi's finite-dimensional criterion for complete positivity, the fact
+that every automorphism of a full complex matrix algebra is inner, the spectral
+theorem, the Birkhoff ergodic theorem, and the standard essential
+self-adjointness theorem for symmetric first-order systems with bounded
+$C^1$ coefficients and bounded propagation speed.  The strong-resolvent step
+itself is proved below in the form needed here.
+
+\begin{lemma}[Common-core strong-resolvent criterion]
+\label{lem:app-core-resolvent}
+Let $A_n$ and $A$ be self-adjoint operators on one Hilbert space $\Hh$.  Let
+$\mathcal C\subset\Dom A$ be a core for $A$, assume
+$\mathcal C\subset\Dom A_n$ for every $n$, and suppose
+\[
+  A_nu\longrightarrow Au
+  \qquad (u\in\mathcal C).
+\]
+Then $A_n\to A$ in strong-resolvent sense.  Consequently
+$f(A_n)\to f(A)$ strongly for every $f\in C_0(\R)$, and
+$e^{-itA_n}\to e^{-itA}$ strongly, uniformly for $t$ in compact intervals.
+\end{lemma}
+
+\begin{proof}
+Fix $z\in\C\setminus\R$.  The map
+$A-z:\Dom A\to\Hh$ is continuous for the graph norm and is onto because $A$
+is self-adjoint.  Since $\mathcal C$ is graph-norm dense in $\Dom A$, its image
+$(A-z)\mathcal C$ is therefore dense in $(A-z)\Dom A=\Hh$.
+
+For $y=(A-z)u$ with $u\in\mathcal C$, the resolvent identity on the vector $u$
+gives
+\[
+ (A_n-z)^{-1}y-u
+ =(A_n-z)^{-1}(A-A_n)u.
+\]
+Since $\|(A_n-z)^{-1}\|\le |\im z|^{-1}$ and $(A_n-A)u\to0$, the right-hand
+side tends to zero.  But $u=(A-z)^{-1}y$, so the resolvents converge on the
+dense set $(A-z)\mathcal C$.  The same uniform resolvent bound extends the
+convergence to every $y\in\Hh$.  This is strong-resolvent convergence.  The
+$C_0$ functional calculus and compact-time unitary-group convergence are the
+standard spectral-theorem consequences of strong-resolvent convergence.
+\end{proof}
+
+% =============================================================================
+\section{Proof of the common finite object}
+\label{app:proof-common-object}
+% =============================================================================
+
+\begin{proof}[Detailed proof of \Cref{prop:common-object}]
+Assume first the operational entry.
+
+\emph{Step 1: canonical predictive carrier.}
+Complete contextual future equivalence is a monoidal congruence: if two
+processes have identical values in every joint ancillary future experiment,
+then precomposition, postcomposition, and tensoring merely enlarge the same
+class of experiments.  The quotient therefore inherits sequential and parallel
+composition.  By the finite-dimensionality clause in
+\Cref{ass:operational-package}\textup{(O1)}, each selected irreducible reduced
+sector has a finite-dimensional ordered linear realization.
+
+\emph{Step 2: Jordan structure.}
+Clauses \textup{(O2)}--\textup{(O3)} give the hypotheses of the established
+finite sharp-purification reconstruction input stated in
+\Cref{app:proof-status}.  Hence each irreducible reduced state cone is the
+positive cone of a finite Euclidean Jordan algebra $J$.
+
+\emph{Step 3: complex type.}
+Let $p_i,p_j$ be a nonclassical pair of primitive outcomes and $J_{ij}$ its
+Peirce coherence space.  The balanced pure states in the rank-two face form a
+sphere $S^{d-1}$, where $d=\dim_{\R}J_{ij}$.  By \textup{(O4)} a connected
+one-dimensional compact group acts effectively and transitively on this
+sphere.  Every orbit of a one-dimensional Lie group has manifold dimension at
+most one, so $d-1\le1$.  The case $d=1$ gives $S^0$, on which a connected group
+cannot act transitively, and the classical case $d=0$ is excluded.  Therefore
+$d=2$.  The finite Jordan classification then leaves only
+$M_n(\C)_{\rm sa}$ on every nonclassical simple block; one-dimensional blocks
+are classical.  The consistent orientation in \textup{(O4)} chooses one of the
+two opposite associative products on each connected complex block.  Thus
+\[
+  \A_{\pred}\cong\bigoplus_a M_{n_a}(\C).
+\]
+
+\emph{Step 4: complete positivity.}
+A deterministic operational transformation acts dually by a positive unital
+map $\Phi$ between the reconstructed operator algebras.  Choose a qubit power
+$2^m$ not smaller than any matrix-block size occurring in the source algebra.
+By \textup{(O5)}, $\id_{M_{2^m}}\otimes\Phi$ is positive.  Compression to an
+$n\times n$ matrix corner shows that $\id_{M_n}\otimes\Phi$ is positive for
+each source block $M_n(\C)$.  Choi's finite-dimensional criterion therefore
+makes $\Phi$ completely positive on every block and hence on the direct sum.
+It is unital because deterministic discard is preserved.  Resolved outcomes
+are represented by CP trace-nonincreasing branches whose outgoing sum is the
+corresponding trace-preserving update.  Clause \textup{(O6)} either retains any
+holistic fibre or proves that every external Store--Read observable factors
+through the locally observable quotient, so no hidden composite degree of
+freedom enters the external theorem chain.
+
+The result is exactly a finite complex predictive algebra with a finite UCP
+renewal alphabet, faithful reference states on the selected supports, and a
+finite resolved CP instrument.  Under the direct operator entry, all of these
+objects occur in the defining tuple $\mathfrak R$, so no reconstruction step is
+needed.  The downstream theorems use only this common object, proving the final
+claim.
+\end{proof}
+
+% =============================================================================
+\section{Proof of predictive reconstruction and positive geometry}
+\label{app:proof-predictive-geometry}
+% =============================================================================
+
+\subsection{Universal future quotient}
+
+For a rooted history $h:I\to B$, define its future profile by
+\[
+  \Pi_B(h)(r,e):=\Pr(e\circ r\circ h).
+\]
+Future equivalence is equality of these functions.
+
+\begin{lemma}[Future congruence and universal minimality]
+\label{lem:app-future-minimality}
+Future equivalence is an equivalence relation stable under admissible
+postcomposition.  Its quotient $\Qq_+(B)$ is the unique reduced
+future-sufficient memory, up to unique isomorphism fixing the encoded histories.
+\end{lemma}
+
+\begin{proof}
+Equality of functions is an equivalence relation.  If $h\sim_+h'$ and
+$k:B\to C$ is admissible, then for every later continuation $d$ and terminal
+test $e$,
+\[
+ \Pr(e\circ d\circ k\circ h)
+ =\Pr(e\circ(d\circ k)\circ h)
+ =\Pr(e\circ(d\circ k)\circ h')
+ =\Pr(e\circ d\circ k\circ h'),
+\]
+so $k\circ h\sim_+k\circ h'$.
+
+Let $X(B)$ be any future-sufficient realization with surjective encoding
+$\eta_B$.  Define
+\[
+  \pi_B^X(\eta_B(h)):=[h].
+\]
+If $\eta_B(h)=\eta_B(h')$, transition compatibility and equality of all output
+functions imply $\Pi_B(h)=\Pi_B(h')$, so the formula is well defined.  It is
+surjective and intertwines all continuations and outputs.  If $X$ is reduced,
+equal quotient classes have equal future outputs and hence represent the same
+point of $X$, so $\pi_B^X$ is injective.  Conversely injectivity of $\pi_B^X$
+implies reducedness.  Uniqueness follows from surjectivity of the encoding.
+\end{proof}
+
+\subsection{Conditional successors and scalar renewal}
+
+For a successful resolved history $h$, put
+$p(h)=\Pr(u\circ h)>0$ and
+\[
+  \Pi^{\rm cond}(h)(F):=\frac{\Pr(F\circ h)}{p(h)}.
+\]
+
+\begin{lemma}[Resolved successor congruence]
+\label{lem:app-successor}
+If $h$ and $h'$ have the same conditional future profile and a resolved branch
+$e$ succeeds after both, then $e\circ h$ and $e\circ h'$ have the same
+conditional future profile.
+\end{lemma}
+
+\begin{proof}
+For every future test $F$ after $e$, conditional equivalence applied to
+$F\circ e$ and to the discard after $e$ gives
+\[
+ \frac{\Pr(F\circ e\circ h)}{p(h)}
+ =\frac{\Pr(F\circ e\circ h')}{p(h')},
+ \qquad
+ \frac{p(e\circ h)}{p(h)}
+ =\frac{p(e\circ h')}{p(h')}.
+\]
+The second common value is positive.  Dividing the first equality by the second
+is exactly conditional equivalence of the extended histories.
+\end{proof}
+
+It follows that the observed branch $e$ defines a partial successor map
+$\delta_e([h])=[e\circ h]$ on the conditional quotient.
+
+\begin{lemma}[Reference-renewal identity]
+\label{lem:app-reference-renewal}
+In a reduced future-tomographic operator realization, every positive-weight
+resolved edge $e:x\to y=\delta_e(x)$ satisfies
+\[
+  \mathcal E_e(\rho_x)=w_e\rho_y,
+  \qquad w_e=\Tr\mathcal E_e(\rho_x).
+\]
+Consequently the weight of a path is the product of its edge weights.
+\end{lemma}
+
+\begin{proof}
+The normalized branch output
+$\widehat\rho_e=\mathcal E_e(\rho_x)/w_e$ represents the extended resolved
+history.  By \Cref{lem:app-successor}, that history lies in the unique successor
+class $y$.  Thus $\widehat\rho_e$ and $\rho_y$ agree on every admitted future
+effect.  Future tomography separates reachable normalized states, so they are
+equal.  Multiplying by $w_e$ proves the one-edge identity.  Induction along
+$e_n\cdots e_1$ gives
+\[
+ \mathcal E_{e_n}\cdots\mathcal E_{e_1}(\rho_{x_0})
+ =\left(\prod_{j=1}^n w_{e_j}\right)\rho_{x_n}.
+\]
+\end{proof}
+
+\subsection{Predictive units}
+
+\begin{lemma}[A UCP unit is an automorphism]
+\label{lem:app-ucp-unit}
+If a UCP map $\Phi$ on a finite-dimensional $C^*$-algebra has a UCP inverse
+$\Psi$, then $\Phi$ is a $*$-automorphism.
+\end{lemma}
+
+\begin{proof}
+Kadison--Schwarz gives
+$\Phi(a)^*\Phi(a)\le\Phi(a^*a)$.  Applying $\Psi$ gives
+\[
+ \Psi(\Phi(a)^*\Phi(a))\le a^*a.
+\]
+Kadison--Schwarz for $\Psi$ at $\Phi(a)$ gives the reverse inequality,
+\[
+ a^*a=\Psi(\Phi(a))^*\Psi(\Phi(a))
+ \le\Psi(\Phi(a)^*\Phi(a)).
+\]
+Hence equality holds.  Applying the same argument to $aa^*$ places every $a$ in
+the multiplicative domain of $\Phi$, so $\Phi$ is a unital $*$-homomorphism.
+Bijectivity makes it a $*$-automorphism.
+\end{proof}
+
+Accumulated UCP maps are closed under composition and contain the identity, so
+they form a monoid; \Cref{lem:app-ucp-unit} proves the unit claim.
+
+\subsection{Predictive-length spectral triple}
+
+Let $E$ be the finite reset alphabet and let $\W=E^*/\!\sim$ be the quotient by
+equality of accumulated predictive channels.  Put
+\[
+ \Lambda([w])=1+\min\{|v|:v\sim w\},
+ \qquad
+ D_+e_{[w]}=\Lambda([w])e_{[w]}.
+\]
+For a letter $\sigma$, let
+$S_\sigma e_{[w]}=e_{[\sigma w]}$.
+
+\begin{lemma}[Bounded shifts, commutators, and compact resolvent]
+\label{lem:app-positive-triple}
+If every $S_\sigma$ has uniformly finite fibres and
+$|\Lambda([\sigma w])-\Lambda([w])|$ is uniformly bounded, then the algebra
+generated by the shifts, their adjoints, and finite-support diagonal
+multipliers, together with $D_+$, is a spectral triple.  Its zeta abscissa is
+\[
+ q_{\pred}=\limsup_{R\to\infty}
+ \frac{\log N(R)}{\log R},
+ \qquad N(R)=\#\{[w]:\Lambda([w])\le R\}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $M_\sigma$ be the supremum of the cardinalities of the fibres of the
+map $[w]\mapsto[\sigma w]$.  For every finitely supported vector $\xi$,
+Cauchy--Schwarz on each fibre gives
+\[
+ \|S_\sigma\xi\|^2
+ =\sum_u\left|\sum_{[w]:[\sigma w]=u}\xi_{[w]}\right|^2
+ \le M_\sigma\sum_{[w]}|\xi_{[w]}|^2.
+\]
+Hence $S_\sigma$ extends boundedly with
+$\|S_\sigma\|\le\sqrt{M_\sigma}$.  On basis vectors,
+\[
+ [D_+,S_\sigma]e_{[w]}
+ =\bigl(\Lambda([\sigma w])-\Lambda([w])\bigr)e_{[\sigma w]},
+\]
+which is bounded by hypothesis.  The adjoints obey the same estimate.
+For each $R$, every class in the length ball has a representative word of
+length at most $R-1$, and there are finitely many such words; hence all spectral
+projections of $D_+$ on bounded intervals have finite rank and the resolvent is
+compact.
+
+For the abscissa, let $q$ denote the displayed limsup.  If $s>q$, choose
+$\epsilon>0$ with $s>q+2\epsilon$.  For all large $R$,
+$N(R)\le R^{q+\epsilon}$.  Dyadic decomposition gives
+\[
+ \sum_{[w]}\Lambda([w])^{-s}
+ \le C+\sum_{k\ge k_0}N(2^{k+1})2^{-ks}
+ \le C+2^{q+\epsilon}\sum_{k\ge k_0}
+ 2^{-k(s-q-\epsilon)}<\infty.
+\]
+If $s<q$, choose $\epsilon>0$ with $s+\epsilon<q$ and a sequence $R_j\to\infty$
+with $N(R_j)\ge R_j^{s+\epsilon}$.  The partial zeta sum over the length ball is
+at least $N(R_j)R_j^{-s}\ge R_j^\epsilon\to\infty$.  Thus the abscissa is $q$.
+\end{proof}
+
+\subsection{Order and positivity boundary}
+
+Define $a\preceq b$ in the predictive monoid if $b=ca$ for some accumulated
+channel $c$.  This is a preorder.  Quotienting by
+$a\approx b\Longleftrightarrow(a\preceq b\ \&\ b\preceq a)$ gives a partial
+order.  On a component where $\Lambda$ is constant on $\approx$-classes and
+strictly increases under strict divisibility, it descends to an intrinsic time
+function.  This proves item \textup{(v)} of \Cref{thm:predictive-geometry}.
+
+For item \textup{(vi)}, let $\mathfrak B_+$ be the irreducibly represented
+positive renewal algebra.  A functorially extracted fundamental symmetry must
+commute with $\mathfrak B_+$.  Since $\mathfrak B_+'=\C\one$, it is scalar;
+self-adjointness and $J^2=\one$ give $J=\pm\one$, hence a definite form.
+More generally, suppose a diagonal involution satisfies
+$JS_e=c(e)S_eJ$ with $c(e)\in\{\pm1\}$.  Writing $Je_x=\eta(x)e_x$ gives
+\[
+  c(e:x\to y)=\eta(y)\eta(x).
+\]
+Thus the compatibility signs are an edgewise $\Ztwo$ cochain.  Changing local
+sign conventions changes it by a vertex coboundary.  A nonconstant compatible
+involution therefore contains precisely the extra signed information later
+realized by the double cover.  Combining the preceding lemmas proves every item
+of \Cref{thm:predictive-geometry}.
+
+% =============================================================================
+\section{Proof of the signed cover and modular clock}
+\label{app:proof-signed-clock}
+% =============================================================================
+
+\subsection{Determinant orientation}
+
+At each predictive vertex let $R_x^0$ be the real contrast space of the retained
+future-distinct record algebra.  Along an oriented edge $e:x\to y$, determinant
+regularity gives an isomorphism
+$Q_e:R_x^0\to R_y^0$.  Choosing local orientations, define
+\[
+  \chi(e):=\sgn\det Q_e\in\{\pm1\}.
+\]
+Determinants multiply under path composition.  Reversing the chosen local
+orientation at a vertex multiplies all incident signs by the corresponding
+vertex coboundary, so the gauge-invariant class is
+$[\chi]\in H^1(G;\Ztwo)$.
+
+By \Cref{ass:finite-phase}\textup{(P6)}, some recurrent physical loop acts on
+the two retained order records by their transposition.  On the one-dimensional
+contrast line that action is multiplication by $-1$, so the determinant product
+around the loop is $-1$.  Hence $[\chi]\ne0$.
+
+\subsection{Minimal principal cover}
+
+\begin{lemma}[Cone-positive minimal enrichment]
+\label{lem:app-minimal-cover}
+Over a fixed connected graph $G$, the gauge classes of objectwise-minimal,
+cone-preserving, fibrewise-indefinite local enrichments are in bijection with
+$H^1(G;\Ztwo)$.  Every such enrichment has fibre rank two.
+\end{lemma}
+
+\begin{proof}
+Fibrewise indefiniteness requires at least one positive and one negative local
+line, so the rank is at least two.  Rank two is realized by a signed double
+cover.  A unitary carrying one distinguished simplicial renewal cone onto
+another permutes its extremal rays: it maps each extremal ray to an extremal
+ray, and unitarity makes the positive scalar on that ray equal to one.  Thus in
+rank two every edge transport is either the identity or the sheet swap
+$S=\begin{psmallmatrix}0&1\\1&0\end{psmallmatrix}$.
+
+Choose sheet labels at the vertices and write the edge transport as
+$S^{c(e)}$, $c(e)\in\F_2$.  A change of sheet label $a:V\to\F_2$ sends
+$c\mapsto c+\delta a$.  Since a graph has no two-cells, every one-cochain is a
+cocycle.  Therefore the gauge classes are
+$C^1(G;\F_2)/\delta C^0(G;\F_2)=H^1(G;\Ztwo)$.  The representative $\chi$
+constructs the cover
+\[
+  G^\chi:
+  (x,\eta)\xrightarrow{e}(y,\eta\chi(e)),
+  \qquad \eta\in\{\pm1\}.
+\]
+The sheet-sign operator $J_\chi e_{(x,\eta)}=\eta e_{(x,\eta)}$ is a
+self-adjoint involution with one positive and one negative line in every fibre.
+\end{proof}
+
+Because $[\chi]\ne0$ and $G$ is connected, the monodromy map
+$\pi_1(G)\to\Ztwo$ is surjective, so $G^\chi$ is connected.
+
+\subsection{Amplitude lifts}
+
+A connected finite graph is homotopy equivalent to a wedge of
+$b_1(G)$ circles.  Hence
+\[
+ H^1(G;\Zfour)\cong(\Zfour)^{b_1(G)},
+ \qquad
+ H^1(G;\Ztwo)\cong(\Ztwo)^{b_1(G)}.
+\]
+Reduction modulo two is coordinatewise surjective, so every signed class has an
+amplitude lift and exactly $2^{b_1(G)}$ such lifts.  Applying reduction to any
+lift recovers the same principal double cover and $J_\chi$, which proves that
+all real/Krein conclusions depend only on $[\chi]$.
+
+\subsection{The pressure root}
+
+\begin{lemma}[Irreducible integer matrix at spectral radius one]
+\label{lem:app-rho-one-cycle}
+Let $A$ be the adjacency matrix of a finite strongly connected directed
+multigraph.  Then $\rho(A)=1$ if and only if the graph is a single directed
+cycle.  Consequently a strongly connected noncycle graph has $\rho(A)>1$.
+\end{lemma}
+
+\begin{proof}
+A directed cycle has a permutation adjacency matrix, hence spectral radius one.
+Conversely, suppose $\rho(A)=1$.  Let $v>0$ be a Perron vector and choose an
+index $i$ with $v_i=\min_jv_j$.  Then
+\[
+ v_i=(Av)_i=\sum_jA_{ij}v_j
+ \ge\left(\sum_jA_{ij}\right)v_i.
+\]
+The row sum is a positive integer because the graph is strongly connected, so
+it must equal one, and its unique successor also has the minimum value $v_i$.
+Repeating the argument along successors produces a directed cycle all of whose
+vertices have outdegree one.  From $i$ there is only this one forward orbit, but
+strong connectivity requires $i$ to reach every vertex.  Hence every vertex
+lies on that cycle, and the graph is a single directed cycle.
+\end{proof}
+
+For the unweighted depth transfer
+\[
+  B(s)_{xy}=\sum_{e:x\to y}e^{-s\ell_e},
+\]
+$B(0)=A$, so \Cref{lem:app-rho-one-cycle} and \textup{(P1)} give
+$\rho(B(0))>1$.  If $s_2>s_1$, then every supported edge weight is strictly smaller at
+$s_2$.  If $v>0$ is a Perron right vector for $B(s_1)$, every row of the
+strongly connected support contains a supported edge, and therefore
+\[
+  B(s_2)v<B(s_1)v=\rho(B(s_1))v
+\]
+componentwise.  The strict Collatz--Wielandt inequality gives
+$\rho(B(s_2))<\rho(B(s_1))$.  The radius is continuous in $s$ and tends to zero
+because every entry does.  The intermediate value theorem therefore gives a
+unique positive $\beta_{\rm top}$ with $\rho(B(\beta_{\rm top}))=1$.
+The identical argument applies to
+$K(s)_{xy}=\sum q_e e^{-s\ell_e}$ with $q_e>0$ whenever $\rho(K(0))>1$.
+
+\subsection{Characterization of the modular magnitude}
+
+On the signed recurrent path cover, let
+\[
+  Ne_p=\Lambda(p)e_p,
+  \qquad \Lambda(pe)=\Lambda(p)+\ell_e.
+\]
+Then
+\[
+ e^{\beta N}\widetilde S_e e^{-\beta N}
+ =e^{\beta\ell_e}\widetilde S_e.
+\]
+Let $D_0$ be self-adjoint, diagonal in the signed path basis, deck odd, and
+invertible.  Deck oddness gives
+$D_0e_{(p,\eta)}=\eta h(p)e_{(p,\eta)}$ with real $h(p)\ne0$.  The vertex
+function $a(p)=\sgn h(p)$ is a flat sheet gauge.  Replacing the sheet-sign
+representative by $J'_\chi=aJ_\chi$ leaves the principal cover and its holonomy
+class unchanged and gives $D_0=J'_\chi|D_0|$.  Rename $J'_\chi$ as $J_\chi$
+and put $g=|D_0|>0$.  If
+$\Ad(g)(\widetilde S_e)=e^{\beta\ell_e}\widetilde S_e$, then
+$m:=ge^{-\beta N}$ commutes with every recurrent lifted shift.  Since the
+nontrivial signed cover is connected, a diagonal operator commuting with all
+edge shifts is constant on all vertices.  Thus $m=c\one$ and
+\[
+  D_0=cJ_\chi e^{\beta N}.
+\]
+Normalizing the magnitude at one base vertex gives $c=1$.  Conversely this
+operator has the required deck parity and edge scaling.  If $B$ is bounded and
+$J_\chi B^*J_\chi=B$, then
+$D=D_0+B$ satisfies $J_\chi D^*J_\chi=D$, so $B$ is precisely a bounded
+Krein-self-adjoint differential correction.  These arguments establish all
+parts of \Cref{thm:signed-clock}.
+
+% =============================================================================
+\section{Proof of the projective revision algebra}
+\label{app:proof-projective-revision}
+% =============================================================================
+
+Let $K_{\rev}$ be the elementary abelian two-group of realized reversible
+labels acting faithfully on the selected matrix factor $\A_{\rm act}$.  By
+\Cref{lem:app-ucp-unit}, every such label acts by a $*$-automorphism.  Every
+automorphism of a full complex matrix algebra is inner, so choose unitaries
+$R_\alpha$ with $R_0=\one$ and
+$\Phi_\alpha=\Ad(R_\alpha)$.
+
+For $\alpha,\beta\in K_{\rev}$, the unitaries
+$R_\alpha R_\beta$ and $R_{\alpha+\beta}$ implement the same automorphism.
+Their ratio is central, hence scalar:
+\[
+ R_\alpha R_\beta=\sigma(\alpha,\beta)R_{\alpha+\beta}.
+\]
+Associativity of the unitary product gives
+\[
+ \sigma(\alpha,\beta)\sigma(\alpha+\beta,\gamma)
+ =\sigma(\beta,\gamma)\sigma(\alpha,\beta+\gamma),
+\]
+so $\sigma$ is a normalized two-cocycle.  Rephasing $R_\alpha$ changes it by a
+coboundary.
+
+The commutator ratio
+\[
+ b(\alpha,\beta)
+ :=\sigma(\alpha,\beta)\sigma(\beta,\alpha)^{-1}
+\]
+is a bicharacter because $K_{\rev}$ is abelian.  Since every element has order
+two,
+$b(\alpha,\beta)^2=b(2\alpha,\beta)=1$, and
+$b(\alpha,\alpha)=1$.  Hence
+$b(\alpha,\beta)=(-1)^{\omega_{\spat}(\alpha,\beta)}$ for a unique alternating
+bilinear form $\omega_{\spat}$ over $\F_2$.
+
+The signed sheet action gives
+\[
+ J_\chi R_\alpha
+ =(-1)^{\langle[\chi],\alpha\rangle}R_\alpha J_\chi.
+\]
+Defining $R_{\alpha+\epsilon t}=R_\alpha J_\chi^\epsilon$ and moving
+$J_\chi^\epsilon$ past $R_\beta$ yields
+\[
+ \omega((\alpha,\epsilon),(\beta,\delta))
+ =\omega_{\spat}(\alpha,\beta)
+ +\epsilon\langle[\chi],\beta\rangle
+ +\delta\langle[\chi],\alpha\rangle.
+\]
+This proves the first three items of \Cref{thm:projective-revision}.
+
+It remains to identify the primitive algebra.  Let $H$ be the full finite
+$\F_2$ label space and let $R=\rad\omega$.  A homogeneous basis element $u_r$
+of the abstract twisted group algebra $\C_\sigma[H]$ is central exactly when
+$r\in R$.  Fixing a character of this centre reduces the algebra to the twisted
+group algebra of $H/R$ with its nondegenerate induced form.  Put
+$\dim_{\F_2}(H/R)=2m$ and choose a symplectic basis
+$p_1,q_1,\ldots,p_m,q_m$.  After scalar rephasing, the corresponding generators
+may be chosen with
+\[
+ U_j^2=V_j^2=\one,
+ \qquad U_jV_j=-V_jU_j,
+\]
+and generators belonging to distinct pairs commuting.  Each pair generates
+$M_2(\C)$, and multiplication gives a surjective homomorphism
+\[
+ M_2(\C)^{\otimes m}\longrightarrow\C_\sigma[H/R].
+\]
+Both algebras have complex dimension $2^{2m}$, so this map is an isomorphism:
+\[
+ \C_\sigma[H/R]\cong M_{2^m}(\C)\cong\Cl_{2m}(\C).
+\]
+The radical, the quotient, and the matrix type are determined by the derived
+commutator form, not separately specified.  This completes the proof.
+
+% =============================================================================
+\section{Proof of the minimal external core}
+\label{app:proof-external-core}
+% =============================================================================
+
+Let $(H,\omega)=(H_{\rm prim},\omega)$ be nondegenerate of dimension $2m$ and
+write $H=K\oplus\F_2t$ as in \textup{(P7)}.
+
+\begin{lemma}[Canonical temporal partner]
+\label{lem:app-temporal-partner}
+There is a unique nonzero $r\in K$ such that
+$\rad(\omega|_K)=K^\perp=\F_2r$.  It satisfies $\omega(t,r)=1$.  Moreover
+\[
+ K_0:=K\cap t^\perp
+\]
+is nondegenerate of dimension $2m-2$, and
+\[
+  H=\Span\{t,r\}\perp K_0,
+  \qquad K=\F_2r\oplus K_0.
+\]
+\end{lemma}
+
+\begin{proof}
+Because $K$ is a hyperplane, $\dim K^\perp=1$; let $0\ne r\in K^\perp$.  If
+$r\notin K$, then $H=K\oplus\F_2r$ and $r$ is orthogonal to both summands,
+contradicting nondegeneracy.  Thus $r\in K$ and
+$K\cap K^\perp=\F_2r$.  If $\omega(t,r)=0$, then $r$ is orthogonal to $K$ and
+to $t$, again a contradiction; over $\F_2$ the nonzero value is one.
+
+For $k\in K$, set $k_0=k+\omega(t,k)r$.  Then $k_0\in K_0$, so
+$K=\F_2r\oplus K_0$.  If $x\in K_0$ is orthogonal to $K_0$, then it is also
+orthogonal to $r$ because $r\in\rad(\omega|_K)$ and to $t$ by definition.
+Hence $x$ is orthogonal to all of $H$ and is zero.  This proves nondegeneracy and
+the orthogonal decomposition.
+\end{proof}
+
+By \textup{(P7)}, $K_0\ne0$.  Choose $0\ne b\in K_0$.  Nondegeneracy gives
+$c\in K_0$ with $\omega(b,c)=1$.  The planes
+$P_t=\Span\{t,r\}$ and $P_s=\Span\{b,c\}$ are hyperbolic and orthogonal, so
+\[
+ W_{\ext}=P_t\perp P_s
+\]
+is nondegenerate of dimension four.  Since $t\notin K$ and $r,b,c\in K$,
+\[
+ W_{\ext}\cap K=\Span\{r,b,c\}
+\]
+has dimension three.  The orthogonal complement
+$H_{\intr}=W_{\ext}^\perp$ is nondegenerate of dimension $2m-4$ and lies in
+$K_0$: if $x=k+\epsilon t\in W_{\ext}^\perp$, then
+$0=\omega(x,r)=\epsilon$, and $0=\omega(x,t)$ then puts $x\in K_0$.
+Thus
+\[
+ H=W_{\ext}\perp H_{\intr},
+ \qquad
+ K=(W_{\ext}\cap K)\oplus H_{\intr}.
+\]
+
+The restrictions of $\omega$ to the two summands are nondegenerate.  The proof
+of \Cref{thm:projective-revision} therefore gives
+\[
+ \A_{\ext}\cong M_4(\C),
+ \qquad
+ \A_{\intr}\cong M_{2^{m-2}}(\C).
+\]
+Orthogonality makes their homogeneous generators commute.  Every label has a
+unique decomposition $w+v$, so multiplication gives a surjective map
+$\A_{\ext}\otimes\A_{\intr}\to\A_{\rm act}$.  The dimensions agree:
+\[
+ 16\cdot 2^{2m-4}=2^{2m}=\dim_\C\A_{\rm act},
+\]
+hence the map is an isomorphism.
+
+Normalize $R_t=J_\chi$, $R_r$, $R_b$, and $R_c$ as Hermitian involutions.
+The only nontrivial commutators among the two hyperbolic pairs are
+$R_tR_r=-R_rR_t$ and $R_bR_c=-R_cR_b$.  Then
+\[
+ \gamma^0:=R_tR_r
+\]
+is anti-Hermitian and has square $-\one$.  An explicit compatible spatial
+Clifford family is
+\[
+ \gamma^1=R_tR_b,
+ \qquad
+ \gamma^2=R_tR_c,
+ \qquad
+ \gamma^3=iR_tR_bR_c.
+\]
+Each is Hermitian, each squares to $\one$, they anticommute pairwise, and each
+anticommutes with $\gamma^0$; these identities follow directly by moving the
+four generators past one another with the two displayed signs.  Thus the
+external factor is a $(1,3)$ Clifford module.
+
+Finally, $\dim K=2m-1$ is odd.  If $m=1$, then $\dim K=1$ and
+$\bigwedge^2K=0$, so there is no nonzero spatial two-reset sector.  The next
+case is $m=2$, where $\dim K=3$ and the above construction gives the full
+external factor.  Hence three is the minimal spatially nondegenerate rank,
+while $H_{\intr}$ may remain nonzero.  This proves
+\Cref{thm:external-core}.
+
+% =============================================================================
+\section{Proof of the canonical external direction record}
+\label{app:proof-octahedral-record}
+% =============================================================================
+
+\begin{proof}[Detailed proof of \Cref{thm:octahedral-record}]
+Because each $\gamma^i$ is a Hermitian involution,
+$P_{i,\pm}=(\one\pm\gamma^i)/2$ are orthogonal projections and
+$P_{i,+}+P_{i,-}=\one$.  Hence
+\[
+ \sum_{i,\pm}K_{i,\pm}^*K_{i,\pm}
+ =\frac13\sum_i(P_{i,+}+P_{i,-})=\one,
+\]
+so the six branch maps form a trace-preserving resolved instrument.
+
+Let $p_{i,\pm}(\rho)=\Tr(\rho E_{i,\pm})$.  Since
+$\theta_{i,\pm}\theta_{i,\pm}^{\mathsf T}=e_ie_i^{\mathsf T}$,
+\[
+ \begin{aligned}
+ \sum_{i,\pm}p_{i,\pm}(\rho)
+ \theta_{i,\pm}\theta_{i,\pm}^{\mathsf T}
+ &=\sum_i\Tr\!\left(\rho\frac{P_{i,+}+P_{i,-}}3\right)e_ie_i^{\mathsf T}\\
+ &=\frac13\sum_i e_ie_i^{\mathsf T}=\frac13I_3.
+ \end{aligned}
+\]
+Thus the second moment is state independent and positive definite.
+
+Write $\gamma(\theta_{i,\pm})=\pm\gamma^i$.  The two signs cancel in
+$\gamma(\theta)(\theta\cdot\xi)$, and therefore
+\[
+ \sum_{i,\pm}p_{i,\pm}(\rho)
+ \gamma(\theta_{i,\pm})(\theta_{i,\pm}\cdot\xi)
+ =\frac13\sum_i\gamma^i\xi_i.
+\]
+With frame normalization three, the symbol is the one stated in the theorem.
+Using $(\gamma^0)^2=-\one$, $(\gamma^i)^2=\one$, and all mixed
+anticommutators equal to zero,
+\[
+ \left[i\left(\gamma^0\xi_0+\sum_i\gamma^i\xi_i\right)\right]^2
+ =\left(\xi_0^2-|\vec\xi|^2\right)\one.
+\]
+\end{proof}
+
+% =============================================================================
+\section{Proof of the flat continuum theorem}
+\label{app:proof-flat-limit}
+% =============================================================================
+
+Put $A^i=\gamma^0\gamma^i$.  The Clifford relations give
+$(A^i)^*=A^i$ and
+\[
+ \{A^i,A^j\}=2\delta^{ij}\one.
+\]
+For a direction $\theta\in\Sphere^2$, write
+$A(\theta)=\theta_iA^i$.
+
+\subsection{Symbol and frame equivalence}
+
+Let $v_i=\kappa M^{ij}\xi_j$.  Since the tensor $v_iv_j$ is symmetric,
+\[
+ \begin{aligned}
+ \sigma_M(\xi)^2
+ &=-\left(\gamma^0\xi_0+\gamma^iv_i\right)^2\\
+ &=-\left((\gamma^0)^2\xi_0^2
+ +\tfrac12\{\gamma^i,\gamma^j\}v_iv_j\right)\\
+ &=\left(\xi_0^2-|v|^2\right)\one
+ =\left(\xi_0^2-\kappa^2\xi^{\mathsf T}M^2\xi\right)\one.
+ \end{aligned}
+\]
+Because $M\succ0$, the spatial quadratic form is positive definite, giving
+signature $(1,3)$.
+
+Set $V_M=\kappa M$ and define
+\[
+ (U_M\psi)(y)=(\det V_M)^{1/2}\psi(V_My).
+\]
+The change $x=V_My$ proves unitarity.  Since $V_M$ is symmetric,
+\[
+ U_M\left[\kappa A^iM^{ij}(-i\partial_{x_j})\right]U_M^{-1}
+ =A^i(-i\partial_{y_i}).
+\]
+Thus constant anisotropy is removed by a spatial linear isometry.
+
+\subsection{Discrete multipliers and common-core convergence}
+
+For mesh $h_R$, define
+\[
+ s_{\theta,R}(\xi)=h_R^{-1}\sin(h_R\theta\cdot\xi),
+ \qquad
+ P_{\theta,R}=-i\frac{T_{h_R\theta}-T_{-h_R\theta}}{2h_R}.
+\]
+Let the finite direction law be
+$\nu_R=\sum_a p_a^{(R)}\delta_{\theta_a^{(R)}}$ with second moment $M_R$.
+The discrete Hamiltonian is the self-adjoint Fourier multiplier
+\[
+ \Ham_R=\kappa\sum_a p_a^{(R)}A(\theta_a^{(R)})P_{\theta_a^{(R)},R},
+\]
+with Hermitian symbol
+\[
+ h_R(\xi)=\kappa\sum_a p_a^{(R)}A(\theta_a^{(R)})
+ s_{\theta_a^{(R)},R}(\xi).
+\]
+The bounds
+$|s_{\theta,R}(\xi)|\le|\theta\cdot\xi|\le|\xi|$ and
+$s_{\theta,R}(\xi)\to\theta\cdot\xi$ give
+\[
+ h_R(\xi)\longrightarrow
+ h_M(\xi):=\kappa A^iM^{ij}\xi_j
+\]
+pointwise whenever $M_R\to M$.  Moreover $\|h_R(\xi)\|\le C|\xi|$ uniformly.
+For $u\in\Sch(\R^3,V)$, Plancherel and dominated convergence therefore give
+\[
+ \|\Ham_Ru-\Ham_Mu\|_2^2
+ =\int\|(h_R-h_M)\widehat u\|^2\,\dd\xi\longrightarrow0.
+\]
+For completeness, on $L^2(\R^{1+3},V)$ define
+\[
+ \Dirac_R
+ =\gamma^0\frac{T_{h_Re_0}-T_{-h_Re_0}}{2h_R}
+ +\kappa\sum_a p_a^{(R)}\gamma(\theta_a^{(R)})
+       \frac{T_{h_R\theta_a^{(R)}}-T_{-h_R\theta_a^{(R)}}}{2h_R},
+\]
+where the spatial translations act only in the last three coordinates, and
+let
+$\Dirac_M=\gamma^0\partial_0+\kappa\gamma^iM^{ij}\partial_j$.
+Its Fourier multiplier is obtained from the preceding one by adjoining
+$i\gamma^0h_R^{-1}\sin(h_R\xi_0)$.  The same pointwise convergence and the
+uniform bound $C|\xi|$ give
+$\Dirac_Ru\to\Dirac_Mu$ for every $u\in\Sch(\R^{1+3},V)$ by Plancherel and
+dominated convergence.  This is the asserted common-core spacetime
+convergence; no resolvent statement for the hyperbolic covariant operator is
+used.
+
+The limit Hamiltonian is self-adjoint on $H^1(\R^3,V)$: its Hermitian symbol
+squares to $\kappa^2|M\xi|^2\one$, which is comparable to $|\xi|^2$ because
+$M\succ0$.  Schwartz space is a core.  Every $\Ham_R$ is self-adjoint as a
+Hermitian Fourier multiplier.  Applying \Cref{lem:app-core-resolvent} gives
+strong-resolvent convergence, compact-time propagator convergence, and strong
+$C_0$ functional-calculus convergence.
+
+\subsection{Fixed-band norm-resolvent estimate}
+
+Let $P_\Lambda$ be the Fourier projection to $|\xi|\le\Lambda$.  The elementary
+bound $|\sin t-t|\le|t|^3/6$ gives
+\[
+ \sup_{|\xi|\le\Lambda}\|h_R(\xi)-h_M(\xi)\|
+ \le C\left(\frac16h_R^2\Lambda^3+
+ \|M_R-M\|\Lambda\right)=:\varepsilon_R(\Lambda).
+\]
+For $z\notin\R$, the matrix resolvent identity and Hermiticity give
+\[
+ \begin{aligned}
+ &\left\|\left[(\Ham_R-z)^{-1}-(\Ham_M-z)^{-1}\right]P_\Lambda\right\|\\
+ &\qquad\le |\im z|^{-2}\varepsilon_R(\Lambda)\longrightarrow0.
+ \end{aligned}
+\]
+If $M_R=M$ exactly, the rate is $O(h_R^2)$ on each fixed band.  This proves all
+parts of \Cref{thm:flat-limit} and also explains why no global norm-resolvent
+claim is made: the estimate is uniform only for bounded momentum.
+
+% =============================================================================
+\section{Proof of the self-averaged flat endpoint}
+\label{app:proof-self-averaging}
+% =============================================================================
+
+\begin{proof}[Detailed proof of \Cref{cor:self-averaged-flat}]
+For each matrix entry, the function
+$\theta\mapsto\theta_i\theta_j$ is bounded.  Birkhoff's ergodic theorem gives,
+for almost every realization,
+\[
+ \frac1{m_R}\sum_{a=1}^{m_R}\theta_{a,i}\theta_{a,j}
+ \longrightarrow
+ \int\theta_i\theta_j\,\dd\zeta_*(\theta).
+\]
+Thus the empirical second moments converge entrywise, hence in norm, to $M_*$.
+The same ergodic theorem applied to a countable dense family of continuous
+functions, followed by uniform approximation, gives weak-star convergence of
+the empirical measures.  On this probability-one event, the proof of
+\Cref{thm:flat-limit} applies pathwise with $M_R\to M_*$.  Therefore the random
+Hamiltonians converge in strong-resolvent sense to the deterministic
+$\Ham_{M_*}$.  Positive definiteness, not rotational invariance, is the only
+load-bearing condition.
+\end{proof}
+
+% =============================================================================
+\section{Proof of exchange-selected torsion cancellation}
+\label{app:proof-torsion-cancellation}
+% =============================================================================
+
+\begin{proof}[Detailed proof of \Cref{thm:torsion-cancellation}]
+Let $\mathsf s(z,a,b)=(z,b,a)$.  The common-source formula gives
+\[
+ K_\diamond(\mathsf sx,\mathsf sy)
+ =P(z,z')R_{z'}(b')R_{z'}(a')
+ =K_\diamond(x,y),
+\]
+so exchange covariance is a consequence of the two fresh identical Reads.
+Let $\pi_ZP=\pi_Z$ and set
+\[
+ \widetilde\pi(z,a,b)=\pi_Z(z)R_z(a)R_z(b).
+\]
+Then
+\[
+ \begin{aligned}
+ &\sum_{z,a,b}\widetilde\pi(z,a,b)
+ K_\diamond((z,a,b),(z',a',b'))\\
+ &\qquad=R_{z'}(a')R_{z'}(b')
+ \sum_z\pi_Z(z)P(z,z')
+ \sum_aR_z(a)\sum_bR_z(b)\\
+ &\qquad=\pi_Z(z')R_{z'}(a')R_{z'}(b')
+ =\widetilde\pi(z',a',b').
+ \end{aligned}
+\]
+Thus $\widetilde\pi$ is stationary; it is exchange invariant by its explicit
+formula.  On the recurrent support, primitivity makes it the unique stationary
+law.  Since the translational defect is exchange odd,
+\[
+ \begin{aligned}
+ S&:=\sum_x\widetilde\pi(x)d^{\rm tr}(x)
+ =\sum_x\widetilde\pi(\mathsf sx)d^{\rm tr}(\mathsf sx)\\
+ &=-\sum_x\widetilde\pi(x)d^{\rm tr}(x)=-S.
+ \end{aligned}
+\]
+Over $\R^3$ this implies $S=0$.  No parity assumption was imposed on the
+rotational record, so the same argument yields no rotational cancellation.
+\end{proof}
+
+% =============================================================================
+\section{Proof of the curved Levi--Civita limit}
+\label{app:proof-curved-limit}
+% =============================================================================
+
+\subsection{Metric compatibility from second moments}
+
+For neighbouring points $x,y$, let $T_e$ transport the direction record and
+assume $T_eM_xT_e^{\mathsf T}=M_y$.  Define
+\[
+ U_e=M_y^{-1/2}T_eM_x^{1/2}.
+\]
+Then
+\[
+ U_eU_e^{\mathsf T}
+ =M_y^{-1/2}T_eM_xT_e^{\mathsf T}M_y^{-1/2}=I.
+\]
+Orientation preservation gives $\det U_e>0$, hence $U_e\in SO(3)$.  If
+$U_i=\exp(-h\gamma_i)$, differentiation of
+$U_iU_i^{\mathsf T}=I$ at $h=0$ gives
+$\gamma_i^{\mathsf T}=-\gamma_i$.  Thus the induced connection is
+$\so(3)$-valued and metric compatible.
+
+\subsection{Plaquette splitting}
+
+Let an elementary developed reset be
+$g_i^{(h)}(x)=(R_i(x),he_i(x))\in SO(3)\ltimes\R^3$, with
+$R_i=\one-h\gamma_i+O(h^2)$.  The translation part of
+$g_j(x+he_i)g_i(x)$ is
+\[
+ h e_i+h e_j+h^2(\partial_i e_j-\gamma_j e_i)+O(h^3),
+\]
+whereas the opposite order gives
+\[
+ h e_j+h e_i+h^2(\partial_j e_i-\gamma_i e_j)+O(h^3).
+\]
+Their difference is
+\[
+ h^2T_{ij}+O(h^3),
+ \qquad
+ T_{ij}=\partial_i e_j-\partial_j e_i+
+ \gamma_i e_j-\gamma_j e_i.
+\]
+Similarly,
+\[
+ R_j(x+he_i)R_i(x)-R_i(x+he_j)R_j(x)
+ =-h^2F_{ij}+O(h^3),
+\]
+where
+$F_{ij}=\partial_i\gamma_j-\partial_j\gamma_i+[\gamma_i,\gamma_j]$.
+Thus translation is torsion and rotation is curvature to leading order.
+
+By \Cref{thm:torsion-cancellation}, the stationary mean of the developed
+translational coefficient is zero.  Assumption
+\Cref{ass:scaling-package}\textup{(A5)} identifies that mean with the
+coefficient of $h^2$ in the coarse-grained translational plaquette.  Hence the
+stationary translational plaquette is $O(h^3)$.  Comparing with
+$h^2T_{ij}+O(h^3)$ forces $T_{ij}=0$.  The rotational term remains
+$-h^2F_{ij}+O(h^3)$ and is unconstrained.
+
+\subsection{Discrete fundamental theorem}
+
+Let $e^a_j$ be the nondegenerate coframe and
+$C^a_{ij}=\delta_i e^a_j-\delta_j e^a_i$.  Put
+$C_{abc}=\delta_{ad}e_b{}^ie_c{}^jC^d_{ij}$ and define
+\[
+ \gamma_{d;ae}
+ =\frac12(C_{dea}-C_{ade}-C_{ead}).
+\]
+This is antisymmetric in $a,e$.  Contracting the torsion equation with the
+inverse frame gives
+$C_{ade}+\gamma_{d;ae}-\gamma_{e;ad}=0$, which the displayed formula satisfies.
+If $\gamma'$ is another metric-compatible torsion-free connection, the
+difference $\Delta$ is antisymmetric in its last two indices and obeys
+$\Delta_{d;ae}=\Delta_{e;ad}$.  Cycling indices gives
+\[
+ \Delta_{d;ae}=\Delta_{e;ad}=-\Delta_{e;da}
+ =-\Delta_{a;de}=\Delta_{a;ed}=\Delta_{d;ea}
+ =-\Delta_{d;ae},
+\]
+so $\Delta=0$.  Hence the connection is unique.  Because centered differences
+approximate derivatives with error $O(h^2)$ for $C_b^4$ coframes, this discrete
+connection equals the continuum Levi--Civita spin connection plus $O(h^2)$
+locally uniformly.
+
+\subsection{Covariant operator convergence}
+
+Put
+\[
+ B_R^j(x)=\kappa A^aM_R^{aj}(x),
+ \qquad B^j(x)=\kappa A^aM^{aj}(x),
+\]
+and let
+$\Omega_j^{\LC}=\tfrac14\omega^{\LC}_{j,ab}A^aA^b$.  In the half-density
+realization define
+\[
+ \Ham_g^{\LC}
+ =\frac12\sum_j\left[
+ B^j\bigl(-i(\partial_j+\Omega_j^{\LC})\bigr)
+ +\bigl(-i(\partial_j+\Omega_j^{\LC})\bigr)^*B^j
+ \right].
+\]
+Uniform positivity of $M$ gives the elliptic graph estimate
+\[
+ \|u\|_{H^1}\le C(\|\Ham_g^{\LC}u\|_2+\|u\|_2).
+\]
+The symmetric first-order essential-self-adjointness input from
+\Cref{app:proof-status} makes $C_c^\infty$ a core; adding the bounded real
+$V_{\rm ren}$ preserves self-adjointness.
+
+Let $U_{j,R}$ be the midpoint spin links generated by the discrete
+Levi--Civita coefficients and define
+\[
+ \nabla_{j,R}\psi(x)=
+ \frac{U_{j,R}(x+\tfrac12h_Re_j)^{-1}\psi(x+h_Re_j)
+ -U_{j,R}(x-\tfrac12h_Re_j)\psi(x-h_Re_j)}{2h_R}.
+\]
+Taylor expansion of the spinor and midpoint exponentials gives, for every
+compactly supported smooth $\psi$,
+\[
+ \nabla_{j,R}\psi
+ =(\partial_j+\Omega_j^{\LC})\psi+O_{L^2}(h_R^2).
+\]
+The order-$h_R^2$ terms in the two transported values agree and cancel in the
+central difference; division by $2h_R$ leaves the first truncation error at
+order $h_R^2$.  Replacing the discrete connection by
+$\omega^{\LC}$ costs another $O(h_R^2)$.
+
+With Weyl symmetrization and the real bounded potential, the discrete
+Hamiltonian is
+\[
+ \Ham_R^{\LC}
+ =\frac12\sum_j\left[B_R^j(-i\nabla_{j,R})
+ +(-i\nabla_{j,R})^*B_R^j\right]+V_{{\rm ren},R}.
+\]
+The coefficient and adjoint consistency in \textup{(A2)--(A5)}, the $C_b^4$
+bounds, and local uniform potential convergence imply
+\[
+ \Ham_R^{\LC}u\longrightarrow
+ (\Ham_g^{\LC}+V_{\rm ren})u
+ \qquad(u\in C_c^\infty).
+\]
+Every discrete operator is self-adjoint by \textup{(A4)}--\textup{(A5)}, and
+$C_c^\infty$ is a core of the limit.  Lemma
+\ref{lem:app-core-resolvent} yields strong-resolvent, propagator, and $C_0$
+functional-calculus convergence.  The principal symbol is
+$B^j\xi_j$ and depends only on $M$; the spin subprincipal term is the uniquely
+reconstructed Levi--Civita connection; the only separately retained term is
+$V_{\rm ren}$.  This proves all six conclusions of \Cref{thm:curved-limit}.
+
+% =============================================================================
+\section{Curvature, assembly, and logical strength}
+\label{app:proof-master}
+% =============================================================================
+
+\subsection{Curvature survives}
+\label{app:proof-curvature-survives}
+
+\begin{proof}[Proof of \Cref{cor:curvature-survives}]
+The plaquette calculation in \Cref{app:proof-curved-limit} gives two independent
+leading components:
+\[
+ \Pi_{\rm tr}\mathscr P_{ij}^{(h)}=h^2T_{ij}+O(h^3),
+ \qquad
+ \Pi_{\rm rot}\mathscr P_{ij}^{(h)}=-h^2F_{ij}+O(h^3).
+\]
+Exchange oddness is assumed only for the translational record.  It forces
+$T_{ij}=0$ but imposes no condition on $F_{ij}$.  Therefore the unique
+metric-compatible torsion-free connection may have nonzero curvature.
+\end{proof}
+
+\subsection{Master assembly}
+
+\begin{proof}[Detailed proof of \Cref{thm:master}]
+Items \textup{(I)}--\textup{(II)} are exactly
+\Cref{prop:common-object,thm:predictive-geometry}.  Item \textup{(III)} is
+\Cref{thm:signed-clock}\textup{(i)--(iii)}.  Item \textup{(IV)} is
+\Cref{thm:signed-clock}\textup{(iv)--(vi)}.  Item \textup{(V)} is
+\Cref{thm:projective-revision}.  Item \textup{(VI)} is
+\Cref{thm:external-core}; its three spatial directions are the marked spatial
+part $W_{\ext}\cap K$.  Item \textup{(VII)} follows from
+\Cref{thm:octahedral-record} in the canonical realization and from the symbol
+calculation in \Cref{thm:flat-limit} for a general positive moment.  Item
+\textup{(VIII)} is the flat theorem and its self-averaging corollary.  Item
+\textup{(IX)} is the combination of
+\Cref{thm:torsion-cancellation,thm:curved-limit}.  Each theorem uses only the
+hypotheses explicitly assigned to that layer.  The final limitations follow
+because none of the cited results proves universal phase membership, vanishing
+of the internal complement, finite-volume orientation selection, uniqueness of
+$M(x)$ or topology, or a curvature field equation.
+\end{proof}
+
+\subsection{Exact logical strength}
+\label{app:proof-logical-strength}
+
+\begin{proof}[Proof of \Cref{cor:logical-strength}]
+Part \textup{(a)} is independent of the Store--Read phase and follows from the
+common finite object and predictive reconstruction.  Part \textup{(b)} adds the
+finite phase criteria and is exactly the finite conclusion of
+\Cref{thm:signed-clock,thm:projective-revision,thm:external-core}.  Part
+\textup{(c)} additionally invokes the scaling package and physical selections,
+which are precisely the hypotheses used by the flat and curved operator
+limits.  The excluded phases are consistent because negating any one of the
+phase predicates leaves a well-defined finite predictive process but blocks the
+corresponding implication: a trivial record class is unsigned, a single cycle
+has zero positive counting pressure, a purely dissipative monoid has no
+reversible Clifford action, $K_0=0$ is spatially degenerate, deck symmetry gives
+an unoriented stationary state, failure of exchange covariance permits torsion,
+and failure of analytic regularity prevents the stated continuum theorem.
+\end{proof}
+
+% =============================================================================
+\section{Proof of the no-overstatement boundary}
+\label{app:proof-nonclaims}
+% =============================================================================
+
+\begin{proof}[Proof of \Cref{prop:no-overstatement}]
+Each listed nonclaim follows either from an explicit countermodel or from a
+free datum left by the hypotheses.
+
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.7em]
+\item A one-state classical replacement process, or a recurrent directed cycle,
+is a valid finite renewal process but violates the coherent/reversible or
+branching phase criteria.  Thus universal Lorentzian phase membership does not
+follow.
+
+\item Tensor any rank-four external model with an independent primitive
+Clifford factor $M_{2^k}(\C)$.  The external construction is unchanged while the
+total active factor becomes $M_{2^{k+2}}(\C)$.  Hence the total factor need not
+be $M_4(\C)$.
+
+\item Predictive growth is independent of the finite external Clifford fibre.
+For example, a finite predictive monoid has growth exponent zero, whereas a
+free cancellative commuting monoid on $c$ generators has exponent $c$.  The
+external $M_4$ factor can be tensored with either, so exponent four is not
+forced.
+
+\item The deterministic product order on $\N^c$ has continuum cone
+$[0,\infty)^c$, which has exactly $c$ extreme rays.  A smooth Lorentz cone in
+dimension $c\ge3$ has a continuum of null extreme rays.  Linear isomorphisms
+preserve extreme rays, so finite product order does not by itself converge to
+the round Dirac cone.
+
+\item Let $T$ be a finite primitive transfer commuting with the deck
+involution.  Its stationary state is unique; applying the deck involution
+produces another stationary state, so uniqueness makes the state deck even.
+Every deck-odd expectation, including that of $J_\chi$, vanishes.  Thus the
+signed cover does not select an orientation in such a phase.
+
+\item Detailed balance alone does not remove torsion.  On two diamond records
+$+,-$, take
+\[
+ P=\begin{pmatrix}3/4&1/4\\[2pt]1/2&1/2\end{pmatrix},
+ \qquad \pi=(2/3,1/3).
+\]
+Then $\pi_+P_{+-}=\pi_-P_{-+}=1/6$, so the primitive chain is reversible.  With
+$d(+)=v$ and $d(-)=-v$, its mean defect is $v/3\ne0$.  The missing property is
+exchange covariance.
+
+\item For the centered difference, consider the positive-measure box
+\[
+ \mathcal B_h=\{(\pi/h+\eta,\xi_2,\xi_3):
+ |\eta|,|\xi_2|,|\xi_3|<\varepsilon\}.
+\]
+Uniformly on this box,
+\[
+ h^{-1}\sin(h\xi_1)=-h^{-1}\sin(h\eta)
+ =-\eta+O(h^2\varepsilon^3),
+ \qquad
+ h^{-1}\sin(h\xi_j)=\xi_j+O(h^2\varepsilon^3)
+ \quad(j=2,3),
+\]
+so the discrete Dirac symbol remains $O(\varepsilon)$, whereas the continuum
+symbol has modulus $\pi h^{-1}+O(\varepsilon)$.  Choose $\varepsilon>0$ small.
+For every fixed nonreal $z$, the discrete resolvent symbol on $\mathcal B_h$
+is then bounded below in norm by a positive constant, while the continuum
+resolvent symbol tends uniformly to zero.  The essential supremum of the
+multiplier difference therefore stays bounded below by a positive constant.
+Hence the global operator-norm resolvent difference cannot tend to zero.
+
+\item Any two distinct smooth uniformly positive fields, for example
+$M_1(x)=I$ and $M_2(x)=(1+\varepsilon f(x))I$ with bounded nonconstant smooth
+$f$ and sufficiently small $\varepsilon$, satisfy the analytic class but yield
+different metrics.  The local finite hypotheses also contain no gluing datum
+fixing global topology.
+
+\item The curved theorem accepts an open class of $C_b^4$ coframes.  A generic
+member does not satisfy any prescribed Einstein equation.  Since the proof uses
+only metric compatibility, torsion closure, and operator convergence, it cannot
+imply a curvature field equation absent from the hypotheses.
+
+\item The finite external Clifford and renewal data contain no representation
+labels or coupling laws specifying matter multiplets, gauge groups, measurement
+dynamics, horizon entropy, or cosmological evolution.  Models with the same
+kinematic data and different added matter sectors therefore satisfy the same
+flagship hypotheses.
+
+\item Multiplying every conventional unit of time by a positive constant changes
+the numerical lapse and propagation speed but no dimensionless pressure equation
+or operator-isomorphism statement.  Therefore an absolute number of seconds or
+energy units cannot be obtained without metrological calibration.
+\end{enumerate}
+\end{proof}
+
+% =============================================================================
+\section{Proof of the compact journal statement}
+\label{app:proof-compact-journal}
+% =============================================================================
+
+\begin{proof}[Proof of \Cref{thm:compact-journal}]
+The hypotheses in the compact statement are the prose form of
+\Cref{ass:operational-package,ass:finite-phase,ass:scaling-package}.  Its finite
+conclusions are \Cref{thm:predictive-geometry,thm:signed-clock,thm:projective-revision,thm:external-core,thm:octahedral-record}; its flat
+conclusions are \Cref{thm:flat-limit,cor:self-averaged-flat}; and its curved
+conclusions are \Cref{thm:torsion-cancellation,thm:curved-limit,cor:curvature-survives}.  The final sentence repeats the precise limitations of
+\Cref{thm:master,prop:no-overstatement}.  Thus it is a logically equivalent
+compressed restatement of the proved theorem chain.
+\end{proof}
+
+
+\end{document}
