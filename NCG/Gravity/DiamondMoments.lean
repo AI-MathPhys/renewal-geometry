@@ -87,4 +87,12 @@ theorem explicit_tomography_matrix :
       simp [Matrix.mul_apply, Fin.sum_univ_two] <;>
       norm_num
 
+/-- `prop:diamond-covariant-linear` (arithmetic): with the isotropic
+direction average `⟨u^μu^ν⟩ = g^{μν}/n` at `n = 4`, the u-averaged
+diamond response is the pure Einstein-coefficient renormalization
+`α_R + (1/4)·α_{R_uu} = -2/45` — a shift of `1/(16πG_ren)`, not a
+higher-curvature invariant. -/
+theorem diamond_covariant_linear :
+    -(1/27 : ℚ) + (1/4) * (-(4/135)) = -(2/45) := by norm_num
+
 end NCG

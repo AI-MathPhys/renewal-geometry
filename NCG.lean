@@ -117,6 +117,14 @@ import NCG.Wavefunction.NoSignalling
 import NCG.Wavefunction.PointerBorn
 import NCG.Matter.FlavourChronology
 import NCG.Matter.ConnectedGram
+import NCG.Matter.KleinCharacters
+import NCG.Matter.GenerationTransparency
+import NCG.Gravity.FractionalCrossing
+import NCG.Matter.SlotFactorization
+import NCG.Matter.ThresholdMass
+import NCG.Matter.K4Carrier
+import NCG.Matter.SignedSpectra
+import NCG.Matter.A2Frame
 import NCG.Lorentz.CovariantL2
 import NCG.Lorentz.StrongLawMoments
 import NCG.Lorentz.CovariantConsistency

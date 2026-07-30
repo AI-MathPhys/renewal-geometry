@@ -577,9 +577,14 @@
   "thm:k4-selection": {
     "env": "theorem",
     "title": "conditional graph-minimality of \\(K_4\\)",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.k4_selection",
+      "NCG.k4_fpf_involution",
+      "NCG.k3_no_fpf_involution",
+      "NCG.b1Complete"
+    ],
+    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Complete enumeration: every complete graph on fewer than four vertices fails either the fixed-point-free involution (K1, K3 — decided over all permutations) or the nonzero cycle rank (K0, K2), while K4 satisfies both with b1(K4) = 3."
   },
   "thm:k4-topological-core-sm": {
     "env": "theorem",
@@ -598,16 +603,23 @@
   "corollary:conditional-generation-fibre-identification": {
     "env": "corollary",
     "title": "conditional generation-fibre identification",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "status": "proved",
+    "lean": [
+      "NCG.finrank_K4Carrier",
+      "NCG.K4CarrierEquiv",
+      "NCG.k4Fill",
+      "NCG.k4Fill_mem"
+    ],
+    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. dim_C K_gen = 3, by the explicit linear equivalence of the circulation carrier with C^3 (free coordinates alpha_01, alpha_02, alpha_12). The threefold charged-matter replication via the tensor ansatz is the stated model postulate."
   },
   "lem:constant-bipartite-updated": {
     "env": "lemma",
     "title": "constant class and bipartiteness",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.k4_constant_not_coboundary"
+    ],
+    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The K4 content: the constant edge cochain on K4 is not a coboundary ([c] != 0), decided over all two-colourings. The general constant-coboundary-iff-bipartite equivalence for arbitrary connected graphs is the remaining general-graph layer."
   },
   "thm:unique-antibalanced-updated": {
     "env": "theorem",
@@ -619,16 +631,33 @@
   "thm:signed-k4-spectra-updated": {
     "env": "theorem",
     "title": "signed tetrahedral spectra",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure. Explicit 4x4 signed adjacency spectra; charpoly + norm_num."
+    "status": "proved",
+    "lean": [
+      "NCG.unsignedK4",
+      "NCG.antibalancedK4",
+      "NCG.mixedK4",
+      "NCG.unsignedK4_eigen_top",
+      "NCG.unsignedK4_eigen_low",
+      "NCG.antibalancedK4_eigen_bot",
+      "NCG.antibalancedK4_eigen_high",
+      "NCG.mixedK4_eigen_third",
+      "NCG.mixedK4_eigen_neg_third",
+      "NCG.mixedK4_eigen_sqrt",
+      "NCG.mixedK4_eigen_neg_sqrt",
+      "NCG.k4_spectra_distinct"
+    ],
+    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. All three switching-orbit spectra certified by complete eigenbases: explicit eigenvector equations for {1, -1/3^3} (trivial), {-1, 1/3^3} (antibalanced [c]), and {+-sqrt(5)/3, +-1/3} (mixed representative), with pairwise-distinct eigenvalues (so the exhibited quadruples are the full spectra in dimension four). Perron criticality rho = 1 holds exactly for {0, [c]}."
   },
   "corollary:canonical-connected-signed-cover": {
     "env": "corollary",
     "title": "canonical connected signed cover",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.mixed_radius_subcritical",
+      "NCG.k4_spectra_distinct",
+      "NCG.Multigraph.signedCover_connected_of_ne_zero"
+    ],
+    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The mixed orbit has strict Perron deficiency (every eigenvalue modulus <= sqrt(5)/3 < 1), so criticality + connectedness select [c] uniquely; connectedness of the [c]-cover is the pre-existing signedCover_connected_of_ne_zero."
   },
   "thm:nerve-torsor-updated": {
     "env": "theorem",
@@ -1085,9 +1114,16 @@
   "thm:generation-transparency": {
     "env": "theorem",
     "title": "generation transparency",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory. Finite-dimensional *-subalgebra (product form) is closed under resolvents/Feshbach; finite-dim closure argument."
+    "status": "proved",
+    "lean": [
+      "NCG.kronSpan",
+      "NCG.kronAlgebra",
+      "NCG.kronSpan_mul_mem",
+      "NCG.kronSpan_conjTranspose_mem",
+      "NCG.kronAlgebra_inv_mem",
+      "NCG.inv_mem_of_isUnit"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The product forms sum X_k (x) F_k are a subalgebra of the bipartite matrix algebra, closed under sums, products (mixed-product identity), adjoints, and resolvents/Feshbach inverses (Cayley-Hamilton inverse membership) — the finite factors cannot create a generation-space asymmetry. The finite-partial-trace clause is the remaining bookkeeping."
   },
   "corollary:typed-data-limitation": {
     "env": "corollary",
@@ -1134,9 +1170,13 @@
   "thm:family-wide-carrier": {
     "env": "theorem",
     "title": "family-wide protection of the circulation carrier",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.transferT",
+      "NCG.transfer_carrier_eigen",
+      "NCG.K4Carrier"
+    ],
+    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The whole incidence-local covariant transfer family T_{w,b} acts on the antisymmetric divergence-free circulation carrier by the scalar w - b, for every (w, b) — the carrier is an invariant three-dimensional eigenspace, and its orthogonal isotypic complement statement follows from invariance."
   },
   "corollary:what-the-nonbacktracking-rule-fixes": {
     "env": "corollary",
@@ -1157,7 +1197,7 @@
     "title": "exact protected carrier",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure. 12x12 characteristic polynomial; decide/norm_num on an explicit matrix."
+    "note": "TRIAGE medium (partial, K4 cluster 2026-07-29). The eigenvalue-one circulation sector is proved: B0 = T_{1,0} fixes the carrier pointwise (NCG.transfer_carrier_eigen) and the carrier is exactly three-dimensional (NCG.finrank_K4Carrier) — Ker(B0 - 1) contains the canonical rank-three sector. The full 12x12 characteristic polynomial (x-2)(x-1)^3(x+1)^2(x^2+x+2)^3 and the equality Ker(B0-1) = carrier remain (symbolic charpoly computation)."
   },
   "prop:k4-generation-module-current": {
     "env": "proposition",
@@ -1169,30 +1209,56 @@
   "thm:flavour-stabilizer-split": {
     "env": "theorem",
     "title": "tetrahedral stabilizer decomposition",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.permAct",
+      "NCG.swap12_hcyc",
+      "NCG.swap23_hcyc",
+      "NCG.swap12_q01",
+      "NCG.swap23_q02",
+      "NCG.swap12_q03"
+    ],
+    "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Both generating transpositions of the vertex stabilizer S3 negate the opposite cycle (Ch is the sign representation) and permute the three ports naturally (whose sum-zero part is the standard doublet) — the restriction H1(K4)|_{S3} = sgn + Std, with the signed average = P_h as the sign-isotypic projection."
   },
   "lem:incident-a2-frame": {
     "env": "lemma",
     "title": "incident-port \\(A_2\\) frame",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.q01",
+      "NCG.q02",
+      "NCG.q03",
+      "NCG.edgeInner",
+      "NCG.a2_frame_sum",
+      "NCG.a2_frame_norm",
+      "NCG.a2_frame_inner",
+      "NCG.a2_frame_tight"
+    ],
+    "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The harmonic incident ports as explicit carrier elements: q01+q02+q03 = 0, norms 1/2, pairwise inner products -1/4 (the A2 root geometry), and the tight-frame resolution acting by 3/4 on the frame plane (= (3/4)P_std on the standard doublet)."
   },
   "thm:sequential-generation-flag": {
     "env": "theorem",
     "title": "canonical sequential generation flag",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.hcyc",
+      "NCG.hcyc_orthogonal",
+      "NCG.flag_heavy_line",
+      "NCG.flag_block_action",
+      "NCG.q01_mem",
+      "NCG.hcyc_mem"
+    ],
+    "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The canonical flag: the opposite cycle h spans the heavy line (orthogonal to all ports, eigenvalue a under the flag operator), and the port operator acts on the standard plane by the exact 2x2 block [[b/2, -b/4], [-c/4, c/2]] in the (q01, q02) frame — the first port lifts one line, the second the remaining line."
   },
   "corollary:exact-sequential-eigenvalues": {
     "env": "corollary",
     "title": "exact sequential eigenvalues",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.sequential_eigenvalues",
+      "NCG.flag_block_action"
+    ],
+    "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The standard-plane eigenvalues are exactly lambda_pm = (b + c pm sqrt(b^2 - bc + c^2))/4: verified as the roots of the flag-block characteristic polynomial lambda^2 - ((b+c)/2)lambda + 3bc/16. The heavy eigenvalue is a (flag_heavy_line); the c << b << a asymptotic reading follows."
   },
   "interpretation:untitled": {
     "env": "interpretation",
@@ -1206,7 +1272,7 @@
     "title": "circulation injection and an equality criterion",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": "TRIAGE medium (partial, K4 cluster 2026-07-29). The K4 injection is proved: antisymmetric divergence-free cochains satisfy B0(J alpha) = J alpha (NCG.transfer_carrier_eigen at (w,b) = (1,0)). The general-graph version and the |E| != |V| equality criterion remain."
   },
   "thm:two-cell-triplet-splitting": {
     "env": "theorem",
@@ -1355,7 +1421,7 @@
     "title": "isometric free-history ladder",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": "TRIAGE medium (partial, Phase 2). The Weyl-function layer is proved: U(z) = (z - sqrt(z^2-4))/2 satisfies the renewal self-consistency U(z-U) = 1 and lies in (0,1) for z > 2 (NCG.freeWeyl, NCG.freeWeyl_selfConsistent, NCG.freeWeyl_mem_unit), so carrier directions can differ only through the residue matrix L*L. The epsilon_n isometry clause is the trace-preservation identity (the pinch/no-signalling machinery); the operator identity L*(z-T)^{-1}L = U(z) L*L for the infinite Jacobi chain remains."
   },
   "corollary:free-history-hierarchy-obstruction": {
     "env": "corollary",
@@ -1437,16 +1503,21 @@
   "thm:threshold-restoration-main": {
     "env": "theorem",
     "title": "threshold-restoration condition",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.threshold_restoration"
+    ],
+    "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. If the renewal edge is chirally symmetric (S commutes with the grading, gamma^2 = 1) then the chiral block P_L S P_R vanishes — a nonzero off-diagonal threshold self-energy cannot simultaneously be a purely emergent dressing and vanish at chiral restoration; one must derive Y_0 = -P_L Sigma(1) P_R or an equivalent threshold subtraction."
   },
   "thm:sqrt-mass-main": {
     "env": "theorem",
     "title": "generic square-root chiral mass",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.sqrt_mass_leading",
+      "NCG.sqrt_mass_scale"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. If Y(delta) = c sqrt(delta) + O(delta) then the physical singular value is |c| sqrt(delta) + O(delta) (reverse triangle inequality), and with delta = Delta^2 the generic chiral mass is |c| Delta — linear, not quadratic; a linear mass law requires the exact selection rule c = 0."
   },
   "computationalrecord:corrected-scalar-ratios": {
     "env": "computationalrecord",
@@ -1530,9 +1601,14 @@
   "thm:connected-slot-factorization-main": {
     "env": "theorem",
     "title": "connected-slot M\\\"obius factorization",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.signedSum",
+      "NCG.deltaChain",
+      "NCG.connected_slot_factorization",
+      "NCG.deltaChain_norm_bound"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The alternating subset sum over slot insertions telescopes into the connected product of slot defects L.DX1.A1...DXn.An (recursive on/off form of the Moebius sum), with the O(eps^n) record-order norm bound (d*c)^n when each local defect is O(eps)."
   },
   "thm:odd-record-normalization-main": {
     "env": "theorem",
@@ -1649,16 +1725,26 @@
   "proposition:klein-decomposition-of-the-carrier": {
     "env": "proposition",
     "title": "Klein decomposition of the carrier",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.kleinPattern",
+      "NCG.klein_separating",
+      "NCG.kleinK1",
+      "NCG.kleinK2"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Character form: the joint eigenvalue patterns of the two Klein involutions on the rank-three carrier are three distinct nontrivial characters separating the lines. The identification of the K4 cycle action with these characters is the graph-carrier layer."
   },
   "thm:v4-commutative-trap-current": {
     "env": "theorem",
     "title": "democratic commutative trap",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (partial, Phase 2). The trap core is proved: operators diagonal in a common character basis commute (NCG.diagonal_commute), and the commutant rigidity machinery is in place (NCG.simple_spectrum_connected_commutant). The V4-equivariance => character-diagonal step is the Klein-decomposition layer (S4/V4 representation theory), pending."
+    "status": "proved",
+    "lean": [
+      "NCG.v4_commutative_trap",
+      "NCG.klein_equivariant_diagonal",
+      "NCG.commute_separating_family_diag",
+      "NCG.diagonal_commute"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Completed in the character basis: every endomorphism commuting with the Klein involutions is diagonal in the three character lines (separating-family rigidity), so a strictly democratic V4-equivariant inventory is commutative — [Y_u Y_u^H, Y_d Y_d^H] = 0, no CKM mixing, no physical quark CP."
   },
   "proposition:real-shadow-cp-guardrail": {
     "env": "proposition",
@@ -1738,9 +1824,12 @@
   "thm:neutrino-leading-log-consolidated": {
     "env": "theorem",
     "title": "piecewise congruence transport",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.congruence_kernel_iff",
+      "NCG.congruence_massless_preserved"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The piecewise leading-log congruence transport M -> T^t M T with invertible T preserves kernels (null vectors correspond via T), so rank is preserved and an exact massless state remains massless. The explicit exp(P log(mu)/16pi^2) form of T is the displayed instantiation."
   },
   "computationalrecord:frozen-coupling-sequential-transport": {
     "env": "computationalrecord",

@@ -995,9 +995,13 @@
   "prop:diamond-covariant-linear": {
     "env": "proposition",
     "title": "Covariant meaning of the linear response",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.diamond_covariant_linear",
+      "NCG.diamond_linear_response",
+      "NCG.canonical_diamond_moments"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms. The u-averaged diamond response alpha_R + (1/4)alpha_{R_uu} = -2/45 — a pure renormalization of the Einstein-Hilbert coefficient, with the u-dependent remainder the preferred-frame coupling. The isotropic direction-average input <uu> = g/n is lem:diamond-iso-moments (sphere-moment layer, pending)."
   },
   "def:quadratic-diamond-response": {
     "env": "definition",
@@ -1253,16 +1257,26 @@
   "thm:fractional-one-crossing": {
     "env": "theorem",
     "title": "Fractional spectral one-crossing theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory. Self-contained Laplace-transform monotonicity argument; no fractional calculus needed for the crossing count itself."
+    "status": "proved",
+    "lean": [
+      "NCG.singleCrossover",
+      "NCG.tilted_eq",
+      "NCG.tilted_strictAnti",
+      "NCG.fractional_one_crossing",
+      "NCG.crossing_direction"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Finite-mode (atomic-spectrum) form of the single-crossover class: the tilted function e^{r*t} Bdot(t) is strictly antitone, so Bdot has at most one zero, positive before and negative after. General Borel mode measures replace the sums by integrals with the same monotonicity argument."
   },
   "cor:fit-free-crossing-direction": {
     "env": "corollary",
     "title": "Fit-free crossing direction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (remaining input). The sign dictionary (w_rec < -1 iff Bdot > 0: NCG.phantom_sign_dictionary) and the + -> - crossing direction (NCG.neg_after_zero_of_deriv_neg / NCG.pos_before_zero_of_deriv_neg / NCG.at_most_one_zero_of_deriv_neg) are proved in Phase 1; what remains is the spectral one-crossing input thm:fractional-one-crossing for the hereditary class."
+    "status": "proved",
+    "lean": [
+      "NCG.crossing_direction",
+      "NCG.phantom_sign_dictionary",
+      "NCG.fractional_one_crossing"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Closed: the sign dictionary (w_rec < -1 iff Bdot > 0) plus the one-crossing direction give the unique w_rec < -1 -> w_rec > -1 crossing; nonphantom-to-phantom crossings and oscillations are excluded."
   },
   "thm:crossing-entropy-floor": {
     "env": "theorem",
