@@ -1,0 +1,1376 @@
+{
+  "def:tilted-matrix-renewal": {
+    "env": "definition",
+    "title": "Tilted matrix-renewal kernel",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:matrix-renewal-dictionary": {
+    "env": "theorem",
+    "title": "Matrix-renewal Perron dictionary",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. Analytic Perron jet: needs analytic perturbation of a simple eigenvalue (via det and the analytic implicit function theorem); NCG.exists_unique_pressure_root_of_branching is the seed."
+  },
+  "cor:embedded-renewal-dictionary": {
+    "env": "corollary",
+    "title": "Embedded-chain specialization and metric clock",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:imported-lorentzian": {
+    "env": "theorem",
+    "title": "Imported Lorentzian renewal endpoint and operator limit\n\\cite{PelissierLorentzian}",
+    "status": "proved",
+    "lean": [
+      "NCG.second_moment_isometry",
+      "NCG.second_moment_orthogonal",
+      "NCG.cfc_det",
+      "NCG.channel_torsion_of_stationary_diamond",
+      "NCG.torsion_of_first_moment_closure",
+      "NCG.cartan_uniqueness",
+      "NCG.koszul",
+      "NCG.koszul_torsion",
+      "NCG.covariant_central_difference",
+      "NCG.linkTransport",
+      "NCG.resolvent_diff_bound",
+      "NCG.central_difference_second_order",
+      "NCG.ground_state_potential",
+      "NCG.centered_difference_pointwise",
+      "NCG.centered_difference_sq_integral",
+      "NCG.covariant_difference_pointwise",
+      "NCG.covariant_difference_sq_integral",
+      "NCG.perturbedResolvent",
+      "NCG.perturbedResolvent_right_inverse",
+      "NCG.perturbedResolvent_left_inverse",
+      "NCG.perturbedResolvent_image_dense",
+      "NCG.perturbedResolvent_norm_le",
+      "NCG.curved_strong_resolvent_convergence",
+      "NCG.clifford_resolvent_identity",
+      "NCG.clifford_resolvent_norm_le",
+      "NCG.clifford_norm_uniform",
+      "NCG.clifford_weighted_bound",
+      "NCG.strong_resolvent_of_core",
+      "NCG.multiplier_resolvent_tendsto",
+      "NCG.position_multiplier_tendsto",
+      "NCG.signed_dirac_krein_selfadjoint",
+      "NCG.KreinCliffordDatum"
+    ],
+    "note": "TRIAGE covered. Same content as flagship:thm:curved-limit (proved there); Lean identifiers reused. Import of the foundational Lorentzian endpoint; its full Lean coverage lives in the lorentzian_emergence and flagship ledgers."
+  },
+  "thm:foundational-transfer": {
+    "env": "theorem",
+    "title": "Foundational-to-dynamical transfer",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "lem:cp-elliptic": {
+    "env": "lemma",
+    "title": "Ellipticity of the positive renewal endpoint",
+    "status": "proved",
+    "lean": [
+      "NCG.frame_square_nonneg",
+      "NCG.frame_square_elliptic"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Frame-square cometric nonnegative; spanning frame gives empty real characteristic variety away from 0."
+  },
+  "lem:poly-not-quad": {
+    "env": "lemma",
+    "title": "A polyhedral predictive cone is not exactly a Lorentz quadric",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:positive-obstruction": {
+    "env": "theorem",
+    "title": "Positive-sector obstruction for the realized renewal limits",
+    "status": "proved",
+    "lean": [
+      "NCG.frame_square_elliptic",
+      "NCG.polyhedral_obstruction",
+      "NCG.polyhedral_obstruction_complex",
+      "NCG.isExtremeDir_lorentzCone"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Part (a) from the new ellipticity lemma; part (b) is the pre-existing polyhedral-cone obstruction (the Lorentz cone is not linearly an orthant). The exact-quadric refinement lem:poly-not-quad remains a medium item."
+  },
+  "hyp:SH": {
+    "env": "hypothesis",
+    "title": "Slow homogeneity and gap",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "hyp:wkb": {
+    "env": "hypothesis",
+    "title": "Constant-multiplicity renewal band",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "lem:band-legendre": {
+    "env": "lemma",
+    "title": "Band symbol and Legendre dual",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:matrix-wkb": {
+    "env": "theorem",
+    "title": "Constant-multiplicity band parametrix",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "lem:berry-antiherm": {
+    "env": "lemma",
+    "title": "Anti-Hermiticity of geometric Berry transport",
+    "status": "proved",
+    "lean": [
+      "NCG.berry_antihermitian"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. A_ab + conj(A_ba) = 0 for C^1 frames with constant Gram matrix."
+  },
+  "thm:transport-decomp": {
+    "env": "theorem",
+    "title": "Band-transport decomposition",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "prop:invariant-response": {
+    "env": "proposition",
+    "title": "Unitary-invariant scalar band response",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "thm:wkb": {
+    "env": "theorem",
+    "title": "Renewal WKB--van Vleck expansion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "hyp:LD": {
+    "env": "corollary",
+    "title": "Derived local large deviations and Gaussian response",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "lem:constant-rate-energy": {
+    "env": "lemma",
+    "title": "Conserved energy at constant rate",
+    "status": "proved",
+    "lean": [
+      "NCG.constant_rate_energy_identity",
+      "NCG.phi_strictMonoOn"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. The energy identity E = 2sL'(s) - L = lambda phi(s) and strict monotonicity of phi on [0, c^2); conservation along the Hamiltonian flow belongs to the WKB cluster."
+  },
+  "thm:constant-rate-geodesics": {
+    "env": "theorem",
+    "title": "Constant-rate geometric exactness",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "thm:adiabatic-rate": {
+    "env": "theorem",
+    "title": "Adiabatic rate-gradient control",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "cor:optical-metric": {
+    "env": "corollary",
+    "title": "Quadratic optical metric",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "thm:proper-time": {
+    "env": "theorem",
+    "title": "Renewal proper-time-deficit action",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "thm:causal-propagation": {
+    "env": "theorem",
+    "title": "Causal propagation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "constr:massive-dirac-model": {
+    "env": "construction",
+    "title": "Slowly varying massive-Dirac renewal model",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "prop:model-W2": {
+    "env": "proposition",
+    "title": "Explicit gap and constant-rank projector",
+    "status": "proved",
+    "lean": [
+      "NCG.cliffordProj",
+      "NCG.cliffordProj_idem",
+      "NCG.cliffordProj_orth",
+      "NCG.cliffordProj_sum",
+      "NCG.cliffordProj_eigen",
+      "NCG.massive_band_gap"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Abstract Clifford-square form: N^2 = r gives idempotent orthogonal complete Riesz projectors with branch eigenvalues +-sqrt(r)-lambda and uniform gap 2 sqrt(r) >= 2 lambda_min."
+  },
+  "prop:model-W3": {
+    "env": "proposition",
+    "title": "Matrix reduction and complementary decay",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "lem:model-W4": {
+    "env": "lemma",
+    "title": "Noncaustic window",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:model-verifies": {
+    "env": "theorem",
+    "title": "Explicit model verification and admissible-class completion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "constr:velocity-jump": {
+    "env": "construction",
+    "title": "Discrete velocity-jump renewal process",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:exact-renewal-band": {
+    "env": "theorem",
+    "title": "Exact renewal origin of the massive band",
+    "status": "proved",
+    "lean": [
+      "NCG.velocityJump",
+      "NCG.velocityJump_mulVec_top",
+      "NCG.velocityJump_mulVec_bot",
+      "NCG.velocityJump_top_eigenvector_pos",
+      "NCG.band_eigenvalue_max",
+      "NCG.band_identity",
+      "NCG.band_le_causal"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. h(theta) = sqrt(lambda^2 + c^2 theta^2) - lambda is an eigenvalue with strictly positive eigenvector (genuinely Perron), dominates the complementary branch, and satisfies the exact identity h(s+lambda) = c^2 theta^2 (interpolating diffusive and causal limits) plus the causal bound h <= c|theta|."
+  },
+  "hyp:reversible-isotropic": {
+    "env": "hypothesis",
+    "title": "Reversible isotropic reset class",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "lem:projected-geo-quant": {
+    "env": "lemma",
+    "title": "Geometric and quantization terms",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "lem:gradient-reset-drift": {
+    "env": "lemma",
+    "title": "Reversible reset drift is a gradient",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:drift-cancellation": {
+    "env": "theorem",
+    "title": "Projected drift removal and residual reset potential",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "constr:worked-reset-channel": {
+    "env": "construction",
+    "title": "Worked reversible internal--spatial reset channel",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "prop:worked-reset-data": {
+    "env": "proposition",
+    "title": "Explicit stationary data of the worked channel",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "lem:worked-channel-regularity": {
+    "env": "lemma",
+    "title": "Moment-bounded symbol regularity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "thm:bare-discrete-remainder": {
+    "env": "theorem",
+    "title": "Bare-discrete subprincipal remainder for the worked class",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "def:admissible-renewal-channel": {
+    "env": "definition",
+    "title": "Admissible renewal channel",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "lem:cv-symbol-reg": {
+    "env": "lemma",
+    "title": "Moment-bounded symbol regularity, reversibility-free",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "thm:unconditional-bare-remainder": {
+    "env": "theorem",
+    "title": "Unconditional bare-discrete remainder",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "lem:canonical-drift-split": {
+    "env": "lemma",
+    "title": "Geometric / gradient / irreversible split",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "lem:curvature-free": {
+    "env": "lemma",
+    "title": "Curvature-freeness of the scalar drift",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "lem:line-integral": {
+    "env": "lemma",
+    "title": "Flat-normalized, reflection-averaged line integral",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "thm:unconditional-ricci": {
+    "env": "theorem",
+    "title": "Unconditional two-profile Ricci reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "cor:tightened": {
+    "env": "corollary",
+    "title": "Tightened error bookkeeping",
+    "status": "proved",
+    "lean": [
+      "NCG.scalar_drift_residual_vanishes"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  },
+  "thm:unconditional-wkb-ricci": {
+    "env": "theorem",
+    "title": "Unconditional WKB--Ricci closure on $\\CV$",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "hyp:spin-iso": {
+    "env": "hypothesis",
+    "title": "Optional spin-isotropising reset",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:perron-spin": {
+    "env": "proposition",
+    "title": "Optional Perron--spin scalarisation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "def:diamond-measure": {
+    "env": "definition",
+    "title": "Calibrated renewal diamond measure",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "lem:vvm-average": {
+    "env": "lemma",
+    "title": "Rotationally symmetric diamond response",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "thm:ricci": {
+    "env": "theorem",
+    "title": "Two-profile Ricci separation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "prop:explicit-tomography": {
+    "env": "proposition",
+    "title": "Explicit causal-diamond tomography in $d=3$",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (partial, Phase 2). The displayed inversion arithmetic is proved: det M = -1/583200 and the displayed integer inverse, two-sided (NCG.explicit_tomography_matrix). The A(m)/B(m,n) moment-integral derivation over genuinely diamond-supported profiles and the C_rec operator-norm value remain."
+  },
+  "prop:least-squares-tomography": {
+    "env": "proposition",
+    "title": "Least-squares diamond tomography",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "cor:background-ricci": {
+    "env": "corollary",
+    "title": "Background-metric reconstruction at slowly varying rate",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "def:primitive-mp-screen": {
+    "env": "definition",
+    "title": "Primitive matrix-product renewal screen",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "lem:boundary-memory-loss": {
+    "env": "lemma",
+    "title": "Exponential loss of boundary memory",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. Trace-norm contraction of primitive transfer maps; physlib trace distance + NCG Dobrushin mixing (NCG/Lorentz/DobrushinMixing.lean) are the ingredients."
+  },
+  "lem:strip-entropy-rate": {
+    "env": "lemma",
+    "title": "Entropy rate of a primitive renewal strip",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. Entropy-rate existence via subadditivity (Fekete) on physlib entropy."
+  },
+  "thm:renewal-screen-area-law": {
+    "env": "theorem",
+    "title": "Boundary-local area law for primitive renewal screens",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. Physlib QuantumInfo supplies von Neumann entropy with strong subadditivity, trace distance and channels (finite-dim); the missing layer is matrix-product/transfer-map structure and exponential memory decay."
+  },
+  "cor:microscopic-screen-law": {
+    "env": "corollary",
+    "title": "Microscopic screen law and Newton normalization",
+    "status": "proved",
+    "lean": [
+      "NCG.screen_law_bulk_stable",
+      "NCG.newton_from_screen_density"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Bulk-term stability of the area law plus the coupling calibration; conditional on the area law thm:renewal-screen-area-law (hard cluster)."
+  },
+  "def:predictive-pure-screen": {
+    "env": "definition",
+    "title": "Resolved predictive-pure screen",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "lem:central-screen-entropy": {
+    "env": "lemma",
+    "title": "Central screen-entropy decomposition",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory. Entropy of a central direct-sum state: physlib QuantumInfo entropy lemmas cover the ingredients."
+  },
+  "thm:predictive-pure-entropy": {
+    "env": "theorem",
+    "title": "Predictive-pure entropy rigidity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "cor:uniform-k4-screen": {
+    "env": "corollary",
+    "title": "Uniform \\(K_4\\) screen",
+    "status": "proved",
+    "lean": [
+      "NCG.k4EntropyRate",
+      "NCG.k4_entropy_rate"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. h(Pi) = log 3 for the uniform three-successor K4 record."
+  },
+  "cor:k4-newton-normalization": {
+    "env": "corollary",
+    "title": "Predictive-pure Newton normalization",
+    "status": "proved",
+    "lean": [
+      "NCG.k4_newton_normalization",
+      "NCG.k4_epsilon_squared"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  },
+  "lem:screen-normalization": {
+    "env": "lemma",
+    "title": "Screen normalization bookkeeping",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "hyp:curved-screen": {
+    "env": "hypothesis",
+    "title": "Bounded-geometry curved screen",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:curved-screen": {
+    "env": "theorem",
+    "title": "Normalized curved-screen stability",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "hyp:quasifree-screen": {
+    "env": "hypothesis",
+    "title": "Quasi-free renewal-screen scaling limit",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "def:renewal-wedge-subspace": {
+    "env": "definition",
+    "title": "One-particle renewal wedge subspace",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:derived-half-sided": {
+    "env": "theorem",
+    "title": "Derived half-sided covariance",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "thm:quasifree-modular": {
+    "env": "theorem",
+    "title": "Half-sided modular inclusion for quasi-free renewal screens",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "def:precise-modular-inputs": {
+    "env": "definition",
+    "title": "Precise modular inputs",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "prop:concrete-quasifree-screen": {
+    "env": "proposition",
+    "title": "Concrete generalized-free renewal screen",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "hyp:stationary-primitive-wedge": {
+    "env": "hypothesis",
+    "title": "Stationary modular wedge with boundary-local entropy",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:local-calibration": {
+    "env": "theorem",
+    "title": "Local renewal calibration",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "thm:modular-calibration-equivalence": {
+    "env": "theorem",
+    "title": "Modular calibration equivalence; imported from Borchers--Wiesbrock",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "prop:entropy-no-iff": {
+    "env": "proposition",
+    "title": "The entropy package is not an equivalence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "hyp:calibration": {
+    "env": "hypothesis",
+    "title": "Calibration and local screen entropy",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "prop:newton-from-screen-density": {
+    "env": "proposition",
+    "title": "Newton coupling from screen density",
+    "status": "proved",
+    "lean": [
+      "NCG.newton_from_screen_density"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  },
+  "prop:kms": {
+    "env": "proposition",
+    "title": "Local KMS--Clausius identity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "lem:raychaudhuri": {
+    "env": "lemma",
+    "title": "Renewal Raychaudhuri area variation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "lem:null-reconstruction": {
+    "env": "lemma",
+    "title": "Null reconstruction; linear algebra",
+    "status": "proved",
+    "lean": [
+      "NCG.null_reconstruction",
+      "NCG.minkMatrix",
+      "NCG.quad_two",
+      "NCG.quad_three"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. A symmetric matrix whose quadratic form vanishes on the whole Minkowski null cone equals -(A_00) eta."
+  },
+  "prop:renewal-noether": {
+    "env": "proposition",
+    "title": "Renewal stress conservation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "thm:einstein": {
+    "env": "theorem",
+    "title": "Local renewal Einstein equation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "thm:validity-window": {
+    "env": "theorem",
+    "title": "Validity window and stable residual",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "cor:residual-decomposition": {
+    "env": "corollary",
+    "title": "Residual decomposition",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:lambda": {
+    "env": "theorem",
+    "title": "Pure-deficiency Hubble relation",
+    "status": "proved",
+    "lean": [
+      "NCG.hubble_deficiency_lambda",
+      "NCG.deficiency_lambda_nonneg"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Pure-deficiency Hubble relation and nonnegative vacuum term."
+  },
+  "prop:common-origin-gravity-scalar": {
+    "env": "proposition",
+    "title": "Common-origin gravitational scalar",
+    "status": "proved",
+    "lean": [
+      "NCG.common_origin_gravity_scalar",
+      "NCG.common_origin_gravity_scalar_three",
+      "NCG.common_origin_gravity_scalar_k4"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Closed form G*Lambda = N(d-1)/(8d) B^2 c^2 eps^(d-3)/h, with the d=3 and uniform-K4 (B^2/(12 log 3)) endpoints."
+  },
+  "prop:bridge-displacement": {
+    "env": "proposition",
+    "title": "Bridge displacement from the homogeneous current",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "cor:krein-positive-expansion-arrow": {
+    "env": "corollary",
+    "title": "Krein-positive expansion arrow",
+    "status": "proved",
+    "lean": [
+      "NCG.krein_positive_expansion_arrow"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  },
+  "lem:isotropy-reduction": {
+    "env": "lemma",
+    "title": "Isotropy reduction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:vacuum-trichotomy": {
+    "env": "theorem",
+    "title": "Maximally symmetric pure-deficiency branch classification",
+    "status": "proved",
+    "lean": [
+      "NCG.deficiency_lambda_pos_iff",
+      "NCG.deficiency_lambda_eq_zero_iff",
+      "NCG.deficiency_lambda_nonneg"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Branch classification: Lambda >= 0 always, Lambda > 0 iff B != 0 (with lt_trichotomy on B); anti-de Sitter excluded within the ansatz."
+  },
+  "cor:sign-dark-energy": {
+    "env": "corollary",
+    "title": "Scope of the dark-energy sign result",
+    "status": "proved",
+    "lean": [
+      "NCG.deficiency_lambda_nonneg"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  },
+  "def:general-curvature-flrw": {
+    "env": "definition",
+    "title": "General-curvature pure-deficiency ansatz",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "lem:flrw-renewal-constraint": {
+    "env": "lemma",
+    "title": "FLRW Hamiltonian constraint with renewal memory",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "lem:flrw-quadratic-collapse": {
+    "env": "lemma",
+    "title": "Four-dimensional FLRW collapse of the quadratic-curvature sector",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "thm:renewal-flatness": {
+    "env": "theorem",
+    "title": "Renewal selection of spatial flatness",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "cor:renewal-flatness-attractor": {
+    "env": "corollary",
+    "title": "Renewal flatness attractor",
+    "status": "proved",
+    "lean": [
+      "NCG.flatness_attractor_hasDerivAt",
+      "NCG.log_omega_eq"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. The exact identity d/dt log|Omega_k| = -2H - 2Hdot/H."
+  },
+  "hyp:renewal-induced-matching": {
+    "env": "hypothesis",
+    "title": "Renewal induced-action matching",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:renewal-gap-moment": {
+    "env": "theorem",
+    "title": "Spectral-gap bound for the renewal response moment",
+    "status": "proved",
+    "lean": [
+      "NCG.renewal_gap_moment"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. The two-sided bound 0 <= T2 <= 2/g^2 in spectral-weight form; the equality-iff-gap-supported clause is not yet formalized."
+  },
+  "cor:microscopic-flatness-bound": {
+    "env": "corollary",
+    "title": "Conditional microscopic sufficient condition for flatness",
+    "status": "proved",
+    "lean": [
+      "NCG.microscopic_flatness_bound"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  },
+  "thm:global-renewal-flattening": {
+    "env": "theorem",
+    "title": "Global dilution of curvature under sustained renewal acceleration",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "prin:universal-predictive-completion": {
+    "env": "principle",
+    "title": "Universal predictive completion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "lem:pure-deficiency-constant-curvature": {
+    "env": "lemma",
+    "title": "Constant-curvature tensor of the pure-deficiency vacuum",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "prop:planar-desitter-chart": {
+    "env": "proposition",
+    "title": "The renewal flat slicing is a planar de Sitter chart",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "lem:desitter-spaceform-rigidity": {
+    "env": "lemma",
+    "title": "Positive-curvature Lorentzian space-form rigidity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "thm:complete-global-desitter": {
+    "env": "theorem",
+    "title": "Complete global de Sitter renewal branch",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "cor:exclude-desitter-quotients": {
+    "env": "corollary",
+    "title": "Exclusion of nontrivial de Sitter quotients",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "hyp:small-data": {
+    "env": "hypothesis",
+    "title": "Small calibrated data",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:nohair": {
+    "env": "theorem",
+    "title": "Small-data closure and renewal no-hair",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "cor:horizons": {
+    "env": "corollary",
+    "title": "Stationary renewal horizons",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "cor:two-sided": {
+    "env": "corollary",
+    "title": "Two-sided horizon bridge interface",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "prop:effective-qg": {
+    "env": "proposition",
+    "title": "Effective status of the \\(\\eps^2\\) layer",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "def:effective-action": {
+    "env": "definition",
+    "title": "Renewal effective action",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "hyp:four-derivative-sector": {
+    "env": "hypothesis",
+    "title": "Four-derivative sector and field content",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:basis": {
+    "env": "theorem",
+    "title": "Four-dimensional channel basis and dynamical quotient",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "prop:six-derivative-radius-shift": {
+    "env": "proposition",
+    "title": "First local radius shift",
+    "status": "proved",
+    "lean": [
+      "NCG.radius_shift_bound"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Quantitative form: |x - 64qL^3| <= 7625 q^2 L^5 for the fixed-point root with |x| <= Lambda, giving deltaR/(4Lambda) = 256 pi G eps^4 b Lambda^2 + O(eps^8)."
+  },
+  "prop:minimal-scalar-heat-kernel": {
+    "env": "proposition",
+    "title": "Minimal scalar heat-kernel benchmark",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "def:normalized-quartic-cumulant": {
+    "env": "definition",
+    "title": "Normalized quartic renewal cumulant",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "prop:worked-channel-cumulants": {
+    "env": "proposition",
+    "title": "Second and fourth cumulants of the worked reset stream",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "def:diamond-quartic-response": {
+    "env": "definition",
+    "title": "Normalized Lorentzian diamond quartic response",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "lem:canonical-diamond-moments": {
+    "env": "lemma",
+    "title": "Canonical diamond moments",
+    "status": "proved",
+    "lean": [
+      "NCG.diamondMoment",
+      "NCG.canonical_diamond_moments"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. All five displayed moments (1/15, 2/5, 3/14, 2/15, 1/210) and the genuine longitudinal-transverse correlation <eta^2|z|^4> != <eta^2><|z|^4>, via the factorized Beta formula displayed in def:diamond-quartic-response (exact rational arithmetic)."
+  },
+  "thm:diamond-linear-response": {
+    "env": "theorem",
+    "title": "Linear-curvature causal-diamond quartic-moment response",
+    "status": "proved",
+    "lean": [
+      "NCG.diamond_linear_response",
+      "NCG.diamondMoment"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The boxed coefficient values alpha_R = -1/27 and alpha_{R_uu} = -4/135 from the displayed covariance formulas (exact rational arithmetic). The isotropy-selection clause (the response depends only on R and R_uu) is the u-average layer of lem:diamond-iso-moments, still pending."
+  },
+  "prop:conditional-wilson": {
+    "env": "proposition",
+    "title": "Conditional determinacy of the $\\eps^2$ bulk coefficients",
+    "status": "proved",
+    "lean": [
+      "NCG.wilson_triple_left_inverse"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  },
+  "prop:diamond-linear-datum": {
+    "env": "proposition",
+    "title": "The diamond pair is a linear-curvature datum",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "prop:diamond-covariant-linear": {
+    "env": "proposition",
+    "title": "Covariant meaning of the linear response",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "def:quadratic-diamond-response": {
+    "env": "definition",
+    "title": "Quadratic diamond response",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "lem:diamond-iso-moments": {
+    "env": "lemma",
+    "title": "Isotropic direction moments",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:u-tomography": {
+    "env": "theorem",
+    "title": "$u$-tomographic Wilson inversion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:one-param": {
+    "env": "theorem",
+    "title": "One-parameter Wilson ray for the worked channel",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:induced-factorization": {
+    "env": "theorem",
+    "title": "Matching factorization is a theorem, not a hypothesis",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "cor:reduction": {
+    "env": "corollary",
+    "title": "Reduction of $\\Aren$ and the ratios",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "lem:gv-three": {
+    "env": "lemma",
+    "title": "Three-dimensional Gray--Vanhecke combination",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "lem:slice-closed": {
+    "env": "lemma",
+    "title": "Closed form for the slice invariants",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:triple": {
+    "env": "theorem",
+    "title": "Worked-channel volume Wilson triple",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "cor:structure": {
+    "env": "corollary",
+    "title": "Structure of the worked-channel correction",
+    "status": "proved",
+    "lean": [
+      "NCG.worked_channel_structure"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  },
+  "def:gaussian-renewal-class": {
+    "env": "definition",
+    "title": "Gaussian renewal class",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:renewal-universality": {
+    "env": "theorem",
+    "title": "Renewal universality of Einstein order",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "cor:renewal-universality-slogan": {
+    "env": "corollary",
+    "title": "Renewal interpretation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "cor:corrected-field-equation": {
+    "env": "corollary",
+    "title": "Corrected field equation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:wald": {
+    "env": "theorem",
+    "title": "Renewal Wald entropy",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+  },
+  "prop:renewal-curvature-boundary": {
+    "env": "proposition",
+    "title": "Renewal curvature boundary",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "cor:controlled-ds-separation": {
+    "env": "corollary",
+    "title": "Controlled de Sitter scale separation",
+    "status": "proved",
+    "lean": [
+      "NCG.controlled_ds_separation"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  },
+  "cor:two-sided-trans-renewal": {
+    "env": "corollary",
+    "title": "Two faces of the trans-renewal boundary",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "def:deficiency-rate-function": {
+    "env": "definition",
+    "title": "Deficiency pressure and rate function",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:deficiency-rate-function": {
+    "env": "theorem",
+    "title": "Perron large-deviation potential",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. The stated I_B properties (convexity, zero at B*, second derivative 1/sigma^2) are convex analysis (medium); the full Gaertner-Ellis LDP is Mathlib-scale."
+  },
+  "prop:mixed-perron-susceptibilities": {
+    "env": "proposition",
+    "title": "Mixed current--screen and current--metric susceptibilities",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:closed-source-free-deficiency-nogo": {
+    "env": "theorem",
+    "title": "Closed vacuum-deficiency no-go",
+    "status": "proved",
+    "lean": [
+      "NCG.closed_vacuum_deficiency_nogo"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Homogeneous (time) version: conserved B^2 with B nonvanishing forces B constant; the spatial nabla version on connected regions is the same argument per coordinate."
+  },
+  "prop:deficiency-eos-identities": {
+    "env": "proposition",
+    "title": "Equation-of-state identities",
+    "status": "proved",
+    "lean": [
+      "NCG.deficiency_eos",
+      "NCG.deficiency_eos_exchange",
+      "NCG.reconstructed_eos"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Both conserved and exchange registers, plus the reconstructed w_rec."
+  },
+  "thm:adiabatic-dark-energy": {
+    "env": "theorem",
+    "title": "Open-budget adiabatic relation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "prin:critical-deficiency-closure": {
+    "env": "principle",
+    "title": "Critical fractional deficiency closure",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "prop:deficiency-subordination": {
+    "env": "proposition",
+    "title": "Subordination origin of the linearized closure",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. Needs a minimal Caputo/Mittag-Leffler library (not in Mathlib); self-contained real analysis."
+  },
+  "thm:source-free-no-crossing": {
+    "env": "theorem",
+    "title": "Reversible fractional no-crossing",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "constr:dark-energy-ring": {
+    "env": "construction",
+    "title": "Three-state irreversible exchange ring",
+    "status": "proved",
+    "lean": [
+      "NCG.ringCGF",
+      "NCG.ringCGF_hasDerivAt",
+      "NCG.ringCGF_deriv_hasDerivAt",
+      "NCG.ring_entropy_production_nonneg"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Tilted CGF with first/second derivatives at 0 equal to k-k' and k+k', and sigma_ep >= 0 with the reversible locus."
+  },
+  "def:exchange-projection": {
+    "env": "definition",
+    "title": "Scalar projection of the exchange current",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:irreversible-crossing-threshold": {
+    "env": "theorem",
+    "title": "Linearized irreversible crossing threshold",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "cor:exchange-driven-crossing": {
+    "env": "corollary",
+    "title": "Existence of an exchange-driven crossing",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "prop:local-clock-one-crossing": {
+    "env": "proposition",
+    "title": "Local-clock one-crossing benchmark",
+    "status": "proved",
+    "lean": [
+      "NCG.local_clock_one_crossing",
+      "NCG.at_most_one_zero_of_deriv_neg",
+      "NCG.neg_after_zero_of_deriv_neg",
+      "NCG.pos_before_zero_of_deriv_neg"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Full proof: at most one zero of Bdot = S - F(B) for S' < 0, with the + -> - crossing direction from the before/after sign lemmas."
+  },
+  "def:single-crossover-spectrum": {
+    "env": "definition",
+    "title": "Single-crossover derivative spectrum",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:fractional-one-crossing": {
+    "env": "theorem",
+    "title": "Fractional spectral one-crossing theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory. Self-contained Laplace-transform monotonicity argument; no fractional calculus needed for the crossing count itself."
+  },
+  "cor:fit-free-crossing-direction": {
+    "env": "corollary",
+    "title": "Fit-free crossing direction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (remaining input). The sign dictionary (w_rec < -1 iff Bdot > 0: NCG.phantom_sign_dictionary) and the + -> - crossing direction (NCG.neg_after_zero_of_deriv_neg / NCG.pos_before_zero_of_deriv_neg / NCG.at_most_one_zero_of_deriv_neg) are proved in Phase 1; what remains is the spectral one-crossing input thm:fractional-one-crossing for the hereditary class."
+  },
+  "thm:crossing-entropy-floor": {
+    "env": "theorem",
+    "title": "Entropy-production floor for phantom crossing",
+    "status": "proved",
+    "lean": [
+      "NCG.crossing_entropy_floor",
+      "NCG.log_ge_two_mul_sub_div_add",
+      "NCG.two_mul_sub_div_add_le_log_sub"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. The ring-model TUR floor sigma_ep >= 2(k-k')^2/(k+k') = 2 Qdot^2/Var proved from the Pade log bound; combining with the threshold sigma_0 > Gamma m^2 Delta_0 is the displayed algebra."
+  },
+  "hyp:coupled-deficiency-completion": {
+    "env": "hypothesis",
+    "title": "Minimal coupled completion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:comoving-matter-depletion": {
+    "env": "theorem",
+    "title": "Exact comoving-matter depletion",
+    "status": "proved",
+    "lean": [
+      "NCG.comoving_matter_depletion"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Exact FTC identity a^d rho(t1) = a^d rho(t0) - int a^d Q."
+  },
+  "cor:phantom-matter-deficit": {
+    "env": "corollary",
+    "title": "Matter deficit accompanying an exchange-driven phantom phase",
+    "status": "proved",
+    "lean": [
+      "NCG.comoving_matter_deficit_nonneg",
+      "NCG.matter_density_le_free"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  },
+  "hyp:minimal-growth-closure": {
+    "env": "hypothesis",
+    "title": "Minimal smooth geodesic perturbation closure",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+  },
+  "thm:growth-sign-consistency": {
+    "env": "theorem",
+    "title": "Growth suppression at fixed expansion history",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "def:renewal-local-detailed-balance": {
+    "env": "definition",
+    "title": "Single-affinity renewal local detailed balance",
+    "status": "proved",
+    "lean": [
+      "NCG.Upstream.supportGraph",
+      "NCG.Upstream.edgeAffCochain",
+      "NCG.Upstream.kolmogorov_cohomology",
+      "NCG.Upstream.path_to_walk",
+      "NCG.Upstream.walk_to_path",
+      "NCG.Upstream.edgeAff",
+      "NCG.Upstream.edgeAff_antisymm",
+      "NCG.Upstream.pathAff_concat",
+      "NCG.Upstream.cycleAff_eq_log_ratio",
+      "NCG.Upstream.edgeAff_eq_zero_of_balanced",
+      "NCG.Upstream.pathAff_eq_zero_of_balanced",
+      "NCG.Upstream.stationary_unique",
+      "NCG.Upstream.classical_affinity_kolmogorov"
+    ],
+    "note": "TRIAGE covered. Same content as renewal_emergence:prop:affinity-detailed-balance (proved there); Lean identifiers reused. Single-affinity local detailed balance = Kolmogorov cohomology of the affinity cochain, already formalized."
+  },
+  "thm:renewal-gc-symmetry": {
+    "env": "theorem",
+    "title": "Gallavotti--Cohen symmetry of the physical-depth pressure",
+    "status": "proved",
+    "lean": [
+      "NCG.gallavotti_cohen_symmetry",
+      "NCG.pRad_of_detailed_balance",
+      "NCG.pRad_transpose",
+      "NCG.growthSeq_transpose",
+      "NCG.entrySum_transpose",
+      "NCG.tiltedKernel"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The fluctuation symmetry Lambda_B(chi) = Lambda_B(-A-chi) at the Perron level: local detailed balance makes the chi-tilted kernel similar (via the stationary diagonal) to the transpose of the (-A-chi)-tilted kernel, and the Gelfand-Fekete radius is invariant under both operations (new pRad_transpose + existing pRad_diag_conj). The displayed integrated-current LDP ratio and sigma_ep = A B* are the large-deviation layer over this identity (see thm:deficiency-rate-function)."
+  },
+  "cor:expansion-cumulant-hierarchy": {
+    "env": "corollary",
+    "title": "Exact expansion-current cumulant hierarchy",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:renewal-dark-energy-dichotomy": {
+    "env": "theorem",
+    "title": "Renewal dark-energy decision theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "prop:late-finite-window-null": {
+    "env": "proposition",
+    "title": "Local finite-window operators cannot drive late dark energy",
+    "status": "proved",
+    "lean": [
+      "NCG.late_window_ratio_bound"
+    ],
+    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+  }
+}

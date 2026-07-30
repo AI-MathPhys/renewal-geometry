@@ -53,9 +53,27 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 LEAN_DIR = ROOT / "NCG"
 
-MANUSCRIPTS = ("lorentzian_emergence", "renewal_emergence")
+MANUSCRIPTS = ("lorentzian_emergence", "renewal_emergence", "flagship",
+               "GR_emergence", "SM_emergence", "wavefunction")
+
+# manuscripts whose .tex basename differs from the folder name
+TEX_BASENAMES = {"flagship": "flagship_theorems",
+                 "wavefunction": "wave_function"}
 
 ENVS = ("theorem", "proposition", "lemma", "corollary", "definition")
+
+# per-manuscript extra tracked environments (the flagship keys its
+# hypothesis ledger by labelled assumption environments; the downstream
+# papers use additional bespoke statement environments)
+EXTRA_ENVS = {
+    "flagship": ("assumption",),
+    "GR_emergence": ("hypothesis", "construction", "principle"),
+    "SM_emergence": ("condition", "construction", "principle",
+                     "interpretation", "openproblem", "conditionalresult",
+                     "ledger", "computationalrecord", "certificate",
+                     "status", "warning"),
+    "wavefunction": ("assumption", "principle", "interpretation"),
+}
 STATUSES = (
     "proved",
     "computer_certified",
@@ -64,15 +82,19 @@ STATUSES = (
     "not_started",
 )
 
-BEGIN_RE = re.compile(
-    r"\\begin\{(" + "|".join(ENVS) + r")\}(?:\[([^\]]*)\])?"
-)
+def begin_re(envs: tuple[str, ...]) -> "re.Pattern":
+    return re.compile(
+        r"\\begin\{(" + "|".join(envs) + r")\}(?:\[([^\]]*)\])?"
+    )
+
+
 LABEL_RE = re.compile(r"\s*\\label\{([^}]+)\}")
 
 
 def manuscript_paths(name: str) -> tuple[Path, Path]:
     folder = ROOT / "manuscripts" / name
-    return folder / f"{name}.tex", folder / "statements.json"
+    base = TEX_BASENAMES.get(name, name)
+    return folder / f"{base}.tex", folder / "statements.json"
 
 
 def slugify(title: str) -> str:
@@ -81,11 +103,12 @@ def slugify(title: str) -> str:
     return slug or "untitled"
 
 
-def parse_manuscript(tex_file: Path) -> list[dict]:
+def parse_manuscript(tex_file: Path,
+                     envs: tuple[str, ...] = ENVS) -> list[dict]:
     text = tex_file.read_text(encoding="utf-8")
     records = []
     seen_keys: set[str] = set()
-    for m in BEGIN_RE.finditer(text):
+    for m in begin_re(envs).finditer(text):
         env, title = m.group(1), (m.group(2) or "").strip()
         # collect the labels immediately following \begin{env}[title]
         labels = []
@@ -125,7 +148,8 @@ def lean_identifiers() -> set[str]:
 
 def check_manuscript(name: str, names: set[str]) -> int:
     tex_file, status_file = manuscript_paths(name)
-    records = parse_manuscript(tex_file)
+    records = parse_manuscript(
+        tex_file, ENVS + EXTRA_ENVS.get(name, ()))
     status_map: dict[str, dict] = {}
     if status_file.exists():
         status_map = json.loads(status_file.read_text(encoding="utf-8"))
@@ -172,7 +196,8 @@ def check_manuscript(name: str, names: set[str]) -> int:
 
 def init_manuscript(name: str) -> int:
     tex_file, status_file = manuscript_paths(name)
-    records = parse_manuscript(tex_file)
+    records = parse_manuscript(
+        tex_file, ENVS + EXTRA_ENVS.get(name, ()))
     status_map: dict[str, dict] = {}
     if status_file.exists():
         status_map = json.loads(status_file.read_text(encoding="utf-8"))
