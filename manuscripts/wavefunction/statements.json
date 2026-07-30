@@ -83,16 +83,23 @@
   "thm:renewal-born-disintegration": {
     "env": "theorem",
     "title": "Renewal Born disintegration",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. Additive+multiplicative+phase-invariant regular weight is quadratic: a functional-equation theorem (finite-dim); the genuinely novel proof of this paper."
+    "status": "proved",
+    "lean": [
+      "NCG.cauchy_add_mul_id",
+      "NCG.weight_additive_of_orthogonal",
+      "NCG.renewal_born_weight",
+      "NCG.born_probabilities"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The full Cauchy mechanism proved, with a stronger result than the manuscript needs: no regularity assumption at all — additivity + multiplicativity alone give positivity (G(x) = G(sqrt x)^2), hence monotonicity, and a floor-squeeze pins G to the identity (cauchy_add_mul_id). Orthogonal additivity of the norm-dependent weight yields the Cauchy additivity by Pythagoras (weight_additive_of_orthogonal), so the regular predictive weight is W(psi) = ||psi||^2 (renewal_born_weight) and the record probabilities are the Born ratios (born_probabilities). The density-operator extension is the existing Lueders/pointer layer (NCG.pointer_born, NCG.Algebra.LuedersInstrument)."
   },
   "prop:operational-born-closure": {
     "env": "proposition",
     "title": "Operational Born closure",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. Needs projective 2-design machinery (absent from Mathlib/physlib)."
+    "status": "proved",
+    "lean": [
+      "NCG.second_moment_closure"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The second-moment closure proved in matrix form: if the rank-one projectors psi psi* of the implemented reset ensemble span the full matrix space (the projective two-design completeness hypothesis, exactly as the proposition assumes), then any second-moment functional agreeing with the quadratic weight on the ensemble is the identity — the Born weights extend to every implementable basis. The Haar-second-moment reading of the two-design hypothesis is the disclosed design-theory layer."
   },
   "definition:renewal-pointer-basis": {
     "env": "definition",

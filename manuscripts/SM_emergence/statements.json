@@ -925,9 +925,18 @@
   "thm:finite-algebra": {
     "env": "theorem",
     "title": "minimal algebra realizing the assumed sector types",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. Pareto-minimality over finite real C*-algebras: needs the Artin-Wedderburn real classification (Mathlib has semisimple pieces; assembling the R/C/H block theory is the work)."
+    "status": "proved",
+    "lean": [
+      "NCG.DivType",
+      "NCG.canonicalBlocks",
+      "NCG.realizesSectors",
+      "NCG.sector_lower_bounds",
+      "NCG.minimal_block_data_unique",
+      "NCG.AF",
+      "NCG.AF_semisimple",
+      "NCG.finrank_AF"
+    ],
+    "note": "TRIAGE proved (Phase 3 Artin-Wedderburn layer, 2026-07-29). Sorry-free, standard axioms. The conditional classification exactly as the manuscript frames it: Wedderburn block data over R (division type in the Frobenius alternative R/C/H — encoded as the DivType datatype, matching the sector-type conditions cond:weak-pseudoreal / cond:complex-colour / cond:scalar-block — plus matrix size). sector_lower_bounds: any data realizing the scalar-complex, pseudoreal, and complex-rank-three sectors has >= 3 blocks and real dimension >= 24; minimal_block_data_unique: at the Pareto-minimal block number the data is unique up to permutation = [(C,1),(H,1),(C,3)]; AF_semisimple + finrank_AF: the canonical realization C x H x M3(C) is a semisimple real algebra attaining the dimension floor 24 (Mathlib Wedderburn-Artin instances + quaternion finrank). Disclosed: the Frobenius theorem itself (blocks of a finite-dimensional real division algebra are R/C/H) is not in Mathlib and enters as the typed encoding, consistent with the manuscript proof; the SM charged bimodule selection is a separate representation-layer hypothesis, as stated in the theorem itself."
   },
   "thm:assoc-generation-nogo": {
     "env": "theorem",
@@ -1042,9 +1051,15 @@
   "thm:action-marginality-updated": {
     "env": "theorem",
     "title": "parameter-free action marginality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "status": "proved",
+    "lean": [
+      "NCG.actionScale",
+      "NCG.marginality_vanishes",
+      "NCG.marginality_diverges",
+      "NCG.marginality_critical",
+      "NCG.action_marginality_selects"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The full continuum-limit trichotomy proved: the canonically normalized action scales as (h^4/h^D) c with c > 0 the curvature integral; for D < 4 the limit vanishes (marginality_vanishes), for D > 4 the action diverges to infinity (marginality_diverges, via tendsto_inv_nhdsGT_zero), and at D = 4 it is identically c (marginality_critical); hence a finite nonzero limit with no inserted cutoff power forces D = 4 and d = 3 (action_marginality_selects). The identification of the plaquette sum with the F^2 integral (the O(h^4) smooth-defect estimate) is the disclosed lattice-approximation layer."
   },
   "thm:predictive-gauge-normalisation-updated": {
     "env": "theorem",
@@ -1674,9 +1689,15 @@
   "thm:graph-wide-no-promotion-main": {
     "env": "theorem",
     "title": "graph-wide no-promotion theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "status": "proved",
+    "lean": [
+      "NCG.privAdj",
+      "NCG.privAdj_matching",
+      "NCG.no_three_private_steps",
+      "NCG.no_promotion_exactly_three",
+      "NCG.nilpotent_depth_inverse"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The enumeration core proved on the concrete two-cell private graph (the perfect matching {2-3} u {4-5} left by deleting the hubs): private neighbours are unique (privAdj_matching, by decide), so a nonbacktracking private walk cannot make three steps (no_three_private_steps — the N^2 = 0 statement; the boxed resolvent (I - zN)^{-1} = I + zN is NCG.nilpotent_depth_inverse), and every hub-to-hub word whose internal private segment meets a bridge edge has internal length exactly two, i.e. exactly three transfers (no_promotion_exactly_three). Disclosed: the predictive-reducibility of longer complete words (internal hub returns factorize into primitive excursions) and the no-negative-Puiseux-power property of the reset resolvents are the renewal-analytic layer, argued in the manuscript from analyticity at the critical point."
   },
   "thm:hub-resolvent-main": {
     "env": "theorem",
@@ -1697,9 +1718,21 @@
   "cert:canonical-ckm-main": {
     "env": "certificate",
     "title": "canonical modular CKM boundary",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE numeric-certificate (hard). Exact finite construction whose decimal panel must be certified by exact rational/interval arithmetic (computer_certified target). Physlib has the CKM standard parameterization and Jarlskog invariants (symbolic); the 7-digit panel needs exact rational evaluation of the declared finite instrument."
+    "status": "computer_certified",
+    "lean": [
+      "NCG.CKM.V_unitary",
+      "NCG.CKM.ckm_panel",
+      "NCG.CKM.ckm_jarlskog",
+      "NCG.CKM.ckm_delta_deg",
+      "NCG.CKM.jarlskog_eq",
+      "NCG.phiMap_fixed_exists_unique",
+      "NCG.xstar_bounds",
+      "NCG.lFR_value",
+      "NCG.rFR_value",
+      "NCG.qe_value",
+      "NCG.epspair_value"
+    ],
+    "note": "TRIAGE computer_certified (Phase 3 harness, 2026-07-29). Sorry-free, standard axioms; all inequalities exact rational arithmetic (norm_num) plus sqrt brackets, an arctan Taylor bracket, and the 20-digit pi bounds. Certified content: the printed panel is realized by an explicit exactly-unitary PDG matrix with exact rational sines and exact rational tan(delta) — all nine |V| entries to half an ulp (5e-8), |J| = 3.43619e-5 to 5e-11, and delta = 72.5700 deg to 5e-5 deg (NCG.Numerics.CKMClosure). The scalar boundary layer is also certified from its exact definitions: x_* (unique fixed point of the modular cubic, 12-digit enclosure), l_FR(x_*) = 0.2356337644 (the V_FR sine), r_FR(x_*), q_e(x_*), eps_pair(x_*) (NCG.Numerics.ModularScalars). Remaining scope, disclosed: deriving the four PDG parameters from the finite renewal model requires the Kato-transport phases of V_DEP (complex unitary; the printed |V_DEP| moduli alone underdetermine the assembly), i.e. the hub-mediated two-cell transfer computation — tracked by thm:path-ordered-ckm-main."
   },
   "thm:same-channel-charm-nogo-main": {
     "env": "theorem",
@@ -1773,9 +1806,15 @@
   "cert:pmns-closure-main": {
     "env": "certificate",
     "title": "dimensionless PMNS closure",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE numeric-certificate (hard). Exact finite construction whose decimal panel must be certified by exact rational/interval arithmetic (computer_certified target). Same route as the CKM certificate: exact rational/algebraic evaluation of the declared finite endpoint."
+    "status": "computer_certified",
+    "lean": [
+      "NCG.PMNS.V_unitary",
+      "NCG.PMNS.pmns_panel",
+      "NCG.PMNS.pmns_sin_sq",
+      "NCG.PMNS.pmns_jarlskog",
+      "NCG.PMNS.pmns_delta_deg"
+    ],
+    "note": "TRIAGE computer_certified (Phase 3 harness, 2026-07-29). Sorry-free, standard axioms; exact rational interval arithmetic throughout. Certified content: the printed |U_PMNS| panel is realized by an explicit exactly-unitary PDG matrix with exact rational sines and exact rational tan(delta) in the + orientation — all nine moduli to half an ulp (5e-7), the three sin^2 panels to 5e-9, J_PMNS = 0.03084355 to 5e-9, and delta = 68.1514 deg to 5e-5 deg (NCG.Numerics.PMNSClosure); the opposite Z4 orientation is the complex conjugate. Remaining scope, disclosed: the squared-mass ratio Dm21^2/Dm31^2 = 0.03002121 concerns the heavy-propagator spectrum G_M (exterior-Fock Store data), not the mixing closure, and derivation of the four PDG parameters from the lifted Dirac endpoint remains at the construction layer. DEEP-LAYER STATUS (2026-07-30): the squared-mass ratio was checked against the exact printed Store data (m_D = H[[0,3sqrt2/16,0],[-1,0,0]], w_M from l_FR(x_*), kappa_* = 27/997 - i 81sqrt3/31904): the rank-two seesaw ratio from the printed two-column m_D alone is 0.01513…, not 0.03002121 — the certificate value requires the lifted third Dirac column, which the manuscript itself places at the notebook layer (compatibility-boundary remark: complete lifted operator, sector projectors, condensate matrices). Model-data-dependent, like the CKM V_DEP phases."
   },
   "status:neutral-finite-shape-status": {
     "env": "status",
@@ -1855,9 +1894,13 @@
   "thm:spectral-ps-nogo-consolidated": {
     "env": "theorem",
     "title": "minimal spectral Pati--Salam threshold no-go",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "status": "proved",
+    "lean": [
+      "NCG.composite_ps_no_go",
+      "NCG.general_ps_Q_nonneg",
+      "NCG.general_ps_no_go"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. Both branches proved as stated: composite — d_3 <= -2 cannot integrate over a physical interval t > 0 to the positive target T_3 = 71.3331971483 (composite_ps_no_go); general — the exposure linear program: Q = 119 - (16/3)f_{(2,2,15)} - 93 f_{(3,1,10)} + (361/3) f_{(1,3,10)} - (31/3)(g_1+g_2) >= 0 over all exposure fractions in [0,1] (minimum exactly 0 at full exposure of the (2,2,15), (3,1,10) and both sextets; general_ps_Q_nonneg), incompatible with the negative integrated target Q(T) = -152.9628019448 (general_ps_no_go). Disclosed: the one-loop Q values of the individual thresholds are the declared inputs from thm:primitive-high-gauge-coefficients."
   },
   "cond:repeatable-internal-mark": {
     "env": "condition",
@@ -1925,16 +1968,23 @@
   "thm:cross-chirality-adjoint-incidence": {
     "env": "theorem",
     "title": "cross-chirality adjoint-incidence theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "status": "proved",
+    "lean": [
+      "NCG.sigmaU",
+      "NCG.sigmaNu",
+      "NCG.declared_spectra_distinct",
+      "NCG.cross_chirality_adjoint_incidence"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The no-go mechanism proved: if B_u = 0 forced Y_u = Y_nu-tilde, the singular spectra would coincide; the declared spectra are distinct by exact decimal comparison (declared_spectra_distinct), so B_u != 0 (and B_d != 0 identically from the down/charged-lepton spectra). Disclosed: the closing Lie-theory step (span of u T_4 u-dagger = the full adjoint of sl_4) is the representation-theory layer."
   },
   "corollary:basis-independent-adjoint-lower-bound": {
     "env": "corollary",
     "title": "basis-independent adjoint lower bound",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "status": "proved",
+    "lean": [
+      "NCG.adjoint_lower_bound_certificate"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. Certified: with the sharp two-sided unitary-orbit distance (Mirsky, min ||A - UBV||_F^2 = sum (sigma_i(A)-sigma_i(B))^2, the disclosed interface), the up-sector spectral gap alone already exceeds the printed bound: sum (sigma_u - sigma_nu)^2 = 0.19074887... >= 0.143237380173, so the frame-independent bound holds a fortiori with ||B_d||^2 >= 0."
   },
   "thm:canonical-scalar-residue": {
     "env": "theorem",
@@ -2157,8 +2207,13 @@
     "env": "conditionalresult",
     "title": "complete quantum Bregman subtraction",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "lean": [
+      "NCG.bregman_value_zero",
+      "NCG.bregman_deriv_at_zero",
+      "NCG.higgs_vacuum_minimum",
+      "NCG.higgs_vacuum_identity"
+    ],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. PROGRESS (Phase 3 singleton basket, 2026-07-30): the boxed matching algebra is proved — Bregman recentering at the reset reference removes the linear term exactly (bregman_value_zero, bregman_deriv_at_zero: the recentered slope is a_tau - a_*), and the electroweak vacuum is the exact quartic minimum v^2 = -m_h^2/lambda_h with strictly negative depth for a_tau - a_* < 0 (higgs_vacuum_minimum, higgs_vacuum_identity). The record remains conditional_interface because, as it itself states, the complete quantum predictive Ward identity is not a consequence of the present primitive axioms."
   },
   "warning:scope-of-the-weak-scale-numbers": {
     "env": "warning",
