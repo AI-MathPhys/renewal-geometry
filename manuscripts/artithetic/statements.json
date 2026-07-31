@@ -317,9 +317,13 @@
   "lem:prime-power": {
     "env": "lemma",
     "title": "Prime-power contamination",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.properPrimePows_card_le",
+      "NCG.properPrimePows_card_le_real",
+      "NCG.prime_power_contamination"
+    ],
+    "note": "Proved in master form: for any injective target map into [1,Y] the von Mangoldt correlation mass carried by proper-prime-power coordinates is at most 4 sqrt(Y) (log Y)^3, from the base-exponent count #PP(Y) <= sqrt(Y) log_2 Y and Lambda <= log. The polylog exponent is coarser than the displayed O(sqrt(X) log X) (which needs Chebyshev theta <= Cx); the crude form suffices for every downstream use, and covers both the shifted (n, n+h) and fixed-sum (n, N-n) windows through the injective-map parameter."
   },
   "thm:car-prime": {
     "env": "theorem",
@@ -363,9 +367,12 @@
   "thm:HL-sufficient": {
     "env": "theorem",
     "title": "Classical asymptotic sufficient conditions",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.HL_twin",
+      "NCG.HL_goldbach"
+    ],
+    "note": "Proved: a Hardy-Littlewood twin asymptotic with positive singular series and O(X^{1/2+delta}) error (delta < 1/2), taken as hypothesis, forces infinitely many twin primes (finitely many twins leave only a bounded prime-pair mass plus the proper-prime-power contamination, which is o(X) by lem:prime-power and log-power asymptotics); the uniform Goldbach lower asymptotic likewise forces a prime decomposition of every sufficiently large even N. The external asymptotics are the stated inputs, exactly as in the manuscript."
   },
   "warning:parity-firewall": {
     "env": "warning",
@@ -613,9 +620,13 @@
   "thm:v003-four-additive-routes": {
     "env": "theorem",
     "title": "Four rigorous routes to additive closure",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.four_additive_routes",
+      "NCG.HL_twin",
+      "NCG.HL_goldbach"
+    ],
+    "note": "Proved as the assembly of the cited records: (A1)/(A2) are the signed closures (NCG.twin_closure, NCG.goldbach_closure), (A3) is parity recovery (NCG.parity_recovery), (A4) is the Hardy-Littlewood route (NCG.HL_twin, NCG.HL_goldbach), and the final firewall sentence is witnessed by the semiprime n = 6 carrying positive degree-<=2 mass with no prime (packet_semiprime)."
   },
   "ledger:goldbach-twin-prime-machinery-status": {
     "env": "ledger",
