@@ -86,9 +86,29 @@
   "thm:flagship-kraus-source-master": {
     "env": "theorem",
     "title": "Exact coherent source compression",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.Kraus24.gram_apply",
+      "NCG.Kraus24.gram_diag",
+      "NCG.Kraus24.gram_decomposition",
+      "NCG.Kraus24.gram_eigen",
+      "NCG.Kraus24.gram_rank",
+      "NCG.Kraus24.kraus_complete",
+      "NCG.Kraus24.P0_mul_P0",
+      "NCG.Kraus24.PV_mul_PV",
+      "NCG.Kraus24.P0_mul_PV",
+      "NCG.Kraus24.P0_rank",
+      "NCG.Kraus24.PV_rank",
+      "NCG.Kraus24.Wmat_iso",
+      "NCG.Kraus24.sflip_mul_P0",
+      "NCG.Kraus24.sflip_mul_PV",
+      "NCG.Kraus24.ico_frame",
+      "NCG.Kraus24.ico_unit",
+      "NCG.Kraus24.ico_cross",
+      "NCG.Kraus24.icosahedral_source_compression",
+      "NCG.Kraus24.icosahedral_projection_split"
+    ],
+    "note": "All boxed claims proved on the explicit golden-ratio icosahedral frame (tight-frame, unit-norm and |u_a.u_b|^2=1/5 certified): exact entries (1+st u_a.u_b)/48, Diag = I/24, completeness sum K*K = I, Gamma = P0/2 + PV/6 with orthogonal projections of ranks 1 and 3, rank Gamma = 4 via the isometry W = [j0|J_V] with W^H W = I_4, and the Clifford factor built from an explicit Pauli-Kronecker triple. The representation label Ran Gamma = 1_+ (+) 3_- is encoded by the sign-contrast parity (S P0 = P0, S PV = -PV); the full A5 x Z2 character classification behind the display is classical representation theory left in prose."
   },
   "cor:native-determinant-master": {
     "env": "corollary",
@@ -114,9 +134,18 @@
   "thm:canonical-chronology-leakage-master": {
     "env": "theorem",
     "title": "Exact canonical chronology leakage",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.leakage_first_moment",
+      "NCG.leakage_second_moment",
+      "NCG.leakage_variance_polynomial",
+      "NCG.leakage_nu_norm",
+      "NCG.line_coefficient",
+      "NCG.line_variance_eq_offline_norm",
+      "NCG.line_variance_eq_commutator",
+      "NCG.commutator_norm_sq"
+    ],
+    "note": "Both boxed displays proved: moment factorization m1 = alpha^3, m2 = beta^3 on the common-depth triple tensor via Kronecker vector calculus, the variance polynomial 3a^4 nu + 3a^2 nu^2 + nu^3, nu = ||(I-|k><k|)Ak||^2 for Hermitian A, and the variance/commutator identity ||Me||^2 - |<e,Me>|^2 = ||(I-P)Me||^2 = ||[M,Z]e||^2/4. The multiplicity-one input P M e_vol in C e_vol (equivariance + uniqueness of the determinant line) enters as the hypothesis hline, exactly as in the manuscript proof."
   },
   "cor:structured-frame-master": {
     "env": "corollary",

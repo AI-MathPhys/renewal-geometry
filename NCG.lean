@@ -186,6 +186,8 @@ import NCG.Upstream.MarkovChernoff
 import NCG.Upstream.FlagshipEasy
 import NCG.Upstream.HodgeBSD
 import NCG.Upstream.KalmanRealization
+import NCG.Upstream.IcosahedralKraus
+import NCG.Upstream.ChronologyLeakage
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree
 import NCG.Arithmetic.SignedSeparator
