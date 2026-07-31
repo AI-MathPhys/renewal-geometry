@@ -188,6 +188,7 @@ import NCG.Upstream.HodgeBSD
 import NCG.Upstream.KalmanRealization
 import NCG.Upstream.IcosahedralKraus
 import NCG.Upstream.ChronologyLeakage
+import NCG.Matter.UCPInverse
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree
 import NCG.Arithmetic.SignedSeparator

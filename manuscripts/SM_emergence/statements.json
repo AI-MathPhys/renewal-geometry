@@ -37,9 +37,13 @@
   "thm:ucp-unit": {
     "env": "theorem",
     "title": "UCP inverse theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.UCP.kadison_schwarz",
+      "NCG.UCP.pos_of_two_positive",
+      "NCG.UCP.ucp_inverse_automorphism"
+    ],
+    "note": "Proved on a finite matrix factor Matrix d d C, the setting of the predictive channel monoid: a unital 2-positive map (complete positivity restricted to the M2 amplification, encoded blockwise via fromBlocks) with a 2-positive two-sided inverse is multiplicative, star-preserving and bijective. Kadison-Schwarz is derived from the block certificate [[1,a],[a*,a*a]] = B*B >= 0 and the Schur defect; squeezing through the inverse forces Schwarz equality for every element, and polarization of the sesquilinear defect upgrades it to full multiplicativity. The inverse needs only 2-positivity: its unitality and star-preservation are derived from the inverse identities. General finite-dimensional C*-algebras are direct sums of matrix factors; the statement is recorded at the factor level."
   },
   "thm:projective-revision": {
     "env": "theorem",
