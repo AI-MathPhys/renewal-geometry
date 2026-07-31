@@ -461,16 +461,21 @@
   "corollary:dyadic-bank": {
     "env": "corollary",
     "title": "Dyadic bank",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.CauchyTransfer.dyadic_bank",
+      "NCG.CauchyTransfer.dyadic_bank_constants"
+    ],
+    "note": "Proved: at r = 1/4, s = 1/2 the aliasing constant evaluates to theta C_s = 6/2^m and the total coefficient variation r^-1 + r^-2 + theta C_s <= 26; the transfer sandwich is instantiated at these constants. The pointwise dyadic sandwich itself enters as the hypothesis inherited from thm:v003-cauchy-minorant, which remains open."
   },
   "thm:v003-cauchy-transfer": {
     "env": "theorem",
     "title": "Positive-mass transfer through the finite bank",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.CauchyTransfer.positive_mass_transfer"
+    ],
+    "note": "Proved exactly as in the manuscript: multiplying the pointwise minorant sandwich 0 <= P(n) - c(n) <= K E(n) by nonnegative weights and summing gives Q - K U <= C <= Q. The pointwise sandwich enters as the hypothesis, supplied by the Cauchy-minorant theorem (thm:v003-cauchy-minorant)."
   },
   "prop:v003-ratio-conversion": {
     "env": "proposition",

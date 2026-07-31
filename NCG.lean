@@ -192,6 +192,7 @@ import NCG.Matter.UCPInverse
 import NCG.Matter.FiveChannel
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
+import NCG.Arithmetic.CauchyTransfer
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree
 import NCG.Arithmetic.SignedSeparator
