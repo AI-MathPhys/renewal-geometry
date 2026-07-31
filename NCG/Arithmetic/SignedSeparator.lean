@@ -158,7 +158,7 @@ theorem packet_semiprime {L : ℝ} {p q : ℕ}
 
 /-- `prop:v003-Ple2-values` (otherwise): the packet vanishes off
 primes and squarefree semiprimes. -/
-theorem packet_other {L : ℝ} (hL : L ≠ 0) {n : ℕ} (h2 : 2 ≤ n)
+theorem packet_other {L : ℝ} {n : ℕ} (h2 : 2 ≤ n)
     (hnp : ¬ n.Prime)
     (hnsp : ¬ ∃ p q, p.Prime ∧ q.Prime ∧ p ≠ q ∧ n = p * q) :
     packetPle2 L n = 0 := by
@@ -347,7 +347,8 @@ theorem separator_semiprime {L : ℝ} (hL : 0 < L) {p q : ℕ}
   have hlog : Real.log ((p * q : ℕ) : ℝ)
       = Real.log p + Real.log q := by
     push_cast
-    rw [Real.log_mul (by positivity) (by positivity)]
+    rw [Real.log_mul (Nat.cast_ne_zero.mpr hp.ne_zero)
+      (Nat.cast_ne_zero.mpr hq.ne_zero)]
   rw [separatorJ, mellinB, mellinB, mellinB,
     moebius_sq_of_squarefree hsq,
     lambdaJ_vanish hsq (by omega),
@@ -388,8 +389,7 @@ theorem separator_minorant {L : ℝ} (hL : 0 < L) {n : ℕ}
           lambdaJ_vanish hsq (by omega : 2 < n.primeFactors.card)]
         have hterm : 0 ≤ 2 / (Real.log n / L) * mellinB L 3 n := by
           positivity
-        simp only [mul_zero, zero_mul, zero_div, zero_add,
-          mul_div_assoc]
+        simp only [mul_zero, zero_div, zero_add]
         nlinarith
     · rw [separatorJ, mellinB, mellinB, mellinB,
         ArithmeticFunction.moebius_eq_zero_of_not_squarefree hsq]
@@ -410,7 +410,7 @@ theorem signed_additive_closure {S : Finset ℕ} (w J : ℕ → ℝ)
     intro p hp
     have hm := hminor p hp
     rw [if_neg (hall p hp)] at hm
-    exact mul_nonpos_iff.mpr (Or.inr ⟨hw p hp, hm⟩)
+    exact mul_nonpos_iff.mpr (Or.inl ⟨hw p hp, hm⟩)
   exact absurd (Finset.sum_nonpos hnonpos) (not_le.mpr hpos)
 
 /-- `cor:v003-signed-additive-closure` (fixed gap): positivity of

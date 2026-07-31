@@ -44,9 +44,11 @@
   "thm:projective-revision": {
     "env": "theorem",
     "title": "Projective revision theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.projective_revision"
+    ],
+    "note": "NCG/Matter/QutritRevision.lean: for any additive family of invertible implementers on a matrix factor with Ad-composition Ad_Ra Ad_Rb = Ad_R(a+b), the Schur argument (central ratio => scalar, via Matrix.mem_range_scalar_iff_commute_single) produces a nowhere-zero scalar two-cocycle tau with R_a R_b = tau(a,b) R_(a+b), the cocycle identity, and the section-independent scalar commutator R_a R_b = (tau(a,b)/tau(b,a)) R_b R_a. Standard axioms only."
   },
   "warning:completely-positive-phase-firewall": {
     "env": "warning",
@@ -85,9 +87,24 @@
   "thm:revision-MUB": {
     "env": "theorem",
     "title": "Revision-line MUB theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.qOmega",
+      "NCG.qX",
+      "NCG.qZ",
+      "NCG.qW",
+      "NCG.qW_mul",
+      "NCG.lineGen",
+      "NCG.mubProj",
+      "NCG.mubProj_idem",
+      "NCG.mubProj_herm",
+      "NCG.mubProj_trace",
+      "NCG.mubProj_orth",
+      "NCG.mubProj_sum",
+      "NCG.mubProj_cross_trace",
+      "NCG.lineGen_commutant"
+    ],
+    "note": "NCG/Matter/QutritWeyl.lean + QutritMUB.lean: the concrete clock-shift pair with omega = e^(2 pi i/3) (ZX = omega XZ proved from the explicit 3x3 matrices), the Weyl-word calculus, and for each of the four projective lines (X, Z, XZ, XZ^2): the three spectral projectors are Hermitian idempotents of unit trace (rank one), mutually orthogonal, resolve the identity, and satisfy Tr(P_L,k P_M,l) = 1/3 for distinct lines (complete qutrit MUB set). Maximal abelianness is proved exactly: the commutant of each line generator is span{1, R_L, R_L^2} (Weyl-basis expansion + symplectic character kill). The head-to-frame assignment clause is the declared model layer. Standard axioms only."
   },
   "warning:frame-lift-firewall": {
     "env": "warning",
@@ -99,16 +116,26 @@
   "thm:v5-relative-revision": {
     "env": "theorem",
     "title": "Relative-revision character theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.relRev",
+      "NCG.relRev_mul",
+      "NCG.relRev_conjTranspose",
+      "NCG.relRev_bell",
+      "NCG.bellProj"
+    ],
+    "note": "NCG/Matter/QutritBell.lean: the relative revisions W_a = conj(R_a) (x) R_a form an honest F_3^2 representation (the scalar cocycles cancel in the tensor product: relRev_mul), are unitary with W_a-dagger = W_(-a), and the vectorized Weyl words are their joint eigenvectors with the symplectic character eigenvalues (relRev_bell, via the Kronecker-vec dictionary (B (x) A) vec X = vec (A X B^T)). The Bell projections are realized as the Fourier character sums (bellProj); their rank-one property follows from the nine-element eigenbasis (qW basis, proved linearly independent). Standard axioms only."
   },
   "cor:v5-bell-dephasing": {
     "env": "corollary",
     "title": "Source-local Bell dephasing",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.bellProj",
+      "NCG.bell_char_sum",
+      "NCG.relRev_twirl_eq_pinch"
+    ],
+    "note": "NCG/Matter/QutritBell.lean: the boxed dephasing identity E_Bell(A) = (1/9) sum_a W_a A W_a-dagger = sum_b Pi_b A Pi_b is proved exactly (relRev_twirl_eq_pinch) by double Fourier expansion and the F_3^2 character orthogonality sum (bell_char_sum): the diagonal collapse leaves exactly the W_a A W_(-a) terms of the twirl. The operational two-generator readout clause is the declared interpretation layer. Standard axioms only."
   },
   "thm:v5-orientation-doublet": {
     "env": "theorem",
@@ -134,9 +161,11 @@
   "thm:v5-hankel-descent": {
     "env": "theorem",
     "title": "Covariant Hankel descent",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.hankel_descent"
+    ],
+    "note": "NCG/Upstream/KalmanRealization.lean: covariant relabellings M_g H = H L_g preserve ker H, act isometrically on the intrinsic source inner product <Hp, Hq> when M_g is unitary, and the quotient dimension equals rank H (rank-nullity). The gauge-independence commentary is carried by the statement itself. Standard axioms only."
   },
   "thm:v5-rank-nine-erasure": {
     "env": "theorem",
@@ -337,13 +366,15 @@
   "thm:exact-oriented-carrier": {
     "env": "theorem",
     "title": "Exact protected amplitude carrier",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG.circulation_carrier_fixed",
-      "NCG.tri_cochains_harmonic",
-      "NCG.tri_cochains_independent"
+      "NCG.bZeroZ",
+      "NCG.bZero_annihilator",
+      "NCG.carrier_in_kernel",
+      "NCG.carrier_independent",
+      "NCG.carrier_kernel_complete"
     ],
-    "note": "Partially proved in NCG/Matter/CirculationCarrier.lean: the harmonic embedding fixed-point identity (B0 J alpha)(i,j) = alpha(i,j) is proved for every antisymmetric divergence-free one-cochain (circulation_carrier_fixed), and the three triangle circulations are verified harmonic and linearly independent (kernel-checked integer cores), giving dim Ker(B0 - I) >= 3 = dim H^1(K4;C). Open: the exact characteristic polynomial (x-2)(x-1)^3(x+1)^2(x^2+x+2)^3 and the matching upper bound dim Ker(B0 - I) = 3."
+    "note": "NCG/Matter/OrientedCarrier.lean: the explicit 12x12 nonbacktracking operator B0 of K4 satisfies its claimed characteristic polynomial (B0-2)(B0-1)^3(B0+1)^2(B0^2+B0+2)^3 = 0 (kernel-checked integer decide-certificate), and the boxed kernel claim is proved exactly: the three harmonic triangle injections J alpha lie in Ker(B0-1), are independent, and every kernel vector is a combination of them (explicit pseudo-inverse certificate 2P(B0-1) = 2(1-N)), so Ker(B0-I) = J H^1(K4) has dimension exactly three. The algebraic-multiplicity display for the remaining eigenvalue factors and the S4-isotypic decomposition are the declared remainder. Standard axioms only."
   },
   "thm:stabilizer-port-frame": {
     "env": "theorem",
@@ -444,23 +475,33 @@
   "prop:edge-M3": {
     "env": "proposition",
     "title": "Full generation algebra from edge lines",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.edge_M3",
+      "NCG.commute_sym_scalar"
+    ],
+    "note": "NCG/Matter/EdgeResponse.lean: for any symmetric whitening S G0 S = 1, every matrix commuting with the six edge projectors P_e = 2 S r_e r_e^T S is scalar: the commutation transports to the rational family r_e r_e^T G0^-1, the three coordinate edges give the identity, the six rank-one forms span Sym_3, and commuting with the symmetric basis forces a scalar. The generated unital *-algebra is therefore M_3(C) (Burnside from the trivial commutant). Standard axioms only."
   },
   "thm:response-isomorphism": {
     "env": "theorem",
     "title": "Edge-score/generation-response isomorphism",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.edgeSym",
+      "NCG.edge_response_iso",
+      "NCG.edge_response_bounds",
+      "NCG.edge_response_whitened"
+    ],
+    "note": "NCG/Matter/EdgeResponse.lean: the six rank-one edge forms are linearly independent and span Sym_3(R) (explicit inverse basis change), the whitened trace of R(z) is (sum z)/2 so centered scores map bijectively onto traceless symmetric operators, and the transported Hilbert-Schmidt metric obeys the exact bounds (1/8)|z|^2 <= |R(z)|_HS^2 <= (1/4)|z|^2 on centered scores via explicit sum-of-squares certificates ((z_e -+ z_opposite)^2 pairings). The HS norm transports through any symmetric whitening (trace cyclicity). Standard axioms only."
   },
   "cor:conductance-completeness": {
     "env": "corollary",
     "title": "Conductance-response completeness",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.conductance_completeness"
+    ],
+    "note": "NCG/Matter/EdgeResponse.lean: the six edge-conductance variations span the symmetric forms on the generation fibre; the common direction supplies the identity and centered variations supply every traceless self-adjoint response (direct corollary of the response isomorphism). Standard axioms only."
   },
   "interpretation:untitled--2": {
     "env": "interpretation",
@@ -472,9 +513,14 @@
   "thm:perron-response": {
     "env": "theorem",
     "title": "Local Perron response",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.perronP",
+      "NCG.perron_response_zero",
+      "NCG.perron_response_first",
+      "NCG.perron_response_hessian"
+    ],
+    "note": "NCG/Matter/PerronResponse.lean: the local Perron data of P_eta = (1-eta)I + (eta/6)J in exact jet form: 1^T/6 and 1 are the left/right Perron pair at rho = 1; l_1 = z_0/(6 eta) satisfies the first-order left-eigenvector jet equation with rho_1 = zbar and centering; and the second-order coefficient of log rho equals ((2-eta)/(6 eta))|z_0|^2, i.e. the boxed Hessian ((2-eta)/(6 eta))(I - Pi_6). The identification of the jets with the analytic derivatives of the simple Perron root is the standard perturbation dictionary (declared). Standard axioms only."
   },
   "thm:quark-source-CP": {
     "env": "theorem",
@@ -658,9 +704,14 @@
   "thm:v5-block-hankel-packet": {
     "env": "theorem",
     "title": "Blind common-frame block-Hankel reconstruction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.krylovMat",
+      "NCG.block_hankel_gram",
+      "NCG.block_hankel_rank",
+      "NCG.physical_source_uniqueness"
+    ],
+    "note": "NCG/Upstream/KalmanRealization.lean: the block-Hankel moment matrix (M_(i+j)) is exactly the Gram matrix of the stacked Krylov family [S, MS, ..., M^(d-1)S] (two-horizon entry identity), so rank H^pkt = dim span{M^j S P : j < d}; and the complete moment family determines (M, S) on the packet space up to one common unitary (physical_source_uniqueness, explicit Gram factorization). The Schur-complement defect display is the Schur machinery of NCG.schur_short. Standard axioms only."
   },
   "thm:bkm-hessian": {
     "env": "theorem",

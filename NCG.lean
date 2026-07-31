@@ -185,9 +185,12 @@ import NCG.Upstream.CramerLower
 import NCG.Upstream.MarkovChernoff
 import NCG.Upstream.FlagshipEasy
 import NCG.Upstream.HodgeBSD
+import NCG.Upstream.KalmanRealization
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree
 import NCG.Arithmetic.SignedSeparator
+import NCG.Arithmetic.SelbergIdentity
+import NCG.Arithmetic.SchurCluster
 import NCG.Matter.SharedSourceCycle
 import NCG.Matter.GluedEffects
 import NCG.Matter.MarkedRefinement
@@ -211,7 +214,14 @@ import NCG.Matter.RowCollapse
 import NCG.Matter.GaugeNormalization
 import NCG.Matter.QuarkSourceCP
 import NCG.Matter.EdgePOVM
+import NCG.Matter.EdgeResponse
+import NCG.Matter.PerronResponse
+import NCG.Matter.OrientedCarrier
 import NCG.Matter.DarkParity
+import NCG.Matter.QutritWeyl
+import NCG.Matter.QutritRevision
+import NCG.Matter.QutritMUB
+import NCG.Matter.QutritBell
 import NCG.Matter.SMEasyV5
 import NCG.Lorentz.CovariantL2
 import NCG.Lorentz.StrongLawMoments

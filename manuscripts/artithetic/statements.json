@@ -58,9 +58,11 @@
   "thm:schur": {
     "env": "theorem",
     "title": "Schur-short variational principle",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.schur_short"
+    ],
+    "note": "NCG/Arithmetic/SchurCluster.lean: the Schur-short variational principle for a PSD block Gram matrix [[A,B],[B^H,C]]: with the range condition Ran B^H <= Ran C witnessed by a solution Z of CZ = B^H (so A - Z^H C Z = A - B C-dagger B^H), the short is PSD, bounds the joint quadratic form from below for every nuisance vector, and is attained exactly at the least-norm minimizer y = -Zx (completion of squares). Standard axioms only."
   },
   "warning:diagonal-positivity-is-not-quotient-coercivity": {
     "env": "warning",
@@ -233,9 +235,13 @@
   "thm:v002-cluster": {
     "env": "theorem",
     "title": "Separated cluster and Feshbach short",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.inv_shift_posSemidef",
+      "NCG.cluster_feshbach_det",
+      "NCG.cluster_feshbach_bound"
+    ],
+    "note": "NCG/Arithmetic/SchurCluster.lean: the Feshbach determinant factorization det(Q-z) = det(C-z) det(A-z-B^H (C-z)^-1 B) (Schur complement, Mathlib det_fromBlocks22), and the self-energy sandwich 0 <= B^H (C-z)^-1 B <= (beta^2/delta) 1 below the gap, via the new inverse-monotonicity lemma N >= delta > 0 => N^-1 <= delta^-1 (spectral theorem). The sin-Theta spectral-projection clause ||P - Pi|| <= 2beta/(Delta-2beta) is the declared analytic input (contour perturbation theory). Standard axioms only."
   },
   "corollary:simple-even-extraction": {
     "env": "corollary",
@@ -356,9 +362,14 @@
   "thm:v003-mellin-degree": {
     "env": "theorem",
     "title": "Exact Mellin-degree coefficients",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.lambdaJ",
+      "NCG.mellinSeries",
+      "NCG.mellin_degree_coeff",
+      "NCG.mellin_degree"
+    ],
+    "note": "NCG/Arithmetic/MellinDegree.lean: the port is realized as the formal power series prod_(l|n) (rescale(log l/L) exp - 1) in the Mellin variable, and the exact coefficient identity B_j = mu^2(n) Lambda_j(n)/(j! L^j) is proved for every j and every n (squarefree core via the divisors <-> powerset bridge and rescale-exp product law; nonsquarefree targets vanish under mu^2). Low-degree vanishing (X^omega divisibility), coefficient nonnegativity, and the exact values at primes and semiprimes are included. Standard axioms only."
   },
   "definition:exact-degree-2-squarefree-port": {
     "env": "definition",
@@ -370,37 +381,60 @@
   "prop:v003-Ple2-values": {
     "env": "proposition",
     "title": "Support and exact values",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.packetPle2",
+      "NCG.packet_prime",
+      "NCG.packet_semiprime",
+      "NCG.packet_other"
+    ],
+    "note": "NCG/Arithmetic/SignedSeparator.lean: the degree-<=2 packet P_{<=2} = B_1 + B_2 equals alpha + alpha^2/2 at a prime, alpha_1 alpha_2 at a squarefree semiprime, and 0 at every other target (squarefree with >= 3 prime factors via low-degree vanishing; nonsquarefree via mu^2). Standard axioms only."
   },
   "lem:v003-selberg": {
     "env": "lemma",
     "title": "Selberg degree-two identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.pmul_log_mul",
+      "NCG.selberg_af",
+      "NCG.lambdaJ_one_eq_vonMangoldt",
+      "NCG.lambdaConv_eq",
+      "NCG.selberg_identity"
+    ],
+    "note": "NCG/Arithmetic/SelbergIdentity.lean: the FULL Selberg degree-two identity Lambda_2(n) = Lambda(n) log n + (Lambda*Lambda)(n) for every n >= 1, proved combinatorially via the log-derivation on the Dirichlet ring (L(f*g) = Lf*g + f*Lg applied to Lambda*zeta = log, then Moebius inversion), replacing the manuscript Dirichlet-series argument. Includes the bridge Lambda_1 = vonMangoldt to the Mathlib arithmetic-function framework. Standard axioms only."
   },
   "cor:v003-atom-bulk": {
     "env": "corollary",
     "title": "Exact prime atom plus semiprime bulk",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.lambdaConv",
+      "NCG.atom_bulk"
+    ],
+    "note": "NCG/Arithmetic/SignedSeparator.lean: the exact split P_{<=2}(n) = mu^2 Lambda/L (1 + log n/(2L)) + mu^2/(2L^2) (Lambda_1*Lambda_1)(n) for every n >= 2, with the convolution supported exactly on squarefree semiprimes (value 2 log r log q) and the first term on primes. Standard axioms only."
   },
   "thm:v003-signed-separator": {
     "env": "theorem",
     "title": "Exact cancellation of the squarefree $P_2$ layer",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.separatorJ",
+      "NCG.separator_prime_value",
+      "NCG.separator_semiprime",
+      "NCG.separator_minorant"
+    ],
+    "note": "NCG/Arithmetic/SignedSeparator.lean: J = (6/7)(B_1 + B_2 - (2/alpha)B_3) equals (6/7)alpha + (1/7)alpha^2 at a prime, vanishes exactly at squarefree semiprimes (the P_2 layer cancellation, via Lambda_3(pq) = 3ab(a+b)), and satisfies the boxed pointwise minorant J(n) <= 1_P(n) for 2 <= n and log n <= L. At depth >= 3 the Lean statement gives J <= 0 from B_3 >= 0 (coefficient nonnegativity); the strict negativity display -12/(7 alpha) B_3 < 0 at depth exactly three is not separately certified. Standard axioms only."
   },
   "cor:v003-signed-additive-closure": {
     "env": "corollary",
     "title": "Signed fixed-gap and fixed-sum closure",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.signed_additive_closure",
+      "NCG.twin_closure",
+      "NCG.goldbach_closure"
+    ],
+    "note": "NCG/Arithmetic/SignedSeparator.lean: positivity of a nonnegatively log-weighted sum of minorant values forces a prime target; instantiated for the fixed-gap (p, p+2) and fixed-sum (p, N-p) correlations. The analytic positivity of the correlations themselves is the declared open input (Type-II/parity estimate). Standard axioms only."
   },
   "thm:v003-cauchy-minorant": {
     "env": "theorem",

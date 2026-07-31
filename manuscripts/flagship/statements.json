@@ -186,9 +186,13 @@
   "thm:physical-source-completeness": {
     "env": "theorem",
     "title": "Physical-source completeness and minimal realization",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.krylov_reduces",
+      "NCG.krylovMat",
+      "NCG.physical_source_uniqueness"
+    ],
+    "note": "NCG/Upstream/KalmanRealization.lean: clause (i) — the cyclic Krylov span is invariant under the self-adjoint transport (krylov_reduces; the reducing/orthogonal-complement clause follows by hermiticity); clauses (ii)-(iii) are immediate compression statements; clause (iv) — two source-minimal finite triples with identical all-order moments B^H G^n B are related by a unitary W with WB = B-prime and WG = G-prime W, proved constructively via the explicit Gram factorization W = K-prime K^H (K K^H)^(-1) with the cross-horizon Hankel-Gram equality (no abstract extension-of-isometries needed; positivity of KK^H comes from NCG.hodge_cycle_observability). Standard axioms only."
   },
   "thm:primitive-sector-saturation": {
     "env": "theorem",
