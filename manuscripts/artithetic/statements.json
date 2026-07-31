@@ -13,16 +13,22 @@
   "prop:old-abel": {
     "env": "proposition",
     "title": "Abel reduction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.abel_reduction",
+      "NCG.abel_reduction_shifted",
+      "NCG.tail_integral"
+    ],
+    "note": "Proved: for Re s > 0 and absolutely summable weighted coefficients (Summable ||c(n)|| n^{-Re s}), int_1^infty (sum_{n<=x} c(n)) x^{-s-1} dx = (1/s) sum_n c(n) n^{-s}, by dominated tsum/integral interchange with per-n tail evaluation int_n^infty x^{-s-1} dx = n^{-s}/s. The manuscript states only s != 0 on the vertical line; the formal statement carries Re s > 0 as hypothesis, which is the regime where the tail integrals converge absolutely and is the regime the corollary uses. The displayed shifted-product instance c(n) = a_i(n) a_j(n+h) is NCG.abel_reduction_shifted (nonnegative shift h; negative shifts relabel the two ports)."
   },
   "cor:old-zero": {
     "env": "corollary",
     "title": "The zero-shift slice is not an $L$-function frame",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.old_zero"
+    ],
+    "note": "Proved: the zero-shift slice with a_i = Lambda rho_i has Dirichlet coefficient Lambda(n)^2 rho_i(n) rho_j(n) -- a squared, unconjugated von Mangoldt weight, formalized as the identity int_1^infty A(x) x^{-s-1} dx = (1/s) sum_n Lambda(n)^2 rho_i(n) rho_j(n) n^{-s} for Re s > 0. The manuscript sentences observing that this weight is neither an L-function coefficient sequence nor of the form -L'/L (no Euler product / no single-prime support) are interpretive prose about the displayed formula and are not separately formalized."
   },
   "def:port-tensor": {
     "env": "definition",
