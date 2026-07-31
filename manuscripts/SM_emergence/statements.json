@@ -659,9 +659,19 @@
   "prop:five-channel-decomp": {
     "env": "proposition",
     "title": "Five-channel representation theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.FiveChannel.edge_orthogonal",
+      "NCG.FiveChannel.colour_compl",
+      "NCG.FiveChannel.colour_orthogonal",
+      "NCG.FiveChannel.kronOne_ptr_adjoint",
+      "NCG.FiveChannel.finrank_colourSinglet",
+      "NCG.FiveChannel.finrank_colourTraceless",
+      "NCG.FiveChannel.five_channel_colour_count",
+      "NCG.FiveChannel.five_modules_orthogonal",
+      "NCG.FiveChannel.embFF_colour_orthogonal"
+    ],
+    "note": "Proved on the five-sector space H_F with weak x colour factorization on the flavoured sectors: modules supported on distinct oriented edges are HS-orthogonal (distinct central supports, edge_orthogonal), the four embedded support-tree modules are pairwise orthogonal (five_modules_orthogonal), and the F_R -> F_L edge block splits exactly and orthogonally along End(C^4) = 1 (+) 15 (colour_compl, colour_orthogonal via the HS-adjunction of W (x) 1 and the partial colour trace), with dimension counts |w||w'| and |w||w'|(|c|^2-1) — for weak doublets and SU(4) colour: (2,2,1) dim 4 and (2,2,15) dim 60. The SU(2)xSU(2)xSU(4) equivariance labels on the summands are the disclosed representation-theory layer."
   },
   "thm:horizontal-Julia": {
     "env": "theorem",
