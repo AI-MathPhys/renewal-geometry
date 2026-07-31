@@ -730,9 +730,15 @@
   "thm:bkm-hessian": {
     "env": "theorem",
     "title": "BKM path curvature",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.BKM.trace_exp_hasDerivAt",
+      "NCG.BKM.trace_exp_second_deriv",
+      "NCG.BKM.bkm_hessian",
+      "NCG.BKM.bkm_centering",
+      "NCG.BKM.bkm_integrand_nonneg"
+    ],
+    "note": "Duhamel/trace-exponential derivative calculus built from scratch (Mathlib has none): F(q) = Tr exp(A+qS) satisfies F'(q) = Tr(exp(A+qS) S) (term-by-term differentiation of the exponential series under summable bounds) and F''(0) = int_0^1 Tr(e^{(1-s)A} S e^{sA} S) ds, via the Beta evaluation int_0^1 (1-s)^k s^l ds = k!l!/(k+l+1)! (real_beta_convolution) and antidiagonal regrouping of the double exponential series. The centered form F''(0) = int Tr(rho^{1-s} St rho^s St) ds + Tr(rho S)^2 with rho^t := exp(tA), St = S - Tr(rho S) 1 is bkm_hessian, so psi''(0) = F''(0) - F'(0)^2 is the BKM integral; for Hermitian data the integrand is Tr(Z Z^H) >= 0 with Z = e^{(1-s)A/2} S e^{sA/2} (bkm_integrand_nonneg), proving nonnegativity. The path state enters as rho = exp A with Tr rho = 1 (A = log rho for the faithful state); the vanishing-iff-zero-score clause follows from the Z Z^H form and invertibility of exp and is left in prose."
   },
   "thm:fixed-reset-action": {
     "env": "theorem",
