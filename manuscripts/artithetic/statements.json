@@ -454,9 +454,13 @@
   "thm:v003-cauchy-minorant": {
     "env": "theorem",
     "title": "Stable Cauchy minorant",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.bank_alias",
+      "NCG.cauchy_minorant",
+      "NCG.bank_weight"
+    ],
+    "note": "Proved with the entire packet E_{z,X} realized as its absolutely convergent Taylor series sum_j B_j z^j (factorial decay of the Mellin coefficients from |Lambda_j(n)| <= tau(n) (log n)^j; the product display is the formal identity NCG.mellin_degree, as in the thm:v003-mellin-degree record): bank_alias is the exact root-of-unity aliasing D^(j) = sum_{d = j mod m} B_d r^d/r^j (geometric root sums + Complex.exp_eq_one_iff), cauchy_minorant is the stable sandwich 0 <= P_{<=2} - c <= theta C_s E_s by coefficientwise domination 0 <= 1_{d in {1,2}} - kappa_d <= theta C_s s^d against the nonnegative coefficients (the residue-class tail estimate r^{d-j} = theta^l s^{d-j} <= theta C_s s^d), and bank_weight gives the m-independent coefficient weight r^{-j} per bank, hence the display total r^{-1} + r^{-2} + theta C_s."
   },
   "corollary:dyadic-bank": {
     "env": "corollary",

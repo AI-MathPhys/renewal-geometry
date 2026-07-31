@@ -194,6 +194,7 @@ import NCG.Matter.BKMHessian
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer
+import NCG.Arithmetic.CauchyBank
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree
 import NCG.Arithmetic.SignedSeparator
