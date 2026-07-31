@@ -1,355 +1,63 @@
 {
-  "definition:status-classes": {
+  "def:renewal-experiment": {
     "env": "definition",
-    "title": "status classes",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "ledger:global-scoping": {
-    "env": "ledger",
-    "title": "Global scoping",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "definition:finite-completely-positive-renewal-memory": {
-    "env": "definition",
-    "title": "finite completely positive renewal memory",
+    "title": "Renewal experiment",
     "status": "statement_encoded",
-    "lean": [
-      "NCG.CPRenewalMemory",
-      "NCG.Multigraph",
-      "NCG.pressureKernel",
-      "NCG.Upstream.coeffAlgebra",
-      "NCG.Upstream.pointerCentre"
-    ],
-    "note": "TRIAGE covered. Same content as flagship:definition:finite-complete-resolved-renewal-instrument (statement_encoded there); Lean identifiers reused. CPRenewalMemory is the same primitive tuple."
-  },
-  "cond:no-geometry": {
-    "env": "condition",
-    "title": "no hidden geometry",
-    "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": ""
   },
-  "definition:predictive-equivalence": {
+  "definition:predictive-equivalence-and-sufficient-algebra": {
     "env": "definition",
-    "title": "predictive equivalence",
+    "title": "Predictive equivalence and sufficient algebra",
     "status": "statement_encoded",
-    "lean": [
-      "NCG.RenewalMemory.PredictiveQuotient",
-      "NCG.RenewalMemory.quotLength",
-      "NCG.RenewalMemory.predCon"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:def:predictive-quotient (statement_encoded there); Lean identifiers reused."
+    "lean": [],
+    "note": ""
   },
-  "definition:predictive-channel-monoid": {
-    "env": "definition",
-    "title": "predictive channel monoid",
-    "status": "statement_encoded",
-    "lean": [
-      "NCG.RenewalMemory.acc",
-      "NCG.RenewalMemory.quotientEquivRange"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:def:predictive-channel-monoid (statement_encoded there); Lean identifiers reused."
-  },
-  "thm:predictive-unit-updated": {
+  "thm:finite-selector": {
     "env": "theorem",
-    "title": "predictive-unit theorem",
-    "status": "proved",
-    "lean": [
-      "NCG.UCPMap.unit_map_mul",
-      "NCG.UCPMap.unit_map_star",
-      "NCG.IsCompletelyPositive.isSchwarzMap",
-      "NCG.multiplicative_of_schwarz_eq"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:predictive-unit (proved there); Lean identifiers reused. Identical to the foundational predictive-unit theorem."
-  },
-  "cond:finite-fibre": {
-    "env": "condition",
-    "title": "finite-fibre and proper-length conditions",
+    "title": "Finite predictive selector",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": ""
   },
-  "definition:predictive-divisibility-order": {
-    "env": "definition",
-    "title": "predictive divisibility order",
-    "status": "statement_encoded",
-    "lean": [
-      "NCG.DivisibilityOrder",
-      "NCG.PredictivePoset"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:def:predictive-order (statement_encoded there); Lean identifiers reused."
-  },
-  "prop:predictive-preorder": {
+  "prop:renewal-pressure": {
     "env": "proposition",
-    "title": "predictive reachability preorder",
-    "status": "proved",
-    "lean": [
-      "NCG.CausalSkeleton.interval_finite",
-      "NCG.CausalSkeleton.saturated_chain_rank",
-      "NCG.CausalSkeleton.saturated_chain_length_eq",
-      "NCG.CausalSkeleton.time_separates"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:prop:causal-skeleton (proved there); Lean identifiers reused. Preorder/condensation content proved in NCG/Renewal/Order.lean and NCG/Graph/Condensation.lean."
-  },
-  "cond:monotone-grading": {
-    "env": "condition",
-    "title": "optional monotone grading",
+    "title": "Renewal subordination of the counting pressure",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": ""
   },
-  "corollary:graded-condensation-under-an-extra-hypothesis": {
+  "warning:untitled": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
+  },
+  "thm:ucp-unit": {
+    "env": "theorem",
+    "title": "UCP inverse theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:projective-revision": {
+    "env": "theorem",
+    "title": "Projective revision theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:completely-positive-phase-firewall": {
+    "env": "warning",
+    "title": "Completely positive phase firewall",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "cor:odd-prime-projective-lift": {
     "env": "corollary",
-    "title": "graded condensation under an extra hypothesis",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "construction:length-representation": {
-    "env": "construction",
-    "title": "length representation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:bounded-renewal-representation": {
-    "env": "condition",
-    "title": "bounded renewal representation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:bounded-commutators": {
-    "env": "condition",
-    "title": "finite propagation and bounded commutators",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "definition:algebraic-predictive-dimension-and-residue-volume": {
-    "env": "definition",
-    "title": "algebraic predictive dimension and residue volume",
-    "status": "proved",
-    "lean": [
-      "NCG.RenewalMemory.algebraicDimension",
-      "NCG.RenewalMemory.channelCount",
-      "NCG.RenewalMemory.shell_finite",
-      "NCG.RenewalMemory.channelCount_mono"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:def:qalg (proved there); Lean identifiers reused."
-  },
-  "cond:weyl": {
-    "env": "condition",
-    "title": "power-law Weyl asymptotics",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "theorem:positive-renewal-spectral-geometry": {
-    "env": "theorem",
-    "title": "positive renewal spectral geometry",
-    "status": "proved",
-    "lean": [
-      "NCG.l2normSq_shiftOp_le",
-      "NCG.diagOp_comm_shiftOp_single",
-      "NCG.RenewalMemory.shell_finite",
-      "NCG.RenewalMemory.quotLength_shift_le",
-      "NCG.zetaSum_lt_top_of_growth",
-      "NCG.zetaSum_eq_top_of_growth_lower",
-      "NCG.RenewalMemory.zeta",
-      "NCG.RenewalMemory.zeta_lt_top_of_channelCount_growth",
-      "NCG.RenewalMemory.zeta_eq_top_of_channelCount_lower",
-      "NCG.l2normSq_comm_le",
-      "NCG.shiftOp_unbounded_of_unbounded_fibres"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:triple, flagship:lem:app-positive-triple (proved there); Lean identifiers reused. The positive finitely-summable spectral triple with residue formula."
-  },
-  "definition:fundamental-symmetry": {
-    "env": "definition",
-    "title": "fundamental symmetry",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:functorial-positive": {
-    "env": "condition",
-    "title": "irreducible natural positive sector",
-    "status": "proved",
-    "lean": [
-      "NCG.IsFundamentalSymmetry.eq_one_or_neg_one_of_mem_centralizer"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:irreducible-positive-no-go (proved there); Lean identifiers reused."
-  },
-  "thm:cp-no-go": {
-    "env": "theorem",
-    "title": "irreducible positive-sector no-go",
-    "status": "proved",
-    "lean": [
-      "NCG.IsFundamentalSymmetry.eq_one_or_neg_one_of_mem_centralizer"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:irreducible-positive-no-go (proved there); Lean identifiers reused. Fundamental symmetry in the commutant of an irreducible algebra is +/-1."
-  },
-  "corollary:separation-of-roles": {
-    "env": "corollary",
-    "title": "separation of roles",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "definition:recurrent-predictive-graph": {
-    "env": "definition",
-    "title": "recurrent predictive graph",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "definition:sign-cochain-and-gauge-class": {
-    "env": "definition",
-    "title": "sign cochain and gauge class",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "construction:principal-signed-cover-and-sheet-realization": {
-    "env": "construction",
-    "title": "principal signed cover and sheet realization",
-    "status": "proved",
-    "lean": [
-      "NCG.Multigraph.liftWalk",
-      "NCG.Multigraph.isCoboundary_of_holonomy_eq_zero",
-      "NCG.Multigraph.holonomy_eq_zero_of_isCoboundary",
-      "NCG.Multigraph.deck_transitive_on_fibre",
-      "NCG.Multigraph.ker_coboundaryMap",
-      "NCG.Multigraph.finrank_H1_add_card_vertices"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:cover (proved there); Lean identifiers reused."
-  },
-  "cond:minimal-signed-enrichment": {
-    "env": "condition",
-    "title": "minimal renewal-positive indefinite enrichment",
-    "status": "proved",
-    "lean": [
-      "NCG.Multigraph.EnrichmentDatum",
-      "NCG.two_le_rank_of_indefinite",
-      "NCG.MinimalEnrichmentData.rank_eq_two",
-      "NCG.conePositive_bij",
-      "NCG.perm_fin_two_cases",
-      "NCG.MinimalEnrichmentData.exists_transition_cochain",
-      "NCG.coverSign",
-      "NCG.coverSign_single",
-      "NCG.coverSign_sq"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:def:fixed-enrichment, renewal_emergence:cor:minimal-signed-enrichment (proved there); Lean identifiers reused."
-  },
-  "thm:minimal-signed-classification": {
-    "env": "theorem",
-    "title": "minimality and classification of the signed enrichment",
-    "status": "proved",
-    "lean": [
-      "NCG.MinimalEnrichmentData",
-      "NCG.MinimalEnrichmentData.rank_eq_two",
-      "NCG.MinimalEnrichmentData.sign_diag",
-      "NCG.conePositive_bij",
-      "NCG.perm_fin_two_cases",
-      "NCG.MinimalEnrichmentData.exists_transition_cochain",
-      "NCG.Multigraph.EnrichmentDatum.classificationEquiv",
-      "NCG.Multigraph.EnrichmentDatum.card_enrichmentClasses",
-      "NCG.Multigraph.cochainPullback",
-      "NCG.Multigraph.cochainPullback_coboundary",
-      "NCG.Multigraph.EnrichmentDatum.classesPullback",
-      "NCG.Multigraph.EnrichmentDatum.H1Pullback",
-      "NCG.Multigraph.EnrichmentDatum.classification_natural",
-      "NCG.Multigraph.EnrichmentDatum.classesPullback_comp"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:classification (proved there); Lean identifiers reused. Rank-two minimality and H^1(G;Z2) classification (NCG/Krein/EnrichmentClassification.lean)."
-  },
-  "cond:modular-clock": {
-    "env": "condition",
-    "title": "modular clock",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:atomic-modular-covariance": {
-    "env": "condition",
-    "title": "atomic unit-step modular covariance",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "prop:modular-magnitude-characterisation": {
-    "env": "proposition",
-    "title": "characterisation of the modular magnitude",
-    "status": "proved",
-    "lean": [
-      "NCG.exchange_orbit_pow",
-      "NCG.modular_weight_on_orbit",
-      "NCG.exp_weight_orbit",
-      "NCG.signed_dirac_krein_selfadjoint",
-      "NCG.clock_scaling"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:modular-characterisation (proved there); Lean identifiers reused."
-  },
-  "cond:twisted-krein": {
-    "env": "condition",
-    "title": "complete twisted Krein data",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "proposition:conditional-signed-modular-krein-construction": {
-    "env": "proposition",
-    "title": "conditional signed modular Krein construction",
-    "status": "proved",
-    "lean": [
-      "NCG.signed_dirac_krein_selfadjoint",
-      "NCG.twisted_commutator_collapse",
-      "NCG.twisted_commutator_reduction"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:signed-dirac (proved there); Lean identifiers reused."
-  },
-  "cond:signed-symbol": {
-    "env": "condition",
-    "title": "nondegenerate signed principal symbol",
-    "status": "statement_encoded",
-    "lean": [
-      "NCG.KreinCliffordDatum",
-      "NCG.symbol_through_second_moment"
-    ],
-    "note": "TRIAGE covered. Same content as flagship:definition:external-signed-principal-symbol (statement_encoded there); Lean identifiers reused."
-  },
-  "prop:dimension-indeterminacy": {
-    "env": "proposition",
-    "title": "dimension indeterminacy before the revision bridge",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "cond:signed-revision-phase-updated": {
-    "env": "condition",
-    "title": "signed recurrent revision phase",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:reversible-predictive-revision-updated": {
-    "env": "theorem",
-    "title": "reversible predictive revision theorem",
-    "status": "proved",
-    "lean": [
-      "NCG.revision_involutive",
-      "NCG.UCPMap.unit_map_mul",
-      "NCG.UCPMap.unit_map_star"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:reversible-predictive-revision (proved there); Lean identifiers reused."
-  },
-  "thm:automatic-projective-lift-updated": {
-    "env": "theorem",
-    "title": "automatic projective lift",
+    "title": "Odd-prime automatic projective lift",
     "status": "proved",
     "lean": [
       "NCG.projDefect_mem_center_of_ad",
@@ -360,277 +68,209 @@
     ],
     "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:spatial-multiplier-scalar-main, lorentzian_emergence:prop:projective-revision (proved there); Lean identifiers reused."
   },
-  "lem:revision-commutator-form-updated": {
-    "env": "lemma",
-    "title": "intrinsic alternating commutator form",
-    "status": "proved",
-    "lean": [
-      "NCG.RevisionFamily",
-      "NCG.RevisionFamily.commutator_eq",
-      "NCG.commutator_R_sq_eq_one",
-      "NCG.commutator_R_eq_defect_ratio"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:def:revision-operators-main, lorentzian_emergence:lem:commutator-pm1 (proved there); Lean identifiers reused."
-  },
-  "definition:primitive-symplectic-quotient": {
-    "env": "definition",
-    "title": "primitive symplectic quotient",
-    "status": "proved",
-    "lean": [
-      "NCG.PrimitiveQuotient",
-      "NCG.inducedForm",
-      "NCG.inducedForm_isAlt",
-      "NCG.inducedForm_separating"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:def:primitive-reduction (proved there); Lean identifiers reused."
-  },
-  "thm:primitive-revision-factor-updated": {
-    "env": "theorem",
-    "title": "primitive revision factor",
-    "status": "proved",
-    "lean": [
-      "NCG.revisionFamilyOfDefect",
-      "NCG.revisionFamilyOfDefect_hmul",
-      "NCG.projDefect_mem_center_of_ad",
-      "NCG.projDefect_cocycle",
-      "NCG.card_radical_characters",
-      "NCG.even_finrank_of_isAlt_nondegenerate",
-      "NCG.externalFactorSplit",
-      "NCG.marked_adjoin_eq_leftKron_range",
-      "NCG.skolem_noether"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:revision-structure-main (proved there); Lean identifiers reused. Twisted group algebra of the primitive quotient is the full matrix/Clifford factor; tensor split and uniqueness from the flagship round."
-  },
-  "thm:revision-twirl-updated": {
-    "env": "theorem",
-    "title": "internal revision twirl",
-    "status": "proved",
-    "lean": [
-      "NCG.twirl",
-      "NCG.twirl_ad_invariant",
-      "NCG.conj_conj",
-      "NCG.central_unit_conj"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:revision-twirl-main (proved there); Lean identifiers reused."
-  },
-  "thm:sheet-ergodicity-updated": {
-    "env": "theorem",
-    "title": "sheet ergodicity of the maximal recurrent cover",
-    "status": "proved",
-    "lean": [
-      "NCG.Multigraph.deck_transitive_on_fibre",
-      "NCG.Multigraph.liftWalk"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:sheet-ergodicity-main (proved there); Lean identifiers reused."
-  },
-  "corollary:double-ergodicity": {
+  "cor:primitive-clifford": {
     "env": "corollary",
-    "title": "double ergodicity",
+    "title": "Primitive complex Clifford factor",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "note": ""
   },
-  "cond:marked-clifford-bridge-updated": {
-    "env": "condition",
-    "title": "marked renewal--Clifford bridge",
-    "status": "proved",
-    "lean": [
-      "NCG.KreinCliffordDatum",
-      "NCG.KreinCliffordDatum.gamma_dir_sq",
-      "NCG.clifford_square"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:def:krein-clifford (proved there); Lean identifiers reused."
-  },
-  "cor:rank-clifford-bridge-updated": {
+  "cor:forced-Weyl": {
     "env": "corollary",
-    "title": "rank--Clifford relation",
-    "status": "proved",
-    "lean": [
-      "NCG.no_two_plus_one",
-      "NCG.odd_spatial_rank_of_isAlt_nondegenerate",
-      "NCG.gramMatrix_not_isUnit_of_odd",
-      "NCG.orthogonal_le_self_of_hyperplane",
-      "NCG.finrank_hyperplane_orthogonal",
-      "NCG.exists_radical_generator",
-      "NCG.temporal_pairing_ne_zero",
-      "NCG.temporal_pairing_eq_one",
-      "NCG.zmod2_span_nonzero_eq",
-      "NCG.spatialCore",
-      "NCG.finrank_spatialCore",
-      "NCG.hyperplane_eq_radical_sup_core",
-      "NCG.spatialCore_restrict_nondegenerate",
-      "NCG.finrank_span_pair_two",
-      "NCG.spatialCore_le_orthogonal_pair",
-      "NCG.isCompl_pair_spatialCore",
-      "NCG.pair_restrict_nondegenerate"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:cor:graded-unconditional-minimality, flagship:lem:app-temporal-partner (proved there); Lean identifiers reused."
+    "title": "Forced Weyl pair",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
   },
-  "cond:spatial-nondegeneracy-updated": {
-    "env": "condition",
-    "title": "spatial nondegeneracy",
-    "status": "proved",
-    "lean": [
-      "NCG.SpatiallyNondegenerate",
-      "NCG.not_spatiallyNondegenerate_one",
-      "NCG.three_le_of_odd_nondegenerate",
-      "NCG.spatiallyNondegenerate_three"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:def:spatially-nondegenerate (proved there); Lean identifiers reused."
-  },
-  "thm:minimal-three-plus-one-updated": {
+  "thm:revision-MUB": {
     "env": "theorem",
-    "title": "minimal spatially nondegenerate endpoint",
-    "status": "proved",
-    "lean": [
-      "NCG.SpatiallyNondegenerate",
-      "NCG.not_spatiallyNondegenerate_one",
-      "NCG.three_le_of_odd_nondegenerate",
-      "NCG.spatiallyNondegenerate_three"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:def:spatially-nondegenerate (proved there); Lean identifiers reused. three_le_of_odd_nondegenerate + spatiallyNondegenerate_three give d=3 minimality."
+    "title": "Revision-line MUB theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
   },
-  "ledger:upstream-revision-and-dimension-status": {
+  "warning:frame-lift-firewall": {
+    "env": "warning",
+    "title": "Frame-lift firewall",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-relative-revision": {
+    "env": "theorem",
+    "title": "Relative-revision character theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:v5-bell-dephasing": {
+    "env": "corollary",
+    "title": "Source-local Bell dephasing",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-orientation-doublet": {
+    "env": "theorem",
+    "title": "Minimal orientation-doublet theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:orientation-firewall": {
+    "env": "warning",
+    "title": "Orientation firewall",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:screen-adjoint-nogo": {
+    "env": "theorem",
+    "title": "Screen--adjoint no-go",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-hankel-descent": {
+    "env": "theorem",
+    "title": "Covariant Hankel descent",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-rank-nine-erasure": {
+    "env": "theorem",
+    "title": "Rank-nine erasure source",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:v5-physical-relative-lifts": {
+    "env": "corollary",
+    "title": "Physical relative-revision lifts",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:predictive-hodge": {
+    "env": "theorem",
+    "title": "Predictive Hodge descent",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:no-relative-speed": {
+    "env": "corollary",
+    "title": "No sectorwise speed after common-origin descent",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:upstream-status": {
     "env": "ledger",
-    "title": "upstream revision and dimension status",
-    "status": "conditional_interface",
+    "title": "Upstream status",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
+    "note": ""
   },
-  "definition:finite-matrix-renewal-kernel": {
-    "env": "definition",
-    "title": "finite matrix renewal kernel",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "definition:positive-perron-pressure-and-complex-spectral-branch": {
-    "env": "definition",
-    "title": "positive Perron pressure and complex spectral branch",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:primitive-kernel": {
-    "env": "condition",
-    "title": "primitive recurrent finite kernel",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:critical-clock": {
-    "env": "condition",
-    "title": "critical renewal and Kesten-universality assumptions",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:conserved-regenerative-instrument": {
-    "env": "condition",
-    "title": "decoherent conserved four-state regenerative instrument",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:explicit-conserved-critical-rule": {
+  "thm:ordered-path-action": {
     "env": "theorem",
-    "title": "explicit conserved critical four-state rule",
+    "title": "Ordered-path Dirichlet identity",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": ""
   },
-  "cond:core-reduction": {
-    "env": "condition",
-    "title": "causal-state core reduction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "prop:first-passage-reachability-closure": {
-    "env": "proposition",
-    "title": "first-passage reachability closure",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "cond:complete-closure": {
-    "env": "condition",
-    "title": "effective first-passage record closure",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:signed-charged": {
-    "env": "condition",
-    "title": "free sign and cycle nondegeneracy",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "prin:k4-minimality": {
-    "env": "principle",
-    "title": "kernel-robust predictive-memory minimality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:k4-selection": {
+  "thm:action-marginality": {
     "env": "theorem",
-    "title": "conditional graph-minimality of \\(K_4\\)",
+    "title": "Cutoff-free action marginality",
     "status": "proved",
     "lean": [
-      "NCG.k4_selection",
-      "NCG.k4_fpf_involution",
-      "NCG.k3_no_fpf_involution",
-      "NCG.b1Complete"
+      "NCG.actionScale",
+      "NCG.marginality_vanishes",
+      "NCG.marginality_diverges",
+      "NCG.marginality_critical",
+      "NCG.action_marginality_selects"
     ],
-    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Complete enumeration: every complete graph on fewer than four vertices fails either the fixed-point-free involution (K1, K3 — decided over all permutations) or the nonzero cycle rank (K0, K2), while K4 satisfies both with b1(K4) = 3."
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The full continuum-limit trichotomy proved: the canonically normalized action scales as (h^4/h^D) c with c > 0 the curvature integral; for D < 4 the limit vanishes (marginality_vanishes), for D > 4 the action diverges to infinity (marginality_diverges, via tendsto_inv_nhdsGT_zero), and at D = 4 it is identically c (marginality_critical); hence a finite nonzero limit with no inserted cutoff power forces D = 4 and d = 3 (action_marginality_selects). The identification of the plaquette sum with the F^2 integral (the O(h^4) smooth-defect estimate) is the disclosed lattice-approximation layer."
   },
-  "thm:k4-topological-core-sm": {
+  "thm:absolute-gauge-normalization": {
     "env": "theorem",
-    "title": "the \\(K_4\\) topological core",
+    "title": "Unit-lapse gauge normalization",
+    "status": "proved",
+    "lean": [
+      "NCG.weak_index_one_generation",
+      "NCG.colour_index_one_generation",
+      "NCG.hypercharge_index_one_generation",
+      "NCG.gauge_coupling_normalization"
+    ],
+    "note": "NCG/Matter/GaugeNormalization.lean: the one-generation Dynkin index sums are computed exactly — four weak doublets give I2 = 2, four colour triplets give I3 = 2, and the hypercharge square sum over the fifteen Weyl components (6 x 1/6, 3 x 2/3, 3 x -1/3, 2 x -1/2, 1 x -1) gives I_Y = 10/3 — and the boxed normalization g^2 I = 2 iff g^2 = 2/I is proved. The identification of the bosonic action with the extensive expected odd-record count per normalized lapse (fixing the constant 2) is the declared normalization input. Standard axioms only."
+  },
+  "warning:scope-of-the-absolute-boundary": {
+    "env": "warning",
+    "title": "Scope of the absolute boundary",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:b1-three": {
+    "env": "theorem",
+    "title": "Rank-three cycle fibre",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": ""
   },
-  "prop:subdivision-conductances-sm": {
-    "env": "proposition",
-    "title": "subdivision lengths become core conductances",
+  "thm:k4-representation": {
+    "env": "theorem",
+    "title": "Sign-twisted standard representation",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": ""
   },
-  "corollary:conditional-generation-fibre-identification": {
+  "cor:democratic-scalar": {
     "env": "corollary",
-    "title": "conditional generation-fibre identification",
+    "title": "Democratic scalar obstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v4-decomp": {
+    "env": "theorem",
+    "title": "Multiplicity-free Klein decomposition",
     "status": "proved",
     "lean": [
-      "NCG.finrank_K4Carrier",
-      "NCG.K4CarrierEquiv",
-      "NCG.k4Fill",
-      "NCG.k4Fill_mem"
+      "NCG.kleinPattern",
+      "NCG.klein_separating",
+      "NCG.kleinK1",
+      "NCG.kleinK2"
     ],
-    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. dim_C K_gen = 3, by the explicit linear equivalence of the circulation carrier with C^3 (free coordinates alpha_01, alpha_02, alpha_12). The threefold charged-matter replication via the tensor ansatz is the stated model postulate."
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Character form: the joint eigenvalue patterns of the two Klein involutions on the rank-three carrier are three distinct nontrivial characters separating the lines. The identification of the K4 cycle action with these characters is the graph-carrier layer. The multiplicity-free endomorphism algebra End_{V4}(K_gen) = C^3 is the direct consequence of the three separating characters (klein_separating)."
   },
-  "lem:constant-bipartite-updated": {
+  "interpretation:untitled": {
+    "env": "interpretation",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
+  },
+  "lem:constant-sign-bipartite": {
     "env": "lemma",
-    "title": "constant class and bipartiteness",
+    "title": "Constant signing and bipartiteness",
     "status": "proved",
     "lean": [
       "NCG.k4_constant_not_coboundary"
     ],
     "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The K4 content: the constant edge cochain on K4 is not a coboundary ([c] != 0), decided over all two-colourings. The general constant-coboundary-iff-bipartite equivalence for arbitrary connected graphs is the remaining general-graph layer."
   },
-  "thm:unique-antibalanced-updated": {
+  "thm:unique-antibalanced-class": {
     "env": "theorem",
-    "title": "unique nonzero tetrahedrally invariant class",
+    "title": "Unique nonzero tetrahedrally invariant sign class",
     "status": "conditional_interface",
     "lean": [],
     "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure. H^1(K4;F2) = F2^3 with S4-action; finite fixed-point computation, decide-certifiable on existing Multigraph cohomology."
   },
-  "thm:signed-k4-spectra-updated": {
+  "thm:signed-tetrahedral-spectra": {
     "env": "theorem",
-    "title": "signed tetrahedral spectra",
+    "title": "Signed tetrahedral spectra",
     "status": "proved",
     "lean": [
       "NCG.unsignedK4",
@@ -648,9 +288,9 @@
     ],
     "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. All three switching-orbit spectra certified by complete eigenbases: explicit eigenvector equations for {1, -1/3^3} (trivial), {-1, 1/3^3} (antibalanced [c]), and {+-sqrt(5)/3, +-1/3} (mixed representative), with pairwise-distinct eigenvalues (so the exhibited quadruples are the full spectra in dimension four). Perron criticality rho = 1 holds exactly for {0, [c]}."
   },
-  "corollary:canonical-connected-signed-cover": {
+  "cor:canonical-signed-cover": {
     "env": "corollary",
-    "title": "canonical connected signed cover",
+    "title": "Canonical connected critical cover",
     "status": "proved",
     "lean": [
       "NCG.mixed_radius_subcritical",
@@ -659,532 +299,33 @@
     ],
     "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The mixed orbit has strict Perron deficiency (every eigenvalue modulus <= sqrt(5)/3 < 1), so criticality + connectedness select [c] uniquely; connectedness of the [c]-cover is the pre-existing signedCover_connected_of_ne_zero."
   },
-  "thm:nerve-torsor-updated": {
+  "thm:nerve-torsor": {
     "env": "theorem",
-    "title": "nerve-torsor classification",
+    "title": "Nerve torsor for anti-balanced cell phases",
     "status": "conditional_interface",
     "lean": [],
     "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
   },
-  "thm:global-perron-nerve-updated": {
+  "thm:global-perron-selection": {
     "env": "theorem",
-    "title": "global criticality removes nerve holonomy",
+    "title": "Finite-volume Perron selection of the global class",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": ""
   },
-  "thm:cyclic-nerve-gap-updated": {
+  "thm:oriented-edge-quotient": {
     "env": "theorem",
-    "title": "exact cyclic-nerve deficiency",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "ledger:local-versus-global-signed-data": {
-    "env": "ledger",
-    "title": "local versus global signed data",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "prop:positive-harmonic-gram-response": {
-    "env": "proposition",
-    "title": "positive harmonic Gram response",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:k4-conductance-response-completeness": {
-    "env": "theorem",
-    "title": "response completeness of \\(K_4\\) conductance deformations",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "cor:k4-cp-even-expressivity": {
-    "env": "corollary",
-    "title": "local CP-even expressivity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "proposition:bare-s-4-cell-is-not-a-gauge-group": {
-    "env": "proposition",
-    "title": "bare \\(S_4\\) cell is not a gauge group",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "proposition:two-k-4-triplets-are-not-colour": {
-    "env": "proposition",
-    "title": "two \\(K_4\\) triplets are not colour",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "definition:shadow-map": {
-    "env": "definition",
-    "title": "shadow map",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "theorem:existence-and-nonuniqueness-of-the-lift": {
-    "env": "theorem",
-    "title": "existence and nonuniqueness of the \\(\\Zfour\\) lift",
+    "title": "Oriented-edge predictive quotient",
     "status": "proved",
     "lean": [
-      "NCG.Multigraph.H1Z4",
-      "NCG.Multigraph.H1Z4.reduce_surjective",
-      "NCG.Multigraph.card_H1Z4_of_connected",
-      "NCG.Multigraph.card_fibre_reduce",
-      "NCG.Multigraph.amplitudeLift_exists",
-      "NCG.Multigraph.amplitudeLift_card",
-      "NCG.Multigraph.no_canonical_z4_section",
-      "NCG.Multigraph.order_four_forced",
-      "NCG.Multigraph.Walk.holonomy4_reduce"
+      "NCG.oriented_edge_separation",
+      "NCG.oriented_edge_quotient"
     ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:lem:z4-lift-surjects, renewal_emergence:prop:z4-lift (proved there); Lean identifiers reused."
+    "note": "NCG/Matter/GaugeNormalization.lean: distinct terminal oriented edges of K4 have distinct one-step future laws (kernel-checked over all pairs, including each reversed pair), so under the last-edge assumption (ass:last-edge-law, the declared hypothesis) two nontrivial histories have identical future laws iff they share the terminal oriented edge: the predictive quotient is canonically E(K4) oriented. Standard axioms only."
   },
-  "thm:minimal-z4-completion": {
+  "thm:family-protected-carrier": {
     "env": "theorem",
-    "title": "minimal finite square-root completion",
-    "status": "proved",
-    "lean": [
-      "NCG.orderOf_eq_four_of_sq_eq_neg_one",
-      "NCG.zmod4_sqrt_neg_one"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:minimal-z4-amplitude-lift (proved there); Lean identifiers reused."
-  },
-  "proposition:real-shadow-conservativity": {
-    "env": "proposition",
-    "title": "real-shadow conservativity",
-    "status": "proved",
-    "lean": [
-      "NCG.amplitudePhase_sq_eq_of_reduction_eq"
-    ],
-    "note": "TRIAGE covered. Same content as lorentzian_emergence:cor:z4-conservative-real-layer (proved there); Lean identifiers reused."
-  },
-  "corollary:division-of-labour": {
-    "env": "corollary",
-    "title": "division of labour",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "prop:coefficient-twist-generation-obstruction": {
-    "env": "proposition",
-    "title": "coefficient-twist obstruction to generation protection",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:z4-full-orbits": {
-    "env": "theorem",
-    "title": "full amplitude-orbit classification",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure. Finite orbit enumeration (64 classes under S4 x conj); decide-certifiable."
-  },
-  "thm:z4-residual-orbits": {
-    "env": "theorem",
-    "title": "residual orbit refinement",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure. Finite orbit enumeration; decide-certifiable."
-  },
-  "thm:pair-orbit-invariance": {
-    "env": "theorem",
-    "title": "single-sector and pair-orbit invariance",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "computationalrecord:relative-alignment-and-frame-audits": {
-    "env": "computationalrecord",
-    "title": "relative-alignment and frame audits",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "prop:mode-resolved-residue-test-sm": {
-    "env": "proposition",
-    "title": "mode-resolved residue test",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "thm:hierarchical-response-requirements-sm": {
-    "env": "theorem",
-    "title": "response requirements for hierarchical relative frames",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "prop:real-shadow-vanishing": {
-    "env": "proposition",
-    "title": "real-shadow CP-odd trace vanishing",
-    "status": "proved",
-    "lean": [
-      "NCG.real_shadow_mul",
-      "NCG.real_trace_im_zero"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Real-shadow matrices are closed under products and have real traces; the m-fold cyclic-trace statement follows by iterating real_shadow_mul."
-  },
-  "proposition:spectral-curvature-guardrail": {
-    "env": "proposition",
-    "title": "spectral-curvature guardrail",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "proposition:scalar-frame-no-go": {
-    "env": "proposition",
-    "title": "scalar frame no-go",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "definition:finite-real-even-spectral-triple": {
-    "env": "definition",
-    "title": "finite real even spectral triple",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:finite-collapse": {
-    "env": "condition",
-    "title": "predictive finite collapse",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:common-origin": {
-    "env": "condition",
-    "title": "common modular origin",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:ko-six": {
-    "env": "condition",
-    "title": "KO-dimension six",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:order-one": {
-    "env": "condition",
-    "title": "zero-order and first-order conditions",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "proposition:finite-triple-verification-criterion": {
-    "env": "proposition",
-    "title": "finite-triple verification criterion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "definition:frobenius-schur-type": {
-    "env": "definition",
-    "title": "Frobenius--Schur type",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:weak-pseudoreal": {
-    "env": "condition",
-    "title": "weak pseudoreal sector",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:complex-colour": {
-    "env": "condition",
-    "title": "complex colour sector",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:scalar-block": {
-    "env": "condition",
-    "title": "scalar charged block",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "prin:finite-algebra-minimality": {
-    "env": "principle",
-    "title": "finite algebra minimality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:finite-algebra": {
-    "env": "theorem",
-    "title": "minimal algebra realizing the assumed sector types",
-    "status": "proved",
-    "lean": [
-      "NCG.DivType",
-      "NCG.canonicalBlocks",
-      "NCG.realizesSectors",
-      "NCG.sector_lower_bounds",
-      "NCG.minimal_block_data_unique",
-      "NCG.AF",
-      "NCG.AF_semisimple",
-      "NCG.finrank_AF"
-    ],
-    "note": "TRIAGE proved (Phase 3 Artin-Wedderburn layer, 2026-07-29). Sorry-free, standard axioms. The conditional classification exactly as the manuscript frames it: Wedderburn block data over R (division type in the Frobenius alternative R/C/H — encoded as the DivType datatype, matching the sector-type conditions cond:weak-pseudoreal / cond:complex-colour / cond:scalar-block — plus matrix size). sector_lower_bounds: any data realizing the scalar-complex, pseudoreal, and complex-rank-three sectors has >= 3 blocks and real dimension >= 24; minimal_block_data_unique: at the Pareto-minimal block number the data is unique up to permutation = [(C,1),(H,1),(C,3)]; AF_semisimple + finrank_AF: the canonical realization C x H x M3(C) is a semisimple real algebra attaining the dimension floor 24 (Mathlib Wedderburn-Artin instances + quaternion finrank). Disclosed: the Frobenius theorem itself (blocks of a finite-dimensional real division algebra are R/C/H) is not in Mathlib and enters as the typed encoding, consistent with the manuscript proof; the SM charged bimodule selection is a separate representation-layer hypothesis, as stated in the theorem itself."
-  },
-  "thm:assoc-generation-nogo": {
-    "env": "theorem",
-    "title": "associative generation replication no-go",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "corollary:conditional-three-generation-matter-space": {
-    "env": "corollary",
-    "title": "conditional three-generation matter space",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "cond:unimodularity": {
-    "env": "condition",
-    "title": "specified unimodularity convention",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:gauge-group": {
-    "env": "theorem",
-    "title": "faithful Standard-Model global gauge group",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory. Physlib defines GaugeGroupI = SU(3)xSU(2)xU(1) with its Z6 subgroup and quotient (Particles/StandardModel/Basic.lean); the kernel computation matches."
-  },
-  "cond:sterile-neutrality": {
-    "env": "condition",
-    "title": "sterile neutrality and hypercharge normalisation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "theorem:conditional-hypercharge-ratios-and-normalisation": {
-    "env": "theorem",
-    "title": "conditional hypercharge ratios and normalisation",
-    "status": "proved",
-    "lean": [
-      "NCG.hypercharge_ratios",
-      "NCG.hypercharge_values"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Linear algebra over Q; physlib has the matching ACC framework."
-  },
-  "corollary:explicit-anomaly-cancellation": {
-    "env": "corollary",
-    "title": "explicit anomaly cancellation",
-    "status": "proved",
-    "lean": [
-      "NCG.anomaly_cancellation"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. All four anomaly equations hold identically on the derived charges (ring). Physlib proves the same conditions independently."
-  },
-  "theorem:conditional-higgs-inner-fluctuation": {
-    "env": "theorem",
-    "title": "conditional Higgs inner fluctuation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
-  },
-  "thm:projective-square-updated": {
-    "env": "theorem",
-    "title": "projective predictive-square theorem",
-    "status": "proved",
-    "lean": [
-      "NCG.projDefect_mem_center_of_ad",
-      "NCG.projDefect_cocycle",
-      "NCG.RevisionFamily.commutator_eq",
-      "NCG.commutator_R_sq_eq_one",
-      "NCG.krein_exchange_path",
-      "NCG.radical_iff_central",
-      "NCG.card_radical_characters",
-      "NCG.even_finrank_primitiveQuotient",
-      "NCG.inducedForm_separating",
-      "NCG.CommonOrigin.piKron"
-    ],
-    "note": "TRIAGE covered. Same content as flagship:thm:projective-revision (proved there); Lean identifiers reused."
-  },
-  "thm:predictive-dirichlet-action-updated": {
-    "env": "theorem",
-    "title": "predictive ordered-path Dirichlet action",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). The Hilbert-Schmidt content (basis sum = (1/4)||G_ab - G_ba||_HS^2) is proved as NCG.one_event_odd_record / NCG.odd_record_hs_sum in Phase 1; the projection Dirichlet-form presentation with the paper-specific Q, G, V operators remains."
-  },
-  "thm:one-event-odd-record-updated": {
-    "env": "theorem",
-    "title": "one-event odd-record identity",
-    "status": "proved",
-    "lean": [
-      "NCG.one_event_odd_record",
-      "NCG.odd_record_hs_sum"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. p_odd(psi) = (1/4)||DG psi||^2 and the orthonormal-basis sum = (1/4)||DG||_HS^2."
-  },
-  "cond:unit-lapse-action-updated": {
-    "env": "condition",
-    "title": "unit-lapse predictive action",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:absolute-action-normalisation-updated": {
-    "env": "theorem",
-    "title": "absolute one-lapse action normalisation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:action-marginality-updated": {
-    "env": "theorem",
-    "title": "parameter-free action marginality",
-    "status": "proved",
-    "lean": [
-      "NCG.actionScale",
-      "NCG.marginality_vanishes",
-      "NCG.marginality_diverges",
-      "NCG.marginality_critical",
-      "NCG.action_marginality_selects"
-    ],
-    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The full continuum-limit trichotomy proved: the canonically normalized action scales as (h^4/h^D) c with c > 0 the curvature integral; for D < 4 the limit vanishes (marginality_vanishes), for D > 4 the action diverges to infinity (marginality_diverges, via tendsto_inv_nhdsGT_zero), and at D = 4 it is identically c (marginality_critical); hence a finite nonzero limit with no inserted cutoff power forces D = 4 and d = 3 (action_marginality_selects). The identification of the plaquette sum with the F^2 integral (the O(h^4) smooth-defect estimate) is the disclosed lattice-approximation layer."
-  },
-  "thm:predictive-gauge-normalisation-updated": {
-    "env": "theorem",
-    "title": "predictive gauge normalisation",
-    "status": "proved",
-    "lean": [
-      "NCG.predictive_gauge_normalisation"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
-  },
-  "ledger:what-the-absolute-gauge-theorem-does-and-does-not-use": {
-    "env": "ledger",
-    "title": "what the absolute gauge theorem does and does not use",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "ledger:scope-of-the-gauge-derivation": {
-    "env": "ledger",
-    "title": "scope of the gauge derivation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "def:status-classes": {
-    "env": "definition",
-    "title": "status classes",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "ledger:evidentiary-rule": {
-    "env": "ledger",
-    "title": "evidentiary rule",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "definition:yukawa-slots": {
-    "env": "definition",
-    "title": "Yukawa slots",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:conditional-yukawa": {
-    "env": "theorem",
-    "title": "conditional structural Yukawa theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
-  },
-  "corollary:architecture-versus-entries": {
-    "env": "corollary",
-    "title": "architecture versus entries",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "def:forced-admissible": {
-    "env": "definition",
-    "title": "forced-admissible operator",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:generation-transparency": {
-    "env": "theorem",
-    "title": "generation transparency",
-    "status": "proved",
-    "lean": [
-      "NCG.kronSpan",
-      "NCG.kronAlgebra",
-      "NCG.kronSpan_mul_mem",
-      "NCG.kronSpan_conjTranspose_mem",
-      "NCG.kronAlgebra_inv_mem",
-      "NCG.inv_mem_of_isUnit"
-    ],
-    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The product forms sum X_k (x) F_k are a subalgebra of the bipartite matrix algebra, closed under sums, products (mixed-product identity), adjoints, and resolvents/Feshbach inverses (Cayley-Hamilton inverse membership) — the finite factors cannot create a generation-space asymmetry. The finite-partial-trace clause is the remaining bookkeeping."
-  },
-  "corollary:typed-data-limitation": {
-    "env": "corollary",
-    "title": "typed-data limitation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "corollary:revised-k-4-flavour-boundary": {
-    "env": "corollary",
-    "title": "revised \\(K_4\\) flavour boundary",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "cond:last-edge-sufficient": {
-    "env": "condition",
-    "title": "last-edge-sufficient nonbacktracking law",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:oriented-edge-predictive-quotient": {
-    "env": "theorem",
-    "title": "oriented edges as a predictive quotient",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "definition:oriented-edge-space": {
-    "env": "definition",
-    "title": "oriented-edge space",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:two-parameter-transfer": {
-    "env": "theorem",
-    "title": "classification of incidence-local covariant transfers",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:family-wide-carrier": {
-    "env": "theorem",
-    "title": "family-wide protection of the circulation carrier",
+    "title": "Family-wide protection of the circulation carrier",
     "status": "proved",
     "lean": [
       "NCG.transferT",
@@ -1193,38 +334,21 @@
     ],
     "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The whole incidence-local covariant transfer family T_{w,b} acts on the antisymmetric divergence-free circulation carrier by the scalar w - b, for every (w, b) — the carrier is an invariant three-dimensional eigenspace, and its orthogonal isotypic complement statement follows from invariance."
   },
-  "corollary:what-the-nonbacktracking-rule-fixes": {
-    "env": "corollary",
-    "title": "what the nonbacktracking rule fixes",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "definition:amplitude-nonbacktracking-operator": {
-    "env": "definition",
-    "title": "amplitude nonbacktracking operator",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:exact-amplitude-carrier": {
+  "thm:exact-oriented-carrier": {
     "env": "theorem",
-    "title": "exact protected carrier",
+    "title": "Exact protected amplitude carrier",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (partial, K4 cluster 2026-07-29). The eigenvalue-one circulation sector is proved: B0 = T_{1,0} fixes the carrier pointwise (NCG.transfer_carrier_eigen) and the carrier is exactly three-dimensional (NCG.finrank_K4Carrier) — Ker(B0 - 1) contains the canonical rank-three sector. The full 12x12 characteristic polynomial (x-2)(x-1)^3(x+1)^2(x^2+x+2)^3 and the equality Ker(B0-1) = carrier remain (symbolic charpoly computation)."
+    "lean": [
+      "NCG.circulation_carrier_fixed",
+      "NCG.tri_cochains_harmonic",
+      "NCG.tri_cochains_independent"
+    ],
+    "note": "Partially proved in NCG/Matter/CirculationCarrier.lean: the harmonic embedding fixed-point identity (B0 J alpha)(i,j) = alpha(i,j) is proved for every antisymmetric divergence-free one-cochain (circulation_carrier_fixed), and the three triangle circulations are verified harmonic and linearly independent (kernel-checked integer cores), giving dim Ker(B0 - I) >= 3 = dim H^1(K4;C). Open: the exact characteristic polynomial (x-2)(x-1)^3(x+1)^2(x^2+x+2)^3 and the matching upper bound dim Ker(B0 - I) = 3."
   },
-  "prop:k4-generation-module-current": {
-    "env": "proposition",
-    "title": "representation decomposition",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:flavour-stabilizer-split": {
+  "thm:stabilizer-port-frame": {
     "env": "theorem",
-    "title": "tetrahedral stabilizer decomposition",
-    "status": "proved",
+    "title": "Exact \\(1+2\\) stabilizer decomposition and port frame",
+    "status": "conditional_interface",
     "lean": [
       "NCG.permAct",
       "NCG.swap12_hcyc",
@@ -1233,27 +357,11 @@
       "NCG.swap23_q02",
       "NCG.swap12_q03"
     ],
-    "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Both generating transpositions of the vertex stabilizer S3 negate the opposite cycle (Ch is the sign representation) and permute the three ports naturally (whose sum-zero part is the standard doublet) — the restriction H1(K4)|_{S3} = sgn + Std, with the signed average = P_h as the sign-isotypic projection."
+    "note": "Decomposition half proved (archived thm:flavour-stabilizer-split, NCG.permAct and the swap action lemmas): both generating transpositions of the vertex stabilizer S3 negate the opposite cycle (sign line) and permute the three incident ports naturally, giving H1(K4)|_{S3} = sgn + W2. Open: the port-frame Gram data q01 + q02 + q03 = 0, |q0j|^2 = 1/2, <q0j, q0k> = -1/4."
   },
-  "lem:incident-a2-frame": {
-    "env": "lemma",
-    "title": "incident-port \\(A_2\\) frame",
-    "status": "proved",
-    "lean": [
-      "NCG.q01",
-      "NCG.q02",
-      "NCG.q03",
-      "NCG.edgeInner",
-      "NCG.a2_frame_sum",
-      "NCG.a2_frame_norm",
-      "NCG.a2_frame_inner",
-      "NCG.a2_frame_tight"
-    ],
-    "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The harmonic incident ports as explicit carrier elements: q01+q02+q03 = 0, norms 1/2, pairwise inner products -1/4 (the A2 root geometry), and the tight-frame resolution acting by 3/4 on the frame plane (= (3/4)P_std on the standard doublet)."
-  },
-  "thm:sequential-generation-flag": {
-    "env": "theorem",
-    "title": "canonical sequential generation flag",
+  "cor:sequential-flag": {
+    "env": "corollary",
+    "title": "Sequential generation flag",
     "status": "proved",
     "lean": [
       "NCG.hcyc",
@@ -1265,357 +373,498 @@
     ],
     "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The canonical flag: the opposite cycle h spans the heavy line (orthogonal to all ports, eigenvalue a under the flag operator), and the port operator acts on the standard plane by the exact 2x2 block [[b/2, -b/4], [-c/4, c/2]] in the (q01, q02) frame — the first port lifts one line, the second the remaining line."
   },
-  "corollary:exact-sequential-eigenvalues": {
-    "env": "corollary",
-    "title": "exact sequential eigenvalues",
+  "thm:two-cell-splitting": {
+    "env": "theorem",
+    "title": "Even/odd triplet splitting",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+  },
+  "thm:shared-edge-sandwich": {
+    "env": "theorem",
+    "title": "Shared-edge cross Gram and chiral sandwich",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+  },
+  "prop:row-normalization-collapse": {
+    "env": "proposition",
+    "title": "Probability normalization destroys the fixed carrier on the irregular gluing",
     "status": "proved",
     "lean": [
-      "NCG.sequential_eigenvalues",
-      "NCG.flag_block_action"
+      "NCG.stochastic_fixed_constant",
+      "NCG.g2_strongly_connected",
+      "NCG.row_normalised_collapse",
+      "NCG.row_normalised_ones_fixed"
     ],
-    "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The standard-plane eigenvalues are exactly lambda_pm = (b + c pm sqrt(b^2 - bc + c^2))/4: verified as the roots of the flag-block characteristic polynomial lambda^2 - ((b+c)/2)lambda + 3bc/16. The heavy eigenvalue is a (flag_heavy_line); the c << b << a asymptotic reading follows."
+    "note": "NCG/Matter/RowCollapse.lean: the elementary Perron maximum principle is proved from scratch (stochastic_fixed_constant: a fixed vector of a nonnegative row-stochastic matrix with strongly connected positivity digraph is constant), the directed nonbacktracking graph of the shared-edge G2 complex (two K4 cells glued along {0,1}, 22 oriented edges) is proved strongly connected by kernel-checked forward/backward closures from the shared edge plus a path-extraction induction (g2_strongly_connected), and hence every fixed vector of the row-normalised T_{G2} (any nonnegative row-stochastic transition supported exactly on the nonbacktracking continuations) is constant: Ker(T-I) = C.1, dim = 1 (row_normalised_collapse, ones_fixed). The contrasting 6-dimensional fixed carrier JH^1(G2;C) of the unnormalised amplitude operator is the declared cohomological count b1(G2) = 6. Standard axioms only."
   },
-  "interpretation:untitled": {
+  "ledger:recovered-k-4-amplitude-status": {
+    "env": "ledger",
+    "title": "Recovered \\(K_4\\) amplitude status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-pairwise-defect": {
+    "env": "theorem",
+    "title": "Exact pairwise-source defect",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:v5-holistic-defect": {
+    "env": "corollary",
+    "title": "Exact holistic Hankel defect",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:coherence-before-squaring-firewall": {
+    "env": "warning",
+    "title": "Coherence-before-squaring firewall",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:edge-povm": {
+    "env": "theorem",
+    "title": "Tight tetrahedral edge POVM",
+    "status": "proved",
+    "lean": [
+      "NCG.edge_gram_sum",
+      "NCG.edge_gram_det",
+      "NCG.edge_gram_mul_inv",
+      "NCG.edge_gram_posdef",
+      "NCG.edge_povm_tight",
+      "NCG.edge_povm_unit"
+    ],
+    "note": "NCG/Matter/EdgePOVM.lean: for the explicit harmonic frame r_e of the six K4 edge lines, the Gram sum G0 = [[3,1,-1],[1,3,1],[-1,1,3]] with det 16 is verified (edge_gram_sum, edge_gram_det), G0 is positive definite via the explicit sum-of-squares x^2+(x+y)^2+(x-z)^2+(y+z)^2+y^2+z^2 (edge_gram_posdef, so the whitening G0^{-1/2} exists), and for ANY symmetric whitening S with S G0 S = 1 the boxed tightness sum_e u_e u_e^T = 2 I3 is proved (edge_povm_tight); each u_e is a unit vector since r_e^T G0^{-1} r_e = 1/2 for all six edges (edge_povm_unit, with the explicit inverse certified by edge_gram_mul_inv). Standard axioms only."
+  },
+  "prop:edge-M3": {
+    "env": "proposition",
+    "title": "Full generation algebra from edge lines",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:response-isomorphism": {
+    "env": "theorem",
+    "title": "Edge-score/generation-response isomorphism",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:conductance-completeness": {
+    "env": "corollary",
+    "title": "Conductance-response completeness",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+  },
+  "interpretation:untitled--2": {
     "env": "interpretation",
     "title": "",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
+    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
-  "thm:general-circulation-carrier": {
+  "thm:perron-response": {
     "env": "theorem",
-    "title": "circulation injection and an equality criterion",
+    "title": "Local Perron response",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (partial, K4 cluster 2026-07-29). The K4 injection is proved: antisymmetric divergence-free cochains satisfy B0(J alpha) = J alpha (NCG.transfer_carrier_eigen at (w,b) = (1,0)). The general-graph version and the |E| != |V| equality criterion remain."
+    "note": ""
   },
-  "thm:two-cell-triplet-splitting": {
+  "thm:quark-source-CP": {
     "env": "theorem",
-    "title": "two shared-edge cells split into two triplets",
+    "title": "Exact quark source spectrum and CP invariant",
+    "status": "proved",
+    "lean": [
+      "NCG.quark_source_hermitian",
+      "NCG.quark_source_charpoly",
+      "NCG.quark_commutator",
+      "NCG.quark_source_cp_invariant"
+    ],
+    "note": "NCG/Matter/QuarkSourceCP.lean: D_u and D_d are expressed in the rational edge-line (Gram) coordinates of the frame u12, u13, u23 (verified numerically similar to the projector form; all displayed quantities are basis-invariant). Proved exactly: G-Hermiticity of both sources (Hermiticity w.r.t. the frame inner product), the common characteristic polynomial lam(lam^2 - lam/2 - 3/8) for every lam (hence spec = {0, (1 -/+ sqrt7)/4}), the commutator matrix, and the boxed CP data det[D_u,D_d] = i/32 and Tr[D_u,D_d]^3 = 3i/32 (phase exactly +pi/2). The change of basis to the orthonormal frame and the CB/BC phase pairing selecting 1 +/- i are the declared inputs. Standard axioms only."
+  },
+  "warning:not-the-physical-ckm-matrix": {
+    "env": "warning",
+    "title": "Not the physical CKM matrix",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:k4-and-flavour-carrier-status": {
+    "env": "ledger",
+    "title": "K4 and flavour-carrier status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "warning:load-bearing-assumptions": {
+    "env": "warning",
+    "title": "Load-bearing assumptions",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "lem:algebra-enumeration": {
+    "env": "lemma",
+    "title": "Bounded algebra enumeration",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "note": ""
   },
-  "thm:shared-edge-chiral-sandwich": {
+  "lem:sector-irreducibility": {
+    "env": "lemma",
+    "title": "Sector accessibility implies irreducibility",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:dirac-connectivity": {
+    "env": "proposition",
+    "title": "Conditional Dirac connectivity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:pseudoreal-pair": {
+    "env": "lemma",
+    "title": "Pseudoreal pair",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:minimal-diagram": {
     "env": "theorem",
-    "title": "shared-edge cross Gram and exact chiral sandwich",
+    "title": "Conditional minimal charged diagram",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "note": ""
   },
-  "warning:untitled": {
+  "thm:three-generation-assembly": {
+    "env": "theorem",
+    "title": "Three-generation assembly",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:assoc-gen-no-go": {
+    "env": "proposition",
+    "title": "Associative generation no-go",
+    "status": "conditional_interface",
+    "lean": [
+      "NCG.kronSpan",
+      "NCG.kronAlgebra",
+      "NCG.kronSpan_mul_mem",
+      "NCG.kronSpan_conjTranspose_mem",
+      "NCG.kronAlgebra_inv_mem",
+      "NCG.inv_mem_of_isUnit"
+    ],
+    "note": "Supporting layer proved (archived thm:generation-transparency, NCG.kronAlgebra and the Kronecker closure lemmas): the product forms sum X_k (x) F_k are a subalgebra of the bipartite matrix algebra closed under sums, products, adjoints and Feshbach inverses, so the identically-represented finite factors cannot create generation-space structure. Open: packaging this as the stated invariance claim (no invariant of pi(a) (x) I_N distinguishes the multiplicity N)."
+  },
+  "thm:gauge-group": {
+    "env": "theorem",
+    "title": "Faithful Standard-Model gauge group",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory. Physlib defines GaugeGroupI = SU(3)xSU(2)xU(1) with its Z6 subgroup and quotient (Particles/StandardModel/Basic.lean); the kernel computation matches."
+  },
+  "thm:anomalies": {
+    "env": "theorem",
+    "title": "One-generation anomaly cancellation",
+    "status": "proved",
+    "lean": [
+      "NCG.anomaly_su3_sq_u1",
+      "NCG.anomaly_su2_sq_u1",
+      "NCG.anomaly_u1_cubed",
+      "NCG.anomaly_grav_u1",
+      "NCG.anomaly_witten_doublets"
+    ],
+    "note": "NCG/Matter/SMEasyV5.lean: the SU(3)^2 U(1), SU(2)^2 U(1), U(1)^3 and grav-U(1) anomaly sums of one generation vanish exactly, and the number of weak doublets is even (Witten anomaly). Standard axioms only."
+  },
+  "thm:yukawa-slots": {
+    "env": "theorem",
+    "title": "Structural Yukawa theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
+  },
+  "warning:untitled--2": {
     "env": "warning",
     "title": "",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
+    "note": ""
   },
-  "prop:row-normalised-collapse": {
-    "env": "proposition",
-    "title": "row normalisation collapses the fixed carrier",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "prop:interface-odd-channel": {
-    "env": "proposition",
-    "title": "interface obstruction to extending one-cell parity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "rec:two-cell-light-triplet": {
-    "env": "computationalrecord",
-    "title": "exchange-symmetric light-triplet separation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "ledger:internal-carrier-versus-spacetime-curvature": {
+  "ledger:finite-matter-and-gauge-status": {
     "env": "ledger",
-    "title": "internal carrier versus spacetime curvature",
+    "title": "Finite matter and gauge status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "prop:five-channel-decomp": {
+    "env": "proposition",
+    "title": "Five-channel representation theorem",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
+    "note": ""
   },
-  "prop:reducing-carrier": {
-    "env": "proposition",
-    "title": "the symmetric carrier is reducing",
-    "status": "proved",
-    "lean": [
-      "NCG.condensate_ports"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. The reducing-port content; the QR-factorisation warning clause is prose."
-  },
-  "thm:exact-feshbach": {
+  "thm:horizontal-Julia": {
     "env": "theorem",
-    "title": "finite-dimensional Feshbach identity",
+    "title": "Horizontal Julia first jet",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:no-unconditional-65-32-primitive-trace": {
+    "env": "warning",
+    "title": "No unconditional \\(65/32\\) primitive trace",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-nambu-compression": {
+    "env": "theorem",
+    "title": "Twenty-four-to-six Nambu compression",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:v5-pauli-volume": {
+    "env": "corollary",
+    "title": "Pauli-volume theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-choi-lie": {
+    "env": "theorem",
+    "title": "Choi--Lie interaction-completeness theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-sign-response": {
+    "env": "theorem",
+    "title": "Canonical sign response",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-block-hankel-packet": {
+    "env": "theorem",
+    "title": "Blind common-frame block-Hankel reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:bkm-hessian": {
+    "env": "theorem",
+    "title": "BKM path curvature",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:fixed-reset-action": {
+    "env": "theorem",
+    "title": "Fixed-reset action",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:absolute-scale": {
+    "env": "warning",
+    "title": "Absolute scale",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:higgs-representation": {
+    "env": "theorem",
+    "title": "Conditional Higgs representation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:gauge-trace": {
+    "env": "theorem",
+    "title": "High-scale gauge trace relation",
     "status": "proved",
     "lean": [
-      "NCG.exact_feshbach_isUnit",
-      "NCG.exact_feshbach_inv"
+      "NCG.gauge_trace_weinberg"
     ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Via Mathlib Schur-complement machinery; the algebraic-multiplicity clause of the analytic Feshbach determinant is not yet formalized."
+    "note": "NCG/Matter/SMEasyV5.lean: with the common-trace normalization g1^2 = (3/5)g^2 the tree-level matching value sin^2 theta_W = 3/8 is proved. The trace relation itself comes from the proved Dynkin sums (NCG.hypercharge_index_one_generation). Standard axioms only."
   },
-  "prop:condensate-ports": {
-    "env": "proposition",
-    "title": "condensate-induced ports",
+  "thm:single-spurion-hessian": {
+    "env": "theorem",
+    "title": "Single-spurion protection",
     "status": "proved",
     "lean": [
-      "NCG.condensate_ports"
+      "NCG.spurionHessian",
+      "NCG.spurion_perp_orthogonal",
+      "NCG.perp_exact_eigenvector"
     ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+    "note": "PROVED (2026-07-30, block mechanics). The decoupling mechanism is formalized: the antisymmetric pairing r^dagger(eps rbar) vanishes identically (NCG.spurion_perp_orthogonal), and in the boxed block form the perpendicular combination H_perp is an exact eigenvector with eigenvalue m_H^2 (NCG.perp_exact_eigenvector on NCG.spurionHessian) — no portal copies or gauge-invariant spectral coefficients can rotate this line, since the boxed matrix is the general form. The SU(2)_R-covariance classification producing the boxed block form (the generated-invariants argument) is the declared representation-theoretic step, as in the manuscript proof."
   },
-  "construction:self-adjoint-dilation-of-the-nonnormal-environment": {
-    "env": "construction",
-    "title": "self-adjoint dilation of the nonnormal environment",
+  "thm:v5-persistence": {
+    "env": "theorem",
+    "title": "Primitive persistence rigidity",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": ""
   },
-  "proposition:full-space-validation-gate": {
+  "corollary:exact-ratio-status": {
+    "env": "corollary",
+    "title": "Exact ratio status",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:threshold-loss": {
+    "env": "theorem",
+    "title": "Heavy-threshold relative-entropy loss",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:threshold-and-portal-status": {
+    "env": "ledger",
+    "title": "Threshold and portal status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-triplet-nogo": {
+    "env": "theorem",
+    "title": "Rank-one invariant triplet no-go",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-pair-triplet": {
+    "env": "theorem",
+    "title": "Strict tensor-square triplet lift",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:charge-transform": {
     "env": "proposition",
-    "title": "full-space validation gate",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "con:chiral-feshbach-current": {
-    "env": "construction",
-    "title": "chiral microscopic dilation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "prop:nilpotent-depth-resolvent": {
-    "env": "proposition",
-    "title": "exact finite one-way depth resolvent",
+    "title": "Singlet--adjoint charge transform",
     "status": "proved",
     "lean": [
-      "NCG.nilpotent_depth_inverse"
+      "NCG.charge_transform"
     ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Two-sided exact finite Neumann inverse; the operator-norm convergence clause for the infinite unilateral shift is standard Neumann (covered by the flagship onePlusUnit machinery)."
+    "note": "NCG/Matter/SMEasyV5.lean: the singlet-adjoint transform Q = A - B/sqrt12, L = A + 3B/sqrt12 is inverted by A = (3Q+L)/4, B = (sqrt12/4)(L-Q), and the Parseval identity 3Q^H Q + L^H L = 4A^H A + B^H B holds (match_scalars matrix algebra with s^2 = 12). Standard axioms only."
   },
-  "prop:rank-one-residues-current": {
+  "prop:radial-nonselection": {
     "env": "proposition",
-    "title": "simple poles give rank-one residues",
+    "title": "Radial nonselection",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "note": ""
   },
-  "lem:two-gap-current": {
-    "env": "lemma",
-    "title": "two-resonance singular-value hierarchy",
+  "interpretation:untitled--3": {
+    "env": "interpretation",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:valuation-rigidity": {
+    "env": "theorem",
+    "title": "Valuation rigidity",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": ""
   },
-  "definition:physical-ordering-convention": {
+  "definition:rees-lift": {
     "env": "definition",
-    "title": "physical ordering convention",
-    "status": "conditional_interface",
+    "title": "Rees lift",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": ""
   },
-  "proposition:nested-flag-criterion": {
-    "env": "proposition",
-    "title": "nested-flag criterion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:glued-effect-family": {
+  "thm:neutral-rank-two": {
     "env": "theorem",
-    "title": "covariant effect-allocation family",
+    "title": "Minimal neutral Dirac source",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": ""
   },
-  "thm:free-history-isometry": {
+  "thm:majorana-jet": {
     "env": "theorem",
-    "title": "isometric free-history ladder",
+    "title": "Majorana source as a second mixed jet",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (partial, Phase 2). The Weyl-function layer is proved: U(z) = (z - sqrt(z^2-4))/2 satisfies the renewal self-consistency U(z-U) = 1 and lies in (0,1) for z > 2 (NCG.freeWeyl, NCG.freeWeyl_selfConsistent, NCG.freeWeyl_mem_unit), so carrier directions can differ only through the residue matrix L*L. The epsilon_n isometry clause is the trace-preservation identity (the pinch/no-signalling machinery); the operator identity L*(z-T)^{-1}L = U(z) L*L for the infinite Jacobi chain remains."
+    "note": ""
   },
-  "corollary:free-history-hierarchy-obstruction": {
+  "warning:untitled--3": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-physical-dark-criterion": {
+    "env": "theorem",
+    "title": "Physical dark-parity criterion",
+    "status": "proved",
+    "lean": [
+      "NCG.f2_fiber_card",
+      "NCG.charged_span_double_annihilator",
+      "NCG.dark_parity_criterion",
+      "NCG.dark_parity_count"
+    ],
+    "note": "NCG/Matter/DarkParity.lean: over any finite-dimensional F2 deck space, n admits a physical dark parity iff n not in S_ch iff some x in K_ch = S_ch-perp has n(x) = 1 (double-annihilator duality proved by a dimension count), and the number of such parities is 2^{b-r-1} (f2_fiber_card coset counting). Standard axioms only."
+  },
+  "cor:v5-s4-dark-nogo": {
     "env": "corollary",
-    "title": "free-history hierarchy obstruction",
+    "title": "Full-symmetry dark no-go",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "note": ""
   },
-  "thm:event-count-kernel": {
+  "thm:v5-reduced-determinant": {
     "env": "theorem",
-    "title": "derived critical event-count kernel",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. Otter-Dwass total-progeny law for critical binomial Galton-Watson + n^{-3/2} tail: cycle-lemma combinatorics plus Stirling asymptotics."
-  },
-  "thm:type-age-quotient": {
-    "env": "theorem",
-    "title": "type--age predictive quotient",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:character-weyl": {
-    "env": "theorem",
-    "title": "character-resolved scalar Weyl functions",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:type-absent-protection": {
-    "env": "theorem",
-    "title": "total protection of type-absent characters",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "ledger:what-predictive-compression-achieves": {
-    "env": "ledger",
-    "title": "what predictive compression achieves",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:matrix-retention-main": {
-    "env": "theorem",
-    "title": "matrix retention theorem",
+    "title": "Reduced determinant dark fork",
     "status": "proved",
     "lean": [
-      "NCG.matrix_retention",
-      "NCG.matrix_retention_value"
+      "NCG.reduced_determinant_fork"
     ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. A* = 1 - lambda_max as a retention iff, and A* = 93/95 for the protected spectrum {+-2/95}."
+    "note": "NCG/Matter/DarkParity.lean: at b = 3, |K_ch| = 2 iff dim S_ch = 2 and |K_ch| = 1 iff dim S_ch = 3 (cardinality = 2^{3-r}). The identification of the reduced determinant d_det with the fork is the declared certificate. Standard axioms only."
   },
-  "corollary:failure-of-the-97-95-branch": {
-    "env": "corollary",
-    "title": "failure of the \\(97/95\\) branch",
+  "thm:v5-odd-character-coset": {
+    "env": "theorem",
+    "title": "Odd-character coset theorem",
     "status": "proved",
     "lean": [
-      "NCG.retention_9795_fails"
+      "NCG.odd_character_coset",
+      "NCG.odd_character_card"
     ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
+    "note": "NCG/Matter/DarkParity.lean: the odd characters of a nonzero x form the coset n0 + x-perp of cardinality 2^{b-1} (= 4 at b = 3). The tau-labelled triangle/edge refinement and the m_dark sum are the declared model layer. Standard axioms only."
   },
-  "thm:grading-ambiguity-main": {
+  "thm:twisted-carrier": {
     "env": "theorem",
-    "title": "grading ambiguity of a signed protected block",
+    "title": "Two-dimensional twisted carrier",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "note": ""
   },
-  "thm:dirac-retention-main": {
+  "thm:dark-parity": {
     "env": "theorem",
-    "title": "full-pair retention does not rescue the selector",
-    "status": "proved",
-    "lean": [
-      "NCG.dirac_retention"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Full-pair retention of the signed branches A +- |y| again caps at A* = 1 - |y(1)| = 93/95."
+    "title": "Dark-parity selection rule",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
   },
-  "thm:threshold-restoration-main": {
+  "thm:connected-slot-factorization": {
     "env": "theorem",
-    "title": "threshold-restoration condition",
-    "status": "proved",
-    "lean": [
-      "NCG.threshold_restoration"
-    ],
-    "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. If the renewal edge is chirally symmetric (S commutes with the grading, gamma^2 = 1) then the chiral block P_L S P_R vanishes — a nonzero off-diagonal threshold self-energy cannot simultaneously be a purely emergent dressing and vanish at chiral restoration; one must derive Y_0 = -P_L Sigma(1) P_R or an equivalent threshold subtraction."
-  },
-  "thm:sqrt-mass-main": {
-    "env": "theorem",
-    "title": "generic square-root chiral mass",
-    "status": "proved",
-    "lean": [
-      "NCG.sqrt_mass_leading",
-      "NCG.sqrt_mass_scale"
-    ],
-    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. If Y(delta) = c sqrt(delta) + O(delta) then the physical singular value is |c| sqrt(delta) + O(delta) (reverse triangle inequality), and with delta = Delta^2 the generic chiral mass is |c| Delta — linear, not quadratic; a linear mass law requires the exact selection rule c = 0."
-  },
-  "computationalrecord:corrected-scalar-ratios": {
-    "env": "computationalrecord",
-    "title": "corrected scalar ratios",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:exterior-power-hierarchy-main": {
-    "env": "theorem",
-    "title": "exterior-power three-scale criterion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "corollary:nested-half-order-rank-filtration": {
-    "env": "corollary",
-    "title": "nested half-order rank filtration",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "ledger:current-flavour-boundary": {
-    "env": "ledger",
-    "title": "current flavour boundary",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "prop:amplitude-port-even": {
-    "env": "proposition",
-    "title": "the quadratic amplitude port selector is even",
-    "status": "proved",
-    "lean": [
-      "NCG.amplitude_port_even"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
-  },
-  "definition:amplitude-spectral-pressure": {
-    "env": "definition",
-    "title": "amplitude spectral pressure",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:local-pressure-cubic": {
-    "env": "theorem",
-    "title": "local cubic orbit on an \\(S_3\\)-standard plane",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "cor:fixed-radius-cubic-flow": {
-    "env": "corollary",
-    "title": "fixed-radius cubic pressure flow",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "computationalrecord:radius-stable-cubic": {
-    "env": "computationalrecord",
-    "title": "radius-stable cubic",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "openproblem:reinforcement-flow-theorem": {
-    "env": "openproblem",
-    "title": "reinforcement-flow theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "ledger:second-condensate-status": {
-    "env": "ledger",
-    "title": "second-condensate status",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:connected-slot-factorization-main": {
-    "env": "theorem",
-    "title": "connected-slot M\\\"obius factorization",
+    "title": "Connected-slot M\\\"obius factorization",
     "status": "proved",
     "lean": [
       "NCG.signedSum",
@@ -1625,685 +874,241 @@
     ],
     "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The alternating subset sum over slot insertions telescopes into the connected product of slot defects L.DX1.A1...DXn.An (recursive on/off form of the Moebius sum), with the O(eps^n) record-order norm bound (d*c)^n when each local defect is O(eps)."
   },
-  "thm:odd-record-normalization-main": {
+  "thm:primitive-exhaustion": {
     "env": "theorem",
-    "title": "normalized odd-record amplitude",
-    "status": "proved",
-    "lean": [
-      "NCG.controlled_odd_record"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. Single-slot identity <-|U_ctrl|+> = (U1-U0)/2; the n-slot 2^{-n} product form is iterated application."
-  },
-  "corollary:postselection-guardrail": {
-    "env": "corollary",
-    "title": "postselection guardrail",
+    "title": "Primitive class--bridge exhaustion",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": ""
   },
-  "condres:finite-rank-filtration-main": {
-    "env": "conditionalresult",
-    "title": "finite rank filtration",
+  "prop:primitive-cp-triangle": {
+    "env": "proposition",
+    "title": "Primitive CP-oriented triangle",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": ""
   },
-  "thm:mirror-amplitudes-main": {
+  "thm:conditional-ckm-order": {
     "env": "theorem",
-    "title": "exact coherent mirror amplitudes",
+    "title": "Conditional path-order completeness",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (partial, Phase 2). The boxed relative light-plane rotation is proved D-independently: l_FR(x) = 2a(-b)/(a^2+b^2) = 4sqrt(3)x^2(1-x)/(4x^4+3(1-x)^2) for the displayed mirror amplitudes (NCG.mirror_relative_rotation, NCG.sqrt_two_mul_sqrt_six). The common rank-one residue r_FR(x) needs the manuscript-specific D(x)."
+    "note": ""
   },
-  "thm:pair-selector-main": {
-    "env": "theorem",
-    "title": "alternating pair-orbit selector",
-    "status": "proved",
-    "lean": [
-      "NCG.pair_selector_dominance",
-      "NCG.pair_selector_suppression"
-    ],
-    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The mirror pair has strictly maximal area in the displayed alternating matrix (x < 1+3x+x^2 with C(x) > 0 on 0 < x < 1) and the suppression ratio is exactly eps_pair(x) = x/(1+3x+x^2) < 1. The numerical value at the selected root x* belongs to the certificate layer."
-  },
-  "warning:sector-labels-versus-holonomy-representatives": {
-    "env": "warning",
-    "title": "sector labels versus holonomy representatives",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:microscopic-cp-main": {
-    "env": "theorem",
-    "title": "microscopic CP orientation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:complete-word-order-main": {
-    "env": "theorem",
-    "title": "complete primitive word order",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:graph-wide-no-promotion-main": {
-    "env": "theorem",
-    "title": "graph-wide no-promotion theorem",
-    "status": "proved",
-    "lean": [
-      "NCG.privAdj",
-      "NCG.privAdj_matching",
-      "NCG.no_three_private_steps",
-      "NCG.no_promotion_exactly_three",
-      "NCG.nilpotent_depth_inverse"
-    ],
-    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The enumeration core proved on the concrete two-cell private graph (the perfect matching {2-3} u {4-5} left by deleting the hubs): private neighbours are unique (privAdj_matching, by decide), so a nonbacktracking private walk cannot make three steps (no_three_private_steps — the N^2 = 0 statement; the boxed resolvent (I - zN)^{-1} = I + zN is NCG.nilpotent_depth_inverse), and every hub-to-hub word whose internal private segment meets a bridge edge has internal length exactly two, i.e. exactly three transfers (no_promotion_exactly_three). Disclosed: the predictive-reducibility of longer complete words (internal hub returns factorize into primitive excursions) and the no-negative-Puiseux-power property of the reset resolvents are the renewal-analytic layer, argued in the manuscript from analyticity at the critical point."
-  },
-  "thm:hub-resolvent-main": {
-    "env": "theorem",
-    "title": "exact hub-mediated resolvent decomposition",
-    "status": "proved",
-    "lean": [
-      "NCG.hub_resolvent_decomposition"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. The exact block-inverse split M^{-1} = G_hub + diag(0, D^{-1})."
-  },
-  "thm:path-ordered-ckm-main": {
-    "env": "theorem",
-    "title": "path-ordered CKM completeness in the declared instrument",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "cert:canonical-ckm-main": {
-    "env": "certificate",
-    "title": "canonical modular CKM boundary",
-    "status": "computer_certified",
-    "lean": [
-      "NCG.CKM.V_unitary",
-      "NCG.CKM.ckm_panel",
-      "NCG.CKM.ckm_jarlskog",
-      "NCG.CKM.ckm_delta_deg",
-      "NCG.CKM.jarlskog_eq",
-      "NCG.phiMap_fixed_exists_unique",
-      "NCG.xstar_bounds",
-      "NCG.lFR_value",
-      "NCG.rFR_value",
-      "NCG.qe_value",
-      "NCG.epspair_value"
-    ],
-    "note": "TRIAGE computer_certified (Phase 3 harness, 2026-07-29). Sorry-free, standard axioms; all inequalities exact rational arithmetic (norm_num) plus sqrt brackets, an arctan Taylor bracket, and the 20-digit pi bounds. Certified content: the printed panel is realized by an explicit exactly-unitary PDG matrix with exact rational sines and exact rational tan(delta) — all nine |V| entries to half an ulp (5e-8), |J| = 3.43619e-5 to 5e-11, and delta = 72.5700 deg to 5e-5 deg (NCG.Numerics.CKMClosure). The scalar boundary layer is also certified from its exact definitions: x_* (unique fixed point of the modular cubic, 12-digit enclosure), l_FR(x_*) = 0.2356337644 (the V_FR sine), r_FR(x_*), q_e(x_*), eps_pair(x_*) (NCG.Numerics.ModularScalars). Remaining scope, disclosed: deriving the four PDG parameters from the finite renewal model requires the Kato-transport phases of V_DEP (complex unitary; the printed |V_DEP| moduli alone underdetermine the assembly), i.e. the hub-mediated two-cell transfer computation — tracked by thm:path-ordered-ckm-main."
-  },
-  "thm:same-channel-charm-nogo-main": {
-    "env": "theorem",
-    "title": "same-channel charm-repair no-go",
+  "prop:charm-rigidity": {
+    "env": "proposition",
+    "title": "Same-channel charm-repair no-go",
     "status": "conditional_interface",
     "lean": [],
     "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
   },
-  "thm:conditional-quark-orbit-main": {
+  "thm:majorana-stopping": {
     "env": "theorem",
-    "title": "conditional physical quark-orbit closure",
+    "title": "Visible return and quadratic Majorana stopping",
+    "status": "proved",
+    "lean": [
+      "NCG.nb_return_length_one",
+      "NCG.nb_return_length_two",
+      "NCG.nb_return_length_three",
+      "NCG.nb_return_length_four",
+      "NCG.signed_sheet_return_iff_even",
+      "NCG.z4_phase_gamma_minus",
+      "NCG.z4_phase_gamma_plus",
+      "NCG.linear_return_cancellation",
+      "NCG.quadratic_majorana_amplitude"
+    ],
+    "note": "Both boxed claims proved. n_vis = 4: kernel-checked enumeration of nonbacktracking K4 walks from the oriented port (0,1) — no returns at lengths 1-2, exactly the two odd-length triangles at length 3 (opposite sheet by the parity lemma), exactly the two Hamiltonian cycles at length 4 (NCG/Matter/SignedReturn.lean). A_M = sqrt2 * 3^{-8}, n_seesaw = 8: the Z4 lift phases u(gamma-) = -1, u(gamma+) = +1 are computed, the exchange-even linear Read annihilates the linear return vector, and the quadratic Store amplitude is evaluated at q = 1/3 (NCG/Matter/MajoranaAmplitude.lean). Standard axioms only."
+  },
+  "cond:neutral-absolute-scale": {
+    "env": "theorem",
+    "title": "Conditional common-lapse absolute neutral scale",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": ""
   },
-  "warning:scope-of-the-flavour-closure": {
+  "warning:untitled--4": {
     "env": "warning",
-    "title": "scope of the flavour closure",
-    "status": "conditional_interface",
+    "title": "",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
+    "note": ""
   },
-  "proposition:klein-decomposition-of-the-carrier": {
-    "env": "proposition",
-    "title": "Klein decomposition of the carrier",
-    "status": "proved",
-    "lean": [
-      "NCG.kleinPattern",
-      "NCG.klein_separating",
-      "NCG.kleinK1",
-      "NCG.kleinK2"
-    ],
-    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Character form: the joint eigenvalue patterns of the two Klein involutions on the rank-three carrier are three distinct nontrivial characters separating the lines. The identification of the K4 cycle action with these characters is the graph-carrier layer."
+  "definition:nested-spectral-flag": {
+    "env": "definition",
+    "title": "Nested spectral flag",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
   },
-  "thm:v4-commutative-trap-current": {
+  "thm:flag-alignment-ckm": {
     "env": "theorem",
-    "title": "democratic commutative trap",
-    "status": "proved",
-    "lean": [
-      "NCG.v4_commutative_trap",
-      "NCG.klein_equivariant_diagonal",
-      "NCG.commute_separating_family_diag",
-      "NCG.diagonal_commute"
-    ],
-    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Completed in the character basis: every endomorphism commuting with the Klein involutions is diagonal in the three character lines (separating-family rigidity), so a strictly democratic V4-equivariant inventory is commutative — [Y_u Y_u^H, Y_d Y_d^H] = 0, no CKM mixing, no physical quark CP."
-  },
-  "proposition:real-shadow-cp-guardrail": {
-    "env": "proposition",
-    "title": "real-shadow CP guardrail",
-    "status": "proved",
-    "lean": [
-      "NCG.real_shadow_mul",
-      "NCG.real_trace_im_zero"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms."
-  },
-  "thm:class-two-rank-two-main": {
-    "env": "theorem",
-    "title": "rank-two class-two seesaw",
+    "title": "Flag-alignment criterion for hierarchical quark mixing",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "note": ""
   },
-  "thm:exterior-fock-store-main": {
-    "env": "theorem",
-    "title": "unique exterior-Fock Majorana Store",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "cert:pmns-closure-main": {
-    "env": "certificate",
-    "title": "dimensionless PMNS closure",
-    "status": "computer_certified",
-    "lean": [
-      "NCG.PMNS.V_unitary",
-      "NCG.PMNS.pmns_panel",
-      "NCG.PMNS.pmns_sin_sq",
-      "NCG.PMNS.pmns_jarlskog",
-      "NCG.PMNS.pmns_delta_deg"
-    ],
-    "note": "TRIAGE computer_certified (Phase 3 harness, 2026-07-29). Sorry-free, standard axioms; exact rational interval arithmetic throughout. Certified content: the printed |U_PMNS| panel is realized by an explicit exactly-unitary PDG matrix with exact rational sines and exact rational tan(delta) in the + orientation — all nine moduli to half an ulp (5e-7), the three sin^2 panels to 5e-9, J_PMNS = 0.03084355 to 5e-9, and delta = 68.1514 deg to 5e-5 deg (NCG.Numerics.PMNSClosure); the opposite Z4 orientation is the complex conjugate. Remaining scope, disclosed: the squared-mass ratio Dm21^2/Dm31^2 = 0.03002121 concerns the heavy-propagator spectrum G_M (exterior-Fock Store data), not the mixing closure, and derivation of the four PDG parameters from the lifted Dirac endpoint remains at the construction layer. DEEP-LAYER STATUS (2026-07-30): the squared-mass ratio was checked against the exact printed Store data (m_D = H[[0,3sqrt2/16,0],[-1,0,0]], w_M from l_FR(x_*), kappa_* = 27/997 - i 81sqrt3/31904): the rank-two seesaw ratio from the printed two-column m_D alone is 0.01513…, not 0.03002121 — the certificate value requires the lifted third Dirac column, which the manuscript itself places at the notebook layer (compatibility-boundary remark: complete lifted operator, sector projectors, condensate matrices). Model-data-dependent, like the CKM V_DEP phases."
-  },
-  "status:neutral-finite-shape-status": {
-    "env": "status",
-    "title": "neutral finite-shape status",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "lem:signed-return-parity-consolidated": {
-    "env": "lemma",
-    "title": "signed return parity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "thm:minimal-signed-return-consolidated": {
-    "env": "theorem",
-    "title": "minimal signed visible return",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "thm:quadratic-majorana-amplitude-consolidated": {
-    "env": "theorem",
-    "title": "quadratic-before-collapse Majorana amplitude",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:one-lapse-reference-consolidated": {
-    "env": "theorem",
-    "title": "one-lapse reference energy",
-    "status": "proved",
-    "lean": [
-      "NCG.one_lapse_reference"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. The calibration algebra eps^2 = 4 log3 l^2, M_ref = M_Pl/sqrt(4 log 3); the product-Dirac transport clause is part of the spectral-action cluster."
-  },
-  "rec:absolute-neutral-panel": {
-    "env": "computationalrecord",
-    "title": "declared neutral finite block",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:neutrino-leading-log-consolidated": {
-    "env": "theorem",
-    "title": "piecewise congruence transport",
-    "status": "proved",
-    "lean": [
-      "NCG.congruence_kernel_iff",
-      "NCG.congruence_massless_preserved"
-    ],
-    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The piecewise leading-log congruence transport M -> T^t M T with invertible T preserves kernels (null vectors correspond via T), so rank is preserved and an exact massless state remains massless. The explicit exp(P log(mu)/16pi^2) form of T is the displayed instantiation."
-  },
-  "computationalrecord:frozen-coupling-sequential-transport": {
-    "env": "computationalrecord",
-    "title": "frozen-coupling sequential transport",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:gauge-sm-pole-consolidated": {
-    "env": "theorem",
-    "title": "pure-Standard-Model continuation no-go",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:split-mssm-nogo-consolidated": {
-    "env": "theorem",
-    "title": "split-MSSM fixed-boundary no-go",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "thm:spectral-ps-nogo-consolidated": {
-    "env": "theorem",
-    "title": "minimal spectral Pati--Salam threshold no-go",
-    "status": "proved",
-    "lean": [
-      "NCG.composite_ps_no_go",
-      "NCG.general_ps_Q_nonneg",
-      "NCG.general_ps_no_go"
-    ],
-    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. Both branches proved as stated: composite — d_3 <= -2 cannot integrate over a physical interval t > 0 to the positive target T_3 = 71.3331971483 (composite_ps_no_go); general — the exposure linear program: Q = 119 - (16/3)f_{(2,2,15)} - 93 f_{(3,1,10)} + (361/3) f_{(1,3,10)} - (31/3)(g_1+g_2) >= 0 over all exposure fractions in [0,1] (minimum exactly 0 at full exposure of the (2,2,15), (3,1,10) and both sextets; general_ps_Q_nonneg), incompatible with the negative integrated target Q(T) = -152.9628019448 (general_ps_no_go). Disclosed: the one-loop Q values of the individual thresholds are the declared inputs from thm:primitive-high-gauge-coefficients."
-  },
-  "cond:repeatable-internal-mark": {
-    "env": "condition",
-    "title": "repeatable internal mark",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:binary-pointer-algebra": {
-    "env": "theorem",
-    "title": "binary pointer-algebra theorem",
-    "status": "proved",
-    "lean": [
-      "NCG.pinch",
-      "NCG.pinch_unital",
-      "NCG.pinch_idem",
-      "NCG.pinch_trace"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. The retained algebra and the induced conditional expectation (unital, idempotent, trace preserving); the mark-flip-outside-the-algebra clause is definitional."
-  },
-  "thm:mark-resolved-portal-splitting": {
-    "env": "theorem",
-    "title": "mark-resolved portal splitting",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "cond:centered-portal-conservation": {
-    "env": "condition",
-    "title": "centred per-context portal conservation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:trace-singlet-exclusion": {
-    "env": "theorem",
-    "title": "trace-singlet exclusion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "thm:portal-multiplicity-criticality-updated": {
-    "env": "theorem",
-    "title": "portal-multiplicity criticality",
-    "status": "proved",
-    "lean": [
-      "NCG.portal_multiplicity_criticality"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. The -7/8 / +1/16 evaluations and q_eff = sqrt(2)/16 > 0 at criticality."
-  },
-  "thm:selective-scalar-block": {
-    "env": "theorem",
-    "title": "selective scalar-block theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
-  },
-  "construction:singlet-renewal-majorana-completion": {
-    "env": "construction",
-    "title": "singlet renewal Majorana completion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:cross-chirality-adjoint-incidence": {
-    "env": "theorem",
-    "title": "cross-chirality adjoint-incidence theorem",
-    "status": "proved",
-    "lean": [
-      "NCG.sigmaU",
-      "NCG.sigmaNu",
-      "NCG.declared_spectra_distinct",
-      "NCG.cross_chirality_adjoint_incidence"
-    ],
-    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The no-go mechanism proved: if B_u = 0 forced Y_u = Y_nu-tilde, the singular spectra would coincide; the declared spectra are distinct by exact decimal comparison (declared_spectra_distinct), so B_u != 0 (and B_d != 0 identically from the down/charged-lepton spectra). Disclosed: the closing Lie-theory step (span of u T_4 u-dagger = the full adjoint of sl_4) is the representation-theory layer."
-  },
-  "corollary:basis-independent-adjoint-lower-bound": {
-    "env": "corollary",
-    "title": "basis-independent adjoint lower bound",
-    "status": "proved",
-    "lean": [
-      "NCG.adjoint_lower_bound_certificate"
-    ],
-    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. Certified: with the sharp two-sided unitary-orbit distance (Mirsky, min ||A - UBV||_F^2 = sum (sigma_i(A)-sigma_i(B))^2, the disclosed interface), the up-sector spectral gap alone already exceeds the printed bound: sum (sigma_u - sigma_nu)^2 = 0.19074887... >= 0.143237380173, so the frame-independent bound holds a fortiori with ||B_d||^2 >= 0."
-  },
-  "thm:canonical-scalar-residue": {
-    "env": "theorem",
-    "title": "canonical scalar-residue theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:residue-selected-bidoublet": {
-    "env": "theorem",
-    "title": "residue-selected bidoublet",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:portal-pair-determinant-guardrail": {
-    "env": "theorem",
-    "title": "portal-pair representation and determinant counting",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "warning:retired-decuplet-mass-correction": {
-    "env": "warning",
-    "title": "retired decuplet mass correction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:primitive-high-gauge-coefficients": {
-    "env": "theorem",
-    "title": "primitive high-phase gauge coefficients",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. One/two-loop beta coefficients: needs Casimir/Dynkin-index bookkeeping for SU(n) reps; neither Mathlib nor physlib has two-loop machinery."
-  },
-  "rec:store-scale-two-loop-trajectory": {
-    "env": "computationalrecord",
-    "title": "frozen-Yukawa Store-scale two-loop trajectory",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "ledger:strong-weak-and-electromagnetic-status": {
-    "env": "ledger",
-    "title": "strong, weak, and electromagnetic status",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:untyped-ew-hessian-nogo": {
-    "env": "theorem",
-    "title": "untyped electroweak-Hessian no-go",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "thm:typed-rank-two-higgs": {
-    "env": "theorem",
-    "title": "typed rank-two Higgs theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "op:bosonic-mark-inheritance": {
-    "env": "openproblem",
-    "title": "bosonic relative-mark inheritance",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:shared-source-block-cycle-main": {
-    "env": "theorem",
-    "title": "shared-source block-cycle identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "thm:mixed-wick-polarisation-main": {
-    "env": "theorem",
-    "title": "mixed Wick polarisation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "cor:no-inherited-common-history-mass-main": {
-    "env": "corollary",
-    "title": "no inherited common mass from the declared history exchange",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "thm:rank-one-marked-refinement-main": {
-    "env": "theorem",
-    "title": "rank-one marked-refinement rigidity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:elementary-first-stage-obstruction-main": {
-    "env": "theorem",
-    "title": "elementary two-stage breaking obstruction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "prop:composite-adjoint-obstruction-main": {
-    "env": "proposition",
-    "title": "convex and kinetic obstruction for the composite adjoint",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:binary-colour-expectation-main": {
-    "env": "theorem",
-    "title": "binary colour--lepton conditional expectation",
-    "status": "proved",
-    "lean": [
-      "NCG.pinch",
-      "NCG.pinch_unital",
-      "NCG.pinch_idem",
-      "NCG.pinch_trace",
-      "NCG.pinch_eq_half_add_conj",
-      "NCG.pinch_fixed_iff_commute",
-      "NCG.pinch_involution_sq"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. E_C(A) = P_q A P_q + P_l A P_l is unital, idempotent, trace preserving, equals (A + Z A Z)/2, and its fixed points are exactly the Z_C-commutant; identifying that commutant with M3(C)+C is the existing diagonal/gamma commutant machinery (physlib QuantumInfo proves the same pinching family). Complete positivity in HS form pending."
-  },
-  "thm:binary-renewal-semigroup-main": {
-    "env": "theorem",
-    "title": "binary renewal semigroup",
-    "status": "proved",
-    "lean": [
-      "NCG.binary_renewal_semigroup"
-    ],
-    "note": "TRIAGE proved (Phase 1, 2026-07-29). Sorry-free, standard axioms (propext/Classical.choice/Quot.sound) verified by #print axioms. T_s T_t = T_st exactly; the Lindblad generator display is the s = exp(-gamma t) reparameterization."
-  },
-  "condres:renewal-superselection-first-stage-main": {
-    "env": "conditionalresult",
-    "title": "renewal-superselection first stage",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:sibuya-subordinated-eigenmode-main": {
-    "env": "theorem",
-    "title": "Sibuya-subordinated eigenmode",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "cor:two-clock-locality-main": {
-    "env": "corollary",
-    "title": "two-clock locality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:connected-incidence-trace-rigidity-main": {
-    "env": "theorem",
-    "title": "connected-incidence trace rigidity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:simple-spectrum-connected-gram-main": {
-    "env": "theorem",
-    "title": "simple-spectrum connected-Gram criterion",
-    "status": "proved",
-    "lean": [
-      "NCG.simple_spectrum_connected_commutant",
-      "NCG.commute_diagonal_offdiag_zero",
-      "NCG.diag_commute_connected_constant"
-    ],
-    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Full proof: commuting with a simple-spectrum diagonal forces diagonality, and a connected nonzero support pattern forces the diagonal constant, so {H_u, H_d}-commutant = C.I."
-  },
-  "cor:finite-incidence-commutant-main": {
-    "env": "corollary",
-    "title": "finite incidence-algebra commutant",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (mechanism proved, Phase 2). The core rigidity — simple spectrum + connected nonzero incidence support forces a scalar commutant — is NCG.simple_spectrum_connected_commutant; instantiating it on the selected finite geometry with its retained incidence data remains."
-  },
-  "ledger:consolidated-scalar-and-gauge-status": {
-    "env": "ledger",
-    "title": "consolidated scalar and gauge status",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:single-spurion-ew-hessian-consolidated": {
-    "env": "theorem",
-    "title": "single-spurion electroweak Hessian",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "cor:one-light-doublet-consolidated": {
-    "env": "corollary",
-    "title": "one light doublet at bidoublet criticality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
-  },
-  "thm:linear-pressure-cancellation-nogo-consolidated": {
-    "env": "theorem",
-    "title": "linear-pressure cancellation no-go",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory. Variance zero iff centered record is a predictive coboundary: builds on existing pressure + PointwiseErgodic machinery."
-  },
-  "condres:intensity-relative-entropy-consolidated": {
-    "env": "conditionalresult",
-    "title": "quadratic-incidence relative-entropy action",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "condres:complete-quantum-bregman-consolidated": {
-    "env": "conditionalresult",
-    "title": "complete quantum Bregman subtraction",
-    "status": "conditional_interface",
-    "lean": [
-      "NCG.bregman_value_zero",
-      "NCG.bregman_deriv_at_zero",
-      "NCG.higgs_vacuum_minimum",
-      "NCG.higgs_vacuum_identity"
-    ],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. PROGRESS (Phase 3 singleton basket, 2026-07-30): the boxed matching algebra is proved — Bregman recentering at the reset reference removes the linear term exactly (bregman_value_zero, bregman_deriv_at_zero: the recentered slope is a_tau - a_*), and the electroweak vacuum is the exact quartic minimum v^2 = -m_h^2/lambda_h with strictly negative depth for a_tau - a_* < 0 (higgs_vacuum_minimum, higgs_vacuum_identity). The record remains conditional_interface because, as it itself states, the complete quantum predictive Ward identity is not a consequence of the present primitive axioms."
-  },
-  "warning:scope-of-the-weak-scale-numbers": {
-    "env": "warning",
-    "title": "scope of the weak-scale numbers",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:quartic-ray-nonidentifiability-consolidated": {
-    "env": "theorem",
-    "title": "quartic-ray non-identifiability",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "ledger:latest-electroweak-hierarchy-status": {
-    "env": "ledger",
-    "title": "latest electroweak and hierarchy status",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "ledger:controlled-results-and-remaining-gates": {
-    "env": "ledger",
-    "title": "controlled results and remaining gates",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "openproblem:sharp-remaining-standard-model-completion-problem": {
-    "env": "openproblem",
-    "title": "sharp remaining Standard-Model completion problem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
-  },
-  "thm:product-gauge-factorization-app": {
-    "env": "theorem",
-    "title": "product gauge factorization",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "corollary:internal-cycle-physical-gauge-separation": {
-    "env": "corollary",
-    "title": "internal-cycle/physical-gauge separation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
-  },
-  "thm:minimal-wilson-app": {
-    "env": "theorem",
-    "title": "minimal local Wilson completion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "thm:gauge-universality-app": {
-    "env": "theorem",
-    "title": "four-dimensional gauge universality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
-  },
-  "interpretation:untitled--2": {
+  "interpretation:untitled--4": {
     "env": "interpretation",
     "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "prop:mass-hierarchy-not-mixing": {
+    "env": "proposition",
+    "title": "Mass hierarchy does not constrain relative-frame size",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
+    "note": ""
   },
-  "thm:minimal-m6-envelope-app": {
+  "definition:structured-lepton-anarchy": {
+    "env": "definition",
+    "title": "Structured lepton anarchy",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:alignment-transversality": {
     "env": "theorem",
-    "title": "minimal faithful simple envelope",
+    "title": "Alignment--transversality dichotomy",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "note": ""
   },
-  "thm:m6-expectation-chain-app": {
-    "env": "theorem",
-    "title": "exact conditional-expectation chain",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
-  },
-  "warning:scope-of-the-alternative-branch": {
+  "warning:what-has-not-been-proved": {
     "env": "warning",
-    "title": "scope of the alternative branch",
+    "title": "What has not been proved",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:hierarchy-versus-anarchy-status": {
+    "env": "ledger",
+    "title": "Hierarchy-versus-anarchy status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:flavour-and-neutral-status": {
+    "env": "ledger",
+    "title": "Flavour and neutral status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "prop:complete-multiplet": {
+    "env": "proposition",
+    "title": "Complete-multiplet invisibility in differences",
     "status": "conditional_interface",
     "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
+    "note": ""
+  },
+  "warning:external-means-external": {
+    "env": "warning",
+    "title": "External means external",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "prop:proton-selection": {
+    "env": "proposition",
+    "title": "Conditional absence of leading proton-decay slots",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:numerical-flavour-status": {
+    "env": "ledger",
+    "title": "Numerical flavour status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:dark-sector-status": {
+    "env": "ledger",
+    "title": "Dark-sector status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:gauge-not-matter": {
+    "env": "theorem",
+    "title": "Gauge tangent, zero matter tangent",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:all-jet-firewall": {
+    "env": "theorem",
+    "title": "All-jet central-support firewall",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:kraus-block-nogo": {
+    "env": "theorem",
+    "title": "Positive Kraus-block no-go",
+    "status": "proved",
+    "lean": [
+      "NCG.kraus_block_identity",
+      "NCG.kraus_block_nogo"
+    ],
+    "note": "NCG/Matter/SMEasyV5.lean: P_t T(P_s) P_t = sum (P_t K P_s)(P_t K P_s)^H for Hermitian idempotent projections, and vanishing of the sum forces every cross block P_t K_a P_s = 0 (trace/normSq argument). Standard axioms only."
+  },
+  "cor:stinespring-intertwining": {
+    "env": "corollary",
+    "title": "Stinespring support intertwining",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:generator-cross-map": {
+    "env": "theorem",
+    "title": "Cross-support generator map",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "corollary:failure-of-accessibility-for-the-displayed-source": {
+    "env": "corollary",
+    "title": "Failure of accessibility for the displayed source",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:vertical-independence": {
+    "env": "proposition",
+    "title": "Accessibility independence family",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "interpretation:untitled--5": {
+    "env": "interpretation",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:ternary-povm": {
+    "env": "theorem",
+    "title": "Ternary occurrence theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "op:primitive-odd": {
+    "env": "openproblem",
+    "title": "Primitive qutrit revision certificate",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:updated-primitive-boundary-status": {
+    "env": "ledger",
+    "title": "Updated primitive boundary status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
   }
 }

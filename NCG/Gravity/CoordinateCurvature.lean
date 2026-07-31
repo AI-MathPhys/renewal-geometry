@@ -42,7 +42,7 @@ open Finset
 
 /-- Christoffel symbols of the second kind from a metric jet:
 `Γ^c_{ab} = ½ Σ_e g^{ce}(∂_a g_{eb} + ∂_b g_{ea} - ∂_e g_{ab})`. -/
-def christoffel (ginv : Fin 4 → Fin 4 → ℝ)
+noncomputable def christoffel (ginv : Fin 4 → Fin 4 → ℝ)
     (dg : Fin 4 → Fin 4 → Fin 4 → ℝ) :
     Fin 4 → Fin 4 → Fin 4 → ℝ :=
   fun c i j => (1 / 2) * ∑ e, ginv c e *
@@ -112,8 +112,7 @@ theorem flrw_christoffel {a : ℝ} (ha : a ≠ 0) (adot : ℝ) :
   unfold christoffel flrwGinv flrwdg flrwGamma
   fin_cases c <;> fin_cases i <;> fin_cases j <;>
     simp [Fin.sum_univ_four] <;>
-    field_simp <;>
-    ring
+    field_simp
 
 /-- Faithfulness of the jet: for an actual scale factor,
 `(aȧ)' = ȧ² + aä`. -/
@@ -121,10 +120,9 @@ theorem scale_jet_consistent {af daf : ℝ → ℝ} {t v w : ℝ}
     (h1 : HasDerivAt af v t) (h2 : HasDerivAt daf w t)
     (hd : daf t = v) :
     HasDerivAt (fun s => af s * daf s) (v * v + af t * w) t := by
-  have := h1.mul h2
-  rw [hd] at this
-  convert this using 1
-  ring
+  have h := h1.mul h2
+  rw [hd] at h
+  exact h
 
 /-- The FLRW Ricci tensor: `R₀₀ = -3ä/a` and
 `Rᵢᵢ = aä + 2ȧ²` on the spatial diagonal (off-diagonal zero). -/
@@ -185,5 +183,38 @@ theorem flrw_einstein_00 {a : ℝ} (ha : a ≠ 0) (adot addot : ℝ) :
   simp
   field_simp
   ring
+
+/-- The de Sitter branch is an Einstein space: on the exponential
+scale factor jet (`ȧ = Ha`, `ä = H²a`) the FLRW Ricci tensor is
+exactly `Ric = 3H²·g` and the scalar curvature is `R = 12H²` —
+`Ric = dH²g`, `R = d(d+1)H²` at `d = 3`, closing the FLRW side of
+`lem:pure-deficiency-constant-curvature`. -/
+theorem desitter_einstein_space {a H : ℝ} (ha : a ≠ 0) :
+    (∀ i j : Fin 4,
+      ricci (flrwGamma a (H * a)) (flrwdGamma a (H * a) (H ^ 2 * a)) i j
+        = 3 * H ^ 2 * flrwG a i j) ∧
+    scalarCurv (flrwGinv a) (flrwGamma a (H * a))
+        (flrwdGamma a (H * a) (H ^ 2 * a)) = 12 * H ^ 2 := by
+  obtain ⟨h00, hdiag, hoff⟩ := flrw_ricci_diag ha (H * a) (H ^ 2 * a)
+  constructor
+  · intro i j
+    by_cases hij : i = j
+    · subst hij
+      by_cases hi0 : i = 0
+      · subst hi0
+        rw [h00]
+        unfold flrwG
+        simp
+        field_simp
+      · rw [hdiag i hi0]
+        unfold flrwG
+        simp [hi0]
+        ring
+    · rw [hoff i j hij]
+      unfold flrwG
+      simp [hij]
+  · rw [flrw_scalar ha (H * a) (H ^ 2 * a)]
+    field_simp
+    ring
 
 end NCG

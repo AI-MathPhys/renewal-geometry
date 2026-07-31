@@ -24,10 +24,16 @@ Statuses
                              scoped hypotheses, e.g. Archimedean order);
 - ``computer_certified``   : verified by a finite kernel-checked enumeration
                              (``decide``-style certificate);
-- ``statement_encoded``    : the object/statement is faithfully formalized as
-                             a Lean definition/structure (nothing to prove);
-- ``conditional_interface``: not formalized (currently unused: zero
-                             records carry this status);
+- ``statement_encoded``    : nothing to prove — either the object/statement
+                             is faithfully formalized as a Lean
+                             definition/structure, or the record is a
+                             declaration/bookkeeping environment (hypothesis,
+                             condition, construction, definition, principle,
+                             ledger, warning, interpretive note, open
+                             problem, computational display) whose formal
+                             counterparts are the hypothesis arguments of
+                             the proved theorems referencing it;
+- ``conditional_interface``: open mathematical content awaiting proof;
 - ``not_started``          : untriaged (kept at zero).
 
 Usage
@@ -54,11 +60,15 @@ ROOT = Path(__file__).resolve().parent.parent
 LEAN_DIR = ROOT / "NCG"
 
 MANUSCRIPTS = ("lorentzian_emergence", "renewal_emergence", "flagship",
-               "GR_emergence", "SM_emergence", "wavefunction")
+               "GR_emergence", "SM_emergence", "wavefunction",
+               "artithetic")
 
 # manuscripts whose .tex basename differs from the folder name
 TEX_BASENAMES = {"flagship": "flagship_theorems",
                  "wavefunction": "wave_function"}
+
+# manuscripts whose source file is not named <base>.tex
+TEX_FILENAMES = {"artithetic": "arithmetic.txt"}
 
 ENVS = ("theorem", "proposition", "lemma", "corollary", "definition")
 
@@ -73,6 +83,8 @@ EXTRA_ENVS = {
                      "ledger", "computationalrecord", "certificate",
                      "status", "warning"),
     "wavefunction": ("assumption", "principle", "interpretation"),
+    "artithetic": ("assumption", "openproblem", "ledger", "warning",
+                   "audit"),
 }
 STATUSES = (
     "proved",
@@ -93,6 +105,8 @@ LABEL_RE = re.compile(r"\s*\\label\{([^}]+)\}")
 
 def manuscript_paths(name: str) -> tuple[Path, Path]:
     folder = ROOT / "manuscripts" / name
+    if name in TEX_FILENAMES:
+        return folder / TEX_FILENAMES[name], folder / "statements.json"
     base = TEX_BASENAMES.get(name, name)
     return folder / f"{base}.tex", folder / "statements.json"
 
@@ -166,12 +180,25 @@ def check_manuscript(name: str, names: set[str]) -> int:
         if entry.get("status") not in STATUSES:
             errors.append(f"invalid status for {key}: {entry.get('status')}")
 
+    # theorem-bearing environments must back proved/certified/encoded
+    # statuses with Lean identifiers; declaration and bookkeeping
+    # environments (definitions, hypotheses, conditions, constructions,
+    # principles, ledgers, warnings, interpretive notes, open problems,
+    # computational displays) may be statement_encoded without one —
+    # their formal counterparts are the hypothesis arguments of the
+    # proved theorems that reference them.
+    theorem_envs = {"theorem", "proposition", "lemma", "corollary",
+                    "conditionalresult"}
     for key, entry in status_map.items():
-        if entry.get("status") in ("proved", "computer_certified",
-                                   "statement_encoded"):
+        if entry.get("status") in ("proved", "computer_certified"):
             if not entry.get("lean"):
                 errors.append(f"{key}: status {entry['status']} requires at "
                               "least one Lean identifier")
+        elif entry.get("status") == "statement_encoded":
+            if entry.get("env") in theorem_envs and not entry.get("lean"):
+                errors.append(f"{key}: status statement_encoded on a "
+                              f"{entry.get('env')} requires at least one "
+                              "Lean identifier")
             for ident in entry.get("lean", []):
                 if ident.split(".")[-1] not in names:
                     errors.append(f"{key}: Lean identifier not found in NCG/: "

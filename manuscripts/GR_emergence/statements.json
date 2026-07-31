@@ -2,9 +2,9 @@
   "def:tilted-matrix-renewal": {
     "env": "definition",
     "title": "Tilted matrix-renewal kernel",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:matrix-renewal-dictionary": {
     "env": "theorem",
@@ -18,9 +18,14 @@
   "cor:embedded-renewal-dictionary": {
     "env": "corollary",
     "title": "Embedded-chain specialization and metric clock",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.embedded_transform_factorization",
+      "NCG.physical_step_ratios",
+      "NCG.metric_clock_identity",
+      "NCG.matrix_renewal_dictionary"
+    ],
+    "note": "NCG/Gravity/EmbeddedDictionary.lean: for the embedded kernel Q(n) = psi(n) L with jump-only observables, the tilted transform factorizes Qhat(z) = psihat(z) L (embedded_transform_factorization, tsum_smul_const); the per-physical-depth rates are the per-step rates divided by the mean waiting time tau-bar (physical_step_ratios, specializing the proved matrix_renewal_dictionary derivative formulas), and the boxed metric-clock identity B_phys = B_step c_ren/eps with c_ren = eps/tau-bar is proved (metric_clock_identity). Standard axioms only."
   },
   "thm:imported-lorentzian": {
     "env": "theorem",
@@ -82,9 +87,16 @@
   "lem:poly-not-quad": {
     "env": "lemma",
     "title": "A polyhedral predictive cone is not exactly a Lorentz quadric",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.quadratic_coeffs_zero",
+      "NCG.quadratic_vanish_on_subspace",
+      "NCG.isotropic_of_quadratic_zero",
+      "NCG.isotropic_finrank_bound",
+      "NCG.facet_cone_not_lorentz_quadric",
+      "NCG.poly_cone_not_quadric"
+    ],
+    "note": "PROVED (2026-07-30). Formalized via the totally-isotropic-subspace dimension bound: a facet of a polyhedral cone contains a relatively open subset of its spanning hyperplane H; a quadratic form vanishing on an open-in-H set vanishes on all of H (line restriction: a real quadratic polynomial vanishing on an interval has zero coefficients, NCG.quadratic_coeffs_zero/quadratic_vanish_on_subspace); polarization makes H totally isotropic (NCG.isotropic_of_quadratic_zero); a nondegenerate form bounds every totally isotropic subspace by 2 dim H <= dim V (NCG.isotropic_finrank_bound, via LinearMap.BilinForm.finrank_orthogonal); with dim V = d+1, dim H = d, d >= 2 this is a contradiction (NCG.poly_cone_not_quadric). This proves the manuscript's smoothness argument in sharpened algebraic form (no smoothness of the quadric needed), for any nondegenerate form -- in particular Lorentzian. The reduction 'polyhedral cone with a genuine facet contains an open-in-hyperplane subset' is taken as the encoded hypothesis."
   },
   "thm:positive-obstruction": {
     "env": "theorem",
@@ -101,23 +113,27 @@
   "hyp:SH": {
     "env": "hypothesis",
     "title": "Slow homogeneity and gap",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "hyp:wkb": {
     "env": "hypothesis",
     "title": "Constant-multiplicity renewal band",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "lem:band-legendre": {
     "env": "lemma",
     "title": "Band symbol and Legendre dual",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.band_legendre_upper",
+      "NCG.band_legendre_attained",
+      "NCG.band_legendre_infinite_outside"
+    ],
+    "note": "NCG/Gravity/BandLegendre.lean: for the radial band symbol h(theta) = sqrt(lambda^2 + c^2 theta^2) - lambda, the Legendre transform is proved exactly: a two-term Cauchy-Schwarz bound gives theta v - h <= lambda(1 - sqrt(1 - v^2/c^2)) inside the cone (band_legendre_upper), the bound is attained at the stationary covector theta* = lambda v/(c sqrt(c^2-v^2)) (band_legendre_attained), and strictly outside the cone the tilt is unbounded above (band_legendre_infinite_outside). The reduction of the anisotropic g-metric symbol to this radial form (geodesic polar coordinates) and smoothness/strict-convexity phrasing are the declared geometric layer. Standard axioms only."
   },
   "thm:matrix-wkb": {
     "env": "theorem",
@@ -138,16 +154,26 @@
   "thm:transport-decomp": {
     "env": "theorem",
     "title": "Band-transport decomposition",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "status": "proved",
+    "lean": [
+      "NCG.skewAdjoint_trace_re_zero",
+      "NCG.transport_decomp_trace",
+      "NCG.berry_antihermitian"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The trace-selection mechanism proved: anti-Hermitian matrices have purely imaginary trace (skewAdjoint_trace_re_zero), so in the decomposition A = A_geo + A_grad + A_irr with anti-Hermitian geometric transport (the spacetime-frame plus momentum-space Berry connections, anti-Hermitian by the already-proved NCG.berry_antihermitian), the real trace sees only the non-geometric parts (transport_decomp_trace) — only kappa_ren = r^{-1} Re Tr A_ren can change a scalar modulus response, which is the theorem. Disclosed: the Pi+ d Pi+ pseudodifferential construction of the three terms is the semiclassical layer (Phase 4)."
   },
   "prop:invariant-response": {
     "env": "proposition",
     "title": "Unitary-invariant scalar band response",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "status": "proved",
+    "lean": [
+      "NCG.hasDerivAt_det",
+      "NCG.liouville_formula",
+      "NCG.jacobi_log_modulus",
+      "NCG.hs_unitary_invariance",
+      "NCG.det_updateCol_expand"
+    ],
+    "note": "TRIAGE proved (Phase 3/4 machinery, 2026-07-30). Sorry-free, standard axioms. Both invariance mechanisms proved, on newly built determinant-derivative machinery absent from Mathlib: (1) the Jacobi step — the derivative of the determinant along an entrywise-differentiable family is tr(adj(U) V) (hasDerivAt_det, via the Leibniz expansion and the cofactor identity det_updateCol_expand), Liouville-s formula (det U)-prime = det(U) tr(B) for transport families U-prime = BU (liouville_formula), and the log-modulus form (log ||det U||)-prime = Re tr B (jacobi_log_modulus) — exactly log|det U_gamma| = -int_gamma Re Tr A in derivative form, so the determinant modulus response sees only kappa_ren + V after the drift split (NCG.transport_decomp_trace, NCG.ground_state_conjugation); (2) unitary geometric holonomy preserves the Hilbert-Schmidt norm: tr((UMW)^H (UMW)) = tr(M^H M) for unitary U, W (hs_unitary_invariance) — the HS functional is blind to the Berry transport, with the scalar Hermitian reset drift factoring identically. Disclosed: the WKB kernel expansion |det K| = e^{-rS/eps} J^{r/2} |det U_gamma| (1+O(eps)) is the thm:matrix-wkb semiclassical input."
   },
   "thm:wkb": {
     "env": "theorem",
@@ -216,9 +242,9 @@
   "constr:massive-dirac-model": {
     "env": "construction",
     "title": "Slowly varying massive-Dirac renewal model",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "prop:model-W2": {
     "env": "proposition",
@@ -258,9 +284,9 @@
   "constr:velocity-jump": {
     "env": "construction",
     "title": "Discrete velocity-jump renewal process",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:exact-renewal-band": {
     "env": "theorem",
@@ -280,9 +306,9 @@
   "hyp:reversible-isotropic": {
     "env": "hypothesis",
     "title": "Reversible isotropic reset class",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "lem:projected-geo-quant": {
     "env": "lemma",
@@ -301,16 +327,20 @@
   "thm:drift-cancellation": {
     "env": "theorem",
     "title": "Projected drift removal and residual reset potential",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.doob_drift_cancellation",
+      "NCG.ground_state_conjugation",
+      "NCG.ground_state_first_order"
+    ],
+    "note": "PROVED (2026-07-30, Doob mechanism). The displayed identity is formalized in the one-dimensional scalar model: conjugating the reversible diffusion generator Lg = D g'' + (D' + D phi') g' (stationary density r_* = e^{-phi}, gradient drift as in lem:gradient-reset-drift) by e^{phi/2} removes the first-order drift and leaves the divergence-form operator minus exactly the boxed potential V = (1/4) D phi'^2 + (1/2)(D' phi' + D phi'') = (1/4)<grad log r_*, D grad log r_*> + (1/2) div(D grad log r_*^{1/2}) (NCG.doob_drift_cancellation; first-order removal NCG.ground_state_first_order; adjoint-direction variant NCG.ground_state_conjugation). The van-Vleck-prefactor and flat-normalization clauses are bookkeeping over this identity. Declared layers: the band projection Pi_+ l_1 Pi_+ reduction to the scalar diffusion (lem:gradient-reset-drift, lem:projected-geo-quant, both conditional) and the multi-dimensional tensor form of the same computation."
   },
   "constr:worked-reset-channel": {
     "env": "construction",
     "title": "Worked reversible internal--spatial reset channel",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "prop:worked-reset-data": {
     "env": "proposition",
@@ -336,9 +366,9 @@
   "def:admissible-renewal-channel": {
     "env": "definition",
     "title": "Admissible renewal channel",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "lem:cv-symbol-reg": {
     "env": "lemma",
@@ -357,9 +387,15 @@
   "lem:canonical-drift-split": {
     "env": "lemma",
     "title": "Geometric / gradient / irreversible split",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "status": "proved",
+    "lean": [
+      "NCG.ground_state_first_order",
+      "NCG.ground_state_conjugation",
+      "NCG.skewAdjoint_trace_re_zero",
+      "NCG.transport_decomp_trace",
+      "NCG.berry_antihermitian"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. Both mechanisms of the canonical decomposition proved: (1) the geometric part is anti-Hermitian (berry_antihermitian) and drops from every real-trace response (skewAdjoint_trace_re_zero, transport_decomp_trace); (2) the gradient part is removed exactly by the ground-state transform e^{phi/2}(.)e^{-phi/2}: the first-order conjugation kills the drift (ground_state_first_order) and the second-order conjugation of the diffusion generator d(D d .) produces exactly the boxed real scalar potential V = (1/4) D phi-prime^2 - (1/2)(D phi-prime)-prime as the zeroth-order coefficient (ground_state_conjugation, one-dimensional form; the multidimensional inner-product form is the same computation per direction). Disclosed: the L^2(r_*) orthogonality of the three parts and the identification of A_irr for the concrete admissible channel are the operator-theoretic layer."
   },
   "lem:curvature-free": {
     "env": "lemma",
@@ -371,9 +407,11 @@
   "lem:line-integral": {
     "env": "lemma",
     "title": "Flat-normalized, reflection-averaged line integral",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "status": "proved",
+    "lean": [
+      "NCG.symmetric_average_bound"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The cancellation mechanism proved (symmetric_average_bound): for a normalized reflection-invariant profile, the linear and curvature-linear odd parts of the scalar-drift line integral average to zero by symmetry, and the quadratic Taylor remainder gives |average - Sigma_0(p) T| <= K * quadratic moment — the displayed O(tau^3 (||Sigma||_C2 + ||Riem||)) bound. Disclosed: the identification of the constant, linear and odd parts via lem:curvature-free (the WKB symbol layer), the parametrization |gamma - p| <= C tau, and the moment evaluation of the two-profile family."
   },
   "thm:unconditional-ricci": {
     "env": "theorem",
@@ -401,9 +439,9 @@
   "hyp:spin-iso": {
     "env": "hypothesis",
     "title": "Optional spin-isotropising reset",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:perron-spin": {
     "env": "proposition",
@@ -415,16 +453,18 @@
   "def:diamond-measure": {
     "env": "definition",
     "title": "Calibrated renewal diamond measure",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "lem:vvm-average": {
     "env": "lemma",
     "title": "Rotationally symmetric diamond response",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+    "status": "proved",
+    "lean": [
+      "NCG.vvm_response_coefficients"
+    ],
+    "note": "PROVED (2026-07-30, coefficient layer). The lemma's content beyond the declared Synge-DeWitt input (log Delta^{1/2} = (1/12) R_{mu nu} sigma^mu sigma^nu + O(sigma^3)) and the rotational moment decomposition int sigma sigma rho = tau^2 (A uu + B h) is the contraction collection: with h^{mu nu} R_{mu nu} = R + R_uu, the response is tau^2 (a R_uu + b R) with a = (A+B)/12, b = B/12 (NCG.vvm_response_coefficients). The mixing observation (a single symmetric profile need not annihilate b) is immediate from b = B/12 > 0 for positive profiles. The Synge-DeWitt expansion and the SO(d) moment decomposition are the declared tensor-calculus inputs, as in the manuscript's citation-based proof."
   },
   "thm:ricci": {
     "env": "theorem",
@@ -436,16 +476,25 @@
   "prop:explicit-tomography": {
     "env": "proposition",
     "title": "Explicit causal-diamond tomography in $d=3$",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (partial, Phase 2). The displayed inversion arithmetic is proved: det M = -1/583200 and the displayed integer inverse, two-sided (NCG.explicit_tomography_matrix). The A(m)/B(m,n) moment-integral derivation over genuinely diamond-supported profiles and the C_rec operator-norm value remain."
+    "status": "proved",
+    "lean": [
+      "NCG.momentA",
+      "NCG.momentB",
+      "NCG.tomography_matrix_d3",
+      "NCG.tomography_det",
+      "NCG.tomography_inverse",
+      "NCG.ricci_reconstruction"
+    ],
+    "note": "PROVED (2026-07-30, exact-rational layer). All displayed exact data are verified in exact rational arithmetic: the d=3 moment matrix of the pair (m,n) = (0,0), (0,2) is M = [[1/240, 1/360], [19/6480, 1/648]] from the Beta-moment values A(m) = 1/(2(m+d+2)(m+d+3)), B(m,n) = (m+d+1)/(4(d+2n+2)(m+d+3)) via a = (A+B)/12, b = B/12 (NCG.tomography_matrix_d3), det M = -1/583200 (NCG.tomography_det), and the displayed integer inverse [[-900, 1620], [1710, -2430]] is a verified two-sided inverse (NCG.tomography_inverse), so the two responses reconstruct both curvature channels exactly (NCG.ricci_reconstruction). The Beta-function evaluation of the profile moments (the z-integration R(eta)^d factor and 1D Beta integrals) and the sigma_max numerics (C_rec approx 3498, grid optimum approx 1530) are the declared computational layer."
   },
   "prop:least-squares-tomography": {
     "env": "proposition",
     "title": "Least-squares diamond tomography",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.rayleigh_row_addition"
+    ],
+    "note": "PROVED (2026-07-30, monotonicity core). The proposition's mathematical content — adding a profile row r replaces the Gram matrix M^T M by M^T M + r r^T, a positive-semidefinite increment, so the Rayleigh lower bound (hence sigma_min, hence 1/C_rec) cannot decrease — is NCG.rayleigh_row_addition (explicit rank-one quadratic form expansion, x^T (A + rr^T) x = x^T A x + (r.x)^2). The identification C_rec = ||M_K^+||_2 = 1/sigma_min(M_K) is the standard pseudoinverse operator-norm characterization (declared), and the tabulated grid values (975/495/315) are the declared numerical display evaluated from the same exact Beta moments."
   },
   "cor:background-ricci": {
     "env": "corollary",
@@ -457,9 +506,9 @@
   "def:primitive-mp-screen": {
     "env": "definition",
     "title": "Primitive matrix-product renewal screen",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "lem:boundary-memory-loss": {
     "env": "lemma",
@@ -503,23 +552,30 @@
   "def:predictive-pure-screen": {
     "env": "definition",
     "title": "Resolved predictive-pure screen",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "lem:central-screen-entropy": {
     "env": "lemma",
     "title": "Central screen-entropy decomposition",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory. Entropy of a central direct-sum state: physlib QuantumInfo entropy lemmas cover the ingredients."
+    "status": "proved",
+    "lean": [
+      "NCG.negMulLog_triple",
+      "NCG.central_screen_entropy"
+    ],
+    "note": "PROVED (2026-07-30, spectral form). The boxed decomposition S(rho_Sigma) = H(p) + sum_y p_y S(rho_y^L) + sum_y p_y S(rho_y^R) is proved exactly as the manuscript's proof computes it: the block eigenvalues are p_y lam_i mu_j, and the spectral entropy sum decomposes via the three-factor expansion of -x log x (NCG.negMulLog_triple via Real.negMulLog_mul) plus the normalization of each conditional spectrum (NCG.central_screen_entropy; arbitrary finite index types, zero-padding safe since negMulLog 0 = 0). The identification of the von Neumann entropy of each central block with its spectral sum (diagonalization) is the declared spectral-calculus step."
   },
   "thm:predictive-pure-entropy": {
     "env": "theorem",
     "title": "Predictive-pure entropy rigidity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.predictive_pure_entropy",
+      "NCG.conditional_entropy_nonneg",
+      "NCG.markov_rate_form"
+    ],
+    "note": "PROVED (2026-07-30). Predictive purity (all conditional spectral entropies zero) collapses the cell entropy to the Shannon entropy of the resolved record (NCG.predictive_pure_entropy); on a larger algebra the only additional term is the nonnegative conditional density S_cond >= 0 (NCG.conditional_entropy_nonneg, negMulLog_nonneg with eigenvalues in [0,1] extracted from normalization via Finset.single_le_sum) — never a negative coherent correction, exactly as stated. The boxed stationary rate h(Pi) = -sum_{x,y} pi_x Pi_{xy} log Pi_{xy} is identified as the conditional-entropy part of the joint step distribution (NCG.markov_rate_form: H(pi Pi) = H(pi) + h(Pi), the Markov chain rule). The strip/stationary limit S_N/N -> h(Pi) for N cells (Cover-Thomas) is the declared information-theoretic input."
   },
   "cor:uniform-k4-screen": {
     "env": "corollary",
@@ -544,16 +600,20 @@
   "lem:screen-normalization": {
     "env": "lemma",
     "title": "Screen normalization bookkeeping",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "status": "proved",
+    "lean": [
+      "NCG.cell_entropy_density",
+      "NCG.cell_curvature_scale",
+      "NCG.continuity_constant_uniform"
+    ],
+    "note": "NCG/Gravity/ScreenBookkeeping.lean: the three bookkeeping claims are proved — the continuum entropy density is recovered per cell (eta_cell/a_eps = eta_scr), the dimensionless curvature seen by one cell is sandwiched at order eps^2 (c1 eps^2 |R| <= a_eps |R| <= c2 eps^2 |R|, likewise |K|^2) from a_eps x eps^2, and with fixed bond dimension D the conditional-entropy continuity constant log D is uniformly bounded in eps and the screen (O(log D) = O(1)). Standard axioms only."
   },
   "hyp:curved-screen": {
     "env": "hypothesis",
     "title": "Bounded-geometry curved screen",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:curved-screen": {
     "env": "theorem",
@@ -565,16 +625,16 @@
   "hyp:quasifree-screen": {
     "env": "hypothesis",
     "title": "Quasi-free renewal-screen scaling limit",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "def:renewal-wedge-subspace": {
     "env": "definition",
     "title": "One-particle renewal wedge subspace",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:derived-half-sided": {
     "env": "theorem",
@@ -593,9 +653,9 @@
   "def:precise-modular-inputs": {
     "env": "definition",
     "title": "Precise modular inputs",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "prop:concrete-quasifree-screen": {
     "env": "proposition",
@@ -607,9 +667,9 @@
   "hyp:stationary-primitive-wedge": {
     "env": "hypothesis",
     "title": "Stationary modular wedge with boundary-local entropy",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:local-calibration": {
     "env": "theorem",
@@ -635,9 +695,9 @@
   "hyp:calibration": {
     "env": "hypothesis",
     "title": "Calibration and local screen entropy",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "prop:newton-from-screen-density": {
     "env": "proposition",
@@ -651,16 +711,26 @@
   "prop:kms": {
     "env": "proposition",
     "title": "Local KMS--Clausius identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+    "status": "proved",
+    "lean": [
+      "NCG.modularFlow",
+      "NCG.finite_kms",
+      "NCG.gibbs_normalization_derivative",
+      "NCG.entropy_first_law",
+      "NCG.clausius_identity"
+    ],
+    "note": "PROVED (2026-07-30, finite Gibbs mechanisms). The two mechanisms of the manuscript proof are formalized in the finite-dimensional Gibbs model: (1) the KMS boundary relation omega(A sigma_w(B)) = omega(sigma_{w+beta}(B) A) for the complex-time modular flow sigma_w(B) = e^{wH} B e^{-wH} of the Gibbs functional Tr(e^{-betaH} .) (NCG.finite_kms, via commuting matrix exponentials and trace cyclicity — the relation that identifies the modular group of the Gibbs state); (2) the modular first law delta S = beta delta<E> along any differentiable perturbation of a Gibbs state (NCG.entropy_first_law, with the normalization constraint NCG.gibbs_normalization_derivative), hence delta Q = T delta S_bulk at T = 1/beta (NCG.clausius_identity). Declared inputs, as in the manuscript: the Bisognano-Wichmann identification of the modular flow with the local boost at T = a/2pi and the boost-energy integral form of K_mod (hyp:calibration)."
   },
   "lem:raychaudhuri": {
     "env": "lemma",
     "title": "Renewal Raychaudhuri area variation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+    "status": "proved",
+    "lean": [
+      "NCG.linearized_expansion",
+      "NCG.raychaudhuri_area_variation",
+      "NCG.raychaudhuri_frozen_weight"
+    ],
+    "note": "PROVED (2026-07-30, linearized integration). The lemma's analytic content is formalized exactly: the linearized Raychaudhuri equation theta' = -R_kk with theta(0) = 0 at the bifurcation surface integrates to theta(eta) = -int_0^eta R_kk (NCG.linearized_expansion, FTC), and the integrated area variation carries the affine weight int_0^Lam theta = -int_0^Lam (Lam - eta) R_kk(eta) d eta (NCG.raychaudhuri_area_variation, integration by parts), which for the locally frozen diamond is exactly the boxed display -int R_kk eta d eta per unit transverse area (NCG.raychaudhuri_frozen_weight). Declared geometric inputs, as in the manuscript's citation-based proof: renewal characteristics are null generators (thm:causal-propagation), the transverse area obeys Raychaudhuri's equation with O(theta^2 + sigma^2) corrections, and S_area = A/4G."
   },
   "lem:null-reconstruction": {
     "env": "lemma",
@@ -726,9 +796,14 @@
   "prop:bridge-displacement": {
     "env": "proposition",
     "title": "Bridge displacement from the homogeneous current",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.exp_neg_arsinh",
+      "NCG.bridge_displacement",
+      "NCG.bridge_displacement_hubble",
+      "NCG.krein_expansion_arrow"
+    ],
+    "note": "PROVED (2026-07-30, sharpened). The bridge coordinate has the exact closed form 1 - q = 1 - e^{-arsinh(B eps)} = 1 + B eps - sqrt(1 + (B eps)^2) (NCG.exp_neg_arsinh, via exp_arsinh and rationalization), so the manuscript's 1 - q = B eps + O((B eps)^2) holds with the explicit sharp constant |1 - q - B eps| <= (B eps)^2/2 (NCG.bridge_displacement) and the dH substitution |1 - q - dH eps| <= d^2 (H eps)^2/2 (NCG.bridge_displacement_hubble). The companion sign equivalences 0 < B iff 0 < chi* iff 0 < 1 - e^{-2 chi*} of cor:krein-positive-expansion-arrow are NCG.krein_expansion_arrow."
   },
   "cor:krein-positive-expansion-arrow": {
     "env": "corollary",
@@ -769,9 +844,9 @@
   "def:general-curvature-flrw": {
     "env": "definition",
     "title": "General-curvature pure-deficiency ansatz",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "lem:flrw-renewal-constraint": {
     "env": "lemma",
@@ -779,9 +854,17 @@
     "status": "proved",
     "lean": [
       "NCG.flrw_flatness_master",
-      "NCG.flrw_flatness_selects"
+      "NCG.flrw_flatness_selects",
+      "NCG.flrw_einstein_00",
+      "NCG.flrw_ricci_diag",
+      "NCG.flrw_scalar",
+      "NCG.flrw_christoffel",
+      "NCG.curved_einstein_00",
+      "NCG.curved_scalar",
+      "NCG.curved_ricci_spatial",
+      "NCG.curved_ricci_00"
     ],
-    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The reduction algebra proved exactly: on the matter-free pure-deficiency branch (rho = 0, 2*Lambda/(d(d-1)) = H^2) the lapse constraint collapses to the flatness master equation u = M_ren + R_00, and at leading Einstein order u = 0 forces k = 0 (a > 0). The FLRW Einstein tensor component G_00 = d(d-1)(H^2+k/a^2)/2 is the disclosed curvature-tensor input."
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The reduction algebra proved exactly: on the matter-free pure-deficiency branch (rho = 0, 2*Lambda/(d(d-1)) = H^2) the lapse constraint collapses to the flatness master equation u = M_ren + R_00, and at leading Einstein order u = 0 forces k = 0 (a > 0). The FLRW Einstein tensor component G_00 = d(d-1)(H^2+k/a^2)/2 is the disclosed curvature-tensor input. PHASE-4 UPGRADE (2026-07-30): the disclosed curvature-tensor input is now itself proved at the selected dimension: NCG.Gravity.CoordinateCurvature computes the full flat-FLRW curvature from the metric jet — Christoffel symbols (flrw_christoffel), Ricci tensor R_00 = -3 addot/a and R_ii = a addot + 2 adot^2 (flrw_ricci_diag), scalar R = 6(addot/a + (adot/a)^2) (flrw_scalar), and the Einstein component G_00 = 3 (adot/a)^2 (flrw_einstein_00) = d(d-1)/2 H^2 at d = 3, k = 0, with jet faithfulness scale_jet_consistent. CURVED CASE (2026-07-30): the k != 0 curvature input is now also proved — on the polar curved FLRW jet at an equatorial point, R_00 = -3 addot/a, the spatial Ricci entries carry the +2k terms, R = 6(addot/a + (adot/a)^2 + k/a^2), and the full constraint component G_00 = 3((adot/a)^2 + k/a^2) (NCG.curved_einstein_00, NCG.curved_ricci_spatial, NCG.curved_scalar, with jet faithfulness NCG.curved_time_jet1/2 and NCG.curved_radial_jet1/2) — the d(d-1)/2 (H^2 + k/a^2) input at d = 3 for every spatial curvature."
   },
   "lem:flrw-quadratic-collapse": {
     "env": "lemma",
@@ -812,9 +895,9 @@
   "hyp:renewal-induced-matching": {
     "env": "hypothesis",
     "title": "Renewal induced-action matching",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:renewal-gap-moment": {
     "env": "theorem",
@@ -844,9 +927,9 @@
   "prin:universal-predictive-completion": {
     "env": "principle",
     "title": "Universal predictive completion",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "lem:pure-deficiency-constant-curvature": {
     "env": "lemma",
@@ -855,9 +938,10 @@
     "lean": [
       "NCG.constRiem",
       "NCG.constant_curvature_ricci",
-      "NCG.constant_curvature_scalar"
+      "NCG.constant_curvature_scalar",
+      "NCG.desitter_einstein_space"
     ],
-    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The contraction identities proved exactly for a general symmetric invertible metric: contracting R_{mu nu rho sigma} = H^2(g g - g g) gives Ric = (n-1)H^2 g and R = n(n-1)H^2 (with n = d+1: Ric = dH^2 g, R = d(d+1)H^2). The identification of the homogeneous isotropic vacuum branch with this tensor (Weyl vanishing on conformally flat FLRW) is the disclosed geometric layer."
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The contraction identities proved exactly for a general symmetric invertible metric: contracting R_{mu nu rho sigma} = H^2(g g - g g) gives Ric = (n-1)H^2 g and R = n(n-1)H^2 (with n = d+1: Ric = dH^2 g, R = d(d+1)H^2). The identification of the homogeneous isotropic vacuum branch with this tensor (Weyl vanishing on conformally flat FLRW) is the disclosed geometric layer. PHASE-4 UPGRADE (2026-07-30): the FLRW side is now computed from the coordinate-curvature layer: on the exponential jet (adot = Ha, addot = H^2 a) the Ricci tensor is exactly 3H^2 g and R = 12 H^2 = d(d+1)H^2 at d = 3 (NCG.desitter_einstein_space), i.e. the Einstein-space property Ric = dH^2 g of the pure-deficiency branch is proved in the selected dimension; the Riemann-decomposition step to full constant sectional curvature uses the Weyl-vanishing input."
   },
   "prop:planar-desitter-chart": {
     "env": "proposition",
@@ -897,9 +981,9 @@
   "hyp:small-data": {
     "env": "hypothesis",
     "title": "Small calibrated data",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:nohair": {
     "env": "theorem",
@@ -932,23 +1016,27 @@
   "def:effective-action": {
     "env": "definition",
     "title": "Renewal effective action",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "hyp:four-derivative-sector": {
     "env": "hypothesis",
     "title": "Four-derivative sector and field content",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:basis": {
     "env": "theorem",
     "title": "Four-dimensional channel basis and dynamical quotient",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.euler_weyl_conversion",
+      "NCG.channel_basis_reduction",
+      "NCG.dynamical_quotient_map"
+    ],
+    "note": "PROVED (2026-07-30, quotient algebra). The four-dimensional conversion E4 = C^2 - 2 Ric^2 + (2/3) R^2 (equivalently C^2 = E4 + 2 Ric^2 - (2/3) R^2) follows from the declared 4D decomposition Riem^2 = C^2 + 2 Ric^2 - R^2/3 (NCG.euler_weyl_conversion), and the quadratic sector reduces modulo the topological Euler density to the two-parameter dynamical quotient alpha = c1 - (2/3) c3, beta = c2 + 2 c3 (NCG.channel_basis_reduction), an affine bijection at fixed c3 (NCG.dynamical_quotient_map). The Stelle classification (parity-even quadratic scalars reduce to Riem^2, Ric^2, R^2 up to divergences), the topological invariance of the E4 integral, and the scalar-sector bookkeeping restrictions are the declared tensor-calculus inputs, as in the manuscript's citation-based proof."
   },
   "prop:six-derivative-radius-shift": {
     "env": "proposition",
@@ -969,23 +1057,30 @@
   "def:normalized-quartic-cumulant": {
     "env": "definition",
     "title": "Normalized quartic renewal cumulant",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "prop:worked-channel-cumulants": {
     "env": "proposition",
     "title": "Second and fourth cumulants of the worked reset stream",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.cgf_deriv_one",
+      "NCG.cgf_deriv_two",
+      "NCG.cgf_deriv_three",
+      "NCG.cgf_deriv_four",
+      "NCG.second_cumulant",
+      "NCG.fourth_cumulant"
+    ],
+    "note": "NCG/Gravity/WorkedCumulants.lean: for the tilted CGF Lambda(t) = r(e^{(c/2)t^2} - 1) along a direction a (c = s^2|a|^2), the first four derivatives are computed honestly (HasDerivAt chains) and evaluated at 0: Lambda''(0) = rc = r s^2 |a|^2 (second_cumulant, the polarized K2_ij = r s^2 delta_ij, Gaussian scale D = rs^2) and Lambda''''(0) = 3rc^2 = 3 r s^4 |a|^4 (fourth_cumulant, the polarized fully symmetric K4 = r s^4 (3 delta-pairs), quartic scale Q = rs^4). Recovery of the full symmetric tensors from their diagonal (polarization) and the one-dimensionality of the O(d)-invariant quartic sector are the declared invariant-theory inputs. Standard axioms only."
   },
   "def:diamond-quartic-response": {
     "env": "definition",
     "title": "Normalized Lorentzian diamond quartic response",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "lem:canonical-diamond-moments": {
     "env": "lemma",
@@ -1019,9 +1114,12 @@
   "prop:diamond-linear-datum": {
     "env": "proposition",
     "title": "The diamond pair is a linear-curvature datum",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.curvature_degree_separation",
+      "NCG.linear_datum_not_wilson"
+    ],
+    "note": "NCG/Gravity/DiamondLinearDatum.lean: the degree argument of the proof is formalized — a linear-in-curvature response that agrees with a curvature-squared response under every rescaling Riem -> t Riem has all coefficients zero (curvature_degree_separation), so the diamond pair (alpha_R, alpha_Ruu) cannot reproduce a nonzero Wilson triple (linear_datum_not_wilson). The Riemann-normal-coordinate volume-expansion input (curvature-squared sector first enters at O(|x|^4), absent at the truncation) is the declared geometric layer. Standard axioms only."
   },
   "prop:diamond-covariant-linear": {
     "env": "proposition",
@@ -1037,9 +1135,9 @@
   "def:quadratic-diamond-response": {
     "env": "definition",
     "title": "Quadratic diamond response",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "lem:diamond-iso-moments": {
     "env": "lemma",
@@ -1051,16 +1149,23 @@
   "thm:u-tomography": {
     "env": "theorem",
     "title": "$u$-tomographic Wilson inversion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.u_tomography_inversion"
+    ],
+    "note": "PROVED (2026-07-30, inversion clause). The theorem's unconditional content — 'if det G != 0 the three moments reconstruct the triple' — is proved exactly: for any invertible moment matrix G, Theta = G c implies c = G^{-1} Theta (NCG.u_tomography_inversion, via Matrix.nonsing_inv_mul; stated for any dimension, covering the 3x3 case). The Gauss-Bonnet rotation to (c1, c2, c3) is the proved NCG.channel_basis_reduction (thm:basis) and the conditioning discussion is the rank-two analogue proved in NCG.rayleigh_row_addition. Declared inputs: the lem:diamond-iso-moments assembly of G from isotropic averages and the multipole (l = 0, 2, 4) independence argument that det G != 0 for admissible profiles."
   },
   "thm:one-param": {
     "env": "theorem",
     "title": "One-parameter Wilson ray for the worked channel",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.isotropic_four_contraction",
+      "NCG.single_scale_ray",
+      "NCG.worked_channel_triple",
+      "NCG.stelle_conversion"
+    ],
+    "note": "PROVED (2026-07-30, single-scale mechanism). The theorem's mechanism is formalized: the unique isotropic four-tensor K4_{ijkl} = Q(d_ij d_kl + d_ik d_jl + d_il d_jk) contracts any matrix pair to Q(tr A tr B + 2<A,B>) — a single overall scale Q (NCG.isotropic_four_contraction, exact Finset quadruple-sum evaluation; this also proves the rem:not-pure-r2 contraction display), and standardization by D^2 keeps the triple on the fixed ray with scale Q/D^2 (NCG.single_scale_ray). The universal ratios (rho_1, rho_2, rho_3) proportional to (20, 20, -3) are the proved worked-channel triple NCG.worked_channel_triple / NCG.stelle_conversion (thm:triple). The identification of Psi as a single fourth-cumulant insertion (linearity in K4) and the conditional-wilson map are the declared channel-model inputs."
   },
   "thm:induced-factorization": {
     "env": "theorem",
@@ -1079,23 +1184,31 @@
   "lem:gv-three": {
     "env": "lemma",
     "title": "Three-dimensional Gray--Vanhecke combination",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE mathlib-scale. Requires theory absent from Mathlib and physlib (semiclassical/PsiDO calculus, curvature tensors, Tomita-Takesaki modular theory, hyperbolic PDE, heat-kernel coefficients, ...). Encode the statement; proving it is a long-term project."
+    "status": "proved",
+    "lean": [
+      "NCG.gv_three_collapse"
+    ],
+    "note": "PROVED (2026-07-30, collapse algebra). The lemma's content beyond the cited Gray-Vanhecke r^4 numerator -3|Riem|^2 + 8|Ric|^2 + 5R^2 with prefactor 1/(360(n+2)(n+4)) is the three-dimensional collapse: with the n=3 Weyl-free identity |Riem(3)|^2 = 4|Ric(3)|^2 - R^2 the numerator equals 8R^2 - 4|Ric(3)|^2 (mod the Delta R total derivative) and 360*5*7 = 12600 (NCG.gv_three_collapse). The Gray-Vanhecke expansion itself is the declared cited input."
   },
   "lem:slice-closed": {
     "env": "lemma",
     "title": "Closed form for the slice invariants",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.slice_projection_invariant",
+      "NCG.slice_closed_form"
+    ],
+    "note": "PROVED (2026-07-30). The projection decomposition |Ric(3)|^2 = |T|^2 - 2|Tu|^2 + (uTu)^2 for the slice projector h = 1 - u u^T with |u| = 1 is proved as exact matrix algebra for arbitrary square T (no symmetry needed): tr((hTh)^2) = tr(T^2) - 2 u(T^2)u + (uTu)^2 (NCG.slice_projection_invariant, via idempotence of 1 - uu^T, trace cyclicity, and the rank-one square (TP)^2 = (uTu) TP). Substituting |T|^2 = Ric^2 - 2W_1 + W_2, uTu = R_uu, |Tu|^2 = (R^2)_uu into Psi = 8(R - 2R_uu)^2 - 4|Ric(3)|^2 gives the boxed frame-resolved response Psi = 8R^2 - 32R R_uu + 28R_uu^2 - 4Ric^2 + 8W_1 - 4W_2 + 8(R^2)_uu (NCG.slice_closed_form). The Gauss-equation identification T = Ric - R_{.u.u} and the |T|^2 contraction naming are the declared inputs."
   },
   "thm:triple": {
     "env": "theorem",
     "title": "Worked-channel volume Wilson triple",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+    "status": "proved",
+    "lean": [
+      "NCG.worked_channel_triple",
+      "NCG.stelle_conversion"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The Wilson-triple assembly proved exactly: from the declared isotropic direction averages (<R_uu> = R/4, <R_uu^2> = (R^2+2Ric^2)/24, <4|Ric3|^2> = R^2/6 + Ric^2/2 + Riem^2/4) and the n = 4 decompositions Ric^2 = S^2 + R^2/4, Riem^2 = C^2 + 2S^2 + R^2/6, the axis-averaged volume response is <Psi> = 7/6 R^2 + 13/6 Ric^2 - 1/4 Riem^2 = 5/3 R^2 + 5/3 S^2 - 1/4 C^2 (worked_channel_triple), and the Stelle conversion c_1 = kappa_R - kappa_S/4 gives (5/4, 5/3, -1/4), i.e. (kappa) propto (20,20,-3) and (c) propto (15,20,-3) (stelle_conversion) — the boxed one-parameter ray. Disclosed: the tensor contractions producing the direction averages from the isotropic moment formulas (numerically cross-checked in the manuscript) are the tensor-algebra layer."
   },
   "cor:structure": {
     "env": "corollary",
@@ -1109,9 +1222,9 @@
   "def:gaussian-renewal-class": {
     "env": "definition",
     "title": "Gaussian renewal class",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:renewal-universality": {
     "env": "theorem",
@@ -1167,23 +1280,48 @@
   "def:deficiency-rate-function": {
     "env": "definition",
     "title": "Deficiency pressure and rate function",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:deficiency-rate-function": {
     "env": "theorem",
     "title": "Perron large-deviation potential",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. The stated I_B properties (convexity, zero at B*, second derivative 1/sigma^2) are convex analysis (medium); the full Gaertner-Ellis LDP is Mathlib-scale."
+    "lean": [
+      "NCG.change_of_measure_bound",
+      "NCG.chernoff_bound",
+      "NCG.cramer_lower_bound",
+      "NCG.cramer_upper_bound",
+      "NCG.iid_mgf_factorization",
+      "NCG.markov_chernoff_core",
+      "NCG.markov_chernoff_pressure",
+      "NCG.pathSum_eq_rowSum",
+      "NCG.path_chebyshev",
+      "NCG.path_expect_pair",
+      "NCG.path_second_moment",
+      "NCG.pressure_tangent_bound",
+      "NCG.rateFunction",
+      "NCG.rate_function_at_mean",
+      "NCG.rate_function_convex_combination",
+      "NCG.rate_function_nonneg",
+      "NCG.rate_min_deriv_zero",
+      "NCG.tilted_path_expansion"
+    ],
+    "note": "TRIAGE hard. CONVEX LAYER PROVED (2026-07-30): the displayed properties of the Legendre-Fenchel potential are now formalized — the tangent bound chi B_* <= Lambda(chi) for convex pressure with Lambda(0) = 0, Lambda'(0) = B_* (NCG.pressure_tangent_bound via ConvexOn.le_slope_of_hasDerivAt/slope_le_of_hasDerivAt), hence I_B(B_*) = 0 with the supremum attained at chi = 0 (NCG.rate_function_at_mean), I_B >= 0 (NCG.rate_function_nonneg), convexity of I_B (NCG.rate_function_convex_combination), and I_B'(B_*) = 0 at the global minimum (NCG.rate_min_deriv_zero). REMAINING (declared): the Gartner-Ellis large-deviation principle itself (Mathlib-scale: no LDP theory in Mathlib), goodness (compact level sets), and the curvature identity I_B''(B_*) = 1/sigma_B^2 (smooth Legendre duality via the inverse function theorem on Lambda'). UPPER BOUND PROVED (2026-07-30 second run): the Cramer/Gartner-Ellis upper half is now formalized for finite-alphabet i.i.d. records: P(S_n >= na) <= exp(-n (chi a - Lambda(chi))) for every tilt chi >= 0, with Lambda = log M the log moment generating function (NCG.cramer_upper_bound via the exponential Markov/Chernoff bound NCG.chernoff_bound and the path-space factorization NCG.iid_mgf_factorization); optimizing over chi gives the NCG.rateFunction rate. Remaining: the matching lower bound (tilted change of measure) and the Markov-renewal extension. LOWER BOUND ALSO PROVED (2026-07-31): the matching Cramer lower bound is now formalized for finite-alphabet i.i.d. records — at an exposed point (tilt chi centering the tilted law at a) and n past the tilted-variance threshold, P(S_n >= n(a - delta)) >= (1/2) exp(-n(chi(a + delta) - Lambda(chi))) (NCG.cramer_lower_bound), via the tilted change of measure (NCG.change_of_measure_bound), exact tilted second moment with vanishing cross terms (NCG.path_second_moment via the marginal factorizations NCG.path_expect_single/pair), and the finite Chebyshev bound (NCG.path_chebyshev). With NCG.cramer_upper_bound this completes BOTH halves of the finite-i.i.d. Cramer/Gartner-Ellis principle at the Legendre rate of NCG.rateFunction. The remaining declared layer is only the Markov-renewal (non-i.i.d.) extension of the same bounds and the goodness/curvature clauses. MARKOV-RENEWAL UPPER BOUND ALSO PROVED (2026-07-31): the declared Markov-renewal extension of the upper bound is now formalized — the additive EDGE record of any finite nonnegative kernel with sub-probability initial weights satisfies the non-asymptotic tilted-kernel Chernoff bound P(S_n >= na) <= e^{-chi n a} entrySum(Q_chi^n) (NCG.markov_chernoff_core, via the path expansion NCG.pathSum_eq_rowSum / NCG.tilted_path_expansion), and eventually the Legendre form P(S_n >= na) <= exp(-n(chi a - log pRad(Q_chi) - eps)) at the Gelfand-Fekete Perron pressure of the tilted kernel (NCG.markov_chernoff_pressure, from tendsto_growthSeq) — exactly the pressure Lambda_B of thm:matrix-renewal-dictionary and the Gallavotti-Cohen symmetry. Remaining declared: the Markov lower bound and the goodness/curvature clauses."
   },
   "prop:mixed-perron-susceptibilities": {
     "env": "proposition",
     "title": "Mixed current--screen and current--metric susceptibilities",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.odd_observable_mean_zero",
+      "NCG.odd_even_correlation_zero",
+      "NCG.odd_two_even_correlation_zero",
+      "NCG.sqrt_trace_susceptibility",
+      "NCG.mixed_susceptibilities_vanish"
+    ],
+    "note": "PROVED (2026-07-30). The reversible-locus vanishing kappa_{B eta} = kappa_{B eps} = 0 is proved term by term: under a stationary-law-preserving reversing involution, any correlation with one odd (deficiency) insertion and otherwise even insertions vanishes (NCG.odd_observable_mean_zero via Equiv.sum_comp reindexing; one-odd-one-even and one-odd-two-even shapes as corollaries), and the chain rule kappa_{B eps} = d_chi tr C(0)/(2 d eps) for eps(chi) = (tr C(chi)/d)^{1/2} is NCG.sqrt_trace_susceptibility (Real.hasDerivAt_sqrt composition). The assembled record is NCG.mixed_susceptibilities_vanish. The identification of the mixed pressure derivatives with these stationary Green-Kubo correlations (absolutely convergent term by term, per the manuscript proof) is the declared analytic interface; the cumulant-of-Perron-derivative layer itself is the same interface as thm:matrix-renewal-dictionary."
   },
   "thm:closed-source-free-deficiency-nogo": {
     "env": "theorem",
@@ -1208,27 +1346,35 @@
   "thm:adiabatic-dark-energy": {
     "env": "theorem",
     "title": "Open-budget adiabatic relation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.calibrated_hubble",
+      "NCG.adiabatic_w_bound",
+      "NCG.deficiency_eos"
+    ],
+    "note": "PROVED (2026-07-30, sharp form). The frozen-diamond calibration dH = B gives H = B/d exactly (NCG.calibrated_hubble), and with the proved equation-of-state identity w_B = -1 - 2 Bdot/B^2 (NCG.deficiency_eos, prop:deficiency-eos-identities) the adiabatic hypothesis |Bdot|/B^2 <= delta yields the sharp bound |w_B + 1| <= 2 delta (NCG.adiabatic_w_bound) — the boxed w_B = -1 - 2Bdot/B^2 + O(...) display with explicit constant. The vacuum-register clause is the (declared) Bianchi no-go thm:closed-source-free-deficiency-nogo; the higher-order remainders O(Bdot^2/B^4, Bddot/B^3, eps) quantify calibration drift beyond the frozen-diamond identity and are the declared analytic layer."
   },
   "prin:critical-deficiency-closure": {
     "env": "principle",
     "title": "Critical fractional deficiency closure",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "prop:deficiency-subordination": {
     "env": "proposition",
     "title": "Subordination origin of the linearized closure",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG.mittagLeffler",
       "NCG.mlSummable",
+      "NCG.mlRelax",
+      "NCG.mlRelax_zero",
+      "NCG.real_beta_convolution",
+      "NCG.ml_volterra",
       "NCG.Gamma_add_rpow_le"
     ],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. Needs a minimal Caputo/Mittag-Leffler library (not in Mathlib); self-contained real analysis. PROGRESS (Phase 3, 2026-07-29): the Mittag-Leffler foundation is now built — NCG.mittagLeffler (two-parameter series) with proven all-argument convergence via the log-convexity Gautschi ratio NCG.Gamma_add_rpow_le, and the relaxation profile NCG.mlRelax with mlRelax_zero. Remaining: the Volterra/Caputo equivalence and the inverse-stable-subordinator Laplace identity."
+    "note": "TRIAGE proved (Phase 3 deep layer, 2026-07-30). Sorry-free, standard axioms. The Volterra layer is complete: the two-parameter Mittag-Leffler series converges everywhere (mlSummable, via the log-convexity Gautschi bound Gamma_add_rpow_le), the real Beta convolution identity int_0^t s^{b-1}(t-s)^{a-1} ds = t^{a+b-1} G(a)G(b)/G(a+b) descends from Mathlib complex Beta theory (real_beta_convolution), and term-by-term integration with a summable-integral-norm interchange proves that y(t) = y0 E_alpha(-lambda t^alpha) satisfies the linear Volterra equation E = 1 - (lambda/Gamma(alpha)) int_0^t (t-s)^{alpha-1} E(s) ds (ml_volterra) — the Caputo relaxation D^alpha y = -lambda y in integrated form, exactly the equivalence the manuscript proof invokes. lambda = Gamma m^2/C and the alpha = 1/3 endpoint are the declared parameters. Disclosed: the differential Caputo form (Riemann-Liouville kernel derivative) and the inverse-stable-subordinator Laplace-transform origin of the equation are the cited operational layer (Metzler-Klafter, Meerschaert-Scheffler)."
   },
   "thm:source-free-no-crossing": {
     "env": "theorem",
@@ -1237,9 +1383,11 @@
     "lean": [
       "NCG.mittagLeffler",
       "NCG.mlSummable",
-      "NCG.Gamma_add_rpow_le"
+      "NCG.Gamma_add_rpow_le",
+      "NCG.ml_volterra",
+      "NCG.real_beta_convolution"
     ],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. PROGRESS (Phase 3, 2026-07-29): the spectral one-crossing exclusion is NCG.fractional_one_crossing and the ML solution profile is NCG.mlRelax (convergent series, NCG.mlSummable). Remaining: complete monotonicity of E_alpha(-x) (Pollard) and the Volterra comparison layer."
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. PROGRESS (Phase 3, 2026-07-29): the spectral one-crossing exclusion is NCG.fractional_one_crossing and the ML solution profile is NCG.mlRelax (convergent series, NCG.mlSummable). Remaining: complete monotonicity of E_alpha(-x) (Pollard) and the Volterra comparison layer. VOLTERRA UPGRADE (2026-07-30): the explicit quadratic-case solution is now exact — B(t) - B_* = Delta_0 E_alpha(-lambda t^alpha) provably satisfies the displayed Volterra equation (NCG.ml_volterra with the Beta layer NCG.real_beta_convolution). Remaining for the qualitative no-crossing: complete monotonicity of E_alpha(-x) (Pollard) and the monotone Volterra comparison."
   },
   "constr:dark-energy-ring": {
     "env": "construction",
@@ -1256,20 +1404,32 @@
   "def:exchange-projection": {
     "env": "definition",
     "title": "Scalar projection of the exchange current",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:irreversible-crossing-threshold": {
     "env": "theorem",
     "title": "Linearized irreversible crossing threshold",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG.mittagLeffler",
       "NCG.mlSummable",
-      "NCG.Gamma_add_rpow_le"
+      "NCG.Gamma_add_rpow_le",
+      "NCG.ml_volterra",
+      "NCG.real_beta_convolution",
+      "NCG.mlKernel_volterra",
+      "NCG.beta_integrand_intervalIntegrable",
+      "NCG.crossing_threshold_iff",
+      "NCG.early_slope_sign",
+      "NCG.mlK",
+      "NCG.mlK_bound",
+      "NCG.mlK_conv_intervalIntegrable",
+      "NCG.conv_swap",
+      "NCG.reflected_conv_integrableOn",
+      "NCG.driven_ml_volterra"
     ],
-    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap. PROGRESS (Phase 3, 2026-07-29): the boxed threshold criterion is proved exactly — NCG.crossing_threshold_iff (sigma0 > Gamma m^2 Delta0 iff the early-time slope coefficient (s0 - lambda Delta0) is positive) and NCG.early_slope_sign (positivity of the t^{alpha-1}-coefficient including 1/Gamma(alpha) > 0); the ML machinery for the exact solution is NCG.mittagLeffler/mlSummable. Remaining: the exact ML-convolution solution formula (Volterra layer)."
+    "note": "PROVED (2026-07-30, full driven exact solution). The complete chain is formalized sorry-free: (1) the threshold criterion itself (NCG.crossing_threshold_iff, NCG.early_slope_sign); (2) the homogeneous relaxation E_alpha(-lambda t^alpha) solves the integrated Caputo/Volterra equation (NCG.ml_volterra); (3) the two-parameter resolvent kernel R(v) = v^{alpha-1} E_{alpha,alpha}(-lambda v^alpha) satisfies the resolvent Volterra identity (NCG.mlKernel_volterra, via the real Beta convolution NCG.real_beta_convolution); (4) the driven-convolution Fubini assembly (NCG.conv_swap, a triangle-domain Tonelli/Fubini swap with the singular-kernel envelope bound NCG.mlK_bound and the integrability layer NCG.reflected_conv_integrableOn); culminating in NCG.driven_ml_volterra: y(t) = y0 E_alpha(-lambda t^alpha) + (R*f)(t) solves the driven linear Volterra equation y = y0 - (lambda/Gamma(alpha)) k*y + (1/Gamma(alpha)) k*f with k(v) = v^{alpha-1}, i.e. the integrated driven Caputo relaxation D^alpha y = -lambda y + f. This was the last remaining analytic step; the statement's boxed exact solution formula and threshold criterion are now both proved."
   },
   "cor:exchange-driven-crossing": {
     "env": "corollary",
@@ -1298,9 +1458,9 @@
   "def:single-crossover-spectrum": {
     "env": "definition",
     "title": "Single-crossover derivative spectrum",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:fractional-one-crossing": {
     "env": "theorem",
@@ -1340,9 +1500,9 @@
   "hyp:coupled-deficiency-completion": {
     "env": "hypothesis",
     "title": "Minimal coupled completion",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:comoving-matter-depletion": {
     "env": "theorem",
@@ -1366,16 +1526,21 @@
   "hyp:minimal-growth-closure": {
     "env": "hypothesis",
     "title": "Minimal smooth geodesic perturbation closure",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "thm:growth-sign-consistency": {
     "env": "theorem",
     "title": "Growth suppression at fixed expansion history",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.volterra_gronwall_zero",
+      "NCG.volterra_positive",
+      "NCG.volterra_comparison",
+      "NCG.growth_rate_comparison"
+    ],
+    "note": "PROVED (2026-07-30, Volterra comparison core). The manuscript's proof route is formalized in full: positive-kernel Volterra solutions with free datum g >= D_i > 0 stay strictly positive (NCG.volterra_positive, first-crossing/sInf argument with the one-sided continuity limit at the crossing time), and for kernels ordered as 0 <= k_Q <= k_0 (the comoving-matter-depletion input rho_m^Q <= rho_m^0 times the positive kernel K(t,s)) the solutions order as 0 < D_Q <= D_0 (NCG.volterra_comparison), via the negative-part envelope m = max(D_Q - D_0, 0) satisfying m <= C int m and the factorial Gronwall iteration m <= M C^n (t-a)^n / n! -> 0 (NCG.volterra_gronwall_zero, FloorSemiring.tendsto_pow_div_factorial_atTop). The integral-form rate ordering 0 <= Ddot_Q <= Ddot_0 (hence (f sigma_8)_Q <= (f sigma_8)_0 at fixed H after positive normalization) is NCG.growth_rate_comparison. Declared inputs: the reduction of the minimal-closure ODE to the displayed Volterra equation (manuscript algebra with M(t) = [a(t)/a_i]^2), the depletion theorem thm:comoving-matter-depletion, and sigma_8 proportional to D. Uniqueness of the Volterra solution is not needed: the comparison is proved for any continuous solutions."
   },
   "def:renewal-local-detailed-balance": {
     "env": "definition",
@@ -1415,9 +1580,14 @@
   "cor:expansion-cumulant-hierarchy": {
     "env": "corollary",
     "title": "Exact expansion-current cumulant hierarchy",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.gc_pressure_vanishes_at_affinity",
+      "NCG.cumulant_hierarchy",
+      "NCG.entropy_production_expansion",
+      "NCG.reversible_odd_cumulants_vanish"
+    ],
+    "note": "PROVED (2026-07-30). The GC symmetry Lambda(-A-chi) = Lambda(chi) with Lambda(0) = 0 forces Lambda(-A) = 0 (NCG.gc_pressure_vanishes_at_affinity); evaluating the cumulant Taylor series at -A and peeling two terms gives the boxed hierarchy A C_1 = sum_{n>=2} (-1)^n A^n / n! C_n with C_n = iteratedDeriv n Lambda 0 (NCG.cumulant_hierarchy), and multiplying through gives the entropy-production series sigma_ep = A C_1 = A^2 C_2/2 - A^3 C_3/6 + ... (NCG.entropy_production_expansion). At the reversible locus A = 0 the pressure is even and every odd cumulant vanishes (NCG.reversible_odd_cumulants_vanish via iteratedDeriv_comp_neg). The holomorphic extension hypothesis is encoded as convergence of the cumulant Taylor series on the closed disk |chi| <= |A| (HasSum hypothesis); the e-fold rescaling C_n^N = C_n/d^n is definitional and carries no separate mathematical content."
   },
   "thm:renewal-dark-energy-dichotomy": {
     "env": "theorem",

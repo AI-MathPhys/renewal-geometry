@@ -1,0 +1,774 @@
+{
+  "thm:direct-sum-firewall": {
+    "env": "theorem",
+    "title": "Direct-sum firewall",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:old-abel": {
+    "env": "proposition",
+    "title": "Abel reduction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:old-zero": {
+    "env": "corollary",
+    "title": "The zero-shift slice is not an $L$-function frame",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:port-tensor": {
+    "env": "definition",
+    "title": "Kinematic grand port tensor",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "prop:anchor": {
+    "env": "proposition",
+    "title": "Positivity and anchor recovery",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:marginals": {
+    "env": "theorem",
+    "title": "Exact difference and sum selectors",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:twin-gold-port": {
+    "env": "corollary",
+    "title": "Twin and Goldbach ports",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:grand": {
+    "env": "definition",
+    "title": "Universal source-to-port grand tensor",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:schur": {
+    "env": "theorem",
+    "title": "Schur-short variational principle",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:diagonal-positivity-is-not-quotient-coercivity": {
+    "env": "warning",
+    "title": "Diagonal positivity is not quotient coercivity",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:finite-weil": {
+    "env": "theorem",
+    "title": "Finite reflected Weil criterion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "corollary:ordinary-frames-do-not-locate-zeros": {
+    "env": "corollary",
+    "title": "Ordinary frames do not locate zeros",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:laplace-pole": {
+    "env": "lemma",
+    "title": "Laplace-pole obstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:gaussian-grh": {
+    "env": "theorem",
+    "title": "Gaussian Hardy criterion for GRH",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:plancherel": {
+    "env": "theorem",
+    "title": "Exact Gaussian Plancherel identity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:scaling-indicator": {
+    "env": "theorem",
+    "title": "Finite scaling indicator",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:residue-parseval": {
+    "env": "theorem",
+    "title": "Character--residue Parseval identity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:fixed-mod-grh": {
+    "env": "corollary",
+    "title": "Conditional fixed-modulus GRH chain",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:spectral": {
+    "env": "ledger",
+    "title": "Spectral chain",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:v002-functional-equation": {
+    "env": "theorem",
+    "title": "Typed primitive functional equation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:complex-character-typing": {
+    "env": "warning",
+    "title": "Complex-character typing",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "prop:v002-imprimitive": {
+    "env": "proposition",
+    "title": "Exact imprimitive Euler correction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "corollary:primitive-reduction-of-dirichlet-grh": {
+    "env": "corollary",
+    "title": "Primitive reduction of Dirichlet GRH",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v002-twisted-mellin": {
+    "env": "theorem",
+    "title": "Exact twisted Mellin transform",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:v002-completed-packet": {
+    "env": "proposition",
+    "title": "Completed packet symbol and trivial zeros",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lemma:packet-selection": {
+    "env": "lemma",
+    "title": "Packet selection",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v002-zero-amplification": {
+    "env": "theorem",
+    "title": "Off-critical zero amplification",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "definition:packetwise-subpower-property": {
+    "env": "definition",
+    "title": "Packetwise subpower property",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:v002-packet-grh": {
+    "env": "theorem",
+    "title": "Packetwise conditional GRH",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:v002-translation-nogo": {
+    "env": "proposition",
+    "title": "Finite self-translation no-go",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "audit:what-the-dirichlet-collection-adds": {
+    "env": "audit",
+    "title": "What the Dirichlet collection adds",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:v002-prolate-basic": {
+    "env": "theorem",
+    "title": "Basic prolate concentration theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v002-leakage": {
+    "env": "theorem",
+    "title": "Exact leakage identity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v002-cluster": {
+    "env": "theorem",
+    "title": "Separated cluster and Feshbach short",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "corollary:simple-even-extraction": {
+    "env": "corollary",
+    "title": "Simple-even extraction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v002-hurwitz-rh": {
+    "env": "theorem",
+    "title": "Real-rooted approximation implies RH",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v002-pswf-chain": {
+    "env": "theorem",
+    "title": "Conditional prolate cluster route to RH",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "audit:what-the-pswf-collection-contributes": {
+    "env": "audit",
+    "title": "What the PSWF collection contributes",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:v002-weyl-barrier": {
+    "env": "theorem",
+    "title": "Scalar-invariant two-channel Weyl barrier",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v002-scalar-bulk": {
+    "env": "theorem",
+    "title": "Scalar bulk carries no ordering",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:critical-scale-firewall": {
+    "env": "warning",
+    "title": "Critical-scale firewall",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "ledger:v002-spectral": {
+    "env": "ledger",
+    "title": "Expanded RH/GRH spectral ledger",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "lem:prime-power": {
+    "env": "lemma",
+    "title": "Prime-power contamination",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:car-prime": {
+    "env": "theorem",
+    "title": "Exact ordered-history prime filter",
+    "status": "proved",
+    "lean": [
+      "NCG.perm_sign_sum_eq_zero",
+      "NCG.car_prime_endpoint"
+    ],
+    "note": "NCG/Arithmetic/ArithParity.lean: the signed permutation sum vanishes for k >= 2 (pairing by a fixed transposition), so the CAR endpoint on the symmetric ordered-history source returns the target at depth one and annihilates every deeper symmetric history (car_prime_endpoint, linear-map form). The anticommutation action E_n|pi> = sgn(pi)|n> is the declared CAR input. Standard axioms only."
+  },
+  "thm:parity-recovery": {
+    "env": "theorem",
+    "title": "Exact depth-one recovery",
+    "status": "proved",
+    "lean": [
+      "NCG.parity_recovery"
+    ],
+    "note": "NCG/Arithmetic/ArithParity.lean: P1 = (M-J)/2, P2 = (M+J)/2 from M = P1+P2, J = -P1+P2, and the quantitative clause J <= (1-2d)M => P1 >= dM. Standard axioms only."
+  },
+  "thm:twin-chain": {
+    "env": "theorem",
+    "title": "Conditional twin-prime chain",
+    "status": "proved",
+    "lean": [
+      "NCG.carrier_prime_mass",
+      "NCG.twin_chain"
+    ],
+    "note": "NCG/Arithmetic/ArithParity.lean: finite-carrier form with the o(M) hypothesis quantified as J <= (1-2d)M (the manuscript's own general clause): a positive twin carrier with mass >= m0 > 0 and small Moebius current supports a twin-prime pair (carrier_prime_mass extracts a positively weighted prime target). The (T1)-(T3) hypotheses are the declared open certificates. Standard axioms only."
+  },
+  "thm:gold-chain": {
+    "env": "theorem",
+    "title": "Conditional binary Goldbach chain",
+    "status": "proved",
+    "lean": [
+      "NCG.carrier_prime_mass",
+      "NCG.gold_chain"
+    ],
+    "note": "NCG/Arithmetic/ArithParity.lean: same skeleton for the Goldbach carrier: positive mass plus small Moebius current produces primes a, b with a + b = N. The (G1)-(G3) hypotheses are the declared open certificates. Standard axioms only."
+  },
+  "thm:HL-sufficient": {
+    "env": "theorem",
+    "title": "Classical asymptotic sufficient conditions",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:parity-firewall": {
+    "env": "warning",
+    "title": "Parity firewall",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:v003-mellin-degree": {
+    "env": "theorem",
+    "title": "Exact Mellin-degree coefficients",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "definition:exact-degree-2-squarefree-port": {
+    "env": "definition",
+    "title": "Exact degree-$\\le2$ squarefree port",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "prop:v003-Ple2-values": {
+    "env": "proposition",
+    "title": "Support and exact values",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:v003-selberg": {
+    "env": "lemma",
+    "title": "Selberg degree-two identity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:v003-atom-bulk": {
+    "env": "corollary",
+    "title": "Exact prime atom plus semiprime bulk",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v003-signed-separator": {
+    "env": "theorem",
+    "title": "Exact cancellation of the squarefree $P_2$ layer",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:v003-signed-additive-closure": {
+    "env": "corollary",
+    "title": "Signed fixed-gap and fixed-sum closure",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v003-cauchy-minorant": {
+    "env": "theorem",
+    "title": "Stable Cauchy minorant",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "corollary:dyadic-bank": {
+    "env": "corollary",
+    "title": "Dyadic bank",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v003-cauchy-transfer": {
+    "env": "theorem",
+    "title": "Positive-mass transfer through the finite bank",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:v003-ratio-conversion": {
+    "env": "proposition",
+    "title": "Factor-ratio conversion",
+    "status": "proved",
+    "lean": [
+      "NCG.ratio_conversion"
+    ],
+    "note": "NCG/Arithmetic/ArithParity.lean: r <= q^a gives log r/log(rq) <= a/(1+a) and log q/log(rq) >= 1/(1+a) (log monotonicity + fraction algebra). Standard axioms only."
+  },
+  "ass:v003-quant-seeds": {
+    "env": "assumption",
+    "title": "Quantitative prime--semiprime seeds",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:v003-seed-transfer": {
+    "env": "theorem",
+    "title": "Quantitative seed transfer",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:untitled": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "lem:v003-rough-weight-support": {
+    "env": "lemma",
+    "title": "Pointwise support of the rough weight",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ass:v003-support-retaining": {
+    "env": "assumption",
+    "title": "Support-retaining Li--Liu audit hypothesis",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "cor:v003-natural-rough-carrier": {
+    "env": "corollary",
+    "title": "Natural-scale rough carrier",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ass:v003-two-form-sieve": {
+    "env": "assumption",
+    "title": "Standard two-linear-form upper-bound sieve",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:v003-profile-lipschitz": {
+    "env": "theorem",
+    "title": "Lipschitz semiprime profile",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v003-atomic-continuous": {
+    "env": "theorem",
+    "title": "Atomic--continuous alternative",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:untitled--2": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:v003-twinfree-marginals": {
+    "env": "theorem",
+    "title": "Twin-free realization of all sub-half marginals",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:v003-maynard-ceiling": {
+    "env": "proposition",
+    "title": "Maynard coordinate ceiling",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:v003-minimal-singular-series": {
+    "env": "proposition",
+    "title": "Gap $2$ has minimal even-gap singular series",
+    "status": "proved",
+    "lean": [
+      "NCG.minimal_singular_series"
+    ],
+    "note": "NCG/Arithmetic/ArithParity.lean: with the displayed product formula over odd prime divisors as input, Sing(d) >= Sing(2) since every factor (l-1)/(l-2) > 1, with equality iff the odd-divisor set is empty. Standard axioms only."
+  },
+  "prop:v003-matching-energy": {
+    "env": "proposition",
+    "title": "Exact matching-energy decomposition",
+    "status": "proved",
+    "lean": [
+      "NCG.matching_identity",
+      "NCG.matching_energy"
+    ],
+    "note": "NCG/Arithmetic/ArithParity.lean: 2XY = X+Y-(X-Y)^2 on binaries (X^2 = X) and the weighted decomposition 2E_w = V_w - D_w. Standard axioms only."
+  },
+  "prop:v003-negative-temperature": {
+    "env": "proposition",
+    "title": "Exact positive/negative temperature identity",
+    "status": "proved",
+    "lean": [
+      "NCG.mellinPort",
+      "NCG.mellin_negative_temperature"
+    ],
+    "note": "NCG/Arithmetic/ArithParity.lean: for the squarefree Mellin port E_c(n) = mu^2(n) prod (l^c - 1), the exact identity n^c E_{-c}(n) = mu(n) E_c(n) is proved via prod_primeFactors_of_squarefree, rpow algebra and mu = (-1)^omega; both sides vanish on nonsquarefree n. Standard axioms only."
+  },
+  "corollary:parity-firewall": {
+    "env": "corollary",
+    "title": "Parity firewall",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v003-four-additive-routes": {
+    "env": "theorem",
+    "title": "Four rigorous routes to additive closure",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:goldbach-twin-prime-machinery-status": {
+    "env": "ledger",
+    "title": "Goldbach/twin-prime machinery status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:mass-prefix": {
+    "env": "theorem",
+    "title": "Exact mass--prefix identity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:fourier-boundary": {
+    "env": "lemma",
+    "title": "Fourier boundary identity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:mass-flux": {
+    "env": "theorem",
+    "title": "Mass--flux inequality",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:multiport-prefix": {
+    "env": "theorem",
+    "title": "Multiport mass--prefix theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "definition:joint-flagship-source-quotient": {
+    "env": "definition",
+    "title": "Joint flagship source quotient",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:grand-arithmetic": {
+    "env": "theorem",
+    "title": "Grand arithmetic closure theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:what-the-theorem-does-not-say": {
+    "env": "warning",
+    "title": "What the theorem does not say",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "prop:phase-firewall": {
+    "env": "proposition",
+    "title": "Relative-phase firewall",
+    "status": "proved",
+    "lean": [
+      "NCG.phase_firewall"
+    ],
+    "note": "NCG/Arithmetic/ArithParity.lean: a global relative phase leaves the rank-one endpoint density matrix unchanged while ||a - e^{i phi} a||^2 = 2||a||^2(1 - cos phi). Standard axioms only."
+  },
+  "thm:clifford": {
+    "env": "theorem",
+    "title": "Finite Lorentzian Clifford theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:dirac-scaling": {
+    "env": "theorem",
+    "title": "Flat Dirac scaling",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:screen-area": {
+    "env": "proposition",
+    "title": "Markov screen area law",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:einstein": {
+    "env": "theorem",
+    "title": "Conditional Einstein closure",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:spacetime-chain": {
+    "env": "ledger",
+    "title": "Spacetime chain",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:qutrit": {
+    "env": "theorem",
+    "title": "Nondegenerate qutrit completion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:untitled--3": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:hypercharge": {
+    "env": "theorem",
+    "title": "Hypercharge descent",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:anomaly": {
+    "env": "theorem",
+    "title": "Anomaly-free descended generation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:coupling": {
+    "env": "theorem",
+    "title": "Conditional tree-level coupling relation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:untitled--4": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:sm-chain": {
+    "env": "theorem",
+    "title": "Conditional gauge-descent theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:gauge-chain": {
+    "env": "ledger",
+    "title": "Gauge chain",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "thm:flagship": {
+    "env": "theorem",
+    "title": "Universal Grand Tensor Conditional Closure",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "openproblem:fixed-subcritical-spectral-mass-flux-estimate": {
+    "env": "openproblem",
+    "title": "Fixed-subcritical spectral mass--flux estimate",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "openproblem:selector-stable-additive-sign": {
+    "env": "openproblem",
+    "title": "Selector-stable additive sign",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "openproblem:quantitative-positive-support": {
+    "env": "openproblem",
+    "title": "Quantitative positive support",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "openproblem:interacting-modular-scaling": {
+    "env": "openproblem",
+    "title": "Interacting modular scaling",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "openproblem:microscopic-standard-model-loading": {
+    "env": "openproblem",
+    "title": "Microscopic Standard-Model loading",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  },
+  "lemma:physical-coupling-controls-a-gaussian-port": {
+    "env": "lemma",
+    "title": "Physical coupling controls a Gaussian port",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:untitled--5": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+  }
+}

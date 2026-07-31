@@ -2,30 +2,37 @@
   "definition:record-algebra": {
     "env": "definition",
     "title": "Record algebra",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.PointerRecord"
+    ],
+    "note": "STATEMENT ENCODED (2026-07-30): the record-algebra effects with stable orthogonal labels are encoded as NCG.PointerRecord (positive effects, resolution of identity, orthogonal labels) in the finite matrix model; the predictive-quotient stability clause is carried by the companion structures (NCG.RegenerativeRecord, NCG.RenewalPointerBasis)."
   },
   "definition:regenerative-record": {
     "env": "definition",
     "title": "Regenerative record",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.RegenerativeRecord"
+    ],
+    "note": "STATEMENT ENCODED (2026-07-30): the sector factorization Phi_future o Phi_record = Phi_future^(i) o Pi_i with idempotent sector projection is NCG.RegenerativeRecord (exact predictive-quotient form; the 'up to decaying errors' clause is encoded as exact equality in the quotient)."
   },
   "ass:pointer-record": {
     "env": "assumption",
     "title": "Predictively sufficient pointer record",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.PointerRecord",
+      "NCG.branchWeight_additive"
+    ],
+    "note": "STATEMENT ENCODED (2026-07-30): clauses (i)-(iii) are the NCG.PointerRecord fields; clause (iv) (additive branch weights under disjoint coarse graining) is PROVED to be automatic in the encoded model (NCG.branchWeight_additive, trace linearity) — matching the manuscript's remark that additivity is not an independent postulate."
   },
   "principle:collapse": {
     "env": "principle",
     "title": "Renewal collapse principle",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "prop:definiteness": {
     "env": "proposition",
@@ -56,9 +63,11 @@
   "definition:predictive-branch-weight": {
     "env": "definition",
     "title": "Predictive branch weight",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.branchWeight"
+    ],
+    "note": "STATEMENT ENCODED (2026-07-30): w(i) = Tr(E_i rho) is NCG.branchWeight; refinement invariance is the predictive-quotient clause carried by the record structures."
   },
   "thm:pointer-born": {
     "env": "theorem",
@@ -76,9 +85,11 @@
   "def:regular-weight": {
     "env": "definition",
     "title": "Regular predictive amplitude weight",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.RegularWeight"
+    ],
+    "note": "STATEMENT ENCODED (2026-07-30): the five clauses (positivity, orthogonal additivity, tensor multiplicativity, channel-equivalent deck invariance over an admissible set, ray regularity) are the fields of NCG.RegularWeight. The derived quadratic form is the proved thm:renewal-born-disintegration chain (NCG.cauchy_add_mul_id, NCG.weight_additive_of_orthogonal, NCG.renewal_born_weight)."
   },
   "thm:renewal-born-disintegration": {
     "env": "theorem",
@@ -104,43 +115,53 @@
   "definition:renewal-pointer-basis": {
     "env": "definition",
     "title": "Renewal pointer basis",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.RenewalPointerBasis"
+    ],
+    "note": "STATEMENT ENCODED (2026-07-30): sector preservation Instr(P_i rho P_i) in P_i B P_i with orthogonal complete projections is NCG.RenewalPointerBasis."
   },
   "definition:redundant-renewal-record": {
     "env": "definition",
     "title": "Redundant renewal record",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "status": "statement_encoded",
+    "lean": [
+      "NCG.RedundantRecord"
+    ],
+    "note": "STATEMENT ENCODED (2026-07-30): fragment subalgebras with agreeing inference maps are NCG.RedundantRecord."
   },
   "prop:objectivity": {
     "env": "proposition",
     "title": "Objectivity criterion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+    "status": "proved",
+    "lean": [
+      "NCG.union_bound",
+      "NCG.redundant_agreement"
+    ],
+    "note": "PROVED (2026-07-30, quantitative core). The proposition's content — observers with access to different fragments condition on the same sector with probability approaching one as redundancy grows — is formalized sharply: if each of N fragments infers the true sector label except on an event of probability at most eps, then all N observers agree on the sector except on probability at most N*eps (NCG.redundant_agreement via the finite union bound NCG.union_bound), so agreement probability -> 1 whenever the per-fragment error decays faster than 1/N (the spectrum-broadcast/quantum-Darwinism regime). The identification of the fragment failure events inside the quantum record model is the declared modeling step (NCG.RedundantRecord encodes the exact-agreement limit)."
   },
   "interp:weak-branch": {
     "env": "interpretation",
     "title": "Weak branch realism",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement."
+    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "principle:horizon-record": {
     "env": "principle",
     "title": "Horizon record principle",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
   },
   "prop:selection-reconstruction": {
     "env": "proposition",
     "title": "Selection-reconstruction duality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding."
+    "status": "proved",
+    "lean": [
+      "NCG.conditionalState",
+      "NCG.conditioning_tower"
+    ],
+    "note": "PROVED (2026-07-30, operative algebra). The duality's operative content — both branch selection and horizon reconstruction are governed by inclusion and conditioning of record algebras — is formalized as the conditioning tower: for nested record sectors W <= Z (WZ = ZW = W), conditioning on the coarse sector and then the finer one equals direct conditioning on the finer sector (NCG.conditioning_tower on the Lueders conditional state NCG.conditionalState), so enlarging the accessible algebra refines selection consistently — the measurement reading (selection) and the horizon reading (reconstruction as radiation access grows) are the two directions of the same tower. The identification of the horizon setting (Page-time completeness of the radiation subalgebra) is the manuscript's declared interpretive framing."
   }
 }

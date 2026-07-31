@@ -118,7 +118,7 @@ theorem modular_conj_shift_single (Λ : ι → ℝ) (β : ℝ) (s : ι → ι)
   rw [← mul_assoc, ← Complex.exp_add]
   congr 1
   push_cast
-  ring
+  ring_nf
 
 /-- **Lemma `lem:bounded-twisted`** (multiplier bound): under bounded
 length increments `|Λ(sx) − Λ(x)| ≤ L`, the conjugation multiplier is

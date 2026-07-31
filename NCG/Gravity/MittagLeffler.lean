@@ -81,7 +81,7 @@ theorem Gamma_add_rpow_le {x α : ℝ} (hx : 2 ≤ x) (hα : 0 < α) :
 
 /-- The two-parameter Mittag-Leffler series converges for all real
 arguments (`0 < α ≤ 1 ≤ β`). -/
-theorem mlSummable {α β : ℝ} (hα : 0 < α) (hβ : 1 ≤ β) (x : ℝ) :
+theorem mlSummable {α β : ℝ} (hα : 0 < α) (hβ : 0 < β) (x : ℝ) :
     Summable (fun n : ℕ => x ^ n / Real.Gamma (α * n + β)) := by
   set M : ℝ := max 1 ((2 * |x| + 1) ^ (1 / α)) with hM
   have hM1 : (1 : ℝ) ≤ M := le_max_left _ _

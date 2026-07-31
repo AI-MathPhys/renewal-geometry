@@ -51,24 +51,20 @@ theorem scalar_traceless_compl : IsCompl scalarLine traceless := by
     have htr : Matrix.trace (c • (1 : Matrix (Fin 4) (Fin 4) ℂ)) = 0 :=
       hM2
     rw [Matrix.trace_smul, Matrix.trace_one] at htr
-    simp only [Fintype.card_fin, smul_eq_mul] at htr
-    have hc : c = 0 := by
-      have h4 : (Fintype.card (Fin 4) : ℂ) = 4 := by norm_num
-      field_simp at htr
-      rcases htr with h | h
-      · exact h
-      · norm_num at h
+    simp only [Fintype.card_fin, Nat.cast_ofNat, smul_eq_mul] at htr
+    have hc : c = 0 :=
+      (mul_eq_zero.mp htr).resolve_right (by norm_num)
     rw [hc, zero_smul]
   · -- codisjoint: every M = (tr M/4)•1 + traceless
     rw [codisjoint_iff, eq_top_iff]
     intro M _
     have hsplit : M = (Matrix.trace M / 4) •
         (1 : Matrix (Fin 4) (Fin 4) ℂ)
-        + (M - (Matrix.trace M / 4) • 1) := by ring_nf
+        + (M - (Matrix.trace M / 4) • 1) := by module
     rw [hsplit]
     apply Submodule.add_mem_sup
     · exact Submodule.smul_mem _ _ (Submodule.mem_span_singleton_self _)
-    · show Matrix.trace (M - (Matrix.trace M / 4) • 1) = 0
+    · change Matrix.trace (M - (Matrix.trace M / 4) • 1) = 0
       rw [Matrix.trace_sub, Matrix.trace_smul, Matrix.trace_one]
       simp only [Fintype.card_fin, smul_eq_mul]
       ring
