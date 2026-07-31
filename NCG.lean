@@ -190,6 +190,8 @@ import NCG.Upstream.IcosahedralKraus
 import NCG.Upstream.ChronologyLeakage
 import NCG.Matter.UCPInverse
 import NCG.Matter.FiveChannel
+import NCG.Arithmetic.TensorFirewall
+import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree
 import NCG.Arithmetic.SignedSeparator

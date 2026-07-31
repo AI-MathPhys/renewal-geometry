@@ -2,9 +2,13 @@
   "thm:direct-sum-firewall": {
     "env": "theorem",
     "title": "Direct-sum firewall",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.ArithFirewall.dirsum_posSemidef",
+      "NCG.ArithFirewall.dirsum_compression",
+      "NCG.ArithFirewall.dirsum_firewall"
+    ],
+    "note": "Proved: any PSD blocks assemble to a PSD direct sum (including a singular or zero second block), the compression to the first summand equals T1 exactly, and it is independent of the second block - so a coercive statement about one typed block constrains nothing about the other without an intertwining theorem."
   },
   "prop:old-abel": {
     "env": "proposition",
@@ -30,23 +34,34 @@
   "prop:anchor": {
     "env": "proposition",
     "title": "Positivity and anchor recovery",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.ArithFirewall.anchor_posSemidef",
+      "NCG.ArithFirewall.anchor_rank_le_one",
+      "NCG.ArithFirewall.anchor_recovery"
+    ],
+    "note": "Proved: the anchored bi-reflected port tensor Phi Phi* (outer product with unit anchor coordinate) is PSD of rank at most one, and its cross-entry against the anchor recovers each port value."
   },
   "thm:marginals": {
     "env": "theorem",
     "title": "Exact difference and sum selectors",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.AffineSelectors.selector_integral",
+      "NCG.AffineSelectors.difference_selector",
+      "NCG.AffineSelectors.sum_selector"
+    ],
+    "note": "Proved for windowed finite port polynomials with arbitrary coefficients (the weights w_X(m) m^{-sigma} of the display are absorbed into the coefficient sequences): the phase integral over [0,1] is the exact Kronecker selector, the normal (difference) marginal picks out m - n = h, and the anomalous (sum) marginal picks out m + n = N."
   },
   "cor:twin-gold-port": {
     "env": "corollary",
     "title": "Twin and Goldbach ports",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.AffineSelectors.twin_collapse",
+      "NCG.AffineSelectors.goldbach_collapse"
+    ],
+    "note": "Proved: for the von Mangoldt coefficients and unit window the h = 2 difference block collapses to the twin correlation sum_{n <= X-2} Lambda(n+2) Lambda(n), and for N < X the N-sum block is the full Goldbach correlation sum_{m+n=N} Lambda(m) Lambda(n) - two typed projections of one tensor."
   },
   "def:grand": {
     "env": "definition",
