@@ -470,7 +470,7 @@
       "NCG.CauchyTransfer.dyadic_bank",
       "NCG.CauchyTransfer.dyadic_bank_constants"
     ],
-    "note": "Proved: at r = 1/4, s = 1/2 the aliasing constant evaluates to theta C_s = 6/2^m and the total coefficient variation r^-1 + r^-2 + theta C_s <= 26; the transfer sandwich is instantiated at these constants. The pointwise dyadic sandwich itself enters as the hypothesis inherited from thm:v003-cauchy-minorant, which remains open."
+    "note": "Proved: at r = 1/4, s = 1/2 the aliasing constant evaluates to theta C_s = 6/2^m and the total coefficient variation r^-1 + r^-2 + theta C_s <= 26; the transfer sandwich is instantiated at these constants. The pointwise dyadic sandwich itself enters as the hypothesis supplied by thm:v003-cauchy-minorant (NCG.cauchy_minorant), now proved."
   },
   "thm:v003-cauchy-transfer": {
     "env": "theorem",
