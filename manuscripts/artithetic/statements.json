@@ -95,16 +95,22 @@
   "thm:finite-weil": {
     "env": "theorem",
     "title": "Finite reflected Weil criterion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.finite_weil",
+      "NCG.weilForm",
+      "NCG.weilReflect"
+    ],
+    "note": "Proved: for a finite multiset Z invariant with multiplicity under the reflection R rho = 1 - conj(rho) (hypothesis Z.map R = Z), every point of Z lies on Re s = 1/2 iff the reflected Weil form W_Z[u] = sum_rho u(rho) conj(u(R rho)) is nonnegative (in the complex order, i.e. real and >= 0) for every polynomial u. The failure direction constructs the Lagrange interpolating polynomial equal to 1 at an off-line point, -1 at its reflection, and 0 at all other distinct points, making the form equal to -(m + m') < 0 (the manuscript -2m, with the two multiplicities equal by invariance)."
   },
   "corollary:ordinary-frames-do-not-locate-zeros": {
     "env": "corollary",
     "title": "Ordinary frames do not locate zeros",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.ordinary_frames"
+    ],
+    "note": "Proved: the unreflected energy sum_rho |u(rho)|^2 is nonnegative for every zero configuration and positive whenever u does not annihilate Z (formalized with the positivity witness as hypothesis). The closing sentence -- that horizontal information enters only through the reflected cross-pairing -- is interpretive prose contrasting with thm:finite-weil."
   },
   "lem:laplace-pole": {
     "env": "lemma",
