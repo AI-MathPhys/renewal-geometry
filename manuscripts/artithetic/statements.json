@@ -584,9 +584,11 @@
   "thm:v003-twinfree-marginals": {
     "env": "theorem",
     "title": "Twin-free realization of all sub-half marginals",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.twinfree_marginals"
+    ],
+    "note": "Proved: for any admissible tuple h : Fin k -> Z and marginals 0 <= pi_i <= 1/2 there is an explicit probability distribution on subsets of coordinates (nonnegative, total mass one) supported on independent sets of the twin graph G_2(H) (edges |h_i - h_j| = 2) with vertex marginals exactly pi_i. Construction as in the manuscript: mod-4 bipartition ({0,1} vs {2,3} residues), a fair coin for the side, then independent inclusion with probability 2 pi_i on the chosen side. The closing sentence that no linear functional of one-coordinate marginals can certify a twin edge is interpretive prose about this construction."
   },
   "prop:v003-maynard-ceiling": {
     "env": "proposition",
