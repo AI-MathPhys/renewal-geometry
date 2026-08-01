@@ -198,6 +198,7 @@ import NCG.Matter.PauliVolume
 import NCG.Matter.TripletNoGo
 import NCG.Matter.RadialNonselection
 import NCG.Matter.NoRelativeSpeed
+import NCG.Matter.ThresholdInvisibility
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

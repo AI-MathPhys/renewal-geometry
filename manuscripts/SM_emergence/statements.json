@@ -1053,9 +1053,11 @@
   "prop:mass-hierarchy-not-mixing": {
     "env": "proposition",
     "title": "Mass hierarchy does not constrain relative-frame size",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.mass_hierarchy_not_mixing"
+    ],
+    "note": "Proved: for any prescribed singular values s_e, s_nu and any unitary V, there exist Yukawa matrices with singular value decompositions Y = U diag(s) W^dagger carrying exactly those values and with relative left frame U_e^dagger U_nu = V (constructed with U_e = W_e = W_nu = 1 and U_nu = V, exactly the manuscript construction). Hence a hierarchical charged-lepton spectrum alone imposes no constraint on the PMNS frame (prose)."
   },
   "definition:structured-lepton-anarchy": {
     "env": "definition",
@@ -1095,9 +1097,12 @@
   "prop:complete-multiplet": {
     "env": "proposition",
     "title": "Complete-multiplet invisibility in differences",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.complete_multiplet_invisibility",
+      "NCG.oneLoopInv"
+    ],
+    "note": "Proved: with the one-loop running alpha_i^{-1}(mu) = alpha_i^{-1}(M) + b_i/(2 pi) log(M/mu) (NCG.oneLoopInv, the logarithm as the running parameter L), a threshold shifting all coefficients by a common delta cancels identically from every pairwise inverse-coupling difference. The in-particular clause (cannot repair a weak-mixing mismatch at one loop) is interpretive prose about the differences."
   },
   "warning:external-means-external": {
     "env": "warning",
