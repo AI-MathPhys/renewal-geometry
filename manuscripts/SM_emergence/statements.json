@@ -828,9 +828,13 @@
   "thm:v5-triplet-nogo": {
     "env": "theorem",
     "title": "Rank-one invariant triplet no-go",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.triplet_nogo",
+      "NCG.triplet_nogo_annihilates",
+      "NCG.radial_expand"
+    ],
+    "note": "Proved: for any one-invariant right potential V_0(X) = F(Tr XX*) on M_{2x4}(C) with F differentiable with derivative F-prime and F-prime differentiable at the vacuum value u_0 (hypotheses hF1/hF2), stationary at the rank-one vacuum X_0 (F-prime(u_0) = 0), the stationary Hessian -- formalized as the mixed second derivative along the two-parameter slice X_0 + tY + sZ -- equals 4 F-second(u_0) (X_0,Y)_R (X_0,Z)_R (NCG.triplet_nogo, via the exact quadratic expansion NCG.radial_expand of the invariant). Hence the Hessian factors through the rank-one functional (X_0, .)_R and annihilates every direction orthogonal to X_0, in particular the complete physical triplet Delta_R (NCG.triplet_nogo_annihilates)."
   },
   "thm:v5-pair-triplet": {
     "env": "theorem",
