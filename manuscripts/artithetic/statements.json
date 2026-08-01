@@ -129,9 +129,15 @@
   "thm:plancherel": {
     "env": "theorem",
     "title": "Exact Gaussian Plancherel identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.gaussian_plancherel",
+      "NCG.gaussPort",
+      "NCG.cutoffL",
+      "NCG.port_transform",
+      "NCG.gaussian_shift"
+    ],
+    "note": "Proved: for the cutoff-matched Gaussian port G^tri(r) = e^{i tau r} int e^{-(1/2+i tau)u} G_A(u-r) d e^tri(u) (NCG.gaussPort, with the arithmetic measure sum_{n<=X} chi(n) Lambda(n) delta_{log n} - delta_chi 1_{(0,log X]} e^u du written out as the atomic sum plus windowed integral, chi a Dirichlet character and Lambda the von Mangoldt function) and the cutoff transform L^tri(s) (NCG.cutoffL), the exact identity int e^{-2 sigma r} |G^tri(r)|^2 dr = (e^{2A sigma^2}/2pi) int e^{-2A(t-tau)^2} |L^tri(1/2+sigma+it)|^2 dt holds for every real sigma. Proof exactly as in the manuscript: the complex-shift Gaussian transform int e^{zr} G_A(u-r) dr = e^{zu} e^{Az^2} (NCG.gaussian_shift, from integral_cexp_quadratic), the pointwise transform formula hat h(t) = e^{A(-sigma+i(tau-t))^2} L^tri(1/2+sigma+it) (NCG.port_transform, atomic terms + Fubini for the windowed continuous part), the L^2 Plancherel theorem through the L^1-cap-L^2 Fourier bridge of the mass-flux file, and the scaling substitution t = 2 pi xi matching the manuscript unitary convention."
   },
   "thm:scaling-indicator": {
     "env": "theorem",
