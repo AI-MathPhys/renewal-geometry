@@ -430,9 +430,17 @@
   "thm:two-cell-splitting": {
     "env": "theorem",
     "title": "Even/odd triplet splitting",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.two_cell_splitting",
+      "NCG.finrank_twoCellH1",
+      "NCG.isCompl_H1",
+      "NCG.finrank_H1even",
+      "NCG.finrank_H1odd",
+      "NCG.ker_cellD",
+      "NCG.cellT_cellD"
+    ],
+    "note": "NCG/Matter/TwoCellSplitting.lean. The two-cell graph (K4 on {0,1,2,3} union K4 on {0,1,4,5} sharing edge 01) is encoded by its eleven ordered edges (cellEnds); H1(G2;C) is the cokernel of the explicit coboundary cellD, and finrank H1 = 6 = 11 - 6 + 1 is proved via ker d = constants (connectivity) plus rank-nullity and the quotient-dimension formula (finrank_twoCellH1). The cell-exchange involution (2<->4, 3<->5) acts on edges with no orientation flips (cellEnds_sigmaE, by decide), intertwines d (cellT_cellD), and descends to an involution cellTbar of H1 via Submodule.mapQ. Boxed splitting proved: IsCompl H1even H1odd (characteristic-zero averaging) with finrank H1even = finrank H1odd = 3 (two_cell_splitting). Deviation: the manuscript's equivariant-trace argument (traces 2,1,1 on C0,C1,H0) is replaced by an equivalent direct dimension count - the even edge subspace (dim 6, orbit coordinates) surjects onto H1even under the quotient map with kernel im d meet C1even = d(C0even) of dimension 3 (range_inf_even, finrank_range_inf_even), and dim H1odd follows from complementarity; disclosed in the module docstring."
   },
   "thm:shared-edge-sandwich": {
     "env": "theorem",

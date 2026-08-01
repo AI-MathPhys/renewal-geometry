@@ -202,6 +202,7 @@ import NCG.Matter.ThresholdInvisibility
 import NCG.Matter.SignResponse
 import NCG.Matter.StabilizerPortFrame
 import NCG.Matter.PairwiseDefect
+import NCG.Matter.TwoCellSplitting
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer
