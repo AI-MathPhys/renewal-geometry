@@ -213,6 +213,7 @@ import NCG.Matter.TwistedCarrier
 import NCG.Flagship.StoreAutocorrelation
 import NCG.Flagship.StoreFrequencyPencil
 import NCG.Flagship.StoreFrequencyCount
+import NCG.Flagship.RankOneCut
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

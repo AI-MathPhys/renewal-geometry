@@ -1149,9 +1149,12 @@
   "thm:rank-one-cut-replacement-master": {
     "env": "theorem",
     "title": "Rank-one complete cut is exactly a replacement",
-    "status": "not_started",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.rank_one_cut_replacement",
+      "NCG.memory_source_of_not_rank_one"
+    ],
+    "note": "NCG/Flagship/RankOneCut.lean. The completed reset is modelled as a trace-preserving linear map R : Matrix n n C ->l Matrix m m C on the finite cut span. Boxed equivalence proved (rank_one_cut_replacement): the output span is one-dimensional - spanned by a normalized state - iff R(A) = Tr(A) omega for a single normalized omega; trace preservation pins the coefficient functional to the trace, exactly as in the manuscript proof. Second clause proved (memory_source_of_not_rank_one): if the output span is not one-dimensional then two reachable outputs differ (the normalized output R(E_11) escapes no line alone), so any admitted future family separating the reachable range yields an effect with different values on two reset outputs - the explicit consequential memory source. Disclosures: 'response-matrix rank one' is rendered as one-dimensionality of the output span (the manuscript's future-tomography identification of the two); 'admitted futures separate the reachable output range' enters as the separation hypothesis on effect functionals; complete positivity of R is not needed for these identities and is not assumed."
   },
   "thm:replacement-dilation-master": {
     "env": "theorem",
