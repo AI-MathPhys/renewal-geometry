@@ -1026,9 +1026,20 @@
   "thm:store-frequency-pencil-master": {
     "env": "theorem",
     "title": "Exact finite Store-frequency pencil",
-    "status": "not_started",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.storeH0_posDef",
+      "NCG.storeH1_posSemidef",
+      "NCG.store_pencil_eigen",
+      "NCG.store_pencil_independent",
+      "NCG.store_annihilator_system",
+      "NCG.store_annihilator_unique",
+      "NCG.store_recurrence",
+      "NCG.store_weight_recovery",
+      "NCG.storeH0_factor",
+      "NCG.storeH1_factor"
+    ],
+    "note": "NCG/Flagship/StoreFrequencyPencil.lean, over the moment sequence m_n = Sum_j w_j lambda_j^n (the identification with <Z, K^n Z> is store_frequency_moments from the autocorrelation slice). All five items proved: (i) H0 PosDef and H1 PosSemidef via the Vandermonde factorizations H = V^T diag(.) V (storeH0_factor/storeH1_factor, storeH0_posDef/storeH1_posSemidef; the quadratic form is the weighted sum of squares hankel_quadratic, strict positivity from Matrix.det_vandermonde and distinctness); (ii) the boxed generalized eigenpairs: x_j = V^{-1}e_j satisfies H1 x_j = lambda_j H0 x_j and x_j /= 0 (store_pencil_eigen), and the family is linearly independent, hence a basis carrying each loaded value once (store_pencil_independent; the 'each once' multiplicity reading rides on s independent exhibited pairs with s distinct eigenvalues); (iii) the boxed annihilator system H0 q = -(m_s..m_{2s-1}) for the monic q = Prod (X - lambda_j) together with its uniqueness from H0 invertibility (store_annihilator_system, store_annihilator_unique); (iv) the boxed exact recurrence m_{n+s} + Sum q_k m_{n+k} = 0 for every n (store_recurrence, via the monic eval expansion of q at its roots); (v) the boxed weight recovery: V w = (m_0..m_{s-1}) and w = V^{-1}(m_0..m_{s-1}) in the manuscript convention V_{aj} = lambda_j^a (store_weight_recovery). Disclosure: the strict ordering 0 < lambda_1 < ... < lambda_s enters as positivity plus pairwise distinctness (Function.Injective lam); generalized-eigenvalue exhaustiveness is rendered by the exhibited independent basis rather than a det-pencil root count."
   },
   "cor:store-frequency-count-master": {
     "env": "corollary",
