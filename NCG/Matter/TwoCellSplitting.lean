@@ -411,7 +411,7 @@ lemma range_psiEven : LinearMap.range psiEven = H1even := by
     · rw [evenEdges, LinearMap.mem_ker, LinearMap.sub_apply,
         LinearMap.id_apply, map_smul, map_add, cellT_invol]
       module
-    · show (LinearMap.range cellD).mkQ ((1/2 : ℂ) • (y + cellT y))
+    · change (LinearMap.range cellD).mkQ ((1/2 : ℂ) • (y + cellT y))
         = (LinearMap.range cellD).mkQ y
       rw [map_smul, map_add, hx]
       module

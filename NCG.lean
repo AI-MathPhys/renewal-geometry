@@ -206,6 +206,7 @@ import NCG.Matter.TwoCellSplitting
 import NCG.Matter.S4DarkNoGo
 import NCG.Matter.VerticalIndependence
 import NCG.Matter.ParitySelection
+import NCG.Matter.StinespringIntertwining
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

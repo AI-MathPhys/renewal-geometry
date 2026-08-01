@@ -56,7 +56,7 @@ omit [DecidableEq n] in
 /-- Vanishing Hilbert–Schmidt leakage forces every coefficient to
 commute with the parity. -/
 lemma leakage_commute (J : Matrix n n ℂ) (K : ι → Matrix n n ℂ)
-    (hleak : (1/4 : ℝ) * (∑ α, ((J * K α - K α * J)ᴴ
+    (hleak : (1 / 4 : ℝ) * (∑ α, ((J * K α - K α * J)ᴴ
       * (J * K α - K α * J)).trace).re = 0) :
     ∀ α, J * K α = K α * J := by
   open scoped ComplexOrder in
@@ -100,7 +100,7 @@ vanishes, coefficients are parity block diagonal, and the odd
 sector has no transition channel into the even sector. -/
 theorem dark_parity_selection (J : Matrix n n ℂ)
     (K : ι → Matrix n n ℂ) (hJ2 : J * J = 1)
-    (hleak : (1/4 : ℝ) * (∑ α, ((J * K α - K α * J)ᴴ
+    (hleak : (1 / 4 : ℝ) * (∑ α, ((J * K α - K α * J)ᴴ
       * (J * K α - K α * J)).trace).re = 0) :
     ∀ α, (J * K α = K α * J)
       ∧ (parityPlus J * K α * parityMinus J = 0)

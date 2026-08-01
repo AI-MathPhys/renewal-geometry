@@ -1197,9 +1197,15 @@
   "cor:stinespring-intertwining": {
     "env": "corollary",
     "title": "Stinespring support intertwining",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.stinespring_intertwining",
+      "NCG.cross_block_vanish",
+      "NCG.support_commute",
+      "NCG.kron_mul_stineV",
+      "NCG.stineV_mul"
+    ],
+    "note": "NCG/Matter/StinespringIntertwining.lean, building on the already-proved thm:kraus-block-nogo (kraus_block_identity/kraus_block_nogo in SMEasyV5.lean). Model: the Stinespring isometry of a Kraus family in a chosen orthonormal environment basis is the block-column matrix stineV K : Matrix (d x E) d with (stineV K)(i,alpha),j = (K alpha) i j, exactly V psi = Sum K_alpha psi (x) |alpha>. Given an orthogonal Hermitian idempotent resolution Sum P_s = 1 and support preservation of the channel (all cross compressions P_t T(P_s) P_t = 0 for s /= t), every cross block P_t K_alpha P_s vanishes (cross_block_vanish), every Kraus operator commutes with every support (support_commute), and the boxed intertwining (P_s (x) I_E) V = V P_s holds with the Kronecker product (stinespring_intertwining). The trailing clause is rendered as: every linear combination Sum c_alpha K_alpha of the frame commutes with every support, which covers environment measurement compressions and unitary Kraus-frame rotations (their Kraus operators are such combinations; disclosed interpretive reading). Uniqueness quantification over all Stinespring dilations is replaced by the canonical basis-built dilation for the given frame (disclosed)."
   },
   "thm:generator-cross-map": {
     "env": "theorem",
