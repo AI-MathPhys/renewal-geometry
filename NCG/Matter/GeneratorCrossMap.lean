@@ -147,6 +147,21 @@ theorem cross_map_frame_independent (H H' : Matrix n n ℂ)
     heq,
     (generator_cross_map Ps Pt H' V' hPsH hPtH hPs2 hts hst).1 X]
 
+/-- `corollary:failure-of-accessibility-for-the-displayed-source`:
+a source whose jumps preserve the central supports (all cross
+blocks vanish, the displayed block-preserving property) has zero
+accessibility effect between any two distinct supports — in
+particular `A_{L←R} = A_{R←L} = 0`, so the sector-resolving
+accessibility premise fails. -/
+theorem displayed_source_no_accessibility (H : Matrix n n ℂ)
+    (V : ι → Matrix n n ℂ)
+    (hPsH : Psᴴ = Ps) (hPtH : Ptᴴ = Pt) (hPs2 : Ps * Ps = Ps)
+    (hts : Pt * Ps = 0) (hst : Ps * Pt = 0)
+    (hblock : ∀ α, Pt * V α * Ps = 0) :
+    Pt * gksl H V Ps * Pt = 0 :=
+  (generator_cross_map Ps Pt H V hPsH hPtH hPs2 hts hst).2.2.mpr
+    hblock
+
 end
 
 end NCG

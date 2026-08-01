@@ -1224,9 +1224,11 @@
   "corollary:failure-of-accessibility-for-the-displayed-source": {
     "env": "corollary",
     "title": "Failure of accessibility for the displayed source",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.displayed_source_no_accessibility"
+    ],
+    "note": "NCG/Matter/GeneratorCrossMap.lean. Immediate from thm:generator-cross-map: a source whose jumps preserve the central supports (all cross blocks P_t V_alpha P_s = 0 for s /= t, the displayed block-preserving property, taken as hypothesis) has zero accessibility effect P_t L(P_s) P_t = 0 between any two distinct supports; in particular A_{L<-R} = A_{R<-L} = 0. That the DISPLAYED bare source satisfies the block-preserving hypothesis is the content of the surrounding firewall theorems (thm:all-jet-firewall, still conditional) and is not re-derived here; the final prose clause about prop:dirac-connectivity is interpretive."
   },
   "prop:vertical-independence": {
     "env": "proposition",
