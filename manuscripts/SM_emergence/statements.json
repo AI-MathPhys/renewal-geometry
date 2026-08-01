@@ -986,9 +986,25 @@
   "thm:twisted-carrier": {
     "env": "theorem",
     "title": "Two-dimensional twisted carrier",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.twisted_carrier",
+      "NCG.finrank_edgeTwist_ker",
+      "NCG.finrank_triTwist_ker",
+      "NCG.edgeTwist_spectrum",
+      "NCG.edgeTwist_eigen_distinct",
+      "NCG.triTwist_spectrum",
+      "NCG.triTwist_eigen_independent",
+      "NCG.edgeTwistP_projector",
+      "NCG.triTwistP_projector",
+      "NCG.edgeTwistL_eq",
+      "NCG.triTwistL_eq",
+      "NCG.edgeTwistW_inv",
+      "NCG.triTwistW_inv",
+      "NCG.edgeTwist_ker_complete",
+      "NCG.triTwist_ker_complete"
+    ],
+    "note": "NCG/Matter/TwistedCarrier.lean. The two twist orbits are represented by explicit twisted incidences over C (edge order 01,02,03,12,13,23; edge column -1 at the tail, epsilon_e at the head): the edge twist (epsilon = -1 on 01) and the triangle twist (epsilon = -1 on 01, 02, 12). Boxed claims proved for both: dim_C H1(K4;L_n) = dim ker B_n = 2 via explicit kernel bases, a complete kernel parametrization, and a LinearEquiv to C^2 (finrank_edgeTwist_ker / finrank_triTwist_ker); the vertex-Hodge spectra {2, 4, 3-sqrt5, 3+sqrt5} and {2, 2, 2, 6} rendered as eigenvector certificates - four exhibited eigenvectors with PAIRWISE DISTINCT eigenvalues for the edge twist (edgeTwist_spectrum + edgeTwist_eigen_distinct, so the eigenbasis is complete), and three independent lambda = 2 eigenvectors plus one lambda = 6 eigenvector for the triangle twist (triTwist_spectrum + triTwist_eigen_independent); the boxed harmonic projector P_n = I - B^H (B B^H)^{-1} B computed explicitly: (BB^H) W = 1 certifies the inverse, the explicit rational matrices P_n equal I - B^H W B, are Hermitian idempotents with B P = 0, and fix the kernel basis (edgeTwistP_eq/edgeTwistP_projector and triangle versions). Disclosures: 'every nontrivial n' is rendered by the two orbit representatives (the seven twists fall into these two S4-orbits; conjugate twists have conjugate spectra); 'direct diagonalization' is rendered as eigenvector certificates; the trailing compressed-effect displays (F_{n,e} traces, HS commutators, C* = M2) are outside the theorem environment and not part of this record."
   },
   "thm:dark-parity": {
     "env": "theorem",
