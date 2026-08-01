@@ -256,9 +256,12 @@
   "thm:v002-leakage": {
     "env": "theorem",
     "title": "Exact leakage identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.leakage_identity",
+      "NCG.leakage_bound"
+    ],
+    "note": "Proved: for a radical packet F = phi + s + r (window and Galerkin decomposition) and any Galerkin vector h on which Q_N represents the form (<h, Q_N phi> = QW(phi, h)), <h, Q_N phi> = -QW(r,h) - QW(s,h) (NCG.leakage_identity); consequently ||Q_N phi|| <= sup over unit Galerkin h of |QW(r,h) + QW(s,h)| (NCG.leakage_bound, stated with an arbitrary nonnegative bound M dominating the tested leakage, and Q_N phi assumed in the Galerkin range). The form enters only through first-slot additivity and the representation and radical hypotheses, exactly as in the manuscript proof; sesquilinearity and the Hermitian property are not needed for the identity."
   },
   "thm:v002-cluster": {
     "env": "theorem",
