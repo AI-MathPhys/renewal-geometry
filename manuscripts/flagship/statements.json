@@ -1044,9 +1044,16 @@
   "cor:store-frequency-count-master": {
     "env": "corollary",
     "title": "Exact loaded-frequency count and source reconstruction",
-    "status": "not_started",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.store_hankel_rank",
+      "NCG.hankelShell_posDef",
+      "NCG.hankelShell_factor",
+      "NCG.store_source_reconstruction",
+      "NCG.aeval_apply_eigenvec",
+      "NCG.store_future_separation"
+    ],
+    "note": "NCG/Flagship/StoreFrequencyCount.lean. Boxed rank formula proved: rank H_r = min(r+1, s) (store_hankel_rank) via the rectangular Vandermonde factorization H_r = V diag(w) V^T (hankelShell_factor): for r+1 <= s the shell is positive definite (hankelShell_posDef; a vanishing shell image restricts to a square Vandermonde on the first r+1 nodes via Fin.castLE), and for s <= r+1 the rank is pinched between rank_mul_le bounds and the embedded H0 through Matrix.rank_submatrix_le - so the first vanishing scalar shell determines s, as claimed. Boxed source reconstruction proved: z_j = p_j(K)Z for the Lagrange basis polynomial at the reconstructed values (store_source_reconstruction, via aeval_apply_eigenvec: polynomials of an operator act by evaluation on eigenvectors - the 'functional calculus gives p_j(K) = e_j on the finite loaded spectrum' step). Separation criterion proved: the quadratic identity c^T R^T R c = Sum_i f_i(Sum_j c_j z_j)^2 and the equivalence 'R^T R positive definite iff the admitted functionals separate the loaded span' (store_future_separation). Disclosures: real scalars and real-linear functionals (the manuscript's c*R*Rc over C complexifies verbatim); the operator interface K z_j = lambda_j z_j is the one instantiated by K = -(1/4) delta^2 in the autocorrelation slice."
   },
   "thm:analytic-store-polar-master": {
     "env": "theorem",
