@@ -203,9 +203,11 @@
   "lemma:packet-selection": {
     "env": "lemma",
     "title": "Packet selection",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.packet_selection"
+    ],
+    "note": "Proved: for every s_0 with Re s_0 > 0 there is a C-infinity compactly supported packet C with H_C(s_0) = int C(u) e^{s_0 u} du != 0, by the manuscript construction C(u) = e^{-i gamma u} phi(u) with phi a smooth bump (ContDiffBump), reducing H_C(s_0) to the positive real integral int phi(u) e^{alpha u} du > 0. The hypothesis Re s_0 > 0 is retained for fidelity although the argument works for every s_0."
   },
   "thm:v002-zero-amplification": {
     "env": "theorem",
