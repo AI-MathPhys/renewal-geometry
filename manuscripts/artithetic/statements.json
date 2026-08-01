@@ -305,16 +305,22 @@
   "thm:v002-weyl-barrier": {
     "env": "theorem",
     "title": "Scalar-invariant two-channel Weyl barrier",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.weyl_barrier",
+      "NCG.weylGap"
+    ],
+    "note": "Proved: lambda_2(L-D) - mu >= Gamma^W(L,D;g) with both Weyl channels, where the spectral quantities are represented by their Courant-Fischer min-max values (NCG.lamMin/lamMax = extreme Rayleigh bounds, NCG.lamTwo/lamTwoTop = second levels through two-dimensional trial subspaces) -- these agree with the sorted eigenvalues of self-adjoint operators on a finite-dimensional space, and the statement is proved for any operators on any complex Hilbert space admitting a two-dimensional subspace (subsuming the manuscript n >= 2 setting). Scalar-shift invariance of Gamma^W is definitional in these coordinates (shifts cancel from the eigenvalue-Rayleigh differences)."
   },
   "thm:v002-scalar-bulk": {
     "env": "theorem",
     "title": "Scalar bulk carries no ordering",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.scalar_bulk",
+      "NCG.weylGap"
+    ],
+    "note": "Proved: if the compressed defect L - cI - D has Rayleigh quotients bounded by epsilon on the physical subspace W (rank >= 2, witnessed by a two-dimensional trial subspace V <= W, with the unit vector g in W), then Gamma^W(L,D;g) <= 2 epsilon. The operator-norm hypothesis ||P(L-cI-D)P|| <= epsilon enters the manuscript proof only through the Rayleigh quotients of vectors of Ran P, which is how the formal hypothesis is stated. Spectral quantities in Courant-Fischer min-max form as in thm:v002-weyl-barrier. The concluding in-particular sentence (epsilon = o(a) on a growing subspace) is interpretive prose."
   },
   "warning:critical-scale-firewall": {
     "env": "warning",
