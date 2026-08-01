@@ -206,6 +206,7 @@ import NCG.Arithmetic.PacketSelection
 import NCG.Arithmetic.LeakageIdentity
 import NCG.Arithmetic.WeylBarrier
 import NCG.Arithmetic.MaynardCeiling
+import NCG.Arithmetic.MassFlux
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree
 import NCG.Arithmetic.SignedSeparator

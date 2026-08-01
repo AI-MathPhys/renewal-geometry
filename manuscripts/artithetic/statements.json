@@ -691,16 +691,24 @@
   "thm:mass-flux": {
     "env": "theorem",
     "title": "Mass--flux inequality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.mass_flux",
+      "NCG.mass_flux_zero",
+      "NCG.fourier_toLp_eq",
+      "NCG.portSynthesis"
+    ],
+    "note": "Proved: with the tensor packet C_F(d) realized as the H-valued L^2 function u -> sum_c F(u+s_c) d_c (NCG.portSynthesis, the canonical H (x) L^2 = L^2(R,H) picture), monotone cells, and F in L^1 cap L^2, ||C_F(d)|| <= ||F|| ||M(d)|| + sqrt(Lambda) ||J_d|| in L^2 (NCG.mass_flux), where Lambda = sup (2 pi xi)^2 |fourier F(xi)|^2 equals 2 pi Lambda_F in the manuscript unitary convention (statement in Mathlib Fourier convention; hypothesis Lambda as a pointwise bound). When M(d) = 0, the exact flux identity ||C_F(d)||^2 = int (2 pi xi)^2 |fourier F|^2 ||fourier J(-xi)||^2 d xi holds (NCG.mass_flux_zero; equal to the boxed display by Plancherel on J). The proof runs through a new L^1 cap L^2 compatibility bridge for the Mathlib vector-valued L^2 Fourier isometry (NCG.fourier_toLp_eq, multiplication formula + Schwartz density), the mass-prefix boundary identity, and the L^2 triangle inequality after the exact A+B frequency split. The mild extra hypothesis F in L^1 (satisfied by all Gaussian ports used downstream) is disclosed."
   },
   "thm:multiport-prefix": {
     "env": "theorem",
     "title": "Multiport mass--prefix theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.multiport_prefix",
+      "NCG.mass_flux"
+    ],
+    "note": "Proved as the weighted Minkowski assembly: if each port obeys the per-port mass-flux bound x_r <= a_r + b_r (with a_r = ||F_r|| ||M||, b_r = sqrt(Lambda_r) ||J||, supplied by NCG.mass_flux), then sqrt(sum lam_r x_r^2) <= sqrt(sum lam_r a_r^2) + sqrt(sum lam_r b_r^2) -- exactly the direct-sum argument of the manuscript (Cauchy-Schwarz on the cross term). The identifications sum lam ||F_r||^2 ||M||^2 = (sum lam ||F_r||^2) ||M||^2 etc. are definitional."
   },
   "definition:joint-flagship-source-quotient": {
     "env": "definition",
