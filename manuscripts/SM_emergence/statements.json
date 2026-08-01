@@ -195,9 +195,11 @@
   "cor:no-relative-speed": {
     "env": "corollary",
     "title": "No sectorwise speed after common-origin descent",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.no_relative_speed"
+    ],
+    "note": "Proved in the finite matrix model: if the fermion coordinate maps C+ and C- are unitary identifications (isometry hypotheses C-^dagger C- = 1, C+^dagger C+ = 1 suffice), then B_F = C- dF C+^* has the transported Gram operator B_F^dagger B_F = C+ (dF^dagger dF) C+^dagger, and for every representation projection P the transported compression preserves its sectorwise Hilbert-Schmidt norm: Tr((B_F P~)^dagger (B_F P~)) = Tr((dF P)^dagger (dF P)) with P~ = C+ P C+^dagger. Hence relative source-residue speed factors equal one (prose). The surrounding Conditional note (existence of the predictive-covariance intertwiners) concerns thm:predictive-hodge upstream, not this corollary."
   },
   "ledger:upstream-status": {
     "env": "ledger",
