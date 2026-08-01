@@ -302,9 +302,14 @@
   "thm:unique-antibalanced-class": {
     "env": "theorem",
     "title": "Unique nonzero tetrahedrally invariant sign class",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure. H^1(K4;F2) = F2^3 with S4-action; finite fixed-point computation, decide-certifiable on existing Multigraph cohomology."
+    "status": "proved",
+    "lean": [
+      "NCG.antibalanced_invariant_iff",
+      "NCG.antibalanced_orbit_transitive",
+      "NCG.antibalanced_card",
+      "NCG.antibalanced_middle_card"
+    ],
+    "note": "Proved in the face-parity encoding used by the manuscript proof: switching classes of K_4 are the eight even-weight vectors in F_2^4 (parities of the four triangular faces, NCG.antibalanced_card), S_4 permutes the four coordinates; the S_4-invariant classes are exactly 0 and the all-ones vector [c] (NCG.antibalanced_invariant_iff), and the remaining six weight-two vectors form a single transitive orbit O_6 (NCG.antibalanced_orbit_transitive, NCG.antibalanced_middle_card) -- the boxed decomposition {0} + {[c]} + O_6 and H^1(K_4;F_2)^{S_4} = {0,[c]}. The identification of face parities with switching classes / H^1(K_4;F_2) is the standard Zaslavsky signed-graph correspondence, cited as standard by the manuscript."
   },
   "thm:signed-tetrahedral-spectra": {
     "env": "theorem",

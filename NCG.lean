@@ -192,6 +192,7 @@ import NCG.Matter.UCPInverse
 import NCG.Matter.FiveChannel
 import NCG.Matter.BKMHessian
 import NCG.Matter.K4Betti
+import NCG.Matter.AntibalancedClass
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer
