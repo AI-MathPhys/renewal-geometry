@@ -463,9 +463,19 @@
   "thm:v5-pairwise-defect": {
     "env": "theorem",
     "title": "Exact pairwise-source defect",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.pairwise_defect",
+      "NCG.defect_distance",
+      "NCG.orthogonal_pairwiseSpan",
+      "NCG.kernel_eq_sign",
+      "NCG.muZ_fiber12",
+      "NCG.muZ_fiber13",
+      "NCG.muZ_fiber23",
+      "NCG.card_turn",
+      "NCG.norm_muVec_sq"
+    ],
+    "note": "NCG/Matter/PairwiseDefect.lean. Turns encoded as the subtype of ordered pairwise-distinct triples of Fin 4 (card 24, card_turn); mu(i,j,k) = sgn(i,j,k,l) implemented as the inversion parity of the four-term sequence with l the omitted vertex. L2(T) is EuclideanSpace C Turn; R_le2 is the sup of the ranges of the three coordinate-pair composition maps (functions of at most one coordinate are contained in these, so this matches the manuscript span). Boxed decomposition proved: (R_le2)-orthocomplement = C.mu (orthogonal_pairwiseSpan, via a 23-step two-term propagation chain in kernel_eq_sign), hence finrank R_le2 = 23 and IsCompl R_le2 (span{mu}) (pairwise_defect). E[mu|t_S] = 0 for the three coordinate pairs proved by decide as vanishing fiber sums (muZ_fiber12/13/23; proper subsets S of size <= 1 follow since such functions lie in the pairwise spans). The distance claim inf ||mu-f||_2 = 1 is stated in the manuscript's expectation normalization as IsLeast {(1/24)||mu-f||^2 : f in R_le2} 1 (defect_distance, with ||mu||^2 = 24 = norm_muVec_sq); the counting-vs-normalized inner product (1/24 weight) is the disclosed deviation."
   },
   "cor:v5-holistic-defect": {
     "env": "corollary",
