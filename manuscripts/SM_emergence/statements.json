@@ -395,16 +395,23 @@
   "thm:stabilizer-port-frame": {
     "env": "theorem",
     "title": "Exact \\(1+2\\) stabilizer decomposition and port frame",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG.permAct",
-      "NCG.swap12_hcyc",
-      "NCG.swap23_hcyc",
-      "NCG.swap12_q01",
-      "NCG.swap23_q02",
-      "NCG.swap12_q03"
+      "NCG.stabilizer_port_frame",
+      "NCG.pW2_projector",
+      "NCG.port_gram",
+      "NCG.port_sum",
+      "NCG.sign_rep",
+      "NCG.port_covariant",
+      "NCG.pcyc_equivariant",
+      "NCG.port_eq",
+      "NCG.pcyc_idem",
+      "NCG.pcyc_herm",
+      "NCG.pcyc_trace",
+      "NCG.harmonic_faceSign",
+      "NCG.stabilizer_invol"
     ],
-    "note": "Decomposition half proved (archived thm:flavour-stabilizer-split, NCG.permAct and the swap action lemmas): both generating transpositions of the vertex stabilizer S3 negate the opposite cycle (sign line) and permute the three incident ports naturally, giving H1(K4)|_{S3} = sgn + W2. Open: the port-frame Gram data q01 + q02 + q03 = 0, |q0j|^2 = 1/2, <q0j, q0k> = -1/4."
+    "note": "NCG/Matter/StabilizerPortFrame.lean, all over the explicit rational 6×6 harmonic projector pcyc of the proof (edges ordered 01,02,03,12,13,23). Boxed frame identity Σ_j q0j q0j* = (3/4)·P_{W2} proved exactly (stabilizer_port_frame), with P_{W2} = pcyc − (1/3)h'h'* for the unnormalized circulation h' = √3·h = (0,0,0,1,−1,1). Gram numbers ‖q0j‖² = ⟪q0j,q0j⟫ = 1/2 and ⟪q0j,q0k⟫ = −1/4, and q01+q02+q03 = 0 (port_gram, port_sum; norms stated as Hermitian dot products). The 1+2 decomposition H¹|S₃ ≅ sgn ⊕ W₂ is rendered in projector form: pcyc and pW2 are Hermitian idempotents of trace 3 and 2, pW2 annihilates h', both signed stabilizer generators u12, u23 (involutions) act by −1 on h', commute with pcyc, and permute the port frame (sign_rep, pW2_projector, pcyc_equivariant, port_covariant). Deviations: ports named port01/port02/port03 in Lean (q0j clashes with A2Frame); h used unnormalized (h = h'/√3 disclosed); abstract S₃-module irreducibility of W₂ is not formalized — the frame identity is verified entrywise rather than via Schur, and the trace values witness the dimensions."
   },
   "cor:sequential-flag": {
     "env": "corollary",
