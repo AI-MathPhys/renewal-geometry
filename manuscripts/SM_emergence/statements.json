@@ -987,9 +987,14 @@
   "thm:dark-parity": {
     "env": "theorem",
     "title": "Dark-parity selection rule",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.dark_parity_selection",
+      "NCG.leakage_commute",
+      "NCG.cross_block_zero",
+      "NCG.parity_sum"
+    ],
+    "note": "NCG/Matter/ParitySelection.lean. For a block-centre parity J with J^2 = 1 and resolved coefficients K_alpha: vanishing parity leakage epsilon = (1/4) Sum ||[J,K_alpha]||_HS^2 = 0 (stated via the real part of the trace form) forces every coefficient to commute with J (leakage_commute, via PosSemidef.trace_nonneg over ComplexOrder + trace_conjTranspose_mul_self_eq_zero_iff), whence with P_pm = (I pm J)/2: every visible-dark Dirac portal vanishes, P_+ K P_- = P_- K P_+ = 0; each coefficient is parity block diagonal K = P_+ K P_+ + P_- K P_-, so internal odd-odd (Majorana) blocks remain allowed; and the odd sector has no transition channel into the even sector, P_+ (K (P_- rho P_-) K^H) P_+ = 0, which is the operator content of absolute stability of the lightest odd state (dark_parity_selection). Deviations/disclosures: the premise clauses |K_ch| = 2 with loaded odd neutral character locate the theorem in the dark-parity dictionary and are interpretive prose; multiplicative-domain rigidity is taken in its leakage form (the hypothesis epsilon = 0 as displayed); kinematic 'lightest state' phrasing is rendered by the vanishing odd-to-even transition channel."
   },
   "thm:connected-slot-factorization": {
     "env": "theorem",
