@@ -137,9 +137,12 @@
   "thm:residue-parseval": {
     "env": "theorem",
     "title": "Character--residue Parseval identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.residue_parseval",
+      "NCG.residue_parseval_prime"
+    ],
+    "note": "Proved for packets v : (ZMod q)^x -> H in an arbitrary complex inner-product space H: with vbar = (q-1)^{-1} sum_a v_a and G_chi = sum_a chi(a) v_a, sum_a ||v_a - vbar||^2 = (q-1)^{-1} sum_{chi != chi_0} ||G_chi||^2 (NCG.residue_parseval_prime, prime modulus as displayed; NCG.residue_parseval is the general-modulus version with phi(n) in place of q-1). The proof is the finite character Plancherel identity (DirichletCharacter orthogonality) with the principal channel subtracted, exactly as in the manuscript. The specific weighted Gaussian port space H_sigma and prime packets v_a are instances of the abstract H and v."
   },
   "cor:fixed-mod-grh": {
     "env": "corollary",
