@@ -593,9 +593,12 @@
   "lem:pseudoreal-pair": {
     "env": "lemma",
     "title": "Pseudoreal pair",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.pseudoreal_pair",
+      "NCG.epsilonW"
+    ],
+    "note": "Proved: for the quaternionic antiunitary epsilon_W = i sigma_2 K on the weak doublet ((h1,h2) -> (conj h2, -conj h1), NCG.epsilonW) and every nonzero H, the partner H~ = epsilon_W H satisfies <H, H~> = 0 and epsilon_W H~ = -H. The closing sentence (the pair exhausts the doublet, giving exactly two independent weak-singlet contraction directions) is the dimension count dim_C W = 2 noted in the docstring."
   },
   "thm:minimal-diagram": {
     "env": "theorem",
@@ -707,9 +710,12 @@
   "cor:v5-pauli-volume": {
     "env": "corollary",
     "title": "Pauli-volume theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.pauli_volume",
+      "NCG.nambuS3"
+    ],
+    "note": "Proved: for Pauli directions Delta_j = x_j . sigma, the cyclic Nambu bracket s_3(X,Y,Z) = X[Y,Z] + Y[Z,X] + Z[X,Y] evaluates exactly to 6i det[x1 x2 x3] I_2 (NCG.pauli_volume, entrywise polynomial identity over the explicit Pauli matrices). The concluding sentences (genuine oriented three-dimensional volume; linearly dependent directions are load bearing) are interpretive prose about the determinant."
   },
   "thm:v5-choi-lie": {
     "env": "theorem",
