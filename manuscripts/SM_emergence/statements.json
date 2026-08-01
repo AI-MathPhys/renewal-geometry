@@ -729,9 +729,11 @@
   "thm:v5-sign-response": {
     "env": "theorem",
     "title": "Canonical sign response",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.sign_response"
+    ],
+    "note": "NCG/Matter/SignResponse.lean. Full statement on a complex Banach space E with M, P : E →L[ℂ] E: given ‖M‖ ≤ θ < 1, P*M = M*P, P u = u, u ≠ 0, the unique solution v of v - M v = u (the resolvent image (I-M)⁻¹u, built via the Neumann-series unit Units.oneSub) satisfies P v = v, v ≠ 0, and ‖u‖²/(1+θ)² ≤ ‖v‖² ≤ ‖u‖²/(1-θ)² (the boxed energy bound). The commuting nuisance projection enters only through the modelling of u as the already-shorted source (prose); the trailing Krylov-rank/defect discussion (Δ_u, r_u, KMS positivity) is prose commentary outside the boxed theorem and is not formalized."
   },
   "thm:v5-block-hankel-packet": {
     "env": "theorem",
