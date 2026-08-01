@@ -1005,16 +1005,23 @@
   "def:store-frequency-moments-master": {
     "env": "definition",
     "title": "Store-frequency moment packet",
-    "status": "not_started",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.store_frequency_moments"
+    ],
+    "note": "NCG/Flagship/StoreAutocorrelation.lean. The boxed identity of the definition, m_n = <Z, K^n Z> = Sum_j w_j lambda_j^n with K = -(1/4) delta^2 (as the scaled square of the Store derivation in the endomorphism algebra), is proved as store_frequency_moments under the same disclosed spectral-component interface as thm:store-autocorrelation-master."
   },
   "thm:store-autocorrelation-master": {
     "env": "theorem",
     "title": "Store-jet/autocorrelation identity",
-    "status": "not_started",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.store_autocorrelation",
+      "NCG.store_jet_even",
+      "NCG.store_jet_odd",
+      "NCG.exp_inner_cos"
+    ],
+    "note": "NCG/Flagship/StoreAutocorrelation.lean, on a real inner product space (CompleteSpace for the operator exponential). The manuscript's spectral decomposition enters through the disclosed interface: loaded components z_j with delta^2 z_j = -4 lambda_j z_j (lambda_j >= 0), diagonal skew pairing <z_j, delta z_j> = 0, and orthogonal delta-invariant spectral planes; Z = Sum z_j is the loaded pointer. Boxed autocorrelation proved: c_Z(t) = <Z, exp(t delta) Z> = Sum ||z_j||^2 cos(2 sqrt(lambda_j) t) (store_autocorrelation), via the exponential series on each invariant plane (exp_inner_cos: HasSum even/odd split against Real.hasSum_cos; the odd part is killed by the skew pairing). Boxed jet identities proved for the closed form: every odd derivative vanishes at the origin (store_jet_odd) and c_Z^{(2n)}(0) = (-4)^n m_n in multiplied form (store_jet_even), via the cosine/sine-family double-derivative induction. Deviations disclosed in the docstring: mu_j appears as sqrt(lambda_j) (frequency 2 sqrt(lambda_j)); the jet identity is stated multiplied by (-4)^n rather than divided; distinctness/positivity of the lambda_j is not needed for these identities and is not assumed beyond 0 <= lambda_j."
   },
   "thm:store-frequency-pencil-master": {
     "env": "theorem",
