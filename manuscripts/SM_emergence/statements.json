@@ -445,9 +445,15 @@
   "thm:shared-edge-sandwich": {
     "env": "theorem",
     "title": "Shared-edge cross Gram and chiral sandwich",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE easy (~0.5-1 day each). Elementary algebra, explicit finite computation, or a short argument on existing NCG/Mathlib infrastructure."
+    "status": "proved",
+    "lean": [
+      "NCG.cross_gram",
+      "NCG.shared_edge_sandwich",
+      "NCG.gram_JA",
+      "NCG.gram_JB",
+      "NCG.normalizer_squares"
+    ],
+    "note": "NCG/Matter/SharedEdgeSandwich.lean. The flag basis (h, u, v) is realized by explicit real 11x3 embeddings: h the normalized face circulation, u = sqrt(2) q01, v the normalized W2-component of q02 orthogonal to u; J_B = J_A composed with the two-cell exchange sigmaE (imported from TwoCellSplitting). Proved: both embeddings are isometries (gram_JA/gram_JB) and the boxed cross Gram C = J_A^H J_B = diag(0, 1/2, 0) (cross_gram) - the overlap is exactly the shared-edge flag row (0, 1/sqrt2, 0). The boxed sandwich Y(M) = (I+C)^(1/2) M (I-C)^(-1/2) with (I+C)^(1/2) = diag(1, sqrt(3/2), 1) and (I-C)^(-1/2) = diag(1, sqrt2, 1) is proved on the doubled coefficient space with Gram metric G = [[I,C],[C,I]]: shared_edge_sandwich shows P+^H G diag(M,-M) P- = (I+C)^(1/2) M (I-C)^(-1/2) for the normalized even/odd triplets P+- = (I;+-I)[2(I+-C)]^(-1/2) (explicit diagonal normalizers; normalizer_squares certifies all four displayed square-root identities). Disclosures: 'sandwiching between the normalized triplets' is rendered as the G-metric adjoint pairing (P+^H G . P-), which reproduces the manuscript's boxed formula exactly; the Gram part is over R (real flag matrices) and the sandwich over C with the same diagonals; sqrt(3/2) is written sqrt6/2."
   },
   "prop:row-normalization-collapse": {
     "env": "proposition",
