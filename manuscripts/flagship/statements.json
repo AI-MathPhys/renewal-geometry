@@ -20,13 +20,6 @@
     "lean": [],
     "note": ""
   },
-  "thm:two-principle-discharge": {
-    "env": "theorem",
-    "title": "Two-principle finite Store--Read closure",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
-  },
   "cor:reduced-hypothesis-spacetime": {
     "env": "corollary",
     "title": "Reduced-hypothesis local Lorentzian spacetime",
@@ -973,5 +966,411 @@
       "NCG.pair_restrict_nondegenerate"
     ],
     "note": "Proved in full in NCG/Dimension/TemporalPartner.lean, over an arbitrary field with the F2 specializations: the orthogonal of the marked hyperplane K lies inside K and is one-dimensional (the radical of omega restricted to K), its generator r pairs nontrivially with the marked temporal label t (value 1 over F2, and r is the unique nonzero radical element), the spatial core K0 = K meet t-perp has codimension two with nondegenerate restriction, K = span{r} + K0, and V = span{t,r} perp K0 is an orthogonal complement with nondegenerate hyperbolic temporal plane. Axiom check: standard axioms only."
+  },
+  "ass:predictive-store-control-entry": {
+    "env": "assumption",
+    "title": "Predictive Store--control entrance",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "ass:complete-cut-entry": {
+    "env": "assumption",
+    "title": "Optional complete renewal-cut freshness entrance",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:predictive-RN-master": {
+    "env": "theorem",
+    "title": "Predictive Radon--Nikodym envelope",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:minimal-realization-naturality-master": {
+    "env": "theorem",
+    "title": "Minimal-realization naturality",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:consequential-odd-read-master": {
+    "env": "theorem",
+    "title": "Consequential odd-line Read extraction",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "def:store-frequency-moments-master": {
+    "env": "definition",
+    "title": "Store-frequency moment packet",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:store-autocorrelation-master": {
+    "env": "theorem",
+    "title": "Store-jet/autocorrelation identity",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:store-frequency-pencil-master": {
+    "env": "theorem",
+    "title": "Exact finite Store-frequency pencil",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "cor:store-frequency-count-master": {
+    "env": "corollary",
+    "title": "Exact loaded-frequency count and source reconstruction",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:analytic-store-polar-master": {
+    "env": "theorem",
+    "title": "Analytic Store germ generates the polar clock",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "cor:real-score-polar-master": {
+    "env": "corollary",
+    "title": "Real score pulse produces the polar microtick",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "prop:score-effect-depth-no-go-master": {
+    "env": "proposition",
+    "title": "One-step score effects do not determine score depth",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "def:persistent-score-transfer-master": {
+    "env": "definition",
+    "title": "Persistent positive score-transfer certificate",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:score-frequency-mixing-master": {
+    "env": "theorem",
+    "title": "Exact score-frequency mixing identity",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:mixed-score-reconstruction-master": {
+    "env": "theorem",
+    "title": "Finite mixed Store--score reconstruction",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:semantic-clock-depth-two-master": {
+    "env": "theorem",
+    "title": "Depth-two common source-clock theorem",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:semantic-total-variance-master": {
+    "env": "theorem",
+    "title": "Exact total-variance clock decomposition",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:no-unmarked-semantic-split-master": {
+    "env": "theorem",
+    "title": "Centrally unmarked semantic alternative",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:anchor-return-rigidity-master": {
+    "env": "theorem",
+    "title": "Anchor-return rigidity",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:clock-quarter-root-master": {
+    "env": "theorem",
+    "title": "Quarter-root, transverse Read, and complex clock factor",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "cor:fair-clock-transition-master": {
+    "env": "corollary",
+    "title": "Exact fair clock transition",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:anchor-external-clifford-master": {
+    "env": "theorem",
+    "title": "One-anchor depth-two external Clifford construction",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:rank-one-cut-replacement-master": {
+    "env": "theorem",
+    "title": "Rank-one complete cut is exactly a replacement",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:replacement-dilation-master": {
+    "env": "theorem",
+    "title": "Minimal replacement dilation and past--fresh split",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:complete-cut-factorization-master": {
+    "env": "theorem",
+    "title": "Complete renewal-cut factorization",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "cor:resolved-memory-factorization-master": {
+    "env": "corollary",
+    "title": "Resolved-memory conditional factorization",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:approximate-cut-locality-master": {
+    "env": "theorem",
+    "title": "Approximate Schur locality at a renewal cut",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "cor:approximate-cut-product-master": {
+    "env": "corollary",
+    "title": "Approximate fresh-source and product-kernel bound",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "def:scalar-source-short-master": {
+    "env": "definition",
+    "title": "Scalar positive source short",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:cut-source-short-master": {
+    "env": "theorem",
+    "title": "A rank-one renewal cut cannot create a source short",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "cor:derived-fresh-diamond-master": {
+    "env": "corollary",
+    "title": "Derived common-source freshness diamond",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:predictive-clock-discharge": {
+    "env": "theorem",
+    "title": "Predictive Store--control finite closure",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:relative-source-sector-master": {
+    "env": "theorem",
+    "title": "Multiplicity-free relative-source reduction",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "def:source-identity-defects-master": {
+    "env": "definition",
+    "title": "Finite clock--geometry source-identity defects",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:cross-source-tomography-master": {
+    "env": "theorem",
+    "title": "Finite clock--geometry branch-interference tomography",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:clock-geometry-cross-Hankel-master": {
+    "env": "theorem",
+    "title": "Cross-Hankel chronology theorem",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "cor:clock-geometry-chronology-polynomial-master": {
+    "env": "corollary",
+    "title": "Primitive-frame chronology polynomials",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:source-cyclic-equivalence-master": {
+    "env": "theorem",
+    "title": "Finite source-cyclic realization equivalence",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:clock-geometry-alternative-master": {
+    "env": "theorem",
+    "title": "Operational clock--geometry source alternative",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:physical-connection-master": {
+    "env": "theorem",
+    "title": "Physical connection decision",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:deformation-anomaly-master": {
+    "env": "theorem",
+    "title": "Exact five-term deformation anomaly",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:ESSC-independence-master": {
+    "env": "theorem",
+    "title": "Continuum-clause independence and heat-bath firewall",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:moving-frame-matter-master": {
+    "env": "theorem",
+    "title": "Exact moving-frame matter bracket",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:orientation-phase-master": {
+    "env": "theorem",
+    "title": "Primitive deck-interaction phase alternative",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:metrology-master": {
+    "env": "theorem",
+    "title": "Independent Newton and cosmological metrology",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:control-frame-equivalence-master": {
+    "env": "theorem",
+    "title": "Finite control-frame equivalence",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "lem:small-transverse-step-master": {
+    "env": "lemma",
+    "title": "Exact small transverse step",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:optimal-transverse-pulse-master": {
+    "env": "theorem",
+    "title": "Optimal transverse-pulse theorem",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "cor:polar-Gram-resource-master": {
+    "env": "corollary",
+    "title": "Sharp Gram--resource law for the polar quarter-root",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:quantitative-control-word-master": {
+    "env": "theorem",
+    "title": "Quantitative exact finite-word synthesis",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "lem:cluster-common-dwell-master": {
+    "env": "lemma",
+    "title": "Sharp one-dwell cluster centre",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:cluster-Bernstein-filter-master": {
+    "env": "theorem",
+    "title": "Inter-cluster Bernstein filter",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "prop:cluster-collision-lower-master": {
+    "env": "proposition",
+    "title": "Collision lower bound for a stable separating polynomial",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "prop:store-pencil-error-master": {
+    "env": "proposition",
+    "title": "Certified Store-frequency pencil error",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "prop:semantic-moment-error-master": {
+    "env": "proposition",
+    "title": "Certified semantic-moment inversion",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:Gram-source-stability-master": {
+    "env": "theorem",
+    "title": "Gram-to-source polar stability",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "lem:cut-minor-error-master": {
+    "env": "lemma",
+    "title": "Certified cut-minor error",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
+  },
+  "thm:robust-clock-factorization-master": {
+    "env": "theorem",
+    "title": "Robust polarized-clock factorization",
+    "status": "not_started",
+    "lean": [],
+    "note": ""
   }
 }
