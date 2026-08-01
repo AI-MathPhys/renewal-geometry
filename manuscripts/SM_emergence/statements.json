@@ -1210,9 +1210,16 @@
   "thm:generator-cross-map": {
     "env": "theorem",
     "title": "Cross-support generator map",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.generator_cross_map",
+      "NCG.cross_map_frame_independent",
+      "NCG.gksl",
+      "NCG.jump_survives",
+      "NCG.end_kill",
+      "NCG.start_kill"
+    ],
+    "note": "NCG/Matter/GeneratorCrossMap.lean. The finite GKSL generator is fixed in a frame as gksl H V rho = -i[H,rho] + Sum (V rho V^H - (1/2){V^H V, rho}) on complex matrices. For Hermitian idempotent supports with P_t P_s = P_s P_t = 0, proved: (i) the boxed cross-map formula P_t L(P_s X P_s) P_t = Sum_alpha B_alpha X B_alpha^H with B_alpha = P_t V_alpha P_s (generator_cross_map, first conjunct; the Hamiltonian and anticommutator compressions vanish by the support-orthogonality kill lemmas end_kill/start_kill); (ii) the boxed effect A_{t<-s} = P_t L(P_s) P_t = Sum B_alpha B_alpha^H; (iii) A = 0 iff every microscopic jump has zero s->t block (via the already-proved kraus_block_nogo from SMEasyV5). Frame independence is rendered as cross_map_frame_independent: two GKSL frames presenting the same generator have identical cross-support Kraus forms (the manuscript's invariance-under-nonunique-frame claim). Complete positivity of X -> Sum B X B^H is manifest from the Kraus form and not separately restated (disclosed)."
   },
   "corollary:failure-of-accessibility-for-the-displayed-source": {
     "env": "corollary",
