@@ -532,9 +532,12 @@
   "lem:v003-rough-weight-support": {
     "env": "lemma",
     "title": "Pointwise support of the rough weight",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.rough_weight_support",
+      "NCG.roughWeight"
+    ],
+    "note": "Proved: the rough weight w_kappa(n;x) (formalized as NCG.roughWeight a b n with real thresholds a = x^kappa, b = x^tau, least prime factor Nat.minFac, and Omega = ArithmeticFunction.cardFactors) equals 1 exactly when n is prime or n = rq with distinct primes r < q and a <= r < b, and 0 otherwise. The manuscript hypotheses \"n asymp x, x sufficiently large, tau < 1/2\" enter the proof only through 1 < a <= b and b^2 <= n, which is how the formal statement takes them; no upper bound on n is needed. The case analysis (factor depth 1 / 2 / >= 3, with the least-factor threshold trichotomy at depth 2) is exactly the manuscript proof."
   },
   "ass:v003-support-retaining": {
     "env": "assumption",
