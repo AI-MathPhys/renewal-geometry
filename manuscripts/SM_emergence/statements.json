@@ -1213,9 +1213,17 @@
   "prop:vertical-independence": {
     "env": "proposition",
     "title": "Accessibility independence family",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.vertical_independence",
+      "NCG.vertDissipator_trace",
+      "NCG.vertDissipator_one",
+      "NCG.vertDissipator_symm",
+      "NCG.vertDissipator_label",
+      "NCG.vertDissipator_PR",
+      "NCG.vertDissipator_PL"
+    ],
+    "note": "NCG/Matter/VerticalIndependence.lean. The vertical family is encoded by its R->L movers G x (so F_{x,R} = G x, F_{x,L} = (G x)^H), with the exact identities of the displayed |x,L><x,R| (x) I4 operators taken as hypotheses: support P_L G P_R = G, resolutions Sum G G^H = P_L and Sum G^H G = P_R, orthogonal Hermitian idempotent supports with P_L + P_R = 1, and label commutation Q_y G_x = G_x Q_y (disclosed model choice). Proved: the dissipator D(rho) = Sum (G rho G^H + G^H rho G) - rho is trace preserving (vertDissipator_trace), unital (vertDissipator_one), tracially symmetric (vertDissipator_symm), and invisible to the classical diagonal label process, Tr(Q_y D(rho)) = 0 (vertDissipator_label; scalar accepted/rejected effects are the trace-preservation clause). Boxed accessibility effects: for L_lambda = L_bare + lambda D with charged-invisible bare part (hypotheses P_L L_bare(P_R) P_L = 0 etc., the preceding displayed corollary), the compressions are exactly lambda P_L and lambda P_R via D(P_R) = P_L - P_R and D(P_L) = P_R - P_L, and lambda P_L = 0 iff lambda = 0 (vertical_independence): charged accessibility absent at lambda = 0, present for every lambda > 0. Complete positivity of the Lindblad form is not restated (standard, outside the boxed claims)."
   },
   "interpretation:untitled--5": {
     "env": "interpretation",
