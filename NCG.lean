@@ -199,6 +199,7 @@ import NCG.Arithmetic.PrimePowerHL
 import NCG.Arithmetic.AbelReduction
 import NCG.Arithmetic.ResidueParseval
 import NCG.Arithmetic.MassPrefix
+import NCG.Arithmetic.TranslationNoGo
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree
 import NCG.Arithmetic.SignedSeparator

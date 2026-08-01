@@ -231,9 +231,11 @@
   "prop:v002-translation-nogo": {
     "env": "proposition",
     "title": "Finite self-translation no-go",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.translation_nogo"
+    ],
+    "note": "Proved: for a finite zero multiset Z, pairwise-distinct sample points (the shifted values z_i - eta_j, collected as a Finset) avoiding Z, and arbitrary nonzero targets A, there is an entire F = P * G with P the polynomial with zero multiset Z, G entire and everywhere nonvanishing (so the zero multiset of F contains Z with exact multiplicity), and F = A at all sample points. Construction as in the manuscript: Lagrange interpolation of logarithm branches, F = P e^h. The concluding sentence that finite translated lower frames therefore do not constrain horizontal zero positions is interpretive prose."
   },
   "audit:what-the-dirichlet-collection-adds": {
     "env": "audit",
