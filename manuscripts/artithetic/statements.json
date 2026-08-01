@@ -647,16 +647,24 @@
   "thm:mass-prefix": {
     "env": "theorem",
     "title": "Exact mass--prefix identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.mass_prefix",
+      "NCG.mass_prefix_bilinear",
+      "NCG.mass_prefix_smul"
+    ],
+    "note": "Proved: the exact Abel resummation C_F(d) = M(d) (x) T_{s_N}F + sum_{c<N} q_c(d) (x) (T_{s_c}F - T_{s_{c+1}}F), formalized for an arbitrary bilinear pairing (NCG.mass_prefix_bilinear) and instantiated at the tensor product (NCG.mass_prefix) and at scalar coefficients (NCG.mass_prefix_smul). The translated ports T_{s_c}F enter the identity only through their values, so the formal statement takes an arbitrary family F c of vectors; the translation structure plays no role in the identity, exactly as in the manuscript proof."
   },
   "lem:fourier-boundary": {
     "env": "lemma",
     "title": "Fourier boundary identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.fourier_boundary",
+      "NCG.fourier_boundary_unitary",
+      "NCG.stepPrefix"
+    ],
+    "note": "Proved for Hilbert-valued coefficients and monotone cell centres s_0 <= ... <= s_N: with the step prefix field J_d = q_c on [s_c, s_{c+1}) (NCG.stepPrefix), sum_c e^{it s_c} d_c = e^{it s_N} M(d) - it int e^{its} J_d(s) ds for every real t (NCG.fourier_boundary; the identity is stated in multiplied-by-it form, so no t != 0 restriction is needed). NCG.fourier_boundary_unitary is the boxed display with the unitary transform hat J(t) = (2 pi)^{-1/2} int e^{its} J(s) ds, which is defined in-file (NCG.unitaryHat) with exactly that normalization."
   },
   "thm:mass-flux": {
     "env": "theorem",
