@@ -948,9 +948,15 @@
   "cor:v5-s4-dark-nogo": {
     "env": "corollary",
     "title": "Full-symmetry dark no-go",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.s4_dark_nogo",
+      "NCG.invariant_line_unique",
+      "NCG.opposite_edge_tau",
+      "NCG.qF2_ker",
+      "NCG.qF2_equivariant"
+    ],
+    "note": "NCG/Matter/S4DarkNoGo.lean, all by decide over F2. H1(K4;F2) is realized by the explicit coordinate map qF2 : F2^6 -> F2^3 whose kernel is proved to be exactly the mod-2 coboundary space (qF2_ker), and the three adjacent vertex transpositions descend through qF2 to explicit matrices w01/w12/w23 (qF2_equivariant), so the S4-action on cohomology is derived rather than decreed. Proved: the opposite-edge relation [e]+[e-bar] = tau for the three opposite pairs (opposite_edge_tau); the triangle class tau = (1,1,1) spans the unique S4-invariant line (invariant_line_unique, which also gives the surrounding-text classification 0, <tau>, H1 of invariant subspaces); and the corollary proper: no plane {0,a,b,a+b} is invariant under all three generating transpositions (s4_dark_nogo), i.e. an exactly S4-covariant charged source cannot have charged rank two. The final clause (rank two is what would select one unique dark parity, via |K_ch| = 2) is the surrounding dark-parity dictionary and is interpretive prose, disclosed in the docstring."
   },
   "thm:v5-reduced-determinant": {
     "env": "theorem",
