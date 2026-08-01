@@ -604,9 +604,13 @@
   "prop:v003-maynard-ceiling": {
     "env": "proposition",
     "title": "Maynard coordinate ceiling",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.maynard_coordinate_CS",
+      "NCG.sq_integral_le",
+      "NCG.maynard_ceiling"
+    ],
+    "note": "Proved: the coordinate integral inequality J_k^{(i)}(F) <= I_k(F) (NCG.maynard_coordinate_CS) as Cauchy-Schwarz in the i-th coordinate (a probability measure) integrated over the remaining variables, stated in product-splitting form (remaining coordinates) x (i-th coordinate) with F square-integrable on the product; the per-slice inequality (int f)^2 <= int f^2 is NCG.sq_integral_le. NCG.maynard_ceiling substitutes J <= I into the standard first-moment asymptotic pi_i = (log R/log N) J/I + o(1), R = N^{theta/2-delta} (taken as hypothesis: it is the external Maynard input), and yields convergence of the marginals to a limit <= theta/2 - delta < 1/2 -- inside the twin-free regime of NCG.twinfree_marginals, which is the compatibility assertion."
   },
   "prop:v003-minimal-singular-series": {
     "env": "proposition",
