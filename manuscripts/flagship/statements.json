@@ -1525,9 +1525,12 @@
  "thm:Gram-source-stability-master": {
   "env": "theorem",
   "title": "Gram-to-source polar stability",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/GramStability.lean:NCG.gram_source_stability",
+   "NCG/Flagship/GramStability.lean:NCG.gram_frame_bounds"
+  ],
+  "note": "Both displayed claims. The synthesis frame inequality (1 - eps/g) I <= S*S <= (1 + eps/g) I is proved in quadratic-form language (gram_frame_bounds) from the Gram floor g||c||^2 <= ||sum c_a eta_a||^2 and the quadratic-form consequence |c*(G-G0)c| <= eps ||c||^2 of the operator-norm hypothesis (a weaker hypothesis, hence a stronger theorem). The boxed polar bound ||xi_a - U eta_a|| <= 1 - sqrt(1 - eps/g) is proved with a genuine polar unitary: A = S*S is diagonalized by the finite-dimensional spectral theorem (LinearMap.IsSymmetric.eigenvectorBasis), the eigenvalues lie in [1 - eps/g, 1 + eps/g] by Rayleigh, U = S|S|^{-1} is realized on the eigenbasis and shown inner-product preserving, and the displacement is bounded by max|sqrt(mu) - 1| <= 1 - sqrt(1-r) using sqrt(1-r) + sqrt(1+r) <= 2. The target vectors enter as a basis of their span with unit norms."
  },
  "lem:cut-minor-error-master": {
   "env": "lemma",
