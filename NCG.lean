@@ -261,6 +261,7 @@ import NCG.Arithmetic.SMDescent
 import NCG.Arithmetic.QutritCompletion
 import NCG.Arithmetic.GaussianPort
 import NCG.Arithmetic.ImprimitiveEuler
+import NCG.Arithmetic.TwistedMellin
 import NCG.Arithmetic.GaussianPlancherel
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree

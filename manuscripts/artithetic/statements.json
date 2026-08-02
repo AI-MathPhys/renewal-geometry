@@ -206,9 +206,14 @@
  "thm:v002-twisted-mellin": {
   "env": "theorem",
   "title": "Exact twisted Mellin transform",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/TwistedMellin.lean:NCG.twisted_mellin",
+   "NCG/Arithmetic/TwistedMellin.lean:NCG.twisted_mellin_prime_side",
+   "NCG/Arithmetic/TwistedMellin.lean:NCG.twisted_mellin_center_side",
+   "NCG/Arithmetic/TwistedMellin.lean:NCG.mellin_log_dilate"
+  ],
+  "note": "Boxed identity proved for continuous compactly supported C and Re s > 1/2, with delta as an explicit parameter of the centered packet (the identity is linear in delta; the prose convention delta_chi = 1 exactly in the primitive trivial channel is definitional). -L'/L(s+1/2, chi) is rendered as the logarithmic derivative of the Dirichlet L-series via Mathlib LSeries_twist_vonMangoldt_eq (Re(s+1/2) > 1, the series domain). Absolute convergence is established, not assumed: the substitution u = log(a/X) is carried out by an explicit exp change of variables, the prime side by countable Fubini (integral_tsum_of_summable_integral_norm plus a proved integrable-tsum companion), the centered channel by product-measure Fubini with the tail integral int_1^infty y^{-s-1/2} dy = 1/(s-1/2) computed by FTC. C smooth is weakened to C continuous with compact support (strictly more general)."
  },
  "prop:v002-completed-packet": {
   "env": "proposition",
