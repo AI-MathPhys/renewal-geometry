@@ -44,9 +44,16 @@
   "thm:exterior-cube-master": {
     "env": "theorem",
     "title": "Exterior-cube determinant identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.cube_expectation",
+      "NCG.cube_det_expansion",
+      "NCG.tripleDet_comp",
+      "NCG.cube_isotropic",
+      "NCG.cubeM",
+      "NCG.tripleDet"
+    ],
+    "note": "NCG/Flagship/ExteriorCube.lean. The multilinear row expansion of det M for M = sum_a w_a u_a u_a^T (cube_det_expansion, via the alternating-multilinear structure of the determinant), and the boxed identity in ordered form: sum over all ordered triples (a,b,c) of w_a w_b w_c det[u_a,u_b,u_c]^2 equals 6 det M (cube_expectation, by expanding one determinant factor through the Leibniz formula and symmetrizing over the six row permutations with sign^2 = 1). This is simultaneously the boxed expectation identity E det[U_1,U_2,U_3]^2 = 6 det M (the ordered sum IS the i.i.d. expectation; repeated indices contribute zero determinants) and the boxed Cauchy-Binet value sum_{a<b<c} w_a w_b w_c det^2 = det M in its equivalent ordered rendering (the a<b<c grouping is the 3!-fold symmetrization of the ordered sum, and the identification of sum_{a<b<c} of the squared maximal minors with ||Lambda^3 W||_HS^2 is the definition of the exterior-cube matrix coefficients - both disclosed). Isotropic normalization 6 det(I_3/3) = 2/9 (cube_isotropic)."
   },
   "thm:spectral-source-Ward-master": {
     "env": "theorem",

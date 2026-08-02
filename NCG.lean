@@ -230,6 +230,7 @@ import NCG.Flagship.PointerChronology
 import NCG.Flagship.RelativeSourceSector
 import NCG.Flagship.CrossHankel
 import NCG.Flagship.TransverseStep
+import NCG.Flagship.ExteriorCube
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer
