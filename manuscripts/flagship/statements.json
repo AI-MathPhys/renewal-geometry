@@ -1072,9 +1072,11 @@
   "prop:score-effect-depth-no-go-master": {
     "env": "proposition",
     "title": "One-step score effects do not determine score depth",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.score_effect_depth_no_go"
+    ],
+    "note": "NCG/Flagship/ScoreDepthNoGo.lean. The manuscript's explicit qubit counterexample fully verified: with effect A = |0><0|, the Lueders success map rho -> A rho A and the measure-and-prepare map rho -> Tr(A rho)|1><1| have identical one-step effects (both succeed with probability Tr(A rho) on every state, first conjunct, proved for all 2x2 complex rho), yet from the state |0><0| the two-step success probability is 1 for Lueders and 0 for measure-and-prepare (second and third conjuncts, explicit matrix computation). Hence one-step score effects do not determine score depth. Stated over all complex matrices rather than just density matrices (a strengthening, disclosed)."
   },
   "def:persistent-score-transfer-master": {
     "env": "definition",
@@ -1210,9 +1212,15 @@
   "thm:cut-source-short-master": {
     "env": "theorem",
     "title": "A rank-one renewal cut cannot create a source short",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.cut_source_short",
+      "NCG.cut_source_short_zero_iff",
+      "NCG.kronLp_inner",
+      "NCG.kronLp_norm_sq",
+      "NCG.sourceShort"
+    ],
+    "note": "NCG/Flagship/CutSourceShort.lean. Tensors realized as Kronecker vectors on the product index of finite-dimensional Euclidean spaces (kronLp, disclosed model). The scalar positive source short S_{o|c} = ||o||^2 - |<c,o>|^2/||c||^2 (squared distance of o from the line C c) satisfies the boxed scaling S_{o- (x) f | c- (x) f} = ||f||^2 S_{o-|c-} for any common post-cut factor f /= 0 (cut_source_short), via the factorization of inner products and norms of Kronecker vectors (kronLp_inner, kronLp_norm_sq). Consequently the short vanishes after the cut iff it vanished before (cut_source_short_zero_iff): a positive clock-geometry short cannot be created or destroyed by a shared rank-one renewal cut factor."
   },
   "cor:derived-fresh-diamond-master": {
     "env": "corollary",
