@@ -215,6 +215,8 @@ import NCG.Flagship.StoreFrequencyPencil
 import NCG.Flagship.StoreFrequencyCount
 import NCG.Flagship.RankOneCut
 import NCG.Flagship.ScoreFrequencyMixing
+import NCG.Flagship.MixedScoreReconstruction
+import NCG.Flagship.CertifiedInversion
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

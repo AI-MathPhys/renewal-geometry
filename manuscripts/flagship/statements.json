@@ -1100,9 +1100,11 @@
   "thm:mixed-score-reconstruction-master": {
     "env": "theorem",
     "title": "Finite mixed Store--score reconstruction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.mixed_score_reconstruction"
+    ],
+    "note": "NCG/Flagship/MixedScoreReconstruction.lean. The boxed Vandermonde reconstruction at any fixed score depth: the mixed moments m_{r,n} = Sum_j lambda_j^r p_{j,n} are the transposed-Vandermonde image of the per-block score vector, and p = V^{-1} m recovers it (mixed_score_reconstruction, reusing vandermonde_det_ne_zero from the pencil slice). The per-block scores p_{j,n} at the fixed depth enter as the interface vector (disclosed); distinctness of the loaded values is the hypothesis."
   },
   "thm:semantic-clock-depth-two-master": {
     "env": "theorem",
@@ -1383,9 +1385,11 @@
   "prop:semantic-moment-error-master": {
     "env": "proposition",
     "title": "Certified semantic-moment inversion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.semantic_moment_error"
+    ],
+    "note": "NCG/Flagship/CertifiedInversion.lean. The boxed propagated error bar: for exact and measured systems Vp = m, V-hat p-hat = m-hat with eta = ||V^{-1}||*||Delta V|| < 1, ||p-hat - p|| <= (||V^{-1}||/(1-eta))(||Delta m|| + ||Delta V||*||p||) (semantic_moment_error), proved on a normed space with the operator norm via the identity (1 + V^{-1}DeltaV)(p-hat - p) = V^{-1}(Delta m - Delta V p) and the elementary Neumann lower bound (1-eta)||x|| <= ||x + Tx||. The perturbed solution p-hat enters as a hypothesis solving the measured system (its existence for eta < 1 is the Neumann invertibility, prose); the closing sentence about depth-two determinants and loading differences is the prose consequence (disclosed)."
   },
   "thm:Gram-source-stability-master": {
     "env": "theorem",
@@ -1397,9 +1401,11 @@
   "lem:cut-minor-error-master": {
     "env": "lemma",
     "title": "Certified cut-minor error",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.cut_minor_error"
+    ],
+    "note": "NCG/Flagship/CertifiedInversion.lean. The boxed scalar bound |D_ab| <= |D-hat_ab| + 3 eps + eps^2 for D_ab = F_ab - F_a0 F_0b under |F| <= 1 and entrywise measurement error eps (cut_minor_error; the normalization F_00 = 1 is not needed for the displayed inequality and is not assumed, disclosed)."
   },
   "thm:robust-clock-factorization-master": {
     "env": "theorem",
