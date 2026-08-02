@@ -1312,9 +1312,16 @@
   "thm:clock-geometry-cross-Hankel-master": {
     "env": "theorem",
     "title": "Cross-Hankel chronology theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.cross_hankel_gram",
+      "NCG.clock_proj_props",
+      "NCG.cross_hankel_schur",
+      "NCG.cross_hankel_psd",
+      "NCG.cross_hankel_rank",
+      "NCG.cross_hankel_reconstruction"
+    ],
+    "note": "NCG/Flagship/CrossHankel.lean, with history syntheses realized by the Krylov block matrices of NCG/Upstream/KalmanRealization.lean and self-adjoint transfer. Proved: the cross-Hankel window is the Gram of the two history families, (H^ab)_{(i,q),(j,r)} = (Sa* T^{i+j} Sb)_{qr} (cross_hankel_gram); with the clock-packet projection Pi = K(K*K)^-1 K* (Hermitian idempotent fixing clock histories, clock_proj_props), the boxed Schur identity G = H^gg - (H^cg)*(H^cc)^-1 H^cg = ((1-Pi)V^g)*((1-Pi)V^g) (cross_hankel_schur), hence G >= 0 (cross_hankel_psd) and rank G = rank((1-Pi)V^g), the number of additional geometry-history directions (cross_hankel_rank); and the boxed reconstruction: G = 0 gives S_geo = sum_{n<d} T^n S_clk R_n with the coefficient blocks read off from (H^cc)^-1 H^cg (cross_hankel_reconstruction). The Moore-Penrose convention enters through the nondegeneracy hypothesis H^cc PosDef (independent clock histories), under which the pseudoinverse is the inverse (disclosed); minimality of the chronology degree is its definition (prose)."
   },
   "cor:clock-geometry-chronology-polynomial-master": {
     "env": "corollary",
