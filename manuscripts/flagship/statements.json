@@ -1153,9 +1153,15 @@
   "thm:semantic-total-variance-master": {
     "env": "theorem",
     "title": "Exact total-variance clock decomposition",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Flagship/SemanticVariance.lean:NCG.clock_defect_fourth_order",
+      "NCG/Flagship/SemanticVariance.lean:NCG.total_variance_decomposition",
+      "NCG/Flagship/SemanticVariance.lean:NCG.semantic_total_variance_fourth_order",
+      "NCG/Flagship/SemanticVariance.lean:NCG.omega_block_sum",
+      "NCG/Flagship/SemanticVariance.lean:NCG.clock_defect_cancellation"
+    ],
+    "note": "Both boxed formulas, with the derivative rendering disclosed. The scalar reductions p1(th)/w*, p2(th)/w* are taken as the manuscript's displayed quartics with the o(t^4) remainder dropped, and the boxed fourth derivative d^4/dt^4|_0 D_clk = 6 Var_omega(Q) is rendered as its 1/4! normalization, the fourth Taylor coefficient: the limit D_clk(th)/t^4 -> (omega(Q^2) - omega(Q)^2)/4 along t -> 0 is proved in full (clock_defect_fourth_order), uniformly in the unknown fourth-order coefficient b = omega(B). The proof is genuine analysis: the b-cancellation p0 p2 - p1^2 = t^4(Var/4 + t^2 omega1 b - t^4 b^2) is the polynomial identity clock_defect_cancellation; the log remainder is controlled by |log(1+y) - y| <= 2y^2 (derived from Mathlib's Real.abs_log_sub_add_sum_range_le) and squeezed; the main part converges by continuity. Block diagonality reduces the state moments to block moments (omega_block_sum, sesquilinear collapse under the no-coupling hypothesis), and the boxed law of total variance Var_omega(Q) = (1/w*) sum_j w_j Var_j + (1/w*) sum_j w_j (nu_j - nubar)^2 is proved exactly as an algebraic identity over the block moments (total_variance_decomposition). semantic_total_variance_fourth_order chains the two boxes: the fourth-order clock coefficient equals one quarter of the total-variance decomposition."
   },
   "thm:no-unmarked-semantic-split-master": {
     "env": "theorem",
