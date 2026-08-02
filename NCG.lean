@@ -224,6 +224,8 @@ import NCG.Flagship.ClockQuarterRoot
 import NCG.Flagship.AnchorClifford
 import NCG.Flagship.SourceCyclicEquivalence
 import NCG.Flagship.ClusterCompiler
+import NCG.Flagship.SemanticClockDepthTwo
+import NCG.Flagship.ReplacementDilation
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

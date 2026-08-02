@@ -1111,9 +1111,14 @@
   "thm:semantic-clock-depth-two-master": {
     "env": "theorem",
     "title": "Depth-two common source-clock theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.semantic_global_flat_iff",
+      "NCG.semantic_block_depth_two",
+      "NCG.semantic_depth_two_moments",
+      "NCG.depth_two_gap"
+    ],
+    "note": "NCG/Flagship/SemanticClockDepthTwo.lean, on a real inner-product carrier with self-adjoint score operator A and loaded components z_j; the commutation [K, A] = 0 enters through commuting self-adjoint... block projections P_j with P_j z_j = z_j and P_j z_i = 0 for i /= j (disclosed interface). All four equivalences covered: the exact Cauchy-Schwarz defect identity ||(||z||^2)Az - <z,Az>z||^2 = ||z||^2(||z||^2<z,A^2 z> - <z,Az>^2) (depth_two_gap); blockwise (i)<->(ii): p_{j,1}^2 = w_j p_{j,2} iff A z_j = (p_{j,1}/w_j) z_j (semantic_block_depth_two); (i)->(iii): the common eigenvalue gives all moments p_{j,n} = w_j a^n (semantic_depth_two_moments; the converse at depths one and two is the block iff); and the boxed global (i)<->(iv): p_0 p_2 = p_1^2 iff every loaded block satisfies A z_j = a(q) z_j with the common value a(q) = p_1/p_0 (semantic_global_flat_iff). The range constraint a(q) in [0,1] is the positive-contraction interface for A (not needed for the equivalences; disclosed)."
   },
   "thm:semantic-total-variance-master": {
     "env": "theorem",
@@ -1200,9 +1205,14 @@
   "thm:replacement-dilation-master": {
     "env": "theorem",
     "title": "Minimal replacement dilation and past--fresh split",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.repVec",
+      "NCG.replacement_isometry",
+      "NCG.replacement_channel",
+      "NCG.replacement_reference_split"
+    ],
+    "note": "NCG/Flagship/ReplacementDilation.lean, finite tuples with the sesquilinear star-dot pairing and kronVec tensors (as in NCG/Upstream/ChronologyLeakage.lean). The boxed isometry V_rep psi = Omega_omega (x) J psi is defined (repVec, memory unitary J as a matrix), proved isometric (replacement_isometry), and proved to dilate the replacement channel in weak form: for every lifted system effect X (x) I (x) I, <V psi, (X(x)I(x)I) V phi> = Tr(omega X) <psi, phi> (replacement_channel; the purification property of Omega_omega enters as the hypothesis <Omega, (X(x)I)Omega> = Tr(omega X)). The boxed reference-system identity is proved pointwise under the explicit index reshuffle (x,((a,e),k)) -> ((x,k),(a,e)) (replacement_reference_split). The environment index is r x dim(H_-) by construction; minimality (= Choi rank r dim H_-) is the standard Choi-rank criterion, cited as interface (disclosed)."
   },
   "thm:complete-cut-factorization-master": {
     "env": "theorem",
