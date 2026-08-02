@@ -231,6 +231,11 @@ import NCG.Flagship.RelativeSourceSector
 import NCG.Flagship.CrossHankel
 import NCG.Flagship.TransverseStep
 import NCG.Flagship.ExteriorCube
+import NCG.Flagship.OddRead
+import NCG.Flagship.CrossTomography
+import NCG.Flagship.NoUnmarkedSplit
+import NCG.Flagship.CutFactorization
+import NCG.Flagship.FreshDiamond
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

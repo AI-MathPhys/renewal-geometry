@@ -1011,9 +1011,11 @@
   "thm:consequential-odd-read-master": {
     "env": "theorem",
     "title": "Consequential odd-line Read extraction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.consequential_odd_read"
+    ],
+    "note": "NCG/Flagship/OddRead.lean. Abstract order-unit rendering: X a real module, s a unit-preserving linear involution, d a loaded odd line (sd = -d, u(d) = 0), admitted effects closed under pullback by s, complement u - f, and binary convex mixing; future separation enters as the hypothesis supplying an admitted e with e(d) /= 0 (disclosed interface). The boxed symmetrized pair e+ = (e + u - s*e)/2, e- = u - e+ is proved admitted with s*e+ = e-, e+(d) = e(d) = -e-(d) /= 0: an exchange-covariant binary Read whose outcomes are future distinct with the involution acting by -1 on the contrast line. The determinant-holonomy consequence for recurrent loops is prose."
   },
   "def:store-frequency-moments-master": {
     "env": "definition",
@@ -1143,9 +1145,11 @@
   "thm:no-unmarked-semantic-split-master": {
     "env": "theorem",
     "title": "Centrally unmarked semantic alternative",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.no_unmarked_semantic_split"
+    ],
+    "note": "NCG/Flagship/NoUnmarkedSplit.lean. Rendered through the separation mechanism of the manuscript proof: the one-step mixed moments m_r = sum_j lam_j^r a_j w_j separate the blockwise values by Vandermonde nondegeneracy (distinct loaded values, nonzero weights). Central unmarkedness - the response is not future consequential - enters as the hypothesis that the mixed moments agree with those of a scalar label c; the boxed conclusion a_1 = ... = a_s (= c) follows by inverting the Vandermonde system (disclosed rendering; the manuscript's contrapositive is that unequal a_j make C(q) = sum a_j e_j a moment-detectable, hence future-consequential, central label)."
   },
   "thm:anchor-return-rigidity-master": {
     "env": "theorem",
@@ -1230,16 +1234,22 @@
   "thm:complete-cut-factorization-master": {
     "env": "theorem",
     "title": "Complete renewal-cut factorization",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.cut_commutant_factorizes",
+      "NCG.cut_source_product",
+      "NCG.complete_cut_kernel_factorization"
+    ],
+    "note": "NCG/Flagship/CutFactorization.lean. Irreducibility of the loaded past action rendered as the scalar-commutant property (the finite-dimensional Schur characterization, disclosed). Proved: every natural post-cut control factorizes W_y = I (x) V_y (cut_commutant_factorizes, by the block computation {U_g (x) I}' = I (x) B(F)); the polarized source factors Xi(x,y) = xi_past(x) (x) xi_fut(y) (cut_source_product); and the boxed kernel product K((x,y),(x',y')) = K((x,0),(x',0)) K((0,y),(0,y')) for unit basepoints (complete_cut_kernel_factorization, kronVec/star-dot model). Slot transitivity, the identical serial root, and the isotypic location of residual memory in the reducible case are prose (disclosed)."
   },
   "cor:resolved-memory-factorization-master": {
     "env": "corollary",
     "title": "Resolved-memory conditional factorization",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.resolved_memory_factorization"
+    ],
+    "note": "NCG/Flagship/CutFactorization.lean. On every resolved orthogonal sector z the boxed conditional product K_z((x,y),(x',y')) = K_z^past(x,x') K_z^fut(y,y') holds (first clause), and the unconditional kernel is the finite direct sum of the sector products (second clause) - the classical mixture after discarding a sharp label. The physical resolution of memory into orthogonal source-minimal sectors is the interface premise (disclosed); without it no conditional-product statement is asserted, matching the corollary's own caveat."
   },
   "thm:approximate-cut-locality-master": {
     "env": "theorem",
@@ -1278,9 +1288,14 @@
   "cor:derived-fresh-diamond-master": {
     "env": "corollary",
     "title": "Derived common-source freshness diamond",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.diamondKernel",
+      "NCG.diamond_stationary",
+      "NCG.diamond_exchange_invariant",
+      "NCG.diamond_odd_mean_zero"
+    ],
+    "note": "NCG/Flagship/FreshDiamond.lean. The boxed diamond kernel K((z,a,b),(z',a',b')) = P(z,z') R_{z'}(a') R_{z'}(b') is defined from the source transition and two identical fresh Read laws (the conditional independence supplied by the proved complete-cut factorization, disclosed), and: the product law pi(z) R_z(a) R_z(b) is stationary for it (diamond_stationary, requires stationarity of pi for P and unit Read row sums); the stationary law is exchange invariant (diamond_exchange_invariant); every exchange-odd observable has zero stationary mean (diamond_odd_mean_zero, by the (a,b) -> (b,a) pairing). The corollary's firewall (no metric-compatibility or torsion conclusion) is prose."
   },
   "thm:predictive-clock-discharge": {
     "env": "theorem",
@@ -1312,9 +1327,11 @@
   "thm:cross-source-tomography-master": {
     "env": "theorem",
     "title": "Finite clock--geometry branch-interference tomography",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.cross_source_tomography"
+    ],
+    "note": "NCG/Flagship/CrossTomography.lean. Both boxed polarization identities proved on a complex inner-product space with the manuscript's conjugate-linear-first convention (Mathlib's): Re<x,y> = (||x+y||^2 - ||x-y||^2)/4 and Im<x,y> = (||x-iy||^2 - ||x+iy||^2)/4, plus the assembled complex matrix element <x,y> = Re + i Im. Instantiating x = S_clk v, y = S_geo w over a finite basis reconstructs the cross Gram B = S_clk* S_geo and every source-identity defect (prose instantiation)."
   },
   "thm:clock-geometry-cross-Hankel-master": {
     "env": "theorem",
