@@ -1473,9 +1473,13 @@
  "thm:cluster-Bernstein-filter-master": {
   "env": "theorem",
   "title": "Inter-cluster Bernstein filter",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/BernsteinFilter.lean:NCG.cluster_bernstein_filter",
+   "NCG/Flagship/BernsteinFilter.lean:NCG.bernstein_filter_mem_unit",
+   "NCG/Flagship/BernsteinFilter.lean:NCG.bernstein_filter_error"
+  ],
+  "note": "Both boxed bounds proved for an abstract Delta^{-1}-Lipschitz [0,1]-valued cluster indicator f on [lam_-, lam_+]: positivity 0 <= p_{a,n} <= 1 (convex weights) and the error bound |p_{a,n}(lam) - f(lam)| <= R/(2 Delta sqrt n) at every point of the window, via Mathlib bernstein.variance, discrete Cauchy-Schwarz, and x(1-x) <= 1/4. The piecewise-affine construction of f_a from the disjoint cluster intervals (which realizes the Lipschitz hypothesis) and the merging remark are prose."
  },
  "prop:cluster-collision-lower-master": {
   "env": "proposition",
