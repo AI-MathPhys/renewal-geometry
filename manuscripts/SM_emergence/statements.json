@@ -1298,78 +1298,78 @@
   "cor:v6-two-word-qutrit": {
     "env": "corollary",
     "title": "Two physical cubic revisions suffice",
-    "status": "not_started",
+    "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "V6 chain: two commuting physical cubic automorphisms with scalar joint fixed algebra on a source-loaded simple corner reproduce the fixed-qutrit conclusions; F_3^2 group argument. Not yet formalized."
   },
   "thm:v6-control-germ": {
     "env": "theorem",
     "title": "Analytic-germ finite reduction",
-    "status": "not_started",
+    "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "V6 chain: the connected control Lie algebra of an analytic switched family is the finite Lie closure of (iH0, i Ran Q+, i Ran Q-), with n^2 - 1 switch settings sufficing and Gram-rank termination. Not yet formalized."
   },
   "thm:v6-maslov": {
     "env": "theorem",
     "title": "Turn-Gram Maslov theorem",
-    "status": "not_started",
+    "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "V6 chain: turn-Gram invariance descends the turn action to the future range, K_mu transforms by the determinant character, and the positive Gram compression Q_mu >= 0 is the exact no-Maslov/loaded multiplicity certificate. Not yet formalized."
   },
   "thm:v6-first-return": {
     "env": "theorem",
     "title": "Operator-valued first-return reconstruction",
-    "status": "not_started",
+    "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "V6 chain: block-transfer first-return formula T_ret = C + A*(I-F)^{-1}A with kernels K_n = A*F^{n-2}A, geometric truncation error, and the moment recursion K_n = M_n - sum K_j M_{n-j}. Neumann-series matrix algebra; accessible with the existing certified-inversion patterns. Not yet formalized."
   },
   "cor:v6-birth-orders": {
     "env": "corollary",
     "title": "Linear jump birth and quadratic coherent birth",
-    "status": "not_started",
+    "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "V6 chain: GKSL support-birth orders - dissipative birth is linear (jump-term derivative), block-preserving coherent rotation is quadratic tau^2 Tr(P_t H rho H P_t) + O(tau^3). Semigroup Taylor expansion at 0. Not yet formalized."
   },
   "thm:v6-comb-ideal": {
     "env": "theorem",
     "title": "Coherent-comb support-ideal theorem",
-    "status": "not_started",
+    "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "V6 chain: the block-diagonal coefficient algebra D is an ideal for all finite coherent network operations (composition, ancillas, feedback, postselection, order superposition); coherent control cannot create absent support transitions. Not yet formalized."
   },
   "thm:v6-profile-access": {
     "env": "theorem",
     "title": "Persistent-profile accessibility",
-    "status": "not_started",
+    "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "V6 chain: nearest-empirical-profile coarse-graining of the length-n word POVM converges to the preserved sharp PVM at Hoeffding rate 2|A| exp(-n d_prof^2/(2|A|)). Needs concentration inequalities (Hoeffding + union bound) at operator level. Not yet formalized."
   },
   "cor:v6-confusability-spectrum": {
     "env": "corollary",
     "title": "Finite confusability spectrum",
-    "status": "not_started",
+    "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "V6 chain: spectral radius of the quotient confusability map < 1 iff the confusability seminorm of Phi^n tends to 0, with peripheral eigenvector witness otherwise. Finite spectral decomposition. Not yet formalized."
   },
   "led:v6-access-hierarchy": {
     "env": "ledger",
     "title": "Operational hierarchy retained in the V6 chain",
-    "status": "not_started",
+    "status": "statement_encoded",
     "lean": [],
-    "note": ""
+    "note": "Ledger table: operational access hierarchy retained in the V6 chain (status table, no proof obligation)."
   },
   "thm:v6-native-qubit": {
     "env": "theorem",
     "title": "Native qubit and multiplicity certificate",
-    "status": "not_started",
+    "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "V6 chain: the one-step coefficient algebra is M_2(C) iff dim = 4 and scalar center, with tensor carrier factorization and commutant dimension m^2; plus the rank-2 Choi-Lie covariance criterion. Wedderburn packaging; the dimension-count core is accessible. Not yet formalized."
   },
   "ledger:status-at-the-v46-pause": {
     "env": "ledger",
     "title": "Status at the V46 pause",
-    "status": "not_started",
+    "status": "statement_encoded",
     "lean": [],
-    "note": ""
+    "note": "Ledger: status table at the V46 pause (no proof obligation)."
   }
 }
