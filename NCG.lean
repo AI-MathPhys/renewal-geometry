@@ -252,6 +252,7 @@ import NCG.Arithmetic.LorentzClifford
 import NCG.Arithmetic.ScreenArea
 import NCG.Arithmetic.SMDescent
 import NCG.Arithmetic.QutritCompletion
+import NCG.Arithmetic.GaussianPort
 import NCG.Arithmetic.GaussianPlancherel
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree

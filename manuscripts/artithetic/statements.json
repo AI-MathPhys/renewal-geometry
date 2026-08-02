@@ -913,9 +913,16 @@
   "lemma:physical-coupling-controls-a-gaussian-port": {
     "env": "lemma",
     "title": "Physical coupling controls a Gaussian port",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.physical_coupling_gaussian_port",
+      "NCG.physical_coupling_port",
+      "NCG.pair_port_bound",
+      "NCG.gauss_flux_bound",
+      "NCG.gaussF_fourier",
+      "NCG.gaussF"
+    ],
+    "note": "NCG/Arithmetic/GaussianPort.lean, following the manuscript proof exactly on the disclosed finite rendering of the finite measure space (finite index with weights lam_zeta >= 0, Bochner data x_zeta, coupled endpoints u_zeta, v_zeta; integrals are the weighted sums). Each coupled pair (+x at u, -x at v) has vanishing total mass and prefix field +-lam x 1_{[u ^ v, u v v)} of exact L2 norm lam ||x|| |u - v|^{1/2} (pair_totalMass, pair_stepPrefix, pair_step_norm), so the proved thm:mass-flux gives the per-pair port bound sqrt(Lambda) lam ||x|| |u-v|^{1/2} (pair_port_bound); Minkowski (the L2 triangle inequality over the pairs, via eLpNorm_sum_le) and Cauchy-Schwarz assemble ||C_F(mu_u - mu_v)||^2 <= Lambda (sum lam ||x||^2)(sum lam |u-v|) (physical_coupling_port). For the Gaussian port G_a the frequency profile is F G_a(xi) = e^{-4 pi^2 a xi^2} (gaussF_fourier) and the flux envelope is Lambda = sup (2 pi xi)^2 |F G_a|^2 = 1/(2 a e) (gauss_flux_bound, via y e^{-y} <= e^{-1}), giving the boxed bound with envelope 1/(2 a e) in the 2pi-normalized Fourier convention (physical_coupling_gaussian_port). In the manuscript's unitary convention the envelope carries the factor 2 pi (cf. the thm:mass-flux ledger note), so the constant reads 2 pi/(2 a e) = pi/(a e) - the boxed pi/(a e) (disclosed)."
   },
   "warning:untitled--5": {
     "env": "warning",
