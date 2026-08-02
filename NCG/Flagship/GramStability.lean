@@ -36,23 +36,23 @@ namespace NCG
 
 variable {E : Type*} [NormedAddCommGroup E]
   [InnerProductSpace ℂ E] [FiniteDimensional ℂ E]
-variable {D : ℕ}
+variable {ι : Type*} [Fintype ι]
 
 local notation "⟪" x ", " y "⟫" => inner ℂ x y
 
 omit [FiniteDimensional ℂ E] in
 /-- The synthesis frame inequality from the Gram data:
 `(1 - ε_G/g)‖v‖² ≤ ‖Sv‖² ≤ (1 + ε_G/g)‖v‖²`. -/
-theorem gram_frame_bounds (b : Basis (Fin D) ℂ E)
-    (ξ : Fin D → E) (g εG : ℝ) (hg : 0 < g) (hεG : 0 ≤ εG)
-    (hG0 : ∀ c : Fin D → ℂ,
+theorem gram_frame_bounds (b : Basis ι ℂ E)
+    (ξ : ι → E) (g εG : ℝ) (hg : 0 < g) (hεG : 0 ≤ εG)
+    (hG0 : ∀ c : ι → ℂ,
       g * ∑ a, ‖c a‖ ^ 2 ≤ ‖∑ a, c a • b a‖ ^ 2)
-    (hGd : ∀ c : Fin D → ℂ,
+    (hGd : ∀ c : ι → ℂ,
       |‖∑ a, c a • ξ a‖ ^ 2 - ‖∑ a, c a • b a‖ ^ 2|
         ≤ εG * ∑ a, ‖c a‖ ^ 2) (v : E) :
     (1 - εG / g) * ‖v‖ ^ 2 ≤ ‖b.constr ℂ ξ v‖ ^ 2
       ∧ ‖b.constr ℂ ξ v‖ ^ 2 ≤ (1 + εG / g) * ‖v‖ ^ 2 := by
-  set c : Fin D → ℂ := fun a => b.repr v a with hc
+  set c : ι → ℂ := fun a => b.repr v a with hc
   have hv : v = ∑ a, c a • b a := by
     conv_lhs => rw [← b.sum_repr v]
   have hS : b.constr ℂ ξ v = ∑ a, c a • ξ a := by
@@ -77,11 +77,12 @@ theorem gram_frame_bounds (b : Basis (Fin D) ℂ E)
   · nlinarith [habs.1]
   · nlinarith [habs.2]
 
+omit [Fintype ι] in
 /-- `thm:Gram-source-stability-master`, boxed polar bound: a
 unitary `U` with `‖ξ_a - Uη_a‖ ≤ 1 - √(1 - ε_G/g)`, from the
 spectral theorem for `S*S`. -/
-theorem gram_source_stability (b : Basis (Fin D) ℂ E)
-    (ξ : Fin D → E) (r : ℝ) (hr0 : 0 ≤ r) (hr1 : r < 1)
+theorem gram_source_stability [Finite ι] (b : Basis ι ℂ E)
+    (ξ : ι → E) (r : ℝ) (hr0 : 0 ≤ r) (hr1 : r < 1)
     (hbnorm : ∀ a, ‖b a‖ = 1)
     (hlow : ∀ v : E,
       (1 - r) * ‖v‖ ^ 2 ≤ ‖b.constr ℂ ξ v‖ ^ 2)
@@ -91,6 +92,7 @@ theorem gram_source_stability (b : Basis (Fin D) ℂ E)
       (∀ v w : E, ⟪U v, U w⟫ = ⟪v, w⟫)
       ∧ ∀ a, ‖ξ a - U (b a)‖ ≤ 1 - Real.sqrt (1 - r) := by
   classical
+  cases nonempty_fintype ι
   set S : E →ₗ[ℂ] E := b.constr ℂ ξ with hSdef
   set A : E →ₗ[ℂ] E := LinearMap.adjoint S ∘ₗ S with hAdef
   have hA : A.IsSymmetric := by
@@ -98,8 +100,8 @@ theorem gram_source_stability (b : Basis (Fin D) ℂ E)
     rw [hAdef, LinearMap.comp_apply, LinearMap.comp_apply,
       LinearMap.adjoint_inner_left,
       LinearMap.adjoint_inner_right]
-  have hD : Module.finrank ℂ E = D := by
-    rw [Module.finrank_eq_card_basis b, Fintype.card_fin]
+  have hD : Module.finrank ℂ E = Fintype.card ι :=
+    Module.finrank_eq_card_basis b
   set u := hA.eigenvectorBasis hD with hu
   set μ := hA.eigenvalues hD with hμdef
   have hApply : ∀ i, A (u i) = (μ i : ℂ) • u i := fun i =>
@@ -136,7 +138,8 @@ theorem gram_source_stability (b : Basis (Fin D) ℂ E)
     simpa using this
   have hμpos : ∀ i, 0 < μ i := fun i =>
     lt_of_lt_of_le (by linarith) (hμlow i)
-  set t : Fin D → ℝ := fun i => (Real.sqrt (μ i))⁻¹ with ht
+  set t : Fin (Fintype.card ι) → ℝ := fun i =>
+    (Real.sqrt (μ i))⁻¹ with ht
   set U : E →ₗ[ℂ] E := u.toBasis.constr ℂ
     (fun i => ((t i : ℝ) : ℂ) • S (u i)) with hUdef
   have hUu : ∀ i, U (u i) = ((t i : ℝ) : ℂ) • S (u i) := by
@@ -163,7 +166,7 @@ theorem gram_source_stability (b : Basis (Fin D) ℂ E)
     rw [map_sum]
     exact Finset.sum_congr rfl fun i _ => by rw [map_smul]
   -- inner products of expansions through hSS
-  have hinner_ST : ∀ (e f : Fin D → ℂ),
+  have hinner_ST : ∀ (e f : Fin (Fintype.card ι) → ℂ),
       ⟪∑ i, e i • S (u i), ∑ j, f j • S (u j)⟫
       = ∑ i, starRingEnd ℂ (e i) * f i * (μ i : ℂ) := by
     intro e f
