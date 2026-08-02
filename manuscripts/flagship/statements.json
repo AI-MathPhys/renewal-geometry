@@ -37,9 +37,12 @@
  "cor:single-writer-third-jet-master": {
   "env": "corollary",
   "title": "Exact third-Store-jet determinant and quantitative loading",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/ThirdJet.lean:NCG.single_writer_third_jet",
+   "NCG/Flagship/ThirdJet.lean:NCG.single_writer_loading"
+  ],
+  "note": "Both boxes proved with genuine real derivatives of the exponentials, in an abstract complex Banach algebra with an arbitrary continuous linear functional tau standing for tau_4(J_3 . ) (strictly more general than the 4x4 instance). The finitely many Clifford-trace facts of the parent theorem enter as displayed hypotheses (disclosed; parent record thm:single-writer-clifford-master is a separate ledger item): W(v)^2 scalar, the pseudoscalar functional kills degrees 0/1/2, and the parent box i tau(J_3 ABC) = chi_W det E names the constant. Jet identity: a(0) = a'(0) = a''(0) = 0 and a'''(0) = 6 chi_W det E via a generic insertion-word derivative lemma iterated three times. Loading: |chi_W| >= g^{3/2} from G >= g I and |chi_W|^2 = det G by the eigenvalue route (Rayleigh bound on the eigenvector basis + det = product of eigenvalues)."
  },
  "thm:exterior-cube-master": {
   "env": "theorem",
