@@ -1086,9 +1086,16 @@
   "thm:score-frequency-mixing-master": {
     "env": "theorem",
     "title": "Exact score-frequency mixing identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.score_mixing_hs",
+      "NCG.score_mixing_zero",
+      "NCG.score_cluster_leakage",
+      "NCG.commutator_block",
+      "NCG.block_hs_orthogonal",
+      "NCG.hs_expansion"
+    ],
+    "note": "NCG/Flagship/ScoreFrequencyMixing.lean. Interface: orthogonal Hermitian projection family e_j with Sum e_j = 1 and K = Sum lambda_j e_j (real values), matching the loaded Store spectral data. All three boxed claims proved: (i) the mixing identity ||[K,A]||_HS^2 = Sum_{j,k} (lambda_j-lambda_k)^2 ||e_j A e_k||_HS^2 (score_mixing_hs; stated as the exact complex-trace identity) via the block formula e_j[K,A]e_k = (lambda_j-lambda_k) e_j A e_k (commutator_block) and Hilbert-Schmidt orthogonality of distinct spectral blocks (block_hs_orthogonal, hs_expansion); (ii) the zero criterion [K,A] = 0 iff A = Sum e_j A e_j for pairwise distinct loaded values (score_mixing_zero); (iii) the cluster-leakage estimate for a partition with spectral gap Delta: Delta^2 ||A - Sum_C E_C A E_C||_HS^2 <= ||[K,A]||_HS^2 (score_cluster_leakage, partitions rendered as labeling functions, stated in squared form to avoid square roots - equivalent to the boxed bound; disclosed). Self-adjointness of A is not needed and not assumed (disclosed)."
   },
   "thm:mixed-score-reconstruction-master": {
     "env": "theorem",
