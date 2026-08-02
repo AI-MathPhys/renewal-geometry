@@ -1498,9 +1498,12 @@
  "prop:store-pencil-error-master": {
   "env": "proposition",
   "title": "Certified Store-frequency pencil error",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/StorePencilError.lean:NCG.store_pencil_operator_error",
+   "NCG/Flagship/StorePencilError.lean:NCG.store_pencil_eigen_error"
+  ],
+  "note": "Both boxes with the manuscript constants, in any normed ring. The operator box ||A_hat - A|| <= eps_A is proved outright from the one-factor-at-a-time decomposition and submultiplicativity. Two standard inputs enter as displayed hypotheses (disclosed): the positive inverse-square-root perturbation estimate ||R_hat - R|| <= d_0 with the spectral bounds ||R_0|| <= kappa^{-1/2}, ||R_hat_0|| <= (kappa - eps_0)^{-1/2} (operator monotonicity not separately recorded), and, in the eigenvalue box, Weyl's inequality for the Hermitian whitened pencils (the Courant-Fischer min-max principle is not yet in Mathlib); the boxed eigenvalue bound is then proved by chaining with the operator box."
  },
  "prop:semantic-moment-error-master": {
   "env": "proposition",
