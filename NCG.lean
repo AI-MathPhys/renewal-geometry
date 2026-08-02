@@ -246,6 +246,8 @@ import NCG.Arithmetic.WeylBarrier
 import NCG.Arithmetic.MaynardCeiling
 import NCG.Arithmetic.MassFlux
 import NCG.Arithmetic.FiniteWeil
+import NCG.Arithmetic.LorentzClifford
+import NCG.Arithmetic.ScreenArea
 import NCG.Arithmetic.GaussianPlancherel
 import NCG.Arithmetic.ArithParity
 import NCG.Arithmetic.MellinDegree
