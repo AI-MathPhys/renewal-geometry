@@ -1304,9 +1304,13 @@
   "thm:source-cyclic-equivalence-master": {
     "env": "theorem",
     "title": "Finite source-cyclic realization equivalence",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.source_cyclic_equivalence",
+      "NCG.source_cyclic_unique",
+      "NCG.physical_source_uniqueness"
+    ],
+    "note": "NCG/Flagship/SourceCyclicEquivalence.lean, delegating to the explicit Gram factorization U = K'K*(KK*)^-1 of NCG.physical_source_uniqueness (NCG/Upstream/KalmanRealization.lean). Boxed intertwining proved: equal source moments S1* T1^n S1 = S2* T2^n S2 on a source-minimal (stabilized) Krylov packet give a unitary U with U S1 = S2 and U T1 = T2 U; uniqueness on the stabilized packet as source_cyclic_unique (any two intertwiners agree on the Krylov data). Disclosures: both realizations carried on one finite index type (two abstract spaces of equal stabilized packet dimension embed there); moments assumed at all orders (the finite window 0 <= n <= 2r+1 recovers all orders by Cayley-Hamilton, standard, cited); self-adjoint transports; stabilization enters as surjectivity of the depth-d Krylov matrix."
   },
   "thm:clock-geometry-alternative-master": {
     "env": "theorem",
@@ -1381,9 +1385,12 @@
   "cor:polar-Gram-resource-master": {
     "env": "corollary",
     "title": "Sharp Gram--resource law for the polar quarter-root",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.polar_gram_resource",
+      "NCG.blochGram"
+    ],
+    "note": "NCG/Flagship/ClusterCompiler.lean. The two-axis Bloch Gram [[1, cos theta],[cos theta, 1]] has certified eigenpairs (1 - cos theta, (1,-1)) and (1 + cos theta, (1,1)), the boxed floor identity lambda_min = 1 - cos theta = 2 sin^2(theta/2), and the boxed count identity ceil(pi/(4 theta)) = ceil(pi/(8 arcsin sqrt(lambda_min/2))) for 0 < theta <= pi (via arcsin sqrt((1-cos theta)/2) = theta/2). The identification k_pol = k_* and the length bound L_pol <= 2 k_pol + 1 are the pulse-count semantics of thm:optimal-transverse-pulse-master (not in scope here; disclosed)."
   },
   "thm:quantitative-control-word-master": {
     "env": "theorem",
@@ -1395,9 +1402,11 @@
   "lem:cluster-common-dwell-master": {
     "env": "lemma",
     "title": "Sharp one-dwell cluster centre",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.cluster_common_dwell"
+    ],
+    "note": "NCG/Flagship/ClusterCompiler.lean. Boxed minimax identity proved in two-sided form: at the centre t* = pi/(2(mu- + mu+)) every cluster frequency mu in [mu-, mu+] has phase error |t* mu - pi/4| <= (pi/4)(mu+ - mu-)/(mu+ + mu-), and for every dwell time t the maximum endpoint error is at least this value (hence the inf-max equals it; the sup over the interval is attained at endpoints since the error is affine in mu - rendered via the endpoint maximum, disclosed)."
   },
   "thm:cluster-Bernstein-filter-master": {
     "env": "theorem",
