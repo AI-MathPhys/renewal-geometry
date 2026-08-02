@@ -239,6 +239,7 @@ import NCG.Flagship.FreshDiamond
 import NCG.Flagship.MinimalNaturality
 import NCG.Flagship.BernsteinFilter
 import NCG.Flagship.ThirdJet
+import NCG.Flagship.OptimalPulse
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

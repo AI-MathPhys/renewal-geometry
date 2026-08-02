@@ -1443,9 +1443,13 @@
  "thm:optimal-transverse-pulse-master": {
   "env": "theorem",
   "title": "Optimal transverse-pulse theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/OptimalPulse.lean:NCG.optimal_transverse_pulse",
+   "NCG/Flagship/OptimalPulse.lean:NCG.chiFS_mul_le",
+   "NCG/Flagship/OptimalPulse.lean:NCG.euler_decomposition"
+  ],
+  "note": "All three clauses proved over explicit pulse words (lists of Z/N letters): the boxed lower bound k_* = ceil(chi/theta) for every implementing word via the Fubini-Study triangle inequality chi(UV) <= chi(U)+chi(V) (proved from unitary row/column normalization), chi(Z) = 0 and chi(N_theta) <= theta; the chi = 0 case with a single Z pulse; and an explicit exact word achieving exactly k_* transverse pulses with total length exactly 2k_*+1 (the boxed L_* <= 2k_*+1), built from the proved Euler decomposition U = Z(alpha) Y(2chi) Z(gamma) and the previously proved exact small transverse step. SU(2) is rendered as unitary with det = 1."
  },
  "cor:polar-Gram-resource-master": {
   "env": "corollary",
