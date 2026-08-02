@@ -61,9 +61,17 @@
  "thm:spectral-source-Ward-master": {
   "env": "theorem",
   "title": "Spectral-source determinant Ward theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/SpectralWard.lean:NCG.hessian_det",
+   "NCG/Flagship/SpectralWard.lean:NCG.ward_scalar_response",
+   "NCG/Flagship/SpectralWard.lean:NCG.ward_trace_decomposition",
+   "NCG/Flagship/SpectralWard.lean:NCG.ward_traceless_pos",
+   "NCG/Flagship/SpectralWard.lean:NCG.ward_scalar_neg",
+   "NCG/Flagship/SpectralWard.lean:NCG.ward_inverse_left",
+   "NCG/Flagship/SpectralWard.lean:NCG.ward_inverse_right"
+  ],
+  "note": "All four boxes. The determinant response R_F(q) = c_F det q/det q0 with c_F = <e0, F e0> >= 0 is proved for an arbitrary positive operator F on an abstract real inner-product space (the dimension-free cyclic-mode remark). The Hessian D^2 det(q)[h,k] = det q (Tr(q^{-1}h)Tr(q^{-1}k) - Tr(q^{-1}h q^{-1}k)) is proved as a genuine iterated real derivative for any n x n real matrix with invertible q: the inner derivative is the Jacobi adjugate formula, and the outer derivative differentiates the adjugate entrywise through its minor representation and is solved from the differentiated Cramer identity M adj M = det M . 1 - this is the boxed normalized Hessian B_q. Signature (5,1): the trace decomposition B(X,X) = Tr(X_0^2) - 6x^2 is an identity, positivity on nonzero symmetric traceless directions and negativity on the scalar line are proved (the dimension count 5+1 is prose). The cotangent inverse Tr(PQ) - (1/2)Tr P Tr Q is certified by the two-sided inverse identities of the trace representers."
  },
  "thm:scalar-response-anomaly-master": {
   "env": "theorem",
