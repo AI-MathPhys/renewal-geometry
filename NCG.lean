@@ -219,6 +219,9 @@ import NCG.Flagship.MixedScoreReconstruction
 import NCG.Flagship.CertifiedInversion
 import NCG.Flagship.ScoreDepthNoGo
 import NCG.Flagship.CutSourceShort
+import NCG.Flagship.AnchorRigidity
+import NCG.Flagship.ClockQuarterRoot
+import NCG.Flagship.AnchorClifford
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer
