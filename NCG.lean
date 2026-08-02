@@ -226,6 +226,8 @@ import NCG.Flagship.SourceCyclicEquivalence
 import NCG.Flagship.ClusterCompiler
 import NCG.Flagship.SemanticClockDepthTwo
 import NCG.Flagship.ReplacementDilation
+import NCG.Flagship.PointerChronology
+import NCG.Flagship.RelativeSourceSector
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

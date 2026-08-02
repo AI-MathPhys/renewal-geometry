@@ -113,9 +113,15 @@
   "thm:pointer-chronology-master": {
     "env": "theorem",
     "title": "Pointer populations determine a Schur chronology, not its coherences",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.pointer_chronology",
+      "NCG.pointer_kraus_diagonal",
+      "NCG.chronologyC",
+      "NCG.chronology_unique",
+      "NCG.chronology_visibility"
+    ],
+    "note": "NCG/Flagship/PointerChronology.lean, for a trace-preserving Kraus channel D(X) = sum_i K_i X K_i* on an arbitrary finite pointer index (the manuscript's M_24 is immaterial; the Kraus form is the disclosed rendering of complete positivity). Fixing every fine pointer projection forces every Kraus operator diagonal (pointer_kraus_diagonal - the matrix form of the Stinespring step W|x> = |x> (x) |eta_x>), and the boxed Schur form D(X) = C o X holds entrywise with C_{xy} = sum_i (K_i)_{xx} (K_i)_{yy}* Hermitian, positive semidefinite (an explicit Gram form), and unit-diagonal from trace preservation (pointer_chronology); C is unique (chronology_unique). Boxed visibility recovery proved: rho_C = C o Gamma has the diagonal of Gamma for every C, and C_{xy} = (rho_C)_{xy}/Gamma_{xy} whenever Gamma_{xy} /= 0 (chronology_visibility). Permutation covariance C_{gx,gy} = C_{xy} is the same entrywise computation applied to matrix units (prose; disclosed)."
   },
   "thm:structured-determinant-source-master": {
     "env": "theorem",
@@ -1279,9 +1285,15 @@
   "thm:relative-source-sector-master": {
     "env": "theorem",
     "title": "Multiplicity-free relative-source reduction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.sector_cauchy_schwarz",
+      "NCG.sector_residual",
+      "NCG.sector_residual_nonneg",
+      "NCG.sector_collinear",
+      "NCG.sector_amplitude_phase"
+    ],
+    "note": "NCG/Flagship/RelativeSourceSector.lean, per loaded sector at the vector level: u = S_clk P_alpha, v = S_geo P_alpha with a = ||u||^2, b = <u,v>, d = ||v||^2 (the Schur-lemma block forms A = a0 P0 + a5 P5 etc. are the multiplicity-free covariance interface, disclosed). Proved: the boxed sectorwise Cauchy-Schwarz |b|^2 <= a d (sector_cauchy_schwarz); the boxed residual formula - the geometry-outside-clock residual d - |b|^2/a equals the squared distance of v from the clock line (sector_residual), hence >= 0 (sector_residual_nonneg); and the boxed equality case: vanishing residual forces v = (b/a) u (sector_collinear), i.e. S_geo P_alpha = lambda_alpha e^{i phi_alpha} S_clk P_alpha with lambda_alpha = sqrt(d/a) and phase b/|b| (sector_amplitude_phase). The two-sector assembly is these formulas at alpha in {0,5} (disclosed)."
   },
   "def:source-identity-defects-master": {
     "env": "definition",
