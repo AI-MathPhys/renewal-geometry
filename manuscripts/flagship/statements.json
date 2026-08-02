@@ -1400,9 +1400,14 @@
   "lem:small-transverse-step-master": {
     "env": "lemma",
     "title": "Exact small transverse step",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG.small_transverse_step",
+      "NCG.pulseZ",
+      "NCG.pulseN",
+      "NCG.pulseY"
+    ],
+    "note": "NCG/Flagship/TransverseStep.lean. The boxed pulse identity exp(-i eta sigma_y/2) = Z(a) N_theta(beta) Z(c) proved exactly for 0 < theta <= pi/2, 0 <= eta <= 2 theta, with s = sin(eta/2)/sin theta, beta = 2 arcsin s, z = cos(beta/2) - i cos theta sin(beta/2), phi = arg z, a = phi + pi/2, c = phi - pi/2. The range condition gives 0 <= s <= 1 (sine monotonicity on [-pi/2, pi/2]); |z|^2 = 1 - sin^2 theta sin^2(beta/2) = cos^2(eta/2) (exact trig bookkeeping); the polar form e^{-i phi} z = cos(eta/2) and its conjugate give the diagonal entries, and e^{-+ i pi/2} = -+ i with sin theta sin(beta/2) = sin(eta/2) give the off-diagonal entries. The pulses are the standard SU(2) matrices in closed form (Z(phi) = diag(e^{-i phi/2}, e^{i phi/2}), N_theta(beta) = exp(-i beta (cos theta sigma_z + sin theta sigma_x)/2) - disclosed closed-form rendering). The SU(2) conjugacy determination of the lower row is replaced by the direct computation of all four entries."
   },
   "thm:optimal-transverse-pulse-master": {
     "env": "theorem",
