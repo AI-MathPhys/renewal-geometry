@@ -1472,9 +1472,15 @@
   "thm:quantitative-control-word-master": {
     "env": "theorem",
     "title": "Quantitative exact finite-word synthesis",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Flagship/QuantControlWord.lean:NCG.quantitative_local_surjectivity",
+      "NCG/Flagship/QuantControlWord.lean:NCG.ball_filling",
+      "NCG/Flagship/QuantControlWord.lean:NCG.quantitative_control_word",
+      "NCG/Flagship/QuantControlWord.lean:NCG.deriv_lipschitz_of_hessian_bound",
+      "NCG/Flagship/QuantControlWord.lean:NCG.approximates_of_deriv_bound"
+    ],
+    "note": "All three layers of the proof, with the chart transport disclosed. (1) The quantitative inverse-function step is proved in full (quantitative_local_surjectivity): on a Banach space, if the chart map f has derivative f' with f'(0) = L invertible, ||L^{-1}|| <= 1/sigma, and Hessian bound M on the rho-ball with rho*M <= sigma/2, then the image of the rho-ball contains the ball of radius r_loc = sigma*rho/4 around f(0). The two mean-value reductions (Hessian bound -> derivative Lipschitz -> linear-approximation estimate) are proved via Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le('), and the Newton/contraction iteration enters through Mathlib's ApproximatesLinearOn.surjOn_closedBall_of_nonlinearRightInverse (which in fact yields the sharper radius (sigma - sigma/2)*rho; the boxed sigma*rho/4 is the manuscript's weaker constant). (2) The geodesic partition of the bi-invariant metric enters as the displayed increment-splitting hypothesis (hsplit, disclosed); given it, ball_filling proves by induction that every target within K_glob*r_loc of the identity is a product of exactly K_glob elements of the r_loc-ball, K_glob = ceil(D_G/r_loc) with D_G <= K_glob*r_loc proved from Nat.le_ceil. (3) The boxed primitive length bound L_glob <= K_glob * sum_nu (2 l(w_nu) + 1) is proved end-to-end (quantitative_control_word) over an abstract pulse alphabet: the realization of each r_loc-ball element as a local word of d conjugated pulses w_nu e^{t A} w_nu^{-1} of primitive length 2 l(w_nu) + 1 is the displayed hypothesis hlocal (the transport of the local surjectivity through the logarithm chart, whose Lie-theoretic construction log/Phi_F/Ad is not formalized), and word_concat sums the lengths of the K_glob concatenated local words."
   },
   "lem:cluster-common-dwell-master": {
     "env": "lemma",

@@ -244,6 +244,7 @@ import NCG.Flagship.StorePencilError
 import NCG.Flagship.SpectralWard
 import NCG.Flagship.GramStability
 import NCG.Flagship.RobustClock
+import NCG.Flagship.QuantControlWord
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer
