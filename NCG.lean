@@ -256,6 +256,7 @@ import NCG.Arithmetic.ZeroAmplification
 import NCG.Flagship.GoldbachHeat
 import NCG.Flagship.CharacterHeat
 import NCG.Arithmetic.ScalingChain
+import NCG.Flagship.GrandReadouts
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

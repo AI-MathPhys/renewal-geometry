@@ -306,9 +306,13 @@
   "thm:arithmetic-grand-readouts": {
     "env": "theorem",
     "title": "Exact arithmetic Grand-Tensor readouts",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Flagship/GrandReadouts.lean:NCG.grand_readout_normal",
+      "NCG/Flagship/GrandReadouts.lean:NCG.grand_readout_anomalous",
+      "NCG/Flagship/GrandReadouts.lean:NCG.integral_circle_char"
+    ],
+    "note": "Both boxed quadratic blocks proved by termwise integration and Fourier orthogonality, with the double expansion displayed. Circle-character orthogonality int_{(0,1]} e^{2 pi i k theta} d theta = delta_{k,0} is proved from the interval exponential integral and exp(2 pi i k) = 1 (integral_circle_char). The normal block: termwise integration of the absolutely convergent pair sum (integral_tsum_of_summable_integral_norm; each pair integrand has constant modulus |a_m||b_n| on the unit interval, and the pair norms are summable by Summable.mul_of_nonneg) evaluates each term to a_m conj(b_n) delta_{m-n-h,0}, and the diagonal collapses along the injection n -> (n+h, n) (Function.Injective.tsum_eq) to the boxed sum_{m-n=h} a_m conj(b_n) (grand_readout_normal). The anomalous block collapses to the finite antidiagonal {(m, N-m) : m <= N} (tsum_eq_sum + sum_image), giving the boxed sum_{m+n=N} a_m b_n (grand_readout_anomalous). Disclosed: the pointwise double expansion of the port product P_chi conj(P_psi) e^{-2 pi i h theta} into the pair sum (hpt; the standard Cauchy product of two absolutely convergent series with the phase folded in) is the displayed hypothesis; the anchor-cross-entry identification with the prime-side wave and the closing no-algebraic-implication remark are the manuscript's prose."
   },
   "definition:twin-and-goldbach-heat-selectors": {
     "env": "definition",
