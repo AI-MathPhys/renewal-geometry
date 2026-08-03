@@ -124,9 +124,13 @@
   "thm:gaussian-grh": {
     "env": "theorem",
     "title": "Gaussian Hardy criterion for GRH",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Arithmetic/GaussianGRH.lean:NCG.gaussian_energy_finite",
+      "NCG/Arithmetic/LaplacePole.lean:NCG.laplace_pole_obstruction",
+      "NCG/Arithmetic/GaussianGRH.lean:NCG.gaussian_grh_criterion"
+    ],
+    "note": "All three clauses, with the explicit-formula inputs disclosed. (i) gaussian_energy_finite: if sigma exceeds every displacement (Theta < sigma, 0 < sigma), the packet f = R + sum c_rho e^{lambda_rho r} is dominated pointwise by C_R + S e^{Theta' r} with S = sum |c_rho| < infty (termwise tsum bound), and e^{-2 sigma r}|f|^2 is dominated by two integrable exponentials - the energy is finite. (ii) is exactly the Laplace-pole obstruction of the lem:laplace-pole record (laplace_pole_obstruction): finite energy forces Re lambda <= sigma at the tested rightmost isolated exponent; the reflection symmetry rho -> 1 - conj(rho) (lambda -> -conj(lambda)) applies the same bound on the reflected exponent, giving the two-sided bound |Re rho - 1/2| <= sigma as in the manuscript. (iii) gaussian_grh_criterion: a displacement bounded by every positive sigma on both reflection sides vanishes - finiteness of the energy for every sigma > 0 is therefore equivalent to all displacements being zero, the Hardy criterion. Disclosed: the Gaussian specialization of the explicit formula (grouped absolutely summable coefficients, remainder with entire transform, reflection symmetry of the zero set) enters as the shared displayed hypotheses; the principal-channel pole clearing is prose."
   },
   "thm:plancherel": {
     "env": "theorem",
@@ -236,9 +240,11 @@
   "thm:v002-zero-amplification": {
     "env": "theorem",
     "title": "Off-critical zero amplification",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Arithmetic/ZeroAmplification.lean:NCG.zero_amplification"
+    ],
+    "note": "Proved in the boundedness rendering of the boxed limsup, with the continuation route replaced by the equivalent elementary Laplace-pole test (disclosed). In the logarithmic variable r = log X, an off-critical zero contributes the exponential c_k e^{lambda_k r} with alpha = Re lambda_k > 0 and grouped residue c_k = -m_rho H_C(rho - 1/2) != 0. If the packet satisfied |E(X)| <= C X^{alpha - eps} (i.e. |f(r)| <= C e^{(alpha-eps)r}), its weighted energy at sigma = alpha - eps/2 would be finite (the integrand is dominated by C^2 e^{-eps r}), and laplace_pole_obstruction would force alpha <= alpha - eps/2 - contradiction. Hence no such bound holds for any eps > 0: the boxed limsup |E|/X^{alpha-eps} = infinity in its unboundedness rendering. Disclosed: the tested exponent is the isolated rightmost one (the manuscript's displacement-maximal pole), the remainder transform is locally bounded near it (hR), and the completed-packet variant (holomorphic conductor-Gamma term at rho) is the manuscript's prose remark."
   },
   "definition:packetwise-subpower-property": {
     "env": "definition",
@@ -250,9 +256,11 @@
   "thm:v002-packet-grh": {
     "env": "theorem",
     "title": "Packetwise conditional GRH",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Arithmetic/ZeroAmplification.lean:NCG.packet_subpower_grh"
+    ],
+    "note": "The core implication is proved: the subpower property SP(chi) - for every eta > 0 some C_eta bounds the packet by C_eta X^eta - is incompatible with any off-critical displacement alpha = Re lambda_k > 0 (packet_subpower_grh, instantiating zero_amplification at eta = alpha/2 < alpha). Hence SP(chi) forces every tested zero exponent into Re <= 0: the right half of the strip is zero-free. Disclosed: the reflection of left-half zeros into the conjugate primitive channel through the typed functional equation, and the primitive-to-imprimitive extension concluding full Dirichlet GRH from all primitive channels, are the manuscript's prose steps (their records thm:v002-functional-equation and corollary:primitive-reduction-of-dirichlet-grh are separate ledger items)."
   },
   "prop:v002-translation-nogo": {
     "env": "proposition",
