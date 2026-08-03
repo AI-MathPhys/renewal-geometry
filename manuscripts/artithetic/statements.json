@@ -229,9 +229,11 @@
   "prop:v002-completed-packet": {
     "env": "proposition",
     "title": "Completed packet symbol and trivial zeros",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Arithmetic/PacketChain.lean:NCG.completed_packet_cancellation"
+    ],
+    "note": "The cancellation clause is proved; the symbol formula cites the proved twisted-Mellin record. completed_packet_cancellation: with the displayed classical principal-part expansions near a parity-forced trivial zero w_m = -a_chi - 2m - the digamma term (1/2) psi((w + a_chi)/2) = -1/(w - w_m) + O(1) and L'/L(w,chi) = 1/(w - w_m) + O(1) - the principal parts cancel exactly and the sum is bounded on the punctured neighbourhood, so only nontrivial zeros contribute poles in the open critical strip. The boxed Mellin symbol H_C(s)[-Lambda'/Lambda(s + 1/2) - delta_chi/(s - 1/2)] is the sum of the inverse-Mellin symbol and the proved thm:v002-twisted-mellin identity (separate ledger record); the two displayed expansions are the standard digamma and Dirichlet-L pole expansions (disclosed)."
   },
   "lemma:packet-selection": {
     "env": "lemma",
@@ -330,9 +332,11 @@
   "thm:v002-pswf-chain": {
     "env": "theorem",
     "title": "Conditional prolate cluster route to RH",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Arithmetic/PacketChain.lean:NCG.pswf_chain"
+    ],
+    "note": "The conditional chain is discharged through the proved Hurwitz record (thm:v002-hurwitz-rh). pswf_chain: given the chain hypotheses rendered as displayed inputs - the locally uniform determinant convergence hconv (bundling clauses (i)-(iii): the cluster decomposition ||B_n||/Delta_n -> 0, the simple even ground vector with dominating gaps, and the leakage-norm convergence of thm:v002-leakage, whose per-record contents are separate ledger items) and the real-rootedness of the regularized determinants (clause (iv), hzeros) - every zero of Xi is real, i.e. RH. The Hurwitz dichotomy itself remains the displayed input of the Hurwitz record (no Rouche machinery in Mathlib). The identification of the actual finite ground vector with the preassigned prolate model is the manuscript's prose transfer step inside hconv."
   },
   "audit:what-the-pswf-collection-contributes": {
     "env": "audit",
@@ -683,9 +687,11 @@
   "corollary:parity-firewall": {
     "env": "corollary",
     "title": "Parity firewall",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Arithmetic/PacketChain.lean:NCG.parity_firewall_identity"
+    ],
+    "note": "The exact Moebius conversion underlying the firewall is proved; the interpretive clause is prose. parity_firewall_identity: on a squarefree carrier (a finite set of primes ps), the temperature difference product prod_p (e^{-a log p/L} - 1) equals (-1)^{|ps|} e^{-(a/L) log(prod p)} prod_p (e^{a log p/L} - 1) - the per-factor conversion e^{-x} - 1 = -e^{-x}(e^x - 1) assembled over the factor set, with the damping product collapsing to the Moebius-weighted power n^{-a/L}. The sign (-1)^{|ps|} is mu(n) for squarefree n (standard identification, disclosed). Hence every shifted or fixed-sum estimate of the temperature difference contains the weighted Moebius current linearly: it is a rewriting of the parity problem, not an independent positive argument (the manuscript's interpretive conclusion)."
   },
   "thm:v003-four-additive-routes": {
     "env": "theorem",
