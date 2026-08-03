@@ -1008,9 +1008,16 @@
   "thm:predictive-RN-master": {
     "env": "theorem",
     "title": "Predictive Radon--Nikodym envelope",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Flagship/PredictiveRN.lean:NCG.thetaV_posSemidef",
+      "NCG/Flagship/PredictiveRN.lean:NCG.thetaV_dominated",
+      "NCG/Flagship/PredictiveRN.lean:NCG.thetaV_injective",
+      "NCG/Flagship/PredictiveRN.lean:NCG.thetaV_povm",
+      "NCG/Flagship/PredictiveRN.lean:NCG.thetaV_add",
+      "NCG/Flagship/PredictiveRN.lean:NCG.thetaV_smul"
+    ],
+    "note": "The forward half of the envelope, its uniqueness, and the POVM correspondence are proved in the finite Stinespring matrix model Theta_V(F)(X) = V^H (X (x) F) V; the converse surjectivity is disclosed. Proved: (1) the map F -> Theta_V(F) is affine (thetaV_add/thetaV_smul); (2) positive F give positive values on positive inputs of every Kronecker-ampliated size (thetaV_posSemidef, via PosSemidef.kronecker and congruence) - the house rendering of complete positivity; (3) F <= I gives CP-domination Theta_V(F) <= Phi through the exact complement identity Phi - Theta_V(F) = Theta_V(I - F) (thetaV_dominated); (4) the coordinate is unique: if Theta_V(F) = 0 for all inputs then F = 0 (thetaV_injective), by evaluating the cyclic-stack pairing S^H (1 (x) F) S on matrix units (block_pairing) and cancelling the surjective stack on both sides (eq_of_mul_stack_eq, the same minimality rendering as the naturality record); (5) finite POVMs sum to finite CP decompositions of Phi (thetaV_povm). Disclosed: the converse surjectivity of the envelope - every 0 <=_CP Psi <=_CP Phi arises as Theta_V(F) - is the finite Radon-Nikodym theorem for CP maps plus the minimal-commutant identification, the manuscript's standard cited input, not re-proved. The automorphism action g.Theta_V(F) = Theta_V(W_g F W_g*) is the already-recorded naturality_refinement of thm:minimal-realization-naturality-master."
   },
   "thm:minimal-realization-naturality-master": {
     "env": "theorem",

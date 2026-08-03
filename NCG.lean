@@ -250,6 +250,7 @@ import NCG.Arithmetic.LaplacePole
 import NCG.Flagship.ControlFrame
 import NCG.Arithmetic.HurwitzRH
 import NCG.Flagship.AnalyticPolar
+import NCG.Flagship.PredictiveRN
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer
