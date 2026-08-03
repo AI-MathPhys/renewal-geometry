@@ -249,6 +249,7 @@ import NCG.Flagship.SemanticVariance
 import NCG.Arithmetic.LaplacePole
 import NCG.Flagship.ControlFrame
 import NCG.Arithmetic.HurwitzRH
+import NCG.Flagship.AnalyticPolar
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

@@ -1088,16 +1088,23 @@
   "thm:analytic-store-polar-master": {
     "env": "theorem",
     "title": "Analytic Store germ generates the polar clock",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Flagship/AnalyticPolar.lean:NCG.lagrange_transverse_filter",
+      "NCG/Flagship/AnalyticPolar.lean:NCG.open_subgroup_eq_top",
+      "NCG/Flagship/AnalyticPolar.lean:NCG.analytic_store_polar"
+    ],
+    "note": "The two mechanisms of the manuscript proof are proved in full, with the prose steps entering as one displayed hypothesis (disclosed). (1) The Lagrange spectral filter (lagrange_transverse_filter): if the double-commutator operator T = -(1/4) ad_D^2 satisfies T(R_j) = mu_j^2 R_j on the transverse derivations, then the shifted product prod_{k != j}(T - mu_k^2) applied to R = sum_j R_j recovers (prod_{k != j}(mu_j^2 - mu_k^2)) R_j - the manuscript's R_j = p_j(T)R after dividing by the displayed nonzero product of distinct eigenvalue differences (proved by noncommProd induction over the shift factors, which commute). (2) The group-closure clause (open_subgroup_eq_top, via Mathlib's OpenSubgroup.isClopen and clopen-in-preconnected): an open subgroup of a preconnected topological group is the whole group; hence (analytic_store_polar) once the generated physical subgroup is open in the connected projective product, it contains the boxed quarter-root Ad(e^{pi J/4}). The transversality selection of u_* (nonzero analytic commutator avoiding finitely many zero sets, from blockwise irreducibility) and the blockwise su(2) span table are the manuscript's prose steps and enter through the displayed openness hypothesis hopen."
   },
   "cor:real-score-polar-master": {
     "env": "corollary",
     "title": "Real score pulse produces the polar microtick",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Flagship/AnalyticPolar.lean:NCG.exp_conj_pair",
+      "NCG/Flagship/AnalyticPolar.lean:NCG.real_score_polar"
+    ],
+    "note": "The boxed identity (R x I) e^{-i Z x X/sqrt N} (R* x I) = e^{J x X/sqrt N} is proved as the conjugation-of-exponential law in a real Banach algebra: conjugation by a two-sided-inverse pair (R, R*) is a continuous ring homomorphism, and map_exp_of_mem_ball carries the exponential through it (exp_conj_pair), so the box follows once the generator identity R(-i Z x X)R* = J x X is supplied (real_score_polar, hypothesis hgen). Disclosed: hgen is the tensored rendering of the manuscript's RZR* = Y_J against the metric-score leg X(q); the tensor-leg bookkeeping ((.) x I acting on the first factor) is carried by that displayed hypothesis rather than a formal tensor-product construction."
   },
   "prop:score-effect-depth-no-go-master": {
     "env": "proposition",
