@@ -260,6 +260,7 @@ import NCG.Flagship.GrandReadouts
 import NCG.Flagship.TwinHeat
 import NCG.Arithmetic.PacketChain
 import NCG.Arithmetic.ProlateBasic
+import NCG.Arithmetic.FunctionalEquation
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

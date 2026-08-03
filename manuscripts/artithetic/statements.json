@@ -184,9 +184,13 @@
  "thm:v002-functional-equation": {
   "env": "theorem",
   "title": "Typed primitive functional equation",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/FunctionalEquation.lean:NCG.functional_equation_symmetric",
+   "NCG/Arithmetic/FunctionalEquation.lean:NCG.functional_equation_deriv",
+   "NCG/Arithmetic/FunctionalEquation.lean:NCG.functional_equation_logderiv"
+  ],
+  "note": "Both boxes proved on the symmetrized completed L-function Lambda(s,chi) = N^{s/2}*completedLFunction(s,chi): the scalar functional equation Lambda(1-s,chi) = eps_chi*Lambda(s,chi^{-1}) is derived from Mathlib's IsPrimitive.completedLFunction_one_sub by collecting conductor powers, and the log-derivative antisymmetry (Lambda'/Lambda)(1-s,chi) = -(Lambda'/Lambda)(s,chi^{-1}) follows by differentiation (the constant root number drops out). Disclosed: Mathlib's inverse character chi^{-1} renders the conjugate character (they agree on the unit circle); |eps_chi| = 1 (Gauss-sum evaluation, classical) and hence eps_chi != 0 enters the log-derivative statement as the displayed hypothesis; the conjugation law eps_{conj chi} = conj(eps_chi) and the doubled-channel self-adjoint unitary R_chi are displayed bookkeeping on top of the scalar identity."
  },
  "warning:complex-character-typing": {
   "env": "warning",
@@ -210,9 +214,11 @@
  "corollary:primitive-reduction-of-dirichlet-grh": {
   "env": "corollary",
   "title": "Primitive reduction of Dirichlet GRH",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/FunctionalEquation.lean:NCG.primitive_reduction_of_dirichlet_grh"
+  ],
+  "note": "Proved: GRH for the inducing primitive character transfers verbatim to every induced character through the proved strip-zeros identification of prop:v002-imprimitive (imprimitive_strip_zeros), with no uniformity in the conductor. The principal-character exceptional point s = 1 is excluded by the displayed side condition (chi != 1 or s != 1), matching Mathlib's LFunction_changeLevel."
  },
  "thm:v002-twisted-mellin": {
   "env": "theorem",
