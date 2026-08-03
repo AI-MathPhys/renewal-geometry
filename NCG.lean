@@ -254,6 +254,7 @@ import NCG.Flagship.PredictiveRN
 import NCG.Arithmetic.GaussianGRH
 import NCG.Arithmetic.ZeroAmplification
 import NCG.Flagship.GoldbachHeat
+import NCG.Flagship.CharacterHeat
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

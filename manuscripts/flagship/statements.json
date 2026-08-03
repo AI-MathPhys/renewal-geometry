@@ -278,16 +278,23 @@
   "thm:GRH-heat-master": {
     "env": "theorem",
     "title": "Gaussian heat criterion for Dirichlet GRH",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Flagship/CharacterHeat.lean:NCG.heat_positivity",
+      "NCG/Flagship/CharacterHeat.lean:NCG.offline_pair_formula",
+      "NCG/Flagship/CharacterHeat.lean:NCG.offline_pair_negative"
+    ],
+    "note": "The analytic mechanism of (i) <-> (ii) is proved, with the completing selection and the moment-matrix clauses disclosed. On the reflected heat orbit sum u(t,tau) = (4 pi t)^{-1/2} sum_rho Re exp(-(tau - gamma_rho + i c_rho)^2/(4t)): (i) => (ii) is proved in full (heat_positivity): with every displacement zero each orbit term is an ordinary positive heat kernel, so u >= 0 (termwise, no summability needed). The converse mechanism is proved exactly as displayed: a reflected off-line pair +-c contributes 2 e^{(c^2-x^2)/4t} cos(cx/2t) (offline_pair_formula, by the complex-square decomposition (x +- ic)^2 = x^2 - c^2 +- 2icx and Complex.exp_re), and at the tested center x = 2 pi t/c the cosine is -1, so the contribution equals -(2 e^{(c^2 - x^2)/4t}) - strictly negative with the boxed exponential magnitude e^{c^2/4t + O(t)} (offline_pair_negative). Disclosed: the Gaussian outer-exposure argument selecting a maximal off-line orbit and centers where competing orbits are exponentially smaller (which upgrades the negative pair into failure of (ii)), the principal-channel pole clearing, and clauses (iii)-(iv) (the affine moment matrix and its determinant identification with the heat-semiconvexity expression) are the manuscript's prose/displayed steps."
   },
   "thm:prime-side-heat-master": {
     "env": "theorem",
     "title": "Exact prime-side heat identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Flagship/CharacterHeat.lean:NCG.gaussian_log_pair",
+      "NCG/Flagship/CharacterHeat.lean:NCG.prime_side_heat"
+    ],
+    "note": "The computational content of the insertion is proved and the boxed identity follows from the displayed explicit formula. The log-Gaussian transform pair int e^{iya} e^{-ta^2} da = (pi/t)^{1/2} e^{-y^2/(4t)} is proved from Mathlib's Gaussian Fourier integral (gaussian_log_pair) - this is the manuscript's inverse-Mellin computation producing the factor x^{-1/2-i tau}(4 pi t)^{-1/2} e^{-(log x)^2/(4t)} at y = tau - i(1/2) log x-form. Given the symmetric explicit formula evaluated on the Gaussian test (hEF, displayed - the explicit formula is itself a StatusExternal input in the manuscript's ledger), rewriting every von Mangoldt term through the pair yields the boxed prime-side wave u = G_chi - (1/pi) Re sum chi(n) Lambda(n) n^{-1/2-i tau} e^{-t (log n)^2} (prime_side_heat). The conductor-gamma-cleared-pole background G_chi is carried as the displayed background function."
   },
   "definition:heat-affine-prime-port": {
     "env": "definition",
