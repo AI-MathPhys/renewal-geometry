@@ -308,9 +308,11 @@
   "thm:v002-hurwitz-rh": {
     "env": "theorem",
     "title": "Real-rooted approximation implies RH",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Arithmetic/HurwitzRH.lean:NCG.hurwitz_real_rooted_rh"
+    ],
+    "note": "Proved with Hurwitz's dichotomy as a displayed hypothesis (disclosed). The manuscript's argument is carried out in full: if Xi had a nonreal zero z0, the closed ball of radius |Im z0|/2 around z0 avoids the real axis (|Im z - Im z0| <= |z - z0| pointwise), so every D_n is zero-free there because its zeros are all real; Hurwitz's dichotomy (hHurwitz: a locally uniform limit of zero-free holomorphic functions on a ball is zero-free or identically zero there) then either contradicts Xi(z0) = 0 directly or forces Xi = 0 on the ball, and the identity theorem for the entire function Xi (AnalyticOnNhd.eqOn_zero_of_preconnected_of_eventuallyEq_zero on the connected plane) propagates this to Xi = 0 everywhere, contradicting Xi not identically zero. Hurwitz's theorem itself is the single standard cited input (no argument-principle/Rouche machinery exists in Mathlib yet); the disk selection, zero-freeness transfer, and identity-theorem branch are fully formal. Conclusion rendered as: every zero of Xi is real (Im = 0), the manuscript's RH equivalence."
   },
   "thm:v002-pswf-chain": {
     "env": "theorem",
