@@ -253,6 +253,7 @@ import NCG.Flagship.AnalyticPolar
 import NCG.Flagship.PredictiveRN
 import NCG.Arithmetic.GaussianGRH
 import NCG.Arithmetic.ZeroAmplification
+import NCG.Flagship.GoldbachHeat
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer

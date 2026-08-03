@@ -320,9 +320,14 @@
   "thm:Goldbach-heat-master": {
     "env": "theorem",
     "title": "Binary-Goldbach heat sufficiency",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Flagship/GoldbachHeat.lean:NCG.goldbach_heat_sufficiency",
+      "NCG/Flagship/GoldbachHeat.lean:NCG.goldbach_heat_contamination",
+      "NCG/Flagship/GoldbachHeat.lean:NCG.sum_inv_sqrt_pair_le",
+      "NCG/Flagship/GoldbachHeat.lean:NCG.proper_prime_pow_card_le"
+    ],
+    "note": "Both clauses proved end-to-end on the finite selector H_N(t) = sum_{0<m<N} Lambda(m)Lambda(N-m)/sqrt(m(N-m)) e^{-t[(log m)^2+(log(N-m))^2]}, with one constant disclosed. The manuscript's displayed estimate sum_{m in S} 1/sqrt(m(N-m)) << sqrt(K)/sqrt(N) is proved exactly with constant 6 (sum_inv_sqrt_pair_le): split at N/2, bound each half by the K-smallest rearrangement estimate sum_{m in S} 1/sqrt(m) <= 2 sqrt(|S|) (sum_inv_sqrt_le, by removing the maximum - which is at least |S| - and telescoping 1/sqrt(K) <= 2(sqrt(K)-sqrt(K-1))), reindexing the upper half by m -> N-m. The proper-prime-power count is proved by the injection m = p^k -> (p,k) with p <= sqrt(N) (since k >= 2) and k <= log_2 N (proper_prime_pow_card_le): at most (sqrt N + 1)(log_2 N + 1) proper prime powers, hence at most twice that many contaminated pairs. Combining with Lambda <= log N and heat factor <= 1 gives the contamination bound (log N)^2 * 6 sqrt(2(sqrt N + 1)(log_2 N + 1))/sqrt(N) = O(N^{-1/4}(log N)^{5/2}) (goldbach_heat_contamination) - the disclosed rendering: the crude count carries an extra half power of log N against the manuscript's Chebyshev-type O(sqrt N), leaving the boxed O(N^{-1/4}(log N)^2) as O(N^{-1/4}(log N)^{5/2}); the sufficiency clause is unaffected. The boxed implication is proved in full (goldbach_heat_sufficiency): if H_N(t) >= c with c exceeding the contamination, some 0 < m < N has both m and N-m prime - every term vanishes unless both entries are prime powers, and non-contaminated prime-power pairs are prime pairs."
   },
   "thm:YM-physical-shell-master": {
     "env": "theorem",
