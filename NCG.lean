@@ -247,6 +247,7 @@ import NCG.Flagship.RobustClock
 import NCG.Flagship.QuantControlWord
 import NCG.Flagship.SemanticVariance
 import NCG.Arithmetic.LaplacePole
+import NCG.Flagship.ControlFrame
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer
