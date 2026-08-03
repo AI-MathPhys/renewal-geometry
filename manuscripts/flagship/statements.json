@@ -80,9 +80,13 @@
  "thm:scalar-response-anomaly-master": {
   "env": "theorem",
   "title": "Exact scalar-response anomaly",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/ScalarResponseAnomaly.lean:NCG.response_second_derivative",
+   "NCG/Flagship/ScalarResponseAnomaly.lean:NCG.ward_departure",
+   "NCG/Flagship/ScalarResponseAnomaly.lean:NCG.ward_vanishing"
+  ],
+  "note": "Directional (one-parameter) rendering proved: R'' = d''c + 2d'c' + dc'' for the response R = det*c along the direction (twice the product rule), the boxed Ward-departure identity R''/R - d''/d = -W with W = -l'' - (l')^2 - 2 theta l' (the identity c^{-1}c'' = l'' + (l')^2 folded in), and Dl = 0 identically kills the anomaly (ward_vanishing). Disclosed: the bilinear polarization W_q(h,k) is the directional identity applied along h + tk; the conjugacy criterion F(q) = U(q) F(q0) U(q)*, U(q)e0 = e^{i alpha} e0 => c constant is the displayed sufficient condition."
  },
  "definition:exterior-source-normality": {
   "env": "definition",
@@ -128,9 +132,13 @@
  "cor:native-determinant-master": {
   "env": "corollary",
   "title": "Unique native determinant source and exact weight",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/NativeDeterminant.lean:NCG.determinant_multiplicity_one",
+   "NCG/Flagship/NativeDeterminant.lean:NCG.kronecker_eigen",
+   "NCG/Flagship/NativeDeterminant.lean:NCG.native_determinant_scaling"
+  ],
+  "note": "Proved: the invariant-multiplicity character sum (27 - 15 + 12(phi^3 + (1-phi)^3))/60 = 1 with phi the golden ratio (both roots of x^2 = x+1 give phi^3 + (1-phi)^3 = 4), and the boxed eigenvalue equations: product vectors are Kronecker eigenvectors with multiplied eigenvalues, so Gamma acting by 1/6 per response factor gives Gamma^{x3} e_vol = (1/216) e_vol, and the 2^3 sign-contrast normalization gives M_ext e_vol = (1/27) e_vol. Disclosed: the parity argument locating the determinant line in 3_-^{x3} and the A5 standard-character values 3, -1, 0, phi, 1-phi on classes 1, 15, 20, 12, 12 are the classical icosahedral character inputs."
  },
  "thm:pointer-chronology-master": {
   "env": "theorem",
@@ -176,16 +184,23 @@
  "cor:structured-frame-master": {
   "env": "corollary",
   "title": "Structured source frame criterion",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/NativeDeterminant.lean:NCG.structured_frame_bound",
+   "NCG/Flagship/NativeDeterminant.lean:NCG.collapsing_direction"
+  ],
+  "note": "Proved in the equivariant diagonal model: blocks with least positive eigenvalue >= c_* give the one-Read source frame lower bound c_* and the three-Read tensor lower bound c_*^3; conversely the quadratic form at a unit eigenvector equals its eigenvalue, so an intended positive eigenvalue tending to zero is an explicit collapsing source direction and saturation need not survive the limit. Disclosed: the orthogonal equivariant block decomposition behind the diagonal model is Schur's lemma, as in the structured-determinant record."
  },
  "thm:ADM-action-audit-master": {
   "env": "theorem",
   "title": "Exact native ADM action audit",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/ADMAudit.lean:NCG.adm_gram_identity",
+   "NCG/Flagship/ADMAudit.lean:NCG.adm_gram_posSemidef",
+   "NCG/Flagship/ADMAudit.lean:NCG.adm_gram_zero_iff"
+  ],
+  "note": "Both boxes proved for invertible clock Gram A = S_clk* S_clk (minimality of the retained clock module, displayed): G_{geo|clk} = D - B* A^{-1} B = S_geo*(I - P)S_geo with P = S_clk A^{-1} S_clk* the orthogonal projection onto the clock range (Hermitian, idempotent, fixes S_clk -- all proved), G >= 0 as the Gram of (I-P)S_geo, and G = 0 exactly when the geometry source factors through the clock source (range inclusion in factored form, both directions). Disclosed: the pseudoinverse form for singular A, the rank bookkeeping rank[A B; B* D] - rank A = rank G, and the principal-cosine contraction D^{-1/2} G D^{-1/2} = I - C*C are the manuscript's remaining clauses."
  },
  "thm:Clifford-common-action-master": {
   "env": "theorem",
@@ -419,16 +434,22 @@
  "prop:PvsNP-dimension-master": {
   "env": "proposition",
   "title": "Ambient record dimension firewall",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/PvsNPBridge.lean:NCG.record_dimension_firewall",
+   "NCG/Flagship/PvsNPBridge.lean:NCG.boolean_record_dimension",
+   "NCG/Flagship/PvsNPBridge.lean:NCG.parity_fold_iff"
+  ],
+  "note": "Proved: an orthonormal family of m record vectors forces ambient dimension >= m, hence representing all 2^n Boolean inputs orthogonally forces dimension >= 2^n; and the parity function is computed exactly by the linear chain of xor gates (one gate per input bit, parity_fold_iff), so exponential record dimension coexists with linear circuit size. Disclosed: 'implies no circuit lower bound' is the interpretive reading; the identity function's linear-size circuit is immediate."
  },
  "thm:PvsNP-bridge-master": {
   "env": "theorem",
   "title": "Conditional resource-faithful complexity bridge",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/PvsNPBridge.lean:NCG.pvsnp_bridge"
+  ],
+  "note": "Conditional bridge proved: given a comparison CircuitSize >= R/p with polynomial p (displayed hypothesis) and superpolynomial growth of the resource R on the family (displayed hypothesis), every polynomial circuit-size bound is excluded -- the rendered L not in P/poly conclusion, hence P != NP. Disclosed: the identification of CircuitSize with a concrete Boolean-circuit measure and the NP-completeness of the target language are the manuscript's framing; per its complexity-scope firewall, both displayed inputs (the resource comparison and the superpolynomial loading bound) are open and are NOT claimed here."
  },
  "prop:Poincare-benchmark": {
   "env": "proposition",

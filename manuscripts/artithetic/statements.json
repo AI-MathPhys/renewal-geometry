@@ -583,9 +583,14 @@
  "thm:v003-seed-transfer": {
   "env": "theorem",
   "title": "Quantitative seed transfer",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.seed_prime_target_bound",
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.seed_semiprime_target_bound",
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.seed_mass_transfer",
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.seed_transfer_onelog"
+  ],
+  "note": "Finite-carrier form proved: the per-candidate arithmetic (a prime target contributes >= c1^2 L, a semiprime target rq with log p >= c1 L, log r >= c2 > 0, log q >= c3 L contributes >= c1 c2 c3 to (log p)(log r log q / L^2)), the summation transfer (a per-candidate bound c and a seed count M give the boxed correlation lower bound c*M, the >> Sing * x/log^2 x scale), and the one-logarithm improvement under the rough lower bound log r >= alpha L. Disclosed: the seed counts are Assumption ass:v003-quant-seeds (external Li-Liu quantitative inputs); the per-candidate log bounds are supplied by log p ~ L on the dyadic window and the proved prop:v003-ratio-conversion; the singular-series normalization M = c Sing x / L^2 names the transferred count."
  },
  "warning:untitled": {
   "env": "warning",
@@ -614,9 +619,12 @@
  "cor:v003-natural-rough-carrier": {
   "env": "corollary",
   "title": "Natural-scale rough carrier",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.rough_support_contribution",
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.natural_rough_carrier"
+  ],
+  "note": "Finite-carrier form proved: on the support-retaining carrier every supported target contributes >= (c1/26) L (log r >= L/13, log q >= L/2 displayed, from the proved rough-weight support lemma and ratio conversion), and since the rough weight satisfies 0 <= W <= 4 the support count is at least one quarter of the weighted mass -- the boxed >> Sing(2) x / log x carrier bound. Disclosed: Assumption ass:v003-support-retaining supplies the weighted lower bound; the support window x^{1/12} <= r < x^{3/7-eps} is the displayed exponent bookkeeping."
  },
  "ass:v003-two-form-sieve": {
   "env": "assumption",
@@ -628,16 +636,21 @@
  "thm:v003-profile-lipschitz": {
   "env": "theorem",
   "title": "Lipschitz semiprime profile",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ProfileLipschitz.lean:NCG.profile_lipschitz"
+  ],
+  "note": "Boxed interval bound proved in finite form: with the dimension-two sieve bound per factor r (displayed Assumption ass:v003-two-form-sieve) and the Mertens window sum over e^{uL} < r <= e^{vL} (displayed classical input), the normalized measure of [u,v] is <= C_x C_M ((v-u) + 1/L). Disclosed: the weak-* subsequential-limit statements (absolute continuity, L^infty density, no atom at a fixed ratio) are the manuscript's compactness bookkeeping on top of the uniform interval bound proved here."
  },
  "thm:v003-atomic-continuous": {
   "env": "theorem",
   "title": "Atomic--continuous alternative",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ProfileLipschitz.lean:NCG.atomic_continuous_split",
+   "NCG/Arithmetic/ProfileLipschitz.lean:NCG.profile_lipschitz"
+  ],
+  "note": "Finite-scale content proved: the carrier mass splits exactly into the prime-target atom tau and the semiprime profile mass (atomic_continuous_split), the rough-carrier lower bound transfers to the sum tau + mu-sharp mass >= M, and the semiprime part has the uniform interval bound of profile_lipschitz. Disclosed: the weak-* limit decomposition nu = tau delta_0 + f(u) du with f in L^infty and supp f in [1/12, 3/7] is the manuscript's compactness step on top of these finite bounds; the theorem does not force tau > 0 (the manuscript's warning)."
  },
  "warning:untitled--2": {
   "env": "warning",

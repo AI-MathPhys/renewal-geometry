@@ -263,6 +263,12 @@ import NCG.Flagship.StructuredDeterminant
 import NCG.Arithmetic.PacketChain
 import NCG.Arithmetic.ProlateBasic
 import NCG.Arithmetic.FunctionalEquation
+import NCG.Arithmetic.SeedTransfer
+import NCG.Arithmetic.ProfileLipschitz
+import NCG.Flagship.NativeDeterminant
+import NCG.Flagship.PvsNPBridge
+import NCG.Flagship.ScalarResponseAnomaly
+import NCG.Flagship.ADMAudit
 import NCG.Arithmetic.TensorFirewall
 import NCG.Arithmetic.AffineSelectors
 import NCG.Arithmetic.CauchyTransfer
