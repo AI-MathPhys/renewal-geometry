@@ -281,16 +281,23 @@
  "thm:source-regulator-master": {
   "env": "theorem",
   "title": "Uniform finite-horizon saturation is regulator stable",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/SourceRegulator.lean:NCG.frame_bound_limit",
+   "NCG/Flagship/SourceRegulator.lean:NCG.cyclicity_collapse"
+  ],
+  "note": "Both halves proved: the cone {X >= cI} is closed under (entrywise) regulator limits, so a uniform frame lower bound survives in the limit and the limit source stays cyclic at the same horizon; and the failure example -- for T = diag(0, 1/2) with limit source s = e_1 the two-step frame Gram of (s, Ts) is singular (det = 0), so without a uniform lower bound cyclicity collapses even in dimension two. Disclosed: norm convergence is rendered entrywise (equivalent in finite dimension); the isotypic refinement is the same closed-cone argument with converging character projectors."
  },
  "thm:naturality-splitting": {
   "env": "theorem",
   "title": "Common-action naturality, Legendre reciprocity, and measurable splitting",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/NaturalitySplitting.lean:NCG.homogeneous_descendant",
+   "NCG/Flagship/NaturalitySplitting.lean:NCG.legendre_reciprocity",
+   "NCG/Flagship/NaturalitySplitting.lean:NCG.loading_trichotomy"
+  ],
+  "note": "Proved: (i) homogeneous descendants of the common class [a] = chi[a_0] carry coefficient chi^p; (ii) Legendre reciprocity by completing the square -- the supremum of pv - L_chi(q,v) is attained at v* = p/(chi b) with value (1/(2chi))(p^2/b) + chi V, giving reciprocal coefficients a = chi^{-1}, b = chi with ab = 1 (rendered in the diagonal/1D form; the nondegenerate bilinear form version is the same identity with B^{-1}); (iii) the loading-difference trichotomy D = 0, D = delta I != 0, or D not scalar. Disclosed: the finite source-polynomial discriminator Delta_D(p) in the non-scalar case is the manuscript's separate construction on the minimal action-cyclic space."
  },
  "definition:reflected-zero-heat": {
   "env": "definition",
@@ -1469,9 +1476,12 @@
  "thm:deformation-anomaly-master": {
   "env": "theorem",
   "title": "Exact five-term deformation anomaly",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/DeformationAnomaly.lean:NCG.interface_term_identity",
+   "NCG/Flagship/DeformationAnomaly.lean:NCG.five_term_telescope"
+  ],
+  "note": "Identity content proved: the boxed interface term -- for an idempotent physical projection P with Q = 1 - P, expanding P[A,B]P with I = P + Q gives exactly P[A,B]P = [PAP, PBP] + (PAQBP - PBQAP) -- and the exact five-term telescope (consecutive differences sum to the total defect with no hidden cancellation), so the target hypersurface-deformation bracket follows iff the five terms vanish. Disclosed: the identification of the intermediate objects (separately shortened commutator, tangential-source projection, metric-predicted structure map, Levi-Civita realization) with the concrete constraint operators is the model layer."
  },
  "thm:ESSC-independence-master": {
   "env": "theorem",
@@ -1497,9 +1507,13 @@
  "thm:metrology-master": {
   "env": "theorem",
   "title": "Independent Newton and cosmological metrology",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/Metrology.lean:NCG.newton_from_stiffness",
+   "NCG/Flagship/Metrology.lean:NCG.homogeneous_volume_variation",
+   "NCG/Flagship/Metrology.lean:NCG.normalized_probability_gauge"
+  ],
+  "note": "Proved: the boxed conversion G_eff = l*^2/(16 pi chi) from the ADM normalization; the boxed cosmological readout -- on the homogeneous path the volume scales as e^{3 sigma}, the vacuum branch action Lambda V e^{3 sigma} has sigma-derivative 3 Lambda V at 0, so (1/(3V)) Gamma'(0) = Lambda; and the invariance clause -- a common amplitude factor e^{-c} cancels from every normalized Store-Read probability, so normalized data cannot determine the absolute homogeneous score. Disclosed: the scalarity criterion (whitened Hessian equals chi-hat I) is definitional on the finite spin-two tangent space; the renewal-length calibration l* is the declared metrological input."
  },
  "thm:control-frame-equivalence-master": {
   "env": "theorem",
@@ -1585,9 +1599,12 @@
  "prop:cluster-collision-lower-master": {
   "env": "proposition",
   "title": "Collision lower bound for a stable separating polynomial",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/ClusterCollision.lean:NCG.separator_slope_bound",
+   "NCG/Flagship/ClusterCollision.lean:NCG.cluster_collision_lower"
+  ],
+  "note": "Proved: the mean-value step (a differentiable separating filter attains slope >= (1-2eps)/Delta between the clusters) and the boxed degree bound n >= sqrt(R(1-2eps)/(2Delta)) obtained by combining it with the Markov brothers' derivative inequality ||p'|| <= 2n^2||p||/R on the spectral window. Disclosed: the Markov brothers' polynomial inequality is the displayed classical input (not in Mathlib)."
  },
  "prop:store-pencil-error-master": {
   "env": "proposition",

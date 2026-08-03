@@ -789,9 +789,11 @@
  "thm:grand-arithmetic": {
   "env": "theorem",
   "title": "Grand arithmetic closure theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/GrandArithmetic.lean:NCG.grand_arithmetic_closure"
+  ],
+  "note": "Multiport closure assembly proved: one theorem consuming the entry data of the constituent proved records and returning in one conjunction the multiport endpoint estimate (thm:multiport-prefix), the spectral conclusion dis = 0 from per-line indicators (cor:fixed-mod-grh through the Gaussian-Hardy criterion), the twin conclusion from a positive carrier with selector-stable parity cancellation (thm:twin-chain), the Goldbach conclusion from a positive fixed-sum carrier (thm:gold-chain), and the signed-separator twin route (twin_closure). Disclosed: the discrepancy factorization through one predetermined logarithmic cell packet and the two o(A_X) ledger estimates are the displayed entry hypotheses, per the manuscript's warning (the theorem does not derive the packet or its estimates; it states one source controls all preassigned ports)."
  },
  "warning:what-the-theorem-does-not-say": {
   "env": "warning",
@@ -822,9 +824,13 @@
  "thm:dirac-scaling": {
   "env": "theorem",
   "title": "Flat Dirac scaling",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/DiracScaling.lean:NCG.centered_difference_plane_wave",
+   "NCG/Arithmetic/DiracScaling.lean:NCG.abs_sin_sub_le",
+   "NCG/Arithmetic/DiracScaling.lean:NCG.dirac_symbol_bound"
+  ],
+  "note": "Provable core proved: the exact plane-wave symbol identity (e^{ip(x+h)} - e^{ip(x-h)})/(2h) = (sin(hp)/h) i e^{ipx}, the cubic sine remainder |sin u - u| <= |u|^3/6, and the uniform-on-compacts symbol convergence |sin(hp)/h - p| <= h^2 K^3/6 for |p| <= K. Disclosed: the passage from uniform symbol convergence on compacts to L^2 convergence on Schwartz spinors and to strong resolvent convergence of the self-adjoint Fourier-multiplier Hamiltonians is the standard core-convergence argument; Mathlib has no unbounded self-adjoint spectral theory, so that layer stays disclosed per house policy."
  },
  "prop:screen-area": {
   "env": "proposition",
@@ -843,9 +849,13 @@
  "thm:einstein": {
   "env": "theorem",
   "title": "Conditional Einstein closure",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/EinsteinClosure.lean:NCG.null_cone_polarization",
+   "NCG/Arithmetic/EinsteinClosure.lean:NCG.einstein_assembly",
+   "NCG/Arithmetic/EinsteinClosure.lean:NCG.newton_constant"
+  ],
+  "note": "Provable core proved: the key null-cone polarization (a symmetric bilinear form on Minkowski space whose quadratic form vanishes on every null vector equals B_00 * eta -- the passage from R_ab k^a k^b = (2pi/eta) T_ab k^a k^b for all null k to R_ab + Phi g_ab = (2pi/eta) T_ab), the assembly to the boxed Einstein equation G_ab + Lambda g_ab = c T_ab given the Bianchi identification Phi = -R/2 + Lambda (displayed), and the boxed coupling 8 pi G_N = 2 pi / eta <=> G_N = 1/(4 eta). Disclosed: the Raychaudhuri/Clausius input (assumptions (E1)-(E4): local Rindler horizons, Unruh temperature, dS = eta dA, dQ = T dS) and the divergence step from stress conservation and contracted Bianchi (E5) are the manuscript's conditional continuum hypotheses."
  },
  "ledger:spacetime-chain": {
   "env": "ledger",
@@ -914,9 +924,11 @@
  "thm:sm-chain": {
   "env": "theorem",
   "title": "Conditional gauge-descent theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/GaugeChain.lean:NCG.sm_gauge_descent"
+  ],
+  "note": "Assembly proved: the entry data of the constituent proved records return in one conjunction the colour carrier generating M_3(C) (thm:qutrit), the Z_6 kernel congruence of the one-generation hypercharge table (thm:hypercharge), the five vanishing anomaly sums with even doublet count (thm:anomaly), and the coupling matching g_Y^2 = (3/5) g^2 with sin^2 theta_W = 3/8 (thm:coupling). Disclosed: the weak doublet factor, Pati-Salam typing, right-breaking source with stabilizer Y = T_R^3 + (B-L)/2, and the branch-blind BRST/Goldstone quotient (S2)-(S4) are the manuscript's structural entry assumptions; the quotient leaving the unbroken Lie algebra unchanged is prose."
  },
  "ledger:gauge-chain": {
   "env": "ledger",
@@ -928,9 +940,11 @@
  "thm:flagship": {
   "env": "theorem",
   "title": "Universal Grand Tensor Conditional Closure",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/FlagshipClosure.lean:NCG.flagship_closure"
+  ],
+  "note": "Five-chain assembly proved: one theorem consuming the entry data of the five chains and returning their conclusions in one conjunction -- spectral (dis = 0 via cor:fixed-mod-grh), twin (twin pair via thm:twin-chain), Goldbach (representation via thm:gold-chain), spacetime (the Einstein equation via the proved null-cone polarization and assembly of thm:einstein), and gauge (M_3(C) colour generation and coupling matching sin^2 theta_W = 3/8 via thm:sm-chain constituents). Disclosed: mutual independence of the chains is the direct-sum firewall record; the port-tensor/Schur-short/retained-phase entrance data (U1)-(U4) are the architectural framing supplying each chain's displayed entry hypotheses; the spacetime chain's Clifford/Dirac/screen steps are the separately proved thm:clifford, thm:dirac-scaling, prop:screen-area records."
  },
  "openproblem:fixed-subcritical-spectral-mass-flux-estimate": {
   "env": "openproblem",

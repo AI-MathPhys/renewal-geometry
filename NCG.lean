@@ -265,6 +265,16 @@ import NCG.Arithmetic.ProlateBasic
 import NCG.Arithmetic.FunctionalEquation
 import NCG.Arithmetic.SeedTransfer
 import NCG.Arithmetic.ProfileLipschitz
+import NCG.Arithmetic.GrandArithmetic
+import NCG.Arithmetic.DiracScaling
+import NCG.Arithmetic.EinsteinClosure
+import NCG.Arithmetic.GaugeChain
+import NCG.Arithmetic.FlagshipClosure
+import NCG.Flagship.DeformationAnomaly
+import NCG.Flagship.ClusterCollision
+import NCG.Flagship.SourceRegulator
+import NCG.Flagship.NaturalitySplitting
+import NCG.Flagship.Metrology
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly
