@@ -324,9 +324,13 @@
   "thm:twin-heat-master": {
     "env": "theorem",
     "title": "Twin-prime heat sufficiency",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Flagship/TwinHeat.lean:NCG.twin_heat_sufficiency",
+      "NCG/Flagship/TwinHeat.lean:NCG.twin_heat_bounded_of_finite",
+      "NCG/Flagship/TwinHeat.lean:NCG.twinHeat_summable"
+    ],
+    "note": "The boxed sufficiency is proved in full; the prime-power tail enters as the displayed convergent majorant. The selector D2(t) is proved to be a genuine convergent series for every t > 0 (twinHeat_summable): the heat factor is dominated through x^2 e^{-t x^2/2} <= 2/t (from y e^{-y} <= 1) and e^{-t x^2/2} <= e^{1/(2t)}/n (the maximum of x - t x^2/2 is 1/(2t)), giving the explicit majorant (4/t + 8) e^{1/(2t)} / n^2. The boxed implication is proved by contraposition (twin_heat_bounded_of_finite / twin_heat_sufficiency): if only finitely many twin pairs existed, the twin part of the split series is bounded by the finite sum of Lambda(n)Lambda(n+2)/n (heat factor discarded) and the proper-prime-power part is uniformly bounded on 0 < t <= 1, so D2 would be bounded - hence divergence as t -> 0 forces infinitely many twin-prime pairs. Disclosed: the uniform bound on the proper-prime-power contamination is the displayed hypothesis hbad, whose majorant is the manuscript's displayed convergent double series sum_p sum_{k>=2} k (log p)^2 p^{-k} < infinity (the (p,k) parametrization; its Goldbach analogue is fully proved in the thm:Goldbach-heat-master record via the same injection); the divergence certificate itself is, as the manuscript notes, not provided by the universal Grand Tensor."
   },
   "thm:Goldbach-heat-master": {
     "env": "theorem",
