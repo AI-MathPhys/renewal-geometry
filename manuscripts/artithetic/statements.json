@@ -148,9 +148,11 @@
   "thm:scaling-indicator": {
     "env": "theorem",
     "title": "Finite scaling indicator",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Arithmetic/ScalingChain.lean:NCG.scaling_energy_upper"
+    ],
+    "note": "The upper half of the boxed limsup identity is proved in its finite-cutoff rendering; the lower half is disclosed. scaling_energy_upper: from the explicit-formula growth bound |G(r)| <= C(1+r)^A e^{(Theta+eps)r} on [0,U], the finite-cutoff energy int_{(0,U]} e^{-2 sigma r}|G|^2 dr is at most C^2 (1+U)^{2A} (U+1) e^{2(Theta+eps-sigma)_+ U} - taking log^+ and dividing by U = log X gives the manuscript's limsup <= 2(Theta - sigma + eps)_+, and the subpower consequence E = X^{o(1)} => Theta <= sigma. Disclosed: the lower half (the Bohr mean-square lower bound over the grouped almost-periodic exponential sum, giving limsup >= 2(1-delta)(Theta-sigma-2eps)_+), the super-Gaussian bulk agreement of the cutoff-matched and complete ports, and the limsup/log^+ bookkeeping (rendered by the displayed finite-cutoff inequality)."
   },
   "thm:residue-parseval": {
     "env": "theorem",
@@ -165,9 +167,12 @@
   "cor:fixed-mod-grh": {
     "env": "corollary",
     "title": "Conditional fixed-modulus GRH chain",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Arithmetic/ScalingChain.lean:NCG.char_energy_le_variance",
+      "NCG/Arithmetic/ScalingChain.lean:NCG.fixed_mod_grh"
+    ],
+    "note": "The chain's two formal steps are proved; the per-character indicator application is the displayed hypothesis. char_energy_le_variance: by the proved Parseval identity (thm:residue-parseval record), every nonprincipal character energy ||G_chi||^2 is bounded by phi(n) times the residue variance sum_a ||v_a - vbar||^2 (single term <= nonnegative sum + rearranged identity). Hence subpower variance gives subpower per-character energy at every scale. fixed_mod_grh: with the per-character scaling indicator supplied at every sigma > 0 on both reflection sides (hind, displayed - the character-by-character application of thm:scaling-indicator through the domination), every nonprincipal displacement vanishes, via the two-sided criterion of the Gaussian-Hardy record (gaussian_grh_criterion). Disclosed: the principal-channel density subtraction and the per-character indicator step."
   },
   "ledger:spectral": {
     "env": "ledger",
