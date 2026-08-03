@@ -258,6 +258,8 @@ import NCG.Flagship.CharacterHeat
 import NCG.Arithmetic.ScalingChain
 import NCG.Flagship.GrandReadouts
 import NCG.Flagship.TwinHeat
+import NCG.Flagship.ClockDischarge
+import NCG.Flagship.StructuredDeterminant
 import NCG.Arithmetic.PacketChain
 import NCG.Arithmetic.ProlateBasic
 import NCG.Arithmetic.FunctionalEquation
