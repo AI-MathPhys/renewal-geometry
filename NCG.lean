@@ -325,6 +325,7 @@ import NCG.Grand.BoundaryCorner
 import NCG.Grand.LineValuedEinstein
 import NCG.Grand.EntropicHodge
 import NCG.Grand.ThreeMatch
+import NCG.Grand.GrandMasters
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly

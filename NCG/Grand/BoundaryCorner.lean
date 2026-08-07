@@ -45,7 +45,7 @@ theorem graded_stokes_adjoint {c f : Type*} [Fintype c]
 
 /-- Exactness: `∂∘∂ = 0` collapses iterated boundaries. -/
 theorem graded_stokes_squared {c₀ c₁ c₂ : Type*} [Fintype c₀]
-    [Fintype c₁] [Fintype c₂] (B₁ : Matrix c₁ c₀ ℝ)
+    [Fintype c₁] (B₁ : Matrix c₁ c₀ ℝ)
     (B₂ : Matrix c₂ c₁ ℝ) (hdd : B₂ * B₁ = 0) (x : c₀ → ℝ) :
     B₂.mulVec (B₁.mulVec x) = 0 := by
   rw [Matrix.mulVec_mulVec, hdd, Matrix.zero_mulVec]
