@@ -1812,9 +1812,11 @@
  "thm:entropic-Hodge-continuum": {
   "env": "theorem",
   "title": "Entropic Hodge form and minimizing movement",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EntropicHodge.lean"
+  ],
+  "note": "Proved (variational core): the boxed Fisher-window bound I_Gamma >= (g-/2)||D_U theta||^2 (fisher_window_bound); the boxed protected-complement gap q >= (176/225) lambda_U ||v||^2 (hodge_gap_chain); and the boxed minimizing movement - the resolvent step (I + tau L)^{-1} f_n is the exact minimizer of the implicit Euler functional, by the exact completion of the square (resolvent_minimizer). Disclosed: the Hessian identity D^2 I_Gamma(0) = q_{U,G0}, the parallel-field kernel identification, Trotter convergence, and the Mosco passage. TRIAGE H (2026-08-07)."
  },
  "thm:periodic-covariant-information-limit": {
   "env": "theorem",
@@ -3766,16 +3768,20 @@
  "thm:SMST-ADM-Cartan": {
   "env": "theorem",
   "title": "Pressure-adapted coherent ADM packet",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTADMPacket.lean"
+  ],
+  "note": "Proved (clause slices): boxed lapse N_h = beta_h l_{0,h} with positive two-sided compact-phase bounds (smst_lapse_bounds); the (P4) link-chain estimate - a chain of near-identity physical links stays near the identity, ||a_n...a_1 - 1|| <= (1+eps)^n - 1 (link_chain_near_identity, the transport step behind clause (ii)). Disclosed: the environment-unitary transport itself, the cb-generator calculus, the Hodge-Sobolev branch, and the connection-atlas conclusions. TRIAGE H (2026-08-07)."
  },
  "thm:SMST-regenerative-ADM": {
   "env": "theorem",
   "title": "Regenerative derivation of the ADM regularity packet",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTADMPacket.lean"
+  ],
+  "note": "Proved (conversion mechanics): the type-mass floor converts integrated quadratic energy into a uniform amplitude cap a_t^2 <= E/m0 (type_mass_amplitude_cap); the cap bootstraps the quartic energy sum m a^4 <= (E/m0) E (amplitude_to_L4); and the (R3) conorm exponent window 4p/(p+2) < 4 < p with 0 < 1 - 4/p is nonempty (conorm_window). Disclosed: the W^{1,p}_loc Hodge estimate, C^{0,alpha}_loc precompactness, and the shorted-Hodge screen branch. TRIAGE H (2026-08-07)."
  },
  "firewall:pressure-data-alone-do-not-control-curvature": {
   "env": "firewall",
@@ -3956,9 +3962,11 @@
  "thm:Palatini": {
   "env": "theorem",
   "title": "Localized renewal--Palatini insertion",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/PalatiniInsertion.lean"
+  ],
+  "note": "Proved (uniqueness and faithfulness): the boxed unique form - linearly independent Holst/Palatini/volume densities force unique coefficients (alpha, beta, lambda) (holst_palatini_coefficients_unique); the boxed first-variation limit chi int sqrt(-g)(G+Lambda g)k is faithful and linear in the test insertion (palatini_insertion_determined/_linear, via the proved insertion-pairing layer). Disclosed: hypotheses (E1)-(E4) - memory-cumulant subtraction, face linearization, Lorentz naturality, the torsion alternative, and the L2/L6/weak-Lp convergence. TRIAGE H (2026-08-07)."
  },
  "assessment:higher-curvature-status": {
   "env": "assessment",
@@ -4012,9 +4020,11 @@
  "thm:SMST-global-boundary": {
   "env": "theorem",
   "title": "Global non-null GHY--corner completion",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/BoundaryCorner.lean"
+  ],
+  "note": "Proved (boundary bookkeeping): the (B1) graded Stokes pairing <dx,y> = <x,d^T y> (graded_stokes_adjoint), the exactness collapse d(dx) = 0 (graded_stokes_squared), and the boxed global GHY-corner first-variation decomposition into bulk, face, and joint terms (ghy_corner_first_variation, via the proved boundary-variation layer). Disclosed: hypotheses (B2)-(B5) - normals, joint angles, trace-map frame floors, closed currents, and the well-posed Dirichlet problem with Brown-York/corner momenta. TRIAGE H (2026-08-07)."
  },
  "thm:SMST-graph-regulator": {
   "env": "theorem",
@@ -4038,9 +4048,11 @@
  "thm:SMST-line-valued-Einstein": {
   "env": "theorem",
   "title": "Line-valued quantum action and covariant Einstein residual",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/LineValuedEinstein.lean"
+  ],
+  "note": "Proved (line and residual mechanics): the unique connection coefficient of a nowhere-zero amplitude (log_derivative_unique); the boxed polar splitting Z = e^{-S} s with ||s|| = 1 and S = -log||Z|| (amplitude_polar); the boxed covariant residual dichotomy Delta_Ein^cov = 0 iff E^R = 0 and t_ph = 0 - a real Einstein mismatch cannot cancel a phase stress (covariant_residual_split). Disclosed: the line-bundle curvature/holonomy formulation d Xi = i Omega_ph. TRIAGE H (2026-08-07)."
  },
  "thm:SMST-corrected-dual-measure": {
   "env": "theorem",
@@ -4446,9 +4458,11 @@
  "thm:ar-three-match": {
   "env": "theorem",
   "title": "Microscopic transversality of nonzero near collisions",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/ThreeMatch.lean"
+  ],
+  "note": "Proved (twelve-slot combinatorics): at most two matched slots leave at least two entire triples unmatched for any predetermined partition of the twelve slots into four triples (triple_transversality, matched_triples_le). Disclosed: the number-theoretic input that a nonzero near collision 0 < |n-n'| <= Y^{1/5+o(1)} permits at most two equal-value atom pairings. TRIAGE H (2026-08-07)."
  },
  "thm:ar-add-mult": {
   "env": "theorem",

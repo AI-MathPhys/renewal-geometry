@@ -319,6 +319,12 @@ import NCG.Grand.SixthOrderProfile
 import NCG.Grand.ChaosLocalization
 import NCG.Grand.FiniteHDA
 import NCG.Grand.ActionEinstein
+import NCG.Grand.SMSTADMPacket
+import NCG.Grand.PalatiniInsertion
+import NCG.Grand.BoundaryCorner
+import NCG.Grand.LineValuedEinstein
+import NCG.Grand.EntropicHodge
+import NCG.Grand.ThreeMatch
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly
