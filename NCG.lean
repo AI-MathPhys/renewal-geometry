@@ -312,6 +312,9 @@ import NCG.Grand.PhaseSelection
 import NCG.Grand.FlowDuality
 import NCG.Grand.SobolevWeyl
 import NCG.Grand.AtlasIsoperimetry
+import NCG.Grand.YMSlabGap
+import NCG.Grand.MemoryCumulant
+import NCG.Grand.LoopSaturation
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly

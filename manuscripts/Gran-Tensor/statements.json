@@ -3922,9 +3922,11 @@
  "thm:renewal-memory-cumulant": {
   "env": "theorem",
   "title": "Complete classical--quantum cut-memory short",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/MemoryCumulant.lean"
+  ],
+  "note": "Proved (Hessian structure): normalization M_cq(0) = 0 for a faithful probability weight (memory_normalization); the classical summand of the boxed Hessian is the nonnegative branch-slope variance, vanishing exactly when all branch mean slopes agree (classical_variance_nonneg/_zero_iff); the quantum BKM summand in the eigenbasis rendering sum lam_i^s lam_j^{1-s} |X_ij|^2 is nonnegative and for a faithful branch vanishes exactly when the centered perturbation is zero on the support (bkm_kernel_nonneg/_zero_iff). Disclosed: the Duhamel trace-exponential second-derivative identity (as in the proved BKM Hessian layer) and the subtraction clause A_sh = A_coarse - M_cq. TRIAGE H (2026-08-07)."
  },
  "thm:Palatini-torsion": {
   "env": "theorem",
@@ -4774,16 +4776,20 @@
  "thm:YM-primitive-loop-saturation": {
   "env": "theorem",
   "title": "Primitive invariant-loop saturation",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/LoopSaturation.lean"
+  ],
+  "note": "Proved (density and cyclicity engines): finite Stone-Weierstrass - a unital subalgebra of the finite function algebra separating configurations is everything, via Lagrange interpolation through the separating writers (finite_stone_weierstrass, single_generator_mem); and the strict-positivity cyclicity - an everywhere nonvanishing finite-regulator vacuum is cyclic for the multiplication algebra (full_support_cyclic). Disclosed: the identification of the selected finite-lattice gauge-invariant algebra with a finite function algebra on the physical configuration spectrum (gauge averaging and retained cycle/centre-flux/topological records). TRIAGE H (2026-08-07)."
  },
  "thm:YM-strong-electric-gap": {
   "env": "theorem",
   "title": "Volume-uniform strong-electric $SU(3)$ slab gap",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/YMSlabGap.lean"
+  ],
+  "note": "Proved (root algebra in full): under the boxed smallness condition 2 eps + 12 tanh eta < 1 the boxed root r = (b - sqrt(b^2-4eps^2))/(2eps) satisfies 0 <= r < 1 (slab_root_lt_one) with the stable rationalized form r = 2eps/(b + sqrt(b^2-4eps^2)) interpreting eps = 0 by continuity (slab_root_rationalized); the Schur-iteration dichotomy - any self-consistent bound eps x^2 - b x + eps >= 0 below the large root forces x <= r (quadratic_gap_dichotomy); and the boxed numeric instance r <= 6 eps <= 9/13 for 12 tanh eta <= 2/3, eps <= 3/26 (numeric_slab_bound). Disclosed: the SU(3) heat-kernel/Wilson transfer operator, the reduction of ||T|| to the self-consistent Schur bound, and the model estimates eps_kappa <= 3/26 (kappa >= 4), 12 tanh(1/18) <= 2/3. TRIAGE H (2026-08-07)."
  },
  "thm:YM-regulated-criterion": {
   "env": "theorem",

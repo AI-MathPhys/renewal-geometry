@@ -33,10 +33,9 @@ open Finset
 
 namespace NCG
 
-variable {α β γ : Type*} [Fintype α] [Fintype β] [Fintype γ]
+variable {α β γ : Type*}
   [DecidableEq α] [DecidableEq β] [DecidableEq γ]
 
-omit [Fintype β] [Fintype γ] in
 /-- Discrete three-dimensional Loomis–Whitney:
 `|A|² ≤ |π₁₂A|·(|π₁₃A|·|π₂₃A|)`. -/
 theorem loomis_whitney_dim3 (A : Finset (α × β × γ)) :
@@ -47,16 +46,22 @@ theorem loomis_whitney_dim3 (A : Finset (α × β × γ)) :
   set P12 := A.image fun p => (p.1, p.2.1) with hP12
   set P13 := A.image fun p => (p.1, p.2.2) with hP13
   set P23 := A.image fun p => p.2 with hP23
+  set T := A.image Prod.fst with hT
   -- fiber cards over the first coordinate
   have hA : A.card
-      = ∑ a : α, (A.filter fun p => p.1 = a).card :=
-    card_eq_sum_card_fiberwise fun x _ => mem_univ x.1
+      = ∑ a ∈ T, (A.filter fun p => p.1 = a).card :=
+    card_eq_sum_card_fiberwise fun x hx =>
+      mem_image_of_mem _ hx
   have h12 : P12.card
-      = ∑ a : α, (P12.filter fun q => q.1 = a).card :=
-    card_eq_sum_card_fiberwise fun x _ => mem_univ x.1
+      = ∑ a ∈ T, (P12.filter fun q => q.1 = a).card :=
+    card_eq_sum_card_fiberwise fun x hx => by
+      rcases mem_image.mp hx with ⟨p, hp, rfl⟩
+      exact mem_image_of_mem _ hp
   have h13 : P13.card
-      = ∑ a : α, (P13.filter fun q => q.1 = a).card :=
-    card_eq_sum_card_fiberwise fun x _ => mem_univ x.1
+      = ∑ a ∈ T, (P13.filter fun q => q.1 = a).card :=
+    card_eq_sum_card_fiberwise fun x hx => by
+      rcases mem_image.mp hx with ⟨p, hp, rfl⟩
+      exact mem_image_of_mem _ hp
   -- each fiber embeds into the product of its two projections
   have hfiber : ∀ a : α, (A.filter fun p => p.1 = a).card
       ≤ (P12.filter fun q => q.1 = a).card
@@ -98,8 +103,7 @@ theorem loomis_whitney_dim3 (A : Finset (α × β × γ)) :
     have hqa := (mem_filter.mp hq).2
     exact Prod.ext (hpa.trans hqa.symm) h2
   -- fiberwise Cauchy–Schwarz
-  have hkey := sum_sq_le_sum_mul_sum_of_sq_le_mul
-    (Finset.univ : Finset α)
+  have hkey := sum_sq_le_sum_mul_sum_of_sq_le_mul T
     (r := fun a => (A.filter fun p => p.1 = a).card)
     (f := fun a => ((P12.filter fun q => q.1 = a).card : ℕ))
     (g := fun a => (P13.filter fun q => q.1 = a).card
