@@ -2404,16 +2404,20 @@
  "thm:renewal-sixth-order-cell-profile": {
   "env": "theorem",
   "title": "Universal continuum cell profile through sixth order",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SixthOrderProfile.lean"
+  ],
+  "note": "Proved (jet arithmetic in full): the boxed seventh-order remainder E^(7) = D q^5 |theta|^7/(1-q|theta|) by geometric tail comparison (geometric_remainder_bound); the boxed effective-diffusivity bracket is exactly the sixth-order jet, kappa_eff^(6) w = kappa w - P^(6)(theta) with the displayed D^(2)..D^(6) (sixth_jet_identity); the boxed memory-mass window 0 <= nu_total <= 2E^(7) from the Stieltjes normalization m(0) = d + nu_total (stieltjes_mass_bound). Disclosed: the coefficient domination |c_j| <= D q^{j-2} from the first-chaos expansion, subsequential-limit existence, and the identification of the D^(j) with the renewal moments. TRIAGE H (2026-08-07)."
  },
  "thm:renewal-chaos-localization": {
   "env": "theorem",
   "title": "All-order exponential localization in Walsh degree",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/ChaosLocalization.lean"
+  ],
+  "note": "Proved (localization mechanics): graded conjugation scales each entry by exactly e^{alpha(n_i - n_j)} (graded_conjugation_entry - the source of the boxed q_phi(1+2 sinh alpha) band bound); Neumann resummation under the boxed smallness with norm <= (1-rho)^{-1} (neumann_resummation_bound); and the boxed exponential degree tail sum_{r>=R} <= e^{-2alpha(R-2)} times the conjugated square norm (degree_tail_bound), uniformly in the cutoff. Disclosed: the Walsh chaos decomposition and the identification of the modulation insertion as a +-1 degree-band operator with band norms <= q_phi. TRIAGE H (2026-08-07)."
  },
  "thm:connected-edge-action-Pythagoras": {
   "env": "theorem",
@@ -3835,9 +3839,12 @@
  "thm:finite-HDA": {
   "env": "theorem",
   "title": "Complete finite coherent vacuum HDA",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FiniteHDA.lean",
+   "NCG/Flagship/V036HDA.lean"
+  ],
+  "note": "Proved (bracket engine + (H1) reconstruction): the calibrated phases 1 and i reconstruct the complex cross kernel of a Hermitian generator from real quadratic measurements, u*Av = ((Q(u+v)-Qu-Qv) - i(Q(u+iv)-Qu-Qv))/2 (cross_kernel_reconstruction); the smearing expansion [H[N],H[M]] = sum N_x M_y [n_x,n_y] and its (H2) one-link reduction (finite_hda_smearing, finite_hda_locality, via the proved flagship HDA layer). Disclosed: the identification of reduced local commutators with the three HDA right-hand sides, the reducing-carrier Feshbach cancellation, and the continuum passage. TRIAGE H (2026-08-07)."
  },
  "assessment:why-the-hda-coefficient-is-not-fitted": {
   "env": "assessment",
@@ -3856,9 +3863,11 @@
  "thm:SMST-finite-action-Einstein": {
   "env": "theorem",
   "title": "Common-action Ward, BRST, stress, and finite Einstein residual",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/ActionEinstein.lean"
+  ],
+  "note": "Proved (variational clauses): the boxed total equation of motion E_q^tot = 2D_q S_g - T via derivative linearity (total_stress_split); clause (F1) - gauge invariance kills the flow derivative, so the boxed Ward pairing vanishes (gauge_ward_identity); clause (F3) - the boxed stress transfer L*T = 2L*E_Phi (relabeling_stress_identity); clause (F4) - the boxed finite Einstein residual Delta_Ein = <E, G^{-1}E> >= 0 vanishing exactly at metric stationarity (einstein_residual_psd). Disclosed: the BRST clause (F2) and the identification of flow derivatives with the displayed divergence/pairing expressions. TRIAGE H (2026-08-07)."
  },
  "def:protected-cycle-reward": {
   "env": "definition",

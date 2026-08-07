@@ -34,9 +34,11 @@ namespace NCG
 
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
+omit [DecidableEq ι] in
 /-- Interpolation core: a separating unital subalgebra of the
 finite function algebra contains every point indicator. -/
-theorem single_generator_mem (A : Subalgebra ℂ (ι → ℂ))
+theorem single_generator_mem [DecidableEq ι]
+    (A : Subalgebra ℂ (ι → ℂ))
     (hsep : ∀ i j : ι, i ≠ j → ∃ f ∈ A, f i ≠ f j) (i₀ : ι) :
     Pi.single i₀ (1 : ℂ) ∈ A := by
   classical
@@ -82,12 +84,16 @@ theorem single_generator_mem (A : Subalgebra ℂ (ι → ℂ))
   rw [← heval]
   exact hprod
 
+omit [Fintype ι] [DecidableEq ι] in
 /-- Finite Stone–Weierstrass density engine: a unital
 subalgebra of the finite function algebra separating
 configurations is everything. -/
-theorem finite_stone_weierstrass (A : Subalgebra ℂ (ι → ℂ))
+theorem finite_stone_weierstrass [Finite ι]
+    (A : Subalgebra ℂ (ι → ℂ))
     (hsep : ∀ i j : ι, i ≠ j → ∃ f ∈ A, f i ≠ f j) :
     A = ⊤ := by
+  classical
+  haveI := Fintype.ofFinite ι
   rw [eq_top_iff]
   intro v _
   have hdecomp : v = ∑ i, v i • Pi.single i (1 : ℂ) := by

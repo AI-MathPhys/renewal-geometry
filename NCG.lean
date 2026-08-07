@@ -315,6 +315,10 @@ import NCG.Grand.AtlasIsoperimetry
 import NCG.Grand.YMSlabGap
 import NCG.Grand.MemoryCumulant
 import NCG.Grand.LoopSaturation
+import NCG.Grand.SixthOrderProfile
+import NCG.Grand.ChaosLocalization
+import NCG.Grand.FiniteHDA
+import NCG.Grand.ActionEinstein
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly
