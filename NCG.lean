@@ -304,6 +304,11 @@ import NCG.Grand.FixedDelayGenerator
 import NCG.Grand.ScoreContinuum
 import NCG.Grand.ControlledCompiler
 import NCG.Grand.FastFeedback
+import NCG.Grand.AnytimeAudit
+import NCG.Grand.RewardPressure
+import NCG.Grand.ColourOrbit
+import NCG.Grand.SMSTCommutant
+import NCG.Grand.PhaseSelection
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly

@@ -1299,9 +1299,11 @@
  "thm:primitive-phase-selection": {
   "env": "theorem",
   "title": "Finite domain-enriched synchronized-interface theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/PhaseSelection.lean"
+  ],
+  "note": "Proved (checkable panel logic): the nonnegative defect ledger vanishes iff every term vanishes (phase_panel_zero_iff), the boxed conjunction gamma_odd > 0 and Delta_phase = 0 equals the fully-resolved panel (locked_phase_criterion), and a failing panel has a least strictly-positive first-failure witness (first_failure_witness). Disclosed: the operational isomorphism onto the locked twenty-five-cell synchronized Store phase up to the stated gauge freedoms. TRIAGE M (2026-08-07)."
  },
  "assessment:where-structural-and-renewal-emergence-end": {
   "env": "assessment",
@@ -2792,9 +2794,11 @@
  "thm:anytime-audit": {
   "env": "theorem",
   "title": "Selection-safe adaptive coordinate audit",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/AnytimeAudit.lean"
+  ],
+  "note": "Proved (calibration and both ledgers): boxed radius is exactly Hoeffding-calibrated - exp(-2k eps^2) = X^{-1} at eps = sqrt((2k)^{-1} log X) (confidence_radius_calibration); Basel ledger sum 1/k^2 = pi^2/6 (basel_budget); coordinate ledger sum_j alpha w_j <= alpha (weight_budget); countable union bound closing the simultaneous confidence region (union_bound_budget). Disclosed: the time-uniform Hoeffding inequality for predictably sampled bounded coordinates. TRIAGE M (2026-08-07)."
  },
  "cth:ambient-invisible": {
   "env": "countertheorem",
@@ -3365,9 +3369,11 @@
  "thm:SM-colour-orbit": {
   "env": "theorem",
   "title": "Exact singlet--adjoint colour occurrence",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/ColourOrbit.lean"
+  ],
+  "note": "Proved (seed invariants and both boxed coefficient tables): R = 2P - 1 for the rank-one lepton projection, R^2 = 1, tr R = -2, Hilbert-Schmidt split 4 = 1 + 3 (colour_component_split), occurrence coefficients 1 and 3/15 = 1/5 (colour_occurrence_coefficients), score bridge (1/2, 1/10) (colour_score_bridge). Disclosed: Schur orthogonality for the SU(4) Haar average and the 257-point positive orbit quadrature. TRIAGE M (2026-08-07)."
  },
  "thm:SM-record-bimodule": {
   "env": "theorem",
@@ -3588,9 +3594,11 @@
  "thm:SMST-support-polar-commutant": {
   "env": "theorem",
   "title": "Exact support-polar commutant",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTCommutant.lean"
+  ],
+  "note": "Proved (no-extra-loading core): anything commuting with an incidence datum commutes with every polynomial functional-calculus output (commutant_polynomial_calculus), and the support Gram F*F stays in the commutant closure (commutant_support_gram) - support projections, metrics, and polar data add no finite loading. Disclosed: the von Neumann bicommutant identifications M = (O^sup)' as algebra equalities. TRIAGE M (2026-08-07)."
  },
  "def:SMST-multiplicity-quiver": {
   "env": "definition",
@@ -3602,9 +3610,11 @@
  "thm:SMST-quiver-commutant": {
   "env": "theorem",
   "title": "Noncommuting-support multiplicity-quiver theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTCommutant.lean"
+  ],
+  "note": "Proved (exact kernel certificates): boxed quiver certificate tr(K*K) = 0 iff K = 0 (quiver_certificate) and the summed nonnegative commutator ledger vanishing iff every block intertwines (quiver_form_kernel) - the first positive quiver eigenvalue certifies absence of additional flavour/generation endomorphisms. Disclosed: the isomorphism C*(S,T)' = End Q and the Hilbert-Schmidt basis expansion of the ambient commutator form. TRIAGE M (2026-08-07)."
  },
  "thm:SMST-polar-holonomy": {
   "env": "theorem",
@@ -3854,16 +3864,20 @@
  "thm:reward-pressure-reconstruction": {
   "env": "theorem",
   "title": "Table-derived reward pressure and complete action-slope reconstruction",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/RewardPressure.lean"
+  ],
+  "note": "Proved (exact jet identities): boxed slope reconstruction S = -G - T pi <=> G = -S - T pi (slope_reconstruction); boxed anchor tau_bar pi* = -G* w from centering S* w = 0 and duration normalization (pressure_slope_anchor), i.e. pi(v) = -gamma(v)/tau_bar. Disclosed: the analytic implicit-function existence/uniqueness of the pressure P_X and the covariance-rank clause. TRIAGE M (2026-08-07)."
  },
  "thm:reward-pressure-jet": {
   "env": "theorem",
   "title": "Pressure-jet reconstruction of the complete mixed action Gram",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/RewardPressure.lean"
+  ],
+  "note": "Proved (exact jet identities): boxed mixed action Gram G*G = S*S + delta* pi + pi* delta + m2 pi* pi with delta = T*S and T*T = m2 (pressure_jet_gram); boxed Hessian positivity D^2 P(0) = tau_bar^{-1} S*S >= 0 (pressure_hessian_psd). Disclosed: identification of the pressure jets with the displayed expectations via the implicit function theorem. TRIAGE M (2026-08-07)."
  },
  "fire:count-action-residual": {
   "env": "firewall",
@@ -3998,9 +4012,11 @@
  "cor:SMST-graph-massless": {
   "env": "corollary",
   "title": "Massless full-rank and zero-mode alternatives",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTCommutant.lean"
+  ],
+  "note": "Proved (limit and rank alternative): the constant-rank branch limit a/(s + m^2) -> a/s as m -> 0 (massless_limit) and the boxed full-rank alternative det D != 0 or an explicit zero mode (zero_mode_dichotomy). Disclosed: the determinant-line curvature (det ker D)* (x) det coker D and the flatness statement alpha_0 = -d arg det D. TRIAGE M (2026-08-07)."
  },
  "thm:SMST-line-valued-Einstein": {
   "env": "theorem",

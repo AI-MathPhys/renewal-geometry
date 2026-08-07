@@ -94,6 +94,7 @@ private lemma alpha_real :
   field_simp
   linear_combination -h
 
+set_option linter.flexible false in
 private lemma fdft_mul_gdft : Fdft * Gdft = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
@@ -105,6 +106,7 @@ private lemma fdft_mul_gdft : Fdft * Gdft = 1 := by
           (1 / 3 : ℂ) * (1 - ω + ω ^ 2) * omega_sum
       | norm_num
 
+set_option linter.flexible false in
 private lemma gdft_mul_fdft : Gdft * Fdft = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
@@ -143,6 +145,7 @@ private lemma key3 :
     αc * (ω - 1) = -(2 * Real.pi) * Complex.I * ω ^ 2 := by
   linear_combination ω ^ 2 * key1 - αc * (ω - 1) ^ 2 * omega_sum
 
+set_option linter.flexible false in
 /-- Eigenrelation: `(2π/√3)·M·F = F·diag(0, -2πi, 2πi)`. -/
 private lemma alpha_M_mul_F :
     (αc • Mmat) * Fdft = Fdft * Ddiag := by
@@ -239,6 +242,7 @@ theorem qmat_difference (t : ℝ) (ht : 0 < t) :
     from rfl, ← Complex.ofReal_mul]
   exact Complex.ofReal_inj.mpr hscalar
 
+set_option linter.flexible false in
 attribute [-instance]
   Matrix.SpecialLinearGroup.hasCoeToGeneralLinearGroup in
 open NormedSpace in
@@ -274,7 +278,7 @@ theorem fixed_delay_hidden_generator (t : ℝ) (ht : 0 < t) :
         ((t : ℂ) • Qmat (4 * Real.pi / (Real.sqrt 3 * t)) 0) := by
       apply Commute.smul_left
       apply Commute.smul_right
-      show _ * _ = _ * _
+      change _ * _ = _ * _
       rw [Matrix.sub_mul, Matrix.mul_sub, hcommQ]
     have hsplit : (t : ℂ) • Qmat
           (4 * Real.pi / (Real.sqrt 3 * t) / 2)

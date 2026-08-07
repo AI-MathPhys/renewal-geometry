@@ -61,7 +61,7 @@ theorem k4_laplacian_gap (v : Fin 4 → ℂ)
 
 /-- Boxed fibre-frame identity: `d*d = 4·I` transfers through
 the Kronecker frame — `(d ⊗ I)*(I ⊗ G₀)(d ⊗ I) = 4·(I ⊗ G₀)`. -/
-theorem tetrad_gram_kronecker {n m k : Type*} [Fintype n]
+theorem tetrad_gram_kronecker {n m k : Type*}
     [Fintype m] [Fintype k] [DecidableEq n] [DecidableEq m]
     [DecidableEq k] (d : Matrix m n ℂ) (G : Matrix k k ℂ)
     (hd : dᴴ * d = (4 : ℂ) • 1) :
