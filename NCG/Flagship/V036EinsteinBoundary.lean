@@ -47,9 +47,9 @@ variable {ι : Type*} [Fintype ι]
 /-- The insertion pairing determines the tensor: vanishing
 against every test insertion forces `T = 0`, so the boxed limit
 `χ∫√-g(G+Λg)k` carries the full field-equation content. -/
-theorem insertion_functional_determined [DecidableEq ι]
-    (T : ι → ℝ)
+theorem insertion_functional_determined (T : ι → ℝ)
     (h : ∀ k : ι → ℝ, ∑ i, T i * k i = 0) : ∀ i, T i = 0 := by
+  classical
   intro i
   have := h (Pi.single i 1)
   simpa [Pi.single_apply, Finset.sum_ite_eq', mul_ite]

@@ -50,8 +50,8 @@ theorem stiffness_not_determined :
 /-- A positive retained residual is a genuine additional
 sector: the block extension with nonzero residual differs from
 the residual-free one. -/
-theorem residual_not_absorbed {n m : Type*} [Fintype n]
-    [Fintype m] (S : Matrix n n ℂ) (R : Matrix m m ℂ)
+theorem residual_not_absorbed {n m : Type*}
+    (S : Matrix n n ℂ) (R : Matrix m m ℂ)
     (hR : R ≠ 0) :
     Matrix.fromBlocks S 0 0 R ≠ Matrix.fromBlocks S 0 0 0 := by
   intro h

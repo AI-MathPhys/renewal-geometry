@@ -65,6 +65,7 @@ theorem score_pulse_group (θ θ' : ℝ) :
   congr 1
   rw [mul_add, add_smul]
 
+set_option linter.flexible false in
 attribute [-instance]
   Matrix.SpecialLinearGroup.hasCoeToGeneralLinearGroup in
 open NormedSpace in
