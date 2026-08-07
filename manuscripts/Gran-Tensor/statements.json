@@ -2256,16 +2256,20 @@
  "thm:pressure-flow-isoperimetry": {
   "env": "theorem",
   "title": "Exact pressure-flow characterization of spatial isoperimetry",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FlowDuality.lean"
+  ],
+  "note": "Proved (flow/cut mini-library): discrete Stokes identity - interior divergence equals net cut flux with exact interior cancellation (boundary_flux_identity); the certifying direction of the boxed equivalence - a current with congestion kappa bounds realized demand by kappa times cut capacity (flow_cut_weak_duality); uniqueness of the canonical minimum-congestion current via strict convexity of sum |j_e|^2/(h c_e) on the midpoint-closed admissible set (min_energy_unique); automorphism invariance of the canonical current (canonical_current_invariant). Disclosed: the converse max-flow/min-cut LP duality and the normalization Gamma_press = I^{-1}. TRIAGE H (2026-08-07)."
  },
  "thm:operational-Sobolev-Weyl": {
   "env": "theorem",
   "title": "Operational Sobolev, Poincar\\'e, and Weyl bounds",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SobolevWeyl.lean"
+  ],
+  "note": "Proved (functional chain): weighted L2<=V^{2/3}L6 Hoelder step in cubed polynomial form (sum mu f^2)^3 <= (sum mu f^6)(sum mu)^2 by double Cauchy-Schwarz (holder_l2_l6_cube); the boxed Poincare constant C_P = C_S V^{2/3} as the cubed chaining (poincare_from_sobolev_cube); the boxed compact-screen tail ||(I-P_R)f||^2 <= R^{-1} E(f) in the diagonal spectral rendering (spectral_tail_bound); positivity of the boxed spectral floor I*^2/(128 D* V*^{2/3}) (poincare_floor_positive). Disclosed: the co-area derivation of the L6 Sobolev bound with C_S = 128 D*/I*^2 and the Weyl packing count N(R). TRIAGE H (2026-08-07)."
  },
  "thm:protected-coordinate-integration": {
   "env": "theorem",
@@ -2279,9 +2283,11 @@
  "thm:coordinate-atlas-isoperimetry": {
   "env": "theorem",
   "title": "Coordinate and atlas discharge of the cut margin",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/AtlasIsoperimetry.lean"
+  ],
+  "note": "Proved (axis bound from scratch): the discrete three-dimensional Loomis-Whitney inequality |A|^2 <= |pi12 A||pi13 A||pi23 A| by fiberwise Cauchy-Schwarz (loomis_whitney_dim3), and positivity of both boxed floors I_ax = c- delta_kappa/m+^{2/3} and I_atlas (axis_floor_positive, atlas_floor_positive). Disclosed: the unit-coordinate-edge counting reducing the cut constant to the axis bound (the delta_kappa bookkeeping) and the chart-nerve case analysis of the atlas branch. TRIAGE H (2026-08-07)."
  },
  "cor:renewal-spatial-positive-screen": {
   "env": "corollary",

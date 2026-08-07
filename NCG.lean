@@ -309,6 +309,9 @@ import NCG.Grand.RewardPressure
 import NCG.Grand.ColourOrbit
 import NCG.Grand.SMSTCommutant
 import NCG.Grand.PhaseSelection
+import NCG.Grand.FlowDuality
+import NCG.Grand.SobolevWeyl
+import NCG.Grand.AtlasIsoperimetry
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly
