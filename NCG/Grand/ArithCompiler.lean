@@ -74,9 +74,9 @@ theorem vaughan_identity (U V : ℕ) :
   linear_combination (trunc muR U - muR) * h2 - h1
     + trunc Λ V * h3
 
+set_option maxHeartbeats 1000000 in
 -- instance search through `HasEnoughRootsOfUnity` and the
 -- Dirichlet-character group exceeds the default limit
-set_option maxHeartbeats 1000000 in
 /-- Character orthogonality: the orbit-`L²` engine (re-export
 of the Mathlib relation over `ℂ`). -/
 theorem character_orthogonality {q : ℕ} [NeZero q]
@@ -86,9 +86,9 @@ theorem character_orthogonality {q : ℕ} [NeZero q]
       = if a = b then (q.totient : ℂ) else 0 :=
   DirichletCharacter.sum_char_inv_mul_char_eq ℂ ha b
 
+set_option maxHeartbeats 1000000 in
 -- the multiplicative/additive character instance search
 -- exceeds the default limit
-set_option maxHeartbeats 1000000 in
 /-- Gauss-sum normalization: the modulus identity for a
 nontrivial multiplicative character (re-export). -/
 theorem gauss_sum_modulus {R R' : Type*} [Field R]
