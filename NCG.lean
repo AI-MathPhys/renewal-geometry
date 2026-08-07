@@ -505,6 +505,13 @@ import NCG.Flagship.SMBridge
 import NCG.Flagship.SingleWriterClifford
 import NCG.Flagship.LayeredProgramme
 import NCG.Flagship.TwoPhaseKernel
+import NCG.Flagship.V036Dimension
+import NCG.Flagship.V036ADMCartan
+import NCG.Flagship.V036NoOverstatement
+import NCG.Flagship.V036HDA
+import NCG.Flagship.V036MatterLegendre
+import NCG.Flagship.V036EinsteinBoundary
+import NCG.Flagship.ScoreControl
 import NCG.Grand.GrandEntangler
 import NCG.Grand.GrandOrder
 import NCG.Grand.GrandReconstruction

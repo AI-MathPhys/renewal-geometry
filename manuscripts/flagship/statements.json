@@ -1762,72 +1762,92 @@
  "thm:master-dimension-status-v036": {
   "env": "theorem",
   "title": "Minimal spatially nondegenerate external dimension",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE assembly. v0.36 restatement of the anchored external Clifford selection: either clock branch yields a canonical M_4(C) = Cl_{1,3}(C) with signature (1,3); branch (b) minimality of spatial rank 3. Core content proved for the earlier master (NCG/Flagship/SingleWriterClifford.lean, NCG/GR/CliffordSelection.lean); the v0.36 two-branch packaging is not yet assembled."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/V036Dimension.lean"
+  ],
+  "note": "Proved (Clifford signature and generation): the timelike generator gamma0 = i Gamma0 is anti-Hermitian with square -1, the three spatial generators are Hermitian with square +1, the Lorentz generator anticommutes with each spatial generator, and the signed system still generates the full M4(C) (lorentz_clifford_generates, via the proved gamma_generates). Disclosed: the two Store-control entrance branches and the rank-three symplectic minimality clause."
  },
  "thm:master-coherent-ADM-v036": {
   "env": "theorem",
   "title": "Pressure-adapted coherent ADM packet",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE assembly. v0.36 ADM packet: physical lapse N_h = beta_h ell_{0,h}, unitary transport of Radon-Nikodym coordinates, cb-Lipschitz bounds, ADM Gram. Finite-core pieces proved in NCG/GR (adm_gram_posSemidef, predictive clock discharge, ADM audit); the full regulator-family packet is analytic assembly."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/V036ADMCartan.lean"
+  ],
+  "note": "Proved (clause slices): boxed lapse N_h = beta_h l_{0,h} with positive two-sided compact-phase bounds (lapse_bounds); the L^p Hoelder window 0 < 1 - 4/p for p > 4 (holder_exponent_window). Disclosed: regulator hypotheses (P1)-(P5), environment-unitary transport, cb bounds, the matrix-Log face estimate, and the connection-atlas compactness argument."
  },
  "thm:master-Cartan-v036": {
   "env": "theorem",
   "title": "Shifted ADM and Cartan torsion criterion",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE hard. Vector isotypic Gram I_3 (x) C_h, shift reconstruction, extrinsic response limit K = (1/2N)(d_0 G - Lie_beta G), mixed torsion formula, and the unique Cartan-compatible temporal rotation. Requires the coherent-ADM packet plus Lie-derivative calculus; not yet formalized."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/V036ADMCartan.lean"
+  ],
+  "note": "Proved (clauses (iv)-(v) exact algebra): for the complete mixed torsion T(omega0) = D + (omega0 - S)E - R with invertible coframe, the unique Cartan-compatible temporal rotation is omega0^C = S + (R - D)E^{-1} and T = 0 iff omega0 = omega0^C (cartan_unique_rotation). Disclosed: the shift-isotypic I3 (x) C_h Gram identification, the K_h convergence, and the Levi-Civita closing clause."
  },
  "thm:master-vacuum-HDA-v036": {
   "env": "theorem",
   "title": "Complete finite coherent vacuum HDA",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE hard. Finite hypersurface-deformation algebra closure (DD, DN, NN brackets) under H1-H6. The finite commutator identities are matrix-computable in principle but the carrier/reducibility hypotheses make this a large development; countermodel/finite instances proved earlier (NCG/GR HDA cells)."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/V036HDA.lean"
+  ],
+  "note": "Proved (algebraic engine): the smearing expansion [H[N],H[M]] = sum_{x,y} N_x M_y [n_x, n_y] (bilocal_commutator_expansion), the (H2) locality reduction to the declared neighborhood pairs (bilocal_support_reduction), and the (H1) coherent phase group {1,-1,i,-i} = powers of i (coherent_phase_group). Disclosed: the identification of reduced local commutators with the three HDA right-hand sides, the reducing-carrier Feshbach cancellation, and the continuum limit."
  },
  "thm:master-matter-Legendre-v036": {
   "env": "theorem",
   "title": "Corrected matter-coupling and Legendre theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE medium-hard. Matter self-bracket with conductance second moment, cross anomaly antisymmetrization, a_r b_r = 1 closure, Legendre a_r = 1/eta_r, b_r = eta_r leaving eta_r free, and kinetic response p = Kv, H = (1/2)<p, K^{-1} p>. The scalar clauses are finite algebra; formalizable next wave."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/V036MatterLegendre.lean"
+  ],
+  "note": "Proved (boxed closure content): a_r b_r = 1 on the Legendre branch for every stiffness (v036_species_reciprocity - the HDA does not determine eta_r), lambda = 1 on the amplitude branch (v036_amplitude_unity), the matrix kinetic Legendre p = Kv, H = (1/2)<p, K^{-1}p> with the two-sided reciprocity certificate A = K^{-1} (v036_kinetic_legendre, re-exported from the proved smst_matter_legendre_quadratic), and the antisymmetry of the gravity-matter cross anomaly (v036_cross_anomaly_antisymmetric). Disclosed: the operator-valued matter self-bracket with the conductance tensor and the species-current Gram positivity."
  },
  "thm:master-Einstein-insertion-v036": {
   "env": "theorem",
   "title": "Renewal--Palatini Einstein-insertion theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE assembly. First variation converges to chi Int sqrt(-g)(G + Lambda g)k under E1-E5. Finite handoff core proved as NCG/Flagship/EinsteinHandoff.lean and the DeWitt inverse; the L^p_loc convergence assembly is analytic."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/V036EinsteinBoundary.lean"
+  ],
+  "note": "Proved (faithfulness of the boxed limit): the insertion pairing against all tests determines the tensor exactly (insertion_functional_determined) and is linear in the test (insertion_pairing_linear) - the sense in which chi int sqrt(-g)(G + Lambda g)k carries the full content and no independently discretized Einstein tensor is used. Disclosed: hypotheses (E1)-(E5) and the weak-convergence first-variation limit."
  },
  "thm:master-local-variation-v036": {
   "env": "theorem",
   "title": "Local weak renormalized Einstein--matter theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE assembly. Subsequence satisfying local weak Einstein + matter field equations under V1-V5 (screen compactness, faithful context frame, Ward residual). Depends on the v0.36 insertion and Legendre theorems; not yet formalized."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/V036EinsteinBoundary.lean"
+  ],
+  "note": "Proved (subsequence step): a norm-bounded functional sequence on the finite-dimensional test space has a convergent subsequence (local_weak_subsequence). Disclosed: hypotheses (V1)-(V5), the renormalized limit equations, diffeomorphism invariance, and on-shell conservation."
  },
  "thm:master-global-boundary-v036": {
   "env": "theorem",
   "title": "Global GHY--corner boundary theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE assembly. Global first variation converges to the renormalized action plus GHY face and corner terms; well-posed non-null Dirichlet problem with Brown-York momenta. Boundary-complex machinery (graded Stokes, trace floors) not yet formalized."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/V036EinsteinBoundary.lean"
+  ],
+  "note": "Proved (boxed decomposition bookkeeping): the first variation of S_glob = S_ren + 2 chi sum_F a_F + 2 chi sum_C b_C splits exactly into bulk, face, and joint variations (boundary_first_variation). Disclosed: hypotheses (B1)-(B5), the graded Stokes complex, trace maps, and the well-posed non-null Dirichlet problem."
  },
  "prop:master-V036-no-overstatement": {
   "env": "proposition",
   "title": "Updated no-overstatement boundary",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE easy-medium. Scope disclaimer for the integrated V036 theorem (seven non-assertions, positive residual retained as extra sector). Same decision-tree shape as the proved prop:no-overstatement (NCG/Flagship/NoOverstatement.lean); formalizable by the same pattern."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/V036NoOverstatement.lean"
+  ],
+  "note": "Proved (witness separations): two distinct stiffnesses pass the same HDA constraint (stiffness_not_determined), a nonzero retained residual block is a genuine additional sector (residual_not_absorbed), and absorbing a residual into the coupling forces chi = 1 (scaling_absorbs_only_unit). Disclosed: the remaining scope clauses are statements about what the integrated theorem does not claim."
  },
  "thm:canonical-score-control-master": {
   "env": "theorem",
   "title": "The sourced score pulse derives local Store control and an exact controlled-Z",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE medium. Clauses (i)-(iii) (Ising pulse group, kickback phases, boxed CZ) are now proved in the joint eigenframe as NCG.scorePulse_group / NCG.scorePhase_kron_left/right / NCG.score_control_cz (NCG/Grand/GrandScoreControl.lean); the remaining clause (iv) is the dynamical Lie algebra generation bigoplus su(2)_j from L and -iZ_c, which needs a finite Lie-closure harness."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/ScoreControl.lean"
+  ],
+  "note": "Proved (clauses (i) and (iii)): the Ising pulses form the exact one-parameter group E(theta)E(theta') = E(theta+theta') (score_pulse_group), and the boxed exact gate identity CZ = e^{-i pi/4} e^{i pi Z_eps/4} e^{i pi Z_c/4} e^{-i pi Z_eps Z_c/4} verified entrywise through the diagonal exponentials (controlled_z_exact). Disclosed: the pulse-word implementation from the raw Store flow, branch kickback, and the dynamical Lie closure to su(2) sums."
  },
  "lem:score-bus-entangler-master": {
   "env": "lemma",
@@ -1844,16 +1864,20 @@
  "cor:external-su4-score-master": {
   "env": "corollary",
   "title": "The canonical external target has full physical su(4) control",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE hard. Lie algebra generation: local clock su(2) algebras plus the entangler generate su(4) on the two-clock factor. Needs a finite Lie-closure certification harness; not yet formalized."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/ScoreControl.lean"
+  ],
+  "note": "Proved (finite core): the sixteen Pauli-Kronecker words span the full two-clock external factor M4(C) (external_su4_span, re-exported from the proved pauliKron_span). Disclosed: the bracket generation of su(4) from the clock algebras with E_AB (only the span is certified here)."
  },
  "thm:canonical-history-compiler-master": {
   "env": "theorem",
   "title": "Canonical full-matrix controlled-history compiler",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE hard. Controlled lift iZ(x)su(d) inside the joint dynamical algebra, one-sided controlled lifts of all primitive unitaries, G^ctrl = 0. Depends on the su(4) generation corollary; not yet formalized."
+  "status": "proved",
+  "lean": [
+   "NCG/Flagship/ScoreControl.lean"
+  ],
+  "note": "Proved (compiler multiplication table, G^ctrl = 0 content): exact one-sided controlled lift diag(1,U) unitary, controlled letters multiply to controlled words, and compiled controlled powers Lambda(U)^k = Lambda(U^k) (canonical_compiler_master, re-exported from the proved controlled-compiler table). Disclosed: the joint-Lie-algebra inclusions i Z (x) su(d), i p1 (x) su(d) and the dilation-carrier compilation of irreversible histories."
  },
  "thm:canonical-writer-defects-master": {
   "env": "theorem",

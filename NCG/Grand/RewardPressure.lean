@@ -97,9 +97,10 @@ theorem pressure_jet_gram (S G : Matrix Ω V ℂ)
   rw [h2, h3, ← h1]
   abel
 
+omit [Fintype V] in
 open scoped ComplexOrder in
 /-- Boxed Hessian positivity: `D²𝒫(0) = τ̄⁻¹·S*S ⪰ 0`. -/
-theorem pressure_hessian_psd [DecidableEq V]
+theorem pressure_hessian_psd [Finite V]
     (S : Matrix Ω V ℂ) (τbar : ℝ) (hτ : 0 < τbar) :
     ((τbar⁻¹ : ℝ) • (Sᴴ * S)).PosSemidef :=
   (Matrix.posSemidef_conjTranspose_mul_self S).smul
