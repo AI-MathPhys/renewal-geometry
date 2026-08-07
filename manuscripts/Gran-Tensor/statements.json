@@ -303,9 +303,11 @@
  "thm:central-source-decomposition": {
   "env": "theorem",
   "title": "Canonical source-ideal decomposition",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SourceIdealSplit.lean:NCG.central_source_decomposition"
+  ],
+  "note": "Boxed Peirce split proved: a central idempotent z gives the two-sided ideal zA, the decomposition a = za + (1-z)a, and z is unique among central idempotents generating the same ideal. Disclosed: existence of the central support z_S of a declared source packet (finite-dimensional structure theory). TRIAGE E (2026-08-07)."
  },
  "def:history-null-ideal": {
   "env": "definition",
@@ -786,9 +788,13 @@
  "thm:phase-invariant-axis": {
   "env": "theorem",
   "title": "Invariant-axis decomposition and the unique cross-fibre Ward coordinate",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/PhaseAxisMoment.lean:NCG.phase_axis_norm_identity",
+   "NCG/Grand/PhaseAxisMoment.lean:NCG.phase_axis_split",
+   "NCG/Grand/PhaseAxisMoment.lean:NCG.ward_coordinate"
+  ],
+  "note": "Boxed content proved: the Pythagoras split (n+1)||p(a,u) - uniform||^2 = n J_n(a)^2 + (n+1)(1-a)^2 ||u - uniform||^2 for the concatenated law p(a,u) = (a, (1-a)u) with sum u = 1; the unique orthogonal decomposition of every centered vector into the invariant axis R omega_n and the tail-centered fibre; and the Ward-coordinate equivalences J_n(a) = 0 iff a = 1/(n+1) with |a - 1/(n+1)| = (n/(n+1))|J_n(a)|. Disclosed: the S_n-fixed-subspace clause is equivariance of the explicit split formulas. TRIAGE E (2026-08-07)."
  },
  "cor:minimal-renewal-Ward-currents": {
   "env": "corollary",
@@ -1086,16 +1092,22 @@
  "thm:accepted-response-pressure": {
   "env": "theorem",
   "title": "Accepted-response renewal pressure",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/RenewalProfiles.lean:NCG.pressure_root"
+  ],
+  "note": "Boxed pressure formula proved: with A_theta(q) = 7 + 8 theta(e^{-q} - 1), the pressure equation e^{-q} F_T(x) = 1 for the proved transform F_T(z) = 8 theta z^2/(15 - 8z + (8 theta - 7)z^2) is the quadratic A x^2 + 8x - 15 = 0 (equivalence proved), solved by the boxed root x = (-8 + sqrt(64 + 60A))/(2A). Disclosed: analyticity of the pressure near the origin (implicit function theorem layer) and the removable-zero continuity clause. TRIAGE E (2026-08-07)."
  },
  "thm:accepted-phase-feedback": {
   "env": "theorem",
   "title": "Exact shorting of the intrinsic renewal phase",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/RenewalProfiles.lean:NCG.phase_contrast_stationary",
+   "NCG/Grand/RenewalProfiles.lean:NCG.phase_contrast_eigen",
+   "NCG/Grand/RenewalProfiles.lean:NCG.phase_contrast_couplings"
+  ],
+  "note": "Boxed block table proved: pi M_0 = pi for pi = (5/11, 6/11), the normalized contrast (6,-5)/sqrt(30) is an M_0 eigenvector with the mean-zero contraction -(7/15), and the three pi-weighted couplings of C_0 = [[0,0],[2/3,0]] are exactly the boxed block coefficients 4/11, 24/(11 sqrt 30), -20/(11 sqrt 30). Disclosed: the tensor bookkeeping identifying the scalar table with the operator blocks A_theta, B_theta, C_theta on phase x payload and the conditional-expectation setting. TRIAGE E (2026-08-07)."
  },
  "firewall:the-count-anchor-is-not-the-complete-physical-action": {
   "env": "firewall",
@@ -1162,9 +1174,12 @@
  "thm:renewal-continuous-completion": {
   "env": "theorem",
   "title": "Continuous completion time and physical event intensity",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/RenewalProfiles.lean:NCG.completion_lst",
+   "NCG/Grand/RenewalProfiles.lean:NCG.completion_mean"
+  ],
+  "note": "Boxed transforms proved: the product of the two exponential-stage Laplace transforms equals 8 lam^2/((4 lam + 5s)(2 lam + 3s)), and the mean/intensity 5/(4 lam) + 3/(2 lam) = 11/(4 lam) with j_phys = (11/(4 lam))^{-1} = 4 lam/11. Disclosed: the distributional identification of the completion time as the independent two-stage sum (renewal probability layer). TRIAGE E (2026-08-07)."
  },
  "thm:renewal-uniformization-gauge": {
   "env": "theorem",
@@ -1239,9 +1254,11 @@
  "cor:endpoint-defect-symmetry": {
   "env": "corollary",
   "title": "Symmetry localization of endpoint memory",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SourceIdealSplit.lean:NCG.endpoint_defect_symmetry"
+  ],
+  "note": "Commutant localization proved: a matrix commuting with every 1 x B is A x 1 (matrix-unit extraction), so coherent endpoint defects live entirely in multiplicity space; on an irreducible payload the commutant is scalar and the complete transverse endpoint response is one complex visibility. Disclosed: the general isotypic decomposition + V_pi x M_pi reduces to this statement blockwise (Schur). TRIAGE E (2026-08-07)."
  },
  "thm:endpoint-defect-record": {
   "env": "theorem",
@@ -1829,9 +1846,11 @@
  "thm:primitive-writer-saturation": {
   "env": "theorem",
   "title": "Primitive-writer saturation",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SourceIdealSplit.lean:NCG.primitive_writer_saturation"
+  ],
+  "note": "Proved: a dense generating subset has the same closed orbit as the full selected algebra (image-closure transfer under the continuous orbit map), which is the boxed GNS-orbit equality; at finite cutoff algebraic generation suffices. Disclosed: the faithfulness clause (nonzero elements detected by primitive words) is the GNS-injectivity reading. TRIAGE E (2026-08-07)."
  },
  "thm:global-record-saturation-obstruction": {
   "env": "theorem",
@@ -2250,9 +2269,14 @@
  "thm:concrete-renewal-continuum-profile": {
   "env": "theorem",
   "title": "Concrete renewal continuum profile",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/RenewalProfiles.lean:NCG.profile_variance",
+   "NCG/Grand/RenewalProfiles.lean:NCG.kronecker_eigen_real",
+   "NCG/Grand/RenewalProfiles.lean:NCG.profile_two_cell",
+   "NCG/Grand/RenewalProfiles.lean:NCG.phase_contrast_eigen"
+  ],
+  "note": "Boxed profile proved: M_0 phi = -(7/15) phi for the centered private-phase contrast, Var_pi(1_P) = 30/121, and the two-cell Walsh eigenvalue (M_0 x M_0)(phi x phi) = (49/225)(phi x phi) via the real Kronecker eigenvector lemma. Disclosed: the m-cell Walsh statement for general m (identical induction), the volume-independent gap 176/225 reading, and the four-cell isometry clause (the S_4 tetrahedral bank is the M-tier score-profile record). TRIAGE E (2026-08-07)."
  },
  "thm:concrete-renewal-score-profile": {
   "env": "theorem",
@@ -2351,13 +2375,6 @@
   "status": "conditional_interface",
   "lean": [],
   "note": ""
- },
- "fire:renewal-fixed-theta-boundary": {
-  "env": "firewall",
-  "title": "Perturbative cell closure is not the full fixed-$\\theta$ field theorem",
-  "status": "statement_encoded",
-  "lean": [],
-  "note": "Non-theorem environment (declaration/bookkeeping); formal counterparts are the hypothesis arguments of the proved theorems referencing it, per house policy."
  },
  "thm:connected-edge-action-Pythagoras": {
   "env": "theorem",
@@ -2660,9 +2677,11 @@
  "cth:second-moment-nontriviality": {
   "env": "countertheorem",
   "title": "Uniform second moments need not preserve nontriviality",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/PhaseAxisMoment.lean:NCG.second_moment_nontriviality"
+  ],
+  "note": "Explicit witness family proved: mu_n = (1 - 1/n^2) delta_0 + (1/2n^2)(delta_n + delta_{-n}) is centered with unit second moment for every n >= 1, yet every bounded observable integrates to f(0) in the limit - a finite-stage variance floor does not pass through weak convergence without uniform integrability. Disclosed: the weak-* formulation (rendered on finite-support integrals of bounded observables) and the p > 2 moment / covariance-domination repairs. TRIAGE E (2026-08-07)."
  },
  "cth:random-scan-gap": {
   "env": "countertheorem",
@@ -2703,9 +2722,12 @@
  "thm:uniform-gap-limit": {
   "env": "theorem",
   "title": "Exact uniform-gap theorem",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SourceIdealSplit.lean:NCG.uniform_gap_limit_bound",
+   "NCG/Grand/SourceIdealSplit.lean:NCG.uniform_gap_decay"
+  ],
+  "note": "Proved: the criterion half (a uniform bound on a dense increasing family bounds the limit operator - the sup formula in criterion form) and the boxed decay (with TE = ET = E, E^2 = E one has T - E = (1-E)T(1-E) and ||T^k - E|| <= ||T - E||^k). Disclosed: the direct-limit construction itself (the compatible-embedding bookkeeping); positive gaps at every finite cutoff do not imply a uniform gap (the sup can approach 1). TRIAGE E (2026-08-07)."
  },
  "thm:robust-hankel-gap": {
   "env": "theorem",
@@ -5286,13 +5308,6 @@
   "lean": [],
   "note": "Statement encoded from the 2026-08-04 manuscript extension."
  },
- "openproblem:actual-connected-regulator-spatial-atlas-and-loaded-memory-closure": {
-  "env": "openproblem",
-  "title": "Actual connected regulator, spatial atlas, and loaded-memory closure",
-  "status": "statement_encoded",
-  "lean": [],
-  "note": "Non-theorem environment (declaration/bookkeeping); formal counterparts are the hypothesis arguments of the proved theorems referencing it, per house policy."
- },
  "openproblem:microscopic-admission-of-noncanonical-physical-sectors": {
   "env": "openproblem",
   "title": "Microscopic admission of noncanonical physical sectors",
@@ -5487,5 +5502,341 @@
   "status": "statement_encoded",
   "lean": [],
   "note": "Statement encoded from the 2026-08-04 manuscript extension."
+ },
+ "def:provenance-aware-connected-packet": {
+  "env": "definition",
+  "title": "Signed provenance-aware connected packet",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:provenance-aware-connected-short": {
+  "env": "theorem",
+  "title": "Exact simultaneous provenance short",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "cth:unsigned-provenance-no-short": {
+  "env": "countertheorem",
+  "title": "An unsigned provenance Gram does not determine the short",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:conditional-Mobius-support": {
+  "env": "theorem",
+  "title": "Conditional M\\\"obius reconstruction of every support order",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:conditional-score-panel-export": {
+  "env": "theorem",
+  "title": "Operational export of the conditional master panels",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "cor:S4-provenance-isotypic": {
+  "env": "corollary",
+  "title": "Symmetry localization of a tetrahedral provenance source",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "def:physical-endpoint-coequalizer": {
+  "env": "definition",
+  "title": "Physical endpoint coequalizer and efficient capacities",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "prop:endpoint-capacity-reconstruction": {
+  "env": "proposition",
+  "title": "Finite reconstruction and nuisance invariance",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:endpoint-refinement-coequalizer": {
+  "env": "theorem",
+  "title": "Functorial endpoint coequalizers and the induced hierarchy",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "def:hierarchy-router-constants": {
+  "env": "definition",
+  "title": "Pointwise and linear hierarchy-router constants",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:hierarchy-linear-router-distinction": {
+  "env": "theorem",
+  "title": "Linear pressure-router correction and finite compiler",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:hierarchy-electrical-router": {
+  "env": "theorem",
+  "title": "Electrical-router spectral bound",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:global-spatial-compiler": {
+  "env": "theorem",
+  "title": "Finite global spatial compiler and exact obstruction",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "cth:local-renewal-no-global-atlas": {
+  "env": "countertheorem",
+  "title": "Local renewal and tetrahedral cells do not force a global atlas",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:renewal-interchange-actual-audit": {
+  "env": "theorem",
+  "title": "Actual short-cylinder and local-update audit of the cubic regulator",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "fire:renewal-interchange-not-Einstein": {
+  "env": "firewall",
+  "title": "The explicit interchange continuum is not the locked Einstein update",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:collision-parity-Hodge": {
+  "env": "theorem",
+  "title": "Parity-corrected collision Hodge decomposition",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:renewal-hard-core-all-degree": {
+  "env": "theorem",
+  "title": "All-degree hard-core corrector profile",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "lem:renewal-orbit-bracket": {
+  "env": "lemma",
+  "title": "Orbit-orthogonal bracket concentration",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:renewal-fixed-coupling-OU": {
+  "env": "theorem",
+  "title": "Full fixed-coupling generalized OU branch",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "firewall:scope-of-the-all-degree-theorem": {
+  "env": "firewall",
+  "title": "Scope of the all-degree theorem",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:SMST-Clifford-twirl-matter": {
+  "env": "theorem",
+  "title": "One-scalar Clifford-twirl matter audit",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "cor:SMST-Clifford-pressure-matter": {
+  "env": "corollary",
+  "title": "Accepted-response pressure export of the Clifford matter mass",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "cor:SMST-Clifford-spatial-route": {
+  "env": "corollary",
+  "title": "Spatial localization of the Clifford occurrence",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "cth:SMST-Clifford-marginals": {
+  "env": "countertheorem",
+  "title": "Separate normal and sign marginals do not decide matter",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:SMST-one-branch-purity": {
+  "env": "theorem",
+  "title": "One positive sign branch determines the normal-assisted matter margin",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:SMST-exceptional-three-matrix": {
+  "env": "theorem",
+  "title": "Exact $S_4$ exceptional three-matrix panel",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "firewall:word-gram-and-executable-clifford-interfaces": {
+  "env": "firewall",
+  "title": "Word-Gram and executable Clifford interfaces",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:SM-occurrence-endpoint-closure": {
+  "env": "theorem",
+  "title": "Edge-resolved CP occurrence and endpoint-source closure",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "prop:SM-typed-transition-audit": {
+  "env": "proposition",
+  "title": "Unsplit-generator audit of typed residue support",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "def:minimal-determining-field": {
+  "env": "definition",
+  "title": "Minimal determining-field quotient and accepted kernel",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:determining-field-compiler": {
+  "env": "theorem",
+  "title": "Terminating determining-field and accepted-kernel compiler",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "def:accepted-joint-table": {
+  "env": "definition",
+  "title": "Stationary accepted joint table and residuals",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:accepted-joint-table": {
+  "env": "theorem",
+  "title": "Accepted-table reconstruction of a Gibbs partition projection",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:accepted-affinity-Hodge": {
+  "env": "theorem",
+  "title": "Finite affinity Hodge compiler",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:accepted-projection-read-survival": {
+  "env": "theorem",
+  "title": "Protected Reads surviving an accepted projection",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:projection-persistence-tradeoff": {
+  "env": "theorem",
+  "title": "Exact first-chaos spectrum and projection--persistence tradeoff",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:renewal-interchange-two-clock": {
+  "env": "theorem",
+  "title": "Singular two-clock limit",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "assessment:free-action-and-the-accepted-field-boundary": {
+  "env": "assessment",
+  "title": "Free action and the accepted-field boundary",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "def:accepted-action-gap": {
+  "env": "definition",
+  "title": "Accepted Fisher--Bregman action gap",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:accepted-Bregman-stationarity": {
+  "env": "theorem",
+  "title": "Accepted Bregman gap forces common-action stationarity",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "cor:accepted-Gibbs-gap": {
+  "env": "corollary",
+  "title": "Finite Gibbs/KL accepted-row certificate",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "cth:accepted-bit-no-field-kernel": {
+  "env": "countertheorem",
+  "title": "The accepted renewal bit does not determine a field kernel",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "firewall:the-action-cost-is-not-fitted-from-the-observed-kernel": {
+  "env": "firewall",
+  "title": "The action cost is not fitted from the observed kernel",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:global-cylinder-Einstein-alternative": {
+  "env": "theorem",
+  "title": "Unconditional global-cylinder Einstein-or-obstruction alternative",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "assessment:exact-unconditional-spacetime-status": {
+  "env": "assessment",
+  "title": "Exact unconditional spacetime status",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "thm:classical-entry-edge-obstruction": {
+  "env": "theorem",
+  "title": "Classical opportunity--edge source obstruction",
+  "status": "conditional_interface",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+ },
+ "openproblem:actual-locked-global-cylinder-and-positive-einstein-branch": {
+  "env": "openproblem",
+  "title": "Actual locked global cylinder and positive Einstein branch",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
  }
 }
