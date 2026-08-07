@@ -3972,9 +3972,12 @@
  "thm:SMST-graph-regulator": {
   "env": "theorem",
   "title": "Canonical graph regulator from the finite-Dirac operator",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTGraphRegulator.lean:NCG.regulator_square",
+   "NCG/Grand/SMSTGraphRegulator.lean:NCG.regulator_gap"
+  ],
+  "note": "Boxed identities proved: (H_m^+-)^2 = diag(D*D + m^2, DD* + m^2) (block multiplication), and the gap: the Gram block matrix diag(D*D, DD*) is PSD via the exact factorization diag(D*D, DD*) = (fromBlocks D 0 0 D*)^H (fromBlocks D 0 0 D*), so both Hamiltonians have spectral gap at least m. Disclosed: the negative spectral projectors as functional-calculus outputs, gauge covariance, and the relative determinant graph line and its chiral-line isomorphism. TRIAGE M (2026-08-07)."
  },
  "cor:SMST-graph-massless": {
   "env": "corollary",
@@ -3993,9 +3996,12 @@
  "thm:SMST-corrected-dual-measure": {
   "env": "theorem",
   "title": "Correct dual-line and independent-measure criterion",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTGraphRegulator.lean:NCG.dual_trace_conj",
+   "NCG/Grand/SMSTGraphRegulator.lean:NCG.dual_trace_transpose"
+  ],
+  "note": "Boxed sign table proved: the graph-connection coefficient Im Tr(A^H B) flips sign under entrywise conjugation (trace of the conjugated product is the conjugate trace) and is preserved under transposition (Tr M^T = Tr M), so L(D^c) is the DUAL line while L(D^v) is the SAME line - the finite real/Nambu completion does not by itself supply a second cancelling determinant; exact phase cancellation needs an independently sourced Berezin factor with block D + conj(D) or an independently reconstructed dual line. Disclosed: the line-bundle bookkeeping (curvature/vertical moment sign table follows the same trace identities). TRIAGE M (2026-08-07)."
  },
  "firewall:finite-anomaly-freedom-versus-physical-quantum-phase": {
   "env": "firewall",
