@@ -326,6 +326,11 @@ import NCG.Grand.LineValuedEinstein
 import NCG.Grand.EntropicHodge
 import NCG.Grand.ThreeMatch
 import NCG.Grand.GrandMasters
+import NCG.Grand.InductiveLimitMachinery
+import NCG.Grand.MoscoResolvent
+import NCG.Grand.OUProcess
+import NCG.Grand.ArithCompiler
+import NCG.Grand.GrandUniversal
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly
