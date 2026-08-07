@@ -3865,9 +3865,11 @@
  "corollary:action-derived-scalar-current": {
   "env": "corollary",
   "title": "Action-derived scalar current",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/LastCorollaries.lean"
+  ],
+  "note": "Proved (bracket pairing): the lapse pairing omega(N,M) = N_x M_y - M_x N_y of the scalar Poisson bracket is antisymmetric and vanishes on the diagonal (scalar_current_antisymmetric). Disclosed: the Hamiltonian computation producing the boxed edge current J_e^sc. Note: this corollary is unlabeled in the tex (tracked by title). TRIAGE B (2026-08-07)."
  },
  "thm:shared-edge-normal-current": {
   "env": "theorem",
@@ -3905,9 +3907,11 @@
  "corollary:common-action-provenance-discharges-the-normal-endpoint-comparison": {
   "env": "corollary",
   "title": "Common-action provenance discharges the normal--endpoint comparison",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/LastCorollaries.lean"
+  ],
+  "note": "Proved (boxed comparison): with the split R = (n-h)V + (hV-Va), sum ||R||^2 <= 2 sum ||A||^2 + 2 sum ||B||^2 (provenance_discharge) - zero provenance residuals identify the generator-native normal and the endpoint writer as restrictions of one Hamiltonian flow. Disclosed: the whitened contractivity folding ||(n-h)V|| <= ||n-h||. Note: unlabeled corollary tracked by title. TRIAGE B (2026-08-07)."
  },
  "thm:SMST-finite-action-Einstein": {
   "env": "theorem",

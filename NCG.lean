@@ -331,6 +331,7 @@ import NCG.Grand.MoscoResolvent
 import NCG.Grand.OUProcess
 import NCG.Grand.ArithCompiler
 import NCG.Grand.GrandUniversal
+import NCG.Grand.LastCorollaries
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly
