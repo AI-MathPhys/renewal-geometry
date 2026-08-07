@@ -61,11 +61,12 @@ LEAN_DIR = ROOT / "NCG"
 
 MANUSCRIPTS = ("lorentzian_emergence", "renewal_emergence", "flagship",
                "GR_emergence", "SM_emergence", "wavefunction",
-               "artithetic")
+               "artithetic", "Gran-Tensor")
 
 # manuscripts whose .tex basename differs from the folder name
 TEX_BASENAMES = {"flagship": "flagship_theorems",
-                 "wavefunction": "wave_function"}
+                 "wavefunction": "wave_function",
+                 "Gran-Tensor": "gran_tensor"}
 
 # manuscripts whose source file is not named <base>.tex
 TEX_FILENAMES = {"artithetic": "arithmetic.txt"}
@@ -85,6 +86,9 @@ EXTRA_ENVS = {
     "wavefunction": ("assumption", "principle", "interpretation"),
     "artithetic": ("assumption", "openproblem", "ledger", "warning",
                    "audit"),
+    "Gran-Tensor": ("countertheorem", "openproblem", "firewall",
+                    "assessment", "remark", "construction",
+                    "assumption", "principle"),
 }
 STATUSES = (
     "proved",

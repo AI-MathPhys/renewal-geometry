@@ -31,7 +31,7 @@
   urlcolor=blue!60!black,
   pdftitle={Renewal Geometry and the Emergent Standard Model},
   pdfauthor={A. Pelissier},
-  pdfsubject={Updated consolidation of the renewal-to-Standard-Model programme: Hankel-minimal matter sources, Maslov and Choi-Lie incidence, one-light-doublet scalar closure, Pati-Salam gauge matching, and the physical dark-parity fork}
+  pdfsubject={Source-closure update through V46: physical revision extraction, read-resolved Maslov incidence, marked finite-Dirac reconstruction, scalar and gauge closure, and the dark-parity fork}
 }
 
 \pagestyle{fancy}
@@ -63,6 +63,10 @@
 \newtheorem{ledger}[theorem]{Status Ledger}
 \newtheorem{audit}[theorem]{Audit}
 \newtheorem{counterexample}[theorem]{Counterexample}
+\newtheorem{countertheorem}[theorem]{Countertheorem}
+\newtheorem{firewall}[theorem]{Firewall}
+\newtheorem{certificate}[theorem]{Finite Certificate}
+\newtheorem{assessment}[theorem]{Assessment}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{warning}[theorem]{Warning}
@@ -88,6 +92,7 @@
 \newcommand{\supp}{\operatorname{supp}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Ran}{\operatorname{Ran}}
 \newcommand{\End}{\operatorname{End}}
 \newcommand{\Aut}{\operatorname{Aut}}
 \newcommand{\diag}{\operatorname{diag}}
@@ -153,121 +158,110 @@
 \newcommand{\Superseded}[1]{\begin{statusbox}{SuperColor}{Status X --- superseded, corrected, or ruled out}#1\end{statusbox}}
 
 \title{\Huge\textbf{Renewal Geometry and the Emergent Standard Model}\\[3mm]
-\Large Predictive Hankel sources, native grading-odd incidence,\\
+\Large Read-resolved primitive source closure, marked finite-Dirac reconstruction,\\
 scalar and gauge closure, and the physical dark-parity fork\\[4mm]
 \large A standalone theorem-and-status synthesis of the renewal programme}
 \author{A.~P\'elissier}
-\date{Consolidation Monograph V5 --- July 2026}
+\date{Consolidation Monograph V6 --- August 2026}
 
 \begin{document}
-\frontmatter
+\hypersetup{pageanchor=false}
 \maketitle
+\hypersetup{pageanchor=true}
+\frontmatter
 
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
-This monograph gives a standalone and status-audited theorem chain from a
+This monograph gives a standalone, status-audited theorem chain from a
 primitive KMS-symmetric renewal experiment to the finite Standard-Model
-architecture.  It distinguishes exact finite operator theorems, conditional
-same-source emergence theorems, selected microscopic branches, and numerical
-or cosmological completions.  The central organizing object is no longer a
-post hoc target basis: it is the complete future-null amplitude-Hankel quotient
-of the retained Store--Read histories.
+architecture.  It separates exact finite mathematics, conditional same-source
+implications, primitive emergence, posterior numerical audits, and no-go
+theorems.  The central objects are the complete future-null amplitude-Hankel
+quotient and the read-resolved multi-time process kernel, not a post hoc target
+basis or a selected Julia dilation.
 
-At the revision level, additive reversible predictive units on an irreducible
-qutrit factor lift automatically to a projective action of
-\(\Fthree^2\).  A single nontrivial cubic commutator makes the alternating
-form nondegenerate and forces the Weyl algebra \(M_3(\C)\), four mutually
-unbiased revision frames, and the finite Clifford normalizer.  Exact qutrit
-erasure has Choi rank nine.  Its minimal complement carries the ordinary
-relative-revision representation \(\overline{R_a}\otimes R_a\), whose
-rank-one character projections are the canonical generalized Bell pointer.
-Orientation reversal cannot act on one qutrit; its minimal complex-linear
-completion is the conjugate \(3+3\) orientation doublet, on which the full
-\(PGL(2,3)\cong S_4\) normalizer acts and the determinant character forces
-deck exchange.
-
-On the twenty-four oriented tetrahedral turns, the Maslov sign is the unique
-function orthogonal to every one- and two-coordinate source: the complete
-pairwise feature space has dimension twenty-three and its orthogonal
-complement is the sign line.  The coherent matter source is therefore the
-predetermined Hankel block
+The source-facing revision programme is now substantially sharper.  A faithful
+nine-element exponent-three physical unit group with scalar fixed algebra
+forces
 \[
- K_\mu=24^{-1/2}\sum_t\mu(t)K_t,
+ \mathsf U_{\rm rev}\cong\Fthree^2,
+ \qquad \mathcal A_{\rm rev}\cong M_3(\C),
+ \qquad R_eR_fR_e^*R_f^*=\omega^{\pm1}I.
 \]
-not a fitted portal vector.  Under local word factorization the complete
-signed sum collapses to the cubic standard polynomial
+Equivalent smaller packets use two physical cubic revisions, or one periodic
+balanced drift together with a finitely certified analytic control germ.  The
+qutrit basis, Weyl pair, nine labels, and cubic phase are conclusions.  Passive
+KMS, refinement, and covariance data alone do not determine physical control
+access.
+
+Once the revision packet exists, two post-revision absorption comparisons
+characterize exact qutrit erasure.  Its minimal rank-nine complement
+canonically factors into key and record \(M_3(\C)\) factors, and the generalized
+Bell PVM is their relative-revision Fourier PVM.  Microscopic antiunitary
+reversal, when it closes on the physical revisions, is forced to be
+anti-symplectic; it derives the conjugate \(3+3\) orientation doublet,
+\(\operatorname{PGL}(2,3)\cong S_4\), and the determinant sign.  The Maslov source is the
+source-derived turn-Gram compression
 \[
- K_\mu=-24^{-1/2}L\,s_3(A_1-A_0,A_2-A_0,A_3-A_0)R.
+ K_\mu=24^{-1/2}\sum_t\mu_J(t)K_t,
+ \qquad Q_\mu=K_\mu^*K_\mu.
 \]
-For Pauli contrasts this is six times the oriented Bloch volume.  More
-intrinsically, the minimal Read Choi matrix defines a real covariance
-\(Q_\Phi\); the native coefficient algebra is \(M_2(\C)\) exactly when
-\(\rank Q_\Phi\ge2\).  Direct and commutator-assisted ports then give a
-canonical positive Choi--Lie sign source.  Stable equivariant transport cannot
-erase its central sign-sector response, and source-cyclic Krylov moments give
-the minimal target frame without diagonalizing a desired endpoint.
+Resolved CP branches or dephased turn probabilities do not determine it.
 
-The six primitive matter ports are reconstructed in one block-Hankel frame,
-unique up to one common unitary.  This closes the former independent-frame
-ambiguity of the scalar tensor.  In the selected Pati--Salam branch the
-right-portal curvature is \(33/160\), persistence and reversal localize the
-left continuation row, and the critical electroweak Hessian has the
-speed-robust form
+The native matter pass is now formulated through an RN-anchored,
+read-resolved process kernel.  A finite process-GNS theorem reconstructs the
+physical update memory, source map, continuation shifts, and terminal
+coefficient.  Positive escape and Schur shells append every missing memory
+mode.  The derived word-effect grammar has a monotone even--Maslov bridge and,
+at finite flatness, returns either exact all-depth phase superselection or the
+earliest physical word whose Choi branch constructs a same-device sign
+instrument.  The supports of the resolved Choi matrices determine the native
+coefficient algebra, its multiplicity, and the basis-free Choi--Lie covariance.
+No Kraus basis, complement gauge, or preferred qubit Read is inserted.
+
+The intervening operational hierarchy is also explicit: marked graph-localization, Choi graph--innovation, canonical Choi tangents, the no-hidden-switch theorem, Choi-whitened sharp cores, finite quantum-output observability, and terminal Stinespring-defect tests decide which coherent source information is actually available before the native matter and finite-Dirac passes.
+
+Ordinary six-port future moments reconstruct the physical transport but not an
+independent finite Dirac operator.  The minimal coherent extra datum is the
+marked bi-Hankel panel
 \[
- \mathcal H_{\rm EW,crit}
- =\kappa_4\,\diag\!\left(
- 0,\frac{33}{20}c_R^2,\frac{33}{10}c_L^2
- \right),
- \qquad c_R,c_L>0.
+ \mathbb N_d=[S^*M^iDM^jS]_{0\le i,j\le d}.
 \]
-Hence exactly one electroweak doublet is light for every positive pair of
-primitive atomic speeds.  The speeds affect heavy eigenvalues but not the
-kernel.  A rank-one right potential depending only on
-\(\Tr(XX^\dagger)\) leaves a physical colour triplet massless; the unique
-minimal anisotropy is the strict tensor-square exterior amplitude
-\(\|\wedge^2X\|^2=\det(XX^\dagger)\).  When the fresh pair record and partial
-swaps are retained, this branch lifts the entire triplet and fixes
-\(m_{\Delta_R}^2=q_R/4\) after common kinetic normalization.
+Exact ordinary flatness and same-null compatibility reconstruct one packet
+operator, unique up to one common unitary.  If the source-derived reality,
+grading, order, one-leg, generation, and slot tests pass, the same packet
+exports
+\[
+ Y_u,\quad Y_d,\quad Y_e,\quad Y_\nu,\quad M_R
+\]
+in one physical generation frame.  Masses, degeneracy-safe mixing overlaps,
+CP invariants, and the neutral Takagi spectrum are then basis-free
+consequences.  The bare marked panel has not yet been exported, so the physical
+matrices remain open.
 
-The threshold and gauge layers are also reduced to finite source tests.  A
-KMS-self-adjoint channel fixing \(M_3(\C)\oplus\C\) pointwise is the
-one-parameter colour--lepton dephasing family \(\mathbb E_\eta\); one
-coherent survival read determines \(\eta\), and a nonidentity idempotent stop
-is the sharp \(3+1\) pinching.  Three transverse-current norms determine the
-Pati--Salam gauge metric, the vacuum orbit Gram gives the complete heavy-vector
-spectrum, and the polar part of the orbit map is the operational Ward
-isometry.  Vector, Goldstone, and ghost determinants cancel mode by mode,
-leaving three physical polarizations per broken generator.  On the common
-fermion-trace branch one has \(z_4=z_L=z_R\), the unique neutral stabilizer is
-\(Y=T_R^3+(B-L)/2\), the hypercharge level is \(5/3\),
-\(\sin^2\theta_W=3/8\) at the matching boundary, and all parent and
-Standard-Model gauge anomalies cancel.
+The downstream exact and conditional results of the earlier consolidation are
+retained: the rank-three \(K_4\) carrier; the conditional
+\(\C\oplus\HH\oplus M_3(\C)\) finite geometry; the speed-robust one-light-doublet
+theorem; the exterior-square right-triplet mechanism; coloured scalar
+positivity; current, Ward, BRST, hypercharge, and anomaly formulae; and the
+charged-Hankel dark-parity fork.
 
-The dark sector is reformulated more sharply.  A nontrivial twisted
-\(K_4\) local system always has two-dimensional first cohomology, but this is
-only an available topological carrier.  A physical dark parity exists exactly
-when the reachable--observable charged deck-character span has nonzero
-annihilator and an odd neutral Hankel block is loaded.  Full \(S_4\) covariance
-forbids a unique dark parity; the residual \(V_4\) phase permits exactly three
-rank-two charged planes.  On a multiplicity-free three-generation source, the
-reduced generation determinant distinguishes the rank-two unique-parity branch
-from the rank-three no-dark branch.  For every nontrivial twist the coherent
-edge effects generate the full \(M_2(\C)\) on the harmonic doublet, so one
-nonzero neutral load saturates the complete doublet if the edge record is
-retained.  Exact parity forbids visible--dark Dirac blocks and makes the
-lightest odd state absolutely stable.  Neither the Majorana mass nor a
-\(3^{-11}\) or \(3^{-12}\) depth law follows from the finite geometry: eleven
-is a simplex count, twelve is a record-space dimension, and the physical
-renewal depth is the occupation number of the actual fresh Majorana history.
+The strongest unconditional statement about the explicit six-state source is
+negative.  Every primitive system coefficient preserves the common central
+supports and grading.  This survives all finite coherent-control wrappers,
+Kraus/Stinespring changes, environment measurements, postselection, and
+convergent chronological limits.  Hence its raw opposite-grading occurrence,
+Maslov source, refinement bridge, marked finite Dirac operator, and Yukawa
+blocks are exactly zero.
 
-The remaining end-to-end work is now localized.  One must evaluate the actual
-pre-dephasing revision, sign, packet, current, threshold, and deck-resolved
-Hankel data of the bare renewal instrument; derive the physical scalar
-criticality and absolute scale; export the Yukawa matrices in the common
-packet frame; and perform threshold matching, coupled running, and cosmological
-production.  The monograph therefore establishes a substantially stronger
-conditional Standard-Model emergence chain without claiming that the austere
-microscopic source has already passed every finite certificate.
+The remaining end-to-end work is therefore localized: export the actual
+revision/control and RN-anchored process kernels of an earlier pre-central
+joint revision--charge Store; pass the type, reality, generation, marked,
+nuisance, and stopping certificates; derive scalar criticality and absolute
+scale; measure currents and thresholds; and establish regulator-level
+continuum construction, matching, running, and cosmology.  The monograph gives
+a stronger conditional emergence chain and exact source obstructions; it does
+not claim that one austere microscopic instrument has passed every certificate.
 \chapter*{How to read the status labels}
 \addcontentsline{toc}{chapter}{How to read the status labels}
 The archive historically used the word ``derived'' at several logically different levels.  This consolidation enforces six labels.
@@ -291,23 +285,30 @@ Two conventions are especially important.  First, an exact theorem about an expl
 
 \chapter*{Executive dependency chain}
 \addcontentsline{toc}{chapter}{Executive dependency chain}
-The updated logical chain is best displayed as four coupled spines.  Every
-arrow is exact in the stated finite model; whether the bare renewal instrument
-realizes its hypotheses is recorded separately.
+Every arrow below is exact in its stated finite model; realization by the bare
+renewal source is recorded separately.
 
 \[
-\boxed{
-\begin{array}{c}
+\boxed{\begin{array}{c}
 \text{primitive KMS renewal experiment}\\
-\Downarrow\ \text{future equivalence and predictive sufficiency}\\
-\text{finite predictive algebra and Hodge--Dirac descent}\\
-\Downarrow\ \text{reversible predictive units}\\
-\text{automatic projective lift}
+\Downarrow\ \text{future equivalence, sufficiency, and coherent process tomography}\\
+(\mathcal K_{\rm ref},S,\{T_a\},L)\\
+\Downarrow\ \text{physical units or signed control germ}\\
+M_3(\C)+\Fthree^2\ \text{ projective revisions}
+\end{array}}
+\]
+
+\[
+\boxed{\begin{array}{c}
+\text{two revision absorptions}\\
+\Downarrow\\
+\text{exact qutrit erasure and rank-nine no-hiding source}\\
+\Downarrow\\
+\text{relative-revision Bell pointer}
 \end{array}}
 \qquad
-\boxed{
-\begin{array}{c}
-K_4\text{ recurrent cell}\\
+\boxed{\begin{array}{c}
+K_4\ \text{ recurrent cell}\\
 \Downarrow\\
 H^1(K_4;\C)\cong\C^3\\
 \Downarrow\ S_4\to V_4\\
@@ -316,75 +317,50 @@ H^1(K_4;\C)\cong\C^3\\
 \]
 
 \[
-\boxed{
-\begin{array}{c}
-\Fthree^2\text{ reversible qutrit revisions}\\
-+\ \text{one nontrivial cubic commutator}\\
+\boxed{\begin{array}{c}
+\text{microscopic antiunitary reversal and coherent turn Gram}\\
 \Downarrow\\
-M_3(\C)\text{ Weyl factor and four MUBs}\\
-\Downarrow\\
-\text{exact erasure and rank-nine Hankel source}\\
-\Downarrow\\
-\text{relative-revision Bell pointer and }3+3\text{ orientation doublet}
+\C^3\oplus\overline{\C^3},\quad PGL(2,3)\cong S_4,\quad Q_\mu\\
+\Downarrow\ \text{flat physical refinement grammar}\\
+\text{phase superselection or earliest sign instrument}\\
+\Downarrow\ \text{Choi-support and type-Hankel audit}\\
+\text{native grading-odd matter source}
 \end{array}}
 \]
 
 \[
-\boxed{
-\begin{array}{c}
-\text{twenty-four retained tetrahedral turns}\\
-\Downarrow\ \text{Maslov sign projection}\\
-K_\mu=24^{-1/2}\sum_t\mu(t)K_t\\
-\Downarrow\ \text{Choi--Lie interaction-completeness test}\\
-\text{nonzero native sign source}\\
-\Downarrow\ \text{stable sign response and Krylov descent}\\
-\text{one block-Hankel frame for }(F,O,r,\ell,u_R,u_L)
+\boxed{\begin{array}{c}
+\text{mixed ordinary six-port moments}\\
++\ \text{one marked bi-Hankel panel}\\
+\Downarrow\\
+\text{one packet, one finite Dirac operator, one generation frame}\\
+\Downarrow\\
+Y_u,Y_d,Y_e,Y_\nu,M_R\\
+\Downarrow\\
+\text{masses, mixing invariants, and neutral spectrum}
 \end{array}}
 \]
 
 \[
-\boxed{
-\begin{array}{c}
-\text{blind common-frame scalar packet}\\
+\boxed{\begin{array}{c}
+\text{primitive scalar jets and common packet}\\
 \Downarrow\\
-\text{speed-robust rank-two EW Hessian}\\
-\Downarrow\\
-\text{exactly one light doublet}\\
-\Downarrow\ \text{exterior-square right-pair branch}\\
-\text{positive right triplet and coloured scalar blocks}
-\end{array}}
-\quad
-\boxed{
-\begin{array}{c}
-\text{three current norms and vacuum orbit map}\\
-\Downarrow\\
-\text{Ward isometry and BRST packet}\\
-\Downarrow\ \text{common trace}\\
-Y=T_R^3+(B-L)/2,\quad k_Y=5/3\\
-\Downarrow\\
-\text{anomaly-free SM matching}
+\text{one-light-doublet Hessian and exterior-square triplet}
 \end{array}}
 \]
-
-The physical dark branch is a fork rather than an automatic consequence:
 \[
-\boxed{
-\begin{array}{c}
-\text{deck action on the reachable--observable charged source}\\
+\boxed{\begin{array}{c}
+\text{current norms, vacuum orbit, threshold packet}\\
 \Downarrow\\
-K_{\rm ch}=S_{\rm ch}^{\perp}\\
-\begin{cases}
-K_{\rm ch}=\{0\}:&\text{exact no-dark theorem},\\
-K_{\rm ch}=\{0,x\}:&\text{unique candidate parity},\\
-|K_{\rm ch}|>2:&\text{nonunique parity; extra marker required}
-\end{cases}\\
-\Downarrow\ \text{odd neutral load and }\varepsilon_x=0\\
-\text{stable twisted Majorana carrier}
+\text{Ward/BRST closure, }Y=T_R^3+(B-L)/2,\ k_Y=5/3\\
+\Downarrow\\
+\text{matching, continuum limit, and RG evolution}
 \end{array}}
 \]
 
-\begin{longtable}{@{}p{0.30\textwidth}cp{0.56\textwidth}@{}}
-\caption{Executive status after the V73 consolidation.}\label{led:executive}\\
+\begin{longtable}{@{}p{0.29\textwidth}cp{0.57\textwidth}@{}}
+\caption{Executive status after incorporation of the cumulative source-closure
+programme through V46.}\label{led:executive-v6}\\
 \toprule
 Claim & Status & Consolidated conclusion\\
 \midrule
@@ -393,85 +369,66 @@ Claim & Status & Consolidated conclusion\\
 Claim & Status & Consolidated conclusion\\
 \midrule
 \endhead
-Finite predictive algebra and Hodge--Dirac descent
-& \statusC/\statusE
-& Exact once predictive sufficiency, modular covariance, and descended reality are supplied.\\
-\addlinespace
-Operational projective lift
-& \statusE/\statusC
-& Additive reversible units on a matrix factor lift automatically; one cubic commutator is the remaining phase-sensitive qutrit witness.\\
-\addlinespace
-Relative-revision Bell pointer
-& \statusE/\statusC
-& The Bell PVM is the character PVM of the minimal rank-nine erasure source; arbitrary \(PU(9)\) control is unnecessary.\\
-\addlinespace
-Full turn normalizer and orientation doublet
-& \statusE/\statusC
-& Anti-symplectic turns require the conjugate \(3+3\) carrier and exchange its two grading sectors.\\
-\addlinespace
-Maslov matter source
-& \statusE/\statusC
-& The sign is the unique order-three mode outside every pairwise turn source; its coherent Hankel block is fixed before target fitting.\\
-\addlinespace
-Native Read criterion
-& \statusE
-& For a minimal qubit Read, \(\rank Q_\Phi\ge2\) is equivalent to interaction completeness and a nonzero canonical Choi--Lie sign source.\\
-\addlinespace
-Portal response
-& \statusE/\statusC
-& Stable equivariant transport cannot erase the central sign response; all remaining target multiplicity is source-cyclic and reconstructed from moments.\\
-\addlinespace
-Common six-port frame
-& \statusE/\statusC
-& One block-Hankel moment family reconstructs \((F,O,r,\ell,u_R,u_L)\) up to one common unitary.\\
-\addlinespace
-Electroweak Hessian
-& \statusE/\statusC
-& Under the selected persistent right/left rows and criticality, the Hessian has one and only one light doublet for every \(c_R,c_L>0\).\\
-\addlinespace
-Atomic speeds
-& \statusO/\statusE
-& Support and covariance do not fix them; primitive Gram and two-jet reads separate speed from source-profile error.\\
-\addlinespace
-Right colour triplet
-& \statusE/\statusC
-& A one-invariant rank-one action leaves it massless; strict tensor-square exterior exposure lifts it with \(m_{\Delta_R}^2=q_R/4\).\\
-\addlinespace
-Stopped coloured Hessian
-& \statusE/\statusC
-& The KMS stop is \(\mathbb E_\eta\); one nonzero adjoint score plus the direct right-spurion block makes the represented coloured quotient positive for all \(0\le\eta\le1\).\\
-\addlinespace
-Gauge/BRST closure
-& \statusE/\statusC
-& Three current reads determine the gauge metric; the Ward polar isometry and modewise BRST cancellation give 27 physical heavy-vector polarizations.\\
-\addlinespace
-Hypercharge and anomalies
-& \statusE/\statusC
-& \(Y=T_R^3+(B-L)/2\), \(k_Y=5/3\), and all parent/SM anomaly sums vanish; the \(3/8\) boundary requires one common current trace.\\
-\addlinespace
-Three generations
-& \statusE/\statusC
-& The ordinary \(K_4\) cycle fibre is rank three and restricts to the three nontrivial \(V_4\) characters; the same-source identification remains physical input.\\
-\addlinespace
-Dark parity
+Predictive process reconstruction
 & \statusE/\statusO
-& Exact rank fork on the charged Hankel source; the actual bare charged rank and neutral odd Fourier weights remain to be evaluated.\\
+& Process-GNS, escape, and flat-memory theorems are exact; the bare non-scalar
+kernel is unexported.\\
 \addlinespace
-Twisted dark doublet
+Physical qutrit revision factor
+& \statusE/\statusO
+& Several finite source packets force the dimension, \(\Fthree^2\) action, and cubic
+phase; none is yet evaluated on the bare source.\\
+\addlinespace
+Screen, no-hiding, and Bell pointer
+& \statusE/\statusO
+& Two absorptions characterize erasure and minimality forces the Bell source;
+actual screen and physical record access remain open.\\
+\addlinespace
+Orientation and Maslov source
+& \statusE/\statusO
+& Antiunitary reversal derives the sign; the actual coherent turn Gram and
+nonzero \(Q_\mu\) remain open.\\
+\addlinespace
+Native Read and typed matter tree
+& \statusE/\statusO
+& Flat refinement grammar, Choi-support algebra, Choi--Lie, typed-Hankel,
+nuisance, and stopping tests are exact; primitive data are absent.\\
+\addlinespace
+Displayed six-state source
+& \statusE/\statusX
+& Exact all-wrapper no-matter theorem.\\
+\addlinespace
+Common six-port transport
+& \statusE/\statusO
+& Mixed block-Hankel reconstruction exact; physical moments absent.\\
+\addlinespace
+Marked finite Dirac
+& \statusE/\statusO
+& Reconstruction and invariant extraction exact; physical marked panel absent.\\
+\addlinespace
+Finite SM algebra and generations
+& \statusC/\statusE
+& Conditional finite algebra; exact \(K_4\) carrier with conditional same-source
+attachment.\\
+\addlinespace
+Scalar, gauge, Ward, BRST, and anomalies
 & \statusE/\statusC
-& Every nontrivial \(K_4\) sign system has \(\dim H^1=2\); coherent edge effects generate \(M_2(\C)\), so one loaded character saturates the full doublet.\\
+& Exact under their displayed source packets; criticality, current, threshold,
+and scale data remain.\\
 \addlinespace
-Dark mass and abundance
-& \statusO/\statusP
-& Neither \(3^{-11}\) nor \(3^{-12}\) is derived; the Majorana history, fresh-record count, expansion history, and source normalization remain open.\\
-\addlinespace
-Physical Yukawa matrices and mixings
+Physical Yukawas, CKM, PMNS
 & \statusO
-& Structural slots and source invariants exist, but the actual common-frame finite Dirac operator and RG transport are not exported.\\
+& Common-frame ambiguity is closed, but matrices and RG transport are not
+exported.\\
+\addlinespace
+Dark parity and cosmology
+& \statusE/\statusO
+& Exact rank fork; actual deck data, mass, and production remain open.\\
 \addlinespace
 Full Standard-Model emergence
 & \statusO
-& Requires the bare finite certificates, scalar criticality and scale, physical Yukawas, thresholds, running, and cosmological closure.\\
+& Requires the primitive process, matter, finite-algebra, generation, marked,
+scalar, gauge, continuum, and RG packets.\\
 \bottomrule
 \end{longtable}
 \tableofcontents
@@ -982,12 +939,10 @@ It is the depolarizing family
 Exact erasure is equivalent to \(w_0=1/9\).
 
 \Conditional{The finite-Heisenberg, MUB, Clifford, and erasure conclusions
-are exact once the bare predictive quotient supplies a future-accessible
-qutrit factor, an additive reversible \(\mathbb F_3^2\)-action, and one
-nontrivial cubic commutator.  The projective cocycle itself then follows
-automatically from \Cref{thm:projective-revision,cor:odd-prime-projective-lift};
-the open upstream problem is the microscopic reconstruction of those
-operational classes and the single coherent witness.}
+are exact after any one of the physical revision packets in
+\Cref{ch:v6-revision-screen} passes.  The qutrit dimension, additive
+\(\mathbb F_3^2\)-action, and cubic commutator are then conclusions.  The open
+problem is evaluation of the actual unit/control packet of the bare source.}
 
 
 \section{Relative revisions, the canonical Bell pointer, and the orientation doublet}
@@ -1389,10 +1344,10 @@ to the no-hiding record.  The record is tomographically exposed exactly when
 A single sharp MUB PVM together with closure under the Fourier and
 quadratic-phase revisions already spans the full record algebra.
 
-\Conditional{The two-layer architecture is forced by exact qutrit erasure
-and the coherent record-control hypotheses.  The bare screen Choi equality,
-future exposure of the record, selected trigger state, and controlled-turn
-identification are finite open tests.}
+\Conditional{Exact qutrit erasure is equivalently certified by
+\Cref{thm:v6-erasure}; its minimal key/record factorization and Bell pointer are
+forced by \Cref{thm:v6-no-hiding}.  Future exposure, physical Bell-Read access,
+and the coherent matter-turn source remain separate finite tests.}
 
 
 \section{The future-null Hankel source of exact erasure}
@@ -3779,10 +3734,11 @@ It vanishes exactly when the depth-zero native packet is already invariant
 under future transport.  Nonzero higher defects are not failures; they are
 canonical additional packet modes supplied by block Lanczos descent.
 
-\Conditional{The source, response, and frame theorems are exact for the
-actual retained amplitudes.  The remaining microscopic question is whether
-the austere renewal instrument has an interaction-complete native Read and
-retains the Maslov/sign and edge records before dephasing.}
+\Conditional{The source, response, and ordinary common-frame theorems are
+exact for the retained amplitudes.  The source-closure results in
+\Cref{ch:v6-process,ch:v6-marked-dirac} replace the pre-given native-Read and
+finite-Dirac premises by an actual read-resolved sign instrument and a coherent
+marked bi-Hankel panel.  Those bare process panels remain open.}
 
 
 \chapter{Quantum path action, fixed reset, and the two-clock release law}
@@ -6948,214 +6904,1659 @@ A failure is equally informative: it identifies a specific absent qutrit,
 sign, packet, current, threshold, or deck block rather than motivating another
 reformulation of the target theory.
 
-\part{Consolidated theorem chain and research boundary}
+% =============================================================================
+% SOURCE-CLOSURE UPDATE THROUGH V46
+% =============================================================================
+\part{Primitive source closure and finite-Dirac reconstruction through V46}
+\label{part:v6-source-closure}
+
+\chapter{Physical revision extraction, qutrit erasure, and orientation}
+\label{ch:v6-revision-screen}
+
+\section{Fixed-point extraction of the qutrit revision factor}
+The finite-Heisenberg normal form is not the source theorem.  The relevant
+source-facing question is whether the actual physical revision units force its
+carrier and cocycle.  The following theorem removes both as assumptions.
+
+\begin{maintheorem}[Nine-unit fixed-point qutrit theorem]
+\label{thm:v6-fixed-qutrit}
+Let \(\mathcal A\cong M_n(\C)\) be a source-loaded invariant simple corner and
+let \(\mathsf U\le\Aut(\mathcal A)\) be a faithful physical unit group.  Assume
+\[
+ |\mathsf U|=9,
+ \qquad \Phi^3=I\quad(\Phi\in\mathsf U),
+ \qquad \Fix(\mathsf U)=\C I.
+\]
+Then
+\[
+ \boxed{\mathsf U\cong\Fthree^2,
+        \qquad \mathcal A\cong M_3(\C).}
+\]
+For arbitrary unitary implementers \(\Phi_a=\Ad R_a\), their projective
+commutator is nondegenerate:
+\[
+ \boxed{R_aR_bR_a^*R_b^*=\omega^{\Omega(a,b)}I,}
+\]
+where \(\Omega\) is a nondegenerate alternating form on \(\Fthree^2\).
+\end{maintheorem}
+
+\begin{proof}
+A group of order nine whose nonidentity elements have order three is
+\(\Fthree^2\).  Innerness on the matrix factor gives
+\[
+ R_aR_b=\tau(a,b)R_{a+b}.
+\]
+If \(a\) lies in the radical of the commutator bicharacter, then \(R_a\) commutes
+with every implementer and hence belongs to the common fixed algebra.  It is
+therefore scalar; faithfulness gives \(a=0\).  The twisted group algebra has
+dimension nine and scalar centre, so it is the simple algebra \(M_3(\C)\).  Any
+representation is \(\C^3\otimes\C^m\), with fixed algebra
+\(I_3\otimes M_m(\C)\); scalar fixed algebra forces \(m=1\).
+\end{proof}
+
+The fixed algebra is computed by the positive Gram
+\[
+ \boxed{\mathbb G_{\rm fix}^{\mathsf U}
+ =\sum_{\Phi\in\mathsf U}(\Phi-I)^*(\Phi-I),
+ \qquad \ker\mathbb G_{\rm fix}^{\mathsf U}=\Fix(\mathsf U).}
+\]
+Thus unresolved multiplicity or a surviving classical record is not silently
+deleted.
+
+\begin{corollary}[Two physical cubic revisions suffice]
+\label{cor:v6-two-word-qutrit}
+If two physical automorphisms \(\alpha,\beta\) satisfy
+\[
+ \alpha^3=\beta^3=I,
+ \quad \alpha\beta=\beta\alpha,
+ \quad \beta\notin\{I,\alpha,\alpha^2\},
+\]
+and their simultaneous fixed algebra is scalar on a source-loaded simple
+corner, then the conclusions of \Cref{thm:v6-fixed-qutrit} follow.  The two
+rank-one endpoint Choi rays determine whether the cubic orientation is
+\(\omega\) or \(\omega^2\).
+\end{corollary}
+
+\begin{proof}
+The nine products \(\alpha^a\beta^b\) are distinct and form
+\(\Fthree^2\).  The common fixed algebra of the two generators is the fixed
+algebra of the group.  Apply \Cref{thm:v6-fixed-qutrit}.  Independent scalar
+rephasings of the two Choi-derived implementers cancel from their commutator.
+\end{proof}
+
+\section{One physical control germ can supply the second revision}
+Let \(\Gamma_{t,u}=\Ad(e^{-itH(u)})\) be one physically switchable real-analytic
+signed control family.  Put
+\[
+ H_0=H(0),\qquad
+ E(u)=\frac{H(u)+H(-u)}{2}-H_0,\qquad
+ O(u)=\frac{H(u)-H(-u)}{2}.
+\]
+For a positive even sampling density define
+\[
+ \mathbb Q_+^{\rm ctl}=\int\varpi(u)|E(u)\rangle\langle E(u)|\, \dd u,
+ \qquad
+ \mathbb Q_-^{\rm ctl}=\int\varpi(u)|O(u)\rangle\langle O(u)|\, \dd u.
+\]
+
+\begin{theorem}[Analytic-germ finite reduction]
+\label{thm:v6-control-germ}
+The complete connected control Lie algebra is
+\[
+ \boxed{\mathfrak g_{\rm germ}
+ =\operatorname{Lie}_{\R}
+ (iH_0,i\Ran\mathbb Q_+^{\rm ctl},i\Ran\mathbb Q_-^{\rm ctl}).}
+\]
+At most \(n^2-1\) actual switch settings generate the same Lie algebra.  The
+iterated commutator Gram stabilizes after at most \(n^2-1\) strict rank
+increases, and full rank is equivalent to
+\(\mathfrak g_{\rm germ}=\mathfrak{su}(n)\).
+\end{theorem}
+
+\begin{proof}
+For an analytic vector-valued function, the span of its values equals the span
+of its Taylor coefficients.  The range of a positive covariance
+\(\int|v(u)\rangle\langle v(u)|\dd u\) is exactly the span of the values
+\(v(u)\).  Hence the displayed finite space contains precisely the Hamiltonian
+directions of the physical family.  Successive commutators generate its Lie
+closure.  Finite dimensionality gives termination and a finite subset of
+actual values containing a basis.
+\end{proof}
+
+Let \(H_0=\sum_a\lambda_aq_a\).  If the additive gap group is cyclic,
+\[
+ \Span_\Z\{\lambda_a-\lambda_b\}=\omega_*\Z,
+\]
+then \(T_*=2\pi/\omega_*\) is the primitive projective period and
+\[
+ \alpha=\Ad(e^{-iT_*H_0/3})
+\]
+is a physical nontrivial cubic revision.  Its three character multiplicities
+are the ranks of the spectral residue classes modulo three.  Equality of those
+ranks is necessary and sufficient for an abstract cyclic transporter.  If
+\Cref{thm:v6-control-germ} has full rank, the transporter is an exact finite
+physical word.  The scalar fixed-algebra test then closes the qutrit theorem.
+
+\begin{firewall}[Passive data do not identify controllability]
+Two operational completions can have identical passive states, effects,
+channels, KMS data, future quotient, and automorphism group while admitting
+different automorphism subgroups as laboratory controls.  Minimal Stinespring
+naturality and refinement access do not by themselves prove physical
+reachability.
+\end{firewall}
+
+\section{Two revision absorptions characterize exact qutrit erasure}
+Assume the qutrit packet above and let \(R_e,R_f\) implement a symplectic basis.
+For a qutrit channel \(\Phi\), let
+\[
+ \mathscr U_a(Y)=(I\otimes R_a)Y(I\otimes R_a^*)
+\]
+act on its Choi matrix.
+
+\begin{maintheorem}[Two-generator erasure theorem]
+\label{thm:v6-erasure}
+The following are equivalent:
+\[
+ \mathscr U_e(J_\Phi)=J_\Phi,
+ \quad \mathscr U_f(J_\Phi)=J_\Phi,
+\]
+\[
+ \mathscr U_a(J_\Phi)=J_\Phi\quad(a\in\Fthree^2),
+\]
+and
+\[
+ \boxed{\Phi(\rho)=\Tr(\rho)I_3/3.}
+\]
+\end{maintheorem}
+
+\begin{proof}
+The two revisions generate the full finite-Heisenberg group.  Its output
+commutant on \(M_3(\C)\) is scalar, so an invariant Choi matrix has form
+\(A\otimes I_3\).  Trace preservation fixes \(A=I_3/3\).  The converse is
+immediate.
+\end{proof}
+
+Covariance is weaker than absorption: the identity channel is Weyl covariant
+but does not satisfy the two displayed post-revision equalities.
+
+\section{No-hiding factors, reversal, and the source-derived turn sign}
+
+\begin{maintheorem}[Forced no-hiding and Bell factors]
+\label{thm:v6-no-hiding}
+Let \(V:\C^3\to\C^3\otimes\mathcal E\) be a minimal Stinespring isometry of exact
+erasure.  Minimal uniqueness gives two commuting complement lifts
+\[
+ (R_a\otimes K_a)V=V,\qquad(I\otimes C_a)V=VR_a.
+\]
+They generate opposite-cocycle factors
+\[
+ C^*(K_a)\cong M_3(\C),\qquad C^*(C_a)\cong M_3(\C),
+\]
+which are mutual commutants.  Therefore
+\[
+ \boxed{\mathcal E\cong\overline{\C^3}_{\rm key}\otimes\C^3_{\rm rec}.}
+\]
+The relative revisions \(W_a=K_aC_a\) form the regular representation of
+\(\Fthree^2\), and
+\[
+ \boxed{\Pi_b^{\rm Bell}
+ =\frac{1}{9}\sum_a\omega^{\Omega(a,b)}W_a}
+\]
+are rank-one Fourier projections summing to the identity.
+\end{maintheorem}
+
+\begin{proof}
+Exact erasure has Choi rank nine.  The two lift families have opposite
+projective cocycles and commute by uniqueness of the joint intertwiner.  Each
+nondegenerate twisted group algebra is \(M_3(\C)\); on a nine-dimensional
+minimal complement they are mutual commutants, giving the tensor
+factorization.  Their product has cancelled cocycle and character
+\(\Tr W_a=9\delta_{a0}\), hence is the regular representation.  Fourier
+inversion gives the rank-one PVM.
+\end{proof}
+
+Let \(J\) be the microscopic antiunitary reversal.  If it closes on the physical
+revisions, write
+\[
+ JR_aJ^{-1}\in\C R_{\rho_Ja}.
+\]
+Applying \(J\) to the cubic commutator complex-conjugates \(\omega\), so
+\[
+ \Omega(\rho_Ja,\rho_Jb)=-\Omega(a,b),\qquad \det\rho_J=-1.
+\]
+No unitary on one qutrit implements this anti-symplectic map.  The minimal
+complex-linear carrier is
+\[
+ \boxed{\mathcal Q\oplus\overline{\mathcal Q}},
+\]
+and its projective-line action is \(\operatorname{PGL}(2,3)\cong S_4\).  Determinant is the
+permutation-sign character.
+
+Let \(\mathcal T\) be the twenty-four ordered tetrahedral turns and let
+\(\mu_J(t)\) be the determinant sign of the unique projective transformation from
+a reference turn to \(t\).  For a complete coherent turn synthesis
+\[
+ \mathcal B_{\rm turn}(|t\rangle\otimes x)=K_tx,
+\]
+define
+\[
+ \boxed{K_\mu=\frac{1}{\sqrt{24}}\sum_t\mu_J(t)K_t,
+ \qquad Q_\mu=K_\mu^*K_\mu.}
+\]
+
+\begin{theorem}[Turn-Gram Maslov theorem]
+\label{thm:v6-maslov}
+If the pre-dephasing turn Gram is invariant under the physical turn action,
+then that action descends uniquely to the future range, \(K_\mu\) transforms by
+the determinant character, and
+\[
+ Q_\mu=( \langle\widehat\mu_J|\otimes I)
+ \mathbb G_{\rm turn}(|\widehat\mu_J\rangle\otimes I)\succeq0.
+\]
+Thus \(Q_\mu=0\) is an exact no-Maslov theorem for the complete tested orbit,
+while \(\rank Q_\mu\) is its exact loaded source multiplicity.
+\end{theorem}
+
+\begin{proof}
+Gram invariance makes
+\(U_g\mathcal B_{\rm turn}x:=\mathcal B_{\rm turn}L_gx\) well defined and unitary
+on the source-cyclic range.  The normalized determinant vector is an
+eigenvector of the regular turn action with eigenvalue \(\det(g)\).  The formula
+for \(Q_\mu\) is the corresponding positive Gram compression.
+\end{proof}
+
+Resolved turn channels determine only \(K_t^*K_t\).  They do not determine the
+cross terms in \(K_\mu^*K_\mu\); the turn record must be retained before
+history dephasing.
+
+\chapter{Operational access hierarchy, coherence firewalls, and finite observability}
+\label{ch:v6-access-hierarchy}
+
+The source-facing theorems above and below depend on several operational
+questions that must not be collapsed into one another: whether a marked
+history is an operator on the ordinary packet, whether a support-changing
+occurrence is coherent or innovative, whether a local channel tangent is
+Hamiltonian or dissipative, whether coherent control can create a missing
+support edge, whether a mathematically sharp pointer is physically readable,
+and whether stopping preserves the amplitude phase.  This chapter records the
+exact finite alternatives developed between the marked bi-Hankel and the final
+read-resolved process theorems.
+
+\section{Marked histories as graph-localized packet operators}
+
+Let \(X\) be a finite past-control space and \(\mathcal F\) a complete future
+space.  Let
+\[
+ V:X\longrightarrow\mathcal F,
+ \qquad
+ W:X\longrightarrow\mathcal F
+\]
+be respectively the ordinary future synthesis and the synthesis with one
+physical marked insertion.  Put
+\[
+ H=V^*V,
+ \qquad C=V^*W,
+ \qquad K=W^*W,
+\]
+and let
+\[
+ P_H=HH^\dagger,
+ \qquad P_V=VV^\dagger
+\]
+be the orthogonal projections onto \((\ker V)^\perp\) and \(\Ran V\).
+
+\begin{maintheorem}[Marked graph-localization theorem]
+\label{thm:v6-marked-graph-localization}
+Define the domain-null and range defects
+\[
+ \Delta_{\rm dom}^{\bullet}
+ =\norm{W(I-P_H)}_{\HS}^2,
+\]
+\[
+ \mathfrak S_{\rm ran}^{\bullet}
+ =K-C^*H^\dagger C.
+\]
+Then
+\[
+ \boxed{
+ \mathfrak S_{\rm ran}^{\bullet}
+ =W^*(I-P_V)W\succeq0.}
+\]
+The following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.8em]
+\item \(\Delta_{\rm dom}^{\bullet}=0\) and
+      \(\mathfrak S_{\rm ran}^{\bullet}=0\);
+\item there is a unique operator
+      \(D_\bullet:\Ran V\to\Ran V\) such that
+      \[
+       \boxed{W=D_\bullet V;}
+      \]
+\item the marked experiment vanishes on every ordinary future-null past
+      combination and creates no future mode outside the ordinary packet.
+\end{enumerate}
+On this branch
+\[
+ C=V^*D_\bullet V,
+ \qquad
+ K=V^*D_\bullet^*D_\bullet V,
+\]
+and
+\[
+ \boxed{D_\bullet=D_\bullet^*\iff C=C^*.}
+\]
+\end{maintheorem}
+
+\begin{proof}
+The standard range identity
+\[
+ V(V^*V)^\dagger V^*=P_V
+\]
+gives
+\[
+ C^*H^\dagger C
+ =W^*V(V^*V)^\dagger V^*W
+ =W^*P_VW,
+\]
+which proves positivity of the range residual.  The domain defect vanishes
+exactly when \(\ker V\subseteq\ker W\).  Hence the rule
+\(D_\bullet(Vx)=Wx\) is well defined.  The range residual vanishes exactly
+when \(\Ran W\subseteq\Ran V\), so this rule maps \(\Ran V\) into itself.
+Uniqueness follows because \(V X\) spans \(\Ran V\).  The converse is
+immediate from \(W=D_\bullet V\).  Finally,
+\[
+ C=C^*
+ \iff
+ \langle Vx,D_\bullet Vy\rangle
+ =\langle D_\bullet Vx,Vy\rangle
+\]
+for all \(x,y\); since \(VX\) spans the packet, this is exactly
+self-adjointness of \(D_\bullet\).
+\end{proof}
+
+\begin{countertheorem}[One synchronized control can miss a nonzero insertion]
+\label{cth:v6-two-clock-firewall}
+Let
+\[
+ M=\begin{pmatrix}a&0\\0&b\end{pmatrix},
+ \qquad
+ S=\frac{1}{\sqrt2}\binom11,
+ \qquad
+ D=\begin{pmatrix}0&i\\-i&0\end{pmatrix},
+ \qquad a\ne b.
+\]
+Then \(D=D^*\ne0\), but
+\[
+ \boxed{
+ S^*(I-zM)^{-1}D(I-zM)^{-1}S=0
+ }
+\]
+for every \(z\).  With independent prefix and suffix clocks,
+\[
+ \boxed{
+ S^*(I-zM)^{-1}D(I-wM)^{-1}S
+ =\frac{i(a-b)(z-w)}
+ {2(1-az)(1-bz)(1-aw)(1-bw)},}
+\]
+which is generically nonzero.
+\end{countertheorem}
+
+\begin{proof}
+The equal-clock expression is the sum of two opposite off-diagonal matrix
+coefficients of equal magnitude.  With two clocks the numerator is
+\[
+ \frac{i}{2}\left[
+ \frac{1}{(1-az)(1-bw)}
+ -\frac{1}{(1-bz)(1-aw)}
+ \right],
+\]
+which simplifies to the displayed formula.
+\end{proof}
+
+Thus a position mark or two independent clock controls is load bearing; a
+single derivative of \(S^*M(u)^nS\) sees only anti-diagonal sums of the
+bi-Hankel panel.
+
+\begin{theorem}[Operator-valued first-return reconstruction]
+\label{thm:v6-first-return}
+Let a positive transfer on
+\(\mathcal K\oplus\mathcal Q\) have block form
+\[
+ T=\begin{pmatrix}C&A^*\\A&F\end{pmatrix},
+ \qquad \norm F<1.
+\]
+The complete transfer that leaves \(\mathcal K\), evolves in
+\(\mathcal Q\), and first returns to \(\mathcal K\) is
+\[
+ \boxed{T_{\rm ret}=C+A^*(I-F)^{-1}A.}
+\]
+Its first-return kernels are
+\[
+ K_1=C,
+ \qquad
+ K_n=A^*F^{n-2}A\quad(n\ge2),
+\]
+and the truncation error obeys
+\[
+ \boxed{
+ \norm{T_{\rm ret}-\sum_{n=1}^{N}K_n}
+ \le \frac{\norm{A}^2\norm{F}^{N-1}}{1-\norm{F}}.}
+\]
+If \(M_n=PT^nP\) and \(M_0=I\), then the kernels are reconstructed
+recursively by
+\[
+ \boxed{K_n=M_n-\sum_{j=1}^{n-1}K_jM_{n-j}.}
+\]
+\end{theorem}
+
+\begin{proof}
+The geometric series for \((I-F)^{-1}\) gives the first two formulas and the
+norm bound.  Every path contributing to \(M_n\) has a unique first-return
+time \(j\), after which an arbitrary compressed path of length \(n-j\)
+remains.  Hence
+\(M_n=\sum_{j=1}^nK_jM_{n-j}\), which gives the recursion.
+\end{proof}
+
+\section{Coherent graph birth versus positive innovation}
+
+\begin{maintheorem}[Choi graph--innovation decomposition]
+\label{thm:v6-choi-graph-innovation}
+Let
+\[
+ J=\begin{pmatrix}A&B\\B^*&C\end{pmatrix}\succeq0
+\]
+relative to an old Choi support and its orthogonal complement.  Then
+\[
+ \Ran B\subseteq\Ran A.
+\]
+Define
+\[
+ G=B^*A^\dagger,
+ \qquad
+ K=C-B^*A^\dagger B.
+\]
+Then
+\[
+ \boxed{
+ J=
+ \begin{pmatrix}I\\G\end{pmatrix}
+ A
+ \begin{pmatrix}I&G^*\end{pmatrix}
+ +
+ \begin{pmatrix}0&0\\0&K\end{pmatrix},
+ \qquad K\succeq0,}
+\]
+and
+\[
+ \boxed{\rank J=\rank A+\rank K.}
+\]
+The first term is the coherent graph deformation of the old minimal Kraus
+space; \(K\) is the positive innovation requiring genuinely new Kraus modes.
+\end{maintheorem}
+
+\begin{proof}
+If \(x\in\ker A\), positivity of the quadratic form on
+\(x\oplus ty\), for arbitrary complex \(t\), forces
+\(\langle x,By\rangle=0\).  Hence \(\Ran B\subseteq\Ran A\).
+The generalized Schur complement theorem gives \(K\succeq0\).  The range
+condition gives \(AA^\dagger B=B\), and direct multiplication proves the
+factorization.  A block-triangular congruence transforms \(J\) to
+\(A\oplus K\), proving rank additivity.
+\end{proof}
+
+\begin{countertheorem}[Record dephasing converts coherence into innovation]
+\label{cth:v6-record-dephasing}
+Let \(K_0,K_1\) be isometries with orthogonal ranges and
+\[
+ V_\theta(u)=\sqrt{1-u^2}\,K_0\otimes|0\rangle
+ +ue^{i\theta}K_1\otimes|1\rangle.
+\]
+The joint pre-dephasing Choi matrix has rank one and zero innovation.  After
+tracing or dephasing the record, the cross block vanishes and the new branch
+appears entirely as the positive innovation
+\[
+ u^2\,|K_1\rangle\!\rangle\langle\!\langle K_1|.
+\]
+All reduced channels are independent of \(\theta\).
+\end{countertheorem}
+
+\begin{proof}
+Before dephasing the two columns belong to one coherent vector, so the Schur
+complement is zero.  Record dephasing deletes the off-diagonal outer products
+while retaining both diagonal outer products.  The second diagonal direction
+is orthogonal to the old support and is therefore exactly the innovation.
+\end{proof}
+
+\section{Canonical infinitesimal source and reversible-control firewalls}
+
+Let \(|\Omega\rangle=d^{-1/2}\sum_j|j\rangle\otimes|j\rangle\),
+\(P_\Omega=|\Omega\rangle\langle\Omega|\), and
+\(Q_\Omega=I-P_\Omega\).
+
+\begin{maintheorem}[Canonical Choi-tangent decomposition]
+\label{thm:v6-choi-tangent}
+Let \(J(t)\) be a one-sided differentiable CPTP germ with
+\(J(0)=P_\Omega\), and put \(X=\dot J(0^+)\).  Then
+\[
+ \boxed{C:=Q_\Omega XQ_\Omega\succeq0.}
+\]
+Choose a factorization
+\[
+ C=\sum_\alpha|L_\alpha\rangle\!\rangle
+ \langle\!\langle L_\alpha|,
+ \qquad \Tr L_\alpha=0.
+\]
+There is a unique traceless Hermitian \(H_{\rm can}\) such that the channel
+derivative is
+\[
+ \boxed{
+ \mathcal L_*(\rho)
+ =-i[H_{\rm can},\rho]
+ +\sum_\alpha L_\alpha\rho L_\alpha^*
+ -\frac12\left\{\sum_\alpha L_\alpha^*L_\alpha,\rho\right\}.}
+\]
+The positive covariance \(C\) and \(H_{\rm can}\) are intrinsic; the
+individual \(L_\alpha\) are unique only up to a unitary noise-index rotation.
+If the same germ is CPTP for both positive and negative parameter values, then
+\[
+ \boxed{C=0,}
+\]
+so the first derivative is purely Hamiltonian.
+\end{maintheorem}
+
+\begin{proof}
+For \(v\perp\Omega\), positivity of \(J(t)\) and
+\(\langle v,J(0)v\rangle=0\) give
+\(\langle v,Xv\rangle\ge0\), proving conditional positivity.  Factor
+\(C\) and remove scalar parts from the factor operators.  The trace-preserving
+identity fixes the Hermitian part of the remaining Choi row and column to
+\(-\frac12\sum L_\alpha^*L_\alpha\); their anti-Hermitian part is uniquely
+\(-iH_{\rm can}\) after fixing \(\Tr H_{\rm can}=0\).  Applying the same
+argument to \(J(-t)\) gives \(-C\succeq0\) on a two-sided germ, hence
+\(C=0\).
+\end{proof}
+
+\begin{corollary}[Linear jump birth and quadratic coherent birth]
+\label{cor:v6-birth-orders}
+Let \(P_s,P_t\) be orthogonal supports, let
+\(\rho=P_s\rho P_s\), and let
+\(p_{t\leftarrow s}(\tau)=\Tr(P_t e^{\tau\mathcal L_*}(\rho))\).
+Then
+\[
+ \left.\frac{\dd}{\dd\tau}\right|_{0^+}p_{t\leftarrow s}(\tau)
+ =\sum_\alpha\Tr(P_tL_\alpha\rho L_\alpha^*P_t).
+\]
+If every \(L_\alpha\) is block preserving, then
+\[
+ \boxed{
+ p_{t\leftarrow s}(\tau)
+ =\tau^2\Tr(P_tH_{\rm can}\rho H_{\rm can}P_t)+O(\tau^3).}
+\]
+Thus dissipative support birth is linear in operational time, while a purely
+coherent support rotation is quadratic in transition probability.
+\end{corollary}
+
+\begin{proof}
+Differentiate the semigroup at zero.  The commutator and anticommutator have
+zero target diagonal on a source-supported state, leaving the jump term.  If
+the jumps are block preserving, all dissipative terms preserve diagonal and
+off-diagonal support type.  In the second derivative only the double
+Hamiltonian commutator contributes to the target diagonal, giving the stated
+coefficient.
+\end{proof}
+
+\begin{maintheorem}[Signed local control group is Hamiltonian]
+\label{thm:v6-local-group-hamiltonian}
+Let \((\Phi_t)_{|t|<\varepsilon}\) be a norm-continuous local group of CPTP
+maps with \(\Phi_0=\id\) and \(\Phi_s\Phi_t=\Phi_{s+t}\) whenever defined.
+Then there is a unique traceless Hermitian \(H\) such that
+\[
+ \boxed{\Phi_t(A)=e^{-itH}Ae^{itH}.}
+\]
+No differentiability hypothesis is required.
+\end{maintheorem}
+
+\begin{proof}
+The inverse \(\Phi_{-t}\) is CPTP, so the UCP inverse theorem makes every
+\(\Phi_t\) a \(*\)-automorphism.  Near the identity the principal
+superoperator logarithm is defined.  The group law and uniqueness of the
+small logarithm make it additive; continuity makes it linear in \(t\).  Its
+generator is a \(*\)-derivation.  Every derivation of a full finite matrix
+algebra is inner, and removal of the scalar part makes the implementing
+Hermitian unique.
+\end{proof}
+
+\begin{countertheorem}[Endpoint channels do not determine winding]
+\label{cth:v6-winding}
+On \(\C^2\), let \(H=\pi\sigma_x\) and
+\(\Phi_t=\Ad(e^{-itH})\).  Then
+\[
+ \Phi_1=\id,
+\]
+but
+\[
+ \Tr\bigl(|1\rangle\langle1|\,
+ \Phi_t(|0\rangle\langle0|)\bigr)=\sin^2(\pi t).
+\]
+Thus the identity endpoint can hide a maximally support-changing Hamiltonian
+loop; one endpoint logarithm cannot identify the microscopic path.
+\end{countertheorem}
+
+\section{Control incidence and the no-hidden-switch theorem}
+
+Let a controlled Store have an isometric realization
+\[
+ V:\mathcal H\otimes\mathcal C
+ \longrightarrow\mathcal H_{\rm out}\otimes\mathcal E.
+\]
+For support projections \(P_s,P_t\), define
+\[
+ (\mathscr B_{t\mid s}c)x
+ =\frac{1}{\sqrt{r_s}}(P_t\otimes I)V(P_sx\otimes c),
+ \qquad r_s=\Tr P_s,
+\]
+and
+\[
+ E_{t\mid s}^{\rm ctrl}=\mathscr B_{t\mid s}^*
+ \mathscr B_{t\mid s}\succeq0.
+\]
+
+\begin{maintheorem}[No-hidden-switch incidence theorem]
+\label{thm:v6-no-hidden-switch}
+The following are equivalent:
+\[
+ \boxed{
+ E_{t\mid s}^{\rm ctrl}=0
+ \iff
+ \mathscr B_{t\mid s}=0
+ \iff
+ (P_t\otimes I)V(P_s\otimes I_{\mathcal C})=0.}
+\]
+If an orthonormal control basis \((c_a)\) is physically preparable, the
+resolved tests
+\[
+ \langle c_a,E_{t\mid s}^{\rm ctrl}c_a\rangle=0
+ \quad\text{for every }a
+\]
+already imply the complete zero theorem for every coherent control
+superposition and every source--control entangled input.
+\end{maintheorem}
+
+\begin{proof}
+The first equivalence is the Gram identity.  The definition of
+\(\mathscr B_{t\mid s}\) gives the second.  If all diagonal basis matrix
+coefficients of a positive operator vanish, then
+\(E^{1/2}c_a=0\) for every basis vector, so \(E=0\).
+\end{proof}
+
+\begin{theorem}[Coherent-comb support-ideal theorem]
+\label{thm:v6-comb-ideal}
+Let \((P_s)\) be a fixed support refinement and
+\[
+ \mathfrak D=\{K:[K,P_s]=0\text{ for every }s\}.
+\]
+Any finite coherent network built from system-bearing coefficients in
+\(\mathfrak D\), arbitrary ancillas, ancilla-only channels, serial and
+parallel composition, adaptive feedback, postselection, partial traces, and
+coherent permutations of causal order has every effective system Kraus
+coefficient in \(\mathfrak D\).  In particular, coherent control cannot create
+a support transition absent from every primitive system coefficient.
+\end{theorem}
+
+\begin{proof}
+The algebra \(\mathfrak D\) is closed under sums, products, adjoints, and norm
+limits.  Tensoring with ancilla operators preserves block diagonality in the
+system factor.  Every postselected or traced branch is an ancilla matrix
+coefficient of a sum of products of primitive coefficients, and hence remains
+in \(\mathfrak D\).  A coherent order superposition changes only the scalar or
+ancilla coefficients multiplying those products.
+\end{proof}
+
+\section{Sharp record cores from physical refinement data}
+
+Let a physical instrument have total Choi matrix \(J\) and branch Choi
+matrices \(J_\alpha\succeq0\), \(\sum_\alpha J_\alpha=J\).  Put
+\(P=\supp J\) and
+\[
+ F_\alpha=J^{\dagger/2}J_\alpha J^{\dagger/2}.
+\]
+
+\begin{maintheorem}[Choi whitening and the finest physical sharp coarse core]
+\label{thm:v6-sharp-core}
+The map
+\[
+ X\longmapsto J^{\dagger/2}XJ^{\dagger/2}
+\]
+is an affine order isomorphism from \([0,J]\) to the effect interval
+\([0,P]\), with inverse \(F\mapsto J^{1/2}FJ^{1/2}\).  The branch effects
+satisfy \(\sum_\alpha F_\alpha=P\).
+
+Define the outcome channel
+\[
+ \mathscr R_F:\C^{A}\to P\mathcal B(\Ran P)P,
+ \qquad
+ \mathscr R_F(x)=\sum_\alpha x_\alpha F_\alpha,
+\]
+and the finite Gram
+\[
+ (\mathbb G_{\rm out})_{\alpha\beta}
+ =\delta_{\alpha\beta}\Tr F_\alpha
+ -\Tr(F_\alpha F_\beta).
+\]
+Then
+\[
+ \boxed{\mathbb G_{\rm out}\succeq0,
+ \qquad \ker\mathbb G_{\rm out}=\operatorname{MD}(\mathscr R_F).}
+\]
+The kernel is the algebra of functions constant on a unique partition
+\(A=C_1\sqcup\cdots\sqcup C_q\).  The coarse effects
+\[
+ \boxed{q_j=\sum_{\alpha\in C_j}F_\alpha}
+\]
+form the unique finest PVM obtainable by coarse-graining the actual physical
+outcomes.
+\end{maintheorem}
+
+\begin{proof}
+If \(0\le X\le J\), positivity implies \(\Ran X\subseteq\Ran J\); multiplying
+by the pseudoinverse proves the order isomorphism.  For \(x\in\C^A\),
+\[
+ x^*\mathbb G_{\rm out}x
+ =\Tr\bigl(\mathscr R_F(x^*x)
+ -\mathscr R_F(x)^*\mathscr R_F(x)\bigr)\ge0
+\]
+by Kadison--Schwarz.  The operator inside the trace is positive, so zero trace
+is equivalent to zero defect.  Applying the same statement to \(xx^*\) gives
+the multiplicative domain.  Every unital subalgebra of \(\C^A\) is the
+algebra of functions constant on a unique partition, and the restriction of a
+UCP map to its multiplicative domain is a \(*\)-homomorphism.  Hence the images
+of the partition indicators are orthogonal projections.  Maximality of the
+multiplicative domain gives finestness and uniqueness.
+\end{proof}
+
+\begin{theorem}[Persistent-profile accessibility]
+\label{thm:v6-profile-access}
+Assume an actual repeated instrument preserves a sharp PVM
+\((q_j)_{j=1}^r\) branch by branch and, conditional on sector \(j\), emits
+outcome \(\alpha\) with probability \(\kappa_{\alpha j}\).  If the profile
+vectors \(\kappa_j\) are pairwise distinct, then coarse-graining the physical
+length-\(n\) word POVM by nearest empirical profile gives physical effects
+\(Q_j^{(n)}\) satisfying
+\[
+ \boxed{
+ \norm{Q_j^{(n)}-q_j}
+ \le 2|A|\exp\left[-\frac{n d_{\rm prof}^2}{2|A|}\right],
+ \qquad
+ d_{\rm prof}=\min_{j\ne k}\norm{\kappa_j-\kappa_k}_2.}
+\]
+Thus the PVM is physically accessible in the complete-future norm closure.
+\end{theorem}
+
+\begin{proof}
+Branch preservation makes every word effect block diagonal in the \(q_j\)
+sectors, and the conditional word law is the product law with profile
+\(\kappa_j\).  If every empirical coordinate differs from its expectation by
+less than \(d_{\rm prof}/(2\sqrt{|A|})\), nearest-profile classification is
+correct.  Hoeffding's inequality and a union bound give the displayed error.
+The operator norm is the largest sectorwise misclassification probability.
+\end{proof}
+
+\section{Complete quantum-output observability}
+
+Let
+\[
+ V:\mathcal K\to\mathcal K\otimes\mathcal Y
+\]
+be a stationary repeated-output isometry and
+\[
+ \Phi(A)=V^*(A\otimes I)V.
+\]
+For a candidate sector PVM \((p_j)\), let \(\sigma_j^{(n)}\) be the complete
+\(n\)-output state generated from \(p_j/\Tr p_j\), and put
+\[
+ \mathcal S_n=\Ran\Phi^n.
+\]
+
+\begin{maintheorem}[Finite quantum-output readability]
+\label{thm:v6-quantum-readability}
+The operator systems form a decreasing chain
+\[
+ \mathcal B(\mathcal K)=\mathcal S_0
+ \supseteq\mathcal S_1\supseteq\cdots
+\]
+which stabilizes after at most \((\dim\mathcal K)^2-1\) strict decreases.  For
+a fixed depth \(n\), the following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.8em]
+\item there is an output POVM \((M_j)\) with
+      \(\mathcal E_n^*(M_j)=p_j\);
+\item the supports of \(\sigma_j^{(n)}\) are pairwise orthogonal;
+\item \(p_j\mathcal S_np_k=0\) for all \(j\ne k\);
+\item the finite defect
+      \[
+       \delta_{\rm qsync}(n)^2
+       =\norm{(A\mapsto(p_j\Phi^n(A)p_k)_{j\ne k})}_{\HS}^2
+      \]
+      vanishes.
+\end{enumerate}
+If exact readability occurs at any depth, it occurs by depth at most
+\((\dim\mathcal K)^2\).
+\end{maintheorem}
+
+\begin{proof}
+The range chain decreases because
+\(\Ran\Phi^{n+1}=\Phi^n(\Ran\Phi)\subseteq\Ran\Phi^n\), and finite dimension
+gives stabilization.  Choosing a basis of the final memory in the iterated
+isometry gives Kraus products
+\(L_\mu^{(n)*}L_\nu^{(n)}=\Phi^n(E_{\mu\nu})\).  A direct Hilbert--Schmidt
+calculation yields
+\[
+ \delta_{\rm qsync}(n)^2
+ =2\sum_{j<k}(\Tr p_j)(\Tr p_k)
+ \Tr(\sigma_j^{(n)}\sigma_k^{(n)}).
+\]
+The defect therefore vanishes exactly when the output supports are orthogonal,
+which is equivalent to a perfect discriminating output PVM.  Pulling that PVM
+back gives the sector projections; positivity kills all unwanted off-diagonal
+blocks.  Stabilization gives the finite cutoff.
+\end{proof}
+
+Let \(\mathscr C(A)=(p_jAp_k)_{j\ne k}\) and
+\[
+ \mathcal N_\infty=\bigcap_{m\ge0}\ker(\mathscr C\Phi^m).
+\]
+The induced finite map on the quotient is denoted
+\(\widehat\Phi_{\rm conf}\).
+
+\begin{corollary}[Finite confusability spectrum]
+\label{cor:v6-confusability-spectrum}
+\[
+ \boxed{
+ \rho(\widehat\Phi_{\rm conf})<1
+ \iff
+ \norm{\mathscr C\Phi^n}\longrightarrow0.}
+\]
+On this branch the complete output sector states become asymptotically
+orthogonal at an exponential rate.  If the spectral radius is one, a
+peripheral generalized eigenvector supplies an explicit nondecaying hidden
+confusability witness.
+\end{corollary}
+
+\begin{proof}
+After quotienting the common all-time kernel, \(\mathscr C\) is observable on
+every nonzero invariant mode.  Finite-dimensional spectral decomposition gives
+exponential decay exactly when every eigenvalue has modulus less than one.  A
+unit-modulus spectral component yields the stated persistent witness.
+\end{proof}
+
+The output POVM furnished by this theorem is mathematical.  Declaring it a
+physical Read still requires inclusion of its sufficient output algebra in the
+admitted Read algebra or an equivalent joint-instrument certificate.
+
+\section{Cross-length coherence and terminal-interface corrections}
+
+\begin{firewall}[Equal-horizon data leave a clock character]
+\label{fw:v6-clock-character}
+If a coherent cylinder kernel \(G(u,v)\) is positive and shift consistent, then
+for every \(\phi\in\R\),
+\[
+ \boxed{
+ G_\phi(u,v)=e^{i\phi(|v|-|u|)}G(u,v)}
+\]
+is also positive and shift consistent and has identical equal-horizon blocks.
+Thus same-length output tomography does not determine a cross-length amplitude
+frame.
+\end{firewall}
+
+\begin{proof}
+Multiply every word synthesis column \(B_u\) by
+\(e^{i\phi|u|}\).  This is a unitary diagonal rephasing of the synthesis, so
+all Grams remain positive.  Appending one letter multiplies both columns in a
+shift-consistency identity by the same phase.  Equal-length phases cancel.
+\end{proof}
+
+Let
+\[
+ V_\bot:\mathcal K_\bot\to
+ \mathcal K_\bot\otimes\mathcal E_\bot
+\]
+be the minimal Stinespring isometry of one terminal-padding cell and let
+\[
+ L:\mathcal K_{\rm run}\to
+ \mathcal K_\bot\otimes\mathcal E_\bot
+\]
+be the first-stop column in the same pre-dephasing writer space.
+
+\begin{maintheorem}[Terminal Stinespring-defect theorem]
+\label{thm:v6-terminal-defect}
+Put
+\[
+ P_{\rm pad}=V_\bot V_\bot^*,
+ \qquad
+ \mathcal D_\bot=I-P_{\rm pad}.
+\]
+Common-cell isometry requires
+\[
+ \boxed{V_\bot^*L=0
+ \iff L=\mathcal D_\bot L.}
+\]
+If
+\[
+ r_\bot=\dim\mathcal K_\bot,
+ \qquad e_\bot=\dim\mathcal E_\bot,
+ \qquad \ell=\rank L,
+\]
+then
+\[
+ \boxed{\ell\le r_\bot(e_\bot-1).}
+\]
+Conversely this inequality is sufficient for a first-stop column with any
+prescribed effect \(L^*L=A\), \(0\le A\le I\).  Hence the minimum terminal
+writer dimension is
+\[
+ \boxed{e_\bot^{\min}=1+\left\lceil\frac{\ell}{r_\bot}\right\rceil.}
+\]
+In particular, terminal writer rank one forces \(L=0\) on a finite terminal
+carrier.
+\end{maintheorem}
+
+\begin{proof}
+The two columns of a common row isometry are orthogonal, giving
+\(V_\bot^*L=0\).  This is equivalent to the range of \(L\) lying in the
+orthogonal complement of \(\Ran V_\bot\).  Since \(V_\bot\) is an isometry,
+\[
+ \dim\Ran\mathcal D_\bot
+ =r_\bot e_\bot-r_\bot=r_\bot(e_\bot-1),
+\]
+which proves necessity.  Conversely choose an isometry from \(\supp A\) into
+the defect space and compose it with \(A^{1/2}\).  The rank-one conclusion is
+the case of zero defect dimension.
+\end{proof}
+
+\begin{countertheorem}[Separate endpoint CP maps do not determine the stop interface]
+\label{cth:v6-stop-interface}
+Let the running and terminal memories be one dimensional and the writer be
+\(\C^2\).  Set
+\[
+ V_\bot1=|0\rangle,
+ \qquad
+ L_\theta1=\sqrt a
+ (\cos\theta|0\rangle+\sin\theta|1\rangle).
+\]
+For every \(\theta\), the reduced terminal channel and first-stop effect are
+the same, but
+\[
+ \boxed{\norm{V_\bot^*L_\theta}^2=a\cos^2\theta.}
+\]
+Thus the compatible coherent interface is not determined by the two endpoint
+CP maps.
+\end{countertheorem}
+
+A general terminal channel also requires its complete coherent word kernel.
+For example,
+\[
+ T_0=\frac{1}{\sqrt2},
+ \qquad T_1=\frac{e^{i\theta}}{\sqrt2}
+\]
+has the identity reduced channel and uniform classical word probabilities for
+every \(\theta\), while
+\[
+ G_\theta(u,v)
+ =2^{-(|u|+|v|)/2}
+ e^{i\theta(N_1(v)-N_1(u))}
+\]
+retains the writer phase.  Age-only moments and reduced channels are therefore
+insufficient.
+
+\begin{ledger}[Operational hierarchy retained in the V6 chain]
+\label{led:v6-access-hierarchy}
+\begin{center}
+\begin{tabularx}{0.97\textwidth}{@{}p{0.32\textwidth}cX@{}}
+\toprule
+Question & Status & Exact finite decision\\
+\midrule
+Does a marked history act on the ordinary packet?
+& \statusE & Domain-null and range Schur defects.\\
+Does support birth use old coherent modes or new Kraus modes?
+& \statusE & Choi graph--innovation decomposition.\\
+Is an infinitesimal source Hamiltonian or dissipative?
+& \statusE & Canonical Choi tangent \((C,H_{\rm can})\).\\
+Can a quantum switch create an absent edge?
+& \statusE/\statusX & No-hidden-switch and support-ideal theorems.\\
+Does the physical outcome panel contain a sharp record?
+& \statusE & Choi-whitened multiplicative-domain Gram.\\
+Can the complete output distinguish sectors?
+& \statusE & Quantum-output cross-corner defect and confusability spectrum.\\
+Is a cross-length or stop phase retained?
+& \statusE & Clock-character and terminal-defect firewalls.\\
+Has the bare source supplied the required panels?
+& \statusO & The actual pre-central coherent process remains unexported.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{ledger}
+
+\chapter{Read-resolved process closure and the native sign instrument}
+\label{ch:v6-process}
+
+\section{RN-anchored process-GNS reconstruction}
+Let \(J\) be the unresolved matter-occurrence Choi matrix and
+\(\mathcal E_J=\Ran J\) its minimal Radon--Nikodym source carrier.  Suppose the
+actual experiment exports an operator-valued word kernel \(\mathsf G(u,v)\) and a
+terminal kernel \(\mathsf D_\bullet(u,v)\) satisfying positivity, normalization,
+and
+\[
+ \mathsf G(u,v)=\mathsf D_\bullet(u,v)
+ +\sum_{a\in\mathsf A}\mathsf G(ua,va).
+\]
+
+\begin{maintheorem}[RN-anchored process reconstruction]
+\label{thm:v6-process-gns}
+The kernel reconstructs, uniquely up to one source-fixing unitary,
+\[
+ \boxed{(\mathcal K_{\rm ref},S,\{T_a\},L)}
+\]
+with
+\[
+ S^*S=I,
+ \qquad L^*L+\sum_aT_a^*T_a=I,
+ \qquad \mathsf G(u,v)=S^*T_u^*T_vS.
+\]
+For
+\[
+ \mathcal K_d=\Span\{T_wSx:|w|\le d\},
+\]
+the next block-Hankel Schur complement is positive and satisfies
+\[
+ \boxed{\rank\mathfrak S_{d+1}^{\rm mem}
+ =\dim(\mathcal K_{d+1}\ominus\mathcal K_d).}
+\]
+It vanishes exactly when \(\mathcal K_d\) is invariant under all continuation
+shifts and hence equals the complete source-cyclic process memory.
+\end{maintheorem}
+
+\begin{proof}
+Take the algebraic word-source space, quotient by the nullspace of the positive
+kernel, and complete.  Left word extension defines \(T_a\); the renewal identity
+gives the row-isometry defect and terminal map \(L\).  Equal cyclic word Grams
+produce the unique source-fixing unitary between any two realizations.  The
+Schur complement is the Gram of the orthogonal residual at the next depth,
+which proves the rank and flatness statements.
+\end{proof}
+
+The one-step RN carrier \(S\mathcal E_J\) is dynamically complete exactly when
+\[
+ \boxed{\mathbb E_{\rm esc}
+ =[S^*T_a^*(I-SS^*)T_bS]_{a,b}=0.}
+\]
+A positive rank is the first missing process-memory multiplicity and must be
+retained.
+
+\section{Finite word grammar and the all-depth bridge}
+At memory flatness define the physical append maps
+\[
+ \widehat{\mathcal R}_a(X)=T_a^*XT_a.
+\]
+For a word \(w\), the physical effect on the original RN source and its dominated
+Choi branch are
+\[
+ \boxed{F_w^J=S^*T_w^*T_wS,
+ \qquad X_w=J^{1/2}F_w^JJ^{1/2}.}
+\]
+The real span of word effects has a positive Gram shell.  One vanishing shell
+makes the span invariant under every append map and proves all-depth closure
+for the declared primitive alphabet.
+
+Let \(P_+\) and \(P_\mu\) be the source-derived even and Maslov projectors.  For an
+orthonormal basis \(E_{d,k}\) of the flat effect span put
+\[
+ C_{d,k}=P_+S^*E_{d,k}SP_\mu,
+ \qquad
+ \mathbb G_{\mu,d}^{\rm pull}=\sum_kC_{d,k}^*C_{d,k}.
+\]
+
+\begin{maintheorem}[Flat all-depth sign alternative]
+\label{thm:v6-sign-alternative}
+At the first flat effect depth exactly one branch occurs:
+\begin{enumerate}[label=\textup{(B\arabic*)},leftmargin=2.8em]
+\item \(\mathbb G_{\mu,d}^{\rm pull}=0\), in which case
+      \(P_+F_w^JP_\mu=0\) for every physical word;
+\item there is an earliest physical word \(w\) with
+      \(P_+F_w^JP_\mu\ne0\).  If \(\Theta_r\) is the physical odd-turn action, then
+      \[
+       \boxed{
+       \begin{aligned}
+       J_+^{(w)}&=\tfrac12(X_w+J-\Theta_r(X_w)),\\
+       J_-^{(w)}&=\tfrac12(J-X_w+\Theta_r(X_w))
+       \end{aligned}}
+      \]
+      are positive, sum to \(J\), are exchanged by the odd turn, and form one
+      physical sign instrument.
+\end{enumerate}
+\end{maintheorem}
+
+\begin{proof}
+At effect flatness the basis spans every word effect, so zero Gram is
+equivalent to zero bridge for all words.  On the positive branch finiteness
+gives an earliest word.  Its branch, odd conjugate, complements, and equal
+classical mixtures are physical; the displayed formulas are those mixtures.
+Their contrast is \(X_w-\Theta_r(X_w)\) and retains twice the nonzero bridge.
+\end{proof}
+
+All scalar word probabilities can agree while the update grammar differs: the
+families \(T_0=T_1=I/2\) and \(T_0=I/2,T_1=H/2\) have identical
+\(T_w^*T_w=4^{-|w|}I\), but transport a non-scalar future effect differently.
+Thus the non-scalar read-resolved kernel is load bearing.
+
+\section{Native coefficient algebra, type saturation, and stopping}
+For a resolved branch Choi matrix \(J_a\), the canonical coefficient space is
+\[
+ \mathcal V_a=\operatorname{unvec}(\Ran J_a).
+\]
+It equals the span of every Kraus family of the branch.  Finite product closure
+of \(I,\mathcal V_a,\mathcal V_a^*\) gives the physical one-step coefficient
+algebra \(\mathcal A_\Phi\).
+
+\begin{theorem}[Native qubit and multiplicity certificate]
+\label{thm:v6-native-qubit}
+The algebra is \(M_2(\C)\) exactly when
+\[
+ \boxed{\dim_\C\mathcal A_\Phi=4,
+ \qquad \dim_\C Z(\mathcal A_\Phi)=1.}
+\]
+Its represented carrier then has form
+\[
+ \mathcal K\cong\C^2\otimes\C^{m_\Phi},
+ \qquad \mathcal A_\Phi=M_2(\C)\otimes I_{m_\Phi},
+\]
+and
+\[
+ \boxed{\dim_\C\mathcal A_\Phi'=m_\Phi^2.}
+\]
+\end{theorem}
+
+\begin{proof}
+A four-dimensional simple complex \(C^*\)-algebra is \(M_2(\C)\).  The
+representation theory of a full matrix algebra gives the tensor factorization
+and identifies the commutant with \(M_{m_\Phi}(\C)\).
+\end{proof}
+
+Only after this factor is source derived is the intrinsic Choi--Lie covariance
+computed.  For its real traceless quadratures,
+\[
+ \boxed{C^*(K_\alpha)=M_2(\C)
+ \iff \rank Q_\Phi\ge2
+ \iff \det\left(Q_\Phi+\frac{\adj(Q_\Phi)}{\Tr Q_\Phi}\right)>0.}
+\]
+
+After nuisance shorting, the common typed Hankel matrix
+\[
+ \mathbb H_d^{\rm type}=[S_e^*M^{i+j}S_f]_{e,f,i,j}
+\]
+has positive Schur shells whose ranks are the new future-visible typed modes.
+A zero shell fixes the complete type packet up to one common unitary.  The
+five-support matter tree is accepted only if its derived support count, degree
+pattern, grading, left/right edge, portal edges, and absence of extra edges all
+pass in this common frame.
+
+For a physical stopping contraction \(R_{\rm stop}\),
+\[
+ G_e^{\rm stop}=S_e^*R_{\rm stop}^*R_{\rm stop}S_e,
+ \qquad
+ L_e^{\rm stop}=S_e^*(I-R_{\rm stop}^*R_{\rm stop})S_e\succeq0.
+\]
+The rank loss is \(\dim(\Ran S_e\cap\ker R_{\rm stop})\).  Stopping may erase
+an existing source but cannot create a type or edge absent beforehand.
+
+\chapter{Marked common-frame reconstruction of the finite Dirac operator}
+\label{ch:v6-marked-dirac}
+
+\section{Ordinary flatness and the missing marked datum}
+Let \(M=M^*\) be the stable future transport and
+\(S:\mathcal P\to\mathcal K\) the complete mixed six-port source.  The ordinary
+moments
+\[
+ \mathsf M_n=S^*M^nS
+\]
+reconstruct \(M,S\) on the source-cyclic packet but cannot determine an
+independently varying grading-odd operator \(D\).  The minimal coherent extra
+datum is the one-insertion panel
+\[
+ \boxed{\mathbb N_d(D)=[S^*M^iDM^jS]_{0\le i,j\le d}.}
+\]
+
+Define
+\[
+ \mathbb H_d=[\mathsf M_{i+j}]_{0\le i,j\le d}.
+\]
+
+\begin{maintheorem}[Exact flat packet reconstruction]
+\label{thm:v6-flat-packet}
+If \(\mathcal K_d=\Span\{M^jS\mathcal P:0\le j\le d\}\), then
+\[
+ \rank\mathbb H_d=\dim\mathcal K_d.
+\]
+Writing
+\[
+ \mathbb H_{d+1}=
+ \begin{pmatrix}\mathbb H_d&B_d\\B_d^*&C_d\end{pmatrix},
+\]
+the Schur defect is
+\[
+ \boxed{\mathfrak D_d^{\rm flat}
+ =C_d-B_d^*\mathbb H_d^\dagger B_d
+ =S^*M^{d+1}(I-P_d)M^{d+1}S\succeq0.}
+\]
+It vanishes exactly when \(M\mathcal K_d\subseteq\mathcal K_d\), equivalently
+when the complete source-cyclic packet has been reached.  The ordinary
+realization is then unique up to one source-fixing unitary.
+\end{maintheorem}
+
+\begin{proof}
+\(\mathbb H_d\) is the Gram matrix of the finite synthesis
+\((x_j)\mapsto\sum_jM^jSx_j\).  The Schur complement is the Gram of the
+orthogonal residual of the next layer.  Its vanishing is exactly invariance.
+Equality of all cyclic Grams gives the unique intertwining unitary between
+minimal realizations.
+\end{proof}
+
+\section{Marked bi-Hankel operator theorem}
+Let \(P_{\mathbb H}=\mathbb H_d\mathbb H_d^\dagger\).  The marked same-null defect
+is
+\[
+ \Delta_{\rm null}^D
+ =\norm{(I-P_{\mathbb H})\mathbb N_d}_{\HS}^2
+ +\norm{\mathbb N_d(I-P_{\mathbb H})}_{\HS}^2.
+\]
+
+\begin{maintheorem}[Marked operator reconstruction]
+\label{thm:v6-marked-operator}
+Assume ordinary flatness and \(\Delta_{\rm null}^D=0\).  For any full-row-rank
+Gram factorization \(\mathbb H_d=R_d^*R_d\),
+\[
+ \boxed{D_{R_d}=(R_d^\dagger)^*\mathbb N_dR_d^\dagger}
+\]
+is the unique packet operator satisfying
+\(\mathbb N_d=R_d^*D_{R_d}R_d\).  Different Gram factors conjugate it by the
+same packet unitary.  Moreover,
+\[
+ \boxed{\mathbb N_d(D)=0\iff D=0
+ \quad\text{on the complete source-cyclic packet}.}
+\]
+\end{maintheorem}
+
+\begin{proof}
+The null condition says that the sesquilinear form encoded by \(\mathbb N_d\)
+descends to the quotient determined by \(\mathbb H_d\).  The Moore--Penrose
+formula is the unique representing operator.  Any two full-row-rank Gram
+factors differ by one unitary on their row spaces.  If the marked form is zero,
+all matrix coefficients of \(D\) vanish on a spanning family, hence \(D=0\).
+\end{proof}
+
+Every complex marked coefficient is recoverable from two positive
+interferometric derivatives:
+\[
+ \left.\frac{\dd}{\dd\varepsilon}\right|_0\norm{\xi+\varepsilon D\eta}^2
+ =2\Re\langle\xi,D\eta\rangle,
+\]
+\[
+ \left.\frac{\dd}{\dd\varepsilon}\right|_0\norm{\xi+i\varepsilon D\eta}^2
+ =-2\Im\langle\xi,D\eta\rangle.
+\]
+
+\section{One common physical flavour frame}
+Let the source port be the direct sum of the six primitive ports.  The mixed
+cross-port moment blocks are load bearing: six separate diagonal moment
+problems retain six unrelated gauges and do not determine relative quark and
+lepton frames.
+
+Assume the reconstructed \(D\) passes self-adjointness, grading oddness,
+microscopic reversal, order zero, order one, one-leg locality, source-derived
+generation attachment, and exact slot tests.  Orthogonal projection onto each
+one-generation edge gives \(Y_u,Y_d,Y_e,Y_\nu\); the singlet symmetric block gives
+\(M_R\).
+
+\begin{maintheorem}[Common-frame finite-Dirac export]
+\label{thm:v6-dirac-export}
+Under the displayed flatness, marked-null, real-Dirac, slot, and Majorana
+certificates, the same physical packet determines
+\[
+ \boxed{Y_u,Y_d,Y_e,Y_\nu,M_R}
+\]
+up to one common generation unitary \(W\):
+\[
+ Y_f\mapsto W^*Y_fW,\qquad
+ M_R\mapsto W^{\mathsf T}M_RW.
+\]
+No independent quark, lepton, left, right, or Lanczos frame remains.
+\end{maintheorem}
+
+\begin{proof}
+\Cref{thm:v6-flat-packet,thm:v6-marked-operator} give one common packet and one
+operator up to a common unitary.  Every source-derived support, type, and
+one-leg slot transforms under that same unitary.  Orthogonal slot projection is
+unique, so all Dirac matrices transform simultaneously; the symmetric
+Majorana form transforms by congruence.
+\end{proof}
+
+The charged singular values are the square roots of the spectra of
+\(H_f=Y_fY_f^*\).  For simple up/down spectra,
+\[
+ \boxed{|V_{ij}^{\CKM}|^2=\Tr(P_{u,i}P_{d,j})},
+\]
+and
+\[
+ \boxed{J_q=\frac{\Im\Tr([H_u,H_d]^3)}{6\Delta(H_u)\Delta(H_d)}}.
+\]
+Degenerate spectra give canonical higher-rank overlap data.  The exact neutral
+masses are the Takagi singular values of
+\[
+ \mathcal M_N=\begin{pmatrix}0&Y_\nu\\Y_\nu^{\mathsf T}&M_R\end{pmatrix}.
+\]
+The seesaw Schur complement is used only on the invertible-heavy branch.
+
+\Open{The reconstruction and gauge problem is closed.  The bare source has not
+yet exported its marked panel, so it has not produced physical numerical
+Yukawa or Majorana matrices.}
+
+\chapter{Current unconditional, conditional, and superseded branches}
+\label{ch:v6-current-status}
+
+\section{Exact no-matter theorem for the displayed six-state source}
+
+\begin{maintheorem}[Comb-level six-state no-matter theorem]
+\label{thm:v6-six-state-no-matter}
+Every primitive system-bearing coefficient of the displayed six-state source
+commutes with the common central-support and grading refinement.  Every finite
+network built from those coefficients by serial/parallel composition,
+coherent order control, ancillas, feedback, postselection, environment
+measurement, and norm-convergent chronological limits is therefore support
+preserving.  Consequently
+\[
+ \boxed{K_\mu=0,
+ \quad Q_\mu=0,
+ \quad \mathbb G_{\mu,d}^{\rm pull}=0,
+ \quad D_F=0}
+\]
+on every grading-odd matter slot of that source.
+\end{maintheorem}
+
+\begin{proof}
+The block-preserving coefficients form a unital \(C^*\)-algebra closed under
+products, sums, tensoring with ancilla operators, taking ancilla matrix
+coefficients, and norm limits.  Every effective Kraus coefficient of such a
+network remains in this algebra and has zero cross-support block.  Linear
+Maslov compression, CP refinement, stopping, and the marked-panel
+reconstruction cannot create an absent raw coefficient.  The marked no-flavour
+theorem then gives \(D_F=0\).
+\end{proof}
+
+\section{Updated assumption-reduction ledger}
+\begin{longtable}{@{}p{0.28\textwidth}p{0.31\textwidth}p{0.34\textwidth}@{}}
+\caption{Principal source assumptions removed by the cumulative programme
+through V46.}\label{tab:v6-reductions}\\
+\toprule
+Earlier entrance & Exact replacement & Remaining physical input\\
+\midrule
+\endfirsthead
+\toprule
+Earlier entrance & Exact replacement & Remaining physical input\\
+\midrule
+\endhead
+Pre-given qutrit/Weyl basis
+& Fixed-point unit theorem, two-word theorem, or period/balance/control packet
+& Actual physical revision channels or signed control germ\\
+\addlinespace
+Assumed uniform twirl
+& Two revision-absorption comparisons
+& Bare screen Choi matrix and comparisons\\
+\addlinespace
+Chosen no-hiding gauge and Bell basis
+& Mutual-commutant minimal complement and Fourier PVM
+& Future record exposure and joint Read access\\
+\addlinespace
+Declared orientation doublet and Maslov table
+& Antiunitary reversal derives the anti-symplectic action and determinant sign
+& Reversal closure and coherent turn Gram\\
+\addlinespace
+Selected Julia collision or preferred qubit Read
+& Flat read-resolved refinement grammar, earliest bridge word, and Choi-support algebra
+& Actual RN-anchored multi-time kernel\\
+\addlinespace
+Fixed one-step update carrier
+& Escape Gram and finite memory Schur shells
+& Non-scalar process kernel\\
+\addlinespace
+Complete refinement-body enumeration
+& Finite word-effect shells and one flat append-closure certificate
+& Exhaustive declared primitive alphabet\\
+\addlinespace
+Chosen Stinespring tangent, switch coherence, or absorbing stop
+& Choi tangent, no-hidden-switch, quantum-output, and terminal-defect theorems
+& Actual coherent control/output/interface panels\\
+\addlinespace
+Six separate port gauges
+& One mixed block-Hankel realization
+& Actual mixed ordinary moments\\
+\addlinespace
+Finite Dirac inferred from ordinary moments
+& Marked bi-Hankel reconstruction
+& Physical one-insertion panel\\
+\addlinespace
+Hidden matter in the displayed six-state environment
+& Exact all-wrapper no-matter theorem
+& An earlier pre-central joint revision--charge Store\\
+\bottomrule
+\end{longtable}
+
+\begin{ledger}[Status at the V46 pause]
+\begin{center}
+\begin{tabularx}{0.97\textwidth}{@{}p{0.31\textwidth}cX@{}}
+\toprule
+Statement & Status & Present boundary\\
+\midrule
+Revision, screen, reversal, Maslov, process, and marked-Dirac theorems
+& \statusE & Exact finite mathematics for the stated packets.\\
+Primitive realization by one austere source
+& \statusO & Actual revision/control and RN-anchored kernels remain unexported.\\
+Displayed six-state matter incidence
+& \statusE/\statusX & Exactly zero under every allowed wrapper.\\
+Finite SM algebra and one-generation diagram
+& \statusC & Follows after the primitive type/reality/order packet passes.\\
+Physical three generations
+& \statusE/\statusC & \(K_4\) carrier exact; same-source charged attachment remains conditional.\\
+Physical Yukawa and Majorana matrices
+& \statusO & Reconstruction closed; actual marked panel absent.\\
+One-light-doublet, coloured scalar, gauge, Ward, anomaly results
+& \statusE/\statusC & Exact under their displayed source packets.\\
+Continuum Standard Model and observed parameters
+& \statusO & Regulator, scale, thresholds, matching, and running remain.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{ledger}
+
+\part{Consolidated theorem chain and present research boundary}
+\label{part:v6-final}
 
 \chapter{What is established exactly}
 \label{ch:exact-core}
 
-\begin{maintheorem}[Updated exact mathematical core]
+\begin{maintheorem}[Exact mathematical core through V46]
 \label{thm:unconditional-core}
-The following statements are exact in the finite graph, operator-algebra,
-channel, or matrix models in which they are formulated.
+The following are exact in the finite graph, matrix, channel, process-kernel,
+or operator models in which they are stated.
 \begin{enumerate}[label=\textup{(U\arabic*)},leftmargin=2.8em]
-\item The ordinary \(K_4\) cycle fibre has dimension three, carries the
-      sign-twisted standard \(S_4\) representation, and restricts to the
-      three nontrivial \(V_4\) characters.
-\item Additive reversible predictive units on a matrix factor lift
-      projectively; on \(\Fthree^2\), one nontrivial cubic commutator is
-      equivalent to a nondegenerate alternating form.
-\item A nondegenerate qutrit revision action forces \(M_3(\C)\), the Weyl
-      pair, four MUBs, the Clifford normalizer, and exact erasure under the
-      uniform twirl.
-\item Exact qutrit erasure has Hankel/Choi rank nine; its minimal source
-      carries the ordinary relative-revision representation and the canonical
-      Bell character PVM.
-\item Anti-symplectic orientation reversal is impossible on one qutrit and
-      acts minimally on the conjugate \(3+3\) orientation doublet.
-\item The Maslov sign is the unique order-three tetrahedral turn mode outside
-      every pairwise source; its exact source block is \(K_\mu\).
-\item Under local factorization the Maslov block is the cubic standard
-      polynomial; on Pauli contrasts it is the oriented three-volume.
-\item For a minimal qubit Read, \(\rank Q_\Phi\ge2\) is equivalent to
-      native interaction completeness and a nonzero direct or
-      commutator-assisted Choi--Lie sign source.
-\item Stable equivariant transport cannot erase a loaded central sign source;
-      source-cyclic target multiplicity and response are reconstructed from
-      finite Krylov moments.
-\item One block-Hankel moment family reconstructs all six primitive matter
-      ports up to one common unitary and supplies positive finite completion
-      defects.
-\item The selected right and persistent-left scalar rows give a
-      speed-robust electroweak Hessian with exactly one light doublet for all
-      positive primitive speeds.
-\item A one-invariant rank-one right potential leaves the physical colour
-      triplet massless; the strict tensor-square exterior amplitude is the
-      unique minimal quartic anisotropy and gives \(m_{\Delta_R}^2=q_R/4\)
-      after common kinetic normalization.
-\item State-preserving threshold expectations are BKM orthogonal projections;
-      the colour--lepton stop is the one-parameter \(\mathbb E_\eta\) family.
-\item Three current norms determine the Pati--Salam gauge kinetic metric; the
-      vacuum orbit Gram, Ward polar isometry, and BRST quartet cancellation
-      give the heavy-vector spectrum and physical mode count.
-\item The hypercharge stabilizer is
-      \(Y=T_R^3+(B-L)/2\), its level is \(5/3\), and the parent and
-      Standard-Model anomaly sums vanish.
-\item A physical dark parity is precisely an element of the annihilator of the
-      reachable--observable charged deck span detected by a neutral odd
-      Hankel block.
-\item Full \(S_4\) charged covariance forbids one unique dark parity; residual
-      \(V_4\) permits exactly three rank-two planes, and the reduced
-      generation determinant decides rank two versus rank three under the
-      multiplicity-free certificate.
-\item Every nontrivial \(K_4\) sign local system has two-dimensional first
-      cohomology; its coherent harmonic edge effects generate \(M_2(\C)\).
-\item Exact retained deck parity forbids visible--dark Dirac blocks and makes
-      the lightest odd state absolutely stable.
-\item The explicit grading-even six-state source still has exactly zero
-      charge-changing matter incidence in every Kraus and Stinespring
-      realization.
+\item The \(K_4\) cycle fibre has dimension three, carries the sign-twisted
+      standard \(S_4\) representation, and restricts to the three nontrivial
+      \(V_4\) characters.
+\item UCP units are automorphisms and additive units lift projectively.
+\item The fixed-point, two-word, periodic-control, and analytic-germ theorems
+      give terminating sufficient packets forcing \(M_3(\C)\),
+      \(\Fthree^2\) revisions, and a nondegenerate cubic phase.
+\item Two post-revision absorption tests characterize exact qutrit erasure;
+      its minimal complement has rank nine and canonical key/record factors
+      with the Bell Fourier PVM.
+\item Antiunitary reversal closing on the revisions is anti-symplectic and
+      forces the minimal conjugate \(3+3\) orientation doublet and determinant
+      sign on \(\operatorname{PGL}(2,3)\cong S_4\).
+\item The Maslov source is the determinant-character compression of the
+      complete coherent turn Gram; its rank is the loaded sign multiplicity.
+\item Marked graph localization, Choi graph--innovation, canonical Choi
+      tangents, no-hidden-switch closure, Choi-whitened sharp cores, complete
+      quantum-output readability, and terminal Stinespring-defect theorems give
+      exact finite decisions about which coherent source data are physically
+      available.
+\item An RN-anchored read-resolved kernel reconstructs its physical update
+      memory and shifts; positive escape and Schur shells locate every omitted
+      mode.
+\item A finite word-effect grammar has a terminating flatness certificate and
+      gives either all-depth phase superselection or an earliest physical sign
+      instrument.
+\item Choi supports determine the native coefficient algebra and its
+      multiplicity; on a derived qubit, \(\rank Q_\Phi\ge2\) is interaction
+      completeness.
+\item Nuisance shorting, type-Hankel reconstruction, and stopping are exact
+      positive-Gram operations and cannot create absent raw edges.
+\item Mixed ordinary block-Hankel moments reconstruct the six-port transport
+      up to one common unitary but do not determine an independent finite
+      Dirac operator.
+\item A same-null compatible marked bi-Hankel panel reconstructs one packet
+      operator; after real/type/order/slot tests it determines
+      \(Y_u,Y_d,Y_e,Y_\nu,M_R\) in one common frame.
+\item The selected scalar rows give a speed-robust Hessian with exactly one
+      light doublet; strict exterior-square exposure is the minimal right
+      triplet lifting mechanism.
+\item The threshold, current, Ward, BRST, hypercharge, and anomaly statements
+      in the corresponding chapters are exact under their finite source
+      hypotheses.
+\item The dark sector has an exact charged-rank/neutral-load fork, and every
+      nontrivial \(K_4\) sign local system has a two-dimensional harmonic carrier.
+\item The explicit six-state source has exactly zero charge-changing matter
+      occurrence under every allowed finite or convergent coherent wrapper.
 \end{enumerate}
 \end{maintheorem}
 
-These are mathematical closure theorems, not a claim that the bare renewal
-tuple has passed every source-selection certificate.
+These are mathematical closure theorems.  They are not a statement that one
+bare renewal instrument has realized every displayed finite object.
+
 \chapter{What is strong but conditional}
 \label{ch:conditional-core}
 
-\begin{maintheorem}[Updated conditional Standard-Model architecture]
+\begin{maintheorem}[Conditional Standard-Model architecture at the V46 pause]
 \label{thm:conditional-architecture}
-Assume that the actual primitive renewal experiment supplies:
+Assume one actual primitive renewal/KMS process supplies, in one compatible
+source/future frame:
 \begin{enumerate}[label=\textup{(C\arabic*)},leftmargin=2.8em]
-\item the finite predictive Hodge descent, KO-six real structure, and one-leg
-      locality;
-\item the recurrent \(K_4\) generation carrier and its same-source residual
-      \(V_4\) action;
-\item a future-accessible qutrit factor with additive reversible
-      \(\Fthree^2\) revision classes and one nontrivial cubic commutator;
-\item exact or sufficiently controlled qutrit screen erasure, record exposure,
-      and the full orientation-doublet normalizer;
-\item an interaction-complete native Read and retained Maslov/sign record;
-\item the complete block-Hankel packet
-      \((F,O,r,\ell,u_R,u_L)\);
-\item the persistent reversal-typed left row, strict right-pair exterior
-      branch, positive adjoint scalar score, and scalar criticality;
-\item the colour--lepton threshold contrast, three transverse-current norms,
-      and an anomaly-free common renormalized gauge functional;
-\item the charged deck stabilizer and neutral odd-source packet for whichever
-      dark branch is claimed.
+\item predictive sufficiency, Hodge descent, KO-six reversal/grading, and
+      one-leg order conditions;
+\item a passing physical qutrit revision packet and exact screen absorption;
+\item future exposure of the no-hiding record, reversal closure, a coherent
+      turn atlas, and \(Q_\mu\ne0\);
+\item a flat read-resolved refinement process, a physical sign instrument, a
+      multiplicity-free native \(M_2(\C)\), and the required typed matter tree
+      surviving nuisance shorting and stopping;
+\item source-derived weak--colour separation, reality completion, and the
+      one-generation finite-algebra packet;
+\item same-source attachment of the charged multiplicity to
+      \(H^1(K_4;\C)\) with no invisible parallel copy;
+\item flat mixed ordinary moments and a physical marked bi-Hankel panel passing
+      the finite-Dirac and slot tests;
+\item the scalar, current, threshold, Ward/BRST, anomaly, regulator, continuum,
+      matching, and RG packets whenever the corresponding low-energy
+      conclusion is claimed;
+\item the charged deck and neutral odd-source packet for a claimed dark branch.
 \end{enumerate}
 Then the finite charged algebra and one-generation diagram are
 \[
  \C\oplus\HH\oplus M_3(\C),
 \]
-tensored with the three-dimensional \(K_4\) generation fibre.  The selected
-scalar quotient has exactly one critical electroweak doublet, a positive
-right colour triplet, and positive represented coloured blocks.  The broken
-Pati--Salam gauge packet has the Ward/BRST spectrum stated above and descends
-to the anomaly-free Standard-Model gauge group with the canonical
-hypercharge level.  If the charged deck rank is two and the odd neutral packet
-is loaded with zero leakage, the same construction additionally contains an
-absolutely stable dark Majorana sector.
+tensored with the physical three-generation \(K_4\) carrier.  The same source
+exports \(Y_u,Y_d,Y_e,Y_\nu,M_R\) in one common frame.  The selected scalar
+quotient has exactly one light electroweak doublet and the displayed positive
+heavy scalar blocks.  The gauge packet has the Ward/BRST spectrum and descends,
+after the common-trace and threshold passes, to the anomaly-free Standard
+Model with canonical hypercharge.  The exact deck-rank fork decides whether a
+stable dark Majorana branch is also present.
 \end{maintheorem}
 
-The theorem is stronger than the V4 statement because the Bell pointer,
-Maslov source, common packet frame, one-light-doublet count, coloured sign
-gate, Ward/BRST closure, hypercharge map, and dark rank fork are no longer
-listed as vague downstream tasks.  They are finite consequences of explicit
-source hypotheses.  What remains conditional is whether the austere source
-realizes those hypotheses and what numerical coefficients it exports.
+\begin{proof}
+The primitive revision, screen, reversal, Maslov, process, native-Read, and
+marked-Dirac implications are
+\Cref{thm:v6-fixed-qutrit,thm:v6-erasure,thm:v6-no-hiding,thm:v6-maslov,thm:v6-process-gns,thm:v6-sign-alternative,thm:v6-native-qubit,thm:v6-dirac-export}.  The finite-algebra, generation,
+scalar, gauge, threshold, anomaly, and dark implications are the exact
+conditional theorems in the earlier chapters and are consumed only after
+their listed source-local hypotheses pass.
+\end{proof}
+
 \chapter{What is genuinely missing}
 \label{ch:open-boundary}
 
-\section{Tier I: actual predictive revision and screen data}
-The operational projective lift is closed, but the bare source must still
-exhibit a future-accessible qutrit factor, nine reversible revision classes,
-and one nontrivial cubic commutator.  It must also pass the screen Choi/Hankel
-rank-nine test and retain the relative-revision/Bell and anti-symplectic
-orientation records before dephasing.
+\section{The actual pre-central process}
+The first missing object is the coherent multi-time process of the earliest
+joint revision--charge Store:
+\[
+ \boxed{J,\quad \mathsf G_{\rm ref},\quad
+ \mathsf D_\bullet^{\rm ref},\quad
+ \text{physical revision/control words},\quad J_{\rm micro}.}
+\]
+Without its non-scalar cross-history blocks, the revision phase, Maslov source,
+update grammar, and marked finite Dirac remain underdetermined.
 
-\section{Tier II: native sign and packet export}
-The actual minimal Read Choi matrix must satisfy the interaction-completeness
-criterion, and the completed turn source must have nonzero Maslov character.
-The six primitive ports and their future moments must then be computed in the
-common block-Hankel frame.  This is the finite source calculation on which the
-physical Yukawa and scalar packets depend.
+\section{Raw grading-odd occurrence}
+The turn Gram must have \(Q_\mu\ne0\).  The derived refinement grammar must then
+produce a sign instrument, a multiplicity-free native \(M_2(\C)\), the required
+left/right and portal type tree, and survival under nuisance shorting and
+stopping.  This is the largest finite-source bottleneck.  The displayed
+six-state source fails it exactly.
 
-\section{Tier III: scalar criticality and primitive calibration}
-The light-doublet count is closed once the rows are loaded, but the primitive
-speeds, the absolute scalar kinetic normalization, the Bregman criticality
-mechanism, and the global metric/energy scale are not.  Pair exposure,
-adjoint-score positivity, and the threshold parameter must be verified for
-the autonomous source rather than selected afterward.
+\section{Finite algebra and physical generations}
+Weak--colour separation, KO-six signs, order-one/one-leg locality, reality
+completion, and minimal target completion must be proved on the same source.
+The charged future-null multiplicity must then be explicitly intertwined with
+\(H^1(K_4;\C)\), all three directions made future visible, and parallel copies
+excluded.
 
-\section{Tier IV: gauge currents, matching, and running}
-The actual current writer must decide whether the three parent current norms
-are equal.  Threshold matching, scalar and gauge one-loop corrections,
-coupled matrix running, confinement-scale matching, and pole extraction are
-standard downstream computations only after the physical threshold spectrum
-is known.
+\section{Marked finite Dirac and flavour}
+The reconstruction theorem is closed; the physical marked panel is absent.
+Only after it exports \(Y_u,Y_d,Y_e,Y_\nu,M_R\) can CKM, PMNS, CP invariants,
+neutrino ranks, thresholds, and RG transport become physical predictions.
 
-\section{Tier V: flavour}
-The common packet makes the problem well posed but does not determine the
-finite Dirac matrices.  The primitive \(Y_u,Y_d,Y_e,Y_\nu,M_R\), their
-relative frames, CP-odd invariants, threshold transport, and low-energy
-observables remain open.
+\section{Scalar, gauge, continuum, and dark completion}
+Primitive scalar jets, criticality, atomic speeds, absolute scale, current
+norms, thresholds, and the common trace remain to be measured.  A single
+regulator family must establish interacting continuum convergence, Ward
+identities, anomaly control, decoupling, and matching.  The charged deck rank
+and neutral odd load must be computed before any dark mass or abundance
+calculation.  Neither a \(3^{-11}\) nor a \(3^{-12}\) mass law is derived.
 
-\section{Tier VI: the dark source and cosmology}
-The charged reduced determinant or Hankel stabilizer, the four possible odd
-character weights, coherent edge-record exposure, and parity leakage must be
-computed.  Even after a stable odd sector is established, the Majorana mass,
-fresh-record depth, gravitational/renewal source, reheating history, entropy
-budget, and abundance normalization remain independent data.
-\chapter{A minimal non-circular research programme}
+\chapter{Minimal non-circular research programme}
 \label{ch:research-programme}
 
-The next calculations should be performed in the following order.
+\begin{enumerate}[label=\textup{(W\arabic*)},leftmargin=2.8em]
+\item Export the actual RN-anchored read-resolved kernel and its terminal
+      effects; test positivity, renewal compatibility, tails, and memory
+      flatness; append every positive shell.
+\item Compute the physical revision unit/control packet, qutrit screen
+      absorptions, no-hiding exposure, and reversal closure.
+\item Compute the coherent turn Gram and \(Q_\mu\).  Run the derived word-effect
+      grammar to flatness.  Stop with an exact no-source theorem if its bridge
+      vanishes; otherwise export the earliest sign instrument and native
+      coefficient algebra.
+\item Run the source-derived finite-algebra and \(K_4\) generation-attachment
+      packet, excluding invisible copies.
+\item Measure the complete mixed ordinary and marked bi-Hankel panels.  Export
+      the five finite matrices only after all real/type/order/slot tests pass.
+\item Evaluate scalar criticality, current norms, vacuum orbit, thresholds,
+      Ward/BRST, and the regulator-level continuum packet.
+\item Decide the dark rank fork before fitting a mass or abundance, and begin
+      coupled RG/cosmology only after every finite source output is fixed.
+\end{enumerate}
 
-\section{Work package A: reconstruct the physical source algebra}
-Compute the complete future-null Hankel quotient of the bare Store--Read
-experiment, its minimal Stinespring covariance, the qutrit revision classes,
-and the one cubic commutator.  Reject any source obtained only by diagonalizing
-the desired portal or Hessian.
-
-\section{Work package B: evaluate the native sign packet}
-Compute \(Q_\Phi\), \(\Gamma_\Phi\), the Maslov Fourier block \(K_\mu\),
-the sign loading, nuisance leakage, and the source-cyclic Krylov moments.
-Retain the order and edge records until after the relevant character reads.
-
-\section{Work package C: export the six-port block-Hankel frame}
-Measure \(\mathsf M_0,\mathsf M_1,\mathsf M_2\), test the first Schur defect,
-and add only genuinely nonzero block-Lanczos residual modes.  Reconstruct
-\((F,O,r,\ell,u_R,u_L)\) in the one common frame.
-
-\section{Work package D: cross the scalar and threshold gates}
-Evaluate primitive right/left Gram profiles and two-jet calibrations, verify
-the strict tensor-square sextet, compute \(h_\Phi,h_\Omega,\eta\), and assemble
-the complete scalar Hessian.  Derive, rather than tune, the protected-line
-criticality and the absolute scalar scale.
-
-\section{Work package E: export gauge and BRST data}
-Measure \(z_4,z_L,z_R\), the vacuum orbit map, Ward isometry, and threshold
-BRST packet.  Test the common-trace equalities and perform finite matching to
-\(SU(3)_c\times SU(2)_L\times U(1)_Y\).
-
-\section{Work package F: decide the dark fork}
-Compute the reduced generation deck representation or the seven charged odd
-energies, identify \(K_{\rm ch}\), Fourier-resolve the odd neutral writer,
-and measure edge-record and leakage defects.  Stop if the charged rank is
-three: that is an exact no-dark result for the minimal branch.  Do not use a
-mass or abundance fit to choose the rank-two branch.
-
-\section{Work package G: flavour, running, and cosmology}
-Only after the preceding finite passes should one integrate the coupled gauge,
-Yukawa, scalar, and Majorana system, perform threshold and pole matching, and
-solve the dark production equation.  These downstream calculations cannot
-repair a failed source certificate.
 \chapter{Final claim ledger}
 \label{ch:final-ledger}
 
-\begin{longtable}{@{}p{0.30\textwidth}cp{0.57\textwidth}@{}}
-\caption{Updated final status after the V73 consolidation.}\label{tab:final-status}\\
+\begin{longtable}{@{}p{0.29\textwidth}cp{0.58\textwidth}@{}}
+\caption{Final status after the source-closure programme through V46.}
+\label{tab:final-status-v6}\\
 \toprule
 Claim & Status & Precise conclusion\\
 \midrule
@@ -7164,121 +8565,101 @@ Claim & Status & Precise conclusion\\
 Claim & Status & Precise conclusion\\
 \midrule
 \endhead
-Predictive quotient and Hodge descent
-& \statusC/\statusE
-& Exact finite theorem under sufficiency and covariance intertwiners.\\
-Operational qutrit revision lift
+Predictive process and Hodge descent
+& \statusE/\statusC/\statusO
+& Finite theorems exact; actual non-scalar process kernel and descent
+intertwiners not fully exported.\\
+\addlinespace
+Operational qutrit revision factor
 & \statusE/\statusO
-& Automatic after reversible classes and a qutrit factor; the bare cubic witness remains to be measured.\\
-Bell/no-hiding screen
+& Several terminating packets force it; bare packet unmeasured.\\
+\addlinespace
+Screen, no-hiding, Bell pointer
 & \statusE/\statusO
-& Canonical rank-nine source and relative-revision pointer; bare erasure and exposure remain finite tests.\\
-Maslov grading-odd source
+& Exact source theorems; bare screen and physical record access open.\\
+\addlinespace
+Orientation and Maslov source
 & \statusE/\statusO
-& Unique order-three turn character; actual microscopic Fourier weight still open.\\
-Native Choi--Lie source
+& Source-derived sign theorem exact; actual coherent turn Gram open.\\
+\addlinespace
+Operational access hierarchy
 & \statusE/\statusO
-& Interaction completeness gives a canonical sign branch; actual Choi covariance not yet exported.\\
-One common matter frame
+& Graph localization, graph--innovation, tangent, control, sharp-record,
+quantum-output, and terminal-interface theorems are exact; the corresponding
+bare coherent panels remain open.\\
+\addlinespace
+Read-resolved sign instrument and native Read
 & \statusE/\statusO
-& Block-Hankel reconstruction is exact; actual six-port moments remain open.\\
+& Finite process/grammar/Choi-support theorem exact; primitive branch data open.\\
+\addlinespace
+Displayed six-state matter incidence
+& \statusE/\statusX
+& Exactly zero under every allowed wrapper.\\
+\addlinespace
 Finite SM algebra and diagram
 & \statusC
-& Unique in the declared renewal-admissible class.\\
-Three-generation fibre
+& Unique in the displayed source-derived reality/type/order class.\\
+\addlinespace
+Physical three generations
 & \statusE/\statusC
-& Exact \(K_4\) cycle representation; physical same-source attachment remains conditional.\\
-Exactly one light doublet
-& \statusE/\statusC
-& Exact for the selected persistent rows at criticality, robust to all positive atomic speeds.\\
-Right physical colour triplet
-& \statusE/\statusC
-& Massless for a one-invariant action; lifted by strict exterior-square pair exposure.\\
-Represented coloured scalar positivity
-& \statusE/\statusC
-& Closed by one nonzero adjoint score plus the direct right-spurion packet.\\
-Gauge-current and Ward packet
+& Exact \(K_4\) carrier; same-source attachment conditional.\\
+\addlinespace
+Common six-port transport
 & \statusE/\statusO
-& Three current reads suffice; actual current writer and absolute scale remain open.\\
-BRST heavy-vector closure
-& \statusE/\statusC
-& Exact quartet cancellation and 27 physical heavy polarizations.\\
-Hypercharge and anomaly cancellation
-& \statusE/\statusC
-& Exact parent-to-SM map; \(3/8\) additionally requires one common trace.\\
-Physical Yukawa matrices, CKM, PMNS
-& \statusO
-& Common-frame problem is solved, but primitive matrices and RG transport are not.\\
-Unique dark parity
+& Reconstruction exact; physical moments absent.\\
+\addlinespace
+Finite Dirac and physical matrices
 & \statusE/\statusO
-& Exact rank-two versus rank-three fork; bare charged determinant/Hankel data remain open.\\
-Twisted dark carrier and stability
+& Marked reconstruction exact; marked panel and matrices absent.\\
+\addlinespace
+CKM, PMNS, neutrino observables
+& \statusE/\statusO/\statusP
+& Basis-free extraction exact after matrices exist; present panels are
+conditional/posterior.\\
+\addlinespace
+Exactly one light doublet and coloured scalar closure
 & \statusE/\statusC
-& Two-dimensional topological carrier; physical loading plus exact parity yields a stable lightest odd state.\\
-Dark mass and abundance
-& \statusO
-& No derived 11- or 12-rung law; require primitive Majorana history, scale, and cosmology.\\
+& Exact after persistent rows, pair exposure, criticality, and normalization.\\
+\addlinespace
+Gauge-current, Ward, BRST, hypercharge, anomalies
+& \statusE/\statusC/\statusO
+& Finite formulas closed; current, threshold, common trace, and regulator data
+remain.\\
+\addlinespace
+Dark parity and twisted carrier
+& \statusE/\statusO
+& Exact rank/load fork; bare deck data, mass, and cosmology open.\\
+\addlinespace
 Full Standard-Model emergence
 & \statusO
-& The architecture is substantially closed conditionally, but the bare source, absolute calibration, flavour, running, and cosmology remain.\\
+& One bare source has not passed the revision, matter, algebra, generation,
+marked-Dirac, scalar, gauge, continuum, and RG packets.\\
 \bottomrule
 \end{longtable}
+
 \chapter{Conclusion}
 \label{ch:conclusion}
+The qutrit, screen, orientation, and Maslov structures no longer need to be
+inserted as target-facing normal forms: finite physical-unit/control, revision
+absorption, no-hiding, and reversal theorems can force them.  The native matter
+boundary has moved from a selected Julia collision to an RN-anchored
+read-resolved process whose memory shells and word-effect grammar decide
+all-depth phase superselection versus a physical sign instrument.  Choi
+supports then decide the native algebra and multiplicity.
 
-The renewal programme now has a substantially sharper Standard-Model
-emergence chain than the earlier consolidation recorded.
+The finite-Dirac boundary is also exact.  Ordinary moments determine the
+transport but not an independent grading-odd operator.  The marked bi-Hankel
+panel is the minimal coherent source datum; once physical, it determines all
+five finite matrices in one frame.  The theorem is closed, but the bare marked
+panel is not available.
 
-First, the qutrit screen and matter record are no longer tied to an arbitrary
-Kraus or Bell basis.  The minimal erasure Hankel source has rank nine, its
-relative revisions form an ordinary \(\Fthree^2\) representation, and their
-character PVM is the canonical Bell pointer.  The full tetrahedral normalizer
-requires the conjugate \(3+3\) orientation doublet and forces deck exchange on
-anti-symplectic branches.
+The explicit six-state source remains exactly negative.  Its coefficient
+algebra is support and grading preserving, and no coherent wrapper,
+environment measurement, quantum switch, stopping construction, or future
+depth can manufacture matter.  The next decisive advance must therefore be a
+calculation of an earlier pre-central joint revision--charge process, not
+another reformulation of the desired Standard Model.
 
-Second, grading-odd matter incidence is no longer represented merely by a
-selected portal word.  The Maslov sign is the unique order-three function
-missing from every pairwise turn source.  Its coherent Fourier block is the
-primitive target.  The Nambu bracket and Choi--Lie theorems reduce native
-source generation to finite, basis-free Store--Read tests.  Stable sign
-transport, Krylov descent, and block-Hankel reconstruction then provide one
-physical common frame for all six primitive matter ports.
-
-Third, the scalar and gauge consequences are much more closed.  The selected
-right and persistent-left rows produce an exact speed-robust electroweak
-Hessian with one light doublet.  The right colour triplet exposes a sharp
-one-invariant no-go and a unique exterior-square repair.  BKM threshold loss,
-colour--lepton dephasing, gauge-current tomography, the Ward polar isometry,
-BRST cancellation, hypercharge matching, and anomaly cancellation are all
-finite theorems once their source-local inputs are present.
-
-Fourth, the dark sector has been corrected from a preselected twisted carrier
-to a physical rank fork.  A nontrivial local system supplies a two-dimensional
-available carrier, but dark matter exists only when the charged
-reachable--observable deck span has a nonzero annihilator and an odd neutral
-source is loaded.  Full tetrahedral symmetry forbids a unique parity; the
-residual Klein phase admits it.  Exact parity gives absolute stability of the
-lightest odd state, while the Majorana mass and abundance remain independent
-open data.  The earlier 11- and 12-rung formulas are not current derivations.
-
-The most important remaining task is therefore not another universal tensor
-or another target-facing normal form.  It is the explicit microscopic export
-of the finite source packet:
-\begin{center}
-\fbox{\parbox{0.86\textwidth}{\centering
-revision cocycle witness; screen and Bell exposure; native sign Choi block;
-six-port moments; current norms; threshold parameter; and deck characters}}
-\end{center}
-A successful pass would move the programme to physical Yukawa matrices,
-criticality, absolute scale, matching, running, and cosmology.  A failed pass
-would be equally informative: it would give an exact obstruction to the
-selected branch rather than a reason to reformulate it again.
-
-Accordingly, this monograph does not claim unconditional full Standard-Model
-emergence.  It does establish that many questions previously listed as broad
-architectural gaps have become exact finite theorems or terminating source
-certificates.  The remaining uncertainty is concentrated in the autonomous
-microscopic realization and the downstream numerical dynamics.
 \chapter{Notation and representation conventions}
 \label{app:notation}
 
@@ -8082,6 +9463,6 @@ unconditional primitive-trace identities.
 The bibliography separates standard published mathematics and physics from the author's companion renewal preprints, the earlier protected-\(K_4\) amplitude manuscript, and the internal archive.  Citations to an internal preprint indicate provenance of a renewal-specific theorem; they do not convert a conditional theorem into an externally established result.  The present consolidation supersedes the status language of the cumulative working archive whenever the two differ.
 
 \bibliographystyle{unsrt}
-\bibliography{Renewal_Emergent_SM_Consolidation_Monograph_V5}
+\bibliography{Renewal_Geometry_Emergent_SM_Consolidation_V006}
 
 \end{document}

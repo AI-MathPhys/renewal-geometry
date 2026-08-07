@@ -89,7 +89,7 @@ lemma mellin_log_dilate (C : ℝ → ℝ) {a : ℝ} (ha : 0 < a)
       volume (Real.log a)]
     refine integral_congr_ae (.of_forall fun t => ?_)
     push_cast
-    ring
+    ring_nf
   rw [hshift]
   have hsplit : ∀ u : ℝ,
       (C u : ℂ) * Complex.exp (-s * (Real.log a - u))
