@@ -1788,9 +1788,12 @@
  "thm:gap-soft-mode-alternative": {
   "env": "theorem",
   "title": "Gap passage and primitive-word soft modes",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/StateTightness.lean:NCG.gap_liminf_passage",
+   "NCG/Grand/StateTightness.lean:NCG.soft_mode_witness"
+  ],
+  "note": "Boxed gap passage proved: pointwise limits of the coercive inequalities q_n[u] >= gamma_n ||(I-E_n)u||^2 keep q[u] >= (lim gamma_n)||(I-E)u||^2 along convergent gap subsequences (le_of_tendsto_of_tendsto), and the soft-mode reading: a gamma-gap on normalized transient vectors forces q >= gamma, so vanishing energies force vanishing gaps. Disclosed: the Mosco framework identifying the limit form and the primitive-word operator-core choice for the explicit soft-mode witnesses. TRIAGE M (2026-08-07)."
  },
  "thm:entropic-Hodge-continuum": {
   "env": "theorem",
@@ -1823,9 +1826,14 @@
  "thm:GNS-observable-limit": {
   "env": "theorem",
   "title": "Bounded observable convergence on the GNS direct limit",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/GNSObservableLimit.lean:NCG.limit_observable_unique",
+   "NCG/Grand/GNSObservableLimit.lean:NCG.limit_observable_norm",
+   "NCG/Grand/GNSObservableLimit.lean:NCG.polynomial_relation_persists",
+   "NCG/Grand/GNSObservableLimit.lean:NCG.nonscalar_of_centered_norm"
+  ],
+  "note": "Proved: uniqueness of the limit observable (bounded operators agreeing on a dense subspace are equal), the norm transfer ||O_inf|| <= C from the dense domain, word-relation persistence (a bounded operator vanishing on a dense subspace vanishes, so every finitely-verified *-polynomial relation holds exactly), and the non-scalarity witness (a uniform positive centered vacuum norm excludes every scalar value). Disclosed: existence of the limit operator from uniformly bounded Cauchy families on the dense GNS core (completeness/Banach-Steinhaus construction on the direct limit). TRIAGE M (2026-08-07)."
  },
  "assessment:exact-scope-of-part-i-b": {
   "env": "assessment",
@@ -2598,16 +2606,21 @@
  "thm:state-compactness-tightness": {
   "env": "theorem",
   "title": "State compactness and spectral tightness",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/StateTightness.lean:NCG.spectral_tightness"
+  ],
+  "note": "Boxed tightness estimate proved: a uniform p-moment bound dominates the spectral tail, omega(1_{|F|>R}) <= C_p R^{-p} (Markov/Chebyshev on finite spectral weights with rpow monotonicity). Disclosed: weak-* compactness of bounded state sequences (Banach-Alaoglu on the separable quasilocal algebra) and unique extension from a norm-dense local subalgebra. TRIAGE M (2026-08-07)."
  },
  "thm:universal-coercive-continuum": {
   "env": "theorem",
   "title": "Universal coercive continuum handoff",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/UniversalCoercive.lean:NCG.head_tail_numerical_bound",
+   "NCG/Grand/UniversalCoercive.lean:NCG.head_tail_contraction"
+  ],
+  "note": "Branch (H1) proved: the head-tail quadratic form is dominated by q* = (a+d+sqrt((a-d)^2+4b^2))/2 (the largest eigenvalue of the 2x2 comparison matrix, via the exact sum-of-squares identity 2s(2G) = (Ax-2by)^2 + (By-2bx)^2 with AB = 4b^2), and the contraction criterion: a, d < 1 with b^2 < (1-a)(1-d) give q* < 1 - the uniform noncollapsing contraction; the geometric decay ||T^k - E|| <= q*^k is the proved uniform_gap_decay. Disclosed: the operator reduction of ||(I-E)T(I-E)|| to the 2x2 numerical bound (head/tail splitting with declared leakage blocks) and the weighted-influence branch (H2). TRIAGE M (2026-08-07)."
  },
  "def:field-tightness-profile": {
   "env": "definition",

@@ -294,6 +294,9 @@ import NCG.Grand.PhaseAxisMoment
 import NCG.Grand.SourceCoreSemigroup
 import NCG.Grand.FreshInvisibility
 import NCG.Grand.VolterraMemory
+import NCG.Grand.GNSObservableLimit
+import NCG.Grand.StateTightness
+import NCG.Grand.UniversalCoercive
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly
