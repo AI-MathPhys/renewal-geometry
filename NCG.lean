@@ -291,6 +291,9 @@ import NCG.Flagship.Metrology
 import NCG.Grand.RenewalProfiles
 import NCG.Grand.SourceIdealSplit
 import NCG.Grand.PhaseAxisMoment
+import NCG.Grand.SourceCoreSemigroup
+import NCG.Grand.FreshInvisibility
+import NCG.Grand.VolterraMemory
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly

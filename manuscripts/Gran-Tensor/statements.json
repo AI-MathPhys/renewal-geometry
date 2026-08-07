@@ -563,9 +563,13 @@
  "thm:source-core-semigroup": {
   "env": "theorem",
   "title": "Generator, resolvent, and semigroup intertwining",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SourceCoreSemigroup.lean:NCG.resolvent_defect",
+   "NCG/Grand/SourceCoreSemigroup.lean:NCG.power_intertwine",
+   "NCG/Grand/SourceCoreSemigroup.lean:NCG.semigroup_intertwine"
+  ],
+  "note": "Finite-dimensional rendering proved: the boxed exact resolvent defect identity (z-N)^{-1}V - V(z-A)^{-1} = (z-N)^{-1}(NV - VA)(z-A)^{-1}, the power intertwining (tN)^k V = V(tA)^k, and the boxed forward implication NV = VA => e^{tN}V = V e^{tA} for every t via the exponential series through Summable.tsum_mul_right/left with the scoped operator-norm Banach-algebra instances. Disclosed: the unbounded strongly-continuous semigroup formulation (domains, graph norms, the Duhamel integral bound with growth constants) is the operator-theoretic layer Mathlib lacks; the backward implication is the same series read at first order. TRIAGE M (2026-08-07)."
  },
  "cor:source-core-Gram-transport": {
   "env": "corollary",
@@ -815,9 +819,12 @@
  "thm:fresh-opportunity-invisibility": {
   "env": "theorem",
   "title": "Complete multitime invisibility of a fresh stationary sampler",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FreshInvisibility.lean:NCG.fresh_sampler_invisibility",
+   "NCG/Grand/FreshInvisibility.lean:NCG.word_composition_determined"
+  ],
+  "note": "Boxed invisibility proved: hidden samplers with equal averaged branches produce identical downstream words of every length (word composition is a function of the average alone), so the complete downstream table determines none of the hidden data (branch count K, sampler law Q, balance, circulation, components, rooted-tree weights, or a gap). Disclosed: the operational identification of every resolved downstream word/adaptive intervention/terminal Read with composites of the averaged branch. TRIAGE M (2026-08-07)."
  },
  "cth:fixed-delay-hidden-generator": {
   "env": "countertheorem",
@@ -963,9 +970,11 @@
  "cth:private-fingerprint-no-provenance-channel": {
   "env": "countertheorem",
   "title": "The old-private fingerprint does not determine the entry-provenance channel",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FreshInvisibility.lean:NCG.provenance_extension_invariant"
+  ],
+  "note": "Block core proved: the one-way extension [[M, 0],[D0 C, D0]] propagates the provenance space by D0 and routes nothing into the active corner - the active block of every power is M^k and the active-to-provenance route is zero, independently of the contraction D0, so all declared renewal probabilities, endpoint data, and old-private Grams are unchanged. Disclosed: the reading of the declared packet marginals in the block picture. TRIAGE M (2026-08-07)."
  },
  "cor:covariant-provenance-inversion": {
   "env": "corollary",
@@ -2537,9 +2546,13 @@
  "thm:continuum-memory-completion": {
   "env": "theorem",
   "title": "Canonical Markovian completion of finite physical-time memory",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/VolterraMemory.lean:NCG.memory_register_shift",
+   "NCG/Grand/VolterraMemory.lean:NCG.memory_hankel_factorization",
+   "NCG/Grand/VolterraMemory.lean:NCG.volterra_block_equivalence"
+  ],
+  "note": "Proved: the semigroup shift of the memory register e^{((t+u)-s)H} = e^{uH}e^{(t-s)H} (the variation-of-constants propagation), the boxed Hankel factorization BH^{i+j}C = (BH^i)(H^jC) bounding the memory Hankel rank by the carrier dimension, and the one-way block power structure (the (1,2)-corner of the block matrix powers is BH^k - the kernel series of M(t) = Be^{tH}C). Disclosed: Picard existence/uniqueness for the block ODE and the identification of the minimal auxiliary carrier with the Kalman source-reachable quotient (the repo's stineStack machinery). TRIAGE M (2026-08-07)."
  },
  "def:Hodge-loaded-transient": {
   "env": "definition",
