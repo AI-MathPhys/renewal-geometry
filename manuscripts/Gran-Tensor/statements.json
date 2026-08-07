@@ -675,9 +675,11 @@
  "thm:canonical-history-compiler": {
   "env": "theorem",
   "title": "Canonical controlled-history compiler",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/ControlledCompiler.lean"
+  ],
+  "note": "Proved (compiler multiplication table): path projection p1 = (1-Z)/2 idempotent (path_projection_idempotent), one-sided controlled lift diag(1,U) unitary (controlled_lift_unitary), controlled letters multiply to controlled words Lambda(U)Lambda(V) = Lambda(UV) and Lambda(U)^k = Lambda(U^k) (controlled_letters_multiply, controlled_word_power). Disclosed: the joint-Lie-algebra generation i Z x su(d), i p1 x su(d) and the derived CP completion of the finite irreversible alphabet. TRIAGE M (2026-08-07)."
  },
  "thm:canonical-writer": {
   "env": "theorem",
@@ -829,9 +831,11 @@
  "cth:fixed-delay-hidden-generator": {
   "env": "countertheorem",
   "title": "One isolated continuous delay does not identify a hidden generator",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FixedDelayGenerator.lean"
+  ],
+  "note": "Proved in full: for every t > 0 the distinct balanced circulant generators Q_{s*/2,s*/2} and Q_{s*,0} with s* = 4pi/(sqrt(3) t) satisfy the boxed identity exp(t Q0) = exp(t Q1) (fixed_delay_hidden_generator) - the difference (2pi/sqrt3)(C^2 - C) is diagonalized by the explicit DFT with eigenvalues 0, -2pi i, 2pi i, every eigenfactor exponentiates to 1 (Matrix.exp_units_conj + exp_diagonal), and the generators commute so the exponentials split. No analytic step is deferred. TRIAGE M (2026-08-07)."
  },
  "thm:delayed-binary-Ward": {
   "env": "theorem",
@@ -1499,9 +1503,11 @@
  "thm:global-cylinder-descent": {
   "env": "theorem",
   "title": "Global cylinder reconstruction and exact cutoff alternative",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/CompatibleCylinder.lean"
+  ],
+  "note": "Proved (clause slices): strict polar-isometry composition (G2) and the boxed joint-source innovation Gram identity j_a* G_{ab,n} j_b = G_{ab,m} + eta_a* eta_b (G6) with its zero-innovation exact-compression branch (polar_isometry_composition, innovation_gram_identity, exact_compression_of_zero_innovation). Disclosed: clauses (G1), (G3)-(G5), (G7) (record surjections, rank-gain bookkeeping, tail ideal, order-unit state extension) are the manuscript's cylinder bookkeeping. TRIAGE M (2026-08-07)."
  },
  "assessment:logical-effect-of-the-global-process-entrance": {
   "env": "assessment",
@@ -1527,9 +1533,11 @@
  "thm:projective-state-compactness": {
   "env": "theorem",
   "title": "Projective compactness of finite-stage states",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/ProjectiveState.lean"
+  ],
+  "note": "Proved (single-stage rendering): Bolzano-Weierstrass subsequence in the finite-dimensional dual unit ball (finite_stage_state_compactness), evaluation convergence, persistence of normalization and positivity under the weak limit, and the exactly-compatible branch converging along the full sequence (compatible_limit_constant). Disclosed: the Cantor diagonal across all stages and the assembly into a state on the AF inductive limit. TRIAGE M (2026-08-07)."
  },
  "thm:joint-source-inductive-limit": {
   "env": "theorem",
@@ -1564,9 +1572,11 @@
  "thm:compatible-future-forms": {
   "env": "theorem",
   "title": "Compatible future forms and the exact module bound",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE blocked (2026-08-05)"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/CompatibleCylinder.lean"
+  ],
+  "note": "Proved (both directions of the boxed module bound): compatible GNS forms make connecting maps isometric (compatible_form_isometry); a uniform stage bound beta_g(a) < inf extends to ||L_a|| <= beta on a dense exhaustion (bounded_action_of_uniform_bound); boundedness conversely bounds every stage (uniform_bound_of_bounded_action). Disclosed: the Hilbert direct-limit completion construction itself. TRIAGE M (2026-08-07)."
  },
  "thm:CP-memory-compactness": {
   "env": "theorem",
@@ -1695,9 +1705,11 @@
  "cor:primitive-score-continuum": {
   "env": "corollary",
   "title": "Exact primitive score fluctuation--dissipation continuum",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/ScoreContinuum.lean"
+  ],
+  "note": "Proved (deterministic slices): boxed Schur innovation telescope H_{2,n} - C_n* G_n^+ C_n = tau G0 by explicit diagonal inversion (schur_innovation_telescope), and the boxed diffusion coefficient (1-rho^2)/(1-rho)^2 = (1+rho)/(1-rho) = 4/11 at the proved renewal correlation rho = -7/15 (diffusion_identity, diffusion_value). Disclosed: the Donsker convergence Z_tau => G0^{1/2} B_3 in D([0,T],R^3). TRIAGE M (2026-08-07)."
  },
  "assessment:exact-scope-of-the-primitive-information-branch": {
   "env": "assessment",
@@ -2298,9 +2310,11 @@
  "thm:concrete-renewal-score-profile": {
   "env": "theorem",
   "title": "Resolved score bank, tetrahedral triplets, and stochastic limits",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/ScoreContinuum.lean"
+  ],
+  "note": "Proved (deterministic slices): score Gram floor 176/225 (score_gram_floor), K4 Laplacian gap 4I on the mean-zero space (k4_laplacian_gap), boxed Kronecker fibre-frame identity (d x I)*(I x G0)(d x I) = 4 (I x G0) (tetrad_gram_kronecker) with floor 704/225. Disclosed: martingale-difference property, S4-covariance of the triplets, Brownian and compound-Poisson limits are the manuscript's stochastic layer. TRIAGE M (2026-08-07)."
  },
  "firewall:local-tetrahedral-coercivity-is-not-spatial-ellipticity": {
   "env": "firewall",
@@ -2547,9 +2561,11 @@
  "thm:fast-feedback-collapse": {
   "env": "theorem",
   "title": "Fast loaded feedback collapses to a local generator",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": ""
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FastFeedback.lean"
+  ],
+  "note": "Proved (core slices): discrete-Duhamel power comparison ||X^{n+1} - E^{n+1}|| <= (n+1) M^n ||X - E|| (power_comparison_bound), boxed Neumann resummation R = B (I - D0)^{-1} C via (1 - D0)(sum_k D0^k) = 1 (geometric_feedback_resummation), and the weighted loading summability sum (k+1) M r^k < inf (feedback_tail_summable). Disclosed: the full telescoping of the delayed recursion against exp(nh(G+R)) and the o(h) vanishing branch. TRIAGE M (2026-08-07)."
  },
  "thm:continuum-memory-completion": {
   "env": "theorem",

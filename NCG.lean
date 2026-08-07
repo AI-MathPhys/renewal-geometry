@@ -298,6 +298,12 @@ import NCG.Grand.GNSObservableLimit
 import NCG.Grand.StateTightness
 import NCG.Grand.UniversalCoercive
 import NCG.Grand.SMSTGraphRegulator
+import NCG.Grand.CompatibleCylinder
+import NCG.Grand.ProjectiveState
+import NCG.Grand.FixedDelayGenerator
+import NCG.Grand.ScoreContinuum
+import NCG.Grand.ControlledCompiler
+import NCG.Grand.FastFeedback
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly

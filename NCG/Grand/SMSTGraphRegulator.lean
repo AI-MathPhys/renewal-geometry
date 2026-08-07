@@ -52,6 +52,7 @@ theorem regulator_square (D : Matrix F E ℂ) (m : ℂ) :
       mul_neg]
 
 open scoped ComplexOrder in
+omit [DecidableEq E] [DecidableEq F] in
 /-- Spectral gap: the regulator square dominates `m²` — both
 diagonal blocks are `Gram + m²·1 ⪰ m²·1`. -/
 theorem regulator_gap (D : Matrix F E ℂ) :
