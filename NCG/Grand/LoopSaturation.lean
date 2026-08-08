@@ -34,14 +34,15 @@ namespace NCG
 
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
-omit [DecidableEq ι] in
+omit [Fintype ι] [DecidableEq ι] in
 /-- Interpolation core: a separating unital subalgebra of the
 finite function algebra contains every point indicator. -/
-theorem single_generator_mem [DecidableEq ι]
+theorem single_generator_mem [Finite ι] [DecidableEq ι]
     (A : Subalgebra ℂ (ι → ℂ))
     (hsep : ∀ i j : ι, i ≠ j → ∃ f ∈ A, f i ≠ f j) (i₀ : ι) :
     Pi.single i₀ (1 : ℂ) ∈ A := by
   classical
+  haveI := Fintype.ofFinite ι
   have hex : ∀ j : ι, j ≠ i₀ → ∃ f ∈ A, f i₀ ≠ f j :=
     fun j hj => hsep i₀ j (Ne.symm hj)
   choose! g hgA hgne using hex
