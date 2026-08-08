@@ -90,8 +90,8 @@ theorem rank_one_projector_idempotent {n : Type*} [Fintype n]
 
 /-- Nuisance invariance: shorting kills every nuisance-valued
 correction of the raw source. -/
-theorem nuisance_invariance {n m k : Type*} [Fintype n]
-    [DecidableEq n] [Fintype m] [Fintype k] (Pr S : Matrix n n ℂ)
+theorem nuisance_invariance {n m : Type*} [Fintype n]
+    [DecidableEq n] [Fintype m] (Pr S : Matrix n n ℂ)
     (N : Matrix n m ℂ) (L : Matrix m n ℂ)
     (hN : (1 - Pr) * N = 0) :
     (1 - Pr) * (S + N * L) = (1 - Pr) * S := by

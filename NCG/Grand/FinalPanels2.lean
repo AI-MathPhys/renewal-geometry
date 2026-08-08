@@ -167,7 +167,7 @@ theorem refinement_termination {N k : ℕ}
 /-- Accepted-table stochasticity: the partition kernel row sums
 to one. -/
 theorem partition_kernel_stochastic {Ω : Type*} [Fintype Ω]
-    [DecidableEq Ω] {B : Type*} [DecidableEq B] (C : Ω → B)
+    {B : Type*} [DecidableEq B] (C : Ω → B)
     (μ : Ω → ℝ) (x : Ω)
     (hmass : 0 < ∑ y ∈ Finset.univ.filter
       (fun y => C y = C x), μ y) :
