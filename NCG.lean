@@ -334,6 +334,9 @@ import NCG.Grand.GrandUniversal
 import NCG.Grand.LastCorollaries
 import NCG.Grand.FinalPanels1
 import NCG.Grand.FinalPanels2
+import NCG.Grand.NewSMSTChannel
+import NCG.Grand.NewSMOrbit
+import NCG.Grand.NewAcceptedQuotient
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly
