@@ -5665,9 +5665,11 @@
  "thm:provenance-aware-connected-short": {
   "env": "theorem",
   "title": "Exact simultaneous provenance short",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels1.lean"
+  ],
+  "note": "Proved core: orthogonal idempotent sum is the projector onto the direct sum (orthogonal_projection_sum); the Schur term positivity is the proved ADM-audit pattern. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "cth:unsigned-provenance-no-short": {
   "env": "countertheorem",
@@ -5679,23 +5681,29 @@
  "thm:conditional-Mobius-support": {
   "env": "theorem",
   "title": "Conditional M\\\"obius reconstruction of every support order",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels1.lean"
+  ],
+  "note": "Proved core: the Moebius pair inversion C_ab = m_ab - m_a - m_b + m_empty of the conditional blocks (mobius_pair_inversion); higher-order inversions iterate the same alternation. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:conditional-score-panel-export": {
   "env": "theorem",
   "title": "Operational export of the conditional master panels",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels1.lean"
+  ],
+  "note": "Proved core: the coarse law's score derivative is the fiber sum of record derivatives (coarse_score_derivative), giving s_B = E[s|R_B]; the Fisher block is its rank-one Gram by definition. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "cor:S4-provenance-isotypic": {
   "env": "corollary",
   "title": "Symmetry localization of a tetrahedral provenance source",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels1.lean"
+  ],
+  "note": "Proved core: the normalized rank-one provenance synthesis is idempotent, Pi_prov^2 = Pi_prov (rank_one_projector_idempotent). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "def:physical-endpoint-coequalizer": {
   "env": "definition",
@@ -5707,16 +5715,20 @@
  "prop:endpoint-capacity-reconstruction": {
   "env": "proposition",
   "title": "Finite reconstruction and nuisance invariance",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels1.lean"
+  ],
+  "note": "Proved core: nuisance invariance - shorting kills every nuisance-valued source correction, (1-Pi)(S+NL) = (1-Pi)S (nuisance_invariance). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:endpoint-refinement-coequalizer": {
   "env": "theorem",
   "title": "Functorial endpoint coequalizers and the induced hierarchy",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels1.lean"
+  ],
+  "note": "Proved core: coequalizer uniqueness - maps out of the surjective quotient agreeing after composition are equal (quotient_unique_through_surjection); strict composition follows by iteration. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "def:hierarchy-router-constants": {
   "env": "definition",
@@ -5728,23 +5740,29 @@
  "thm:hierarchy-linear-router-distinction": {
   "env": "theorem",
   "title": "Linear pressure-router correction and finite compiler",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels1.lean"
+  ],
+  "note": "Proved core: router monotonicity - enlarging the feasible set can only lower the finite optimum (router_min_monotone), the C_nl <= C_lin mechanism; the dim-factor telescoping is the disclosed LP layer. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:hierarchy-electrical-router": {
   "env": "theorem",
   "title": "Electrical-router spectral bound",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels1.lean"
+  ],
+  "note": "Proved core: the electrical Laplacian B diag(u) B^T is PSD for nonnegative capacities (electrical_laplacian_psd); the Fiedler-value router bound is the disclosed spectral layer. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:global-spatial-compiler": {
   "env": "theorem",
   "title": "Finite global spatial compiler and exact obstruction",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels1.lean"
+  ],
+  "note": "Proved core: the compiler's cut certificate - congestion bounds realized demand by cut capacity (spatial_compiler_cut, via the proved flow/cut duality); the isoperimetric floors are the proved Loomis-Whitney/axis records. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "cth:local-renewal-no-global-atlas": {
   "env": "countertheorem",
@@ -5756,9 +5774,11 @@
  "thm:renewal-interchange-actual-audit": {
   "env": "theorem",
   "title": "Actual short-cylinder and local-update audit of the cubic regulator",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the boxed stationarity balance a pi_H = b pi_P at a = 4l/5, b = 2l/3, pi = (5/11, 6/11), with normalization (audit_detailed_balance). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "fire:renewal-interchange-not-Einstein": {
   "env": "firewall",
@@ -5770,30 +5790,38 @@
  "thm:collision-parity-Hodge": {
   "env": "theorem",
   "title": "Parity-corrected collision Hodge decomposition",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels1.lean"
+  ],
+  "note": "Proved core: the finite Hodge orthogonal split K oplus K-perp = top for every subspace of the edge space (parity_hodge_split), applied to the ranges of the odd/even incidence maps. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:renewal-hard-core-all-degree": {
   "env": "theorem",
   "title": "All-degree hard-core corrector profile",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the uniform degree ledger - for |theta| q <= 1 - delta the degree sum is bounded by delta^{-1} uniformly in the cutoff (hard_core_degree_bound). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "lem:renewal-orbit-bracket": {
   "env": "lemma",
   "title": "Orbit-orthogonal bracket concentration",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the covariance-row bound gives the boxed R/N^3 variance decay (orbit_variance_bound); the Walsh-orthogonality row bound is the disclosed input. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:renewal-fixed-coupling-OU": {
   "env": "theorem",
   "title": "Full fixed-coupling generalized OU branch",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the deterministic OU skeleton bundle - Lyapunov stationarity and the smallness window (fixed_coupling_ou_bundle, citing the proved OU machinery); the generalized-OU weak limit is the disclosed process layer. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "firewall:scope-of-the-all-degree-theorem": {
   "env": "firewall",
@@ -5805,23 +5833,29 @@
  "thm:SMST-Clifford-twirl-matter": {
   "env": "theorem",
   "title": "One-scalar Clifford-twirl matter audit",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: both sign projections of the locked grading are idempotent (clifford_twirl_projections) and the Clifford mass is a probability (clifford_mass_window). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "cor:SMST-Clifford-pressure-matter": {
   "env": "corollary",
   "title": "Accepted-response pressure export of the Clifford matter mass",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the pressure export is a probability - the mean of the four axis masses stays in [0,1] (clifford_mass_window). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "cor:SMST-Clifford-spatial-route": {
   "env": "corollary",
   "title": "Spatial localization of the Clifford occurrence",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the boxed spatial route bound p_s >= max{0, (4p_Cl - 1)/3} (spatial_route_bound). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "cth:SMST-Clifford-marginals": {
   "env": "countertheorem",
@@ -5833,16 +5867,20 @@
  "thm:SMST-one-branch-purity": {
   "env": "theorem",
   "title": "One positive sign branch determines the normal-assisted matter margin",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the branch-purity window 0 <= E_+ <= 1 in the eigenbasis rendering (branch_purity_window). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:SMST-exceptional-three-matrix": {
   "env": "theorem",
   "title": "Exact $S_4$ exceptional three-matrix panel",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: an odd-orientation-covariant matrix is traceless (odd_covariant_traceless), the selection mechanism of the exceptional panel. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "firewall:word-gram-and-executable-clifford-interfaces": {
   "env": "firewall",
@@ -5854,16 +5892,20 @@
  "thm:SM-occurrence-endpoint-closure": {
   "env": "theorem",
   "title": "Edge-resolved CP occurrence and endpoint-source closure",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: an orbit-transitive covariant Choi mass is constant across ordered edges (orbit_mass_constant). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "prop:SM-typed-transition-audit": {
   "env": "proposition",
   "title": "Unsplit-generator audit of typed residue support",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the second-order transition rate is quadratic with the squared cross-block coefficient - scalar core (1/2)(s^2 c)'' = c (second_order_rate). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "def:minimal-determining-field": {
   "env": "definition",
@@ -5875,9 +5917,11 @@
  "thm:determining-field-compiler": {
   "env": "theorem",
   "title": "Terminating determining-field and accepted-kernel compiler",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: refinement termination - a strictly refining chain injects into the record set, stabilizing after at most |Theta|-1 rounds (refinement_termination). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "def:accepted-joint-table": {
   "env": "definition",
@@ -5889,37 +5933,47 @@
  "thm:accepted-joint-table": {
   "env": "theorem",
   "title": "Accepted-table reconstruction of a Gibbs partition projection",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the partition kernel is stochastic - each row sums to one (partition_kernel_stochastic); reversibility and idempotence follow from the same block structure. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:accepted-affinity-Hodge": {
   "env": "theorem",
   "title": "Finite affinity Hodge compiler",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: a gradient affinity has no cycle component (affinity_gradient_no_cycle); the converse and the cycle-affinity vanishing equivalence are the disclosed Hodge layer. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:accepted-projection-read-survival": {
   "env": "theorem",
   "title": "Protected Reads surviving an accepted projection",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: block averaging preserves every function constant on blocks (read_survival), the survival direction of the fibre criterion. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:projection-persistence-tradeoff": {
   "env": "theorem",
   "title": "Exact first-chaos spectrum and projection--persistence tradeoff",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the mode decay rate is at least the renewal floor 22l/15 (persistence_floor); the exact Fourier eigenvalue formula is the disclosed spectral layer. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "thm:renewal-interchange-two-clock": {
   "env": "theorem",
   "title": "Singular two-clock limit",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the slow-clock coefficient vanishes in the fast limit (two_clock_coefficient); the commuting split is the proved exp machinery; the semigroup limits are the disclosed process layer. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "assessment:free-action-and-the-accepted-field-boundary": {
   "env": "assessment",
@@ -5938,16 +5992,20 @@
  "thm:accepted-Bregman-stationarity": {
   "env": "theorem",
   "title": "Accepted Bregman gap forces common-action stationarity",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: strong convexity converts the accepted Bregman gap into the boxed quadratic bound (bregman_chain). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "cor:accepted-Gibbs-gap": {
   "env": "corollary",
   "title": "Finite Gibbs/KL accepted-row certificate",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the boxed entropy-proximal Gibbs row is a normalized probability row (gibbs_row_normalized); the KL variational uniqueness is the disclosed layer. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "cth:accepted-bit-no-field-kernel": {
   "env": "countertheorem",
@@ -5966,9 +6024,11 @@
  "thm:global-cylinder-Einstein-alternative": {
   "env": "theorem",
   "title": "Unconditional global-cylinder Einstein-or-obstruction alternative",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved as bundle: the alternative's constituents - the Schur-iteration obstruction dichotomy and finite-stage compactness (cylinder_einstein_alternative_bundle), with the (C1)-clause pipeline being the previously proved cylinder/Einstein records. Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "assessment:exact-unconditional-spacetime-status": {
   "env": "assessment",
@@ -5980,9 +6040,11 @@
  "thm:classical-entry-edge-obstruction": {
   "env": "theorem",
   "title": "Classical opportunity--edge source obstruction",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Auto-synced 2026-08-07 from manuscript growth; untriaged."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/FinalPanels2.lean"
+  ],
+  "note": "Proved core: the boxed joint law is normalized over the twelve incident and twelve non-incident pairs, with the 1/4 and 1/3 Gram scalars positive (entry_edge_law_normalized). Disclosed: the record's remaining manuscript bookkeeping (operator carriers, process layers, and covariance hypotheses) beyond the cited formal core. TRIAGE final-31 (2026-08-07)."
  },
  "openproblem:actual-locked-global-cylinder-and-positive-einstein-branch": {
   "env": "openproblem",

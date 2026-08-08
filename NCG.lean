@@ -332,6 +332,8 @@ import NCG.Grand.OUProcess
 import NCG.Grand.ArithCompiler
 import NCG.Grand.GrandUniversal
 import NCG.Grand.LastCorollaries
+import NCG.Grand.FinalPanels1
+import NCG.Grand.FinalPanels2
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly
