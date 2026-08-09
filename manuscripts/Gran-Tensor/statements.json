@@ -93,7 +93,7 @@
       "NCG.minimal_read_algebra",
       "NCG.separating_subalgebra_eq_top"
     ],
-    "note": "Exact re-encoding 2026-08-08: the generated future-Read algebra is proved equal to the full fibre-constant pullback algebra, and primitive-update pullback invariance is kernel-checked in ExactEasy03."
+    "note": "Exact re-encoding 2026-08-08: the generated future-Read algebra is proved equal to the full fibre-constant pullback algebra, and primitive-update pullback invariance is kernel-checked in GeneratedMinimalRecord."
   },
   "con:partition-refinement": {
     "env": "construction",
@@ -507,7 +507,7 @@
     "lean": [
       "NCG/Grand/JointSourceUniversality.lean:NCG.joint_source_universality",
       "NCG/Grand/JointSourceUniversality.lean:NCG.gram_realization_inner",
-      "NCG/Grand/ExactEasy43.lean:NCG.joint_source_unique_range_unitary"
+      "NCG/Grand/JointSourceRangeUnitary.lean:NCG.joint_source_unique_range_unitary"
     ],
     "note": "Exact distributed encoding: NCG.joint_source_universality proves Gram reproduction, quotient-kernel equality, well-defined factor correspondence, inner preservation, and the rank/minimal-dimension clause. NCG.joint_source_unique_range_unitary constructs the quotient-induced linear equivalence between the two source ranges, proves that it fixes every source coefficient and preserves the ambient inner product, and proves uniqueness. Consequently every Gram-preserving support gauge or unread refinement induces the same source-fixing unitary."
   },
@@ -911,11 +911,11 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/ExcursionInversion.lean:NCG.resolved_excursion_inversion",
-      "NCG/Grand/ExactEasy44.lean:NCG.resolved_excursion_formal_schur_inverse",
-      "NCG/Grand/ExactEasy44.lean:NCG.excursionESeries_coefficient",
-      "NCG/Grand/ExactEasy44.lean:NCG.excursionESeries_three_letter"
+      "NCG/Grand/ResolvedWordSchurInversion.lean:NCG.resolved_excursion_formal_schur_inverse",
+      "NCG/Grand/ResolvedWordSchurInversion.lean:NCG.excursionESeries_coefficient",
+      "NCG/Grand/ResolvedWordSchurInversion.lean:NCG.excursionESeries_three_letter"
     ],
-    "note": "Exact EASY proof completed 2026-08-08. ExcursionInversion proves the resolved word-lift recursion, connected three-letter coefficient identity, exactness/no-return conclusion over all words, and the positive-summand branch. ExactEasy44 supplies the previously missing free-word formal-series packaging: hiddenResolventApply is the coefficient action of (I-D(z))^-1 C(z), excursionESeries is B(z)(I-D(z))^-1 C(z), and resolved_excursion_formal_schur_inverse proves coefficientwise that [I-A(z)-E(z)]X(z)=I. excursionESeries_coefficient identifies every arbitrary-middle-word coefficient with B_b D_u C_a, with the displayed three-letter case recorded separately."
+    "note": "Exact EASY proof completed 2026-08-08. ExcursionInversion proves the resolved word-lift recursion, connected three-letter coefficient identity, exactness/no-return conclusion over all words, and the positive-summand branch. ResolvedWordSchurInversion supplies the previously missing free-word formal-series packaging: hiddenResolventApply is the coefficient action of (I-D(z))^-1 C(z), excursionESeries is B(z)(I-D(z))^-1 C(z), and resolved_excursion_formal_schur_inverse proves coefficientwise that [I-A(z)-E(z)]X(z)=I. excursionESeries_coefficient identifies every arbitrary-middle-word coefficient with B_b D_u C_a, with the displayed three-letter case recorded separately."
   },
   "cor:exact-lift-normal-form": {
     "env": "corollary",
@@ -966,10 +966,10 @@
     "status": "proved",
     "lean": [
       "NCG.sealed_provenance_quotient",
-      "NCG/Grand/ExactEasy74.lean:NCG.completeObservation",
-      "NCG/Grand/ExactEasy74.lean:NCG.reachable_observable_unique_similarity"
+      "NCG/Grand/PassiveRealizationSimilarity.lean:NCG.completeObservation",
+      "NCG/Grand/PassiveRealizationSimilarity.lean:NCG.reachable_observable_unique_similarity"
     ],
-    "note": "Exact distributed encoding 2026-08-08: sealed_provenance_quotient proves both word homomorphisms, the provenance cocycle and reconstruction formula, hidden-letter invariance of the reachable and Read-null spaces, the quotient exact-sequence dimension identity, and response factorization. ExactEasy74 constructs the unique linear similarity between any two source-reachable, Read-observable realizations of the same complete passive Read table through their common injective observation/Hankel-column range; it fixes all sources, preserves all Reads, and intertwines generated letter actions."
+    "note": "Exact distributed encoding 2026-08-08: sealed_provenance_quotient proves both word homomorphisms, the provenance cocycle and reconstruction formula, hidden-letter invariance of the reachable and Read-null spaces, the quotient exact-sequence dimension identity, and response factorization. PassiveRealizationSimilarity constructs the unique linear similarity between any two source-reachable, Read-observable realizations of the same complete passive Read table through their common injective observation/Hankel-column range; it fixes all sources, preserves all Reads, and intertwines generated letter actions."
   },
   "thm:provenance-hankel-minimality": {
     "env": "theorem",
@@ -977,11 +977,11 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/ProvenanceHankel.lean:NCG.provenance_hankel_minimality",
-      "NCG/Grand/ExactEasy83.lean:NCG.increasing_filtration_saturates_by_finrank",
-      "NCG/Grand/ExactEasy83.lean:NCG.full_panel_rank",
-      "NCG/Grand/ExactEasy83.lean:NCG.provenance_finite_panel_saturation"
+      "NCG/Grand/ProvenancePanelSaturation.lean:NCG.increasing_filtration_saturates_by_finrank",
+      "NCG/Grand/ProvenancePanelSaturation.lean:NCG.full_panel_rank",
+      "NCG/Grand/ProvenancePanelSaturation.lean:NCG.provenance_finite_panel_saturation"
     ],
-    "note": "Exact EASY completion 2026-08-08: ProvenanceHankel proves the quotient is linearly equivalent to the full Hankel column space and establishes the minimal dimension bound. ExactEasy83 supplies the omitted finite-panel clause: under the manuscript's increasing, plateau-freeze, and exhaustion hypotheses, the reachable and observable word-length filtrations saturate by d = finrank V, so a surjective column synthesis followed by an injective row analysis has panel rank d for every p,q ≥ d."
+    "note": "Exact EASY completion 2026-08-08: ProvenanceHankel proves the quotient is linearly equivalent to the full Hankel column space and establishes the minimal dimension bound. ProvenancePanelSaturation supplies the omitted finite-panel clause: under the manuscript's increasing, plateau-freeze, and exhaustion hypotheses, the reachable and observable word-length filtrations saturate by d = finrank V, so a surjective column synthesis followed by an injective row analysis has panel rank d for every p,q ≥ d."
   },
   "def:completion-aggregate-provenance": {
     "env": "definition",
@@ -1032,11 +1032,11 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/InnovationDecomposition.lean:NCG.provenance_innovation_decomposition",
-      "NCG/Grand/ExactEasy67.lean:NCG.finrank_coprod_sub_of_projection",
-      "NCG/Grand/ExactEasy67.lean:NCG.stacked_rank_innovation",
-      "NCG/Grand/ExactEasy67.lean:NCG.provenance_innovation_decomposition_exact"
+      "NCG/Grand/ProvenanceInnovationRank.lean:NCG.finrank_coprod_sub_of_projection",
+      "NCG/Grand/ProvenanceInnovationRank.lean:NCG.stacked_rank_innovation",
+      "NCG/Grand/ProvenanceInnovationRank.lean:NCG.provenance_innovation_decomposition_exact"
     ],
-    "note": "Exact encoding completed 2026-08-08. InnovationDecomposition proves the boxed projector Pythagoras, positivity of both summands, and the Gram-rank identity. ExactEasy67 characterizes the Moore--Penrose row projector P_A=A^dagger A by idempotence, AP_A=A, and rank P_A=rank A; these facts identify its range with Row A. It proves that adjoining S increases row-space dimension by exactly rank(S(I-P_A)), combines this with the Gram-rank identity, and packages the full manuscript theorem including rank([A;S])-rank(A)=rank(S(I-P_A)S*)."
+    "note": "Exact encoding completed 2026-08-08. InnovationDecomposition proves the boxed projector Pythagoras, positivity of both summands, and the Gram-rank identity. ProvenanceInnovationRank characterizes the Moore--Penrose row projector P_A=A^dagger A by idempotence, AP_A=A, and rank P_A=rank A; these facts identify its range with Row A. It proves that adjoining S increases row-space dimension by exactly rank(S(I-P_A)), combines this with the Gram-rank identity, and packages the full manuscript theorem including rank([A;S])-rank(A)=rank(S(I-P_A)S*)."
   },
   "assess:canonical-microscopic-floor": {
     "env": "assessment",
@@ -1807,9 +1807,9 @@
     "status": "proved",
     "lean": [
       "NCG.source_native_renormalization",
-      "NCG/Grand/ExactEasy50.lean:NCG.source_native_router_strict_composition"
+      "NCG/Grand/SourceNativeRouterComposition.lean:NCG.source_native_router_strict_composition"
     ],
-    "note": "Exact EASY promotion 2026-08-08: FAITHFUL. The existing theorem proves the minimum-norm router Pythagoras, exact metric transport iff zero old-source residual, and positivity of the independent new-source innovation. ExactEasy50 proves the remaining clause: zero-residual routers synthesize the embedded old sources exactly and compose strictly along a composable physical carrier cocycle."
+    "note": "Exact EASY promotion 2026-08-08: FAITHFUL. The existing theorem proves the minimum-norm router Pythagoras, exact metric transport iff zero old-source residual, and positivity of the independent new-source innovation. SourceNativeRouterComposition proves the remaining clause: zero-residual routers synthesize the embedded old sources exactly and compose strictly along a composable physical carrier cocycle."
   },
   "thm:summable-metric-correction": {
     "env": "theorem",
@@ -1817,14 +1817,14 @@
     "status": "proved",
     "lean": [
       "NCG.summable_metric_correction",
-      "NCG/Grand/ExactEasy72.lean:NCG.metricChainTransport",
-      "NCG/Grand/ExactEasy72.lean:NCG.transportedMetric_succ_sub",
-      "NCG/Grand/ExactEasy72.lean:NCG.transportedMetric_defect_bound",
-      "NCG/Grand/ExactEasy72.lean:NCG.posSemidef_of_tendsto",
-      "NCG/Grand/ExactEasy72.lean:NCG.summable_metric_correction_exact",
-      "NCG/Grand/ExactEasy72.lean:NCG.unweighted_metric_errors_do_not_suffice"
+      "NCG/Grand/MetricArrowCorrection.lean:NCG.metricChainTransport",
+      "NCG/Grand/MetricArrowCorrection.lean:NCG.transportedMetric_succ_sub",
+      "NCG/Grand/MetricArrowCorrection.lean:NCG.transportedMetric_defect_bound",
+      "NCG/Grand/MetricArrowCorrection.lean:NCG.posSemidef_of_tendsto",
+      "NCG/Grand/MetricArrowCorrection.lean:NCG.summable_metric_correction_exact",
+      "NCG/Grand/MetricArrowCorrection.lean:NCG.unweighted_metric_errors_do_not_suffice"
     ],
-    "note": "Exact EASY promotion 2026-08-08: ExactEasy72 constructs the ordered chain cocycle Z_{n/m}, proves that consecutive transported metrics differ by Z_{n/m}^* E_n Z_{n/m}, and bounds this in the genuine Hilbert L2 operator norm by ||Z_{n/m}||^2 ||E_n||. Summable telescoping produces Ghat_m with the boxed tail bound; an explicit closed-PSD-cone proof gives positivity; shifted-chain transport plus uniqueness of limits gives Z_m^* Ghat_{m+1} Z_m = Ghat_m. The scalar example 4^n*(1/4)^n = 1 proves unweighted summability can fail after amplification."
+    "note": "Exact EASY promotion 2026-08-08: MetricArrowCorrection constructs the ordered chain cocycle Z_{n/m}, proves that consecutive transported metrics differ by Z_{n/m}^* E_n Z_{n/m}, and bounds this in the genuine Hilbert L2 operator norm by ||Z_{n/m}||^2 ||E_n||. Summable telescoping produces Ghat_m with the boxed tail bound; an explicit closed-PSD-cone proof gives positivity; shifted-chain transport plus uniqueness of limits gives Z_m^* Ghat_{m+1} Z_m = Ghat_m. The scalar example 4^n*(1/4)^n = 1 proves unweighted summability can fail after amplification."
   },
   "def:metric-obstruction-profile": {
     "env": "definition",
@@ -1952,11 +1952,11 @@
       "NCG/Upstream/KalmanRealization.lean:NCG.physical_source_uniqueness",
       "NCG/Upstream/KalmanRealization.lean:NCG.krylov_reduces",
       "NCG/Upstream/KalmanRealization.lean:NCG.block_hankel_rank",
-      "NCG/Grand/ExactEasy51.lean:NCG.krylov_orthogonal_complement_invariant",
-      "NCG/Grand/ExactEasy51.lean:NCG.source_compression_invisibility",
-      "NCG/Grand/ExactEasy51.lean:NCG.source_fixing_intertwiner_unique"
+      "NCG/Grand/PhysicalSourceMinimality.lean:NCG.krylov_orthogonal_complement_invariant",
+      "NCG/Grand/PhysicalSourceMinimality.lean:NCG.source_compression_invisibility",
+      "NCG/Grand/PhysicalSourceMinimality.lean:NCG.source_fixing_intertwiner_unique"
     ],
-    "note": "Exact EASY promotion 2026-08-08: FAITHFUL. Existing Kalman results give cyclic invariance, Hankel rank, and existence of the unitary source-fixing intertwiner from all-order moments. ExactEasy51 proves orthogonal-complement invariance for Hermitian response, exact preservation of every moment and arbitrary finite functional-calculus block under cyclic compression, source invisibility of the complement, and uniqueness of any source-fixing intertwiner on a source-minimal Krylov carrier."
+    "note": "Exact EASY promotion 2026-08-08: FAITHFUL. Existing Kalman results give cyclic invariance, Hankel rank, and existence of the unitary source-fixing intertwiner from all-order moments. PhysicalSourceMinimality proves orthogonal-complement invariance for Hermitian response, exact preservation of every moment and arbitrary finite functional-calculus block under cyclic compression, source invisibility of the complement, and uniqueness of any source-fixing intertwiner on a source-minimal Krylov carrier."
   },
   "thm:primitive-writer-saturation": {
     "env": "theorem",
@@ -2025,11 +2025,11 @@
     "lean": [
       "NCG/Grand/HeadTailEnclosure.lean:NCG.sharp_positive_head_tail",
       "NCG/Grand/HeadTailEnclosure.lean:NCG.head_tail_block_expansion",
-      "NCG/Grand/ExactEasy68.lean:NCG.abs_re_star_dot_mulVec_le",
-      "NCG/Grand/ExactEasy68.lean:NCG.sharp_positive_head_tail_opNorm",
-      "NCG/Grand/ExactEasy68.lean:NCG.sharp_positive_head_tail_exact"
+      "NCG/Grand/PositiveHeadTailEnclosure.lean:NCG.abs_re_star_dot_mulVec_le",
+      "NCG/Grand/PositiveHeadTailEnclosure.lean:NCG.sharp_positive_head_tail_opNorm",
+      "NCG/Grand/PositiveHeadTailEnclosure.lean:NCG.sharp_positive_head_tail_exact"
     ],
-    "note": "Exact encoding completed 2026-08-08. HeadTailEnclosure proves the exact block quadratic-form expansion, the sharp scalar two-by-two eigenvalue enclosure Lambda(a,b,d), and Lambda<1 iff b^2<(1-a)(1-d) under a,d<1. ExactEasy68 proves the missing operator clause for every positive complex block matrix H=[[A,B],[B*,D]]: Cauchy--Schwarz bounds each block pairing, the scalar enclosure controls every Rayleigh quotient, and positivity plus the finite-dimensional Rayleigh norm theorem gives ||H||<=Lambda(||A||,||B||,||D||)."
+    "note": "Exact encoding completed 2026-08-08. HeadTailEnclosure proves the exact block quadratic-form expansion, the sharp scalar two-by-two eigenvalue enclosure Lambda(a,b,d), and Lambda<1 iff b^2<(1-a)(1-d) under a,d<1. PositiveHeadTailEnclosure proves the missing operator clause for every positive complex block matrix H=[[A,B],[B*,D]]: Cauchy--Schwarz bounds each block pairing, the scalar enclosure controls every Rayleigh quotient, and positivity plus the finite-dimensional Rayleigh norm theorem gives ||H||<=Lambda(||A||,||B||,||D||)."
   },
   "thm:weighted-source-influence": {
     "env": "theorem",
@@ -2056,14 +2056,14 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/CalderonFrame.lean:NCG.universal_calderon_frame",
-      "NCG/Grand/ExactEasy79.lean:NCG.matrix_exp_eq_bare_cfc",
-      "NCG/Grand/ExactEasy79.lean:NCG.exp_neg_psd_bounds",
-      "NCG/Grand/ExactEasy79.lean:NCG.exp_smul_projection",
-      "NCG/Grand/ExactEasy79.lean:NCG.universal_calderon_frame_bounds",
-      "NCG/Grand/ExactEasy79.lean:NCG.universal_calderon_frame_isometry_limit",
-      "NCG/Grand/ExactEasy79.lean:NCG.universal_calderon_frame_infinite_isometry"
+      "NCG/Grand/UniversalCalderonFrame.lean:NCG.matrix_exp_eq_bare_cfc",
+      "NCG/Grand/UniversalCalderonFrame.lean:NCG.exp_neg_psd_bounds",
+      "NCG/Grand/UniversalCalderonFrame.lean:NCG.exp_smul_projection",
+      "NCG/Grand/UniversalCalderonFrame.lean:NCG.universal_calderon_frame_bounds",
+      "NCG/Grand/UniversalCalderonFrame.lean:NCG.universal_calderon_frame_isometry_limit",
+      "NCG/Grand/UniversalCalderonFrame.lean:NCG.universal_calderon_frame_infinite_isometry"
     ],
-    "note": "Exact encoding completed 2026-08-08. CalderonFrame proves the operator FTC, per-scale Gram identity, and compressed finite-cutoff identity. ExactEasy79 diagonalizes the matrix exponential through the bare Hermitian functional calculus, proves positivity and contraction of exp(-AR), evaluates the exponential of the reducing projection, and derives the sharp Loewner bounds (1-exp(-Am))Q <= Q-exp(-AL)Q <= Q from L>=mQ. It also proves quadratic convergence of the compressed Gram to Q as A tends to infinity and specializes this to the ambient squared norm on vectors x with Qx=x, giving the infinite-cutoff isometry."
+    "note": "Exact encoding completed 2026-08-08. CalderonFrame proves the operator FTC, per-scale Gram identity, and compressed finite-cutoff identity. UniversalCalderonFrame diagonalizes the matrix exponential through the bare Hermitian functional calculus, proves positivity and contraction of exp(-AR), evaluates the exponential of the reducing projection, and derives the sharp Loewner bounds (1-exp(-Am))Q <= Q-exp(-AL)Q <= Q from L>=mQ. It also proves quadratic convergence of the compressed Gram to Q as A tends to infinity and specializes this to the ambient squared norm on vectors x with Qx=x, giving the infinite-cutoff isometry."
   },
   "thm:common-predictor-innovation": {
     "env": "theorem",
@@ -2097,14 +2097,14 @@
     "lean": [
       "NCG/Grand/HoeffdingSupport.lean:NCG.primitive_hoeffding_support",
       "NCG/Grand/HoeffdingSupport.lean:NCG.hoeffding_frame_window",
-      "NCG/Grand/ExactEasy65.lean:NCG.primitive_projection_relations",
-      "NCG/Grand/ExactEasy65.lean:NCG.primitive_hoeffding_support_canonical",
-      "NCG/Grand/ExactEasy65.lean:NCG.scoreGram_psd",
-      "NCG/Grand/ExactEasy65.lean:NCG.scoreGram_lower",
-      "NCG/Grand/ExactEasy65.lean:NCG.scoreGram_upper",
-      "NCG/Grand/ExactEasy65.lean:NCG.primitive_score_tensor_frame_window"
+      "NCG/Grand/PrimitiveHoeffdingCarrier.lean:NCG.primitive_projection_relations",
+      "NCG/Grand/PrimitiveHoeffdingCarrier.lean:NCG.primitive_hoeffding_support_canonical",
+      "NCG/Grand/PrimitiveHoeffdingCarrier.lean:NCG.scoreGram_psd",
+      "NCG/Grand/PrimitiveHoeffdingCarrier.lean:NCG.scoreGram_lower",
+      "NCG/Grand/PrimitiveHoeffdingCarrier.lean:NCG.scoreGram_upper",
+      "NCG/Grand/PrimitiveHoeffdingCarrier.lean:NCG.primitive_score_tensor_frame_window"
     ],
-    "note": "Exact encoding completed 2026-08-08. HoeffdingSupport proves mutual orthogonality and identity resolution of all sixteen four-cell tensor projections, trace/range dimensions 3^|A|, the exact 54/108/81 support-order table and total 243, the nine-dimensional two-cell connected sector, and tensorization of the frame window. ExactEasy65 instantiates E and Q on the canonical one-dimensional constant plus three-dimensional primitive score carrier, verifies their complementary ranks 1 and 3, and proves for the concrete G0=diag(176/225,1,1) the PSD lower and upper windows and hence (176/225)^2 I <= G0 tensor G0 <= I."
+    "note": "Exact encoding completed 2026-08-08. HoeffdingSupport proves mutual orthogonality and identity resolution of all sixteen four-cell tensor projections, trace/range dimensions 3^|A|, the exact 54/108/81 support-order table and total 243, the nine-dimensional two-cell connected sector, and tensorization of the frame window. PrimitiveHoeffdingCarrier instantiates E and Q on the canonical one-dimensional constant plus three-dimensional primitive score carrier, verifies their complementary ranks 1 and 3, and proves for the concrete G0=diag(176/225,1,1) the PSD lower and upper windows and hence (176/225)^2 I <= G0 tensor G0 <= I."
   },
   "thm:S4-support-prototype": {
     "env": "theorem",
@@ -2145,7 +2145,7 @@
     "lean": [
       "NCG/Grand/MeanNoiseShort.lean:NCG.renewal_noise_shorted_ward",
       "NCG/Grand/MeanNoiseShort.lean:NCG.renewal_mean_noise_short",
-      "NCG/Grand/ExactEasy41.lean:NCG.renewal_noise_shorted_ward_remainder"
+      "NCG/Grand/RenewalNoiseWardRemainder.lean:NCG.renewal_noise_shorted_ward_remainder"
     ],
     "note": "Exact distributed encoding: NCG.renewal_mean_noise_short proves the raw/mean/noise Pythagoras and the simultaneous noise short; NCG.renewal_noise_shorted_ward proves the exact τG_noise substitution. NCG.renewal_noise_shorted_ward_remainder proves ‖raw-τG_noise‖ ≤ ‖X‖²+‖E‖ and ‖X*X‖=‖X‖² for the whitened mean residual X, which directly yields the displayed o(τ) and o(τ²) conclusions under the manuscript assumptions."
   },
@@ -2161,7 +2161,7 @@
     "title": "Finite regenerative complete observability",
     "status": "proved",
     "lean": [
-      "NCG/Grand/ExactEasy35.lean:NCG.renewal_complete_observability_exact",
+      "NCG/Grand/RenewalCompleteObservability.lean:NCG.renewal_complete_observability_exact",
       "NCG/Grand/FluctuationObservability.lean:NCG.renewal_complete_observability"
     ],
     "note": "Exact distributed encoding: NCG.renewal_complete_observability proves telescoping, Loewner decay, and energy telescoping. NCG.renewal_complete_observability_exact identifies the truncated observability operator, derives the source-frame comparison b(1-δ)^k G - a R*^k G R^k ⪰ 0 (the squared G-norm contraction estimate), and proves O - δ Σ_{k<K}R*^k Q R^k ⪰ 0 for every K, the exact finite certificate for the total observed-energy bound and exclusion of invisible fixed directions."
@@ -2173,11 +2173,11 @@
     "lean": [
       "NCG/Grand/OneWayLyapunov.lean:NCG.one_way_provenance_power",
       "NCG/Grand/OneWayLyapunov.lean:NCG.lyapunov_metric",
-      "NCG/Grand/ExactEasy62.lean:NCG.l2_opNorm_fromBlocks_oneway_le",
-      "NCG/Grand/ExactEasy62.lean:NCG.one_way_provenance_uniform_power",
-      "NCG/Grand/ExactEasy62.lean:NCG.one_way_provenance_Lyapunov_exact"
+      "NCG/Grand/ProvenanceBlockAggregation.lean:NCG.l2_opNorm_fromBlocks_oneway_le",
+      "NCG/Grand/ProvenanceBlockAggregation.lean:NCG.one_way_provenance_uniform_power",
+      "NCG/Grand/ProvenanceBlockAggregation.lean:NCG.one_way_provenance_Lyapunov_exact"
     ],
-    "note": "Exact encoding completed 2026-08-08. OneWayLyapunov proves the exact lower-triangular block-power formula, the geometric corner estimate, and the complete word-Gram Lyapunov package (convergence, Stein identity, uniqueness, conditioning, coercive contraction, and truncation tail). ExactEasy62 proves the missing Euclidean direct-sum operator estimate ||[[A,0],[C,D]]|| <= ||A||+||C||+||D||, aggregates the three block bounds with the manuscript's precise M_R = max{1, M_A+M_D+M_A M_D c/(r-max(a,d))}, derives ||R^n|| <= M_R r^n, and feeds that exact bound into the full Lyapunov theorem."
+    "note": "Exact encoding completed 2026-08-08. OneWayLyapunov proves the exact lower-triangular block-power formula, the geometric corner estimate, and the complete word-Gram Lyapunov package (convergence, Stein identity, uniqueness, conditioning, coercive contraction, and truncation tail). ProvenanceBlockAggregation proves the missing Euclidean direct-sum operator estimate ||[[A,0],[C,D]]|| <= ||A||+||C||+||D||, aggregates the three block bounds with the manuscript's precise M_R = max{1, M_A+M_D+M_A M_D c/(r-max(a,d))}, derives ||R^n|| <= M_R r^n, and feeds that exact bound into the full Lyapunov theorem."
   },
   "thm:renewal-physical-rate": {
     "env": "theorem",
@@ -2185,7 +2185,7 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/PhysicalRate.lean:NCG.renewal_physical_rate",
-      "NCG/Grand/ExactEasy40.lean:NCG.renewal_physical_rate_exact"
+      "NCG/Grand/RenewalPhysicalRate.lean:NCG.renewal_physical_rate_exact"
     ],
     "note": "Exact distributed encoding: NCG.renewal_physical_rate proves the residual triangle inequality and n-step telescoping estimate for contractions. NCG.renewal_physical_rate_exact derives both displayed rate bounds for TV and V*TV, the λ' rate-budget implication, and the exact compact-window estimate nε ≤ (T+τ)(ε/τ); thus ε=o(τ), equivalently the squared Ward residual is o(τ²), gives uniform compact-time agreement."
   },
@@ -2213,7 +2213,7 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/FluctuationObservability.lean:NCG.renewal_fluctuation_dissipation",
-      "NCG/Grand/ExactEasy36.lean:NCG.renewal_fluctuation_dissipation_two_sided"
+      "NCG/Grand/RenewalFluctuationDissipation.lean:NCG.renewal_fluctuation_dissipation_two_sided"
     ],
     "note": "Exact distributed encoding: NCG.renewal_fluctuation_dissipation proves the finite Lyapunov telescope, every conjugated upper innovation bound, and the equal-marginal stationary identity Q=H-K*HK. NCG.renewal_fluctuation_dissipation_two_sided proves at every truncation both Σ_N-d_- (H-K*^N H K^N) ⪰ 0 and d_+ (H-K*^N H K^N)-Σ_N ⪰ 0. Under the theorem's strict H-contraction the endpoint tends to zero, yielding the displayed two-sided covariance/noncollapse window and uniqueness of the norm-convergent Lyapunov solution."
   },
@@ -2317,12 +2317,12 @@
     "status": "proved",
     "lean": [
       "NCG.four_cell_support_orbit_audit",
-      "NCG/Grand/ExactEasy65.lean:NCG.primitive_hoeffding_support_canonical",
-      "NCG/Grand/ExactEasy66.lean:NCG.canonical_hoeffding_projection_hermitian",
-      "NCG/Grand/ExactEasy66.lean:NCG.canonical_hoeffding_response_decomposition",
-      "NCG/Grand/ExactEasy66.lean:NCG.canonical_hoeffding_components_orthogonal"
+      "NCG/Grand/PrimitiveHoeffdingCarrier.lean:NCG.primitive_hoeffding_support_canonical",
+      "NCG/Grand/HoeffdingGramIdentification.lean:NCG.canonical_hoeffding_projection_hermitian",
+      "NCG/Grand/HoeffdingGramIdentification.lean:NCG.canonical_hoeffding_response_decomposition",
+      "NCG/Grand/HoeffdingGramIdentification.lean:NCG.canonical_hoeffding_components_orthogonal"
     ],
-    "note": "Exact encoding completed 2026-08-08. SupportPrototype proves S4 transitivity on all pair and triple supports and the one-prototype nonzero/zero orbit criteria. ExactEasy65 supplies the canonical four-cell constant/score Hoeffding projections. ExactEasy66 identifies every support Gram as (P_A F)*(P_A F), proves positivity and zero iff the corresponding innovation vanishes, proves the sixteen components sum to the full response, and proves distinct supports are Hilbert-Schmidt orthogonal. Together with the unique four-body support, these give the exact pair/triple/four-body exhaustion and the stated pairwise-K4 prototype audit."
+    "note": "Exact encoding completed 2026-08-08. SupportPrototype proves S4 transitivity on all pair and triple supports and the one-prototype nonzero/zero orbit criteria. PrimitiveHoeffdingCarrier supplies the canonical four-cell constant/score Hoeffding projections. HoeffdingGramIdentification identifies every support Gram as (P_A F)*(P_A F), proves positivity and zero iff the corresponding innovation vanishes, proves the sixteen components sum to the full response, and proves distinct supports are Hilbert-Schmidt orthogonal. Together with the unique four-body support, these give the exact pair/triple/four-body exhaustion and the stated pairwise-K4 prototype audit."
   },
   "thm:interaction-refinement-innovations": {
     "env": "theorem",
@@ -2330,10 +2330,10 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/EfficientConnectedScore.lean:NCG.interaction_refinement_innovations",
-      "NCG/Grand/ExactEasy47.lean:NCG.visibility_refinement_innovation",
-      "NCG/Grand/ExactEasy47.lean:NCG.interaction_refinement_innovations_exact"
+      "NCG/Grand/VisibilityInnovations.lean:NCG.visibility_refinement_innovation",
+      "NCG/Grand/VisibilityInnovations.lean:NCG.interaction_refinement_innovations_exact"
     ],
-    "note": "Exact EASY proof completed 2026-08-08. EfficientConnectedScore proves the boxed nuisance-explanation identity C0=C1+F*(P1-P0)F and positivity of the explained increment for nested orthogonal projections. ExactEasy47 supplies the missing strict-visibility refinement: for an isometric old-carrier embedding e and compatible response inclusion j, visibility_refinement_innovation proves j*(Gnew*Gnew)j=Gold*Gold+j*Gnew*(I-ee*)Gnew j, and identifies the added term as a positive Gram. Together these are exactly the two refinement alternatives in the manuscript."
+    "note": "Exact EASY proof completed 2026-08-08. EfficientConnectedScore proves the boxed nuisance-explanation identity C0=C1+F*(P1-P0)F and positivity of the explained increment for nested orthogonal projections. VisibilityInnovations supplies the missing strict-visibility refinement: for an isometric old-carrier embedding e and compatible response inclusion j, visibility_refinement_innovation proves j*(Gnew*Gnew)j=Gold*Gold+j*Gnew*(I-ee*)Gnew j, and identifies the added term as a positive Gram. Together these are exactly the two refinement alternatives in the manuscript."
   },
   "def:locality-modulus": {
     "env": "definition",
@@ -2348,13 +2348,13 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/LocalityModulus.lean:NCG.locality_modulus",
-      "NCG/Grand/ExactEasy46.lean:NCG.connectedPanelCompletions",
-      "NCG/Grand/ExactEasy46.lean:NCG.completedPanelGraph",
-      "NCG/Grand/ExactEasy46.lean:NCG.forcedPanelGraph",
-      "NCG/Grand/ExactEasy46.lean:NCG.possiblePanelGraph",
-      "NCG/Grand/ExactEasy46.lean:NCG.locality_modulus_exact"
+      "NCG/Grand/PanelLocalityModulus.lean:NCG.connectedPanelCompletions",
+      "NCG/Grand/PanelLocalityModulus.lean:NCG.completedPanelGraph",
+      "NCG/Grand/PanelLocalityModulus.lean:NCG.forcedPanelGraph",
+      "NCG/Grand/PanelLocalityModulus.lean:NCG.possiblePanelGraph",
+      "NCG/Grand/PanelLocalityModulus.lean:NCG.locality_modulus_exact"
     ],
-    "note": "Exact EASY proof completed 2026-08-08. ExactEasy46 replaces the old predicate-only rendering with the manuscript objects: connectedPanelCompletions is the set of PSD matrix completions satisfying every measured complex-linear constraint; connected support coefficients define each completion's operational two-section graph and the universal/existential forced and possible graphs. locality_modulus_exact assumes compactness of the feasible completion set, proves forced <= every operational graph <= possible, proves identification when the bounds coincide, and proves the induced extended-distance inequalities possible.edist <= operational.edist <= forced.edist."
+    "note": "Exact EASY proof completed 2026-08-08. PanelLocalityModulus replaces the old predicate-only rendering with the manuscript objects: connectedPanelCompletions is the set of PSD matrix completions satisfying every measured complex-linear constraint; connected support coefficients define each completion's operational two-section graph and the universal/existential forced and possible graphs. locality_modulus_exact assumes compactness of the feasible completion set, proves forced <= every operational graph <= possible, proves identification when the bounds coincide, and proves the induced extended-distance inequalities possible.edist <= operational.edist <= forced.edist."
   },
   "def:operational-collars": {
     "env": "definition",
@@ -2565,13 +2565,13 @@
     "lean": [
       "NCG/Grand/ResistanceCoframe.lean:NCG.action_resistance_reconstruction",
       "NCG/Grand/ResistanceCoframe.lean:NCG.action_coframe_router",
-      "NCG/Grand/ExactEasy71.lean:NCG.IsHermitianPenroseInverse",
-      "NCG/Grand/ExactEasy71.lean:NCG.hermitianPenroseInverse_symm",
-      "NCG/Grand/ExactEasy71.lean:NCG.action_resistance_pinv_exact",
-      "NCG/Grand/ExactEasy71.lean:NCG.equivariant_coframe_router_scalar",
-      "NCG/Grand/ExactEasy71.lean:NCG.resistanceMatrix_smul"
+      "NCG/Grand/ResistanceCoframeCalibration.lean:NCG.IsHermitianPenroseInverse",
+      "NCG/Grand/ResistanceCoframeCalibration.lean:NCG.hermitianPenroseInverse_symm",
+      "NCG/Grand/ResistanceCoframeCalibration.lean:NCG.action_resistance_pinv_exact",
+      "NCG/Grand/ResistanceCoframeCalibration.lean:NCG.equivariant_coframe_router_scalar",
+      "NCG/Grand/ResistanceCoframeCalibration.lean:NCG.resistanceMatrix_smul"
     ],
-    "note": "Exact EASY promotion 2026-08-08: ExactEasy71 represents K = H-dagger by the Hermitian Penrose equations, proves dagger involutivity, derives centering of K from the connected zero mode of H, and combines this with the existing entrywise resistance calculation to prove K = -1/2 P0 R P0 and that H is the dagger of the reconstructed K. It also derives that the canonical coframe router commutes with every common physical symmetry from the source equivariance equations, then applies the scalar-commutant hypothesis to obtain C = cA and G = |c|^2 H. Resistance rescaling under scalar Green-matrix scaling is kernel-checked separately."
+    "note": "Exact EASY promotion 2026-08-08: ResistanceCoframeCalibration represents K = H-dagger by the Hermitian Penrose equations, proves dagger involutivity, derives centering of K from the connected zero mode of H, and combines this with the existing entrywise resistance calculation to prove K = -1/2 P0 R P0 and that H is the dagger of the reconstructed K. It also derives that the canonical coframe router commutes with every common physical symmetry from the source equivariance equations, then applies the scalar-commutant hypothesis to obtain C = cA and G = |c|^2 H. Resistance rescaling under scalar Green-matrix scaling is kernel-checked separately."
   },
   "firewall:positive-resistance-geometry-is-not-lorentzian-geometry": {
     "env": "firewall",
@@ -2647,13 +2647,13 @@
     "lean": [
       "NCG/Grand/UniversalFeedback.lean:NCG.universal_feedback_memory",
       "NCG/Grand/UniversalFeedback.lean:NCG.feedback_kernel_reduction",
-      "NCG/Grand/ExactEasy84.lean:NCG.feedback_resolvent_series",
+      "NCG/Grand/UniversalFeedbackMemory.lean:NCG.feedback_resolvent_series",
       "NCG/Grand/FeedbackRealization.lean:NCG.feedback_hankel_realization",
       "NCG/Grand/HankelMinimality.lean:NCG.hankel_minimality",
       "NCG/Grand/PreRenewalRecovery.lean:NCG.pre_renewal_visible_recovery",
-      "NCG/Grand/ExactEasy84.lean:NCG.matrix_feedback_contraction_bound"
+      "NCG/Grand/UniversalFeedbackMemory.lean:NCG.matrix_feedback_contraction_bound"
     ],
-    "note": "Exact EASY completion 2026-08-08: UniversalFeedback proves the compressed-power exactness iff and Cayley–Hamilton reduction. ExactEasy84 proves the actual convergent infinite Schur-resolvent series over complex finite matrices, not only a formal identity; FeedbackRealization plus HankelMinimality give finite Hankel factorization and the canonical reachable/unobservable quotient with the minimal dimension bound; PreRenewalRecovery proves recursive kernel recovery. ExactEasy84 also proves principal-compression contractivity and derives the displayed weighted norm estimate directly from contractivity of the full enlarged transfer and T0."
+    "note": "Exact EASY completion 2026-08-08: UniversalFeedback proves the compressed-power exactness iff and Cayley–Hamilton reduction. UniversalFeedbackMemory proves the actual convergent infinite Schur-resolvent series over complex finite matrices, not only a formal identity; FeedbackRealization plus HankelMinimality give finite Hankel factorization and the canonical reachable/unobservable quotient with the minimal dimension bound; PreRenewalRecovery proves recursive kernel recovery. UniversalFeedbackMemory also proves principal-compression contractivity and derives the displayed weighted norm estimate directly from contractivity of the full enlarged transfer and T0."
   },
   "thm:connected-residual-factorization": {
     "env": "theorem",
@@ -2699,10 +2699,10 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/FeedbackWitnesses.lean:NCG.feedback_witnesses",
-      "NCG/Grand/ExactEasy73.lean:NCG.escaping_windows_of_not_uniformFiniteTail",
-      "NCG/Grand/ExactEasy73.lean:NCG.recurring_input_direction",
-      "NCG/Grand/ExactEasy73.lean:NCG.matrix_singularValue_pos_iff_rank_gt",
-      "NCG/Grand/ExactEasy73.lean:NCG.feedback_witnesses_exact"
+      "NCG/Grand/TemporalTailRankWitnesses.lean:NCG.escaping_windows_of_not_uniformFiniteTail",
+      "NCG/Grand/TemporalTailRankWitnesses.lean:NCG.recurring_input_direction",
+      "NCG/Grand/TemporalTailRankWitnesses.lean:NCG.matrix_singularValue_pos_iff_rank_gt",
+      "NCG/Grand/TemporalTailRankWitnesses.lean:NCG.feedback_witnesses_exact"
     ],
     "note": "Exact re-encoding 2026-08-08: failure of uniform finite-tail tightness now literally extracts nonempty finite packets with support beyond j and mass at least epsilon. The packet maxima satisfy the atomic-frequently/diffuse dichotomy, and diffuse packets have cardinality tending to infinity. A fixed basis input direction captures epsilon/d along an unbounded subsequence. The existing finite-memory factorization bound is paired with the exact Mathlib Hilbert-space equivalence sigma_(M+1)>0 iff matrix rank>M (zero-indexed singular values)."
   },
@@ -2712,7 +2712,7 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/SpatiotemporalFeedback.lean:NCG.spatiotemporal_feedback",
-      "NCG/Grand/ExactEasy42.lean:NCG.spatiotemporal_exponential_weights",
+      "NCG/Grand/SpatiotemporalExponentialWeights.lean:NCG.spatiotemporal_exponential_weights",
       "NCG/Grand/OperationalLightCone.lean:NCG.operational_light_cone"
     ],
     "note": "Exact distributed encoding: NCG.operational_light_cone supplies the atom-corner product calculus; NCG.spatiotemporal_feedback proves weighted spatial submultiplicativity and the scalar Volterra bound 1/(1-q). NCG.spatiotemporal_exponential_weights proves exp(μd(i,k))≤exp(μd(i,j))exp(μd(j,k)) from the graph triangle inequality and removes the row/temporal weights to obtain exactly exp(-μd(i,j))exp(-ηm)/(1-q) for every corner."
@@ -3149,10 +3149,10 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/ProvenancePythagoras.lean:NCG.smst_provenance_pythagoras",
-      "NCG/Grand/ExactEasy53.lean:NCG.smst_provenance_pythagoras_exact",
-      "NCG/Grand/ExactEasy53.lean:NCG.gram_pinv_range_projection"
+      "NCG/Grand/SameHistoryProvenancePythagoras.lean:NCG.smst_provenance_pythagoras_exact",
+      "NCG/Grand/SameHistoryProvenancePythagoras.lean:NCG.gram_pinv_range_projection"
     ],
-    "note": "Exact EASY promotion 2026-08-08: FAITHFUL. ExactEasy53 instantiates the proved reversal-even/odd resolution at the manuscript's concrete L_H, E_H, and N_H panels, proves their pairwise range orthogonality, the boxed Gram Pythagoras, and simultaneous vanishing iff the full provenance residual vanishes. It also verifies that B(B*B)^dagger B* is a Hermitian idempotent fixing the joint synthesis from the Moore-Penrose/range identities, supplying the displayed pair-range projector formula."
+    "note": "Exact EASY promotion 2026-08-08: FAITHFUL. SameHistoryProvenancePythagoras instantiates the proved reversal-even/odd resolution at the manuscript's concrete L_H, E_H, and N_H panels, proves their pairwise range orthogonality, the boxed Gram Pythagoras, and simultaneous vanishing iff the full provenance residual vanishes. It also verifies that B(B*B)^dagger B* is a Hermitian idempotent fixing the joint synthesis from the Moore-Penrose/range identities, supplying the displayed pair-range projector formula."
   },
   "cor:SMST-record-native-provenance": {
     "env": "corollary",
@@ -3212,13 +3212,13 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/FrameTransport.lean:NCG.smst_frame_transport",
-      "NCG/Grand/ExactEasy55.lean:NCG.polar_link_unique",
-      "NCG/Grand/ExactEasy55.lean:NCG.frame_path_gauge_covariance",
-      "NCG/Grand/ExactEasy55.lean:NCG.principal_frame_curvature",
-      "NCG/Grand/ExactEasy55.lean:NCG.real_oriented_frame_link_mem_SO3",
-      "NCG/Grand/ExactEasy55.lean:NCG.frame_affine_path_product"
+      "NCG/Grand/GlobalFrameTransport.lean:NCG.polar_link_unique",
+      "NCG/Grand/GlobalFrameTransport.lean:NCG.frame_path_gauge_covariance",
+      "NCG/Grand/GlobalFrameTransport.lean:NCG.principal_frame_curvature",
+      "NCG/Grand/GlobalFrameTransport.lean:NCG.real_oriented_frame_link_mem_SO3",
+      "NCG/Grand/GlobalFrameTransport.lean:NCG.frame_affine_path_product"
     ],
-    "note": "Exact encoding completed 2026-08-08. NCG.smst_frame_transport proves whitening, the boxed leakage decomposition with positivity and closure iff, invertible polar existence, coframe closure, and one-step affine multiplication. ExactEasy55 adds uniqueness of the positive polar link, endpoint gauge covariance for arbitrary ordered paths (hence loop holonomy covariance), the principal self-adjoint curvature logarithm under the exact -1 spectral exclusion, the real/oriented SO(3) branch, and the iterated homogeneous affine product whose top-right block is the accumulated Cartan translation."
+    "note": "Exact encoding completed 2026-08-08. NCG.smst_frame_transport proves whitening, the boxed leakage decomposition with positivity and closure iff, invertible polar existence, coframe closure, and one-step affine multiplication. GlobalFrameTransport adds uniqueness of the positive polar link, endpoint gauge covariance for arbitrary ordered paths (hence loop holonomy covariance), the principal self-adjoint curvature logarithm under the exact -1 spectral exclusion, the real/oriented SO(3) branch, and the iterated homogeneous affine product whose top-right block is the accumulated Cartan translation."
   },
   "thm:SMST-clock-geometry-audit": {
     "env": "theorem",
@@ -3469,10 +3469,10 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/OccurrenceMarginals.lean:NCG.occurrence_environment_rank",
-      "NCG/Grand/ExactEasy48.lean:NCG.occurrenceFullGram_rank",
-      "NCG/Grand/ExactEasy48.lean:NCG.occurrence_environment_rank_source_minimal"
+      "NCG/Grand/OccurrenceEnvironmentRank.lean:NCG.occurrenceFullGram_rank",
+      "NCG/Grand/OccurrenceEnvironmentRank.lean:NCG.occurrence_environment_rank_source_minimal"
     ],
-    "note": "Exact EASY proof completed 2026-08-08. OccurrenceMarginals proves the spectral projection rank formula. ExactEasy48 constructs the full 1+15 diagonal occurrence Gram, proves its rank is rank(K_rep)+15 rank(I-K_rep), and builds an explicit synthesis indexed by its nonzero support. occurrence_environment_rank_source_minimal proves this synthesis has exactly the displayed environment dimension and that every finite Gram factorization has at least that many rows, using rank(W*W)=rank(W). Thus the formula is tied to the source-minimal environment rank rather than merely asserted on a spectral representation."
+    "note": "Exact EASY proof completed 2026-08-08. OccurrenceMarginals proves the spectral projection rank formula. OccurrenceEnvironmentRank constructs the full 1+15 diagonal occurrence Gram, proves its rank is rank(K_rep)+15 rank(I-K_rep), and builds an explicit synthesis indexed by its nonzero support. occurrence_environment_rank_source_minimal proves this synthesis has exactly the displayed environment dimension and that every finite Gram factorization has at least that many rows, using rank(W*W)=rank(W). Thus the formula is tied to the source-minimal environment rank rather than merely asserted on a spectral representation."
   },
   "cth:SM-bare-universal-no-go": {
     "env": "countertheorem",
@@ -3716,11 +3716,11 @@
     "lean": [
       "NCG/Grand/GrandFactorObstruction.lean:NCG.smst_factor_obstruction",
       "NCG/Algebra/SkolemNoether.lean:NCG.skolem_noether",
-      "NCG/Grand/ExactEasy76.lean:NCG.matrix_representation_dimension",
-      "NCG/Grand/ExactEasy76.lean:NCG.matrix_representation_normal_form",
-      "NCG/Grand/ExactEasy76.lean:NCG.smst_factor_obstruction_exact"
+      "NCG/Grand/MatrixFactorNormalForm.lean:NCG.matrix_representation_dimension",
+      "NCG/Grand/MatrixFactorNormalForm.lean:NCG.matrix_representation_normal_form",
+      "NCG/Grand/MatrixFactorNormalForm.lean:NCG.smst_factor_obstruction_exact"
     ],
-    "note": "Exact fidelity completion 2026-08-08: ExactEasy76 derives the multiplicity equation N = n*k from represented matrix-unit ranks, constructs the carrier equivalence Fin N ≃ Fin n × Fin k, and proves conjugacy with the left Kronecker representation by the repository's from-scratch Skolem--Noether theorem. GrandFactorObstruction then proves the exact commutant, its factoriality, and the nontrivial-centre obstruction on that normal form."
+    "note": "Exact fidelity completion 2026-08-08: MatrixFactorNormalForm derives the multiplicity equation N = n*k from represented matrix-unit ranks, constructs the carrier equivalence Fin N ≃ Fin n × Fin k, and proves conjugacy with the left Kronecker representation by the repository's from-scratch Skolem--Noether theorem. GrandFactorObstruction then proves the exact commutant, its factoriality, and the nontrivial-centre obstruction on that normal form."
   },
   "thm:SMST-trinity": {
     "env": "theorem",
@@ -3755,12 +3755,12 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/GrandWedderburn.lean:NCG.smst_edge_commutant",
-      "NCG/Grand/ExactEasy54.lean:NCG.dimension_eq_of_walk",
-      "NCG/Grand/ExactEasy54.lean:NCG.connected_common_dimension",
-      "NCG/Grand/ExactEasy54.lean:NCG.edge_transport_of_walk",
-      "NCG/Grand/ExactEasy54.lean:NCG.connected_edge_transport"
+      "NCG/Grand/EdgeCommutantReconstruction.lean:NCG.dimension_eq_of_walk",
+      "NCG/Grand/EdgeCommutantReconstruction.lean:NCG.connected_common_dimension",
+      "NCG/Grand/EdgeCommutantReconstruction.lean:NCG.edge_transport_of_walk",
+      "NCG/Grand/EdgeCommutantReconstruction.lean:NCG.connected_edge_transport"
     ],
-    "note": "Exact encoding completed 2026-08-08. The existing one-edge theorem derives the transported multiplicity block from the full block commutator. ExactEasy54 kernel-checks the formerly missing iteration: edgewise dimension equality propagates along every walk and hence to one common dimension on a connected graph, while the one-edge conjugation equation composes to the ordered link transport along every incidence walk. Together these are precisely the manuscript's edge equations and connected-incidence reconstruction."
+    "note": "Exact encoding completed 2026-08-08. The existing one-edge theorem derives the transported multiplicity block from the full block commutator. EdgeCommutantReconstruction kernel-checks the formerly missing iteration: edgewise dimension equality propagates along every walk and hence to one common dimension on a connected graph, while the one-edge conjugation equation composes to the ordered link transport along every incidence walk. Together these are precisely the manuscript's edge equations and connected-incidence reconstruction."
   },
   "lem:SMST-polar-edge": {
     "env": "lemma",
@@ -3770,10 +3770,10 @@
       "NCG/Grand/PolarEdgeSingular.lean:NCG.polar_edge_singular",
       "NCG/Grand/PolarEdge.lean:NCG.polar_edge",
       "NCG/Grand/SqrtPolar.lean:NCG.polar_edge_of_posDef",
-      "NCG/Grand/ExactEasy80.lean:NCG.exists_singular_polar_data",
-      "NCG/Grand/ExactEasy80.lean:NCG.polar_edge_singular_arbitrary"
+      "NCG/Grand/SingularPolarData.lean:NCG.exists_singular_polar_data",
+      "NCG/Grand/SingularPolarData.lean:NCG.polar_edge_singular_arbitrary"
     ],
-    "note": "Exact encoding completed 2026-08-08. PolarEdgeSingular proves the boxed incidence/transport equivalence and all support commutations from singular polar data. ExactEasy80 constructs that data for every rectangular complex matrix: P, its support pseudoinverse, and the support projection are bare Hermitian functional-calculus functions of F*F; U=F P-dagger is proved to factor F, have U*U equal to the support, and satisfy the partial-isometry identity. Functional-calculus commutation proves the required support commutation for every operator commuting with P^2. Thus no SVD or polar datum remains hypothesized."
+    "note": "Exact encoding completed 2026-08-08. PolarEdgeSingular proves the boxed incidence/transport equivalence and all support commutations from singular polar data. SingularPolarData constructs that data for every rectangular complex matrix: P, its support pseudoinverse, and the support projection are bare Hermitian functional-calculus functions of F*F; U=F P-dagger is proved to factor F, have U*U equal to the support, and satisfy the partial-isometry identity. Functional-calculus commutation proves the required support commutation for every operator commuting with P^2. Thus no SVD or polar datum remains hypothesized."
   },
   "def:SMST-support-polar-algebra": {
     "env": "definition",
@@ -3814,11 +3814,11 @@
     "lean": [
       "NCG/Grand/PolarHolonomy.lean:NCG.smst_polar_holonomy",
       "NCG/Grand/Bicommutant.lean:NCG.double_commutant",
-      "NCG/Grand/ExactEasy56.lean:NCG.walkUnitaryTransport_isUnitary",
-      "NCG/Grand/ExactEasy56.lean:NCG.connected_unitary_root_transports",
-      "NCG/Grand/ExactEasy56.lean:NCG.smst_polar_holonomy_family"
+      "NCG/Grand/PolarMetricHolonomy.lean:NCG.walkUnitaryTransport_isUnitary",
+      "NCG/Grand/PolarMetricHolonomy.lean:NCG.connected_unitary_root_transports",
+      "NCG/Grand/PolarMetricHolonomy.lean:NCG.smst_polar_holonomy_family"
     ],
-    "note": "Exact encoding completed 2026-08-08. NCG.smst_polar_holonomy proves the exact per-edge equivalence between transported typed equations and commutation with K_e,W_e, and NCG.double_commutant proves finite mutual reconstruction. ExactEasy56 closes the prior graph gap: ordered products of unitary polar factors remain unitary along every walk, connectedness supplies a root transport to every vertex, and the per-edge iff is assembled over an arbitrary complete edge family."
+    "note": "Exact encoding completed 2026-08-08. NCG.smst_polar_holonomy proves the exact per-edge equivalence between transported typed equations and commutation with K_e,W_e, and NCG.double_commutant proves finite mutual reconstruction. PolarMetricHolonomy closes the prior graph gap: ordered products of unitary polar factors remain unitary along every walk, connectedness supplies a root transport to every vertex, and the per-edge iff is assembled over an arbitrary complete edge family."
   },
   "cor:SMST-polar-extremes": {
     "env": "corollary",
@@ -3826,12 +3826,12 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/PolarEdge.lean:NCG.polar_extremes",
-      "NCG/Grand/ExactEasy57.lean:NCG.matCommutant_eq_univ_iff_generators_scalar",
-      "NCG/Grand/ExactEasy57.lean:NCG.matCommutant_eq_scalars_iff_eq_top",
-      "NCG/Grand/ExactEasy57.lean:NCG.unitary_edge_polar_metric_trivial",
-      "NCG/Grand/ExactEasy57.lean:NCG.smst_polar_extremes_exact"
+      "NCG/Grand/PolarFlatIrreducibleLimits.lean:NCG.matCommutant_eq_univ_iff_generators_scalar",
+      "NCG/Grand/PolarFlatIrreducibleLimits.lean:NCG.matCommutant_eq_scalars_iff_eq_top",
+      "NCG/Grand/PolarFlatIrreducibleLimits.lean:NCG.unitary_edge_polar_metric_trivial",
+      "NCG/Grand/PolarFlatIrreducibleLimits.lean:NCG.smst_polar_extremes_exact"
     ],
-    "note": "Exact encoding completed 2026-08-08. ExactEasy57 identifies the existing scalar/full-matrix and non-scalar metric facts with the root-fibre holonomy carriers: a generator set has full commutant iff all generators are scalar; a finite unital star algebra has scalar commutant iff it is the full matrix algebra; a unitary edge has P^2=I and hence K_e=I after root transport; and the explicit non-scalar positive metric witness remains on a tree. The four manuscript clauses are bundled in NCG.smst_polar_extremes_exact."
+    "note": "Exact encoding completed 2026-08-08. PolarFlatIrreducibleLimits identifies the existing scalar/full-matrix and non-scalar metric facts with the root-fibre holonomy carriers: a generator set has full commutant iff all generators are scalar; a finite unital star algebra has scalar commutant iff it is the full matrix algebra; a unitary edge has P^2=I and hence K_e=I after root transport; and the explicit non-scalar positive metric witness remains on a tree. The four manuscript clauses are bundled in NCG.smst_polar_extremes_exact."
   },
   "thm:SMST-main-duality": {
     "env": "theorem",
@@ -3840,9 +3840,9 @@
     "lean": [
       "NCG/Grand/MainDuality.lean:NCG.smst_main_duality",
       "NCG/Grand/Bicommutant.lean:NCG.double_commutant",
-      "NCG/Grand/ExactEasy82.lean:NCG.smst_main_duality_assembled"
+      "NCG/Grand/SMSTDualityAssembly.lean:NCG.smst_main_duality_assembled"
     ],
-    "note": "Exact assembly completed 2026-08-08. MainDuality and Bicommutant prove finite mutual-commutant closure for every star-closed matrix subalgebra. ExactEasy82 takes precisely the forward identifications supplied by the edge, support-polar, quiver, and rooted polar-holonomy presentation theorems and derives all reverse commutant equalities simultaneously, while carrying the quiver algebra equivalence as the third canonical presentation. The presentation hypotheses are the conclusions of the separately tracked branch theorems, matching the manuscript proof's theorem-by-theorem assembly; no invertibility assumption is added to the total-carrier clauses."
+    "note": "Exact assembly completed 2026-08-08. MainDuality and Bicommutant prove finite mutual-commutant closure for every star-closed matrix subalgebra. SMSTDualityAssembly takes precisely the forward identifications supplied by the edge, support-polar, quiver, and rooted polar-holonomy presentation theorems and derives all reverse commutant equalities simultaneously, while carrying the quiver algebra equivalence as the third canonical presentation. The presentation hypotheses are the conclusions of the separately tracked branch theorems, matching the manuscript proof's theorem-by-theorem assembly; no invertibility assumption is added to the total-carrier clauses."
   },
   "def:SMST-commutant-Laplacian": {
     "env": "definition",
@@ -3857,10 +3857,10 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/GrandInterface2.lean:NCG.commutant_audit",
-      "NCG/Grand/ExactEasy77.lean:NCG.posDef_min_eigenvalue_quadratic",
-      "NCG/Grand/ExactEasy77.lean:NCG.finite_dimensional_kernel_least_eigenvalue_gap",
-      "NCG/Grand/ExactEasy77.lean:NCG.matrix_commutant_least_eigenvalue_gap",
-      "NCG/Grand/ExactEasy77.lean:NCG.commutant_audit_gap_exact"
+      "NCG/Grand/FiniteCommutantPoincareGap.lean:NCG.posDef_min_eigenvalue_quadratic",
+      "NCG/Grand/FiniteCommutantPoincareGap.lean:NCG.finite_dimensional_kernel_least_eigenvalue_gap",
+      "NCG/Grand/FiniteCommutantPoincareGap.lean:NCG.matrix_commutant_least_eigenvalue_gap",
+      "NCG/Grand/FiniteCommutantPoincareGap.lean:NCG.commutant_audit_gap_exact"
     ],
     "note": "Exact completion 2026-08-08: the joint commutator is realized as a finite Hilbert--Schmidt linear map; its kernel is the exact matrix commutant. On the nonzero orthogonal complement, Lean constructs the restricted Gram matrix, proves it positive definite, selects an actual least indexed eigenvalue, proves it positive and least, and derives the boxed Hilbert--Schmidt Poincare estimate. The zero-complement branch is recorded separately, since then no positive eigenvalue exists and the estimate is vacuous."
   },
@@ -3891,15 +3891,15 @@
       "NCG/Grand/FiniteAnchorHowe.lean:NCG.finite_anchor_lock",
       "NCG/Grand/FiniteAnchorHowe.lean:NCG.summable_tail_lock",
       "NCG/Grand/HoweCertificate.lean:NCG.howe_certificate",
-      "NCG/Grand/ExactEasy58.lean:NCG.norm_unitaryCarrierTransport",
-      "NCG/Grand/ExactEasy58.lean:NCG.norm_unitaryCarrierTransport_sub",
-      "NCG/Grand/ExactEasy58.lean:NCG.unitaryCarrierTransport_mul",
-      "NCG/Grand/ExactEasy58.lean:NCG.unitaryCarrierTransport_star_apply",
-      "NCG/Grand/ExactEasy58.lean:NCG.unitaryCarrierTransport_injective",
-      "NCG/Grand/ExactEasy58.lean:NCG.unitaryCarrierTransport_commute_iff",
-      "NCG/Grand/ExactEasy58.lean:NCG.unitaryCarrierTransport_tuple_commutant"
+      "NCG/Grand/HoweCarrierTransport.lean:NCG.norm_unitaryCarrierTransport",
+      "NCG/Grand/HoweCarrierTransport.lean:NCG.norm_unitaryCarrierTransport_sub",
+      "NCG/Grand/HoweCarrierTransport.lean:NCG.unitaryCarrierTransport_mul",
+      "NCG/Grand/HoweCarrierTransport.lean:NCG.unitaryCarrierTransport_star_apply",
+      "NCG/Grand/HoweCarrierTransport.lean:NCG.unitaryCarrierTransport_injective",
+      "NCG/Grand/HoweCarrierTransport.lean:NCG.unitaryCarrierTransport_commute_iff",
+      "NCG/Grand/HoweCarrierTransport.lean:NCG.unitaryCarrierTransport_tuple_commutant"
     ],
-    "note": "Exact encoding completed 2026-08-08. The existing finite-anchor results prove the derivation-Laplacian perturbation bound, preservation of the positive anchor floor and exact commutant kernel, and the summable telescoping tail; howe_certificate supplies the exact Gram/kernel lock. ExactEasy58 closes the remaining common-screened-carrier bookkeeping: unitary carrier transport is isometric on operators and tuple differences, multiplicative with an explicit adjoint inverse, injective, and preserves pair and tuple commutants exactly."
+    "note": "Exact encoding completed 2026-08-08. The existing finite-anchor results prove the derivation-Laplacian perturbation bound, preservation of the positive anchor floor and exact commutant kernel, and the summable telescoping tail; howe_certificate supplies the exact Gram/kernel lock. HoweCarrierTransport closes the remaining common-screened-carrier bookkeeping: unitary carrier transport is isometric on operators and tuple differences, multiplicative with an explicit adjoint inverse, injective, and preserves pair and tuple commutants exactly."
   },
   "thm:SMST-continuum-Howe": {
     "env": "theorem",
@@ -3919,12 +3919,12 @@
       "NCG/Grand/OrbitHodgeTransfer.lean:NCG.orbit_commutant_descent",
       "NCG/Grand/OrbitHodgeTransfer.lean:NCG.hodge_commutator_transfer",
       "NCG/Grand/HoweCertificate.lean:NCG.howe_certificate",
-      "NCG/Grand/ExactEasy59.lean:NCG.hasDerivAt_conjugationOrbit_component",
-      "NCG/Grand/ExactEasy59.lean:NCG.hasDerivAt_conjugationOrbit",
-      "NCG/Grand/ExactEasy59.lean:NCG.equivariant_orbit_derivative",
-      "NCG/Grand/ExactEasy59.lean:NCG.equivariant_orbit_derivative_unique"
+      "NCG/Grand/ConjugationOrbitDerivative.lean:NCG.hasDerivAt_conjugationOrbit_component",
+      "NCG/Grand/ConjugationOrbitDerivative.lean:NCG.hasDerivAt_conjugationOrbit",
+      "NCG/Grand/ConjugationOrbitDerivative.lean:NCG.equivariant_orbit_derivative",
+      "NCG/Grand/ConjugationOrbitDerivative.lean:NCG.equivariant_orbit_derivative_unique"
     ],
-    "note": "Exact encoding completed 2026-08-08. OrbitHodgeTransfer proves the simultaneous-commutator kernel, exact commutant descent, and the stated Hodge-to-commutator domination with denominator 1-C0*epsilon^2; howe_certificate supplies the relative kernel/Gram link. ExactEasy59 closes the differentiable export clause on an arbitrary C-star algebra: the actual exponential path exp(-tX)G exp(tX) has derivative [G,X], finite tuples differentiate componentwise, the Frechet chain rule gives J_c = D_orb Phi_G J_G under equivariance, and derivative uniqueness proves the advertised unique orbit derivative."
+    "note": "Exact encoding completed 2026-08-08. OrbitHodgeTransfer proves the simultaneous-commutator kernel, exact commutant descent, and the stated Hodge-to-commutator domination with denominator 1-C0*epsilon^2; howe_certificate supplies the relative kernel/Gram link. ConjugationOrbitDerivative closes the differentiable export clause on an arbitrary C-star algebra: the actual exponential path exp(-tX)G exp(tX) has derivative [G,X], finite tuples differentiate componentwise, the Frechet chain rule gives J_c = D_orb Phi_G J_G under equivariance, and derivative uniqueness proves the advertised unique orbit derivative."
   },
   "thm:SMST-reducing-coherent-closure": {
     "env": "theorem",
@@ -3953,10 +3953,10 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/OneGenerationAudit.lean:NCG.smst_one_generation_audit",
-      "NCG/Grand/ExactEasy81.lean:NCG.nonzero_incidence_generates_cross_units",
-      "NCG/Grand/ExactEasy81.lean:NCG.smst_one_generation_audit_exact"
+      "NCG/Grand/OneGenerationIncidenceAudit.lean:NCG.nonzero_incidence_generates_cross_units",
+      "NCG/Grand/OneGenerationIncidenceAudit.lean:NCG.smst_one_generation_audit_exact"
     ],
-    "note": "Exact encoding completed 2026-08-08. OneGenerationAudit proves the arbitrary-dimensional Schur, cross-block matrix-unit, and two-component commutant engines. ExactEasy81 upgrades a nonzero incidence block to every coefficient-one cross matrix unit, instantiates Schur at the exact gauge-module dimensions 6,3,3,2,1, verifies the connected-component dimensions 12 and 3, and proves the residual C^2 commutant concretely for M_12(C) plus M_3(C). The neutral-singlet extension is also instantiated as the 12+4 two-component commutant, so the residual remains C^2."
+    "note": "Exact encoding completed 2026-08-08. OneGenerationAudit proves the arbitrary-dimensional Schur, cross-block matrix-unit, and two-component commutant engines. OneGenerationIncidenceAudit upgrades a nonzero incidence block to every coefficient-one cross matrix unit, instantiates Schur at the exact gauge-module dimensions 6,3,3,2,1, verifies the connected-component dimensions 12 and 3, and proves the residual C^2 commutant concretely for M_12(C) plus M_3(C). The neutral-singlet extension is also instantiated as the 12+4 two-component commutant, so the residual remains C^2."
   },
   "assessment:reader-level-summary-of-the-finite-and-coercive-duality": {
     "env": "assessment",
@@ -4412,7 +4412,7 @@
     "title": "Naturality and protected-writer rigidity",
     "status": "proved",
     "lean": [
-      "NCG/Grand/ExactEasy33.lean:NCG.peano_naturality_two_realizations",
+      "NCG/Grand/PeanoNaturalityTransport.lean:NCG.peano_naturality_two_realizations",
       "NCG/Grand/PeanoLadder.lean:NCG.peano_naturality"
     ],
     "note": "Exact distributed encoding: NCG.peano_naturality_two_realizations proves that a source-fixing chronology unitary between two anchored realizations intertwines the uniquely normalized count and every normalized Peano history. NCG.peano_naturality proves the chronology self-isomorphism identity and hence the protected-writer rigidity clause under the manuscript's weaker shift-and-anchor hypotheses."
@@ -4430,7 +4430,7 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/ZetaIncidence.lean:NCG.zeta_incidence",
-      "NCG/Grand/ExactEasy34.lean:NCG.zetaX_unique_of_corners"
+      "NCG/Grand/ZetaCornerUniqueness.lean:NCG.zetaX_unique_of_corners"
     ],
     "note": "Exact distributed encoding: NCG.zeta_incidence proves the Peano sum formula, endpoint-corner divisibility rule, unitriangularity, and nilpotency of Z-I. NCG.zetaX_unique_of_corners proves that the displayed corner rule determines Z uniquely even among all matrices, hence in the forward algebra. Terminating inverse and logarithm polynomials follow from the encoded nilpotency statement."
   },
@@ -4487,14 +4487,14 @@
       "NCG/Grand/PeanoStability.lean:NCG.peano_stability",
       "NCG/Grand/PeanoStability.lean:NCG.peanoL_covariance",
       "NCG/Grand/PeanoStability.lean:NCG.peanoL_anchor",
-      "NCG/Grand/ExactEasy75.lean:NCG.contraction_chain_stability",
-      "NCG/Grand/ExactEasy75.lean:NCG.finite_recurrence_stability",
-      "NCG/Grand/ExactEasy75.lean:NCG.matrix_column_recurrence_stability",
-      "NCG/Grand/ExactEasy75.lean:NCG.matrix_shift_residual_stability",
-      "NCG/Grand/ExactEasy75.lean:NCG.recS_pow_euclidean_contraction",
-      "NCG/Grand/ExactEasy75.lean:NCG.ar_peano_stability_exact"
+      "NCG/Grand/ContractionChainStability.lean:NCG.contraction_chain_stability",
+      "NCG/Grand/ContractionChainStability.lean:NCG.finite_recurrence_stability",
+      "NCG/Grand/ContractionChainStability.lean:NCG.matrix_column_recurrence_stability",
+      "NCG/Grand/ContractionChainStability.lean:NCG.matrix_shift_residual_stability",
+      "NCG/Grand/ContractionChainStability.lean:NCG.recS_pow_euclidean_contraction",
+      "NCG/Grand/ContractionChainStability.lean:NCG.ar_peano_stability_exact"
     ],
-    "note": "Exact fidelity completion 2026-08-08: the zero-residual equivalences and both quantitative X^2 Hilbert--Schmidt estimates are proved. ExactEasy75 proves the contraction-chain estimate, its finite recurrence and matrix-column specializations, Euclidean contraction of every truncated-shift power, and the final Peano/count residual package with the manuscript's explicit constant and no hidden asymptotic factor."
+    "note": "Exact fidelity completion 2026-08-08: the zero-residual equivalences and both quantitative X^2 Hilbert--Schmidt estimates are proved. ContractionChainStability proves the contraction-chain estimate, its finite recurrence and matrix-column specializations, Euclidean contraction of every truncated-shift power, and the final Peano/count residual package with the manuscript's explicit constant and no hidden asymptotic factor."
   },
   "thm:ar-derived-packet": {
     "env": "theorem",
@@ -4503,16 +4503,16 @@
     "lean": [
       "NCG.ar_derived_packet",
       "NCG/Grand/RecordGeneration.lean:NCG.record_generation",
-      "NCG/Grand/ExactEasy60.lean:NCG.diagFn_mulVec_single",
-      "NCG/Grand/ExactEasy60.lean:NCG.affineHistory_action",
-      "NCG/Grand/ExactEasy60.lean:NCG.mellinHeatHistory_action",
-      "NCG/Grand/ExactEasy60.lean:NCG.primeProjection_eq_depth_one",
-      "NCG/Grand/ExactEasy60.lean:NCG.liouvilleHistory_eq_factorParity",
-      "NCG/Grand/ExactEasy60.lean:NCG.moebiusHistory_eq_squarefree_mul_factorParity",
-      "NCG/Grand/ExactEasy60.lean:NCG.every_matrix_mem_record_history",
-      "NCG/Grand/ExactEasy60.lean:NCG.affine_mellin_vonMangoldt_column"
+      "NCG/Grand/ArithmeticDerivedHistories.lean:NCG.diagFn_mulVec_single",
+      "NCG/Grand/ArithmeticDerivedHistories.lean:NCG.affineHistory_action",
+      "NCG/Grand/ArithmeticDerivedHistories.lean:NCG.mellinHeatHistory_action",
+      "NCG/Grand/ArithmeticDerivedHistories.lean:NCG.primeProjection_eq_depth_one",
+      "NCG/Grand/ArithmeticDerivedHistories.lean:NCG.liouvilleHistory_eq_factorParity",
+      "NCG/Grand/ArithmeticDerivedHistories.lean:NCG.moebiusHistory_eq_squarefree_mul_factorParity",
+      "NCG/Grand/ArithmeticDerivedHistories.lean:NCG.every_matrix_mem_record_history",
+      "NCG/Grand/ArithmeticDerivedHistories.lean:NCG.affine_mellin_vonMangoldt_column"
     ],
-    "note": "Exact encoding completed 2026-08-08. ArDerivedPacket proves arbitrary diagonal composition and involution, the exact truncated-shift boundary action, and the von Mangoldt commutator column for every endpoint weight. ExactEasy60 supplies the concrete affine and Mellin-heat weights and basis actions, proves prime projection equals the Omega=1 spectral projection, Liouville equals factor parity, Moebius equals squarefree projection times factor parity, and instantiates the fully twisted character/affine/Mellin/von-Mangoldt column. RecordGeneration proves the record history algebra is the full matrix algebra, so every finite diagonal, shift, indicator, and window panel is internal."
+    "note": "Exact encoding completed 2026-08-08. ArDerivedPacket proves arbitrary diagonal composition and involution, the exact truncated-shift boundary action, and the von Mangoldt commutator column for every endpoint weight. ArithmeticDerivedHistories supplies the concrete affine and Mellin-heat weights and basis actions, proves prime projection equals the Omega=1 spectral projection, Liouville equals factor parity, Moebius equals squarefree projection times factor parity, and instantiates the fully twisted character/affine/Mellin/von-Mangoldt column. RecordGeneration proves the record history algebra is the full matrix algebra, so every finite diagonal, shift, indicator, and window panel is internal."
   },
   "thm:ar-record-cutoff": {
     "env": "theorem",
@@ -4521,8 +4521,8 @@
     "lean": [
       "NCG/Grand/RecordCutoff.lean:NCG.record_cutoff",
       "NCG/Grand/RecordCutoff.lean:NCG.corner_compress",
-      "NCG/Grand/ExactEasy38.lean:NCG.forward_corner_compression_hom",
-      "NCG/Grand/ExactEasy38.lean:NCG.cornerJ_isometry"
+      "NCG/Grand/ForwardCornerCompression.lean:NCG.forward_corner_compression_hom",
+      "NCG/Grand/ForwardCornerCompression.lean:NCG.cornerJ_isometry"
     ],
     "note": "Exact distributed encoding: NCG.cornerJ_isometry proves J*J=I for the record inclusion. NCG.forward_corner_compression_hom proves that corner compression preserves the unit, addition, scalars, and multiplication under the exact forward-block condition J*A=J*A(JJ*), so it is the claimed unital algebra homomorphism on the forward algebra. NCG.record_cutoff proves the successor, count, and every Peano-history generator formula; all listed finite sums, polynomials, commutators, and diagonal functional-calculus histories then descend by the encoded algebra-map laws."
   },
@@ -4539,9 +4539,9 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/AbsorbingCutoff.lean:NCG.absorbing_cutoff",
-      "NCG/Grand/ExactEasy39.lean:NCG.absorbingWord_eq_compressedWord",
-      "NCG/Grand/ExactEasy39.lean:NCG.compressedWord_unique",
-      "NCG/Grand/ExactEasy39.lean:NCG.compressedWord_transitive"
+      "NCG/Grand/AbsorbingCutoffWords.lean:NCG.absorbingWord_eq_compressedWord",
+      "NCG/Grand/AbsorbingCutoffWords.lean:NCG.compressedWord_unique",
+      "NCG/Grand/AbsorbingCutoffWords.lean:NCG.compressedWord_transitive"
     ],
     "note": "Exact encoding: NCG.absorbingWord_eq_compressedWord proves for arbitrary finite matrix words that inserting JJ* between adjacent letters equals the product of the individually compressed letters. NCG.compressedWord_unique proves uniqueness among rules agreeing on letters and multiplicative under concatenation. NCG.compressedWord_transitive proves word-level cutoff transitivity, using the corner-composition/single-letter theorem NCG.absorbing_cutoff."
   },
@@ -4570,13 +4570,13 @@
     "lean": [
       "NCG.ar_explicit_compiler_routing",
       "NCG.writerJ",
-      "NCG/Grand/ExactEasy61.lean:NCG.writer_endpoint_whitening",
-      "NCG/Grand/ExactEasy61.lean:NCG.intrinsic_endpoint_gram_identity",
-      "NCG/Grand/ExactEasy61.lean:NCG.writerJ_column",
-      "NCG/Grand/ExactEasy61.lean:NCG.peano_endpoint_descent",
-      "NCG/Grand/ExactEasy61.lean:NCG.equal_routed_source_panels"
+      "NCG/Grand/EndpointWhiteningCompiler.lean:NCG.writer_endpoint_whitening",
+      "NCG/Grand/EndpointWhiteningCompiler.lean:NCG.intrinsic_endpoint_gram_identity",
+      "NCG/Grand/EndpointWhiteningCompiler.lean:NCG.writerJ_column",
+      "NCG/Grand/EndpointWhiteningCompiler.lean:NCG.peano_endpoint_descent",
+      "NCG/Grand/EndpointWhiteningCompiler.lean:NCG.equal_routed_source_panels"
     ],
-    "note": "Exact encoding completed 2026-08-08. ArCompilerRouting proves the von-Mangoldt endpoint readout, its truncated Laplace/Dirichlet pairing, and the exact diagonal endpoint-writer Gram. ExactEasy61 closes the former bookkeeping gaps: each retained compiler column lies on its unique endpoint coordinate line; symmetric inverse-square-root whitening turns the writer Gram into the identity on the retained support; the intrinsic endpoint synthesis has identity Gram; multiplicative endpoint concatenation descends exactly through the Peano multiplication history with cutoff; and equal routed sources have identical source and target Grams and zero mutual Schur mismatch."
+    "note": "Exact encoding completed 2026-08-08. ArCompilerRouting proves the von-Mangoldt endpoint readout, its truncated Laplace/Dirichlet pairing, and the exact diagonal endpoint-writer Gram. EndpointWhiteningCompiler closes the former bookkeeping gaps: each retained compiler column lies on its unique endpoint coordinate line; symmetric inverse-square-root whitening turns the writer Gram into the identity on the retained support; the intrinsic endpoint synthesis has identity Gram; multiplicative endpoint concatenation descends exactly through the Peano multiplication history with cutoff; and equal routed sources have identical source and target Grams and zero mutual Schur mismatch."
   },
   "prop:ar-old-response": {
     "env": "proposition",
@@ -4724,11 +4724,11 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/ArAddMult.lean:NCG.ar_add_mult",
-      "NCG/Grand/ExactEasy45.lean:NCG.ar_add_mult_boxed",
-      "NCG/Grand/ExactEasy45.lean:NCG.gaussSum_norm_eq_sqrt_card",
-      "NCG/Grand/ExactEasy45.lean:NCG.ar_add_mult_exact_packet"
+      "NCG/Grand/ArithmeticFourierTransform.lean:NCG.ar_add_mult_boxed",
+      "NCG/Grand/ArithmeticFourierTransform.lean:NCG.gaussSum_norm_eq_sqrt_card",
+      "NCG/Grand/ArithmeticFourierTransform.lean:NCG.ar_add_mult_exact_packet"
     ],
-    "note": "Exact EASY proof completed 2026-08-08. ArAddMult proves scalar additive-character orthogonality, finite coordinate factorization, the nonzero multiplicative-character transform, vanishing at zero, and the Gauss product identity. ExactEasy45 composes those engines at the actual finite-field row/column level: ar_add_mult_boxed proves the normalized q^(-r) constrained-sum formula for an arbitrary finite matrix A, vector b, and coordinate functions (hence also functions on F_q^times extended by zero). gaussSum_norm_eq_sqrt_card derives |tau|=sqrt(q) from star_gaussSum_eq and the Gauss product. ar_add_mult_exact_packet records the boxed transform and all character clauses together."
+    "note": "Exact EASY proof completed 2026-08-08. ArAddMult proves scalar additive-character orthogonality, finite coordinate factorization, the nonzero multiplicative-character transform, vanishing at zero, and the Gauss product identity. ArithmeticFourierTransform composes those engines at the actual finite-field row/column level: ar_add_mult_boxed proves the normalized q^(-r) constrained-sum formula for an arbitrary finite matrix A, vector b, and coordinate functions (hence also functions on F_q^times extended by zero). gaussSum_norm_eq_sqrt_card derives |tau|=sqrt(q) from star_gaussSum_eq and the Gauss product. ar_add_mult_exact_packet records the boxed transform and all character clauses together."
   },
   "firewall:transform-duality-is-not-arithmetic-coercivity": {
     "env": "firewall",
@@ -4959,11 +4959,11 @@
     "status": "proved",
     "lean": [
       "NCG.other_loadings",
-      "NCG/Grand/ExactEasy70.lean:NCG.IsCanonicalLoadedHierarchy",
-      "NCG/Grand/ExactEasy70.lean:NCG.canonical_loaded_hierarchy",
-      "NCG/Grand/ExactEasy70.lean:NCG.other_loadings_exact"
+      "NCG/Grand/OtherLoadingEmergence.lean:NCG.IsCanonicalLoadedHierarchy",
+      "NCG/Grand/OtherLoadingEmergence.lean:NCG.canonical_loaded_hierarchy",
+      "NCG/Grand/OtherLoadingEmergence.lean:NCG.other_loadings_exact"
     ],
-    "note": "Exact EASY promotion 2026-08-08: ExactEasy70 packages every synthesis hierarchy with positivity at every depth, finite flatness of nested word spans, source-minimality among all Gram realizations, and the unique source-fixing inner-product-preserving equivalence between equal-Gram source ranges. It applies this certificate componentwise and jointly, proves the displayed typed compression from W_delta = W_J I_delta, and retains the explicit pair of positive joint Grams with equal component compressions but different mixed kernels."
+    "note": "Exact EASY promotion 2026-08-08: OtherLoadingEmergence packages every synthesis hierarchy with positivity at every depth, finite flatness of nested word spans, source-minimality among all Gram realizations, and the unique source-fixing inner-product-preserving equivalence between equal-Gram source ranges. It applies this certificate componentwise and jointly, proves the displayed typed compression from W_delta = W_J I_delta, and retains the explicit pair of positive joint Grams with equal component compressions but different mixed kernels."
   },
   "assessment:what-belongs-to-t-other": {
     "env": "assessment",
@@ -5367,7 +5367,7 @@
     "lean": [
       "NCG/Grand/GrandAudit.lean:NCG.commutant_kernel",
       "NCG/Grand/GrandAudit.lean:NCG.howe_pair_audit",
-      "NCG/Grand/ExactEasy37.lean:NCG.commutant_dimension_audit"
+      "NCG/Grand/CommutantDimensionAudit.lean:NCG.commutant_dimension_audit"
     ],
     "note": "Exact distributed encoding: NCG.commutant_kernel renders each finite commutant as the kernel of an explicit homogeneous linear map; NCG.howe_pair_audit renders both generator inclusions; NCG.commutant_dimension_audit proves that each verified inclusion plus equality of the computed finranks is equality. These are precisely the terminating finite-linear-algebra audit steps in the proposition."
   },
@@ -5429,9 +5429,9 @@
     "status": "proved",
     "lean": [
       "NCG.ordered_opportunity_cycle_source",
-      "NCG/Grand/ExactEasy52.lean:NCG.ordered_opportunity_cycle_source_exact"
+      "NCG/Grand/OrderedOpportunityCycle.lean:NCG.ordered_opportunity_cycle_source_exact"
     ],
-    "note": "Exact EASY promotion 2026-08-08: FAITHFUL. The existing theorem proves the boundary kernel, surjectivity/Laplacian identity, cycle projector, and exact 3+3=6 dimension count. ExactEasy52 names P_cyc and G_cyc=P_cyc/12, proves the projector lands in and fixes H1(K4), is idempotent, and gives the exact positive margin 1/12. It also assembles the linear identification with the relative standard triplet and its determinant-sign orientation twist."
+    "note": "Exact EASY promotion 2026-08-08: FAITHFUL. The existing theorem proves the boundary kernel, surjectivity/Laplacian identity, cycle projector, and exact 3+3=6 dimension count. OrderedOpportunityCycle names P_cyc and G_cyc=P_cyc/12, proves the projector lands in and fixes H1(K4), is idempotent, and gives the exact positive margin 1/12. It also assembles the linear identification with the relative standard triplet and its determinant-sign orientation twist."
   },
   "cth:vertex-no-local-edge": {
     "env": "countertheorem",
@@ -5483,8 +5483,8 @@
     "status": "proved",
     "lean": [
       "NCG/Grand/GrandInterface2.lean:NCG.tetrahedral_gram",
-      "NCG/Grand/ExactEasy49.lean:NCG.five_parameter_pointed_tetrahedral_gram",
-      "NCG/Grand/ExactEasy49.lean:NCG.pointedTetrahedralGram_psd_iff"
+      "NCG/Grand/PointedTetrahedralGram.lean:NCG.five_parameter_pointed_tetrahedral_gram",
+      "NCG/Grand/PointedTetrahedralGram.lean:NCG.pointedTetrahedralGram_psd_iff"
     ],
     "note": "Exact EASY promotion 2026-08-08: FAITHFUL. The Hermitian S4-invariant pointed family is proved to equal the displayed five-real-parameter 5x5 Gram; Hermiticity and transitivity force a,c,d real. An explicit normalized Walsh involution proves the exact block decomposition into the stated 2x2 anchor/average block and three copies of c-d, hence the manuscript PSD iff criterion."
   },
@@ -5852,7 +5852,7 @@
     "lean": [
       "NCG.unsigned_provenance_no_short"
     ],
-    "note": "Exact finite-dimensional counterexample: two concrete provenance syntheses have the same unsigned marginal Gram, while the connected short against a fixed probe is respectively zero and one. Kernel-checked in NCG/Grand/ExactEasy15.lean."
+    "note": "Exact finite-dimensional counterexample: two concrete provenance syntheses have the same unsigned marginal Gram, while the connected short against a fixed probe is respectively zero and one. Kernel-checked in NCG/Grand/ProvenanceCounterexamples.lean."
   },
   "thm:provenance-aware-connected-short": {
     "env": "theorem",
@@ -5870,7 +5870,7 @@
     "lean": [
       "NCG.accepted_bit_no_field_kernel"
     ],
-    "note": "Exact two-state counterexample: identity and full-reset are distinct idempotent stochastic kernels, can share a state-independent accepted mark, and act differently on the terminal field. Kernel-checked in NCG/Grand/ExactEasy15.lean."
+    "note": "Exact two-state counterexample: identity and full-reset are distinct idempotent stochastic kernels, can share a state-independent accepted mark, and act differently on the terminal field. Kernel-checked in NCG/Grand/ProvenanceCounterexamples.lean."
   },
   "thm:conditional-Mobius-support": {
     "env": "theorem",
@@ -5906,7 +5906,7 @@
     "lean": [
       "NCG.separate_clifford_marginals_do_not_decide_matter"
     ],
-    "note": "Exact concrete C^4⊗C^2 counterexample: the intrinsic chirality grading and a multiplicity-only Pauli grading both carry an algebraic 4+4 sign-fibre certificate, while normalized Clifford trace-correlation masses evaluate to 1 and 0. Kernel-checked in NCG/Grand/ExactEasy16.lean."
+    "note": "Exact concrete C^4⊗C^2 counterexample: the intrinsic chirality grading and a multiplicity-only Pauli grading both carry an algebraic 4+4 sign-fibre certificate, while normalized Clifford trace-correlation masses evaluate to 1 and 0. Kernel-checked in NCG/Grand/CliffordMarginalMatterNoGo.lean."
   },
   "prop:endpoint-capacity-reconstruction": {
     "env": "proposition",
@@ -6310,14 +6310,14 @@
     "title": "Exact conditioning of inner derivations",
     "status": "proved",
     "lean": [
-      "NCG/Grand/ExactEasy63.lean:NCG.adSuperHSSq",
-      "NCG/Grand/ExactEasy63.lean:NCG.ad_matrix_unit_hs",
-      "NCG/Grand/ExactEasy63.lean:NCG.adSuperHSSq_expansion",
-      "NCG/Grand/ExactEasy63.lean:NCG.inner_derivation_norm_exact",
-      "NCG/Grand/ExactEasy63.lean:NCG.inner_derivation_traceless_norm",
-      "NCG/Grand/ExactEasy63.lean:NCG.inner_derivation_injective_on_traceless"
+      "NCG/Grand/InnerDerivationConditioning.lean:NCG.adSuperHSSq",
+      "NCG/Grand/InnerDerivationConditioning.lean:NCG.ad_matrix_unit_hs",
+      "NCG/Grand/InnerDerivationConditioning.lean:NCG.adSuperHSSq_expansion",
+      "NCG/Grand/InnerDerivationConditioning.lean:NCG.inner_derivation_norm_exact",
+      "NCG/Grand/InnerDerivationConditioning.lean:NCG.inner_derivation_traceless_norm",
+      "NCG/Grand/InnerDerivationConditioning.lean:NCG.inner_derivation_injective_on_traceless"
     ],
-    "note": "Exact encoding completed 2026-08-08. ExactEasy63 defines the manuscript's superoperator Hilbert-Schmidt square by summing over all matrix units, expands each commutator Gram exactly, and proves ||ad_H||^2 = 2d ||H-(Tr H/d)I||_HS^2 for every Hermitian H. It then proves the exact sqrt(2d) norm scaling on the traceless Hermitian subspace and injectivity there, which is precisely the stated smallest-singular-value conclusion."
+    "note": "Exact encoding completed 2026-08-08. InnerDerivationConditioning defines the manuscript's superoperator Hilbert-Schmidt square by summing over all matrix units, expands each commutator Gram exactly, and proves ||ad_H||^2 = 2d ||H-(Tr H/d)I||_HS^2 for every Hermitian H. It then proves the exact sqrt(2d) norm scaling on the traceless Hermitian subspace and injectivity there, which is precisely the stated smallest-singular-value conclusion."
   },
   "def:SMST-Hamiltonian-tangent": {
     "env": "definition",
@@ -6366,13 +6366,13 @@
     "title": "Source-core leakage Pythagoras",
     "status": "proved",
     "lean": [
-      "NCG/Grand/ExactEasy64.lean:NCG.compressed_hamiltonian_derivative",
-      "NCG/Grand/ExactEasy64.lean:NCG.channelCoreResidual_eq_corner",
-      "NCG/Grand/ExactEasy64.lean:NCG.corner_matrix_unit_hs",
-      "NCG/Grand/ExactEasy64.lean:NCG.corner_commutator_hs_sum",
-      "NCG/Grand/ExactEasy64.lean:NCG.channel_core_Pythagoras"
+      "NCG/Grand/SourceCoreHamiltonianLeakage.lean:NCG.compressed_hamiltonian_derivative",
+      "NCG/Grand/SourceCoreHamiltonianLeakage.lean:NCG.channelCoreResidual_eq_corner",
+      "NCG/Grand/SourceCoreHamiltonianLeakage.lean:NCG.corner_matrix_unit_hs",
+      "NCG/Grand/SourceCoreHamiltonianLeakage.lean:NCG.corner_commutator_hs_sum",
+      "NCG/Grand/SourceCoreHamiltonianLeakage.lean:NCG.channel_core_Pythagoras"
     ],
-    "note": "Exact encoding completed 2026-08-08. ExactEasy64 defines the source encoder iota(X)=CXC*, the compressed Hamiltonian K=C*HC, the off-core corner B=(I-CC*)HC, and the channel-core residual. It proves that compression gives -i ad_K, identifies the residual exactly with the two off-core blocks B E_ab C* and -C E_ab B*, proves their Hilbert-Schmidt orthogonality, and sums over all matrix units to obtain Δ_core=2d||B||_HS^2. Positivity then gives Δ_core=0 iff B=0."
+    "note": "Exact encoding completed 2026-08-08. SourceCoreHamiltonianLeakage defines the source encoder iota(X)=CXC*, the compressed Hamiltonian K=C*HC, the off-core corner B=(I-CC*)HC, and the channel-core residual. It proves that compression gives -i ad_K, identifies the residual exactly with the two off-core blocks B E_ab C* and -C E_ab B*, proves their Hilbert-Schmidt orthogonality, and sums over all matrix units to obtain Δ_core=2d||B||_HS^2. Positivity then gives Δ_core=0 iff B=0."
   },
   "thm:SMST-channel-unitarity-branches": {
     "env": "theorem",
