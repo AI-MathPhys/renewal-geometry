@@ -75,7 +75,7 @@ lemma recS_pow (X a : ℕ) :
       have := j.isLt
       omega
 
-private lemma recS_unit {X : ℕ} (hX : 1 ≤ X) (a b : Fin X) :
+lemma recS_unit {X : ℕ} (hX : 1 ≤ X) (a b : Fin X) :
     recS X ^ (a : ℕ) * (1 - recS X * (recS X)ᴴ)
         * (recS X ^ (b : ℕ))ᴴ
       = Matrix.single a b 1 := by
