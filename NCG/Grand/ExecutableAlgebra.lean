@@ -3,7 +3,7 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import Mathlib
+import NCG.Grand.HankelMinimality
 
 /-!
 # Realization-free executable algebra
@@ -82,5 +82,53 @@ theorem executable_predictive_algebra {ι d P F : Type*}
       mul_ite, mul_one, mul_zero, Finset.sum_ite_eq',
       Finset.mem_univ, if_true, Pi.zero_apply] at hk
     simpa using hk
+
+/-! ## Multiplicative naturality of the minimal similarity -/
+
+/-- Execute a typed forward word from left to right. -/
+def forwardWordAction {R N ι : Type*} [Semiring R] [AddCommMonoid N]
+    [Module R N] (T : ι → Module.End R N) : List ι → Module.End R N
+  | [] => LinearMap.id
+  | a :: w => (forwardWordAction T w).comp (T a)
+
+@[simp] theorem forwardWordAction_nil_apply
+    {R N ι : Type*} [Semiring R] [AddCommMonoid N] [Module R N]
+    (T : ι → Module.End R N) (v : N) : forwardWordAction T [] v = v := rfl
+
+@[simp] theorem forwardWordAction_cons_apply
+    {R N ι : Type*} [Semiring R] [AddCommMonoid N] [Module R N]
+    (T : ι → Module.End R N) (a : ι) (w : List ι) (v : N) :
+    forwardWordAction T (a :: w) v = forwardWordAction T w (T a v) := rfl
+
+/-- A primitive intertwiner automatically intertwines every executable word. -/
+theorem forwardWordAction_intertwines
+    {R N₁ N₂ ι : Type*} [Semiring R]
+    [AddCommMonoid N₁] [Module R N₁] [AddCommMonoid N₂] [Module R N₂]
+    (S : N₁ →ₗ[R] N₂) (T₁ : ι → Module.End R N₁)
+    (T₂ : ι → Module.End R N₂)
+    (hprimitive : ∀ a v, S (T₁ a v) = T₂ a (S v))
+    (w : List ι) (v : N₁) :
+    S (forwardWordAction T₁ w v) = forwardWordAction T₂ w (S v) := by
+  induction w generalizing v with
+  | nil => rfl
+  | cons a w ih =>
+      rw [forwardWordAction_cons_apply, ih, hprimitive,
+        forwardWordAction_cons_apply]
+
+/-- Consequently the same similarity intertwines every finite forward-word
+polynomial. -/
+theorem forwardPolynomial_intertwines
+    {R N₁ N₂ ι : Type*} [CommSemiring R]
+    [AddCommMonoid N₁] [Module R N₁] [AddCommMonoid N₂] [Module R N₂]
+    (S : N₁ →ₗ[R] N₂) (T₁ : ι → Module.End R N₁)
+    (T₂ : ι → Module.End R N₂)
+    (hprimitive : ∀ a v, S (T₁ a v) = T₂ a (S v))
+    (words : Finset (List ι)) (coef : List ι → R) (v : N₁) :
+    S (∑ w ∈ words, coef w • forwardWordAction T₁ w v) =
+      ∑ w ∈ words, coef w • forwardWordAction T₂ w (S v) := by
+  rw [map_sum]
+  apply Finset.sum_congr rfl
+  intro w hw
+  rw [map_smul, forwardWordAction_intertwines S T₁ T₂ hprimitive]
 
 end NCG

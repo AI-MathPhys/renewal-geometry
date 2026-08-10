@@ -33,9 +33,9 @@ private noncomputable def polarSupport (x : ℝ) : ℝ :=
 
 /-- Every rectangular complex matrix admits exactly the singular polar data
 required by `polar_edge_singular`. -/
-theorem exists_singular_polar_data {e h : ℕ}
-    (F : Matrix (Fin h) (Fin e) ℂ) :
-    ∃ (U : Matrix (Fin h) (Fin e) ℂ)
+theorem exists_singular_polar_data {e : ℕ} {H : Type*} [Fintype H]
+    (F : Matrix H (Fin e) ℂ) :
+    ∃ (U : Matrix H (Fin e) ℂ)
       (P Pd : Matrix (Fin e) (Fin e) ℂ),
       P.PosSemidef ∧ F = U * P ∧ P * P = Fᴴ * F ∧
       U * (Uᴴ * U) = U ∧
@@ -50,7 +50,7 @@ theorem exists_singular_polar_data {e h : ℕ}
   let P : Matrix (Fin e) (Fin e) ℂ := hXH.cfc Real.sqrt
   let Pd : Matrix (Fin e) (Fin e) ℂ := hXH.cfc polarPinvSqrt
   let p : Matrix (Fin e) (Fin e) ℂ := hXH.cfc polarSupport
-  let U : Matrix (Fin h) (Fin e) ℂ := F * Pd
+  let U : Matrix H (Fin e) ℂ := F * Pd
   have hP : P.PosSemidef := by
     dsimp only [P]
     exact Upstream.PrimitiveWeight.cfc_posSemidef hXH
@@ -126,7 +126,7 @@ theorem exists_singular_polar_data {e h : ℕ}
     rw [Matrix.conjTranspose_mul, hpH, hXH] at ht
     exact ht
   have hFp : F * p = F := by
-    let Y : Matrix (Fin h) (Fin e) ℂ := F * (1 - p)
+    let Y : Matrix H (Fin e) ℂ := F * (1 - p)
     have hY2 : Yᴴ * Y = 0 := by
       calc
         Yᴴ * Y = (1 - p) * X * (1 - p) := by

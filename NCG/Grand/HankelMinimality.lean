@@ -100,4 +100,208 @@ theorem hankel_minimality {P F N : Type*} [AddCommGroup N]
           exact LinearMap.mem_range_self Φ v
       _ ≤ Module.finrank ℂ N := LinearMap.finrank_range_le Φ
 
+/-! ## The minimal (reachable and observable) case
+
+The quotient statement above is useful even for nonminimal realizations.  The
+manuscript also needs the equality case as an actual canonical map, together
+with its uniqueness and naturality for the primitive transitions.  The next
+definitions package those clauses without choosing bases.
+-/
+
+/-- The intrinsic Hankel response space associated with a scalar table. -/
+abbrev HankelCore (P F : Type*) (tbl : F → P → ℂ) : Submodule ℂ (F → ℂ) :=
+  Submodule.span ℂ (Set.range fun p (f : F) => tbl f p)
+
+/-- A reachable and future-separated realization is canonically equivalent to
+its Hankel response space. -/
+noncomputable def hankelCoreEquiv {P F N : Type*} [AddCommGroup N]
+    [Module ℂ N] (tbl : F → P → ℂ) (nst : P → N)
+    (ℓ : F → N →ₗ[ℂ] ℂ) (hmatch : ∀ f p, ℓ f (nst p) = tbl f p)
+    (hreach : Submodule.span ℂ (Set.range nst) = ⊤)
+    (hsep : ∀ v : N, (∀ f, ℓ f v = 0) → v = 0) :
+    N ≃ₗ[ℂ] HankelCore P F tbl := by
+  let Φ : N →ₗ[ℂ] (F → ℂ) := LinearMap.pi (fun f => ℓ f)
+  have hΦn : ∀ p, Φ (nst p) = fun f => tbl f p := by
+    intro p
+    funext f
+    exact hmatch f p
+  have hmap : Submodule.map Φ (Submodule.span ℂ (Set.range nst)) =
+      HankelCore P F tbl := by
+    rw [Submodule.map_span]
+    congr 1
+    rw [← Set.range_comp]
+    congr 1
+    funext p
+    exact hΦn p
+  let toCore : N →ₗ[ℂ] HankelCore P F tbl :=
+    LinearMap.codRestrict (HankelCore P F tbl) Φ fun v => by
+      rw [← hmap, hreach]
+      exact ⟨v, by simp, rfl⟩
+  refine LinearEquiv.ofBijective toCore ⟨?_, ?_⟩
+  · intro x y hxy
+    apply sub_eq_zero.mp
+    apply hsep
+    intro f
+    have hz : toCore (x - y) = 0 := by
+      rw [map_sub, hxy, sub_self]
+    exact congrFun (congrArg Subtype.val hz) f
+  · intro y
+    have hy : (y : F → ℂ) ∈
+        Submodule.map Φ (Submodule.span ℂ (Set.range nst)) := by
+      rw [hmap]
+      exact y.property
+    rw [hreach] at hy
+    obtain ⟨v, _, hv⟩ := hy
+    refine ⟨v, Subtype.ext ?_⟩
+    exact hv
+
+@[simp]
+theorem hankelCoreEquiv_state {P F N : Type*} [AddCommGroup N]
+    [Module ℂ N] (tbl : F → P → ℂ) (nst : P → N)
+    (ℓ : F → N →ₗ[ℂ] ℂ) (hmatch : ∀ f p, ℓ f (nst p) = tbl f p)
+    (hreach : Submodule.span ℂ (Set.range nst) = ⊤)
+    (hsep : ∀ v : N, (∀ f, ℓ f v = 0) → v = 0) (p : P) :
+    ((hankelCoreEquiv tbl nst ℓ hmatch hreach hsep (nst p) :
+        HankelCore P F tbl) : F → ℂ) = fun f => tbl f p := by
+  funext f
+  exact hmatch f p
+
+/-- The canonical record-preserving similarity between two minimal
+realizations of the same operational table. -/
+noncomputable def minimalRealizationSimilarity
+    {P F N₁ N₂ : Type*} [AddCommGroup N₁] [Module ℂ N₁]
+    [AddCommGroup N₂] [Module ℂ N₂]
+    (tbl : F → P → ℂ) (n₁ : P → N₁) (n₂ : P → N₂)
+    (ℓ₁ : F → N₁ →ₗ[ℂ] ℂ) (ℓ₂ : F → N₂ →ₗ[ℂ] ℂ)
+    (hmatch₁ : ∀ f p, ℓ₁ f (n₁ p) = tbl f p)
+    (hmatch₂ : ∀ f p, ℓ₂ f (n₂ p) = tbl f p)
+    (hreach₁ : Submodule.span ℂ (Set.range n₁) = ⊤)
+    (hreach₂ : Submodule.span ℂ (Set.range n₂) = ⊤)
+    (hsep₁ : ∀ v : N₁, (∀ f, ℓ₁ f v = 0) → v = 0)
+    (hsep₂ : ∀ v : N₂, (∀ f, ℓ₂ f v = 0) → v = 0) :
+    N₁ ≃ₗ[ℂ] N₂ :=
+  (hankelCoreEquiv tbl n₁ ℓ₁ hmatch₁ hreach₁ hsep₁).trans
+    (hankelCoreEquiv tbl n₂ ℓ₂ hmatch₂ hreach₂ hsep₂).symm
+
+@[simp]
+theorem minimalRealizationSimilarity_state
+    {P F N₁ N₂ : Type*} [AddCommGroup N₁] [Module ℂ N₁]
+    [AddCommGroup N₂] [Module ℂ N₂]
+    (tbl : F → P → ℂ) (n₁ : P → N₁) (n₂ : P → N₂)
+    (ℓ₁ : F → N₁ →ₗ[ℂ] ℂ) (ℓ₂ : F → N₂ →ₗ[ℂ] ℂ)
+    (hmatch₁ : ∀ f p, ℓ₁ f (n₁ p) = tbl f p)
+    (hmatch₂ : ∀ f p, ℓ₂ f (n₂ p) = tbl f p)
+    (hreach₁ : Submodule.span ℂ (Set.range n₁) = ⊤)
+    (hreach₂ : Submodule.span ℂ (Set.range n₂) = ⊤)
+    (hsep₁ : ∀ v : N₁, (∀ f, ℓ₁ f v = 0) → v = 0)
+    (hsep₂ : ∀ v : N₂, (∀ f, ℓ₂ f v = 0) → v = 0) (p : P) :
+    minimalRealizationSimilarity tbl n₁ n₂ ℓ₁ ℓ₂ hmatch₁ hmatch₂
+      hreach₁ hreach₂ hsep₁ hsep₂ (n₁ p) = n₂ p := by
+  simp only [minimalRealizationSimilarity, LinearEquiv.trans_apply]
+  rw [LinearEquiv.symm_apply_eq]
+  apply Subtype.ext
+  exact (hankelCoreEquiv_state tbl n₁ ℓ₁ hmatch₁ hreach₁ hsep₁ p).trans
+    (hankelCoreEquiv_state tbl n₂ ℓ₂ hmatch₂ hreach₂ hsep₂ p).symm
+
+/-- The canonical similarity is the unique linear map preserving all past
+states.  Reachability is the essential uniqueness input. -/
+theorem minimalRealizationSimilarity_unique
+    {P F N₁ N₂ : Type*} [AddCommGroup N₁] [Module ℂ N₁]
+    [AddCommGroup N₂] [Module ℂ N₂]
+    (tbl : F → P → ℂ) (n₁ : P → N₁) (n₂ : P → N₂)
+    (ℓ₁ : F → N₁ →ₗ[ℂ] ℂ) (ℓ₂ : F → N₂ →ₗ[ℂ] ℂ)
+    (hmatch₁ : ∀ f p, ℓ₁ f (n₁ p) = tbl f p)
+    (hmatch₂ : ∀ f p, ℓ₂ f (n₂ p) = tbl f p)
+    (hreach₁ : Submodule.span ℂ (Set.range n₁) = ⊤)
+    (hreach₂ : Submodule.span ℂ (Set.range n₂) = ⊤)
+    (hsep₁ : ∀ v : N₁, (∀ f, ℓ₁ f v = 0) → v = 0)
+    (hsep₂ : ∀ v : N₂, (∀ f, ℓ₂ f v = 0) → v = 0)
+    (S : N₁ →ₗ[ℂ] N₂) (hS : ∀ p, S (n₁ p) = n₂ p) :
+    S = (minimalRealizationSimilarity tbl n₁ n₂ ℓ₁ ℓ₂ hmatch₁ hmatch₂
+      hreach₁ hreach₂ hsep₁ hsep₂ : N₁ →ₗ[ℂ] N₂) := by
+  apply LinearMap.ext
+  intro v
+  have hv : v ∈ Submodule.span ℂ (Set.range n₁) := by
+    rw [hreach₁]
+    trivial
+  induction hv using Submodule.span_induction with
+  | mem x hx =>
+      obtain ⟨p, rfl⟩ := hx
+      simpa using hS p
+  | zero => simp
+  | add x y _ _ hx hy => simp [hx, hy]
+  | smul c x _ hx => simp [hx]
+
+/-- Primitive transitions are intertwined by the canonical similarity. -/
+theorem minimalRealizationSimilarity_intertwines
+    {P F N₁ N₂ : Type*} [AddCommGroup N₁] [Module ℂ N₁]
+    [AddCommGroup N₂] [Module ℂ N₂]
+    (tbl : F → P → ℂ) (n₁ : P → N₁) (n₂ : P → N₂)
+    (ℓ₁ : F → N₁ →ₗ[ℂ] ℂ) (ℓ₂ : F → N₂ →ₗ[ℂ] ℂ)
+    (hmatch₁ : ∀ f p, ℓ₁ f (n₁ p) = tbl f p)
+    (hmatch₂ : ∀ f p, ℓ₂ f (n₂ p) = tbl f p)
+    (hreach₁ : Submodule.span ℂ (Set.range n₁) = ⊤)
+    (hreach₂ : Submodule.span ℂ (Set.range n₂) = ⊤)
+    (hsep₁ : ∀ v : N₁, (∀ f, ℓ₁ f v = 0) → v = 0)
+    (hsep₂ : ∀ v : N₂, (∀ f, ℓ₂ f v = 0) → v = 0)
+    (next : P → P) (A₁ : N₁ →ₗ[ℂ] N₁) (A₂ : N₂ →ₗ[ℂ] N₂)
+    (hA₁ : ∀ p, A₁ (n₁ p) = n₁ (next p))
+    (hA₂ : ∀ p, A₂ (n₂ p) = n₂ (next p)) :
+    (minimalRealizationSimilarity tbl n₁ n₂ ℓ₁ ℓ₂ hmatch₁ hmatch₂
+      hreach₁ hreach₂ hsep₁ hsep₂ : N₁ →ₗ[ℂ] N₂).comp A₁ =
+      A₂.comp (minimalRealizationSimilarity tbl n₁ n₂ ℓ₁ ℓ₂ hmatch₁ hmatch₂
+        hreach₁ hreach₂ hsep₁ hsep₂ : N₁ →ₗ[ℂ] N₂) := by
+  apply LinearMap.ext
+  intro v
+  have hv : v ∈ Submodule.span ℂ (Set.range n₁) := by
+    rw [hreach₁]
+    trivial
+  induction hv using Submodule.span_induction with
+  | mem x hx =>
+      obtain ⟨p, rfl⟩ := hx
+      simp [LinearMap.comp_apply, hA₁, hA₂]
+  | zero => simp
+  | add x y _ _ hx hy =>
+      simpa only [map_add, LinearMap.comp_apply] using congrArg₂ (· + ·) hx hy
+  | smul c x _ hx =>
+      simpa only [map_smul, LinearMap.comp_apply] using congrArg (c • ·) hx
+
+/-- Future effects are transported by the canonical similarity. -/
+theorem minimalRealizationSimilarity_future
+    {P F N₁ N₂ : Type*} [AddCommGroup N₁] [Module ℂ N₁]
+    [AddCommGroup N₂] [Module ℂ N₂]
+    (tbl : F → P → ℂ) (n₁ : P → N₁) (n₂ : P → N₂)
+    (ℓ₁ : F → N₁ →ₗ[ℂ] ℂ) (ℓ₂ : F → N₂ →ₗ[ℂ] ℂ)
+    (hmatch₁ : ∀ f p, ℓ₁ f (n₁ p) = tbl f p)
+    (hmatch₂ : ∀ f p, ℓ₂ f (n₂ p) = tbl f p)
+    (hreach₁ : Submodule.span ℂ (Set.range n₁) = ⊤)
+    (hreach₂ : Submodule.span ℂ (Set.range n₂) = ⊤)
+    (hsep₁ : ∀ v : N₁, (∀ f, ℓ₁ f v = 0) → v = 0)
+    (hsep₂ : ∀ v : N₂, (∀ f, ℓ₂ f v = 0) → v = 0)
+    (f : F) (v : N₁) :
+    ℓ₂ f (minimalRealizationSimilarity tbl n₁ n₂ ℓ₁ ℓ₂ hmatch₁ hmatch₂
+      hreach₁ hreach₂ hsep₁ hsep₂ v) = ℓ₁ f v := by
+  have hv : v ∈ Submodule.span ℂ (Set.range n₁) := by
+    rw [hreach₁]
+    trivial
+  induction hv using Submodule.span_induction with
+  | mem x hx =>
+      obtain ⟨p, rfl⟩ := hx
+      rw [minimalRealizationSimilarity_state]
+      exact (hmatch₂ f p).trans (hmatch₁ f p).symm
+  | zero => simp
+  | add x y _ _ hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
+  | smul c x _ hx => simpa only [map_smul] using congrArg (c • ·) hx
+
+/-- Reachability and future separation characterize the equality case in the
+Hankel dimension bound. -/
+theorem hankel_minimality_finrank_eq {P F N : Type*} [AddCommGroup N]
+    [Module ℂ N] [FiniteDimensional ℂ N]
+    (tbl : F → P → ℂ) (nst : P → N) (ℓ : F → N →ₗ[ℂ] ℂ)
+    (hmatch : ∀ f p, ℓ f (nst p) = tbl f p)
+    (hreach : Submodule.span ℂ (Set.range nst) = ⊤)
+    (hsep : ∀ v : N, (∀ f, ℓ f v = 0) → v = 0) :
+    Module.finrank ℂ N = Module.finrank ℂ (HankelCore P F tbl) :=
+  (hankelCoreEquiv tbl nst ℓ hmatch hreach hsep).finrank_eq
+
 end NCG
