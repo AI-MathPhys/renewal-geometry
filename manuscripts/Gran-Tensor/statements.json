@@ -3922,10 +3922,15 @@
     "status": "conditional_interface",
     "lean": [
       "NCG.typed_occurrence_RN",
+      "NCG/Grand/TypedOccurrenceRN.lean:NCG.typedOccurrenceRN_scalarNeutralRecord",
+      "NCG/Grand/TypedRecordScalarNeutralCommutant.lean:NCG.TypedRecordScalarNeutralCommutant.mem_commutant_iff_scalarNeutralBlockForm",
+      "NCG/Grand/TypedRecordScalarNeutralCommutant.lean:NCG.TypedRecordScalarNeutralCommutant.commutingEffect_has_scalarNeutralEffectForm",
+      "NCG/Grand/TypedRecordScalarNeutralCommutant.lean:NCG.TypedRecordScalarNeutralCommutant.correctedTypedRecordEffectCoordinates_finrank",
+      "NCG/Grand/TypedRecordScalarNeutralCommutant.lean:NCG.TypedRecordScalarNeutralCommutant.correctedTypedRecordConductanceKernel_finrank",
       "NCG/Grand/TypedRecordCommutantDimensionAudit.lean:NCG.typedNeutralFullMatrixBlock_commutant_scalar",
       "NCG/Grand/TypedRecordCommutantDimensionAudit.lean:NCG.arbitraryNeutralEffects_incompatible_with_fullMatrixRecord"
     ],
-    "note": "Fidelity audit 2026-08-07: the positive-operator Radon–Nikodym effect is proved (existence, uniqueness, complement factorization), while the SU(4) block form remains to be encoded. Exact commutant audit 2026-08-10 found a manuscript inconsistency that prevents promotion as written: in the natural eight-dimensional representation, the commutant of the displayed full M2(C)_{nu D} summand is scalar on that two-dimensional block, not the arbitrary 2x2 effect required by the claimed ten-real-parameter count. TypedRecordCommutantDimensionAudit proves the full-matrix commutant is scalar and supplies a positive rank-one 2x2 effect that fails the nondemolition condition. The statement must either replace that M2(C) summand by a scalar algebra with multiplicity two or change the effect form/count before an exact proof can exist. TRIAGE-EXACT: MEDIUM after manuscript correction - SU(4)-covariant uniqueness via commutant/twirl plus corrected block-commutant clauses."
+    "note": "Correction and formalization updated 2026-08-10: the manuscript now uses a scalar neutral algebra acting with multiplicity two. TypedRecordScalarNeutralCommutant computes its commutant in both directions as exactly six diagonal scalar coordinates plus an arbitrary neutral 2x2 block and records the resulting ten real coordinates and nine-dimensional fixed-conductance kernel. typedOccurrenceRN_scalarNeutralRecord packages that exact nondemolition classification with the unique positive Radon--Nikodym effect and both square-root factorizations. TypedRecordCommutantDimensionAudit retains the formal counterexample to the former full-M2 wording as correction provenance. The remaining clause before promotion is the concrete SU(4) singlet--adjoint covariance decomposition and positivity of its two typed multiplicity blocks."
   },
   "cth:SM-occurrence-marginal-nonselection": {
     "env": "countertheorem",
@@ -6009,9 +6014,16 @@
     "status": "conditional_interface",
     "lean": [
       "NCG/Grand/GrandWedderburn.lean:NCG.commutant_decomposition",
-      "NCG/Grand/GrandWedderburn.lean:NCG.block_bicommutant"
+      "NCG/Grand/GrandWedderburn.lean:NCG.block_bicommutant",
+      "NCG/Grand/FiniteComplexStarSubalgebraSemisimplicity.lean:NCG.FiniteComplexStarSubalgebraSemisimplicity.leftIdealOrthogonalComplement_isCompl",
+      "NCG/Grand/FiniteComplexStarSubalgebraSemisimplicity.lean:NCG.FiniteComplexStarSubalgebraSemisimplicity.starSubalgebra_isSemisimpleRing",
+      "NCG/Grand/FiniteStarSubalgebraMutualCommutant.lean:NCG.FiniteStarSubalgebraMutualCommutant.mutualCommutants",
+      "NCG/Grand/FiniteStarSubalgebraMutualCommutant.lean:NCG.FiniteStarSubalgebraMutualCommutant.matrixBlockDecomposition",
+      "NCG/Grand/FiniteOrthogonalSectorDecomposition.lean:NCG.FiniteOrthogonalSectorDecomposition.orthogonalSectorUnitaryEquiv",
+      "NCG/Grand/FullMatrixAlgebraModuleDecomposition.lean:NCG.FullMatrixAlgebraModuleDecomposition.fullMatrixModuleLinearEquiv",
+      "NCG/Grand/FullMatrixAlgebraModuleDecomposition.lean:NCG.FullMatrixAlgebraModuleDecomposition.fullMatrixModuleUnitaryEquiv"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_OK, severity 1). Commutant/bicommutant identities genuinely proved on the decomposed carrier; Artin–Wedderburn reduction disclosed and classification file exists. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: MEDIUM - Artin-Wedderburn carrier decomposition of arbitrary finite-dim unital *-subalgebra — real finite work on bicommutant files."
+    "note": "Fidelity audit updated 2026-08-10 after manuscript correction: the theorem now explicitly assumes a finite-dimensional complex Hilbert carrier. GrandWedderburn proves the explicit commutant and bicommutant formulas on a decomposed tensor carrier. FiniteComplexStarSubalgebraSemisimplicity constructs trace-orthogonal complementary left ideals and proves IsSemisimpleRing with no assumption. FiniteStarSubalgebraMutualCommutant proves both A''=A and the assumption-free abstract Artin-Wedderburn equivalence A≃∏λ M_nλ(C). FullMatrixAlgebraModuleDecomposition explicitly proves that every module over one full matrix block is matrix-linearly equivalent to copies of the defining representation and, for a star-compatible action, that this equivalence is unitary by a direct matrix-unit orthogonality calculation. FiniteOrthogonalSectorDecomposition now proves that any finite self-adjoint pairwise-orthogonal resolution of the identity assembles its ranges into the carrier by a unitary equivalence. The remaining unencoded bridge is construction of that projection family and its star-compatible matrix units from the abstract Artin--Wedderburn equivalence. The record remains conditional_interface until that bridge is constructed. TRIAGE-EXACT: HARD remainder - star-preserving central matrix-unit extraction."
   },
   "definition:finite-howe-dual-pair": {
     "env": "definition",
@@ -6762,11 +6774,15 @@
   "thm:SMST-Clifford-twirl-matter": {
     "env": "theorem",
     "title": "One-scalar Clifford-twirl matter audit",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/CliffordTwirlMatterAudit.lean"
+      "NCG/Grand/CliffordTwirlMatterAudit.lean",
+      "NCG/Grand/CliffordPauliWordSpectralCertificate.lean",
+      "NCG/Grand/CliffordPauliWordEnergyBounds.lean",
+      "NCG/Grand/CliffordMatrixSpectralGap.lean",
+      "NCG/Grand/CliffordExpectationSpectralBounds.lean"
     ],
-    "note": "Exact re-encoding in progress 2026-08-10. CliffordTwirlMatterAudit now proves the one-axis η and p formulas, summed twirl/mass identities, all five positive-matter equivalences, the arbitrary-multiplicity commutant I4⊗B(M), exact p=0 and p=1 branch classifications with inherited Hermitian-unitary multiplicity factors, both grading residual formulas and constant-sum law, the trace-preserving commutant expectation, and ΩCl = Tr_M(ρ+ρ-). The only remaining manuscript clause is the sharp spectral window D pCl ≤ ΩCl ≤ 4D pCl; status remains conditional_interface until that certificate is proved. TRIAGE-EXACT: MEDIUM."
+    "note": "Exact re-encoding completed 2026-08-10. CliffordTwirlMatterAudit proves the axis η and p formulas, summed twirl/mass identities, positive-matter equivalences, arbitrary-multiplicity commutant I4⊗B(M), exact p=0 and p=1 branches, both grading residual formulas, the trace-preserving commutant expectation, and ΩCl = Tr_M(ρ+ρ-). CliffordPauliWordSpectralCertificate constructs the sixteen-word Hilbert–Schmidt basis and certifies all gamma-axis signs; CliffordPauliWordEnergyBounds proves the sharp coefficient window; CliffordMatrixSpectralGap converts it to the primitive matrix statement; and CliffordExpectationSpectralBounds lifts it over arbitrary multiplicity and proves D pCl ≤ ΩCl ≤ 4D pCl exactly. TRIAGE-EXACT: MEDIUM."
   },
   "cor:SMST-Clifford-pressure-matter": {
     "env": "corollary",
@@ -6807,11 +6823,14 @@
   "thm:SMST-exceptional-three-matrix": {
     "env": "theorem",
     "title": "Exact $S_4$ exceptional three-matrix panel",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/ExceptionalS4ThreeMatrixPanel.lean"
+      "NCG/Grand/ExceptionalS4GeneratorSchurCertificate.lean",
+      "NCG/Grand/ExceptionalS4IsotypicBlockClassification.lean",
+      "NCG/Grand/ExceptionalS4ThreeMatrixPanel.lean",
+      "NCG/Grand/ExceptionalS4MultiplicityMatrixAssembly.lean"
     ],
-    "note": "Exact re-encoding in progress 2026-08-10. ExceptionalS4ThreeMatrixPanel defines the two paired contractions and Hermitian self-twist contraction with PSD contraction certificates, proves the displayed Ωexc dimension/HS-norm formula, proves nonnegativity, and proves the exact zero branch including both multiplicity balances, two-sided unitarity of A1 and A3, and A2²=I. The remaining clause is the upstream FDRep/Schur derivation that S4 orientation covariance admits exactly these three blocks; status remains conditional_interface until that classification is connected. TRIAGE-EXACT: MEDIUM."
+    "note": "Exact MEDIUM completion 2026-08-10. ExceptionalS4GeneratorSchurCertificate gives concrete orthonormal generator models for [31], its sign twist [211], and [22], proves the fixed Hermitian sign-twist intertwiner C22, scalar commutants, the vanishing standard sign-anticommutant, and every rectangular Schur-vanishing case. ExceptionalS4IsotypicBlockClassification assembles the complete 5-by-5 orientation-covariant block calculation: all twenty forbidden blocks vanish and exactly the two directed [4]/[1^4] blocks, two directed [31]/[211] blocks, and the C22 line survive. ExceptionalS4MultiplicityMatrixAssembly applies self-adjointness to pair the directed blocks, leaving precisely A1, A3, and Hermitian A2 with their contraction certificates. ExceptionalS4ThreeMatrixPanel then proves the displayed Ωexc formula, nonnegativity, and the exact simultaneous zero branch with both multiplicity balances, two-sided unitarity of A1 and A3, and A2²=I."
   },
   "firewall:word-gram-and-executable-clifford-interfaces": {
     "env": "firewall",

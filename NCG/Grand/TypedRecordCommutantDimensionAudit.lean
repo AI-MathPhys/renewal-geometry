@@ -8,12 +8,12 @@ import NCG.Flagship.MinimalNaturality
 /-!
 # Typed record commutant dimension audit
 
-The displayed algebra in `thm:SM-typed-occurrence-RN` contains a full
+The former displayed algebra in `thm:SM-typed-occurrence-RN` contained a full
 `M₂(ℂ)` neutral block, while its subsequent parameter count treats that block
 as though its commutant were all Hermitian `2 × 2` matrices.  These two claims
-cannot simultaneously hold in the natural representation.  This file records
-the precise finite-dimensional obstruction so the manuscript can choose the
-intended algebra before the theorem is promoted.
+cannot simultaneously hold in the natural representation. This file records
+the precise finite-dimensional obstruction that motivated the corrected
+scalar algebra acting with multiplicity two.
 -/
 
 open Matrix

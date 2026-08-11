@@ -703,6 +703,7 @@ import NCG.Grand.PhysicalTwoHistoryCoherence
 import NCG.Grand.JointSourceNormalizedTransportAndShort
 import NCG.Grand.SimultaneousNuisanceUniversalShort
 import NCG.Grand.TypedOccurrenceRN
+import NCG.Grand.TypedRecordScalarNeutralCommutant
 import NCG.Grand.RelativeMetricDensity
 import NCG.Grand.RelativeMetricSupportDensity
 import NCG.Grand.MomentLeakage
@@ -768,6 +769,10 @@ import NCG.Grand.LoadedSubhierarchy
 import NCG.Grand.CanonicalLoadedSubhierarchyAssembly
 import NCG.Grand.ArithmeticLoading
 import NCG.Grand.Bicommutant
+import NCG.Grand.FiniteComplexStarSubalgebraSemisimplicity
+import NCG.Grand.FiniteOrthogonalSectorDecomposition
+import NCG.Grand.FullMatrixAlgebraModuleDecomposition
+import NCG.Grand.FiniteStarSubalgebraMutualCommutant
 import NCG.Grand.PolarHolonomy
 import NCG.Grand.MainDuality
 import NCG.Grand.OneGenerationAudit
@@ -907,6 +912,10 @@ import NCG.Grand.HiddenSchedulerNoGo
 import NCG.Grand.ProvenanceCounterexamples
 import NCG.Grand.CliffordMarginalMatterNoGo
 import NCG.Grand.CliffordTwirlMatterAudit
+import NCG.Grand.CliffordPauliWordSpectralCertificate
+import NCG.Grand.CliffordPauliWordEnergyBounds
+import NCG.Grand.CliffordMatrixSpectralGap
+import NCG.Grand.CliffordExpectationSpectralBounds
 import NCG.Grand.CliffordSpatialLocalization
 import NCG.Grand.CrossHankelAnomalyPacket
 import NCG.Grand.RelativeHoweCertificate
@@ -1057,6 +1066,9 @@ import NCG.Grand.JarlskogCommutatorIdentity
 import NCG.Grand.MixingPanelRephasingReconstruction
 import NCG.Grand.JarlskogSpectralTriangle
 import NCG.Grand.NormalBranchPurityMargin
+import NCG.Grand.ExceptionalS4GeneratorSchurCertificate
+import NCG.Grand.ExceptionalS4IsotypicBlockClassification
 import NCG.Grand.ExceptionalS4ThreeMatrixPanel
+import NCG.Grand.ExceptionalS4MultiplicityMatrixAssembly
 import NCG.Grand.AcceptedJointTableReconstruction
 import NCG.Grand.FeedbackLimitMemoryClassification

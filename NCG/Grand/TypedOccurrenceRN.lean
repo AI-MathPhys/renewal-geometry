@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import NCG.Grand.SqrtPolar
+import NCG.Grand.TypedRecordScalarNeutralCommutant
 
 /-!
 # Typed singlet–adjoint Radon–Nikodym reduction
@@ -107,5 +108,27 @@ theorem typed_occurrence_RN {n : Type*} [Fintype n]
       (fun M => (CFC.sqrt G)⁻¹ * M * (CFC.sqrt G)⁻¹) hK'
     rw [hcan' K'] at h
     rw [hKdef, h]
+
+/-- Corrected typed Radon--Nikodym reduction on the concrete record carrier.
+The unique effect is nondemolition exactly when it consists of six scalar
+coordinates and one unrestricted neutral `2 × 2` block. -/
+theorem typedOccurrenceRN_scalarNeutralRecord
+    {G GΦ : Matrix (Fin 6 ⊕ Fin 2) (Fin 6 ⊕ Fin 2) ℂ}
+    (hG : G.PosDef) (hΦ : GΦ.PosSemidef)
+    (hle : (G - GΦ).PosSemidef) :
+    ∃! K : Matrix (Fin 6 ⊕ Fin 2) (Fin 6 ⊕ Fin 2) ℂ,
+      K.PosSemidef ∧ ((1 : Matrix (Fin 6 ⊕ Fin 2) (Fin 6 ⊕ Fin 2) ℂ) - K).PosSemidef ∧
+      GΦ = CFC.sqrt G * K * CFC.sqrt G ∧
+      G - GΦ = CFC.sqrt G * (1 - K) * CFC.sqrt G ∧
+      ((∀ (a : Fin 6 → ℂ) (z : ℂ),
+          TypedRecordScalarNeutralCommutant.scalarNeutralRecord a z * K =
+            K * TypedRecordScalarNeutralCommutant.scalarNeutralRecord a z) ↔
+        ∃ (k : Fin 6 → ℂ) (N : Matrix (Fin 2) (Fin 2) ℂ),
+          K = Matrix.fromBlocks (Matrix.diagonal k) 0 0 N) := by
+  obtain ⟨K, hK, huniq⟩ := typed_occurrence_RN hG hΦ hle
+  refine ⟨K, ⟨hK.1, hK.2.1, hK.2.2.1, hK.2.2.2, ?_⟩, ?_⟩
+  · exact TypedRecordScalarNeutralCommutant.mem_commutant_iff_scalarNeutralBlockForm K
+  · intro K' hK'
+    exact huniq K' ⟨hK'.1, hK'.2.1, hK'.2.2.1, hK'.2.2.2.1⟩
 
 end NCG
