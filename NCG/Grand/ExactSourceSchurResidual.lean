@@ -157,6 +157,78 @@ theorem sourceGramPseudoinverse_projection {h e : ℕ}
     (S * J * Sᴴ) * S = S
   exact ⟨hJH, hXJX, hJXJ, hproj.1, hproj.2.1, hproj.2.2⟩
 
+/-- The spectral Moore--Penrose inverse commutes with its Gram matrix. -/
+theorem sourceGramPseudoinverse_commutes {h e : ℕ}
+    (S : Matrix (Fin h) (Fin e) ℂ) :
+    (Sᴴ * S) * sourceGramPseudoinverse S =
+      sourceGramPseudoinverse S * (Sᴴ * S) := by
+  let X : Matrix (Fin e) (Fin e) ℂ := Sᴴ * S
+  let hX : X.IsHermitian :=
+    (Matrix.posSemidef_conjTranspose_mul_self S).isHermitian
+  change X * hX.cfc sourceSpectralPseudoinverse =
+    hX.cfc sourceSpectralPseudoinverse * X
+  calc
+    X * hX.cfc sourceSpectralPseudoinverse =
+        hX.cfc id * hX.cfc sourceSpectralPseudoinverse := by
+      rw [Upstream.PrimitiveWeight.cfc_id' hX]
+    _ = hX.cfc (fun x => x * sourceSpectralPseudoinverse x) :=
+      Upstream.PrimitiveWeight.cfc_mul hX _ _
+    _ = hX.cfc (fun x => sourceSpectralPseudoinverse x * x) := by
+      apply Upstream.PrimitiveWeight.cfc_congr hX
+      intro i
+      exact mul_comm _ _
+    _ = hX.cfc sourceSpectralPseudoinverse * hX.cfc id :=
+      (Upstream.PrimitiveWeight.cfc_mul hX _ _).symm
+    _ = hX.cfc sourceSpectralPseudoinverse * X := by
+      rw [Upstream.PrimitiveWeight.cfc_id' hX]
+
+/-- The coefficient-space support `G†G` is the orthogonal support projection
+of the source Gram and fixes the source frame on the right. -/
+theorem sourceCoefficientSupport_properties {h e : ℕ}
+    (S : Matrix (Fin h) (Fin e) ℂ) :
+    let X := Sᴴ * S
+    let J := sourceGramPseudoinverse S
+    let Q := J * X
+    Qᴴ = Q ∧ Q * Q = Q ∧ S * Q = S := by
+  let X : Matrix (Fin e) (Fin e) ℂ := Sᴴ * S
+  let J : Matrix (Fin e) (Fin e) ℂ := sourceGramPseudoinverse S
+  let Q : Matrix (Fin e) (Fin e) ℂ := J * X
+  obtain ⟨hJH, hXJX, hJXJ, -⟩ := sourceGramPseudoinverse_projection S
+  have hXH : Xᴴ = X := (Matrix.posSemidef_conjTranspose_mul_self S).isHermitian
+  have hcomm : X * J = J * X := sourceGramPseudoinverse_commutes S
+  have hQH : Qᴴ = Q := by
+    dsimp only [Q]
+    rw [Matrix.conjTranspose_mul, hXH, hJH, hcomm]
+  have hQ2 : Q * Q = Q := by
+    dsimp only [Q]
+    calc
+      (J * X) * (J * X) = (J * X * J) * X := by
+        simp only [Matrix.mul_assoc]
+      _ = J * X := by rw [hJXJ]
+  have hXQ : X * Q = X := by
+    dsimp only [Q]
+    rw [← Matrix.mul_assoc, hXJX]
+  have hQX : Q * X = X := by
+    simpa [Matrix.conjTranspose_mul, hQH, hXH] using
+      congrArg Matrix.conjTranspose hXQ
+  have hfix : S * Q = S := by
+    let R : Matrix (Fin h) (Fin e) ℂ := S * (1 - Q)
+    have hRgram : Rᴴ * R = 0 := by
+      calc
+        Rᴴ * R = (1 - Q) * X * (1 - Q) := by
+          dsimp only [R, X]
+          rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_sub,
+            Matrix.conjTranspose_one, hQH]
+          simp only [Matrix.mul_assoc]
+        _ = 0 := by
+          rw [Matrix.sub_mul, Matrix.one_mul, hQX, sub_self,
+            Matrix.zero_mul]
+    have hR : R = 0 := Matrix.conjTranspose_mul_self_eq_zero.mp hRgram
+    dsimp only [R] at hR
+    rw [Matrix.mul_sub, Matrix.mul_one] at hR
+    exact (sub_eq_zero.mp hR).symm
+  exact ⟨hQH, hQ2, hfix⟩
+
 /-- The Schur expression equals the Gram matrix of the orthogonal residual. -/
 theorem sourceSchurResidual_eq_orthogonalResidual {h e₁ e₂ : ℕ}
     (S₁ : Matrix (Fin h) (Fin e₁) ℂ)

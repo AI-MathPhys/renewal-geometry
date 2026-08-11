@@ -3,7 +3,7 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import Mathlib
+import NCG.Grand.HermitianMoorePenroseInverse
 
 /-!
 # Exact harmonic cycle projector
@@ -123,5 +123,105 @@ theorem cycle_projector {V E : Type*} [Fintype V] [Fintype E]
         = Module.finrank ℂ (LinearMap.range dl.mulVecLin) :=
       rfl
     omega
+
+/-! ## Exact connected-incidence specialization -/
+
+/-- Standard algebraic connectedness criterion for an oriented incidence
+matrix: the only vertex potentials with zero edge gradient are constants. -/
+def IsConnectedIncidence {V E : Type*} [Fintype V] [Fintype E]
+    (dl : Matrix V E ℂ) : Prop :=
+  dlᴴ *ᵥ (fun _ : V => (1 : ℂ)) = 0 ∧
+    ∀ x : V → ℂ, dlᴴ *ᵥ x = 0 →
+      ∃ c : ℂ, x = c • (fun _ : V => (1 : ℂ))
+
+/-- Connectedness identifies the kernel of the transpose incidence with the
+one-dimensional constant-potential line. -/
+theorem connectedIncidence_ker_conjTranspose_eq_span_one
+    {V E : Type*} [Fintype V] [Fintype E]
+    (dl : Matrix V E ℂ) (hconnected : IsConnectedIncidence dl) :
+    LinearMap.ker dlᴴ.mulVecLin =
+      ℂ ∙ (fun _ : V => (1 : ℂ)) := by
+  ext x
+  constructor
+  · intro hx
+    have hxzero : dlᴴ *ᵥ x = 0 := LinearMap.mem_ker.mp hx
+    obtain ⟨c, rfl⟩ := hconnected.2 x hxzero
+    exact Submodule.mem_span_singleton.mpr ⟨c, rfl⟩
+  · intro hx
+    obtain ⟨c, rfl⟩ := Submodule.mem_span_singleton.mp hx
+    apply LinearMap.mem_ker.mpr
+    rw [map_smul]
+    change c • (dlᴴ *ᵥ (fun _ : V => (1 : ℂ))) = 0
+    rw [hconnected.1, smul_zero]
+
+/-- A connected oriented incidence matrix has rank `|V|-1`; this is derived
+from the constant-potential kernel, not assumed. -/
+theorem connectedIncidence_rank
+    {V E : Type*} [Fintype V] [Fintype E] [Nonempty V]
+    (dl : Matrix V E ℂ) (hconnected : IsConnectedIncidence dl) :
+    Matrix.rank dl = Fintype.card V - 1 := by
+  classical
+  have hone : (fun _ : V => (1 : ℂ)) ≠ 0 := by
+    intro hzero
+    let root : V := Classical.choice inferInstance
+    have := congrFun hzero root
+    simp at this
+  have hker := connectedIncidence_ker_conjTranspose_eq_span_one dl hconnected
+  have hnullity : Module.finrank ℂ (LinearMap.ker dlᴴ.mulVecLin) = 1 := by
+    rw [hker, finrank_span_singleton hone]
+  have hrankNullity := LinearMap.finrank_range_add_finrank_ker dlᴴ.mulVecLin
+  rw [hnullity, Module.finrank_pi] at hrankNullity
+  have hrankTranspose : Matrix.rank dlᴴ =
+      Module.finrank ℂ (LinearMap.range dlᴴ.mulVecLin) := rfl
+  have hrankPlus : Matrix.rank dl + 1 = Fintype.card V := by
+    rw [← Matrix.rank_conjTranspose dl, hrankTranspose]
+    exact hrankNullity
+  omega
+
+/-- Exact manuscript theorem with no supplied pseudoinverse and no supplied
+rank.  The spectral theorem constructs the Hermitian Moore--Penrose inverse;
+connectedness derives `rank ∂ = |V|-1`; the resulting operator is precisely
+the orthogonal projection onto `ker ∂`, with the cycle-dimension formula. -/
+theorem exact_harmonic_cycle_projector
+    {V E : Type*} [Fintype V] [Fintype E] [Nonempty V]
+    [DecidableEq E]
+    (dl : Matrix V E ℂ) (hconnected : IsConnectedIncidence dl) :
+    ∃ G : Matrix V V ℂ,
+      Gᴴ = G ∧
+      (1 - dlᴴ * G * dl) * (1 - dlᴴ * G * dl) =
+        1 - dlᴴ * G * dl ∧
+      (1 - dlᴴ * G * dl)ᴴ = 1 - dlᴴ * G * dl ∧
+      dl * (1 - dlᴴ * G * dl) = 0 ∧
+      (∀ x : E → ℂ, dl *ᵥ x = 0 →
+        (1 - dlᴴ * G * dl) *ᵥ x = x) ∧
+      Module.finrank ℂ (LinearMap.ker dl.mulVecLin) +
+          (Fintype.card V - 1) = Fintype.card E ∧
+      Module.finrank ℂ (LinearMap.ker dl.mulVecLin) =
+        Fintype.card E + 1 - Fintype.card V := by
+  classical
+  let L := dl * dlᴴ
+  have hL : L.IsHermitian := Matrix.isHermitian_mul_conjTranspose_self dl
+  let G := HermitianMoorePenroseInverse.hermitianMoorePenroseInverse L hL
+  have hG : Gᴴ = G :=
+    HermitianMoorePenroseInverse.hermitianMoorePenroseInverse_isHermitian L hL
+  have h1 : L * G * L = L :=
+    HermitianMoorePenroseInverse.hermitianMoorePenroseInverse_penrose_left L hL
+  have h2 : G * L * G = G :=
+    HermitianMoorePenroseInverse.hermitianMoorePenroseInverse_penrose_right L hL
+  obtain ⟨hidempotent, hhermitian, hkill, hfix, hdimension_if⟩ :=
+    cycle_projector dl G hG h1 h2
+  have hrank : Matrix.rank dl = Fintype.card V - 1 :=
+    connectedIncidence_rank dl hconnected
+  have hdimension := hdimension_if hrank
+  have hdimension_formula :
+      Module.finrank ℂ (LinearMap.ker dl.mulVecLin) =
+        Fintype.card E + 1 - Fintype.card V := by
+    have hVpos : 0 < Fintype.card V := Fintype.card_pos
+    have hsum : Module.finrank ℂ (LinearMap.ker dl.mulVecLin) +
+        Fintype.card V = Fintype.card E + 1 := by
+      omega
+    omega
+  exact ⟨G, hG, hidempotent, hhermitian, hkill, hfix,
+    hdimension, hdimension_formula⟩
 
 end NCG
