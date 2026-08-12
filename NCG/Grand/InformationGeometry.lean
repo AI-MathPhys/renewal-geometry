@@ -24,13 +24,10 @@ For the finite exponential family
       convex along the family and the primitive is a
       minimizer of the renormalized action on its ray.
 
-The Fisher-window clauses (`g₋I ⪯ G(θ) ⪯ g₊I` on a ball by
-real-analyticity, the bi-Lipschitz expectation map, and the
-two-sided quadratic bounds `g₋/2‖θ-φ‖² ≤ 𝒟 ≤ g₊/2‖θ-φ‖²`)
-are the manuscript's Taylor/continuity layer over this
-exact identity; the second-variation Gram
-`D²𝒜(p₀) = G₀` is the score-bank Gram of
-`NCG.primitive_score_bank`.
+The exact multivariate conditional family, unique KL minimizer, entropy
+Hessian, physical Gram, closed-ball Fisher window, directional calculus,
+bi-Lipschitz expectation map, and two-sided quadratic KL bounds are completed
+in `NCG.Grand.PrimitiveInformationGeometryExact`.
 -/
 
 open Finset

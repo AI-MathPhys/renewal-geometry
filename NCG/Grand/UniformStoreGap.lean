@@ -17,12 +17,10 @@ import Mathlib
   `1 - γ₀ = λ₁²/(λ₁²+δ₀²)`, and hence any contraction rate below
   it decays like `(1-γ₀)ⁿ`.
 
-Rendering disclosed: the operator clause
-`‖R_Xⁿ - E_{L_X}‖ ≤ (1-γ₀)ⁿ` is this bound fed through the
-spectral norm identity of `thm:score-dwell-spectrum`
-(hard-tier, pending); the corollary's own content — the exact
-Laplace–cosine integral, the uniform multiplier maximum, and
-the power decay — is proved here.
+The operator clause
+`‖R_Xⁿ - E_{L_X}‖ ≤ (1-γ₀)ⁿ`, obtained from the exact
+score--dwell spectral norm identity, is proved for every natural power in
+`NCG.Grand.UniformStoreGapOperatorBound`.
 -/
 
 open Real MeasureTheory Filter

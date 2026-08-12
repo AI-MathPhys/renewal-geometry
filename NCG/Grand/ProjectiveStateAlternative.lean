@@ -21,13 +21,10 @@ import Mathlib
       cofinal subsequences with the two subsequential
       limits — the finite-stage separator.
 
-The identification of the ambient compact space with the
-product of the finite-dimensional state spaces (Tychonoff)
-and of the compatibility relations as closed conditions,
-and the extraction of the separating self-adjoint element
-`a` with margin `ε` from two distinct Hermitian
-functionals, are the manuscript's functional-analytic
-packaging of these cluster-set facts.
+The exact finite-dimensional C-star state-space realization, Tychonoff
+product, closed inverse-limit compatibility equations, coordinatewise
+singleton criterion, and self-adjoint finite-stage separator are completed in
+`NCG.Grand.FiniteProjectiveStateAlternative`.
 -/
 
 open Filter

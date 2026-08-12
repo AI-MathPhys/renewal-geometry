@@ -18,12 +18,11 @@ import Mathlib
   `(R + c(I-R))ᴺ = R + cᴺ(I-R)`, giving both boxed channel
   formulas at `c = 1-θ` and `c = Pr(T>n)`.
 
-Rendering disclosed: the iid-marks/geometric-sum probability
-layer (that `F_T` is the transform of the accepted first-return
-law and `𝔼T` its mean) is the manuscript's renewal bookkeeping
-over these proved rational identities, exactly as in
-`thm:completed-private-renewal`; regulator uniformity is the
-declared uniform-cutoff clause.
+The actual iid geometric-random-sum PMF, its first moment, strict-tail
+generating series, positive exponential moment, and the explicit
+regulator-uniform assumptions are proved in
+`NCG.Renewal.AcceptedResponseLaw`.  This module retains the reusable closed-form
+algebra and idempotent-channel identity.
 -/
 
 open Matrix

@@ -23,10 +23,13 @@ import NCG.Grand.OccurrenceChoiSource
       Choi dyad sum over the output leg is the identity
       (`Tr₂ J = (ΣV_αᴴV_α)ᵀ = I`).
 
-Rendering disclosed: sufficiency (linking minimal purifications
-of the positive prefixes into a sequential process) is the
-canonical comb dilation record; the probability table and its
-multilinear pairing are the declared tomographic inputs.
+The exact multi-slot completion is in
+`NCG.Grand.FiniteProcessCombTomography`: it constructs recursively typed
+prefix carriers, proves physical dual-frame reconstruction and frame
+independence, proves the full positive nested-trace characterization in both
+directions using canonical minimal square-root purifications and causal Gram
+links, and proves that all prefixes are uniquely derived from the terminal
+tensor.
 -/
 
 open Matrix

@@ -39,9 +39,11 @@ directed system of `ℂ`-algebras (Mathlib's explicit
 
 Rendering disclosed: the C*-completion (sup-norm on the
 algebraic limit, GNS boundedness `‖π(a)‖ ≤ ‖a‖`, and UCP-norm
-contractivity of the extended maps) and the Hilbert-space
-direct-limit isometries of the joint-source theorem are the
-manuscript's operator-norm layer; the algebraic inductive limit,
+contractivity of the extended maps) is the remaining
+operator-norm layer for the AF-state theorem.  The Hilbert-space
+completion, common-carrier isometries, and cross-transport defect criterion
+for the joint-source theorem are proved in
+`NCG.Grand.JointSourceHilbertInductiveLimit`; the algebraic inductive limit,
 the unique unital positive functional extension, the exhaustion,
 and the semigroup map extension are proved here on Mathlib's
 directed-system colimit.

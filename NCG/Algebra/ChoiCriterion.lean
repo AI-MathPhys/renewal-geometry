@@ -111,6 +111,26 @@ theorem choiMatrix_posSemidef_of_cp
   rw [choiMatrix_eq_ampliate]
   exact h n (entangledProj n) (entangledProj_posSemidef n)
 
+/-- Complete positivity contains ordinary positivity as its one-dimensional
+ampliation. -/
+theorem matrixCompletelyPositive_positive
+    {Φ : Matrix (Fin n) (Fin n) ℂ →ₗ[ℂ] Matrix (Fin m) (Fin m) ℂ}
+    (hΦ : IsMatrixCompletelyPositive Φ)
+    {X : Matrix (Fin n) (Fin n) ℂ} (hX : X.PosSemidef) :
+    (Φ X).PosSemidef := by
+  let X₁ : Matrix (Fin 1 × Fin n) (Fin 1 × Fin n) ℂ :=
+    X.submatrix Prod.snd Prod.snd
+  have hX₁ : X₁.PosSemidef := hX.submatrix Prod.snd
+  have hY := hΦ 1 X₁ hX₁
+  have hcorner := hY.submatrix (fun i : Fin m => (0, i))
+  have heq :
+      (ampliate 1 Φ X₁).submatrix (fun i : Fin m => (0, i))
+        (fun i : Fin m => (0, i)) = Φ X := by
+    ext i j
+    change Φ (Matrix.of fun a b => X₁ (0, a) (0, b)) i j = Φ X i j
+    congr 2
+  rwa [heq] at hcorner
+
 /-- Collapsing a product-indexed sum whose off-block terms vanish. -/
 theorem sum_prod_collapse {β : Type*} [AddCommMonoid β] {k₀ : ℕ}
     {J : Type*} [Fintype J] (p : Fin k₀) (g : Fin k₀ → J → β)

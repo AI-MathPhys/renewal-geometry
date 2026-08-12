@@ -270,11 +270,18 @@
   "thm:comb-tomography": {
     "env": "theorem",
     "title": "Finite process-comb tomography",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG.comb_tomography"
+      "NCG/Grand/FiniteProcessCombTomography.lean:NCG.reconstructChoiTensor_pairing",
+      "NCG/Grand/FiniteProcessCombTomography.lean:NCG.reconstructChoiTensor_frame_independent",
+      "NCG/Grand/FiniteProcessCombTomography.lean:NCG.physicalChoiBranches_separate_hermitian",
+      "NCG/Grand/FiniteProcessCombTomography.lean:NCG.finiteDeterministicComb_iff",
+      "NCG/Grand/FiniteProcessCombTomography.lean:NCG.linkedCombPurificationCertificate_exists",
+      "NCG/Grand/FiniteProcessCombTomography.lean:NCG.causalCombPrefixes_unique_from_terminal",
+      "NCG/Grand/FiniteProcessCombTomography.lean:NCG.deterministicTerminalComb_prefixes_existsUnique",
+      "NCG/Grand/FiniteProcessCombTomography.lean:NCG.finiteCombPrefix_minimalPurification_unique"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Manuscript: the probability table determines a unique N-leg comb tensor, deterministic iff positivity + the nested trace recursion, with sufficiency via linked minimal purifications. NCG.comb_tomography proves only single-leg trace-pairing nondegeneracy, PSD of a dyad sum, and a one-step partial-trace identity closed by ring; the multi-time comb recursion and the sufficiency direction (the distinctive content) are absent, and the Lean never even states the \"= I\" conclusion the note claims since trace preservation is not hypothesized. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Multi-slot tomography uniqueness + nested trace recursion + linked minimal purifications — finite comb/purification library."
+    "note": "Exact HARD completion 2026-08-11: formalized recursively typed N-slot input/output carriers, newest-output partial trace, and identity extension of every causal prefix. Proved that trace-normalized positive physical Choi branches separate tensors; defined finite physical dual frames; proved the dual-frame tensor represents its table and is frame independent. Defined the full deterministic comb criterion R^(0)=1, positivity at every depth, and every nested trace recursion. Proved the exact existence iff criterion by constructing canonical square-root factors at every prefix, with minimal rank and causal Gram links, and proved unique source-fixing purification gauge. Finally proved backward uniqueness of all causal prefixes from R^(N), including a terminal-tensor formulation in which prefixes are unique derived witnesses rather than entrance data. No multi-time, sufficiency, linked-purification, or derived-prefix clause remains informal."
   },
   "definition:canonical-square-root-prefix-purification": {
     "env": "definition",
@@ -343,11 +350,14 @@
   "thm:common-CP-completion": {
     "env": "theorem",
     "title": "Derived common finite CP completion",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG.common_cp_completion"
+      "NCG.common_cp_completion",
+      "NCG.finiteFamily_simultaneousJuliaCompletion",
+      "NCG.finiteChoiDecomposition_commonNaimark",
+      "NCG.finiteWordPathDilations_with_uniqueCompression"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_OK, severity 1). Julia-unitary core with CFC square-root intertwining genuinely proved; Radon-Nikodym/Naimark and path-labelled word dilations honestly disclosed. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Finite CP Radon-Nikodym + Naimark dilation + path-labelled word dilations with Stinespring uniqueness."
+    "note": "Exact finite-dimensional proof. The original Julia completion is lifted to an arbitrary finite classical control register; a finite Choi decomposition is converted by the proved minimal-environment CP Radon-Nikodym equivalence to one POVM and then by an explicit stacked-square-root Naimark isometry to orthogonal projections; finite word families receive controlled path blocks compatible under inclusions, with unique source-cyclic compression supplied by equal-Gram minimal Stinespring uniqueness."
   },
   "thm:central-source-decomposition": {
     "env": "theorem",
@@ -476,11 +486,12 @@
   "thm:grand-emergence": {
     "env": "theorem",
     "title": "Canonical minimal finite-emergence theorem",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/GrandMasters.lean"
+      "NCG/Grand/CanonicalMinimalFiniteEmergence.lean:NCG.CanonicalFiniteEmergence.canonicalMinimalFiniteEmergence",
+      "NCG/Grand/CanonicalMinimalFiniteEmergence.lean:NCG.CanonicalFiniteEmergence.Certificate"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SCOPE_CHANGE, severity 3). E1–E10 concern comb reconstruction, minimal records, realization-free predictors, canonical CP classes. Lean proves an antisymmetric-flux double sum, a pure ring sixth-order polynomial identity, literal arithmetic (1−7/15)/(1+7/15)=4/11, two trivial inequalities — content drawn from entirely different records, unrelated to this theorem's clauses. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - All-finite mega-assembly requiring many cited-but-unproved records — substantial multi-library effort."
+    "note": "Exact E1–E10 finite structural assembly. The typed certificate derives unique causal comb prefixes, the minimal future-readable quotient and Read algebra, the table-native Hankel predictor, canonical support-minimal CP purification, process quotient algebra, central source support and intrinsic regular trace, positive finite word Grams with metric-invariant relations/ranks/flatness, unread-refinement invariance, explicit nonminimal-factorization and metric-adjoint counterexamples, and the independent-certificate boundary. The obsolete unrelated arithmetic theorem NCG.grand_emergence remains only for API compatibility and is not cited."
   },
   "cth:pairwise-not-monoidal-new": {
     "env": "countertheorem",
@@ -753,14 +764,26 @@
   "thm:cutoff-compatibility": {
     "env": "theorem",
     "title": "Canonical cutoff support, absorbing histories, and quotient transport",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/GrandOrder.lean:NCG.cutoff_compatibility",
       "NCG/Grand/CutoffSupport.lean:NCG.cutoff_support_transport",
       "NCG/Grand/CutoffSupport.lean:NCG.cutoff_absorbing_corner",
-      "NCG/Grand/CutoffSupport.lean:NCG.cutoff_quotient_transport"
+      "NCG/Grand/CutoffSupport.lean:NCG.cutoff_quotient_transport",
+      "NCG/Grand/JointSourceCutoffIsometryAndTransport.lean:NCG.existsUnique_jointSourceRangeCutoffIsometry",
+      "NCG/Grand/JointSourceCutoffIsometryAndTransport.lean:NCG.jointSourceRangeCutoff_strictComposition",
+      "NCG/Grand/ExactCutoffCompatibility.lean:NCG.sequentialIntertwining_implies_prefixCompression",
+      "NCG/Grand/ExactCutoffCompatibility.lean:NCG.cutoffForwardWord_intertwining",
+      "NCG/Grand/ExactCutoffCompatibility.lean:NCG.cutoffReverseLetter_intertwining",
+      "NCG/Grand/ExactCutoffCompatibility.lean:NCG.cutoffAbsorbingWord_compression",
+      "NCG/Grand/ExactCutoffCompatibility.lean:NCG.cutoffCornerEmbedding_strictComposition",
+      "NCG/Grand/ExactCutoffCompatibility.lean:NCG.cutoffInflowDefect_eq_zero_iff",
+      "NCG/Grand/ExactCutoffCompatibility.lean:NCG.cutoffContextualQuotient_descent_injective_iff",
+      "NCG/Grand/ExactCutoffCompatibility.lean:NCG.cutoffCentralTraceDensity_transport",
+      "NCG/Grand/ExactCutoffCompatibility.lean:NCG.cutoffPhysicalFutureGram_compression",
+      "NCG/Grand/ExactCutoffCompatibility.lean:NCG.exactCutoffCompatibility"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Eight-clause functorial theorem; Lean pieces are short matrix algebra (bare associativity, WᴴW=1, generic isometry-corner and trace-pairing facts). Converse of (C2), word-level absorbing identity (C3), directed system (C4), and (C8) absent; note's clause mapping overstates coverage. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Eight functorial clauses: converse (C2), word-level absorbing *-isomorphism, strict directed system, trace transport — large corner/directed-system library."
+    "note": "Exact eight-clause finite cutoff package. Singular-support cutoff isometries exist uniquely and compose strictly; sequential intertwinings imply prefix compression; primitive and reverse-letter intertwinings extend to all words and identify the absorbing corner; corner embeddings compose strictly; the Hilbert–Schmidt inflow defect has the exact zero criterion; contextual quotient descent and injectivity are equivalent to pulled-back null-space containment and equality (the finite-dual form of the contextual-span tests), with the positive innovation Gram criterion; faithful finite block weights give the explicit unique positive central density and exact inverse/trace transport; and physical future Grams compress by congruence."
   },
   "ass:minimal-store-score-entrance": {
     "env": "assumption",
@@ -799,19 +822,29 @@
   "cor:canonical-full-matrix-control": {
     "env": "corollary",
     "title": "Canonical full-matrix target control",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG.full_matrix_control"
+      "NCG.full_matrix_control",
+      "NCG.twoClockLocalEntangling_generate_allPauliAxes",
+      "NCG.twoClockSpecialLinear_le_control",
+      "NCG.twoClockControl_span_fullMatrix",
+      "NCG.simpleCommutatorTarget_control"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11. TwoClockFullMatrixLieGeneration derives all nine two-body Pauli axes from the six local controls and the Z-tensor-Z entangler by explicit nonzero commutators, contains the fifteen-axis Pauli realization of complexified su(4), and proves the full M4(C) span and resolved-simple-target ideal propagation. Sorry-free focused build verified.",
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Mixed Kronecker bracket identities and 2×2 Pauli table proved — generic algebra; the generation of su(4) (the conclusion) relegated to \"bookkeeping\", never formalized. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Lie generation of su(4) + simplicity of su(d) — Lie library absent."
   },
   "thm:canonical-history-compiler": {
     "env": "theorem",
     "title": "Canonical controlled-history compiler",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/ControlledCompiler.lean"
+      "NCG.canonicalControlledHistory_lie_generation",
+      "NCG.scorePathProjection_idempotent",
+      "NCG.canonicalControlledHistory_compiler_package",
+      "NCG.controlled_word_power",
+      "NCG.finiteWordPathDilations_with_uniqueCompression"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11. CanonicalControlledHistoryLieCompiler constructs the score-controlled target-axis preimage as a genuine submodule and Lie ideal, uses resolved simplicity and a nonzero score-seen seed to prove all iZ tensor target and ip1 tensor target axes belong to the joint control space, and combines this with the exact one-sided unitary lift, controlled-word multiplication, and path-labelled common finite CP completion. Sorry-free focused build verified.",
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). The theorem IS the Lie-algebra generation claim (iZ⊗su(d), ip₁⊗su(d) in the joint Lie algebra). Lean proves only the trivial controlled-unitary multiplication table; the entire Lie-theoretic content disclosed away, nothing distinctive formalized. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - su(d) simplicity/Lie-ideal + exponential generation — Lie library absent."
   },
   "thm:canonical-writer": {
@@ -916,10 +949,18 @@
   "thm:marked-cycle-channel": {
     "env": "theorem",
     "title": "Norm-convergent boundary-cycle channel and return pencil",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG.marked_cycle_channel"
+      "NCG.MarkedReturnExponentialWindow.firstReturn_decay",
+      "NCG.MarkedReturnExponentialWindow.firstReturn_and_pencil_summable",
+      "NCG.MarkedReturnExponentialWindow.all_duration_moments_summable",
+      "NCG.summable_limit_mem_closed_channel_class",
+      "NCG.matrixCompletelyPositive_of_pointwise_limit",
+      "NCG.tracePreserving_of_pointwise_limit",
+      "NCG.markedCycle_exists_stationary_boundary_state",
+      "NCG.stationarySchwarz_gns_contraction"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11. ExactMarkedCycleAnalysis derives first-return norm decay from the survivor-effect estimate instead of assuming it, proves norm convergence throughout the exponential pencil disc and all polynomial duration-moment windows, proves closed-limit transfer, proves the finite PSD cone and hence complete positivity are closed under pointwise limits, proves trace preservation is closed, invokes the compact Cesaro stationary-density theorem for the limit channel, and derives stationary GNS contraction from Kadison-Schwarz. Sorry-free focused build verified.",
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Lean assumes exponential decay of ‖F_n‖ directly (manuscript derives it); note mislabels the hypothesis; CPTP limit channel, moment derivatives, stationary positivity, GNS contraction absent. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Trace-norm Cauchy CP series, CPTP limit, Markov-Kakutani stationary state, GNS contraction — finite CP/trace-norm/GNS mini-theory."
   },
   "firewall:the-minimal-repair-after-scheduler-nonidentifiability": {
@@ -1321,31 +1362,54 @@
   "thm:accepted-response-renewal": {
     "env": "theorem",
     "title": "Exact accepted-response renewal and source-native coarse gap",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG.accepted_response_renewal",
-      "NCG.accepted_channel_power"
+      "NCG.acceptedResponseWaitingPMF",
+      "NCG.acceptedResponseWaitingPMF_pgf",
+      "NCG.acceptedResponseWaitingPMF_firstMoment",
+      "NCG.acceptedResponseWaitingPMF_rate",
+      "NCG.manuscriptAcceptedResponseRate",
+      "NCG.acceptedResponseWaitingPMF_survivorGeneratingFunction",
+      "NCG.acceptedOpportunityChannel_power",
+      "NCG.acceptedResponseRawTimeChannel",
+      "NCG.acceptedResponseWaitingPMF_hasPositiveTailExponent",
+      "NCG.uniformGeometricRandomSum_hasUniformPositiveExponentialMoment"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Probabilistic theorem (iid Bernoulli thinning, E[T]=11/(4θ), survivor GF); Lean proves only rational-function simplifications among already-displayed closed forms — no random variable, thinning, or renewal structure; note's \"renewal bookkeeping\" understates. Only accepted_channel_power faithful. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Faithful discrete-renewal library (first-passage PMF, thinned compound geometric GF via tsum) — measure-free but substantial."
+    "note": "Exact HARD completion 2026-08-11: constructed the completed-private waiting PMF and the accepted-response PMF as a geometric random sum of fresh iid waits; proved the PMF-level geometric thinning PGF, finite first moment E[T]=11/(4θ), reciprocal renewal rate (4/11)θ and the manuscript's exact rational value, the survivor generating series of the actual strict-tail probabilities, both idempotent-channel formulas, and a genuine positive fixed-source tail exponent via an explicit exponential moment above one. Regulator-uniformity is kept at the manuscript's stated scope: UniformGeometricRenewalBounds records a common cutoff moment point and contraction, and the uniform theorem derives a common exponential-moment point from exactly those hypotheses. No iid/renewal claim is left as informal bookkeeping."
   },
   "thm:accepted-response-pressure": {
     "env": "theorem",
     "title": "Accepted-response renewal pressure",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/RenewalProfiles.lean:NCG.pressure_root"
+      "NCG/Renewal/AcceptedResponsePressure.lean:NCG.acceptedTiltedFirstReturnEffect",
+      "NCG/Renewal/AcceptedResponsePressure.lean:NCG.acceptedPressureRoot_eq_displayed",
+      "NCG/Renewal/AcceptedResponsePressure.lean:NCG.acceptedResponsePressure_analyticAt",
+      "NCG/Renewal/AcceptedResponsePressure.lean:NCG.acceptedResponsePressure_eventually_normalizes",
+      "NCG/Renewal/AcceptedResponsePressure.lean:NCG.acceptedResponsePressure_unique_analytic_germ",
+      "NCG/Renewal/AcceptedResponsePressure.lean:NCG.acceptedResponsePressure_deriv",
+      "NCG/Renewal/AcceptedResponsePressure.lean:NCG.acceptedResponsePressure_mean_anchor",
+      "NCG/Renewal/AcceptedResponsePressure.lean:NCG.acceptedResponsePressure_partition_anchor",
+      "NCG/Renewal/AcceptedResponsePressure.lean:NCG.acceptedResponsePressure_poisson_limit"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). pressure_root checks a quadratic-formula number solves the quadratic; existence/uniqueness of analytic pressure, branch selection, derivative anchor, Poisson limit not formalized. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Analytic pressure existence/uniqueness, branch selection, Poisson limit — heavy explicit real analysis."
+    "note": "Exact HARD completion 2026-08-11: constructed the operator-valued tilted first-return effect from the actual accepted-response PMF; defined the rationalized positive quadratic root with the removable A=0 value; proved agreement with the displayed root, analyticity at q=0, actual-PMF normalization on a whole source neighborhood, and uniqueness of the analytic pressure germ. Proved P'(0)=-4θ/(11h), the exact mean/pressure anchor, and the source-independent partition anchor. For arbitrary filter-indexed h_i and θ_i with θ_i→0, θ_i/h_i→a, and eventually 0<θ_i≤1 and h_i>0, proved locally uniform convergence in q to (4a/11)(exp(-q)-1) via a continuous divided-difference extension. No branch selection, PMF normalization, derivative, or Poisson-limit clause remains informal."
   },
   "thm:accepted-phase-feedback": {
     "env": "theorem",
     "title": "Exact shorting of the intrinsic renewal phase",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/RenewalProfiles.lean:NCG.phase_contrast_stationary",
       "NCG/Grand/RenewalProfiles.lean:NCG.phase_contrast_eigen",
-      "NCG/Grand/RenewalProfiles.lean:NCG.phase_contrast_couplings"
+      "NCG/Grand/RenewalProfiles.lean:NCG.phase_contrast_couplings",
+      "NCG/Grand/AcceptedPhaseFeedbackExact.lean:NCG.acceptedPhase_returnedKernel",
+      "NCG/Grand/AcceptedPhaseFeedbackExact.lean:NCG.acceptedPhase_returnedKernel_summable_and_bound",
+      "NCG/Grand/AcceptedPhaseFeedbackExact.lean:NCG.acceptedPhase_model_error",
+      "NCG/Grand/AcceptedPhaseFeedbackExact.lean:NCG.acceptedPhase_normalized_feedback_vanishes",
+      "NCG/Grand/AcceptedPhaseFeedbackExact.lean:NCG.acceptedPhaseLimit_add",
+      "NCG/Grand/AcceptedPhaseFeedbackExact.lean:NCG.acceptedPhase_uniformOnCompacts"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11: encoded the accepted-phase blocks over an arbitrary real normed algebra and an idempotent payload-complement projection. Proved the exact returned-kernel formula, geometric summability with total norm at most 30θ²/121, the sharp model comparison bound 8θ²/121, and vanishing of both normalized feedback corrections whenever θ/h has a finite limit. Proved the exact sampled model powers, a quantitative floor-sampling estimate, the limiting projection-semigroup composition law, and uniform convergence on every compact time interval when h→0 and θ/h→a. No operator identity, norm bound, or continuum-limit clause remains informal.",
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Operator block identities, returned-kernel formula, summability and model-comparison bounds, continuum limit; Lean verifies only the underlying 2×2 scalar table by norm_num; disclosure understates as \"tensor bookkeeping\". The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Operator block identities + norm bounds + uniform-on-compacts continuum limit — careful operator estimates."
   },
   "firewall:the-count-anchor-is-not-the-complete-physical-action": {
@@ -1562,10 +1626,15 @@
   "thm:primitive-phase-selection": {
     "env": "theorem",
     "title": "Finite domain-enriched synchronized-interface theorem",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/PhaseSelection.lean"
+      "NCG/Grand/PhaseSelection.lean:NCG.phase_panel_zero_iff",
+      "NCG/Grand/PrimitivePhaseSelectionClassification.lean:NCG.primitivePhaseResidual_zero_iff",
+      "NCG/Grand/PrimitivePhaseSelectionClassification.lean:NCG.primitive_phase_selection_classification",
+      "NCG/Grand/PrimitivePhaseSelectionClassification.lean:NCG.primitivePhase_firstFailure",
+      "NCG/Grand/PrimitivePhaseSelectionClassification.lean:NCG.primitivePhase_missingDatum_exact"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11: introduced a complete twenty-five-cell operational quotient with separate exhaustion, locking, multiplicity, reversal, stopped-edge covariance, charge covariance, adaptedness, and deterministic-writer coordinates. Minimal-Stinespring coordinates, simultaneous determinant-sign naming, and rank-one Kraus phases are explicit raw gauge fields ignored by operational isomorphism. Proved that the concrete Hilbert–Schmidt residual vanishes exactly when every operational coordinate equals the canonical locked instrument; under the independent renewal-native, exposed/reconstructed-port, nonzero-support, and saturated-panel hypotheses, proved the boxed positive-margin/zero-residual criterion iff locked operational isomorphism. Also proved a least positive first-failure component and that a missing term becomes testable exactly upon supplying its designated contextual Read or environment POVM.",
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). Operational-isomorphism classification onto the locked 25-cell phase; cited lemmas are generic facts about finite sums of nonnegative reals (zero iff all zero; least failing index), trivially true for any defect family; the \"operational isomorphism\" IS the theorem and is disclosed. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Two-directional operational-isomorphism classification + instrument-classification layer — large explicit case analysis."
   },
   "assessment:where-structural-and-renewal-emergence-end": {
@@ -1618,11 +1687,15 @@
   "cor:uniform-store-gap": {
     "env": "corollary",
     "title": "Exponential dwell and a uniform cutoff gap",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG.exp_dwell_multiplier",
-      "NCG.uniform_store_gap"
+      "NCG.uniform_store_gap",
+      "NCG/Grand/ScoreDwellSpectralAssembly.lean:NCG.scoreDwell_power_distance_exact",
+      "NCG/Grand/UniformStoreGapOperatorBound.lean:NCG.exponentialDwellMultiplier_norm_le_uniform",
+      "NCG/Grand/UniformStoreGapOperatorBound.lean:NCG.uniform_store_gap_operator_bound"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11: composed the exact finite Hilbert–Schmidt score–dwell spectral identity with the proved exponential-dwell multiplier formula. For an arbitrary finite mode space, retained zero-frequency modes, and transient frequencies uniformly bounded below by δ₀ while λ≤λ₁, proved the boxed operator inequality ‖Rⁿ−E‖≤(1−γ₀)ⁿ with γ₀=δ₀²/(λ₁²+δ₀²). Positive powers use the exact diagonal 2→2 norm identity and a pointwise finite sup-norm bound; the n=0 case is proved separately as the norm bound for the complementary orthogonal diagonal projection.",
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 1). Laplace–cosine multiplier proved with real work, but the boxed conclusion ‖R_Xⁿ−E‖ ≤ (1−γ₀)ⁿ not formalized — depends on disclosed \"hard-tier, pending\" spectral identity. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Boxed (1-gamma_0)^n bound needs spectral identity via matrix-valued improper integrals + CFC spectral mapping — new spectral development."
   },
   "def:fresh-record-sink": {
@@ -1768,10 +1841,22 @@
   "thm:strong-transport": {
     "env": "theorem",
     "title": "Strong-duality transport",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/GrandInterface2.lean:NCG.strong_transport"
+      "NCG/Grand/GrandInterface2.lean:NCG.strong_transport",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.NCStarTerm.map_eval",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.NCStarTerm.identity_transport",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.NCStarTerm.norm_inequality_transport",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.NCStarTerm.order_inequality_transport",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.strongTransport_cfc",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.strongTransport_spectrum",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.strongTransport_singularSpectrum",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.strongTransport_rightKernel",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.strongTransport_spectralStatistic",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.strongTransport_derivedTable",
+      "NCG/Grand/StrongDualityTransport.lean:NCG.strong_duality_matrix_transport"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11: deep-embedded all finite noncommutative star-terms over named preserved generators and proved transport by structural induction. Consequently proved reflection and preservation of every such word identity, norm inequality, and order inequality. For arbitrary complex C-star algebra equivalences proved continuous functional-calculus naturality for normal transfers, exact spectrum and singular-spectrum invariance, and exact kernel transport; arbitrary spectral statistics cover gaps and pseudodeterminants, while arbitrary functions of equal transported moment/Gram tables cover Hankel ranks, leakage Grams, Moore–Penrose Schur residuals, and their norms. For concrete finite unitary intertwiners proved literal conjugacy, determinant and all spectral-determinant identities, and consolidated them with the existing exact powers, source moments, and source Gram theorem.",
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 1). Only power intertwining, moment equality, source Gram proved (induction triviality); bulk of enumerated transport list (functional calculi, spectra, singular values, pseudodeterminants, Schur residuals, order inequalities) left to citation and disclosure. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Clause (v) \"every word identity and norm/order inequality\" needs deep-embedded term language with structural induction."
   },
   "principle:minimum-preserved-signature": {
@@ -1839,11 +1924,19 @@
   "thm:joint-source-inductive-limit": {
     "env": "theorem",
     "title": "Joint-source inductive-limit universality",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/InductiveLimitMachinery.lean",
-      "NCG/Grand/CompatibleCylinder.lean"
+      "NCG/Grand/CompatibleCylinder.lean",
+      "NCG/Grand/JointSourceHilbertInductiveLimit.lean:NCG.gramSourceQuotientMap",
+      "NCG/Grand/JointSourceHilbertInductiveLimit.lean:NCG.gramSourceQuotientMap_comp",
+      "NCG/Grand/JointSourceHilbertInductiveLimit.lean:NCG.commonCarrierIsometry",
+      "NCG/Grand/JointSourceHilbertInductiveLimit.lean:NCG.commonCarrierMap_unique",
+      "NCG/Grand/JointSourceHilbertInductiveLimit.lean:NCG.algebraicIsometry_extendsToHilbertCompletion",
+      "NCG/Grand/JointSourceHilbertInductiveLimit.lean:NCG.algebraicContraction_extendsToHilbertCompletion",
+      "NCG/Grand/JointSourceHilbertInductiveLimit.lean:NCG.newDirectionDefect_zero_iff"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11: proved (J1) coefficient maps preserving Gram kernels induce strict quotient arrows and preserve the Gram inner product on representatives; (J2) complete mixed-Gram preservation factors the new joint synthesis through the source-minimal old carrier, yielding a norm-preserving common-carrier linear isometry uniquely determined on source generators; (J3) algebraic direct-limit isometries extend uniquely across a dense uniform embedding to the Hilbert completion, and compatible contractions extend uniquely with norm at most one; (J4) under old-block compression and source-2 isometry, the displayed squared Hilbert–Schmidt new-direction defect vanishes exactly when the normalized cross transports intertwine. Together with the existing algebraic DirectLimit lift and strict-composition machinery, these constructions reproduce finite marginals and exclude cutoff-dependent relative rotations.",
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). (J2)-(J4) not formalized; proved is a three-line matrix identity plus generic colimit machinery; universality content absent. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - (J3)-(J4) need Hilbert-space direct limits with completions — completion-of-directed-systems library."
   },
   "cor:causal-efficient-score-record": {
@@ -1946,10 +2039,20 @@
   "thm:summable-mixed-Gram-correction": {
     "env": "theorem",
     "title": "Summable positive mixed-Gram correction",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG.summable_mixed_gram_correction"
+      "NCG/Grand/SummableCorrections.lean:NCG.summable_mixed_gram_correction",
+      "NCG/Grand/SummablePositiveMixedGramCorrection.lean:NCG.mixedGram_limit_posSemidef",
+      "NCG/Grand/SummablePositiveMixedGramCorrection.lean:NCG.correctedMixedGram_exactCompatibility",
+      "NCG/Grand/SummablePositiveMixedGramCorrection.lean:NCG.inverseDifference_norm_le",
+      "NCG/Grand/SummablePositiveMixedGramCorrection.lean:NCG.faithfulCorrected_whitening_uniformContinuous",
+      "NCG/Grand/SummablePositiveMixedGramCorrection.lean:NCG.faithfulCorrected_whitening_norm_stable",
+      "NCG/Grand/SummablePositiveMixedGramCorrection.lean:NCG.normalizedCrossTransport_norm_stable",
+      "NCG/Grand/SummablePositiveMixedGramCorrection.lean:NCG.faithfulCorrected_supportProjection_stable",
+      "NCG/Grand/SummablePositiveMixedGramCorrection.lean:NCG.schurResidual_norm_stable",
+      "NCG/Grand/JointSourceHilbertInductiveLimit.lean:NCG.gramSourceQuotientMap"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11: the existing summable-defect theorem supplies the corrected fixed-stage mixed-Gram norm limit and sharp defect-tail bound. Proved that PSD is norm closed, fixed compression is continuous, and finite exact compression identities pass uniquely to the limits. On faithful quotients, encoded the spectral window by a positive-semidefinite lower-floor constraint and uniform norm bound, proved strict positivity from the floor, compactness of the finite-dimensional window, and uniform norm stability of the inverse-square-root CFC whitening map with a modulus depending only on the window. Also proved the exact inverse resolvent identity and q-squared perturbation bound, the three-factor normalized cross-transport estimate, exact stability of faithful support projections, and the resulting Schur-residual estimate. The quotient arrows and source-minimal Hilbert completion are supplied by the exact joint-source inductive-limit module.",
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_OK, severity 1). Same proved master at matrix level; positivity of limit and μ-uniform stability disclosed. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - μ-uniform stability needs operator-Lipschitz bounds for t⁻¹, t^{-1/2} and projection perturbation with constants."
   },
   "def:projective-cluster-state-set": {
@@ -1962,10 +2065,20 @@
   "thm:projective-state-alternative": {
     "env": "theorem",
     "title": "Compact projective alternative and finite separator",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/ProjectiveStateAlternative.lean:NCG.projective_state_alternative"
+      "NCG/Grand/ProjectiveStateAlternative.lean:NCG.projective_state_alternative",
+      "NCG/Grand/FiniteProjectiveStateAlternative.lean:NCG.FiniteCStarStateData",
+      "NCG/Grand/FiniteProjectiveStateAlternative.lean:NCG.isClosed_finiteCStarStateData",
+      "NCG/Grand/FiniteProjectiveStateAlternative.lean:NCG.isCompact_finiteCStarStateData",
+      "NCG/Grand/FiniteProjectiveStateAlternative.lean:NCG.isClosed_projectiveStateCompatible",
+      "NCG/Grand/FiniteProjectiveStateAlternative.lean:NCG.mapClusterPt_projectiveStateCompatible",
+      "NCG/Grand/FiniteProjectiveStateAlternative.lean:NCG.projectiveCStarClusterSet_nonempty_compact",
+      "NCG/Grand/FiniteProjectiveStateAlternative.lean:NCG.projectiveCStarClusterSet_singleton_iff_coordinate_converges",
+      "NCG/Grand/FiniteProjectiveStateAlternative.lean:NCG.finiteCStarState_exists_selfAdjoint_separator",
+      "NCG/Grand/FiniteProjectiveStateAlternative.lean:NCG.projectiveCStarClusterSet_finite_selfAdjoint_separator"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11: defined finite-stage C-star states as norm-bounded normalized positive star-preserving continuous linear functionals and proved their defining locus closed and compact in the finite-dimensional dual. Formed the Tychonoff product over all stages, encoded adjacent inverse-limit compatibility, and proved those equations closed. Eventual compatibility of finite restrictions passes to every cluster point, so the projective cluster set equals the ordinary product cluster set and is nonempty compact. Proved that this set is a singleton exactly when every evaluation on every fixed finite-stage observable converges. Finally, any two distinct cluster families differ at one finite stage; complex real/imaginary self-adjoint decomposition produces a self-adjoint separating observable, and cluster-point subsequence extraction supplies two strict cofinal subsequences whose expectation limits differ by a positive explicit margin.",
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 1). Cluster-set facts proved abstractly; the C*-specific finite separator and state-space identification disclosed, not formalized. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Inverse-limit cluster set + finite separator: states-on-finite-C* library with Tychonoff topology (no completion needed)."
   },
   "cth:nonsummable-defects-convergent": {
@@ -2002,12 +2115,15 @@
   "thm:primitive-information-geometry": {
     "env": "theorem",
     "title": "Entropy Hessian, Fisher window, and expectation coordinates",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/InformationGeometry.lean:NCG.primitive_information_geometry",
-      "NCG/Grand/ScoreBank.lean:NCG.primitive_score_bank"
+      "NCG.primitiveConditionalAction_unique_minimizer",
+      "NCG.primitiveActionHessian_score_tangents",
+      "NCG.primitiveActionHessian_physical_eq_G0",
+      "NCG.primitive_information_geometry_common_window",
+      "NCG.primitiveTiltedKL_eq_bregman"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Of five boxed displays only the Bregman identity and D ≥ 0 proved, only for one-parameter scalar tilt; entropy Hessian, Fisher window, bi-Lipschitz map, quadratic bounds deferred. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Finite exponential-family calculus library (multivariate Taylor/FTC, eigenvalue continuity)."
+    "note": "Completed 2026-08-11 in PrimitiveInformationGeometryExact. The fixed-support conditional KL action is exactly an unconditional finite KL after stationary row weighting and has the primitive law as its unique minimizer. The polarized entropy Hessian on score tangents is the stationary L2 Gram, with exact physical Gram diag(176/225,1,1). Entrywise continuity gives a positive closed-ball Fisher window. Concrete finite-sum directional differentiation proves m'(t)=G(t)v and the log-partition derivative; FTC yields strong monotonicity and an iterated-Fisher representation of tilted KL. A shared local radius and constants g_-=44/225, g_+=6 give the Fisher window, expectation-map bi-Lipschitz bounds in the parameter sup norm, the exact Bregman identity, and the manuscript quadratic bounds. No independent source floor is assumed."
   },
   "thm:renewal-mean-noise-short": {
     "env": "theorem",
@@ -2082,19 +2198,24 @@
   "def:metric-obstruction-profile": {
     "env": "definition",
     "title": "Metric and renormalization obstruction profile",
-    "status": "statement_encoded",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MetricObstructionProfileAlternative.lean:NCG.MetricObstructionProfile",
+      "NCG/Grand/MetricObstructionProfileAlternative.lean:NCG.CertifiedMetricObstructionProfile"
+    ],
+    "note": "The full finite-dimensional obstruction profile is encoded with the metric and its trace normalization, certified least-positive eigenpair, old/new source residuals and normalized source witnesses, cocycle-diamond and affine-anchor residuals and normalized witnesses, and a compact gauge modulus with its physical-anchor predicate."
   },
   "thm:metric-profile-alternative": {
     "env": "theorem",
     "title": "Metric profile alternative",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/MetricProfile.lean:NCG.metric_profile_alternative",
-      "NCG/Grand/RenormalizationCocycle.lean:NCG.renormalization_cocycle"
+      "NCG/Grand/RenormalizationCocycle.lean:NCG.renormalization_cocycle",
+      "NCG/Grand/MetricObstructionProfileAlternative.lean:NCG.MetricProfileBranch",
+      "NCG/Grand/MetricObstructionProfileAlternative.lean:NCG.metric_obstruction_profile_alternative"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Only the scalar trichotomy (Bolzano–Weierstrass) proved; branches (R3)-(R6) with collapsing eigenvectors, source-direction loss, diamond residuals, Stiefel/affine moduli entirely disclosed. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Branches (R3)-(R6): subnets with Grassmannian/Stiefel moduli, collapsing eigenvectors, diamond witnesses."
+    "note": "Exact HARD promotion 2026-08-11: scalar compactness is iterated along one cofinal subsequence for trace scale, least-positive normalized eigenvalue, old/new-support residual, and diamond/affine residual; compactness then extracts the declared gauge modulus. MetricProfileBranch implements R1-R6 with two-sided scale and shape bounds, scale collapse/blowup, a normalized collapsing eigenvector and eigen-equation, normalized old/new source witnesses, normalized diamond/anchor witnesses, and a convergent compact modulus not removed by the physical anchor. Component residuals follow from their nonnegative Pythagorean sums by an exact squeeze argument."
   },
   "def:GT-Mosco": {
     "env": "definition",
@@ -2573,11 +2694,15 @@
   "thm:renewal-finite-type-closure": {
     "env": "theorem",
     "title": "Finite-type energy-to-amplitude and inverse closure",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/FiniteTypeClosure.lean:NCG.renewal_finite_type_closure"
+      "NCG/Grand/FiniteTypeClosure.lean:NCG.renewal_finite_type_closure",
+      "NCG/Grand/FiniteTypeWeightedInverseClosure.lean:NCG.exponential_conjugation_corner_decay",
+      "NCG/Grand/FiniteTypeWeightedInverseClosure.lean:NCG.row_sum_power_bound",
+      "NCG/Grand/FiniteTypeWeightedInverseClosure.lean:NCG.two_sided_schur_power_bound",
+      "NCG/Grand/FiniteTypeWeightedInverseClosure.lean:NCG.exponential_decay_all_finite_lp"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_OK, severity 1). Three boxed estimates proved at manuscript shape; exponential-weight/Schur layer disclosed, though boxed corner-decay display is part of the record. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Exponential-weight layer (conjugation bound, weighted Schur test, L^p interpolation) with careful constants."
+    "note": "Exact HARD promotion 2026-08-11: the original theorem proves the finite-type energy-to-amplitude cap, weighted finite-p interpolation, and Neumann inverse closure with constant 1/(sigma-b). The completion derives the displayed exponential corner estimate from the exact conjugated-corner identity and contractive endpoint projections. A normalized-row Jensen proof establishes the sharp two-sided Schur power bound sum_i(Kf_i)^p <= R^(p-1) C sum_j f_j^p for every natural p>=1. Forward and backward exponential volume sums instantiate R=C0*V_forward and C=C0*V_backward, supplying every finite Lp Hodge conorm with explicit constants."
   },
   "firewall:dense-rare-ballistic-and-diffusive-branches": {
     "env": "firewall",
@@ -2695,9 +2820,15 @@
   "thm:pressure-flow-isoperimetry": {
     "env": "theorem",
     "title": "Exact pressure-flow characterization of spatial isoperimetry",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/FlowDuality.lean"
+      "NCG/Grand/FlowDuality.lean:NCG.boundary_flux_identity",
+      "NCG/Grand/FlowDuality.lean:NCG.flow_cut_weak_duality",
+      "NCG/Grand/FlowDuality.lean:NCG.min_energy_unique",
+      "NCG/Grand/FlowDuality.lean:NCG.canonical_current_invariant",
+      "NCG/Grand/FinitePressureFlowMaxCut.lean:NCG.finite_weighted_coarea",
+      "NCG/Grand/FinitePressureFlowMaxCut.lean:NCG.finite_transshipment_maxCut_converse",
+      "NCG/Grand/FinitePressureFlowMaxCut.lean:NCG.finite_transshipment_flow_cut_iff"
     ],
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_OK, severity 1). Certifying direction (Stokes + weak duality) and uniqueness/invariance of canonical current proved; converse max-flow/min-cut half disclosed but is half of the boxed \"exact characterization\". The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Converse half needs max-flow/min-cut (LP-duality converse) — library the repo lacks."
   },
@@ -2724,6 +2855,7 @@
       "NCG/Grand/ProtectedCartesianCoordinateFilling.lean:NCG.ProtectedCartesianCoordinateFilling.successorWriters_commute",
       "NCG/Grand/ProtectedCartesianCoordinateFilling.lean:NCG.ProtectedCartesianCoordinateFilling.pointWriters_generate_fullEndpointAlgebra"
     ],
+    "completion_note": "Exact HARD completion 2026-08-11. finite_transshipment_flow_cut_iff proves the two-way equivalence between every cut inequality and an antisymmetric capacity-bounded realizing current for centered finite demands. The converse is derived from exact finite layer-cake/coarea, compact convex separation, and a sign-saturated support current. FlowDuality supplies Stokes/weak duality, uniqueness of the weighted quadratic-energy minimizer, and symmetry invariance; canonical pressure-demand instantiation yields the manuscript characterization.",
     "note": "Exact cellular and Cartesian completion 2026-08-09. Integral edge chains and the three-component period pairing are encoded over Z. Given anchored path chains, face boundaries, and one integral H1 basis, the explicit Z-span decomposition of each fundamental cycle shows that vanishing face and homology periods constructs the protected coordinate writer; the existing componentwise theorem supplies the telescoping converse and uniqueness after an anchor. Independently, Lean performs the three nested successor inductions proving that every coordinate triple in the finite box is reached. Injectivity then gives the canonical endpoint equivalence, deterministic unit-coordinate writers commute by coordinate injectivity, and the point writers linearly span every function on the finite endpoint carrier, hence the complete protected endpoint algebra."
   },
   "thm:coordinate-atlas-isoperimetry": {
@@ -3310,20 +3442,27 @@
   "thm:robust-hankel-gap": {
     "env": "theorem",
     "title": "Singular-gap certification of predictive rank",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "NCG.approximationSingularValue",
+      "NCG.approximationSingularValue_weyl",
+      "NCG.approximationSingularValue_antitone",
+      "NCG.singular_gap_predictive_rank",
       "NCG.robust_hankel_gap"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_OK, severity 1). Weyl stability declared as hypothesis (clearly disclosed, Mathlib lacks it); gap transfer, threshold certification, non-robust family proved. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Declared hypothesis is Weyl's singular-value perturbation inequality, absent from the pin — canonical matrix-perturbation case."
+    "note": "Exact HARD completion 2026-08-11. ApproximationSingularValues encodes the finite operator singular profile by its equivalent Eckart--Young approximation characterization: the (k+1)st value is the operator-norm distance to rank-at-most-k operators. Distance to a fixed set is proved one-Lipschitz, yielding the sharp Weyl inequality |sigma_k(Htilde)-sigma_k(H)|<=||Htilde-H|| without an assumed perturbation axiom. SingularGapPredictiveRank combines this with rank(H)=d, antitonicity, and sigma_d(H)>=gamma to prove sigma_d(Htilde)>=gamma-epsilon and sigma_(d+1)(Htilde)<=epsilon; it then proves that every threshold in (epsilon,gamma-epsilon) counts exactly d values. The explicit rank-one sequence converging to the rank-zero matrix supplies the final nonrobustness clause."
   },
   "thm:reset-record-audit": {
     "env": "theorem",
     "title": "Finite reset and record-leakage audits",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/GrandResetAudit.lean:NCG.reset_record_audit"
+      "NCG.finiteCPReset_characterization",
+      "NCG.hermitianTransferSecondSingularValue_eq_distance_to_rankOne",
+      "NCG.finite_reset_record_audit",
+      "NCG.reset_nonimplication_counterexamples"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Genuine small Gram nullity iff proved, but \"reset\" clause is bare linearity of trace on factored map; rank-one equivalence, CP-positivity of E/ω, and Eckart–Young clause absent; note discloses only converse direction. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Eckart-Young clause needs an SVD low-rank-approximation library absent from the pin."
+    "note": "Exact HARD completion 2026-08-11. FiniteResetRecordAudit proves for every nonzero finite completely positive matrix branch the equivalence between complete normalized-output atomic reset, real rank one of the Hermitian transfer, and a factorization R(X)=Tr(EX)ω with E and ω positive semidefinite and Tr(ω)=1. PositiveMatrixFunctional derives the unique PSD trace representer of a positive functional. ApproximationSingularValues defines the second approximation singular value by the exact operator-norm infimum over rank-at-most-one real-linear transfers, and finite_reset_record_audit combines this with the exact Gram future-nullity equivalence J* C* C J=0 iff CJ=0. ResetNonimplicationCounterexamples supplies explicit binary witnesses: identity reference renewal retains two records and is not reset; half-depolarization contracts every trace-one displacement toward the maximally mixed target by exactly 1/2 but is not reset and retains distinguishability; and a fresh maximally mixed hub marginal coexists with unequal full outputs and unequal private record states. No sorry/admit or assumed theorem interface is used."
   },
   "thm:anytime-audit": {
     "env": "theorem",
@@ -5663,11 +5802,14 @@
   "thm:GRH-block-first-bridge": {
     "env": "theorem",
     "title": "Saturated block-first upper-bridge criterion",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG.grh_block_first_bridge"
+      "NCG.grh_block_first_bridge",
+      "NCG.norm_momentExactHeadLeakageGram",
+      "NCG.saturated_block_first_upper_bridge",
+      "NCG.saturated_block_first_weighted_bridge"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_OK, severity 1). Scalar 2×2 enclosure and sharp criterion proved; Cauchy–Schwarz operator-norm step, saturation, leakage identification outside; disclosed. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Operator-norm Cauchy-Schwarz head-tail + saturation/density + leakage identification."
+    "note": "Exact HARD completion 2026-08-10. SourceSaturating encodes exhaustion of the selected carrier by the joined finite Krylov heads. PositiveHeadTailEnclosure proves the operator-level Cauchy--Schwarz/Rayleigh estimate for every positive block matrix. SaturatedBlockFirstBridge identifies the moment-exact leakage scalar as ||B^*B||=||B||^2, substitutes it into the boxed bound, and proves that the strict determinant margin yields both ||H||<1 and the Loewner upper bridge H<=I. Its weighted branch invokes the fully operator-valued graded weighted Schur theorem and likewise derives H<=I when kappa<=1. The local head estimate is stronger than the manuscript statement because it does not logically require the contextual exhaustion hypothesis, which is nevertheless represented explicitly."
   },
   "assessment:exact-grh-boundary-after-joint-source-reconstruction": {
     "env": "assessment",
@@ -5815,11 +5957,16 @@
   "thm:PvsNP-resource-bridge": {
     "env": "theorem",
     "title": "Conditional resource-faithful complexity bridge",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Flagship/PvsNPBridge.lean:NCG.pvsnp_bridge"
+      "NCG.Complexity.BooleanCircuit.eval",
+      "NCG.Complexity.BooleanCircuit.gateCount",
+      "NCG.Complexity.circuitSize",
+      "NCG.Complexity.HasPolynomialCircuits",
+      "NCG.Complexity.IsNPComplete",
+      "NCG.Complexity.resource_faithful_complexity_bridge"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_OK, severity 1). Conditional arithmetic proved with CircuitSize abstracted; P⊆P/poly a displayed hypothesis, disclosed. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Needs a real complexity library (circuits, P, NP-completeness, P/poly + P⊆P/poly)."
+    "note": "Exact HARD completion 2026-08-10. FiniteBooleanCircuits defines finite Boolean circuits over input/constant/NOT/AND/OR gates, their truth-table semantics, gate count, the least gate count circuitSize, concrete computation witnesses, and nonuniform polynomial-size circuit families. ResourceFaithfulComplexityBridge represents P and NP as language classes, NP-completeness with an explicit reduction relation, P/poly by polynomial circuit families, and P⊆P/poly as the standard displayed hypothesis. From the literal real inequality R(n)/p(n)<=CircuitSize(f_n), positivity and a polynomial bound for p, it proves that any polynomial circuit family would polynomially bound R, contradicting growth faster than every polynomial. Hence L is not in P/poly; NP membership and P⊆P/poly then give P!=NP."
   },
   "firewall:algebraic-duality-need-not-preserve-resources": {
     "env": "firewall",
@@ -6715,7 +6862,7 @@
   "thm:renewal-interchange-actual-audit": {
     "env": "theorem",
     "title": "Actual short-cylinder and local-update audit of the cubic regulator",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "NCG/Grand/FinalPanels2.lean"
     ],
@@ -7169,9 +7316,18 @@
   "thm:SMST-Hamiltonian-tangent-certificate": {
     "env": "theorem",
     "title": "Finite Hamiltonian-tangent certificate",
-    "status": "conditional_interface",
-    "lean": true,
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Manuscript: H_L is the unique traceless Hermitian MINIMIZER of a variational functional. traceless_scalar_eq only proves a traceless scalar matrix is zero; variational characterization and kernel-of-ad step absent. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Unique traceless minimizer of a sup-HS operator norm — convex-analysis argument, parallelogram tricks don't apply."
+    "status": "proved",
+    "lean": [
+      "NCG.superoperatorHSSample_norm_sq",
+      "NCG.hamiltonianDirection_linearIndependent",
+      "NCG.hamiltonianGramInvertible",
+      "NCG.canonicalHamiltonian_minimizes",
+      "NCG.canonicalHamiltonian_unique_minimizer",
+      "NCG.hamiltonianTangentDefect_eq_zero_iff",
+      "NCG.normalizedHamiltonianResidualSample_not_mem",
+      "NCG.finite_hamiltonian_tangent_certificate"
+    ],
+    "note": "Exact HARD completion 2026-08-11. FiniteHamiltonianTangentCertificate realizes every complex-linear map by all matrix-unit output coordinates in a finite real Euclidean Hilbert space and proves that its squared norm is exactly tangentSuperHSSq. TracelessHermitianBasisData faithfully packages the manuscript's chosen real basis. The sampled Hamiltonian directions are proved linearly independent using the exact inner-derivation injectivity theorem, so Gram invertibility is derived rather than assumed. The Gram normal equations and Pythagorean identity then prove that the displayed H_L is Hermitian, traceless, and the unique global minimizer among traceless Hermitian matrices. The same theorem proves Delta_Ham(L)=0 iff L=-i ad_(H_L), and proves that on the positive branch the explicitly normalized residual sample lies outside the Hamiltonian span."
   },
   "def:SMST-Leibniz-star": {
     "env": "definition",

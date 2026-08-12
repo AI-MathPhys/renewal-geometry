@@ -22,12 +22,10 @@ import Mathlib
 * `controlled_word_power`: iterated letters compile to the
   controlled word `Λ(U)ᵏ = Λ(Uᵏ)`.
 
-Rendering disclosed: the joint-Lie-algebra generation statement
-(`iZ_ε ⊗ 𝔰𝔲(d)` and `ip₁^ε ⊗ 𝔰𝔲(d)` inside the generated
-algebra) and the derived CP completion of a finite irreversible
-alphabet are the manuscript's Lie-theoretic layer; the exact
-controlled-lift algebra proved here is the compiler's
-multiplication table.
+The joint-Lie-algebra ideal propagation to `iZ_ε ⊗ 𝔰𝔲(d)` and
+`ip₁^ε ⊗ 𝔰𝔲(d)` is proved in
+`NCG.Grand.CanonicalControlledHistoryLieCompiler`; the finite irreversible
+completion is proved in `NCG.Grand.FiniteCommonCPCompletion`.
 -/
 
 open Matrix Kronecker

@@ -29,7 +29,9 @@ import Mathlib
   `φ̂ = (6,-5)/√30`, and the three π-weighted couplings
   `⟨1, C₀1⟩_π = 4/11`, `⟨1, C₀φ̂⟩_π = 24/(11√30)`,
   `⟨φ̂, C₀1⟩_π = -20/(11√30)` — exactly the coefficients in the
-  boxed blocks `A_θ, B_θ, C_θ`;
+  boxed blocks `A_θ, B_θ, C_θ`.  The operator blocks, returned-kernel
+  series, sharp norm estimates, and uniform continuum limit are proved in
+  `NCG.Grand.AcceptedPhaseFeedbackExact`;
 * `profile_eigen` / `profile_variance` / `profile_two_cell`: the
   boxed continuum profile — `M₀φ = -(7/15)φ`,
   `Var_π(1_P) = 30/121`, and the two-cell Walsh eigenvalue
@@ -38,9 +40,8 @@ import Mathlib
 Rendering disclosed: the distributional identification of `𝒯`
 as the independent two-stage sum (renewal probability layer), the
 `m`-cell Walsh statement for general `m` (two-cell case proved,
-induction identical), and the tensor bookkeeping identifying the
-block table with the operator blocks on phase ⊗ payload are the
-manuscript's framing on top of the identities proved here.
+induction identical) is the manuscript's framing on top of the identities
+proved here.
 -/
 
 open Matrix Kronecker

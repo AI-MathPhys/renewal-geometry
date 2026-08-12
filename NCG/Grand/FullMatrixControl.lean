@@ -19,12 +19,9 @@ import Mathlib
       iterated bracket of local generators on the entangling
       `Z⊗Z` axis.
 
-Rendering disclosed: the enumeration of all nine two-body
-axes by the two-level bracket mechanism and the 15-dimensional
-trace-orthogonality count identifying the span with 𝔰𝔲(4)
-(and its simple-block generalization by the Lie-ideal
-argument) are the manuscript's bookkeeping over the proved
-bracket identities.
+The actual closure through all fifteen nonidentity Pauli axes, its full-matrix
+span consequence, and the resolved-simple-target ideal argument are proved in
+`NCG.Grand.TwoClockFullMatrixLieGeneration`.
 -/
 
 open Matrix

@@ -20,9 +20,9 @@ import Mathlib
       endomorphism of a nonempty finite matrix algebra has a
       nonzero fixed point.
 
-The CPTP/GNS-contraction reading of the fixed point and the
-moment-derivative clause are the manuscript's positivity
-bookkeeping over these convergence statements.
+The survivor-to-return estimate, every finite derivative/moment window,
+closed CPTP limit, stationary density, and stationary GNS contraction are
+proved in `NCG.Grand.ExactMarkedCycleAnalysis`.
 -/
 
 open Matrix

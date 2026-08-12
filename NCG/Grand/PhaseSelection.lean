@@ -26,12 +26,10 @@ concrete first-failure witness.
   first-failure witness, naming the single Read or environment
   POVM that must be added.
 
-Rendering disclosed: the operational isomorphism onto the locked
-twenty-five-cell synchronized Store phase (up to minimal
-Stinespring coordinate changes, determinant-sign exchange, and
-rank-one Kraus phases) is the manuscript's classification layer
-built on \Cref{thm:two-state-active-renewal}; the finite panel
-logic proved here is its checkable content.
+The operational-isomorphism classification onto the locked
+twenty-five-cell synchronized Store phase, including its allowed
+Stinespring, determinant-sign, and Kraus-phase coordinate freedoms,
+is proved in `NCG.Grand.PrimitivePhaseSelectionClassification`.
 -/
 
 namespace NCG

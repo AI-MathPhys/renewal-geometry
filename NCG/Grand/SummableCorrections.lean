@@ -25,6 +25,11 @@ import Mathlib
   constraints (positivity, normalization, complete
   positivity) and the exact-compatibility identities are the
   manuscript's closure bookkeeping over these limits.
+
+The positivity, exact compression compatibility, faithful spectral-window
+whitening stability, normalized cross-transport bounds, and Schur-residual
+stability required by the mixed-Gram record are completed in
+`NCG.Grand.SummablePositiveMixedGramCorrection`.
 -/
 
 open Matrix

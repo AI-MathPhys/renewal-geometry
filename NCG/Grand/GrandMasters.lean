@@ -76,7 +76,11 @@ theorem master_architecture :
   · exact fun w hw S hmid j₁ h₁ j₂ h₂ hm₁ hm₂ =>
       min_energy_unique w hw S hmid j₁ j₂ h₁ h₂ hm₁ hm₂
 
-/-- `thm:grand-emergence`: emergence bundle — the discrete
+/-- Legacy arithmetic bundle formerly associated with `thm:grand-emergence`.
+The exact E1--E10 structural theorem is now
+`CanonicalFiniteEmergence.canonicalMinimalFiniteEmergence` in
+`NCG.Grand.CanonicalMinimalFiniteEmergence`. This declaration is retained for
+API compatibility only: the discrete
 Stokes flux identity, the sixth-order Markovian bracket, the
 boxed diffusion coefficient `4/11`, the Fisher-window Dirichlet
 floor, and the positive Poincaré floor. -/

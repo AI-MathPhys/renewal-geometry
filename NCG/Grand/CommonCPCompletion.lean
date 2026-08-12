@@ -25,14 +25,9 @@ import NCG.Grand.SqrtPolar
       simultaneous finite controlled-unitary completion of a
       finite family.
 
-Rendering disclosed: the CP Radon–Nikodym effects in one
-minimal environment are the proved `typed_occurrence_rn`
-record; adjoining `F₀ = I - ΣFⱼ` and Naimark orthogonalization
-of the effect family, and the tensoring of fresh environments
-along words with minimal-Stinespring compression, are the
-manuscript's assembly of these dilation blocks (the proved
-Kraus/Choi source and comb-dilation records supply the
-per-word dilations).
+The remaining finite-family, common Radon–Nikodym/Naimark, and compatible
+path-labelled word clauses are proved in the exact companion module
+`NCG.Grand.FiniteCommonCPCompletion`.
 -/
 
 open Matrix Polynomial

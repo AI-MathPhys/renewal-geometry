@@ -20,8 +20,10 @@ import Mathlib
   invertible `B, Λ_{k+1}` uniquely reconstructs
   `Λ_{k+1} = -B(Λ_k - zI + C)⁻¹Bᴴ`;
 * `strong_transport`: a unitary intertwiner transports powers,
-  all source moments, and the source Gram exactly — hence every
-  finite word identity of the preserved structures;
+  all source moments, and the source Gram exactly.  Continuous functional
+  calculi, spectral data, kernels, determinants, derived Gram constructions,
+  and every finite word identity/norm/order inequality are completed in
+  `NCG.Grand.StrongDualityTransport`;
 * `multiplicity_factorization`: if every multiplicity block of
   an equivariant incidence map is a scalar multiple of the fixed
   intertwiner `D` (the one-dimensionality hypothesis), the map
@@ -35,9 +37,7 @@ import Mathlib
   and one off-diagonal value (2-transitivity by kernel
   enumeration).
 
-Rendering disclosed: kernel/spectrum transport under the same
-unitary is the proved `kernel_dim_conjugation`; the
-Redheffer/Herglotz coordinates, the positive-gauge chain
+Rendering disclosed: the Redheffer/Herglotz coordinates, the positive-gauge chain
 uniqueness, and the tetrahedral positivity criterion are the
 remaining interface records.
 -/

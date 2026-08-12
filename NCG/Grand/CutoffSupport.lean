@@ -28,11 +28,11 @@ import NCG.Grand.SqrtPolar
   rows lie in the old contextual span, and the central
   transport density is unique under a faithful trace.
 
-Clause (C5) (full-letter inflow defects) and the exact
-sequential-isometry intertwinings are the manuscript's
-bookkeeping over these identities; the congruence core
-`K_X = IᴴK_YI` is the previously proved
-`NCG.cutoff_compatibility` (GrandOrder.lean).
+The converse sequential-isometry implication, word-level absorbing identity,
+strict corner composition, full-letter inflow defect, contextual quotient
+criterion, finite-block central trace density, and physical Gram compression
+are proved in the exact companion module
+`NCG.Grand.ExactCutoffCompatibility`.
 -/
 
 open Matrix
