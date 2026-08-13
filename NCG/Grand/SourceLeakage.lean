@@ -29,6 +29,56 @@ open scoped InnerProductSpace
 
 namespace NCG
 
+/-- Sequential Banach--Alaoglu plus Fréchet--Riesz: every normalized
+sequence in a separable complex Hilbert space has a weakly convergent
+subsequence. -/
+theorem exists_weakly_convergent_subsequence_of_normalized
+    {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+    [CompleteSpace H] [TopologicalSpace.SeparableSpace H]
+    (y : ℕ → H) (hunit : ∀ n, ‖y n‖ = 1) :
+    ∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ yl : H, ∀ z : H,
+      Filter.Tendsto (fun n => inner ℂ z (y (φ n)))
+        Filter.atTop (nhds (inner ℂ z yl)) := by
+  let F : ℕ → WeakDual ℂ H := fun n =>
+    StrongDual.toWeakDual (InnerProductSpace.toDual ℂ H (y n))
+  let ball : Set (WeakDual ℂ H) :=
+    WeakDual.toStrongDual ⁻¹' Metric.closedBall (0 : StrongDual ℂ H) 1
+  have hmem : ∀ n, F n ∈ ball := by
+    intro n
+    change WeakDual.toStrongDual (F n) ∈
+      Metric.closedBall (0 : StrongDual ℂ H) 1
+    rw [Metric.mem_closedBall, dist_zero_right,
+      show WeakDual.toStrongDual (F n) = InnerProductSpace.toDual ℂ H (y n) by
+        apply ContinuousLinearMap.ext
+        intro z
+        rfl,
+      (InnerProductSpace.toDual ℂ H).norm_map, hunit]
+  have hseq : IsSeqCompact ball :=
+    WeakDual.isSeqCompact_closedBall ℂ H 0 1
+  obtain ⟨flim, hflimMem, φ, hφ, ht⟩ := hseq.subseq_of_frequently_in
+    (Filter.Eventually.of_forall hmem).frequently
+  let yl : H := (InnerProductSpace.toDual ℂ H).symm
+    (WeakDual.toStrongDual flim)
+  refine ⟨φ, hφ, yl, fun z => ?_⟩
+  have heval := (tendsto_iff_forall_eval_tendsto_topDualPairing.mp ht) z
+  have heval0 : Filter.Tendsto
+      (fun n => inner ℂ (y (φ n)) z) Filter.atTop
+      (nhds (inner ℂ yl z)) := by
+    convert heval using 1
+    · funext n
+      rfl
+    · congr 1
+      change inner ℂ yl z = (WeakDual.toStrongDual flim) z
+      simpa [yl] using
+        (InnerProductSpace.toDual_symm_apply
+          (x := z) (y := WeakDual.toStrongDual flim))
+  have heval' := (Complex.continuous_conj.tendsto _).comp heval0
+  convert heval' using 1
+  · funext n
+    exact (inner_conj_symm z (y (φ n))).symm
+  · congr 1
+    exact (inner_conj_symm z yl).symm
+
 /-- `thm:source-leakage-limit-alternative`. -/
 theorem source_leakage_limit_alternative {H : Type*}
     [NormedAddCommGroup H] [InnerProductSpace ℂ H]
@@ -107,5 +157,27 @@ theorem source_leakage_limit_alternative {H : Type*}
   · intro h0
     subst h0
     simpa using hmain
+
+/-- Full manuscript theorem including the weak-subsequence extraction and the
+Pythagorean persistence/splitting/escape alternative. -/
+theorem source_leakage_subsequence_alternative
+    {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+    [CompleteSpace H] [TopologicalSpace.SeparableSpace H]
+    (y : ℕ → H) (hunit : ∀ n, ‖y n‖ = 1) :
+    ∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ yl : H,
+      Filter.Tendsto (fun n => ‖y (φ n) - yl‖ ^ 2)
+        Filter.atTop (nhds (1 - ‖yl‖ ^ 2))
+      ∧ ‖yl‖ ≤ 1
+      ∧ (‖yl‖ = 1 →
+          Filter.Tendsto (fun n => ‖y (φ n) - yl‖)
+            Filter.atTop (nhds 0))
+      ∧ (yl = 0 →
+          Filter.Tendsto (fun n => ‖y (φ n) - yl‖ ^ 2)
+            Filter.atTop (nhds 1)) := by
+  obtain ⟨φ, hφ, yl, hweak⟩ :=
+    exists_weakly_convergent_subsequence_of_normalized y hunit
+  refine ⟨φ, hφ, yl, ?_⟩
+  exact source_leakage_limit_alternative (fun n => y (φ n)) yl
+    (fun n => hunit (φ n)) hweak
 
 end NCG

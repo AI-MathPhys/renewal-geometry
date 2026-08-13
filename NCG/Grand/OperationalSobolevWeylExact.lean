@@ -1234,6 +1234,35 @@ theorem finite_nash_cube_from_sobolev
       mul_le_mul_of_nonneg_left hsob (by positivity)
     _ = (CS * E) ^ 3 * (∑ v, μ v * |f v|) ^ 4 := by ring
 
+/-- Real-power form of the Nash inequality used by the heat differential
+argument.  This is the exact cube root of `finite_nash_cube_from_sobolev`. -/
+theorem finite_nash_from_sobolev
+    {V : Type*} [Fintype V]
+    (μ f : V → ℝ) (hμ : ∀ v, 0 ≤ μ v) (CS E : ℝ)
+    (hCS : 0 ≤ CS) (hE : 0 ≤ E)
+    (hsob : ∑ v, μ v * f v ^ 6 ≤ (CS * E) ^ 3) :
+    (∑ v, μ v * f v ^ 2) ^ (5 / 3 : ℝ) ≤
+      CS * E * (∑ v, μ v * |f v|) ^ (4 / 3 : ℝ) := by
+  let A : ℝ := ∑ v, μ v * f v ^ 2
+  let L : ℝ := ∑ v, μ v * |f v|
+  have hA : 0 ≤ A := Finset.sum_nonneg fun v _ =>
+    mul_nonneg (hμ v) (sq_nonneg _)
+  have hL : 0 ≤ L := Finset.sum_nonneg fun v _ =>
+    mul_nonneg (hμ v) (abs_nonneg _)
+  have hcube := finite_nash_cube_from_sobolev μ f hμ CS E hsob
+  change A ^ 5 ≤ (CS * E) ^ 3 * L ^ 4 at hcube
+  have hlhs : (A ^ (5 / 3 : ℝ)) ^ (3 : ℕ) = A ^ 5 := by
+    rw [← Real.rpow_natCast, ← Real.rpow_mul hA]
+    norm_num
+  have hLpow : (L ^ (4 / 3 : ℝ)) ^ (3 : ℕ) = L ^ 4 := by
+    rw [← Real.rpow_natCast, ← Real.rpow_mul hL]
+    norm_num
+  have hrhs : (CS * E * L ^ (4 / 3 : ℝ)) ^ (3 : ℕ) =
+      (CS * E) ^ 3 * L ^ 4 := by
+    rw [mul_pow, hLpow]
+  rw [← hlhs, ← hrhs] at hcube
+  exact (Odd.pow_le_pow (by decide : Odd 3)).mp hcube
+
 /-- Number of eigenvalues in a closed interval `[0,R]`. -/
 def finiteEigenvalueCount
     {J : Type*} [Fintype J] (lam : J → ℝ) (R : ℝ) : ℕ :=
@@ -1460,9 +1489,6 @@ structure FiniteHeatColumn (CS : ℝ) where
   positive : ∀ t, 0 ≤ t → 0 < l2sq t
   continuous : ∀ T, 0 ≤ T → ContinuousOn l2sq (Set.Icc 0 T)
   dissipation : ∀ t, 0 < t → HasDerivAt l2sq (-2 * energy t) t
-  nash : ∀ t, 0 < t →
-    l2sq t ^ (5 / 3 : ℝ) ≤
-      (CS * energy t) ^ 3 * l1 ^ 4
   nash_uncubed : ∀ t, 0 < t →
     l2sq t ^ (5 / 3 : ℝ) ≤ CS * energy t * l1 ^ (4 / 3 : ℝ)
 

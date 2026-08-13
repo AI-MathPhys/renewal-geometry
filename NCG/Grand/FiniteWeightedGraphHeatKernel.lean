@@ -171,8 +171,9 @@ def heatApply (t : ℝ) (f : V → ℝ) (v : V) : ℝ :=
 /-- The self-adjoint weighted graph Laplacian conjugated to ordinary
 Euclidean coordinates by multiplication with `sqrt mass`. -/
 def symmetricLaplacian : Matrix V V ℝ := fun v u =>
-  (if v = u then G.degree v / G.mass v else 0) -
-    G.conductance v u / (Real.sqrt (G.mass v) * Real.sqrt (G.mass u))
+  (if v = u then G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 else 0) -
+    G.conductance v u * (Real.sqrt (G.mass v))⁻¹ *
+      (Real.sqrt (G.mass u))⁻¹
 
 theorem symmetricLaplacian_isHermitian :
     Matrix.IsHermitian G.symmetricLaplacian := by
@@ -184,7 +185,8 @@ theorem symmetricLaplacian_isHermitian :
   by_cases hvu : v = u
   · subst u
     rfl
-  · simp [hvu, Ne.symm hvu, mul_comm]
+  · simp [hvu, Ne.symm hvu]
+    ring
 
 theorem symmetricLaplacian_quadraticForm (x : V → ℝ) :
     dotProduct (star x) (Matrix.mulVec G.symmetricLaplacian x) =
@@ -193,11 +195,45 @@ theorem symmetricLaplacian_quadraticForm (x : V → ℝ) :
   let f : V → ℝ := fun v => x v / Real.sqrt (G.mass v)
   have hsqrt (v : V) : 0 < Real.sqrt (G.mass v) :=
     Real.sqrt_pos.2 (G.mass_pos v)
-  have hmass (v : V) : (Real.sqrt (G.mass v)) ^ 2 = G.mass v :=
-    Real.sq_sqrt (G.mass_pos v).le
   have hx (v : V) : x v = Real.sqrt (G.mass v) * f v := by
     unfold f
-    field_simp [ne_of_gt (hsqrt v)]
+    rw [div_eq_mul_inv]
+    have hs : Real.sqrt (G.mass v) * (Real.sqrt (G.mass v))⁻¹ = 1 :=
+      mul_inv_cancel₀ (hsqrt v).ne'
+    calc
+      x v = 1 * x v := by ring
+      _ = (Real.sqrt (G.mass v) * (Real.sqrt (G.mass v))⁻¹) * x v := by rw [hs]
+      _ = Real.sqrt (G.mass v) * (x v * (Real.sqrt (G.mass v))⁻¹) := by ring
+  have hdiag (v : V) :
+      x v * (G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 * x v) =
+        G.degree v * f v ^ 2 := by
+    rw [hx v]
+    have hs : Real.sqrt (G.mass v) * (Real.sqrt (G.mass v))⁻¹ = 1 :=
+      mul_inv_cancel₀ (hsqrt v).ne'
+    calc
+      Real.sqrt (G.mass v) * f v *
+          (G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 *
+            (Real.sqrt (G.mass v) * f v)) =
+          G.degree v * f v ^ 2 *
+            (Real.sqrt (G.mass v) * (Real.sqrt (G.mass v))⁻¹) ^ 2 := by ring
+      _ = G.degree v * f v ^ 2 := by rw [hs]; ring
+  have hoff (v u : V) :
+      x v * (G.conductance v u * (Real.sqrt (G.mass v))⁻¹ *
+        (Real.sqrt (G.mass u))⁻¹ * x u) =
+        G.conductance v u * f v * f u := by
+    rw [hx v, hx u]
+    have hsv : Real.sqrt (G.mass v) * (Real.sqrt (G.mass v))⁻¹ = 1 :=
+      mul_inv_cancel₀ (hsqrt v).ne'
+    have hsu : Real.sqrt (G.mass u) * (Real.sqrt (G.mass u))⁻¹ = 1 :=
+      mul_inv_cancel₀ (hsqrt u).ne'
+    calc
+      Real.sqrt (G.mass v) * f v *
+          (G.conductance v u * (Real.sqrt (G.mass v))⁻¹ *
+            (Real.sqrt (G.mass u))⁻¹ * (Real.sqrt (G.mass u) * f u)) =
+          G.conductance v u * f v * f u *
+            (Real.sqrt (G.mass v) * (Real.sqrt (G.mass v))⁻¹) *
+            (Real.sqrt (G.mass u) * (Real.sqrt (G.mass u))⁻¹) := by ring
+      _ = G.conductance v u * f v * f u := by rw [hsv, hsu]; ring
   have henergy : finiteSpatialEnergy G.conductance f =
       (∑ v, G.degree v * f v ^ 2) -
         ∑ v, ∑ u, G.conductance v u * f v * f u := by
@@ -246,37 +282,46 @@ theorem symmetricLaplacian_quadraticForm (x : V → ℝ) :
   unfold symmetricLaplacian
   simp only [starRingEnd_apply, star_id_of_comm, dotProduct, Matrix.mulVec]
   rw [show (∑ v, x v * ∑ u,
-      ((if v = u then G.degree v / G.mass v else 0) -
-        G.conductance v u /
-          (Real.sqrt (G.mass v) * Real.sqrt (G.mass u))) * x u) =
+      ((if v = u then G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 else 0) -
+        G.conductance v u * (Real.sqrt (G.mass v))⁻¹ *
+          (Real.sqrt (G.mass u))⁻¹) * x u) =
       (∑ v, G.degree v * f v ^ 2) -
         ∑ v, ∑ u, G.conductance v u * f v * f u by
     rw [show (∑ v, x v * ∑ u,
-        ((if v = u then G.degree v / G.mass v else 0) -
-          G.conductance v u /
-            (Real.sqrt (G.mass v) * Real.sqrt (G.mass u))) * x u) =
+        ((if v = u then G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 else 0) -
+          G.conductance v u * (Real.sqrt (G.mass v))⁻¹ *
+            (Real.sqrt (G.mass u))⁻¹) * x u) =
         (∑ v, x v * ∑ u,
-          (if v = u then G.degree v / G.mass v else 0) * x u) -
+          (if v = u then G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 else 0) * x u) -
         (∑ v, x v * ∑ u,
-          (G.conductance v u /
-            (Real.sqrt (G.mass v) * Real.sqrt (G.mass u))) * x u) by
+          (G.conductance v u * (Real.sqrt (G.mass v))⁻¹ *
+            (Real.sqrt (G.mass u))⁻¹) * x u) by
           simp only [sub_mul, Finset.sum_sub_distrib, mul_sub]
-          rw [Finset.sum_sub_distrib]]
+          ]
     congr 1
     · apply Finset.sum_congr rfl
       intro v _
       simp only [Finset.mul_sum]
-      rw [Finset.sum_ite_eq' Finset.univ v (Finset.mem_univ v)]
-      rw [hx v, hmass v]
-      field_simp [ne_of_gt (hsqrt v)]
-      ring
+      calc
+        (∑ u, x v * ((if v = u then
+            G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 else 0) * x u)) =
+            x v * (G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 * x v) := by
+              rw [show (∑ u, x v * ((if v = u then
+                  G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 else 0) * x u)) =
+                  ∑ u, (if v = u then
+                    x v * (G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 * x u)
+                  else 0) by
+                    apply Finset.sum_congr rfl
+                    intro u _
+                    split_ifs <;> ring]
+              rw [Fintype.sum_ite_eq v]
+        _ = G.degree v * f v ^ 2 := hdiag v
     · apply Finset.sum_congr rfl
       intro v _
+      rw [Finset.mul_sum]
       apply Finset.sum_congr rfl
       intro u _
-      rw [hx v, hx u]
-      field_simp [ne_of_gt (hsqrt v), ne_of_gt (hsqrt u)]
-      ring]
+      exact hoff v u]
 
 theorem symmetricLaplacian_posSemidef :
     Matrix.PosSemidef G.symmetricLaplacian := by
@@ -295,6 +340,515 @@ def eigenvalue : V → ℝ :=
 
 theorem eigenvalue_nonnegative (j : V) : 0 ≤ G.eigenvalue j :=
   G.symmetricLaplacian_posSemidef.eigenvalues_nonneg j
+
+/-- Euclidean eigenvectors of the conjugated Laplacian. -/
+def eigenvector (j : V) : V → ℝ :=
+  ⇑(G.symmetricLaplacian_isHermitian.eigenvectorBasis j)
+
+theorem symmetricLaplacian_mulVec_eigenvector (j : V) :
+    Matrix.mulVec G.symmetricLaplacian (G.eigenvector j) =
+      G.eigenvalue j • G.eigenvector j := by
+  exact G.symmetricLaplacian_isHermitian.mulVec_eigenvectorBasis j
+
+/-- Weighted eigenfunctions in `L²(V,mass)`. -/
+def eigenfunction (j v : V) : ℝ :=
+  G.eigenvector j v * (Real.sqrt (G.mass v))⁻¹
+
+/-- The weighted eigenfunctions are orthonormal in `L²(V,mass)`. -/
+theorem eigenfunction_weighted_orthonormal (i j : V) :
+    ∑ v, G.mass v * G.eigenfunction i v * G.eigenfunction j v =
+      if i = j then 1 else 0 := by
+  have hsqrt (v : V) : 0 < Real.sqrt (G.mass v) :=
+    Real.sqrt_pos.2 (G.mass_pos v)
+  have hterm (v : V) :
+      G.mass v * G.eigenfunction i v * G.eigenfunction j v =
+        G.eigenvector i v * G.eigenvector j v := by
+    unfold eigenfunction
+    have hsquare : Real.sqrt (G.mass v) ^ 2 = G.mass v :=
+      Real.sq_sqrt (G.mass_pos v).le
+    field_simp [(hsqrt v).ne']
+    rw [hsquare]
+    ring
+  simp_rw [hterm]
+  have hortho := G.symmetricLaplacian_isHermitian.eigenvectorBasis.orthonormal
+  rw [orthonormal_iff_ite] at hortho
+  have hij := hortho i j
+  simpa [eigenvector, EuclideanSpace.inner_eq_star_dotProduct,
+    dotProduct, mul_comm] using hij
+
+/-- The quadratic form of the conjugated Laplacian is diagonal in its
+canonical orthonormal eigenbasis. -/
+theorem symmetricLaplacian_quadraticForm_eigenExpansion (a : V → ℝ) :
+    dotProduct (star (∑ j, a j • G.eigenvector j))
+        (Matrix.mulVec G.symmetricLaplacian (∑ j, a j • G.eigenvector j)) =
+      ∑ j, G.eigenvalue j * a j ^ 2 := by
+  have hmul :
+      Matrix.mulVec G.symmetricLaplacian (∑ j, a j • G.eigenvector j) =
+        ∑ j, (G.eigenvalue j * a j) • G.eigenvector j := by
+    rw [Matrix.mulVec_sum]
+    apply Finset.sum_congr rfl
+    intro j _
+    rw [Matrix.mulVec_smul, G.symmetricLaplacian_mulVec_eigenvector]
+    ext v
+    simp [mul_assoc, mul_comm, mul_left_comm]
+  rw [hmul]
+  simp only [dotProduct, Finset.sum_apply, Pi.smul_apply, smul_eq_mul,
+    map_sum, map_mul, starRingEnd_apply, star_trivial]
+  simp_rw [Finset.mul_sum]
+  rw [Finset.sum_comm]
+  apply Finset.sum_congr rfl
+  intro j _
+  simp_rw [Finset.sum_mul]
+  rw [Finset.sum_comm]
+  have hortho (i : V) :
+      ∑ v, G.eigenvector i v * G.eigenvector j v =
+        if i = j then 1 else 0 := by
+    have h := G.eigenfunction_weighted_orthonormal i j
+    have hsqrt (v : V) : 0 < Real.sqrt (G.mass v) :=
+      Real.sqrt_pos.2 (G.mass_pos v)
+    have hterm (v : V) :
+        G.mass v * G.eigenfunction i v * G.eigenfunction j v =
+          G.eigenvector i v * G.eigenvector j v := by
+      unfold eigenfunction
+      have hsquare : Real.sqrt (G.mass v) ^ 2 = G.mass v :=
+        Real.sq_sqrt (G.mass_pos v).le
+      field_simp [(hsqrt v).ne']
+      rw [hsquare]
+      ring
+    simpa only [hterm] using h
+  calc
+    (∑ i, ∑ v,
+        a i * G.eigenvector i v *
+          (G.eigenvalue j * a j * G.eigenvector j v)) =
+        ∑ i, (a i * (G.eigenvalue j * a j)) *
+          ∑ v, G.eigenvector i v * G.eigenvector j v := by
+            apply Finset.sum_congr rfl
+            intro i _
+            rw [Finset.mul_sum]
+            apply Finset.sum_congr rfl
+            intro v _
+            ring
+    _ = ∑ i, (a i * (G.eigenvalue j * a j)) *
+          (if i = j then 1 else 0) := by simp_rw [hortho]
+    _ = G.eigenvalue j * a j ^ 2 := by
+          simp only [mul_ite, mul_one, mul_zero, Finset.sum_ite_irrel,
+            Finset.sum_ite_eq', Finset.mem_univ, if_pos]
+          ring
+
+/-- Completeness of the weighted eigenfunctions, in kernel form. -/
+theorem eigenfunction_completeness (v u : V) :
+    ∑ j, G.eigenfunction j v * G.eigenfunction j u =
+      if v = u then (G.mass v)⁻¹ else 0 := by
+  let U : Matrix V V ℝ :=
+    G.symmetricLaplacian_isHermitian.eigenvectorUnitary
+  have hunit : U * star U = 1 :=
+    Unitary.coe_mul_star_self G.symmetricLaplacian_isHermitian.eigenvectorUnitary
+  have hvu := congrFun (congrFun hunit v) u
+  change (∑ j, U v j * (star U) j u) = (1 : Matrix V V ℝ) v u at hvu
+  have hstar (j : V) : (star U) j u = G.eigenvector j u := by
+    change star (U u j) = G.eigenvector j u
+    simp [U, eigenvector]
+  have hU (j : V) : U v j = G.eigenvector j v := by
+    simp [U, eigenvector]
+  simp_rw [hstar, hU] at hvu
+  have hsqrtv : Real.sqrt (G.mass v) ≠ 0 :=
+    (Real.sqrt_pos.2 (G.mass_pos v)).ne'
+  have hsqrtu : Real.sqrt (G.mass u) ≠ 0 :=
+    (Real.sqrt_pos.2 (G.mass_pos u)).ne'
+  unfold eigenfunction
+  by_cases hvu' : v = u
+  · subst u
+    simp only [if_pos]
+    have hsquare : Real.sqrt (G.mass v) ^ 2 = G.mass v :=
+      Real.sq_sqrt (G.mass_pos v).le
+    have hvv : (∑ j, G.eigenvector j v * G.eigenvector j v) = 1 := by
+      simpa [Matrix.one_apply] using hvu
+    calc
+      (∑ j, (G.eigenvector j v * (Real.sqrt (G.mass v))⁻¹) *
+          (G.eigenvector j v * (Real.sqrt (G.mass v))⁻¹)) =
+          (Real.sqrt (G.mass v))⁻¹ ^ 2 *
+            ∑ j, G.eigenvector j v * G.eigenvector j v := by
+              rw [Finset.mul_sum]
+              apply Finset.sum_congr rfl
+              intro j _
+              ring
+      _ = (Real.sqrt (G.mass v))⁻¹ ^ 2 := by rw [hvv]; ring
+      _ = ((Real.sqrt (G.mass v)) ^ 2)⁻¹ := by
+            rw [inv_pow]
+      _ = (G.mass v)⁻¹ := by rw [hsquare]
+  · simp only [hvu', if_false]
+    have hzero : (∑ j, G.eigenvector j v * G.eigenvector j u) = 0 := by
+      simpa [Matrix.one_apply, hvu'] using hvu
+    calc
+      (∑ j, (G.eigenvector j v * (Real.sqrt (G.mass v))⁻¹) *
+          (G.eigenvector j u * (Real.sqrt (G.mass u))⁻¹)) =
+          ((Real.sqrt (G.mass v))⁻¹ * (Real.sqrt (G.mass u))⁻¹) *
+            ∑ j, G.eigenvector j v * G.eigenvector j u := by
+              rw [Finset.mul_sum]
+              apply Finset.sum_congr rfl
+              intro j _
+              ring
+      _ = 0 := by rw [hzero, mul_zero]
+
+theorem eigenfunction_weighted_norm (j : V) :
+    ∑ v, G.mass v * G.eigenfunction j v ^ 2 = 1 := by
+  have h := G.eigenfunction_weighted_orthonormal j j
+  rw [if_pos rfl] at h
+  calc
+    (∑ v, G.mass v * G.eigenfunction j v ^ 2) =
+        ∑ v, G.mass v * G.eigenfunction j v * G.eigenfunction j v := by
+          apply Finset.sum_congr rfl
+          intro v _
+          ring
+    _ = 1 := h
+
+/-- The Dirichlet energy of a normalized eigenfunction is its eigenvalue. -/
+theorem eigenfunction_energy (j : V) :
+    finiteSpatialEnergy G.conductance (G.eigenfunction j) = G.eigenvalue j := by
+  have hquad := G.symmetricLaplacian_quadraticForm (G.eigenvector j)
+  have heig := G.symmetricLaplacian_mulVec_eigenvector j
+  rw [heig] at hquad
+  have hsqrt (v : V) : Real.sqrt (G.mass v) ≠ 0 :=
+    (Real.sqrt_pos.2 (G.mass_pos v)).ne'
+  have hfun : (fun v => G.eigenvector j v / Real.sqrt (G.mass v)) =
+      G.eigenfunction j := by
+    funext v
+    unfold eigenfunction
+    rw [div_eq_mul_inv]
+  rw [hfun] at hquad
+  have hnorm : dotProduct (star (G.eigenvector j)) (G.eigenvector j) = 1 := by
+    have h := G.eigenfunction_weighted_norm j
+    have hsquare (v : V) : Real.sqrt (G.mass v) ^ 2 = G.mass v :=
+      Real.sq_sqrt (G.mass_pos v).le
+    have hterm (v : V) :
+        G.mass v * G.eigenfunction j v ^ 2 = G.eigenvector j v ^ 2 := by
+      unfold eigenfunction
+      have hmass : G.mass v = Real.sqrt (G.mass v) ^ 2 := (hsquare v).symm
+      have hsqrtMass : Real.sqrt (Real.sqrt (G.mass v) ^ 2) =
+          Real.sqrt (G.mass v) :=
+        Real.sqrt_sq_eq_abs _ |>.trans
+          (abs_of_pos (Real.sqrt_pos.2 (G.mass_pos v)))
+      rw [hmass, hsqrtMass]
+      calc
+        Real.sqrt (G.mass v) ^ 2 *
+            (G.eigenvector j v * (Real.sqrt (G.mass v))⁻¹) ^ 2 =
+            G.eigenvector j v ^ 2 *
+              (Real.sqrt (G.mass v) ^ 2 *
+                (Real.sqrt (G.mass v))⁻¹ ^ 2) := by ring
+        _ = G.eigenvector j v ^ 2 * 1 := by
+              congr 1
+              field_simp [hsqrt v]
+        _ = G.eigenvector j v ^ 2 := by ring
+    unfold dotProduct
+    simp only [star_id_of_comm]
+    calc
+      (∑ i, G.eigenvector j i * G.eigenvector j i) =
+          ∑ i, G.eigenvector j i ^ 2 := by
+            apply Finset.sum_congr rfl
+            intro i _
+            ring
+      _ = ∑ i, G.mass i * G.eigenfunction j i ^ 2 := by
+            apply Finset.sum_congr rfl
+            intro i _
+            exact (hterm i).symm
+      _ = 1 := h
+  calc
+    finiteSpatialEnergy G.conductance (G.eigenfunction j) =
+        dotProduct (star (G.eigenvector j))
+          (G.eigenvalue j • G.eigenvector j) := hquad.symm
+    _ = G.eigenvalue j *
+        dotProduct (star (G.eigenvector j)) (G.eigenvector j) := by
+          unfold dotProduct
+          rw [Finset.mul_sum]
+          apply Finset.sum_congr rfl
+          intro v _
+          simp only [Pi.smul_apply, smul_eq_mul, starRingEnd_apply, star_id_of_comm]
+          ring
+    _ = G.eigenvalue j := by rw [hnorm, mul_one]
+
+/-- The weighted graph Laplacian in function coordinates. -/
+def laplacianApply (f : V → ℝ) (v : V) : ℝ :=
+  (∑ u, G.conductance v u * (f v - f u)) / G.mass v
+
+theorem transition_mulVec_eq (f : V → ℝ) (v : V) :
+    Matrix.mulVec G.transition f v =
+      f v - G.uniformizationRate⁻¹ * G.laplacianApply f v := by
+  unfold Matrix.mulVec transition laplacianApply degree
+  have hΛ : G.uniformizationRate ≠ 0 := G.uniformizationRate_pos.ne'
+  have hμ : G.mass v ≠ 0 := (G.mass_pos v).ne'
+  change (∑ u, ((if v = u then 1 else 0) +
+      (G.conductance v u - if v = u then ∑ x, G.conductance v x else 0) /
+        (G.uniformizationRate * G.mass v)) * f u) = _
+  simp only [add_mul, Finset.sum_add_distrib]
+  have hdelta : (∑ u : V, (if v = u then 1 else 0) * f u) = f v := by simp
+  rw [hdelta]
+  have hfrac : (∑ u : V,
+      (G.conductance v u - if v = u then ∑ x, G.conductance v x else 0) /
+        (G.uniformizationRate * G.mass v) * f u) =
+      -G.uniformizationRate⁻¹ *
+        ((∑ u, G.conductance v u * (f v - f u)) / G.mass v) := by
+    have hden : G.uniformizationRate * G.mass v ≠ 0 := mul_ne_zero hΛ hμ
+    simp_rw [div_mul_eq_mul_div]
+    rw [← Finset.sum_div]
+    apply (div_eq_iff hden).2
+    have hnum : (∑ u : V,
+        (G.conductance v u - if v = u then ∑ x, G.conductance v x else 0) * f u) =
+        (∑ u, G.conductance v u * f u) -
+          (∑ x, G.conductance v x) * f v := by
+      calc
+        (∑ u : V,
+            (G.conductance v u - if v = u then ∑ x, G.conductance v x else 0) * f u) =
+            ∑ u, (G.conductance v u * f u -
+              (if v = u then ∑ x, G.conductance v x else 0) * f u) := by
+                apply Finset.sum_congr rfl
+                intro u _
+                ring
+        _ = (∑ u, G.conductance v u * f u) -
+            ∑ u, (if v = u then ∑ x, G.conductance v x else 0) * f u :=
+              by rw [Finset.sum_sub_distrib]
+        _ = (∑ u, G.conductance v u * f u) -
+            (∑ x, G.conductance v x) * f v := by
+              congr 1
+              rw [show (∑ u : V,
+                  (if v = u then ∑ x, G.conductance v x else 0) * f u) =
+                  ∑ u : V, if v = u then (∑ x, G.conductance v x) * f u else 0 by
+                    apply Finset.sum_congr rfl
+                    intro u _
+                    split_ifs <;> ring]
+              rw [Fintype.sum_ite_eq v]
+    rw [hnum]
+    field_simp [hΛ, hμ]
+    calc
+      (∑ x, G.conductance v x * f x) -
+          (∑ x, G.conductance v x) * f v =
+          ∑ x, (G.conductance v x * f x -
+            G.conductance v x * f v) := by
+              rw [Finset.sum_sub_distrib, Finset.sum_mul]
+      _ = -∑ x, G.conductance v x * (f v - f x) := by
+            rw [show -(∑ x, G.conductance v x * (f v - f x)) =
+                ∑ x, -(G.conductance v x * (f v - f x)) by
+                  rw [Finset.sum_neg_distrib]]
+            apply Finset.sum_congr rfl
+            intro x _
+            ring
+  rw [hfrac]
+  ring
+
+/-- The transition matrix conjugated to ordinary Euclidean coordinates. -/
+def symmetricTransition : Matrix V V ℝ := fun v u =>
+  Real.sqrt (G.mass v) * G.transition v u *
+    (Real.sqrt (G.mass u))⁻¹
+
+theorem symmetricTransition_eq :
+    G.symmetricTransition = 1 - G.uniformizationRate⁻¹ • G.symmetricLaplacian := by
+  ext v u
+  have hsv : Real.sqrt (G.mass v) ≠ 0 := (Real.sqrt_pos.2 (G.mass_pos v)).ne'
+  have hsu : Real.sqrt (G.mass u) ≠ 0 := (Real.sqrt_pos.2 (G.mass_pos u)).ne'
+  have hmv : G.mass v = (Real.sqrt (G.mass v)) ^ 2 :=
+    (Real.sq_sqrt (G.mass_pos v).le).symm
+  have hΛ : G.uniformizationRate ≠ 0 := G.uniformizationRate_pos.ne'
+  by_cases hvu : v = u
+  · subst u
+    unfold symmetricTransition
+    rw [G.transition_diag]
+    change Real.sqrt (G.mass v) *
+        (1 + (G.conductance v v - G.degree v) /
+          (G.uniformizationRate * G.mass v)) *
+          (Real.sqrt (G.mass v))⁻¹ =
+      (if v = v then 1 else 0) - G.uniformizationRate⁻¹ *
+        ((if v = v then G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 else 0) -
+          G.conductance v v * (Real.sqrt (G.mass v))⁻¹ *
+            (Real.sqrt (G.mass v))⁻¹)
+    simp only [if_pos]
+    rw [hmv]
+    have hsqrtMass : Real.sqrt ((Real.sqrt (G.mass v)) ^ 2) =
+        Real.sqrt (G.mass v) := Real.sqrt_sq_eq_abs _ |>.trans
+          (abs_of_pos (Real.sqrt_pos.2 (G.mass_pos v)))
+    rw [hsqrtMass]
+    field_simp [hsv, hΛ]
+    ring
+  · unfold symmetricTransition
+    rw [G.transition_offdiag hvu]
+    change Real.sqrt (G.mass v) *
+        (G.conductance v u / (G.uniformizationRate * G.mass v)) *
+          (Real.sqrt (G.mass u))⁻¹ =
+      (if v = u then 1 else 0) - G.uniformizationRate⁻¹ *
+        ((if v = u then G.degree v * (Real.sqrt (G.mass v))⁻¹ ^ 2 else 0) -
+          G.conductance v u * (Real.sqrt (G.mass v))⁻¹ *
+            (Real.sqrt (G.mass u))⁻¹)
+    simp only [hvu, if_false, zero_sub]
+    rw [hmv]
+    have hsqrtMass : Real.sqrt ((Real.sqrt (G.mass v)) ^ 2) =
+        Real.sqrt (G.mass v) := Real.sqrt_sq_eq_abs _ |>.trans
+          (abs_of_pos (Real.sqrt_pos.2 (G.mass_pos v)))
+    rw [hsqrtMass]
+    field_simp [hsv, hsu, hΛ]
+
+theorem symmetricTransition_mulVec_eigenvector (j : V) :
+    Matrix.mulVec G.symmetricTransition (G.eigenvector j) =
+      (1 - G.eigenvalue j / G.uniformizationRate) • G.eigenvector j := by
+  rw [G.symmetricTransition_eq]
+  rw [Matrix.sub_mulVec, Matrix.one_mulVec, Matrix.smul_mulVec,
+    G.symmetricLaplacian_mulVec_eigenvector]
+  ext v
+  simp only [Pi.sub_apply, Pi.smul_apply, smul_eq_mul]
+  field_simp [G.uniformizationRate_pos.ne']
+
+theorem transition_mulVec_eigenfunction (j : V) :
+    Matrix.mulVec G.transition (G.eigenfunction j) =
+      (1 - G.eigenvalue j / G.uniformizationRate) • G.eigenfunction j := by
+  have hs := G.symmetricTransition_mulVec_eigenvector j
+  ext v
+  have hsv : Real.sqrt (G.mass v) ≠ 0 := (Real.sqrt_pos.2 (G.mass_pos v)).ne'
+  have hterm (u : V) :
+      G.symmetricTransition v u * G.eigenvector j u =
+        Real.sqrt (G.mass v) *
+          (G.transition v u * G.eigenfunction j u) := by
+    unfold symmetricTransition eigenfunction
+    ring
+  have hsum :
+      Matrix.mulVec G.symmetricTransition (G.eigenvector j) v =
+        Real.sqrt (G.mass v) *
+          Matrix.mulVec G.transition (G.eigenfunction j) v := by
+    simp only [Matrix.mulVec]
+    calc
+      (∑ u, G.symmetricTransition v u * G.eigenvector j u) =
+          ∑ u, Real.sqrt (G.mass v) *
+            (G.transition v u * G.eigenfunction j u) := by
+              apply Finset.sum_congr rfl
+              intro u _
+              exact hterm u
+      _ = Real.sqrt (G.mass v) *
+          ∑ u, G.transition v u * G.eigenfunction j u := by
+            rw [Finset.mul_sum]
+  have hs_v := congrFun hs v
+  rw [hsum] at hs_v
+  unfold eigenfunction
+  simp only [Pi.smul_apply, smul_eq_mul] at hs_v ⊢
+  calc
+    Matrix.mulVec G.transition (G.eigenfunction j) v =
+        (Real.sqrt (G.mass v))⁻¹ *
+          (Real.sqrt (G.mass v) *
+            Matrix.mulVec G.transition (G.eigenfunction j) v) := by
+              field_simp [hsv]
+    _ = (Real.sqrt (G.mass v))⁻¹ *
+        ((1 - G.eigenvalue j / G.uniformizationRate) *
+          G.eigenvector j v) := by rw [hs_v]
+    _ = (1 - G.eigenvalue j / G.uniformizationRate) *
+        (G.eigenvector j v * (Real.sqrt (G.mass v))⁻¹) := by ring
+
+theorem laplacianApply_eigenfunction (j : V) (v : V) :
+    G.laplacianApply (G.eigenfunction j) v =
+      G.eigenvalue j * G.eigenfunction j v := by
+  have ht := congrFun (G.transition_mulVec_eigenfunction j) v
+  rw [G.transition_mulVec_eq] at ht
+  simp only [Pi.smul_apply, smul_eq_mul] at ht
+  have hΛ : G.uniformizationRate ≠ 0 := G.uniformizationRate_pos.ne'
+  field_simp [hΛ] at ht
+  linarith
+
+/-- Every strictly positive Laplacian eigenmode has weighted mean zero. -/
+theorem eigenfunction_mean_zero {j : V} (hj : 0 < G.eigenvalue j) :
+    ∑ v, G.mass v * G.eigenfunction j v = 0 := by
+  have hsum : ∑ v, G.mass v * G.laplacianApply (G.eigenfunction j) v = 0 := by
+    unfold laplacianApply
+    have hμ (v : V) : G.mass v ≠ 0 := (G.mass_pos v).ne'
+    simp_rw [mul_div_cancel₀ _ (hμ _)]
+    rw [show (∑ v, ∑ u, G.conductance v u *
+        (G.eigenfunction j v - G.eigenfunction j u)) = 0 by
+      rw [Finset.sum_comm]
+      have hswap : (∑ u, ∑ v, G.conductance v u * G.eigenfunction j v) =
+          ∑ u, ∑ v, G.conductance v u * G.eigenfunction j u := by
+        calc
+          (∑ u, ∑ v, G.conductance v u * G.eigenfunction j v) =
+              ∑ v, ∑ u, G.conductance v u * G.eigenfunction j v := Finset.sum_comm
+          _ = ∑ v, ∑ u, G.conductance u v * G.eigenfunction j v := by
+                apply Finset.sum_congr rfl
+                intro v _
+                apply Finset.sum_congr rfl
+                intro u _
+                rw [G.conductance_symm]
+          _ = ∑ u, ∑ v, G.conductance v u * G.eigenfunction j u := by
+                apply Finset.sum_congr rfl
+                intro u _
+                apply Finset.sum_congr rfl
+                intro v _
+                ring
+      simp only [mul_sub, Finset.sum_sub_distrib]
+      rw [hswap]
+      ring]
+  simp_rw [G.laplacianApply_eigenfunction] at hsum
+  have hfactor : (∑ v, G.mass v *
+      (G.eigenvalue j * G.eigenfunction j v)) =
+      G.eigenvalue j * ∑ v, G.mass v * G.eigenfunction j v := by
+    rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro v _
+    ring
+  rw [hfactor] at hsum
+  exact (mul_eq_zero.mp hsum).resolve_left hj.ne'
+
+/-- The uniformized graph heat kernel acts on each weighted Laplacian
+eigenfunction by the exact scalar `exp (-t λ)`. -/
+theorem heatApply_eigenfunction (j : V) (t : ℝ) (ht : 0 ≤ t) :
+    G.heatApply t (G.eigenfunction j) =
+      Real.exp (-t * G.eigenvalue j) • G.eigenfunction j := by
+  have hs : 0 ≤ G.uniformizationRate * t :=
+    mul_nonneg G.uniformizationRate_pos.le ht
+  have hexp := Matrix.exponentialEntry_smul_mulVec_eigenvector
+    G.transition G.transition_rowStochastic (G.eigenfunction j)
+    (1 - G.eigenvalue j / G.uniformizationRate)
+    (G.uniformizationRate * t) hs
+    (G.transition_mulVec_eigenfunction j)
+  ext v
+  have hexp_v := congrFun hexp v
+  unfold heatApply heatKernel
+  simp only [Matrix.mulVec, Pi.smul_apply, smul_eq_mul] at hexp_v ⊢
+  calc
+    (∑ x, Real.exp (-(G.uniformizationRate * t)) *
+        Matrix.exponentialEntry ((G.uniformizationRate * t) • G.transition) v x *
+          G.eigenfunction j x) =
+        Real.exp (-(G.uniformizationRate * t)) *
+          ∑ x, Matrix.exponentialEntry
+            ((G.uniformizationRate * t) • G.transition) v x *
+              G.eigenfunction j x := by
+                rw [Finset.mul_sum]
+                apply Finset.sum_congr rfl
+                intro x _
+                ring
+    _ = Real.exp (-(G.uniformizationRate * t)) *
+        (Real.exp (G.uniformizationRate * t *
+          (1 - G.eigenvalue j / G.uniformizationRate)) *
+            G.eigenfunction j v) := by
+              have hexp_v' :
+                  (∑ x, Matrix.exponentialEntry
+                    ((G.uniformizationRate * t) • G.transition) v x *
+                      G.eigenfunction j x) =
+                    Real.exp (G.uniformizationRate * t *
+                      (1 - G.eigenvalue j / G.uniformizationRate)) *
+                        G.eigenfunction j v := hexp_v
+              rw [hexp_v']
+    _ = Real.exp (-t * G.eigenvalue j) * G.eigenfunction j v := by
+      have harg : -(G.uniformizationRate * t) +
+          G.uniformizationRate * t *
+            (1 - G.eigenvalue j / G.uniformizationRate) =
+          -t * G.eigenvalue j := by
+        field_simp [G.uniformizationRate_pos.ne']
+        ring
+      calc
+        Real.exp (-(G.uniformizationRate * t)) *
+            (Real.exp (G.uniformizationRate * t *
+              (1 - G.eigenvalue j / G.uniformizationRate)) *
+                G.eigenfunction j v) =
+            (Real.exp (-(G.uniformizationRate * t)) *
+              Real.exp (G.uniformizationRate * t *
+                (1 - G.eigenvalue j / G.uniformizationRate))) *
+                  G.eigenfunction j v := by ring
+        _ = Real.exp (-(G.uniformizationRate * t) +
+              G.uniformizationRate * t *
+                (1 - G.eigenvalue j / G.uniformizationRate)) *
+                  G.eigenfunction j v := by rw [Real.exp_add]
+        _ = Real.exp (-t * G.eigenvalue j) * G.eigenfunction j v := by rw [harg]
 
 /-- Detailed balance and stochasticity imply weighted L1 contraction. -/
 theorem heatApply_weightedL1_le

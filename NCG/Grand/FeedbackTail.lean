@@ -54,6 +54,70 @@ theorem exp_tail_integral (R : ℝ) (hR : 0 < R) :
   rw [h, integral_exp_neg_Ioi_zero, smul_eq_mul, mul_one,
     one_div]
 
+/-- The exact first time moment of an exponential tail. -/
+theorem time_mul_exp_tail_integral (R : ℝ) (hR : 0 < R) :
+    (∫ t in Ioi (0 : ℝ), t * Real.exp (-(R * t))) = 1 / R ^ 2 := by
+  have h := Real.integral_rpow_mul_exp_neg_mul_Ioi
+    (a := (2 : ℝ)) (r := R) (by norm_num) hR
+  norm_num [Real.rpow_one] at h
+  rw [h]
+  field_simp
+
+/-- Algebraic Feshbach high-energy split.  The inverse-at-zero term is the
+time-local correction and the remaining factor is linear in frequency. -/
+theorem feshbach_resolvent_split
+    {A : Type*} [NormedRing A]
+    (z Hinv Rz B Q C : A)
+    (hres : Rz - Hinv = -(z * Rz * Hinv)) :
+    B * Rz * Q * C = B * Hinv * Q * C
+      + (-(B * z * Rz * Hinv * Q * C)) := by
+  have hRz : Rz = Hinv - z * Rz * Hinv := by
+    calc
+      Rz = Hinv + (Rz - Hinv) := by abel
+      _ = Hinv - z * Rz * Hinv := by rw [hres]; abel
+  calc
+    B * Rz * Q * C = B * (Hinv - z * Rz * Hinv) * Q * C :=
+      congrArg (fun X => B * X * Q * C) hRz
+    _ = B * Hinv * Q * C + (-(B * z * Rz * Hinv * Q * C)) := by
+      noncomm_ring
+
+/-- Norm bounds for the local Feshbach correction and its frequency-dependent
+remainder from two high-energy inverse estimates. -/
+theorem feshbach_high_energy_bounds
+    {A : Type*} [NormedRing A]
+    (z Hinv Rz B Q C : A) (b c R : ℝ)
+    (hR : 0 < R) (hb : 0 ≤ b) (hc : 0 ≤ c)
+    (hB : ‖B‖ ≤ b) (hC : ‖C‖ ≤ c) (hQ : ‖Q‖ ≤ 1)
+    (hH : ‖Hinv‖ ≤ 1 / R) (hRz : ‖Rz‖ ≤ 1 / R) :
+    ‖B * Hinv * Q * C‖ ≤ b * c / R
+      ∧ ‖B * z * Rz * Hinv * Q * C‖ ≤ ‖z‖ * b * c / R ^ 2 := by
+  have hRinv : 0 ≤ 1 / R := by positivity
+  constructor
+  · calc
+      ‖B * Hinv * Q * C‖ ≤ ‖B‖ * ‖Hinv‖ * ‖Q‖ * ‖C‖ := by
+        calc
+          _ ≤ ‖B * Hinv * Q‖ * ‖C‖ := norm_mul_le _ _
+          _ ≤ (‖B * Hinv‖ * ‖Q‖) * ‖C‖ := by gcongr; exact norm_mul_le _ _
+          _ ≤ ((‖B‖ * ‖Hinv‖) * ‖Q‖) * ‖C‖ := by
+            gcongr; exact norm_mul_le _ _
+      _ ≤ b * (1 / R) * 1 * c := by gcongr
+      _ = b * c / R := by ring
+  · calc
+      ‖B * z * Rz * Hinv * Q * C‖
+          ≤ ‖B‖ * ‖z‖ * ‖Rz‖ * ‖Hinv‖ * ‖Q‖ * ‖C‖ := by
+            calc
+              _ ≤ ‖B * z * Rz * Hinv * Q‖ * ‖C‖ := norm_mul_le _ _
+              _ ≤ ‖B * z * Rz * Hinv‖ * ‖Q‖ * ‖C‖ := by
+                gcongr; exact norm_mul_le _ _
+              _ ≤ ‖B * z * Rz‖ * ‖Hinv‖ * ‖Q‖ * ‖C‖ := by
+                gcongr; exact norm_mul_le _ _
+              _ ≤ ‖B * z‖ * ‖Rz‖ * ‖Hinv‖ * ‖Q‖ * ‖C‖ := by
+                gcongr; exact norm_mul_le _ _
+              _ ≤ ‖B‖ * ‖z‖ * ‖Rz‖ * ‖Hinv‖ * ‖Q‖ * ‖C‖ := by
+                gcongr; exact norm_mul_le _ _
+      _ ≤ b * ‖z‖ * (1 / R) * (1 / R) * 1 * c := by gcongr
+      _ = ‖z‖ * b * c / R ^ 2 := by field_simp
+
 /-- `thm:Hodge-feedback-tail`. -/
 theorem hodge_feedback_tail :
     -- (i) the boxed high-energy memory bound

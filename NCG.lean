@@ -334,6 +334,8 @@ import NCG.Grand.MemoryCumulant
 import NCG.Grand.LoopSaturation
 import NCG.Grand.SixthOrderProfile
 import NCG.Grand.ChaosLocalization
+import NCG.Grand.CollisionParityHodge
+import NCG.Grand.HardCoreCorrectorProfile
 import NCG.Grand.FiniteHDA
 import NCG.Grand.ActionEinstein
 import NCG.Grand.SMSTADMPacket
@@ -914,6 +916,7 @@ import NCG.Grand.ProtectedCartesianCoordinateFilling
 import NCG.Grand.FaceLinearization
 import NCG.Grand.StableRenewalFaceLinearization
 import NCG.Grand.SchurMori
+import NCG.Grand.SchurMoriEvolution
 import NCG.Grand.PolarEdgeSingular
 import NCG.Grand.ResistanceCoframe
 import NCG.Grand.HoweCertificate
@@ -924,6 +927,7 @@ import NCG.Grand.CoherentClosureQuantitativeEnvelope
 import NCG.Grand.OrbitHodgeTransfer
 import NCG.Grand.FiniteAnchorHowe
 import NCG.Grand.FeedbackTail
+import NCG.Grand.HodgeFeedbackSpectralReduction
 import NCG.Grand.NaimarkPhaseSharpness
 import NCG.Grand.FiniteNoGoCounterexamples
 import NCG.Grand.ExactSourceSchurResidual
@@ -1104,4 +1108,9 @@ import NCG.Grand.ExceptionalS4IsotypicBlockClassification
 import NCG.Grand.ExceptionalS4ThreeMatrixPanel
 import NCG.Grand.ExceptionalS4MultiplicityMatrixAssembly
 import NCG.Grand.AcceptedJointTableReconstruction
+import NCG.Grand.AcceptedGeneratorClosure
+import NCG.Grand.AcceptedKrylovOrbitSpan
 import NCG.Grand.FeedbackLimitMemoryClassification
+import NCG.Grand.OperationalSobolevWeylFiniteGraph
+import NCG.Grand.RenewalSpatialPositiveScreen
+import NCG.Grand.OperationalSobolevWeylFiniteGraph

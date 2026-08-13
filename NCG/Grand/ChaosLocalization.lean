@@ -53,6 +53,40 @@ theorem graded_conjugation_entry (n : ι → ℝ) (α : ℝ)
   congr 2
   ring
 
+/-- Exact decomposition of the manuscript weight
+`1 + 2 sinh α = 1 + exp α - exp (-α)`. -/
+theorem one_add_two_sinh (α : ℝ) :
+    1 + 2 * Real.sinh α = 1 + Real.exp α - Real.exp (-α) := by
+  rw [Real.sinh_eq]
+  ring
+
+/-- The boxed weighted insertion estimate follows by adding the diagonal,
+raising, and signed lowering block bounds.  These are precisely the three
+blocks exposed by a degree-at-most-one Walsh insertion. -/
+theorem walsh_weighted_insertion_bound
+    (q α diagonalNorm raisingNorm loweringNorm weightedNorm : ℝ)
+    (hq : 0 ≤ q) (hα : 0 ≤ α)
+    (hdiag : diagonalNorm ≤ q)
+    (hraise : raisingNorm ≤ q)
+    (hlower : loweringNorm ≤ q)
+    (hweighted : weightedNorm ≤ diagonalNorm
+      + (Real.exp α - 1) * raisingNorm
+      + (1 - Real.exp (-α)) * loweringNorm) :
+    weightedNorm ≤ q * (1 + 2 * Real.sinh α) := by
+  have he : 1 ≤ Real.exp α := by
+    simpa using Real.exp_le_exp.mpr hα
+  have hen : Real.exp (-α) ≤ 1 := by
+    simpa using Real.exp_le_exp.mpr (neg_nonpos.mpr hα)
+  calc
+    weightedNorm ≤ diagonalNorm + (Real.exp α - 1) * raisingNorm
+        + (1 - Real.exp (-α)) * loweringNorm := hweighted
+    _ ≤ q + (Real.exp α - 1) * q
+        + (1 - Real.exp (-α)) * q := by
+          gcongr
+    _ = q * (1 + 2 * Real.sinh α) := by
+          rw [one_add_two_sinh]
+          ring
+
 section Resummation
 
 variable {A : Type*} [NormedRing A] [NormOneClass A]
@@ -128,5 +162,34 @@ theorem degree_tail_bound (n y : ι → ℝ) (hy : ∀ i, 0 ≤ y i)
           (Finset.filter_subset _ _) fun i _ _ => ?_
         have := hy i
         positivity
+
+/-- Complete localization assembly: the weighted Neumann correction has
+square norm at most `sourceNorm²/(1-ρ)²`, hence its mass above degree `R`
+has the advertised exponential tail. -/
+theorem renewal_chaos_localization
+    (n y : ι → ℝ) (hy : ∀ i, 0 ≤ y i)
+    (α R ρ sourceNorm weightedNorm : ℝ)
+    (hα : 0 ≤ α) (hρ0 : 0 ≤ ρ) (hρ : ρ < 1)
+    (hsource : 0 ≤ sourceNorm) (hwn : 0 ≤ weightedNorm)
+    (hweighted : weightedNorm ≤ sourceNorm / (1 - ρ))
+    (hsq : ∑ i, Real.exp (2 * α * (n i - 2)) * y i
+      ≤ weightedNorm ^ 2) :
+    ∑ i ∈ Finset.univ.filter (fun i => R ≤ n i), y i
+      ≤ Real.exp (-2 * α * (R - 2))
+        * (sourceNorm / (1 - ρ)) ^ 2 := by
+  have hden : 0 < 1 - ρ := sub_pos.mpr hρ
+  have hs0 : 0 ≤ sourceNorm / (1 - ρ) := by
+    positivity
+  calc
+    ∑ i ∈ Finset.univ.filter (fun i => R ≤ n i), y i
+        ≤ Real.exp (-2 * α * (R - 2))
+          * ∑ i, Real.exp (2 * α * (n i - 2)) * y i :=
+            degree_tail_bound n y hy α R hα
+    _ ≤ Real.exp (-2 * α * (R - 2)) * weightedNorm ^ 2 := by
+          gcongr
+    _ ≤ Real.exp (-2 * α * (R - 2))
+        * (sourceNorm / (1 - ρ)) ^ 2 := by
+          exact mul_le_mul_of_nonneg_left
+            ((sq_le_sq₀ hwn hs0).2 hweighted) (Real.exp_nonneg _)
 
 end NCG

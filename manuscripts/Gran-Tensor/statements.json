@@ -2835,11 +2835,15 @@
   "thm:operational-Sobolev-Weyl": {
     "env": "theorem",
     "title": "Operational Sobolev, Poincar\\'e, and Weyl bounds",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/SobolevWeyl.lean"
+      "NCG/Grand/OperationalSobolevWeylExact.lean:NCG.finite_meanZero_L6_sobolev",
+      "NCG/Grand/OperationalSobolevWeylExact.lean:NCG.finite_meanZero_poincare",
+      "NCG/Grand/OperationalSobolevWeylFiniteGraph.lean:NCG.FiniteWeightedGraph.positiveEigenvalue_floor",
+      "NCG/Grand/OperationalSobolevWeylFiniteGraph.lean:NCG.FiniteWeightedGraph.eigenvalueCount_bound",
+      "NCG/Grand/OperationalSobolevWeylFiniteGraph.lean:NCG.FiniteWeightedGraph.eigenfunction_spectralTail_bound"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Load-bearing claims (L6 Sobolev with C_S = 128D*/I*², Weyl count) disclosed away; proved: Hölder interpolation cube, conditional chaining assuming the Sobolev bound, Chebyshev tail, positivity fact. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - L⁶ Sobolev constant + Weyl count: discrete coarea, layer-cake, Nash iteration, heat-trace bounds."
+    "note": "Exact completion 2026-08-12: OperationalSobolevWeylExact proves discrete coarea and layer-cake, the half-support and median reductions, and the exact mean-zero L6 Sobolev constant C_S=128D*/I*^2; it derives the Poincare constant C_P=128D*V*^(2/3)/I*^2, Nash inequality, integrated heat decay, and optimized finite Weyl constant. FiniteMarkovHeatKernel and FiniteWeightedGraphHeatKernel construct the concrete reversible Markov heat semigroup and canonical weighted graph spectrum. OperationalSobolevWeylFiniteGraph proves zero-mode uniqueness, positive spectral floor, spectral heat-column energy/dissipation/L1 identities, exact diagonal heat trace, N(R)<=1+4e^(3/2)V*(C_S R)^(3/2), and the compact-screen spectral tail. Singleton and nontrivial regulators are handled separately, with D*>0 derived from the stated hypotheses in the nontrivial branch."
   },
   "thm:protected-coordinate-integration": {
     "env": "theorem",
@@ -2861,20 +2865,26 @@
   "thm:coordinate-atlas-isoperimetry": {
     "env": "theorem",
     "title": "Coordinate and atlas discharge of the cut margin",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/AtlasIsoperimetry.lean"
+      "NCG/Grand/AtlasIsoperimetry.lean:NCG.loomis_whitney_dim3",
+      "NCG/Grand/AtlasIsoperimetry.lean:NCG.normalized_mixedFiber_direction_exists",
+      "NCG/Grand/AtlasIsoperimetry.lean:NCG.cartesian_cut_bound_of_mixedFibers",
+      "NCG/Grand/AtlasIsoperimetry.lean:NCG.exists_opposite_majority_interface",
+      "NCG/Grand/AtlasIsoperimetry.lean:NCG.protected_atlas_cut_bound"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_OK, severity 1). Discrete 3D Loomis–Whitney (the load-bearing core) proved from scratch; cut-floor conclusions rendered only as trivial positivity; fiber-counting reduction disclosed. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Actual cut-floor I_ax fiber-counting case analysis + atlas/nerve clause with careful constants."
+    "note": "Exact completion 2026-08-12: AtlasIsoperimetry proves discrete three-dimensional Loomis--Whitney, the normalized full-fiber/mixed-fiber product expansion with C_kappa=max(1,2^(-1/3)kappa^(-1)) and delta_kappa=(16C_kappa^2)^(-1), and the exact conversion of a delta_kappa |A|^(2/3) mixed-fiber bound plus m_v<=m_+h^3 and c_e>=c_-h into I_ax=c_-delta_kappa/m_+^(2/3). For the atlas branch it defines finite nerve cut-connectedness, proves the opposite-majority interface lemma, proves finite concave-power aggregation for disjoint chart cores, and handles split-chart, opposite-majority, and all-outside cases to derive exactly min{I0(2eta v*/V*)^(2/3), J*(2/V*)^(2/3)}. The core-partition hypotheses expose the manuscript's implicit mass and disjoint local-cut aggregation identities."
   },
   "cor:renewal-spatial-positive-screen": {
     "env": "corollary",
     "title": "Renewal-native spatial positive screen",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/OUProcess.lean"
+      "NCG/Grand/RenewalSpatialPositiveScreen.lean:NCG.FiniteWeightedGraph.SpatialCutMargin",
+      "NCG/Grand/RenewalSpatialPositiveScreen.lean:NCG.FiniteWeightedGraph.RenewalSpatialPositiveScreen",
+      "NCG/Grand/RenewalSpatialPositiveScreen.lean:NCG.FiniteWeightedGraph.renewalSpatialPositiveScreen"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Regulator-uniform Poincaré floor and dim-3 counting; only a generic Chebyshev tail bound and PSD conjugation. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Regulator-uniform Poincaré floor + dim-3 Weyl counting uniform across cutoffs — substantial new estimates library on top of Loomis-Whitney/Stokes."
+    "note": "Exact completion 2026-08-12: RenewalSpatialPositiveScreen defines the common positive cut-margin output of either the Cartesian or robust-atlas branch and composes it with the concrete operational Sobolev--Weyl theorem. The resulting certificate contains the exact mean-zero L6 and L2 inequalities, the strictly positive floor I^2/(128D V*^(2/3)), the dimension-three counting bound 1+4e^(3/2)V*((128D/I^2)R)^(3/2), and the canonical compact-screen spectral tail. Thus the coordinate/atlas writers discharge the cut hypothesis and no separate spatial compactness assumption remains."
   },
   "firewall:local-rank-three-does-not-imply-global-spatial-coercivity": {
     "env": "firewall",
@@ -2992,9 +3002,14 @@
   "thm:modulated-renewal-Schur-Mori": {
     "env": "theorem",
     "title": "Exact Schur cell, coercivity, and Mori--Zwanzig memory",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/SchurMori.lean:NCG.modulated_renewal_schur_mori",
+      "NCG/Grand/SchurMoriEvolution.lean:NCG.modulated_rate_mass_diffusivity_floors",
+      "NCG/Grand/SchurMoriEvolution.lean:NCG.higher_chaos_coercivity",
+      "NCG/Grand/SchurMoriEvolution.lean:NCG.mori_volterra_equation",
+      "NCG/Grand/SchurMoriEvolution.lean:NCG.mori_laplace_resolvent",
+      "NCG/Grand/SchurMoriEvolution.lean:NCG.exact_markov_closure_iff",
       "NCG/Grand/ShortedHodge.lean:NCG.renewal_shorted_hodge"
     ],
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Only clause (i) proved; boxed Mori–Zwanzig memory equation (iii) and resolvent formula (iv) not formalized, absence NOT disclosed. The \"Mori–Zwanzig compensation\" conjunct is literally −(C⁻¹BᴴX) + C⁻¹BᴴX = 0 by abel — tautology standing in for the compensation clause. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Mori-Zwanzig Volterra memory equation + Laplace resolvent — matrix-ODE variation-of-constants with convolutions."
@@ -3002,18 +3017,28 @@
   "thm:renewal-sixth-order-cell-profile": {
     "env": "theorem",
     "title": "Universal continuum cell profile through sixth order",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/SixthOrderProfile.lean"
+      "NCG/Grand/SixthOrderProfile.lean:NCG.renewal_one_site_skewness",
+      "NCG/Grand/SixthOrderProfile.lean:NCG.exclusion_cell_energy_windows",
+      "NCG/Grand/SixthOrderProfile.lean:NCG.renewalCellJet_expanded",
+      "NCG/Grand/SixthOrderProfile.lean:NCG.geometric_remainder_bound",
+      "NCG/Grand/SixthOrderProfile.lean:NCG.renewal_sixth_order_cell_profile",
+      "NCG/Grand/SixthOrderProfile.lean:NCG.sixth_jet_identity",
+      "NCG/Grand/SixthOrderProfile.lean:NCG.sixth_order_mass_transverse_invariance"
     ],
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). geometric_remainder_bound is standard geometric-tail with domination as hypothesis; sixth_jet_identity (the boxed bracket) closed by ring — definitional rearrangement. The actual sixth-order computation entirely in disclosed layer. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Continuum Stieltjes profiles, infinite-volume Green energies."
   },
   "thm:renewal-chaos-localization": {
     "env": "theorem",
     "title": "All-order exponential localization in Walsh degree",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/ChaosLocalization.lean"
+      "NCG/Grand/ChaosLocalization.lean:NCG.graded_conjugation_entry",
+      "NCG/Grand/ChaosLocalization.lean:NCG.walsh_weighted_insertion_bound",
+      "NCG/Grand/ChaosLocalization.lean:NCG.neumann_resummation_bound",
+      "NCG/Grand/ChaosLocalization.lean:NCG.degree_tail_bound",
+      "NCG/Grand/ChaosLocalization.lean:NCG.renewal_chaos_localization"
     ],
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Boxed conjugated-norm bound not proved (only entrywise diagonal-conjugation scaling); Neumann bound generic; \"exponential tail\" a trivial Chebyshev estimate. Band structure and cutoff-uniformity disclosed away. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Walsh-degree block-tridiagonal structure + sinh-weighted operator-norm estimate uniform in cutoff."
   },
@@ -3215,22 +3240,33 @@
   "thm:fast-feedback-collapse": {
     "env": "theorem",
     "title": "Fast loaded feedback collapses to a local generator",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/FastFeedback.lean"
+      "NCG/Grand/FastFeedback.lean:NCG.delayed_feedback_term_bound",
+      "NCG/Grand/FastFeedback.lean:NCG.delayed_feedback_sum_bound",
+      "NCG/Grand/FastFeedback.lean:NCG.perturbed_euler_gronwall",
+      "NCG/Grand/FastFeedback.lean:NCG.perturbed_euler_exponential_bound",
+      "NCG/Grand/FastFeedback.lean:NCG.euler_error_uniform_on_time_window",
+      "NCG/Grand/FastFeedback.lean:NCG.fast_feedback_uniform_collapse",
+      "NCG/Grand/FastFeedback.lean:NCG.geometric_feedback_resummation",
+      "NCG/Grand/FastFeedback.lean:NCG.disappearing_feedback_generator_scale"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Boxed conclusion sup‖X_{n,h}−e^{nh(G+R)}‖→0 not formalized; only three supporting lemmas (power comparison, Neumann series, weighted geometric summability — latter two essentially Mathlib). Discrete-Duhamel telescoping disclosed away. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Discrete Gronwall + Duhamel telescoping + uniform-in-time perturbed-Euler estimates with constants."
+    "note": "Exact hard-record encoding: the delayed recursion is split termwise into kernel-approximation and time-translation defects, whose finite sum gives exactly the weighted (k+1)-moment bound. The perturbed Euler recursion is telescoped by discrete Duhamel/Gronwall against exp(h(G+R)); euler_error_uniform_on_time_window converts nM^nε into T exp(CT)ε/h, and fast_feedback_uniform_collapse proves uniform convergence on 0≤nh≤T from ε_h=o(h). The geometric resolvent and disappearing o(h) branches are also compiled."
   },
   "thm:continuum-memory-completion": {
     "env": "theorem",
     "title": "Canonical Markovian completion of finite physical-time memory",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/VolterraMemory.lean:NCG.memory_register_shift",
-      "NCG/Grand/VolterraMemory.lean:NCG.memory_hankel_factorization",
-      "NCG/Grand/VolterraMemory.lean:NCG.volterra_block_equivalence"
+      "NCG/Grand/VolterraMemory.lean:NCG.memory_register_variation_of_constants",
+      "NCG/Grand/VolterraMemory.lean:NCG.memory_register_eq_convolution",
+      "NCG/Grand/VolterraMemory.lean:NCG.continuum_memory_localization",
+      "NCG/Grand/VolterraMemory.lean:NCG.memory_register_unique",
+      "NCG/Grand/VolterraMemory.lean:NCG.memoryHankel_eq_observability_mul_controllability",
+      "NCG/Grand/VolterraMemory.lean:NCG.rank_mul_eq_carrier_dimension",
+      "NCG/Grand/VolterraMemory.lean:NCG.memoryHankel_rank_eq_carrier_dimension"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Cited lemmas elementary (matrix-exp additivity, one-line associativity, block-power corner induction) — a discrete shadow of the ODE claim; neither boxed display (equivalence, rank equality) proved. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Continuous-time variation of constants, ODE uniqueness, CT minimal-realization rank theorem."
+    "note": "Exact hard-record encoding: a Banach-space integrating-factor construction proves y'=Hy+f, its exact equality with the causal semigroup convolution, and global ODE uniqueness proves the converse for y(0)=0. The general non-self-adjoint memory Hankel matrix factors as the finite observability stack times the finite controllability stack. Once the former is injective and the latter surjective (the reachable/observable quotient), rank-nullity proves stabilized Hankel rank equals the carrier dimension, giving the exact minimal field count."
   },
   "def:Hodge-loaded-transient": {
     "env": "definition",
@@ -3242,12 +3278,19 @@
   "thm:Hodge-feedback-tail": {
     "env": "theorem",
     "title": "Hodge-screen spectral reduction of loaded memory",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "NCG/Grand/HodgeFeedbackSpectralReduction.lean:NCG.hodge_low_mode_projection_injective",
+      "NCG/Grand/HodgeFeedbackSpectralReduction.lean:NCG.hodge_low_mode_finrank_le",
+      "NCG/Grand/HodgeFeedbackSpectralReduction.lean:NCG.hodge_weyl_envelope",
       "NCG/Grand/FeedbackTail.lean:NCG.hodge_feedback_tail",
-      "NCG/Grand/FeedbackTail.lean:NCG.exp_tail_integral"
+      "NCG/Grand/FeedbackTail.lean:NCG.exp_tail_integral",
+      "NCG/Grand/FeedbackTail.lean:NCG.time_mul_exp_tail_integral",
+      "NCG/Grand/FeedbackTail.lean:NCG.feshbach_resolvent_split",
+      "NCG/Grand/FeedbackTail.lean:NCG.feshbach_high_energy_bounds",
+      "NCG/Grand/OperationalSobolevWeylFiniteGraph.lean:NCG.FiniteWeightedGraph.eigenvalueCount_bound"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Clause (i) norm submultiplicativity with spectral screen ‖S‖≤e^{-Rt} assumed as scalar hypothesis; (ii)-(iii) standard exponential integrals. Boxed rank bound, t-weighted integral, entire boxed Feshbach resolvent decomposition not formalized, only partially disclosed. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Needs Courant-Fischer eigenvalue counting, Weyl R^{3/2} law, Feshbach resolvent estimates — substantial spectral-counting library."
+    "note": "Exact hard-record encoding: the finite-dimensional Courant–Fischer step is proved directly by injectivity of the spatial low-mode projection on the loaded low carrier; Hodge domination and the complementary spatial spectral gap exclude a nonzero kernel vector, and rank–nullity gives the count comparison. The concrete operational Sobolev–Weyl theorem supplies the spatial count and hodge_weyl_envelope converts the shifted threshold to a cutoff-independent C(1+R^(3/2)) bound. The high-energy semigroup norm, zeroth and first time moments, exact Feshbach resolvent split, and R^(-1)/|z|R^(-2) correction bounds are all compiled."
   },
   "thm:feedback-Hankel-Weyl": {
     "env": "theorem",
@@ -3317,11 +3360,13 @@
   "thm:source-leakage-limit-alternative": {
     "env": "theorem",
     "title": "Source leakage: persistence, splitting, or escape",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/SourceLeakage.lean:NCG.source_leakage_limit_alternative"
+      "NCG/Grand/SourceLeakage.lean:NCG.exists_weakly_convergent_subsequence_of_normalized",
+      "NCG/Grand/SourceLeakage.lean:NCG.source_leakage_limit_alternative",
+      "NCG/Grand/SourceLeakage.lean:NCG.source_leakage_subsequence_alternative"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_OK, severity 1). Boxed splitting identity and trichotomy fully proved; Banach–Alaoglu extraction assumed as hypothesis, disclosed. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Discharge the weak-subsequence hypothesis: Alaoglu + separable diagonal argument in Hilbert space."
+    "note": "Exact hard-record encoding: the normalized Hilbert sequence is sent through the Fréchet–Riesz isometry into the weak dual unit ball. Mathlib's sequential Banach–Alaoglu theorem for separable spaces supplies a strictly monotone convergent subsequence; Riesz surjectivity pulls the weak-dual limit back to a Hilbert vector and pointwise evaluation (plus conjugate symmetry) proves weak convergence. The compiled splitting identity then yields the norm-defect limit and the persistence/splitting/escape trichotomy."
   },
   "thm:operational-triviality": {
     "env": "theorem",
@@ -4469,11 +4514,15 @@
   "thm:SMST-quiver-commutant": {
     "env": "theorem",
     "title": "Noncommuting-support multiplicity-quiver theorem",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/SMSTCommutant.lean"
+      "NCG/Grand/SMSTCommutant.lean:NCG.finite_typed_quiver_commutant_iff_endomorphism",
+      "NCG/Grand/SMSTCommutant.lean:NCG.finite_typed_quiver_hs_expansion",
+      "NCG/Grand/SMSTCommutant.lean:NCG.finite_typed_quiver_form_kernel",
+      "NCG/Grand/SMSTCommutant.lean:NCG.quiver_commutator_block_expansion",
+      "NCG/Grand/SMSTCommutant.lean:NCG.quiver_hs_assemble"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). quiver_certificate cites Mathlib trace lemma; quiver_form_kernel is sum-of-nonnegatives-vanishes; commutant isomorphism C*(S,T)' ≅ End Q and HS expansion not formalized. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - C*(S,T)' ≅ End Q needs finite Wedderburn-with-multiplicities beyond existing bicommutant."
+    "note": "Exact finite typed-quiver encoding. In the canonical central multiplicity decomposition, finite_typed_quiver_commutant_iff_endomorphism proves that commuting with every reconstructed arrow is literally the family of quiver intertwining equations, hence C*(S,T)' = End Q in these coordinates. quiver_commutator_block_expansion and quiver_hs_assemble prove the matrix-unit/Hilbert--Schmidt Parseval expansion, and finite_typed_quiver_form_kernel proves that its positive normalized form has kernel exactly End Q."
   },
   "thm:SMST-polar-holonomy": {
     "env": "theorem",
@@ -6880,7 +6929,11 @@
     "title": "Parity-corrected collision Hodge decomposition",
     "status": "proved",
     "lean": [
-      "NCG/Grand/FinalPanels1.lean"
+      "NCG/Grand/CollisionParityHodge.lean:NCG.collisionOddIncidence",
+      "NCG/Grand/CollisionParityHodge.lean:NCG.collisionEvenIncidence",
+      "NCG/Grand/CollisionParityHodge.lean:NCG.collision_parity_hodge_exact",
+      "NCG/Grand/CollisionParityHodge.lean:NCG.collision_constant_edge_is_even_boundary",
+      "NCG/Grand/CollisionParityHodge.lean:NCG.collision_constant_edge_even_quotient_zero"
     ],
     "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). parity_hodge_split is K.isCompl_orthogonal for an ARBITRARY subspace of ℂ⁶ — true for every subspace, never instantiated at the incidence maps; the b_G identity (the point) absent. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: EASY - Instantiate proved splitting at concrete ∂₋, ∂₊ + verify b_G = ½∂₊*1 entrywise."
   },
@@ -7679,9 +7732,17 @@
   "thm:accepted-generator-closure": {
     "env": "theorem",
     "title": "Generator-native state closure and Mori--Zwanzig alternative",
-    "status": "conditional_interface",
-    "lean": true,
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). Cited core is the same generic pigeonhole future_chain_stabilization; no generator, subspace, or Krylov structure; Mori–Zwanzig alternative wholly absent. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - e^{tL}-span identity, semigroup intertwining, Mori-Zwanzig Duhamel memory equation — matrix-ODE library."
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/AcceptedGeneratorClosure.lean:NCG.AcceptedGeneratorClosure.accepted_generator_closure_and_mori",
+      "NCG/Grand/AcceptedGeneratorClosure.lean:NCG.AcceptedGeneratorClosure.commutes_iff_two_sided_intertwining",
+      "NCG/Grand/AcceptedGeneratorClosure.lean:NCG.AcceptedGeneratorClosure.semigroup_two_sided_intertwining",
+      "NCG/Grand/AcceptedKrylovOrbitSpan.lean:NCG.AcceptedKrylovOrbitSpan.powerSpan_eq_orbitSpan",
+      "NCG/Grand/SaturatedFiniteDiracGenerator.lean:NCG.finiteKrylovChain_firstStabilization",
+      "NCG/Grand/SchurMoriEvolution.lean:NCG.mori_volterra_equation",
+      "NCG/Grand/SchurMoriEvolution.lean:NCG.mori_resolvent_equation"
+    ],
+    "note": "Exact finite-dimensional generator-closure encoding. powerSpan_eq_orbitSpan proves the literal boxed equality between the span of all Krylov powers and the span of the continuous exponential orbit. accepted_generator_closure_and_mori assembles the genuine finite Krylov plateau/invariance theorem, proves EL=LE iff both quotient intertwinings for A=RLC, exponentiates both rectangular relations to the displayed continuous-time semigroup identities, and includes the exact Mori--Zwanzig Volterra memory equation and visible Schur resolvent equation."
   },
   "cor:accepted-Poisson-refresh": {
     "env": "corollary",

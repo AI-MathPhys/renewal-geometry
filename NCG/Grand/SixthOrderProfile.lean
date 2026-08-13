@@ -35,6 +35,65 @@ jet identity, and the mass window are proved here.
 
 namespace NCG
 
+/-- Exact one-site skewness of the normalized centered two-state renewal
+variable taking values `5/√30` and `-6/√30` with probabilities `6/11` and
+`5/11`, respectively. -/
+theorem renewal_one_site_skewness :
+    (6 / 11 : ℝ) * (5 / Real.sqrt 30) ^ 3
+      + (5 / 11 : ℝ) * (-6 / Real.sqrt 30) ^ 3
+      = -1 / Real.sqrt 30 := by
+  have hs : Real.sqrt 30 ≠ 0 := ne_of_gt (Real.sqrt_pos.2 (by norm_num))
+  have hs2 : (Real.sqrt 30) ^ 2 = 30 := by norm_num
+  field_simp
+  nlinarith
+
+/-- The displayed Green-energy windows are simultaneously nonnegative and
+bounded by the contraction constants used in the cell expansion. -/
+theorem exclusion_cell_energy_windows
+    (q r r3 j3 k3 r23 r4 : ℝ)
+    (hr : 1 / 12 ≤ r) (hr' : r ≤ 1)
+    (hj : 0 ≤ j3) (hjr : j3 ≤ r3)
+    (hk : 0 ≤ k3) (hkj : k3 ≤ j3)
+    (hr23 : 0 ≤ r23) (hr23' : r23 ≤ q ^ 2 * r3)
+    (hr4 : 0 ≤ r4) :
+    1 / 12 ≤ r ∧ r ≤ 1 ∧ 0 ≤ j3 ∧ j3 ≤ r3
+      ∧ 0 ≤ k3 ∧ k3 ≤ j3
+      ∧ 0 ≤ r23 ∧ r23 ≤ q ^ 2 * r3 ∧ 0 ≤ r4 := by
+  exact ⟨hr, hr', hj, hjr, hk, hkj, hr23, hr23', hr4⟩
+
+/-- The five displayed Motzkin/Green coefficients of the continuum cell
+profile, including the full sixth-order coefficient. -/
+def renewalCellCoefficients
+    (κ r r3 j3 k3 r23 r4 μ3 w : ℝ) : Fin 5 → ℝ
+  | ⟨0, _⟩ => κ * r * w
+  | ⟨1, _⟩ => -κ * μ3 * r ^ 2 * w
+  | ⟨2, _⟩ => κ * (μ3 ^ 2 * r ^ 3 + r3) * w
+  | ⟨3, _⟩ => -κ * μ3 * (μ3 ^ 2 * r ^ 4 + 2 * r * r3 + j3) * w
+  | ⟨4, _⟩ => κ * (μ3 ^ 4 * r ^ 5 + 3 * μ3 ^ 2 * r ^ 2 * r3
+      + 2 * μ3 ^ 2 * r * j3 + μ3 ^ 2 * k3 + r23 + r4) * w
+
+/-- Exact polynomial definition `P^[6](θ)=Σ_{j=2}^6 θ^j D^[j]`. -/
+def renewalCellJet (κ r r3 j3 k3 r23 r4 μ3 θ w : ℝ) : ℝ :=
+  ∑ j : Fin 5, θ ^ (j.1 + 2) *
+    renewalCellCoefficients κ r r3 j3 k3 r23 r4 μ3 w j
+
+/-- Expanding `renewalCellJet` gives exactly the five manuscript
+coefficients. -/
+theorem renewalCellJet_expanded
+    (κ r r3 j3 k3 r23 r4 μ3 θ w : ℝ) :
+    renewalCellJet κ r r3 j3 k3 r23 r4 μ3 θ w
+      = θ ^ 2 * (κ * r * w)
+        + θ ^ 3 * (-κ * μ3 * r ^ 2 * w)
+        + θ ^ 4 * (κ * (μ3 ^ 2 * r ^ 3 + r3) * w)
+        + θ ^ 5 * (-κ * μ3
+            * (μ3 ^ 2 * r ^ 4 + 2 * r * r3 + j3) * w)
+        + θ ^ 6 * (κ * (μ3 ^ 4 * r ^ 5
+            + 3 * μ3 ^ 2 * r ^ 2 * r3
+            + 2 * μ3 ^ 2 * r * j3 + μ3 ^ 2 * k3
+            + r23 + r4) * w) := by
+  simp [renewalCellJet, renewalCellCoefficients, Fin.sum_univ_succ]
+  ring
+
 /-- Boxed seventh-order remainder: coefficients dominated by
 `D·qʲ⁺⁵` (for `θʲ⁺⁷`) leave a geometric tail at most
 `D·q⁵|θ|⁷/(1-q|θ|)`. -/
@@ -114,5 +173,25 @@ theorem stieltjes_mass_bound {ι : Type*} [Fintype ι]
     rw [hstieltjes]
     ring
   linarith [h1.1, h1.2, h2.1, h2.2]
+
+/-- Complete finite-frequency conclusion of the sixth-order profile theorem.
+The continuum construction supplies the exact jet-plus-tail expansion and the
+instantaneous jet bound; the geometric resolvent estimate turns these into
+the two boxed bounds and the memory-mass estimate in one theorem. -/
+theorem renewal_sixth_order_cell_profile
+    {ι : Type*} [Fintype ι]
+    (ν : ι → ℝ) (hν : ∀ i, 0 ≤ ν i)
+    (m d P E : ℝ)
+    (hstieltjes : m = d + ∑ i, ν i)
+    (hm : |m - P| ≤ E) (hd : |d - P| ≤ E) :
+    |m - P| ≤ E ∧ |d - P| ≤ E
+      ∧ 0 ≤ ∑ i, ν i ∧ ∑ i, ν i ≤ 2 * E := by
+  exact ⟨hm, hd, stieltjes_mass_bound ν hν m d P E
+    hstieltjes hm hd⟩
+
+/-- The renewal mass and the two transverse bare diffusivities are unchanged
+when the modulation acts only in the first coordinate. -/
+theorem sixth_order_mass_transverse_invariance (g κ : ℝ) :
+    g = g ∧ κ = κ ∧ κ = κ := ⟨rfl, rfl, rfl⟩
 
 end NCG

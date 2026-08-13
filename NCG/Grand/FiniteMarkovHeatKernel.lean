@@ -103,6 +103,21 @@ theorem RowStochastic.pow
       rw [pow_succ]
       exact (hA.pow n).mul hA
 
+/-- Powers preserve an eigenvector, with the corresponding scalar power. -/
+theorem pow_mulVec_eigenvector
+    {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (A : Matrix ι ι ℝ) (f : ι → ℝ) (q : ℝ)
+    (hf : Matrix.mulVec A f = q • f) :
+    ∀ n : ℕ, Matrix.mulVec (A ^ n) f = q ^ n • f
+  | 0 => by simp
+  | n + 1 => by
+      rw [pow_succ, ← Matrix.mulVec_mulVec, hf, Matrix.mulVec_smul,
+        pow_mulVec_eigenvector A f q hf n]
+      ext i
+      simp only [Pi.smul_apply, smul_eq_mul]
+      rw [pow_succ]
+      ring
+
 /-- Reversibility with respect to a positive weight. -/
 def DetailedBalance {ι : Type*} (μ : ι → ℝ) (A : Matrix ι ι ℝ) : Prop :=
   ∀ i j, μ i * A i j = μ j * A j i
@@ -220,6 +235,98 @@ theorem exponentialEntry_smul_rowSum
   apply tsum_congr
   intro n
   simp only [smul_eq_mul]
+
+/-- The coordinatewise exponential series acts on an eigenvector by the scalar
+exponential.  Stochasticity supplies the uniform absolute-convergence bound
+needed to exchange the finite vertex sum with the power series. -/
+theorem exponentialEntry_smul_mulVec_eigenvector
+    {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (K : Matrix ι ι ℝ) (hK : RowStochastic K)
+    (f : ι → ℝ) (q s : ℝ) (hs : 0 ≤ s)
+    (hf : Matrix.mulVec K f = q • f) :
+    Matrix.mulVec (exponentialEntry (s • K)) f = Real.exp (s * q) • f := by
+  ext i
+  unfold Matrix.mulVec exponentialEntry
+  have hsummable (j : ι) : Summable (fun n : ℕ =>
+      ((1 / n.factorial : ℝ) * ((s • K) ^ n) i j) * f j) := by
+    have hbound (n : ℕ) :
+        ‖((1 / n.factorial : ℝ) * ((s • K) ^ n) i j) * f j‖ ≤
+        ‖f j‖ * (s ^ n / n.factorial) := by
+      rw [smul_pow]
+      change ‖((1 / n.factorial : ℝ) * (s ^ n * (K ^ n) i j)) * f j‖ ≤
+        ‖f j‖ * (s ^ n / n.factorial)
+      have hentry := (hK.pow n).1 i j
+      have hle : (K ^ n) i j ≤ 1 := by
+        have hrow := (hK.pow n).2 i
+        nlinarith [Finset.single_le_sum (fun k _ => (hK.pow n).1 i k)
+          (Finset.mem_univ j)]
+      rw [norm_mul, norm_mul, Real.norm_eq_abs, Real.norm_eq_abs,
+        abs_div, abs_one, abs_of_nonneg (Nat.cast_nonneg _), abs_mul,
+        abs_pow, abs_of_nonneg hs, abs_of_nonneg hentry]
+      have hcoef : 0 ≤ s ^ n / (n.factorial : ℝ) := by positivity
+      rw [mul_comm]
+      have : (1 / (n.factorial : ℝ)) * (s ^ n * (K ^ n) i j) =
+          (s ^ n / n.factorial) * (K ^ n) i j := by ring
+      rw [this]
+      have hinner : (s ^ n / n.factorial) * (K ^ n) i j ≤
+          (s ^ n / n.factorial) := by
+        simpa using (mul_le_mul_of_nonneg_left hle hcoef :
+          (s ^ n / n.factorial) * (K ^ n) i j ≤
+            (s ^ n / n.factorial) * 1)
+      exact mul_le_mul_of_nonneg_left hinner (norm_nonneg _)
+    exact Summable.of_norm_bounded
+      ((Real.summable_pow_div_factorial s).mul_left ‖f j‖) hbound
+  change (∑ j, (∑' n : ℕ,
+      (1 / n.factorial : ℝ) * ((s • K) ^ n) i j) * f j) =
+        Real.exp (s * q) * f i
+  have htsum (j : ι) :
+      (∑' n : ℕ, (1 / n.factorial : ℝ) * ((s • K) ^ n) i j) * f j =
+        ∑' n : ℕ, ((1 / n.factorial : ℝ) * ((s • K) ^ n) i j) * f j := by
+    exact (tsum_mul_right).symm
+  simp_rw [htsum]
+  have hinterchange :
+      (∑ j, ∑' n : ℕ,
+          ((1 / n.factorial : ℝ) * ((s • K) ^ n) i j) * f j) =
+        ∑' n : ℕ, ∑ j,
+          ((1 / n.factorial : ℝ) * ((s • K) ^ n) i j) * f j := by
+    exact (Summable.tsum_finsetSum (fun j _ => hsummable j)).symm
+  rw [hinterchange]
+  have hpow (n : ℕ) :
+      Matrix.mulVec ((s • K) ^ n) f = (s * q) ^ n • f := by
+    rw [smul_pow, Matrix.smul_mulVec,
+      pow_mulVec_eigenvector K f q hf n]
+    ext v
+    simp only [Pi.smul_apply, smul_eq_mul]
+    rw [mul_pow]
+    ring
+  calc
+    (∑' n : ℕ, ∑ j,
+        ((1 / n.factorial : ℝ) * ((s • K) ^ n) i j) * f j) =
+        ∑' n : ℕ, (1 / n.factorial : ℝ) * (s * q) ^ n * f i := by
+          apply tsum_congr
+          intro n
+          have hn := congrFun (hpow n) i
+          simp only [Matrix.mulVec, Pi.smul_apply, smul_eq_mul] at hn
+          calc
+            (∑ j, (1 / ↑n.factorial * ((s • K) ^ n) i j) * f j) =
+                (1 / ↑n.factorial) * ∑ j, ((s • K) ^ n) i j * f j := by
+                  rw [Finset.mul_sum]
+                  apply Finset.sum_congr rfl
+                  intro j _
+                  ring
+            _ = (1 / ↑n.factorial) * ((s * q) ^ n * f i) := by
+                  have hn' : (∑ j, ((s • K) ^ n) i j * f j) =
+                      (s * q) ^ n * f i := hn
+                  rw [hn']
+            _ = (1 / ↑n.factorial) * (s * q) ^ n * f i := by ring
+    _ = (∑' n : ℕ, (1 / n.factorial : ℝ) * (s * q) ^ n) * f i := by
+          rw [tsum_mul_right]
+    _ = Real.exp (s * q) * f i := by
+          rw [Real.exp_eq_exp_ℝ, congrFun (NormedSpace.exp_eq_tsum ℝ) (s * q)]
+          congr 1
+          apply tsum_congr
+          intro n
+          simp only [smul_eq_mul, one_div]
 
 /-- Uniformization: `exp(t(K-I))` is row-stochastic for every stochastic
 matrix `K` and nonnegative time `t`. -/
