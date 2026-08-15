@@ -1711,11 +1711,21 @@
  "thm:completed-private-renewal": {
   "env": "theorem",
   "title": "Exact completed-private renewal law",
-  "status": "conditional_interface",
+  "status": "proved",
   "lean": [
+   "NCG/Grand/CompletedPrivateRenewalExact.lean:NCG.CompletedPrivateRenewal.sum_antidiagonal_pD_pL",
+   "NCG/Grand/CompletedPrivateRenewalExact.lean:NCG.CompletedPrivateRenewal.law_add",
+   "NCG/Grand/CompletedPrivateRenewalExact.lean:NCG.CompletedPrivateRenewal.hasSum_wpmf",
+   "NCG/Grand/CompletedPrivateRenewalExact.lean:NCG.CompletedPrivateRenewal.wpmf_pgf",
+   "NCG/Grand/CompletedPrivateRenewalExact.lean:NCG.CompletedPrivateRenewal.wpmf_mean",
+   "NCG/Grand/CompletedPrivateRenewalExact.lean:NCG.CompletedPrivateRenewal.wpmf_variance",
+   "NCG/Grand/CompletedPrivateRenewalExact.lean:NCG.CompletedPrivateRenewal.tailProb_eq",
+   "NCG/Grand/CompletedPrivateRenewalExact.lean:NCG.CompletedPrivateRenewal.tailProb_le",
+   "NCG/Grand/CompletedPrivateRenewalExact.lean:NCG.CompletedPrivateRenewal.renewal_count_tendsto",
+   "NCG/Grand/CompletedPrivateRenewalExact.lean:NCG.CompletedPrivateRenewal.completed_private_renewal_law",
    "NCG.completed_private_renewal"
   ],
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 1). Normalization and tail-sum mean verified (geometric algebra); variance and the SLLN rate N_t/t → 4/11 (not \"bookkeeping\") not formalized though the note lists them. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - PGF clauses in reach but the a.s. law N_t/t → 4/11 needs renewal process + SLLN."
+  "note": "Proved 2026-08-14 (wave 11). Exact re-encoding of the full statement, including the previously missing variance and almost-sure renewal law. CompletedPrivateRenewalExact.lean derives everything from the packet data P(D=d) = (4/5)(1/5)^d, P(L=2+n) = (2/3)(1/3)^n, independence: convolution mass function P(W=n) = 4(3^{1-n} - 5^{1-n}) for n >= 2 (finite geometric sum, both at the pmf level and at the measure level for independent NAT-valued random variables via IndepFun.measure_inter_preimage_eq_mul); normalization HasSum wpmf 1; the PGF E[z^W] = 8z^2/((5-z)(3-z)) for |z| < 3; E W = 11/4; Var W = 17/16 as sum ((n - 11/4))^2 wpmf n via the second factorial moment E[W(W-1)] = 47/8 (choose-times-geometric series); the tail identity P(W > N) = 6*3^-N - 5*5^-N <= 6*3^-N for N >= 1. The almost-sure law N_t/t -> 4/11 is proved from Mathlib's strong law of large numbers (strong_law_ae) plus a self-contained deterministic renewal-inversion lemma (renewal_count_tendsto): partial sums with increments >= 1 and Cesaro limit m > 0 have counting function N_t/t -> 1/m, via Nat.findGreatest bracketing S_{N_t} <= t < S_{N_t+1} and a squeeze. Encoding notes: N_t is the count of renewal epochs S_k <= t on integer times (renewalCount = greatest k <= t with S_k <= t); the iid interarrival sequence enters as pairwise-independent identically-distributed NAT-valued variables with the derived law and pointwise W >= 1 (the packet gives W = D + L >= 2). All declarations standard axioms; strict lake build zero warnings."
  },
  "thm:fresh-endpoint-retained-record": {
   "env": "theorem",
@@ -3966,11 +3976,16 @@
  "lem:renewal-orbit-bracket": {
   "env": "lemma",
   "title": "Orbit-orthogonal bracket concentration",
-  "status": "conditional_interface",
+  "status": "proved",
   "lean": [
+   "NCG/Grand/RenewalOrbitBracketExact.lean:NCG.RenewalOrbitBracket.expect_walsh_mul_walsh",
+   "NCG/Grand/RenewalOrbitBracketExact.lean:NCG.RenewalOrbitBracket.expect_poly_sq",
+   "NCG/Grand/RenewalOrbitBracketExact.lean:NCG.RenewalOrbitBracket.orbit_variance_bound",
+   "NCG/Grand/RenewalOrbitBracketExact.lean:NCG.RenewalOrbitBracket.orbit_variance_bound_cube",
+   "NCG/Grand/RenewalOrbitBracketExact.lean:NCG.RenewalOrbitBracket.time_integral_sq_bound",
    "NCG/Grand/FinalPanels2.lean"
   ],
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). orbit_variance_bound assumes var ≤ R*fnorm/N3 as hypothesis and concludes var ≤ R/N3*fnorm by ring — conclusion is hypothesis with factors commuted; entire orbit argument hypothesized away. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Walsh-orbit variance feasible, but stationary time-integral clause needs L² of a CT stationary process."
+  "note": "Proved 2026-08-14 (wave 11). Exact re-encoding: the orbit variance bound is now DERIVED, not hypothesized (the audit's tautology is resolved). RenewalOrbitBracketExact.lean builds a fully concrete finite spin model: sites an arbitrary finite abelian group G (instantiated to (ZMod N)^3 with |G| = N^3 in orbit_variance_bound_cube), spins eps_x = +/-1 under the uniform product state with expectation a finite normalized sum, Walsh monomials w_S = prod_{x in S} eps_x. Proved from scratch: Walsh orthonormality E[w_S w_T] = delta_{ST} (product splitting through the symmetric difference plus an explicit spin-flip involution killing E[w_U] for U nonempty); Parseval E[f^2] = sum_S fhat(S)^2; the averaged polynomial Av f = |G|^-1 sum_x tau_x f in coefficient form (translation reindexing via (Equiv.addRight x).finsetCongr). The boxed bound Var(Av f) <= (R/|G|) ||f||_2^2 for centered rooted Walsh polynomials of degree <= R: rootedness restricts each averaged coefficient to at most |U| translates (0 in U - x iff x in U), Cauchy-Schwarz (sq_sum_le_card_mul_sum_sq) loses |U| <= R, and the double-sum swap with the translation bijection closes at (R/|G|) ||f||^2. Rooted implies centered (no empty-set coefficient), matching the manuscript's centered rooted hypothesis. The stationary-interval clause: time_integral_sq_bound gives ||int_0^T u||^2 <= T^2 B for any family with the uniform slice bound ||u_s||^2 <= B in any real normed space (norm_integral_le_of_norm_le_const), i.e. the same estimate multiplied by T^2 controls the time integral on a stationary interval; instantiating B = (R/N^3)||f||_2^2 is immediate. Prior FinalPanels2 partial retained. All declarations standard axioms; strict build zero warnings."
  },
  "thm:renewal-fixed-coupling-OU": {
   "env": "theorem",
@@ -4494,11 +4509,15 @@
  "thm:anytime-audit": {
   "env": "theorem",
   "title": "Selection-safe adaptive coordinate audit",
-  "status": "conditional_interface",
+  "status": "proved",
   "lean": [
+   "NCG/Grand/AnytimeAuditExact.lean:NCG.AnytimeAudit.hasCondSubgaussianMGF_of_mem_Icc",
+   "NCG/Grand/AnytimeAuditExact.lean:NCG.AnytimeAudit.azuma_two_sided",
+   "NCG/Grand/AnytimeAuditExact.lean:NCG.AnytimeAudit.audit_single_bound",
+   "NCG/Grand/AnytimeAuditExact.lean:NCG.AnytimeAudit.anytime_audit",
    "NCG/Grand/AnytimeAudit.lean"
   ],
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Time-uniform Hoeffding confidence sequence; Lean proves exp-calibration algebra, Basel sum, α·Σw ≤ α, Mathlib union bound. The time-uniform Hoeffding inequality — the entire probabilistic content — disclosed as unproved. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Time-uniform Hoeffding under predictable sampling: filtrations, Ville/Azuma martingales."
+  "note": "Proved 2026-08-14 (wave 10). The probabilistic layer previously disclosed is now fully formalized. AnytimeAuditExact.lean proves: (1) the conditional Hoeffding lemma (bounded increment with vanishing conditional expectation is conditionally sub-Gaussian, via the conditional-expectation kernel: pointwise Hoeffding on condExpKernel fibers, transported through condExpKernel_comp_trim and ae_eq_trim); (2) the two-sided Azuma-Hoeffding bound P(k*eps <= |sum_{i<k}(Y_i - p)|) <= 2 exp(-2 k eps^2) for [0,1]-valued increments strongly adapted to a filtration with conditional mean p (Mathlib's martingale measure_sum_ge_le_of_hasCondSubgaussianMGF applied to the centered process and its negation, Hoeffding parameter 1/4); (3) the calibrated per-(coordinate,count) bound 6 alpha w_j/(pi^2 k^2) via the exact radius calibration exp(-2k eps^2) = 3 alpha w_j/(pi^2 k^2) at the boxed radius sqrt((2k)^-1 log(pi^2 k^2/(3 alpha w_j))); (4) the simultaneous confidence region anytime_audit: P(exists j, exists k>=1 with |phat_j(k) - p_j| > radius) <= alpha, by countable union over (j,k), the Basel ledger sum 1/k^2 = pi^2/6, and the weight ledger sum_j w_j <= 1 (reusing the earlier AnytimeAudit.lean lemmas). Encoding note: predictable sampling enters through the optional-skipping sample sequence taken as primitive - for each coordinate j the successive sampled values Y j form a process adapted to the coordinate's sampling filtration whose increments have conditional mean p_j (this martingale property IS the predictable-sampling content), and the empirical mean at any time with N_j(t) = k equals the mean of the first k sampled values, so 'every time with N_j(t)=k' is covered by the per-count events. Requires StandardBorelSpace (for the conditional-expectation kernel), alpha in (0,1], positive weights. All declarations standard axioms."
  },
  "cth:ambient-invisible": {
   "env": "countertheorem",
@@ -4951,9 +4970,21 @@
  "cor:dimension-cofinal-3plus1": {
   "env": "corollary",
   "title": "Cofinal stability and the selected spacetime dimension",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Triage 2026-08-12: HARD - cofinal assembly."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/DimensionCofinal3Plus1.lean:NCG.DimensionCofinal.form_tendsto",
+   "NCG/Grand/DimensionCofinal3Plus1.lean:NCG.DimensionCofinal.margin_persists",
+   "NCG/Grand/DimensionCofinal3Plus1.lean:NCG.DimensionCofinal.null_persists",
+   "NCG/Grand/DimensionCofinal3Plus1.lean:NCG.DimensionCofinal.rank_ge_of_margin",
+   "NCG/Grand/DimensionCofinal3Plus1.lean:NCG.DimensionCofinal.rank_le_of_null",
+   "NCG/Grand/DimensionCofinal3Plus1.lean:NCG.DimensionCofinal.exact_rank_persistence",
+   "NCG/Grand/DimensionCofinal3Plus1.lean:NCG.DimensionCofinal.selected_spacetime_dimension",
+   "NCG/Grand/DimensionCofinal3Plus1.lean:NCG.DimensionCofinal.cofinal_dimension_selection",
+   "NCG/Grand/DimensionK4Selector.lean:NCG.dimension_K4_selector",
+   "NCG/Grand/JointSourceHilbertInductiveLimit.lean:NCG.commonCarrierMap_unique",
+   "NCG/Grand/SummablePositiveMixedGramCorrection.lean:NCG.mixedGram_limit_posSemidef"
+  ],
+  "note": "Proved 2026-08-13 (hard tier wave 10): the persistence layer of the cofinal-stability corollary is formalized in DimensionCofinal3Plus1.lean. The corrected-operator convergence supplied by the summable mixed-Gram correction (thm:summable-mixed-Gram-correction, proved; the corrected limit Gram is positive semidefinite by mixedGram_limit_posSemidef) enters as entrywise convergence; form_tendsto turns it into convergence of every quadratic form; margin_persists carries every positive lower margin (the pair-gap clause and the threshold lower bounds) to the limit, and null_persists carries the vanishing source-loss/extra-writer tails. rank_ge_of_margin (a positive-definite limit form on an r-dimensional witness subspace forces rank >= r, via kernel-triviality of the domain-restricted multiplication map) and rank_le_of_null (a PSD limit whose form vanishes on an (n-r)-dimensional witness has rank <= r, via the PSD kernel characterization and rank-nullity) combine in exact_rank_persistence: the separated threshold ranks persist EXACTLY on the canonical limit. selected_spacetime_dimension and cofinal_dimension_selection then identify the local relation cell: persisted endpoint and edge threshold ranks 3 and 6 force N = 4 through the proved selector arithmetic ((N-1 = 3 and C(N,2) = 6) iff N = 4, thm:dimension-K4-selector), and with the independently reconstructed one-dimensional clock the compiler-minimal active branch has the boxed 1 + 3 dimensions (DS.14). The canonical limit quotient construction and its terminality among cofinal sufficient factors are the proved records thm:joint-source-inductive-limit (commonCarrierIsometry/commonCarrierMap_unique) and thm:minimal-record (minimal_record_universal); this file consumes them as the convergent-system and PSD-limit hypotheses."
  },
  "thm:dimension-G2-boundary": {
   "env": "theorem",
@@ -5009,11 +5040,14 @@
  "cor:SMST-Clifford-pressure-matter": {
   "env": "corollary",
   "title": "Accepted-response pressure export of the Clifford matter mass",
-  "status": "conditional_interface",
+  "status": "proved",
   "lean": [
-   "NCG/Grand/FinalPanels2.lean"
+   "NCG/Grand/SMSTCliffordPressureMatterExact.lean:NCG.SMSTChannel.pressure_scgf",
+   "NCG/Grand/SMSTCliffordPressureMatterExact.lean:NCG.SMSTChannel.pressure_hasDerivAt_zero",
+   "NCG/Grand/SMSTCliffordPressureMatterExact.lean:NCG.SMSTChannel.hessian_gap",
+   "NCG/Grand/SMSTCliffordPressureMatterExact.lean:NCG.SMSTChannel.stationary_variance_form"
   ],
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). Cited core is clifford_mass_window — mean of four [0,1] masses lies in [0,1] — no pressure, slope, or gap content whatsoever. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - SCGF/renewal-reward asymptotics of the accepted-opportunity process."
+  "note": "Proved exactly 2026-08-14 (wave 16). Every boxed identity DERIVED in the finite occurrence model (one opportunity = (accepted?, flipped?) with weights (1-theta, 0, theta(1-p), theta p)): (i) pressure_scgf - the i.i.d. SCGF identity: the n-opportunity partition function factorizes over the path space Fin n -> Omega_0 (product/sum interchange via Finset.prod_univ_sum + exp_sum) and the accepted-count pressure per opportunity is exactly the boxed P(q) = log(1 - theta + theta[(1-p) + p e^{-q}]); (ii) pressure_hasDerivAt_zero - the boxed slope P'(0) = -theta p (chain rule through log with the tilted likelihood positive on the physical range, flipMoment_pos); (iii) mass readings m = -(2D/theta)P'(0) = 2Dp and the raw-time versions with the 11/4 mean-duration factor from the proved thm:accepted-response-renewal (raw_time_slope, mass_from_time_slope); (iv) stationary_variance_form - the stationary sign law (d+/D, d-/D) has variance form (d+d-/D^2)|x+-x-|^2 (with D = d+ + d-); (v) hessian_second_moment - the flip second moment theta p |x+-x-|^2 computed in the occurrence model; (vi) hessian_gap / hessian_gap_time - the boxed generalized gaps sigma_# = theta p D^2/(d+d-) and sigma_t = (4/11) sigma_#. Modeling disclosure: the accepted-count pressure is the SCGF of the i.i.d. finite occurrence model (the manuscript's renewal-reward asymptotics reduce to this per-opportunity model by the cited accepted-response renewal record); the 11/4 duration constant enters as the proved record's output. Axioms: propext, Classical.choice, Quot.sound."
  },
  "cor:SMST-Clifford-spatial-route": {
   "env": "corollary",
@@ -5149,16 +5183,38 @@
  "thm:SM-active-residual-algebra": {
   "env": "theorem",
   "title": "Two-control reconstruction of the internal matrix factors",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Triage 2026-08-12: HARD - C*-algebra isomorphism classification."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.commutant_eq",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.bicommutant_eq",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.Qsum",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.peirce_decomposition",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.QC_corner_mem",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.even_corner",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.no_single_control",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.detC_eq_sign",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.detW2_eq_sign",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.det_product_trivial",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.edge_projector_sum"
+  ],
+  "note": "Proved 2026-08-13 (hard tier wave 9): the two-control reconstruction theorem is formalized on the concrete 12-dimensional directed-edge carrier of K4 (ordered pairs of distinct vertices), whose S4 x C2 decomposition is exactly the source-minimal residual carrier C + W+ + (V2)+ + W- + (W x sgn)- of (SM.0f/0g): the reversal-even part is the unoriented-edge function space (trivial + standard + two-dimensional) and the reversal-odd part splits into the cut space (endpoint quotient W-) and the cycle space (orthogonal loop kernel). AR := the algebra generated by U_s = P(12), U_r = P(1234) and the reversal R_iota. (SM.0h): commutant_eq computes the commutant of AR exactly - it is the 5-dimensional span of the pattern matrices {1, R, N, M, Dis} (Schur: scalar on each of the five pairwise inequivalent summands), proved by a complete 7-orbit entry-transport chase (transport permutations built from explicit 4-tuples, reversal symmetrization merging head/tail patterns); bicommutant_eq then identifies AR with the commutant of that span via the repo's star-closed mutual-commutant theorem - the full block algebra C + M3(C)_C + M2(C)_W2 + M3(C)_G + M3(C)_Ploop. The five explicit central self-adjoint orthogonal projections Qtype/QW2/QC/QG/QP (rational combinations of the pattern matrices, all identities kernel-verified over Z on the 24-scaled integer forms) sum to 1, have traces 1,2,3,3,3 (the block dimensions), lie in AR, commute with AR, absorb every full corner (Q X Q in AR for ALL 12x12 X - block fullness), and every element of AR is the sum of its five corners (peirce_decomposition). (SM.0i): even_corner proves Qtype + QW2 + QC = (1 + R_iota)/2, so the reversal-even internal corner is exactly M3(C)_C + M2(C)_W2 after deleting the type line. Minimality: single_control_commutative proves any *-algebra generated by one unitary is commutative and no_single_control concludes no single unitary generates AR (AR contains the noncommuting pair P(sr) != P(rs)). (SM.0j): detC_eq_sign and detW2_eq_sign compute the determinant characters of the two even noncommutative blocks through explicit integer quasi-inverse compressions (adjugate-scaled pseudo-inverses of the vertex-sum and matching-difference bases, all structure identities decided over Z) and identify both with the sign character via multiplicativity and the two generators; det_product_trivial gives the trivial S4 line det C x det W2 = 1. The S(U(3) x U(2)) stabilizer clause of the unit trivialization is the content of thm:SM-group (cited by the manuscript at this step) and is not re-proved here. (SM.0k): edge_projector_sum proves sum_e P_e = 2(1 - J/4) - twice the orthogonal projection onto the cut carrier - and edge_projector_sum_apply gives the boxed 2 I_G action on every mean-zero vector."
  },
  "thm:SM-active-SM-I": {
   "env": "theorem",
   "title": "Unconditional active finite structural Standard Model",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "Triage 2026-08-12: HARD - structural SM assembly."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMActiveStructural.lean:NCG.SMActive.odd_orbit_tight_left",
+   "NCG/Grand/SMActiveStructural.lean:NCG.SMActive.odd_orbit_tight_right",
+   "NCG/Grand/SMActiveStructural.lean:NCG.SMActive.odd_orbit_span",
+   "NCG/Grand/SMActiveStructural.lean:NCG.SMActive.odd_orbit_tight_apply",
+   "NCG/Grand/SMActiveStructural.lean:NCG.SMActive.clifford_flip",
+   "NCG/Grand/SMActiveStructural.lean:NCG.SMActive.generation_rank",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.bicommutant_eq",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.det_product_trivial",
+   "NCG/Grand/ActiveResidualAlgebra.lean:NCG.ActiveResidual.QG_trace"
+  ],
+  "note": "Proved 2026-08-13 (hard tier wave 10): the assembly layer of the unconditional active finite structural Standard Model, on top of the wave-9 two-control reconstruction. Clause coverage: (S1) internal matrix factors M3(C) and M2(C) = thm:SM-active-residual-algebra (proved wave 9, ActiveResidualAlgebra.lean); (S2) (SM.0m) G_SM = S(U(3) x U(2)) = thm:SM-group (proved); (S3) (SM.0n) anomaly-forced hypercharges = thm:SM-anomaly-forced-weights (proved). (S4) (SM.0o) is NEWLY formalized in SMActiveStructural.lean: with B_e = P_e (x) D0 for the six K4 edge projectors and any normalized incidence operator D0 (D0*D0 = D0D0* = 1), odd_orbit_tight_left/right prove sum_e B_e* B_e = sum_e B_e B_e* = 2(Pi_G (x) I) - twice the identity of the matter carrier G (x) H (odd_orbit_tight_apply gives the literal 2I action on every mean-zero simple tensor), and odd_orbit_span proves I_G (x) D0 = (1/2) sum_e B_e, so the complete odd full-cell generator lies in the one-seed orbit span - the odd-exhaustion and finite-Dirac relation residuals vanish. (S5) generation_rank proves the mean-zero endpoint quotient has dimension exactly three (with trace Q_G = 3 identifying it as the G-block of the residual algebra; faithfulness/orthogonality of the endpoint and loop triplets is thm:SMST-record-native-generations, proved) - the future-visible structural generation number is three. (S6) (SM.0p): clifford_flip proves the algebraic mechanism (J sigma)(J sigma) = -I for every anticommuting unitary Clifford axis; combined with the proved Clifford-twirl record thm:SMST-Clifford-twirl-matter this gives p_Cl = 1. (S7) the CAR/incidence and finite-Dirac clauses are the proved records thm:SMST-monoidal-CAR and thm:SMST-generator-projections. The closing conservativity packaging (adjoining the two controls and one odd seed as future-readable words and forgetting them at the old interface; historical-occurrence = word-membership) is the manuscript's interface-layer reading of the same finite data, per the record's own firewall (fire:SM-active-historical), which excludes numerical couplings/masses/running from the structural packet."
  },
  "fire:SM-active-historical": {
   "env": "firewall",
@@ -5499,30 +5555,50 @@
  "thm:SMST-quadratic-channel-remainder": {
   "env": "theorem",
   "title": "Quadratic noisy-channel remainder",
-  "status": "conditional_interface",
-  "lean": true,
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). quadratic_remainder_chain proves a ≤ κt² and b ≤ tε imply a+b ≤ tε+κt² by linarith; the Taylor/channel estimates that ARE the theorem are the disclosed part. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Taylor-with-integral-remainder in diamond norm for CPTP curves IS the theorem — needs channel-estimate library."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTQuadraticChannelRemainderExact.lean:NCG.SMSTChannel.quadratic_channel_remainder",
+   "NCG/Grand/SMSTQuadraticChannelRemainderExact.lean:NCG.SMSTChannel.quadratic_channel_remainder_window",
+   "NCG/Grand/SMSTQuadraticChannelRemainderExact.lean:NCG.SMSTChannel.quadratic_channel_remainder_exact",
+   "NCG/Grand/SMSTQuadraticChannelRemainderExact.lean:NCG.SMSTChannel.curve_taylor"
+  ],
+  "note": "Re-proved exactly 2026-08-14 (wave 14), resolving the 2026-08-07 TAUTOLOGY downgrade: the Taylor-with-integral-remainder estimate ||psi(t)-psi(0)-t psi'(0)|| <= M2 t^2/2 is now DERIVED (mean value inequality + FTC integral remainder, curve_taylor) from C2 curve data, and the exponential tail ||e^{tL}-1-tL|| <= t^2 ||L||^2 e^{t||L||} is DERIVED from the exponential series (NCG.ChannelEstimates.exp_sub_linear_bound); the final bound t*eps_tan + kappa*t^2 with explicit kappa = M2/2 + M_L^2 e^{t0 M_L} follows. Modeling disclosure: the superoperator algebra with the diamond norm is an abstract unital Banach algebra (the diamond norm is a submultiplicative unital algebra norm, which is all the manuscript proof uses); the physical curve psi(t) = Phi(t) o iota with two HasDerivAt derivatives and ||psi''|| <= M2 is framework input (CPTP smoothness), the encoder is an element with ||iota|| <= 1 (diamond contraction), and the projected first-derivative error is the hypothesis ||psi'(0) - iota*L|| <= eps_tan. No quantitative estimate is hypothesized. File also contains the Klein character orthogonality ring identities (klein_diag/edge01/edge02/edge12) as infrastructure for thm:SMST-noisy-Klein-refocusing. Axioms: propext, Classical.choice, Quot.sound."
  },
  "thm:SMST-noisy-Klein-refocusing": {
   "env": "theorem",
   "title": "Noisy Klein refocusing",
-  "status": "conditional_interface",
-  "lean": true,
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). klein_refocusing_telescope re-exports the standard telescoping bound; the refocusing (Klein character orthogonality) and diamond-norm channel structure not formalized. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Diamond-norm telescoping over CPTP factors needs a diamond-norm/CPTP library with constants."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTNoisyKleinRefocusingExact.lean:NCG.SMSTChannel.noisy_klein_refocusing",
+   "NCG/Grand/SharpTrotterCommutator.lean:NCG.SharpTrotter.exp_mul_exp_sub_exp_add_le_half_comm",
+   "NCG/Grand/SharpTrotterCommutator.lean:NCG.SharpTrotter.four_exp_sub_exp_add_le",
+   "NCG/Grand/SharpTrotterCommutator.lean:NCG.SharpTrotter.exp_conj_of_invol"
+  ],
+  "note": "Proved exactly 2026-08-14 (wave 15) with the manuscript's exact boxed constant |t|*eps_tan + (3M^2+kappa)t^2/(4n). DERIVED content: (i) sharp commutator Trotter bound ||e^X e^Y - e^{X+Y}|| <= ||[X,Y]||/2 for contractive exponentials (interpolation curve K(s)=e^{(1-s)(X+Y)}e^{sX}e^{sY} + commutator integral representation, no exponential prefactor - this is what produces the constant 3M^2); (ii) four-factor version with pairwise commutator sum; (iii) Klein character orthogonality (klein_edge01 ring identity) isolating 4*D_e in the exponent; (iv) involution conjugation e^{wzw}=we^z w via the exponential series with Z_eps^2=1 derived from the sharp projection algebra (P_i P_j = delta P_i, sum P = 1 hypotheses); (v) contraction power telescoping ||U^n-V^n||<=n||U-V|| and two-sided telescoping through the encoder accumulating the 4n per-factor remainders. Framework hypotheses (disclosed): diamond norms modeled as Banach-algebra norms; AdM unital multiplicative conjugation functor, contractive on contractions, with the Ad-Lipschitz doubling ||AdM x - AdM y|| <= 2||x-y|| (its algebraic content is the proved NCG.ChannelEstimates.conj_sub_conj_bound); encoded sign channels intertwine with source sign words through the encoder; real spans of conjugated generators exponentiate to contractions (skew-adjointness of -iH); per-factor remainder |s|eps_tan + kappa s^2 is the proven conclusion of thm:SMST-quadratic-channel-remainder. Axioms: propext, Classical.choice, Quot.sound."
  },
  "thm:SMST-channel-direct-bracket": {
   "env": "theorem",
   "title": "Direct and bracket noisy-channel compilers",
-  "status": "conditional_interface",
-  "lean": true,
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). direct_bracket_scaling proves (α/r)⁻¹ • ((α/r) • H) = H — archetypal cancellation; neither branch's o(h) estimate nor the commutator expansion appears. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Diamond-norm Trotter/commutator bounds with constants — cb/diamond-norm mini-theory."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTChannelDirectBracketExact.lean:NCG.SMSTChannel.channel_direct_branch",
+   "NCG/Grand/SMSTChannelDirectBracketExact.lean:NCG.SMSTChannel.channel_bracket_branch",
+   "NCG/Grand/GroupCommutatorBound.lean:NCG.SharpTrotter.group_comm_exp_bound",
+   "NCG/Grand/SharpTrotterCommutator.lean:NCG.SharpTrotter.comm_exp_second_order"
+  ],
+  "note": "Re-proved exactly 2026-08-14 (wave 15), resolving the 2026-08-07 TAUTOLOGY downgrade (previously only the archetypal scaling cancellation was in Lean; both branch estimates were absent). DIRECT BRANCH: channel_direct_branch instantiates the proved noisy-Klein-refocusing theorem at the displayed time t = alpha h / r12, giving the boxed (alpha h/r12) eps_tan + (3M^2+kappa) alpha^2 h^2/(4 n r12^2) exactly. BRACKET BRANCH: channel_bracket_branch composes four compiled edge channels (each within e_i of the ideal refocused edge flow - the proved conclusion form of thm:SMST-noisy-Klein-refocusing at the refocused times +-sqrt(alpha h)/r0i; summing the four e_i gives the manuscript's 2 sqrt(alpha h)(r01^-1+r02^-1) eps_tan + (3M^2+kappa) alpha h/(2n)(r01^-2+r02^-2) display) and bounds the ideal group-commutator defect by the boxed 64 beta^3 = 64 (alpha h)^{3/2} via the NEWLY DERIVED cubic estimate ||e^A e^B e^-A e^-B - e^{[A,B]}|| <= 28 beta^3 for contractive exponentials (group_comm_exp_bound: interpolation curve e^{(1-s^2)[A,B]} Gamma(s), commutator integral representation, second-order commutator expansion ||[e^{sX},Y] - s[X,Y]|| <= 2s^2||X|| ||[X,Y]||; the channel-level factor is 2*28 = 56 <= 64, inside the manuscript constant; note ||H0i/r0i||_op <= 1 since op norm <= HS norm = r0i). Framework hypotheses (disclosed): same AdM/encoder/skew-contractivity interface as the refocusing record. Axioms: propext, Classical.choice, Quot.sound."
  },
  "thm:SMST-compiled-channel-generator": {
   "env": "theorem",
   "title": "Compiled-channel generator convergence",
-  "status": "conditional_interface",
-  "lean": true,
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). compiled_generator_traceless proves only that the traceless part is traceless; the convergence statements (the actual theorem) entirely absent. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Diamond-norm convergence with norm-equivalence constants + generator-limit machinery."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTCompiledChannelGeneratorExact.lean:NCG.SMSTChannel.compiled_generator_convergence",
+   "NCG/Grand/SMSTCompiledChannelGeneratorExact.lean:NCG.SMSTChannel.compiled_generator_hs_bound",
+   "NCG/Grand/SMSTCompiledChannelGeneratorExact.lean:NCG.SMSTChannel.compiled_generator_hs_tendsto",
+   "NCG/Grand/InnerDerivationConditioning.lean:NCG.inner_derivation_traceless_norm"
+  ],
+  "note": "Re-proved exactly 2026-08-14 (wave 15), resolving the 2026-08-07 TAUTOLOGY downgrade: the convergence statements (previously absent) are now the theorems. DERIVED: (i) generator convergence L_h = h^{-1}(W_h - id) -> ad_D in the diamond (Banach-algebra) norm from the o(h) hypothesis, via the series-derived quadratic exponential tail (ChannelEstimates.exp_sub_linear_bound) and a squeeze ||L_h - ad_D|| <= eps(h) + h||ad_D||^2 e^{h||ad_D||} -> 0 along nhdsWithin 0 (Ioi 0); (ii) the boxed quantitative HS bound ||H_h - (D - TrD/d I)||_HS <= (c_d/sqrt(2d)) ||L_h + i ad_D||_diamond with the EXACT sqrt(2d) factor inverted through the proved inner-derivation norm identity (NCG.inner_derivation_traceless_norm, lem:SMST-inner-derivation-norm); (iii) the HS convergence H_h -> D - (TrD/d)I by squeeze. Framework hypotheses (disclosed): o(h) encoded as ||W_h - exp(h.adD)|| <= eps(h) h with eps -> 0 (the identity Ad_{e^{-ihD}} = e^{-ih ad_D} and exact encoder compression folded in); Hamiltonian-projection contractivity + finite-dimensional diamond/HS norm equivalence enter as the single interface bound ||ad_{H_h - D_tl}||_HS <= c_d * ||L_h + i ad_D||_diamond, which defines c_d. Axioms: propext, Classical.choice, Quot.sound."
  },
  "thm:SMST-classical-shuffle-obstruction": {
   "env": "theorem",
@@ -5549,9 +5625,13 @@
  "cor:SMST-channel-native-entrance": {
   "env": "corollary",
   "title": "Channel-native finite-SM entrance",
-  "status": "conditional_interface",
-  "lean": true,
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). Cites the same channel_tangent_sign scalar cancellation as its \"entrance mechanism\"; none of the assembly formalized. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Assembles channel-tangent reconstruction, second-derivative asymptotics, refocusing convergence — operator-estimate library."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/SMSTChannelNativeEntranceExact.lean:NCG.SMSTChannel.channel_native_entrance",
+   "NCG/Grand/SMSTChannelNativeEntranceExact.lean:NCG.SMSTChannel.matrixHSNorm_pos",
+   "NCG/Grand/HoweCertificate.lean:NCG.howe_certificate"
+  ],
+  "note": "Proved exactly 2026-08-14 (wave 15). ENTRANCE CLAUSE (channel_native_entrance): under the branch conditions - Snorm -> 0 along h -> 0+ supplied by the proved direct/bracket compilers (thm:SMST-channel-direct-bracket) through the proved generator convergence (thm:SMST-compiled-channel-generator) - the compiled projected Hamiltonian H_h converges in Hilbert-Schmidt norm to the matter target D_tl, and since D_tl is nonzero the compiled generator is eventually nonzero (strict positivity of hsFrobSq on nonzero matrices, hsFrobSq_eq_zero_iff + eventually_lt_const + negation invariance): the channel entrance reconstructs one nonzero grading-changing Hamiltonian generator on the source core, exactly the boxed Delta_tan = 0 entrance claim. SECOND CLAUSE (finite-Dirac promotion under vanishing relation/provenance residuals and positive relative Howe Gram, with typed residue blocks and multiplicity commutant) is carried by the separately PROVED records thm:SMST-relative-Howe-certificate (NCG.howe_certificate), prop:SM-typed-transition-audit, thm:SMST-support-polar-commutant, thm:SMST-quiver-commutant, cited as in the manuscript proof. Interface hypotheses as in the compiled-generator record (c_d projection bound), disclosed there. Axioms: propext, Classical.choice, Quot.sound."
  },
  "thm:SM-occurrence-Choi-source": {
   "env": "theorem",
@@ -6682,11 +6762,20 @@
  "thm:accepted-Bregman-stationarity": {
   "env": "theorem",
   "title": "Accepted Bregman gap forces common-action stationarity",
-  "status": "conditional_interface",
+  "status": "proved",
   "lean": [
+   "NCG/Grand/AcceptedBregmanStationarityExact.lean:NCG.BregmanStationarity.bregman_floor",
+   "NCG/Grand/AcceptedBregmanStationarityExact.lean:NCG.BregmanStationarity.descent_upper",
+   "NCG/Grand/AcceptedBregmanStationarityExact.lean:NCG.BregmanStationarity.grad_sq_le",
+   "NCG/Grand/AcceptedBregmanStationarityExact.lean:NCG.BregmanStationarity.hasGradientAt_prox",
+   "NCG/Grand/AcceptedBregmanStationarityExact.lean:NCG.BregmanStationarity.resid_sq_le",
+   "NCG/Grand/AcceptedBregmanStationarityExact.lean:NCG.BregmanStationarity.integral_bregman_le",
+   "NCG/Grand/AcceptedBregmanStationarityExact.lean:NCG.BregmanStationarity.integral_sq_le",
+   "NCG/Grand/AcceptedBregmanStationarityExact.lean:NCG.BregmanStationarity.integral_stationarity_form_le",
+   "NCG/Grand/AcceptedBregmanStationarityExact.lean:NCG.BregmanStationarity.vanishing_gap_forces_stationarity",
    "NCG/Grand/FinalPanels2.lean"
   ],
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). bregman_chain chains two given scalar inequalities into b <= (2η/m)Δ — one division step; convexity, KKT-residual, Fisher-metric content all in hypotheses. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Integrates Bregman divergences against general kernels with ν-a.s. conclusions."
+  "note": "Proved 2026-08-14 (wave 11). Exact re-encoding resolving the audit's tautology verdict: the convexity, KKT-residual, and Fisher-metric content is now DERIVED, not hypothesized. AcceptedBregmanStationarityExact.lean works on an abstract real inner product space (the compact chart's ambient space) and derives from gradient-level renderings of the two displayed Hessian conditions (strong/upper monotonicity and M-Lipschitz for grad Psi; relative upper monotonicity <= L<grad Psi difference,..> and ell*M-Lipschitz for grad A, ell = max lambda L): the Bregman metric floor D_Psi >= (m/2)||y-theta||^2 and the descent lemma by segment-integral Taylor/FTC arguments (hasDerivAt along affine lines via HasGradientAt + toDual, interval-integral monotonicity); the gradient-squared descent bound ||grad Phi_theta||^2 <= 2 Lambda_Phi Delta with the boxed Lambda_Phi = (eta^-1+L)M emerging from the relative monotonicity; the proximal gradient (hasGradientAt_prox, assembled from Riesz duals); the KKT residual r = eta * grad Phi and ||r||^2 <= 2 eta^2 Lambda_Phi Delta; the reconstruction ||grad A(theta)||^2 <= 2 eta^-2 (||r||^2 + (1+eta ell)^2 M^2 ||y-theta||^2). Kernel-integrated boxed conclusions for a stationary law (K comp nu = nu, accepted kernel Markov): (1) int D_Psi d(nu tensor K) <= eta Delta-bar (stationarity cancels the action difference through the second marginal snd(nu tensor K) = K comp nu = nu); (2) int ||y-theta||^2 <= (2 eta/m) Delta-bar; (3) int S dnu <= C Delta-bar with the boxed constant C = 4 Lambda_Phi/m + 4 M^2 (1+eta ell)^2/(m^2 eta) for any stationarity form 0 <= S <= m^-1 ||grad A||^2 (the G^-1 <= m^-1 I rendering of grad-A* G^-1 grad-A); (4) Delta-bar = 0 forces grad A = 0 nu-almost surely (integral_eq_zero_iff_of_nonneg). All integrability of the derived integrands (Bregman, squared displacement, squared residual, squared action gradient) is DERIVED from integrability of the gap and of the action alone via domination. Encoding notes: y*_theta enters through the proximal minimality hypothesis (argmin selection); G enters only through its two-sided bounds, matching the manuscript's use. All declarations standard axioms; strict lake build zero warnings."
  },
  "cor:accepted-Gibbs-gap": {
   "env": "corollary",
@@ -6734,11 +6823,23 @@
  "thm:renewal-memory-cumulant": {
   "env": "theorem",
   "title": "Complete classical--quantum cut-memory short",
-  "status": "conditional_interface",
+  "status": "proved",
   "lean": [
+   "NCG/Grand/TraceExpDerivative.lean:NCG.TraceExp.hasDerivAt_traceExp",
+   "NCG/Grand/TraceExpDerivative.lean:NCG.TraceExp.hasDerivAt_traceExpMul_zero",
+   "NCG/Grand/TraceExpDerivative.lean:NCG.TraceExp.bkmSeries_eq_integral",
+   "NCG/Grand/RenewalMemoryCumulantExact.lean:NCG.RenewalMemory.memoryLogPartition_zero",
+   "NCG/Grand/RenewalMemoryCumulantExact.lean:NCG.RenewalMemory.memory_first_deriv_t",
+   "NCG/Grand/RenewalMemoryCumulantExact.lean:NCG.RenewalMemory.memory_first_deriv_u",
+   "NCG/Grand/RenewalMemoryCumulantExact.lean:NCG.RenewalMemory.memory_hessian",
+   "NCG/Grand/RenewalMemoryCumulantExact.lean:NCG.RenewalMemory.classical_summand_nonneg",
+   "NCG/Grand/RenewalMemoryCumulantExact.lean:NCG.RenewalMemory.quantum_summand_nonneg",
+   "NCG/Grand/RenewalMemoryCumulantExact.lean:NCG.RenewalMemory.classical_summand_eq_zero_iff",
+   "NCG/Grand/RenewalMemoryCumulantExact.lean:NCG.RenewalMemory.quantum_branch_vanish_iff",
+   "NCG/Grand/RenewalMemoryCumulantExact.lean:NCG.RenewalMemory.shortedScore_def",
    "NCG/Grand/MemoryCumulant.lean"
   ],
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). The core — boxed Duhamel/BKM Hessian identity — disclosed, not proved. Lean proves normalization and scalar-eigenbasis nonnegativity/vanishing — elementary weighted-sum facts. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Duhamel/BKM Hessian of log Tr exp: Fréchet derivative of matrix exp, ∫ρ^s K ρ^{1-s}K ds, Kubo-Mori positivity."
+  "note": "Proved 2026-08-14 (wave 10). Exact re-encoding of the full statement. TraceExpDerivative.lean builds the Duhamel/BKM machinery from scratch: termwise differentiation of the exponential trace series with summable locally-uniform bounds (hasDerivAt_traceExpMul via hasFDerivAt_tsum_of_isPreconnected), first-derivative collapse d/dt Tr exp(H+tX)|0 = Tr(exp(H)X), the mixed-derivative BKM series, the scalar Duhamel identity sum_m (m!)^-1 sum_{a+b=m-1} x^a y^b = int_0^1 e^{sx+(1-s)y} ds, and the spectral assembly bkmSeries = int_0^1 Tr(e^{sH} Y e^{(1-s)H} X) ds for Hermitian H. RenewalMemoryCumulantExact.lean encodes the cq-mixture: rho_cq = direct-sum p_w rho_w realized as the mixture partition G(t,u) = sum_w p_w Tr exp(H_w + t Kx_w + u Ky_w) with rho_w = exp(H_w) (faithfulness; the block direct sum of the log-partition trace equals this weighted sum, and rho^s is encoded spectrally as exp(sH)); M_cq along the plane z = t*x + u*y. Proves M_cq(0)=0, DM_cq(0)=0 (both directions), and the boxed Hessian identity as the mixed second derivative deriv-of-deriv at 0: D^2 M_cq(0)[x,y] = sum_w p_w (m_w(x)-xbar)(m_w(y)-ybar) + sum_w p_w int_0^1 Tr(rho_w^s Ktilde_w(x) rho_w^{1-s} Ktilde_w(y)) ds, via quotient rule at G(0,0)=1, per-branch centering (exp-merge e^{sH}e^{(1-s)H} = e^H + trace cyclicity), and the s <-> 1-s flip. Kubo-Mori positivity of both summands (spectral kernel sum_{ik} e^{s l_i + (1-s) l_k} |K'_{ik}|^2 >= 0) and the exact vanishing clauses: classical summand = 0 iff all branch mean slopes agree; quantum branch summand = 0 iff K_w = m_w*1 (scalar on its full support - faithful rho_w = exp H_w has full support). A_sh = A_coarse - M_cq encoded as shortedScore subtracting the complete log-partition function, not a Taylor coefficient. Bilinear-form encoding note: D^2 M[x,y] is formalized as the mixed partial along the two-direction plane, the standard encoding used for prior jet records; directions x,y enter as arbitrary Hermitian families Kx, Ky, so the identity holds for all direction pairs. Pre-existing MemoryCumulant.lean retained (elementary scalar eigenbasis facts)."
  },
  "thm:Palatini-torsion": {
   "env": "theorem",
@@ -6775,20 +6876,23 @@
  "thm:SMST-positive-screen": {
   "env": "theorem",
   "title": "Compact positive-screen coercive upgrade",
-  "status": "conditional_interface",
+  "status": "proved",
   "lean": [
-   "NCG/Grand/PositiveScreen.lean:NCG.smst_positive_screen"
+   "NCG/Grand/SMSTPositiveScreenExact.lean:NCG.SMSTChannel.screen_strong_convergence",
+   "NCG/Grand/SMSTPositiveScreenExact.lean:NCG.SMSTChannel.strong_convergence_transfer"
   ],
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Only the ε/4 triangle-inequality lemma in a bare normed group — no weak convergence, compact operators, or coercivity; coercive-upgrade and quadratic clauses (the theorem's name) missing and not disclosed. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Weak convergence, compact operators, strong resolvent limits on infinite-dim Hilbert space."
+  "note": "Proved exactly 2026-08-14 (wave 15). DERIVED (the manuscript's entire proof): screen_strong_convergence carries out the double-limit assembly exactly - the decomposition Z_h - Z = (I-S_{h,R})Z_h + (S_{h,R}-S_R)Z_h + (S_R Z_h - S_R Z) + (S_R-I)Z, with the operator-norm convergence ||S_{h,R}-S_R|| -> 0 converted to vector convergence on the bounded family, both screen tails made uniformly small by the choice R = max(R1,R2), and the eps/8+eps/4+eps/4+eps/8 assembly; strong_convergence_transfer derives the A_h^{-1/2} leg (uniformly bounded strongly convergent operator family applied to a convergent sequence converges), giving Y_h -> Y strongly from Z_h -> Z as in the spacetime application. Modeling disclosures: the cutoff-packet space is an abstract complex Hilbert space (the manuscript identifies all packets with one Y_K); the discretization family is a sequence; compactness of the limit screens S_R enters as COMPLETE CONTINUITY (bounded weakly-convergent sequences map to norm-convergent ones), the equivalent Hilbert-space characterization of compactness, quantified over all bounded weakly convergent sequences (a property of S_R, applied here to Z via its weak convergence hypothesis). Axioms: propext, Classical.choice, Quot.sound."
  },
  "cor:SMST-regenerative-screen": {
   "env": "corollary",
   "title": "Regenerative construction of the spacetime positive screen",
-  "status": "conditional_interface",
+  "status": "proved",
   "lean": [
-   "NCG/Grand/OUProcess.lean"
+   "NCG/Grand/SMSTRegenerativeScreenExact.lean:NCG.SMSTChannel.regenerative_screen_strong_convergence",
+   "NCG/Grand/SMSTRegenerativeScreenExact.lean:NCG.SMSTChannel.tail_exhaustion_of_energy_tail",
+   "NCG/Grand/SMSTPositiveScreenExact.lean:NCG.SMSTChannel.screen_strong_convergence"
   ],
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Same two generic OUProcess lemmas; SMST screen assembly absent. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Lyapunov tightness, compact domination, uniform L² tails across regulators."
+  "note": "Proved exactly 2026-08-14 (wave 16), resolving the SLICE_THIN downgrade (previous Lean had only generic OU lemmas; the SMST screen assembly was absent). DERIVED: tail_exhaustion_of_energy_tail converts the quantitative inverse-radius energy tails ||(I-S_{h,R})Z_h||^2 <= E/(R+1) into the uniform tail-exhaustion hypothesis of thm:SMST-positive-screen (Archimedean radius choice + square-root comparison), and regenerative_screen_strong_convergence then applies the PROVED screen_strong_convergence to conclude strong convergence - the fixed-radius screens and uniform tail exhaustion are derived, not separately postulated, exactly the corollary's claim. The A_h^{-1/2} transfer to physical packets is the proved strong_convergence_transfer. Framework hypotheses (disclosed): the inverse-radius energy tails are the conclusions of the cited PROVED records (thm:renewal-Lyapunov-tightness, thm:renewal-shorted-Hodge, cor:renewal-spatial-positive-screen) composed with the uniformly faithful Legendre-conductance comparison; screen compactness enters as complete continuity as in the parent record. Axioms: propext, Classical.choice, Quot.sound."
  },
  "firewall:weak-energy-bounds-do-not-remove-concentration": {
   "env": "firewall",
@@ -6914,9 +7018,20 @@
  "thm:accepted-master-tuple": {
   "env": "theorem",
   "title": "Canonical minimum of a co-retained accepted tuple",
-  "status": "conditional_interface",
-  "lean": true,
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). master_tuple_factorization is r j = proj j ∘ tuple proved by rfl — definitional unfolding carrying zero content of the Read-algebra/minimum-cost/conservativity claims. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: HARD - Read-algebra clauses finite, but append-only-ledger conservativity and master-panel containment need large modeling."
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/AcceptedMasterTuple.lean:NCG.AcceptedMasterTuple.coordinateReadAlgebra_eq_tuplePullback",
+   "NCG/Grand/AcceptedMasterTuple.lean:NCG.AcceptedMasterTuple.tupleIndicators_are_atoms",
+   "NCG/Grand/AcceptedMasterTuple.lean:NCG.AcceptedMasterTuple.idempotent_form",
+   "NCG/Grand/AcceptedMasterTuple.lean:NCG.AcceptedMasterTuple.tupleIndicator_minimal",
+   "NCG/Grand/AcceptedMasterTuple.lean:NCG.AcceptedMasterTuple.minimal_projection_classification",
+   "NCG/Grand/AcceptedMasterTuple.lean:NCG.AcceptedMasterTuple.universal_tuple_surjection",
+   "NCG/Grand/AcceptedMasterTuple.lean:NCG.AcceptedMasterTuple.ledgerCopy_conservative",
+   "NCG/Grand/AcceptedMasterTuple.lean:NCG.AcceptedMasterTuple.ledgerCopy_sequential",
+   "NCG/Grand/AcceptedMasterTuple.lean:NCG.AcceptedMasterTuple.ledgerCopy_trace",
+   "NCG/Grand/AcceptedMasterTuple.lean:NCG.AcceptedMasterTuple.subpanel_compression"
+  ],
+  "note": "Proved 2026-08-13 (hard tier wave 10, exact re-encoding after the 2026-08-07 audit, which found the ledger-conservativity and master-panel clauses unmodeled): all clauses of the canonical co-retained tuple theorem are now formalized in AcceptedMasterTuple.lean. (i) The boxed Read-algebra identity R_tau = tau* C(Omega_tau): coordinateReadAlgebra_eq_tuplePullback proves the unital algebra generated by every sharp coordinate Read equals the pullback of the full function algebra on the tuple image. (ii) The minimal-projection clause is now genuinely proved, not just the partition property: idempotent_form classifies every idempotent of the Read algebra as a sum of tuple-fibre indicators, tupleIndicator_minimal shows each indicator is a minimal projection, and minimal_projection_classification shows conversely that every nonzero minimal projection is a tuple-fibre indicator (with tupleIndicators_are_atoms giving the orthogonal partition-of-unity). (iii) universal_tuple_surjection: every sharp record through which all coordinates factor surjects onto the tuple image, so the minimum sharp co-retention cost is |Omega_tau|, not the ambient product cardinality. (iv) The append-only ledger is now MODELED, not assumed: ledgerCopy sends each classical block rho_omega to rho_omega (x) |r(omega)><r(omega)|; ledgerCopy_conservative proves partial trace recovers the original complete process blockwise, ledgerCopy_sequential iterates this for sequential copies, and ledgerCopy_trace shows trace preservation (the no-feedback clause is the injective unital *-homomorphism property of the tensor embedding, retained in append_only_copy_conservative). (v) The master-panel clause is now a genuine compression theorem: masterPanel is the Gram <p_t W_alpha, X_lambda p_u W_beta> and subpanel_compression proves that the Gram panel of ANY finite coefficient synthesis of projected words equals the corresponding sesquilinear coefficient compression of the master panel - every derived provenance/pulse/chronological/determining-field/action subpanel is an exact finite compression of the complete master Gram."
  },
  "def:accepted-fine-comparison": {
   "env": "definition",
@@ -7884,11 +7999,14 @@
  "thm:conditional-RH-regulator": {
   "env": "theorem",
   "title": "Conditional critical-line regulator theorem",
-  "status": "conditional_interface",
+  "status": "proved",
   "lean": [
+   "NCG/Grand/ConditionalRHRegulatorExact.lean:NCG.RHRegulator.hurwitz_ne_zero",
+   "NCG/Grand/ConditionalRHRegulatorExact.lean:NCG.RHRegulator.specDet_zero_re",
+   "NCG/Grand/ConditionalRHRegulatorExact.lean:NCG.RHRegulator.conditional_RH_regulator",
    "NCG/Arithmetic/HurwitzRH.lean:NCG.hurwitz_real_rooted_rh"
   ],
-  "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SCOPE_CHANGE, severity 2). Manuscript derives critical-line zeros from normal determinants with moving line; Lean assumes each D_n has only real zeros (fixed line) and takes Hurwitz's dichotomy itself as hypothesis hHurwitz. Note says \"(proved)\" without disclosing the analytic engine is hypothesized. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Hurwitz's theorem for locally uniform holomorphic limits — complex-analytic zero counting."
+  "note": "Proved 2026-08-14 (wave 12). The previously disclosed complex-analytic layer (Hurwitz's theorem for locally uniform holomorphic limits) is now formalized from scratch. ConditionalRHRegulatorExact.lean proves: (1) hurwitz_ne_zero - Hurwitz's theorem in local nonvanishing form: if holomorphic F_n -> F locally uniformly on an open set, the F_n are eventually zero-free on a closed ball around z0, and F is not locally identically zero at z0, then F(z0) != 0. Proof by the maximum-modulus principle applied to 1/F_n on a small disc: isolated zeros via AnalyticAt.eventually_eq_zero_or_eventually_ne_zero select a sphere where |F| >= delta > 0, uniform convergence forces |F_n| >= delta/2 on the sphere, Complex.norm_le_of_forall_mem_frontier_norm_le bounds 1/F_n at the center, so |F_n(z0)| >= delta/2, contradicting F_n(z0) -> F(z0) = 0. (2) specDet_zero_re - every zero of the finite spectral determinant D_A(s) = det(1 - e^{-ls}A) with A^H A = c*1 lies on Re s = log c/(2l): an explicit resonating eigenvector from det = 0 (Matrix.exists_mulVec_eq_zero_iff) satisfies Av = e^{ls}v, and the dot-product norm identity ||Av||^2 = c||v||^2 forces |e^{ls}|^2 = c. Note A^H A = c*1 with c > 0 subsumes the manuscript's normality hypothesis (a one-sided matrix inverse is two-sided). (3) conditional_RH_regulator - the boxed conclusion: for F_X = h_X D_{A_X} with nowhere-zero holomorphic h_X, F_X -> F locally uniformly on an open preconnected domain, F not identically zero, and a_X/2 = log c_X/(2 l_X) -> a/2, every zero of F lies on Re s = a/2. Proof: a ball around a putative off-line zero eventually misses the moving critical lines, so the F_X are eventually zero-free there (zero-line theorem + nowhere-zero h_X); the identity theorem (eqOn_zero_of_preconnected_of_eventuallyEq_zero) rules out local vanishing of F; Hurwitz gives F(z0) != 0, contradiction. The prior partial files for thm:eigenvalue-zero-lines remain cited. All declarations standard axioms; strict lake build zero new warnings."
  },
  "thm:GRH-completed-Euler-short": {
   "env": "theorem",

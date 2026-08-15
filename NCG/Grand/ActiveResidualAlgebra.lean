@@ -1165,171 +1165,228 @@ matrix representations by explicit rational quasi-inverse
 pairs `(T, S)` with `T S = 1` and `S T = Q`; the determinant
 characters of both compressions equal the sign character. -/
 
-def czq (A : Matrix E E ℤ) : Matrix E E ℚ :=
-  A.map (Int.cast : ℤ → ℚ)
+/-- Cast an integer matrix of any shape to `ℂ`. -/
+def ci {m n : Type} (A : Matrix m n ℤ) : Matrix m n ℂ :=
+  A.map (Int.cast : ℤ → ℂ)
 
-def PsQ : Matrix E E ℚ := fun e f =>
-  if e = act sPerm f then 1 else 0
+theorem ci_mul {l m n : Type} [Fintype m]
+    (A : Matrix l m ℤ) (B : Matrix m n ℤ) :
+    ci (A * B) = ci A * ci B :=
+  A.map_mul (f := Int.castRingHom ℂ) (M := B)
 
-def PrQ : Matrix E E ℚ := fun e f =>
-  if e = act rPerm f then 1 else 0
+theorem ci_nsmul {m n : Type} (k : ℕ) (A : Matrix m n ℤ) :
+    ci (k • A) = (k : ℂ) • ci A := by
+  ext e f
+  have h : (k • A) e f = (k : ℤ) * A e f := by
+    rw [Matrix.smul_apply, nsmul_eq_mul]
+  rw [ci, Matrix.map_apply, h, Int.cast_mul,
+    Int.cast_natCast, ci, Matrix.smul_apply,
+    Matrix.map_apply, smul_eq_mul]
 
-def QCQ : Matrix E E ℚ := (24:ℚ)⁻¹ • czq Z3
-def QW2Q : Matrix E E ℚ := (24:ℚ)⁻¹ • czq Z2
+theorem ci_add {m n : Type} (A B : Matrix m n ℤ) :
+    ci (A + B) = ci A + ci B :=
+  Matrix.map_add _ (by simp) A B
 
-/-- Vertex differences of the even-standard block basis. -/
-def phiv (c : Fin 3) (x : V) : ℚ :=
+theorem ci_sub {m n : Type} (A B : Matrix m n ℤ) :
+    ci (A - B) = ci A - ci B := by
+  ext e f
+  simp [ci, Matrix.map_apply]
+
+theorem ci_one {m : Type} [Fintype m] [DecidableEq m] :
+    ci (1 : Matrix m m ℤ) = 1 :=
+  Matrix.map_one _ (by simp) (by simp)
+
+theorem cz_eq_ci (A : Matrix E E ℤ) : cz A = ci A := rfl
+
+/-- Vertex-difference profile of the even-standard basis. -/
+def phivZ (c : Fin 3) (x : V) : ℤ :=
   if x.val = c.val then 1 else if x.val = 3 then -1 else 0
 
-def S3q : Matrix E (Fin 3) ℚ := fun e c =>
-  phiv c e.val.1 + phiv c e.val.2
+/-- The even-standard (`C`-block) basis columns
+`y_c(i,j) = φ_c(i) + φ_c(j)`, `φ_c = e_c − e_3`. -/
+def S3z : Matrix E (Fin 3) ℤ := fun e c =>
+  phivZ c e.val.1 + phivZ c e.val.2
 
-def T3q : Matrix (Fin 3) E ℚ :=
-  (16:ℚ)⁻¹ • ((!![3,-1,-1;-1,3,-1;-1,-1,3] :
-    Matrix (Fin 3) (Fin 3) ℚ) * S3qᵀ)
+/-- The adjugate-scaled left inverse (`16` times the true
+pseudo-inverse). -/
+def T3z : Matrix (Fin 3) E ℤ :=
+  (!![3,-1,-1;-1,3,-1;-1,-1,3] :
+    Matrix (Fin 3) (Fin 3) ℤ) * S3zᵀ
 
-/-- Matching indicators via endpoint sums (the three perfect
-matchings of `K₄` have endpoint sums `{1,5}, {2,4}, {3}`). -/
-def chi1 (e : E) : ℚ :=
-  if e.val.1.val + e.val.2.val = 1
-    ∨ e.val.1.val + e.val.2.val = 5 then 1 else 0
-def chi2 (e : E) : ℚ :=
-  if e.val.1.val + e.val.2.val = 2
-    ∨ e.val.1.val + e.val.2.val = 4 then 1 else 0
-def chi3 (e : E) : ℚ :=
-  if e.val.1.val + e.val.2.val = 3 then 1 else 0
+/-- Matching indicators via endpoint sums: the three perfect
+matchings of `K₄` have endpoint-sum sets `{1,5}, {2,4}, {3}`. -/
+def chiSum (e : E) : ℕ := e.val.1.val + e.val.2.val
 
-def S2q : Matrix E (Fin 2) ℚ := fun e c =>
-  if c = 0 then chi1 e - chi2 e else chi2 e - chi3 e
+/-- The two-dimensional (`W₂`-block) basis columns:
+differences of matching indicators. -/
+def S2z : Matrix E (Fin 2) ℤ := fun e c =>
+  if c = 0 then
+    (if chiSum e = 1 ∨ chiSum e = 5 then 1 else 0)
+      - (if chiSum e = 2 ∨ chiSum e = 4 then 1 else 0)
+  else
+    (if chiSum e = 2 ∨ chiSum e = 4 then 1 else 0)
+      - (if chiSum e = 3 then 1 else 0)
 
-def T2q : Matrix (Fin 2) E ℚ :=
-  (48:ℚ)⁻¹ • ((!![8,4;4,8] :
-    Matrix (Fin 2) (Fin 2) ℚ) * S2qᵀ)
+/-- The adjugate-scaled left inverse (`48` times the true
+pseudo-inverse). -/
+def T2z : Matrix (Fin 2) E ℤ :=
+  (!![8,4;4,8] : Matrix (Fin 2) (Fin 2) ℤ) * S2zᵀ
 
-theorem hTS3q : T3q * S3q = 1 := by decide
-theorem hST3q : S3q * T3q = QCQ := by decide
-theorem hQS3q : QCQ * S3q = S3q := by decide
-theorem hTS2q : T2q * S2q = 1 := by decide
-theorem hST2q : S2q * T2q = QW2Q := by decide
-theorem hQS2q : QW2Q * S2q = S2q := by decide
+theorem hTS3z : T3z * S3z = 16 • 1 := by decide
+theorem hST3z : S3z * T3z
+    = 4 • 1 + 4 • RmZ - 4 • DisZ := by decide
+theorem hQS3z : Z3 * S3z = 24 • S3z := by decide
+theorem hTS2z : T2z * S2z = 48 • 1 := by decide
+theorem hST2z : S2z * T2z = 2 • Z2 := by decide
+theorem hQS2z : Z2 * S2z = 24 • S2z := by decide
 
-theorem hs3 : T3q * (PsQ * S3q)
-    = !![0,1,0;1,0,0;0,0,1] := by decide
-theorem hr3 : T3q * (PrQ * S3q)
-    = !![-1,-1,0;1,0,-1;0,1,0] := by decide
-theorem hs2 : T2q * (PsQ * S2q) = !![1,0;1,-1] := by decide
-theorem hr2 : T2q * (PrQ * S2q) = !![0,-1;-1,0] := by decide
-
-/-- Cast a rational matrix (of any shape) to `ℂ`. -/
-def cq {m n : Type} (A : Matrix m n ℚ) : Matrix m n ℂ :=
-  A.map (Rat.cast : ℚ → ℂ)
-
-theorem cq_mul {l m n : Type} [Fintype m]
-    (A : Matrix l m ℚ) (B : Matrix m n ℚ) :
-    cq (A * B) = cq A * cq B :=
-  A.map_mul (f := Rat.castHom ℂ) (M := B)
-
-theorem Pm_s_eq_cq : Pm sPerm = cq PsQ := by
-  ext e f
-  simp [Pm, PsQ, cq, Matrix.map_apply,
-    apply_ite (Rat.cast : ℚ → ℂ)]
-
-theorem Pm_r_eq_cq : Pm rPerm = cq PrQ := by
-  ext e f
-  simp [Pm, PrQ, cq, Matrix.map_apply,
-    apply_ite (Rat.cast : ℚ → ℂ)]
-
-theorem QC_eq_cq : QC = cq QCQ := by
-  ext e f
-  simp [QC, QCQ, cq, czq, cz, Matrix.map_apply,
-    Matrix.smul_apply]
-
-theorem QW2_eq_cq : QW2 = cq QW2Q := by
-  ext e f
-  simp [QW2, QW2Q, cq, czq, cz, Matrix.map_apply,
-    Matrix.smul_apply]
+theorem hs3z : T3z * (PsZ * S3z)
+    = 16 • !![0,1,0;1,0,0;0,0,1] := by decide
+theorem hr3z : T3z * (PrZ * S3z)
+    = 16 • !![-1,-1,-1;1,0,0;0,1,0] := by decide
+theorem hs2z : T2z * (PsZ * S2z)
+    = 48 • !![1,0;1,-1] := by decide
+theorem hr2z : T2z * (PrZ * S2z)
+    = 48 • !![0,-1;-1,0] := by decide
 
 /-- The compressed `C`-block representation. -/
 noncomputable def rho3 (σ : Equiv.Perm V) :
     Matrix (Fin 3) (Fin 3) ℂ :=
-  cq T3q * (Pm σ * cq S3q)
+  ((16:ℂ)⁻¹ • ci T3z) * (Pm σ * ci S3z)
 
 /-- The compressed `W₂`-block representation. -/
 noncomputable def rho2 (σ : Equiv.Perm V) :
     Matrix (Fin 2) (Fin 2) ℂ :=
-  cq T2q * (Pm σ * cq S2q)
-
-theorem cq_one {m : Type} [Fintype m] [DecidableEq m] :
-    cq (1 : Matrix m m ℚ) = 1 :=
-  Matrix.map_one _ (by simp) (by simp)
+  ((48:ℂ)⁻¹ • ci T2z) * (Pm σ * ci S2z)
 
 theorem rho3_one : rho3 1 = 1 := by
-  rw [rho3, Pm_one, Matrix.one_mul, ← cq_mul, hTS3q, cq_one]
+  rw [rho3, Pm_one, Matrix.one_mul, Matrix.smul_mul,
+    ← ci_mul, hTS3z, ci_nsmul, ci_one, smul_smul,
+    show (16:ℂ)⁻¹ * ((16:ℕ):ℂ) = 1 by norm_num, one_smul]
 
 theorem rho2_one : rho2 1 = 1 := by
-  rw [rho2, Pm_one, Matrix.one_mul, ← cq_mul, hTS2q, cq_one]
+  rw [rho2, Pm_one, Matrix.one_mul, Matrix.smul_mul,
+    ← ci_mul, hTS2z, ci_nsmul, ci_one, smul_smul,
+    show (48:ℂ)⁻¹ * ((48:ℕ):ℂ) = 1 by norm_num, one_smul]
+
+theorem hST3 : ci S3z * ((16:ℂ)⁻¹ • ci T3z) = QC := by
+  rw [Matrix.mul_smul, ← ci_mul, hST3z, ci_sub, ci_add,
+    ci_nsmul, ci_nsmul, ci_nsmul, ci_one, QC, cz_eq_ci,
+    show Z3 = 6 • (1 : Matrix E E ℤ) + 6 • RmZ - 6 • DisZ
+      from rfl,
+    ci_sub, ci_add, ci_nsmul, ci_nsmul, ci_nsmul, ci_one,
+    show ((4:ℕ):ℂ) = (4:ℂ) from by norm_num,
+    show ((6:ℕ):ℂ) = (6:ℂ) from by norm_num]
+  module
+
+theorem hST2 : ci S2z * ((48:ℂ)⁻¹ • ci T2z) = QW2 := by
+  rw [Matrix.mul_smul, ← ci_mul, hST2z, ci_nsmul, QW2,
+    cz_eq_ci, smul_smul,
+    show (48:ℂ)⁻¹ * ((2:ℕ):ℂ) = (24:ℂ)⁻¹ by norm_num]
 
 theorem rho3_mul (σ τ : Equiv.Perm V) :
     rho3 σ * rho3 τ = rho3 (σ * τ) := by
-  have hST : cq S3q * cq T3q = QC := by
-    rw [← cq_mul, hST3q, QC_eq_cq]
-  have hQS : QC * cq S3q = cq S3q := by
-    rw [QC_eq_cq, ← cq_mul, hQS3q]
+  have hST : ci S3z * ((16:ℂ)⁻¹ • ci T3z) = QC := hST3
+  have hQS : QC * ci S3z = ci S3z := by
+    rw [QC, cz_eq_ci, Matrix.smul_mul, ← ci_mul, hQS3z,
+      ci_nsmul, smul_smul,
+      show (24:ℂ)⁻¹ * ((24:ℕ):ℂ) = 1 by norm_num, one_smul]
   have hcen : Pm τ * QC = QC * Pm τ :=
     (Q_central QC_mem_span (Pm τ) (Pm_mem τ)).symm
   calc rho3 σ * rho3 τ
-      = cq T3q * (Pm σ * ((cq S3q * cq T3q)
-          * (Pm τ * cq S3q))) := by
+      = ((16:ℂ)⁻¹ • ci T3z) * (Pm σ
+          * ((ci S3z * ((16:ℂ)⁻¹ • ci T3z))
+            * (Pm τ * ci S3z))) := by
         rw [rho3, rho3, Matrix.mul_assoc, Matrix.mul_assoc,
           Matrix.mul_assoc]
-    _ = cq T3q * (Pm σ * (QC * (Pm τ * cq S3q))) := by
-        rw [hST]
-    _ = cq T3q * (Pm σ * (Pm τ * (QC * cq S3q))) := by
-        rw [← Matrix.mul_assoc QC (Pm τ) (cq S3q), ← hcen,
+    _ = ((16:ℂ)⁻¹ • ci T3z) * (Pm σ
+          * (QC * (Pm τ * ci S3z))) := by rw [hST]
+    _ = ((16:ℂ)⁻¹ • ci T3z) * (Pm σ
+          * (Pm τ * (QC * ci S3z))) := by
+        rw [← Matrix.mul_assoc QC (Pm τ) (ci S3z), ← hcen,
           Matrix.mul_assoc]
-    _ = cq T3q * (Pm σ * (Pm τ * cq S3q)) := by rw [hQS]
+    _ = ((16:ℂ)⁻¹ • ci T3z) * (Pm σ
+          * (Pm τ * ci S3z)) := by rw [hQS]
     _ = rho3 (σ * τ) := by
-        rw [rho3, ← Matrix.mul_assoc (Pm σ) (Pm τ),
-          Pm_mul]
+        rw [rho3, ← Matrix.mul_assoc (Pm σ) (Pm τ), Pm_mul]
 
 theorem rho2_mul (σ τ : Equiv.Perm V) :
     rho2 σ * rho2 τ = rho2 (σ * τ) := by
-  have hST : cq S2q * cq T2q = QW2 := by
-    rw [← cq_mul, hST2q, QW2_eq_cq]
-  have hQS : QW2 * cq S2q = cq S2q := by
-    rw [QW2_eq_cq, ← cq_mul, hQS2q]
+  have hST : ci S2z * ((48:ℂ)⁻¹ • ci T2z) = QW2 := hST2
+  have hQS : QW2 * ci S2z = ci S2z := by
+    rw [QW2, cz_eq_ci, Matrix.smul_mul, ← ci_mul, hQS2z,
+      ci_nsmul, smul_smul,
+      show (24:ℂ)⁻¹ * ((24:ℕ):ℂ) = 1 by norm_num, one_smul]
   have hcen : Pm τ * QW2 = QW2 * Pm τ :=
     (Q_central QW2_mem_span (Pm τ) (Pm_mem τ)).symm
   calc rho2 σ * rho2 τ
-      = cq T2q * (Pm σ * ((cq S2q * cq T2q)
-          * (Pm τ * cq S2q))) := by
+      = ((48:ℂ)⁻¹ • ci T2z) * (Pm σ
+          * ((ci S2z * ((48:ℂ)⁻¹ • ci T2z))
+            * (Pm τ * ci S2z))) := by
         rw [rho2, rho2, Matrix.mul_assoc, Matrix.mul_assoc,
           Matrix.mul_assoc]
-    _ = cq T2q * (Pm σ * (QW2 * (Pm τ * cq S2q))) := by
-        rw [hST]
-    _ = cq T2q * (Pm σ * (Pm τ * (QW2 * cq S2q))) := by
-        rw [← Matrix.mul_assoc QW2 (Pm τ) (cq S2q), ← hcen,
+    _ = ((48:ℂ)⁻¹ • ci T2z) * (Pm σ
+          * (QW2 * (Pm τ * ci S2z))) := by rw [hST]
+    _ = ((48:ℂ)⁻¹ • ci T2z) * (Pm σ
+          * (Pm τ * (QW2 * ci S2z))) := by
+        rw [← Matrix.mul_assoc QW2 (Pm τ) (ci S2z), ← hcen,
           Matrix.mul_assoc]
-    _ = cq T2q * (Pm σ * (Pm τ * cq S2q)) := by rw [hQS]
+    _ = ((48:ℂ)⁻¹ • ci T2z) * (Pm σ
+          * (Pm τ * ci S2z)) := by rw [hQS]
     _ = rho2 (σ * τ) := by
-        rw [rho2, ← Matrix.mul_assoc (Pm σ) (Pm τ),
-          Pm_mul]
+        rw [rho2, ← Matrix.mul_assoc (Pm σ) (Pm τ), Pm_mul]
 
 theorem rho3_s_det : (rho3 sPerm).det = -1 := by
-  rw [rho3, Pm_s_eq_cq, ← cq_mul, ← cq_mul, hs3]
-  norm_num [cq, Matrix.det_fin_three, Matrix.map_apply]
+  set M3 : Matrix (Fin 3) (Fin 3) ℤ := !![0,1,0;1,0,0;0,0,1]
+    with hM3
+  have h : rho3 sPerm = ci M3 := by
+    rw [hM3]
+    rw [rho3, Pm_s_eq_cz, cz_eq_ci, Matrix.smul_mul,
+      ← ci_mul, ← ci_mul, hs3z, ci_nsmul, smul_smul,
+      show (16:ℂ)⁻¹ * ((16:ℕ):ℂ) = 1 by norm_num, one_smul]
+  rw [h, show (ci M3).det = ((M3.det : ℤ) : ℂ) from
+    (RingHom.map_det (Int.castRingHom ℂ) M3).symm,
+    show M3.det = -1 from by rw [hM3]; decide]
+  norm_num
 
 theorem rho3_r_det : (rho3 rPerm).det = -1 := by
-  rw [rho3, Pm_r_eq_cq, ← cq_mul, ← cq_mul, hr3]
-  norm_num [cq, Matrix.det_fin_three, Matrix.map_apply]
+  set M3 : Matrix (Fin 3) (Fin 3) ℤ := !![-1,-1,-1;1,0,0;0,1,0]
+    with hM3
+  have h : rho3 rPerm = ci M3 := by
+    rw [hM3]
+    rw [rho3, Pm_r_eq_cz, cz_eq_ci, Matrix.smul_mul,
+      ← ci_mul, ← ci_mul, hr3z, ci_nsmul, smul_smul,
+      show (16:ℂ)⁻¹ * ((16:ℕ):ℂ) = 1 by norm_num, one_smul]
+  rw [h, show (ci M3).det = ((M3.det : ℤ) : ℂ) from
+    (RingHom.map_det (Int.castRingHom ℂ) M3).symm,
+    show M3.det = -1 from by rw [hM3]; decide]
+  norm_num
 
 theorem rho2_s_det : (rho2 sPerm).det = -1 := by
-  rw [rho2, Pm_s_eq_cq, ← cq_mul, ← cq_mul, hs2]
-  norm_num [cq, Matrix.det_fin_two, Matrix.map_apply]
+  set M2 : Matrix (Fin 2) (Fin 2) ℤ := !![1,0;1,-1]
+    with hM2
+  have h : rho2 sPerm = ci M2 := by
+    rw [hM2]
+    rw [rho2, Pm_s_eq_cz, cz_eq_ci, Matrix.smul_mul,
+      ← ci_mul, ← ci_mul, hs2z, ci_nsmul, smul_smul,
+      show (48:ℂ)⁻¹ * ((48:ℕ):ℂ) = 1 by norm_num, one_smul]
+  rw [h, show (ci M2).det = ((M2.det : ℤ) : ℂ) from
+    (RingHom.map_det (Int.castRingHom ℂ) M2).symm,
+    show M2.det = -1 from by rw [hM2]; decide]
+  norm_num
 
 theorem rho2_r_det : (rho2 rPerm).det = -1 := by
-  rw [rho2, Pm_r_eq_cq, ← cq_mul, ← cq_mul, hr2]
-  norm_num [cq, Matrix.det_fin_two, Matrix.map_apply]
+  set M2 : Matrix (Fin 2) (Fin 2) ℤ := !![0,-1;-1,0]
+    with hM2
+  have h : rho2 rPerm = ci M2 := by
+    rw [hM2]
+    rw [rho2, Pm_r_eq_cz, cz_eq_ci, Matrix.smul_mul,
+      ← ci_mul, ← ci_mul, hr2z, ci_nsmul, smul_smul,
+      show (48:ℂ)⁻¹ * ((48:ℕ):ℂ) = 1 by norm_num, one_smul]
+  rw [h, show (ci M2).det = ((M2.det : ℤ) : ℂ) from
+    (RingHom.map_det (Int.castRingHom ℂ) M2).symm,
+    show M2.det = -1 from by rw [hM2]; decide]
+  norm_num
 
 theorem sign_sPerm : (Equiv.Perm.sign sPerm : ℤ) = -1 := by
   decide
@@ -1441,12 +1498,25 @@ theorem edge_projector_sum_apply (x : V → ℂ)
     (Pedge 0 1 + Pedge 0 2 + Pedge 0 3 + Pedge 1 2
       + Pedge 1 3 + Pedge 2 3) *ᵥ x = (2:ℂ) • x := by
   rw [edge_projector_sum]
-  have hJ : (Matrix.of (fun _ _ => (1:ℂ))) *ᵥ x = 0 := by
-    funext v
-    simp [Matrix.mulVec, dotProduct, hx]
-  rw [Matrix.smul_mulVec_assoc, Matrix.sub_mulVec,
-    Matrix.one_mulVec, Matrix.smul_mulVec_assoc, hJ,
-    smul_zero, sub_zero]
+  funext v
+  simp only [Matrix.mulVec, Matrix.smul_apply,
+    Matrix.sub_apply, Matrix.one_apply, Matrix.of_apply,
+    dotProduct, Pi.smul_apply, smul_eq_mul]
+  have h1 : ∀ w : V,
+      (2:ℂ) * ((if v = w then (1:ℂ) else 0) - 4⁻¹ * 1)
+        * x w
+      = (if v = w then (2:ℂ) * x w else 0)
+        - 2⁻¹ * x w := by
+    intro w
+    by_cases hw : v = w
+    · rw [if_pos hw, if_pos hw]
+      ring
+    · rw [if_neg hw, if_neg hw]
+      ring
+  rw [Finset.sum_congr rfl fun w _ => h1 w,
+    Finset.sum_sub_distrib, Finset.sum_ite_eq,
+    if_pos (Finset.mem_univ v), ← Finset.mul_sum, hx,
+    mul_zero, sub_zero]
 
 end ActiveResidual
 end NCG

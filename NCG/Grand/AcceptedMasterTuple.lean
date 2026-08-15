@@ -54,11 +54,15 @@ def coordinateReadAlgebra : Subalgebra ℂ (Ω → ℂ) :=
     (Set.range fun ja : Σ j, Ωj j =>
       coordinateIndicator Ωj r ja.1 ja.2)
 
+omit [Fintype Ω] [Fintype m] [DecidableEq Ω] [DecidableEq m]
+  [(j : m) → Fintype (Ωj j)] in
 theorem coordinateIndicator_mem_pullback (j : m) (a : Ωj j) :
     coordinateIndicator Ωj r j a ∈ tuplePullbackAlgebra Ωj r := by
   refine ⟨fun t => if t.1 j = a then 1 else 0, ?_⟩
   rfl
 
+omit [Fintype Ω] [DecidableEq Ω] [DecidableEq m]
+  [(j : m) → Fintype (Ωj j)] in
 /-- The indicator of one tuple value is the product of its coordinate
 point indicators. -/
 theorem tupleIndicator_eq_product (t : TupleImage Ωj r) :
@@ -78,7 +82,7 @@ theorem tupleIndicator_eq_product (t : TupleImage Ωj r) :
   · rw [if_neg h]
     have hex : ∃ j, r j ω ≠ t.1 j := by
       by_contra hall
-      push_neg at hall
+      push Not at hall
       apply h
       funext j
       exact hall j
@@ -89,6 +93,8 @@ theorem tupleIndicator_eq_product (t : TupleImage Ωj r) :
     change (if r j ω = t.1 j then (1 : ℂ) else 0) = 0
     rw [if_neg hj]
 
+omit [Fintype Ω] [DecidableEq Ω] [DecidableEq m]
+  [(j : m) → Fintype (Ωj j)] in
 theorem tupleIndicator_mem_coordinateRead (t : TupleImage Ωj r) :
     (fun ω : Ω => if tupleMap Ωj r ω = t.1 then (1 : ℂ) else 0) ∈
       coordinateReadAlgebra Ωj r := by
@@ -98,6 +104,8 @@ theorem tupleIndicator_mem_coordinateRead (t : TupleImage Ωj r) :
   apply Algebra.subset_adjoin
   exact ⟨⟨j, t.1 j⟩, rfl⟩
 
+omit [DecidableEq Ω] [DecidableEq m]
+  [(j : m) → Fintype (Ωj j)] in
 /-- Exact Read-algebra identity
 `R_τ = τ* C(Ω_τ)`. -/
 theorem coordinateReadAlgebra_eq_tuplePullback :
@@ -127,6 +135,8 @@ theorem coordinateReadAlgebra_eq_tuplePullback :
     exact Subalgebra.sum_mem _ fun t _ =>
       Subalgebra.smul_mem _ (tupleIndicator_mem_coordinateRead Ωj r t) _
 
+omit [DecidableEq Ω] [DecidableEq m]
+  [(j : m) → Fintype (Ωj j)] in
 /-- The joint-tuple indicators are nonzero pairwise-orthogonal atoms
 partitioning the unit. -/
 theorem tupleIndicators_are_atoms :
@@ -160,6 +170,8 @@ theorem tupleIndicators_are_atoms :
       exact fun hval => hne (Subtype.ext hval.symm)
     · simp
 
+omit [DecidableEq Ω] [DecidableEq m]
+  [(j : m) → Fintype (Ωj j)] in
 /-- Every sharp record through which every coordinate factors maps
 surjectively onto the tuple image. -/
 theorem universal_tuple_surjection
@@ -216,6 +228,239 @@ theorem master_panel_contains_subpanel
     (M : Matrix I J ℂ) (row : I' → I) (col : J' → J) :
     M.submatrix row col =
       fun i j => M (row i) (col j) := rfl
+
+/-! ### Minimality: the tuple-fibre indicators are exactly the
+nonzero minimal projections of the Read algebra -/
+
+omit [DecidableEq Ω] [DecidableEq m]
+  [(j : m) → Fintype (Ωj j)] in
+/-- Every idempotent of the coordinate Read algebra is a sum of
+tuple-fibre indicators. -/
+theorem idempotent_form (p : Ω → ℂ)
+    (hp : p ∈ coordinateReadAlgebra Ωj r)
+    (hidem : p * p = p) :
+    ∃ S : Finset (TupleImage Ωj r),
+      p = ∑ t ∈ S, (fun ω : Ω =>
+        if tupleMap Ωj r ω = t.1 then (1:ℂ) else 0) := by
+  rw [coordinateReadAlgebra_eq_tuplePullback] at hp
+  obtain ⟨g, rfl⟩ := hp
+  have hg : ∀ x : TupleImage Ωj r, g x = 0 ∨ g x = 1 := by
+    intro x
+    obtain ⟨ω, hω⟩ := x.2
+    have h := congrFun hidem ω
+    simp only [Pi.mul_apply, Function.comp_apply] at h
+    have hex : (⟨tupleMap Ωj r ω, ⟨ω, rfl⟩⟩ :
+        TupleImage Ωj r) = x := Subtype.ext hω
+    rw [hex] at h
+    have h2 : g x * (g x - 1) = 0 := by linear_combination h
+    rcases mul_eq_zero.mp h2 with h3 | h3
+    · exact Or.inl h3
+    · exact Or.inr (sub_eq_zero.mp h3)
+  refine ⟨Finset.univ.filter (fun t => g t = 1), ?_⟩
+  funext ω
+  rw [Finset.sum_apply]
+  set e : TupleImage Ωj r := ⟨tupleMap Ωj r ω, ⟨ω, rfl⟩⟩
+    with he
+  by_cases hgω : g e = 1
+  · rw [Finset.sum_eq_single_of_mem e
+      (Finset.mem_filter.mpr ⟨Finset.mem_univ e, hgω⟩)
+      (fun t _ ht => by
+        rw [if_neg fun hc => ht (Subtype.ext hc.symm)])]
+    rw [if_pos rfl]
+    exact hgω
+  · rw [Finset.sum_eq_zero (fun t ht => by
+      rw [if_neg fun hc => hgω (by
+        rw [show e = t from Subtype.ext hc]
+        exact (Finset.mem_filter.mp ht).2)])]
+    rcases hg e with h0 | h1
+    · exact h0
+    · exact absurd h1 hgω
+
+omit [DecidableEq Ω] [DecidableEq m]
+  [(j : m) → Fintype (Ωj j)] in
+/-- Each tuple-fibre indicator is a minimal projection: any
+idempotent of the algebra below it is `0` or the indicator
+itself. -/
+theorem tupleIndicator_minimal (t : TupleImage Ωj r)
+    (q : Ω → ℂ) (hq : q ∈ coordinateReadAlgebra Ωj r)
+    (hqidem : q * q = q)
+    (hle : q * (fun ω : Ω =>
+      if tupleMap Ωj r ω = t.1 then (1:ℂ) else 0) = q) :
+    q = 0 ∨ q = (fun ω : Ω =>
+      if tupleMap Ωj r ω = t.1 then (1:ℂ) else 0) := by
+  obtain ⟨S, rfl⟩ := idempotent_form Ωj r _ hq hqidem
+  by_cases hS : ∀ s ∈ S, s = t
+  · rcases Finset.eq_empty_or_nonempty S with rfl | ⟨s, hs⟩
+    · exact Or.inl (by simp)
+    · have hst := hS s hs
+      subst hst
+      have hSe : S = {s} := by
+        apply Finset.eq_singleton_iff_unique_mem.mpr
+        exact ⟨hs, fun u hu => hS u hu⟩
+      rw [hSe, Finset.sum_singleton]
+      exact Or.inr rfl
+  · exfalso
+    push Not at hS
+    obtain ⟨s, hsS, hst⟩ := hS
+    obtain ⟨ω, hω⟩ := s.2
+    have h := congrFun hle ω
+    simp only [Pi.mul_apply, Finset.sum_apply] at h
+    have hleft : ∑ u ∈ S, (if tupleMap Ωj r ω = u.1
+        then (1:ℂ) else 0) = 1 := by
+      rw [Finset.sum_eq_single_of_mem s hsS
+        (fun u _ hu => by
+          rw [if_neg fun hc => hu (Subtype.ext
+            (hc.symm.trans hω))])]
+      rw [if_pos hω]
+    have hright : (if tupleMap Ωj r ω = t.1
+        then (1:ℂ) else 0) = 0 := by
+      rw [if_neg fun hc => hst (Subtype.ext
+        (hω.symm.trans hc))]
+    rw [hleft, hright, one_mul] at h
+    exact one_ne_zero h.symm
+
+omit [DecidableEq Ω] [DecidableEq m]
+  [(j : m) → Fintype (Ωj j)] in
+/-- Conversely, every nonzero minimal projection of the Read
+algebra is a tuple-fibre indicator. -/
+theorem minimal_projection_classification (p : Ω → ℂ)
+    (hp : p ∈ coordinateReadAlgebra Ωj r)
+    (hidem : p * p = p) (hne : p ≠ 0)
+    (hmin : ∀ q ∈ coordinateReadAlgebra Ωj r,
+      q * q = q → q * p = q →
+      q = 0 ∨ q = p) :
+    ∃ t : TupleImage Ωj r, p = (fun ω : Ω =>
+      if tupleMap Ωj r ω = t.1 then (1:ℂ) else 0) := by
+  obtain ⟨S, rfl⟩ := idempotent_form Ωj r _ hp hidem
+  rcases Finset.eq_empty_or_nonempty S with rfl | ⟨t, htS⟩
+  · exact absurd (by simp) hne
+  refine ⟨t, ?_⟩
+  have hqmem : (fun ω : Ω =>
+      if tupleMap Ωj r ω = t.1 then (1:ℂ) else 0)
+      ∈ coordinateReadAlgebra Ωj r :=
+    tupleIndicator_mem_coordinateRead Ωj r t
+  have hqidem : (fun ω : Ω =>
+        if tupleMap Ωj r ω = t.1 then (1:ℂ) else 0)
+      * (fun ω : Ω =>
+        if tupleMap Ωj r ω = t.1 then (1:ℂ) else 0)
+      = (fun ω : Ω =>
+        if tupleMap Ωj r ω = t.1 then (1:ℂ) else 0) := by
+    funext ω
+    by_cases h : tupleMap Ωj r ω = t.1 <;>
+      simp [h]
+  have hqle : (fun ω : Ω =>
+        if tupleMap Ωj r ω = t.1 then (1:ℂ) else 0)
+      * (∑ u ∈ S, fun ω : Ω =>
+        if tupleMap Ωj r ω = u.1 then (1:ℂ) else 0)
+      = (fun ω : Ω =>
+        if tupleMap Ωj r ω = t.1 then (1:ℂ) else 0) := by
+    funext ω
+    simp only [Pi.mul_apply, Finset.sum_apply]
+    by_cases h : tupleMap Ωj r ω = t.1
+    · rw [if_pos h, one_mul,
+        Finset.sum_eq_single_of_mem t htS
+          (fun u _ hu => by
+            rw [if_neg fun hc => hu (Subtype.ext
+              (hc.symm.trans h))]),
+        if_pos h]
+    · rw [if_neg h, zero_mul]
+  rcases hmin _ hqmem hqidem hqle with h0 | hEq
+  · exfalso
+    obtain ⟨ω, hω⟩ := t.2
+    have := congrFun h0 ω
+    rw [if_pos hω] at this
+    exact one_ne_zero this
+  · exact hEq.symm
+
+/-! ### Append-only ledger copy and its conservativity -/
+
+/-- The passive append-only ledger copy of a
+classical–quantum family: each classical block is tensored
+with the sharp ledger registration of its coordinate value. -/
+noncomputable def ledgerCopy {d L : Type*} [Fintype L]
+    [DecidableEq L] (ρ : Ω → Matrix d d ℂ) (v : Ω → L) :
+    Ω → Matrix (d × L) (d × L) ℂ :=
+  fun ω => ρ ω ⊗ₖ Matrix.single (v ω) (v ω) 1
+
+omit [Fintype Ω] [DecidableEq Ω] in
+/-- Tracing out the ledger recovers the original process on
+every classical block. -/
+theorem ledgerCopy_conservative {d L : Type*} [Fintype d]
+    [Fintype L] [DecidableEq d] [DecidableEq L] [Nonempty L]
+    (ρ : Ω → Matrix d d ℂ) (v : Ω → L) (ω : Ω) :
+    partialTraceRight (ledgerCopy ρ v ω) = ρ ω :=
+  sm_completion_conservative.1 (ρ ω) _
+    (Matrix.trace_single_eq_same (v ω) 1)
+
+omit [Fintype Ω] [DecidableEq Ω] in
+/-- Sequential copies to two append-only ledgers are jointly
+conservative: two partial traces recover the original
+process. -/
+theorem ledgerCopy_sequential {d L1 L2 : Type*} [Fintype d]
+    [Fintype L1] [Fintype L2] [DecidableEq d]
+    [DecidableEq L1] [DecidableEq L2] [Nonempty L1]
+    [Nonempty L2]
+    (ρ : Ω → Matrix d d ℂ) (v : Ω → L1) (w : Ω → L2)
+    (ω : Ω) :
+    partialTraceRight (partialTraceRight
+      (ledgerCopy (ledgerCopy ρ v) w ω)) = ρ ω := by
+  rw [ledgerCopy_conservative, ledgerCopy_conservative]
+
+omit [Fintype Ω] [DecidableEq Ω] in
+/-- The copy is trace preserving on every classical block. -/
+theorem ledgerCopy_trace {d L : Type*} [Fintype d]
+    [Fintype L] [DecidableEq d] [DecidableEq L]
+    (ρ : Ω → Matrix d d ℂ) (v : Ω → L) (ω : Ω) :
+    (ledgerCopy ρ v ω).trace = (ρ ω).trace := by
+  rw [ledgerCopy, Matrix.trace_kronecker,
+    Matrix.trace_single_eq_same, mul_one]
+
+/-! ### The master panel and exact subpanel compression -/
+
+section MasterPanel
+
+variable {n T W' Λ I : Type*} [Fintype n] [Fintype T]
+  [Fintype W']
+
+/-- The complete master panel: the Gram of every projected
+word against every inserted projected word. -/
+noncomputable def masterPanel (p : T → Matrix n n ℂ)
+    (W : W' → Matrix n n ℂ) (X : Λ → Matrix n n ℂ)
+    (lam : Λ) (ta ub : T × W') : ℂ :=
+  ((p ta.1 * W ta.2)ᴴ * (X lam * (p ub.1 * W ub.2))).trace
+
+/-- A synthesized panel element: a finite coefficient
+combination of projected words. -/
+noncomputable def synthVec (p : T → Matrix n n ℂ)
+    (W : W' → Matrix n n ℂ) (c : I → T × W' → ℂ) (i : I) :
+    Matrix n n ℂ :=
+  ∑ ta : T × W', c i ta • (p ta.1 * W ta.2)
+
+/-- **Exact subpanel compression**: the Gram panel of any
+finite coefficient synthesis is the corresponding
+coefficient compression of the complete master panel — every
+derived provenance/pulse/chronological/determining-field/
+action subpanel is contained in the master panel. -/
+theorem subpanel_compression (p : T → Matrix n n ℂ)
+    (W : W' → Matrix n n ℂ) (X : Λ → Matrix n n ℂ)
+    (c : I → T × W' → ℂ) (lam : Λ) (i k : I) :
+    ((synthVec p W c i)ᴴ * (X lam * synthVec p W c k)).trace
+      = ∑ ta : T × W', ∑ ub : T × W',
+        star (c i ta) * c k ub
+          * masterPanel p W X lam ta ub := by
+  simp only [synthVec, masterPanel]
+  rw [Matrix.conjTranspose_sum, Finset.mul_sum,
+    Finset.sum_mul_sum]
+  rw [Matrix.trace_sum]
+  refine Finset.sum_congr rfl fun ta _ => ?_
+  rw [Matrix.trace_sum]
+  refine Finset.sum_congr rfl fun ub _ => ?_
+  simp only [Matrix.conjTranspose_smul, smul_mul_assoc,
+    mul_smul_comm, smul_smul, Matrix.trace_smul,
+    smul_eq_mul, mul_assoc]
+  ring
+
+end MasterPanel
 
 end AcceptedMasterTuple
 end NCG
