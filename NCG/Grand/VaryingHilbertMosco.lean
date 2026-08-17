@@ -40,8 +40,16 @@ variable [∀ n, NormedAddCommGroup (Hn n)] [∀ n, InnerProductSpace K (Hn n)]
 
 /-- Isometric identifications of varying Hilbert spaces with subspaces of one common carrier. -/
 structure System where
+
   /-- The stage-`n` isometric embedding into the common Hilbert carrier. -/
   embedding : ∀ n, Hn n →ₗᵢ[K] H
+
+/-- A fixed Hilbert space viewed as a constant varying-space system. -/
+def constantSystem (K : Type u) [RCLike K] (H : Type v)
+    [NormedAddCommGroup H] [InnerProductSpace K H] :
+    System (K := K) (H := H) (Hn := fun _ ↦ H) where
+  embedding _ := LinearIsometry.id
+
 
 variable (J : System (K := K) (H := H) (Hn := Hn))
 
@@ -66,6 +74,19 @@ def WeaklyConverges (x : ∀ n, Hn n) (xlim : H) : Prop :=
   ∀ y : H,
     Tendsto (fun n ↦ inner K (J.embedding n (x n)) y) atTop
       (𝓝 (inner K xlim y))
+
+@[simp]
+theorem constantSystem_stronglyConverges_iff (x : ℕ → H) (xlim : H) :
+    (constantSystem K H).StronglyConverges x xlim ↔
+      Tendsto x atTop (𝓝 xlim) := by
+  rfl
+
+@[simp]
+theorem constantSystem_weaklyConverges_iff (x : ℕ → H) (xlim : H) :
+    (constantSystem K H).WeaklyConverges x xlim ↔
+      ∀ y : H, Tendsto (fun n ↦ inner K (x n) y) atTop
+        (𝓝 (inner K xlim y)) := by
+  rfl
 
 /-- Strong convergence on the common carrier implies weak convergence. -/
 theorem StronglyConverges.weak {x : ∀ n, Hn n} {xlim : H}
@@ -111,6 +132,11 @@ theorem StronglyConverges.add {x y : ∀ n, Hn n} {a b : H}
     (hx : J.StronglyConverges x a) (hy : J.StronglyConverges y b) :
     J.StronglyConverges (fun n ↦ x n + y n) (a + b) := by
   simpa only [StronglyConverges, map_add] using Filter.Tendsto.add hx hy
+/-- Strong convergence is closed under scalar multiplication. -/
+theorem StronglyConverges.smul (c : K) {x : ∀ n, Hn n} {a : H}
+    (hx : J.StronglyConverges x a) :
+    J.StronglyConverges (fun n ↦ c • x n) (c • a) := by
+  simpa only [StronglyConverges, map_smul] using hx.const_smul c
 
 /-- Weak convergence is closed under addition of dependent sequences. -/
 theorem WeaklyConverges.add {x y : ∀ n, Hn n} {a b : H}
@@ -194,5 +220,42 @@ theorem StrongOperatorConverges.comp
   exact hT _ _ (hS x xlim hx)
 
 end System
+/-- The zero operator family converges strongly to zero. -/
+theorem strongOperatorConverges_zero :
+    J.StrongOperatorConverges J (fun _ ↦ (0 : Hn _ →L[K] Hn _)) (0 : H →L[K] H) := by
+  intro x xlim hx
+  simpa using J.stronglyConverges_zero
+
+/-- Varying-space strong operator convergence is closed under addition. -/
+theorem StrongOperatorConverges.add
+    {Sn Tn : ∀ n, Hn n →L[K] Hn n} {S T : H →L[K] H}
+    (hS : J.StrongOperatorConverges J Sn S)
+    (hT : J.StrongOperatorConverges J Tn T) :
+    J.StrongOperatorConverges J (fun n ↦ Sn n + Tn n) (S + T) := by
+  intro x xlim hx
+  simpa only [add_apply] using
+    System.StronglyConverges.add J (hS x xlim hx) (hT x xlim hx)
+
+/-- Varying-space strong operator convergence is closed under scalar multiplication. -/
+theorem StrongOperatorConverges.smul (c : K)
+    {Tn : ∀ n, Hn n →L[K] Hn n} {T : H →L[K] H}
+    (hT : J.StrongOperatorConverges J Tn T) :
+    J.StrongOperatorConverges J (fun n ↦ c • Tn n) (c • T) := by
+  intro x xlim hx
+  simpa only [smul_apply] using System.StronglyConverges.smul J c (hT x xlim hx)
+
+/-- Every fixed power of a strongly convergent endomorphism family converges strongly. -/
+theorem StrongOperatorConverges.pow
+    {Tn : ∀ n, Hn n →L[K] Hn n} {T : H →L[K] H}
+    (hT : J.StrongOperatorConverges J Tn T) (m : ℕ) :
+    J.StrongOperatorConverges J (fun n ↦ (Tn n) ^ m) (T ^ m) := by
+  induction m with
+  | zero =>
+      change J.StrongOperatorConverges J (fun _ ↦ ContinuousLinearMap.id K _)
+        (ContinuousLinearMap.id K H)
+      exact J.strongOperatorConverges_id
+  | succ m ih =>
+      simpa [pow_succ, ContinuousLinearMap.mul_def] using
+        System.StrongOperatorConverges.comp J ih hT
 
 end NCG.VaryingHilbert
