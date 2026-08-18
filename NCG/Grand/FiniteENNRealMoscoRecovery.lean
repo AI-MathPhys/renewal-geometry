@@ -68,6 +68,6 @@ theorem exists_finite_recovery_energy_tendsto
   · intro n
     by_cases hn : q n (x n) = ∞
     · simp [x', hn, hq0 n]
-    · simpa [x', hn] using hn
+    · simp [x', hn]
 
 end NCG.VaryingHilbert.System.MoscoConverges

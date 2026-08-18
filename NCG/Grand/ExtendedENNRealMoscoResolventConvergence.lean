@@ -33,7 +33,6 @@ variable {H : Type v} [NormedAddCommGroup H] [InnerProductSpace K H]
   [CompleteSpace H] [TopologicalSpace.SeparableSpace H]
 variable {Hn : ℕ → Type w}
 variable [∀ n, NormedAddCommGroup (Hn n)] [∀ n, InnerProductSpace K (Hn n)]
-  [∀ n, InnerProductSpace ℝ (Hn n)] [∀ n, IsScalarTower ℝ K (Hn n)]
 variable (J : System (K := K) (H := H) (Hn := Hn))
 
 /-- Cofinal Mosco convergence of genuinely extended forms implies strong convergence of their
@@ -68,7 +67,8 @@ theorem strongOperatorConverges_resolvents_of_extendedCofinalMosco
   have hrecoveryEnergy : Tendsto
       (fun n ↦ (q n (recovery n)).toReal) atTop
       (𝓝 ((qlim xlim).toReal)) := by
-    simpa using (ENNReal.tendsto_toReal (hlimitFinite flim)).comp hrecoveryEnergyENN
+    simpa [xlim, Function.comp_def] using
+      (ENNReal.tendsto_toReal (hlimitFinite flim)).comp hrecoveryEnergyENN
   have hrecoveryValue := resolventObjective_tendsto_of_recovery J
     (fun n z ↦ (q n z).toReal) (fun z ↦ (qlim z).toReal) lam
       f recovery flim xlim hrecoveryStrong hf hrecoveryEnergy

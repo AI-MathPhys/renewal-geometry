@@ -84,8 +84,8 @@ theorem eventually_finrank_range_eq_of_tendsto
     (hconv : Tendsto Pseq l (𝓝 P))
     (hidem_seq : ∀ᶠ i in l, IsIdempotentElem (Pseq i).toLinearMap)
     (hidem : IsIdempotentElem P.toLinearMap)
-    (hfinite_seq :
-      ∀ i, Module.Finite K (LinearMap.range (Pseq i).toLinearMap))
+    (hfinite_seq : ∀ᶠ i in l,
+      Module.Finite K (LinearMap.range (Pseq i).toLinearMap))
     [Module.Finite K (LinearMap.range P.toLinearMap)] :
     ∀ᶠ i in l,
       Module.finrank K (LinearMap.range (Pseq i).toLinearMap) =
@@ -95,8 +95,8 @@ theorem eventually_finrank_range_eq_of_tendsto
     tendsto_iff_norm_sub_tendsto_zero.mp hconv
   have hclose : ∀ᶠ i in l, ‖Pseq i - P‖ < 1 :=
     hnorm.eventually (Iio_mem_nhds zero_lt_one)
-  filter_upwards [hidem_seq, hclose] with i hi hdist
+  filter_upwards [hidem_seq, hfinite_seq, hclose] with i hi hfinite hdist
   letI : Module.Finite K (LinearMap.range (Pseq i).toLinearMap) :=
-    hfinite_seq i
+    hfinite
   exact finrank_range_eq_of_norm_sub_lt_one (Pseq i) P hi hidem hdist
 end NCG.ProjectionStability

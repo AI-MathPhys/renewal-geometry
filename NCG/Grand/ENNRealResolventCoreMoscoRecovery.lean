@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import NCG.Grand.ENNRealResolventEnvelopeLiminf
-import NCG.Grand.EMetricValuedDiagonalRecovery
+import NCG.Grand.TopologicalValuedDiagonalRecovery
 
 /-!
 # Extended-valued Mosco recovery from a resolvent energy core
@@ -75,7 +75,7 @@ theorem exists_ennreal_recovery_of_resolventCore_approximation
     ∃ x : ∀ n, Hn n,
       J.StronglyConverges x xlim ∧
         Tendsto (fun n ↦ q n (x n)) atTop (𝓝 (qlim xlim)) := by
-  apply exists_recovery_of_emetricValued_tendsto_approximants J q qlim
+  apply exists_recovery_of_topologicalValued_tendsto_approximants J q qlim
     (fun m ↦ T (source m)) xlim hcore hcoreEnergy
   intro m
   exact exists_ennreal_resolventImage_recovery J q qlim lam Tn T

@@ -103,8 +103,8 @@ theorem exists_diagonal_tendsto_pair_emetric
     · exact hδ
   have huClose : Tendsto
       (fun n ↦ edist (u (φ n) n) (c (φ n))) atTop (𝓝 0) := by
-    apply tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds hε
-    · exact fun _ ↦ bot_le
+    apply tendsto_of_tendsto_of_tendsto_of_le_of_le' tendsto_const_nhds hε
+    · exact Eventually.of_forall fun _ ↦ bot_le
     · filter_upwards [hφSpec] with n hn
       exact (hNu (φ n) n ((le_max_right (Ng (φ n)) (Nu (φ n))).trans
         ((le_max_right (φ n) _).trans hn))).le

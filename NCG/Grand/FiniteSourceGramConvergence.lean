@@ -5,6 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import NCG.Grand.RieszProjectionStability
 
+import Mathlib.Topology.Instances.Matrix
+import Mathlib.Analysis.InnerProductSpace.GramMatrix
 /-!
 # Convergence of finite source Gram matrices
 
@@ -67,5 +69,48 @@ theorem sourceGram_tendsto
   rw [tendsto_pi_nhds]
   intro j
   exact sourceGram_entry_tendsto hT hv i j
+
+/-- Determinants of finite projected source Gram matrices converge. -/
+theorem sourceGram_det_tendsto
+    [Fintype ι] [DecidableEq ι]
+    {T : ℕ → H →L[K] H} {Tlim : H →L[K] H}
+    {v : ℕ → ι → H} {vlim : ι → H}
+    (hT : Tendsto T atTop (𝓝 Tlim))
+    (hv : ∀ i, Tendsto (fun n ↦ v n i) atTop (𝓝 (vlim i))) :
+    Tendsto (fun n ↦ (sourceGram (T n) (v n)).det) atTop
+      (𝓝 (sourceGram Tlim vlim).det) := by
+  exact (continuous_id.matrix_det.tendsto _).comp (sourceGram_tendsto hT hv)
+
+/-- If the limiting projected source family has nonsingular Gram matrix, no sufficiently late
+cutoff source Gram can collapse. -/
+theorem eventually_sourceGram_det_ne_zero
+    [Fintype ι] [DecidableEq ι]
+    {T : ℕ → H →L[K] H} {Tlim : H →L[K] H}
+    {v : ℕ → ι → H} {vlim : ι → H}
+    (hT : Tendsto T atTop (𝓝 Tlim))
+    (hv : ∀ i, Tendsto (fun n ↦ v n i) atTop (𝓝 (vlim i)))
+    (hdet : (sourceGram Tlim vlim).det ≠ 0) :
+    ∀ᶠ n in atTop, (sourceGram (T n) (v n)).det ≠ 0 := by
+  have hopen : {z : K | z ≠ 0} ∈ 𝓝 (sourceGram Tlim vlim).det :=
+    isOpen_compl_singleton.mem_nhds hdet
+  exact (sourceGram_det_tendsto hT hv).eventually hopen
+
+/-- Linear independence of a finite limiting projected source family persists at every
+sufficiently late cutoff.  In particular, a rank-three source cannot collapse. -/
+theorem eventually_linearIndependent_projected_sources
+    [Finite ι]
+    {T : ℕ → H →L[K] H} {Tlim : H →L[K] H}
+    {v : ℕ → ι → H} {vlim : ι → H}
+    (hT : Tendsto T atTop (𝓝 Tlim))
+    (hv : ∀ i, Tendsto (fun n ↦ v n i) atTop (𝓝 (vlim i)))
+    (hind : LinearIndependent K (fun i ↦ Tlim (vlim i))) :
+    ∀ᶠ n in atTop, LinearIndependent K (fun i ↦ T n (v n i)) := by
+  classical
+  letI := Fintype.ofFinite ι
+  have hdet : (sourceGram Tlim vlim).det ≠ 0 := by
+    exact Matrix.det_gram_ne_zero_iff_linearIndependent.mpr hind
+  filter_upwards [eventually_sourceGram_det_ne_zero hT hv hdet] with n hn
+  exact Matrix.det_gram_ne_zero_iff_linearIndependent.mp hn
+
 
 end NCG.SpectralApproximation
