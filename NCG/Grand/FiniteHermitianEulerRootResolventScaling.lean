@@ -26,6 +26,14 @@ universe u
 
 variable {ι : Type u} [Fintype ι] [DecidableEq ι]
 
+/-- The literal positive-shift resolvent of a finite Hermitian generator, bundled as a
+continuous operator on Euclidean space. -/
+def finiteHermitianShiftedResolventOperator (A : Matrix ι ι ℂ) (lam : ℝ) :
+    EuclideanSpace ℂ ι →L[ℂ] EuclideanSpace ℂ ι :=
+  Matrix.toEuclideanCLM (n := ι) (𝕜 := ℂ)
+    ((((lam : ℝ) : ℂ) • (1 : Matrix ι ι ℂ) + A)⁻¹)
+
+omit [Fintype ι] in
 /-- The diagonal one-step Euler multiplier is a positive scalar multiple of the shifted
 diagonal resolvent. -/
 theorem finiteSpectralEulerRoot_eq_smul_finiteSpectralResolvent
@@ -42,11 +50,20 @@ theorem finiteSpectralEulerRoot_eq_smul_finiteSpectralResolvent
     have ht0 : t ≠ 0 := ne_of_gt ht
     have hkPos : (0 : ℝ) < k := by exact_mod_cast hk
     have hkR : (k : ℝ) ≠ 0 := ne_of_gt hkPos
-    have hleft : 1 + t * ν i / (k : ℝ) ≠ 0 := by positivity
-    have hright : (k : ℝ) / t + ν i ≠ 0 := by positivity
-    norm_cast
-    field_simp [ht0, hkR, hleft, hright]
-  · simp [Matrix.diagonal_apply, Matrix.smul_apply, hij]
+    have hfracNonneg : 0 ≤ t * ν i / (k : ℝ) :=
+      div_nonneg (mul_nonneg ht.le (hν i)) hkPos.le
+    have hleft : 1 + t * ν i / (k : ℝ) ≠ 0 := ne_of_gt (by linarith)
+    have hlamPos : 0 < (k : ℝ) / t := div_pos hkPos ht
+    have hright : (k : ℝ) / t + ν i ≠ 0 :=
+      ne_of_gt (add_pos_of_pos_of_nonneg hlamPos (hν i))
+    have hreal :
+        (1 + t * ν i / (k : ℝ))⁻¹ =
+          ((k : ℝ) / t) * (((k : ℝ) / t + ν i)⁻¹) := by
+      field_simp [ht0, hkR, hleft, hright]
+    change (((1 + t * ν i / (k : ℝ))⁻¹ : ℝ) : ℂ) =
+      (((k : ℝ) / t : ℝ) : ℂ) * ((((k : ℝ) / t + ν i)⁻¹ : ℝ) : ℂ)
+    exact_mod_cast hreal
+  · simp [Matrix.smul_apply, hij]
 
 /-- Unitary spectral transport preserves the one-step Euler root formula. -/
 theorem finiteUnitarySpectralEulerRoot_eq_inv_one_add_smul
@@ -81,9 +98,8 @@ theorem finiteHermitianEulerRootOperator_eq_smul_shiftedResolvent
     (A : Matrix ι ι ℂ) (hA : A.PosSemidef) (t : ℝ) (m : ℕ) (ht : 0 < t) :
     finiteHermitianEulerRootOperator A t m =
       (((((m + 1 : ℕ) : ℝ) / t : ℝ) : ℂ)) •
-        Matrix.toEuclideanCLM (n := ι) (𝕜 := ℂ)
-          ((((((m + 1 : ℕ) : ℝ) / t : ℝ) : ℂ) •
-            (1 : Matrix ι ι ℂ) + A)⁻¹) := by
+        finiteHermitianShiftedResolventOperator A
+          (((m + 1 : ℕ) : ℝ) / t) := by
   let k : ℕ := m + 1
   let lam : ℝ := (k : ℝ) / t
   have hk : 0 < k := Nat.succ_pos m
@@ -117,7 +133,7 @@ theorem finiteHermitianEulerRootOperator_eq_smul_shiftedResolvent
       _ = _ := (finiteUnitarySpectralEulerRoot_eq_inv_one_add_smul
         hA.1.eigenvectorUnitary hA.1.eigenvalues t k ht.le hk
           hA.eigenvalues_nonneg).symm
-  unfold finiteHermitianEulerRootOperator
+  unfold finiteHermitianEulerRootOperator finiteHermitianShiftedResolventOperator
   change Matrix.toEuclideanCLM (n := ι) (𝕜 := ℂ)
       (((1 : Matrix ι ι ℂ) + (((t / (k : ℝ) : ℝ) : ℂ) • A))⁻¹) = _
   rw [hroot,
@@ -128,6 +144,5 @@ theorem finiteHermitianEulerRootOperator_eq_smul_shiftedResolvent
         hA.1.eigenvectorUnitary hA.1.eigenvalues lam)) = _
   rw [NCG.SpectralGap.finiteUnitarySpectralResolvent_eigenvector_eq_inv_shiftedHermitian
     hA.1 lam hlam hA.eigenvalues_nonneg]
-  simpa [k, lam]
 
 end NCG.ImplicitEuler

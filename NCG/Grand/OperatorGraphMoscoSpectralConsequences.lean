@@ -4,8 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import NCG.Grand.OneShiftResolventSpectralConsequences
-import NCG.Grand.ExtendedENNRealMoscoResolventConvergenceFromConvexity
-import NCG.Grand.ENNRealOperatorGraphResolventMinimizer
+import NCG.Grand.OperatorGraphMoscoResolventConvergence
 import NCG.Grand.ENNRealResolventIdentityFromConvexity
 import NCG.Grand.ENNRealResolventOperatorBound
 
@@ -126,17 +125,9 @@ theorem operatorGraphMosco_spectralConsequences
   have hlimitConvex :
       ConvexOn ℝ {z : H | q z ≠ ∞} (fun z ↦ (q z).toReal) := by
     simpa [q] using convexOn_ennrealOperatorGraphEnergy D A
-  have haStrong : J.StrongOperatorConverges J (Rn a) (R a) := by
-    apply J.strongOperatorConverges_resolvents_of_extendedCofinalMosco_minimizers
-      qn q (by simpa [qn, q] using hmosco) a haPos (Rn a) (R a)
-    · intro n
-      simp [qn]
-    · exact hstageFinite a haPos
-    · exact hlimitFinite a haPos
-    · exact hstageConvex
-    · exact hlimitConvex
-    · exact hstageMin a haPos
-    · exact hlimitMin a haPos
+  have haStrong : J.StrongOperatorConverges J (Rn a) (R a) :=
+    J.operatorGraphMosco_strongResolvents_allPositive
+      Dn An D A Rn R hmosco hstageEquation hlimitEquation a haPos
   have hbound : ∀ lam, 0 < lam → ∃ C : ℝ, ∀ n, ‖Rn lam n‖ ≤ C := by
     intro lam hlam
     refine ⟨1 / lam, fun n ↦ ?_⟩
