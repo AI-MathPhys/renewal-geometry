@@ -66,8 +66,8 @@ theorem eventually_range_protected_eq_operatorGraphKernel_of_riesz_finrank_eq
     (hequation : ∀ n f, OperatorGraphResolventEquation (D n) (A n) lam f (T n f))
     (center : ℂ) (radius : ℝ)
     (hinside : (((lam : ℝ) : ℂ)⁻¹) ∈ Metric.ball center radius)
-    (hcontour : ∀ n z, z ∈ Metric.sphere center radius → z ∈ resolventSet ℂ (T n))
-    (hfinite : ∀ n, Module.Finite ℂ
+    (hcontour : ∀ᶠ n in atTop, ∀ z ∈ Metric.sphere center radius, z ∈ resolventSet ℂ (T n))
+    (hfinite : ∀ᶠ n in atTop, Module.Finite ℂ
       (LinearMap.range
         (NCG.ResolventStability.circleRieszProjection (T n) center radius).toLinearMap))
     (hprotected : ∀ᶠ n in atTop,
@@ -78,13 +78,13 @@ theorem eventually_range_protected_eq_operatorGraphKernel_of_riesz_finrank_eq
         (NCG.ResolventStability.circleRieszProjection (T n) center radius).toLinearMap)) :
     ∀ᶠ n in atTop,
       LinearMap.range (P n).toLinearMap = operatorGraphKernel (D n) (A n) := by
-  filter_upwards [hprotected, hrank] with n hnProtected hnRank
+  filter_upwards [hcontour, hfinite, hprotected, hrank] with n hnContour hnFinite hnProtected hnRank
   letI : Module.Finite ℂ
       (LinearMap.range
         (NCG.ResolventStability.circleRieszProjection (T n) center radius).toLinearMap) :=
-    hfinite n
+    hnFinite
   exact range_protected_eq_operatorGraphKernel_of_riesz_finrank_eq
     (D n) (A n) lam hlam (T n) (P n) (hequation n)
-      center radius hinside (fun z hz ↦ hcontour n z hz) hnProtected hnRank
+      center radius hinside hnContour hnProtected hnRank
 
 end NCG.VaryingHilbert

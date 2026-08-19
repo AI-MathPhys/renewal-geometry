@@ -7,6 +7,8 @@ import NCG.Grand.CollectivelyCompactLimit
 import NCG.Grand.FiniteSourceGramConvergence
 import NCG.Grand.NearbyProjectionRankStability
 import NCG.Grand.CompactCircleRieszProjection
+import NCG.Grand.SelfAdjointContourSeparation
+import NCG.Grand.ContourResolventBounds
 
 /-!
 # Abstract spectral consequences of compact screens
@@ -192,4 +194,55 @@ theorem compactScreen_spectralConsequences_of_zero_avoiding
       hlimit_unit hlimit_bound hstage_unit hstage_bound hidemSeq hidemLim
         hfiniteSeq v vlim hv
 
+/-- Real-centered endpoint form of the zero-avoiding compact-screen theorem. The two limiting
+endpoint checks supply the full limiting contour. Collective compactness upgrades strong to
+operator-norm convergence, after which a quantitative Neumann argument supplies both eventual
+cutoff contour separation and a common cutoff resolvent bound automatically. -/
+theorem compactScreen_spectralConsequences_of_zero_avoiding_of_endpoints
+    {ι : Type w}
+    (T : ℕ → H →L[ℂ] H) (Tlim : H →L[ℂ] H)
+    (hcompact :
+      (NCG.VaryingHilbert.constantSystem ℂ H).CollectivelyCompact T)
+    (hsymm : ∀ n, LinearMap.IsSymmetric (T n).toLinearMap)
+    (hlim_symm : LinearMap.IsSymmetric Tlim.toLinearMap)
+    (hstrong : ∀ y : H, Tendsto (fun n ↦ T n y) atTop (𝓝 (Tlim y)))
+    (center radius : ℝ) (hR : 0 < radius)
+    (hzero : (0 : ℂ) ∉ Metric.closedBall (center : ℂ) radius)
+    (hlimit_left : ((center - radius : ℝ) : ℂ) ∈ resolventSet ℂ Tlim)
+    (hlimit_right : ((center + radius : ℝ) : ℂ) ∈ resolventSet ℂ Tlim)
+    (v : ℕ → ι → H) (vlim : ι → H)
+    (hv : ∀ i, Tendsto (fun n ↦ v n i) atTop (𝓝 (vlim i))) :
+    IsCompactOperator Tlim ∧
+      Tendsto (fun n ↦ circleRieszProjection (T n) (center : ℂ) radius) atTop
+        (𝓝 (circleRieszProjection Tlim (center : ℂ) radius)) ∧
+      (∀ᶠ n in atTop,
+        Module.finrank ℂ
+            (LinearMap.range
+              (circleRieszProjection (T n) (center : ℂ) radius).toLinearMap) =
+          Module.finrank ℂ
+            (LinearMap.range
+              (circleRieszProjection Tlim (center : ℂ) radius).toLinearMap)) ∧
+      Tendsto
+        (fun n ↦ NCG.SpectralApproximation.sourceGram
+          (circleRieszProjection (T n) (center : ℂ) radius) (v n)) atTop
+        (𝓝 (NCG.SpectralApproximation.sourceGram
+          (circleRieszProjection Tlim (center : ℂ) radius) vlim)) := by
+  have hlimit_unit : ∀ z ∈ Metric.sphere (center : ℂ) radius,
+      z ∈ resolventSet ℂ Tlim :=
+    circle_subset_resolventSet_of_isSymmetric_of_endpoints
+      Tlim hlim_symm center radius hlimit_left hlimit_right
+  obtain ⟨M, hM, hlimit_bound⟩ :=
+    exists_circle_resolvent_norm_bound Tlim (center : ℂ) radius hlimit_unit
+  have hop : Tendsto T atTop (𝓝 Tlim) :=
+    NCG.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_symmetric'
+      T Tlim hcompact hsymm hlim_symm hstrong
+  obtain ⟨N, hN, hstage⟩ := eventually_circle_resolvent_bound_of_tendsto
+    T Tlim hop (center : ℂ) radius M hM hlimit_unit hlimit_bound
+  have hstage_unit : ∀ᶠ n in atTop, ∀ z ∈ Metric.sphere (center : ℂ) radius,
+      z ∈ resolventSet ℂ (T n) := hstage.mono fun n hn z hz ↦ (hn z hz).1
+  have hstage_bound : ∀ᶠ n in atTop, ∀ z ∈ Metric.sphere (center : ℂ) radius,
+      ‖resolvent (T n) z‖ ≤ N := hstage.mono fun n hn z hz ↦ (hn z hz).2
+  exact compactScreen_spectralConsequences_of_zero_avoiding
+    T Tlim hcompact hsymm hlim_symm hstrong (center : ℂ) radius hR hzero M N hM
+      hlimit_unit hlimit_bound hstage_unit hstage_bound v vlim hv
 end NCG.ResolventStability

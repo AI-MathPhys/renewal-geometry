@@ -6,6 +6,8 @@ Authors: Aurélien Pélissier
 import NCG.Grand.ProtectedGraphKernelRigidityFromCompactResolvents
 import NCG.Grand.ConvergentSpectralGapCoercivity
 import NCG.Grand.ComplementCompressedResolventGap
+import NCG.Grand.SelfAdjointContourSeparation
+import NCG.Grand.AutomaticCircleRieszProjectionStability
 
 /-!
 # Coercive continuum Howe compiler
@@ -38,7 +40,7 @@ theorem continuumHowe_kernel_and_uniformCoercivity
     (center : ℂ) (radius : ℝ)
     (hzero : (0 : ℂ) ∉ Metric.closedBall center radius)
     (hinside : (((lam : ℝ) : ℂ)⁻¹) ∈ Metric.ball center radius)
-    (hcontour : ∀ n z, z ∈ Metric.sphere center radius → z ∈ resolventSet ℂ (T n))
+    (hcontour : ∀ᶠ n in atTop, ∀ z ∈ Metric.sphere center radius, z ∈ resolventSet ℂ (T n))
     (Qlim : E →L[ℂ] E)
     (hRieszTendsto : Tendsto
       (fun n ↦ NCG.ResolventStability.circleRieszProjection (T n) center radius)
@@ -84,7 +86,7 @@ theorem continuumHowe_kernel_and_compressedResolventCoercivity
     (center : ℂ) (radius : ℝ)
     (hzero : (0 : ℂ) ∉ Metric.closedBall center radius)
     (hinside : (((lam : ℝ) : ℂ)⁻¹) ∈ Metric.ball center radius)
-    (hcontour : ∀ n z, z ∈ Metric.sphere center radius → z ∈ resolventSet ℂ (T n))
+    (hcontour : ∀ᶠ n in atTop, ∀ z ∈ Metric.sphere center radius, z ∈ resolventSet ℂ (T n))
     (Qlim Tlim Plim : E →L[ℂ] E)
     (hRieszTendsto : Tendsto
       (fun n ↦ NCG.ResolventStability.circleRieszProjection (T n) center radius)
@@ -119,10 +121,10 @@ theorem continuumHowe_kernel_and_compressedResolventCoercivity
       (‖NCG.SpectralGap.complementCompression Tlim Plim‖⁻¹ - lam)
       hresidual hcoercive
       (NCG.SpectralGap.inverseNormGap_tendsto T P Tlim Plim lam hTnorm hPnorm hne) hgapPos
-/-- Fully derived compressed-resolvent compiler: once cutoff protected and Riesz operators are
-orthogonal projections, kernel rigidity forces the protected projections to converge to the
-Riesz limit. Thus only resolvent norm convergence and positivity of the limiting compressed gap
-remain as analytic inputs to the coercivity passage. -/
+/-- Fully derived compressed-resolvent compiler: once the cutoff protected projections and the
+limiting Riesz projection are orthogonal, kernel rigidity forces the protected projections to
+converge to the Riesz limit. Thus only resolvent norm convergence and positivity of the limiting
+compressed gap remain as analytic inputs to the coercivity passage. -/
 theorem continuumHowe_kernel_and_derivedCompressedResolventCoercivity
     (D : ℕ → Submodule ℂ E) (A : ∀ n, D n →ₗ[ℂ] F)
     (lam : ℝ) (hlam : 0 < lam) (T P : ℕ → E →L[ℂ] E)
@@ -132,7 +134,7 @@ theorem continuumHowe_kernel_and_derivedCompressedResolventCoercivity
     (center : ℂ) (radius : ℝ)
     (hzero : (0 : ℂ) ∉ Metric.closedBall center radius)
     (hinside : (((lam : ℝ) : ℂ)⁻¹) ∈ Metric.ball center radius)
-    (hcontour : ∀ n z, z ∈ Metric.sphere center radius → z ∈ resolventSet ℂ (T n))
+    (hcontour : ∀ᶠ n in atTop, ∀ z ∈ Metric.sphere center radius, z ∈ resolventSet ℂ (T n))
     (Qlim Tlim : E →L[ℂ] E)
     (hRieszTendsto : Tendsto
       (fun n ↦ NCG.ResolventStability.circleRieszProjection (T n) center radius)
@@ -143,8 +145,7 @@ theorem continuumHowe_kernel_and_derivedCompressedResolventCoercivity
       Module.finrank ℂ (LinearMap.range (P n).toLinearMap) =
         Module.finrank ℂ (LinearMap.range Qlim.toLinearMap))
     (hstarP : ∀ᶠ n in atTop, IsStarProjection (P n))
-    (hstarRiesz : ∀ᶠ n in atTop, IsStarProjection
-      (NCG.ResolventStability.circleRieszProjection (T n) center radius))
+    (hstarQlim : IsStarProjection Qlim)
     (hTnorm : Tendsto T atTop (nhds Tlim))
     (hne : ‖NCG.SpectralGap.complementCompression Tlim Qlim‖ ≠ 0)
     (energy residual : ℕ → E → ℝ)
@@ -166,9 +167,62 @@ theorem continuumHowe_kernel_and_derivedCompressedResolventCoercivity
   have hPnorm : Tendsto P atTop (nhds Qlim) :=
     protectedProjection_tendsto_of_compact_riesz_tendsto
       D A lam hlam T P hequation hcompact hsymmetric center radius hR hzero hinside
-        hcontour Qlim hRieszTendsto hprotected hprotectedRank hstarP hstarRiesz
+        hcontour Qlim hRieszTendsto hprotected hprotectedRank hstarP hstarQlim
   exact continuumHowe_kernel_and_compressedResolventCoercivity
     D A lam hlam T P hequation hcompact hsymmetric center radius hzero hinside hcontour
       Qlim Tlim Qlim hRieszTendsto hprotected hprotectedRank hTnorm hPnorm hne
       energy residual hresidual hcoercive hgapPos
+/-- Endpoint-separated form of the strongest compiler. For symmetric resolvents and a
+real-centered circle, checking the left and right real endpoints at each cutoff automatically
+supplies the entire contour-resolvent hypothesis. -/
+theorem continuumHowe_kernel_and_derivedCompressedResolventCoercivity_of_endpoints
+    (D : ℕ → Submodule ℂ E) (A : ∀ n, D n →ₗ[ℂ] F)
+    (lam : ℝ) (hlam : 0 < lam) (T P : ℕ → E →L[ℂ] E)
+    (hequation : ∀ n f, OperatorGraphResolventEquation (D n) (A n) lam f (T n f))
+    (hcompact : ∀ n, IsCompactOperator (T n))
+    (hsymmetric : ∀ n, LinearMap.IsSymmetric (T n).toLinearMap)
+    (center radius : ℝ)
+    (hzero : (0 : ℂ) ∉ Metric.closedBall (center : ℂ) radius)
+    (hinside : (((lam : ℝ) : ℂ)⁻¹) ∈ Metric.ball (center : ℂ) radius)
+    (hleft : ∀ n, ((center - radius : ℝ) : ℂ) ∈ resolventSet ℂ (T n))
+    (hright : ∀ n, ((center + radius : ℝ) : ℂ) ∈ resolventSet ℂ (T n))
+    (Qlim Tlim : E →L[ℂ] E)
+    (hRieszTendsto : Tendsto
+      (fun n ↦ NCG.ResolventStability.circleRieszProjection
+        (T n) (center : ℂ) radius)
+      atTop (nhds Qlim))
+    (hprotected : ∀ᶠ n in atTop,
+      LinearMap.range (P n).toLinearMap ≤ operatorGraphKernel (D n) (A n))
+    (hprotectedRank : ∀ n,
+      Module.finrank ℂ (LinearMap.range (P n).toLinearMap) =
+        Module.finrank ℂ (LinearMap.range Qlim.toLinearMap))
+    (hstarP : ∀ᶠ n in atTop, IsStarProjection (P n))
+    (hstarQlim : IsStarProjection Qlim)
+    (hTnorm : Tendsto T atTop (nhds Tlim))
+    (hne : ‖NCG.SpectralGap.complementCompression Tlim Qlim‖ ≠ 0)
+    (energy residual : ℕ → E → ℝ)
+    (hresidual : ∀ n x, 0 ≤ residual n x)
+    (hcoercive : ∀ n x,
+      (‖NCG.SpectralGap.complementCompression (T n) (P n)‖⁻¹ - lam) * residual n x ≤
+        energy n x)
+    (hgapPos : 0 < ‖NCG.SpectralGap.complementCompression Tlim Qlim‖⁻¹ - lam) :
+    (∀ᶠ n in atTop,
+      LinearMap.range (P n).toLinearMap = operatorGraphKernel (D n) (A n)) ∧
+      0 < (‖NCG.SpectralGap.complementCompression Tlim Qlim‖⁻¹ - lam) / 2 ∧
+      (∀ᶠ n in atTop, ∀ x,
+        (‖NCG.SpectralGap.complementCompression Tlim Qlim‖⁻¹ - lam) / 2 * residual n x ≤
+          energy n x) ∧
+      ∀ xseq : ℕ → E,
+        Tendsto (fun n ↦ energy n (xseq n)) atTop (nhds 0) →
+          Tendsto (fun n ↦ residual n (xseq n)) atTop (nhds 0) := by
+  have hcontour : ∀ n z,
+      z ∈ Metric.sphere (center : ℂ) radius → z ∈ resolventSet ℂ (T n) := by
+    intro n
+    exact NCG.ResolventStability.circle_subset_resolventSet_of_isSymmetric_of_endpoints
+      (T n) (hsymmetric n) center radius (hleft n) (hright n)
+  exact continuumHowe_kernel_and_derivedCompressedResolventCoercivity
+    D A lam hlam T P hequation hcompact hsymmetric (center : ℂ) radius hzero hinside
+      (Filter.Eventually.of_forall hcontour) Qlim Tlim hRieszTendsto hprotected
+      hprotectedRank hstarP hstarQlim
+      hTnorm hne energy residual hresidual hcoercive hgapPos
 end NCG.VaryingHilbert

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib.Analysis.CStarAlgebra.Spectrum
 import Mathlib.Analysis.InnerProductSpace.Adjoint
+import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
 
 /-!
 # Contour separation for self-adjoint operators
@@ -65,4 +66,40 @@ theorem circle_subset_resolventSet_of_isSelfAdjoint_of_real_points
   exact subset_resolventSet_of_isSelfAdjoint_of_real_points
     a ha (Metric.sphere center radius) hreal
 
+/-- For a circle centered on the real axis, self-adjoint contour separation reduces to checking
+the two real endpoints. Every other point of the circle is automatically resolvent. -/
+theorem circle_subset_resolventSet_of_isSelfAdjoint_of_endpoints
+    (a : A) (ha : IsSelfAdjoint a)
+    (center radius : ℝ)
+    (hleft : ((center - radius : ℝ) : ℂ) ∈ resolventSet ℂ a)
+    (hright : ((center + radius : ℝ) : ℂ) ∈ resolventSet ℂ a) :
+    ∀ z ∈ Metric.sphere (center : ℂ) radius, z ∈ resolventSet ℂ a := by
+  apply circle_subset_resolventSet_of_isSelfAdjoint_of_real_points
+    a ha (center : ℂ) radius
+  intro x hx
+  have hdist := Metric.mem_sphere.mp hx
+  rw [Complex.isometry_ofReal.dist_eq, Real.dist_eq] at hdist
+  change |x - center| = radius at hdist
+  by_cases hnonneg : 0 ≤ x - center
+  · have hxeq : x = center + radius := by
+      rw [abs_of_nonneg hnonneg] at hdist
+      linarith
+    simpa [hxeq] using hright
+  · have hxeq : x = center - radius := by
+      rw [abs_of_nonpos (le_of_not_ge hnonneg)] at hdist
+      linarith
+    simpa [hxeq] using hleft
+set_option maxHeartbeats 400000 in
+-- Synthesizing the bounded-operator C-star instance and real-spectrum wrapper is expensive.
+/-- Hilbert-space specialization stated with the symmetric linear-map hypothesis used by
+the graph-resolvent machinery. -/
+theorem circle_subset_resolventSet_of_isSymmetric_of_endpoints
+    {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+    (T : H →L[ℂ] H) (hT : LinearMap.IsSymmetric T.toLinearMap)
+    (center radius : ℝ)
+    (hleft : ((center - radius : ℝ) : ℂ) ∈ resolventSet ℂ T)
+    (hright : ((center + radius : ℝ) : ℂ) ∈ resolventSet ℂ T) :
+    ∀ z ∈ Metric.sphere (center : ℂ) radius, z ∈ resolventSet ℂ T :=
+  circle_subset_resolventSet_of_isSelfAdjoint_of_endpoints
+    T hT.isSelfAdjoint center radius hleft hright
 end NCG.ResolventStability

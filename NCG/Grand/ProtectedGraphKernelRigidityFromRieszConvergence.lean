@@ -34,7 +34,7 @@ theorem eventually_range_protected_eq_operatorGraphKernel_of_riesz_tendsto
     (hequation : ∀ n f, OperatorGraphResolventEquation (D n) (A n) lam f (T n f))
     (center : ℂ) (radius : ℝ)
     (hinside : (((lam : ℝ) : ℂ)⁻¹) ∈ Metric.ball center radius)
-    (hcontour : ∀ n z, z ∈ Metric.sphere center radius → z ∈ resolventSet ℂ (T n))
+    (hcontour : ∀ᶠ n in atTop, ∀ z ∈ Metric.sphere center radius, z ∈ resolventSet ℂ (T n))
     (Qlim : E →L[ℂ] E)
     (hRieszTendsto : Tendsto
       (fun n ↦ NCG.ResolventStability.circleRieszProjection (T n) center radius)
@@ -43,7 +43,7 @@ theorem eventually_range_protected_eq_operatorGraphKernel_of_riesz_tendsto
       IsIdempotentElem
         (NCG.ResolventStability.circleRieszProjection
           (T n) center radius).toLinearMap)
-    (hfinite : ∀ n, Module.Finite ℂ
+    (hfinite : ∀ᶠ n in atTop, Module.Finite ℂ
       (LinearMap.range
         (NCG.ResolventStability.circleRieszProjection (T n) center radius).toLinearMap))
     [Module.Finite ℂ (LinearMap.range Qlim.toLinearMap)]
@@ -71,7 +71,7 @@ theorem eventually_range_protected_eq_operatorGraphKernel_of_riesz_tendsto
     NCG.ProjectionStability.eventually_finrank_range_eq_of_tendsto
       (fun n ↦ NCG.ResolventStability.circleRieszProjection (T n) center radius)
       Qlim hRieszTendsto hRieszIdempotent hQlimIdempotent
-        (Filter.Eventually.of_forall hfinite)
+        hfinite
   apply eventually_range_protected_eq_operatorGraphKernel_of_riesz_finrank_eq
     D A lam hlam T P hequation center radius hinside hcontour hfinite hprotected
   filter_upwards [hRieszRank] with n hn
