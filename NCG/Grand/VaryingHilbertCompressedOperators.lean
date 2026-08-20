@@ -86,6 +86,21 @@ theorem stronglyConverges_adjointLift
   · simpa only [norm_sub_rev] using
       (tendsto_iff_norm_sub_tendsto_zero.mp hy)
 
+/-- Every strongly convergent stage lift is asymptotically equal, in its
+native stage norm, to the canonical adjoint lift of the same limit vector. -/
+theorem StronglyConverges.norm_sub_adjointLift_tendsto_zero
+    (hdense : J.IsAsymptoticallyDense) {x : ∀ n, Hn n} {xlim : H}
+    (hx : J.StronglyConverges x xlim) :
+    Tendsto (fun n ↦ ‖x n - J.adjointLift n xlim‖) atTop (nhds 0) := by
+  have hadj := J.stronglyConverges_adjointLift hdense xlim
+  have hdiff : J.StronglyConverges
+      (fun n ↦ x n - J.adjointLift n xlim) (xlim - xlim) := by
+    simpa [sub_eq_add_neg] using
+      StronglyConverges.add J hx (StronglyConverges.smul J (-1 : K) hadj)
+  rw [StronglyConverges] at hdiff
+  have hnorm := hdiff.norm
+  simpa only [LinearIsometry.norm_map, sub_self, norm_zero] using hnorm
+
 /-- Varying-space strong convergence gives pointwise strong convergence of the literal
 common-carrier compressions `Jₙ Tₙ Jₙ†`. -/
 theorem compressedOperator_tendsto
