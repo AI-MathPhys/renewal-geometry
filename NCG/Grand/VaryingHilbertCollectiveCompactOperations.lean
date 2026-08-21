@@ -21,7 +21,7 @@ noncomputable section
 
 namespace NCG.VaryingHilbert.System
 
-universe u v w v' w'
+universe u v w v' w' x
 
 variable {K : Type u} [RCLike K]
 variable {H : Type v} [NormedAddCommGroup H] [InnerProductSpace K H]
@@ -30,6 +30,8 @@ variable [∀ n, NormedAddCommGroup (Hn n)] [∀ n, InnerProductSpace K (Hn n)]
 variable {G : Type v'} [NormedAddCommGroup G] [InnerProductSpace K G]
 variable {Gn : ℕ → Type w'}
 variable [∀ n, NormedAddCommGroup (Gn n)] [∀ n, InnerProductSpace K (Gn n)]
+variable {En : ℕ → Type x}
+variable [∀ n, NormedAddCommGroup (En n)] [∀ n, InnerProductSpace K (En n)]
 
 variable (L : System (K := K) (H := G) (Hn := Gn))
 
@@ -61,9 +63,9 @@ theorem CollectivelyCompact.smul_family
   exact smul_mem_smul_set (hTC n ⟨x, hx, rfl⟩)
 
 /-- A collectively compact family remains collectively compact after uniformly bounded
-precomposition on its varying source spaces. -/
+precomposition from arbitrary varying source spaces. -/
 theorem CollectivelyCompact.precomp_uniformlyBounded
-    {Tn : ∀ n, Hn n →L[K] Gn n} {Sn : ∀ n, Hn n →L[K] Hn n}
+    {Tn : ∀ n, Hn n →L[K] Gn n} {Sn : ∀ n, En n →L[K] Hn n}
     (hT : L.CollectivelyCompact Tn) (B : ℝ) (hB : 0 < B)
     (hS : ∀ n, ‖Sn n‖ ≤ B) :
     L.CollectivelyCompact (fun n ↦ (Tn n).comp (Sn n)) := by

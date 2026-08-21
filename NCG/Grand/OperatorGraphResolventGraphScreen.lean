@@ -33,6 +33,41 @@ variable {F : Type z} [NormedAddCommGroup F] [InnerProductSpace K F]
   [CompleteSpace F]
 variable {Fn : ℕ → Type z'}
 variable [∀ n, NormedAddCommGroup (Fn n)] [∀ n, InnerProductSpace K (Fn n)]
+omit [CompleteSpace H] [CompleteSpace F] in
+/-- The embedded unit-ball outputs of every canonical weak-resolvent graph map lie in one
+explicit common-carrier ball. -/
+theorem embeddedUnitBallOutputs_operatorGraphResolventHilbertGraph_subset_closedBall
+    (L : System (K := K) (H := WithLp 2 (H × F))
+      (Hn := fun n ↦ WithLp 2 (Hn n × Fn n)))
+    (Dn : ∀ n, Submodule K (Hn n))
+    (An : ∀ n, Dn n →ₗ[K] Fn n)
+    (Rn : ∀ n, Hn n →L[K] Hn n)
+    (lam : ℝ) (hlam : 0 < lam)
+    (hEquation : ∀ n (f : Hn n),
+      OperatorGraphResolventEquation (Dn n) (An n) lam f (Rn n f)) :
+    L.embeddedUnitBallOutputs
+      (fun n ↦ operatorGraphResolventHilbertGraph
+        (Dn n) (An n) (Rn n) lam hlam (hEquation n)) ⊆
+      Metric.closedBall 0 (2 * (1 + 1 / lam)) := by
+  let graphRn : ∀ n, Hn n →L[K] WithLp 2 (Hn n × Fn n) :=
+    fun n ↦ operatorGraphResolventHilbertGraph
+      (Dn n) (An n) (Rn n) lam hlam (hEquation n)
+  intro y hy
+  rw [embeddedUnitBallOutputs] at hy
+  obtain ⟨n, x, hx, rfl⟩ := Set.mem_iUnion.mp hy
+  have hxnorm : ‖x‖ ≤ 1 := by
+    simpa only [Metric.mem_closedBall, dist_zero_right] using hx
+  rw [Metric.mem_closedBall, dist_zero_right, embeddedOperator_apply,
+    (L.embedding n).norm_map]
+  calc
+    ‖graphRn n x‖ ≤ (2 * (1 + 1 / lam)) * ‖x‖ := by
+      simpa only [graphRn] using
+        norm_operatorGraphResolventHilbertGraph_le
+          (Dn n) (An n) (Rn n) lam hlam (hEquation n) x
+    _ ≤ (2 * (1 + 1 / lam)) * 1 :=
+      mul_le_mul_of_nonneg_left hxnorm (by positivity)
+    _ = 2 * (1 + 1 / lam) := by ring
+
 
 /-- Compact screens for the canonical weak-resolvent graph outputs imply
 collective compactness of the physical resolvent family. -/
@@ -100,21 +135,9 @@ theorem operatorGraphResolvent_collectivelyCompact_of_graphScreenTails
       (Dn n) (An n) (Rn n) lam hlam (hEquation n)
   have hbounded : L.embeddedUnitBallOutputs graphRn ⊆
       Metric.closedBall 0 (2 * (1 + 1 / lam)) := by
-    intro y hy
-    rw [embeddedUnitBallOutputs] at hy
-    obtain ⟨n, x, hx, rfl⟩ := Set.mem_iUnion.mp hy
-    have hxnorm : ‖x‖ ≤ 1 := by
-      simpa only [Metric.mem_closedBall, dist_zero_right] using hx
-    rw [Metric.mem_closedBall, dist_zero_right, embeddedOperator_apply,
-      (L.embedding n).norm_map]
-    calc
-      ‖graphRn n x‖ ≤ (2 * (1 + 1 / lam)) * ‖x‖ := by
-        simpa only [graphRn] using
-          norm_operatorGraphResolventHilbertGraph_le
-            (Dn n) (An n) (Rn n) lam hlam (hEquation n) x
-      _ ≤ (2 * (1 + 1 / lam)) * 1 :=
-        mul_le_mul_of_nonneg_left hxnorm (by positivity)
-      _ = 2 * (1 + 1 / lam) := by ring
+    simpa only [graphRn] using
+      embeddedUnitBallOutputs_operatorGraphResolventHilbertGraph_subset_closedBall
+        L Dn An Rn lam hlam hEquation
   apply J.operatorGraphResolvent_collectivelyCompact_of_graphScreens
     L Dn An Rn lam hlam hEquation screen (2 * (1 + 1 / lam))
   · simpa only [graphRn] using hbounded

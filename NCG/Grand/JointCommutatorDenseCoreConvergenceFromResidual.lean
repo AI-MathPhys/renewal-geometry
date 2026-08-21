@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import NCG.Grand.JointCommutatorResolventResidual
 import NCG.Grand.BoundedOperatorNormalResolventFamily
 import NCG.Grand.VaryingHilbertAsymptoticDensityFromDenseSources
+import NCG.Grand.VaryingHilbertNormalOperatorConvergence
 import NCG.Grand.VaryingHilbertCompressedOperators
 
 /-!
@@ -199,6 +200,118 @@ theorem jointCommutator_denseCoreConvergence_to_boundedNormalResolvent_of_adjoin
                   (J.adjointLift cutoff
                     (boundedOperatorNormalResolventFamily A lam y))) by abel]
       exact norm_add_le _ _
-  · exact hsourceDiff.add (hconsistency y hy)
+  · simpa only [add_zero] using hsourceDiff.add (hconsistency y hy)
+
+/-- Strong operator convergence of the shifted finite commutant Laplacians
+to the shifted bounded normal operator automatically supplies the canonical
+adjoint-lift consistency defect, hence dense-core resolvent convergence. -/
+theorem jointCommutator_denseCoreConvergence_of_shiftedNormalStrongConvergence
+    {d : ℕ → Type u} [∀ cutoff, Fintype (d cutoff)] {s : ℕ}
+    (c : ∀ cutoff, Fin s → Matrix (d cutoff) (d cutoff) ℂ)
+    (J : System (K := ℂ) (H := H)
+      (Hn := fun cutoff ↦ EuclideanSpace ℂ (d cutoff × d cutoff)))
+    (A : H →L[ℂ] F) (lam : ℝ) (hlam : 0 < lam)
+    (D : Set H) (hD : Dense D)
+    (source : H → ∀ cutoff,
+      EuclideanSpace ℂ (d cutoff × d cutoff))
+    (hsource : ∀ y ∈ D, J.StronglyConverges (source y) y)
+    (hoperator : J.StrongOperatorConverges J
+      (fun cutoff ↦ NCG.shiftedCommutantLaplacianCLM (c cutoff) lam)
+      (shiftedBoundedNormalCLM A lam)) :
+    ∀ y ∈ D, J.StronglyConverges
+      (fun cutoff ↦ NCG.jointCommutatorResolventFamily c lam cutoff
+        (source y cutoff))
+      (boundedOperatorNormalResolventFamily A lam y) := by
+  have hdense : J.IsAsymptoticallyDense :=
+    J.isAsymptoticallyDense_of_denseSources D hD source hsource
+  apply J.jointCommutator_denseCoreConvergence_to_boundedNormalResolvent_of_adjointLiftConsistency
+    c A lam hlam D hD source hsource
+  intro y hy
+  let u := boundedOperatorNormalResolventFamily A lam y
+  have hadj : J.StronglyConverges (fun cutoff ↦ J.adjointLift cutoff u) u :=
+    J.stronglyConverges_adjointLift hdense u
+  have hout : J.StronglyConverges
+      (fun cutoff ↦ NCG.shiftedCommutantLaplacianCLM (c cutoff) lam
+        (J.adjointLift cutoff u))
+      (shiftedBoundedNormalCLM A lam u) :=
+    hoperator _ _ hadj
+  have heq : shiftedBoundedNormalCLM A lam u = y := by
+    rw [shiftedBoundedNormalCLM_apply]
+    exact boundedOperatorNormalResolventFamily_normalEquation A lam hlam y
+  have hout' : J.StronglyConverges
+      (fun cutoff ↦ NCG.shiftedCommutantLaplacianCLM (c cutoff) lam
+        (J.adjointLift cutoff u)) y := by
+    simpa only [heq] using hout
+  have hdiff := StronglyConverges.norm_sub_adjointLift_tendsto_zero
+    J hdense hout'
+  simpa only [u, norm_sub_rev] using hdiff
+
+/-- It suffices to prove strong operator convergence of the raw commutant
+Laplacians.  Adding the positive scalar shift is automatic because identity
+operators converge strongly on every varying-Hilbert system. -/
+theorem jointCommutator_denseCoreConvergence_of_commutantLaplacianStrongConvergence
+    {d : ℕ → Type u} [∀ cutoff, Fintype (d cutoff)] {s : ℕ}
+    (c : ∀ cutoff, Fin s → Matrix (d cutoff) (d cutoff) ℂ)
+    (J : System (K := ℂ) (H := H)
+      (Hn := fun cutoff ↦ EuclideanSpace ℂ (d cutoff × d cutoff)))
+    (A : H →L[ℂ] F) (lam : ℝ) (hlam : 0 < lam)
+    (D : Set H) (hD : Dense D)
+    (source : H → ∀ cutoff,
+      EuclideanSpace ℂ (d cutoff × d cutoff))
+    (hsource : ∀ y ∈ D, J.StronglyConverges (source y) y)
+    (hnormal : J.StrongOperatorConverges J
+      (fun cutoff ↦ NCG.commutantLaplacianCLM (c cutoff))
+      ((ContinuousLinearMap.adjoint A).comp A)) :
+    ∀ y ∈ D, J.StronglyConverges
+      (fun cutoff ↦ NCG.jointCommutatorResolventFamily c lam cutoff
+        (source y cutoff))
+      (boundedOperatorNormalResolventFamily A lam y) := by
+  have hscalar : J.StrongOperatorConverges J
+      (fun _ ↦ (lam : ℂ) • ContinuousLinearMap.id ℂ _)
+      ((lam : ℂ) • ContinuousLinearMap.id ℂ H) :=
+    StrongOperatorConverges.smul J (lam : ℂ)
+      J.strongOperatorConverges_id
+  have hshift : J.StrongOperatorConverges J
+      (fun cutoff ↦ NCG.shiftedCommutantLaplacianCLM (c cutoff) lam)
+      (shiftedBoundedNormalCLM A lam) := by
+    simpa only [NCG.shiftedCommutantLaplacianCLM,
+      shiftedBoundedNormalCLM, ContinuousLinearMap.one_def] using
+        StrongOperatorConverges.add J hnormal hscalar
+  exact J.jointCommutator_denseCoreConvergence_of_shiftedNormalStrongConvergence
+    c A lam hlam D hD source hsource hshift
+
+/-- First-order convergence of the finite joint commutator maps and their
+adjoints implies convergence of their commutant Laplacians, and therefore
+dense-core convergence of the canonical finite resolvents. -/
+theorem jointCommutator_denseCoreConvergence_of_commutatorAndAdjointConvergence
+    {d : ℕ → Type u} [∀ cutoff, Fintype (d cutoff)] {s : ℕ}
+    (c : ∀ cutoff, Fin s → Matrix (d cutoff) (d cutoff) ℂ)
+    (J : System (K := ℂ) (H := H)
+      (Hn := fun cutoff ↦ EuclideanSpace ℂ (d cutoff × d cutoff)))
+    (L : System (K := ℂ) (H := F)
+      (Hn := fun cutoff ↦
+        EuclideanSpace ℂ (Fin s × (d cutoff × d cutoff))))
+    (A : H →L[ℂ] F) (lam : ℝ) (hlam : 0 < lam)
+    (D : Set H) (hD : Dense D)
+    (source : H → ∀ cutoff,
+      EuclideanSpace ℂ (d cutoff × d cutoff))
+    (hsource : ∀ y ∈ D, J.StronglyConverges (source y) y)
+    (hcommutator : J.StrongOperatorConverges L
+      (fun cutoff ↦ NCG.jointCommutatorCLM (c cutoff)) A)
+    (hadjoint : L.StrongOperatorConverges J
+      (fun cutoff ↦ ContinuousLinearMap.adjoint
+        (NCG.jointCommutatorCLM (c cutoff)))
+      (ContinuousLinearMap.adjoint A)) :
+    ∀ y ∈ D, J.StronglyConverges
+      (fun cutoff ↦ NCG.jointCommutatorResolventFamily c lam cutoff
+        (source y cutoff))
+      (boundedOperatorNormalResolventFamily A lam y) := by
+  have hnormal : J.StrongOperatorConverges J
+      (fun cutoff ↦ NCG.commutantLaplacianCLM (c cutoff))
+      ((ContinuousLinearMap.adjoint A).comp A) := by
+    simpa only [NCG.commutantLaplacianCLM] using
+      StrongOperatorConverges.adjoint_comp_self J L hcommutator hadjoint
+  exact J.jointCommutator_denseCoreConvergence_of_commutantLaplacianStrongConvergence
+    c A lam hlam D hD source hsource hnormal
 
 end NCG.VaryingHilbert.System

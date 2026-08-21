@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import NCG.Grand.ContinuumHoweCoercivityCompiler
 import NCG.Grand.AutomaticCircleRieszProjectionStability
 
+import NCG.Grand.CircleRieszProjectionOrthogonality
 /-!
 # Continuum Howe coercivity from limiting endpoint separation
 
@@ -95,5 +96,72 @@ theorem continuumHowe_kernel_and_derivedCompressedResolventCoercivity_of_limit_e
       (NCG.ResolventStability.circleRieszProjection Tlim (center : ℂ) radius) Tlim
       hRieszTendsto hprotected hprotectedRank hstarP hstarQlim hTnorm hne
       energy residual hresidual hcoercive hgapPos
+
+/-- Strongest limit-endpoint compiler: norm convergence of compact symmetric
+resolvents makes the limiting Riesz operator an orthogonal projection
+automatically.  The caller supplies no cutoff contour, Riesz-convergence, or
+limiting star-projection premise. -/
+theorem continuumHowe_kernel_and_coercivity_of_limit_endpoints
+    (D : ℕ → Submodule ℂ E) (A : ∀ n, D n →ₗ[ℂ] F)
+    (lam : ℝ) (hlam : 0 < lam) (T P : ℕ → E →L[ℂ] E)
+    (hequation : ∀ n f, OperatorGraphResolventEquation (D n) (A n) lam f (T n f))
+    (hcompact : ∀ n, IsCompactOperator (T n))
+    (hsymmetric : ∀ n, LinearMap.IsSymmetric (T n).toLinearMap)
+    (Tlim : E →L[ℂ] E) (hlimSymmetric : LinearMap.IsSymmetric Tlim.toLinearMap)
+    (center radius : ℝ)
+    (hzero : (0 : ℂ) ∉ Metric.closedBall (center : ℂ) radius)
+    (hinside : (((lam : ℝ) : ℂ)⁻¹) ∈ Metric.ball (center : ℂ) radius)
+    (hleft : ((center - radius : ℝ) : ℂ) ∈ resolventSet ℂ Tlim)
+    (hright : ((center + radius : ℝ) : ℂ) ∈ resolventSet ℂ Tlim)
+    (hprotected : ∀ᶠ n in atTop,
+      LinearMap.range (P n).toLinearMap ≤ operatorGraphKernel (D n) (A n))
+    (hprotectedRank : ∀ n,
+      Module.finrank ℂ (LinearMap.range (P n).toLinearMap) =
+        Module.finrank ℂ (LinearMap.range
+          (NCG.ResolventStability.circleRieszProjection
+            Tlim (center : ℂ) radius).toLinearMap))
+    (hstarP : ∀ᶠ n in atTop, IsStarProjection (P n))
+    (hTnorm : Tendsto T atTop (𝓝 Tlim))
+    (energy residual : ℕ → E → ℝ)
+    (hresidual : ∀ n x, 0 ≤ residual n x)
+    (hcoercive : ∀ n x,
+      (‖NCG.SpectralGap.complementCompression (T n) (P n)‖⁻¹ - lam) * residual n x ≤
+        energy n x)
+    (hgapPos : 0 < ‖NCG.SpectralGap.complementCompression Tlim
+      (NCG.ResolventStability.circleRieszProjection Tlim (center : ℂ) radius)‖⁻¹ - lam) :
+    (∀ᶠ n in atTop,
+      LinearMap.range (P n).toLinearMap = operatorGraphKernel (D n) (A n)) ∧
+      0 < (‖NCG.SpectralGap.complementCompression Tlim
+        (NCG.ResolventStability.circleRieszProjection Tlim (center : ℂ) radius)‖⁻¹ - lam) / 2 ∧
+      (∀ᶠ n in atTop, ∀ x,
+        (‖NCG.SpectralGap.complementCompression Tlim
+          (NCG.ResolventStability.circleRieszProjection Tlim (center : ℂ) radius)‖⁻¹ - lam) /
+            2 * residual n x ≤ energy n x) ∧
+      ∀ xseq : ℕ → E,
+        Tendsto (fun n ↦ energy n (xseq n)) atTop (𝓝 0) →
+          Tendsto (fun n ↦ residual n (xseq n)) atTop (𝓝 0) := by
+  have hlimCompact : IsCompactOperator Tlim :=
+    isCompactOperator_of_tendsto hTnorm
+      (Filter.Eventually.of_forall hcompact)
+  have hR : 0 < radius := dist_nonneg.trans_lt hinside
+  have hlimitContour : ∀ z ∈ Metric.sphere (center : ℂ) radius,
+      z ∈ resolventSet ℂ Tlim :=
+    NCG.ResolventStability.circle_subset_resolventSet_of_isSymmetric_of_endpoints
+      Tlim hlimSymmetric center radius hleft hright
+  have hstarQlim : IsStarProjection
+      (NCG.ResolventStability.circleRieszProjection
+        Tlim (center : ℂ) radius) :=
+    NCG.ResolventStability.circleRieszProjection_isStarProjection_of_compact_of_isSymmetric
+      Tlim hlimCompact hlimSymmetric (center : ℂ) radius hR hlimitContour
+  have hne : ‖NCG.SpectralGap.complementCompression Tlim
+      (NCG.ResolventStability.circleRieszProjection
+        Tlim (center : ℂ) radius)‖ ≠ 0 := by
+    intro hzeroNorm
+    rw [hzeroNorm, inv_zero, zero_sub] at hgapPos
+    exact (not_lt_of_ge (neg_nonpos.mpr hlam.le)) hgapPos
+  exact continuumHowe_kernel_and_derivedCompressedResolventCoercivity_of_limit_endpoints
+    D A lam hlam T P hequation hcompact hsymmetric Tlim hlimSymmetric center radius
+      hzero hinside hleft hright hprotected hprotectedRank hstarP hstarQlim hTnorm
+      hne energy residual hresidual hcoercive hgapPos
 
 end NCG.VaryingHilbert
