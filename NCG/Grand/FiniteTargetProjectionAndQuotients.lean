@@ -77,6 +77,8 @@ theorem real_pushforward_comp
   funext y
   have h := real_pushforward_change_variables T rho
     (fun x => if s x = y then 1 else 0)
+  unfold pushforwardRow
+  rw [Finset.sum_filter, Finset.sum_filter]
   simpa [realIntegral, pushforwardRow, mul_ite] using h
 
 theorem complex_pushforward_comp
@@ -88,6 +90,8 @@ theorem complex_pushforward_comp
   funext y
   have h := complex_pushforward_change_variables T zeta
     (fun x => if s x = y then 1 else 0)
+  unfold complexPushforward
+  rw [Finset.sum_filter, Finset.sum_filter]
   simpa [complexIntegral, complexPushforward, mul_ite] using h
 /-- Projected likelihood ratio on a finite target record. -/
 noncomputable def projectedLikelihood
@@ -136,7 +140,9 @@ theorem projected_likelihood_tower
   congr 1
   apply sum_congr rfl
   intro x _
-  rw [← projectedLikelihood_factor T rho nu hT hnu]
+  change pushforwardRow T rho x =
+    pushforwardRow T nu x * projectedLikelihood T rho nu x
+  exact (projectedLikelihood_factor T rho nu hT hnu x).symm
 
 /-- Zero-safe finite Lebesgue density. -/
 noncomputable def regularDensity {X : Type*}
@@ -154,7 +160,6 @@ theorem finite_lebesgue_decomposition {X : Type*}
   by_cases h : nu x = 0
   · simp [regularDensity, singularPart, h]
   · simp [regularDensity, singularPart, h]
-    field_simp
 
 theorem finite_singular_integral_formula
     {X : Type*} [Fintype X] (rho nu f : X -> Real) :
@@ -179,26 +184,37 @@ theorem singular_mass_sharp_interval
     regular + a * mass <= realIntegral rho f /\
       realIntegral rho f <= regular + b * mass := by
   dsimp only
-  rw [finite_singular_integral_formula]
+  let regular := realIntegral nu (fun x => regularDensity rho nu x * f x)
+  let singularIntegral := realIntegral (fun x => singularPart rho nu x) f
+  let mass := Finset.univ.sum (fun x => singularPart rho nu x)
+  have hformula : realIntegral rho f = regular + singularIntegral := by
+    simpa [regular, singularIntegral] using
+      (finite_singular_integral_formula rho nu f)
+  have hlower : a * mass <= singularIntegral := by
+    unfold mass singularIntegral realIntegral
+    rw [Finset.mul_sum]
+    apply sum_le_sum
+    intro x _
+    by_cases h : nu x = 0
+    · simp only [singularPart, h, if_true]
+      simpa [mul_comm] using mul_le_mul_of_nonneg_left (hf x h).1 (hrho x)
+    · simp [singularPart, h]
+  have hupper : singularIntegral <= b * mass := by
+    unfold mass singularIntegral realIntegral
+    rw [Finset.mul_sum]
+    apply sum_le_sum
+    intro x _
+    by_cases h : nu x = 0
+    · simp only [singularPart, h, if_true]
+      simpa [mul_comm] using mul_le_mul_of_nonneg_left (hf x h).2 (hrho x)
+    · simp [singularPart, h]
   constructor
-  · apply add_le_add_left
-    unfold realIntegral
-    rw [Finset.mul_sum]
-    apply sum_le_sum
-    intro x _
-    by_cases h : nu x = 0
-    · simp only [singularPart, h, if_true]
-      exact mul_le_mul_of_nonneg_left (hf x h).1 (hrho x)
-    · simp [singularPart, h]
-  · apply add_le_add_left
-    unfold realIntegral
-    rw [Finset.mul_sum]
-    apply sum_le_sum
-    intro x _
-    by_cases h : nu x = 0
-    · simp only [singularPart, h, if_true]
-      exact mul_le_mul_of_nonneg_left (hf x h).2 (hrho x)
-    · simp [singularPart, h]
+  · rw [hformula]
+    change regular + a * mass <= regular + singularIntegral
+    exact add_le_add_right hlower regular
+  · rw [hformula]
+    change regular + singularIntegral <= regular + b * mass
+    exact add_le_add_right hupper regular
 /-- Projected complex density with respect to a positive reference row. -/
 noncomputable def projectedComplexWeight
     {Omega X : Type*} [Fintype Omega] [DecidableEq X]
@@ -246,7 +262,9 @@ theorem projected_complex_tower
   congr 1
   apply sum_congr rfl
   intro x _
-  rw [projectedComplexWeight_factor T zeta nu hT hnu]
+  change complexPushforward T zeta x =
+    (pushforwardRow T nu x : Complex) * projectedComplexWeight T zeta nu x
+  exact (projectedComplexWeight_factor T zeta nu hT hnu x).symm
 
 /-- Total complex amplitude is invariant under projection. -/
 theorem complex_amplitude_projection_invariant
@@ -320,6 +338,6 @@ theorem phase_quenched_quotient
   · rw [Finset.mul_sum]
     apply sum_congr rfl
     intro x _
-    simpa [mul_assoc] using (hpolar x).symm
+    simpa [mul_assoc] using hpolar x
 end FiniteTargetProjectionAndQuotients
 end NCG

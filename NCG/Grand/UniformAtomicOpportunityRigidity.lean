@@ -100,7 +100,9 @@ theorem atomicOpportunity_endpoint_independent (o : Fin 4) (endpoint : Bool) :
 /-- The opportunity marginal of the joint law is uniform. -/
 theorem atomicOpportunityEndpointLaw_opportunity_marginal (o : Fin 4) :
     ∑ endpoint : Bool, atomicOpportunityEndpointLaw o endpoint = 1 / 4 := by
-  native_decide +revert
+  fin_cases o <;>
+    simp [atomicOpportunityEndpointLaw, atomicOpportunityLaw,
+      atomicEndpointLaw] <;> norm_num
 
 /-- The endpoint marginal of the joint law is a fair bit. -/
 theorem atomicOpportunityEndpointLaw_endpoint_marginal (endpoint : Bool) :
@@ -223,7 +225,7 @@ theorem atomicRelativePermutationMatrix_represents_restriction :
       (σ.permMatrix ℤ *ᵥ atomicRelativeBasisVector j) i =
         ∑ k : Fin 3,
           atomicRelativePermutationMatrix σ k j * atomicRelativeBasisVector k i := by
-  native_decide
+  decide +kernel
 
 /-- The determinant of the restricted three-dimensional action is the sign
 of the relabelling.  This is not merely the determinant of the full
@@ -231,7 +233,8 @@ four-dimensional permutation matrix. -/
 theorem atomicRelativePermutationMatrix_det_sign
     (σ : Equiv.Perm (Fin 4)) :
     (atomicRelativePermutationMatrix σ).det = Equiv.Perm.sign σ := by
-  native_decide +revert
+  revert σ
+  decide +kernel
 
 /-- Concrete irreducibility certificate for the standard triplet: an
 equivariant idempotent is either zero or identity.  Over a finite group in

@@ -43,7 +43,7 @@ theorem generatedMatter_dimension_table :
     (2 = (generatedMatterLabels 3).weakDim) ∧
     (Nat.choose 2 2 = (generatedMatterLabels 4).weakDim) ∧
     (2 = (generatedMatterLabels 5).weakDim) := by
-  native_decide
+  decide
 
 /-- Propagating the primitive charges `C ↦ -2`, `W ↦ 3` through tensor,
 dual, and exterior square gives all six integer charges. -/
