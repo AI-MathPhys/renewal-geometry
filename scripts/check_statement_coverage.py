@@ -98,6 +98,22 @@ STATUSES = (
     "not_started",
 )
 
+# Environments whose mathematical content must eventually be backed by Lean.
+PROOF_ENVS = {
+    "theorem", "proposition", "lemma", "corollary",
+    "countertheorem", "conditionalresult",
+}
+
+DIFFICULTIES = {
+    "easy", "medium", "hard_finite_library", "hard_analytic_research",
+}
+
+BOOKKEEPING_NOTE = (
+    "Non-theorem environment (declaration/bookkeeping); formal counterparts "
+    "are the hypothesis arguments of the proved theorems referencing it, per "
+    "house policy."
+)
+
 def begin_re(envs: tuple[str, ...]) -> "re.Pattern":
     return re.compile(
         r"\\begin\{(" + "|".join(envs) + r")\}(?:\[([^\]]*)\])?"
@@ -178,11 +194,27 @@ def check_manuscript(name: str, names: set[str]) -> int:
         if rec["key"] not in status_map:
             errors.append(f"missing status record: {rec['key']} "
                           f"({rec['env']} \"{rec['title']}\")")
+        elif name == "Gran-Tensor":
+            entry = status_map[rec["key"]]
+            if entry.get("env") != rec["env"]:
+                errors.append(
+                    f"environment mismatch for {rec['key']}: "
+                    f"manuscript={rec['env']}, ledger={entry.get('env')}")
+            if entry.get("title") != rec["title"]:
+                errors.append(
+                    f"title mismatch for {rec['key']}: "
+                    f"manuscript={rec['title']!r}, "
+                    f"ledger={entry.get('title')!r}")
     for key, entry in status_map.items():
         if key not in keys:
             errors.append(f"stale status record (not in manuscript): {key}")
         if entry.get("status") not in STATUSES:
             errors.append(f"invalid status for {key}: {entry.get('status')}")
+        if (name == "Gran-Tensor"
+                and entry.get("status") == "conditional_interface"
+                and entry.get("difficulty") not in DIFFICULTIES):
+            errors.append(
+                f"{key}: conditional interface requires a valid difficulty")
 
     # theorem-bearing environments must back proved/certified/encoded
     # statuses with Lean identifiers; declaration and bookkeeping
@@ -191,22 +223,37 @@ def check_manuscript(name: str, names: set[str]) -> int:
     # computational displays) may be statement_encoded without one —
     # their formal counterparts are the hypothesis arguments of the
     # proved theorems that reference them.
-    theorem_envs = {"theorem", "proposition", "lemma", "corollary",
-                    "conditionalresult"}
     for key, entry in status_map.items():
+        lean = entry.get("lean", [])
+        if not isinstance(lean, list):
+            errors.append(f"{key}: lean evidence must be a list of identifiers")
+            continue
         if entry.get("status") in ("proved", "computer_certified"):
-            if not entry.get("lean"):
+            if not lean:
                 errors.append(f"{key}: status {entry['status']} requires at "
                               "least one Lean identifier")
         elif entry.get("status") == "statement_encoded":
-            if entry.get("env") in theorem_envs and not entry.get("lean"):
+            if entry.get("env") in PROOF_ENVS and not lean:
                 errors.append(f"{key}: status statement_encoded on a "
                               f"{entry.get('env')} requires at least one "
                               "Lean identifier")
-            for ident in entry.get("lean", []):
-                if ident.split(".")[-1] not in names:
-                    errors.append(f"{key}: Lean identifier not found in NCG/: "
-                                  f"{ident}")
+        if entry.get("status") not in (
+                "proved", "computer_certified", "statement_encoded"):
+            continue
+        for ident in lean:
+            module, separator, declaration = ident.partition(":")
+            if module.endswith(".lean") and not (ROOT / module).exists():
+                errors.append(f"{key}: Lean module not found: {module}")
+            if separator:
+                short_name = declaration.split(".")[-1]
+                if short_name not in names:
+                    errors.append(
+                        f"{key}: Lean identifier not found in NCG/: {ident}")
+            elif not module.endswith(".lean"):
+                short_name = module.split(".")[-1]
+                if short_name not in names:
+                    errors.append(
+                        f"{key}: Lean identifier not found in NCG/: {ident}")
 
     counts = Counter(e["status"] for e in status_map.values())
     for s in STATUSES:
@@ -235,12 +282,14 @@ def init_manuscript(name: str) -> int:
     added = 0
     for rec in records:
         if rec["key"] not in status_map:
+            proof_bearing = rec["env"] in PROOF_ENVS
             status_map[rec["key"]] = {
                 "env": rec["env"],
                 "title": rec["title"],
-                "status": "conditional_interface",
+                "status": ("conditional_interface" if proof_bearing
+                           else "statement_encoded"),
                 "lean": [],
-                "note": "",
+                "note": "" if proof_bearing else BOOKKEEPING_NOTE,
             }
             added += 1
     ordered = {r["key"]: status_map[r["key"]] for r in records}
