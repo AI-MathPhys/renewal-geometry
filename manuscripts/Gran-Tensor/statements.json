@@ -3378,9 +3378,12 @@
     "title": "Exact primitive score fluctuation--dissipation continuum",
     "status": "conditional_interface",
     "lean": [
-      "NCG/Grand/ScoreContinuum.lean"
+      "NCG/Grand/ScoreContinuum.lean",
+      "NCG/Grand/MultivariateCLT.lean:NCG.MultivariateCLT.tendstoInDistribution_inv_sqrt_smul_sum",
+      "NCG/Grand/DonskerFiniteDimensional.lean:NCG.DonskerFiniteDimensional.tendstoInDistribution_jointBlocks",
+      "NCG/Grand/DonskerPartialSums.lean:NCG.DonskerPartialSums.tendstoInDistribution_partialSums"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Donsker convergence (the boxed distinctive claim) not formalized; schur_innovation_telescope collapses to (t+τ)G0 − tG0 = τG0; diffusion identities are field_simp/norm_num arithmetic. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Boxed Donsker convergence in D([0,T],R^3) — weak convergence of processes, no Skorokhod machinery available.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Donsker convergence (the boxed distinctive claim) not formalized; schur_innovation_telescope collapses to (t+τ)G0 − tG0 = τG0; diffusion identities are field_simp/norm_num arithmetic. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Boxed Donsker convergence in D([0,T],R^3) — weak convergence of processes, no Skorokhod machinery available. MACHINERY (2026-08-22): stochastic continuum toolkit built on Mathlib's 1-D CLT / Levy continuity / multivariate Gaussians: MultivariateCLT.lean (covariance matrix, Cramer-Wold multivariate CLT for i.i.d. centred L^2 vectors in EuclideanSpace), DonskerFiniteDimensional.lean (variable-exponent (1+g_n)^{N_n} -> exp, second-order Taylor expansion of projected characteristic functions, block-sum limits N(0, c S), joint factorization over pairwise disjoint blocks via iIndepFun.precomp on the sigma type, finite-dimensional-distribution convergence of the scaled block vector) and DonskerPartialSums.lean (floor-grid blocks, telescoping, Donsker in finite-dimensional distributions: (S_n(t_1),...,S_n(t_m)) -> cumulative sums of independent N(0,(t_j - t_{j-1}) S)). Remaining gap for the boxed claim: convergence in the Skorokhod space D([0,T]) (tightness / Prokhorov on path space is absent from Mathlib) and the martingale-difference (rather than i.i.d.) hypothesis on the score bank.",
     "difficulty": "hard_analytic_research"
   },
   "assessment:exact-scope-of-the-primitive-information-branch": {
@@ -3682,8 +3685,14 @@
   "thm:compact-screen-alternative": {
     "env": "theorem",
     "title": "Compact screens, spectrum, and mass escape",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "NCG/Grand/OperatorGraphMoscoEnergyCompactScreenConsequences.lean:NCG.VaryingHilbert.System.operatorGraphMosco_fullSpectralConsequences_of_graphNormScreenTight",
+      "NCG/Grand/OperatorGraphEnergyCompactScreenAlternative.lean:NCG.VaryingHilbert.System.energyMassEscape_of_not_graphNormScreenTight",
+      "NCG/Grand/OperatorGraphMoscoEnergyCompactScreenSpectralAlternative.lean:NCG.VaryingHilbert.System.operatorGraphMosco_fullSpectralConsequences_or_energyMassEscape",
+      "NCG/Grand/GraphScreenMassEscape.lean:NCG.VaryingHilbert.UniformGraphScreenTight",
+      "NCG/Grand/MovingRankOneStrongResolventCounterexample.lean:NCG.MovingRankOneCounterexample.shiftedResolvent_tendsto_halfIdentity",
+      "NCG/Grand/MovingRankOneStrongResolventCounterexample.lean:NCG.MovingRankOneCounterexample.norm_defectOperator_sub_identity",
       "NCG/Grand/MoscoResolvent.lean",
       "NCG/Grand/VaryingHilbertMosco.lean",
       "NCG/Grand/VaryingHilbertCollectiveCompactness.lean",
@@ -3790,7 +3799,7 @@
       "NCG/Grand/GraphScreenTailFromSquaredError.lean",
       "NCG/Grand/ShortedHodgeGraphScreenTail.lean"
     ],
-    "note": "Machinery progress 2026-08-17: the changing-space framework includes collective compactness, arbitrary cutoff reindexing, and compact-output subsequence extraction. CompactScreenCollectiveCompactness proves the positive screen mechanism, while GraphScreenMassEscape proves the exact negative branch with one fixed escaped margin along cofinal radii and cutoffs. CollectivelyCompactLimit derives compactness of the strong limit automatically. CompactScreenSpectralStability then bundles operator-norm and Riesz-projection convergence, eventual finite multiplicity stability, and convergence of all projected finite source Gram matrices. The generic positive branch now carries graph collective compactness through compatible coordinate projections and gives operator-norm convergence of the exact compressed operators J_n T_n J_n†. Exact inside/outside circle residues and the compact self-adjoint spectral theorem make the contour operators idempotent automatically. On zero-avoiding contours the Riesz operator factors through the compact resolvent, so stage and limit ranges are finite-dimensional automatically; the compact-screen spectral theorem now needs no separate idempotence or finite-rank premises. Non-real contour points are automatically resolvent for self-adjoint operators, and on a real-centered circle the full contour condition reduces further to the two real endpoints; an endpoint-separated compact-screen bundle is now available. Operator-norm convergence and the two limiting endpoint exclusions now make all sufficiently late cutoff contour exclusions and one common cutoff resolvent bound automatic. Machinery progress 2026-08-20: the compact-screen calculus now extends from self-adjoint to compact normal families. Normality supplies adjoint convergence, literal-compression normality, compact-normal eigenspace density, finite-rank orthogonal Riesz projections, nonzero spectral isolation, automatic zero-avoiding circles, exact limiting eigenspace identification, bilateral range convergence, and exact identification of every late stage Riesz range with the sum of its enclosed eigenspaces; stable Riesz rank is therefore stable total algebraic multiplicity. The canonical operator-graph norm carrier is now identified in both directions with the literal ENNReal energy unit ball. Under GT-Mosco, vanishing full graph-energy screen tightness directly returns collective compactness, norm-resolvent convergence, compact limit, automatic isolated Riesz eigenspaces, stable multiplicities, norm-convergent projections, and finite-source Gram convergence; failure directly returns effective-domain vectors with ‖u_j‖² + q_{n_j}[u_j] ≤ 1 and one fixed escaped tail along cofinal radii and cutoffs. Remaining work is the model-specific identification of the concrete Grand-Tensor graph operators and screens, plus numerical eigenvalue identification. Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). TRIAGE-EXACT: ANALYTIC.",
+    "note": "PROVED (2026-08-22): the manuscript statement is abstract (it assumes thm:GT-Mosco for forms on a varying Hilbert system and the graph-screen profile of def:compact-graph-screen), and the assembled theorems now cover it at that generality. Positive branch: operatorGraphMosco_fullSpectralConsequences_of_graphNormScreenTight - under cofinal Mosco convergence of the graph energies q_n[u] = ||A_n u||^2 (A_n the square-root map D_n) with the stage/limit resolvent equations, vanishing of the screen profile (UniformGraphScreenTight: for every eps > 0 some radius R such that eventually in n every graph-unit-ball vector has ||(I - Pi_S) Gamma_n u|| < eps for S >= R, i.e. Theta_R^gr -> 0) gives collective compactness of the embedded resolvents, operator-norm convergence of the compressed resolvents, compactness of the limit resolvent, Riesz-projection norm convergence with eventually stable rank (isolated eigenvalues with multiplicity) at every nonzero center, and convergence of every projected finite source Gram. Negative branch: energyMassEscape_of_not_graphNormScreenTight - failure of the profile produces radii R_j -> infinity, cutoffs n_j -> infinity and vectors u_j with ||u_j||^2 + q_{n_j}[u_j] <= 1 and ||(I - Pi_{R_j}) Gamma_{n_j} u_j|| >= eps > 0. operatorGraphMosco_fullSpectralConsequences_or_energyMassEscape is the dichotomy. The moving rank-one example A_n = I - |e_n><e_n| on l^2 (strong resolvent limit I, escaping zero eigenvectors) is MovingRankOneStrongResolventCounterexample (shiftedResolvent_tendsto_halfIdentity, norm_defectOperator_sub_identity). Interface: 'eigenvalues converge with multiplicity' is encoded as rank stability of the circle Riesz projections around each nonzero center together with their norm convergence; the earlier audit downgrade (2026-08-07) predates this machinery. Earlier machinery notes: Machinery progress 2026-08-17: the changing-space framework includes collective compactness, arbitrary cutoff reindexing, and compact-output subsequence extraction. CompactScreenCollectiveCompactness proves the positive screen mechanism, while GraphScreenMassEscape proves the exact negative branch with one fixed escaped margin along cofinal radii and cutoffs. CollectivelyCompactLimit derives compactness of the strong limit automatically. CompactScreenSpectralStability then bundles operator-norm and Riesz-projection convergence, eventual finite multiplicity stability, and convergence of all projected finite source Gram matrices. The generic positive branch now carries graph collective compactness through compatible coordinate projections and gives operator-norm convergence of the exact compressed operators J_n T_n J_n†. Exact inside/outside circle residues and the compact self-adjoint spectral theorem make the contour operators idempotent automatically. On zero-avoiding contours the Riesz operator factors through the compact resolvent, so stage and limit ranges are finite-dimensional automatically; the compact-screen spectral theorem now needs no separate idempotence or finite-rank premises. Non-real contour points are automatically resolvent for self-adjoint operators, and on a real-centered circle the full contour condition reduces further to the two real endpoints; an endpoint-separated compact-screen bundle is now available. Operator-norm convergence and the two limiting endpoint exclusions now make all sufficiently late cutoff contour exclusions and one common cutoff resolvent bound automatic. Machinery progress 2026-08-20: the compact-screen calculus now extends from self-adjoint to compact normal families. Normality supplies adjoint convergence, literal-compression normality, compact-normal eigenspace density, finite-rank orthogonal Riesz projections, nonzero spectral isolation, automatic zero-avoiding circles, exact limiting eigenspace identification, bilateral range convergence, and exact identification of every late stage Riesz range with the sum of its enclosed eigenspaces; stable Riesz rank is therefore stable total algebraic multiplicity. The canonical operator-graph norm carrier is now identified in both directions with the literal ENNReal energy unit ball. Under GT-Mosco, vanishing full graph-energy screen tightness directly returns collective compactness, norm-resolvent convergence, compact limit, automatic isolated Riesz eigenspaces, stable multiplicities, norm-convergent projections, and finite-source Gram convergence; failure directly returns effective-domain vectors with ‖u_j‖² + q_{n_j}[u_j] ≤ 1 and one fixed escaped tail along cofinal radii and cutoffs. Remaining work is the model-specific identification of the concrete Grand-Tensor graph operators and screens, plus numerical eigenvalue identification. Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). TRIAGE-EXACT: ANALYTIC.",
     "difficulty": "medium"
   },
   "thm:gap-soft-mode-alternative": {
@@ -4728,7 +4737,7 @@
     "lean": [
       "NCG/Grand/OUProcess.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 3). Five-clause stochastic reduction; cited OUProcess lemmas are a trivial induction and a one-line Mathlib call; essentially none of the theorem's content in Lean. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Aggregates inductive-limit state, tightness, bracket convergence.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 3). Five-clause stochastic reduction; cited OUProcess lemmas are a trivial induction and a one-line Mathlib call; essentially none of the theorem's content in Lean. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Aggregates inductive-limit state, tightness, bracket convergence. MACHINERY (2026-08-22): the finite-dimensional Gaussian/Donsker limit toolkit (MultivariateCLT.lean, DonskerFiniteDimensional.lean, DonskerPartialSums.lean) now supplies the i.i.d. vector CLT and f.d.d. Brownian limits of scaled partial-sum processes; the OU/field-valued claims still need martingale FCLTs, Mitoma tightness and Skorokhod-space convergence, none of which are in Mathlib.",
     "difficulty": "hard_analytic_research"
   },
   "thm:renewal-finite-type-closure": {
@@ -5060,9 +5069,12 @@
     "title": "Resolved score bank, tetrahedral triplets, and stochastic limits",
     "status": "conditional_interface",
     "lean": [
-      "NCG/Grand/ScoreContinuum.lean"
+      "NCG/Grand/ScoreContinuum.lean",
+      "NCG/Grand/MultivariateCLT.lean:NCG.MultivariateCLT.tendstoInDistribution_inv_sqrt_smul_sum",
+      "NCG/Grand/DonskerFiniteDimensional.lean:NCG.DonskerFiniteDimensional.tendstoInDistribution_jointBlocks",
+      "NCG/Grand/DonskerPartialSums.lean:NCG.DonskerPartialSums.tendstoInDistribution_partialSums"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Martingale-difference, S4-covariance, Brownian limit, compound-Poisson thinning — the stochastic content — all disclosed away; proved: trivial floor, K4 Laplacian evaluation, Kronecker identity with dᴴd = 4•1 as hypothesis. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Martingale differences, Brownian limit, compound-Poisson thinning.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Martingale-difference, S4-covariance, Brownian limit, compound-Poisson thinning — the stochastic content — all disclosed away; proved: trivial floor, K4 Laplacian evaluation, Kronecker identity with dᴴd = 4•1 as hypothesis. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Martingale differences, Brownian limit, compound-Poisson thinning. MACHINERY (2026-08-22): stochastic continuum toolkit built on Mathlib's 1-D CLT / Levy continuity / multivariate Gaussians: MultivariateCLT.lean (covariance matrix, Cramer-Wold multivariate CLT for i.i.d. centred L^2 vectors in EuclideanSpace), DonskerFiniteDimensional.lean (variable-exponent (1+g_n)^{N_n} -> exp, second-order Taylor expansion of projected characteristic functions, block-sum limits N(0, c S), joint factorization over pairwise disjoint blocks via iIndepFun.precomp on the sigma type, finite-dimensional-distribution convergence of the scaled block vector) and DonskerPartialSums.lean (floor-grid blocks, telescoping, Donsker in finite-dimensional distributions: (S_n(t_1),...,S_n(t_m)) -> cumulative sums of independent N(0,(t_j - t_{j-1}) S)). Remaining gap for the boxed claim: convergence in the Skorokhod space D([0,T]) (tightness / Prokhorov on path space is absent from Mathlib) and the martingale-difference (rather than i.i.d.) hypothesis on the score bank.",
     "difficulty": "hard_analytic_research"
   },
   "firewall:local-tetrahedral-coercivity-is-not-spatial-ellipticity": {
@@ -5141,7 +5153,7 @@
     "lean": [
       "NCG/Grand/OUProcess.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). Weak convergence to the stationary generalized OU field; lyapunov_stationary is A·A⁻¹ + A⁻¹·Aᵀ = 2·1 (inverse cancellations dressed as \"Lyapunov stationarity\"); ou_mean_decay trivial recursion. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Weak convergence in D([0,T],D'(T³)): martingale FCLT, Mitoma tightness.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). Weak convergence to the stationary generalized OU field; lyapunov_stationary is A·A⁻¹ + A⁻¹·Aᵀ = 2·1 (inverse cancellations dressed as \"Lyapunov stationarity\"); ou_mean_decay trivial recursion. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Weak convergence in D([0,T],D'(T³)): martingale FCLT, Mitoma tightness. MACHINERY (2026-08-22): the finite-dimensional Gaussian/Donsker limit toolkit (MultivariateCLT.lean, DonskerFiniteDimensional.lean, DonskerPartialSums.lean) now supplies the i.i.d. vector CLT and f.d.d. Brownian limits of scaled partial-sum processes; the OU/field-valued claims still need martingale FCLTs, Mitoma tightness and Skorokhod-space convergence, none of which are in Mathlib.",
     "difficulty": "hard_analytic_research"
   },
   "thm:renewal-interchange-actual-audit": {
@@ -5290,7 +5302,7 @@
     "lean": [
       "NCG/Grand/FinalPanels2.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). fixed_coupling_ou_bundle proves A·A⁻¹ + A⁻¹·Aᵀ = 2·1 for symmetric invertible A (both summands literally 1) and |θ|q<1 → 1−|θ|q>0 — zero process content. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Martingale functional CLT identifying a generalized OU field.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). fixed_coupling_ou_bundle proves A·A⁻¹ + A⁻¹·Aᵀ = 2·1 for symmetric invertible A (both summands literally 1) and |θ|q<1 → 1−|θ|q>0 — zero process content. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Martingale functional CLT identifying a generalized OU field. MACHINERY (2026-08-22): the finite-dimensional Gaussian/Donsker limit toolkit (MultivariateCLT.lean, DonskerFiniteDimensional.lean, DonskerPartialSums.lean) now supplies the i.i.d. vector CLT and f.d.d. Brownian limits of scaled partial-sum processes; the OU/field-valued claims still need martingale FCLTs, Mitoma tightness and Skorokhod-space convergence, none of which are in Mathlib.",
     "difficulty": "hard_analytic_research"
   },
   "firewall:scope-of-the-all-degree-theorem": {
@@ -5784,7 +5796,7 @@
     "lean": [
       "NCG/Grand/GrandUniversal.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SCOPE_CHANGE, severity 3). Positive continuum branch (quasilocal nets, GNS, Mosco limits, saturation, coercive floor) rendered by five fixed-size clauses on Fin 4/Fin 8, incl. lyapunov_stationary = A·A⁻¹ + A⁻¹·Aᵀ = 2•1, i.e. 1+1=2. Infinite-dimensional limit content — the entire theorem — absent. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Quasilocal-net/GNS/Mosco/tightness continuum construction.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SCOPE_CHANGE, severity 3). Positive continuum branch (quasilocal nets, GNS, Mosco limits, saturation, coercive floor) rendered by five fixed-size clauses on Fin 4/Fin 8, incl. lyapunov_stationary = A·A⁻¹ + A⁻¹·Aᵀ = 2•1, i.e. 1+1=2. Infinite-dimensional limit content — the entire theorem — absent. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Quasilocal-net/GNS/Mosco/tightness continuum construction. MACHINERY (2026-08-22): the finite-dimensional Gaussian/Donsker limit toolkit (MultivariateCLT.lean, DonskerFiniteDimensional.lean, DonskerPartialSums.lean) now supplies the i.i.d. vector CLT and f.d.d. Brownian limits of scaled partial-sum processes; the OU/field-valued claims still need martingale FCLTs, Mitoma tightness and Skorokhod-space convergence, none of which are in Mathlib.",
     "difficulty": "hard_analytic_research"
   },
   "cor:renewal-positive-continuum": {
@@ -5794,7 +5806,7 @@
     "lean": [
       "NCG/Grand/OUProcess.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Assembly corollary; cited core is a one-line Mathlib PSD-conjugation re-export unrelated to the assembly. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Requires the universal-physical-continuum assembly: C*-inductive limits with states and Mosco/resolvent limits.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Assembly corollary; cited core is a one-line Mathlib PSD-conjugation re-export unrelated to the assembly. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Requires the universal-physical-continuum assembly: C*-inductive limits with states and Mosco/resolvent limits. MACHINERY (2026-08-22): the finite-dimensional Gaussian/Donsker limit toolkit (MultivariateCLT.lean, DonskerFiniteDimensional.lean, DonskerPartialSums.lean) now supplies the i.i.d. vector CLT and f.d.d. Brownian limits of scaled partial-sum processes; the OU/field-valued claims still need martingale FCLTs, Mitoma tightness and Skorokhod-space convergence, none of which are in Mathlib.",
     "difficulty": "hard_analytic_research"
   },
   "def:GT-finite-horizon-response": {
@@ -5873,17 +5885,32 @@
   "thm:GT-response-thread-completion": {
     "env": "theorem",
     "title": "Projectively Cauchy response-thread completion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Hard — finite/library-scale. Requires a new reusable finite-dimensional/library component, a large model-specific assembly, or a multi-module compiler.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.Thread",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.limitTrace",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.limitTrace_modulus",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.limitTrace_continuousOn",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.limitTrace_defect",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.limitTrace_unique",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.adjacent_defect_bound",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.tail_tendsto_zero",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.cylinder_limit"
+    ],
+    "note": "TRIAGE V047 (2026-08-21): Hard — finite/library-scale. Requires a new reusable finite-dimensional/library component, a large model-specific assembly, or a multi-module compiler. PROVED (2026-08-22): Thread packages the finite-query data (K complete metric space, query sets D m in [0,T] increasing with dense union, responses y m, common modulus omega with TR.3, projective defect bound eta m with TR.4 and eta -> 0). limitTrace is the completed trace: it has modulus omega on [0,T] (limitTrace_modulus), is continuous (limitTrace_continuousOn), satisfies TR.5 (limitTrace_defect: d(y t, y_m t) <= eta_m on D_m) and is the unique continuous trace with TR.5 (limitTrace_unique). adjacent_defect_bound: summable adjacent defects delta give d(y_n t, y_m t) <= sum_{j>=m} delta_j on D_m (so eta_m := tail sums, tail_tendsto_zero). cylinder_limit is TR.6 for a continuous cylinder functional on finitely many query times. Interface: the modulus omega is taken continuous with omega(0) = 0 (so that omega(|t-s|) passes to the dense-set limit); eta is any nonnegative dominating defect sequence (the manuscript's sup is one choice); cylinder functionals depend on finitely many query times lying in the query hierarchy.",
     "difficulty": "hard_finite_library"
   },
   "cor:GT-response-thread-master-defect": {
     "env": "corollary",
     "title": "Quantitative residual passage and one-scalar thread certificate",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Medium. Uses existing repository machinery but needs a substantive exact packaging or several linked finite-dimensional arguments.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.lipschitz_cylinder_bound",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.masterDefect",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.master_defect_closure",
+      "NCG/Grand/ResponseThreadCompletionExact.lean:NCG.ResponseThreadCompletion.cylinder_limit"
+    ],
+    "note": "TRIAGE V047 (2026-08-21): Medium. Uses existing repository machinery but needs a substantive exact packaging or several linked finite-dimensional arguments. PROVED (2026-08-22): lipschitz_cylinder_bound is TR.6a (an L-Lipschitz cylinder functional on query times in D_m satisfies d_j(y) <= d_j[y_m] + L eta_m, with the sup metric on the finite query coordinates); masterDefect is TR.6b with weights 2^{-(j+1)} over j < m; master_defect_closure: if the master defect tends to zero (which forces eta_m -> 0 and each min(1, d_j[y_m]) -> 0), every nonnegative continuous member of the countable defect core vanishes on the completed trace, via thm:GT-response-thread-completion (cylinder_limit).",
     "difficulty": "medium"
   },
   "thm:GT-thread-cutoff-compactness": {
@@ -8741,7 +8768,7 @@
     "lean": [
       "NCG/Grand/FinalPanels2.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). two_clock_coefficient proves σλ/κ → 0 as κ → ∞ — trivial scalar limit, no semigroups/generators/fields. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - N→∞ semigroup limits against the continuum heat semigroup on T³.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). two_clock_coefficient proves σλ/κ → 0 as κ → ∞ — trivial scalar limit, no semigroups/generators/fields. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - N→∞ semigroup limits against the continuum heat semigroup on T³. MACHINERY (2026-08-22): the finite-dimensional Gaussian/Donsker limit toolkit (MultivariateCLT.lean, DonskerFiniteDimensional.lean, DonskerPartialSums.lean) now supplies the i.i.d. vector CLT and f.d.d. Brownian limits of scaled partial-sum processes; the OU/field-valued claims still need martingale FCLTs, Mitoma tightness and Skorokhod-space convergence, none of which are in Mathlib.",
     "difficulty": "hard_analytic_research"
   },
   "assessment:free-action-and-the-accepted-field-boundary": {
@@ -9025,9 +9052,16 @@
   "cor:SMST-generated-response-source": {
     "env": "corollary",
     "title": "Generated fine Einstein--matter responses and source attribution",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Medium. Uses existing repository machinery but needs a substantive exact packaging or several linked finite-dimensional arguments.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/SMSTGeneratedResponseSourceExact.lean:NCG.SMSTGeneratedResponseSource.residual",
+      "NCG/Grand/SMSTGeneratedResponseSourceExact.lean:NCG.SMSTGeneratedResponseSource.sourceBirth",
+      "NCG/Grand/SMSTGeneratedResponseSourceExact.lean:NCG.SMSTGeneratedResponseSource.isNewSource_iff",
+      "NCG/Grand/SMSTGeneratedResponseSourceExact.lean:NCG.SMSTGeneratedResponseSource.sourceBirth_eq_zero_of_generated",
+      "NCG/Grand/SMSTGeneratedResponseSourceExact.lean:NCG.SMSTGeneratedResponseSource.isGenerated_of_sourceBirth_eq_zero",
+      "NCG/Grand/SMSTGeneratedResponseSourceExact.lean:NCG.SMSTGeneratedResponseSource.unexplainedRange_eq"
+    ],
+    "note": "TRIAGE V047 (2026-08-21): Medium. Uses existing repository machinery but needs a substantive exact packaging or several linked finite-dimensional arguments. PROVED (2026-08-22): exact encoding on the fine weak-test carrier V (finite-dimensional real inner product space): residual = A_Y(JU) - J A_X(U) - G^nl - S^decl (SMC.1); sourceBirth v = <v, residual>; isNewSource_iff (a new fine response direction is a new physical source exactly when its projection in the residual is nonzero); sourceBirth_eq_zero_of_generated (a direction whose fine response is fully licensed by old transport, the common nonlinear writer and the declared packet - a generated harmonic or constraint correction - has zero source birth) with its converse; unexplainedRange_eq (the polar range of the residual, i.e. the orthogonal complement of the zero-birth directions, is the residual line). DISCLOSURE: the corollary's mathematical content is the constitutive-balance bookkeeping itself; the Lean statements are correspondingly elementary linear algebra over the abstract response vectors, and the physical identification of the four packets is an interface.",
     "difficulty": "medium"
   },
   "thm:global-cylinder-Einstein-alternative": {
@@ -9197,25 +9231,58 @@
   "thm:SMST-quantum-projective-limit": {
     "env": "theorem",
     "title": "Summable cutoff correction and reflection-positive projective limit",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/SMSTQuantumProjectiveLimitExact.lean:NCG.SMSTQuantumProjectiveLimit.quantum_projective_limit",
+      "NCG/Grand/SMSTQuantumProjectiveLimitExact.lean:NCG.SMSTQuantumProjectiveLimit.existsUnique_inverseLimit",
+      "NCG/Grand/QuantumCylinderProjectiveLimitExact.lean:NCG.QuantumCylinderProjectiveLimit.tv_limMarg_le",
+      "NCG/Grand/QuantumCylinderProjectiveLimitExact.lean:NCG.QuantumCylinderProjectiveLimit.push_limMarg",
+      "NCG/Grand/QuantumCylinderProjectiveLimitExact.lean:NCG.QuantumCylinderProjectiveLimit.limMarg_reflection_positive",
+      "NCG/Grand/QuantumCylinderInverseLimitExact.lean:NCG.QuantumCylinderInverseLimit.inverseLimit_map_eval",
+      "NCG/Grand/QuantumCylinderInverseLimitExact.lean:NCG.QuantumCylinderInverseLimit.inverseLimit_ae_rel",
+      "NCG/Grand/QuantumCylinderInverseLimitExact.lean:NCG.QuantumCylinderInverseLimit.inverseLimit_unique"
+    ],
+    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib. MACHINERY (2026-08-22): QuantumCylinderProjectiveLimitExact.lean formalizes, on the finite oriented cylinders of def:SMST-quantum-cylinder, the total-variation norm and its sup characterization (tv_isGreatest), the 1-Lipschitz pushforward, the composed cutoff maps pi_{n,m} (Nat.leRecOn), and proves: summable TV defects make the pushed marginals (pi_{n,m})_* mu_n Cauchy in l^1(Omega_m) (cauchySeq_marg) with a limit probability vector mu-bar_m (limMarg_nonneg, sum_limMarg), exact projective compatibility (push_limMarg), the boxed bound QRP.6 (tv_limMarg_le), and reflection positivity of every limit marginal on a positive-time algebra pulled back along reflection-equivariant cutoff maps (limMarg_reflection_positive). Remaining for a flip: the existence/uniqueness of the inverse-limit cylinder probability on prod_n Omega_n with these marginals (Mathlib has no Kolmogorov extension theorem; an Ionescu-Tulcea construction via ProbabilityTheory.Kernel.traj with conditional kernels is the intended route). PROVED (2026-08-22): quantum_projective_limit bundles, for a CylinderTower (finite oriented cylinders Omega_n with reflections theta_n, reflection-equivariant cutoff maps pi_n, reflection-invariant nonnegative weights) with probability normalization and summable TV defects delta_n = ||(pi_n)_* mu_{n+1} - mu_n||_TV: (i) TV convergence of the pushed measures (pi_{n,m})_* mu_n to a probability vector mu-bar_m for every fixed m; (ii) exact projective compatibility (pi_m)_* mu-bar_{m+1} = mu-bar_m; (iii) QRP.6; (iv) existence and uniqueness of the inverse-limit cylinder probability: a probability measure on prod_n Omega_n (product sigma-algebra) with coordinate laws mu-bar_n and carried a.s. by the relations pi_n(omega_{n+1}) = omega_n, built as the Ionescu-Tulcea trajectory measure (ProbabilityTheory.Kernel.traj) of the conditional kernels and unique by IsProjectiveLimit.unique against the induced cylinder family; (v) reflection positivity of every limit marginal on the positive-time algebra A_m whenever each mu_n is reflection positive on A_n and A_m pulls back into A_n along pi_{n,m}. Interface: the TV norm is the finite l^1 norm (tv_isGreatest proves it equals the manuscript's sup over ||f||_inf <= 1); composition of cutoff maps is encoded via Nat.leRecOn; the cylinder sigma-algebra is the product sigma-algebra of the discrete finite coordinates.",
     "difficulty": "hard_analytic_research"
   },
   "thm:SMST-quantum-tightness": {
     "env": "theorem",
     "title": "Absolute tightness, correlation passage, and nontriviality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/SMSTQuantumTightnessExact.lean:NCG.SMSTQuantumTightness.quantum_tightness",
+      "NCG/Grand/SMSTQuantumTightnessExact.lean:NCG.SMSTQuantumTightness.tail_bound",
+      "NCG/Grand/SMSTQuantumTightnessExact.lean:NCG.SMSTQuantumTightness.tight_of_expMoment",
+      "NCG/Grand/SMSTQuantumTightnessExact.lean:NCG.SMSTQuantumTightness.tight_of_screen",
+      "NCG/Grand/SMSTQuantumTightnessExact.lean:NCG.SMSTQuantumTightness.correlation_passage",
+      "NCG/Grand/SMSTQuantumTightnessExact.lean:NCG.SMSTQuantumTightness.limit_variance_ge",
+      "NCG/Grand/QuantumFieldTightnessExact.lean:NCG.QuantumFieldTightness.isTightMeasureSet_fieldLaw",
+      "NCG/Grand/QuantumFieldTightnessExact.lean:NCG.QuantumFieldTightness.isCompact_screened",
+      "NCG/Grand/QuantumFieldTightnessExact.lean:NCG.QuantumFieldTightness.isTightMeasureSet_of_screen",
+      "NCG/Grand/QuantumFieldPassageExact.lean:NCG.QuantumFieldPassage.tendsto_integral_of_locally_uniform",
+      "NCG/Grand/QuantumFieldPassageExact.lean:NCG.QuantumFieldPassage.moment_limit_le",
+      "NCG/Grand/QuantumFieldPassageExact.lean:NCG.QuantumFieldPassage.variance_limit_ge"
+    ],
+    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib. PROVED (2026-08-22): QRP.7 - tail_bound/tight_of_expMoment: for finite cylinders with nonnegative weights mu_X and maps iota_X into a Borel field space E, a uniform exponential moment bound sum_omega mu_X(omega) e^{alpha V(iota_X omega)} <= C gives mu-hat_X {V > R} <= C e^{-alpha R} (Markov on finite sums) and, when V has compact sublevel sets, tightness of the family of field laws (IsTightMeasureSet). QRP.8 - tight_of_screen: probability measures on a real Hilbert space with uniformly bounded second moments and finite-rank contractions P_k whose screen tails sup_X int ||(I-P_k)phi||^2 tend to zero form a tight family (isCompact_screened: norm-bounded vectors with geometrically small screen tails form a compact set, via total boundedness through the proper finite-dimensional ranges). QRP.9 - correlation_passage: if mu-hat_j -> mu weakly (ProbabilityMeasure topology), the family is tight, continuous protected writers F_j -> F locally uniformly (uniformly on every compact) and int |F_j|^{1+delta} dmu-hat_j <= C, then int F_j dmu-hat_j -> int F dmu (clamp truncation, moment transfer to the limit law by monotone convergence through bounded continuous truncated moments, portmanteau for bounded continuous tests); limit_variance_ge: under the analogous bounds for O_j and O_j^2 the limiting variance dominates any uniform lower bound v on Var(O_j), hence is positive when inf_j Var(O_j) > 0. Interface: V is real-valued with compact sublevel sets (lower semicontinuity is implied); QRP.9 takes tightness of the sequence as a hypothesis (it is the conclusion of QRP.7/QRP.8 in the manuscript's setting; the converse-Prokhorov direction is not used); the (2+delta)-moment hypothesis of the nontriviality clause is encoded as (1+delta)-moment bounds on O_j and on O_j^2; E is a T2 Borel space with HasOuterApproxClosed (satisfied by metrizable, in particular Polish, spaces).",
     "difficulty": "hard_analytic_research"
   },
   "thm:SMST-fermionic-phase-transport": {
     "env": "theorem",
     "title": "Fermionic gap, spectral-flow, and gauge-line alternatives",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/SMSTFermionicPhaseTransportExact.lean:NCG.SMSTFermionicPhaseTransport.fermionic_phase_transport",
+      "NCG/Grand/FermionicPhaseTransportExact.lean:NCG.FermionicPhaseTransport.reduced_gap_alternative",
+      "NCG/Grand/FermionicPhaseTransportExact.lean:NCG.FermionicPhaseTransport.sign_parity",
+      "NCG/Grand/FermionicPhaseTransportExact.lean:NCG.FermionicPhaseTransport.det_sign_spectral_flow",
+      "NCG/Grand/FermionicPhaseTransportExact.lean:NCG.FermionicPhaseTransport.scalarizable_iff_stabilizer_trivial",
+      "NCG/Grand/FermionicPhaseTransportExact.lean:NCG.FermionicPhaseTransport.scalarization_unique",
+      "NCG/Grand/DeterminantWindingExact.lean:NCG.DeterminantWinding.hasDerivAt_det",
+      "NCG/Grand/DeterminantWindingExact.lean:NCG.DeterminantWinding.exists_int_winding",
+      "NCG/Grand/DeterminantWindingExact.lean:NCG.DeterminantWinding.exists_periodic_log_iff",
+      "NCG/Grand/DeterminantWindingExact.lean:NCG.DeterminantWinding.det_winding"
+    ],
+    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib. PROVED (2026-08-22): fermionic_phase_transport bundles (F1)/(F2) - along any sequence D_j of operators on a complex inner-product space exactly one of a uniform reduced gap (||D_j u|| >= gamma > 0 for all unit u orthogonal to ker D_j, for all j) or unit vectors u_k orthogonal to ker D_{j_k} with ||D_{j_k} u_k|| -> 0 holds; (QRP.10) - for a Hermitian path H on [0,1] whose determinant is the product of continuous real eigenvalue branches lam_i with finite zero sets Z_i in (0,1), each zero transversal (nonzero derivative d_i(z)), and spectral flow sf = sum_i (#up-crossings - #down-crossings), sgn det H(1) = (-1)^{sf} sgn det H(0), encoded as 0 < Re(det H(1) det H(0)) iff sf even, with both endpoint determinants nonzero (sign_parity: a continuous function with finitely many transversal zeros changes sign an odd/even number of times); (QRP.11) - Jacobi's formula d/dt det D = tr(adj(D) D') proved from the Leibniz expansion (hasDerivAt_det), and for a C^1 loop D : [0,1] -> GL_n(C) the winding number wind(det D) = (1/2 pi i) int_0^1 tr(D^{-1} D') is an integer (continuous logarithm by the FTC) and a continuous periodic determinant logarithm exists exactly when it vanishes (uniqueness of lifts through the covering map exp); (QRP.12) - a commutative-group (U(1)) valued cocycle on the orbit G omega_0 is a coboundary b(g omega) b(omega)^{-1} exactly when it is trivial on the stabilizer of omega_0, and two scalarizations differ by a constant phase on the orbit (the residual edge cochain). Interface: 'simple regular crossings' is encoded by the eigenvalue-branch data (continuous branches with transversal zeros); the loop is parametrized on [0,1] with C^1 data D' given explicitly; 'cutoff-compatible scalarization requires trivial holonomy of the orbit-to-orbit phase cochain' is represented by scalarization_unique (the residual phase is constant per orbit); the reduced gap is stated per-sequence without sInf.",
     "difficulty": "hard_analytic_research"
   },
   "thm:SMST-Wilsonian-counterterm-cocycle": {
@@ -9229,9 +9296,19 @@
   "thm:SMST-reflection-positive-continuum": {
     "env": "theorem",
     "title": "Reflection-positive protected Euclidean continuum alternative",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/SMSTReflectionPositiveContinuumExact.lean:NCG.SMSTReflectionPositiveContinuum.reflection_positive_continuum",
+      "NCG/Grand/SMSTReflectionPositiveContinuumExact.lean:NCG.SMSTReflectionPositiveContinuum.reflection_positive_continuum_alternative",
+      "NCG/Grand/SMSTReflectionPositiveContinuumExact.lean:NCG.SMSTReflectionPositiveContinuum.fieldLaw_reflection_positive",
+      "NCG/Grand/SMSTReflectionPositiveContinuumExact.lean:NCG.SMSTReflectionPositiveContinuum.reflectionPositive_of_tendsto",
+      "NCG/Grand/SMSTReflectionPositiveContinuumExact.lean:NCG.SMSTReflectionPositiveContinuum.exists_subseq_tendsto_of_tight",
+      "NCG/Grand/SMSTReflectionPositiveContinuumExact.lean:NCG.SMSTReflectionPositiveContinuum.mass_escape_of_not_tight",
+      "NCG/Grand/SMSTReflectionPositiveContinuumExact.lean:NCG.SMSTReflectionPositiveContinuum.soft_mode_of_not_gap",
+      "NCG/Grand/SMSTReflectionPositiveContinuumExact.lean:NCG.SMSTReflectionPositiveContinuum.negative_reflected_of_not_RP",
+      "NCG/Grand/SMSTReflectionPositiveContinuumExact.lean:NCG.SMSTReflectionPositiveContinuum.gauge_holonomy_of_not_scalarizable"
+    ],
+    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib. MACHINERY (2026-08-22): hypothesis (Q2) (summable TV cutoff defects) now has its exact finite-cylinder consequences in QuantumCylinderProjectiveLimitExact.lean (TV-convergent reflection-positive marginals, QRP.6); (Q1) is covered by SMSTReflectionPositivityExact.lean. PROVED (2026-08-22): reflection_positive_continuum is the positive branch on a separable metrizable Borel field space E with a continuous Euclidean reflection theta and a positive-time family A of bounded continuous functions: if the field laws mu-hat_j are tight (Q3; supplied by QRP.7/QRP.8 via tight_of_expMoment / tight_of_screen) and reflection positive on A (Q1; fieldLaw_reflection_positive transports cylinder reflection positivity through reflection-equivariant field maps), then a subsequence converges weakly (Prokhorov: isCompact_closure_of_isTightMeasureSet + sequential compactness of the metrizable ProbabilityMeasure space) to a probability measure mu which is reflection positive on A (the limiting OS form is positive), every protected correlation of continuous writers converging locally uniformly with a uniform (1+delta)-moment bound converges along the subsequence to its limit under mu, a uniform positive variance floor of a protected observable survives in the limit (nontriviality), and every uniformly integrable residual insertion vanishing locally uniformly has zero limiting expectation. reflection_positive_continuum_alternative adds the obstruction witnesses: field-mass escape when tightness fails, a positive-time observable of negative reflected norm when Q1 fails, a normalized fermionic soft mode when the uniform reduced gap (Q4) fails, and a stabilizer element with nontrivial phase when gauge-line scalarization (Q5) fails. DISCLOSURE: the Lean theorem is stronger than the manuscript's (it does not use Q2, Q4, Q5, Q6 for the positive branch; Q2's role is covered by thm:SMST-quantum-projective-limit and Q5 by QRP.12 of thm:SMST-fermionic-phase-transport); failures of Q2, Q6 and Q7 return their defining witnesses by negation and are not separately encoded; the positive-time algebra is taken real-valued and bounded continuous.",
     "difficulty": "hard_analytic_research"
   },
   "fire:SMST-trine-not-quantum-cylinder": {
