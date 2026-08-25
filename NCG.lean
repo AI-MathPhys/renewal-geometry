@@ -666,6 +666,10 @@ import NCG.Grand.HermitianPulseHoweComparison
 import NCG.Grand.ProtectedPCHGraphWriter
 import NCG.Grand.FinitePCHFunctional
 import NCG.Grand.NewAcceptedQuotient
+import NCG.Grand.BrandNewEasy00
+import NCG.Grand.BrandNewEasy01
+import NCG.Grand.BrandNewEasy02
+import NCG.Grand.BrandNewEasy03
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly

@@ -13317,10 +13317,11 @@
   "cor:GTLOC-local-counterterm-target": {
     "env": "corollary",
     "title": "Target-relative local counterterm independence",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - T vanishes on Ran(Pi_ct) iff representative-independence + minimal-Read count = rank — routine rank/Gram.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy00.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy00.lean): theorems ctProjector*, ctTarget_independent_iff, ctTarget_read_floor, ctTarget_local_counterterm. Projector from dual-calibrated bank; independence iff T(Ran Π)=0; minimal Read count as IsLeast = finrank, attainability + floor. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cor:GTLOC-pair-locality-independent": {
     "env": "corollary",
@@ -13365,10 +13366,11 @@
   "cor:SMQG-assembly-before-elimination": {
     "env": "corollary",
     "title": "Assembly before Gaussian elimination",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Schur of summed blocks vs summed Schur complements + explicit counterexample.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy00.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy00.lean): theorems sectorSchur, assembled_schur_retained_block, assembly_before_elimination_counterexample/_covariance. General correct-assembly identity + explicit two-sector witness (−1/2 vs −1) propagating into P. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cor:SMQG-dressing": {
     "env": "corollary",
@@ -13405,10 +13407,11 @@
   "cth:GT-counterfeit-support": {
     "env": "countertheorem",
     "title": "A counterfeit support can hide an indefinite carrier",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Explicit 1x2/2x2 computation with repo block/Schur lemmas.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy00.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy00.lean): theorems counterfeit_penrose/_formal_test/_apparent_schur/_true_support_test/_quadratic_value/_not_posSemidef. Full CERT.9 witness: Penrose-verified D⁺, counterfeit passes with PSD apparent Schur, true support fails, value −1 at (1,0,−2), not PSD. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:GT-future-no-immediate-read": {
     "env": "countertheorem",
@@ -13429,18 +13432,20 @@
   "cth:GTLOC-local-Gram-no-inverse": {
     "env": "countertheorem",
     "title": "A local Gram without a uniform floor need not have a local inverse",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Path Laplacians: G_N 1 = eps 1 gives the CFC sqrt norm; tridiagonal weighted-Schur three-term sums.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy00.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy00.lean): theorems pathIncidence/pathLaplacian/gramFloor*, invSqrtGram*, invSqrt_floor_blowup, localGram_no_local_inverse. Genuine path Laplacian; radius-1 propagation + uniform weighted Schur bound; exact ‖G^{-1/2}‖ = ε^{-1/2} via CFC; blow-up as ε↓0. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:GTLOC-local-endpoint-hidden-route": {
     "env": "countertheorem",
     "title": "A local endpoint can hide an arbitrarily long pair excursion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - 2-dim carrier with H=0: Duhamel responses are polynomial time integrals (0 and t^2).",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy00.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy00.lean): theorems duhamelFirst/duhamelPair, longHop*, endpoint_hidden_route. Genuine interval-integral Duhamel responses at H=0: first 0, pair t², far-site excursion witness. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:GTLOC-local-response-not-product": {
     "env": "countertheorem",
@@ -13469,34 +13474,38 @@
   "cth:SMOS-Ward-source-escape": {
     "env": "countertheorem",
     "title": "Cutoffwise Ward closure can escape the local continuum",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Nested finite spans with Q_r e_n = 0 — trivial projections.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy00.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy00.lean): theorems wardVector/wardCutoff/wardScreen*, ward_source_escape. Genuine ℓ²(ℕ) with lp.single; screen projection fixes range; Q_r e_n = 0 for n>r. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:SMOS-energy-scalar-fibre": {
     "env": "countertheorem",
     "title": "Correct dynamics do not fix the absolute energy",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - [H+cI,A]=[H,A] + vacuum shift — one-liner.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy00.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy00.lean): theorems energyScalarFibre_commutator/_vacuum/_shift_ne, energy_scalar_fibre. [H+cI,A]=[H,A] on any complex inner-product space; vacuum shifts by c; H+cI ≠ H. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:SMOS-expectation-Ward": {
     "env": "countertheorem",
     "title": "Expectation Ward identities are insufficient",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - C^2 example — immediate.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy00.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy00.lean): theorems expectationWardDefect*, expectation_ward_insufficient. Exact ℂ² witness: vacuum expectation zero, operator nonzero. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:SMOS-pair-contact-no-cocycle": {
     "env": "countertheorem",
     "title": "A pair contact table need not satisfy the Ward cocycle",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Explicit Hochschild-coboundary evaluation on C^2.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy01.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy01.lean): theorems contactCochain_* , wardContactAssociator_eval, pairContact_no_cocycle. Honest bilinear contact table on ℂ² (LinearMap.mk₂), Ward associator per SMOS-Ward-contact-cocycle with p=0; (δ⁰c)(e₁,e₁,e₂)=e₂≠0 proved. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:SMOS-raw-stress-cumulant": {
     "env": "countertheorem",
@@ -13509,18 +13518,20 @@
   "cth:SMOS-separate-Ward-shorts": {
     "env": "countertheorem",
     "title": "Separate Ward-row repairs need not share one improvement",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Explicit C+C computation — trivial.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy01.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy01.lean): theorems row_zero_repaired, row_one_repaired, no_common_repair, GNpinv_penrose/_unique, PN_*, separate_ward_shorts. MP inverse certified via all four Penrose identities + uniqueness; P_N Y=0, Y*(I−P_N)Y=2; separate repairs and nonexistence of joint repair proved. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:SMQG-determinant-no-covariance": {
     "env": "countertheorem",
     "title": "Aggregate determinant data do not determine the reflected covariance",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - 2x2 counterexample.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy01.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy01.lean): theorems S1_det, S2_det, reflected_covariances_differ, determinant_no_covariance. Manuscript witnesses diag(1,2) vs [[1,1],[0,2]]: equal dets, inverses separated entrywise. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:SMQG-marginals-no-mixture": {
     "env": "countertheorem",
@@ -13541,26 +13552,29 @@
   "cth:SMQG-two-point-no-four-point": {
     "env": "countertheorem",
     "title": "Positive two-point data do not determine the four-point word",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Explicit 4-dim computation on ⋀(ℂ²) with P=I₂.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy01.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy01.lean): theorems K1/K2_posSemidef, same_two_point_blocks, four_point_differs, K2_not_exteriorKernel. ⋀(ℂ²) as ℂ⁴; strengthened: K⁽²⁾ is not the exterior kernel of ANY P. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:SMQG-zero-positive-carrier": {
     "env": "countertheorem",
     "title": "A regular positive carrier can coexist with a partition zero",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Concrete small-matrix witness with existing coherence/determinant machinery.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy01.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy01.lean): theorems history_mass, total_mass, coherence_zero, no_normalized_phase. w=(1,−1): TV 2>0, coherence 0, phase-equation uniqueness refuted. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "cth:SMST-internal-Dirac-not-full-phase": {
     "env": "countertheorem",
     "title": "The internal finite Dirac does not determine the full phase",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - One-complex-dimensional scalar counterexample.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy01.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy01.lean): theorems K_eq, K_unimodular, K_zero, K_pi, internal_Dirac_not_full_phase. 1-dim family: SMQ.0c 𝒦(θ)=e^{iθ}, winding, no function of constant D_F matches. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "def:GT-NCG-commutant-anchor": {
     "env": "definition",
@@ -14067,10 +14081,11 @@
   "thm:GT-MP-supported-Schur": {
     "env": "theorem",
     "title": "Canonical support and supported Schur completion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Pinv Schur completion via existing Schur + MP machinery.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy01.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy01.lean): theorems canonicalSupport, supportProj_*, supported_completion_of_square, supported_schur_posSemidef_iff, supported_schur_bundle. Full CERT.4–CERT.8 with spectral pinv supportProj, uniqueness, exact completion of square, PSD iff. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:GT-NCG-austere-image": {
     "env": "theorem",
@@ -14117,8 +14132,8 @@
     "title": "Functoriality and the unavoidable differential-scale row",
     "status": "conditional_interface",
     "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Functoriality + scaling laws, direct bookkeeping given the interface.",
-    "difficulty": "easy"
+    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Functoriality + scaling laws, direct bookkeeping given the interface. RETRIAGED MEDIUM (2026-08-09): Needs the unformalized finite-spectralization interface (differential packets, π_Q/D_Q/J_Q/γ_Q, Connes metric); a private stand-in would be a definitional encoding — mis-triaged, genuinely MEDIUM+ after GT-NCG-finite-spectralization.",
+    "difficulty": "medium"
   },
   "thm:GT-NCG-graph-fibre": {
     "env": "theorem",
@@ -14163,10 +14178,11 @@
   "thm:GT-error-not-verdict": {
     "env": "theorem",
     "title": "Input rejection is not a theorem verdict",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Essentially definitional on a finite status alphabet.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy02.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy02.lean): theorems gt_certTwo_expectation_alphabet, gt_soundExpectationAlphabet_iff, gt_error_admitted_exploit, gt_error_not_verdict. Soundness ⟺ CERT.2 containment; admitting ERROR yields accepted declaration with no theorem verdict; bundled. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:GT-frozen-corpus-replay": {
     "env": "theorem",
@@ -14203,18 +14219,20 @@
   "thm:GT-upstream-compiler-transfer": {
     "env": "theorem",
     "title": "Transfer of future-operational compilers",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Universal property of quotients.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy02.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy02.lean): theorems upstream_compiler_transfer (+ futureSignatureSetoid, minimalPredictiveQuotient/Projection). UP.8 unique-existence factorization D = D̄ ∘ π through Z^min. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:GTLOC-collar-contact-quotient": {
     "env": "theorem",
     "title": "Exact collar-relative contact quotient",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Direct from pinv/projection machinery.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy02.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy02.lean): theorems collar_contact_quotient_convergence_iff, contactMinimalCounterterm_residual/_leastSquares/_minimumNorm. Iff over contact-data sequences; canonical u^min = L†P_L Π via Gram pinv, least-squares + minimum-norm. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:GTLOC-commutator-hierarchy": {
     "env": "theorem",
@@ -14251,10 +14269,11 @@
   "thm:GTLOC-leakage-Gram-transport": {
     "env": "theorem",
     "title": "Transport of locality leakage Grams",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - One-line Gram perturbation + Cauchy remark.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy02.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy02.lean): theorems leakage_gram_transport_bound/_cauchy/_limit. 2M_R‖ΔA‖ bound; summable defects ⟹ Cauchy Grams; limit transport (cofinal clause). Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:GTLOC-local-connected-OS": {
     "env": "theorem",
@@ -14275,10 +14294,11 @@
   "thm:GTLOC-locality-leakage": {
     "env": "theorem",
     "title": "Exact collar criterion and exponential bound",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Short PSD algebra once collar class defined.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy02.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy02.lean): theorems locality_leakage_zero_iff/_exponential_bound, localityLeakageGram_synthesis, locality_leakage_bank_minimality. Exact collar-zero criterion + Loewner sandwich 0 ⪯ 𝕃 ⪯ e^{−2αR}c²JᴴJ; B_α membership as collar-decay hypothesis; bank minimality as rank equality. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:GTLOC-quasilocal-OS-completion": {
     "env": "theorem",
@@ -14291,10 +14311,11 @@
   "thm:GTLOC-quasilocal-commutator": {
     "env": "theorem",
     "title": "Quasilocal commutator from local collars",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Triangle-inequality commutator splitting; only the approximation-packet definition needs encoding.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy02.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy02.lean): theorems quasilocal_commutator_split/_from_collars/_exponential. Boxed bound in any normed ring from approximation packets; exponential corollary at R = d/3. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:GTLOC-quasilocal-contact-renormalization": {
     "env": "theorem",
@@ -14475,10 +14496,11 @@
   "thm:SMFS-operator-birth": {
     "env": "theorem",
     "title": "Source-minimal field-shell operator birth",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - MP/coherence-factorization instantiation.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy02.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy02.lean): theorems field_shell_operator_decomposition/_pythagoras/_pythagoras_trace, field_shell_bank_minimality, field_shell_operator_birth. FS.36–FS.38 full: MP split, Gram + HS Pythagoras, source-minimality. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:SMFS-projective-continuum": {
     "env": "theorem",
@@ -14515,10 +14537,11 @@
   "thm:SMOS-Ward-short": {
     "env": "theorem",
     "title": "Simultaneous Ward-short Pythagoras",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Standard simultaneous-short via MP projection + Douglas/rank lemmas.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy02.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy02.lean): theorems wardPhysicalGram_eq_schur, ward_short_pythagoras/_zero_iff/_rank_increment, ward_short_obstruction_minimality, simultaneous_ward_short. All four boxed clauses incl. genuine range-inclusion form and block-Gram rank increment. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:SMOS-Ward-short-transport": {
     "env": "theorem",
@@ -14555,18 +14578,20 @@
   "thm:SMOS-energy-commutator-anchor": {
     "env": "theorem",
     "title": "Commutator Ward data determine energy only after a vacuum anchor",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - D(AΩ)=A DΩ on cyclic domain gives D=0/cI — module algebra.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy03.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy03.lean): theorems smos_energy_commutator_zero_anchor/_scalar_anchor/_anchor. Cyclic-domain rendering; DΩ=0 ⟹ D=0 and DΩ=cΩ ⟹ D=cI on 𝔄₀Ω, clauses (i)-(ii). Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:SMOS-energy-trace-transport": {
     "env": "theorem",
     "title": "Energy and trace packet transport",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Triangle/submultiplicativity telescoping.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy03.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy03.lean): theorems smos_energy_trace_packet_transport, smos_scale_trace_incidence_transport. Triangle/submultiplicativity telescoping in any non-unital normed ring + scale/trace instance. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:SMOS-stress-current-criterion": {
     "env": "theorem",
@@ -14587,26 +14612,29 @@
   "thm:SMOS-trace-Pythagoras": {
     "env": "theorem",
     "title": "Identity--nuisance--composite--new-anomaly Pythagoras",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Sequential deflation + four-term Gram Pythagoras via MP lemmas.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy03.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy03.lean): theorems smos_trace_pythagoras_projections, smos_trace_source_decomposition, smos_trace_gram_pythagoras, smos_trace_beta_synthesis, smos_trace_new_gram_zero_iff. Orthogonal projections, four-term decomposition, Gram Pythagoras, T3 β synthesis, zero-iff-range criterion. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:SMOS-trace-scheme": {
     "env": "theorem",
     "title": "Finite scheme covariance of the physical anomaly class",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Scheme covariance from range-projection invariance.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy03.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy03.lean): theorems smos_trace_scheme_* (7 theorems). Full scheme covariance: O₁'=O₁M, projector invariance, Gram congruence, β covariance modulo ker O₁' (the quotient claim). Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:SMQG-Feshbach-covariance": {
     "env": "theorem",
     "title": "Exact Feshbach covariance and determinant factorization",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Block LDU + determinant split via Schur machinery.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy03.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy03.lean): theorems smqg_feshbach_ldu/_det/_retained_inverse/_reflected_covariance/_covariance. QG.29-32 exact on Mathlib Schur-complement machinery. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:SMQG-Gaussian-occurrence": {
     "env": "theorem",
@@ -14715,10 +14743,11 @@
   "thm:SMQG-relation-descent": {
     "env": "theorem",
     "title": "Gaussian kernel descends through the physical word relations",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: EASY - Quotient well-definedness ⟺ relation residual vanishing.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/BrandNewEasy03.lean"
+    ],
+    "note": "Proved exactly (2026-08-09, NCG/Grand/BrandNewEasy03.lean): theorems smqg_relation_descent(_residual_left/_right/_converse). QG.44 residual with MP projector; descent ⟺ Δ_rel = 0 both directions. Verified at the exact-statement standard; brand-new 2026-08-08 record."
   },
   "thm:SMQG-robust-positivity": {
     "env": "theorem",
