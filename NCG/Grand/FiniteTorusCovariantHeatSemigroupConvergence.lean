@@ -23,11 +23,28 @@ open scoped InnerProduct lp
 
 noncomputable section
 
+local instance finiteTorusHeatMeasureSpace :
+    MeasureTheory.MeasureSpace UnitAddCircle :=
+  ⟨AddCircle.haarAddCircle⟩
+
+local instance finiteTorusHeatIsAddHaarMeasure :
+    MeasureTheory.Measure.IsAddHaarMeasure
+      (MeasureTheory.volume : MeasureTheory.Measure UnitAddCircle) :=
+  inferInstanceAs
+    (MeasureTheory.Measure.IsAddHaarMeasure AddCircle.haarAddCircle)
+
+local instance finiteTorusHeatIsProbabilityMeasure :
+    MeasureTheory.IsProbabilityMeasure
+      (MeasureTheory.volume : MeasureTheory.Measure UnitAddCircle) :=
+  inferInstanceAs
+    (MeasureTheory.IsProbabilityMeasure AddCircle.haarAddCircle)
+
 namespace NCG
 
 variable {d : Type*} [Fintype d] [DecidableEq d]
 variable {r : Type} [Fintype r] [Nonempty r]
 
+omit [Nonempty r] in
 /-- Every finite-stage coefficient resolver block is positive. -/
 theorem finiteTorusCovariantResolverBlock_isPositive
     (N : ℕ)
@@ -40,6 +57,7 @@ theorem finiteTorusCovariantResolverBlock_isPositive
   · rw [finiteTorusCovariantResolverBlock, if_neg hk]
     exact ContinuousLinearMap.isPositive_zero
 
+omit [DecidableEq d] [Nonempty r] in
 /-- Every continuum coefficient resolver block is positive. -/
 theorem continuumCovariantResolverBlock_isPositive
     (B : d → EuclideanSpace ℂ r →L[ℂ] EuclideanSpace ℂ r)
@@ -70,6 +88,7 @@ theorem continuumCovariantCoefficientResolver_isPositive
     (continuumCovariantResolverBlock_norm_apply_le_inv B lam hlam)
     (continuumCovariantResolverBlock_isPositive B lam hlam)
 
+omit [DecidableEq d] [Nonempty r] in
 /-- Unitary finite-fibre Fourier conjugation preserves positivity. -/
 theorem conjugateByFiniteFiberTorusFourierEquiv_isPositive
     (T : ℓ²(d → ℤ, EuclideanSpace ℂ r) →L[ℂ]
@@ -80,7 +99,8 @@ theorem conjugateByFiniteFiberTorusFourierEquiv_isPositive
     finiteFiberTorusFourierEquiv.symm.toContinuousLinearEquiv.toContinuousLinearMap
   simpa only [conjugateByFiniteFiberTorusFourierEquiv,
     ContinuousLinearMap.comp_assoc,
-    LinearIsometryEquiv.adjoint_eq_symm] using h
+    LinearIsometryEquiv.adjoint_eq_symm,
+    LinearIsometryEquiv.symm_symm] using h
 
 /-- Every literal interpolated finite resolver is positive. -/
 theorem finiteTorusCovariantInterpolatedResolver_isPositive
@@ -117,6 +137,7 @@ theorem continuumCovariantCoefficientResolver_opNorm_le_inv
   l2BlockDiagonal_opNorm_le _ (1 / lam) (by positivity)
     (continuumCovariantResolverBlock_norm_apply_le_inv B lam hlam)
 
+omit [DecidableEq d] [Nonempty r] in
 /-- Unitary finite-fibre Fourier conjugation preserves any operator-norm
 upper bound. -/
 theorem conjugateByFiniteFiberTorusFourierEquiv_opNorm_le
@@ -128,6 +149,8 @@ theorem conjugateByFiniteFiberTorusFourierEquiv_opNorm_le
   intro f
   simp only [conjugateByFiniteFiberTorusFourierEquiv,
     ContinuousLinearMap.comp_apply]
+  change ‖finiteFiberTorusFourierEquiv.symm
+    (T (finiteFiberTorusFourierEquiv f))‖ ≤ C * ‖f‖
   rw [LinearIsometryEquiv.norm_map]
   calc
     ‖T (finiteFiberTorusFourierEquiv f)‖ ≤
@@ -157,6 +180,7 @@ theorem continuumTorusCovariantResolver_opNorm_le_inv
     (1 / lam) (by positivity)
     (continuumCovariantCoefficientResolver_opNorm_le_inv B lam hlam)
 
+omit [DecidableEq d] in
 /-- A positive resolver with the shift bound has real spectrum in the
 canonical interval. -/
 theorem realSpectrum_subset_Icc_of_isPositive_of_opNorm_le_inv
@@ -164,6 +188,11 @@ theorem realSpectrum_subset_Icc_of_isPositive_of_opNorm_le_inv
       FiniteFiberContinuumTorusL2 (d := d) (r := r))
     (lam : ℝ) (hpositive : T.IsPositive) (hnorm : ‖T‖ ≤ 1 / lam) :
     spectrum ℝ T ⊆ Icc 0 lam⁻¹ := by
+  classical
+  haveI : Inhabited r := Classical.inhabited_of_nonempty ‹_›
+  haveI : Nontrivial (FiniteFiberContinuumTorusL2 (d := d) (r := r)) :=
+    (finiteFiberFourierInterpolation_injective
+      (N := 1) (d := d) (r := r)).nontrivial
   intro x hx
   constructor
   · exact spectrum_nonneg_of_nonneg
