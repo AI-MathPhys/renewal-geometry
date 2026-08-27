@@ -126,10 +126,22 @@ theorem arithmetic_scalar_cutoff {LX JX UX LY JY UY : ℝ}
     LY - UX ≤ JY - JX ∧ JY - JX ≤ UY - LX :=
   target_interval_transport hLX hXU hLY hYU
 
+/-- The calibration information against the constant subspace for one
+selected scalar expectation.  This is the one-dimensional Gram residual
+appearing in `cor:accepted-target-native-scalar`. -/
+def scalarCalibrationDefect (EY Ew : ℝ) : ℝ := (EY - Ew) ^ 2
+
+/-- Vanishing scalar calibration information is exactly equality of the
+physical Read and writer expectations. -/
+theorem scalarCalibrationDefect_eq_zero_iff (EY Ew : ℝ) :
+    scalarCalibrationDefect EY Ew = 0 ↔ EY = Ew := by
+  rw [scalarCalibrationDefect, sq_eq_zero_iff, sub_eq_zero]
+
 /-- `cor:accepted-target-native-scalar`: calibration against constants closes
 the selected scalar. -/
-theorem accepted_target_native_scalar (EY Ew : ℝ) (h : EY - Ew = 0) :
-    EY = Ew := sub_eq_zero.mp h
+theorem accepted_target_native_scalar (EY Ew : ℝ)
+    (h : scalarCalibrationDefect EY Ew = 0) : EY = Ew :=
+  (scalarCalibrationDefect_eq_zero_iff EY Ew).mp h
 
 /-- `cor:GT-calibrated-scalar-cofinal`: a vanishing calibration error transfers
 a Cauchy Read limit to the selected writer means. -/

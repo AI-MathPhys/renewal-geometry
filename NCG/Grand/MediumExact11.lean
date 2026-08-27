@@ -143,7 +143,7 @@ theorem spectral_tail_handoff (hlam : ∀ i, 0 ≤ lam i) (hs : 0 < sigma)
         (Real.rpow_pos_of_pos (by linarith [hlam i]) sigma).le
       have := sq_nonneg (r i)
       positivity
-    · push Not at h
+    · push_neg at h
       have hbase : (1 + Lam : ℝ) ^ sigma ≤ (1 + lam i) ^ sigma :=
         Real.rpow_le_rpow (by linarith) (by linarith) hs.le
       have h1 : (1 : ℝ) ≤ (1 + Lam) ^ (-sigma) * (1 + lam i) ^ sigma := by
@@ -231,7 +231,7 @@ theorem escaping_variation_witness (r : ℕ → ℕ → ℝ) (Lams : ℕ → ℝ
       vNorm v = 1 ∧ (∀ i, lam i ≤ Lams n → v i = 0)
         ∧ epsStar ≤ ∑' i, r n i * v i := by
   rw [Metric.tendsto_atTop] at hfail
-  push Not at hfail
+  push_neg at hfail
   obtain ⟨eps0, heps0, hfr⟩ := hfail
   have hfreq : ∃ᶠ n in atTop, eps0 ≤ vNorm (r n) := by
     rw [frequently_atTop]
@@ -371,8 +371,7 @@ theorem score_familyA (x : Fin 2) : score familyA x = phi x := by
 
 theorem score_familyB (x : Fin 2) : score familyB x = phi x := by
   rw [score, log_familyB, deriv_cubicshift]
-  have h := ((hasDerivAt_pow 2 (0:ℝ)).const_mul 3).const_add c₀ (c := phi x)
-  · simp
+  norm_num
 
 theorem law_at_cutoff (x : Fin 2) : familyA 0 x = familyB 0 x := by
   rw [familyA, familyB]
