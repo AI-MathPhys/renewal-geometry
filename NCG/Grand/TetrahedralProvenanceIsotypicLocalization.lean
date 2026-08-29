@@ -193,4 +193,39 @@ theorem tetrahedralProvenanceShort_idempotent
     rw [Matrix.mulVec_mulVec,
       tetrahedralProvenanceProjector_idempotent p hp]
 
+/-- **`cor:S4-provenance-isotypic`.**  The complete tetrahedral provenance
+localization certificate in the standard-isotypic coordinate decomposition:
+Schur factorization is unique, the displayed projector is idempotent, its
+multiplicity range is a line, and every inequivalent connected isotype is
+killed while the short remains confined to and idempotent on the standard
+block. -/
+theorem tetrahedral_provenance_isotypic_localization
+    {m : Type*} [Fintype m] [DecidableEq m]
+    (Y : Matrix (Fin 3 × m) (Fin 3 × PUnit) ℂ)
+    (hY : ∀ q,
+      (standardS4Carrier q ⊗ₖ (1 : Matrix m m ℂ)) * Y =
+        Y * (standardS4Carrier q ⊗ₖ (1 : Matrix PUnit PUnit ℂ)))
+    (p : m → ℂ) (hp : star p ⬝ᵥ p ≠ 0) :
+    (∃! q : m → ℂ,
+        Y = (1 : Matrix (Fin 3) (Fin 3) ℂ) ⊗ₖ provenanceColumn q) ∧
+      tetrahedralProvenanceProjector p * tetrahedralProvenanceProjector p =
+        tetrahedralProvenanceProjector p ∧
+      (∀ x : m → ℂ,
+        (tetrahedralMultiplicityProjector p).mulVec x =
+          ((star p ⬝ᵥ p)⁻¹ * (star p ⬝ᵥ x)) • p) ∧
+      (∀ w : NonstandardConnectedS4Isotype → ℂ,
+        tetrahedralProvenanceShort p
+          (w, (0 : (m × Fin 3) → ℂ)) = 0) ∧
+      (∀ x : ConnectedS4IsotypicCarrier m,
+        (tetrahedralProvenanceShort p x).1 = 0) ∧
+      (∀ x : ConnectedS4IsotypicCarrier m,
+        tetrahedralProvenanceShort p (tetrahedralProvenanceShort p x) =
+          tetrahedralProvenanceShort p x) := by
+  exact ⟨standardS4_equivariantSynthesis_unique_factorization Y hY,
+    tetrahedralProvenanceProjector_idempotent p hp,
+    tetrahedralMultiplicityProjector_range_is_line p,
+    tetrahedralProvenanceShort_kills_nonstandard_isotypes p,
+    tetrahedralProvenanceShort_preserves_nonstandard_component p,
+    tetrahedralProvenanceShort_idempotent p hp⟩
+
 end NCG

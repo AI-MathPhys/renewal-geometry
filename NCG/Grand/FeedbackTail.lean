@@ -121,7 +121,7 @@ theorem feshbach_high_energy_bounds
 /-- `thm:Hodge-feedback-tail`. -/
 theorem hodge_feedback_tail :
     -- (i) the boxed high-energy memory bound
-    (∀ {A : Type} [NormedRing A] (B S C : A) (b c R t : ℝ),
+    (∀ {A : Type*} [NormedRing A] (B S C : A) (b c R t : ℝ),
       0 ≤ b → 0 ≤ c → ‖B‖ ≤ b → ‖C‖ ≤ c →
       ‖S‖ ≤ Real.exp (-(R * t)) →
       ‖B * S * C‖ ≤ b * c * Real.exp (-(R * t)))

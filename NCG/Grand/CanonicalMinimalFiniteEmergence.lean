@@ -144,11 +144,172 @@ def FactorizationMetricBoundary : Prop :=
       ({maGen 0 1, (maMetric (1 / 2))⁻¹ * maGen 0 1 * maMetric (1 / 2)} :
         Set (Matrix (Fin 2) (Fin 2) ℂ)) = ⊤
 
-/-- E10: the four additional analytic certificates are logically distinct
-coordinates: each coordinate can occur without any of the other three. -/
+/-- The four analytic panels mentioned in E10.  Keeping these as a named
+finite type lets the independence statement quantify over the actual
+certificates rather than over surrogate Boolean flags. -/
+inductive AdditionalCertificate
+  | directFringe
+  | infiniteHorizonFiniteMemory
+  | autonomousPhysicalRenewal
+  | regulatorUniformGap
+  deriving DecidableEq
+
+/-- Concrete data on which the four additional certificates are tested.
+
+* `fringe` is the off-diagonal coefficient in the normalized positive
+  two-history matrix `[[1,c],[conj c,1]]`;
+* `feedback` is an infinite scalar returned-feedback kernel;
+* `completionClasses` and `survivorNorm` are the reset-rank and survivor
+  data of a two-state renewal test;
+* `transientNorm` is the cutoff-indexed transient contraction norm. -/
+structure AdditionalCertificateDatum where
+  fringe : ℂ
+  feedback : ℕ → ℝ
+  completionClasses : Finset (Fin 2)
+  survivorNorm : ℝ
+  transientNorm : ℕ → ℝ
+
+/-- A nonzero admissible normalized two-history coherence.  The inequality
+`|c| ≤ 1` is exactly positivity of `[[1,c],[conj c,1]]`. -/
+def HasDirectFringe (d : AdditionalCertificateDatum) : Prop :=
+  ‖d.fringe‖ ≤ 1 ∧ d.fringe ≠ 0
+
+/-- A nonzero infinite feedback kernel with a one-dimensional time-homogeneous
+realization.  The displayed recurrence is equivalent to `Kₖ = b aᵏ` and so
+is the scalar rank-one instance of finite Hankel memory. -/
+def HasInfiniteHorizonFiniteMemory (d : AdditionalCertificateDatum) : Prop :=
+  d.feedback 0 ≠ 0 ∧
+    ∃ a : ℝ, ∀ k : ℕ, d.feedback (k + 1) = a * d.feedback k
+
+/-- The finite renewal test: all completions land in one class and the
+noncompletion survivor has spectral radius (here its scalar norm) below one. -/
+def HasAutonomousPhysicalRenewal (d : AdditionalCertificateDatum) : Prop :=
+  d.completionClasses.card = 1 ∧
+    0 ≤ d.survivorNorm ∧ d.survivorNorm < 1
+
+/-- A regulator-uniform gap for the cutoff transient norms. -/
+def HasRegulatorUniformGap (d : AdditionalCertificateDatum) : Prop :=
+  ∃ γ : ℝ, 0 < γ ∧
+    ∀ X : ℕ, 0 ≤ d.transientNorm X ∧ d.transientNorm X ≤ 1 - γ
+
+/-- Interpret one of the four named certificates on concrete panel data. -/
+def HasAdditionalCertificate
+    (d : AdditionalCertificateDatum) : AdditionalCertificate → Prop
+  | .directFringe => HasDirectFringe d
+  | .infiniteHorizonFiniteMemory => HasInfiniteHorizonFiniteMemory d
+  | .autonomousPhysicalRenewal => HasAutonomousPhysicalRenewal d
+  | .regulatorUniformGap => HasRegulatorUniformGap d
+
+/-- E10: each of the four analytic certificates occurs on concrete data while
+the other three fail.  Thus none of them is supplied by the finite structural
+emergence theorem or follows merely from any one of the other panels. -/
 def AdditionalCertificateIndependence : Prop :=
-  ∀ target : Fin 4, ∃ flags : Fin 4 → Bool,
-    flags target = true ∧ ∀ other, other ≠ target → flags other = false
+  ∀ target : AdditionalCertificate,
+    ∃ d : AdditionalCertificateDatum,
+      HasAdditionalCertificate d target ∧
+        ∀ other, other ≠ target → ¬ HasAdditionalCertificate d other
+
+private def directFringeOnly : AdditionalCertificateDatum where
+  fringe := 1
+  feedback := fun _ => 0
+  completionClasses := Finset.univ
+  survivorNorm := 1
+  transientNorm := fun _ => 1
+
+private def finiteMemoryOnly : AdditionalCertificateDatum where
+  fringe := 0
+  feedback := fun _ => 1
+  completionClasses := Finset.univ
+  survivorNorm := 1
+  transientNorm := fun _ => 1
+
+private def autonomousRenewalOnly : AdditionalCertificateDatum where
+  fringe := 0
+  feedback := fun _ => 0
+  completionClasses := {0}
+  survivorNorm := 0
+  transientNorm := fun _ => 1
+
+private def uniformGapOnly : AdditionalCertificateDatum where
+  fringe := 0
+  feedback := fun _ => 0
+  completionClasses := Finset.univ
+  survivorNorm := 1
+  transientNorm := fun _ => 0
+
+private lemma constantOne_hasNoUniformGap
+    (d : AdditionalCertificateDatum) (h : d.transientNorm = fun _ => 1) :
+    ¬ HasRegulatorUniformGap d := by
+  rintro ⟨γ, hγ, hbound⟩
+  have hle := (hbound 0).2
+  rw [h] at hle
+  norm_num at hle
+  linarith
+
+/-- The concrete independence witnesses required by E10. -/
+theorem additionalCertificateIndependence_exact :
+    AdditionalCertificateIndependence := by
+  intro target
+  cases target with
+  | directFringe =>
+      refine ⟨directFringeOnly, ?_, ?_⟩
+      · norm_num [HasAdditionalCertificate, HasDirectFringe, directFringeOnly]
+      · intro other hne
+        cases other with
+        | directFringe => exact (hne rfl).elim
+        | infiniteHorizonFiniteMemory =>
+            simp [HasAdditionalCertificate, HasInfiniteHorizonFiniteMemory,
+              directFringeOnly]
+        | autonomousPhysicalRenewal =>
+            norm_num [HasAdditionalCertificate, HasAutonomousPhysicalRenewal,
+              directFringeOnly]
+        | regulatorUniformGap =>
+            exact constantOne_hasNoUniformGap directFringeOnly rfl
+  | infiniteHorizonFiniteMemory =>
+      refine ⟨finiteMemoryOnly, ?_, ?_⟩
+      · refine ⟨by norm_num [HasAdditionalCertificate,
+            HasInfiniteHorizonFiniteMemory, finiteMemoryOnly], ?_⟩
+        exact ⟨1, by intro k; norm_num [finiteMemoryOnly]⟩
+      · intro other hne
+        cases other with
+        | directFringe =>
+            simp [HasAdditionalCertificate, HasDirectFringe, finiteMemoryOnly]
+        | infiniteHorizonFiniteMemory => exact (hne rfl).elim
+        | autonomousPhysicalRenewal =>
+            norm_num [HasAdditionalCertificate, HasAutonomousPhysicalRenewal,
+              finiteMemoryOnly]
+        | regulatorUniformGap =>
+            exact constantOne_hasNoUniformGap finiteMemoryOnly rfl
+  | autonomousPhysicalRenewal =>
+      refine ⟨autonomousRenewalOnly, ?_, ?_⟩
+      · norm_num [HasAdditionalCertificate, HasAutonomousPhysicalRenewal,
+          autonomousRenewalOnly]
+      · intro other hne
+        cases other with
+        | directFringe =>
+            simp [HasAdditionalCertificate, HasDirectFringe, autonomousRenewalOnly]
+        | infiniteHorizonFiniteMemory =>
+            simp [HasAdditionalCertificate, HasInfiniteHorizonFiniteMemory,
+              autonomousRenewalOnly]
+        | autonomousPhysicalRenewal => exact (hne rfl).elim
+        | regulatorUniformGap =>
+            exact constantOne_hasNoUniformGap autonomousRenewalOnly rfl
+  | regulatorUniformGap =>
+      refine ⟨uniformGapOnly, ?_, ?_⟩
+      · refine ⟨1 / 2, by norm_num, ?_⟩
+        intro X
+        norm_num [HasAdditionalCertificate, HasRegulatorUniformGap, uniformGapOnly]
+      · intro other hne
+        cases other with
+        | directFringe =>
+            simp [HasAdditionalCertificate, HasDirectFringe, uniformGapOnly]
+        | infiniteHorizonFiniteMemory =>
+            simp [HasAdditionalCertificate, HasInfiniteHorizonFiniteMemory,
+              uniformGapOnly]
+        | autonomousPhysicalRenewal =>
+            norm_num [HasAdditionalCertificate, HasAutonomousPhysicalRenewal,
+              uniformGapOnly]
+        | regulatorUniformGap => exact (hne rfl).elim
 
 /-- The ten-clause structural output of a consistent finite datum. -/
 structure Certificate
@@ -270,10 +431,7 @@ theorem canonicalMinimalFiniteEmergence
   · refine ⟨nonminimal_factorization.2.2.2.2.2, ?_⟩
     exact (metric_adjoint_no_go 0 1 (1 / 2) (by norm_num)
       (by norm_num) (by norm_num)).2.2.2.2
-  · intro target
-    refine ⟨fun i => decide (i = target), by simp, ?_⟩
-    intro other hne
-    simp [hne]
+  · exact additionalCertificateIndependence_exact
 
 end CanonicalFiniteEmergence
 

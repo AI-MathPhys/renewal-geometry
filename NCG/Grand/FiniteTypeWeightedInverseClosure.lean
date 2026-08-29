@@ -23,7 +23,7 @@ namespace NCG
 /-- The exact Combes--Thomas corner identity plus Neumann closure gives the
 displayed exponentially decaying inverse corner. -/
 theorem exponential_conjugation_corner_decay
-    {A : Type} [NormedRing A] [NormedAlgebra ℝ A]
+    {A : Type*} [NormedRing A] [NormedAlgebra ℝ A]
     (D E Di W Px Py : A) (σ b μ δ : ℝ)
     (hσ : 0 < σ) (hb : 0 ≤ b) (hbσ : b < σ)
     (hDDi : D * Di = 1) (hDiD : Di * D = 1)

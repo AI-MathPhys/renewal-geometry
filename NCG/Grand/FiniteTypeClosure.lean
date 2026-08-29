@@ -52,7 +52,7 @@ theorem renewal_finite_type_closure {ι τ : Type*}
         ∑ e, μ e * d e ^ P
           ≤ S ^ (P - 2) * ∑ e, μ e * d e ^ 2)
     -- (iii) the Combes–Thomas/Neumann inverse closure
-    ∧ (∀ {A : Type} [NormedRing A]
+    ∧ (∀ {A : Type*} [NormedRing A]
         (D E Di W : A) (σ b : ℝ),
         0 < σ → 0 ≤ b → b < σ →
         D * Di = 1 → Di * D = 1 →

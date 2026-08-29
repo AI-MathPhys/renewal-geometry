@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import NCG.Grand.CanonicalGraphRegulatorGeometry
 import NCG.Grand.SMSTCommutant
 import NCG.Grand.WignerSmithPhase
+import NCG.Grand.ZeroModeSaturationExact
 
 /-!
 # Massless graph connection and zero-mode determinant line
@@ -26,6 +27,45 @@ noncomputable def masslessKernelCokernelCarrier {e f : ℕ}
     (D : Matrix (Fin f) (Fin e) ℂ) :=
   (LinearMap.ker D.mulVecLin) ×
     ((Fin f → ℂ) ⧸ LinearMap.range D.mulVecLin)
+
+/-- The actual residual determinant line at a massless zero-mode stratum:
+`det(coker D) tensor (det(ker D))^*`. -/
+noncomputable abbrev masslessZeroModeLine {e f : ℕ}
+    (D : Matrix (Fin f) (Fin e) ℂ) :=
+  ZeroMode.ZeroModeLine (LinearMap.ker D.mulVecLin)
+    ((Fin f → ℂ) ⧸ LinearMap.range D.mulVecLin)
+
+/-- The kernel/cokernel carrier really produces a line, rather than merely a
+pair of vector spaces. -/
+theorem masslessZeroModeLine_dim_one {e f : ℕ}
+    (D : Matrix (Fin f) (Fin e) ℂ) :
+    Module.finrank ℂ (masslessZeroModeLine D) = 1 := by
+  simp [masslessZeroModeLine, ZeroMode.ZeroModeLine,
+    Module.finrank_tensorProduct, Subspace.dual_finrank_eq,
+    ZeroMode.det_line_dim_one]
+
+/-- Spectral-coordinate form of the constant-rank graph connection.  On a
+fixed nonzero singular support, `weights i` are the imaginary trace
+coefficients and `singularSq i` are the positive squared singular values. -/
+noncomputable def masslessSpectralConnection {r : Type*} [Fintype r]
+    (weights singularSq : r → ℝ) (m : ℝ) : ℝ :=
+  -∑ i, weights i / (singularSq i + m ^ 2)
+
+/-- The full finite constant-rank limit, obtained simultaneously over every
+nonzero singular direction (not merely a single scalar summand). -/
+theorem masslessSpectralConnection_tendsto {r : Type*} [Fintype r]
+    (weights singularSq : r → ℝ) (hs : ∀ i, 0 < singularSq i) :
+    Filter.Tendsto (masslessSpectralConnection weights singularSq)
+      (nhds 0) (nhds (-∑ i, weights i / singularSq i)) := by
+  have hi : ∀ i : r, Filter.Tendsto
+      (fun m : ℝ => weights i / (singularSq i + m ^ 2))
+      (nhds 0) (nhds (weights i / singularSq i)) :=
+    fun i => massless_limit (weights i) (singularSq i) (hs i)
+  have hsum := tendsto_finsetSum Finset.univ (fun i _ => hi i)
+  have hneg := continuous_neg.continuousAt.tendsto.comp hsum
+  convert hneg using 1
+  · funext x
+    rfl
 
 /-- Massless connection on an invertible square branch. -/
 noncomputable def masslessGraphConnection {n : ℕ}

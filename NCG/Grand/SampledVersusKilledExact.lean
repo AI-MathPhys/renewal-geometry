@@ -25,7 +25,8 @@ projection onto the tail `Fin p`.
 * `protocols_agree_iff` : the two protocols agree for all small `t` exactly when `B = 0`.
 -/
 
-open Matrix NCG.GeometricThresholdBank NCG.SourceCoercivityInfluence NCG.PsdBlockSchur
+open Matrix Asymptotics Filter Topology NCG.GeometricThresholdBank
+  NCG.SourceCoercivityInfluence NCG.PsdBlockSchur
   NCG.LocalizerExtensionFloor NCG.ThreeCylinderActionResponse NCG.GRHRestoringShort
 open scoped ComplexOrder MatrixOrder
 
@@ -450,6 +451,55 @@ variable {m p : ℕ} (A : Matrix (Fin m) (Fin m) ℂ) (B : Matrix (Fin m) (Fin p
 noncomputable local instance {n : Type*} [Fintype n] [DecidableEq n] :
     CompleteSpace (Matrix n n ℂ) := FiniteDimensional.complete ℂ _
 
+/-- The genuine second-order Taylor expansion of the matrix exponential with
+cubic Banach-algebra remainder. -/
+theorem matrixExp_secondOrder_remainder_isBigO {n : Type*}
+    [Fintype n] [DecidableEq n] :
+    (fun X : Matrix n n ℂ => NormedSpace.exp X -
+      (1 + X + (2 : ℂ)⁻¹ • X ^ 2))
+      =O[𝓝 0] fun X : Matrix n n ℂ => ‖X‖ ^ 3 := by
+  have h := (NormedSpace.exp_hasFPowerSeriesAt_zero
+    (𝕂 := ℂ) (𝔸 := Matrix n n ℂ)).isBigO_sub_partialSum_pow 3
+  refine h.congr' ?_ EventuallyEq.rfl
+  filter_upwards with X
+  simp only [zero_add]
+  congr 1
+  norm_num [FormalMultilinearSeries.partialSum,
+    NormedSpace.expSeries_apply_eq, Finset.sum_range_succ]
+
+/-- Along every real matrix line, the second-order exponential remainder is
+`O(t^3)`. -/
+theorem matrixExp_line_secondOrder_remainder_isBigO {n : Type*}
+    [Fintype n] [DecidableEq n] (X : Matrix n n ℂ) :
+    (fun t : ℝ => NormedSpace.exp (t • X) -
+      (1 + t • X + ((t ^ 2 / 2 : ℝ) : ℂ) • X ^ 2))
+      =O[𝓝 0] fun t : ℝ => t ^ 3 := by
+  have htend : Tendsto (fun t : ℝ => t • X) (𝓝 0) (𝓝 0) := by
+    have hc : Continuous (fun t : ℝ => t • X) :=
+      continuous_id.smul continuous_const
+    simpa only [zero_smul] using hc.tendsto (0 : ℝ)
+  have h := matrixExp_secondOrder_remainder_isBigO.comp_tendsto htend
+  have hnorm : (fun t : ℝ => ‖t • X‖ ^ 3)
+      =O[𝓝 0] fun t : ℝ => t ^ 3 := by
+    refine IsBigO.of_bound (‖X‖ ^ 3) ?_
+    filter_upwards with t
+    simp only [norm_pow, norm_smul, Real.norm_eq_abs, abs_pow]
+    rw [abs_of_nonneg (mul_nonneg (abs_nonneg t) (norm_nonneg X))]
+    ring_nf
+    exact le_rfl
+  refine (h.trans hnorm).congr' ?_ EventuallyEq.rfl
+  filter_upwards with t
+  simp only [Function.comp_apply]
+  have ht : t • X = (t : ℂ) • X := by
+    ext i j
+    simp [Complex.real_smul]
+  rw [ht, smul_pow, smul_smul]
+  have hcoef : (2 : ℂ)⁻¹ * (t : ℂ) ^ 2 = ((t ^ 2 / 2 : ℝ) : ℂ) := by
+    push_cast
+    norm_num
+    ring
+  rw [hcoef]
+
 /-- Tail-block extraction as a continuous linear map. -/
 noncomputable def tailBlock :
     Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ →L[ℝ] Matrix (Fin p) (Fin p) ℂ :=
@@ -460,6 +510,31 @@ noncomputable def tailBlock :
 
 theorem tailBlock_apply (M : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ) :
     tailBlock M = M.toBlocks₂₂ := rfl
+
+theorem toBlocks₂₂_add_er16
+    (M N : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ) :
+    (M + N).toBlocks₂₂ = M.toBlocks₂₂ + N.toBlocks₂₂ := rfl
+
+theorem toBlocks₂₂_real_smul_er16 (t : ℝ)
+    (M : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ) :
+    (t • M).toBlocks₂₂ = t • M.toBlocks₂₂ := rfl
+
+theorem toBlocks₂₂_complex_smul_er16 (c : ℂ)
+    (M : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ) :
+    (c • M).toBlocks₂₂ = c • M.toBlocks₂₂ := rfl
+
+theorem neg_generator_tail :
+    (-generator A B D).toBlocks₂₂ = -D := by
+  unfold generator
+  rw [fromBlocks_neg, toBlocks_fromBlocks₂₂]
+
+/-- The quadratic tail block is precisely the coupling energy plus the killed
+quadratic term. -/
+theorem neg_generator_sq_tail :
+    ((-generator A B D) ^ 2).toBlocks₂₂ = Bᴴ * B + (-D) ^ 2 := by
+  rw [pow_two, pow_two, neg_mul_neg, neg_mul_neg]
+  unfold generator
+  rw [fromBlocks_multiply, toBlocks_fromBlocks₂₂]
 
 /-- **(ER.16)**: the first difference `F(t) = Q e^{-tH} Q - e^{-tD}`. -/
 noncomputable def firstDiff (t : ℝ) : Matrix (Fin p) (Fin p) ℂ :=
@@ -506,6 +581,34 @@ theorem taylor_data :
     rw [zero_smul, zero_smul, NormedSpace.exp_zero, NormedSpace.exp_zero, Matrix.one_mul,
       Matrix.one_mul, neg_mul_neg, neg_mul_neg, fromBlocks_multiply, toBlocks_fromBlocks₂₂]
     abel
+
+/-- **(ER.16), with its actual remainder**:
+`Q e^{-tH} Q - e^{-tD} = (t²/2) B^*B + O(t³)` in matrix norm. -/
+theorem firstDiff_cubic_remainder_isBigO :
+    (fun t : ℝ => firstDiff A B D t -
+      ((t ^ 2 / 2 : ℝ) : ℂ) • (Bᴴ * B))
+      =O[𝓝 0] fun t : ℝ => t ^ 3 := by
+  let rH : ℝ → Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ := fun t =>
+    NormedSpace.exp (t • (-generator A B D)) -
+      (1 + t • (-generator A B D) +
+        ((t ^ 2 / 2 : ℝ) : ℂ) • (-generator A B D) ^ 2)
+  let rD : ℝ → Matrix (Fin p) (Fin p) ℂ := fun t =>
+    NormedSpace.exp (t • (-D)) -
+      (1 + t • (-D) + ((t ^ 2 / 2 : ℝ) : ℂ) • (-D) ^ 2)
+  have hH : rH =O[𝓝 0] fun t : ℝ => t ^ 3 := by
+    exact matrixExp_line_secondOrder_remainder_isBigO (-generator A B D)
+  have hHt : (fun t => tailBlock (rH t)) =O[𝓝 0] fun t : ℝ => t ^ 3 :=
+    ((tailBlock (m := m) (p := p)).isBigO_comp rH (𝓝 0)).trans hH
+  have hD : rD =O[𝓝 0] fun t : ℝ => t ^ 3 := by
+    exact matrixExp_line_secondOrder_remainder_isBigO (-D)
+  refine (hHt.sub hD).congr' ?_ EventuallyEq.rfl
+  filter_upwards with t
+  dsimp only [rH, rD]
+  unfold firstDiff sampled killed
+  rw [tailBlock_apply, toBlocks₂₂_sub, toBlocks₂₂_add_er16,
+    toBlocks₂₂_add_er16, toBlocks₂₂_one, toBlocks₂₂_real_smul_er16,
+    toBlocks₂₂_complex_smul_er16, neg_generator_tail, neg_generator_sq_tail]
+  module
 
 /-- If the protocols agree near `t = 0`, the coupling vanishes. -/
 theorem coupling_eq_zero_of_agree (h : ∀ᶠ t in nhds (0 : ℝ), firstDiff A B D t = 0) : B = 0 := by

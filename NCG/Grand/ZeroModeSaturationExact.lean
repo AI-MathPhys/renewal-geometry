@@ -31,6 +31,8 @@ open ExteriorAlgebra
 namespace NCG
 namespace ZeroMode
 
+noncomputable section
+
 /-! ### The `noncommProd`–`List.ofFn` bridge -/
 
 theorem noncommProd_univ_fin {A : Type*} [Monoid A] {e : ℕ} (f : Fin e → A)
@@ -182,6 +184,49 @@ theorem det_line_dim_one {W : Type*} [AddCommGroup W] [Module ℂ W]
   rw [exteriorPower.finrank_eq]
   exact Nat.choose_self _
 
+/-- The determinant line of a finite-dimensional complex carrier. -/
+abbrev DetLine (W : Type*) [AddCommGroup W] [Module ℂ W]
+    [FiniteDimensional ℂ W] :=
+  ⋀[ℂ]^(Module.finrank ℂ W) W
+
+/-- The chiral amplitude line `(det Hplus)^* tensor det Hminus`. -/
+abbrev ChiralAmplitudeLine (Hplus Hminus : Type*)
+    [AddCommGroup Hplus] [Module ℂ Hplus] [FiniteDimensional ℂ Hplus]
+    [AddCommGroup Hminus] [Module ℂ Hminus] [FiniteDimensional ℂ Hminus] :=
+  TensorProduct ℂ (Module.Dual ℂ (DetLine Hplus)) (DetLine Hminus)
+
+/-- The zero-mode determinant line `det Kminus tensor (det Kplus)^*`. -/
+abbrev ZeroModeLine (Kplus Kminus : Type*)
+    [AddCommGroup Kplus] [Module ℂ Kplus] [FiniteDimensional ℂ Kplus]
+    [AddCommGroup Kminus] [Module ℂ Kminus] [FiniteDimensional ℂ Kminus] :=
+  TensorProduct ℂ (DetLine Kminus) (Module.Dual ℂ (DetLine Kplus))
+
+/-- The reduced determinant line `det Eminus tensor (det Eplus)^*`. -/
+abbrev ReducedLine (Eplus Eminus : Type*)
+    [AddCommGroup Eplus] [Module ℂ Eplus] [FiniteDimensional ℂ Eplus]
+    [AddCommGroup Eminus] [Module ℂ Eminus] [FiniteDimensional ℂ Eminus] :=
+  TensorProduct ℂ (DetLine Eminus) (Module.Dual ℂ (DetLine Eplus))
+
+/-- **SMQ.1 as an actual line isomorphism.**  For the orthogonal direct-sum
+carriers `Hplus = Kplus x Eplus` and `Hminus = Kminus x Eminus`, the chiral
+amplitude line is linearly isomorphic to the tensor product of the zero-mode
+and reduced determinant lines.  `line_factorization` below identifies this
+isomorphism on every zero-mode-adapted top generator. -/
+theorem determinant_line_factorization
+    {Kplus Kminus Eplus Eminus : Type*}
+    [AddCommGroup Kplus] [Module ℂ Kplus] [FiniteDimensional ℂ Kplus]
+    [AddCommGroup Kminus] [Module ℂ Kminus] [FiniteDimensional ℂ Kminus]
+    [AddCommGroup Eplus] [Module ℂ Eplus] [FiniteDimensional ℂ Eplus]
+    [AddCommGroup Eminus] [Module ℂ Eminus] [FiniteDimensional ℂ Eminus] :
+    Nonempty
+      (ChiralAmplitudeLine (Kplus × Eplus) (Kminus × Eminus) ≃ₗ[ℂ]
+        TensorProduct ℂ (ZeroModeLine Kplus Kminus)
+          (ReducedLine Eplus Eminus)) := by
+  apply FiniteDimensional.nonempty_linearEquiv_of_finrank_eq
+  simp [ChiralAmplitudeLine, ZeroModeLine, ReducedLine, DetLine,
+    Module.finrank_tensorProduct, Subspace.dual_finrank_eq,
+    det_line_dim_one]
+
 /-- **SMQ.1, adapted factorization**: on zero-mode-adapted generator families the top
 Grassmann monomial factors exactly as (kernel block) × (regular block) — the canonical
 factorization of the determinant line realized on adapted generators. -/
@@ -249,5 +294,6 @@ theorem smst_zero_mode_saturation {W : Type*} [AddCommGroup W] [Module ℂ W]
   ⟨det_line_dim_one, reduced_determinant_norm D', reduced_determinant_ne_zero hD',
    saturated_projection zb z a g D', vacuum_vanishes a g D' hk⟩
 
+end
 end ZeroMode
 end NCG

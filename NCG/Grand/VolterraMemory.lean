@@ -193,6 +193,94 @@ theorem memory_register_unique
       simp [z]
   simpa [z] using heq
 
+/-- Full variation of constants with a nonzero initial hidden register.  Unlike
+`memory_register_unique`, this is the form needed by the Mori--Zwanzig
+elimination in `thm:accepted-generator-closure`: the homogeneous hidden term
+is retained rather than silently set to zero. -/
+theorem memory_register_unique_with_initial
+    (H : V →L[ℝ] V) (f : ℝ → V) (hf : Continuous f)
+    (y : ℝ → V)
+    (hy : forall t, HasDerivAt y (H (y t) + f t) t) :
+    y = fun t =>
+      (NormedSpace.exp (t • H)) (y 0) +
+        ∫ s in (0 : ℝ)..t,
+          (NormedSpace.exp ((t - s) • H)) (f s) := by
+  letI : NormedAlgebra ℚ (V →L[ℝ] V) :=
+    NormedAlgebra.restrictScalars ℚ ℝ _
+  let z : ℝ → V := fun t =>
+    (NormedSpace.exp (t • H)) (y 0) +
+      (NormedSpace.exp (t • H))
+        (∫ s in (0 : ℝ)..t,
+          (NormedSpace.exp ((-s) • H)) (f s))
+  have hz : forall t, HasDerivAt z (H (z t) + f t) t := by
+    intro t
+    have hhom := (hasDerivAt_exp_smul_const' H t).clm_apply
+      (hasDerivAt_const (x := t) (y 0))
+    have hhom' : HasDerivAt
+        (fun u => (NormedSpace.exp (u • H)) (y 0))
+        (H ((NormedSpace.exp (t • H)) (y 0))) t := by
+      simpa only [mul_apply_eq_comp, map_zero, add_zero] using hhom
+    have hforced := memory_register_variation_of_constants H f hf t
+    have hadd := hhom'.add hforced
+    convert hadd using 1
+    · funext u
+      rfl
+    · simp only [z, map_add]
+      abel
+  have heq : y = z := by
+    apply ODE_solution_unique_univ (s := fun _ => Set.univ)
+      (v := fun t v => H v + f t) (K := ‖H‖₊ + 0) (t₀ := 0)
+    · intro t
+      exact H.lipschitz.add (LipschitzWith.const (f t)) |>.lipschitzOnWith
+    · intro t
+      exact ⟨hy t, Set.mem_univ _⟩
+    · intro t
+      exact ⟨hz t, Set.mem_univ _⟩
+    · simp [z]
+  funext t
+  calc
+    y t = z t := congrFun heq t
+    _ = (NormedSpace.exp (t • H)) (y 0) +
+        ∫ s in (0 : ℝ)..t,
+          (NormedSpace.exp ((t - s) • H)) (f s) := by
+      dsimp only [z]
+      rw [memory_register_eq_convolution H f hf t]
+
+/-- Exact Mori--Zwanzig elimination with the initial hidden term.  The hidden
+ODE is solved by the preceding theorem, and bounded linearity moves the
+visible coupling through the Bochner interval integral. -/
+theorem volterra_equation_with_initial_hidden
+    {X : Type*} [NormedAddCommGroup X] [NormedSpace Real X]
+    [CompleteSpace X]
+    (A : X →L[ℝ] X) (B : X →L[ℝ] V)
+    (C : V →L[ℝ] X) (H : V →L[ℝ] V)
+    (x : ℝ → X) (y : ℝ → V)
+    (hxcont : Continuous x)
+    (hx : forall t, HasDerivAt x (A (x t) + C (y t)) t)
+    (hy : forall t, HasDerivAt y (H (y t) + B (x t)) t) :
+    forall t, HasDerivAt x
+      (A (x t) + C ((NormedSpace.exp (t • H)) (y 0)) +
+        ∫ s in (0 : ℝ)..t,
+          C ((NormedSpace.exp ((t - s) • H)) (B (x s)))) t := by
+  letI : NormedAlgebra ℚ (V →L[ℝ] V) :=
+    NormedAlgebra.restrictScalars ℚ ℝ _
+  have hBx : Continuous (fun s => B (x s)) := B.continuous.comp hxcont
+  have hyform := memory_register_unique_with_initial H
+    (fun s => B (x s)) hBx y hy
+  intro t
+  have hint : IntervalIntegrable
+      (fun s => (NormedSpace.exp ((t - s) • H)) (B (x s)))
+      MeasureTheory.volume 0 t := by
+    apply Continuous.intervalIntegrable
+    exact Continuous.clm_apply
+      (NormedSpace.exp_continuous.comp
+        ((continuous_const.sub continuous_id).smul continuous_const)) hBx
+  have hmove := C.intervalIntegral_comp_comm hint
+  apply (hx t).congr_deriv
+  have hyt := congrFun hyform t
+  rw [hyt, map_add, ← hmove]
+  abel
+
 end VariationOfConstants
 
 variable {d e : Type*} [Fintype d] [Fintype e]

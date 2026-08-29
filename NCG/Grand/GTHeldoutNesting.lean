@@ -31,6 +31,36 @@ open ContinuousLinearMap
 
 namespace NCG
 
+/-- `thm:GT-heldout-nesting` (the boxed RG.2 integral identity).
+Along the affine tail line `t ↦ (y, t • z)`, the derivative is the partial
+tail derivative applied to `z`; the Banach-valued fundamental theorem of
+calculus then gives the exact held-out difference. -/
+theorem heldout_nesting_integral {Y Z W : Type*}
+    [NormedAddCommGroup Y] [NormedSpace ℝ Y]
+    [NormedAddCommGroup Z] [NormedSpace ℝ Z]
+    [NormedAddCommGroup W] [NormedSpace ℝ W] [CompleteSpace W]
+    (F2 : Y × Z → W) (y : Y) (z : Z)
+    (DF2 : ℝ → (Y × Z →L[ℝ] W))
+    (hF2 : ∀ t ∈ Set.uIcc (0 : ℝ) 1,
+      HasFDerivAt F2 (DF2 t) (y, t • z))
+    (hpartial : ContinuousOn
+      (fun t : ℝ => DF2 t (0, z)) (Set.uIcc (0 : ℝ) 1)) :
+    F2 (y, z) - F2 (y, 0) =
+      ∫ t in (0 : ℝ)..1, DF2 t (0, z) := by
+  have hline : ∀ t : ℝ,
+      HasDerivAt (fun s : ℝ => (y, s • z)) (0, z) t := by
+    intro t
+    exact (hasDerivAt_const t y).prodMk
+      (by simpa using (hasDerivAt_id t).smul_const z)
+  have hderiv : ∀ t ∈ Set.uIcc (0 : ℝ) 1,
+      HasDerivAt (fun s : ℝ => F2 (y, s • z)) (DF2 t (0, z)) t := by
+    intro t ht
+    simpa only [Function.comp_def] using
+      (hF2 t ht).comp_hasDerivAt t (hline t)
+  have hFTC := intervalIntegral.integral_eq_sub_of_hasDerivAt hderiv
+    hpartial.intervalIntegrable
+  simpa using hFTC.symm
+
 /-- `thm:GT-heldout-nesting` (the boxed RG.3 chain
 factorization). -/
 theorem gt_heldout_nesting {X Y Z W : Type*}
