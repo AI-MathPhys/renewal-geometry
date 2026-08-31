@@ -258,5 +258,68 @@ theorem channel_bracket_branch
   rw [hcollapse] at htelB htriangle
   linarith
 
+/-- The bracket branch after substituting the two noisy-Klein edge bounds.
+Each of the two edge flows occurs once with positive and once with negative
+time, so its tangent and quadratic errors occur twice.  This is the exact
+three-term display in the manuscript, with beta equal to the square root of
+alpha times h. -/
+theorem channel_bracket_branch_compiled_bound
+    {M B : Type} [NormedRing M] [NormOneClass M]
+    [NormedAlgebra ℝ M] [NormedAlgebra ℚ M] [CompleteSpace M]
+    [NormedRing B] [NormOneClass B]
+    (Am Bm : M) (α h r₀₁ r₀₂ εtan κ MH : ℝ) (n : ℕ)
+    (hAβ : ‖Am‖ ≤ Real.sqrt (α * h))
+    (hBβ : ‖Bm‖ ≤ Real.sqrt (α * h))
+    (hcA : ∀ u : ℝ, ‖exp (u • Am)‖ ≤ 1)
+    (hcB : ∀ u : ℝ, ‖exp (u • Bm)‖ ≤ 1)
+    (hcC : ∀ u ∈ Icc (0 : ℝ) 1,
+      ‖exp (u • (Am * Bm - Bm * Am))‖ ≤ 1)
+    (V₁ V₂ V₃ V₄ ι : B) (AdM : M → B)
+    (hV₁ : ‖V₁‖ ≤ 1) (hV₂ : ‖V₂‖ ≤ 1) (hV₃ : ‖V₃‖ ≤ 1)
+    (hι : ‖ι‖ ≤ 1)
+    (hAdmul : ∀ x y : M, AdM (x * y) = AdM x * AdM y)
+    (hAdnorm : ∀ x : M, ‖x‖ ≤ 1 → ‖AdM x‖ ≤ 1)
+    (hAdLip : ∀ x y : M, ‖x‖ ≤ 1 → ‖y‖ ≤ 1 →
+      ‖AdM x - AdM y‖ ≤ 2 * ‖x - y‖)
+    (h₁ : ‖V₁ * ι - ι * AdM (exp Am)‖
+      ≤ Real.sqrt (α * h) * r₀₁⁻¹ * εtan
+        + (3 * MH ^ 2 + κ) * α * h / (4 * n) * r₀₁⁻¹ ^ 2)
+    (h₂ : ‖V₂ * ι - ι * AdM (exp Bm)‖
+      ≤ Real.sqrt (α * h) * r₀₂⁻¹ * εtan
+        + (3 * MH ^ 2 + κ) * α * h / (4 * n) * r₀₂⁻¹ ^ 2)
+    (h₃ : ‖V₃ * ι - ι * AdM (exp (-Am))‖
+      ≤ Real.sqrt (α * h) * r₀₁⁻¹ * εtan
+        + (3 * MH ^ 2 + κ) * α * h / (4 * n) * r₀₁⁻¹ ^ 2)
+    (h₄ : ‖V₄ * ι - ι * AdM (exp (-Bm))‖
+      ≤ Real.sqrt (α * h) * r₀₂⁻¹ * εtan
+        + (3 * MH ^ 2 + κ) * α * h / (4 * n) * r₀₂⁻¹ ^ 2) :
+    ‖V₁ * V₂ * V₃ * V₄ * ι
+      - ι * AdM (exp (Am * Bm - Bm * Am))‖
+    ≤ 64 * (Real.sqrt (α * h)) ^ 3
+      + 2 * Real.sqrt (α * h) * (r₀₁⁻¹ + r₀₂⁻¹) * εtan
+      + (3 * MH ^ 2 + κ) * α * h / (2 * n)
+        * (r₀₁⁻¹ ^ 2 + r₀₂⁻¹ ^ 2) := by
+  let e₀₁ :=
+    Real.sqrt (α * h) * r₀₁⁻¹ * εtan
+      + (3 * MH ^ 2 + κ) * α * h / (4 * n) * r₀₁⁻¹ ^ 2
+  let e₀₂ :=
+    Real.sqrt (α * h) * r₀₂⁻¹ * εtan
+      + (3 * MH ^ 2 + κ) * α * h / (4 * n) * r₀₂⁻¹ ^ 2
+  have hbase := channel_bracket_branch Am Bm (Real.sqrt (α * h))
+    (Real.sqrt_nonneg _) hAβ hBβ hcA hcB hcC
+    V₁ V₂ V₃ V₄ ι AdM hV₁ hV₂ hV₃ hι
+    hAdmul hAdnorm hAdLip e₀₁ e₀₂ e₀₁ e₀₂ h₁ h₂ h₃ h₄
+  calc
+    ‖V₁ * V₂ * V₃ * V₄ * ι
+        - ι * AdM (exp (Am * Bm - Bm * Am))‖
+        ≤ e₀₁ + e₀₂ + e₀₁ + e₀₂
+          + 64 * (Real.sqrt (α * h)) ^ 3 := hbase
+    _ = 64 * (Real.sqrt (α * h)) ^ 3
+        + 2 * Real.sqrt (α * h) * (r₀₁⁻¹ + r₀₂⁻¹) * εtan
+        + (3 * MH ^ 2 + κ) * α * h / (2 * n)
+          * (r₀₁⁻¹ ^ 2 + r₀₂⁻¹ ^ 2) := by
+      dsimp [e₀₁, e₀₂]
+      ring
+
 end SMSTChannel
 end NCG

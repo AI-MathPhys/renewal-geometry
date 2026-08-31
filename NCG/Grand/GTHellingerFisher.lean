@@ -120,4 +120,82 @@ theorem gt_hellinger_shorted_gram {n m k : Type}
     rw [hfact]
     exact Matrix.posSemidef_conjTranspose_mul_self _
 
+/-! ### The physical score derivative and Fisher Gram -/
+
+/-- Differentiating the Hellinger embedding `2√p` along a full-support
+one-parameter law family gives the square-root-weighted score.  The hypothesis
+`p' = p s` is the derivative form of `s = ∂ log p`. -/
+theorem hasDerivAt_hellinger_of_probabilityScore
+    {Ω : Type*} (p p' s : ℝ → Ω → ℝ) (θ : ℝ)
+    (hp : ∀ ω, HasDerivAt (fun t => p t ω) (p' θ ω) θ)
+    (hpos : ∀ ω, 0 < p θ ω)
+    (hscore : ∀ ω, p' θ ω = p θ ω * s θ ω) (ω : Ω) :
+    HasDerivAt (fun t => 2 * Real.sqrt (p t ω))
+      (Real.sqrt (p θ ω) * s θ ω) θ := by
+  have hsqrt := (hp ω).sqrt (hpos ω).ne'
+  refine (hsqrt.const_mul 2).congr_deriv ?_
+  rw [hscore ω]
+  have hsne : Real.sqrt (p θ ω) ≠ 0 :=
+    (Real.sqrt_pos.mpr (hpos ω)).ne'
+  have hsq : Real.sqrt (p θ ω) * Real.sqrt (p θ ω) = p θ ω :=
+    Real.mul_self_sqrt (hpos ω).le
+  calc
+    2 * (p θ ω * s θ ω / (2 * Real.sqrt (p θ ω))) =
+        (p θ ω * s θ ω) / Real.sqrt (p θ ω) := by
+          field_simp [hsne]
+    _ = (Real.sqrt (p θ ω) * Real.sqrt (p θ ω) * s θ ω) /
+          Real.sqrt (p θ ω) := by rw [hsq]
+    _ = Real.sqrt (p θ ω) * s θ ω := by field_simp [hsne]
+
+/-- The Gram of square-root-weighted score tangents is exactly the finite
+Fisher score Gram. -/
+theorem hellinger_scoreTangent_gram_eq_fisher
+    {Ω J : Type*} [Fintype Ω]
+    (p : Ω → ℝ) (s : J → Ω → ℝ) (hp : ∀ ω, 0 ≤ p ω)
+    (i j : J) :
+    ∑ ω, (Real.sqrt (p ω) * s i ω) *
+        (Real.sqrt (p ω) * s j ω) =
+      ∑ ω, p ω * s i ω * s j ω := by
+  apply Finset.sum_congr rfl
+  intro ω hω
+  calc
+    (Real.sqrt (p ω) * s i ω) * (Real.sqrt (p ω) * s j ω) =
+        (Real.sqrt (p ω) * Real.sqrt (p ω)) * (s i ω * s j ω) := by ring
+    _ = p ω * (s i ω * s j ω) := by
+      rw [Real.mul_self_sqrt (hp ω)]
+    _ = p ω * s i ω * s j ω := by ring
+
+/-- Clause (iii) of `thm:GT-Hellinger-Fisher`, simultaneously for a finite
+bank of coordinate lines. -/
+theorem gt_hellinger_score_derivative_and_fisher
+    {Ω J : Type*} [Fintype Ω]
+    (p p' : J → ℝ → Ω → ℝ) (s : J → Ω → ℝ)
+    (hderiv : ∀ j ω, HasDerivAt (fun t => p j t ω) (p' j 0 ω) 0)
+    (hpos : ∀ j ω, 0 < p j 0 ω)
+    (hbase : ∀ i j ω, p i 0 ω = p j 0 ω)
+    (hscore : ∀ j ω, p' j 0 ω = p j 0 ω * s j ω) :
+    (∀ j ω, HasDerivAt (fun t => 2 * Real.sqrt (p j t ω))
+      (Real.sqrt (p j 0 ω) * s j ω) 0)
+    ∧ (∀ i j,
+      ∑ ω, (Real.sqrt (p i 0 ω) * s i ω) *
+          (Real.sqrt (p j 0 ω) * s j ω) =
+        ∑ ω, p i 0 ω * s i ω * s j ω) := by
+  constructor
+  · intro j ω
+    exact hasDerivAt_hellinger_of_probabilityScore
+      (p j) (p' j) (fun _ => s j) 0 (hderiv j) (hpos j)
+      (hscore j) ω
+  · intro i j
+    calc
+      ∑ ω, (Real.sqrt (p i 0 ω) * s i ω) *
+          (Real.sqrt (p j 0 ω) * s j ω) =
+          ∑ ω, (Real.sqrt (p i 0 ω) * s i ω) *
+            (Real.sqrt (p i 0 ω) * s j ω) := by
+              apply Finset.sum_congr rfl
+              intro ω hω
+              rw [hbase j i ω]
+      _ = ∑ ω, p i 0 ω * s i ω * s j ω :=
+        hellinger_scoreTangent_gram_eq_fisher
+          (p i 0) s (fun ω => (hpos i ω).le) i j
+
 end NCG

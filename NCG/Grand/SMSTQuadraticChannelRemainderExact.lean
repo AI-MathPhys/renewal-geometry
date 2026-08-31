@@ -18,7 +18,7 @@ through the encoder `ι` whose second derivative is bounded and
 whose first derivative at `0` matches the ideal generator up to
 `ε_tan` stays within `t·ε_tan + κ·t²` of the ideal semigroup
 `ι ∘ e^{tℒ_H}` in diamond norm, with
-`κ = M₂/2 + M_ℒ²·e^{t₀·M_ℒ}` explicit.
+`κ = (M₂ + M_ℒ²·e^{t₀·M_ℒ})/2` explicit.
 
 Formalization choices (all quantitative content derived, none
 hypothesized — this resolves the 2026-08-07 fidelity-audit
@@ -35,9 +35,9 @@ TAUTOLOGY downgrade of this record):
   remainder, not assumed;
 * the encoder is an element `ι` with `‖ι‖ ≤ 1` (CPTP maps are
   diamond contractions);
-* the exponential tail `‖e^{tℒ} - 1 - tℒ‖ ≤ t²‖ℒ‖²e^{t‖ℒ‖}` is
+* the exponential tail `‖e^{tℒ} - 1 - tℒ‖ ≤ t²‖ℒ‖²e^{t‖ℒ‖}/2` is
   derived from the exponential series
-  (`NCG.ChannelEstimates.exp_sub_linear_bound`).
+  (`NCG.ChannelEstimates.exp_sub_linear_bound_half`).
 
 Main results:
 
@@ -46,9 +46,9 @@ Main results:
 * `curve_taylor`: the integral-remainder Taylor bound
   `‖ψ(t) - ψ(0) - t·ψ'(0)‖ ≤ M₂·t²/2`;
 * `quadratic_channel_remainder`: the boxed bound
-  `‖ψ(t) - ι·e^{t•L}‖ ≤ t·ε_tan + (M₂/2 + ‖L‖²e^{t‖L‖})·t²`;
+  `‖ψ(t) - ι·e^{t•L}‖ ≤ t·ε_tan + (M₂ + ‖L‖²e^{t‖L‖})·t²/2`;
 * `quadratic_channel_remainder_window`: the uniform-window
-  version with `κ = M₂/2 + M_ℒ²·e^{t₀·M_ℒ}` constant on
+  version with `κ = (M₂ + M_ℒ²·e^{t₀·M_ℒ})/2` constant on
   `[0, t₀]`;
 * `quadratic_channel_remainder_exact`: the exact-tangent branch
   `‖ψ(t) - ι·e^{t•L}‖ ≤ κ·t²`;
@@ -220,7 +220,7 @@ theorem quadratic_channel_remainder (ψ ψ' ψ'' : ℝ → A)
     (htan : ‖ψ' 0 - ι * L‖ ≤ εtan) :
     ‖ψ t - ι * NormedSpace.exp (t • L)‖
       ≤ t * εtan
-        + (M₂ / 2 + ‖L‖ ^ 2 * Real.exp (t * ‖L‖)) * t ^ 2 := by
+        + ((M₂ + ‖L‖ ^ 2 * Real.exp (t * ‖L‖)) / 2) * t ^ 2 := by
   -- three-term decomposition
   have hsplit : ψ t - ι * NormedSpace.exp (t • L)
       = (ψ t - ψ 0 - t • ψ' 0)
@@ -239,17 +239,18 @@ theorem quadratic_channel_remainder (ψ ψ' ψ'' : ℝ → A)
     exact mul_le_mul_of_nonneg_left htan ht
   -- exponential tail term
   have h3 : ‖ι * (NormedSpace.exp (t • L) - 1 - t • L)‖
-      ≤ ‖L‖ ^ 2 * Real.exp (t * ‖L‖) * t ^ 2 := by
+      ≤ (‖L‖ ^ 2 * Real.exp (t * ‖L‖) / 2) * t ^ 2 := by
     have hnorm : ‖t • L‖ = t * ‖L‖ := by
       rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg ht]
     calc ‖ι * (NormedSpace.exp (t • L) - 1 - t • L)‖
         ≤ ‖ι‖ * ‖NormedSpace.exp (t • L) - 1 - t • L‖ :=
           norm_mul_le _ _
-      _ ≤ 1 * (‖t • L‖ ^ 2 * Real.exp ‖t • L‖) := by
+      _ ≤ 1 * ((1 / 2 : ℝ) * ‖t • L‖ ^ 2 *
+          Real.exp ‖t • L‖) := by
           refine mul_le_mul hι
-            (NCG.ChannelEstimates.exp_sub_linear_bound (t • L))
+            (NCG.ChannelEstimates.exp_sub_linear_bound_half (t • L))
             (norm_nonneg _) zero_le_one
-      _ = ‖L‖ ^ 2 * Real.exp (t * ‖L‖) * t ^ 2 := by
+      _ = (‖L‖ ^ 2 * Real.exp (t * ‖L‖) / 2) * t ^ 2 := by
           rw [hnorm]
           ring
   calc ‖(ψ t - ψ 0 - t • ψ' 0) + t • (ψ' 0 - ι * L)
@@ -263,15 +264,15 @@ theorem quadratic_channel_remainder (ψ ψ' ψ'' : ℝ → A)
           (t • (ψ' 0 - ι * L))
         linarith
     _ ≤ M₂ * t ^ 2 / 2 + t * εtan
-        + ‖L‖ ^ 2 * Real.exp (t * ‖L‖) * t ^ 2 := by
+        + (‖L‖ ^ 2 * Real.exp (t * ‖L‖) / 2) * t ^ 2 := by
         linarith
     _ = t * εtan
-        + (M₂ / 2 + ‖L‖ ^ 2 * Real.exp (t * ‖L‖)) * t ^ 2 := by
+        + ((M₂ + ‖L‖ ^ 2 * Real.exp (t * ‖L‖)) / 2) * t ^ 2 := by
         ring
 
 /-- Uniform-window form: on `0 ≤ t ≤ t₀` with generator bound
 `‖L‖ ≤ M_ℒ`, the remainder constant
-`κ = M₂/2 + M_ℒ²·e^{t₀·M_ℒ}` is independent of `t`, giving the
+`κ = (M₂ + M_ℒ²·e^{t₀·M_ℒ})/2` is independent of `t`, giving the
 manuscript's boxed `t·ε_tan + κ·t²`. -/
 theorem quadratic_channel_remainder_window (ψ ψ' ψ'' : ℝ → A)
     (ι L : A) (εtan M₂ ML t t₀ : ℝ) (ht : 0 ≤ t)
@@ -283,7 +284,7 @@ theorem quadratic_channel_remainder_window (ψ ψ' ψ'' : ℝ → A)
     (htan : ‖ψ' 0 - ι * L‖ ≤ εtan) :
     ‖ψ t - ι * NormedSpace.exp (t • L)‖
       ≤ t * εtan
-        + (M₂ / 2 + ML ^ 2 * Real.exp (t₀ * ML)) * t ^ 2 := by
+        + ((M₂ + ML ^ 2 * Real.exp (t₀ * ML)) / 2) * t ^ 2 := by
   have hbase := quadratic_channel_remainder ψ ψ' ψ'' ι L
     εtan M₂ t ht hι hψ0 hd1 hd2 hM htan
   have hML : (0 : ℝ) ≤ ML := (norm_nonneg L).trans hL
@@ -312,7 +313,7 @@ theorem quadratic_channel_remainder_exact (ψ ψ' ψ'' : ℝ → A)
     (hM : ∀ s ∈ Icc (0 : ℝ) t, ‖ψ'' s‖ ≤ M₂)
     (htan : ψ' 0 = ι * L) :
     ‖ψ t - ι * NormedSpace.exp (t • L)‖
-      ≤ (M₂ / 2 + ML ^ 2 * Real.exp (t₀ * ML)) * t ^ 2 := by
+      ≤ ((M₂ + ML ^ 2 * Real.exp (t₀ * ML)) / 2) * t ^ 2 := by
   have hbase := quadratic_channel_remainder_window ψ ψ' ψ''
     ι L 0 M₂ ML t t₀ ht ht₀ hL hι hψ0 hd1 hd2 hM
     (by rw [htan]; simp)

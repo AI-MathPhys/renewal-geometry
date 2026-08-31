@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import NCG.Grand.RobustChoiPurityUnitary
 
 /-!
 # Exact inverse and Choi-purity branches
@@ -37,9 +38,10 @@ explicit inverse `s⁻¹ Aᵢ₀ᴴ`.
 The robust branch — `‖J − J_{Ad_U}‖₁ ≤ 2√δ + δ/d` for
 `δ = d² − Tr J²` via the leading Choi eigenvector, the
 polar partial isometry, and the rank-one trace-norm
-estimate — is the manuscript's Weyl-type perturbation
-layer and is not formalized here; the Kraus presentation
-of a CPTP map is its Choi-decomposition layer.
+estimate — is proved in
+`RobustChoiPurityUnitary.exists_unitary_of_choi_purity`.
+Together the two named theorems formalize both branches of
+the manuscript statement.
 -/
 
 open Matrix

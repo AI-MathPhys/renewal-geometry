@@ -6974,10 +6974,15 @@ The construction in \Cref{def:GT-Hellinger-bank} has the following properties.
        =\mathbb E_{p_0}[s_i\overline{s_j}].}
       \]
 \item For a physical $C^2$ family $p_{\alpha,\beta}$ with nuisance score bank
-      $N$ and retained score bank $S$, the profiled relative entropy
+      $N$ and retained score bank $S$, assume the profile is local at
+      $(\alpha,\beta)=(0,0)$ and second-order regular: minimization over the
+      local nuisance branch commutes with the quadratic Taylor germ (as it
+      does, for example, for a locally identifiable interior nuisance branch).
+      Then the locally profiled relative entropy
       \[
        \mathcal I_{\rm prof}(\beta)
-       :=\inf_\alpha D(p_{\alpha,\beta}\Vert p_{0,0})
+       :=\inf_{\alpha\ {m near}\ 0}
+       D(p_{\alpha,\beta}\Vert p_{0,0})
       \]
       has Hessian
       \[
@@ -14383,12 +14388,28 @@ by provenance after all one-cell nuisances have already been removed.  In
 particular, shorting $U$ and $P$ independently and subtracting
 $\Pi_U+\Pi_P$ is valid only when their ranges are orthogonal.
 
-If the faithful nuisance Gram satisfies $N^*N\succeq\mu I$ and the measured
-blocks are perturbed by at most $\varepsilon<\mu/2$, the connected Gram is
-operator-Lipschitz in those blocks, with a constant depending only on $\mu$
-and a uniform bound for $\|N^*F\|$ and $\|F^*F\|$.  Hence every connected
-eigenvalue separated from zero by more than this explicit perturbation budget
-has a cutoff-stable sign.
+For the stability statement write the connected Schur block as
+$C=D-LG^{-1}R$, where $G=N^*N$, $D=F^*F$, $R=N^*F$, and $L=R^*$.
+Suppose $G\succeq\mu I$, $\mu>0$, and corresponding measured blocks
+$G',D',L',R'$ satisfy
+\[
+ \max\{\|G'-G\|,\|D'-D\|,\|L'-L\|,\|R'-R\|\}
+ \leq\varepsilon<\mu/2,
+ \qquad \|R\|,\|L'\|\leq M.
+\]
+Then $G'\succeq(\mu-\varepsilon)I$ and, for
+$C'=D'-L'(G')^{-1}R'$,
+\[
+ \boxed{\|C-C'\|\leq \beta(\mu,\varepsilon,M)},
+ \qquad
+ \beta=\varepsilon+\varepsilon\mu^{-1}M
+ +M\mu^{-1}\varepsilon(\mu-\varepsilon)^{-1}M
+ +M(\mu-\varepsilon)^{-1}\varepsilon .
+\]
+Consequently, at any cutoff with a certified one-sided connected spectral
+margin $\eta I\preceq C$ (respectively $\eta I\preceq-C$), the same sign is
+stable whenever $\beta<\eta$: then $C'$ is positive definite (respectively
+$-C'$ is positive definite).
 \end{theorem}
 
 \begin{proof}
@@ -14985,7 +15006,11 @@ Then
 \]
 If one intervention slot is operationally inert on the entire cube, every
 $c_B$ containing that slot vanishes.  For independent occurrences, the
-all-slot secant is the tensor product of the one-slot secants.  In general it
+normalization $\mathfrak h(p)=2\sqrt p$ gives
+\[
+ \boxed{c_A=2^{1-|A|}\bigotimes_{i\in A}c_{\{i\}}.}
+\]
+In general it
 has the orthogonal decomposition
 \[
  \boxed{c_A=c_A^{\rm prod}+c_A^{\rm occ},}
@@ -21486,9 +21511,15 @@ compact carrier
 for every fixed $j$.  Then every $(x,y)\in\Gamma$ satisfies
 $\mathfrak d_j(x,y)=0$ for all $j$.
 
-If the fibre diameters satisfy
+If the response fibres are asymptotically equicontinuous over the base, in
+the precise sense that for every $\varepsilon>0$ there are $\delta>0$ and
+$n_0$ such that
 \[
- \sup_x\operatorname{diam}\Gamma_n(x)\longrightarrow0,
+ \begin{gathered}
+ n\ge n_0,\quad (x,y),(x',y')\in\Gamma_n,\quad
+ d_X(x,x')<\delta\\
+ \Longrightarrow\quad d_{\mathcal Y}(y,y')<\varepsilon,
+ \end{gathered}
  \tag{TR.9}
 \]
 then $\Gamma$ is the graph of a single-valued continuous response.  Without
@@ -21500,10 +21531,14 @@ convergent branch kernels or finite-cylinder probabilities.
 \begin{proof}
 For $(x,y)\in\Gamma$, Hausdorff convergence gives
 $(x_n,y_n)\in\Gamma_n$ converging to $(x,y)$.  Uniform convergence and
-\textup{(TR.8)} imply $\mathfrak d_j(x,y)=0$.  Vanishing fibre diameters make
-each limiting fibre a singleton.  Closedness of the graph and compactness of
-$X$ then give continuity of the resulting response map.  A compact support set
-admits many probability measures unless a kernel is separately supplied.
+\textup{(TR.8)} imply $\mathfrak d_j(x,y)=0$.  Applying \textup{(TR.9)} to
+simultaneous approximants of two limiting graph points yields the same uniform
+modulus on $\Gamma$.  Two points in one limiting fibre therefore have zero
+distance, and the resulting response is continuous on the projected domain.
+A compact support set admits many probability measures unless a kernel is
+separately supplied.  Mere convergence of the individual fibre diameters is
+not enough: the singleton graphs of $x\mapsto\operatorname{clamp}(nx)$ can
+converge to a relation with a vertical segment at the origin.
 \end{proof}
 
 \begin{countertheorem}[A strong differential defect is not necessary for weak closure]
@@ -28716,7 +28751,12 @@ tail graph preserve zero.  Then the reduced shell satisfies
 A nonzero affine translation is therefore a reference, normalization, tail
 origin, or action-bank defect rather than a free selector.
 
-At the Gaussian origin, engineering grading gives
+Assume that at the Gaussian origin the reduced Gaussian shell is the
+engineering scaling map
+\(
+ \Sigma_{\rm red}^{\rm G}(x)_\Delta=b^{4-\Delta}x_\Delta
+\)
+on the finite operator-dimension bank.  Then its Fr\'echet derivative gives
 \[
  \boxed{
  D\Sigma_{\rm red}(0)

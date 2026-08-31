@@ -229,7 +229,7 @@ theorem adjoint_apply_mem_gramRange (y : F) : (S†) y ∈ gramRange S := by
 
 /-- **`S G† S† = P_{ran S}`**: the Moore–Penrose Gram inverse reconstructs the orthogonal
 projection onto the range of `S`. -/
-theorem comp_gramPinv_comp_adjoint [FiniteDimensional ℝ F] (y : F) :
+theorem comp_gramPinv_comp_adjoint (y : F) :
     S (gramPinv S ((S†) y)) = (LinearMap.range S.toLinearMap).starProjection y := by
   haveI : FiniteDimensional ℝ (LinearMap.range S.toLinearMap) := inferInstance
   symm
@@ -262,6 +262,7 @@ theorem residual_apply (y : E') :
 /-- The cross Gram `B = S† T`. -/
 noncomputable def crossGram : E' →L[ℝ] E := S† ∘L T
 
+omit [FiniteDimensional ℝ F] in
 /-- **The Moore–Penrose Schur innovation**: `D - B† G† B = T† (I - P_{ran S}) T`, i.e. the Schur
 complement of the Gram is the Gram of the orthogonal residual. -/
 theorem schur_innovation :
@@ -320,6 +321,7 @@ theorem innovation_variational (y : E') :
     congr 1
     abel
 
+omit [FiniteDimensional ℝ F] in
 /-- The innovation is a positive operator. -/
 theorem innovation_isPositive : (T† ∘L residual S T).IsPositive := by
   have hself : IsSelfAdjoint (T† ∘L residual S T) := by

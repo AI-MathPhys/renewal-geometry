@@ -101,6 +101,40 @@ def gradedScale (b : ℝ) : (∀ Δ, V Δ) →ₗ[ℝ] ∀ Δ, V Δ where
 @[simp] theorem gradedScale_apply (b : ℝ) (x : ∀ Δ, V Δ) (Δ : Fin 5) :
     gradedScale b x Δ = b ^ (4 - Δ.val) • x Δ := rfl
 
+section GaussianJacobian
+
+variable {W : Fin 5 → Type*}
+  [∀ Δ, NormedAddCommGroup (W Δ)] [∀ Δ, NormedSpace ℝ (W Δ)]
+  [∀ Δ, FiniteDimensional ℝ (W Δ)]
+
+/-- The Gaussian reduced shell as a genuine continuous linear map.  Its
+block on engineering dimension `Δ` is multiplication by `b^(4-Δ)`. -/
+noncomputable def gaussianReducedShell (b : ℝ) :
+    (∀ Δ, W Δ) →L[ℝ] ∀ Δ, W Δ :=
+  ⟨gradedScale (V := W) b,
+    (gradedScale (V := W) b).continuous_of_finiteDimensional⟩
+
+@[simp] theorem gaussianReducedShell_apply (b : ℝ) (x : ∀ Δ, W Δ)
+    (Δ : Fin 5) :
+    gaussianReducedShell (W := W) b x Δ = b ^ (4 - Δ.val) • x Δ :=
+  rfl
+
+/-- **RG.5, Jacobian identification.**  Once the manuscript's Gaussian
+engineering scaling law is stated as the reduced shell itself, its Fréchet
+derivative is exactly the block-diagonal engineering grading at every point,
+in particular at the Gaussian origin. -/
+theorem gaussianReducedShell_hasFDerivAt (b : ℝ) (x : ∀ Δ, W Δ) :
+    HasFDerivAt (gaussianReducedShell (W := W) b)
+      (gaussianReducedShell (W := W) b) x :=
+  (gaussianReducedShell (W := W) b).hasFDerivAt
+
+theorem fderiv_gaussianReducedShell (b : ℝ) (x : ∀ Δ, W Δ) :
+    fderiv ℝ (gaussianReducedShell (W := W) b) x =
+      gaussianReducedShell (W := W) b :=
+  (gaussianReducedShell_hasFDerivAt (W := W) b x).fderiv
+
+end GaussianJacobian
+
 /-- The dimension-four marginal block `E₄` inside the graded coefficient bank. -/
 def dimFourBlock : Submodule ℝ (∀ Δ, V Δ) where
   carrier := {x | ∀ Δ : Fin 5, Δ ≠ 4 → x Δ = 0}

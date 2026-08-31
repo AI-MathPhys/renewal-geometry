@@ -89,4 +89,31 @@ theorem complete_connected_occurrence_sector_exact
       Matrix.zero_mul, Matrix.mul_zero]
     abel
 
+/-- Vector-level form of the complete connected/occurrence split: every
+response decomposes into its product-connected and occurrence-innovation
+components, and the two cross projections vanish. -/
+theorem complete_connected_occurrence_vector_split
+    {n a e : Type} [Fintype n] [Fintype a]
+    [DecidableEq n] [DecidableEq a]
+    (t : ℕ) (P Q : Matrix n n ℂ)
+    (hPQ1 : P + Q = 1) (hPQ : P * Q = 0) (hQP : Q * P = 0)
+    (hPP : P * P = P) (hQQ : Q * Q = Q) (hQH : Qᴴ = Q)
+    (U : Matrix a (Fin t → n) ℂ) (hU : Uᴴ * U = 1)
+    (Z : Matrix a e ℂ) :
+    let Qtop := tensorPow t (fun _ => Q)
+    let Pconn := U * Qtop * Uᴴ
+    let Pocc := (1 : Matrix a a ℂ) - U * Uᴴ
+    let Cfull := Pconn + Pocc
+    Cfull * Z = Pconn * Z + Pocc * Z
+      ∧ Pconn * (Pocc * Z) = 0
+      ∧ Pocc * (Pconn * Z) = 0 := by
+  dsimp only
+  have hsector := complete_connected_occurrence_sector_exact
+    t P Q hPQ1 hPQ hQP hPP hQQ hQH U hU Z
+  refine ⟨Matrix.add_mul _ _ _, ?_, ?_⟩
+  · rw [← Matrix.mul_assoc, hsector.2.2.1]
+    exact Matrix.zero_mul _
+  · rw [← Matrix.mul_assoc, hsector.2.2.2.1]
+    exact Matrix.zero_mul _
+
 end NCG

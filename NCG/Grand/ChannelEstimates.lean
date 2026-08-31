@@ -282,6 +282,102 @@ theorem exp_sub_linear_bound (x : A) :
           exp_eq_tsum_div]
 
 omit [NormedAlgebra ℚ A] in
+/-- The sharp quadratic exponential tail, retaining the factor coming from
+the second factorial:
+
+  norm (exp x - 1 - x) <= (1 / 2) * norm x squared * exp (norm x).
+
+This is the quantitative form used by the manuscript's noisy-channel
+remainder estimate. -/
+theorem exp_sub_linear_bound_half (x : A) :
+    ‖NormedSpace.exp x - 1 - x‖
+      ≤ (1 / 2 : ℝ) * ‖x‖ ^ 2 * Real.exp ‖x‖ := by
+  have hfull : HasSum
+      (fun n : ℕ => (n.factorial : ℝ)⁻¹ • x ^ n)
+      (NormedSpace.exp x) :=
+    NormedSpace.exp_series_hasSum_exp' (𝕂 := ℝ) x
+  have htail : HasSum
+      (fun m : ℕ => (((m + 2).factorial : ℝ))⁻¹ • x ^ (m + 2))
+      (NormedSpace.exp x - 1 - x) := by
+    refine (hasSum_nat_add_iff
+      (f := fun n => ((n.factorial : ℝ))⁻¹ • x ^ n)
+      2).mpr ?_
+    have hsum01 : ∑ i ∈ Finset.range 2,
+        ((i.factorial : ℝ))⁻¹ • x ^ i = 1 + x := by
+      rw [Finset.sum_range_succ, Finset.sum_range_one]
+      norm_num
+    rw [hsum01, show NormedSpace.exp x - 1 - x + (1 + x)
+      = NormedSpace.exp x from by abel]
+    exact hfull
+  have hbound : ∀ m : ℕ,
+      ‖(((m + 2).factorial : ℝ))⁻¹ • x ^ (m + 2)‖
+      ≤ ((1 / 2 : ℝ) * ‖x‖ ^ 2) *
+          (‖x‖ ^ m / m.factorial) := by
+    intro m
+    rw [norm_smul, Real.norm_eq_abs,
+      abs_of_nonneg (by positivity)]
+    have hpow : ‖x ^ (m + 2)‖ ≤ ‖x‖ ^ (m + 2) :=
+      norm_pow_le x (m + 2)
+    have hfacNat : 2 * m.factorial ≤ (m + 2).factorial := by
+      rw [show m + 2 = (m + 1) + 1 by omega,
+        Nat.factorial_succ, Nat.factorial_succ]
+      calc
+        2 * m.factorial
+            ≤ ((m + 2) * (m + 1)) * m.factorial :=
+              Nat.mul_le_mul_right m.factorial
+                (by
+                  have hprod : 2 * 1 ≤ (m + 2) * (m + 1) :=
+                    Nat.mul_le_mul
+                      (show 2 ≤ m + 2 by omega)
+                      (show 1 ≤ m + 1 by omega)
+                  simpa using hprod)
+        _ = (m + 1 + 1) * ((m + 1) * m.factorial) := by
+              ring
+    have hfac : (2 : ℝ) * (m.factorial : ℝ)
+        ≤ ((m + 2).factorial : ℝ) := by
+      exact_mod_cast hfacNat
+    have hinv : (((m + 2).factorial : ℝ))⁻¹
+        ≤ (1 / 2 : ℝ) * (m.factorial : ℝ)⁻¹ := by
+      calc
+        (((m + 2).factorial : ℝ))⁻¹
+            ≤ ((2 : ℝ) * (m.factorial : ℝ))⁻¹ := by
+              exact (inv_le_inv₀ (by positivity) (by positivity)).mpr hfac
+        _ = (1 / 2 : ℝ) * (m.factorial : ℝ)⁻¹ := by
+              rw [mul_inv_rev]
+              norm_num
+              ring
+    calc
+      (((m + 2).factorial : ℝ))⁻¹ * ‖x ^ (m + 2)‖
+          ≤ ((1 / 2 : ℝ) * (m.factorial : ℝ)⁻¹) *
+              ‖x‖ ^ (m + 2) := by
+            refine mul_le_mul hinv hpow (norm_nonneg _)
+              (by positivity)
+      _ = ((1 / 2 : ℝ) * ‖x‖ ^ 2) *
+            (‖x‖ ^ m / m.factorial) := by
+          rw [pow_add]
+          ring
+  have hgsum : Summable (fun m : ℕ =>
+      ((1 / 2 : ℝ) * ‖x‖ ^ 2) *
+        (‖x‖ ^ m / m.factorial)) :=
+    (Real.summable_pow_div_factorial ‖x‖).mul_left _
+  calc
+    ‖NormedSpace.exp x - 1 - x‖
+        ≤ ∑' m : ℕ,
+            ‖(((m + 2).factorial : ℝ))⁻¹ • x ^ (m + 2)‖ := by
+          rw [← htail.tsum_eq]
+          exact norm_tsum_le_tsum_norm
+            (Summable.of_nonneg_of_le
+              (fun m => norm_nonneg _) hbound hgsum)
+    _ ≤ ∑' m : ℕ, ((1 / 2 : ℝ) * ‖x‖ ^ 2) *
+          (‖x‖ ^ m / m.factorial) :=
+        Summable.tsum_le_tsum hbound
+          (Summable.of_nonneg_of_le
+            (fun m => norm_nonneg _) hbound hgsum) hgsum
+    _ = (1 / 2 : ℝ) * ‖x‖ ^ 2 * Real.exp ‖x‖ := by
+        rw [tsum_mul_left, Real.exp_eq_exp_ℝ,
+          exp_eq_tsum_div]
+
+omit [NormedAlgebra ℚ A] in
 /-- The linear exponential tail. -/
 theorem exp_sub_one_bound (x : A) :
     ‖NormedSpace.exp x - 1‖ ≤ ‖x‖ * Real.exp ‖x‖ := by

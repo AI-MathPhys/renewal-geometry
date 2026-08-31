@@ -118,4 +118,104 @@ theorem uniform_store_gap_operator_bound
         · simp [scoreDwellResidualMultiplier, hi, hq0]
       exact pow_le_pow_left₀ (norm_nonneg _) hrho (k + 1)
 
+/-- The uniform gap on the concrete score--dwell mode assembly.  Mean modes
+carry difference frequencies, difference modes carry sum frequencies, and
+odd modes are killed exactly by dephasing.  Thus this theorem connects the
+exponential-dwell scalar estimate directly to the score--dwell operator from
+the preceding spectral theorem. -/
+theorem scoreDwell_exponential_uniform_store_gap
+    {J : Type*} [Fintype J] [DecidableEq J] [Nonempty J]
+    (μ : J → ℝ) (lam lam1 d0 : ℝ)
+    (hlam : 0 < lam) (hlam1 : lam ≤ lam1) (hd0 : 0 < d0)
+    (hmean : ∀ j k, j ≠ k → d0 ≤ |μ j - μ k|)
+    (hdifference : ∀ j k, d0 ≤ |μ j + μ k|)
+    (n : ℕ) :
+    ‖scoreDwellDiagonalEvolution
+          (scoreDwellModeMultiplier μ
+            (exponentialDwellMultiplier lam)) ^ n
+        - scoreDwellRetainedExpectation scoreDwellRetainedMode‖
+      ≤ (1 - d0 ^ 2 / (lam1 ^ 2 + d0 ^ 2)) ^ n := by
+  let j0 : J := Classical.choice (inferInstance : Nonempty J)
+  letI : Nonempty (ScoreDwellMode J) := ⟨.mean j0 j0⟩
+  let q : ℝ := 1 - d0 ^ 2 / (lam1 ^ 2 + d0 ^ 2)
+  have hq0 : 0 ≤ q := by
+    dsimp [q]
+    rw [(uniform_store_gap lam lam1 d0 d0 hlam hlam1 hd0
+      (le_abs_self d0)).2.1]
+    positivity
+  have hone : ∀ i, scoreDwellRetainedMode i = true →
+      scoreDwellModeMultiplier μ (exponentialDwellMultiplier lam) i = 1 := by
+    intro i hi
+    cases i with
+    | mean j k =>
+        have hjk : j = k := by
+          simpa [scoreDwellRetainedMode] using hi
+        subst k
+        simp [scoreDwellModeMultiplier, exponentialDwellMultiplier_zero,
+          hlam.ne']
+    | difference j k => simp [scoreDwellRetainedMode] at hi
+    | odd j k s => simp [scoreDwellRetainedMode] at hi
+  have hrho :
+      ‖scoreDwellResidualMultiplier scoreDwellRetainedMode
+          (scoreDwellModeMultiplier μ
+            (exponentialDwellMultiplier lam))‖ ≤ q := by
+    rw [pi_norm_le_iff_of_nonneg hq0]
+    intro i
+    cases i with
+    | mean j k =>
+        by_cases hjk : j = k
+        · subst k
+          simpa [scoreDwellResidualMultiplier,
+            scoreDwellRetainedMode] using hq0
+        · have hret :
+              scoreDwellRetainedMode (ScoreDwellMode.mean j k) = false := by
+            simp [scoreDwellRetainedMode, hjk]
+          simpa [scoreDwellResidualMultiplier, hret,
+            scoreDwellModeMultiplier, q] using
+              exponentialDwellMultiplier_norm_le_uniform
+                lam lam1 (μ j - μ k) d0 hlam hlam1 hd0
+                (hmean j k hjk)
+    | difference j k =>
+        simp only [scoreDwellResidualMultiplier, scoreDwellRetainedMode,
+          Bool.false_eq_true, ↓reduceIte, scoreDwellModeMultiplier]
+        simpa [q] using
+          exponentialDwellMultiplier_norm_le_uniform
+            lam lam1 (μ j + μ k) d0 hlam hlam1 hd0
+            (hdifference j k)
+    | odd j k s =>
+        simpa [scoreDwellResidualMultiplier, scoreDwellRetainedMode,
+          scoreDwellModeMultiplier] using hq0
+  cases n with
+  | zero =>
+      have hmatrix :
+          scoreDwellDiagonalEvolution
+                (scoreDwellModeMultiplier μ
+                  (exponentialDwellMultiplier lam)) ^ 0
+              - scoreDwellRetainedExpectation scoreDwellRetainedMode
+            = Matrix.diagonal
+                (fun i => if scoreDwellRetainedMode i then (0 : ℂ) else 1) := by
+        ext i j
+        by_cases hij : i = j
+        · subst j
+          by_cases hi : scoreDwellRetainedMode i = true <;>
+            simp [scoreDwellRetainedExpectation, hi]
+        · simp [scoreDwellRetainedExpectation, Matrix.one_apply, hij,
+            Matrix.diagonal_apply_ne _ hij]
+      rw [hmatrix, Matrix.l2_opNorm_diagonal]
+      have hfun :
+          ‖(fun i : ScoreDwellMode J =>
+            if scoreDwellRetainedMode i then (0 : ℂ) else 1)‖
+            ≤ (1 : ℝ) := by
+        rw [pi_norm_le_iff_of_nonneg (by norm_num)]
+        intro i
+        by_cases hi : scoreDwellRetainedMode i = true <;> simp [hi]
+      simpa using hfun
+  | succ k =>
+      have hexact := scoreDwell_power_distance_exact
+        scoreDwellRetainedMode
+        (scoreDwellModeMultiplier μ (exponentialDwellMultiplier lam))
+        hone (k + 1) (Nat.succ_pos k)
+      rw [hexact]
+      exact pow_le_pow_left₀ (norm_nonneg _) hrho (k + 1)
+
 end NCG

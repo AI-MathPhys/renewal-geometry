@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import NCG.Grand.WalshBandWeightedOperator
 
 /-!
 # All-order exponential localization in Walsh degree
@@ -22,13 +23,14 @@ import Mathlib
   spectral mass of the corrector above Walsh degree `R` is at
   most `e^{-2α(R-2)}` times the conjugated (weighted) square
   norm, uniformly in the cutoff.
+* `renewal_chaos_localization_from_degree_blocks`: the complete assembly from
+  native diagonal/raising/lowering block bounds, with both boxed estimates
+  derived rather than assumed.
 
-Rendering disclosed: the Walsh chaos decomposition, the
-identification of the modulation insertion as a `±1` degree-band
-operator with band norms `≤ q_φ`, and the constant
-`C_{θ,α}` as the conjugated corrector norm are the manuscript's
-process layer; the conjugation scaling, the Neumann bound, and
-the exponential tail extraction are proved here.
+The Walsh coordinate Parseval estimate and identification of the concrete
+modulation insertion with its three degree bands are the manuscript's process
+data.  From those native data, the conjugated insertion bound, Neumann bound,
+and exponential tail are all proved here.
 -/
 
 namespace NCG
@@ -87,6 +89,18 @@ theorem walsh_weighted_insertion_bound
           rw [one_add_two_sinh]
           ring
 
+/-- Operator-level discharge of the boxed weighted insertion estimate.  Unlike
+`walsh_weighted_insertion_bound`, this theorem does not assume an inequality
+for the conjugated norm: it derives it from the exact diagonal/raising/lowering
+decomposition and the three native block bounds. -/
+theorem walsh_weighted_insertion_bound_from_blocks
+    {A : Type*} [SeminormedAddCommGroup A] [NormedSpace ℝ A]
+    (D R L : A) (q α : ℝ) (hα : 0 ≤ α)
+    (hT : ‖D + R + L‖ ≤ q) (hR : ‖R‖ ≤ q) (hL : ‖L‖ ≤ q) :
+    ‖D + Real.exp α • R + Real.exp (-α) • L‖ ≤
+      q * (1 + 2 * Real.sinh α) :=
+  WalshBandWeightedOperator.norm_weighted_band_le D R L q α hα hT hR hL
+
 section Resummation
 
 variable {A : Type*} [NormedRing A] [NormOneClass A]
@@ -118,6 +132,40 @@ theorem neumann_resummation_bound [CompleteSpace A]
     _ = (1 - ρ)⁻¹ := tsum_geometric_of_lt_one hρ0 hρ
 
 end Resummation
+
+section WeightedResummation
+
+variable {B : Type*} [NormedRing B] [NormedAlgebra ℝ B]
+  [NormOneClass B] [CompleteSpace B]
+
+/-- The weighted Neumann corrector bound derived from the degree-band
+decomposition.  The strict manuscript condition is used directly with
+`ρ = |θ| q (1 + 2 sinh α)`; no norm bound for the conjugated insertion or
+for the resummed corrector is assumed. -/
+theorem weighted_neumann_corrector_norm_le
+    (D R L x : B) (q α θ : ℝ) (hα : 0 ≤ α)
+    (hT : ‖D + R + L‖ ≤ q) (hR : ‖R‖ ≤ q) (hL : ‖L‖ ≤ q)
+    (hsmall : |θ| * (q * (1 + 2 * Real.sinh α)) < 1) :
+    ‖(∑' k : ℕ,
+        ((-θ) • (D + Real.exp α • R + Real.exp (-α) • L)) ^ k) * x‖
+      ≤ ‖x‖ / (1 - |θ| * (q * (1 + 2 * Real.sinh α))) := by
+  let W : B := D + Real.exp α • R + Real.exp (-α) • L
+  let ρ : ℝ := |θ| * (q * (1 + 2 * Real.sinh α))
+  have hW : ‖W‖ ≤ q * (1 + 2 * Real.sinh α) := by
+    exact walsh_weighted_insertion_bound_from_blocks D R L q α hα hT hR hL
+  have hM : ‖(-θ) • W‖ ≤ ρ := by
+    rw [norm_smul, Real.norm_eq_abs, abs_neg]
+    exact mul_le_mul_of_nonneg_left hW (abs_nonneg θ)
+  have hseries : ‖∑' k : ℕ, ((-θ) • W) ^ k‖ ≤ (1 - ρ)⁻¹ :=
+    neumann_resummation_bound ((-θ) • W) ρ hsmall hM
+  calc
+    ‖(∑' k : ℕ, ((-θ) • W) ^ k) * x‖
+        ≤ ‖∑' k : ℕ, ((-θ) • W) ^ k‖ * ‖x‖ := norm_mul_le _ _
+    _ ≤ (1 - ρ)⁻¹ * ‖x‖ :=
+      mul_le_mul_of_nonneg_right hseries (norm_nonneg x)
+    _ = ‖x‖ / (1 - ρ) := by rw [div_eq_mul_inv]; ring
+
+end WeightedResummation
 
 omit [DecidableEq ι] in
 /-- Boxed exponential degree tail: the mass above Walsh degree
@@ -191,5 +239,53 @@ theorem renewal_chaos_localization
         * (sourceNorm / (1 - ρ)) ^ 2 := by
           exact mul_le_mul_of_nonneg_left
             ((sq_le_sq₀ hwn hs0).2 hweighted) (Real.exp_nonneg _)
+
+section NativeDegreeBandAssembly
+
+variable {B : Type*} [NormedRing B] [NormedAlgebra ℝ B]
+  [NormOneClass B] [CompleteSpace B]
+
+/-- Full operator-level closure of `thm:renewal-chaos-localization` from the
+native Walsh degree-band data.  The normalized insertion is split into its
+degree-preserving, raising, and lowering blocks `D`, `R`, and `L`.  Their
+unweighted bounds imply the manuscript's boxed conjugated-operator estimate;
+the strict positivity inequality then controls the exact weighted Neumann
+corrector and hence, through the Walsh Parseval estimate `hsq`, its
+exponentially small high-degree tail.  In particular, neither boxed norm bound
+is supplied as a hypothesis. -/
+theorem renewal_chaos_localization_from_degree_blocks
+    (D R L x : B) (q α θ : ℝ) (hα : 0 ≤ α)
+    (hT : ‖D + R + L‖ ≤ q) (hR : ‖R‖ ≤ q) (hL : ‖L‖ ≤ q)
+    (hsmall : |θ| * (q * (1 + 2 * Real.sinh α)) < 1)
+    (n y : ι → ℝ) (hy : ∀ i, 0 ≤ y i) (cutoff : ℝ)
+    (hsq : ∑ i, Real.exp (2 * α * (n i - 2)) * y i ≤
+      ‖(∑' k : ℕ,
+          ((-θ) • (D + Real.exp α • R + Real.exp (-α) • L)) ^ k) * x‖ ^ 2) :
+    ‖D + Real.exp α • R + Real.exp (-α) • L‖ ≤
+        q * (1 + 2 * Real.sinh α)
+      ∧ ∑ i ∈ Finset.univ.filter (fun i => cutoff ≤ n i), y i ≤
+        Real.exp (-2 * α * (cutoff - 2)) *
+          (‖x‖ / (1 - |θ| * (q * (1 + 2 * Real.sinh α)))) ^ 2 := by
+  let ρ : ℝ := |θ| * (q * (1 + 2 * Real.sinh α))
+  let weightedCorrector : B :=
+    (∑' k : ℕ,
+      ((-θ) • (D + Real.exp α • R + Real.exp (-α) • L)) ^ k) * x
+  have hweightedInsertion :
+      ‖D + Real.exp α • R + Real.exp (-α) • L‖ ≤
+        q * (1 + 2 * Real.sinh α) :=
+    walsh_weighted_insertion_bound_from_blocks D R L q α hα hT hR hL
+  have hcorrector : ‖weightedCorrector‖ ≤ ‖x‖ / (1 - ρ) := by
+    exact weighted_neumann_corrector_norm_le D R L x q α θ hα hT hR hL hsmall
+  have hq : 0 ≤ q := le_trans (norm_nonneg (D + R + L)) hT
+  have hsinh : 0 ≤ Real.sinh α := Real.sinh_nonneg_iff.mpr hα
+  have hρ0 : 0 ≤ ρ := by
+    exact mul_nonneg (abs_nonneg θ)
+      (mul_nonneg hq (by positivity))
+  have htail := renewal_chaos_localization n y hy α cutoff ρ ‖x‖
+    ‖weightedCorrector‖ hα hρ0 hsmall (norm_nonneg x)
+    (norm_nonneg weightedCorrector) hcorrector hsq
+  exact ⟨hweightedInsertion, htail⟩
+
+end NativeDegreeBandAssembly
 
 end NCG

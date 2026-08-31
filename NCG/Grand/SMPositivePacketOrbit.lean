@@ -56,8 +56,9 @@ namespace NCG
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- Vanishing of the PSD form kills the vector. -/
-private lemma psd_form_zero {J : Matrix n n ℂ}
+/-- Vanishing of a positive-semidefinite quadratic form kills the tested
+vector. -/
+lemma posSemidef_mulVec_eq_zero_of_form_eq_zero {J : Matrix n n ℂ}
     (hJ : J.PosSemidef) {y : n → ℂ}
     (h : star y ⬝ᵥ (J *ᵥ y) = 0) : J *ᵥ y = 0 := by
   have hg := gram_realization_inner (CFC.sqrt J) y y
@@ -142,7 +143,7 @@ theorem sm_positive_packet_orbit {G : Type*} [Group G]
       have hterm := (Finset.sum_eq_zero_iff_of_nonneg
         (fun g _ => hJ.dotProduct_mulVec_nonneg
           ((ρ g)ᴴ *ᵥ x))).mp hsum0 g (Finset.mem_univ g)
-      exact psd_form_zero hJ hterm
+      exact posSemidef_mulVec_eq_zero_of_form_eq_zero hJ hterm
     · intro hall
       have hterms : ∀ g : G,
           (ρ g * J * (ρ g)ᴴ) *ᵥ x = 0 := by
@@ -187,7 +188,7 @@ theorem sm_positive_packet_orbit {G : Type*} [Group G]
       · exfalso
         have hFx : (((Fintype.card G : ℂ))⁻¹ •
             ∑ g : G, ρ g * J * (ρ g)ᴴ) *ᵥ x = 0 :=
-          psd_form_zero hF heq.symm
+          posSemidef_mulVec_eq_zero_of_form_eq_zero hF heq.symm
         obtain ⟨g, hg⟩ := hex x hx
         exact hg ((hker x).mp hFx g)
       · exact hlt
@@ -275,58 +276,26 @@ private lemma hermCoords_injective
     rw [hsym j i, hupper]
     simp
 
-/-- `cor:SM-finite-positive-packet-orbit` (the boxed
-Carathéodory quadrature `L ≤ (dim 𝒟)² + 1`). -/
-theorem sm_finite_positive_packet_orbit {G : Type*}
-    [Group G] [Fintype G]
-    (ρ : G → Matrix (Fin d) (Fin d) ℂ)
-    (J : Matrix (Fin d) (Fin d) ℂ) (hJ : J.PosSemidef) :
+/-- Any Hermitian matrix-valued orbit point in its real convex hull has an
+exact positive quadrature with at most `d² + 1` nodes.  This is the reusable
+Hermitian Carathéodory core; neither finiteness nor a group structure on the
+parameter type is needed. -/
+theorem finite_hermitian_quadrature_of_mem_convexHull {G : Type*}
+    (orbit : G → Matrix (Fin d) (Fin d) ℂ)
+    (hHerm : ∀ k, (orbit k).IsHermitian)
+    (x : Matrix (Fin d) (Fin d) ℂ)
+    (hmem : x ∈ convexHull ℝ (Set.range orbit)) :
     ∃ (L : ℕ) (w : Fin L → ℝ) (g : Fin L → G),
       L ≤ d ^ 2 + 1
       ∧ (∀ ℓ, 0 ≤ w ℓ) ∧ (∑ ℓ, w ℓ = 1)
-      ∧ ((Fintype.card G : ℂ))⁻¹ •
-          (∑ k : G, ρ k * J * (ρ k)ᴴ)
-        = ∑ ℓ, w ℓ • (ρ (g ℓ) * J * (ρ (g ℓ))ᴴ) := by
+      ∧ x = ∑ ℓ, w ℓ • orbit (g ℓ) := by
   classical
   set S : Set (Matrix (Fin d) (Fin d) ℂ) :=
-    Set.range fun k : G => ρ k * J * (ρ k)ᴴ with hS
+    Set.range orbit with hS
   -- every orbit point is Hermitian
   have hSherm : ∀ M ∈ S, M.IsHermitian := by
     rintro M ⟨k, rfl⟩
-    exact (hJ.mul_mul_conjTranspose_same (ρ k)).1
-  -- the average lies in the convex hull of the orbit
-  have hcardR : (0 : ℝ) < (Fintype.card G : ℝ) := by
-    exact_mod_cast Fintype.card_pos
-  have hmem : ((Fintype.card G : ℂ))⁻¹ •
-      (∑ k : G, ρ k * J * (ρ k)ᴴ)
-      ∈ convexHull ℝ S := by
-    have hcm := Finset.centerMass_mem_convexHull
-      (t := (Finset.univ : Finset G))
-      (w := fun _ => ((Fintype.card G : ℝ))⁻¹)
-      (z := fun k => ρ k * J * (ρ k)ᴴ)
-      (fun _ _ => by positivity)
-      (by
-        rw [Finset.sum_const, Finset.card_univ,
-          nsmul_eq_mul]
-        positivity)
-      (fun k _ => show ρ k * J * (ρ k)ᴴ ∈ S from
-        ⟨k, rfl⟩)
-    have hcm' : (Finset.univ : Finset G).centerMass
-        (fun _ => ((Fintype.card G : ℝ))⁻¹)
-        (fun k => ρ k * J * (ρ k)ᴴ)
-        = ((Fintype.card G : ℂ))⁻¹ •
-          (∑ k : G, ρ k * J * (ρ k)ᴴ) := by
-      rw [Finset.centerMass]
-      rw [Finset.sum_const, Finset.card_univ,
-        nsmul_eq_mul, mul_inv_cancel₀
-          (ne_of_gt (by positivity)),
-        inv_one, one_smul, ← Finset.smul_sum]
-      ext i j
-      simp only [Matrix.smul_apply, Complex.real_smul]
-      push_cast
-      ring
-    rw [← hcm']
-    exact hcm
+    exact hHerm k
   -- Carathéodory: an affinely independent sub-quadrature
   rw [convexHull_eq_union] at hmem
   simp only [Set.mem_iUnion] at hmem
@@ -401,7 +370,7 @@ theorem sm_finite_positive_packet_orbit {G : Type*}
   rw [Finset.centerMass_eq_of_sum_1 _ _ hw1] at hwc
   -- choose orbit representatives for the points of `t`
   have hrep : ∀ y : ↥t, ∃ k : G,
-      ρ k * J * (ρ k)ᴴ = (y : Matrix _ _ ℂ) := by
+      orbit k = (y : Matrix _ _ ℂ) := by
     intro y
     have := hts y.2
     rw [hS] at this
@@ -445,6 +414,53 @@ theorem sm_finite_positive_packet_orbit {G : Type*}
           apply Finset.sum_congr rfl
           intro ℓ _
           rw [hrep']
+
+/-- `cor:SM-finite-positive-packet-orbit` for a finite control group.  The
+uniform finite average first lies in the orbit convex hull, after which the
+Hermitian Carathéodory core gives the sharp `d² + 1` node bound. -/
+theorem sm_finite_positive_packet_orbit {G : Type*}
+    [Group G] [Fintype G]
+    (ρ : G → Matrix (Fin d) (Fin d) ℂ)
+    (J : Matrix (Fin d) (Fin d) ℂ) (hJ : J.PosSemidef) :
+    ∃ (L : ℕ) (w : Fin L → ℝ) (g : Fin L → G),
+      L ≤ d ^ 2 + 1
+      ∧ (∀ ℓ, 0 ≤ w ℓ) ∧ (∑ ℓ, w ℓ = 1)
+      ∧ ((Fintype.card G : ℂ))⁻¹ •
+          (∑ k : G, ρ k * J * (ρ k)ᴴ)
+        = ∑ ℓ, w ℓ • (ρ (g ℓ) * J * (ρ (g ℓ))ᴴ) := by
+  classical
+  let orbit : G → Matrix (Fin d) (Fin d) ℂ :=
+    fun k => ρ k * J * (ρ k)ᴴ
+  let x : Matrix (Fin d) (Fin d) ℂ :=
+    ((Fintype.card G : ℂ))⁻¹ • ∑ k : G, orbit k
+  have hHerm : ∀ k, (orbit k).IsHermitian := by
+    intro k
+    exact (hJ.mul_mul_conjTranspose_same (ρ k)).1
+  have hmem : x ∈ convexHull ℝ (Set.range orbit) := by
+    have hcm := Finset.centerMass_mem_convexHull
+      (t := (Finset.univ : Finset G))
+      (w := fun _ => ((Fintype.card G : ℝ))⁻¹)
+      (z := orbit)
+      (fun _ _ => by positivity)
+      (by
+        rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+        positivity)
+      (fun k _ => Set.mem_range_self k)
+    have hcm' : (Finset.univ : Finset G).centerMass
+        (fun _ => ((Fintype.card G : ℝ))⁻¹) orbit = x := by
+      rw [Finset.centerMass]
+      rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul,
+        mul_inv_cancel₀ (ne_of_gt (by positivity)), inv_one, one_smul,
+        ← Finset.smul_sum]
+      dsimp [x]
+      ext i j
+      simp only [Matrix.smul_apply, Complex.real_smul]
+      push_cast
+      ring
+    rw [← hcm']
+    exact hcm
+  simpa [orbit, x] using
+    finite_hermitian_quadrature_of_mem_convexHull orbit hHerm x hmem
 
 end Caratheodory
 
