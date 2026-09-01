@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import NCG.Grand.SchurMoriEvolution
 import NCG.Grand.VolterraMemory
+import NCG.Grand.FiniteHermitianSemigroupLaplace
 
 /-!
 # Exact projected Schur--Mori semigroup
@@ -20,7 +21,7 @@ input for the repository's Banach-space variation-of-constants theorem.
 -/
 
 open Matrix
-open scoped ComplexOrder MatrixOrder Interval Matrix.Norms.Operator
+open scoped ComplexOrder MatrixOrder Interval Matrix.Norms.L2Operator
 
 namespace NCG
 namespace SchurMoriProjectedSemigroup
@@ -30,6 +31,11 @@ set_option linter.unusedFintypeInType false
 set_option linter.unusedSectionVars false
 
 variable {m p : ℕ}
+
+noncomputable local instance complexMatrixNormedAlgebraRat
+    {n : Type*} [Fintype n] [DecidableEq n] :
+    NormedAlgebra ℚ (Matrix n n ℂ) :=
+  NormedAlgebra.restrictScalars ℚ ℂ _
 
 -- Keep the operator algebra on rectangular hidden columns explicit.  This
 -- avoids typeclass ambiguity between the complex matrix norm and its real
@@ -331,6 +337,106 @@ def shiftedGenerator (z : ℂ) (A : Matrix (Fin m) (Fin m) ℂ)
     Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ :=
   fromBlocks (z • 1 + A) B Bᴴ (z • 1 + C)
 
+/-- The blockwise shifted generator is literally `zI + H`. -/
+theorem shiftedGenerator_eq_add_generator
+    (z : ℂ) (A : Matrix (Fin m) (Fin m) ℂ)
+    (B : Matrix (Fin m) (Fin p) ℂ) (C : Matrix (Fin p) (Fin p) ℂ) :
+    shiftedGenerator z A B C =
+      z • (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ) +
+        generator A B C := by
+  unfold shiftedGenerator generator
+  rw [← fromBlocks_one, fromBlocks_smul, fromBlocks_add]
+  simp
+
+/-- A scalar resolvent shift factors from the full Schur--Mori semigroup as
+the ordinary Laplace weight. -/
+theorem exp_neg_shiftedGenerator_eq_weighted
+    (z : ℝ) (A : Matrix (Fin m) (Fin m) ℂ)
+    (B : Matrix (Fin m) (Fin p) ℂ) (C : Matrix (Fin p) (Fin p) ℂ)
+    (t : ℝ) :
+    NormedSpace.exp
+        ((-(t : ℂ)) • shiftedGenerator (z : ℂ) A B C) =
+      Complex.exp ((-(t : ℂ)) * (z : ℂ)) •
+        NormedSpace.exp (t • (-generator A B C)) := by
+  rw [shiftedGenerator_eq_add_generator]
+  have hsplit :
+      ((-(t : ℂ)) •
+          ((z : ℂ) •
+            (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ) +
+            generator A B C)) =
+        (((-(t : ℂ)) * (z : ℂ)) •
+            (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ)) +
+          t • (-generator A B C) := by
+    ext i j
+    simp [Complex.real_smul]
+    ring
+  rw [hsplit]
+  have hcomm : Commute
+      (((-(t : ℂ)) * (z : ℂ)) •
+        (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ))
+      (t • (-generator A B C)) := by
+    rw [Algebra.smul_def, Matrix.mul_one]
+    exact Algebra.commutes _ _
+  rw [Matrix.exp_add_of_commute _ _ hcomm]
+  have hscalar :
+      NormedSpace.exp
+          (((-(t : ℂ)) * (z : ℂ)) •
+            (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ)) =
+        Complex.exp ((-(t : ℂ)) * (z : ℂ)) •
+          (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ) := by
+    rw [Algebra.smul_def, Matrix.mul_one,
+      ← NormedSpace.algebraMap_exp_comm,
+      ← Complex.exp_eq_exp_ℂ]
+    simp [Algebra.smul_def]
+  rw [hscalar, Matrix.smul_mul, Matrix.one_mul]
+
+/-- Visible-block version of scalar Laplace weighting. -/
+theorem shiftedSemigroup_visible_eq_weighted_projectedCovariance
+    (z : ℝ) (A : Matrix (Fin m) (Fin m) ℂ)
+    (B : Matrix (Fin m) (Fin p) ℂ) (C : Matrix (Fin p) (Fin p) ℂ)
+    (t : ℝ) :
+    (NormedSpace.exp
+        ((-(t : ℂ)) • shiftedGenerator (z : ℂ) A B C)).toBlocks₁₁ =
+      Complex.exp ((-(t : ℂ)) * (z : ℂ)) •
+        projectedCovariance A B C t := by
+  rw [exp_neg_shiftedGenerator_eq_weighted]
+  rfl
+
+/-- A positive definite two-by-two block matrix has a positive definite Schur
+complement of its positive definite lower-right block. -/
+theorem schurComplement₂₂_posDef
+    {A : Matrix (Fin m) (Fin m) ℂ} {B : Matrix (Fin m) (Fin p) ℂ}
+    {D : Matrix (Fin p) (Fin p) ℂ}
+    (hFull : (fromBlocks A B Bᴴ D).PosDef) (hD : D.PosDef)
+    [Invertible D] :
+    (A - B * D⁻¹ * Bᴴ).PosDef := by
+  have hSchurHerm : (A - B * D⁻¹ * Bᴴ).IsHermitian :=
+    (IsHermitian.fromBlocks₂₂ A B hD.1).mp hFull.1
+  refine PosDef.of_dotProduct_mulVec_pos hSchurHerm fun x hx => ?_
+  have hne : Sum.elim x (-((D⁻¹ * Bᴴ) *ᵥ x)) ≠ 0 := by
+    intro hzero
+    apply hx
+    funext i
+    simpa using congrFun hzero (Sum.inl i)
+  have hq := hFull.dotProduct_mulVec_pos hne
+  rw [dotProduct_mulVec,
+    schur_complement_eq₂₂ _ _ _ _ hD.1, add_neg_cancel] at hq
+  simpa [dotProduct_mulVec] using hq
+
+/-- Positivity of the full Schur--Mori generator passes to its hidden
+principal block. -/
+theorem generator_hidden_posSemidef
+    {A : Matrix (Fin m) (Fin m) ℂ} {B : Matrix (Fin m) (Fin p) ℂ}
+    {C : Matrix (Fin p) (Fin p) ℂ}
+    (hH : (generator A B C).PosSemidef) : C.PosSemidef := by
+  have hprincipal := hH.submatrix (fun i : Fin p => Sum.inr i)
+  have heq :
+      (generator A B C).submatrix (fun i : Fin p => Sum.inr i)
+        (fun i : Fin p => Sum.inr i) = C := by
+    ext i j
+    rfl
+  rwa [heq] at hprincipal
+
 /-- Visible block of the actual full resolvent. -/
 noncomputable def projectedResolvent (z : ℂ)
     (A : Matrix (Fin m) (Fin m) ℂ) (B : Matrix (Fin m) (Fin p) ℂ)
@@ -342,6 +448,67 @@ noncomputable def hiddenResolvent (z : ℂ)
     (A : Matrix (Fin m) (Fin m) ℂ) (B : Matrix (Fin m) (Fin p) ℂ)
     (C : Matrix (Fin p) (Fin p) ℂ) : Matrix (Fin p) (Fin m) ℂ :=
   (shiftedGenerator z A B C)⁻¹.toBlocks₂₁
+
+/-- The positive-half-line integral of the visible block of the positively
+shifted full semigroup is the visible block of the genuine full resolvent. -/
+theorem integral_shiftedSemigroup_visible_eq_projectedResolvent
+    [Nonempty (Fin m ⊕ Fin p)]
+    (A : Matrix (Fin m) (Fin m) ℂ) (B : Matrix (Fin m) (Fin p) ℂ)
+    (C : Matrix (Fin p) (Fin p) ℂ)
+    (hH : (generator A B C).PosSemidef) (z : ℝ) (hz : 0 < z) :
+    (∫ t : ℝ in Set.Ioi 0,
+        (NormedSpace.exp
+          ((-(t : ℂ)) • shiftedGenerator (z : ℂ) A B C)).toBlocks₁₁) =
+      projectedResolvent (z : ℂ) A B C := by
+  have hshift := shiftedGenerator_eq_add_generator (z : ℂ) A B C
+  have hint := NCG.ImplicitEuler.integrableOn_exp_neg_shift_posSemidef hH z hz
+  change MeasureTheory.Integrable
+    (fun t : ℝ => NormedSpace.exp
+      ((-(t : ℂ)) •
+        ((z : ℂ) •
+          (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ) +
+          generator A B C)))
+    (MeasureTheory.volume.restrict (Set.Ioi 0)) at hint
+  have hfull := NCG.ImplicitEuler.integral_exp_neg_shift_posSemidef_eq_inv hH z hz
+  have hcomm := (visibleBlock (m := m) (p := p)).integral_comp_comm hint
+  calc
+    (∫ t : ℝ in Set.Ioi 0,
+        (NormedSpace.exp
+          ((-(t : ℂ)) • shiftedGenerator (z : ℂ) A B C)).toBlocks₁₁)
+        = (visibleBlock (m := m) (p := p))
+            (∫ t : ℝ in Set.Ioi 0,
+              NormedSpace.exp
+                ((-(t : ℂ)) •
+                  ((z : ℂ) •
+                    (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ) +
+                    generator A B C))) := by
+          rw [hshift]
+          exact hcomm
+    _ = (visibleBlock (m := m) (p := p))
+          (((z : ℂ) •
+              (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ) +
+              generator A B C)⁻¹) := congrArg _ hfull
+    _ = projectedResolvent (z : ℂ) A B C := by
+      rw [← hshift]
+      rfl
+
+/-- The genuine Laplace transform of the actual projected covariance is the
+visible block of the actual full resolvent. -/
+theorem integral_weighted_projectedCovariance_eq_projectedResolvent
+    [Nonempty (Fin m ⊕ Fin p)]
+    (A : Matrix (Fin m) (Fin m) ℂ) (B : Matrix (Fin m) (Fin p) ℂ)
+    (C : Matrix (Fin p) (Fin p) ℂ)
+    (hH : (generator A B C).PosSemidef) (z : ℝ) (hz : 0 < z) :
+    (∫ t : ℝ in Set.Ioi 0,
+        Complex.exp ((-(t : ℂ)) * (z : ℂ)) •
+          projectedCovariance A B C t) =
+      projectedResolvent (z : ℂ) A B C := by
+  rw [← integral_shiftedSemigroup_visible_eq_projectedResolvent
+    A B C hH z hz]
+  apply MeasureTheory.integral_congr_ae
+  filter_upwards with t
+  exact (shiftedSemigroup_visible_eq_weighted_projectedCovariance
+    z A B C t).symm
 
 /-- The blocks of the actual inverse satisfy both coupled resolvent equations;
 these equations are derived, not supplied as hypotheses. -/
@@ -387,6 +554,54 @@ theorem projectedResolvent_eq_schur
   rcases projectedResolvent_block_equations z A B C with ⟨htop, hbottom⟩
   exact mori_laplace_resolvent A B C z
     (projectedResolvent z A B C) (hiddenResolvent z A B C) htop hbottom
+
+/-- **Exact Schur--Mori Laplace formula without supplied resolvent
+hypotheses.**  Positivity of the actual full generator and `z > 0`
+construct all inverses appearing in the Schur formula. -/
+theorem integral_weighted_projectedCovariance_eq_schur
+    [Nonempty (Fin m ⊕ Fin p)]
+    (A : Matrix (Fin m) (Fin m) ℂ) (B : Matrix (Fin m) (Fin p) ℂ)
+    (C : Matrix (Fin p) (Fin p) ℂ)
+    (hH : (generator A B C).PosSemidef) (z : ℝ) (hz : 0 < z) :
+    (∫ t : ℝ in Set.Ioi 0,
+        Complex.exp ((-(t : ℂ)) * (z : ℂ)) •
+          projectedCovariance A B C t) =
+      ((z : ℂ) • (1 : Matrix (Fin m) (Fin m) ℂ) + A -
+        B * ((z : ℂ) • (1 : Matrix (Fin p) (Fin p) ℂ) + C)⁻¹ * Bᴴ)⁻¹ := by
+  have hzFull :
+      (((z : ℂ) •
+        (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ))).PosDef := by
+    simpa [Complex.real_smul] using
+      (Matrix.PosDef.one.smul hz :
+        (z • (1 : Matrix (Fin m ⊕ Fin p) (Fin m ⊕ Fin p) ℂ)).PosDef)
+  have hshift : (shiftedGenerator (z : ℂ) A B C).PosDef := by
+    rw [shiftedGenerator_eq_add_generator]
+    exact hzFull.add_posSemidef hH
+  letI : Invertible (shiftedGenerator (z : ℂ) A B C) :=
+    hshift.isUnit.invertible
+  have hzHidden :
+      (((z : ℂ) • (1 : Matrix (Fin p) (Fin p) ℂ) + C)).PosDef := by
+    have hzI : ((z : ℂ) • (1 : Matrix (Fin p) (Fin p) ℂ)).PosDef := by
+      simpa [Complex.real_smul] using
+        (Matrix.PosDef.one.smul hz :
+          (z • (1 : Matrix (Fin p) (Fin p) ℂ)).PosDef)
+    exact hzI.add_posSemidef (generator_hidden_posSemidef hH)
+  letI : Invertible
+      ((z : ℂ) • (1 : Matrix (Fin p) (Fin p) ℂ) + C) :=
+    hzHidden.isUnit.invertible
+  have hSchur :
+      ((z : ℂ) • (1 : Matrix (Fin m) (Fin m) ℂ) + A -
+        B * ((z : ℂ) • (1 : Matrix (Fin p) (Fin p) ℂ) + C)⁻¹ * Bᴴ).PosDef := by
+    apply schurComplement₂₂_posDef
+    · simpa [shiftedGenerator] using hshift
+    · exact hzHidden
+  letI : Invertible
+      ((z : ℂ) • (1 : Matrix (Fin m) (Fin m) ℂ) + A -
+        B * ((z : ℂ) • (1 : Matrix (Fin p) (Fin p) ℂ) + C)⁻¹ * Bᴴ) :=
+    hSchur.isUnit.invertible
+  rw [integral_weighted_projectedCovariance_eq_projectedResolvent
+    A B C hH z hz]
+  exact projectedResolvent_eq_schur (z : ℂ) A B C
 
 end SchurMoriProjectedSemigroup
 end NCG

@@ -5514,17 +5514,19 @@
   "thm:hierarchy-linear-router-distinction": {
     "env": "theorem",
     "title": "Linear pressure-router correction and finite compiler",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/FinitePressureFlowMaxCut.lean:NCG.finite_transshipment_flow_cut_iff",
-      "NCG/Grand/HierarchyLinearRouterDistinction.lean:NCG.HierarchyLinearRouterDistinction.linear_bound_implies_pointwise_bound",
-      "NCG/Grand/HierarchyLinearRouterDistinction.lean:NCG.HierarchyLinearRouterDistinction.auerbach_linear_router",
-      "NCG/Grand/HierarchyLinearRouterDistinction.lean:NCG.HierarchyLinearRouterDistinction.completeCollar_cut_capacity",
+      "NCG/Grand/CenteredCoordinateRouterCompiler.lean:NCG.CenteredCoordinateRouterCompiler.linear_implies_pointwise",
+      "NCG/Grand/CenteredCoordinateRouterCompiler.lean:NCG.CenteredCoordinateRouterCompiler.pointwise_compiles_linear",
+      "NCG/Grand/CompleteCollarRouterOptimality.lean:NCG.CompleteCollarRouterOptimality.complete_pointwise_bound_iff",
+      "NCG/Grand/CompleteCollarRouterOptimality.lean:NCG.CompleteCollarRouterOptimality.complete_linear_bound_iff",
+      "NCG/Grand/CompleteCollarRouterOptimality.lean:NCG.CompleteCollarRouterOptimality.linear_router_trace_identity",
       "NCG/Grand/HierarchyLinearRouterDistinction.lean:NCG.HierarchyLinearRouterDistinction.completeCollar_even_constants_agree",
       "NCG/Grand/HierarchyLinearRouterDistinction.lean:NCG.HierarchyLinearRouterDistinction.completeCollar_odd_constants_strict",
       "NCG/Grand/HierarchyLinearRouterDistinction.lean:NCG.HierarchyLinearRouterDistinction.completeCollar_K4_exact"
     ],
-    "note": "Fidelity audit 2026-08-08: DOWNGRADED from proved (verdict SCOPE_CHANGE, sev 2). Boxed formulas are DEFINITIONS (nothing proves they are the optima); Auerbach estimate hypothesized; cut capacity rfl. Existing Lean kept as partial progress. TRIAGE-EXACT: HARD - close the named gap.",
+    "note": "Exact post-audit completion.  On the centered coordinate cube, linear feasibility implies pointwise feasibility, while the explicit basis e_i-e_last compiles pointwise routes into one linear router with the exact factor d=dim(D_Q), eliminating the formerly hypothesized Auerbach coefficient estimate.  For the normalized complete collar, finite max-flow/min-cut plus a balanced half-cut witness proves that the nonlinear feasible bounds are exactly those at least 1/ceil(k/2).  The canonical router (g_i-g_j)/k gives the linear upper bound 2/k, and a finite trace identity proves the matching lower bound for every linear right inverse.  Rescaling the coordinate and edge units gives the manuscript's m^(2/3)/(u ceil(k/2)) and 2m^(2/3)/(ku); the even/odd distinction and K4 value are compiled separately.",
     "difficulty": "hard_finite_library"
   },
   "thm:hierarchy-electrical-router": {
@@ -5823,7 +5825,7 @@
   "thm:modulated-renewal-Schur-Mori": {
     "env": "theorem",
     "title": "Exact Schur cell, coercivity, and Mori--Zwanzig memory",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/SchurMori.lean:NCG.modulated_renewal_schur_mori",
       "NCG/Grand/SchurMoriEvolution.lean:NCG.modulated_rate_mass_diffusivity_floors",
@@ -5831,9 +5833,22 @@
       "NCG/Grand/SchurMoriEvolution.lean:NCG.mori_volterra_equation",
       "NCG/Grand/SchurMoriEvolution.lean:NCG.mori_laplace_resolvent",
       "NCG/Grand/SchurMoriEvolution.lean:NCG.exact_markov_closure_iff",
+      "NCG/Grand/FiniteHermitianSemigroupLaplace.lean:NCG.ImplicitEuler.integral_exp_neg_shift_posSemidef_eq_inv",
+      "NCG/Grand/SchurMoriProjectedSemigroupExact.lean:NCG.SchurMoriProjectedSemigroup.projectedCovariance_volterra",
+      "NCG/Grand/SchurMoriProjectedSemigroupExact.lean:NCG.SchurMoriProjectedSemigroup.integral_weighted_projectedCovariance_eq_schur",
+      "NCG/Grand/SchurMoriProjectedSemigroupExact.lean:NCG.SchurMoriProjectedSemigroup.projectedCovariance_exact_markov_iff",
+      "NCG/Grand/ModulatedRenewalWalshCoercivity.lean:NCG.ModulatedRenewalWalshCoercivity.phaseScore_centered",
+      "NCG/Grand/ModulatedRenewalWalshCoercivity.lean:NCG.ModulatedRenewalWalshCoercivity.abs_phaseScore_le",
+      "NCG/Grand/ModulatedRenewalWalshCoercivity.lean:NCG.ModulatedRenewalWalshCoercivity.longitudinal_swapRate_floor",
+      "NCG/Grand/ModulatedRenewalWalshCoercivity.lean:NCG.ModulatedRenewalWalshCoercivity.transverse_swapRate_exact",
+      "NCG/Grand/ModulatedRenewalWalshCoercivity.lean:NCG.ModulatedRenewalWalshCoercivity.renewalWalshEnergy_higherChaos_floor",
+      "NCG/Grand/ModulatedRenewalWalshCoercivity.lean:NCG.ModulatedRenewalWalshCoercivity.renewalWalshEnergy_firstChaos_exact",
+      "NCG/Grand/ModulatedRenewalWalshCoercivity.lean:NCG.ModulatedRenewalWalshCoercivity.interchangeWalshEnergy_first_add_higher",
+      "NCG/Grand/ModulatedRenewalWalshCoercivity.lean:NCG.ModulatedRenewalWalshCoercivity.longitudinal_axisSwapEnergy_floor",
+      "NCG/Grand/ModulatedRenewalWalshCoercivity.lean:NCG.ModulatedRenewalWalshCoercivity.transverse_axisSwapEnergy_exact",
       "NCG/Grand/ShortedHodge.lean:NCG.renewal_shorted_hodge"
     ],
-    "note": "Fidelity audit 2026-08-08: DOWNGRADED from proved (verdict SLICE_THIN, sev 2). (i) proved; (iii)/(iv) assume variation-of-constants + Laplace block equations as hypotheses; floors return own hypotheses. Existing Lean kept as partial progress. TRIAGE-EXACT: HARD - close the named gap.",
+    "note": "Completed 2026-08-30. The canonical Boolean phase score is centered under the exact 6/11--5/11 renewal law and has proved sup norm q_phi = 6/sqrt(30). The actual state-dependent torus rates dominate kappa N^2(1-|theta|q_phi) longitudinally and equal kappa N^2 transversely; the corresponding configuration Dirichlet forms inherit those comparisons. On Walsh coefficients the renewal number operator has the literal 2g higher-chaos floor, acts with mass exactly g on first chaos, and the unmodulated interchange form splits exactly across first and higher degrees, giving the shorted diffusivity comparison. Block-square completion supplies the unique corrector. The actual finite block exponential supplies the literal Volterra equation, genuine half-line Laplace/Schur resolvent with all inverses derived from positivity, and exact Markov-closure iff B=0.",
     "difficulty": "hard_finite_library"
   },
   "thm:renewal-sixth-order-cell-profile": {
@@ -7357,11 +7372,18 @@
   "thm:dimension-K4-selector": {
     "env": "theorem",
     "title": "Compiler-minimal complete-cell selector",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Grand/DimensionK4Selector.lean:NCG.dimension_K4_selector"
+      "NCG/Grand/DimensionK4Selector.lean:NCG.dimension_K4_selector",
+      "NCG/Grand/K4TwistedExteriorSquareMultiplicity.lean:NCG.k4TwistedHodgeMatrix_intertwines",
+      "NCG/Grand/K4TwistedExteriorSquareMultiplicity.lean:NCG.k4TwistedHodgeMatrix_det",
+      "NCG/Grand/K4TwistedExteriorSquareMultiplicity.lean:NCG.k4TwistedHodgeInverse_twoSided",
+      "NCG/Grand/K4TwistedExteriorSquareMultiplicity.lean:NCG.k4TwistedExteriorSquare_intertwiner_unique",
+      "NCG/Grand/StandardRepresentationTwistedExteriorSquare.lean:NCG.standardTwistedExteriorTensor_zero_of_ne_four",
+      "NCG/Grand/DimensionK4Classification.lean:NCG.dimensionK4_twistedExteriorSquare_classification",
+      "NCG/Grand/DimensionK4Classification.lean:NCG.dimension_K4_selector_complete"
     ],
-    "note": "Fidelity audit 2026-08-08: DOWNGRADED from proved (verdict SLICE_OK, sev 1). Selection arithmetic + intertwiner proved; DS.6 Specht/Schur classification unformalized. Existing Lean kept as partial progress. TRIAGE-EXACT: HARD - close the named gap.",
+    "note": "Exact completion 2026-08-31. DS.5 parity and rank selection are proved. DS.6 is formalized in ambient centred coefficient coordinates: for every N≠4, every alternating, input/output-centred, sign-covariant three-index tensor representing Λ²W_N → W_N⊗sgn vanishes. The stable range N≥5 is killed by an odd transposition outside the three coefficient indices, and N=0,1,2,3 are discharged explicitly. At N=4, the second-compound generator matrices are intertwined with the sign-twisted standard triplet by an explicit Hodge matrix of determinant -16, and every generator-equivariant intertwiner is a unique scalar multiple of it. The complete DS.5–DS.6 bundle is `dimension_K4_selector_complete`.",
     "difficulty": "hard_finite_library"
   },
   "cor:dimension-regular-graph": {
@@ -8728,30 +8750,36 @@
   },  "thm:SM-beta-curl-cone-ray": {
     "env": "theorem",
     "title": "Variational--circulating marginal tensor and cone ray",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/BetaCurlConeRayExact.lean:NCG.BetaCurl.decomposition_unique",
       "NCG/Grand/BetaCurlConeRayExact.lean:NCG.BetaCurl.hasDerivAt_cubic",
       "NCG/Grand/BetaCurlConeRayExact.lean:NCG.BetaCurl.inner_circ_eq_curl",
       "NCG/Grand/BetaCurlConeRayExact.lean:NCG.BetaCurl.ray_iff_tangent_curl",
-      "NCG/Grand/BetaCurlConeRayExact.lean:NCG.BetaCurl.quadratic_cone_ray"
+      "NCG/Grand/BetaCurlConeRayExact.lean:NCG.BetaCurl.quadratic_cone_ray",
+      "NCG/Grand/BetaCurlConeRayExact.lean:NCG.BetaCurl.quadratic_cone_ray_with_brouwer",
+      "NCG/Topology/Brouwer/FixedPoint.lean:brouwer_fixed_point"
     ],
-    "note": "Fidelity audit 2026-08-08: DOWNGRADED from proved (verdict SLICE_OK, sev 1). RG.10-12 proved (KKT hypothesis disclosed); unconditional ray clause needs Brouwer (absent from Mathlib). Existing Lean kept as partial progress. TRIAGE-EXACT: HARD - close the named gap.",
+    "note": "Proved exactly (2026-08-31). RG.10--12 are formalized, and the unconditional quadratic cone-ray clause now follows from a ported, sorry-free cubical-Sperner proof of the finite-dimensional compact-convex Brouwer theorem. The continuous quadratic shell is normalized on the nonempty pointed compact base to obtain a positive eigenray; the direct contractive existence and uniqueness branch remains available separately.",
     "difficulty": "hard_finite_library"
   },
   "thm:SM-certified-projective-ray": {
     "env": "theorem",
     "title": "Operational projective map, residual certification, and coordinate covariance",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/CertifiedProjectiveRayExact.lean:NCG.ProjectiveRay.sm_certified_projective_ray",
+      "NCG/Grand/CertifiedProjectiveRayExact.lean:NCG.ProjectiveRay.sm_certified_projective_ray_with_brouwer",
+      "NCG/Grand/CertifiedProjectiveRayExact.lean:NCG.ProjectiveRay.continuousOn_rayMap",
+      "NCG/Grand/CertifiedProjectiveRayExact.lean:NCG.ProjectiveRay.exists_fixed_of_continuous",
       "NCG/Grand/CertifiedProjectiveRayExact.lean:NCG.ProjectiveRay.fixed_eigen",
       "NCG/Grand/CertifiedProjectiveRayExact.lean:NCG.ProjectiveRay.exists_fixed_of_contractive",
       "NCG/Grand/CertifiedProjectiveRayExact.lean:NCG.ProjectiveRay.read_bound",
       "NCG/Grand/CertifiedProjectiveRayExact.lean:NCG.ProjectiveRay.fixed_transport",
-      "NCG/Grand/CertifiedProjectiveRayExact.lean:NCG.ProjectiveRay.read_transport"
+      "NCG/Grand/CertifiedProjectiveRayExact.lean:NCG.ProjectiveRay.read_transport",
+      "NCG/Topology/Brouwer/FixedPoint.lean:brouwer_fixed_point"
     ],
-    "note": "Fidelity audit 2026-08-08: DOWNGRADED from proved (verdict SLICE_OK, sev 1). RG.15-18 proved; unconditional fixed point needs Brouwer (absent), only contractive branch proved. Existing Lean kept as partial progress. TRIAGE-EXACT: HARD - close the named gap.",
+    "note": "Proved exactly (2026-08-31). The normalized ray map is proved continuous on the physical base because its calibration denominator is strictly positive there. A ported, sorry-free cubical-Sperner proof of finite-dimensional Brouwer gives the unconditional RG.15 fixed ray on every nonempty pointed compact base. Positive eigenray identification, contractive existence and uniqueness, residual and scalar-Read bounds, and coordinate covariance complete RG.15--18.",
     "difficulty": "hard_finite_library"
   },
   "assessment:exact-status-of-numerical-standard-model-landing": {
@@ -10649,7 +10677,7 @@
   "cor:accepted-BKM-loss": {
     "env": "corollary",
     "title": "BKM loss as the local data-processing Hessian",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/BkmKernelExact.lean:NCG.QRE.bkmKernel",
       "NCG/Grand/BkmKernelExact.lean:NCG.QRE.tendsto_integral_resolvent",
@@ -10670,9 +10698,54 @@
       "NCG/Grand/BkmMonotonicityExact.lean:NCG.Petz.tQuad_kraus_le",
       "NCG/Grand/BkmMonotonicityExact.lean:NCG.Petz.bkmForm_kraus_le",
       "NCG/Grand/BkmMonotonicityExact.lean:NCG.Petz.bkmLoss_nonneg",
-      "NCG/Grand/OmegaKernelExact.lean:NCG.QRE.kubo_mul_bkmKernel"
+      "NCG/Grand/OmegaKernelExact.lean:NCG.QRE.kubo_mul_bkmKernel",
+      "NCG/Grand/KuboBkmDualityExact.lean:NCG.QRE.kuboTransform",
+      "NCG/Grand/KuboBkmDualityExact.lean:NCG.QRE.inverseKuboTransform",
+      "NCG/Grand/KuboBkmDualityExact.lean:NCG.QRE.kuboTransform_inverseKuboTransform",
+      "NCG/Grand/KuboBkmDualityExact.lean:NCG.QRE.inverseKuboTransform_kuboTransform",
+      "NCG/Grand/KuboBkmDualityExact.lean:NCG.QRE.bkmForm_kuboTransform",
+      "NCG/Grand/KuboBkmDualityExact.lean:NCG.QRE.bkmLoss_eq_kuboForm_loss",
+      "NCG/Grand/KuboBkmDualityExact.lean:NCG.QRE.kuboForm_loss_nonneg",
+      "NCG/Grand/MatrixResolventPathDerivativeExact.lean:NCG.QRE.resolvent_affine_hasDerivAt",
+      "NCG/Grand/MatrixResolventPathDerivativeExact.lean:NCG.QRE.trace_resolvent_affine_hasDerivAt",
+      "NCG/Grand/BkmResolventCurvatureLimitExact.lean:NCG.QRE.truncatedResolventCurvature_eq_sum",
+      "NCG/Grand/BkmResolventCurvatureLimitExact.lean:NCG.QRE.tendsto_truncatedResolventCurvature",
+      "NCG/Grand/LogResolventKernelExact.lean:NCG.QRE.tendsto_truncatedLogKernel",
+      "NCG/Grand/MatrixLogResolventApproximationExact.lean:NCG.QRE.tendsto_truncatedMatrixLogPairing",
+      "NCG/Grand/MatrixLogResolventApproximationExact.lean:NCG.QRE.truncatedMatrixLogPairing_eq_integral",
+      "NCG/Grand/AffineMatrixLogResolventIntegrandExact.lean:NCG.QRE.affineLogResolventIntegrand_hasDerivAt",
+      "NCG/Grand/AffineMatrixLogResolventIntegrandExact.lean:NCG.QRE.truncatedAffineMatrixLogPairing_eq_integral",
+      "NCG/Grand/AffineMatrixLogResolventIntegrandExact.lean:NCG.QRE.affineRawSForm_continuousOn_rect",
+      "NCG/Grand/AffineMatrixLogResolventIntegrandExact.lean:NCG.QRE.exists_affineSForm_bound_rect",
+      "NCG/Grand/AffineMatrixLogResolventIntegrandExact.lean:NCG.QRE.truncatedAffineMatrixLogPairing_hasDerivAt",
+      "NCG/Grand/AffineBkmLocalUniformLimitExact.lean:NCG.QRE.affineTruncatedBkmCurvature_continuousOn",
+      "NCG/Grand/AffineBkmLocalUniformLimitExact.lean:NCG.QRE.tendstoUniformlyOn_affineTruncatedBkmCurvature",
+      "NCG/Grand/AffineBkmLocalUniformLimitExact.lean:NCG.QRE.tendstoLocallyUniformlyOn_affineTruncatedBkmCurvature",
+      "NCG/Grand/AffineMatrixLogDerivativeExact.lean:NCG.QRE.affineMatrixLogPairing_hasDerivAt",
+      "NCG/Grand/RelativeEntropyBkmHessianExact.lean:NCG.QRE.affineRelativeEntropyFirstVariation_hasDerivAt_zero",
+      "NCG/Grand/RelativeEntropyBkmHessianExact.lean:NCG.Petz.affineDataProcessingFirstVariation_hasDerivAt_zero",
+      "NCG/Grand/RelativeEntropyBkmHessianExact.lean:NCG.Petz.affineDataProcessingBkmHessian_nonneg",
+      "NCG/Grand/AffineBkmTwoDirectionUniformLimitExact.lean:NCG.QRE.tendstoLocallyUniformlyOn_affineTruncatedBkmCurvatureAlong",
+      "NCG/Grand/AffineMatrixLogMixedDerivativeExact.lean:NCG.QRE.affineMatrixLogPairing_mixed_hasDerivAt",
+      "NCG/Grand/BkmTraceNormalizationExact.lean:NCG.QRE.mixedBkmForm_base_eq_trace",
+      "NCG/Grand/AffineTraceEntropyDerivativeExact.lean:NCG.QRE.affineTraceEntropy_hasDerivAt",
+      "NCG/Grand/AffineRelativeEntropySecondDerivativeExact.lean:NCG.QRE.affineRelativeEntropy_hasDerivAt",
+      "NCG/Grand/AffineRelativeEntropySecondDerivativeExact.lean:NCG.QRE.affineRelativeEntropy_hasDerivativeField",
+      "NCG/Grand/AffineRelativeEntropySecondDerivativeExact.lean:NCG.QRE.affineRelativeEntropyDerivative_hasDerivAt_zero",
+      "NCG/Grand/AffineRelativeEntropySecondDerivativeExact.lean:NCG.QRE.affineRelativeEntropy_hasBkmSecondDerivativeAt_zero",
+      "NCG/Grand/AffineDataProcessingSecondDerivativeExact.lean:NCG.Petz.kraus_affine",
+      "NCG/Grand/AffineDataProcessingSecondDerivativeExact.lean:NCG.Petz.affineDataProcessingRelativeEntropy_hasDerivAt",
+      "NCG/Grand/AffineDataProcessingSecondDerivativeExact.lean:NCG.Petz.affineDataProcessingRelativeEntropyDerivative_hasDerivAt_zero",
+      "NCG/Grand/AffineDataProcessingSecondDerivativeExact.lean:NCG.Petz.affineDataProcessingRelativeEntropy_hasBkmSecondDerivativeAt_zero",
+      "NCG/Grand/AffineDataProcessingSecondDerivativeExact.lean:NCG.Petz.affineDataProcessingRelativeEntropy_secondDerivative_nonneg",
+      "NCG/Grand/FaithfulAffineNeighborhoodExact.lean:NCG.QRE.two_mul_inv_sq_mul_affineRelativeEntropy_eq_bkmAverage_of_endpoints",
+      "NCG/Grand/DifferentiablePathRelativeEntropyHessianExact.lean:NCG.QRE.tendsto_algebraicChordBkmAverage",
+      "NCG/Grand/DifferentiablePathRelativeEntropyHessianExact.lean:NCG.QRE.differentiablePath_relativeEntropy_secondOrder",
+      "NCG/Grand/DifferentiablePathRelativeEntropyHessianExact.lean:NCG.Petz.kraus_hasDerivAt",
+      "NCG/Grand/DifferentiablePathRelativeEntropyHessianExact.lean:NCG.Petz.differentiablePath_dataProcessingLoss_secondOrder",
+      "NCG/Grand/DifferentiablePathRelativeEntropyHessianExact.lean:NCG.Petz.differentiablePath_dataProcessingLoss_bkm_nonneg"
     ],
-    "note": "Fidelity audit 2026-08-08: DOWNGRADED from proved (verdict SLICE_OK, sev 1). Boxed BKM monotonicity proved sorry-free for arbitrary Kraus CPTP; Daleckii-Krein Hessian framing disclosed gloss. Existing Lean kept as partial progress. TRIAGE-EXACT: HARD - close the named gap.",
+    "note": "Proved exactly (2026-08-31). The affine BKM integral remainder is transported to every differentiable normalized faithful matrix-state path by its convergent secant directions, proving that twice the relative-entropy remainder divided by t^2 converges to the BKM form of the tangent and is independent of path acceleration. Finite Kraus linearity transports the derivative to the output path; output faithfulness near zero is derived from base faithfulness using determinant continuity and Kraus positivity. Subtracting the input and output limits gives the literal path-level data-processing Hessian in (QS.5), and the previously proved Kraus BKM contraction gives its nonnegativity. No nonlinear recovery claim is inferred from equality of a single tangent, matching the corollary's final warning.",
     "difficulty": "hard_finite_library"
   },
   "firewall:state-recovery-is-not-process-recovery": {
@@ -15317,9 +15390,25 @@
   "thm:RPESM-projective-transport": {
     "env": "theorem",
     "title": "Exact projective shell, dynamic, and line transport",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: HARD - Kernel clauses feasible via Mathlib Kernel; sizable Pfaffian-transport library needed.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.shellPartition_pos",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.sum_shellKernel",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.fineLaw_fst_marginal",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.fineLaw_fst_marginal_hasDerivAt_iff",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.fineLaw_fst_marginal_secondDeriv_iff",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.fineSkeleton_markov",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.fineSkeleton_reversible",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.fineSkeleton_pullback",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.det_shellTransport",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.RealPfaffianSection.directSum",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.blockShell_mulVec_eq_zero_iff",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.transportedShell_mulVec_eq_zero_iff",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.transportedShell_transpose_mulVec_eq_zero_iff",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.divisorOrder_product",
+      "NCG/Grand/FiniteProjectiveKernelTransport.lean:NCG.FiniteProjectiveKernelTransport.crossingParity_product"
+    ],
+    "note": "Completed and corrected 2026-08-30. Boltzmann normalization is proved positive and exact; adjoining the conditional preserves the old marginal and all old-supported expectations, first writers, and second writers. The lift-after-old-update skeleton is a Markov kernel, is reversible for the fine law, and exactly intertwines every pulled-back old observable. Determinant-one shell maps preserve the product determinant; oriented real Pfaffian sections tensor with the product value; kernels, transpose-kernels/cokernels, divisor orders, and mod-two crossing parities transport exactly. The manuscript's former claim that any two-variable dependence forces coupling was false for additive potentials and has been corrected to the exact criterion that the normalized conditional varies with the old field.",
     "difficulty": "hard_finite_library"
   },
   "thm:RPESM-reflected-slab": {
@@ -15334,8 +15423,19 @@
     "env": "theorem",
     "title": "Uniform field gap and influence transport",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: HARD - Dobrushin influence-matrix gap + oscillation-seminorm library (bounded generators feasible).",
+    "lean": [
+      "NCG/Grand/DobrushinInfluencePoissonTail.lean:NCG.DobrushinInfluencePoissonTail.influence_power_eq_zero_of_distance",
+      "NCG/Grand/DobrushinInfluencePoissonTail.lean:NCG.DobrushinInfluencePoissonTail.influenceExponentialEntry_eq_exponentialEntry_smul",
+      "NCG/Grand/DobrushinInfluencePoissonTail.lean:NCG.DobrushinInfluencePoissonTail.dobrushinKernelEntry_eq_uniformized_exponential",
+      "NCG/Grand/DobrushinInfluencePoissonTail.lean:NCG.DobrushinInfluencePoissonTail.finiteRange_dobrushinKernelEntry_le_poissonTail",
+      "NCG/Grand/FiniteHeatBathDobrushin.lean:NCG.FiniteHeatBathDobrushin.averageUpdate_oscillation_of_leakage",
+      "NCG/Grand/FiniteHeatBathDobrushin.lean:NCG.FiniteHeatBathDobrushin.iterate_oscillation_le_matrixPower",
+      "NCG/Grand/FiniteHeatBathDobrushin.lean:NCG.FiniteHeatBathDobrushin.uniformized_averagedInfluence_exp",
+      "NCG/Grand/FiniteHeatBathDobrushin.lean:NCG.FiniteHeatBathDobrushin.dobrushinKernelEntry_averagedInfluence",
+      "NCG/Grand/FiniteHeatBathDobrushin.lean:NCG.FiniteHeatBathDobrushin.finiteDimensional_randomScan_oscillation",
+      "NCG/Grand/FiniteHeatBathDobrushin.lean:NCG.FiniteHeatBathDobrushin.heatBath_gap_of_approximateTensorization"
+    ],
+    "note": "Substantial exact progress (2026-08-31): the FS.25 operator compiler is complete in finite dimension. Single-block updates satisfying the heat-bath self-kill and off-diagonal leakage bounds are averaged, iterated, Poissonized with convergence discharged automatically, and normalized at total rate |I|*rho to exactly exp(-rho*t*(I-C)) entrywise. Finite interaction range gives the regulator-independent Poisson-tail light cone. The scalar conversion from approximate tensorization plus the heat-bath Dirichlet identity to FS.24 is also proved. Still conditional: instantiate the compiler with the manuscript's concrete finite Gibbs conditional expectations and derive the approximate-tensorization inequality from the protected Dobrushin margin; these are the remaining Gibbs/model-specific steps.",
     "difficulty": "hard_finite_library"
   },
   "thm:SMFS-Palatini-tail": {
@@ -15384,9 +15484,16 @@
   "thm:SMFS-full-Hessian": {
     "env": "theorem",
     "title": "Full same-cylinder Hessian and integrability",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: HARD - Differentiation under the integral for determinant-weighted Gibbs measure with uniform L^p bounds.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/FinitePathPartitionHessian.lean:NCG.FinitePathPartitionHessian.logPartition_line_hessian",
+      "NCG/Grand/FinitePathPartitionHessian.lean:NCG.FinitePathPartitionHessian.finite_path_partition_full_hessian",
+      "NCG/Grand/FinitePathPartitionHessian.lean:NCG.FinitePathPartitionHessian.covarianceBlock_posSemidef",
+      "NCG/Grand/FinitePathPartitionHessian.lean:NCG.FinitePathPartitionHessian.directBlock_has_either_sign",
+      "NCG/Grand/FinitePathPartitionHessian.lean:NCG.FinitePathPartitionHessian.uniform_finiteMoments",
+      "NCG/Grand/FinitePathPartitionHessian.lean:NCG.FinitePathPartitionHessian.poisson_compensated_moments_uniform_dominator"
+    ],
+    "note": "Exact finite protected-screen encoding.  A quadratic coefficient chart records precisely the local first and second writers, and the finite Gibbs log partition has the stated directional Hessian: expected direct second writer plus score variance.  The covariance block is a positive-semidefinite Gram form while the direct block can have either sign.  Bounded finite-law writers have uniform moments of every finite order; compensated finite-time Poisson count writers admit a common summable moment dominator under a uniform intensity ceiling.",
     "difficulty": "hard_finite_library"
   },
   "thm:SMFS-gauge-descent": {

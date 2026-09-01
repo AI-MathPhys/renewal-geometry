@@ -152,10 +152,8 @@ noncomputable def unitaryConjugation (U : Matrix.unitaryGroup ι ℂ) :
     { toFun := fun M => Unitary.conjStarAlgAut ℂ _ U M
       map_add' := fun M N => map_add (Unitary.conjStarAlgAut ℂ _ U) M N
       map_smul' := fun r M => by
-        change Unitary.conjStarAlgAut ℂ _ U (r • M) =
-          r • Unitary.conjStarAlgAut ℂ _ U M
-        rw [← Complex.real_smul, ← Complex.real_smul]
-        exact map_smul (Unitary.conjStarAlgAut ℂ _ U) (r : ℂ) M }
+        ext i j
+        simp [Complex.real_smul] }
 
 @[simp]
 theorem unitaryConjugation_apply (U : Matrix.unitaryGroup ι ℂ)
@@ -207,7 +205,8 @@ theorem integral_finiteUnitarySpectralHeat_shift_eq_inv
   rw [← map_mul]
   change Unitary.conjStarAlgAut ℂ _ U (Dinv * D) = 1
   have hDD : Dinv * D = 1 := by
-    rw [Dinv, D, Matrix.diagonal_mul_diagonal]
+    dsimp only [Dinv, D]
+    rw [Matrix.diagonal_mul_diagonal]
     ext i j
     by_cases hij : i = j
     · subst j
@@ -255,6 +254,25 @@ theorem unitary_diagonal_shift_eq
       simp
     · simp [hij]
   rw [hdiag, map_add, map_smul, map_one, hspectral]
+
+/-- The positively shifted Hermitian exponential is integrable on the positive
+half-line. -/
+theorem integrableOn_exp_neg_shift_posSemidef
+    {H : Matrix ι ι ℂ} (hH : H.PosSemidef) (z : ℝ) (hz : 0 < z) :
+    IntegrableOn
+      (fun t : ℝ => NormedSpace.exp
+        ((-(t : ℂ)) • ((z : ℂ) • (1 : Matrix ι ι ℂ) + H)))
+      (Ioi 0) := by
+  let U := hH.1.eigenvectorUnitary
+  let ν := hH.1.eigenvalues
+  have hgen := unitary_diagonal_shift_eq hH z
+  have hunitary := integrableOn_finiteUnitarySpectralHeat_shift
+    U ν z hz hH.eigenvalues_nonneg
+  apply hunitary.congr
+  filter_upwards with t
+  rw [finiteUnitarySpectralHeat_eq_exp_smul]
+  congr 1
+  exact congrArg (fun M : Matrix ι ι ℂ => (-(t : ℂ)) • M) hgen
 
 /-- **Finite Hermitian Laplace--resolvent identity.**  For every
 positive-semidefinite Hermitian matrix `H` and every real `z > 0`, the

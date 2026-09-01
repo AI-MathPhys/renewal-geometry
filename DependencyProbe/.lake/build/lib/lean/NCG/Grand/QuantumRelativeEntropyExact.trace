@@ -1,0 +1,33 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs":
+ {"o": ["11660dfa5c307930.olean"],
+  "m": false,
+  "i": "25df9a16958de9ad.ilean",
+  "c": "251b7ea5d3720d15.c"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\Cli\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\Gametheory\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\checkdecls\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\QICLean\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\build\\lib\\lean c:\\Users\\googo\\.elan\\toolchains\\leanprover--lean4---v4.34.0-rc1\\bin\\lean.exe C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\..\\NCG\\Grand\\QuantumRelativeEntropyExact.lean -o C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\build\\lib\\lean\\NCG\\Grand\\QuantumRelativeEntropyExact.olean -i C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\build\\lib\\lean\\NCG\\Grand\\QuantumRelativeEntropyExact.ilean -c C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\build\\ir\\NCG\\Grand\\QuantumRelativeEntropyExact.c --setup C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\build\\ir\\NCG\\Grand\\QuantumRelativeEntropyExact.setup.json --json",
+   "level": "trace"}],
+ "inputs":
+ [["deps",
+   [["DependencyProbe/NCG:extraDep",
+     [["@DependencyProbe:extraDep", "00000000000006bb"]]],
+    ["imports",
+     [["Mathlib transitive imports (legacy)", "8c4ebe9d0e191956"],
+      ["Mathlib:importAllArts", "5f036c3d2971369e"]]]]],
+  ["libs",
+   [["import dynlibs", "00000000000006bb"],
+    ["package external libraries", "00000000000006bb"],
+    ["module dynlibs", "00000000000006bb"],
+    ["module plugins", "00000000000006bb"]]],
+  ["Lean 4.34.0, commit 3447a668783dbce1a8fdb97101dd067687b2b418",
+   "421484e3e0c70198"],
+  ["C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\..\\NCG\\Grand\\QuantumRelativeEntropyExact.lean",
+   "02fa4f5f9da90a9d"],
+  ["options", "00000000000006bb"],
+  ["isModule: false", "feefd2a0d3a1847e"],
+  ["Module.name: NCG.Grand.QuantumRelativeEntropyExact", "7d68b7b94e5787e9"],
+  ["Package.id?: (some DependencyProbe)", "7ab2874502847358"],
+  ["Module.leanArgs: #[]", "00000000000006bb"]],
+ "depHash": "6edb95951789d615"}

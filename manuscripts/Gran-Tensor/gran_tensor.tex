@@ -30059,7 +30059,10 @@ and
 \]
 Then \((\pi_{n+1/n})_*\Lambda_{n+1}^+=\Lambda_n^+\) and
 \((\pi_{n+1/n})_*\mu_{n+1}=\mu_n\), while the conditional detail is genuinely
-coupled when \(V_{n+1/n}\) depends on both variables.  The shell term
+coupled exactly when the normalized kernel
+\(K_{n+1/n}(\mathord\cdot\mid x)\) varies with \(x\).  In particular this holds
+when the Boltzmann weight is nonseparable relative to the reference kernel;
+mere additive dependence \(V(x,y)=a(x)+b(y)\) is not sufficient.  The shell term
 \(+\log Z_{n+1/n}(x)\) transports every old-supported first and second action
 writer.
 
@@ -30103,7 +30106,8 @@ fit.
 \end{theorem}
 
 \begin{proof}
-The static marginal is the normalization of \(K_{n+1/n}\).  Differentiating
+The static marginal is the normalization of \(K_{n+1/n}\); genuine coupling is
+exactly nonconstancy of that normalized conditional in the old field.  Differentiating
 that normalization once and twice gives exactly the conditional score and
 covariance terms supplied by the shell counterterm.  The stationary edge
 measure of \textup{(RP.13)} is symmetric because the old edge measure is

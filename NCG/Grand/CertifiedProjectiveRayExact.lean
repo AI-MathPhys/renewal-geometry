@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import NCG.Grand.OperationalConeExact
+import NCG.Topology.Brouwer.FixedPoint
 
 /-!
 # Operational projective map, residual certification, and coordinate covariance
@@ -14,9 +15,9 @@ Machinery for `thm:SM-certified-projective-ray`.  On the compact convex base
 projective map `𝒯(x) = ℱ(x)/ν(ℱ(x))` (RG.14, `rayMap`).
 
 * (RG.15) a fixed point `a ∈ ℬ` of `𝒯` satisfies `ℱ(a) = β a` with `β = ν(ℱ(a)) > 0`
-  (`fixed_eigen`); the fixed-point existence on the non-contractive branch is Brouwer's theorem
-  (not in Mathlib) and enters as a hypothesis, while on the `q`-contractive branch existence is
-  proved outright by iteration (`exists_fixed_of_contractive`);
+  (`fixed_eigen`); unconditional existence for continuous `ℱ` follows from the bundled cubical
+  Sperner proof of Brouwer's theorem (`exists_fixed_of_continuous`), while the `q`-contractive
+  branch also has a direct iterative proof (`exists_fixed_of_contractive`);
 * uniqueness on the contractive branch (`fixed_unique_of_contractive`);
 * (RG.16) the a-posteriori residual bound `‖â - a‖ ≤ ‖â - 𝒯(â)‖ / (1 - q)`
   (`residual_bound`);
@@ -75,6 +76,45 @@ theorem fixed_eigen {a : E} (ha : a ∈ base R L W) (hfix : rayMap L W Φ a = a)
   exact h
 
 end Basic
+
+/-! ### The unconditional Brouwer branch -/
+
+section Brouwer
+
+variable (hW : ∀ j, (W j).PosDef) (Φ : E → E)
+  (hΦ : ∀ x ∈ base R L W, Φ x ∈ cone R L)
+  (hΦ0 : ∀ x ∈ base R L W, ¬ ∀ j, L j (Φ x) = 0)
+
+include hW hΦ hΦ0
+
+/-- Continuity of normalization by the strictly positive calibration on the physical base. -/
+theorem continuousOn_rayMap (hΦc : ContinuousOn Φ (base R L W)) :
+    ContinuousOn (rayMap L W Φ) (base R L W) := by
+  have hcal : ContinuousOn (fun x => calib L W (Φ x)) (base R L W) :=
+    (continuous_calib L W).comp_continuousOn hΦc
+  have hinv : ContinuousOn (fun x => (calib L W (Φ x))⁻¹) (base R L W) :=
+    hcal.inv₀ fun x hx => (calib_pos_of_mem R L W hW Φ hΦ hΦ0 hx).ne'
+  exact hinv.smul hΦc
+
+/-- The normalized projective map as a continuous self-map of the compact convex base. -/
+noncomputable def continuousRayMap (hΦc : ContinuousOn Φ (base R L W)) :
+    C(base R L W, base R L W) where
+  toFun x := ⟨rayMap L W Φ x, rayMap_mem_base R L W hW Φ hΦ hΦ0 x.property⟩
+  continuous_toFun := Continuous.subtype_mk
+    (continuousOn_rayMap R L W hW Φ hΦ hΦ0 hΦc).restrict _
+
+/-- **(RG.15), unconditional branch**: Brouwer's theorem supplies a fixed projective ray for
+every continuous cone-preserving leading map on a nonempty compact physical base. -/
+theorem exists_fixed_of_continuous
+    (hpointed : ∀ x ∈ LinearMap.ker R, (∀ j, L j x = 0) → x = 0)
+    (hne : (base R L W).Nonempty) (hΦc : ContinuousOn Φ (base R L W)) :
+    ∃ a ∈ base R L W, rayMap L W Φ a = a := by
+  obtain ⟨a, ha⟩ := brouwer_fixed_point (base R L W) (base_convex R L W)
+    (base_isCompact R L W hW hpointed) hne (continuousRayMap R L W hW Φ hΦ hΦ0 hΦc)
+  refine ⟨a, a.property, ?_⟩
+  exact congrArg Subtype.val ha
+
+end Brouwer
 
 /-! ### The contractive branch -/
 
@@ -283,6 +323,30 @@ theorem sm_certified_projective_ray (hW : ∀ j, (W j).PosDef) (Φ : E → E)
           fixed_unique_of_contractive R L W Φ hq1 hLip ha ha' hfa hfa',
         fun _ ha _ hahat hfa => ⟨residual_bound R L W Φ hq1 hLip ha hahat hfa,
           fun ℓ => read_bound R L W ℓ hq1 Φ hLip ha hahat hfa⟩⟩⟩
+
+/-- **`thm:SM-certified-projective-ray`**, including the unconditional (RG.15) clause: on a
+nonempty pointed compact base, every continuous cone-preserving leading map has a positive
+eigenray.  The remaining preservation, contractive uniqueness, residual certification, scalar
+Read, and covariance clauses are supplied by `sm_certified_projective_ray` and the transport
+theorems above. -/
+theorem sm_certified_projective_ray_with_brouwer
+    (hW : ∀ j, (W j).PosDef)
+    (hpointed : ∀ x ∈ LinearMap.ker R, (∀ j, L j x = 0) → x = 0)
+    (hne : (base R L W).Nonempty) (Φ : E → E)
+    (hΦ : ∀ x ∈ base R L W, Φ x ∈ cone R L)
+    (hΦ0 : ∀ x ∈ base R L W, ¬ ∀ j, L j (Φ x) = 0)
+    (hΦc : ContinuousOn Φ (base R L W)) :
+    (∃ a ∈ base R L W, rayMap L W Φ a = a ∧
+      Φ a = calib L W (Φ a) • a ∧ 0 < calib L W (Φ a)) ∧
+      ((∀ x ∈ base R L W, rayMap L W Φ x ∈ base R L W) ∧
+      (∀ a ∈ base R L W, rayMap L W Φ a = a →
+        Φ a = calib L W (Φ a) • a ∧ 0 < calib L W (Φ a))) := by
+  obtain ⟨a, ha, hfix⟩ :=
+    exists_fixed_of_continuous R L W hW Φ hΦ hΦ0 hpointed hne hΦc
+  have heigen := fixed_eigen R L W hW Φ hΦ hΦ0 ha hfix
+  exact ⟨⟨a, ha, hfix, heigen⟩,
+    (sm_certified_projective_ray R L W hW Φ hΦ hΦ0).1,
+    (sm_certified_projective_ray R L W hW Φ hΦ hΦ0).2.1⟩
 
 end ProjectiveRay
 end NCG

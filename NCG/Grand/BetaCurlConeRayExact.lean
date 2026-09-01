@@ -22,9 +22,9 @@ quadratic tensor `𝒬`:
 * (RG.12) for a variational cone candidate `a` with dual slack `s` (`𝒬_var(a,a) = β a - s`),
   the complete-ray condition on the tangent space `h ⊥ a` is the tangent-curl identity
   `⅓ Ω_a(a,h) = ⟨h, s⟩` (`ray_iff_tangent_curl`);
-* the projective cone-ray existence (contractive branch) and uniqueness clauses are
-  `NCG.ProjectiveRay.sm_certified_projective_ray` applied to `Φ(x) = 𝒬(x,x)`
-  (`quadratic_cone_ray`).
+* unconditional projective cone-ray existence follows from the bundled cubical-Sperner proof of
+  Brouwer applied to the continuous quadratic map (`quadratic_cone_ray_with_brouwer`); the direct
+  contractive existence and uniqueness clauses remain available as `quadratic_cone_ray`.
 -/
 
 open scoped RealInnerProductSpace InnerProduct
@@ -252,6 +252,23 @@ theorem quadratic_cone_ray (R : E →ₗ[ℝ] F) (L : ∀ j, E →ₗ[ℝ] Matri
           rayMap L W (fun x => Q x x) a' = a' → a = a' := by
   obtain ⟨h1, h2, h3⟩ := sm_certified_projective_ray R L W hW (fun x => Q x x) hQ hQ0
   exact ⟨h1, h2, fun hq0 hq1 hLip => ⟨(h3 hq0 hq1 hLip).1, (h3 hq0 hq1 hLip).2.1⟩⟩
+
+omit [CompleteSpace E] in
+/-- **`thm:SM-beta-curl-cone-ray`, unconditional ray clause**: a continuous quadratic shell
+mapping the nonempty compact calibrated base into the nonzero cone has a positive projective
+eigenray.  Existence is an actual consequence of Brouwer's theorem, not a fixed-point hypothesis. -/
+theorem quadratic_cone_ray_with_brouwer
+    (R : E →ₗ[ℝ] F) (L : ∀ j, E →ₗ[ℝ] Matrix (n j) (n j) ℝ)
+    (W : ∀ j, Matrix (n j) (n j) ℝ) (hW : ∀ j, (W j).PosDef)
+    (hpointed : ∀ x ∈ LinearMap.ker R, (∀ j, L j x = 0) → x = 0)
+    (hne : (base R L W).Nonempty) (Q : E →L[ℝ] E →L[ℝ] E)
+    (hQ : ∀ x ∈ base R L W, Q x x ∈ cone R L)
+    (hQ0 : ∀ x ∈ base R L W, ¬ ∀ j, L j (Q x x) = 0) :
+    ∃ a ∈ base R L W, rayMap L W (fun x => Q x x) a = a ∧
+      Q a a = calib L W (Q a a) • a ∧ 0 < calib L W (Q a a) := by
+  have hQc : ContinuousOn (fun x => Q x x) (base R L W) := by fun_prop
+  exact (sm_certified_projective_ray_with_brouwer R L W hW hpointed hne
+    (fun x => Q x x) hQ hQ0 hQc).1
 
 end BetaCurl
 end NCG
