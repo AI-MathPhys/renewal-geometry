@@ -11,6 +11,7 @@ import Mathlib.Analysis.Calculus.FDeriv.Linear
 import Mathlib.Analysis.Calculus.MeanValue
 import Mathlib.Analysis.Calculus.TangentCone.Real
 import Mathlib.Analysis.Normed.Operator.Basic
+import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
@@ -69,6 +70,23 @@ omit [NormedSpace ℝ E] [IsScalarTower ℝ K E] in
 theorem continuousOn_orbit (S : StronglyContinuousSemigroup K E) (x : E) :
     ContinuousOn (fun t ↦ S t x) (Ici 0) :=
   S.stronglyContinuous x
+
+/-- A strongly continuous semigroup is uniformly bounded in operator norm
+on every compact nonnegative time interval.  This is the usual
+Banach--Steinhaus consequence of pointwise compact-orbit boundedness. -/
+theorem exists_norm_le_on_Icc
+    (S : StronglyContinuousSemigroup K E) [CompleteSpace E]
+    (t : ℝ) :
+    ∃ B : ℝ, ∀ q ∈ Icc (0 : ℝ) t, ‖S q‖ ≤ B := by
+  let I := {q : ℝ // q ∈ Icc (0 : ℝ) t}
+  obtain ⟨B, hB⟩ := banach_steinhaus
+      (g := fun q : I ↦ S q.1) (fun x ↦ by
+    obtain ⟨C, hC⟩ :=
+      isCompact_Icc.bddAbove_image
+        ((S.continuousOn_orbit x).norm.mono Icc_subset_Ici_self)
+    refine ⟨C, fun q ↦ hC ?_⟩
+    exact ⟨q.1, q.2, rfl⟩)
+  exact ⟨B, fun q hq ↦ hB ⟨q, hq⟩⟩
 
 /-- A vector `x` belongs to the right-generator graph with generator value
 `Ax` when its semigroup orbit has that right derivative at zero. -/
@@ -220,6 +238,30 @@ end Complete
 variable {F : Type w} [NormedAddCommGroup F] [NormedSpace K F]
   [NormedSpace ℝ F] [IsScalarTower ℝ K F]
 
+/-- Intertwining one orbit at every nonnegative time forces intertwining of
+the corresponding right-generator values.  This pointwise form is the
+natural one for graph-domain carriers. -/
+theorem generatorIntertwining_of_semigroupIntertwining_on_vector
+    (S : StronglyContinuousSemigroup K E)
+    (T : StronglyContinuousSemigroup K F)
+    (V : E →L[K] F) {x Ax : E} {NVx : F}
+    (hintertwine : ∀ t : ℝ, 0 ≤ t →
+      T t (V x) = V (S t x))
+    (hAx : S.IsRightGeneratorVector x Ax)
+    (hNVx : T.IsRightGeneratorVector (V x) NVx) :
+    NVx = V Ax := by
+  have hVAx : HasDerivWithinAt
+      (fun t : ℝ ↦ V (S t x)) (V Ax) (Ici 0) 0 :=
+    (V.restrictScalars ℝ).hasFDerivAt.comp_hasDerivWithinAt 0 hAx
+  have htransfer : HasDerivWithinAt
+      (fun t : ℝ ↦ T t (V x)) (V Ax) (Ici 0) 0 := by
+    apply hVAx.congr_of_mem
+    · intro t ht
+      exact hintertwine t ht
+    · exact self_mem_Ici
+  exact UniqueDiffWithinAt.eq_deriv (Ici (0 : ℝ))
+    (uniqueDiffWithinAt_Ici 0) hNVx htransfer
+
 /-- Intertwining all nonnegative-time semigroup operators forces
 intertwining of their right generators.  This is the exact differentiation
 at `t = 0` implication for possibly unbounded generators, stated on their
@@ -232,18 +274,9 @@ theorem generatorIntertwining_of_semigroupIntertwining
       (T t).comp V = V.comp (S t))
     (hAx : S.IsRightGeneratorVector x Ax)
     (hNVx : T.IsRightGeneratorVector (V x) NVx) :
-    NVx = V Ax := by
-  have hVAx : HasDerivWithinAt
-      (fun t : ℝ ↦ V (S t x)) (V Ax) (Ici 0) 0 :=
-    (V.restrictScalars ℝ).hasFDerivAt.comp_hasDerivWithinAt 0 hAx
-  have htransfer : HasDerivWithinAt
-      (fun t : ℝ ↦ T t (V x)) (V Ax) (Ici 0) 0 := by
-    apply hVAx.congr_of_mem
-    · intro t ht
-      exact DFunLike.congr_fun (hintertwine t ht) x
-    · exact self_mem_Ici
-  exact UniqueDiffWithinAt.eq_deriv (Ici (0 : ℝ))
-    (uniqueDiffWithinAt_Ici 0) hNVx htransfer
+    NVx = V Ax :=
+  generatorIntertwining_of_semigroupIntertwining_on_vector
+    S T V (fun t ht ↦ DFunLike.congr_fun (hintertwine t ht) x) hAx hNVx
 
 end StronglyContinuousSemigroup
 

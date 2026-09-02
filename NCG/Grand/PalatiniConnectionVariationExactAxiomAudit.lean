@@ -1,0 +1,5 @@
+import NCG.Grand.PalatiniConnectionVariationExact
+
+#print axioms NCG.PalatiniConnectionVariation.connectionAction_increment
+#print axioms NCG.PalatiniConnectionVariation.connection_stationarity_euler
+#print axioms NCG.PalatiniConnectionVariation.palatini_connection_torsion_packet

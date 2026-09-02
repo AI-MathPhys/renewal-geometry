@@ -95,14 +95,23 @@ theorem localExpectation_succ (n : ℕ) (f : Stage n) :
     exact Fintype.sum_equiv e _ _ fun p => rfl
   rw [localExpectation, localExpectation, ← hsum]
   rw [Fintype.sum_prod_type]
-  simp only [e, Fin.snocEquiv_apply]
+  change (∑ b : Fin 2, ∑ y : Configuration n,
+      (RenewalField.w (Fin.snoc y b) : ℂ) *
+        cylinderMap n (n + 1) (Nat.le_succ n) f (Fin.snoc y b)) =
+    ∑ x : Configuration n, (RenewalField.w x : ℂ) * f x
   have hweight (b : Fin 2) (y : Configuration n) :
       RenewalField.w (Fin.snoc y b) = RenewalField.w y * RenewalWalsh.piw b := by
-    simp [RenewalField.w, Fin.prod_univ_succ]
+    simp [RenewalField.w, Fin.prod_univ_castSucc]
   simp_rw [hweight]
   have hcyl (b : Fin 2) (y : Configuration n) :
       cylinderMap n (n + 1) (Nat.le_succ n) f (Fin.snoc y b) = f y := by
-    rfl
+    change f (restrictConfiguration (Nat.le_succ n) (Fin.snoc y b)) = f y
+    congr 1
+    funext i
+    have hi : Fin.castLE (Nat.le_succ n) i = i.castSucc := by
+      apply Fin.ext
+      rfl
+    simp [restrictConfiguration, hi]
   simp_rw [hcyl]
   rw [show (∑ b : Fin 2, ∑ y : Configuration n,
       ((RenewalField.w y * RenewalWalsh.piw b : ℝ) : ℂ) * f y) =
@@ -131,9 +140,18 @@ theorem localExpectation_compatible {n m : ℕ} (h : n ≤ m) (f : Stage n) :
 def localExpectationLinearMap (n : ℕ) : Stage n →ₗ[ℂ] ℂ where
   toFun := localExpectation n
   map_add' f g := by
-    simp [localExpectation, Finset.mul_sum, mul_add]
+    unfold localExpectation
+    simp only [Pi.add_apply, mul_add, Finset.sum_add_distrib]
   map_smul' z f := by
-    simp [localExpectation, Finset.mul_sum, mul_assoc]
+    unfold localExpectation
+    simp only [Pi.smul_apply, RingHom.id_apply, smul_eq_mul]
+    calc
+      (∑ x, (RenewalField.w x : ℂ) * (z * f x)) =
+          ∑ x, z * ((RenewalField.w x : ℂ) * f x) := by
+            refine Finset.sum_congr rfl fun x _ => ?_
+            ring
+      _ = z * ∑ x, (RenewalField.w x : ℂ) * f x := by
+            rw [Finset.mul_sum]
 
 theorem norm_localExpectation_le (n : ℕ) (f : Stage n) :
     ‖localExpectation n f‖ ≤ ‖f‖ := by
@@ -144,7 +162,8 @@ theorem norm_localExpectation_le (n : ℕ) (f : Stage n) :
     _ = ∑ x : Configuration n, RenewalField.w x * ‖f x‖ := by
       apply Finset.sum_congr rfl
       intro x hx
-      rw [norm_mul, Complex.norm_real, abs_of_nonneg (RenewalField.w_nonneg x)]
+      rw [norm_mul, Complex.norm_real, Real.norm_eq_abs,
+        abs_of_nonneg (RenewalField.w_nonneg x)]
     _ ≤ ∑ x : Configuration n, RenewalField.w x * ‖f‖ := by
       apply Finset.sum_le_sum
       intro x hx
@@ -155,10 +174,13 @@ theorem norm_localExpectation_le (n : ℕ) (f : Stage n) :
 
 def localExpectationCLM (n : ℕ) : Stage n →L[ℂ] ℂ :=
   (localExpectationLinearMap n).mkContinuous 1 fun f => by
+    change ‖localExpectation n f‖ ≤ 1 * ‖f‖
     simpa using norm_localExpectation_le n f
 
 theorem localExpectation_one (n : ℕ) : localExpectation n 1 = 1 := by
-  simp [localExpectation, RenewalField.weight_total]
+  unfold localExpectation
+  simp only [Pi.one_apply, mul_one]
+  exact_mod_cast RenewalField.weight_total (m := n)
 
 theorem localExpectation_star_mul_self_nonneg (n : ℕ) (f : Stage n) :
     0 ≤ localExpectation n (star f * f) := by
@@ -182,6 +204,7 @@ def localState (n : ℕ) : NCG.PreCStarState (Stage n) where
     apply le_antisymm
     · apply ContinuousLinearMap.opNorm_le_bound _ zero_le_one
       intro f
+      change ‖localExpectation n f‖ ≤ 1 * ‖f‖
       simpa using norm_localExpectation_le n f
     · calc
         1 = ‖localExpectationCLM n (1 : Stage n)‖ := by
@@ -229,7 +252,10 @@ theorem localState_faithful (n : ℕ) (f : Stage n)
   have hwpos : 0 < RenewalField.w x := by
     apply Finset.prod_pos
     intro i hi
-    fin_cases x i <;> norm_num [RenewalField.w, RenewalWalsh.piw]
+    have hpiwpos : ∀ b : Fin 2, 0 < RenewalWalsh.piw b := by
+      intro b
+      fin_cases b <;> norm_num [RenewalWalsh.piw]
+    exact hpiwpos (x i)
   have hz : Complex.normSq (f x) = 0 := (mul_eq_zero.mp hx).resolve_left hwpos.ne'
   exact Complex.normSq_eq_zero.mp hz
 
@@ -265,10 +291,13 @@ theorem localExpectation_twoSite_factorization {n : ℕ}
       ((∑ b, RenewalWalsh.piw b * g b : ℝ) : ℂ) *
         ((∑ b, RenewalWalsh.piw b * h b : ℝ) : ℂ) := by
   have hr := RenewalField.expect_pair g h i j hij
-  change ((RenewalField.expect (fun x => g (x i) * h (x j)) : ℝ) : ℂ) = _
-  rw [hr]
-  push_cast
-  rfl
+  have hcast :
+      localExpectation n (fun x => ((g (x i) * h (x j) : ℝ) : ℂ)) =
+        ((RenewalField.expect (fun x => g (x i) * h (x j)) : ℝ) : ℂ) := by
+    unfold localExpectation RenewalField.expect
+    push_cast <;> rfl
+  rw [hcast, hr]
+  push_cast <;> rfl
 
 theorem quasilocalProductState_twoSite_factorization {n : ℕ}
     (g h : Fin 2 → ℝ) (i j : Fin n) (hij : i ≠ j) :
@@ -281,8 +310,10 @@ theorem quasilocalProductState_twoSite_factorization {n : ℕ}
   rw [quasilocalProductState_of]
   exact localExpectation_twoSite_factorization g h i j hij
 
-/-- Concrete AF/quasilocal closure for the independent renewal regulator. -/
-theorem concreteRenewalProductAF_profile :
+/-- The concrete AF/quasilocal closure proposition for the independent
+renewal regulator.  Naming the proposition lets larger certificates include
+it without confusing the proposition with its proof term. -/
+def ConcreteRenewalProductAFProfile : Prop :=
     (∀ n m (h : n ≤ m), Isometry (cylinderMap n m h))
       ∧ (∀ n, ∀ f : Stage n,
           quasilocalProductState
@@ -295,11 +326,15 @@ theorem concreteRenewalProductAF_profile :
           φ = quasilocalProductState)
       ∧ (∀ n (f : Stage n), localState n (star f * f) = 0 → f = 0)
       ∧ (∀ a : QuasilocalAlgebra,
-          ‖compatibleProductState.completionGNSRepresentation a‖ ≤ ‖a‖) := by
+          ‖compatibleProductState.completionGNSRepresentation a‖ ≤ ‖a‖)
+
+/-- Concrete AF/quasilocal closure for the independent renewal regulator. -/
+theorem concreteRenewalProductAF_profile : ConcreteRenewalProductAFProfile := by
   refine ⟨fun n m h => ?_, fun n f => quasilocalProductState_of n f,
     quasilocalProductState_unique, localState_faithful,
     quasilocalGNSRepresentation_norm_le⟩
-  exact isometry_iff_norm.mpr (cylinderMap_norm n m h)
+  exact (AddMonoidHomClass.isometry_iff_norm (cylinderMap n m h)).mpr
+    (cylinderMap_norm n m h)
 
 end NCG.RenewalProductAF
 

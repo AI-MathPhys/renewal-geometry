@@ -134,6 +134,43 @@ theorem hasDerivAt_duhamelProductPath
     rw [hdefect, (T (t - s)).map_add]
     abel
 
+/-- Duhamel product-path derivative with an externally supplied
+source-path derivative.  This is the form needed when the source orbit is
+tracked on a graph-norm carrier while its generator derivative lives in the
+ambient source space. -/
+theorem hasDerivAt_duhamelProductPath_of_sourcePath
+    (T : StronglyContinuousSemigroup K H)
+    (v rvec : ℝ → H) {v' NVs : H}
+    {t s : ℝ} (_hs : 0 < s) (hst : s < t)
+    (hsource : HasDerivAt v v' s)
+    (hTgen : T.IsRightGeneratorVector (v s) NVs)
+    (hdefect : NVs = v' + rvec s)
+    (hbound : ∃ C : ℝ, ∀ᶠ r in 𝓝 s,
+      ‖(T (t - r)).restrictScalars ℝ‖ ≤ C) :
+    HasDerivAt (fun r ↦ T (t - r) (v r))
+      (-(T (t - s) (rvec s))) s := by
+  let Aop : ℝ → H →L[ℝ] H := fun r ↦
+    (T (t - r)).restrictScalars ℝ
+  have htarget : HasDerivAt (fun r ↦ Aop r (v s))
+      (-(T (t - s) NVs)) s := by
+    change HasDerivAt (fun r ↦ T (t - r) (v s))
+      (-(T (t - s) NVs)) s
+    exact T.hasDerivAt_const_sub_orbit hTgen (sub_pos.mpr hst)
+  have hstrong : ContinuousAt (fun r ↦ Aop r v') s := by
+    have horbit : ContinuousAt (fun q ↦ T q v') (t - s) :=
+      (T.continuousOn_orbit v').continuousAt
+        (Ici_mem_nhds (sub_pos.mpr hst))
+    change ContinuousAt (fun r ↦ T (t - r) v') s
+    exact horbit.comp (continuousAt_const.sub continuousAt_id)
+  have hproduct := hasDerivAt_clm_apply_of_strong
+    Aop v hsource htarget hstrong hbound
+  convert hproduct using 1
+  · rfl
+  · change -(T (t - s) (rvec s)) =
+      T (t - s) v' + -(T (t - s) NVs)
+    rw [hdefect, (T (t - s)).map_add]
+    abel
+
 /-- Exact Duhamel identity derived from the generator graph relations along
 the source orbit.  Continuity of the product path and integrability of the
 Duhamel integrand are kept explicit so this theorem also applies to graph-norm

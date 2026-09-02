@@ -1,0 +1,4 @@
+import NCG.Grand.RenewalRegenerativeContinuumAssemblyExact
+
+#print axioms NCG.RenewalRegenerativeContinuum.finitePacket_analytic_conclusions
+#print axioms NCG.RenewalRegenerativeContinuum.renewal_regenerative_continuum

@@ -7,6 +7,8 @@ import Mathlib
 import NCG.Grand.OperatorGraphMoscoResolventConvergence
 import NCG.Grand.ENNRealOperatorGraphMoscoConverseFromOneShiftWeakEquation
 import NCG.Grand.FiniteHermitianOperatorGraphCanonicalHeatSemigroup
+import NCG.Grand.FiniteHermitianOperatorGraphCanonicalHeatNonnegative
+import NCG.Grand.FiniteHermitianCanonicalHeatToResolvent
 import NCG.Grand.ENNRealClosedOperatorGraphEnergyLowerSemicontinuity
 import NCG.Grand.ENNRealResolventOperatorBound
 import NCG.Grand.DenseSourceStrongConvergence
@@ -81,6 +83,30 @@ theorem gt_mosco_resolvent_norm {E : Type*} [NormedAddCommGroup E]
 
 variable (J : System (K := ℂ) (H := H) (Hn := fun n ↦ EuclideanSpace ℂ (iota n)))
 
+/-- Cofinal strong convergence of every positive finite Hermitian resolvent. -/
+def CofinalStrongResolventConverges
+    (G : ∀ n, Matrix (iota n) (iota n) ℂ)
+    (R : ℝ → H →L[ℂ] H) : Prop :=
+  ∀ (φ : ℕ → ℕ), Tendsto φ atTop atTop →
+    ∀ lam, 0 < lam →
+      (J.reindex φ).StrongOperatorConverges (J.reindex φ)
+        (fun n ↦ NCG.ImplicitEuler.finiteHermitianShiftedResolventOperator
+          (G (φ n)) lam)
+        (R lam)
+
+/-- Cofinal compact-uniform convergence of finite Hermitian heat semigroups
+on nonnegative times to the correctly zero-extended canonical heat family. -/
+def CofinalCanonicalHeatConverges
+    (G : ∀ n, Matrix (iota n) (iota n) ℂ)
+    (R : ℝ → H →L[ℂ] H) : Prop :=
+  ∀ (φ : ℕ → ℕ), Tendsto φ atTop atTop →
+    ∀ b, 0 < b → ∀ s : Set ℝ, IsCompact s →
+      (∀ t ∈ s, 0 ≤ t) →
+        (J.reindex φ).StrongOperatorConvergesUniformlyOn
+          (fun n (t : ℝ) ↦ NormedSpace.exp ((-(t : ℂ)) •
+            Matrix.toEuclideanCLM (n := iota (φ n)) (𝕜 := ℂ) (G (φ n))))
+          (fun t ↦ operatorGraphResolventHeatNonnegative (R b) b t) s
+
 set_option maxHeartbeats 1600000 in -- heavy unification across reindexed systems
 /-- **The Grand-Tensor Mosco equivalence** (`thm:GT-Mosco`): on the finite
 Hermitian regulator model, (Q1) cofinal Mosco convergence of the extended
@@ -147,6 +173,97 @@ theorem gt_mosco
     exact
       StrongOperatorConvergesUniformlyOn.of_finiteHermitianOperatorGraphMosco_canonicalResolventHeat
       J G hG Dn An D A hD R hmosco hstageEquation hlimitEquation b hb s hs hsPos
+
+set_option maxHeartbeats 2400000 in
+-- The four cofinal implications elaborate through several reindexed analytic compilers.
+/-- Exact three-way Grand-Tensor Mosco equivalence (thm:GT-Mosco).
+Cofinal graph Mosco convergence, cofinal strong convergence of every positive
+resolvent, and cofinal compact-uniform convergence of the embedded heat
+semigroups on the nonnegative half-line are pairwise equivalent. -/
+theorem gt_mosco_equivalence
+    (G : ∀ n, Matrix (iota n) (iota n) ℂ) (hG : ∀ n, (G n).PosSemidef)
+    (Dn : ∀ n, Submodule ℂ (EuclideanSpace ℂ (iota n)))
+    (An : ∀ n, Dn n →ₗ[ℂ] Fn n)
+    (D : Submodule ℂ H) (A : D →ₗ[ℂ] F) (hD : Dense (D : Set H))
+    (R : ℝ → H →L[ℂ] H)
+    (hstageEquation : ∀ lam, 0 < lam → ∀ n (f : EuclideanSpace ℂ (iota n)),
+      OperatorGraphResolventEquation (Dn n) (An n) lam f
+        (NCG.ImplicitEuler.finiteHermitianShiftedResolventOperator (G n) lam f))
+    (hlimitEquation : ∀ lam, 0 < lam → ∀ f : H,
+      OperatorGraphResolventEquation D A lam f (R lam f))
+    (hclosed : (operatorLinearPMap D A).IsClosed)
+    (hdense : J.IsAsymptoticallyDense)
+    (hrealInner : ∀ x y : H, inner ℝ x y = RCLike.re (inner ℂ x y)) :
+    let Q1 := J.CofinalMoscoConverges
+      (fun n ↦ ennrealOperatorGraphEnergy (Dn n) (An n))
+      (ennrealOperatorGraphEnergy D A)
+    let Q2 := CofinalStrongResolventConverges J G R
+    let Q3 := CofinalCanonicalHeatConverges J G R
+    (Q1 ↔ Q2) ∧ (Q2 ↔ Q3) := by
+  dsimp only
+  have h12 :
+      J.CofinalMoscoConverges
+          (fun n ↦ ennrealOperatorGraphEnergy (Dn n) (An n))
+          (ennrealOperatorGraphEnergy D A) →
+        CofinalStrongResolventConverges J G R := by
+    intro hmosco φ hφ lam hlam
+    exact (J.reindex φ).operatorGraphMosco_strongResolvents_allPositive
+      (fun n ↦ Dn (φ n)) (fun n ↦ An (φ n)) D A
+      (fun lam n ↦
+        NCG.ImplicitEuler.finiteHermitianShiftedResolventOperator
+          (G (φ n)) lam)
+      R (hmosco.reindex J φ hφ)
+      (fun lam hlam n f ↦ hstageEquation lam hlam (φ n) f)
+      hlimitEquation lam hlam
+  have h21 :
+      CofinalStrongResolventConverges J G R →
+        J.CofinalMoscoConverges
+          (fun n ↦ ennrealOperatorGraphEnergy (Dn n) (An n))
+          (ennrealOperatorGraphEnergy D A) := by
+    intro hres φ hφ
+    exact
+      ennrealOperatorGraphEnergy_moscoConverges_of_oneStrongResolvent_of_weakEquation
+        (J.reindex φ) (fun n ↦ Dn (φ n)) (fun n ↦ An (φ n)) D A
+        (fun lam n ↦
+          NCG.ImplicitEuler.finiteHermitianShiftedResolventOperator
+            (G (φ n)) lam)
+        R (IsAsymptoticallyDense.reindex J hdense φ hφ)
+        1 zero_lt_one (hres φ hφ 1 zero_lt_one)
+        (fun lam hlam n f ↦ hstageEquation lam hlam (φ n) f)
+        hlimitEquation
+        (lowerSemicontinuous_ennrealOperatorGraphEnergy_of_isClosed D A hclosed)
+        hD hrealInner
+  have h13 :
+      J.CofinalMoscoConverges
+          (fun n ↦ ennrealOperatorGraphEnergy (Dn n) (An n))
+          (ennrealOperatorGraphEnergy D A) →
+        CofinalCanonicalHeatConverges J G R := by
+    intro hmosco φ hφ b hb s hs hsNonneg
+    exact
+      StrongOperatorConvergesUniformlyOn.of_finiteHermitianOperatorGraphMosco_canonicalResolventHeat_nonnegative
+        (J.reindex φ) (fun n ↦ G (φ n)) (fun n ↦ hG (φ n))
+        (fun n ↦ Dn (φ n)) (fun n ↦ An (φ n))
+        D A hD R (hmosco.reindex J φ hφ)
+        (fun lam hlam n f ↦ hstageEquation lam hlam (φ n) f)
+        hlimitEquation b hb s hs hsNonneg
+  have h32 :
+      CofinalCanonicalHeatConverges J G R →
+        CofinalStrongResolventConverges J G R := by
+    intro hheat φ hφ
+    apply
+      StrongOperatorConverges.of_finiteHermitian_canonicalOperatorGraphHeat
+        (J.reindex φ) (fun n ↦ G (φ n)) (fun n ↦ hG (φ n))
+        D A R hlimitEquation 1 zero_lt_one
+    intro s hs hsPos
+    have hnonnegative :=
+      hheat φ hφ 1 zero_lt_one s hs
+        (fun t ht ↦ (hsPos t ht).le)
+    intro x xlim hx
+    exact (hnonnegative x xlim hx).congr_right fun t ht ↦ by
+      exact congrArg (fun T : H →L[ℂ] H ↦ T xlim)
+        (operatorGraphResolventHeatNonnegative_of_ne
+          (R 1) 1 t (ne_of_gt (hsPos t ht)))
+  exact ⟨⟨h12, h21⟩, ⟨fun h2 ↦ h13 (h21 h2), h32⟩⟩
 
 omit [(n : ℕ) → DecidableEq (iota n)] [InnerProductSpace ℝ H]
   [IsScalarTower ℝ ℂ H] [CompleteSpace H]

@@ -1,0 +1,7 @@
+import NCG.Grand.ReflectedEndpointGroundStateTransformExact
+
+#print axioms NCG.ReflectedEndpointGroundState.groundStateTransform_row_sum
+#print axioms NCG.ReflectedEndpointGroundState.weighted_quadratic_bounds
+#print axioms NCG.ReflectedEndpointGroundState.dirichletForm_eq_transferDirichletAction
+#print axioms NCG.ReflectedEndpointGroundState.reflected_endpoint_action_identity
+

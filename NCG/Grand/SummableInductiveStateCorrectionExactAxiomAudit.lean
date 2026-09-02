@@ -1,0 +1,7 @@
+import NCG.Grand.SummableInductiveStateCorrectionExact
+
+#print axioms NCG.SummableInductiveStateCorrection.fixedStage_limit
+#print axioms NCG.SummableInductiveStateCorrection.correctedState
+#print axioms NCG.SummableInductiveStateCorrection.correctedState_succ_compatible
+#print axioms NCG.SummableInductiveStateCorrection.compatibleState_eq_corrected_of_tracking
+#print axioms NCG.SummableInductiveStateCorrection.summableInductiveStateCorrection

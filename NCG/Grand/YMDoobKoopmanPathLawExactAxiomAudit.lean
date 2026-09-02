@@ -1,0 +1,5 @@
+import NCG.Grand.YMDoobKoopmanPathLawExact
+
+#print axioms NCG.YMDoobKoopman.twoSidedCylinderLaw_exists
+#print axioms NCG.YMDoobKoopman.weightedInner_power_eq_stationaryCorrelation
+#print axioms NCG.YMDoobKoopman.ym_doob_koopman_path_law

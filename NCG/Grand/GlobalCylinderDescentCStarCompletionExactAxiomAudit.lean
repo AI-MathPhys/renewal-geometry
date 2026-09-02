@@ -1,0 +1,8 @@
+import NCG.Grand.GlobalCylinderDescentCStarCompletionExact
+
+#print axioms NCG.GlobalCylinderDescent.completedCylinderState_existsUnique
+#print axioms NCG.GlobalCylinderDescent.completedCylinderGNS_contract
+#print axioms NCG.GlobalCylinderDescent.algebraicCylinderState_existsUnique
+#print axioms NCG.GlobalCylinderDescent.incompatibleFiniteFamily_has_tester
+#print axioms NCG.GlobalCylinderDescent.distinctGlobalStates_have_finite_tester
+

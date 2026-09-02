@@ -1,0 +1,4 @@
+import NCG.Grand.UniversalCoerciveCompatibleGNSLimitExact
+
+#print axioms NCG.UniversalCoerciveGNS.compatible_gns_coercive_handoff
+#print axioms NCG.UniversalCoerciveGNS.sharp_head_tail_compatible_gns_handoff

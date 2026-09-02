@@ -601,6 +601,14 @@ import NCG.Grand.OperatorGraphSecondResolventIdentity
 import NCG.Grand.OperatorGraphResolventShiftFunctionalCalculus
 import NCG.Grand.OperatorGraphResolventEulerFunctionalCalculus
 import NCG.Grand.FiniteHermitianOperatorGraphCanonicalHeatSemigroup
+import NCG.Grand.FiniteHermitianSemigroupEndpoint
+import NCG.Grand.FiniteHermitianOperatorGraphCanonicalHeatNonnegative
+import NCG.Grand.VaryingHilbertSemigroupLaplaceConvergence
+import NCG.Grand.FiniteHermitianSemigroupLaplaceResolvent
+import NCG.Grand.FiniteHermitianSemigroupToResolvent
+import NCG.Grand.ResolventHeatMultiplierLaplace
+import NCG.Grand.OperatorGraphResolventHeatLaplace
+import NCG.Grand.FiniteHermitianCanonicalHeatToResolvent
 import NCG.Grand.CollectivelyCompactStrongToNorm
 import NCG.Grand.CollectivelyCompactLimit
 import NCG.Grand.CompactScreenCollectiveCompactness
@@ -868,6 +876,7 @@ import NCG.Flagship.PrincipleCount
 import NCG.Flagship.NoOverstatement
 import NCG.Flagship.DeWittInverse
 import NCG.Flagship.IntrinsicFrameVolumeDeWitt
+import NCG.Grand.IntrinsicFrameDeWittExact
 import NCG.Flagship.CommonAction
 import NCG.Flagship.EinsteinHandoff
 import NCG.Flagship.SMBridge
@@ -1140,7 +1149,24 @@ import NCG.Grand.LocalGaugeActionRigidity
 import NCG.Grand.LoadedSubhierarchy
 import NCG.Grand.CanonicalLoadedSubhierarchyAssembly
 import NCG.Grand.FiniteSMSTLoadedEmergence
+import NCG.Grand.IndependentWhitenedInternalInterventions
+import NCG.Grand.InvariantActionWardStress
 import NCG.Grand.UniversalCoupledActionCarrier
+import NCG.Grand.CoupledSourceSchurNaturality
+import NCG.Grand.OnePointPerronLoadingExact
+import NCG.Grand.QuantitativeRieszProjectionStability
+import NCG.Grand.CanonicalScreenRankStability
+import NCG.Grand.SemigroupSylvesterBound
+import NCG.Grand.SelfAdjointSemigroupBounds
+import NCG.Grand.SupportedCrossLeakage
+import NCG.Grand.CanonicalScreenDavisKahan
+import NCG.Grand.SpectralScreenSemigroup
+import NCG.Grand.GappedThresholdMultiplier
+import NCG.Grand.GappedCanonicalScreen
+import NCG.Grand.GappedCanonicalScreenTransport
+import NCG.Grand.SelfAdjointGapResolvent
+import NCG.Grand.SelfAdjointWeylGap
+import NCG.Grand.GTCanonicalScreenTransportExact
 import NCG.Grand.RegulatedStandardModelAction
 import NCG.Grand.FewOrbitJacobiBound
 import NCG.Grand.FewOrbitFourierPlancherel
@@ -1297,6 +1323,7 @@ import NCG.Grand.CompleteCollarRouterOptimality
 import NCG.Grand.CenteredCoordinateRouterCompiler
 import NCG.Grand.DobrushinInfluencePoissonTail
 import NCG.Grand.FiniteHeatBathDobrushin
+import NCG.Grand.DobrushinSpectralGapBridge
 import NCG.Grand.ModulatedRenewalWalshCoercivity
 import NCG.Grand.SchurMoriProjectedSemigroupExact
 import NCG.Grand.PolarEdgeSingular
@@ -1401,6 +1428,8 @@ import NCG.Grand.AffineLocalFactors
 import NCG.Grand.DimensionRecurrentRoot
 import NCG.Grand.GTPositiveUnitaryDichotomy
 import NCG.Grand.SMActiveResidual
+import NCG.Grand.SMActiveResidualExact
+import NCG.Grand.InternalCommutantNumericalExact
 import NCG.Grand.SMSTRelativeWriter
 import NCG.Grand.RelationalFlatVacuum
 import NCG.Grand.PointFibreHolonomy
@@ -1409,6 +1438,7 @@ import NCG.Grand.LocalRenewalNoAtlas
 import NCG.Grand.GTFusionTower
 import NCG.Grand.FusionAssociatorProductSystemExact
 import NCG.Grand.DimensionActiveExchange
+import NCG.Grand.DimensionActiveExchangeExact
 import NCG.Grand.SMSTUnitWriter
 import NCG.Grand.GTAffineFourier
 import NCG.Grand.GTAffineConnectedBridge
@@ -1678,6 +1708,7 @@ import NCG.Grand.OperationalSobolevWeylFiniteGraph
 import NCG.Grand.SMSTChannelUnitarity
 import NCG.Grand.ProjectionPersistenceTradeoff
 import NCG.Grand.InterchangeActualAudit
+import NCG.Grand.InterchangeBinomialStrongLawExact
 import NCG.Grand.TypedOccurrenceSU4Covariance
 import NCG.Grand.RewardPressureJet
 import NCG.Grand.StarMatrixUnits
@@ -1726,9 +1757,10 @@ import NCG.Grand.AcceptedArithmeticAndAffineConsequences
 import NCG.Grand.WeakClosureAndAncientConstantCounterexamples
 
 -- Registered 2026-08-21: modules present on disk but previously absent from the root import list
--- (two drafts that do not yet compile are deliberately left out: SourceNativeCommonActionExact,
---  FiniteReturnAssemblyAndResponseThreads; FiniteTorusCovariantHeatSemigroupConvergence was
+-- (FiniteReturnAssemblyAndResponseThreads remains an excluded draft;
+--  SourceNativeCommonActionExact and FiniteTorusCovariantHeatSemigroupConvergence were
 --  repaired and registered 2026-08-24)
+import NCG.Grand.SourceNativeCommonActionExact
 import NCG.Grand.BoundedOperatorNormalResolventConvergence
 import NCG.Grand.BoundedWriterComparison
 import NCG.Grand.ContinuumTorusFourierScreen
@@ -1873,6 +1905,7 @@ import NCG.Grand.MultiplicityClosureTransportExact
 import NCG.Grand.UniversalPhysicalContinuumExact
 import NCG.Grand.UniversalLimitAlternativeExact
 import NCG.Grand.RenewalProfileWalshExact
+import NCG.Grand.RenewalSixthOrderResolventLimitExact
 import NCG.Grand.RenewalProfileFieldExact
 import NCG.Grand.RenewalProductAFQuasilocalExact
 import NCG.Grand.RenewalProfileNoncompactExact
@@ -1898,6 +1931,7 @@ import NCG.Grand.MatFunShiftExact
 import NCG.Grand.RelEntropyPerturbExact
 import NCG.Grand.DataProcessingExact
 import NCG.Grand.PetzUnconditionalExact
+import NCG.Grand.PetzEqualityExact
 import NCG.Grand.ResolventFormExact
 import NCG.Grand.BkmKernelExact
 import NCG.Grand.QuadFormConvexExact
@@ -1926,6 +1960,7 @@ import NCG.Grand.GRHBufferedRestoringFloorExact
 import NCG.Grand.SMSTGeneratedResponseSourceExact
 import NCG.Grand.ResponseThreadCompletionExact
 import NCG.Grand.StructurePreservingResponseExact
+import NCG.Grand.DiscreteAubinLionsResponseExact
 import NCG.Grand.TargetRelativeFiniteTimeExact
 import NCG.Grand.MultivariateCLT
 import NCG.Grand.DonskerFiniteDimensional
@@ -2013,6 +2048,8 @@ import NCG.Grand.CompactHaarRankOneAverage
 import NCG.Grand.ColourOrbitHaarExact
 import NCG.Grand.ColourOrbitPositiveQuadrature
 import NCG.Grand.SMYMColourRestrictionExact
+import NCG.Grand.ConcreteStandardModelInvariantVacuum
+import NCG.Grand.ConcreteStandardModelVacuumStationarity
 import NCG.Grand.PermutationSpanExact
 import NCG.Grand.PermCommutantExact
 import NCG.Grand.EdgeCommutantDimensionExact
@@ -2089,6 +2126,7 @@ import NCG.Grand.SMFSOneShellHessianWilsonianCounterexampleExact
 import NCG.Grand.SameOperatorChiralBerezinShell
 import NCG.Grand.FuturePredictiveClassWithoutImmediateReadExact
 import NCG.Grand.DerivedPredictiveCarrierUniversalExact
+import NCG.Grand.RelativeUpstreamPrimitiveClosure
 import NCG.Grand.SMQGDivisorSafePositivityOrderExact
 import NCG.Grand.StaticChannelsDoNotDetermineTerminalGermExact
 import NCG.Grand.UniversalOneFormDiracKernelGrowthExact
@@ -2198,3 +2236,67 @@ import NCG.Grand.AffineRelativeEntropyIntegralRemainderExact
 import NCG.Grand.AffineRelativeEntropyQuadraticRemainderExact
 import NCG.Grand.FaithfulAffineNeighborhoodExact
 import NCG.Grand.DifferentiablePathRelativeEntropyHessianExact
+import NCG.Grand.EmbeddedJointCommutatorCommutant
+import NCG.Grand.ContinuumHoweProtectedCommutantExact
+import NCG.Grand.CoerciveContinuumHoweDualityExact
+import NCG.Grand.CoerciveMultiplicityClosureFiniteAnchorExact
+import NCG.Grand.CentralCharacterQuotientDescentExact
+import NCG.Grand.HDAContinuumPassageExact
+import NCG.Grand.ExplicitRegulatedStandardModelActionExact
+import NCG.Grand.FrozenCertificateCorpusReplayExact
+import NCG.Grand.StandardModelHiggsStabilizerExact
+import NCG.Grand.FiniteStandardModelSourceNativeEmergenceExact
+import NCG.Grand.FiniteCTMCPathLikelihoodExact
+import NCG.Grand.CoarseCTMCPathKLPythagorasExact
+import NCG.Grand.ContinuousRenewalCompletionTimeExact
+import NCG.Grand.ReflectedEndpointGroundStateTransformExact
+import NCG.Grand.GNSPrimitiveWriterSaturationExact
+import NCG.Grand.DenseGNSObservableLimitExact
+import NCG.Grand.RenewalSpectatorProductCompleteExact
+import NCG.Grand.GlobalCylinderDescentCStarCompletionExact
+import NCG.Grand.SummableInductiveStateCorrectionExact
+import NCG.Grand.HodgeFiniteResolutionMemoryCompleteExact
+import NCG.Grand.OperationalTrivialityGNSDensityExact
+import NCG.Grand.UniversalCoerciveCompatibleGNSLimitExact
+import NCG.Grand.PrototypeWardPhysicalTimeMoscoClosureExact
+import NCG.Grand.ProjectedLikelihoodSingularIntervalSharpExact
+import NCG.Grand.CoerciveContinuumHoweDualityExactAxiomAudit
+import NCG.Grand.SourceCoreSemigroupUnboundedExact
+import NCG.Grand.SourceCoreSemigroupUnboundedExactAxiomAudit
+import NCG.Grand.HilbertSourceGramTransportExact
+import NCG.Grand.HilbertSourceGramTransportExactAxiomAudit
+import NCG.Grand.SourceCorePythagorasUnboundedExact
+import NCG.Grand.SourceCorePythagorasUnboundedExactAxiomAudit
+import NCG.Grand.ClosedRangeMoorePenrose
+import NCG.Grand.CommonActionHilbertClosedRangeExact
+import NCG.Grand.CommonActionHilbertClosedRangeExactAxiomAudit
+import NCG.Grand.RankTwoFourierCarrierExact
+import NCG.Grand.ShellActionSymmetryInheritanceExact
+import NCG.Grand.StrictHiggsYukawaCovarianceExact
+import NCG.Grand.UniversalPhysicalContinuumRealizationExact
+import NCG.Grand.UniversalPhysicalContinuumRealizationExactAxiomAudit
+import NCG.Grand.RenewalRegenerativeContinuumAssemblyExact
+import NCG.Grand.RenewalRegenerativeContinuumAssemblyExactAxiomAudit
+import NCG.Grand.RenewalPositivePhysicalContinuumExact
+import NCG.Grand.RenewalPositivePhysicalContinuumExactAxiomAudit
+import NCG.Grand.UniversalLimitTypedWitnessAlternativeExact
+import NCG.Grand.UniversalLimitTypedWitnessAlternativeExactAxiomAudit
+import NCG.Grand.PalatiniConnectionVariationExact
+import NCG.Grand.PalatiniConnectionVariationExactAxiomAudit
+import NCG.Grand.TargetRelativeEinsteinMatterResponseExact
+import NCG.Grand.TargetRelativeEinsteinMatterResponseExactAxiomAudit
+import NCG.Grand.BSDDeterminantLineBridgeExact
+import NCG.Grand.BSDDeterminantLineBridgeExactAxiomAudit
+import NCG.Grand.YMDoobKoopmanPathLawExact
+import NCG.Grand.YMDoobKoopmanPathLawExactAxiomAudit
+import NCG.Grand.CommonReversibleFieldReactionSlabExact
+import NCG.Grand.CommonReversibleFieldReactionSlabExactAxiomAudit
+import NCG.Grand.BoundaryResponseGaussianNormalCollarExact
+import NCG.Grand.BoundaryResponseGaussianNormalCollarExactAxiomAudit
+import NCG.Grand.DobrushinProjectiveContinuumExact
+import NCG.Grand.DobrushinProjectiveContinuumExactAxiomAudit
+import NCG.Grand.FiniteFieldShellCompilerExact
+import NCG.Grand.FiniteWeightedLocalityAlternativeExact
+import NCG.Grand.FiniteFieldShellCompilerExactAxiomAudit
+import NCG.Grand.TypedFiniteWeilRankTraceCertificateExact
+import NCG.Grand.TypedFiniteWeilRankTraceCertificateExactAxiomAudit

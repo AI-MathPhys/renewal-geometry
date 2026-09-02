@@ -1,0 +1,4 @@
+import NCG.Grand.UniversalLimitTypedWitnessAlternativeExact
+
+#print axioms NCG.UniversalLimit.classify_typed_profile
+#print axioms NCG.UniversalLimit.typed_universal_limit_alternative

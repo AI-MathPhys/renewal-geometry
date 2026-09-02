@@ -45,6 +45,36 @@ theorem resolvent_tendsto_of_tendsto
     Tendsto (fun i ↦ resolvent (aSeq i) z) l (𝓝 (resolvent a z)) := by
   exact (spectrum.hasFDerivAt_resolvent hz).continuousAt.tendsto.comp ha
 
+/-- Quantitative one-step Neumann stability of the resolvent set. -/
+theorem mem_resolventSet_of_norm_resolvent_mul_norm_sub_lt_one
+    (a b : A) (z : K) (hz : z ∈ resolventSet K a)
+    (hsmall : ‖resolvent a z‖ * ‖a - b‖ < 1) :
+    z ∈ resolventSet K b := by
+  have hmul : ‖resolvent a z * (a - b)‖ < 1 :=
+    (norm_mul_le _ _).trans_lt hsmall
+  have hunitCorrection : IsUnit (1 + resolvent a z * (a - b)) := by
+    rw [show 1 + resolvent a z * (a - b) =
+      1 - (-(resolvent a z * (a - b))) by rw [sub_neg_eq_add]]
+    apply isUnit_one_sub_of_norm_lt_one
+    simpa using hmul
+  have hfactor :
+      algebraMap K A z - b =
+        (algebraMap K A z - a) *
+          (1 + resolvent a z * (a - b)) := by
+    calc
+      algebraMap K A z - b =
+          (algebraMap K A z - a) + (a - b) := by abel
+      _ = (algebraMap K A z - a) * 1 +
+          ((algebraMap K A z - a) * resolvent a z) * (a - b) := by
+        rw [mul_one, show (algebraMap K A z - a) * resolvent a z = 1 by
+          exact Ring.mul_inverse_cancel _ hz, one_mul]
+      _ = (algebraMap K A z - a) *
+          (1 + resolvent a z * (a - b)) := by
+        rw [mul_add, mul_one, mul_assoc]
+  change IsUnit (algebraMap K A z - b)
+  rw [hfactor]
+  exact hz.mul hunitCorrection
+
 /-- Every node in a finite subset of the limit resolvent set remains a resolvent point
 simultaneously at all sufficiently late stages. -/
 theorem eventually_forall_mem_resolventSet_of_tendsto

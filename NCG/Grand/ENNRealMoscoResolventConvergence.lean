@@ -38,6 +38,16 @@ def CofinalMoscoConverges
   ∀ (φ : ℕ → ℕ), Tendsto φ atTop atTop →
     (J.reindex φ).MoscoConverges (fun n ↦ q (φ n)) qlim
 
+/-- Cofinal Mosco convergence remains cofinal after any cofinal reindexing. -/
+theorem CofinalMoscoConverges.reindex
+    {q : (n : ℕ) → Hn n → ℝ≥0∞} {qlim : H → ℝ≥0∞}
+    (hmosco : J.CofinalMoscoConverges q qlim)
+    (φ : ℕ → ℕ) (hφ : Tendsto φ atTop atTop) :
+    (J.reindex φ).CofinalMoscoConverges (fun n ↦ q (φ n)) qlim := by
+  intro ψ hψ
+  simpa only [System.reindex, Function.comp_def] using
+    hmosco (φ ∘ ψ) (hφ.comp hψ)
+
 /-- A bounded ENNReal liminf inequality descends through `toReal`. -/
 theorem toReal_le_liminf_toReal_of_bounded
     {u : ℕ → ℝ≥0∞} {a b : ℝ≥0∞}

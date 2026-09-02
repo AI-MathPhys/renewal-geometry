@@ -102,7 +102,7 @@ theorem source_native_common_action_exact {h q : ℕ}
         controlJet Sgeo = controlJet Sclk)
     ∧ ((3 : ℝ) - 1)⁻¹ = 1 / 2
     ∧ (∀ p : ℝ, IsGreatest
-        (Set.range fun v : ℝ ⇒ p * v - chi / 2 * v ^ 2)
+        (Set.range fun v : ℝ ↦ p * v - chi / 2 * v ^ 2)
         (p ^ 2 / (2 * chi)))
     ∧ (∀ LambdaH sqrtq kinetic curvature : ℝ,
         hamiltonianADM chi LambdaH sqrtq kinetic curvature =
