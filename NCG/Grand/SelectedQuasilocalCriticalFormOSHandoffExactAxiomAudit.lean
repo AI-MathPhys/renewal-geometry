@@ -1,0 +1,7 @@
+import NCG.Grand.SelectedQuasilocalCriticalFormOSHandoffExact
+
+/-! Axiom audit for the selected critical-form OS handoff. -/
+
+#print axioms NCG.SelectedQuasilocalCriticalFormOSHandoff.assemble_selected_quasilocal_critical_form_OS_sector
+#print axioms NCG.SelectedQuasilocalCriticalFormOSHandoff.selected_quasilocal_critical_form_OS_handoff
+#print axioms NCG.SelectedQuasilocalCriticalFormOSHandoff.selected_handoff_endpoint_properties

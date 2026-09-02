@@ -47,15 +47,22 @@ instance unitaryBlockAddCommGroup (D : MatrixBlockDecomposition G)
     (i : Fin D.count) : AddCommGroup (UnitaryBlockCarrier D i) :=
   (unitaryBlockEquiv D i).addCommGroup
 
+/-- The coordinate equivalence after transporting the additive structure. -/
+def unitaryBlockAddEquiv (D : MatrixBlockDecomposition G)
+    (i : Fin D.count) :
+    UnitaryBlockCarrier D i ≃+ (Fin (D.dimension i) → ℂ) where
+  toEquiv := unitaryBlockEquiv D i
+  map_add' _ _ := rfl
+
 instance unitaryBlockModule (D : MatrixBlockDecomposition G)
     (i : Fin D.count) : Module ℂ (UnitaryBlockCarrier D i) :=
-  (unitaryBlockEquiv D i).module ℂ
+  (unitaryBlockAddEquiv D i).module ℂ
 
 /-- Coordinate identification of the wrapped block with its matrix carrier. -/
 def unitaryBlockCoordEquiv (D : MatrixBlockDecomposition G)
     (i : Fin D.count) :
     UnitaryBlockCarrier D i ≃ₗ[ℂ] (Fin (D.dimension i) → ℂ) :=
-  (unitaryBlockEquiv D i).linearEquiv ℂ
+  (unitaryBlockAddEquiv D i).linearEquiv ℂ
 
 /-- The averaged Hermitian form transported to the type-distinct carrier. -/
 @[instance_reducible] noncomputable def unitaryBlockInnerProductCore

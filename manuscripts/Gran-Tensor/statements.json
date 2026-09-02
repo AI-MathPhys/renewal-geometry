@@ -15130,8 +15130,38 @@
     "env": "theorem",
     "title": "Essential-image trichotomy",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: ANALYTIC - Separable compact-resolvent operators, quasidiagonality, Toeplitz triple.",
+    "lean": [
+      "NCG.SpectralCompression.compress_mul_sub_mul_compress",
+      "NCG.SpectralCompression.compress_star_mul_sub_mul_compress",
+      "NCG.SpectralCompression.norm_compress_star_mul_defect",
+      "NCG.SpectralCompression.norm_compress_mul_star_defect",
+      "NCG.SpectralCompression.norm_compression_defect_le",
+      "NCG.tendsto_l2FinsetScreen_range_apply",
+      "NCG.tendsto_screenCompression_l2FinsetScreen_range_apply",
+      "NCG.canonical_screenCompression_isCompactOperator",
+      "NCG.tendsto_product_screenCompressions_apply",
+      "NCG.tendsto_screenCompression_multiplicativity_defect_apply",
+      "NCG.ToeplitzScreenObstruction.unilateralShift_basisVector",
+      "NCG.ToeplitzScreenObstruction.norm_unilateralShift",
+      "NCG.ToeplitzScreenObstruction.screenShiftCommutator_apply_boundary",
+      "NCG.ToeplitzScreenObstruction.one_le_norm_screenShiftCommutator",
+      "NCG.ToeplitzScreenObstruction.not_tendsto_screenShiftCommutator_norm_zero",
+      "NCG.ToeplitzScreenObstruction.numberResolvent_isCompactOperator",
+      "NCG.ToeplitzScreenObstruction.numberOperator_dense_domain",
+      "NCG.ToeplitzScreenObstruction.numberOperator_compact_resolvent",
+      "NCG.ToeplitzScreenObstruction.numberOperator_apply_coordinate",
+      "NCG.ToeplitzScreenObstruction.numberOperator_comm_unilateralShift_basisVector",
+      "NCG.ToeplitzScreenObstruction.diagonal_on_basis_of_commutes_numberOperator",
+      "NCG.ToeplitzScreenObstruction.diagonalSupport_finite_of_finiteDimensional_range",
+      "NCG.ToeplitzScreenObstruction.diagonalIdempotent_eq_l2FinsetScreen",
+      "NCG.ToeplitzScreenObstruction.one_le_norm_commutator_of_finiteRank_idempotent_commutes_numberOperator",
+      "NCG.FiniteDiracCalibratedUnitaryCurveExact.finiteSpectralization_dirac_controlled_unitary_tangent",
+      "NCG.FiniteSpectralPacketGradingRealOperationsExact.Packet.finiteSpectralization_grading_real_operations_exact",
+      "NCG.SpectralCompression.normMultiplicativeAlong_iff_quasidiagonalAlong",
+      "NCG.FiniteCStarAlgebraControlledUnitaryGenerationExact.exists_finite_controlled_unitary_spanning_family",
+      "NCG.FiniteSpectralCommutatorGramCarrierExact.finite_spectral_commutator_gram_carrier_exact"
+    ],
+    "note": "PARTIAL EXACT (2026-09-01): NCG/Grand/SpectralCompressionMultiplicativityExact.lean proves SP.28 and the C-star positive-square corner identities. SpectralCompressionStrictQuasidiagonalEquivalenceExact.lean completes the filter-level equivalence: norm multiplicativity of all compressed products is iff both off-diagonal corners vanish, deriving the norm-one projection bound internally. L2FiniteCoordinateScreensStrongConvergenceExact.lean proves canonical finite-rank l2 screens converge strongly, every bounded-operator compression and compressed product converges strongly, and multiplicativity defects vanish strongly. The Toeplitz modules construct the unilateral shift and densely defined number operator, prove compact two-sided resolvent, Nx has coordinate n*x_n, [N,S]e_n=S e_n, and diagonalize bounded operators commuting with N on the standard core. ToeplitzFiniteRankDiagonalProjectionExact.lean derives finite support from finite-dimensional range, identifies every finite-rank diagonal idempotent with an actual coordinate screen, and proves every nonzero finite-rank idempotent commuting with N has shift-commutator norm at least one. Thus the strict norm-monoidal iff and explicit properness witness (I3) are complete. The finite marked construction has also advanced exactly: FiniteCStarAlgebraControlledUnitaryGenerationExact.lean constructs a finite target-specific unitary bank spanning every finite-dimensional C-star coefficient algebra; FiniteDiracCalibratedUnitaryCurveExact.lean recovers every finite spectralization Dirac matrix as the phase-corrected derivative at zero of an explicit two-sided unitary exponential curve; FiniteSpectralPacketGradingRealOperationsExact.lean promotes the grading to a self-adjoint unitary involution and the real matrix to an involutive conjugate-linear port commuting with D and gamma and implementing the opposite representation; and FiniteSpectralCommutatorGramCarrierExact.lean constructs the positive Hilbert-Schmidt commutator Gram, identifies its exact null space, and proves its square-root carrier is rank-minimal among every finite realization. Audited with standard Mathlib axioms only. Remaining for the full manuscript theorem: these exact target layers must still be joined to finite comb tomography/support reduction to produce a legitimate finite marked Renewal object (I1), and arbitrary separable compact-resolvent packets must be transported to finite spectral screens with marked realization (I2). TRIAGE-EXACT: ANALYTIC - Separable compact-resolvent operators and categorical essential-image identification.",
     "difficulty": "hard_analytic_research"
   },
   "thm:GT-NCG-finite-Euclidean-landing": {
@@ -15504,9 +15534,13 @@
   "thm:GTLOC-selected-handoff": {
     "env": "theorem",
     "title": "Conditional quasilocal critical-form OS handoff",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: ANALYTIC - Mega-handoff invoking inherited OS reconstruction on an interacting continuum sector.",
+    "status": "proved",
+    "lean": [
+      "NCG.SelectedQuasilocalCriticalFormOSHandoff.assemble_selected_quasilocal_critical_form_OS_sector",
+      "NCG.SelectedQuasilocalCriticalFormOSHandoff.selected_quasilocal_critical_form_OS_handoff",
+      "NCG.SelectedQuasilocalCriticalFormOSHandoff.selected_handoff_endpoint_properties"
+    ],
+    "note": "Exact conditional handoff in NCG/Grand/SelectedQuasilocalCriticalFormOSHandoffExact.lean, imported against the concrete quasilocal OS completion layer. H1--H9 are nine distinct evidence types and are all consumed by the inherited reconstruction. The endpoint carries separate selected, quasilocal, pair-complete, and interacting proofs. It deliberately contains no complete-local-net or exhaustive-QFT field, preserving the manuscript's source-completeness/fibre-elimination firewall. All audited declarations are axiom-free.",
     "difficulty": "hard_analytic_research"
   },
   "thm:GTLOC-target-local-contact": {
@@ -15538,9 +15572,13 @@
   "thm:GTLOC-terminating-alternative": {
     "env": "theorem",
     "title": "Finite weighted-locality alternative",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: ANALYTIC - Thirteen-branch audit ending in the continuum OS reconstruction clause.",
+    "status": "proved",
+    "lean": [
+      "NCG.FiniteWeightedLocalityAlternative.compile",
+      "NCG.FiniteWeightedLocalityAlternative.compile_reconstruction_iff",
+      "NCG.FiniteWeightedLocalityAlternative.finite_weighted_locality_alternative"
+    ],
+    "note": "Exact executable encoding in NCG/Grand/FiniteWeightedLocalityAlternativeExact.lean. The twelve preliminary outcomes are checked in manuscript order; every returned branch stores its typed witness and proofs that all earlier branches were inapplicable. The thirteenth branch is produced by the packet coverage theorem and carries the inherited selected reconstruction certificate. The iff theorem proves that reconstruction occurs exactly when none of A1--A12 applies. The output type deliberately contains neither a global-decay conclusion nor an endpoint-to-route promotion, preserving both manuscript firewalls. Axiom audit: compile is axiom-free; the iff and aggregate theorem use only propext.",
     "difficulty": "hard_analytic_research"
   },
   "thm:GTLOC-weighted-Cauchy": {

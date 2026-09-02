@@ -1,0 +1,10 @@
+import NCG.Grand.ToeplitzUnilateralShiftScreenObstructionExact
+
+/-! Axiom audit for the unilateral-shift finite-screen obstruction. -/
+
+#print axioms NCG.ToeplitzScreenObstruction.shiftedBasis_orthonormal
+#print axioms NCG.ToeplitzScreenObstruction.unilateralShift_basisVector
+#print axioms NCG.ToeplitzScreenObstruction.norm_unilateralShift
+#print axioms NCG.ToeplitzScreenObstruction.screenShiftCommutator_apply_boundary
+#print axioms NCG.ToeplitzScreenObstruction.one_le_norm_screenShiftCommutator
+#print axioms NCG.ToeplitzScreenObstruction.not_tendsto_screenShiftCommutator_norm_zero

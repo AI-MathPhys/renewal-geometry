@@ -1,0 +1,3 @@
+import NCG.Grand.SpectralCompressionStrictQuasidiagonalEquivalenceExact
+
+#print axioms NCG.SpectralCompression.normMultiplicativeAlong_iff_quasidiagonalAlong
