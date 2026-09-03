@@ -1,0 +1,27 @@
+/-
+Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Aurélien Pélissier
+-/
+import NCG.Grand.FiniteOrderedMarkovMarginalExact
+
+#print axioms NCG.FiniteOrderedMarkovMarginal.sum_tailWeight_insert_after_prefix
+#print axioms NCG.FiniteOrderedMarkovMarginal.sum_chainWeight_insert_after_prefix
+#print axioms NCG.FiniteOrderedMarkovMarginal.sum_finChainWeight
+#print axioms NCG.FiniteOrderedMarkovMarginal.sum_finChainWeight_insertNth
+#print axioms NCG.FiniteOrderedMarkovMarginal.sum_finChainWeight_of_rowStochastic
+#print axioms NCG.FiniteOrderedMarkovMarginal.finChainLaw_apply_singleton
+#print axioms NCG.FiniteOrderedMarkovMarginal.finChainLaw_map_removeNth
+#print axioms NCG.FiniteOrderedMarkovMarginal.finChainLaw_isProbabilityMeasure
+#print axioms NCG.FiniteOrderedMarkovMarginal.finChainLaw_isProbabilityMeasure_of_weights
+#print axioms NCG.FiniteOrderedMarkovMarginal.generatorKernel_chapman
+#print axioms NCG.FiniteOrderedMarkovMarginal.sum_generator_chainWeight_insert_after_prefix
+#print axioms NCG.FiniteOrderedMarkovMarginal.evolvedEntrance_sum
+#print axioms NCG.FiniteOrderedMarkovMarginal.evolvedEntrance_consistent
+#print axioms NCG.FiniteOrderedMarkovMarginal.tailWeight_generator_nonnegative_of_ordered
+#print axioms NCG.FiniteOrderedMarkovMarginal.evolved_generator_chainWeight_nonnegative_of_ordered
+#print axioms NCG.FiniteOrderedMarkovMarginal.evolved_generator_finChainWeight_nonnegative
+#print axioms NCG.FiniteOrderedMarkovMarginal.evolvedGeneratorFinChainLaw_isProbabilityMeasure
+#print axioms NCG.FiniteOrderedMarkovMarginal.sum_evolved_generator_chainWeight_insert_after_prefix
+#print axioms NCG.FiniteOrderedMarkovMarginal.sum_evolved_generator_finChainWeight_insertNth
+#print axioms NCG.FiniteOrderedMarkovMarginal.evolvedGeneratorFinChainLaw_map_removeNth

@@ -1,0 +1,5 @@
+import NCG.Grand.CompactResolventDiracSpectralScreensExact
+
+open NCG.CompactResolventDiracSpectralScreensExact
+
+#print axioms compactResolventSpectralTriple_has_cofinal_finiteDiracScreens

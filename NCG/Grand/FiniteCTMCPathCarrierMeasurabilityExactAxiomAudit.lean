@@ -1,0 +1,9 @@
+import NCG.Grand.FiniteCTMCPathCarrierMeasurabilityExact
+
+#print axioms NCG.FiniteCTMCPathCarrierMeasurability.measurable_cumulativeJumpTime
+#print axioms NCG.FiniteCTMCPathCarrierMeasurability.measurableSet_positiveHoldingSet
+#print axioms NCG.FiniteCTMCPathCarrierMeasurability.measurableSet_nonexplosiveHoldingSet
+#print axioms NCG.FiniteCTMCPathCarrierMeasurability.measurableSet_admissibleJumpSequenceSet
+#print axioms NCG.FiniteCTMCPathCarrierMeasurability.real_nonexplosion_of_mem
+#print axioms NCG.FiniteCTMCPathCarrierMeasurability.clockOfAdmissible
+#print axioms NCG.FiniteCTMCPathCarrierMeasurability.cadlagPathOfAdmissible_regular

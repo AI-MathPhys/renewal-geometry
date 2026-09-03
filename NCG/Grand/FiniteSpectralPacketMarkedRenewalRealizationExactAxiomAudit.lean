@@ -1,0 +1,3 @@
+import NCG.Grand.FiniteSpectralPacketMarkedRenewalRealizationExact
+
+#print axioms NCG.FiniteSpectralPacketMarkedRenewalRealizationExact.finiteSpectralPacket_has_finiteMarkedRenewalRealization

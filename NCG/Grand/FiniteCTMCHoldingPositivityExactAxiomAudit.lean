@@ -1,0 +1,6 @@
+import NCG.Grand.FiniteCTMCHoldingPositivityExact
+
+#print axioms NCG.FiniteCTMCHoldingPositivity.expMeasure_Ioi_zero_eq_one
+#print axioms NCG.FiniteCTMCHoldingPositivity.holdingDestinationMeasure_positive_eq_one
+#print axioms NCG.FiniteCTMCHoldingPositivity.jumpSequenceLaw_physicalHold_positive_eq_one
+#print axioms NCG.FiniteCTMCHoldingPositivity.jumpSequenceLaw_positiveHoldingSet_eq_one

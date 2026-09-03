@@ -1,0 +1,11 @@
+import NCG.Grand.PerronBorderedEigenSystemExact
+
+/-! Axiom audit for the bordered Perron eigenvalue system. -/
+
+#print axioms NCG.PerronBorderedEigenSystem.bordered_homogeneous_unique
+#print axioms NCG.PerronBorderedEigenSystem.borderedOperator_injective
+#print axioms NCG.PerronBorderedEigenSystem.borderedOperator_bijective
+#print axioms NCG.PerronBorderedEigenSystem.borderedContinuousOperator_isInvertible
+#print axioms NCG.PerronBorderedEigenSystem.irreducibleMetzler_bordered_homogeneous_unique
+#print axioms NCG.PerronBorderedEigenSystem.irreducibleMetzler_borderedOperator_bijective
+#print axioms NCG.PerronBorderedEigenSystem.irreducibleMetzler_borderedContinuousOperator_isInvertible

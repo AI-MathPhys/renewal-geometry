@@ -1,0 +1,5 @@
+import NCG.Grand.ExponentialTiltWindowConcentrationExact
+
+#print axioms NCG.ExponentialTiltWindowConcentration.tiltedMass_Ioo_eq_one_sub_tails
+#print axioms NCG.ExponentialTiltWindowConcentration.tiltedMass_Ioo_tendsto_one_of_tails
+#print axioms NCG.ExponentialTiltWindowConcentration.exposed_tiltedWindow_tendsto_one

@@ -1,0 +1,16 @@
+/-
+Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Aurélien Pélissier
+-/
+import NCG.Grand.FiniteGeneratorProjectiveFamilyExact
+
+#print axioms NCG.FiniteGeneratorProjectiveFamily.orderedTimes_monotone
+#print axioms NCG.FiniteGeneratorProjectiveFamily.removeNth_orderedTimesWithCard_insert
+#print axioms NCG.FiniteGeneratorProjectiveFamily.restrict_orderedStateEquivWithCard_insert
+#print axioms NCG.FiniteGeneratorProjectiveFamily.finiteTimeLaw_apply_singleton
+#print axioms NCG.FiniteGeneratorProjectiveFamily.finiteTimeLaw_isProbabilityMeasure
+#print axioms NCG.FiniteGeneratorProjectiveFamily.finiteTimeLaw_insert_projective
+#print axioms NCG.FiniteGeneratorProjectiveFamily.finiteTimeLaw_union_projective
+#print axioms NCG.FiniteGeneratorProjectiveFamily.finiteTimeLaw_isProjectiveMeasureFamily
+#print axioms NCG.FiniteGeneratorProjectiveFamily.exists_generator_process_measure

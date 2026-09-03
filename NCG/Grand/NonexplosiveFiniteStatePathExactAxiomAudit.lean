@@ -1,0 +1,16 @@
+import NCG.Grand.NonexplosiveFiniteStatePathExact
+
+#print axioms NCG.NonexplosiveFiniteStatePath.Clock.cumulativeHold_strictMono
+#print axioms NCG.NonexplosiveFiniteStatePath.jumpIndex_lt_nextJump
+#print axioms NCG.NonexplosiveFiniteStatePath.earlierJump_le_time
+#print axioms NCG.NonexplosiveFiniteStatePath.jumpIndex_mono
+#print axioms NCG.NonexplosiveFiniteStatePath.jumpIndex_eq_on_right_window
+#print axioms NCG.NonexplosiveFiniteStatePath.jumpIndex_eq_of_between
+#print axioms NCG.NonexplosiveFiniteStatePath.jumpIndex_leftLocallyConstant
+#print axioms NCG.NonexplosiveFiniteStatePath.realizedState_rightLocallyConstant
+#print axioms NCG.NonexplosiveFiniteStatePath.realizedState_leftLocallyConstant
+#print axioms NCG.NonexplosiveFiniteStatePath.realizedCadlagStepPath
+#print axioms NCG.NonexplosiveFiniteStatePath.realizedState_finiteHorizon_index_bound
+#print axioms NCG.NonexplosiveFiniteStatePath.realizedJumpSequenceState_rightLocallyConstant
+#print axioms NCG.NonexplosiveFiniteStatePath.realizedJumpSequenceState_leftLocallyConstant
+#print axioms NCG.NonexplosiveFiniteStatePath.cadlagStepPathOfJumpSequence

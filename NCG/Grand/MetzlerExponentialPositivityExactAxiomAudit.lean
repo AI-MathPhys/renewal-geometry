@@ -1,0 +1,21 @@
+/-
+Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Aurélien Pélissier
+-/
+import NCG.Grand.MetzlerExponentialPositivityExact
+
+/-! Axiom audit for finite Metzler exponential positivity. -/
+
+#print axioms NCG.MetzlerExponentialPositivity.diagonalShift_entrywiseNonnegative
+#print axioms NCG.MetzlerExponentialPositivity.canonicalDiagonalShift_entrywiseNonnegative
+#print axioms NCG.MetzlerExponentialPositivity.exponentialEntry_eq_shift
+#print axioms NCG.MetzlerExponentialPositivity.exponentialEntry_smul_entrywiseNonnegative_of_offDiag
+#print axioms NCG.MetzlerExponentialPositivity.tiltedGenerator_exponentialEntry_nonnegative
+#print axioms NCG.MetzlerExponentialPositivity.exponentialEntry_pos_of_power_pos
+#print axioms NCG.MetzlerExponentialPositivity.exponentialEntry_smul_pos_of_irreducible
+#print axioms NCG.MetzlerExponentialPositivity.exponentialEntry_smul_pos_of_irreducibleMetzler
+#print axioms NCG.MetzlerExponentialPositivity.IsIrreducibleMetzler.exists_pos_eigenvector
+#print axioms NCG.MetzlerExponentialPositivity.IsIrreducibleMetzler.eigenvalue_eq_of_pos_eigenvectors
+#print axioms NCG.MetzlerExponentialPositivity.IsIrreducibleMetzler.exists_eq_smul_of_mulVec_eq_smul
+#print axioms NCG.MetzlerExponentialPositivity.tiltedGenerator_strictKernel_and_perron

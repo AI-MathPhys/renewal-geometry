@@ -1,0 +1,3 @@
+import NCG.Grand.TrajectoryKernelAlmostSureEventExact
+
+#print axioms NCG.TrajectoryKernelAlmostSureEvent.trajMeasure_next_mem_eq_one

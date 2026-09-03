@@ -1,0 +1,5 @@
+import NCG.Grand.SCGFExponentialTightnessExact
+
+#print axioms NCG.SCGFExponentialTightness.originalMass_mono
+#print axioms NCG.SCGFExponentialTightness.originalMass_compl_Icc_le_closedTails
+#print axioms NCG.SCGFExponentialTightness.exists_compactInterval_exponential_tightness

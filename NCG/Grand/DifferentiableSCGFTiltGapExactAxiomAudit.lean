@@ -1,0 +1,7 @@
+import NCG.Grand.DifferentiableSCGFTiltGapExact
+
+#print axioms NCG.DifferentiableSCGFTiltGap.eventually_right_tilt_gap
+#print axioms NCG.DifferentiableSCGFTiltGap.eventually_left_tilt_gap
+#print axioms NCG.DifferentiableSCGFTiltGap.exists_positive_right_tilt_gap
+#print axioms NCG.DifferentiableSCGFTiltGap.exists_negative_left_tilt_gap
+

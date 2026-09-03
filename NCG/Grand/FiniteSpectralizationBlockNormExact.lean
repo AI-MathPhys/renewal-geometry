@@ -19,52 +19,52 @@ namespace NCG.FiniteSpectralizationBlockNormExact
 
 noncomputable section
 
-variable {I J : Type*} [Fintype I] [Fintype J]
+variable {K I J : Type*} [RCLike K] [Fintype I] [Fintype J]
   [DecidableEq I] [DecidableEq J]
 
 abbrev euclideanCLM {M N : Type*} [Fintype M] [Fintype N]
     [DecidableEq M] [DecidableEq N]
-    (A : Matrix M N ℂ) :
-    EuclideanSpace ℂ N →L[ℂ] EuclideanSpace ℂ M :=
+    (A : Matrix M N K) :
+    EuclideanSpace K N →L[K] EuclideanSpace K M :=
   (Matrix.toEuclideanLin.trans LinearMap.toContinuousLinearMap) A
 
-def leftPart (z : EuclideanSpace ℂ (I ⊕ J)) : EuclideanSpace ℂ I :=
+def leftPart (z : EuclideanSpace K (I ⊕ J)) : EuclideanSpace K I :=
   WithLp.toLp 2 (fun i => z (Sum.inl i))
 
-def rightPart (z : EuclideanSpace ℂ (I ⊕ J)) : EuclideanSpace ℂ J :=
+def rightPart (z : EuclideanSpace K (I ⊕ J)) : EuclideanSpace K J :=
   WithLp.toLp 2 (fun j => z (Sum.inr j))
 
-def leftEmbed (x : EuclideanSpace ℂ I) : EuclideanSpace ℂ (I ⊕ J) :=
+def leftEmbed (x : EuclideanSpace K I) : EuclideanSpace K (I ⊕ J) :=
   WithLp.toLp 2 (Sum.elim (fun i => x i) (fun _ => 0))
 
-theorem norm_sq_split (z : EuclideanSpace ℂ (I ⊕ J)) :
+theorem norm_sq_split (z : EuclideanSpace K (I ⊕ J)) :
     ‖z‖ ^ 2 = ‖leftPart z‖ ^ 2 + ‖rightPart z‖ ^ 2 := by
   simp only [EuclideanSpace.norm_sq_eq, leftPart, rightPart]
   rw [Fintype.sum_sum_type]
 
-@[simp] theorem leftPart_leftEmbed (x : EuclideanSpace ℂ I) :
-    leftPart (leftEmbed x : EuclideanSpace ℂ (I ⊕ J)) = x := by
+@[simp] theorem leftPart_leftEmbed (x : EuclideanSpace K I) :
+    leftPart (leftEmbed x : EuclideanSpace K (I ⊕ J)) = x := by
   apply WithLp.ofLp_injective
   rfl
 
-@[simp] theorem rightPart_leftEmbed (x : EuclideanSpace ℂ I) :
-    rightPart (leftEmbed x : EuclideanSpace ℂ (I ⊕ J)) = 0 := by
+@[simp] theorem rightPart_leftEmbed (x : EuclideanSpace K I) :
+    rightPart (leftEmbed x : EuclideanSpace K (I ⊕ J)) = 0 := by
   apply WithLp.ofLp_injective
   funext j
   rfl
 
-@[simp] theorem norm_leftEmbed (x : EuclideanSpace ℂ I) :
-    ‖(leftEmbed x : EuclideanSpace ℂ (I ⊕ J))‖ = ‖x‖ := by
+@[simp] theorem norm_leftEmbed (x : EuclideanSpace K I) :
+    ‖(leftEmbed x : EuclideanSpace K (I ⊕ J))‖ = ‖x‖ := by
   apply (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
   rw [norm_sq_split, leftPart_leftEmbed, rightPart_leftEmbed, norm_zero,
     zero_pow, add_zero]
   omega
 
-def offDiagonal (B : Matrix J I ℂ) : Matrix (I ⊕ J) (I ⊕ J) ℂ :=
+def offDiagonal (B : Matrix J I K) : Matrix (I ⊕ J) (I ⊕ J) K :=
   Matrix.fromBlocks 0 (-Bᴴ) B 0
 
-theorem offDiagonal_apply_leftPart (B : Matrix J I ℂ)
-    (z : EuclideanSpace ℂ (I ⊕ J)) :
+theorem offDiagonal_apply_leftPart (B : Matrix J I K)
+    (z : EuclideanSpace K (I ⊕ J)) :
     leftPart (euclideanCLM (offDiagonal B) z) =
       euclideanCLM (-Bᴴ) (rightPart z) := by
   apply WithLp.ofLp_injective
@@ -78,8 +78,8 @@ theorem offDiagonal_apply_leftPart (B : Matrix J I ℂ)
   rw [Fintype.sum_sum_type]
   simp [offDiagonal]
 
-theorem offDiagonal_apply_rightPart (B : Matrix J I ℂ)
-    (z : EuclideanSpace ℂ (I ⊕ J)) :
+theorem offDiagonal_apply_rightPart (B : Matrix J I K)
+    (z : EuclideanSpace K (I ⊕ J)) :
     rightPart (euclideanCLM (offDiagonal B) z) =
       euclideanCLM B (leftPart z) := by
   apply WithLp.ofLp_injective
@@ -93,15 +93,15 @@ theorem offDiagonal_apply_rightPart (B : Matrix J I ℂ)
   rw [Fintype.sum_sum_type]
   simp [offDiagonal]
 
-theorem offDiagonal_apply_leftEmbed (B : Matrix J I ℂ)
-    (x : EuclideanSpace ℂ I) :
+theorem offDiagonal_apply_leftEmbed (B : Matrix J I K)
+    (x : EuclideanSpace K I) :
     rightPart (euclideanCLM (offDiagonal B) (leftEmbed x)) =
       euclideanCLM B x := by
   rw [offDiagonal_apply_rightPart, leftPart_leftEmbed]
 
 /-- The Euclidean operator norm of the Dirac off-diagonal block is exactly
 the norm of its differential block. -/
-theorem norm_offDiagonal (B : Matrix J I ℂ) :
+theorem norm_offDiagonal (B : Matrix J I K) :
     ‖offDiagonal B‖ = ‖B‖ := by
   rw [Matrix.l2_opNorm_def, Matrix.l2_opNorm_def]
   let S := euclideanCLM (offDiagonal B)

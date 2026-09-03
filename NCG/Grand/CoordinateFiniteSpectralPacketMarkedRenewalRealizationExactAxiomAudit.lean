@@ -1,0 +1,6 @@
+import NCG.Grand.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact
+
+open NCG.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact
+
+#print axioms every_finiteSpectralPacket_has_finiteMarkedRenewalRealization
+#print axioms every_finiteRealEvenSpectralPacket_has_finiteMarkedRenewalRealization

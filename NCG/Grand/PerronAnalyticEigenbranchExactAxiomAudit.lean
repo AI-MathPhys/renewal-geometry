@@ -1,0 +1,12 @@
+import NCG.Grand.PerronAnalyticEigenbranchExact
+
+/-! Axiom audit for the analytic Perron eigenbranch construction. -/
+
+#print axioms NCG.PerronAnalyticEigenbranch.eigenResidual_analyticAt
+#print axioms NCG.PerronAnalyticEigenbranch.hasFDerivAt_eigenResidual_fixedTilt
+#print axioms NCG.PerronAnalyticEigenbranch.fderiv_eigenResidual_comp_inr
+#print axioms NCG.PerronAnalyticEigenbranch.exists_local_analytic_eigenbranch
+#print axioms NCG.PerronAnalyticEigenbranch.analyticAt_tiltedPerronExponent
+#print axioms NCG.PerronAnalyticEigenbranch.hasDerivAt_tiltedPerronExponent
+#print axioms NCG.PerronAnalyticEigenbranch.analyticAt_tiltedPerronExponent_of_generator
+#print axioms NCG.PerronAnalyticEigenbranch.hasDerivAt_tiltedPerronExponent_of_generator

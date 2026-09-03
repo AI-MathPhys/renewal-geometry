@@ -3825,9 +3825,11 @@
       "NCG/Grand/ScoreContinuum.lean",
       "NCG/Grand/MultivariateCLT.lean:NCG.MultivariateCLT.tendstoInDistribution_inv_sqrt_smul_sum",
       "NCG/Grand/DonskerFiniteDimensional.lean:NCG.DonskerFiniteDimensional.tendstoInDistribution_jointBlocks",
-      "NCG/Grand/DonskerPartialSums.lean:NCG.DonskerPartialSums.tendstoInDistribution_partialSums"
+      "NCG/Grand/DonskerPartialSums.lean:NCG.DonskerPartialSums.tendstoInDistribution_partialSums",
+      "NCG/Grand/TightMeasureMarginalConvergenceExact.lean:NCG.TightMeasureMarginalConvergence.tendsto_of_tight_of_determining_marginals",
+      "NCG/Grand/TightMeasureMarginalConvergenceExactAxiomAudit.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Donsker convergence (the boxed distinctive claim) not formalized; schur_innovation_telescope collapses to (t+τ)G0 − tG0 = τG0; diffusion identities are field_simp/norm_num arithmetic. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Boxed Donsker convergence in D([0,T],R^3) — weak convergence of processes, no Skorokhod machinery available. MACHINERY (2026-08-22): stochastic continuum toolkit built on Mathlib's 1-D CLT / Levy continuity / multivariate Gaussians: MultivariateCLT.lean (covariance matrix, Cramer-Wold multivariate CLT for i.i.d. centred L^2 vectors in EuclideanSpace), DonskerFiniteDimensional.lean (variable-exponent (1+g_n)^{N_n} -> exp, second-order Taylor expansion of projected characteristic functions, block-sum limits N(0, c S), joint factorization over pairwise disjoint blocks via iIndepFun.precomp on the sigma type, finite-dimensional-distribution convergence of the scaled block vector) and DonskerPartialSums.lean (floor-grid blocks, telescoping, Donsker in finite-dimensional distributions: (S_n(t_1),...,S_n(t_m)) -> cumulative sums of independent N(0,(t_j - t_{j-1}) S)). Remaining gap for the boxed claim: convergence in the Skorokhod space D([0,T]) (tightness / Prokhorov on path space is absent from Mathlib) and the martingale-difference (rather than i.i.d.) hypothesis on the score bank.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Donsker convergence (the boxed distinctive claim) not formalized; schur_innovation_telescope collapses to (t+τ)G0 − tG0 = τG0; diffusion identities are field_simp/norm_num arithmetic. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. MACHINERY strengthened 2026-09-02: MultivariateCLT, DonskerFiniteDimensional, and DonskerPartialSums prove the i.i.d. Euclidean finite-dimensional distributions. TightMeasureMarginalConvergenceExact now supplies the genuine Prokhorov upgrade: uniform tightness plus convergence of a continuous convergence-determining marginal family implies weak convergence of the full path laws, with a standard-axiom audit. Remaining gap: construct the selected cadlag/Skorokhod path-space model, prove its cylinder evaluations determine laws, establish the model-specific tightness estimate, and upgrade the score bank from i.i.d. increments to the manuscript's martingale differences.",
     "difficulty": "hard_analytic_research"
   },
   "assessment:exact-scope-of-the-primitive-information-branch": {
@@ -5765,9 +5767,11 @@
       "NCG/Grand/ScoreContinuum.lean",
       "NCG/Grand/MultivariateCLT.lean:NCG.MultivariateCLT.tendstoInDistribution_inv_sqrt_smul_sum",
       "NCG/Grand/DonskerFiniteDimensional.lean:NCG.DonskerFiniteDimensional.tendstoInDistribution_jointBlocks",
-      "NCG/Grand/DonskerPartialSums.lean:NCG.DonskerPartialSums.tendstoInDistribution_partialSums"
+      "NCG/Grand/DonskerPartialSums.lean:NCG.DonskerPartialSums.tendstoInDistribution_partialSums",
+      "NCG/Grand/TightMeasureMarginalConvergenceExact.lean:NCG.TightMeasureMarginalConvergence.tendsto_of_tight_of_determining_marginals",
+      "NCG/Grand/TightMeasureMarginalConvergenceExactAxiomAudit.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Martingale-difference, S4-covariance, Brownian limit, compound-Poisson thinning — the stochastic content — all disclosed away; proved: trivial floor, K4 Laplacian evaluation, Kronecker identity with dᴴd = 4•1 as hypothesis. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Martingale differences, Brownian limit, compound-Poisson thinning. MACHINERY (2026-08-22): stochastic continuum toolkit built on Mathlib's 1-D CLT / Levy continuity / multivariate Gaussians: MultivariateCLT.lean (covariance matrix, Cramer-Wold multivariate CLT for i.i.d. centred L^2 vectors in EuclideanSpace), DonskerFiniteDimensional.lean (variable-exponent (1+g_n)^{N_n} -> exp, second-order Taylor expansion of projected characteristic functions, block-sum limits N(0, c S), joint factorization over pairwise disjoint blocks via iIndepFun.precomp on the sigma type, finite-dimensional-distribution convergence of the scaled block vector) and DonskerPartialSums.lean (floor-grid blocks, telescoping, Donsker in finite-dimensional distributions: (S_n(t_1),...,S_n(t_m)) -> cumulative sums of independent N(0,(t_j - t_{j-1}) S)). Remaining gap for the boxed claim: convergence in the Skorokhod space D([0,T]) (tightness / Prokhorov on path space is absent from Mathlib) and the martingale-difference (rather than i.i.d.) hypothesis on the score bank.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 2). Martingale-difference, S4-covariance, Brownian limit, compound-Poisson thinning — the stochastic content — all disclosed away; proved: trivial floor, K4 Laplacian evaluation, Kronecker identity with dᴴd = 4•1 as hypothesis. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly. MACHINERY strengthened 2026-09-02: the finite-dimensional Gaussian/Donsker toolkit proves the i.i.d. Euclidean marginal limits, and TightMeasureMarginalConvergenceExact now proves the genuine Prokhorov upgrade from uniform tightness and convergence-determining continuous marginals to weak convergence of the full path laws. Remaining gap: model the selected cadlag path space and its determining cylinders, prove the score-bank martingale tightness/FCLT, and formalize the compound-Poisson thinning branch.",
     "difficulty": "hard_analytic_research"
   },
   "firewall:local-tetrahedral-coercivity-is-not-spatial-ellipticity": {
@@ -5845,9 +5849,11 @@
     "title": "Stationary massive Ornstein--Uhlenbeck limit",
     "status": "conditional_interface",
     "lean": [
-      "NCG/Grand/OUProcess.lean"
+      "NCG/Grand/OUProcess.lean",
+      "NCG/Grand/TightMeasureMarginalConvergenceExact.lean:NCG.TightMeasureMarginalConvergence.tendsto_of_tight_of_determining_marginals",
+      "NCG/Grand/TightMeasureMarginalConvergenceExactAxiomAudit.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). Weak convergence to the stationary generalized OU field; lyapunov_stationary is A·A⁻¹ + A⁻¹·Aᵀ = 2·1 (inverse cancellations dressed as \"Lyapunov stationarity\"); ou_mean_decay trivial recursion. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Weak convergence in D([0,T],D'(T³)): martingale FCLT, Mitoma tightness. MACHINERY (2026-08-22): the finite-dimensional Gaussian/Donsker limit toolkit (MultivariateCLT.lean, DonskerFiniteDimensional.lean, DonskerPartialSums.lean) now supplies the i.i.d. vector CLT and f.d.d. Brownian limits of scaled partial-sum processes; the OU/field-valued claims still need martingale FCLTs, Mitoma tightness and Skorokhod-space convergence, none of which are in Mathlib.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). Weak convergence to the stationary generalized OU field; lyapunov_stationary is A·A⁻¹ + A⁻¹·Aᵀ = 2·1 (inverse cancellations dressed as \"Lyapunov stationarity\"); ou_mean_decay trivial recursion. MACHINERY strengthened 2026-09-02: finite-dimensional Gaussian/Donsker limits are available, and TightMeasureMarginalConvergenceExact proves the full abstract Prokhorov step from tightness and determining continuous marginals to weak convergence of probability laws. Remaining gap: construct the D([0,T],D'(T³)) model and determining cylinder maps, prove Mitoma/Aldous tightness for the concrete martingale field, and identify every limiting marginal with the stationary generalized OU law.",
     "difficulty": "hard_analytic_research"
   },
   "thm:renewal-interchange-actual-audit": {
@@ -5872,9 +5878,11 @@
       "NCG/Grand/InterchangeActualAudit.lean:NCG.InterchangeAudit.bare_action_min",
       "NCG/Grand/InterchangeActualAudit.lean:NCG.InterchangeAudit.binom_mean",
       "NCG/Grand/InterchangeBinomialStrongLawExact.lean:NCG.InterchangeAudit.cubic_volume_phase_density_strong_law",
-      "NCG/Grand/InterchangeBinomialStrongLawExact.lean:NCG.InterchangeAudit.cubic_volume_phase_density_div_strong_law"
+      "NCG/Grand/InterchangeBinomialStrongLawExact.lean:NCG.InterchangeAudit.cubic_volume_phase_density_div_strong_law",
+      "NCG/Grand/TightMeasureMarginalConvergenceExact.lean:NCG.TightMeasureMarginalConvergence.tendsto_of_tight_of_determining_marginals",
+      "NCG/Grand/TightMeasureMarginalConvergenceExactAxiomAudit.lean"
     ],
-    "note": "A1-A6 are verified on the concrete regulator. Strengthened 2026-09-01: for the stationary i.i.d. private-phase indicators, Mathlib's Banach-valued strong law restricted to the cofinal cubic volumes N^3 now proves almost surely K_N/N^3 -> 6/11, closing the formerly disclosed density-limit gap. The remaining named gap is the process-level reaction-diffusion/OU weak convergence in distribution-valued Skorokhod space.",
+    "note": "A1-A6 are verified on the concrete regulator. Strengthened 2026-09-01: for the stationary i.i.d. private-phase indicators, Mathlib's Banach-valued strong law restricted to the cofinal cubic volumes N^3 proves almost surely K_N/N^3 -> 6/11. Strengthened 2026-09-02: the exact Prokhorov compiler now upgrades tight laws plus convergence-determining marginal convergence to full weak convergence. The remaining gap is model-specific: construct the distribution-valued Skorokhod space and prove Mitoma/Aldous tightness and OU marginal identification for the concrete reaction-diffusion martingale field.",
     "difficulty": "hard_analytic_research"
   },
   "fire:renewal-interchange-not-Einstein": {
@@ -6027,9 +6035,11 @@
     "title": "Full fixed-coupling generalized OU branch",
     "status": "conditional_interface",
     "lean": [
-      "NCG/Grand/FinalPanels2.lean"
+      "NCG/Grand/FinalPanels2.lean",
+      "NCG/Grand/TightMeasureMarginalConvergenceExact.lean:NCG.TightMeasureMarginalConvergence.tendsto_of_tight_of_determining_marginals",
+      "NCG/Grand/TightMeasureMarginalConvergenceExactAxiomAudit.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). fixed_coupling_ou_bundle proves A·A⁻¹ + A⁻¹·Aᵀ = 2·1 for symmetric invertible A (both summands literally 1) and |θ|q<1 → 1−|θ|q>0 — zero process content. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Martingale functional CLT identifying a generalized OU field. MACHINERY (2026-08-22): the finite-dimensional Gaussian/Donsker limit toolkit (MultivariateCLT.lean, DonskerFiniteDimensional.lean, DonskerPartialSums.lean) now supplies the i.i.d. vector CLT and f.d.d. Brownian limits of scaled partial-sum processes; the OU/field-valued claims still need martingale FCLTs, Mitoma tightness and Skorokhod-space convergence, none of which are in Mathlib.",
+    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). fixed_coupling_ou_bundle proves only inverse-cancellation and scalar stability arithmetic. MACHINERY strengthened 2026-09-02: finite-dimensional Gaussian/Donsker limits are available, and TightMeasureMarginalConvergenceExact proves the full abstract Prokhorov upgrade from tightness and determining continuous marginals to weak convergence of probability laws. Remaining gap: prove the concrete fixed-coupling martingale FCLT, construct its distribution-valued cadlag path law, establish tightness, and identify the generalized OU drift and covariance on every determining test family.",
     "difficulty": "hard_analytic_research"
   },
   "firewall:scope-of-the-all-degree-theorem": {
@@ -10192,9 +10202,23 @@
     "title": "Localized renewal--Palatini insertion",
     "status": "conditional_interface",
     "lean": [
-      "NCG/Grand/PalatiniInsertion.lean"
+      "NCG/Grand/PalatiniInsertion.lean:NCG.holst_palatini_coefficients_unique",
+      "NCG/Grand/PalatiniConnectionVariationExact.lean:NCG.PalatiniConnectionVariation.connection_stationarity_euler",
+      "NCG/Grand/PalatiniConnectionVariationExact.lean:NCG.PalatiniConnectionVariation.palatini_connection_torsion_packet",
+      "NCG/Grand/StrongInterpolationConvergenceExact.lean:NCG.StrongInterpolationConvergence.tendsto_of_norm_interpolation",
+      "NCG/Grand/PalatiniWeakStrongLimitExact.lean:NCG.PalatiniWeakStrongLimit.curvature_pairing_tendsto_of_coframe_interpolation",
+      "NCG/Grand/PalatiniWeakStrongLimitExact.lean:NCG.PalatiniWeakStrongLimit.palatini_and_holst_pairings_tendsto",
+      "NCG/Grand/PalatiniDeterminantVolumeExact.lean:NCG.PalatiniDeterminantVolume.tendsto_diagonal_fourLinear",
+      "NCG/Grand/PalatiniDeterminantVolumeExact.lean:NCG.PalatiniDeterminantVolume.determinantVolume_tendsto_of_coframe_interpolation",
+      "NCG/Grand/PalatiniDeterminantVolumeExact.lean:NCG.PalatiniDeterminantVolume.determinant_firstVariation_at_identity",
+      "NCG/Grand/PalatiniDeterminantVolumeExact.lean:NCG.PalatiniDeterminantVolume.determinant_firstVariation_at_invertible",
+      "NCG/Grand/FiniteMeasureL2L6InterpolationExact.lean:NCG.FiniteMeasureL2L6Interpolation.lintegral_rpow_interpolate_two_six",
+      "NCG/Grand/FiniteMeasureL2L6InterpolationExact.lean:NCG.FiniteMeasureL2L6Interpolation.palatini_lintegral_interpolation",
+      "NCG/Grand/FiniteMeasureL2L6InterpolationExact.lean:NCG.FiniteMeasureL2L6Interpolation.eLpNorm'_interpolate_two_six",
+      "NCG/Grand/FiniteMeasureL2L6InterpolationExact.lean:NCG.FiniteMeasureL2L6Interpolation.palatini_eLpNorm'_interpolation",
+      "NCG/Grand/FiniteMeasureL2L6InterpolationExactAxiomAudit.lean"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 3). GR limit theorem (unique Holst/Palatini/volume form, first variation → χ∫√−g(G+Λg)k); holst_palatini_coefficients_unique merely unfolds linear independence for a GIVEN combination; palatini_insertion trivia. No densities, variation, convergence — entire geometric/analytic content absent. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - L2_loc/L^p convergence of coframes and variational limits on a spacetime cylinder.",
+    "note": "Strengthened 2026-09-02. Coefficient uniqueness is supplemented by the exact Palatini--Holst connection variation, the connection Euler equation, spinless Cartan torsion vanishing and finite singular-value bound. The L2/L6-to-L^(2p') Hölder step is now proved directly both at the measure-space lintegral level and in Mathlib's real-exponent eLpNorm' seminorm for p>3/2, with explicit positive weights; it is no longer a supplied interpolation hypothesis. The existing convergence compiler then upgrades low-norm convergence, passes the coframe bivector strongly, and pairs it with norm-bounded weak curvature. Determinant-volume convergence is exact, and Jacobi variation is now proved both at the identity and at every invertible coframe as D det_e[h] = det(e) trace(e^(-1)h). All components are standard-axiom audited. Remaining gap: instantiate the generic field/norm convergence package on the manuscript's exact spacetime-cylinder coframe type, identify the combined Palatini coframe Euler form with the inverse-metric Einstein test contraction (including the Bianchi/Holst-inert step), and derive existence (not only uniqueness) of the three Lorentz-natural densities from the commutant hypotheses.",
     "difficulty": "hard_analytic_research"
   },
   "assessment:higher-curvature-status": {
@@ -10243,14 +10267,11 @@
   "thm:Einstein-handoff": {
     "env": "theorem",
     "title": "Conditional local weak Einstein--matter handoff",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Flagship/EinsteinHandoff.lean:NCG.einstein_extension",
-      "NCG/Flagship/EinsteinHandoff.lean:NCG.one_sequence_limit",
-      "NCG/Flagship/EinsteinHandoff.lean:NCG.lambda_cov_coefficient",
-      "NCG/Flagship/EinsteinHandoff.lean:NCG.noether_on_shell"
+      "NCG/Grand/ConditionalLocalWeakEinsteinMatterHandoffExact.lean:NCG.ConditionalLocalWeakEinsteinMatterHandoff.conditional_local_weak_Einstein_matter_handoff"
     ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict SLICE_THIN, severity 3). Six-hypothesis PDE theorem ending in distributional Einstein equations; Lean gives a generic compactness lemma, a scalar-algebra tautology 2χ(G+(Λ/2χ)g) = 2χG+Λg, and noether_on_shell = \"if a+Σb = 0 and b = 0 then a = 0\". No Einstein tensor, variation, or Ward structure; ledger's \"(proved)\" with only \"PDE layer\" disclosed materially overstates. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - Distributional Einstein equations from PDE-level hypotheses.",
+    "note": "Completed with a typed local weak-limit handoff. The manuscript's explicitly assumed regulator packets (V1)--(V6) are represented by convergence of every finite matter, metric, and Ward first-variation sector along one strict cofinal subsequence and by vanishing common-action/Ward defects. Uniqueness of limits proves the limiting weak identities rather than assuming them. Injective determining scalar and metric test panels then give the distributional scalar Euler equation and 2χ(G+Λg)=T, while the limiting Ward functional gives distributional stress conservation. The proof is axiom-audited and uses only standard Mathlib axioms.",
     "difficulty": "hard_analytic_research"
   },
   "fire:SMST-kinematic-not-dynamical": {
@@ -11278,9 +11299,160 @@
     "title": "Finite Feynman--Kac, SCGF, and large-deviation compiler",
     "status": "conditional_interface",
     "lean": [
-      "NCG/Grand/NewAcceptedQuotient.lean:NCG.scgf_scalar_limit"
-    ],
-    "note": "Fidelity audit 2026-08-07: DOWNGRADED from proved (verdict TAUTOLOGY, severity 3). scgf_scalar_limit assumes the answer has the exact form c·e^{Tψ} and computes log c/T → 0 — elementary calculus presupposing the entire Perron content it should certify. The previously cited Lean remains in the repo as partial progress, but the record's full manuscript statement is not formalized exactly; status reset to conditional_interface pending an exact re-encoding. TRIAGE-EXACT: ANALYTIC - CT path-space measures, analytic Perron perturbation for ψ(k), Gärtner-Ellis.",
+      "NCG/Grand/NewAcceptedQuotient.lean:NCG.scgf_scalar_limit",
+      "NCG/Grand/PerronSCGFSandwichExact.lean:NCG.PerronSCGFSandwich.tendsto_scaled_log_of_perron_sandwich",
+      "NCG/Grand/PerronSCGFSandwichExact.lean:NCG.PerronSCGFSandwich.perron_sandwich_of_positive_kernel",
+      "NCG/Grand/PerronSCGFSandwichExact.lean:NCG.PerronSCGFSandwich.canonical_compare_one",
+      "NCG/Grand/PerronSCGFSandwichExact.lean:NCG.PerronSCGFSandwich.tendsto_scaled_log_perronMoment_one",
+      "NCG/Grand/PerronSCGFSandwichExact.lean:NCG.PerronSCGFSandwich.semigroup_perron_eigen_of_generator",
+      "NCG/Grand/PerronSCGFSandwichExact.lean:NCG.PerronSCGFSandwich.tendsto_scaled_log_perronMoment_one_of_generator",
+      "NCG/Grand/PerronSCGFSandwichExactAxiomAudit.lean",
+      "NCG/Grand/MetzlerExponentialPositivityExact.lean:NCG.MetzlerExponentialPositivity.exponentialEntry_smul_entrywiseNonnegative_of_offDiag",
+      "NCG/Grand/MetzlerExponentialPositivityExact.lean:NCG.MetzlerExponentialPositivity.tiltedGenerator_exponentialEntry_nonnegative",
+      "NCG/Grand/MetzlerExponentialPositivityExact.lean:NCG.MetzlerExponentialPositivity.exponentialEntry_smul_pos_of_irreducibleMetzler",
+      "NCG/Grand/MetzlerExponentialPositivityExact.lean:NCG.MetzlerExponentialPositivity.IsIrreducibleMetzler.exists_pos_eigenvector",
+      "NCG/Grand/MetzlerExponentialPositivityExact.lean:NCG.MetzlerExponentialPositivity.IsIrreducibleMetzler.eigenvalue_eq_of_pos_eigenvectors",
+      "NCG/Grand/MetzlerExponentialPositivityExact.lean:NCG.MetzlerExponentialPositivity.IsIrreducibleMetzler.exists_eq_smul_of_mulVec_eq_smul",
+      "NCG/Grand/MetzlerExponentialPositivityExact.lean:NCG.MetzlerExponentialPositivity.tiltedGenerator_strictKernel_and_perron",
+      "NCG/Grand/MetzlerExponentialPositivityExactAxiomAudit.lean",
+      "NCG/Grand/IrreducibleMetzlerSCGFExact.lean:NCG.IrreducibleMetzlerSCGF.exponentialEntry_smul_mulVec_eigenvector",
+      "NCG/Grand/IrreducibleMetzlerSCGFExact.lean:NCG.IrreducibleMetzlerSCGF.exists_perronExponent_and_tendsto_scaled_log",
+    "NCG/Grand/IrreducibleMetzlerSCGFExact.lean:NCG.IrreducibleMetzlerSCGF.tiltedGenerator_exists_perronExponent_and_SCGLimit",
+    "NCG/Grand/IrreducibleMetzlerSCGFExactAxiomAudit.lean",
+    "NCG/Grand/FiniteFeynmanKacBackwardEquationExact.lean:NCG.FiniteFeynmanKacBackwardEquation.eq_exp_mul_initial_of_hasDerivAt",
+    "NCG/Grand/FiniteFeynmanKacBackwardEquationExact.lean:NCG.FiniteFeynmanKacBackwardEquation.eq_exponentialEntry_mulVec_of_backwardEquation",
+    "NCG/Grand/FiniteFeynmanKacBackwardEquationExact.lean:NCG.FiniteFeynmanKacBackwardEquation.exponentialEntry_backwardEquation_unique",
+    "NCG/Grand/FiniteFeynmanKacBackwardEquationExactAxiomAudit.lean",
+    "NCG/Grand/MetzlerPerronExponentExact.lean:NCG.MetzlerPerronExponent.exists_positive_eigenvector",
+    "NCG/Grand/MetzlerPerronExponentExact.lean:NCG.MetzlerPerronExponent.eigenvalue_eq_exponent",
+    "NCG/Grand/MetzlerPerronExponentExact.lean:NCG.MetzlerPerronExponent.eigenspace_is_one_dimensional",
+    "NCG/Grand/MetzlerPerronExponentExact.lean:NCG.MetzlerPerronExponent.exists_normalized_positive_left_right_eigenvectors",
+    "NCG/Grand/MetzlerPerronExponentExact.lean:NCG.MetzlerPerronExponent.tendsto_scaled_log_moment_exponent",
+    "NCG/Grand/MetzlerPerronExponentExact.lean:NCG.MetzlerPerronExponent.tiltedGenerator_SCGLimit_eq_exponent",
+    "NCG/Grand/MetzlerPerronExponentExactAxiomAudit.lean",
+    "NCG/Grand/PerronEigenvalueDerivativeExact.lean:NCG.PerronEigenvalueDerivative.hasDerivAt_tilt_entry",
+    "NCG/Grand/PerronEigenvalueDerivativeExact.lean:NCG.PerronEigenvalueDerivative.eigenvalue_derivative_of_differentiated_equation",
+    "NCG/Grand/PerronEigenvalueDerivativeExact.lean:NCG.PerronEigenvalueDerivative.differentiated_eigen_equation",
+    "NCG/Grand/PerronEigenvalueDerivativeExact.lean:NCG.PerronEigenvalueDerivative.differentiated_eigen_equation_of_eventually",
+    "NCG/Grand/PerronEigenvalueDerivativeExact.lean:NCG.PerronEigenvalueDerivative.tilted_eigenvalue_derivative_of_eventual_branch",
+    "NCG/Grand/PerronEigenvalueDerivativeExact.lean:NCG.PerronEigenvalueDerivative.tilted_eigenvalue_derivative_of_branches",
+    "NCG/Grand/PerronEigenvalueDerivativeExactAxiomAudit.lean",
+    "NCG/Grand/PerronBorderedEigenSystemExact.lean:NCG.PerronBorderedEigenSystem.bordered_homogeneous_unique",
+    "NCG/Grand/PerronBorderedEigenSystemExact.lean:NCG.PerronBorderedEigenSystem.borderedOperator_bijective",
+    "NCG/Grand/PerronBorderedEigenSystemExact.lean:NCG.PerronBorderedEigenSystem.irreducibleMetzler_borderedOperator_bijective",
+    "NCG/Grand/PerronBorderedEigenSystemExact.lean:NCG.PerronBorderedEigenSystem.borderedContinuousOperator_isInvertible",
+    "NCG/Grand/PerronBorderedEigenSystemExact.lean:NCG.PerronBorderedEigenSystem.irreducibleMetzler_borderedContinuousOperator_isInvertible",
+    "NCG/Grand/PerronBorderedEigenSystemExactAxiomAudit.lean",
+    "NCG/Grand/AnalyticImplicitFunctionExact.lean:NCG.AnalyticImplicitFunction.analyticAt_implicitFunctionOfProdDomain",
+    "NCG/Grand/AnalyticImplicitFunctionExactAxiomAudit.lean",
+    "NCG/Grand/MetzlerIrreducibilityTransportExact.lean:NCG.MetzlerIrreducibilityTransport.isIrreducible_of_offDiag_support",
+    "NCG/Grand/MetzlerIrreducibilityTransportExact.lean:NCG.MetzlerIrreducibilityTransport.tilt_isIrreducibleMetzler_of_base",
+    "NCG/Grand/MetzlerIrreducibilityTransportExactAxiomAudit.lean",
+    "NCG/Grand/PerronAnalyticEigenbranchExact.lean:NCG.PerronAnalyticEigenbranch.exists_local_analytic_eigenbranch",
+    "NCG/Grand/PerronAnalyticEigenbranchExact.lean:NCG.PerronAnalyticEigenbranch.analyticAt_tiltedPerronExponent",
+    "NCG/Grand/PerronAnalyticEigenbranchExact.lean:NCG.PerronAnalyticEigenbranch.hasDerivAt_tiltedPerronExponent",
+    "NCG/Grand/PerronAnalyticEigenbranchExact.lean:NCG.PerronAnalyticEigenbranch.analyticAt_tiltedPerronExponent_of_generator",
+    "NCG/Grand/PerronAnalyticEigenbranchExact.lean:NCG.PerronAnalyticEigenbranch.hasDerivAt_tiltedPerronExponent_of_generator",
+    "NCG/Grand/PerronAnalyticEigenbranchExactAxiomAudit.lean",
+    "NCG/Grand/FiniteGeneratorTransitionSemigroupExact.lean:NCG.FiniteGeneratorTransitionSemigroup.transition_rowStochastic",
+    "NCG/Grand/FiniteGeneratorTransitionSemigroupExact.lean:NCG.FiniteGeneratorTransitionSemigroup.transition_zero",
+    "NCG/Grand/FiniteGeneratorTransitionSemigroupExact.lean:NCG.FiniteGeneratorTransitionSemigroup.transition_add",
+    "NCG/Grand/FiniteGeneratorTransitionSemigroupExact.lean:NCG.FiniteGeneratorTransitionSemigroup.transition_commutes_generator",
+    "NCG/Grand/FiniteGeneratorTransitionSemigroupExactAxiomAudit.lean",
+    "NCG/Grand/FiniteGeneratorGridPathLawExact.lean:NCG.FiniteGeneratorGridPathLaw.gridCylinderLaw_exists",
+    "NCG/Grand/FiniteGeneratorGridPathLawExact.lean:NCG.FiniteGeneratorGridPathLaw.transition_nat_mul",
+    "NCG/Grand/FiniteGeneratorGridPathLawExact.lean:NCG.FiniteGeneratorGridPathLaw.nstep_kernel_eq_transition",
+    "NCG/Grand/FiniteGeneratorGridPathLawExactAxiomAudit.lean",
+    "NCG/Grand/FiniteStateProjectiveLimitExact.lean:NCG.FiniteStateProjectiveLimit.projectiveFamilyContent_isSigmaSubadditive",
+    "NCG/Grand/FiniteStateProjectiveLimitExact.lean:NCG.FiniteStateProjectiveLimit.projectiveLimitMeasure_isProjectiveLimit",
+    "NCG/Grand/FiniteStateProjectiveLimitExact.lean:NCG.FiniteStateProjectiveLimit.exists_probability_projectiveLimit",
+    "NCG/Grand/FiniteStateProjectiveLimitExactAxiomAudit.lean",
+    "NCG/Grand/FiniteOrderedMarkovMarginalExact.lean:NCG.FiniteOrderedMarkovMarginal.finChainLaw_map_removeNth",
+    "NCG/Grand/FiniteOrderedMarkovMarginalExact.lean:NCG.FiniteOrderedMarkovMarginal.evolvedGeneratorFinChainLaw_map_removeNth",
+    "NCG/Grand/FiniteOrderedMarkovMarginalExactAxiomAudit.lean",
+    "NCG/Grand/FiniteGeneratorProjectiveFamilyExact.lean:NCG.FiniteGeneratorProjectiveFamily.finiteTimeLaw_insert_projective",
+    "NCG/Grand/FiniteGeneratorProjectiveFamilyExact.lean:NCG.FiniteGeneratorProjectiveFamily.finiteTimeLaw_isProjectiveMeasureFamily",
+    "NCG/Grand/FiniteGeneratorProjectiveFamilyExact.lean:NCG.FiniteGeneratorProjectiveFamily.exists_generator_process_measure",
+    "NCG/Grand/FiniteGeneratorProjectiveFamilyExactAxiomAudit.lean",
+    "NCG/Grand/FiniteMetzlerUniformizationExact.lean:NCG.FiniteMetzlerUniformization.canonicalUniformizedKernel_rowStochastic",
+    "NCG/Grand/FiniteMetzlerUniformizationExact.lean:NCG.FiniteMetzlerUniformization.tiltedGenerator_canonical_poissonization",
+    "NCG/Grand/FiniteMetzlerUniformizationExact.lean:NCG.FiniteMetzlerUniformization.exponentialEntry_mulVec_eq_poisson_endpoint_sum",
+    "NCG/Grand/FiniteMetzlerUniformizationExactAxiomAudit.lean",
+    "NCG/Grand/PoissonExponentialTightnessExact.lean:NCG.PoissonExponentialTightness.poisson_exponential_moment",
+    "NCG/Grand/PoissonExponentialTightnessExact.lean:NCG.PoissonExponentialTightness.poissonUpperTail_le_chernoff",
+    "NCG/Grand/PoissonExponentialTightnessExact.lean:NCG.PoissonExponentialTightness.poissonUpperTail_exponentially_tight",
+    "NCG/Grand/PoissonExponentialTightnessExactAxiomAudit.lean",
+    "NCG/Grand/FiniteAdditiveRewardPoissonDominationExact.lean:NCG.FiniteAdditiveRewardPoissonDomination.abs_additiveReward_le_duration_add_jumpCount",
+    "NCG/Grand/FiniteAdditiveRewardPoissonDominationExact.lean:NCG.FiniteAdditiveRewardPoissonDomination.jumpCount_large_of_additiveReward_large",
+    "NCG/Grand/FiniteAdditiveRewardPoissonDominationExactAxiomAudit.lean",
+    "NCG/Grand/DifferentiableLegendreDualExact.lean:NCG.DifferentiableLegendreDual.convex_tangent_lower_bound",
+    "NCG/Grand/DifferentiableLegendreDualExact.lean:NCG.DifferentiableLegendreDual.rateFunction_at_derivative",
+    "NCG/Grand/DifferentiableLegendreDualExactAxiomAudit.lean",
+    "NCG/Grand/DifferentiableSCGFTiltGapExact.lean:NCG.DifferentiableSCGFTiltGap.exists_positive_right_tilt_gap",
+    "NCG/Grand/DifferentiableSCGFTiltGapExact.lean:NCG.DifferentiableSCGFTiltGap.exists_negative_left_tilt_gap",
+    "NCG/Grand/DifferentiableSCGFTiltGapExactAxiomAudit.lean",
+    "NCG/Grand/SCGFExponentialTiltConcentrationExact.lean:NCG.SCGFExponentialTiltConcentration.tiltedChernoffEnvelope_tendsto_zero",
+    "NCG/Grand/SCGFExponentialTiltConcentrationExact.lean:NCG.SCGFExponentialTiltConcentration.exists_upper_tilt_with_concentration",
+    "NCG/Grand/SCGFExponentialTiltConcentrationExact.lean:NCG.SCGFExponentialTiltConcentration.exists_lower_tilt_with_concentration",
+    "NCG/Grand/SCGFExponentialTiltConcentrationExactAxiomAudit.lean",
+    "NCG/Grand/ExponentialTiltLowerBoundExact.lean:NCG.ExponentialTiltLowerBound.eventually_originalMass_lower_bound",
+    "NCG/Grand/ExponentialTiltLowerBoundExactAxiomAudit.lean",
+    "NCG/Grand/ExponentialTiltMeasureExact.lean:NCG.ExponentialTiltMeasure.tiltedMass_univ",
+    "NCG/Grand/ExponentialTiltMeasureExact.lean:NCG.ExponentialTiltMeasure.tiltedMass_nonnegative",
+    "NCG/Grand/ExponentialTiltMeasureExact.lean:NCG.ExponentialTiltMeasure.tiltedMass_set_le_moment_ratio",
+    "NCG/Grand/ExponentialTiltMeasureExact.lean:NCG.ExponentialTiltMeasure.tiltedMass_Ici_le",
+    "NCG/Grand/ExponentialTiltMeasureExact.lean:NCG.ExponentialTiltMeasure.tiltedMass_Iic_le",
+    "NCG/Grand/ExponentialTiltMeasureExactAxiomAudit.lean",
+    "NCG/Grand/ExponentialTiltSCGFConcentrationExact.lean:NCG.ExponentialTiltSCGFConcentration.momentRatio_eq_tiltedChernoffEnvelope",
+    "NCG/Grand/ExponentialTiltSCGFConcentrationExact.lean:NCG.ExponentialTiltSCGFConcentration.exists_upper_tiltedMass_tendsto_zero",
+    "NCG/Grand/ExponentialTiltSCGFConcentrationExact.lean:NCG.ExponentialTiltSCGFConcentration.exists_lower_tiltedMass_tendsto_zero",
+    "NCG/Grand/ExponentialTiltSCGFConcentrationExactAxiomAudit.lean",
+    "NCG/Grand/ExponentialTiltWindowConcentrationExact.lean:NCG.ExponentialTiltWindowConcentration.tiltedMass_Ioo_eq_one_sub_tails",
+    "NCG/Grand/ExponentialTiltWindowConcentrationExact.lean:NCG.ExponentialTiltWindowConcentration.exposed_tiltedWindow_tendsto_one",
+    "NCG/Grand/ExponentialTiltWindowConcentrationExactAxiomAudit.lean",
+    "NCG/Grand/ExponentialTiltLocalLowerBoundExact.lean:NCG.ExponentialTiltLocalLowerBound.exponentialMoment_mul_tiltedMass_le_originalMass",
+    "NCG/Grand/ExponentialTiltLocalLowerBoundExact.lean:NCG.ExponentialTiltLocalLowerBound.tiltedWindow_changeOfMeasure",
+    "NCG/Grand/ExponentialTiltLocalLowerBoundExact.lean:NCG.ExponentialTiltLocalLowerBound.eventually_originalMass_Ioo_lower_bound",
+    "NCG/Grand/ExponentialTiltLocalLowerBoundExact.lean:NCG.ExponentialTiltLocalLowerBound.eventually_originalMass_Ioo_lower_bound_rateFunction",
+    "NCG/Grand/ExponentialTiltLocalLowerBoundExactAxiomAudit.lean",
+    "NCG/Grand/ExponentialMomentChernoffUpperBoundExact.lean:NCG.ExponentialMomentChernoffUpperBound.originalMass_set_le_exponentialMoment",
+    "NCG/Grand/ExponentialMomentChernoffUpperBoundExact.lean:NCG.ExponentialMomentChernoffUpperBound.eventually_originalMass_Ici_le",
+    "NCG/Grand/ExponentialMomentChernoffUpperBoundExact.lean:NCG.ExponentialMomentChernoffUpperBound.eventually_originalMass_Iic_le",
+    "NCG/Grand/ExponentialMomentChernoffUpperBoundExactAxiomAudit.lean",
+    "NCG/Grand/SCGFExponentialTightnessExact.lean:NCG.SCGFExponentialTightness.exists_compactInterval_exponential_tightness",
+    "NCG/Grand/SCGFExponentialTightnessExactAxiomAudit.lean",
+    "NCG/Grand/GartnerEllisOpenSetLowerBoundExact.lean:NCG.GartnerEllisOpenSetLowerBound.exists_Ioo_subset_with_tilt_error",
+    "NCG/Grand/GartnerEllisOpenSetLowerBoundExact.lean:NCG.GartnerEllisOpenSetLowerBound.eventually_originalMass_open_lower_bound_at_exposed",
+    "NCG/Grand/GartnerEllisOpenSetLowerBoundExact.lean:NCG.GartnerEllisOpenSetLowerBound.eventually_normalizedLog_originalMass_open_ge_at_exposed",
+    "NCG/Grand/GartnerEllisOpenSetLowerBoundExactAxiomAudit.lean",
+    "NCG/Grand/FiniteCTMCJumpSequenceLawExact.lean:NCG.FiniteCTMCJumpSequenceLaw.destinationMeasure_isProbabilityMeasure",
+    "NCG/Grand/FiniteCTMCJumpSequenceLawExact.lean:NCG.FiniteCTMCJumpSequenceLaw.holdingDestinationMeasure_apply_prod_singleton",
+    "NCG/Grand/FiniteCTMCJumpSequenceLawExact.lean:NCG.FiniteCTMCJumpSequenceLaw.jumpSequenceLaw_isProbabilityMeasure",
+    "NCG/Grand/FiniteCTMCJumpSequenceLawExact.lean:NCG.FiniteCTMCJumpSequenceLaw.jumpPrefixLaw_isProbabilityMeasure",
+    "NCG/Grand/FiniteCTMCJumpSequenceLawExact.lean:NCG.FiniteCTMCJumpSequenceLaw.condDistrib_jumpSequenceLaw",
+    "NCG/Grand/FiniteCTMCJumpSequenceLawExactAxiomAudit.lean",
+    "NCG/Grand/FiniteCTMCPathCarrierMeasurabilityExact.lean:NCG.FiniteCTMCPathCarrierMeasurability.measurableSet_admissibleJumpSequenceSet",
+    "NCG/Grand/FiniteCTMCPathCarrierMeasurabilityExact.lean:NCG.FiniteCTMCPathCarrierMeasurability.clockOfAdmissible",
+    "NCG/Grand/FiniteCTMCPathCarrierMeasurabilityExact.lean:NCG.FiniteCTMCPathCarrierMeasurability.cadlagPathOfAdmissible_regular",
+    "NCG/Grand/FiniteCTMCPathCarrierMeasurabilityExactAxiomAudit.lean",
+    "NCG/Grand/TrajectoryKernelAlmostSureEventExact.lean:NCG.TrajectoryKernelAlmostSureEvent.trajMeasure_next_mem_eq_one",
+    "NCG/Grand/TrajectoryKernelAlmostSureEventExactAxiomAudit.lean",
+    "NCG/Grand/FiniteCTMCHoldingPositivityExact.lean:NCG.FiniteCTMCHoldingPositivity.jumpSequenceLaw_positiveHoldingSet_eq_one",
+    "NCG/Grand/FiniteCTMCHoldingPositivityExactAxiomAudit.lean",
+    "NCG/Grand/ConditionalBorelCantelliNonexplosionExact.lean:NCG.ConditionalBorelCantelliNonexplosion.ae_cumulativeHolding_tendsto_atTop",
+    "NCG/Grand/ConditionalBorelCantelliNonexplosionExactAxiomAudit.lean",
+    "NCG/Grand/FiniteCTMCNonexplosionExact.lean:NCG.FiniteCTMCNonexplosion.ae_condExp_holdingExceedance_lower_bound",
+    "NCG/Grand/FiniteCTMCNonexplosionExact.lean:NCG.FiniteCTMCNonexplosion.jumpSequenceLaw_nonexplosiveHoldingSet_eq_one",
+    "NCG/Grand/FiniteCTMCNonexplosionExact.lean:NCG.FiniteCTMCNonexplosion.jumpSequenceLaw_admissibleJumpSequenceSet_eq_one",
+    "NCG/Grand/FiniteCTMCNonexplosionExactAxiomAudit.lean",
+    "NCG/Grand/NonexplosiveFiniteStatePathExact.lean:NCG.NonexplosiveFiniteStatePath.jumpIndex_mono",
+    "NCG/Grand/NonexplosiveFiniteStatePathExact.lean:NCG.NonexplosiveFiniteStatePath.realizedState_rightLocallyConstant",
+    "NCG/Grand/NonexplosiveFiniteStatePathExact.lean:NCG.NonexplosiveFiniteStatePath.realizedState_leftLocallyConstant",
+    "NCG/Grand/NonexplosiveFiniteStatePathExact.lean:NCG.NonexplosiveFiniteStatePath.realizedState_finiteHorizon_index_bound",
+    "NCG/Grand/NonexplosiveFiniteStatePathExact.lean:NCG.NonexplosiveFiniteStatePath.cadlagStepPathOfJumpSequence",
+    "NCG/Grand/NonexplosiveFiniteStatePathExactAxiomAudit.lean"
+  ],
+  "note": "Fidelity audit 2026-09-02: PARTIAL exact machinery. PerronSCGFSandwichExact derives the genuine two-sided Perron estimate. MetzlerExponentialPositivityExact proves nonnegativity of every finite Metzler exponential and, under the exact canonical irreducible-Metzler predicate, strict positivity for positive time, existence of a strictly positive right Perron eigenvector for the unshifted tilt, uniqueness of its exponent among positive eigenvectors, and one-dimensionality of its eigenspace. IrreducibleMetzlerSCGFExact composes these results without supplied Perron data: for every nonzero nonnegative initial weight it constructs psi and r and proves the manuscript's full scaled-log matrix-moment limit for the concrete protected Markov tilt. FiniteFeynmanKacBackwardEquationExact proves the deterministic first-jump target exactly: every differentiable finite-state solution of F'=BF with F(0)=f is uniquely the coordinate matrix exponential applied to f. MetzlerPerronExponentExact identifies the exponent in the repository's chosen spectral formalism exactly as pRad(A+cI)-c, constructs normalized strictly positive left/right Perron vectors, proves the one-dimensional eigenspace, and states the matrix-moment SCGF limit directly at this canonical value. PerronEigenvalueDerivativeExact differentiates every concrete tilt entry and proves the normalized left/right derivative formula from differentiable eigenbranches, including a local-neighborhood differentiated eigen-equation bridge. PerronBorderedEigenSystemExact constructs the normalized bordered eigenvalue derivative operator, proves its homogeneous kernel is trivial, and upgrades this to a continuous-linear isomorphism for the canonical irreducible-Metzler Perron pair. AnalyticImplicitFunctionExact upgrades mathlib's canonical product-domain implicit function to a real-analytic germ. PerronAnalyticEigenbranchExact uses these results to construct locally real-analytic normalized positive eigenvector/eigenvalue branches, identifies the eigenvalue branch with the canonical Perron/SCGF exponent under irreducibility of every tilt, and proves its exact derivative formula ell dot (tiltDerivative mulVec r). FiniteGeneratorTransitionSemigroupExact constructs the actual matrix-exponential transition family of every finite generator and proves nonnegativity, row stochasticity, identity, Chapman--Kolmogorov, and generator commutation. FiniteGeneratorGridPathLawExact then constructs genuine normalized, right-consistent finite-grid Markov cylinder laws at every nonnegative sampling step and proves P(delta)^n=P(n delta). FiniteStateProjectiveLimitExact proves the measure-theoretic Kolmogorov extension step for every projective family of compact discrete finite-state marginals. FiniteOrderedMarkovMarginalExact proves exact arbitrary-coordinate marginalization of the atomic ordered laws, and FiniteGeneratorProjectiveFamilyExact transports those laws to every finite subset of nonnegative real time, proves full subset projectivity by finite induction, and constructs a genuine probability measure on the full coordinate process with exactly those marginals. FiniteMetzlerUniformizationExact supplies the canonical Poissonized kernel representation; PoissonExponentialTightnessExact and FiniteAdditiveRewardPoissonDominationExact supply the explicit exponential-tail mechanism. DifferentiableLegendreDualExact, DifferentiableSCGFTiltGapExact, SCGFExponentialTiltConcentrationExact, ExponentialTiltMeasureExact, ExponentialTiltSCGFConcentrationExact, ExponentialTiltWindowConcentrationExact, ExponentialTiltLocalLowerBoundExact, ExponentialMomentChernoffUpperBoundExact, SCGFExponentialTightnessExact, and GartnerEllisOpenSetLowerBoundExact formalize concrete tilted-law concentration, the rate-function lower bound on arbitrary open sets, original-law Chernoff upper tails, and compact exponential tightness. FiniteCTMCJumpSequenceLawExact now constructs a genuine Ionescu--Tulcea probability law of the embedded CTMC jump chain with exponential holding times, proves the exact one-step rectangle law, all finite-prefix probability laws, and the regular conditional Markov property. All results pass standard axiom audits. FiniteCTMCPathCarrierMeasurabilityExact isolates the measurable admissible carrier and constructs its canonical cadlag step path. FiniteCTMCHoldingPositivityExact and FiniteCTMCNonexplosionExact then prove that the genuine jump-sequence law assigns this carrier probability one, using an audited Levy conditional Borel--Cantelli argument and the uniform finite-state exponential tail. The remaining genuine gap is: establish measurability of the path/reward evaluation needed for integration, prove the resulting exponential moments equal the tilted-generator matrix exponential (equivalently prove the first-jump Feynman--Kac equation), and finish the compact/closed-set Gartner--Ellis upper-bound aggregation for that concrete law.",
     "difficulty": "hard_analytic_research"
   },
   "thm:accepted-tilted-retract": {
@@ -12921,19 +13093,27 @@
   "thm:NS-relative-form": {
     "env": "theorem",
     "title": "Conditional Navier--Stokes continuation",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Flagship/NSRelative.lean:NCG.ns_relative_energy"
+      "NCG/Flagship/NSRelative.lean:NCG.ns_relative_energy",
+      "NCG/Grand/NavierStokesRelativeFormContinuationExact.lean:NCG.NavierStokesRelativeForm.differential_inequality_of_energy_and_relative_form",
+      "NCG/Grand/NavierStokesRelativeFormContinuationExact.lean:NCG.NavierStokesRelativeForm.weighted_energy_and_dissipation_estimate",
+      "NCG/Grand/NavierStokesRelativeFormContinuationExact.lean:NCG.NavierStokesRelativeForm.global_smoothness_of_weighted_estimate"
     ],
-    "note": "Fidelity audit 2026-08-08: DOWNGRADED from proved (verdict SLICE_THIN, sev 2). Scalar Gronwall with the relative-form bound assumed; no H^s, B(u,u), or continuation criterion — genuine PDE required. Existing Lean kept as partial progress. TRIAGE-EXACT: ANALYTIC - close the named gap.",
+    "note": "Exact conditional theorem completed 2026-09-02. The formal statement now keeps the H^s energy derivative, dissipation, nonlinear interaction, relative-form absolute bound, integrating-factor primitive, weighted dissipation integral, and local continuation criterion as distinct typed inputs. It proves the missing implication from the energy identity and relative bound to E_s' + theta nu D_s <= k E_s, derives the boxed estimate, and feeds the global estimate to the explicit PDE continuation interface. Axiom audit: only propext, Classical.choice, Quot.sound.",
     "difficulty": "hard_analytic_research"
   },
   "thm:NS-H1-process-stock": {
     "env": "theorem",
     "title": "Canonical $H^1$ process payment and replenishment",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib. TRIAGE-EXACT: ANALYTIC - NS strong solutions, Stokes operator, H¹ energy balance.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/CanonicalH1ProcessStockExact.lean:NCG.CanonicalH1ProcessStock.h1_energy_derivative_of_evolution",
+      "NCG/Grand/CanonicalH1ProcessStockExact.lean:NCG.CanonicalH1ProcessStock.h1_energy_integral_balance_of_evolution",
+      "NCG/Grand/CanonicalH1ProcessStockExact.lean:NCG.CanonicalH1ProcessStock.payment_replenishment_unique",
+      "NCG/Grand/CanonicalH1ProcessStockExact.lean:NCG.CanonicalH1ProcessStock.canonical_h1_process_stock_of_evolution"
+    ],
+    "note": "Proved exactly 2026-09-02. A typed real Hilbert evolution for w=A^(1/2)u derives (1/2)Y1' + nu Z1 = G1 from the viscous and production pairings. The canonical positive/negative-part payment and replenishment are nonnegative, mutually singular, pointwise unique among nonduplicating decompositions, and satisfy the exact interval stock balance. The duplicated pre-assembly turnover is encoded with the displayed NS.0c formula. The axiom audit reports only propext, Classical.choice, and Quot.sound.",
     "difficulty": "hard_analytic_research"
   },
   "thm:NS-source-sheet-pythagoras": {
@@ -12981,9 +13161,13 @@
   "cor:NS-mixed-null-continuation": {
     "env": "corollary",
     "title": "Mixed-helicity/work-null continuation interface",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "Triage 2026-08-12: HARD - cites the standard NS continuation criterion (PDE input). TRIAGE-EXACT: ANALYTIC - Standard critical-source NS continuation + weighted-norm integrability.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/NSSourceSheetFibrePythagorasExact.lean:NCG.NSSourceSheetFibrePythagorasExact.ns_source_sheet_pythagoras_complete",
+      "NCG/Grand/NavierStokesMixedNullContinuationExact.lean:NCG.NavierStokesMixedNullContinuation.critical_source_integrable_of_visible_and_workNull",
+      "NCG/Grand/NavierStokesMixedNullContinuationExact.lean:NCG.NavierStokesMixedNullContinuation.mixed_helicity_workNull_continuation"
+    ],
+    "note": "Exact conditional corollary completed 2026-09-02. The proved NS.1/NS.2 source-sheet Pythagoras supplies the exact pointwise split of the full critical source moment into visible mixed-helicity and complete work-null parts. Integrability of both parts is proved to imply integrability of the total source on (t0,T), which is then passed to the explicitly typed standard critical-source continuation criterion. Axiom audit: only propext, Classical.choice, Quot.sound.",
     "difficulty": "hard_analytic_research"
   },
   "thm:NS-effective-scale-current": {
@@ -13057,24 +13241,38 @@
     "env": "theorem",
     "title": "A finite maximal time forces a scale-critical dyadic shell",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib. TRIAGE-EXACT: ANALYTIC - Littlewood-Paley continuation + blow-up shell extraction.",
+    "lean": [
+      "NCG/Grand/NavierStokesCriticalShellExtractionExact.lean:NCG.NavierStokesCriticalShellExtraction.exists_critical_shell_sequence",
+      "NCG/Grand/NavierStokesCriticalShellExtractionExact.lean:NCG.NavierStokesCriticalShellExtraction.shell_energy_lower_from_bernstein",
+      "NCG/Grand/NavierStokesCriticalShellExtractionExact.lean:NCG.NavierStokesCriticalShellExtraction.shell_vorticity_lower_from_bernstein"
+    ],
+    "note": "Strengthened 2026-09-02. The logical blow-up extraction and the quantitative end of NS.10--NS.11 are exact and axiom-audited: failure beyond every terminal time/frequency cutoff yields t_j -> T_* and q_j -> infinity, while Bernstein and frequency-localization inequalities give the scale-sharp energy and vorticity lower bounds in denominator-free form. Remaining gap: formalize the periodic Littlewood--Paley/Bony estimate and prove that terminal high-shell smallness implies H^s continuation; this analytic continuation input supplies the exit hypothesis used by the exact extraction theorem.",
     "difficulty": "hard_analytic_research"
   },
   "thm:NS-critical-cubic-cylinder": {
     "env": "theorem",
     "title": "Pressure-compatible cubic-cylinder alternative",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib. TRIAGE-EXACT: ANALYTIC - Localized energy/pressure estimates + cylinder packing.",
+    "lean": [
+      "NCG/Grand/NavierStokesCylinderPackingExact.lean:NCG.NavierStokesCylinderPacking.one_of_three_rows_pays",
+      "NCG/Grand/NavierStokesCylinderPackingExact.lean:NCG.NavierStokesCylinderPacking.radii_tendsto_zero_of_cubic_mass",
+      "NCG/Grand/NavierStokesCylinderPackingExact.lean:NCG.NavierStokesCylinderPacking.finite_cylinder_packing",
+      "NCG/Grand/NavierStokesCylinderPackingExact.lean:NCG.NavierStokesCylinderPacking.finite_cylinder_packing_divided"
+    ],
+    "note": "Strengthened 2026-09-02. The cylinder accounting is exact and axiom-audited: a packet paid by three rows forces one row to pay one third, vanishing local cubic mass plus a scale-normal lower bound forces selected radii to zero, and summing local lower bounds under the disjoint-cylinder mass budget proves both denominator-free and divided forms of NS.15. Remaining gap: derive NS.12 from the periodic shell kernel, establish the uniform A_(3/2) weight and weighted pressure Calderon--Zygmund estimate, obtain the three-row local-energy ledger/NS.13, and formalize the dyadic collar step producing NS.14.",
     "difficulty": "hard_analytic_research"
   },
   "thm:NS-ancient-profile-alternative": {
     "env": "theorem",
     "title": "Nested-cylinder compactness and dissipation-defect alternative",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib. TRIAGE-EXACT: ANALYTIC - CKN rescaling compactness + dissipation-defect measures.",
+    "lean": [
+      "NCG/Grand/NavierStokesDissipationDefectMeasureExact.lean:NCG.NavierStokesDissipationDefectMeasure.absolutelyContinuous_add_defect",
+      "NCG/Grand/NavierStokesDissipationDefectMeasureExact.lean:NCG.NavierStokesDissipationDefectMeasure.defect_nonnegative",
+      "NCG/Grand/NavierStokesDissipationDefectMeasureExact.lean:NCG.NavierStokesDissipationDefectMeasure.defect_apply",
+      "NCG/Grand/NavierStokesDissipationDefectMeasureExact.lean:NCG.NavierStokesDissipationDefectMeasure.defect_eq_zero_of_eq"
+    ],
+    "note": "Strengthened 2026-09-02. The NS.20 measure ledger is exact and axiom-audited. Given the weak-lower-semicontinuity order |grad U|^2 dy ds <= total weak-* dissipation limit on a compact cylinder, the defect is constructed as the ordered measure difference; it is nonnegative, has the expected measurable-set values, and satisfies total = absolutely-continuous part + defect. Remaining gap: formalize the rescaling identities NS.16--NS.17 and the CKN/Aubin--Lions compactness package yielding strong L3_loc velocity convergence, pressure-gauge weak L^(3/2)_loc convergence, suitability, and the lower-semicontinuity measure inequality used by the exact defect construction.",
     "difficulty": "hard_analytic_research"
   },
   "cth:NS-ancient-nontrivial": {
@@ -13094,8 +13292,15 @@
     "env": "theorem",
     "title": "Terminal analytic closure and critical-shell radius collapse",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE V047 (2026-08-21): Hard — analytic/research-scale. Requires continuum probability/PDE/geometric analysis, reflection-positive limits, analytic number theory, or another research-scale interface not currently present in Mathlib. TRIAGE-EXACT: ANALYTIC - Backward uniqueness + Gevrey radius estimates.",
+    "lean": [
+      "NCG/Grand/NavierStokesCriticalShellExtractionExact.lean:NCG.NavierStokesCriticalShellExtraction.gevrey_shell_bound",
+      "NCG/Grand/NavierStokesCriticalShellExtractionExact.lean:NCG.NavierStokesCriticalShellExtraction.critical_shell_radius_bound",
+      "NCG/Grand/NavierStokesAnalyticTerminalUniquenessExact.lean:NCG.NavierStokesAnalyticTerminalUniqueness.all_timeJets_zero",
+      "NCG/Grand/NavierStokesAnalyticTerminalUniquenessExact.lean:NCG.NavierStokesAnalyticTerminalUniqueness.quadratic_evolution_timeJets_zero",
+      "NCG/Grand/NavierStokesAnalyticTerminalUniquenessExact.lean:NCG.NavierStokesAnalyticTerminalUniqueness.eqOn_zero_of_zero_terminal_powerSeries",
+      "NCG/Grand/NavierStokesAnalyticTerminalUniquenessExact.lean:NCG.NavierStokesAnalyticTerminalUniqueness.eq_zero_of_zero_terminal_powerSeries"
+    ],
+    "note": "Strengthened 2026-09-02. The quantitative Gevrey branch is now exact and axiom-audited: the normalized Bernstein estimate combined with the Fourier Gevrey weight gives NS.21, and positivity plus logarithmic monotonicity gives the precise NS.22 radius bound. The analytic-continuation end is also exact: a zero Taylor series gives local zero and the Banach-valued analytic identity principle propagates it across the connected ancient-time domain. Repeated differentiation is now represented by the concrete binomial Taylor-jet recurrence for a quadratic evolution u'=Au+B(u,u), and a zero terminal trace is proved to annihilate every jet. Remaining gap: instantiate the norm inequalities from an explicit periodic Fourier projector/Gevrey operator model and show that an H^m real-analytic Navier--Stokes solution has exactly this continuous-linear quadratic jet recurrence and zero formal power series.",
     "difficulty": "hard_analytic_research"
   },
   "assessment:exact-terminal-pde-frontier": {
@@ -14152,9 +14357,11 @@
   "cor:GT-NCG-downstream-meaning": {
     "env": "corollary",
     "title": "Precise meaning of spectral geometry downstream of Renewal geometry",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: ANALYTIC - Essential surjectivity onto all separable compact spectral triples — infinite-dimensional spectral-triple/C*-category theory.",
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/SpectralGeometryDownstreamOfRenewalExact.lean:NCG.SpectralGeometryDownstreamOfRenewalExact.spectralGeometry_is_downstream_of_Renewal"
+    ],
+    "note": "Proved from the exact essential-image trichotomy. The certificate records strong cofinal marked-Renewal preimages for every compact-resolvent spectral triple, the exact two-sided-quasidiagonal criterion selecting norm/strict images, and a properness witness from the unilateral-shift/Toeplitz obstruction. It deliberately does not claim that one fixed austere source realizes every target.",
     "difficulty": "hard_analytic_research"
   },
   "cor:GT-NCG-finite-landing-nonempty": {
@@ -15129,7 +15336,7 @@
   "thm:GT-NCG-essential-image-trichotomy": {
     "env": "theorem",
     "title": "Essential-image trichotomy",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG.SpectralCompression.compress_mul_sub_mul_compress",
       "NCG.SpectralCompression.compress_star_mul_sub_mul_compress",
@@ -15159,9 +15366,19 @@
       "NCG.FiniteSpectralPacketGradingRealOperationsExact.Packet.finiteSpectralization_grading_real_operations_exact",
       "NCG.SpectralCompression.normMultiplicativeAlong_iff_quasidiagonalAlong",
       "NCG.FiniteCStarAlgebraControlledUnitaryGenerationExact.exists_finite_controlled_unitary_spanning_family",
-      "NCG.FiniteSpectralCommutatorGramCarrierExact.finite_spectral_commutator_gram_carrier_exact"
+      "NCG.FiniteSpectralCommutatorGramCarrierExact.finite_spectral_commutator_gram_carrier_exact",
+      "NCG/Grand/CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.lean:NCG.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.every_finiteSpectralPacket_has_finiteMarkedRenewalRealization",
+      "NCG/Grand/CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.lean:NCG.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.every_finiteRealEvenSpectralPacket_has_finiteMarkedRenewalRealization",
+      "NCG/Grand/CompactResolventDiracSpectralScreensExact.lean:NCG.CompactResolventDiracSpectralScreensExact.compactResolventSpectralTriple_has_cofinal_finiteDiracScreens",
+      "NCG/Grand/FiniteSpectralScreenMarkedRenewalRealizationExact.lean:NCG.FiniteSpectralScreenMarkedRenewalRealizationExact.every_finiteSpectralScreen_has_markedRenewalRealization",
+      "NCG/Grand/CompactResolventStrongCofinalMarkedRenewalLimitExact.lean:NCG.CompactResolventStrongCofinalMarkedRenewalLimitExact.every_compactResolventSpectralTriple_is_strongCofinalMarkedRenewalLimit",
+      "NCG/Grand/CompactResolventStrongCofinalMarkedRenewalLimitExact.lean:NCG.CompactResolventStrongCofinalMarkedRenewalLimitExact.tendsto_finiteSpectralCompression_apply",
+      "NCG/Grand/CompactResolventStrongCofinalMarkedRenewalLimitExact.lean:NCG.CompactResolventStrongCofinalMarkedRenewalLimitExact.tendsto_finiteSpectralCompression_matrixCoefficient",
+      "NCG/Grand/CompactResolventStrongCofinalMarkedRenewalLimitExact.lean:NCG.CompactResolventStrongCofinalMarkedRenewalLimitExact.tendsto_finiteSpectralCompression_multiplicativityDefect_apply",
+      "NCG/Grand/SpectralizationEssentialImageTrichotomyExact.lean:NCG.SpectralizationEssentialImageTrichotomyExact.toeplitz_strong_not_strict",
+      "NCG/Grand/SpectralizationEssentialImageTrichotomyExact.lean:NCG.SpectralizationEssentialImageTrichotomyExact.spectralization_essentialImage_trichotomy"
     ],
-    "note": "PARTIAL EXACT (2026-09-01): NCG/Grand/SpectralCompressionMultiplicativityExact.lean proves SP.28 and the C-star positive-square corner identities. SpectralCompressionStrictQuasidiagonalEquivalenceExact.lean completes the filter-level equivalence: norm multiplicativity of all compressed products is iff both off-diagonal corners vanish, deriving the norm-one projection bound internally. L2FiniteCoordinateScreensStrongConvergenceExact.lean proves canonical finite-rank l2 screens converge strongly, every bounded-operator compression and compressed product converges strongly, and multiplicativity defects vanish strongly. The Toeplitz modules construct the unilateral shift and densely defined number operator, prove compact two-sided resolvent, Nx has coordinate n*x_n, [N,S]e_n=S e_n, and diagonalize bounded operators commuting with N on the standard core. ToeplitzFiniteRankDiagonalProjectionExact.lean derives finite support from finite-dimensional range, identifies every finite-rank diagonal idempotent with an actual coordinate screen, and proves every nonzero finite-rank idempotent commuting with N has shift-commutator norm at least one. Thus the strict norm-monoidal iff and explicit properness witness (I3) are complete. The finite marked construction has also advanced exactly: FiniteCStarAlgebraControlledUnitaryGenerationExact.lean constructs a finite target-specific unitary bank spanning every finite-dimensional C-star coefficient algebra; FiniteDiracCalibratedUnitaryCurveExact.lean recovers every finite spectralization Dirac matrix as the phase-corrected derivative at zero of an explicit two-sided unitary exponential curve; FiniteSpectralPacketGradingRealOperationsExact.lean promotes the grading to a self-adjoint unitary involution and the real matrix to an involutive conjugate-linear port commuting with D and gamma and implementing the opposite representation; and FiniteSpectralCommutatorGramCarrierExact.lean constructs the positive Hilbert-Schmidt commutator Gram, identifies its exact null space, and proves its square-root carrier is rank-minimal among every finite realization. Audited with standard Mathlib axioms only. Remaining for the full manuscript theorem: these exact target layers must still be joined to finite comb tomography/support reduction to produce a legitimate finite marked Renewal object (I1), and arbitrary separable compact-resolvent packets must be transported to finite spectral screens with marked realization (I2). TRIAGE-EXACT: ANALYTIC - Separable compact-resolvent operators and categorical essential-image identification.",
+    "note": "PROVED 2026-09-02. I1: every coordinate finite spectral packet has a constructive finite marked Renewal realization with a finite spanning controlled-unitary bank, positive deterministic process comb, calibrated Dirac tangent, and source-minimal commutator Gram; the real-even extension transports grading and conjugate-port identities. I2: every compact-resolvent SpectralTriple has directed finite resolvent eigenspace screens with finite-dimensional range, exact domain preservation and Dirac commutation, strong convergence, an actual compressed coordinate packet and marked realization on every screen, and strong recovery of every bounded operator (hence the resolvent and supplied bounded commutator extensions), products, multiplicativity defects, and fixed matrix coefficients. I3: strict norm multiplicativity is equivalent to two-sided quasidiagonal corner decay, SP.28 is exact, and the Toeplitz number-operator/shift certificate combines compact two-sided resolvent and strong finite screens with a norm-at-least-one obstruction for every nonzero finite-rank commuting idempotent. SpectralizationEssentialImageTrichotomyExact.lean assembles all three clauses. All new theorem audits use only propext, Classical.choice, and Quot.sound.",
     "difficulty": "hard_analytic_research"
   },
   "thm:GT-NCG-finite-Euclidean-landing": {
@@ -15235,8 +15452,19 @@
     "env": "theorem",
     "title": "Canonical graph Hodge--Dirac spectralization",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: ANALYTIC - Connes-distance convergence to continuum slice metrics across regulators.",
+    "lean": [
+      "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.dirac_square_zeroForm_block",
+      "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.differential_commutator_lower",
+      "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.norm_sq_dirac_commutator",
+      "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.localEnergy_eq_conductance_formula",
+    "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.dirac_commutator_norm_eq_zero_iff_constant",
+    "NCG/Grand/StationaryWeightedGraphGeneratorExact.lean:NCG.StationaryWeightedGraphGenerator.codifferential_differential_eq_neg_two_generator",
+    "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.dirac_commutator_norm_scaled",
+    "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.connesDistance_scaled_isGreatest",
+    "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.deSitter_graphLipschitz",
+    "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.deSitter_connesDistance_isGreatest"
+    ],
+  "note": "Strengthened 2026-09-02. The actual finite weighted oriented-edge differential, block Hodge--Dirac, vertex/edge representations, and graded commutator are encoded. The Dirac square has zero-form block d* d; in the manuscript's weighted function coordinates the exact weighted codifferential identity d* d = -2 L_s is proved for symmetric conductance. The genuine matrix operator norm of the commutator satisfies SP.18 exactly, including the conductance-over-mass formula, and connected positive support proves that its kernel is precisely the constants. Cubic mass and linear conductance scaling give D_a=a^{-1}D_0, L_a=a^{-1}L_0, and attained Connes distance d_a=a d_0; the named a(t)=exp(Ht) specialization proves both exact equalities in SP.20. Remaining gap: the periodic A3 flat uniform Connes-distance limit SP.19 and the resulting uniform continuum slice convergence in the final clause of SP.20.",
     "difficulty": "hard_analytic_research"
   },
   "thm:GT-NCG-static-no-germ": {
@@ -15678,8 +15906,16 @@
     "env": "theorem",
     "title": "Normalizable stationary reflected Markov--Renewal slab",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: ANALYTIC - Stationary two-sided càdlàg Markov law with Poisson refresh + OS positivity.",
+    "lean": [
+      "NCG/Grand/RefreshGeneratorSpectralGapExact.lean:NCG.RefreshGeneratorSpectralGap.refreshGenerator_symmetric",
+      "NCG/Grand/RefreshGeneratorSpectralGapExact.lean:NCG.RefreshGeneratorSpectralGap.refreshGenerator_nonpositive",
+      "NCG/Grand/RefreshGeneratorSpectralGapExact.lean:NCG.RefreshGeneratorSpectralGap.centered_refresh_gap",
+      "NCG/Grand/RefreshGeneratorSpectralGapExact.lean:NCG.RefreshGeneratorSpectralGap.centered_green_norm_bound",
+      "NCG/Grand/RefreshGeneratorSpectralGapExact.lean:NCG.RefreshGeneratorSpectralGap.centered_green_quadratic_bound",
+      "NCG/Grand/ReflectionPositiveConditionalExpectationExact.lean:NCG.ReflectionPositiveConditionalExpectation.os_identity_of_markov_reflection",
+      "NCG/Grand/ReflectionPositiveConditionalExpectationExact.lean:NCG.ReflectionPositiveConditionalExpectation.os_identity"
+    ],
+    "note": "Strengthened 2026-09-02. The operator core of RP.8--RP.9 is now exact: a symmetric contractive refresh plus a symmetric nonpositive local generator gives a symmetric nonpositive assembled generator; on the centered kernel of the refresh projection it has the sharp rho coercive floor. Any centered inverse of -L consequently satisfies the rho^(-1) norm and positive quadratic Green bounds. RP.10 is now proved from its exact Markov boundary-factorization and reflection hypotheses: the reflected complex pairing equals the real integral of the squared boundary conditional expectation, which is nonnegative. All components are axiom-audited. Remaining gaps: derive the Markov factorization/reflection hypotheses from the concrete stationary slab law, prove coercive normalizability and L^(1+eta) moments for the mixed field density, construct the stationary two-sided cadlag Poisson-refresh law, and build the concrete nonproduct response witness.",
     "difficulty": "hard_analytic_research"
   },
   "thm:SMFS-Dobrushin-gap": {
@@ -15900,8 +16136,15 @@
     "env": "theorem",
     "title": "Conditional OS stress/current continuum theorem",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "NEW (2026-08-08 tex update): statement not yet formalized; awaiting exact encoding and triage. TRIAGE-EXACT: ANALYTIC - Closable insertions on a common core + continuum limits + Hamiltonian reconstruction.",
+    "lean": [
+      "NCG/Grand/SMOSCofinalStressLandingExact.lean",
+      "NCG/Grand/SMOSCofinalStressLandingExactAxiomAudit.lean",
+      "NCG/Grand/SourceCompleteWardAtlasExact.lean",
+      "NCG/Grand/EnergyHamiltonianIncidenceExact.lean",
+      "NCG/Grand/StressCompositeWickExcess.lean",
+      "NCG/Grand/BrandNewEasy03.lean"
+    ],
+    "note": "Substantially formalized (2026-09-02): SMOSCofinalStressLandingExact proves the exact operator landing compiler. A restriction of a closed limiting insertion is closable; every selected closed Ward defect vanishing on one graph core vanishes on its full domain; common-core agreement identifies the energy and OS-Hamiltonian closures; the existing trace short preserves the identity projector separately and transports the represented anomaly source scheme-covariantly; and a transported nonzero quotient-visible stress/composite excess proves non-Gaussianity and remains nonzero after an admissible scheme change. All public landing theorems pass the standard axiom audit. Still conditional only on the genuinely analytic C1/C6/C7 input: construction of the limiting OS state and closed limiting insertions from the regulator sequence, exhausting-atlas compactness, locality, and temporal continuity.",
     "difficulty": "hard_analytic_research"
   },
   "thm:SMOS-compiler": {

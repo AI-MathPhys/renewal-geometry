@@ -1,0 +1,8 @@
+import NCG.Grand.SCGFExponentialTiltConcentrationExact
+
+#print axioms NCG.SCGFExponentialTiltConcentration.tendsto_shiftedExponent
+#print axioms NCG.SCGFExponentialTiltConcentration.eventually_tiltedChernoffEnvelope_le
+#print axioms NCG.SCGFExponentialTiltConcentration.tiltedChernoffEnvelope_tendsto_zero
+#print axioms NCG.SCGFExponentialTiltConcentration.exists_upper_tilt_with_concentration
+#print axioms NCG.SCGFExponentialTiltConcentration.exists_lower_tilt_with_concentration
+

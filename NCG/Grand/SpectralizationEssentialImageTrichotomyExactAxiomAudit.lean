@@ -1,0 +1,6 @@
+import NCG.Grand.SpectralizationEssentialImageTrichotomyExact
+
+open NCG.SpectralizationEssentialImageTrichotomyExact
+
+#print axioms toeplitz_strong_not_strict
+#print axioms spectralization_essentialImage_trichotomy

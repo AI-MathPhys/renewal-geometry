@@ -1,0 +1,7 @@
+import NCG.Grand.ExponentialTiltLocalLowerBoundExact
+
+#print axioms NCG.ExponentialTiltLocalLowerBound.exponentialMoment_mul_tiltedMass_le_originalMass
+#print axioms NCG.ExponentialTiltLocalLowerBound.tilt_on_Ioo_le_center_add_abs_error
+#print axioms NCG.ExponentialTiltLocalLowerBound.tiltedWindow_changeOfMeasure
+#print axioms NCG.ExponentialTiltLocalLowerBound.eventually_originalMass_Ioo_lower_bound
+#print axioms NCG.ExponentialTiltLocalLowerBound.eventually_originalMass_Ioo_lower_bound_rateFunction

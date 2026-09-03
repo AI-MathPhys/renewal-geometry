@@ -1,0 +1,7 @@
+import NCG.Grand.FiniteCTMCPathEvaluationMeasurabilityExact
+
+#print axioms NCG.FiniteCTMCPathEvaluationMeasurability.jumpIndex_eq_iff_of_nonnegative_time
+#print axioms NCG.FiniteCTMCPathEvaluationMeasurability.admissibleJumpIndex_eq_iff
+#print axioms NCG.FiniteCTMCPathEvaluationMeasurability.measurable_admissibleJumpIndex
+#print axioms NCG.FiniteCTMCPathEvaluationMeasurability.measurable_admissibleStateAt
+#print axioms NCG.FiniteCTMCPathEvaluationMeasurability.admissibleStateAt_eq_cadlagPath

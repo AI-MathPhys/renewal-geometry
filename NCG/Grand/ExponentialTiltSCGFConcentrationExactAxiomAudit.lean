@@ -1,0 +1,7 @@
+import NCG.Grand.ExponentialTiltSCGFConcentrationExact
+
+#print axioms NCG.ExponentialTiltSCGFConcentration.momentRatio_eq_tiltedChernoffEnvelope
+#print axioms NCG.ExponentialTiltSCGFConcentration.tiltedMass_Ici_le_envelope
+#print axioms NCG.ExponentialTiltSCGFConcentration.tiltedMass_Iic_le_envelope
+#print axioms NCG.ExponentialTiltSCGFConcentration.exists_upper_tiltedMass_tendsto_zero
+#print axioms NCG.ExponentialTiltSCGFConcentration.exists_lower_tiltedMass_tendsto_zero

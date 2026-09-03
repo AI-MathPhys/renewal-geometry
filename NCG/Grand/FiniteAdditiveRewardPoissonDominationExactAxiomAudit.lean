@@ -1,0 +1,6 @@
+import NCG.Grand.FiniteAdditiveRewardPoissonDominationExact
+
+#print axioms NCG.FiniteAdditiveRewardPoissonDomination.abs_additiveReward_le_duration_add_jumpCount
+#print axioms NCG.FiniteAdditiveRewardPoissonDomination.abs_additiveReward_le_time_add_jumpCount
+#print axioms NCG.FiniteAdditiveRewardPoissonDomination.jumpCount_large_of_additiveReward_large
+

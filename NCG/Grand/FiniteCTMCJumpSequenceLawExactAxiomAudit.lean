@@ -1,0 +1,14 @@
+import NCG.Grand.FiniteCTMCJumpSequenceLawExact
+
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.destinationProbability_nonnegative
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.sum_destinationProbability
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.destinationMeasure_isProbabilityMeasure
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.holdingDestinationMeasure_isProbabilityMeasure
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.holdingDestinationMeasure_apply_prod_singleton
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.destinationProbability_of_ne
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.jumpKernel_isMarkov
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.historyJumpKernel_isMarkov
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.initialHoldingStateMeasure_isProbabilityMeasure
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.jumpSequenceLaw_isProbabilityMeasure
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.jumpPrefixLaw_isProbabilityMeasure
+#print axioms NCG.FiniteCTMCJumpSequenceLaw.condDistrib_jumpSequenceLaw

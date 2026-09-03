@@ -1,0 +1,5 @@
+import NCG.Grand.SpectralGeometryDownstreamOfRenewalExact
+
+open NCG.SpectralGeometryDownstreamOfRenewalExact
+
+#print axioms spectralGeometry_is_downstream_of_Renewal
