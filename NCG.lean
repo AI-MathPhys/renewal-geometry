@@ -686,6 +686,7 @@ import NCG.Grand.BrandNewEasy02
 import NCG.Grand.BrandNewEasy03
 import NCG.Grand.EasyExact00
 import NCG.Grand.EasyExact01
+import NCG.Grand.EasyExact02
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly
