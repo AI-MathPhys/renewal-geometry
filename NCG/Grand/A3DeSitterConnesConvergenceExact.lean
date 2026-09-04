@@ -13,7 +13,7 @@ masses and conductances, not a distance defined by scaling the answer.
 -/
 
 open Filter Set
-open scoped Topology Matrix.Norms.L2Operator
+open scoped Topology Pointwise Matrix.Norms.L2Operator
 
 namespace NCG.A3DeSitterConnesConvergence
 
@@ -35,6 +35,22 @@ def sliceConnesDistance (d : ℕ) [NeZero d] (H t : ℝ) (x y : Vertex d) : ℝ 
 /-- The metric of the homothetically scaled flat slice. -/
 def sliceFlatDistance (H t : ℝ) (x y : Space) : ℝ :=
   Real.exp (H * t) * flatDistance x y
+
+/-- Identification with Euclidean quotient distance on the physically scaled lattice. -/
+theorem sliceFlatDistance_eq_scaled_infDist (H t : ℝ) (x y : Space) :
+    sliceFlatDistance H t x y =
+      Metric.infDist (Real.exp (H * t) • (x - y))
+        (Real.exp (H * t) • (A3PeriodicSmoothEnergy.lattice : Set Space)) := by
+  rw [infDist_smul₀ (Real.exp_ne_zero _), Real.norm_eq_abs,
+    abs_of_pos (Real.exp_pos _), sliceFlatDistance, flatDistance_eq_infDist]
+
+theorem scaled_mass_eq_exp_three (d : ℕ) (H t : ℝ) (x : Vertex d) :
+    scaledMass (Real.exp (H * t)) (mass d) x = Real.exp (3 * H * t) * mesh d ^ 3 := by
+  have he := Real.exp_nat_mul (H * t) 3
+  norm_num only [Nat.cast_ofNat] at he
+  rw [scaledMass, mass, ← he]
+  congr 2
+  ring
 
 theorem slice_graphLipschitz_eq (d : ℕ) [NeZero d] (H t : ℝ) (f : Vertex d → ℝ) :
     graphLipschitz (scaledMass (Real.exp (H * t)) (mass d))
@@ -64,7 +80,7 @@ theorem eventually_uniform_slice_distance_error
       |sliceConnesDistance (n + 1) H t x y -
         sliceFlatDistance H t (point (n + 1) x) (point (n + 1) y)| < ε := by
   obtain ⟨B, hB⟩ := hK.bddAbove_image
-    ((continuous_const.mul continuous_id).exp.continuousOn :
+    ((Real.continuous_exp.comp (continuous_const.mul continuous_id)).continuousOn :
       ContinuousOn (fun t : ℝ => Real.exp (H * t)) K)
   let C := |B| + 1
   have hC : 0 < C := by dsimp [C]; positivity

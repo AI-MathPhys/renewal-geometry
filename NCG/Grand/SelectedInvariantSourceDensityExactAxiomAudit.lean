@@ -1,0 +1,9 @@
+import NCG.Grand.SelectedInvariantSourceDensityExact
+
+#print axioms NCG.SelectedInvariantSourceDensity.mem_selectedSector_iff
+#print axioms NCG.SelectedInvariantSourceDensity.mem_selectedSector_iff_supported_invariant
+#print axioms NCG.SelectedInvariantSourceDensity.isClosed_selectedSector
+#print axioms NCG.SelectedInvariantSourceDensity.select_mem_selectedSector
+#print axioms NCG.SelectedInvariantSourceDensity.selection_image_fixedSubmodule
+#print axioms NCG.SelectedInvariantSourceDensity.closure_selected_writers_eq_sector
+#print axioms NCG.SelectedInvariantSourceDensity.closure_centered_selected_writers_eq_neutral

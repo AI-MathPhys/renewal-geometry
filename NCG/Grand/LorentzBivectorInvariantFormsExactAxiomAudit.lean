@@ -1,0 +1,10 @@
+import NCG.Grand.LorentzBivectorInvariantFormsExact
+
+#print axioms NCG.LorentzBivectorInvariantForms.bivectorAction_mul
+#print axioms NCG.LorentzBivectorInvariantForms.bivectorAction_transpose
+#print axioms NCG.LorentzBivectorInvariantForms.bivectorAction_minkowskiMetric
+#print axioms NCG.LorentzBivectorInvariantForms.bivectorMetric_squared
+#print axioms NCG.LorentzBivectorInvariantForms.metric_mul_wedgePairing
+#print axioms NCG.LorentzBivectorInvariantForms.bivectorAction_preserves_metric
+#print axioms NCG.LorentzBivectorInvariantForms.bivectorAction_wedgePairing
+#print axioms NCG.LorentzBivectorInvariantForms.hodgeStar_commutes_lorentz

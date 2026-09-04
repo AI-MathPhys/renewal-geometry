@@ -1,6 +1,8 @@
 import NCG.Grand.A3DeSitterConnesConvergenceExact
 
 #print axioms NCG.A3DeSitterConnesConvergence.conductance_nonneg
+#print axioms NCG.A3DeSitterConnesConvergence.sliceFlatDistance_eq_scaled_infDist
+#print axioms NCG.A3DeSitterConnesConvergence.scaled_mass_eq_exp_three
 #print axioms NCG.A3DeSitterConnesConvergence.slice_graphLipschitz_eq
 #print axioms NCG.A3DeSitterConnesConvergence.sliceConnesDistance_eq
 #print axioms NCG.A3DeSitterConnesConvergence.slice_distance_error_eq

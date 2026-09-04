@@ -1,0 +1,9 @@
+import NCG.Grand.MeasurableRecordProjectionExact
+
+#print axioms NCG.MeasurableRecordProjection.select_ae
+#print axioms NCG.MeasurableRecordProjection.select_add
+#print axioms NCG.MeasurableRecordProjection.select_smul
+#print axioms NCG.MeasurableRecordProjection.norm_select_le
+#print axioms NCG.MeasurableRecordProjection.select_eq_self_iff
+#print axioms NCG.MeasurableRecordProjection.select_idempotent
+#print axioms NCG.MeasurableRecordProjection.select_commutes_pullback

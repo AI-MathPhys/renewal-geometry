@@ -1,0 +1,8 @@
+import NCG.Grand.LorentzBivectorActionExact
+
+#print axioms NCG.LorentzBivectorAction.cycleRotation_lorentz
+#print axioms NCG.LorentzBivectorAction.halfTurnRotation_lorentz
+#print axioms NCG.LorentzBivectorAction.rationalBoost_lorentz
+#print axioms NCG.LorentzBivectorAction.bivectorAction_cycleRotation
+#print axioms NCG.LorentzBivectorAction.bivectorAction_halfTurnRotation
+#print axioms NCG.LorentzBivectorAction.hodgeStar_squared
