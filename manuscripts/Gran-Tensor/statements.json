@@ -1740,42 +1740,48 @@
     "title": "Projective common-response Pythagoras",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite-Omega martingale increments as orthogonal projections; nested head projections give exact Pythagoras split; one file with operator-valued conditional-expectation mini-library.",
+    "difficulty": "medium"
   },
   "cor:GT-projective-head-telescope": {
     "env": "corollary",
     "title": "Promotion telescope",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Direct telescope of residuals R^(h) from the Pythagoras split; finite sum manipulation.",
+    "difficulty": "easy"
   },
   "cth:GT-terminal-marginals-no-novelty": {
     "env": "countertheorem",
     "title": "Marginal terminal energies do not determine novelty",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit 2x2 matrix witness; compute terminal energies and novelty for both contractions directly.",
+    "difficulty": "easy"
   },
   "thm:GT-projective-head-replay": {
     "env": "theorem",
     "title": "Final-head source action and positive level replay",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Min-norm solution via Moore-Penrose (repo machinery) plus Cauchy-Schwarz optimal-allocation identities; unbiasedness on finite sample space.",
+    "difficulty": "medium"
   },
   "cor:GT-projective-head-pruning": {
     "env": "corollary",
     "title": "Target-local level pruning and allocation freeze",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Set characterization of active levels plus freeze policy stated as exact zero-certificate implication; near-definitional.",
+    "difficulty": "easy"
   },
   "thm:GT-projective-head-heldout": {
     "env": "theorem",
     "title": "Common-response cross-level held-out and cutoff transport",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Cross-level orthogonality from martingale increments plus intertwining transport identities; finite block algebra in one file.",
+    "difficulty": "medium"
   },
   "fire:GT-projective-head-scope": {
     "env": "firewall",
@@ -1789,7 +1795,8 @@
     "title": "Ancestry-resolved terminal response and no-double-charging short",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Pseudoinverse projection Pythagoras + polar synthesis via C^{dagger/2} (repo MP/CFC sqrt) + rank-minimality; multi-part but all finite.",
+    "difficulty": "medium"
   },
   "fire:GT-ancestry-response-scope": {
     "env": "firewall",
@@ -1810,7 +1817,8 @@
     "title": "Complete multiplicative-gauge classification",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Positive-function coboundary classification on finite state space; h_j=B_j/A_j uniqueness by direct algebra.",
+    "difficulty": "easy"
   },
   "fire:GT-factor-not-stage": {
     "env": "firewall",
@@ -1831,14 +1839,16 @@
     "title": "Exact stage-defect telescope and route cocycle",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Exact telescope identity plus TV bound via signed-measure Jordan (repo machinery) on finite space.",
+    "difficulty": "easy"
   },
   "thm:GT-stage-product-interval": {
     "env": "theorem",
     "title": "Sharp common-history product interval from two marginals",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite Hardy-Littlewood rearrangement inequality with comonotone/countermonotone attainment; build finite quantile/coupling mini-library.",
+    "difficulty": "medium"
   },
   "def:GT-record-likelihood-tower": {
     "env": "definition",
@@ -1852,7 +1862,8 @@
     "title": "Canonical record-likelihood, entropy, and Fisher tower",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite likelihood martingale + KL chain rule (finite KL/Gibbs mini-library) + L2 innovation Pythagoras + Fisher form monotonicity; one file.",
+    "difficulty": "medium"
   },
   "def:GT-record-factor-residual": {
     "env": "definition",
@@ -1866,14 +1877,16 @@
     "title": "Canonical factor audit, approximate recovery, and cofinal transport",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Equivalence chain plus triangle-inequality error propagation; convergence statements are finite-dimensional norm limits.",
+    "difficulty": "medium"
   },
   "thm:GT-physical-stage-alternative": {
     "env": "theorem",
     "title": "Physical stage-attribution alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Formalize as exhaustive first-match disjunction over the defined certificates of the stage framework; interface-heavy but finite.",
+    "difficulty": "medium"
   },
   "fire:GT-record-information-not-source": {
     "env": "firewall",
@@ -1894,14 +1907,16 @@
     "title": "Physical-source Pythagoras and opposite monotonicities",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Least-squares completion identity via G^dagger plus Loewner monotonicity chain of residual projections; repo MP/Schur machinery.",
+    "difficulty": "medium"
   },
   "thm:GT-mediator-loss-Gram": {
     "env": "theorem",
     "title": "Complete mediator-loss Gram",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - 2x2 block Gram positivity, Schur complement bound and Cauchy-Schwarz; direct from repo Schur machinery.",
+    "difficulty": "easy"
   },
   "rem:GT-mediator-information-telescope": {
     "env": "remark",
@@ -1915,14 +1930,16 @@
     "title": "Constraint-first Riesz--Thomson action",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - G-orthogonal projection onto ker L via pseudoinverse; minimum-action solution and Pythagoras by direct algebra.",
+    "difficulty": "easy"
   },
   "thm:GT-physical-source-transport": {
     "env": "theorem",
     "title": "Primitive transport of a physically restricted source",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Exact three-term defect decomposition plus congruence identities; summable-defect limit in finite dimensions.",
+    "difficulty": "medium"
   },
   "fire:GT-physical-source-order": {
     "env": "firewall",
@@ -2052,7 +2069,8 @@
     "title": "Exact old compression does not transport a source short",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit 2x2 witness; compute K_delta = delta/(1+delta) and its limit.",
+    "difficulty": "easy"
   },
   "def:GT-source-compatible-retraction": {
     "env": "definition",
@@ -2066,35 +2084,40 @@
     "title": "Exact adjacent-cutoff source-short transport",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Loewner recursion induction and telescoping sum; eigenvalue floor from norm-summability.",
+    "difficulty": "easy"
   },
   "thm:GT-source-short-rotation": {
     "env": "theorem",
     "title": "Energy-dual control of source rotation",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Energy-dual norm bound via A^{1/2} conjugation and inverse square-root perturbation; careful but finite operator inequalities.",
+    "difficulty": "medium"
   },
   "thm:GT-Feshbach-source-debit": {
     "env": "theorem",
     "title": "Feshbach characterization of the returning-memory debit",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Schur-complement iff characterization (repo Feshbach/Haynsworth machinery); both directions by completing the square.",
+    "difficulty": "easy"
   },
   "cor:GT-Hodge-return-debit": {
     "env": "corollary",
     "title": "Hodge-screen returning-memory compiler",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Combine Feshbach debit with Hodge-screen splitting (repo finite Hodge machinery); summability arithmetic on top.",
+    "difficulty": "medium"
   },
   "cor:GT-source-short-Mosco": {
     "env": "corollary",
     "title": "Mosco handoff and the separate noncollapse row",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Mosco convergence of closed forms on changing Hilbert spaces is irreducibly infinite-dimensional variational analysis; out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:GT-returning-memory-support": {
     "env": "firewall",
@@ -2108,35 +2131,40 @@
     "title": "Uniform exact-trace window and cofinal projective landing",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - TV-compactness subsequence extraction, C1_loc convergence and inverse-limit probability measure; continuum projective limit out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:GT-exact-trace-source-reserve": {
     "env": "theorem",
     "title": "Projective exact-trace source reserve and infinite-rank noncollapse",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Lower reserve on limiting exact-trace family with infinite-rank cylinder source bank on inverse-limit measure; analytic limit object.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:GT-exact-trace-reflection-closure": {
     "env": "theorem",
     "title": "Reflection-positive master state and zero vertical closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Reflection positivity of inverse-limit measure and fibre-integration closure on continuum cylinder algebra; out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:GT-exact-trace-dynamic-memory": {
     "env": "theorem",
     "title": "Canonical traced response and dynamic-memory alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Schur complement trace formula, Green identity and reducing-subspace equivalences; finite block matrix algebra via repo Schur machinery.",
+    "difficulty": "easy"
   },
   "cth:GT-static-projectivity-no-clock": {
     "env": "countertheorem",
     "title": "A projective static marginal does not determine its clock",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Restrict 2D OU generators to linear span: traced response = harmonic mean 2ab/(a+b) by 2x2 algebra; non-invariance via Gaussian Plancherel (repo).",
+    "difficulty": "medium"
   },
   "fire:GT-exact-trace-scope": {
     "env": "firewall",
@@ -2150,14 +2178,16 @@
     "title": "Transfer-resolvent bracket, finite-lag compiler, and matrix source clock",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Resolvent bracketing is finite, but the converse matrix Hausdorff moment theorem (representing measure on [0,1]) needs substantial new library.",
+    "difficulty": "hard_finite_library"
   },
   "thm:GT-source-renewal-lifetime": {
     "env": "theorem",
     "title": "Operator-valued renewal lifetime and exact mesh projectivity",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite spectral decomposition makes Lambda a finite exponential mixture; identities via interval-integral/Gamma integrals; one spectral-renewal file.",
+    "difficulty": "medium"
   },
   "def:GT-source-lifetime-W": {
     "env": "definition",
@@ -2171,14 +2201,16 @@
     "title": "Lifetime transport and joint reflected spectral tangent",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - W1 metric on operator measures, completeness of unitary quotient, OS reconstruction and joint PVM with weak convergence; analytic content.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:GT-wavepacket-tangent-cone": {
     "env": "theorem",
     "title": "Whitened wave-packet tangent, renewal landing, and source-visible cone",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Wave-packet scaling limits and weak convergence of rescaled joint spectral measures on the continuum; out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:GT-wavepacket-tangent-scope": {
     "env": "firewall",
@@ -2192,49 +2224,56 @@
     "title": "Moment windows do not determine a joint tangent",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Requires constructing a translation-covariant reflected packet with divergent scale subsequences; infinite scaling family out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "prop:GT-joint-tangent-stabilizer": {
     "env": "proposition",
     "title": "Joint-tangent route stabilizer",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Stabilizer iff is direct; separating C_c test for distinct finite Borel measures via Mathlib finite-measure separation; reduce operator-valued to scalar entries.",
+    "difficulty": "medium"
   },
   "cth:GT-lifetime-no-momentum-ancestry": {
     "env": "countertheorem",
     "title": "Equal lifetime with distinct momentum ancestry",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Finite witness: two distinct measures on a small momentum window with identical delta_1 energy marginal; direct computation.",
+    "difficulty": "easy"
   },
   "thm:GT-dynamic-source-ancestry": {
     "env": "theorem",
     "title": "Static-to-dynamic source short and cutoff transport",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Krylov cyclic subspace (repo machinery) equals closed semigroup span in finite dims; projection split and nested-bank Loewner limit.",
+    "difficulty": "medium"
   },
   "thm:GT-temporal-Schur-dynamic-source": {
     "env": "theorem",
     "title": "Temporal Schur compiler and dual dynamic-birth certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Gram/pseudoinverse projection formula, Schur residual, decreasing Loewner limit and four-way equivalence; repo MP + Krylov machinery.",
+    "difficulty": "medium"
   },
   "prop:GT-dynamic-source-transport-rectangle": {
     "env": "proposition",
     "title": "Primitive-orbit Duhamel identity and four-cutoff dynamic rectangle",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Matrix Duhamel identity (repo interval-integral Duhamel) plus exact telescoping rectangle; finite algebra.",
+    "difficulty": "medium"
   },
   "thm:GT-cofinal-dynamic-source": {
     "env": "theorem",
     "title": "Cofinal dynamic-source landing under temporal exhaustion",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Norm limit of finite residual Grams under summable transported defects; positive-part spectral floor in finite dimensions.",
+    "difficulty": "medium"
   },
   "def:GT-source-action-packet": {
     "env": "definition",
@@ -2248,7 +2287,8 @@
     "title": "Variational covariance and polar reserve factorization",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Sup formula by completing the square; partial isometry via G^{dagger/2} polar (repo CFC machinery); spectral window transfer.",
+    "difficulty": "easy"
   },
   "def:GT-source-metric-Gramians": {
     "env": "definition",
@@ -2262,35 +2302,40 @@
     "title": "Metric-covariant horizon control and invariant zero atom",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite controllability Gramian via interval integrals; L2-control minimization reduces to Gramian pseudoinverse; Tikhonov monotone limit in finite dims.",
+    "difficulty": "medium"
   },
   "cth:GT-source-metric-collapses": {
     "env": "countertheorem",
     "title": "Three independent leverage-collapse mechanisms",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Three explicit scalar/2x2 witnesses with elementary exponential integrals; direct computation.",
+    "difficulty": "easy"
   },
   "thm:GT-source-metric-depth": {
     "env": "theorem",
     "title": "Coefficient-invariant source depth and block-Jacobi chain",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Krylov depth filtration is block-tridiagonal; short-time Taylor expansion of Gramian with explicit leading coefficient; careful finite asymptotics.",
+    "difficulty": "medium"
   },
   "thm:GT-source-metric-cofinal": {
     "env": "theorem",
     "title": "Cofinal reserve--geometry separation",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Formalize on finite comparison carrier: norm/trace limits of Gramians and residuals under uniform reserve window; finite-dim limit arithmetic.",
+    "difficulty": "medium"
   },
   "prop:GT-source-metric-transport": {
     "env": "proposition",
     "title": "Primitive transport before leverage",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Two exact algebraic defect decompositions (difference-of-products and integral defect); direct expansion.",
+    "difficulty": "easy"
   },
   "fire:GT-source-metric-scope": {
     "env": "firewall",
@@ -2304,7 +2349,8 @@
     "title": "A positive entrance residual can be a complete clock follower",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit 2x2 witness: Krylov span of e1 under coupled H is full, so R_dyn=0 while R_ent=1.",
+    "difficulty": "easy"
   },
   "fire:GT-source-clock-scope": {
     "env": "firewall",
@@ -2318,14 +2364,16 @@
     "title": "Low-island relative-moment reduction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite spectral-projection Loewner arithmetic plus Chebyshev/Markov tail bound on spectral measure; generalized eigenvalue attainment.",
+    "difficulty": "medium"
   },
   "cor:GT-low-island-cofinal-carrier": {
     "env": "corollary",
     "title": "Summable cofinal landing from relative low-island moments",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Summable increments give Cauchy sequence in Hilbert space; limit nonzero by norm floor; standard completeness.",
+    "difficulty": "easy"
   },
   "fire:GT-low-island-relative-scope": {
     "env": "firewall",
@@ -3444,7 +3492,6 @@
     "title": "Locked record count, Choi rank, and minimal Naimark record",
     "status": "proved",
     "lean": [
-      "NCG.Grand.LockedOpportunityInstrumentExact",
       "NCG.locked_opportunity_instrument",
       "NCG/Grand/LockedOpportunityNaimarkFrame.lean:NCG.lockedOpportunityTheta_bounds",
       "NCG/Grand/LockedOpportunityNaimarkFrame.lean:NCG.lockedOpportunityChoiRanks",
@@ -3454,7 +3501,9 @@
       "NCG/Grand/LockedOpportunityNaimarkFrame.lean:NCG.lockedRawFrame_nullVector",
       "NCG/Grand/LockedOpportunityNaimarkFrame.lean:NCG.lockedNaimarkNullVector_normalized",
       "NCG/Grand/LockedOpportunityNaimarkFrame.lean:NCG.lockedAcceptedFrame_not_orthogonal",
-      "NCG/Grand/LockedOpportunityNaimarkFrame.lean:NCG.lockedRecord_excludes_thirtySeven"
+      "NCG/Grand/LockedOpportunityNaimarkFrame.lean:NCG.lockedRecord_excludes_thirtySeven",
+      "NCG/Grand/LockedOpportunityInstrumentExact.lean:NCG.LockedOpportunityInstrumentExact.locked_opportunity_instrument_exact",
+      "NCG/Grand/LockedOpportunityInstrumentExact.lean:NCG.LockedOpportunityInstrumentExact.totalChoi_factorization"
     ],
     "note": "Gap closed exactly: from the concrete 24 operators, linear independence proves accepted Choi synthesis rank 24; the locked sum proves Bc=vec(I); and the total branchwise Choi sum is derived as B M_theta B*. Positivity then preserves total rank. The companion Naimark module proves unique minimal effects, non-projectivity, the exact one-dimensional synthesis kernel and normalized null vector, and exclusion of 37 cells.",
     "difficulty": "medium"
@@ -4511,7 +4560,8 @@
     "title": "Completeness, mass control, and contraction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Completeness and narrow-convergence metrization of a mass-aware Wasserstein-type metric on measure spaces; weak-convergence machinery out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "def:GT-triangular-defect": {
     "env": "definition",
@@ -4525,21 +4575,24 @@
     "title": "Vanishing adjacent defects do not select a continuum",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Dirac-mass witness reduces metric to point distances; sin(log n) adjacent-gap and subsequence analysis is elementary real analysis once metric on Diracs is pinned.",
+    "difficulty": "medium"
   },
   "cth:GT-triangular-weaker-than-summability": {
     "env": "countertheorem",
     "title": "Triangular coherence is strictly weaker than summability",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Dirac witness at (-1)^n/sqrt(n): D_N <= 2/sqrt(N) but adjacent defects sum like harmonic series; needs only Dirac-level metric evaluation.",
+    "difficulty": "medium"
   },
   "thm:GT-cofinal-projective-envelope": {
     "env": "theorem",
     "title": "Necessary-and-sufficient cofinal projective envelope",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Existence/uniqueness of projective envelope and Radon inverse-limit law; continuum projective limit with measure theory out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "def:GT-cofinal-route-defects": {
     "env": "definition",
@@ -4553,7 +4606,8 @@
     "title": "Cofinal route independence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Route independence of staged/direct coarse-graining limits in the mass-aware metric framework; same analytic machinery as envelope theorem.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:GT-projective-diagonal-fidelity": {
     "env": "firewall",
@@ -10652,7 +10706,7 @@
     "title": "Exact orientation-positive quartet cancellation",
     "status": "proved",
     "lean": [
-      "NCG.Grand.GhostQuartetCancellation"
+      "NCG/Grand/GhostQuartetCancellation.lean:NCG.GhostQuartetCancellation.ghost_quartet_and_BRST_descent"
     ],
     "note": "Exact finite proof: the existing Grassmann Gaussian theorem identifies the oriented ghost top coefficient with det L; positive definiteness makes det L nonzero and its inverse bosonic factor cancels it. Infinitesimal determinant responses cancel algebraically, while nilpotency and the no-boundary Berezin identity make every BRST-exact score closed and integral-zero.",
     "difficulty": "medium"
@@ -10886,98 +10940,112 @@
     "title": "Selected retained-terminal population and complete-path transport",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Grand existence/assembly of retained-terminal Einstein-SM histories with explicit summable defect bounds; elaborate multi-file finite infrastructure.",
+    "difficulty": "hard_finite_library"
   },
   "thm:RPESM-regular-fibre-current": {
     "env": "theorem",
     "title": "Canonical conditional current, same-randomness sampler, and zero bracket",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Weighted elliptic solve L_x phi=F, Moser flow transport and continuum current energies on conditional fibres; PDE content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "cor:RPESM-regular-fibre-margin": {
     "env": "corollary",
     "title": "Strict regular-fibre visibility, exact margin, and route orthogonality",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Depends on continuum conditional currents and solenoidal circulation div(rho R)=0; PDE content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:RPESM-sector-patched-line": {
     "env": "theorem",
     "title": "Sector-patched reflected line and coherent half-amplitude",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite-cover line-bundle algebra: partition-of-unity isometry, basis-independent reweighting, K^{1/2}S K^{1/2} rank formula, Cech coboundary iff; discrete one-form row for eta.",
+    "difficulty": "medium"
   },
   "thm:RPESM-complete-mixed-short": {
     "env": "theorem",
     "title": "Complete mixed sector--quantum Gram and canonical entrance short",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - 2x2 block positivity iff via pseudoinverse Schur complement, orthogonal split and trace identity plus 2-dim witness; repo Schur machinery.",
+    "difficulty": "easy"
   },
   "prop:RPESM-mixed-short-transport": {
     "env": "proposition",
     "title": "Adjacent-cutoff stability and four-cutoff transport of the mixed short",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Pseudoinverse perturbation identity on common support, norm bound, exact transport rectangle; careful but finite.",
+    "difficulty": "medium"
   },
   "thm:RPESM-quantum-source-metric": {
     "env": "theorem",
     "title": "Quantum-state-first score, complete mixed metric, and final source short",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite score decomposition with generator pseudoinverse and combination of mixed-short plus dynamic-ancestry results; assembly file.",
+    "difficulty": "medium"
   },
   "thm:SMST-actual-kinetic-derivative": {
     "env": "theorem",
     "title": "Conditional-score derivative of the actual kinetic Hamiltonian",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Derivative of finite Gibbs-type family: product-rule identities for s, R, P_j, H; conditional variance norm and rank<=2 block structure.",
+    "difficulty": "medium"
   },
   "thm:SMST-centered-material-tangent": {
     "env": "theorem",
     "title": "Centered material tangent and conditional locality",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Unitary transport tangent with oscillation bounds; explicit gauge-Higgs constants need a concrete finite model computation.",
+    "difficulty": "medium"
   },
   "thm:SMST-Fisher-Green-bridge": {
     "env": "theorem",
     "title": "Exact Fisher--Green reconstruction and stationary follower",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Pseudoinverse identities for J = H M s/2 and 4J*(H^dagger)^2 J = M; stationary follower via kernel matching; finite algebra with support care.",
+    "difficulty": "medium"
   },
   "thm:SMST-Gibbs-incidence-obstruction": {
     "env": "theorem",
     "title": "Gibbs incidence and connection-independent obstruction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Gibbs-map injectivity mod RI, HS variance bound, and pinching projection: orthogonal complement of commutators is spectral-diagonal; finite HS geometry.",
+    "difficulty": "medium"
   },
   "cth:SMST-three-record-incidence": {
     "env": "countertheorem",
     "title": "A multiplication writer need not be the kinetic tangent",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit 3-state witness; direct computation of W, its HS norm and the 1/12 mismatch.",
+    "difficulty": "easy"
   },
   "thm:SMST-81-record-incidence": {
     "env": "theorem",
     "title": "Outward-certified incidence failure on the $81$-record cylinder",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Certified numeric bound over an 81-record cylinder (inf over commutator + scalar subspace in dim 80); heavy certified rational enumeration.",
+    "difficulty": "hard_finite_library"
   },
   "thm:SMST-sharp-Dirac-threshold": {
     "env": "theorem",
     "title": "Sharp all-size singular-value threshold for the frozen Dirac family",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Sharp all-N singular-value infimum over Z_3 links and phi; needs circulant/Fourier Dirac analysis over all sizes plus configuration minimization library.",
+    "difficulty": "hard_finite_library"
   },
   "fire:SMST-actual-tangent-scope": {
     "env": "firewall",
@@ -10998,7 +11066,8 @@
     "title": "Exact right-clock leakage formula",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Fibrewise commutator leakage sum, vanishing iff invariance, rank identity; finite spectral fibre algebra given packet definitions.",
+    "difficulty": "medium"
   },
   "def:SMST-Duhamel-five-matrix": {
     "env": "definition",
@@ -11012,70 +11081,80 @@
     "title": "Duhamel variance, prior absorption, and final birth",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Three-way pseudoinverse Schur Pythagoras V=A+R with projection identities; repo MP/Schur machinery.",
+    "difficulty": "easy"
   },
   "thm:SMST-Duhamel-variance": {
     "env": "theorem",
     "title": "Matrix-valued right-energy variance and lower certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Matrix variance via finite spectral measure, HS commutator trace identity, and Lipschitz-below bound on calibrated multiplier via interval integral.",
+    "difficulty": "medium"
   },
   "thm:SMST-Duhamel-head-transport": {
     "env": "theorem",
     "title": "Support-stable finite Duhamel head and transport",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Head truncation Loewner sandwich with polynomial tail weight; continuity over compact card family; finite spectral arithmetic.",
+    "difficulty": "medium"
   },
   "lem:SMST-split-clock-trapezoid": {
     "env": "lemma",
     "title": "Sharp split-clock trapezoidal bound",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Trapezoid error for e^{-(a-s)x-sy}: monotone/convexity analysis on interval integral plus sharpness witness; elementary but careful calculus.",
+    "difficulty": "medium"
   },
   "thm:SMST-split-clock-target": {
     "env": "theorem",
     "title": "Endpoint-sensitive finite target approximation",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Operator trapezoid error via spectral calculus from scalar lemma; second-order ah^2/12 bound with (H-lambda)^2 weight.",
+    "difficulty": "medium"
   },
   "thm:SMST-mixed-clock-packet": {
     "env": "theorem",
     "title": "Exact $3m+3$ mixed-clock packet",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Exact finite reconstruction identities between the 3m+3 packet and the five inherited matrices; direct block algebra.",
+    "difficulty": "easy"
   },
   "cth:SMST-mixed-C-irredundant": {
     "env": "countertheorem",
     "title": "The auxiliary mixed row is irredundant",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit 3-dim witness with identical (S,T,U,G) and differing C; direct computation.",
+    "difficulty": "easy"
   },
   "thm:SMST-mixed-clock-interval": {
     "env": "theorem",
     "title": "Target-metric interval and cofinal landing without a horizon floor",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Loewner enclosure arithmetic combining trapezoid and tail bounds in weighted metric; finite-dim cofinal limit.",
+    "difficulty": "medium"
   },
   "thm:SMST-physical-low-island": {
     "env": "theorem",
     "title": "Physical generalized low island and the two weighted primitive panels",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Projection Pythagoras and principal-angle distance bound plus weighted absorption Gram identity; feeds low-island theorem; finite algebra.",
+    "difficulty": "medium"
   },
   "cth:SMST-five-matrices-not-weighted": {
     "env": "countertheorem",
     "title": "The five unweighted matrices do not determine the weighted panels",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit 2-dim witness: same five matrices, different weighted panel via monotone functional calculus f^{-1}(M_j).",
+    "difficulty": "easy"
   },
   "assess:SMST-Duhamel-compiler": {
     "env": "assessment",
@@ -11103,56 +11182,64 @@
     "title": "Source-local semigroup floor and collar modulus",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Semigroup Loewner floor G_t >= e^{-2tE*}G_0 via Gronwall/spectral argument and Lipschitz |t-s|K modulus; finite matrix semigroup file.",
+    "difficulty": "medium"
   },
   "cth:SMST-positive-time-high-energy-escape": {
     "env": "countertheorem",
     "title": "Base noncollapse without an energy row permits delayed collapse",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - 1-dim-per-level bank witness H_n=n: G_0=I but e^{-2tn} collapses; spectral escape immediate.",
+    "difficulty": "easy"
   },
   "thm:SMST-Markov-entrance-amplitude": {
     "env": "theorem",
     "title": "Exact Markov entrance-amplitude formula",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite-chain OS amplitude: reflection pairing equals L2(pi) inner product of conditioned segments; finite Markov semigroup algebra.",
+    "difficulty": "medium"
   },
   "thm:SMST-positive-time-interaction-landing": {
     "env": "theorem",
     "title": "Positive-time interaction landing",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite content is the uniform floor m*e^{-2tau E*} on each card from semigroup floor plus entrance Gram; limiting-state row kept as finite cofinal uniformity.",
+    "difficulty": "medium"
   },
   "cor:SMST-finite-hopping-positive-time": {
     "env": "corollary",
     "title": "Literal finite hopping interaction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite slab: delayed Gram of independent residual vectors is congruent to positive matrix via injective e^{-tau H}; plus explicit non-Gaussian stencil witness.",
+    "difficulty": "medium"
   },
   "thm:SMST-positive-time-transport-rectangle": {
     "env": "theorem",
     "title": "Delayed-source transport rectangle",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Exact defect definition and three-step telescoping rectangle; direct algebra.",
+    "difficulty": "easy"
   },
   "thm:SMST-marked-bond-resistance": {
     "env": "theorem",
     "title": "Marked-bond spectral resistance and cofinal alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Discrete spectral measure over Z with Gaussian-type weights: convergent series identities and exact exponential tilt; countable-sum file.",
+    "difficulty": "medium"
   },
   "cth:SMST-resistance-clock-not-OS-clock": {
     "env": "countertheorem",
     "title": "Static twist data do not identify the physical OS clock",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Clock rescaling witness: pushforward scaling of spectral measure and F_a(0)=a^{-1}F_1(0); direct computation.",
+    "difficulty": "easy"
   },
   "fire:SMST-positive-time-scope": {
     "env": "firewall",
@@ -11166,7 +11253,8 @@
     "title": "Exact de Rham incidence and cofinal one-form normalization",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Trig-polynomial one-forms: lattice Riemann sums become exact at finite bandwidth, discrete d intertwines reflection, refinement rectangles commute; finite Fourier file.",
+    "difficulty": "medium"
   },
   "assessment:microscopic-and-cofinal-electromagnetic-sources": {
     "env": "assessment",
@@ -11187,49 +11275,56 @@
     "title": "Exact routed first/second jets and their cocycle",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Exact jet/cocycle algebra for path-ordered unitaries: Hermitian/skew split, Maurer-Cartan identity, associative concatenation laws; finite matrix Lie algebra.",
+    "difficulty": "medium"
   },
   "cor:SMST-electromagnetic-scalar-branch": {
     "env": "corollary",
     "title": "Exact scalar-aggregation branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Covariantly-constant-charge iff scalar aggregation; direct algebra from router formula.",
+    "difficulty": "easy"
   },
   "cth:SMST-electromagnetic-phase-sum": {
     "env": "countertheorem",
     "title": "Equal total phase need not give equal current",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit Pauli-matrix two-link witness; direct computation of jets and norm sqrt(2).",
+    "difficulty": "easy"
   },
   "thm:SMST-electromagnetic-pullback": {
     "env": "theorem",
     "title": "Same-history pullback before whitening and shorting",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Positivity/invariance of pulled-back form, expectation-product counterexample row, and Krylov-subspace monotonicity EMR.17; finite algebra.",
+    "difficulty": "medium"
   },
   "thm:SMST-electromagnetic-current-chain": {
     "env": "theorem",
     "title": "Physical overlap--Yukawa current and routed capacity",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite operator derivative identities for the overlap-Yukawa map with lattice one-form insertions; exact product-rule algebra plus capacity scaling.",
+    "difficulty": "medium"
   },
   "thm:SMST-routed-electromagnetic-transport": {
     "env": "theorem",
     "title": "Exact routed-source and routed-form transport",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Two exact algebraic defect decompositions (product rule and congruence expansion); direct verification.",
+    "difficulty": "easy"
   },
   "thm:SMST-physical-electromagnetic-handoff": {
     "env": "theorem",
     "title": "Conditional physical-source-first current/clock handoff",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Grand conditional assembly tying one-form transport, routers, jets and residual landing; elaborate multi-file finite interface infrastructure.",
+    "difficulty": "hard_finite_library"
   },
   "fire:SMST-electromagnetic-router-scope": {
     "env": "firewall",
@@ -11250,28 +11345,32 @@
     "title": "Exact protected-source thread and zero transport debit",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Bounded exponential tilt on finite path spaces: explicit density bounds, constant normalizer, exact pushforward projectivity; master-law landing row as interface.",
+    "difficulty": "medium"
   },
   "thm:RPESM-H4-source-floors": {
     "env": "theorem",
     "title": "Explicit conditioned source and OS floors",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Explicit arctanh-threshold floors uniform in N; finite tilt-perturbation arithmetic with certified rational constants.",
+    "difficulty": "medium"
   },
   "prop:RPESM-H4-action-no-reprice": {
     "env": "proposition",
     "title": "Positive intrinsic action with no repeated source price",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - KL of exponential tilt with variance derivative identity; finite KL/Gibbs mini-library plus N-independence.",
+    "difficulty": "medium"
   },
   "cth:RPESM-invariant-scalar-no-ray": {
     "env": "countertheorem",
     "title": "A gauge-invariant scalar does not select a Higgs ray",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Fixed point of SU(2) on P(C^2) would give an invariant line, contradicting irreducibility of the fundamental rep; small explicit witness matrices.",
+    "difficulty": "easy"
   },
   "def:RPESM-relational-Higgs-source": {
     "env": "definition",
@@ -11285,56 +11384,64 @@
     "title": "Source-conditioned projectivity, reflection, and ancestry",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Bounded-tilt projectivity plus reflection positivity preservation; finite-cutoff exact identities in one file.",
+    "difficulty": "medium"
   },
   "thm:RPESM-local-orbit-full-rank": {
     "env": "theorem",
     "title": "Uniform local orbit floor and exact cutoff constancy",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Explicit uniform 2x2 orbit-Gram eigenvalue floor; certified rational/interval arithmetic and exact N-independence.",
+    "difficulty": "medium"
   },
   "cth:RPESM-local-source-no-rank-one": {
     "env": "countertheorem",
     "title": "A local source is not a macroscopic rank-one orbit",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Liminf bound direct from the uniform orbit floor of the previous theorem.",
+    "difficulty": "easy"
   },
   "prop:RPESM-no-infrared-axis": {
     "env": "proposition",
     "title": "Ultraviolet refinement is not thermodynamic volume",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Increasing subsets of a fixed finite carrier stabilize; near-trivial finite set theory.",
+    "difficulty": "easy"
   },
   "thm:RPESM-subextensive-fixed-source": {
     "env": "theorem",
     "title": "Fixed-source rank-one concentration under subextensive interaction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Product-law average covariance identity plus oscillation-bounded tilt concentration; finite probability with scalar M-to-infinity limits.",
+    "difficulty": "medium"
   },
   "cth:RPESM-bounded-source-removal": {
     "env": "countertheorem",
     "title": "Bounded source normalization has zero quasi-average",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Orbit-amplitude bound rho*^2 eta^2 under bounded per-site source; finite concentration arithmetic with thermodynamic scalar limit.",
+    "difficulty": "medium"
   },
   "thm:RPESM-UV-bounded-equivalence": {
     "env": "theorem",
     "title": "Bounded shell equivalence and ultraviolet tail triviality",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Infinite shell-product convergence, TV bound and tail sigma-algebra 0-1 law on the infinite product; projective-limit measure theory out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:RPESM-Higgs-scaling-trichotomy": {
     "env": "theorem",
     "title": "Elementary-Higgs collapse, white-noise landing, and scaling trichotomy",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Convergence in law in H^{-s} to white noise with cumulant vanishing; weak convergence of distribution-valued fields out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:RPESM-source-scale-scope": {
     "env": "firewall",
@@ -11348,28 +11455,32 @@
     "title": "Literal checkerboard marginal and strict finite-shell interaction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Exact checkerboard integration is finite, but certified interval bounds on c2, c4 and the quartic head need heavy certified quadrature of J_m integrals.",
+    "difficulty": "hard_finite_library"
   },
   "thm:RPESM-fixed-margin-white-noise": {
     "env": "theorem",
     "title": "Fixed-margin white-noise and critical-window alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Dobrushin-mixing correlation decay and CLT to Gaussian white noise over vanishing mesh; random-field weak convergence out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:RPESM-two-shell-root-bracket": {
     "env": "theorem",
     "title": "Uniform two-shell root bracket",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Perron value is algebraic, but uniform-in-volume Gibbs moment bounds and certified sign brackets of m_2L need substantial finite Gibbs/expansion library plus IVT.",
+    "difficulty": "hard_finite_library"
   },
   "thm:RPESM-root-subsequence": {
     "env": "theorem",
     "title": "Subsequential retuned-root packet and coherent escape",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Subsequential infinite-volume Gibbs-state convergence and tightness of coherent currents; thermodynamic-limit weak convergence out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "def:RPESM-critical-infrared-window": {
     "env": "definition",
@@ -11383,21 +11494,24 @@
     "title": "A coherent mass root does not determine a kinetic window",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit Gaussian current laws on a finite torus with prescribed Fourier covariance; direct K-hat computation (repo Gaussian machinery).",
+    "difficulty": "easy"
   },
   "thm:RPESM-covariance-walk": {
     "env": "theorem",
     "title": "Positive covariance walk and exact characteristic exponent",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Needs Griffiths/Ginibre-type nonnegative-correlation library for the vector model; then finite Fourier walk representation is direct.",
+    "difficulty": "hard_finite_library"
   },
   "thm:RPESM-all-mode-kinetic-floor": {
     "env": "theorem",
     "title": "Shared-site variance floor and strict all-mode stability",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Uniform single-site conditional variance floor over all volumes/boundaries needs certified one-site integral estimates; shared-site Fourier step is easy.",
+    "difficulty": "hard_finite_library"
   },
   "assess:RPESM-lower-window-closed": {
     "env": "assessment",
@@ -11411,28 +11525,32 @@
     "title": "Covariance-radius and four-mode equivalence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite-torus Fourier equivalences between covariance radius and kinetic bounds; explicit constant arithmetic with 1-cos comparisons.",
+    "difficulty": "medium"
   },
   "thm:RPESM-infrared-source-compiler": {
     "env": "theorem",
     "title": "Finite source-Hessian compiler for the complete kinetic window",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Central-difference second-derivative Taylor bound h^2 M4/12 plus reconstruction identity and four-valued interval decision; finite calculus.",
+    "difficulty": "medium"
   },
   "cor:RPESM-safe-root-collar": {
     "env": "corollary",
     "title": "Explicit safe-root collar branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Needs finite Dobrushin-uniqueness machinery with certified influence constants and exponentially summable covariance collar.",
+    "difficulty": "hard_finite_library"
   },
   "thm:RPESM-finite-local-nongaussianity": {
     "env": "theorem",
     "title": "Finite local interaction and the cofinal source alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Non-Gaussianity via quartic coercivity, |t|^{4/3} log-moment growth and nonzero cumulant, plus cofinal Gaussianization alternative; substantial scalar-law library.",
+    "difficulty": "hard_finite_library"
   },
   "fire:RPESM-kinetic-source-scope": {
     "env": "firewall",
@@ -12866,7 +12984,7 @@
     "title": "Gauge covariance of the complete coefficient",
     "status": "proved",
     "lean": [
-      "NCG.Grand.CompleteFermionGaugeCovariance"
+      "NCG/Grand/CompleteFermionGaugeCovariance.lean:NCG.CompleteFermionGaugeCovariance.complete_fermion_gauge_covariance"
     ],
     "note": "Exact finite-matrix proof: component spacetime and Clifford-Yukawa covariance plus Hodge intertwining derive the complete unitary left-right law. Rank, the squared singular polynomial, determinant divisor, every mass-regulated graph spectral polynomial, and zero-mode multiplicity are invariant.",
     "difficulty": "medium"
@@ -13057,7 +13175,8 @@
     "title": "Relation descent and exact reflected-hopping alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Compression descent iff, nearest-PSD-in-HS via (K_h)_+, rank-minimal factorization unique up to unitary; repo CFC/polar machinery in one file.",
+    "difficulty": "medium"
   },
   "fire:SMQG-no-crossing-projection-repair": {
     "env": "firewall",
@@ -13071,7 +13190,8 @@
     "title": "Balanced-slab sign correspondence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit 2x2 block inverse cross block H(m^2-H^2)^{-1} and inertia equality; repo Haynsworth/Schur machinery.",
+    "difficulty": "easy"
   },
   "assess:SMQG-first-crossing-gate": {
     "env": "assessment",
@@ -13767,7 +13887,8 @@
     "title": "Bounded source-tail Radonification and reflected landing",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Minlos-type Radonification of a characteristic functional on a nuclear test space; infinite-dimensional measure theory out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "def:SMST-Gaussian-cocycle": {
     "env": "definition",
@@ -13781,21 +13902,24 @@
     "title": "Complete bounded Gaussian separator",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Gaussian-iff-cocycle-vanishes characterization of scalar characteristic functions needs a substantial real-analytic char-function library; certificate bounds then easy.",
+    "difficulty": "hard_finite_library"
   },
   "thm:SMST-Gaussian-master": {
     "env": "theorem",
     "title": "Weighted Gaussian master defect, replicated audit, and finite witness",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Weighted master defect and replicated audit are finite series/expectation algebra, but inherit the Gaussian-cocycle characterization library.",
+    "difficulty": "hard_finite_library"
   },
   "thm:SMST-projective-bounded-source": {
     "env": "theorem",
     "title": "Projective bounded-source field alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - L2 martingale limits on an inverse-limit filtration with OS-source landing; infinite filtration/projective content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "def:SMST-Weyl-dynamic-packet": {
     "env": "definition",
@@ -13809,14 +13933,16 @@
     "title": "Static Weyl law does not determine the transfer clock",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Two-state flip process: E[X_0 X_tau]=e^{-2a tau} from repo finite-CTMC machinery; static characteristic obviously a-independent.",
+    "difficulty": "easy"
   },
   "thm:SMST-Weyl-Dirichlet-resolvent": {
     "env": "theorem",
     "title": "Source-cyclic Dirichlet and fixed-Laplace Green reconstruction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite-dim reduction: monotone lag Grams, Dirichlet limit, Laplace-Green matrix with exponential tail bounds via interval integrals.",
+    "difficulty": "medium"
   },
   "fire:SMST-bounded-source-scope": {
     "env": "firewall",
@@ -14053,7 +14179,7 @@
     "title": "Stress-linked primitive non-Gaussianity",
     "status": "proved",
     "lean": [
-      "NCG.Grand.StressCompositeWickExcess"
+      "NCG/Grand/StressCompositeWickExcess.lean:NCG.StressCompositeWickExcess.stress_linked_primitive_non_gaussianity_and_scheme_invariance"
     ],
     "note": "Exact finite-slot proof: direct and Wick tensors descend through surjective stress-short and multislot OS quotient maps; a nonzero quotient-visible excess contradicts Gaussian/quasi-free Wick equality. Common invertible stress, composite, and value scheme maps preserve vanishing of the excess.",
     "difficulty": "medium"
@@ -14149,21 +14275,24 @@
     "title": "Simultaneous charge--flux short and exact Gauss landing",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Three-way orthogonal projection Pythagoras with range-sum iff; direct pseudoinverse algebra.",
+    "difficulty": "easy"
   },
   "thm:SMOS-charge-landing": {
     "env": "theorem",
     "title": "Charge implementer, commutant anchors, and cofinal landing",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Graph limits, closability and norm-resolvent convergence of unbounded charges on an infinite carrier; unbounded operator theory out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:SMOS-source-visible-superselection": {
     "env": "theorem",
     "title": "Conservation, screening, and source-visible superselection",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite-dim commuting spectral sector grading, Pythagoras trichotomy, and ladder relation for charged fields; finite spectral algebra.",
+    "difficulty": "medium"
   },
   "fire:SMOS-charge-scope": {
     "env": "firewall",
@@ -14177,7 +14306,8 @@
     "title": "Selected local-net and covariance landing",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - C*-algebra local net with quasilocal norm closure and unitary covariance extension; infinite operator-algebraic content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:SMOS-local-net-scope": {
     "env": "firewall",
@@ -14198,21 +14328,24 @@
     "title": "Minimum source-cyclic translation reconstruction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - GNS realization with strongly continuous translation unitaries and joint PVM (SNAG); infinite-dimensional reconstruction out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "cth:SMOS-finite-translation-no-spectrum": {
     "env": "countertheorem",
     "title": "Finite translation samples do not determine a spectrum",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Two explicit scalar Laplace kernels agreeing at t=0,1 with distinct supports; direct computation.",
+    "difficulty": "easy"
   },
   "thm:SMOS-translation-target-ladder": {
     "env": "theorem",
     "title": "Translation-kernel target ladder and the two resolvent variables",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite-dim reduction: Laplace resolvent integral identity, Dirichlet limit, invariant-mass resolvent and explicit forgetting counterexamples.",
+    "difficulty": "medium"
   },
   "fire:SMOS-Laplace-not-mass": {
     "env": "firewall",
@@ -14226,21 +14359,24 @@
     "title": "Source-visible mass measure, flat atomic closure, and shell alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite spectral measures: Stieltjes inversion limits computable, Hankel/Krylov flat closure via repo machinery, shell alternative as case split.",
+    "difficulty": "medium"
   },
   "thm:SMOS-cofinal-spectrum": {
     "env": "theorem",
     "title": "Cofinal spectral tightness and persistence of an isolated shell",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Tightness and weak limits of compressed energy-momentum measures; Riesz-contour part is finite but the landing quantifies over weak convergence.",
+    "difficulty": "hard_analytic_research"
   },
   "cth:SMOS-atom-dissolution": {
     "env": "countertheorem",
     "title": "Cutoffwise atoms can dissolve into a continuum",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Explicit atomic measures converging weakly to uniform on [m^2,m^2+1]; needs a light weak-convergence-against-continuous-tests argument.",
+    "difficulty": "medium"
   },
   "prin:SMOS-local-spectral-order": {
     "env": "principle",
@@ -14254,7 +14390,8 @@
     "title": "Generalized-free controls separate a transfer gap from a particle shell",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Kallen-Lehmann covariances with R^3 integrals and reflection positivity on test functions; continuum field-theory analysis out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "cor:accepted-target-native-scalar": {
     "env": "corollary",
@@ -14456,8 +14593,7 @@
       "NCG/Grand/PetzEqualityExact.lean:NCG.Petz.stineConjRight_support_of_posDef",
       "NCG/Grand/PetzEqualityExact.lean:NCG.Petz.compress_partialTraceRightPetzMap_stineConjRight",
       "NCG/Grand/PetzEqualityExact.lean:NCG.Petz.deltaDPI_eq_zero_implies_petz_recovery",
-      "NCG/Grand/PetzEqualityExact.lean:NCG.Petz.deltaDPI_eq_zero_iff_petz_recovery",
-      "QICLean/Channel/Schwarz/WeylSupportPetzRecovery.lean:Matrix.partialTraceRightPetzMap_eq_of_relativeEntropy_eq_general_support"
+      "NCG/Grand/PetzEqualityExact.lean:NCG.Petz.deltaDPI_eq_zero_iff_petz_recovery"
     ],
     "note": "PROVED EXACTLY (2026-08-31): QICLean v0.2.1 supplies the proved support-domain equality theorem for right partial trace. The local bridge identifies the two spectral-calculus/relative-entropy conventions, uses a right-environment Stinespring isometry, proves support inclusion from faithful sigma, and compresses QICLean's raw partial-trace Petz formula to the manuscript's explicit Kraus-form Petz map. Together with the already proved DPI and recovery-implies-equality direction, QS.1-QS.4 are unconditional. The axiom audit reports only standard Lean foundational axioms.",
     "difficulty": "hard_finite_library"
@@ -16698,14 +16834,16 @@
     "title": "Exact removal of the auxiliary refresh",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Exact refresh/de-refresh semigroup identities, carre-du-champ convex split and moment rescaling; finite-state Markov algebra.",
+    "difficulty": "easy"
   },
   "cth:SMYM-refresh-gap": {
     "env": "countertheorem",
     "title": "The parent refresh is not Yang--Mills coercivity",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Refresh generator has gap rho on centered space regardless of local gap; direct finite generator computation.",
+    "difficulty": "easy"
   },
   "cth:SMYM-action-no-law": {
     "env": "countertheorem",
@@ -16738,7 +16876,8 @@
     "title": "Reflection-positive colour descent and exact pure-colour landing",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Colour pushforward reflection positivity, conditional log-Laplace recursion and residual-zero equivalence; finite cylinder probability algebra.",
+    "difficulty": "medium"
   },
   "fire:SMYM-three-colour-maps": {
     "env": "firewall",
@@ -16876,7 +17015,8 @@
     "title": "Half-slab nuclearity, positive exterior coefficients, and Doob--Schmidt edge",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite reduction: exterior-power/compound-matrix mini-library (Fredholm sum), Perron simple positive kernel, Doob transform and s2/s1 maximal correlation.",
+    "difficulty": "medium"
   },
   "def:YM-common-boundary-factor": {
     "env": "definition",
@@ -16890,21 +17030,24 @@
     "title": "Common-factor extraction and exact two-boundary Gibbs gap",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Alternating-projection limit (finite von Neumann), variance-form gap (1-rho)/2, and max/min tensorization; finite Hilbert probability algebra.",
+    "difficulty": "medium"
   },
   "cth:YM-rare-common-factor": {
     "env": "countertheorem",
     "title": "Rare common data cannot be discarded",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit finite witness: rare shared binary record with conditional independence yet maximal correlation one.",
+    "difficulty": "easy"
   },
   "thm:YM-Gaussian-infrared-saturation": {
     "env": "theorem",
     "title": "Gaussian infrared saturation and the order-one deformation requirement",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Lattice dispersion arcosh analysis, torus momentum infimum with explicit asymptotics, and norm-perturbation dichotomy; finite Fourier calculus.",
+    "difficulty": "medium"
   },
   "fire:YM-finite-half-slab": {
     "env": "firewall",
@@ -16918,7 +17061,8 @@
     "title": "Exact signed Wilsonian head and one-cylinder source card",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Differentiation of log-partition under SU(3) Haar link integrals with dominated derivatives; Haar-on-Lie-group analysis out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:YM-no-double-return": {
     "env": "firewall",
@@ -16932,7 +17076,8 @@
     "title": "Exact Witten covariance and conditional router",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Hodge Laplacian covariance identity on a compact Riemannian colour carrier; continuum elliptic/Witten analysis out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "def:YM-source-visible-capacity": {
     "env": "definition",
@@ -16946,7 +17091,8 @@
     "title": "Local--capacity gap and source-resolved Green Pythagoras",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Two-scale capacity gap and Green Pythagoras for continuum Witten Laplacians; elliptic operator content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "def:YM-action-flow-box": {
     "env": "definition",
@@ -16960,14 +17106,16 @@
     "title": "Action-flow current, endpoint equilibration, and current dictionary",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Coarea flow boxes, tube currents and gradient-flow construction on manifolds; continuum geometric analysis out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "cor:YM-action-flow-geometry": {
     "env": "corollary",
     "title": "Geometric tube and orthogonal-network bounds",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Geometric tube resistance bounds via Jacobian and volume estimates; continuum flow-box geometry out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:YM-action-flow-not-dynamics": {
     "env": "firewall",
@@ -16981,28 +17129,32 @@
     "title": "Local stiffness and barrier height do not control a thin neck",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Thin-neck spectral collapse family with Poincare control; continuum spectral geometry witness out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "prop:YM-divergence-source-flow": {
     "env": "proposition",
     "title": "Diffusive network softness can be source invisible",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite network Thomson bound via pseudoinverse algebra per Bloch momentum; uniformity immediate.",
+    "difficulty": "medium"
   },
   "cor:YM-action-flow-no-double-charge": {
     "env": "corollary",
     "title": "Wilson source ancestry and nonduplicating action-flow return",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Pseudoinverse ancestry Pythagoras for the return dictionary (same pattern as GT ancestry theorem); finite algebra given interfaces.",
+    "difficulty": "medium"
   },
   "thm:YM-source-flow-mass": {
     "env": "theorem",
     "title": "Source-visible signed-head mass handoff",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Conditional norm arithmetic: reserve implies contraction and -2/t log bound on the transfer Hamiltonian; finite given hypotheses.",
+    "difficulty": "medium"
   },
   "fire:YM-signed-head-baseline": {
     "env": "firewall",
@@ -17016,7 +17168,8 @@
     "title": "Transported null and canonical law incidence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Multiplication-operator and rank-one projection identities on a finite carrier with variance formula and two-sided bounds.",
+    "difficulty": "easy"
   },
   "def:YM-law-aligned-run": {
     "env": "definition",
@@ -17030,21 +17183,24 @@
     "title": "Same-observable correction and fixed-pair conditioning",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Observable-form correction identity plus oscillation bounds; SU(3) plaquette range bound is finite matrix algebra.",
+    "difficulty": "medium"
   },
   "thm:YM-selected-surface-alias": {
     "env": "theorem",
     "title": "Exact axial alias trace and finite-scale reserve",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Explicit trigonometric alias sums and rational alpha(s) window with certified constants; finite certified computation.",
+    "difficulty": "medium"
   },
   "thm:YM-selected-surface-zero-mode": {
     "env": "theorem",
     "title": "Zero momentum and centre-character audit",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Zero-momentum vanishing plus Z_3^3 centre-character orthogonality; finite group-action algebra.",
+    "difficulty": "medium"
   },
   "def:YM-nonlinear-law-residual": {
     "env": "definition",
@@ -17072,56 +17228,64 @@
     "title": "Adapted parity forest and vertical internal gauge",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Spanning-forest combinatorics on the dyadic lattice and vertical gauge invariance; finite graph/group bookkeeping.",
+    "difficulty": "medium"
   },
   "thm:YM-relative-tree-gauge": {
     "env": "theorem",
     "title": "Global relative tree gauge and exact Haar quotient",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Real-analytic diffeomorphism and Haar-measure pushforward factorization on SU(3)^E; Haar on Lie groups out of scope (counting rows alone are easy).",
+    "difficulty": "hard_analytic_research"
   },
   "thm:YM-shell-symbol-decomposition": {
     "env": "theorem",
     "title": "Translation--stabilizer reduction and shell symbols",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Discrete Fourier plus torus-isotypic decomposition of su(3); finite representation-theoretic block diagonalization (repo isotypic experience).",
+    "difficulty": "medium"
   },
   "thm:YM-modewise-shell-card": {
     "env": "theorem",
     "title": "Modewise direct loss and three-query shell card",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Blockwise lambda-max characterization and score/Hessian mean-covariance identity; finite algebra conditional on fibre expectation interfaces.",
+    "difficulty": "medium"
   },
   "cth:YM-normalized-source-no-Hessian": {
     "env": "countertheorem",
     "title": "Normalized source geometry does not determine the physical shell Hessian",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Invariance of normalized packet under action shift c(v) versus shifted shell Hessian; structural computation on the fibre interface.",
+    "difficulty": "medium"
   },
   "thm:YM-partition-secant": {
     "env": "theorem",
     "title": "Exact partition secant and positive two-replica acquisition",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Two-replica positive secant identity is exact algebra; C^2 limits as epsilon vanishes are finite calculus on a compact fibre interface.",
+    "difficulty": "medium"
   },
   "thm:YM-validated-partition-margin": {
     "env": "theorem",
     "title": "Validated local axial margin from one finite displacement",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Taylor remainder enclosure with sharp 1/12 constant and interval propagation to the margin; finite certified calculus.",
+    "difficulty": "medium"
   },
   "cor:YM-partition-curvature-transport": {
     "env": "corollary",
     "title": "Target-native adjacent-cutoff transport",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Exact log-ratio adjacent identity plus summability bookkeeping.",
+    "difficulty": "easy"
   },
   "fire:YM-partition-before-source": {
     "env": "firewall",
@@ -17135,42 +17299,48 @@
     "title": "Connected score structure factor",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Fourier-isotypic split of Hessian into deterministic kernel minus positive connected-score covariance; finite algebra.",
+    "difficulty": "medium"
   },
   "thm:YM-fibre-current-symbol": {
     "env": "theorem",
     "title": "Weighted fibre covariance and the exact current symbol",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Elliptic self-adjoint realizations with compact resolvent on the fibre and covariance identity; continuum Witten operator content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:YM-fibre-current-spectral": {
     "env": "theorem",
     "title": "Source-visible current action and inverse spectral moment",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Spectral-measure variational formula for the unbounded fibre operator; same continuum setting out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:YM-fibre-current-head-tail": {
     "env": "theorem",
     "title": "Signed low-current head and certified high-current tail",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite-dim reduction: whitened head/tail Loewner splitting at Lambda* with witness vector; positive-matrix spectral arithmetic.",
+    "difficulty": "medium"
   },
   "thm:YM-fibre-current-Galerkin": {
     "env": "theorem",
     "title": "Finite current acquisition with an exact residual energy",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Galerkin monotone convergence on a Peter-Weyl form core for the unbounded fibre operator; infinite-dimensional approximation out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "prop:YM-fibre-current-transport": {
     "env": "proposition",
     "title": "Current transport and quadratic local reduction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Exact transport defect identities and the quadratic Euclidean model with effective Hessian; finite algebra with domain rows axiomatized.",
+    "difficulty": "medium"
   },
   "fire:YM-fibre-current-scope": {
     "env": "firewall",
@@ -17184,84 +17354,96 @@
     "title": "Local curvature factorization and signed symbol tail",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Two-cochain factorization at flat background plus exponential-weight kernel tail bound and momentum-mesh certificate; finite lattice Fourier analysis.",
+    "difficulty": "medium"
   },
   "thm:YM-mode-witness-alternative": {
     "env": "theorem",
     "title": "Cofinal mode-witness alternative and adjacent transport",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Cofinal trichotomy by finite pigeonhole/subsequence on symbol data, explicit covariant dispersion formula, and normalized transport bound.",
+    "difficulty": "medium"
   },
   "thm:YM-exact-parity-tree-gap": {
     "env": "theorem",
     "title": "Exact parity-tree fibre gap",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Certified global minimum over T^4 of a symbol eigenvalue with degree-8 algebraic root isolated to 20 digits; heavy certified optimization library.",
+    "difficulty": "hard_finite_library"
   },
   "thm:YM-return-renormalized-shell": {
     "env": "theorem",
     "title": "Local majorant and return-renormalized Bochner--Schur identity",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Loewner floor for the local majorant, three-Gram splits and exact removal of the common follower; finite algebra given packet.",
+    "difficulty": "medium"
   },
   "cor:YM-return-words": {
     "env": "corollary",
     "title": "Source-cyclic curvature-defect return",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Neumann-series return with geometric tail on the source-cyclic subspace; finite spectral-radius arithmetic.",
+    "difficulty": "medium"
   },
   "thm:YM-common-gauge-return-card": {
     "env": "theorem",
     "title": "Common-gauge reduction of comparison head minus return",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Ward-identity block equalities and common Schur shorts reducing head-minus-return to the transverse block; finite algebra.",
+    "difficulty": "medium"
   },
   "lem:YM-exact-form-isometry": {
     "env": "lemma",
     "title": "Exact-form Witten isometry",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Normalized-differential isometry on centered scalars; finite weighted-graph Hodge identity (repo Hodge machinery).",
+    "difficulty": "easy"
   },
   "thm:YM-source-comparison-return-Pythagoras": {
     "env": "theorem",
     "title": "Comparison/return Pythagoras on the occurring source law",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Orthogonal comparison/return split and Gram Pythagoras; direct algebra.",
+    "difficulty": "easy"
   },
   "thm:YM-arm-resolved-incidence": {
     "env": "theorem",
     "title": "Arm-resolved incidence and router dispersion",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - 3x3 block Gram positivity, scalar Moore-Penrose shorts and exact route-dispersion identity; finite algebra.",
+    "difficulty": "medium"
   },
   "cor:YM-Ward-assembly-before-source-short": {
     "env": "corollary",
     "title": "Ward cancellation is assembled before source shorting",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Gauge-direction cancellation and the positive assembled-vs-separate gap; direct from the incidence identities.",
+    "difficulty": "easy"
   },
   "thm:YM-six-by-six-incidence-card": {
     "env": "theorem",
     "title": "Target-minimal six-by-six first-axial incidence card",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Parameter completion, two-replica representation and acceptance checks; finite probability algebra.",
+    "difficulty": "medium"
   },
   "thm:YM-low-island-return-edges": {
     "env": "theorem",
     "title": "Two relative edges control the selected return island",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Spectral-island Loewner window plus two Chebyshev-type edge bounds (same pattern as GT low-island theorem); finite spectral arithmetic.",
+    "difficulty": "medium"
   },
   "fire:YM-exact-form-source-scope": {
     "env": "firewall",
@@ -17275,7 +17457,8 @@
     "title": "Strong-coupling obstruction to a uniform bare margin",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Uniform high-temperature expansion of SU(3) Haar link integrals; Haar-on-Lie-group expansion machinery out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:YM-shell-symbol-not-mass": {
     "env": "firewall",
@@ -17289,70 +17472,80 @@
     "title": "Reflection correction and the positive cross source",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Kernel triviality and Casimir-contact cancellation for the literal Wilson-law boundary Hessian; requires SU(3) Haar integral evaluation.",
+    "difficulty": "hard_analytic_research"
   },
   "lem:YM-lattice-Hodge": {
     "env": "lemma",
     "title": "Exact Bloch Hodge quotient",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Exact momentum-space lattice Hodge complex with omega-identities and normalized-curl unitarity; finite Fourier/Hodge algebra.",
+    "difficulty": "medium"
   },
   "thm:YM-curvature-source-factorization": {
     "env": "theorem",
     "title": "Boundary Ward identities and exact curvature ancestry",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Ward kernel conditions and unique factorization through the curl at nonzero momentum; finite algebra given the Hodge lemma.",
+    "difficulty": "medium"
   },
   "thm:YM-source-normalized-reserve": {
     "env": "theorem",
     "title": "Exact occurring source metric and source-normalized reserve",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Congruence equivalences between head and source-normalized reserve with min-over-momenta definition; finite algebra.",
+    "difficulty": "medium"
   },
   "thm:YM-source-current-incidence": {
     "env": "theorem",
     "title": "Same-history reflected-source/current incidence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - 2x2 normalized source/current Gram with ancestry residual and follower iff; direct projection algebra.",
+    "difficulty": "easy"
   },
   "cth:YM-source-current-marginals": {
     "env": "countertheorem",
     "title": "The marginal source and current Grams do not determine incidence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit 2-dim witness with identical marginals and differing mixed block.",
+    "difficulty": "easy"
   },
   "cth:YM-geometric-not-source-reserve": {
     "env": "countertheorem",
     "title": "A geometric reserve does not control the source reserve",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit scaling witness collapsing the normalized reserve while the geometric reserve is one.",
+    "difficulty": "easy"
   },
   "cth:YM-identity-metric-artifact": {
     "env": "countertheorem",
     "title": "Diffusive identity collapse is not a colour-gap obstruction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Maxwell head lowest-mode eigenvalue 4 sin^2(pi/M) tends to zero; direct computation.",
+    "difficulty": "easy"
   },
   "thm:YM-source-tail-coefficient": {
     "env": "theorem",
     "title": "Weighted source-tail coefficient bound",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Weighted second-moment Fourier kernel bounds with explicit pi^2/8 constant; finite lattice sums.",
+    "difficulty": "medium"
   },
   "thm:YM-curvature-source-compiler": {
     "env": "theorem",
     "title": "Terminating curvature/source compiler on the two literal cards",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Interval propagation through congruences plus certified cubic-orbit enumeration (34/164) on the two literal lattices; terminating finite compiler.",
+    "difficulty": "medium"
   },
   "assess:YM-source-metric-frontier": {
     "env": "assessment",
@@ -17401,9 +17594,39 @@
       "NCG/Grand/FiniteLatticePhysicalInvariantDensityExact.lean:NCG.FiniteLatticePhysicalInvariantDensity.closure_centered_holonomy_vacuumOrbit_eq_neutral",
       "NCG/Grand/FiniteLatticeHaarGaugeMeasureExact.lean:NCG.FiniteLatticeHaarGaugeMeasure.normalizedHaar_pi_eq",
       "NCG/Grand/FiniteLatticeHaarGaugeMeasureExact.lean:NCG.FiniteLatticeHaarGaugeMeasure.measurePreserving_gaugeAction",
-      "NCG/Grand/FiniteLatticeHaarVacuumCyclicityExact.lean:NCG.FiniteLatticeHaarVacuumCyclicity.closure_centered_holonomy_vacuumOrbit_eq_neutral"
+      "NCG/Grand/FiniteLatticeHaarVacuumCyclicityExact.lean:NCG.FiniteLatticeHaarVacuumCyclicity.closure_centered_holonomy_vacuumOrbit_eq_neutral",
+      "NCG/Grand/HolonomyWordAlgebraExact.lean:NCG.HolonomyWordAlgebra.wordValue_append",
+      "NCG/Grand/HolonomyWordAlgebraExact.lean:NCG.HolonomyWordAlgebra.continuous_wordValue",
+      "NCG/Grand/HolonomyWordAlgebraExact.lean:NCG.HolonomyWordAlgebra.wordEntry_singleton",
+      "NCG/Grand/HolonomyWordAlgebraExact.lean:NCG.HolonomyWordAlgebra.wordEntry_nil",
+      "NCG/Grand/HolonomyWordAlgebraExact.lean:NCG.HolonomyWordAlgebra.wordEntry_cons",
+      "NCG/Grand/HolonomyWordAlgebraExact.lean:NCG.HolonomyWordAlgebra.wordEntry_inverse",
+      "NCG/Grand/HolonomyWordAlgebraExact.lean:NCG.HolonomyWordAlgebra.wordEntry_mem_matrixEntryAlgebra",
+      "NCG/Grand/HolonomyWordAlgebraExact.lean:NCG.HolonomyWordAlgebra.wordAlgebra_eq_matrixEntryAlgebra",
+      "NCG/Grand/HolonomyWordAlgebraExact.lean:NCG.HolonomyWordAlgebra.closure_gaugeAverage_wordAlgebra",
+      "NCG/Grand/HolonomyWordAlgebraExactAxiomAudit.lean",
+      "NCG/Grand/MeasurableRecordProjectionExact.lean:NCG.MeasurableRecordProjection.select_ae",
+      "NCG/Grand/MeasurableRecordProjectionExact.lean:NCG.MeasurableRecordProjection.select_add",
+      "NCG/Grand/MeasurableRecordProjectionExact.lean:NCG.MeasurableRecordProjection.select_smul",
+      "NCG/Grand/MeasurableRecordProjectionExact.lean:NCG.MeasurableRecordProjection.norm_select_le",
+      "NCG/Grand/MeasurableRecordProjectionExact.lean:NCG.MeasurableRecordProjection.select_eq_self_iff",
+      "NCG/Grand/MeasurableRecordProjectionExact.lean:NCG.MeasurableRecordProjection.select_idempotent",
+      "NCG/Grand/MeasurableRecordProjectionExact.lean:NCG.MeasurableRecordProjection.select_commutes_pullback",
+      "NCG/Grand/MeasurableRecordProjectionExactAxiomAudit.lean",
+      "NCG/Grand/SelectedInvariantSourceDensityExact.lean:NCG.SelectedInvariantSourceDensity.mem_selectedSector_iff",
+      "NCG/Grand/SelectedInvariantSourceDensityExact.lean:NCG.SelectedInvariantSourceDensity.mem_selectedSector_iff_supported_invariant",
+      "NCG/Grand/SelectedInvariantSourceDensityExact.lean:NCG.SelectedInvariantSourceDensity.isClosed_selectedSector",
+      "NCG/Grand/SelectedInvariantSourceDensityExact.lean:NCG.SelectedInvariantSourceDensity.select_mem_selectedSector",
+      "NCG/Grand/SelectedInvariantSourceDensityExact.lean:NCG.SelectedInvariantSourceDensity.selection_image_fixedSubmodule",
+      "NCG/Grand/SelectedInvariantSourceDensityExact.lean:NCG.SelectedInvariantSourceDensity.closure_selected_writers_eq_sector",
+      "NCG/Grand/SelectedInvariantSourceDensityExact.lean:NCG.SelectedInvariantSourceDensity.closure_centered_selected_writers_eq_neutral",
+      "NCG/Grand/SelectedInvariantSourceDensityExactAxiomAudit.lean",
+      "NCG/Grand/FiniteLatticeSelectedWordCyclicityExact.lean:NCG.FiniteLatticeSelectedWordCyclicity.closure_word_vacuumOrbit_eq_fixedSet",
+      "NCG/Grand/FiniteLatticeSelectedWordCyclicityExact.lean:NCG.FiniteLatticeSelectedWordCyclicity.closure_selected_word_vacuumOrbit_eq_sector",
+      "NCG/Grand/FiniteLatticeSelectedWordCyclicityExact.lean:NCG.FiniteLatticeSelectedWordCyclicity.closure_centered_selected_word_vacuumOrbit_eq_neutral",
+      "NCG/Grand/FiniteLatticeSelectedWordCyclicityExactAxiomAudit.lean"
     ],
-    "note": "Strengthened 2026-09-03, still PARTIAL. HolonomyCoordinateDensityExact proves separation by actual retained matrix entries and uniform/L2 density on compact holonomy products, with no supplied separation premise. CompactGaugeAveragingDensityExact constructs the genuine Bochner-integral Reynolds operator and proves contractivity, invariance, idempotence, and invariant density. FiniteLatticeGaugeInvariantDensityExact specializes this to the actual vertex gauge action of a compact group with a continuous faithful finite matrix representation, constructing its normalized right Haar probability and proving density of gauge-averaged matrix-entry polynomials. RootedLoopGaugeReconstructionExact defines transport on actual graph walks, proves endpoint gauge covariance and reversal, identifies rooted edge holonomies with closed walks, and proves their equality equivalent to based-gauge equivalence; connectedness supplies the root paths. PositiveVacuumWeightedL2Exact constructs the actual unitary L2(|Omega|^2 dmu) -> L2(dmu) by multiplication, with inverse division for a measurable almost-everywhere nonvanishing vacuum. PositiveVacuumCyclicityExact transports density to the physical orbit and proves orthogonally centered cyclicity. InvariantHolonomyVacuumOrbitExact assembles these results: averaged matrix-entry polynomials and all continuous gauge-invariant functions have the same closed physical vacuum orbit, also after centering. CompactGroupInvariantProjectionExact now constructs the full Banach-space Haar projection. CompactGaugeInvariantL2DensityExact proves strong continuity of the actual Koopman pullbacks, identifies continuous and L2 averaging, and proves that the continuous invariant closure equals the independently defined measurable fixed space. InvariantVacuumPullbackExact proves preservation of the weighted measure and equivariance of the constructed vacuum unitary. PhysicalGaugeInvariantCyclicityExact and InvariantVacuumOrthogonalCenteringExact consequently identify the physical orbit with the full fixed space and its centered closure with the intersection of that fixed space and the vacuum orthogonal complement. FiniteLatticePhysicalInvariantDensityExact assembles this for the concrete lattice matrix-entry bank. FiniteLatticeHaarGaugeMeasureExact constructs the normalized reference law, identifies it with the independent edge-Haar product, and proves gauge invariance. FiniteLatticeHaarVacuumCyclicityExact specializes full physical and neutral cyclicity to that reference law, deriving weighted regularity from compact metrizability. All cited components compile and have standard-axiom audits. Remaining manuscript-specific gap: identify the precise primitive current/transported-plaquette bank and the selected global cycle/centre-flux/topological record sectors with the concrete generating bank and fixed-space sector. The full matrix-entry-bank Hilbert-space and orthogonal-centering gap is closed; no full manuscript-statement closure is claimed.",
+    "note": "Strengthened 2026-09-03, still PARTIAL. HolonomyCoordinateDensityExact proves separation by actual retained matrix entries and uniform/L2 density on compact holonomy products, with no supplied separation premise. CompactGaugeAveragingDensityExact constructs the genuine Bochner-integral Reynolds operator and proves contractivity, invariance, idempotence, and invariant density. FiniteLatticeGaugeInvariantDensityExact specializes this to the actual vertex gauge action of a compact group with a continuous faithful finite matrix representation, constructing its normalized right Haar probability and proving density of gauge-averaged matrix-entry polynomials. RootedLoopGaugeReconstructionExact defines transport on actual graph walks, proves endpoint gauge covariance and reversal, identifies rooted edge holonomies with closed walks, and proves their equality equivalent to based-gauge equivalence; connectedness supplies the root paths. PositiveVacuumWeightedL2Exact constructs the actual unitary L2(|Omega|^2 dmu) -> L2(dmu) by multiplication, with inverse division for a measurable almost-everywhere nonvanishing vacuum. PositiveVacuumCyclicityExact transports density to the physical orbit and proves orthogonally centered cyclicity. InvariantHolonomyVacuumOrbitExact assembles these results: averaged matrix-entry polynomials and all continuous gauge-invariant functions have the same closed physical vacuum orbit, also after centering. CompactGroupInvariantProjectionExact now constructs the full Banach-space Haar projection. CompactGaugeInvariantL2DensityExact proves strong continuity of the actual Koopman pullbacks, identifies continuous and L2 averaging, and proves that the continuous invariant closure equals the independently defined measurable fixed space. InvariantVacuumPullbackExact proves preservation of the weighted measure and equivariance of the constructed vacuum unitary. PhysicalGaugeInvariantCyclicityExact and InvariantVacuumOrthogonalCenteringExact consequently identify the physical orbit with the full fixed space and its centered closure with the intersection of that fixed space and the vacuum orthogonal complement. FiniteLatticePhysicalInvariantDensityExact assembles this for the concrete lattice matrix-entry bank. FiniteLatticeHaarGaugeMeasureExact constructs the normalized reference law, identifies it with the independent edge-Haar product, and proves gauge invariance. FiniteLatticeHaarVacuumCyclicityExact specializes full physical and neutral cyclicity to that reference law, deriving weighted regularity from compact metrizability. All cited components compile and have standard-axiom audits. HolonomyWordAlgebraExact now proves that literal signed chronological transport-word entries generate exactly the full edge matrix-entry star algebra, using the inverse-adjoint identity of a unitary representation; gauge-averaged word density follows without a separation premise. MeasurableRecordProjectionExact constructs actual indicator multiplication on L2, proves its contractivity, linearity, idempotence, precise support characterization and commutation with record-preserving pullbacks. SelectedInvariantSourceDensityExact proves density in the independently defined supported invariant sector and centering after selection. FiniteLatticeSelectedWordCyclicityExact applies this to the constructed Haar law and actual word-vacuum orbit: every retained gauge-invariant measurable event has full selected cyclicity, and centering removes exactly the selected vacuum line, without a supplied density premise. These four additional modules and audits compile with only standard axioms. Remaining manuscript-specific gap: reconstruct this full transport-word bank from the exact primitive current/transported-plaquette bank and retained global cycles, and identify any additional centre-flux/topological record carriers or non-measurable central sectors with the corresponding selected representation. The measurable-sector and word-orbit steps are proved, but this is not a full manuscript-statement closure.",
     "difficulty": "hard_analytic_research"
   },
   "thm:YM-Doob-Koopman": {
@@ -17511,49 +17734,56 @@
     "title": "Canonical Wilson separator",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Lattice shell-separator combinatorics and exact action split; finite bookkeeping.",
+    "difficulty": "easy"
   },
   "thm:YM-Wilson-blanket": {
     "env": "theorem",
     "title": "Exact Wilson Markov blanket",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Density-factorization implies conditional independence across the separating shell; abstract finite-index Gibbs Markov property with equivariance.",
+    "difficulty": "medium"
   },
   "thm:YM-boundary-mediation": {
     "env": "theorem",
     "title": "Boundary mediation and source-minimal follower short",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Conditional-expectation mediation identity and 2x2 boundary Gram follower short; finite conditional-probability algebra.",
+    "difficulty": "medium"
   },
   "prop:YM-boundary-replica-acquisition": {
     "env": "proposition",
     "title": "Three-query boundary-glued acquisition",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Replica expectation identities from conditional independence; direct.",
+    "difficulty": "easy"
   },
   "thm:YM-outward-source-recursion": {
     "env": "theorem",
     "title": "Outward source recursion and exact information loss",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Message contraction recursion with exact Pythagorean information loss and product formula; finite conditional-expectation algebra.",
+    "difficulty": "medium"
   },
   "thm:YM-finite-boundary-contraction": {
     "env": "theorem",
     "title": "Strict finite-card boundary contraction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Doeblin minorization gives centered-L2 contraction 1-epsilon; abstract two-variable density argument, finite version direct.",
+    "difficulty": "medium"
   },
   "thm:YM-source-channel-locality": {
     "env": "theorem",
     "title": "Source-channel locality and physical-radius alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Cofinal trichotomy for influence-loss measures via subsequence extraction on bounded scalar data; finite measure bookkeeping.",
+    "difficulty": "medium"
   },
   "fire:YM-spatial-channel-not-mass": {
     "env": "firewall",
@@ -17567,70 +17797,80 @@
     "title": "Ten-plaquette centre-orbit separation",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Pointwise SU(3) centre-orbit trace inequality with square-root bound; finite matrix analysis, no measure needed.",
+    "difficulty": "medium"
   },
   "thm:YM-centre-fibre-extinction": {
     "env": "theorem",
     "title": "Weak-facing branch closure and centre-fibre extinction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Chebyshev split with explicit constants layered on Wilson-law expectations and trajectory alternatives; substantial finite estimate infrastructure.",
+    "difficulty": "hard_finite_library"
   },
   "thm:YM-complete-native-collapse": {
     "env": "theorem",
     "title": "Forty-four-plaquette envelope and complete native collapse",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Pointwise 44-plaquette envelope with certified coefficient plus variance bound with explicit huge constant; heavy certified finite computation.",
+    "difficulty": "hard_finite_library"
   },
   "cor:YM-native-descendant-collapse": {
     "env": "corollary",
     "title": "Every unrescaled native descendant collapses",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Conditional-expectation contractivity and Pythagoras collapse given the variance bound; direct algebra.",
+    "difficulty": "easy"
   },
   "thm:YM-native-cycle-frame": {
     "env": "theorem",
     "title": "Complete native cycle frame and first nonzero jet",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Explicit finite graph: cycle dimension 33, exact spectrum with sqrt(393), and quadratic jet expansion; certified exact linear algebra.",
+    "difficulty": "medium"
   },
   "thm:YM-singlet-adjoint-selection": {
     "env": "theorem",
     "title": "Exact singlet--adjoint selection rule",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Ad-invariant linear functional on sl_3 vanishes (adjoint rep has no trivial component); finite representation-theoretic orthogonality.",
+    "difficulty": "medium"
   },
   "prop:YM-physical-radius-source-survives-audit": {
     "env": "proposition",
     "title": "Fixed native collapse does not erase the physical-radius source",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Filling-word bound and explicit response-root inequalities; finite arithmetic conditional on the response interface.",
+    "difficulty": "medium"
   },
   "thm:YM-outer-replica-card": {
     "env": "theorem",
     "title": "Exact outer replica card after centre shorting",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Exact replica algebra: convex residual ledger and outer identities; finite probability computation.",
+    "difficulty": "medium"
   },
   "cth:YM-cutoff-radial-independent": {
     "env": "countertheorem",
     "title": "Cutoff and radial coefficients are independent",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit finite product model realizing arbitrary cutoff/radial coefficients; direct construction.",
+    "difficulty": "easy"
   },
   "cor:YM-radial-four-leaf": {
     "env": "corollary",
     "title": "Positive four-leaf radial acquisition",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Four-leaf replica read expectations and ratio identity; direct from conditional independence.",
+    "difficulty": "easy"
   },
   "fire:YM-weak-facing-branch-scope": {
     "env": "firewall",
@@ -17658,7 +17898,8 @@
     "title": "Exact zero-junction and edge-thin leading face",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Exact rational LP replay with 159228 variables and dual face certificates; heavy certified enumeration/LP verification.",
+    "difficulty": "hard_finite_library"
   },
   "remark:face-specific-reduction": {
     "env": "remark",
@@ -17679,35 +17920,40 @@
     "title": "Exact edgewise-triality block decomposition",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Orthogonal decomposition of the boundary space under the finite centre-triality action with sector formula; finite-group harmonic algebra.",
+    "difficulty": "medium"
   },
   "thm:YM-seventeen-leading-sectors": {
     "env": "theorem",
     "title": "Seventeen isolated leading boundary sectors",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_FINITE_LIBRARY - Certified uniqueness of degree-48 words per sector and exact seventeen-sector stocks; heavy combinatorial enumeration plus group-moment evaluation.",
+    "difficulty": "hard_finite_library"
   },
   "cor:YM-seventeen-loss": {
     "env": "corollary",
     "title": "Strict finite-card source--geometry incompatibility",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Arithmetic consequence theta <= 1/17 of the seventeen-sector stock.",
+    "difficulty": "easy"
   },
   "thm:YM-seventeen-router": {
     "env": "theorem",
     "title": "Rank-one leading router and sixteen-dimensional contact kernel",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Rank-one router restriction with explicit singular value; finite algebra conditional on the sector data.",
+    "difficulty": "medium"
   },
   "lem:YM-rational-face-certificate": {
     "env": "lemma",
     "title": "Rational optimum-face certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Finite LP complementary-slackness lemma over the rationals; standard duality algebra.",
+    "difficulty": "easy"
   },
   "ass:YM-complete-thin-face-certificate": {
     "env": "assumption",
@@ -17728,28 +17974,32 @@
     "title": "Complete five-letter boundary banks",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Face isomorphism and 5^16/5^8 counts conditional on the declared complete-face certificate assumption; direct combinatorial arithmetic.",
+    "difficulty": "medium"
   },
   "thm:YM-complete-boundary-stock": {
     "env": "theorem",
     "title": "Complete source stocks and the rank-one contact router",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Conditional arithmetic: explicit stocks, rank-one router singular value and small-beta contraction germ.",
+    "difficulty": "medium"
   },
   "cor:YM-five-letter-cutoff-law": {
     "env": "corollary",
     "title": "Conditional no-wrap cutoff law",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Conditional generalization of the stock arithmetic to general no-wrap N; explicit exponent bookkeeping.",
+    "difficulty": "medium"
   },
   "thm:YM-boundary-double-layer": {
     "env": "theorem",
     "title": "Boundary double layer and complete-face evaluation",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Sector-by-sector double-layer Gram assembly identity; finite algebra with conditional five-letter evaluation.",
+    "difficulty": "medium"
   },
   "fire:YM-leading-boundary-scope": {
     "env": "firewall",
@@ -17763,63 +18013,72 @@
     "title": "Source-cycle/complement decomposition of the physical gap",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Reducing-subspace max split of the transfer norm plus finite witness of two extensions with equal source packet and different full gap.",
+    "difficulty": "medium"
   },
   "thm:YM-full-network-compiler": {
     "env": "theorem",
     "title": "Dense centre-neutral Wilson core and exact full-gap Gram compiler",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Density of spin networks in inverse-limit gauge-invariant L2 and OS-reconstructed unbounded Hamiltonian; infinite-dimensional content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "prop:YM-balanced-excess": {
     "env": "proposition",
     "title": "Massless balanced baseline and excess normalization",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Explicit reflected Gaussian chain and Mehler-bridge sinh-squared excess computation; finite Gaussian algebra (repo Plancherel machinery).",
+    "difficulty": "medium"
   },
   "prop:YM-toron-quantum-expansion": {
     "env": "proposition",
     "title": "Toron-writer symmetries and quartic harmonic expansion",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Matrix-exponential chart expansion of the toron writer with uniform two-derivative remainder on compacts; finite Lie-algebra calculus.",
+    "difficulty": "medium"
   },
   "thm:YM-toron-soft-sequence": {
     "env": "theorem",
     "title": "Centre-neutral toron soft sequence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Semiclassical scaling limit of Hamiltonians with localization isometries converging to the harmonic commutator model; operator scaling limits out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "cor:YM-toron-cyclic-softening": {
     "env": "corollary",
     "title": "Finite-sector softening before collective compactness",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Inherits the toron scaling-limit softening; same out-of-scope analytic content.",
+    "difficulty": "hard_analytic_research"
   },
   "cth:YM-kernel-collapse-soft-direction": {
     "env": "countertheorem",
     "title": "Absolute kernel convergence can erase a normalized soft direction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit scalar kernel witness; direct computation of the ratio limit.",
+    "difficulty": "easy"
   },
   "thm:YM-lower-frame-necessity": {
     "env": "theorem",
     "title": "Projective lower-frame requirement",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Finite-bank Gram lower-frame stability preventing null-space absorption; finite-dim limit algebra.",
+    "difficulty": "medium"
   },
   "thm:YM-renormalized-full-core-promotion": {
     "env": "theorem",
     "title": "Conditional full-core promotion on a renormalized or local-vacuum branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Collective delayed compactness, graph-Rellich estimates and limits of unbounded Hamiltonians; infinite-dimensional operator theory out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:YM-renormalized-full-core-scope": {
     "env": "firewall",
@@ -17833,7 +18092,8 @@
     "title": "Cutoff-trajectory obstruction and renormalized frontier",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Spectral obstruction along the bare trajectory via the toron scaling limit plus renormalized continuation program; out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:YM-G10-scope": {
     "env": "firewall",
@@ -18081,21 +18341,24 @@
     "title": "Exact full covariant nonlinear-source equation",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Exact covariant acceleration identity for smooth periodic Navier-Stokes histories; PDE function-space content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:NS-signed-interband-transfer": {
     "env": "theorem",
     "title": "Signed interband acceleration/transfer rectangle",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Band-transfer antisymmetry and normalized rectangle for the NS nonlinearity on the torus; PDE infrastructure out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:NS-weak-covariant-acceleration": {
     "env": "theorem",
     "title": "Finite weak covariant-acceleration stock",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Distributional acceleration stock bounds for Leray-Hopf solutions; PDE estimates out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "assessment:meaning-of-the-weak-stock": {
     "env": "assessment",
@@ -18109,21 +18372,24 @@
     "title": "Tight-profile coupling-normalization alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Rescaling/normalization alternative for NS blow-up profiles; PDE scaling analysis out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:NS-scale-vanishing-entropy": {
     "env": "theorem",
     "title": "Scale-vanishing entropy and palinstrophy escalation",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Entropy divergence and instantaneous palinstrophy lower bound for NS histories; PDE content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:NS-two-centre-backscatter": {
     "env": "theorem",
     "title": "Two-centre source/pressure rectangle and high--high backscatter",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Littlewood-Paley high-high backscatter estimates and Hodge pressure orthogonality; harmonic-analysis PDE content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "assess:NS-covariant-acceleration-frontier": {
     "env": "assessment",
@@ -18151,77 +18417,88 @@
     "title": "Exact nonlinear energy-null incidence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Energy-null cancellation for all smooth periodic divergence-free fields; needs periodic vector-calculus/Fourier infrastructure over an infinite-dimensional field space.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:NS-critical-centred-target": {
     "env": "theorem",
     "title": "Exact critical centring and dispersion action",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Abstract Hilbert projection identity and Cauchy-Schwarz equality case (single spectral modulus); finite-dim/bounded-operator reduction.",
+    "difficulty": "medium"
   },
   "thm:NS-energy-neutral-payment": {
     "env": "theorem",
     "title": "Exact energy-neutral viscosity-shorted payment",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Constrained minimum-norm payment via projection with exact Pythagoras splits; finite Hilbert algebra.",
+    "difficulty": "easy"
   },
   "cth:NS-ambient-critical-underprice": {
     "env": "countertheorem",
     "title": "Ambient critical short can underprice the physical source",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Explicit 2-dim witness separating ambient and energy-neutral payment distances.",
+    "difficulty": "easy"
   },
   "cor:NS-centred-work-one-source": {
     "env": "corollary",
     "title": "One occurrence, viscosity matching, and payment",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Collinear decomposition of the work projection; direct algebra.",
+    "difficulty": "easy"
   },
   "thm:NS-centred-payment-stocks": {
     "env": "theorem",
     "title": "Finite native length and combined overdrive/width stock",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Native length and quartic stock bounds via Sobolev interpolation on Leray-Hopf histories; PDE estimates out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:NS-centred-dispersion-escape": {
     "env": "theorem",
     "title": "Source-paid centred-dispersion escape",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Radon-Nikodym plus Chebyshev escape from bounded-dispersion sets; abstract measure algebra with the NS chronology axiomatized as interface.",
+    "difficulty": "medium"
   },
   "thm:NS-centred-boundary-counterflow": {
     "env": "theorem",
     "title": "Coherent payment and balanced scale counterflow",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Signed-measure coherent/counterflow decomposition and 1-dim Wasserstein CDF formula on an interval; finite/one-dimensional transport algebra.",
+    "difficulty": "medium"
   },
   "thm:NS-two-centre-critical-dipole": {
     "env": "theorem",
     "title": "Canonical two-centre/far-leverage dipole",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Two-sided spectral-mass and distance bounds from leverage constraints; abstract Chebyshev-type spectral measure arithmetic.",
+    "difficulty": "medium"
   },
   "thm:NS-centred-critical-commutator": {
     "env": "theorem",
     "title": "Exact centred commutator and donor ancestry boundary",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: MEDIUM - Commutator Fourier identity and alias triangle bound; exact on a finite Fourier/Galerkin model.",
+    "difficulty": "medium"
   },
   "thm:NS-energy-neutral-continuation": {
     "env": "theorem",
     "title": "Energy-neutral critical continuation alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Grand NS continuation alternative assembling PDE branches; research-level analytic content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:NS-energy-neutral-scope": {
     "env": "firewall",
@@ -18235,28 +18512,32 @@
     "title": "Positive Reynolds innovations and exact heat telescoping",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Heat-semigroup Reynolds tensor positivity and L1 telescoping on the torus; heat-kernel function-space content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:NS-all-shell-Reynolds-action": {
     "env": "theorem",
     "title": "All-shell output-parabolic action",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Uniform multiplier estimate for the all-shell parabolic action; harmonic-analysis estimates out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "prop:NS-Reynolds-increment-square": {
     "env": "proposition",
     "title": "Increment representation and a fixed-heat square function",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Heat-kernel increment representation and square-function bound; continuum harmonic analysis out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:NS-all-shell-height-payment": {
     "env": "theorem",
     "title": "Critical-height payment for the native and heat sources",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Record-weighted payment integral bounds combining PDE estimates; out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "remark:temporal-occupation-is-still-a-separate-estimate": {
     "env": "remark",
@@ -18270,14 +18551,16 @@
     "title": "Fixed-datum stress compactness",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Galerkin Besov-in-time bounds and L2 precompactness of stress trajectories; Aubin-Lions-type PDE compactness out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "prop:NS-paid-stress-selector": {
     "env": "proposition",
     "title": "Occupied selector versus stress motion",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Finite symmetric-traceless orthogonal-split identity plus scalar arcsin Lipschitz bound; direct algebra.",
+    "difficulty": "easy"
   },
   "remark:finite-head-selector-regularity": {
     "env": "remark",
@@ -18291,7 +18574,8 @@
     "title": "Where an unbounded all-shell action must concentrate",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Normalized action-measure escape to unbounded records/frequencies on Galerkin families; PDE limit content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:NS-Reynolds-stress-scope": {
     "env": "firewall",
@@ -18305,35 +18589,40 @@
     "title": "Signed spectral source and exact caloric contact",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Signed spectral measure with caloric weights and first-passage energy identity for NS solutions; out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:NS-coherent-Dini": {
     "env": "theorem",
     "title": "Coherent carrier and a source-relative Dini test",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Coherent-carrier Dini test against the terminal chronology; inherits the caloric-contact analytic setting.",
+    "difficulty": "hard_analytic_research"
   },
   "thm:NS-source-mass-tangent": {
     "env": "theorem",
     "title": "Canonical source-mass parabolic contact law",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Rescaled measure pushforwards with universal density and subsequence ridge/ultra-terminal dichotomy; weak-convergence content out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "prop:NS-common-phase-space-panel": {
     "env": "proposition",
     "title": "A common phase-space scalar panel",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: EASY - Partition-of-unity operator resolution summing to the identity with polarized scalar split; direct Hilbert algebra.",
+    "difficulty": "easy"
   },
   "prop:NS-local-fractional-source": {
     "env": "proposition",
     "title": "Localized primitive source and fractional interface",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "TRIAGE-EXACT: HARD_ANALYTIC_RESEARCH - Commutator estimate for the localized fractional source operator; harmonic-analysis estimate out of scope.",
+    "difficulty": "hard_analytic_research"
   },
   "fire:NS-coherent-terminal-scope": {
     "env": "firewall",
@@ -18762,7 +19051,7 @@
   "thm:GT-NCG-graph-spectralization": {
     "env": "theorem",
     "title": "Canonical graph Hodge--Dirac spectralization",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.dirac_square_zeroForm_block",
       "NCG/Grand/FiniteWeightedGraphHodgeDiracExact.lean:NCG.FiniteWeightedGraphHodgeDirac.differential_commutator_lower",
@@ -18928,9 +19217,79 @@
       "NCG/Grand/A3SmoothUnitBallApproximationExact.lean:NCG.A3SmoothUnitBallApproximation.abs_average_kernel_sub_lift_le",
       "NCG/Grand/A3SmoothUnitBallApproximationExact.lean:NCG.A3SmoothUnitBallApproximation.abs_average_kernel_sample_sub_le",
       "NCG/Grand/A3SmoothUnitBallApproximationExact.lean:NCG.A3SmoothUnitBallApproximation.exists_smooth_periodic_approximation_with_unit_energy",
-      "NCG/Grand/A3SmoothUnitBallApproximationExactAxiomAudit.lean"
+      "NCG/Grand/A3SmoothUnitBallApproximationExactAxiomAudit.lean",
+      "NCG/Grand/BoundedConvolutionKernelEstimateExact.lean:NCG.BoundedConvolutionKernelEstimate.norm_convolution_le_kernel_integral",
+      "NCG/Grand/BoundedConvolutionKernelEstimateExactAxiomAudit.lean",
+      "NCG/Grand/CompactKernelConvolutionDerivativeBoundExact.lean:NCG.CompactKernelConvolutionDerivativeBound.derivativeBound_nonneg",
+      "NCG/Grand/CompactKernelConvolutionDerivativeBoundExact.lean:NCG.CompactKernelConvolutionDerivativeBound.norm_fderiv_convolution_sub_le",
+      "NCG/Grand/CompactKernelConvolutionDerivativeBoundExactAxiomAudit.lean",
+      "NCG/Grand/LipschitzDerivativeFiniteDifferenceExact.lean:NCG.LipschitzDerivativeFiniteDifference.uniform_first_order_remainder",
+      "NCG/Grand/LipschitzDerivativeFiniteDifferenceExact.lean:NCG.LipschitzDerivativeFiniteDifference.uniform_bounded_direction_difference",
+      "NCG/Grand/LipschitzDerivativeFiniteDifferenceExactAxiomAudit.lean",
+      "NCG/Grand/A3DerivativeEnergyComparisonExact.lean:NCG.A3DerivativeEnergyComparison.inner_derivativeVector",
+      "NCG/Grand/A3DerivativeEnergyComparisonExact.lean:NCG.A3DerivativeEnergyComparison.norm_derivativeVector",
+      "NCG/Grand/A3DerivativeEnergyComparisonExact.lean:NCG.A3DerivativeEnergyComparison.norm_derivative_le_of_energy_and_channel_error",
+      "NCG/Grand/A3DerivativeEnergyComparisonExactAxiomAudit.lean",
+      "NCG/Grand/A3SmoothedDerivativeControlExact.lean:NCG.A3SmoothedDerivativeControl.kernelDerivativeBound_nonneg",
+      "NCG/Grand/A3SmoothedDerivativeControlExact.lean:NCG.A3SmoothedDerivativeControl.norm_fderiv_average_sub_le",
+      "NCG/Grand/A3SmoothedDerivativeControlExact.lean:NCG.A3SmoothedDerivativeControl.eventually_norm_fderiv_average_le",
+      "NCG/Grand/A3SmoothedDerivativeControlExactAxiomAudit.lean",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.distance_eq_infDist",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.distance_le_norm",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.distance_nonneg",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.distance_self",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.distance_comm",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.distance_triangle",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.distance_periodic_right",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.projection_lipschitz",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.distance_to_base_lipschitz",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.periodic_lipschitz_le_distance",
+      "NCG/Grand/PeriodicQuotientDistanceExact.lean:NCG.PeriodicQuotientDistance.distance_eq_zero_iff",
+      "NCG/Grand/PeriodicQuotientDistanceExactAxiomAudit.lean",
+      "NCG/Grand/A3FlatTorusMetricExact.lean:NCG.A3FlatTorusMetric.lattice_eq_integral_coordinates",
+      "NCG/Grand/A3FlatTorusMetricExact.lean:NCG.A3FlatTorusMetric.lattice_isClosed",
+      "NCG/Grand/A3FlatTorusMetricExact.lean:NCG.A3FlatTorusMetric.flatDistance_eq_infDist",
+      "NCG/Grand/A3FlatTorusMetricExact.lean:NCG.A3FlatTorusMetric.flatDistance_eq_zero_iff",
+      "NCG/Grand/A3FlatTorusMetricExactAxiomAudit.lean",
+      "NCG/Grand/A3ConnesFlatUpperComparisonExact.lean:NCG.A3ConnesFlatUpperComparison.eventually_connesDistance_le_flat_with_smoothing_error",
+      "NCG/Grand/A3ConnesFlatUpperComparisonExactAxiomAudit.lean",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.flatDistance_le_six",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.flatDistance_lipschitz",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.norm_flatDistance_le_six",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.smoothDistance_eq_integral",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.integrable_flatDistance_translate",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.smoothDistance_lipschitz",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.contDiff_smoothDistance",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.smoothDistance_periodic",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.abs_smoothDistance_sub_le",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.norm_fderiv_smoothDistance_le_one",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.distanceDerivativeBound_nonneg",
+      "NCG/Grand/A3SmoothedFlatDistanceExact.lean:NCG.A3SmoothedFlatDistance.norm_fderiv_smoothDistance_sub_le",
+      "NCG/Grand/A3SmoothedFlatDistanceExactAxiomAudit.lean",
+      "NCG/Grand/A3ConnesFlatLowerComparisonExact.lean:NCG.A3ConnesFlatLowerComparison.eventually_graphLipschitz_smoothDistance_le",
+      "NCG/Grand/A3ConnesFlatLowerComparisonExact.lean:NCG.A3ConnesFlatLowerComparison.eventually_flatDistance_le_connes_with_smoothing_error",
+      "NCG/Grand/A3ConnesFlatLowerComparisonExactAxiomAudit.lean",
+      "NCG/Grand/A3ConnesFlatUniformConvergenceExact.lean:NCG.A3ConnesFlatUniformConvergence.eventually_uniform_connes_flat_error",
+      "NCG/Grand/A3ConnesFlatUniformConvergenceExact.lean:NCG.A3ConnesFlatUniformConvergence.tendsto_distanceError_zero",
+      "NCG/Grand/A3ConnesFlatUniformConvergenceExactAxiomAudit.lean",
+      "NCG/Grand/A3DeSitterConnesConvergenceExact.lean:NCG.A3DeSitterConnesConvergence.conductance_nonneg",
+      "NCG/Grand/A3DeSitterConnesConvergenceExact.lean:NCG.A3DeSitterConnesConvergence.sliceFlatDistance_eq_scaled_infDist",
+      "NCG/Grand/A3DeSitterConnesConvergenceExact.lean:NCG.A3DeSitterConnesConvergence.scaled_mass_eq_exp_three",
+      "NCG/Grand/A3DeSitterConnesConvergenceExact.lean:NCG.A3DeSitterConnesConvergence.slice_graphLipschitz_eq",
+      "NCG/Grand/A3DeSitterConnesConvergenceExact.lean:NCG.A3DeSitterConnesConvergence.sliceConnesDistance_eq",
+      "NCG/Grand/A3DeSitterConnesConvergenceExact.lean:NCG.A3DeSitterConnesConvergence.slice_distance_error_eq",
+      "NCG/Grand/A3DeSitterConnesConvergenceExact.lean:NCG.A3DeSitterConnesConvergence.eventually_uniform_slice_distance_error",
+      "NCG/Grand/A3DeSitterConnesConvergenceExactAxiomAudit.lean",
+      "NCG/Grand/StationaryGraphSpectralizationExact.lean:NCG.StationaryGraphSpectralization.fluxGenerator_mass_mul_rate_eq",
+      "NCG/Grand/StationaryGraphSpectralizationExact.lean:NCG.StationaryGraphSpectralization.stationary_rate_adjoint",
+      "NCG/Grand/StationaryGraphSpectralizationExact.lean:NCG.StationaryGraphSpectralization.stationary_rate_dirac_square",
+      "NCG/Grand/StationaryGraphSpectralizationExact.lean:NCG.StationaryGraphSpectralization.stationary_rate_commutator_energy",
+      "NCG/Grand/StationaryGraphSpectralizationExact.lean:NCG.StationaryGraphSpectralization.connected_commutator_kernel",
+      "NCG/Grand/StationaryGraphSpectralizationExactAxiomAudit.lean",
+      "NCG/Grand/CanonicalGraphSpectralizationExact.lean:NCG.CanonicalGraphSpectralization.canonical_graph_spectralization",
+      "NCG/Grand/CanonicalGraphSpectralizationExactAxiomAudit.lean"
     ],
-    "note": "Strengthened 2026-09-03; full statement remains conditional. Finite algebra: the actual weighted incidence, block Hodge--Dirac, graded representations, commutator norm SP.18, and constant seminorm kernel are proved. A normalization error in the old incidence matrix was corrected: each endpoint now uses its own vertex mass and self-loop rows vanish. WeightedGraphOrthonormalCoordinatesExact proves the exact weighted-to-orthonormal differential intertwining, constant-vector kernel, and unequal-mass regression. WeightedGraphHodgeLaplacianCoordinatesExact proves that the actual matrix transpose represents the weighted codifferential and that the actual zero-form Dirac square is -2 L_s in these coordinates. StationaryFluxAdjointExact proves directly that balanced-flux reversal is the weighted adjoint and identifies symmetrized conductance with the symmetric part of the flux generator. Exact cubic-mass/linear-conductance scaling gives both equalities of SP.20. FiniteConnesDistanceAttainmentExact derives compactness and genuine supremum attainment from connectedness; FiniteConnesDistanceMetricExact proves the metric axioms and exact scaling with no optimizer premise. Continuum preparation: the explicit noncubic A3 root basis, all twelve integer root coordinates, scalar-period ZMod regulators, wrapped sampling, retained root multiplicities, and connectedness are proved. Differentiability and periodic continuous derivative yield uniform square-root local-energy consistency; smooth periodic unit-gradient functions give genuine rescaled lower tests for the Connes distance. DiscreteCoordinateDifferenceBoundExact proves integer and coordinate-path telescoping. A3DiscreteUnitBallEquicontinuityExact proves an eighteen-Lipschitz bound for every actual discrete unit-ball observable, uniformly in period, and injectivity of the Euclidean grid representatives. A3DiscreteLipschitzExtensionExact constructs exact global extensions, retaining the bound and anchored linear growth. UniformLipschitzSubsequenceCompactnessExact derives uniform subsequence compactness from Arzela--Ascoli and retains the Lipschitz and size bounds. A3DiscreteUnitBallCompactnessExact applies it to arbitrary anchored cofinal grid observables on every fixed closed ball, without assuming extensions or compactness. A3ConnesDistanceUniformBoundsExact puts every grid in the radius-six ball and bounds the actual supremal Connes metrics uniformly. FiniteRootGraphAveragingExact proves exact translation invariance and probability-convolution preservation of the commutator unit ball. The sixteen new source modules and their axiom audits compile; all affected previous graph audits also pass, using only propext, Classical.choice, and Quot.sound. A3PeriodicStepFunctionLiftExact constructs measurable periodic floor-coordinate lifts, exact sampling, exact root-translation intertwining, and pointwise equality of lifted and discrete local energy. A3ProbabilityAverageEnergyExact proves that Bochner probability averaging preserves the full twelve-channel energy bound one without dimension loss. A3PeriodicProbabilitySmoothingExact derives global boundedness and integrability of anchored lifts and proves periodicity and exact unit-energy preservation for actual probability convolution. A3SmoothPeriodicUnitEnergyExact constructs a normalized smooth bump probability measure, proves its convolution identity, derives local integrability, and obtains genuinely smooth periodic representatives with the exact mesh energy bound. A3PeriodicLiftOscillationExact proves the global seam-compatible estimate |F(q)-F(p)| <= 18 norm(q-p)+9h. A3SmoothUnitBallApproximationExact combines these into actual smooth periodic approximants of every anchored discrete unit-ball observable with uniform grid-value error at most 18r+9h, where r is the bump outer radius; no smoothness or integrability of the discrete data is assumed. Remaining genuine gaps for SP.19: identify the flat-torus geodesic distance with the smooth periodic dual supremum; derive mesh-uniform derivative control for the fixed-kernel smoothed family and recover the sharp continuum one-Lipschitz bound from the full tight-frame energy constraint (smoothness at each mesh and the exact mesh energy bound alone do not justify this limit); assemble uniform pairwise convergence and its compact de Sitter slab consequence. No additional full manuscript statement is counted as closed.",
+    "note": "Completed 2026-09-03. CanonicalGraphSpectralizationExact.canonical_graph_spectralization proves the full SP.17--SP.20 package from positive masses, nonnegative original renewal rates, stationarity and connected conductance support. StationaryGraphSpectralizationExact identifies the weighted rate adjoint, actual zero-form Dirac square in orthonormal coordinates, exact commutator energy maximum and constant kernel (including the empty carrier). The corrected incidence uses the mass of each endpoint and zero self-loop rows. SP.19 is proved for the explicit twelve-root A3 scalar-period regulator with masses h^3 and per-root conductances h/8, retaining multiplicities. A3ConnesFlatUniformConvergenceExact proves that the actual finite-pair supremum error tends to zero against the genuine closed-lattice quotient metric. The upper bound smooths actual anchored Connes optimizers and derives a mesh-uniform sharp derivative bound from the exact twelve-channel energy. The lower bound uses smoothed genuine quotient distances with a center-independent derivative modulus; one mesh cutoff controls every vertex pair. No optimizer, interpolation, sharp gradient limit or metric convergence is assumed. A3DeSitterConnesConvergenceExact proves both exact exponential scaling identities and convergence uniformly over every compact time set and all vertex pairs; the slice target is identified with Euclidean infimum distance on the physically scaled lattice. All fourteen newly integrated source modules and their axiom audits compile, including the public complete theorem, using only propext, Classical.choice and Quot.sound. Counts refer to the original classified hard batch; subsequently added unclassified entries are preserved.",
     "difficulty": "hard_analytic_research"
   },
   "cth:GT-NCG-extensive-oneform-kernel": {
@@ -19042,7 +19401,7 @@
     "title": "Exact derivation-only image and sharp anchor rank",
     "status": "proved",
     "lean": [
-      "NCG.Grand.DerivationOnlyAustereImage"
+      "NCG/Grand/DerivationOnlyAustereImage.lean:NCG.DerivationOnlyAustereImage.derivation_only_austere_image"
     ],
     "note": "Exact finite-dimensional proof: derivation, grading, and reality data are linear constraints whose common kernel is the compatible commutant anchor. The complete solution fibre is affine, orthogonal centering is its unique minimum-Hilbert-Schmidt-norm point, and dimension theory proves that exactly q independent real scalar anchors are necessary and sufficient; no fixed finite dimension budget covers all finite packets.",
     "difficulty": "medium"

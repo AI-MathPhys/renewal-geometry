@@ -168,7 +168,7 @@ def lean_identifiers() -> set[str]:
     decl_re = re.compile(
         r"^\s*(?:@\[[^\]]*\]\s*)?(?:private\s+|protected\s+|noncomputable\s+)*"
         r"(?:theorem|lemma|def|abbrev|structure|class|instance|inductive)\s+"
-        r"([A-Za-z0-9_'.]+)",
+        r"((?:[A-Za-z0-9_'.]|[^\x00-\x7F])+)",
         re.M,
     )
     names: set[str] = set()
