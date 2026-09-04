@@ -11225,10 +11225,16 @@
   "cth:SMST-mixed-C-irredundant": {
     "env": "countertheorem",
     "title": "The auxiliary mixed row is irredundant",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - Explicit 3-dim witness with identical (S,T,U,G) and differing C; direct computation.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.MixedCIrr.gram_S",
+      "NCG/Grand/EasyExact03.lean:NCG.MixedCIrr.gramG_values",
+      "NCG/Grand/EasyExact03.lean:NCG.MixedCIrr.rowC_values",
+      "NCG/Grand/EasyExact03.lean:NCG.MixedCIrr.resR_values",
+      "NCG/Grand/EasyExact03.lean:NCG.MixedCIrr.mixed_row_irredundant",
+      "NCG/Grand/EasyExact03.lean:NCG.MixedCIrr.calibrated_fibre_instantiation"
+    ],
+    "note": "The manuscript witness on C^3: M = diag(mu) (real multiplier values), A(1) = 2^{-1/2}(e1+e2), F_0(1) = 2^{-1/2}(e1-e2), F_1(1) = e3, Y = MA, with 2^{-1/2} rendered as sqrt(2)/2 and the DMC.15 reconstruction using the spectral Moore-Penrose pseudo-inverse. Both cards have identical (S,D,E,T,U,G); (DMC.16) gives C_0 = (mu1-mu2)/2, R_0 = 0, C_1 = 0, R_1 = (mu1-mu2)^2/4, and for mu1 != mu2 the rows and residuals genuinely differ. The literal-fibre clause is rendered as: any strictly monotone calibrated multiplier takes distinct values at distinct right energies."
   },
   "thm:SMST-mixed-clock-interval": {
     "env": "theorem",
@@ -11249,10 +11255,15 @@
   "cth:SMST-five-matrices-not-weighted": {
     "env": "countertheorem",
     "title": "The five unweighted matrices do not determine the weighted panels",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - Explicit 2-dim witness: same five matrices, different weighted panel via monotone functional calculus f^{-1}(M_j).",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.FiveMatrixWeighted.cards_share_unweighted",
+      "NCG/Grand/EasyExact03.lean:NCG.FiveMatrixWeighted.card_projA",
+      "NCG/Grand/EasyExact03.lean:NCG.FiveMatrixWeighted.specH_literal",
+      "NCG/Grand/EasyExact03.lean:NCG.FiveMatrixWeighted.witness_spectra",
+      "NCG/Grand/EasyExact03.lean:NCG.FiveMatrixWeighted.weighted_panels_differ"
+    ],
+    "note": "Witness on R^2 with A(1)=e1, F(1)=e2, cards M_j = [[a,c],[c,b_j]] with common a = 2r/3, small common c = r/6 > 0, b_0 = a, b_1 = a-2c, spectra in (0,r). The calibrated multiplier f is abstract: strictly monotone (either direction) with nonnegative preimages covering (0,r) - its range hypothesis. Fibres are literal: explicit spectral resolutions from Cayley-Hamilton, H_j built spectrally from chosen f-preimages, and applying f spectrally to H_j recovers M_j. Both cards share the target column, the five (DMC.28) matrices S=1, T=a, U=a^2+c^2, G=1, C=c (S-dagger rendered as the inverse of the invertible 1x1 block) and the exact prior absorption c^2, while the weighted panels <e2,(1+H_j)^{2t}e2> (spectral real powers, every t > 0) differ."
   },
   "assess:SMST-Duhamel-compiler": {
     "env": "assessment",
@@ -11286,10 +11297,14 @@
   "cth:SMST-positive-time-high-energy-escape": {
     "env": "countertheorem",
     "title": "Base noncollapse without an energy row permits delayed collapse",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - 1-dim-per-level bank witness H_n=n: G_0=I but e^{-2tn} collapses; spectral escape immediate.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.HighEnergyEscape.energy_escape",
+      "NCG/Grand/EasyExact03.lean:NCG.HighEnergyEscape.wit_base",
+      "NCG/Grand/EasyExact03.lean:NCG.HighEnergyEscape.wit_collapse",
+      "NCG/Grand/EasyExact03.lean:NCG.HighEnergyEscape.one_dim_bank_escape"
+    ],
+    "note": "General clause proved at finite generality: for any bank of Hermitian Hamiltonians H_n with source banks Psi_n, if G_{0,n} >= I and the minimal eigenvalue of G_{t0,n} = Psi_n^* e^{-2 t0 H_n} Psi_n tends to 0 at a fixed delay t0 > 0, then there are unit coefficient vectors whose normalized spectral measures (eigenbasis weight distributions of Psi_n c_n under H_n) assign mass tending to 0 to every bounded energy interval {|lambda| <= R}. The witness bank H_n = n, Psi_n = 1 has G_{0,n} = I and minimal delayed eigenvalue e^{-2 t0 n} -> 0."
   },
   "thm:SMST-Markov-entrance-amplitude": {
     "env": "theorem",
@@ -11318,10 +11333,14 @@
   "thm:SMST-positive-time-transport-rectangle": {
     "env": "theorem",
     "title": "Delayed-source transport rectangle",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - Exact defect definition and three-step telescoping rectangle; direct algebra.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.TransportRect.delayed_defect",
+      "NCG/Grand/EasyExact03.lean:NCG.TransportRect.transport_rectangle",
+      "NCG/Grand/EasyExact03.lean:NCG.TransportRect.floor_transport",
+      "NCG/Grand/EasyExact03.lean:NCG.TransportRect.endpoint_defect_witness"
+    ],
+    "note": "PT.14 and PT.15 proved as exact matrix identities for finite carriers at one fixed delay (the identities are pointwise in t): the delayed-source defect P_{i+1,t}Psi_{i+1}V_i - U_i P_{i,t} Psi_i equals P_{i+1,t}A_i + S_i(t)Psi_i, and the four-cutoff direct defect telescopes into the three adjacent defects. The floor-transport sentence is rendered quantitatively by the exact positive splitting (Y+D)^H(Y+D) >= ((1-theta)m - (theta^{-1}-1)eps^2) I for every theta in (0,1] given Y^HY >= mI and D^HD <= eps^2 I; a one-dimensional witness has vanishing direct endpoint defect but adjacent defect 1."
   },
   "thm:SMST-marked-bond-resistance": {
     "env": "theorem",
@@ -11334,10 +11353,15 @@
   "cth:SMST-resistance-clock-not-OS-clock": {
     "env": "countertheorem",
     "title": "Static twist data do not identify the physical OS clock",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - Clock rescaling witness: pushforward scaling of spectral measure and F_a(0)=a^{-1}F_1(0); direct computation.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.ResistanceClock.sigma_pushforward",
+      "NCG/Grand/EasyExact03.lean:NCG.ResistanceClock.zero_response_scaling",
+      "NCG/Grand/EasyExact03.lean:NCG.ResistanceClock.time_memory_scaling",
+      "NCG/Grand/EasyExact03.lean:NCG.ResistanceClock.stiffness_static",
+      "NCG/Grand/EasyExact03.lean:NCG.ResistanceClock.mass_moment_not_determine_response"
+    ],
+    "note": "The retained boundary state is a weight pi on the command spectrum Z and the spectral-memory measure Sigma = sum n^2 pi(n) delta_{c(n)} of (PT.19) is a literal MeasureTheory.Measure. For C_a = aC the three boxed (PT.21) laws are proved: Sigma_a is the pushforward of Sigma_1 under scaling by a; the zero-mass Stieltjes response int lambda^{-1} dSigma scales by a^{-1} (a > 0); the time memory int e^{-t lambda} dSigma satisfies M_a(t) = M_1(at). The static data (pi itself) is shared by construction and the twist stiffness Sigma_a(R) is proved a-independent. The final clause is the two-card witness with equal total memory mass and first moment but zero-mass responses 1 != 4/3."
   },
   "fire:SMST-positive-time-scope": {
     "env": "firewall",
@@ -11379,18 +11403,28 @@
   "cor:SMST-electromagnetic-scalar-branch": {
     "env": "corollary",
     "title": "Exact scalar-aggregation branch",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - Covariantly-constant-charge iff scalar aggregation; direct algebra from router formula.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.ChargeRouter.scalar_aggregation_iff",
+      "NCG/Grand/EasyExact03.lean:NCG.ChargeRouter.covariantly_constant_iff",
+      "NCG/Grand/EasyExact03.lean:NCG.ChargeRouter.pathProd_unitary"
+    ],
+    "note": "On an m-link path with unitary holonomies and routed charges Qtilde_{j+1} = P_j Q_j P_j^* (P_j the partial holonomy products), the (EMR.7) router J(u) = sum u_j Qtilde_j aggregates as (sum u_j) Q_0 for every phase bank iff every routed charge equals Q_0, iff each frame Q_j is the reverse parallel transport P_j^* Q_0 P_j (covariant constancy). The final sentence (outside the branch the diagonal contact misses the mixed terms) is witnessed by cth:SMST-electromagnetic-phase-sum."
   },
   "cth:SMST-electromagnetic-phase-sum": {
     "env": "countertheorem",
     "title": "Equal total phase need not give equal current",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - Explicit Pauli-matrix two-link witness; direct computation of jets and norm sqrt(2).",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.PhaseSum.rotU_exp",
+      "NCG/Grand/EasyExact03.lean:NCG.PhaseSum.phase_sums_agree",
+      "NCG/Grand/EasyExact03.lean:NCG.PhaseSum.router_values",
+      "NCG/Grand/EasyExact03.lean:NCG.PhaseSum.router_norm_gap",
+      "NCG/Grand/EasyExact03.lean:NCG.PhaseSum.mixed_contact_zero",
+      "NCG/Grand/EasyExact03.lean:NCG.PhaseSum.rotU_unitary",
+      "NCG/Grand/EasyExact03.lean:NCG.PhaseSum.routed_charges"
+    ],
+    "note": "The two-link Pauli witness (EMR.14): U_1 = e^{-i pi sigma_2/4} is proved as a literal matrix exponential (explicit diagonalization of sigma_2, 2^{-1/2} rendered as sqrt(2)/2) and is unitary; the banks u=(1,0), v=(0,1) have equal scalar phase sums while the (EMR.7) routers are sigma_3 and sigma_1; the norm gap ||sigma_3 - sigma_1|| = sqrt 2 is proved in the L^2 operator norm; the exact mixed Hermitian contact (1/2){J(u),J(v)} vanishes and the naive scalar aggregation gives Q^2 = 1."
   },
   "thm:SMST-electromagnetic-pullback": {
     "env": "theorem",
@@ -11411,10 +11445,16 @@
   "thm:SMST-routed-electromagnetic-transport": {
     "env": "theorem",
     "title": "Exact routed-source and routed-form transport",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - Two exact algebraic defect decompositions (product rule and congruence expansion); direct verification.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.RoutedTransport.routed_source_defect",
+      "NCG/Grand/EasyExact03.lean:NCG.RoutedTransport.routed_form_congruence",
+      "NCG/Grand/EasyExact03.lean:NCG.RoutedTransport.routed_form_congruence_averaged",
+      "NCG/Grand/EasyExact03.lean:NCG.RoutedTransport.routed_form_congruence_delayed",
+      "NCG/Grand/EasyExact03.lean:NCG.RoutedTransport.blocking_defect_zero",
+      "NCG/Grand/EasyExact03.lean:NCG.RoutedTransport.refit_witness"
+    ],
+    "note": "EMR.23 and EMR.24 proved as exact matrix identities with the (EMR.22) defects A^R = R_{i+1}V_i - U_i R_i and A^B = B_{i+1}U_i - T_i B_i; the same-history averaged version holds for every finite history weight and the delayed version for every kernel family C_i(s) at every delay; exact path blocking (R_{i+1}V_i = U_i R_i, supplied by the jet cocycle) makes A^R = 0, while a one-dimensional separately refitted coarse twist has A^R = 1. The final telescoping sentence is the manuscript's prose reading of these identities."
   },
   "thm:SMST-physical-electromagnetic-handoff": {
     "env": "theorem",
@@ -14048,10 +14088,17 @@
   "cth:SMST-static-Weyl-no-clock": {
     "env": "countertheorem",
     "title": "Static Weyl law does not determine the transfer clock",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - Two-state flip process: E[X_0 X_tau]=e^{-2a tau} from repo finite-CTMC machinery; static characteristic obviously a-independent.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.StaticWeylClock.transfer_eq",
+      "NCG/Grand/EasyExact03.lean:NCG.StaticWeylClock.uniform_stationary",
+      "NCG/Grand/EasyExact03.lean:NCG.StaticWeylClock.transfer_stochastic",
+      "NCG/Grand/EasyExact03.lean:NCG.StaticWeylClock.staticChar_eq_cos",
+      "NCG/Grand/EasyExact03.lean:NCG.StaticWeylClock.staticChar_indep",
+      "NCG/Grand/EasyExact03.lean:NCG.StaticWeylClock.lag_correlation",
+      "NCG/Grand/EasyExact03.lean:NCG.StaticWeylClock.generator_eigenvalue"
+    ],
+    "note": "The rate-a flip chain on {-1,+1} is rendered by its generator 2a(R-1) = [[-a,a],[a,-a]] with transfer the literal matrix exponential, computed in closed form; the uniform law is stationary and rows are stochastic for every a; the complete one-time characteristic is cos t for every a; the boxed (BS.12a) lag correlation E[X_0 X_tau] (two-time law rendered as pi tensor P_tau) equals e^{-2a tau}; and -Q_a has eigenvalue 2a on the nonzero spin vector, so the lag kernel depends on a while the static law does not."
   },
   "thm:SMST-Weyl-Dirichlet-resolvent": {
     "env": "theorem",
@@ -16965,18 +17012,29 @@
   "thm:SMYM-derefresh": {
     "env": "theorem",
     "title": "Exact removal of the auxiliary refresh",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - Exact refresh/de-refresh semigroup identities, carre-du-champ convex split and moment rescaling; finite-state Markov algebra.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.Derefresh.derefresh_forward",
+      "NCG/Grand/EasyExact03.lean:NCG.Derefresh.derefresh_inverse",
+      "NCG/Grand/EasyExact03.lean:NCG.Derefresh.carre_split",
+      "NCG/Grand/EasyExact03.lean:NCG.Derefresh.moment_rescale",
+      "NCG/Grand/EasyExact03.lean:NCG.Derefresh.innovation_rescale",
+      "NCG/Grand/EasyExact03.lean:NCG.Derefresh.leak_scale",
+      "NCG/Grand/EasyExact03.lean:NCG.Derefresh.polar_innovation_invariant"
+    ],
+    "note": "Finite rendering: reflected parent space = finite state space with stationary weight; local generator = reversible zero-row-sum matrix, parent generator rho(R-1)+L per (CYD.1), semigroups literal matrix exponentials. CYD.3/CYD.4 proved via commuting exponential splitting and exp of the idempotent 1-R; CYD.5 as the pointwise convex carre-du-champ split for matrix-valued vector writers; CYD.6/CYD.7 for a real isometry J with range in Ran Q (RJ = 0); the final normalized-polar-innovation sentence is rendered by the exact leakage scaling L^par = e^{-rho t} L^loc plus trace-normalized proportionality of the lag-two innovations."
   },
   "cth:SMYM-refresh-gap": {
     "env": "countertheorem",
     "title": "The parent refresh is not Yang--Mills coercivity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: EASY - Refresh generator has gap rho on centered space regardless of local gap; direct finite generator computation.",
-    "difficulty": "easy"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/EasyExact03.lean:NCG.RefreshGap.refresh_gap",
+      "NCG/Grand/EasyExact03.lean:NCG.RefreshGap.quadratic_gen_eq",
+      "NCG/Grand/EasyExact03.lean:NCG.RefreshGap.quadratic_gen_nonneg",
+      "NCG/Grand/EasyExact03.lean:NCG.RefreshGap.zero_gap_witness"
+    ],
+    "note": "For every finite reversible Markov generator (zero rows, detailed balance, nonnegative off-diagonal rates) and every rho > 0, the refreshed generator satisfies <f,-(rho(R-1)+L)f>_mu >= rho <f,f>_mu on mu-centred f, via the Dirichlet-form identity and its nonnegativity; the zero generator on the uniform two-point space witnesses centred local gap 0 (nonzero centred unit vector with zero Dirichlet energy), so the refresh gap carries no Yang-Mills coercivity information. The Green-bound/transfer sentence is the manuscript's prose reading of this inequality."
   },
   "cth:SMYM-action-no-law": {
     "env": "countertheorem",
