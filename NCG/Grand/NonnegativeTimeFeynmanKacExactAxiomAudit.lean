@@ -1,0 +1,7 @@
+import NCG.Grand.NonnegativeTimeFeynmanKacExact
+
+/-! Standard-axiom audit for physical-half-line backward-equation uniqueness. -/
+
+#print axioms NCG.NonnegativeTimeFeynmanKac.eq_exp_mul_initial_of_hasDerivWithinAt_nonnegative
+#print axioms NCG.NonnegativeTimeFeynmanKac.eq_exponentialEntry_mulVec_of_backwardEquation_nonnegative
+#print axioms NCG.NonnegativeTimeFeynmanKac.eq_exponentialEntry_mulVec_of_firstJumpConditioning_nonnegative

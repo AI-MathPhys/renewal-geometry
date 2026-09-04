@@ -1,0 +1,8 @@
+import NCG.Grand.A3PeriodicProbabilitySmoothingExact
+
+#print axioms NCG.A3PeriodicProbabilitySmoothing.abs_lift_le_uniform_bound
+#print axioms NCG.A3PeriodicProbabilitySmoothing.integrable_lift_translate
+#print axioms NCG.A3PeriodicProbabilitySmoothing.average_periodic
+#print axioms NCG.A3PeriodicProbabilitySmoothing.sampledEnergy_translate
+#print axioms NCG.A3PeriodicProbabilitySmoothing.sampledEnergy_average_le_one
+#print axioms NCG.A3PeriodicProbabilitySmoothing.abs_average_le_uniform_bound

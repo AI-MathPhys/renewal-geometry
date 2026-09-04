@@ -1,0 +1,5 @@
+import NCG.Grand.A3SmoothUnitBallApproximationExact
+
+#print axioms NCG.A3SmoothUnitBallApproximation.abs_average_kernel_sub_lift_le
+#print axioms NCG.A3SmoothUnitBallApproximation.abs_average_kernel_sample_sub_le
+#print axioms NCG.A3SmoothUnitBallApproximation.exists_smooth_periodic_approximation_with_unit_energy

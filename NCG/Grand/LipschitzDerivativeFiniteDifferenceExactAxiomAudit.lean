@@ -1,0 +1,4 @@
+import NCG.Grand.LipschitzDerivativeFiniteDifferenceExact
+
+#print axioms NCG.LipschitzDerivativeFiniteDifference.uniform_first_order_remainder
+#print axioms NCG.LipschitzDerivativeFiniteDifference.uniform_bounded_direction_difference

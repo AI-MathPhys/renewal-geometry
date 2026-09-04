@@ -1,0 +1,7 @@
+import NCG.Grand.StationaryGraphSpectralizationExact
+
+#print axioms NCG.StationaryGraphSpectralization.fluxGenerator_mass_mul_rate_eq
+#print axioms NCG.StationaryGraphSpectralization.stationary_rate_adjoint
+#print axioms NCG.StationaryGraphSpectralization.stationary_rate_dirac_square
+#print axioms NCG.StationaryGraphSpectralization.stationary_rate_commutator_energy
+#print axioms NCG.StationaryGraphSpectralization.connected_commutator_kernel

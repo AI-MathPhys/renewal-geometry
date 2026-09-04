@@ -1,0 +1,6 @@
+import NCG.Grand.A3ConnesDistanceUniformBoundsExact
+
+#print axioms NCG.A3ConnesDistanceUniformBounds.norm_point_le_six
+#print axioms NCG.A3ConnesDistanceUniformBounds.point_mem_closedBall
+#print axioms NCG.A3ConnesDistanceUniformBounds.connesDistance_le_eighteen_norm
+#print axioms NCG.A3ConnesDistanceUniformBounds.connesDistance_le_uniform_diameter

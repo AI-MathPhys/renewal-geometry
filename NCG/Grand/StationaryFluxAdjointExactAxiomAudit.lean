@@ -1,0 +1,6 @@
+import NCG.Grand.StationaryFluxAdjointExact
+
+#print axioms NCG.StationaryFluxAdjoint.weightedPairing_fluxGenerator
+#print axioms NCG.StationaryFluxAdjoint.stationary_flux_adjoint
+#print axioms NCG.StationaryFluxAdjoint.symmetric_generator_eq_average
+#print axioms NCG.StationaryFluxAdjoint.hodgeLaplacian_eq_negative_flux_sum

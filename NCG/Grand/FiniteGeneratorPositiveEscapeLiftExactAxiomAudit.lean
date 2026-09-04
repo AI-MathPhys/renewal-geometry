@@ -1,0 +1,13 @@
+import NCG.Grand.FiniteGeneratorPositiveEscapeLiftExact
+
+/-! Standard-axiom audit for a positive-escape lift of arbitrary finite generators. -/
+
+#print axioms NCG.FiniteGeneratorPositiveEscapeLift.clockLift_mulVec_liftFunction
+#print axioms NCG.FiniteGeneratorPositiveEscapeLift.clockLift_isGenerator
+#print axioms NCG.FiniteGeneratorPositiveEscapeLift.escapeRate_clockLift
+#print axioms NCG.FiniteGeneratorPositiveEscapeLift.escapeRate_clockLift_pos
+#print axioms NCG.FiniteGeneratorPositiveEscapeLift.tilt_clockLift
+#print axioms NCG.FiniteGeneratorPositiveEscapeLift.physicalRecord_mulVec
+#print axioms NCG.FiniteGeneratorPositiveEscapeLift.clockLift_mul_physicalRecord
+#print axioms NCG.FiniteGeneratorPositiveEscapeLift.exponentialEntry_clockLift_intertwines
+#print axioms NCG.FiniteGeneratorPositiveEscapeLift.exponentialEntry_clockLift_mulVec

@@ -1,0 +1,4 @@
+import NCG.Grand.CompactKernelConvolutionDerivativeBoundExact
+
+#print axioms NCG.CompactKernelConvolutionDerivativeBound.derivativeBound_nonneg
+#print axioms NCG.CompactKernelConvolutionDerivativeBound.norm_fderiv_convolution_sub_le

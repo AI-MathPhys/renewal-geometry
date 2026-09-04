@@ -1,0 +1,7 @@
+import NCG.Grand.A3SmoothPeriodicUnitEnergyExact
+
+#print axioms NCG.A3SmoothPeriodicUnitEnergy.probabilityKernel_isProbability
+#print axioms NCG.A3SmoothPeriodicUnitEnergy.average_kernel_eq_convolution
+#print axioms NCG.A3SmoothPeriodicUnitEnergy.locallyIntegrable_lift
+#print axioms NCG.A3SmoothPeriodicUnitEnergy.contDiff_average_kernel
+#print axioms NCG.A3SmoothPeriodicUnitEnergy.smooth_periodic_unit_energy

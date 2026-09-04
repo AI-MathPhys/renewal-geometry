@@ -1,0 +1,5 @@
+import NCG.Grand.A3SmoothedDerivativeControlExact
+
+#print axioms NCG.A3SmoothedDerivativeControl.kernelDerivativeBound_nonneg
+#print axioms NCG.A3SmoothedDerivativeControl.norm_fderiv_average_sub_le
+#print axioms NCG.A3SmoothedDerivativeControl.eventually_norm_fderiv_average_le

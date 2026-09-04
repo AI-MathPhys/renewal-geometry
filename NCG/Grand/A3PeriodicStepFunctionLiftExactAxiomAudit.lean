@@ -1,0 +1,12 @@
+import NCG.Grand.A3PeriodicStepFunctionLiftExact
+
+#print axioms NCG.A3PeriodicStepFunctionLift.index_point
+#print axioms NCG.A3PeriodicStepFunctionLift.lift_point
+#print axioms NCG.A3PeriodicStepFunctionLift.integerIndex_lattice_translate
+#print axioms NCG.A3PeriodicStepFunctionLift.lift_periodic
+#print axioms NCG.A3PeriodicStepFunctionLift.integerIndex_root_translate
+#print axioms NCG.A3PeriodicStepFunctionLift.index_root_translate
+#print axioms NCG.A3PeriodicStepFunctionLift.measurable_integerIndex
+#print axioms NCG.A3PeriodicStepFunctionLift.measurable_lift
+#print axioms NCG.A3PeriodicStepFunctionLift.sampledEnergy_lift_eq_localEnergy
+#print axioms NCG.A3PeriodicStepFunctionLift.sampledEnergy_lift_le_one

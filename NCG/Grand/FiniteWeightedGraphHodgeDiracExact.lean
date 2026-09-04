@@ -29,13 +29,13 @@ def edgeWeight (mass : V → ℝ) (conductance : V → V → ℝ)
     (x y : V) : ℝ :=
   Real.sqrt (conductance x y / mass x)
 
-/-- Weighted incidence matrix on all oriented edges. -/
+/-- Weighted incidence matrix in orthonormal coordinates. Each endpoint is
+divided by its own vertex mass; a self-loop has zero differential. -/
 def differential (mass : V → ℝ) (conductance : V → V → ℝ) :
     Matrix (V × V) V ℝ :=
   fun xy z =>
-    if z = xy.2 then edgeWeight mass conductance xy.1 xy.2
-    else if z = xy.1 then -edgeWeight mass conductance xy.1 xy.2
-    else 0
+    (if z = xy.2 then edgeWeight mass (fun i j => conductance j i) xy.2 xy.1 else 0) -
+      (if z = xy.1 then edgeWeight mass conductance xy.1 xy.2 else 0)
 
 /-- Hodge--Dirac matrix on zero-forms plus oriented one-forms. -/
 def dirac (mass : V → ℝ) (conductance : V → V → ℝ) :
@@ -330,14 +330,16 @@ theorem differential_scaled
     (hmass : ∀ x, 0 < mass x) (hc : ∀ x y, 0 ≤ conductance x y) :
     differential (scaledMass a mass) (scaledConductance a conductance) =
       a⁻¹ • differential mass conductance := by
+  have htarget (x y : V) :
+      edgeWeight (scaledMass a mass) (fun i j => scaledConductance a conductance j i) x y =
+        a⁻¹ * edgeWeight mass (fun i j => conductance j i) x y :=
+    edgeWeight_scaled a ha mass (fun i j => conductance j i) hmass
+      (fun x y => hc y x) x y
   ext xy z
   rw [Matrix.smul_apply]
-  by_cases hzy : z = xy.2
-  · simp [differential, hzy, edgeWeight_scaled a ha mass conductance hmass hc]
-  · by_cases hzx : z = xy.1
-    · simp [differential, hzy, hzx,
-        edgeWeight_scaled a ha mass conductance hmass hc]
-    · simp [differential, hzy, hzx]
+  simp only [differential, htarget,
+    edgeWeight_scaled a ha mass conductance hmass hc, smul_eq_mul]
+  split_ifs <;> ring
 
 /-- The graph Hodge--Dirac obeys the de Sitter spatial scaling law
 `D_a = a^{-1} D_0`. -/

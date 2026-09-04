@@ -1,0 +1,9 @@
+import NCG.Grand.FiniteCTMCFirstJumpConditioningExact
+
+/-! Standard-axiom audit for actual CTMC first-jump conditioning. -/
+
+#print axioms NCG.FiniteCTMCFirstJumpConditioning.ae_continuation_prefix_eq
+#print axioms NCG.FiniteCTMCFirstJumpConditioning.integral_continuation_eq_firstJumpPrefixMoment
+#print axioms NCG.FiniteCTMCFirstJumpConditioning.integrable_firstJumpHoldingMoment
+#print axioms
+  NCG.FiniteCTMCFirstJumpConditioning.conditionalPathMoment_eq_integral_firstJumpHoldingMoment

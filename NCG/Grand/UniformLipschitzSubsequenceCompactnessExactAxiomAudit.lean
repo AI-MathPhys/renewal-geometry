@@ -1,0 +1,3 @@
+import NCG.Grand.UniformLipschitzSubsequenceCompactnessExact
+
+#print axioms NCG.UniformLipschitzSubsequenceCompactness.exists_uniformly_convergent_subsequence

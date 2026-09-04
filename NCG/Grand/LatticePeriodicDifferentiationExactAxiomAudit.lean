@@ -1,0 +1,9 @@
+import NCG.Grand.LatticePeriodicDifferentiationExact
+
+/-! Standard-axiom audit of lattice tiles and periodic differentiation. -/
+
+#print axioms NCG.LatticePeriodicDifferentiation.norm_sub_floor_combination_le
+#print axioms NCG.LatticePeriodicDifferentiation.periodLattice_bounded_cover
+#print axioms NCG.LatticePeriodicDifferentiation.uniformContinuous_of_lattice_periodic
+#print axioms NCG.LatticePeriodicDifferentiation.derivative_periodic
+#print axioms NCG.LatticePeriodicDifferentiation.uniformContinuous_derivative_of_lattice_periodic

@@ -1,0 +1,14 @@
+import NCG.Grand.FiniteConnesDistanceAttainmentExact
+
+/-! Standard-axiom audit of finite Connes variational attainment. -/
+
+#print axioms NCG.FiniteConnesDistanceAttainment.graphLipschitz_eq_norm_gradient
+#print axioms NCG.FiniteConnesDistanceAttainment.continuous_graphLipschitz
+#print axioms NCG.FiniteConnesDistanceAttainment.anchoredGradient_injective
+#print axioms NCG.FiniteConnesDistanceAttainment.isCompact_anchoredUnitBall
+#print axioms NCG.FiniteConnesDistanceAttainment.graphLipschitz_sub_constant
+#print axioms NCG.FiniteConnesDistanceAttainment.distanceValues_eq_anchored_image
+#print axioms NCG.FiniteConnesDistanceAttainment.isCompact_distanceValues
+#print axioms NCG.FiniteConnesDistanceAttainment.zero_mem_distanceValues
+#print axioms NCG.FiniteConnesDistanceAttainment.connesDistance_isGreatest
+#print axioms NCG.FiniteConnesDistanceAttainment.exists_connesDistance_optimizer

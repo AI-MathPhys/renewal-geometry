@@ -1,0 +1,13 @@
+import NCG.Grand.PeriodicQuotientDistanceExact
+
+#print axioms NCG.PeriodicQuotientDistance.distance_eq_infDist
+#print axioms NCG.PeriodicQuotientDistance.distance_le_norm
+#print axioms NCG.PeriodicQuotientDistance.distance_nonneg
+#print axioms NCG.PeriodicQuotientDistance.distance_self
+#print axioms NCG.PeriodicQuotientDistance.distance_comm
+#print axioms NCG.PeriodicQuotientDistance.distance_triangle
+#print axioms NCG.PeriodicQuotientDistance.distance_periodic_right
+#print axioms NCG.PeriodicQuotientDistance.projection_lipschitz
+#print axioms NCG.PeriodicQuotientDistance.distance_to_base_lipschitz
+#print axioms NCG.PeriodicQuotientDistance.periodic_lipschitz_le_distance
+#print axioms NCG.PeriodicQuotientDistance.distance_eq_zero_iff

@@ -1,0 +1,4 @@
+import NCG.Grand.A3ConnesFlatLowerComparisonExact
+
+#print axioms NCG.A3ConnesFlatLowerComparison.eventually_graphLipschitz_smoothDistance_le
+#print axioms NCG.A3ConnesFlatLowerComparison.eventually_flatDistance_le_connes_with_smoothing_error

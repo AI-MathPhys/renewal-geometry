@@ -62,9 +62,11 @@ theorem admissibleJumpIndex_eq_iff
     admissibleJumpIndex z T = n ↔
       cumulativeJumpTime z.1 n ≤ T ∧
         T < cumulativeJumpTime z.1 (n + 1) := by
-  simpa [admissibleJumpIndex, clockOfAdmissible,
-    clockOfJumpSequence, cumulativeJumpTime, physicalHold] using
-    jumpIndex_eq_iff_of_nonnegative_time (clockOfAdmissible z) hT n
+  change jumpIndex (clockOfAdmissible z) T = n ↔
+    cumulativeHold (fun m => (z.1 (m + 1)).1) n ≤ T ∧
+      T < cumulativeHold (fun m => (z.1 (m + 1)).1) (n + 1)
+  exact jumpIndex_eq_iff_of_nonnegative_time
+    (clockOfAdmissible z) hT n
 
 /-- The random finite-horizon jump index is measurable on the admissible
 carrier. -/
@@ -80,7 +82,7 @@ theorem measurable_admissibleJumpIndex (T : ℝ) (hT : 0 ≤ T) :
         {z | T < cumulativeJumpTime z.1 (n + 1)} := by
     ext z
     simp only [Set.mem_preimage, Set.mem_singleton_iff, Set.mem_inter_iff,
-      Set.mem_setOf_eq]
+      Set.mem_ofPred_eq]
     exact admissibleJumpIndex_eq_iff z hT n
   rw [hset]
   apply MeasurableSet.inter
@@ -110,7 +112,7 @@ theorem measurable_admissibleStateAt (T : ℝ) (hT : 0 ≤ T) :
           {z | (z.1 n).2 = x} := by
     ext z
     simp only [Set.mem_preimage, Set.mem_singleton_iff, Set.mem_iUnion,
-      Set.mem_inter_iff, Set.mem_setOf_eq, admissibleStateAt]
+      Set.mem_inter_iff, Set.mem_ofPred_eq, admissibleStateAt]
     constructor
     · intro hz
       exact ⟨admissibleJumpIndex z T, rfl, hz⟩

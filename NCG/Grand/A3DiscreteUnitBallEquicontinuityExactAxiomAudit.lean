@@ -1,0 +1,7 @@
+import NCG.Grand.A3DiscreteUnitBallEquicontinuityExact
+
+#print axioms NCG.A3DiscreteUnitBallEquicontinuity.abs_coordinates_apply_le_two_norm
+#print axioms NCG.A3DiscreteUnitBallEquicontinuity.coordinates_point
+#print axioms NCG.A3DiscreteUnitBallEquicontinuity.coordinates_point_sub
+#print axioms NCG.A3DiscreteUnitBallEquicontinuity.point_injective
+#print axioms NCG.A3DiscreteUnitBallEquicontinuity.abs_difference_le_eighteen_norm

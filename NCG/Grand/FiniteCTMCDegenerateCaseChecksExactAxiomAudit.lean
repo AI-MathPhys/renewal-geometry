@@ -1,0 +1,10 @@
+import NCG.Grand.FiniteCTMCDegenerateCaseChecksExact
+
+/-! Standard-axiom audit for the absorbing-state and singleton compiler instances. -/
+
+#print axioms NCG.FiniteCTMCDegenerateCaseChecks.absorbingGenerator_isGenerator
+#print axioms NCG.FiniteCTMCDegenerateCaseChecks.absorbingGenerator_has_zero_escape
+#print axioms NCG.FiniteCTMCDegenerateCaseChecks.absorbing_feynmanKac
+#print axioms NCG.FiniteCTMCDegenerateCaseChecks.singleton_zero_isGenerator
+#print axioms NCG.FiniteCTMCDegenerateCaseChecks.singleton_zero_isCommunicating
+#print axioms NCG.FiniteCTMCDegenerateCaseChecks.singleton_zero_hasLargeDeviationPrinciple

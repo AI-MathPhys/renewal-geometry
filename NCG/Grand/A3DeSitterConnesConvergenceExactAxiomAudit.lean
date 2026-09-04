@@ -1,0 +1,7 @@
+import NCG.Grand.A3DeSitterConnesConvergenceExact
+
+#print axioms NCG.A3DeSitterConnesConvergence.conductance_nonneg
+#print axioms NCG.A3DeSitterConnesConvergence.slice_graphLipschitz_eq
+#print axioms NCG.A3DeSitterConnesConvergence.sliceConnesDistance_eq
+#print axioms NCG.A3DeSitterConnesConvergence.slice_distance_error_eq
+#print axioms NCG.A3DeSitterConnesConvergence.eventually_uniform_slice_distance_error

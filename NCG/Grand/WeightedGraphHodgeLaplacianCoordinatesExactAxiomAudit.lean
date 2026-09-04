@@ -1,0 +1,9 @@
+import NCG.Grand.WeightedGraphHodgeLaplacianCoordinatesExact
+
+/-! Standard-axiom audit of the actual matrix/weighted Hodge Laplacian identification. -/
+
+#print axioms NCG.WeightedGraphHodgeLaplacianCoordinates.sqrt_mass_mul_edgeWeight_mul_sqrt
+#print axioms NCG.WeightedGraphHodgeLaplacianCoordinates.weighted_differential_entry
+#print axioms NCG.WeightedGraphHodgeLaplacianCoordinates.sqrt_mass_mul_transpose_mulVec_edgeCoordinates
+#print axioms NCG.WeightedGraphHodgeLaplacianCoordinates.transpose_mulVec_edgeCoordinates
+#print axioms NCG.WeightedGraphHodgeLaplacianCoordinates.hodgeLaplacian_mulVec_vertexCoordinates
