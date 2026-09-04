@@ -2260,10 +2260,17 @@
  "cth:GT-lifetime-no-momentum-ancestry": {
   "env": "countertheorem",
   "title": "Equal lifetime with distinct momentum ancestry",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Finite witness: two distinct measures on a small momentum window with identical delta_1 energy marginal; direct computation.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.Lifetime.lifetime_no_momentum_ancestry",
+   "NCG/Grand/EasyExact01.lean:NCG.Lifetime.equal_energy_marginals",
+   "NCG/Grand/EasyExact01.lean:NCG.Lifetime.survival_kernel",
+   "NCG/Grand/EasyExact01.lean:NCG.Lifetime.lifetime_density",
+   "NCG/Grand/EasyExact01.lean:NCG.Lifetime.green_weight",
+   "NCG/Grand/EasyExact01.lean:NCG.Lifetime.packet_momentum_marginal",
+   "NCG/Grand/EasyExact01.lean:NCG.Lifetime.witness_lifetime_ancestry"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean): the packet mu_j = delta_1 x eta_j (the scalar factor of JT.5; the I_E tensor factor is rendered by the matrix-decorated marginal and Green clauses since it is a scalar multiple of the identity) on a compact metrizable momentum window has energy marginal delta_1, survival kernel e^{-s}, renewal-lifetime density e^{-s} ds, and unit zero-mass Green weight, independently of eta_j; for eta_1 <> eta_2 a continuous test separates the momentum marginals (lifetime_no_momentum_ancestry, via the finite-measure Riesz ext theorem). A fully explicit witness (window [0,1], Dirac ancestries at the endpoints, separating test q -> q) is constructed in witness_lifetime_ancestry."
  },
  "thm:GT-dynamic-source-ancestry": {
   "env": "theorem",
@@ -2307,10 +2314,18 @@
  "thm:GT-source-action-covariance": {
   "env": "theorem",
   "title": "Variational covariance and polar reserve factorization",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Sup formula by completing the square; partial isometry via G^{dagger/2} polar (repo CFC machinery); spectral window transfer.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.SourceAction.variational_covariance",
+   "NCG/Grand/EasyExact01.lean:NCG.SourceAction.covariance_coordinate_invariance",
+   "NCG/Grand/EasyExact01.lean:NCG.SourceAction.polar_partial_isometry",
+   "NCG/Grand/EasyExact01.lean:NCG.SourceAction.polar_range_projection",
+   "NCG/Grand/EasyExact01.lean:NCG.SourceAction.polar_factorization",
+   "NCG/Grand/EasyExact01.lean:NCG.SourceAction.same_nonzero_spectrum",
+   "NCG/Grand/EasyExact01.lean:NCG.SourceAction.reserve_window",
+   "NCG/Grand/EasyExact01.lean:NCG.SourceAction.sigma_eq_unitSource"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean): for finite null-cost-consistent packets (Ker M <= Ker B as a mulVec inclusion), SMET.5 is an attained IsGreatest for <x, Sigma x> over all coefficient vectors (variational_covariance); SMET.6 is proved through the variational characterization with an invertible reparametrization S : E ~ E (equal source spaces; the manuscript allows an abstract E-tilde, which an invertible S identifies with E); SMET.7-9 give U^*U = supp G, UU^* = supp Sigma = P_B, B_M = U G^{1/2}, Sigma = U G U^*; the equal nonzero spectrum is the two-sided nonzero-eigenvalue transport; SMET.10 is the Loewner window g_- P_B <= Sigma <= g_+ P_B with g_- = posFloor(G) (least positive eigenvalue) and g_+ = lambda_max(G) (= ||G|| for the PSD Gram, rendered spectrally). All spectral operators (M-dagger, M^{dagger/2}, G^{dagger/2}, G^{1/2}, supports) use the repo spectralFunction calculus."
  },
  "def:GT-source-metric-Gramians": {
   "env": "definition",
@@ -2330,10 +2345,16 @@
  "cth:GT-source-metric-collapses": {
   "env": "countertheorem",
   "title": "Three independent leverage-collapse mechanisms",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Three explicit scalar/2x2 witnesses with elementary exponential integrals; direct computation.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.Leverage.coordinate_collapse",
+   "NCG/Grand/EasyExact01.lean:NCG.Leverage.reserve_collapse",
+   "NCG/Grand/EasyExact01.lean:NCG.Leverage.cyclic_geometry_collapse",
+   "NCG/Grand/EasyExact01.lean:NCG.Leverage.tiltGramian_value",
+   "NCG/Grand/EasyExact01.lean:NCG.Leverage.tiltGramian_det",
+   "NCG/Grand/EasyExact01.lean:NCG.Leverage.tiltProj_is_projection"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean) with fully explicit witnesses along any eps_n > 0 tending to 0. (i) coordinate_collapse: Sigma = B M^{-1} B = 1 and physical Gramian c_T constant while the raw coefficient Gramian is c_T eps_n^2 -> 0. (ii) reserve_collapse: full scalar source range, Sigma = eps_n^2, and the minimum physical control energy over continuous unit-reach controls is an attained IsLeast with exact value (c_T eps_n^2)^{-1}, which diverges. (iii) cyclic_geometry_collapse on R^2 with H = diag(1,2): entrance reserve 1 + eps^2, every tilted source clock-cyclic (semigroup-orbit span = top via the actual matrix exponential), the normalized horizon Gramian and its determinant take the displayed exact values, the smallest eigenvalue (variational Rayleigh-quotient infimum) tends to 0, and the limiting source e_1 loses e_2 from its cyclic space."
  },
  "thm:GT-source-metric-depth": {
   "env": "theorem",
@@ -2354,10 +2375,14 @@
  "prop:GT-source-metric-transport": {
   "env": "proposition",
   "title": "Primitive transport before leverage",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Two exact algebraic defect decompositions (difference-of-products and integral defect); direct expansion.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.MetricTransport.primitive_transport",
+   "NCG/Grand/EasyExact01.lean:NCG.MetricTransport.horizon_defect",
+   "NCG/Grand/EasyExact01.lean:NCG.MetricTransport.clock_defect_pointwise",
+   "NCG/Grand/EasyExact01.lean:NCG.MetricTransport.defect_telescope"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean): SMET.29 (primitive_transport) for two aligned finite cards with positive-definite metrics; SMET.30 (horizon_defect) for Hermitian clocks, an adjacent isometry, entrance projections P_i = supp Sigma_i (spectral support projections of the given PSD covariances), and matrix-valued horizon integrals of the actual matrix exponential over the operator-norm Banach algebra; the closing telescope clause is defect_telescope (additive telescoping of source and metric defects along staged routes)."
  },
  "fire:GT-source-metric-scope": {
   "env": "firewall",
@@ -2369,10 +2394,14 @@
  "cth:GT-static-residual-follower": {
   "env": "countertheorem",
   "title": "A positive entrance residual can be a complete clock follower",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Explicit 2x2 witness: Krylov span of e1 under coupled H is full, so R_dyn=0 while R_ent=1.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.StaticResidual.static_residual_follower",
+   "NCG/Grand/EasyExact01.lean:NCG.StaticResidual.entProj_is_projection",
+   "NCG/Grand/EasyExact01.lean:NCG.StaticResidual.cyclicCarrier_eq_top",
+   "NCG/Grand/EasyExact01.lean:NCG.StaticResidual.exp_mulVec_eigen"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean): the explicit packet H = [[1,alpha],[alpha,1]], B1 = e1, Y1 = e2 with 0 < |alpha| < 1 has H >= 0, R_ent = <Y,(1-P_B)Y> = 1 against the explicit orthogonal entrance projection (its defining clauses proved), and R_dyn = 0: the semigroup-cyclic carrier span{e^{-tH} B : t >= 0} (actual matrix exponential, evaluated on the eigenvector pair via a series argument) is all of R^2, so Y - PY = 0 for any projection P fixing the carrier."
  },
  "fire:GT-source-clock-scope": {
   "env": "firewall",
@@ -2392,10 +2421,14 @@
  "cor:GT-low-island-cofinal-carrier": {
   "env": "corollary",
   "title": "Summable cofinal landing from relative low-island moments",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Summable increments give Cauchy sequence in Hilbert space; limit nonzero by norm floor; standard completeness.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.LowIsland.low_island_cofinal_landing",
+   "NCG/Grand/EasyExact01.lean:NCG.LowIsland.island_floor",
+   "NCG/Grand/EasyExact01.lean:NCG.LowIsland.island_mass_upper",
+   "NCG/Grand/EasyExact01.lean:NCG.LowIsland.island_tail"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean): low_island_cofinal_landing takes n-indexed families of finite source cards and finite carriers (finite rendering of the carrier Hilbert spaces, so the sublevel projections have finite rank automatically), the LIR.1-LIR.4 data with uniform windows rho < d_-, d_+, kappa_j, unit island vectors, radii with summable R_n^{-1/2}, inner-product-preserving embeddings into one comparison Hilbert space, and the summable head increments (LIR.9), and concludes strong convergence of J_n Q_n v_n to a nonzero limit. The needed conclusions of thm:GT-low-island-relative-moment are not assumed: the floor d_- - rho <= ||Q_n v_n||^2 (LIR.5), the upper edge <= d_+, and the spectral tail estimate R ||(1-Pi_R) Q v||^2 <= kappa_* d_+ (LIR.6/LIR.8) are derived from the island data by the repo spectral calculus (island_floor, island_mass_upper, island_tail)."
  },
  "fire:GT-low-island-relative-scope": {
   "env": "firewall",
@@ -18453,26 +18486,36 @@
  "thm:NS-energy-neutral-payment": {
   "env": "theorem",
   "title": "Exact energy-neutral viscosity-shorted payment",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Constrained minimum-norm payment via projection with exact Pythagoras splits; finite Hilbert algebra.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.NSPay.payment_constraints",
+   "NCG/Grand/EasyExact01.lean:NCG.NSPay.payment_normsq",
+   "NCG/Grand/EasyExact01.lean:NCG.NSPay.payment_isLeast",
+   "NCG/Grand/EasyExact01.lean:NCG.NSPay.payment_unique",
+   "NCG/Grand/EasyExact01.lean:NCG.NSPay.payment_pythagoras",
+   "NCG/Grand/EasyExact01.lean:NCG.NSPay.payment_ratio"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean) as Hilbert geometry on an arbitrary complex inner-product space with the data the manuscript carries at this point: e <> 0, the energy-null incidence Re<c,e> = 0 (NSE.4), nu >= 0, and record positivity q_c > 0 (V_c > 0 is derived, not assumed). NSE.12 (payment_constraints), NSE.13 as an attained IsLeast over all energy-neutral corrections removing the record rate plus a uniqueness clause (payment_isLeast, payment_unique), NSE.14 (payment_pythagoras), NSE.15 (payment_ratio); all scalars kappa-bar, psi, D_c, V_c, Phi_c, q_c, delta_c are the manuscript formulas NSE.2-NSE.10."
  },
  "cth:NS-ambient-critical-underprice": {
   "env": "countertheorem",
   "title": "Ambient critical short can underprice the physical source",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Explicit 2-dim witness separating ambient and energy-neutral payment distances.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.NSPay.ambient_underprice",
+   "NCG/Grand/EasyExact01.lean:NCG.NSPay.witness_orthonormal"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean): for every 0 < eps < 1 the fully explicit two-dimensional packet on C^2 with orthonormal e, f, energy-neutral source c = -f, zero viscosity threshold, and target v = sqrt(1-eps^2) e + eps f has unit energy vector, positive record rate q_c = eps, ambient payment distance eps, energy-neutral payment distance 1, and delta_c = eps -> 0, so no regulator-uniform comparison is available without a positive lower bound on delta_c."
  },
  "cor:NS-centred-work-one-source": {
   "env": "corollary",
   "title": "One occurrence, viscosity matching, and payment",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Collinear decomposition of the work projection; direct algebra.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.NSPay.work_decomposition",
+   "NCG/Grand/EasyExact01.lean:NCG.NSPay.work_collinear"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean): NSE.17 (work_decomposition: c = c_wrk + c_0 with Re<c_0,psi> = 0 and the exact norm split ||c||^2 = Phi_c^2/V_c + ||c_0||^2) and NSE.18 (work_collinear: on the record-positive set c_wrk = -(nu D_c/V_c) psi + c_pay), in the same abstract critical-carrier rendering as thm:NS-energy-neutral-payment; the perpendicularity is the real pairing of the complex carrier."
  },
  "thm:NS-centred-payment-stocks": {
   "env": "theorem",
@@ -18579,10 +18622,16 @@
  "prop:NS-paid-stress-selector": {
   "env": "proposition",
   "title": "Occupied selector versus stress motion",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Finite symmetric-traceless orthogonal-split identity plus scalar arcsin Lipschitz bound; direct algebra.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.StressSel.selector_split",
+   "NCG/Grand/EasyExact01.lean:NCG.StressSel.fisher_lipschitz",
+   "NCG/Grand/EasyExact01.lean:NCG.StressSel.paid_stress_translation_bound",
+   "NCG/Grand/EasyExact01.lean:NCG.StressSel.rhoObs_amplitude",
+   "NCG/Grand/EasyExact01.lean:NCG.StressSel.rhoObs_L4",
+   "NCG/Grand/EasyExact01.lean:NCG.StressSel.rhoObs_no_translation_modulus"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean): NSR.15 (selector_split) on the trace-free symmetric 3x3 carrier with the Hilbert-Schmidt pairing; the Fisher bound |theta_1 - theta_0| <= (1/2)|zeta_1 - zeta_0| for zeta = 2 arcsin sqrt(theta) (fisher_lipschitz); NSR.16 (paid_stress_translation_bound) for continuous stress data with the occupied selector theta = sin^2(zeta/2) and amplitude bound ||X(t)|| <= E_*; and the closing clause via the manuscript proof's own scalar obstruction rho_n = 1 + sin(nt)/2, uniformly bounded and L^4-bounded but with no uniform L^2 translation modulus (rhoObs_no_translation_modulus, with the explicit sin^2-window integral)."
  },
  "remark:finite-head-selector-regularity": {
   "env": "remark",
@@ -18633,10 +18682,15 @@
  "prop:NS-common-phase-space-panel": {
   "env": "proposition",
   "title": "A common phase-space scalar panel",
-  "status": "conditional_interface",
-  "lean": [],
-  "note": "TRIAGE-EXACT: EASY - Partition-of-unity operator resolution summing to the identity with polarized scalar split; direct Hilbert algebra.",
-  "difficulty": "easy"
+  "status": "proved",
+  "lean": [
+   "NCG/Grand/EasyExact01.lean:NCG.PhasePanel.panel_fiber_collapse",
+   "NCG/Grand/EasyExact01.lean:NCG.PhasePanel.panel_resolution",
+   "NCG/Grand/EasyExact01.lean:NCG.PhasePanel.panel_scalar_split",
+   "NCG/Grand/EasyExact01.lean:NCG.PhasePanel.panel_scalar_summable",
+   "NCG/Grand/EasyExact01.lean:NCG.PhasePanel.marginals_do_not_determine_joint"
+  ],
+  "note": "Proved exactly (2026-09-04, NCG/Grand/EasyExact01.lean): for self-adjoint idempotents (Q_j) whose partial sums converge strongly to the identity and any finite operator partition with sum eta_a^* eta_a = 1 (the manuscript's smooth quadratic spatial partition), the ordered panel E_{j,a} = eta_a Q_j satisfies the complete resolution sum E^*E = I in the strong (HasSum) sense and the polarized scalar split of -Re<c,q> (NST.15), with the Cauchy-Schwarz absolute-convergence clause (panel_scalar_summable); the joint sum over (j,a) is rendered as the strong j-sum of the finite a-sums. The opening insufficiency clause is the explicit diagonal/antidiagonal witness on {0,1}^2 with identical marginals and opposite equality incidence."
  },
  "prop:NS-local-fractional-source": {
   "env": "proposition",
