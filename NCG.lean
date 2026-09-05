@@ -693,6 +693,7 @@ import NCG.Grand.EasyExact05
 import NCG.Grand.MediumProved00
 import NCG.Grand.MediumProved01
 import NCG.Grand.MediumProved02
+import NCG.Grand.MediumProved03
 import NCG.Flagship.NativeDeterminant
 import NCG.Flagship.PvsNPBridge
 import NCG.Flagship.ScalarResponseAnomaly

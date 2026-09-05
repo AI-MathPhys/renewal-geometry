@@ -11229,18 +11229,30 @@
   "prop:RPESM-mixed-short-transport": {
     "env": "proposition",
     "title": "Adjacent-cutoff stability and four-cutoff transport of the mixed short",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Pseudoinverse perturbation identity on common support, norm bound, exact transport rectangle; careful but finite.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved03.lean:NCG.MixedShortTransport.pinv_resolvent",
+      "NCG/Grand/MediumProved03.lean:NCG.MixedShortTransport.rperp_adjacent_transport",
+      "NCG/Grand/MediumProved03.lean:NCG.MixedShortTransport.rperp_adjacent_stability",
+      "NCG/Grand/MediumProved03.lean:NCG.MixedShortTransport.rperp_transport_rectangle",
+      "NCG/Grand/MediumProved03.lean:NCG.MixedShortTransport.diagonal_transport_conceals_ancestry"
+    ],
+    "note": "Exact RTH.M7-M10 on fixed finite coefficient carriers: Kato alignment is rendered as equal spectral support projections, S dagger is the spectral Moore-Penrose inverse, the floor (RTH.M7) is the Loewner bound S >= s*P, RTH.M8 is proved through the pseudoinverse resolvent identity on the common support, RTH.M9 is the verbatim l2-operator-norm bound via the certified pseudoinverse ceiling ||S dagger|| <= 1/s*, and RTH.M10 is the exact three-step rectangle. The concluding clause is an explicit 1x1 witness with S,R transported identically while the Schur residual jumps 0 to 1 (follower to orthogonal occurrence)."
   },
   "thm:RPESM-quantum-source-metric": {
     "env": "theorem",
     "title": "Quantum-state-first score, complete mixed metric, and final source short",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Finite score decomposition with generator pseudoinverse and combination of mixed-short plus dynamic-ancestry results; assembly file.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved03.lean:NCG.QuantumSourceMetric.rawScoreQ_hasDerivAt",
+      "NCG/Grand/MediumProved03.lean:NCG.QuantumSourceMetric.quantum_state_first_score",
+      "NCG/Grand/MediumProved03.lean:NCG.QuantumSourceMetric.score_split",
+      "NCG/Grand/MediumProved03.lean:NCG.QuantumSourceMetric.complete_mixed_metric",
+      "NCG/Grand/MediumProved03.lean:NCG.QuantumSourceMetric.cross_terms_cancel_exactly",
+      "NCG/Grand/MediumProved03.lean:NCG.QuantumSourceMetric.final_source_short",
+      "NCG/Grand/MediumProved03.lean:NCG.QuantumSourceMetric.final_source_short_delayed_orthogonality"
+    ],
+    "note": "RTH.16-19 in three layers. The unquenched law nu = z p/Z on a finite carrier with the raw quantum score certified as the actual derivative of log(z p/Z) (nothing encoded by definition); RTH.17 verbatim in the energy sign convention; RTH.18 as the exact four-block split of (B+X)* L-pinv (B+X) with PSD diagonal blocks, B+X proved equal to the quantum score, and an explicit exact cross-cancellation witness. RTH.19 on the finite-dimensional Hilbert carrier of thm:GT-dynamic-source-ancestry with the closed-range Moore-Penrose gram pseudoinverse: the entrance short equals Y*(I-P_B0)Y and splits exactly into the positive clock-generated promotion and positive dynamically-new source through the genuine semigroup-cyclic projection; the delayed-orthogonality clause re-exports LT.30."
   },
   "thm:SMST-actual-kinetic-derivative": {
     "env": "theorem",
@@ -11664,26 +11676,37 @@
   "thm:RPESM-H4-conditioned-thread": {
     "env": "theorem",
     "title": "Exact protected-source thread and zero transport debit",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Bounded exponential tilt on finite path spaces: explicit density bounds, constant normalizer, exact pushforward projectivity; master-law landing row as interface.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved03.lean:NCG.H4Thread.protected_source_thread",
+      "NCG/Grand/MediumProved03.lean:NCG.H4Thread.protected_source_master",
+      "NCG/Grand/MediumProved03.lean:NCG.H4Thread.protected_source_reflection_positive"
+    ],
+    "note": "RH.5-RH.6 on finite conditioned path cards: |B*| <= 2 for the reflected real part of any unit-modulus protected writer, the exact normalizer window e^{-2eta} <= Z <= e^{2eta} and density window e^{-4eta} <= dP_eta/dP <= e^{4eta}, exact writer pullback, Z_{N+1}=Z_N, exact tilted-law pushforward, the identically-one adjacent exponential source cocycle (zero source-cocycle and cofinal debit), and the N-independent normalized density. The master clause is on a projective-tower interface (master carrier, compatible projections, base master expectation with the finite laws as marginals): one bounded mean-one N-independent density whose conditioned expectations have all tilted finite laws as marginals. Reflection positivity of every conditioned reflected Gram is by the exact factorization e^{eta B} = Theta(e^{eta b}) e^{eta b}."
   },
   "thm:RPESM-H4-source-floors": {
     "env": "theorem",
     "title": "Explicit conditioned source and OS floors",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Explicit arctanh-threshold floors uniform in N; finite tilt-perturbation arithmetic with certified rational constants.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved03.lean:NCG.H4Floors.etaSafe_pos",
+      "NCG/Grand/MediumProved03.lean:NCG.H4Floors.conditioned_source_floors",
+      "NCG/Grand/MediumProved03.lean:NCG.TiltThread.tilt_tv_le_tanh"
+    ],
+    "note": "RH.7-RH.8 with the manuscript constants: etaSafe = artanh(e^{-2} GammaLow/16) with GammaLow = e^{-89/483840}/65537 (RH.2), proved positive; for 0 <= eta <= etaSafe the conditioned variance of the unit-modulus protected writer, the positive-time norm, and the separation-two reflected Gram satisfy the verbatim floors (3/4)GammaLow, (1/2)GammaLow, (1/2)e^{-2}GammaLow > 0, uniformly in the cutoff (quantified over every finite conditioned card). The engine is the sharp oscillation total-variation bound ||P_eta - P||_TV <= tanh(eta) proved exactly for |B| <= 2. Base values enter through the hypotheses that the base variance dominates GammaLow, the positive-time writer dominates the variance, and the reflected Gram equals e^{-2} times the variance, exactly as in the manuscript proof."
   },
   "prop:RPESM-H4-action-no-reprice": {
     "env": "proposition",
     "title": "Positive intrinsic action with no repeated source price",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - KL of exponential tilt with variance derivative identity; finite KL/Gibbs mini-library plus N-independence.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved03.lean:NCG.H4Action.source_action_eq",
+      "NCG/Grand/MediumProved03.lean:NCG.H4Action.source_action_hasDerivAt",
+      "NCG/Grand/MediumProved03.lean:NCG.H4Action.source_action_pos",
+      "NCG/Grand/MediumProved03.lean:NCG.H4Action.source_action_pullback",
+      "NCG/Grand/MediumProved03.lean:NCG.H4Action.summing_recounts_source"
+    ],
+    "note": "RH.9 exactly: the intrinsic action is the finite relative entropy D_KL(P_eta || P); the closed form eta d/deta log Z - log Z is proved with the derivative of log Z certified as the actual conditioned mean (HasDerivAt); the actual derivative of the action is eta Var_{P_eta}(B) >= 0; strict positivity for eta > 0 under source nonconstancy via strict monotonicity from the positive derivative; exact cutoff independence under the projective pullback (zero adjacent transport novelty); and the repeated-counting identity: summing the constant relative entropy over K cutoffs equals K times the one source action."
   },
   "cth:RPESM-invariant-scalar-no-ray": {
     "env": "countertheorem",
@@ -11705,26 +11728,33 @@
   "thm:RPESM-source-conditioned-projectivity": {
     "env": "theorem",
     "title": "Source-conditioned projectivity, reflection, and ancestry",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Bounded-tilt projectivity plus reflection positivity preservation; finite-cutoff exact identities in one file.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved03.lean:NCG.RelationalSource.source_conditioned_projectivity",
+      "NCG/Grand/MediumProved03.lean:NCG.RelationalSource.relational_source_reflection_positive"
+    ],
+    "note": "RS.1-RS.4 with the concrete relational source: chi_H(h) = h/sqrt(1+||h||^2) on the doublet carrier C^2 proved to land strictly inside the unit ball, B+ = Re<b, chi_H(H)> for a unit frame vector, B = B+ + Theta B+. The bundle proves |B+| <= 1, |B| <= 2, the exact source transport B_{N+1} = B_N o pi under exact root/frame/Higgs-coordinate transport, the windows (RS.3), exact normalizer equality and conditioned-law pushforward (RS.4), the identically-one source cocycle (zero source-coordinate mismatch, old-source debit, shell-source birth), and the N-independent conditioned density; conditioned expectations of pulled-back writers (state, orbit Gram, Ward/current/Green/mass-form descendants) are determined by the one source occurrence via the exact pushforward clause. Reflection positivity of the conditioned family is proved by the reflected-factorization argument."
   },
   "thm:RPESM-local-orbit-full-rank": {
     "env": "theorem",
     "title": "Uniform local orbit floor and exact cutoff constancy",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Explicit uniform 2x2 orbit-Gram eigenvalue floor; certified rational/interval arithmetic and exact N-independence.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved03.lean:NCG.LocalOrbitFullRank.local_orbit_full_rank",
+      "NCG/Grand/MediumProved03.lean:NCG.LocalOrbitFullRank.path_orbitGram_floor",
+      "NCG/Grand/MediumProved03.lean:NCG.LocalOrbitFullRank.path_orbitGram_rank_two"
+    ],
+    "note": "RS.6 on the projective path thread: carriers with expectation functionals, exactly transported root Higgs coordinate whose base marginal is the rotation-invariant non-concentrated quartic proposal, interacting density with oscillation window 17/64 and source |B| <= 2, 0 <= eta <= 1/64, both exactly transported. Proves the uniform Loewner floor Q_{N,eta} >= e^{-21/64} a_chi I_2 and eigenvalue floor lambda_min >= e^{-21/64} a_chi > 0 (a_chi the frame-coordinate saturation second moment, positive by non-concentration and isotropy); exact N-independence of the source normalizer, conditioned source mean, and local orbit Gram; and rank two at every cutoff and every source strength in the window. Rendering choice: the decimal clause lambda_min >= 0.1576726006 is the numerical evaluation of the same constant e^{-21/64} a_chi for the explicit quartic integral a_chi of RS.5 (approx 0.2189067271) and is not formalized; the exact floor is."
   },
   "cth:RPESM-local-source-no-rank-one": {
     "env": "countertheorem",
     "title": "A local source is not a macroscopic rank-one orbit",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - retriaged from easy: proof requires the uniform orbit floor of thm:RPESM-local-orbit-full-rank (itself unproved medium); prove that record first, then derive this countertheorem from it.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved03.lean:NCG.LocalOrbit.local_source_no_rank_one",
+      "NCG/Grand/MediumProved03.lean:NCG.LocalOrbit.aChi_pos"
+    ],
+    "note": "Exact liminf statement: along arbitrary N_j -> infinity and 0 <= eta_j <= 1/64, liminf_j lambda_2(Q_{N_j,eta_j}) >= e^{-21/64} a_chi > 0, derived from the uniform orbit floor (the full-rank theorem's layer) with a_chi > 0 proved from rotational invariance plus non-concentration of the proposal at the origin through the exact saturation profile ||chi_H(h)||^2 = ||h||^2/(1+||h||^2). Conditioned laws are rendered as Gibbs tilts of the proposal with the manuscript windows (17/64 interaction, 4 eta source); coboundedness for the liminf comes from the proved orbit ceiling Q <= I."
   },
   "prop:RPESM-no-infrared-axis": {
     "env": "proposition",
@@ -11740,18 +11770,29 @@
   "thm:RPESM-subextensive-fixed-source": {
     "env": "theorem",
     "title": "Fixed-source rank-one concentration under subextensive interaction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Product-law average covariance identity plus oscillation-bounded tilt concentration; finite probability with scalar M-to-infinity limits.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved03.lean:NCG.Subextensive.fixed_source_orbit_identity",
+      "NCG/Grand/MediumProved03.lean:NCG.Subextensive.transverse_eigenvalue",
+      "NCG/Grand/MediumProved03.lean:NCG.Subextensive.fixed_source_orbit_limit",
+      "NCG/Grand/MediumProved03.lean:NCG.Subextensive.tilted_dev_moment",
+      "NCG/Grand/MediumProved03.lean:NCG.Subextensive.tilted_lam2_bound",
+      "NCG/Grand/MediumProved03.lean:NCG.Subextensive.subextensive_dev_limit",
+      "NCG/Grand/MediumProved03.lean:NCG.Subextensive.subextensive_orbit_limit"
+    ],
+    "note": "RS.8 complete: the product law enters through the genuine product-expectation interface (every product writer integrates to the product of one-site expectations); the exact average-orbit identity E[Vbar Vbar*] = m^2 P + (1/M)(C - m^2 P) is proved from it, the transverse direction is an exact eigenvector with eigenvalue q_perp/M under the diagonal structure C = q_par P + q_perp P_perp, and the orbit converges to the nonzero rank-one matrix m^2 P (nonzero and rank computed). The tilted clauses are exact: E||Vbar - m zeta_0||^2 <= e^{Delta*}/M and lambda_2 <= 2 e^{Delta*/2}/sqrt(M) for any tilt of oscillation <= Delta*; the osc = o(M) clause is proved through an explicit Chernoff bound for the product interface (quadratic mgf bound on bounded centered component reads), giving vanishing conditioned squared deviation and convergence of the tilted orbit to m^2 P."
   },
   "cth:RPESM-bounded-source-removal": {
     "env": "countertheorem",
     "title": "Bounded source normalization has zero quasi-average",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Orbit-amplitude bound rho*^2 eta^2 under bounded per-site source; finite concentration arithmetic with thermodynamic scalar limit.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved03.lean:NCG.BoundedSourceRemoval.bounded_source_removal",
+      "NCG/Grand/MediumProved03.lean:NCG.BoundedSourceRemoval.tilted_mean_window",
+      "NCG/Grand/MediumProved03.lean:NCG.BoundedSourceRemoval.source_removed_orbit_zero",
+      "NCG/Grand/MediumProved03.lean:NCG.BoundedSourceRemoval.rpesm_bounded_osc_subextensive"
+    ],
+    "note": "RS.9: the sourced one-site law is the exponential tilt of a symmetric base law by s_N X with X = Re<zeta_0, V>, |X| <= 1; the RS.7 upper branch 0 <= m(s) <= s is proved exactly via the pointwise chord bound x sinh(sx) <= s cosh(sx) (from tanh t <= t, proved by a monotonicity argument) and E[cosh] >= 1. Every subextensive-interaction thermodynamic orbit is proved to exist and equal m(s_N)^2 P_{zeta_0} (via the fixed-source theorem), with l2 operator norm at most rho*^2 eta^2 uniformly in N (sup_N rendered as forall N); at fixed positive source with non-degenerate read the orbit is a constructed nonzero rank-one matrix (m(s) >= s E[X^2]/E[cosh] > 0); and the source-removed orbit is zero: the orbit tends to 0 as eta -> 0+ (zero quasi-average). The RPESM specialization enters through the proved subextensivity of the 17/64-bounded oscillation (osc/M -> 0). Rendering choice: the aside that the volume-normalized one-site pressure is analytic is commentary not formalized; the boxed RS.9 bound, the rank-one clause, and the zero quasi-average are."
   },
   "thm:RPESM-UV-bounded-equivalence": {
     "env": "theorem",
