@@ -2223,10 +2223,13 @@
   "cor:GT-Hodge-return-debit": {
     "env": "corollary",
     "title": "Hodge-screen returning-memory compiler",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Combine Feshbach debit with Hodge-screen splitting (repo finite Hodge machinery); summability arithmetic on top.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved01.lean:NCG.hodge_return_debit_reserve",
+      "NCG/Grand/MediumProved01.lean:NCG.hodge_debit_admissible",
+      "NCG/Grand/MediumProved01.lean:NCG.hodge_debit_norm_le"
+    ],
+    "note": "ST.10 proved exactly on a Hodge-screen chain of determining quotients: orthogonal head/high-Hodge splittings J_n J_n^* + W_n W_n^* = I with source analyses unsupported on the complement, C_high,n >= kappa_n I, L_n^*L_n <= T_n^*X_n T_n, and the retained old/low mismatch bound give admissibility of D_n = D_n^old + kappa_n^{-1}X_n (Loewner packet form via the repo Feshbach-debit layer), and summability of hermLamMax(D_n^old) + kappa_n^{-1} hermLamMax(X_n) below hermLamMin(K_0) yields the uniform reserve lambda_min(K_N) >= lambda_min(K_0) - sum for every N, with no lower bound on the fine forms (kappa_n may collapse)."
   },
   "cor:GT-source-short-Mosco": {
     "env": "corollary",
@@ -2280,10 +2283,14 @@
   "cth:GT-static-projectivity-no-clock": {
     "env": "countertheorem",
     "title": "A projective static marginal does not determine its clock",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Restrict 2D OU generators to linear span: traced response = harmonic mean 2ab/(a+b) by 2x2 algebra; non-invariance via Gaussian Plancherel (repo).",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved01.lean:NCG.static_projectivity_no_clock",
+      "NCG/Grand/MediumProved01.lean:NCG.static_marginal_eq",
+      "NCG/Grand/MediumProved01.lean:NCG.tracedResponse_eq",
+      "NCG/Grand/MediumProved01.lean:NCG.ouFlow_not_function_of_y"
+    ],
+    "note": "ET.21-ET.22 with the genuine 2D OU differential generators a(-d1^2+x1 d1)+b(-d2^2+x2 d2) (slicewise deriv), the genuine standard Gaussian product measure, and the L2(mu) pairing proved equal to the Euclidean coefficient pairing in degree one: the static marginal of y=(x1+x2)/sqrt2 is the standard Gaussian for all (a,b) (measure pushforward, proved), the exact traced response (ET.15 Schur complement of the rotated 2x2 block, agreeing with the inverse Green pairing computed as a real Gaussian integral) is 2ab/(a+b), and for a != b the semigroup orbit of y (the solved coefficient flow, certified by HasDerivAt against the generator) leaves the functions of y at every positive time."
   },
   "fire:GT-exact-trace-scope": {
     "env": "firewall",
@@ -2303,10 +2310,23 @@
   "thm:GT-source-renewal-lifetime": {
     "env": "theorem",
     "title": "Operator-valued renewal lifetime and exact mesh projectivity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Finite spectral decomposition makes Lambda a finite exponential mixture; identities via interval-integral/Gamma integrals; one spectral-renewal file.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved01.lean:NCG.renewal_law_complete",
+      "NCG/Grand/MediumProved01.lean:NCG.renewal_tail_complete",
+      "NCG/Grand/MediumProved01.lean:NCG.firstLoss_posSemidef",
+      "NCG/Grand/MediumProved01.lean:NCG.lifeMeasure_total",
+      "NCG/Grand/MediumProved01.lean:NCG.lifeMeasure_tail",
+      "NCG/Grand/MediumProved01.lean:NCG.lifeScal_unique",
+      "NCG/Grand/MediumProved01.lean:NCG.lifetime_moment",
+      "NCG/Grand/MediumProved01.lean:NCG.extMoment_atom_free",
+      "NCG/Grand/MediumProved01.lean:NCG.extMoment_atom_top",
+      "NCG/Grand/MediumProved01.lean:NCG.lifetime_laplace",
+      "NCG/Grand/MediumProved01.lean:NCG.lifetime_histogram",
+      "NCG/Grand/MediumProved01.lean:NCG.lifetime_mesh_halving",
+      "NCG/Grand/MediumProved01.lean:NCG.renewal_green_bracket"
+    ],
+    "note": "LT.11-LT.18 on the finite determining quotient (PSD Hermitian matrix H, isometric source X): first-loss operators are PSD, the renewal law is complete (HasSum of the first-loss operators over N to I - X^*P_{ker H}X, so law plus {infty}-atom totals I_E) with the exact tails M_{h,m} = atom + sum_{j>=m} P_{h,j} (LT.12); the operator-valued lifetime measure is built as the exponential mixture of genuine withDensity measures over the spectrum plus the separate {infty} atom, is PSD-valued, countably additive, total mass I, has survival tails X^*e^{-tH}X (LT.14) and is unique among finite Borel laws with those tails (scalarized, LT.13); moments Gamma(p+1)X^*H^{-p}X for p>0 as an extended ennreal-valued form (top exactly on zero-atom directions, LT.15), Laplace transform I - zX^*(H+z)^{-1}X (LT.16), the exact histogram and mesh-halving identities (LT.17), and the two-sided Green bracket 0 <= X^*H^{-1}X - h*sum M_{h,m} <= h I on atom-free sources with h*sum M = h*sum j P_{h,j} (LT.18)."
   },
   "def:GT-source-lifetime-W": {
     "env": "definition",
@@ -2349,10 +2369,13 @@
   "prop:GT-joint-tangent-stabilizer": {
     "env": "proposition",
     "title": "Joint-tangent route stabilizer",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Stabilizer iff is direct; separating C_c test for distinct finite Borel measures via Mathlib finite-measure separation; reduce operator-valued to scalar entries.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved01.lean:NCG.joint_tangent_stabilizer_iff",
+      "NCG/Grand/MediumProved01.lean:NCG.joint_tangent_separating_test",
+      "NCG/Grand/MediumProved01.lean:NCG.joint_stabilizer_strictly_finer"
+    ],
+    "note": "JT.1-JT.4 for finite positive End(E)-valued joint source measures rendered as PSD-matrix-valued vector measures on (0,infty) x K (K compact metrizable): route identity holds iff the unitary holonomy lies in the stabilizer (JT.3, an iff proved from the conjugation identity), failure produces an explicit continuous compactly supported test f and unit coefficient c with a strictly nonzero pairing gap (JT.4, via scalarization to complex measures and the Riesz/regularity separation of distinct finite Borel measures), and an explicit two-point example shows the energy-marginal stabilizer strictly exceeds the joint stabilizer."
   },
   "cth:GT-lifetime-no-momentum-ancestry": {
     "env": "countertheorem",
@@ -2372,34 +2395,57 @@
   "thm:GT-dynamic-source-ancestry": {
     "env": "theorem",
     "title": "Static-to-dynamic source short and cutoff transport",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Krylov cyclic subspace (repo machinery) equals closed semigroup span in finite dims; projection split and nested-bank Loewner limit.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved01.lean:NCG.dynamic_source_ancestry_split",
+      "NCG/Grand/MediumProved01.lean:NCG.cyc_reduces",
+      "NCG/Grand/MediumProved01.lean:NCG.dynamic_source_bank_residuals",
+      "NCG/Grand/MediumProved01.lean:NCG.cyc_short_delay_orthogonality",
+      "NCG/Grand/MediumProved01.lean:NCG.transport_residual_identity",
+      "NCG/Grand/MediumProved01.lean:NCG.transport_rectangle",
+      "NCG/Grand/MediumProved01.lean:NCG.dynamic_residual_cofinal_unique",
+      "NCG/Grand/MediumProved01.lean:NCG.dynamic_source_dichotomy"
+    ],
+    "note": "LT.26-LT.31 on finite-dimensional carriers: the semigroup-cyclic carrier C_H(B) (closed span of e^{-tH}B, t>=0) is proved equal to the Krylov span, reduces self-adjoint H (LT.26), the exact split R_ent = R_prom + R_dyn holds with both parts positive (LT.27-LT.28); along nested dense zero-containing time banks the bank residuals are a decreasing Loewner chain converging in operator norm to R_dyn, with eventual stabilization in finite dimensions (LT.29); the complete cyclic short annihilates all delayed pairings (LT.30); the one-step transport identity r_{i+1}V_i - T_i r_i = (I-P_{i+1})A_i^Y - C_i^cyc Y_i is exact and telescopes to the four-cutoff rectangle (LT.31); norm limits of transported residuals are route-unique, and the closing dichotomy gives either R_dyn = 0 (complete dynamic follower) or an explicit unit witness in C_H(B)^perp whose nonzero compressed rank-one block sits below R_dyn."
   },
   "thm:GT-temporal-Schur-dynamic-source": {
     "env": "theorem",
     "title": "Temporal Schur compiler and dual dynamic-birth certificate",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Gram/pseudoinverse projection formula, Schur residual, decreasing Loewner limit and four-way equivalence; repo MP + Krylov machinery.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved01.lean:NCG.bankGram_apply",
+      "NCG/Grand/MediumProved01.lean:NCG.bankCross_apply",
+      "NCG/Grand/MediumProved01.lean:NCG.bank_projection_formula",
+      "NCG/Grand/MediumProved01.lean:NCG.bank_residual_schur",
+      "NCG/Grand/MediumProved01.lean:NCG.dynamic_source_bank_residuals",
+      "NCG/Grand/MediumProved01.lean:NCG.temporal_follower_criteria",
+      "NCG/Grand/MediumProved01.lean:NCG.dual_dynamic_birth_certificate"
+    ],
+    "note": "DYN.1-DYN.6: the temporal synthesis acts on the PiLp 2 coefficient bank with the exact delayed Gram/cross entries B^*e^{-(t_j+t_k)H}B and B^*e^{-t_jH}Y (DYN.2); P_t = W G^+ W^* with the repo closed-range Moore-Penrose pseudoinverse is proved to be the orthogonal projection onto the temporal follower range (DYN.3); the residual is the pseudoinverse Schur complement R - C^*G^+C and is positive (DYN.4); the four follower criteria (F1) R_dyn=0, (F2) range inclusion in C_H(B), (F3) approximation by finitely many delayed writers (DYN.5, attained exactly at zero error via a basis-decomposition construction), (F4) decay of one/every nested dense bank residual chain are proved equivalent; the dual certificate 0 <= Y^*ZZ^*Y <= R_dyn holds for every isometry into the cyclic complement (DYN.6)."
   },
   "prop:GT-dynamic-source-transport-rectangle": {
     "env": "proposition",
     "title": "Primitive-orbit Duhamel identity and four-cutoff dynamic rectangle",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Matrix Duhamel identity (repo interval-integral Duhamel) plus exact telescoping rectangle; finite algebra.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved01.lean:NCG.primitive_orbit_duhamel",
+      "NCG/Grand/MediumProved01.lean:NCG.transport_residual_identity",
+      "NCG/Grand/MediumProved01.lean:NCG.transport_rectangle"
+    ],
+    "note": "DYN.7-DYN.10: the primitive-orbit Duhamel identity e^{-tH_{i+1}}B_{i+1}U_i - T_i e^{-tH_i}B_i = e^{-tH_{i+1}}A_i^B - int_0^t e^{-(t-s)H_{i+1}} R_i^H e^{-sH_i}B_i ds is proved with the genuine operator-valued Bochner interval integral (derivative comparison of both sides, on finite-dimensional carriers where every vector is in the common invariant graph core); DYN.9 is the exact one-step residual transport identity at the cyclic projections and DYN.10 the exact telescoped four-cutoff rectangle r_4 V_3V_2V_1 - T_3T_2T_1 r_1 = D_3 V_2V_1 + T_3 D_2 V_1 + T_3T_2 D_1."
   },
   "thm:GT-cofinal-dynamic-source": {
     "env": "theorem",
     "title": "Cofinal dynamic-source landing under temporal exhaustion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Norm limit of finite residual Grams under summable transported defects; positive-part spectral floor in finite dimensions.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved01.lean:NCG.cofinal_residual_landing",
+      "NCG/Grand/MediumProved01.lean:NCG.dynamic_source_spectral_floor",
+      "NCG/Grand/MediumProved01.lean:NCG.dual_dynamic_birth_certificate",
+      "NCG/Grand/MediumProved01.lean:NCG.cyc_short_delay_orthogonality",
+      "NCG/Grand/MediumProved01.lean:NCG.minimal_cyclic_realization_unique"
+    ],
+    "note": "DYN.11-DYN.12: under the uniform temporal-tail sandwich (DYN.11, hypothesis C3) and per-bank convergence (C2) the transported residual Grams converge in operator norm to a unique positive limit independent of the cofinal route (an epsilon/3 argument with the Loewner-to-norm bound for positive operators); a nonzero positive limit has an explicit spectral floor R >= r_* P_* with P_* the support projection 1_{(0,infty)}(R) rendered as the orthogonal projection onto (ker R)^perp and r_* the least positive eigenvalue (DYN.12); the transported-isometry lower block is dual_dynamic_birth_certificate, delay-orthogonality to the primitive follower carrier is cyc_short_delay_orthogonality, and the minimal source-cyclic realization is proved unique up to a unique intertwining unitary (minimal_cyclic_realization_unique)."
   },
   "def:GT-source-action-packet": {
     "env": "definition",
@@ -2434,10 +2480,18 @@
   "thm:GT-source-metric-horizon": {
     "env": "theorem",
     "title": "Metric-covariant horizon control and invariant zero atom",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Finite controllability Gramian via interval integrals; L2-control minimization reduces to Gramian pseudoinverse; Tikhonov monotone limit in finite dims.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved01.lean:NCG.source_metric_horizon_support",
+      "NCG/Grand/MediumProved01.lean:NCG.source_metric_horizon_zero_atom",
+      "NCG/Grand/MediumProved01.lean:NCG.source_metric_horizon_tikhonov_min",
+      "NCG/Grand/MediumProved01.lean:NCG.source_metric_horizon_tikhonov_spectral",
+      "NCG/Grand/MediumProved01.lean:NCG.source_metric_horizon_tikhonov_antitone",
+      "NCG/Grand/MediumProved01.lean:NCG.source_metric_horizon_tikhonov_limit",
+      "NCG/Grand/MediumProved01.lean:NCG.source_metric_horizon_window",
+      "NCG/Grand/MediumProved01.lean:NCG.source_metric_horizon_tikhonov_window"
+    ],
+    "note": "SMET.14-SMET.19 on finite-dimensional carriers with genuine operator-valued interval-integral horizon Gramians W_{T;B,M} = int_0^T e^{-tH} (B M^+ B^*) e^{-tH} dt: both Gramians have range exactly the cyclic carrier and kernel its complement for every T>0 (SMET.14, ranges as the manuscript's support projections), so both zero spectral projections compress to R_dyn (SMET.15); the operator-valued Tikhonov minimum over continuous operator-valued controls is proved by exact completing-the-square: every control pays at least R_{T,eps}^M = eps Y^*(W+eps)^{-1}Y in Loewner order and the bound is attained by the explicit continuous control M^+ B^* e^{-tH}(W+eps)^{-1}Y with values in (Ker M)^perp (SMET.16; continuous controls are the finite rendering of L^2 controls modulo Ker M); SMET.17 is the finite spectral resolution R_{T,eps}^M = R_dyn + sum_{mu_i>0} eps/(mu_i+eps) Y^*P_{b_i}Y over an orthonormal eigenbasis of the Gramian, plus Loewner antitonicity in eps and the operator-norm limit R_{T,eps}^M -> R_dyn as eps -> 0+; the reserve window g_- P_B <= Sigma_{B,M} <= g_+ P_B transports to g_- What <= W <= g_+ What (SMET.18) and the two-sided Tikhonov comparison hat R_{T,eps/g_+} <= R_{T,eps}^M <= hat R_{T,eps/g_-} follows by a Cauchy-Schwarz Loewner-inversion lemma (SMET.19)."
   },
   "cth:GT-source-metric-collapses": {
     "env": "countertheorem",
@@ -2456,10 +2510,17 @@
   "thm:GT-source-metric-depth": {
     "env": "theorem",
     "title": "Coefficient-invariant source depth and block-Jacobi chain",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Krylov depth filtration is block-tridiagonal; short-time Taylor expansion of Gramian with explicit leading coefficient; careful finite asymptotics.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved01.lean:NCG.source_metric_depth_gramian",
+      "NCG/Grand/MediumProved01.lean:NCG.source_metric_depth_normalized",
+      "NCG/Grand/MediumProved01.lean:NCG.depth_tridiagonal",
+      "NCG/Grand/MediumProved01.lean:NCG.depthA_range",
+      "NCG/Grand/MediumProved01.lean:NCG.depthN_finrank_antitone",
+      "NCG/Grand/MediumProved01.lean:NCG.depthD_eq_chain",
+      "NCG/Grand/MediumProved01.lean:NCG.depth_sandwich_bound"
+    ],
+    "note": "SMET.20-SMET.24 in finite dimensions (where the domain hypotheses hold automatically): the depth filtration M_r = sum_{k<=r} Ran(H^k P_B), its layers N_r, and D_r = P_r H^r P_B; the short-time expansions SMET.21/SMET.22 are proved as genuine IsBigO asymptotics at 0+, P_r W_{T;B,M} P_r = T^{2r+1}/((r!)^2(2r+1)) D_r Sigma_{B,M} D_r^* + O(T^{2r+2}) and the normalized version with D_r D_r^*, with the leading coefficient exact; H is block tridiagonal on the depth decomposition (SMET.23); Ran A_r = N_{r+1}, dim N_{r+1} <= dim N_r and D_r = A_{r-1}...A_0 (SMET.24); the leading coefficient is bounded between the g_-/g_+ window multiples of the normalized coefficient (depth_sandwich_bound)."
   },
   "thm:GT-source-metric-cofinal": {
     "env": "theorem",
