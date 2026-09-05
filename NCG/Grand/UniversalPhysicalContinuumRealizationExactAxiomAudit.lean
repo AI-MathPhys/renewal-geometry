@@ -1,0 +1,4 @@
+import NCG.Grand.UniversalPhysicalContinuumRealizationExact
+
+#print axioms NCG.UniversalContinuum.physical_continuum_realization_of_profiles
+#print axioms NCG.UniversalContinuum.PhysicalContinuumRealization.nontrivial

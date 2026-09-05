@@ -1,0 +1,7 @@
+import NCG.Grand.RenewalSpectatorProductCompleteExact
+
+#print axioms NCG.RenewalSpectatorProduct.partialTrace_correlatedTensorMap
+#print axioms NCG.RenewalSpectatorProduct.predictive_rank_eq_two_pow
+#print axioms NCG.RenewalSpectatorProduct.no_finite_faithful_global_carrier
+#print axioms NCG.RenewalSpectatorProduct.independent_cell_regulator_certificate
+

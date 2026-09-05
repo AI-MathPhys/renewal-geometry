@@ -1,0 +1,3 @@
+import NCG.Grand.FiniteStandardModelSourceNativeEmergenceExact
+
+#print axioms NCG.finiteStandardModel_sourceNative_emergence

@@ -1,0 +1,3 @@
+import NCG.Grand.FiniteSpectralCommutatorGramCarrierExact
+
+#print axioms NCG.FiniteSpectralCommutatorGramCarrierExact.finite_spectral_commutator_gram_carrier_exact

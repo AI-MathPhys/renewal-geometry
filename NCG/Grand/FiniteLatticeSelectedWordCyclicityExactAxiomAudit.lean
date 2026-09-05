@@ -1,0 +1,5 @@
+import NCG.Grand.FiniteLatticeSelectedWordCyclicityExact
+
+#print axioms NCG.FiniteLatticeSelectedWordCyclicity.closure_word_vacuumOrbit_eq_fixedSet
+#print axioms NCG.FiniteLatticeSelectedWordCyclicity.closure_selected_word_vacuumOrbit_eq_sector
+#print axioms NCG.FiniteLatticeSelectedWordCyclicity.closure_centered_selected_word_vacuumOrbit_eq_neutral

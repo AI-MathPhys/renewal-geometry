@@ -1,0 +1,37 @@
+NCG/Grand/FiniteSpinNetworkCompleteness.lean:26:0: warning: automatically included section variable(s) unused in theorem `NCG.FiniteSpinNetwork.globalVertexAverage_eq_prod_reynolds`:
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+NCG/Grand/FiniteSpinNetworkCompleteness.lean:36:32: warning: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.smul_apply, smul_eq_mul, Finset.sum_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+NCG/Grand/FiniteSpinNetworkCompleteness.lean:37:4: warning: This simp argument is unused:
+  Finset.sum_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.smul_apply, Pi.smul_apply, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+NCG/Grand/FiniteSpinNetworkCompleteness.lean:210:0: warning: automatically included section variable(s) unused in theorem `NCG.FiniteSpinNetwork.gaugeAverageLinearMap_apply`:
+  [Fintype E]
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype E] [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+NCG/Grand/FiniteSpinNetworkCompleteness.lean:305:2: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+NCG/Grand/FiniteSpinNetworkCompleteness.lean:300:8: warning: automatically included section variable(s) unused in theorem `NCG.FiniteSpinNetwork.edgeCoefficientIndexOf_edgeMatrixIndexOfCoefficientLabel`:
+  [Fintype E]
+  [DecidableEq E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype E] [DecidableEq E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`

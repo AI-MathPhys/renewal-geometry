@@ -62,9 +62,9 @@ space `H`:
 
 * `rep` — a `*`-representation of `A` by bounded operators on `H`;
 * `dirac` — a densely defined symmetric operator `D`;
-* `compact_resolvent` — a two-sided compact inverse `R = (D - i)⁻¹`,
-  encoding self-adjointness (surjectivity of `D - i`) together with
-  compactness of the resolvent;
+* `compact_resolvent` — a normal compact two-sided inverse
+  `R = (D - i)⁻¹`, encoding the self-adjoint compact-resolvent spectral
+  calculus;
 * `lipschitz` — bounded commutators `[D, π(a)]` for all `a` in the
   distinguished dense subalgebra `smoothAlgebra`.
 
@@ -83,12 +83,15 @@ structure SpectralTriple (A : Type*) [Ring A] [StarRing A] [Algebra ℂ A]
   /-- The Dirac operator is symmetric on its domain. -/
   symmetric : ∀ x y : dirac.domain,
     ⟪dirac x, (y : H)⟫ = ⟪(x : H), dirac y⟫
-  /-- Compact resolvent: a compact two-sided inverse of `D - i`.  This
-  simultaneously encodes self-adjointness (both deficiency conditions) and
-  the compactness axiom of a spectral triple. -/
+  /-- Compact resolvent: a normal compact two-sided inverse of `D - i`.
+  Normality is recorded explicitly: symmetry together with invertibility at
+  only one nonreal point does not by itself eliminate both deficiency spaces,
+  whereas the normal compact resolvent is exactly the bounded datum consumed
+  by the compact spectral theorem. -/
   compact_resolvent :
     ∃ (R : H →L[ℂ] H) (hmem : ∀ y : H, R y ∈ dirac.domain),
       IsCompactOperator (R : H → H) ∧
+      IsStarNormal R ∧
       (∀ y : H, dirac ⟨R y, hmem y⟩ - Complex.I • R y = y) ∧
       (∀ x : dirac.domain, R (dirac x - Complex.I • (x : H)) = x)
   /-- The distinguished dense subalgebra of "smooth" elements. -/
@@ -113,14 +116,19 @@ theorem resolvent_mem_domain (y : H) : S.resolvent y ∈ S.dirac.domain :=
 theorem resolvent_isCompact : IsCompactOperator (S.resolvent : H → H) :=
   S.compact_resolvent.choose_spec.choose_spec.1
 
+/-- The compact resolvent is normal, the bounded form of the self-adjoint
+spectral-calculus hypothesis used by finite spectral screens. -/
+theorem resolvent_isStarNormal : IsStarNormal S.resolvent :=
+  S.compact_resolvent.choose_spec.choose_spec.2.1
+
 theorem resolvent_right_inverse (y : H) :
     S.dirac ⟨S.resolvent y, S.resolvent_mem_domain y⟩
       - Complex.I • S.resolvent y = y :=
-  S.compact_resolvent.choose_spec.choose_spec.2.1 y
+  S.compact_resolvent.choose_spec.choose_spec.2.2.1 y
 
 theorem resolvent_left_inverse (x : S.dirac.domain) :
     S.resolvent (S.dirac x - Complex.I • (x : H)) = x :=
-  S.compact_resolvent.choose_spec.choose_spec.2.2 x
+  S.compact_resolvent.choose_spec.choose_spec.2.2.2 x
 
 end SpectralTriple
 

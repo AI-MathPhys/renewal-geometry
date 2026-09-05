@@ -1,0 +1,6 @@
+import NCG.Grand.GNSPrimitiveWriterSaturationExact
+
+#print axioms NCG.GNSPrimitiveWriterSaturation.continuous_cyclicOrbit
+#print axioms NCG.GNSPrimitiveWriterSaturation.primitive_writer_saturation_gns
+#print axioms NCG.GNSPrimitiveWriterSaturation.exists_primitive_detection
+

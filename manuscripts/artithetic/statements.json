@@ -1,0 +1,1005 @@
+{
+ "thm:direct-sum-firewall": {
+  "env": "theorem",
+  "title": "Direct-sum firewall",
+  "status": "proved",
+  "lean": [
+   "NCG.ArithFirewall.dirsum_posSemidef",
+   "NCG.ArithFirewall.dirsum_compression",
+   "NCG.ArithFirewall.dirsum_firewall"
+  ],
+  "note": "Proved: any PSD blocks assemble to a PSD direct sum (including a singular or zero second block), the compression to the first summand equals T1 exactly, and it is independent of the second block - so a coercive statement about one typed block constrains nothing about the other without an intertwining theorem."
+ },
+ "prop:old-abel": {
+  "env": "proposition",
+  "title": "Abel reduction",
+  "status": "proved",
+  "lean": [
+   "NCG.abel_reduction",
+   "NCG.abel_reduction_shifted",
+   "NCG.tail_integral"
+  ],
+  "note": "Proved: for Re s > 0 and absolutely summable weighted coefficients (Summable ||c(n)|| n^{-Re s}), int_1^infty (sum_{n<=x} c(n)) x^{-s-1} dx = (1/s) sum_n c(n) n^{-s}, by dominated tsum/integral interchange with per-n tail evaluation int_n^infty x^{-s-1} dx = n^{-s}/s. The manuscript states only s != 0 on the vertical line; the formal statement carries Re s > 0 as hypothesis, which is the regime where the tail integrals converge absolutely and is the regime the corollary uses. The displayed shifted-product instance c(n) = a_i(n) a_j(n+h) is NCG.abel_reduction_shifted (nonnegative shift h; negative shifts relabel the two ports)."
+ },
+ "cor:old-zero": {
+  "env": "corollary",
+  "title": "The zero-shift slice is not an $L$-function frame",
+  "status": "proved",
+  "lean": [
+   "NCG.old_zero"
+  ],
+  "note": "Proved: the zero-shift slice with a_i = Lambda rho_i has Dirichlet coefficient Lambda(n)^2 rho_i(n) rho_j(n) -- a squared, unconjugated von Mangoldt weight, formalized as the identity int_1^infty A(x) x^{-s-1} dx = (1/s) sum_n Lambda(n)^2 rho_i(n) rho_j(n) n^{-s} for Re s > 0. The manuscript sentences observing that this weight is neither an L-function coefficient sequence nor of the form -L'/L (no Euler product / no single-prime support) are interpretive prose about the displayed formula and are not separately formalized."
+ },
+ "def:port-tensor": {
+  "env": "definition",
+  "title": "Kinematic grand port tensor",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "prop:anchor": {
+  "env": "proposition",
+  "title": "Positivity and anchor recovery",
+  "status": "proved",
+  "lean": [
+   "NCG.ArithFirewall.anchor_posSemidef",
+   "NCG.ArithFirewall.anchor_rank_le_one",
+   "NCG.ArithFirewall.anchor_recovery"
+  ],
+  "note": "Proved: the anchored bi-reflected port tensor Phi Phi* (outer product with unit anchor coordinate) is PSD of rank at most one, and its cross-entry against the anchor recovers each port value."
+ },
+ "thm:marginals": {
+  "env": "theorem",
+  "title": "Exact difference and sum selectors",
+  "status": "proved",
+  "lean": [
+   "NCG.AffineSelectors.selector_integral",
+   "NCG.AffineSelectors.difference_selector",
+   "NCG.AffineSelectors.sum_selector"
+  ],
+  "note": "Proved for windowed finite port polynomials with arbitrary coefficients (the weights w_X(m) m^{-sigma} of the display are absorbed into the coefficient sequences): the phase integral over [0,1] is the exact Kronecker selector, the normal (difference) marginal picks out m - n = h, and the anomalous (sum) marginal picks out m + n = N."
+ },
+ "cor:twin-gold-port": {
+  "env": "corollary",
+  "title": "Twin and Goldbach ports",
+  "status": "proved",
+  "lean": [
+   "NCG.AffineSelectors.twin_collapse",
+   "NCG.AffineSelectors.goldbach_collapse"
+  ],
+  "note": "Proved: for the von Mangoldt coefficients and unit window the h = 2 difference block collapses to the twin correlation sum_{n <= X-2} Lambda(n+2) Lambda(n), and for N < X the N-sum block is the full Goldbach correlation sum_{m+n=N} Lambda(m) Lambda(n) - two typed projections of one tensor."
+ },
+ "def:grand": {
+  "env": "definition",
+  "title": "Universal source-to-port grand tensor",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:schur": {
+  "env": "theorem",
+  "title": "Schur-short variational principle",
+  "status": "proved",
+  "lean": [
+   "NCG.schur_short"
+  ],
+  "note": "NCG/Arithmetic/SchurCluster.lean: the Schur-short variational principle for a PSD block Gram matrix [[A,B],[B^H,C]]: with the range condition Ran B^H <= Ran C witnessed by a solution Z of CZ = B^H (so A - Z^H C Z = A - B C-dagger B^H), the short is PSD, bounds the joint quadratic form from below for every nuisance vector, and is attained exactly at the least-norm minimizer y = -Zx (completion of squares). Standard axioms only."
+ },
+ "warning:diagonal-positivity-is-not-quotient-coercivity": {
+  "env": "warning",
+  "title": "Diagonal positivity is not quotient coercivity",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:finite-weil": {
+  "env": "theorem",
+  "title": "Finite reflected Weil criterion",
+  "status": "proved",
+  "lean": [
+   "NCG.finite_weil",
+   "NCG.weilForm",
+   "NCG.weilReflect"
+  ],
+  "note": "Proved: for a finite multiset Z invariant with multiplicity under the reflection R rho = 1 - conj(rho) (hypothesis Z.map R = Z), every point of Z lies on Re s = 1/2 iff the reflected Weil form W_Z[u] = sum_rho u(rho) conj(u(R rho)) is nonnegative (in the complex order, i.e. real and >= 0) for every polynomial u. The failure direction constructs the Lagrange interpolating polynomial equal to 1 at an off-line point, -1 at its reflection, and 0 at all other distinct points, making the form equal to -(m + m') < 0 (the manuscript -2m, with the two multiplicities equal by invariance)."
+ },
+ "corollary:ordinary-frames-do-not-locate-zeros": {
+  "env": "corollary",
+  "title": "Ordinary frames do not locate zeros",
+  "status": "proved",
+  "lean": [
+   "NCG.ordinary_frames"
+  ],
+  "note": "Proved: the unreflected energy sum_rho |u(rho)|^2 is nonnegative for every zero configuration and positive whenever u does not annihilate Z (formalized with the positivity witness as hypothesis). The closing sentence -- that horizontal information enters only through the reflected cross-pairing -- is interpretive prose contrasting with thm:finite-weil."
+ },
+ "lem:laplace-pole": {
+  "env": "lemma",
+  "title": "Laplace-pole obstruction",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/LaplacePole.lean:NCG.laplace_pole_obstruction"
+  ],
+  "note": "Proved with the manuscript's pole contradiction made quantitative and elementary, with the rendering disclosed. The Laplace transform is tested at z = lambda_k + eps: the weighted-energy hypothesis int e^{-2 sigma r}|f|^2 < infty bounds |Lf(z)| uniformly in eps (an AM-GM splitting ||f|| e^{-(sigma+a+eps)r} <= (e^{-2 sigma r}||f||^2 + e^{-2(a+eps)r})/2 replaces Cauchy-Schwarz); termwise integration of the exponential series is justified by summability of the norm integrals (integral_tsum_of_summable_integral_norm) since every exponent is dominated by Re lambda_k; each term integrates exactly to c_j/(z - lambda_j) (integral_exp_mul_complex_Ioi); the isolated k-term contributes |c_k|/eps while the separated tail is bounded by (2/delta) sum|c_j|; taking eps small enough makes |c_k|/eps exceed every bound, the contradiction. Disclosed hypotheses standing in for the manuscript's setting: the tested exponent is isolated (hsep; 'equal exponents grouped' over a discrete zero set) and of maximal real part (hmax; the rightmost pole is the one tested, matching the rightmost-displacement reduction in thm:gaussian-grh), and the entire Laplace transform of the remainder R enters through its local integrability and boundedness near lambda_k (hR). No complex-analytic continuation is needed in this rendering; the conclusion Re lambda_k <= sigma is the lemma's displayed bound."
+ },
+ "thm:gaussian-grh": {
+  "env": "theorem",
+  "title": "Gaussian Hardy criterion for GRH",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/GaussianGRH.lean:NCG.gaussian_energy_finite",
+   "NCG/Arithmetic/LaplacePole.lean:NCG.laplace_pole_obstruction",
+   "NCG/Arithmetic/GaussianGRH.lean:NCG.gaussian_grh_criterion"
+  ],
+  "note": "All three clauses, with the explicit-formula inputs disclosed. (i) gaussian_energy_finite: if sigma exceeds every displacement (Theta < sigma, 0 < sigma), the packet f = R + sum c_rho e^{lambda_rho r} is dominated pointwise by C_R + S e^{Theta' r} with S = sum |c_rho| < infty (termwise tsum bound), and e^{-2 sigma r}|f|^2 is dominated by two integrable exponentials - the energy is finite. (ii) is exactly the Laplace-pole obstruction of the lem:laplace-pole record (laplace_pole_obstruction): finite energy forces Re lambda <= sigma at the tested rightmost isolated exponent; the reflection symmetry rho -> 1 - conj(rho) (lambda -> -conj(lambda)) applies the same bound on the reflected exponent, giving the two-sided bound |Re rho - 1/2| <= sigma as in the manuscript. (iii) gaussian_grh_criterion: a displacement bounded by every positive sigma on both reflection sides vanishes - finiteness of the energy for every sigma > 0 is therefore equivalent to all displacements being zero, the Hardy criterion. Disclosed: the Gaussian specialization of the explicit formula (grouped absolutely summable coefficients, remainder with entire transform, reflection symmetry of the zero set) enters as the shared displayed hypotheses; the principal-channel pole clearing is prose."
+ },
+ "thm:plancherel": {
+  "env": "theorem",
+  "title": "Exact Gaussian Plancherel identity",
+  "status": "proved",
+  "lean": [
+   "NCG.gaussian_plancherel",
+   "NCG.gaussPort",
+   "NCG.cutoffL",
+   "NCG.port_transform",
+   "NCG.gaussian_shift"
+  ],
+  "note": "Proved: for the cutoff-matched Gaussian port G^tri(r) = e^{i tau r} int e^{-(1/2+i tau)u} G_A(u-r) d e^tri(u) (NCG.gaussPort, with the arithmetic measure sum_{n<=X} chi(n) Lambda(n) delta_{log n} - delta_chi 1_{(0,log X]} e^u du written out as the atomic sum plus windowed integral, chi a Dirichlet character and Lambda the von Mangoldt function) and the cutoff transform L^tri(s) (NCG.cutoffL), the exact identity int e^{-2 sigma r} |G^tri(r)|^2 dr = (e^{2A sigma^2}/2pi) int e^{-2A(t-tau)^2} |L^tri(1/2+sigma+it)|^2 dt holds for every real sigma. Proof exactly as in the manuscript: the complex-shift Gaussian transform int e^{zr} G_A(u-r) dr = e^{zu} e^{Az^2} (NCG.gaussian_shift, from integral_cexp_quadratic), the pointwise transform formula hat h(t) = e^{A(-sigma+i(tau-t))^2} L^tri(1/2+sigma+it) (NCG.port_transform, atomic terms + Fubini for the windowed continuous part), the L^2 Plancherel theorem through the L^1-cap-L^2 Fourier bridge of the mass-flux file, and the scaling substitution t = 2 pi xi matching the manuscript unitary convention."
+ },
+ "thm:scaling-indicator": {
+  "env": "theorem",
+  "title": "Finite scaling indicator",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ScalingChain.lean:NCG.scaling_energy_upper"
+  ],
+  "note": "The upper half of the boxed limsup identity is proved in its finite-cutoff rendering; the lower half is disclosed. scaling_energy_upper: from the explicit-formula growth bound |G(r)| <= C(1+r)^A e^{(Theta+eps)r} on [0,U], the finite-cutoff energy int_{(0,U]} e^{-2 sigma r}|G|^2 dr is at most C^2 (1+U)^{2A} (U+1) e^{2(Theta+eps-sigma)_+ U} - taking log^+ and dividing by U = log X gives the manuscript's limsup <= 2(Theta - sigma + eps)_+, and the subpower consequence E = X^{o(1)} => Theta <= sigma. Disclosed: the lower half (the Bohr mean-square lower bound over the grouped almost-periodic exponential sum, giving limsup >= 2(1-delta)(Theta-sigma-2eps)_+), the super-Gaussian bulk agreement of the cutoff-matched and complete ports, and the limsup/log^+ bookkeeping (rendered by the displayed finite-cutoff inequality)."
+ },
+ "thm:residue-parseval": {
+  "env": "theorem",
+  "title": "Character--residue Parseval identity",
+  "status": "proved",
+  "lean": [
+   "NCG.residue_parseval",
+   "NCG.residue_parseval_prime"
+  ],
+  "note": "Proved for packets v : (ZMod q)^x -> H in an arbitrary complex inner-product space H: with vbar = (q-1)^{-1} sum_a v_a and G_chi = sum_a chi(a) v_a, sum_a ||v_a - vbar||^2 = (q-1)^{-1} sum_{chi != chi_0} ||G_chi||^2 (NCG.residue_parseval_prime, prime modulus as displayed; NCG.residue_parseval is the general-modulus version with phi(n) in place of q-1). The proof is the finite character Plancherel identity (DirichletCharacter orthogonality) with the principal channel subtracted, exactly as in the manuscript. The specific weighted Gaussian port space H_sigma and prime packets v_a are instances of the abstract H and v."
+ },
+ "cor:fixed-mod-grh": {
+  "env": "corollary",
+  "title": "Conditional fixed-modulus GRH chain",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ScalingChain.lean:NCG.char_energy_le_variance",
+   "NCG/Arithmetic/ScalingChain.lean:NCG.fixed_mod_grh"
+  ],
+  "note": "The chain's two formal steps are proved; the per-character indicator application is the displayed hypothesis. char_energy_le_variance: by the proved Parseval identity (thm:residue-parseval record), every nonprincipal character energy ||G_chi||^2 is bounded by phi(n) times the residue variance sum_a ||v_a - vbar||^2 (single term <= nonnegative sum + rearranged identity). Hence subpower variance gives subpower per-character energy at every scale. fixed_mod_grh: with the per-character scaling indicator supplied at every sigma > 0 on both reflection sides (hind, displayed - the character-by-character application of thm:scaling-indicator through the domination), every nonprincipal displacement vanishes, via the two-sided criterion of the Gaussian-Hardy record (gaussian_grh_criterion). Disclosed: the principal-channel density subtraction and the per-character indicator step."
+ },
+ "ledger:spectral": {
+  "env": "ledger",
+  "title": "Spectral chain",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:v002-functional-equation": {
+  "env": "theorem",
+  "title": "Typed primitive functional equation",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/FunctionalEquation.lean:NCG.functional_equation_symmetric",
+   "NCG/Arithmetic/FunctionalEquation.lean:NCG.functional_equation_deriv",
+   "NCG/Arithmetic/FunctionalEquation.lean:NCG.functional_equation_logderiv"
+  ],
+  "note": "Both boxes proved on the symmetrized completed L-function Lambda(s,chi) = N^{s/2}*completedLFunction(s,chi): the scalar functional equation Lambda(1-s,chi) = eps_chi*Lambda(s,chi^{-1}) is derived from Mathlib's IsPrimitive.completedLFunction_one_sub by collecting conductor powers, and the log-derivative antisymmetry (Lambda'/Lambda)(1-s,chi) = -(Lambda'/Lambda)(s,chi^{-1}) follows by differentiation (the constant root number drops out). Disclosed: Mathlib's inverse character chi^{-1} renders the conjugate character (they agree on the unit circle); |eps_chi| = 1 (Gauss-sum evaluation, classical) and hence eps_chi != 0 enters the log-derivative statement as the displayed hypothesis; the conjugation law eps_{conj chi} = conj(eps_chi) and the doubled-channel self-adjoint unitary R_chi are displayed bookkeeping on top of the scalar identity."
+ },
+ "warning:complex-character-typing": {
+  "env": "warning",
+  "title": "Complex-character typing",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "prop:v002-imprimitive": {
+  "env": "proposition",
+  "title": "Exact imprimitive Euler correction",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ImprimitiveEuler.lean:NCG.imprimitive_euler_correction",
+   "NCG/Arithmetic/ImprimitiveEuler.lean:NCG.imprimitive_log_deriv",
+   "NCG/Arithmetic/ImprimitiveEuler.lean:NCG.added_factor_zero_re",
+   "NCG/Arithmetic/ImprimitiveEuler.lean:NCG.imprimitive_strip_zeros"
+  ],
+  "note": "Induction rendered by Mathlib DirichletCharacter.changeLevel along q | Q. Both boxed identities proved: the finite Euler correction (from Mathlib LFunction_changeLevel, dropping the factors at p | q which equal one) and the logarithmic-derivative correction via logDeriv_mul/logDeriv_prod (stated away from s = 1, from zeros of L(s,chi*), and from zeros of the added factors, where both sides are defined). Zeros of added factors proved to lie on Re s = 0 (|chi*(p)| = 1), and the strip-zero identification L(s,chi) = 0 iff L(s,chi*) = 0 for Re s > 0 is proved; the multiplicity refinement (analytic order) is subsumed by the exact identity and is not separately formalized. The GRH-reduction corollary is prose."
+ },
+ "corollary:primitive-reduction-of-dirichlet-grh": {
+  "env": "corollary",
+  "title": "Primitive reduction of Dirichlet GRH",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/FunctionalEquation.lean:NCG.primitive_reduction_of_dirichlet_grh"
+  ],
+  "note": "Proved: GRH for the inducing primitive character transfers verbatim to every induced character through the proved strip-zeros identification of prop:v002-imprimitive (imprimitive_strip_zeros), with no uniformity in the conductor. The principal-character exceptional point s = 1 is excluded by the displayed side condition (chi != 1 or s != 1), matching Mathlib's LFunction_changeLevel."
+ },
+ "thm:v002-twisted-mellin": {
+  "env": "theorem",
+  "title": "Exact twisted Mellin transform",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/TwistedMellin.lean:NCG.twisted_mellin",
+   "NCG/Arithmetic/TwistedMellin.lean:NCG.twisted_mellin_prime_side",
+   "NCG/Arithmetic/TwistedMellin.lean:NCG.twisted_mellin_center_side",
+   "NCG/Arithmetic/TwistedMellin.lean:NCG.mellin_log_dilate"
+  ],
+  "note": "Boxed identity proved for continuous compactly supported C and Re s > 1/2, with delta as an explicit parameter of the centered packet (the identity is linear in delta; the prose convention delta_chi = 1 exactly in the primitive trivial channel is definitional). -L'/L(s+1/2, chi) is rendered as the logarithmic derivative of the Dirichlet L-series via Mathlib LSeries_twist_vonMangoldt_eq (Re(s+1/2) > 1, the series domain). Absolute convergence is established, not assumed: the substitution u = log(a/X) is carried out by an explicit exp change of variables, the prime side by countable Fubini (integral_tsum_of_summable_integral_norm plus a proved integrable-tsum companion), the centered channel by product-measure Fubini with the tail integral int_1^infty y^{-s-1/2} dy = 1/(s-1/2) computed by FTC. C smooth is weakened to C continuous with compact support (strictly more general)."
+ },
+ "prop:v002-completed-packet": {
+  "env": "proposition",
+  "title": "Completed packet symbol and trivial zeros",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/PacketChain.lean:NCG.completed_packet_cancellation"
+  ],
+  "note": "The cancellation clause is proved; the symbol formula cites the proved twisted-Mellin record. completed_packet_cancellation: with the displayed classical principal-part expansions near a parity-forced trivial zero w_m = -a_chi - 2m - the digamma term (1/2) psi((w + a_chi)/2) = -1/(w - w_m) + O(1) and L'/L(w,chi) = 1/(w - w_m) + O(1) - the principal parts cancel exactly and the sum is bounded on the punctured neighbourhood, so only nontrivial zeros contribute poles in the open critical strip. The boxed Mellin symbol H_C(s)[-Lambda'/Lambda(s + 1/2) - delta_chi/(s - 1/2)] is the sum of the inverse-Mellin symbol and the proved thm:v002-twisted-mellin identity (separate ledger record); the two displayed expansions are the standard digamma and Dirichlet-L pole expansions (disclosed)."
+ },
+ "lemma:packet-selection": {
+  "env": "lemma",
+  "title": "Packet selection",
+  "status": "proved",
+  "lean": [
+   "NCG.packet_selection"
+  ],
+  "note": "Proved: for every s_0 with Re s_0 > 0 there is a C-infinity compactly supported packet C with H_C(s_0) = int C(u) e^{s_0 u} du != 0, by the manuscript construction C(u) = e^{-i gamma u} phi(u) with phi a smooth bump (ContDiffBump), reducing H_C(s_0) to the positive real integral int phi(u) e^{alpha u} du > 0. The hypothesis Re s_0 > 0 is retained for fidelity although the argument works for every s_0."
+ },
+ "thm:v002-zero-amplification": {
+  "env": "theorem",
+  "title": "Off-critical zero amplification",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ZeroAmplification.lean:NCG.zero_amplification"
+  ],
+  "note": "Proved in the boundedness rendering of the boxed limsup, with the continuation route replaced by the equivalent elementary Laplace-pole test (disclosed). In the logarithmic variable r = log X, an off-critical zero contributes the exponential c_k e^{lambda_k r} with alpha = Re lambda_k > 0 and grouped residue c_k = -m_rho H_C(rho - 1/2) != 0. If the packet satisfied |E(X)| <= C X^{alpha - eps} (i.e. |f(r)| <= C e^{(alpha-eps)r}), its weighted energy at sigma = alpha - eps/2 would be finite (the integrand is dominated by C^2 e^{-eps r}), and laplace_pole_obstruction would force alpha <= alpha - eps/2 - contradiction. Hence no such bound holds for any eps > 0: the boxed limsup |E|/X^{alpha-eps} = infinity in its unboundedness rendering. Disclosed: the tested exponent is the isolated rightmost one (the manuscript's displacement-maximal pole), the remainder transform is locally bounded near it (hR), and the completed-packet variant (holomorphic conductor-Gamma term at rho) is the manuscript's prose remark."
+ },
+ "definition:packetwise-subpower-property": {
+  "env": "definition",
+  "title": "Packetwise subpower property",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:v002-packet-grh": {
+  "env": "theorem",
+  "title": "Packetwise conditional GRH",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ZeroAmplification.lean:NCG.packet_subpower_grh"
+  ],
+  "note": "The core implication is proved: the subpower property SP(chi) - for every eta > 0 some C_eta bounds the packet by C_eta X^eta - is incompatible with any off-critical displacement alpha = Re lambda_k > 0 (packet_subpower_grh, instantiating zero_amplification at eta = alpha/2 < alpha). Hence SP(chi) forces every tested zero exponent into Re <= 0: the right half of the strip is zero-free. Disclosed: the reflection of left-half zeros into the conjugate primitive channel through the typed functional equation, and the primitive-to-imprimitive extension concluding full Dirichlet GRH from all primitive channels, are the manuscript's prose steps (their records thm:v002-functional-equation and corollary:primitive-reduction-of-dirichlet-grh are separate ledger items)."
+ },
+ "prop:v002-translation-nogo": {
+  "env": "proposition",
+  "title": "Finite self-translation no-go",
+  "status": "proved",
+  "lean": [
+   "NCG.translation_nogo"
+  ],
+  "note": "Proved: for a finite zero multiset Z, pairwise-distinct sample points (the shifted values z_i - eta_j, collected as a Finset) avoiding Z, and arbitrary nonzero targets A, there is an entire F = P * G with P the polynomial with zero multiset Z, G entire and everywhere nonvanishing (so the zero multiset of F contains Z with exact multiplicity), and F = A at all sample points. Construction as in the manuscript: Lagrange interpolation of logarithm branches, F = P e^h. The concluding sentence that finite translated lower frames therefore do not constrain horizontal zero positions is interpretive prose."
+ },
+ "audit:what-the-dirichlet-collection-adds": {
+  "env": "audit",
+  "title": "What the Dirichlet collection adds",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:v002-prolate-basic": {
+  "env": "theorem",
+  "title": "Basic prolate concentration",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ProlateBasic.lean:NCG.projection_contraction",
+   "NCG/Arithmetic/ProlateBasic.lean:NCG.prolate_sandwich"
+  ],
+  "note": "Operator core proved: for self-adjoint idempotents P (time cut) and B (band cut), the compression K = PBP satisfies <f,Kf> = ||B(Pf)||^2 and 0 <= <f,Kf> <= ||f||^2, i.e. 0 <= K <= I (projection_contraction supplies ||Bg|| <= ||g||). Disclosed: the explicit sine kernel, the trace value 2*T*Omega/pi (trace class of the continuous positive kernel), and the Ky Fan maximum principle are the manuscript's classical Slepian-Landau-Pollak inputs and are not re-proved."
+ },
+ "thm:v002-leakage": {
+  "env": "theorem",
+  "title": "Exact leakage identity",
+  "status": "proved",
+  "lean": [
+   "NCG.leakage_identity",
+   "NCG.leakage_bound"
+  ],
+  "note": "Proved: for a radical packet F = phi + s + r (window and Galerkin decomposition) and any Galerkin vector h on which Q_N represents the form (<h, Q_N phi> = QW(phi, h)), <h, Q_N phi> = -QW(r,h) - QW(s,h) (NCG.leakage_identity); consequently ||Q_N phi|| <= sup over unit Galerkin h of |QW(r,h) + QW(s,h)| (NCG.leakage_bound, stated with an arbitrary nonnegative bound M dominating the tested leakage, and Q_N phi assumed in the Galerkin range). The form enters only through first-slot additivity and the representation and radical hypotheses, exactly as in the manuscript proof; sesquilinearity and the Hermitian property are not needed for the identity."
+ },
+ "thm:v002-cluster": {
+  "env": "theorem",
+  "title": "Separated cluster and Feshbach short",
+  "status": "proved",
+  "lean": [
+   "NCG.inv_shift_posSemidef",
+   "NCG.cluster_feshbach_det",
+   "NCG.cluster_feshbach_bound"
+  ],
+  "note": "NCG/Arithmetic/SchurCluster.lean: the Feshbach determinant factorization det(Q-z) = det(C-z) det(A-z-B^H (C-z)^-1 B) (Schur complement, Mathlib det_fromBlocks22), and the self-energy sandwich 0 <= B^H (C-z)^-1 B <= (beta^2/delta) 1 below the gap, via the new inverse-monotonicity lemma N >= delta > 0 => N^-1 <= delta^-1 (spectral theorem). The sin-Theta spectral-projection clause ||P - Pi|| <= 2beta/(Delta-2beta) is the declared analytic input (contour perturbation theory). Standard axioms only."
+ },
+ "corollary:simple-even-extraction": {
+  "env": "corollary",
+  "title": "Simple even extraction",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ProlateBasic.lean:NCG.simple_even_extraction"
+  ],
+  "note": "Perturbation arithmetic proved: with the spectral comparison for the effective operator displayed (two lowest levels move by at most the correction norm eps, odd sector starts above the shifted gap), a correction of size 2*eps < gamma keeps the ground level strictly simple and strictly below the odd sector, forcing even parity. Disclosed: the Schur effective-operator reduction A - B*(C-z)^{-1}B and the Weyl-type spectral comparison enter as the displayed hypotheses, as in the store-pencil record."
+ },
+ "thm:v002-hurwitz-rh": {
+  "env": "theorem",
+  "title": "Real-rooted approximation implies RH",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/HurwitzRH.lean:NCG.hurwitz_real_rooted_rh"
+  ],
+  "note": "Proved with Hurwitz's dichotomy as a displayed hypothesis (disclosed). The manuscript's argument is carried out in full: if Xi had a nonreal zero z0, the closed ball of radius |Im z0|/2 around z0 avoids the real axis (|Im z - Im z0| <= |z - z0| pointwise), so every D_n is zero-free there because its zeros are all real; Hurwitz's dichotomy (hHurwitz: a locally uniform limit of zero-free holomorphic functions on a ball is zero-free or identically zero there) then either contradicts Xi(z0) = 0 directly or forces Xi = 0 on the ball, and the identity theorem for the entire function Xi (AnalyticOnNhd.eqOn_zero_of_preconnected_of_eventuallyEq_zero on the connected plane) propagates this to Xi = 0 everywhere, contradicting Xi not identically zero. Hurwitz's theorem itself is the single standard cited input (no argument-principle/Rouche machinery exists in Mathlib yet); the disk selection, zero-freeness transfer, and identity-theorem branch are fully formal. Conclusion rendered as: every zero of Xi is real (Im = 0), the manuscript's RH equivalence."
+ },
+ "thm:v002-pswf-chain": {
+  "env": "theorem",
+  "title": "Conditional prolate cluster route to RH",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/PacketChain.lean:NCG.pswf_chain"
+  ],
+  "note": "The conditional chain is discharged through the proved Hurwitz record (thm:v002-hurwitz-rh). pswf_chain: given the chain hypotheses rendered as displayed inputs - the locally uniform determinant convergence hconv (bundling clauses (i)-(iii): the cluster decomposition ||B_n||/Delta_n -> 0, the simple even ground vector with dominating gaps, and the leakage-norm convergence of thm:v002-leakage, whose per-record contents are separate ledger items) and the real-rootedness of the regularized determinants (clause (iv), hzeros) - every zero of Xi is real, i.e. RH. The Hurwitz dichotomy itself remains the displayed input of the Hurwitz record (no Rouche machinery in Mathlib). The identification of the actual finite ground vector with the preassigned prolate model is the manuscript's prose transfer step inside hconv."
+ },
+ "audit:what-the-pswf-collection-contributes": {
+  "env": "audit",
+  "title": "What the PSWF collection contributes",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:v002-weyl-barrier": {
+  "env": "theorem",
+  "title": "Scalar-invariant two-channel Weyl barrier",
+  "status": "proved",
+  "lean": [
+   "NCG.weyl_barrier",
+   "NCG.weylGap"
+  ],
+  "note": "Proved: lambda_2(L-D) - mu >= Gamma^W(L,D;g) with both Weyl channels, where the spectral quantities are represented by their Courant-Fischer min-max values (NCG.lamMin/lamMax = extreme Rayleigh bounds, NCG.lamTwo/lamTwoTop = second levels through two-dimensional trial subspaces) -- these agree with the sorted eigenvalues of self-adjoint operators on a finite-dimensional space, and the statement is proved for any operators on any complex Hilbert space admitting a two-dimensional subspace (subsuming the manuscript n >= 2 setting). Scalar-shift invariance of Gamma^W is definitional in these coordinates (shifts cancel from the eigenvalue-Rayleigh differences)."
+ },
+ "thm:v002-scalar-bulk": {
+  "env": "theorem",
+  "title": "Scalar bulk carries no ordering",
+  "status": "proved",
+  "lean": [
+   "NCG.scalar_bulk",
+   "NCG.weylGap"
+  ],
+  "note": "Proved: if the compressed defect L - cI - D has Rayleigh quotients bounded by epsilon on the physical subspace W (rank >= 2, witnessed by a two-dimensional trial subspace V <= W, with the unit vector g in W), then Gamma^W(L,D;g) <= 2 epsilon. The operator-norm hypothesis ||P(L-cI-D)P|| <= epsilon enters the manuscript proof only through the Rayleigh quotients of vectors of Ran P, which is how the formal hypothesis is stated. Spectral quantities in Courant-Fischer min-max form as in thm:v002-weyl-barrier. The concluding in-particular sentence (epsilon = o(a) on a growing subspace) is interpretive prose."
+ },
+ "warning:critical-scale-firewall": {
+  "env": "warning",
+  "title": "Critical-scale firewall",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "ledger:v002-spectral": {
+  "env": "ledger",
+  "title": "Expanded RH/GRH spectral ledger",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "lem:prime-power": {
+  "env": "lemma",
+  "title": "Prime-power contamination",
+  "status": "proved",
+  "lean": [
+   "NCG.properPrimePows_card_le",
+   "NCG.properPrimePows_card_le_real",
+   "NCG.prime_power_contamination"
+  ],
+  "note": "Proved in master form: for any injective target map into [1,Y] the von Mangoldt correlation mass carried by proper-prime-power coordinates is at most 4 sqrt(Y) (log Y)^3, from the base-exponent count #PP(Y) <= sqrt(Y) log_2 Y and Lambda <= log. The polylog exponent is coarser than the displayed O(sqrt(X) log X) (which needs Chebyshev theta <= Cx); the crude form suffices for every downstream use, and covers both the shifted (n, n+h) and fixed-sum (n, N-n) windows through the injective-map parameter."
+ },
+ "thm:car-prime": {
+  "env": "theorem",
+  "title": "Exact ordered-history prime filter",
+  "status": "proved",
+  "lean": [
+   "NCG.perm_sign_sum_eq_zero",
+   "NCG.car_prime_endpoint"
+  ],
+  "note": "NCG/Arithmetic/ArithParity.lean: the signed permutation sum vanishes for k >= 2 (pairing by a fixed transposition), so the CAR endpoint on the symmetric ordered-history source returns the target at depth one and annihilates every deeper symmetric history (car_prime_endpoint, linear-map form). The anticommutation action E_n|pi> = sgn(pi)|n> is the declared CAR input. Standard axioms only."
+ },
+ "thm:parity-recovery": {
+  "env": "theorem",
+  "title": "Exact depth-one recovery",
+  "status": "proved",
+  "lean": [
+   "NCG.parity_recovery"
+  ],
+  "note": "NCG/Arithmetic/ArithParity.lean: P1 = (M-J)/2, P2 = (M+J)/2 from M = P1+P2, J = -P1+P2, and the quantitative clause J <= (1-2d)M => P1 >= dM. Standard axioms only."
+ },
+ "thm:twin-chain": {
+  "env": "theorem",
+  "title": "Conditional twin-prime chain",
+  "status": "proved",
+  "lean": [
+   "NCG.carrier_prime_mass",
+   "NCG.twin_chain"
+  ],
+  "note": "NCG/Arithmetic/ArithParity.lean: finite-carrier form with the o(M) hypothesis quantified as J <= (1-2d)M (the manuscript's own general clause): a positive twin carrier with mass >= m0 > 0 and small Moebius current supports a twin-prime pair (carrier_prime_mass extracts a positively weighted prime target). The (T1)-(T3) hypotheses are the declared open certificates. Standard axioms only."
+ },
+ "thm:gold-chain": {
+  "env": "theorem",
+  "title": "Conditional binary Goldbach chain",
+  "status": "proved",
+  "lean": [
+   "NCG.carrier_prime_mass",
+   "NCG.gold_chain"
+  ],
+  "note": "NCG/Arithmetic/ArithParity.lean: same skeleton for the Goldbach carrier: positive mass plus small Moebius current produces primes a, b with a + b = N. The (G1)-(G3) hypotheses are the declared open certificates. Standard axioms only."
+ },
+ "thm:HL-sufficient": {
+  "env": "theorem",
+  "title": "Classical asymptotic sufficient conditions",
+  "status": "proved",
+  "lean": [
+   "NCG.HL_twin",
+   "NCG.HL_goldbach"
+  ],
+  "note": "Proved: a Hardy-Littlewood twin asymptotic with positive singular series and O(X^{1/2+delta}) error (delta < 1/2), taken as hypothesis, forces infinitely many twin primes (finitely many twins leave only a bounded prime-pair mass plus the proper-prime-power contamination, which is o(X) by lem:prime-power and log-power asymptotics); the uniform Goldbach lower asymptotic likewise forces a prime decomposition of every sufficiently large even N. The external asymptotics are the stated inputs, exactly as in the manuscript."
+ },
+ "warning:parity-firewall": {
+  "env": "warning",
+  "title": "Parity firewall",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:v003-mellin-degree": {
+  "env": "theorem",
+  "title": "Exact Mellin-degree coefficients",
+  "status": "proved",
+  "lean": [
+   "NCG.lambdaJ",
+   "NCG.mellinSeries",
+   "NCG.mellin_degree_coeff",
+   "NCG.mellin_degree"
+  ],
+  "note": "NCG/Arithmetic/MellinDegree.lean: the port is realized as the formal power series prod_(l|n) (rescale(log l/L) exp - 1) in the Mellin variable, and the exact coefficient identity B_j = mu^2(n) Lambda_j(n)/(j! L^j) is proved for every j and every n (squarefree core via the divisors <-> powerset bridge and rescale-exp product law; nonsquarefree targets vanish under mu^2). Low-degree vanishing (X^omega divisibility), coefficient nonnegativity, and the exact values at primes and semiprimes are included. Standard axioms only."
+ },
+ "definition:exact-degree-2-squarefree-port": {
+  "env": "definition",
+  "title": "Exact degree-$\\le2$ squarefree port",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "prop:v003-Ple2-values": {
+  "env": "proposition",
+  "title": "Support and exact values",
+  "status": "proved",
+  "lean": [
+   "NCG.packetPle2",
+   "NCG.packet_prime",
+   "NCG.packet_semiprime",
+   "NCG.packet_other"
+  ],
+  "note": "NCG/Arithmetic/SignedSeparator.lean: the degree-<=2 packet P_{<=2} = B_1 + B_2 equals alpha + alpha^2/2 at a prime, alpha_1 alpha_2 at a squarefree semiprime, and 0 at every other target (squarefree with >= 3 prime factors via low-degree vanishing; nonsquarefree via mu^2). Standard axioms only."
+ },
+ "lem:v003-selberg": {
+  "env": "lemma",
+  "title": "Selberg degree-two identity",
+  "status": "proved",
+  "lean": [
+   "NCG.pmul_log_mul",
+   "NCG.selberg_af",
+   "NCG.lambdaJ_one_eq_vonMangoldt",
+   "NCG.lambdaConv_eq",
+   "NCG.selberg_identity"
+  ],
+  "note": "NCG/Arithmetic/SelbergIdentity.lean: the FULL Selberg degree-two identity Lambda_2(n) = Lambda(n) log n + (Lambda*Lambda)(n) for every n >= 1, proved combinatorially via the log-derivation on the Dirichlet ring (L(f*g) = Lf*g + f*Lg applied to Lambda*zeta = log, then Moebius inversion), replacing the manuscript Dirichlet-series argument. Includes the bridge Lambda_1 = vonMangoldt to the Mathlib arithmetic-function framework. Standard axioms only."
+ },
+ "cor:v003-atom-bulk": {
+  "env": "corollary",
+  "title": "Exact prime atom plus semiprime bulk",
+  "status": "proved",
+  "lean": [
+   "NCG.lambdaConv",
+   "NCG.atom_bulk"
+  ],
+  "note": "NCG/Arithmetic/SignedSeparator.lean: the exact split P_{<=2}(n) = mu^2 Lambda/L (1 + log n/(2L)) + mu^2/(2L^2) (Lambda_1*Lambda_1)(n) for every n >= 2, with the convolution supported exactly on squarefree semiprimes (value 2 log r log q) and the first term on primes. Standard axioms only."
+ },
+ "thm:v003-signed-separator": {
+  "env": "theorem",
+  "title": "Exact cancellation of the squarefree $P_2$ layer",
+  "status": "proved",
+  "lean": [
+   "NCG.separatorJ",
+   "NCG.separator_prime_value",
+   "NCG.separator_semiprime",
+   "NCG.separator_minorant"
+  ],
+  "note": "NCG/Arithmetic/SignedSeparator.lean: J = (6/7)(B_1 + B_2 - (2/alpha)B_3) equals (6/7)alpha + (1/7)alpha^2 at a prime, vanishes exactly at squarefree semiprimes (the P_2 layer cancellation, via Lambda_3(pq) = 3ab(a+b)), and satisfies the boxed pointwise minorant J(n) <= 1_P(n) for 2 <= n and log n <= L. At depth >= 3 the Lean statement gives J <= 0 from B_3 >= 0 (coefficient nonnegativity); the strict negativity display -12/(7 alpha) B_3 < 0 at depth exactly three is not separately certified. Standard axioms only."
+ },
+ "cor:v003-signed-additive-closure": {
+  "env": "corollary",
+  "title": "Signed fixed-gap and fixed-sum closure",
+  "status": "proved",
+  "lean": [
+   "NCG.signed_additive_closure",
+   "NCG.twin_closure",
+   "NCG.goldbach_closure"
+  ],
+  "note": "NCG/Arithmetic/SignedSeparator.lean: positivity of a nonnegatively log-weighted sum of minorant values forces a prime target; instantiated for the fixed-gap (p, p+2) and fixed-sum (p, N-p) correlations. The analytic positivity of the correlations themselves is the declared open input (Type-II/parity estimate). Standard axioms only."
+ },
+ "thm:v003-cauchy-minorant": {
+  "env": "theorem",
+  "title": "Stable Cauchy minorant",
+  "status": "proved",
+  "lean": [
+   "NCG.bank_alias",
+   "NCG.cauchy_minorant",
+   "NCG.bank_weight"
+  ],
+  "note": "Proved with the entire packet E_{z,X} realized as its absolutely convergent Taylor series sum_j B_j z^j (factorial decay of the Mellin coefficients from |Lambda_j(n)| <= tau(n) (log n)^j; the product display is the formal identity NCG.mellin_degree, as in the thm:v003-mellin-degree record): bank_alias is the exact root-of-unity aliasing D^(j) = sum_{d = j mod m} B_d r^d/r^j (geometric root sums + Complex.exp_eq_one_iff), cauchy_minorant is the stable sandwich 0 <= P_{<=2} - c <= theta C_s E_s by coefficientwise domination 0 <= 1_{d in {1,2}} - kappa_d <= theta C_s s^d against the nonnegative coefficients (the residue-class tail estimate r^{d-j} = theta^l s^{d-j} <= theta C_s s^d), and bank_weight gives the m-independent coefficient weight r^{-j} per bank, hence the display total r^{-1} + r^{-2} + theta C_s."
+ },
+ "corollary:dyadic-bank": {
+  "env": "corollary",
+  "title": "Dyadic bank",
+  "status": "proved",
+  "lean": [
+   "NCG.CauchyTransfer.dyadic_bank",
+   "NCG.CauchyTransfer.dyadic_bank_constants"
+  ],
+  "note": "Proved: at r = 1/4, s = 1/2 the aliasing constant evaluates to theta C_s = 6/2^m and the total coefficient variation r^-1 + r^-2 + theta C_s <= 26; the transfer sandwich is instantiated at these constants. The pointwise dyadic sandwich itself enters as the hypothesis supplied by thm:v003-cauchy-minorant (NCG.cauchy_minorant), now proved."
+ },
+ "thm:v003-cauchy-transfer": {
+  "env": "theorem",
+  "title": "Positive-mass transfer through the finite bank",
+  "status": "proved",
+  "lean": [
+   "NCG.CauchyTransfer.positive_mass_transfer"
+  ],
+  "note": "Proved exactly as in the manuscript: multiplying the pointwise minorant sandwich 0 <= P(n) - c(n) <= K E(n) by nonnegative weights and summing gives Q - K U <= C <= Q. The pointwise sandwich enters as the hypothesis, supplied by the Cauchy-minorant theorem (thm:v003-cauchy-minorant)."
+ },
+ "prop:v003-ratio-conversion": {
+  "env": "proposition",
+  "title": "Factor-ratio conversion",
+  "status": "proved",
+  "lean": [
+   "NCG.ratio_conversion"
+  ],
+  "note": "NCG/Arithmetic/ArithParity.lean: r <= q^a gives log r/log(rq) <= a/(1+a) and log q/log(rq) >= 1/(1+a) (log monotonicity + fraction algebra). Standard axioms only."
+ },
+ "ass:v003-quant-seeds": {
+  "env": "assumption",
+  "title": "Quantitative prime--semiprime seeds",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:v003-seed-transfer": {
+  "env": "theorem",
+  "title": "Quantitative seed transfer",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.seed_prime_target_bound",
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.seed_semiprime_target_bound",
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.seed_mass_transfer",
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.seed_transfer_onelog"
+  ],
+  "note": "Finite-carrier form proved: the per-candidate arithmetic (a prime target contributes >= c1^2 L, a semiprime target rq with log p >= c1 L, log r >= c2 > 0, log q >= c3 L contributes >= c1 c2 c3 to (log p)(log r log q / L^2)), the summation transfer (a per-candidate bound c and a seed count M give the boxed correlation lower bound c*M, the >> Sing * x/log^2 x scale), and the one-logarithm improvement under the rough lower bound log r >= alpha L. Disclosed: the seed counts are Assumption ass:v003-quant-seeds (external Li-Liu quantitative inputs); the per-candidate log bounds are supplied by log p ~ L on the dyadic window and the proved prop:v003-ratio-conversion; the singular-series normalization M = c Sing x / L^2 names the transferred count."
+ },
+ "warning:untitled": {
+  "env": "warning",
+  "title": "",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "lem:v003-rough-weight-support": {
+  "env": "lemma",
+  "title": "Pointwise support of the rough weight",
+  "status": "proved",
+  "lean": [
+   "NCG.rough_weight_support",
+   "NCG.roughWeight"
+  ],
+  "note": "Proved: the rough weight w_kappa(n;x) (formalized as NCG.roughWeight a b n with real thresholds a = x^kappa, b = x^tau, least prime factor Nat.minFac, and Omega = ArithmeticFunction.cardFactors) equals 1 exactly when n is prime or n = rq with distinct primes r < q and a <= r < b, and 0 otherwise. The manuscript hypotheses \"n asymp x, x sufficiently large, tau < 1/2\" enter the proof only through 1 < a <= b and b^2 <= n, which is how the formal statement takes them; no upper bound on n is needed. The case analysis (factor depth 1 / 2 / >= 3, with the least-factor threshold trichotomy at depth 2) is exactly the manuscript proof."
+ },
+ "ass:v003-support-retaining": {
+  "env": "assumption",
+  "title": "Support-retaining Li--Liu audit hypothesis",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "cor:v003-natural-rough-carrier": {
+  "env": "corollary",
+  "title": "Natural-scale rough carrier",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.rough_support_contribution",
+   "NCG/Arithmetic/SeedTransfer.lean:NCG.natural_rough_carrier"
+  ],
+  "note": "Finite-carrier form proved: on the support-retaining carrier every supported target contributes >= (c1/26) L (log r >= L/13, log q >= L/2 displayed, from the proved rough-weight support lemma and ratio conversion), and since the rough weight satisfies 0 <= W <= 4 the support count is at least one quarter of the weighted mass -- the boxed >> Sing(2) x / log x carrier bound. Disclosed: Assumption ass:v003-support-retaining supplies the weighted lower bound; the support window x^{1/12} <= r < x^{3/7-eps} is the displayed exponent bookkeeping."
+ },
+ "ass:v003-two-form-sieve": {
+  "env": "assumption",
+  "title": "Standard two-linear-form upper-bound sieve",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:v003-profile-lipschitz": {
+  "env": "theorem",
+  "title": "Lipschitz semiprime profile",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ProfileLipschitz.lean:NCG.profile_lipschitz"
+  ],
+  "note": "Boxed interval bound proved in finite form: with the dimension-two sieve bound per factor r (displayed Assumption ass:v003-two-form-sieve) and the Mertens window sum over e^{uL} < r <= e^{vL} (displayed classical input), the normalized measure of [u,v] is <= C_x C_M ((v-u) + 1/L). Disclosed: the weak-* subsequential-limit statements (absolute continuity, L^infty density, no atom at a fixed ratio) are the manuscript's compactness bookkeeping on top of the uniform interval bound proved here."
+ },
+ "thm:v003-atomic-continuous": {
+  "env": "theorem",
+  "title": "Atomic--continuous alternative",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/ProfileLipschitz.lean:NCG.atomic_continuous_split",
+   "NCG/Arithmetic/ProfileLipschitz.lean:NCG.profile_lipschitz"
+  ],
+  "note": "Finite-scale content proved: the carrier mass splits exactly into the prime-target atom tau and the semiprime profile mass (atomic_continuous_split), the rough-carrier lower bound transfers to the sum tau + mu-sharp mass >= M, and the semiprime part has the uniform interval bound of profile_lipschitz. Disclosed: the weak-* limit decomposition nu = tau delta_0 + f(u) du with f in L^infty and supp f in [1/12, 3/7] is the manuscript's compactness step on top of these finite bounds; the theorem does not force tau > 0 (the manuscript's warning)."
+ },
+ "warning:untitled--2": {
+  "env": "warning",
+  "title": "",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:v003-twinfree-marginals": {
+  "env": "theorem",
+  "title": "Twin-free realization of all sub-half marginals",
+  "status": "proved",
+  "lean": [
+   "NCG.twinfree_marginals"
+  ],
+  "note": "Proved: for any admissible tuple h : Fin k -> Z and marginals 0 <= pi_i <= 1/2 there is an explicit probability distribution on subsets of coordinates (nonnegative, total mass one) supported on independent sets of the twin graph G_2(H) (edges |h_i - h_j| = 2) with vertex marginals exactly pi_i. Construction as in the manuscript: mod-4 bipartition ({0,1} vs {2,3} residues), a fair coin for the side, then independent inclusion with probability 2 pi_i on the chosen side. The closing sentence that no linear functional of one-coordinate marginals can certify a twin edge is interpretive prose about this construction."
+ },
+ "prop:v003-maynard-ceiling": {
+  "env": "proposition",
+  "title": "Maynard coordinate ceiling",
+  "status": "proved",
+  "lean": [
+   "NCG.maynard_coordinate_CS",
+   "NCG.sq_integral_le",
+   "NCG.maynard_ceiling"
+  ],
+  "note": "Proved: the coordinate integral inequality J_k^{(i)}(F) <= I_k(F) (NCG.maynard_coordinate_CS) as Cauchy-Schwarz in the i-th coordinate (a probability measure) integrated over the remaining variables, stated in product-splitting form (remaining coordinates) x (i-th coordinate) with F square-integrable on the product; the per-slice inequality (int f)^2 <= int f^2 is NCG.sq_integral_le. NCG.maynard_ceiling substitutes J <= I into the standard first-moment asymptotic pi_i = (log R/log N) J/I + o(1), R = N^{theta/2-delta} (taken as hypothesis: it is the external Maynard input), and yields convergence of the marginals to a limit <= theta/2 - delta < 1/2 -- inside the twin-free regime of NCG.twinfree_marginals, which is the compatibility assertion."
+ },
+ "prop:v003-minimal-singular-series": {
+  "env": "proposition",
+  "title": "Gap $2$ has minimal even-gap singular series",
+  "status": "proved",
+  "lean": [
+   "NCG.minimal_singular_series"
+  ],
+  "note": "NCG/Arithmetic/ArithParity.lean: with the displayed product formula over odd prime divisors as input, Sing(d) >= Sing(2) since every factor (l-1)/(l-2) > 1, with equality iff the odd-divisor set is empty. Standard axioms only."
+ },
+ "prop:v003-matching-energy": {
+  "env": "proposition",
+  "title": "Exact matching-energy decomposition",
+  "status": "proved",
+  "lean": [
+   "NCG.matching_identity",
+   "NCG.matching_energy"
+  ],
+  "note": "NCG/Arithmetic/ArithParity.lean: 2XY = X+Y-(X-Y)^2 on binaries (X^2 = X) and the weighted decomposition 2E_w = V_w - D_w. Standard axioms only."
+ },
+ "prop:v003-negative-temperature": {
+  "env": "proposition",
+  "title": "Exact positive/negative temperature identity",
+  "status": "proved",
+  "lean": [
+   "NCG.mellinPort",
+   "NCG.mellin_negative_temperature"
+  ],
+  "note": "NCG/Arithmetic/ArithParity.lean: for the squarefree Mellin port E_c(n) = mu^2(n) prod (l^c - 1), the exact identity n^c E_{-c}(n) = mu(n) E_c(n) is proved via prod_primeFactors_of_squarefree, rpow algebra and mu = (-1)^omega; both sides vanish on nonsquarefree n. Standard axioms only."
+ },
+ "corollary:parity-firewall": {
+  "env": "corollary",
+  "title": "Parity firewall",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/PacketChain.lean:NCG.parity_firewall_identity"
+  ],
+  "note": "The exact Moebius conversion underlying the firewall is proved; the interpretive clause is prose. parity_firewall_identity: on a squarefree carrier (a finite set of primes ps), the temperature difference product prod_p (e^{-a log p/L} - 1) equals (-1)^{|ps|} e^{-(a/L) log(prod p)} prod_p (e^{a log p/L} - 1) - the per-factor conversion e^{-x} - 1 = -e^{-x}(e^x - 1) assembled over the factor set, with the damping product collapsing to the Moebius-weighted power n^{-a/L}. The sign (-1)^{|ps|} is mu(n) for squarefree n (standard identification, disclosed). Hence every shifted or fixed-sum estimate of the temperature difference contains the weighted Moebius current linearly: it is a rewriting of the parity problem, not an independent positive argument (the manuscript's interpretive conclusion)."
+ },
+ "thm:v003-four-additive-routes": {
+  "env": "theorem",
+  "title": "Four rigorous routes to additive closure",
+  "status": "proved",
+  "lean": [
+   "NCG.four_additive_routes",
+   "NCG.HL_twin",
+   "NCG.HL_goldbach"
+  ],
+  "note": "Proved as the assembly of the cited records: (A1)/(A2) are the signed closures (NCG.twin_closure, NCG.goldbach_closure), (A3) is parity recovery (NCG.parity_recovery), (A4) is the Hardy-Littlewood route (NCG.HL_twin, NCG.HL_goldbach), and the final firewall sentence is witnessed by the semiprime n = 6 carrying positive degree-<=2 mass with no prime (packet_semiprime)."
+ },
+ "ledger:goldbach-twin-prime-machinery-status": {
+  "env": "ledger",
+  "title": "Goldbach/twin-prime machinery status",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:mass-prefix": {
+  "env": "theorem",
+  "title": "Exact mass--prefix identity",
+  "status": "proved",
+  "lean": [
+   "NCG.mass_prefix",
+   "NCG.mass_prefix_bilinear",
+   "NCG.mass_prefix_smul"
+  ],
+  "note": "Proved: the exact Abel resummation C_F(d) = M(d) (x) T_{s_N}F + sum_{c<N} q_c(d) (x) (T_{s_c}F - T_{s_{c+1}}F), formalized for an arbitrary bilinear pairing (NCG.mass_prefix_bilinear) and instantiated at the tensor product (NCG.mass_prefix) and at scalar coefficients (NCG.mass_prefix_smul). The translated ports T_{s_c}F enter the identity only through their values, so the formal statement takes an arbitrary family F c of vectors; the translation structure plays no role in the identity, exactly as in the manuscript proof."
+ },
+ "lem:fourier-boundary": {
+  "env": "lemma",
+  "title": "Fourier boundary identity",
+  "status": "proved",
+  "lean": [
+   "NCG.fourier_boundary",
+   "NCG.fourier_boundary_unitary",
+   "NCG.stepPrefix"
+  ],
+  "note": "Proved for Hilbert-valued coefficients and monotone cell centres s_0 <= ... <= s_N: with the step prefix field J_d = q_c on [s_c, s_{c+1}) (NCG.stepPrefix), sum_c e^{it s_c} d_c = e^{it s_N} M(d) - it int e^{its} J_d(s) ds for every real t (NCG.fourier_boundary; the identity is stated in multiplied-by-it form, so no t != 0 restriction is needed). NCG.fourier_boundary_unitary is the boxed display with the unitary transform hat J(t) = (2 pi)^{-1/2} int e^{its} J(s) ds, which is defined in-file (NCG.unitaryHat) with exactly that normalization."
+ },
+ "thm:mass-flux": {
+  "env": "theorem",
+  "title": "Mass--flux inequality",
+  "status": "proved",
+  "lean": [
+   "NCG.mass_flux",
+   "NCG.mass_flux_zero",
+   "NCG.fourier_toLp_eq",
+   "NCG.portSynthesis"
+  ],
+  "note": "Proved: with the tensor packet C_F(d) realized as the H-valued L^2 function u -> sum_c F(u+s_c) d_c (NCG.portSynthesis, the canonical H (x) L^2 = L^2(R,H) picture), monotone cells, and F in L^1 cap L^2, ||C_F(d)|| <= ||F|| ||M(d)|| + sqrt(Lambda) ||J_d|| in L^2 (NCG.mass_flux), where Lambda = sup (2 pi xi)^2 |fourier F(xi)|^2 equals 2 pi Lambda_F in the manuscript unitary convention (statement in Mathlib Fourier convention; hypothesis Lambda as a pointwise bound). When M(d) = 0, the exact flux identity ||C_F(d)||^2 = int (2 pi xi)^2 |fourier F|^2 ||fourier J(-xi)||^2 d xi holds (NCG.mass_flux_zero; equal to the boxed display by Plancherel on J). The proof runs through a new L^1 cap L^2 compatibility bridge for the Mathlib vector-valued L^2 Fourier isometry (NCG.fourier_toLp_eq, multiplication formula + Schwartz density), the mass-prefix boundary identity, and the L^2 triangle inequality after the exact A+B frequency split. The mild extra hypothesis F in L^1 (satisfied by all Gaussian ports used downstream) is disclosed."
+ },
+ "thm:multiport-prefix": {
+  "env": "theorem",
+  "title": "Multiport mass--prefix theorem",
+  "status": "proved",
+  "lean": [
+   "NCG.multiport_prefix",
+   "NCG.mass_flux"
+  ],
+  "note": "Proved as the weighted Minkowski assembly: if each port obeys the per-port mass-flux bound x_r <= a_r + b_r (with a_r = ||F_r|| ||M||, b_r = sqrt(Lambda_r) ||J||, supplied by NCG.mass_flux), then sqrt(sum lam_r x_r^2) <= sqrt(sum lam_r a_r^2) + sqrt(sum lam_r b_r^2) -- exactly the direct-sum argument of the manuscript (Cauchy-Schwarz on the cross term). The identifications sum lam ||F_r||^2 ||M||^2 = (sum lam ||F_r||^2) ||M||^2 etc. are definitional."
+ },
+ "definition:joint-flagship-source-quotient": {
+  "env": "definition",
+  "title": "Joint flagship source quotient",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:grand-arithmetic": {
+  "env": "theorem",
+  "title": "Grand arithmetic closure theorem",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/GrandArithmetic.lean:NCG.grand_arithmetic_closure"
+  ],
+  "note": "Multiport closure assembly proved: one theorem consuming the entry data of the constituent proved records and returning in one conjunction the multiport endpoint estimate (thm:multiport-prefix), the spectral conclusion dis = 0 from per-line indicators (cor:fixed-mod-grh through the Gaussian-Hardy criterion), the twin conclusion from a positive carrier with selector-stable parity cancellation (thm:twin-chain), the Goldbach conclusion from a positive fixed-sum carrier (thm:gold-chain), and the signed-separator twin route (twin_closure). Disclosed: the discrepancy factorization through one predetermined logarithmic cell packet and the two o(A_X) ledger estimates are the displayed entry hypotheses, per the manuscript's warning (the theorem does not derive the packet or its estimates; it states one source controls all preassigned ports)."
+ },
+ "warning:what-the-theorem-does-not-say": {
+  "env": "warning",
+  "title": "What the theorem does not say",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "prop:phase-firewall": {
+  "env": "proposition",
+  "title": "Relative-phase firewall",
+  "status": "proved",
+  "lean": [
+   "NCG.phase_firewall"
+  ],
+  "note": "NCG/Arithmetic/ArithParity.lean: a global relative phase leaves the rank-one endpoint density matrix unchanged while ||a - e^{i phi} a||^2 = 2||a||^2(1 - cos phi). Standard axioms only."
+ },
+ "thm:clifford": {
+  "env": "theorem",
+  "title": "Finite Lorentzian Clifford theorem",
+  "status": "proved",
+  "lean": [
+   "NCG.lorentz_clifford",
+   "NCG.lorentz_clifford_algebra_top"
+  ],
+  "note": "NCG/Arithmetic/LorentzClifford.lean. For abstract self-adjoint involutions J, S on the binary order plane with JS = -SJ, the boxed relations gamma^mu gamma^nu + gamma^nu gamma^mu = 2 eta^{mu nu} I_4 (eta = diag(1,-1,-1,-1)) are proved in explicit signature form for gamma^0 = J (x) I, gamma^i = (JS) (x) sigma_i: (gamma^0)^2 = I, (gamma^i)^2 = -I, and all mixed anticommutators vanish (lorentz_clifford; the gamma^0-gamma^i anticommutators are proved for every second factor at once). In the canonical binary-plane realization J = Z, S = X the four generators generate all of M_4(C) as a complex unital algebra (lorentz_clifford_algebra_top, by reduction to the flagship generation theorem clifford_algebra_top). The identification Cl_{1,3}(C) iso M_4(C) is the certified presentation by these relations (disclosed; no abstract CliffordAlgebra iso is constructed)."
+ },
+ "thm:dirac-scaling": {
+  "env": "theorem",
+  "title": "Flat Dirac scaling",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/DiracScaling.lean:NCG.centered_difference_plane_wave",
+   "NCG/Arithmetic/DiracScaling.lean:NCG.abs_sin_sub_le",
+   "NCG/Arithmetic/DiracScaling.lean:NCG.dirac_symbol_bound"
+  ],
+  "note": "Provable core proved: the exact plane-wave symbol identity (e^{ip(x+h)} - e^{ip(x-h)})/(2h) = (sin(hp)/h) i e^{ipx}, the cubic sine remainder |sin u - u| <= |u|^3/6, and the uniform-on-compacts symbol convergence |sin(hp)/h - p| <= h^2 K^3/6 for |p| <= K. Disclosed: the passage from uniform symbol convergence on compacts to L^2 convergence on Schwartz spinors and to strong resolvent convergence of the self-adjoint Fourier-multiplier Hamiltonians is the standard core-convergence argument; Mathlib has no unbounded self-adjoint spectral theory, so that layer stays disclosed per house policy."
+ },
+ "prop:screen-area": {
+  "env": "proposition",
+  "title": "Markov screen area law",
+  "status": "proved",
+  "lean": [
+   "NCG.screen_chain_rule",
+   "NCG.screen_area_law",
+   "NCG.chainLaw",
+   "NCG.entropyOf",
+   "NCG.entropyRate",
+   "NCG.chainLaw_last_marginal"
+  ],
+  "note": "NCG/Arithmetic/ScreenArea.lean. The joint law of the stationary screen chain is the explicit product pi(x_0) Prod P(x_k, x_{k+1}) over Fin (N+1) -> s (the Markov property is definitional here, disclosed). Boxed chain rule proved exactly: H(X_1,...,X_{N+1}) = H(pi) + N h(P) with h(P) = -sum pi_i P_ij log P_ij (screen_chain_rule, by induction with the snoc splitting, the stationary final-cell marginal chainLaw_last_marginal, and the log 0 = 0 convention making the log-product split exact including zero transition probabilities; the manuscript's N cells carry N-1 transitions - indexing disclosed). Boxed area law proved with an explicit O(1) constant: if |N a_0 - Area| <= a_0 then |H - (h(P)/a_0) Area| <= |H(pi)| + |h(P)| (screen_area_law)."
+ },
+ "thm:einstein": {
+  "env": "theorem",
+  "title": "Conditional Einstein closure",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/EinsteinClosure.lean:NCG.null_cone_polarization",
+   "NCG/Arithmetic/EinsteinClosure.lean:NCG.einstein_assembly",
+   "NCG/Arithmetic/EinsteinClosure.lean:NCG.newton_constant"
+  ],
+  "note": "Provable core proved: the key null-cone polarization (a symmetric bilinear form on Minkowski space whose quadratic form vanishes on every null vector equals B_00 * eta -- the passage from R_ab k^a k^b = (2pi/eta) T_ab k^a k^b for all null k to R_ab + Phi g_ab = (2pi/eta) T_ab), the assembly to the boxed Einstein equation G_ab + Lambda g_ab = c T_ab given the Bianchi identification Phi = -R/2 + Lambda (displayed), and the boxed coupling 8 pi G_N = 2 pi / eta <=> G_N = 1/(4 eta). Disclosed: the Raychaudhuri/Clausius input (assumptions (E1)-(E4): local Rindler horizons, Unruh temperature, dS = eta dA, dQ = T dS) and the divergence step from stress conservation and contracted Bianchi (E5) are the manuscript's conditional continuum hypotheses."
+ },
+ "ledger:spacetime-chain": {
+  "env": "ledger",
+  "title": "Spacetime chain",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:qutrit": {
+  "env": "theorem",
+  "title": "Nondegenerate qutrit completion",
+  "status": "proved",
+  "lean": [
+   "NCG.qutrit_algebra_top",
+   "NCG.qutrit_weyl",
+   "NCG.qutrit_traceless",
+   "NCG.qutritU",
+   "NCG.qutritV"
+  ],
+  "note": "NCG/Arithmetic/QutritCompletion.lean. The nine revision operators R_{(a,b)} = U^a V^b are realized by the clock/shift pair U = diag(1, omega, omega^2), V = cyclic shift, for a primitive cube root of unity (omega^3 = 1, 1 + omega + omega^2 = 0 - the concrete form of the nondegenerate commutator bicharacter, disclosed). Proved: the Weyl commutation UV = omega VU (qutrit_weyl); tracelessness of the nontrivial revision operators (qutrit_traceless); and the boxed completion: the generated complex unital algebra is all of M_3(C) (qutrit_algebra_top, via the clock-average diagonal unit and shift words giving every matrix unit). The minimal faithful irreducible carrier is the three-dimensional column space and the C*-closure adds nothing in finite dimension (prose, disclosed)."
+ },
+ "warning:untitled--3": {
+  "env": "warning",
+  "title": "",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:hypercharge": {
+  "env": "theorem",
+  "title": "Hypercharge descent",
+  "status": "proved",
+  "lean": [
+   "NCG.hypercharge_descent",
+   "NCG.hypercharge_z6_kernel",
+   "NCG.smTable"
+  ],
+  "note": "NCG/Arithmetic/SMDescent.lean. The boxed generator Y = T_R^3 + (B-L)/2 reproduces the six Standard-Model hypercharges 1/6, -1/2, -2/3, 1/3, 1, 0 (hypercharge_descent, the six rational identities on the multiplet table smTable). The boxed Z_6 quotient: the element z = (e^{2 pi i/3} I_3, -I_2, e^{i pi/3}) acts trivially on every multiplet, rendered as the kernel congruence 6 | 2t + 3d + q with triality t, doublet flag d, and integer charge q = 6Y, verified for all six multiplets (hypercharge_z6_kernel). The group-quotient packaging of (SU(3) x SU(2) x U(1))/Z_6 and faithfulness of the quotient representation are prose (disclosed)."
+ },
+ "thm:anomaly": {
+  "env": "theorem",
+  "title": "Anomaly-free descended generation",
+  "status": "proved",
+  "lean": [
+   "NCG.ps_anomaly_cancellation"
+  ],
+  "note": "NCG/Arithmetic/SMDescent.lean. All five anomaly sums of the descended generation vanish exactly as displayed in the manuscript proof: SU(3)^3 (triplets vs antitriplets), SU(3)^2 U(1), SU(2)^2 U(1), U(1)_Y^3, and the mixed gravitational-U(1)_Y sum, plus the Witten mod-two condition (four SU(2)_L doublets, even) - ps_anomaly_cancellation (named to avoid clashing with the SM-emergence NCG.anomaly_cancellation). The sums are the manuscript's explicit rational identities over the multiplet table (disclosed rendering; no abstract representation-theoretic anomaly functor is constructed)."
+ },
+ "thm:coupling": {
+  "env": "theorem",
+  "title": "Conditional tree-level coupling relation",
+  "status": "proved",
+  "lean": [
+   "NCG.coupling_matching",
+   "NCG.coupling_dynkin"
+  ],
+  "note": "NCG/Arithmetic/SMDescent.lean. The common-trace index count (each Pati-Salam factor sees four fundamental-index units, normalized Dynkin index 4 x 1/2 = 2, coupling_dynkin) and the boxed relations: given the hypercharge inverse-square law 1/gY^2 = 1/g^2 + 2/(3g^2) (equal parent couplings g4 = gL = gR = g from the common trace, and the orthogonal-generator decomposition of Y - interface, disclosed), gY^2 = (3/5) g^2 and sin^2 theta_W = gY^2/(gL^2 + gY^2) = 3/8 at tree-level matching (coupling_matching). Threshold/running caveats are the manuscript's own warning (prose)."
+ },
+ "warning:untitled--4": {
+  "env": "warning",
+  "title": "",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:sm-chain": {
+  "env": "theorem",
+  "title": "Conditional gauge-descent theorem",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/GaugeChain.lean:NCG.sm_gauge_descent"
+  ],
+  "note": "Assembly proved: the entry data of the constituent proved records return in one conjunction the colour carrier generating M_3(C) (thm:qutrit), the Z_6 kernel congruence of the one-generation hypercharge table (thm:hypercharge), the five vanishing anomaly sums with even doublet count (thm:anomaly), and the coupling matching g_Y^2 = (3/5) g^2 with sin^2 theta_W = 3/8 (thm:coupling). Disclosed: the weak doublet factor, Pati-Salam typing, right-breaking source with stabilizer Y = T_R^3 + (B-L)/2, and the branch-blind BRST/Goldstone quotient (S2)-(S4) are the manuscript's structural entry assumptions; the quotient leaving the unbroken Lie algebra unchanged is prose."
+ },
+ "ledger:gauge-chain": {
+  "env": "ledger",
+  "title": "Gauge chain",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "thm:flagship": {
+  "env": "theorem",
+  "title": "Universal Grand Tensor Conditional Closure",
+  "status": "proved",
+  "lean": [
+   "NCG/Arithmetic/FlagshipClosure.lean:NCG.flagship_closure"
+  ],
+  "note": "Five-chain assembly proved: one theorem consuming the entry data of the five chains and returning their conclusions in one conjunction -- spectral (dis = 0 via cor:fixed-mod-grh), twin (twin pair via thm:twin-chain), Goldbach (representation via thm:gold-chain), spacetime (the Einstein equation via the proved null-cone polarization and assembly of thm:einstein), and gauge (M_3(C) colour generation and coupling matching sin^2 theta_W = 3/8 via thm:sm-chain constituents). Disclosed: mutual independence of the chains is the direct-sum firewall record; the port-tensor/Schur-short/retained-phase entrance data (U1)-(U4) are the architectural framing supplying each chain's displayed entry hypotheses; the spacetime chain's Clifford/Dirac/screen steps are the separately proved thm:clifford, thm:dirac-scaling, prop:screen-area records."
+ },
+ "openproblem:fixed-subcritical-spectral-mass-flux-estimate": {
+  "env": "openproblem",
+  "title": "Fixed-subcritical spectral mass--flux estimate",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "openproblem:selector-stable-additive-sign": {
+  "env": "openproblem",
+  "title": "Selector-stable additive sign",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "openproblem:quantitative-positive-support": {
+  "env": "openproblem",
+  "title": "Quantitative positive support",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "openproblem:interacting-modular-scaling": {
+  "env": "openproblem",
+  "title": "Interacting modular scaling",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "openproblem:microscopic-standard-model-loading": {
+  "env": "openproblem",
+  "title": "Microscopic Standard-Model loading",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ },
+ "lemma:physical-coupling-controls-a-gaussian-port": {
+  "env": "lemma",
+  "title": "Physical coupling controls a Gaussian port",
+  "status": "proved",
+  "lean": [
+   "NCG.physical_coupling_gaussian_port",
+   "NCG.physical_coupling_port",
+   "NCG.pair_port_bound",
+   "NCG.gauss_flux_bound",
+   "NCG.gaussF_fourier",
+   "NCG.gaussF"
+  ],
+  "note": "NCG/Arithmetic/GaussianPort.lean, following the manuscript proof exactly on the disclosed finite rendering of the finite measure space (finite index with weights lam_zeta >= 0, Bochner data x_zeta, coupled endpoints u_zeta, v_zeta; integrals are the weighted sums). Each coupled pair (+x at u, -x at v) has vanishing total mass and prefix field +-lam x 1_{[u ^ v, u v v)} of exact L2 norm lam ||x|| |u - v|^{1/2} (pair_totalMass, pair_stepPrefix, pair_step_norm), so the proved thm:mass-flux gives the per-pair port bound sqrt(Lambda) lam ||x|| |u-v|^{1/2} (pair_port_bound); Minkowski (the L2 triangle inequality over the pairs, via eLpNorm_sum_le) and Cauchy-Schwarz assemble ||C_F(mu_u - mu_v)||^2 <= Lambda (sum lam ||x||^2)(sum lam |u-v|) (physical_coupling_port). For the Gaussian port G_a the frequency profile is F G_a(xi) = e^{-4 pi^2 a xi^2} (gaussF_fourier) and the flux envelope is Lambda = sup (2 pi xi)^2 |F G_a|^2 = 1/(2 a e) (gauss_flux_bound, via y e^{-y} <= e^{-1}), giving the boxed bound with envelope 1/(2 a e) in the 2pi-normalized Fourier convention (physical_coupling_gaussian_port). In the manuscript's unitary convention the envelope carries the factor 2 pi (cf. the thm:mass-flux ledger note), so the constant reads 2 pi/(2 a e) = pi/(a e) - the boxed pi/(a e) (disclosed)."
+ },
+ "warning:untitled--5": {
+  "env": "warning",
+  "title": "",
+  "status": "statement_encoded",
+  "lean": [],
+  "note": "Declaration/bookkeeping environment; its formal counterparts are the hypothesis arguments of the theorems referencing it."
+ }
+}

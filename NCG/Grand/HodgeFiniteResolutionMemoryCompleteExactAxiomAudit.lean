@@ -1,0 +1,5 @@
+import NCG.Grand.HodgeFiniteResolutionMemoryCompleteExact
+
+#print axioms NCG.HankelFeedback.loadedScreen_rank_le
+#print axioms NCG.HankelFeedback.source_dynamic_residuals_iff_declared
+#print axioms NCG.HankelFeedback.hodge_finite_resolution_memory

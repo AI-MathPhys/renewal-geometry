@@ -1,0 +1,5 @@
+import NCG.Grand.A3DerivativeEnergyComparisonExact
+
+#print axioms NCG.A3DerivativeEnergyComparison.inner_derivativeVector
+#print axioms NCG.A3DerivativeEnergyComparison.norm_derivativeVector
+#print axioms NCG.A3DerivativeEnergyComparison.norm_derivative_le_of_energy_and_channel_error

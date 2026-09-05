@@ -1,0 +1,6 @@
+diff --git a/NCG/Grand/JointCommutatorDenseCoreConvergenceFromResidual.lean b/NCG/Grand/JointCommutatorDenseCoreConvergenceFromResidual.lean
+--- a/NCG/Grand/JointCommutatorDenseCoreConvergenceFromResidual.lean
++++ b/NCG/Grand/JointCommutatorDenseCoreConvergenceFromResidual.lean
+@@ -202 +202 @@
+-  · exact hsourceDiff.add (hconsistency y hy)
++  · simpa only [add_zero] using hsourceDiff.add (hconsistency y hy)

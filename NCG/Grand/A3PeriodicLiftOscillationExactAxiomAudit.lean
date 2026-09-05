@@ -1,0 +1,5 @@
+import NCG.Grand.A3PeriodicLiftOscillationExact
+
+#print axioms NCG.A3PeriodicLiftOscillation.abs_floor_sub_le
+#print axioms NCG.A3PeriodicLiftOscillation.index_integer_path
+#print axioms NCG.A3PeriodicLiftOscillation.abs_lift_sub_le_spatial_mesh_bound

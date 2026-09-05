@@ -1,0 +1,8 @@
+import NCG.Grand.FiniteGeneratorCommunicationExact
+
+/-! Standard-axiom audit for the singleton-safe generator communication predicate. -/
+
+#print axioms NCG.FiniteGeneratorCommunication.isCommunicating_of_subsingleton
+#print axioms NCG.FiniteGeneratorCommunication.isCommunicating_of_isIrreducibleMetzler
+#print axioms NCG.FiniteGeneratorCommunication.isIrreducibleMetzler_of_isCommunicating
+#print axioms NCG.FiniteGeneratorCommunication.isCommunicating_iff_isIrreducibleMetzler

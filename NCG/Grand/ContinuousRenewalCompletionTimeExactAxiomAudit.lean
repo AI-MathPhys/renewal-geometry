@@ -1,0 +1,5 @@
+import NCG.Grand.ContinuousRenewalCompletionTimeExact
+
+#print axioms NCG.ContinuousRenewalCompletion.canonicalStageMeasure_isProbability
+#print axioms NCG.ContinuousRenewalCompletion.continuous_completion_time_and_physical_event_intensity
+

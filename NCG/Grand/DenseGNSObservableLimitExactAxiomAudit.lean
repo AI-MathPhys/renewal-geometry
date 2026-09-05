@@ -1,0 +1,6 @@
+import NCG.Grand.DenseGNSObservableLimitExact
+
+#print axioms NCG.DenseGNSObservableLimit.exists_unique_bounded_observable_limit
+#print axioms NCG.DenseGNSObservableLimit.positive_norm_of_lowerLimitAtLeast
+#print axioms NCG.DenseGNSObservableLimit.nonscalar_of_centered_vacuum_liminf
+#print axioms NCG.DenseGNSObservableLimit.StarPolynomial.relation_persists

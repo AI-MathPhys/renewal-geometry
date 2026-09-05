@@ -1,0 +1,6 @@
+import NCG.Grand.CoarseCTMCPathKLPythagorasExact
+
+#print axioms NCG.DrivenProcess.CoarsePathKL.coarse_path_KL_pythagoras
+#print axioms NCG.DrivenProcess.CoarsePathKL.initialFibreKL_nonneg
+#print axioms NCG.DrivenProcess.CoarsePathKL.integrated_destination_KL_nonneg
+#print axioms NCG.DrivenProcess.CoarsePathKL.integrated_internal_KL_nonneg

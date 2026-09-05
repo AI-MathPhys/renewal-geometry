@@ -1,0 +1,3 @@
+import NCG.Grand.A3DiscreteUnitBallCompactnessExact
+
+#print axioms NCG.A3DiscreteUnitBallCompactness.exists_uniformly_convergent_extensions_on_ball

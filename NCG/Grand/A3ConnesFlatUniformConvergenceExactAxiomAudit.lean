@@ -1,0 +1,4 @@
+import NCG.Grand.A3ConnesFlatUniformConvergenceExact
+
+#print axioms NCG.A3ConnesFlatUniformConvergence.eventually_uniform_connes_flat_error
+#print axioms NCG.A3ConnesFlatUniformConvergence.tendsto_distanceError_zero

@@ -1,0 +1,4 @@
+import NCG.Grand.FiniteDiracCalibratedUnitaryCurveExact
+
+#print axioms NCG.FiniteDiracCalibratedUnitaryCurveExact.calibratedUnitaryCurve_recovers_generator
+#print axioms NCG.FiniteDiracCalibratedUnitaryCurveExact.finiteSpectralization_dirac_controlled_unitary_tangent

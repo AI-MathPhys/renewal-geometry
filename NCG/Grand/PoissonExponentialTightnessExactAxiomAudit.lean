@@ -1,0 +1,6 @@
+import NCG.Grand.PoissonExponentialTightnessExact
+
+#print axioms NCG.PoissonExponentialTightness.poisson_exponential_moment
+#print axioms NCG.PoissonExponentialTightness.poissonUpperTail_le_chernoff
+#print axioms NCG.PoissonExponentialTightness.poissonUpperTail_linear_exponential
+#print axioms NCG.PoissonExponentialTightness.poissonUpperTail_exponentially_tight

@@ -1,0 +1,3 @@
+import NCG.Grand.A3ConnesFlatUpperComparisonExact
+
+#print axioms NCG.A3ConnesFlatUpperComparison.eventually_connesDistance_le_flat_with_smoothing_error

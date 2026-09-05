@@ -1,0 +1,11 @@
+import NCG.Grand.HolonomyWordAlgebraExact
+
+#print axioms NCG.HolonomyWordAlgebra.wordValue_append
+#print axioms NCG.HolonomyWordAlgebra.continuous_wordValue
+#print axioms NCG.HolonomyWordAlgebra.wordEntry_singleton
+#print axioms NCG.HolonomyWordAlgebra.wordEntry_nil
+#print axioms NCG.HolonomyWordAlgebra.wordEntry_cons
+#print axioms NCG.HolonomyWordAlgebra.wordEntry_inverse
+#print axioms NCG.HolonomyWordAlgebra.wordEntry_mem_matrixEntryAlgebra
+#print axioms NCG.HolonomyWordAlgebra.wordAlgebra_eq_matrixEntryAlgebra
+#print axioms NCG.HolonomyWordAlgebra.closure_gaugeAverage_wordAlgebra

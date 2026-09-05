@@ -1,0 +1,8 @@
+import NCG.Grand.FiniteCTMCNonexplosionExact
+
+#print axioms NCG.FiniteCTMCNonexplosion.expMeasure_real_Ioi_one
+#print axioms NCG.FiniteCTMCNonexplosion.uniform_holdingTail_lower_bound
+#print axioms NCG.FiniteCTMCNonexplosion.ae_condExp_holdingExceedance_lower_bound
+#print axioms NCG.FiniteCTMCNonexplosion.ae_cumulativePhysicalHold_tendsto_atTop
+#print axioms NCG.FiniteCTMCNonexplosion.jumpSequenceLaw_nonexplosiveHoldingSet_eq_one
+#print axioms NCG.FiniteCTMCNonexplosion.jumpSequenceLaw_admissibleJumpSequenceSet_eq_one

@@ -1,0 +1,7 @@
+import NCG.Grand.BivectorRotationCommutantExact
+
+#print axioms NCG.BivectorRotationCommutant.spatial_commutant_scalar
+#print axioms NCG.BivectorRotationCommutant.block_mul_doubledRotation
+#print axioms NCG.BivectorRotationCommutant.block_doubledRotation_mul
+#print axioms NCG.BivectorRotationCommutant.rotation_commutant_scalar_blocks
+#print axioms NCG.BivectorRotationCommutant.scalarBlocks_commutes_doubledRotation

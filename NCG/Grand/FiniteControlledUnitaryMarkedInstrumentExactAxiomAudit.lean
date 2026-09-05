@@ -1,0 +1,4 @@
+import NCG.Grand.FiniteControlledUnitaryMarkedInstrumentExact
+
+#print axioms NCG.exists_controlledUnitary_isFiniteFirstReturnInstrument
+#print axioms NCG.controlledUnitary_markedInstrument_choiCertificate

@@ -1,0 +1,5 @@
+import NCG.Grand.FiniteRootGraphAveragingExact
+
+#print axioms NCG.FiniteRootGraphAveraging.graphLipschitz_probability_average_le_one
+#print axioms NCG.FiniteRootGraphAveraging.graphLipschitz_translate
+#print axioms NCG.FiniteRootGraphAveraging.probability_convolution_preserves_unit_ball

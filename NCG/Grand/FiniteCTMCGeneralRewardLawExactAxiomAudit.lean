@@ -1,0 +1,11 @@
+import NCG.Grand.FiniteCTMCGeneralRewardLawExact
+
+/-! Standard-axiom audit for the general physical empirical reward law. -/
+
+#print axioms NCG.FiniteCTMCGeneralRewardLaw.physicalRewardLaw_eq_liftedRewardLaw
+#print axioms NCG.FiniteCTMCGeneralRewardLaw.physicalRewardLaw_isProbabilityMeasure
+#print axioms NCG.FiniteCTMCGeneralRewardLaw.integrable_exp_physicalRewardLaw
+#print axioms NCG.FiniteCTMCGeneralRewardLaw.integral_exp_physicalRewardLaw_eq_pathMoment
+#print axioms NCG.FiniteCTMCGeneralRewardLaw.integral_exp_physicalRewardLaw_pos
+#print axioms NCG.FiniteCTMCGeneralRewardLaw.tendsto_scaled_log_integral_exp
+#print axioms NCG.FiniteCTMCGeneralRewardLaw.hasLargeDeviationPrinciple

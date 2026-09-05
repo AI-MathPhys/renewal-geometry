@@ -1,0 +1,7 @@
+import NCG.Grand.FiniteCTMCAdditiveRewardMeasurabilityExact
+
+#print axioms NCG.FiniteCTMCAdditiveRewardMeasurability.measurable_natIndexedEvaluation
+#print axioms NCG.FiniteCTMCAdditiveRewardMeasurability.measurable_fixedJumpCountAdditiveReward
+#print axioms NCG.FiniteCTMCAdditiveRewardMeasurability.measurable_finiteHorizonAdditiveReward
+#print axioms
+  NCG.FiniteCTMCAdditiveRewardMeasurability.measurable_normalizedFiniteHorizonAdditiveReward

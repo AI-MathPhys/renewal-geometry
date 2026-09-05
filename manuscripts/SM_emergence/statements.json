@@ -1,0 +1,1375 @@
+{
+  "def:renewal-experiment": {
+    "env": "definition",
+    "title": "Renewal experiment",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "definition:predictive-equivalence-and-sufficient-algebra": {
+    "env": "definition",
+    "title": "Predictive equivalence and sufficient algebra",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:finite-selector": {
+    "env": "theorem",
+    "title": "Finite predictive selector",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:renewal-pressure": {
+    "env": "proposition",
+    "title": "Renewal subordination of the counting pressure",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:untitled": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
+  },
+  "thm:ucp-unit": {
+    "env": "theorem",
+    "title": "UCP inverse theorem",
+    "status": "proved",
+    "lean": [
+      "NCG.UCP.kadison_schwarz",
+      "NCG.UCP.pos_of_two_positive",
+      "NCG.UCP.ucp_inverse_automorphism"
+    ],
+    "note": "Proved on a finite matrix factor Matrix d d C, the setting of the predictive channel monoid: a unital 2-positive map (complete positivity restricted to the M2 amplification, encoded blockwise via fromBlocks) with a 2-positive two-sided inverse is multiplicative, star-preserving and bijective. Kadison-Schwarz is derived from the block certificate [[1,a],[a*,a*a]] = B*B >= 0 and the Schur defect; squeezing through the inverse forces Schwarz equality for every element, and polarization of the sesquilinear defect upgrades it to full multiplicativity. The inverse needs only 2-positivity: its unitality and star-preservation are derived from the inverse identities. General finite-dimensional C*-algebras are direct sums of matrix factors; the statement is recorded at the factor level."
+  },
+  "thm:projective-revision": {
+    "env": "theorem",
+    "title": "Projective revision theorem",
+    "status": "proved",
+    "lean": [
+      "NCG.projective_revision"
+    ],
+    "note": "NCG/Matter/QutritRevision.lean: for any additive family of invertible implementers on a matrix factor with Ad-composition Ad_Ra Ad_Rb = Ad_R(a+b), the Schur argument (central ratio => scalar, via Matrix.mem_range_scalar_iff_commute_single) produces a nowhere-zero scalar two-cocycle tau with R_a R_b = tau(a,b) R_(a+b), the cocycle identity, and the section-independent scalar commutator R_a R_b = (tau(a,b)/tau(b,a)) R_b R_a. Standard axioms only."
+  },
+  "warning:completely-positive-phase-firewall": {
+    "env": "warning",
+    "title": "Completely positive phase firewall",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "cor:odd-prime-projective-lift": {
+    "env": "corollary",
+    "title": "Odd-prime automatic projective lift",
+    "status": "proved",
+    "lean": [
+      "NCG.projDefect_mem_center_of_ad",
+      "NCG.projDefect_cocycle",
+      "NCG.commutator_R_add_left",
+      "NCG.RevisionFamily.commutator_eq",
+      "NCG.regauge_polar_invariant"
+    ],
+    "note": "TRIAGE covered. Same content as lorentzian_emergence:thm:spatial-multiplier-scalar-main, lorentzian_emergence:prop:projective-revision (proved there); Lean identifiers reused."
+  },
+  "cor:primitive-clifford": {
+    "env": "corollary",
+    "title": "Primitive complex Clifford factor",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:forced-Weyl": {
+    "env": "corollary",
+    "title": "Forced Weyl pair",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:revision-MUB": {
+    "env": "theorem",
+    "title": "Revision-line MUB theorem",
+    "status": "proved",
+    "lean": [
+      "NCG.qOmega",
+      "NCG.qX",
+      "NCG.qZ",
+      "NCG.qW",
+      "NCG.qW_mul",
+      "NCG.lineGen",
+      "NCG.mubProj",
+      "NCG.mubProj_idem",
+      "NCG.mubProj_herm",
+      "NCG.mubProj_trace",
+      "NCG.mubProj_orth",
+      "NCG.mubProj_sum",
+      "NCG.mubProj_cross_trace",
+      "NCG.lineGen_commutant"
+    ],
+    "note": "NCG/Matter/QutritWeyl.lean + QutritMUB.lean: the concrete clock-shift pair with omega = e^(2 pi i/3) (ZX = omega XZ proved from the explicit 3x3 matrices), the Weyl-word calculus, and for each of the four projective lines (X, Z, XZ, XZ^2): the three spectral projectors are Hermitian idempotents of unit trace (rank one), mutually orthogonal, resolve the identity, and satisfy Tr(P_L,k P_M,l) = 1/3 for distinct lines (complete qutrit MUB set). Maximal abelianness is proved exactly: the commutant of each line generator is span{1, R_L, R_L^2} (Weyl-basis expansion + symplectic character kill). The head-to-frame assignment clause is the declared model layer. Standard axioms only."
+  },
+  "warning:frame-lift-firewall": {
+    "env": "warning",
+    "title": "Frame-lift firewall",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-relative-revision": {
+    "env": "theorem",
+    "title": "Relative-revision character theorem",
+    "status": "proved",
+    "lean": [
+      "NCG.relRev",
+      "NCG.relRev_mul",
+      "NCG.relRev_conjTranspose",
+      "NCG.relRev_bell",
+      "NCG.bellProj"
+    ],
+    "note": "NCG/Matter/QutritBell.lean: the relative revisions W_a = conj(R_a) (x) R_a form an honest F_3^2 representation (the scalar cocycles cancel in the tensor product: relRev_mul), are unitary with W_a-dagger = W_(-a), and the vectorized Weyl words are their joint eigenvectors with the symplectic character eigenvalues (relRev_bell, via the Kronecker-vec dictionary (B (x) A) vec X = vec (A X B^T)). The Bell projections are realized as the Fourier character sums (bellProj); their rank-one property follows from the nine-element eigenbasis (qW basis, proved linearly independent). Standard axioms only."
+  },
+  "cor:v5-bell-dephasing": {
+    "env": "corollary",
+    "title": "Source-local Bell dephasing",
+    "status": "proved",
+    "lean": [
+      "NCG.bellProj",
+      "NCG.bell_char_sum",
+      "NCG.relRev_twirl_eq_pinch"
+    ],
+    "note": "NCG/Matter/QutritBell.lean: the boxed dephasing identity E_Bell(A) = (1/9) sum_a W_a A W_a-dagger = sum_b Pi_b A Pi_b is proved exactly (relRev_twirl_eq_pinch) by double Fourier expansion and the F_3^2 character orthogonality sum (bell_char_sum): the diagonal collapse leaves exactly the W_a A W_(-a) terms of the twirl. The operational two-generator readout clause is the declared interpretation layer. Standard axioms only."
+  },
+  "thm:v5-orientation-doublet": {
+    "env": "theorem",
+    "title": "Minimal orientation-doublet theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:orientation-firewall": {
+    "env": "warning",
+    "title": "Orientation firewall",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:screen-adjoint-nogo": {
+    "env": "theorem",
+    "title": "Screen--adjoint no-go",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-hankel-descent": {
+    "env": "theorem",
+    "title": "Covariant Hankel descent",
+    "status": "proved",
+    "lean": [
+      "NCG.hankel_descent"
+    ],
+    "note": "NCG/Upstream/KalmanRealization.lean: covariant relabellings M_g H = H L_g preserve ker H, act isometrically on the intrinsic source inner product <Hp, Hq> when M_g is unitary, and the quotient dimension equals rank H (rank-nullity). The gauge-independence commentary is carried by the statement itself. Standard axioms only."
+  },
+  "thm:v5-rank-nine-erasure": {
+    "env": "theorem",
+    "title": "Rank-nine erasure source",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:v5-physical-relative-lifts": {
+    "env": "corollary",
+    "title": "Physical relative-revision lifts",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:predictive-hodge": {
+    "env": "theorem",
+    "title": "Predictive Hodge descent",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:no-relative-speed": {
+    "env": "corollary",
+    "title": "No sectorwise speed after common-origin descent",
+    "status": "proved",
+    "lean": [
+      "NCG.no_relative_speed"
+    ],
+    "note": "Proved in the finite matrix model: if the fermion coordinate maps C+ and C- are unitary identifications (isometry hypotheses C-^dagger C- = 1, C+^dagger C+ = 1 suffice), then B_F = C- dF C+^* has the transported Gram operator B_F^dagger B_F = C+ (dF^dagger dF) C+^dagger, and for every representation projection P the transported compression preserves its sectorwise Hilbert-Schmidt norm: Tr((B_F P~)^dagger (B_F P~)) = Tr((dF P)^dagger (dF P)) with P~ = C+ P C+^dagger. Hence relative source-residue speed factors equal one (prose). The surrounding Conditional note (existence of the predictive-covariance intertwiners) concerns thm:predictive-hodge upstream, not this corollary."
+  },
+  "ledger:upstream-status": {
+    "env": "ledger",
+    "title": "Upstream status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:ordered-path-action": {
+    "env": "theorem",
+    "title": "Ordered-path Dirichlet identity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:action-marginality": {
+    "env": "theorem",
+    "title": "Cutoff-free action marginality",
+    "status": "proved",
+    "lean": [
+      "NCG.actionScale",
+      "NCG.marginality_vanishes",
+      "NCG.marginality_diverges",
+      "NCG.marginality_critical",
+      "NCG.action_marginality_selects"
+    ],
+    "note": "TRIAGE proved (Phase 3 singleton basket, 2026-07-30). Sorry-free, standard axioms. The full continuum-limit trichotomy proved: the canonically normalized action scales as (h^4/h^D) c with c > 0 the curvature integral; for D < 4 the limit vanishes (marginality_vanishes), for D > 4 the action diverges to infinity (marginality_diverges, via tendsto_inv_nhdsGT_zero), and at D = 4 it is identically c (marginality_critical); hence a finite nonzero limit with no inserted cutoff power forces D = 4 and d = 3 (action_marginality_selects). The identification of the plaquette sum with the F^2 integral (the O(h^4) smooth-defect estimate) is the disclosed lattice-approximation layer."
+  },
+  "thm:absolute-gauge-normalization": {
+    "env": "theorem",
+    "title": "Unit-lapse gauge normalization",
+    "status": "proved",
+    "lean": [
+      "NCG.weak_index_one_generation",
+      "NCG.colour_index_one_generation",
+      "NCG.hypercharge_index_one_generation",
+      "NCG.gauge_coupling_normalization"
+    ],
+    "note": "NCG/Matter/GaugeNormalization.lean: the one-generation Dynkin index sums are computed exactly — four weak doublets give I2 = 2, four colour triplets give I3 = 2, and the hypercharge square sum over the fifteen Weyl components (6 x 1/6, 3 x 2/3, 3 x -1/3, 2 x -1/2, 1 x -1) gives I_Y = 10/3 — and the boxed normalization g^2 I = 2 iff g^2 = 2/I is proved. The identification of the bosonic action with the extensive expected odd-record count per normalized lapse (fixing the constant 2) is the declared normalization input. Standard axioms only."
+  },
+  "warning:scope-of-the-absolute-boundary": {
+    "env": "warning",
+    "title": "Scope of the absolute boundary",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:b1-three": {
+    "env": "theorem",
+    "title": "Rank-three cycle fibre",
+    "status": "proved",
+    "lean": [
+      "NCG.finrank_k4_H1",
+      "NCG.k4_H1_equiv",
+      "NCG.finrank_k4_coboundary_ker",
+      "NCG.k4Coboundary"
+    ],
+    "note": "Proved: with the cellular coboundary d : C^0(K_4;C) -> C^1(K_4;C), (df)_{ij} = f_j - f_i on the six oriented edges i < j (NCG.k4Coboundary over the concrete edge type), the kernel of d is the one-dimensional space of constants (connectivity, NCG.finrank_k4_coboundary_ker), so by rank-nullity b_1(K_4) = dim C^1/im d = 6 - (4 - 1) = 3 (NCG.finrank_k4_H1) and the generation fibre K = H^1(K_4;C) is linearly isomorphic to C^3 (NCG.k4_H1_equiv). Unconditional graph cohomology, exactly as the manuscript audit notes; the physical interpretation of K as a generation fibre is the renewal identification discussed there."
+  },
+  "thm:k4-representation": {
+    "env": "theorem",
+    "title": "Sign-twisted standard representation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:democratic-scalar": {
+    "env": "corollary",
+    "title": "Democratic scalar obstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v4-decomp": {
+    "env": "theorem",
+    "title": "Multiplicity-free Klein decomposition",
+    "status": "proved",
+    "lean": [
+      "NCG.kleinPattern",
+      "NCG.klein_separating",
+      "NCG.kleinK1",
+      "NCG.kleinK2"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. Character form: the joint eigenvalue patterns of the two Klein involutions on the rank-three carrier are three distinct nontrivial characters separating the lines. The identification of the K4 cycle action with these characters is the graph-carrier layer. The multiplicity-free endomorphism algebra End_{V4}(K_gen) = C^3 is the direct consequence of the three separating characters (klein_separating)."
+  },
+  "interpretation:untitled": {
+    "env": "interpretation",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
+  },
+  "lem:constant-sign-bipartite": {
+    "env": "lemma",
+    "title": "Constant signing and bipartiteness",
+    "status": "proved",
+    "lean": [
+      "NCG.k4_constant_not_coboundary"
+    ],
+    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The K4 content: the constant edge cochain on K4 is not a coboundary ([c] != 0), decided over all two-colourings. The general constant-coboundary-iff-bipartite equivalence for arbitrary connected graphs is the remaining general-graph layer."
+  },
+  "thm:unique-antibalanced-class": {
+    "env": "theorem",
+    "title": "Unique nonzero tetrahedrally invariant sign class",
+    "status": "proved",
+    "lean": [
+      "NCG.antibalanced_invariant_iff",
+      "NCG.antibalanced_orbit_transitive",
+      "NCG.antibalanced_card",
+      "NCG.antibalanced_middle_card"
+    ],
+    "note": "Proved in the face-parity encoding used by the manuscript proof: switching classes of K_4 are the eight even-weight vectors in F_2^4 (parities of the four triangular faces, NCG.antibalanced_card), S_4 permutes the four coordinates; the S_4-invariant classes are exactly 0 and the all-ones vector [c] (NCG.antibalanced_invariant_iff), and the remaining six weight-two vectors form a single transitive orbit O_6 (NCG.antibalanced_orbit_transitive, NCG.antibalanced_middle_card) -- the boxed decomposition {0} + {[c]} + O_6 and H^1(K_4;F_2)^{S_4} = {0,[c]}. The identification of face parities with switching classes / H^1(K_4;F_2) is the standard Zaslavsky signed-graph correspondence, cited as standard by the manuscript."
+  },
+  "thm:signed-tetrahedral-spectra": {
+    "env": "theorem",
+    "title": "Signed tetrahedral spectra",
+    "status": "proved",
+    "lean": [
+      "NCG.unsignedK4",
+      "NCG.antibalancedK4",
+      "NCG.mixedK4",
+      "NCG.unsignedK4_eigen_top",
+      "NCG.unsignedK4_eigen_low",
+      "NCG.antibalancedK4_eigen_bot",
+      "NCG.antibalancedK4_eigen_high",
+      "NCG.mixedK4_eigen_third",
+      "NCG.mixedK4_eigen_neg_third",
+      "NCG.mixedK4_eigen_sqrt",
+      "NCG.mixedK4_eigen_neg_sqrt",
+      "NCG.k4_spectra_distinct"
+    ],
+    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. All three switching-orbit spectra certified by complete eigenbases: explicit eigenvector equations for {1, -1/3^3} (trivial), {-1, 1/3^3} (antibalanced [c]), and {+-sqrt(5)/3, +-1/3} (mixed representative), with pairwise-distinct eigenvalues (so the exhibited quadruples are the full spectra in dimension four). Perron criticality rho = 1 holds exactly for {0, [c]}."
+  },
+  "cor:canonical-signed-cover": {
+    "env": "corollary",
+    "title": "Canonical connected critical cover",
+    "status": "proved",
+    "lean": [
+      "NCG.mixed_radius_subcritical",
+      "NCG.k4_spectra_distinct",
+      "NCG.Multigraph.signedCover_connected_of_ne_zero"
+    ],
+    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The mixed orbit has strict Perron deficiency (every eigenvalue modulus <= sqrt(5)/3 < 1), so criticality + connectedness select [c] uniquely; connectedness of the [c]-cover is the pre-existing signedCover_connected_of_ne_zero."
+  },
+  "thm:nerve-torsor": {
+    "env": "theorem",
+    "title": "Nerve torsor for anti-balanced cell phases",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory."
+  },
+  "thm:global-perron-selection": {
+    "env": "theorem",
+    "title": "Finite-volume Perron selection of the global class",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:oriented-edge-quotient": {
+    "env": "theorem",
+    "title": "Oriented-edge predictive quotient",
+    "status": "proved",
+    "lean": [
+      "NCG.oriented_edge_separation",
+      "NCG.oriented_edge_quotient"
+    ],
+    "note": "NCG/Matter/GaugeNormalization.lean: distinct terminal oriented edges of K4 have distinct one-step future laws (kernel-checked over all pairs, including each reversed pair), so under the last-edge assumption (ass:last-edge-law, the declared hypothesis) two nontrivial histories have identical future laws iff they share the terminal oriented edge: the predictive quotient is canonically E(K4) oriented. Standard axioms only."
+  },
+  "thm:family-protected-carrier": {
+    "env": "theorem",
+    "title": "Family-wide protection of the circulation carrier",
+    "status": "proved",
+    "lean": [
+      "NCG.transferT",
+      "NCG.transfer_carrier_eigen",
+      "NCG.K4Carrier"
+    ],
+    "note": "TRIAGE proved (K4 cluster, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The whole incidence-local covariant transfer family T_{w,b} acts on the antisymmetric divergence-free circulation carrier by the scalar w - b, for every (w, b) — the carrier is an invariant three-dimensional eigenspace, and its orthogonal isotypic complement statement follows from invariance."
+  },
+  "thm:exact-oriented-carrier": {
+    "env": "theorem",
+    "title": "Exact protected amplitude carrier",
+    "status": "proved",
+    "lean": [
+      "NCG.bZeroZ",
+      "NCG.bZero_annihilator",
+      "NCG.carrier_in_kernel",
+      "NCG.carrier_independent",
+      "NCG.carrier_kernel_complete"
+    ],
+    "note": "NCG/Matter/OrientedCarrier.lean: the explicit 12x12 nonbacktracking operator B0 of K4 satisfies its claimed characteristic polynomial (B0-2)(B0-1)^3(B0+1)^2(B0^2+B0+2)^3 = 0 (kernel-checked integer decide-certificate), and the boxed kernel claim is proved exactly: the three harmonic triangle injections J alpha lie in Ker(B0-1), are independent, and every kernel vector is a combination of them (explicit pseudo-inverse certificate 2P(B0-1) = 2(1-N)), so Ker(B0-I) = J H^1(K4) has dimension exactly three. The algebraic-multiplicity display for the remaining eigenvalue factors and the S4-isotypic decomposition are the declared remainder. Standard axioms only."
+  },
+  "thm:stabilizer-port-frame": {
+    "env": "theorem",
+    "title": "Exact \\(1+2\\) stabilizer decomposition and port frame",
+    "status": "proved",
+    "lean": [
+      "NCG.stabilizer_port_frame",
+      "NCG.pW2_projector",
+      "NCG.port_gram",
+      "NCG.port_sum",
+      "NCG.sign_rep",
+      "NCG.port_covariant",
+      "NCG.pcyc_equivariant",
+      "NCG.port_eq",
+      "NCG.pcyc_idem",
+      "NCG.pcyc_herm",
+      "NCG.pcyc_trace",
+      "NCG.harmonic_faceSign",
+      "NCG.stabilizer_invol"
+    ],
+    "note": "NCG/Matter/StabilizerPortFrame.lean, all over the explicit rational 6×6 harmonic projector pcyc of the proof (edges ordered 01,02,03,12,13,23). Boxed frame identity Σ_j q0j q0j* = (3/4)·P_{W2} proved exactly (stabilizer_port_frame), with P_{W2} = pcyc − (1/3)h'h'* for the unnormalized circulation h' = √3·h = (0,0,0,1,−1,1). Gram numbers ‖q0j‖² = ⟪q0j,q0j⟫ = 1/2 and ⟪q0j,q0k⟫ = −1/4, and q01+q02+q03 = 0 (port_gram, port_sum; norms stated as Hermitian dot products). The 1+2 decomposition H¹|S₃ ≅ sgn ⊕ W₂ is rendered in projector form: pcyc and pW2 are Hermitian idempotents of trace 3 and 2, pW2 annihilates h', both signed stabilizer generators u12, u23 (involutions) act by −1 on h', commute with pcyc, and permute the port frame (sign_rep, pW2_projector, pcyc_equivariant, port_covariant). Deviations: ports named port01/port02/port03 in Lean (q0j clashes with A2Frame); h used unnormalized (h = h'/√3 disclosed); abstract S₃-module irreducibility of W₂ is not formalized — the frame identity is verified entrywise rather than via Schur, and the trace values witness the dimensions."
+  },
+  "cor:sequential-flag": {
+    "env": "corollary",
+    "title": "Sequential generation flag",
+    "status": "proved",
+    "lean": [
+      "NCG.hcyc",
+      "NCG.hcyc_orthogonal",
+      "NCG.flag_heavy_line",
+      "NCG.flag_block_action",
+      "NCG.q01_mem",
+      "NCG.hcyc_mem"
+    ],
+    "note": "TRIAGE proved (S4 layer, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The canonical flag: the opposite cycle h spans the heavy line (orthogonal to all ports, eigenvalue a under the flag operator), and the port operator acts on the standard plane by the exact 2x2 block [[b/2, -b/4], [-c/4, c/2]] in the (q01, q02) frame — the first port lifts one line, the second the remaining line."
+  },
+  "thm:two-cell-splitting": {
+    "env": "theorem",
+    "title": "Even/odd triplet splitting",
+    "status": "proved",
+    "lean": [
+      "NCG.two_cell_splitting",
+      "NCG.finrank_twoCellH1",
+      "NCG.isCompl_H1",
+      "NCG.finrank_H1even",
+      "NCG.finrank_H1odd",
+      "NCG.ker_cellD",
+      "NCG.cellT_cellD"
+    ],
+    "note": "NCG/Matter/TwoCellSplitting.lean. The two-cell graph (K4 on {0,1,2,3} union K4 on {0,1,4,5} sharing edge 01) is encoded by its eleven ordered edges (cellEnds); H1(G2;C) is the cokernel of the explicit coboundary cellD, and finrank H1 = 6 = 11 - 6 + 1 is proved via ker d = constants (connectivity) plus rank-nullity and the quotient-dimension formula (finrank_twoCellH1). The cell-exchange involution (2<->4, 3<->5) acts on edges with no orientation flips (cellEnds_sigmaE, by decide), intertwines d (cellT_cellD), and descends to an involution cellTbar of H1 via Submodule.mapQ. Boxed splitting proved: IsCompl H1even H1odd (characteristic-zero averaging) with finrank H1even = finrank H1odd = 3 (two_cell_splitting). Deviation: the manuscript's equivariant-trace argument (traces 2,1,1 on C0,C1,H0) is replaced by an equivalent direct dimension count - the even edge subspace (dim 6, orbit coordinates) surjects onto H1even under the quotient map with kernel im d meet C1even = d(C0even) of dimension 3 (range_inf_even, finrank_range_inf_even), and dim H1odd follows from complementarity; disclosed in the module docstring."
+  },
+  "thm:shared-edge-sandwich": {
+    "env": "theorem",
+    "title": "Shared-edge cross Gram and chiral sandwich",
+    "status": "proved",
+    "lean": [
+      "NCG.cross_gram",
+      "NCG.shared_edge_sandwich",
+      "NCG.gram_JA",
+      "NCG.gram_JB",
+      "NCG.normalizer_squares"
+    ],
+    "note": "NCG/Matter/SharedEdgeSandwich.lean. The flag basis (h, u, v) is realized by explicit real 11x3 embeddings: h the normalized face circulation, u = sqrt(2) q01, v the normalized W2-component of q02 orthogonal to u; J_B = J_A composed with the two-cell exchange sigmaE (imported from TwoCellSplitting). Proved: both embeddings are isometries (gram_JA/gram_JB) and the boxed cross Gram C = J_A^H J_B = diag(0, 1/2, 0) (cross_gram) - the overlap is exactly the shared-edge flag row (0, 1/sqrt2, 0). The boxed sandwich Y(M) = (I+C)^(1/2) M (I-C)^(-1/2) with (I+C)^(1/2) = diag(1, sqrt(3/2), 1) and (I-C)^(-1/2) = diag(1, sqrt2, 1) is proved on the doubled coefficient space with Gram metric G = [[I,C],[C,I]]: shared_edge_sandwich shows P+^H G diag(M,-M) P- = (I+C)^(1/2) M (I-C)^(-1/2) for the normalized even/odd triplets P+- = (I;+-I)[2(I+-C)]^(-1/2) (explicit diagonal normalizers; normalizer_squares certifies all four displayed square-root identities). Disclosures: 'sandwiching between the normalized triplets' is rendered as the G-metric adjoint pairing (P+^H G . P-), which reproduces the manuscript's boxed formula exactly; the Gram part is over R (real flag matrices) and the sandwich over C with the same diagonals; sqrt(3/2) is written sqrt6/2."
+  },
+  "prop:row-normalization-collapse": {
+    "env": "proposition",
+    "title": "Probability normalization destroys the fixed carrier on the irregular gluing",
+    "status": "proved",
+    "lean": [
+      "NCG.stochastic_fixed_constant",
+      "NCG.g2_strongly_connected",
+      "NCG.row_normalised_collapse",
+      "NCG.row_normalised_ones_fixed"
+    ],
+    "note": "NCG/Matter/RowCollapse.lean: the elementary Perron maximum principle is proved from scratch (stochastic_fixed_constant: a fixed vector of a nonnegative row-stochastic matrix with strongly connected positivity digraph is constant), the directed nonbacktracking graph of the shared-edge G2 complex (two K4 cells glued along {0,1}, 22 oriented edges) is proved strongly connected by kernel-checked forward/backward closures from the shared edge plus a path-extraction induction (g2_strongly_connected), and hence every fixed vector of the row-normalised T_{G2} (any nonnegative row-stochastic transition supported exactly on the nonbacktracking continuations) is constant: Ker(T-I) = C.1, dim = 1 (row_normalised_collapse, ones_fixed). The contrasting 6-dimensional fixed carrier JH^1(G2;C) of the unnormalised amplitude operator is the declared cohomological count b1(G2) = 6. Standard axioms only."
+  },
+  "ledger:recovered-k-4-amplitude-status": {
+    "env": "ledger",
+    "title": "Recovered \\(K_4\\) amplitude status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-pairwise-defect": {
+    "env": "theorem",
+    "title": "Exact pairwise-source defect",
+    "status": "proved",
+    "lean": [
+      "NCG.pairwise_defect",
+      "NCG.defect_distance",
+      "NCG.orthogonal_pairwiseSpan",
+      "NCG.kernel_eq_sign",
+      "NCG.muZ_fiber12",
+      "NCG.muZ_fiber13",
+      "NCG.muZ_fiber23",
+      "NCG.card_turn",
+      "NCG.norm_muVec_sq"
+    ],
+    "note": "NCG/Matter/PairwiseDefect.lean. Turns encoded as the subtype of ordered pairwise-distinct triples of Fin 4 (card 24, card_turn); mu(i,j,k) = sgn(i,j,k,l) implemented as the inversion parity of the four-term sequence with l the omitted vertex. L2(T) is EuclideanSpace C Turn; R_le2 is the sup of the ranges of the three coordinate-pair composition maps (functions of at most one coordinate are contained in these, so this matches the manuscript span). Boxed decomposition proved: (R_le2)-orthocomplement = C.mu (orthogonal_pairwiseSpan, via a 23-step two-term propagation chain in kernel_eq_sign), hence finrank R_le2 = 23 and IsCompl R_le2 (span{mu}) (pairwise_defect). E[mu|t_S] = 0 for the three coordinate pairs proved by decide as vanishing fiber sums (muZ_fiber12/13/23; proper subsets S of size <= 1 follow since such functions lie in the pairwise spans). The distance claim inf ||mu-f||_2 = 1 is stated in the manuscript's expectation normalization as IsLeast {(1/24)||mu-f||^2 : f in R_le2} 1 (defect_distance, with ||mu||^2 = 24 = norm_muVec_sq); the counting-vs-normalized inner product (1/24 weight) is the disclosed deviation."
+  },
+  "cor:v5-holistic-defect": {
+    "env": "corollary",
+    "title": "Exact holistic Hankel defect",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:coherence-before-squaring-firewall": {
+    "env": "warning",
+    "title": "Coherence-before-squaring firewall",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:edge-povm": {
+    "env": "theorem",
+    "title": "Tight tetrahedral edge POVM",
+    "status": "proved",
+    "lean": [
+      "NCG.edge_gram_sum",
+      "NCG.edge_gram_det",
+      "NCG.edge_gram_mul_inv",
+      "NCG.edge_gram_posdef",
+      "NCG.edge_povm_tight",
+      "NCG.edge_povm_unit"
+    ],
+    "note": "NCG/Matter/EdgePOVM.lean: for the explicit harmonic frame r_e of the six K4 edge lines, the Gram sum G0 = [[3,1,-1],[1,3,1],[-1,1,3]] with det 16 is verified (edge_gram_sum, edge_gram_det), G0 is positive definite via the explicit sum-of-squares x^2+(x+y)^2+(x-z)^2+(y+z)^2+y^2+z^2 (edge_gram_posdef, so the whitening G0^{-1/2} exists), and for ANY symmetric whitening S with S G0 S = 1 the boxed tightness sum_e u_e u_e^T = 2 I3 is proved (edge_povm_tight); each u_e is a unit vector since r_e^T G0^{-1} r_e = 1/2 for all six edges (edge_povm_unit, with the explicit inverse certified by edge_gram_mul_inv). Standard axioms only."
+  },
+  "prop:edge-M3": {
+    "env": "proposition",
+    "title": "Full generation algebra from edge lines",
+    "status": "proved",
+    "lean": [
+      "NCG.edge_M3",
+      "NCG.commute_sym_scalar"
+    ],
+    "note": "NCG/Matter/EdgeResponse.lean: for any symmetric whitening S G0 S = 1, every matrix commuting with the six edge projectors P_e = 2 S r_e r_e^T S is scalar: the commutation transports to the rational family r_e r_e^T G0^-1, the three coordinate edges give the identity, the six rank-one forms span Sym_3, and commuting with the symmetric basis forces a scalar. The generated unital *-algebra is therefore M_3(C) (Burnside from the trivial commutant). Standard axioms only."
+  },
+  "thm:response-isomorphism": {
+    "env": "theorem",
+    "title": "Edge-score/generation-response isomorphism",
+    "status": "proved",
+    "lean": [
+      "NCG.edgeSym",
+      "NCG.edge_response_iso",
+      "NCG.edge_response_bounds",
+      "NCG.edge_response_whitened"
+    ],
+    "note": "NCG/Matter/EdgeResponse.lean: the six rank-one edge forms are linearly independent and span Sym_3(R) (explicit inverse basis change), the whitened trace of R(z) is (sum z)/2 so centered scores map bijectively onto traceless symmetric operators, and the transported Hilbert-Schmidt metric obeys the exact bounds (1/8)|z|^2 <= |R(z)|_HS^2 <= (1/4)|z|^2 on centered scores via explicit sum-of-squares certificates ((z_e -+ z_opposite)^2 pairings). The HS norm transports through any symmetric whitening (trace cyclicity). Standard axioms only."
+  },
+  "cor:conductance-completeness": {
+    "env": "corollary",
+    "title": "Conductance-response completeness",
+    "status": "proved",
+    "lean": [
+      "NCG.conductance_completeness"
+    ],
+    "note": "NCG/Matter/EdgeResponse.lean: the six edge-conductance variations span the symmetric forms on the generation fibre; the common direction supplies the identity and centered variations supply every traceless self-adjoint response (direct corollary of the response isomorphism). Standard axioms only."
+  },
+  "interpretation:untitled--2": {
+    "env": "interpretation",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "TRIAGE record. Prose ledger/status/warning/computational-record item; tracked for coverage, not a provable mathematical statement. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
+  },
+  "thm:perron-response": {
+    "env": "theorem",
+    "title": "Local Perron response",
+    "status": "proved",
+    "lean": [
+      "NCG.perronP",
+      "NCG.perron_response_zero",
+      "NCG.perron_response_first",
+      "NCG.perron_response_hessian"
+    ],
+    "note": "NCG/Matter/PerronResponse.lean: the local Perron data of P_eta = (1-eta)I + (eta/6)J in exact jet form: 1^T/6 and 1 are the left/right Perron pair at rho = 1; l_1 = z_0/(6 eta) satisfies the first-order left-eigenvector jet equation with rho_1 = zbar and centering; and the second-order coefficient of log rho equals ((2-eta)/(6 eta))|z_0|^2, i.e. the boxed Hessian ((2-eta)/(6 eta))(I - Pi_6). The identification of the jets with the analytic derivatives of the simple Perron root is the standard perturbation dictionary (declared). Standard axioms only."
+  },
+  "thm:quark-source-CP": {
+    "env": "theorem",
+    "title": "Exact quark source spectrum and CP invariant",
+    "status": "proved",
+    "lean": [
+      "NCG.quark_source_hermitian",
+      "NCG.quark_source_charpoly",
+      "NCG.quark_commutator",
+      "NCG.quark_source_cp_invariant"
+    ],
+    "note": "NCG/Matter/QuarkSourceCP.lean: D_u and D_d are expressed in the rational edge-line (Gram) coordinates of the frame u12, u13, u23 (verified numerically similar to the projector form; all displayed quantities are basis-invariant). Proved exactly: G-Hermiticity of both sources (Hermiticity w.r.t. the frame inner product), the common characteristic polynomial lam(lam^2 - lam/2 - 3/8) for every lam (hence spec = {0, (1 -/+ sqrt7)/4}), the commutator matrix, and the boxed CP data det[D_u,D_d] = i/32 and Tr[D_u,D_d]^3 = 3i/32 (phase exactly +pi/2). The change of basis to the orthonormal frame and the CB/BC phase pairing selecting 1 +/- i are the declared inputs. Standard axioms only."
+  },
+  "warning:not-the-physical-ckm-matrix": {
+    "env": "warning",
+    "title": "Not the physical CKM matrix",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:k4-and-flavour-carrier-status": {
+    "env": "ledger",
+    "title": "K4 and flavour-carrier status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "warning:load-bearing-assumptions": {
+    "env": "warning",
+    "title": "Load-bearing assumptions",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "lem:algebra-enumeration": {
+    "env": "lemma",
+    "title": "Bounded algebra enumeration",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:sector-irreducibility": {
+    "env": "lemma",
+    "title": "Sector accessibility implies irreducibility",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:dirac-connectivity": {
+    "env": "proposition",
+    "title": "Conditional Dirac connectivity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:pseudoreal-pair": {
+    "env": "lemma",
+    "title": "Pseudoreal pair",
+    "status": "proved",
+    "lean": [
+      "NCG.pseudoreal_pair",
+      "NCG.epsilonW"
+    ],
+    "note": "Proved: for the quaternionic antiunitary epsilon_W = i sigma_2 K on the weak doublet ((h1,h2) -> (conj h2, -conj h1), NCG.epsilonW) and every nonzero H, the partner H~ = epsilon_W H satisfies <H, H~> = 0 and epsilon_W H~ = -H. The closing sentence (the pair exhausts the doublet, giving exactly two independent weak-singlet contraction directions) is the dimension count dim_C W = 2 noted in the docstring."
+  },
+  "thm:minimal-diagram": {
+    "env": "theorem",
+    "title": "Conditional minimal charged diagram",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:three-generation-assembly": {
+    "env": "theorem",
+    "title": "Three-generation assembly",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:assoc-gen-no-go": {
+    "env": "proposition",
+    "title": "Associative generation no-go",
+    "status": "conditional_interface",
+    "lean": [
+      "NCG.kronSpan",
+      "NCG.kronAlgebra",
+      "NCG.kronSpan_mul_mem",
+      "NCG.kronSpan_conjTranspose_mem",
+      "NCG.kronAlgebra_inv_mem",
+      "NCG.inv_mem_of_isUnit"
+    ],
+    "note": "Supporting layer proved (archived thm:generation-transparency, NCG.kronAlgebra and the Kronecker closure lemmas): the product forms sum X_k (x) F_k are a subalgebra of the bipartite matrix algebra closed under sums, products, adjoints and Feshbach inverses, so the identically-represented finite factors cannot create generation-space structure. Open: packaging this as the stated invariance claim (no invariant of pi(a) (x) I_N distinguishes the multiplicity N)."
+  },
+  "thm:gauge-group": {
+    "env": "theorem",
+    "title": "Faithful Standard-Model gauge group",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE medium (~1-3 days). Self-contained Lean development on existing Mathlib/NCG infrastructure; no missing theory. Physlib defines GaugeGroupI = SU(3)xSU(2)xU(1) with its Z6 subgroup and quotient (Particles/StandardModel/Basic.lean); the kernel computation matches."
+  },
+  "thm:anomalies": {
+    "env": "theorem",
+    "title": "One-generation anomaly cancellation",
+    "status": "proved",
+    "lean": [
+      "NCG.anomaly_su3_sq_u1",
+      "NCG.anomaly_su2_sq_u1",
+      "NCG.anomaly_u1_cubed",
+      "NCG.anomaly_grav_u1",
+      "NCG.anomaly_witten_doublets"
+    ],
+    "note": "NCG/Matter/SMEasyV5.lean: the SU(3)^2 U(1), SU(2)^2 U(1), U(1)^3 and grav-U(1) anomaly sums of one generation vanish exactly, and the number of weak doublets is even (Witten anomaly). Standard axioms only."
+  },
+  "thm:yukawa-slots": {
+    "env": "theorem",
+    "title": "Structural Yukawa theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE encode-only. Definitional/scoping statement: encode as a Lean structure/def (statement_encoded target); no proof obligation beyond faithful encoding. RECLASSIFIED statement_encoded (2026-07-31): non-theorem record (hypothesis/condition declaration, construction, definition, principle, bookkeeping ledger, computational display, open problem, or interpretive note) — there is no theorem content awaiting proof; the record declares an interface, scope, or datum. Where the declared objects are used by proved theorems, their formal encoding is carried by the Lean hypotheses of those theorems (see the referencing records)."
+  },
+  "warning:untitled--2": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:finite-matter-and-gauge-status": {
+    "env": "ledger",
+    "title": "Finite matter and gauge status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "prop:five-channel-decomp": {
+    "env": "proposition",
+    "title": "Five-channel representation theorem",
+    "status": "proved",
+    "lean": [
+      "NCG.FiveChannel.edge_orthogonal",
+      "NCG.FiveChannel.colour_compl",
+      "NCG.FiveChannel.colour_orthogonal",
+      "NCG.FiveChannel.kronOne_ptr_adjoint",
+      "NCG.FiveChannel.finrank_colourSinglet",
+      "NCG.FiveChannel.finrank_colourTraceless",
+      "NCG.FiveChannel.five_channel_colour_count",
+      "NCG.FiveChannel.five_modules_orthogonal",
+      "NCG.FiveChannel.embFF_colour_orthogonal"
+    ],
+    "note": "Proved on the five-sector space H_F with weak x colour factorization on the flavoured sectors: modules supported on distinct oriented edges are HS-orthogonal (distinct central supports, edge_orthogonal), the four embedded support-tree modules are pairwise orthogonal (five_modules_orthogonal), and the F_R -> F_L edge block splits exactly and orthogonally along End(C^4) = 1 (+) 15 (colour_compl, colour_orthogonal via the HS-adjunction of W (x) 1 and the partial colour trace), with dimension counts |w||w'| and |w||w'|(|c|^2-1) — for weak doublets and SU(4) colour: (2,2,1) dim 4 and (2,2,15) dim 60. The SU(2)xSU(2)xSU(4) equivariance labels on the summands are the disclosed representation-theory layer."
+  },
+  "thm:horizontal-Julia": {
+    "env": "theorem",
+    "title": "Horizontal Julia first jet",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:no-unconditional-65-32-primitive-trace": {
+    "env": "warning",
+    "title": "No unconditional \\(65/32\\) primitive trace",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-nambu-compression": {
+    "env": "theorem",
+    "title": "Twenty-four-to-six Nambu compression",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:v5-pauli-volume": {
+    "env": "corollary",
+    "title": "Pauli-volume theorem",
+    "status": "proved",
+    "lean": [
+      "NCG.pauli_volume",
+      "NCG.nambuS3"
+    ],
+    "note": "Proved: for Pauli directions Delta_j = x_j . sigma, the cyclic Nambu bracket s_3(X,Y,Z) = X[Y,Z] + Y[Z,X] + Z[X,Y] evaluates exactly to 6i det[x1 x2 x3] I_2 (NCG.pauli_volume, entrywise polynomial identity over the explicit Pauli matrices). The concluding sentences (genuine oriented three-dimensional volume; linearly dependent directions are load bearing) are interpretive prose about the determinant."
+  },
+  "thm:v5-choi-lie": {
+    "env": "theorem",
+    "title": "Choi--Lie interaction-completeness theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-sign-response": {
+    "env": "theorem",
+    "title": "Canonical sign response",
+    "status": "proved",
+    "lean": [
+      "NCG.sign_response"
+    ],
+    "note": "NCG/Matter/SignResponse.lean. Full statement on a complex Banach space E with M, P : E →L[ℂ] E: given ‖M‖ ≤ θ < 1, P*M = M*P, P u = u, u ≠ 0, the unique solution v of v - M v = u (the resolvent image (I-M)⁻¹u, built via the Neumann-series unit Units.oneSub) satisfies P v = v, v ≠ 0, and ‖u‖²/(1+θ)² ≤ ‖v‖² ≤ ‖u‖²/(1-θ)² (the boxed energy bound). The commuting nuisance projection enters only through the modelling of u as the already-shorted source (prose); the trailing Krylov-rank/defect discussion (Δ_u, r_u, KMS positivity) is prose commentary outside the boxed theorem and is not formalized."
+  },
+  "thm:v5-block-hankel-packet": {
+    "env": "theorem",
+    "title": "Blind common-frame block-Hankel reconstruction",
+    "status": "proved",
+    "lean": [
+      "NCG.krylovMat",
+      "NCG.block_hankel_gram",
+      "NCG.block_hankel_rank",
+      "NCG.physical_source_uniqueness"
+    ],
+    "note": "NCG/Upstream/KalmanRealization.lean: the block-Hankel moment matrix (M_(i+j)) is exactly the Gram matrix of the stacked Krylov family [S, MS, ..., M^(d-1)S] (two-horizon entry identity), so rank H^pkt = dim span{M^j S P : j < d}; and the complete moment family determines (M, S) on the packet space up to one common unitary (physical_source_uniqueness, explicit Gram factorization). The Schur-complement defect display is the Schur machinery of NCG.schur_short. Standard axioms only."
+  },
+  "thm:bkm-hessian": {
+    "env": "theorem",
+    "title": "BKM path curvature",
+    "status": "proved",
+    "lean": [
+      "NCG.BKM.trace_exp_hasDerivAt",
+      "NCG.BKM.trace_exp_second_deriv",
+      "NCG.BKM.bkm_hessian",
+      "NCG.BKM.bkm_centering",
+      "NCG.BKM.bkm_integrand_nonneg"
+    ],
+    "note": "Duhamel/trace-exponential derivative calculus built from scratch (Mathlib has none): F(q) = Tr exp(A+qS) satisfies F'(q) = Tr(exp(A+qS) S) (term-by-term differentiation of the exponential series under summable bounds) and F''(0) = int_0^1 Tr(e^{(1-s)A} S e^{sA} S) ds, via the Beta evaluation int_0^1 (1-s)^k s^l ds = k!l!/(k+l+1)! (real_beta_convolution) and antidiagonal regrouping of the double exponential series. The centered form F''(0) = int Tr(rho^{1-s} St rho^s St) ds + Tr(rho S)^2 with rho^t := exp(tA), St = S - Tr(rho S) 1 is bkm_hessian, so psi''(0) = F''(0) - F'(0)^2 is the BKM integral; for Hermitian data the integrand is Tr(Z Z^H) >= 0 with Z = e^{(1-s)A/2} S e^{sA/2} (bkm_integrand_nonneg), proving nonnegativity. The path state enters as rho = exp A with Tr rho = 1 (A = log rho for the faithful state); the vanishing-iff-zero-score clause follows from the Z Z^H form and invertibility of exp and is left in prose."
+  },
+  "thm:fixed-reset-action": {
+    "env": "theorem",
+    "title": "Fixed-reset action",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:absolute-scale": {
+    "env": "warning",
+    "title": "Absolute scale",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:higgs-representation": {
+    "env": "theorem",
+    "title": "Conditional Higgs representation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:gauge-trace": {
+    "env": "theorem",
+    "title": "High-scale gauge trace relation",
+    "status": "proved",
+    "lean": [
+      "NCG.gauge_trace_weinberg"
+    ],
+    "note": "NCG/Matter/SMEasyV5.lean: with the common-trace normalization g1^2 = (3/5)g^2 the tree-level matching value sin^2 theta_W = 3/8 is proved. The trace relation itself comes from the proved Dynkin sums (NCG.hypercharge_index_one_generation). Standard axioms only."
+  },
+  "thm:single-spurion-hessian": {
+    "env": "theorem",
+    "title": "Single-spurion protection",
+    "status": "proved",
+    "lean": [
+      "NCG.spurionHessian",
+      "NCG.spurion_perp_orthogonal",
+      "NCG.perp_exact_eigenvector"
+    ],
+    "note": "PROVED (2026-07-30, block mechanics). The decoupling mechanism is formalized: the antisymmetric pairing r^dagger(eps rbar) vanishes identically (NCG.spurion_perp_orthogonal), and in the boxed block form the perpendicular combination H_perp is an exact eigenvector with eigenvalue m_H^2 (NCG.perp_exact_eigenvector on NCG.spurionHessian) — no portal copies or gauge-invariant spectral coefficients can rotate this line, since the boxed matrix is the general form. The SU(2)_R-covariance classification producing the boxed block form (the generated-invariants argument) is the declared representation-theoretic step, as in the manuscript proof."
+  },
+  "thm:v5-persistence": {
+    "env": "theorem",
+    "title": "Primitive persistence rigidity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "corollary:exact-ratio-status": {
+    "env": "corollary",
+    "title": "Exact ratio status",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:threshold-loss": {
+    "env": "theorem",
+    "title": "Heavy-threshold relative-entropy loss",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:threshold-and-portal-status": {
+    "env": "ledger",
+    "title": "Threshold and portal status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-triplet-nogo": {
+    "env": "theorem",
+    "title": "Rank-one invariant triplet no-go",
+    "status": "proved",
+    "lean": [
+      "NCG.triplet_nogo",
+      "NCG.triplet_nogo_annihilates",
+      "NCG.radial_expand"
+    ],
+    "note": "Proved: for any one-invariant right potential V_0(X) = F(Tr XX*) on M_{2x4}(C) with F differentiable with derivative F-prime and F-prime differentiable at the vacuum value u_0 (hypotheses hF1/hF2), stationary at the rank-one vacuum X_0 (F-prime(u_0) = 0), the stationary Hessian -- formalized as the mixed second derivative along the two-parameter slice X_0 + tY + sZ -- equals 4 F-second(u_0) (X_0,Y)_R (X_0,Z)_R (NCG.triplet_nogo, via the exact quadratic expansion NCG.radial_expand of the invariant). Hence the Hessian factors through the rank-one functional (X_0, .)_R and annihilates every direction orthogonal to X_0, in particular the complete physical triplet Delta_R (NCG.triplet_nogo_annihilates)."
+  },
+  "thm:v5-pair-triplet": {
+    "env": "theorem",
+    "title": "Strict tensor-square triplet lift",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:charge-transform": {
+    "env": "proposition",
+    "title": "Singlet--adjoint charge transform",
+    "status": "proved",
+    "lean": [
+      "NCG.charge_transform"
+    ],
+    "note": "NCG/Matter/SMEasyV5.lean: the singlet-adjoint transform Q = A - B/sqrt12, L = A + 3B/sqrt12 is inverted by A = (3Q+L)/4, B = (sqrt12/4)(L-Q), and the Parseval identity 3Q^H Q + L^H L = 4A^H A + B^H B holds (match_scalars matrix algebra with s^2 = 12). Standard axioms only."
+  },
+  "prop:radial-nonselection": {
+    "env": "proposition",
+    "title": "Radial nonselection",
+    "status": "proved",
+    "lean": [
+      "NCG.radial_nonselection",
+      "NCG.residueTrace"
+    ],
+    "note": "Proved: for nonzero profiles A_s^0, B_s^0 with residues Z_Phi^0 = sum_s Tr(A^dagger A) and 4 Z_Omega^0 = sum_s Tr(B^dagger B), and every p in (0,1), the rescaled family A_s(p) = sqrt((1-p)/Z_Phi^0) A_s^0, B_s(p) = sqrt(p/Z_Omega^0) B_s^0 has Z_Phi(p) = 1-p and Z_Omega(p) = p, while the normalized profiles A_s(p)/sqrt(Z_Phi(p)) = A_s^0/sqrt(Z_Phi^0) (and likewise for B) are unchanged -- hence so are ranks and singular subspaces, which are functions of the normalized profiles. The stated normalization Z_Phi^0 + Z_Omega^0 = 1 is not needed for these identities and is omitted; positivity of the two residues (nonzero profiles) is the hypothesis used. The interpretation sentence is prose."
+  },
+  "interpretation:untitled--3": {
+    "env": "interpretation",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:valuation-rigidity": {
+    "env": "theorem",
+    "title": "Valuation rigidity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "definition:rees-lift": {
+    "env": "definition",
+    "title": "Rees lift",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:neutral-rank-two": {
+    "env": "theorem",
+    "title": "Minimal neutral Dirac source",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:majorana-jet": {
+    "env": "theorem",
+    "title": "Majorana source as a second mixed jet",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:untitled--3": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:v5-physical-dark-criterion": {
+    "env": "theorem",
+    "title": "Physical dark-parity criterion",
+    "status": "proved",
+    "lean": [
+      "NCG.f2_fiber_card",
+      "NCG.charged_span_double_annihilator",
+      "NCG.dark_parity_criterion",
+      "NCG.dark_parity_count"
+    ],
+    "note": "NCG/Matter/DarkParity.lean: over any finite-dimensional F2 deck space, n admits a physical dark parity iff n not in S_ch iff some x in K_ch = S_ch-perp has n(x) = 1 (double-annihilator duality proved by a dimension count), and the number of such parities is 2^{b-r-1} (f2_fiber_card coset counting). Standard axioms only."
+  },
+  "cor:v5-s4-dark-nogo": {
+    "env": "corollary",
+    "title": "Full-symmetry dark no-go",
+    "status": "proved",
+    "lean": [
+      "NCG.s4_dark_nogo",
+      "NCG.invariant_line_unique",
+      "NCG.opposite_edge_tau",
+      "NCG.qF2_ker",
+      "NCG.qF2_equivariant"
+    ],
+    "note": "NCG/Matter/S4DarkNoGo.lean, all by decide over F2. H1(K4;F2) is realized by the explicit coordinate map qF2 : F2^6 -> F2^3 whose kernel is proved to be exactly the mod-2 coboundary space (qF2_ker), and the three adjacent vertex transpositions descend through qF2 to explicit matrices w01/w12/w23 (qF2_equivariant), so the S4-action on cohomology is derived rather than decreed. Proved: the opposite-edge relation [e]+[e-bar] = tau for the three opposite pairs (opposite_edge_tau); the triangle class tau = (1,1,1) spans the unique S4-invariant line (invariant_line_unique, which also gives the surrounding-text classification 0, <tau>, H1 of invariant subspaces); and the corollary proper: no plane {0,a,b,a+b} is invariant under all three generating transpositions (s4_dark_nogo), i.e. an exactly S4-covariant charged source cannot have charged rank two. The final clause (rank two is what would select one unique dark parity, via |K_ch| = 2) is the surrounding dark-parity dictionary and is interpretive prose, disclosed in the docstring."
+  },
+  "thm:v5-reduced-determinant": {
+    "env": "theorem",
+    "title": "Reduced determinant dark fork",
+    "status": "proved",
+    "lean": [
+      "NCG.reduced_determinant_fork"
+    ],
+    "note": "NCG/Matter/DarkParity.lean: at b = 3, |K_ch| = 2 iff dim S_ch = 2 and |K_ch| = 1 iff dim S_ch = 3 (cardinality = 2^{3-r}). The identification of the reduced determinant d_det with the fork is the declared certificate. Standard axioms only."
+  },
+  "thm:v5-odd-character-coset": {
+    "env": "theorem",
+    "title": "Odd-character coset theorem",
+    "status": "proved",
+    "lean": [
+      "NCG.odd_character_coset",
+      "NCG.odd_character_card"
+    ],
+    "note": "NCG/Matter/DarkParity.lean: the odd characters of a nonzero x form the coset n0 + x-perp of cardinality 2^{b-1} (= 4 at b = 3). The tau-labelled triangle/edge refinement and the m_dark sum are the declared model layer. Standard axioms only."
+  },
+  "thm:twisted-carrier": {
+    "env": "theorem",
+    "title": "Two-dimensional twisted carrier",
+    "status": "proved",
+    "lean": [
+      "NCG.twisted_carrier",
+      "NCG.finrank_edgeTwist_ker",
+      "NCG.finrank_triTwist_ker",
+      "NCG.edgeTwist_spectrum",
+      "NCG.edgeTwist_eigen_distinct",
+      "NCG.triTwist_spectrum",
+      "NCG.triTwist_eigen_independent",
+      "NCG.edgeTwistP_projector",
+      "NCG.triTwistP_projector",
+      "NCG.edgeTwistL_eq",
+      "NCG.triTwistL_eq",
+      "NCG.edgeTwistW_inv",
+      "NCG.triTwistW_inv",
+      "NCG.edgeTwist_ker_complete",
+      "NCG.triTwist_ker_complete"
+    ],
+    "note": "NCG/Matter/TwistedCarrier.lean. The two twist orbits are represented by explicit twisted incidences over C (edge order 01,02,03,12,13,23; edge column -1 at the tail, epsilon_e at the head): the edge twist (epsilon = -1 on 01) and the triangle twist (epsilon = -1 on 01, 02, 12). Boxed claims proved for both: dim_C H1(K4;L_n) = dim ker B_n = 2 via explicit kernel bases, a complete kernel parametrization, and a LinearEquiv to C^2 (finrank_edgeTwist_ker / finrank_triTwist_ker); the vertex-Hodge spectra {2, 4, 3-sqrt5, 3+sqrt5} and {2, 2, 2, 6} rendered as eigenvector certificates - four exhibited eigenvectors with PAIRWISE DISTINCT eigenvalues for the edge twist (edgeTwist_spectrum + edgeTwist_eigen_distinct, so the eigenbasis is complete), and three independent lambda = 2 eigenvectors plus one lambda = 6 eigenvector for the triangle twist (triTwist_spectrum + triTwist_eigen_independent); the boxed harmonic projector P_n = I - B^H (B B^H)^{-1} B computed explicitly: (BB^H) W = 1 certifies the inverse, the explicit rational matrices P_n equal I - B^H W B, are Hermitian idempotents with B P = 0, and fix the kernel basis (edgeTwistP_eq/edgeTwistP_projector and triangle versions). Disclosures: 'every nontrivial n' is rendered by the two orbit representatives (the seven twists fall into these two S4-orbits; conjugate twists have conjugate spectra); 'direct diagonalization' is rendered as eigenvector certificates; the trailing compressed-effect displays (F_{n,e} traces, HS commutators, C* = M2) are outside the theorem environment and not part of this record."
+  },
+  "thm:dark-parity": {
+    "env": "theorem",
+    "title": "Dark-parity selection rule",
+    "status": "proved",
+    "lean": [
+      "NCG.dark_parity_selection",
+      "NCG.leakage_commute",
+      "NCG.cross_block_zero",
+      "NCG.parity_sum"
+    ],
+    "note": "NCG/Matter/ParitySelection.lean. For a block-centre parity J with J^2 = 1 and resolved coefficients K_alpha: vanishing parity leakage epsilon = (1/4) Sum ||[J,K_alpha]||_HS^2 = 0 (stated via the real part of the trace form) forces every coefficient to commute with J (leakage_commute, via PosSemidef.trace_nonneg over ComplexOrder + trace_conjTranspose_mul_self_eq_zero_iff), whence with P_pm = (I pm J)/2: every visible-dark Dirac portal vanishes, P_+ K P_- = P_- K P_+ = 0; each coefficient is parity block diagonal K = P_+ K P_+ + P_- K P_-, so internal odd-odd (Majorana) blocks remain allowed; and the odd sector has no transition channel into the even sector, P_+ (K (P_- rho P_-) K^H) P_+ = 0, which is the operator content of absolute stability of the lightest odd state (dark_parity_selection). Deviations/disclosures: the premise clauses |K_ch| = 2 with loaded odd neutral character locate the theorem in the dark-parity dictionary and are interpretive prose; multiplicative-domain rigidity is taken in its leakage form (the hypothesis epsilon = 0 as displayed); kinematic 'lightest state' phrasing is rendered by the vanishing odd-to-even transition channel."
+  },
+  "thm:connected-slot-factorization": {
+    "env": "theorem",
+    "title": "Connected-slot M\\\"obius factorization",
+    "status": "proved",
+    "lean": [
+      "NCG.signedSum",
+      "NCG.deltaChain",
+      "NCG.connected_slot_factorization",
+      "NCG.deltaChain_norm_bound"
+    ],
+    "note": "TRIAGE proved (Phase 2, 2026-07-29). Sorry-free, standard axioms verified by #print axioms. The alternating subset sum over slot insertions telescopes into the connected product of slot defects L.DX1.A1...DXn.An (recursive on/off form of the Moebius sum), with the O(eps^n) record-order norm bound (d*c)^n when each local defect is O(eps)."
+  },
+  "thm:primitive-exhaustion": {
+    "env": "theorem",
+    "title": "Primitive class--bridge exhaustion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:primitive-cp-triangle": {
+    "env": "proposition",
+    "title": "Primitive CP-oriented triangle",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:conditional-ckm-order": {
+    "env": "theorem",
+    "title": "Conditional path-order completeness",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:charm-rigidity": {
+    "env": "proposition",
+    "title": "Same-channel charm-repair no-go",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "TRIAGE hard (~1-3 weeks). Needs a new self-contained mini-library (built in-repo, like PointwiseErgodic/SkolemNoether were), but no Mathlib-scale gap."
+  },
+  "thm:majorana-stopping": {
+    "env": "theorem",
+    "title": "Visible return and quadratic Majorana stopping",
+    "status": "proved",
+    "lean": [
+      "NCG.nb_return_length_one",
+      "NCG.nb_return_length_two",
+      "NCG.nb_return_length_three",
+      "NCG.nb_return_length_four",
+      "NCG.signed_sheet_return_iff_even",
+      "NCG.z4_phase_gamma_minus",
+      "NCG.z4_phase_gamma_plus",
+      "NCG.linear_return_cancellation",
+      "NCG.quadratic_majorana_amplitude"
+    ],
+    "note": "Both boxed claims proved. n_vis = 4: kernel-checked enumeration of nonbacktracking K4 walks from the oriented port (0,1) — no returns at lengths 1-2, exactly the two odd-length triangles at length 3 (opposite sheet by the parity lemma), exactly the two Hamiltonian cycles at length 4 (NCG/Matter/SignedReturn.lean). A_M = sqrt2 * 3^{-8}, n_seesaw = 8: the Z4 lift phases u(gamma-) = -1, u(gamma+) = +1 are computed, the exchange-even linear Read annihilates the linear return vector, and the quadratic Store amplitude is evaluated at q = 1/3 (NCG/Matter/MajoranaAmplitude.lean). Standard axioms only."
+  },
+  "cond:neutral-absolute-scale": {
+    "env": "theorem",
+    "title": "Conditional common-lapse absolute neutral scale",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:untitled--4": {
+    "env": "warning",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "definition:nested-spectral-flag": {
+    "env": "definition",
+    "title": "Nested spectral flag",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:flag-alignment-ckm": {
+    "env": "theorem",
+    "title": "Flag-alignment criterion for hierarchical quark mixing",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "interpretation:untitled--4": {
+    "env": "interpretation",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "prop:mass-hierarchy-not-mixing": {
+    "env": "proposition",
+    "title": "Mass hierarchy does not constrain relative-frame size",
+    "status": "proved",
+    "lean": [
+      "NCG.mass_hierarchy_not_mixing"
+    ],
+    "note": "Proved: for any prescribed singular values s_e, s_nu and any unitary V, there exist Yukawa matrices with singular value decompositions Y = U diag(s) W^dagger carrying exactly those values and with relative left frame U_e^dagger U_nu = V (constructed with U_e = W_e = W_nu = 1 and U_nu = V, exactly the manuscript construction). Hence a hierarchical charged-lepton spectrum alone imposes no constraint on the PMNS frame (prose)."
+  },
+  "definition:structured-lepton-anarchy": {
+    "env": "definition",
+    "title": "Structured lepton anarchy",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:alignment-transversality": {
+    "env": "theorem",
+    "title": "Alignment--transversality dichotomy",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "warning:what-has-not-been-proved": {
+    "env": "warning",
+    "title": "What has not been proved",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:hierarchy-versus-anarchy-status": {
+    "env": "ledger",
+    "title": "Hierarchy-versus-anarchy status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:flavour-and-neutral-status": {
+    "env": "ledger",
+    "title": "Flavour and neutral status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "prop:complete-multiplet": {
+    "env": "proposition",
+    "title": "Complete-multiplet invisibility in differences",
+    "status": "proved",
+    "lean": [
+      "NCG.complete_multiplet_invisibility",
+      "NCG.oneLoopInv"
+    ],
+    "note": "Proved: with the one-loop running alpha_i^{-1}(mu) = alpha_i^{-1}(M) + b_i/(2 pi) log(M/mu) (NCG.oneLoopInv, the logarithm as the running parameter L), a threshold shifting all coefficients by a common delta cancels identically from every pairwise inverse-coupling difference. The in-particular clause (cannot repair a weak-mixing mismatch at one loop) is interpretive prose about the differences."
+  },
+  "warning:external-means-external": {
+    "env": "warning",
+    "title": "External means external",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "prop:proton-selection": {
+    "env": "proposition",
+    "title": "Conditional absence of leading proton-decay slots",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:numerical-flavour-status": {
+    "env": "ledger",
+    "title": "Numerical flavour status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:dark-sector-status": {
+    "env": "ledger",
+    "title": "Dark-sector status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:gauge-not-matter": {
+    "env": "theorem",
+    "title": "Gauge tangent, zero matter tangent",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:all-jet-firewall": {
+    "env": "theorem",
+    "title": "All-jet central-support firewall",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:kraus-block-nogo": {
+    "env": "theorem",
+    "title": "Positive Kraus-block no-go",
+    "status": "proved",
+    "lean": [
+      "NCG.kraus_block_identity",
+      "NCG.kraus_block_nogo"
+    ],
+    "note": "NCG/Matter/SMEasyV5.lean: P_t T(P_s) P_t = sum (P_t K P_s)(P_t K P_s)^H for Hermitian idempotent projections, and vanishing of the sum forces every cross block P_t K_a P_s = 0 (trace/normSq argument). Standard axioms only."
+  },
+  "cor:stinespring-intertwining": {
+    "env": "corollary",
+    "title": "Stinespring support intertwining",
+    "status": "proved",
+    "lean": [
+      "NCG.stinespring_intertwining",
+      "NCG.cross_block_vanish",
+      "NCG.support_commute",
+      "NCG.kron_mul_stineV",
+      "NCG.stineV_mul"
+    ],
+    "note": "NCG/Matter/StinespringIntertwining.lean, building on the already-proved thm:kraus-block-nogo (kraus_block_identity/kraus_block_nogo in SMEasyV5.lean). Model: the Stinespring isometry of a Kraus family in a chosen orthonormal environment basis is the block-column matrix stineV K : Matrix (d x E) d with (stineV K)(i,alpha),j = (K alpha) i j, exactly V psi = Sum K_alpha psi (x) |alpha>. Given an orthogonal Hermitian idempotent resolution Sum P_s = 1 and support preservation of the channel (all cross compressions P_t T(P_s) P_t = 0 for s /= t), every cross block P_t K_alpha P_s vanishes (cross_block_vanish), every Kraus operator commutes with every support (support_commute), and the boxed intertwining (P_s (x) I_E) V = V P_s holds with the Kronecker product (stinespring_intertwining). The trailing clause is rendered as: every linear combination Sum c_alpha K_alpha of the frame commutes with every support, which covers environment measurement compressions and unitary Kraus-frame rotations (their Kraus operators are such combinations; disclosed interpretive reading). Uniqueness quantification over all Stinespring dilations is replaced by the canonical basis-built dilation for the given frame (disclosed)."
+  },
+  "thm:generator-cross-map": {
+    "env": "theorem",
+    "title": "Cross-support generator map",
+    "status": "proved",
+    "lean": [
+      "NCG.generator_cross_map",
+      "NCG.cross_map_frame_independent",
+      "NCG.gksl",
+      "NCG.jump_survives",
+      "NCG.end_kill",
+      "NCG.start_kill"
+    ],
+    "note": "NCG/Matter/GeneratorCrossMap.lean. The finite GKSL generator is fixed in a frame as gksl H V rho = -i[H,rho] + Sum (V rho V^H - (1/2){V^H V, rho}) on complex matrices. For Hermitian idempotent supports with P_t P_s = P_s P_t = 0, proved: (i) the boxed cross-map formula P_t L(P_s X P_s) P_t = Sum_alpha B_alpha X B_alpha^H with B_alpha = P_t V_alpha P_s (generator_cross_map, first conjunct; the Hamiltonian and anticommutator compressions vanish by the support-orthogonality kill lemmas end_kill/start_kill); (ii) the boxed effect A_{t<-s} = P_t L(P_s) P_t = Sum B_alpha B_alpha^H; (iii) A = 0 iff every microscopic jump has zero s->t block (via the already-proved kraus_block_nogo from SMEasyV5). Frame independence is rendered as cross_map_frame_independent: two GKSL frames presenting the same generator have identical cross-support Kraus forms (the manuscript's invariance-under-nonunique-frame claim). Complete positivity of X -> Sum B X B^H is manifest from the Kraus form and not separately restated (disclosed)."
+  },
+  "corollary:failure-of-accessibility-for-the-displayed-source": {
+    "env": "corollary",
+    "title": "Failure of accessibility for the displayed source",
+    "status": "proved",
+    "lean": [
+      "NCG.displayed_source_no_accessibility"
+    ],
+    "note": "NCG/Matter/GeneratorCrossMap.lean. Immediate from thm:generator-cross-map: a source whose jumps preserve the central supports (all cross blocks P_t V_alpha P_s = 0 for s /= t, the displayed block-preserving property, taken as hypothesis) has zero accessibility effect P_t L(P_s) P_t = 0 between any two distinct supports; in particular A_{L<-R} = A_{R<-L} = 0. That the DISPLAYED bare source satisfies the block-preserving hypothesis is the content of the surrounding firewall theorems (thm:all-jet-firewall, still conditional) and is not re-derived here; the final prose clause about prop:dirac-connectivity is interpretive."
+  },
+  "prop:vertical-independence": {
+    "env": "proposition",
+    "title": "Accessibility independence family",
+    "status": "proved",
+    "lean": [
+      "NCG.vertical_independence",
+      "NCG.vertDissipator_trace",
+      "NCG.vertDissipator_one",
+      "NCG.vertDissipator_symm",
+      "NCG.vertDissipator_label",
+      "NCG.vertDissipator_PR",
+      "NCG.vertDissipator_PL"
+    ],
+    "note": "NCG/Matter/VerticalIndependence.lean. The vertical family is encoded by its R->L movers G x (so F_{x,R} = G x, F_{x,L} = (G x)^H), with the exact identities of the displayed |x,L><x,R| (x) I4 operators taken as hypotheses: support P_L G P_R = G, resolutions Sum G G^H = P_L and Sum G^H G = P_R, orthogonal Hermitian idempotent supports with P_L + P_R = 1, and label commutation Q_y G_x = G_x Q_y (disclosed model choice). Proved: the dissipator D(rho) = Sum (G rho G^H + G^H rho G) - rho is trace preserving (vertDissipator_trace), unital (vertDissipator_one), tracially symmetric (vertDissipator_symm), and invisible to the classical diagonal label process, Tr(Q_y D(rho)) = 0 (vertDissipator_label; scalar accepted/rejected effects are the trace-preservation clause). Boxed accessibility effects: for L_lambda = L_bare + lambda D with charged-invisible bare part (hypotheses P_L L_bare(P_R) P_L = 0 etc., the preceding displayed corollary), the compressions are exactly lambda P_L and lambda P_R via D(P_R) = P_L - P_R and D(P_L) = P_R - P_L, and lambda P_L = 0 iff lambda = 0 (vertical_independence): charged accessibility absent at lambda = 0, present for every lambda > 0. Complete positivity of the Lindblad form is not restated (standard, outside the boxed claims)."
+  },
+  "interpretation:untitled--5": {
+    "env": "interpretation",
+    "title": "",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "thm:ternary-povm": {
+    "env": "theorem",
+    "title": "Ternary occurrence theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "op:primitive-odd": {
+    "env": "openproblem",
+    "title": "Primitive qutrit revision certificate",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "ledger:updated-primitive-boundary-status": {
+    "env": "ledger",
+    "title": "Updated primitive boundary status",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": ""
+  },
+  "cor:v6-two-word-qutrit": {
+    "env": "corollary",
+    "title": "Two physical cubic revisions suffice",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "V6 chain: two commuting physical cubic automorphisms with scalar joint fixed algebra on a source-loaded simple corner reproduce the fixed-qutrit conclusions; F_3^2 group argument. Not yet formalized."
+  },
+  "thm:v6-control-germ": {
+    "env": "theorem",
+    "title": "Analytic-germ finite reduction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "V6 chain: the connected control Lie algebra of an analytic switched family is the finite Lie closure of (iH0, i Ran Q+, i Ran Q-), with n^2 - 1 switch settings sufficing and Gram-rank termination. Not yet formalized."
+  },
+  "thm:v6-maslov": {
+    "env": "theorem",
+    "title": "Turn-Gram Maslov theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "V6 chain: turn-Gram invariance descends the turn action to the future range, K_mu transforms by the determinant character, and the positive Gram compression Q_mu >= 0 is the exact no-Maslov/loaded multiplicity certificate. Not yet formalized."
+  },
+  "thm:v6-first-return": {
+    "env": "theorem",
+    "title": "Operator-valued first-return reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "V6 chain: block-transfer first-return formula T_ret = C + A*(I-F)^{-1}A with kernels K_n = A*F^{n-2}A, geometric truncation error, and the moment recursion K_n = M_n - sum K_j M_{n-j}. Neumann-series matrix algebra; accessible with the existing certified-inversion patterns. Not yet formalized."
+  },
+  "cor:v6-birth-orders": {
+    "env": "corollary",
+    "title": "Linear jump birth and quadratic coherent birth",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "V6 chain: GKSL support-birth orders - dissipative birth is linear (jump-term derivative), block-preserving coherent rotation is quadratic tau^2 Tr(P_t H rho H P_t) + O(tau^3). Semigroup Taylor expansion at 0. Not yet formalized."
+  },
+  "thm:v6-comb-ideal": {
+    "env": "theorem",
+    "title": "Coherent-comb support-ideal theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "V6 chain: the block-diagonal coefficient algebra D is an ideal for all finite coherent network operations (composition, ancillas, feedback, postselection, order superposition); coherent control cannot create absent support transitions. Not yet formalized."
+  },
+  "thm:v6-profile-access": {
+    "env": "theorem",
+    "title": "Persistent-profile accessibility",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "V6 chain: nearest-empirical-profile coarse-graining of the length-n word POVM converges to the preserved sharp PVM at Hoeffding rate 2|A| exp(-n d_prof^2/(2|A|)). Needs concentration inequalities (Hoeffding + union bound) at operator level. Not yet formalized."
+  },
+  "cor:v6-confusability-spectrum": {
+    "env": "corollary",
+    "title": "Finite confusability spectrum",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "V6 chain: spectral radius of the quotient confusability map < 1 iff the confusability seminorm of Phi^n tends to 0, with peripheral eigenvector witness otherwise. Finite spectral decomposition. Not yet formalized."
+  },
+  "led:v6-access-hierarchy": {
+    "env": "ledger",
+    "title": "Operational hierarchy retained in the V6 chain",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Ledger table: operational access hierarchy retained in the V6 chain (status table, no proof obligation)."
+  },
+  "thm:v6-native-qubit": {
+    "env": "theorem",
+    "title": "Native qubit and multiplicity certificate",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": "V6 chain: the one-step coefficient algebra is M_2(C) iff dim = 4 and scalar center, with tensor carrier factorization and commutant dimension m^2; plus the rank-2 Choi-Lie covariance criterion. Wedderburn packaging; the dimension-count core is accessible. Not yet formalized."
+  },
+  "ledger:status-at-the-v46-pause": {
+    "env": "ledger",
+    "title": "Status at the V46 pause",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Ledger: status table at the V46 pause (no proof obligation)."
+  }
+}

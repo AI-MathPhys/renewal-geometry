@@ -1,0 +1,70 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs":
+ {"o": ["0bdcbd6a7ca16192.olean"],
+  "m": false,
+  "i": "1be5a0b9d7809a6e.ilean",
+  "c": "876f28822e20e6aa.c"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\Cli\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\Gametheory\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\checkdecls\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\QICLean\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\packages\\mathlib\\.lake\\build\\lib\\lean;C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\build\\lib\\lean c:\\Users\\googo\\.elan\\toolchains\\leanprover--lean4---v4.34.0-rc1\\bin\\lean.exe C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\..\\NCG\\Grand\\WeylTwirlExact.lean -o C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\build\\lib\\lean\\NCG\\Grand\\WeylTwirlExact.olean -i C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\build\\lib\\lean\\NCG\\Grand\\WeylTwirlExact.ilean -c C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\build\\ir\\NCG\\Grand\\WeylTwirlExact.c --setup C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\.lake\\build\\ir\\NCG\\Grand\\WeylTwirlExact.setup.json --json",
+   "level": "trace"},
+  {"message":
+   "../NCG/Grand/WeylTwirlExact.lean:102:10: `if_neg` has been deprecated: Use `ite_eq_right` instead",
+   "level": "warning"},
+  {"message":
+   "../NCG/Grand/WeylTwirlExact.lean:113:10: `if_neg` has been deprecated: Use `ite_eq_right` instead",
+   "level": "warning"},
+  {"message":
+   "../NCG/Grand/WeylTwirlExact.lean:114:10: `if_neg` has been deprecated: Use `ite_eq_right` instead",
+   "level": "warning"},
+  {"message":
+   "../NCG/Grand/WeylTwirlExact.lean:191:12: `if_pos` has been deprecated: Use `ite_eq_left` instead",
+   "level": "warning"},
+  {"message":
+   "../NCG/Grand/WeylTwirlExact.lean:193:28: `if_neg` has been deprecated: Use `ite_eq_right` instead",
+   "level": "warning"},
+  {"message":
+   "../NCG/Grand/WeylTwirlExact.lean:206:10: `if_pos` has been deprecated: Use `ite_eq_left` instead",
+   "level": "warning"},
+  {"message":
+   "../NCG/Grand/WeylTwirlExact.lean:222:45: `if_neg` has been deprecated: Use `ite_eq_right` instead",
+   "level": "warning"},
+  {"message":
+   "../NCG/Grand/WeylTwirlExact.lean:245:25: `if_true` has been deprecated: Use `ite_true` instead",
+   "level": "warning"},
+  {"message":
+   "../NCG/Grand/WeylTwirlExact.lean:259:15: `if_neg` has been deprecated: Use `ite_eq_right` instead",
+   "level": "warning"},
+  {"message":
+   "../NCG/Grand/WeylTwirlExact.lean:259:28: `if_neg` has been deprecated: Use `ite_eq_right` instead",
+   "level": "warning"}],
+ "inputs":
+ [["deps",
+   [["DependencyProbe/NCG:extraDep",
+     [["@DependencyProbe:extraDep", "00000000000006bb"]]],
+    ["imports",
+     [["Mathlib transitive imports (legacy)", "8c4ebe9d0e191956"],
+      ["Mathlib:importAllArts", "5f036c3d2971369e"],
+      ["NCG.Grand.RelEntropyKronExact transitive imports (legacy)",
+       "0321d2dd6ebb42ea"],
+      ["NCG.Grand.RelEntropyKronExact:importAllArts", "905c4381e54ff085"],
+      ["NCG.Grand.StinespringDilationExact transitive imports (legacy)",
+       "27d4ee0813cad44b"],
+      ["NCG.Grand.StinespringDilationExact:importAllArts",
+       "337cd7aadf511347"]]]]],
+  ["libs",
+   [["import dynlibs", "00000000000006bb"],
+    ["package external libraries", "00000000000006bb"],
+    ["module dynlibs", "00000000000006bb"],
+    ["module plugins", "00000000000006bb"]]],
+  ["Lean 4.34.0, commit 3447a668783dbce1a8fdb97101dd067687b2b418",
+   "421484e3e0c70198"],
+  ["C:\\Users\\googo\\Documents\\GitHub\\renewal-geometry\\DependencyProbe\\..\\NCG\\Grand\\WeylTwirlExact.lean",
+   "3071cf8f43e47e5c"],
+  ["options", "00000000000006bb"],
+  ["isModule: false", "feefd2a0d3a1847e"],
+  ["Module.name: NCG.Grand.WeylTwirlExact", "80634452db6b5d8a"],
+  ["Package.id?: (some DependencyProbe)", "7ab2874502847358"],
+  ["Module.leanArgs: #[]", "00000000000006bb"]],
+ "depHash": "28207544de0d9ed1"}

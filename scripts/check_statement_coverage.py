@@ -24,10 +24,16 @@ Statuses
                              scoped hypotheses, e.g. Archimedean order);
 - ``computer_certified``   : verified by a finite kernel-checked enumeration
                              (``decide``-style certificate);
-- ``statement_encoded``    : the object/statement is faithfully formalized as
-                             a Lean definition/structure (nothing to prove);
-- ``conditional_interface``: not formalized (currently unused: zero
-                             records carry this status);
+- ``statement_encoded``    : nothing to prove — either the object/statement
+                             is faithfully formalized as a Lean
+                             definition/structure, or the record is a
+                             declaration/bookkeeping environment (hypothesis,
+                             condition, construction, definition, principle,
+                             ledger, warning, interpretive note, open
+                             problem, computational display) whose formal
+                             counterparts are the hypothesis arguments of
+                             the proved theorems referencing it;
+- ``conditional_interface``: open mathematical content awaiting proof;
 - ``not_started``          : untriaged (kept at zero).
 
 Usage
@@ -53,9 +59,37 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 LEAN_DIR = ROOT / "NCG"
 
-MANUSCRIPTS = ("lorentzian_emergence", "renewal_emergence")
+MANUSCRIPTS = ("lorentzian_emergence", "renewal_emergence", "flagship",
+               "GR_emergence", "SM_emergence", "wavefunction",
+               "artithetic", "Gran-Tensor")
+
+# manuscripts whose .tex basename differs from the folder name
+TEX_BASENAMES = {"flagship": "flagship_theorems",
+                 "wavefunction": "wave_function",
+                 "Gran-Tensor": "gran_tensor"}
+
+# manuscripts whose source file is not named <base>.tex
+TEX_FILENAMES = {"artithetic": "arithmetic.txt"}
 
 ENVS = ("theorem", "proposition", "lemma", "corollary", "definition")
+
+# per-manuscript extra tracked environments (the flagship keys its
+# hypothesis ledger by labelled assumption environments; the downstream
+# papers use additional bespoke statement environments)
+EXTRA_ENVS = {
+    "flagship": ("assumption",),
+    "GR_emergence": ("hypothesis", "construction", "principle"),
+    "SM_emergence": ("condition", "construction", "principle",
+                     "interpretation", "openproblem", "conditionalresult",
+                     "ledger", "computationalrecord", "certificate",
+                     "status", "warning"),
+    "wavefunction": ("assumption", "principle", "interpretation"),
+    "artithetic": ("assumption", "openproblem", "ledger", "warning",
+                   "audit"),
+    "Gran-Tensor": ("countertheorem", "openproblem", "firewall",
+                    "assessment", "remark", "construction",
+                    "assumption", "principle"),
+}
 STATUSES = (
     "proved",
     "computer_certified",
@@ -64,15 +98,37 @@ STATUSES = (
     "not_started",
 )
 
-BEGIN_RE = re.compile(
-    r"\\begin\{(" + "|".join(ENVS) + r")\}(?:\[([^\]]*)\])?"
+# Environments whose mathematical content must eventually be backed by Lean.
+PROOF_ENVS = {
+    "theorem", "proposition", "lemma", "corollary",
+    "countertheorem", "conditionalresult",
+}
+
+DIFFICULTIES = {
+    "easy", "medium", "hard_finite_library", "hard_analytic_research",
+}
+
+BOOKKEEPING_NOTE = (
+    "Non-theorem environment (declaration/bookkeeping); formal counterparts "
+    "are the hypothesis arguments of the proved theorems referencing it, per "
+    "house policy."
 )
+
+def begin_re(envs: tuple[str, ...]) -> "re.Pattern":
+    return re.compile(
+        r"\\begin\{(" + "|".join(envs) + r")\}(?:\[([^\]]*)\])?"
+    )
+
+
 LABEL_RE = re.compile(r"\s*\\label\{([^}]+)\}")
 
 
 def manuscript_paths(name: str) -> tuple[Path, Path]:
     folder = ROOT / "manuscripts" / name
-    return folder / f"{name}.tex", folder / "statements.json"
+    if name in TEX_FILENAMES:
+        return folder / TEX_FILENAMES[name], folder / "statements.json"
+    base = TEX_BASENAMES.get(name, name)
+    return folder / f"{base}.tex", folder / "statements.json"
 
 
 def slugify(title: str) -> str:
@@ -81,11 +137,12 @@ def slugify(title: str) -> str:
     return slug or "untitled"
 
 
-def parse_manuscript(tex_file: Path) -> list[dict]:
+def parse_manuscript(tex_file: Path,
+                     envs: tuple[str, ...] = ENVS) -> list[dict]:
     text = tex_file.read_text(encoding="utf-8")
     records = []
     seen_keys: set[str] = set()
-    for m in BEGIN_RE.finditer(text):
+    for m in begin_re(envs).finditer(text):
         env, title = m.group(1), (m.group(2) or "").strip()
         # collect the labels immediately following \begin{env}[title]
         labels = []
@@ -111,7 +168,7 @@ def lean_identifiers() -> set[str]:
     decl_re = re.compile(
         r"^\s*(?:@\[[^\]]*\]\s*)?(?:private\s+|protected\s+|noncomputable\s+)*"
         r"(?:theorem|lemma|def|abbrev|structure|class|instance|inductive)\s+"
-        r"([A-Za-z0-9_'.]+)",
+        r"((?:[A-Za-z0-9_'.]|[^\x00-\x7F])+)",
         re.M,
     )
     names: set[str] = set()
@@ -125,7 +182,8 @@ def lean_identifiers() -> set[str]:
 
 def check_manuscript(name: str, names: set[str]) -> int:
     tex_file, status_file = manuscript_paths(name)
-    records = parse_manuscript(tex_file)
+    records = parse_manuscript(
+        tex_file, ENVS + EXTRA_ENVS.get(name, ()))
     status_map: dict[str, dict] = {}
     if status_file.exists():
         status_map = json.loads(status_file.read_text(encoding="utf-8"))
@@ -136,22 +194,66 @@ def check_manuscript(name: str, names: set[str]) -> int:
         if rec["key"] not in status_map:
             errors.append(f"missing status record: {rec['key']} "
                           f"({rec['env']} \"{rec['title']}\")")
+        elif name == "Gran-Tensor":
+            entry = status_map[rec["key"]]
+            if entry.get("env") != rec["env"]:
+                errors.append(
+                    f"environment mismatch for {rec['key']}: "
+                    f"manuscript={rec['env']}, ledger={entry.get('env')}")
+            if entry.get("title") != rec["title"]:
+                errors.append(
+                    f"title mismatch for {rec['key']}: "
+                    f"manuscript={rec['title']!r}, "
+                    f"ledger={entry.get('title')!r}")
     for key, entry in status_map.items():
         if key not in keys:
             errors.append(f"stale status record (not in manuscript): {key}")
         if entry.get("status") not in STATUSES:
             errors.append(f"invalid status for {key}: {entry.get('status')}")
+        if (name == "Gran-Tensor"
+                and entry.get("status") == "conditional_interface"
+                and entry.get("difficulty") not in DIFFICULTIES):
+            errors.append(
+                f"{key}: conditional interface requires a valid difficulty")
 
+    # theorem-bearing environments must back proved/certified/encoded
+    # statuses with Lean identifiers; declaration and bookkeeping
+    # environments (definitions, hypotheses, conditions, constructions,
+    # principles, ledgers, warnings, interpretive notes, open problems,
+    # computational displays) may be statement_encoded without one —
+    # their formal counterparts are the hypothesis arguments of the
+    # proved theorems that reference them.
     for key, entry in status_map.items():
-        if entry.get("status") in ("proved", "computer_certified",
-                                   "statement_encoded"):
-            if not entry.get("lean"):
+        lean = entry.get("lean", [])
+        if not isinstance(lean, list):
+            errors.append(f"{key}: lean evidence must be a list of identifiers")
+            continue
+        if entry.get("status") in ("proved", "computer_certified"):
+            if not lean:
                 errors.append(f"{key}: status {entry['status']} requires at "
                               "least one Lean identifier")
-            for ident in entry.get("lean", []):
-                if ident.split(".")[-1] not in names:
-                    errors.append(f"{key}: Lean identifier not found in NCG/: "
-                                  f"{ident}")
+        elif entry.get("status") == "statement_encoded":
+            if entry.get("env") in PROOF_ENVS and not lean:
+                errors.append(f"{key}: status statement_encoded on a "
+                              f"{entry.get('env')} requires at least one "
+                              "Lean identifier")
+        if entry.get("status") not in (
+                "proved", "computer_certified", "statement_encoded"):
+            continue
+        for ident in lean:
+            module, separator, declaration = ident.partition(":")
+            if module.endswith(".lean") and not (ROOT / module).exists():
+                errors.append(f"{key}: Lean module not found: {module}")
+            if separator:
+                short_name = declaration.split(".")[-1]
+                if short_name not in names:
+                    errors.append(
+                        f"{key}: Lean identifier not found in NCG/: {ident}")
+            elif not module.endswith(".lean"):
+                short_name = module.split(".")[-1]
+                if short_name not in names:
+                    errors.append(
+                        f"{key}: Lean identifier not found in NCG/: {ident}")
 
     counts = Counter(e["status"] for e in status_map.values())
     for s in STATUSES:
@@ -172,19 +274,22 @@ def check_manuscript(name: str, names: set[str]) -> int:
 
 def init_manuscript(name: str) -> int:
     tex_file, status_file = manuscript_paths(name)
-    records = parse_manuscript(tex_file)
+    records = parse_manuscript(
+        tex_file, ENVS + EXTRA_ENVS.get(name, ()))
     status_map: dict[str, dict] = {}
     if status_file.exists():
         status_map = json.loads(status_file.read_text(encoding="utf-8"))
     added = 0
     for rec in records:
         if rec["key"] not in status_map:
+            proof_bearing = rec["env"] in PROOF_ENVS
             status_map[rec["key"]] = {
                 "env": rec["env"],
                 "title": rec["title"],
-                "status": "conditional_interface",
+                "status": ("conditional_interface" if proof_bearing
+                           else "statement_encoded"),
                 "lean": [],
-                "note": "",
+                "note": "" if proof_bearing else BOOKKEEPING_NOTE,
             }
             added += 1
     ordered = {r["key"]: status_map[r["key"]] for r in records}

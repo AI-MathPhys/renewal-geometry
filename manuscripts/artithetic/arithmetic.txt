@@ -1,0 +1,3267 @@
+\documentclass[11pt,oneside]{report}
+\usepackage[margin=0.92in,headheight=15pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm,mathrsfs}
+\usepackage{booktabs,tabularx,longtable,array,multirow}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=green!40!black,urlcolor=blue!60!black]{hyperref}
+\usepackage[nameinlink,capitalise,noabbrev]{cleveref}
+\hypersetup{pdftitle={The Universal Grand Tensor: Conditional Closure Monograph V003},pdfauthor={Renewal Geometry Programme},pdfsubject={Rigorous conditional chains for arithmetic and renewal geometry},pageanchor=false}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{etoolbox}
+
+\allowdisplaybreaks
+\setlength{\parindent}{1.1em}
+\setlength{\parskip}{0.18em}
+\setlength{\emergencystretch}{3em}
+\raggedbottom
+
+\definecolor{ExactColor}{RGB}{24,110,72}
+\definecolor{CondColor}{RGB}{175,105,18}
+\definecolor{OpenColor}{RGB}{170,45,55}
+\definecolor{AuditColor}{RGB}{48,83,160}
+\definecolor{ExternalColor}{RGB}{91,64,148}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small The Universal Grand Tensor}
+\fancyhead[R]{\small Conditional Closure Monograph V003}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{openproblem}[theorem]{Open Problem}
+\newtheorem{ledger}[theorem]{Status Ledger}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{warning}[theorem]{Warning}
+\newtheorem{audit}[theorem]{Audit Finding}
+
+\crefname{assumption}{assumption}{assumptions}
+\Crefname{assumption}{Assumption}{Assumptions}
+\crefname{openproblem}{open problem}{open problems}
+\Crefname{openproblem}{Open Problem}{Open Problems}
+\crefname{ledger}{status ledger}{status ledgers}
+\Crefname{ledger}{Status Ledger}{Status Ledgers}
+\crefname{audit}{audit finding}{audit findings}
+\Crefname{audit}{Audit Finding}{Audit Findings}
+
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Torus}{\mathbb T}
+\newcommand{\Id}{\mathrm I}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\e}{\mathrm e}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Short}{\operatorname{Short}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Res}{\operatorname*{Res}}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1\right\rvert}
+\newcommand{\ip}[2]{\left\langle #1,#2\right\rangle}
+\newcommand{\BR}{\mathrm{BR}}
+\newcommand{\conn}{\mathrm{conn}}
+\newcommand{\spec}{\mathrm{spec}}
+\newcommand{\add}{\mathrm{add}}
+\newcommand{\ren}{\mathrm{ren}}
+\newcommand{\Sing}{\mathfrak S}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\StatusExact}{\textcolor{ExactColor}{\textsf{proved}}}
+\newcommand{\StatusExternal}{\textcolor{ExternalColor}{\textsf{external theorem}}}
+\newcommand{\StatusConditional}{\textcolor{CondColor}{\textsf{conditional}}}
+\newcommand{\StatusOpen}{\textcolor{OpenColor}{\textsf{open input}}}
+\newcommand{\StatusAudit}{\textcolor{AuditColor}{\textsf{audit/no-go}}}
+
+\newenvironment{statusbox}[2]{%
+  \par\medskip\noindent\begin{center}\begin{minipage}{0.95\textwidth}
+  \colorbox{#1!9}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\textbf{#2}}}\par\smallskip
+}{\end{minipage}\end{center}\medskip}
+\newcommand{\ExactBox}[1]{\begin{statusbox}{ExactColor}{Exact statement}#1\end{statusbox}}
+\newcommand{\ConditionalBox}[1]{\begin{statusbox}{CondColor}{Conditional closure}#1\end{statusbox}}
+\newcommand{\OpenBox}[1]{\begin{statusbox}{OpenColor}{Open input}#1\end{statusbox}}
+\newcommand{\AuditBox}[1]{\begin{statusbox}{AuditColor}{Audit and firewall}#1\end{statusbox}}
+
+\title{\Huge\textbf{The Universal Grand Tensor}\\[2mm]
+\Large A Conditional Closure Monograph for RH, GRH, Goldbach, Twin Primes,\\
+Renewal Spacetime, and Standard-Model Gauge Descent\\[4mm]
+\large Dedicated monograph V003}
+\author{Renewal Geometry Programme}
+\date{30 July 2026}
+
+\begin{document}
+\pagenumbering{roman}
+\maketitle
+
+\begin{abstract}
+This monograph extracts the stable mathematical core of the cumulative renewal--arithmetic programme into one standalone document.  The basic object is not the original one-variable shifted-correlation integral, whose zero-shift slice contains coefficients of type $\Lambda(n)^2$ and is therefore not an $L$-function frame.  The corrected object is an anchored, bi-reflected, normal--anomalous port tensor, together with its source-to-future Schur quotient.  Its anchor retains linear amplitudes; Fourier charge conjugation separates difference and sum constraints; Mellin reflection retains horizontal zero information; and Schur shorting removes scalar, diagonal, and record-erased nuisance directions before positivity is used.
+
+Exact theorems in the monograph recover Dirichlet and logarithmic-derivative ports, shifted-prime and Goldbach marginals, finite reflected Weil forms, ordered-factor prime projectors, source-conditioned Gaussian kernels, and the canonical mass--prefix-current descent.  These results are then assembled into rigorous \emph{conditional chains}: a cutoff-matched subcritical Gaussian estimate implies RH or GRH; a positive $P_1\cup P_2$ carrier together with a selector-stable M\"obius-current estimate implies twin primes or binary Goldbach; and a common mass--prefix packet controls any preassigned finite family of spectral and additive ports.
+
+The V002 expansion incorporates the type-correct primitive functional equation, exact imprimitive Euler corrections, a compactly supported twisted Mellin packet whose subpower growth implies Dirichlet GRH, and a separate PSWF compression route.  The latter is kept rigorously distinct from full Weil positivity: an exact radical-to-window leakage identity and a cluster--Feshbach theorem reduce it to graph-norm leakage and internal simple-even ordering.  A scalar-invariant two-channel Weyl theorem then records the critical-scale firewall: a leading positive scalar bulk carries no arithmetic spectral ordering.
+
+
+
+The V003 expansion adds the degree-resolved Goldbach--twin-prime machinery from the oriented two-form programme.  A squarefree Mellin product is identified exactly with generalized von Mangoldt degrees; its first two Taylor coefficients split into a prime atom and a squarefree-semiprime bulk.  A signed degree-three correction cancels the entire semiprime layer pointwise, while a bounded finite Cauchy bank realizes the positive $P_1\cup P_2$ carrier inside the phase-complete tensor.  Quantitative Li--Liu prime-or-semiprime inputs are separated from an explicitly labelled support-retaining audit hypothesis.  The resulting chains distinguish four logically different routes: signed degree separation, M\"obius cancellation on a positive $P_1\cup P_2$ carrier, semiprime-profile contraction, and the classical Hardy--Littlewood asymptotic.  First-moment Maynard data, local singular-series optimization, and positive/negative Mellin-temperature comparisons are proved insufficient by themselves.
+
+The same operator anatomy also appears in renewal spacetime and internal gauge reconstruction.  We prove the finite Clifford and qutrit algebra statements, then formulate conditional chains from retained Store--Read histories to a Lorentzian Dirac scaling limit, horizon thermodynamics, Einstein closure, and Pati--Salam-to-Standard-Model gauge descent.  These parallels are architectural, not logical implications between number theory and physics.  No proof of RH, GRH, Goldbach, twin primes, the Standard Model, or Einstein dynamics is claimed.  Every conclusion is labelled as exact, external, conditional, or open, and every conditional theorem lists the precise missing input.
+\end{abstract}
+
+\begin{center}
+\begin{tabularx}{0.96\textwidth}{@{}p{0.21\textwidth}Xp{0.20\textwidth}@{}}
+\toprule
+Layer & Meaning & Status notation\\
+\midrule
+Finite algebra and operator identities & Fourier marginals, reflection criteria, Schur shorts, source quotients, Clifford/qutrit relations & \StatusExact\\
+Standard analytic or geometric theorems & Explicit formula, Weil criterion, Raychaudhuri, Bisognano--Wichmann, anomaly formulae & \StatusExternal\\
+Closure chains & Implications from explicitly stated estimates or physical hypotheses & \StatusConditional\\
+Native estimates & Prime-side coercivity, parity breaking, continuum control, microscopic loading & \StatusOpen\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\tableofcontents
+\clearpage
+\hypersetup{pageanchor=true}
+\pagenumbering{arabic}
+
+\part{The phase-complete grand tensor}
+
+\chapter{Scope, logic, and the corrected object}
+
+\section{What is unified and what is not}
+
+The word \emph{unified} is used in a precise operator sense.  The same finite source may be interrogated by several preassigned ports, and these ports may be placed in one positive source-to-future Gram tensor.  Difference constraints, sum constraints, critical-line reflection, factor-depth grading, and physical Store--Read records then appear as typed projections of that tensor.  A common Schur short removes a common nuisance algebra.
+
+This does \emph{not} imply that an estimate in one sector automatically proves an estimate in another.  A reflected Mellin inequality is an order-one spectral statement, whereas a prime-pair lower bound is an order-two additive statement.  The Standard-Model and spacetime chains require physical representation and scaling hypotheses that are absent from the arithmetic tensor.
+
+\begin{theorem}[Direct-sum firewall]\label{thm:direct-sum-firewall}
+Let $\mathcal H=\mathcal H_1\oplus\mathcal H_2$ and let $T=T_1\oplus T_2\succeq0$.  Any coercive statement involving only the compression of $T$ to $\mathcal H_1$ is compatible with an arbitrary positive semidefinite operator on $\mathcal H_2$.  Consequently, positivity or coercivity of one typed block of a grand tensor cannot, without an intertwining theorem, force coercivity of another typed block.
+\end{theorem}
+
+\begin{proof}
+Fix $T_1$ satisfying the proposed estimate and choose any $T_2\succeq0$, including a singular or zero operator.  The compression of $T$ to $\mathcal H_1$ equals $T_1$ and is independent of $T_2$.  Therefore no conclusion about $T_2$ follows from the first compression alone.
+\end{proof}
+
+\section{Audit of the original one-variable tensor}
+
+For coefficient sequences $a_i,a_j$ and fixed integer $h$, consider
+\[
+ A_{ij,h}(x)=\sum_{\substack{n\le x\\n+h\ge1}}a_i(n)a_j(n+h)
+\]
+and
+\[
+ \mathbb T^{\rm old}_{ij}(s,h)
+ =\int_1^\infty A_{ij,h}(x)x^{-s-1}\dd x.
+\]
+
+\begin{proposition}[Abel reduction]\label{prop:old-abel}
+Assume $s\ne0$ and
+\[
+ \sum_{n\ge1}\abs{a_i(n)a_j(n+h)}n^{-\Re s}<\infty.
+\]
+Then
+\[
+ \boxed{
+ \mathbb T^{\rm old}_{ij}(s,h)
+ =\frac1s\sum_{\substack{n\ge1\\n+h\ge1}}
+ a_i(n)a_j(n+h)n^{-s}.}
+\]
+\end{proposition}
+
+\begin{proof}
+Absolute convergence permits Fubini.  The summand indexed by $n$ contributes for $x\ge n$, and
+\[
+ \int_n^\infty x^{-s-1}\dd x=\frac{n^{-s}}s.
+\]
+Summing over $n$ proves the formula.
+\end{proof}
+
+\begin{corollary}[The zero-shift slice is not an $L$-function frame]\label{cor:old-zero}
+For $a_i(n)=\Lambda(n)\rho_i(n)$,
+\[
+ \mathbb T^{\rm old}_{ij}(s,0)
+ =\frac1s\sum_{n\ge1}\Lambda(n)^2\rho_i(n)\rho_j(n)n^{-s}.
+\]
+This is neither $L(s,\rho_i)$ nor $-L'/L(s,\rho_i)$.  Without conjugating one coefficient it is not even a Hermitian Gram entry.
+\end{corollary}
+
+\begin{proof}
+Set $h=0$ in \Cref{prop:old-abel}.  The coefficient is $\Lambda(n)^2\rho_i(n)\rho_j(n)$, whereas a Hermitian Gram would contain $a_i(n)\overline{a_j(n)}$.
+\end{proof}
+
+\AuditBox{The corrected object needs four ingredients absent from the old tensor: an anchor for linear amplitudes, a normal and anomalous Fourier pair for difference and sum constraints, critical-line Mellin reflection, and a source-to-future quotient that removes nuisance directions before coercivity is tested.}
+
+\chapter{The anchored bi-reflected affine port tensor}
+
+\section{Finite-window ports}
+
+Let $\mathscr A$ be a finite typed port set.  For each $\alpha\in\mathscr A$, choose coefficients $a_\alpha(n)\in\C$, and let $w_X$ be finitely supported.  Define
+\begin{equation}\label{eq:port}
+ F_{\alpha,X}(s,\theta)
+ :=\sum_{n\ge1}a_\alpha(n)w_X(n)n^{-s}\e^{2\pi i n\theta},
+ \qquad (s,\theta)\in\C\times\Torus.
+\end{equation}
+Adjoin an anchor port $\star$ by $F_{\star,X}=1$.
+
+For a Dirichlet character $\chi$, extended by zero away from the units, the basic ports are
+\[
+ a_{\chi,L}(n)=\chi(n),\qquad
+ a_{\chi,P}(n)=\chi(n)\Lambda(n),\qquad
+ a_{\chi,\partial L}(n)=\chi(n)\log n.
+\]
+After removing the window and for $\Re s>1$,
+\[
+ F_{\chi,L}(s,0)=L(s,\chi),\qquad
+ F_{\chi,P}(s,0)=-\frac{L'}{L}(s,\chi),\qquad
+ F_{\chi,\partial L}(s,0)=-L'(s,\chi).
+\]
+
+Define Fourier charge conjugation and Mellin reflection by
+\[
+ (\mathcal CF)(s,\theta)=\overline{F(\bar s,\theta)},
+ \qquad
+ (\mathcal MF)(s,\theta)=F(1-\bar s,\theta).
+\]
+They commute and square to the identity.  Write
+\[
+ \mathfrak K=\{\Id,\mathcal C,\mathcal M,\mathcal M\mathcal C\}.
+\]
+
+\begin{definition}[Kinematic grand port tensor]\label{def:port-tensor}
+Order the vector
+\[
+ \bm\Phi_X(s,\theta)
+ =\left(1,\bigl(gF_{\alpha,X}(s,\theta)\bigr)_{\alpha\in\mathscr A,\,g\in\mathfrak K}\right)^{\mathsf T}.
+\]
+The anchored bi-reflected affine port tensor is
+\[
+ \boxed{
+ \mathbb T_X^{\BR}(s,\theta)
+ =\bm\Phi_X(s,\theta)\bm\Phi_X(s,\theta)^*.}
+\]
+\end{definition}
+
+\begin{proposition}[Positivity and anchor recovery]\label{prop:anchor}
+For every $(s,\theta)$, $\mathbb T_X^{\BR}(s,\theta)\succeq0$ and has rank at most one.  Its cross-entry against the anchor recovers each port value $F_{\alpha,X}$.
+\end{proposition}
+
+\begin{proof}
+The tensor is an outer product.  The $(\alpha,\star)$ entry equals $F_{\alpha,X}\overline{1}=F_{\alpha,X}$.
+\end{proof}
+
+\section{Normal and anomalous affine marginals}
+
+For real $\sigma$, define
+\begin{align*}
+ \mathcal D_{\alpha\beta,X}(h;\sigma)
+ &:={\int_0^1}F_{\alpha,X}(\sigma,\theta)
+ \overline{F_{\beta,X}(\sigma,\theta)}\e^{-2\pi i h\theta}\dd\theta,\\
+ \mathcal H_{\alpha\beta,X}(N;\sigma)
+ &:={\int_0^1}F_{\alpha,X}(\sigma,\theta)
+ F_{\beta,X}(\sigma,\theta)\e^{-2\pi i N\theta}\dd\theta.
+\end{align*}
+The second expression is a Hermitian tensor entry because, at real $\sigma$,
+$\overline{(\mathcal CF)(\sigma,\theta)}=F(\sigma,\theta)$.
+
+\begin{theorem}[Exact difference and sum selectors]\label{thm:marginals}
+For every integer $h$ and $N$,
+\begin{align*}
+ \boxed{
+ \mathcal D_{\alpha\beta,X}(h;\sigma)
+ =\sum_{m-n=h}
+ a_\alpha(m)\overline{a_\beta(n)}
+ w_X(m)\overline{w_X(n)}(mn)^{-\sigma},}\\
+ \boxed{
+ \mathcal H_{\alpha\beta,X}(N;\sigma)
+ =\sum_{m+n=N}
+ a_\alpha(m)a_\beta(n)
+ w_X(m)w_X(n)(mn)^{-\sigma}.}
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+Expand both finite sums.  In the normal block the phase integral is
+\[
+ \int_0^1\e^{2\pi i(m-n-h)\theta}\dd\theta,
+\]
+which is one exactly when $m-n=h$ and zero otherwise.  In the anomalous block the corresponding phase is $m+n-N$.
+\end{proof}
+
+\begin{corollary}[Twin and Goldbach ports]\label{cor:twin-gold-port}
+For the trivial character, $a_P(n)=\Lambda(n)$, and a window equal to one on the relevant range,
+\[
+ \mathcal D_{PP,X}(2;0)=\sum_{n\le X-2}\Lambda(n+2)\Lambda(n),
+\]
+while
+\[
+ \mathcal H_{PP,X}(N;0)=\sum_{m+n=N}\Lambda(m)\Lambda(n).
+\]
+Twin primes and Goldbach are therefore different typed projections of one tensor: a normal difference block and an anomalous sum block.
+\end{corollary}
+
+\section{Source-to-future grand tensors and Schur shorting}
+
+The rank-one tensor of \Cref{def:port-tensor} is the smallest kinematic case.  A physical or arithmetic history source generally has a Hilbert space $\mathcal S_X$, a finite port space $\mathcal P_X$, and a synthesis
+\[
+ S_X:\mathcal P_X\longrightarrow\mathcal S_X.
+\]
+Let $Q_X\succeq0$ be a preassigned future, reflection, or nuisance-short operator on $\mathcal S_X$.
+
+\begin{definition}[Universal source-to-port grand tensor]\label{def:grand}
+The grand tensor associated with $(S_X,Q_X)$ is
+\[
+ \boxed{
+ \mathbb G_X=S_X^*Q_XS_X\succeq0.}
+\]
+Its entries retain all pairwise phases among the selected ports before any record-erasing diagonalization.
+\end{definition}
+
+Suppose the port space is split into signal and nuisance components and
+\[
+ \mathbb G_X=
+ \begin{pmatrix}
+ A&B\\ B^*&C
+ \end{pmatrix}\succeq0.
+\]
+
+\begin{theorem}[Schur-short variational principle]\label{thm:schur}
+Assume $\Ran B^*\subseteq\Ran C$.  The canonical positive short of $\mathbb G_X$ to the signal space is
+\[
+ \boxed{
+ \Short_{\rm sig}(\mathbb G_X)=A-BC^\dagger B^*\succeq0,}
+\]
+where $C^\dagger$ is the Moore--Penrose inverse.  For every signal vector $x$,
+\[
+ \boxed{
+ \ip{x}{\Short_{\rm sig}(\mathbb G_X)x}
+ =\inf_y
+ \ip{(x,y)}{\mathbb G_X(x,y)}.}
+\]
+The minimizer of least norm is $y=-C^\dagger B^*x$.
+\end{theorem}
+
+\begin{proof}
+Expand the quadratic form:
+\[
+ \ip{(x,y)}{\mathbb G_X(x,y)}
+ =\ip{x}{Ax}+2\Re\ip{B^*x}{y}+\ip{y}{Cy}.
+\]
+Because $B^*x\in\Ran C$, write $B^*x=Cz$ with $z=C^\dagger B^*x$.  Then
+\[
+ \ip{y}{Cy}+2\Re\ip{Cz}{y}
+ =\ip{y+z}{C(y+z)}-\ip{z}{Cz}.
+\]
+The infimum is attained at $y=-z$ modulo $\ker C$ and equals
+\[
+ \ip{x}{Ax}-\ip{C^\dagger B^*x}{B^*x}
+ =\ip{x}{(A-BC^\dagger B^*)x}.
+\]
+Nonnegativity follows because the original quadratic form is nonnegative.
+\end{proof}
+
+\begin{warning}[Diagonal positivity is not quotient coercivity]
+A lower bound for $A$, for $\Tr\mathbb G_X$, or for an unshorted route does not imply a lower bound for $A-BC^\dagger B^*$.  The nuisance can predict the entire signal.  Every conditional chain below therefore places the non-formal estimate on a connected or shortened object.
+\end{warning}
+
+\chapter{Mellin reflection and horizontal zero information}
+
+\section{Finite reflection positivity}
+
+Let $Z$ be a finite multiset invariant, with multiplicity, under
+\[
+ \mathcal R\rho=1-\bar\rho.
+\]
+For a polynomial $u$, define
+\[
+ \mathcal W_Z[u]
+ =\sum_{\rho\in Z}u(\rho)\overline{u(\mathcal R\rho)}.
+\]
+
+\begin{theorem}[Finite reflected Weil criterion]\label{thm:finite-weil}
+The following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item every point of $Z$ lies on $\Re s=1/2$;
+\item $\mathcal W_Z[u]\ge0$ for every polynomial $u$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+If every point is fixed by $\mathcal R$, then
+\[
+ \mathcal W_Z[u]=\sum_{\rho\in Z}|u(\rho)|^2\ge0.
+\]
+Conversely, if $\rho_0\ne\mathcal R\rho_0$, polynomial interpolation produces $u$ equal to $1$ at $\rho_0$, $-1$ at $\mathcal R\rho_0$, and $0$ at all other distinct points.  If the reflected pair has multiplicity $m$, its contribution is $-2m$.
+\end{proof}
+
+\begin{corollary}[Ordinary frames do not locate zeros]
+The energy $\sum_{\rho\in Z}|u(\rho)|^2$ is positive for every zero configuration.  Horizontal information enters only through the reflected cross-pairing.
+\end{corollary}
+
+\section{Infinite completed functions}
+
+For a primitive Dirichlet character $\chi$, let $\Xi(s,\chi)$ denote a completed $L$-function normalized so that its nontrivial zeros are invariant under $s\mapsto1-\bar s$.  The standard Weil explicit formula identifies positivity of the infinite reflected form on an admissible test class with GRH for $L(s,\chi)$; the principal modulus-one specialization is RH.  We use this standard result as an external theorem rather than reproducing the full distributional explicit formula.  What will be proved here is the exact growth mechanism by which a Gaussian travelling port detects horizontal displacement.
+
+
+\section{A Gaussian travelling port}
+
+Fix $A>0$ and $\tau\in\R$, and put
+\[
+ K_{A,\tau}(s)=\exp\!\left(A\left(s-\frac12-i\tau\right)^2\right).
+\]
+The coefficient $K_{A,\tau}(\rho)$ is Gaussian in the ordinate of $\rho$ and is nonzero at every zero.  The standard completed explicit formula gives a prime-side travelling port of the form
+\begin{equation}\label{eq:zero-expansion}
+ \mathcal G_{\chi,A,\tau}(r)
+ =\mathcal R_{\chi,A,\tau}(r)
+ -\sum_{\Xi(\rho,\chi)=0}
+ m_\rho K_{A,\tau}(\rho)
+ \e^{(\rho-1/2)r},
+\end{equation}
+where the sum converges locally uniformly, the coefficients are absolutely summable after grouping equal zeros, and $\mathcal R$ decays faster than every exponential as $r\to+\infty$.  This is the Gaussian specialization of the explicit formula; conductor, gamma, and trivial-zero terms are contained in $\mathcal R$.
+
+Define
+\[
+ \Theta_\chi
+ =\sup_{\Xi(\rho,\chi)=0}
+ \left|\Re\rho-\frac12\right|.
+\]
+Reflection symmetry makes the rightmost displacement equal to $\Theta_\chi$.
+
+\begin{lemma}[Laplace-pole obstruction]\label{lem:laplace-pole}
+Let
+\[
+ f(r)=R(r)+\sum_jc_j\e^{\lambda_jr}
+\]
+on $[0,\infty)$, where $\sum_j|c_j|<\infty$, the real parts $\Re\lambda_j$ are bounded above, the sum converges locally uniformly, $R$ has an entire Laplace transform, and equal exponents have been grouped so that every $c_j\ne0$.  If
+\[
+ \int_0^\infty\e^{-2\sigma r}|f(r)|^2\dd r<\infty,
+\]
+then $\Re\lambda_j\le\sigma$ for every $j$.
+\end{lemma}
+
+\begin{proof}
+For $\Re z>\sigma$, Cauchy--Schwarz gives absolute convergence of
+\[
+ \mathcal Lf(z)=\int_0^\infty f(r)\e^{-zr}\dd r.
+\]
+Hence $\mathcal Lf$ is holomorphic there.  On a right half-plane where termwise integration is initially valid,
+\[
+ \mathcal Lf(z)=\mathcal LR(z)+\sum_j\frac{c_j}{z-\lambda_j}.
+\]
+The right side gives a meromorphic continuation, with nonzero residue $c_j$ at every $\lambda_j$.  A pole with $\Re\lambda_j>\sigma$ contradicts holomorphy of the Laplace integral in that half-plane.
+\end{proof}
+
+\begin{theorem}[Gaussian Hardy criterion for GRH]\label{thm:gaussian-grh}
+For fixed $\chi,A,\tau$, define
+\[
+ \mathscr E_{\chi,A,\tau}(\sigma)
+ =\int_0^\infty\e^{-2\sigma r}
+ |\mathcal G_{\chi,A,\tau}(r)|^2\dd r.
+\]
+Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item if $\sigma>\Theta_\chi$, then $\mathscr E_{\chi,A,\tau}(\sigma)<\infty$;
+\item if $\mathscr E_{\chi,A,\tau}(\sigma)<\infty$, then $\Theta_\chi\le\sigma$;
+\item GRH for $L(s,\chi)$ is equivalent to finiteness of the energy for every $\sigma>0$.
+\end{enumerate}
+The modulus-one principal specialization is an equivalent RH criterion after the zeta-pole density is subtracted.
+\end{theorem}
+
+\begin{proof}
+If $\sigma>\Theta_\chi$, every exponential in \eqref{eq:zero-expansion} belongs to the weighted space.  Gaussian decay in the ordinates gives absolute summability, while $\mathcal R$ is harmless.  Conversely, apply \Cref{lem:laplace-pole} with $\lambda_\rho=\rho-1/2$.  Reflection symmetry turns the right-hand bound into the two-sided bound $|\Re\rho-1/2|\le\sigma$.  Finiteness for every positive $\sigma$ is therefore equivalent to $\Theta_\chi=0$.
+\end{proof}
+
+\section{Cutoff-matched prime-side energy}
+
+Let
+\[
+ G_A(v)=\frac{1}{\sqrt{4\pi A}}\exp\!\left(-\frac{v^2}{4A}\right).
+\]
+For a Dirichlet character $\chi$, define the cutoff-matched arithmetic measure
+\begin{equation}\label{eq:cutoff-measure}
+ \dd\mathfrak e_{\chi,X}^{\triangle}(u)
+ =\sum_{n\le X}\chi(n)\Lambda(n)\delta_{\log n}(\dd u)
+ -\delta_\chi\1_{[0,\log X]}(u)\e^u\dd u,
+\end{equation}
+where $\delta_\chi=1$ in the principal channel and $0$ otherwise.  Define
+\[
+ \mathfrak L_{\chi,X}^{\triangle}(s)
+ =\int\e^{-su}\dd\mathfrak e_{\chi,X}^{\triangle}(u)
+\]
+and
+\begin{equation}\label{eq:finite-gaussian-port}
+ \mathcal G_{\chi,A,\tau;X}^{\triangle}(r)
+ =\e^{i\tau r}
+ \int\e^{-(1/2+i\tau)u}
+ G_A(u-r)\dd\mathfrak e_{\chi,X}^{\triangle}(u).
+\end{equation}
+
+\begin{theorem}[Exact Gaussian Plancherel identity]\label{thm:plancherel}
+For every real $\sigma$,
+\[
+ \boxed{
+ \begin{aligned}
+ &\int_{\R}\e^{-2\sigma r}
+ \left|\mathcal G_{\chi,A,\tau;X}^{\triangle}(r)\right|^2\dd r\\
+ &\quad=\frac{\e^{2A\sigma^2}}{2\pi}
+ \int_{\R}\e^{-2A(t-\tau)^2}
+ \left|\mathfrak L_{\chi,X}^{\triangle}
+ \left(\frac12+\sigma+it\right)\right|^2\dd t.
+ \end{aligned}}
+\]
+\end{theorem}
+
+\begin{proof}
+Use the Fourier convention $\widehat f(t)=\int f(r)\e^{-itr}\dd r$, for which Plancherel has factor $(2\pi)^{-1}$.  The Fourier transform of $G_A$ is $\e^{-At^2}$.  For the weighted function $\e^{-\sigma r}\mathcal G(r)$, a change of variable $r=u+v$ gives
+\[
+ \widehat{\e^{-\sigma\cdot}\mathcal G}(t)
+ =\exp\!\left(A(-\sigma+i(\tau-t))^2\right)
+ \mathfrak L_{\chi,X}^{\triangle}
+ \left(\frac12+\sigma+it\right).
+\]
+Taking the modulus squared and applying Plancherel proves the formula.
+\end{proof}
+
+\begin{theorem}[Finite scaling indicator]\label{thm:scaling-indicator}
+Let
+\[
+ \mathscr E_{\chi,X}^{\triangle}(\sigma)
+ =\int_{\R}\e^{-2\sigma r}
+ |\mathcal G_{\chi,A,\tau;X}^{\triangle}(r)|^2\dd r.
+\]
+The standard explicit formula and its cutoff-matched bulk approximation imply
+\[
+ \boxed{
+ \limsup_{X\to\infty}
+ \frac{\log^+\mathscr E_{\chi,X}^{\triangle}(\sigma)}{\log X}
+ =2(\Theta_\chi-\sigma)_+.}
+\]
+Consequently, the estimate
+\[
+ \mathscr E_{\chi,X}^{\triangle}(\sigma)=X^{o(1)}
+\]
+forces $\Theta_\chi\le\sigma$; imposing it for every $\sigma>0$ gives GRH for $\chi$.
+\end{theorem}
+
+\begin{proof}
+We include the standard argument because it identifies exactly what must be estimated.  Put $U=\log X$.  The cutoff-matched port agrees with the complete explicit-formula port, with super-Gaussian error, on every bulk interval $r\le(1-\delta)U$.  This follows directly from the Gaussian tail because both the atomic and continuous measures are cut at the same endpoint.
+
+For the upper bound, the explicit formula gives, for every $\eps>0$,
+\[
+ |\mathcal G_{\chi,A,\tau}(r)|
+ \ll_{\eps,A,\chi}(1+r)^C
+ \e^{(\Theta_\chi+\eps)r}
+\]
+for $r\ge0$.  Integrating to $U$ and controlling the moving edge by the same Gaussian estimate gives
+\[
+ \mathscr E_{\chi,X}^{\triangle}(\sigma)
+ \ll X^{2(\Theta_\chi-\sigma+\eps)_+}(\log X)^C.
+\]
+
+For the lower bound, choose a zero with displacement
+\[
+ \Re\rho-\frac12>\Theta_\chi-\eps.
+\]
+Group zero terms with the same real part and use the Bohr mean-square identity for the resulting absolutely convergent almost-periodic exponential sum: its mean square is the sum of the squared grouped coefficients and is positive because the Gaussian coefficient of the chosen zero is nonzero.  Hence on arbitrarily long intervals the complete weighted energy is bounded below by a positive multiple of
+\[
+ \exp\!\left(2(\Theta_\chi-\sigma-2\eps)r\right).
+\]
+Integrating inside $[0,(1-\delta)U]$, where the finite and complete ports agree, yields
+\[
+ \limsup_{X\to\infty}
+ \frac{\log^+\mathscr E_{\chi,X}^{\triangle}(\sigma)}{\log X}
+ \ge2(1-\delta)(\Theta_\chi-\sigma-2\eps)_+.
+\]
+Let $\delta,\eps\downarrow0$.
+\end{proof}
+
+\section{Fixed-modulus vector form}
+
+Let $q$ be prime, let $\mathcal H_\sigma$ be the weighted Gaussian port space, and let $v_a\in\mathcal H_\sigma$ be the prime packet in the reduced residue class $a\bmod q$.  Put
+\[
+ \bar v=\frac{1}{q-1}\sum_{a\in(\Z/q\Z)^\times}v_a.
+\]
+
+\begin{theorem}[Character--residue Parseval identity]\label{thm:residue-parseval}
+With
+\[
+ G_\chi=\sum_a\chi(a)v_a,
+\]
+one has
+\[
+ \boxed{
+ \sum_a\|v_a-\bar v\|^2
+ =\frac{1}{q-1}\sum_{\chi\ne\chi_0}\|G_\chi\|^2.}
+\]
+\end{theorem}
+
+\begin{proof}
+The finite characters form an orthogonal basis of functions on the unit group.  Parseval gives
+\[
+ \sum_a\|v_a\|^2
+ =\frac{1}{q-1}\sum_\chi\|G_\chi\|^2.
+\]
+The principal term is
+\[
+ \frac{1}{q-1}\|G_{\chi_0}\|^2=(q-1)\|\bar v\|^2.
+\]
+Subtract it.
+\end{proof}
+
+\begin{corollary}[Conditional fixed-modulus GRH chain]\label{cor:fixed-mod-grh}
+Fix $q$ and $\sigma>0$.  If the cutoff-matched residue variance satisfies
+\[
+ \sum_a\|v_{a;X}-\bar v_X\|_{\mathcal H_\sigma}^2=X^{o(1)},
+\]
+then every nonprincipal zero modulo $q$ obeys
+\[
+ \left|\Re\rho-\frac12\right|\le\sigma.
+\]
+If this estimate holds for every $\sigma>0$, all nonprincipal Dirichlet $L$-functions modulo $q$ satisfy GRH.  Adding the centered principal channel gives RH as well.
+\end{corollary}
+
+\begin{proof}
+By \Cref{thm:residue-parseval}, every nonprincipal character energy is bounded by the total residue variance.  Apply \Cref{thm:scaling-indicator} character by character.  The principal channel uses the density subtraction in \eqref{eq:cutoff-measure}.
+\end{proof}
+
+\begin{ledger}[Spectral chain]\label{ledger:spectral}
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{@{}p{0.27\textwidth}Xp{0.20\textwidth}@{}}
+\toprule
+Step & Statement & Status\\
+\midrule
+Reflected tensor & Mellin reflection retains the Weil orientation & \StatusExact\\
+Gaussian explicit formula & Prime port equals a rapidly decaying background minus the Gaussian zero sum & \StatusExternal\\
+Growth detector & Weighted energy abscissa equals horizontal zero displacement & \StatusExact\\
+Finite arithmetic target & Cutoff-matched energy or residue variance is subpolynomial on a fixed subcritical line & \StatusOpen\\
+Conclusion & A fixed line gives a zero strip; all positive lines give GRH/RH & \StatusConditional\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{ledger}
+
+\part{Expanded RH and Dirichlet--GRH spectral attacks}
+
+\chapter{Typed Dirichlet channels and compact Mellin packets}
+
+\section{Primitive typing and the functional equation}
+
+Let $\chi$ be a primitive Dirichlet character of conductor $q$, extended by
+zero away from the units, and put
+\[
+ a_\chi=\frac{1-\chi(-1)}2\in\{0,1\}.
+\]
+The completed function is
+\begin{equation}\label{eq:v002-completed-L}
+ \Lambda(s,\chi)
+ =\left(\frac q\pi\right)^{(s+a_\chi)/2}
+ \Gamma\!\left(\frac{s+a_\chi}{2}\right)L(s,\chi).
+\end{equation}
+For primitive nonprincipal $\chi$ it is entire; the primitive principal
+channel is the modulus-one zeta channel and is meromorphic at $0$ and $1$.
+
+\begin{theorem}[Typed primitive functional equation]\label{thm:v002-functional-equation}
+For primitive $\chi$ there is a root number $\varepsilon_\chi$ with
+$|\varepsilon_\chi|=1$ such that
+\[
+ \boxed{\Lambda(s,\chi)=\varepsilon_\chi
+ \Lambda(1-s,\overline\chi).}
+\]
+Moreover $\varepsilon_{\overline\chi}=\overline{\varepsilon_\chi}$, and,
+where both sides are defined and nonzero,
+\[
+ \boxed{\frac{\Lambda'}{\Lambda}(s,\chi)
+ =-\frac{\Lambda'}{\Lambda}(1-s,\overline\chi).}
+\]
+For a complex character the type-correct carrier is the doubled channel
+\[
+ \boldsymbol\Lambda_\chi(s)
+ =\binom{\Lambda(s,\chi)}{\Lambda(s,\overline\chi)},
+ \qquad
+ \mathsf R_\chi=
+ \begin{pmatrix}0&\varepsilon_\chi\\
+ \overline{\varepsilon_\chi}&0\end{pmatrix},
+\]
+for which $\mathsf R_\chi$ is a self-adjoint unitary and
+\[
+ \boxed{\boldsymbol\Lambda_\chi(s)
+ =\mathsf R_\chi\boldsymbol\Lambda_\chi(1-s).}
+\]
+\end{theorem}
+
+\begin{proof}
+The scalar identity is the standard primitive Dirichlet functional equation
+in the normalization \eqref{eq:v002-completed-L}.  The Gauss-sum identity
+$\tau(\overline\chi)=\chi(-1)\overline{\tau(\chi)}$ gives the stated
+conjugation law for the root number.  Logarithmic differentiation removes
+the constant root number and contributes the minus sign from $1-s$.
+Applying the scalar identity to $\chi$ and $\overline\chi$ gives the matrix
+identity.  The root-number relation and $|\varepsilon_\chi|=1$ imply
+$\mathsf R_\chi^*=\mathsf R_\chi$ and $\mathsf R_\chi^2=I$.
+\end{proof}
+
+\begin{warning}[Complex-character typing]
+For complex $\chi$, the functional equation exchanges the $\chi$ and
+$\overline\chi$ sectors.  Replacing them by one real history space without a
+specified isometric or antiunitary intertwiner can erase the reflected phase
+which the grand tensor is designed to retain.
+\end{warning}
+
+\section{Imprimitive reduction}
+
+Let a character $\chi\pmod Q$ be induced by a primitive character
+$\chi^*\pmod q$, where $q\mid Q$.
+
+\begin{proposition}[Exact imprimitive Euler correction]\label{prop:v002-imprimitive}
+One has
+\[
+ \boxed{L(s,\chi)=L(s,\chi^*)
+ \prod_{\substack{p\mid Q\\p\nmid q}}
+ \left(1-\chi^*(p)p^{-s}\right),}
+\]
+and
+\[
+ \boxed{-\frac{L'}{L}(s,\chi)
+ =-\frac{L'}{L}(s,\chi^*)
+ -\sum_{\substack{p\mid Q\\p\nmid q}}
+ \frac{\chi^*(p)(\log p)p^{-s}}
+ {1-\chi^*(p)p^{-s}}.}
+\]
+Every zero of an added Euler factor lies on $\Re s=0$.  Hence the zeros of
+$L(s,\chi)$ in $0<\Re s<1$ are precisely the zeros of $L(s,\chi^*)$, with
+multiplicity.
+\end{proposition}
+
+\begin{proof}
+Compare the two Euler products.  At primes not dividing $Q$ they agree.  At
+$p\mid Q$ with $p\nmid q$, the imprimitive character vanishes while the
+primitive Euler factor remains, giving the finite product.  Logarithmic
+differentiation gives the second identity.  If
+$1-\chi^*(p)p^{-s}=0$, then $|p^{-s}|=1$, so $p^{-\Re s}=1$ and therefore
+$\Re s=0$.
+\end{proof}
+
+\begin{corollary}[Primitive reduction of Dirichlet GRH]
+It is enough to prove the critical-line assertion separately for every
+primitive Dirichlet $L$-function.  The reduction itself needs no uniformity
+in the conductor.
+\end{corollary}
+
+\section{A compact logarithmic packet}
+
+Fix $C\in C_c^\infty(\R)$ and define its bilateral Laplace transform
+\[
+ H_C(s)=\int_\R C(u)e^{su}\,\dd u.
+\]
+For $X>0$ put
+\[
+ \mathcal P_{C,\chi}(X)
+ =\sum_{n\ge1}\frac{\Lambda(n)\chi(n)}{\sqrt n}
+ C\!\left(\log\frac nX\right),
+\]
+and
+\[
+ \mathcal C_C(X)=\int_1^\infty y^{-1/2}
+ C\!\left(\log\frac yX\right)\,\dd y.
+\]
+Let $\delta_\chi=1$ in the primitive trivial channel and $0$ otherwise, and
+set
+\begin{equation}\label{eq:v002-centered-packet}
+ \boxed{\mathcal E_{C,\chi}(X)
+ =\mathcal P_{C,\chi}(X)-\delta_\chi\mathcal C_C(X).}
+\end{equation}
+Both terms vanish for all sufficiently small $X$.
+
+\begin{theorem}[Exact twisted Mellin transform]\label{thm:v002-twisted-mellin}
+For $\Re s>1/2$,
+\[
+ \boxed{
+ \int_0^\infty \mathcal E_{C,\chi}(X)X^{-s}\frac{\dd X}{X}
+ =H_C(s)\left[
+ -\frac{L'}{L}\!\left(s+\frac12,\chi\right)
+ -\frac{\delta_\chi}{s-1/2}\right].}
+\]
+The integral is absolutely convergent in that half-plane.
+\end{theorem}
+
+\begin{proof}
+For fixed $n$, the substitution $u=\log(n/X)$ gives
+\[
+ \int_0^\infty C\!\left(\log\frac nX\right)
+ X^{-s}\frac{\dd X}{X}=n^{-s}H_C(s).
+\]
+Absolute convergence for $\Re s>1/2$ permits Fubini and the Dirichlet series
+for $-L'/L$.  The same substitution with $n$ replaced by $y$ gives
+\[
+ \int_0^\infty\mathcal C_C(X)X^{-s}\frac{\dd X}{X}
+ =H_C(s)\int_1^\infty y^{-s-1/2}\dd y
+ =\frac{H_C(s)}{s-1/2}.
+\]
+Subtracting proves the formula.
+\end{proof}
+
+\section{Conductor, Gamma factor, and trivial-zero cancellation}
+
+Put
+\[
+ \mathcal G_\chi(w)
+ =\frac12\log\frac q\pi
+ +\frac12\psi\!\left(\frac{w+a_\chi}{2}\right),
+ \qquad \psi=\Gamma'/\Gamma.
+\]
+Then
+\[
+ \frac{\Lambda'}{\Lambda}(w,\chi)
+ =\mathcal G_\chi(w)+\frac{L'}{L}(w,\chi).
+\]
+Define the archimedean packet by inverse Mellin transform on any line
+$\Re s=\sigma>1/2$,
+\[
+ \mathcal A_{C,\chi}^{(\sigma)}(X)
+ =-\frac1{2\pi i}\int_{(\sigma)}
+ H_C(s)\mathcal G_\chi(s+1/2)X^s\,\dd s,
+\]
+and set $\mathcal E_{C,\chi}^{\Lambda}
+=\mathcal E_{C,\chi}+\mathcal A_{C,\chi}^{(\sigma)}$.
+
+\begin{proposition}[Completed packet symbol and trivial zeros]
+\label{prop:v002-completed-packet}
+The completed packet has Mellin symbol
+\[
+ \boxed{
+ \widehat{\mathcal E}_{C,\chi}^{\Lambda}(s)
+ =H_C(s)\left[-\frac{\Lambda'}{\Lambda}
+ \!\left(s+\frac12,\chi\right)
+ -\frac{\delta_\chi}{s-1/2}\right].}
+\]
+For primitive nonprincipal $\chi$, the poles of $L'/L$ at the parity-forced
+trivial zeros $w=-a_\chi-2m$ cancel exactly against the corresponding poles
+of the digamma term.  Consequently only nontrivial zeros contribute poles in
+the open critical strip.
+\end{proposition}
+
+\begin{proof}
+The inverse Mellin definition contributes the symbol
+$-H_C(s)\mathcal G_\chi(s+1/2)$; add it to
+\Cref{thm:v002-twisted-mellin}.  Near $w_m=-a_\chi-2m$,
+\[
+ \frac12\psi\!\left(\frac{w+a_\chi}{2}\right)
+ =-\frac1{w-w_m}+O(1),
+ \qquad
+ \frac{L'}{L}(w,\chi)=\frac1{w-w_m}+O(1),
+\]
+so the principal parts cancel.
+\end{proof}
+
+\section{Off-line zeros force power growth}
+
+\begin{lemma}[Packet selection]
+For every $s_0=\alpha+i\gamma$ with $\alpha>0$, there exists a fixed
+$C\in C_c^\infty(\R)$ with $H_C(s_0)\ne0$.
+\end{lemma}
+
+\begin{proof}
+Choose nonzero $\phi\in C_c^\infty(\R)$ with $\phi\ge0$ and put
+$C(u)=e^{-i\gamma u}\phi(u)$.  Then
+$H_C(s_0)=\int\phi(u)e^{\alpha u}\dd u>0$.
+\end{proof}
+
+\begin{theorem}[Off-critical zero amplification]\label{thm:v002-zero-amplification}
+Suppose $L(\rho,\chi)=0$ for primitive $\chi$, with
+$\rho=\beta+i\gamma$ and $\beta>1/2$.  Put $\alpha=\beta-1/2$ and choose
+$C$ with $H_C(\rho-1/2)\ne0$.  Then, for every $\eps>0$,
+\[
+ \boxed{
+ \limsup_{X\to\infty}
+ \frac{|\mathcal E_{C,\chi}(X)|}{X^{\alpha-\eps}}=\infty.}
+\]
+The same assertion holds for the completed packet
+$\mathcal E_{C,\chi}^{\Lambda}$.
+\end{theorem}
+
+\begin{proof}
+The meromorphic continuation of the Mellin transform in
+\Cref{thm:v002-twisted-mellin} has a pole at $s_0=\rho-1/2$ with residue
+$-m_\rho H_C(s_0)\ne0$.  If
+$\mathcal E_{C,\chi}(X)=O(X^{\alpha-\eps})$, then, because the packet
+vanishes for sufficiently small $X$, its Mellin integral would converge
+absolutely and be holomorphic in $\Re s>\alpha-\eps$.  On the intersection
+with $\Re s>1/2$ it equals the meromorphic expression above, so the identity
+theorem would make that expression holomorphic at $s_0$, a contradiction.
+The completed packet has the same nontrivial-zero residue because the
+conductor--Gamma term is holomorphic at $\rho$.
+\end{proof}
+
+\begin{definition}[Packetwise subpower property]
+A primitive character $\chi$ satisfies $\mathrm{SP}(\chi)$ if, for every
+$C\in C_c^\infty(\R)$ and every $\eta>0$,
+\[
+ \mathcal E_{C,\chi}(X)=O_{C,\chi,\eta}(X^\eta).
+\]
+\end{definition}
+
+\begin{theorem}[Packetwise conditional GRH]\label{thm:v002-packet-grh}
+If $\mathrm{SP}(\chi)$ holds for a primitive $\chi$, then
+$L(s,\chi)\ne0$ for $\Re s>1/2$.  If it holds for every primitive character,
+then Dirichlet GRH holds for all primitive and imprimitive Dirichlet
+$L$-functions.
+\end{theorem}
+
+\begin{proof}
+An off-line zero with displacement $\alpha>0$ contradicts
+\Cref{thm:v002-zero-amplification} and the subpower estimate with any
+$\eta<\alpha/2$.  Thus the right half of the strip is zero-free.  The typed
+functional equation reflects any zero left of the critical line into the
+right half-plane of the conjugate primitive channel.  Finally apply
+\Cref{prop:v002-imprimitive}.
+\end{proof}
+
+\begin{remark}
+This is a character-by-character reduction.  No conductor-uniform estimate
+is needed logically.  Uniformity becomes relevant only for a stronger
+family theorem.
+\end{remark}
+
+\section{Finite frames are phase references, not zero selectors}
+
+\begin{proposition}[Finite self-translation no-go]\label{prop:v002-translation-nogo}
+Let $Z=\{z_1,\ldots,z_M\}$ be a finite multiset and let
+$\eta_1,\ldots,\eta_k$ be such that all $z_i-\eta_j$ are distinct from $Z$
+and from one another.  Given arbitrary nonzero values $A_{ij}$, there is an
+entire function $F$ whose zero multiset contains $Z$ and for which
+\[
+ F(z_i-\eta_j)=A_{ij}.
+\]
+Therefore a finite lower frame of horizontally translated values does not
+constrain the horizontal positions of the zeros.
+\end{proposition}
+
+\begin{proof}
+Let $P(z)$ be the polynomial with zero multiset $Z$.  At every shifted sample
+point prescribe
+\[
+ h(z_i-\eta_j)=\log\!\left(\frac{A_{ij}}{P(z_i-\eta_j)}\right),
+\]
+choosing arbitrary logarithm branches.  Polynomial interpolation gives a
+polynomial $h$ with these values.  Then $F=Pe^h$ has the desired zeros and
+samples.
+\end{proof}
+
+\begin{audit}[What the Dirichlet collection adds]
+The compact packet theorem and the cutoff-matched Gaussian theorem already
+present in the monograph are complementary.  The former gives a minimal
+Mellin-pole contradiction for one fixed compact packet; the latter gives a
+positive Hilbert-space energy with an exact horizontal-displacement exponent.
+Neither auxiliary-character lower frames nor finite self-translation frames
+supply the missing reflected prime-side sign by themselves.
+\end{audit}
+
+\chapter{Prolate compression and a separate conditional RH route}
+
+\section{The time--band limiting operator}
+
+Let $P_T$ be restriction to $[-T,T]$ on $L^2(\R)$ and let
+$B_\Omega=\mathcal F^{-1}\1_{[-\Omega,\Omega]}\mathcal F$ be the orthogonal
+band-limiting projection, with the unitary Fourier transform.  On
+$L^2([-T,T])$ define
+\[
+ K_{T,\Omega}=P_TB_\Omega P_T.
+\]
+
+\begin{theorem}[Basic prolate concentration theorem]\label{thm:v002-prolate-basic}
+The operator $K_{T,\Omega}$ is compact, positive, self-adjoint, and satisfies
+$0\preceq K_{T,\Omega}\preceq I$.  Its integral kernel is
+\[
+ K_{T,\Omega}(x,y)=\frac{\sin(\Omega(x-y))}{\pi(x-y)},
+\]
+with diagonal value $\Omega/\pi$, and
+\[
+ \boxed{\Tr K_{T,\Omega}=\frac{2T\Omega}{\pi}.}
+\]
+If $1>\lambda_0\ge\lambda_1\ge\cdots\ge0$ are its eigenvalues, then for
+every rank-$m$ orthogonal projection $P$,
+\[
+ \Tr(PK_{T,\Omega}P)\le\sum_{j=0}^{m-1}\lambda_j.
+\]
+Thus the first $m$ prolate eigenfunctions give the optimal $m$-dimensional
+subspace for simultaneous time and frequency concentration.  This is the
+classical prolate time--band limiting operator of
+\cite{SlepianPollak,LandauPollak}.
+\end{theorem}
+
+\begin{proof}
+The displayed kernel follows by Fourier inversion of the band projection.
+On the bounded square $[-T,T]^2$ it is square integrable, so the operator is
+Hilbert--Schmidt and hence compact.  Positivity and the contraction bound
+follow from
+\[
+ \langle f,K_{T,\Omega}f\rangle
+ =\|B_\Omega P_Tf\|_2^2\in[0,\|f\|_2^2].
+\]
+The continuous positive kernel is trace class, and integrating the diagonal
+gives $2T\Omega/\pi$.  The final assertion is the Ky Fan maximum principle.
+\end{proof}
+
+\section{Exact radical-to-window leakage}
+
+Let $\mathcal H$ carry a Hermitian form $QW(\cdot,\cdot)$ on a common form
+domain.  Let $F$ be in its radical, so $QW(F,h)=0$ for all admissible $h$.
+Let $P_{\rm win}$ be a window projection and $P_N$ a finite Galerkin
+projection.  Write
+\[
+ g=P_{\rm win}F,\qquad r=(I-P_{\rm win})F,
+ \qquad \phi=P_Ng,\qquad s=(I-P_N)g.
+\]
+Let $Q_N$ be the Galerkin operator representing $QW$ on $\Ran P_N$.
+
+\begin{theorem}[Exact leakage identity]\label{thm:v002-leakage}
+For every $h\in\Ran P_N$,
+\[
+ \boxed{\langle h,Q_N\phi\rangle=-QW(r,h)-QW(s,h).}
+\]
+Consequently,
+\[
+ \|Q_N\phi\|
+ \le
+ \sup_{\substack{h\in\Ran P_N\\\|h\|=1}}
+ |QW(r,h)+QW(s,h)|.
+\]
+\end{theorem}
+
+\begin{proof}
+Since $F=\phi+s+r$ and $F$ belongs to the radical,
+\[
+ 0=QW(F,h)=QW(\phi,h)+QW(s,h)+QW(r,h).
+\]
+For $\phi,h\in\Ran P_N$, the first term is
+$\langle h,Q_N\phi\rangle$.  Taking the supremum gives the norm bound.
+\end{proof}
+
+\begin{remark}
+This identity is the exact advantage of the prolate route: the residual of a
+specified near-radical packet is entirely the image of its window and
+Galerkin leakage.  Ordinary $L^2$ concentration is not automatically enough;
+the leakage must be small in the graph norm in which the Weil form is
+continuous.
+\end{remark}
+
+\section{Cluster--Feshbach reduction}
+
+\begin{theorem}[Separated cluster and Feshbach short]\label{thm:v002-cluster}
+Let $Q=Q^*$ act on a finite-dimensional Hilbert space and let $\Pi$ be an
+orthogonal projection.  Write
+\[
+ Q=\begin{pmatrix}A&B^*\\B&C\end{pmatrix}
+\]
+relative to $\Ran\Pi\oplus\Ran(I-\Pi)$.  Put
+\[
+ a_+=\max\Spec A,\qquad c_-=\min\Spec C,
+ \qquad\Delta=c_--a_+>0,\qquad\beta=\|B\|.
+\]
+If $\beta<\Delta/2$, then the spectral projection $P$ of $Q$ below
+$(a_++c_-)/2$ has rank $\rank\Pi$ and
+\[
+ \boxed{\|P-\Pi\|\le\frac{2\beta}{\Delta-2\beta}.}
+\]
+For every real $z<c_-$,
+\[
+ \boxed{\det(Q-z)=\det(C-z)
+ \det\!\left(A-z-B^*(C-z)^{-1}B\right),}
+\]
+and
+\[
+ 0\preceq B^*(C-z)^{-1}B
+ \preceq\frac{\beta^2}{c_--z}I.
+\]
+\end{theorem}
+
+\begin{proof}
+Let $Q_0=A\oplus C$.  The off-diagonal perturbation $Q-Q_0$ has norm
+$\beta$.  Since the two spectral sets of $Q_0$ are separated by $\Delta$ and
+$\beta<\Delta/2$, no eigenvalue crosses the midpoint; the low spectral
+projection has the same rank.  The resolvent representation of spectral
+projections on a contour through the gap, followed by the resolvent identity,
+gives the displayed safe sin-$\Theta$ bound.  For $z<c_-$, Gaussian block
+elimination gives the determinant identity.  Positivity and the norm bound
+for $(C-z)^{-1}$ give the final operator inequality.
+\end{proof}
+
+\begin{corollary}[Simple-even extraction]
+Assume the hypotheses of \Cref{thm:v002-cluster}.  If $A$ has a simple lowest
+eigenvalue $a_0$ with internal gap $\gamma>0$, and
+$2\beta^2/\Delta<\gamma$, then the lowest eigenvalue of $Q$ is simple and its
+compressed eigenvector differs from that of $A$ by
+$O(\beta^2/(\Delta\gamma))$.  If an involution commuting with $Q$ and $\Pi$
+makes the ground vector of $A$ even, and the odd compressed spectrum begins
+more than $\beta^2/\Delta$ above $a_0$, then the ground vector of $Q$ is even.
+\end{corollary}
+
+\begin{proof}
+For eigenvalues below $c_-$, the effective operator is
+$A-B^*(C-z)^{-1}B$, whose correction has norm at most $\beta^2/\Delta$ at
+the lower edge.  The min--max principle gives simplicity, and the standard
+simple-eigenvalue perturbation estimate gives the angle bound.  The same
+self-energy can lower the odd sector by no more than its norm, proving the
+parity statement.
+\end{proof}
+
+\section{Conditional PSWF--Hurwitz chain}
+
+\begin{theorem}[Real-rooted approximation implies RH]\label{thm:v002-hurwitz-rh}
+Let $D_n$ be nonzero entire functions whose zeros are all real.  Suppose
+$D_n\to\Xi$ locally uniformly on $\C$, where $\Xi$ is the completed Riemann
+xi function and is not identically zero.  Then all zeros of $\Xi$ are real;
+equivalently RH holds.
+\end{theorem}
+
+\begin{proof}
+If $\Xi$ had a nonreal zero $z_0$, choose a closed disk around $z_0$ which is
+disjoint from the real axis and whose boundary contains no zero of $\Xi$.
+Every $D_n$ is zero-free on that disk.  Hurwitz's theorem says that a locally
+uniform limit of zero-free holomorphic functions is either zero-free or
+identically zero there.  This contradicts the zero of $\Xi$ and the fact
+that $\Xi$ is not identically zero.
+\end{proof}
+
+\begin{theorem}[Conditional prolate cluster route to RH]\label{thm:v002-pswf-chain}
+Assume a sequence of finite self-adjoint Weil matrices $Q_n$ and physically
+preassigned prolate projections $\Pi_n$ satisfies:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\|B_n\|/\Delta_n\to0$ in the cluster decomposition of
+      \Cref{thm:v002-cluster};
+\item the compressed matrix $A_n=\Pi_nQ_n\Pi_n$ has a simple even ground
+      vector $k_n$, with internal and parity gaps dominating
+      $\|B_n\|^2/\Delta_n$;
+\item the leakage identity \Cref{thm:v002-leakage} gives convergence of the
+      actual ground vector to $k_n$ in a norm strong enough that the associated
+      regularized determinants $D_n$ converge locally uniformly to $\Xi$;
+\item each $D_n$ has only real zeros.
+\end{enumerate}
+Then RH holds.
+\end{theorem}
+
+\begin{proof}
+The cluster and simple-even estimates identify the actual finite ground
+vector with the preassigned prolate model.  Hypothesis (iii) transfers this
+to locally uniform determinant convergence.  Apply
+\Cref{thm:v002-hurwitz-rh}.
+\end{proof}
+
+\begin{audit}[What the PSWF collection contributes]
+The prolate route is not another form of full Weil positivity.  It replaces
+the full test space by a growing near-radical cluster and separates two new
+estimates: cluster-to-exterior leakage and the arithmetic ordering inside the
+compressed cluster.  Neither time--frequency concentration nor the Feshbach
+identity supplies the internal sign automatically.
+\end{audit}
+
+\chapter{Affine-invariant PNT crests and the scalar-bulk firewall}
+
+\section{A two-channel Weyl inequality}
+
+Let $L=L^*$ and $D=D^*$ on an $n$-dimensional Hilbert space, $n\ge2$.  Write
+$\ell_1\le\ell_2\le\cdots$ for the eigenvalues of $L$ and
+$d_1\ge d_2\ge\cdots$ for the eigenvalues of $D$ in decreasing order.  For a
+unit vector $g$, put
+\[
+ m=\langle g,Lg\rangle,\qquad \bar d=\langle g,Dg\rangle,
+ \qquad \mu=m-\bar d,
+\]
+and
+\[
+ \Gamma^{\rm W}(L,D;g)
+ =\max\{(\ell_2-m)-(d_1-\bar d),
+          (\ell_1-m)-(d_2-\bar d)\}.
+\]
+
+\begin{theorem}[Scalar-invariant two-channel Weyl barrier]
+\label{thm:v002-weyl-barrier}
+One has
+\[
+ \boxed{\lambda_2(L-D)-\mu\ge\Gamma^{\rm W}(L,D;g).}
+\]
+The right side is invariant under $L\mapsto L+bI$ and
+$D\mapsto D+aI$.
+\end{theorem}
+
+\begin{proof}
+The two Weyl inequalities
+$\lambda_2(L-D)\ge\ell_2-d_1$ and
+$\lambda_2(L-D)\ge\ell_1-d_2$ give the two terms after subtracting
+$\mu=m-\bar d$.  Scalar shifts cancel from eigenvalue--Rayleigh differences.
+\end{proof}
+
+\begin{remark}
+The second channel matters when one exceptional positive eigen-direction of
+$D$ destroys the first bound.  It is the finite-dimensional statement that
+one large PNT crest can lower at most one spectral level.
+\end{remark}
+
+\section{A precise scalar-bulk no-go theorem}
+
+\begin{theorem}[Scalar bulk carries no ordering]\label{thm:v002-scalar-bulk}
+Let $P$ be an orthogonal projection of rank at least two, let $g\in\Ran P$ be
+a unit vector, and assume
+\[
+ \|P(L-cI-D)P\|\le\varepsilon.
+\]
+Then
+\[
+ \boxed{\Gamma^{\rm W}(L,D;g)\le2\varepsilon.}
+\]
+In particular, if $\varepsilon=o(a)$ on a growing physical subspace, no
+leading scalar term $cI$ can provide a gap of order $a$ through the affine
+Weyl barrier.
+\end{theorem}
+
+\begin{proof}
+By min--max on the rank-at-least-two trial space $\Ran P$,
+\[
+ \ell_2\le c+d_1+\varepsilon.
+\]
+Also the minimum Rayleigh quotient of $D$ on any two-dimensional subspace is
+at most $d_2$, so
+\[
+ \ell_1\le c+d_2+\varepsilon.
+\]
+Because $g\in\Ran P$,
+$|m-c-\bar d|\le\varepsilon$.  Substitution into both channels gives an
+upper bound $2\varepsilon$.
+\end{proof}
+
+\begin{warning}[Critical-scale firewall]
+A positive generator may be asymptotic to a scalar on a large PSWF family.
+Positivity, Perron simplicity, or leading-order oscillation of that scalar
+bulk then supplies no ordering of the first two arithmetic levels.  A valid
+continuation must sign a next-scale centered matrix: a compressed PNT
+crest, a conductor recursion coefficient, or a renormalized
+cluster--complement Schur return.
+\end{warning}
+
+\begin{ledger}[Expanded RH/GRH spectral ledger]\label{ledger:v002-spectral}
+\begin{center}
+\begin{tabularx}{0.96\textwidth}{@{}p{0.24\textwidth}Xp{0.18\textwidth}@{}}
+\toprule
+Route & Exact reduction now retained & Missing native estimate\\
+\midrule
+Compact Mellin packet
+& An off-line zero forces $X^{\beta-1/2-o(1)}$ growth; packetwise subpower
+  implies characterwise GRH
+& Subpower prime-packet estimate\\
+Cutoff-matched Gaussian
+& Positive energy exponent equals horizontal zero displacement
+& Fixed-line subpolynomial energy\\
+Fixed-modulus vector form
+& Residue-class variance is the sum of nonprincipal character energies
+& Source-local variance bound\\
+PSWF cluster
+& Exact radical leakage, cluster Feshbach short, and Hurwitz closure
+& Graph-norm leakage, exterior gap, simple-even compressed ground\\
+Affine PNT crest
+& Scalar-invariant two-level Weyl lower bound
+& Positive next-scale centered barrier and residual rate\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{ledger}
+
+
+
+\part{Additive prime chains}
+
+\chapter{Exact prime and factor-depth selectors}
+
+\section{Higher prime powers are lower order}
+
+\begin{lemma}[Prime-power contamination]\label{lem:prime-power}
+For fixed $h$, the contribution to
+\[
+ \sum_{n\le X}\Lambda(n)\Lambda(n+h)
+\]
+from terms for which at least one coordinate is a proper prime power is
+\[
+ O_h(X^{1/2}\log X).
+\]
+The analogous contribution to $\sum_{m+n=N}\Lambda(m)\Lambda(n)$ is
+$O(N^{1/2}\log N)$.
+\end{lemma}
+
+\begin{proof}
+The total von Mangoldt weight of proper prime powers up to $Y$ is
+\[
+ \sum_{k\ge2}\sum_{p\le Y^{1/k}}\log p
+ \ll \sqrt Y.
+\]
+For every exceptional coordinate the other factor is at most $O(\log Y)$, and there are two choices of exceptional coordinate.
+\end{proof}
+
+\section{Ordered-factor CAR projector}
+
+Let $n=p_1\cdots p_k$ be squarefree and let $\mathcal O_n=\ell^2(\mathfrak S_k)$ be its ordered factor-history space.  Let $c_p^*$ be fermionic creation operators and define
+\[
+ E_n|\pi\rangle
+ =c_{p_{\pi(1)}}^*\cdots c_{p_{\pi(k)}}^*|0\rangle.
+\]
+
+\begin{theorem}[Exact ordered-history prime filter]\label{thm:car-prime}
+For every $\pi\in\mathfrak S_k$,
+\[
+ E_n|\pi\rangle=\operatorname{sgn}(\pi)|n\rangle.
+\]
+Let
+\[
+ |\Omega_k^+\rangle=\frac1{\sqrt{k!}}\sum_{\pi\in\mathfrak S_k}|\pi\rangle.
+\]
+Then
+\[
+ \boxed{
+ E_n|\Omega_k^+\rangle
+ =\begin{cases}
+ |n\rangle,&k=1,\\
+ 0,&k\ge2.
+ \end{cases}}
+\]
+Thus the permutation-symmetric ordered-history source followed by the CAR endpoint is an exact prime projector on squarefree targets.
+\end{theorem}
+
+\begin{proof}
+Anticommutation changes the ordered product by the sign of the permutation, proving the first formula.  Hence
+\[
+ E_n|\Omega_k^+\rangle
+ =\frac{1}{\sqrt{k!}}
+ \left(\sum_{\pi\in\mathfrak S_k}\operatorname{sgn}(\pi)\right)|n\rangle.
+\]
+For $k=1$ the sum is one; for $k\ge2$ the even and odd permutations pair and cancel.
+\end{proof}
+
+\begin{remark}
+This theorem solves the algebraic separation problem but not the arithmetic support problem.  It identifies the prime branch if a source reaches it; it does not prove that the branch has nonzero mass.
+\end{remark}
+
+\section{The parity-current identity on a \texorpdfstring{$P_1\cup P_2$}{P1 union P2} carrier}
+
+Let a positive weighted candidate carrier be known to contain only squarefree targets of factor depth one or two.  Write
+\[
+ M=P_1+P_2
+\]
+for its total mass and
+\[
+ \mathcal J=\sum_cw_c\mu(n_c)
+\]
+for its M\"obius grading current.  Since $\mu=-1$ on primes and $+1$ on squarefree semiprimes,
+\[
+ \mathcal J=-P_1+P_2.
+\]
+
+\begin{theorem}[Exact depth-one recovery]\label{thm:parity-recovery}
+On a positive $P_1\cup P_2$ carrier,
+\[
+ \boxed{
+ P_1=\frac12(M-\mathcal J),
+ \qquad
+ P_2=\frac12(M+\mathcal J).}
+\]
+If $M>0$ and $\mathcal J=o(M)$, then
+\[
+ P_1=\left(\frac12+o(1)\right)M>0.
+\]
+More generally, $\mathcal J\le(1-2\delta)M$ implies $P_1\ge\delta M$.
+\end{theorem}
+
+\begin{proof}
+Solve the two linear equations $M=P_1+P_2$ and $\mathcal J=-P_1+P_2$.
+\end{proof}
+
+\chapter{Conditional twin-prime and Goldbach theorems}
+
+\section{Twin primes from a rough positive carrier}
+
+Let $b_{p,X}\ge0$ be weights supported on source primes $p$ in a dyadic interval, and suppose the selected target $p+2$ is known to be either prime or squarefree semiprime.  Define
+\[
+ M_X=\sum_pb_{p,X},
+ \qquad
+ \mathcal J_X=\sum_pb_{p,X}\mu(p+2).
+\]
+
+\begin{theorem}[Conditional twin-prime chain]\label{thm:twin-chain}
+Assume that along an unbounded sequence $X\to\infty$:
+\begin{enumerate}[label=\textup{(T\arabic*)}]
+\item $b_{p,X}\ge0$ and every supported target $p+2$ lies in $P_1\cup P_2$;
+\item $M_X\ge m_0>0$ after the chosen normalization;
+\item $\mathcal J_X=o(M_X)$.
+\end{enumerate}
+Then there is a supported twin-prime pair for every sufficiently large scale in the sequence, and hence infinitely many twin primes.
+\end{theorem}
+
+\begin{proof}
+By \Cref{thm:parity-recovery}, the weighted prime-target mass is
+\[
+ P_{1,X}=\frac12(M_X-\mathcal J_X)
+ =\left(\frac12+o(1)\right)M_X>0.
+\]
+A positive sum of nonnegative weights over prime targets implies that at least one supported $p$ has $p+2$ prime.  Since the source intervals tend to infinity, the pairs are distinct and unbounded.
+\end{proof}
+
+\section{Binary Goldbach from a positive fixed-sum carrier}
+
+For an even integer $N$, let $w_{p,N}\ge0$ be weights on source primes $p<N$ such that $N-p$ is known to lie in $P_1\cup P_2$.  Put
+\[
+ M_N=\sum_pw_{p,N},
+ \qquad
+ \mathcal J_N=\sum_pw_{p,N}\mu(N-p).
+\]
+
+\begin{theorem}[Conditional binary Goldbach chain]\label{thm:gold-chain}
+Assume for every sufficiently large even $N$:
+\begin{enumerate}[label=\textup{(G\arabic*)}]
+\item the weights are nonnegative and every target $N-p$ lies in $P_1\cup P_2$;
+\item $M_N\ge m_0>0$ after normalization;
+\item $\mathcal J_N=o(M_N)$ uniformly in $N$.
+\end{enumerate}
+Then every sufficiently large even $N$ is a sum of two primes.
+\end{theorem}
+
+\begin{proof}
+The prime-target mass equals
+\[
+ P_{1,N}=\frac12(M_N-\mathcal J_N)>0.
+\]
+Hence some supported source prime $p$ has $N-p$ prime.
+\end{proof}
+
+\section{Hardy--Littlewood asymptotic route}
+
+\begin{theorem}[Classical asymptotic sufficient conditions]\label{thm:HL-sufficient}
+Suppose, for some $\delta<1/2$,
+\[
+ \sum_{n\le X}\Lambda(n)\Lambda(n+2)
+ =\Sing(2)X+O(X^{1/2+\delta}),
+ \qquad \Sing(2)>0,
+\]
+and, uniformly for sufficiently large even $N$,
+\[
+ \sum_{m+n=N}\Lambda(m)\Lambda(n)
+ =\Sing(N)N+O(N^{1/2+\delta}),
+ \qquad \inf_{N\ \mathrm{even}}\Sing(N)>0.
+\]
+Then there are infinitely many twin primes and every sufficiently large even integer is a sum of two primes.
+\end{theorem}
+
+\begin{proof}
+The main terms dominate the errors.  By \Cref{lem:prime-power}, contributions involving proper prime powers are $o(X)$ and $o(N)$.  The remaining positive von Mangoldt mass is carried by prime--prime pairs.
+\end{proof}
+
+\begin{warning}[Parity firewall]
+The exact Fourier selectors and a positive frame do not prove the sign estimate in \Cref{thm:twin-chain,thm:gold-chain}.  A prime-free semiprime carrier can satisfy all local congruence conditions and carry large positive tensor energy.  The substantive input is a selector-stable, phase-sensitive current estimate or an equivalent marked zero-mode lower bound.
+\end{warning}
+
+\part{Degree-resolved Goldbach and twin-prime machinery}
+
+\chapter{Squarefree Mellin degree and exact prime separation}
+
+\section{The squarefree Mellin product}
+
+Fix $X\ge2$ and put
+\[
+ L_X:=\log(2X).
+\]
+For $n\ge2$ define the entire squarefree Mellin port
+\begin{equation}
+ \mathfrak E_{z,X}(n)
+ :=\mu^2(n)\prod_{\ell\mid n}
+       \left(\ell^{z/L_X}-1\right)
+ =\sum_{j\ge1}B_{j,X}(n)z^j.
+ \label{eq:v003-squarefree-mellin}
+\end{equation}
+The product is over the distinct prime divisors of $n$.  The factor
+$\mu^2(n)$ intentionally kills all nonsquarefree targets; the resulting port
+is therefore adapted to a rough $P_1\cup P_2$ carrier rather than to the
+complete von Mangoldt sequence.
+
+For $j\ge1$ define the generalized von Mangoldt function
+\begin{equation}
+ \Lambda_j(n)
+ :=\sum_{d\mid n}\mu(d)
+       \left(\log\frac nd\right)^j.
+ \label{eq:v003-generalized-lambda}
+\end{equation}
+
+\begin{theorem}[Exact Mellin-degree coefficients]\label{thm:v003-mellin-degree}
+For every $j\ge1$ and every $n\ge2$,
+\[
+ \boxed{
+ B_{j,X}(n)
+ =\frac{\mu^2(n)\Lambda_j(n)}{j!L_X^j}.}
+\]
+In particular,
+\[
+ B_{1,X}(n)=\frac{\mu^2(n)\Lambda(n)}{L_X},
+ \qquad
+ B_{2,X}(n)=\frac{\mu^2(n)\Lambda_2(n)}{2L_X^2}.
+\]
+\end{theorem}
+
+\begin{proof}
+If $n$ is squarefree, then
+\[
+ \begin{aligned}
+ \sum_{j\ge0}\Lambda_j(n)\frac{z^j}{j!L_X^j}
+ &=\sum_{d\mid n}\mu(d)
+   \exp\!\left(\frac z{L_X}\log\frac nd\right)\\
+ &=n^{z/L_X}\prod_{\ell\mid n}(1-\ell^{-z/L_X})
+ =\prod_{\ell\mid n}(\ell^{z/L_X}-1).
+ \end{aligned}
+\]
+Coefficient comparison proves the formula.  If $n$ is nonsquarefree, both
+sides vanish after multiplication by $\mu^2(n)$.
+\end{proof}
+
+\begin{definition}[Exact degree-$\le2$ squarefree port]
+Define
+\begin{equation}
+ \mathfrak P_{\le2,X}(n):=B_{1,X}(n)+B_{2,X}(n).
+ \label{eq:v003-Ple2}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Support and exact values]\label{prop:v003-Ple2-values}
+For $2\le n\le2X$,
+\[
+ \mathfrak P_{\le2,X}(n)=
+ \begin{cases}
+  \alpha+\alpha^2/2,
+    &n=p\text{ prime},\\[1mm]
+  \alpha_1\alpha_2,
+    &n=p_1p_2,\ p_1\ne p_2\text{ prime},\\[1mm]
+  0,&\text{otherwise},
+ \end{cases}
+\]
+where $\alpha=\log p/L_X$ and
+$\alpha_i=\log p_i/L_X$.
+\end{proposition}
+
+\begin{proof}
+For one prime,
+$\e^{\alpha z}-1=\alpha z+\alpha^2z^2/2+O(z^3)$.
+For two distinct primes the product begins with
+$\alpha_1\alpha_2z^2$.  A squarefree integer with at least three prime
+factors has no coefficient of degree one or two, and a nonsquarefree integer
+is killed by definition.
+\end{proof}
+
+\section{Atom--bulk decomposition}
+
+\begin{lemma}[Selberg degree-two identity]\label{lem:v003-selberg}
+For every $n\ge1$,
+\[
+ \boxed{
+ \Lambda_2(n)=\Lambda(n)\log n+(\Lambda*\Lambda)(n).}
+\]
+\end{lemma}
+
+\begin{proof}
+For $\Re s>1$, the Dirichlet series of $\Lambda_2$ is
+$\zeta''(s)/\zeta(s)$.  Put $A(s)=-\zeta'(s)/\zeta(s)$.  The Dirichlet
+series of $\Lambda(n)\log n$ is $-A'(s)$ and that of
+$\Lambda*\Lambda$ is $A(s)^2$.  Since
+\[
+ -A'(s)+A(s)^2=\frac{\zeta''(s)}{\zeta(s)},
+\]
+uniqueness of absolutely convergent Dirichlet series gives the identity.
+\end{proof}
+
+\begin{corollary}[Exact prime atom plus semiprime bulk]\label{cor:v003-atom-bulk}
+For every $n\ge2$,
+\[
+ \boxed{
+ \begin{aligned}
+ \mathfrak P_{\le2,X}(n)
+ ={}&\mu^2(n)\frac{\Lambda(n)}{L_X}
+      \left(1+\frac{\log n}{2L_X}\right)\\
+ &+\frac{\mu^2(n)}{2L_X^2}(\Lambda*\Lambda)(n).
+ \end{aligned}}
+\]
+The first term is supported exactly on primes.  The second is supported
+exactly on squarefree semiprimes and equals
+$(\log r\log q)/L_X^2$ at $n=rq$ with $r\ne q$ prime.
+\end{corollary}
+
+\begin{proof}
+Insert \Cref{thm:v003-mellin-degree,lem:v003-selberg}.  At a prime the
+convolution term vanishes.  At a squarefree semiprime $rq$ it equals
+$2\log r\log q$.  At every other squarefree depth the degree-two coefficient
+vanishes.
+\end{proof}
+
+\section{A signed pointwise prime minorant}
+
+For $2\le n\le2X$ put
+\[
+ \alpha_X(n):=\frac{\log n}{L_X}
+\]
+and define
+\begin{equation}
+ \mathfrak J_X(n)
+ :=\frac67\left(
+ B_{1,X}(n)+B_{2,X}(n)
+ -\frac{2}{\alpha_X(n)}B_{3,X}(n)
+ \right).
+ \label{eq:v003-signed-separator}
+\end{equation}
+
+\begin{theorem}[Exact cancellation of the squarefree $P_2$ layer]
+\label{thm:v003-signed-separator}
+For $2\le n\le2X$,
+\[
+ \mathfrak J_X(n)=
+ \begin{cases}
+  \dfrac67\alpha+\dfrac17\alpha^2,
+     &n=p\text{ prime},\\[2mm]
+  0,&n\text{ a squarefree semiprime},\\[1mm]
+  -\dfrac{12}{7\alpha_X(n)}B_{3,X}(n)<0,
+     &n\text{ squarefree with three prime factors},\\[2mm]
+  0,&\text{otherwise}.
+ \end{cases}
+\]
+Consequently,
+\begin{equation}
+ \boxed{\mathfrak J_X(n)\le\1_{\mathbb P}(n)}
+ \label{eq:v003-prime-minorant}
+\end{equation}
+for every $2\le n\le2X$.
+\end{theorem}
+
+\begin{proof}
+For a prime, $B_1=\alpha$, $B_2=\alpha^2/2$, and
+$B_3=\alpha^3/6$, which gives the first value.  Since $0<\alpha\le1$, it
+lies in $(0,1]$.  For $n=pq$, write
+$\alpha=\alpha_p+\alpha_q$.  Then
+\[
+ B_2=\alpha_p\alpha_q,
+ \qquad
+ B_3=\frac12\alpha_p\alpha_q(\alpha_p+\alpha_q)
+     =\frac\alpha2B_2,
+\]
+so the separator vanishes.  At squarefree factor depth three one has
+$B_1=B_2=0$ and $B_3>0$.  At depth at least four the first three
+coefficients vanish.  Nonsquarefree targets vanish by definition.  The
+pointwise minorant follows from this case division.
+\end{proof}
+
+\begin{corollary}[Signed fixed-gap and fixed-sum closure]
+\label{cor:v003-signed-additive-closure}
+Define
+\[
+ \mathscr J_{\rm twin}(X)
+ :=\sum_{\substack{p\le X\\p\ \mathrm{prime}}}
+   (\log p)\mathfrak J_X(p+2)
+\]
+and, for even $N$,
+\[
+ \mathscr J_{\rm Gold}(N)
+ :=\sum_{\substack{p<N-1\\p\ \mathrm{prime}}}
+   (\log p)\mathfrak J_N(N-p).
+\]
+If $\mathscr J_{\rm twin}(X)>0$ for an unbounded sequence of $X$, then
+there are infinitely many twin primes.  If
+$\mathscr J_{\rm Gold}(N)>0$ for every sufficiently large even $N$, then
+binary Goldbach holds for all such $N$.
+\end{corollary}
+
+\begin{proof}
+If no target $p+2$ were prime, every summand in
+$\mathscr J_{\rm twin}(X)$ would be nonpositive by
+\eqref{eq:v003-prime-minorant}.  Thus positivity forces at least one twin
+pair.  The same argument with target $N-p$ proves the Goldbach statement.
+\end{proof}
+
+\begin{remark}
+The separator solves the algebraic $P_1/P_2$ problem exactly, but the
+resulting shifted or fixed-sum correlation is signed.  Proving its positivity
+is a new Type--II/parity estimate, not a consequence of the interpolation
+formula.
+\end{remark}
+
+\chapter{Stable finite Cauchy realization of the degree-two carrier}
+
+\section{A bounded finite evaluation bank}
+
+Fix an integer $m\ge3$, let $\zeta_m=\e^{2\pi i/m}$, and choose
+$0<r<s<1$.  For $j=1,2$ define
+\begin{equation}
+ \mathfrak D^{(j)}_{m,r,X}(n)
+ :=\frac1{mr^j}\sum_{v=0}^{m-1}
+   \zeta_m^{-jv}\mathfrak E_{r\zeta_m^v,X}(n).
+ \label{eq:v003-cauchy-D}
+\end{equation}
+Root-of-unity orthogonality gives
+\begin{equation}
+ \mathfrak D^{(j)}_{m,r,X}(n)
+ =\sum_{\ell\ge0}B_{j+\ell m,X}(n)r^{\ell m}.
+ \label{eq:v003-cauchy-alias}
+\end{equation}
+Put
+\[
+ \vartheta:=\left(\frac rs\right)^m,
+ \qquad
+ C_s:=\frac1s+\frac1{s^2},
+\]
+and define
+\begin{equation}
+ \mathfrak c^{(\le2)}_{m;r,s,X}(n)
+ :=\mathfrak D^{(1)}_{m,r,X}(n)
+  +\mathfrak D^{(2)}_{m,r,X}(n)
+  -\vartheta C_s\mathfrak E_{s,X}(n).
+ \label{eq:v003-cauchy-minorant}
+\end{equation}
+
+\begin{theorem}[Stable Cauchy minorant]\label{thm:v003-cauchy-minorant}
+For every $n\ge2$,
+\[
+ \boxed{
+ 0\le
+ \mathfrak P_{\le2,X}(n)-\mathfrak c^{(\le2)}_{m;r,s,X}(n)
+ \le
+ \vartheta C_s\mathfrak E_{s,X}(n).}
+\]
+In particular,
+$\mathfrak c^{(\le2)}_{m;r,s,X}\le\mathfrak P_{\le2,X}$ pointwise.  The
+total absolute coefficient weight of the finite evaluation bank is at most
+\[
+ \boxed{r^{-1}+r^{-2}+\vartheta C_s,}
+\]
+independently of $m$.
+\end{theorem}
+
+\begin{proof}
+The coefficient of $B_{d,X}(n)$ in
+\eqref{eq:v003-cauchy-minorant} is
+\[
+ \kappa_d
+ =r^{d-1}\1_{d\equiv1\pmod m}
+  +r^{d-2}\1_{d\equiv2\pmod m}
+  -\vartheta C_ss^d.
+\]
+For $d=1,2$ one has $\kappa_d\le1$.  If
+$d=1+\ell m$ with $\ell\ge1$, then
+\[
+ r^{d-1}=\vartheta^\ell s^{d-1}
+ \le\vartheta C_ss^d
+\]
+because $C_ss=1+s^{-1}>1$.  The same argument for
+$d=2+\ell m$ uses $C_ss^2=1+s>1$.  Every other coefficient of degree at
+least three is nonpositive.  Since all $B_{d,X}(n)$ are nonnegative, this
+proves the lower inequality and the pointwise minorant.  Subtracting the
+aliased positive tails shows that the difference is at most
+$\vartheta C_s\mathfrak E_{s,X}(n)$.  Finally, the two Fourier banks have
+coefficient variations $r^{-1}$ and $r^{-2}$, and the correction contributes
+$\vartheta C_s$.
+\end{proof}
+
+\begin{corollary}[Dyadic bank]
+For $r=1/4$ and $s=1/2$,
+\[
+ 0\le\mathfrak P_{\le2,X}(n)
+ -\mathfrak c^{(\le2)}_{m;1/4,1/2,X}(n)
+ \le6\,2^{-m}\mathfrak E_{1/2,X}(n),
+\]
+and the total coefficient variation is at most $26$.
+\end{corollary}
+
+\begin{theorem}[Positive-mass transfer through the finite bank]
+\label{thm:v003-cauchy-transfer}
+Let $b_n\ge0$ be finitely supported weights and set
+\[
+ Q_{\le2}:=\sum_nb_n\mathfrak P_{\le2,X}(n),
+ \qquad
+ U_s:=\sum_nb_n\mathfrak E_{s,X}(n),
+\]
+\[
+ C_m:=\sum_nb_n\mathfrak c^{(\le2)}_{m;r,s,X}(n).
+\]
+Then
+\[
+ \boxed{Q_{\le2}-\vartheta C_sU_s\le C_m\le Q_{\le2}.}
+\]
+Consequently, any lower bound $Q_{\le2}\ge M_X$ survives in a finite
+phase-complete tensor whenever $\vartheta C_sU_s=o(M_X)$.
+\end{theorem}
+
+\begin{proof}
+Multiply the pointwise inequalities of
+\Cref{thm:v003-cauchy-minorant} by $b_n$ and sum.
+\end{proof}
+
+\chapter{Prime--semiprime seed theorems and rigorous conditional transfers}
+
+\section{Li--Liu inputs and exponent conversion}
+
+The following qualitative statements are external inputs.  Li and Liu prove
+in their terminology Proposition $(1-1.75)$ for twin primes and Proposition
+$(1+1.9)$ for Goldbach \cite{LiLiu2026}: the target is either prime or a product $rq$ of two
+primes with the indicated factor-ratio restriction.  Quantitative constants
+and support refinements are kept separate below.
+
+\begin{proposition}[Factor-ratio conversion]\label{prop:v003-ratio-conversion}
+If $n=rq$ with $1\le r\le q^a$, then
+\[
+ \boxed{
+ \frac{\log r}{\log n}\le\frac{a}{1+a},
+ \qquad
+ \frac{\log q}{\log n}\ge\frac1{1+a}.}
+\]
+Thus $a=3/4$ gives the interval endpoint $3/7$, and $a=9/10$ gives
+$9/19$.
+\end{proposition}
+
+\begin{proof}
+The inequality $\log r\le a\log q$ gives
+$\log n=\log r+\log q\le(1+a)\log q$.  This proves the second inequality;
+the first follows by subtraction from one.
+\end{proof}
+
+\begin{assumption}[Quantitative prime--semiprime seeds]
+\label{ass:v003-quant-seeds}
+There are constants $c_{\rm T},c_{\rm G},\varepsilon>0$ such that:
+\begin{enumerate}[label=\textup{(Q\arabic*)}]
+\item for all sufficiently large $x$, at least
+$c_{\rm T}\Sing(2)x/\log^2x$ primes
+$p\in(\varepsilon x,x)$ satisfy
+$p+2=rq$, where $q$ is prime, $r=1$ or prime, and $r\le q^{3/4}$;
+\item for every sufficiently large even $N$, at least
+$c_{\rm G}\Sing(N)N/\log^2N$ representations
+$N=p+rq$ have $p,q$ prime, $r=1$ or prime, and $r\le q^{9/10}$.
+\end{enumerate}
+These are external quantitative inputs; they are not proved in this
+monograph.
+\end{assumption}
+
+Define
+\[
+ \mathscr Q_{\rm T}^{(\le2)}(x)
+ :=\sum_{\substack{p\le x\\p\ \mathrm{prime}}}
+   (\log p)\mathfrak P_{\le2,x}(p+2)
+\]
+and
+\[
+ \mathscr Q_{\rm G}^{(\le2)}(N)
+ :=\sum_{\substack{p<N\\p\ \mathrm{prime}}}
+   (\log p)\mathfrak P_{\le2,N}(N-p).
+\]
+
+\begin{theorem}[Quantitative seed transfer]\label{thm:v003-seed-transfer}
+Under Assumption~\ref{ass:v003-quant-seeds},
+\[
+ \boxed{
+ \mathscr Q_{\rm T}^{(\le2)}(x)
+ \gg\Sing(2)\frac{x}{\log^2x}}
+\]
+for all sufficiently large $x$, and
+\[
+ \boxed{
+ \mathscr Q_{\rm G}^{(\le2)}(N)
+ \gg\Sing(N)\frac{N}{\log^2N}}
+\]
+uniformly for sufficiently large even $N$.
+
+If, in addition, every composite target in the relevant seed satisfies
+$r\ge x^\alpha$ in the twin case, respectively $r\ge N^\alpha$ in the
+Goldbach case, for some fixed $\alpha>0$, then the corresponding lower bound
+improves by one logarithm to
+\[
+ \mathscr Q_{\rm T}^{(\le2)}(x)
+ \gg\Sing(2)\frac{x}{\log x},
+ \qquad
+ \mathscr Q_{\rm G}^{(\le2)}(N)
+ \gg\Sing(N)\frac{N}{\log N}.
+\]
+\end{theorem}
+
+\begin{proof}
+For the twin seed, $\log p\asymp\log x$.  A prime target contributes
+$\gg\log x$.  For a composite target $n=rq>\varepsilon x$, one has
+$r\ge2$ and, by \Cref{prop:v003-ratio-conversion},
+$\log q\gg\log x$.  Hence
+\[
+ (\log p)\mathfrak P_{\le2,x}(rq)
+ =(\log p)\frac{\log r\log q}{L_x^2}
+ \gg1.
+\]
+Multiplication by the number of candidates proves the first bound.
+
+For Goldbach, discard representations with
+$p\le N^{1/2}$ or $rq\le N^{1/2}$; there are $O(N^{1/2})$, negligible
+against $N/\log^2N$.  On the remainder, $\log p\gg\log N$ and
+\Cref{prop:v003-ratio-conversion} gives $\log q\gg\log N$.  The same
+calculation gives a positive absolute contribution for each composite
+representation, while a prime target contributes $\gg\log N$.
+
+Under the additional rough lower bound, both $\log r/L$ and $\log q/L$ are
+bounded below by positive constants.  Every candidate then contributes
+$\gg\log x$ or $\gg\log N$, yielding the stronger scale.
+\end{proof}
+
+\begin{warning}
+The theorem proves positive prime-or-semiprime mass, not prime mass.  The
+semiprime layer may carry the entire lower bound.  The exact separator
+\eqref{eq:v003-signed-separator} or the parity current of
+\Cref{thm:parity-recovery} still requires a signed arithmetic estimate.
+\end{warning}
+
+\section{A transparent support-retaining hypothesis}
+
+Fix $0<\kappa<\tau<1/2$ and define
+\begin{equation}
+ \begin{aligned}
+ w_\kappa(n;x):={}&
+ \1_{P^-(n)\ge x^\kappa}
+ -\1_{\Omega(n)\ge2}\1_{P^-(n)\ge x^\tau}\\
+ &+\1_{\Omega(n)\ge3}\1_{P^-(n)\ge x^\tau}
+ -\1_{\Omega(n)\ge3}\1_{P^-(n)\ge x^\kappa}.
+ \end{aligned}
+ \label{eq:v003-rough-weight}
+\end{equation}
+Here $P^-(n)$ is the least prime divisor and $\Omega(n)$ counts prime
+factors with multiplicity.
+
+\begin{lemma}[Pointwise support of the rough weight]
+\label{lem:v003-rough-weight-support}
+Suppose $n\asymp x$ and $x$ is sufficiently large.  Then
+\[
+ w_\kappa(n;x)=1
+\]
+exactly when either $n$ is prime, or $n=rq$ with distinct primes
+$r<q$ and $x^\kappa\le r<x^\tau$; otherwise the weight is zero.
+\end{lemma}
+
+\begin{proof}
+If $P^-(n)<x^\kappa$, the first term vanishes and the two depth-$\ge3$
+terms cancel, while depth at most two contributes zero.  If
+$x^\kappa\le P^-(n)<x^\tau$, the value is one at factor depth two and
+zero at depth at least three.  A depth-one integer in this range would be a
+prime $n=P^-(n)<x^\tau$, contradicting $n\asymp x$.  In the depth-two
+case, writing $n=rq$ with $r=P^-(n)$, the inequalities $n\asymp x$ and
+$r<x^\tau$ with $\tau<1/2$ give $q>r$ for large $x$.  If
+$P^-(n)\ge x^\tau$, the second term cancels the first at every composite
+depth, with the third term restoring and the fourth term removing the
+depth-$\ge3$ part; only primes remain.
+\end{proof}
+
+Let
+\[
+ \mathcal K=\left\{\frac1{12},\frac17,\frac27,\frac13\right\},
+ \qquad
+ \tau=\frac37-\varepsilon_0,
+ \qquad
+ \mathcal W_x(n)=\sum_{\kappa\in\mathcal K}w_\kappa(n;x).
+\]
+Then $0\le\mathcal W_x\le4$, and its positive support consists of primes
+and semiprimes $rq$ satisfying
+\[
+ x^{1/12}\le r<x^{3/7-\varepsilon_0}.
+\]
+
+\begin{assumption}[Support-retaining Li--Liu audit hypothesis]
+\label{ass:v003-support-retaining}
+For some $c_0>0$ and all sufficiently large $x$,
+\[
+ \sum_{\substack{\varepsilon_0x<p<x\\p\ \mathrm{prime}}}
+ \mathcal W_x(p+2)
+ \ge c_0\Sing(2)\frac{x}{\log^2x}.
+\]
+This is the support-retaining left-side deduction proposed in the V061
+working notes \cite{GoldbachV061}.  It is recorded here as a hypothesis, not as an externally
+verified theorem.
+\end{assumption}
+
+\begin{corollary}[Natural-scale rough carrier]
+\label{cor:v003-natural-rough-carrier}
+Under Assumption~\ref{ass:v003-support-retaining},
+\[
+ \boxed{
+ \mathscr Q_{\rm T}^{(\le2)}(x)
+ \gg\Sing(2)\frac{x}{\log x}.}
+\]
+Moreover the positive mass comes entirely from prime targets and semiprime
+targets $rq$ with
+$x^{1/12}\le r<x^{3/7-\varepsilon_0}$.
+\end{corollary}
+
+\begin{proof}
+Every supported prime or semiprime has $\log p\asymp L_x$,
+$\log r/L_x\ge1/13$ for sufficiently large $x$, and
+$\log q/L_x\ge1/2$.  Hence every supported target contributes
+$\gg L_x$ to the weighted degree-$\le2$ correlation.  The support count is
+at least one quarter of the weighted lower bound because
+$0\le\mathcal W_x\le4$.  Multiplication gives the result.
+\end{proof}
+
+\chapter{The semiprime profile and the remaining parity wall}
+
+\section{Local factor-ratio regularity}
+
+For a twin-type semiprime target $p+2=rq$ with $r<q$ prime, put
+\[
+ u_x(r):=\frac{\log r}{L_x}
+\]
+and define the positive measure
+\begin{equation}
+ \mu_x^{(2)}
+ :=\frac{L_x}{x}
+ \sum_{\substack{\varepsilon_0x<p<x\\p\ \mathrm{prime}\\
+                   p+2=rq,\ r<q\ \mathrm{prime}}}
+ (\log p)\frac{\log r}{L_x}\frac{\log q}{L_x}
+ \delta_{u_x(r)}.
+ \label{eq:v003-semiprime-profile}
+\end{equation}
+
+\begin{assumption}[Standard two-linear-form upper-bound sieve]
+\label{ass:v003-two-form-sieve}
+Uniformly for odd primes $r\le(2x)^{1/2}$,
+\[
+ \#\left\{q:\ q\ \mathrm{prime},\ rq-2\ \mathrm{prime},\
+             \varepsilon_0x<rq-2<x\right\}
+ \ll_{\varepsilon_0}\frac{x}{rL_x^2}.
+\]
+This is the standard dimension-two upper-bound sieve for the primitive
+linear forms $q$ and $rq-2$; see, for example, \cite{IwaniecKowalski}.
+\end{assumption}
+
+\begin{theorem}[Lipschitz semiprime profile]\label{thm:v003-profile-lipschitz}
+Under Assumption~\ref{ass:v003-two-form-sieve}, uniformly for
+$0\le u<v\le1/2$,
+\[
+ \boxed{
+ \mu_x^{(2)}([u,v])
+ \ll_{\varepsilon_0}v-u+\frac1{L_x}.}
+\]
+Every weak-* subsequential limit of $\mu_x^{(2)}$ is therefore absolutely
+continuous with an essentially bounded density.  In particular, the
+normalized degree-two mass has no atom at a fixed factor ratio.
+\end{theorem}
+
+\begin{proof}
+For fixed $r$, the sieve bound and
+$(\log p)(\log q)/L_x^2\le1$ show that the unnormalized contribution is
+\[
+ \ll\frac{x\log r}{rL_x^2}.
+\]
+Sum over primes $r$ with
+$\e^{uL_x}<r\le\e^{vL_x}$ and use
+\[
+ \sum_{y<r\le z\atop r\ \mathrm{prime}}\frac{\log r}{r}
+ \ll\log(z/y)+1.
+\]
+After multiplying by $L_x/x$, the stated interval bound follows.  Uniform
+interval domination implies absolute continuity and an $L^\infty$ density
+for every weak-* limit.
+\end{proof}
+
+\section{Atomic prime fibre versus continuous semiprime fibre}
+
+Define the normalized twin atom
+\[
+ \tau_x:=\frac{L_x}{x}
+ \sum_{\substack{\varepsilon_0x<p<x\\p,p+2\ \mathrm{prime}}}
+ (\log p)
+ \left[
+  \frac{\log(p+2)}{L_x}
+  +\frac12\left(\frac{\log(p+2)}{L_x}\right)^2
+ \right].
+\]
+Let $\mu_x^\sharp$ be the restriction of
+\eqref{eq:v003-semiprime-profile} to
+$[1/12,3/7-\varepsilon_0]$ and put
+\[
+ \nu_x^\sharp:=\tau_x\delta_0+\mu_x^\sharp.
+\]
+
+\begin{theorem}[Atomic--continuous alternative]
+\label{thm:v003-atomic-continuous}
+Assume Assumptions~\ref{ass:v003-support-retaining} and~\ref{ass:v003-two-form-sieve}.  Then
+\[
+ \nu_x^\sharp([0,1/2])\gg\Sing(2)
+\]
+for all sufficiently large $x$.  Every weak-* subsequential limit has the
+form
+\[
+ \boxed{\nu=\tau\delta_0+f(u)\dd u,}
+\]
+where $f\in L^\infty$, $\supp f\subset[1/12,3/7]$, and
+$\tau+\int f\gg\Sing(2)$.
+\end{theorem}
+
+\begin{proof}
+The total mass is exactly the normalization by $L_x/x$ of the rough
+prime-plus-semiprime contribution in
+\Cref{cor:v003-natural-rough-carrier}.  The semiprime part has uniformly
+bounded density by \Cref{thm:v003-profile-lipschitz}; its support converges
+into $[1/12,3/7]$.  The prime contribution is concentrated at the isolated
+endpoint $u=0$.  Weak-* compactness of bounded positive measures gives the
+claimed decomposition and mass lower bound.
+\end{proof}
+
+\begin{warning}
+The theorem does not force $\tau>0$.  All the positive mass may converge to
+a bounded continuous semiprime profile.  Twin primes require a contraction
+of that profile, a positive signed separator correlation, or an equivalent
+M\"obius-current estimate.
+\end{warning}
+
+\chapter{Selector firewalls and the first genuinely quadratic targets}
+
+\section{First moments cannot select a twin edge}
+
+Let $\mathcal H=\{h_1,\ldots,h_k\}$ and let $G_2(\mathcal H)$ join $i$ and
+$j$ when $|h_i-h_j|=2$.  This graph is bipartite: color $h$ according to
+whether $h\bmod4$ belongs to $\{0,1\}$ or to $\{2,3\}$.
+
+\begin{theorem}[Twin-free realization of all sub-half marginals]
+\label{thm:v003-twinfree-marginals}
+If $0\le\pi_i\le1/2$, there is a probability distribution supported on
+independent sets of $G_2(\mathcal H)$ whose vertex marginals are exactly
+$\pi_i$.  Hence no statistic depending only linearly on the one-coordinate
+marginals can certify a twin edge.
+\end{theorem}
+
+\begin{proof}
+Let $A\sqcup B$ be the bipartition.  Choose $A$ or $B$ with probability
+$1/2$.  Conditional on the chosen side, include vertex $i$ independently
+with probability $2\pi_i$ and include no vertex on the other side.  The
+result is an independent set and vertex $i$ is included with probability
+$\pi_i$.
+\end{proof}
+
+\begin{proposition}[Maynard coordinate ceiling]
+\label{prop:v003-maynard-ceiling}
+For a standard Maynard test function $F$ \cite{Maynard2015}, the coordinate integrals satisfy
+$J_k^{(i)}(F)\le I_k(F)$.  Thus the standard first-moment asymptotic
+\[
+ \pi_i=\frac{\log R}{\log N}\frac{J_k^{(i)}(F)}{I_k(F)}+o(1),
+ \qquad R=N^{\theta/2-\delta},
+\]
+gives $\limsup\pi_i\le\theta/2-\delta<1/2$.  Consequently the complete
+first-moment data are compatible with the twin-free model of
+\Cref{thm:v003-twinfree-marginals}.
+\end{proposition}
+
+\begin{proof}
+For fixed values of the other variables, Cauchy--Schwarz in the $i$th
+coordinate gives
+\[
+ \left(\int F\,\dd t_i\right)^2\le\int F^2\,\dd t_i.
+\]
+Integrating over the remaining variables yields $J_k^{(i)}(F)\le I_k(F)$.
+Substitution proves the ceiling, and
+\Cref{thm:v003-twinfree-marginals} gives the final assertion.
+\end{proof}
+
+\section{The singular series is an anti-selector}
+
+\begin{proposition}[Gap $2$ has minimal even-gap singular series]
+\label{prop:v003-minimal-singular-series}
+For every nonzero even integer $d$,
+\[
+ \boxed{
+ \Sing(d)=\Sing(2)
+ \prod_{\ell\mid d,\ \ell>2}\frac{\ell-1}{\ell-2}
+ \ge\Sing(2).}
+\]
+Equality holds exactly when $d$ has no odd prime divisor.
+\end{proposition}
+
+\begin{proof}
+Each factor $(\ell-1)/(\ell-2)$ is greater than one.  The product is empty
+exactly when no odd prime divides $d$.
+\end{proof}
+
+\begin{remark}
+Local Euler densities therefore do not privilege the twin edge; among even
+gaps the twin singular series is minimal, with equality shared by powers of
+two.  A successful selector must use global two-coordinate information.
+\end{remark}
+
+\section{Matching energy}
+
+For binary variables $X_j,Y_j\in\{0,1\}$,
+\begin{equation}
+ \boxed{2X_jY_j=X_j+Y_j-(X_j-Y_j)^2.}
+ \label{eq:v003-matching-identity}
+\end{equation}
+For nonnegative weights $w_n$ put
+\[
+ \mathcal V_w=\sum_nw_n\sum_j(X_j(n)+Y_j(n)),
+\]
+\[
+ \mathcal D_w=\sum_nw_n\sum_j(X_j(n)-Y_j(n))^2,
+ \qquad
+ \mathcal E_w=\sum_nw_n\sum_jX_j(n)Y_j(n).
+\]
+
+\begin{proposition}[Exact matching-energy decomposition]
+\label{prop:v003-matching-energy}
+One has
+\[
+ \boxed{2\mathcal E_w=\mathcal V_w-\mathcal D_w.}
+\]
+Thus first moments estimate $\mathcal V_w$, while a genuine twin selector
+requires a strict contraction of the imbalance energy $\mathcal D_w$.
+\end{proposition}
+
+\begin{proof}
+Multiply \eqref{eq:v003-matching-identity} by $w_n$, sum over $n$ and $j$,
+and collect terms.
+\end{proof}
+
+\section{Negative-temperature parity is not a new route}
+
+\begin{proposition}[Exact positive/negative temperature identity]
+\label{prop:v003-negative-temperature}
+For every real $a$, every $X\ge2$, and every $2\le n\le2X$,
+\[
+ \boxed{
+ n^{a/L_X}\mathfrak E_{-a,X}(n)
+ =\mu(n)\mathfrak E_{a,X}(n).}
+\]
+Consequently,
+\[
+ \frac{\mathfrak E_{a,X}(n)
+       -n^{a/L_X}\mathfrak E_{-a,X}(n)}{2a}
+ =\frac{1-\mu(n)}{2a}\mathfrak E_{a,X}(n).
+\]
+\end{proposition}
+
+\begin{proof}
+For nonsquarefree $n$, both sides vanish.  If
+$n=p_1\cdots p_k$ is squarefree and
+$\alpha_j=\log p_j/L_X$, then
+\[
+ \prod_j(\e^{-a\alpha_j}-1)
+ =(-1)^k\e^{-a\sum_j\alpha_j}
+   \prod_j(\e^{a\alpha_j}-1)
+ =\mu(n)n^{-a/L_X}\mathfrak E_{a,X}(n).
+\]
+\end{proof}
+
+\begin{corollary}[Parity firewall]
+On a squarefree $P_1\cup P_2$ carrier the temperature difference separates
+primes and semiprimes exactly, but every shifted or fixed-sum estimate of it
+contains the weighted M\"obius current linearly.  It is therefore a rewriting
+of the parity problem, not an independent positive argument.
+\end{corollary}
+
+\begin{proof}
+Insert the second identity into the relevant source-prime sum.  The term
+with $1$ is a positive-temperature moment; the second is precisely the
+weighted correlation with $\mu$ of the shifted or complementary target.
+\end{proof}
+
+\chapter{Integrated additive closure ledger}
+
+\begin{theorem}[Four rigorous routes to additive closure]
+\label{thm:v003-four-additive-routes}
+Each of the following is sufficient for the stated conclusion.
+\begin{enumerate}[label=\textup{(A\arabic*)}]
+\item If the signed fixed-gap correlations
+$\mathscr J_{\rm twin}(X)$ are positive on unbounded scales, then twin
+primes are infinite.
+\item If the signed fixed-sum correlations
+$\mathscr J_{\rm Gold}(N)$ are positive for all sufficiently large even
+$N$, then binary Goldbach holds.
+\item If a positive $P_1\cup P_2$ carrier has nonvanishing mass and
+$\mathcal J=o(M)$, then the corresponding prime fibre has asymptotic mass
+$M/2$.
+\item If the Hardy--Littlewood asymptotics of
+\Cref{thm:HL-sufficient} hold, the twin-prime and binary Goldbach
+conjectures follow.
+\end{enumerate}
+The external Li--Liu inputs and the stable Cauchy bank provide positive
+prime-or-semiprime seed mass, but do not by themselves establish any of the
+four signed conclusions.
+\end{theorem}
+
+\begin{proof}
+Items (A1)--(A2) are
+\Cref{cor:v003-signed-additive-closure}.  Item (A3) is
+\Cref{thm:parity-recovery}; item (A4) is \Cref{thm:HL-sufficient}.  The last
+sentence follows from the exact decomposition
+\Cref{cor:v003-atom-bulk}: a positive degree-$\le2$ mass can be carried
+entirely by the semiprime bulk.
+\end{proof}
+
+\begin{ledger}[Goldbach/twin-prime machinery status]
+\begin{center}
+\begin{tabularx}{0.97\textwidth}{@{}p{0.25\textwidth}Xp{0.20\textwidth}@{}}
+\toprule
+Object & Rigorous content & Status\\
+\midrule
+Normal/anomalous tensor ports
+& Exact difference and fixed-sum prime correlations
+& \StatusExact\\
+Generalized Mellin degree
+& Exact $B_j=\mu^2\Lambda_j/(j!L^j)$ calculus
+& \StatusExact\\
+Degree-$\le2$ carrier
+& Exact prime atom plus squarefree-semiprime bulk
+& \StatusExact\\
+Signed separator
+& Cancels all $P_2$, is negative only on squarefree $P_3$
+& \StatusExact\\
+Stable Cauchy bank
+& Bounded finite phase bank minorizing $P_1\cup P_2$
+& \StatusExact\\
+Li--Liu seeds
+& Qualitative $(1-1.75)$ and $(1+1.9)$ theorems; quantitative counts isolated as assumptions
+& \StatusExternal/\StatusConditional\\
+Support-retaining rough seed
+& Would promote the weighted carrier to $x/\log x$
+& \StatusConditional\\
+Semiprime profile
+& Bounded-density weak limits under a standard upper-bound sieve
+& \StatusConditional\\
+First-moment selection
+& Cannot force a twin edge below the one-half marginal threshold
+& \StatusAudit\\
+Remaining theorem
+& Signed Type--II/profile contraction at $h=2$ and uniformly in $N$
+& \StatusOpen\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{ledger}
+
+
+
+\part{The common mass--prefix coercivity engine}
+
+\chapter{Gaussian kernel descent}
+
+\section{Discrete mass and prefix current}
+
+Let
+\[
+ s_0<s_1<\cdots<s_N
+\]
+be predetermined logarithmic cell centres and let $d_0,\ldots,d_N$ be Hilbert-valued discrepancy coefficients.  Define
+\[
+ M(d)=\sum_{c=0}^Nd_c,
+ \qquad
+ q_c(d)=\sum_{r=0}^cd_r\quad(0\le c<N).
+\]
+For a port $F\in L^2(\R)$ and translations $T_sF(u)=F(u+s)$, put
+\[
+ \mathcal C_F(d)=\sum_{c=0}^Nd_c\otimes T_{s_c}F.
+\]
+
+\begin{theorem}[Exact mass--prefix identity]\label{thm:mass-prefix}
+One has
+\[
+ \boxed{
+ \mathcal C_F(d)
+ =M(d)\otimes T_{s_N}F
+ +\sum_{c=0}^{N-1}q_c(d)\otimes
+ \bigl(T_{s_c}F-T_{s_{c+1}}F\bigr).}
+\]
+\end{theorem}
+
+\begin{proof}
+The coefficient of $T_{s_0}F$ is $q_0=d_0$.  For $1\le c<N$ it is $q_c-q_{c-1}=d_c$, and the coefficient of $T_{s_N}F$ is $M-q_{N-1}=d_N$.
+\end{proof}
+
+Define the step prefix field
+\[
+ J_d(s)=q_c(d)\quad(s_c\le s<s_{c+1}),
+\]
+with $J_d=0$ outside $[s_0,s_N)$.
+
+\begin{lemma}[Fourier boundary identity]\label{lem:fourier-boundary}
+With the unitary Fourier transform,
+\[
+ \boxed{
+ \sum_{c=0}^N\e^{its_c}d_c
+ =\e^{its_N}M(d)-it\sqrt{2\pi}\,\widehat J_d(t).}
+\]
+\end{lemma}
+
+\begin{proof}
+Compute
+\[
+ -it\int_{s_0}^{s_N}\e^{its}J_d(s)\dd s
+ =\sum_{c=0}^{N-1}q_c
+ \bigl(\e^{its_c}-\e^{its_{c+1}}\bigr)
+ =\sum_{c=0}^N\e^{its_c}d_c-\e^{its_N}M(d).
+\]
+Insert the unitary normalization.
+\end{proof}
+
+\section{Port-adapted \texorpdfstring{$H^{-1}$}{H-minus-one} control}
+
+Set
+\[
+ \Lambda_F=\sup_{t\in\R}t^2|\widehat F(t)|^2.
+\]
+
+\begin{theorem}[Mass--flux inequality]\label{thm:mass-flux}
+If $\Lambda_F<\infty$, then
+\[
+ \boxed{
+ \norm{\mathcal C_F(d)}
+ \le\norm F\,\norm{M(d)}
+ +\sqrt{2\pi\Lambda_F}\,
+ \norm{J_d}_{L^2}.}
+\]
+If $M(d)=0$, then
+\[
+ \boxed{
+ \norm{\mathcal C_F(d)}^2
+ =2\pi\int_{\R}t^2|\widehat F(t)|^2
+ \norm{\widehat J_d(t)}^2\dd t.}
+\]
+\end{theorem}
+
+\begin{proof}
+By Plancherel,
+\[
+ \norm{\mathcal C_F(d)}^2
+ =\int_{\R}|\widehat F(t)|^2
+ \left\|\sum_c\e^{its_c}d_c\right\|^2\dd t.
+\]
+Use \Cref{lem:fourier-boundary}, the triangle inequality, and Plancherel for $J_d$.  When $M=0$, the boundary term vanishes and the identity is exact.
+\end{proof}
+
+For the normalized Gaussian satisfying
+\[
+ |\widehat F_{\mathfrak a}(t)|^2=\e^{-2\mathfrak a t^2},
+\]
+one has
+\[
+ \Lambda_{F_{\mathfrak a}}=\frac{1}{2\mathfrak a e}.
+\]
+Hence
+\[
+ \boxed{
+ \norm{\mathcal C_{F_{\mathfrak a}}(d)}
+ \le\norm{F_{\mathfrak a}}\norm{M(d)}
+ +\sqrt{\frac{\pi}{\mathfrak a e}}\norm{J_d}_{L^2}.}
+\]
+
+\section{A common source for many ports}
+
+Let $F_1,\ldots,F_R$ be a preassigned finite collection of spectral and additive ports and let $\lambda_r>0$.  The same discrepancy packet $d$ defines every synthesis $\mathcal C_{F_r}(d)$.
+
+\begin{theorem}[Multiport mass--prefix theorem]\label{thm:multiport-prefix}
+One has
+\[
+ \boxed{
+ \begin{aligned}
+ \left[\sum_r\lambda_r\|\mathcal C_{F_r}(d)\|^2\right]^{1/2}
+ \le{}&
+ \left[\sum_r\lambda_r\|F_r\|^2\right]^{1/2}\|M(d)\|\\
+ &+\left[2\pi\sum_r\lambda_r\Lambda_{F_r}\right]^{1/2}
+ \|J_d\|_{L^2}.
+ \end{aligned}}
+\]
+\end{theorem}
+
+\begin{proof}
+Apply \Cref{thm:mass-flux} in the Hilbert direct sum $\bigoplus_r\mathcal H_r$ after replacing $F_r$ by $\sqrt{\lambda_r}F_r$.
+\end{proof}
+
+\begin{definition}[Joint flagship source quotient]
+For preassigned source-to-port maps $C_r$, define
+\[
+ K_{\rm joint}=\sum_r\lambda_rC_r^*C_r.
+\]
+Then
+\[
+ \ker K_{\rm joint}=\bigcap_r\ker C_r.
+\]
+The quotient by this common nullspace is the smallest phase-complete history source visible to every selected port.
+\end{definition}
+
+\begin{proof}[Proof of the nullspace identity]
+If $x\in\ker K_{\rm joint}$, positivity gives
+\[
+ 0=\ip{x}{K_{\rm joint}x}=\sum_r\lambda_r\|C_rx\|^2,
+\]
+so every $C_rx=0$.  The converse is immediate.
+\end{proof}
+
+\chapter{Unified conditional arithmetic closure}
+
+\begin{theorem}[Grand arithmetic closure theorem]\label{thm:grand-arithmetic}
+Fix a finite collection of the following preassigned ports:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item cutoff-matched Gaussian character ports at lines $\sigma_1,\ldots,\sigma_m$;
+\item the normal difference port at $h=2$;
+\item anomalous fixed-sum ports for selected even integers $N$;
+\item factor-depth or M\"obius marked ports on independently verified $P_1\cup P_2$ carriers;
+\item the signed degree-separator ports $\mathfrak J_X(p+2)$ and $\mathfrak J_N(N-p)$ of \Cref{thm:v003-signed-separator}.
+\end{enumerate}
+Suppose the direct--actual and actual--canonical branch discrepancies of these ports factor through one predetermined logarithmic cell packet.  If, in the normalization required by each port,
+\[
+ \|M(d)\|=o(A_X),
+ \qquad
+ \|J_d\|_{L^2}=o(A_X),
+\]
+then every selected endpoint port is $o(A_X)$.
+
+The following consequences hold after inserting the sector-specific hypotheses:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item on a fixed subcritical line, the spectral conclusion is the corresponding zero strip;
+\item on every positive line, it is RH or GRH;
+\item on a positive $P_1\cup P_2$ twin carrier, selector-stable parity cancellation gives infinitely many twins;
+\item on positive $P_1\cup P_2$ fixed-sum carriers, uniform parity cancellation gives binary Goldbach;
+\item positivity of the signed degree-separator ports gives twin primes or Goldbach directly by \Cref{cor:v003-signed-additive-closure}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The multiport endpoint estimate follows from \Cref{thm:multiport-prefix}.  Apply \Cref{thm:scaling-indicator} or \Cref{cor:fixed-mod-grh} to the spectral ports, and \Cref{thm:twin-chain,thm:gold-chain,cor:v003-signed-additive-closure} to the additive ports.
+\end{proof}
+
+\begin{warning}[What the theorem does not say]
+The theorem does not derive the common discrepancy packet, its mass balance, or its prefix-current estimate.  Nor does it turn a spectral estimate into an additive estimate.  It states that once one physical source supplies those ledgers for several preassigned ports, the same source quotient and the same continuity identity control all of them.
+\end{warning}
+
+\part{Renewal spacetime and gauge emergence}
+
+\chapter{The common Store--Read architecture}
+
+\section{Source, future, and nuisance}
+
+A finite Store--Read experiment consists of a source Hilbert space $\mathcal S$, a resolved history synthesis $V:\mathcal S\to\mathcal H_{\rm hist}$, a preassigned nuisance algebra or projection, and an admitted future map $C:\mathcal H_{\rm hist}\to\mathcal H_{\rm out}$.  Its physical Gram is
+\[
+ V^*C^*CV.
+\]
+This is the same construction as \Cref{def:grand}.  A Schur short removes future-predictable nuisance directions, and a retained relative-history record preserves phases that disappear in the endpoint completely positive map.
+
+\begin{proposition}[Relative-phase firewall]\label{prop:phase-firewall}
+Let $a,b$ be amplitude histories and suppose $b=\e^{i\varphi}a$.  Their rank-one endpoint density matrices are identical, but
+\[
+ \|a-b\|^2=2\|a\|^2(1-\cos\varphi).
+\]
+Hence a phase-blind endpoint cannot reconstruct the relative-history interference needed by the arithmetic parity and physical orientation sectors.
+\end{proposition}
+
+\begin{proof}
+The density matrices are $aa^*=bb^*$, while the norm identity follows by expansion.
+\end{proof}
+
+\section{Architectural parallel}
+
+\begin{center}
+\begin{longtable}{@{}p{0.20\textwidth}p{0.34\textwidth}p{0.34\textwidth}@{}}
+\toprule
+Operation & Arithmetic realization & Renewal/field realization\\
+\midrule
+\endfirsthead
+\toprule
+Operation & Arithmetic realization & Renewal/field realization\\
+\midrule
+\endhead
+Anchor & Linear $L$-function or prime amplitude & Vacuum/source column\\
+Charge conjugation & Goldbach bilinear inside a Hermitian tensor & Nambu particle--hole doubling\\
+Mellin reflection & Critical-line Weil orientation & Euclidean/KMS reflection\\
+Normal affine block & Difference $m-n=h$ & Ordinary propagation/scattering channel\\
+Anomalous block & Sum $m+n=N$ & Pairing or Nambu channel\\
+Schur short & Pole, diagonal, semiprime, or fitted nuisance removal & Predictable record or gauge-nuisance removal\\
+Marked zero mode & Prime atom or critical-line mode & Vacuum, orientation, or gauge-invariant sector\\
+Prefix current & Logarithmic arithmetic transport & Accumulated renewal/history flux\\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\AuditBox{This table is a functorial analogy.  A theorem identifying the arithmetic source with a physical spacetime or gauge source would require an explicit representation and intertwiner preserving the relevant products, involutions, and scaling limits.  No such identification is assumed here.}
+
+\chapter{Conditional Lorentzian spacetime chain}
+
+\section{Finite Lorentzian Clifford core}
+
+Let $J,S$ be self-adjoint involutions on a binary order plane with
+\[
+ J^2=S^2=I,
+ \qquad
+ JS=-SJ.
+\]
+Let $\sigma_1,\sigma_2,\sigma_3$ be the Pauli matrices.  On the tensor product define
+\[
+ \gamma^0=J\otimes I_2,
+ \qquad
+ \gamma^i=JS\otimes\sigma_i.
+\]
+
+\begin{theorem}[Finite Lorentzian Clifford theorem]\label{thm:clifford}
+The matrices satisfy
+\[
+ \boxed{
+ \gamma^\mu\gamma^\nu+\gamma^\nu\gamma^\mu
+ =2\eta^{\mu\nu}I_4,}
+\]
+with $\eta=\diag(1,-1,-1,-1)$.  Consequently they generate
+\[
+ \Cl_{1,3}(\C)\cong M_4(\C).
+\]
+\end{theorem}
+
+\begin{proof}
+Clearly $(\gamma^0)^2=I$.  Since $JSJS=-I$, $(\gamma^i)^2=-I$.  The anticommutation of $J$ with $JS$ gives $\{\gamma^0,\gamma^i\}=0$, while the Pauli relations give $\{\gamma^i,\gamma^j\}=-2\delta_{ij}I$.  The complex Clifford algebra in four generators is the full matrix algebra $M_4(\C)$.
+\end{proof}
+
+\section{Dirac scaling from accumulated histories}
+
+On the lattice $h\Z^3$, define centered differences
+\[
+ (\nabla_{h,j}\psi)(x)=\frac{\psi(x+he_j)-\psi(x-he_j)}{2h}
+\]
+and the lattice Dirac Hamiltonian
+\[
+ D_h=-i\sum_{j=1}^3\alpha^j\nabla_{h,j},
+ \qquad
+ \alpha^j=\gamma^0\gamma^j.
+\]
+
+\begin{theorem}[Flat Dirac scaling]\label{thm:dirac-scaling}
+For every Schwartz spinor $\psi$ on $\R^3$, after sampling on $h\Z^3$ and identifying the lattice with piecewise-constant functions,
+\[
+ D_h\psi\longrightarrow -i\sum_j\alpha^j\partial_j\psi
+\]
+in $L^2$ as $h\downarrow0$.  The corresponding self-adjoint operators converge in strong resolvent sense on the standard core.
+\end{theorem}
+
+\begin{proof}
+Taylor expansion gives
+\[
+ \nabla_{h,j}\psi=\partial_j\psi+O(h^2)
+\]
+uniformly with all Schwartz weights.  Hence $D_h\psi\to D\psi$ in $L^2$ on a core.  The operators are self-adjoint Fourier multipliers with symbols
+\[
+ \sum_j\alpha^j\frac{\sin(hp_j)}h
+\]
+converging pointwise to $\sum_j\alpha^jp_j$ and uniformly on compact momentum sets.  Standard core convergence for self-adjoint operators yields strong resolvent convergence.
+\end{proof}
+
+\section{Screen entropy}
+
+Let a stationary finite-state screen chain have stationary law $\pi$ and transition matrix $P$.  Its entropy rate is
+\[
+ h(P)=-\sum_{i,j}\pi_iP_{ij}\log P_{ij}.
+\]
+
+\begin{proposition}[Markov screen area law]\label{prop:screen-area}
+For a chain of $N$ cells,
+\[
+ H(X_1,\ldots,X_N)=H(\pi)+(N-1)h(P).
+\]
+If the screen has one cell per area $a_0$, then
+\[
+ S=\frac{h(P)}{a_0}\operatorname{Area}+O(1).
+\]
+\end{proposition}
+
+\begin{proof}
+The chain rule and the Markov property give
+\[
+ H(X_1^N)=H(X_1)+\sum_{k=2}^NH(X_k\mid X_{k-1})
+ =H(\pi)+(N-1)h(P).
+\]
+Substitute $N=\operatorname{Area}/a_0+O(1)$.
+\end{proof}
+
+\section{Einstein closure from local horizon thermodynamics}
+
+\begin{theorem}[Conditional Einstein closure]\label{thm:einstein}
+Assume a Lorentzian scaling limit with the following properties:
+\begin{enumerate}[label=\textup{(E\arabic*)}]
+\item every spacetime point and null direction admits a local Rindler horizon with approximate boost generator and Unruh temperature $T=\kappa/(2\pi)$;
+\item the horizon entropy variation is $\delta S=\eta\,\delta A$ with constant finite density $\eta>0$;
+\item the heat flux is $\delta Q=\int T_{ab}\chi^a\dd\Sigma^b$ and satisfies $\delta Q=T\delta S$ for every local horizon;
+\item the null congruence obeys Raychaudhuri's equation and the state has vanishing expansion and shear at the base point;
+\item $\nabla^aT_{ab}=0$ and the contracted Bianchi identity holds.
+\end{enumerate}
+Then
+\[
+ \boxed{
+ G_{ab}+\Lambda g_{ab}=8\pi G_{\rm N}T_{ab},
+ \qquad
+ G_{\rm N}=\frac{1}{4\eta},}
+\]
+for a constant $\Lambda$.
+\end{theorem}
+
+\begin{proof}
+Let $k^a$ be the horizon generator and $\lambda$ an affine parameter vanishing at the base point.  Raychaudhuri's equation gives, to leading order,
+\[
+ \delta A=-\int\lambda R_{ab}k^ak^b\dd\lambda\dd A.
+\]
+The approximate boost field is $\chi^a=-\kappa\lambda k^a$, so
+\[
+ \delta Q=-\kappa\int\lambda T_{ab}k^ak^b\dd\lambda\dd A.
+\]
+Using $T=\kappa/(2\pi)$ and $\delta Q=T\eta\delta A$ yields
+\[
+ R_{ab}k^ak^b=\frac{2\pi}{\eta}T_{ab}k^ak^b
+\]
+for every null $k$.  Hence
+\[
+ R_{ab}+\Phi g_{ab}=\frac{2\pi}{\eta}T_{ab}
+\]
+for a scalar field $\Phi$.  Taking the divergence, using stress conservation and the contracted Bianchi identity, gives
+\[
+ \Phi=-\frac12R+\Lambda.
+\]
+Thus
+\[
+ G_{ab}+\Lambda g_{ab}=\frac{2\pi}{\eta}T_{ab}.
+\]
+Identifying $8\pi G_{\rm N}=2\pi/\eta$ gives the stated value.
+\end{proof}
+
+\begin{ledger}[Spacetime chain]
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{@{}p{0.28\textwidth}Xp{0.19\textwidth}@{}}
+\toprule
+Step & Required statement & Status\\
+\midrule
+Finite temporal core & Retained order plane and Pauli spatial frame generate $\Cl_{1,3}$ & \StatusExact\\
+Flat propagation & Accumulated coherent histories converge to a Dirac operator & \StatusExact\ under stated lattice model\\
+Screen density & Retained screen has finite positive entropy density & \StatusConditional\\
+Modular geometry & Local boosts and Unruh normalization emerge in the continuum & \StatusExternal/\StatusOpen\\
+Einstein dynamics & Clausius equality holds for all local horizons with conserved stress & \StatusConditional\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{ledger}
+
+\chapter{Qutrit colour and Standard-Model gauge descent}
+
+\section{Finite qutrit revision algebra}
+
+Let $\mathbb F_3^2$ carry the symplectic form
+\[
+ [(p,q),(p',q')]=qp'-pq'.
+\]
+Let $\omega=\e^{2\pi i/3}$ and suppose a projective revision section satisfies
+\[
+ R_aR_b=\tau(a,b)R_{a+b},
+ \qquad
+ R_aR_bR_a^*R_b^*=\omega^{[a,b]}I.
+\]
+
+\begin{theorem}[Nondegenerate qutrit completion]\label{thm:qutrit}
+If the commutator bicharacter is nondegenerate, then the $C^*$-algebra generated by the nine revision operators is
+\[
+ \boxed{C^*(R_a:a\in\mathbb F_3^2)\cong M_3(\C).}
+\]
+Its minimal faithful irreducible carrier has dimension three.
+\end{theorem}
+
+\begin{proof}
+For $a\ne0$, choose $c$ with $[c,a]\ne0$.  Conjugation gives
+\[
+ R_cR_aR_c^*=\omega^{[c,a]}R_a,
+\]
+so $\Tr R_a=0$.  Similarly,
+\[
+ \Tr(R_a^*R_b)=d\,\delta_{ab},
+\]
+where $d$ is the carrier dimension.  Hence the nine operators are linearly independent.  Their span is already a $*$-algebra because the projective law closes products and adjoints, so the generated algebra has dimension exactly nine.  A central element $\sum_ac_aR_a$ must satisfy $c_a\omega^{[b,a]}=c_a$ for every $b$, forcing $a=0$ whenever $c_a\ne0$.  Thus the center is scalar.  A finite-dimensional complex $C^*$-algebra with scalar center is one full matrix algebra $M_n(\C)$; its dimension is nine, so $n=3$.
+\end{proof}
+
+\begin{warning}
+This theorem derives a colour-qutrit matrix factor from an amplitude-level projective revision datum.  It does not derive the physical existence, loading, or interpretation of that datum, and it does not by itself produce the full Standard Model.
+\end{warning}
+
+\section{Pati--Salam breaking and hypercharge}
+
+Consider the Pati--Salam group
+\[
+ G_{\rm PS}=SU(4)\times SU(2)_L\times SU(2)_R
+\]
+with one left-handed generation
+\[
+ (\mathbf4,\mathbf2,\mathbf1)
+ \oplus
+ (\overline{\mathbf4},\mathbf1,\mathbf2).
+\]
+Let
+\[
+ T_{15}=\frac{1}{2\sqrt6}\diag(1,1,1,-3).
+\]
+Then
+\[
+ B-L=2\sqrt{\frac23}\,T_{15}.
+\]
+
+\begin{theorem}[Hypercharge descent]\label{thm:hypercharge}
+A right-handed neutrino vacuum is invariant under the unique neutral generator
+\[
+ \boxed{
+ Y=T_R^3+\sqrt{\frac23}\,T_{15}
+ =T_R^3+\frac{B-L}{2}.}
+\]
+The surviving one-generation left-handed Standard-Model multiplets are
+\[
+ Q_L:(\mathbf3,\mathbf2)_{1/6},\qquad
+ L_L:(\mathbf1,\mathbf2)_{-1/2},
+\]
+\[
+ u_R^c:(\overline{\mathbf3},\mathbf1)_{-2/3},\qquad
+ d_R^c:(\overline{\mathbf3},\mathbf1)_{1/3},
+\]
+\[
+ e_R^c:(\mathbf1,\mathbf1)_1,
+ \qquad
+ \nu_R^c:(\mathbf1,\mathbf1)_0.
+\]
+The faithfully represented connected gauge group on these multiplets is
+\[
+ \boxed{
+ \frac{SU(3)_c\times SU(2)_L\times U(1)_Y}{\mathbb Z_6}.}
+\]
+\end{theorem}
+
+\begin{proof}
+On a quark component, $(B-L)/2=1/6$; on a lepton component it is $-1/2$.  Combining these values with $T_R^3=\pm1/2$ yields the displayed hypercharges.  For the quotient, use the integer charge $q=6Y$.  The element
+\[
+ z=(\e^{2\pi i/3}I_3,-I_2,\e^{i\pi/3})
+\]
+acts trivially on every listed multiplet: for $Q_L$ the three factors multiply to one; for $u_R^c,d_R^c,L_L,e_R^c,\nu_R^c$ the same follows from $q=-4,2,-3,6,0$, respectively.  Its powers form a $\mathbb Z_6$ kernel, and the listed representations are faithful after quotienting by it.
+\end{proof}
+
+\section{One-generation anomaly cancellation}
+
+\begin{theorem}[Anomaly-free descended generation]\label{thm:anomaly}
+The multiplets in \Cref{thm:hypercharge} have vanishing
+\[
+ SU(3)^3,\quad SU(3)^2U(1)_Y,\quad SU(2)^2U(1)_Y,
+\quad U(1)_Y^3,
+\]
+and mixed gravitational--$U(1)_Y$ anomalies.  The number of left-handed $SU(2)_L$ doublets is even, so the global mod-two $SU(2)$ anomaly also vanishes.
+\end{theorem}
+
+\begin{proof}
+The cubic $SU(3)$ anomaly has two fundamental triplets from the two components of $Q_L$ and two antifundamentals $u_R^c,d_R^c$, so it cancels.  Using $T(\mathbf3)=T(\mathbf2)=1/2$,
+\[
+ SU(3)^2U(1):
+ \quad2\cdot\frac12\cdot\frac16
+ +\frac12\left(-\frac23\right)
+ +\frac12\left(\frac13\right)=0,
+\]
+and
+\[
+ SU(2)^2U(1):
+ \quad3\cdot\frac12\cdot\frac16
+ +\frac12\left(-\frac12\right)=0.
+\]
+For the cubic abelian anomaly,
+\[
+ 6\left(\frac16\right)^3
+ +3\left(-\frac23\right)^3
+ +3\left(\frac13\right)^3
+ +2\left(-\frac12\right)^3
+ +1^3=0.
+\]
+For the mixed gravitational anomaly,
+\[
+ 6\left(\frac16\right)
+ +3\left(-\frac23\right)
+ +3\left(\frac13\right)
+ +2\left(-\frac12\right)+1=0.
+\]
+There are three coloured $Q_L$ doublets and one lepton doublet, for a total of four, so the Witten mod-two anomaly vanishes.
+\end{proof}
+
+\section{Common-trace coupling matching}
+
+\begin{theorem}[Conditional tree-level coupling relation]\label{thm:coupling}
+Assume that the three Pati--Salam current metrics are restrictions of one finite cyclic trace on
+\[
+ (\mathbf4,\mathbf2,\mathbf1)
+ \oplus(\overline{\mathbf4},\mathbf1,\mathbf2).
+\]
+Then their normalized Dynkin indices agree and
+\[
+ g_4=g_L=g_R=:g
+\]
+at the matching scale.  Hypercharge obeys
+\[
+ \boxed{
+ \frac1{g_Y^2}=\frac1{g_R^2}+\frac{2}{3g_4^2}.}
+\]
+Consequently
+\[
+ g_Y^2=\frac35g^2,
+ \qquad
+ \boxed{\sin^2\theta_W=\frac38}
+\]
+at tree-level matching.
+\end{theorem}
+
+\begin{proof}
+For $SU(4)$, the representation contains four fundamental-index units: two copies of $\mathbf4$ from the $SU(2)_L$ doublet and two copies of $\overline{\mathbf4}$ from the $SU(2)_R$ doublet, giving total index $4\cdot(1/2)=2$.  Each $SU(2)$ factor sees four doublets and therefore also has index $4\cdot(1/2)=2$.  A single trace coefficient gives equal parent couplings.
+
+The unbroken generator is $Y=T_R^3+\sqrt{2/3}\,T_{15}$, with orthogonal normalized parent generators.  The inverse squared coupling of an orthogonal linear combination is the sum of the squared coefficients divided by the parent coupling squares, giving the displayed relation.  Setting $g_R=g_4=g$ yields $1/g_Y^2=(5/3)g^{-2}$ and
+\[
+ \sin^2\theta_W=\frac{g_Y^2}{g_L^2+g_Y^2}=\frac{3/5}{1+3/5}=\frac38.
+\]
+\end{proof}
+
+\begin{warning}
+A common trace is a genuine physical hypothesis about one primitive current experiment.  Independently normalizing three already separated sectors does not prove it.  Threshold corrections, running couplings, flavour, Yukawa structure, and the common physical scale are not fixed by \Cref{thm:coupling}.
+\end{warning}
+
+\section{Conditional Standard-Model emergence chain}
+
+\begin{theorem}[Conditional gauge-descent theorem]\label{thm:sm-chain}
+Assume a renewal Store--Read source provides:
+\begin{enumerate}[label=\textup{(S\arabic*)}]
+\item a nondegenerate qutrit revision datum generating $M_3(\C)$;
+\item an independent weak doublet factor and the typed Pati--Salam one-generation representation;
+\item a right-breaking source with stabilizer generated by $Y=T_R^3+(B-L)/2$;
+\item a branch-blind BRST or gauge quotient removing Goldstone and ghost quartets;
+\item one primitive common current trace.
+\end{enumerate}
+Then the finite tree-level gauge packet descends to the anomaly-free Standard-Model group
+\[
+ (SU(3)_c\times SU(2)_L\times U(1)_Y)/\mathbb Z_6,
+\]
+with the hypercharges, coupling relation, and matching value in \Cref{thm:hypercharge,thm:coupling}.
+\end{theorem}
+
+\begin{proof}
+Assumption (S1) supplies the colour matrix factor by \Cref{thm:qutrit}.  Assumptions (S2)--(S3) put the source in the Pati--Salam setting of \Cref{thm:hypercharge}.  The quotient in (S4) leaves the physical gauge-vector polarizations and does not change the unbroken Lie algebra.  Assumption (S5) gives \Cref{thm:coupling}; anomaly cancellation is \Cref{thm:anomaly}.
+\end{proof}
+
+\begin{ledger}[Gauge chain]
+\begin{center}
+\begin{tabularx}{0.95\textwidth}{@{}p{0.29\textwidth}Xp{0.18\textwidth}@{}}
+\toprule
+Step & Required statement & Status\\
+\midrule
+Colour carrier & Nondegenerate projective qutrit revision datum & \StatusExact\ conditionally\\
+Weak and Pati--Salam typing & Appropriate multiplicities and source support & \StatusOpen\\
+Hypercharge and anomalies & Algebraic descent of one generation & \StatusExact\\
+Coupling matching & One primitive common current trace & \StatusConditional\\
+Thresholds and running & Finite source moments and renormalization flow & \StatusOpen\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{ledger}
+
+\part{Flagship theorem and research ledger}
+
+\chapter{The conditional flagship theorem}
+
+\begin{theorem}[Universal Grand Tensor Conditional Closure]\label{thm:flagship}
+Let a phase-complete source family be equipped with:
+\begin{enumerate}[label=\textup{(U\arabic*)}]
+\item the anchored bi-reflected normal--anomalous port tensor of \Cref{def:port-tensor};
+\item preassigned source-to-future maps and their Schur-short grand tensor of \Cref{def:grand,thm:schur};
+\item a common logarithmic cell source with mass and prefix-current ledgers;
+\item retained relative-history phases before classical record erasure.
+\end{enumerate}
+Then the following implications are rigorous and mutually independent.
+
+\medskip
+\noindent\textbf{Spectral chain.}
+If the cutoff-matched Gaussian mass--prefix ledger is subpolynomial on a fixed line $\sigma>0$, every selected zero lies in
+\[
+ |\Re\rho-1/2|\le\sigma.
+\]
+If it holds on every positive line for the principal and all Dirichlet sectors, RH and GRH follow.
+
+\medskip
+\noindent\textbf{Twin-prime chain.}
+Infinitely many twin primes follow from either of two independent native estimates: (i) an independently verified positive carrier restricting $p+2$ to $P_1\cup P_2$, with nonvanishing mass and marked prefix/M\"obius ledger $o(M_X)$ on unbounded scales; or (ii) positivity of the signed degree-separator correlation $\mathscr J_{\rm twin}(X)$ on unbounded scales.
+
+\medskip
+\noindent\textbf{Goldbach chain.}
+Binary Goldbach follows for all sufficiently large even $N$ from either: (i) positive fixed-sum $P_1\cup P_2$ carriers with uniform marked-ledger cancellation; or (ii) positivity of $\mathscr J_{\rm Gold}(N)$ uniformly in $N$.  The Li--Liu $(1+1.9)$ input supplies a prime-or-semiprime seed, not this final signed estimate.
+
+\medskip
+\noindent\textbf{Spacetime chain.}
+If the source realizes the retained order/Pauli Clifford core, a coherent accumulated-history scaling family, a finite positive screen entropy density, local modular boost geometry, and anomaly-free Clausius balance, then the continuum satisfies the Einstein equation of \Cref{thm:einstein}.
+
+\medskip
+\noindent\textbf{Gauge chain.}
+If the source realizes the qutrit and weak/Pati--Salam typing, right breaking, BRST quotient, and one common current trace, then the tree-level Standard-Model gauge packet of \Cref{thm:sm-chain} follows.
+\end{theorem}
+
+\begin{proof}
+The spectral conclusions follow from \Cref{thm:multiport-prefix,thm:scaling-indicator,cor:fixed-mod-grh}.  The additive conclusions follow from \Cref{thm:multiport-prefix,thm:parity-recovery,thm:twin-chain,thm:gold-chain,cor:v003-signed-additive-closure}.  The spacetime conclusion is the sequence \Cref{thm:clifford,thm:dirac-scaling,prop:screen-area,thm:einstein}.  The gauge conclusion is \Cref{thm:qutrit,thm:hypercharge,thm:anomaly,thm:coupling,thm:sm-chain}.  Independence follows from \Cref{thm:direct-sum-firewall}.
+\end{proof}
+
+\chapter{Precise remaining estimates}
+
+\section{Arithmetic}
+
+\begin{openproblem}[Fixed-subcritical spectral mass--flux estimate]
+For one fixed modulus $q$ and one fixed $\eta>0$, prove at
+\[
+ \sigma=\frac12-\eta
+\]
+that the cutoff-matched residue-class or character port has a subpolynomial mass--prefix ledger.  This would give the nontrivial strip
+\[
+ |\Re\rho-1/2|\le\frac12-\eta.
+\]
+The all-positive-line version is GRH.  Equivalently, one may prove the compact-packet subpower property of \Cref{thm:v002-packet-grh}.  A logically separate PSWF route requires the leakage, exterior-cluster, and simple-even estimates of \Cref{thm:v002-pswf-chain}; time--frequency concentration alone is not enough.
+\end{openproblem}
+
+\begin{openproblem}[Selector-stable additive sign]
+Prove at least one of the following genuinely signed estimates.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item On a rigorously verified positive $P_1\cup P_2$ carrier, prove the coherent mass balance and prefix-current/M\"obius estimate for the actual/direct/reference branch differences.
+\item Prove positivity of the signed separator correlations $\mathscr J_{\rm twin}(X)$ on unbounded scales and $\mathscr J_{\rm Gold}(N)$ uniformly for large even $N$.
+\item Under the rough support hypothesis, contract the continuous semiprime profile in \Cref{thm:v003-atomic-continuous} enough to force a positive endpoint atom.
+\end{enumerate}
+All three forms require fixed-gap or moving-sum Type--II information; the exact algebraic projectors do not supply it.
+\end{openproblem}
+
+\begin{openproblem}[Quantitative positive support]
+Independently verify the quantitative Li--Liu seed constants and, separately, the support-retaining rough left-side Assumption~\ref{ass:v003-support-retaining}.  The official prime-or-semiprime theorems provide a powerful seed, but a twin-prime or binary-Goldbach conclusion still requires a signed separator or parity-current estimate.
+\end{openproblem}
+
+\section{Spacetime and gauge physics}
+
+\begin{openproblem}[Interacting modular scaling]
+Construct a regulator-uniform interacting history-port net with a standard positive-energy wedge limit, finite positive screen density, and an anomaly-free common renormalized functional.  These are the load-bearing continuum hypotheses in the Einstein chain.
+\end{openproblem}
+
+\begin{openproblem}[Microscopic Standard-Model loading]
+Derive from the austere Store--Read instrument the weak multiplicity, Pati--Salam typing, right-breaking source, common current trace, threshold moments, and running.  The finite qutrit and anomaly theorems do not supply these numerical or support inputs.
+\end{openproblem}
+
+\section{Status table}
+
+\begin{longtable}{@{}p{0.23\textwidth}p{0.37\textwidth}p{0.28\textwidth}@{}}
+\toprule
+Target & Exact/conditional chain now available & Remaining decisive input\\
+\midrule
+\endfirsthead
+\toprule
+Target & Exact/conditional chain now available & Remaining decisive input\\
+\midrule
+\endhead
+RH & Centered Gaussian/compact Mellin packet; optional PSWF--Hurwitz route & Prime-side subpower estimate, or PSWF leakage plus simple-even ordering\\
+Dirichlet GRH & Typed primitive packet, imprimitive reduction, residue variance & Characterwise packet subpower or fixed-line source-local variance\\
+Twin primes & Exact normal selector, CAR projector, generalized Mellin degree, signed $P_2$ cancellation & Positive $P_1\cup P_2$ current cancellation, signed-separator positivity, or semiprime-profile contraction\\
+Binary Goldbach & Exact anomalous selector, Li--Liu prime-or-semiprime seed, signed degree separator & Uniform fixed-sum parity cancellation or signed-separator positivity\\
+Lorentzian kinematics & Finite Clifford core and flat Dirac scaling & Native loading and regulator-uniform interacting continuum\\
+Einstein dynamics & Local-horizon thermodynamic implication & Modular sufficiency, entropy density, anomaly-free common functional\\
+SM gauge group & Qutrit completion, Pati--Salam hypercharge, anomalies & Physical weak/Pati--Salam typing and right-breaking source\\
+Gauge couplings & Common-trace tree-level relation & Proof of one primitive current trace, thresholds, and running\\
+\bottomrule
+\end{longtable}
+
+\chapter{No-go results that constrain future work}
+
+\begin{enumerate}[label=\textbf{N\arabic*.},leftmargin=3em]
+\item The old $h=0$ correlation tensor is not an $L$-function frame.
+\item An ordinary positive zero Gram contains no horizontal information.
+\item Character orthogonality is a coordinate transform; it does not break sieve parity.
+\item A positive semiprime carrier can mimic every local congruence condition.
+\item A post hoc polar or singular-vector source repackages the unknown answer and is not coercive.
+\item Phase-blind endpoint equality cannot replace coherent relative-history control.
+\item A common trace equalizes coefficients only when all branches descend from one primitive trace experiment.
+\item The existence of a qutrit or Clifford factor does not select its physical loading, continuum interpretation, or coupling constants.
+\item A spectral estimate in the grand tensor does not imply an additive estimate, and an arithmetic estimate does not imply spacetime or gauge emergence, without a proved intertwiner.
+\item A finite auxiliary-character or self-translation frame may provide a phase reference while remaining compatible with an arbitrary symmetric off-line zero set.
+\item A leading positive scalar bulk on a growing PSWF family carries no ordering of the first two arithmetic levels; the first non-scalar centered matrix is the load-bearing object.
+\end{enumerate}
+
+\chapter{Conclusion}
+
+The grand tensor has reached a stable form.  Its universal content is not a promise that one inequality proves every conjecture.  It is a disciplined source architecture:
+\[
+ \boxed{
+ \begin{gathered}
+ \text{retain amplitudes}
+ \longrightarrow
+ \text{apply anchor, conjugation, reflection, and typed selectors},\\
+ \text{then short nuisance directions}
+ \longrightarrow
+ \text{estimate a marked quotient or flux}.
+ \end{gathered}}
+\]
+
+For RH and GRH, the marked quantity is a cutoff-matched reflected Gaussian energy.  For twin primes and Goldbach, it is either a prime-versus-semiprime grading current on a positive restricted carrier or the signed generalized-Mangoldt degree separator which cancels the full squarefree semiprime layer.  For renewal spacetime, it is a retained order/Clifford source followed by a modular and thermodynamic continuum limit.  For Standard-Model gauge descent, it is a typed qutrit/weak/Pati--Salam source with a genuine common current trace.
+
+The exact operator theorems are substantial, but the classical conjectures remain precisely where they should remain: in the native arithmetic or continuum coercivity estimates, not hidden in notation.  The next mathematical advances must therefore estimate the mass--prefix and marked-history ledgers in the actual source, or produce a finite obstruction identifying why those estimates fail.
+
+\appendix
+
+\chapter{A common-source coupling lemma}
+
+\begin{lemma}[Physical coupling controls a Gaussian port]
+Let $(\Omega,\lambda)$ be a finite measure space, let $x:\Omega\to\mathcal K$ be Bochner integrable, and let $u,v:\Omega\to\R$.  Define
+\[
+ \mu_u=\int x(\zeta)\delta_{u(\zeta)}\dd\lambda(\zeta),
+ \qquad
+ \mu_v=\int x(\zeta)\delta_{v(\zeta)}\dd\lambda(\zeta).
+\]
+For the Gaussian port $F_{\mathfrak a}$,
+\[
+ \boxed{
+ \|\mathcal C_{F_{\mathfrak a}}(\mu_u-\mu_v)\|^2
+ \le
+ \frac{\pi}{\mathfrak a e}
+ \left(\int\|x\|^2\dd\lambda\right)
+ \left(\int|u-v|\dd\lambda\right).}
+\]
+\end{lemma}
+
+\begin{proof}
+For each $\zeta$, the difference of two point masses generates a prefix field equal to $x(\zeta)$ on the interval between $u(\zeta)$ and $v(\zeta)$, with sign determined by orientation.  Minkowski and Cauchy--Schwarz give
+\[
+ \|J\|_{L^2}
+ \le\int\|x(\zeta)\||u(\zeta)-v(\zeta)|^{1/2}\dd\lambda
+ \le
+ \left(\int\|x\|^2\dd\lambda\right)^{1/2}
+ \left(\int|u-v|\dd\lambda\right)^{1/2}.
+\]
+The total mass vanishes, so apply the Gaussian specialization of \Cref{thm:mass-flux} and square.
+\end{proof}
+
+\begin{warning}
+The coupling in this lemma must be supplied by the physical common source before the endpoint is evaluated.  An optimal transport coupling selected after observing the two endpoint measures is a post hoc comparison and does not establish source-level naturality.
+\end{warning}
+
+\chapter{Normalization conventions}
+
+The hypercharge anomaly calculations use left-handed Weyl fermions throughout.  Right-handed Standard-Model fields are represented by their left-handed charge conjugates.  The $U(1)$ charge in the $\mathbb Z_6$ quotient proof is the integer $q=6Y$.  The gravitational constant in \Cref{thm:einstein} uses units $\hbar=c=k_B=1$ and the entropy convention $S=\eta A$.
+
+\chapter{Bibliographic notes}
+
+The reflected positivity criterion is the finite algebraic core of Weil's explicit-formula criterion.  The local-horizon thermodynamic implication follows the Jacobson argument, while the modular normalization is associated with Bisognano--Wichmann and Borchers theory.  The Pati--Salam representation and hypercharge embedding are classical.  The exact Store--Read, Schur, qutrit, and mass--prefix formulations used here were distilled from the internal cumulative renewal--arithmetic notes listed below.  The V002 typed Mellin-packet and prolate-cluster sections were audited against the Dirichlet-GRH V98 and RH endpoint PSWF V260 collections.  The V003 additive expansion was audited against the Goldbach--Twin-Prime Oriented Two-Form V061 collection; its support-retaining Li--Liu refinement is deliberately recorded as a conditional audit hypothesis rather than an established external theorem.
+
+\begin{thebibliography}{99}
+
+\bibitem{Weil1952}
+A.~Weil,
+\emph{Sur les ``formules explicites'' de la th\'eorie des nombres premiers},
+Comm. S\'em. Math. Univ. Lund, 1952.
+
+\bibitem{Davenport}
+H.~Davenport,
+\emph{Multiplicative Number Theory},
+3rd ed., Springer, 2000.
+
+\bibitem{BombieriRH}
+E.~Bombieri,
+\emph{The Riemann Hypothesis},
+Clay Mathematics Institute Millennium Problem description.
+
+\bibitem{Chen1973}
+J.~R. Chen,
+\emph{On the representation of a large even integer as the sum of a prime and the product of at most two primes},
+Sci. Sinica 16 (1973), 157--176.
+
+\bibitem{FIAsymptoticSieve}
+J.~Friedlander and H.~Iwaniec,
+\emph{Asymptotic sieve for primes},
+Ann. of Math. 148 (1998), 1041--1065.
+
+\bibitem{LiLiu2026}
+J.~Li and J.~Liu,
+\emph{Theorem $(1+1.9)$ on the Goldbach Conjecture},
+arXiv:2606.05224, 2026.
+
+\bibitem{Maynard2015}
+J.~Maynard,
+\emph{Small gaps between primes},
+Ann. of Math. 181 (2015), 383--413.
+
+\bibitem{IwaniecKowalski}
+H.~Iwaniec and E.~Kowalski,
+\emph{Analytic Number Theory},
+American Mathematical Society Colloquium Publications 53, 2004.
+
+\bibitem{GoldbachV061}
+Renewal Geometry Programme,
+\emph{Goldbach--Twin-Prime Oriented Two-Form Program V061},
+unpublished cumulative working notes, 2026.
+
+\bibitem{Stinespring}
+W.~F. Stinespring,
+\emph{Positive functions on $C^*$-algebras},
+Proc. Amer. Math. Soc. 6 (1955), 211--216.
+
+\bibitem{BW}
+J.~J. Bisognano and E.~H. Wichmann,
+\emph{On the duality condition for a Hermitian scalar field},
+J. Math. Phys. 16 (1975), 985--1007.
+
+\bibitem{Jacobson}
+T.~Jacobson,
+\emph{Thermodynamics of spacetime: the Einstein equation of state},
+Phys. Rev. Lett. 75 (1995), 1260--1263.
+
+\bibitem{PatiSalam}
+J.~C. Pati and A.~Salam,
+\emph{Lepton number as the fourth color},
+Phys. Rev. D 10 (1974), 275--289.
+
+\bibitem{SlepianPollak}
+D.~Slepian and H.~O.~Pollak,
+\emph{Prolate spheroidal wave functions, Fourier analysis and uncertainty, I},
+Bell System Tech. J. 40 (1961), 43--63.
+
+\bibitem{LandauPollak}
+H.~J.~Landau and H.~O.~Pollak,
+\emph{Prolate spheroidal wave functions, Fourier analysis and uncertainty, II},
+Bell System Tech. J. 40 (1961), 65--84.
+
+\bibitem{DirichletGRHV98}
+A.~P'elissier,
+\emph{Dirichlet GRH via Typed Mellin--Zak Boundary Dispersion: Microscopic self-shift moments and a horizontal translation frame, V98},
+unpublished cumulative working notes, 2026.
+
+\bibitem{RHEndpointV260}
+A.~P'elissier,
+\emph{Affine-Invariant PNT Crests and the Critical-Scale Firewall: RH Endpoint PSWF Attack V260},
+unpublished cumulative working notes, 2026.
+
+\bibitem{GrandV045}
+Renewal Geometry Programme,
+\emph{Universal Grand Upstream Master Tensor Program V045},
+unpublished cumulative working notes, 2026.
+
+\bibitem{AffineV051}
+Renewal Geometry Programme,
+\emph{Universal Bi-Reflected Affine Port Tensor Program V051},
+unpublished cumulative working notes, 2026.
+
+\bibitem{MatterV68}
+Renewal Geometry Programme,
+\emph{Hypercharge Ward Descent, Common-Trace Coupling Matching, and One-Generation Anomaly Closure, V68},
+unpublished cumulative working notes, 2026.
+
+\end{thebibliography}
+
+\end{document}

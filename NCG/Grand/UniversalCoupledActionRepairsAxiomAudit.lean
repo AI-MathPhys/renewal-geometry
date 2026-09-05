@@ -1,0 +1,33 @@
+/-
+Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Aurélien Pélissier
+-/
+import NCG.Grand.IndependentWhitenedInternalInterventions
+import NCG.Grand.InvariantActionWardStress
+import NCG.Grand.FiniteActionWardBRSTStressEinsteinExact
+import NCG.Grand.ConcreteStandardModelInvariantVacuum
+import NCG.Grand.ConcreteStandardModelVacuumStationarity
+import NCG.Grand.CoupledSourceSchurNaturality
+import NCG.Grand.OnePointPerronLoadingExact
+
+/-!
+# Axiom audit for the repaired universal coupled-action clauses
+-/
+
+#print axioms NCG.IndependentWhitenedInternalInterventions.explicit_independent_whitened_branch
+#print axioms NCG.InvariantActionWardStress.ward_brst_stress_from_invariance
+#print axioms NCG.FiniteActionWardBRSTStressEinstein.gauge_ward_divergence
+#print axioms NCG.FiniteActionWardBRSTStressEinstein.relabeling_stress_transfer
+#print axioms NCG.FiniteActionWardBRSTStressEinstein.finiteBRST2_nilpotent
+#print axioms NCG.FiniteActionWardBRSTStressEinstein.einstein_residual_of_common_action
+#print axioms NCG.StandardModelInvariantVacuum.invariantVacuum_zero_packet
+#print axioms NCG.StandardModelInvariantVacuum.hasDerivAt_regulatedAction_invariantVacuum
+#print axioms NCG.StandardModelInvariantVacuum.internalStress_invariantVacuum
+#print axioms NCG.CoupledSourceSchurNaturality.jointGram_posDef_iff_sourceSchurResidual_posDef
+#print axioms NCG.CoupledSourceSchurNaturality.sourceMinimalInternalVariation_eq_of_gramBlocks
+#print axioms NCG.CoupledSourceSchurNaturality.ambientIsometry_preserves_sourceSchur
+#print axioms NCG.OnePointPerronLoading.unique_normalized_eigenvector_transport
+#print axioms NCG.OnePointPerronLoading.perronPressure_onePointLoading
+#print axioms NCG.OnePointPerronLoading.commonProvenance_and_acceptedAction_gaps_zero
+#print axioms NCG.finiteFibreScreen_rank

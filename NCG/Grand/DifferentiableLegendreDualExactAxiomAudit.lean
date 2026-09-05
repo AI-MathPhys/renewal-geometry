@@ -1,0 +1,6 @@
+import NCG.Grand.DifferentiableLegendreDualExact
+
+#print axioms NCG.DifferentiableLegendreDual.convex_tangent_lower_bound
+#print axioms NCG.DifferentiableLegendreDual.rateFunction_at_derivative
+#print axioms NCG.DifferentiableLegendreDual.rateFunction_exposed_certificate
+

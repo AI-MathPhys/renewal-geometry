@@ -1,0 +1,8 @@
+import NCG.Grand.OperationalTrivialityGNSDensityExact
+
+#print axioms NCG.operational_triviality
+#print axioms NCG.OperationalTrivialityGNS.scalar_on_all_of_dense_adjoin
+#print axioms NCG.OperationalTrivialityGNS.cyclic_scalar_orbit_one_dimensional
+#print axioms NCG.OperationalTrivialityGNS.gnsCyclicVector_denseRange
+#print axioms NCG.OperationalTrivialityGNS.gnsCyclicVector_state
+#print axioms NCG.OperationalTrivialityGNS.gns_determining_panel_zero_forces_one_dimensional_character

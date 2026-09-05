@@ -1,0 +1,5 @@
+import NCG.Grand.FiniteSpectralScreenMarkedRenewalRealizationExact
+
+open NCG.FiniteSpectralScreenMarkedRenewalRealizationExact
+
+#print axioms every_finiteSpectralScreen_has_markedRenewalRealization

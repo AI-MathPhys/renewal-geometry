@@ -1,0 +1,3 @@
+import NCG.Grand.FiniteSpectralPacketGradingRealOperationsExact
+
+#print axioms NCG.FiniteSpectralPacketGradingRealOperationsExact.Packet.finiteSpectralization_grading_real_operations_exact

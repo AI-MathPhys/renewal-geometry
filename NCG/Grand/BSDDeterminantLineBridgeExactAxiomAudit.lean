@@ -1,0 +1,4 @@
+import NCG.Grand.BSDDeterminantLineBridgeExact
+
+#print axioms NCG.BSDDeterminantLine.reducedDeterminantMagnitude_conj
+#print axioms NCG.BSDDeterminantLine.bsd_determinant_line_bridge

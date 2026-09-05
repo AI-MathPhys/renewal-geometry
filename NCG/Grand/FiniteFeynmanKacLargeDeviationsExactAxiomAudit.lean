@@ -1,0 +1,12 @@
+import NCG.Grand.FiniteFeynmanKacLargeDeviationsExact
+
+/-! Standard-axiom audit of every clause and the assembled manuscript theorem. -/
+
+#print axioms NCG.FiniteFeynmanKacLargeDeviations.analyticAt_spectralAbscissa
+#print axioms NCG.FiniteFeynmanKacLargeDeviations.exists_positive_perron_pair
+#print axioms NCG.FiniteFeynmanKacLargeDeviations.complex_rootMultiplicity_spectralAbscissa_eq_one
+#print axioms NCG.FiniteFeynmanKacLargeDeviations.tendsto_scaled_log_physicalPathMoment
+#print axioms NCG.FiniteFeynmanKacLargeDeviations.hasLargeDeviationPrinciple
+#print axioms NCG.FiniteFeynmanKacLargeDeviations.spectralRate_nonnegative
+#print axioms NCG.FiniteFeynmanKacLargeDeviations.exists_spectralRate_zero
+#print axioms NCG.FiniteFeynmanKacLargeDeviations.finite_feynmanKac_scgf_largeDeviations

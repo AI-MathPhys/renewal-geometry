@@ -1,0 +1,11 @@
+import NCG.Grand.FiniteCTMCInitialMixtureExact
+
+/-! Standard-axiom audit for genuine initial-state mixtures and Feynman--Kac. -/
+
+#print axioms NCG.FiniteCTMCInitialMixture.jumpSequenceLaw_eq_pointStart_comp
+#print axioms NCG.FiniteCTMCInitialMixture.jumpSequenceLaw_eq_sum_pointMass
+#print axioms NCG.FiniteCTMCInitialMixture.map_admissibleProjection_pointMass
+#print axioms NCG.FiniteCTMCInitialMixture.admissiblePathLaw_eq_sum_pointMass
+#print axioms NCG.FiniteCTMCInitialMixture.integrable_feynmanKacIntegrand_initialLaw
+#print axioms NCG.FiniteCTMCInitialMixture.pathMoment_eq_sum_conditionalPathMoment
+#print axioms NCG.FiniteCTMCInitialMixture.pathMoment_eq_exponentialEntry_pairing

@@ -1,0 +1,47 @@
+diff --git a/NCG/Grand/FiniteTorusFourierPlancherel.lean b/NCG/Grand/FiniteTorusFourierPlancherel.lean
+--- a/NCG/Grand/FiniteTorusFourierPlancherel.lean
++++ b/NCG/Grand/FiniteTorusFourierPlancherel.lean
+@@ -79,0 +80,43 @@ theorem sum_norm_sq_finiteTorusFourier
++/-- Energy scaling for a constant multiple of the Fourier transform. -/
++theorem sum_norm_sq_const_smul_finiteTorusFourier
++    (c : ℂ) (Phi : (d → ZMod N) → E) :
++    ∑ k, ‖c • finiteTorusFourier Phi k‖ ^ 2 =
++      (‖c‖ ^ 2 * Fintype.card (d → ZMod N)) *
++        ∑ x, ‖Phi x‖ ^ 2 := by
++  simp_rw [norm_smul, mul_pow]
++  rw [← Finset.mul_sum, sum_norm_sq_finiteTorusFourier]
++  ring
++
++/-- The canonical inverse-square-root normalization of the product Fourier
++transform. -/
++noncomputable def finiteTorusNormalizedFourier
++    (Phi : (d → ZMod N) → E) (k : d → ZMod N) : E :=
++  ((Real.sqrt (Fintype.card (d → ZMod N)) : ℂ)⁻¹) •
++    finiteTorusFourier Phi k
++
++/-- The inverse-square-root cardinal factor has precisely the normalization
++required by Parseval. -/
++theorem norm_inv_sqrt_card_finiteTorus_sq_mul_card :
++    ‖(Real.sqrt (Fintype.card (d → ZMod N)) : ℂ)⁻¹‖ ^ 2 *
++        Fintype.card (d → ZMod N) = 1 := by
++  have hcard : 0 < Fintype.card (d → ZMod N) := Fintype.card_pos
++  have hsqrt : 0 < Real.sqrt (Fintype.card (d → ZMod N)) :=
++    Real.sqrt_pos.2 (by exact_mod_cast hcard)
++  rw [norm_inv, Complex.norm_real, Real.norm_eq_abs,
++    abs_of_pos hsqrt, inv_pow]
++  rw [Real.sq_sqrt (by positivity)]
++  field_simp
++
++/-- The normalized product Fourier transform preserves the counting
++`L²` energy exactly. -/
++theorem sum_norm_sq_finiteTorusNormalizedFourier
++    (Phi : (d → ZMod N) → E) :
++    ∑ k, ‖finiteTorusNormalizedFourier Phi k‖ ^ 2 =
++      ∑ x, ‖Phi x‖ ^ 2 := by
++  rw [show (∑ k, ‖finiteTorusNormalizedFourier Phi k‖ ^ 2) =
++      ∑ k,
++        ‖(Real.sqrt (Fintype.card (d → ZMod N)) : ℂ)⁻¹ •
++          finiteTorusFourier Phi k‖ ^ 2 by rfl]
++  rw [sum_norm_sq_const_smul_finiteTorusFourier,
++    norm_inv_sqrt_card_finiteTorus_sq_mul_card, one_mul]
++

@@ -1,0 +1,11 @@
+import NCG.Grand.FiniteCTMCNormalizedRewardLawExact
+
+/-! Standard-axiom audit for the actual normalized CTMC reward law. -/
+
+#print axioms NCG.FiniteCTMCNormalizedRewardLaw.exp_scaled_normalizedReward_eq
+#print axioms NCG.FiniteCTMCNormalizedRewardLaw.normalizedRewardLaw_isProbabilityMeasure
+#print axioms NCG.FiniteCTMCNormalizedRewardLaw.integrable_exp_normalizedRewardLaw
+#print axioms NCG.FiniteCTMCNormalizedRewardLaw.integral_exp_normalizedRewardLaw_eq_pathMoment
+#print axioms NCG.FiniteCTMCNormalizedRewardLaw.integral_exp_normalizedRewardLaw_pos
+#print axioms NCG.FiniteCTMCNormalizedRewardLaw.tendsto_scaled_log_integral_exp
+#print axioms NCG.FiniteCTMCNormalizedRewardLaw.tendsto_normalizedLogMoment

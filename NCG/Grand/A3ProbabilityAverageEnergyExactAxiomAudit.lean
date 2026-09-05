@@ -1,0 +1,4 @@
+import NCG.Grand.A3ProbabilityAverageEnergyExact
+
+#print axioms NCG.A3ProbabilityAverageEnergy.rootDifference_integral
+#print axioms NCG.A3ProbabilityAverageEnergy.sampledEnergy_probability_average_le_one

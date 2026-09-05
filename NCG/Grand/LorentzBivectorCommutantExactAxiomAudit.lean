@@ -1,0 +1,8 @@
+import NCG.Grand.LorentzBivectorCommutantExact
+
+#print axioms NCG.LorentzBivectorCommutant.boost_forces_hodge_blocks
+#print axioms NCG.LorentzBivectorCommutant.scalarBlocks_eq_identity_add_hodge
+#print axioms NCG.LorentzBivectorCommutant.lorentzNatural_eq_identity_add_hodge
+#print axioms NCG.LorentzBivectorCommutant.identity_add_hodge_lorentzNatural
+#print axioms NCG.LorentzBivectorCommutant.identity_hodge_coefficients_unique
+#print axioms NCG.LorentzBivectorCommutant.lorentzNatural_iff_existsUnique

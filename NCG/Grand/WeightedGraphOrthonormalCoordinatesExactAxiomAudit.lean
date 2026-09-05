@@ -1,0 +1,9 @@
+import NCG.Grand.WeightedGraphOrthonormalCoordinatesExact
+
+/-! Standard-axiom audit for weighted graph coordinate fidelity. -/
+
+#print axioms NCG.WeightedGraphOrthonormalCoordinates.edgeWeight_mul_sqrt_mass
+#print axioms NCG.WeightedGraphOrthonormalCoordinates.differential_mulVec_vertexCoordinates
+#print axioms NCG.WeightedGraphOrthonormalCoordinates.differential_mulVec_sqrt_mass_eq_zero
+#print axioms NCG.WeightedGraphOrthonormalCoordinates.differential_self_loop
+#print axioms NCG.WeightedGraphOrthonormalCoordinates.unequal_mass_constant_regression

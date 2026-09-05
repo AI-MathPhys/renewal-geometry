@@ -1,0 +1,3 @@
+import NCG.Grand.FiniteCStarAlgebraControlledUnitaryGenerationExact
+
+#print axioms NCG.FiniteCStarAlgebraControlledUnitaryGenerationExact.exists_finite_controlled_unitary_spanning_family

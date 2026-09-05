@@ -1,0 +1,8 @@
+import NCG.Grand.ToeplitzFiniteRankDiagonalProjectionExact
+
+/-! Axiom audit for the finite-rank Toeplitz obstruction. -/
+
+#print axioms NCG.ToeplitzScreenObstruction.diagonalSupport_finite_of_finiteDimensional_range
+#print axioms NCG.ToeplitzScreenObstruction.diagonalCoefficient_eq_zero_or_one_of_idempotent
+#print axioms NCG.ToeplitzScreenObstruction.diagonalIdempotent_eq_l2FinsetScreen
+#print axioms NCG.ToeplitzScreenObstruction.one_le_norm_commutator_of_finiteRank_idempotent_commutes_numberOperator

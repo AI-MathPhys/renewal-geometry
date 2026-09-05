@@ -1,0 +1,13 @@
+import NCG.Grand.ToeplitzNumberOperatorShiftCommutatorExact
+
+/-! Axiom audit for the Toeplitz number operator and shift relations. -/
+
+#print axioms NCG.IsL2BlockDiagonal.isCompactOperator_of_tendsto_norm_atTop_zero
+#print axioms NCG.ToeplitzScreenObstruction.numberResolvent_isCompactOperator
+#print axioms NCG.ToeplitzScreenObstruction.numberResolvent_injective
+#print axioms NCG.ToeplitzScreenObstruction.numberOperator_dense_domain
+#print axioms NCG.ToeplitzScreenObstruction.numberOperator_compact_resolvent
+#print axioms NCG.ToeplitzScreenObstruction.numberOperator_apply_coordinate
+#print axioms NCG.ToeplitzScreenObstruction.numberOperator_basisVector
+#print axioms NCG.ToeplitzScreenObstruction.numberOperator_comm_unilateralShift_basisVector
+#print axioms NCG.ToeplitzScreenObstruction.diagonal_on_basis_of_commutes_numberOperator

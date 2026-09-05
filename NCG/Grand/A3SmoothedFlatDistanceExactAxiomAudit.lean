@@ -1,0 +1,14 @@
+import NCG.Grand.A3SmoothedFlatDistanceExact
+
+#print axioms NCG.A3SmoothedFlatDistance.flatDistance_le_six
+#print axioms NCG.A3SmoothedFlatDistance.flatDistance_lipschitz
+#print axioms NCG.A3SmoothedFlatDistance.norm_flatDistance_le_six
+#print axioms NCG.A3SmoothedFlatDistance.smoothDistance_eq_integral
+#print axioms NCG.A3SmoothedFlatDistance.integrable_flatDistance_translate
+#print axioms NCG.A3SmoothedFlatDistance.smoothDistance_lipschitz
+#print axioms NCG.A3SmoothedFlatDistance.contDiff_smoothDistance
+#print axioms NCG.A3SmoothedFlatDistance.smoothDistance_periodic
+#print axioms NCG.A3SmoothedFlatDistance.abs_smoothDistance_sub_le
+#print axioms NCG.A3SmoothedFlatDistance.norm_fderiv_smoothDistance_le_one
+#print axioms NCG.A3SmoothedFlatDistance.distanceDerivativeBound_nonneg
+#print axioms NCG.A3SmoothedFlatDistance.norm_fderiv_smoothDistance_sub_le

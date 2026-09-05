@@ -1,0 +1,5 @@
+import NCG.Grand.A3DiscreteLipschitzExtensionExact
+
+#print axioms NCG.A3DiscreteLipschitzExtension.exists_lipschitz_extension
+#print axioms NCG.A3DiscreteLipschitzExtension.point_zero
+#print axioms NCG.A3DiscreteLipschitzExtension.exists_anchored_lipschitz_extension

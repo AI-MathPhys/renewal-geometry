@@ -1,0 +1,3 @@
+import NCG.Grand.RenewalPositivePhysicalContinuumExact
+
+#print axioms NCG.RenewalRegenerativeContinuum.renewal_positive_physical_continuum

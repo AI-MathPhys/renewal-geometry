@@ -1,0 +1,5 @@
+import NCG.Grand.CompactNormalFiniteSpectralScreensExact
+
+open NCG.CompactNormalFiniteSpectralScreensExact
+
+#print axioms compactNormal_injective_has_cofinal_finiteSpectralScreens

@@ -1,0 +1,3 @@
+import NCG.Grand.CanonicalGraphSpectralizationExact
+
+#print axioms NCG.CanonicalGraphSpectralization.canonical_graph_spectralization

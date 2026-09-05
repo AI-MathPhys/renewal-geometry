@@ -1,0 +1,3 @@
+import NCG.Grand.BoundedConvolutionKernelEstimateExact
+
+#print axioms NCG.BoundedConvolutionKernelEstimate.norm_convolution_le_kernel_integral

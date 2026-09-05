@@ -1,0 +1,50 @@
+diff --git a/NCG/Grand/FiniteTorusFourierInterpolation.lean b/NCG/Grand/FiniteTorusFourierInterpolation.lean
+--- a/NCG/Grand/FiniteTorusFourierInterpolation.lean
++++ b/NCG/Grand/FiniteTorusFourierInterpolation.lean
+@@ -96,0 +97,49 @@ theorem norm_sq_finiteTorusFourierInterpolation
++/-- Fourier interpolation is additive. -/
++theorem finiteTorusFourierInterpolation_add
++    (Phi Psi : (d → ZMod N) → ℂ) :
++    finiteTorusFourierInterpolation (Phi + Psi) =
++      finiteTorusFourierInterpolation Phi +
++        finiteTorusFourierInterpolation Psi := by
++  classical
++  simp [finiteTorusFourierInterpolation, finiteTorusNormalizedFourier,
++    finiteTorusFourier, Pi.add_apply, smul_add, Finset.sum_add_distrib]
++
++/-- Fourier interpolation commutes with complex scalar multiplication. -/
++theorem finiteTorusFourierInterpolation_smul
++    (c : ℂ) (Phi : (d → ZMod N) → ℂ) :
++    finiteTorusFourierInterpolation (c • Phi) =
++      c • finiteTorusFourierInterpolation Phi := by
++  classical
++  simp [finiteTorusFourierInterpolation, finiteTorusNormalizedFourier,
++    finiteTorusFourier, Pi.smul_apply, smul_sum, smul_smul, mul_comm]
++
++/-- Discrete Fourier interpolation bundled as a genuine linear isometry from
++the finite counting `L²` space into continuum torus `L²`. -/
++noncomputable def finiteTorusFourierInterpolationLinearIsometry :
++    EuclideanSpace ℂ (d → ZMod N) →ₗᵢ[ℂ]
++      MeasureTheory.Lp ℂ 2
++        (MeasureTheory.volume : MeasureTheory.Measure (UnitAddTorus d)) where
++  toFun Phi := finiteTorusFourierInterpolation Phi
++  map_add' := finiteTorusFourierInterpolation_add
++  map_smul' := finiteTorusFourierInterpolation_smul
++  norm_map' Phi := by
++    rw [← sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _),
++      norm_sq_finiteTorusFourierInterpolation,
++      EuclideanSpace.norm_sq_eq]
++
++@[simp]
++theorem finiteTorusFourierInterpolationLinearIsometry_apply
++    (Phi : EuclideanSpace ℂ (d → ZMod N)) :
++    finiteTorusFourierInterpolationLinearIsometry Phi =
++      finiteTorusFourierInterpolation Phi := rfl
++
++/-- In particular the interpolation is injective. -/
++theorem finiteTorusFourierInterpolation_injective :
++    Function.Injective
++      (finiteTorusFourierInterpolationLinearIsometry
++        (N := N) (d := d)) :=
++  LinearIsometry.injective _
++

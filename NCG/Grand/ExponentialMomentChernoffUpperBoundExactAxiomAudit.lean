@@ -1,0 +1,7 @@
+import NCG.Grand.ExponentialMomentChernoffUpperBoundExact
+
+#print axioms NCG.ExponentialMomentChernoffUpperBound.originalMass_set_le_exponentialMoment
+#print axioms NCG.ExponentialMomentChernoffUpperBound.originalMass_Ici_le
+#print axioms NCG.ExponentialMomentChernoffUpperBound.originalMass_Iic_le
+#print axioms NCG.ExponentialMomentChernoffUpperBound.eventually_originalMass_Ici_le
+#print axioms NCG.ExponentialMomentChernoffUpperBound.eventually_originalMass_Iic_le

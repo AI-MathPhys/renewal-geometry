@@ -1,0 +1,7 @@
+import NCG.Grand.FiniteCTMCAdmissiblePathLawExact
+
+#print axioms NCG.FiniteCTMCAdmissiblePathLaw.unitHoldingJumpSequence_mem
+#print axioms NCG.FiniteCTMCAdmissiblePathLaw.measurable_admissibleProjection
+#print axioms NCG.FiniteCTMCAdmissiblePathLaw.admissiblePathLaw_isProbabilityMeasure
+#print axioms NCG.FiniteCTMCAdmissiblePathLaw.ae_coe_admissibleProjection_eq_id
+#print axioms NCG.FiniteCTMCAdmissiblePathLaw.map_subtypeVal_admissiblePathLaw
