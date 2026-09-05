@@ -2525,10 +2525,13 @@
   "thm:GT-source-metric-cofinal": {
     "env": "theorem",
     "title": "Cofinal reserve--geometry separation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Formalize on finite comparison carrier: norm/trace limits of Gramians and residuals under uniform reserve window; finite-dim limit arithmetic.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved02.lean:NCG.MetricCofinal.horizonGramian_tendsto",
+      "NCG/Grand/MediumProved02.lean:NCG.MetricCofinal.dynProj_char",
+      "NCG/Grand/MediumProved02.lean:NCG.MetricCofinal.source_metric_cofinal"
+    ],
+    "note": "One finite comparison carrier: sequences (H_n, B_n, M_n, Y_n) with Hermitian clocks, PSD metrics, P_{B_n} := supp(Sigma_{B_n,M_n}) via the SMET machinery of EasyExact01; strong resolvent convergence and the trace/operator-norm convergences are rendered as convergence in the (unique) matrix topology of the finite carrier, on which all these notions coincide. Null-cost consistency (SMET.1) and the uniform reserve window (SMET.25, Loewner form g_- P_B <= Sigma <= g_+ P_B) are carried as manuscript hypotheses; SMET.26 is rendered as its epsilon-delta unfolding: for every eps > 0 there is delta_0 > 0 with |R-hat_{n,T,delta} - R_dyn,n| <= eps eventually in n for all 0 < delta <= delta_0, with R-hat the literal Tikhonov residual Y^H (1 - W(W + delta)^{-1}) Y. The bundle proves: SMET.27 (horizon Gramians converge to the integral of e^{-tH} P_B e^{-tH}, by dominated convergence with a compact clock-chart bound); the identification, at every card and at the limit, of the dynamic projection (support projection of the horizon Gramian) as the orthogonal projection onto span{e^{-tH} Ran P_B : t >= 0} (Hermitian, idempotent, fixes exactly the span; proved by an identity-theorem analytic continuation of the projected clock orbit, so the manuscript's t >= 0 span is captured with a finite-horizon Gramian); SMET.28 (dynamic residuals converge to Y^*(1 - P_H^{P_B})Y, by the eps/3 assembly of the uniform Tikhonov tails, the fixed-delta residual convergence, and the spectral limit W(W+delta)^{-1} -> supp W); and the closing of the limit-card physical-metric Tikhonov tail (tikhResidual -> dynResidual along delta -> 0+). The closing classification sentence of the manuscript is a prose taxonomy of failure modes and is not a formalizable claim."
   },
   "prop:GT-source-metric-transport": {
     "env": "proposition",
@@ -2571,10 +2574,16 @@
   "thm:GT-low-island-relative-moment": {
     "env": "theorem",
     "title": "Low-island relative-moment reduction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Finite spectral-projection Loewner arithmetic plus Chebyshev/Markov tail bound on spectral measure; generalized eigenvalue attainment.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved02.lean:NCG.LowIslandRM.island_window",
+      "NCG/Grand/MediumProved02.lean:NCG.LowIslandRM.island_head_ne_zero",
+      "NCG/Grand/MediumProved02.lean:NCG.LowIslandRM.island_weighted_window",
+      "NCG/Grand/MediumProved02.lean:NCG.LowIslandRM.island_carrier_bound",
+      "NCG/Grand/MediumProved02.lean:NCG.LowIslandRM.island_tail_norm",
+      "NCG/Grand/MediumProved02.lean:NCG.LowIslandRM.relative_edge_attained"
+    ],
+    "note": "Finite card E = (m -> C), carrier (k -> C), Q a matrix, K0 = Q^H Q, A = D - K0 PSD, P = 1_[0,rho](A) the spectral island projection, K_j = Q^H W_j Q, Omega = 1 + sum W_j; the domain condition on W_j^{1/2} is vacuous on the finite carrier. LIR.5 and LIR.6 are proved as Loewner (PosSemidef-difference) windows, Qv != 0 for nonzero island vectors, LIR.7 for the normalized carrier w = Qv/|Qv| of every unit island vector, LIR.8 in the vectorwise ell^2 operator-norm form R*|(1-Pi_R)QPx|^2 <= kappa* d_+ |x|^2, and the least admissible relative edge is the attained largest generalized Rayleigh quotient (IsGreatest), with the Loewner edge inequality holding iff c >= that maximum and every failed edge returning an attained unit island polarization."
   },
   "cor:GT-low-island-cofinal-carrier": {
     "env": "corollary",
@@ -4786,18 +4795,20 @@
   "cth:GT-adjacent-defect-insufficient": {
     "env": "countertheorem",
     "title": "Vanishing adjacent defects do not select a continuum",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Dirac-mass witness reduces metric to point distances; sin(log n) adjacent-gap and subsequence analysis is elementary real analysis once metric on Diracs is pinned.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved02.lean:NCG.AdjacentDefectWitness.adjacent_defect_insufficient"
+    ],
+    "note": "Exact witness: the moving Dirac family is represented by its base points sin(log(n+1)) on the fixed carrier [-1,1] with identity bonding maps (the projective transport metric restricts to base-point distance on Diracs). Proves carrier containment, vanishing adjacent defects via the sine Lipschitz and log-difference bounds, explicit strictly monotone landing subsequences n_k = floor(exp(2pi k + theta)) converging to sin(theta) = +/-1 (so subsequences land on delta_1 and delta_{-1}), and failure of the complete tail diameter D_N -> 0."
   },
   "cth:GT-triangular-weaker-than-summability": {
     "env": "countertheorem",
     "title": "Triangular coherence is strictly weaker than summability",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Dirac witness at (-1)^n/sqrt(n): D_N <= 2/sqrt(N) but adjacent defects sum like harmonic series; needs only Dirac-level metric evaluation.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved02.lean:NCG.AdjacentDefectWitness.triangular_weaker_than_summability"
+    ],
+    "note": "Exact witness: Dirac base points (-1)^n/sqrt(n) on [-1,1] with identity bonding maps. Proves carrier containment, the tail-diameter bound D_N <= 2/sqrt(N) for N >= 1, D_N -> 0, and non-summability of the adjacent defects (each defect dominates 1/(n+1), harmonic comparison)."
   },
   "thm:GT-cofinal-projective-envelope": {
     "env": "theorem",
@@ -11175,10 +11186,24 @@
   "thm:RPESM-sector-patched-line": {
     "env": "theorem",
     "title": "Sector-patched reflected line and coherent half-amplitude",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Finite-cover line-bundle algebra: partition-of-unity isometry, basis-independent reweighting, K^{1/2}S K^{1/2} rank formula, Cech coboundary iff; discrete one-form row for eta.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.patching_isometry",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.cohAmp_eq_sum_sq",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.cohAmp_reflection_positive",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.cohAmp_basis_independent",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.cohAmp_trace",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.reflGram_posSemidef",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.halfCarrier_posSemidef",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.halfCarrier_min_dim",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.offdiagonal_mixture_witness",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.global_frame_iff_coboundary",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.reflection_real_frame_defect",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.line_one_form_patches",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.line_one_form_modulus",
+      "NCG/Grand/MediumProved02.lean:NCG.RPESMLine.line_one_form_phase_witness"
+    ],
+    "note": "Finite reflection-stable cover rendering: discrete base X with reflection theta, patches U_alpha, unitary frames/transition cocycle, square partition of unity. RTH.11: the patching map is a fibrewise isometry (pairing of compatible sections preserved). RTH.12: the coherent amplitude z_{K,b} equals a sum of reflected squares of K^{1/2}-filtered sections, is a reflection-positive reweighting of every reflection-positive base state for PSD K, and is invariant under unitary central frame changes. RTH.13: Z_{K,b} = omega(z) = Tr(K^{1/2} S_b K^{1/2}), R = K^{1/2} S_b K^{1/2} is PSD, the minimum Gram-factorization dimension is attained at rank R (IsLeast), and an explicit two-sector witness shows diagonal truncation of K replaces the coherent (pure, R^2 = Tr(R) R) half-carrier by the incoherent identity mixture violating that equation. RTH.14: global scalar half-frame iff the Cech cocycle is a coboundary, with Real compatibility rendered as patch independence of the reflected frame defect. RTH.15: the line one-form s_a(y)/s_a(x) * conn patches globally on the discrete edge model, its modulus is determined by the section/connection moduli, and an explicit witness shows the phase is independent line data."
   },
   "thm:RPESM-complete-mixed-short": {
     "env": "theorem",
@@ -18886,10 +18911,14 @@
   "thm:NS-critical-centred-target": {
     "env": "theorem",
     "title": "Exact critical centring and dispersion action",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Abstract Hilbert projection identity and Cauchy-Schwarz equality case (single spectral modulus); finite-dim/bounded-operator reduction.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved02.lean:NCG.NSCentred.centred_is_projection",
+      "NCG/Grand/MediumProved02.lean:NCG.NSCentred.dispersion_action",
+      "NCG/Grand/MediumProved02.lean:NCG.NSCentred.dispersion_action_zero_iff",
+      "NCG/Grand/MediumProved02.lean:NCG.NSCentred.one_modulus_branch"
+    ],
+    "note": "NSE.8 (psi is the orthogonal projection of v onto the physical carrier Re<x,e> = 0, with uniqueness of the closest point, Re<psi,e> = 0 and Phi_c = -Re<c,psi>) is proved on an arbitrary complex inner-product space reusing the NSPay packet of EasyExact01. NSE.9 (exact value V_c = D_c - |A^{1/2}u|^4/|A^{1/4}u|^2, 0 <= V_c <= D_c) and the one-modulus characterization of V_c = 0 with Phi_c = q_c = 0 on that branch are proved on the finite spectral Galerkin model with strictly positive moduli kappa and e = Lambda^{1/2}u, v = Lambda^{3/2}u."
   },
   "thm:NS-energy-neutral-payment": {
     "env": "theorem",
@@ -18936,34 +18965,47 @@
   "thm:NS-centred-dispersion-escape": {
     "env": "theorem",
     "title": "Source-paid centred-dispersion escape",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Radon-Nikodym plus Chebyshev escape from bounded-dispersion sets; abstract measure algebra with the NS chronology axiomatized as interface.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved02.lean:NCG.NSEscape.pay_eq_disp_withDensity",
+      "NCG/Grand/MediumProved02.lean:NCG.NSEscape.dispersion_escape"
+    ],
+    "note": "Abstract chronology carrier (T, mu) with measurable packets I_k, record rate q and dispersion action V (positive where q is). NSE.23 is the exact Radon-Nikodym factorization pi_k^c = sqrt(V_c) d lambda_k^disp as a withDensity identity of measures; NSE.24 is proved in assembled form: under packet disjointness and the finite global dispersion stock (the NSE.19 interface hypothesis), the dispersion masses are summable and vanish, and pi_k^c{V_c <= R} <= sqrt(R) lambda_k^disp(I_k) -> 0 for every fixed R (Chebyshev escape)."
   },
   "thm:NS-centred-boundary-counterflow": {
     "env": "theorem",
     "title": "Coherent payment and balanced scale counterflow",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Signed-measure coherent/counterflow decomposition and 1-dim Wasserstein CDF formula on an interval; finite/one-dimensional transport algebra.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved02.lean:NCG.NSCounterflow.counterflow_split",
+      "NCG/Grand/MediumProved02.lean:NCG.NSCounterflow.coherent_unique",
+      "NCG/Grand/MediumProved02.lean:NCG.NSCounterflow.counterflow_transport"
+    ],
+    "note": "Finite uniform scale grid kappa_i = a + h*i rendering of the boundary power as a signed cell-mass vector p. NSE.25/NSE.26: the exact coherent/counterflow split p = p^pay + p_cf^+ - p_cf^- with the stated totals, and uniqueness of the proportional positive replay. NSE.27: the minimum open-boundary transport cost over all nonnegative couplings of the counterflow marginals is attained and equals the discrete Kantorovich-Rubinstein CDF cost h * sum_r |sum_{i<=r}(p_cf^+ - p_cf^-)_i| (IsLeast), proved by an explicit 1-Lipschitz dual potential and an inductive transport plan."
   },
   "thm:NS-two-centre-critical-dipole": {
     "env": "theorem",
     "title": "Canonical two-centre/far-leverage dipole",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Two-sided spectral-mass and distance bounds from leverage constraints; abstract Chebyshev-type spectral measure arithmetic.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved02.lean:NCG.NSDipole.two_centre_mass",
+      "NCG/Grand/MediumProved02.lean:NCG.NSDipole.two_centre_separation",
+      "NCG/Grand/MediumProved02.lean:NCG.NSDipole.dipole_action_floor",
+      "NCG/Grand/MediumProved02.lean:NCG.NSDipole.far_leverage_moment",
+      "NCG/Grand/MediumProved02.lean:NCG.NSDipole.leverage_ge_four"
+    ],
+    "note": "On the finite Galerkin model, the critical-energy law omega_j = kappa_j|u_j|^2/|e|^2 with mean m, variance s^2, second moment r^2, half deviation a and leverage L = s^2/a^2 (all finite sums; L >= 4 proved). NSE.30: both dipole shoulders {kappa <= m - a/2} and {kappa >= m + a/2} carry omega-mass >= 1/(4 L_0) (Paley-Zygmund), and any two shoulder frequencies are separated by >= (delta_0/sqrt(L_0)) r. NSE.31: both shoulders carry centred action >= V_c/(2 L_0). NSE.32: the far region |kappa - m| > R a carries centred second moment >= s^2 (1 - 2R/L)_+ (stated with max (1 - 2R/L) 0)."
   },
   "thm:NS-centred-critical-commutator": {
     "env": "theorem",
     "title": "Exact centred commutator and donor ancestry boundary",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "TRIAGE-EXACT: MEDIUM - Commutator Fourier identity and alias triangle bound; exact on a finite Fourier/Galerkin model.",
-    "difficulty": "medium"
+    "status": "proved",
+    "lean": [
+      "NCG/Grand/MediumProved02.lean:NCG.NSCommutator.centred_commutator",
+      "NCG/Grand/MediumProved02.lean:NCG.NSCommutator.centred_commutator_fourier",
+      "NCG/Grand/MediumProved02.lean:NCG.NSCommutator.ordered_alias_bound"
+    ],
+    "note": "Exact finite Fourier Galerkin model on Z^3: divergence-free, reflection-real modes supported on a finite symmetric mean-free grid, literal Fourier advection, Leray projector, multiplier Lambda = |k|, and Phi_c = -Re<A^{-1/4}N_u u, A^{3/4}u>. NSE.33 proves both commutator identities 2Phi_c = -Re<[Lambda,N_u]u,u> = -Re<[Lambda-kbar,N_u]u,u> for every centring constant; NSE.34 is the exact alias expansion over ordered pairs p+q=k; NSE.35 is ||k|-|q|| <= |p| for every ordered alias (reverse triangle inequality of euclidean moduli)."
   },
   "thm:NS-energy-neutral-continuation": {
     "env": "theorem",
