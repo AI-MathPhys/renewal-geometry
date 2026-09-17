@@ -1,0 +1,1351 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{record}[theorem]{Record}
+\newtheorem{gate}[theorem]{Gate}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{firewall}[theorem]{Firewall}
+
+\newcommand{\cA}{\mathcal A}
+\newcommand{\cE}{\mathcal E}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cW}{\mathcal W}
+\newcommand{\Pm}{P_{\mathrm{marg}}}
+\newcommand{\TV}{\mathrm{TV}}
+\newcommand{\NP}{\mathrm{NP}}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\currentversion}{5}
+
+\title{Renewal Yang--Mills Parallel Research Notes\\
+Programme I: Nonperturbative Margin Protection\\
+Programme II: Sector Tightness and Topological Transport}
+\author{Parallel Yang--Mills stream}
+\date{Version V\currentversion}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This is the single cumulative file for complementary Yang--Mills programmes
+that do not duplicate the main Brillouin/SCIC/ADMC stream.  Programme I bounds,
+in the source-differentiable analytic norms of the main notes, the difference
+between the exact marginal RG response and the certified packet-first response.
+It reaches its success stop in Section~5: the exhaustive nonlinear correction
+is higher order, summable, and smaller than one half of the supplied symbolic
+margin on an explicit weak-coupling domain.
+
+Programme II is appended after that completed result.  It separates finite
+centre flux, compact toron/holonomy coordinates, and integer global charge;
+tests the proposed cutoff- and volume-uniform sector tail against the actual
+block ledger; and stops at the first stated success or failure criterion.  The
+file remains Version V5 at the user's request: new work is appended in place,
+the former programme-specific filename is replaced by this umbrella name, and
+no additional active version is created.  Companion research is audited at
+the programme checkpoint before the final decision.
+\end{abstract}
+
+\tableofcontents
+
+\section{V1: provenance, scope, and the exact remainder ledger}
+
+\subsection{Sources and nonduplication boundary}
+
+The manuscript
+\texttt{Renewal\_Grand\_Tensor\_Monograph\_V074(1).tex} is used as a claim
+boundary and as context for the finite colour-law and Yang--Mills interfaces.
+The mathematical source for the present RG estimates is the latest cumulative
+Yang--Mills note available at the start of the programme,
+\texttt{Renewal\_Yang\_Mills\_Mass\_Gap\_Research\_Notes\_V74.tex}, together
+with its cited archive
+\texttt{Renewal\_Yang\_Mills\_Mass\_Gap\_Research\_Notes\_V65\_f8.tex}.
+The supplied programme memorandum fixes the five gates and the stopping rule;
+it is not treated as evidence for a theorem.
+
+The following results are imported and will not be reproved here.
+\begin{enumerate}[label=\textup{(I\arabic*)},leftmargin=4em]
+\item Exact Morse--Gaussian gluing after extraction of the constant, linear,
+and quadratic jets; its interior Taylor defect is
+$O(\beta^{-6/5})$, while its chart-exit and Wilson-exterior terms are
+stretched-exponentially small (compact V6, (6.12)--(6.19)).
+\item The normalized regular-kernel defect obeys
+$\|\Delta_y\|_{\rm var}\le q_{\rm ker}(\beta)$, with
+$q_{\rm ker}(\beta)=O(\beta^{-6/5})$, and the collar-bad primitive obeys
+$q_{\rm sat}(\beta)=O(\beta^{d_*/(2M_{\rm sat})}e^{-c\beta})$
+(compact V7, (7.13)--(7.25)).
+\item The triangular all-colour schedule gives every regular or bad block one
+historical owner and proves an absolutely convergent connected expansion,
+uniformly in volume, with four source derivatives permitted after summation
+(compact V8, Theorem (8.28)--(8.32)).
+\item The measured redundant coordinate has exactly zero physical marginal
+leakage, the zero-theta sector is invariant, and topology-changing exits are
+already bad-owned (compact V9, V11, and V12).
+\item One marked connected expansion gives a uniformly bounded response of the
+inverse-coupling increment, while reciprocal inversion supplies two powers of
+$u=\beta^{-1}$ (compact V13, (13.3)--(13.15)).
+\item On the cofinal domain the aligned stable map is a strict contraction
+with some $q_{\rm st}<1$ (archived Theorem 36.14), and its nonautonomous
+tracking estimate is (36.17).
+\end{enumerate}
+
+Thus this stream does not repeat the one-loop Brillouin calculation, the Morse
+lemma, the forest combinatorics, the bad-field Peierls estimate, or the
+packet-first response compiler.  It starts at their common output interface.
+
+\subsection{The owner alphabet}
+
+Fix a finite regulator, a retained zero-theta sector, and one exact triangular
+block elimination.  Let $\mathcal O$ be the absolutely convergent owner algebra
+of compact V8 on its smaller source polydisc.  Each primitive carries its
+historical support and exactly one birth tag in
+\[
+ \mathfrak T=\{\mathrm{loc},\mathrm{bad},\mathrm{reset},
+                 \mathrm{boundary}\}.                       \tag{1.1}
+\]
+Here $\mathrm{loc}$ means a regular two-jet-subtracted local primitive;
+$\mathrm{bad}$ means a chart exit, Wilson exterior, collar-irregular birth, or
+sector transition; $\mathrm{reset}$ means a stable complement created by the
+declared reference/calibration reset; and $\mathrm{boundary}$ means a genuine
+global endpoint response not represented by a local saturated owner.  The
+Gaussian principal shell and every extracted finite jet are carried in the
+calibrated ledger, not in $\mathcal O$.
+
+Let a connected word $W$ be a finite word in these primitives after the V8
+historical saturation and canonical rooting.  Assign $W$ to the first
+applicable class in the ordered list
+\[
+ \mathrm{boundary}\succ\mathrm{bad}\succ\mathrm{reset}
+ \succ\mathrm{polymer}\succ\mathrm{vertex},                  \tag{1.2}
+\]
+where ``polymer'' means that all letters are regular local letters and
+$|W|\ge2$, while ``vertex'' means one regular local letter.  The order in
+(1.2) is a classification rule, not a second owner: the historical owner of a
+primitive is never altered.
+
+\begin{lemma}[Disjoint exhaustive word partition]
+\label{lem:word-partition}
+Every non-Gaussian connected word belongs to exactly one of the five classes
+in (1.2).
+\end{lemma}
+
+\begin{proof}
+If a word contains a boundary tag it enters the first class.  Otherwise, if it
+contains a bad tag it enters the second class; otherwise, if it contains a
+reset tag it enters the third.  A remaining word consists only of regular
+local letters, and is classified by whether its length is at least two or is
+one.  These alternatives are exhaustive.  They are disjoint because the class
+is chosen by the first true predicate in a fixed ordered list.  Unique
+historical payment of every primitive follows from the all-colour saturation
+theorem, so classification cannot introduce a second charge.
+\end{proof}
+
+\subsection{Exact response projector and ledger}
+
+Let $s=(s_0,\ldots,s_3)$ denote the four source variables on the fixed smaller
+polydisc.  Let $\mathcal G$ be the finite-dimensional space of normalized
+quadratic background germs and let
+\[
+ \Pm:\mathcal G\longrightarrow\mathbb R                    \tag{1.3}
+\]
+be the bounded transverse $F^2$ extractor used by compact V13--V15.  If
+$\mathfrak L$ is the normalized logarithm of the exact pushed density, define
+the required marginal response by
+\[
+ \cR_{\rm exact}:=
+ \Pm\,\partial_{s_0}\partial_{s_1}\partial_{s_2}
+              \partial_{s_3}\mathfrak L\big|_{s=0}.          \tag{1.4}
+\]
+Fewer physical marks are handled by deleting the unused derivatives; four are
+kept because the imported normal-convergence theorem controls them.
+
+Write $\mathfrak L_{\rm G}$ for the calibrated Gaussian-principal logarithm,
+including its Haar-compensated determinant and declared finite jets, and put
+\[
+ \cR_{\rm main}:=
+ \Pm\,\partial_{s_0}\partial_{s_1}\partial_{s_2}
+              \partial_{s_3}\mathfrak L_{\rm G}\big|_{s=0}. \tag{1.5}
+\]
+
+\begin{theorem}[Exact non-double-counted remainder ledger]
+\label{thm:exact-ledger}
+On every finite-volume all-colour domain satisfying the imported V8 gate,
+\[
+\boxed{
+ \cR_{\rm exact}=\cR_{\rm main}
+ +E_{\rm vert}+E_{\rm polymer}+E_{\rm bad}
+ +E_{\rm reset}+E_{\rm multiscale}.}                         \tag{1.6}
+\]
+The five error terms are the images under (1.4) of the five disjoint classes
+of Lemma~\ref{lem:word-partition}, with
+$E_{\rm multiscale}$ equal to the boundary class together with the endpoint of
+the propagated stable history.  No determinant, local Taylor defect,
+topology-changing exit, or reset complement occurs twice.
+\end{theorem}
+
+\begin{proof}
+The exact triangular pushforward is the Gaussian calibrated term plus the
+normally convergent sum of connected owner words.  Normal convergence on the
+fixed source polydisc permits the four derivatives in (1.4) to pass through
+that sum, and boundedness of $\Pm$ permits its application term by term.
+Lemma~\ref{lem:word-partition} partitions the resulting series into five
+disjoint subseries, proving (1.6).
+
+The two-jet determinant is outside the owner algebra by the V6--V8 ownership
+rule and therefore occurs only in $\cR_{\rm main}$.  A bad or sector-transition
+word has one first historical bad birth and is placed wholly in $E_{\rm bad}$,
+so none of its regular companions is recharged to $E_{\rm polymer}$.  A reset
+word is similarly placed wholly in $E_{\rm reset}$.  Finally, only a genuine
+global boundary tag and the terminal stable-history endpoint enter
+$E_{\rm multiscale}$.  This proves the nonduplication statement.
+\end{proof}
+
+\begin{firewall}[What V1 does not prove]
+Theorem~\ref{thm:exact-ledger} is an exact identity, not yet a smallness
+estimate.  In particular, the reset and multiscale classes still require a
+power-preserving propagation theorem.  No one-loop sign, continuum measure,
+or Yang--Mills mass gap is claimed.
+\end{firewall}
+
+\begin{gate}[P1]
+Gate P1 is closed: (1.6) is exhaustive and each contribution has one owner.
+The next acquisition is a common $u^{6/5}$ bound for the local, polymer, and
+bad classes in the already established analytic norm.
+\end{gate}
+
+\section{V2: local analytic, polymer, and bad-field response bounds}
+
+\subsection{An explicit common primitive majorant}
+
+Put
+\[
+ u=\beta^{-1},\qquad p=\frac65.                              \tag{2.1}
+\]
+The following notation only repackages the proved V6--V10 quantities:
+\begin{align}
+ a_3&=M_\ell(c_0/t_0)^3,
+ &q_3(u)&=e^{a_3u^p}-1,                                      \tag{2.2}\\
+ \epsilon_6(u)&=C_2q_3(u)
+ +C_2 2^{d_*/2}e^{-c_0^2u^{-1/5}/32}
+ +C_{\rm ext}u^{-d_*/2}e^{-c_0^2u^{-1/5}/2},                \tag{2.3}\\
+ q_{\rm ker}(u)&=\frac{2\epsilon_6(u)}{1-\epsilon_6(u)},
+ &q_{\rm sat}(u)&=
+ \left(C_{\rm collar}u^{-d_*/2}e^{-c_{\rm col}/u}\right)^{1/M_{\rm sat}},
+                                                                    \tag{2.4}\\
+ q_{\rm comp}(u)&=e^{\tau_*C_{\rm comp}u^p}-1,              \tag{2.5}\\
+ w(u)&=(K_{\chi_*}+1)\{q_{\rm ker}(u)+q_{\rm sat}(u)\}
+       +q_{\rm comp}(u).                                     \tag{2.6}
+\end{align}
+Here $c_{\rm col}=\bar\epsilon_0^2/(6M_\kappa)$.  Formula (2.6)
+is the $w_{10}$ strength, with every fresh regular, bad, and compensation
+primitive paid once.
+
+For $A,c,d,\beta_0>0$, define
+\[
+ \beta_\sharp(A,c,d;\beta_0)
+ =\max\left\{\beta_0,\left(\frac{A}{cd}\right)^{1/d}\right\},
+ \quad
+ T(A,c,d;\beta_0)=\beta_\sharp^A e^{-c\beta_\sharp^d}.     \tag{2.7}
+\]
+
+\begin{lemma}[Explicit exponential-to-power conversion]
+\label{lem:exp-power}
+For $\beta\ge\beta_0$,
+\[
+ \beta^A e^{-c\beta^d}\le T(A,c,d;\beta_0).                \tag{2.8}
+\]
+Consequently each stretched-exponential term in (2.3)--(2.4) is
+bounded by an explicit constant times $u^p$ on
+$0<u\le u_0=\beta_0^{-1}$.
+\end{lemma}
+
+\begin{proof}
+The logarithmic derivative of $f(\beta)=\beta^Ae^{-c\beta^d}$ is
+$A/\beta-cd\beta^{d-1}$.  Thus $f$ increases up to
+$(A/(cd))^{1/d}$ and decreases afterwards, proving (2.8).
+To compare $\beta^ae^{-c\beta^d}$ with
+$u^p=\beta^{-p}$, apply (2.8) with $A=a+p$.
+\end{proof}
+
+\begin{proposition}[Uniform $u^{6/5}$ owner strength]
+\label{prop:w-power}
+Choose $\beta_0$ so that
+\[
+ \epsilon_6(\beta_0^{-1})\le\frac12,\qquad
+ a_3\beta_0^{-p}\le1,\qquad
+ \tau_*C_{\rm comp}\beta_0^{-p}\le1.                      \tag{2.9}
+\]
+Then
+\[
+ \boxed{w(u)\le C_w(\beta_0)u^{6/5}}
+ \qquad(0<u\le\beta_0^{-1}),                               \tag{2.10}
+\]
+where one explicit legal constant is
+\begin{align}
+ C_w={}&(K_{\chi_*}+1)[4C_6+C_{\rm sat}]
+       +e\tau_*C_{\rm comp},                               \tag{2.11}\\
+ C_6={}&e a_3C_2
+ +C_2 2^{d_*/2}T(p,c_0^2/32,1/5;\beta_0)\\
+ &+C_{\rm ext}T(d_*/2+p,c_0^2/2,1/5;\beta_0),              \tag{2.12}\\
+ C_{\rm sat}={}&C_{\rm collar}^{1/M_{\rm sat}}
+ T\left(\frac{d_*}{2M_{\rm sat}}+p,
+         \frac{c_{\rm col}}{M_{\rm sat}},1;\beta_0\right).
+                                                                    \tag{2.13}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+For $0\le t\le1$, $e^t-1\le et$, so
+$q_3\le ea_3u^p$ and
+$q_{\rm comp}\le e\tau_*C_{\rm comp}u^p$.
+Lemma~\ref{lem:exp-power} gives
+$\epsilon_6\le C_6u^p$.  Since $\epsilon_6\le1/2$,
+$q_{\rm ker}\le4C_6u^p$.  The same lemma, after the
+$M_{\rm sat}$th root, gives
+$q_{\rm sat}\le C_{\rm sat}u^p$.  Substitute in (2.6).
+\end{proof}
+
+\subsection{Local derivatives in the established norm}
+
+Let $\|\cdot\|_{R,\boldsymbol\rho}^{\rm HK}$ be the compact
+right-invariant Taylor--Wiener norm of compact V3, augmented by the source
+radii, and let $0<r<R$.  Write $V_{\rm hi}$ for the regular local log-density
+after exact extraction of its constant, linear, and quadratic field jets.
+
+\begin{theorem}[High-grade local response]
+\label{thm:local-response}
+There is a fixed $C_{\rm loc}$ such that
+\[
+ \|V_{\rm hi}\|_{R,\boldsymbol\rho}^{\rm HK}
+ \le C_{\rm loc}u^p,                                       \tag{2.14}
+\]
+and
+\[
+ \|DV_{\rm hi}\|_{r,\boldsymbol\rho}^{\rm HK}
+ \le\frac{C_{\rm loc}}{R-r}u^p,\qquad
+ \|D^2V_{\rm hi}\|_{r,\boldsymbol\rho}^{\rm HK}
+ \le\frac{2C_{\rm loc}}{(R-r)^2}u^p.                      \tag{2.15}
+\]
+Restricting source radii from $\rho_i$ to $\rho_i'<\rho_i$ and
+differentiating in a set $I$ of sources adds only
+$\prod_{i\in I}(\rho_i-\rho_i')^{-1}$.
+\end{theorem}
+
+\begin{proof}
+The V6 Morse identity writes the regular density as its exact two-jet times
+$e^{\mathcal R_3}-1$; every other regular completion primitive is in
+(2.5).  Proposition~\ref{prop:w-power}, with fixed owner embeddings, gives
+(2.14).  The one-radius lemma for this same norm gives
+$\|D^kF\|_r\le k!(R-r)^{-k}\|F\|_R$ for $k=1,2$.
+Multivariable Cauchy gives the source statement.  No cutoff indicator is
+differentiated.
+\end{proof}
+
+\subsection{Marked connected-polymer and bad-field bounds}
+
+Let $M_{\rm rsp}$ contain one normalized marginal response mark, $\Pm$,
+and the fixed owner/source embeddings.  Put
+\[
+ x(u)=A_\mu c_{\rm rsp}w(u),\qquad
+ A_\mu=e^{1+\mu}(\Delta_*+1).                              \tag{2.16}
+\]
+
+\begin{theorem}[Source-marked remainder split]
+\label{thm:marked-split}
+If $x(u)<1$, the V1 subseries satisfy
+\begin{align}
+ |E_{\rm vert}|+|E_{\rm bad}|
+ &\le C_{\rm vb}w(u),                                      \tag{2.17}\\
+ |E_{\rm polymer}|
+ &\le e^\mu M_{\rm rsp}c_{\rm rsp}w(u)
+       \frac{2x(u)-x(u)^2}{(1-x(u))^2}.                     \tag{2.18}
+\end{align}
+If $x(u)\le1/2$, then
+\[
+ |E_{\rm vert}|+|E_{\rm bad}|+|E_{\rm polymer}|
+ \le C_{\rm fresh}u^{6/5},                                \tag{2.19}
+\]
+where
+\[
+ C_{\rm fresh}=C_{\rm vb}C_w
+ +8e^\mu M_{\rm rsp}c_{\rm rsp}^2A_\mu C_w^2u_0^p.       \tag{2.20}
+\]
+The constants are uniform in volume, colour stage, and regulator whenever the
+imported local dictionary is uniform.
+\end{theorem}
+
+\begin{proof}
+Singleton regular and bad words are bounded by their primitive variation
+strength times the fixed response embeddings.  Historical saturation pays a
+mixed word containing a bad primitive only to the bad class, proving (2.17).
+
+For an all-regular connected word with $n\ge2$ primitives, root at the
+response mark.  The first primitive costs
+$e^\mu M_{\rm rsp}c_{\rm rsp}w$, each later primitive costs at most $x$,
+and there are at most $n$ mark positions.  Hence
+\[
+ e^\mu M_{\rm rsp}c_{\rm rsp}w
+ \sum_{n\ge2}n x^{n-1}
+ =e^\mu M_{\rm rsp}c_{\rm rsp}w
+   \frac{2x-x^2}{(1-x)^2},
+\]
+which proves (2.18).  For $x\le1/2$ the rational factor is at most $4x$.
+Use (2.10) and $u^{2p}\le u_0^pu^p$ to obtain (2.19)--(2.20).
+Normal convergence justifies the source derivatives.
+\end{proof}
+
+\begin{gate}[P2 and the local half of P3]
+Theorem~\ref{thm:local-response} closes P2 in the existing strong/weak
+analytic norms.  Theorem~\ref{thm:marked-split} closes the polymer and
+response-weighted bad-field parts of P3.  The remaining task is propagation
+of the reset/stable history without losing $p=6/5$.
+\end{gate}
+
+\section{V3: upstream reset propagation and multiscale ownership}
+
+\subsection{Why the reset problem is a stable-history problem}
+
+The V14 ledger of the main notes separates a same-scale Gaussian shell, a
+local nonlinear correction, reference-reset memory, and a genuine global
+boundary response.  A moment-preserving reset is not automatically harmless
+at later scales.  However, after the constant, marginal two-jet, measured
+redundant, anisotropy, and retained sector rows have been extracted, its
+remaining local part lies in the stable owner space on which the archived
+aligned map is contractive.  This is the correct upstream location of the
+reset estimate.
+
+Let $X_{\rm st}$ be that packet-polymer Banach space and let $s_j$ be the norm
+of all propagated stable history entering scale $j$.  Fix constants
+\[
+ 0\le q<1,\quad B_{\rm reset},L_h,M_c<\infty,              \tag{3.1}
+\]
+where $q$ is the cofinal stable contraction, $B_{\rm reset}$ is the norm of
+stable projection followed by recharting, $L_h$ is the moving-reference
+Lipschitz constant, and
+\[
+ |c_j|\le M_c,qquad
+ \beta_{j+1}=\beta_j+c_j,qquad u_j=\beta_j^{-1}.           \tag{3.2}
+\]
+All are uniform finite-dictionary constants on the imported calibrated cone.
+
+\begin{lemma}[Fresh reset forcing has the same power as the owner bank]
+\label{lem:reset-forcing}
+On the domain of Proposition~\ref{prop:w-power}, the stable forcing born
+between scales $j$ and $j+1$ obeys
+\[
+ \|d_{{\rm st},j}\|_{X_{\rm st}}
+ \le A_{\rm forc}u_j^p,                                    \tag{3.3}
+\]
+where one admissible constant is
+\[
+ A_{\rm forc}
+ =B_{\rm reset}C_w+L_hM_cu_0^{,2-p}.                       \tag{3.4}
+\]
+\end{lemma}
+
+\begin{proof}
+Exact finite-jet extraction partitions the output into the calibrated jet and
+its stable complement.  The local difference between exact and reference
+outputs has owner norm at most $w(u_j)$; applying the bounded stable projection
+and recharting costs $B_{\rm reset}$.  Proposition~\ref{prop:w-power} bounds
+this part by $B_{\rm reset}C_wu_j^p$.
+
+Changing the moving reference from $u_j$ to $u_{j+1}$ contributes at most
+$L_h|u_{j+1}-u_j|$.  From (3.2),
+\[
+ |u_{j+1}-u_j|
+ =\frac{|c_j|u_j^2}{|1+c_ju_j|}
+ \le 2M_cu_j^2                                              \tag{3.5}
+\]
+when $M_cu_j\le1/2$.  Absorb the harmless factor $2$ into the declared
+$L_h$, and use $u_j^2\le u_0^{2-p}u_j^p$.  The measured redundant projection
+is exactly zero, retained labels are not reset, and bad histories were already
+included in $w$; hence no omitted local term remains.
+\end{proof}
+
+\subsection{A power-preserving geometric convolution}
+
+For $q>0$ put
+\[
+ \Lambda_q=\left(\frac{1+q}{2q}\right)^{1/p};
+\]
+for $q=0$ choose any $\Lambda_q>1$.  In either case
+\[
+ \theta_q:=q\Lambda_q^p<1.                                 \tag{3.6}
+\]
+
+\begin{theorem}[Reset-memory invariant cone]
+\label{thm:reset-cone}
+Assume
+\[
+ 0<u_j\le u_*,\qquad
+ M_cu_*\le\frac12,qquad
+ 1+M_cu_*\le\Lambda_q,                                    \tag{3.7}
+\]
+and the archived nonautonomous stable recursion
+\[
+ s_{j+1}\le q s_j+A_{\rm forc}u_j^p.                       \tag{3.8}
+\]
+Define
+\[
+ H_{\rm st}
+ =\frac{A_{\rm forc}\Lambda_q^p}{1-q\Lambda_q^p}.         \tag{3.9}
+\]
+If $s_0\le H_{\rm st}u_0^p$, then for every $j\ge0$,
+\[
+ \boxed{s_j\le H_{\rm st}u_j^p.}                          \tag{3.10}
+\]
+Thus propagation does not degrade the exponent $p=6/5$.
+\end{theorem}
+
+\begin{proof}
+Equation (3.2) gives
+\[
+ \frac{u_j}{u_{j+1}}=1+c_ju_j\le1+M_cu_*\le\Lambda_q,     \tag{3.11}
+\]
+while positivity of the couplings is part of the calibrated domain.
+Suppose inductively that $s_j\le H_{\rm st}u_j^p$.  Then
+\[
+\begin{split}
+ s_{j+1}
+ &\le(qH_{\rm st}+A_{\rm forc})u_j^p\\
+ &\le(qH_{\rm st}+A_{\rm forc})\Lambda_q^pu_{j+1}^p
+ =H_{\rm st}u_{j+1}^p,
+\end{split}                                                  \tag{3.12}
+\]
+where the last identity is (3.9).  The initial hypothesis starts the
+induction.
+\end{proof}
+
+\begin{remark}[Noncircularity]
+The hypothesis (3.8) is not the desired marginal estimate.  It is the archived
+strict contraction theorem applied to the stable projection, with the fresh
+forcing supplied independently by Lemma~\ref{lem:reset-forcing}.  The
+marginal extractor never enters the proof of (3.10).
+\end{remark}
+
+\subsection{The genuine boundary class on the declared sector}
+
+\begin{proposition}[No unowned boundary response on the fixed periodic sector]
+\label{prop:boundary-zero}
+For a periodic finite lattice, with flux, toron, and integer charge retained
+as fixed labels and theta equal to zero, the boundary class in (1.2) has zero
+local marginal response.  Every chart or admissibility exit is already in
+$E_{\rm bad}$, and every surviving multiscale term is the stable-history
+endpoint controlled by (3.10).
+\end{proposition}
+
+\begin{proof}
+A periodic lattice has no spatial boundary face, so the sum of a discrete
+divergence is zero.  The sectorwise pushforward theorem transports the flux,
+toron, and integer charge labels instead of recomputing or summing them.
+The V11 transition-ownership theorem assigns any path leaving an admissible
+sector to its first historical collar-bad birth, already counted in
+$E_{\rm bad}$.  The V8 saturation theorem assigns every chart-overlap failure
+to the same unique bad history.  Hence the only endpoint not evaluated at its
+birth scale is the stable reset history, which is (3.10).
+\end{proof}
+
+Let $L_{\rm st}$ be the uniform marked inverse-coupling response norm on
+$X_{\rm st}$ supplied by the V13 marked expansion.
+
+\begin{corollary}[Reset plus multiscale response]
+\label{cor:reset-response}
+Under Theorem~\ref{thm:reset-cone} and
+Proposition~\ref{prop:boundary-zero},
+\[
+ |E_{\rm reset}|+|E_{\rm multiscale}|
+ \le L_{\rm st}H_{\rm st}u_j^p.                           \tag{3.13}
+\]
+Together with (2.19), the complete non-Gaussian inverse-coupling error obeys
+\[
+ \boxed{|e_j|\le C_{\rm NP}u_j^{6/5}},\qquad
+ C_{\rm NP}=C_{\rm fresh}+L_{\rm st}H_{\rm st}.          \tag{3.14}
+\]
+\end{corollary}
+
+\begin{proof}
+Integrate the bounded marked derivative along the segment from zero history
+to the stable history of norm $s_j$, use (3.10), and add the fresh estimate
+(2.19).  The owner partition in Theorem~\ref{thm:exact-ledger} makes the sum
+exhaustive and disjoint.
+\end{proof}
+
+\begin{gate}[P3 and the inverse-coupling part of P4]
+The reset convolution (3.10), the boundary classification, and (3.14) close
+P3 on the fixed periodic retained sector and prove the critical order
+separation in inverse-coupling variables: the main shell is order one while
+the exhaustive nonperturbative error is $O(u^{6/5})$.  Iteration V4 converts
+this into the exact physical-response margin and proves scale summability.
+\end{gate}
+
+\section{V4: physical margin protection and summation over scales}
+
+\subsection{Exact reciprocal conversion}
+
+Let $b_j$ be the main programme's certified Gaussian-principal
+inverse-coupling response at scale $j$.  Define $e_j$ by
+\[
+ c_j=b_j+e_j,\qquad
+ u_{j+1}=\frac{u_j}{1+u_jc_j}.                              \tag{4.1}
+\]
+Thus $c_j$ is the exhaustive exact inverse-coupling increment and, by
+Corollary~\ref{cor:reset-response},
+\[
+ |e_j|\le C_{\rm NP}u_j^p,\qquad p=\frac65.              \tag{4.2}
+\]
+Assume the already established bounded-increment card
+\[
+ |c_j|\le M_c.                                               \tag{4.3}
+\]
+No numerical value of $b_j$ is used below.
+
+Define the exact and main physical responses by
+\[
+ \cR_j^{\rm exact}=u_{j+1}-u_j,\qquad
+ \cR_j^{\rm main}=-b_ju_j^2.                               \tag{4.4}
+\]
+
+\begin{lemma}[Exact physical remainder identity]
+\label{lem:physical-identity}
+Whenever $1+u_jc_j\ne0$,
+\[
+ \cR_j^{\rm exact}-\cR_j^{\rm main}
+ =-e_ju_j^2+\frac{c_j^2u_j^3}{1+u_jc_j}.                   \tag{4.5}
+\]
+If $M_cu_j\le1/2$, then
+\[
+ \boxed{
+ |\cR_j^{\rm exact}-\cR_j^{\rm main}|
+ \le C_{\rm NP}u_j^{16/5}+2M_c^2u_j^3.}                   \tag{4.6}
+\]
+\end{lemma}
+
+\begin{proof}
+For every scalar $c$ with $1+uc\ne0$,
+\[
+ \frac{u}{1+uc}=u-cu^2+\frac{c^2u^3}{1+uc}.
+\]
+Insert $c_j=b_j+e_j$ and subtract $u_j-b_ju_j^2$, proving
+(4.5).  Under $M_cu_j\le1/2$ the denominator in the last term has
+absolute value at least $1/2$.  Apply (4.2)--(4.3).
+\end{proof}
+
+\subsection{The symbolic-margin theorem}
+
+The only datum requested from the main line is a lower margin
+\[
+ |b_j|\ge m_{\rm main}>0.                                  \tag{4.7}
+\]
+All other constants below are outputs of the remainder programme.
+
+Let $u_{\rm owner}$ be the minimum of the thresholds required for
+Proposition~\ref{prop:w-power}, $x(u)\le1/2$, and the imported calibrated
+cone.  Put
+\[
+\boxed{
+ u_*=
+ \min\left\{
+ u_{\rm owner},
+ \frac1{2M_c},
+ \frac{\Lambda_q-1}{M_c},
+ \left(\frac{m_{\rm main}}{4C_{\rm NP}}\right)^{5/6},
+ \frac{m_{\rm main}}{8M_c^2}
+ \right\}.}                                                \tag{4.8}
+\]
+If $C_{\rm NP}=0$, the fourth entry is interpreted as $+\infty$.
+The third entry is omitted when $q=0$ and $\Lambda_q$ was chosen without a
+restriction.  Shrinking $u_{\rm owner}$ once also ensures the source radii
+and every strict analytic inclusion used above.
+
+\begin{theorem}[Regulator-uniform nonperturbative margin protection]
+\label{thm:margin-protection}
+On every fixed-sector periodic admissible weak-coupling trajectory with
+$0<u_j<u_*$, (4.7) implies
+\[
+\boxed{
+ |\cR_j^{\rm exact}-\cR_j^{\rm main}|
+ \le
+ \left[
+ \frac{C_{\rm NP}}{m_{\rm main}}u_j^{6/5}
+ +\frac{2M_c^2}{m_{\rm main}}u_j
+ \right]|\cR_j^{\rm main}|
+ \le\frac12|\cR_j^{\rm main}|.}                          \tag{4.9}
+\]
+Consequently
+\[
+ \operatorname{sgn}\cR_j^{\rm exact}
+ =\operatorname{sgn}\cR_j^{\rm main}.                    \tag{4.10}
+\]
+The estimate is uniform in finite volume, colour stage, regulator, and scale
+on the declared trajectory.
+\end{theorem}
+
+\begin{proof}
+By (4.7),
+$|\cR_j^{\rm main}|=|b_j|u_j^2\ge m_{\rm main}u_j^2$.
+Divide (4.6) by this lower bound.  The fourth and fifth entries of (4.8)
+make the two displayed summands in (4.9) at most $1/4$ each.
+Thus the distance from the exact real response to the nonzero main response
+is less than its magnitude, which proves (4.10).  Uniformity follows from the
+uniform constants in (2.10), (2.19), (3.10), and (4.3).
+\end{proof}
+
+\begin{corollary}[One-step nonlinear RG remainder]
+\label{cor:one-step}
+The exact physical marginal recursion has the form
+\[
+ u_{j+1}=u_j-b_ju_j^2+r_j,                                   \tag{4.11}
+\]
+with
+\[
+ \boxed{|r_j|\le C_{\rm NP}u_j^{16/5}+2M_c^2u_j^3
+ =O(u_j^3).}                                                 \tag{4.12}
+\]
+In particular $r_j=o(u_j^2)$, so Gate P4 is positive rather than a failure
+stop.
+\end{corollary}
+
+\begin{proof}
+Equation (4.11) is the definition (4.4); (4.12) is (4.6).
+Since $16/5>3>2$, both terms are strictly higher order than the leading
+response.
+\end{proof}
+
+\subsection{Scale-summable accumulation}
+
+For accumulation in the ultraviolet orientation, suppose in addition that
+\[
+ b_j\ge m_{\rm main}>0.                                    \tag{4.13}
+\]
+The threshold (4.8) makes
+$|e_j|\le m_{\rm main}/4$, hence
+\[
+ c_j\ge\frac34m_{\rm main}\ge\frac12m_{\rm main}.       \tag{4.14}
+\]
+
+\begin{lemma}[Explicit power sum along the protected trajectory]
+\label{lem:power-sum}
+If $\beta_{j+1}\ge\beta_j+a$ with $a>0$, then for every $\alpha>1$,
+\[
+ \sum_{j=0}^\infty u_j^\alpha
+ \le \beta_0^{-\alpha}
+ +\frac{\beta_0^{1-\alpha}}{a(\alpha-1)}.                \tag{4.15}
+\]
+\end{lemma}
+
+\begin{proof}
+Induction gives $\beta_j\ge\beta_0+aj$.  The function
+$(\beta_0+at)^{-\alpha}$ is decreasing, so its sum is bounded by its
+value at zero plus its integral on $[0,\infty)$.  Evaluation of the
+integral gives (4.15).
+\end{proof}
+
+\begin{theorem}[Summable nonlinear response error]
+\label{thm:summable}
+Under (4.13) and $u_0<u_*$, the protected domain is forward invariant and
+\[
+ \sum_{j=0}^\infty
+ |\cR_j^{\rm exact}-\cR_j^{\rm main}|<\infty.            \tag{4.16}
+\]
+More precisely,
+\begin{equation}
+\begin{split}
+ E_{\rm NP}^{\rm total}
+ :={}&\sum_{j\ge0}
+ |\cR_j^{\rm exact}-\cR_j^{\rm main}|\\
+ \le{}&
+ C_{\rm NP}\left[
+ \beta_0^{-16/5}
+ +\frac{10}{11m_{\rm main}}\beta_0^{-11/5}\right]\\
+ &+2M_c^2\left[
+ \beta_0^{-3}+\frac1{m_{\rm main}}\beta_0^{-2}\right].
+\end{split}
+\tag{4.17}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Equation (4.14) gives
+$\beta_{j+1}\ge\beta_j+m_{\rm main}/2$, so $u_j$ decreases and can never
+leave $0<u<u_*$.  Apply Lemma~\ref{lem:power-sum} to (4.6), first with
+$a=m_{\rm main}/2$, $\alpha=16/5$, and then with $\alpha=3$.
+The two integral coefficients are
+$2/[m_{\rm main}(11/5)]=10/(11m_{\rm main})$ and
+$2/[m_{\rm main}(2)]=1/m_{\rm main}$, giving (4.17).
+\end{proof}
+
+\begin{gate}[P4 and P5]
+Corollary~\ref{cor:one-step} closes the critical go/no-go gate P4 with a
+strict power separation.  Theorem~\ref{thm:summable} closes P5.  Theorem
+\ref{thm:margin-protection} already has the requested success-stop form, with
+an explicit $u_*$ and only the symbolic margin $m_{\rm main}$ supplied by the
+main programme.  Iteration V5 performs the mandatory companion sweep and
+checks whether any new note invalidates or strengthens an imported premise
+before the stop is declared.
+\end{gate}
+
+\section{V5: mandatory companion sweep and success stop}
+
+\subsection{Files inspected}
+
+The fifth-iteration sweep was performed after V4.  The exact snapshot was
+\[
+\begin{array}{l|r|r|l}
+\text{file}&\text{lines}&\text{bytes}&\text{SHA--256 prefix}\\ \hline
+\texttt{Renewal\_Yang\_Mills\_Mass\_Gap\_Research\_Notes\_V77.tex}
+&26825&913923&\texttt{6CA0089783961EDA}\\
+\texttt{Renewal\_SM\_Einstein\_Continuum\_Research\_Notes\_V26.tex}
+&8127&288229&\texttt{4C4BF2D7A80239EB}\\
+\texttt{Renewal\_NS\_Stability\_Research\_Notes\_V26.tex}
+&5319&278283&\texttt{82C887F8C2C69E4F}.
+\end{array}                                                   \tag{5.1}
+\]
+The full hashes are retained in the filesystem audit used to form this note.
+
+The Yang--Mills stream advanced from V74 to V77 during V1--V4.  V75 proves a
+typed cyclic trace identity, V76 finds that a factorwise differentiated
+majorant is worse than the operative V69 bound, and V77 introduces
+energy-dressed trace words but obtains only floating finite-grid diagnostics
+for the relevant scale.  Each of V75--V77 explicitly states that it does not
+provide a higher-loop or nonperturbative estimate.  These results do not alter
+(3.14): the present bound is an absolute owner majorant and uses no
+factorwise trace cancellation.  The typed-cycle lesson reinforces the decision
+not to split the main Gaussian response before its packet-first recombination.
+
+The SM--Einstein stream advanced from V21 to V26.  Its V26 normal
+commuting-square limit shows how a vanishing residual can pass through
+interacting conditional expectations.  No Yang--Mills conditional-expectation
+square with the required owner-norm estimate is supplied there, so importing
+that result would add an unproved hypothesis.  It is unnecessary because the
+strict stable recursion already proves (3.10).  The Navier--Stokes file is
+unchanged and contains no compact determinant, sector boundary, or YM reset
+estimate.
+
+\begin{record}[V5 audit decision]
+No new companion result invalidates an imported premise or improves the
+nonperturbative exponent.  The correct direction remains the one taken in
+V3--V4: complete-word ownership, stable reset propagation, and reciprocal
+conversion.  No redirection is required.
+\end{record}
+
+\subsection{The five-gate ledger}
+
+\begin{center}
+\begin{tabular}{c|p{0.62\textwidth}|c}
+gate&result&status\\ \hline
+P1&Exact disjoint owner identity (1.6).&closed\\
+P2&Uniform high-grade local response and two field derivatives,
+      (2.14)--(2.15).&closed\\
+P3&Source-marked connected polymer, bad-field, reset, and
+      multiscale bounds, (2.19) and (3.13).&closed\\
+P4&Exact one-step remainder is $O(u^3)=o(u^2)$, (4.12).&go\\
+P5&The accumulated physical-response error is summable,
+      (4.16)--(4.17).&success
+\end{tabular}
+\end{center}
+
+\subsection{Final theorem in the requested interface form}
+
+\begin{theorem}[Success-stop theorem]
+\label{thm:success-stop}
+Let the finite-volume exact Yang--Mills block trajectory be periodic, remain in
+the calibrated weak-coupling cone, retain its flux, toron, and integer-charge
+labels, and satisfy the already-proved all-colour owner gate and cofinal stable
+contraction.  Let the main programme provide only the certified number
+$m_{\rm main}>0$ such that
+$|b_j|\ge m_{\rm main}$ on the same trajectory.  For $0<u_j<u_*$, with
+$u_*$ given explicitly by (4.8),
+\[
+\boxed{
+ \left|\cR_j^{\rm exact}-\cR_j^{\rm certified\ main}\right|
+ \le E_{\rm NP}(u_j)
+ :=C_{\rm NP}u_j^{16/5}+2M_c^2u_j^3
+ \le\frac12\left|\cR_j^{\rm certified\ main}\right|.}  \tag{5.3}
+\]
+If $u_*\le1$, then also
+\[
+ E_{\rm NP}(u)
+ \le
+ \frac{C_{\rm NP}+2M_c^2}{m_{\rm main}},
+ u\,|\cR^{\rm certified\ main}(u)|,                       \tag{5.4}
+\]
+so the requested relative form holds with $\delta=1$.  In the positive
+ultraviolet orientation the errors are scale summable with the explicit total
+bound (4.17).  Therefore the exact and certified-main responses have the same
+sign at every scale in the domain.
+\end{theorem}
+
+\begin{proof}
+The exact owner identity is Theorem~\ref{thm:exact-ledger}.  Its fresh
+local, polymer, and bad subseries satisfy (2.19); reset and multiscale history
+satisfy (3.13); hence their exhaustive inverse-coupling sum satisfies (3.14).
+Lemma~\ref{lem:physical-identity} converts that estimate without a truncated
+formal expansion.  The threshold (4.8) and
+Theorem~\ref{thm:margin-protection} give (5.3) and the sign conclusion.
+For $u\le1$, $u^{6/5}\le u$, so division of (4.6) by the main lower bound
+$m_{\rm main}u^2$ gives (5.4).  The scale sum is
+Theorem~\ref{thm:summable}.
+\end{proof}
+
+\begin{firewall}[Exact claim boundary at the stop]
+The theorem protects the sign of a certified packet-first marginal response
+on the declared weak-coupling trajectory.  It does not supply the numerical
+margin $m_{\rm main}$, certify the still-open Brillouin quadrature in V77,
+construct an infinite-volume or continuum Yang--Mills measure, prove
+Osterwalder--Schrader reconstruction, establish exponential clustering, or
+prove a Yang--Mills mass gap.  Those are outside this parallel programme.
+\end{firewall}
+
+\begin{gate}[SUCCESS STOP]
+The success criterion is reached by (5.3)--(5.4): the exhaustive nonlinear
+remainder is regulator-uniform, source differentiable, strictly higher order,
+uniformly less than one half of the symbolic main margin for explicit $u_*$,
+and summable over the ultraviolet trajectory.  In accordance with the stated
+stopping rule, the programme stops here; no constant optimization is pursued.
+\end{gate}
+
+\clearpage
+\section{Programme II: Yang--Mills sector tightness and topological
+transport}
+\label{sec:sector-programme}
+
+\subsection{Context, target, and nonduplication boundary}
+
+Programme I is complete and is not reopened below.  The new question is
+whether the finite-cutoff Yang--Mills laws can satisfy, simultaneously in
+cutoff and finite volume,
+\[
+ \sup_j\mu_j\{\Psi(q_j)\ge R\}\le C e^{-cR},\qquad c>0,       \tag{6.1}
+\]
+together with coherent transport of $q_j$ under refinement.
+\emph{Volume-uniform} is understood in the locality-compatible sense: the
+class of finite regulators is closed under finite disjoint unions, on which
+the Wilson action, product Haar measure, and exact block integrations
+factorize.
+
+The programme memorandum fixes the gates and stopping rules; it is not
+evidence for a mathematical assertion.  The following results are imported
+without reproof.
+\begin{enumerate}[label=\textup{(S\arabic*)},leftmargin=4em]
+\item Main YM V11 separates local $\operatorname{Tr}F\widetilde F$, integer
+      global charge, and retained flux/toron data.  Its extended block map
+      copies the global labels and its regular fibres are sector diagonal.
+\item Archived YM V27 proves Haar-preserving erasure and an exponential area
+      bound for detail-exact centre sheets, expressly excluding winding
+      sheets.
+\item Archived YM V28 proves a volume-uniform multi-plaquette bound and a
+      rooted noncentral bad-cluster tail for the bare Wilson law.  These are
+      local/rooted estimates, not a tail for the total number of defects.
+\item Archived YM V45 proves that torons and boundary holonomies are compact
+      external slow variables, not residual tails.
+\item Companion SM V74--V78 proves the abstract energy--entropy and gapped
+      refinement implications, but supplies no Yang--Mills constants.
+\end{enumerate}
+The task is therefore to decide whether those hypotheses can hold for a
+global, volume-uniform Yang--Mills sector variable.
+
+\subsection{S1: exact sector ledger for the retained block map}
+
+Fix a four-dimensional periodic torus and $G=SU(3)$.  Write
+\[
+ q_\Lambda=(z_\Lambda,\xi_\Lambda,Q_\Lambda),                \tag{6.2}
+\]
+where
+\[
+ z_\Lambda\in H^2(\mathbb T^4;\mathbb Z_3)
+                 \simeq(\mathbb Z_3)^6,
+\]
+and where the primitive noncontractible holonomies lie in the compact
+simultaneous-conjugacy quotient
+\[
+ {\cal X}_{\rm hol}:=G^4/G.                                  \tag{6.3}
+\]
+Its closed commuting locus is the toron space.  The coordinate
+$\xi_\Lambda$ may also retain the finite boundary-holonomy data of the
+chosen tree gauge.  On the gauge-invariant admissible open set
+$\cA_\Lambda$, the geometric charge is the continuous integer-valued map
+$Q_\Lambda:\cA_\Lambda\to\mathbb Z$ of main YM V11.  Use a cemetery value
+$\partial$ off $\cA_\Lambda$ when a total measurable label is needed.
+
+\begin{lemma}[Only the integer coordinate can escape]
+\label{lem:only-integer-escapes}
+The product
+\[
+ {\cal K}_{\rm top}
+ :=H^2(\mathbb T^4;\mathbb Z_3)\times{\cal X}_{\rm hol}
+\]
+is compact.  Every family of probability laws on its coordinates is tight.
+Thus a proper sector complexity need only be unbounded in $|Q_\Lambda|$;
+adding a bounded continuous function of $(z_\Lambda,\xi_\Lambda)$ changes
+only the constants in (6.1).
+\end{lemma}
+
+\begin{proof}
+The cohomology group is finite.  The group $G^4$ is compact, and its quotient
+by the continuous action of compact $G$ is compact.  Their product is a
+common compact containment set.  Every continuous real function on it is
+bounded.
+\end{proof}
+
+\begin{proposition}[Exact preservation and the only mixing mechanisms]
+\label{prop:sector-ledger}
+For the actual extended block map of main YM V11,
+\[
+ \widehat{\cal B}_\Lambda(U)
+ =
+ \bigl({\cal B}_\Lambda U,z_\Lambda(U),
+       \xi_\Lambda(U),Q_\Lambda(U)\bigr),                    \tag{6.4}
+\]
+the ledger is:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=3.5em]
+\item cubical subdivision preserves the centre-flux class through its
+      induced isomorphism on $H^2$;
+\item tree gauge retains primitive noncontractible chords, and coarse
+      ordered-path multiplication preserves their holonomies up to
+      base-point conjugacy;
+\item $Q_\Lambda$ is constant on each connected regular fibre and is copied,
+      not recomputed, by (6.4);
+\item labels mix only if a coordinate is forgotten, recomputed from the
+      coarse local field, or crosses $\cA_\Lambda^c$.  The last event is
+      already assigned to the saturated-bad owner.  If fine sectors merge,
+      their probability-weighted conditional mixture, not each individual
+      conditional, is the coarse conditional law.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Subdivision is a homotopy equivalence and induces a cohomology isomorphism.
+Fine-path multiplication telescopes around the coarse cycle, while changing
+base point only conjugates it.  A continuous integer-valued map on a
+connected fibre is constant.  Formula (6.4) then gives exact retention.
+The listed operations exhaust the failures of that argument, and ordinary
+disintegration proves the weighted-mixture statement.
+\end{proof}
+
+\begin{gate}[S1]
+Finite centre flux and compact holonomy/toron coordinates are already tight
+and exactly retained.  The only noncompact global label is integer charge.
+Winding-sheet erasure and toron concentration are therefore not substitutes
+for an integer-charge estimate.
+\end{gate}
+
+\subsection{S2: energy information and its exact ceiling}
+
+There is no positive Wilson-action penalty for moving through the commuting
+toron space.
+
+\begin{proposition}[Commuting torons have zero Wilson action]
+\label{prop:toron-zero-action}
+Let $H_1,\ldots,H_4\in SU(3)$ commute.  On a periodic lattice with side
+lengths $L_\mu$, there is a spatially constant link field whose primitive
+$\mu$-cycle holonomy is $H_\mu$ and whose every plaquette is the identity.
+Thus its Wilson action is zero.
+\end{proposition}
+
+\begin{proof}
+The commuting tuple lies in a common maximal torus.  The power map
+$T\mapsto T^{L_\mu}$ is surjective on that torus, so choose commuting
+$T_\mu$ with $T_\mu^{L_\mu}=H_\mu$ and set $U_{x,\mu}=T_\mu$.
+Every plaquette is
+$T_\mu T_\nu T_\mu^{-1}T_\nu^{-1}=I$, whereas the primitive cycle product is
+$T_\mu^{L_\mu}=H_\mu$.
+\end{proof}
+
+This zero is harmless because toron space is compact.  For centre-labelled
+contractible sheets, archived V27 already gives the linear area cost
+\[
+ \bigl[\beta\sigma_0(\delta)-\kappa_\Psi\bigr]|\Sigma|.
+\]
+For noncentral local defects, archived V28 gives the stronger multi-event
+probability bound.  Neither result controls a winding cohomology class or
+global integer charge.
+
+Let a finite connected component $\Lambda_0$ have unnormalised sector weights
+\[
+ W(q)=\int_{\{Q=q\}}e^{-S}\,dH.                              \tag{6.5}
+\]
+The identity neighbourhood gives $W(0)>0$.  If a nonzero admissible sector is
+nonempty, it is open in the admissible set.  Product Haar measure gives it
+positive measure and the finite Wilson density is strictly positive, so
+$W(q_*)>0$ for some $q_*\ne0$.
+
+\begin{lemma}[Additivity caps a global charge penalty at linear growth]
+\label{lem:energy-linear-ceiling}
+On the disjoint union of $N$ copies of $\Lambda_0$, let action and charge be
+additive and Haar measure be the product.  Normalize the nonnegative Wilson
+action to have global minimum zero in the identity, charge-zero sector.  If a
+charge-$q_*$ configuration has finite action $E_*$, then for $0\le k\le N$
+the minimum action at total charge $kq_*$ obeys
+\[
+ 0\le E_N(kq_*)\le kE_*.                                    \tag{6.6}
+\]
+Thus no local additive action can force a superlinear penalty in the number
+of separated charge carriers.
+\end{lemma}
+
+\begin{proof}
+Place the charge-$q_*$ configuration on $k$ components and the zero-action
+identity configuration on the remaining $N-k$.  Additivity gives action
+$kE_*$.  Taking the infimum in the charged sector can only lower it, while
+nonnegativity gives the other inequality.
+\end{proof}
+
+\begin{gate}[S2]
+The local energy bounds are retained, but the global integer-charge penalty
+has an exact linear ceiling under separation.  Granting a linear lower bound
+would be the strongest locality-compatible rate; S3 must compare it with
+placement entropy.
+\end{gate}
+
+\subsection{S3: exact sector-placement entropy}
+
+\begin{theorem}[Binomial sector multiplicity]
+\label{thm:binomial-sector-entropy}
+The unnormalised weight on $N$ disjoint copies of configurations having
+exactly $k$ components in sector $q_*$ and all others in sector zero is
+\[
+ \binom Nk W(q_*)^kW(0)^{N-k}.                              \tag{6.7}
+\]
+Its placement entropy satisfies
+\[
+ S_N(k):=\log\binom Nk\ge k\log\frac Nk
+ \qquad(1\le k\le N).                                      \tag{6.8}
+\]
+If
+\[
+ \Delta_*=-\log\frac{W(q_*)}{W(0)}
+\]
+is the complete one-component sector free-energy cost, already including
+internal entropy, then
+\[
+ k\Delta_*-S_N(k)
+ \le k\left(\Delta_*-\log\frac Nk\right)
+ \longrightarrow-\infty                                   \tag{6.9}
+\]
+for every fixed $k\ge1$ as $N\to\infty$.
+\end{theorem}
+
+\begin{proof}
+Factorization gives weight $W(q_*)^kW(0)^{N-k}$ for each choice of the $k$
+charged components.  The choices are disjoint and number $\binom Nk$.
+Moreover
+\[
+ \binom Nk
+ =\prod_{i=0}^{k-1}\frac{N-i}{k-i}
+ \ge\left(\frac Nk\right)^k,
+\]
+because $(N-i)/(k-i)\ge N/k$ when $N\ge k$.  This proves (6.8);
+substitution gives (6.9).
+\end{proof}
+
+\begin{gate}[S3]
+The entropy count is exact.  Even after replacing bare action by the full
+one-component sector free energy, placement entropy is unbounded with volume
+at fixed complexity.  Hence the net sector-weight exponent and comparison
+floor required by companion V76 cannot both be volume independent for a
+global extensive charge.
+\end{gate}
+
+\subsection{S4: the volume-uniform global tail is impossible}
+
+If charge is not defined almost surely, include
+$\mathbf 1_{\cA_\Lambda^c}$ in the nonnegative sector complexity.  On
+disjoint copies, any positive one-component inadmissibility probability
+already gives the Bernoulli divergence in the first part of the next proof.
+Thus it remains only to treat an almost-sure integer charge.
+
+\begin{theorem}[Tensorization no-go for global sector tightness]
+\label{thm:global-sector-no-go}
+Let $X$ be the integer charge under the normalized Yang--Mills law on
+$\Lambda_0$, and suppose $X$ is not almost surely zero.  On $N$ disjoint
+copies let $X_1,\ldots,X_N$ be the independent charges and define
+\[
+ \Psi_N=\sum_{i=1}^N|X_i|,
+ \qquad
+ Q_N=\sum_{i=1}^NX_i.                                      \tag{6.10}
+\]
+For every fixed $R<\infty$,
+\[
+ \mathbb P\{\Psi_N\ge R\}\longrightarrow1.                 \tag{6.11}
+\]
+The signed total-charge laws are not tight either:
+\[
+ \mathbb P\{|Q_N|\ge R\}\longrightarrow1.                  \tag{6.12}
+\]
+Consequently no $C<\infty$ and $c>0$, independent of volume, can bound
+either tail by $Ce^{-cR}$ for every $N$ and $R$.
+\end{theorem}
+
+\begin{proof}
+Put $p=\mathbb P\{|X|\ge1\}>0$.  The indicators
+$B_i={\bf1}_{\{|X_i|\ge1\}}$ are independent Bernoulli variables of
+parameter $p$, and $\Psi_N\ge\sum_iB_i$.  The weak law gives
+$N^{-1}\sum_iB_i\to p$ in probability, proving (6.11).
+
+The charge $X$ is bounded on the fixed finite lattice, hence has finite
+variance.  If $m=\mathbb EX\ne0$, then $Q_N/N\to m$ in probability and
+(6.12) follows.  If $m=0$, nontriviality gives
+$\sigma^2=\operatorname{Var}X>0$.  The central limit theorem gives
+$Q_N/(\sigma\sqrt N)\Rightarrow Z$, with $Z$ standard normal.  For every
+$\eta>0$ and all sufficiently large $N$,
+\[
+ \mathbb P\{|Q_N|\le R\}
+ \le\mathbb P\{|Q_N|/(\sigma\sqrt N)\le\eta\}.
+\]
+The portmanteau bound for the closed interval $[-\eta,\eta]$, followed by
+$\eta\downarrow0$, proves that this probability tends to zero.  In the
+remaining zero-variance case $X$ is constant; if it is not zero, the
+nonzero-mean argument applies.
+
+Finally choose $R_0$ with $Ce^{-cR_0}<1/2$.  Equations (6.11) and (6.12)
+make the corresponding probability exceed $1/2$ for large $N$, a
+contradiction.
+\end{proof}
+
+\begin{corollary}[The energy--entropy failure criterion is reached]
+\label{cor:failure-stop}
+For any nontrivial global charge sector,
+\[
+ \boxed{E(R)-S_{\rm entropy}(R)\not\longrightarrow+\infty}
+                                                                  \tag{6.13}
+\]
+uniformly in volume.  More sharply, (6.9) tends to $-\infty$ along fixed
+$R=k$ and increasing volume.  The proposed energy--entropy mechanism cannot
+prove (6.1).
+\end{corollary}
+
+\begin{proof}
+Lemma~\ref{lem:energy-linear-ceiling} gives the additive energy ceiling and
+Theorem~\ref{thm:binomial-sector-entropy} gives the placement entropy.  Their
+difference is (6.9), while the probability-level contradiction is
+Theorem~\ref{thm:global-sector-no-go}.
+\end{proof}
+
+\begin{firewall}[Connected tori versus the mechanism no-go]
+\label{firewall:connected-volume}
+Theorem~\ref{thm:global-sector-no-go} is an exact obstruction to the stated
+volume-uniform theorem on a locality-compatible regulator class, because
+local Yang--Mills measures tensorize on disjoint unions.  It does not by
+itself prove anti-concentration of total charge along a sequence restricted
+only to connected periodic tori.  Such a theorem would require positive
+topological susceptibility or a uniform lower insertion/mixing estimate,
+neither of which occurs in the current notes.  Restricting to fixed physical
+volume can also remove placement divergence.  Those are different targets;
+they do not rescue the volume-uniform global energy--entropy mechanism.
+\end{firewall}
+
+\subsection{Refinement transport retained at the failure boundary}
+
+Although S4 terminates the tightness route, its independent refinement
+statement can be recorded exactly.  Let $P_j:X_{j+1}\to X_j$ be the field
+block map, $r_j:{\cal S}_{j+1}\to{\cal S}_j$ the label map, and let
+$\mathcal G_{j+1}$ be the set on which
+\[
+ r_jq_{j+1}=q_jP_j.
+\]
+For probability laws $\mu_j$, put
+\[
+ \epsilon_j=\mu_{j+1}({\cal G}_{j+1}^c),\qquad
+ d_j=\|(P_j)_*\mu_{j+1}-\mu_j\|_{\rm TV}.                  \tag{6.14}
+\]
+
+\begin{proposition}[Refinement defect is data-processing stable]
+\label{prop:refinement-defect}
+The label laws obey
+\[
+ \left\|(r_j)_*(q_{j+1})_*\mu_{j+1}
+       -(q_j)_*\mu_j\right\|_{\rm TV}
+ \le\epsilon_j+d_j.                                        \tag{6.15}
+\]
+For the copied labels in (6.4), $\epsilon_j=0$ on the extended state.
+If $\sum_j(\epsilon_j+d_j)<\infty$, successive label laws are projectively
+Cauchy after pushforward to every fixed level.
+\end{proposition}
+
+\begin{proof}
+Couple $r_jq_{j+1}(x)$ and $q_jP_j(x)$ using the same
+$x\sim\mu_{j+1}$.  They differ only off $\mathcal G_{j+1}$, so their
+total-variation distance is at most $\epsilon_j$.  Applying $q_j$ cannot
+increase total variation; hence the distance from
+$(q_jP_j)_*\mu_{j+1}$ to $(q_j)_*\mu_j$ is at most $d_j$.  The triangle
+inequality proves (6.15), and summation and telescoping give the last claim.
+\end{proof}
+
+\begin{remark}[Coherence does not prevent escape]
+Point masses $\delta_j$ on $\mathbb Z$ may be perfectly coherent under a
+changing-label convention while escaping every finite sector set.
+Proposition~\ref{prop:refinement-defect} preserves labels faithfully; it
+does not make an extensive global label tight.
+\end{remark}
+
+\subsection{Companion checkpoint and terminal decision}
+
+The checkpoint immediately before this decision inspected
+\[
+\begin{array}{l|r|l}
+\text{file}&\text{bytes}&\text{SHA--256 prefix}\\ \hline
+\texttt{Renewal\_Yang\_Mills\_Mass\_Gap\_Research\_Notes\_V82.tex}
+ &958424&\texttt{D4E3B41C26CF2E1C}\\
+\texttt{Renewal\_SM\_Einstein\_Continuum\_Research\_Notes\_V39.tex}
+ &455984&\texttt{9B0F17930C29371F}\\
+\texttt{Renewal\_NS\_Stability\_Research\_Notes\_V26.tex}
+ &278283&\texttt{82C887F8C2C69E4F}
+\end{array}                                                   \tag{6.16}
+\]
+Main YM V81--V82 add a signed-diagonal frequency collapse and a rational
+path-cell certificate for the Brillouin programme.  They add no sector-energy
+or topology estimate; the inherited V35 warning that local plaquette control
+is not global sector tightness remains operative.  SM V38 proves a
+projectively compatible fixed point for compact affine holonomy, reinforcing
+the compact-coordinate treatment in S1, while SM V39 concerns an
+OS-recovery isometry and vacuum multiplicity.  Neither changes the global
+integer-charge entropy.  The NS file is unchanged.  The archived centre
+erasure, chessboard, and toron-patch results therefore remain the strongest
+relevant Yang--Mills inputs; none defeats tensorization.
+
+\begin{center}
+\begin{tabular}{c|p{0.62\textwidth}|c}
+gate&result&status\\ \hline
+S1&Finite flux and compact holonomy labels separated from integer charge;
+exact extended-map preservation.&closed\\
+S2&Local centre/noncentral estimates retained; toron action is flat and
+global charge energy has an additive linear ceiling.&closed\\
+S3&Exact binomial placement entropy, (6.7)--(6.9).&closed\\
+S4&Every nontrivial extensive charge law violates a volume-uniform
+exponential global tail under tensorization.&failure\\
+S5&Label coherence obeys (6.15), but cannot repair escape.&structural only\\
+S6&Joint continuum handoff.&not entered
+\end{tabular}
+\end{center}
+
+\begin{gate}[FAILURE STOP: energy--entropy tightness route fails]
+\label{gate:sector-failure-stop}
+The programme's stated failure criterion is reached:
+\[
+ \boxed{\text{energy--entropy tightness route fails}.}       \tag{6.17}
+\]
+The obstruction is not a poor constant.  Global integer charge and absolute
+topological activity are extensive, additive variables; separated carriers
+have a linear energy/free-energy cost and unbounded placement entropy.  A
+cutoff- and volume-uniform tail for their total value is therefore the wrong
+infinite-volume target unless all nonzero sectors have zero probability.
+
+The appropriate return to the main YM programme is to retain compact
+flux/toron labels exactly, use fixed-window or charge-density estimates for
+local topology, and assemble the continuum through phase decomposition or a
+quasi-local observable algebra.  A fixed-physical-volume charge tail is also
+a legitimate separate programme.  In accordance with the stop rule, no OS
+reconstruction, clustering, mass-gap argument, or S6 continuum construction
+is attempted here.
+\end{gate}
+
+\end{document}

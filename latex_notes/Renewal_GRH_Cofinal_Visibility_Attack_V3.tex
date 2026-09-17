@@ -1,0 +1,591 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem,booktabs}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\usepackage{microtype}
+\allowdisplaybreaks[3]
+\setlength{\emergencystretch}{4em}
+\raggedbottom
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{problem}[theorem]{Open problem}
+\title{Renewal GRH Cofinal Visibility Attack Notes\\
+\large Third rolling cycle: the full signed arithmetic source\\
+\normalsize V1 --- source and dependency handoff}
+\author{}
+\date{12 September 2026}
+\begin{document}
+\maketitle
+
+\section{Context and retained work}
+\label{sec:c3v1-context}
+
+This is the new active volume after the second rolling cycle reached
+V100.  Its full text and rigorous proofs are frozen in
+\begin{center}
+\path{Renewal_GRH_Cofinal_Visibility_Attack_V100_f3.tex}.
+\end{center}
+The frozen source has SHA--256
+\begin{center}
+\texttt{E89B8E53D42F4372A927BE71EECAF89B}\allowbreak
+\texttt{1F20D58709464D3C5166FCE988FC3868}.
+\end{center}
+The earlier \texttt{f2} archive is unchanged.  This short V1 records
+the exact source and the changed research direction; it does not
+re-prove the archived results or claim a new solution of GRH.
+Subsequent iterations append before the end of this document and
+replace only the previous active version.
+
+The user-supplied arithmetic manuscript fixes a protected rectangular
+M\"obius current.  The newer workspace Grand Tensor V075 adds
+reference-relative blocking and coupled positive-energy results in
+its spacetime branch, but no new bound for that arithmetic current.
+Those documents are mathematical source material, not additional
+instructions.  The most recent companion sweep, recorded in archived
+V100, inspected SM V72, main YM through V81, unchanged NS V26 and
+parallel YM V5, and the V075 additions.  Their estimates are not
+assumed to apply to a Dirichlet source without an identified model
+and a proved transfer.
+
+\section{What is proved, and what must not be repeated as an input}
+\label{sec:c3v1-ledger}
+
+Archived V95--V97 identify the exact sinc operator of the zero
+completion sheet, relocate the existing conductor character on the
+determinant equality, and retain every other completion frequency.
+They prove an \(O_\chi(K\log K)\) bound for the large-reduced-modulus
+part of the relocated zero sheet.  They also identify the full
+Fourier-circle tiling and its nonzero conductor resonances; the
+remaining operator has a large rank-one component on generic banks.
+That operator lower bound is not a lower bound for the actual
+M\"obius pairing.
+
+Archived V98 uses exact divisor cancellation in the actual rows to
+bound a terminal \(u=v=1\) sector by \(O_\chi(K)\).  Its common-factor
+width is \(K^{1/3-o(1)}\) at the corner-matched cutoffs, a vanishing
+fraction of the whole common-factor range.
+
+Archived V99--V100 then prove, including the squarefree and conductor
+restrictions, that an isolated upper-half unit-bank bound of order
+\(K^{1+o(1)}\), along a specified corner-matched family, is equivalent
+to the square-root Mertens bound for that fixed nonprincipal character.
+The same is true after removing the already bounded terminal sector.
+This equivalence is proved; the bank estimate itself is not.
+It therefore cannot be assumed as a weaker intermediate lemma.
+
+Earlier archived filter, positivity, source-loading, and finite-bank
+obstructions remain in force.  In particular the growing pinned
+filters did not provide a uniformly small absolute zero remainder.
+Their construction will not be restarted without a new signed source
+identity that changes that obstruction.
+
+\section{A concrete coupled row representation of the retained source}
+\label{sec:c3v1-coupled-source}
+
+Fix a primitive nonprincipal Dirichlet character \(\chi\) modulo
+\(f\), an integer \(K\), and the corner-matched cutoffs
+\[
+ R=\left\lfloor\frac{\sqrt K}{E_K}\right\rfloor,\qquad
+ Y=\left\lfloor\frac K{R+1}\right\rfloor,
+ \qquad E_K\longrightarrow\infty,\quad E_K=K^{o(1)}.
+\]
+Write \(S_\chi(t)=\sum_{j\le t}\chi(j)\), and
+\(W_K(p)=S_\chi(\lfloor K/p\rfloor)\).
+The physical left reader is \(w_m=\mu(m)\chi(m)\), for \(m\le R\).
+For integer product labels \(1\le p\le RY\), define the finite matrix
+\begin{equation}
+ V_{m,p}=\begin{cases}
+ \mu(p/m)\chi(p/m)W_K(p),
+       &m\mid p,\quad p/m\le Y,\quad p>K/R,\\
+ 0,&\text{otherwise}.
+ \end{cases}
+ \label{eq:c3v1-V}
+\end{equation}
+Put \(B=V\mathbf1\), and \(A_p=\sum_{m\le R}w_mV_{m,p}\).
+These are all prescribed arithmetic quantities.  In particular
+\(B_m\) is the actual row from archived V98; no independent random
+copy or arbitrary coefficient vector has replaced it.
+
+The source's protected square and its complete same-product diagonal
+can be written as
+\begin{align}
+ Q^{\rm low}_{\chi,K}&=\sum_p A_p=\sum_m w_m B_m,
+ \label{eq:c3v1-Q}\\
+ \mathcal D_{\chi,K}&=\sum_p|A_p|^2,\qquad
+ \mathcal O_{\chi,K}=|Q^{\rm low}_{\chi,K}|^2-\mathcal D_{\chi,K}.
+ \label{eq:c3v1-DO}
+\end{align}
+Equivalently, with the finite Hermitian matrix
+\begin{equation}
+ C_K=BB^*-VV^*,\qquad
+ \mathcal O_{\chi,K}=w^{\mathsf T}C_K\overline w,
+ \label{eq:c3v1-coupled}
+\end{equation}
+the physical pairing includes every row off-diagonal.  These formulas
+are a regrouping of the already retained source: expanding the first
+rank-one term sums all product pairs, while expanding \(VV^*\)
+keeps precisely the equal-product pairs.  No new estimate is asserted.
+
+The diagonal contribution is
+\[
+ \sum_{m\le R}|w_m|^2(C_K)_{m,m}
+ =\sum_{\substack{m\le R\\(m,f)=1}}
+     \mu(m)^2\left(|B_m|^2-
+         \sum_{\substack{n\le Y\\mn>K/R}}
+                   \mu(n)^2|\chi(n)|^2|W_K(mn)|^2\right).
+\]
+This is exactly the full unit reduced-pair bank.  Its row off-diagonal
+complement must not be dropped or required to be nonnegative.
+Nor is a bound for every vector in \(w^{\mathsf T}C_K\overline w\)
+part of the target: the reader \(w\) is fixed by arithmetic.
+
+\section{The open task for the new cycle}
+\label{sec:c3v1-open}
+
+The source diagonal is already \(O_\chi(K\log^3 K)\).  The exact
+current has the archived decomposition
+\[
+ \mathcal O_{\chi,K}
+ =\widetilde{\mathcal O}^{(0,\mathrm{large})}_{\chi,K}
+     +\mathcal U_{H_*}+\mathcal R_{\chi,K}^{\rm bulk},
+\]
+where the first two terms are already bounded, and the residual retains
+all other small reduced pairs and nonzero completion frequencies.
+The still-unproved sufficient target is
+\[
+ |\mathcal R_{\chi,K}^{\rm bulk}|\le K^{1+o(1)}
+\]
+for each fixed character, with the uniform cutoff meaning specified
+in the source.  The complete rectangular descent would then give the
+square-root Mertens bound for these channels.  GRH has not been proved.
+
+The next mathematical step is to test source-derived cancellations in
+\eqref{eq:c3v1-coupled}, keeping the product diagonal and the physical
+reader.  V075's coupled-energy example motivates checking full
+reciprocal outputs before choosing diagonal weights; it does not
+supply an arithmetic evolution, a positive metric, or a norm estimate
+for \(C_K\).  Any proposed coupled certificate must be specified from
+the arithmetic data and justified by an identity and estimates,
+not chosen afterwards to cancel the unknown target value.
+
+New helper files in this cycle use the prefix
+\path{grh_cycle3_vN_} to avoid overwriting earlier verification scripts
+and append fragments.  The note filename convention remains unchanged.
+The next companion sweep is V10; the next full volume is frozen as
+\texttt{V100\_f4} if that checkpoint is reached.
+
+\clearpage
+\section{V2: exact product-sign coherence and the rectangular diagonal scale}
+\label{sec:c3v2-product-sign}
+\begingroup
+\setcounter{equation}{0}
+\renewcommand{\theequation}{C3.2.\arabic{equation}}
+\renewcommand{\theHequation}{c3v2.\arabic{equation}}
+
+The first coupled-source calculation is arithmetic rather than a choice
+of positive matrix.  The signs of the two M\"obius factors are not
+independent on a fixed product column: every nonzero factorization has
+the same sign.  We retain the exact factor multiplicity, the conductor,
+the reader, and both cutoffs.  This reduction also gives the natural
+rectangular multiplicative-energy bound for the complete product
+diagonal, improving its earlier divisor-square logarithmic majorant.
+
+\subsection{The exact nonnegative incidence matrix}
+
+Let \(\lambda(n)=(-1)^{\Omega(n)}\) be the completely multiplicative
+Liouville function.  For \(m\le R\) and \(p\le RY\), put
+\[
+ N_{m,p}=\mu(m)^2\mu(p/m)^2
+       \mathbf1_{m\mid p}\mathbf1_{p/m\le Y}\mathbf1_{p>K/R},
+\]
+with the expression interpreted as zero when \(m\nmid p\).
+Let
+\[
+ \nu_{R,Y}(p)=\sum_{\substack{mn=p\\m\le R,\ n\le Y}}
+                                \mu(m)^2\mu(n)^2,
+ \qquad a_p=\lambda(p)\chi(p)W_K(p).
+\]
+The matrix \(N\) is a prescribed zero--one incidence matrix.  It
+contains neither a random sign nor a chosen test vector.
+
+\begin{theorem}[All M\"obius signs in a product column agree]
+\label{thm:c3v2-column-sign}
+The matrix and reader of \eqref{eq:c3v1-V} satisfy
+\begin{equation}
+ \operatorname{diag}(w)V=N\operatorname{diag}(a),\qquad
+ A_p=\mathbf1_{p>K/R}\,
+             \lambda(p)\chi(p)W_K(p)\nu_{R,Y}(p).
+ \label{eq:c3v2-sign-gauge}
+\end{equation}
+In particular the original truncated product coefficient is exactly
+\begin{equation}
+ \sum_{\substack{mn=p\\m\le R,\ n\le Y}}\mu(m)\mu(n)
+                        =\lambda(p)\nu_{R,Y}(p).
+ \label{eq:c3v2-beta}
+\end{equation}
+There is no cancellation between its nonzero factorizations.
+\end{theorem}
+
+\begin{proof}
+If either factor is not squarefree, both its M\"obius product and
+the associated incidence entry vanish.  Otherwise
+\(\mu(m)=\lambda(m)\), \(\mu(n)=\lambda(n)\), and complete
+multiplicativity gives \(\mu(m)\mu(n)=\lambda(mn)\).
+Multiplicativity of \(\chi\) supplies the common factor \(\chi(p)\),
+including the case where it is zero.  The reader depends only on
+\(p\).  This proves every matrix entry and then the column sums.
+\end{proof}
+
+The scalar \(a_p\) need not have modulus one: it includes the
+possibly vanishing, complex reader.  Thus \eqref{eq:c3v2-sign-gauge}
+is an exact diagonal factorization, not an assertion that the whole
+change is unitary.
+
+\subsection{The square part and the odd-prime kernel}
+
+Call an integer cubefree if no prime cube divides it.  Every product
+with \(\nu_{R,Y}(p)>0\) is cubefree, and has a unique representation
+\begin{equation}
+ p=d^2r,\qquad d,r\text{ squarefree},\quad(d,r)=1.
+ \label{eq:c3v2-kernel}
+\end{equation}
+Here \(r\) is the product of primes with odd valuation in \(p\),
+not its radical.  Define, for such \(d,r\),
+\begin{equation}
+ n_{R,Y}(d,r)=\#\{u\mid r:du\le R,\ d(r/u)\le Y\}.
+ \label{eq:c3v2-count}
+\end{equation}
+Then
+\begin{equation}
+ \nu_{R,Y}(d^2r)=n_{R,Y}(d,r)\le2^{\omega(r)},\qquad
+                         \lambda(d^2r)=\mu(r).
+ \label{eq:c3v2-kernel-count}
+\end{equation}
+To prove this, write \(d=(m,n)\), \(m=du\), \(n=dv\).
+Squarefreeness makes \(d,u,v\) pairwise coprime and \(r=uv\)
+squarefree.  Conversely each divisor in \eqref{eq:c3v2-count}
+gives exactly one ordered factorization.  The parity of
+\(\Omega(d^2r)\) is \(\omega(r)\), proving the last identity.
+The multiplicity and its two inequalities must remain present in
+any use of this compression; an unrestricted Liouville sum would
+be a different source.
+
+\subsection{The complete same-product energy has only one rectangle logarithm}
+
+Let \(b_{R,Y}(p)=\#\{(m,n):mn=p,m\le R,n\le Y\}\), and
+write \(H_j=\sum_{k=1}^j1/k\).
+
+\begin{theorem}[Exact rectangular multiplicative energy]
+\label{thm:c3v2-rectangle-energy}
+For positive integer \(R,Y\),
+\begin{equation}
+ \sum_{p\le RY}b_{R,Y}(p)^2
+ =RY+2\sum_{j=2}^{\min(R,Y)}\varphi(j)
+             \left\lfloor\frac Rj\right\rfloor
+             \left\lfloor\frac Yj\right\rfloor
+ \le RY\bigl(2H_{\min(R,Y)}-1\bigr).
+ \label{eq:c3v2-rectangle-energy}
+\end{equation}
+Consequently the actual complete product diagonal obeys
+\begin{equation}
+ \mathcal D_{\chi,K}
+ \le C_\chi^2RY\bigl(2H_{\min(R,Y)}-1\bigr)
+ =O_\chi(K\log(2R))
+ \label{eq:c3v2-D-bound}
+\end{equation}
+at the corner-matched cutoffs, where
+\(C_\chi=\max_{0\le a<f}|S_\chi(a)|\).
+\end{theorem}
+
+\begin{proof}
+The energy counts ordered quadruples \(mn=ab\) with the stated
+rectangle bounds.  Write \(m=gu\), \(a=gv\), \((u,v)=1\).
+The equality forces \(n=vh\), \(b=uh\), with
+\(g\le R/\max(u,v)\) and \(h\le Y/\max(u,v)\).
+For maximum one there is one coprime ordered pair, and for maximum
+\(j\ge2\) there are exactly \(2\varphi(j)\).  This proves the
+identity.  Use \(\varphi(j)\le j\) and bound each floor by its
+argument for the inequality.
+
+By \eqref{eq:c3v2-sign-gauge},
+\(\mathcal D_{\chi,K}=\sum_{p>K/R}\nu_{R,Y}(p)^2
+|\chi(p)W_K(p)|^2\).  Since \(\nu\le b\) and
+\(|W_K|\le C_\chi\), the full nonnegative rectangle energy is
+an upper bound.  Finally \(RY<K\) and \(R\le Y\) eventually
+on the chosen corner scale.
+\end{proof}
+
+This improves an already closed term, not the unresolved signed
+estimate.  The useful new information for the latter is
+\eqref{eq:c3v2-kernel-count}: the M\"obius sign depends only on
+\(r\).  Products with the same \(r\) can therefore be grouped
+coherently before another protected square is taken.  The next
+iteration tests the size of that larger diagonal, including pairs
+of distinct products whose ratio is a rational square.
+
+\subsection*{Verification and append record}
+
+\path{scripts/verify_grh_cycle3_v2_product_sign.py} checks the sign
+factorization, cubefree representation, exact restricted divisor
+counts, and rectangle-energy identity with integer arithmetic.
+It also tests the full column identity with real and complex
+characters.  These checks do not assert cancellation between
+different product kernels.
+
+V2 appends to the third-cycle V1 with SHA--256
+\begin{center}
+\texttt{AAC40D7739C935FCBCB75139D2C4007}\allowbreak
+\texttt{E79F0972284D5B2A78E06A41BCC63ED43}.
+\end{center}
+The next companion sweep remains V10.  GRH is unresolved.
+\endgroup
+
+\clearpage
+\section{V3: closing square-ratio pairs and a growing small-prime parity sector}
+\label{sec:c3v3-square-classes}
+\begingroup
+\setcounter{equation}{0}
+\renewcommand{\theequation}{C3.3.\arabic{equation}}
+\renewcommand{\theHequation}{c3v3.\arabic{equation}}
+
+The sign coherence in V2 permits a larger protected diagonal than
+equal products.  This iteration bounds, with the actual character,
+reader, and rectangle multiplicities intact, all pairs of products
+with the same odd-prime kernel.  It then allows the kernel to differ
+on a prescribed growing set of small primes.  These are unconditional
+bounds for specified parts of the connected arithmetic current, not
+an assumption of cancellation in a positive unit-row bank.
+
+Put \(X=RY\), and let \(\kappa(p)\) be the squarefree kernel
+formed from primes with odd valuation in \(p\).  Only cubefree
+products have nonzero coefficients \(A_p\), by V2.
+
+\subsection{Coherent square-class amplitudes}
+
+For squarefree \(r\le X\), define the fully retained coefficient
+\begin{equation}
+ T_r=\sum_{\substack{d\ge1\ {m squarefree}\\(d,r)=1\\
+                              K/R<d^2r\le X}}
+       \chi(d)^2 W_K(d^2r)\,n_{R,Y}(d,r),
+ \qquad F_r=\mu(r)\chi(r)T_r.
+ \label{eq:c3v3-Tr}
+\end{equation}
+The restricted divisor count \(n_{R,Y}\) is exactly
+\eqref{eq:c3v2-count}; zero counts need not be deleted from this sum.
+The product decomposition proves
+\begin{equation}
+ F_r=\sum_{\kappa(p)=r}A_p,\qquad
+                 Q^{\rm low}_{\chi,K}=\sum_{r\ {m squarefree}}F_r.
+ \label{eq:c3v3-class-sum}
+\end{equation}
+In particular the character factor \(\chi(d)^2\) is not set equal
+to one for a complex character, and \(W_K(d^2r)\) is not replaced
+by an unweighted reader.
+
+\begin{theorem}[Square-class protected energy]
+\label{thm:c3v3-square-energy}
+For all positive integer cutoffs,
+\begin{equation}
+ D_{\rm sq}:=\sum_{r\ {m squarefree}}|F_r|^2
+                          \le C_\chi^2 X H_X^4.
+ \label{eq:c3v3-square-energy}
+\end{equation}
+Thus \(D_{\rm sq}=K^{1+o(1)}\) at the corner-matched scale.
+The bound is unconditional and uses no Mertens estimate.
+\end{theorem}
+
+\begin{proof}
+For a given \(r\), every admitted \(d\) is at most
+\(\sqrt{X/r}\).  From \eqref{eq:c3v2-kernel-count},
+\[
+ |F_r|\le C_\chi 2^{\omega(r)}\lfloor\sqrt{X/r}\rfloor.
+\]
+On squarefree \(r\), the number of ordered four-factor
+representations \(d_4(r)\) equals \(4^{\omega(r)}\).
+Consequently
+\[
+ D_{\rm sq}\le C_\chi^2X
+      \sum_{r\le X}\frac{\mu(r)^2 4^{\omega(r)}}r
+ \le C_\chi^2X\sum_{n\le X}\frac{d_4(n)}n
+ =C_\chi^2X\sum_{abcd\le X}\frac1{abcd}
+ \le C_\chi^2XH_X^4.
+\]
+All relaxations are nonnegative counting bounds made after the
+complete arithmetic coefficient \(F_r\) is defined.
+\end{proof}
+
+The part of the original connected current with a rational-square
+product ratio is
+\begin{equation}
+ O_{\rm sq}=\sum_{\substack{p\ne q\\\kappa(p)=\kappa(q)}}
+                       A_p\overline{A_q}=D_{\rm sq}-\mathcal D_{\chi,K}.
+ \label{eq:c3v3-square-connected}
+\end{equation}
+Indeed \(p/q\) is a rational square if and only if every valuation
+difference is even, equivalently \(\kappa(p)=\kappa(q)\).
+V2 and \eqref{eq:c3v3-square-energy} give
+\begin{equation}
+ |O_{\rm sq}|\le C_\chi^2 X
+              \bigl(H_X^4+2H_{\min(R,Y)}-1\bigr)=K^{1+o(1)}.
+ \label{eq:c3v3-square-connected-bound}
+\end{equation}
+This controls distinct-product terms, not merely the already closed
+same-product diagonal.  The word ``diagonal'' refers to the larger
+index \(r\); it does not assert \(D_{\rm sq}\ge\mathcal D\),
+since complex class amplitudes can cancel internally.
+
+For comparison, ratios that are rational \(j\)-th powers with
+\(j\ge3\) give no larger diagonal on this cubefree support: each
+valuation difference lies between \(-2\) and \(2\), and divisibility
+by \(j\ge3\) forces it to be zero.  Such a pair has \(p=q\).
+
+\subsection{A larger sector with small-prime parity differences}
+
+Let \(\mathcal B\) be a finite, prescribed set of primes, chosen
+from cutoffs rather than the unknown source value.  Define
+\[
+ M_{\mathcal B}=\prod_{\ell\in\mathcal B}\ell,\qquad
+ \kappa_{\mathcal B}(p)
+       =\frac{\kappa(p)}{\gcd(\kappa(p),M_{\mathcal B})},\qquad
+ N_{\mathcal B}(X)=\#\{a\mid M_{\mathcal B}:a\le X\}.
+\]
+For squarefree \(t\) coprime to \(M_{\mathcal B}\), put
+\begin{equation}
+ G_t=\sum_{\substack{a\mid M_{\mathcal B}\\at\le X}}F_{at},
+ \qquad D_{\mathcal B}=\sum_t|G_t|^2.
+ \label{eq:c3v3-coarse-classes}
+\end{equation}
+Every \(F_r\) occurs once, by the unique decomposition
+\(r=at\).  Thus \(G_t=\sum_{\kappa_{\mathcal B}(p)=t}A_p\)
+and \(Q^{\rm low}=\sum_tG_t\).
+
+\begin{theorem}[Growing parity-sector energy]
+\label{thm:c3v3-parity-sector}
+For every prescribed finite prime set,
+\begin{equation}
+ D_{\mathcal B}\le N_{\mathcal B}(X)D_{\rm sq}
+                     \le C_\chi^2XN_{\mathcal B}(X)H_X^4.
+ \label{eq:c3v3-parity-energy}
+\end{equation}
+If \(N_{\mathcal B}(X)=X^{o(1)}\), the connected sector
+\begin{equation}
+ O_{\mathcal B}=
+    \sum_{\substack{p\ne q\\\kappa_{\mathcal B}(p)=\kappa_{\mathcal B}(q)}}
+             A_p\overline{A_q}
+      =D_{\mathcal B}-\mathcal D_{\chi,K}
+ \label{eq:c3v3-parity-connected}
+\end{equation}
+has \(|O_{\mathcal B}|\le K^{1+o(1)}\) at the corner scale.
+\end{theorem}
+
+\begin{proof}
+For each \(t\), Cauchy--Schwarz gives
+\[
+ |G_t|^2\le N_{\mathcal B}(X/t)
+       \sum_{\substack{a\mid M_{\mathcal B}\\at\le X}}|F_{at}|^2.
+\]
+Use \(N_{\mathcal B}(X/t)\le N_{\mathcal B}(X)\) and sum;
+the inner coefficients are disjoint across \(t\).  This proves
+the energy bound.  Expand the complete square of each \(G_t\)
+to obtain \eqref{eq:c3v3-parity-connected}, then bound its absolute
+value by \(D_{\mathcal B}+\mathcal D\).
+\end{proof}
+
+A simple sufficient choice has \(|\mathcal B|=o(\log X)\), since
+\(N_{\mathcal B}(X)\le2^{|\mathcal B|}\).  There is also a direct
+elementary choice including \emph{every} prime at most \(\log X\),
+without invoking a prime-counting theorem.  For this choice and
+\(0<\sigma<1\),
+\[
+ N_{\mathcal B}(X)
+ \le X^\sigma\prod_{\ell\le\log X}(1+\ell^{-\sigma}),\qquad
+ \log N_{\mathcal B}(X)
+ \le\sigma\log X+\frac{(\log X)^{1-\sigma}}{1-\sigma}.
+\]
+The first inequality bounds \(\mathbf1_{a\le X}\) by
+\((X/a)^\sigma\); the second uses \(\log(1+z)\le z\)
+and bounds the prime sum by the integral for all integers at least two.
+With \(L=\log\log X\) and \(\sigma=L^{-1/2}\), for sufficiently
+large \(X\), this yields the explicit bound
+\begin{equation}
+ N_{\mathcal B}(X)\le X^{\eta(X)},\qquad
+ \eta(X)=L^{-1/2}+\frac{e^{-\sqrt L}}{1-L^{-1/2}}
+                       \longrightarrow0.
+ \label{eq:c3v3-log-primes}
+\end{equation}
+Thus the sector where the odd-valuation kernel of \(pq\) is supported
+entirely on primes at most \(\log(RY)\) is now bounded at the
+required scale.  No cancellation among those small-prime signs was
+assumed to obtain this bound.
+
+\subsection{Exact residual and the role of the phase average}
+
+The remaining current in this partition is
+\begin{equation}
+ O_{\ne\mathcal B}=\sum_{t\ne s}G_t\overline{G_s},\qquad
+ |Q^{\rm low}_{\chi,K}|^2=D_{\mathcal B}+O_{\ne\mathcal B},
+ \qquad \mathcal O_{\chi,K}=O_{\mathcal B}+O_{\ne\mathcal B}.
+ \label{eq:c3v3-residual}
+\end{equation}
+For the logarithmic prime set above, a sufficient unproved target is
+\begin{equation}
+ |O_{\ne\mathcal B}|\le K^{1+o(1)}.
+ \label{eq:c3v3-open}
+\end{equation}
+Every surviving product pair differs in odd valuation at some prime
+larger than \(\log(RY)\).  This is not a bound for that remaining
+parity correlation, and does not make its coefficients independent.
+The complete descendant reader and the exact rectangle multiplicity
+remain inside \(G_t\).
+
+There is a useful exact interpretation of the positive energy.  Give
+the finitely many relevant primes signs \(\varepsilon_\ell\in\{-1,1\}\)
+and set
+\[
+ P(\varepsilon)=\sum_{r\ {m squarefree}}
+                \chi(r)T_r\prod_{\ell\mid r}\varepsilon_\ell.
+\]
+The actual arithmetic value is \(P((-1)_\ell)=Q^{\rm low}\).
+Uniformly averaging \(|P|^2\) over all prime signs gives
+\(D_{\rm sq}\) by finite character orthogonality.  Fixing
+\(\varepsilon_\ell=-1\) on \(\mathcal B\) and averaging only
+over the other signs gives \(D_{\mathcal B}\): after grouping
+\(r=at\), its coefficient of the outside sign monomial is
+\(\mu(t)G_t\), which has modulus \(|G_t|\).
+This proves an auxiliary phase-average identity, not randomness of
+the physical M\"obius signs.  An average bound does not control
+the specified all-minus evaluation.  Equation~\eqref{eq:c3v3-open}
+is precisely what is still missing there.
+
+The present partition is made on exact product pairs before any
+completion.  Its closed sector is not the same as the archived
+large-modulus zero-frequency sheet, and the two are not asserted
+to be disjoint.  Their bounds cannot be combined by silently deleting
+both sets of frequency terms.  The exact identities
+\eqref{eq:c3v3-residual} specify the alternative residual used here.
+
+\subsection*{Verification and append record}
+
+\path{scripts/verify_grh_cycle3_v3_parity_sector.py} checks the
+square-class and small-prime-class identities term by term, including
+their contributions from distinct products.  It retains real and
+complex characters, verifies the finite Cauchy energy comparison,
+and enumerates the auxiliary prime-sign cubes for exact Parseval
+checks.  The subpower bound is proved by
+\eqref{eq:c3v3-log-primes}, not by the finite examples.
+
+V3 appends to V2 with SHA--256
+\begin{center}
+\texttt{76A3A7D801D0109D69B84E58C6F1A42}\allowbreak
+\texttt{BCA401CB69EB99962CCE9920CB25D50AD}.
+\end{center}
+The next companion sweep remains V10.  The stated sectors are closed;
+GRH and the remaining cross-class current are not.
+\endgroup
+
+\end{document}

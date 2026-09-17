@@ -1,0 +1,1741 @@
+\documentclass[11pt,oneside]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{record}[theorem]{Record}
+\newtheorem{firewall}[theorem]{Claim firewall}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\Tr}{Tr}
+\title{Renewal Yang--Mills Mass-Gap Research Notes\\
+Post-Fifteenth-Archive Compact Lineage, Version V3}
+\author{Continuation with a scope-checked result ledger}
+\date{Research continuation}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Context, restart, and the unchanged objective}
+\label{f16v1:context}
+
+The objective is a rigorous nontrivial interacting four-dimensional
+continuum Yang--Mills theory with a positive physical Hamiltonian mass
+gap. That objective remains unproved. We currently work with an exact
+compact \(\SU(2)\) Wilson transfer, its gauge constraints, and particular
+weak-field limits. Auxiliary Gaussian separation, a lattice transfer
+ratio, and a calibrated physical continuum mass are different claims.
+
+The hundred-version fifteenth lineage is preserved in
+\begin{center}\small
+\path{Renewal_Yang_Mills_Mass_Gap_Research_Notes_V100_f15.tex}.
+\end{center}
+This is a compact restart, not a replacement of that archive.
+References such as f15 V99 specify sections of that file.
+Prior hypotheses and corrections remain binding. The summary below
+is a result map, not a fresh certification of every historical claim.
+
+The required V100 checkpoint reread SM continuum V72, NS stability V26,
+shell-mixing V16, parallel YM V5, SM source-selection V31,
+regenerative stationarity V34 and exact-action Einstein bridge V24.
+Their current versions and hashes were unchanged. No companion
+provides the missing volume-uniform native YM spectral comparison.
+The useful cross-program lesson is to control densities or local
+quantities rather than demand a volume-independent tail for an
+extensive count. The detailed checkpoint is in f15 V100.
+The next companion review is this lineage's V5; its next normal
+archive/restart is V100.
+
+The recent upstream change is to retain the normalized magnetic
+image of the cube carrier rather than freeze its internal variables
+or project its image straight back to the old ground band.
+The present note continues by computing the exact overlap of those
+conditional vectors across a native bridge kinetic step.
+Its weak-field response is not an invariant-subspace theorem:
+even the resulting Gaussian compressed family fails the semigroup
+law at finite time. We keep that discrepancy explicit.
+
+\section{Major interfaces retained from f15}
+\label{f16v1:ledger}
+
+\begin{center}\small
+\begin{tabular}{@{}p{0.15\textwidth}p{0.79\textwidth}@{}}
+\toprule
+Range & Established objects and scope limits\\
+\midrule
+V1--V11 &
+Full compact source/entropy estimates, literal blocking, growing-depth
+curvature comparisons and scale-correct pinned-fibre interfaces.
+They do not give physical continuum coercivity.\\[1mm]
+V12--V37 &
+Local chart and source-response comparisons with normalization,
+exceptional-set and entropy costs retained; obstructions to dropping
+those costs. No unqualified extensive-source mixing theorem.\\[1mm]
+V38--V56 &
+Native compact conditional landscapes, coherent boundary minima,
+reflected source laws and paid pressure comparisons.
+Rare or low-action regions are not automatically harmless for spectra.\\[1mm]
+V57--V65 &
+Positive Wilson transfer and vacuum response estimates in their
+selected regimes; soft microscopic spectral limits.
+A collapsing one-step lattice gap is not a disproof of a positive
+gap after independently calibrated physical time scaling.\\[1mm]
+V66--V81 &
+Exact decimation/conditional laws, local Dirichlet and bad-region
+control, full Gaussian invariant sectors, and vacuum-independent
+transfer/compound-operator certificates.
+A local gap or a finite matrix check is not the full native gap.\\[1mm]
+V82--V91 &
+Exact Gauss-boundary charge decomposition, magnetic charge walks,
+charged-sector domination, compact endpoint channels and paid
+spectral tails. Literature and undecidability audits import
+methods, not an unverified mass-gap conclusion.\\[1mm]
+V92--V97 &
+Complete native coupled finite-region kernels and their growing
+boundary carriers; full internal oscillator spectra and
+finite-volume complement approximations.\\[1mm]
+V98--V100 &
+Actual spatial assembly, a sharp auxiliary coarse electric edge,
+exact magnetic Gram/dressing, a fixed-volume Gaussian response,
+and extensive old-oscillator excitation budgets.
+Volume-uniform native dressed dynamics remain open.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{The exact spatial assembly and its unresolved dynamics}
+
+Let the spatial torus have side \(2m\), \(m\ge4\), with
+\(B=m^3\) disjoint vertex cubes. A link is internal when its base
+coordinate in its own direction is even; otherwise it is a bridge.
+There are \(12B\) of each. Of the \(24B\) plaquettes, \(6B\)
+are internal, \(12B\) cross one block interface and \(6B\) cross
+in both directions. The coarse graph has four parallel bridges
+between each pair of positive-direction neighbouring blocks.
+
+A rooted spanning tree in each cube gives exact Haar coordinates
+\(g\in G^{7B}\), \(X\in G^{5B}\), \(Y\in G^{12B}\), \(G=\SU(2)\).
+After nonroot Gauss reduction the whole physical Hilbert space is
+\begin{equation}
+ \mathcal H_{\rm phys}
+       =L^2(G^{5B}\times G^{12B})^{G^B}.
+ \label{f16v1:physical}
+\end{equation}
+The root group conjugates its internal chords and acts at all its
+bridge endpoints. Mixed plaquette words are exactly the two-bridge,
+two-internal-edge words or the four-bridge words from the original
+lattice. No plaquette is discarded.
+
+For \(s(U)=1-\frac12\Tr U\), define the normalized central convolution
+kernel and bridge operator
+\begin{equation}
+ k_\gamma(U)=\frac{e^{-\gamma s(U)}}{z_\gamma},\quad
+ z_\gamma=\int_Ge^{-\gamma s(U)}\,dH(U),\quad
+ \mathcal C_\gamma=\bigotimes_{e\ {\rm bridge}} C_\gamma^{(e)}.
+ \label{f16v1:kinetic}
+\end{equation}
+These are the Wilson kinetic kernels, not exactly heat kernels.
+The full native transfer has the exact factorization
+\begin{equation}
+ T_{\rm full,\gamma}
+ =M_\times\left[
+       \left(\bigotimes_b T_{\Box,\gamma}^{(b)}\right)
+                       \otimes\mathcal C_\gamma\right]M_\times,
+ \quad M_\times=e^{-\gamma S_\times/2},
+ \label{f16v1:full}
+\end{equation}
+where \(S_\times\) sums all \(18B\) mixed plaquette actions.
+The regional transfer factors and the bridge factor commute before
+the magnetic sandwich, but the magnetic factor cannot be omitted.
+
+The ground-carrier compression of the cut transfer in f15 V98
+has coarse electric operator
+\[
+ \mathcal D=\mathcal E_{\rm bridge}
+       +\sum_b\sum_{v,w}(L_\Box^+)_{vw}J_{bv}\cdot J_{bw},
+ \qquad \mathcal E_{\rm bridge}\le\mathcal D
+                         \le4\mathcal E_{\rm bridge}.
+\]
+On the coarse physical space its first nonzero eigenvalue is \(19/2\).
+This is an auxiliary operator. Its proved native growing-carrier
+error \(O_R(B/\sqrt\gamma)\) is larger than the \(1/\gamma\)
+scale of that auxiliary heat edge. The magnetic image contributes
+an additional order-one effect. No full-transfer gap follows.
+
+\subsection{The exact normalized carrier and the leading response}
+
+Here are sufficient definitions to continue without reprinting the
+finite-region proofs. In one cube let \(\mathsf B\) be the
+root-deleted edge incidence matrix, with row \(z_t-z_s\);
+let \(\mathsf J\) inject its five chord coordinates; and let
+\(\mathsf Z\mathsf B=0,\ \mathsf Z\mathsf J=I\) be the cycle matrix.
+Use the rooted axial tree of f15 V97. Put
+\[
+ \mathsf F=-(\mathsf B^{\mathsf T}\mathsf B)^{-1}
+                     \mathsf B^{\mathsf T}\mathsf J,\quad
+ \mathsf M=\mathsf Z\mathsf Z^{\mathsf T},\quad
+ U=\mathsf J+\mathsf B\mathsf F=\mathsf Z^{\mathsf T}\mathsf M^{-1}.
+\]
+Let \(\mathsf H\) be the Gram of the six linearized cube faces and
+\(T=\mathsf M^{1/2}\mathsf H\mathsf M^{1/2}\).
+The spectrum of \(T\) is \(4,4,4,6,6\).
+The covariance of one colour component of the squared internal
+Gaussian ground vector is
+\begin{equation}
+ C=\mathsf M^{1/2}[2\sqrt{T+T^2/4}]^{-1}\mathsf M^{1/2},
+ \qquad C_B=\bigoplus_b C.
+ \label{f16v1:covariance}
+\end{equation}
+For \(X_i=\operatorname{Exp}(x_i/\sqrt\gamma)\) on the complete
+chord charts, let \(\Phi_\gamma(X)\) be the positive normalized
+product Gaussian vector with its Haar square-root Jacobian divided
+out, and with its chart restriction normalized exactly. Its
+squared \(x\)-density is the corresponding truncated Gaussian.
+
+Set \(h_{bu}=\operatorname{Exp}((\mathsf F x_b)_u/\sqrt\gamma)\)
+at nonroot ports and \(h_{bo}=I\). The moving bridge coordinates are
+\[
+                    (\Theta_XY)_e=h_s^{-1}Y_eh_t.
+\]
+At fixed \(X\) this is Haar preserving. Define
+\begin{align}
+ \widehat S_\gamma f(X,Y)
+       &=\Phi_\gamma(X)f(\Theta_XY),\notag\\
+ F_{\gamma,t}(Z)
+       &=\int|\Phi_\gamma(X)|^2
+              M_\times(X,\Theta_X^{-1}Z)^t\,dH^{5B}(X).
+ \label{f16v1:gram}
+\end{align}
+The identities
+\[
+ \widehat S_\gamma^*M_\times^t\widehat S_\gamma=M_{F_{\gamma,t}},
+ \qquad
+ \mathcal I_\gamma=M_\times\widehat S_\gamma
+                                    M_{F_{\gamma,2}^{-1/2}},
+ \qquad \mathcal I_\gamma^*\mathcal I_\gamma=I
+\]
+are exact on the coarse physical carrier. At each finite regulator
+\(F_{\gamma,2}>0\) is bounded below. It is \(F_{\gamma,2}\), not
+\(F_{\gamma,1}^2\), that normalizes the magnetic image.
+
+Let \(C_{\rm int}\) and \(D\) be the signed mixed-plaquette incidence
+matrices on internal and bridge edges. In the moving frame the
+internal linear embedding is \(\bigoplus_bU\), so put
+\[
+ A=C_{\rm int}\bigoplus_bU,\qquad
+ K=AC_BA^{\mathsf T},\quad
+ L=C_B^{1/2}A^{\mathsf T}AC_B^{1/2},\quad \rho=1/\sqrt2 .
+\]
+F15 V99 proves
+\[
+ 0\le K,\quad\|K\|\le\rho<1,\quad
+ \Tr K=B\left(\frac3{2\sqrt2}+\frac2{\sqrt{15}}\right)>B.
+\]
+With \(Z_e=\operatorname{Exp}(y_e/\sqrt\gamma)\),
+\begin{equation}
+ F_{\gamma,t}(Z)\longrightarrow
+ F_t(y)=\det(I+(t/2)K)^{-3/2}
+     e^{-(t/4)y^{\mathsf T}
+       [D^{\mathsf T}(I+(t/2)K)^{-1}D\otimes I_3]y},
+ \label{f16v1:limit}
+\end{equation}
+uniformly on bounded \(y\)-windows at fixed \(B\).
+The proved absolute error is \(O_t(B(1+R^3)/\sqrt\gamma)
++O_t(Be^{-c\gamma})\). It is not a relative bound uniform in volume.
+
+The normalized conditional limit of \(\mathcal I_\gamma\) is the
+positive square root of a Gaussian with covariance and mean
+\begin{equation}
+ C_{\rm p}=(C_B^{-1}+A^{\mathsf T}A)^{-1},\qquad
+ m_y=-(C_{\rm p}A^{\mathsf T}D\otimes I_3)y .
+ \label{f16v1:posterior}
+\end{equation}
+The inverse has a block-distance convergent Neumann expansion:
+for block sets \(E,F\) at distance \(d\),
+\[
+ \|P_EC_{\rm p}P_F\|\le\|C\|\rho^d/(1-\rho).
+\]
+The leading log determinant also has a uniformly summable
+per-block closed-walk expansion. These are Gaussian response
+statements, not a native non-Gaussian polymer theorem.
+
+F15 V100 counts all internal oscillator levels in this dressed
+vector. It proves exponentially small capture by every
+\(o(B)\) total-degree cutoff at zero bridge field and an
+exponentially accurate cutoff of order
+\(B+\|Dy\|^2+\log\delta^{-1}\). Its compact projection handoff
+takes \(\gamma\to\infty\) at each fixed \(B\); it does not control
+the norm of the full excited-state transfer complement.
+
+\section{New V1 result: exact kinetic compression by conditional affinity}
+\label{f16v1:affinity}
+
+For the derivation it is convenient to work first before root Gauss
+restriction, on \(L^2(G^{12B})\) and
+\(L^2(G^{5B}\times G^{12B})\) in \((X,Z)\) coordinates.
+All maps below intertwine the root action, so their exact
+operator identities restrict to \eqref{f16v1:physical}.
+Define normalized conditional vectors
+\begin{equation}
+ a_{\gamma,Z}(X)
+   =\frac{\Phi_\gamma(X)M_\times(X,\Theta_X^{-1}Z)}
+                    {\sqrt{F_{\gamma,2}(Z)}},
+ \qquad \int|a_{\gamma,Z}(X)|^2\,dH^{5B}(X)=1,
+ \label{f16v1:conditional}
+\end{equation}
+and their affinity
+\[
+ \mathcal A_\gamma(Z,Z')
+       =\int a_{\gamma,Z}(X)a_{\gamma,Z'}(X)\,dH^{5B}(X).
+\]
+
+\begin{theorem}[Exact native bridge kernel on the dressed carrier]
+\label{f16v1:exact-kernel}
+The compression of the bridge kinetic factor alone is
+\begin{equation}
+ \bigl(\mathcal I_\gamma^*\mathcal C_\gamma
+                      \mathcal I_\gamma\bigr)(Z,Z')
+   =\left[\prod_{e\ {\rm bridge}}
+             k_\gamma(Z_eZ_e'^{-1})\right]\mathcal A_\gamma(Z,Z').
+ \label{eq:f16v1:exact-kernel}
+\end{equation}
+The affinity is symmetric, positive semidefinite as a Gram kernel,
+continuous, and satisfies \(0<\mathcal A_\gamma\le1\) and
+\(\mathcal A_\gamma(Z,Z)=1\).
+The compressed operator is a positive contraction.
+The root gauge invariance is simultaneous in \(Z,Z'\), not
+a claim that the affinity is separately invariant in each argument.
+\end{theorem}
+
+\begin{proof}
+The bridge operator leaves \(X\) fixed. Under
+\(Y_e=h_s Z_eh_t^{-1}\) and \(Y_e'=h_s Z_e'h_t^{-1}\),
+\[
+                  Y_eY_e'^{-1}
+                       =h_s Z_eZ_e'^{-1}h_s^{-1}.
+\]
+Centrality of \(k_\gamma\) and Haar invariance remove both frame
+factors. In these coordinates \(\mathcal I_\gamma f=a_{\gamma,Z}f(Z)\).
+Integrating the internal coordinate in its compression gives
+\eqref{eq:f16v1:exact-kernel}. The Gram assertion and the upper
+bound are respectively the squared-norm identity and Cauchy--Schwarz.
+Positivity follows also directly from compression of the positive
+Wilson convolution. Its norm is at most one.
+
+At finite \(\gamma,B\), the magnetic multiplier is strictly positive
+and bounded, \(F_{\gamma,2}\) has a positive lower bound, and
+\(\Phi_\gamma\) has norm one. Dominated convergence proves
+continuity and strict positivity of the affinity. Equivariance
+of the original carrier and kernel proves the root-action
+statement and the restriction to invariant functions.
+\end{proof}
+
+This identity keeps the whole compact bridge configuration space.
+It does not replace \eqref{f16v1:full} by its bridge factor.
+In particular the cube kinetic dynamics and their internal
+excited-state returns have not been integrated by this theorem.
+
+\subsection{The leading affinity and its exact null directions}
+
+In the next formulas the colour tensor \(I_3\) is suppressed:
+when \(R\) acts on a \(36B\)-component bridge vector, it means
+\(R\otimes I_3\).
+Set
+\begin{align}
+ R&=D^{\mathsf T}A C_{\rm p}A^{\mathsf T}D
+    =D^{\mathsf T}K(I+K)^{-1}D
+    =D^{\mathsf T}D-H_{\rm eff},\notag\\
+ H_{\rm eff}&=D^{\mathsf T}(I+K)^{-1}D .
+ \label{f16v1:R}
+\end{align}
+
+\begin{theorem}[Conditional overlap and native local-kernel limit]
+\label{f16v1:gaussian-affinity}
+For the normalized Gaussian amplitudes \(\psi_y\) with squared
+density \eqref{f16v1:posterior},
+\begin{equation}
+ \langle\psi_y,\psi_z\rangle
+             =e^{-(y-z)^{\mathsf T}R(y-z)/8}.
+ \label{eq:f16v1:gaussian-affinity}
+\end{equation}
+At fixed \(B\), \(\mathcal A_\gamma\) in rescaled bridge charts
+converges to this expression uniformly on bounded pairs of
+bridge windows. After including both square-root Haar chart
+densities, the kernel \eqref{eq:f16v1:exact-kernel} converges there to
+\begin{equation}
+ (2\pi)^{-q/2}
+   \exp\left[-\frac{|y-z|^2}{2}
+                    -\frac{(y-z)^{\mathsf T}R(y-z)}8\right],
+       \qquad q=36B.
+ \label{f16v1:native-leading-kernel}
+\end{equation}
+Thus compression to any fixed bounded coordinate window
+converges in Hilbert--Schmidt norm. No global norm or
+volume-uniform spectral convergence is asserted.
+\end{theorem}
+
+\begin{proof}
+Completing the common square of two Gaussian amplitudes with
+covariance \(C_{\rm p}\) gives the overlap
+\[
+       \exp[-(m_y-m_z)^{\mathsf T}C_{\rm p}^{-1}(m_y-m_z)/8].
+\]
+Substitute \eqref{f16v1:posterior}; Woodbury inversion gives
+\eqref{f16v1:R}. F15 V99's normalized-density convergence,
+or f15 V100's \(L^2\) amplitude argument, gives the uniform
+convergence of the affinities at fixed \(B\).
+
+For completeness, in one bridge chart with Jacobian \(J_\gamma\),
+ordinary Taylor expansion and Laplace normalization give
+\[
+ [J_\gamma(y)J_\gamma(z)]^{1/2}
+ k_\gamma(\operatorname{Exp}(y/\sqrt\gamma)
+                      \operatorname{Exp}(-z/\sqrt\gamma))
+       \longrightarrow(2\pi)^{-3/2}e^{-|y-z|^2/2}
+\]
+uniformly on compact pairs. Here
+\(s(\operatorname{Exp}v)=1-\cos|v|\);
+\(\gamma s\) tends to \(|y-z|^2/2\).
+The normalization follows by the same rescaling in
+\(z_\gamma\); the inequality \(1-\cos r\ge2r^2/\pi^2\)
+for \(0\le r\le\pi\) dominates the full chart integral.
+The Haar Jacobian cancels to the displayed Euclidean prefactor.
+Multiply over the fixed \(12B\) bridges and use
+\eqref{eq:f16v1:gaussian-affinity}. Uniform convergence on
+a bounded window implies square-integral kernel convergence.
+This is a kinematic chart assertion before root averaging;
+it does not identify a physical spectral subspace with that window.
+\end{proof}
+
+One has
+\begin{equation}
+ 0\le R\le\frac{\rho}{1+\rho}D^{\mathsf T}D.
+ \label{f16v1:Rbound}
+\end{equation}
+The covariance locality from \eqref{f16v1:posterior} and the
+finite-range incidence factors give exponentially decaying
+block entries of \(R\), uniformly in volume.
+
+There is a stronger exact statement than simply
+\(\ker D\subseteq\ker R\). Let \(\mathcal E\) consist of bridge
+vectors constant on each set of four parallel bridges.
+Then
+\begin{equation}
+ A^{\mathsf T}D y=0,\qquad R y=0,\qquad
+ H_{\rm eff}y=D^{\mathsf T}Dy,\qquad \psi_y=\psi_0
+                    \quad (y\in\mathcal E).
+ \label{f16v1:common-bridge}
+\end{equation}
+Indeed a decorated digon takes the difference of two such
+parallel values, so its curvature vanishes. A quadrilateral
+has no internal edge, so the corresponding row of \(A\) is
+zero. This proves the first identity; the others follow.
+More generally \(\psi_{y+v}=\psi_y\) for \(v\in\mathcal E\).
+The scalar magnetic normalizer still depends on the coarse
+quadrilateral curvature; it has not disappeared.
+
+In particular the transverse common-bridge cosine used in
+f15 V99 has exactly
+\[
+       \frac{\langle y,H_{\rm eff}y\rangle}{\|y\|^2}
+                           =2\sin^2(\pi/m),
+\]
+not merely the upper bound established there.
+The leading fast conditional vector cannot generate a restoring
+term in these coarse common-bridge directions.
+This concerns a static linearized Hessian, not a family of
+gapless native physical Hamiltonian states.
+
+\section{Finite kinetic time is not fixed by the static normalization}
+\label{f16v1:time}
+
+The Gaussian limit allows a complete check of this issue.
+Let \(G\) be any positive definite \(q\)-by-\(q\) constant matrix,
+and let \(H_t^G\) act on the bridge variable, leaving the internal
+variable fixed, with kernel
+\[
+ h_t^G(y-z)
+ =(4\pi t)^{-q/2}\det(G)^{-1/2}
+        e^{-(y-z)^{\mathsf T}G^{-1}(y-z)/(4t)}.
+\]
+The isometry \(\mathcal J f(u,y)=\psi_y(u)f(y)\) compresses it
+to \(\mathcal B_t=\mathcal J^*H_t^G\mathcal J\).
+The actual one-step local limit \eqref{f16v1:native-leading-kernel}
+is the case \(G=I,t=1/2\).
+
+\begin{theorem}[Exact finite-time diffusion change and its composition defect]
+\label{f16v1:heat}
+For every \(t>0\),
+\begin{equation}
+ \mathcal B_t=c_t H_t^{G_t},\qquad
+ G_t=(G^{-1}+tR/2)^{-1},\qquad
+ c_t=\det(I+(t/2)G^{1/2}RG^{1/2})^{-1/2}.
+ \label{f16v1:heat-factor}
+\end{equation}
+Its operator norm on \(L^2(\mathbb R^q)\) is \(c_t\).
+If \(R\ne0\), the norm-normalized family
+\(c_t^{-1}\mathcal B_t\) is not a semigroup.
+\end{theorem}
+
+\begin{proof}
+Multiply \(h_t^G(y-z)\) by the affinity
+\eqref{eq:f16v1:gaussian-affinity}.
+The exponent becomes
+\(-(y-z)^{\mathsf T}(G^{-1}+tR/2)(y-z)/(4t)\).
+Comparing Gaussian prefactors gives \(c_t\).
+The Fourier multiplier is
+\(c_t e^{-t p^{\mathsf T}G_t p}\), whose essential supremum is
+\(c_t\).
+
+For \(R\ne0\), positivity and inversion show
+\(G_t-G_{2t}\) is nonzero positive semidefinite.
+Thus for some \(p\),
+\[
+ e^{-2t p^{\mathsf T}G_t p}
+                   \ne e^{-2t p^{\mathsf T}G_{2t}p}.
+\]
+These are the multipliers of
+\((c_t^{-1}\mathcal B_t)^2\) and
+\(c_{2t}^{-1}\mathcal B_{2t}\). Continuity in \(p\) makes this
+a genuine operator inequality, proving the failure of the
+semigroup law.
+\end{proof}
+
+The nonzero case actually occurs in the assembly.
+For example take a bridge perturbation supported only on
+the positive first-direction bridge from fine vertex \((1,0,0)\).
+In its incident block, \(A^{\mathsf T}D\) applied to this vector
+is nonzero. To see this without a numerical rank test, its
+internal-edge source is, up to overall sign, the sum of the
+second- and third-direction edges starting at port \((1,0,0)\).
+The first/second-direction cube face at third coordinate zero
+contains just the former edge, with nonzero signed coefficient.
+Thus the source has nonzero circulation. Since
+\(\ker U^{\mathsf T}\) is the cut space, its image under
+\(U^{\mathsf T}\) cannot vanish. Positivity of \(C_{\rm p}\)
+then implies \(R\ne0\).
+The exact incidence checker supplies this literal relative-port
+example on sides eight and twelve.
+
+The failure is also transparent before taking limits:
+\(\mathcal J^*H_s^G H_t^G\mathcal J\) differs from
+\(\mathcal J^*H_s^G\mathcal J\mathcal J^*H_t^G\mathcal J\)
+by the omitted intermediate internal complement.
+A static isometry alone cannot remove that return.
+
+\subsection{The infinitesimal check and its limited physical meaning}
+
+There is a useful independent derivative check.
+For bridge indices \(i,j\), real positivity and normalization give
+\[
+ \langle\psi_y,\partial_i\psi_y\rangle=0,\qquad
+ \langle\partial_i\psi_y,\partial_j\psi_y\rangle=R_{ij}/4.
+\]
+Differentiate the Gaussian mean in
+\eqref{f16v1:posterior} to verify the second identity.
+For Schwartz \(f\), Fubini's theorem and this zero cross term yield
+\begin{equation}
+ \int \bigl|\nabla_y(\psi_y f)\bigr|_G^2\,du\,dy
+  =\int|\nabla f|_G^2\,dy
+                     +\frac14\Tr(GR)\int|f|^2\,dy .
+ \label{f16v1:metric}
+\end{equation}
+Thus the compressed differential quadratic form has a constant
+scalar addition, not a bridge-dependent mass potential.
+It agrees with the derivative of \eqref{f16v1:heat-factor}:
+\[
+       \left.\frac d{dt}\log c_t\right|_{t=0}
+                           =-\frac14\Tr(GR),\qquad G_0=G.
+\]
+Exponentiating that compressed differential form is nevertheless
+not equal to the finite-time compression in
+\eqref{f16v1:heat-factor}. The latter has \(G_t\), not \(G\).
+For \(G=I\), the scalar addition is a vacuum normalization of
+order at most \(B\), using \eqref{f16v1:Rbound} and the bounded
+plaquette incidence. None of these chart statements fixes the
+physical lattice time unit or the full interacting transfer gap.
+
+\section{What must be controlled next}
+\label{f16v1:next}
+
+The direction is now more precise. The exact native affinity
+in \eqref{eq:f16v1:exact-kernel} retains every bridge configuration
+and its correct magnetic normalization. Its leading response
+has a computable diffusion correction on relative-port directions,
+while the fast conditional state is blind to all common-bridge
+directions at this order. Repeated ground projection, even after
+normalization, discards a definite intermediate return.
+
+The next required calculation is the joint dressed compression
+with the cube transfer factors in \eqref{f16v1:full}, retaining
+their excited internal bands and the noncommuting moving frame
+at both time ends. It must bound the discarded return relative
+to the same full native top eigenvalue, uniformly in spatial
+volume, or retain it through a controlled memory/Schur term.
+A new scalar normalization or another fixed-volume Gaussian
+determinant does not supply that estimate.
+
+Beyond it remain nonlinear compact collective-mode coercivity,
+bridge-field tail control, an independent physical-time calibration,
+and nontrivial interacting continuum reconstruction. These are
+requirements of the unchanged objective, not assumptions being
+declared solved by the restart.
+
+\section{Verification and preservation}
+\label{f16v1:verification}
+
+The diagnostic
+\path{scripts/verify_ym_f16_v1_dressed_affinity.py}
+checks independent noncommuting matrix completions,
+the affinity and derivative metric, finite-time heat precisions,
+the composition defect, a direct finite conditional-kernel
+compression, and the complete mixed-plaquette incidence on
+two actual spatial tori. It checks the common-bridge null
+response and an explicit nonzero relative-port response.
+It also reruns the inherited f15 V100 diagnostic chain.
+All 10,918 new exact fixtures passed, together with the inherited
+f15 V100 chain. These finite fixtures supplement proofs, not replace them.
+The checker has 5,600 bytes and SHA--256
+\begin{center}\scriptsize\ttfamily
+CCBCBC50A687E88B74465051A0C7E9B283891911ADA928D910FA5C896B3EFC7B.
+\end{center}
+
+F15 V100 is preserved as an archive, with V99's body recoverable
+byte for byte. Its source has 2,310,095 bytes and SHA--256
+\begin{center}\scriptsize\ttfamily
+D9349B9F87D70400E7A140A3BDC38D1BC60F8E3A12F830D8C37693CD6D3C30C5.
+\end{center}
+This V1 is the sole active main YM source.
+Only \texttt{.tex} files are stored in \texttt{latex\_notes};
+build products and visual checks are outside it.
+
+\begin{firewall}
+The new exact compact result is the conditional-affinity formula
+for the dressed bridge kinetic factor. The subsequent Gaussian
+overlap, finite-time diffusion change, null directions and
+composition defect have proved fixed-volume local limits.
+They are not a volume-uniform approximation of the full native
+transfer or a positive physical continuum mass-gap theorem.
+The full Yang--Mills goal remains unachieved.
+\end{firewall}
+
+\section{V2: joint cube dynamics in the dressed transfer}
+\label{f16v2:context}
+
+V1 computed the dressed bridge factor while holding the internal
+variables fixed. We now include the cube motion at both time ends.
+There are two separate corrections: nonroot gauge matching changes
+the leading bridge covariance, and compression of the \emph{full}
+magnetic sandwich uses the magnetic multiplier twice at each end.
+Neither correction is contained in the static conditional affinity.
+
+We first give an exact full-compact kernel. We then integrate its
+entire leading internal Gaussian propagator, not just its ground
+projection. The resulting two-end Schur matrices have
+volume-independent locality and quadratic-form comparisons.
+The native limit remains fixed-volume and local in the bridge
+coordinates. This does not yet control the discarded native
+transfer subspace or the interacting infrared modes.
+
+\subsection{An exact two-ended compact kernel}
+
+Write \(f_v(X)\) for V1's moving port frame, with \(f_o=I\) at
+every block root, and put
+\[
+ \bar X_e=f_s(X)^{-1}X_ef_t(X),\qquad
+ \bar X'_e=f_s(X')^{-1}X'_ef_t(X').
+\]
+This includes tree edges, whose original representatives are \(I\).
+As in f15 V99, this is a pointwise gauge rewriting, not a change
+of internal integration variables. Denote the exact mixed
+multiplier in moving coordinates by
+\[
+ m_\gamma(X,Z)=M_\times(X,\Theta_X^{-1}Z),
+\]
+and the internal magnetic multiplier by
+\(b_\gamma(X)=\exp[-\gamma S_{\rm int}(X)/2]\).
+There are \(7B\) nonroot gauge variables.
+
+\begin{proposition}[Full compact cut kernel with both moving frames]
+\label{f16v2:exact-cut}
+Before the remaining root Gauss restriction, the cut transfer has
+kernel
+\begin{align}
+ \mathcal K_\gamma(X,Z;X',Z')
+ &=b_\gamma(X)b_\gamma(X')\,\mathcal L_\gamma(X,Z;X',Z'),
+ \notag\\
+ \mathcal L_\gamma
+ &=\int_{G^{7B}}
+   \prod_{e\ {\rm internal}}
+       k_\gamma(r_s^{-1}\bar X_e r_t\bar X_e'^{-1})
+   \prod_{e\ {\rm bridge}}
+       k_\gamma(r_s^{-1}Z_e r_t Z_e'^{-1})\,dH^{7B}(r).
+ \label{f16v2:cut}
+\end{align}
+Here \(r_o=I\) at block roots. The exact kernel of the full
+transfer is \(m_\gamma(X,Z)\mathcal K_\gamma
+m_\gamma(X',Z')\). All formulas restrict to the root-invariant
+physical space.
+\end{proposition}
+
+\begin{proof}
+In the rooted tree variables at the two times write \(g'=gh\).
+Nonroot Gauss reduction integrates \(h\) and leaves the kinetic
+arguments \(h_s^{-1}X_eh_tX_e'^{-1}\) on internal edges and
+\(h_s^{-1}Y_eh_tY_e'^{-1}\) on bridges.
+This is the same exact Fourier-free Haar reduction used in
+f15 V97; no boundary representation has been discarded.
+
+Set \(h_v=f_v(X)r_vf_v(X')^{-1}\).
+For fixed endpoints this is a product of Haar translations.
+The internal argument becomes, up to conjugation by \(f_s(X')\),
+\(r_s^{-1}\bar X_e r_t\bar X_e'^{-1}\).
+On a bridge, substitute \(Y_e=f_s(X)Z_ef_t(X)^{-1}\) and its
+primed counterpart. The same conjugation gives
+\(r_s^{-1}Z_er_tZ_e'^{-1}\). Centrality of \(k_\gamma\) removes
+the conjugations. The internal and mixed magnetic traces are
+unchanged by the pointwise gauge rewriting.
+This proves the kernel and the full sandwich.
+\end{proof}
+
+Let \(\mathcal I_\gamma\) be V1's exact normalized dressed
+isometry. Distinguish
+\[
+ \mathcal B_{1,\gamma}=\mathcal I_\gamma^*
+                  T_{\rm cut,\gamma}\mathcal I_\gamma,\qquad
+ \mathcal B_{2,\gamma}=\mathcal I_\gamma^*
+                  T_{\rm full,\gamma}\mathcal I_\gamma.
+\]
+Their exact kernels, for \(\ell=1,2\), are
+\begin{equation}
+ \begin{aligned}
+ \mathcal B_{\ell,\gamma}(Z,Z')
+ &=\frac{1}{\sqrt{F_{\gamma,2}(Z)F_{\gamma,2}(Z')}}\\
+ &\quad\times\int \Phi_\gamma(X)\Phi_\gamma(X')\,
+      m_\gamma(X,Z)^\ell m_\gamma(X',Z')^\ell
+      \mathcal K_\gamma(X,Z;X',Z')\,dH^{5B}(X)dH^{5B}(X').
+ \end{aligned}
+ \label{f16v2:exact-compression}
+\end{equation}
+In particular, \(\ell=2\) is necessary for the full transfer:
+\[
+ \mathcal I_\gamma^*T_{\rm full,\gamma}\mathcal I_\gamma
+ =M_{F_{\gamma,2}^{-1/2}}\widehat S_\gamma^*
+      M_\times^2T_{\rm cut,\gamma}M_\times^2\widehat S_\gamma
+                                      M_{F_{\gamma,2}^{-1/2}}.
+\]
+Using \(\ell=1\) instead would compress a different operator.
+
+\subsection{The kinetic covariance produced by the moving nonroot vertices}
+
+Use block-diagonal copies \(\mathsf B_B,\Sigma_B,\mathsf M_B,
+\mathsf H_B,U_B\) of the single-cube matrices in V1 and f15 V97,
+where \(\Sigma=(\mathsf B^{\mathsf T}\mathsf B)^{-1}\).
+Let \(E\) be the \(12B\)-by-\(7B\) bridge endpoint incidence:
+its row is \(z_t-z_s\), with each root coordinate set to zero.
+Define
+\begin{equation}
+ G=I+E\Sigma_BE^{\mathsf T},\qquad
+ L_h=\mathsf B_B^{\mathsf T}\mathsf B_B+E^{\mathsf T}E.
+ \label{f16v2:G}
+\end{equation}
+The letter \(G\) in these matrix formulas denotes a covariance;
+the group remains \(\SU(2)\).
+
+\begin{theorem}[Exact leading kinetic square and a uniform covariance bound]
+\label{f16v2:kinetic-square}
+For one colour component, \(\delta x=x-x'\), \(\delta y=y-y'\),
+and \(z\in\mathbb R^{7B}\),
+\begin{align}
+ &\|U_B\delta x+\mathsf B_Bz\|^2+\|\delta y+Ez\|^2
+ \notag\\
+ &\quad=\delta x^{\mathsf T}\mathsf M_B^{-1}\delta x
+       +\delta y^{\mathsf T}G^{-1}\delta y
+       +(z+L_h^{-1}E^{\mathsf T}\delta y)^{\mathsf T}
+                    L_h(z+L_h^{-1}E^{\mathsf T}\delta y).
+ \label{f16v2:completed-kinetic}
+\end{align}
+Moreover
+\begin{equation}
+  \det L_h=(\det\mathsf M)^B\det G,\qquad
+                         I\le G\le30I.
+ \label{f16v2:Gbounds}
+\end{equation}
+The matrix \(G\) couples only bridges incident to a common block.
+\end{theorem}
+
+\begin{proof}
+The balanced internal embedding obeys
+\(U_B^{\mathsf T}\mathsf B_B=0\) and
+\(U_B^{\mathsf T}U_B=\mathsf M_B^{-1}\).
+There is therefore no internal--port cross term.
+Complete the \(z\)-square. Woodbury inversion gives
+\[
+ I-E L_h^{-1}E^{\mathsf T}
+                    =(I+E\Sigma_BE^{\mathsf T})^{-1}=G^{-1}.
+\]
+The determinant lemma and the cube equality
+\(\det(\mathsf B^{\mathsf T}\mathsf B)=\det\mathsf M\)
+give the determinant statement.
+
+Each row of \(E\) has absolute sum at most two. Each nonroot
+port is incident to three bridges, so each column has absolute
+sum three. Thus \(\|E\|^2\le6\).
+The diagonal of the rooted inverse \(\Sigma\) consists of the
+effective resistances from the root. For the cube these are
+\(7/12\) at the three adjacent vertices, \(3/4\) at the three
+face-opposite vertices and \(5/6\) at the opposite vertex.
+They are the exact resistance values verified and derived
+in f15 V98. Consequently
+\[
+ \|\Sigma_B\|=\|\Sigma\|\le\Tr\Sigma
+                    =3(7/12)+3(3/4)+5/6=29/6.
+\]
+This proves \(G\le I+6(29/6)I=30I\).
+Block diagonality of \(\Sigma_B\) gives the support assertion.
+\end{proof}
+
+The bound \(30\) is a convenient pre-root-quotient bound,
+not a replacement for f15 V98's sharper physical electric
+form comparison. The new point is that the bridge covariance
+is \(G\), not \(I\). Fixing all temporal port variables to zero
+would miss it.
+
+For a positive \(d\)-by-\(d\) path covariance \(Q\), abbreviate
+the three-colour Gaussian density by
+\[
+ \varphi_Q(v)
+  =(2\pi)^{-3d/2}\det(Q)^{-3/2}
+             e^{-v^{\mathsf T}(Q^{-1}\otimes I_3)v/2}.
+\]
+Write \(b_0(x)=e^{-x^{\mathsf T}(\mathsf H_B\otimes I_3)x/4}\).
+The complete leading cut kernel is
+\begin{equation}
+ \mathcal K_0(x,y;x',y')
+       =b_0(x)b_0(x')\,
+           \varphi_{\mathsf M_B}(x-x')\varphi_G(y-y').
+ \label{f16v2:leading-cut}
+\end{equation}
+The full leading kernel has in addition
+\(e^{-|Ax+Dy|^2/4}\) at each end.
+
+\begin{proposition}[Fixed-volume native convergence with all internal ends integrated]
+\label{f16v2:native-limit}
+At each fixed \(B\), after including all square-root Haar
+chart densities, the kernel \eqref{f16v2:cut} converges uniformly
+on bounded \(x,x',y,y'\) windows to \eqref{f16v2:leading-cut}.
+The kernels \eqref{f16v2:exact-compression} converge uniformly
+on bounded \(y,y'\) windows to the result of integrating the
+complete Gaussian kernel \eqref{f16v2:leading-cut} with its
+displayed endpoint weights and normalizers.
+There is no internal excitation cutoff in this assertion.
+It also gives Hilbert--Schmidt convergence after restricting
+both bridge ends to a fixed bounded coordinate window.
+\end{proposition}
+
+\begin{proof}
+Put \(r_v=\operatorname{Exp}(z_v/\sqrt\gamma)\).
+The first-order kinetic words in \eqref{f16v2:cut} are exactly
+\(U_B(x-x')+\mathsf B_Bz\) and \(y-y'+Ez\).
+Their actions have leading exponent one half of the sum of
+the two squared norms. Gaussian integration and
+\eqref{f16v2:completed-kinetic} give the covariance in
+\eqref{f16v2:leading-cut}; \eqref{f16v2:Gbounds} fixes its
+normalizing determinant. The internal plaquette multiplier
+converges to \(b_0\).
+
+Here is the compact-integral justification.
+When the endpoint charts tend to identity, the internal tree
+kinetic words force every nonroot \(r_v\) to identity: each
+tree has a fixed root. On the compact group the sum of their
+squared geodesic distances controls the distances of all
+\(r_v\), up to an endpoint error bounded by \(C/\gamma\)
+on a fixed endpoint window. This follows successively along
+the seven tree edges, by the bi-invariant triangle inequality
+and Cauchy--Schwarz along each path. Since
+\(1-\cos\theta\ge2\theta^2/\pi^2\) for \(0\le\theta\le\pi\),
+the rescaled integrand is dominated by
+\(C\exp(-c\sum_v|z_v|^2)\), with constants at fixed \(B\)
+and window. The complement of any fixed small group
+neighbourhood is exponentially small. Taylor expansion there,
+followed by dominated convergence, proves the local kernel limit.
+
+For the integration over all internal \(X,X'\), a separate
+uniform bound avoids a hidden chart restriction.
+Keep only the \(7B\) tree factors of the kinetic product and
+bound the other \(17B\) factors by \(\|k_\gamma\|_\infty\).
+Successive Haar integration of leaves gives one for the tree
+product. The full integral is therefore at most
+\(\|k_\gamma\|_\infty^{17B}\).
+The normalization in \eqref{f16v1:kinetic} gives
+\(\|k_\gamma\|_\infty\le C\gamma^{3/2}\) for \(\gamma\ge1\).
+Each chart Jacobian is at most \(C\gamma^{-3/2}\).
+The two half-densities on the \(17B\) reduced coordinates
+cancel this power. Thus the cut chart kernel is bounded by
+a constant depending on \(B\), uniformly throughout the
+internal charts; magnetic multipliers are at most one.
+
+The transformed \(\Phi_\gamma\) is exactly a normalized
+truncation of the product Gaussian ground amplitude.
+It therefore gives an integrable dominating product
+\(C_B\Omega(x)\Omega(x')\).
+On a fixed bridge window \(F_{\gamma,2}\) is bounded below
+uniformly for sufficiently large \(\gamma\), by V1's
+fixed-volume limit. Internal Gaussian tails are now uniform
+in \(\gamma\). Apply the local limit on bounded internal
+windows and then send those windows to infinity.
+This proves uniform convergence of the compressed kernels.
+The final Hilbert--Schmidt assertion follows on any bounded
+bridge window. All constants may deteriorate with \(B\).
+\end{proof}
+
+\subsection{The two-end Schur formula retaining the full internal propagator}
+
+The product cube Gaussian ground amplitude \(\Omega(x)\)
+has squared covariance \(C_B\) from \eqref{f16v1:covariance}.
+Write \(N=\mathsf M_B^{-1}\) and
+\begin{equation}
+ Q_0=\tfrac12(C_B^{-1}+\mathsf H_B),\qquad
+ V_{\ell,+}=Q_0+\tfrac\ell2 A^{\mathsf T}A,\qquad
+ V_{\ell,-}=V_{\ell,+}+2N,\qquad \ell=0,1,2.
+ \label{f16v2:V}
+\end{equation}
+All are strictly positive. Define
+\begin{align}
+ P_{\ell,\pm}&=D^{\mathsf T}A V_{\ell,\pm}^{-1}A^{\mathsf T}D,
+ \notag\\
+ B_{\ell,\pm}
+       &=\ell D^{\mathsf T}D-H_{\rm eff}
+                              -\tfrac{\ell^2}{2}P_{\ell,\pm}.
+ \label{f16v2:B}
+\end{align}
+Colour tensors are suppressed: each path matrix acts with \(I_3\)
+on the actual bridge vectors.
+
+Let \(r(q)=(1+q/2+\sqrt{q+q^2/4})^{-1}\), and put
+\[
+                   \lambda_\Box^0=r(4)^{9/2}r(6)^3.
+\]
+This is the top value of the entire single-cube Gaussian
+transfer, not its physical mass. It is the
+\href{https://dlmf.nist.gov/18.18.E28}{Mehler value}
+already derived in f15 V97, with nine coordinates of parameter
+four and six coordinates of parameter six.
+Set
+\begin{equation}
+ \kappa_\ell
+ =\frac{(\lambda_\Box^0)^B}{F_2(0)}
+   \left[
+    \frac{\det V_{0,+}\det V_{0,-}}
+         {\det V_{\ell,+}\det V_{\ell,-}}
+   \right]^{3/2},\qquad \ell=1,2.
+ \label{f16v2:kappa}
+\end{equation}
+
+\begin{theorem}[Complete Gaussian dressed cut and full compressions]
+\label{f16v2:schur}
+The fixed-volume limits in Proposition~\ref{f16v2:native-limit} are
+\begin{align}
+ \mathcal B_{\ell,0}(y,y')
+ &=\kappa_\ell\,\varphi_G(y-y') \notag\\
+ &\quad\cdot
+ \exp\left[-\tfrac18(y+y')^{\mathsf T}B_{\ell,+}(y+y')
+           -\tfrac18(y-y')^{\mathsf T}B_{\ell,-}(y-y')\right],
+       \qquad \ell=1,2.
+ \label{f16v2:schur-kernel}
+\end{align}
+In particular \(\ell=2\) includes the entire internal Gaussian
+propagator of the full magnetic transfer between the dressed ends.
+No intermediate internal ground projection appears.
+\end{theorem}
+
+\begin{proof}
+At one end the integrand of \eqref{f16v2:exact-compression}
+tends to
+\[
+ \frac{\Omega(x)
+           e^{-\ell|Ax+Dy|^2/4}b_0(x)}{\sqrt{F_2(y)}} .
+\]
+The two-end internal precision and source are
+\[
+ W_\ell=
+ \begin{pmatrix}V_{\ell,+}+N&-N\\-N&V_{\ell,+}+N\end{pmatrix},
+ \qquad
+ \eta_\ell=-\frac\ell2
+          \begin{pmatrix}A^{\mathsf T}Dy\\A^{\mathsf T}Dy'\end{pmatrix}.
+\]
+Changing to \((x+x')/\sqrt2,(x-x')/\sqrt2\) gives the two
+precisions \(V_{\ell,+},V_{\ell,-}\). Gaussian integration
+therefore contributes determinant
+\((\det V_{\ell,+}\det V_{\ell,-})^{-3/2}\)
+and exponent
+\[
+ \frac{\ell^2}{16}\left[
+   (y+y')^{\mathsf T}P_{\ell,+}(y+y')
+     +(y-y')^{\mathsf T}P_{\ell,-}(y-y')\right].
+\]
+The remaining endpoint exponent is
+\[
+ -\frac\ell4(y^{\mathsf T}D^{\mathsf T}Dy
+                   +y'^{\mathsf T}D^{\mathsf T}Dy')
+ +\frac14(y^{\mathsf T}H_{\rm eff}y
+                   +y'^{\mathsf T}H_{\rm eff}y').
+\]
+The second term comes from \(F_2(y)^{-1/2}F_2(y')^{-1/2}\).
+Combining these expressions gives exactly \eqref{f16v2:B}.
+
+To fix the scalar without discarding any determinant, set the
+endpoint magnetic power to zero in the internal integral.
+It is \(\langle\Omega,K_{\Box,0}^{\otimes B}\Omega\rangle
+=(\lambda_\Box^0)^B\). Dividing the general determinant by
+this one and retaining \(F_2(0)^{-1}\) gives
+\eqref{f16v2:kappa}. This proves the formula.
+\end{proof}
+
+This is a calculation of one-step compression, not a claim that
+its spectrum equals the spectrum of \(T_{\rm full,\gamma}\).
+V1's intermediate-complement warning remains in force.
+
+\subsection{Uniform locality of the retained two-time fast response}
+
+The inverses in \eqref{f16v2:V} are uniformly local even for the
+full magnetic power \(\ell=2\).
+For either sign put
+\[
+ Q_+=Q_0,\quad Q_-=Q_0+2N,\qquad
+ Z_\pm=Q_\pm^{-1/2}A^{\mathsf T}A Q_\pm^{-1/2}.
+\]
+Since \(Q_\pm\ge C_B^{-1}/2\),
+\[
+                 0\le Z_\pm,\qquad \|Z_\pm\|\le2\rho .
+\]
+These matrices have only nearest-block off-diagonal entries.
+Let \(c=1+2\rho\), \(\theta=1-c^{-1}<1\), and
+\(T_\pm=I-(I+Z_\pm)/c\). Then \(0\le T_\pm\le\theta I\) and
+\begin{equation}
+ V_{2,\pm}^{-1}
+   =c^{-1}Q_\pm^{-1/2}
+                     \sum_{j=0}^{\infty}T_\pm^jQ_\pm^{-1/2}.
+ \label{f16v2:local-inverse}
+\end{equation}
+For block sets \(E_0,F_0\) separated by distance \(d\), this gives
+\[
+ \|P_{E_0}V_{2,\pm}^{-1}P_{F_0}\|
+                    \le\|Q_\pm^{-1}\|\theta^d.
+\]
+Indeed powers of degree less than \(d\) cannot connect the sets,
+and \(c^{-1}/(1-\theta)=1\).
+No volume or set-cardinality factor is needed.
+Consequently \(P_{2,\pm}\) and \(B_{2,\pm}\) have exponentially
+decaying block entries, with the fixed range shift of \(A,D\).
+This controls the complete leading two-time fast response,
+not the non-Gaussian native remainder.
+
+\subsection{The full effective quadratic transfer and its surviving soft modes}
+
+Write \(B_\pm=B_{2,\pm}\).
+The lower bound here is relative to the actual coarse curl,
+not relative to the identity.
+
+\begin{theorem}[Volume-independent curvature and kinetic comparisons]
+\label{f16v2:comparison}
+One has
+\begin{equation}
+ \frac{D^{\mathsf T}D}{(1+\rho)(1+2\rho)}
+       \le B_+\le B_-
+       \le\frac{1+2\rho}{1+\rho}D^{\mathsf T}D .
+ \label{f16v2:Bbounds}
+\end{equation}
+Define
+\[
+       C_{\rm eff}
+       =\left[G^{-1}+\tfrac14(B_--B_+)\right]^{-1}.
+\]
+Then
+\begin{equation}
+ \frac{I}{1+16\rho/(1+2\rho)}
+       \le C_{\rm eff}\le30I ,
+ \label{f16v2:Ceffbounds}
+\end{equation}
+and, with
+\(\widetilde\kappa=\kappa_2(\det C_{\rm eff}/\det G)^{3/2}\),
+\begin{equation}
+ \mathcal B_{2,0}(y,y')
+   =\widetilde\kappa\,
+      e^{-y^{\mathsf T}B_+y/4}
+       \varphi_{C_{\rm eff}}(y-y')
+      e^{-y'^{\mathsf T}B_+y'/4}.
+ \label{f16v2:effective}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Since \(V_{2,+}\ge C_B^{-1}/2+A^{\mathsf T}A\),
+\[
+ A V_{2,+}^{-1}A^{\mathsf T}
+              \le2K(I+2K)^{-1}.
+\]
+The commuting functions of \(K\) obey the exact identity
+\[
+ 2I-(I+K)^{-1}-4K(I+2K)^{-1}
+                    =(I+K)^{-1}(I+2K)^{-1}.
+\]
+Substitute in \(B_+=2D^{\mathsf T}D-H_{\rm eff}-2P_{2,+}\)
+and use \(0\le K\le\rho I\) for the lower bound.
+The upper bound follows from \(P_{2,-}\ge0\) and
+\(H_{\rm eff}\ge(1+\rho)^{-1}D^{\mathsf T}D\).
+Inversion of \(V_{2,-}\ge V_{2,+}\) gives \(B_-\ge B_+\).
+
+Furthermore
+\[
+ 0\le B_--B_+
+   =2D^{\mathsf T}A(V_{2,+}^{-1}-V_{2,-}^{-1})A^{\mathsf T}D
+   \le\frac{4\rho}{1+2\rho}D^{\mathsf T}D.
+\]
+Every bridge belongs to four plaquettes; each mixed row has at
+most four bridge entries. Thus \(\|D\|^2\le16\).
+Together with \(I\le G\le30I\), this proves
+\eqref{f16v2:Ceffbounds}. Finally split the exponent in
+\eqref{f16v2:schur-kernel} into the two endpoint \(B_+\)
+terms and the difference term \(B_--B_+\).
+The Gaussian prefactor changes by the displayed determinant
+ratio, proving \eqref{f16v2:effective}.
+\end{proof}
+
+These comparisons prove \(\ker B_+=\ker D\).
+For the common-bridge subspace \(\mathcal E\) of V1,
+\(A^{\mathsf T}Dy=0\) and \(H_{\rm eff}y=D^{\mathsf T}Dy\).
+Thus
+\[
+ B_+y=B_-y=D^{\mathsf T}Dy,\qquad
+            (B_--B_+)y=0\quad(y\in\mathcal E).
+\]
+The full leading cube propagation has not generated a constant
+restoring term for those coarse collective modes.
+
+For clarity, even the positive oscillator frequencies of
+\eqref{f16v2:effective} have a soft finite-volume edge.
+Let \(\nu_{\min}^+\) be the least positive eigenvalue of
+\(C_{\rm eff}^{1/2}B_+C_{\rm eff}^{1/2}\).
+Then
+\begin{equation}
+                     \nu_{\min}^+\le60\sin^2(\pi/m).
+ \label{f16v2:soft}
+\end{equation}
+To prove it, use V1's common-bridge transverse cosine \(v\),
+orthogonal in the Euclidean metric to \(\ker D\).
+Its numerator is \(\langle v,D^{\mathsf T}Dv\rangle\).
+Choose the representative \(v+w\), \(w\in\ker D\), orthogonal
+to that kernel in the \(C_{\rm eff}^{-1}\) metric.
+Its numerator is unchanged, and its denominator is at least
+\(\|v+w\|^2/30\ge\|v\|^2/30\).
+The generalized minimum principle and V1's exact quotient
+\(2\sin^2(\pi/m)\) prove \eqref{f16v2:soft}.
+
+The zero directions include residual linearized gauge directions
+and torons. The full Euclidean Gaussian operator has free
+diffusion in these directions, not a normalizable isolated vacuum.
+If those directions are removed to discuss just its positive
+oscillator factors, a parameter \(\nu>0\) has Mehler ratio
+\((1+\nu/2+\sqrt{\nu+\nu^2/4})^{-1}\).
+Equation~\eqref{f16v2:soft} concerns this specified Gaussian
+factorization. It is neither a native physical gaplessness
+theorem nor a choice of physical time scaling.
+
+\subsection{The remaining full-operator return and verification}
+
+The exact compact kernel and the full Gaussian Schur response
+now include both time ends and all internal propagation within
+one step. The missing spectral implication is still substantive:
+a one-step compression does not bound the full complement.
+With \(P_\gamma=\mathcal I_\gamma\mathcal I_\gamma^*\),
+the actual two-step return is
+\[
+ \mathcal I_\gamma^*T_{\rm full,\gamma}
+       (I-P_\gamma)T_{\rm full,\gamma}\mathcal I_\gamma .
+\]
+It is nonnegative, but no sufficiently small relative bound
+uniform in spatial volume has been proved. The native bridge
+tails and the nonlinear common-bridge dynamics must also be
+kept under the same normalization. The fixed-volume domination
+in Proposition~\ref{f16v2:native-limit} is not such a bound.
+
+The next upstream target is to retain this return as a
+two-time or Schur/memory operator and test a volume-uniform
+relative comparison, rather than identify the compressed
+Gaussian spectrum with the full transfer spectrum.
+Independent physical-time calibration and interacting
+four-dimensional continuum reconstruction remain open.
+
+The diagnostic
+\begin{center}\small
+\path{scripts/verify_ym_f16_v2_joint_dressed_transfer.py}
+\end{center}
+checks noncommuting two-ended compact words, the actual
+two-cube kinetic completion and determinant, full-torus port
+incidences, the independent two-end Gaussian precision and
+plus/minus Schur formulas, the matrix identity behind
+\eqref{f16v2:Bbounds}, and the endpoint magnetic-square
+distinction. Finite checks supplement the proofs; they are not
+a continuum spectral certificate. All 4,582 new exact fixtures passed,
+together with the inherited V1 chain. The diagnostic uses exact
+elimination for the larger determinants, rather than the inherited
+small-matrix cofactor routine. It has 8,154 bytes and SHA--256
+\begin{center}\scriptsize\ttfamily
+95087B3BF6B4AA9517C734E8A35B690B9074EF3D9355AC7125B2A22340C59DCF.
+\end{center}
+
+The predecessor V1 has 25,601 bytes and SHA--256
+\begin{center}\scriptsize\ttfamily
+A04BB24BC54769C31EF36F591282F6ABCF828DA25920C369DCB9DA9F1EF27097.
+\end{center}
+Its body is preserved byte for byte; removing this append and
+restoring the title recovers that source. All 167 previously
+protected files remain unchanged. The last companion
+checkpoint is f15 V100 and the next is this lineage's V5.
+Only \texttt{.tex} files belong in \texttt{latex\_notes};
+build and visual-check products are kept outside that folder.
+
+\begin{firewall}
+V2 gives an exact full-compact joint kernel, a fixed-volume
+native dressed-compression limit with all internal ends
+integrated, and explicit volume-independent comparisons for
+its complete leading two-time Gaussian response.
+No small volume-uniform full-operator return, positive
+physical continuum mass gap, or interacting continuum
+Yang--Mills construction is proved. The goal remains unachieved.
+\end{firewall}
+
+\section{V3: extensive dressed-line leakage and a retained fast history}
+\label{f16v3:context}
+
+V2 computed one full step between the normalized dressed ends.
+We now ask what happens before inserting another dressed projection.
+The answer is not a small correction to the static conditional line:
+even the complete leading Gaussian transfer changes its fast
+covariance by an extensive amount. We prove a quantitative
+pre-root-restriction obstruction to a small relative return.
+We then integrate the fast variables along an arbitrary bridge
+history without intermediate projection. Its covariance and
+quadratic memory have volume- and time-length-independent decay.
+
+This is a change in the next analytic target, not a mass-gap claim.
+F15 V99--V100 concerned the magnetic image and its old oscillator
+occupations; V1 concerned bridge-only affinity; V2 concerned the
+joint one-step compression. The new calculation propagates the
+dressed image by the full Gaussian transfer and retains arbitrarily
+many fast time slices. The archive search also found spatial
+Gaussian blocking memory in f11 V32--V33 and native observable
+covariance estimates in f15 V61; neither is the conditional
+fast-history calculation below.
+
+\subsection{The propagated conditional vector is not the static dressed vector}
+
+All statements in this subsection concern V2's leading Gaussian
+model before the remaining root Gauss restriction.
+Write \(\mathsf T_0\) for its full transfer on the internal and
+bridge Euclidean coordinates, and
+\[
+ (\mathcal J_0 f)(x,y)=\psi_y(x)f(y),\qquad
+ \psi_y(x)=\frac{\Omega(x)e^{-|Ax+Dy|^2/4}}{\sqrt{F_2(y)}} .
+\]
+The vector \(\psi_y\) has norm one in the internal coordinates.
+Each displayed path matrix is tensored with \(I_3\) when acting
+on the three colour components. Put
+\begin{align}
+ N&=\mathsf M_B^{-1},&
+ S&=\mathsf H_B+A^{\mathsf T}A,&
+ \Lambda&=A^{\mathsf T}D,\notag\\
+ E_0&=N+\tfrac12(C_B^{-1}+\mathsf H_B),&
+ E&=E_0+A^{\mathsf T}A,&
+ P&=\tfrac12(C_B^{-1}+A^{\mathsf T}A).
+ \label{f16v3:definitions}
+\end{align}
+Here \(E\) is V2's two-end diagonal block \(V_{2,+}+N\).
+The precision in the amplitude \(\psi_z\), as opposed to its
+squared probability density, is \(P\):
+\[
+ \psi_z(x)=c(z)\exp[-x^{\mathsf T}Px/2-x^{\mathsf T}\Lambda z/2],
+                      \qquad c(z)>0.
+\]
+The sources and the positive scalar depend on the bridge field.
+
+For fixed initial bridge coordinate \(y\) and final coordinate \(z\),
+define the fast output feature
+\[
+ q_{z,y}(x)=\int \mathsf T_0(x,z;x',y)\psi_y(x')\,dx'.
+\]
+This definition has no intermediate fast projection.
+
+\begin{proposition}[Full-step covariance mismatch]
+\label{f16v3:propagation}
+Set
+\begin{equation}
+ \Delta_f=N(E_0^{-1}-E^{-1})N\ge0.
+ \label{f16v3:delta}
+\end{equation}
+There is a positive scalar \(c(z,y)\) such that
+\begin{equation}
+ q_{z,y}(x)=c(z,y)
+ \exp\left[
+   -\tfrac12x^{\mathsf T}(P+\Delta_f)x
+   -x^{\mathsf T}\bigl(\tfrac12\Lambda z+NE^{-1}\Lambda y\bigr)
+ \right].
+ \label{f16v3:feature}
+\end{equation}
+Consequently the squared normalized output feature has covariance
+\([2(P+\Delta_f)]^{-1}\otimes I_3\), independent of \(y,z\).
+It is not the covariance \((2P)^{-1}\otimes I_3\) of the static
+dressed line unless \(A=0\).
+\end{proposition}
+
+\begin{proof}
+The full kernel is the product of its internal and bridge heat
+densities and the two endpoint factors
+\[
+ \exp[-(x^{\mathsf T}\mathsf H_Bx+|Ax+Dz|^2)/4].
+\]
+After multiplication by \(\psi_y(x')\), the input precision is \(E\)
+and its linear source is \(Nx-\Lambda y\).
+Gaussian integration of \(x'\) leaves output precision
+\[
+ Q=N+\tfrac12S-NE^{-1}N
+\]
+and linear source \(-\Lambda z/2-NE^{-1}\Lambda y\).
+The cube ground-state equation gives the exact identity
+\begin{equation}
+ N+\tfrac12(\mathsf H_B-C_B^{-1})=NE_0^{-1}N.
+ \label{f16v3:riccati}
+\end{equation}
+For completeness, conjugate by \(\mathsf M_B^{1/2}\).
+On a cube mode with parameter \(t=4\) or \(6\), the two sides
+become
+\[
+ 1+t/2-\sqrt{t+t^2/4}
+       =\bigl(1+t/2+\sqrt{t+t^2/4}\bigr)^{-1};
+\]
+their product identity follows by squaring the radical.
+This proves \eqref{f16v3:riccati}, hence \(Q=P+\Delta_f\).
+Inversion reverses \(E\ge E_0\), so \(\Delta_f\ge0\).
+If \(\Delta_f=0\), invertibility of \(N,E,E_0\) implies
+\(A^{\mathsf T}A=0\). The covariance assertion follows by squaring
+the amplitude and normalizing its positive Gaussian.
+\end{proof}
+
+\subsection{A volume-extensive obstruction to a small static return}
+
+The covariance mismatch gives a uniform conditional overlap
+bound, not just a nonzero example.
+
+\begin{theorem}[Dressed-line retention after a full step]
+\label{f16v3:retention}
+For the actual parity-cube geometry with \(B=m^3\), define
+\[
+ \eta_B(z,y)=
+       \frac{|\langle\psi_z,q_{z,y}\rangle|^2}
+            {\|q_{z,y}\|_2^2}.
+\]
+Then, for every \(y,z\),
+\begin{equation}
+ 0<\eta_B(z,y)\le
+ \eta_B^{\rm cov}:=
+ \frac{\det(I+Z)^{3/2}}{\det(I+Z/2)^3}
+ \le e^{-c_*B}\le e^{-B/100000},
+ \qquad
+ c_*=\frac{50}{147}\frac{(25/1728)^2}{5}>10^{-5}.
+ \label{f16v3:retention-bound}
+\end{equation}
+Here \(Z\) is the relative covariance-precision change defined
+in the proof. The determinants retain all \(5B\) path modes,
+with the displayed power accounting for all three colours.
+\end{theorem}
+
+\begin{proof}
+Use bars to denote congruence by \(N^{-1/2}=\mathsf M_B^{1/2}\);
+in particular
+\[
+ \overline E_0=N^{-1/2}E_0N^{-1/2},\quad
+ W=N^{-1/2}A^{\mathsf T}AN^{-1/2},\quad
+ \overline P=N^{-1/2}PN^{-1/2}.
+\]
+Then
+\[
+ \overline\Delta_f
+   =\overline E_0^{-1}-(\overline E_0+W)^{-1},\qquad
+ Z=\overline P^{-1/2}\overline\Delta_f\,\overline P^{-1/2}.
+\]
+The eigenvalues of \(Z\) are the generalized eigenvalues of
+\((\Delta_f,P)\); no commuting-matrix assumption is being made.
+
+The inherited cube spectrum and covariance give
+\[
+ 5I\le\overline E_0\le8I,\qquad 2I\le\overline P\le6I.
+\]
+Indeed the exact bounds for \(\overline E_0\) are
+\(3+2\sqrt2\) and \(4+\sqrt{15}\).
+For the second assertion, the spectrum of the whitened
+\(C_B^{-1}\) lies between \(4\sqrt2\) and \(2\sqrt{15}\), and
+\(0\le W\le4I\).
+This last inequality follows from
+\(A=C_{\rm int}U_B\), \(\|C_{\rm int}\|\le2\), and
+\(U_B^{\mathsf T}U_B=N\).
+Moreover the exact diagonal Gram blocks
+\((A^{\mathsf T}A)_{bb}=2N_{bb}\) from f15 V99 give
+\[
+                           \Tr W=10B.
+\]
+These are bounds for the actual geometry, not assumptions
+on independently chosen toy matrices.
+
+Woodbury inversion, or continuous extension if \(W\) is singular,
+gives
+\[
+ \overline\Delta_f
+ =\overline E_0^{-1}W^{1/2}
+   (I+W^{1/2}\overline E_0^{-1}W^{1/2})^{-1}
+                       W^{1/2}\overline E_0^{-1}
+ \ge\frac59\,\overline E_0^{-1}W\overline E_0^{-1}.
+\]
+Taking traces and using \(\overline E_0\le8I\) yields
+\[
+ \Tr\overline\Delta_f\ge\frac{25}{288}B,\qquad
+ \Tr Z\ge\frac{25}{1728}B,\qquad 0\le Z\le\frac1{10}I.
+\]
+For the last estimate use
+\(\overline\Delta_f\le\overline E_0^{-1}\le I/5\) and
+\(\overline P\ge2I\).
+Cauchy--Schwarz on the \(5B\) eigenvalues gives
+\[
+                   \Tr Z^2\ge\frac{(25/1728)^2}{5}\,B.
+\]
+
+The squared overlap of two normalized Gaussian amplitudes with
+precisions \(P\) and \(P+\Delta_f\) is at most the value when
+their means coincide. Completing the square shows that unequal
+means multiply this value by \(e^{-a}\) for a nonnegative
+quadratic form \(a\). The coincident-mean determinant is precisely
+\(\eta_B^{\rm cov}\) in \eqref{f16v3:retention-bound}; congruence changes
+do not change it. For an eigenvalue \(0\le z\le1/10\),
+\[
+ \frac32\log\frac{(1+z/2)^2}{1+z}
+ =\frac32\log\left(1+\frac{z^2}{4(1+z)}\right)
+ \ge\frac{3z^2}{8(1+z/2)^2}
+ \ge\frac{50}{147}z^2 .
+\]
+We used \(\log(1+u)\ge u/(1+u)\), which follows by integrating
+its nonnegative derivative difference from zero.
+Summation proves the stated exponential bound.
+\end{proof}
+
+Let
+\[
+ \mathsf B_0=\mathcal J_0^*\mathsf T_0\mathcal J_0,\quad
+ \mathsf A_2=\mathcal J_0^*\mathsf T_0^2\mathcal J_0,\quad
+ \mathsf R_0=\mathsf A_2-\mathsf B_0^2
+ =\mathcal J_0^*\mathsf T_0(I-\mathcal J_0\mathcal J_0^*)
+                              \mathsf T_0\mathcal J_0\ge0.
+\]
+Their diagonal kernels satisfy
+\begin{align}
+ \mathsf A_2(y,y)&=\int\|q_{z,y}\|_2^2\,dz,\notag\\
+ \mathsf B_0^2(y,y)&=\int|\langle\psi_z,q_{z,y}\rangle|^2\,dz
+                 \le e^{-c_*B}\mathsf A_2(y,y).
+ \label{f16v3:diagonal}
+\end{align}
+All these diagonal integrals are finite. In fact the internal
+cut transfer has norm \((\lambda_\Box^0)^B\); its magnetic
+multipliers have norm at most one. Hence
+\[
+ \|q_{z,y}\|_2
+       \le(\lambda_\Box^0)^B\varphi_G(z-y),
+\]
+whose square is integrable in \(z\), uniformly in \(y\).
+
+For any bounded bridge window \(U\) of positive measure,
+the resulting operators localized at their input are
+Hilbert--Schmidt and
+\begin{equation}
+ \|(I-\mathcal J_0\mathcal J_0^*)\mathsf T_0
+                      \mathcal J_0\,1_U\|_{\rm HS}^2
+ \ge(1-e^{-c_*B})
+              \|\mathsf T_0\mathcal J_0\,1_U\|_{\rm HS}^2.
+ \label{f16v3:HS-loss}
+\end{equation}
+This follows by integrating \eqref{f16v3:diagonal}, or by
+orthogonal decomposition of each output feature.
+In particular a quadratic-form inequality
+\(\mathsf R_0\le\varepsilon\mathsf A_2\) on the entire
+pre-root-restriction coarse space requires
+\(\varepsilon\ge1-e^{-c_*B}\). To see this, sandwich by \(1_U\)
+and take the finite trace; the denominator is strictly positive.
+Thus no fixed \(\varepsilon<1\) works for all volumes in this model.
+
+This conclusion is stronger than a nonzero projection defect,
+but its scope is important. It does not assert pointwise
+positivity of every off-diagonal return kernel, nor does it
+turn a diagonal comparison into a reverse operator inequality.
+It does not apply automatically after physical Gauss
+restriction, to a low-energy subspace, or to the native compact
+transfer. In particular, V2's fixed-window one-step convergence
+alone does not transfer this full two-step statement to that
+native operator.
+
+\subsection{Exact elimination along an arbitrary bridge history}
+
+We now avoid intermediate projection altogether. Let \(n\ge1\),
+fix the bridge history \(\mathbf y=(y_0,\ldots,y_n)\), and
+integrate the internal coordinates \(x_0,\ldots,x_n\) in the
+kernel of \(\mathcal J_0^*\mathsf T_0^n\mathcal J_0\).
+Set \(E_{\rm i}=S+2N\), and define the \((n+1)\)-by-\((n+1)\)
+block precision
+\begin{equation}
+ (W_n)_{00}=(W_n)_{nn}=E,\qquad
+ (W_n)_{ii}=E_{\rm i}\ (0<i<n),\qquad
+ (W_n)_{i,i+1}=(W_n)_{i+1,i}=-N,
+ \label{f16v3:history-precision}
+\end{equation}
+with all other time blocks zero.
+Its time blocks have \(5B\) path coordinates.
+Let \(\mathcal L\mathbf y=(\Lambda y_0,\ldots,\Lambda y_n)\) and
+\[
+ a_n=\frac1{F_2(0)}
+       \left[\det C_B\,(\det\mathsf M_B)^n\det W_n\right]^{-3/2}.
+\]
+
+\begin{theorem}[Complete fast-history kernel]
+\label{f16v3:history}
+After integration of every internal time slice, the exact
+Gaussian history weight is
+\begin{align}
+ \mathcal W_n(\mathbf y)
+ &=a_n\prod_{i=0}^{n-1}\varphi_G(y_i-y_{i+1})
+       \exp\bigl(\mathcal E_n(\mathbf y)\bigr),\notag\\
+ \mathcal E_n(\mathbf y)
+ &=-\frac12\sum_{i=0}^n y_i^{\mathsf T}D^{\mathsf T}Dy_i
+   +\frac14\bigl(y_0^{\mathsf T}H_{\rm eff}y_0
+                         +y_n^{\mathsf T}H_{\rm eff}y_n\bigr)
+   +\frac12(\mathcal L\mathbf y)^{\mathsf T}
+                           W_n^{-1}(\mathcal L\mathbf y).
+ \label{f16v3:history-weight}
+\end{align}
+The kernel of \(\mathcal J_0^*\mathsf T_0^n\mathcal J_0\) is
+\(\int\mathcal W_n(\mathbf y)\,dy_1\cdots dy_{n-1}\).
+No internal state or intervening bridge configuration has
+been discarded. The determinant in \(a_n\) is part of this
+identity, not a freely chosen spectral normalization.
+\end{theorem}
+
+\begin{proof}
+Each interior time slice receives two magnetic endpoint
+multipliers, whereas each external slice receives one
+transfer multiplier and one multiplier from its dressed
+end vector. Thus the mixed magnetic power is two at
+\emph{every} slice. Each linear source is consequently
+\(-\Lambda y_i\).
+The internal magnetic power is two at interior slices;
+at the two ends there is one such factor and one
+\(\Omega\) amplitude. The kinetic differences contribute
+\(\sum_{i=0}^{n-1}(x_i-x_{i+1})^{\mathsf T}N(x_i-x_{i+1})\).
+These observations give exactly \eqref{f16v3:history-precision}.
+Its quadratic form can also be written as
+\begin{align*}
+ \mathbf x^{\mathsf T}W_n\mathbf x
+ ={}&x_0^{\mathsf T}(E-N)x_0+x_n^{\mathsf T}(E-N)x_n\\
+ &+\sum_{i=1}^{n-1}x_i^{\mathsf T}Sx_i
+   +\sum_{i=0}^{n-1}(x_i-x_{i+1})^{\mathsf T}N(x_i-x_{i+1}),
+\end{align*}
+which proves strict positivity.
+Gaussian integration contributes the last term in
+\(\mathcal E_n\) and \(\det(W_n)^{-3/2}\).
+The scalar \((2\pi)^{15B(n+1)/2}\) from integration cancels
+the \(n\) internal heat prefactors and the two ground-amplitude
+prefactors. Their remaining factors are
+\((\det\mathsf M_B)^{-3n/2}(\det C_B)^{-3/2}\).
+Finally the two factors \(F_2^{-1/2}\) contribute \(F_2(0)^{-1}\)
+and the displayed external \(H_{\rm eff}\) term.
+This proves the history formula. Positivity permits the
+iterated integrations; their interpretation as the stated
+bounded-operator kernel follows from composition of the
+positive Gaussian transfer kernels.
+\end{proof}
+
+For \(n=1\), the plus/minus transform has precisions
+\(E-N=V_{2,+}\) and \(E+N=V_{2,-}\), so this is exactly V2,
+including its scalar. For every \(n\) one may compute the
+determinant without dropping its boundary terms by
+\[
+ R_0=E,\qquad R_i=(W_n)_{ii}-NR_{i-1}^{-1}N,\qquad
+                   \det W_n=\prod_{i=0}^n\det R_i .
+\]
+All pivots are strictly positive by block Gaussian elimination.
+The order of the matrix products matters.
+
+\subsection{Uniform temporal and space--time locality of the fast memory}
+
+Write \(\mathbb N=I_{n+1}\otimes N\) and
+\(\widehat W_n=\mathbb N^{-1/2}W_n\mathbb N^{-1/2}\).
+The graph for space--time locality has a vertex for each
+(time slice, spatial block), with the nearest-time and
+nearest-spatial-block edges.
+
+\begin{theorem}[Length-independent conditional fast response]
+\label{f16v3:locality}
+For every \(B,n\),
+\begin{equation}
+                        4I\le\widehat W_n\le15I.
+ \label{f16v3:uniform-spectrum}
+\end{equation}
+For sets \(\mathcal E,\mathcal F\) at graph distance \(d\),
+\begin{equation}
+ \|P_{\mathcal E}\widehat W_n^{-1}P_{\mathcal F}\|
+                         \le\frac14(11/15)^d .
+ \label{f16v3:spacetime}
+\end{equation}
+A sharper purely temporal bound is
+\begin{equation}
+ \|N^{1/2}(W_n^{-1})_{ij}N^{1/2}\|
+       \le\frac{q^{|i-j|}}{p_*-2},
+ \qquad p_*=3+2\sqrt2,\quad q=2/p_*<1.
+ \label{f16v3:temporal}
+\end{equation}
+These are conditional fast-covariance bounds for arbitrary
+bridge histories, not decay of the complete physical
+Yang--Mills correlations.
+\end{theorem}
+
+\begin{proof}
+Whitening the quadratic-form decomposition in the preceding
+proof gives a time-path Laplacian, with norm at most four.
+The interior on-site term is the whitened
+\(\mathsf H_B+A^{\mathsf T}A\), between \(4I\) and \(10I\).
+The external on-site term is the whitened \(E-N\), between
+\((2+2\sqrt2)I\) and \((7+\sqrt{15})I<11I\).
+This proves \eqref{f16v3:uniform-spectrum}.
+All off-site entries of \(\widehat W_n\) join adjacent
+space--time blocks: \(A^{\mathsf T}A\) has only nearest-block
+entries, and the whitening is spatially block diagonal.
+Thus \(T_n=I-\widehat W_n/15\) satisfies
+\(0\le T_n\le(11/15)I\), with the same finite range.
+The convergent expansion
+\[
+             \widehat W_n^{-1}=\frac1{15}\sum_{k\ge0}T_n^k
+\]
+has no connection between those sets before degree \(d\).
+The geometric tail is \((11/15)^d/4\), proving
+\eqref{f16v3:spacetime} without a set-cardinality factor.
+
+For the temporal estimate, keep entire spatial slices as blocks.
+The diagonal blocks of \(\widehat W_n\) are at least \(p_*I\):
+the external ones are \(\overline E_0+W\), and the interior
+ones are at least \(6I\). Its temporal off-diagonal blocks are
+\(-I\). If \(\mathcal D_n\) is its time-block diagonal,
+write \(\widehat W_n=\mathcal D_n-\mathcal A_n\), where
+\(\mathcal A_n\) is the path adjacency with identity blocks.
+Then
+\(\|\mathcal D_n^{-1/2}\mathcal A_n\mathcal D_n^{-1/2}\|
+\le2/p_*=q\).
+This matrix need not be positive, but its norm-convergent
+Neumann series is valid. A term of degree less than
+\(|i-j|\) has zero \(ij\) block.
+Multiplication by the two diagonal inverse square roots and
+summation give
+\(p_*^{-1}q^{|i-j|}/(1-q)=q^{|i-j|}/(p_*-2)\).
+Undoing the whitening proves \eqref{f16v3:temporal}.
+\end{proof}
+
+There is also a curvature-relative truncation estimate.
+Let \(\mathcal Q_n(\mathbf y)\) denote the last term in
+\(\mathcal E_n\), and let \(\mathcal Q_n^{[r]}\) keep only
+its ordered pairs with \(|i-j|\le r\), for an integer \(r\ge0\).
+Since \(\|N^{-1/2}A^{\mathsf T}\|\le2\), the temporal bound yields
+\begin{equation}
+ |\mathcal Q_n(\mathbf y)-\mathcal Q_n^{[r]}(\mathbf y)|
+ \le \frac{4}{p_*-2}\frac{q^{r+1}}{1-q}
+                               \sum_{i=0}^n\|Dy_i\|^2 .
+ \label{f16v3:memory-tail}
+\end{equation}
+Indeed each ordered matrix element is bounded by
+\(4q^{|i-j|}\|Dy_i\|\|Dy_j\|/(p_*-2)\).
+The omitted scalar matrix has row sum at most
+\(2q^{r+1}/(1-q)\); its quadratic form is bounded by that
+row sum times \(\sum_i\|Dy_i\|^2\). Include the factor
+\(1/2\) in \(\mathcal Q_n\) to obtain the displayed constant.
+No spatial volume or time-length factor multiplies this
+relative curvature budget. Truncation is an estimate on the
+quadratic action, not automatically an operator-norm or
+positivity-preserving approximation.
+
+For histories taking values in V1's common-bridge subspace,
+\(\Lambda y_i=0\) at every time. The entire fast source
+response \(\mathcal Q_n\), not merely its long-time tail,
+then vanishes. The determinant \(a_n\) is independent of
+the bridge history. This statement concerns the fixed-history
+weight; integrating other bridge modes is a further operation.
+It does not create a constant restoring term or settle the
+native dynamics of those common modes.
+
+\subsection{Direction of the next native estimate and verification}
+
+The exact native counterpart of the return is still
+\[
+ \mathcal I_\gamma^*T_{\rm full,\gamma}
+        (I-\mathcal I_\gamma\mathcal I_\gamma^*)
+                         T_{\rm full,\gamma}\mathcal I_\gamma.
+\]
+V3 shows why asking for a small relative return on the entire
+static dressed carrier is not a promising unrestricted
+Gaussian target: \eqref{f16v3:HS-loss} goes the opposite way.
+A physical low-energy restriction would require its own
+estimate; it is not supplied by this obstruction.
+
+The constructive replacement is the unprojected fast-history
+integral. Its Gaussian precision remains uniformly coercive
+even though the retained bridge dynamics has soft directions.
+The next useful native theorem must control the non-Gaussian
+conditional fast integral, its determinant or pressure
+normalization, and its bridge-field tails in a norm compatible
+with the physical Gauss restriction and the same full transfer
+top value. The compact action is not globally convex in a
+single chart, and V2's constants depend on volume. Consequently
+\eqref{f16v3:memory-tail} is not yet a native uniform cluster or
+spectral estimate. Physical-time calibration and an interacting
+continuum construction remain additional open requirements.
+
+The new diagnostic is
+\begin{center}\small
+\path{scripts/verify_ym_f16_v3_fast_history.py}.
+\end{center}
+Its 2,075 exact rational fixtures check the noncommuting
+propagated precision and source, unequal-mean overlap
+completion, full-history action and determinant recursion,
+one-step agreement with V2, finite-range propagation, and
+length-independent memory tails. They also check the rational
+constants in the extensive leakage bound. The inherited V2
+chain passed. Finite fixtures supplement the proofs and do
+not certify a physical mass gap.
+The checker has 7,716 bytes and SHA--256
+\begin{center}\scriptsize\ttfamily
+811A66019E7A8B4A78D6CF8C1F8F6B2882D318BBA5D2B57D6E4D5C274275EA02.
+\end{center}
+
+The predecessor V2 has 48,007 bytes and SHA--256
+\begin{center}\scriptsize\ttfamily
+D8BC72F2B7E92E94C2B8E3AF848D9580563E5F9302CA13E8843909C42AB80F6F.
+\end{center}
+Its body is preserved byte for byte: remove this append and
+restore the title to recover it. The 168 previously protected
+files are unchanged. The last companion checkpoint is f15 V100;
+the next is f16 V5. Only \texttt{.tex} files belong in
+\texttt{latex\_notes}; build products remain elsewhere.
+
+\begin{firewall}
+V3 proves extensive static dressed-line loss and a conditional,
+unprojected fast-history formula with uniform Gaussian
+space--time locality and curvature-relative temporal truncation.
+The leakage obstruction is before physical Gauss restriction.
+No native volume-uniform memory bound, nontrivial interacting
+continuum construction, or positive physical Yang--Mills
+mass gap is established. The full goal remains unachieved.
+\end{firewall}
+
+\end{document}
