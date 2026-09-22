@@ -659,7 +659,7 @@ def IsRealization.toStationaryRenewalGraph (hm : ∀ x, 0 < m x) (hsum : ∑ x, 
       exact hk.conductance x y
     rw [hfun]
     exact Relation.ReflTransGen.mono
-      (fun a b hab => G.pairConductance_pos_of_adjacent c hc hab) (hG x y)
+      (fun a b hab => G.pairConductance_pos_of_adjacent c hc hab) x y (hG x y)
 
 /-- Conversely a stationary finite renewal graph whose conductance is carried
 by `(G, c)` is a stationary realization of `(m, G, c)`. -/
