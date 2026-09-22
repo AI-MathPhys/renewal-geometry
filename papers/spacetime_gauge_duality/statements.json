@@ -320,7 +320,7 @@
       "RenewalGeometry/Commutant/IsotypicCommutantExact.lean:RenewalGeometry.IsotypicAlgebra.image_pi_matrix",
       "RenewalGeometry/Commutant/IsotypicCommutantExact.lean:RenewalGeometry.IsotypicAlgebra.commutant_pi_matrix",
       "RenewalGeometry/Commutant/MatrixFactorNormalForm.lean:RenewalGeometry.matrix_representation_dimension",
-      "RenewalGeometry/Commutant/EdgeCommutantBasisExact.lean:RenewalGeometry.commutant_finrank_eq_seven",
+      "RenewalGeometry/Commutant/EdgeCommutantBasisExact.lean:RenewalGeometry.EdgeCommutantBasis.commutant_finrank_eq_seven",
       "RenewalGeometry/StandardModel/ActiveResidualAlgebra.lean:RenewalGeometry.ActiveResidual.commutant_eq",
       "RenewalGeometry/StandardModel/ActiveResidualAlgebra.lean:RenewalGeometry.ActiveResidual.bicommutant_eq"
     ],
@@ -333,8 +333,8 @@
     "title": "Degree-one internal-colour obstruction",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Commutant/EdgeCommutantDimensionExact.lean:RenewalGeometry.no_M3_embedding",
-      "RenewalGeometry/Commutant/EdgeCommutantBasisExact.lean:RenewalGeometry.commutant_finrank_eq_seven"
+      "RenewalGeometry/Commutant/EdgeCommutantDimensionExact.lean:RenewalGeometry.EdgeCommutant.no_M3_embedding",
+      "RenewalGeometry/Commutant/EdgeCommutantBasisExact.lean:RenewalGeometry.EdgeCommutantBasis.commutant_finrank_eq_seven"
     ],
     "note": "Partial: the degree-one commutant on the ordered-root carrier has dimension 7 and admits no injective linear map from M_3(C) (first clause, in dimension-counting form stronger than 'no unital copy'). Missing: the second clause after adjoining one external-trivial private contrast line (census (2,2,1,1), algebra M_2+M_2+C+C of dimension 10, where the dimension argument no longer applies).",
     "difficulty": "medium",
@@ -345,8 +345,8 @@
     "title": "Flat-depth multiplicity-birth obstruction",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Predictive/FutureWordSaturationExact.lean:RenewalGeometry.futureKernel_eq_iff_invariant",
-      "RenewalGeometry/Predictive/FutureWordSaturationExact.lean:RenewalGeometry.futureKernel_eq_of_stable",
+      "RenewalGeometry/Predictive/FutureWordSaturationExact.lean:RenewalGeometry.FutureWordSaturation.futureKernel_eq_iff_invariant",
+      "RenewalGeometry/Predictive/FutureWordSaturationExact.lean:RenewalGeometry.FutureWordSaturation.futureKernel_eq_of_stable",
       "RenewalGeometry/Predictive/GeneratedAlgebraFlatness.lean:RenewalGeometry.flat_exhausts_generated_algebra_exact"
     ],
     "note": "Partial: flatness-implies-stabilization is proved for the dual future-kernel chain (K_{r+1} = K_r iff K_r is letter-invariant, and then K_m = K_r for all m >= r) and for generated-algebra word filtrations; missing: the Gram-rank formulation rank K_r = rank K_{r+1} => V_s = V_r on the reachable physical carrier and the conclusion m_0 <= 2 => no external-trivial M_3 factor, r_col^birth = infinity.",
@@ -510,9 +510,9 @@
     "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Arithmetic/SMDescent.lean:RenewalGeometry.hypercharge_z6_kernel",
-      "RenewalGeometry/StandardModel/AnomalyFreeFieldShellGaugeQuotientExact.lean:RenewalGeometry.fieldShell_Z6_descent",
-      "RenewalGeometry/StandardModel/SMCentralDescentSelector.lean:RenewalGeometry.centralKernelActsTrivially_iff",
-      "RenewalGeometry/StandardModel/AnomalyFreeFieldShellGaugeQuotientExact.lean:RenewalGeometry.smfs_anomaly_free_quotient_carrier"
+      "RenewalGeometry/StandardModel/AnomalyFreeFieldShellGaugeQuotientExact.lean:RenewalGeometry.AnomalyFreeFieldShellGaugeQuotient.fieldShell_Z6_descent",
+      "RenewalGeometry/StandardModel/SMCentralDescentSelector.lean:RenewalGeometry.SMCentralDescentSelector.centralKernelActsTrivially_iff",
+      "RenewalGeometry/StandardModel/AnomalyFreeFieldShellGaugeQuotientExact.lean:RenewalGeometry.AnomalyFreeFieldShellGaugeQuotient.smfs_anomaly_free_quotient_carrier"
     ],
     "note": "Partial: the generator z = (e^{2 pi i/3} I_3, -I_2, e^{i pi/3}) acts trivially on every displayed multiplet (kernel congruence 6 | 2t + 3d + y for Q, L, u^c, d^c, e^c, nu^c, and the field-shell rows Q,U^c,D^c,L,E^c,H), i.e. K is contained in the common kernel; missing: the converse that the common kernel is exactly <z> (faithfulness of G~/K), disclosed as prose in the SMDescent docstring.",
     "difficulty": "medium",

@@ -269,9 +269,14 @@ def check_paper(name: str, index: dict[str, set[str]]) -> int:
                 errors.append(f"{key}: Lean module not found: {module}")
                 continue
             names = index[module]
-            if decl not in names and decl.split(".")[-1] not in names:
+            if decl not in names:
+                hint = ""
+                short = decl.split(".")[-1]
+                cands = sorted(n for n in names if n.endswith("." + short) and n.count(".") > 0)
+                if cands:
+                    hint = f" (did you mean {cands[0]}?)"
                 errors.append(f"{key}: declaration {decl} not found in "
-                              f"{module}")
+                              f"{module}{hint}")
 
     counts = Counter(e["status"] for e in status_map.values())
     for s in STATUSES:
