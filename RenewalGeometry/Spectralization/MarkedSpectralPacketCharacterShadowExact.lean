@@ -197,8 +197,9 @@ theorem MarkedFiniteSpectralPacket.mem_autGroup_iff (S : MarkedFiniteSpectralPac
           (U : Matrix K K ℂ) *ᵥ S.packet.realOperation x) ∧
       U ∈ algebraConventionSubgroup S.packet S.convention ∧
       U • S.mark = S.mark := by
-  simp only [MarkedFiniteSpectralPacket.autGroup, Subgroup.mem_inf, MulAction.mem_stabilizer_iff]
-  rfl
+  simp only [MarkedFiniteSpectralPacket.autGroup, Subgroup.mem_inf, MulAction.mem_stabilizer_iff,
+    and_assoc]
+  exact Iff.rfl
 
 end Packet
 
