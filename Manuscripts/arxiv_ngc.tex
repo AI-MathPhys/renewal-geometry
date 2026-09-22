@@ -1,0 +1,4374 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.02in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{booktabs,array,tabularx}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,capitalise]{cleveref}
+
+% -----------------------------------------------------------------------------
+% separate tables of contents for the main text and Mathematical Supplement
+% -----------------------------------------------------------------------------
+\newif\ifmathsupplement
+\mathsupplementfalse
+
+\makeatletter
+\let\RG@addcontentsline\addcontentsline
+\renewcommand{\addcontentsline}[3]{%
+  \def\RG@tocname{#1}%
+  \def\RG@toc{toc}%
+  \ifx\RG@tocname\RG@toc
+    \ifmathsupplement
+      \RG@addcontentsline{supptoc}{#2}{#3}%
+    \else
+      \RG@addcontentsline{maintoc}{#2}{#3}%
+    \fi
+  \else
+    \RG@addcontentsline{#1}{#2}{#3}%
+  \fi
+}
+
+\newcommand{\maintableofcontents}{%
+  \section*{Contents}%
+  \IfFileExists{\jobname.maintoc}{%
+    \@starttoc{maintoc}%
+  }{%
+    \newwrite\RGmaintoc
+    \immediate\openout\RGmaintoc=\jobname.maintoc
+    \immediate\closeout\RGmaintoc
+    \@starttoc{maintoc}%
+  }%
+}
+
+\newcommand{\supplementtableofcontents}{%
+  \section*{Contents of the Mathematical Supplement}%
+  \IfFileExists{\jobname.supptoc}{%
+    \@starttoc{supptoc}%
+  }{%
+    \newwrite\RGsupptoc
+    \immediate\openout\RGsupptoc=\jobname.supptoc
+    \immediate\closeout\RGsupptoc
+    \@starttoc{supptoc}%
+  }%
+}
+
+\makeatother
+\usepackage{tikz-cd}
+\setlength{\emergencystretch}{4em}
+\raggedbottom
+\hbadness=10000
+
+% -----------------------------------------------------------------------------
+% theorem environments
+% -----------------------------------------------------------------------------
+\newtheorem{mastertheorem}{Master Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{countertheorem}[theorem]{Countertheorem}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interpretation}[theorem]{Interpretation}
+\newtheorem{scope}[theorem]{Scope statement}
+
+\crefname{mastertheorem}{Master Theorem}{Master Theorems}
+\Crefname{mastertheorem}{Master Theorem}{Master Theorems}
+
+% -----------------------------------------------------------------------------
+% notation
+% -----------------------------------------------------------------------------
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Torus}{\mathbb T}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\ip}[2]{\left\langle #1,#2\right\rangle}
+\newcommand{\A}{\mathcal A}
+\newcommand{\Hh}{\mathcal H}
+\newcommand{\Om}{\Omega}
+\newcommand{\GT}{\boldsymbol{\mathbb T}_{\mathrm{Grand}}}
+\newcommand{\GTX}{\boldsymbol{\mathbb T}_{\mathrm{Grand},X}}
+\newcommand{\Lip}{\operatorname{Lip}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\supplement}{Appendices}
+\newcommand{\EssIm}{\operatorname{EssIm}}
+\newcommand{\Curr}{\operatorname{Curr}}
+\newcommand{\RReal}{\operatorname{RReal}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\McM}{\operatorname{McM}}
+\newcommand{\RG}{\operatorname{RG}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+
+\title{\textbf{From Predictive Dynamics to Spectral Geometry}}
+
+\author{%
+  Aur\'elien P\'elissier$^{\dagger}$\\
+  {\small $^{\dagger}$Correspondence: \href{mailto:aurelien.pelissier.38@gmail.com}{aurelien.pelissier.38@gmail.com}}%
+  \vspace{-0.5cm}
+}
+\date{}
+
+
+
+\begin{document}
+\maketitle
+
+
+
+\begin{abstract}
+In Alain Connes' noncommutative geometry, geometry is encoded by an algebra, a Hilbert space, and a Dirac operator taken as fundamental spectral data. We show that these structures can instead emerge from a more primitive predictive dynamics. A compatible first-order variation on the induced history algebra canonically generates a real even Hodge--Dirac spectral triple, while the algebra alone determines neither its metric scale nor the full Dirac operator.
+%
+The resulting spectral geometry is an information-reduced description: dynamically inequivalent predictive systems can share the same effective spectral data. Nevertheless, finite geometries become reconstructible after finitely many calibrations, and on periodic three-dimensional lattice approximants the emergent spectral distance converges to a Riemannian metric reconstructed independently from the dynamics.
+%
+Thus Connes-type spectral geometry may arise not as fundamental structure, but as an effective geometric description of richer underlying dynamics. This provides a concrete setting in which noncommutative geometry need not be fundamental, but may instead arise as a coarse-grained spectral description.
+%
+A \texttt{Lean} formalization is available at
+\url{https://github.com/AI-MathPhys/renewal-geometry}.
+
+\end{abstract}
+
+\medskip
+\noindent\textbf{Keywords.}
+Noncommutative geometry; spectral triples; Renewal Geometry; predictive dynamics;
+Hodge--Dirac operators; Connes distance; emergent geometry; spectral reconstruction.
+\setcounter{tocdepth}{2}
+
+
+\vfill
+
+\maintableofcontents
+
+
+\newpage
+
+
+
+% =============================================================================
+\section{Introduction}
+\label{sec:introduction}
+% =============================================================================
+
+Many spaces that arise naturally in mathematics and physics do not admit a
+satisfactory description as ordinary geometric spaces. Quotients may be singular,
+points may fail to capture the relevant observables, and the structures of interest
+may be encoded more faithfully by operators than by a classical manifold. In such
+situations the usual geometric language---built from points, coordinates, and
+functions on a well-behaved space---can cease to be adequate, even though an
+algebra of observables remains meaningful.
+
+Noncommutative geometry was developed to address this problem. Connes' programme
+replaces the requirement of an underlying point-set space by an operator-algebraic
+description in which an algebra plays the role of generalized coordinates. In the
+commutative case this remains compatible with ordinary geometry, since a suitable
+commutative algebra determines the underlying space through Gelfand duality.
+Allowing the algebra to become noncommutative extends the same principle to
+settings for which no classical space of points need exist.
+
+The spectral formulation equips this generalized coordinate algebra with geometry.
+A compact spin manifold can be encoded by an algebra $\mathcal A$ represented on
+a Hilbert space $\mathcal H$, together with a Dirac operator $D$
+\cite{Connes1994}. The representation supplies the operator-theoretic carrier,
+while $D$ encodes differential and metric information.  Under the reconstruction
+axioms for commutative spectral triples, this operator data recovers compact spin
+geometry \cite{RennieVarilly2008,connesreconstruction}; in the genuinely
+noncommutative case the same operator-geometric language continues to apply even
+when no ordinary underlying space exists.
+
+Spectral triples consequently provide a common language for noncommutative spaces,
+differential calculi, index theory, and metric geometry. The Connes distance
+formula turns the commutator with $D$ into a metric notion, making the Dirac
+operator simultaneously a differential and geometric object. Related work on
+compact quantum metric spaces formulates metric information at the level of an
+algebra equipped with a Lipschitz seminorm \cite{Rieffel1999}.  Rieffel's quantum
+Gromov--Hausdorff distance and the later propinquity and spectral propinquity
+provide frameworks for convergence of quantum metric spaces and metric spectral
+triples \cite{Rieffel2004,Latremoliere2022,FarsiLatremolierePacker2024}, while real
+structures and gradings encode analogues of spin and orientation data.
+
+A different structural question is whether the objects entering this spectral
+description must themselves be regarded as primitive. This is logically prior to
+spectral reconstruction: rather than asking which geometry is encoded by a given
+spectral triple, one asks whether the algebra, representation, differential
+structure, and Dirac data can arise from an underlying dynamics in which none of
+them is initially prescribed.
+
+\paragraph{From predictive dynamics to spectral geometry.}
+
+Renewal Geometry provides one setting in which this question can be posed
+operationally \cite{PelissierRenewalSpacetime2026}. Its starting point is not a
+manifold, graph, causal order, algebra, Hilbert space, or spectral triple, but a
+finite operational process specified by composable intervention histories and
+their conditional future statistics. Histories that cannot be distinguished by
+any admissible future continuation are identified. The resulting
+future-equivalence quotient reconstructs the minimum persistent predictive
+carrier of the process rather than requiring such a carrier to be supplied
+independently.
+
+Complete operational statistics then reconstruct a canonical positive history
+object, the \emph{Renewal Grand Tensor}.  We denote the Grand Tensor associated
+with a finite predictive system $X$ by $\GTX$.  Its role is pregeometric: it
+records which distinctions survive prediction, how represented histories compose,
+and how they overlap, before positions, distances, metrics, or continuum geometry
+have been assigned.  The corresponding history algebra and positive moment
+structure therefore arise from the operational process rather than being inserted
+as geometric input.
+
+For the present paper, the relevant interface is the algebraic content carried by
+$\GTX$.  The Grand Tensor canonically supplies the future-minimal predictive
+carrier, the represented history algebra $\A_X^{\mathrm{hist}}$, and its positive
+moment structure.  On the finite algebra there is in particular an intrinsic
+normalized regular trace, which will provide one canonical choice of $\tau_X$.
+To pass from this reconstructed algebraic object to spectral geometry, one then
+specifies a compatible first-order variation $\delta_X$ of the history algebra.
+Thus the interface used here is
+\begin{equation}
+\GTX
+\longmapsto
+(\A_X^{\mathrm{hist}},\tau_X)
+\overset{\delta_X}{\longrightarrow}
+(\A_X,\Hh_X,D_X,J_X,\gamma_X).
+\label{eq:RGT-spectral-interface}
+\end{equation}
+The first arrow is reconstructed directly from the operational statistics and is
+recalled self-containedly in Section~\ref{sec:finite-main}.  The second is the
+Hodge--Dirac spectralization studied in this paper.  The Grand Tensor is not
+identified with the displayed algebraic or spectral data: it retains the
+predictive carrier and complete positive history structure, including information
+that need not survive in the spectral image.  Nor do we assume that the Grand
+Tensor or its algebra alone fixes $\delta_X$; the first-order variation is exactly
+the additional datum whose metric scale and Dirac ambiguity are analyzed below.
+
+The same $\GTX$ also supports the separate Lorentzian spacetime construction
+developed within the Renewal Geometry framework~\cite{PelissierRenewalSpacetime2026}.
+The present work asks instead whether
+Connes-type spectral geometry can arise from a compatible first-order variation
+of its reconstructed history algebra.  The spacetime-specific assumptions of the
+companion construction are not used below; once a finite-dimensional unital
+$C^*$-algebra $\A$, a faithful tracial state $\tau$, and a compatible real
+Hilbert-bimodule derivation $\delta$ are supplied, the finite spectralization
+results are ordinary operator-theoretic statements independent of the operational
+route by which $\A$ was obtained.
+
+The resulting problem has both a forward and an inverse aspect. On the forward
+side one asks whether a first-order predictive differential canonically produces
+the structures of spectral geometry, and whether the resulting metric has an
+independent dynamical meaning. On the inverse side one asks which spectral
+geometries can be reached, what additional data are required to reconstruct a
+full Dirac operator, and whether different microscopic dynamics can have the same
+spectral image.
+
+\paragraph{What lies before a spectral triple?}
+
+At the finite-dimensional level, Krajewski classified finite spectral triples in
+terms of finite matrix data and diagrams \cite{Krajewski1998}.  This gives a
+powerful classification of already specified finite spectral geometries, but it
+does not address whether the algebraic carrier or Dirac data can themselves be
+reconstructed from an operational dynamics.
+
+Several constructions derive spectral triples from other supplied geometric or
+hierarchical structure.  For approximately finite-dimensional $C^*$-algebras, a
+Dirac operator can be built naturally from a prescribed finite-dimensional
+filtration \cite{ChristensenIvan2006}.  Weighted trees, ultrametric Cantor sets,
+fractal spaces, stationary Bratteli diagrams, and aperiodic systems provide further
+constructions in which the underlying space, algebra, hierarchy, or incidence
+structure is already given
+\cite{PearsonBellissard2009,ChristensenIvanSchrohe2012,KellendonkSavinien2012}.
+These results show that the Dirac operator need not be specified independently,
+but their mathematical entrance remains a pre-existing algebraic or geometric
+carrier.
+
+A related dynamical literature constructs or extends spectral triples from a
+prescribed $C^*$-dynamical system.  Crossed-product constructions attach spectral
+data to given group actions \cite{Paterson2014}; for symbolic dynamics, spectral
+triples have been constructed on subshift algebras and their crossed products
+\cite{JulienPutnam2016}; and analogous constructions have been developed for
+irreversible $C^*$-dynamical systems \cite{AielloGuidoIsola2022}.  Here again the
+dynamics acts on an algebra that is supplied before spectralization.  The present
+question differs at the entrance: the history algebra itself is reconstructed only
+after predictive future-equivalence has removed operationally invisible
+refinements.
+
+A particularly close line of work comes from quantum Riemannian geometry. Majid
+has shown that a geometrically realized Dirac operator can be constructed
+canonically from a prescribed noncommutative coordinate algebra, differential
+calculus, quantum metric, and compatible bimodule connection, with explicit
+realizations on graphs, lattices, the fuzzy sphere, and matrix algebras
+\cite{Majid2025}. This places the Dirac operator downstream of quantum metric and
+differential data. The present question begins one level earlier: neither the
+coordinate algebra nor the differential and metric structures from which the
+Dirac operator is built are assumed at the operational entrance.
+
+An even closer dynamical precedent is provided by noncommutative potential theory.
+Cipriani and Sauvageot showed that a tracially symmetric Dirichlet form on a
+$C^*$-algebra admits a canonical realization through a closable derivation into a
+Hilbert bimodule, with the Markov generator represented by the corresponding
+divergence \cite{CiprianiSauvageot2003}.  This calculus has been used to define
+Dirac operators on fractals \cite{HinzTeplyaev2013}, and Hinz, Kelleher and
+Teplyaev constructed spectral triples from regular Dirichlet and resistance forms,
+showing in the compact strongly local case that the Connes distance coincides with
+the intrinsic metric \cite{HinzKelleherTeplyaev2015}.  Subsequent work has related
+Hodge--Dirac spectral triples of sub-Markovian semigroups to heat-kernel and
+spectral-dimension estimates \cite{Cipriani2016,Arhancet2024}.  These constructions
+are especially close to the Hodge--Dirac layer used below, but they begin with the
+algebra, reference state or trace, and Dirichlet or Markov structure already
+supplied.
+
+The operational entrance also has established precedents. Quantum combs and
+process-tensor formalisms encode complete multitime intervention statistics by
+positive causal process objects and describe memory-bearing quantum dynamics
+without imposing a Markov approximation
+\cite{ChiribellaDArianoPerinotti2009,PollockProcessTensor2018,PollockEtAl2018}.
+They reconstruct or represent a multitime process from intervention statistics,
+but do not by themselves identify histories by predictive future-equivalence and
+then use that quotient to construct the coordinate algebra of a spectral geometry.
+
+There is also a broad classical literature in which state is defined through
+future predictions rather than hidden microscopic labels.  Observable operator
+models encode stochastic processes through operators acting on observable
+statistics \cite{Jaeger2000}, while predictive-state representations use
+multi-step, action-conditional predictions as state coordinates
+\cite{LittmanSuttonSingh2001,SinghJamesRudary2004}.  In computational mechanics,
+causal states identify pasts that induce the same conditional distribution over
+futures and yield minimal predictive presentations
+\cite{CrutchfieldYoung1989,shalizicrutchfield,TraversCrutchfield2025}; continuous-
+time extensions include renewal and discrete-event processes
+\cite{MarzenCrutchfield2017}.  Renewal Geometry combines this predictive quotient
+with multitime operational composition and positive process structure.  The
+persistent carrier and represented history algebra are reconstructed only after
+future-invisible distinctions have been removed, and the first-order differential
+is then spectralized on that reconstructed algebra.
+
+The question considered here can therefore be stated as follows:
+\begin{quote}
+\emph{Can the algebra, Hilbert-space carrier, differential structure, and Dirac
+data of noncommutative geometry arise from an underlying predictive dynamics in
+which none of them is initially prescribed?}
+\end{quote}
+
+A nontrivial answer requires more than reproducing a desired spectral triple by
+definition. The algebra cannot simply be hidden in the microscopic model under
+another name, and the Dirac operator cannot be fitted afterward to recover a
+target metric. One must determine what the differential actually fixes, which
+spectral geometries are obtainable under different notions of reconstruction,
+whether the resulting metric can be validated independently, and what information
+is lost in the passage from dynamics to spectral geometry.
+
+The last point is central. If distinct predictive systems have the same spectral
+image, then a spectral triple is not, in general, a complete invariant of the
+dynamics from which it arose. It may instead describe an equivalence class of
+microscopically different systems that agree on their effective metric and
+differential structure. In this sense spectral geometry can be
+\emph{information-reduced}: complete for the operator-geometric information it
+encodes while insufficient, in general, to reconstruct the richer underlying
+dynamics.
+
+\paragraph{Our contribution.}
+
+We first construct a canonical spectralization of finite differential data. A
+star-compatible derivation $\delta$ into a real Hilbert $\A$-bimodule determines
+a minimal one-form carrier and a real even Hodge--Dirac spectral triple with exact
+order-zero and first-order relations. Two rigidity results identify what this
+construction does not determine. The algebra and faithful trace do not fix an
+absolute Dirac scale, and a fixed commutator derivation determines the full
+compatible Dirac operator only modulo a finite-dimensional self-adjoint commutant.
+The orthogonally centered representative is the unique
+minimum-Hilbert--Schmidt-norm implementer, and the dimension of this commutant is
+the sharp number of independent scalar measurements required to distinguish the
+remaining Dirac ambiguity.
+
+This distinction separates an \emph{austere Hodge construction} from an enlarged
+\emph{calibrated marked reconstruction}. The bare Hodge operator always has the
+unit zero-mode and therefore cannot realize arbitrary finite Dirac operators.
+When the missing finite calibration data are retained, every finite spectral
+packet is reconstructible and every separable compact-resolvent packet arises as
+a strong cofinal limit of finite marked reconstructions. A stricter requirement,
+in which multiplication must be transported asymptotically in norm, is genuinely
+selective and is characterized exactly by spectral quasidiagonality.
+
+We next test whether the construction has independent geometric content. For
+stationary graph dynamics, the symmetric jump data determine a Hodge--Dirac
+operator whose square is the symmetric Markov generator and whose commutator
+seminorm is its local quadratic form. On periodic $A_3$ approximants, the
+corresponding Connes distance converges uniformly to a Riemannian metric
+reconstructed independently from the jump second moments. For closed Riemannian
+spin manifolds, the local positive-stencil and covariant Wilson construction gives
+the required chartwise estimates, while global norm-resolvent convergence follows
+under the stated compatible stable-spin discretization hypotheses. The independent
+scalar metric reconstruction is unconditional.
+
+Finally, we characterize several mechanisms by which spectralization loses
+information. Directed stationary current can vary at fixed metric spectral
+geometry, hidden dynamical memory can vary at fixed static spectral data, and
+locally identical spectral packets can differ by global marked monodromy. These
+inverse fibres have intrinsic coordinates and canonical coarse-graining maps.
+Thus spectralization is not merely noninjective: the information it forgets has
+its own mathematical structure and transformation laws.
+
+The resulting interpretation is that Connes-type spectral geometry can arise as
+an effective geometric description of a richer predictive dynamics rather than
+necessarily as its most primitive level. This conclusion is strengthened by the
+companion spacetime construction: Lorentzian spacetime and spectral geometry can
+both arise downstream of the same pregeometric predictive structure, without
+either being required as the primitive entrance to the other. The two papers
+therefore lead to the schematic picture
+\begin{equation}
+\boxed{
+\begin{array}{c}
+\text{operational histories}\\[1mm]
+\downarrow\\[1mm]
+\text{predictive Renewal Geometry}\\[1mm]
+\downarrow\\[1mm]
+\text{Renewal Grand Tensor}\\[1mm]
+\swarrow\hspace{2.5cm}\searrow\\[-1mm]
+\text{Lorentzian spacetime}
+\hspace{1.4cm}
+\text{Connes-type spectral geometry}.
+\end{array}}
+\label{eq:intro-renewal-geometric-branches}
+\end{equation}
+
+The left branch is developed in the companion Renewal Geometry
+work~\cite{PelissierRenewalSpacetime2026}. The present paper develops the right
+branch: its canonical finite construction, its category-dependent image, its
+independent metric test, and its inverse fibres. The central question is therefore
+not only why spectral geometry can arise, but what a richer underlying dynamics
+retains that must be forgotten when it is compressed to a spectral description.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% =============================================================================
+\section{From predictive dynamics to spectral geometry}
+\label{sec:finite-main}
+% =============================================================================
+
+The spectralization theorem is algebraically self-contained, but its motivating
+entrance is more primitive than the datum $(\A,\tau,\delta)$.  We therefore begin
+with the finite predictive construction of the Renewal Grand Tensor~\cite{PelissierRenewalSpacetime2026}, restated here in the finite form needed
+for the present paper.  This makes explicit which structures are reconstructed
+before spectral geometry is introduced and which first-order information enters
+only at the spectralization stage.
+
+\subsection{The Renewal Grand Tensor and the first-order differential interface}
+\label{subsec:grand-tensor-main}
+
+Fix a finite cutoff $X$.  The operational entrance consists of a finite typed
+event grammar with finite reachable histories.  If a history $h$ ends at cut type
+$x$, let $\mathsf F_{X,x}$ be the finite admissible future words beginning at $x$.
+The conditional event law assigns normalized one-step probabilities and therefore
+cylinder probabilities
+\begin{equation}
+ p_X(w\mid h)
+ =\prod_{j=1}^{k}p_X(a_j\mid ha_1\cdots a_{j-1}),
+ \qquad w=a_1\cdots a_k,
+\label{eq:ncg-chain-law}
+\end{equation}
+with $p_X(\epsilon_x\mid h)=1$.  No persistent state space, algebra, Hilbert
+space, metric, or Dirac operator is assumed at this stage.
+
+Two histories of the same cut type are \emph{future equivalent} when no declared
+finite continuation distinguishes them:
+\begin{equation}
+ h\sim_X h'
+ \quad\Longleftrightarrow\quad
+ p_X(w\mid h)=p_X(w\mid h')
+ \quad\text{for every }w\in\mathsf F_{X,x}.
+\label{eq:ncg-future-equivalence}
+\end{equation}
+Histories of different cut type are never identified.  This is a typed right
+congruence.  Indeed, if $h\sim_Xh'$ and $a:x\to y$ is admissible, then the
+one-letter future gives $p_X(a\mid h)=p_X(a\mid h')$; on a positive-probability
+branch, for every continuation $v$,
+\[
+ p_X(v\mid ha)
+ =\frac{p_X(av\mid h)}{p_X(a\mid h)}
+ =\frac{p_X(av\mid h')}{p_X(a\mid h')}
+ =p_X(v\mid h'a).
+\]
+Hence $ha\sim_Xh'a$.
+
+Define the minimum persistent predictive carrier by
+\begin{equation}
+ \boxed{
+ Z_{X,x}^{\min}:=\mathsf H_{X,x}/\!\sim_X,
+ \qquad
+ q_{X,x}:\mathsf H_{X,x}\twoheadrightarrow Z_{X,x}^{\min}.}
+\label{eq:ncg-predictive-state}
+\end{equation}
+For an admissible event $a:x\to y$, right congruence gives canonical update and
+branch maps
+\begin{equation}
+ \boxed{
+ T_{X,a}([h])=[ha],
+ \qquad
+ \kappa_{X,a}([h])=p_X(a\mid h).}
+\label{eq:ncg-predictive-update}
+\end{equation}
+Thus persistence is reconstructed from the conditional future law rather than
+introduced as an independent coordinate.  Moreover, this quotient is universal:
+if $S_X$ is any reachable deterministic predictive realization of the same
+conditional event law, then equality of two realization states forces equality of
+all their future cylinder probabilities.  Consequently there is a unique
+surjection
+\begin{equation}
+ \pi_{X,x}:S_{X,x}\twoheadrightarrow Z_{X,x}^{\min}
+\label{eq:ncg-predictive-universal}
+\end{equation}
+intertwining branch probabilities and updates.  Hence $Z_X^{\min}$ is the unique
+coarsest reachable deterministic predictive realization.
+
+To reconstruct the operator-algebraic history object, assume in addition that the
+finite multitime intervention tables are specified on tomographically complete
+finite operator frames, are affine under randomization and additive under coarse
+graining, and obey the usual finite positivity, normalization, prefix
+compatibility, and causal-discard conditions.  Finite tomography then determines
+the corresponding positive causal process matrices.  Choosing their
+support-minimal square-root realizations introduces no additional invariant:
+minimal realizations of the same positive process data differ only by unitaries on
+the support spaces.  The represented predictive-state projections, mixed forward
+maps, and their Hilbert--Schmidt reverses therefore generate, up to represented
+$*$-isomorphism, a finite history algebra
+\begin{equation}
+ \A_X^{\mathrm{hist}}\subseteq\mathcal B(\mathcal M_X).
+\label{eq:ncg-history-algebra}
+\end{equation}
+Here $\mathcal M_X$ denotes any support-minimal sequential carrier; its particular
+choice is immaterial up to the preceding unitary equivalence.
+
+On every finite-dimensional $C^*$-algebra there is a canonical normalized regular
+trace.  For
+$\A_X^{\mathrm{hist}}\cong\bigoplus_\lambda M_{n_\lambda}(\C)$, set
+\begin{equation}
+ \widehat\tau_{X,\mathrm{reg}}(a)
+ =\frac{\Tr_{\C}(L_a)}{\dim_{\C}\A_X^{\mathrm{hist}}}
+ =\frac{\sum_\lambda n_\lambda\Tr(a_\lambda)}
+        {\sum_\lambda n_\lambda^2}.
+\label{eq:ncg-grand-regular-trace}
+\end{equation}
+If $[w]$ denotes the represented operator associated with a finite history word,
+define the positive word-Gram kernels
+\begin{equation}
+ \mathbb K_{X,r}(v,w)
+ =\widehat\tau_{X,\mathrm{reg}}\bigl([v]^*[w]\bigr),
+ \qquad |v|,|w|\le r.
+\label{eq:ncg-word-gram}
+\end{equation}
+Positivity is immediate from the trace inner product.  Since
+$\A_X^{\mathrm{hist}}$ is finite dimensional, the increasing spans of represented
+words stabilize after finite depth; once this happens, one additional word layer
+determines multiplication and involution on the stabilized span.
+
+\begin{definition}[Finite Renewal Grand Tensor]
+\label{def:ncg-grand-tensor}
+The finite Renewal Grand Tensor associated with the operational process $X$ is
+\begin{equation}
+ \boxed{
+ \GTX
+ =\left(
+ \A_X^{\mathrm{hist}},
+ \{\mathbb K_{X,r}\}_{r\ge0},
+ Z_X^{\min}
+ \right).}
+\label{eq:ncg-grand-tensor}
+\end{equation}
+It is a tensor in the operational sense of a complete positive history-moment
+object: $Z_X^{\min}$ records which past distinctions remain predictively effective,
+$\A_X^{\mathrm{hist}}$ records how represented histories compose, and the Gram
+hierarchy records their intrinsic positive overlaps.
+\end{definition}
+
+\begin{proposition}[Canonical finite Grand-Tensor reconstruction]
+\label{prop:ncg-grand-tensor-reconstruction}
+Under the finite assumptions above, the following data are fixed by the complete
+operational statistics up to their natural isomorphisms:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.8em]
+\item the future-minimal carrier $Z_X^{\min}$ and its update/branch maps;
+\item the support-minimal represented history algebra
+      $\A_X^{\mathrm{hist}}$, up to represented $*$-isomorphism;
+\item the normalized regular trace and the positive word-Gram hierarchy;
+\item consequently, the Grand Tensor $\GTX$ of
+      \eqref{eq:ncg-grand-tensor}.
+\end{enumerate}
+No independent hidden-state presentation, persistent state space, metric, or
+spectral triple is needed for this reconstruction.
+\end{proposition}
+
+\begin{proof}
+Right congruence was proved above.  The universal factorization
+\eqref{eq:ncg-predictive-universal} shows that $Z_X^{\min}$ is independent of a
+chosen predictive presentation.  Tomographic completeness makes the finite
+multitime positive process matrices unique; support-minimal Gram factorizations of
+the same positive matrices are unitarily equivalent.  The represented operators
+generated from such a realization therefore determine the same finite
+$C^*$-algebra up to represented $*$-isomorphism.  The normalized regular trace is
+intrinsic to that algebra, so the Gram kernels
+\eqref{eq:ncg-word-gram} are invariant under the same equivalence.  Finite
+dimensionality gives stabilization of the represented word spans, completing the
+claim.
+\end{proof}
+
+This proposition is the self-contained predictive entrance needed in the present
+paper.  The same construction is developed in the broader spacetime setting of the
+Renewal Geometry framework~\cite{PelissierRenewalSpacetime2026}, including additional
+same-history physical marks
+needed by the Lorentzian branch; none of those spacetime-specific marks is assumed
+for the spectralization below.
+
+\paragraph{First-order differential interface.}
+
+The Grand Tensor is logically upstream of spectral geometry, but it is important
+not to identify algebraic reconstruction with metric differentiation.  From
+\eqref{eq:ncg-grand-tensor} we canonically obtain the history algebra and its
+positive finite-dimensional structure.  We take
+\begin{equation}
+ \A=\A_X^{\mathrm{hist}},
+ \qquad
+ \tau=\widehat\tau_{X,\mathrm{reg}},
+\label{eq:ncg-grand-algebra-trace}
+\end{equation}
+or, more generally, any declared faithful tracial state on $\A$.  To spectralize
+this algebra one additionally specifies a compatible first-order variation.
+Abstractly, this is a Hilbert $\A$-bimodule $\mathcal K$, an antiunitary
+involution $C_{\mathcal K}$ reversing the bimodule actions, and a complex-linear
+map
+\begin{equation}
+ \delta:\A\longrightarrow\mathcal K
+\label{eq:ncg-grand-delta}
+\end{equation}
+satisfying
+\begin{equation}
+ \delta(\one)=0,
+ \qquad
+ \delta(ab)=a\delta(b)+\delta(a)b,
+ \qquad
+ C_{\mathcal K}\delta(a)=\delta(a^*).
+\label{eq:ncg-grand-delta-rules}
+\end{equation}
+When this datum comes from a Renewal process, $\delta$ represents the declared
+first-order variation of the reconstructed predictive history algebra.  The
+results below do not assume that $\GTX$ or $\A$ alone uniquely determines this
+variation.  This distinction is essential: the no-scale result below shows that
+rescaling $\delta$ changes the spectral metric while leaving the algebra and trace
+fixed.
+
+The logical interface is therefore
+\begin{equation}
+\boxed{
+\text{operational histories}
+\longrightarrow
+\GTX
+\longmapsto
+(\A_X^{\mathrm{hist}},\tau_X)
+\overset{\delta_X}{\longrightarrow}
+(\A_X,\Hh_X,D_X,J_X,\gamma_X).}
+\label{eq:ncg-grand-spectral-interface}
+\end{equation}
+The first arrows reconstruct predictive and algebraic structure; the final arrow
+is the Hodge--Dirac spectralization studied in this paper.
+
+The zero-form carrier is
+\begin{equation}
+\Hh_0=L^2(\A,\tau),
+\label{eq:summary-H0}
+\end{equation}
+and the one-form carrier is the minimal quotient of the universal calculus
+generated by $\delta$,
+\begin{equation}
+\Hh_1(\delta)=\Om_u^1(\A)/\Ker T_\delta,
+\qquad
+\Om_u^1(\A)=\Ker(m:\A\otimes\A\to\A).
+\label{eq:summary-H1}
+\end{equation}
+On $\Hh=\Hh_0\oplus\Hh_1(\delta)$, the induced derivation $\partial$ gives
+\begin{equation}
+D=\begin{pmatrix}0&\partial^*\\ \partial&0\end{pmatrix},
+\qquad
+\gamma=\begin{pmatrix}I&0\\0&-I\end{pmatrix},
+\label{eq:summary-D}
+\end{equation}
+while reversal of universal one-forms gives the real structure $J$.  Thus the
+spectral triple is constructed from a first-order differential on an algebra that
+has itself already been reconstructed from predictive histories.
+
+\subsection{What the differential determines}
+
+The finite Hodge construction is canonical once $\delta$ is fixed.  It produces a
+real even spectral triple with exact order-zero and first-order relations.  The
+spectral scale is not already hidden in $(\A,\tau)$: replacing $\delta$ by
+$s\delta$ leaves the algebra and trace unchanged but sends
+\begin{equation}
+D\longmapsto sD,
+\qquad
+L_D\longmapsto sL_D,
+\qquad
+d_D\longmapsto s^{-1}d_D.
+\label{eq:summary-scale}
+\end{equation}
+Thus an absolute metric scale enters through the differential data.
+
+There is a second, finite ambiguity.  For a marked spectral packet
+$\mathsf S=(\A,\Hh,\pi,D,J,\gamma)$ define
+\begin{equation}
+\mathfrak c_{\mathsf S}
+=\{C\in\pi(\A)'_{\rm sa}: C\gamma+\gamma C=0,\ JC=\varepsilon'CJ\}.
+\label{eq:summary-commutant}
+\end{equation}
+All compatible self-adjoint Dirac operators implementing the same commutator
+derivation form exactly the affine space
+\begin{equation}
+D+\mathfrak c_{\mathsf S}.
+\label{eq:summary-affine}
+\end{equation}
+The orthogonally centered representative
+$D_{\rm der}=D-P_{\mathfrak c_{\mathsf S}}D$ is the unique
+minimum-Hilbert--Schmidt-norm implementer, and
+$q_{\mathsf S}=\dim_{\R}\mathfrak c_{\mathsf S}$ real linear scalar measurements are
+necessary and sufficient to distinguish every point of the fibre.
+
+The austere Hodge construction has an additional visible restriction:
+$D(\one,0)=0$.  It therefore cannot be surjective onto arbitrary finite Dirac
+operators.  This is why the inverse statement below uses an enlarged calibrated
+marked reconstruction rather than the bare Hodge functor.
+
+\subsection{Which spectral geometries can be reconstructed?}
+
+At the finite marked level, one is allowed to retain finitely many calibration data,
+including a target generator germ or the equivalent commutant coordinates.  At the
+strong compact level, finite spectral compressions converge strongly on fixed
+vectors, resolvents, commutators, and matrix coefficients.  At the strict
+norm-monoidal level, multiplication must additionally be transported asymptotically
+in norm.
+
+\begin{theorem}[Spectralization, Dirac ambiguity, and calibrated image]
+\label{thm:summary-finite}
+The following statements hold.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.8em]
+\item Every finite real differential datum $(\A,\tau,\delta)$ determines the real even
+Hodge--Dirac spectral triple above, functorially under trace- and
+ differential-preserving $*$-isomorphisms.
+\item The algebra and trace do not determine the Dirac scale, and a fixed commutator
+ derivation determines the full compatible Dirac operator exactly modulo
+ $\mathfrak c_{\mathsf S}$.
+\item For the enlarged calibrated marked reconstruction,
+\begin{equation}
+\begin{aligned}
+\EssIm(\mathfrak S_{\rm fin}^{\rm mark})
+  &=\mathbf{Spec}_{\rm fin},\\
+\EssIm(\mathfrak S_{\rm cpt}^{\rm strong,mark})
+  &=\mathbf{Spec}_{\rm cpt}^{\rm sep},\\
+\EssIm(\mathfrak S_{\rm cpt}^{\rm strict})
+  &=\mathbf{Spec}_{\rm cpt}^{\rm sqd}
+  \subsetneq\mathbf{Spec}_{\rm cpt}^{\rm sep}.
+\end{aligned}
+\label{eq:summary-essential-image}
+\end{equation}
+Thus every finite spectral packet is reconstructible once the finite calibration
+marks are retained; every separable compact-resolvent packet is a strong cofinal
+limit of such finite marked reconstructions; and strict norm-monoidal realizability
+is equivalent to spectral quasidiagonality.
+\end{enumerate}
+\end{theorem}
+
+The distinction between the first and third clauses is essential.  Finite marked
+surjectivity is a reconstruction benchmark for an enlarged data set; it is not a
+claim that an arbitrary target $D$ has been derived from the algebra or Hodge
+derivation alone.  The complete definitions and proofs are given in
+\Cref{sec:finite} of the mathematical supplement.
+
+
+% =============================================================================
+\section{Independent metric reconstruction and compact spin geometry}
+\label{sec:a3-main}
+% =============================================================================
+
+Producing an operator called $D$ is not by itself evidence that geometry has emerged.
+A stronger test is available when the same finite dynamics determines a metric by a
+route that does not use the Dirac operator.
+
+\subsection{An independent metric test}
+
+For a stationary finite graph, let $m_x>0$ be the stationary masses,
+$q_{xy}=m_xk_{xy}$ the stationary fluxes, and
+\begin{equation}
+c_{xy}=\frac{q_{xy}+q_{yx}}2,
+\qquad
+j_{xy}=\frac{q_{xy}-q_{yx}}2.
+\label{eq:summary-cj}
+\end{equation}
+The symmetric conductances determine the graph Hodge--Dirac operator $D_{m,c}$.
+Exactly,
+\begin{equation}
+D_{m,c}^2|_{\ell^2(V,m)}=-2\mathcal L_s,
+\qquad
+\|[D_{m,c},f]\|^2
+=\max_x\frac1{m_x}\sum_yc_{xy}|f(y)-f(x)|^2.
+\label{eq:summary-graph-identities}
+\end{equation}
+Thus the Dirac square is the symmetric Markov generator and its commutator seminorm
+is the local quadratic form of that generator.
+
+On the periodic $A_3$ approximants, the normalization gives
+\begin{equation}
+L_h(f)^2
+=\max_{x\in V_h}\frac1{8h^2}
+\sum_{\alpha\in\Phi_{A_3}}|f(x+h\alpha)-f(x)|^2,
+\label{eq:summary-A3-Lip}
+\end{equation}
+and the pure-state Connes distance satisfies
+\begin{equation}
+\sup_{x,y\in V_h}
+|d_h^{\rm Connes}(x,y)-d_g(x,y)|\longrightarrow0,
+\label{eq:summary-A3-distance}
+\end{equation}
+where $d_g$ is reconstructed independently from the jump second moments.  This is
+the principal anti-circularity test of the paper.
+
+\subsection{From local spin discretization to a global convergence criterion}
+
+The spin problem is subtler.  Local positive stencils reconstruct the inverse metric,
+and a density-symmetric covariant Wilson discretization removes lattice doublers while
+remaining $O(h)$ on sampled smooth spinors.  These chartwise estimates do not by
+themselves guarantee that independently discretized charts assemble into one stable
+global operator.  The mathematical supplement therefore isolates the additional
+global approximation properties in the notion of a \emph{compatible stable spin
+discretization}.
+
+\begin{theorem}[Independent metric reconstruction and stable compact-spin convergence]
+\label{thm:summary-metric}
+The following statements hold.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.8em]
+\item The periodic $A_3$ Hodge--Dirac operator obeys
+\eqref{eq:summary-graph-identities}, and its Connes distance converges uniformly as
+in \eqref{eq:summary-A3-distance}.
+\item The relation-adapted cellular completion removes the extensive one-form kernel
+and has the expected compact Hodge--Dirac continuum limit.
+\item The covariant Wilson construction has one low-energy species and satisfies the
+local uniform graph estimates required for a spin continuum limit.
+\item Let $(M^d,g,\mathfrak s)$ be closed.  If the finite covariant Wilson operators
+form a compatible stable spin discretization in the precise sense of
+Definition~\ref{def:stable-spin-atlas}, then for every $z\in\C\setminus\R$,
+\begin{equation}
+\left\|W_h(D_h-z)^{-1}W_h^*
+-(\widehat D_{M,\mathfrak s}-z)^{-1}\right\|\longrightarrow0,
+\qquad
+\widehat D_{M,\mathfrak s}=D_{M,\mathfrak s}\otimes\sigma_1.
+\label{eq:summary-spin-resolvent}
+\end{equation}
+\item Independently of the spin-assembly hypothesis, every closed Riemannian manifold
+admits finite metric triples on refining meshes for which
+\begin{equation}
+\sup_{x,y\in V_h}|d_h^{\rm met}(x,y)-d_g(x,y)|\longrightarrow0.
+\label{eq:summary-global-metric}
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+The theorem deliberately separates the verified local spin analysis from the global
+atlas-stability requirement.  The scalar metric approximation is unconditional; the
+spin norm-resolvent conclusion is a convergence criterion for compatible stable
+assemblies.  The precise local estimates, atlas definition, and compactness argument
+are given in \Cref{sec:metric,app:compact-spin}.
+
+
+% =============================================================================
+\section{Spectral geometry as a universality quotient}
+\label{sec:universality-main}
+% =============================================================================
+
+The spectral map is broad but not injective.  Three independent mechanisms make the
+loss of information explicit: directed current at fixed symmetric metric geometry,
+hidden dynamical memory at fixed static spectral data, and global marked monodromy
+at fixed local packets.
+
+\subsection{Information lost under spectralization}
+
+For a connected graph with fixed masses $m$ and conductances $c$, the complete
+stationary current fibre is
+\begin{equation}
+\mathcal J(G,c)=\{j\in\Ker B:\ |j_e|<c_e\ \text{for every }e\},
+\qquad
+\dim\mathcal J(G,c)=b_1(G).
+\label{eq:summary-current-fibre}
+\end{equation}
+Every point of this fibre has the same metric spectral triple, while path
+probabilities, time-reversal asymmetry, and entropy production can vary.  The lost
+directionality is recovered by the modular affinity
+\begin{equation}
+a_e=\operatorname{arctanh}\frac{j_e}{c_e}
+=\frac12\log\frac{q_e}{q_{\bar e}},
+\label{eq:summary-affinity}
+\end{equation}
+whose cohomology class parametrizes the current fibre.
+
+Hidden positive memory gives a second fibre.  Eliminating auxiliary degrees of
+freedom produces a Stieltjes self-energy
+\begin{equation}
+\Sigma_\mu(z)
+=\int_{(0,\infty)}\frac{1}{\lambda-z}\,\dd\mu(\lambda)
+=B_\mu(C_\mu-z)^{-1}B_\mu^*.
+\label{eq:summary-Stieltjes}
+\end{equation}
+The full operator-valued measure $\mu$ classifies the minimal positive dilation,
+whereas a static spectral head may see only selected boundary values or moments.
+Finite rational Hermitian indefinite memory has the corresponding minimal
+Pontryagin/descriptor classification.
+
+The third fibre is global.  Locally marked-isomorphic spectral packets glued over a
+connected incidence graph are classified by
+\begin{equation}
+[\rho]\in\Hom(\pi_1(\Gamma),G_{\mathsf S})/G_{\mathsf S}.
+\label{eq:summary-monodromy}
+\end{equation}
+Trivial monodromy gives a global marked trivialization; nontrivial monodromy gives a
+flat twisted spectral geometry.
+
+\subsection{Universality fibres and coarse graining}
+
+These fibres have canonical effective images.  Current is pushed through the graph
+chain map; high-energy positive memory is replaced by an exact zero-energy contact
+correction plus the retained low-energy measure; and monodromy descends precisely
+when the collapsed cycles lie in its kernel.  The maps compose under successive
+coarse grainings.
+
+\begin{theorem}[Universality fibres and coarse graining]
+\label{thm:summary-universality}
+For the classes above:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.8em]
+\item the stationary realization fibre of a metric graph triple is
+$\mathcal J(G,c)$, and the modular class recovers the complete directed generator;
+\item positive hidden memory is classified by its minimal operator-valued Stieltjes
+measure, while finite rational Hermitian indefinite memory is classified by a
+minimal Pontryagin/descriptor realization;
+\item locally identical marked packets are globally classified by the monodromy class
+\eqref{eq:summary-monodromy};
+\item current, memory, and monodromy admit canonical composable coarse-graining maps,
+with the corresponding entropy/rank/index monotonicity statements;
+\item after auxiliary markings, calibration, and joint Gram data are retained, the
+fully reduced finite inverse fibre is a stratified stabilizer quotient, and under
+the explicit separation, tightness, domain, weight, and transport hypotheses of the
+supplement the completed fibre is the inverse limit of those finite strata.
+\end{enumerate}
+\end{theorem}
+
+The detailed current geometry, operator-measure realization, monodromy classification,
+coarse-graining maps, rational indefinite memory, and completed inverse-fibre theorems
+are given in \Cref{sec:inverse,app:rational-krein,app:completed-fibres}.
+
+
+
+
+% =============================================================================
+\section{Interpretation and discussion}
+\label{sec:discussion}
+% =============================================================================
+
+The results separate predictive reconstruction from operator-theoretic
+spectralization in a useful way.  Renewal Geometry first reconstructs the Grand
+Tensor $\GTX$, including the future-minimal predictive carrier, represented
+history algebra, and positive moment hierarchy.  Spectralization then equips that
+reconstructed algebra with a compatible first-order differential datum
+$\delta_X$.  Once $(\A,\tau,\delta)$ is given, the finite Hodge--Dirac theorem
+is an ordinary statement about $C^*$-algebras, Hilbert bimodules, and derivations.
+The predictive reconstruction is therefore logically prior to the spectral
+triple without being an extra hypothesis of the abstract operator-theoretic
+result.
+
+\subsection{Spectral geometry as an effective description of predictive dynamics}
+
+The first consequence is a change in the logical status of the spectral triple.
+In Connes' formulation, the algebra, its Hilbert-space representation, and the
+Dirac operator constitute the spectral data from which geometry is extracted.  In
+the present construction these objects can instead occur downstream of the
+Renewal Grand Tensor:
+\begin{equation}
+\text{predictive dynamics}
+\longrightarrow
+\GTX
+\longmapsto
+(\A_X^{\mathrm{hist}},\tau_X)
+\overset{\delta_X}{\longrightarrow}
+(\A_X,\Hh_X,D_X,J_X,\gamma_X).
+\label{eq:discussion-layered}
+\end{equation}
+A spectral triple therefore need not be interpreted as the most microscopic
+object in the description.  Within the framework considered here, it is the
+spectral image of a specific algebraic and differential sector of a richer
+predictive object.
+
+This does not mean that an arbitrary Dirac operator is determined by the algebra.
+The finite Hodge construction shows precisely where additional information enters.
+The algebra and faithful trace do not fix an absolute metric scale, and the
+commutator derivation determines the full compatible Dirac operator only modulo
+the appropriate self-adjoint commutant.  Likewise, finite marked surjectivity is a
+statement about an enlarged reconstruction category in which the missing
+calibration coordinates are retained; it is not a claim that an arbitrary target
+Dirac operator has been derived from the austere Hodge datum alone.  At the
+stricter norm-monoidal level the reconstruction becomes genuinely selective, with
+spectral quasidiagonality providing the exact criterion.
+
+The independent metric construction is important for the same reason.  On the
+periodic $A_3$ family, the Riemannian metric reconstructed from jump second moments
+and the Connes distance reconstructed from the Hodge--Dirac operator are obtained
+by different routes and converge to the same continuum geometry.  The agreement
+therefore tests the spectralization rather than defining the target metric by
+construction.  For general closed Riemannian manifolds the scalar metric
+approximation remains unconditional, while the spin norm-resolvent statement
+requires the compatible stable-discretization hypotheses stated above.
+
+\paragraph{A common pregeometric origin of spacetime and spectral geometry.}
+
+The interpretation is strengthened by the companion spacetime construction
+\cite{PelissierRenewalSpacetime2026}.  There, the same Renewal Grand Tensor
+$\GTX$ supports a reconstruction of Lorentzian spacetime without requiring a
+spectral triple as an intermediate primitive.  Together, the two papers therefore
+place the Grand Tensor as a common pregeometric object upstream of two distinct
+downstream descriptions, as summarized in
+\eqref{eq:intro-renewal-geometric-branches}.
+
+This matters conceptually.  If spectral geometry were the only downstream output,
+one could interpret the predictive construction merely as an alternative
+procedure for generating spectral triples.  The existence of an independent
+spacetime branch instead suggests that Lorentzian geometry and Connes-type
+spectral geometry are different projections of a common pregeometric structure
+rather than successive fundamental layers.
+
+The claim is structural rather than ontological.  The results do not establish
+that Renewal Geometry is the unique microscopic theory underlying all
+noncommutative geometries or all physical spacetimes.  They show that, within the
+framework studied here, neither spectral geometry nor spacetime geometry needs to
+be placed at the primitive entrance.  Both may arise from a predictive structure
+defined before either metric geometry or a spectral triple is introduced.
+
+\paragraph{Information loss and nonfaithfulness.}
+
+The inverse results sharpen this effective interpretation.  Spectralization is
+generically many-to-one:
+\begin{equation}
+\mathfrak S(\mathcal R_1)=\mathfrak S(\mathcal R_2)
+\qquad\text{need not imply}\qquad
+\mathcal R_1\simeq\mathcal R_2,
+\label{eq:discussion-nonfaithful}
+\end{equation}
+where $\mathcal R_i$ denote predictive or dynamical realizations and
+$\mathfrak S$ their spectral image.  A spectral triple is therefore not, in
+general, a complete invariant of the underlying dynamics.
+
+The stationary-current fibre provides the simplest example.  Fixing the masses
+and symmetric conductances fixes the metric Hodge--Dirac triple, while a
+divergence-free stationary current remains undetermined.  Moving within this
+fibre changes path probabilities, time-reversal asymmetry, and entropy production
+without changing the spectral metric.  The spectral geometry retains the
+symmetric metric sector while forgetting part of the directed dynamics.
+
+The memory fibre exhibits a different form of information loss.  Eliminating
+auxiliary degrees of freedom produces a frequency-dependent self-energy whose
+minimal realization is encoded by an operator-valued measure.  A static spectral
+description may retain only selected boundary values, moments, or an effective
+operator, so distinct dynamical tails can have the same static spectral image.
+What is lost here is temporal organization rather than merely a finite parameter.
+
+Global marked monodromy provides a third mechanism.  Locally equivalent spectral
+packets can differ in how their marked realizations are assembled globally.
+Consequently spectralization can forget directional, dynamical, and global
+information for mathematically different reasons.
+
+These examples motivate the description of spectral geometry as an
+\emph{information-reduced effective geometry}.  This should not be interpreted as
+a claim that noncommutative geometry is mathematically incomplete.  A spectral
+triple may completely encode the geometric observables for which it is designed.
+The point is that it need not completely encode the predictive dynamics from which
+it arose.  A single spectral geometry can therefore represent an entire family of
+dynamically inequivalent microscopic realizations.
+
+The analogy with effective descriptions in statistical physics is useful.  A set
+of macroscopic variables may completely characterize an effective state while
+failing to determine a unique microscopic realization.  Likewise, a spectral
+triple may fully characterize an effective metric and differential sector while
+identifying systems that remain distinct at the predictive level.
+
+\paragraph{Why the quotient has a universality interpretation.}
+
+The inverse fibre
+\begin{equation}
+\mathfrak S^{-1}(\mathsf S)
+\label{eq:discussion-fibre}
+\end{equation}
+is therefore more than a technical obstruction to inversion.  It describes the
+microscopic information quotiented out in the passage to a fixed spectral packet.
+
+Moreover, the discarded variables are themselves organized under effective
+reduction.  Directed currents are pushed through the induced graph chain map;
+high-energy memory can be absorbed into a zero-energy contact correction while
+the retained low-energy measure survives; and marked monodromy descends exactly
+when the cycles removed by the quotient carry trivial holonomy.  These maps
+compose under successive coarse grainings.
+
+This is the sense in which the spectral packet acts as a universality-level
+observable.  Different microscopic systems can share the same spectral geometry
+because distinctions that remain meaningful at the predictive level no longer
+affect the operator-geometric structure retained at that level of description.
+
+The coarse-graining language should nevertheless be interpreted precisely.  The
+results do not prove that spectralization is universally generated by a
+renormalization-group flow, nor that arbitrary predictive dynamics converges
+toward a spectral fixed point.  What is established is a controlled many-to-one
+map, explicit inverse fibres, and composable effective maps on their principal
+coordinates.  The universality interpretation is therefore structural rather than
+a claim of a universal dynamical attractor.
+
+\subsection{Inverse geometry, scope, and outlook}
+
+Once the lost information has been identified, a natural question is whether it
+should be retained when it is physically relevant.  The present examples suggest
+several possible enrichments.  A metric spectral triple can be supplemented by a
+modular or current class to retain irreversible directed information; an
+operator-valued self-energy can retain frequency-dependent memory; and a marked
+holonomy class can retain global assembly data.  Schematically,
+\begin{equation}
+(\A,\Hh,D,J,\gamma)
+\quad\longrightarrow\quad
+(\A,\Hh,D,J,\gamma;
+\text{current},\text{memory},\text{monodromy},\ldots).
+\label{eq:discussion-enrichment}
+\end{equation}
+The ordinary spectral packet is recovered by forgetting the additional
+coordinates.
+
+This perspective changes the natural inverse problem.  Rather than expecting one
+microscopic dynamics to correspond to one spectral geometry, one should generally
+expect a moduli space or stratified fibre of realizations.  The finite stabilizer
+quotient and its completed inverse-limit version provide concrete examples of
+such an inverse geometry.  The relevant microscopic question is therefore not
+necessarily
+\begin{quote}
+``Which dynamics is represented by this spectral triple?''
+\end{quote}
+but rather
+\begin{quote}
+``Which class of predictive dynamics has this spectral triple as its common
+effective geometry?''
+\end{quote}
+
+The companion spacetime construction makes this question still richer.  Two
+predictive systems that have the same spectral image need not necessarily have
+the same image under another downstream geometric reconstruction.  Conversely,
+systems could agree on a spacetime sector while differing in spectral or
+dynamical refinements.  The joint fibres of the spectral and Lorentzian
+projections of Renewal Geometry therefore provide a natural object for future
+study.
+
+\paragraph{Mathematical scope.}
+
+Several limitations of the present results should remain explicit.  The strict
+spectral image would benefit from an intrinsic characterization independent of a
+chosen spectral projection sequence.  For spin geometry, the local Wilson
+construction provides the required analytic estimates, but an unconditional
+global realization theorem would require verification of the compatibility and
+stability hypotheses for every closed spin manifold.  Noncompact and genuinely
+semifinite geometries require further control of domains, localization, and
+weights.  The positive Stieltjes memory classification has a complete finite
+rational indefinite analogue, but the unrestricted nonrational
+infinite-dimensional indefinite problem is not treated here.
+
+Nor does the finite compact-quantum-metric-space result by itself imply
+quantum Gromov--Hausdorff, propinquity, or spectral-propinquity convergence in the
+continuum limit \cite{Rieffel2004,Latremoliere2022,FarsiLatremolierePacker2024}.
+Such statements require uniform control of the full state-space Lip-norms and, for
+spectral propinquity, compatible control of the spectral data beyond the
+pure-state distance convergence proved for the $A_3$ approximants.
+
+\paragraph{Open questions and broader interpretation.}
+
+The effective-geometric viewpoint raises several further questions.  Which parts
+of the inverse fibre can be reconstructed from natural enrichments of a spectral
+triple?  Which fibre coordinates remain stable under broader classes of
+coarse graining?  Can additional dynamical principles select canonical
+representatives inside a spectral fibre?  And how much of the many-to-one
+structure persists in continuum classes substantially larger than the finite and
+controlled compact-resolvent settings considered here?
+
+The coexistence of the spectral and spacetime branches suggests a second family
+of questions.  One may ask when the two downstream reconstructions determine one
+another, when one retains information absent from the other, and which microscopic
+coordinates are invisible to both.  More generally, one can ask whether other
+geometric or physical structures arise as additional quotients of the same
+predictive object.
+
+Within the scope established in this paper, the hierarchy is nevertheless clear.
+Predictive dynamics carries temporal, directional, and global information before
+a metric or spectral triple is introduced.  Renewal Geometry organizes that
+information in the pregeometric Grand Tensor $\GTX$.  Lorentzian spacetime can
+emerge from one downstream sector, while on the spectral branch $\GTX$
+canonically supplies the predictive history algebra and positive moment structure,
+which become Connes-type spectral geometry after a compatible first-order
+variation is specified.  The latter retains the metric and
+differential structures relevant to its level while identifying classes of
+underlying dynamics that remain distinct microscopically.
+
+Thus, within this framework, Connes-type spectral geometry is naturally
+interpreted as a stable effective geometry of a richer predictive dynamics:
+powerful and potentially complete for its geometric sector, but not in general a
+complete description of the dynamics from which that geometry emerges.
+
+
+
+
+
+
+\begin{thebibliography}{99}
+\bibitem{Connes1994}
+A.~Connes,
+\newblock \emph{Noncommutative Geometry},
+\newblock Academic Press, San Diego, 1994.
+
+\bibitem{RennieVarilly2008}
+A.~Rennie and J.~C.~V\'arilly,
+\newblock Reconstruction of manifolds in noncommutative geometry,
+\newblock arXiv:math/0610418, revised 2008.
+
+\bibitem{connesreconstruction}
+A.~Connes,
+\newblock On the spectral characterization of manifolds,
+\newblock \emph{Journal of Noncommutative Geometry} \textbf{7} (2013), no.~1,
+1--82.
+
+\bibitem{Rieffel1999}
+M.~A.~Rieffel,
+\newblock Metrics on state spaces,
+\newblock \emph{Documenta Mathematica} \textbf{4} (1999), 559--600.
+
+\bibitem{Rieffel2004}
+M.~A.~Rieffel,
+\newblock Gromov--Hausdorff distance for quantum metric spaces,
+\newblock \emph{Memoirs of the American Mathematical Society} \textbf{168}
+(2004), no.~796, 1--65.
+\newblock doi:10.1090/memo/0796.
+
+\bibitem{Latremoliere2022}
+F.~Latr\'emoli\`ere,
+\newblock The Gromov--Hausdorff propinquity for metric spectral triples,
+\newblock \emph{Advances in Mathematics} \textbf{404} (2022), 108393.
+\newblock doi:10.1016/j.aim.2022.108393.
+
+\bibitem{FarsiLatremolierePacker2024}
+C.~Farsi, F.~Latr\'emoli\`ere, and J.~Packer,
+\newblock Convergence of inductive sequences of spectral triples for the spectral
+propinquity,
+\newblock \emph{Advances in Mathematics} \textbf{437} (2024), 109442.
+\newblock doi:10.1016/j.aim.2023.109442.
+
+\bibitem{PelissierRenewalSpacetime2026}
+A.~P\'elissier,
+\newblock Renewal Geometry and the emergence of Lorentzian spacetime,
+\newblock HAL preprint hal-05744772, 2026.
+\newblock \url{https://hal.science/hal-05744772}
+
+\bibitem{Krajewski1998}
+T.~Krajewski,
+\newblock Classification of finite spectral triples,
+\newblock \emph{Journal of Geometry and Physics} \textbf{28} (1998), 1--30.
+\newblock doi:10.1016/S0393-0440(97)00068-5.
+
+\bibitem{ChristensenIvan2006}
+E.~Christensen and C.~Ivan,
+\newblock Spectral triples for AF $C^*$-algebras and metrics on the Cantor set,
+\newblock \emph{Journal of Operator Theory} \textbf{56} (2006), no.~1, 17--46.
+
+\bibitem{PearsonBellissard2009}
+J.~Pearson and J.~Bellissard,
+\newblock Noncommutative Riemannian geometry and diffusion on ultrametric Cantor sets,
+\newblock \emph{Journal of Noncommutative Geometry} \textbf{3} (2009), no.~3,
+447--480.
+
+\bibitem{ChristensenIvanSchrohe2012}
+E.~Christensen, C.~Ivan, and E.~Schrohe,
+\newblock Spectral triples and the geometry of fractals,
+\newblock \emph{Journal of Noncommutative Geometry} \textbf{6} (2012), no.~2,
+249--274.
+\newblock doi:10.4171/JNCG/91.
+
+\bibitem{KellendonkSavinien2012}
+J.~Kellendonk and J.~Savinien,
+\newblock Spectral triples and characterization of aperiodic order,
+\newblock \emph{Proceedings of the London Mathematical Society} \textbf{104} (2012),
+no.~1, 123--157.
+
+\bibitem{Paterson2014}
+A.~L.~T.~Paterson,
+\newblock Contractive spectral triples for crossed products,
+\newblock \emph{Mathematica Scandinavica} \textbf{114} (2014), no.~2, 275--298.
+\newblock doi:10.7146/math.scand.a-17112.
+
+\bibitem{JulienPutnam2016}
+A.~Julien and I.~F.~Putnam,
+\newblock Spectral triples for subshifts,
+\newblock \emph{Journal of Functional Analysis} \textbf{270} (2016), no.~3,
+1031--1063.
+\newblock doi:10.1016/j.jfa.2015.12.002.
+
+\bibitem{AielloGuidoIsola2022}
+V.~Aiello, D.~Guido, and T.~Isola,
+\newblock Spectral triples on irreversible $C^*$-dynamical systems,
+\newblock \emph{International Journal of Mathematics} \textbf{33} (2022), no.~1,
+2250005.
+\newblock doi:10.1142/S0129167X22500057.
+
+\bibitem{Majid2025}
+S.~Majid,
+\newblock Dirac operator associated to a quantum metric,
+\newblock \emph{Journal of Noncommutative Geometry} \textbf{19} (2025), no.~2,
+573--600.
+
+\bibitem{CiprianiSauvageot2003}
+F.~Cipriani and J.-L.~Sauvageot,
+\newblock Derivations as square roots of Dirichlet forms,
+\newblock \emph{Journal of Functional Analysis} \textbf{201} (2003), no.~1,
+78--120.
+
+\bibitem{HinzTeplyaev2013}
+M.~Hinz and A.~Teplyaev,
+\newblock Dirac and magnetic Schr\"odinger operators on fractals,
+\newblock \emph{Journal of Functional Analysis} \textbf{265} (2013), no.~11,
+2830--2854.
+\newblock doi:10.1016/j.jfa.2013.07.021.
+
+\bibitem{HinzKelleherTeplyaev2015}
+M.~Hinz, D.~J.~Kelleher, and A.~Teplyaev,
+\newblock Metric and spectral triples for Dirichlet and resistance forms,
+\newblock \emph{Journal of Noncommutative Geometry} \textbf{9} (2015), no.~2,
+359--390.
+\newblock doi:10.4171/JNCG/195.
+
+\bibitem{Cipriani2016}
+F.~Cipriani,
+\newblock Noncommutative potential theory: A survey,
+\newblock \emph{Journal of Geometry and Physics} \textbf{105} (2016), 25--59.
+
+\bibitem{Arhancet2024}
+C.~Arhancet,
+\newblock Spectral triples, Coulhon--Varopoulos dimension and heat kernel estimates,
+\newblock \emph{Advances in Mathematics} \textbf{451} (2024), 109794.
+
+\bibitem{ChiribellaDArianoPerinotti2009}
+G.~Chiribella, G.~M.~D'Ariano, and P.~Perinotti,
+\newblock Theoretical framework for quantum networks,
+\newblock \emph{Physical Review A} \textbf{80} (2009), 022339.
+
+\bibitem{PollockProcessTensor2018}
+F.~A.~Pollock, C.~Rodr\'iguez-Rosario, T.~Frauenheim, M.~Paternostro, and K.~Modi,
+\newblock Non-Markovian quantum processes: Complete framework and efficient
+characterization,
+\newblock \emph{Physical Review A} \textbf{97} (2018), 012127.
+\newblock doi:10.1103/PhysRevA.97.012127.
+
+\bibitem{PollockEtAl2018}
+F.~A.~Pollock, C.~Rodr\'iguez-Rosario, T.~Frauenheim, M.~Paternostro, and K.~Modi,
+\newblock Operational Markov condition for quantum processes,
+\newblock \emph{Physical Review Letters} \textbf{120} (2018), 040405.
+
+\bibitem{Jaeger2000}
+H.~Jaeger,
+\newblock Observable operator models for discrete stochastic time series,
+\newblock \emph{Neural Computation} \textbf{12} (2000), no.~6, 1371--1398.
+\newblock doi:10.1162/089976600300015411.
+
+\bibitem{LittmanSuttonSingh2001}
+M.~L.~Littman, R.~S.~Sutton, and S.~Singh,
+\newblock Predictive representations of state,
+\newblock in \emph{Advances in Neural Information Processing Systems 14},
+MIT Press, 2002, pp.~1555--1561.
+
+\bibitem{SinghJamesRudary2004}
+S.~Singh, M.~R.~James, and M.~R.~Rudary,
+\newblock Predictive state representations: A new theory for modeling dynamical
+systems,
+\newblock in \emph{Proceedings of the 20th Conference on Uncertainty in Artificial
+Intelligence}, 2004, pp.~512--519.
+
+\bibitem{CrutchfieldYoung1989}
+J.~P.~Crutchfield and K.~Young,
+\newblock Inferring statistical complexity,
+\newblock \emph{Physical Review Letters} \textbf{63} (1989), 105--108.
+\newblock doi:10.1103/PhysRevLett.63.105.
+
+\bibitem{shalizicrutchfield}
+C.~R.~Shalizi and J.~P.~Crutchfield,
+\newblock Computational mechanics: Pattern and prediction, structure and simplicity,
+\newblock \emph{Journal of Statistical Physics} \textbf{104} (2001), 817--879.
+
+\bibitem{TraversCrutchfield2025}
+N.~F.~Travers and J.~P.~Crutchfield,
+\newblock Equivalence of history and generator $\epsilon$-machines,
+\newblock \emph{Symmetry} \textbf{17} (2025), no.~1, 78.
+\newblock doi:10.3390/sym17010078.
+
+\bibitem{MarzenCrutchfield2017}
+S.~E.~Marzen and J.~P.~Crutchfield,
+\newblock Structure and randomness of continuous-time, discrete-event processes,
+\newblock \emph{Journal of Statistical Physics} \textbf{169} (2017), 303--315.
+
+\bibitem{Rieffel1998}
+M.~A.~Rieffel,
+\newblock Metrics on states from actions of compact groups,
+\newblock \emph{Documenta Mathematica} \textbf{3} (1998), 215--230.
+\newblock doi:10.4171/DM/41.
+
+\bibitem{lawson-michelsohn}
+H.~B.~Lawson and M.-L.~Michelsohn,
+\newblock \emph{Spin Geometry},
+\newblock Princeton University Press, Princeton, 1989.
+
+\bibitem{nielsenninomiya1981a}
+H.~B.~Nielsen and M.~Ninomiya,
+\newblock Absence of neutrinos on a lattice. I. Proof by homotopy theory,
+\newblock \emph{Nuclear Physics B} \textbf{185} (1981), 20--40.
+
+\bibitem{nielsenninomiya1981b}
+H.~B.~Nielsen and M.~Ninomiya,
+\newblock Absence of neutrinos on a lattice. II. Intuitive topological proof,
+\newblock \emph{Nuclear Physics B} \textbf{193} (1981), 173--194.
+
+\bibitem{Nakamura2024}
+S.~Nakamura,
+\newblock Remarks on discrete Dirac operators and their continuum limits,
+\newblock \emph{Journal of Spectral Theory} \textbf{14} (2024), no.~1,
+255--269.
+\newblock doi:10.4171/JST/478.
+
+\end{thebibliography}
+
+
+
+
+
+\clearpage
+
+% Manual link from the main TOC to the Mathematical Supplement
+\phantomsection
+\addcontentsline{toc}{section}{S.~Mathematical Supplement}
+
+\mathsupplementtrue
+\appendix
+\renewcommand{\thesection}{S\arabic{section}}
+\setcounter{section}{0}
+
+
+\renewcommand{\thesection}{S\arabic{section}}
+\setcounter{section}{0}
+
+\begin{center}
+{\LARGE\bfseries Mathematical Supplement}
+\end{center}
+\vspace{1em}
+
+The main text reconstructs the finite Renewal Grand Tensor from operational
+histories before introducing spectral data.  Its algebraic sector canonically
+supplies the future-minimal predictive carrier, the represented history algebra,
+and its positive moment structure, while a compatible first-order variation is
+supplied separately.  The mathematical supplement begins at this algebraic
+interface, since the spectralization theorems depend only on the resulting
+finite-dimensional unital $C^*$-algebra, faithful tracial state, and compatible
+derivation into a Hilbert bimodule.
+
+The associated Hodge--Dirac construction yields a real even spectral triple,
+whose metric scale is not fixed by the algebra and trace alone, and whose Dirac
+operator is determined by its commutator derivation only modulo a compatible
+self-adjoint commutant.  After adjoining finite calibrated markings, every finite
+spectral packet is reconstructible; every separable compact-resolvent packet arises
+as a strong cofinal limit of such finite reconstructions, while norm-monoidal
+realizability is equivalent to spectral quasidiagonality.  For stationary Markov
+graphs, the Hodge--Dirac square is the symmetric generator and its commutator
+seminorm is the corresponding local quadratic form; on periodic $A_3$
+approximants, the resulting Connes distance converges uniformly to the Riemannian
+metric reconstructed independently from the jump second moments.  The same
+framework also makes the nonfaithfulness of spectralization explicit through
+stationary currents, dynamical memory, and global marked monodromy, together with
+their natural coarse-graining maps.  The sections below give the precise
+definitions, hypotheses, constructions, and proofs underlying these results.
+
+\medskip
+\supplementtableofcontents
+
+% =============================================================================
+\section{Finite spectralization and essential image}
+\label{sec:finite}
+% =============================================================================
+
+\subsection{Algebraic input and operational motivation}
+\label{subsec:algebraic-input}
+
+The finite construction requires only a finite-dimensional unital $C^*$-algebra
+$\A$, a faithful tracial state $\tau$, and the differential datum specified
+below.  No operational reconstruction theorem is assumed.  The Hilbert space
+of zero-forms is the vector space $\A$ with inner product
+\begin{equation}
+ \Hh_0=L^2(\A,\tau),\qquad
+ \langle a,b\rangle_0=\tau(a^*b).
+ \label{eq:history-H0}
+\end{equation}
+Faithfulness makes this inner product nondegenerate.  Left and right
+multiplication are bounded commuting actions, with adjoints $L_a^*=L_{a^*}$
+and $R_a^*=R_{a^*}$.  The right action is a representation of the opposite
+algebra: $R_aR_b=R_{ba}$.
+
+There is a distinguished possible choice of trace, but the results do not
+require it.  If $\A\cong\bigoplus_\lambda M_{n_\lambda}(\C)$, its normalized
+regular trace is
+\begin{equation}
+ \widehat\tau_{\rm reg}(a)
+ =\frac{\Tr_{\C}(L_a)}{\dim_{\C}\A}
+ =\frac{\sum_\lambda n_\lambda\Tr(a_\lambda)}
+        {\sum_\lambda n_\lambda^2}.
+ \label{eq:regular-trace-selfcontained}
+\end{equation}
+This is a faithful tracial state invariant under $*$-isomorphisms.  Thus both
+$\A$ and $\widehat\tau_{\rm reg}$ have ordinary finite-dimensional algebraic
+meanings independent of the motivating history construction.
+
+A Hilbert $\A$-bimodule means a Hilbert space $\mathcal K$ with commuting
+unital $*$-representations of $\A$ and $\A^{\rm op}$.  We denote these by
+$\lambda_{\mathcal K}(a)$ and $\rho_{\mathcal K}(b)$, so that
+$a\xi b=\lambda_{\mathcal K}(a)\rho_{\mathcal K}(b)\xi$ and
+$\rho_{\mathcal K}(a)\rho_{\mathcal K}(b)=\rho_{\mathcal K}(ba)$.
+
+\begin{definition}[Finite real differential datum]
+\label{def:finite-real-differential}
+A finite real differential datum on $(\A,\tau)$ consists of a Hilbert
+$\A$-bimodule $\mathcal K$, an antiunitary involution $C_{\mathcal K}$ with
+\[
+ C_{\mathcal K}(a\xi b)=b^*C_{\mathcal K}(\xi)a^*,
+\]
+and a complex-linear map $\delta:\A\to\mathcal K$ satisfying
+\begin{equation}
+ \delta(\one)=0,\qquad
+ \delta(ab)=a\delta(b)+\delta(a)b,\qquad
+ C_{\mathcal K}\delta(a)=\delta(a^*).
+ \label{eq:predictive-derivation}
+\end{equation}
+Only the bimodule generated by $\delta(\A)$ is retained.  The term
+\emph{predictive differential datum} will occasionally be used when this same
+algebraic datum is obtained from the operational setting.  No result in this
+section depends on how the datum was produced.
+\end{definition}
+
+For completeness, the one-form construction can be performed entirely within
+this datum.  The universal first-order calculus is
+\begin{equation}
+ \Om_u^1(\A)=\Ker(m:\A\otimes\A\to\A),\qquad
+ \dd_u a=\one\otimes a-a\otimes\one,
+ \label{eq:universal-oneforms}
+\end{equation}
+with bimodule action $c(a\otimes b)d=ca\otimes bd$ and conjugate-linear reversal
+\begin{equation}
+ \left(\sum_i a_i\otimes b_i\right)^\natural
+ =-\sum_i b_i^*\otimes a_i^*.
+ \label{eq:oneform-reversal}
+\end{equation}
+Direct expansion gives $(\dd_u a)^\natural=\dd_u(a^*)$ and
+$\dd_u(ab)=a\dd_u b+(\dd_u a)b$.
+The map
+\[
+ T_\delta\left(\sum_i a_i\otimes b_i\right)
+ =\sum_i a_i\delta(b_i),\qquad \sum_i a_ib_i=0,
+\]
+is the unique bimodule map with $T_\delta\dd_u=\delta$.  Indeed, the
+Leibniz rule makes it right linear because the additional term is
+$(\sum_i a_ib_i)\delta(c)=0$; left linearity is immediate.
+Star compatibility gives
+$T_\delta(\omega^\natural)=C_{\mathcal K}T_\delta(\omega)$.
+Consequently
+\begin{equation}
+ Q_\delta(\omega,\eta)
+ =\langle T_\delta\omega,T_\delta\eta\rangle_{\mathcal K}
+ \label{eq:differential-Gram}
+\end{equation}
+is positive, and its null space is exactly $\Ker T_\delta$.  The resulting
+one-form Hilbert space is
+\begin{equation}
+ \Hh_1(\delta)=\Om_u^1(\A)/\Ker T_\delta
+ \cong\Ran T_\delta
+ =\Span\{a\delta(b)c:a,b,c\in\A\}.
+ \label{eq:H1-delta}
+\end{equation}
+It is finite dimensional even if the initially supplied $\mathcal K$ is not.
+The displayed identification is isometric, so this quotient removes exactly
+the unused bimodule directions.  This is the meaning of \emph{source minimality}
+here.  Write $\partial a=[\dd_u a]$ for the induced derivation.
+
+Predictive histories provide a motivation and a class of examples, rather than
+extra axioms for this construction.  Section~\ref{subsec:grand-tensor-main}
+reconstructs self-containedly the finite Renewal Grand Tensor $\GTX$ from
+operational histories.  In particular, $\GTX$ canonically contains the separated
+history algebra $\A_X^{\mathrm{hist}}$ and its positive word-moment hierarchy;
+the normalized regular trace is an intrinsic faithful tracial state on that
+finite algebra.  A compatible first-order variation $\delta_X$ is then supplied
+as the additional differential datum to be spectralized, as described in
+Section~\ref{subsec:grand-tensor-main}.  Once $(\A,\tau,\delta)$ is given,
+the finite results below use only the algebraic data of
+Definition~\ref{def:finite-real-differential}.
+
+\subsection{The associated spectral triple}
+
+Set $\Hh_0=L^2(\A,\tau)$ and let $L_a$ and $R_a$ denote left and right
+multiplication on $\Hh_0$.  On
+\begin{equation}
+ \Hh=\Hh_0\oplus\Hh_1(\delta)
+ \label{eq:H-total}
+\end{equation}
+define
+\begin{equation}
+ \pi(a)=L_a\oplus\lambda(a),
+ \qquad
+ D=\begin{pmatrix}0&\partial^*\\ \partial&0\end{pmatrix},
+ \qquad
+ \gamma=\begin{pmatrix}I&0\\0&-I\end{pmatrix}.
+ \label{eq:finite-D}
+\end{equation}
+On $\Hh_0$ put $J_0a=a^*$, and on $\Hh_1(\delta)$ let
+$J_1[\omega]=[\omega^\natural]$; set $J=J_0\oplus J_1$.
+
+\begin{theorem}[Finite spectralization]
+\label{thm:finite-spectralization}
+The quintuple $(\A,\Hh,D,J,\gamma)$ is a real even finite spectral triple.
+More precisely, $\pi$ is faithful, $D$ is self-adjoint, $J$ is antiunitary,
+\[
+ J^2=I,\qquad JD=DJ,\qquad J\gamma=\gamma J,
+\]
+and the opposite representation is
+\[
+ \pi^o(b)=J\pi(b^*)J^{-1}=R_b\oplus\rho(b).
+\]
+For all $a,b\in\A$,
+\begin{equation}
+ [\pi(a),\pi^o(b)]=0,
+ \qquad
+ [[D,\pi(a)],\pi^o(b)]=0.
+ \label{eq:order-zero-first}
+\end{equation}
+If $B_a:\Hh_0\to\Hh_1(\delta)$ is defined by
+$B_ab=(\partial a)b$, then
+\begin{equation}
+ [D,\pi(a)]
+ =\begin{pmatrix}0&-B_{a^*}^*\\B_a&0\end{pmatrix}.
+ \label{eq:finite-commutator}
+\end{equation}
+In particular, for $a=a^*$,
+\begin{equation}
+ \|[D,\pi(a)]\|=\|B_a\|,
+ \qquad
+ \Ker\bigl(a\mapsto\|[D,\pi(a)]\|\bigr)=\Ker\partial\cap\A_{\rm sa}.
+ \label{eq:finite-Lip}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Faithfulness follows from the left regular summand.  Since all spaces are finite
+dimensional, $D$ is self-adjoint with compact resolvent.  The Leibniz rule gives
+\[
+ (\partial L_a-\lambda(a)\partial)b
+ =\partial(ab)-a\partial b=(\partial a)b=B_ab,
+\]
+and taking adjoints yields \eqref{eq:finite-commutator}.  The reversal identities
+make $J_1$ antiunitary and imply $J_1\partial=\partial J_0$, hence $JD=DJ$.
+Moreover $J_0L_{b^*}J_0=R_b$ and
+$J_1\lambda(b^*)J_1=\rho(b)$, so the opposite representation has the asserted
+form.  Left and right actions commute.  Finally, the lower-left block of the
+double commutator is $B_aR_b-\rho(b)B_a$, which vanishes because $B_a$ is right
+$\A$-linear.  The upper-right block is its adjoint.  For self-adjoint $a$, the two
+off-diagonal blocks are adjoints, proving \eqref{eq:finite-Lip}.
+\end{proof}
+
+\begin{remark}
+The real structure in Theorem~\ref{thm:finite-spectralization} is the algebraic
+reversal associated with the history bimodule.  Additional physical interpretations
+of $J$ require extra markings and are not used in the mathematical results below.
+\end{remark}
+
+\begin{proposition}[No algebra-and-trace determination of the Dirac scale]
+\label{prop:no-scale}
+Let $\delta\neq0$ be a finite real differential datum and let $s>0$.  Replacing
+$\delta$ by $s\delta$ leaves $(\A,\tau)$ unchanged and, under the canonical
+identification of the one-form carriers, sends
+\begin{equation}
+ D\longmapsto sD,
+ \qquad
+ L_D(a):=\|[D,\pi(a)]\|\longmapsto sL_D(a).
+ \label{eq:scale-D}
+\end{equation}
+Whenever the Connes distance is finite, it scales as
+$d_D\mapsto s^{-1}d_D$.  Hence the algebra and canonical trace do not determine an
+absolute spectral metric scale.
+\end{proposition}
+
+\begin{proof}
+The inner product induced by $s\delta$ is $s^2Q_\delta$, so the canonical unitary
+from the scaled one-form carrier to the original one sends the derivation vector
+$[\dd_u a]$ to $s[\dd_u a]$.  Both off-diagonal blocks of $D$ therefore acquire the
+factor $s$.  The commutator and dual-distance scalings follow immediately.
+\end{proof}
+
+The spectral seminorm also gives a compact quantum metric space, provided that
+zero differential means constant observable.  This is the finite-dimensional
+form of the state-space criterion underlying Rieffel's theory
+\cite{Rieffel1998,Rieffel1999}.
+
+\begin{proposition}[Compact quantum metric-space structure]
+\label{prop:finite-CQMS}
+Suppose $\Ker\partial=\C\one$ and set
+$L_D(a)=\|[D,\pi(a)]\|$.  On the real order-unit space $\A_{\rm sa}$,
+$L_D$ is a continuous Lip-norm.  Explicitly, the distance
+\begin{equation}
+ \operatorname{mk}_{L_D}(\varphi,\psi)
+ =\sup\{|\varphi(a)-\psi(a)|:
+          a=a^*,\ L_D(a)\le1\}
+ \label{eq:finite-state-metric}
+\end{equation}
+is finite on the state space $S(\A)$ and induces its weak-$*$ topology.
+Moreover, the complex extension satisfies
+\begin{equation}
+ L_D(ab)\le\|a\|L_D(b)+\|b\|L_D(a),\qquad
+ L_D(a^*)=L_D(a).
+ \label{eq:Leibniz-Lip}
+\end{equation}
+Conversely, if $\Ker\partial\ne\C\one$, the distance in
+\eqref{eq:finite-state-metric} is infinite for some pair of states, so it is
+not a compact quantum metric on the whole state space.
+\end{proposition}
+
+\begin{proof}
+The commutator is a linear map between finite-dimensional normed spaces;
+hence $L_D$ is continuous.  The commutator product rule and the $*$-identity
+give \eqref{eq:Leibniz-Lip}.  By Theorem~\ref{thm:finite-spectralization},
+the kernel on $\A_{\rm sa}$ is $\R\one$.
+On $E_\tau=\{a=a^*:\tau(a)=0\}$ it follows that $L_D$ is a norm, and
+finite-dimensional norm equivalence gives a constant $C_\delta$ such that
+\begin{equation}
+ \|a-\tau(a)\one\|\le C_\delta L_D(a),\qquad a=a^*.
+ \label{eq:finite-Poincare-Lip}
+\end{equation}
+Thus $\{a\in E_\tau:L_D(a)\le1\}$ is norm compact.  Scalar multiples of
+$\one$ do not affect differences of states, so the supremum in
+\eqref{eq:finite-state-metric} can be taken over this compact set and is at
+most $2C_\delta$.  Weak-$*$ convergence of states is uniform on a norm-compact
+set, since states have norm one; it therefore implies convergence in
+$\operatorname{mk}_{L_D}$.  Conversely, for each self-adjoint $a$,
+\[
+ |\varphi(a)-\psi(a)|\le L_D(a)
+       \operatorname{mk}_{L_D}(\varphi,\psi),
+\]
+with the scalar case immediate.  Hence metric convergence implies weak-$*$
+convergence and the metric separates states.
+
+If the kernel is larger, star compatibility gives a non-scalar self-adjoint
+$b\in\Ker\partial$.  States separate self-adjoint elements modulo scalars,
+so some $\varphi,\psi$ have $\varphi(b)\ne\psi(b)$.  Every multiple $tb$
+has zero seminorm, making their distance infinite.
+\end{proof}
+
+The quotient used here is $\A_{\rm sa}/\R\one$; the metric itself is on
+$S(\A)$, not on a quotient of states.  Finite dimensionality is essential to
+the automatic compactness argument: for an infinite-dimensional limit, a scalar
+kernel alone does not replace total boundedness of the normalized Lipschitz ball.
+
+
+\begin{proposition}[Unit zero-mode of the austere Hodge construction]
+\label{prop:austere-zero-mode}
+For every differential datum of Definition~\ref{def:finite-real-differential}, the
+Hodge operator of Theorem~\ref{thm:finite-spectralization} satisfies
+\begin{equation}
+ D(\one,0)=0.
+ \label{eq:austere-zero-mode}
+\end{equation}
+Consequently the bare Hodge functor $\mathfrak H_{\rm fin}$ never produces an
+invertible finite Dirac operator.  More generally, knowledge of the commutator
+derivation does not determine the component of $D$ in the compatible commutant;
+that residual ambiguity is characterized in Theorem~\ref{thm:commutant-fibre}.
+\end{proposition}
+
+\begin{proof}
+The universal derivation satisfies $\partial\one=0$, hence the lower-left block of
+$D(\one,0)$ vanishes; the upper-right block acts on the zero one-form component and
+vanishes as well.  The second assertion is immediate from
+Theorem~\ref{thm:commutant-fibre}.
+\end{proof}
+
+\subsection{The commutant fibre of a fixed derivation}
+
+Let $\mathsf S=(\A,\Hh,\pi,D,J,\gamma)$ be a finite marked spectral packet.  Define
+\begin{equation}
+ \mathfrak c_{\mathsf S}
+ =\{C\in\pi(\A)'_{\rm sa}:
+ C\gamma+\gamma C=0,\quad JC=\varepsilon'CJ\},
+ \label{eq:commutant-space}
+\end{equation}
+with the evident omission of a condition when the corresponding mark is absent.
+
+\begin{theorem}[Exact Dirac commutant fibre]
+\label{thm:commutant-fibre}
+Among self-adjoint operators with the declared grading and reality signs that
+implement the same commutator derivation $[D,\pi(\cdot)]$, the complete solution
+set is the affine space
+\begin{equation}
+ D+\mathfrak c_{\mathsf S}.
+ \label{eq:Dirac-affine}
+\end{equation}
+Let $P_{\mathfrak c_{\mathsf S}}$ denote Hilbert--Schmidt projection onto
+$\mathfrak c_{\mathsf S}$ and put
+\begin{equation}
+ D_{\rm der}=D-P_{\mathfrak c_{\mathsf S}}D.
+ \label{eq:centered-D}
+\end{equation}
+Then $D_{\rm der}$ is the unique minimum-Hilbert--Schmidt-norm representative of
+the affine fibre.  Moreover
+$q_{\mathsf S}=\dim_{\R}\mathfrak c_{\mathsf S}$ independent real linear scalar measurements
+are necessary and sufficient to distinguish every point of the fibre.
+\end{theorem}
+
+\begin{proof}
+If $D'$ has the same commutator derivation as $D$, then
+$C=D'-D$ commutes with $\pi(\A)$.  Subtracting the grading and reality equations
+for $D'$ and $D$ shows that $C\in\mathfrak c_{\mathsf S}$.  Conversely every
+$C\in\mathfrak c_{\mathsf S}$ preserves the commutators and the declared signs.
+Thus the solution set is \eqref{eq:Dirac-affine}.  Orthogonal projection gives
+\[
+ \|D+C\|_{\HS}^2
+ =\|D_{\rm der}\|_{\HS}^2
+  +\|P_{\mathfrak c_{\mathsf S}}D+C\|_{\HS}^2,
+\]
+which proves the minimum statement.  Finally, a bank of scalar anchors restricts
+to a real linear map on $\mathfrak c_{\mathsf S}$; injectivity requires at least
+$q_{\mathsf S}$ coordinates and is achieved by any basis of the dual space.
+\end{proof}
+
+\subsection{Functoriality and essential image}
+
+Let $\mathbf{RenDiff}_{\rm fin}$ have objects $(\A,\tau,\delta)$ as above and
+morphisms the trace-preserving $*$-isomorphisms intertwining the differential
+bimodule data.  The construction of Theorem~\ref{thm:finite-spectralization} is
+functorial: the algebra isomorphism induces unitaries on $L^2(\A,\tau)$ and on the
+minimal one-form quotient, and these unitaries intertwine $\pi,D,J,\gamma$.
+We denote this austere Hodge functor by $\mathfrak H_{\rm fin}$.
+
+The marked reconstruction considered next is a different, deliberately enlarged
+map.  It retains a represented carrier together with finitely many calibrated
+operator marks in addition to the differential datum; we denote it by
+$\mathfrak S_{\rm fin}^{\rm mark}$.  The distinction is essential.  The Hodge
+operator of Theorem~\ref{thm:finite-spectralization} annihilates $(\one,0)$, so the
+bare functor $\mathfrak H_{\rm fin}$ cannot be unitarily equivalent to an arbitrary
+invertible finite Dirac operator.  The marked image statement below concerns the
+enlarged calibrated reconstruction, not surjectivity of the Hodge functor.
+
+For the inverse problem we distinguish three categories.  In the \emph{finite
+marked category}, a finite target may retain finitely many calibration and marking
+data.  In the \emph{strong compact category}, finite-rank spectral compressions converge
+strongly on fixed vectors, resolvents, commutators, and matrix coefficients.  In
+the \emph{strict norm-monoidal category}, the finite compressions must additionally
+transport multiplication asymptotically in norm.  A compact-resolvent packet is
+called \emph{spectrally quasidiagonal} if there exist finite-rank projections
+$P_n\uparrow I$ with
+\begin{equation}
+ P_nD=DP_n,
+ \qquad
+ \|[P_n,\pi(a)]\|\longrightarrow0
+ \label{eq:sqd}
+\end{equation}
+for every $a$ in a dense spectral algebra, equivariantly for $J$ and $\gamma$ when
+these are marked.
+
+\begin{theorem}[Calibrated marked image and norm-compatible essential image]
+\label{thm:essential-image}
+The following statements concern the enlarged calibrated reconstruction in the
+first two lines and the norm-compatible approximation problem in the third.  They
+do not assert that the austere Hodge functor $\mathfrak H_{\rm fin}$ is surjective:
+\begin{equation}
+ \begin{aligned}
+ \EssIm(\mathfrak S_{\rm fin}^{\rm mark})
+   &=\mathbf{Spec}_{\rm fin},\\
+ \EssIm(\mathfrak S_{\rm cpt}^{\rm strong,mark})
+   &=\mathbf{Spec}_{\rm cpt}^{\rm sep},\\
+ \EssIm(\mathfrak S_{\rm cpt}^{\rm strict})
+   &=\mathbf{Spec}_{\rm cpt}^{\rm sqd}
+   \subsetneq\mathbf{Spec}_{\rm cpt}^{\rm sep}.
+ \end{aligned}
+ \label{eq:essential-image}
+\end{equation}
+Thus every finite spectral packet is reconstructible once the finite calibration
+marks defining the marked category are retained; every separable compact-resolvent
+packet is a strong cofinal limit of such finite marked reconstructions; and strict
+norm-monoidal realizability is equivalent to spectral quasidiagonality.
+\end{theorem}
+
+\begin{proof}
+For a finite target $(\mathcal B,K,\pi_0,D_0,J_0,\gamma_0)$, choose finitely
+many self-adjoint generators of $\pi_0(\mathcal B)$.  Their exponentials, with
+angles chosen so that functional calculus recovers the generators, give a finite
+family of generating unitary matrices.  Retain their full matrix-word
+coefficients on $K$, the declared $J_0,\gamma_0$ marks, and the calibrated
+unitary germ $U(t)=e^{-itD_0}$.  At this point $D_0$ is deliberately part of the
+calibration data: the identity $i\dot U(0)=D_0$ is a reconstruction of the marked
+generator, not a derivation of $D_0$ from $\mathcal B$ or from a Hodge differential.
+If only the conjugation germ is retained, its derivative determines the commutator
+action instead, and the missing compatible commutant coordinates are exactly those
+of Theorem~\ref{thm:commutant-fibre}.  Evaluation of these finite-dimensional
+marked data recovers the target up to unitary isomorphism.  The first equality in
+\eqref{eq:essential-image} should therefore be read as a calibrated reconstruction
+benchmark: it identifies which finite information closes the gap from the austere
+derivation image to an arbitrary marked target.  The predictive entrance and its Grand-Tensor interface are reconstructed
+self-containedly in Section~\ref{subsec:grand-tensor-main}; the companion Renewal
+Geometry work~\cite{PelissierRenewalSpacetime2026} develops the same predictive
+construction in the broader Lorentzian-spacetime setting.
+
+Let now $(\A,\Hh,\pi,D)$ be separable with compact resolvent.  Let $P_n$ be the
+increasing finite spectral projections of $D$.  Then $P_nD=DP_n$ and $P_n\to I$
+strongly.  For every fixed $a,b$,
+\begin{equation}
+ P_n\pi(ab)P_n-P_n\pi(a)P_n\pi(b)P_n
+ =P_n\pi(a)(I-P_n)\pi(b)P_n
+ \label{eq:compression-defect}
+\end{equation}
+tends strongly to zero.  Here the finite-stage observables are the compressed matrices
+$P_n\pi(a)P_n$; the compression map from the original algebra is not asserted
+to be a $*$-homomorphism at finite $n$.  This is precisely why its product defect
+is retained.  Applying the finite marked construction to these matrix data
+and $P_nDP_n$ yields strong convergence of fixed resolvents, commutators, and
+matrix coefficients, proving the second equality.
+
+If \eqref{eq:sqd} holds, \eqref{eq:compression-defect} tends to zero in norm, so
+the spectral packet lies in the strict image.  Conversely, norm multiplicativity
+applied to $(a^*,a)$ gives
+\[
+ \|P_n\pi(a)^*(I-P_n)\pi(a)P_n\|\to0,
+\]
+which is exactly
+$\|(I-P_n)\pi(a)P_n\|^2\to0$.  Applying the same argument to $a^*$ controls the
+opposite off-diagonal block, hence $\|[P_n,\pi(a)]\|\to0$.  This proves equality
+with the spectrally quasidiagonal class.
+
+Properness is seen from the Toeplitz representation on $\ell^2(\N_0)$ with number
+operator $Ne_k=ke_k$ and unilateral shift $Se_k=e_{k+1}$.  Any finite-rank
+projection commuting with $N$ is diagonal in the number basis, and every nontrivial
+finite diagonal projection has $\|[P,S]\|=1$.  Hence this compact-resolvent spectral
+packet lies in the strong image but not in the strict one.
+\end{proof}
+
+\begin{remark}
+The first equality in \eqref{eq:essential-image} is intentionally not an
+``emergence from the algebra'' statement.  The full generator germ is allowed as a
+calibration mark, so finite surjectivity by itself is formal.  The nontrivial
+rigidity content is instead the comparison with the austere Hodge image:
+Proposition~\ref{prop:austere-zero-mode} gives its unavoidable unit zero-mode, and
+Theorem~\ref{thm:commutant-fibre} identifies exactly what a fixed commutator
+derivation fails to determine.  The strict norm-monoidal line adds a separate,
+genuine approximation constraint.
+\end{remark}
+
+
+% =============================================================================
+\section{Metric realization and compact spin geometry}
+\label{sec:metric}
+% =============================================================================
+
+The essential-image theorem is a structural existence result.  To test whether the
+spectralization also has geometric content, one needs a metric reconstructed by a
+route that does not use the Dirac operator.  Stationary graph dynamics provides a
+particularly transparent setting because the symmetric jump covariance determines
+such an independent metric quantity.
+
+\subsection{Stationary graphs and the Hodge--Dirac operator}
+
+\begin{definition}[Stationary finite renewal graph]
+\label{def:supp-renewal-graph}
+Let $V$ be finite, let $m_x>0$ with $\sum_xm_x=1$, and let $k_{xy}\ge0$ for
+$x\ne y$.  Put
+\begin{equation}
+ (\mathcal Lf)(x)=\sum_{y\ne x}k_{xy}(f(y)-f(x)),
+ \qquad q_{xy}=m_xk_{xy},
+ \label{eq:supp-renewal-generator}
+\end{equation}
+and assume stationarity
+\begin{equation}
+ \sum_y(q_{xy}-q_{yx})=0
+ \qquad(x\in V).
+ \label{eq:supp-stationarity}
+\end{equation}
+Define
+\begin{equation}
+ c_{xy}=\frac{q_{xy}+q_{yx}}2=c_{yx},
+ \qquad
+ j_{xy}=\frac{q_{xy}-q_{yx}}2=-j_{yx}.
+ \label{eq:supp-conductance-current}
+\end{equation}
+Assume the undirected graph on the pairs with $c_{xy}>0$ is connected.
+\end{definition}
+
+Set
+\begin{equation}
+ \Hh_0=\ell^2(V,m),
+ \qquad
+ \Hh_1=\ell^2(E^{\rm or},c),
+ \qquad
+ (\partial f)(x,y)=f(y)-f(x),
+ \label{eq:supp-graph-carriers}
+\end{equation}
+where both orientations are retained and
+$\norm{\omega}_1^2=\sum_{x,y}c_{xy}|\omega(x,y)|^2$.  Let
+\begin{equation}
+ (\lambda(a)\omega)(x,y)=a(y)\omega(x,y),
+ \qquad
+ (\rho(a)\omega)(x,y)=a(x)\omega(x,y).
+ \label{eq:supp-graph-actions}
+\end{equation}
+Then $\partial(fg)=\lambda(f)\partial g+\rho(g)\partial f$.  The associated
+Hodge operator is
+\begin{equation}
+ D_{m,c}=\begin{pmatrix}0&\partial^*\\\partial&0\end{pmatrix}.
+ \label{eq:supp-graph-Dirac}
+\end{equation}
+
+\begin{theorem}[Renewal Hodge square and exact Lipschitz seminorm]
+\label{thm:supp-graph-square}
+Let $\mathcal L^\dagger$ be the adjoint of $\mathcal L$ in $\ell^2(V,m)$ and
+let $\mathcal L_s=(\mathcal L+\mathcal L^\dagger)/2$.  Then
+\begin{equation}
+ {D_{m,c}^2|_{\Hh_0}=\partial^*\partial=-2\mathcal L_s.}
+ \label{eq:supp-graph-square}
+\end{equation}
+For every real $f\in C(V)$,
+\begin{equation}
+ {
+ L_{m,c}(f)^2
+ =\norm{[D_{m,c},f]}^2
+ =\max_{x\in V}\frac1{m_x}
+   \sum_yc_{xy}|f(y)-f(x)|^2.}
+ \label{eq:supp-graph-Lip}
+\end{equation}
+The kernel of $L_{m,c}$ is the constants, so the Connes formula gives a finite
+metric on $V$.  On the reversible branch, $\mathcal L=\mathcal L_s$ and
+$D_{m,c}^2|_{\Hh_0}=-2\mathcal L$.
+\end{theorem}
+
+\begin{proof}
+The adjoint generator has rates $q_{yx}/m_x$, so $\mathcal L_s$ has rates
+$c_{xy}/m_x$.  Therefore
+\[
+ -\ip{f}{\mathcal L_sf}_0
+ =\frac12\sum_{x,y}c_{xy}|f(y)-f(x)|^2
+ =\frac12\norm{\partial f}_1^2.
+\]
+Polarization gives \eqref{eq:supp-graph-square}.  The lower-left commutator
+block satisfies
+\[
+ (B_fg)(x,y)=(f(y)-f(x))g(x).
+\]
+Hence
+\[
+ \norm{B_fg}_1^2
+ =\sum_x|g(x)|^2\sum_yc_{xy}|f(y)-f(x)|^2.
+\]
+Its norm relative to $\sum_xm_x|g(x)|^2$ is the maximum in
+\eqref{eq:supp-graph-Lip}.  Connectedness makes $\partial f=0$ equivalent to
+constancy.
+\end{proof}
+
+The connectedness assumption has a state-space consequence as well as a
+pointwise one.  Proposition~\ref{prop:finite-CQMS} implies that
+$(C(V)_{\rm sa},L_{m,c})$ is a compact quantum metric space.  This
+finite-dimensional Lip-norm fact is standard and is not the new assertion of this
+section.  The relevant structural identity is the exact equality
+\eqref{eq:supp-graph-Lip} between the commutator seminorm and the local
+carr\'e-du-champ of the symmetric Markov generator; the continuum result below is
+the uniform convergence of the resulting $A_3$ Connes metric to the independently
+reconstructed Riemannian metric.  Its states are
+probability distributions on $V$, and the spectral metric on those distributions
+induces their usual weak-$*$ topology.  This conclusion does not require the
+Hodge operator itself to be invertible; it is the scalar kernel of the
+\emph{commutator seminorm} that matters.  The following large one-form kernel is
+therefore an issue for the operator continuum limit, not for the finite Lip-norm.
+
+\begin{proposition}[Extensive kernel of the one-step graph calculus]
+\label{cth:supp-extensive-kernel}
+Let the connected underlying graph have $n$ vertices and $e$ undirected edges,
+and retain both orientations in $\Hh_1$.  Then
+\begin{equation}
+ {\dim\Ker D_{m,c}=2e-n+2.}
+ \label{eq:supp-extensive-kernel}
+\end{equation}
+On a periodic $A_3$ root graph, $e=6n$, so the kernel has dimension $11n+2$.
+Thus the one-step universal graph calculus cannot itself have a compact-
+resolvent cofinal limit retaining all one-form directions.
+\end{proposition}
+
+\begin{proof}
+Connectedness gives $\dim\Ker\partial=1$ and $\rank\partial=n-1$.  Since the
+directed one-form space has dimension $2e$,
+$\dim\Ker\partial^*=2e-n+1$.  Because
+$\Ker D=(\Ker\partial)\oplus(\Ker\partial^*)$, the formula follows.
+\end{proof}
+
+\subsection{The periodic $A_3$ model and convergence of the Connes metric}
+
+Let
+\begin{equation}
+ W_0=\left\{x\in\R^4:\sum_{i=1}^4x_i=0\right\},
+ \qquad
+ \Lambda_{A_3}=W_0\cap\Z^4,
+ \label{eq:supp-A3-lattice}
+\end{equation}
+and let
+$\Phi_{A_3}=\{e_i-e_j:i\ne j\}$ be the twelve oriented roots.
+
+\begin{lemma}[$A_3$ tight-frame identity]
+\label{lem:supp-A3-frame}
+On $W_0$,
+\begin{equation}
+ {\sum_{\alpha\in\Phi_{A_3}}\alpha\alpha^{\mathsf T}=8I_{W_0}.}
+ \label{eq:supp-A3-frame}
+\end{equation}
+Equivalently,
+$\sum_{i\ne j}(v_i-v_j)^2=8\norm v^2$ for $v\in W_0$.
+\end{lemma}
+
+\begin{proof}
+Expand the left side.  Each $v_i^2$ occurs six times in the two diagonal sums,
+while
+$\sum_{i\ne j}v_iv_j=(\sum_iv_i)^2-\sum_iv_i^2=-\sum_iv_i^2$.
+The total is $8\sum_i v_i^2$.  Polarization gives the operator identity.
+\end{proof}
+
+Put
+\begin{equation}
+ M=W_0/\Lambda_{A_3},
+ \qquad
+ V_h=h\Lambda_{A_3}/\Lambda_{A_3},
+ \qquad h=d^{-1},
+ \label{eq:supp-A3-torus}
+\end{equation}
+and assign each root edge the reversible rate and vertex mass
+\begin{equation}
+ k_{\alpha,h}=\frac1{8h^2},
+ \qquad
+ m_h(x)=h^3,
+ \qquad
+ c_{\alpha,h}=\frac h8.
+ \label{eq:supp-A3-data}
+\end{equation}
+
+\begin{theorem}[Exact finite $A_3$ spectralization]
+\label{thm:supp-A3-finite}
+The graph spectral triple has
+\begin{equation}
+ {
+ L_h(f)^2
+ =\max_{x\in V_h}\frac1{8h^2}
+  \sum_{\alpha\in\Phi_{A_3}}
+  |f(x+h\alpha)-f(x)|^2,}
+ \label{eq:supp-A3-Lip}
+\end{equation}
+\begin{equation}
+ {D_h^2|_{C(V_h)}=-2\mathcal L_h,}
+ \qquad
+ (\mathcal L_hf)(x)
+ =\frac1{8h^2}\sum_{\alpha\in\Phi_{A_3}}
+   (f(x+h\alpha)-f(x)).
+ \label{eq:supp-A3-square}
+\end{equation}
+For every $F\in C^2(M)$,
+\begin{equation}
+ \left|L_h(F|_{V_h})-\norm{\nabla F}_{L^\infty(M)}\right|
+ \le C_{A_3}h\norm F_{C^2(M)}.
+ \label{eq:supp-A3-Lip-convergence}
+\end{equation}
+Moreover $\mathcal L_hF\to\frac12\Delta F$ uniformly for $F\in C^4(M)$.
+\end{theorem}
+
+\begin{proof}
+The first two identities follow from \Cref{thm:supp-graph-square} and
+\eqref{eq:supp-A3-data}.  Taylor expansion gives
+\[
+ \frac{F(x+h\alpha)-F(x)}h
+ =\alpha\cdot\nabla F(x)+r_{\alpha,h}(x),
+ \qquad |r_{\alpha,h}(x)|\le Ch\norm F_{C^2}.
+\]
+Apply the reverse triangle inequality in $\ell^2(\Phi_{A_3})$ and
+\Cref{lem:supp-A3-frame}, then maximize over the mesh, to obtain
+\eqref{eq:supp-A3-Lip-convergence}.  For the generator, the linear terms cancel
+by central symmetry.  The quadratic term is
+$\frac1{16}\sum_\alpha(\alpha\otimes\alpha):\nabla^2F=\frac12\Delta F$;
+the cubic terms cancel and the remainder is $O(h^2\norm F_{C^4})$.
+\end{proof}
+
+\begin{lemma}[Compactness of discrete unit-Lipschitz functions]
+\label{lem:supp-A3-compactness}
+Let $h_n\downarrow0$ and let $f_n:V_{h_n}\to\R$ satisfy
+$L_{h_n}(f_n)\le1$ and $f_n(x_{0,n})=0$ for $x_{0,n}\to x_0$.  Then a
+subsequence of periodic piecewise-affine interpolants converges uniformly to
+$F\in W^{1,\infty}(M)$ with
+\begin{equation}
+ |\nabla F|\le1
+ \quad\text{almost everywhere}.
+ \label{eq:supp-A3-limit-Lip}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Equation~\eqref{eq:supp-A3-Lip} gives the root-edge bound
+$|f_n(x+h_n\alpha)-f_n(x)|\le\sqrt8h_n$.  A fixed shape-regular periodic
+simplicial refinement of the $A_3$ lattice therefore gives equi-Lipschitz,
+uniformly bounded interpolants.  Arzel\`a--Ascoli gives uniform convergence
+along a subsequence.
+
+The difference quotients
+$g_{n,\alpha}=(f_n(\cdot+h_n\alpha)-f_n)/h_n$ lie pointwise in the closed convex
+ball $\frac18\sum_\alpha|z_\alpha|^2\le1$.  Passing weak-* in $L^\infty$ and
+using discrete periodic summation by parts gives
+$g_\alpha=\alpha\cdot\nabla F$ distributionally.  The tight-frame identity then
+yields
+$|\nabla F|^2=\frac18\sum_\alpha|\alpha\cdot\nabla F|^2\le1$.
+\end{proof}
+
+\begin{theorem}[Renewal--spectral distance identity]
+\label{thm:supp-A3-distance}
+Let $d_h$ be the pure-state Connes distance defined by
+\eqref{eq:supp-A3-Lip}, and let $d_g$ be the flat geodesic distance of the
+metric independently reconstructed from the renewal second moment.  Then
+\begin{equation}
+ {
+ \sup_{x,y\in V_h}|d_h(x,y)-d_g(x,y)|\longrightarrow0.}
+ \label{eq:supp-A3-distance}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For the lower bound, mollify the one-Lipschitz function
+$z\mapsto d_g(z,y)$ periodically to obtain smooth $F_{y,\varepsilon}$ with
+$\|F_{y,\varepsilon}-d_g(\cdot,y)\|_\infty\le\varepsilon$ and
+$\|\nabla F_{y,\varepsilon}\|_\infty\le1$, uniformly in $y$.
+By \eqref{eq:supp-A3-Lip-convergence}, its sampled seminorm is at most
+$1+o_h(1)$.  The dual formula then gives
+$\liminf_h(d_h-d_g)\ge-2\varepsilon$ uniformly; let $\varepsilon\downarrow0$.
+
+If the upper bound failed, there would be $h_n\downarrow0$, vertices
+$x_n,y_n$, and real $f_n$ with $L_{h_n}(f_n)\le1$ and
+$f_n(x_n)-f_n(y_n)\ge d_g(x_n,y_n)+\varepsilon$.  Normalize by
+$f_n(y_n)=0$ and pass to subsequences.  By
+\Cref{lem:supp-A3-compactness}, the interpolants converge uniformly to a
+one-Lipschitz $F$.  Thus
+$F(x)-F(y)\le d_g(x,y)$, contradicting the limiting inequality.
+\end{proof}
+
+
+Each finite $A_3$ approximant is consequently a compact quantum metric space.
+The distance convergence just proved concerns its pure states, that is, the
+vertices.  It is not by itself a quantum Gromov--Hausdorff, propinquity, or
+spectral-propinquity convergence theorem: those stronger notions compare the full
+Lip-norms, state spaces, and, in the spectral setting, the corresponding operator
+data \cite{Rieffel2004,Latremoliere2022,FarsiLatremolierePacker2024}.  In
+particular, a quadratic graph commutator seminorm need not be the ordinary
+Lipschitz seminorm of its pure-state metric \cite{Rieffel1999}.  Nor does the finite-dimensional conclusion of
+Proposition~\ref{prop:finite-CQMS} automatically survive an infinite-dimensional
+limit.  A limiting quantum compact metric-space statement would require a
+uniform total-boundedness or equicontinuity estimate for normalized Lipschitz
+balls (the noncommutative analogue of the Arzel\`a--Ascoli input), together with
+control of the limiting seminorm.  Lemma~\ref{lem:supp-A3-compactness} supplies
+the required precompactness for the scalar functions used in the pure-state
+metric proof, but it is not asserted here to prove convergence of the full
+quantum state spaces.  Keeping these assertions separate avoids conflating a
+pointwise metric limit with a noncommutative metric-space limit.
+
+\subsection{Local spin discretization and norm-resolvent convergence under atlas stability}
+
+The periodic model makes the metric comparison explicit.  We next formulate the
+local construction on an arbitrary closed Riemannian spin manifold
+$(M^d,g,\mathfrak s)$ and separate what is proved chartwise from the additional
+global compatibility needed for norm-resolvent convergence.  The local scalar
+ingredient is a positive decomposition of the inverse metric.
+
+\begin{lemma}[Positive local stencil]
+\label{lem:positive-stencil-main}
+Let
+\[
+ \mathcal R_d^+
+ =\{e_i:1\le i\le d\}
+ \cup\{e_i+e_j,e_i-e_j:1\le i<j\le d\}.
+\]
+After a linear normalization at a point, every inverse metric sufficiently close
+to the identity admits a decomposition
+\begin{equation}
+ g^{-1}(x)=\sum_{r\in\mathcal R_d^+}w_r(x)rr^{\mathsf T}
+ \label{eq:positive-stencil-main}
+\end{equation}
+with all $w_r(x)>0$.  Hence a finite good cover of a closed Riemannian manifold may
+be chosen so that such a positive stencil exists on every chart.
+\end{lemma}
+
+\begin{proof}
+Write $A=(A_{ij})$ for the normalized inverse metric and fix $\eta>0$ such that
+$|A_{ij}|<\eta$ for $i\neq j$ and $A_{ii}>(d-1)\eta$.  Set
+\[
+ w_i=A_{ii}-(d-1)\eta,
+ \qquad
+ w_{ij}^{\pm}=\tfrac12(\eta\pm A_{ij}).
+\]
+All coefficients are positive and direct expansion gives
+\[
+ A=\sum_iw_ie_ie_i^{\mathsf T}
+ +\sum_{i<j}\bigl[
+ w_{ij}^+(e_i+e_j)(e_i+e_j)^{\mathsf T}
+ +w_{ij}^-(e_i-e_j)(e_i-e_j)^{\mathsf T}\bigr].
+\]
+Continuity and compactness then give a finite cover.
+\end{proof}
+
+The weights in \eqref{eq:positive-stencil-main} define reversible local jump
+processes whose second moments converge to $g^{-1}$ and whose generators converge
+to $\frac12\Delta_g$.  To recover spin geometry one chooses the marked oriented
+orthonormal coframe and its spin lift.  This is additional information: the scalar
+metric bracket alone does not determine the spin structure.  With
+$c^j=E_a{}^j\gamma_a$ and $\rho=\sqrt{\det g}$, the geometric Dirac operator admits
+the density-symmetric representation
+\begin{equation}
+ \rho^{1/2}D_g\rho^{-1/2}
+ =-\frac{i}{2}\sum_{j=1}^d
+ \bigl(M_{c^j}\nabla_j+\nabla_jM_{c^j}\bigr),
+ \label{eq:density-symmetric-main}
+\end{equation}
+which is well suited to self-adjoint finite-difference discretization
+\cite{lawson-michelsohn}.
+
+A naive centered lattice Dirac operator generally has extra low-energy species;
+we therefore use a covariant Wilson term, as in the standard resolution of the
+fermion-doubling problem \cite{nielsenninomiya1981a,nielsenninomiya1981b}.
+Its role in rigorous continuum limits is discussed in \cite{Nakamura2024}.
+For fixed positive Wilson parameter, this term is $O(h)$ on sampled smooth
+spinors but of size $O(h^{-1})$ at nonzero lattice corners.  It removes the
+unwanted ultraviolet species without adding a term to the limiting equation
+on the smooth core.  The distinction between these two estimates is essential:
+the Wilson term does not tend to zero in operator norm on the whole lattice
+space.  A fixed two-dimensional normal Clifford factor supplies the stable
+real-even convention.
+
+Passing from local coordinate estimates to a closed manifold requires more
+than a positive overlap Gram.  The assembled finite operators must have a
+uniform first-order graph estimate, compatible reconstructions into the fixed
+spin bundle, and consistency on its smooth core.  These requirements are
+stated precisely in Definition~\ref{def:stable-spin-atlas}.  They also specify
+which self-adjoint continuum realization is intended: the closure on smooth
+spinors, with domain $H^1$, rather than independent boundary realizations on
+the coordinate charts.
+
+\begin{theorem}[Norm-resolvent convergence criterion under atlas stability]
+\label{thm:compact-spin-main}
+Let $(M^d,g,\mathfrak s)$ be a closed Riemannian spin manifold, and suppose that
+its finite covariant Wilson operators form a compatible stable spin
+discretization in the sense of Definition~\ref{def:stable-spin-atlas}.
+Then, for every $z\in\C\setminus\R$,
+\begin{equation}
+ \left\|W_h(D_h-z)^{-1}W_h^*
+       -(\widehat D_{M,\mathfrak s}-z)^{-1}\right\|\longrightarrow0,
+ \qquad \widehat D_{M,\mathfrak s}=D_{M,\mathfrak s}\otimes\sigma_1.
+ \label{eq:compact-spin-resolvent-main}
+\end{equation}
+The real and grading structures are retained when intertwined as specified
+there, and the global construction uses the fixed spin structure and
+orientation.  Independently, every closed Riemannian manifold admits finite
+metric triples on refining meshes with
+\begin{equation}
+ \sup_{x,y\in V_h}|d_h^{\rm met}(x,y)-d_g(x,y)|\longrightarrow0.
+ \label{eq:compact-spin-distance-main}
+\end{equation}
+Thus the spin conclusion is a convergence theorem for compatible stable
+assemblies; the scalar metric approximation does not require those additional
+spin-assembly hypotheses.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:positive-stencil-main} supplies reversible local generators
+whose scalar brackets approximate $g^{-1}$.  On the spin side, the frozen
+Wilson square controls the full forward-difference symbol uniformly, including
+nonzero Brillouin corners.  Appendix~\ref{app:compact-spin} gives the explicit
+symbol comparison and derives the chartwise G\aa rding bound by localization
+on fixed, sufficiently small coordinate patches.
+
+In a compatible global assembly, smooth cutoffs with
+$\sum_\alpha\chi_\alpha^2=1$ introduce no order-one boundary term:
+$\sum_\alpha\chi_\alpha[\widehat D,\chi_\alpha]=0$ after the spin and
+density transitions are included.  The analogous Wilson double-commutator
+error is $O(h)$ on common meshes.  For independently meshed charts, the
+interpolation and assembled stability requirements are part of the explicit
+atlas hypotheses, not a consequence of positivity alone.
+
+Self-adjointness bounds the discrete resolvents by
+$|\operatorname{Im}z|^{-1}$.  The global graph estimate and reconstruction
+bounds make their images collectively compact in $L^2$.  Testing the
+resolvent equation against sampled smooth spinors identifies every limit with
+$(\widehat D-z)^{-1}$; the same argument at $\bar z$ gives adjoint
+convergence.  These facts yield norm convergence by the compactness argument
+proved in Theorem~\ref{thm:supp-compact-spin-resolvent}.
+
+For the metric conclusion, connect mesh points at distances of a mesoscopic
+scale $\rho_h\downarrow0$, with $h/\rho_h\to0$, using endpoint blocks weighted
+by the lengths of short Riemannian curves.  The commutator seminorm is the
+ordinary graph Lipschitz seminorm.  Approximating minimizing geodesics by mesh
+paths gives, uniformly,
+\[
+ d_g(x,y)\le d_h^{\rm met}(x,y)
+ \le d_g(x,y)+C\left(\rho_h+\frac h{\rho_h}\right).
+\]
+This proves \eqref{eq:compact-spin-distance-main}; the complete metric
+construction is in Theorem~\ref{thm:supp-global-metric}.
+\end{proof}
+
+\begin{remark}
+The theorem is Riemannian.  It does not require, and does not assert, a Lorentzian
+or interacting quantum-field-theoretic completion.  The role of the fixed normal
+Clifford factor is only to provide a stable real-even lattice realization.
+The local construction proves the necessary chartwise estimates.  An
+unconditional assertion that a particular atlas construction realizes every
+closed spin manifold additionally requires verification of the global
+compatibility and stability properties in Definition~\ref{def:stable-spin-atlas}.
+The convergence criterion does not assume that this follows merely from an
+overlap Gram quotient.
+\end{remark}
+
+
+% =============================================================================
+\section{Nonfaithfulness and inverse fibres}
+\label{sec:inverse}
+% =============================================================================
+
+The preceding sections show that the spectralization map has a broad essential
+image.  It is nevertheless far from injective.  Everything in this section is
+formulated in standard operator-theoretic terms once the graph generator, the
+operator-valued self-energy, or the marked spectral packet is specified; the
+Renewal terminology records one motivating interpretation and is not an
+additional hypothesis.  We describe three independent mechanisms of
+nonfaithfulness: directed current at fixed symmetric metric data, hidden
+dynamical memory, and global marked monodromy.  Each admits an intrinsic
+coordinate, and the principal coordinates transform functorially under coarse
+graining.
+
+\subsection{Directed currents at fixed metric geometry}
+
+Fix a connected undirected graph $G=(V,E)$, positive masses $m_x$, and positive
+conductances $c_e$.  Choose one orientation of each undirected edge and let
+$B:\R^E\to\R^V$ be the incidence matrix.  An oriented current is extended to
+the reverse orientation by $j_{\bar e}=-j_e$.
+
+\begin{definition}[Admissible cycle-current polytope]
+\label{def:supp-current-polytope}
+Define
+\begin{equation}
+ \mathcal J(G,c)
+ =\{j\in\Ker B:\abs{j_e}<c_e\text{ for every }e\in E\}.
+ \label{eq:supp-current-polytope}
+\end{equation}
+Allowing non-strict inequalities gives the closed fibre in which some directed
+rates may vanish.
+\end{definition}
+
+\begin{theorem}[Stationary Markov realization fibre of a metric graph triple]
+\label{thm:supp-graph-realization}
+Let
+$\mathfrak T(G,m,c)=(C(V),\Hh_{m,c},D_{m,c},J,\gamma)$ be the metric graph
+spectral triple of \Cref{thm:supp-graph-square}.  Then:
+\begin{enumerate}[label=\textup{(R\arabic*)},leftmargin=3em]
+\item it has the reversible Markov realization
+      \begin{equation}
+      k_{xy}^{\rm rev}=\frac{c_{xy}}{m_x};
+      \label{eq:supp-reversible-realization}
+      \end{equation}
+\item every $j\in\mathcal J(G,c)$ gives a stationary Markov realization
+      \begin{equation}
+      q_{xy}=c_{xy}+j_{xy},
+      \qquad
+      k_{xy}=\frac{c_{xy}+j_{xy}}{m_x};
+      \label{eq:supp-current-realization}
+      \end{equation}
+\item conversely, every stationary renewal generator with masses $m$ and
+      symmetric conductances $c$ is uniquely of the form
+      \eqref{eq:supp-current-realization};
+\item every realization in the fibre has the same metric spectral triple.
+\end{enumerate}
+Thus, up to unread parallel-channel refinements,
+\begin{equation}
+ {
+ \RReal_{\rm graph}(\mathfrak T(G,m,c))
+ \cong\mathcal J(G,c).}
+ \label{eq:supp-realization-fibre}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For \eqref{eq:supp-reversible-realization}, the stationary flux is
+$q_{xy}=c_{xy}=q_{yx}$, so detailed balance holds.  For
+\eqref{eq:supp-current-realization}, positivity follows from
+$|j_{xy}|<c_{xy}$.  Moreover
+\[
+ \sum_y(q_{xy}-q_{yx})=2\sum_yj_{xy}=0
+\]
+because $Bj=0$, so $m$ is stationary.  Conversely, for a stationary continuous-time Markov
+generator define $j=(q-q^{\mathsf T})/2$.  Stationarity gives $Bj=0$, positivity gives
+the edge inequalities, and $q=c+j$ is unique.  The graph spectralization uses
+only $m$ and $(q+q^{\mathsf T})/2=c$.
+\end{proof}
+
+\begin{corollary}[Dimension and faithfulness of the fibre]
+\label{cor:supp-fibre-dimension}
+For connected $G$,
+\begin{equation}
+ {\dim\mathcal J(G,c)=|E|-|V|+1=b_1(G).}
+ \label{eq:supp-fibre-dimension}
+\end{equation}
+The reversible realization is unique exactly when $G$ is a tree.  If
+$b_1(G)>0$, the metric spectralization map is not faithful.
+\end{corollary}
+
+\begin{proof}
+The incidence matrix of a connected graph has rank $|V|-1$, so
+$\dim\Ker B=|E|-|V|+1$.  The strict inequalities cut out an open neighborhood
+of zero in this cycle space.  A connected graph has zero first Betti number
+exactly when it is a tree.
+\end{proof}
+
+\begin{proposition}[Entropy production inside one spectral fibre]
+\label{prop:supp-entropy}
+For a stationary realization with current $j$, the steady entropy production
+is
+\begin{equation}
+ {
+ \sigma(j)
+ =2\sum_{e\in E}j_e
+   \log\frac{c_e+j_e}{c_e-j_e}\ge0.}
+ \label{eq:supp-entropy}
+\end{equation}
+It vanishes exactly at $j=0$.
+\end{proposition}
+
+\begin{proof}
+Start from
+$\frac12\sum_{x,y}(q_{xy}-q_{yx})\log(q_{xy}/q_{yx})$, pair the two
+orientations of each edge, and substitute $q_e=c_e+j_e$,
+$q_{\bar e}=c_e-j_e$.  Each summand is nonnegative because $j_e$ and the
+logarithm have the same sign; it vanishes only for $j_e=0$.
+\end{proof}
+
+\begin{example}[Three-cycle universality family]
+On an oriented three-cycle with equal conductance $c$, every constant current
+$j_e=s$, $|s|<c$, is divergence free.  All values of $s$ give one metric
+spectral triple, whereas
+\[
+ \sigma(s)=6s\log\frac{c+s}{c-s}
+\]
+varies continuously from zero and diverges as $|s|\uparrow c$.
+\end{example}
+
+\begin{theorem}[Finite spectral universality]
+\label{thm:supp-spectral-universality}
+There exist nonisomorphic stationary predictive graph dynamics
+$T_1\not\cong T_2$ with isomorphic metric spectral images.  More strongly, for
+every connected graph with $b_1(G)>0$, the fibre contains a
+$b_1(G)$-dimensional open family of dynamically inequivalent renewal laws.
+\end{theorem}
+
+\begin{proof}
+Choose two distinct currents in \eqref{eq:supp-current-polytope}.  Their
+directed fluxes and path probabilities differ, and generically their entropy
+productions differ, so the history-preserving renewal packets are not
+isomorphic.  \Cref{thm:supp-graph-realization} gives identical metric spectral
+images, and \Cref{cor:supp-fibre-dimension} gives the dimension.
+\end{proof}
+
+\subsection{The modular coordinate of the current fibre}
+
+For $j\in\mathcal J(G,c)$ define the real affinity
+\begin{equation}
+ a_e=\operatorname{arctanh}\frac{j_e}{c_e}
+ =\frac12\log\frac{c_e+j_e}{c_e-j_e}.
+ \label{eq:supp-affinity}
+\end{equation}
+Exact one-cochains are $\Ran B^{\mathsf T}$, so $a$ has a class
+$[a]\in H^1(G;\R)=\R^E/\Ran B^{\mathsf T}$.
+
+\begin{lemma}[Zero affinity class forces reversibility]
+\label{lem:supp-zero-affinity}
+If $j\in\mathcal J(G,c)$ is divergence free and $[a]=0$, then $j=0$.
+\end{lemma}
+
+\begin{proof}
+Write $a=B^{\mathsf T}\phi$.  Since
+$j_e=c_e\tanh((B^{\mathsf T}\phi)_e)$ and $Bj=0$,
+\[
+ 0=\langle\phi,Bj\rangle
+ =\sum_ec_e(B^{\mathsf T}\phi)_e
+       \tanh((B^{\mathsf T}\phi)_e).
+\]
+Every summand is nonnegative and vanishes only when the edge difference is
+zero.  Connectedness makes $\phi$ constant, hence $a=j=0$.
+\end{proof}
+
+\begin{theorem}[Nonlinear Hodge theorem for stationary affinities]
+\label{thm:supp-nonlinear-Hodge}
+The map
+\begin{equation}
+ \mathfrak A:\mathcal J(G,c)\longrightarrow H^1(G;\R),
+ \qquad
+ j\longmapsto[\operatorname{arctanh}(j/c)]
+ \label{eq:supp-affinity-map}
+\end{equation}
+is a diffeomorphism.  More explicitly, for a class $\alpha$ and representative
+$a_0$, define on mean-zero vertex potentials
+\begin{equation}
+ \mathcal F_\alpha(\phi)
+ =\sum_{e\in E}c_e
+  \log\cosh(a_{0,e}+(B^{\mathsf T}\phi)_e).
+ \label{eq:supp-convex-affinity-functional}
+\end{equation}
+This functional is coercive and strictly convex.  Its unique minimizer
+$\phi_\alpha$ gives
+\begin{equation}
+ a_\alpha=a_0+B^{\mathsf T}\phi_\alpha,
+ \qquad
+ j_{\alpha,e}=c_e\tanh(a_{\alpha,e}),
+ \qquad Bj_\alpha=0,
+ \label{eq:supp-affinity-inverse}
+\end{equation}
+and this is the unique current with modular class $\alpha$.
+\end{theorem}
+
+\begin{proof}
+On mean-zero potentials, connectedness gives a Poincar\'e estimate
+$\|\phi\|\le C\|B^{\mathsf T}\phi\|$.  Since
+$\log\cosh t\ge|t|-\log2$, the functional is coercive.  Its Hessian is
+\[
+ B\,\diag\!\left(c_e\operatorname{sech}^2
+  (a_{0,e}+(B^{\mathsf T}\phi)_e)\right)B^{\mathsf T},
+\]
+which is positive definite on the mean-zero subspace.  Thus there is a unique
+minimizer.  Its Euler equation is
+\[
+ 0=\sum_ec_e\tanh(a_{\alpha,e})(B^{\mathsf T}\psi)_e
+  =\langle Bj_\alpha,\psi\rangle,
+\]
+so $j_\alpha$ is divergence free.  Conversely, if $j$ is stationary and
+$a=\operatorname{arctanh}(j/c)$, then zero is the critical point of
+\eqref{eq:supp-convex-affinity-functional} in the class $[a]$; strict
+convexity makes it the unique minimizer.  Smooth dependence follows from the
+implicit-function theorem and the positive Hessian.
+\end{proof}
+
+\begin{corollary}[Faithful metric--modular enrichment]
+\label{cor:supp-faithful-modular}
+For fixed $(G,m,c)$, the enriched object
+\begin{equation}
+ \mathfrak S_{\rm mod}(T)
+ =\bigl(C(V),\Hh_{m,c},D_{m,c},J,\gamma;[a]\bigr)
+ \label{eq:supp-modular-enrichment}
+\end{equation}
+determines the complete stationary generator through
+\[
+ [a]\longmapsto a_\alpha
+ \longmapsto j=c\tanh a_\alpha
+ \longmapsto q=c+j
+ \longmapsto k_{xy}=q_{xy}/m_x.
+\]
+Hence the modular enrichment is faithful on each finite graph fibre.
+\end{corollary}
+
+\begin{proof}
+Apply \Cref{thm:supp-nonlinear-Hodge} and
+\Cref{thm:supp-graph-realization}.
+\end{proof}
+
+The entropy production is the modular pairing
+\begin{equation}
+ {\sigma(j)=4\sum_{e\in E}j_ea_e,}
+ \label{eq:supp-entropy-modular-pairing}
+\end{equation}
+and is unchanged by $a\mapsto a+B^{\mathsf T}\phi$ because
+$\langle j,B^{\mathsf T}\phi\rangle=\langle Bj,\phi\rangle=0$.
+
+\subsection{Relative modular data and cellular curvature}
+
+Let $E^{\rm or}$ contain both orientations of every edge, with reversal
+$e\mapsto\bar e$, source $s(e)$, terminal $t(e)=s(\bar e)$, and positive
+directed stationary flux $q_e$.  On $\Hh_E=\ell^2(E^{\rm or})$, define
+\begin{equation}
+ (J_E\xi)(e)=\overline{\xi(\bar e)},
+ \qquad
+ (\Delta_q\xi)(e)=\frac{q_e}{q_{\bar e}}\xi(e)=e^{2a_e}\xi(e),
+ \qquad
+ S_q=J_E\Delta_q^{1/2}.
+ \label{eq:supp-Tomita-packet}
+\end{equation}
+Source and terminal multiplication are
+$(\lambda_E(f)\xi)(e)=f(s(e))\xi(e)$ and
+$(\rho_E(f)\xi)(e)=f(t(e))\xi(e)$.
+
+\begin{theorem}[Finite modular-reversal identities]
+\label{thm:supp-Tomita}
+The packet \eqref{eq:supp-Tomita-packet} satisfies
+\begin{equation}
+ {
+ J_E^2=I,
+ \qquad
+ J_E\Delta_qJ_E=\Delta_q^{-1},
+ \qquad
+ S_q^2=I,}
+ \label{eq:supp-Tomita-identities}
+\end{equation}
+\begin{equation}
+ {
+ J_E\lambda_E(f^*)J_E=\rho_E(f),
+ \qquad
+ S_q\lambda_E(f^*)S_q^{-1}=\rho_E(f),
+ \qquad
+ \log\Delta_q(e)=2a_e.}
+ \label{eq:supp-Tomita-opposite}
+\end{equation}
+The reversible branch is exactly $\Delta_q=I$.
+\end{theorem}
+
+\begin{proof}
+Reversal preserves counting measure, so $J_E$ is antiunitary and squares to
+the identity.  Since $a_{\bar e}=-a_e$, conjugating the diagonal multiplier
+$e^{2a_e}$ by $J_E$ gives its inverse; hence $S_q^2=I$.  The source of the
+reversed edge is the terminal of the original edge, proving the opposite-action
+identities.  The logarithm statement is the definition of $a_e$.
+\end{proof}
+
+For an oriented cycle $C$,
+\begin{equation}
+ \operatorname{Hol}_{\Delta}(C)
+ =\prod_{e\in C}\left(\frac{q_e}{q_{\bar e}}\right)^{\epsilon_{C,e}}
+ =\exp\left(2\sum_{e\in C}\epsilon_{C,e}a_e\right).
+ \label{eq:supp-modular-cycle-holonomy}
+\end{equation}
+
+Now let
+\begin{equation}
+ C^0\xrightarrow{d_0}C^1\xrightarrow{d_1}C^2
+ \xrightarrow{d_2}C^3
+ \label{eq:supp-cellular-Hodge-complex}
+\end{equation}
+be a finite real Hilbert complex and let
+$\mathscr H^1=\Ker d_1\cap\Ker d_0^*$.
+
+\begin{theorem}[Cellular modular Hodge reconstruction]
+\label{thm:supp-modular-Hodge}
+For $a\in C^1$, define
+\begin{equation}
+ h_a=P_{\mathscr H^1}a,
+ \qquad
+ F_a=d_1a.
+ \label{eq:supp-modular-hF}
+\end{equation}
+Then $a$ has the unique orthogonal decomposition
+\begin{equation}
+ {a=d_0\phi+h_a+d_1^*\psi.}
+ \label{eq:supp-modular-Hodge}
+\end{equation}
+Its coexact part is reconstructed from the curvature by
+\begin{equation}
+ P_{\Ran d_1^*}a
+ =d_1^*(d_1d_1^*)^\dagger F_a.
+ \label{eq:supp-modular-coexact}
+\end{equation}
+Consequently
+\begin{equation}
+ C^1/\Ran d_0\longrightarrow\mathscr H^1\oplus\Ran d_1,
+ \qquad
+ [a]_{\rm gauge}\longmapsto(h_a,F_a)
+ \label{eq:supp-modular-gauge-map}
+\end{equation}
+is injective and onto the displayed product.  A canonical representative is
+\begin{equation}
+ a_{h,F}=h+d_1^*(d_1d_1^*)^\dagger F.
+ \label{eq:supp-modular-representative}
+\end{equation}
+Moreover $d_2F_a=0$ and
+\begin{equation}
+ \norm a^2
+ =\norm{d_0\phi}^2+\norm{h_a}^2
+ +\ip{F_a}{(d_1d_1^*)^\dagger F_a}.
+ \label{eq:supp-modular-norm}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Finite Hodge decomposition gives
+$C^1=\Ran d_0\oplus\mathscr H^1\oplus\Ran d_1^*$, proving
+\eqref{eq:supp-modular-Hodge}.  Since $d_1$ annihilates the first two
+summands, $F_a=d_1d_1^*\psi$; Moore--Penrose inversion on $\Ran d_1$ gives
+\eqref{eq:supp-modular-coexact}.  If two cochains have the same $(h,F)$, their
+difference has zero harmonic projection and lies in $\Ker d_1$.  Its coexact
+part then has zero norm, so the difference is exact.  This proves injectivity;
+\eqref{eq:supp-modular-representative} proves surjectivity.  Orthogonality
+gives the norm identity, and $d_2d_1=0$ gives the Bianchi identity.
+\end{proof}
+
+\begin{corollary}[Flat, globally twisted, and curved modular branches]
+\label{cor:supp-modular-trichotomy}
+For a cellular affinity $a$:
+\begin{enumerate}[label=\textup{(M\arabic*)},leftmargin=3em]
+\item if $F_a\ne0$, the modular transport has local face curvature;
+\item if $F_a=0$ but $h_a\ne0$, it is locally flat with nontrivial global positive
+      holonomy;
+\item if $F_a=h_a=0$, then $a=d_0\phi$ and the modular packet is removed by a
+      positive vertex gauge.
+\end{enumerate}
+On the periodic three-torus, the global flat sector has dimension three.
+\end{corollary}
+
+\begin{theorem}[Face holonomy]
+\label{thm:supp-face-holonomy}
+For every oriented loaded two-cell $p$,
+\begin{equation}
+ {
+ \prod_{e\subset\partial p}
+ \left(\frac{q_e}{q_{\bar e}}\right)^{\epsilon_{p,e}}
+ =\exp(2F_a(p)).}
+ \label{eq:supp-face-holonomy}
+\end{equation}
+Thus a source--terminal modular transport descends to a flat cell-line packet
+exactly when every face-curvature residual vanishes.
+\end{theorem}
+
+\begin{proof}
+By the cellular coboundary formula,
+$F_a(p)=\sum_e\epsilon_{p,e}a_e$.  Substitute
+$q_e/q_{\bar e}=e^{2a_e}$ and multiply.
+\end{proof}
+\subsection{Hidden dynamical memory}
+\label{subsec:dynamic-memory}
+
+The graph-current fibre concerns directed dynamics at fixed metric geometry.
+A second inverse fibre appears when auxiliary memory degrees of freedom have been eliminated
+into an effective head operator.  The dynamic coordinate is the whole
+resolvent self-energy rather than one static Schur value.
+
+\begin{definition}[Positive operator-valued tail measure]
+\label{def:supp-POVM}
+Let $H$ be finite dimensional.  A bounded positive operator-valued tail
+measure is a weakly countably additive map
+\[
+ \mu:\mathfrak B((0,\infty))\to\mathcal B(H),
+ \qquad
+ \mu(E)\succeq0,
+ \qquad
+ \|\mu((0,\infty))\|<\infty.
+\]
+Its Stieltjes self-energy is
+\begin{equation}
+ {
+ \Sigma_\mu(z)
+ =\int_{(0,\infty)}
+  \frac{1}{\lambda-z}\,\dd\mu(\lambda),
+ \qquad z\in\mathbb C\setminus[0,\infty).}
+ \label{eq:supp-Stieltjes}
+\end{equation}
+\end{definition}
+
+\begin{construction}[Canonical minimal Stieltjes dilation]
+\label{con:supp-Naimark-tail}
+Let $\mathscr S_\mu$ be the finite $H$-valued Borel simple functions and set
+\[
+ \left\langle
+ \sum_j\one_{E_j}\xi_j,
+ \sum_k\one_{F_k}\eta_k
+ \right\rangle_\mu
+ =
+ \sum_{j,k}
+ \langle\xi_j,\mu(E_j\cap F_k)\eta_k\rangle.
+\]
+Quotient by the null space and complete to $K_\mu$.  Multiplication by
+$\one_E$ defines a projection-valued measure $P_\mu(E)$, and
+\[
+ C_\mu=\int\lambda\,\dd P_\mu(\lambda),
+ \qquad
+ V_\mu\xi=[\one_{(0,\infty)}\xi],
+ \qquad
+ B_\mu=V_\mu^*.
+\]
+\end{construction}
+
+\begin{theorem}[Operator-measure realization and minimality]
+\label{thm:supp-Naimark-realization}
+Every bounded positive operator-valued measure satisfies
+\begin{equation}
+ {
+ \Sigma_\mu(z)
+ =B_\mu(C_\mu-z)^{-1}B_\mu^*.}
+ \label{eq:supp-Naimark-realization}
+\end{equation}
+Moreover
+\begin{equation}
+ {
+ K_\mu
+ =\overline{\Span}\{
+ P_\mu(E)B_\mu^*\xi:
+ E\in\mathfrak B((0,\infty)),\ \xi\in H\}.}
+ \label{eq:supp-Naimark-minimal}
+\end{equation}
+Conversely, if $C\ge0$ is self-adjoint on $K$, $B:K\to H$ is bounded, and
+\[
+ K=\overline{\Span}\{E_C(E)B^*H\},
+\]
+then $\mu(E)=BE_C(E)B^*$ is a bounded positive operator-valued measure with
+self-energy $B(C-z)^{-1}B^*$.  Two minimal realizations of the same
+$\mu$ are related by a unique unitary $U$ satisfying
+\begin{equation}
+ {UC_1=C_2U,\qquad UB_1^*=B_2^*.}
+ \label{eq:supp-Naimark-unitary}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The spectral calculus gives
+\[
+ B_\mu(C_\mu-z)^{-1}B_\mu^*
+ =V_\mu^*
+ \left(\int\frac{1}{\lambda-z}\,\dd P_\mu(\lambda)\right)V_\mu
+ =\int\frac{1}{\lambda-z}\,\dd\mu(\lambda).
+\]
+Every simple function is a finite sum of vectors
+$P_\mu(E)V_\mu\xi$, proving \eqref{eq:supp-Naimark-minimal}.
+
+For the converse, the spectral theorem gives positivity and countable
+additivity of $BE_C(E)B^*$.  On the algebraic span of spectral-source vectors
+define
+\[
+ U_0\left(\sum_jE_C(E_j)B^*\xi_j\right)
+ =
+ \sum_jP_\mu(E_j)V_\mu\xi_j.
+\]
+The squared norms on the two sides are both
+\[
+ \sum_{j,k}
+ \langle\xi_j,BE_C(E_j\cap E_k)B^*\xi_k\rangle,
+\]
+so $U_0$ is well defined and isometric.  Source minimality makes its extension
+unitary.  It intertwines every spectral projection, hence $C$, and sends
+$B^*$ to $V_\mu$.  Applying the same construction to two realizations proves
+existence and uniqueness of \eqref{eq:supp-Naimark-unitary}.
+\end{proof}
+
+\begin{theorem}[Static shadows, inverse moments, and positive Euclidean memory]
+\label{thm:supp-dynamic-jets}
+For $\operatorname{Im}z>0$,
+\begin{equation}
+ \operatorname{Im}\Sigma_\mu(z)
+ =(\operatorname{Im}z)
+  \int\frac{1}{|\lambda-z|^2}\,\dd\mu(\lambda)
+ \succeq0.
+ \label{eq:supp-Herglotz-sign}
+\end{equation}
+The finite static shadow
+\[
+ Q_0=\lim_{s\downarrow0}\Sigma_\mu(-s)
+\]
+exists exactly when the inverse first moment is bounded, and then
+\begin{equation}
+ {Q_0=\int\lambda^{-1}\,\dd\mu(\lambda).}
+ \label{eq:supp-static-inverse-moment}
+\end{equation}
+If the corresponding inverse moment is finite, the $r$-th boundary jet is
+\begin{equation}
+ {
+ \Sigma_{\mu,-}^{(r)}(0)
+ =r!\int\lambda^{-(r+1)}\,\dd\mu(\lambda).}
+ \label{eq:supp-dynamic-jet}
+\end{equation}
+The Euclidean memory kernel
+\begin{equation}
+ {
+ K_\mu(t)=\int e^{-t\lambda}\,\dd\mu(\lambda)
+ =B_\mu e^{-tC_\mu}B_\mu^*}
+ \label{eq:supp-Euclidean-memory}
+\end{equation}
+is positive and
+\[
+ \Sigma_\mu(-s)
+ =\int_0^\infty e^{-st}K_\mu(t)\,\dd t.
+\]
+\end{theorem}
+
+\begin{proof}
+The scalar identity
+$\operatorname{Im}(\lambda-z)^{-1}
+=(\operatorname{Im}z)|\lambda-z|^{-2}$ gives the sign after positive
+operator integration.  Monotone convergence along $z=-s$ gives
+\eqref{eq:supp-static-inverse-moment}.  Differentiating
+$(\lambda-z)^{-1}$ gives the higher inverse moments.  The spectral calculus
+gives the second equality in \eqref{eq:supp-Euclidean-memory}; Tonelli's
+theorem applied to scalarizations gives the Laplace relation.
+\end{proof}
+
+\begin{remark}[Positive memory is not full OS positivity]
+Positivity of $K_\mu(t)$ is a two-point positive memory statement.  It does not
+by itself supply a Euclidean field law, a positive-time product algebra, or
+Osterwalder--Schrader positivity for reflected words.
+\end{remark}
+
+\begin{theorem}[Determinacy on controlled support]
+\label{thm:supp-memory-determinacy}
+If $\supp\mu$ is compact, the complete nonnegative moment sequence
+$M_n=\int\lambda^n\,\dd\mu(\lambda)$ determines $\mu$ uniquely.  The same
+conclusion holds on unbounded support if
+$\int e^{a\lambda}\,\dd\Tr\mu(\lambda)<\infty$ for some $a>0$.
+\end{theorem}
+
+\begin{proof}
+On compact support, equality of all moments gives equality against all
+polynomials; Stone--Weierstrass gives equality against every continuous
+function, and polarization gives equality of the operator measures.
+
+Under an exponential moment, each scalarized Laplace transform
+$\int e^{-t\lambda}\,\dd\langle\xi,\mu\eta\rangle$ extends holomorphically to
+a half-plane containing the origin.  Its Taylor coefficients are the moments.
+Equality of all moments therefore gives equality of the Laplace transforms
+near zero and hence throughout the connected half-plane.  Uniqueness of the
+Laplace transform and polarization recover $\mu$.
+\end{proof}
+
+\begin{proposition}[All integer moments can miss the dynamic self-energy]
+\label{cth:supp-moment-indeterminate}
+For $|\varepsilon|\le1$ define
+\begin{equation}
+ {
+ \dd\mu_\varepsilon(x)
+ =
+ \left[1+\varepsilon\sin(2\pi\log x)\right]
+ \frac{e^{-(\log x)^2/2}}{x\sqrt{2\pi}}\,\dd x.}
+ \label{eq:supp-lognormal-family}
+\end{equation}
+Then for every integer $n\in\mathbb Z$,
+\begin{equation}
+ {
+ \int_0^\infty x^n\,\dd\mu_\varepsilon(x)=e^{n^2/2}}
+ \label{eq:supp-lognormal-moments}
+\end{equation}
+independently of $\varepsilon$.  Nevertheless
+$\varepsilon\ne\varepsilon'$ implies that the Stieltjes transforms differ for
+some, hence an open set of, $z\in\mathbb C\setminus[0,\infty)$.  Consequently
+all positive moments, all inverse integer moments, and every finite Hankel
+panel can agree while the dynamic self-energies are inequivalent.
+\end{proposition}
+
+\begin{proof}
+Set $y=\log x$.  The perturbation of the $n$-th moment is
+\[
+ \frac1{\sqrt{2\pi}}
+ \int_\mathbb R
+ e^{ny-y^2/2}\sin(2\pi y)\,\dd y
+ =
+ \operatorname{Im}
+ \exp\!\left(\frac{(n+2\pi i)^2}{2}\right)
+ =
+ e^{(n^2-4\pi^2)/2}\sin(2\pi n)=0
+\]
+for every $n\in\mathbb Z$.  The unperturbed lognormal moment is
+$e^{n^2/2}$.  Distinct $\varepsilon$ give distinct measures.
+
+If a finite signed measure on $[0,\infty)$ had identically zero Stieltjes
+transform on the negative real axis, the identity
+\[
+ \int\frac{1}{x+s}\,\dd\sigma(x)
+ =
+ \int_0^\infty e^{-st}
+ \left(\int e^{-tx}\,\dd\sigma(x)\right)\dd t
+\]
+and two applications of uniqueness of the Laplace transform would force
+$\sigma=0$.  Hence distinct measures have distinct Stieltjes transforms.
+\end{proof}
+
+\begin{theorem}[High-energy memory escape and instantaneous contact terms]
+\label{thm:supp-contact-escape}
+Let $\mu_n$ be positive tail measures supported in $[m,\infty)$ for one
+$m>0$ and define
+\[
+ \dd\nu_n(\lambda)=\lambda^{-1}\dd\mu_n(\lambda),
+ \qquad
+ Q_n=\nu_n([m,\infty))=\Sigma_n(0).
+\]
+If $\sup_n\Tr Q_n<\infty$, every sequence has a subsequence and a positive
+operator-valued measure on the one-point compactification of the form
+\[
+ \nu_\infty=\nu_{\rm fin}+Q_{\rm esc}\delta_\infty,
+ \qquad Q_{\rm esc}\succeq0,
+\]
+such that, locally uniformly off $[m,\infty)$,
+\begin{equation}
+ {
+ \Sigma_n(z)\longrightarrow
+ Q_{\rm esc}
+ +\int_{[m,\infty)}
+  \frac{\lambda}{\lambda-z}\,\dd\nu_{\rm fin}(\lambda).}
+ \label{eq:supp-contact-selfenergy}
+\end{equation}
+The Euclidean memory measures satisfy
+\begin{equation}
+ {
+ K_n(t)\,\dd t
+ \longrightarrow
+ Q_{\rm esc}\delta_0+K_{\rm fin}(t)\,\dd t.}
+ \label{eq:supp-contact-kernel}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The matrix entries of $\nu_n$ are uniformly bounded finite measures on the
+compact space $[m,\infty]$.  Weak-* compactness and polarization give a
+positive operator-valued limit, which decomposes into finite and point-at-
+infinity parts.  For $z\notin[m,\infty)$,
+$g_z(\lambda)=\lambda/(\lambda-z)$ extends continuously to infinity with
+$g_z(\infty)=1$, proving \eqref{eq:supp-contact-selfenergy}.
+For $\varphi\in C_c([0,\infty))$,
+\[
+ h_\varphi(\lambda)
+ =\int_0^\infty\varphi(t)\lambda e^{-\lambda t}\,\dd t
+\]
+extends continuously with $h_\varphi(\infty)=\varphi(0)$; integration against
+$\nu_n$ gives \eqref{eq:supp-contact-kernel}.
+\end{proof}
+
+\begin{proposition}[The static triple does not identify escaped memory]
+\label{cth:supp-contact-static}
+For $Q\succeq0$ and $\lambda_n\to\infty$, let
+\[
+ \mu_n=\lambda_nQ\,\delta_{\lambda_n}.
+\]
+Then
+\begin{equation}
+ {
+ \Sigma_n(0)=Q,\qquad
+ \Sigma_n(z)=\frac{\lambda_n}{\lambda_n-z}Q\longrightarrow Q,}
+ \label{eq:supp-contact-static}
+\end{equation}
+whereas $\lambda_ne^{-\lambda_nt}Q\to0$ for every $t>0$ and converges
+distributionally to $Q\delta_0$.  The same static local correction is
+therefore compatible with an intrinsic head term or with memory escaping to
+infinite energy.
+\end{proposition}
+
+\begin{proof}
+The resolvent identities are immediate, and the exponential kernels form the
+standard positive approximate identity at the origin.
+\end{proof}
+\subsection{Global marked monodromy}
+
+\begin{definition}[Marked spectral packet]
+\label{def:supp-marked-spectral-packet}
+A marked finite spectral packet is
+\begin{equation}
+ \mathsf S=(\A,\Hh,D,J,\gamma;\mathfrak m),
+ \label{eq:supp-marked-packet}
+\end{equation}
+where $\mathfrak m$ denotes any declared auxiliary data that are required to be
+preserved by isomorphisms, such as orientation, modular, calibration, frame, or
+determinant-line markings.  Let
+\begin{equation}
+ G_{\mathsf S}=\operatorname{Aut}(\mathsf S)
+ \label{eq:supp-marked-aut}
+\end{equation}
+be the compact group of unitary packet automorphisms preserving those
+markings and the declared algebra automorphism convention.
+\end{definition}
+
+\begin{theorem}[Marked spectral-bundle descent]
+\label{thm:supp-marked-bundle}
+Let $\Gamma$ be connected, let each vertex packet be marked-isomorphic to
+$\mathsf S$, and let each oriented edge carry a marked unitary isomorphism
+$U_e$ with $U_{\bar e}=U_e^{-1}$.  Then:
+\begin{enumerate}[label=\textup{(B\arabic*)},leftmargin=3em]
+\item after choosing a base vertex and spanning tree, chord holonomies define a
+      homomorphism
+      \begin{equation}
+       \rho_U:\pi_1(\Gamma)\longrightarrow G_{\mathsf S};
+       \label{eq:supp-monodromy}
+      \end{equation}
+\item changing vertex frames conjugates $\rho_U$ by one element of
+      $G_{\mathsf S}$;
+\item one global marked trivialization exists if and only if $\rho_U$ is
+      trivial;
+\item in general the isomorphism class of the flat marked spectral bundle is
+      \begin{equation}
+       {
+       [\rho_U]\in
+       \operatorname{Hom}(\pi_1(\Gamma),G_{\mathsf S})/G_{\mathsf S}.}
+       \label{eq:supp-monodromy-class}
+      \end{equation}
+\end{enumerate}
+Since $\pi_1(\Gamma)$ is free of rank $b_1(\Gamma)$, the bundle is determined
+by $b_1(\Gamma)$ elements of $G_{\mathsf S}$ modulo simultaneous conjugation.
+\end{theorem}
+
+\begin{proof}
+Use the edge maps along a spanning tree to identify every vertex packet with
+the base packet.  Each chord gives the ordered product around its fundamental
+cycle, an element of $G_{\mathsf S}$.  These cycle values extend uniquely to a
+homomorphism from the free fundamental group.  Changing the base frame
+conjugates every cycle value by the same automorphism.  Trivial cycle values
+make the tree identification path independent and hence give one global marked
+frame.  Conversely, a global frame makes every cycle product telescope.  This
+is precisely the clutching classification
+\eqref{eq:supp-monodromy-class} on a graph.
+\end{proof}
+
+\begin{corollary}[Nontrivial monodromy is a twisted geometry]
+\label{cor:supp-twisted-bundle}
+If the local packets are marked-isomorphic and the edge identifications satisfy the declared compatibility relations while $[\rho_U]$ is nontrivial, the resulting object is a flat twisted spectral geometry rather than a globally trivial marked packet.
+\end{corollary}
+
+\begin{theorem}[Line characters are incomplete shadows of frame holonomy]
+\label{thm:supp-character-shadow}
+Let
+$\chi_1,\ldots,\chi_m:G_{\mathsf S}\to U(1)$ be determinant, charge, or other
+complex line characters and let
+$\epsilon_1,\ldots,\epsilon_r:G_{\mathsf S}\to\{\pm1\}$ be real Pfaffian-sign
+characters.  Trivial frame holonomy implies triviality of all induced line
+holonomies.  The converse holds exactly when
+\begin{equation}
+ {
+ \bigcap_j\Ker\chi_j\cap\bigcap_k\Ker\epsilon_k=\{1\}.}
+ \label{eq:supp-character-faithfulness}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Every character sends the identity to the identity.  If
+\eqref{eq:supp-character-faithfulness} holds and all character holonomies are
+trivial, every cycle value of $\rho_U$ lies in the displayed intersection and
+is therefore the identity.  Conversely, if the intersection contains
+$g\ne1$, assign $g$ as monodromy on a one-cycle graph.  Every listed character
+is trivial although the marked bundle is not.
+\end{proof}
+
+\begin{proposition}[A trivial determinant line need not trivialize the packet]
+\label{cth:supp-det-no-frame}
+Let a marked packet have scalar algebra, zero Dirac operator, and a
+multiplicity-two Hilbert carrier so that its marked automorphism group contains
+$SU(2)$.  On a one-cycle graph choose monodromy
+\begin{equation}
+ g=\begin{pmatrix}e^{i\theta}&0\\0&e^{-i\theta}\end{pmatrix},
+ \qquad \theta\notin2\pi\Z.
+ \label{eq:supp-SU2-monodromy}
+\end{equation}
+Then the determinant-line holonomy is one although the marked Hilbert bundle
+has nontrivial monodromy.
+\end{proposition}
+
+\begin{proof}
+Every $SU(2)$ element has determinant one, while the displayed matrix is not
+the identity.  Apply \Cref{thm:supp-marked-bundle,thm:supp-character-shadow}.
+\end{proof}
+\subsection{Coarse graining of the principal fibres}
+
+Let $\partial_G:\mathbb R^E\to\mathbb R^V$ be the oriented incidence map and
+$\mathcal Z(G)=\Ker\partial_G$.  A vertex quotient $q:V\twoheadrightarrow\bar V$
+induces maps $Q_V$ and $Q_E$ by summing vertex and oriented edge coefficients over
+fibres.
+
+\begin{theorem}[Current-chain functor]
+\label{thm:supp-current-chain}
+The incidence maps satisfy
+\begin{equation}
+{\partial_{\bar G}Q_E=Q_V\partial_G,}
+\label{eq:supp-current-chain}
+\end{equation}
+so $Q_E\mathcal Z(G)\subseteq\mathcal Z(\bar G)$.  If
+$\bar c_{\bar e}=\sum_{e\mapsto\bar e}c_e$, then
+$Q_E\Curr(G,c)\subseteq\Curr(\bar G,\bar c)$.  When the vertex fibres are
+connected and the coarse graph retains every inter-fibre edge class, the induced
+map on cycle spaces is onto and
+\begin{equation}
+0\longrightarrow\Ker(Q_E|_{\mathcal Z(G)})
+\longrightarrow\mathcal Z(G)
+\xrightarrow{Q_E}\mathcal Z(\bar G)
+\longrightarrow0,
+\label{eq:supp-cycle-exact}
+\end{equation}
+with
+\begin{equation}
+\dim\Ker(Q_E|_{\mathcal Z(G)})=b_1(G)-b_1(\bar G).
+\label{eq:supp-cycle-kernel-dim}
+\end{equation}
+The stationary entropy production satisfies
+\begin{equation}
+\sigma_{\bar G}(Q_Ej)\le\sigma_G(j).
+\label{eq:supp-entropy-contraction}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For a coarse vertex, the divergence of the summed inter-fibre current equals the
+sum of fine divergences; internal fine edges cancel in pairs.  This is exactly
+\eqref{eq:supp-current-chain}.  The conductance inequality
+$|(Q_Ej)_{\bar e}|\le\sum_{e\mapsto\bar e}|j_e|<\bar c_{\bar e}$ gives the fibre
+map.  Connected fibres allow every coarse cycle to be lifted and completed inside
+fibres, proving surjectivity.  The dimension formula follows from the Betti-number
+formula for connected graphs.  Finally, on every coarse edge the log-sum inequality
+for the aggregated forward and reverse fluxes gives entropy contraction; summing
+over coarse edges yields \eqref{eq:supp-entropy-contraction}.
+\end{proof}
+
+For an effective operator $A$ and positive memory measure $\mu$, write
+\begin{equation}
+F_{A,\mu}(z)=A-z-\Sigma_\mu(z),
+\qquad
+Q_{>\Lambda}=\int_{(\Lambda,\infty)}\lambda^{-1}\,\dd\mu(\lambda),
+\label{eq:supp-memory-head}
+\end{equation}
+and define
+\begin{equation}
+\RG_\Lambda(A,\mu)
+=\left(A-Q_{>\Lambda},\mu|_{(0,\Lambda]}\right).
+\label{eq:supp-memory-RG}
+\end{equation}
+
+\begin{theorem}[Exact memory RG semigroup]
+\label{thm:supp-memory-RG}
+If $(A_\Lambda,\mu_\Lambda)=\RG_\Lambda(A,\mu)$, then
+\begin{equation}
+{F_{A_\Lambda,\mu_\Lambda}(0)=F_{A,\mu}(0).}
+\label{eq:supp-memory-static-preserved}
+\end{equation}
+For $|z|\le r<\Lambda$,
+\begin{equation}
+{
+\|F_{A,\mu}(z)-F_{A_\Lambda,\mu_\Lambda}(z)\|
+\le\frac r{\Lambda-r}\|Q_{>\Lambda}\|.}
+\label{eq:supp-memory-screen-error}
+\end{equation}
+Moreover, if $0<\Lambda_2\le\Lambda_1$,
+\begin{equation}
+\RG_{\Lambda_2}\circ\RG_{\Lambda_1}=\RG_{\Lambda_2}.
+\label{eq:supp-memory-semigroup}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Split the Stieltjes integral at $\Lambda$.  At $z=0$ the removed high-energy part is
+exactly $Q_{>\Lambda}$ and is canceled by the head correction.  Away from zero,
+\[
+\frac1{\lambda-z}-\frac1\lambda
+=\frac z{\lambda(\lambda-z)},
+\]
+whose norm is at most
+$r[(\Lambda-r)\lambda]^{-1}$ for $\lambda>\Lambda$.  Integrating gives
+\eqref{eq:supp-memory-screen-error}.  Two successive cutoffs simply split the same
+measure into disjoint shells; their inverse-moment head corrections add, proving the
+semigroup law.
+\end{proof}
+
+Let $\rho:\pi_1(\Gamma,v_0)\to G_{\mathsf S}$ be marked monodromy and let a graph
+contraction $q:\Gamma\to\bar\Gamma$ induce a surjection $q_*$ on fundamental
+groups.
+
+\begin{theorem}[Exact marked-monodromy descent]
+\label{thm:supp-monodromy-descent}
+There is a unique $\bar\rho:\pi_1(\bar\Gamma)\to G_{\mathsf S}$ satisfying
+\begin{equation}
+\rho=\bar\rho\circ q_*
+\label{eq:supp-monodromy-factor}
+\end{equation}
+if and only if
+\begin{equation}
+{\Ker q_*\subseteq\Ker\rho.}
+\label{eq:supp-monodromy-kernel}
+\end{equation}
+The conjugacy class $[\bar\rho]$ is gauge independent and functorial under further
+contractions.  A determinant or Pfaffian character may satisfy its own descended
+kernel condition even when \eqref{eq:supp-monodromy-kernel} fails, so line descent
+does not imply descent of the full marked packet.
+\end{theorem}
+
+\begin{proof}
+If \eqref{eq:supp-monodromy-factor} holds, every element of $\Ker q_*$ lies in
+$\Ker\rho$.  Conversely, if \eqref{eq:supp-monodromy-kernel} holds, define
+$\bar\rho(q_*\gamma)=\rho(\gamma)$.  The kernel condition makes the definition
+independent of the chosen lift.  Surjectivity of $q_*$ gives uniqueness and the
+quotient-group universal property gives functoriality.  The character statement
+follows by applying the same argument to a nonfaithful one-dimensional
+representation of $G_{\mathsf S}$.
+\end{proof}
+
+\begin{theorem}[Functorial principal universality packet]
+\label{thm:supp-fibre-RG}
+Collect
+\begin{equation}
+\mathfrak U(G,c;A,\mu;\rho)
+=\bigl(\Curr(G,c),(A,\mu),[\rho]\bigr).
+\label{eq:supp-U-packet}
+\end{equation}
+For a connected-fibre graph quotient, a memory threshold $\Lambda$, and a compatible
+isometric effective-space compression $V$, define
+\begin{equation}
+{
+\mathfrak U\longmapsto
+\left(
+Q_E\Curr(G,c),
+\bigl(V^*(A-Q_{>\Lambda})V,
+      V^*\mu|_{(0,\Lambda]}V\bigr),
+[\bar\rho]
+\right).}
+\label{eq:supp-U-map}
+\end{equation}
+When the monodromy kernel condition holds, this map is canonical and composes
+strictly for composable graph quotients, nested memory thresholds and compatible
+head maps.  Along it, entropy production cannot increase; the zero-energy Schur complement is preserved before effective-space compression; minimal dilation rank and
+Pontryagin negative-square index cannot increase; and marked monodromy descends
+exactly when collapsed cycles lie in its kernel.
+\end{theorem}
+
+\begin{proof}
+The current and entropy statements are \Cref{thm:supp-current-chain}; the memory
+statement and exact composition are \Cref{thm:supp-memory-RG}; the monodromy part is
+\Cref{thm:supp-monodromy-descent}.  Compression of a positive minimal memory dilation
+carrier cannot increase source rank.  For a generalized-Nevanlinna kernel, head
+compression replaces each finite kernel Gram by a congruence, which cannot increase
+the number of negative eigenvalues.  Each component is uniquely determined by the
+corresponding quotient data, so the product map is canonical and composes
+componentwise.
+\end{proof}
+
+\section{Analytic details for compact-spin spectralization}
+\label{app:compact-spin}
+% =============================================================================
+
+The periodic $A_3$ construction in Section~\ref{sec:metric} supplies the explicit metric model.  This appendix records the analytic estimates used in the compact-spin convergence criterion.  The chartwise construction is verified below; the global theorem additionally assumes the atlas stability conditions of Definition~\ref{def:stable-spin-atlas}.
+
+\subsection{A positive Renewal stencil for an arbitrary local inverse metric}
+
+Let $d\ge2$ and put
+\begin{equation}
+\mathcal R_d^+
+=\{e_i:1\le i\le d\}
+\cup\{e_i+e_j,e_i-e_j:1\le i<j\le d\}.
+\label{eq:supp-general-stencil}
+\end{equation}
+There are exactly $d^2$ unoriented directions.
+
+\begin{lemma}[Positive $d^2$-direction decomposition]
+\label{lem:supp-positive-decomposition}
+Let $A=(A_{ij})\in\operatorname{Sym}_d(\mathbb R)$ and suppose that for some
+$\eta>0$,
+\begin{equation}
+|A_{ij}|<\eta\quad(i\ne j),
+\qquad
+A_{ii}>(d-1)\eta.
+\label{eq:supp-stencil-window}
+\end{equation}
+Define
+\begin{equation}
+w_i=A_{ii}-(d-1)\eta,
+\qquad
+w_{ij}^{\pm}=\frac12(\eta\pm A_{ij}).
+\label{eq:supp-stencil-weights}
+\end{equation}
+Then every coefficient is strictly positive and
+\begin{equation}
+{
+A=\sum_iw_ie_ie_i^{\mathsf T}
++\sum_{i<j}\left[
+ w_{ij}^+(e_i+e_j)(e_i+e_j)^{\mathsf T}
++w_{ij}^-(e_i-e_j)(e_i-e_j)^{\mathsf T}
+\right].}
+\label{eq:supp-positive-decomposition}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Positivity follows immediately from \eqref{eq:supp-stencil-window}.  In the
+right-hand side of \eqref{eq:supp-positive-decomposition}, the $(i,j)$ off-diagonal
+entry is $w_{ij}^+-w_{ij}^-=A_{ij}$.  Every pair containing $i$ contributes
+$w_{ij}^++w_{ij}^-=\eta$ to the $i$th diagonal, so the diagonal coefficient is
+$w_i+(d-1)\eta=A_{ii}$.
+\end{proof}
+
+A linear coordinate normalization makes $g^{-1}$ equal to $I_d$ at the centre of a
+chart.  By continuity, after shrinking the chart, the inverse metric remains inside
+one window \eqref{eq:supp-stencil-window}.  Compactness gives a finite good cover by
+such charts.
+
+Let $\rho=\sqrt{\det g}$ and write the decomposition coefficients of $g^{-1}$ as
+$w_r(x)$, $r\in\mathcal R_d^+$.  Put $a_r(x)=\rho(x)w_r(x)$.  On
+$Q_h=h\mathbb Z^d/\mathbb Z^d$ take
+\begin{equation}
+m_h(x)=h^d\rho(x),
+\qquad
+c_h(x,r)=\frac{h^{d-2}}4\bigl(a_r(x)+a_r(x+hr)\bigr).
+\label{eq:supp-general-conductance}
+\end{equation}
+The two directed rates are the conductance divided by the corresponding endpoint
+mass.
+
+\begin{theorem}[Reversible coframe Renewal process]
+\label{thm:supp-general-renewal-process}
+The packet \eqref{eq:supp-general-conductance} is reversible with stationary mass
+$m_h$.  Its predictable coordinate bracket is
+\begin{equation}
+{
+\mathcal B_h(x)
+=\frac1{4\rho(x)}
+\sum_{r\in\mathcal R_d^+}
+\bigl[a_r(x+hr)+2a_r(x)+a_r(x-hr)\bigr]rr^{\mathsf T},}
+\label{eq:supp-general-bracket}
+\end{equation}
+and satisfies
+\begin{equation}
+\|\mathcal B_h-g^{-1}\|_{L^\infty}\le Ch^2.
+\label{eq:supp-general-bracket-error}
+\end{equation}
+For every $f\in C^4$,
+\begin{equation}
+{\mathcal L_hf=\frac12\Delta_gf+O(h^2\|f\|_{C^4})}
+\label{eq:supp-general-generator}
+\end{equation}
+uniformly on the chart, and the Dirichlet forms converge to
+\begin{equation}
+-\langle f_h,\mathcal L_hf_h\rangle_{m_h}
+\longrightarrow
+\frac12\int g^{ij}\partial_if\,\partial_j\overline f\,\rho\,\dd x.
+\label{eq:supp-general-form-limit}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Symmetry of $c_h$ gives detailed balance.  The bracket follows by summing the two
+orientations of every direction through a vertex.  Taylor expansion of
+$a_r(x\pm hr)$ cancels odd terms and, together with
+\eqref{eq:supp-positive-decomposition}, gives
+\eqref{eq:supp-general-bracket-error}.  Expanding
+$f(x\pm hr)$ to fourth order, the first-order terms cancel and the second-order
+terms contract with the same tensor decomposition.  The derivative of the physical
+density and of the conductances produces the divergence-form first-order part of
+$\Delta_g$, yielding \eqref{eq:supp-general-generator}.  Summation by parts gives
+the finite Dirichlet form; the coefficient convergence and Riemann sums give
+\eqref{eq:supp-general-form-limit}.
+\end{proof}
+
+\begin{proposition}[The metric bracket does not select the spin marking]
+\label{cth:supp-metric-no-coframe}
+The positive bracket determines $g^{-1}$ but not an oriented orthonormal coframe, a
+spin lift, or a global spin structure.  A smooth rotation
+$R(x)\in\mathrm{SO}(d)$ changes the coframe and spin connection without changing
+$g^{-1}$ or the scalar Renewal generator, and a nontrivial $\mathbb Z_2$ spin
+holonomy is invisible to every local metric bracket.
+\end{proposition}
+
+\subsection{Density-symmetric spin Dirac and finite Wilson packet}
+
+Let $S_d$ be a complex spin module, let $\gamma_a$ be Hermitian Clifford matrices,
+and let $E_a{}^j$ be the inverse oriented orthonormal coframe.  Set
+\begin{equation}
+c^j=E_a{}^j\gamma_a,
+\qquad
+c^jc^k+c^kc^j=2g^{jk}I,
+\label{eq:supp-clifford-coeff}
+\end{equation}
+and let $\Omega_j$ be the Levi--Civita spin connection.  On
+$L^2(Q,S_d;\rho\dd x)$,
+\begin{equation}
+D_g=-i\sum_jc^j(\partial_j+\Omega_j).
+\label{eq:supp-geometric-dirac}
+\end{equation}
+
+\begin{lemma}[Exact density-symmetric Dirac identity]
+\label{lem:supp-density-symmetric}
+With $U_\rho\psi=\rho^{1/2}\psi$ and
+$\nabla_j=\partial_j+\Omega_j$,
+\begin{equation}
+{
+U_\rho D_gU_\rho^{-1}
+=-\frac{i}{2}\sum_{j=1}^d
+\bigl(M_{c^j}\nabla_j+\nabla_jM_{c^j}\bigr).}
+\label{eq:supp-density-symmetric}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Metric compatibility of Clifford multiplication gives
+\[
+\partial_jc^k+[\Omega_j,c^k]+\Gamma^k{}_{j\ell}c^\ell=0.
+\]
+Setting $k=j$ and using
+$\Gamma^j{}_{j\ell}=\partial_\ell\log\rho$ gives
+\[
+\partial_jc^j+[\Omega_j,c^j]+c^j\partial_j\log\rho=0.
+\]
+Conjugating \eqref{eq:supp-geometric-dirac} by $\rho^{1/2}$ and applying this
+contracted identity yields \eqref{eq:supp-density-symmetric}.
+\end{proof}
+
+Introduce one fixed two-dimensional normal factor and put
+\begin{equation}
+\widehat S_d=S_d\otimes\mathbb C^2,
+\quad
+\widehat c^j=c^j\otimes\sigma_1,
+\quad
+\Gamma_\perp=I\otimes\sigma_2,
+\quad
+\widehat\gamma=I\otimes\sigma_3.
+\label{eq:supp-doubled-clifford}
+\end{equation}
+Let $T_{j,h}^{\Omega}$ be exact inverse spin parallel transport followed by a lattice
+shift and define
+\begin{equation}
+P_{j,h}^{\Omega}
+=\frac{T_{j,h}^{\Omega}-(T_{j,h}^{\Omega})^*}{2ih},
+\qquad
+W_h^{\Omega}
+=\frac1{2h}\sum_{j=1}^d
+\bigl(2I-T_{j,h}^{\Omega}-(T_{j,h}^{\Omega})^*\bigr).
+\label{eq:supp-covariant-differences}
+\end{equation}
+The local doubled Wilson operator is the density-conjugated version of
+\begin{equation}
+\widetilde D_{g,h}^{\rm W}
+=\frac12\sum_j
+\bigl(M_{\widehat c_h^j}P_{j,h}^{\Omega}
+      +P_{j,h}^{\Omega}M_{\widehat c_h^j}\bigr)
++\varpi\Gamma_\perp W_h^{\Omega}.
+\label{eq:supp-general-Wilson}
+\end{equation}
+
+For the local estimates, extend the coefficients smoothly to a fixed periodic
+coordinate box, preserving uniform ellipticity, and use the density-conjugated
+$\ell^2$ norm with cell weight $h^d$.  Such an extension is an auxiliary local
+calculation, not a boundary condition on a chart of $M$.  Let $S_{j,h}$ be the
+ordinary coordinate shift.  In a smooth spin frame,
+$T_{j,h}^{\Omega}-S_{j,h}=O(h)$ in operator norm.  Define
+\begin{equation}
+ \|u\|_{1,h}^2=\|u\|_h^2+
+       \sum_j\left\|h^{-1}(S_{j,h}-I)u\right\|_h^2.
+ \label{eq:discrete-H1-norm}
+\end{equation}
+The analogous covariant norm is uniformly equivalent to this one, since the
+connection coefficients are bounded.  All constants below may depend on the
+fixed atlas and finitely many coefficient bounds, but not on $h$.
+
+\begin{theorem}[Frozen symbol, unique species, and uniform graph estimate]
+\label{thm:supp-general-Wilson-ellipticity}
+For fixed $\varpi>0$, the frozen principal symbol of
+\eqref{eq:supp-general-Wilson} is
+\begin{equation}
+ q_{h,x_0}(\theta)=\frac1h\left[
+ \sum_j\widehat c^j(x_0)\sin\theta_j
+ +\varpi\Gamma_\perp\sum_j(1-\cos\theta_j)\right].
+ \label{eq:supp-general-frozen-symbol}
+\end{equation}
+It satisfies
+\begin{equation}
+ q_{h,x_0}(\theta)^2=\frac1{h^2}\left[
+ g^{jk}(x_0)\sin\theta_j\sin\theta_k
+ +\varpi^2\Bigl(\sum_j(1-\cos\theta_j)\Bigr)^2\right]I.
+ \label{eq:supp-general-frozen-square}
+\end{equation}
+Its only zero is $\theta=0$ on the Brillouin torus.  On the fixed smooth
+periodic extension, and for sections localized in the interior of the original
+chart, there is a cutoff-independent bound
+\begin{equation}
+ \|u\|_{1,h}\le C\bigl(\|\widetilde D_{g,h}^{\rm W}u\|_h+\|u\|_h\bigr).
+ \label{eq:supp-general-Garding}
+\end{equation}
+The symmetric placement of coefficients makes the finite operator self-adjoint;
+the fixed doubled Clifford convention supplies the declared real and grading
+structures.
+\end{theorem}
+
+\begin{proof}
+The Clifford relations eliminate the mixed terms in the square.  Put
+$s(\theta)=\sum_j(1-\cos\theta_j)$ and
+$\ell_h(\theta)=2h^{-2}s(\theta)$.  Uniform ellipticity and the elementary
+identity
+\[
+ \sum_j\sin^2\theta_j+s(\theta)^2
+ =2s(\theta)+2\sum_{i<j}(1-\cos\theta_i)(1-\cos\theta_j)
+ \ge2s(\theta)
+\]
+give constants $0<c\le C<\infty$ such that
+\begin{equation}
+ c\ell_h(\theta)I\preceq q_{h,x_0}(\theta)^2
+            \preceq C\ell_h(\theta)I.
+ \label{eq:frozen-uniform-ellipticity}
+\end{equation}
+For the upper bound use $s\le2d$ and $\sum_j\sin^2\theta_j\le2s$.
+The lower bound controls all forward differences, including modes near the
+nonzero Brillouin corners.  Fourier transformation proves the frozen graph
+estimate.
+
+To pass to variable coefficients, choose a partition with supports of fixed
+small diameter $r$, independent of $h$.  On one support the difference of the
+variable principal part and its frozen value is bounded by
+$C\omega_c(r)\|u\|_{1,h}+C_r\|u\|_h$, where $\omega_c$ is the modulus of
+continuity of the coframe coefficients.  Derivatives of coefficients and the
+replacement of ordinary shifts by smooth spin links contribute only the
+second term.  Choose $r$ once so that the first term is absorbed by the frozen
+estimate.  For every fixed smooth cutoff $\chi$,
+\begin{equation}
+ \|[\widetilde D_{g,h}^{\rm W},M_{\chi,h}]\|
+          \le C\|\nabla\chi\|_\infty.
+ \label{eq:local-cutoff-commutator}
+\end{equation}
+Indeed, a shift commutator contains $\chi(x+he_j)-\chi(x)=O(h)$,
+which cancels the $h^{-1}$ factor in both the Dirac and Wilson differences.
+Apply the local estimate to $\chi u$, sum the squared bounds over a fixed
+finite partition with $\sum\chi^2=1$, and use the same discrete product rule
+for the forward differences in \eqref{eq:discrete-H1-norm}.  This proves
+\eqref{eq:supp-general-Garding}.  The fixed localization scale is important:
+no cutoff derivative diverging as $h\to0$ is absorbed into a uniform constant.
+\end{proof}
+
+Let $\mathcal J_h^0$ be isometric piecewise-constant reconstruction and take
+$S_h=(\mathcal J_h^0)^*$, the cell-average sampling map in the chosen density
+and spin frame.  This avoids a dimension-dependent point-evaluation assumption
+on Sobolev functions.  A piecewise-affine reconstruction $I_h$ on a fixed
+shape-regular refinement of the coordinate cells satisfies
+\begin{equation}
+ \|I_hu\|_{H^1}\le C\|u\|_{1,h},\qquad
+ \|I_hu-\mathcal J_h^0u\|_{L^2}\le Ch\|u\|_{1,h}.
+ \label{eq:local-reconstruction-estimates}
+\end{equation}
+These inequalities follow cell by cell from the affine interpolation formula
+and scaling to a unit cell.  Thus it is $I_hu$, not the discontinuous
+piecewise-constant reconstruction itself, that has a uniform $H^1$ bound.
+
+\begin{lemma}[Smooth-core consistency and the Wilson term]
+\label{lem:supp-general-core}
+For every smooth doubled spinor supported in the coordinate interior,
+\begin{equation}
+ \left\|\mathcal J_h^0\widetilde D_{g,h}^{\rm W}S_h\psi
+       -U_\rho\widehat D_gU_\rho^{-1}\psi\right\|_{L^2}
+       \le Ch\|\psi\|_{H^3}.
+ \label{eq:supp-general-core}
+\end{equation}
+In particular, on this core,
+\begin{equation}
+ \|W_h^\Omega S_h\psi\|_h\le Ch\|\psi\|_{H^2}.
+ \label{eq:Wilson-core-smallness}
+\end{equation}
+This is a core estimate, not an operator-norm smallness assertion on the full
+lattice space.
+\end{lemma}
+
+\begin{proof}
+Taylor's formula with integral remainder, applied to spin-parallel translated
+cell averages, gives the covariant centered derivative $-i\nabla_j$ and the
+second-difference expansion $W_h^\Omega=-(h/2)\sum_j\nabla_j^2$ on a smooth
+core, with the corresponding Sobolev remainders.  Cell averaging and
+reconstruction add $O(h)$ errors controlled by one further derivative.
+Symmetric multiplication by the smooth coefficients and
+Lemma~\ref{lem:supp-density-symmetric} give
+\eqref{eq:supp-general-core}; applying the second-difference estimate alone
+gives \eqref{eq:Wilson-core-smallness}.
+\end{proof}
+
+The two roles of the Wilson term must be distinguished.  On smooth sections it
+vanishes as $h\to0$, whereas at nonzero lattice corners its size is of order
+$h^{-1}$ and removes the spurious low-energy species.  It is therefore not a
+bounded perturbation tending to zero in operator norm.  This distinction is
+also central in rigorous continuum-limit studies of lattice Dirac operators
+\cite{Nakamura2024}.  Moreover, for any bounded sequence $u_h$ and fixed smooth
+$\psi$, self-adjointness gives
+\[
+ |\langle W_h^\Omega u_h,S_h\psi\rangle_h|
+ =|\langle u_h,W_h^\Omega S_h\psi\rangle_h|
+ \le Ch\|u_h\|_h\|\psi\|_{H^2}.
+\]
+Hence the regularizer leaves no additional distributional term in the limiting
+Dirac equation.  On a closed manifold the intended self-adjoint realization is
+the closure of $D_g$ on smooth spinors, with domain $H^1(M;S)$
+\cite{lawson-michelsohn}; no chart-boundary domain is introduced.
+
+\subsection{Atlas compatibility and the global resolvent argument}
+\label{subsec:atlas-compatibility}
+
+Local consistency and a positive overlap Gram do not, by themselves, imply
+global norm-resolvent convergence.  The following formulation states the
+required global approximation properties explicitly, so that the analytic
+conclusion is separate from a choice of mesh and overlap realization.
+
+\begin{definition}[Compatible stable spin discretization]
+\label{def:stable-spin-atlas}
+Let $\widehat D=D_{M,\mathfrak s}\otimes\sigma_1$ on
+$\mathscr H=L^2(M;S\otimes\C^2)$, where $M$ is closed.  A compatible stable
+spin discretization is a sequence of finite Hilbert spaces $\Hh_h$, self-adjoint
+operators $D_h$, and isometries $W_h:\Hh_h\to\mathscr H$ satisfying:
+\begin{enumerate}[label=\textup{(A\arabic*)},leftmargin=3em]
+\item $W_hW_h^*\to I$ strongly.  There are discrete first-order norms
+$\|\cdot\|_{1,h}$ and reconstructions $I_h:\Hh_h\to H^1(M;S\otimes\C^2)$
+with
+\begin{equation}
+ \|I_hu\|_{H^1}\le C\|u\|_{1,h},\qquad
+ \|I_hu-W_hu\|\le\varepsilon_h\|u\|_{1,h},\quad
+ \varepsilon_h\longrightarrow0.
+ \label{eq:atlas-reconstruction}
+\end{equation}
+\item The assembled, rather than merely chartwise, operators satisfy
+\begin{equation}
+ \|u\|_{1,h}\le C(\|D_hu\|_h+\|u\|_h).
+ \label{eq:atlas-global-stability}
+\end{equation}
+\item For every smooth doubled spinor $\psi$ there are samples $S_h\psi$ with
+\begin{equation}
+ W_hS_h\psi\longrightarrow\psi,\qquad
+ W_hD_hS_h\psi\longrightarrow\widehat D\psi.
+ \label{eq:atlas-global-core}
+\end{equation}
+The global samples use the transition functions of the fixed spin bundle on
+shared degrees of freedom, including coordinate and density changes.  When
+real and grading structures are asserted, their finite actions intertwine
+these reconstructions and converge to the declared continuum actions.
+\end{enumerate}
+\end{definition}
+
+Here is the cancellation that a proposed atlas assembly must respect.  Choose
+fixed smooth real cutoffs $\chi_\alpha$ supported in chart interiors with
+$\sum_\alpha\chi_\alpha^2=1$.  After transporting local spinors and their
+density factors to the same bundle, the continuum first-order identity is
+\begin{equation}
+ \sum_\alpha\chi_\alpha\widehat D\chi_\alpha=\widehat D,
+ \qquad
+ \sum_\alpha\chi_\alpha[\widehat D,\chi_\alpha]
+       =\tfrac12[\widehat D,\sum_\alpha\chi_\alpha^2]=0.
+ \label{eq:atlas-cutoff-cancellation}
+\end{equation}
+Thus the apparent order-one derivatives of the cutoffs cancel; one must not
+assert that they individually tend to zero.  For a finite-range Wilson
+operator on a common coordinate mesh the analogous localization identity is
+\begin{equation}
+ \sum_\alpha M_{\chi_\alpha,h}W_h^\Omega M_{\chi_\alpha,h}-W_h^\Omega
+ =\tfrac12\sum_\alpha
+ [M_{\chi_\alpha,h},[W_h^\Omega,M_{\chi_\alpha,h}]],
+ \label{eq:Wilson-double-commutator}
+\end{equation}
+and its norm is at most $Ch\sum_\alpha\|\nabla\chi_\alpha\|_\infty^2$.
+Each matrix entry contains two cutoff differences and only one factor $h^{-1}$.
+Fixed collars keep all such finite-range stencils away from auxiliary chart
+boundaries for sufficiently small $h$.
+
+On a shared geometric link $x\to y$, spin transition matrices satisfy the
+exact covariance identity
+\[
+ U_{\alpha\beta}(x)\,T^\beta_{xy}\,U_{\alpha\beta}(y)^{-1}
+       =T^\alpha_{xy}.
+\]
+It removes frame mismatch on that link.  It does not identify different
+coordinate-grid links or supply a stable interpolation between unrelated grids.
+For independently meshed charts, such interpolation and its first-order error
+bounds must be verified in \eqref{eq:atlas-reconstruction}--
+\eqref{eq:atlas-global-core}.  In particular, positivity of a Gram matrix is
+not a substitute for the assembled graph estimate
+\eqref{eq:atlas-global-stability}.  The local Wilson estimates above establish
+the local ingredients; the existence of a global assembly satisfying all these
+properties is an additional construction requirement.
+
+\begin{theorem}[Norm-resolvent convergence for compatible stable atlases]
+\label{thm:supp-compact-spin-resolvent}
+For a compatible stable spin discretization in the sense of
+Definition~\ref{def:stable-spin-atlas}, and every $z\notin\R$,
+\begin{equation}
+ \left\|W_h(D_h-z)^{-1}W_h^*-(\widehat D-z)^{-1}\right\|
+       \longrightarrow0.
+ \label{eq:supp-global-norm-resolvent}
+\end{equation}
+The same argument on a fixed smooth periodic coordinate extension gives
+\begin{equation}
+ \left\|\mathcal J_h^0(D_{g,h}^{\rm W}-z)^{-1}(\mathcal J_h^0)^*
+       -(\widehat D_g-z)^{-1}\right\|\longrightarrow0.
+ \label{eq:supp-local-norm-resolvent}
+\end{equation}
+This local statement is about that self-adjoint periodic extension, not an
+unspecified self-adjoint operator on an open chart.  Isolated bounded-energy
+spectral projections converge, and compatible real and grading structures
+are retained as specified in Definition~\ref{def:stable-spin-atlas}.
+\end{theorem}
+
+\begin{proof}
+Write $R_h(z)=W_h(D_h-z)^{-1}W_h^*$ and
+$R(z)=(\widehat D-z)^{-1}$.  Self-adjointness gives
+\begin{equation}
+ \|(D_h-z)^{-1}\|\le|\operatorname{Im}z|^{-1},\qquad
+ \|D_h(D_h-z)^{-1}\|\le1+|z|\,|\operatorname{Im}z|^{-1}.
+ \label{eq:uniform-resolvent-bounds}
+\end{equation}
+For $\|f\|\le1$ put $u_h=(D_h-z)^{-1}W_h^*f$.  The global graph estimate
+bounds $\|u_h\|_{1,h}$ uniformly.  Therefore $I_hu_h$ lies in a bounded
+$H^1$ set, while $\|W_hu_h-I_hu_h\|\to0$ uniformly on this resolvent unit
+ball.  Rellich compactness proves collective compactness of the embedded
+resolvents along the refining sequence.  This step uses the reconstruction
+estimate and does not assign an $H^1$ norm to a piecewise-constant function.
+
+For fixed $f$, let $W_hu_h\to u$ along a subsequence.  Test the discrete
+resolvent equation against $S_h\psi$, with $\psi$ any smooth doubled spinor.
+Self-adjointness and \eqref{eq:atlas-global-core} pass the equation to
+$(\widehat D-z)u=f$ in the distributional sense.  Since smooth spinors are a
+core for the self-adjoint operator $\widehat D$, this places $u$ in its
+adjoint domain, which is $H^1$, and gives $u=R(z)f$.  Every convergent
+subsequence has this limit, so $R_h(z)\to R(z)$ strongly.  Applying the same
+argument at $\bar z$ also gives strong convergence of the adjoints.
+
+For clarity, this last fact is needed for the upgrade to norm convergence.
+If that convergence failed, choose unit vectors $f_h$ with
+$\|(R_h(z)-R(z))f_h\|\ge\epsilon$.  Passing to subsequences, let
+$f_h\rightharpoonup f$ and use collective compactness to make $R_h(z)f_h$
+converge in norm.  For each fixed $v$, strong adjoint convergence implies
+\[
+ \langle v,R_h(z)f_h\rangle
+ =\langle R_h(\bar z)v,f_h\rangle
+ \longrightarrow\langle R(\bar z)v,f\rangle.
+\]
+Hence its norm limit is $R(z)f$.  Compactness of $R(z)$ also gives
+$R(z)f_h\to R(z)f$, a contradiction.  This proves
+\eqref{eq:supp-global-norm-resolvent}.  On the periodic extension,
+\eqref{eq:local-reconstruction-estimates},
+\eqref{eq:supp-general-Garding}, and \eqref{eq:supp-general-core} provide the
+same hypotheses.  The spectral-projection conclusion is the usual consequence
+of self-adjoint norm-resolvent convergence for isolated spectral clusters.
+\end{proof}
+
+\subsection{Independent all-dimensional metric head}
+
+For each chart choose a mesoscopic radius $\rho_h\downarrow0$ with
+$h/\rho_h\to0$.  Connect nearby vertices by endpoint blocks whose edge length is the
+length of the corresponding short physical curve in $g$.  Let $D_h^{\rm met}$ be
+the direct sum of these source--terminal blocks.
+
+\begin{theorem}[Exact finite metric head and geodesic convergence]
+\label{thm:supp-global-metric}
+For $f\in C(V_h)$,
+\begin{equation}
+{
+L_h^{\rm met}(f)
+=\|[D_h^{\rm met},\pi_h(f)]\|
+=\max_{\{x,y\}\in E_h}\frac{|f(x)-f(y)|}{\ell_h(x,y)}.}
+\label{eq:supp-edge-lip}
+\end{equation}
+The pure-state Connes distance is exactly the graph shortest-path metric.  On every
+closed Riemannian manifold,
+\begin{equation}
+{
+\sup_{x,y\in V_h}
+|d_h^{\rm met}(x,y)-d_g(x,y)|\longrightarrow0.}
+\label{eq:supp-global-metric-convergence}
+\end{equation}
+For smooth $f$, $L_h^{\rm met}(f|_{V_h})\to\|\nabla_gf\|_\infty$.
+\end{theorem}
+
+\begin{proof}
+The commutator of one endpoint block has off-diagonal entry
+$(f(y)-f(x))/\ell_h(x,y)$, so the operator norm gives
+\eqref{eq:supp-edge-lip}.  Telescoping along graph paths gives one inequality in the
+Connes dual formula; the distance-to-a-fixed-vertex function has seminorm one and
+gives equality.
+
+Every graph edge has the length of an actual curve, so
+$d_g\le d_h^{\rm met}$.  Conversely, partition a minimizing geodesic into pieces of
+length comparable with $\rho_h$ and replace the partition points by mesh vertices
+within $O(h)$.  Bounded geometry gives
+\[
+d_h^{\rm met}(x,y)
+\le d_g(x,y)+C\left(\rho_h+\frac h{\rho_h}\right).
+\]
+Choosing, for example, $\rho_h=h^{1/2}$ proves uniform distance convergence.  Taylor
+expansion along the short edges gives the smooth seminorm convergence.
+\end{proof}
+
+For these endpoint metric triples the finite Lip-norm is exactly the
+ordinary Lipschitz seminorm of the graph shortest-path distance.  The metric
+on $S(C(V_h))$, identified with probability measures on $V_h$, is therefore
+the Kantorovich transport distance for $d_h^{\rm met}$
+\cite{Rieffel1999}.  If $p,q$ are probability measures supported on $V_h$,
+the same transport plans give
+\[
+ \left|\operatorname{mk}_{L_h^{\rm met}}(p,q)-W_{1,d_g}(p,q)\right|
+ \le\sup_{x,y\in V_h}|d_h^{\rm met}(x,y)-d_g(x,y)|.
+\]
+Here $W_{1,d_g}$ denotes the transport distance between the same measures
+viewed on $M$.  Unlike the general quadratic graph seminorm, this particular
+endpoint construction thus yields an immediate comparison on all states,
+not only on vertices.
+
+\begin{corollary}[Conditional stable compact-spin approximation]
+\label{cor:supp-compact-spin-image}
+A closed marked Riemannian spin manifold admitting a compatible stable spin
+discretization has a finite-dimensional approximation of its doubled spin
+Dirac operator in generalized norm resolvent, together with convergent
+independent metric heads.  Consequently, essential surjectivity of this
+particular atlas-based spin construction follows if such compatible stable
+discretizations are supplied for all target manifolds.
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:supp-compact-spin-resolvent} to the spin operators and
+Theorem~\ref{thm:supp-global-metric} to the independent metric heads.
+The last assertion records explicitly the additional existence requirement.
+\end{proof}
+
+\section{Finite rational indefinite memory}
+\label{app:rational-krein}
+% =============================================================================
+
+The positive Stieltjes theory in Subsection~\ref{subsec:dynamic-memory} is not the full dynamic
+image.  A finite Krein/Pontryagin tail is instead controlled by the number of
+negative squares of its generalized Nevanlinna kernel.
+
+\begin{definition}[Normalized rational Hermitian dynamic function]
+\label{def:supp-rational-Hermitian}
+Let $H$ be finite dimensional and let $Q$ be an $\End(H)$-valued rational function
+satisfying
+\begin{equation}
+Q(\bar z)^*=Q(z),
+\qquad
+\lim_{z\to\infty}Q(z)=0.
+\label{eq:supp-rational-symmetry}
+\end{equation}
+Write its Laurent expansion at infinity as
+\begin{equation}
+Q(z)=-\sum_{n\ge0}M_nz^{-n-1},
+\qquad M_n=M_n^*.
+\label{eq:supp-rational-Laurent}
+\end{equation}
+Let $\mathcal K_Q$ be the span of Hankel columns
+$c_j(h)=(M_{j+r}h)_{r\ge0}$ and define
+\begin{equation}
+[c_i(u),c_j(v)]_Q=\langle u,M_{i+j}v\rangle.
+\label{eq:supp-Hankel-form}
+\end{equation}
+After quotienting the null space, let $A_Qc_j(h)=c_{j+1}(h)$ and
+$\Gamma_Qh=c_0(h)$.
+\end{definition}
+
+\begin{theorem}[Complete normalized rational generalized-Nevanlinna realization]
+\label{thm:supp-complete-rational-Krein}
+The construction above is a minimal finite Pontryagin realization and
+\begin{equation}
+{Q(z)=\Gamma_Q^+(A_Q-z)^{-1}\Gamma_Q.}
+\label{eq:supp-rational-realization}
+\end{equation}
+Its ordinary dimension is the stabilized coefficient-Hankel rank
+\begin{equation}
+\dim\mathcal K_Q=\McM(Q),
+\label{eq:supp-rational-degree}
+\end{equation}
+and its negative index is the inertia of
+\eqref{eq:supp-Hankel-form}.  The Nevanlinna kernel
+\begin{equation}
+N_Q(z,w)=\frac{Q(z)-Q(w)^*}{z-\bar w}
+\label{eq:supp-Nevanlinna-kernel}
+\end{equation}
+has exactly that many negative squares.  Every other minimal finite
+Pontryagin realization of $Q$ is related to this one by a unique source-fixing
+Pontryagin unitary.
+\end{theorem}
+
+\begin{proof}
+By construction, the output functional $L_Q$ on the Hankel column model obeys
+$L_QA_Q^n\Gamma_Q=M_n$.  For large $z$,
+\[
+L_Q(A_Q-z)^{-1}\Gamma_Q
+=-\sum_{n\ge0}\frac{M_n}{z^{n+1}}=Q(z),
+\]
+and rational continuation proves \eqref{eq:supp-rational-realization}.  The
+power-cyclic span of $\Gamma_QH$ is all of $\mathcal K_Q$ by definition.  In finite
+dimension, the resolvent-source span equals the power-cyclic span: expansion at
+infinity gives one inclusion and a finite Vandermonde inversion at sufficiently many
+regular spectral parameters gives the other.  Thus the realization is source
+minimal.
+
+The dimension is the stabilized Hankel rank by construction.  Choosing a Hilbert
+majorant and a congruence which writes the nondegenerate Hankel form as a fundamental
+symmetry $J_Q$ gives $A_Q^*J_Q=J_QA_Q$ and
+$Q(z)=\Gamma_Q^*J_Q(A_Q-z)^{-1}\Gamma_Q$.  The standard resolvent identity gives
+\[
+N_Q(z,w)
+=\Gamma_Q^*J_Q(A_Q-z)^{-1}(A_Q-\bar w)^{-1}\Gamma_Q.
+\]
+Every finite kernel Gram is therefore a compression of the Pontryagin form, so it
+has at most its negative index.  Source minimality makes the resolvent-source vectors
+span the whole state space and attains the full index.  Finally, if two
+minimal realizations have the same $Q$, their complete Hankel moments agree.
+Mapping $A_Q^j\Gamma_Qh$ to the corresponding cyclic vector in the second
+realization preserves the indefinite form, is onto, fixes the source, and
+intertwines the state operators.  Uniqueness follows from cyclicity.
+\end{proof}
+
+\begin{theorem}[Pole--Hankel invariants]
+\label{thm:supp-pole-Hankel}
+For a normalized rational Hermitian $Q$:
+\begin{enumerate}[label=\textup{(P\arabic*)},leftmargin=3em]
+\item the principal part at each pole determines the local McMillan degree and all
+      Jordan block sizes through shifted principal-part Hankel ranks;
+\item at each real pole, the principal-part Hankel Gram determines the complete
+      local Pontryagin inertia;
+\item every nonreal conjugate pole pair forms a neutral paired root space, and its
+      upper-half-plane local McMillan degree contributes equally to positive and
+      negative index;
+\item the sum of the local contributions equals the minimum global negative index.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+At a pole $\lambda$, multiply by a sufficiently high power of $(z-\lambda)$ and
+read the finite principal-part coefficient sequence.  The ranks of its shifted
+Hankel matrices are the controllability/observability ranks of the nilpotent local
+state operator and their successive differences recover the Jordan chain lengths.
+For a real pole the local Hankel form is Hermitian and Sylvester inertia is invariant
+under every minimal state-coordinate change, hence gives the local Pontryagin
+signature.  Hermitian symmetry pairs a nonreal root space with its conjugate; their
+indefinite form is neutral off-diagonal, so the two signs occur with equal
+multiplicity.  The primary decomposition is Pontryagin orthogonal, and the global
+index is the sum of local indices.
+\end{proof}
+
+A general finite rational Hermitian function has a unique split
+\begin{equation}
+Q(z)=P(z)+Q_0(z),
+\qquad
+\lim_{z\to\infty}Q_0(z)=0,
+\label{eq:supp-rational-split}
+\end{equation}
+with a Hermitian polynomial $P$.
+
+\begin{corollary}[All finite rational Hermitian dynamics]
+\label{cor:supp-all-rational}
+The strictly proper part $Q_0$ is realized by
+\Cref{thm:supp-complete-rational-Krein}.  The nonconstant polynomial jet $P$ has a
+canonical finite infinity-chain/regular descriptor realization.  Their primary
+direct sum gives an equivalence, up to source-fixing descriptor Pontryagin unitary,
+\begin{equation}
+{
+\begin{gathered}
+\text{finite rational Hermitian dynamic functions}\\
+\longleftrightarrow\\
+\text{minimal regular Pontryagin descriptor realizations}.
+\end{gathered}}
+\label{eq:supp-all-rational-equivalence}
+\end{equation}
+This includes finite real and nonreal poles, arbitrary finite Jordan chains, and all
+polynomial jets at infinity.
+\end{corollary}
+
+\begin{proof}
+The pencil of any regular finite descriptor realization has a primary decomposition
+at infinity and at finite spectral points.  On the finite primary block the transfer
+function is strictly proper and is minimized by
+\Cref{thm:supp-complete-rational-Krein}.  On the generalized zero eigenspace of an
+anchored descriptor pencil, the resolvent expansion is polynomial and is represented
+by the canonical nilpotent infinity chain.  The direct sum attains both minimum
+state dimensions and indices.  Any second minimal realization splits into the
+same invariant primary blocks, and the unique source-fixing unitaries on the finite
+and infinity blocks combine to the unique descriptor equivalence.
+\end{proof}
+
+\begin{remark}[Positive OS memory is the index-zero branch]
+\label{scope:supp-positive-index-zero}
+A positive Stieltjes/OS memory packet has zero negative-square index.  A nonzero
+physical Pontryagin index requires an independently occurring fundamental-symmetry
+or signed packet.  Neither OS reflection, temporal orientation, charge conjugation,
+nor a determinant/Pfaffian line determines that sign by itself.  The unrestricted
+nonrational infinite-dimensional indefinite essential image is not claimed here.
+\end{remark}
+
+
+\section{Completed inverse fibres}\label{app:completed-fibres}
+\subsection{Joint Gram realizations and the finite stratified fibre}
+
+Let $E_1,\ldots,E_m$ be finite Hilbert spaces representing minimal marginal
+realization spaces, normalized so that their marginal Gram operators are the
+identity.  A joint realization is encoded by a block correlation operator
+\begin{equation}
+\mathcal K=[K_{ab}]_{a,b=1}^m,
+\qquad
+K_{aa}=I_{E_a},
+\qquad
+\mathcal K\succeq0.
+\label{eq:supp-correlation-spectrahedron}
+\end{equation}
+Let $\Corr_X$ denote this correlation spectrahedron and let $\mathcal G_X$ be
+the product of the unitary gauge groups of the marginal realization spaces.
+
+\begin{theorem}[Joint Gram classification]
+\label{thm:supp-common-source}
+Every minimal joint realization of the retained marginal Gram blocks is
+classified, up to a unitary on the common realization space, by a point of
+$\Corr_X/\mathcal G_X$.  The support rank of $\mathcal K$ is the minimum
+possible joint realization dimension.  A representative $\mathcal K$ has
+residual gauge group exactly $\Stab_{\mathcal G_X}(\mathcal K)$.
+\end{theorem}
+
+\begin{proof}
+A joint realization has a Gram factorization $\mathcal K=S^*S$, with the
+identity diagonal expressing the chosen normalization of the marginal blocks.
+Conversely every positive block operator with identity diagonal admits such a
+factorization.  Restricting the realization space to $\overline{\Ran S}$ gives
+the minimal realization, whose dimension is $\rank\mathcal K$ in the finite
+case.  Two minimal Gram factorizations of the same positive operator are
+related by a unique unitary on the common range.  Independent changes of
+marginal frames act by block congruence, and the residual action is precisely
+the stated stabilizer.
+\end{proof}
+
+\begin{proposition}[Pairwise positivity need not give a joint realization]
+\label{cth:supp-pairwise-not-global}
+Pairwise admissible Gram blocks need not assemble into one positive joint Gram
+operator.  For example,
+\begin{equation}
+\begin{pmatrix}
+1&-3/4&-3/4\\
+-3/4&1&-3/4\\
+-3/4&-3/4&1
+\end{pmatrix}
+\label{eq:supp-three-block-counterexample}
+\end{equation}
+has every $2\times2$ principal block positive but has eigenvalue $-1/2$.
+Thus pairwise compatibility does not imply global Gram compatibility.
+\end{proposition}
+
+Let $\mathcal J_X$ be the current fibre, $\mathcal M_X$ the complete
+dynamic-memory fibre over the fixed spectral data, $\mathcal P_X$ the retained
+auxiliary-marking fibre, $\mathcal C_X^{\rm cal}$ the residual calibration
+class, and $\mathcal R_X$ the marked monodromy representation space.  We call a
+finite target \emph{fully reduced} when all null and spectator directions have
+been quotiented out, the domain, weight, orientation, determinant-line, normalization, and auxiliary-marking
+conventions are fixed, every retained Gram block is minimal, and a specified
+finite family of bounded separating functionals (equivalently, finite-rank
+defect operators) has trivial common kernel on any additional retained
+direction.  This last condition is the standard separation hypothesis that
+replaces the programme-specific ``zero-exhaustion'' terminology.
+
+\begin{theorem}[Finite stratified inverse-fibre exhaustion]
+\label{thm:supp-finite-exhaustion}
+For a completed fully reduced finite target $\mathsf S^\sharp$,
+\begin{equation}
+{
+\RReal_X^{\sharp,\min}(\mathsf S)
+\cong
+\bigsqcup_{[\mathcal K]\in\Corr_X/\mathcal G_X}
+\frac{
+\mathcal J_X\times\mathcal M_X\times\mathcal P_X
+\times\mathcal C_X^{\rm cal}\times\mathcal R_X
+}{\Stab_{\mathcal G_X}(\mathcal K)}.}
+\label{eq:supp-finite-fibre}
+\end{equation}
+The factors vary, respectively, directed dynamics, dynamical memory,
+auxiliary markings, calibration, and global bundle data while preserving
+the fixed spectral packet.  In general the quotient is stratified and not a
+Cartesian product.
+\end{theorem}
+
+\begin{proof}
+The separating family in the definition of full reduction rules out any
+additional independent retained direction after the null quotients have been
+taken.  The graph inverse theorem classifies the directed-current freedom; the
+positive and Pontryagin/descriptor theorems classify returned dynamic memory;
+the retained auxiliary markings give $\mathcal P_X$; the calibration data give
+$\mathcal C_X^{\rm cal}$; and marked bundle descent gives $\mathcal R_X$.
+Theorem~\ref{thm:supp-common-source} classifies all compatible joint Gram
+realizations and identifies their residual stabilizers.  Equivalence of two
+fully reduced realizations is therefore simultaneous equivalence in these
+factors under the common stabilizer, yielding \eqref{eq:supp-finite-fibre}.
+Proposition~\ref{cth:supp-pairwise-not-global} explains why the general fibre
+cannot be replaced by a product of independently quotiented factors.
+\end{proof}
+
+\subsection{Quasilocal and semifinite completion}
+
+A completed finite-stage system consists of increasing finite-trace projections
+$P_n\uparrow I$, fully reduced finite fibres $\mathfrak F_n$, bonding maps onto
+their stable images, tightness of the finite realization and operator-measure data, compatible
+bundle transport, compatible self-adjoint resolvent data, and a compatible
+normal semifinite weight.  In addition, choose at each stage a family
+$\mathscr F_n$ of bounded separating functionals (or finite-rank defect
+operators), compatible under restriction, such that the cofinal family
+$\bigcup_n\mathscr F_n$ separates every nonzero additional quasilocal retained
+direction.  Equivalently, the common kernel of this cofinal separating family
+on the quotient by the declared finite-stage coordinates is zero.
+
+\begin{theorem}[Completed quasilocal/semifinite inverse-fibre theorem]
+\label{thm:supp-semifinite-exhaustion}
+For such a completed system, the retained inverse fibre is exactly
+\begin{equation}
+{
+\RReal_\infty^{\sharp,\min}(\mathsf S)
+\cong
+\varprojlim_n
+\left[
+\bigsqcup_{[\mathcal K_n]\in\Corr_n/\mathcal G_n}
+\frac{
+\mathcal J_n\times\mathcal M_n\times\mathcal P_n
+\times\mathcal C_n^{\rm cal}\times\mathcal R_n
+}{\Stab(\mathcal K_n)}
+\right].}
+\label{eq:supp-semifinite-fibre}
+\end{equation}
+The inverse limit is taken over the stable images, is nonempty exactly when the
+stable-image system is nonempty, and contains no additional retained coordinate
+under the stated separation and tightness hypotheses.  On a factor-preserving
+stratum it may be written as the product of the five component inverse limits
+and the correlation inverse limit followed by the compatible gauge quotient;
+without factor-preserving transport the stratified form
+\eqref{eq:supp-semifinite-fibre} is essential.
+\end{theorem}
+
+\begin{proof}
+Surjective restriction to stable images makes the inverse system of nonempty
+compact finite strata satisfy the finite-intersection property, so compatible
+threads exist whenever every stable image is nonempty.  Tightness prevents a
+nonzero realization direction or dynamic mass from escaping every finite
+projection.  The compatible resolvents determine one closed self-adjoint
+operator through the resolvent identity, adjoint symmetry, injectivity, and
+dense range.  The compatible finite-trace weights increase to a unique
+lower-semicontinuous normal semifinite weight by monotone convergence, while
+compatible bundle transport fixes the remaining global data.  Finally, if an additional
+retained quasilocal coordinate existed, the cofinal separating family would
+contain a functional or defect operator nonzero on it, contradicting the
+trivial-common-kernel hypothesis.  The finite fibres are given by
+Theorem~\ref{thm:supp-finite-exhaustion}; taking compatible threads proves
+\eqref{eq:supp-semifinite-fibre}.
+\end{proof}
+
+
+\end{document}
