@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import NCG.PerronFrobenius.PerronPressure
-import RenewalGeometry.Upstream.CommonOriginKMS
+import RenewalGeometry.Operational.CommonOriginKMS
 
 open NCG
 /-!
@@ -136,7 +136,7 @@ theorem doob_normalized_at_zero {𝔞 : ℝ} (h𝔞 : 0 < 𝔞)
 
 namespace CommonOrigin
 
-open NCG.CommonOrigin RenewalGeometry.CommonOrigin
+open RenewalGeometry.CommonOrigin
 
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 

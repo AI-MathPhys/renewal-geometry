@@ -104,12 +104,14 @@ end KinematicLorentzianData
 (`thm:regular-lorentzian` (iii)) -/
 
 namespace Multigraph
+open NCG.Multigraph
 
+open NCG.Multigraph in
 /-- **Theorem `thm:regular-lorentzian` (iii)**: a sign cocycle with
 nonzero class is not removable by a flat gauge (`cor:removability`
 contrapositive) — the fundamental symmetry of the signed cover is
 essential. -/
-theorem nonremovable_of_class_ne_zero {G : Multigraph}
+theorem _root_.NCG.Multigraph.nonremovable_of_class_ne_zero {G : Multigraph}
     {χ : G.E → ZMod 2} (h : H1.mk G χ ≠ 0) :
     ¬IsCoboundary (G := G) χ :=
   fun hc => h (H1.mk_eq_zero_iff.mpr hc)

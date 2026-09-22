@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurelien Pelissier
 -/
 import RenewalGeometry.Renewal.GeometricRandomSum
-import RenewalGeometry.Grand.AcceptedResponse
+import RenewalGeometry.Renewal.AcceptedResponse
 /-!
 # The accepted-response waiting law
 

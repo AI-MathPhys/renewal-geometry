@@ -4,9 +4,9 @@
     "title": "Finite Renewal Grand Tensor",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.MinimalCarrier",
-      "RenewalGeometry/Grand/IntrinsicRegularTrace.lean:RenewalGeometry.normalizedRegularTrace",
-      "RenewalGeometry/Upstream/Operational.lean:RenewalGeometry.Upstream.Qpred"
+      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.MinimalCarrier",
+      "RenewalGeometry/Commutant/IntrinsicRegularTrace.lean:RenewalGeometry.normalizedRegularTrace",
+      "RenewalGeometry/Operational/Operational.lean:RenewalGeometry.Upstream.Qpred"
     ],
     "note": "Partial: the components are encoded separately (future-minimal carrier Z^min as the quotient by complete finite-future laws; normalized regular trace tau_reg = Tr(L_a)/dim A; categorical predictive quotient Qpred); missing: a bundled Grand Tensor object with the represented history algebra A^hist and the word-Gram hierarchy K_{X,r}."
   },
@@ -15,14 +15,14 @@
     "title": "Canonical finite Grand-Tensor reconstruction",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.step_futureEquivalent",
-      "RenewalGeometry/Grand/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_surjective",
-      "RenewalGeometry/Grand/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_branch",
-      "RenewalGeometry/Grand/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_update_of_occurs",
-      "RenewalGeometry/Grand/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_unique",
-      "RenewalGeometry/Upstream/Operational.lean:RenewalGeometry.Upstream.futureEquiv_comp",
-      "RenewalGeometry/Grand/IntrinsicRegularTrace.lean:RenewalGeometry.normalizedRegularTrace_algEquiv",
-      "RenewalGeometry/Upstream/CompletePositivity.lean:RenewalGeometry.Upstream.tomographic_channel_equality"
+      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.step_futureEquivalent",
+      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_surjective",
+      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_branch",
+      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_update_of_occurs",
+      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_unique",
+      "RenewalGeometry/Operational/Operational.lean:RenewalGeometry.Upstream.futureEquiv_comp",
+      "RenewalGeometry/Commutant/IntrinsicRegularTrace.lean:RenewalGeometry.normalizedRegularTrace_algEquiv",
+      "RenewalGeometry/Operational/CompletePositivity.lean:RenewalGeometry.Upstream.tomographic_channel_equality"
     ],
     "note": "Partial: clause (i) is proved (right congruence of future equivalence, and the unique surjection from any reachable deterministic realization onto Z^min intertwining branch and occurring updates); clause (iii) regular-trace invariance under *-isomorphism is proved; tomographic uniqueness of a linear map from spanning preparations/separating effects is proved. Missing: (ii) uniqueness of the support-minimal represented history algebra up to represented *-isomorphism and invariance of the word-Gram hierarchy, hence (iv)."
   },
@@ -31,11 +31,11 @@
     "title": "Spectralization, Dirac ambiguity, and calibrated image",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.canonical_finite_real_even_spectralization",
-      "RenewalGeometry/Grand/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.IsometricTransport.finite_spectralization_functorial",
-      "RenewalGeometry/Grand/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.Scale.finite_spectralization_scale",
-      "RenewalGeometry/Grand/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.derivation_only_austere_image",
-      "RenewalGeometry/Grand/SpectralizationEssentialImageTrichotomyExact.lean:RenewalGeometry.SpectralizationEssentialImageTrichotomyExact.spectralization_essentialImage_trichotomy"
+      "RenewalGeometry/Spectralization/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.canonical_finite_real_even_spectralization",
+      "RenewalGeometry/Spectralization/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.IsometricTransport.finite_spectralization_functorial",
+      "RenewalGeometry/Spectralization/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.Scale.finite_spectralization_scale",
+      "RenewalGeometry/Spectralization/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.derivation_only_austere_image",
+      "RenewalGeometry/Spectralization/SpectralizationEssentialImageTrichotomyExact.lean:RenewalGeometry.SpectralizationEssentialImageTrichotomyExact.spectralization_essentialImage_trichotomy"
     ],
     "note": "Aggregate of thm:finite-spectralization, prop:no-scale, thm:commutant-fibre and thm:essential-image; see those records for the scoped renderings (coordinate packet whose Leibniz/right-linearity/reversal-intertwining fields are hypotheses, abstract linear-constraint commutant model, and image equalities rendered as existence certificates plus the exact strict criterion and Toeplitz properness witness)."
   },
@@ -44,9 +44,9 @@
     "title": "Independent metric reconstruction and stable compact-spin convergence",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization",
-      "RenewalGeometry/Grand/A3ConnesFlatUniformConvergenceExact.lean:RenewalGeometry.A3ConnesFlatUniformConvergence.tendsto_distanceError_zero",
-      "RenewalGeometry/Grand/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong"
+      "RenewalGeometry/Spectralization/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization",
+      "RenewalGeometry/Spectralization/A3ConnesFlatUniformConvergenceExact.lean:RenewalGeometry.A3ConnesFlatUniformConvergence.tendsto_distanceError_zero",
+      "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong"
     ],
     "note": "Partial: clause (i) is proved (graph Hodge-Dirac square/commutator identities and uniform convergence of the A3 Connes distance to the flat torus quotient metric); for (iv) only the abstract collectively-compact strong-plus-adjoint to norm-resolvent upgrade is proved. Missing: (ii) relation-adapted cellular completion and its compact limit, (iii) covariant Wilson species/graph estimates, the atlas-based norm-resolvent theorem, and (v) the global metric head."
   },
@@ -55,10 +55,10 @@
     "title": "Universality fibres and coarse graining",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.graph_spectral_universality_fibre",
-      "RenewalGeometry/Grand/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankel_minimalRealizations_uniquelySimilar",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.graph_spectral_universality_fibre",
+      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankel_minimalRealizations_uniquelySimilar",
       "NCG/Graph/Cohomology.lean:NCG.Multigraph.H1.mk_eq_zero_of_holonomy_eq_zero",
-      "RenewalGeometry/Grand/CoarseAndHiddenEntropyProduction.lean:RenewalGeometry.CoarseAndHiddenEntropyProduction.coarse_and_hidden_entropy_production"
+      "RenewalGeometry/MarkovChains/CoarseAndHiddenEntropyProduction.lean:RenewalGeometry.CoarseAndHiddenEntropyProduction.coarse_and_hidden_entropy_production"
     ],
     "note": "Partial: (i) the current fibre (open conductance box in ker B, dimension b_1, entropy zero iff j=0) is proved but not the modular-class recovery of the generator; (ii) only Hankel-rank minimal realization and unique similarity (no Stieltjes measure classification, no Pontryagin index); (iii) only the Z/2 special case (holonomy separates H^1(Gamma;Z/2)); (iv) only b_1 monotonicity and a lumpable entropy split; (v) nothing."
   },
@@ -67,12 +67,12 @@
     "title": "Finite real differential datum",
     "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/Grand/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.Packet",
-      "RenewalGeometry/Grand/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.Packet.IsStarBimoduleDerivation",
-      "RenewalGeometry/Grand/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.UniversalOneForm",
-      "RenewalGeometry/Grand/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.universalDifferential",
-      "RenewalGeometry/Grand/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.Packet.universalFactor",
-      "RenewalGeometry/Grand/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.Packet.sourceMinimalEquivRange"
+      "RenewalGeometry/Spectralization/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.Packet",
+      "RenewalGeometry/Spectralization/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.Packet.IsStarBimoduleDerivation",
+      "RenewalGeometry/Spectralization/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.UniversalOneForm",
+      "RenewalGeometry/Spectralization/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.universalDifferential",
+      "RenewalGeometry/Spectralization/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.Packet.universalFactor",
+      "RenewalGeometry/Spectralization/FiniteDifferentialOccurrenceCompiler.lean:RenewalGeometry.FiniteDifferentialOccurrenceCompiler.Packet.sourceMinimalEquivRange"
     ],
     "note": "Packet bundles the Hilbert bimodule K (commuting star-adjoint left/right actions), the conjugate-linear involution reversing the actions, and delta; IsStarBimoduleDerivation is exactly delta(1)=0, Leibniz, and C delta(a)=delta(a^*). The universal calculus ker(m), d_u, the bimodule map T_delta and the source-minimal quotient-to-range carrier are encoded as well. Scoped: A is a normed complex star-algebra with a finite basis."
   },
@@ -81,15 +81,15 @@
     "title": "Finite spectralization",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.canonical_finite_real_even_spectralization",
-      "RenewalGeometry/Grand/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.dirac_commutator_formula",
-      "RenewalGeometry/Grand/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.commutator_norm_eq_B",
-      "RenewalGeometry/Grand/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.connesMetricFinite_iff_kernelConstants",
-      "RenewalGeometry/Grand/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.order_zero",
-      "RenewalGeometry/Grand/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.first_order",
-      "RenewalGeometry/Grand/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.realMatrix_implements_opposite",
-      "RenewalGeometry/Grand/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.realMatrix_intertwines_dirac",
-      "RenewalGeometry/Grand/FiniteSpectralizationBlockNormExact.lean:RenewalGeometry.FiniteSpectralizationBlockNormExact.norm_offDiagonal"
+      "RenewalGeometry/Spectralization/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.canonical_finite_real_even_spectralization",
+      "RenewalGeometry/Spectralization/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.dirac_commutator_formula",
+      "RenewalGeometry/Spectralization/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.commutator_norm_eq_B",
+      "RenewalGeometry/Spectralization/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.connesMetricFinite_iff_kernelConstants",
+      "RenewalGeometry/Spectralization/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.order_zero",
+      "RenewalGeometry/Spectralization/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.first_order",
+      "RenewalGeometry/Spectralization/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.realMatrix_implements_opposite",
+      "RenewalGeometry/Spectralization/FiniteRealEvenSpectralizationExact.lean:RenewalGeometry.FiniteRealEvenSpectralizationExact.Packet.realMatrix_intertwines_dirac",
+      "RenewalGeometry/Spectralization/FiniteSpectralizationBlockNormExact.lean:RenewalGeometry.FiniteSpectralizationBlockNormExact.norm_offDiagonal"
     ],
     "note": "Proved in orthonormal coordinates: D Hermitian and odd, J antiunitary with J^2=1, JD=DJ, J gamma=gamma J, opposite representation R_b (+) rho(b), order-zero and first-order identities, the commutator block formula and the exact norm identity ||[D,pi(a)]||=||B_a|| for a=a^*. Scoped: the Lean Packet takes as structural hypotheses the properties the paper derives from Definition finite-real-differential (Leibniz block identity, right-linearity of B_a, reversal intertwining J_1 d = d J_0), and faithfulness of pi is not stated."
   },
@@ -98,10 +98,10 @@
     "title": "No algebra-and-trace determination of the Dirac scale",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.Scale.finite_spectralization_scale",
-      "RenewalGeometry/Grand/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.Scale.dirac_eq_smul",
-      "RenewalGeometry/Grand/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.Scale.lipschitz_eq_mul",
-      "RenewalGeometry/Grand/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.Scale.connesDistance_scale_isGreatest"
+      "RenewalGeometry/Spectralization/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.Scale.finite_spectralization_scale",
+      "RenewalGeometry/Spectralization/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.Scale.dirac_eq_smul",
+      "RenewalGeometry/Spectralization/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.Scale.lipschitz_eq_mul",
+      "RenewalGeometry/Spectralization/FiniteSpectralizationFunctorScaleExact.lean:RenewalGeometry.FiniteSpectralizationFunctorScaleExact.Scale.connesDistance_scale_isGreatest"
     ],
     "note": "D -> sD and L_D -> sL_D are proved literally for s>0 on the coordinate packet (scaling the differential block, which is the canonical identification of the one-form carriers); the distance law d -> s^{-1} d is proved for the attained finite Connes variational maximum between two linear functionals."
   },
@@ -110,9 +110,9 @@
     "title": "Compact quantum metric-space structure",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteConnesDistanceMetricExact.lean:RenewalGeometry.FiniteConnesDistanceMetric.connesDistance_eq_zero_iff",
-      "RenewalGeometry/Grand/FiniteConnesDistanceMetricExact.lean:RenewalGeometry.FiniteConnesDistanceMetric.connesDistance_triangle",
-      "RenewalGeometry/Grand/FiniteConnesDistanceMetricExact.lean:RenewalGeometry.FiniteConnesDistanceMetric.connesDistance_comm"
+      "RenewalGeometry/Spectralization/FiniteConnesDistanceMetricExact.lean:RenewalGeometry.FiniteConnesDistanceMetric.connesDistance_eq_zero_iff",
+      "RenewalGeometry/Spectralization/FiniteConnesDistanceMetricExact.lean:RenewalGeometry.FiniteConnesDistanceMetric.connesDistance_triangle",
+      "RenewalGeometry/Spectralization/FiniteConnesDistanceMetricExact.lean:RenewalGeometry.FiniteConnesDistanceMetric.connesDistance_comm"
     ],
     "note": "Partial: for the commutative graph algebras C(V) with connected conductance support, the finite Connes distance between vertices (pure states) is proved to be a genuine metric; missing: the general finite algebra with Ker(d)=C1, the Lip-norm/weak-* statement on the full state space, the Leibniz and star identities, and the converse for a larger kernel."
   },
@@ -128,13 +128,13 @@
     "title": "Exact Dirac commutant fibre",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.derivation_only_austere_image",
-      "RenewalGeometry/Grand/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.complete_solution_fibre",
-      "RenewalGeometry/Grand/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.centered_norm_minimal",
-      "RenewalGeometry/Grand/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.centered_norm_eq_iff",
-      "RenewalGeometry/Grand/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.anchor_count_lower_bound",
-      "RenewalGeometry/Grand/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.sharpAnchorCoordinates_injective",
-      "RenewalGeometry/Grand/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.compatibleAnchor"
+      "RenewalGeometry/Spectralization/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.derivation_only_austere_image",
+      "RenewalGeometry/Spectralization/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.complete_solution_fibre",
+      "RenewalGeometry/Spectralization/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.centered_norm_minimal",
+      "RenewalGeometry/Spectralization/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.centered_norm_eq_iff",
+      "RenewalGeometry/Spectralization/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.anchor_count_lower_bound",
+      "RenewalGeometry/Spectralization/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.sharpAnchorCoordinates_injective",
+      "RenewalGeometry/Spectralization/DerivationOnlyAustereImage.lean:RenewalGeometry.DerivationOnlyAustereImage.compatibleAnchor"
     ],
     "note": "Proved in an abstract finite-dimensional real inner-product model: the derivation X -> [X,pi(.)] and the grading/reality sign equations are arbitrary R-linear constraint maps, the compatible anchor space is their common kernel, the solution set is the affine fibre D + c, the centered point D - P_c D is the unique minimum-norm representative, and q = dim c real coordinates are necessary and sufficient. Scoped: the identification of the abstract kernel with the concrete self-adjoint commutant c_S is the instantiation, not a separate lemma."
   },
@@ -143,12 +143,12 @@
     "title": "Calibrated marked image and norm-compatible essential image",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/SpectralizationEssentialImageTrichotomyExact.lean:RenewalGeometry.SpectralizationEssentialImageTrichotomyExact.spectralization_essentialImage_trichotomy",
-      "RenewalGeometry/Grand/SpectralizationEssentialImageTrichotomyExact.lean:RenewalGeometry.SpectralizationEssentialImageTrichotomyExact.toeplitz_strong_not_strict",
-      "RenewalGeometry/Grand/CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.lean:RenewalGeometry.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.every_finiteSpectralPacket_has_finiteMarkedRenewalRealization",
-      "RenewalGeometry/Grand/CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.lean:RenewalGeometry.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.every_finiteRealEvenSpectralPacket_has_finiteMarkedRenewalRealization",
-      "RenewalGeometry/Grand/CompactResolventStrongCofinalMarkedRenewalLimitExact.lean:RenewalGeometry.CompactResolventStrongCofinalMarkedRenewalLimitExact.every_compactResolventSpectralTriple_is_strongCofinalMarkedRenewalLimit",
-      "RenewalGeometry/Grand/SpectralCompressionStrictQuasidiagonalEquivalenceExact.lean:RenewalGeometry.SpectralCompression.normMultiplicativeAlong_iff_quasidiagonalAlong"
+      "RenewalGeometry/Spectralization/SpectralizationEssentialImageTrichotomyExact.lean:RenewalGeometry.SpectralizationEssentialImageTrichotomyExact.spectralization_essentialImage_trichotomy",
+      "RenewalGeometry/Spectralization/SpectralizationEssentialImageTrichotomyExact.lean:RenewalGeometry.SpectralizationEssentialImageTrichotomyExact.toeplitz_strong_not_strict",
+      "RenewalGeometry/Spectralization/CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.lean:RenewalGeometry.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.every_finiteSpectralPacket_has_finiteMarkedRenewalRealization",
+      "RenewalGeometry/Spectralization/CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.lean:RenewalGeometry.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.every_finiteRealEvenSpectralPacket_has_finiteMarkedRenewalRealization",
+      "RenewalGeometry/OperatorLimits/CompactResolventStrongCofinalMarkedRenewalLimitExact.lean:RenewalGeometry.CompactResolventStrongCofinalMarkedRenewalLimitExact.every_compactResolventSpectralTriple_is_strongCofinalMarkedRenewalLimit",
+      "RenewalGeometry/Spectralization/SpectralCompressionStrictQuasidiagonalEquivalenceExact.lean:RenewalGeometry.SpectralCompression.normMultiplicativeAlong_iff_quasidiagonalAlong"
     ],
     "note": "The three lines are rendered as: (1) every coordinate finite (real even) spectral packet has a marked realization retaining the calibrated unitary germ i U'(0)=D and the source-minimal commutator Gram; (2) every SpectralTriple with compact resolvent (no separability hypothesis needed) has finite Dirac spectral screens with strong convergence of compressions, matrix coefficients and product defects; (3) norm multiplicativity of the compressions is equivalent to two-sided quasidiagonal corner decay for any family of self-adjoint idempotents along a filter; properness is the Toeplitz number-operator/shift certificate. Scoped: the equalities EssIm = Spec are stated through these certificates rather than as category-theoretic essential images."
   },
@@ -157,13 +157,13 @@
     "title": "Stationary finite renewal graph",
     "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/Grand/FiniteWeightedGraphHodgeDiracExact.lean:RenewalGeometry.FiniteWeightedGraphHodgeDirac.differential",
-      "RenewalGeometry/Grand/FiniteWeightedGraphHodgeDiracExact.lean:RenewalGeometry.FiniteWeightedGraphHodgeDirac.dirac",
-      "RenewalGeometry/Grand/FiniteWeightedGraphHodgeDiracExact.lean:RenewalGeometry.FiniteWeightedGraphHodgeDirac.representation",
-      "RenewalGeometry/Grand/FiniteWeightedGraphHodgeDiracExact.lean:RenewalGeometry.FiniteWeightedGraphHodgeDirac.ConductanceConnected",
-      "RenewalGeometry/Grand/StationaryFluxAdjointExact.lean:RenewalGeometry.StationaryFluxAdjoint.symmetrizedConductance",
-      "RenewalGeometry/Grand/StationaryFluxAdjointExact.lean:RenewalGeometry.StationaryFluxAdjoint.fluxGenerator",
-      "RenewalGeometry/Grand/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization"
+      "RenewalGeometry/Spectralization/FiniteWeightedGraphHodgeDiracExact.lean:RenewalGeometry.FiniteWeightedGraphHodgeDirac.differential",
+      "RenewalGeometry/Spectralization/FiniteWeightedGraphHodgeDiracExact.lean:RenewalGeometry.FiniteWeightedGraphHodgeDirac.dirac",
+      "RenewalGeometry/Spectralization/FiniteWeightedGraphHodgeDiracExact.lean:RenewalGeometry.FiniteWeightedGraphHodgeDirac.representation",
+      "RenewalGeometry/Spectralization/FiniteWeightedGraphHodgeDiracExact.lean:RenewalGeometry.FiniteWeightedGraphHodgeDirac.ConductanceConnected",
+      "RenewalGeometry/Spectralization/StationaryFluxAdjointExact.lean:RenewalGeometry.StationaryFluxAdjoint.symmetrizedConductance",
+      "RenewalGeometry/Spectralization/StationaryFluxAdjointExact.lean:RenewalGeometry.StationaryFluxAdjoint.fluxGenerator",
+      "RenewalGeometry/Spectralization/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization"
     ],
     "note": "The weighted incidence differential, block Hodge-Dirac matrix, graded representation, symmetrized conductance c=(q+q^T)/2 and connectedness of the positive-conductance support are encoded in orthonormal coordinates; stationarity and positivity of masses/rates enter as the hypotheses of canonical_graph_spectralization. Scoped: real scalars, both orientations retained via V x V."
   },
@@ -172,12 +172,12 @@
     "title": "Renewal Hodge square and exact Lipschitz seminorm",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization",
-      "RenewalGeometry/Grand/StationaryGraphSpectralizationExact.lean:RenewalGeometry.StationaryGraphSpectralization.stationary_rate_dirac_square",
-      "RenewalGeometry/Grand/StationaryGraphSpectralizationExact.lean:RenewalGeometry.StationaryGraphSpectralization.stationary_rate_commutator_energy",
-      "RenewalGeometry/Grand/StationaryGraphSpectralizationExact.lean:RenewalGeometry.StationaryGraphSpectralization.connected_commutator_kernel",
-      "RenewalGeometry/Grand/FiniteConnesDistanceMetricExact.lean:RenewalGeometry.FiniteConnesDistanceMetric.connesDistance_eq_zero_iff",
-      "RenewalGeometry/Grand/FiniteConnesDistanceMetricExact.lean:RenewalGeometry.FiniteConnesDistanceMetric.connesDistance_triangle"
+      "RenewalGeometry/Spectralization/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization",
+      "RenewalGeometry/Spectralization/StationaryGraphSpectralizationExact.lean:RenewalGeometry.StationaryGraphSpectralization.stationary_rate_dirac_square",
+      "RenewalGeometry/Spectralization/StationaryGraphSpectralizationExact.lean:RenewalGeometry.StationaryGraphSpectralization.stationary_rate_commutator_energy",
+      "RenewalGeometry/Spectralization/StationaryGraphSpectralizationExact.lean:RenewalGeometry.StationaryGraphSpectralization.connected_commutator_kernel",
+      "RenewalGeometry/Spectralization/FiniteConnesDistanceMetricExact.lean:RenewalGeometry.FiniteConnesDistanceMetric.connesDistance_eq_zero_iff",
+      "RenewalGeometry/Spectralization/FiniteConnesDistanceMetricExact.lean:RenewalGeometry.FiniteConnesDistanceMetric.connesDistance_triangle"
     ],
     "note": "From positive masses, nonnegative stationary rates and connected conductance support: d^*d f = -(L f + L^dagger f) = -2 L_s f in vertex coordinates, ||[D,f]||^2 = max_x (1/m_x) sum_y c_xy |f(y)-f(x)|^2 for real f, the kernel is exactly the constants, and the resulting Connes distance on V is a metric. Scoped: real-valued vertex functions."
   },
@@ -186,10 +186,10 @@
     "title": "Extensive kernel of the one-step graph calculus",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/UniversalOneFormDiracKernelGrowthExact.lean:RenewalGeometry.UniversalOneFormDiracKernelGrowth.extensive_universal_oneform_kernel",
-      "RenewalGeometry/Grand/UniversalOneFormDiracKernelGrowthExact.lean:RenewalGeometry.UniversalOneFormDiracKernelGrowth.connected_graph_kernel_dimension",
-      "RenewalGeometry/Grand/UniversalOneFormDiracKernelGrowthExact.lean:RenewalGeometry.UniversalOneFormDiracKernelGrowth.periodic_A3_kernel_dimension",
-      "RenewalGeometry/Grand/UniversalOneFormDiracKernelGrowthExact.lean:RenewalGeometry.UniversalOneFormDiracKernelGrowth.periodic_A3_nullity_unbounded"
+      "RenewalGeometry/Spectralization/UniversalOneFormDiracKernelGrowthExact.lean:RenewalGeometry.UniversalOneFormDiracKernelGrowth.extensive_universal_oneform_kernel",
+      "RenewalGeometry/Spectralization/UniversalOneFormDiracKernelGrowthExact.lean:RenewalGeometry.UniversalOneFormDiracKernelGrowth.connected_graph_kernel_dimension",
+      "RenewalGeometry/Spectralization/UniversalOneFormDiracKernelGrowthExact.lean:RenewalGeometry.UniversalOneFormDiracKernelGrowth.periodic_A3_kernel_dimension",
+      "RenewalGeometry/Spectralization/UniversalOneFormDiracKernelGrowthExact.lean:RenewalGeometry.UniversalOneFormDiracKernelGrowth.periodic_A3_nullity_unbounded"
     ],
     "note": "dim ker D = 2e+2-n for the block Dirac of any differential d:V->W with dim V=n, dim W=2e and dim ker d=1 (the connectedness input is taken as this hypothesis), the A3 count 11n+2, and unboundedness of these nullities (the no-compact-resolvent-limit clause is rendered as this unboundedness)."
   },
@@ -198,8 +198,8 @@
     "title": "$A_3$ tight-frame identity",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/A3FiniteDifferenceConsistencyExact.lean:RenewalGeometry.A3FiniteDifferenceConsistency.tight_frame_energy",
-      "RenewalGeometry/Grand/RelationalFlatVacuum.lean:RenewalGeometry.relational_flat_vacuum"
+      "RenewalGeometry/DiscreteAnalysis/A3FiniteDifferenceConsistencyExact.lean:RenewalGeometry.A3FiniteDifferenceConsistency.tight_frame_energy",
+      "RenewalGeometry/Gravity/RelationalFlatVacuum.lean:RenewalGeometry.relational_flat_vacuum"
     ],
     "note": "sum_alpha alpha alpha^T = 8 I and (1/8) sum_alpha <v,alpha>^2 = |v|^2 are proved for the explicit twelve roots (+-e_i +- e_j) of A3 written in R^3 coordinates of W_0 rather than in the R^4 hyperplane presentation."
   },
@@ -208,11 +208,11 @@
     "title": "Exact finite $A_3$ spectralization",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/A3PeriodicGraphSamplingExact.lean:RenewalGeometry.A3PeriodicGraphSampling.graphLipschitz_sample_sq_eq",
-      "RenewalGeometry/Grand/FiniteRootGraphEnergyExact.lean:RenewalGeometry.FiniteRootGraphEnergy.graphLipschitz_sq_eq_root_difference_norm",
-      "RenewalGeometry/Grand/A3PeriodicGraphSamplingExact.lean:RenewalGeometry.A3PeriodicGraphSampling.eventually_uniform_localEnergy_sample",
-      "RenewalGeometry/Grand/A3UniformEnergyConsistencyExact.lean:RenewalGeometry.A3UniformEnergyConsistency.tendstoUniformly_sqrt_sampledEnergy",
-      "RenewalGeometry/Grand/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization"
+      "RenewalGeometry/DiscreteAnalysis/A3PeriodicGraphSamplingExact.lean:RenewalGeometry.A3PeriodicGraphSampling.graphLipschitz_sample_sq_eq",
+      "RenewalGeometry/Spectralization/FiniteRootGraphEnergyExact.lean:RenewalGeometry.FiniteRootGraphEnergy.graphLipschitz_sq_eq_root_difference_norm",
+      "RenewalGeometry/DiscreteAnalysis/A3PeriodicGraphSamplingExact.lean:RenewalGeometry.A3PeriodicGraphSampling.eventually_uniform_localEnergy_sample",
+      "RenewalGeometry/DiscreteAnalysis/A3UniformEnergyConsistencyExact.lean:RenewalGeometry.A3UniformEnergyConsistency.tendstoUniformly_sqrt_sampledEnergy",
+      "RenewalGeometry/Spectralization/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization"
     ],
     "note": "Partial: the exact seminorm formula L_h(f)^2 = max_x (1/(8h^2)) sum_alpha |f(x+h alpha)-f(x)|^2 on the periodic A3 graph (masses h^3, conductances h/8) and D_h^2 = -2 L_h (via the general stationary theorem) are proved, and L_h(F|V_h) -> ||grad F||_inf uniformly for lattice-periodic C^1 F with continuous derivative is proved; missing: the explicit O(h ||F||_{C^2}) rate and the generator convergence L_h F -> (1/2) Delta F."
   },
@@ -221,7 +221,7 @@
     "title": "Compactness of discrete unit-Lipschitz functions",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/A3DiscreteUnitBallCompactnessExact.lean:RenewalGeometry.A3DiscreteUnitBallCompactness.exists_uniformly_convergent_extensions_on_ball"
+      "RenewalGeometry/DiscreteAnalysis/A3DiscreteUnitBallCompactnessExact.lean:RenewalGeometry.A3DiscreteUnitBallCompactness.exists_uniformly_convergent_extensions_on_ball"
     ],
     "note": "Partial: anchored discrete unit-ball functions admit 18-Lipschitz Euclidean extensions with a uniformly convergent subsequence on every closed ball; missing: the sharp limit bound |grad F| <= 1 a.e. and the W^{1,inf} identification (the Lean distance proof avoids this lemma by smoothing)."
   },
@@ -230,11 +230,11 @@
     "title": "Renewal--spectral distance identity",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/A3ConnesFlatUniformConvergenceExact.lean:RenewalGeometry.A3ConnesFlatUniformConvergence.tendsto_distanceError_zero",
-      "RenewalGeometry/Grand/A3ConnesFlatUniformConvergenceExact.lean:RenewalGeometry.A3ConnesFlatUniformConvergence.eventually_uniform_connes_flat_error",
-      "RenewalGeometry/Grand/A3FlatTorusMetricExact.lean:RenewalGeometry.A3FlatTorusMetric.flatDistance",
-      "RenewalGeometry/Grand/FiniteConnesDistanceAttainmentExact.lean:RenewalGeometry.FiniteConnesDistanceAttainment.connesDistance",
-      "RenewalGeometry/Grand/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization"
+      "RenewalGeometry/Spectralization/A3ConnesFlatUniformConvergenceExact.lean:RenewalGeometry.A3ConnesFlatUniformConvergence.tendsto_distanceError_zero",
+      "RenewalGeometry/Spectralization/A3ConnesFlatUniformConvergenceExact.lean:RenewalGeometry.A3ConnesFlatUniformConvergence.eventually_uniform_connes_flat_error",
+      "RenewalGeometry/Spectralization/A3FlatTorusMetricExact.lean:RenewalGeometry.A3FlatTorusMetric.flatDistance",
+      "RenewalGeometry/Spectralization/FiniteConnesDistanceAttainmentExact.lean:RenewalGeometry.FiniteConnesDistanceAttainment.connesDistance",
+      "RenewalGeometry/Spectralization/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization"
     ],
     "note": "sup over vertex pairs of |d_h(x,y) - d_g(x,y)| -> 0 is proved with d_h the actual finite commutator-supremum Connes distance and d_g the flat quotient metric of W_0/Lambda_{A3}. Scoped: d_g is taken as the flat lattice quotient metric directly; the paper's identification of that metric with the second-moment reconstruction is not part of the Lean statement."
   },
@@ -250,8 +250,8 @@
     "title": "Norm-resolvent convergence criterion under atlas stability",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong",
-      "RenewalGeometry/Grand/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.norm_tendsto_zero_of_collectivelyCompact_of_adjointStrong"
+      "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong",
+      "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.norm_tendsto_zero_of_collectivelyCompact_of_adjointStrong"
     ],
     "note": "Partial: the abstract analytic step of the proof (strong convergence of a collectively compact family and of its adjoints implies operator-norm convergence, with compact limit) is proved; missing: the Wilson operators, the atlas hypotheses, Rellich compactness of embedded resolvents, identification of the limit with (D-z)^{-1}, and the metric-head convergence."
   },
@@ -260,8 +260,8 @@
     "title": "Admissible cycle-current polytope",
     "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.GraphSpectralFibre",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.IsStationaryCurrent"
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.GraphSpectralFibre",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.IsStationaryCurrent"
     ],
     "note": "J(G,c) = {j : B j = 0, |j_e| < c_e} is encoded for a complex incidence matrix and real currents; the closed (non-strict) variant is not encoded."
   },
@@ -270,13 +270,13 @@
     "title": "Stationary Markov realization fibre of a metric graph triple",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.forwardRate_eq_flux_div_mass",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.reverseRate_eq_flux_div_mass",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.abs_lt_conductance_iff_flux_pos",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.symmetricFlux_eq_conductance",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.antisymmetricFlux_eq_current",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.zero_mem_fibre",
-      "RenewalGeometry/Grand/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization"
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.forwardRate_eq_flux_div_mass",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.reverseRate_eq_flux_div_mass",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.abs_lt_conductance_iff_flux_pos",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.symmetricFlux_eq_conductance",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.antisymmetricFlux_eq_current",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.zero_mem_fibre",
+      "RenewalGeometry/Spectralization/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization"
     ],
     "note": "Partial: k = (c +- j)/m formulas, positivity of both directed rates iff |j_e| < c_e, the unique symmetric/antisymmetric flux decomposition (converse direction), membership of j=0, and dependence of the spectralization on (m,c) alone are proved; missing: the equivalence between B j = 0 (abstract incidence matrix) and the mass-stationarity equation of def:supp-renewal-graph for q = c + j, i.e. that each fibre point is a stationary renewal generator in the sense of the definition."
   },
@@ -285,9 +285,9 @@
     "title": "Dimension and faithfulness of the fibre",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.cycleKernel_finrank",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.cycleKernel_finrank_eq_zero_iff_treeCard",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.graph_spectral_universality_fibre"
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.cycleKernel_finrank",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.cycleKernel_finrank_eq_zero_iff_treeCard",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.graph_spectral_universality_fibre"
     ],
     "note": "Partial: dim ker B = |E|-|V|+1 for connected incidence and triviality exactly at the tree cardinality are proved (over C for the ambient cycle kernel); missing: the nonfaithfulness sentence, which needs a nonzero current inside the open box when b_1 > 0 (not compiled)."
   },
@@ -296,10 +296,10 @@
     "title": "Entropy production inside one spectral fibre",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.entropyProduction",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.entropyEdge_nonneg",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.entropyEdge_pos_iff",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.entropyProduction_eq_zero_iff"
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.entropyProduction",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.entropyEdge_nonneg",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.entropyEdge_pos_iff",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.entropyProduction_eq_zero_iff"
     ],
     "note": "sigma(j) = 2 sum_e j_e log((c_e+j_e)/(c_e-j_e)) is taken as the definition; nonnegativity and vanishing exactly at j=0 are proved under 0 < c_e and |j_e| < c_e. Scoped: the derivation of this formula from (1/2) sum (q_xy - q_yx) log(q_xy/q_yx) is not compiled."
   },
@@ -308,9 +308,9 @@
     "title": "Finite spectral universality",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.entropyProduction_ne_equilibrium",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.symmetricFlux_eq_conductance",
-      "RenewalGeometry/Grand/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.cycleKernel_finrank"
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.entropyProduction_ne_equilibrium",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.symmetricFlux_eq_conductance",
+      "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.cycleKernel_finrank"
     ],
     "note": "Partial: every nonzero admissible current has entropy production different from the reversible member while sharing the same (m,c), and the cycle-kernel dimension is b_1; missing: existence of a nonzero admissible current for b_1 > 0 (hence of the open family) and any formal notion of non-isomorphic predictive dynamics beyond the entropy witness."
   },
@@ -326,7 +326,7 @@
     "title": "Nonlinear Hodge theorem for stationary affinities",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/AcceptedAffinityHodgeCompiler.lean:RenewalGeometry.AcceptedAffinityHodgeCompiler.acceptedAffinityHodgeCompiler"
+      "RenewalGeometry/DiscreteAnalysis/AcceptedAffinityHodgeCompiler.lean:RenewalGeometry.AcceptedAffinityHodgeCompiler.acceptedAffinityHodgeCompiler"
     ],
     "note": "Partial: the linear Hodge calculus of the incidence matrix (Moore-Penrose cut/cycle projectors, exactness of an edge cochain iff its cycle periods vanish, orthogonal energy minimization) is proved; missing: the arctanh affinity map, the convex log-cosh functional, its unique minimizer and the diffeomorphism J(G,c) -> H^1(G;R)."
   },
@@ -349,7 +349,7 @@
     "title": "Cellular modular Hodge reconstruction",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteVariationCanonicalHodgeExact.lean:RenewalGeometry.finiteVariationComplex_canonicalHodgeDecomposition"
+      "RenewalGeometry/Action/FiniteVariationCanonicalHodgeExact.lean:RenewalGeometry.finiteVariationComplex_canonicalHodgeDecomposition"
     ],
     "note": "Partial: for a finite real Hilbert complex d_0, d_1 with d_1 d_0 = 0 every one-cochain decomposes orthogonally as d_0 phi + h + d_1^* psi with d_1 h = 0; missing: the Moore-Penrose reconstruction of the coexact part from F_a = d_1 a, injectivity/surjectivity of [a] -> (h_a, F_a), the canonical representative, the norm identity and the Bianchi identity d_2 F_a = 0."
   },
@@ -372,8 +372,7 @@
     "title": "Positive operator-valued tail measure",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkIsometry",
-      "RenewalGeometry/Grand/MediumProved04.lean:RenewalGeometry.MassShell.stieltjes"
+      "RenewalGeometry/Spectralization/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkIsometry"
     ],
     "note": "Partial: only finite-outcome POVMs (positive effects summing to one) and the matrix Stieltjes transform B^*(A-z)^{-1}B of a finite Hermitian pair are encoded; missing: a weakly countably additive B(H)-valued Borel measure on (0,infinity) and its Stieltjes self-energy integral."
   },
@@ -382,8 +381,8 @@
     "title": "Canonical minimal Stieltjes dilation",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkIsometry",
-      "RenewalGeometry/Grand/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkProjection"
+      "RenewalGeometry/Spectralization/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkIsometry",
+      "RenewalGeometry/Spectralization/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkProjection"
     ],
     "note": "Partial: the finite-outcome Naimark dilation (stacked square-root isometry and coordinate projections) is constructed; missing: the simple-function Hilbert space K_mu, the projection-valued measure P_mu, C_mu = int lambda dP_mu and B_mu = V_mu^* for a Borel operator measure."
   },
@@ -392,7 +391,7 @@
     "title": "Operator-measure realization and minimality",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkDilation"
+      "RenewalGeometry/Spectralization/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkDilation"
     ],
     "note": "Partial: for a finite-outcome POVM the dilation is isometric, the outcomes are orthogonal projections resolving one, and compression recovers every effect; missing: the resolvent identity Sigma_mu(z) = B(C-z)^{-1}B^*, the minimality span, the converse from (C,B) and the unique intertwining unitary between minimal realizations."
   },
@@ -401,9 +400,8 @@
     "title": "Static shadows, inverse moments, and positive Euclidean memory",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/MediumProved04.lean:RenewalGeometry.MassShell.imPart_stieltjes",
-      "RenewalGeometry/Grand/EasyExact03.lean:RenewalGeometry.ResistanceClock.zeroResponse",
-      "RenewalGeometry/Grand/EasyExact03.lean:RenewalGeometry.ResistanceClock.timeMemory"
+      "RenewalGeometry/Miscellany/AssortedFiniteRecords03.lean:RenewalGeometry.ResistanceClock.zeroResponse",
+      "RenewalGeometry/Miscellany/AssortedFiniteRecords03.lean:RenewalGeometry.ResistanceClock.timeMemory"
     ],
     "note": "Partial: the Herglotz sign is proved in the finite atomic case (Im of the matrix Stieltjes transform is a Poisson-kernel weighted sum of psd spectral weights), and the zero-mass response int lambda^{-1} dSigma and Euclidean memory int e^{-t lambda} dSigma are defined for scalar measures with scaling laws; missing: general operator measures, the inverse-moment boundary jets, and the Laplace relation Sigma(-s) = int e^{-st} K(t) dt."
   },
@@ -440,7 +438,7 @@
     "title": "Marked spectral packet",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.lean:RenewalGeometry.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.CoordinateFiniteRealEvenSpectralPacket"
+      "RenewalGeometry/Spectralization/CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.lean:RenewalGeometry.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact.CoordinateFiniteRealEvenSpectralPacket"
     ],
     "note": "Partial: the unmarked finite real even packet (A, H, D, J, gamma) is encoded in coordinates; missing: the auxiliary marking data m and the compact automorphism group G_S = Aut(S) preserving the marks."
   },
@@ -486,8 +484,8 @@
     "status": "conditional_interface",
     "lean": [
       "NCG/Graph/Decimation.lean:NCG.Multigraph.betti_le_of_surjective",
-      "RenewalGeometry/Grand/CoarseAndHiddenEntropyProduction.lean:RenewalGeometry.CoarseAndHiddenEntropyProduction.coarse_and_hidden_entropy_production",
-      "RenewalGeometry/Grand/CoarseAndHiddenEntropyProduction.lean:RenewalGeometry.CoarseAndHiddenEntropyProduction.hidden_entropy_coordinates_nonnegative"
+      "RenewalGeometry/MarkovChains/CoarseAndHiddenEntropyProduction.lean:RenewalGeometry.CoarseAndHiddenEntropyProduction.coarse_and_hidden_entropy_production",
+      "RenewalGeometry/MarkovChains/CoarseAndHiddenEntropyProduction.lean:RenewalGeometry.CoarseAndHiddenEntropyProduction.hidden_entropy_coordinates_nonnegative"
     ],
     "note": "Partial: b_1 cannot increase under a surjective map of Z/2 cycle spaces, and for a generator Markov retract with strictly positive rates the fine entropy production equals the coarse one plus two nonnegative hidden terms (entropy contraction in lumpable form); missing: the chain identity d_bar Q_E = Q_V d, the map of current polytopes, the exact sequence and the kernel dimension b_1(G)-b_1(G_bar)."
   },
@@ -566,8 +564,8 @@
     "title": "Norm-resolvent convergence for compatible stable atlases",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong",
-      "RenewalGeometry/Grand/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.norm_tendsto_zero_of_collectivelyCompact_of_adjointStrong"
+      "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong",
+      "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.norm_tendsto_zero_of_collectivelyCompact_of_adjointStrong"
     ],
     "note": "Partial: the compactness upgrade used in the proof (a collectively compact sequence converging strongly together with its adjoints converges in operator norm, with compact limit) is proved for a fixed Hilbert space; missing: the atlas hypotheses (A1)-(A3), Rellich compactness of the embedded resolvents, identification of the limit as (D-z)^{-1} via the smooth core, the periodic-extension statement and the spectral-projection consequences."
   },
@@ -590,9 +588,9 @@
     "title": "Normalized rational Hermitian dynamic function",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/OperatorHankelCanonicalRealization.lean:RenewalGeometry.OperatorHankelSpace",
-      "RenewalGeometry/Grand/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankelTransition",
-      "RenewalGeometry/Grand/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankelSource"
+      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.OperatorHankelSpace",
+      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankelTransition",
+      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankelSource"
     ],
     "note": "Partial: the Hankel column space spanned by shifted columns of an N-indexed matrix kernel, the shift A_Q and the source Gamma_Q are encoded; missing: the rational Hermitian function Q with Q(z-bar)^* = Q(z), its Laurent coefficients, and the indefinite Hankel form [c_i(u), c_j(v)] = <u, M_{i+j} v> with its null-space quotient."
   },
@@ -601,9 +599,9 @@
     "title": "Complete normalized rational generalized-Nevanlinna realization",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/OperatorHankelCanonicalRealization.lean:RenewalGeometry.finiteOperatorHankelRank_realization",
-      "RenewalGeometry/Grand/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankelRank_le_realizationDimension",
-      "RenewalGeometry/Grand/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankel_minimalRealizations_uniquelySimilar"
+      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.finiteOperatorHankelRank_realization",
+      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankelRank_le_realizationDimension",
+      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankel_minimalRealizations_uniquelySimilar"
     ],
     "note": "Partial: the canonical Hankel realization reproduces every coefficient M_n = output A^n source, is reachable and observable with dimension equal to the stabilized Hankel rank, every realization has at least that dimension, and two minimal realizations are uniquely similar; missing: the resolvent formula Q(z) = Gamma^+ (A-z)^{-1} Gamma, the Pontryagin form and negative index, the Nevanlinna-kernel negative-square count, and unitarity of the intertwiner for the indefinite form."
   },
@@ -626,8 +624,8 @@
     "title": "Joint Gram classification",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteSpectralCommutatorGramCarrierExact.lean:RenewalGeometry.FiniteSpectralCommutatorGramCarrierExact.finite_spectral_commutator_gram_carrier_exact",
-      "RenewalGeometry/Grand/PhysicalSourceMinimality.lean:RenewalGeometry.source_fixing_intertwiner_unique"
+      "RenewalGeometry/Spectralization/FiniteSpectralCommutatorGramCarrierExact.lean:RenewalGeometry.FiniteSpectralCommutatorGramCarrierExact.finite_spectral_commutator_gram_carrier_exact",
+      "RenewalGeometry/Predictive/PhysicalSourceMinimality.lean:RenewalGeometry.source_fixing_intertwiner_unique"
     ],
     "note": "Partial: for the commutator Gram G = S^*S the minimal factorization dimension equals rank G and is attained by the positive square root, and a source-fixing intertwiner between realizations is unique under Krylov surjectivity; missing: the correlation spectrahedron Corr_X with identity diagonal blocks, classification of joint realizations by Corr_X / G_X, and the residual stabilizer statement."
   },

@@ -166,10 +166,11 @@ private theorem gram_sandwich_sum (φ : A →ₗ[ℂ] A) (x : A) (c : ℂ) :
     smul_smul]
   module
 
+open NCG.IsCompletelyPositive in
 /-- **Completely positive maps are star-preserving**: `φ(x⋆) = φ(x)⋆`.
 Extracted from selfadjointness of the amplified Gram sandwich sums at the
 vectors `(1, 1)` and `(i·1, 1)`. -/
-theorem IsCompletelyPositive.map_star (hφ : IsCompletelyPositive φ) (x : A) :
+theorem _root_.NCG.IsCompletelyPositive.map_star (hφ : IsCompletelyPositive φ) (x : A) :
     φ (star x) = star (φ x) := by
   have hN := hφ 2 (pairMatrix 1 x) (matrixQF_pair 1 x)
   have hφ1 : IsSelfAdjoint (φ 1) :=
@@ -221,11 +222,12 @@ theorem IsCompletelyPositive.map_star (hφ : IsCompletelyPositive φ) (x : A) :
     one_smul] at h3
   exact h3.symm
 
+open NCG.IsCompletelyPositive in
 /-- **The Kadison–Schwarz inequality** (input to `thm:predictive-unit`): a
 unital completely positive map satisfies `φ(x)⋆ φ(x) ≤ φ(x⋆ x)`.  Proved by
 evaluating the amplified Gram matrix at the vector `(-φ(x), 1)` — the
 Schur-complement trick, carried out entirely in quadratic-form terms. -/
-theorem IsCompletelyPositive.isSchwarzMap (hφ : IsCompletelyPositive φ)
+theorem _root_.NCG.IsCompletelyPositive.isSchwarzMap (hφ : IsCompletelyPositive φ)
     (h1 : φ 1 = 1) : IsSchwarzMap φ := by
   intro x
   have hN := hφ 2 (pairMatrix 1 x) (matrixQF_pair 1 x)
@@ -442,17 +444,20 @@ theorem multiplicative_of_schwarz_eq {φ : A →ₗ[ℂ] A}
 /-! ### The predictive-unit theorem -/
 
 namespace UCPMap
+open NCG.UCPMap
 
 variable {A : Type*} [Ring A] [PartialOrder A] [StarRing A]
   [StarOrderedRing A] [Algebra ℂ A] [StarModule ℂ A]
 
+open NCG.UCPMap in
 /-- **Predictive units are star-preserving** (`thm:predictive-unit`): every
 unit of the channel monoid `UCPMap A` respects the involution. -/
-theorem unit_map_star (u : (UCPMap A)ˣ) (a : A) :
+theorem _root_.NCG.UCPMap.unit_map_star (u : (UCPMap A)ˣ) (a : A) :
     (u.val : UCPMap A) (star a) = star ((u.val : UCPMap A) a) := by
   have h := (u.val : UCPMap A).completelyPositive.map_star a
   simpa [UCPMap.coe_toLinearMap] using h
 
+open NCG.UCPMap in
 /-- **The predictive-unit theorem** (`thm:predictive-unit`): over an
 Archimedean order, every unit of the channel monoid `UCPMap A` is
 multiplicative.  Together with `unit_map_star` this makes every predictive
@@ -463,7 +468,7 @@ equality (`unit_sandwich_eq`) says equality holds in the Kadison–Schwarz
 inequality for `u⁻¹` at every point of the range of `u`; Choi's theorem
 turns this into the multiplicative-domain identity for `u⁻¹`; and
 injectivity of `u⁻¹` transports multiplicativity back to `u`. -/
-theorem unit_map_mul (harch : IsArchimedeanStarOrder A) (u : (UCPMap A)ˣ)
+theorem _root_.NCG.UCPMap.unit_map_mul (harch : IsArchimedeanStarOrder A) (u : (UCPMap A)ˣ)
     (a b : A) :
     (u.val : UCPMap A) (a * b)
       = (u.val : UCPMap A) a * (u.val : UCPMap A) b := by

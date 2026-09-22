@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import NCG.Algebra.PauliJordan
 import NCG.Algebra.CircleSelection
-import RenewalGeometry.Upstream.SharpPurification
+import RenewalGeometry.Operational.SharpPurification
 
 open NCG
 /-!
@@ -48,6 +48,7 @@ The assembly layer of the Jordan cluster
 -/
 
 namespace RenewalGeometry.Jordan
+open NCG.Jordan
 
 open Module Matrix RealInnerProductSpace
 

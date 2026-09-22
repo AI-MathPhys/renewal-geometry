@@ -50,8 +50,9 @@ estimate. -/
 def IsSchwarzMap (φ : A →ₗ[ℂ] A) : Prop :=
   ∀ x : A, star (φ x) * φ x ≤ φ (star x * x)
 
+open NCG.IsPositiveMap in
 /-- Positive linear maps are monotone. -/
-theorem IsPositiveMap.mono {φ : A →ₗ[ℂ] A} (hφ : IsPositiveMap φ) {a b : A}
+theorem _root_.NCG.IsPositiveMap.mono {φ : A →ₗ[ℂ] A} (hφ : IsPositiveMap φ) {a b : A}
     (h : a ≤ b) : φ a ≤ φ b := by
   have h0 : 0 ≤ b - a := sub_nonneg.mpr h
   have h1 : 0 ≤ φ (b - a) := hφ _ h0
@@ -82,19 +83,23 @@ theorem schwarz_sandwich_eq {Ψ Θ : A →ₗ[ℂ] A} (hΨ : IsSchwarzMap Ψ)
     rwa [hinv] at h3
 
 namespace UCPMap
+open NCG.UCPMap
 
+open NCG.UCPMap in
 /-- Applying a unit of the channel monoid and then its inverse returns the
 input: with diagrammatic multiplication, `u.val * u.inv = 1` evaluates to
 `u.inv (u.val a) = a`. -/
-theorem inv_val_apply (u : (UCPMap A)ˣ) (a : A) :
+theorem _root_.NCG.UCPMap.inv_val_apply (u : (UCPMap A)ˣ) (a : A) :
     (u.inv : UCPMap A) ((u.val : UCPMap A) a) = a := by
   rw [← mul_apply u.val u.inv a, u.val_inv, one_apply]
 
+open NCG.UCPMap in
 /-- Applying the inverse of a unit and then the unit returns the input. -/
-theorem val_inv_apply (u : (UCPMap A)ˣ) (a : A) :
+theorem _root_.NCG.UCPMap.val_inv_apply (u : (UCPMap A)ˣ) (a : A) :
     (u.val : UCPMap A) ((u.inv : UCPMap A) a) = a := by
   rw [← mul_apply u.inv u.val a, u.inv_val, one_apply]
 
+open NCG.UCPMap in
 /-- **The sandwich equality for predictive units** (`thm:predictive-unit`
 via Definition `def:predictive-channel-monoid`): if both components of a
 unit `u` of the channel monoid `UCPMap A` satisfy the Schwarz inequality,
@@ -105,7 +110,7 @@ then
 Together with the multiplicative-domain step
 (`NCG/Algebra/KadisonSchwarz.lean`) this makes every
 predictive unit a `*`-automorphism: `𝖴_pred ⊆ Aut(𝒜_int)`. -/
-theorem unit_sandwich_eq (u : (UCPMap A)ˣ)
+theorem _root_.NCG.UCPMap.unit_sandwich_eq (u : (UCPMap A)ˣ)
     (hval : IsSchwarzMap (u.val : UCPMap A).toLinearMap)
     (hinv : IsSchwarzMap (u.inv : UCPMap A).toLinearMap) (x : A) :
     (u.inv : UCPMap A)

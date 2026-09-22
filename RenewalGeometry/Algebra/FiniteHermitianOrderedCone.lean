@@ -3,8 +3,8 @@ Copyright (c) 2026 Aurelien Pelissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurelien Pelissier
 -/
-import RenewalGeometry.Grand.AtomicResetOrderedCone
-import RenewalGeometry.Upstream.PrimitiveWeight
+import RenewalGeometry.Algebra.AtomicResetOrderedCone
+import RenewalGeometry.Operational.PrimitiveWeight
 import Mathlib.Analysis.Matrix.Normed
 import Mathlib.Topology.MetricSpace.Algebra
 

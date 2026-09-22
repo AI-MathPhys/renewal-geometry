@@ -4,9 +4,9 @@
     "title": "Finite classical Einstein--Standard-Model interface",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.RegulatedSMConfiguration",
-      "RenewalGeometry/Grand/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.explicitRegulatedStandardModelAction",
-      "RenewalGeometry/Grand/SMGroup.lean:RenewalGeometry.sm_group"
+      "RenewalGeometry/StandardModel/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.RegulatedSMConfiguration",
+      "RenewalGeometry/StandardModel/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.explicitRegulatedStandardModelAction",
+      "RenewalGeometry/StandardModel/SMGroup.lean:RenewalGeometry.sm_group"
     ],
     "note": "Partial: RegulatedSMConfiguration/explicitRegulatedStandardModelAction encode a finite link/vertex Standard-Model configuration with the four-term (Euclidean) matter action of (I2)-(I4), and sm_group proves the quotient presentation S(U(3)xU(2)) = (SU(3)xSU(2)xU(1))/Z_6 of eq:gauge-group ; missing: the Lorentzian carrier and coframe variables (I1), the common gravity+matter action with its relative normalization (I4, gravity part), the positive source geometry (I5), and any single structure bundling (I1)-(I5)."
   },
@@ -15,7 +15,7 @@
     "title": "Renewal realization of the finite interface",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteStandardModelSourceNativeEmergenceExact.lean:RenewalGeometry.finiteStandardModel_sourceNative_emergence"
+      "RenewalGeometry/StandardModel/FiniteStandardModelSourceNativeEmergenceExact.lean:RenewalGeometry.finiteStandardModel_sourceNative_emergence"
     ],
     "note": "Partial: the companion finite Standard-Model structural packet (gauge quotient, generation rank, weak doublet, finite Dirac incidence) is assembled as the typed certificate finiteStandardModel_sourceNative_emergence ; missing: a Lean finite-interface structure and a proof that the companion constructions instantiate (I1)-(I5), in particular the Lorentzian carrier and common-action normalization."
   },
@@ -38,7 +38,7 @@
     "title": "Scaled source control of physical stationarity",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/GTProtectedRiesz.lean:RenewalGeometry.gt_protected_riesz"
+      "RenewalGeometry/Certificates/GTProtectedRiesz.lean:RenewalGeometry.gt_protected_riesz"
     ],
     "note": "Partial: gt_protected_riesz proves the Gram Cauchy-Schwarz bound <Lu,v>^2 <= <u,Lu><v,Lv> for a range source e = Lu on a real inner-product space, i.e. |a[w]| <= ||a||_{G^{-1}} ||w||_G ; missing: the assembly eps_h(K) <= L_h sqrt(R_h) + e_h with the test-lift bound ||v_h(v)||_G <= L_h ||v|| and the identification error e_h."
   },
@@ -117,8 +117,8 @@
     "title": "Alternative finite-prefix stationarity criterion",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.descent_upper",
-      "RenewalGeometry/Grand/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.bregman_floor"
+      "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.descent_upper",
+      "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.bregman_floor"
     ],
     "note": "Partial: descent_upper proves the Taylor descent inequality f(a+v) <= f(a) + <grad f(a),v> + (Lambda/2)||v||^2 used in eq:prefix-descent1, and bregman_floor the strong-convexity floor (m/2)||v||^2 <= D_Psi used for the potential Psi_h ; missing: the balance residual b_j, the telescoped prefix average eq:prefix-average with the h^{-2} Hessian-scale constants, and the selected-slope conclusion eq:prefix-selected (the legacy file instead treats a stationary law of an accepted kernel)."
   },
@@ -141,8 +141,8 @@
     "title": "Common compact screen",
     "status": "proved",
     "lean": [
-      "RenewalGeometry/Grand/SMSTPositiveScreenExact.lean:RenewalGeometry.SMSTChannel.screen_strong_convergence",
-      "RenewalGeometry/Grand/SMSTPositiveScreenExact.lean:RenewalGeometry.SMSTChannel.strong_convergence_transfer"
+      "RenewalGeometry/OperatorLimits/SMSTPositiveScreenExact.lean:RenewalGeometry.SMSTChannel.screen_strong_convergence",
+      "RenewalGeometry/OperatorLimits/SMSTPositiveScreenExact.lean:RenewalGeometry.SMSTChannel.strong_convergence_transfer"
     ],
     "note": "screen_strong_convergence proves the first assertion on a complex Hilbert space for N-indexed sequences: bounded Z_n weakly convergent, ||S_{h,R} - S_R|| -> 0, uniform tail exhaustion, S_R Z -> Z, with compactness of S_R rendered as complete continuity (bounded weakly convergent inputs have strongly convergent images, equivalent for compact operators on Hilbert space) and the norm bound sup ||Z_n|| < infinity spelled out explicitly (automatic from weak convergence). The whitened clause is strong_convergence_transfer: uniformly bounded, strongly convergent B_n = A_h^{-1/2} applied to the strongly convergent whitened packet gives Y_h -> Y; the Loewner bounds mI <= A_h <= MI enter only through that uniform bound."
   },
@@ -158,7 +158,7 @@
     "title": "A local quartic compactness certificate",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/GaussianKernelVitaliExact.lean:RenewalGeometry.GaussianKernelVitali.integral_norm_sub_tendsto_zero"
+      "RenewalGeometry/Continuum/GaussianKernelVitaliExact.lean:RenewalGeometry.GaussianKernelVitali.integral_norm_sub_tendsto_zero"
     ],
     "note": "Partial: integral_norm_sub_tendsto_zero proves the Vitali step (uniform integrability + convergence in measure implies L^1 convergence of the norm) on a finite reference cylinder ; missing: the superlinear-Phi (de la Vallee-Poussin) uniform integrability of |H_h|^4, Rellich compactness giving convergence in measure, and the L^4(K) conclusion."
   },
@@ -202,8 +202,8 @@
     "title": "Local product and coefficient continuity",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_diagonal_bilinear",
-      "RenewalGeometry/Grand/WeakStrongBilinearPairingExact.lean:RenewalGeometry.WeakStrongBilinearPairing.tendsto_of_strong_of_bounded_weak"
+      "RenewalGeometry/Continuum/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_diagonal_bilinear",
+      "RenewalGeometry/Continuum/WeakStrongBilinearPairingExact.lean:RenewalGeometry.WeakStrongBilinearPairing.tendsto_of_strong_of_bounded_weak"
     ],
     "note": "Partial: continuity of bounded bilinear maps under strong (and strong x bounded-weak) convergence is proved on abstract normed spaces ; missing: the Holder instantiation L^p x L^q -> L^r, the explicit quadratic bound eq:quadratic-product, the algebraic coefficient convergence on the coframe chart, and the spin-connection convergence eq:spin-connection-convergence."
   },
@@ -219,9 +219,9 @@
     "title": "General subsequential Einstein--Standard-Model variational closure",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Flagship/EinsteinHandoff.lean:RenewalGeometry.one_sequence_limit",
-      "RenewalGeometry/Flagship/EinsteinHandoff.lean:RenewalGeometry.einstein_extension",
-      "RenewalGeometry/Grand/ConditionalLocalWeakEinsteinMatterHandoffExact.lean:RenewalGeometry.ConditionalLocalWeakEinsteinMatterHandoff.conditional_local_weak_Einstein_matter_handoff"
+      "RenewalGeometry/Gravity/EinsteinHandoff.lean:RenewalGeometry.one_sequence_limit",
+      "RenewalGeometry/Gravity/EinsteinHandoff.lean:RenewalGeometry.einstein_extension",
+      "RenewalGeometry/Gravity/ConditionalLocalWeakEinsteinMatterHandoffExact.lean:RenewalGeometry.ConditionalLocalWeakEinsteinMatterHandoff.conditional_local_weak_Einstein_matter_handoff"
     ],
     "note": "Partial: one_sequence_limit/einstein_extension prove the abstract skeleton (sequence in a compact container, continuous residual bounded by vanishing defects, hence a subsequence converging to a zero-residual point), and conditional_local_weak_Einstein_matter_handoff derives the limiting scalar Euler and 2chi(G+Lambda g)=T identities from assumed sectorwise convergence of finite first variations plus vanishing defects (essentially uniqueness of limits) ; missing: compactness derived from the certificate, first-variation continuity in the strong-packet topology, the source-bound residual estimate eq:main-residual-bound, and the concrete Einstein-Standard-Model field equations."
   },
@@ -230,9 +230,9 @@
     "title": "Summable cofinal transport",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/TrineCofinalCompleteScreenExact.lean:RenewalGeometry.TrineCofinalCompleteScreen.positive_outcomes_converge",
-      "RenewalGeometry/Grand/ThreadCutoffCompactnessExact.lean:RenewalGeometry.ThreadCutoff.tendsto_of_summable_dist",
-      "RenewalGeometry/Grand/MediumProved00.lean:RenewalGeometry.cofinal_transport_attribution"
+      "RenewalGeometry/Measurement/TrineCofinalCompleteScreenExact.lean:RenewalGeometry.TrineCofinalCompleteScreen.positive_outcomes_converge",
+      "RenewalGeometry/Continuum/ThreadCutoffCompactnessExact.lean:RenewalGeometry.ThreadCutoff.tendsto_of_summable_dist",
+      "RenewalGeometry/Predictive/PredictiveRecordBatch00.lean:RenewalGeometry.cofinal_transport_attribution"
     ],
     "note": "Partial: summable adjacent distances give a Cauchy sequence and a limit in a complete normed space (positive_outcomes_converge, tendsto_of_summable_dist), and cofinal_transport_attribution adds uniqueness of the limit in a finite weighted norm ; missing: the componentwise d_K packet, identification of the curvature and covariant-derivative limits, and the two-route direct-comparison clause."
   },
@@ -325,7 +325,7 @@
     "title": "Yang--Mills quadratic stress defect",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_diagonal_bilinear"
+      "RenewalGeometry/Continuum/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_diagonal_bilinear"
     ],
     "note": "Partial: only the final clause (strong L^2 curvature convergence passes the quadratic stress through a bounded bilinear diagonal) has an abstract counterpart ; missing: the tensor-valued weak-star Radon defect measure S_YM and its extraction (Grand/NavierStokesDissipationDefectMeasureExact.lean handles only scalar positive measures)."
   },
@@ -399,12 +399,12 @@
     "title": "Weak-curvature Palatini passage",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/FiniteMeasureL2L6InterpolationExact.lean:RenewalGeometry.FiniteMeasureL2L6Interpolation.lintegral_rpow_interpolate_two_six",
-      "RenewalGeometry/Grand/FiniteMeasureL2L6InterpolationExact.lean:RenewalGeometry.FiniteMeasureL2L6Interpolation.palatini_eLpNorm'_interpolation",
-      "RenewalGeometry/Grand/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_of_norm_interpolation",
-      "RenewalGeometry/Grand/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.curvature_pairing_tendsto_of_coframe_interpolation",
-      "RenewalGeometry/Grand/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.palatini_and_holst_pairings_tendsto",
-      "RenewalGeometry/Grand/PalatiniDeterminantVolumeExact.lean:RenewalGeometry.PalatiniDeterminantVolume.determinantVolume_tendsto_of_coframe_interpolation"
+      "RenewalGeometry/Continuum/FiniteMeasureL2L6InterpolationExact.lean:RenewalGeometry.FiniteMeasureL2L6Interpolation.lintegral_rpow_interpolate_two_six",
+      "RenewalGeometry/Continuum/FiniteMeasureL2L6InterpolationExact.lean:RenewalGeometry.FiniteMeasureL2L6Interpolation.palatini_eLpNorm'_interpolation",
+      "RenewalGeometry/Continuum/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_of_norm_interpolation",
+      "RenewalGeometry/Gravity/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.curvature_pairing_tendsto_of_coframe_interpolation",
+      "RenewalGeometry/Gravity/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.palatini_and_holst_pairings_tendsto",
+      "RenewalGeometry/Gravity/PalatiniDeterminantVolumeExact.lean:RenewalGeometry.PalatiniDeterminantVolume.determinantVolume_tendsto_of_coframe_interpolation"
     ],
     "note": "Partial: the L^2-L^6 Holder interpolation to L^q for 2 < q < 6 (with the p > 3/2 exponent arithmetic) is proved concretely at eLpNorm level, and the passage strong coframe -> strong wedge product -> pairing with norm-bounded weakly convergent curvature, plus the four-linear volume-density limit, are proved on abstract normed spaces with the interpolation bound as hypothesis ; missing: the instantiation on L^p(K) fields (Holder boundedness of the wedge L^{2p'} x L^{2p'} -> L^{p'}, weak L^p as weak-space convergence), the coframe-variation clause, and the connection-Euler pairing caveat."
   },
@@ -469,8 +469,8 @@
     "title": "Regularity of the plaquette map",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Grand/CovariantPlaquetteExpansion.lean:RenewalGeometry.CovariantPlaquette.norm_plaquette_sub_secondOrder_le",
-      "RenewalGeometry/Grand/CovariantPlaquetteExpansion.lean:RenewalGeometry.CovariantPlaquette.plaquette_sub_secondOrder_isBigO_right"
+      "RenewalGeometry/DiscreteAnalysis/CovariantPlaquetteExpansion.lean:RenewalGeometry.CovariantPlaquette.norm_plaquette_sub_secondOrder_le",
+      "RenewalGeometry/DiscreteAnalysis/CovariantPlaquetteExpansion.lean:RenewalGeometry.CovariantPlaquette.plaquette_sub_secondOrder_isBigO_right"
     ],
     "note": "Partial: for the unshifted case a = b = 0 the four-exponential plaquette equals 1 + h^2 [X,Y] + O(h^3) in a Banach algebra, with an explicit cubic bound under contraction hypotheses ; missing: the shifted arguments a, b, the logarithm quotient Phi(h) = h^{-2} log(...), its analytic extension through h = 0 with Phi(0) = a - b + [X,Y], and uniform bounds on parameter derivatives."
   },

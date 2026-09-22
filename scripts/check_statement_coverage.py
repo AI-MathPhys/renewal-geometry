@@ -176,6 +176,9 @@ def declarations_in(path: Path) -> set[str]:
                 parts = b.split(".")
                 if stack[-len(parts):] == parts:
                     del stack[-len(parts):]
+        elif a.startswith("_root_."):
+            names.add(a[len("_root_."):])
+            names.add(a.split(".")[-1])
         else:
             names.add(a)
             names.add(a.split(".")[-1])
