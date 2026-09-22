@@ -50,7 +50,6 @@ estimate. -/
 def IsSchwarzMap (φ : A →ₗ[ℂ] A) : Prop :=
   ∀ x : A, star (φ x) * φ x ≤ φ (star x * x)
 
-open NCG.IsPositiveMap in
 /-- Positive linear maps are monotone. -/
 theorem _root_.NCG.IsPositiveMap.mono {φ : A →ₗ[ℂ] A} (hφ : IsPositiveMap φ) {a b : A}
     (h : a ≤ b) : φ a ≤ φ b := by

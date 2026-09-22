@@ -8,7 +8,9 @@
       "RenewalGeometry/StandardModel/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.explicitRegulatedStandardModelAction",
       "RenewalGeometry/StandardModel/SMGroup.lean:RenewalGeometry.sm_group"
     ],
-    "note": "Partial: RegulatedSMConfiguration/explicitRegulatedStandardModelAction encode a finite link/vertex Standard-Model configuration with the four-term (Euclidean) matter action of (I2)-(I4), and sm_group proves the quotient presentation S(U(3)xU(2)) = (SU(3)xSU(2)xU(1))/Z_6 of eq:gauge-group ; missing: the Lorentzian carrier and coframe variables (I1), the common gravity+matter action with its relative normalization (I4, gravity part), the positive source geometry (I5), and any single structure bundling (I1)-(I5)."
+    "note": "Partial: RegulatedSMConfiguration/explicitRegulatedStandardModelAction encode a finite link/vertex Standard-Model configuration with the four-term (Euclidean) matter action of (I2)-(I4), and sm_group proves the quotient presentation S(U(3)xU(2)) = (SU(3)xSU(2)xU(1))/Z_6 of eq:gauge-group ; missing: the Lorentzian carrier and coframe variables (I1), the common gravity+matter action with its relative normalization (I4, gravity part), the positive source geometry (I5), and any single structure bundling (I1)-(I5).",
+    "difficulty": "medium",
+    "plan": "Write a Lean structure FiniteInterface bundling: a finite-dimensional real vector space Q_h (configuration chart), a differentiable common action S_h = S_g + S_SM : Q_h -> R (fields for both pieces plus the relative normalization constant), a coefficient bank record theta, the finite Dirac/Yukawa incidence operator, and a positive-definite Gram on the retained variation directions (I5). Reuse RenewalGeometry/StandardModel/ExplicitRegulatedStandardModelActionExact.lean:RegulatedSMConfiguration / explicitRegulatedStandardModelAction for the matter part and SMGroup.lean:sm_group for (I2). Missing: the Lorentzian carrier/coframe fields (I1) can only be carried as an abstract field (a coframe map plus an oriented signature predicate, cf. Lorentz/Reconstruction.lean:MarkedDiracDatum) since no manifold reconstruction exists; the gravity action must be an abstract differentiable functional. Definition only, no theorem."
   },
   "prop:renewal-interface": {
     "env": "proposition",
@@ -17,21 +19,27 @@
     "lean": [
       "RenewalGeometry/StandardModel/FiniteStandardModelSourceNativeEmergenceExact.lean:RenewalGeometry.finiteStandardModel_sourceNative_emergence"
     ],
-    "note": "Partial: the companion finite Standard-Model structural packet (gauge quotient, generation rank, weak doublet, finite Dirac incidence) is assembled as the typed certificate finiteStandardModel_sourceNative_emergence ; missing: a Lean finite-interface structure and a proof that the companion constructions instantiate (I1)-(I5), in particular the Lorentzian carrier and common-action normalization."
+    "note": "Partial: the companion finite Standard-Model structural packet (gauge quotient, generation rank, weak doublet, finite Dirac incidence) is assembled as the typed certificate finiteStandardModel_sourceNative_emergence ; missing: a Lean finite-interface structure and a proof that the companion constructions instantiate (I1)-(I5), in particular the Lorentzian carrier and common-action normalization.",
+    "difficulty": "hard",
+    "plan": "Requires the structure of def:finite-interface plus a proof that the companion Lean packets instantiate every field. The matter side is available (StandardModel/FiniteStandardModelSourceNativeEmergenceExact.lean:finiteStandardModel_sourceNative_emergence, ExplicitRegulatedStandardModelActionExact.lean), but no Lean object supplies a Lorentzian carrier with coframe variables on a comparison cylinder or a common gravity+matter action with the physical relative normalization; the gravity companion files (Gravity/FiniteLineValuedEinstein.lean, Gravity/FiniteBRSTWardEinstein.lean) are line-valued abstract actions, not a coframe action. Needs reformulation: either weaken (I1)/(I4) to abstract fields (then it becomes a medium assembly) or build the missing carrier, which is research-level."
   },
   "def:tests": {
     "env": "definition",
     "title": "Physical variation space",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: test space, C^{r_0} norm, compactly supported variation tuple, determining core, metric lift; nothing in NCG/ encodes the physical variation space of smooth compactly supported tuples on a spin cylinder."
+    "note": "No Lean counterpart found; searched: test space, C^{r_0} norm, compactly supported variation tuple, determining core, metric lift; nothing in NCG/ encodes the physical variation space of smooth compactly supported tuples on a spin cylinder.",
+    "difficulty": "hard",
+    "plan": "Presupposes smooth compactly supported sections of Sym^2 TM, T^*M (x) ad P and matter bundles over a spin cylinder with a C^{r_0} norm in an atlas and its completion. Mathlib has smooth manifolds/vector bundles and ContMDiff but no C^r norms on sections, no compactly supported section spaces, and no bundle metrics; nothing in the library encodes them. A faithful definition needs that infrastructure; a chart-local surrogate (compactly supported C^r maps R^4 -> R^N with the sup of derivative norms, via Mathlib iteratedFDeriv) would be medium but changes the statement."
   },
   "def:regulator": {
     "env": "definition",
     "title": "A finite-interface regulator sequence",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: regulator sequence, reconstruction map, test lift, first-variation consistency c_h(K), stationarity eps_h(K); Flagship/EinsteinHandoff.lean only carries an abstract sequence x : N -> X with a scalar defect, not the reconstruction/test-lift data of this definition."
+    "note": "No Lean counterpart found; searched: regulator sequence, reconstruction map, test lift, first-variation consistency c_h(K), stationarity eps_h(K); Flagship/EinsteinHandoff.lean only carries an abstract sequence x : N -> X with a scalar defect, not the reconstruction/test-lift data of this definition.",
+    "difficulty": "hard",
+    "plan": "Depends on def:finite-interface, def:tests and reconstruction maps R_h into smooth local fields on M; c_h(K) and eps_h(K) are suprema over the C^{r_0} unit ball of differences of Frechet derivatives. Missing: the test space (def:tests), a Lean notion of reconstructed smooth field on bundles over M, and the linear test lifts I_h. Gravity/EinsteinHandoff.lean only has an abstract sequence with a scalar defect. Could be stated abstractly (test space = arbitrary normed space V, I_h : V -> T Q_h linear, R_h : Q_h -> Z with Z a normed field space, c_h/eps_h as operator-norm suprema) as a medium definition, but that is a reformulation."
   },
   "prop:source-bound": {
     "env": "proposition",
@@ -40,77 +48,99 @@
     "lean": [
       "RenewalGeometry/Certificates/GTProtectedRiesz.lean:RenewalGeometry.gt_protected_riesz"
     ],
-    "note": "Partial: gt_protected_riesz proves the Gram Cauchy-Schwarz bound <Lu,v>^2 <= <u,Lu><v,Lv> for a range source e = Lu on a real inner-product space, i.e. |a[w]| <= ||a||_{G^{-1}} ||w||_G ; missing: the assembly eps_h(K) <= L_h sqrt(R_h) + e_h with the test-lift bound ||v_h(v)||_G <= L_h ||v|| and the identification error e_h."
+    "note": "Partial: gt_protected_riesz proves the Gram Cauchy-Schwarz bound <Lu,v>^2 <= <u,Lu><v,Lv> for a range source e = Lu on a real inner-product space, i.e. |a[w]| <= ||a||_{G^{-1}} ||w||_G ; missing: the assembly eps_h(K) <= L_h sqrt(R_h) + e_h with the test-lift bound ||v_h(v)||_G <= L_h ||v|| and the identification error e_h.",
+    "difficulty": "easy",
+    "plan": "Pure finite-dimensional Cauchy-Schwarz assembly. State on a real inner-product space with a positive-definite Gram G (or its induced inner product): from |a[w]| <= ||a||_{G^{-1}} ||w||_G (RenewalGeometry/Certificates/GTProtectedRiesz.lean:gt_protected_riesz gives the range-source form <Lu,v>^2 <= <u,Lu><v,Lv>), the lift bound ||v_h(v)||_G <= L_h ||v||, and the identification error e_h ||v||, derive sup_{||v||<=1} |D S_h[I_h v]| <= L_h sqrt(R_h) + e_h. Only the triangle inequality, Real.sqrt monotonicity and csSup/iSup bound are needed; define eps_h as an iSup over the unit ball of an abstract normed test space."
   },
   "prop:native-consistency": {
     "env": "proposition",
     "title": "Growing-band consistency of the unchanged finite action",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: growing-band consistency, Cartan plaquette curvature, Euler density E_0, stencil Taylor expansion h K^3."
+    "note": "No Lean counterpart found; searched: growing-band consistency, Cartan plaquette curvature, Euler density E_0, stencil Taylor expansion h K^3.",
+    "difficulty": "hard",
+    "plan": "Consistency of the full lattice Euler row of S_h^loc (eq:native-densities, Cartan+YM+Higgs+Dirac plaquettes with logarithms) against the continuum Einstein-Standard-Model Euler density E_0 with error h K^3. Requires formalizing the local action (see lem:native-scaling), the continuum Euler density including the Levi-Civita/spin-connection chain, and multivariate Taylor expansion of stencils with uniform constants. Nothing beyond DiscreteAnalysis/UniformFiniteDifferenceRemainderExact.lean (first-order remainders) and CovariantPlaquetteExpansion.lean (unshifted plaquette) exists; the continuum Euler density is not defined anywhere. Research-level infrastructure."
   },
   "thm:native-source": {
     "env": "theorem",
     "title": "Leakage-tolerant physical forcing estimate",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: leakage-tolerant forcing, physical residual R_B R_D, tau_{h,m}, forcing budget F_{h,k}, logarithmic factor."
+    "note": "No Lean counterpart found; searched: leakage-tolerant forcing, physical residual R_B R_D, tau_{h,m}, forcing budget F_{h,k}, logarithmic factor.",
+    "difficulty": "hard",
+    "plan": "Needs Sobolev norms L^2_t H^k_x on a slab, the trigonometric reconstruction I_h^trig, the physical residual maps R_B, R_D, lem:native-tail-transfer, lem:log-source-upgrade (holomorphic strip / contour shift) and prop:native-consistency. None of these objects exist in Mathlib or the library (no Sobolev spaces, no Paley-Wiener decay, no continuum Euler rows). Hard by every ingredient."
   },
   "thm:native-closure": {
     "env": "theorem",
     "title": "Quantitative finite-action stability and Einstein--Standard-Model closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: actual-jet state, C_t H^k stability, Riem convergence, stress convergence, first-exit bootstrap, D^{full}."
+    "note": "No Lean counterpart found; searched: actual-jet state, C_t H^k stability, Riem convergence, stress convergence, first-exit bootstrap, D^{full}.",
+    "difficulty": "hard",
+    "plan": "Composition of thm:native-source with the symmetric-hyperbolic actual-jet stability estimate prop:coupled-bootstrap (H^k energy estimates, commutator estimates, Gronwall, first-exit bootstrap on T^3) and the algebraic stress identification. Requires Sobolev spaces on T^3, Kato-type energy estimates for symmetric hyperbolic systems and curvature/stress algebra; all absent. Research-level."
   },
   "cor:native-rate": {
     "env": "corollary",
     "title": "An explicit cofinal rate",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: cofinal rate, dyadic summability, K_h ~ h^{-beta}, h^{1-beta(k+4)}."
+    "note": "No Lean counterpart found; searched: cofinal rate, dyadic summability, K_h ~ h^{-beta}, h^{1-beta(k+4)}.",
+    "difficulty": "hard",
+    "plan": "The conclusion inherits thm:native-closure, so the corollary as stated is hard. The self-contained part, F_{h,k} = O(h^{1-beta(k+4)} (1+|log h|)^{k+1}) and eps^phys = O(h^{1-3 beta}) from sigma_h=O(h), K_h ~ h^{-beta}, the tail rates eq:native-tail-rate and the definitions eq:native-forcing-budget, plus dyadic summability of h_n^rho (1+n)^{k+1}, is an easy real-asymptotics lemma (Asymptotics.IsBigO, Real.log bounds, summable_geometric) and could be split off and proved in a day."
   },
   "thm:source-selection": {
     "env": "theorem",
     "title": "Same-record selection from the actual signed action drift",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: stopped action drift, legal-edge mask, telescoping subprobability masses, Markov inequality selection score, exit probability."
+    "note": "No Lean counterpart found; searched: stopped action drift, legal-edge mask, telescoping subprobability masses, Markov inequality selection score, exit probability.",
+    "difficulty": "medium",
+    "plan": "Finite-state, finite-horizon probability. Model: Fintype state X, sub-stochastic legal kernels K_j (nonneg rows summing to <= 1; cf. MarkovChains/FiniteMarkovHeatKernel.lean RowStochastic/EntrywiseNonnegative), surviving masses mu_{j+1} = mu_j K_j, actions a_h : X -> [A^-, A^+]. Prove (i) the telescoping identity sum_j sum_x mu_j(x) d_{h,j}(x) = sum_x mu_J(x) a(x) - a(x_0) - (killed mass credited at last legal value) >= -D_h^A, hence eq:source-slope-occupation from the drift inequality; (ii) build the finite path measure of the stopped chain (product of kernels on Fin (J+1) -> X, a Finset-weighted PMF) and apply Markov's inequality to the mean score to get eq:source-selection-failure. Missing: the finite path-measure construction with killing and the deterministic min-score argument; all finite sums, several days."
   },
   "prop:native-reader": {
     "env": "proposition",
     "title": "Exact native-energy to physical-tail certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: affine reader, weighted high-frequency coefficient map, kernel condition T ker Q = 0, Moore-Penrose square root pinv, weighted ell^1 duality."
+    "note": "No Lean counterpart found; searched: affine reader, weighted high-frequency coefficient map, kernel condition T ker Q = 0, Moore-Penrose square root pinv, weighted ell^1 duality.",
+    "difficulty": "medium",
+    "plan": "Finite-dimensional linear algebra. State with H_src = EuclideanSpace R n, Q positive semidefinite (Matrix.PosSemidef), T : H_src -> (block index -> R^d) linear, weight w_l > 0, and tau as the weighted block-l^1 norm. Prove: a constant c with sum_l w_l ||T_l xi|| <= c <xi,Q xi>^{1/2} for all xi exists iff T (ker Q) = 0 (necessity: kernel vectors have zero energy; sufficiency: restrict to (ker Q)^perp where Q is definite, finite-dimensional norm equivalence). The optimal-constant formula needs Q^{dagger/2}: build it from Analysis/HermitianMoorePenroseInverse.lean:hermitianMoorePenroseInverse combined with Matrix.PosSemidef.sqrt (or diagonalize once via Matrix.IsHermitian.spectral_theorem) and then it is the operator norm of T Q^{dagger/2} from l^2 to weighted l^1 (a finite sup). Affine offset by triangle inequality."
   },
   "cor:native-reader-sobolev": {
     "env": "corollary",
     "title": "Sobolev positive-form reader criterion",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Sobolev positive-form reader, diagonal multiplier (1+|l|^2)^{1/2}, dyadic shell count O(R^4), K^{2-q} tail."
+    "note": "No Lean counterpart found; searched: Sobolev positive-form reader, diagonal multiplier (1+|l|^2)^{1/2}, dyadic shell count O(R^4), K^{2-q} tail.",
+    "difficulty": "medium",
+    "plan": "Two finite pieces: (a) from R^* L^{2q} R <= C_R Q and ||u_soft||_{H^q} <= C_R deduce ||u_h(x)||_{H^q} <= C(1+sqrt V) with H^q the weighted l^2 norm sum (1+|l|^2)^q |u_hat(l)|^2 on the finite mode set, a Loewner-order inequality on finite matrices (easy); (b) the lattice-sum bound A_{N,K,m,q}^2 = sum_{K<|l|_inf<=N} (1+|l|_1/K)^{2m} (1+|l|_2^2)^{-q} <= C K^{4-2q} for q > m+2, via dyadic shells in Z^4 with O(R^4) points (needs a counting lemma #{l in Z^4 : |l|_inf <= R} <= (2R+1)^4 and comparisons |l|_1 <= 4|l|_inf, |l|_2 >= |l|_inf) and Cauchy-Schwarz (Parseval on the finite Fourier index set). Missing: the shell-counting/geometric-sum estimate and the identification of tau_{h,j} with the weighted l^1 tail; all finite sums, several days. Sharpness clause optional."
   },
   "thm:native-selected-closure": {
     "env": "theorem",
     "title": "Same-source selected finite-action Einstein--Standard-Model closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: same-source selected closure, selected record, Borel-Cantelli, summable adjacent differences."
+    "note": "No Lean counterpart found; searched: same-source selected closure, selected record, Borel-Cantelli, summable adjacent differences.",
+    "difficulty": "hard",
+    "plan": "Assembles thm:source-selection, the reader bound and thm:native-source/thm:native-closure; inherits the Sobolev/PDE stability machinery of the latter. The Borel-Cantelli summability clause (MeasureTheory.measure_limsup_eq_zero) is medium on its own, but the closure bound eq:selected-closure is research-level."
   },
   "cor:selected-polynomial": {
     "env": "corollary",
     "title": "An explicit polynomial selected-source regime",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: polynomial selected-source regime, exponent window, failure probability O(h^{2a}+h^{2eps})."
+    "note": "No Lean counterpart found; searched: polynomial selected-source regime, exponent window, failure probability O(h^{2a}+h^{2eps}).",
+    "difficulty": "hard",
+    "plan": "Inherits thm:native-selected-closure. The exponent arithmetic in app:native-polynomial-proof (failure probability O(h^{2a}+h^{2eps}) from the five terms, the order of the terms in bar F_{h,k}, and the resulting rho) is an easy standalone real-asymptotics lemma; the closure statement itself is hard."
   },
   "cor:gauge-robust-reader": {
     "env": "corollary",
     "title": "Gauge-robust weak-sector reader entrance",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: covariant jet energy, discrete Kato inequality, algebraic Higgs frame, causal temporal gauge, logarithmic link coordinates, full covector gauge invariance."
+    "note": "No Lean counterpart found; searched: covariant jet energy, discrete Kato inequality, algebraic Higgs frame, causal temporal gauge, logarithmic link coordinates, full covector gauge invariance.",
+    "difficulty": "hard",
+    "plan": "Requires the discrete Kato inequality, discrete Sobolev inequalities on a periodic grid with link-independent constants, finite-difference chain rules for the normalized Higgs frame, causal temporal gauge with discrete Gronwall, a discrete-symbol Parseval bound giving an all-mode H^q bound, plus the finite Ward identity for the full action covector. Individual pieces (Kato: |delta|F|| <= |D^U F| from the reverse triangle inequality and unitarity; gauge covariance of the covector) are medium, but the discrete Sobolev embeddings on grids in d<=4 with uniform constants do not exist in Mathlib or the library (DiscreteAnalysis/OperationalSobolevWeylExact.lean is unrelated). Overall hard."
   },
   "thm:prefix-stationarity": {
     "env": "theorem",
@@ -120,21 +150,27 @@
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.descent_upper",
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.bregman_floor"
     ],
-    "note": "Partial: descent_upper proves the Taylor descent inequality f(a+v) <= f(a) + <grad f(a),v> + (Lambda/2)||v||^2 used in eq:prefix-descent1, and bregman_floor the strong-convexity floor (m/2)||v||^2 <= D_Psi used for the potential Psi_h ; missing: the balance residual b_j, the telescoped prefix average eq:prefix-average with the h^{-2} Hessian-scale constants, and the selected-slope conclusion eq:prefix-selected (the legacy file instead treats a stationary law of an accepted kernel)."
+    "note": "Partial: descent_upper proves the Taylor descent inequality f(a+v) <= f(a) + <grad f(a),v> + (Lambda/2)||v||^2 used in eq:prefix-descent1, and bregman_floor the strong-convexity floor (m/2)||v||^2 <= D_Psi used for the potential Psi_h ; missing: the balance residual b_j, the telescoped prefix average eq:prefix-average with the h^{-2} Hessian-scale constants, and the selected-slope conclusion eq:prefix-selected (the legacy file instead treats a stationary law of an accepted kernel).",
+    "difficulty": "medium",
+    "plan": "Finite-dimensional descent calculation on an inner-product space E (the mass norm). Take eq:prefix-Fisher and eq:prefix-Hessian as hypotheses (Hessian bound as a Lipschitz bound on the gradient: ||grad A(x)-grad A(y)|| <= K_0 h^{-2}||x-y||, strong convexity of Psi as (grad Psi(y)-grad Psi(x), y-x) >= g_* ||y-x||^2 and Lipschitz g^*). Reuse RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:descent_upper (Taylor descent inequality eq:prefix-descent1) and bregman_floor; then the algebra of app:prefix-stationarity (Young's inequality, E(x) = b_j - upsilon^{-1}(p(y)-p(x)) + (E(x)-E(y)), squaring, summing, telescoping A(theta_0)-A(theta_J) <= D_0, taking the min of a finite list) is elementary Finset.sum manipulation. Missing: only this assembly with explicit constants C_0, D_1; the file's later stationary-law material is not needed."
   },
   "cor:prefix-table": {
     "env": "corollary",
     "title": "Finite-table certification for the prefix-balance entrance",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: finite-table certification, safe set, exit probability, balance sum, Markov inequality, dyadic Borel-Cantelli."
+    "note": "No Lean counterpart found; searched: finite-table certification, safe set, exit probability, balance sum, Markov inequality, dyadic Borel-Cantelli.",
+    "difficulty": "medium",
+    "plan": "Needs a finite-horizon path measure for the tabled transitions (same construction as thm:source-selection), the pathwise inequality of thm:prefix-stationarity on the safe event G, Markov's inequality (MeasureTheory.mul_meas_ge_le_lintegral) to get eq:prefix-table-probability, and the first Borel-Cantelli lemma (MeasureTheory.measure_limsup_eq_zero) along a dyadic cutoff family on a common probability space. Missing: the path measure with safe-set indicator and the Markov step; several days once thm:prefix-stationarity is done."
   },
   "cor:generated-nonempty": {
     "env": "corollary",
     "title": "Nonemptiness of the controlled finite class",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: spectral-midpoint evolution, constrained initial class, N^{-p}+tau rate, Dirac residual."
+    "note": "No Lean counterpart found; searched: spectral-midpoint evolution, constrained initial class, N^{-p}+tau rate, Dirac residual.",
+    "difficulty": "hard",
+    "plan": "Restates thm:generated-dynamics (spectral Galerkin + midpoint recursion for a symmetric hyperbolic system with H^q energy estimates, constrained initial data via elliptic solvers). Requires Sobolev spaces on T^3, discrete energy identities and the coupled actual-jet system; none available. Hard."
   },
   "lem:screen": {
     "env": "lemma",
@@ -151,7 +187,9 @@
     "title": "From spatial screens to spacetime compactness",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Aubin-Lions, Simon, finite-rank projections P_R, H^1(0,T) time regularity, precompact in L^2_t H; Grand/DiscreteAubinLionsResponseExact.lean only computes a sqrt time modulus from an interpolation and a negative-norm estimate and does not prove precompactness."
+    "note": "No Lean counterpart found; searched: Aubin-Lions, Simon, finite-rank projections P_R, H^1(0,T) time regularity, precompact in L^2_t H; Grand/DiscreteAubinLionsResponseExact.lean only computes a sqrt time modulus from an interpolation and a negative-norm estimate and does not prove precompactness.",
+    "difficulty": "hard",
+    "plan": "Requires precompactness in L^2(0,T;H) (Bochner space) from finite-rank spatial projections plus H^1(0,T) bounds on projected components: needs the one-dimensional Rellich compactness H^1(0,T) into L^2(0,T) (Arzela-Ascoli via Mathlib's BoundedContinuousFunction.arzela_ascoli is reachable, but the H^1 -> Holder-1/2 step and Bochner L^2_t H are not set up) and a total-boundedness/epsilon-net argument in L^2_t H. The abstract epsilon-net step (tail uniformly small + projected sequence precompact => precompact) is medium and could be proved on an abstract Hilbert space with OperatorLimits/L2BlockDiagonalCompactness.lean-style screens; the time-Sobolev compactness is the hard part. No Aubin-Lions in Mathlib."
   },
   "prop:orlicz": {
     "env": "proposition",
@@ -160,42 +198,54 @@
     "lean": [
       "RenewalGeometry/Continuum/GaussianKernelVitaliExact.lean:RenewalGeometry.GaussianKernelVitali.integral_norm_sub_tendsto_zero"
     ],
-    "note": "Partial: integral_norm_sub_tendsto_zero proves the Vitali step (uniform integrability + convergence in measure implies L^1 convergence of the norm) on a finite reference cylinder ; missing: the superlinear-Phi (de la Vallee-Poussin) uniform integrability of |H_h|^4, Rellich compactness giving convergence in measure, and the L^4(K) conclusion."
+    "note": "Partial: integral_norm_sub_tendsto_zero proves the Vitali step (uniform integrability + convergence in measure implies L^1 convergence of the norm) on a finite reference cylinder ; missing: the superlinear-Phi (de la Vallee-Poussin) uniform integrability of |H_h|^4, Rellich compactness giving convergence in measure, and the L^4(K) conclusion.",
+    "difficulty": "hard",
+    "plan": "The Vitali step is available (RenewalGeometry/Continuum/GaussianKernelVitaliExact.lean:integral_norm_sub_tendsto_zero) and the de la Vallee-Poussin uniform integrability of |H_h|^4 from sup int Phi(|H_h|^4) < inf is a medium measure-theory lemma (MeasureTheory.UnifIntegrable). What is missing and hard is Rellich compactness H^1(K) -> L^2(K) on a bounded 4D region giving convergence in measure: no Sobolev spaces or Rellich theorem in Mathlib. If Rellich (convergence in measure of H_h) is taken as a hypothesis, the remainder is medium."
   },
   "prop:sobolev-bosonic": {
     "env": "proposition",
     "title": "A-priori Sobolev bounds imply bosonic strong compactness",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Rellich-Kondrachov, H^{2+sigma} into H^1, L^{4+delta} embedding, curvature convergence dA + A wedge A."
+    "note": "No Lean counterpart found; searched: Rellich-Kondrachov, H^{2+sigma} into H^1, L^{4+delta} embedding, curvature convergence dA + A wedge A.",
+    "difficulty": "hard",
+    "plan": "Requires Rellich-Kondrachov compact embeddings H^{2+sigma} -> H^1 -> L^4 and H^{2+sigma} -> C^0 in four dimensions, plus product continuity for dA + A wedge A. Sobolev spaces and their compact embeddings do not exist in Mathlib; only the abstract bilinear-diagonal lemma (Continuum/StrongInterpolationConvergenceExact.lean:tendsto_diagonal_bilinear) is available for the curvature step. Hard."
   },
   "prop:dirac-stability": {
     "env": "proposition",
     "title": "Lorentzian Dirac stability produces spinor $H^1$ compactness",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: symmetric hyperbolic, Dirac energy inequality, Gronwall, C_t L^2 Cauchy, H^1 interpolation; the only Gronwall lemmas (Gravity/GrowthComparison, Grand/FastFeedback, Grand/HypocoerciveScreensExact) are scalar Volterra/discrete forms unrelated to spinor systems."
+    "note": "No Lean counterpart found; searched: symmetric hyperbolic, Dirac energy inequality, Gronwall, C_t L^2 Cauchy, H^1 interpolation; the only Gronwall lemmas (Gravity/GrowthComparison, Grand/FastFeedback, Grand/HypocoerciveScreensExact) are scalar Volterra/discrete forms unrelated to spinor systems.",
+    "difficulty": "hard",
+    "plan": "Symmetric-hyperbolic L^2 energy inequality for first-order systems with W^{1,inf} coefficients, Gronwall, H^1/H^2 interpolation on a closed 3-manifold and Cauchy-in-H^1 conclusion. No hyperbolic PDE energy estimates, Sobolev spaces on manifolds, or distributional limits of first-order systems exist in Mathlib/the library (Gronwall lemmas in Gravity/GrowthComparison and Grand/* are scalar). Hard."
   },
   "def:compactness-certificate": {
     "env": "definition",
     "title": "Classical compactness certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: compactness certificate (C1)-(C5), compact screen, Orlicz condition, spinor route (C4a)/(C4b)."
+    "note": "No Lean counterpart found; searched: compactness certificate (C1)-(C5), compact screen, Orlicz condition, spinor route (C4a)/(C4b).",
+    "difficulty": "hard",
+    "plan": "Presupposes L^inf/H^1/L^4/L^2 norms of bundle-valued fields on compact regions, compact screens (available abstractly: OperatorLimits/SMSTPositiveScreenExact.lean) and Orlicz integrals. H^1 of coframes/spinors and precompactness in L^4(K) of connections need Sobolev spaces; a purely abstract surrogate (a family of normed spaces with predicates) would be medium but not faithful."
   },
   "def:strong-packet": {
     "env": "definition",
     "title": "Classical strong packet",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: strong packet, L^infty cap H^1 coframe convergence, L^4 connection convergence, H^1 spinor convergence, coefficient bank."
+    "note": "No Lean counterpart found; searched: strong packet, L^infty cap H^1 coframe convergence, L^4 connection convergence, H^1 spinor convergence, coefficient bank.",
+    "difficulty": "hard",
+    "plan": "Same obstruction as def:compactness-certificate: the packet is convergence in L^inf cap H^1, L^4, L^2 of curvature F_A = dA + A wedge A, D_A H, and H^1 of spinors on compact K. Needs Sobolev/weak-derivative infrastructure and bundle-valued L^p on manifolds. Abstract version (a tuple of normed spaces with a distinguished continuous curvature map) is medium."
   },
   "thm:certificate-packet": {
     "env": "theorem",
     "title": "Finite certificates produce the classical strong packet",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: diagonal extraction over bundle atlas, identification of curvature limit, Rellich, Orlicz; no field-level compactness assembly exists."
+    "note": "No Lean counterpart found; searched: diagonal extraction over bundle atlas, identification of curvature limit, Rellich, Orlicz; no field-level compactness assembly exists.",
+    "difficulty": "hard",
+    "plan": "Assembly of diagonal extraction, lem:screen (proved), prop:orlicz, prop:dirac-stability, Rellich compactness and distributional identification dA_h = F_{A_h} - A_h wedge A_h. Every non-abstract ingredient (Rellich, distributions on charts, weak derivatives, Sobolev spaces) is missing. The abstract skeleton (screens on Hilbert packets + diagonal subsequence extraction over a countable exhaustion, cf. OperatorLimits/VaryingHilbertWeakSubsequenceCompactness.lean and TopologicalDiagonalTendsto.lean) is medium but does not reach the theorem."
   },
   "lem:products": {
     "env": "lemma",
@@ -205,14 +255,18 @@
       "RenewalGeometry/Continuum/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_diagonal_bilinear",
       "RenewalGeometry/Continuum/WeakStrongBilinearPairingExact.lean:RenewalGeometry.WeakStrongBilinearPairing.tendsto_of_strong_of_bounded_weak"
     ],
-    "note": "Partial: continuity of bounded bilinear maps under strong (and strong x bounded-weak) convergence is proved on abstract normed spaces ; missing: the Holder instantiation L^p x L^q -> L^r, the explicit quadratic bound eq:quadratic-product, the algebraic coefficient convergence on the coframe chart, and the spin-connection convergence eq:spin-connection-convergence."
+    "note": "Partial: continuity of bounded bilinear maps under strong (and strong x bounded-weak) convergence is proved on abstract normed spaces ; missing: the Holder instantiation L^p x L^q -> L^r, the explicit quadratic bound eq:quadratic-product, the algebraic coefficient convergence on the coframe chart, and the spin-connection convergence eq:spin-connection-convergence.",
+    "difficulty": "hard",
+    "plan": "The first clause (L^p x L^q -> L^r product continuity and the quadratic bound eq:quadratic-product) is medium: Mathlib's Holder inequality for eLpNorm (MeasureTheory.eLpNorm_smul_le_mul_eLpNorm / Memℒp.mul with 1/p+1/q=1/r) plus one-factor-at-a-time telescoping, and the abstract bilinear versions already exist in Continuum/StrongInterpolationConvergenceExact.lean:tendsto_diagonal_bilinear and Continuum/WeakStrongBilinearPairingExact.lean. The coefficient clause (smooth algebraic functions of e_h, e_h^{-1} converge in L^inf cap H^1) and eq:spin-connection-convergence require the chain rule for weak derivatives of compositions in H^1 and the Levi-Civita/spin-connection formula; Sobolev spaces are absent, so these clauses are hard. Split: prove the L^p clauses first."
   },
   "prop:variation-continuity": {
     "env": "proposition",
     "title": "First-variation continuity from primitive fields",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: first-variation continuity, dual C^{r_0} norm, Yang-Mills/Higgs/Dirac-Yukawa/gravity sector estimates, Palatini first-order density."
+    "note": "No Lean counterpart found; searched: first-variation continuity, dual C^{r_0} norm, Yang-Mills/Higgs/Dirac-Yukawa/gravity sector estimates, Palatini first-order density.",
+    "difficulty": "hard",
+    "plan": "Sectorwise Lipschitz estimate of the full first variation of the Einstein-Standard-Model action in the dual C^{r_0} norm with respect to d_K; needs the continuum action on bundle-valued Sobolev/L^p fields, the Palatini first-order density, spin connections, and the dual test norm. None of the field-level objects exist. Research/infrastructure-level."
   },
   "thm:main-limit": {
     "env": "theorem",
@@ -223,7 +277,9 @@
       "RenewalGeometry/Gravity/EinsteinHandoff.lean:RenewalGeometry.einstein_extension",
       "RenewalGeometry/Gravity/ConditionalLocalWeakEinsteinMatterHandoffExact.lean:RenewalGeometry.ConditionalLocalWeakEinsteinMatterHandoff.conditional_local_weak_Einstein_matter_handoff"
     ],
-    "note": "Partial: one_sequence_limit/einstein_extension prove the abstract skeleton (sequence in a compact container, continuous residual bounded by vanishing defects, hence a subsequence converging to a zero-residual point), and conditional_local_weak_Einstein_matter_handoff derives the limiting scalar Euler and 2chi(G+Lambda g)=T identities from assumed sectorwise convergence of finite first variations plus vanishing defects (essentially uniqueness of limits) ; missing: compactness derived from the certificate, first-variation continuity in the strong-packet topology, the source-bound residual estimate eq:main-residual-bound, and the concrete Einstein-Standard-Model field equations."
+    "note": "Partial: one_sequence_limit/einstein_extension prove the abstract skeleton (sequence in a compact container, continuous residual bounded by vanishing defects, hence a subsequence converging to a zero-residual point), and conditional_local_weak_Einstein_matter_handoff derives the limiting scalar Euler and 2chi(G+Lambda g)=T identities from assumed sectorwise convergence of finite first variations plus vanishing defects (essentially uniqueness of limits) ; missing: compactness derived from the certificate, first-variation continuity in the strong-packet topology, the source-bound residual estimate eq:main-residual-bound, and the concrete Einstein-Standard-Model field equations.",
+    "difficulty": "hard",
+    "plan": "The abstract skeleton is in place (Gravity/EinsteinHandoff.lean:one_sequence_limit, einstein_extension; Gravity/ConditionalLocalWeakEinsteinMatterHandoffExact.lean:conditional_local_weak_Einstein_matter_handoff) and eq:main-residual-bound is a triangle-inequality assembly of prop:source-bound (easy), c_h and prop:variation-continuity. What is missing and hard: thm:certificate-packet (compactness), prop:variation-continuity, and the concrete distributional Einstein-Standard-Model equations. An abstract conditional version (compactness + continuity + vanishing residual => stationary limit) is essentially already proved; the theorem as stated is hard."
   },
   "prop:cofinal-transport": {
     "env": "proposition",
@@ -234,91 +290,117 @@
       "RenewalGeometry/Continuum/ThreadCutoffCompactnessExact.lean:RenewalGeometry.ThreadCutoff.tendsto_of_summable_dist",
       "RenewalGeometry/Predictive/PredictiveRecordBatch00.lean:RenewalGeometry.cofinal_transport_attribution"
     ],
-    "note": "Partial: summable adjacent distances give a Cauchy sequence and a limit in a complete normed space (positive_outcomes_converge, tendsto_of_summable_dist), and cofinal_transport_attribution adds uniqueness of the limit in a finite weighted norm ; missing: the componentwise d_K packet, identification of the curvature and covariant-derivative limits, and the two-route direct-comparison clause."
+    "note": "Partial: summable adjacent distances give a Cauchy sequence and a limit in a complete normed space (positive_outcomes_converge, tendsto_of_summable_dist), and cofinal_transport_attribution adds uniqueness of the limit in a finite weighted norm ; missing: the componentwise d_K packet, identification of the curvature and covariant-derivative limits, and the two-route direct-comparison clause.",
+    "difficulty": "medium",
+    "plan": "Abstract form: d_K is a finite sum of norms of differences in complete normed spaces (one per packet component) plus |theta_h - theta|; summable adjacent distances give Cauchy sequences and limits (Continuum/ThreadCutoffCompactnessExact.lean:tendsto_of_summable_dist, Measurement/TrineCofinalCompleteScreenExact.lean:positive_outcomes_converge, Predictive/PredictiveRecordBatch00.lean:cofinal_transport_attribution for uniqueness). Missing: the componentwise packaging (a Fintype-indexed family of complete normed spaces with the sum metric; summability of the sum implies each component summable), the two-route comparison clause (two sequences with dist tending to zero have equal limits: tendsto_nhds_unique), and the identification clause stated abstractly as: the limit of a convergent sequence that also has a subsequential limit z equals z. The curvature identification is inherited from thm:certificate-packet and should be kept as a hypothesis. Several days."
   },
   "cor:cofinal-unique": {
     "env": "corollary",
     "title": "Cofinal uniqueness and route independence",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: cofinal uniqueness, route independence, strong-packet limit identified as Einstein-Standard-Model solution; only the abstract summable-Cauchy ingredients cited under prop:cofinal-transport exist, and the legacy thm:GT-cofinal-route-independence is itself conditional_interface."
+    "note": "No Lean counterpart found; searched: cofinal uniqueness, route independence, strong-packet limit identified as Einstein-Standard-Model solution; only the abstract summable-Cauchy ingredients cited under prop:cofinal-transport exist, and the legacy thm:GT-cofinal-route-independence is itself conditional_interface.",
+    "difficulty": "hard",
+    "plan": "Composition of prop:cofinal-transport (medium) with thm:main-limit (hard). Abstractly (uniqueness of limit + limit is stationary) it is easy once thm:main-limit is available as a hypothesis, but as stated it inherits thm:main-limit."
   },
   "thm:regular-branch": {
     "env": "theorem",
     "title": "Regularity criterion for variational closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: regularity criterion H^{3+sigma}, Sobolev embedding, Lorentzian Dirac system coefficients."
+    "note": "No Lean counterpart found; searched: regularity criterion H^{3+sigma}, Sobolev embedding, Lorentzian Dirac system coefficients.",
+    "difficulty": "hard",
+    "plan": "Needs prop:sobolev-bosonic, prop:dirac-stability, Sobolev embedding H^{3+sigma} -> W^{1,inf} in four dimensions, and the proof of thm:main-limit. All Sobolev/PDE ingredients are missing. Hard."
   },
   "prop:covariant-higgs-endpoint": {
     "env": "proposition",
     "title": "Covariant-gradient compactness closes the Higgs endpoint",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: covariant gradient compactness, relative multiplier estimate, compact multiplication H^1 -> L^2 by L^4 coefficient."
+    "note": "No Lean counterpart found; searched: covariant gradient compactness, relative multiplier estimate, compact multiplication H^1 -> L^2 by L^4 coefficient.",
+    "difficulty": "hard",
+    "plan": "Relative compactness of multiplication H^1 -> L^2 by L^4 coefficients, the graph estimate, Rellich compactness and distributional identification Y = D_A H; all need Sobolev spaces and compact embeddings on bounded 4D charts. Absent from Mathlib. Hard."
   },
   "prop:weak-fermion": {
     "env": "proposition",
     "title": "Weak-$H^1$ continuity of the complete fermionic first variation",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: weak-H^1 fermionic first variation, spin connection P(e) d e, finite-net upgrade C^r to C^1."
+    "note": "No Lean counterpart found; searched: weak-H^1 fermionic first variation, spin connection P(e) d e, finite-net upgrade C^r to C^1.",
+    "difficulty": "hard",
+    "plan": "Weak H^1 convergence of spinors with Rellich strong L^2 convergence, weak-strong pairings (abstract version exists: OperatorLimits/VaryingHilbertWeakStrongPairing.lean:WeaklyConverges.inner_strong, Continuum/WeakStrongBilinearPairingExact.lean), the spin-connection formula P(e) d e, and the finite-net upgrade from C^r to C^1 (Arzela-Ascoli for the C^r unit ball, medium). Sobolev spaces/Rellich and the continuum Dirac action are missing. Hard."
   },
   "def:reduced-certificate": {
     "env": "definition",
     "title": "Reduced compactness certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: reduced compactness certificate (R1)-(R5)."
+    "note": "No Lean counterpart found; searched: reduced compactness certificate (R1)-(R5).",
+    "difficulty": "hard",
+    "plan": "Same obstruction as def:compactness-certificate (L^inf/H^1/L^4/L^2 field spaces with screens); abstract surrogate medium, faithful version needs Sobolev infrastructure."
   },
   "thm:reduced-closure": {
     "env": "theorem",
     "title": "Reduced-certificate Einstein--Standard-Model closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: reduced-certificate closure, weak spinor limits, Higgs endpoint."
+    "note": "No Lean counterpart found; searched: reduced-certificate closure, weak spinor limits, Higgs endpoint.",
+    "difficulty": "hard",
+    "plan": "Assembly of the screen lemma (proved), prop:covariant-higgs-endpoint, prop:weak-fermion, prop:variation-continuity and the main-limit argument; inherits their Sobolev/PDE obstructions. Hard."
   },
   "cor:renewal-realization": {
     "env": "corollary",
     "title": "Renewal Geometry realization",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Renewal Geometry realization, companion branch, subsequential limit."
+    "note": "No Lean counterpart found; searched: Renewal Geometry realization, companion branch, subsequential limit.",
+    "difficulty": "hard",
+    "plan": "Depends on prop:renewal-interface (hard) and thm:main-limit / cor:cofinal-unique (hard). Purely a composition once those exist."
   },
   "cor:exact-critical": {
     "env": "corollary",
     "title": "Exact finite critical branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: exact finite critical points, eps_h = 0."
+    "note": "No Lean counterpart found; searched: exact finite critical points, eps_h = 0.",
+    "difficulty": "hard",
+    "plan": "With thm:main-limit available it is the trivial specialization eps_h = 0 (if D S_h[I_h v] = 0 then the operational term in eq:main-residual-bound vanishes). As stated it inherits thm:main-limit's compactness and continuity hypotheses, which are hard to formalize faithfully."
   },
   "cor:stress-topology": {
     "env": "corollary",
     "title": "Distributional and negative-Sobolev stress convergence",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: operational stress density, negative Sobolev H^{-m}, H_0^m into C^{r_0} embedding."
+    "note": "No Lean counterpart found; searched: operational stress density, negative Sobolev H^{-m}, H_0^m into C^{r_0} embedding.",
+    "difficulty": "hard",
+    "plan": "Needs the continuous embedding H_0^m -> C^{r_0} on a compact 4D region (Sobolev embedding, absent) and prop:variation-continuity. The abstract step 'convergence in the dual of a norm implies convergence in the dual of any stronger norm' is easy (operator-norm comparison through a continuous linear inclusion), but the embedding and the matter variation are missing. Hard."
   },
   "cor:random-realization": {
     "env": "corollary",
     "title": "A realized random branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: pathwise source bound, Tonelli, countable determining core, almost sure Einstein equations; Renewal/AcceptedResponseLaw.lean and Renewal/GeometricRandomSum.lean use Tonelli only for renewal sums."
+    "note": "No Lean counterpart found; searched: pathwise source bound, Tonelli, countable determining core, almost sure Einstein equations; Renewal/AcceptedResponseLaw.lean and Renewal/GeometricRandomSum.lean use Tonelli only for renewal sums.",
+    "difficulty": "hard",
+    "plan": "The probabilistic step (sum L_h^2 E||a_h||^2 < inf implies a.s. summability by Tonelli, MeasureTheory.lintegral_tsum, then eps_h -> 0 pathwise via prop:source-bound and intersection of countably many full-measure events) is medium on its own; the conclusion needs thm:main-limit and cor:cofinal-unique on each path, which are hard."
   },
   "lem:critical-cubic": {
     "env": "lemma",
     "title": "Cubic Euler terms and quartic concentration",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: cubic Euler term weak L^{4/3}, quartic concentration measure nu_H, weak-star Radon measure, uniform convexity."
+    "note": "No Lean counterpart found; searched: cubic Euler term weak L^{4/3}, quartic concentration measure nu_H, weak-star Radon measure, uniform convexity.",
+    "difficulty": "hard",
+    "plan": "Weak L^{4/3} identification via a.e. convergence and boundedness (needs weak compactness of L^p balls and an a.e.-limit identification lemma; Mathlib has weak-* topology but little L^p reflexivity machinery), weak-* compactness of bounded Radon measures on a compact 4D domain (Mathlib has FiniteMeasure weak convergence topology but no Banach-Alaoglu sequential compactness for measures), and uniform convexity of L^4 for the nu_H = 0 equivalence. Hard."
   },
   "thm:higgs-defect": {
     "env": "theorem",
     "title": "Critical Higgs stress-defect identity",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Higgs stress defect, kinetic defect measure K_H, distributional conservation, Noether identity."
+    "note": "No Lean counterpart found; searched: Higgs stress defect, kinetic defect measure K_H, distributional conservation, Noether identity.",
+    "difficulty": "hard",
+    "plan": "Needs the tensor-valued weak-* defect measures K_H and nu_H (lem:critical-cubic), the distributional Einstein equation with measure source, and the distributional conservation identity with C^1-convergent metrics. Vector-measure weak-* limits and distributional covariant divergence are absent. Hard."
   },
   "prop:YM-defect": {
     "env": "proposition",
@@ -327,49 +409,63 @@
     "lean": [
       "RenewalGeometry/Continuum/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_diagonal_bilinear"
     ],
-    "note": "Partial: only the final clause (strong L^2 curvature convergence passes the quadratic stress through a bounded bilinear diagonal) has an abstract counterpart ; missing: the tensor-valued weak-star Radon defect measure S_YM and its extraction (Grand/NavierStokesDissipationDefectMeasureExact.lean handles only scalar positive measures)."
+    "note": "Partial: only the final clause (strong L^2 curvature convergence passes the quadratic stress through a bounded bilinear diagonal) has an abstract counterpart ; missing: the tensor-valued weak-star Radon defect measure S_YM and its extraction (Grand/NavierStokesDissipationDefectMeasureExact.lean handles only scalar positive measures).",
+    "difficulty": "hard",
+    "plan": "Needs a symmetric tensor-valued finite Radon measure obtained as a weak-* subsequential limit of uniformly L^1-bounded densities on a compact chart (vector-valued Banach-Alaoglu / sequential weak-* compactness of measures, absent from Mathlib; Grand/NavierStokesDissipationDefectMeasureExact.lean only handles scalar positive measures). Only the final clause has an abstract counterpart (Continuum/StrongInterpolationConvergenceExact.lean:tendsto_diagonal_bilinear). Hard."
   },
   "thm:joint-defect": {
     "env": "theorem",
     "title": "Joint matter-defect Einstein limit",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: joint matter defect, Einstein limit with S_YM + S_H, conserved defect."
+    "note": "No Lean counterpart found; searched: joint matter defect, Einstein limit with S_YM + S_H, conserved defect.",
+    "difficulty": "hard",
+    "plan": "Composition of thm:higgs-defect and prop:YM-defect with the distributional Einstein equation and conservation identity; inherits their vector-measure and distributional obstructions. Hard."
   },
   "prop:monotonicity": {
     "env": "proposition",
     "title": "A sufficient Euclidean defect-removal mechanism",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: strongly monotone operator, coercive Euclidean Higgs operator, weak-to-strong V cap L^4."
+    "note": "No Lean counterpart found; searched: strongly monotone operator, coercive Euclidean Higgs operator, weak-to-strong V cap L^4.",
+    "difficulty": "medium",
+    "plan": "Abstract Hilbert-space monotone-operator argument. State: V real Hilbert space with a second norm ||.||_4 (continuous embedding), A_h : V -> V' (or V -> V via Riesz) satisfying the strong monotonicity inequality, H_h weakly convergent to H (WeaklyConverges as in OperatorLimits/VaryingHilbertWeakStrongPairing.lean, or Mathlib's WeakSpace), A_h(H_h) = J_h -> J and A_h(H) -> J strongly in V'. Then <J_h - A_h(H), H_h - H> -> 0 by strong-times-bounded-weak pairing (Continuum/WeakStrongBilinearPairingExact.lean:tendsto_of_strong_of_bounded_weak; boundedness of weakly convergent sequences via Banach-Steinhaus), so c_1||H_h-H||_V^2 + c_2||H_h-H||_4^4 -> 0. Missing: only the assembly with a dual-space formulation; the 'covariant H^1 norm' clause should be read as V's norm. Several days."
   },
   "thm:hyperbolic": {
     "env": "theorem",
     "title": "Common-slab metric stability",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: common-slab metric stability, reduced wave equation, H^{s-2} algebra, differentiated wave energy, L^1_t source, Riem convergence."
+    "note": "No Lean counterpart found; searched: common-slab metric stability, reduced wave equation, H^{s-2} algebra, differentiated wave energy, L^1_t source, Riem convergence.",
+    "difficulty": "hard",
+    "plan": "Quasilinear wave-equation energy estimates on [0,T] x Sigma with H^{s-1} x H^{s-2} differences, Sobolev algebra/product estimates, commutator bounds, Gronwall with L^1-in-time sources, and the curvature formula. No Sobolev spaces on manifolds or hyperbolic energy estimates exist in Mathlib or the library. Research-level."
   },
   "prop:subsidiary": {
     "env": "proposition",
     "title": "Subsidiary equation and constraint stability",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: harmonic gauge covector, subsidiary wave equation, contracted Bianchi, constraint energy estimate; Arithmetic/EinsteinClosure.lean and Flagship/EinsteinHandoff.lean mention Bianchi only as a displayed Noether identity."
+    "note": "No Lean counterpart found; searched: harmonic gauge covector, subsidiary wave equation, contracted Bianchi, constraint energy estimate; Arithmetic/EinsteinClosure.lean and Flagship/EinsteinHandoff.lean mention Bianchi only as a displayed Noether identity.",
+    "difficulty": "hard",
+    "plan": "Two parts: the algebraic identity eq:subsidiary from contracted Bianchi and the commutation formula 2 nabla^mu nabla_(mu C_nu) - nabla_nu nabla^alpha C_alpha = Box C_nu + Ric C (medium if a coordinate curvature framework with Bianchi identities existed; Gravity/CoordinateCurvature.lean has coordinate Christoffel/curvature but no covariant-derivative calculus or Bianchi identity), and the one-form wave energy estimate with Gronwall (hard, same obstruction as thm:hyperbolic). Overall hard."
   },
   "prop:smooth-sampling": {
     "env": "proposition",
     "title": "Smooth sampling is a consistency realization",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: smooth sampling consistency O(h), strong packet convergence of reconstruction."
+    "note": "No Lean counterpart found; searched: smooth sampling consistency O(h), strong packet convergence of reconstruction.",
+    "difficulty": "hard",
+    "plan": "Depends on prop:mesh-consistency (hard) and prop:variation-continuity (hard) through the triangle inequality; the inequality eps_h <= c_h + C_K d_K itself is easy given those. As stated hard."
   },
   "prop:critical-shadowing": {
     "env": "proposition",
     "title": "Nondegenerate critical-point shadowing",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Newton shadowing, frozen-Newton contraction, uniformly invertible linearized Euler map; the only ContractingWith uses (Grand/RenewalStateTransportCompleteMetricExact.lean) concern state transport, not a Newton map."
+    "note": "No Lean counterpart found; searched: Newton shadowing, frozen-Newton contraction, uniformly invertible linearized Euler map; the only ContractingWith uses (Grand/RenewalStateTransportCompleteMetricExact.lean) concern state transport, not a Newton map.",
+    "difficulty": "medium",
+    "plan": "Self-contained finite-dimensional frozen-Newton contraction. State on a finite-dimensional (or complete) normed space X with F : X -> X, B = (DF(x0))^{-1} with ||B|| <= M, DF Lipschitz with constant L on a ball, ||F(x0)|| <= C_0 h. Show T(x) = x - B F(x) maps the closed ball of radius rho = 2 M C_0 h into itself and is a contraction with constant M L rho < 1/2 for small h (mean-value inequality Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le applied to x -> x - B F(x), whose derivative is B(DF(x0) - DF(x))), then Mathlib's ContractingWith.exists_fixedPoint on the complete ball; conclude F(x*) = 0 and the reconstruction bound from the Lipschitz hypothesis (S4). Missing: everything but Mathlib primitives; no library file has this Newton argument (ContractingWith appears only in Grand/RenewalStateTransportCompleteMetricExact.lean for state transport). The final 'd_K(R_h x*, z_*) = O(h)' clause needs prop:smooth-sampling and should be kept as a hypothesis."
   },
   "prop:homogeneous": {
     "env": "proposition",
@@ -378,21 +474,27 @@
     "lean": [
       "RenewalGeometry/Gravity/CurvedFLRW.lean:RenewalGeometry.curved_einstein_00"
     ],
-    "note": "Partial: curved_einstein_00 computes the FLRW Einstein component G_00 = 3((adot/a)^2 + k/a^2), the left side of the Friedmann constraint eq:Friedmann-initial at k=0 ; missing: the Einstein-Higgs ODE system eq:homogeneous-ODE, local existence with a>0, constraint propagation, and verification of the remaining Einstein/Higgs/gauge equations."
+    "note": "Partial: curved_einstein_00 computes the FLRW Einstein component G_00 = 3((adot/a)^2 + k/a^2), the left side of the Friedmann constraint eq:Friedmann-initial at k=0 ; missing: the Einstein-Higgs ODE system eq:homogeneous-ODE, local existence with a>0, constraint propagation, and verification of the remaining Einstein/Higgs/gauge equations.",
+    "difficulty": "medium",
+    "plan": "Finite ODE + algebra. (i) Local existence for the smooth 4-dimensional system eq:homogeneous-ODE: Mathlib's IsPicardLindelof.exists_forall_hasDerivAt_Ioo_eq gives a C^1 local solution (smoothness needs an extra bootstrap; state C^1 or C^2 and note it). (ii) a(t) = a_0 exp(int H) > 0 from the first equation (uniqueness for the linear ODE). (iii) Constraint propagation: the derivative of 3H^2 - Lambda - kappa(pi^2/2 + U) vanishes along solutions (HasDerivAt algebra, a few lines). (iv) Einstein equations on flat FLRW with a homogeneous scalar: reuse RenewalGeometry/Gravity/CurvedFLRW.lean:curved_einstein_00 (G_00 at k=0 gives 3H^2) and curved_ricci_spatial/curved_scalar to get G_ij = -(2 addot/a + H^2) a^2 delta_ij, and match with the Higgs stress rho = pi^2/2 + U, p = pi^2/2 - U from eq:H-stress. Missing: the G_ij component from the existing Ricci lemmas and the explicit stress tensor of the homogeneous scalar; the gauge-current/fermion clauses are trivial with A = 0, Psi = 0 but require a Lean statement of those equations (state them explicitly for this ansatz). Several days."
   },
   "lem:Whitney": {
     "env": "lemma",
     "title": "Commuting reconstruction and positive comparison norm",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Whitney form, de Rham map, commuting coboundary, mass matrix, projection convergence; only the Loomis-Whitney inequality (Grand/AtlasIsoperimetry.lean) exists, which is unrelated."
+    "note": "No Lean counterpart found; searched: Whitney form, de Rham map, commuting coboundary, mass matrix, projection convergence; only the Loomis-Whitney inequality (Grand/AtlasIsoperimetry.lean) exists, which is unrelated.",
+    "difficulty": "hard",
+    "plan": "Whitney forms on a shape-regular simplicial mesh, the de Rham map, R_h W_h = I and d W_h = W_h d_h need simplicial complexes with barycentric coordinates and differential forms on simplices; Mathlib has neither simplicial differential forms nor Stokes on simplices, and the library's only Whitney hit is the Loomis-Whitney inequality. The mass-matrix positivity and strong convergence of projections also need L^2 forms. Hard infrastructure."
   },
   "prop:mesh-consistency": {
     "env": "proposition",
     "title": "Smooth local action consistency",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: parallel transport Taylor expansion, plaquette holonomy I + h^2 F + O(h^3), Riemann-sum quadrature error, differentiated transport."
+    "note": "No Lean counterpart found; searched: parallel transport Taylor expansion, plaquette holonomy I + h^2 F + O(h^3), Riemann-sum quadrature error, differentiated transport.",
+    "difficulty": "hard",
+    "plan": "Requires parallel-transport ODE Taylor expansions U_mu = I + h A + O(h^2), the four-edge plaquette product (partially: DiscreteAnalysis/CovariantPlaquetteExpansion.lean gives the unshifted exponential plaquette), covariant Taylor expansions for Higgs and spinor differences, the mollified interpolant estimates eq:smooth-reconstruction-estimate, and Riemann-sum quadrature error O(h) for smooth densities on a 4D region. Continuum fields, transport ODEs and quadrature on regions are all missing. Hard."
   },
   "prop:weak-palatini": {
     "env": "proposition",
@@ -406,63 +508,81 @@
       "RenewalGeometry/Gravity/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.palatini_and_holst_pairings_tendsto",
       "RenewalGeometry/Gravity/PalatiniDeterminantVolumeExact.lean:RenewalGeometry.PalatiniDeterminantVolume.determinantVolume_tendsto_of_coframe_interpolation"
     ],
-    "note": "Partial: the L^2-L^6 Holder interpolation to L^q for 2 < q < 6 (with the p > 3/2 exponent arithmetic) is proved concretely at eLpNorm level, and the passage strong coframe -> strong wedge product -> pairing with norm-bounded weakly convergent curvature, plus the four-linear volume-density limit, are proved on abstract normed spaces with the interpolation bound as hypothesis ; missing: the instantiation on L^p(K) fields (Holder boundedness of the wedge L^{2p'} x L^{2p'} -> L^{p'}, weak L^p as weak-space convergence), the coframe-variation clause, and the connection-Euler pairing caveat."
+    "note": "Partial: the L^2-L^6 Holder interpolation to L^q for 2 < q < 6 (with the p > 3/2 exponent arithmetic) is proved concretely at eLpNorm level, and the passage strong coframe -> strong wedge product -> pairing with norm-bounded weakly convergent curvature, plus the four-linear volume-density limit, are proved on abstract normed spaces with the interpolation bound as hypothesis ; missing: the instantiation on L^p(K) fields (Holder boundedness of the wedge L^{2p'} x L^{2p'} -> L^{p'}, weak L^p as weak-space convergence), the coframe-variation clause, and the connection-Euler pairing caveat.",
+    "difficulty": "medium",
+    "plan": "Most of the abstract passage is proved (Continuum/FiniteMeasureL2L6InterpolationExact.lean L2-L6 interpolation; Gravity/PalatiniWeakStrongLimitExact.lean curvature_pairing_tendsto_of_coframe_interpolation, palatini_and_holst_pairings_tendsto; Gravity/PalatiniDeterminantVolumeExact.lean). Missing: instantiating on Lp(K) fields: the Holder wedge bound ||e_h wedge e_h - e wedge e||_{p'} <= C ||e_h - e||_{2p'}(...) via Mathlib's eLpNorm Holder inequality (MeasureTheory.eLpNorm_smul_le_mul_eLpNorm / Memℒp.mul) for a bounded bilinear pointwise map, weak L^p convergence of R_h rendered as convergence in the weak topology of Lp (dual pairing with L^{p'}, WeakSpace or a hypothesis 'for all test in L^{p'} the integral converges'), and the coframe-variation clause (same argument with one factor a variation). The connection-Euler caveat is a hypothesis. Several days of Lp bookkeeping."
   },
   "prop:improvement": {
     "env": "proposition",
     "title": "An assembled strong--weak improvement criterion",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: nonminimal xi |H|^2 R, improvement tensor, W^{2,p} weak metric convergence, assembled distributional limit."
+    "note": "No Lean counterpart found; searched: nonminimal xi |H|^2 R, improvement tensor, W^{2,p} weak metric convergence, assembled distributional limit.",
+    "difficulty": "hard",
+    "plan": "Distributional limit of f_h G(g_h) + (g Box - nabla nabla) f_h with g_h weakly convergent in W^{2,p} and strongly in W^{1,inf}: needs Sobolev spaces W^{2,p}, weak convergence in them, the coordinate Einstein tensor as linear-in-second-derivatives plus quadratic first-derivative terms (Gravity/CoordinateCurvature.lean has the algebra but only for smooth coordinate functions), and integration by parts against tests. Hard."
   },
   "lem:half-ricci": {
     "env": "lemma",
     "title": "Twisted half-Ricci contraction",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Clifford contraction, half-Ricci identity, first Bianchi, twisted curvature."
+    "note": "No Lean counterpart found; searched: Clifford contraction, half-Ricci identity, first Bianchi, twisted curvature.",
+    "difficulty": "medium",
+    "plan": "Purely algebraic identity in a Clifford algebra with a curvature tensor satisfying antisymmetry and the first Bianchi identity. State: c_a in a Clifford algebra (Mathlib CliffordAlgebra with quadratic form eta, or explicit 4x4 gamma matrices) with c_a c_b + c_b c_a = -2 eta_ab, R_{abcd} a real tensor with R_{abcd} = -R_{bacd} = -R_{abdc} and the cyclic identity, R^S_{ab} = (1/4) sum R_{abcd} c^c c^d, Ric_ab = sum_c eps_c R_{cacb}; prove sum_b eps_b c_b R^S_{ba} = (1/2) sum_b eps_b Ric_ab c_b using the triple-product decomposition c_b c_c c_d = c_[b c_c c_d] - eta_bc c_d + eta_bd c_c - eta_cd c_b and Bianchi. Missing: everything (no curvature tensor structure with Bianchi identity in the library; Lorentz/AnchorClifford.lean has gamma matrices but no curvature). With explicit Fin 4 sums and Matrix gamma matrices this is a finite computation (Finset.sum over Fin 4, heavy but decidable after ring normalization); the twisting term is additive bookkeeping. Several days."
   },
   "prop:spinor-prolongation": {
     "env": "proposition",
     "title": "Residual-sensitive tangential spinor prolongation",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: tangential spinor prolongation, commuted Dirac operator, normal jet algebraic relation."
+    "note": "No Lean counterpart found; searched: tangential spinor prolongation, commuted Dirac operator, normal jet algebraic relation.",
+    "difficulty": "hard",
+    "plan": "Commutation of a covariant derivative with the twisted Dirac operator on a Lorentzian spin manifold; needs spin connections, curvature of twisted bundles and the torsion-free Ricci identity for spinors. No spinor-bundle calculus exists in Mathlib or the library. Hard."
   },
   "prop:actual-jet-writer": {
     "env": "proposition",
     "title": "Block-symmetric actual-jet equation",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: actual-jet symmetric system, harmonic reduction, Maxwell blocks, temporal gauge."
+    "note": "No Lean counterpart found; searched: actual-jet symmetric system, harmonic reduction, Maxwell blocks, temporal gauge.",
+    "difficulty": "hard",
+    "plan": "Harmonic-coordinate first-order reduction of the coupled Einstein-Yang-Mills-Higgs-Dirac system into a symmetric hyperbolic system for the realified actual-jet state; requires the full continuum field equations in coordinates, Bianchi identities, and the spinor prolongation. Nothing of this scale exists. Hard."
   },
   "prop:coupled-bootstrap": {
     "env": "theorem",
     "title": "Coupled actual-jet stability and first-exit closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: coupled actual-jet stability, commutator estimate, H^k algebra, first-exit bootstrap."
+    "note": "No Lean counterpart found; searched: coupled actual-jet stability, commutator estimate, H^k algebra, first-exit bootstrap.",
+    "difficulty": "hard",
+    "plan": "Symmetric-hyperbolic H^k energy estimate on T^3 with commutator estimates (Kato-Ponce type), Sobolev algebra for k > 3/2, Gronwall and first-exit bootstrap, then curvature/stress recovery. Sobolev spaces on T^3 and these estimates are absent from Mathlib. Research-level."
   },
   "thm:generated-dynamics": {
     "env": "theorem",
     "title": "Fully finite approximation branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: midpoint recursion, Fourier projection P_N, CFL condition, cubic Hermite reconstruction, discrete energy identity; the corpus midpoint/Galerkin hits (Lorentz/CovariantConsistency, Grand/StructurePreservingResponseExact) are unrelated."
+    "note": "No Lean counterpart found; searched: midpoint recursion, Fourier projection P_N, CFL condition, cubic Hermite reconstruction, discrete energy identity; the corpus midpoint/Galerkin hits (Lorentz/CovariantConsistency, Grand/StructurePreservingResponseExact) are unrelated.",
+    "difficulty": "hard",
+    "plan": "Spectral Galerkin + implicit midpoint discretization of a symmetric hyperbolic system with uniform H^q bounds, discrete energy identities, CFL contraction, cubic Hermite reconstruction and residual estimates. Requires Sobolev spaces on T^3, Fourier projections P_N as Sobolev contractions, and hyperbolic energy estimates. Hard."
   },
   "prop:generated-initial": {
     "env": "proposition",
     "title": "Constructive constrained initial data",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: conformal method, Lichnerowicz equation, L_* = -8 Delta + mu_*, Banach contraction, Gauss and vector constraints."
+    "note": "No Lean counterpart found; searched: conformal method, Lichnerowicz equation, L_* = -8 Delta + mu_*, Banach contraction, Gauss and vector constraints.",
+    "difficulty": "hard",
+    "plan": "Banach contraction for the Lichnerowicz-type equation on T^3 with L_* = -8 Delta + mu_* an isomorphism H^{r+2} -> H^r, Sobolev multiplication, elliptic inverses for the Gauss and vector constraints. The contraction skeleton is medium (ContractingWith on a ball), but the Sobolev spaces, Laplacian isomorphism and constraint equations are missing. Hard."
   },
   "lem:generated-physical-identification": {
     "env": "lemma",
     "title": "Physical identification of the symmetric extension",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: analytic germ, Cauchy-Kovalevskaya, symmetric system uniqueness, Sobolev limit identification."
+    "note": "No Lean counterpart found; searched: analytic germ, Cauchy-Kovalevskaya, symmetric system uniqueness, Sobolev limit identification.",
+    "difficulty": "hard",
+    "plan": "Cauchy-Kovalevskaya analytic germs for the Einstein-Standard-Model Cauchy problem, uniqueness for symmetric hyperbolic systems, and Sobolev-limit identification. None available. Hard."
   },
   "lem:native-plaquette": {
     "env": "lemma",
@@ -472,48 +592,62 @@
       "RenewalGeometry/DiscreteAnalysis/CovariantPlaquetteExpansion.lean:RenewalGeometry.CovariantPlaquette.norm_plaquette_sub_secondOrder_le",
       "RenewalGeometry/DiscreteAnalysis/CovariantPlaquetteExpansion.lean:RenewalGeometry.CovariantPlaquette.plaquette_sub_secondOrder_isBigO_right"
     ],
-    "note": "Partial: for the unshifted case a = b = 0 the four-exponential plaquette equals 1 + h^2 [X,Y] + O(h^3) in a Banach algebra, with an explicit cubic bound under contraction hypotheses ; missing: the shifted arguments a, b, the logarithm quotient Phi(h) = h^{-2} log(...), its analytic extension through h = 0 with Phi(0) = a - b + [X,Y], and uniform bounds on parameter derivatives."
+    "note": "Partial: for the unshifted case a = b = 0 the four-exponential plaquette equals 1 + h^2 [X,Y] + O(h^3) in a Banach algebra, with an explicit cubic bound under contraction hypotheses ; missing: the shifted arguments a, b, the logarithm quotient Phi(h) = h^{-2} log(...), its analytic extension through h = 0 with Phi(0) = a - b + [X,Y], and uniform bounds on parameter derivatives.",
+    "difficulty": "medium",
+    "plan": "Extend RenewalGeometry/DiscreteAnalysis/CovariantPlaquetteExpansion.lean (norm_plaquette_sub_secondOrder_le, plaquette_sub_secondOrder_isBigO_right handle a = b = 0) to shifted arguments: the product e^{hX} e^{h(Y+ha)} e^{-h(X+hb)} e^{-hY} = 1 + h^2(a - b + [X,Y]) + O(h^3) follows from the same Banach-algebra exp expansion (Analysis/ExponentialTaylorRemainder.lean, GroupCommutatorBound.lean) with the two extra linear-in-h^2 terms; that part is a routine extension. The analytic-continuation clause needs a logarithm on a Banach algebra near 1 (not in Mathlib): define log(1+z) = sum (-1)^{n+1} z^n / n as a FormalMultilinearSeries with radius 1, get analyticity of h -> log(P(h)) from AnalyticAt.comp, and show the removable quotient h^{-2} log P(h) is analytic at 0 by factoring the power series of P(h) - 1 (its h^0 and h^1 coefficients vanish). Uniform derivative bounds on compact parameter sets follow from power-series coefficient bounds. Several days, mostly the Banach-algebra log."
   },
   "lem:native-scaling": {
     "env": "lemma",
     "title": "Differential-order scaling",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: amplitude-preserving rescaling xi = Kx, rho = hK, nu = 1/K, K^2 bosonic and K Dirac stencil factors."
+    "note": "No Lean counterpart found; searched: amplitude-preserving rescaling xi = Kx, rho = hK, nu = 1/K, K^2 bosonic and K Dirac stencil factors.",
+    "difficulty": "medium",
+    "plan": "Exact algebraic identity once the local action eq:native-densities is defined in Lean (a large but finite definition over a periodic Z^4 grid: coframe e, jets q via delta_h^+, the Cartan reader eq:native-LC-reader, exponentials and plaquette logarithms using the Banach-algebra log of lem:native-plaquette, Higgs links and spin differences). The scaling statement is then: substituting y(x) = ytilde(Kx) turns delta_h^+ into K delta_rho^+, omega_h = K omegatilde_rho, exp(h omega_h) = exp(rho omegatilde_rho), F^h = K Ftilde (via the removable quotient of lem:native-plaquette with arguments nu A), K^h = K Ktilde, so each bosonic density factors K^2 and the Dirac density K; uniform regularity of the normalized stencils on compact sets is inherited from smoothness of the finite composition. Missing: the entire action definition and the substitution lemma; no continuum analysis. Several days to a week, mechanical."
   },
   "lem:native-tail-transfer": {
     "env": "lemma",
     "title": "Finite-order tail bounds",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: finite Fourier tail derivative bounds, |l^alpha| <= K^{|alpha|}(1+|l|_1/K)^j, mean-value Euler-row tail transfer."
+    "note": "No Lean counterpart found; searched: finite Fourier tail derivative bounds, |l^alpha| <= K^{|alpha|}(1+|l|_1/K)^j, mean-value Euler-row tail transfer.",
+    "difficulty": "hard",
+    "plan": "The first display (derivative bounds on trigonometric tails: |l^alpha| <= K^{|alpha|}(1+|l|_1/K)^j, finite Fourier sum bounded by tau_{h,j}) is medium: finite sums over the mode set with Complex.exp derivatives (Mathlib fourier/ZMod machinery, DiscreteAnalysis/LatticePeriodicDifferentiationExact.lean for periodic derivatives). The Euler-row transfer eq:native-Euler-tail (mean-value theorem for the finite Euler row as a smooth function of shifted jets; needs lem:native-firstjet-normal-form and lem:native-action-Hessian-type bounds) is medium. The L^2_t H^k_x source-tail bound eq:native-source-tail needs the continuum residual maps R_B, R_D and Sobolev norms, which are missing; that clause makes the lemma hard as stated."
   },
   "lem:log-source-upgrade": {
     "env": "lemma",
     "title": "Logarithmic derivative upgrade for a band-limited source",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: holomorphic strip a/K, contour shift, Plancherel low/high frequency split, logarithmic factor."
+    "note": "No Lean counterpart found; searched: holomorphic strip a/K, contour shift, Plancherel low/high frequency split, logarithmic factor.",
+    "difficulty": "hard",
+    "plan": "Requires Fourier coefficients of a function holomorphic in a strip to decay exponentially (contour shifting / Paley-Wiener in three variables on T^3) and Plancherel for L^2_t H^j_x. Mathlib has Fourier series on AddCircle with Plancherel (tsum_sq_fourierCoeff) but no strip-holomorphy decay estimate for several variables; the frequency-split optimization once the decay is known is medium. Hard because of the complex-analytic step."
   },
   "prop:native-rounding": {
     "env": "proposition",
     "title": "A sufficient nodal-accuracy condition",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: nodal rounding tolerance, discrete Parseval, O(h^{-4}) modes, (hK)^{-j} weight bound."
+    "note": "No Lean counterpart found; searched: nodal rounding tolerance, discrete Parseval, O(h^{-4}) modes, (hK)^{-j} weight bound.",
+    "difficulty": "medium",
+    "plan": "Finite discrete Fourier analysis on (ZMod n)^4: Parseval for the normalized DFT (Mathlib's ZMod.dft has a Plancherel-type identity; extend to the 4-fold product or reprove via orthogonality of characters on a Fintype), Cauchy-Schwarz sum_l |ehat(l)| <= sqrt(#modes) (sum |ehat|^2)^{1/2} with #modes = n^4 = O(h^{-4}), and the pointwise weight bound (1+|l|_1/K)^j <= C_j (hK)^{-j} for |l|_inf <= (n-1)/2 (since |l|_1 <= 2(n-1) <= 4 pi / h). The band-limited part contributes nothing to the tail. Missing: the multidimensional DFT Parseval and the counting; all finite. Several days."
   },
   "lem:native-firstjet-normal-form": {
     "env": "lemma",
     "title": "Shifted-first-jet normal form of the unchanged local action",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: shifted first-jet normal form, discrete summation by parts, exact lattice divergence, collar functional; Grand/BoundaryCorner.lean and Grand/OpenPathWassersteinDualityExact.lean use summation by parts in unrelated settings."
+    "note": "No Lean counterpart found; searched: shifted first-jet normal form, discrete summation by parts, exact lattice divergence, collar functional; Grand/BoundaryCorner.lean and Grand/OpenPathWassersteinDualityExact.lean use summation by parts in unrelated settings.",
+    "difficulty": "medium",
+    "plan": "Exact finite summation-by-parts identity on the periodic grid: the discrete product rule eq:native-SBP (<C, delta^+ W> = -<delta^- C, W> + delta^-<C, T W>) is a one-line Finset telescoping (cf. DiscreteAnalysis/LatticePeriodicDifferentiationExact.lean, FlowDuality.lean for similar sums); eq:native-C-firstjet is the integral form of the mean value theorem for the smooth coefficient C (Mathlib intervalIntegral of a derivative). The substance is the exact decomposition of the Cartan plaquette logarithm R^h as 'discrete curl of the connection + regular function of shifted connections' (follows from lem:native-plaquette's removable-quotient form) and collecting the exact lattice divergence into the collar functional. Requires the full local action definition (lem:native-scaling). Mechanical but sizable; several days once the action exists."
   },
   "lem:native-action-Hessian": {
     "env": "lemma",
     "title": "Uniform upper Hessian scale of the local action",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: uniform upper Hessian scale K_0 h^{-2}, inverse estimate ||delta^+ u|| <= 2 h^{-1} ||u||, action oscillation bound."
+    "note": "No Lean counterpart found; searched: uniform upper Hessian scale K_0 h^{-2}, inverse estimate ||delta^+ u|| <= 2 h^{-1} ||u||, action oscillation bound.",
+    "difficulty": "medium",
+    "plan": "Given lem:native-firstjet-normal-form (action = h^4 sum of a smooth F^(1) of finitely many shifted values and first differences), the bilinear bound eq:action-Hessian-bilinear is Cauchy-Schwarz over the finite sum with uniformly bounded second derivatives of F^(1) on the compact chart; eq:action-Hessian-scale follows from the inverse estimate ||delta^+ u||_{0,h} <= 2 h^{-1} ||u||_{0,h} (triangle inequality on the shifted sum, a few lines) and translation invariance of the mass norm; eq:action-span is boundedness of the density times the fixed cell count h^4 #Q'_h <= vol. Missing: the general 'Hessian of h^4 sum F(shifted jets)' bound with a fixed number of shifts per node (a finite double-counting lemma), and the second-derivative characterization (use Mathlib's iteratedFDeriv or a HasFDerivAt of the gradient). Several days, no analysis beyond finite sums."
   }
 }

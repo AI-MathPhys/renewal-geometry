@@ -73,30 +73,53 @@ def render(name: str) -> str:
                  "`scripts/check_statement_coverage.py` and audited for axioms by "
                  "`scripts/audit_axioms.py` (CI).\n")
 
-    def table(title: str, rows: list[tuple[str, dict]], with_note: bool) -> None:
+    unproved = [(k, r) for k, r in ledger.items()
+                if r["status"] not in ("proved", "computer_certified")]
+    diff_counts = Counter(r.get("difficulty", "unrated") for _, r in unproved)
+    if unproved:
+        lines.append("## How far is the library from the rest?\n")
+        lines.append("Every unproved record carries an estimate of the effort needed with the "
+                     "existing machinery: **easy** (≤ 1 day: assembly of existing lemmas or a "
+                     "direct definition), **medium** (days: new lemmas inside the existing "
+                     "finite/algebraic framework), **hard** (research or infrastructure level: "
+                     "function-space analysis, unbounded operators, continuum PDE, or the "
+                     "statement needs reformulation).\n")
+        lines.append("| Easy | Medium | Hard | Unrated |")
+        lines.append("|---:|---:|---:|---:|")
+        lines.append(f"| {diff_counts['easy']} | {diff_counts['medium']} | "
+                     f"{diff_counts['hard']} | {diff_counts['unrated']} |\n")
+
+    def table(title: str, rows: list[tuple[str, dict]], with_note: bool,
+              with_plan: bool = False) -> None:
         if not rows:
             return
         lines.append(f"## {title} ({len(rows)})\n")
-        hdr = "| Label | Env | Title | Lean |" + (" Note |" if with_note else "")
+        hdr = "| Label | Env | Title | Lean |" + (" Note |" if with_note else "") \
+            + (" Difficulty | What is missing |" if with_plan else "")
         lines.append(hdr)
-        lines.append("|---|---|---|---|" + ("---|" if with_note else ""))
+        lines.append("|---|---|---|---|" + ("---|" if with_note else "")
+                     + ("---|---|" if with_plan else ""))
         for k, r in rows:
             row = (f"| `{md_escape(k)}` | {r['env']} | {md_escape(r['title']) or '—'} | "
                    f"{lean_links(r['lean'])} |")
             if with_note:
                 row += f" {md_escape(r.get('note', ''))} |"
+            if with_plan:
+                row += (f" {r.get('difficulty', '—')} | "
+                        f"{md_escape(r.get('plan', ''))} |")
             lines.append(row)
         lines.append("")
 
     table("Proved statements", proved, with_note=True)
-    table("Encoded definitions and statements", encoded, with_note=True)
-    table("Open statements with partial Lean support", partial, with_note=True)
+    table("Encoded definitions and statements", encoded, with_note=True, with_plan=True)
+    table("Open statements with partial Lean support", partial, with_note=True, with_plan=True)
     if open_only:
         lines.append(f"## Open statements without a Lean counterpart ({len(open_only)})\n")
-        lines.append("| Label | Env | Title |")
-        lines.append("|---|---|---|")
+        lines.append("| Label | Env | Title | Difficulty | What is missing |")
+        lines.append("|---|---|---|---|---|")
         for k, r in open_only:
-            lines.append(f"| `{md_escape(k)}` | {r['env']} | {md_escape(r['title']) or '—'} |")
+            lines.append(f"| `{md_escape(k)}` | {r['env']} | {md_escape(r['title']) or '—'} | "
+                         f"{r.get('difficulty', '—')} | {md_escape(r.get('plan', ''))} |")
         lines.append("")
     return "\n".join(lines)
 

@@ -6,7 +6,9 @@
     "lean": [
       "RenewalGeometry/Commutant/LoadedHoweDualityPacketExact.lean:RenewalGeometry.SourceCompleteJointDualityPacket"
     ],
-    "note": "Partial: SourceCompleteJointDualityPacket bundles only the duality-facing algebras (action, multiplicity, support-polar, root holonomy) and their forward commutant identities as structure fields; missing: a faithful encoding of the represented (J1)-(J5) data (external Clifford factor M_4, commuting typed internal algebra, central type decomposition, incidence graph and histories Y_e, mixed words)."
+    "note": "Partial: SourceCompleteJointDualityPacket bundles only the duality-facing algebras (action, multiplicity, support-polar, root holonomy) and their forward commutant identities as structure fields; missing: a faithful encoding of the represented (J1)-(J5) data (external Clifford factor M_4, commuting typed internal algebra, central type decomposition, incidence graph and histories Y_e, mixed words).",
+    "difficulty": "medium",
+    "plan": "Write a represented packet structure (carrier Fin n, unital AlgHom from Matrix (Fin 4) into Matrix n n, a commuting star-closed internal Subalgebra, a Fintype sector index with orthogonal central projectors and a unitary carrier decomposition into C^4 (x) V_lam (x) M_lam, a SimpleGraph/orientation edge family with matrices Y_e, and a Finset of mixed words). Build on RenewalGeometry/Commutant/LoadedHoweDualityPacketExact.lean:SourceCompleteJointDualityPacket (keep its duality fields), RenewalGeometry/Commutant/MatrixFactorNormalForm.lean:matrix_representation_normal_form (M_4 normal form a |-> a (x) I_k for (J1)), RenewalGeometry/Commutant/FiniteCommutantDecompositionAssembly.lean:Certificate (central block projectors and carrierUnitary for (J3)) and the edge data conventions of RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean (J4). Missing: only the bundling structure and a lemma that the Certificate data yields the displayed Kronecker sector form; no new mathematics."
   },
   "def:action-algebra": {
     "env": "definition",
@@ -15,70 +17,90 @@
     "lean": [
       "RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:RenewalGeometry.GraphLoadedEdgeCommutant.CommutesWithLoadedEdges"
     ],
-    "note": "Partial: generator sets exist for a two-vertex incidence family (vertex projection plus edges F_j, F_j^*) and loaded edges D_e (x) F_e on a graph are represented; missing: a Lean definition of the generated joint C*-algebra C*(A_ext, A_int, Y_e, Y_e^*) on a general packet."
+    "note": "Partial: generator sets exist for a two-vertex incidence family (vertex projection plus edges F_j, F_j^*) and loaded edges D_e (x) F_e on a graph are represented; missing: a Lean definition of the generated joint C*-algebra C*(A_ext, A_int, Y_e, Y_e^*) on a general packet.",
+    "difficulty": "easy",
+    "plan": "Direct definition: on a packet with carrier Matrix n n C, set actionAlgebra := Algebra.adjoin C (A_ext ∪ A_int ∪ range Y ∪ range (fun e => (Y e)ᴴ)) and prove star-closure (adjoint of a generator is a generator, then Algebra.adjoin_induction), so that it satisfies the action_starClosed field of RenewalGeometry/Commutant/LoadedHoweDualityPacketExact.lean:SourceCompleteJointDualityPacket. Existing generator-set pattern: RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:CommutesWithLoadedEdges and RenewalGeometry/StandardModel/InternalAssemblyExact.lean:gens7. Missing: only the definition and the star-closure lemma."
   },
   "thm:record-nonidentifiability": {
     "env": "countertheorem",
     "title": "Classical record data do not determine the system algebra",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: nonidentifiability, Choi spectrum, Hilbert-Schmidt Gram, coefficient algebra, C^20 / M_4 (x) I_5 witness, resolved record channel (TrineMatrixMeasureNonidentifiabilityExact and FreshSamplerDynamicalNonidentifiability concern different data)."
+    "note": "No Lean counterpart found; searched: nonidentifiability, Choi spectrum, Hilbert-Schmidt Gram, coefficient algebra, C^20 / M_4 (x) I_5 witness, resolved record channel (TrineMatrixMeasureNonidentifiabilityExact and FreshSamplerDynamicalNonidentifiability concern different data).",
+    "difficulty": "medium",
+    "plan": "Finite witness on C^20 (Appendix app:source-identifiability): define the six diagonal sign matrices H^c_e on the 20 three-subsets of Fin 6 and the six Clifford combinations H^q_e = sqrt(6/5) sum O_{e mu} Gamma_mu (x) I_5 with an explicit Helmert 6x5 matrix O, put K_e = I/sqrt 18 + (i/3) H_e, and verify by finite computation (K_e)^*K_e = I/6, sum K_e^*K_e = I, sum K_e = sqrt 2 I, Tr(K_e^*K_f) = 10/3 or 2/3. Generation: Algebra.adjoin of the diagonal family = all diagonal matrices (20 distinct sign patterns, Lagrange/idempotent interpolation) versus adjoin of the Clifford family = M_4 (x) I_5 (adapt NCG/Algebra/CliffordGenerates.lean:gamma_generates and pauliKron_span to five anticommuting generators); commutative vs noncommutative shows nonisomorphism of the algebras and their commutants (dimensions 20 vs 25). Missing infrastructure: a Lean definition of a finite resolved instrument L_0, L_{e,a} = sqrt(theta) K_e (x) Q_a and of its word effects L_w^* L_w (no such definition exists; RenewalGeometry/Operational/Instrument.lean is a different object), plus the word-effect formula eq:record-word-effect (each sqrt 6 K_e unitary). The Choi-spectrum clause needs the 24x24 Gram G_6 (x) I_4 eigen-decomposition; scope it last or exhibit the eigenvectors explicitly (RenewalGeometry/Algebra/ChoiCriterion.lean:choiMatrix for the Choi matrix)."
   },
   "thm:pullback-reconstruction": {
     "env": "theorem",
     "title": "Identity-pivot reconstruction of the system action",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: complementary channel, Heisenberg pullback C(z)^*C(w), identity pivot, isometry/environment basis, StinespringDilationExact, ProtectedRecordMapStinespringHull."
+    "note": "No Lean counterpart found; searched: complementary channel, Heisenberg pullback C(z)^*C(w), identity pivot, isometry/environment basis, StinespringDilationExact, ProtectedRecordMapStinespringHull.",
+    "difficulty": "easy",
+    "plan": "Pure Algebra.adjoin argument. Define C z := sum_nu conj(z nu) • C nu for a finite family C : nu -> Matrix n n C and the pullback set {C(z)ᴴ * C(w)}. Show (i) every C(z)ᴴ C(w) lies in Algebra.adjoin C (range C) by bilinearity, and (ii) with C z0 = alpha • 1 and C zj = beta j • A j, the element (conj alpha * beta j)⁻¹ • C(z0)ᴴ C(zj) = A j, so the generators lie in the pullback algebra; conclude equality of the adjoins and, via RenewalGeometry/Commutant/Bicommutant.lean:matCommutant congruence, equality of commutants. Missing: only the definitions of C(z) and of the pullback algebra; no analytic content (the Stinespring isometry V and the complementary channel can be left implicit, as C(z) is defined directly from the coefficient family)."
   },
   "cor:finite-system-export": {
     "env": "corollary",
     "title": "Finite coherent system export",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: six-edge normalization, Helmert frame, ten quadratures, 2*sqrt(2) commutator-map bound, protected commutant complement least singular value."
+    "note": "No Lean counterpart found; searched: six-edge normalization, Helmert frame, ten quadratures, 2*sqrt(2) commutator-map bound, protected commutant complement least singular value.",
+    "difficulty": "hard",
+    "plan": "Needs reformulation before it can be stated: 'independently verified protected commutant complement', 'measured least singular value' and 'no additional commutant direction' are not mathematical objects in the paper; a faithful version is: (a) the ten-panel identities of prop:ten-panel-reconstruction (C(u) = sqrt(h/12) I, C(r_mu) = sqrt(theta)/2 D_mu (x) I, D_mu = 2 sqrt 3/sqrt(theta h) (X_mu + i Y_mu)) and (b) a perturbation bound: if hatK_e = K_e + E_e with (sum ||E_e||_HS^2)^{1/2} <= e_K then the stacked commutator map D(X) = (([K_e,X],[K_e^*,X]))_e satisfies ||hatD - D||_{2->2} <= 2 sqrt 2 e_K, hence sigma_min(hatD restricted to a subspace) > 2 sqrt 2 e_K implies sigma_min(D) > 0 there. Part (a) is finite matrix algebra over the Helmert frame (sqrt normalizations, eigenvectors of M_theta = theta I + (1-theta) c c^*); part (b) needs an operator-norm/least-singular-value perturbation lemma (sigma_min(A+E) >= sigma_min(A) - ||E||) that Mathlib lacks (no SVD; would go through the Rayleigh quotient of AᴴA via Matrix.IsHermitian.eigenvalues) and HS-vs-operator norm comparisons. Build on thm:pullback-reconstruction and RenewalGeometry/StandardModel/InternalCommutantNumericalExact.lean:hsNormSq."
   },
   "thm:word-module-recognition": {
     "env": "theorem",
     "title": "Word-module recognition of historical internal actions",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: regular word carrier L^2(A,tau_reg), left/right multiplication commutant R(A)' = L(A), invariant elements A^G, word module. Only the normalized regular trace itself is defined (NCG/Grand/IntrinsicRegularTrace.lean: normalizedRegularTrace), not the module recognition theorem."
+    "note": "No Lean counterpart found; searched: regular word carrier L^2(A,tau_reg), left/right multiplication commutant R(A)' = L(A), invariant elements A^G, word module. Only the normalized regular trace itself is defined (NCG/Grand/IntrinsicRegularTrace.lean: normalizedRegularTrace), not the module recognition theorem.",
+    "difficulty": "easy",
+    "plan": "Purely algebraic; tau_reg is not needed. For a finite-dimensional unital C-algebra A take W := A, R b := LinearMap.mulRight C b, L a := LinearMap.mulLeft C a, and a group action alpha : G ->* (A ≃ₐ[C] A) with U g := (alpha g).toLinearMap. Prove: T commutes with every mulRight b iff T = mulLeft (T 1) (T b = T (1 * b) = (T 1) * b), and mulLeft a commutes with every U g iff a is fixed by every alpha g (U g ∘ L a ∘ (U g)⁻¹ = L (alpha g a) and mulLeft is injective on a unital algebra). Uniqueness: the coefficient is T 1. Assemble into the two-sided commutant identity R(A)' ∩ U(G)' = L(A^G) as sets of Module.End C A. Missing: only these lemmas (Mathlib supplies LinearMap.mulLeft/mulRight and LinearMap.mulLeft_injective)."
   },
   "prop:word-module-defect": {
     "env": "proposition",
     "title": "Exact module and symmetry defects",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: module defect, symmetry defect, Hilbert-Schmidt distance to left multiplication, group averaging E_G, tau_reg-orthonormal basis."
+    "note": "No Lean counterpart found; searched: module defect, symmetry defect, Hilbert-Schmidt distance to left multiplication, group averaging E_G, tau_reg-orthonormal basis.",
+    "difficulty": "medium",
+    "plan": "Needs the tau_reg Hilbert structure on a finite star algebra A ⊆ Matrix n n C: inner product ⟨x,y⟩ = tau(xᴴ y) with tau := RenewalGeometry/Commutant/IntrinsicRegularTrace.lean:normalizedRegularTrace, positivity/faithfulness of tau on star-closed subalgebras (via RenewalGeometry/Commutant/FiniteStarSubalgebraMutualCommutant.lean:matrixBlockDecomposition, tau = D⁻¹ sum n_beta Tr a_beta) and tau-invariance under automorphisms (regularTraceIntrinsic_algEquiv exists). Then: eq:word-module-defect is a direct basis expansion ((T - L_a) e_nu = [T, R_{e_nu}] 1); the second inequality needs two new lemmas: |G|⁻¹ sum_g ||alpha_g a - a||^2 = 2 ||a - E_G a||^2 (orthogonality of the group average, unitarity of U_g) and ||L_b||_HS^2 = D ||b||_tau^2, which is the identity sum_nu e_nu x e_nuᴴ = D tau(x) 1 for a tau-orthonormal basis (a Schur-orthogonality fact, proved blockwise on the Wedderburn form). Everything is finite-dimensional linear algebra; several days."
   },
   "cor:word-multiplicity-firewall": {
     "env": "corollary",
     "title": "Word-space multiplicity firewall",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: conjugation representation multiplicity, twelve-root benchmark, M_7 word-space block, word-space inflation, regular representation (FinitePeterWeylDecomposition is the abstract regular representation only)."
+    "note": "No Lean counterpart found; searched: conjugation representation multiplicity, twelve-root benchmark, M_7 word-space block, word-space inflation, regular representation (FinitePeterWeylDecomposition is the abstract regular representation only).",
+    "difficulty": "medium",
+    "plan": "Statement is largely interpretive; formalize its concrete content (Appendix prop:word-space-inflation) on the existing carrier E = ordered unequal pairs of Fin 4 of RenewalGeometry/StandardModel/ActiveResidualAlgebra.lean: (i) the multiplicity of the trivial representation in the conjugation action of S_4 on M_12 equals the fixed-point dimension = 7, which is RenewalGeometry/Commutant/EdgeCommutantBasisExact.lean:commutant_finrank_eq_seven, so the conjugation commutant contains an M_7 block (M_{m_triv} on the trivial isotypic component), while (ii) the physical invariant algebra admits no M_3 (RenewalGeometry/Commutant/EdgeCommutantDimensionExact.lean:no_M3_embedding, already proved). Missing for the full multiplicity vectors (1,0,2,1,1) vs (7,5,19,17,12): the S_4 character table and character inner products (Mathlib has Representation.character and char_orthonormal but no S_4 table); recommend scoping the Lean statement to (i)+(ii) plus the inequality 7 > 1 between the conjugation and physical trivial multiplicities."
   },
   "def:word-native-shadow": {
     "env": "definition",
     "title": "Word-native linear shadow",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: word-native, shadow map sum c A X B, finite compression/conjugation/group-average shadow."
+    "note": "No Lean counterpart found; searched: word-native, shadow map sum c A X B, finite compression/conjugation/group-average shadow.",
+    "difficulty": "easy",
+    "plan": "Direct predicate on Module.End C A (A a finite-dimensional C-algebra): IsWordNative L := ∃ (m : ℕ) (c : Fin m → C) (A B : Fin m → A), L = ∑ α, c α • (LinearMap.mulLeft C (A α)).comp (LinearMap.mulRight C (B α)). Add closure lemmas (sums, scalar multiples, compositions are word native; compressions X ↦ p X p, conjugations, finite group averages are instances). No supporting structure is missing."
   },
   "thm:inserted-word-moments": {
     "env": "theorem",
     "title": "Inserted word-moment compiler",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: inserted moments, word-native Gram blocks, cyclicity of tau_reg, inserted panel (InsertedPanelCertificate.inserted_panel_certificate is an unrelated unitary-intertwining statement)."
+    "note": "No Lean counterpart found; searched: inserted moments, word-native Gram blocks, cyclicity of tau_reg, inserted panel (InsertedPanelCertificate.inserted_panel_certificate is an unrelated unitary-intertwining statement).",
+    "difficulty": "easy",
+    "plan": "With the tau_reg inner product ⟨y,x⟩ := tau(yᴴ x) (tau = RenewalGeometry/Commutant/IntrinsicRegularTrace.lean:normalizedRegularTrace on a star-closed matrix subalgebra) and def:word-native-shadow, eq:inserted-one-moment is substitution plus linearity of tau. eq:inserted-two-moments additionally uses cyclicity (regularTraceIntrinsic_mul_comm, exists) and one small new lemma tau(aᴴ) = conj(tau a) (star-trace property; prove via the Wedderburn form or via LinearMap.trace of the adjoint of mulLeft a with respect to the HS inner product restricted to A). The closing flatness remark is a corollary of RenewalGeometry/Predictive/GeneratedAlgebraFlatness.lean:flat_exhausts_generated_algebra_exact and need not be a separate clause."
   },
   "cor:table-native-ancestry": {
     "env": "corollary",
     "title": "Table-native ancestry short",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: table-native, ancestry short R_{T|S}=H-C^*G^+C, K^{00}/K^{0L}/K^{LL} panels (CanonicalMinimalFiniteEmergence.TableNativePredictor is a Hankel-realization predicate, not this short)."
+    "note": "No Lean counterpart found; searched: table-native, ancestry short R_{T|S}=H-C^*G^+C, K^{00}/K^{0L}/K^{LL} panels (CanonicalMinimalFiniteEmergence.TableNativePredictor is a Hankel-realization predicate, not this short).",
+    "difficulty": "easy",
+    "plan": "Pure matrix identities: with S = W_r * B_S and T = L(W_r) * B_T (L a linear map applied columnwise, or a matrix acting on the word carrier) we get Sᴴ S = B_Sᴴ (W_rᴴ W_r) B_S, Sᴴ T = B_Sᴴ (W_rᴴ L W_r) B_T, Tᴴ T = B_Tᴴ (W_rᴴ Lᴴ L W_r) B_T by Matrix.conjTranspose_mul and associativity; then define the short with the pseudo-inverse of RenewalGeometry/Predictive/ExactSourceSchurResidual.lean:sourceGramPseudoinverse / sourceSchurResidual. Missing: only the three-line assembly and a definition of K^{00}, K^{0L}, K^{LL}; 'deterministic function' is by construction."
   },
   "thm:external-shadow-no-go": {
     "env": "countertheorem",
@@ -89,7 +111,9 @@
       "RenewalGeometry/StandardModel/ConservativeResolvedGradingExtensions.lean:RenewalGeometry.conservativeResolvedGrading_word",
       "RenewalGeometry/StandardModel/ConservativeResolvedGradingExtensions.lean:RenewalGeometry.gradingOddProcessExtension_crossBlock_ne_zero"
     ],
-    "note": "Partial: for an arbitrary finite old letter process, two conservative extensions by a two-level spectator are constructed (grading-even via clockZ, grading-odd via clockX); every old word is recovered exactly after normalized grading discard, the even extension commutes with the grading (zero cross block), and the odd extension has a nonzero left-to-right cross block. Missing: the explicit clauses that the complete word-Gram hierarchy and the resolved classical cylinder probabilities coincide (only implicit through old-word recovery)."
+    "note": "Partial: for an arbitrary finite old letter process, two conservative extensions by a two-level spectator are constructed (grading-even via clockZ, grading-odd via clockX); every old word is recovered exactly after normalized grading discard, the even extension commutes with the grading (zero cross block), and the odd extension has a nonzero left-to-right cross block. Missing: the explicit clauses that the complete word-Gram hierarchy and the resolved classical cylinder probabilities coincide (only implicit through old-word recovery).",
+    "difficulty": "easy",
+    "plan": "Extend RenewalGeometry/StandardModel/ConservativeResolvedGradingExtensions.lean: add explicit clauses that for the even (clockZ) and odd (clockX) extensions every word Gram entry Tr(w_1ᴴ w_2) of extended old words equals a fixed multiple (factor 2 from the spectator) of the old Gram entry, and that the resolved cylinder probabilities (products of old letter effects) coincide; both follow from conservativeResolvedGrading_word / resolvedGradingEmbed_word by Matrix.trace_kronecker-type computations. The nonzero cross block is already gradingOddProcessExtension_crossBlock_ne_zero. Missing: only these two clauses and a packaging statement quantifying over the proposed cross block."
   },
   "thm:factor-obstruction": {
     "env": "theorem",
@@ -123,7 +147,9 @@
       "RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:RenewalGeometry.GraphLoadedEdgeCommutant.TypedMultiplicityCommutant",
       "RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:RenewalGeometry.GraphLoadedEdgeCommutant.MultiplicityBlocks"
     ],
-    "note": "Definition encoded: MultiplicityBlocks is the family (R_lambda) and TypedMultiplicityCommutant is the pair of intertwining equations R_mu F_e = F_e R_lambda, R_lambda F_e^* = F_e^* R_mu on every edge of a SimpleGraph with per-orientation edge data (undirected graph, orientation-pointwise)."
+    "note": "Definition encoded: MultiplicityBlocks is the family (R_lambda) and TypedMultiplicityCommutant is the pair of intertwining equations R_mu F_e = F_e R_lambda, R_lambda F_e^* = F_e^* R_mu on every edge of a SimpleGraph with per-orientation edge data (undirected graph, orientation-pointwise).",
+    "difficulty": "easy",
+    "plan": "Already encoded as RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:TypedMultiplicityCommutant / MultiplicityBlocks. Remaining polish: package the solution set as a star-closed Subalgebra of the product Π v, Matrix (M v) (M v) C (closed under +, *, star by the two intertwining equations) and define its action on the full carrier as the block-diagonal map ⊕ I_{C^4 (x) V_lam} (x) R_lam (Matrix.kroneckerMap with 1). One short file."
   },
   "lem:multiplicity-factorization": {
     "env": "lemma",
@@ -163,7 +189,9 @@
     "title": "Support-polar action algebra",
     "status": "conditional_interface",
     "lean": [],
-    "note": "DOWNGRADED 2026-09-22: the cited file(s) SingularSupportPolarGeneratedAlgebra.lean do not compile against the pinned Mathlib and are excluded from the public tree; pending repair. Original assessment: Definition encoded as the generator set {vertex projection, F_j^*F_j support metrics, polar partial isometries U_j} whose StarAlgebra.adjoin is O_F^sup; scoped to a family of parallel edges between one source carrier Fin e and one target carrier Fin h."
+    "note": "DOWNGRADED 2026-09-22: the cited file(s) SingularSupportPolarGeneratedAlgebra.lean do not compile against the pinned Mathlib and are excluded from the public tree; pending repair. Original assessment: Definition encoded as the generator set {vertex projection, F_j^*F_j support metrics, polar partial isometries U_j} whose StarAlgebra.adjoin is O_F^sup; scoped to a family of parallel edges between one source carrier Fin e and one target carrier Fin h.",
+    "difficulty": "easy",
+    "plan": "Repair the excluded file SingularSupportPolarGeneratedAlgebra.lean against the pinned Mathlib (rename pitfalls only): generator set {vertex projections Z_lam, F_eᴴ F_e, U_e, U_eᴴ} with U_e from RenewalGeometry/Commutant/SingularPolarData.lean:exists_singular_polar_data, and O_F^sup := Algebra.adjoin of that set (star-closed since the set is star-closed). Then restate over the graph-indexed edge data of RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean instead of one source/target pair. No new mathematics."
   },
   "thm:support-polar": {
     "env": "theorem",
@@ -174,7 +202,9 @@
       "RenewalGeometry/Commutant/SingularSupportPolarCommutantExactness.lean:RenewalGeometry.singularPolar_supportBoundary_in_commutant",
       "RenewalGeometry/Commutant/Bicommutant.lean:RenewalGeometry.double_commutant"
     ],
-    "note": "Partial: for a finite family of arbitrary (rectangular, singular, rank-deficient, zero) edges between one source and one target multiplicity carrier, the intertwiner sets, block commutants and generator commutants of the incidence and support-polar presentations coincide and the generated star algebras are equal (eq:incidence-support-polar-equality); the reverse identity follows from double_commutant. Missing: the general multi-vertex incidence graph (Z_lambda for several vertices, edges between different pairs of vertices)."
+    "note": "Partial: for a finite family of arbitrary (rectangular, singular, rank-deficient, zero) edges between one source and one target multiplicity carrier, the intertwiner sets, block commutants and generator commutants of the incidence and support-polar presentations coincide and the generated star algebras are equal (eq:incidence-support-polar-equality); the reverse identity follows from double_commutant. Missing: the general multi-vertex incidence graph (Z_lambda for several vertices, edges between different pairs of vertices).",
+    "difficulty": "medium",
+    "plan": "Generalize RenewalGeometry/Commutant/SingularSupportPolarCommutantExactness.lean:finiteFamily_singular_support_polar_commutant_exactness from one source/target pair to a multi-vertex incidence graph: commuting with the orthogonal vertex projectors Z_lam forces block-diagonal form (new lemma; pattern in RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:loadedEdgeCommutant_iff_typed), then apply RenewalGeometry/Commutant/SingularPolarData.lean:polar_edge_singular_arbitrary edge by edge; the reverse identity is RenewalGeometry/Commutant/Bicommutant.lean:double_commutant. For eq:incidence-support-polar-equality the missing piece is the polynomial functional calculus: U_e = F_e g(F_eᴴ F_e) with g a polynomial interpolating t^{-1/2} on the finite spectrum (needs Matrix.IsHermitian.spectral_theorem + Lagrange interpolation, or show the Pd of exists_singular_polar_data lies in Algebra.adjoin {FᴴF}); RenewalGeometry/Commutant/SMSTCommutant.lean:commutant_polynomial_calculus is a related pattern. Several days."
   },
   "def:multiplicity-quiver": {
     "env": "definition",
@@ -184,7 +214,9 @@
       "RenewalGeometry/Commutant/SMSTQuiverCommutantAssemblyExact.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.QuiverEndomorphism",
       "RenewalGeometry/Commutant/SMSTQuiverCommutantAssemblyExact.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.AmbientCommutant"
     ],
-    "note": "Definition encoded: vertex spaces N_a, arrows given by coefficient blocks B_j(v_b,v_a) in Hilbert-Schmidt bases of B(V_a,V_b), End Q = families (X_a) with X_b B = B X_a. Scoped: the arrow blocks are supplied as data rather than derived from the isotypic decomposition of S_F."
+    "note": "Definition encoded: vertex spaces N_a, arrows given by coefficient blocks B_j(v_b,v_a) in Hilbert-Schmidt bases of B(V_a,V_b), End Q = families (X_a) with X_b B = B X_a. Scoped: the arrow blocks are supplied as data rather than derived from the isotypic decomposition of S_F.",
+    "difficulty": "easy",
+    "plan": "Already encoded (RenewalGeometry/Commutant/SMSTQuiverCommutantAssemblyExact.lean:QuiverEndomorphism, AmbientCommutant) with arrow blocks as data. Optional refinement: define B_ba(T) := span of the slices (φ (x) id)(T_ba) over the Hilbert-Schmidt basis of B(V_a,V_b), i.e. the matrices (fun n m => T ((va, n), (vb, m))) for fixed va vb, exactly the B j vb va blocks used in RenewalGeometry/Commutant/SMSTCommutant.lean:finite_typed_quiver_form_kernel; then Q_F(T) is the QuiverEndomorphism of that family. Direct definition."
   },
   "thm:quiver": {
     "env": "theorem",
@@ -243,21 +275,27 @@
       "RenewalGeometry/Commutant/FiniteCommutantDecompositionAssembly.lean:RenewalGeometry.FiniteCommutantDecompositionAssembly.Certificate",
       "RenewalGeometry/Commutant/FiniteStarSubalgebraMutualCommutant.lean:RenewalGeometry.FiniteStarSubalgebraMutualCommutant.matrixBlockDecomposition"
     ],
-    "note": "Partial: every unital star-closed matrix algebra has a certificate with orthogonal central block projectors, star-compatible matrix units, a unitary carrier decomposition into common multiplicity corners and the mutual-commutant identity S'' = S; missing: the displayed reciprocal form A = (+) B(H^act) (x) I, M = (+) I (x) B(H^mult) and the common-centre identity Z(A) = Z(M) = A cap M."
+    "note": "Partial: every unital star-closed matrix algebra has a certificate with orthogonal central block projectors, star-compatible matrix units, a unitary carrier decomposition into common multiplicity corners and the mutual-commutant identity S'' = S; missing: the displayed reciprocal form A = (+) B(H^act) (x) I, M = (+) I (x) B(H^mult) and the common-centre identity Z(A) = Z(M) = A cap M.",
+    "difficulty": "medium",
+    "plan": "The common-centre identity eq:common-centre is immediate (one day): with Z(A) := A ∩ matCommutant A and the mutual commutant identities of RenewalGeometry/Commutant/LoadedHoweDualityPacketExact.lean:sourceCompleteJointPacket_loadedHoweDuality, Z(A_act) = A_act ∩ M_type = Z(M_type). The displayed reciprocal Kronecker form ⊕ B(H^act) (x) I and ⊕ I (x) B(H^mult) for a general sector index is the medium part: generalize RenewalGeometry/Commutant/GrandWedderburn.lean:commutant_decomposition / block_bicommutant (two sectors) to a Fintype of sectors using the star matrix units p, v, base and carrierUnitary of RenewalGeometry/Commutant/FiniteCommutantDecompositionAssembly.lean:Certificate (regroup equal-block slots into defining (x) multiplicity factors), then transport along the carrier unitary."
   },
   "thm:incidence-polymatroid": {
     "env": "theorem",
     "title": "Incidence rank polymatroid",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: polymatroid, submodular, incidence rank function f(S), kernel of G_S, essential incidence, commutant enlargement on deletion."
+    "note": "No Lean counterpart found; searched: polymatroid, submodular, incidence rank function f(S), kernel of G_S, essential incidence, commutant enlargement on deletion.",
+    "difficulty": "medium",
+    "plan": "Set up on Matrix n n C: A_0 a star-closed subalgebra, Y : E → Matrix, M(S) := matCommutant (A_0 ∪ {Y e, (Y e)ᴴ : e ∈ S}) (RenewalGeometry/Commutant/Bicommutant.lean:matCommutant), V := matCommutant A_0 ⊓ (M(E))ᗮ with the HS inner product, D_e X := ([Y e, X], [(Y e)ᴴ, X]) as a linear map V → Matrix × Matrix and G_S := ∑ D_eᴴ D_e (or the linear map ∑ (D_e)† D_e). New lemmas, all finite-dimensional: ker (∑ D_eᴴ D_e) = ⋂ ker D_e (PSD sum; cf. RenewalGeometry/Commutant/SMSTCommutant.lean:finite_typed_quiver_form_kernel for the HS-form-kernel pattern), range D_eᴴ = (ker D_e)ᗮ (Mathlib: LinearMap.ker_eq... / Submodule.orthogonal), rank G_S = dim ∑ range D_eᴴ (Matrix.rank_conjTranspose_mul_self, Submodule.finrank_add_finrank_orthogonal), submodularity from Submodule.finrank_sup_add_finrank_inf_eq with R(S∩T) ≤ R(S) ⊓ R(T), and the decomposition M(S) = M(E) ⊕ (ker G_S on V) (M(E) ⊆ M(S) ⊆ A_0', orthogonal complement inside A_0'). Essentiality criterion is the kernel formula at S = E \\ {e}. Several days of assembly, no new theory."
   },
   "cor:minimal-incidence-skeleton": {
     "env": "corollary",
     "title": "Finite source-minimal incidence skeleton",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: incidence skeleton, inclusion-minimal sufficient bank, reverse deletion, unequal-cardinality example."
+    "note": "No Lean counterpart found; searched: incidence skeleton, inclusion-minimal sufficient bank, reverse deletion, unequal-cardinality example.",
+    "difficulty": "medium",
+    "plan": "Given thm:incidence-polymatroid's framework: existence of an inclusion-minimal S ⊆ E with M(S) = M(E) by Finset well-foundedness (Finset.exists_minimal / strong induction on card); the bound |S| ≤ n via a strictly increasing chain of subspaces R(S_k) ⊆ V (each added essential edge strictly raises f, and f ≤ n = finrank V). The appendix example ex:nonmatroid-skeleton is independent and easy: on Fin 3 with Y_a = E12 + E23, Y_b = E12, Y_c = E23 show Algebra.adjoin of {Y_a, Y_aᴴ} and of {Y_b, Y_c, adjoints} contain all matrix units (RenewalGeometry/StandardModel/WeakResetGenerationExact.lean:top_of_units) while {Y_b, Y_bᴴ} alone has the nonscalar commutant element E33 (so f({b}) < n); this gives the unequal-cardinality claim. Medium only because it depends on the M(S)/G_S setup."
   },
   "thm:geometry-short": {
     "env": "theorem",
@@ -270,7 +308,9 @@
       "RenewalGeometry/StandardModel/SMActiveResidualExact.lean:RenewalGeometry.SMActiveResidual.active_product_short_eq",
       "RenewalGeometry/StandardModel/SMActiveResidualExact.lean:RenewalGeometry.SMActiveResidual.active_residual_census_exact"
     ],
-    "note": "Partial: the general pseudo-inverse Schur short G_int - C G_ST^+ C^* equals S_int^*(I-P_ST)S_int and is positive semidefinite (eq:geometry-short-general); the scalar active realization gives theta I with zero mixed block and the exactness criterion C=0; the census gives five orthogonal Hermitian central projectors of ranks 1,2,3,3,3 summing to one. Missing: the rank/quotient carrier statement, the identification of the five blocks with the named S_4 x reversal irreducibles (C_type, W_+, V_2, W_-, W(x)sgn_-), and the endpoint-block survival at complex rank three under strict positivity."
+    "note": "Partial: the general pseudo-inverse Schur short G_int - C G_ST^+ C^* equals S_int^*(I-P_ST)S_int and is positive semidefinite (eq:geometry-short-general); the scalar active realization gives theta I with zero mixed block and the exactness criterion C=0; the census gives five orthogonal Hermitian central projectors of ranks 1,2,3,3,3 summing to one. Missing: the rank/quotient carrier statement, the identification of the five blocks with the named S_4 x reversal irreducibles (C_type, W_+, V_2, W_-, W(x)sgn_-), and the endpoint-block survival at complex rank three under strict positivity.",
+    "difficulty": "medium",
+    "plan": "General short and PSD (eq:geometry-short-general) and the scalar active realization are done (RenewalGeometry/Predictive/ExactSourceSchurResidual.lean, RenewalGeometry/StandardModel/SMActiveResidualExact.lean). Missing: (a) eq:geometry-short-quotient: define E_min := E / ker G and prove finrank = rank G via Submodule.finrank_quotient_add_finrank and Matrix.rank = finrank range (easy); (b) the identification of the five census projectors Qtype, QW2, QC, QG, QP of RenewalGeometry/StandardModel/ActiveResidualAlgebra.lean with the named S_4 x reversal irreducibles: prove the commutant of the represented S_4 x ⟨Rm⟩ action on E has dimension 5 (adapt EdgeCommutantBasisExact.lean:commutant_finrank_eq_seven with Rm adjoined), so the five projectors are the isotypic components of five inequivalent irreducibles of dimensions 1,2,3,3,3; distinguish W_- from (W (x) sgn)_- by a trace of a transposition on the two blocks; (c) endpoint survival: if G restricted to the range of QG is positive definite then ker G ∩ range QG = 0, hence the block injects into the quotient at rank 3 (easy). Equivariance of the shorted Gram under the group is a lemma about sourceRangeProjection commuting with the unitaries. Several days, all matrix algebra."
   },
   "thm:active-isotypic": {
     "env": "theorem",
@@ -284,7 +324,9 @@
       "RenewalGeometry/StandardModel/ActiveResidualAlgebra.lean:RenewalGeometry.ActiveResidual.commutant_eq",
       "RenewalGeometry/StandardModel/ActiveResidualAlgebra.lean:RenewalGeometry.ActiveResidual.bicommutant_eq"
     ],
-    "note": "Partial: the Burnside image and the relative commutant of a finite-group representation are abstractly products of full matrix algebras; a unital representation of M_n has carrier dimension divisible by n (the 'multiplicity at least n' obstruction in dimension form); on the concrete ordered-root S_4 carrier the degree-one commutant has dimension exactly 7 (= dim C+M_2+C+C) and the two-control algebra/commutant pair is computed. Missing: the explicit identification of block sizes with dim V_lambda and m_lambda, and the (2,2,1,1) private-line census M_2+M_2+C+C."
+    "note": "Partial: the Burnside image and the relative commutant of a finite-group representation are abstractly products of full matrix algebras; a unital representation of M_n has carrier dimension divisible by n (the 'multiplicity at least n' obstruction in dimension form); on the concrete ordered-root S_4 carrier the degree-one commutant has dimension exactly 7 (= dim C+M_2+C+C) and the two-control algebra/commutant pair is computed. Missing: the explicit identification of block sizes with dim V_lambda and m_lambda, and the (2,2,1,1) private-line census M_2+M_2+C+C.",
+    "difficulty": "medium",
+    "plan": "Abstract Burnside/Schur forms exist (RenewalGeometry/Commutant/IsotypicCommutantExact.lean:image_pi_matrix, commutant_pi_matrix) but without block sizes. Two routes: (1) general: prove that for a finite-group representation on a finite-dimensional C-space the commutant blocks have sizes m_lam = multiplicity (Schur: End_G(V_lam^{m}) ≅ M_m); this needs isotypic-component infrastructure beyond current Mathlib (Representation.IsIrreducible, char_orthonormal exist; no isotypic decomposition of a general rep) — several days at least; (2) concrete: the two censuses on the ordered-root carrier E of RenewalGeometry/StandardModel/ActiveResidualAlgebra.lean: dimension 7 is proved (EdgeCommutantBasisExact.lean:commutant_finrank_eq_seven); exhibit an explicit algebra isomorphism of that commutant with C ⊕ M_2 ⊕ C ⊕ C (the span {1, Rm, Nm, Mm, Dis, ...} of ActiveResidualAlgebra.lean:commutant_eq regrouped into central idempotents), and repeat on E ⊕ C (private line) to get dimension 10 and M_2 ⊕ M_2 ⊕ C ⊕ C. The M_n divisibility obstruction is RenewalGeometry/Commutant/MatrixFactorNormalForm.lean:matrix_representation_dimension. Recommend route (2) for the ledger statement; medium."
   },
   "thm:degree-one-colour-no-go": {
     "env": "countertheorem",
@@ -294,7 +336,9 @@
       "RenewalGeometry/Commutant/EdgeCommutantDimensionExact.lean:RenewalGeometry.no_M3_embedding",
       "RenewalGeometry/Commutant/EdgeCommutantBasisExact.lean:RenewalGeometry.commutant_finrank_eq_seven"
     ],
-    "note": "Partial: the degree-one commutant on the ordered-root carrier has dimension 7 and admits no injective linear map from M_3(C) (first clause, in dimension-counting form stronger than 'no unital copy'). Missing: the second clause after adjoining one external-trivial private contrast line (census (2,2,1,1), algebra M_2+M_2+C+C of dimension 10, where the dimension argument no longer applies)."
+    "note": "Partial: the degree-one commutant on the ordered-root carrier has dimension 7 and admits no injective linear map from M_3(C) (first clause, in dimension-counting form stronger than 'no unital copy'). Missing: the second clause after adjoining one external-trivial private contrast line (census (2,2,1,1), algebra M_2+M_2+C+C of dimension 10, where the dimension argument no longer applies).",
+    "difficulty": "medium",
+    "plan": "First clause proved (RenewalGeometry/Commutant/EdgeCommutantDimensionExact.lean:no_M3_embedding). Second clause: on the 13-dimensional carrier E ⊕ C (one external-trivial private line) compute the S_4 commutant as an explicit 10-dimensional algebra with block structure M_2 ⊕ M_2 ⊕ C ⊕ C (extend EdgeCommutantBasisExact.lean's relMatrix basis by the 3 new intertwiners between the private line and the trivial isotypic line), then show no unital algebra map M_3 → M_2 ⊕ M_2 ⊕ C ⊕ C exists: composing with each block projection gives a ring hom from the simple ring Matrix (Fin 3) (Fin 3) C (Mathlib IsSimpleRing for matrix algebras over a field) into an algebra of dimension ≤ 4 < 9, hence zero on every block, contradicting unitality. Depends on the same commutant computation as thm:active-isotypic."
   },
   "thm:flat-depth-colour": {
     "env": "theorem",
@@ -305,7 +349,9 @@
       "RenewalGeometry/Predictive/FutureWordSaturationExact.lean:RenewalGeometry.futureKernel_eq_of_stable",
       "RenewalGeometry/Predictive/GeneratedAlgebraFlatness.lean:RenewalGeometry.flat_exhausts_generated_algebra_exact"
     ],
-    "note": "Partial: flatness-implies-stabilization is proved for the dual future-kernel chain (K_{r+1} = K_r iff K_r is letter-invariant, and then K_m = K_r for all m >= r) and for generated-algebra word filtrations; missing: the Gram-rank formulation rank K_r = rank K_{r+1} => V_s = V_r on the reachable physical carrier and the conclusion m_0 <= 2 => no external-trivial M_3 factor, r_col^birth = infinity."
+    "note": "Partial: flatness-implies-stabilization is proved for the dual future-kernel chain (K_{r+1} = K_r iff K_r is letter-invariant, and then K_m = K_r for all m >= r) and for generated-algebra word filtrations; missing: the Gram-rank formulation rank K_r = rank K_{r+1} => V_s = V_r on the reachable physical carrier and the conclusion m_0 <= 2 => no external-trivial M_3 factor, r_col^birth = infinity.",
+    "difficulty": "easy",
+    "plan": "Assemble: define the depth filtration V_r := span of words of length ≤ r applied to the source vectors (Submodule chain with V_{r+1} = V_r ⊔ ⨆_letters map L V_r, cf. RenewalGeometry/Predictive/KrylovLocalizerFlatnessExact.lean:krylov_succ_eq_sup_map and FutureWordSaturationExact.lean); Gram-rank equality ⇒ finrank equality (rank of a Gram = rank of the synthesizing matrix: Matrix.rank_conjTranspose_mul_self) ⇒ V_{r+1} = V_r by Submodule.eq_of_le_of_finrank_le ⇒ letter invariance ⇒ V_s = V_r for all s ≥ r (KrylovLocalizerFlatnessExact.lean:krylov_stable_of_eq / FutureWordSaturationExact.lean:futureKernel_eq_of_stable patterns; GeneratedAlgebraFlatness.lean:flat_exhausts_generated_algebra_exact). The M_3 exclusion: an external-trivial internal operator is supported on the S_4-fixed subspace of V_r, whose dimension is m_0 ≤ 2, and End of a ≤2-dimensional space (dim ≤ 4) admits no injective linear image of M_3 (dim 9) — same dimension count as EdgeCommutantDimensionExact.lean:no_M3_embedding. One day of assembly."
   },
   "thm:connected-router": {
     "env": "theorem",
@@ -315,14 +361,18 @@
       "RenewalGeometry/StandardModel/WeakResetGenerationExact.lean:RenewalGeometry.WeakReset.top_of_units",
       "RenewalGeometry/StandardModel/InternalCommutantSeedExact.lean:RenewalGeometry.InternalSeed.top_of_units"
     ],
-    "note": "Partial: a subalgebra containing all matrix units is the full matrix algebra (the generation step once path products have produced the units); missing: the support-graph connectivity criterion C*(D_n,u) = M_n <=> connected, and the disconnected => proper block-diagonal reducing subalgebra clause."
+    "note": "Partial: a subalgebra containing all matrix units is the full matrix algebra (the generation step once path products have produced the units); missing: the support-graph connectivity criterion C*(D_n,u) = M_n <=> connected, and the disconnected => proper block-diagonal reducing subalgebra clause.",
+    "difficulty": "medium",
+    "plan": "New lemmas on Matrix (Fin n) (Fin n) C with p i := Matrix.single i i 1: (i) p i * u * p j = u i j • single i j 1; (ii) along a SimpleGraph.Walk of the support graph (edge i~j iff u i j ≠ 0 ∨ u j i ≠ 0), products of the (scaled) units and their adjoints give single i j 1 ∈ Algebra.adjoin (induction on SimpleGraph.Reachable / Walk); connected ⇒ all units ⇒ ⊤ via RenewalGeometry/StandardModel/WeakResetGenerationExact.lean:top_of_units; (iii) converse: for a connected component S, the projection P_S = ∑_{i∈S} p i commutes with u and all p j, so Algebra.adjoin ≤ the proper block-diagonal subalgebra {X : P_S X = X P_S} (generalize RenewalGeometry/StandardModel/InternalCommutantSeedExact.lean:blockDiag / InternalAssemblyExact.lean:blockAlgebra to an arbitrary subset S), which excludes single i j 1 for i ∈ S, j ∉ S. Several days because of the graph-walk induction."
   },
   "cor:one-router-minimality": {
     "env": "corollary",
     "title": "One-router source minimality",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: cyclic nonnormal router, one-router minimality, commutative generated algebra without off-diagonal word (only the n=3 colour-corner instance internal_seed_dichotomy exists, see thm:colour-bridge)."
+    "note": "No Lean counterpart found; searched: cyclic nonnormal router, one-router minimality, commutative generated algebra without off-diagonal word (only the n=3 colour-corner instance internal_seed_dichotomy exists, see thm:colour-bridge).",
+    "difficulty": "easy",
+    "plan": "Instantiate with a concrete cyclic router: the cyclic shift permutation matrix S on Fin n (Equiv.Perm.permMatrix of finRotate) is nonnormal-free of issue here since p i * S * p (i+1) = single i (i+1) 1; products of consecutive units and adjoints give every single i j 1, hence Algebra.adjoin (range p ∪ {S, Sᴴ}) = ⊤ by RenewalGeometry/StandardModel/WeakResetGenerationExact.lean:top_of_units (no need for the general thm:connected-router). Second clause: Algebra.adjoin of a set of pairwise commuting diagonal matrices is commutative (Mathlib: Algebra.adjoin_induction with Commute, or Algebra.adjoinCommSemiringOfComm). One day."
   },
   "lem:weak-M2": {
     "env": "lemma",
@@ -349,21 +399,27 @@
     "title": "Finite reciprocal-return criterion",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: reciprocal return, mediator carrier V (x) N, Schur averaging Tr_V, cyclic multiplicity spaces, Cayley-Hamilton horizon, route bank (EasyExact00 mediator-loss Gram is unrelated)."
+    "note": "No Lean counterpart found; searched: reciprocal return, mediator carrier V (x) N, Schur averaging Tr_V, cyclic multiplicity spaces, Cayley-Hamilton horizon, route bank (EasyExact00 mediator-loss Gram is unrelated).",
+    "difficulty": "medium",
+    "plan": "Ingredients to add, all finite-dimensional: (1) Schur twirl: for an irreducible unitary representation v of a finite group G on V (dim d) and any operator Z on V (x) N, |G|⁻¹ ∑ (v_g (x) I) Z (v_g (x) I)ᴴ = I_V/d (x) Tr_V Z; proof: the average commutes with all v_g (x) I, and the commutant of {v_g (x) 1} is 1 (x) B(N) (use image_pi_matrix/Burnside from RenewalGeometry/Commutant/IsotypicCommutantExact.lean or Mathlib Schur for irreducible reps, plus RenewalGeometry/Commutant/MatrixFactorNormalForm.lean-style commutant of M_d (x) 1), then take the partial trace; (2) the mass identity m_ret = d⁻¹ Tr(rho_B W_A) by expanding ||Bᴴ (v_g (x) h^k) A||_HS^2 and applying (1) to A Aᴴ; (3) positivity ⇔ some r_{g,k} ≠ 0 (finite sum of squared HS norms; RenewalGeometry/StandardModel/InternalCommutantNumericalExact.lean:hsNormSq); (4) range W_A = span_{k<n} h^k range rho_A (Krylov space, RenewalGeometry/Predictive/KrylovLocalizerFlatnessExact.lean:krylov + Cayley–Hamilton Matrix.aeval_self_charpoly for the horizon n); (5) the reducing projection Q = I_T ⊕ 0 ⊕ (I_V (x) P_{N_A}) commutes with the route generators when the Krylov spaces are orthogonal. Several days."
   },
   "cor:reciprocal-return-force": {
     "env": "corollary",
     "title": "Port-relative reachability forces colour",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: reciprocal return margin, kappa lower bound, two-leg colour return, port-relative reachability."
+    "note": "No Lean counterpart found; searched: reciprocal return margin, kappa lower bound, two-leg colour return, port-relative reachability.",
+    "difficulty": "easy",
+    "plan": "Given the mass identity of thm:reciprocal-return (take it as hypothesis if that theorem is not yet formalized): W_A ⪰ κ I ⇒ Tr(rho_B W_A) ≥ κ Tr rho_B = κ ||B||_HS^2 (Matrix.PosSemidef trace monotonicity: Tr(rho_B (W_A - κ I)) ≥ 0 for PSD rho_B, use Matrix.PosSemidef.trace_mul_nonneg or the sqrt factorization), and max_{g,k} ||r_{g,k}||^2 ≥ (|G| n)⁻¹ ∑ = m_ret/n by Finset.exists_le_of_sum_le / average ≤ max. One day."
   },
   "thm:central-separation": {
     "env": "theorem",
     "title": "Central separation of the landed internal blocks",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: subdirect product, central separation, scalar-locked 14-dimensional algebra, eta_cen, characters chi_1 chi_2 on M_3+M_2+C+C."
+    "note": "No Lean counterpart found; searched: subdirect product, central separation, scalar-locked 14-dimensional algebra, eta_cen, characters chi_1 chi_2 on M_3+M_2+C+C.",
+    "difficulty": "medium",
+    "plan": "Formalize the (3,2,1,1) case directly on Matrix (Fin 7) (Fin 7) C with the block algebra of RenewalGeometry/StandardModel/InternalAssemblyExact.lean:blockAlgebra / blockOf: for a star-closed unital subalgebra B ≤ blockAlgebra with surjective block projections, show M_3 ⊕ 0 ⊆ B and 0 ⊕ M_2 ⊕ 0 ⊆ B: the kernel of the projection to M_3 is a star-closed ideal, its HS-orthogonal complement inside B is an ideal J mapping isomorphically onto M_3 (uses RenewalGeometry/Commutant/FiniteComplexStarSubalgebraSemisimplicity.lean / the star-ideal complement), and J's projections onto M_2, C, C are ring homs from the simple ring Matrix (Fin 3) (Fin 3) C into algebras of dimension < 9, hence zero. Then B ∩ (0 ⊕ 0 ⊕ C ⊕ C) is a unital subalgebra of C ⊕ C containing (1,1): either the diagonal (dim 14) or all (dim 15); η_cen > 0 iff some generator separates the two scalar characters iff the second case. Several days; the ideal-complement step is the only nontrivial piece."
   },
   "thm:internal-seed-saturation": {
     "env": "theorem",
@@ -376,7 +432,9 @@
       "RenewalGeometry/StandardModel/InternalCommutantNumericalExact.lean:RenewalGeometry.InternalCommutantNumerical.source_minimal_internal_seed_exact",
       "RenewalGeometry/StandardModel/ActiveResidualAlgebra.lean:RenewalGeometry.ActiveResidual.bicommutant_eq"
     ],
-    "note": "Partial: on the concrete census carrier C^3+C^2+C+C (Fin 7) with the type line, private and weak matrix units, the two scalar central projectors (I4 discharged by represented projectors) and a colour-supported word u, the generated algebra equals M_3+M_2+C+C exactly when omega_col(u) > 0; two nonorthogonal weak lines generate M_2 (I2). Missing: the reciprocal-mediator alternative in (I1) (m_ret > 0, thm:reciprocal-return), the abstract identification A_int^word = A_ext,r' from the census (3,2,1,1) at a general word depth, and the eta_cen > 0 form of (I4)."
+    "note": "Partial: on the concrete census carrier C^3+C^2+C+C (Fin 7) with the type line, private and weak matrix units, the two scalar central projectors (I4 discharged by represented projectors) and a colour-supported word u, the generated algebra equals M_3+M_2+C+C exactly when omega_col(u) > 0; two nonorthogonal weak lines generate M_2 (I2). Missing: the reciprocal-mediator alternative in (I1) (m_ret > 0, thm:reciprocal-return), the abstract identification A_int^word = A_ext,r' from the census (3,2,1,1) at a general word depth, and the eta_cen > 0 form of (I4).",
+    "difficulty": "medium",
+    "plan": "Assembly on the Fin 7 census carrier once its inputs exist: (I1) reciprocal-mediator alternative needs thm:reciprocal-return's witness word with nonzero H_priv ← T corner fed into RenewalGeometry/StandardModel/InternalCommutantSeedExact.lean:internal_seed_dichotomy (omegaCol > 0); (I4) η_cen > 0 form needs thm:central-separation; the concrete generation is already RenewalGeometry/StandardModel/InternalAssemblyExact.lean:assembled_dichotomy. The remaining abstract clause A_int^word = A_ext,r' requires identifying the relative commutant at census (3,2,1,1) with M_3 ⊕ M_2 ⊕ C ⊕ C (thm:active-isotypic concrete route: a commutant dimension/basis computation on the corresponding S_4 carrier, as in RenewalGeometry/Commutant/EdgeCommutantBasisExact.lean). Recommend stating the Lean theorem with the census identification as an explicit hypothesis (an algebra isomorphism), leaving 'dimension 15, centre dimension 4, block sizes distinguish colour/weak' as a direct computation on blockAlgebra."
   },
   "thm:internal-deficit-alternatives": {
     "env": "theorem",
@@ -386,14 +444,18 @@
       "RenewalGeometry/StandardModel/InternalCommutantNumericalExact.lean:RenewalGeometry.InternalCommutantNumerical.relative_colour_word_dimension_profile",
       "RenewalGeometry/StandardModel/InternalAssemblyExact.lean:RenewalGeometry.InternalAssembly.assembled_dichotomy"
     ],
-    "note": "Partial: the colour-block word filtration has exact dimensions 5 -> 7 -> 9 -> 9 (bridge absent gives the 5-dimensional M_2+C corner, bridge present gives M_3), and the terminal 15-dimensional saturation criterion is the assembled dichotomy; missing: the four-row table 9/11/13/15 as a Lean statement and the 14-dimensional scalar-locked branch."
+    "note": "Partial: the colour-block word filtration has exact dimensions 5 -> 7 -> 9 -> 9 (bridge absent gives the 5-dimensional M_2+C corner, bridge present gives M_3), and the terminal 15-dimensional saturation criterion is the assembled dichotomy; missing: the four-row table 9/11/13/15 as a Lean statement and the 14-dimensional scalar-locked branch.",
+    "difficulty": "medium",
+    "plan": "Needs one new lemma: dimension additivity for block-supported generators — if the generator set contains the four orthogonal central projectors of RenewalGeometry/StandardModel/InternalAssemblyExact.lean:blockAlgebra and each other generator is supported in one block, then Algebra.adjoin ≅ ⊕ of the blockwise adjoins and finrank adds. Then the four rows are 5 or 9 (colour: RenewalGeometry/StandardModel/InternalCommutantNumericalExact.lean:relative_colour_word_dimension_profile, InternalCommutantSeedExact.lean:internal_seed_dichotomy) plus 2 or 4 (weak: one projection generates span{1,p} of dimension 2; two nonorthogonal give M_2 by WeakResetGenerationExact.lean:two_lines_generate) plus 1 + 1, giving 9/11/13/15 as finrank statements. The 14-dimensional scalar-locked branch is thm:central-separation. Several days."
   },
   "cor:generic-router-saturation": {
     "env": "corollary",
     "title": "Generic saturation at fixed multiplicity census",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Zariski open/dense, generic router, disconnected support graph as finite union of linear subspaces."
+    "note": "No Lean counterpart found; searched: Zariski open/dense, generic router, disconnected support graph as finite union of linear subspaces.",
+    "difficulty": "medium",
+    "plan": "Reformulate 'Zariski open and dense' as: the set of routers u ∈ Matrix (Fin n) (Fin n) C with disconnected support graph is contained in ⋃_{S ⊂ Fin n, S ≠ ∅, S ≠ univ} Z_S where Z_S := {u : ∀ i ∈ S, ∀ j ∉ S, u i j = 0 ∧ u j i = 0} is a proper linear subspace, and a finite union of proper subspaces over the infinite field C is a proper subset (Mathlib: Submodule.iUnion_ssubset_of_forall_ne_top_of_card_lt / Submodule.exists_forall_notMem_of_forall_ne_top), hence the connected (generating) set is nonempty with Zariski-closed complement; apply to n = 3 and n = 2 independently. Depends on thm:connected-router for the generation equivalence; the partition enumeration and the subspace inclusion are one day."
   },
   "prop:main-det-incidence": {
     "env": "proposition",
@@ -416,7 +478,9 @@
       "RenewalGeometry/StandardModel/DeterminantIncidenceExact.lean:RenewalGeometry.DetIncidence.theta",
       "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.determinantProductHom"
     ],
-    "note": "Definition encoded: theta tau is the normalized alternating seed shadow on C^3 (x) C^2 (x) C^2 -> Lambda^2 C^3, and determinantProductHom (A,B) |-> det A det B is the character whose kernel is the seed stabilizer."
+    "note": "Definition encoded: theta tau is the normalized alternating seed shadow on C^3 (x) C^2 (x) C^2 -> Lambda^2 C^3, and determinantProductHom (A,B) |-> det A det B is the character whose kernel is the seed stabilizer.",
+    "difficulty": "easy",
+    "plan": "Already encoded: RenewalGeometry/StandardModel/DeterminantIncidenceExact.lean:theta (normalized alternating seed) and RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:determinantProductHom (the character whose kernel is the stabilizer). Optional: add the normalization clause ||theta tau||^2 = 6 |tau|^2 = 1 for |tau| = 1/sqrt 6 (DetIncidence.theta_norm exists) and the remark that the stabilizer is phase independent (ker of a character is unchanged by scaling the seed). Nothing substantive missing."
   },
   "thm:gauge-group": {
     "env": "theorem",
@@ -436,7 +500,9 @@
     "title": "Positive operational source criterion for the determinant group",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: h_det, Choi cross block J_01, character sectors 1 and chi^-1, stabilizer of marked positive subpacket (StandardModelHiggsStabilizerExact concerns the Higgs vacuum stabilizer, not this criterion)."
+    "note": "No Lean counterpart found; searched: h_det, Choi cross block J_01, character sectors 1 and chi^-1, stabilizer of marked positive subpacket (StandardModelHiggsStabilizerExact concerns the Higgs vacuum stabilizer, not this criterion).",
+    "difficulty": "easy",
+    "plan": "Reformulate abstractly and prove in a few lines: for a group G, a character χ : G →* unitary C and a G-module in which G acts on the cross block J by g • J = χ(g)⁻¹ • J (this transformation law is the mathematical content of 'two marked sectors with characters 1 and χ⁻¹'), Stab(J) = ker χ when J ≠ 0 and Stab(J) = G when J = 0 (h_det := ||J||_HS^2 > 0 iff J ≠ 0). Instantiate with G = SMGaugeU3 × SMGaugeU2 and χ = RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:determinantProductHom, whose kernel is SMGaugeGroup = S(U(3) × U(2)). One day including the concrete cross-block model J_01 : Matrix with the (A,B)-action A (x) B acting by det(A)⁻¹ det(B)⁻¹."
   },
   "prop:faithful-SM-quotient": {
     "env": "proposition",
@@ -448,7 +514,9 @@
       "RenewalGeometry/StandardModel/SMCentralDescentSelector.lean:RenewalGeometry.centralKernelActsTrivially_iff",
       "RenewalGeometry/StandardModel/AnomalyFreeFieldShellGaugeQuotientExact.lean:RenewalGeometry.smfs_anomaly_free_quotient_carrier"
     ],
-    "note": "Partial: the generator z = (e^{2 pi i/3} I_3, -I_2, e^{i pi/3}) acts trivially on every displayed multiplet (kernel congruence 6 | 2t + 3d + y for Q, L, u^c, d^c, e^c, nu^c, and the field-shell rows Q,U^c,D^c,L,E^c,H), i.e. K is contained in the common kernel; missing: the converse that the common kernel is exactly <z> (faithfulness of G~/K), disclosed as prose in the SMDescent docstring."
+    "note": "Partial: the generator z = (e^{2 pi i/3} I_3, -I_2, e^{i pi/3}) acts trivially on every displayed multiplet (kernel congruence 6 | 2t + 3d + y for Q, L, u^c, d^c, e^c, nu^c, and the field-shell rows Q,U^c,D^c,L,E^c,H), i.e. K is contained in the common kernel; missing: the converse that the common kernel is exactly <z> (faithfulness of G~/K), disclosed as prose in the SMDescent docstring.",
+    "difficulty": "medium",
+    "plan": "Converse to RenewalGeometry/Arithmetic/SMDescent.lean:hypercharge_z6_kernel: define the six representations of SMGaugeCover = (SU(3) × SU(2)) × Circle (RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean) on C^3 (x) C^2 (Q, Matrix.kroneckerMap with the phase), C^3 conjugate (u^c, d^c), C^2 (L, H), C (e^c), and prove that a common-kernel element is central: g_3 (x) g_2 = λ I on the Q multiplet forces g_3 = μ I_3 and g_2 = ν I_2 (new lemma: Kronecker product of two matrices equal to a nonzero scalar identity ⇒ both scalar; via entries), then det = 1 gives μ^3 = 1, ν^2 = 1, and the e^c, L, d^c equations (root-of-unity arithmetic with RenewalGeometry/StandardModel/SMCentralDescentSelector.lean:centralKernelActsTrivially_iff) pin the element to a power of z; finish with mem_smGaugeHom_ker_iff_centralZ6 to identify the common kernel with the Z_6 kernel of smGaugeHom, giving faithfulness of the quotient. Several days of concrete group computation."
   },
   "thm:hypercharge": {
     "env": "theorem",
@@ -477,7 +545,9 @@
       "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.axisCrossBlock",
       "RenewalGeometry/StandardModel/CliffordOccurrencePressureAssembly.lean:RenewalGeometry.CliffordOccurrencePressure.probability"
     ],
-    "note": "Definition encoded: axisCrossBlock J σ = P_- σ P_+ with P_± = (1±J)/2, axisOccurrence = its squared Hilbert–Schmidt norm, and cliffordProbability J σ = (1/4)·Σ_μ (2/dim H)·axisOccurrence = (1/(2 dim H)) Σ_{μ=0}^{3} ‖P_- σ_μ P_+‖²_HS, i.e. exactly p_Cl (complex-valued, real part taken in CliffordOccurrencePressure.probability)."
+    "note": "Definition encoded: axisCrossBlock J σ = P_- σ P_+ with P_± = (1±J)/2, axisOccurrence = its squared Hilbert–Schmidt norm, and cliffordProbability J σ = (1/4)·Σ_μ (2/dim H)·axisOccurrence = (1/(2 dim H)) Σ_{μ=0}^{3} ‖P_- σ_μ P_+‖²_HS, i.e. exactly p_Cl (complex-valued, real part taken in CliffordOccurrencePressure.probability).",
+    "difficulty": "easy",
+    "plan": "Already encoded: RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:cliffordProbability (complex) and CliffordOccurrencePressureAssembly.lean:CliffordOccurrencePressure.probability (real part). Nothing new is needed beyond a one-line lemma unfolding cliffordProbability to (1/(2·card n))·Σ_μ ‖P₋σ_μP₊‖²_HS in the paper's normalisation (axisOccurrence_probability_formulas already does the per-axis step)."
   },
   "prop:clifford-occurrence": {
     "env": "proposition",
@@ -489,7 +559,9 @@
       "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.axisCrossBlock_eq_zero_iff_commute",
       "RenewalGeometry/StandardModel/CliffordOccurrencePressureAssembly.lean:RenewalGeometry.CliffordOccurrencePressure.probability_mem_unitInterval"
     ],
-    "note": "Partial: each axis occurrence is nonnegative and vanishes exactly when the Hermitian axis commutes with the grading involution J (no grading-changing corner), so p_Cl>0 iff some represented axis changes the grading and p_Cl=0 iff the grading reduces every axis; p_Cl∈[0,1] is proved. Missing: the clause that on the p_Cl=0 branch the residual Clifford action lies in the normal multiplicity commutant."
+    "note": "Partial: each axis occurrence is nonnegative and vanishes exactly when the Hermitian axis commutes with the grading involution J (no grading-changing corner), so p_Cl>0 iff some represented axis changes the grading and p_Cl=0 iff the grading reduces every axis; p_Cl∈[0,1] is proved. Missing: the clause that on the p_Cl=0 branch the residual Clifford action lies in the normal multiplicity commutant.",
+    "difficulty": "easy",
+    "plan": "Assemble on the represented carrier CliffordCarrier m: CliffordTwirlMatterAudit.lean:axisOccurrence_eq_zero_iff_commute + axisOccurrence_nonnegative give p_Cl>0 ↔ ∃ μ, J does not commute with representedAxis μ; the missing p_Cl=0 clause is already proved as noMatter_branch (p_Cl=0 ↔ J = 1 ⊗ B with B a Hermitian involution) together with representedAxis_commutant_iff (the Clifford commutant is exactly 1 ⊗ Block m, i.e. the normal multiplicity commutant). Only a wrapper theorem stating both clauses in the paper's form is missing."
   },
   "prop:generation-carrier": {
     "env": "proposition",
@@ -498,7 +570,9 @@
     "lean": [
       "RenewalGeometry/StandardModel/SMActiveStructural.lean:RenewalGeometry.SMActive.generation_rank"
     ],
-    "note": "Partial: on the explicit orthogonal active realization the mean-zero endpoint quotient of the K4 vertex register (the reversal-odd cut block W_-) is proved three-dimensional, dim G_gen = 3. Missing: the hypothesis-driven form (strict positivity of the shorted Gram on W_- implying one supported rank-three generation factor) and the exclusion of (W⊗sgn)_- as loop provenance; searched: generation carrier, three generations, W_-, reversal-odd, shorted Gram."
+    "note": "Partial: on the explicit orthogonal active realization the mean-zero endpoint quotient of the K4 vertex register (the reversal-odd cut block W_-) is proved three-dimensional, dim G_gen = 3. Missing: the hypothesis-driven form (strict positivity of the shorted Gram on W_- implying one supported rank-three generation factor) and the exclusion of (W⊗sgn)_- as loop provenance; searched: generation carrier, three generations, W_-, reversal-odd, shorted Gram.",
+    "difficulty": "medium",
+    "plan": "SMActiveStructural.lean:SMActive.generation_rank gives dim W₋ = 3 on the explicit realization (mean-zero quotient of the K4 vertex register, K4Carrier.lean). Missing: (a) a generic linear-algebra lemma 'if a PSD Gram G restricted to a subspace W is positive definite then W injects into E/Ker G' (finite-dimensional, easy, build on Predictive/ExactSourceSchurResidual.lean and Commutant/FiniteCommutantPoincareGap.lean:posDef_min_eigenvalue_quadratic); (b) the S4-isotypic split of the odd endpoint block into W₋ and (W⊗sgn)₋ as distinct irreducible types (use Dimension/K4CutCycleIsotypicSchur.lean and K4TwistedExteriorSquareMultiplicity.lean with Commutant/IsotypicCommutantExact.lean:commutant_pi_matrix to show the two triplets are not isomorphic S4-modules, hence (W⊗sgn)₋ cannot be a second copy of the generation type)."
   },
   "definition:odd-provenance-completeness": {
     "env": "definition",
@@ -508,7 +582,9 @@
       "RenewalGeometry/StandardModel/OneDoubletOddTangentClassification.lean:RenewalGeometry.oddProvenanceDefect",
       "RenewalGeometry/StandardModel/OneDoubletOddTangentClassification.lean:RenewalGeometry.oddProvenanceDefect_eq_zero_iff_rangeIncluded"
     ],
-    "note": "Definition encoded as the odd provenance defect: the trace of the source Schur residual of the complete odd coefficient block against the selected (finite-Dirac) block, proved to vanish exactly when every complete odd coefficient lies in the selected range — the paper's 'orthogonal odd innovation Gram vanishes' clause. The label does not occur in the .tex (unlabelled definition at line 2584)."
+    "note": "Definition encoded as the odd provenance defect: the trace of the source Schur residual of the complete odd coefficient block against the selected (finite-Dirac) block, proved to vanish exactly when every complete odd coefficient lies in the selected range — the paper's 'orthogonal odd innovation Gram vanishes' clause. The label does not occur in the .tex (unlabelled definition at line 2584).",
+    "difficulty": "easy",
+    "plan": "Already encoded as OneDoubletOddTangentClassification.lean:oddProvenanceDefect with oddProvenanceDefect_eq_zero_iff_rangeIncluded. At most add a Prop abbreviation OddProvenanceComplete := oddProvenanceDefect = 0 so downstream statements (prop:finite-dirac) can quote it; the label is absent from the .tex (unlabelled definition at line 2584), so the ledger key should be recorded as a synthetic label."
   },
   "prop:finite-dirac": {
     "env": "proposition",
@@ -519,7 +595,9 @@
       "RenewalGeometry/Spectralization/SaturatedFiniteDiracGenerator.lean:RenewalGeometry.zeroOddProvenance_finiteDiracBudget",
       "RenewalGeometry/Spectralization/SaturatedFiniteDiracGenerator.lean:RenewalGeometry.gradedFiniteDirac_hilbertSchmidtBudget"
     ],
-    "note": "Partial: zero odd-provenance defect forces the complete grading-odd generator into the finite-Dirac relation space (its canonical projection is itself, the extra odd residue vanishes) and the even/odd/finite-Dirac Hilbert–Schmidt budget is exact. Missing: uniqueness of D_F as the source-minimal self-adjoint grading-odd full-cell generator on a saturated branch, and the typed contractions giving Yukawa/Majorana residue blocks in one generation frame."
+    "note": "Partial: zero odd-provenance defect forces the complete grading-odd generator into the finite-Dirac relation space (its canonical projection is itself, the extra odd residue vanishes) and the even/odd/finite-Dirac Hilbert–Schmidt budget is exact. Missing: uniqueness of D_F as the source-minimal self-adjoint grading-odd full-cell generator on a saturated branch, and the typed contractions giving Yukawa/Majorana residue blocks in one generation frame.",
+    "difficulty": "medium",
+    "plan": "Spectralization/SaturatedFiniteDiracGenerator.lean already gives zeroOddProvenance_fixesFiniteDiracProjection (the odd part D_F = P₋AP₊ + P₊AP₋ is the canonical odd generator) and the HS budget. Missing: (1) a concrete finite definition of 'source-minimal self-adjoint grading-odd full-cell generator' (odd Hermitian matrices modulo the source kernel, i.e. modulo Ker of the odd innovation Gram of OneDoubletOddTangentClassification.lean) and the uniqueness lemma 'two odd self-adjoint generators with the same represented range and zero odd innovation coincide' (finite linear algebra: odd part uniquely determined by gradingEvenOdd_hilbertSchmidt_orthogonal); (2) typed contractions P_type D_F P_type' onto the SMST4 module blocks giving Yukawa/Majorana blocks — routine block extraction once the module decomposition (StandardModel/SMTensorGeneration.lean, Spectralization/GeneratorProjections.lean Majorana block) is fixed."
   },
   "thm:structural-SM": {
     "env": "theorem",
@@ -536,14 +614,18 @@
       "RenewalGeometry/StandardModel/WeakResetGenerationExact.lean:RenewalGeometry.WeakReset.two_lines_generate",
       "RenewalGeometry/StandardModel/DeterminantIncidenceExact.lean:RenewalGeometry.DetIncidence.mdet_pos_iff"
     ],
-    "note": "Partial: an explicit-carrier assembly proves all six conclusions in one packet — (i) generated ∗-algebra on C^3⊕C^2⊕C⊕C equals M3⊕M2⊕C⊕C when the colour corner weight is positive, (ii) S(U(3)×U(2)) (kernel of the product determinant) ≅ (SU(3)×SU(2)×U(1))/Z6, (iii) anomaly classification 3a+2b=0, (iv) three-dimensional generation carrier, (v) normalized self-adjoint grading-odd Dirac seed with tight odd orbit and nonzero determinant seed, (vi) two independent non-orthogonal weak lines generate M2. Missing: the paper's abstract hypotheses (positive geometry short, multiplicity census/internal landing of thm:internal-seed-saturation, nonzero fully alternating incidence projection, positivity of the shorted endpoint Gram, odd-provenance completeness) are replaced by concrete matrix hypotheses on a fixed 7-dimensional carrier, and the no-go/deficit branches are not part of this theorem."
+    "note": "Partial: an explicit-carrier assembly proves all six conclusions in one packet — (i) generated ∗-algebra on C^3⊕C^2⊕C⊕C equals M3⊕M2⊕C⊕C when the colour corner weight is positive, (ii) S(U(3)×U(2)) (kernel of the product determinant) ≅ (SU(3)×SU(2)×U(1))/Z6, (iii) anomaly classification 3a+2b=0, (iv) three-dimensional generation carrier, (v) normalized self-adjoint grading-odd Dirac seed with tight odd orbit and nonzero determinant seed, (vi) two independent non-orthogonal weak lines generate M2. Missing: the paper's abstract hypotheses (positive geometry short, multiplicity census/internal landing of thm:internal-seed-saturation, nonzero fully alternating incidence projection, positivity of the shorted endpoint Gram, odd-provenance completeness) are replaced by concrete matrix hypotheses on a fixed 7-dimensional carrier, and the no-go/deficit branches are not part of this theorem.",
+    "difficulty": "hard",
+    "plan": "The explicit-carrier packet StandardModel/ActiveFiniteStructuralStandardModelExact.lean:activeFiniteStructuralStandardModel proves all six clauses under concrete matrix hypotheses on a fixed 7-dimensional carrier. A faithful version needs Lean definitions of the abstract hypothesis packet — positive geometry short (thm:geometry-short, only the Schur residual exists in Predictive/ExactSourceSchurResidual.lean), multiplicity census / internal landing (thm:internal-seed-saturation, only InternalAssemblyExact.assembled_dichotomy exists), odd-provenance completeness, and the shorted endpoint Gram — all currently conditional_interface, plus the no-go branches. This is a global assembly whose hypotheses must first be formalised as structures; do it after prop:generation-carrier, prop:finite-dirac, prop:bridge-router-residuals and thm:finite-internal-landing-alternative are closed, by bundling them into a structure that specialises to ActiveFiniteStructuralStandardModelPacket."
   },
   "cor:historical-typed-compilation": {
     "env": "corollary",
     "title": "Historical typed-compilation criterion",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: historical, typed compilation, typed shadow, word native, ancestry Gram, Schur ancestry residual, alternating determinant shadow, cross-Hankel."
+    "note": "No Lean counterpart found; searched: historical, typed compilation, typed shadow, word native, ancestry Gram, Schur ancestry residual, alternating determinant shadow, cross-Hankel.",
+    "difficulty": "hard",
+    "plan": "No Lean counterpart and the prerequisite objects (def:word-native-shadow, historical word hierarchy, Grand-Tensor word Gram with multiplication table, Store–Clifford and matter-incidence shadows, thm:external-shadow-no-go) are all conditional_interface with no definitions. The mathematical core is finite: if every typing projector/router is a polynomial in represented words, then compressed Grams ⟨pwp, pw'p⟩ are polynomial functions of the word Gram and structure constants. Formalising it requires a new 'labelled word algebra with Gram and multiplication table' structure (nearest material: Predictive/TypedHankelRealization.lean, Predictive/FiniteMomentKrylovSourceDuality.lean) before the corollary can even be stated faithfully."
   },
   "def:commutant-laplacian": {
     "env": "definition",
@@ -555,7 +637,9 @@
       "RenewalGeometry/Commutant/FiniteCommutantPoincareGap.lean:RenewalGeometry.jointCommutatorL2",
       "RenewalGeometry/Commutant/FiniteCommutantPoincareGap.lean:RenewalGeometry.jointCommutatorL2_norm_sq"
     ],
-    "note": "Definition encoded on finite Hilbert–Schmidt carriers: jointCommutatorL2 c is the stacked map X ↦ ([c_j,X])_j on EuclideanSpace ℂ (n×n) and commutantLaplacianCLM c = (jointCommutatorCLM c)† ∘ jointCommutatorCLM c = Σ_j ad_{c_j}^* ad_{c_j}; its quadratic form is proved to be Σ_j ‖[c_j,X]‖²_HS. Scoped: matrix generators on a finite carrier (the spanning/unital ∗-algebra framing is not needed)."
+    "note": "Definition encoded on finite Hilbert–Schmidt carriers: jointCommutatorL2 c is the stacked map X ↦ ([c_j,X])_j on EuclideanSpace ℂ (n×n) and commutantLaplacianCLM c = (jointCommutatorCLM c)† ∘ jointCommutatorCLM c = Σ_j ad_{c_j}^* ad_{c_j}; its quadratic form is proved to be Σ_j ‖[c_j,X]‖²_HS. Scoped: matrix generators on a finite carrier (the spanning/unital ∗-algebra framing is not needed).",
+    "difficulty": "easy",
+    "plan": "Already encoded: Commutant/JointCommutatorContinuousOperator.lean:commutantLaplacianCLM = (jointCommutatorCLM c)† ∘ jointCommutatorCLM c with quadratic form Σ_j ‖[c_j,X]‖²_HS (jointCommutatorCLM_norm_sq). Optionally add the one-line identity commutantLaplacianCLM c = Σ_j ad_{c_j}† ∘ ad_{c_j} as a sum over j to match the boxed display."
   },
   "thm:commutant-audit": {
     "env": "theorem",
@@ -578,7 +662,9 @@
       "RenewalGeometry/Commutant/FiniteCommutantPoincareGap.lean:RenewalGeometry.jointCommutatorL2",
       "RenewalGeometry/Commutant/RelativeHoweCertificate.lean:RenewalGeometry.smstCommutatorSource"
     ],
-    "note": "Encoded as the quadratic form x ↦ ‖jointCommutatorL2 c x‖² = Σ_j ‖[c_j,x]‖²_HS restricted to the orthogonal complement of the proposed algebra M; RelativeHoweSpectralMargin exhibits the restricted Gram as an explicit positive-definite matrix with attained least eigenvalue. The basis-indexed matrix G_Howe(c|M)_{ab} itself is not a named definition."
+    "note": "Encoded as the quadratic form x ↦ ‖jointCommutatorL2 c x‖² = Σ_j ‖[c_j,x]‖²_HS restricted to the orthogonal complement of the proposed algebra M; RelativeHoweSpectralMargin exhibits the restricted Gram as an explicit positive-definite matrix with attained least eigenvalue. The basis-indexed matrix G_Howe(c|M)_{ab} itself is not a named definition.",
+    "difficulty": "easy",
+    "plan": "Define relativeHoweGram (c : Fin s → Matrix n n ℂ) (E : Basis of Mᗮ, HS-orthonormal) : Matrix r r ℂ := fun a b => Σ_j ⟪jointCommutatorL2 c (E a), jointCommutatorL2 c (E b)⟫ and prove it is the Gram of the restricted quadratic form via Commutant/FiniteCommutantPoincareGap.lean:jointCommutatorL2_norm_sq; RelativeHoweGramSpectralCertificateExact.lean:RelativeHoweSpectralMargin already exhibits the restricted form, so only the basis-indexed matrix and its polarisation identity are missing."
   },
   "thm:howe-certificate": {
     "env": "theorem",
@@ -597,14 +683,18 @@
     "title": "Howe enhancement discriminant and generic rigidity",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: discriminant, Cauchy–Binet, minors, enhancement locus, polynomial family, open dense, measure zero, generic rigidity, real-analytic."
+    "note": "No Lean counterpart found; searched: discriminant, Cauchy–Binet, minors, enhancement locus, polynomial family, open dense, measure zero, generic rigidity, real-analytic.",
+    "difficulty": "hard",
+    "plan": "Three missing infrastructure pieces: (1) Cauchy–Binet det(D*D) = Σ_{|I|=r}|det D_I|² for rectangular matrices — absent from Mathlib (only Matrix.det_mul for square), a genuinely new lemma; (2) 'a nonzero real polynomial on ℝ^p has zero set of Lebesgue measure zero and empty interior' — empty interior follows from MvPolynomial.funext-style arguments, but measure zero needs a Fubini induction not in Mathlib; (3) the real-analytic clause needs 'zero set of a non-identically-zero analytic function on a connected domain is null', also absent. The enhancement-locus identity itself is easy: det G(θ)=0 ↔ ¬PosDef (Matrix.PosSemidef + det) ↔ commutant enlargement via Commutant/FiniteCommutantPoincareGap.lean:matrix_commutant_least_eigenvalue_gap / RelativeHoweCertificate.lean:relative_howe_certificate_exact; polynomiality of entries and degree bound via RingHom.map_det over MvPolynomial ℝ. Recommend splitting: prove the polynomial/locus clauses (medium) and leave the measure-zero and analytic clauses as separate infrastructure."
   },
   "cor:howe-nullity": {
     "env": "corollary",
     "title": "Determinantal nullity filtration",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: nullity filtration, minors, upper semicontinuous (only spectrum semicontinuity files exist), commutant dimension in continuous family."
+    "note": "No Lean counterpart found; searched: nullity filtration, minors, upper semicontinuous (only spectrum semicontinuity files exist), commutant dimension in continuous family.",
+    "difficulty": "medium",
+    "plan": "Needs a rank-via-minors lemma 'rank D ≤ r−k ↔ all (r−k+1)×(r−k+1) minors vanish' (not in Mathlib; provable from Matrix.rank and Matrix.det_ne_zero_of_left_inverse-type arguments on submatrices, or from exterior powers), then nullity(G(θ)) = r − rank D(θ) via CharacterLeakage.lean:saturation_rank (rank(D*D)=rank D) and commutant dimension = dim M + nullity via FiniteCommutantPoincareGap.lean:matrixL2_mem_jointCommutator_ker_iff. Upper semicontinuity: minors are continuous in θ, so {rank ≤ r−k} is closed — assemble with Matrix.det continuity (Continuous.matrix_det)."
   },
   "thm:finite-anchor": {
     "env": "theorem",
@@ -615,7 +705,9 @@
       "RenewalGeometry/Commutant/FiniteAnchorHowe.lean:RenewalGeometry.finite_anchor_lock",
       "RenewalGeometry/Commutant/FiniteAnchorHowe.lean:RenewalGeometry.derivation_perturbation"
     ],
-    "note": "Partial: for the actual Hilbert–Schmidt joint commutator sources at the anchor and a later cutoff, an anchor floor γ₀ on M^⊥ plus the quadratic-form perturbation bound |‖J_c x‖²−‖J_{c₀}x‖²| ≤ 4(C+C₀)ε‖x‖² with 4(C+C₀)ε<γ₀ gives C*(c)' = M and λ⁺_min ≥ γ₀−4(C+C₀)ε; derivation_perturbation proves ‖d²−d₀²‖ ≤ 4(C+C₀)ε for abstract normed-ring elements with ‖d‖≤2C, ‖d−d₀‖≤2ε. Missing: the derivation of that quadratic-form perturbation bound from the paper's operator-norm data C_X=(Σ‖c_{j,X}‖²)^{1/2}, ε_{X,X₀}=(Σ‖c_{j,X}−c_{j,X₀}‖²)^{1/2} is assumed rather than proved."
+    "note": "Partial: for the actual Hilbert–Schmidt joint commutator sources at the anchor and a later cutoff, an anchor floor γ₀ on M^⊥ plus the quadratic-form perturbation bound |‖J_c x‖²−‖J_{c₀}x‖²| ≤ 4(C+C₀)ε‖x‖² with 4(C+C₀)ε<γ₀ gives C*(c)' = M and λ⁺_min ≥ γ₀−4(C+C₀)ε; derivation_perturbation proves ‖d²−d₀²‖ ≤ 4(C+C₀)ε for abstract normed-ring elements with ‖d‖≤2C, ‖d−d₀‖≤2ε. Missing: the derivation of that quadratic-form perturbation bound from the paper's operator-norm data C_X=(Σ‖c_{j,X}‖²)^{1/2}, ε_{X,X₀}=(Σ‖c_{j,X}−c_{j,X₀}‖²)^{1/2} is assumed rather than proved.",
+    "difficulty": "medium",
+    "plan": "Commutant/FiniteAnchorHoweActualExact.lean:finiteAnchorHowe_actualJointCommutator already concludes C*(c)'=M and the margin from the quadratic-form perturbation hypothesis hpert. Missing: derive hpert from operator-norm data — prove ‖[c_j,X]‖_HS ≤ 2‖c_j‖_op‖X‖_HS on EuclideanSpace ℂ (n×n) (needs an HS-vs-operator-norm lemma ‖AX‖_HS ≤ ‖A‖_op‖X‖_HS; nearest material Spectralization/FiniteSpectralizationBlockNormExact.lean, Predictive/FeedbackRealization.lean), sum over j with Cauchy–Schwarz to get ‖J_c x‖ ≤ 2C_X‖x‖ and ‖J_c x − J_{c₀} x‖ ≤ 2ε‖x‖, then |a²−b²| ≤ (a+b)|a−b| (pattern of FiniteAnchorHowe.lean:derivation_perturbation) yields 4(C_X+C_{X₀})ε‖x‖²."
   },
   "def:transported-mosco": {
     "env": "definition",
@@ -627,7 +719,9 @@
       "RenewalGeometry/OperatorLimits/VaryingHilbertMosco.lean:RenewalGeometry.VaryingHilbert.System.StronglyConverges",
       "RenewalGeometry/OperatorLimits/ENNRealMoscoResolventConvergence.lean:RenewalGeometry.VaryingHilbert.System.CofinalMoscoConverges"
     ],
-    "note": "Definition encoded: a System bundles isometric embeddings J_X of the stage Hilbert spaces into a common carrier; MoscoConverges records (M1) the weak-liminf inequality q_∞(B) ≤ liminf q_X(A_X) for weakly convergent transported sequences and (M2) strong recovery sequences with limsup q_X(A_X) ≤ q_∞(A), for extended nonnegative forms (q_∞ = +∞ off the limit range replaces the 'B ∈ J_∞H_∞' clause). CofinalMoscoConverges is the reindexing-stable variant used downstream."
+    "note": "Definition encoded: a System bundles isometric embeddings J_X of the stage Hilbert spaces into a common carrier; MoscoConverges records (M1) the weak-liminf inequality q_∞(B) ≤ liminf q_X(A_X) for weakly convergent transported sequences and (M2) strong recovery sequences with limsup q_X(A_X) ≤ q_∞(A), for extended nonnegative forms (q_∞ = +∞ off the limit range replaces the 'B ∈ J_∞H_∞' clause). CofinalMoscoConverges is the reindexing-stable variant used downstream.",
+    "difficulty": "easy",
+    "plan": "Already encoded: OperatorLimits/VaryingHilbertMosco.lean:VaryingHilbert.System.MoscoConverges (M1 weak liminf, M2 strong recovery) and the cofinal variant in ENNRealMoscoResolventConvergence.lean. Nothing further required."
   },
   "def:asymptotic-compactness": {
     "env": "definition",
@@ -637,7 +731,9 @@
       "RenewalGeometry/OperatorLimits/VaryingHilbertCollectiveCompactness.lean:RenewalGeometry.VaryingHilbert.System.CollectivelyCompact",
       "RenewalGeometry/OperatorLimits/CompactScreenCollectiveCompactness.lean:RenewalGeometry.VaryingHilbert.System.collectivelyCompact_of_compactOperator_screens"
     ],
-    "note": "Partial: the corpus defines collective compactness of transported operator families (all embedded stage unit-ball images inside one compact set) and a compact-screen sufficient condition (uniformly small tails under compact screens); missing: the paper's form-level definition (every sequence with sup(‖A_X‖²+q_X(A_X))<∞ has a strongly convergent transported subsequence) is not itself a Lean definition. Searched: asymptotically compact, asymptotic compactness, form compact."
+    "note": "Partial: the corpus defines collective compactness of transported operator families (all embedded stage unit-ball images inside one compact set) and a compact-screen sufficient condition (uniformly small tails under compact screens); missing: the paper's form-level definition (every sequence with sup(‖A_X‖²+q_X(A_X))<∞ has a strongly convergent transported subsequence) is not itself a Lean definition. Searched: asymptotically compact, asymptotic compactness, form compact.",
+    "difficulty": "easy",
+    "plan": "Write the form-level definition directly on VaryingHilbert.System (OperatorLimits/VaryingHilbertMosco.lean): AsymptoticallyCompact q := ∀ A : ∀ n, Hn n, (∃ C, ∀ n, ‖A n‖² + q n (A n) ≤ C) → ∃ φ strictly monotone, ∃ B, Tendsto (fun k => J.embedding (φ k) (A (φ k))) atTop (nhds B), with the same clause for the limiting form; relate it to the existing CollectivelyCompact only in lem:collective-compactness."
   },
   "prop:compact-mosco-resolvent": {
     "env": "proposition",
@@ -648,7 +744,9 @@
       "RenewalGeometry/OperatorLimits/GraphScreenCompressedResolventNormConvergence.lean:RenewalGeometry.VaryingHilbert.System.compressedOperator_tendsto_operatorNorm_of_graphScreens",
       "RenewalGeometry/OperatorLimits/NearbyProjectionRankStability.lean:RenewalGeometry.ProjectionStability.eventually_finrank_range_eq_of_tendsto"
     ],
-    "note": "Partial: under cofinal Mosco convergence of operator-graph energies with weak resolvent equations and a compact graph-screen tail (the rendering of asymptotic compactness), the transported resolvents converge in operator norm, the limit resolvent is compact, the kernel-cluster Riesz projections converge in norm and their ranks are eventually equal (also for any isolated nonzero cluster via the one-shift spectral-gap file). Missing: the ordered eigenvalue convergence λ_{k,X} → λ_{k,∞} with multiplicity for every fixed index is not formalized."
+    "note": "Partial: under cofinal Mosco convergence of operator-graph energies with weak resolvent equations and a compact graph-screen tail (the rendering of asymptotic compactness), the transported resolvents converge in operator norm, the limit resolvent is compact, the kernel-cluster Riesz projections converge in norm and their ranks are eventually equal (also for any isolated nonzero cluster via the one-shift spectral-gap file). Missing: the ordered eigenvalue convergence λ_{k,X} → λ_{k,∞} with multiplicity for every fixed index is not formalized.",
+    "difficulty": "hard",
+    "plan": "Norm-resolvent convergence, compactness of R_∞, Riesz-projection norm convergence and eventual rank equality are proved (OperatorLimits/OperatorGraphMoscoKernelSpectralConsequencesFromGraphScreens.lean, GraphScreenCompressedResolventNormConvergence.lean, NearbyProjectionRankStability.lean). Missing: ordered eigenvalue convergence λ_{k,X} → λ_{k,∞} with multiplicity for every fixed k, which needs an ordered eigenvalue enumeration (min–max / Courant–Fischer) for compact self-adjoint operators on infinite-dimensional Hilbert space and its Lipschitz dependence on the operator norm — Mathlib only has eigenvalues_antitone in finite dimension and the Rayleigh existence results. Infrastructure-level; alternatively reformulate the clause via isolated clusters (already proved) and leave the full enumeration open."
   },
   "thm:cofinal-duality": {
     "env": "theorem",
@@ -669,7 +767,9 @@
       "RenewalGeometry/Action/UniversalCoupledActionCarrier.lean:RenewalGeometry.coupledSourceSchur_factorization",
       "RenewalGeometry/Action/UniversalCoupledActionCarrier.lean:RenewalGeometry.sourceMinimalInternalVariation"
     ],
-    "note": "DOWNGRADED 2026-09-22: the cited file(s) CoupledSourceSchurNaturality.lean do not compile against the pinned Mathlib and are excluded from the public tree; pending repair. Original assessment: Proved for finite source matrices S_g, S_i with G_g = S_g^*S_g positive definite: G_{i|g} = G_i − C G_g^{-1} C^* = S_i^*(I−P_g)S_i, the boxed block LDL^* factorization, G_{i|g} ⪰ 0, rank(joint Gram) − rank G_g = rank G_{i|g} (ii), the joint Gram is positive definite iff G_{i|g} ≻ 0 (i), and the source-minimal internal variation space is defined as E_i / Ker G_{i|g} (iii)."
+    "note": "Partial: coupledSourceSchur_factorization (Action/UniversalCoupledActionCarrier.lean) proves the Schur factorization clauses; missing: clause (i) joint positive-definiteness <-> Schur positive-definiteness (Mathlib Matrix.PosDef.fromBlocks). The original full proof cited CoupledSourceSchurNaturality.lean, which does not compile against the pinned Mathlib and is excluded.",
+    "difficulty": "easy",
+    "plan": "Action/UniversalCoupledActionCarrier.lean compiles and is imported by RenewalGeometry.lean: coupledSourceSchur_factorization gives the boxed residual identity, LDL* factorization, PSD and the rank identity (ii); sourceMinimalInternalVariation gives (iii). Missing only clause (i): joint Gram PosDef ↔ G_{i|g} PosDef — assemble from Mathlib's Matrix.PosDef.fromBlocks₁₁ (LinearAlgebra/Matrix/SchurComplement.lean) with hGg. The ledger downgrade refers to a removed file CoupledSourceSchurNaturality.lean; re-point the record to the surviving declarations."
   },
   "prop:classical-compatibility": {
     "env": "proposition",
@@ -690,21 +790,27 @@
       "RenewalGeometry/Predictive/CharacterLeakage.lean:RenewalGeometry.krylov_stabilization",
       "RenewalGeometry/Spectralization/SaturatedFiniteDiracGenerator.lean:RenewalGeometry.finiteKrylovChain_firstStabilization"
     ],
-    "note": "Partial: for a nested Krylov chain K_r under one operator T, rank K_{r+1} ≤ rank K_r forces K_{r+1} = K_r and, given T-invariance of K_r, K_s = K_r for all s ≥ r; the first plateau of a forward-mapped chain is proved T-invariant. Missing: the multi-letter word-span version (every letter of the alphabet preserves V_r at any flat depth, not only the first plateau) and the constancy of external isotypic multiplicities."
+    "note": "Partial: for a nested Krylov chain K_r under one operator T, rank K_{r+1} ≤ rank K_r forces K_{r+1} = K_r and, given T-invariance of K_r, K_s = K_r for all s ≥ r; the first plateau of a forward-mapped chain is proved T-invariant. Missing: the multi-letter word-span version (every letter of the alphabet preserves V_r at any flat depth, not only the first plateau) and the constancy of external isotypic multiplicities.",
+    "difficulty": "easy",
+    "plan": "Generalise Predictive/CharacterLeakage.lean:krylov_stabilization to a finite letter alphabet: define V (r+1) = V r ⊔ ⨆_ℓ Submodule.map ℓ (V r) over ℓ ∈ 𝓛 (finite family of linear maps); rank K_r = finrank V_r via saturation_rank (Gram rank = span rank); Submodule.eq_of_le_of_finrank_le gives V_{r+1}=V_r, hence map ℓ (V r) ≤ V r for every letter and V_s = V_r by induction (same pattern as krylov_stabilization). Constancy of external isotypic multiplicities is immediate from V_s = V_r as submodules."
   },
   "cor:flat-multiplicity-obstruction": {
     "env": "corollary",
     "title": "Terminating multiplicity obstruction",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: multiplicity obstruction, flat word depth, m_{λ,r} ≥ n, internal M_n factor, isotypic multiplicity."
+    "note": "No Lean counterpart found; searched: multiplicity obstruction, flat word depth, m_{λ,r} ≥ n, internal M_n factor, isotypic multiplicity.",
+    "difficulty": "medium",
+    "plan": "Combine the multi-letter flat-word-span lemma with Commutant/IsotypicCommutantExact.lean:commutant_pi_matrix (commutant of the external action on V_r is Π_λ M_{m_λ}). Missing: the dimension-count lemma 'a nonzero algebra homomorphism M_n(ℂ) → M_m(ℂ) forces n ≤ m' (injectivity from simplicity of M_n — use Commutant/EdgeCommutantDimensionExact.lean:no_M3_embedding as a template, or Matrix.finrank comparison n² ≤ m² after proving injectivity), plus the framing that an internal M_n factor carried by the λ-space is such a homomorphism; then flatness makes m_{λ,s}=m_{λ,r} for all s ≥ r."
   },
   "prop:router-failure-locus": {
     "env": "proposition",
     "title": "Algebraic structure of the router failure set",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: router failure, failure set, failure locus, Zariski, proper linear subspace L_S, Euclidean open dense."
+    "note": "No Lean counterpart found; searched: router failure, failure set, failure locus, Zariski, proper linear subspace L_S, Euclidean open dense.",
+    "difficulty": "medium",
+    "plan": "Formalise thm:connected-router first (only WeakResetGenerationExact.lean:top_of_units / InternalCommutantSeedExact.lean:top_of_units exist): C*(𝒟_n,u)=M_n ↔ support graph of u connected, using Commutant/EdgeCommutantReconstruction.lean:connected_common_dimension-style walk arguments and StarMatrixUnits.lean matrix units. Then 𝔉_n = ⋃_S L_S is the disconnectedness statement (S = a component); L_S proper linear subspace is immediate (u = 1 ∉ L_S? no — use u = all-ones matrix); density of the complement: finite union of proper subspaces has empty interior (Mathlib: Submodule.eq_top_of_nonempty_interior', closed proper subspaces are nowhere dense, finite union of nowhere dense is nowhere dense). Zariski closedness needs only that each L_S is the zero set of linear forms."
   },
   "prop:bridge-router-residuals": {
     "env": "proposition",
@@ -715,7 +821,9 @@
       "RenewalGeometry/StandardModel/InternalAssemblyExact.lean:RenewalGeometry.InternalAssembly.assembled_dichotomy",
       "RenewalGeometry/StandardModel/InternalAssemblyExact.lean:RenewalGeometry.InternalAssembly.omega7"
     ],
-    "note": "Partial: two independent non-orthogonal lines of C^2 generate M_2(C) (the δ_wk>0 branch), and on the assembled 7-dimensional internal carrier the generated ∗-algebra is the full block algebra M3⊕M2⊕C⊕C exactly when the colour corner weight ω = Σ|u_{type,private}|² (the δ_col analogue) is positive. Missing: the explicit formula δ_wk(p,q)=2c²(1−c²) for rank-one projections, and the identification of the δ_col=0 branch with the reducing algebra M2⊕C (only failure of fullness is proved)."
+    "note": "Partial: two independent non-orthogonal lines of C^2 generate M_2(C) (the δ_wk>0 branch), and on the assembled 7-dimensional internal carrier the generated ∗-algebra is the full block algebra M3⊕M2⊕C⊕C exactly when the colour corner weight ω = Σ|u_{type,private}|² (the δ_col analogue) is positive. Missing: the explicit formula δ_wk(p,q)=2c²(1−c²) for rank-one projections, and the identification of the δ_col=0 branch with the reducing algebra M2⊕C (only failure of fullness is proved).",
+    "difficulty": "medium",
+    "plan": "δ_wk formula: for p = vecMulVec t (star t), q = vecMulVec h (star h) unit vectors on Fin 2 compute ‖[p,q]‖²_HS = 2c²(1−c²) with c = |⟨t,h⟩| by direct trace expansion (Matrix.trace, vecMulVec_mul in WeakResetGenerationExact.lean); δ_wk>0 ↔ distinct and non-orthogonal then feeds two_lines_generate. δ_col=0 branch: on T ⊕ H_priv (Fin 3 carrier) prove Algebra.adjoin of the block-diagonal generators with vanishing cross corners equals the block algebra M₂ ⊕ ℂ (both inclusions; the ⊆ direction is InternalAssemblyExact.lean:gens7_subset_blockAlgebra-style, the ⊇ direction needs the assumed M₂ on T and the private unit) — mirror InternalAssemblyExact.assembled_dichotomy on the 3-dimensional colour carrier."
   },
   "thm:finite-internal-landing-alternative": {
     "env": "theorem",
@@ -726,7 +834,9 @@
       "RenewalGeometry/StandardModel/InternalAssemblyExact.lean:RenewalGeometry.InternalAssembly.assembled_ne_of_omega_zero",
       "RenewalGeometry/StandardModel/WeakResetGenerationExact.lean:RenewalGeometry.WeakReset.two_lines_generate"
     ],
-    "note": "Partial: the (A4)-type positive branch — on the census (3,2,1,1) carrier a colour-supported word with positive colour corner weight, together with the weak units, generates the full relative commutant M3⊕M2⊕C⊕C — and the failure of fullness at zero colour weight are proved. Missing: (A1) the flat-depth m_{0,r}<3 no-go, (A2) the exact reducible M2⊕C landing, (A3) commutativity of the weak algebra when all weak-router residuals vanish, and the exact intermediate algebra dimensions of thm:internal-deficit-alternatives."
+    "note": "Partial: the (A4)-type positive branch — on the census (3,2,1,1) carrier a colour-supported word with positive colour corner weight, together with the weak units, generates the full relative commutant M3⊕M2⊕C⊕C — and the failure of fullness at zero colour weight are proved. Missing: (A1) the flat-depth m_{0,r}<3 no-go, (A2) the exact reducible M2⊕C landing, (A3) commutativity of the weak algebra when all weak-router residuals vanish, and the exact intermediate algebra dimensions of thm:internal-deficit-alternatives.",
+    "difficulty": "medium",
+    "plan": "(A4) is InternalAssemblyExact.lean:assembled_dichotomy + WeakResetGenerationExact.lean:two_lines_generate. Missing pieces, all finite-dimensional: (A1) from cor:flat-multiplicity-obstruction with n=3; (A2) from the δ_col=0 branch of prop:bridge-router-residuals; (A3) an algebra generated by pairwise commuting projections is commutative (Mathlib: Algebra.adjoin of a commuting set, e.g. Algebra.adjoinCommSemiringOfComm / Algebra.commute_of_mem_adjoin_of_forall_mem_commute); the 9/11/13/15 dimension table from InternalCommutantNumericalExact.lean:relative_colour_word_dimension_profile (thm:internal-deficit-alternatives). Then a case-split theorem on the census (3,2,1,1) stating exactly one branch holds. Several days of assembly, no new analysis."
   },
   "prop:det-incidence": {
     "env": "proposition",
@@ -752,7 +862,9 @@
       "RenewalGeometry/Gravity/FiniteActionWardBRSTStressEinsteinExact.lean:RenewalGeometry.FiniteActionWardBRSTStressEinstein.finiteBRST2_nilpotent",
       "RenewalGeometry/Gravity/FiniteBRSTWardEinstein.lean:RenewalGeometry.finite_action_Einstein"
     ],
-    "note": "Partial: the four-term face/edge/vertex action is defined with definitional one-cell locality, its exact gauge invariance is derived from covariance of the cell densities (taken as hypotheses), the Ward identity D_U^*J + R^*E = 0 and the stress transfer L_q^*T = 2L_Φ^*E are derived by the chain rule from invariance of a generic finite action along gauge/relabeling flows, and a finite (group-cochain) BRST differential is proved nilpotent through ghost degree two. Missing: gauge covariance of the concrete Yang–Mills–Higgs–Dirac–Yukawa densities is assumed, the ghost-field BRST operator s (sc=−c², sU=c_tU−Uc_s, ...) with s²=0 in all degrees and sS=0 is not the formalized object, and the cutoff-independence of the support radius is only the definitional locality."
+    "note": "Partial: the four-term face/edge/vertex action is defined with definitional one-cell locality, its exact gauge invariance is derived from covariance of the cell densities (taken as hypotheses), the Ward identity D_U^*J + R^*E = 0 and the stress transfer L_q^*T = 2L_Φ^*E are derived by the chain rule from invariance of a generic finite action along gauge/relabeling flows, and a finite (group-cochain) BRST differential is proved nilpotent through ghost degree two. Missing: gauge covariance of the concrete Yang–Mills–Higgs–Dirac–Yukawa densities is assumed, the ghost-field BRST operator s (sc=−c², sU=c_tU−Uc_s, ...) with s²=0 in all degrees and sS=0 is not the formalized object, and the cutoff-independence of the support radius is only the definitional locality.",
+    "difficulty": "hard",
+    "plan": "Ward and stress identities are derived abstractly (Gravity/FiniteActionWardBRSTStressEinsteinExact.lean:gauge_ward_divergence, relabeling_stress_transfer) and gauge invariance of the four-term action follows from covariance hypotheses (StandardModel/ExplicitRegulatedStandardModelActionExact.lean:explicitRegulatedStandardModelAction_gaugeInvariant). Missing: (1) proving covariance of the concrete Yang–Mills/Higgs/Dirac/Yukawa cell densities under U_e ↦ g_t U_e g_s⁻¹ etc. (finite, medium: trace cyclicity and unitary invariance on lattice cells); (2) the ghost BRST operator s with sc=−c², sU=c_tU−Uc_s, s²=0 in all ghost degrees and sS=0 — the library only has the group-cochain differential (finiteBRST2_nilpotent), and a faithful encoding needs a Grassmann-graded field algebra (ExteriorAlgebra-valued ghosts and a graded derivation), a new structure whose statement must be reformulated before it can be proved. Rated hard for the BRST clause; the covariance clause alone is medium."
   },
   "cor:internal-vacuum": {
     "env": "corollary",
@@ -786,7 +898,9 @@
       "RenewalGeometry/OperatorLimits/CompactScreenCollectiveCompactness.lean:RenewalGeometry.VaryingHilbert.System.collectivelyCompact_of_compactOperator_screens",
       "RenewalGeometry/OperatorLimits/CollectivelyCompactLimit.lean:RenewalGeometry.VaryingHilbert.System.CollectivelyCompact.isCompactOperator_limit"
     ],
-    "note": "Partial: collective compactness of transported resolvents yields a strongly convergent subsequence of outputs for every bounded input sequence and forces any strong limit to be compact; collective compactness itself is derived from uniformly small tails under compact screens. Missing: the derivation from the paper's form-level asymptotic compactness (sequential compactness of form-bounded sequences) is not formalized."
+    "note": "Partial: collective compactness of transported resolvents yields a strongly convergent subsequence of outputs for every bounded input sequence and forces any strong limit to be compact; collective compactness itself is derived from uniformly small tails under compact screens. Missing: the derivation from the paper's form-level asymptotic compactness (sequential compactness of form-bounded sequences) is not formalized.",
+    "difficulty": "medium",
+    "plan": "After defining form-level AsymptoticallyCompact (def:asymptotic-compactness), prove the energy identity for the resolvent output A_X = R_X f_X: q_X(A_X) + ‖A_X‖² = Re⟨f_X, A_X⟩ ≤ ‖f_X‖‖A_X‖, hence sup(‖A_X‖² + q_X(A_X)) < ∞ (use the OperatorGraphResolventEquation of OperatorLimits/OperatorGraphMoscoKernelSpectralConsequencesFromGraphScreens.lean or JointCommutatorContinuousOperator.lean:jointCommutator_resolventEquation_of_laplacianEquation). Sequential compactness of embedded unit-ball outputs then gives VaryingHilbertCollectiveCompactness.lean:CollectivelyCompact via Mathlib's IsSeqCompact.isCompact / closure argument; compactness of R_∞ is CollectivelyCompact.isCompactOperator_limit (CollectivelyCompactLimit.lean)."
   },
   "lem:collective-norm": {
     "env": "lemma",
@@ -819,7 +933,9 @@
       "RenewalGeometry/OperatorLimits/RieszProjectionStability.lean:RenewalGeometry.ResolventStability.circleRieszProjection",
       "RenewalGeometry/OperatorLimits/NearbyProjectionRankStability.lean:RenewalGeometry.ProjectionStability.eventually_finrank_range_eq_of_tendsto"
     ],
-    "note": "Partial: the circle-contour Riesz projections Π_X(Γ) = (2πi)^{-1}∮_Γ (z−R_X)^{-1}dz converge in operator norm under norm convergence R_X → R_∞ with uniform resolvent bounds on Γ, and norm-convergent finite-rank idempotents have eventually equal range dimension. Missing: the ordered eigenvalue convergence μ_{k,X} → μ_{k,∞}, λ_{k,X} → λ_{k,∞} for every fixed index is not formalized."
+    "note": "Partial: the circle-contour Riesz projections Π_X(Γ) = (2πi)^{-1}∮_Γ (z−R_X)^{-1}dz converge in operator norm under norm convergence R_X → R_∞ with uniform resolvent bounds on Γ, and norm-convergent finite-rank idempotents have eventually equal range dimension. Missing: the ordered eigenvalue convergence μ_{k,X} → μ_{k,∞}, λ_{k,X} → λ_{k,∞} for every fixed index is not formalized.",
+    "difficulty": "hard",
+    "plan": "The Riesz-projection and rank clauses are proved (OperatorLimits/RieszProjectionStability.lean:circleRieszProjection_tendsto, NearbyProjectionRankStability.lean:eventually_finrank_range_eq_of_tendsto). Missing: ordered eigenvalue convergence μ_{k,X} → μ_{k,∞} for compact self-adjoint operators under norm convergence, which requires an ordered enumeration of eigenvalues with multiplicity and a min–max/Weyl perturbation inequality in infinite dimension — not in Mathlib (only finite-dimensional eigenvalues_antitone and Analysis/ApproximationSingularValues.lean:approximationNumber_weyl for approximation numbers). One route: prove μ_k equals the k-th approximation number for compact positive self-adjoint operators (needs the spectral theorem for compact self-adjoint operators, absent), then use approximationNumber_weyl. Infrastructure-level."
   },
   "prop:protected-kernel-locking": {
     "env": "proposition",
@@ -842,76 +958,98 @@
       "RenewalGeometry/StandardModel/OneGenerationIncidenceAudit.lean:RenewalGeometry.nonzero_incidence_generates_cross_units",
       "RenewalGeometry/StandardModel/OneGenerationAudit.lean:RenewalGeometry.smst_one_generation_audit"
     ],
-    "note": "Partial: at the exact module dimensions (6,3,3,2,1) the Schur engine (scalar commutant of each irreducible gauge block), the cross-generation engine (a nonzero incidence block Q↔u, Q↔d, L↔e yields every cross matrix unit), and the two-component residuals (matrices commuting with M_12 ⊕ M_3, resp. M_12 ⊕ M_4 with a neutral singlet, are diag(a·I,b·I) ≅ C^2) are proved. Missing: the assembled algebra equality A_gauge+inc = M_12(C) ⊕ M_3(C) (resp. M_4) is not stated as one theorem."
+    "note": "Partial: at the exact module dimensions (6,3,3,2,1) the Schur engine (scalar commutant of each irreducible gauge block), the cross-generation engine (a nonzero incidence block Q↔u, Q↔d, L↔e yields every cross matrix unit), and the two-component residuals (matrices commuting with M_12 ⊕ M_3, resp. M_12 ⊕ M_4 with a neutral singlet, are diag(a·I,b·I) ≅ C^2) are proved. Missing: the assembled algebra equality A_gauge+inc = M_12(C) ⊕ M_3(C) (resp. M_4) is not stated as one theorem.",
+    "difficulty": "medium",
+    "plan": "All engines exist in StandardModel/OneGenerationIncidenceAudit.lean (nonzero_incidence_generates_cross_units, smst_one_generation_audit_exact) and OneGenerationAudit.lean. Missing: the single assembled theorem Algebra.adjoin ℂ (gauge blocks ∪ incidence edges) = block algebra M₁₂ ⊕ M₃ (resp. M₁₂ ⊕ M₄) on the explicit 15- (16-) dimensional carrier, with commutant ≅ ℂ² — follow the template of InternalAssemblyExact.lean (blockAlgebra, gens7_subset_blockAlgebra, assembled_dichotomy) with matrix units generated along the connected components {Q,u,d}, {L,e}, and Commutant/GrandWedderburn.lean:commutant_decomposition for the ℂ² commutant."
   },
   "thm:incidence-determinant": {
     "env": "theorem",
     "title": "Positive incidence determinant and sufficient supports",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: incidence polynomial P_E, sufficient support, essential edge, rank function f(S), matroid, divides, homogeneous nonnegative coefficients."
+    "note": "No Lean counterpart found; searched: incidence polynomial P_E, sufficient support, essential edge, rank function f(S), matroid, divides, homogeneous nonnegative coefficients.",
+    "difficulty": "medium",
+    "plan": "The face criterion P_E(w)>0 ↔ f(S)=n ↔ 𝓜(S)=𝓜(E) needs no Cauchy–Binet: on a face G(w)=Σ_{e∈S} w_e D_e*D_e is PSD, det>0 ↔ PosDef ↔ ⋂ Ker D_e = 0 ↔ Σ Ran D_e* = V (Mathlib PosSemidef/PosDef det lemmas plus thm:incidence-polymatroid's kernel identity, which is itself unformalised but elementary). Homogeneity and nonnegative coefficients and the κ_e minimal-power clause need a new Cauchy–Binet lemma for stacked row blocks √w_e D_e and monomial bookkeeping over MvPolynomial ℝ E — a self-contained matrix/combinatorics development (Cauchy–Binet is absent from Mathlib). Nearest material: CharacterLeakage.lean:saturation_rank, FiniteCommutantPoincareGap.lean:posDef_min_eigenvalue_quadratic."
   },
   "prop:deletion-margin": {
     "env": "proposition",
     "title": "Exact simultaneous-deletion margin",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: deletion margin, simultaneous deletion, B_R, G^{1/2}(I−B_R)G^{1/2}, λ_min(G_{E∖R})."
+    "note": "No Lean counterpart found; searched: deletion margin, simultaneous deletion, B_R, G^{1/2}(I−B_R)G^{1/2}, λ_min(G_{E∖R}).",
+    "difficulty": "medium",
+    "plan": "Finite matrices with G ≻ 0: use Mathlib's Matrix.PosDef.sqrt / PosSemidef.sqrt (CFC) to define B_e = G^{-1/2} G_e G^{-1/2}, prove Σ B_e = I and G_{E∖R} = G^{1/2}(I−B_R)G^{1/2} by algebra; 0 ⪯ B_R ⪯ I; PosDef(I−B_R) ↔ ‖B_R‖_op<1 (largest eigenvalue of a PSD contraction, via Matrix.IsHermitian.eigenvalues / Rayleigh bounds); congruence preserves nullity and PSD order so G_{E∖R} ⪰ (1−β_R)G and the λ_min bound via FiniteCommutantPoincareGap.lean:posDef_min_eigenvalue_quadratic. The commutant clause 𝓜(E∖R)=𝓜(E) ↔ Ker G_{E∖R}=0 needs the kernel identity of thm:incidence-polymatroid (unformalised, elementary)."
   },
   "prop:word-space-inflation": {
     "env": "proposition",
     "title": "Invariant word-space inflation without an internal $M_3$",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: inflation, M_12, M_7, S4 multiplicities (1,0,2,1,1) and (7,5,19,17,12), conjugation action on L²(M_12), invariant system algebra."
+    "note": "No Lean counterpart found; searched: inflation, M_12, M_7, S4 multiplicities (1,0,2,1,1) and (7,5,19,17,12), conjugation action on L²(M_12), invariant system algebra.",
+    "difficulty": "medium",
+    "plan": "Explicit finite computation on Ω = ordered unequal pairs of Fin 4 (12 points): (a) A = M₁₂ from connectivity of the support graph of the point projections plus T,H (needs thm:connected-router, see prop:router-failure-locus); (b) the S4 multiplicities (1,0,2,1,1) and (7,5,19,17,12) by explicit character inner products over Equiv.Perm (Fin 4) (24 elements, decidable sums; irreducible characters entered as explicit class functions as in Dimension/K4CutCycleIsotypicSchur.lean / StandardModel/K4Carrier.lean); (c) A^{S4} ≅ ℂ ⊕ M₂ ⊕ ℂ ⊕ ℂ and the M₇ block in the conjugation commutant via Commutant/IsotypicCommutantExact.lean:commutant_pi_matrix. No new theory, but a sizeable explicit verification."
   },
   "thm:subdirect-classification": {
     "env": "theorem",
     "title": "Finite subdirect matrix-algebra classification",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: subdirect, surjective coordinate projection, diagonal embedding up to inner automorphism, equal matrix size classes (GrandWedderburn.lean covers block commutants on a fixed decomposed carrier, not the subdirect-product classification)."
+    "note": "No Lean counterpart found; searched: subdirect, surjective coordinate projection, diagonal embedding up to inner automorphism, equal matrix size classes (GrandWedderburn.lean covers block commutants on a fixed decomposed carrier, not the subdirect-product classification).",
+    "difficulty": "hard",
+    "plan": "Requires the Wedderburn structure of a finite-dimensional unital *-subalgebra of ⊕ M_{n_i}(ℂ) (semisimplicity from *-closedness, then Mathlib's Wedderburn–Artin for semisimple rings together with 'finite-dimensional division algebra over ℂ is ℂ'), the fact that a surjective *-homomorphism onto a simple factor kills all but one intrinsic summand, and Skolem–Noether (NCG/Algebra/CanonicalReductions.lean:matrix_algEquiv_inner covers M_n(K) automorphisms). The library's Commutant/GrandWedderburn.lean and StarMatrixUnits.lean:star_matrix_units work on a fixed decomposed carrier, not on an abstract subalgebra; building the intrinsic decomposition of an arbitrary *-subalgebra is infrastructure-level."
   },
   "prop:all-excursion-return": {
     "env": "proposition",
     "title": "All-excursion return alternative",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: excursion, return panel, reciprocal route bank, N_A ⊥ N_B, p_H w p_T (ExcursionInversion.lean treats resolved excursion inversion of branch lifts, a different statement)."
+    "note": "No Lean counterpart found; searched: excursion, return panel, reciprocal route bank, N_A ⊥ N_B, p_H w p_T (ExcursionInversion.lean treats resolved excursion inversion of branch lifts, a different statement).",
+    "difficulty": "medium",
+    "plan": "Needs the mediator setup of thm:reciprocal-return (no Lean): finite carrier T ⊕ H_priv ⊕ (V ⊗ K), entry/exit operators A,B with partial-trace positivity Ran A ⊆ V ⊗ Ran ρ_A, mediator h self-adjoint, 𝔪_ret = d⁻¹Tr(ρ_B W_A). Then: 𝒩_A := Σ_{k<n} h^k Ran ρ_A is h-invariant by Cayley–Hamilton (Mathlib Matrix.aeval_self_charpoly) and reducing since h is Hermitian; 𝔪_ret=0 with positivity gives Ran ρ_B ⊥ 𝒩_A; Q commutes with each generator; every word has p_H w p_T = 0 by induction on word length. All finite linear algebra; the new small structure is the route-bank data."
   },
   "thm:determinant-arity-floor": {
     "env": "theorem",
     "title": "Sharp five-slot determinant-mode floor",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: arity, five-slot, central weight support, (−3,−2), k-fold tensor carrier, determinant-incidence character."
+    "note": "No Lean counterpart found; searched: arity, five-slot, central weight support, (−3,−2), k-fold tensor carrier, determinant-incidence character.",
+    "difficulty": "medium",
+    "plan": "State as weight combinatorics on ℤ²: single-slot weights {(1,0),(0,1),(0,0)}, k-fold tensor weights {(a,b): a,b ≥ 0, a+b ≤ k} (build on StandardModel/TensorExteriorAnomalyPacket.lean:tensorCentralAction_eq_sumWeight, exteriorSquareCentralAction_eq_doubleWeight), endomorphism weights = differences; then (−3,−2) ∉ differences for k<5 (total charge ≥ −k) and the k=5 witness: the alternating line in C^{⊗3} ⊗ W₂^{⊗2} has weight (3,2) (Dimension/ZeroModeSaturationExact.lean:det_line_dim_one / DetLine for the determinant line), so a rank-one map from it to a neutral line has weight (−3,−2). Missing: a small 'central-weight support of End' definition for a torus action on a graded carrier; the rest is Finset arithmetic."
   },
   "prop:five-kraus-freedom": {
     "env": "proposition",
     "title": "Five-Kraus freedom behind the six-edge normalization",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: six-edge normalization, five Kraus, 1/sqrt(18), sqrt(2/3), coarse edge channel (1/3)id + (2/3)Ψ, C*(K_e)."
+    "note": "No Lean counterpart found; searched: six-edge normalization, five Kraus, 1/sqrt(18), sqrt(2/3), coarse edge channel (1/3)id + (2/3)Ψ, C*(K_e).",
+    "difficulty": "medium",
+    "plan": "Pure finite linear algebra over Fin 6 / Fin 5: construct an explicit real 6×5 Helmert-type matrix O with OᵀO=I₅, Oᵀ𝟏=0, OOᵀ=I₆−𝟏𝟏ᵀ/6 (no Mathlib source; enter explicitly and verify by norm_num), then the orthogonal coefficient change K_e ↦ (Σ_e K_e/√6, D_μ=Σ_e O_{eμ}K_e) preserves Σ K_e*K_e (Kraus completeness, cf. Dimension/IcosahedralKraus.lean:kraus_complete pattern), coherent sum fixes the first coefficient, B_μ = √(3/2) D_μ; linear independence transports along the invertible 6×6 change; the coarse channel decomposition (1/3)id + (2/3)Ψ and C*(K_e)=C*(B_μ) (Algebra.adjoin equality under invertible linear change plus the identity) follow. Several routine lemmas, no new theory."
   },
   "prop:record-witness": {
     "env": "proposition",
     "title": "Record-complete nonidentifiability witness",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: record-complete, nonidentifiability (existing witnesses: accepted-bit kernel, trine measure, fresh sampler — different statements), C^20, M_4⊗I_5, I_20/6, Choi spectrum, opportunity channel."
+    "note": "No Lean counterpart found; searched: record-complete, nonidentifiability (existing witnesses: accepted-bit kernel, trine measure, fresh sampler — different statements), C^20, M_4⊗I_5, I_20/6, Choi spectrum, opportunity channel.",
+    "difficulty": "medium",
+    "plan": "Large explicit finite computation with reusable parts: five anticommuting Hermitian Clifford matrices on ℂ⁴ exist as CliffordTwirlMatterAudit.lean representedAxis (4) + representedChirality (anticommuting, involutive) and gamma_commutant gives scalar commutant ⇒ C*(K_e^q)=M₄⊗I₅ via a finite bicommutant step (Commutant/GrandWedderburn.lean:block_bicommutant / commutant_decomposition); the commuting family on ℂ^{20} (3-subsets of Fin 6, Finset.powersetCard 3) generates ℂ^{20} because the 20 sign patterns are distinct (decide); the normalisation identities (K_e*)K_e=I/6, traces 10/3 and 2/3 by explicit sums (mean zero, pair correlation −1/5 counted with Finset.card); word effects by induction using √6K_e unitary and orthogonal Q_a (Operational/Instrument.lean); the Choi spectrum from G₆=(8/3)I+(2/3)𝟏𝟏ᵀ ⊗ I₄ and M_ϑ (rank-one perturbation eigenvalues). Nothing analytic, but many independent lemmas; expect several days."
   },
   "prop:ten-panel-reconstruction": {
     "env": "proposition",
     "title": "Explicit ten-panel reconstruction",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: ten panel, ten-panel, pullback X_μ + iY_μ, 2√3/√(ϑh), K_e = I/√18 + Σ O_{eμ} D_μ, tomography (CombTomography/FiniteProcessCombTomography treat process-comb Choi reconstruction, a different statement)."
+    "note": "No Lean counterpart found; searched: ten panel, ten-panel, pullback X_μ + iY_μ, 2√3/√(ϑh), K_e = I/√18 + Σ O_{eμ} D_μ, tomography (CombTomography/FiniteProcessCombTomography treat process-comb Choi reconstruction, a different statement).",
+    "difficulty": "medium",
+    "plan": "Presupposes the Heisenberg complementary pullback eq:complementary-pullback / cor:finite-system-export (unformalised): C(z)=(I⊗⟨z|)V_ϑ with 𝒫*_ϑ(|z⟩⟨w|)=C(z)*C(w). Once that finite Stinespring frame is defined (build on Operational/MinimalNaturality.lean / Predictive/JointSourceUniversality.lean Stinespring material and Algebra/ChoiCriterion.lean:choiMatrix), the proposition is a computation: u is an eigenvector of the coefficient Gram with eigenvalue h=12−11ϑ and r_μ with eigenvalue ϑ, giving C(u)=√(h/12)I, C(r_μ)=√ϑ D_μ⊗I/2, then X_μ+iY_μ=2|u⟩⟨r_μ| and orthogonality of O invert to K_e. Needs matrix square-root of M_ϑ = ϑI+(1−ϑ)cc* on the two eigen-directions (explicit, no CFC needed)."
   },
   "prop:reconstruction-error": {
     "env": "proposition",
     "title": "Robust commutant stopping test",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: reconstruction error, stopping test, least singular value, stacked commutator map, 2√2 e_K, Hilbert–Schmidt pullback error (RobustHankelGap.lean certifies predictive Hankel rank by singular gaps, a different statement)."
+    "note": "No Lean counterpart found; searched: reconstruction error, stopping test, least singular value, stacked commutator map, 2√2 e_K, Hilbert–Schmidt pullback error (RobustHankelGap.lean certifies predictive Hankel rank by singular gaps, a different statement).",
+    "difficulty": "medium",
+    "plan": "Error propagation through the linear reconstruction of prop:ten-panel-reconstruction: ‖D̂_μ−D_μ‖_HS ≤ (2√3/√(ϑh))(ε_{X,μ}+ε_{Y,μ}) by the triangle inequality, and Σ_e‖K̂_e−K_e‖² = Σ_μ‖D̂_μ−D_μ‖² by orthonormal columns of O. Commutator-map bound: ‖[A,X]‖_HS ≤ 2‖A‖_HS‖X‖_HS (same HS-vs-operator-norm lemma needed for thm:finite-anchor) and the star-closed stacking gives the √2 factor, so ‖𝒟̂−𝒟‖_{2→2} ≤ 2√2 e_K. Least singular value stability then follows from Analysis/ApproximationSingularValues.lean:approximationSingularValue_weyl / _lower_perturbation, and 'ŝ > 2√2 e_K ⇒ no kernel on the protected complement' from FiniteCommutantPoincareGap.lean:matrix_commutant_least_eigenvalue_gap. Assembly of existing pieces plus one norm lemma."
   }
 }

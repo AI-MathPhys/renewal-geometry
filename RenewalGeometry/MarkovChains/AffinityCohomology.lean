@@ -89,7 +89,6 @@ instance : Module ℝ (H1R G) :=
   inferInstanceAs (Module ℝ
     ((G.E → ℝ) ⧸ LinearMap.range (coboundR G)))
 
-open NCG.Multigraph.H1R in
 /-- The class of a real one-cochain. -/
 def _root_.NCG.Multigraph.H1R.mk : (G.E → ℝ) →ₗ[ℝ] H1R G := Submodule.mkQ _
 

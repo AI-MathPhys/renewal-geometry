@@ -81,6 +81,10 @@ PROOF_ENVS = {
 # ``conditional_interface``).
 DEFINITION_ENVS = {"definition", "construction"}
 
+# Every record that is not proved carries an estimate of how far the existing
+# library is from proving it, plus a one-line plan.
+DIFFICULTIES = ("easy", "medium", "hard")
+
 BOOKKEEPING_NOTE = (
     "Non-theorem environment (declaration/bookkeeping); formal counterparts "
     "are the hypothesis arguments of the proved theorems referencing it."
@@ -246,8 +250,14 @@ def check_paper(name: str, index: dict[str, set[str]]) -> int:
             errors.append(f"{key}: status statement_encoded on a "
                           f"{entry.get('env')} requires at least one Lean "
                           "reference")
-        if status in ("proved", "computer_certified") and not entry.get("note"):
-            pass  # notes are encouraged but not mandatory for proved records
+        if status in ("statement_encoded", "conditional_interface", "not_started"):
+            diff = entry.get("difficulty")
+            if diff is not None and diff not in DIFFICULTIES:
+                errors.append(f"{key}: invalid difficulty {diff!r} "
+                              f"(expected one of {DIFFICULTIES})")
+            if "--require-difficulty" in sys.argv and diff is None \
+                    and entry.get("env") not in ("assumption",):
+                errors.append(f"{key}: non-proved record without a difficulty estimate")
         for ident in lean:
             module, sep, decl = ident.partition(":")
             if not sep or not module.endswith(".lean") or not decl:
@@ -323,17 +333,31 @@ def list_paper(name: str, wanted: str) -> int:
 
 
 def summary_table(names: list[str]) -> int:
-    print("| Paper | Statements | Proved | Certified | Encoded | Open |")
-    print("|---|---:|---:|---:|---:|---:|")
+    print("| Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | "
+          "Easy | Medium | Hard |")
+    print("|---|---:|---:|---:|---:|---:|---:|---:|---:|")
+    tot = Counter()
     for name in names:
         _, status_file, manifest = paper_paths(name)
         if not status_file.exists():
             continue
         status_map = json.loads(status_file.read_text(encoding="utf-8"))
         c = Counter(e["status"] for e in status_map.values())
-        print(f"| {manifest['title']} | {len(status_map)} | {c['proved']} | "
-              f"{c['computer_certified']} | {c['statement_encoded']} | "
-              f"{c['conditional_interface'] + c['not_started']} |")
+        partial = sum(1 for e in status_map.values()
+                      if e["status"] == "conditional_interface" and e.get("lean"))
+        none = c["conditional_interface"] + c["not_started"] - partial
+        d = Counter(e.get("difficulty") for e in status_map.values()
+                    if e["status"] not in ("proved", "computer_certified"))
+        row = {"n": len(status_map), "proved": c["proved"] + c["computer_certified"],
+               "enc": c["statement_encoded"], "partial": partial, "none": none,
+               "easy": d["easy"], "medium": d["medium"], "hard": d["hard"]}
+        tot.update(row)
+        print(f"| {manifest['short']} | {row['n']} | {row['proved']} | {row['enc']} | "
+              f"{row['partial']} | {row['none']} | {row['easy']} | {row['medium']} | "
+              f"{row['hard']} |")
+    print(f"| **Total** | **{tot['n']}** | **{tot['proved']}** | **{tot['enc']}** | "
+          f"**{tot['partial']}** | **{tot['none']}** | **{tot['easy']}** | "
+          f"**{tot['medium']}** | **{tot['hard']}** |")
     return 0
 
 

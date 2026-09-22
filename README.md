@@ -103,13 +103,13 @@ PDF, a `paper.json` manifest, the ledger `statements.json` mapping **every**
 theorem/proposition/lemma/corollary/definition environment to its status and
 Lean declarations, and a generated README listing every record.
 
-| Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) |
-|---|---:|---:|---:|---:|---:|
-| [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 68 | 10 | 3 | 25 | 30 |
-| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 140 | 40 | 5 | 31 | 64 |
-| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 68 | 1 | 0 | 12 | 55 |
-| [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 93 | 24 | 8 | 28 | 33 |
-| **Total** | **369** | **75** | **16** | **96** | **182** |
+| Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | Easy | Medium | Hard |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 68 | 10 | 3 | 25 | 30 | 16 | 18 | 24 |
+| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 140 | 40 | 5 | 31 | 64 | 20 | 40 | 40 |
+| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 68 | 1 | 0 | 12 | 55 | 1 | 17 | 49 |
+| [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 93 | 24 | 8 | 28 | 33 | 24 | 37 | 8 |
+| **Total** | **369** | **75** | **16** | **96** | **182** | **61** | **112** | **121** |
 
 How to read this table:
 
@@ -119,6 +119,14 @@ How to read this table:
 - *Open (partial Lean)* records point to Lean that proves a special case, one
   direction or a finite model; the note says exactly what is missing. *Open
   (none)* records have no counterpart in the library yet.
+- *Easy / Medium / Hard* estimate, for every unproved record, how far the
+  existing machinery is from a proof: **easy** is at most a day of assembling
+  existing lemmas or writing a direct definition; **medium** is several days
+  of new lemmas inside the existing finite/algebraic framework; **hard** needs
+  infrastructure that neither this library nor Mathlib has (function-space
+  compactness, unbounded operators, continuum PDE) or a reformulation before
+  the statement can be stated faithfully. Each record's `plan` field says what
+  is missing and which files to build on; the per-paper READMEs list them.
 - Coverage is strongest for the finite algebraic content: the finite
   spectralization functor and essential image, the graph and A₃ metric
   results, the commutant-duality and Howe-certificate theorems, the

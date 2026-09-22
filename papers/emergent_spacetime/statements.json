@@ -32,7 +32,9 @@
       "RenewalGeometry/Predictive/GeneratedAlgebraFlatness.lean:RenewalGeometry.flat_exhausts_generated_algebra_exact",
       "RenewalGeometry/Predictive/RelationalCompletionProcessMorphismExact.lean:RenewalGeometry.RelationalCompletionProcessMorphism.relational_completion_is_process_quotient"
     ],
-    "note": "Partial: each clause has an exact finite Lean counterpart proved separately -- (i)-(ii),(vi) derived_predictive_relation_carrier / upstream_compiler_transfer; (iii) typed Hankel realization and Hankel-rank minimality; (iv) frame-independent Choi reconstruction, positive causal comb criterion and minimal purification unique up to unitaries; (v) contextual two-sided *-ideal, normalized regular trace, Krylov/flatness exhaustion; (vii) relational completion as process quotient. Missing: no single assembly theorem, no typed cut-type grammar, and the legacy assembly records (thm:master-architecture, thm:integrated-grand-tensor) are audited as toy/conditional; canonicity of the whole tensor (eq:grand-tensor-main) is not formalized."
+    "note": "Partial: each clause has an exact finite Lean counterpart proved separately -- (i)-(ii),(vi) derived_predictive_relation_carrier / upstream_compiler_transfer; (iii) typed Hankel realization and Hankel-rank minimality; (iv) frame-independent Choi reconstruction, positive causal comb criterion and minimal purification unique up to unitaries; (v) contextual two-sided *-ideal, normalized regular trace, Krylov/flatness exhaustion; (vii) relational completion as process quotient. Missing: no single assembly theorem, no typed cut-type grammar, and the legacy assembly records (thm:master-architecture, thm:integrated-grand-tensor) are audited as toy/conditional; canonicity of the whole tensor (eq:grand-tensor-main) is not formalized.",
+    "difficulty": "hard",
+    "plan": "Every clause already has a separate exact counterpart (DerivedPredictiveCarrierUniversalExact.lean:derived_predictive_relation_carrier, TypedHankelRealization.lean:typed_hankel_realization, HankelMinimality.lean:hankel_minimality, FiniteProcessCombTomography.lean:reconstructChoiTensor_frame_independent / finiteCombPrefix_minimalPurification_unique, ContextualFutureNullIdeal.lean, IntrinsicRegularTrace.lean:regular_trace_exact, GeneratedAlgebraFlatness.lean, RelationalCompletionProcessMorphismExact.lean), but they live on heterogeneous carriers (untyped PredictiveSystem, WordRecordMachine, Choi frames). Missing is infrastructure: a typed cut-type grammar structure (def:supp-event-grammar) on which all seven clauses are re-instantiated, plus one assembly theorem; clause (vi)/(eq:grand-tensor-main) 'canonical without independently supplied ledger' is prose and needs a formal reformulation (e.g. as the conjunction of the seven universal-property statements) before it can be stated faithfully."
   },
   "prop:main-regular-graph-k4": {
     "env": "proposition",
@@ -66,7 +68,9 @@
       "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.sylvester_inertia",
       "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.posInertia_eq_card_of_eigenbasis"
     ],
-    "note": "Partial: inertia (positive/negative/null) is defined variationally and proved additive under block-diagonal / Haynsworth congruence and Sylvester-invariant, which yields inertia(diag(-N^-2, g)) = (1,3) as an instance; missing: no theorem states the (1,3) conclusion for the one-line signed extension of a positive 3-form, nor the \"every minimal nondegenerate orthogonal signed extension is this form up to overall sign\" clause. Searched: inertia, signature, (1,3), one-sign, Lorentzian inertia, TemporalPartner."
+    "note": "Partial: inertia (positive/negative/null) is defined variationally and proved additive under block-diagonal / Haynsworth congruence and Sylvester-invariant, which yields inertia(diag(-N^-2, g)) = (1,3) as an instance; missing: no theorem states the (1,3) conclusion for the one-line signed extension of a positive 3-form, nor the \"every minimal nondegenerate orthogonal signed extension is this form up to overall sign\" clause. Searched: inertia, signature, (1,3), one-sign, Lorentzian inertia, TemporalPartner.",
+    "difficulty": "easy",
+    "plan": "Formalize the 'minimal nondegenerate orthogonal signed extension' as the block form fromBlocks (-N^-2) 0 0 g on Fin 1 ⊕ Fin 3 with g PosDef (real symmetric mapped to ℂ), then apply Krein/SignedHaynsworthInertia.lean:posInertia_fromBlocks_diag together with posInertia_eq_card_of_eigenbasis to get posInertia = 3, negInertia = 1, nullInertia = 0; the 'up to overall sign' clause is the same computation for -q (inertia (3,1)). Missing only the small lemma 'posInertia of a PosDef matrix = card, negInertia = 0' and the 1x1 negative block instance."
   },
   "mt:adm": {
     "env": "theorem",
@@ -82,7 +86,9 @@
       "RenewalGeometry/Lorentz/KreinClifford.lean:RenewalGeometry.KreinCliffordDatum.symbol_square",
       "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.gt_signed_haynsworth"
     ],
-    "note": "Partial: (i) K4/A3 selection by either selector is proved; (ii)-(iv) relational_scheduler_ADM proves the six A3 dyadics span Sym_3, the rank-3 shift map with 3-dimensional circulation kernel, faithfulness of the winner-waiting exponential-race score frame (winner-only loses the common scale), the exact ADM inversion eq:adm-inversion-main and the h^-2 total-rate bound for a nondegenerate bracket; (vi) the Clifford symbol square with signature (1,3); (vii) rank persistence of endpoint/edge Grams under cofinal convergence with margin/tail witnesses. Missing: (v) the Lorentzian-inertia statement for the one-sign extension is only available as inertia additivity, \"summably correctable\" defects and the ADM-packet persistence on the canonical limit quotient are not formalized, and there is no single assembled theorem."
+    "note": "Partial: (i) K4/A3 selection by either selector is proved; (ii)-(iv) relational_scheduler_ADM proves the six A3 dyadics span Sym_3, the rank-3 shift map with 3-dimensional circulation kernel, faithfulness of the winner-waiting exponential-race score frame (winner-only loses the common scale), the exact ADM inversion eq:adm-inversion-main and the h^-2 total-rate bound for a nondegenerate bracket; (vi) the Clifford symbol square with signature (1,3); (vii) rank persistence of endpoint/edge Grams under cofinal convergence with margin/tail witnesses. Missing: (v) the Lorentzian-inertia statement for the one-sign extension is only available as inertia additivity, \"summably correctable\" defects and the ADM-packet persistence on the canonical limit quotient are not formalized, and there is no single assembled theorem.",
+    "difficulty": "medium",
+    "plan": "Clauses (i)-(iv),(vi),(vii-rank) exist: Dimension/DimensionRegularGraphExact.lean, Dimension/DimensionK4Classification.lean:dimension_K4_selector_complete, Gravity/RelationalSchedulerADM.lean:relational_scheduler_ADM, Lorentz/KreinClifford.lean:KreinCliffordDatum.symbol_square, Dimension/DimensionCofinal3Plus1.lean:exact_rank_persistence / cofinal_dimension_selection. Missing: (v) the (1,3) inertia lemma (see prop:main-signature-minimality, easy via Krein/SignedHaynsworthInertia.lean), (vii) persistence of the ADM packet under summable bracket/speed defects (continuity of the ADM inversion eq:adm-inversion-main in the bracket, i.e. continuity of Matrix.inv at units plus DimensionCofinal3Plus1.lean:margin_persists), and one bundling structure/theorem that states the seven clauses as a conjunction on a common carrier."
   },
   "thm:main-determining-kernel": {
     "env": "theorem",
@@ -170,28 +176,36 @@
     "lean": [
       "RenewalGeometry/Gravity/PalatiniInsertion.lean:RenewalGeometry.holst_palatini_coefficients_unique"
     ],
-    "note": "DOWNGRADED 2026-09-22: the cited file(s) LorentzBivectorCommutantExact.lean, LorentzInvariantDensityClassificationExact.lean do not compile against the pinned Mathlib and are excluded from the public tree; pending repair. Original assessment: Finite-dimensional classification: a real bilinear pairing on the coframe-bivector carrier invariant under all proper time-oriented Lorentz matrices (Lorentz naturality, defined by the actual induced bivector action) is uniquely a * (metric pairing) + b * (wedge pairing), i.e. the Palatini and Holst contractions; a Lorentz-natural operator on the bivector carrier is uniquely a + b Hodge (scalar residual commutant); a Lorentz-invariant alternating scalar of the coframe is c * det (the volume term); the three coefficients are unique. Scoped: the bulk term is modelled as a bivector/curvature pairing plus a coframe-alternating scalar (first order); no Palatini/Holst/Einstein action is assumed."
+    "note": "DOWNGRADED 2026-09-22: the cited file(s) LorentzBivectorCommutantExact.lean, LorentzInvariantDensityClassificationExact.lean do not compile against the pinned Mathlib and are excluded from the public tree; pending repair. Original assessment: Finite-dimensional classification: a real bilinear pairing on the coframe-bivector carrier invariant under all proper time-oriented Lorentz matrices (Lorentz naturality, defined by the actual induced bivector action) is uniquely a * (metric pairing) + b * (wedge pairing), i.e. the Palatini and Holst contractions; a Lorentz-natural operator on the bivector carrier is uniquely a + b Hodge (scalar residual commutant); a Lorentz-invariant alternating scalar of the coframe is c * det (the volume term); the three coefficients are unique. Scoped: the bulk term is modelled as a bivector/curvature pairing plus a coframe-alternating scalar (first order); no Palatini/Holst/Einstein action is assumed.",
+    "difficulty": "medium",
+    "plan": "Model the statement finite-dimensionally as in the downgraded original: bilinear pairings on the bivector carrier Fin 2 × Fin 3 (E,B) commuting with the induced action of explicit proper Lorentz generators. Lorentz/BivectorRotationCommutantExact.lean:rotation_commutant_scalar_blocks already reduces the commutant to 2x2 scalar blocks under two rotations; add one explicit boost matrix acting on (E,B) to cut the 2x2 block down to span{I, Hodge J}, giving the a + b*Hodge commutant and the a*metric + b*wedge pairing classification; the volume term is Mathlib AlternatingMap.eq_smul_basis_det (any alternating 4-form on ℝ^4 is c·det); finish with Gravity/PalatiniInsertion.lean:holst_palatini_coefficients_unique for uniqueness of (α,β,λ). Also repair the excluded LorentzBivectorCommutantExact / LorentzInvariantDensityClassificationExact files if their content is still wanted."
   },
   "thm:main-curvature-propagation": {
     "env": "theorem",
     "title": "Initial-energy curvature propagation certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Gronwall, Duhamel, curvature energy, initial-energy, propagation certificate, z_X, interpolation, lapse bound. NCG/Gravity/GrowthComparison.volterra_gronwall_zero and NCG/Grand/DuhamelDefectBound are unrelated zero-Gronwall / semigroup-defect bounds."
+    "note": "No Lean counterpart found; searched: Gronwall, Duhamel, curvature energy, initial-energy, propagation certificate, z_X, interpolation, lapse bound. NCG/Gravity/GrowthComparison.volterra_gronwall_zero and NCG/Grand/DuhamelDefectBound are unrelated zero-Gronwall / semigroup-defect bounds.",
+    "difficulty": "medium",
+    "plan": "First box: a finite-dimensional ODE y' = (K+L)y + f with M-skew K; differentiate z^2 = y^T M y (Mathlib HasDerivAt for bilinear forms), get (z^2)' ≤ 2 a z^2 + 2 z ‖f‖_M, and prove a time-dependent Gronwall comparison z(t) ≤ e^{∫a}[z(0)+∫e^{-∫a}‖f‖] via Mathlib image_le_of_liminf_slope_right_lt_deriv_boundary' (Mathlib's gronwallBound is constant-coefficient only, so this is one genuinely new lemma; regularize sqrt(z^2+δ) to avoid z = 0). Second box: abstract ‖R‖_{L^2(K)}^2 = ∫_0^{T*} N(t)‖R(t)‖^2_{L^2(Σ_t)} dt as a hypothesis on real-valued functions; then it is Cauchy–Schwarz plus sup z ≤ e^{A*}(Z*+F*). No library counterpart exists (search confirmed); no new infrastructure beyond Mathlib real analysis is needed."
   },
   "thm:main-discrete-curvature": {
     "env": "theorem",
     "title": "Fully discrete initial-energy curvature certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: discrete curvature, implicit step, (1-b), sqrt(T D), discrete Gronwall, perturbed_euler_gronwall (NCG/Grand/FastFeedback, a different linear recursion bound)."
+    "note": "No Lean counterpart found; searched: discrete curvature, implicit step, (1-b), sqrt(T D), discrete Gronwall, perturbed_euler_gronwall (NCG/Grand/FastFeedback, a different linear recursion bound).",
+    "difficulty": "medium",
+    "plan": "Purely finite-dimensional: unique solvability of (I - (s_j/2)(K_j+L_j))Y_{j+1} = ... from coercivity ⟨x,(I-(s/2)(K+L))x⟩ ≥ (1-b)|x|^2 (skew part drops, symmetric part ≤ b); energy identity by pairing the update with the midpoint gives (1 - s_ja_j/2)‖Y_{j+1}‖ ≤ (1 + s_ja_j/2)e^{d_j}‖Y_j‖ + ‖ε_j‖; then Mathlib Analysis/ODE/DiscreteGronwall.lean:discrete_gronwall_prod_general with c_j = e^{d_j}(1+s a/2)/(1-s a/2) ≤ e^{d_j + s_ja_j/(1-b)} and Cauchy–Schwarz Σ‖ε_j‖ ≤ sqrt(T_X D_X). New lemmas needed: the midpoint energy identity and the (1+x)/(1-x) ≤ e^{2x/(1-b)} bound. The final L^2(K) sentence should be scoped out (analytic, same abstraction as thm:main-curvature-propagation)."
   },
   "prop:main-action-current": {
     "env": "proposition",
     "title": "Sharp differentiated action-current certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: action current, amplification, Gamma_X, opNorm H^{1/2} T G^{1/2}, source budget, sqrt(2 T)."
+    "note": "No Lean counterpart found; searched: action current, amplification, Gamma_X, opNorm H^{1/2} T G^{1/2}, source budget, sqrt(2 T).",
+    "difficulty": "medium",
+    "plan": "First box is finite matrix algebra: with H, G PosDef, write a = G^{1/2} b (CFC.sqrt on Matrix n n ℂ or any factorization G = Lᴴ L), so ‖T a‖_H = |H^{1/2} T G^{1/2} b| ≤ ‖H^{1/2}TG^{1/2}‖_op |b| and the operator norm is the least constant (Mathlib matrix L2 operator norm via Matrix.toEuclideanLin / ContinuousLinearMap.opNorm). Second box needs Hölder/Cauchy–Schwarz on [0,T*] (MeasureTheory.integral_mul_le_Lp_mul_Lq with integrability hypotheses) after ‖f‖^2 ≤ 2(ΓCΔ + ‖r‖^2); the discrete counterpart D_X ≤ 2Σ s_j(...) is a finite sum. No library counterpart; the finite part alone would be easy."
   },
   "thm:main-curvature-compactness": {
     "env": "theorem",
@@ -201,35 +215,45 @@
       "RenewalGeometry/Gravity/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.curvature_pairing_tendsto_of_coframe_interpolation",
       "RenewalGeometry/Gravity/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.palatini_and_holst_pairings_tendsto"
     ],
-    "note": "Partial: for a uniformly bounded curvature family converging weakly and coframes converging in norm with an interpolation rate, the Palatini and Holst pairings converge to the limit pairings (abstract Banach-space statement). Missing: extraction of a weakly convergent subsequence in L^2(K) from the uniform curvature bound, the distributional identification R = d omega + omega wedge omega from the Cartan/interface hypotheses, and the countable compact exhaustion diagonal argument."
+    "note": "Partial: for a uniformly bounded curvature family converging weakly and coframes converging in norm with an interpolation rate, the Palatini and Holst pairings converge to the limit pairings (abstract Banach-space statement). Missing: extraction of a weakly convergent subsequence in L^2(K) from the uniform curvature bound, the distributional identification R = d omega + omega wedge omega from the Cartan/interface hypotheses, and the countable compact exhaustion diagonal argument.",
+    "difficulty": "hard",
+    "plan": "Needs weak sequential compactness of bounded sets in L^2(K) (Banach–Alaoglu/Eberlein–Šmulian for separable Hilbert spaces, not conveniently in Mathlib), distributional curvature identification R = dω + ω∧ω from strong L^2_loc convergence of ω (products of weakly/strongly convergent sequences, distributional exterior derivative) and a diagonal argument on a compact exhaustion. Gravity/PalatiniWeakStrongLimitExact.lean:curvature_pairing_tendsto_of_coframe_interpolation covers only the pairing limit given weak convergence as a hypothesis; the extraction and identification steps are missing analytic infrastructure."
   },
   "thm:main-open-3plus1": {
     "env": "theorem",
     "title": "Open nonsymmetric $3+1$ renewal--Einstein population",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: harmonic gauge, small data, Sobolev lifespan, H^s, Einstein residual G(g), T^3, subsidiary, finite renewal realization. The DiscreteAubinLions/StructurePreservingResponse modules concern abstract response threads, not the Einstein evolution."
+    "note": "No Lean counterpart found; searched: harmonic gauge, small data, Sobolev lifespan, H^s, Einstein residual G(g), T^3, subsidiary, finite renewal realization. The DiscreteAubinLions/StructurePreservingResponse modules concern abstract response threads, not the Einstein evolution.",
+    "difficulty": "hard",
+    "plan": "Small-data local well-posedness of the harmonic-gauge Einstein equations on T^3 in discrete Sobolev spaces H_h^s with cutoff-uniform lifespan, convergence rates O(h) of g_h, ∂_t g_h, ∂_t^2 g_h, and subsidiary-constraint propagation. Requires Sobolev spaces, nonlinear energy estimates and hyperbolic PDE theory absent from Mathlib and the library (DiscreteAnalysis/A3*Exact files are one-dimensional periodic sampling lemmas only). Not reachable without a large PDE infrastructure."
   },
   "thm:main-open-law-basin": {
     "env": "theorem",
     "title": "Open renewal-law basin with action-prepared finite seeds",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: law basin, row moment, M T h^4, energy inequality E^{3/2}, analytic zero-set chart, right inverse, codimension 4N^3."
+    "note": "No Lean counterpart found; searched: law basin, row moment, M T h^4, energy inequality E^{3/2}, analytic zero-set chart, right inverse, codimension 4N^3.",
+    "difficulty": "hard",
+    "plan": "(L1)-(L2) are cutoff-uniform nonlinear energy inequalities and jet comparisons for a family of Einstein-type writers (same PDE infrastructure as thm:main-open-3plus1). (L3) is a probabilistic shadowing estimate whose Markov/martingale part (E C_h ≤ M T h^4, Markov inequality, Borel–Cantelli via MeasureTheory.measure_limsup_eq_zero) could be isolated as a medium lemma, but its conclusion 'same Einstein limit' depends on (L1)-(L2). (L4) is an analytic implicit-function zero-set chart with a quantitative right inverse (codimension 4N^3), needing the finite constraint map from the supplement. Recommend splitting (L3)'s probabilistic bound off as a separate finite statement."
   },
   "thm:main-exact-action-response": {
     "env": "theorem",
     "title": "Exact-action response and prepared-branch structure",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: 12V-2, symplectic quotient, trace resonance 2/3, transverse shift source, signed Gram, active Gram h^16, scalar flux, time hierarchy."
+    "note": "No Lean counterpart found; searched: 12V-2, symplectic quotient, trace resonance 2/3, transverse shift source, signed Gram, active Gram h^16, scalar flux, time hierarchy.",
+    "difficulty": "hard",
+    "plan": "Depends on the exact finite-action system of Appendix supp:exact-action-audit, which has no Lean definition; the finite-dimensional sub-claims (X1 dimension count 12V-2, X3 signed-Gram/Schur-complement formulas v = w - 3(I-Π)Eχ and ‖v‖^2 = ‖w‖^2 + 9⟨χ,(I-C)χ⟩, X6 Leibniz hierarchy χ^{(j)} = H^{-1}[...]) would each be medium once that system is encoded, but (X2) h-uniform transverse spectral bounds, (X4) c h^16 active-Gram bounds at every odd cutoff and (X5) H_h^s direct-output estimates are cutoff-uniform analytic estimates. Needs the finite action defined first; then split X1/X3/X6 into separate finite records."
   },
   "prop:main-exact-action-tangency": {
     "env": "proposition",
     "title": "Exact-action tangency obstruction and upstream deformability",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: tangency, Poisson-null, R_{0i0j}, a^3 S, upstream tangent, first jet chart."
+    "note": "No Lean counterpart found; searched: tangency, Poisson-null, R_{0i0j}, a^3 S, upstream tangent, first jet chart.",
+    "difficulty": "hard",
+    "plan": "Existence of a specific prepared branch with an explicit Poisson-null tangency functional, a non-uniform curvature bound (no fixed-linear bound on a fixed interval) and an upstream tangent (Z,m) with D L = 0, D Δ_◇ ≠ 0. All objects (exact finite action, canonical first-jet chart, transported tangency system) are undefined in Lean; the negative statement 'no bound sup ‖R_{0i0j}‖ ≤ Ca can hold' requires the explicit family's asymptotics. Needs the same finite-action encoding as thm:main-exact-action-response plus explicit curvature asymptotics; research-level to reformulate."
   },
   "thm:main-renewal-einstein": {
     "env": "theorem",
@@ -242,7 +266,9 @@
       "RenewalGeometry/Gravity/PalatiniConnectionVariationExact.lean:RenewalGeometry.PalatiniConnectionVariation.connection_stationarity_euler",
       "RenewalGeometry/Gravity/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.palatini_and_holst_pairings_tendsto"
     ],
-    "note": "Partial: an abstract typed handoff proves that convergence of the finite metric/matter/Ward first variations along a cofinal subsequence with vanishing defects and injective determining test pairings forces the limiting Einstein identity (2 chi)(G + Lambda g) = stress (stress = 0 in vacuum) and a limiting common-action stationarity; connection stationarity forces the torsion Euler equation; Palatini/Holst pairings pass to weak curvature limits; coefficients are unique. Missing: instantiation of (E1)-(E5) on a spacetime cylinder (L^2_loc coframe limits, L^6 bound, curvature propagation budgets, Cartan writer), the distributional vacuum equation on the determining test core and its closure. Legacy record thm:Palatini remains conditional_interface (HARD_ANALYTIC)."
+    "note": "Partial: an abstract typed handoff proves that convergence of the finite metric/matter/Ward first variations along a cofinal subsequence with vanishing defects and injective determining test pairings forces the limiting Einstein identity (2 chi)(G + Lambda g) = stress (stress = 0 in vacuum) and a limiting common-action stationarity; connection stationarity forces the torsion Euler equation; Palatini/Holst pairings pass to weak curvature limits; coefficients are unique. Missing: instantiation of (E1)-(E5) on a spacetime cylinder (L^2_loc coframe limits, L^6 bound, curvature propagation budgets, Cartan writer), the distributional vacuum equation on the determining test core and its closure. Legacy record thm:Palatini remains conditional_interface (HARD_ANALYTIC).",
+    "difficulty": "hard",
+    "plan": "The typed handoff Gravity/ConditionalLocalWeakEinsteinMatterHandoffExact.lean:conditional_local_weak_Einstein_matter_handoff, Gravity/PalatiniConnectionVariationExact.lean and PalatiniWeakStrongLimitExact.lean cover the abstract limit passage. Missing is the instantiation of (E1)-(E5) on a spacetime cylinder: L^2_loc/L^6 coframe limits (Sobolev), the curvature propagation budgets feeding thm:main-curvature-compactness (weak L^2 compactness), the distributional Cartan writer, and the closure of the vacuum equation on the test core. These are continuum-analysis objects Mathlib lacks; only the finite/abstract layer is formalizable."
   },
   "thm:main-einstein-alternative": {
     "env": "theorem",
@@ -251,14 +277,18 @@
     "lean": [
       "RenewalGeometry/Gravity/ConditionalLocalWeakEinsteinMatterHandoffExact.lean:RenewalGeometry.ConditionalLocalWeakEinsteinMatterHandoff.conditional_local_weak_Einstein_matter_handoff"
     ],
-    "note": "Partial: the passing branch (A1) is covered only at the abstract typed-handoff level (see thm:main-renewal-einstein); missing: the certification procedure as a decidable compiler on the actual records, the failure-witness branch (A2) with its residual/budget/margin/compactness witnesses, and the continuum Lorentzian 3+1 conclusion. FiniteFieldShellCompilerExact is a different (field-shell) alternative and is not cited."
+    "note": "Partial: the passing branch (A1) is covered only at the abstract typed-handoff level (see thm:main-renewal-einstein); missing: the certification procedure as a decidable compiler on the actual records, the failure-witness branch (A2) with its residual/budget/margin/compactness witnesses, and the continuum Lorentzian 3+1 conclusion. FiniteFieldShellCompilerExact is a different (field-shell) alternative and is not cited.",
+    "difficulty": "hard",
+    "plan": "Branch (A1) is thm:main-renewal-einstein (hard). Branch (A2) requires encoding the whole certification procedure as a decidable compiler on the actual records with failure witnesses (residuals bounded away from zero, diverging budgets, vanishing margins, escaping compactness tails) — a large new structure over undefined continuum objects. A finite toy version (decidable check of finitely many real-valued residuals against thresholds, returning either pass or a witness index) would be easy but is not the theorem as stated; the statement needs reformulation."
   },
   "thm:main-homogeneous-friedmann": {
     "env": "theorem",
     "title": "Vacuum Friedmann equations in renewal coordinates",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found for the renewal-coordinate action S[kappa,varrho], its Euler expressions E_u, E_v, or the equivalence with 3H^2 = Lambda, D_tau H = 0; searched: Friedmann, FLRW action, lapse Euler, varrho, kappa, Hubble. NCG/Gravity/FLRWReduction and CurvedFLRW concern a different (pure-deficiency) FLRW constraint."
+    "note": "No Lean counterpart found for the renewal-coordinate action S[kappa,varrho], its Euler expressions E_u, E_v, or the equivalence with 3H^2 = Lambda, D_tau H = 0; searched: Friedmann, FLRW action, lapse Euler, varrho, kappa, Hubble. NCG/Gravity/FLRWReduction and CurvedFLRW concern a different (pure-deficiency) FLRW constraint.",
+    "difficulty": "medium",
+    "plan": "No library counterpart (Gravity/CurvedFLRW.lean is the pure-deficiency FLRW constraint). Define the Lagrangian L(u,v,u',v') = -(2/3)ϱ'^2/(ϱ^{4/3}√κ) - 2Λϱ^{4/3}√κ with κ = e^u, ϱ = e^v, define the Euler expressions E_u = ∂L/∂u - d/dt ∂L/∂u', E_v likewise (Mathlib deriv / HasDerivAt), and verify the two boxed formulas by chain-rule bookkeeping under a = ϱ^{1/3}, N = ϱ^{1/3}κ^{1/2}, H = a'/(N a); then stationarity ⇔ (3H^2 = Λ ∧ D_τ H = 0) is algebra using N a^3 > 0. The derivation of eq:main-renewal-rate-action from S[a,N] is a substitution identity (easy). Only the identification δS = ∫(E_u δu + E_v δv) via integration by parts (intervalIntegral.integral_mul_deriv_eq_deriv_mul with compactly supported variations) is a small extra lemma."
   },
   "cor:main-derived-desitter-rates": {
     "env": "corollary",
@@ -270,56 +300,72 @@
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.adm_variables_exact",
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.conductance_exact"
     ],
-    "note": "Partial: the displayed expanding de Sitter regulator (eq:desitter-regulator-main with a_0 = 1, t_0 = 0, N = 1) is encoded explicitly as rootRate H h t = exp(-2Ht)/(8h^2) and vertexMass = exp(3Ht) h^3, and its ADM variables/conductance are computed; missing: the classification of all positive connected stationary solutions of eq:main-renewal-rate-action (a = a_0 exp(sigma H_0 tau)), the sigma = -1 branch, the Lambda = 0 constant branch and the Lambda < 0 nonexistence."
+    "note": "Partial: the displayed expanding de Sitter regulator (eq:desitter-regulator-main with a_0 = 1, t_0 = 0, N = 1) is encoded explicitly as rootRate H h t = exp(-2Ht)/(8h^2) and vertexMass = exp(3Ht) h^3, and its ADM variables/conductance are computed; missing: the classification of all positive connected stationary solutions of eq:main-renewal-rate-action (a = a_0 exp(sigma H_0 tau)), the sigma = -1 branch, the Lambda = 0 constant branch and the Lambda < 0 nonexistence.",
+    "difficulty": "easy",
+    "plan": "Take stationarity in its Friedmann form 3H^2 = Λ, D_τ H = 0 (the output of thm:main-homogeneous-friedmann) as hypothesis. Then H = ±H_0 with constant sign on a connected interval (continuous function into {−H_0,H_0} is constant), d/dt(log a − σH_0 τ) = N(H − σH_0) = 0 so Mathlib constant_of_derivWithin_zero / is_const_of_deriv_eq_zero gives a = a_0 e^{σH_0(τ−τ_0)}; ϱ = a^3, κ = N^2/a^2 are the definitions eq:main-isotropic-renewal-map, and with N = 1 the regulator rates are exactly Gravity/RelationalDeSitterBranch.lean:rootRate / vertexMass (generalize a_0, t_0). Λ = 0 gives H = 0 hence a constant; Λ < 0 contradicts 3H^2 ≥ 0. Only the sign-connectedness lemma and the general (a_0,t_0) rates are new."
   },
   "thm:main-finite-homogeneous-stationarity": {
     "env": "theorem",
     "title": "Finite stationary classification and de Sitter convergence",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: discrete homogeneous action, lapse constraint, stationary recurrence (1 + sigma omega s/2)/(1 - sigma omega s/2), second-order logarithmic error, omega^3 T h_t^2."
+    "note": "No Lean counterpart found; searched: discrete homogeneous action, lapse constraint, stationary recurrence (1 + sigma omega s/2)/(1 - sigma omega s/2), second-order logarithmic error, omega^3 T h_t^2.",
+    "difficulty": "medium",
+    "plan": "No library counterpart. Encode S_d = -Σ_j [A_0 (q_{j+1}-q_j)^2/s_j + B_0 s_j q̄_j^2] as a function on (Fin (M+1) → ℝ) × (Fin M → ℝ) and compute its partial derivatives (Mathlib HasDerivAt on finite sums) to get eq:main-discrete-lapse-constraint and eq:main-discrete-scale-euler; the lapse constraint gives v_j = σ_j ω q̄_j, the scale equation forces σ_j = σ_{j−1} for positive q, yielding the rational recurrence; the converse is substitution. The error bound uses log((1+x)/(1−x)) = 2 artanh x (Mathlib Analysis/SpecialFunctions/Artanh.lean:artanh_eq_half_log) and a new lemma 0 ≤ artanh x − x ≤ x^3/(3(1−b^2)) for 0 ≤ x ≤ b < 1 (monotonicity via derivative x^2/(1−x^2)), summed with Σ s_j^3 ≤ T h_t^2."
   },
   "thm:main-operational-action-matching": {
     "env": "theorem",
     "title": "Measured acceptance reconstructs the finite action",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: accept/reject, trial table, log Z_s, observed writer, off-shell action match, Lambda_act, Lambda_geom, rank-one cost. NCG/Grand/AcceptanceLikelihood and NCG/Renewal/AcceptedResponseLaw are unrelated."
+    "note": "No Lean counterpart found; searched: accept/reject, trial table, log Z_s, observed writer, off-shell action match, Lambda_act, Lambda_geom, rank-one cost. NCG/Grand/AcceptanceLikelihood and NCG/Renewal/AcceptedResponseLaw are unrelated.",
+    "difficulty": "medium",
+    "plan": "eq:main-observed-cost is immediate from the definitions Z_s, Q_s (same shape as Action/FiniteGibbsActionGap.lean:gibbsRow / gibbsPartition with η = 1/ε and c = E_s; cf. log_ratio_gibbsRow). eq:main-offshell-action-match is a telescoping finite sum of C(q_{j+1}^2 − q_j^2) against C(q_M^2 − q_0^2) (Finset.sum_range_sub). The mismatch box needs (a) the one-step minimizer of y ↦ E_s(x,y) and its s → 0 drift c = −C/A (a limit of a rational function), and (b) the de Sitter Einstein tensor identity G + Λ_geom g = 0 from Gravity/RelationalDeSitterBranch.lean:einstein_cosmological_vacuum with H = 2C/(3A)... so that G + Λ_act g = (Λ_act − Λ_geom) g = 4𝔇/(3A^2) g by algebra. Parts (a)-(b) are the new medium lemmas; the first two boxes are easy."
   },
   "thm:main-explicit-operational-family": {
     "env": "theorem",
     "title": "Finite positive operational family with an Einstein limit",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: retry cap, M^-4, M^-6, proposal alphabet, piecewise-affine, H^1 convergence, stochastic profile."
+    "note": "No Lean counterpart found; searched: retry cap, M^-4, M^-6, proposal alphabet, piecewise-affine, H^1 convergence, stochastic profile.",
+    "difficulty": "hard",
+    "plan": "Requires constructing stochastic accept/reject cylinders (finite grids, temperature schedule) and proving E[E_M] ≤ C M^{-4}, E max|q_j − q_0 e^{σωτ_j}| ≤ C M^{-2}, retry failure ≤ M^{-6}, first-variation residuals O(M^{-2}) for every smooth test, a.s. finitely many failures (Borel–Cantelli exists in Mathlib) and strong H^1 convergence of piecewise-affine paths (H^1 not in Mathlib). The Laplace-type low-temperature concentration estimates on finite grids are a long probabilistic construction with no library analogue (Action/FiniteGibbsActionGap.lean gives only the exact Gibbs KL identities)."
   },
   "thm:main-no-blocking-attractor": {
     "env": "theorem",
     "title": "No transverse matching attraction under conservative blocking",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: blocking, hyperbolic composition E_{mu,theta,C}, AB = mu^2, Delta_rel, midpoint interval map, twist C. NCG/Grand/BlockingGap concerns spectral blocking of a projection and is unrelated."
+    "note": "No Lean counterpart found; searched: blocking, hyperbolic composition E_{mu,theta,C}, AB = mu^2, Delta_rel, midpoint interval map, twist C. NCG/Grand/BlockingGap concerns spectral blocking of a projection and is unrelated.",
+    "difficulty": "medium",
+    "plan": "The core is finite algebra with hyperbolic functions (Mathlib Real.cosh_add/sinh_add): E_1(x,z)+E_2(z,y) is a quadratic in z with leading coefficient μ(coth θ_1 + coth θ_2) > 0 whose minimizer z* = (csch θ_1 x + csch θ_2 y)/(coth θ_1+coth θ_2) is positive for x,y > 0, so the inf over z > 0 is attained (complete the square; ciInf over Ioi 0), and substituting gives E_{μ,θ_1+θ_2,C} via coth/csch addition formulas. The (A',B',C') block map and invariance of AB, C, 𝔇, Δ_rel then follow from the dictionary A/s ± Bs/4 = μ coth θ, μ csch θ (Mathlib Artanh.lean for θ = 2 artanh). The final sentence (finite amplitude alphabets, low-temperature/grid limit recovering Δ_rel) is an analytic Laplace-method claim and should be split off as a separate (hard) record."
   },
   "prop:main-optimizer-composition": {
     "env": "proposition",
     "title": "Optimizer composition characterizes action--law matching",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: optimizer, cosh theta + rho sinh theta, r_theta, composition defect sinh sinh, Delta_rel. The cosh/sinh files (MediumProved03, CurieWeiss, DeSitterChart) are unrelated."
+    "note": "No Lean counterpart found; searched: optimizer, cosh theta + rho sinh theta, r_theta, composition defect sinh sinh, Delta_rel. The cosh/sinh files (MediumProved03, CurieWeiss, DeSitterChart) are unrelated.",
+    "difficulty": "easy",
+    "plan": "Pure real algebra: y ↦ E_{μ,θ,C}(x,y) is a quadratic with leading coefficient μ coth θ + C > 0 (since |ρ| ≤ 1 and cosh θ > |sinh θ|), so the unique minimizer over y > 0 is y = x/(cosh θ + ρ sinh θ) (complete the square; positivity of the minimizer for x > 0); the defect identity r_{θ+φ}^{-1} − r_θ^{-1}r_φ^{-1} = (1−ρ^2) sinh θ sinh φ is Real.cosh_add / Real.sinh_add plus ring, and the 'one pair at one x > 0 suffices' clause is sinh θ sinh φ > 0. On Δ_rel = 0, cosh θ ± sinh θ = e^{±θ} (Real.cosh_add_sinh). No library dependencies beyond Mathlib."
   },
   "thm:main-gowdy-regulator": {
     "env": "theorem",
     "title": "Nonlinear two-polarization renewal regulator",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Gowdy, two-polarization, staggered momentum, Strang/source-transport splitting, cubic Hermite readout, areal gauge, Riem L^infty."
+    "note": "No Lean counterpart found; searched: Gowdy, two-polarization, staggered momentum, Strang/source-transport splitting, cubic Hermite readout, areal gauge, Riem L^infty.",
+    "difficulty": "hard",
+    "plan": "A nonlinear finite-difference scheme for the two-polarization Gowdy system on a slab with an exact discrete conserved momentum (G1: finite algebra, could be isolated), but (G2)-(G4) need cutoff-uniform nonlinear stability in discrete W^{r,∞} norms with bootstrap, cubic Hermite interpolation error estimates in W^{1,∞} and for second derivatives, and pathwise curvature comparison Riem(g_h) → Riem(g_*) — numerical-analysis/PDE infrastructure absent from Mathlib and the library (DiscreteAnalysis/UniformFiniteDifferenceRemainderExact.lean is one-dimensional Taylor remainder only). Only (G1) is plausibly medium as a standalone record."
   },
   "prop:main-safe-access": {
     "env": "proposition",
     "title": "Finite proposal-access certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: proposal access, retry, KL >= -log p(G), exp(-R mu e^{-c/eps}), Gibbs acceptance rule with indicator."
+    "note": "No Lean counterpart found; searched: proposal access, retry, KL >= -log p(G), exp(-R mu e^{-c/eps}), Gibbs acceptance rule with indicator.",
+    "difficulty": "medium",
+    "plan": "Finite probability: Z_j = Σ_y p_j(y) 1_G(y) e^{−E_j(y)/ε_j} gives μ_j e^{−c_j/ε_j} ≤ Z_j ≤ p_j(G) by termwise bounds (Finset.sum_le_sum), the KL bound D_KL(Q_j‖p_j) ≥ −log p_j(G) follows from the log-sum inequality / Jensen with Mathlib convexOn_mul_log (or Mathlib InformationTheory/KullbackLeibler data processing) applied to the partition {G, G^c}, building on Action/FiniteGibbsActionGap.lean:finiteKL / gibbsRow; the retry bound is (1−Z_j)^{R_j} ≤ exp(−R_j Z_j) with a union bound over stages under an independent-retries model (finite product measure, Real.add_one_le_exp). The last two sentences (inheritance from thm:main-gowdy-regulator, a.s. along refinements) are conditional on the hard Gowdy theorem plus Borel–Cantelli (MeasureTheory.measure_limsup_eq_zero) and should be stated as a separate conditional clause."
   },
   "mt:vacuum": {
     "env": "theorem",
@@ -337,7 +383,9 @@
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.compact_desitter_global_slicing_certificate",
       "RenewalGeometry/Gravity/RelationalFlatVacuum.lean:RenewalGeometry.relational_flat_vacuum"
     ],
-    "note": "Partial: (ii) the A3 root law reconstructs the displayed ADM variables (flat: tight-frame identity and h/8 conductance; de Sitter: lapse 1, shift 0, metric exp(2Ht) I); (iii) the de Sitter metric equals the FLRW metric and satisfies Ric - (R/2) g + Lambda g = 0 with Lambda = 3H^2 and R = 12H^2; (iv) one positive slab margin bounds the cut, Poincare, counting and screen constants uniformly on |t| <= T; (v) the curvature tensor is the explicit constant-curvature tensor (flat: zero), bounded on slabs; (vi) along h_n = 2^{-n^2} the time transport is metric-unitary and the normalized torsion/curvature/Palatini defects are O(h_n) and summable. Missing: (i) the lapse-varied Euler system and the finite-to-continuum stationary limit, the actual h -> 0 convergence of the regulator sequence to the metric (only the explicit continuum objects are checked), and the operational accept/reject realization. Legacy: thm:relational-deSitter-branch proved, cor:relational-flat-vacuum audited SLICE_THIN."
+    "note": "Partial: (ii) the A3 root law reconstructs the displayed ADM variables (flat: tight-frame identity and h/8 conductance; de Sitter: lapse 1, shift 0, metric exp(2Ht) I); (iii) the de Sitter metric equals the FLRW metric and satisfies Ric - (R/2) g + Lambda g = 0 with Lambda = 3H^2 and R = 12H^2; (iv) one positive slab margin bounds the cut, Poincare, counting and screen constants uniformly on |t| <= T; (v) the curvature tensor is the explicit constant-curvature tensor (flat: zero), bounded on slabs; (vi) along h_n = 2^{-n^2} the time transport is metric-unitary and the normalized torsion/curvature/Palatini defects are O(h_n) and summable. Missing: (i) the lapse-varied Euler system and the finite-to-continuum stationary limit, the actual h -> 0 convergence of the regulator sequence to the metric (only the explicit continuum objects are checked), and the operational accept/reject realization. Legacy: thm:relational-deSitter-branch proved, cor:relational-flat-vacuum audited SLICE_THIN.",
+    "difficulty": "medium",
+    "plan": "Clauses (ii)-(vi) are proved in Gravity/RelationalDeSitterBranch.lean (adm_variables_exact, einstein_cosmological_vacuum, slab_spatial_constants_common_lower, cartan_constant_sectional_curvature, timeTransport_metric_unitary, explicit_geometric_defects_summable) and Gravity/RelationalFlatVacuum.lean:relational_flat_vacuum. Missing for (i): the Friedmann Euler system (thm:main-homogeneous-friedmann, medium) and the finite-to-continuum limit (thm:main-finite-homogeneous-stationarity, medium); the 'h → 0 convergence of the regulator sequence' is trivial on this branch since rootRate/vertexMass give h-independent ADM variables (adm_variables_exact). Then one assembly theorem. The closing sentence about the accept/reject realization depends on thm:main-explicit-operational-family (hard) and should be split off."
   },
   "def:supp-event-grammar": {
     "env": "definition",
@@ -347,7 +395,9 @@
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem",
       "RenewalGeometry/Predictive/GeneratedMinimalRecord.lean:RenewalGeometry.WordRecordMachine.MinimalRecordExact"
     ],
-    "note": "Partial: the closest carriers are PredictiveSystem (History, Letter, step) and WordRecordMachine (letters, records, Read alphabet); missing: cut types, typed letters a : x -> y, prefix-closed typed histories, preparation/intervention/terminal-Read alphabets and the protected binary orientation record are not encoded as one grammar structure. Searched: grammar, cut type, typed history, orientation record."
+    "note": "Partial: the closest carriers are PredictiveSystem (History, Letter, step) and WordRecordMachine (letters, records, Read alphabet); missing: cut types, typed letters a : x -> y, prefix-closed typed histories, preparation/intervention/terminal-Read alphabets and the protected binary orientation record are not encoded as one grammar structure. Searched: grammar, cut type, typed history, orientation record.",
+    "difficulty": "easy",
+    "plan": "Write a structure directly: a Fintype of cut types O, letter sets Σ : O → O → Type with Fintype, typed histories as a prefix-closed predicate on lists of dependent letters (or a Quiver-path type) ending at each cut type, finite preparation/intervention/terminal-Read alphabets and port types as extra Fintype fields, and the orientation record as a Bool-valued field with a policy predicate separating its two values. Nothing analytic; only the typed history type (dependent list / Quiver.Path over O) is new relative to Predictive/DerivedPredictiveCarrierUniversalExact.lean:PredictiveSystem and Predictive/GeneratedMinimalRecord.lean:WordRecordMachine."
   },
   "def:supp-operational-datum": {
     "env": "definition",
@@ -357,7 +407,9 @@
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem",
       "RenewalGeometry/Predictive/FiniteProcessCombTomography.lean:RenewalGeometry.PhysicalChoiTomographyFrame"
     ],
-    "note": "Partial: PredictiveSystem encodes a one-step branch law with the chain law p(a::w | h) = branch h a * p(w | step h a) and p(empty | h) = 1; PhysicalChoiTomographyFrame encodes a finite spanning positive trace-normalized CP probe frame with Hermitian duals. Missing: row normalization sum_a p(a|h) = 1 and positivity are not fields of PredictiveSystem, and the multitime affinity/coarse-graining/causality/prefix-compatibility clauses are not bundled."
+    "note": "Partial: PredictiveSystem encodes a one-step branch law with the chain law p(a::w | h) = branch h a * p(w | step h a) and p(empty | h) = 1; PhysicalChoiTomographyFrame encodes a finite spanning positive trace-normalized CP probe frame with Hermitian duals. Missing: row normalization sum_a p(a|h) = 1 and positivity are not fields of PredictiveSystem, and the multitime affinity/coarse-graining/causality/prefix-compatibility clauses are not bundled.",
+    "difficulty": "medium",
+    "plan": "Extend PredictiveSystem (Predictive/DerivedPredictiveCarrierUniversalExact.lean) over the typed grammar of def:supp-event-grammar with fields 0 ≤ p(a|h), Σ_a p(a|h) = 1 (cf. Predictive/RelationalCompletion.lean:Kernel.normalized), keeping probability_cons as the chain law; bundle the intervention letters with a finite spanning CP frame on each Hermitian Choi space (Predictive/FiniteProcessCombTomography.lean:PhysicalChoiTomographyFrame) and state the multitime affinity/coarse-graining/normalization/causality/prefix-compatibility and positivity clauses as Prop fields phrased via the (proved) thm:supp-comb-tomography hypotheses. New supporting structure needed to tie the typed grammar to the Choi frames; no analysis."
   },
   "def:supp-future-signature": {
     "env": "definition",
@@ -368,7 +420,9 @@
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.futureSetoid",
       "RenewalGeometry/Certificates/CertificateRecordBatch02.lean:RenewalGeometry.futureSignatureSetoid"
     ],
-    "note": "FutureEquivalent h h' := forall w, probability h w = probability h' w encodes eq:supp-future-equivalence with the future bank = all finite letter words; the setoid is the quotient relation. Scoped: a single history type per PredictiveSystem, so cut typing is handled fibrewise (histories of different types live in different systems) rather than by an explicit type check."
+    "note": "FutureEquivalent h h' := forall w, probability h w = probability h' w encodes eq:supp-future-equivalence with the future bank = all finite letter words; the setoid is the quotient relation. Scoped: a single history type per PredictiveSystem, so cut typing is handled fibrewise (histories of different types live in different systems) rather than by an explicit type check.",
+    "difficulty": "easy",
+    "plan": "Already encoded fibrewise by PredictiveSystem.FutureEquivalent / futureSetoid. To match the typed statement, index histories by cut type (History : O → Type) so that h ∼ h' is only defined for the same x, and restrict the test bank to the finite future bank F_{X,x} (a Finset of admissible typed words) instead of all lists; this is a direct definitional refinement once def:supp-event-grammar exists."
   },
   "thm:supp-right-congruence": {
     "env": "theorem",
@@ -392,7 +446,9 @@
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.minimalUpdate_mk_of_occurs",
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.minimalBranch_mk"
     ],
-    "note": "MinimalCarrier = Quotient futureSetoid encodes Z^min with the canonical projection Quotient.mk; minimalBranch a [h] = branch h a (definitional) and minimalUpdate a [h] = [step h a] on occurring branches (minimalUpdate_mk_of_occurs; off-branch it uses a canonical effective step). Definition faithfully encoded, fibrewise in cut type."
+    "note": "MinimalCarrier = Quotient futureSetoid encodes Z^min with the canonical projection Quotient.mk; minimalBranch a [h] = branch h a (definitional) and minimalUpdate a [h] = [step h a] on occurring branches (minimalUpdate_mk_of_occurs; off-branch it uses a canonical effective step). Definition faithfully encoded, fibrewise in cut type.",
+    "difficulty": "easy",
+    "plan": "Already encoded by PredictiveSystem.MinimalCarrier, minimalUpdate, minimalBranch (Predictive/DerivedPredictiveCarrierUniversalExact.lean) with minimalUpdate_mk_of_occurs giving T_a([h]) = [ha] on occurring branches. Typed version: quotient each fibre H_{X,x} separately and let T_{X,a} : Z_x → Z_y for a : x → y; direct definition over the typed grammar."
   },
   "cor:supp-derived-state-machine": {
     "env": "corollary",
@@ -415,7 +471,9 @@
     "lean": [
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization"
     ],
-    "note": "Realization State bundles stateOf : History -> State, update, rate with reachability (stateOf surjective), state_step (s(ha) = u_a(s(h))) and branch_factor (p(a|h) = r_a(s(h))). Scoped: updates are total functions rather than partial maps, an extra futureLaw field with future_factor is carried, and finiteness of the state sets is not required."
+    "note": "Realization State bundles stateOf : History -> State, update, rate with reachability (stateOf surjective), state_step (s(ha) = u_a(s(h))) and branch_factor (p(a|h) = r_a(s(h))). Scoped: updates are total functions rather than partial maps, an extra futureLaw field with future_factor is carried, and finiteness of the state sets is not required.",
+    "difficulty": "easy",
+    "plan": "PredictiveSystem.Realization (Predictive/DerivedPredictiveCarrierUniversalExact.lean) already has stateOf, update, rate with reachability, state_step and branch_factor. Missing only cosmetic refinements: finiteness [Fintype (S x)] per cut type, typed partial updates u_a : S x → Option (S y) (or total maps on occurring branches), and dropping the extra futureLaw field; write the typed structure directly."
   },
   "thm:supp-minimal-record": {
     "env": "theorem",
@@ -528,7 +586,9 @@
       "RenewalGeometry/Predictive/FiniteMomentKrylovSourceDuality.lean:RenewalGeometry.finiteMoment_sourceFixingIntertwiner_existsUnique",
       "RenewalGeometry/Predictive/WordBasisMonoidalTransport.lean:RenewalGeometry.WordBasisMonoidalTransport.word_level_monoidal_transport"
     ],
-    "note": "Partial: rank stabilization of the word/Krylov filtration at one depth forces stabilization forever and exhaustion of the generated algebra (flat_exhausts_generated_algebra_exact, krylov_stable_eq_minimal), a stable index exists in finite dimension (exists_stable_index), finite moment agreement through depth 2d-1 with Krylov minimality reconstructs the represented generator and source up to a unique unitary (finiteMoment_sourceFixingIntertwiner_existsUnique), and a word-basis isometry is a star-algebra isomorphism iff its monoidal innovation vanishes. Missing: positivity of the panels K_{X,r} as Grams, a single theorem for multi-letter typed word panels reconstructing units, multiplication, involution and the predictive core algebras at depth r_X + 1."
+    "note": "Partial: rank stabilization of the word/Krylov filtration at one depth forces stabilization forever and exhaustion of the generated algebra (flat_exhausts_generated_algebra_exact, krylov_stable_eq_minimal), a stable index exists in finite dimension (exists_stable_index), finite moment agreement through depth 2d-1 with Krylov minimality reconstructs the represented generator and source up to a unique unitary (finiteMoment_sourceFixingIntertwiner_existsUnique), and a word-basis isometry is a star-algebra isomorphism iff its monoidal innovation vanishes. Missing: positivity of the panels K_{X,r} as Grams, a single theorem for multi-letter typed word panels reconstructing units, multiplication, involution and the predictive core algebras at depth r_X + 1.",
+    "difficulty": "medium",
+    "plan": "Positivity of K_{X,r}: define the depth-r panel as the Gram matrix of represented word vectors and use Mathlib Matrix.posSemidef_conjTranspose_mul_self. Least stabilization depth and exhaustion: Predictive/KrylovLocalizerFlatnessExact.lean:exists_stable_index / krylov_stable_eq_minimal and Predictive/GeneratedAlgebraFlatness.lean:flat_exhausts_generated_algebra_exact, generalized from one operator T to the finitely many typed letter operators (multi-generator Krylov filtration is a new but routine lemma). Reconstruction at depth r_X+1: new lemma that the Gram panel through depth r+1 determines structure constants of multiplication and involution on the word span (the multi-letter analogue of Predictive/FiniteMomentKrylovSourceDuality.lean:finiteMoment_sourceFixingIntertwiner_existsUnique) and hence the unit/core algebras; also use Predictive/WordBasisMonoidalTransport.lean:word_level_monoidal_transport."
   },
   "thm:supp-relative-primitive-floor": {
     "env": "theorem",
@@ -542,7 +602,9 @@
       "RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean:RenewalGeometry.OrientationCalibrationResidual.orientation_absorbed_iff_read_decoder",
       "RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean:RenewalGeometry.OrientationCalibrationResidual.invariant_packet_no_equivariant_orientation"
     ],
-    "note": "Partial: (R2)-(R3) are proved only in a four-field record toy model (FiniteAuditModel = Bool x Bernoulli x PlaneSection x PositiveCalibration) where each separating pair is two records differing in one field and cofinal stability is injectivity of split spectator embeddings/faithful pullbacks; (R4) is rendered as the iff 'P ≃ Bool <-> encoder/Read-decoder pair' plus a no-go for equivariant orientation choice on a reversal-fixed packet; missing: the category of finite typed operational-predictive models, (R1) sufficiency as a statement, and the orientation pair's 'identical positive Gram data' beyond the scalar coefficient^2 witness."
+    "note": "Partial: (R2)-(R3) are proved only in a four-field record toy model (FiniteAuditModel = Bool x Bernoulli x PlaneSection x PositiveCalibration) where each separating pair is two records differing in one field and cofinal stability is injectivity of split spectator embeddings/faithful pullbacks; (R4) is rendered as the iff 'P ≃ Bool <-> encoder/Read-decoder pair' plus a no-go for equivariant orientation choice on a reversal-fixed packet; missing: the category of finite typed operational-predictive models, (R1) sufficiency as a statement, and the orientation pair's 'identical positive Gram data' beyond the scalar coefficient^2 witness.",
+    "difficulty": "hard",
+    "plan": "(R2)-(R4) are already witnessed in the four-field toy model RenewalGeometry/Certificates/RelativeUpstreamPrimitiveClosure.lean (four_rows_irredundant, four_pairs_remain_separating, downstream_packet_factors) and OrientationCalibrationResidualExact.lean (orientation_absorbed_iff_read_decoder). What blocks a faithful statement is the 'fixed category of finite typed operational-predictive models' with anchored isomorphisms and conservative refinement functors: it does not exist in the library and (R1) 'the rows are sufficient for the reconstruction used below' is a meta-claim about other theorems, so the record needs reformulation (at best R1 becomes a conjunction of the already-proved cited theorems). A cheap partial upgrade is to replace PlaneSection.positiveGram (a scalar) by the 2x2 Gram matrix I_2 with alternating coefficients +-1 so that 'identical positive Gram data' is literal; the categorical closure remains research-level."
   },
   "thm:supp-calibration-fibre": {
     "env": "theorem",
@@ -557,7 +619,9 @@
       "RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean:RenewalGeometry.OrientationCalibrationResidual.physicalResidual_dimension",
       "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.relational_scheduler_ADM"
     ],
-    "note": "Partial: (K1) the solution set of Lx=b is x0 + ker L with dim = dim V - rank L (finite-dimensional V), (K2) every injective linear anchor bank on ker L has at least dim ker L coordinates and a bijective bank with exactly dim ker L exists, (K3) the residual ker L / Im U has dimension N - rank L - d for injective U, and the winner-law invariance under common rescaling of (K4) (clause A3' of relational_scheduler_ADM) are proved; missing: the anchor count stated on the quotient K_L^phys itself and the clause that the waiting-time scale separates the common-rate direction."
+    "note": "Partial: (K1) the solution set of Lx=b is x0 + ker L with dim = dim V - rank L (finite-dimensional V), (K2) every injective linear anchor bank on ker L has at least dim ker L coordinates and a bijective bank with exactly dim ker L exists, (K3) the residual ker L / Im U has dimension N - rank L - d for injective U, and the winner-law invariance under common rescaling of (K4) (clause A3' of relational_scheduler_ADM) are proved; missing: the anchor count stated on the quotient K_L^phys itself and the clause that the waiting-time scale separates the common-rate direction.",
+    "difficulty": "easy",
+    "plan": "(K1)-(K3 dimension) are proved in RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean. Missing pieces are routine: (i) re-run anchor_bank_lower_bound / exists_minimal_anchor_bank with the domain replaced by the finite-dimensional quotient PhysicalResidual L J hLJ (Module.Finite instance for Submodule.Quotient is automatic), giving 'one anchor per quotient direction is necessary and sufficient'; (ii) encode (K4) as: for k : Fin 6 -> R positive, the pair (winner law k_b / sum k, total rate sum k) determines k (k_b = p_b * sum k), while the common rescaling clause is already clause A3' of RenewalGeometry/Gravity/RelationalSchedulerADM.lean:relational_scheduler_ADM; the exponential waiting-time law with rate sum k can be cited from the same file's race-moment integrals."
   },
   "ass:supp-relational-branch": {
     "env": "assumption",
@@ -568,7 +632,9 @@
       "RenewalGeometry/Dimension/DimensionPairwiseCompletionExact.lean:RenewalGeometry.FutureMinimalSerialCell.futureSetoid",
       "RenewalGeometry/Dimension/DimensionPairwise.lean:RenewalGeometry.dimension_pairwise_completion"
     ],
-    "note": "Encoded as a definition (assumption, no proof obligation): the one-source/one-target serial relation cell with involutive reversal swapping endpoints and a complete future signature is the structure NCG.FutureMinimalSerialCell, future-minimal identification is the quotient by future-signature equality (futureSetoid), and invariance under a group transitive on unordered endpoint pairs plus nonemptiness are the hypotheses htrans/hRinv/hne of dimension_pairwise_completion."
+    "note": "Encoded as a definition (assumption, no proof obligation): the one-source/one-target serial relation cell with involutive reversal swapping endpoints and a complete future signature is the structure NCG.FutureMinimalSerialCell, future-minimal identification is the quotient by future-signature equality (futureSetoid), and invariance under a group transitive on unordered endpoint pairs plus nonemptiness are the hypotheses htrans/hRinv/hne of dimension_pairwise_completion.",
+    "difficulty": "easy",
+    "plan": "Assumption, already encoded as RenewalGeometry/Dimension/DimensionPairwiseCompletionExact.lean:FutureMinimalSerialCell with futureSetoid and the transitivity/reversal/nonemptiness hypotheses of RenewalGeometry/Dimension/DimensionPairwise.lean:dimension_pairwise_completion. Nothing to prove; if a single named object is wanted, bundle the four clauses (one source/one target, involutive reversal, future-minimal quotient, transitive invariance + nonempty) into one structure extending FutureMinimalSerialCell."
   },
   "lem:supp-pair-completion": {
     "env": "lemma",
@@ -641,7 +707,9 @@
       "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.a3ShiftMap",
       "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.a3Cycle"
     ],
-    "note": "Partial: (A1) the six root dyadics are a basis of Sym_3, (A2) the rate-difference map is onto R^3 with kernel exactly the span of the three tetrahedral face-cycle vectors (finrank 3), and (A4) the displayed inversion g = ϱ^{2/3}(det B)^{1/3}B^{-1}, N = ϱ^{1/3}(det B)^{1/6} satisfies √det g = ϱ and N^2 g^{-1} = B for every ϱ > 0 and det B > 0 are proved; missing: uniqueness of the solution of B = N^2 g^{-1}, ϱ = √det g (only existence via the explicit formula is checked)."
+    "note": "Partial: (A1) the six root dyadics are a basis of Sym_3, (A2) the rate-difference map is onto R^3 with kernel exactly the span of the three tetrahedral face-cycle vectors (finrank 3), and (A4) the displayed inversion g = ϱ^{2/3}(det B)^{1/3}B^{-1}, N = ϱ^{1/3}(det B)^{1/6} satisfies √det g = ϱ and N^2 g^{-1} = B for every ϱ > 0 and det B > 0 are proved; missing: uniqueness of the solution of B = N^2 g^{-1}, ϱ = √det g (only existence via the explicit formula is checked).",
+    "difficulty": "easy",
+    "plan": "(A1),(A2),(A4 existence) are clauses of RenewalGeometry/Gravity/RelationalSchedulerADM.lean:relational_scheduler_ADM. Missing only uniqueness: for B with det B > 0, rho > 0, N > 0 and g with det g > 0 satisfying B = N^2 g^{-1} and rho = sqrt(det g), take determinants (Matrix.det_smul, Matrix.det_nonsing_inv) to get N^6 = rho^2 det B, so N = (rho^2 det B)^(1/6) by injectivity of x -> x^6 on positives (pow_left_injOn / Real.rpow_natCast), then g = N^2 B^{-1}. Add the theorem as a new clause next to (A4); one afternoon of matrix algebra with rpow arithmetic."
   },
   "lem:supp-fast-clock": {
     "env": "lemma",
@@ -660,7 +728,9 @@
       "NCG/Krein/FundamentalSymmetry.lean:NCG.IsFundamentalSymmetry.eq_one_of_krein_nonneg",
       "NCG/Krein/FundamentalSymmetry.lean:NCG.kreinForm"
     ],
-    "note": "Partial: eq_one_of_krein_nonneg proves that a fundamental symmetry J (self-adjoint involution) whose Krein form ⟨x, Jx⟩ is positive semidefinite must be J = 1, i.e. positive Gram data cannot supply a nontrivial sign involution and a genuine Krein form needs both eigenspaces; missing: positivity of the word-Gram hierarchy after adjoining the orientation record and the statement about positive combinations of the A_3 root dyadics."
+    "note": "Partial: eq_one_of_krein_nonneg proves that a fundamental symmetry J (self-adjoint involution) whose Krein form ⟨x, Jx⟩ is positive semidefinite must be J = 1, i.e. positive Gram data cannot supply a nontrivial sign involution and a genuine Krein form needs both eigenspaces; missing: positivity of the word-Gram hierarchy after adjoining the orientation record and the statement about positive combinations of the A_3 root dyadics.",
+    "difficulty": "easy",
+    "plan": "The Krein half is NCG/Krein/FundamentalSymmetry.lean:eq_one_of_krein_nonneg. Missing statements are direct: (i) any positive combination sum c_a r_a r_a^T (c_a > 0) of the root dyadics a3SchedulerRoot from RenewalGeometry/Gravity/RelationalSchedulerADM.lean is PosSemidef via Mathlib Matrix.posSemidef_vecMulVec_self_star + PosSemidef.smul + posSemidef_sum, hence has no negative direction (no v with v^T S v < 0); (ii) a Gram matrix of any word set (including the adjoined orientation record) is PosSemidef via Matrix.posSemidef_conjTranspose_mul_self; (iii) combine with eq_one_of_krein_nonneg to state 'no PSD form is a nontrivial fundamental symmetry'. Assemble in a new short file citing GeneratedAlgebraFlatness for the word-Gram."
   },
   "thm:supp-signature-minimality": {
     "env": "theorem",
@@ -670,7 +740,9 @@
       "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.sylvester_inertia",
       "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.posInertia_fromBlocks_diag"
     ],
-    "note": "Partial: Sylvester's law of inertia (invariance of positive/negative/null inertia under invertible congruence) and additivity of positive inertia for Hermitian block-diagonal matrices are proved from scratch; missing: the minimal one-signed-line extension argument and the conclusion inertia(q) = (1,3) for q(τt + w) = -a^2 τ^2 + g(w,w)."
+    "note": "Partial: Sylvester's law of inertia (invariance of positive/negative/null inertia under invertible congruence) and additivity of positive inertia for Hermitian block-diagonal matrices are proved from scratch; missing: the minimal one-signed-line extension argument and the conclusion inertia(q) = (1,3) for q(τt + w) = -a^2 τ^2 + g(w,w).",
+    "difficulty": "medium",
+    "plan": "Sylvester and posInertia additivity for block-diagonal Hermitian matrices exist in RenewalGeometry/Krein/SignedHaynsworthInertia.lean (sylvester_inertia, posInertia_fromBlocks_diag, posInertia_eq_card_of_eigenbasis). Needed new lemmas: negInertia_fromBlocks_diag (mirror the posInertia proof), posInertia of a PosDef 3x3 block = 3 and negInertia = 0 (from the eigenbasis characterization), inertia of the 1x1 block [-a^2] = (0,1), giving inertia(fromBlocks (-a^2) 0 0 g) = (3 pos, 1 neg); then transport the real form to the complex matrix setting used there (map via Matrix.map ofReal). The hypothesis 'exactly one independent nondegenerate signed line' should be encoded as q = fromBlocks c 0 0 g with c != 0 (choose the sign c < 0 up to overall sign); the informal 'cannot supply a negative direction' clause is lem:supp-positive-krein-distinct."
   },
   "lem:supp-clifford-cell": {
     "env": "lemma",
@@ -694,7 +766,9 @@
       "RenewalGeometry/Lorentz/KreinClifford.lean:RenewalGeometry.KreinCliffordDatum.symbol_square",
       "RenewalGeometry/Lorentz/AnchorClifford.lean:RenewalGeometry.anchor_external_clifford"
     ],
-    "note": "Partial: symbol_square proves the abstract Clifford square (ξ0 γ^0 + Σ a_i γ_i)^2 = (q ξ0^2 + Σ a_i^2)·1 with q = (γ^0)^2 for any Krein-Clifford datum, and the concrete γ^μ satisfy the Clifford relations; missing: the lapse/shift/coframe substitution a = E_h ξ, ξ0 ↦ N_h^{-1}(ξ0 - β_h·ξ) with E_h E_h^T = g_h^{-1} that yields eq. dirac-square-main, and the inertia (1,3) statement."
+    "note": "Partial: symbol_square proves the abstract Clifford square (ξ0 γ^0 + Σ a_i γ_i)^2 = (q ξ0^2 + Σ a_i^2)·1 with q = (γ^0)^2 for any Krein-Clifford datum, and the concrete γ^μ satisfy the Clifford relations; missing: the lapse/shift/coframe substitution a = E_h ξ, ξ0 ↦ N_h^{-1}(ξ0 - β_h·ξ) with E_h E_h^T = g_h^{-1} that yields eq. dirac-square-main, and the inertia (1,3) statement.",
+    "difficulty": "easy",
+    "plan": "RenewalGeometry/Lorentz/KreinClifford.lean:symbol_square gives (xi0 g0 + sum a_i g_i)^2 = (q xi0^2 + sum a_i^2) 1 and RenewalGeometry/Lorentz/AnchorClifford.lean supplies the concrete gammas with q = -1. Missing is only the substitution lemma: with xi0' := N^{-1}(xi0 - beta . xi) and a := E^T xi (a_a = sum_i E_a^i xi_i), sum_a a_a^2 = xi . ((E E^T) xi) = xi . (g^{-1} xi) whenever E E^T = g^{-1} (Matrix.dotProduct_mulVec / vecMul_mulVec rewriting), which yields eq. dirac-square-main verbatim. The inertia (1,3) sentence is inherited from thm:supp-signature-minimality (congruence by the invertible map (xi0,xi) -> (N^{-1}(xi0 - beta.xi), xi) plus sylvester_inertia)."
   },
   "thm:supp-determining-kernel": {
     "env": "theorem",
@@ -777,7 +851,9 @@
     "lean": [
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.integral_stationarity_form_le"
     ],
-    "note": "Partial: the underlying estimate ∫𝔖 dν ≤ C_X Δ̄ is integral_stationarity_form_le; missing: the duality step with the represented test-lift budget B_{X,K}(k)^2 (eq. main-physical-stationarity), the mean-square convergence on a countable determining core, and the diagonal almost-sure subsequence via Tonelli. Searched: test lift, determining core, mean square, Tonelli, almost-sure subsequence."
+    "note": "Partial: the underlying estimate ∫𝔖 dν ≤ C_X Δ̄ is integral_stationarity_form_le; missing: the duality step with the represented test-lift budget B_{X,K}(k)^2 (eq. main-physical-stationarity), the mean-square convergence on a countable determining core, and the diagonal almost-sure subsequence via Tonelli. Searched: test lift, determining core, mean square, Tonelli, almost-sure subsequence.",
+    "difficulty": "medium",
+    "plan": "Base estimate is RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:integral_stationarity_form_le. Missing: (i) the duality step |<gA, v>|^2 <= ||gA||_{G^{-1}}^2 ||v||_G^2 (finite-dimensional Cauchy-Schwarz in the G inner product; state with G as a PosDef matrix or as an inner product on E) and taking sup over the supported v to get eq. main-physical-stationarity with B_{X,K}(k)^2; (ii) mean-square convergence: immediate squeeze once the right-hand side tends to 0; (iii) the almost-sure diagonal subsequence: choose cutoffs X_j with E|Y_j(k_m)|^2 <= 2^{-j} for m <= j, then Mathlib lintegral_tsum + ae_lt_top give sum_j |Y_j|^2 < infinity a.s., hence Y_j -> 0 a.s. (Summable.tendsto_atTop_zero), and ae_all_iff over the countable core. Requires modelling 'common coupling' as one probability space carrying all cutoff variables; the closure-extension sentence is a hypothesis (continuity on the declared test topology)."
   },
   "cor:supp-gibbs-gap": {
     "env": "corollary",
@@ -803,7 +879,9 @@
       "RenewalGeometry/DiscreteAnalysis/FiniteWeightedGraphHeatKernel.lean:RenewalGeometry.FiniteWeightedGraph.heatApply",
       "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylExact.lean:RenewalGeometry.finiteSpatialEnergy"
     ],
-    "note": "Definition encoded: NCG.FiniteWeightedGraph bundles positive vertex masses and symmetric nonnegative conductances; finiteSpatialEnergy c f = (1/2) ΣΣ c_uv (f u - f v)^2 is the ordered-pair form of E^sp; the mass-weighted Laplacian, its eigenvalues and the heat semigroup e^{-tΔ} are FiniteWeightedGraph.symmetricLaplacian / eigenvalue / heatApply. The L^q-contractivity remark is not encoded."
+    "note": "Definition encoded: NCG.FiniteWeightedGraph bundles positive vertex masses and symmetric nonnegative conductances; finiteSpatialEnergy c f = (1/2) ΣΣ c_uv (f u - f v)^2 is the ordered-pair form of E^sp; the mass-weighted Laplacian, its eigenvalues and the heat semigroup e^{-tΔ} are FiniteWeightedGraph.symmetricLaplacian / eigenvalue / heatApply. The L^q-contractivity remark is not encoded.",
+    "difficulty": "easy",
+    "plan": "Definition already encoded (RenewalGeometry/DiscreteAnalysis/FiniteWeightedGraphHeatKernel.lean:FiniteWeightedGraph, symmetricLaplacian, eigenvalue, heatApply; OperationalSobolevWeylExact.lean:finiteSpatialEnergy). Only the remark on L^q-contractivity of e^{-t Delta} is not encoded: the L^2 contraction follows from OperationalSobolevWeylFiniteGraph.lean:heatApply_spectralExpansion with nonnegative eigenvalues; the L^1/L^infinity (Markov) contraction needs entrywise nonnegativity of the semigroup (write Delta = D - C with C >= 0 entrywise and use exp(-tD) exp(tC) Trotter or the resolvent (I + tDelta/n)^{-n} limit), a separate medium-size lemma that is not required for the definition itself."
   },
   "lem:supp-half-volume-sobolev": {
     "env": "lemma",
@@ -854,7 +932,9 @@
       "RenewalGeometry/Renewal/RenewalSpatialPositiveScreen.lean:RenewalGeometry.FiniteWeightedGraph.SpatialCutMargin",
       "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylFiniteGraph.lean:RenewalGeometry.FiniteWeightedGraph.eigenfunction_spectralTail_bound"
     ],
-    "note": "Partial: from a SpatialCutMargin (I^sp > 0), the degree bound and μ(V) ≤ V*, renewalSpatialPositiveScreen assembles the Sobolev and Poincaré bounds (C_P = 128 D V*^{2/3}/I^2), the positive spectral floor, the Weyl counting law and the screen tail Σ_{λ_j > R} |⟨f, φ_j⟩|^2 ≤ R^{-1} E(f) (eq. supp-screen-count-tail); missing: the conversion I^sp ≥ I^eff/a_+ from the capacity-conductance comparison and the neck-obstruction dual witness of eq. main-neck-obstruction."
+    "note": "Partial: from a SpatialCutMargin (I^sp > 0), the degree bound and μ(V) ≤ V*, renewalSpatialPositiveScreen assembles the Sobolev and Poincaré bounds (C_P = 128 D V*^{2/3}/I^2), the positive spectral floor, the Weyl counting law and the screen tail Σ_{λ_j > R} |⟨f, φ_j⟩|^2 ≤ R^{-1} E(f) (eq. supp-screen-count-tail); missing: the conversion I^sp ≥ I^eff/a_+ from the capacity-conductance comparison and the neck-obstruction dual witness of eq. main-neck-obstruction.",
+    "difficulty": "easy",
+    "plan": "The Sobolev/Poincare/Weyl/screen-tail package is RenewalGeometry/Renewal/RenewalSpatialPositiveScreen.lean:renewalSpatialPositiveScreen from a SpatialCutMargin. Missing: (i) define I^eff and I^sp as finite minima over half-volume cuts using finiteCutCapacity from RenewalGeometry/DiscreteAnalysis/FinitePressureFlowMaxCut.lean with the two edge weights u_e and h c_e, and prove from the per-edge comparison a_- h c_e <= u_e <= a_+ h c_e (summed over the cut edges) that a_- I^sp <= I^eff <= a_+ I^sp, so I^eff >= I_* gives a SpatialCutMargin with constant I_*/a_+; (ii) the neck witness: phi = cutIndicator A / u(boundary A) has sum_e u_e |d phi(e)| = 1 and demandPairing b_A phi = mu(A)^{2/3}/u(boundary A) = (I^eff)^{-1} for a minimizing cut (two Finset sum computations with the mean-zero demand b_A of eq. main-cut-demand). All finite; one day of assembly."
   },
   "prop:supp-compact-upgrade": {
     "env": "proposition",
@@ -922,42 +1002,54 @@
       "RenewalGeometry/Continuum/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.palatini_conjugate_exponent_range",
       "RenewalGeometry/Continuum/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_diagonal_bilinear"
     ],
-    "note": "Partial: the Hölder interpolation ‖f‖_q ≤ ‖f‖_2^{θ_q} ‖f‖_6^{1-θ_q} with θ_q = (6-q)/(2q) = 3/q - 1/2 is proved in Mathlib's eLpNorm' for 2 ≤ q ≤ 6 (and the p > 3/2 ⇒ 2 < 2p' < 6 arithmetic), an abstract 'interpolation estimate plus vanishing low norm ⇒ strong convergence' lemma and the passage through a bounded bilinear diagonal (e_X∧e_X → e∧e) are proved; missing: e ∈ L^6 with ‖e‖_6 ≤ M_6 and the uniform L^6 bound on e_X - e (the weak-compactness step) and the instantiation on L^q(K)."
+    "note": "Partial: the Hölder interpolation ‖f‖_q ≤ ‖f‖_2^{θ_q} ‖f‖_6^{1-θ_q} with θ_q = (6-q)/(2q) = 3/q - 1/2 is proved in Mathlib's eLpNorm' for 2 ≤ q ≤ 6 (and the p > 3/2 ⇒ 2 < 2p' < 6 arithmetic), an abstract 'interpolation estimate plus vanishing low norm ⇒ strong convergence' lemma and the passage through a bounded bilinear diagonal (e_X∧e_X → e∧e) are proved; missing: e ∈ L^6 with ‖e‖_6 ≤ M_6 and the uniform L^6 bound on e_X - e (the weak-compactness step) and the instantiation on L^q(K).",
+    "difficulty": "medium",
+    "plan": "Interpolation inequality and the abstract 'interpolation + vanishing L^2 => strong L^q' and bilinear diagonal steps exist (RenewalGeometry/Continuum/FiniteMeasureL2L6InterpolationExact.lean:eLpNorm'_interpolate_two_six, StrongInterpolationConvergenceExact.lean:tendsto_of_norm_interpolation, tendsto_diagonal_bilinear). Missing: e in L^6 with ||e||_6 <= M_6 and sup ||e_X - e||_6 <= 2 M_6. Avoid weak compactness: from L^2 convergence on a finite measure extract an a.e.-convergent subsequence (Mathlib tendstoInMeasure_of_tendsto_eLpNorm + TendstoInMeasure.exists_seq_tendsto_ae) and apply Fatou (lintegral_liminf_le) to |e_X|^6, then instantiate the eLpNorm' interpolation on the difference and the Holder product bound for e_X wedge e_X in L^{p'} via eLpNorm'_le_eLpNorm'_mul_eLpNorm' (Mathlib Holder for eLpNorm). Several days of Lp-space bookkeeping, no new analysis."
   },
   "thm:supp-curvature-propagation": {
     "env": "theorem",
     "title": "Finite curvature-energy propagation from initial data",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: curvature energy, Gronwall, propagation writer, skew principal term M K + K^T M = 0, integrating factor, lapse-integrated L^2 curvature bound."
+    "note": "No Lean counterpart found; searched: curvature energy, Gronwall, propagation writer, skew principal term M K + K^T M = 0, integrating factor, lapse-integrated L^2 curvature bound.",
+    "difficulty": "medium",
+    "plan": "No Lean. Content is a finite-dimensional linear ODE energy estimate: encode y : R -> (n -> R), M(t) PosDef, K with M K + K^T M = 0, and state the growth hypothesis directly as the quadratic-form bound y^T (M' + M L + L^T M) y <= 2 a(t) y^T M y (avoids the M^{1/2} in eq. main-curvature-growth). Then d/dt (y^T M y) = y^T(M' + ML + L^T M)y + 2 y^T M f (HasDerivAt of a bilinear form) and Cauchy-Schwarz in the M-inner product give eq. supp-curvature-energy-differential; the integrating-factor step on sqrt(z^2 + eps^2) needs a time-dependent Gronwall (Mathlib's Analysis/ODE/Gronwall.lean has constant K only; prove d/dt [exp(-int a) w] <= exp(-int a) ||f||_M and integrate via image_le_of_deriv_right_le_deriv_boundary or a monotonicity lemma). The passage to ||R_X||_{L^2(K)} is an abstract hypothesis (stable interpolation, lapse bound) and can be stated as a one-line real inequality."
   },
   "thm:supp-discrete-curvature": {
     "env": "theorem",
     "title": "Midpoint propagation with the physical Gram transfer",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: midpoint, Crank-Nicolson, (I - s A/2) inverse bound, Gram transfer T_j = M^{1/2} T M^{-1/2}, discrete curvature certificate."
+    "note": "No Lean counterpart found; searched: midpoint, Crank-Nicolson, (I - s A/2) inverse bound, Gram transfer T_j = M^{1/2} T M^{-1/2}, discrete curvature certificate.",
+    "difficulty": "medium",
+    "plan": "No Lean, but everything is finite: (i) coercivity <v,(I - sA/2)v> >= (1 - s a/2)|v|^2 from K skew and (L + L^T)/2 <= a I, hence invertibility and inverse-norm bound (Matrix/EuclideanSpace, finite-dimensional injective => bijective); (ii) the one-step bound |w| <= (1 + sa/2)/(1 - sa/2) |v| by pairing the update with (w+v)/2; (iii) elementary inequality log((1+x)/(1-x)) <= 2x/(1-b) for 0 <= x <= b < 1 (Real.log bounds); (iv) the recursion |Y_{j+1}| <= c_j |Y_j| + b_j is exactly Mathlib Analysis/ODE/DiscreteGronwall.lean:discrete_gronwall_prod_general; (v) weighted Cauchy-Schwarz sum |eps_j| <= sqrt(T sum |eps_j|^2/s_j) via Finset.inner_mul_le_norm_mul_norm. The final L^2(K) sentence with the Gram transfer T_j = M_{j+1}^{1/2} T M_j^{-1/2} is an abstract hypothesis. Several days, no new infrastructure."
   },
   "prop:supp-sharp-current-transfer": {
     "env": "proposition",
     "title": "Exact amplification of the differentiated action current",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: sharp transfer constant, largest singular value of H^{1/2} T G^{1/2}, action current, source amplification, curvature source budget."
+    "note": "No Lean counterpart found; searched: sharp transfer constant, largest singular value of H^{1/2} T G^{1/2}, action current, source amplification, curvature source budget.",
+    "difficulty": "medium",
+    "plan": "No Lean. Finite-dimensional: with G, H PosDef use Mathlib Matrix.PosSemidef.sqrt (G^{1/2}, H^{1/2}) to reparametrize a = G^{1/2} v, so ||T a||_H^2 / ||a||_{G^{-1}}^2 = |H^{1/2} T G^{1/2} v|^2 / |v|^2, and the least constant is the operator norm squared of Matrix.toEuclideanLin (H^{1/2} T G^{1/2}) (sup attained on the compact unit sphere: IsCompact.exists_isMaxOn; both directions of 'least constant' needed). The budget inequality is |u + v|^2 <= 2|u|^2 + 2|v|^2 applied to eq. main-current-incidence, and the time version is an integral Cauchy-Schwarz (integral_mul_le_Lp_mul_Lq with p = q = 2) or the finite weighted sum. The expectation clause is linearity of integral with a deterministic Gamma bound. RenewalGeometry/Analysis/ApproximationSingularValues.lean already defines singular values for EuclideanOperator and can host the sharpness statement."
   },
   "prop:supp-current-derivative-loss": {
     "env": "proposition",
     "title": "Sharp grid-scale source amplification",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: central difference on a periodic grid, Fourier multiplier i sin(2πk/m)/h, ‖D_h‖ = h^{-1}, grid-scale amplification."
+    "note": "No Lean counterpart found; searched: central difference on a periodic grid, Fourier multiplier i sin(2πk/m)/h, ‖D_h‖ = h^{-1}, grid-scale amplification.",
+    "difficulty": "easy",
+    "plan": "No Lean, but fully explicit. Define D_h on ZMod m -> R (or Fin m) by (D u)_i = (u_{i+1} - u_{i-1})/(2h) with norm h sum u_i^2. Upper bound ||D_h u|| <= ||u||/h by the triangle inequality on the two shifts (shift invariance of Finset sums over ZMod via Equiv.addRight). Lower bound/sharpness: for 4 | m the explicit witness v_i = 0,1,0,-1 periodic (v_i = sin(pi i/2)) satisfies (D v)_i = v_i shifted by one index scaled by 1/h, so ||D_h v||^2 = ||v||^2/h^2, which gives equality without Fourier analysis (avoids ZMod.dft/Parseval). The last sentence is the vector a_h = h^{1/2} v_h/||v_h|| with ||a_h||^2 = h and ||D_h a_h||^2 = h^{-1}."
   },
   "cor:supp-stochastic-curvature": {
     "env": "corollary",
     "title": "Expected curvature energy and a sufficient pathwise upgrade",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: expected curvature energy, pathwise bound, Tonelli source-energy summability, Markov inequality boundedness in probability."
+    "note": "No Lean counterpart found; searched: expected curvature energy, pathwise bound, Tonelli source-energy summability, Markov inequality boundedness in probability.",
+    "difficulty": "medium",
+    "plan": "No Lean. Take the pathwise propagation bound sup_t z(t) <= e^{A_*}(z(0) + int ||f||) as a hypothesis (it is thm:supp-curvature-propagation) on a probability space; then E sup z^2 <= 2 e^{2A_*}(E z(0)^2 + T_* E int ||f||^2) is (u+v)^2 <= 2u^2 + 2v^2 plus integral Cauchy-Schwarz in time (integral_mul_le_Lp_mul_Lq) and monotonicity of expectation; insert prop:supp-sharp-current-transfer's pointwise budget under the integral (Tonelli via lintegral_prod for the time-omega product). The pathwise upgrade is Mathlib lintegral_tsum + ae_lt_top: a summable sequence of expectations makes the sum finite a.s., hence sup_X int ||f_X||^2 finite a.s., and the deterministic estimate applies pathwise. Main cost is measurability/integrability bookkeeping for processes omega x t; no new analysis."
   },
   "thm:supp-curvature-compactness": {
     "env": "theorem",
@@ -967,21 +1059,27 @@
       "RenewalGeometry/OperatorLimits/HilbertWeakSpaceSequentialCompactness.lean:RenewalGeometry.exists_tendsto_toWeakSpace_subsequence_of_bounded",
       "RenewalGeometry/OperatorLimits/HilbertWeakSpaceSequentialCompactness.lean:RenewalGeometry.tendsto_toWeakSpace_of_inner"
     ],
-    "note": "Partial: every norm-bounded sequence in a separable Hilbert space has a subsequence converging in Mathlib's WeakSpace (the p = 2 case of the reflexive weak compactness, i.e. eq. supp-curvature-reflexive-limit for the propagated L^2 bound); missing: general 1 < p < ∞, the distributional identification R = dω + ω∧ω from strong L^2_loc connection convergence, and the finite-writer residual clauses."
+    "note": "Partial: every norm-bounded sequence in a separable Hilbert space has a subsequence converging in Mathlib's WeakSpace (the p = 2 case of the reflexive weak compactness, i.e. eq. supp-curvature-reflexive-limit for the propagated L^2 bound); missing: general 1 < p < ∞, the distributional identification R = dω + ω∧ω from strong L^2_loc connection convergence, and the finite-writer residual clauses.",
+    "difficulty": "hard",
+    "plan": "The p = 2 weak subsequence is RenewalGeometry/OperatorLimits/HilbertWeakSpaceSequentialCompactness.lean:exists_tendsto_toWeakSpace_subsequence_of_bounded. Missing and beyond current Mathlib: reflexivity/weak sequential compactness of L^p(K) for general 1 < p < infinity (no L^p-L^q duality isomorphism in Mathlib), and the distributional identity R = d omega + omega wedge omega, which needs weak derivatives/distributions on a cylinder (not in Mathlib). A restricted abstract version is feasible at medium cost: model 'distributions' as linear functionals on a test space with d_dist given by an abstract adjoint, prove omega_X wedge omega_X -> omega wedge omega in L^1 via RenewalGeometry/Continuum/WeakStrongBilinearPairingExact.lean, and pass weak L^2 limits through fixed test pairings (tendsto_toWeakSpace_of_inner); the faithful L^p/distribution statement remains hard."
   },
   "lem:supp-interface-lifting": {
     "env": "lemma",
     "title": "Interface lifting and its distributional error",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: interface lifting, normal prism, face jump J_f, face measure δ_f, mollifier η, bounded overlap of prisms."
+    "note": "No Lean counterpart found; searched: interface lifting, normal prism, face jump J_f, face measure δ_f, mollifier η, bounded overlap of prisms.",
+    "difficulty": "hard",
+    "plan": "No Lean. Requires a cubical chart with interior faces, face (surface) measures delta_f, normal prisms of width h/4 with a mollifier eta, and integration in normal coordinates ||L_f J_f||_2^2 = h^{-1} ||eta||^2 ||J_f||_{L^2(f)}^2 plus bounded-overlap counting of O(h^{-4}) faces of area h^3. Mathlib has Hausdorff measure but no usable surface-measure/normal-coordinate integration or trace theory; the library's closest pieces (RenewalGeometry/Continuum/BoundedConvolutionKernelEstimateExact.lean, CompactKernelConvolutionDerivativeBoundExact.lean) cover only convolution kernel bounds on R^n. Infrastructure-level geometric measure theory is needed before the statement can be written faithfully."
   },
   "thm:supp-interface-curvature": {
     "env": "theorem",
     "title": "Constructive connection-and-interface curvature criterion",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: lifted curvature R^lift, interface budget J_h, broken derivative d_b ω, distributional lifting error, weak L^2 cluster point."
+    "note": "No Lean counterpart found; searched: lifted curvature R^lift, interface budget J_h, broken derivative d_b ω, distributional lifting error, weak L^2 cluster point.",
+    "difficulty": "hard",
+    "plan": "No Lean. Depends on lem:supp-interface-lifting (surface measures, prisms) and on the distributional identification of thm:supp-curvature-compactness, both missing; the only easy fragment is the L^2 bound ||omega_h wedge omega_h||_2 <= C ||omega_h||_4^2 (Holder via eLpNorm'_le_eLpNorm'_mul_eLpNorm') and the triangle inequality for R_h^lift. The broken exterior derivative d_b of a piecewise connection and the face jumps [omega_h]_f have no counterpart in Mathlib or the library."
   },
   "lem:supp-weak-strong-palatini": {
     "env": "lemma",
@@ -1009,7 +1107,9 @@
       "RenewalGeometry/Gravity/PalatiniDeterminantVolumeExact.lean:RenewalGeometry.PalatiniDeterminantVolume.determinantVolume_tendsto_of_coframe_interpolation",
       "RenewalGeometry/Gravity/PalatiniDeterminantVolumeExact.lean:RenewalGeometry.PalatiniDeterminantVolume.determinant_firstVariation_at_invertible"
     ],
-    "note": "Partial: coefficient uniqueness given linear independence of the Holst/Palatini/volume densities, the commutant of two spatial rotations on electric/magnetic bivectors reduced to scalar 2x2 blocks (a fragment of eq. supp-lorentz-commutant, not the full SO+(1,3) commutant = span{I,⋆}), the torsion packet, the abstract weak-strong passage of Palatini and Holst pairings and of volume terms, and Jacobi's D det_e[h] = det(e) tr(e^{-1}h) are proved; missing: existence of the classified form eq. supp-phv-classification from Lorentz naturality, the torsion-free metric-compatible limit connection, the Bianchi/Holst-inert step, and the identification of the limiting metric variation with χ∫√-g (G + Λg) k."
+    "note": "Partial: coefficient uniqueness given linear independence of the Holst/Palatini/volume densities, the commutant of two spatial rotations on electric/magnetic bivectors reduced to scalar 2x2 blocks (a fragment of eq. supp-lorentz-commutant, not the full SO+(1,3) commutant = span{I,⋆}), the torsion packet, the abstract weak-strong passage of Palatini and Holst pairings and of volume terms, and Jacobi's D det_e[h] = det(e) tr(e^{-1}h) are proved; missing: existence of the classified form eq. supp-phv-classification from Lorentz naturality, the torsion-free metric-compatible limit connection, the Bianchi/Holst-inert step, and the identification of the limiting metric variation with χ∫√-g (G + Λg) k.",
+    "difficulty": "hard",
+    "plan": "Proved fragments: RenewalGeometry/Gravity/PalatiniInsertion.lean:holst_palatini_coefficients_unique, PalatiniConnectionVariationExact.lean:palatini_connection_torsion_packet, PalatiniWeakStrongLimitExact.lean:palatini_and_holst_pairings_tendsto, PalatiniDeterminantVolumeExact.lean, and the spatial-rotation fragment of the commutant in Lorentz/BivectorRotationCommutantExact.lean. A tractable medium sub-target is the full commutant End_{SO+(1,3)}(Lambda^2 R^{1,3}) = span{I, star}: compute the commutant of the six so(1,3) generators acting on the 6-dimensional bivector space as a 36-unknown linear system (finite, decidable with Fin 6 matrices). The rest is research-level continuum geometry absent from Mathlib: torsion-free metric-compatible limit connection from L^2 convergence, the first Bianchi identity removing the Holst variation, and the identification of the Palatini/volume metric variations with chi int sqrt(-g)(G + Lambda g)k (continuum Einstein tensor variational calculus)."
   },
   "cor:supp-renewal-einstein": {
     "env": "corollary",
@@ -1020,266 +1120,342 @@
       "RenewalGeometry/Gravity/ConditionalLocalWeakEinsteinMatterHandoffExact.lean:RenewalGeometry.ConditionalLocalWeakEinsteinMatterHandoff.RegulatorPacket",
       "RenewalGeometry/Gravity/V036EinsteinBoundary.lean:RenewalGeometry.insertion_functional_determined"
     ],
-    "note": "Partial: the typed handoff proves that when finite metric first variations converge along a cofinal subsequence with vanishing defects and the limit is represented as χ⟨metricPair(G+Λg), k⟩ - (1/2)⟨metricPair T, k⟩ on an injective (determining) test panel, then 2χ(G+Λg) = T (vacuum T = 0 gives G+Λg = 0 for χ ≠ 0); insertion_functional_determined is the finite faithfulness of the insertion pairing. Missing: the limit identification is a hypothesis (thm:supp-renewal-palatini is itself partial), the extension from the core to its closure in the declared test topology, and the stochastic almost-sure subsequence route."
+    "note": "Partial: the typed handoff proves that when finite metric first variations converge along a cofinal subsequence with vanishing defects and the limit is represented as χ⟨metricPair(G+Λg), k⟩ - (1/2)⟨metricPair T, k⟩ on an injective (determining) test panel, then 2χ(G+Λg) = T (vacuum T = 0 gives G+Λg = 0 for χ ≠ 0); insertion_functional_determined is the finite faithfulness of the insertion pairing. Missing: the limit identification is a hypothesis (thm:supp-renewal-palatini is itself partial), the extension from the core to its closure in the declared test topology, and the stochastic almost-sure subsequence route.",
+    "difficulty": "medium",
+    "plan": "The typed handoff RenewalGeometry/Gravity/ConditionalLocalWeakEinsteinMatterHandoffExact.lean:conditional_local_weak_Einstein_matter_handoff already yields G + Lambda g = 0 once the limit is represented on an injective test panel. Missing and doable: (i) extension from the countable determining core to its closure in the declared test topology, i.e. a continuous linear functional vanishing on a dense subset vanishes (Mathlib DenseRange / Dense.eqOn_of_continuousOn or ContinuousLinearMap.ext_on with DenseRange), phrased on an abstract topological test space; (ii) the stochastic route, which is prop:supp-physical-test-stationarity's a.s. subsequence composed with the (hypothesised) pathwise compactness budgets, i.e. compose that subsequence with the RegulatorPacket.selected field. The identification of the limit with eq. supp-einstein-insertion stays a hypothesis since thm:supp-renewal-palatini is hard."
   },
   "lem:supp-open-parity": {
     "env": "lemma",
     "title": "Root-parity obstruction and a minimal execution connector",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: root parity, odd periodic grid, even coordinate sum, execution connector, D_{e_1}^+, coercivity constants 1/5 and 9, root-graph distance N-1."
+    "note": "No Lean counterpart found; searched: root parity, odd periodic grid, even coordinate sum, execution connector, D_{e_1}^+, coercivity constants 1/5 and 9, root-graph distance N-1.",
+    "difficulty": "medium",
+    "plan": "No Lean. Set the grid as Fin 3 -> ZMod N (N odd) as in RenewalGeometry/DiscreteAnalysis/A3PeriodicGraphSamplingExact.lean (Vertex, rootStep with rootCoordinates from A3PeriodicSmoothEnergyExact.lean). Reformulate the non-coercivity clause discretely: the test u(x) = exp(2 pi i m (x1+x2+x3)) (or its real part) has bounded root Dirichlet form D_F while the coordinate form D_C ~ m^2, which is a finite computation with cos/sin sums (avoid the continuum interpolant I_h). Root-graph distance N-1: define the graph distance on (ZMod N)^3 with the 12 roots, prove the parity invariant (lifted displacement e_1 + N z has even coordinate sum, N odd forces one coordinate of modulus >= N-1) and exhibit the alternating path. Coercivity 1/5 D_C <= D_+ <= 9 D_C: from S_{e2} - I = S_{e1}^{-1}[(S_{e1+e2} - I) - (S_{e1} - I)], shift invariance of sums over ZMod (Equiv.addRight), and (a+b)^2 <= 2a^2 + 2b^2. Several days of finite combinatorics."
   },
   "lem:supp-open-calculus": {
     "env": "lemma",
     "title": "Exact shifted product rule and uniform Sobolev calculus",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: shifted product rule, discrete Leibniz, forward/backward/central difference adjoints, trigonometric H^r norm equivalence, shifted commutator bounds, product algebra."
+    "note": "No Lean counterpart found; searched: shifted product rule, discrete Leibniz, forward/backward/central difference adjoints, trigonometric H^r norm equivalence, shifted commutator bounds, product algebra.",
+    "difficulty": "hard",
+    "plan": "No Lean. The adjoint identities and the shifted product rule are easy (finite sums over (ZMod N)^3, induction on multi-indices with D_i^+(fw) = (S_i f) D_i^+ w + (D_i^+ f) w). The remaining clauses are a discrete Sobolev-calculus infrastructure: uniform equivalence of the forward-difference H^r norms with trigonometric H^r norms needs multidimensional Parseval on (ZMod N)^3 (Mathlib has ZMod.dft and dft_dft but no Plancherel for products) and symbol bounds 4|k| <= |(e^{2 pi i h k} - 1)/h| <= 2 pi |k| (sin bounds as in RenewalGeometry/Lorentz/ResetDifference.lean, OperatorLimit.lean); the product-algebra and commutator bounds for r >= 3 need weighted convolution (Kato-Ponce-type) estimates with h-uniform constants and summability of <k>^{-2r} on the finite cube. This is research/infrastructure-level."
   },
   "prop:supp-open-locality": {
     "env": "proposition",
     "title": "Locality and continuum consistency of the writer",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: twelve-neighbour coordinate stencil, skew transport, first-jet compensator, harmonic reduced vacuum row, continuum consistency of the writer."
+    "note": "No Lean counterpart found; searched: twelve-neighbour coordinate stencil, skew transport, first-jet compensator, harmonic reduced vacuum row, continuum consistency of the writer.",
+    "difficulty": "medium",
+    "plan": "No Lean. First define the writer eq. main-open-writer on (ZMod N)^3 with abstract analytic coefficient maps a, b^i, c^{ij}, F (keep F(g, jet) abstract to avoid the reduced Einstein tensor). Locality is then syntactic: the right-hand side at x is a function of the values at x and the twelve stencil points {+-e_i, +-(e_i - e_j)} (prove by unfolding D_i^- (c D_j^+ q), K_b, G_h); 'two hops of the execution graph' is a graph-distance check on the connector graph of lem:supp-open-parity. Continuum consistency needs Taylor expansions of forward/central differences of smooth functions (RenewalGeometry/DiscreteAnalysis/A3FiniteDifferenceConsistencyExact.lean, UniformFiniteDifferenceRemainderExact.lean, Lorentz/DiscreteCartan.lean:central_difference_second_order) plus the chain rule cancellation of the compensator, giving eq. main-harmonic-normal-row pointwise as h -> 0 on smooth jets. Several days once the writer is defined."
   },
   "thm:supp-open-energy": {
     "env": "theorem",
     "title": "All-component shifted nonlinear energy",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: shifted nonlinear energy, E_{s,h}, all-component energy inequality, s ≥ 11, open 3+1 writer, uniform lifespan."
+    "note": "No Lean counterpart found; searched: shifted nonlinear energy, E_{s,h}, all-component energy inequality, s ≥ 11, open 3+1 writer, uniform lifespan.",
+    "difficulty": "hard",
+    "plan": "No Lean. Depends entirely on the uniform discrete Sobolev calculus of lem:supp-open-calculus (commutator and product-algebra bounds for s >= 11 with h-independent constants) and the nonlinear energy identity eq. supp-open-energy-identity for the writer of eq. main-open-writer with analytic coefficients. The only currently provable fragments are the skew cancellation <v, K_b v>_h = 0 (from (D_i^0)^* = -D_i^0) and the summation-by-parts cancellation of the divergence term against the spatial energy, both finite-sum identities on (ZMod N)^3. The h-uniform nonlinear energy inequality is research-level numerical analysis."
   },
   "cor:supp-open-lifespan": {
     "env": "corollary",
     "title": "Common nonlinear time and forced stability",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: lifespan, common nonlinear time, first-exit, forced energy, Gronwall, Sobolev energy, harmonic writer (NCG/Gravity, NCG/Lorentz, NCG/Grand); no lattice 3+1 Cauchy-problem formalization exists"
+    "note": "No Lean counterpart found; searched: lifespan, common nonlinear time, first-exit, forced energy, Gronwall, Sobolev energy, harmonic writer (NCG/Gravity, NCG/Lorentz, NCG/Grand); no lattice 3+1 Cauchy-problem formalization exists",
+    "difficulty": "hard",
+    "plan": "Needs the h-uniform discrete Sobolev scale X_h^s on the periodic grid, the nonlinear energy inequality of thm:supp-open-energy (itself unformalized), a first-exit/continuation argument and a Gronwall difference estimate with product/commutator bounds at order r. None of the lattice 3+1 Cauchy framework exists (searched Gravity, Lorentz, DiscreteAnalysis; only scalar A3 energy files such as DiscreteAnalysis/A3UniformEnergyConsistencyExact.lean). Infrastructure-level: define the grid Sobolev norms and the local writer ODE first; the finite-dimensional ODE continuation could then use Mathlib ODE existence, but the h-uniform energy estimate is research-level."
   },
   "lem:supp-open-subsidiary": {
     "env": "lemma",
     "title": "Subsidiary control on the common interval",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: subsidiary, harmonic gauge, contracted Bianchi, reduced Einstein, wave energy"
+    "note": "No Lean counterpart found; searched: subsidiary, harmonic gauge, contracted Bianchi, reduced Einstein, wave energy",
+    "difficulty": "hard",
+    "plan": "Requires the contracted Bianchi identity on a smooth canonical interpolant, a coordinate wave-energy estimate commuted through s-3 derivatives on a Lorentzian background, and Gronwall; PDE energy theory on T^3 is absent from Mathlib and the library (only algebraic Christoffel/Ricci jets in Gravity/CoordinateCurvature.lean). Not approachable without a continuum hyperbolic-PDE layer."
   },
   "thm:supp-open-einstein": {
     "env": "theorem",
     "title": "Whole-sequence nonsymmetric vacuum limit",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: nonsymmetric vacuum limit, harmonic reduced equation, H^{s-1} rate, cluster point uniqueness, Levi-Civita curvature convergence; the only Einstein-equation Lean results are the homogeneous FLRW/de Sitter coordinate computations (NCG/Gravity/CoordinateCurvature.lean), not a 3+1 Cauchy development"
+    "note": "No Lean counterpart found; searched: nonsymmetric vacuum limit, harmonic reduced equation, H^{s-1} rate, cluster point uniqueness, Levi-Civita curvature convergence; the only Einstein-equation Lean results are the homogeneous FLRW/de Sitter coordinate computations (NCG/Gravity/CoordinateCurvature.lean), not a 3+1 Cauchy development",
+    "difficulty": "hard",
+    "plan": "Compactness in C_t H^{s+1-delta}, cluster-point uniqueness for the harmonic reduced wave system, consistency of the discrete writer with the continuum equation and the O(h eps) rate all need Sobolev spaces on T^3 and hyperbolic energy estimates that neither Mathlib nor the library provide (OperatorLimits has varying-Hilbert weak compactness, e.g. OperatorLimits/VaryingHilbertWeakSubsequenceCompactness.lean, but no Sobolev/PDE layer). Research-level analysis."
   },
   "cor:supp-open-direct-route": {
     "env": "corollary",
     "title": "Direct constructive Einstein limit",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: direct constructive Einstein limit, certification conditions E1-E5, renewal cylinders"
+    "note": "No Lean counterpart found; searched: direct constructive Einstein limit, certification conditions E1-E5, renewal cylinders",
+    "difficulty": "hard",
+    "plan": "This is a meta-statement about which hypotheses are invoked in the proof of thm:supp-open-einstein (that items E1-E5 of thm:main-renewal-einstein are not used); it has no mathematical content separable from that hard theorem and would need reformulation (e.g. as an implication from the four named inputs to G(g)=0) before it can even be stated in Lean. Inherits the hard status of thm:supp-open-einstein."
   },
   "thm:supp-open-finite-words": {
     "env": "theorem",
     "title": "Finite local successor words",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: successor word, Hermite (only an unrelated degree-one Hermite layer in NCG/Grand/MediumProved01.lean), residual correction, execution-graph radius, arithmetic floor"
+    "note": "No Lean counterpart found; searched: successor word, Hermite (only an unrelated degree-one Hermite layer in NCG/Grand/MediumProved01.lean), residual correction, execution-graph radius, arithmetic floor",
+    "difficulty": "hard",
+    "plan": "Needs the degree-seven two-endpoint Hermite curve, its residual-correction map with the h-uniform selector bound (eq. supp-open-selector-inverse), fixed-order Hermite remainder estimates in grid Sobolev norms, and the forced energy/difference estimates of cor:supp-open-lifespan. No Hermite interpolation or grid-Sobolev infrastructure exists (searched Hermite, residual correction; nothing). The contraction recurrence d_{n+1} <= C h d_n + nu_h alone is easy, but everything feeding it is hard."
   },
   "lem:supp-law-multiplier": {
     "env": "lemma",
     "title": "Uniform fourth-order multiplier bounds",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: discrete Laplacian symbol 4h^{-2} sin^2, Parseval, biharmonic/fourth-order multiplier, Lambda_h^2, bound 12"
+    "note": "No Lean counterpart found; searched: discrete Laplacian symbol 4h^{-2} sin^2, Parseval, biharmonic/fourth-order multiplier, Lambda_h^2, bound 12",
+    "difficulty": "medium",
+    "plan": "Define the periodic grid (Fin 3 -> ZMod N, as in DiscreteAnalysis/A3PeriodicGraphSamplingExact.lean), forward differences D_i^+, Lambda_h = sum_i D_i^- D_i^+ and the Fourier-weighted norms H_h^r. The first bound h^2||Lambda_h w||^2 <= 12 sum_i ||D_i^+ w||^2 can be proved without Fourier analysis from ||D_i^- v|| <= (2/h)||v|| plus Cauchy-Schwarz over the three directions. The four order bounds reduce, once H_h^r is defined by the Fourier weight (1+l_h)^{r/2}, to the scalar inequalities h^2 l^2/(1+l)^p <= 12, sqrt(12) h, h^2 for 0 <= h^2 l <= 12, which are routine; the missing piece is a finite DFT/Parseval on (ZMod N)^3 (Mathlib has ZMod.dft on one cyclic factor; a product-Parseval lemma must be written) and the equivalence of the forward-difference norm with the Fourier weight."
   },
   "thm:supp-law-stability": {
     "env": "theorem",
     "title": "Fixed-radius propagation on an open writer ball",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: open writer ball, coefficient ball B, fourth-order energy E^B, common Cauchy chart, forced estimate"
+    "note": "No Lean counterpart found; searched: open writer ball, coefficient ball B, fourth-order energy E^B, common Cauchy chart, forced estimate",
+    "difficulty": "hard",
+    "plan": "The energy commutation argument, the h-uniform product/commutator estimates of thm:supp-open-energy for s >= 11 and the first-exit lifespan are the same missing lattice-Cauchy infrastructure as cor:supp-open-lifespan. Only the algebraic cancellation -h^2<v_a, B Lambda_h^2 q_a> = -(d/dt)(h^2/2)<Lambda_h q_a, B Lambda_h q_a> (symmetric B commuting with shifts) and the positivity margin b_0 < c_*/24 via lem:supp-law-multiplier are finite algebra; those two pieces could be proved separately as easy lemmas, but the theorem as stated is research-level."
   },
   "thm:supp-law-einstein": {
     "env": "theorem",
     "title": "Uniform Einstein limit for the whole coefficient family",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: uniform Einstein limit, coefficient family, jet comparison, external force f_B"
+    "note": "No Lean counterpart found; searched: uniform Einstein limit, coefficient family, jet comparison, external force f_B",
+    "difficulty": "hard",
+    "plan": "Depends on thm:supp-law-stability, the forced difference estimate of cor:supp-open-lifespan and the Einstein convergence of thm:supp-open-einstein, all unformalized and analytic. The only self-contained part is the lower-order bound ||h^2 a^{-1} B Lambda_h^2 q||_{s-2} <= C h ||B|| eps from lem:supp-law-multiplier, which becomes easy once that lemma exists."
   },
   "prop:supp-law-switching": {
     "env": "proposition",
     "title": "Rapid switching is not included",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: rapid switching, quarter-period transfer matrix, oscillator dispersion Omega_sigma, exp(cT/h) amplification (NCG/Grand/EasyExact03.lean transfer matrix is a two-state CTMC, unrelated)"
+    "note": "No Lean counterpart found; searched: rapid switching, quarter-period transfer matrix, oscillator dispersion Omega_sigma, exp(cT/h) amplification (NCG/Grand/EasyExact03.lean transfer matrix is a two-state CTMC, unrelated)",
+    "difficulty": "easy",
+    "plan": "Scope as an explicit finite statement: for the scalar oscillator q'' = -Omega^2 q the quarter-period map is the 2x2 matrix [[0, 1/Omega],[-Omega, 0]] (Mathlib Real.cos/sin at pi/2), the product of two such maps is diag(-Omega_1/Omega_2, -Omega_2/Omega_1), and with Omega_sigma^2 = l(1+sigma h^2 l) at the corner h^2 l = 12 the ratio Omega_1/Omega_2 = sqrt((1+12 sigma_1)/(1+12 sigma_2)) differs from 1 when sigma_1 != sigma_2. Growth of the n-th power of the diagonal matrix gives the exp(cT/h) amplification with n ~ T/h. All Fin 2 matrix algebra plus a few real inequalities; nothing in the library to reuse beyond Mathlib (the ledger's transfer-matrix pointer NCG/Grand/EasyExact03 is unrelated)."
   },
   "lem:supp-law-cost-control": {
     "env": "lemma",
     "title": "A stopped physical cost controls the whole word",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: stopped physical cost, guard exit, chronological letter, cost shadowing"
+    "note": "No Lean counterpart found; searched: stopped physical cost, guard exit, chronological letter, cost shadowing",
+    "difficulty": "hard",
+    "plan": "Needs the forced energy estimate eq:supp-law-forced and the lower-order difference estimate eq:supp-open-difference, i.e. the lattice nonlinear-energy framework of thm:supp-law-stability; the Cauchy-Schwarz step int ||f|| <= sqrt(T) eps d_h is trivial once those exist. Hard by inheritance."
   },
   "thm:supp-law-row-neighbourhood": {
     "env": "theorem",
     "title": "A chronological law neighborhood with the same Einstein limit",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: transition row, conditional cost moment, Markov threshold, Borel-Cantelli along odd cutoffs, relatively open row simplex (NCG/Grand/ConditionalBorelCantelliNonexplosionExact.lean is a CTMC nonexplosion criterion, unrelated)"
+    "note": "No Lean counterpart found; searched: transition row, conditional cost moment, Markov threshold, Borel-Cantelli along odd cutoffs, relatively open row simplex (NCG/Grand/ConditionalBorelCantelliNonexplosionExact.lean is a CTMC nonexplosion criterion, unrelated)",
+    "difficulty": "medium",
+    "plan": "Scope to the boxed probabilistic content plus the openness statement; the 'same Einstein limit' clause is a citation of lem:supp-law-cost-control/thm:supp-law-einstein and should be left as an inherited hypothesis. Model the word as a finite-horizon process with a per-stage kernel K_{h,j}(e|prefix) and nonnegative stage costs c_{h,j}; prove E C_h <= M T h^4 by conditioning on live prefixes (finite sums, tower property written explicitly as in StatMech/AcceptedActionInformationPythagoras.lean PartitionedRow), then Markov's inequality (Mathlib MeasureTheory.mul_meas_ge_le_lintegral or a finite-sum version), Borel-Cantelli along h_m = (2m+1)^{-1} via MeasureTheory.measure_limsup_eq_zero with summable m^{-2}, and openness/convexity of strict affine half-spaces in a product of finite simplexes (Mathlib isOpen_lt with continuous linear functionals). Needs a new finite path-process structure but stays inside finite probability."
   },
   "prop:supp-law-transport": {
     "env": "proposition",
     "title": "Physical profile transport certifies a row neighborhood",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: profile transport, W_2 coupling, Minkowski row bound, relatively open transport ball (NCG/Grand/OpenPathWassersteinDualityExact.lean is a 1D path W_1 duality, unrelated)"
+    "note": "No Lean counterpart found; searched: profile transport, W_2 coupling, Minkowski row bound, relatively open transport ball (NCG/Grand/OpenPathWassersteinDualityExact.lean is a 1D path W_1 duality, unrelated)",
+    "difficulty": "medium",
+    "plan": "No finite optimal-transport distance exists in the library (Wasserstein hits are unrelated). Define W_{2,d}(K,P)^2 = inf over couplings pi on E x E with marginals K,P of sum pi(e,e') d(e,e')^2, with profiles Phi_e in a real inner-product space and c_e = ||Phi_e||^2. Per coupling the bound is Minkowski in L^2(pi;H): (sum K c)^{1/2} = ||Phi_e||_{L^2(pi)} <= ||Phi_{e'}||_{L^2(pi)} + ||Phi_e - Phi_{e'}||_{L^2(pi)}; existence of the minimizing coupling uses compactness of the coupling polytope (Mathlib: IsCompact of closed bounded set in a finite-dimensional space, IsCompact.exists_isMinOn). Openness of the strict ball needs continuity of W_{2,d} in the row, provable from the explicit coupling K(e)P(e') style perturbation. Several routine lemmas, no analytic obstruction."
   },
   "lem:supp-initial-calculus": {
     "env": "lemma",
     "title": "Uniform original-action constraint calculus",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: original-action constraint map, Fierz-Pauli rows, phase derivative delta_i, analytic constraint calculus, Legendre elimination"
+    "note": "No Lean counterpart found; searched: original-action constraint map, Fierz-Pauli rows, phase derivative delta_i, analytic constraint calculus, Legendre elimination",
+    "difficulty": "hard",
+    "plan": "Requires the reconstructed finite original action, its stationary-connection and Legendre elimination, and the h-uniform Taylor bounds of the resulting constraint map on grid Sobolev spaces; none of this (constraint map C_h, phase derivatives delta_i, Fierz-Pauli rows) is encoded anywhere (Action/ and Gravity/ have only abstract Palatini and ADM records). The linear part L_h = (delta_i delta_j u_ij - sum delta_i^2 tr u, -2 delta_j pi^ij) could be defined directly, but the analyticity and quadratic remainder bounds presuppose the missing action."
   },
   "lem:supp-initial-range": {
     "env": "lemma",
     "title": "Range inverse and four missing means",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: range inverse R_h, rank 4d-4, kernel 8d+4, mean-zero contraction, Theta_h"
+    "note": "No Lean counterpart found; searched: range inverse R_h, rank 4d-4, kernel 8d+4, mean-zero contraction, Theta_h",
+    "difficulty": "hard",
+    "plan": "The linear half (L_h R_h = I on mean-zero targets, rank L_h = 4d-4, ker dim 8d+4) is finite linear algebra per Fourier mode on the odd grid: the mode symbol of the vector row is |kappa|^2 I + kappa kappa^T/3 (invertible), and the scalar row is 2 Omega_h^2 phi; this needs a 3D finite Fourier decomposition and rank-nullity (Mathlib LinearMap.finrank_range_add_finrank_ker) and would be medium on its own. The nonlinear range equation y = -P_perp N_h(z + R_h y) as a uniform contraction requires the bounds of lem:supp-initial-calculus (hard), so the lemma as stated is hard."
   },
   "lem:supp-initial-balance": {
     "env": "lemma",
     "title": "Exact four-mode mean calibration",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: four-mode mean calibration, quadratic mean jet Q_h, omega_h root 3omega_h/4"
+    "note": "No Lean counterpart found; searched: four-mode mean calibration, quadratic mean jet Q_h, omega_h root 3omega_h/4",
+    "difficulty": "medium",
+    "plan": "Scope to the displayed quadratic Hamiltonian H_h^{[2]}(u,pi;N,beta) = N(||pi||^2 - ||tr pi||^2/2 + sum_i ||delta_i u||^2/4) + sum_i beta^i <pi, delta_i u> taken as the definition (its derivation from the full retained action is the hard content of lem:supp-initial-calculus). Then Q_h is minus the lapse derivative and the three shift derivatives evaluated on the seed u_* = sum T_i cos(2 pi x_i), p = -(2/3) kappa I + sum b_i T_i sin(2 pi x_i): finite sums over (ZMod N)^3 using orthogonality of constant and unit Fourier modes on odd grids (sum over ZMod N of cos(2 pi j/N), sin products, needs a small trigonometric-sum lemma set) and the odd phase derivative symbol omega_h = 2 h^{-1} sin(pi h). The root (3 omega_h/4, 0,0,0), the Jacobian diag(omega_h, -omega_h/2, ...) and uniform invertibility (omega_h >= 2 for h <= 1/2 via Real.two_div_pi_mul_le_sin) are routine."
   },
   "thm:supp-action-prepared-chart": {
     "env": "theorem",
     "title": "Exact finite preparation from free initial records",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: exact finite preparation, free initial record, normalized mean map, right inverse |t|^{-1}, codimension 4N^3"
+    "note": "No Lean counterpart found; searched: exact finite preparation, free initial record, normalized mean map, right inverse |t|^{-1}, codimension 4N^3",
+    "difficulty": "hard",
+    "plan": "An h-uniform Newton/contraction argument for the normalized mean map Q_h(t,theta,W) = t^{-2} Theta_h(t[Z+W]) requires the analytic extension through t=0 (integral Taylor formula for Theta_h), the range inverse of lem:supp-initial-range and the constraint calculus of lem:supp-initial-calculus, plus an inverse-function-theorem codimension count on the zero set (Mathlib has HasStrictFDerivAt.implicitFunction but the uniformity in h and the |t|^{-1} right-inverse bound are bespoke). Hard by dependence on the missing action and by the uniform-in-h analysis."
   },
   "cor:supp-action-prepared-einstein": {
     "env": "corollary",
     "title": "Action-prepared inputs populate the open law family",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: action-prepared inputs, harmonic completion, open law family, vacuum development"
+    "note": "No Lean counterpart found; searched: action-prepared inputs, harmonic completion, open law family, vacuum development",
+    "difficulty": "hard",
+    "plan": "Inherits thm:supp-action-prepared-chart, thm:supp-law-stability, thm:supp-law-einstein and the consistency of phase derivatives/Legendre maps toward a continuum vacuum-constraint limit; all hard and unformalized. The only finite fact, that the four lapse-shift rows vanish at the initial cut independently of B_h, is a restatement of C_h(I_h)=0 from the chart theorem."
   },
   "thm:supp-exact-constraint-rank": {
     "env": "theorem",
     "title": "Finite characteristic quotient on a regular one-null branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: characteristic quotient, extended constraint bracket, Dirac matrix D_h, rank 8V-2, 12V-2"
+    "note": "No Lean counterpart found; searched: characteristic quotient, extended constraint bracket, Dirac matrix D_h, rank 8V-2, 12V-2",
+    "difficulty": "medium",
+    "plan": "Formulate abstractly: given finite matrices M (with ker M = span{lambda}), A, B and the block map D = [[M, 0],[A, M]]-type acting on pairs (r,s) with the hypotheses (D_X P onto; A lambda = B from the homogeneity identity; consistency solvable), prove ker D = span{(lambda,0), (-M^dagger B, lambda)} and rank D = 8V - 2 by rank-nullity (Mathlib LinearMap.finrank_range_add_finrank_ker, Submodule.span of two independent vectors). The pseudo-inverse M^dagger can be taken from Analysis/HermitianMoorePenroseInverse.lean or Algebra/PsdBlockSchurExact.lean (pinv). The dimension count 20V - 8V - 2 = 12V - 2 is arithmetic. What is missing is only the abstract block-matrix lemma; connecting it to the actual extended-phase Dirac matrix of the exact action would be hard, so state it with the matrices as parameters."
   },
   "thm:supp-exact-transverse": {
     "env": "theorem",
     "title": "Exact all-cutoff transverse rank and natural-order bounds",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: transverse shift space, curl_delta, transverse source A_h, rank 2(V-1), singular values 4,1,1, K_0^{-1} acts by 1/2"
+    "note": "No Lean counterpart found; searched: transverse shift space, curl_delta, transverse source A_h, rank 2(V-1), singular values 4,1,1, K_0^{-1} acts by 1/2",
+    "difficulty": "medium",
+    "plan": "Per Fourier mode this is finite algebra: (a) the 3x3 map w -> (w1+w2, w1+w3, w2+w3) has Gram matrix with eigenvalues 4,1,1 (Mathlib Fin 3 matrix, charpoly or explicit eigenvectors); (b) for kappa . b = 0 the Lagrange identity |kappa x b|^2 = |kappa|^2|b|^2 gives ||curl_delta beta|| = ||Omega_h beta|| on transverse modes; (c) dim T_h = 2(V-1) by counting a two-dimensional kernel of the functional kappa(k)^T per nonzero mode (needs 3D finite Fourier decomposition on (ZMod N)^3; only a 1D root-difference sampling exists in DiscreteAnalysis/A3PeriodicGraphSamplingExact.lean); (d) the DeWitt inverse acting by 1/2 on zero-diagonal (trace-free) symmetric matrices follows from Gravity/DeWittInverse.lean:dewitt_inverse. New pieces: the mode decomposition, definitions of curl_delta and L_h, and assembling the two-sided bound with the uniform factor kappa_h."
   },
   "cor:supp-exact-transverse-elimination": {
     "env": "corollary",
     "title": "Lossless elimination of the transverse source columns",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: lossless elimination, transverse source columns, rank split, signed Gram congruence"
+    "note": "No Lean counterpart found; searched: lossless elimination, transverse source columns, rank split, signed Gram congruence",
+    "difficulty": "medium",
+    "plan": "Abstract matrix lemma: for F = [A G] with A^*A invertible, C = (A^*A)^{-1} A^* G and Gbar = G - A C, the block column operation [[I,-C],[0,I]] gives [A Gbar] with A^* Gbar = 0, hence rank F = rank A + rank Gbar (needs a small lemma: rank of a concatenation with orthogonal column spaces is additive, via Matrix.rank and finrank of a direct sum of ranges) and F^* K F congruent to blockdiag(A^*K A, Gbar^* K Gbar) when K A = A/2 and A^* Gbar = 0 (Matrix.fromBlocks_multiply, cross term A^* K Gbar = (1/2) A^* Gbar = 0). Congruence bookkeeping can reuse Krein/SignedHaynsworthInertia.lean (quadForm_congruence, posInertia_fromBlocks_diag) and Algebra/PsdBlockSchurExact.lean. Assembly only, but rank additivity is not yet in the library."
   },
   "thm:supp-exact-scalar-reconstruction": {
     "env": "theorem",
     "title": "Exact scalar--trace response reconstruction",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: scalar-trace reconstruction, H=2I-3C, signed Gram invertibility, response norm identity, trace resonance 2/3"
+    "note": "No Lean counterpart found; searched: scalar-trace reconstruction, H=2I-3C, signed Gram invertibility, response norm identity, trace resonance 2/3",
+    "difficulty": "medium",
+    "plan": "Finite matrix identities with orthogonal projections: define Pi = F(F^*F)^{-1}F^*, w, E tau = tau I/sqrt3, C = E^* Pi E, H = 2I - 3C. Invertibility equivalence uses det(2I - 3 Q^*EE^*Q) versus det(2I - 3 E^*QQ^*E) via Mathlib Matrix.det_one_add_mul_comm (Sylvester) after a QR/orthonormal-basis factor Q of ran F (obtain from Gram-Schmidt or Matrix.PosDef sqrt; Algebra/PsdBlockSchurExact.lean has supportProj/pinv tools). The response characterization F^* v = b and K_0 v in ran F with K_0 = (2I - 3 P_tr)/... gives Pi v = w and (I-Pi) v = 3 (I-Pi) E E^* v, then H(E^* v) = -zeta; the norm identity is Pythagoras for Pi. Needs the explicit DeWitt K_0 (Gravity/DeWittInverse.lean:dewittMap) and a dozen projection lemmas; no analysis."
   },
   "thm:supp-exact-time-hierarchy": {
     "env": "theorem",
     "title": "Derivative hierarchy in scalar--trace coordinates",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: derivative hierarchy, chi_j recursion, time-dependent signed response"
+    "note": "No Lean counterpart found; searched: derivative hierarchy, chi_j recursion, time-dependent signed response",
+    "difficulty": "medium",
+    "plan": "Pure calculus of matrix-valued C^r functions of t: from H(t) chi(t) = zeta(t) and H^{(l)} = -3 C^{(l)}, the j-th derivative via the Leibniz rule gives the boxed recursion, and differentiating v = w - 3(I-Pi)E chi gives the first-order formula. Missing: an iterated-derivative Leibniz formula for products of matrix-valued functions (Mathlib has iteratedDeriv/iteratedFDeriv with norm bounds and deriv_mul; the exact binomial Leibniz formula may need to be written by induction using HasDerivAt.mul), plus deriv of the inverse (Mathlib HasDerivAt.inverse / Matrix inverse smoothness via Ring.inverse). Routine but several lemmas."
   },
   "prop:supp-exact-clock-test": {
     "env": "proposition",
     "title": "Necessary lapse--shift clock condition for harmonic shadowing",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: lapse-shift clock condition, harmonic shadowing, active/weak amplitude grading, rate norm"
+    "note": "No Lean counterpart found; searched: lapse-shift clock condition, harmonic shadowing, active/weak amplitude grading, rate norm",
+    "difficulty": "easy",
+    "plan": "Scope to the analytic content: if ||lambda_t||^2 = a^{-2}||u_A||^2 + a^{-4}||u_W||^2 (eq:supp-exact-rate-norm taken as hypothesis) and ||lambda_t|| -> 0 along a(h) -> 0, then both a^{-1}||u_A|| -> 0 and a^{-2}||u_W|| -> 0; this is squeeze on nonnegative summands (Mathlib tendsto_of_tendsto_of_tendsto_of_le_of_le, sqrt continuity). The ADM identities partial_t g_00 = -2 partial_t N, partial_t g_0i = gamma_ij partial_t beta^j at N=1, beta=0 can be recorded as an algebraic lemma on Matrix (Fin 4) built like Gravity/RelationalDeSitterBranch.lean:lorentzMetric. One short file."
   },
   "lem:supp-exact-rational-detuning": {
     "env": "lemma",
     "title": "Finite rational detuning",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: rational detuning, cosine product-defect operator, Jacobi matrix spectrum, h^6 margin (NCG/Grand/FiniteBlockJacobiChainExact.lean is unrelated)"
+    "note": "No Lean counterpart found; searched: rational detuning, cosine product-defect operator, Jacobi matrix spectrum, h^6 margin (NCG/Grand/FiniteBlockJacobiChainExact.lean is unrelated)",
+    "difficulty": "hard",
+    "plan": "Requires quantitative spectral information on the cosine product-defect Jacobi matrix D_h (simple spectrum, reciprocal-eigenvalue sum O(h^{-3}), spectral gaps versus 4h^6) and a measure argument on the ratio set, then a tensor-product eigenbasis argument for the three squared components; the paper proof is itself sketchy on the h^{-3} bound. Nothing on Jacobi/tridiagonal spectra exists (Jacobi hits are determinant-derivative files). Finite-dimensional but a research-level quantitative spectral estimate; the existential 'finite algebraic search' is not a usable Lean statement without the margin proof."
   },
   "thm:supp-exact-active-regular": {
     "env": "theorem",
     "title": "All-cutoff regular active source",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: active source, curl-free shift kernel, rank 3V-3, Gram floor h^16"
+    "note": "No Lean counterpart found; searched: active source, curl-free shift kernel, rank 3V-3, Gram floor h^16",
+    "difficulty": "hard",
+    "plan": "Combines the exact preparation chart (hard, thm:supp-action-prepared-chart), the rational detuning margin (hard) and the transverse block (medium) into an h^16 Gram floor for the complete leading active source of the exact action, which is not defined in Lean. Only the kernel description constant lapse plus curl-free shifts would be finite algebra once the source matrix is defined."
   },
   "thm:supp-exact-neutral-preparation": {
     "env": "theorem",
     "title": "Exact source-neutral finite preparation",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: source-neutral preparation, balanced polarization family, three-site seed, signed Gram, initial link curvature"
+    "note": "No Lean counterpart found; searched: source-neutral preparation, balanced polarization family, three-site seed, signed Gram, initial link curvature",
+    "difficulty": "hard",
+    "plan": "Needs the weak quadratic target of the full retained action on the balanced family (polarization invariants), the uniform range inverse and four-mean calibration (hard chain), a concrete three-site signed-Gram determinant computed from the exact action, and the literal temporal/spatial link-curvature formulas. None of the exact-action objects exist; the vanishing of the two polarization invariants (equal norms, orthogonality of T_i and P_i) is an easy Fin 3 matrix fact but is a small fraction of the statement."
   },
   "thm:supp-exact-direct-transverse": {
     "env": "theorem",
     "title": "Actual direct transverse geometric suppression",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: direct transverse response, pseudoinverse factorization T^dagger, H_h bounds 9/16..324, folded-face tail"
+    "note": "No Lean counterpart found; searched: direct transverse response, pseudoinverse factorization T^dagger, H_h bounds 9/16..324, folded-face tail",
+    "difficulty": "hard",
+    "plan": "Requires the pseudoinverse factorization T^dagger, the operator bounds 9/16 <= H_h <= 324 in weighted Sobolev norms H_h^{s+3}, a geometric observation operator whose symbol supplies h^2, and exponential off-diagonal decay of H_h^{-1} in cyclic Fourier distance. These are h-uniform multiplier estimates on the grid with undefined operators; research-level and dependent on the exact action."
   },
   "thm:supp-exact-scalar-flux": {
     "env": "theorem",
     "title": "Exact positive scalar energy",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: positive scalar energy, K_Q bounds 1/324..16/9, scalar operator S_h flux factorization, diagonal soft subspace"
+    "note": "No Lean counterpart found; searched: positive scalar energy, K_Q bounds 1/324..16/9, scalar operator S_h flux factorization, diagonal soft subspace",
+    "difficulty": "hard",
+    "plan": "The identity S_h = (1/2) D_h^* D_h + (h^2/2) sigma_h^* K_Q^{-1} sigma_h and the K_Q bounds 1/324..16/9 are finite congruence/compression statements, but S_h, sigma_h, Q_h, K_{Q,h} are derived from the exact action after transverse elimination and are not defined; the divergence claim on the soft subspace is a compactness argument. Without the exact-action pipeline this cannot be stated faithfully; a scoped abstract version (compression of a positive metric with uniformly invertible coefficient map has bounds inherited from that map) would be medium."
   },
   "thm:supp-exact-initial-layer": {
     "env": "theorem",
     "title": "Initial-layer obstruction on an exactly prepared branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: initial-layer obstruction, tangency functional Delta_nu, Poisson-null weak test, a^3 S layer, R_{0i0j} no fixed-time linear bound"
+    "note": "No Lean counterpart found; searched: initial-layer obstruction, tangency functional Delta_nu, Poisson-null weak test, a^3 S layer, R_{0i0j} no fixed-time linear bound",
+    "difficulty": "hard",
+    "plan": "Requires the three-site exactly prepared family, the weak Poisson matrix K_1, the tangency functional Delta_nu, and a time-rescaling t = a^3 s limit of an analytic finite vector field with a contradiction argument against a fixed-time linear curvature bound. The rescaling limit is finite-dimensional ODE analysis (Mathlib has ODE existence/Gronwall but not parameter-dependent limits), and every object depends on the unformalized exact action. Research-level."
   },
   "thm:supp-exact-upstream-deformation": {
     "env": "theorem",
     "title": "The fixed-first-jet tangency obstruction is deformable",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: tangency deformation, lower incidence tangent (Z_2,m_2), polarization derivative nonzero"
+    "note": "No Lean counterpart found; searched: tangency deformation, lower incidence tangent (Z_2,m_2), polarization derivative nonzero",
+    "difficulty": "hard",
+    "plan": "The conclusion is a nonzero rational number obtained by polarizing the tangency functional along an exact lower-incidence tangent (Z_2, m_2) of the three-site exact action; in principle a decide/norm_num computation, but it presupposes Lean definitions of the lower-incidence map L(Y,l), the first Poisson matrix and the multiplier system for the exact finite action, none of which exist. Hard until the exact-action objects (also needed by thm:supp-exact-initial-layer) are encoded."
   },
   "lem:supp-homogeneous-euler-control": {
     "env": "lemma",
     "title": "Full finite variation controlled by the residual energy",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: residual energy E=A_0 sum R_j^2/s_j, finite variation bound, common-sign stationary recurrence, path control (NCG/Gravity/FLRWReduction.lean and NCG/Flagship/Metrology.lean treat the continuum homogeneous action only)"
+    "note": "No Lean counterpart found; searched: residual energy E=A_0 sum R_j^2/s_j, finite variation bound, common-sign stationary recurrence, path control (NCG/Gravity/FLRWReduction.lean and NCG/Flagship/Metrology.lean treat the continuum homogeneous action only)",
+    "difficulty": "medium",
+    "plan": "Encode the homogeneous discrete action S_d(q,s) as a finite sum, the residuals R_j^sigma = q_{j+1} - q_j - sigma omega s_j qbar_j, and first prove the exact square factorization eq:supp-homogeneous-square-factor (ring). Then the variation bound is a weighted Cauchy-Schwarz over j (Mathlib inner_mul_le_norm_mul_norm on Fin M -> R or Finset.inner_mul_le_norm_mul_norm) together with |delta of the endpoint term| <= E ||n||_inf; the path bound is an explicit iteration of q_{j+1} = r_j q_j + R_j/d_j with d_j >= 1-b and sum |R_j| <= sqrt(T sum R_j^2/s_j) (Cauchy-Schwarz again). Comparable to the finite-recurrence records in Action/ScoreContinuum.lean; no existing homogeneous-action encoding (Gravity/FLRWReduction handles only the continuum), so a small new structure is needed."
   },
   "prop:supp-three-costs": {
     "env": "proposition",
     "title": "Three-cost identification and rank defect",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: three-cost identification, measured quadratic cost E_s, rank-one compatibility AB-C^2, completed square"
+    "note": "No Lean counterpart found; searched: three-cost identification, measured quadratic cost E_s, rank-one compatibility AB-C^2, completed square",
+    "difficulty": "easy",
+    "plan": "With E_s(x,y) = A(y-x)^2/s + B s ((x+y)/2)^2 + C(y^2-x^2) (eq:main-measured-quadratic-cost) as a Lean definition over reals, the three identification formulas and the completed-square identity eq:supp-cost-completion are field_simp/ring identities under s > 0, u != v, A > 0; the statement 'D = 0 iff rank-one' is the observation that the second term vanishes exactly when nu = 0. No library dependency; similar one-file algebraic records exist in Action/EdgeActionPythagoras.lean."
   },
   "lem:supp-entropy-energy": {
     "env": "lemma",
     "title": "History-level entropy--energy estimate",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: history-level entropy-energy estimate, Gibbs row Q=p e^{-E/eps}/Z, proposal floor p_*, chain rule path relative entropy (KL files in NCG/Grand/Accepted*Exact.lean concern occupation-energy/KL bounds of a different object)"
+    "note": "No Lean counterpart found; searched: history-level entropy-energy estimate, Gibbs row Q=p e^{-E/eps}/Z, proposal floor p_*, chain rule path relative entropy (KL files in NCG/Grand/Accepted*Exact.lean concern occupation-energy/KL bounds of a different object)",
+    "difficulty": "medium",
+    "plan": "Per-stage identity E_P E_j = eps KL(P_j||Q_j) - eps KL(P_j||p_j) - eps log Z_j follows from log Q_j = log p_j - E_j/eps - log Z_j with the finite KL of Action/FiniteGibbsActionGap.lean (finiteKL, gibbsRow, log_ratio_gibbsRow already give this for one row); Z_j >= p_* e^{-e_j/eps} from a single term. Missing: the path-level chain rule D_KL(P||Q) = sum_j E_P[KL of stage-j conditionals] for a finite-horizon product law Q against a memoryful P (iterate StatMech/AcceptedActionInformationPythagoras.lean:finiteKL_partition_chain over the prefix partition M times) and the nonnegativity KL(P_j||p_j) >= 0 (finiteKL_nonneg_eq_iff). A new finite path-measure structure plus an induction; no analysis."
   },
   "lem:supp-two-edge-schur": {
     "env": "lemma",
@@ -1288,35 +1464,45 @@
     "lean": [
       "RenewalGeometry/StandardModel/K4Core.lean:RenewalGeometry.schur_series_step"
     ],
-    "note": "Partial: only the degenerate special case p_i=q_i=r_i (weighted two-edge path Laplacian, d_i=0) is proved as a series-conductance Schur step; missing: the general positive-quadratic two-edge blocking with the coefficient formulas p',q',r', the positive minimizer, and the boxed determinant identity p'r'-q'^2=(r_2 d_1+p_1 d_2)/(r_1+p_2)."
+    "note": "Partial: only the degenerate special case p_i=q_i=r_i (weighted two-edge path Laplacian, d_i=0) is proved as a series-conductance Schur step; missing: the general positive-quadratic two-edge blocking with the coefficient formulas p',q',r', the positive minimizer, and the boxed determinant identity p'r'-q'^2=(r_2 d_1+p_1 d_2)/(r_1+p_2).",
+    "difficulty": "easy",
+    "plan": "Extend StandardModel/K4Core.lean:schur_series_step to the general quadratic: minimize E_1(x,z)+E_2(z,y) in z, giving z_* = (q_1 x + q_2 y)/(r_1+p_2) > 0 for x,y > 0 (positivity), the coefficient formulas p', q', r' by completing the square (field_simp; ring), and the determinant identity p'r' - q'^2 = (r_2 d_1 + p_1 d_2)/(r_1+p_2) by ring after substituting d_i = p_i r_i - q_i^2. Also record that the blocked quadratic equals the minimum value (a quadratic-in-z minimization lemma, e.g. via the completed square). One short file."
   },
   "thm:supp-gowdy-momentum": {
     "env": "theorem",
     "title": "Exact staggered momentum under symmetric splitting",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Gowdy, staggered momentum, symmetric splitting, implicit midpoint, characteristic transport; no Gowdy formalization in NCG"
+    "note": "No Lean counterpart found; searched: Gowdy, staggered momentum, symmetric splitting, implicit midpoint, characteristic transport; no Gowdy formalization in NCG",
+    "difficulty": "medium",
+    "plan": "Scope to the exact algebraic clauses: encode the Gowdy grid state (U,P,Q,lambda) on ZMod N, the constraint K_l = D_+ lambda - 2 A_+ J(U) with J quadratic, the implicit-midpoint source step and the characteristic transport step; then (i) implicit midpoint preserves J exactly because a quadratic's endpoint difference equals its midpoint gradient paired with the increment (ring identity), and (ii) the transport identity Delta J = (1/2)[(S_+ - I)g^+ - (S_- - I)g^-] with D_+ Delta lambda = 2 A_+ Delta J is finite shift algebra on periodic sequences (nearest-neighbour operators as in DiscreteAnalysis/DiscreteCoordinateDifferenceBoundExact.lean); nonnegativity of the lambda increment is a sum of squares. The 'second-order consistent on smooth charts' clause is a Taylor-remainder statement for the 1D transport/trapezoid rule (Mathlib taylor_mean_remainder) and should be split off; no Gowdy encoding exists, so a new small structure is required."
   },
   "prop:supp-gowdy-residual-control": {
     "env": "proposition",
     "title": "Residual and constraint control",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Gowdy residual energy, discrete Gronwall, constraint increment"
+    "note": "No Lean counterpart found; searched: Gowdy residual energy, discrete Gronwall, constraint increment",
+    "difficulty": "hard",
+    "plan": "The discrete Gronwall iteration itself (Lipschitz 1+Ch, residual sum) is medium and could be a standalone lemma (no discrete Gronwall exists in the library), but the statement needs the smooth Gowdy reference solution X_*, the grid sampling S_l, the C^r_l norms with inverse estimates, and the O(h^3) consistency of the split map against the Gowdy PDE, i.e. Taylor expansions of a PDE solution in two variables; PDE reference objects are absent from Mathlib/library. The exact constraint-increment formula is finite algebra given thm:supp-gowdy-momentum."
   },
   "thm:supp-gowdy-full-curvature": {
     "env": "theorem",
     "title": "Pathwise full-curvature control on the Gowdy alphabet",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: Gowdy, cubic Hermite reconstruction, W^{1,inf} second-jet, Riemann/Ricci pathwise curvature bounds"
+    "note": "No Lean counterpart found; searched: Gowdy, cubic Hermite reconstruction, W^{1,inf} second-jet, Riemann/Ricci pathwise curvature bounds",
+    "difficulty": "hard",
+    "plan": "Requires cubic Hermite reconstruction on a 2D grid with W^{1,inf} and second-jet remainder estimates, the reconstructed Gowdy metric's Christoffel and Riemann tensors as functions of a piecewise-polynomial C^1 metric, and L^inf/L^2 curvature bounds; no Hermite interpolation, no continuum curvature of a general metric (Gravity/CoordinateCurvature.lean only handles diagonal FLRW jets). Infrastructure-level."
   },
   "lem:supp-executed-proposal-floor": {
     "env": "lemma",
     "title": "A finite execution certificate for the proposal floor",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: launch race, predictor-marked launch, first-launch decomposition, execution certificate, proposal floor q_* rho_* (1-e^{-A_*})"
+    "note": "No Lean counterpart found; searched: launch race, predictor-marked launch, first-launch decomposition, execution certificate, proposal floor q_* rho_* (1-e^{-A_*})",
+    "difficulty": "easy",
+    "plan": "Finite probability arithmetic: with S_l = prod_{i<=l}(1-a_i), the telescoping identity sum_{l=1}^J S_{l-1} a_l = 1 - S_J (Finset.sum_range_succ induction), the lower bound sum S_{l-1} f_l >= rho_* (1 - S_J) from f_l >= rho_* a_l, then 1 - S_J >= 1 - e^{-A_*} from -log S_J >= A_* (Real.exp_le_exp, Real.exp_log), and multiplication by the conditional execution probability q_*. Model the launch race as explicit real numbers; a conditional-probability product statement can be phrased directly on the numbers. Telescoping-product patterns already appear in MarkovChains/ClassicalAffinity.lean and Analysis/GeometricThresholdBankExact.lean."
   },
   "lem:supp-a3-second-moment": {
     "env": "lemma",
@@ -1333,7 +1519,9 @@
     "title": "Fourier symbol and flat generator limit",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: A3 root generator Fourier symbol, (1/4h^2) sum (1-cos), limit 2 pi^2 |k|^2, strong resolvent / Mosco convergence to Delta/2 (NCG/Grand/CovariantFourierLaplacianSymbolConvergence.lean and ZModCovariantFourierSymbol.lean treat cubic covariant symbols, not the A3 root generator; NCG/Grand/A3*Exact.lean prove Connes-distance and energy consistency, not the generator limit)"
+    "note": "No Lean counterpart found; searched: A3 root generator Fourier symbol, (1/4h^2) sum (1-cos), limit 2 pi^2 |k|^2, strong resolvent / Mosco convergence to Delta/2 (NCG/Grand/CovariantFourierLaplacianSymbolConvergence.lean and ZModCovariantFourierSymbol.lean treat cubic covariant symbols, not the A3 root generator; NCG/Grand/A3*Exact.lean prove Connes-distance and energy consistency, not the generator limit)",
+    "difficulty": "hard",
+    "plan": "As stated it includes strong-resolvent and semigroup convergence of L_h to (1/2) Delta on L^2(T^3), which needs the continuum torus Laplacian as an unbounded operator and the varying-Hilbert Mosco machinery (OperatorLimits/VaryingHilbertMosco.lean, MoscoResolvent.lean exist but no continuum Laplacian on T^3 exists in Mathlib); that clause is infrastructure-level. The finite part is medium and should be split off: define the generator on (ZMod d)^3 from A3PeriodicGraphSamplingExact.lean (mass/conductance/rootStep) and a3Roots, show e_k is an eigenvector with lambda_h(k) = (1/(4h^2)) sum_{a=1}^6 [1 - cos(2 pi h <r_a,k>)] by pairing +-alpha (Real.cos_neg), then the pointwise limit 2 pi^2 |k|^2 from (1-cos x)/x^2 -> 1/2 (Mathlib Real.one_sub_cos or tendsto via Taylor) and the tight-frame identity Gravity/RelationalFlatVacuum.lean:relational_flat_vacuum / A3FiniteDifferenceConsistencyExact.lean:tight_frame_energy (sum over 6 oriented roots = 4I)."
   },
   "lem:supp-periodic-screens": {
     "env": "lemma",
@@ -1346,7 +1534,9 @@
       "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylExact.lean:RenewalGeometry.finite_meanZero_poincare",
       "RenewalGeometry/DiscreteAnalysis/AtlasIsoperimetry.lean:RenewalGeometry.loomis_whitney_dim3"
     ],
-    "note": "Partial: for an arbitrary finite weighted graph satisfying a cut inequality h c(dA) >= I mu(A)^{2/3} and an h^2-degree bound, Lean proves the Poincare/spectral floor (i), a Weyl count <= 1 + C V R^{3/2} (ii) and the spectral tail |(I-P_R)f|^2 <= R^{-1} E(f); the 3D discrete Loomis-Whitney inequality is proved. Missing: the A3-specific h-uniform cut margin (iii) via coordinate slicing, and the symbol comparison c_1|k|^2 <= lambda_h(k) <= c_2|k|^2 with constants uniform in h and in a in [a_-,a_+]."
+    "note": "Partial: for an arbitrary finite weighted graph satisfying a cut inequality h c(dA) >= I mu(A)^{2/3} and an h^2-degree bound, Lean proves the Poincare/spectral floor (i), a Weyl count <= 1 + C V R^{3/2} (ii) and the spectral tail |(I-P_R)f|^2 <= R^{-1} E(f); the 3D discrete Loomis-Whitney inequality is proved. Missing: the A3-specific h-uniform cut margin (iii) via coordinate slicing, and the symbol comparison c_1|k|^2 <= lambda_h(k) <= c_2|k|^2 with constants uniform in h and in a in [a_-,a_+].",
+    "difficulty": "medium",
+    "plan": "Generic parts (i),(ii), tail bound are proved in DiscreteAnalysis/OperationalSobolevWeylFiniteGraph.lean (positiveEigenvalue_floor, eigenvalueCount_bound, eigenfunction_spectralTail_bound) from a cut inequality plus degree bound. Missing: (a) the A3-specific cut margin: restrict to the three basis-root directions, slice a vertex set A of the periodic grid (ZMod d)^3 along coordinates, apply DiscreteAnalysis/AtlasIsoperimetry.lean:loomis_whitney_dim3 to get h^2 #dA >= c_0 (h^3 #A)^{2/3} for #A <= d^3/2 (needs a lemma that a coordinate fibre either fills or contributes at least one boundary edge, i.e. #(boundary edges in direction i) >= #(proj_i A) when A is not a union of full lines, plus the half-volume case), then monotonicity of cut capacity when adding the remaining root edges; (b) the h^2-degree bound h^2 * 12 * (a h/8) <= D a^3 h^3, trivial; (c) if the symbol comparison c_1|k|^2 <= lambda_h(k) <= c_2|k|^2 is wanted explicitly, use Real.two_div_pi_mul_le_sin / Real.sin_le on |x| <= pi/2 with 1-cos x = 2 sin^2(x/2) and the tight-frame identity. All finite combinatorics and elementary inequalities."
   },
   "con:supp-flat-regulator": {
     "env": "construction",
@@ -1358,7 +1548,9 @@
       "RenewalGeometry/DiscreteAnalysis/A3PeriodicGraphSamplingExact.lean:RenewalGeometry.A3PeriodicGraphSampling.conductance",
       "RenewalGeometry/Gravity/RelationalFlatVacuum.lean:RenewalGeometry.a3Roots"
     ],
-    "note": "Partial: the spatial weighted graph of the regulator is encoded (periodic A3 lattice Lambda/d Lambda as Fin 3 -> ZMod d in the root basis, vertex mass h^3, twelve root edges with conductance h/8 from rate 1/(8h^2), a3Roots); missing: the renewal/event structure (root-race outcomes, identity root router, identity slow row, zero reward, protected orientation and spectator fibres, normalized conditional law) is not encoded."
+    "note": "Partial: the spatial weighted graph of the regulator is encoded (periodic A3 lattice Lambda/d Lambda as Fin 3 -> ZMod d in the root basis, vertex mass h^3, twelve root edges with conductance h/8 from rate 1/(8h^2), a3Roots); missing: the renewal/event structure (root-race outcomes, identity root router, identity slow row, zero reward, protected orientation and spectator fibres, normalized conditional law) is not encoded.",
+    "difficulty": "medium",
+    "plan": "The spatial weighted graph is already encoded (DiscreteAnalysis/A3PeriodicGraphSamplingExact.lean: Vertex, mass = h^3, conductance = h/8 along a3Roots). Missing is the renewal-event structure: a record type bundling the twelve exponential root branches at rate 1/(8h^2), the identity root router and identity slow row, zero reward, the protected-orientation and one-point spectator fibres, and the directly normalized conditional law of the race outcome (winner probability k_alpha / sum k = 1/12, cf. Gravity/RelationalSchedulerADM.lean (A3) race-score identities). This requires the paper's general operational regulator/scheduler structure to exist in Lean (it does not; only the ADM inversion and race moments are recorded), so a new supporting structure is needed, but each field is a finite object."
   },
   "thm:supp-flat-vacuum": {
     "env": "theorem",
@@ -1369,7 +1561,9 @@
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.predictableBracket_eq",
       "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.relational_scheduler_ADM"
     ],
-    "note": "Partial: B_h = I_3 (tight-frame identity, and predictableBracket_eq at H=0) and the conductance h/8 are proved; the ADM inversion g = rho^{2/3}(det B)^{1/3}B^{-1}, N = rho^{1/3}(det B)^{1/6} is proved as an analytic bijection (relational_scheduler_ADM (A4)) but not evaluated to g_h=I_3, N_h=1, beta_h=0, rho_h=1. Missing: generator convergence to Delta/2, the Lorentzian continuum (R x T^3, Minkowski), G(g_0)=0, and vanishing finite torsion/curvature/Palatini residuals."
+    "note": "Partial: B_h = I_3 (tight-frame identity, and predictableBracket_eq at H=0) and the conductance h/8 are proved; the ADM inversion g = rho^{2/3}(det B)^{1/3}B^{-1}, N = rho^{1/3}(det B)^{1/6} is proved as an analytic bijection (relational_scheduler_ADM (A4)) but not evaluated to g_h=I_3, N_h=1, beta_h=0, rho_h=1. Missing: generator convergence to Delta/2, the Lorentzian continuum (R x T^3, Minkowski), G(g_0)=0, and vanishing finite torsion/curvature/Palatini residuals.",
+    "difficulty": "medium",
+    "plan": "Missing finite pieces: evaluate the ADM inversion of Gravity/RelationalSchedulerADM.lean:relational_scheduler_ADM (A4) at B = I_3, rho = 1 to get g = I_3, N = 1 (det I = 1, rpow of 1), beta = 0 from the reversal symmetry of the twelve rates (sum over a3Roots of k_alpha alpha = 0, a Fin 12 computation like RelationalFlatVacuum.lean); Minkowski curvature and G = 0 from Gravity/CoordinateCurvature.lean (flrw_einstein_00 / desitter_einstein_space at a = 1, adot = 0, H = 0, or a direct zero-Christoffel lemma); vanishing of the finite Cartan/Palatini residuals for identity links and constant coframe once those writers are defined (the Lorentz/DiscreteCartan.lean plaquetteDefect vanishes for zero generator). The generator-convergence clause is a citation of lem:supp-flat-symbol (hard) and should be scoped out or kept as a hypothesis; with that scoping the record is assembly plus a few definitions."
   },
   "thm:supp-desitter-adm": {
     "env": "theorem",
@@ -1382,7 +1576,9 @@
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.conductance_exact",
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.slab_spatial_constants_common_lower"
     ],
-    "note": "Partial: with rootRate = e^{-2Ht}/(8h^2) and vertexMass = e^{3Ht}h^3, Lean proves B_h(t) = e^{-2Ht} I_3 and the conductance e^{Ht}h/8 exactly. The ADM packet (rho, g=e^{2Ht}I, N=1, beta=0) is only stated by definition (adm_variables_exact is rfl), not derived from the ADM inversion; the slab uniformity of the cut/Poincare/counting/screen constants is reduced to assumed positive t=0 margins transported by e^{Ht} (slab_spatial_constants_common_lower), not derived from the periodic-screen lemma."
+    "note": "Partial: with rootRate = e^{-2Ht}/(8h^2) and vertexMass = e^{3Ht}h^3, Lean proves B_h(t) = e^{-2Ht} I_3 and the conductance e^{Ht}h/8 exactly. The ADM packet (rho, g=e^{2Ht}I, N=1, beta=0) is only stated by definition (adm_variables_exact is rfl), not derived from the ADM inversion; the slab uniformity of the cut/Poincare/counting/screen constants is reduced to assumed positive t=0 margins transported by e^{Ht} (slab_spatial_constants_common_lower), not derived from the periodic-screen lemma.",
+    "difficulty": "medium",
+    "plan": "Replace the rfl-by-definition adm_variables_exact in Gravity/RelationalDeSitterBranch.lean by a derivation: apply relational_scheduler_ADM (A4) inversion g = rho^{2/3} (det B)^{1/3} B^{-1}, N = rho^{1/3} (det B)^{1/6} at B = e^{-2Ht} I (predictableBracket_eq) and rho = e^{3Ht} (speedDensity), using Matrix.det_smul, Real.rpow_natCast and exp arithmetic; beta = 0 from reversal symmetry of the rates (Fin 12 sum). Slab uniformity of cut/Poincare/counting/screen constants: replace the assumed t=0 margins in slab_spatial_constants_common_lower by the actual periodic-screen constants of lem:supp-periodic-screens applied with a = e^{Ht} in [e^{-HT}, e^{HT}] (slab_scale_lower already gives the scale bounds). Depends on the medium record lem:supp-periodic-screens."
   },
   "thm:supp-desitter-einstein": {
     "env": "theorem",
@@ -1395,7 +1591,9 @@
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.compact_desitter_global_slicing_certificate",
       "RenewalGeometry/Gravity/DeSitterChart.lean:RenewalGeometry.dsChart_pullback_metric"
     ],
-    "note": "Partial: Ric = 3H^2 g, R = 12H^2 and G + 3H^2 g = 0 are proved for g_H = -dt^2 + e^{2Ht}dx^2 from the coordinate Christoffel jet (desitter_einstein_space, coordinate_desitter_einstein_space), and the planar de Sitter hyperboloid realization is proved. Missing: the Cartan-form derivation (torsion-freeness of omega^a_0 = H theta^a and Omega^A_B = H^2 theta^A wedge theta_B) is not proved: cartanTorsion is defined as 0 and constantCurvatureTensor is a definition, so cartan_torsion_free is tautological; global hyperbolicity is only a coordinate slicing certificate (det != 0, spacelike slices, unique time parameter)."
+    "note": "Partial: Ric = 3H^2 g, R = 12H^2 and G + 3H^2 g = 0 are proved for g_H = -dt^2 + e^{2Ht}dx^2 from the coordinate Christoffel jet (desitter_einstein_space, coordinate_desitter_einstein_space), and the planar de Sitter hyperboloid realization is proved. Missing: the Cartan-form derivation (torsion-freeness of omega^a_0 = H theta^a and Omega^A_B = H^2 theta^A wedge theta_B) is not proved: cartanTorsion is defined as 0 and constantCurvatureTensor is a definition, so cartan_torsion_free is tautological; global hyperbolicity is only a coordinate slicing certificate (det != 0, spacelike slices, unique time parameter).",
+    "difficulty": "medium",
+    "plan": "Ric = 3H^2 g, R = 12 H^2, G + 3H^2 g = 0 are proved (RelationalDeSitterBranch.lean:coordinate_desitter_einstein_space, CoordinateCurvature.lean:desitter_einstein_space). Missing: replace the tautological cartanTorsion := 0 by a component computation: define the coframe structure coefficients of theta^0 = dt, theta^a = e^{Ht} dx^a (d theta^a = H theta^0 ^ theta^a, i.e. C^a_{0a} = H), the connection omega^a_0 = H theta^a as coefficients omega^A_{B C}, and prove the torsion components d theta^A + omega^A_B ^ theta^B vanish and the curvature components d omega + omega ^ omega equal H^2 (eta_AC eta_BD - eta_AD eta_BC) as Fin 4 index algebra (fin_cases + norm_num), reusing the Koszul/torsion algebra of Lorentz/DiscreteCartan.lean (koszul_torsion, cartan_uniqueness) to show the connection is the unique metric torsion-free one. Differential forms in Mathlib are impractical; the component formulation is finite. The final global-hyperbolicity sentence needs Lorentzian causality theory and should stay scoped to the existing coordinate slicing certificate (compact_desitter_global_slicing_certificate)."
   },
   "thm:supp-finite-defects": {
     "env": "theorem",
@@ -1410,6 +1608,8 @@
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.explicit_geometric_defects_summable",
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.diagonalMesh_summable"
     ],
-    "note": "Partial: for the homogeneous de Sitter branch Lean proves exact metric-unitary time-line transport, explicit scalar Taylor-remainder models of the torsion, face-curvature and midpoint Palatini cell defects with area-normalized bounds C_H h_n (C_H depending on H only) on the diagonal mesh h_n = 2^{-n^2}, and their summability. Missing: the actual nonabelian-Stokes face holonomy log U_{dp} + |p| Omega, the covariant developed-edge torsion defect, the Palatini first-variation quadrature error over O(h^{-4}) cells with a slab constant C_T, the sup over faces and C^1 tests, the flat-regulator zero statement, and the T_n = n exhaustion with C_{T_n} <= C e^{cn}."
+    "note": "Partial: for the homogeneous de Sitter branch Lean proves exact metric-unitary time-line transport, explicit scalar Taylor-remainder models of the torsion, face-curvature and midpoint Palatini cell defects with area-normalized bounds C_H h_n (C_H depending on H only) on the diagonal mesh h_n = 2^{-n^2}, and their summability. Missing: the actual nonabelian-Stokes face holonomy log U_{dp} + |p| Omega, the covariant developed-edge torsion defect, the Palatini first-variation quadrature error over O(h^{-4}) cells with a slab constant C_T, the sup over faces and C^1 tests, the flat-regulator zero statement, and the T_n = n exhaustion with C_{T_n} <= C e^{cn}.",
+    "difficulty": "hard",
+    "plan": "The existing Lean (RelationalDeSitterBranch.lean torsionCellRemainder_le, curvatureCellRemainder_le, palatiniCellRemainder_le, explicit_geometric_defects_summable) only bounds scalar Taylor-remainder models. The real statement needs the path-ordered exact link U_e = P exp(-int omega) (no product integral / nonabelian Stokes in Mathlib), the face holonomy expansion log U_dp = -|p| Omega + O(h^3), the developed-edge torsion defect, the midpoint quadrature error of the Palatini first variation over O(h^{-4}) cells with a C^1 test-field sup, and the exponential growth C_{T_n} <= C e^{cn} of derivative bounds on [-n,n]. Only the last summability step (Summable of C e^{cn} 2^{-n^2}, cf. summable_of_defect_le_mesh) is easy. Infrastructure-level ODE/holonomy analysis."
   }
 }

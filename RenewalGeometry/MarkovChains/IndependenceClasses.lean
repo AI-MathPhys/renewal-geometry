@@ -92,7 +92,6 @@ theorem _root_.NCG.Multigraph.Walk.holonomy_indicator (e₀ : G.E) :
     simp only [holonomy_bwd, usesCount, fwdCount, bwdCount, ih]
     split <;> push_cast <;> ring
 
-open NCG.Multigraph.H1R in
 /-- The real class of the indicator of an edge traversed exactly once
 by a closed walk is nonzero. -/
 theorem _root_.NCG.Multigraph.H1R.mk_indicator_ne_zero {v : G.V} {e₀ : G.E}
