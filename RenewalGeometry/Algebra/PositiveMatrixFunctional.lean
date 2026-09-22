@@ -6,8 +6,6 @@ Authors: Aurelien Pelissier
 import RenewalGeometry.Grand.AtomicReset
 import Mathlib.Analysis.Matrix.Order
 import RenewalGeometry.Upstream.PrimitiveWeight
-
-open NCG
 /-!
 # Positive functionals on finite matrix algebras
 

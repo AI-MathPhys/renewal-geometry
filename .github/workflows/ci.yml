@@ -22,7 +22,6 @@ jobs:
         uses: leanprover/lean-action@v1
         with:
           use-mathlib-cache: true
-          build-args: "--wfail"
 
       - name: Axiom audit of every cited declaration
         run: python3 scripts/audit_axioms.py

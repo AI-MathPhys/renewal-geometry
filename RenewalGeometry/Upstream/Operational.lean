@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # The rooted operational process system (upstream program, §2–3)
 

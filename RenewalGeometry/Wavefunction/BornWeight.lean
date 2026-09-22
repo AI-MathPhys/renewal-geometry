@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # The renewal Born disintegration and operational closure
   (`thm:renewal-born-disintegration`,

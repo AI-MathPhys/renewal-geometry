@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Common-core strong-resolvent criterion and propagator convergence
 

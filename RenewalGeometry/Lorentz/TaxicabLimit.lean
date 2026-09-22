@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # The polyhedral Lorentzian continuum: reverse triangle inequality
 

@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Upstream.Operational
 import RenewalGeometry.Algebra.ChoiCriterion
-
-open NCG
 /-!
 # Process systems, parallel completeness, ancillary stability, roles
 

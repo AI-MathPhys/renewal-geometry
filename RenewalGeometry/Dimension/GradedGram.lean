@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # The graded Clifford commutator form and its Gram matrix
 

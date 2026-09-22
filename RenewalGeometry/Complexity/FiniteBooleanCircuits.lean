@@ -5,8 +5,6 @@ Authors: Aurelien Pelissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Finite Boolean circuits and nonuniform circuit families
 

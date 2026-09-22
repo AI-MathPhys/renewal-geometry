@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Concrete renewal profiles
   (`thm:renewal-continuous-completion`,

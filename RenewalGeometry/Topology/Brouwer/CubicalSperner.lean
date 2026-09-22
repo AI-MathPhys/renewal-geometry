@@ -6,8 +6,6 @@ see LICENSES/FixedPointTheorems-MIT.txt.
 -/
 
 import RenewalGeometry.Topology.Brouwer.CubicalSpernerPrep
-
-open NCG
 open Classical
 
 

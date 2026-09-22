@@ -6,8 +6,6 @@ Authors: Aurélien Pélissier
 import RenewalGeometry.Upstream.CommonOriginBalance
 import RenewalGeometry.Upstream.PrimitiveWeight
 import RenewalGeometry.Algebra.ChoiCriterion
-
-open NCG
 /-!
 # The common-origin resolved instrument: UCP law, marginal, deck
 

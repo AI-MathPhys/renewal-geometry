@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Upstream.PointerAlgebra
-
-open NCG
 /-!
 # The interaction-complete stable-pointer dissipator
 

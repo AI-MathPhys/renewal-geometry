@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # The Cramér–Chernoff upper bound
   (missing large-deviations machinery; `thm:deficiency-rate-function`,

@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Exact accepted-response renewal and source-native coarse gap
   (`thm:accepted-response-renewal`, Gran-Tensor manuscript)

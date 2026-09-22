@@ -8,8 +8,6 @@ import RenewalGeometry.Grand.RenewalProfiles
 import Mathlib.Analysis.Calculus.DSlope
 import Mathlib.Topology.MetricSpace.Algebra
 
-open NCG
-
 /-!
 # Analytic pressure of the accepted-response renewal
 

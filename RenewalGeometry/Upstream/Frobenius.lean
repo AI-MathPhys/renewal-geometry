@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # The Frobenius theorem: real division algebras have dimension 1, 2, or 4
   (missing Mathlib machinery; `thm:finite-algebra`, SM_emergence)

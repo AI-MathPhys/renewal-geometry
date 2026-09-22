@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Upstream.IsingContours
-
-open NCG
 /-!
 # The planar circuit count: contour structure and walk coding
 

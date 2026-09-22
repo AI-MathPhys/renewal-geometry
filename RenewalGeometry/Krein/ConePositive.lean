@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Lorentz.PolyhedralObstruction
-
-open NCG
 /-!
 # Cone-positive unitaries are permutations
 

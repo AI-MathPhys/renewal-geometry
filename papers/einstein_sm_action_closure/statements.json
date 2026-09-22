@@ -3,476 +3,517 @@
     "env": "definition",
     "title": "Finite classical Einstein--Standard-Model interface",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Grand/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.RegulatedSMConfiguration",
+      "RenewalGeometry/Grand/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.explicitRegulatedStandardModelAction",
+      "RenewalGeometry/Grand/SMGroup.lean:RenewalGeometry.sm_group"
+    ],
+    "note": "Partial: RegulatedSMConfiguration/explicitRegulatedStandardModelAction encode a finite link/vertex Standard-Model configuration with the four-term (Euclidean) matter action of (I2)-(I4), and sm_group proves the quotient presentation S(U(3)xU(2)) = (SU(3)xSU(2)xU(1))/Z_6 of eq:gauge-group ; missing: the Lorentzian carrier and coframe variables (I1), the common gravity+matter action with its relative normalization (I4, gravity part), the positive source geometry (I5), and any single structure bundling (I1)-(I5)."
   },
   "prop:renewal-interface": {
     "env": "proposition",
     "title": "Renewal realization of the finite interface",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Grand/FiniteStandardModelSourceNativeEmergenceExact.lean:RenewalGeometry.finiteStandardModel_sourceNative_emergence"
+    ],
+    "note": "Partial: the companion finite Standard-Model structural packet (gauge quotient, generation rank, weak doublet, finite Dirac incidence) is assembled as the typed certificate finiteStandardModel_sourceNative_emergence ; missing: a Lean finite-interface structure and a proof that the companion constructions instantiate (I1)-(I5), in particular the Lorentzian carrier and common-action normalization."
   },
   "def:tests": {
     "env": "definition",
     "title": "Physical variation space",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: test space, C^{r_0} norm, compactly supported variation tuple, determining core, metric lift; nothing in NCG/ encodes the physical variation space of smooth compactly supported tuples on a spin cylinder."
   },
   "def:regulator": {
     "env": "definition",
     "title": "A finite-interface regulator sequence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: regulator sequence, reconstruction map, test lift, first-variation consistency c_h(K), stationarity eps_h(K); Flagship/EinsteinHandoff.lean only carries an abstract sequence x : N -> X with a scalar defect, not the reconstruction/test-lift data of this definition."
   },
   "prop:source-bound": {
     "env": "proposition",
     "title": "Scaled source control of physical stationarity",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Grand/GTProtectedRiesz.lean:RenewalGeometry.gt_protected_riesz"
+    ],
+    "note": "Partial: gt_protected_riesz proves the Gram Cauchy-Schwarz bound <Lu,v>^2 <= <u,Lu><v,Lv> for a range source e = Lu on a real inner-product space, i.e. |a[w]| <= ||a||_{G^{-1}} ||w||_G ; missing: the assembly eps_h(K) <= L_h sqrt(R_h) + e_h with the test-lift bound ||v_h(v)||_G <= L_h ||v|| and the identification error e_h."
   },
   "prop:native-consistency": {
     "env": "proposition",
     "title": "Growing-band consistency of the unchanged finite action",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: growing-band consistency, Cartan plaquette curvature, Euler density E_0, stencil Taylor expansion h K^3."
   },
   "thm:native-source": {
     "env": "theorem",
     "title": "Leakage-tolerant physical forcing estimate",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: leakage-tolerant forcing, physical residual R_B R_D, tau_{h,m}, forcing budget F_{h,k}, logarithmic factor."
   },
   "thm:native-closure": {
     "env": "theorem",
     "title": "Quantitative finite-action stability and Einstein--Standard-Model closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: actual-jet state, C_t H^k stability, Riem convergence, stress convergence, first-exit bootstrap, D^{full}."
   },
   "cor:native-rate": {
     "env": "corollary",
     "title": "An explicit cofinal rate",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: cofinal rate, dyadic summability, K_h ~ h^{-beta}, h^{1-beta(k+4)}."
   },
   "thm:source-selection": {
     "env": "theorem",
     "title": "Same-record selection from the actual signed action drift",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: stopped action drift, legal-edge mask, telescoping subprobability masses, Markov inequality selection score, exit probability."
   },
   "prop:native-reader": {
     "env": "proposition",
     "title": "Exact native-energy to physical-tail certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: affine reader, weighted high-frequency coefficient map, kernel condition T ker Q = 0, Moore-Penrose square root pinv, weighted ell^1 duality."
   },
   "cor:native-reader-sobolev": {
     "env": "corollary",
     "title": "Sobolev positive-form reader criterion",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: Sobolev positive-form reader, diagonal multiplier (1+|l|^2)^{1/2}, dyadic shell count O(R^4), K^{2-q} tail."
   },
   "thm:native-selected-closure": {
     "env": "theorem",
     "title": "Same-source selected finite-action Einstein--Standard-Model closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: same-source selected closure, selected record, Borel-Cantelli, summable adjacent differences."
   },
   "cor:selected-polynomial": {
     "env": "corollary",
     "title": "An explicit polynomial selected-source regime",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: polynomial selected-source regime, exponent window, failure probability O(h^{2a}+h^{2eps})."
   },
   "cor:gauge-robust-reader": {
     "env": "corollary",
     "title": "Gauge-robust weak-sector reader entrance",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: covariant jet energy, discrete Kato inequality, algebraic Higgs frame, causal temporal gauge, logarithmic link coordinates, full covector gauge invariance."
   },
   "thm:prefix-stationarity": {
     "env": "theorem",
     "title": "Alternative finite-prefix stationarity criterion",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Grand/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.descent_upper",
+      "RenewalGeometry/Grand/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.bregman_floor"
+    ],
+    "note": "Partial: descent_upper proves the Taylor descent inequality f(a+v) <= f(a) + <grad f(a),v> + (Lambda/2)||v||^2 used in eq:prefix-descent1, and bregman_floor the strong-convexity floor (m/2)||v||^2 <= D_Psi used for the potential Psi_h ; missing: the balance residual b_j, the telescoped prefix average eq:prefix-average with the h^{-2} Hessian-scale constants, and the selected-slope conclusion eq:prefix-selected (the legacy file instead treats a stationary law of an accepted kernel)."
   },
   "cor:prefix-table": {
     "env": "corollary",
     "title": "Finite-table certification for the prefix-balance entrance",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: finite-table certification, safe set, exit probability, balance sum, Markov inequality, dyadic Borel-Cantelli."
   },
   "cor:generated-nonempty": {
     "env": "corollary",
     "title": "Nonemptiness of the controlled finite class",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: spectral-midpoint evolution, constrained initial class, N^{-p}+tau rate, Dirac residual."
   },
   "lem:screen": {
     "env": "lemma",
     "title": "Common compact screen",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Grand/SMSTPositiveScreenExact.lean:RenewalGeometry.SMSTChannel.screen_strong_convergence",
+      "RenewalGeometry/Grand/SMSTPositiveScreenExact.lean:RenewalGeometry.SMSTChannel.strong_convergence_transfer"
+    ],
+    "note": "screen_strong_convergence proves the first assertion on a complex Hilbert space for N-indexed sequences: bounded Z_n weakly convergent, ||S_{h,R} - S_R|| -> 0, uniform tail exhaustion, S_R Z -> Z, with compactness of S_R rendered as complete continuity (bounded weakly convergent inputs have strongly convergent images, equivalent for compact operators on Hilbert space) and the norm bound sup ||Z_n|| < infinity spelled out explicitly (automatic from weak convergence). The whitened clause is strong_convergence_transfer: uniformly bounded, strongly convergent B_n = A_h^{-1/2} applied to the strongly convergent whitened packet gives Y_h -> Y; the Loewner bounds mI <= A_h <= MI enter only through that uniform bound."
   },
   "prop:time-compactness": {
     "env": "proposition",
     "title": "From spatial screens to spacetime compactness",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: Aubin-Lions, Simon, finite-rank projections P_R, H^1(0,T) time regularity, precompact in L^2_t H; Grand/DiscreteAubinLionsResponseExact.lean only computes a sqrt time modulus from an interpolation and a negative-norm estimate and does not prove precompactness."
   },
   "prop:orlicz": {
     "env": "proposition",
     "title": "A local quartic compactness certificate",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Grand/GaussianKernelVitaliExact.lean:RenewalGeometry.GaussianKernelVitali.integral_norm_sub_tendsto_zero"
+    ],
+    "note": "Partial: integral_norm_sub_tendsto_zero proves the Vitali step (uniform integrability + convergence in measure implies L^1 convergence of the norm) on a finite reference cylinder ; missing: the superlinear-Phi (de la Vallee-Poussin) uniform integrability of |H_h|^4, Rellich compactness giving convergence in measure, and the L^4(K) conclusion."
   },
   "prop:sobolev-bosonic": {
     "env": "proposition",
     "title": "A-priori Sobolev bounds imply bosonic strong compactness",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: Rellich-Kondrachov, H^{2+sigma} into H^1, L^{4+delta} embedding, curvature convergence dA + A wedge A."
   },
   "prop:dirac-stability": {
     "env": "proposition",
     "title": "Lorentzian Dirac stability produces spinor $H^1$ compactness",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: symmetric hyperbolic, Dirac energy inequality, Gronwall, C_t L^2 Cauchy, H^1 interpolation; the only Gronwall lemmas (Gravity/GrowthComparison, Grand/FastFeedback, Grand/HypocoerciveScreensExact) are scalar Volterra/discrete forms unrelated to spinor systems."
   },
   "def:compactness-certificate": {
     "env": "definition",
     "title": "Classical compactness certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: compactness certificate (C1)-(C5), compact screen, Orlicz condition, spinor route (C4a)/(C4b)."
   },
   "def:strong-packet": {
     "env": "definition",
     "title": "Classical strong packet",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: strong packet, L^infty cap H^1 coframe convergence, L^4 connection convergence, H^1 spinor convergence, coefficient bank."
   },
   "thm:certificate-packet": {
     "env": "theorem",
     "title": "Finite certificates produce the classical strong packet",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: diagonal extraction over bundle atlas, identification of curvature limit, Rellich, Orlicz; no field-level compactness assembly exists."
   },
   "lem:products": {
     "env": "lemma",
     "title": "Local product and coefficient continuity",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Grand/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_diagonal_bilinear",
+      "RenewalGeometry/Grand/WeakStrongBilinearPairingExact.lean:RenewalGeometry.WeakStrongBilinearPairing.tendsto_of_strong_of_bounded_weak"
+    ],
+    "note": "Partial: continuity of bounded bilinear maps under strong (and strong x bounded-weak) convergence is proved on abstract normed spaces ; missing: the Holder instantiation L^p x L^q -> L^r, the explicit quadratic bound eq:quadratic-product, the algebraic coefficient convergence on the coframe chart, and the spin-connection convergence eq:spin-connection-convergence."
   },
   "prop:variation-continuity": {
     "env": "proposition",
     "title": "First-variation continuity from primitive fields",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: first-variation continuity, dual C^{r_0} norm, Yang-Mills/Higgs/Dirac-Yukawa/gravity sector estimates, Palatini first-order density."
   },
   "thm:main-limit": {
     "env": "theorem",
     "title": "General subsequential Einstein--Standard-Model variational closure",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Flagship/EinsteinHandoff.lean:RenewalGeometry.one_sequence_limit",
+      "RenewalGeometry/Flagship/EinsteinHandoff.lean:RenewalGeometry.einstein_extension",
+      "RenewalGeometry/Grand/ConditionalLocalWeakEinsteinMatterHandoffExact.lean:RenewalGeometry.ConditionalLocalWeakEinsteinMatterHandoff.conditional_local_weak_Einstein_matter_handoff"
+    ],
+    "note": "Partial: one_sequence_limit/einstein_extension prove the abstract skeleton (sequence in a compact container, continuous residual bounded by vanishing defects, hence a subsequence converging to a zero-residual point), and conditional_local_weak_Einstein_matter_handoff derives the limiting scalar Euler and 2chi(G+Lambda g)=T identities from assumed sectorwise convergence of finite first variations plus vanishing defects (essentially uniqueness of limits) ; missing: compactness derived from the certificate, first-variation continuity in the strong-packet topology, the source-bound residual estimate eq:main-residual-bound, and the concrete Einstein-Standard-Model field equations."
   },
   "prop:cofinal-transport": {
     "env": "proposition",
     "title": "Summable cofinal transport",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Grand/TrineCofinalCompleteScreenExact.lean:RenewalGeometry.TrineCofinalCompleteScreen.positive_outcomes_converge",
+      "RenewalGeometry/Grand/ThreadCutoffCompactnessExact.lean:RenewalGeometry.ThreadCutoff.tendsto_of_summable_dist",
+      "RenewalGeometry/Grand/MediumProved00.lean:RenewalGeometry.cofinal_transport_attribution"
+    ],
+    "note": "Partial: summable adjacent distances give a Cauchy sequence and a limit in a complete normed space (positive_outcomes_converge, tendsto_of_summable_dist), and cofinal_transport_attribution adds uniqueness of the limit in a finite weighted norm ; missing: the componentwise d_K packet, identification of the curvature and covariant-derivative limits, and the two-route direct-comparison clause."
   },
   "cor:cofinal-unique": {
     "env": "corollary",
     "title": "Cofinal uniqueness and route independence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: cofinal uniqueness, route independence, strong-packet limit identified as Einstein-Standard-Model solution; only the abstract summable-Cauchy ingredients cited under prop:cofinal-transport exist, and the legacy thm:GT-cofinal-route-independence is itself conditional_interface."
   },
   "thm:regular-branch": {
     "env": "theorem",
     "title": "Regularity criterion for variational closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: regularity criterion H^{3+sigma}, Sobolev embedding, Lorentzian Dirac system coefficients."
   },
   "prop:covariant-higgs-endpoint": {
     "env": "proposition",
     "title": "Covariant-gradient compactness closes the Higgs endpoint",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: covariant gradient compactness, relative multiplier estimate, compact multiplication H^1 -> L^2 by L^4 coefficient."
   },
   "prop:weak-fermion": {
     "env": "proposition",
     "title": "Weak-$H^1$ continuity of the complete fermionic first variation",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: weak-H^1 fermionic first variation, spin connection P(e) d e, finite-net upgrade C^r to C^1."
   },
   "def:reduced-certificate": {
     "env": "definition",
     "title": "Reduced compactness certificate",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: reduced compactness certificate (R1)-(R5)."
   },
   "thm:reduced-closure": {
     "env": "theorem",
     "title": "Reduced-certificate Einstein--Standard-Model closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: reduced-certificate closure, weak spinor limits, Higgs endpoint."
   },
   "cor:renewal-realization": {
     "env": "corollary",
     "title": "Renewal Geometry realization",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: Renewal Geometry realization, companion branch, subsequential limit."
   },
   "cor:exact-critical": {
     "env": "corollary",
     "title": "Exact finite critical branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: exact finite critical points, eps_h = 0."
   },
   "cor:stress-topology": {
     "env": "corollary",
     "title": "Distributional and negative-Sobolev stress convergence",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: operational stress density, negative Sobolev H^{-m}, H_0^m into C^{r_0} embedding."
   },
   "cor:random-realization": {
     "env": "corollary",
     "title": "A realized random branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: pathwise source bound, Tonelli, countable determining core, almost sure Einstein equations; Renewal/AcceptedResponseLaw.lean and Renewal/GeometricRandomSum.lean use Tonelli only for renewal sums."
   },
   "lem:critical-cubic": {
     "env": "lemma",
     "title": "Cubic Euler terms and quartic concentration",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: cubic Euler term weak L^{4/3}, quartic concentration measure nu_H, weak-star Radon measure, uniform convexity."
   },
   "thm:higgs-defect": {
     "env": "theorem",
     "title": "Critical Higgs stress-defect identity",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: Higgs stress defect, kinetic defect measure K_H, distributional conservation, Noether identity."
   },
   "prop:YM-defect": {
     "env": "proposition",
     "title": "Yang--Mills quadratic stress defect",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Grand/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_diagonal_bilinear"
+    ],
+    "note": "Partial: only the final clause (strong L^2 curvature convergence passes the quadratic stress through a bounded bilinear diagonal) has an abstract counterpart ; missing: the tensor-valued weak-star Radon defect measure S_YM and its extraction (Grand/NavierStokesDissipationDefectMeasureExact.lean handles only scalar positive measures)."
   },
   "thm:joint-defect": {
     "env": "theorem",
     "title": "Joint matter-defect Einstein limit",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: joint matter defect, Einstein limit with S_YM + S_H, conserved defect."
   },
   "prop:monotonicity": {
     "env": "proposition",
     "title": "A sufficient Euclidean defect-removal mechanism",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: strongly monotone operator, coercive Euclidean Higgs operator, weak-to-strong V cap L^4."
   },
   "thm:hyperbolic": {
     "env": "theorem",
     "title": "Common-slab metric stability",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: common-slab metric stability, reduced wave equation, H^{s-2} algebra, differentiated wave energy, L^1_t source, Riem convergence."
   },
   "prop:subsidiary": {
     "env": "proposition",
     "title": "Subsidiary equation and constraint stability",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: harmonic gauge covector, subsidiary wave equation, contracted Bianchi, constraint energy estimate; Arithmetic/EinsteinClosure.lean and Flagship/EinsteinHandoff.lean mention Bianchi only as a displayed Noether identity."
   },
   "prop:smooth-sampling": {
     "env": "proposition",
     "title": "Smooth sampling is a consistency realization",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: smooth sampling consistency O(h), strong packet convergence of reconstruction."
   },
   "prop:critical-shadowing": {
     "env": "proposition",
     "title": "Nondegenerate critical-point shadowing",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: Newton shadowing, frozen-Newton contraction, uniformly invertible linearized Euler map; the only ContractingWith uses (Grand/RenewalStateTransportCompleteMetricExact.lean) concern state transport, not a Newton map."
   },
   "prop:homogeneous": {
     "env": "proposition",
     "title": "A nonvacuum Einstein--Higgs comparison family",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Gravity/CurvedFLRW.lean:RenewalGeometry.curved_einstein_00"
+    ],
+    "note": "Partial: curved_einstein_00 computes the FLRW Einstein component G_00 = 3((adot/a)^2 + k/a^2), the left side of the Friedmann constraint eq:Friedmann-initial at k=0 ; missing: the Einstein-Higgs ODE system eq:homogeneous-ODE, local existence with a>0, constraint propagation, and verification of the remaining Einstein/Higgs/gauge equations."
   },
   "lem:Whitney": {
     "env": "lemma",
     "title": "Commuting reconstruction and positive comparison norm",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: Whitney form, de Rham map, commuting coboundary, mass matrix, projection convergence; only the Loomis-Whitney inequality (Grand/AtlasIsoperimetry.lean) exists, which is unrelated."
   },
   "prop:mesh-consistency": {
     "env": "proposition",
     "title": "Smooth local action consistency",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: parallel transport Taylor expansion, plaquette holonomy I + h^2 F + O(h^3), Riemann-sum quadrature error, differentiated transport."
   },
   "prop:weak-palatini": {
     "env": "proposition",
     "title": "Weak-curvature Palatini passage",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Grand/FiniteMeasureL2L6InterpolationExact.lean:RenewalGeometry.FiniteMeasureL2L6Interpolation.lintegral_rpow_interpolate_two_six",
+      "RenewalGeometry/Grand/FiniteMeasureL2L6InterpolationExact.lean:RenewalGeometry.FiniteMeasureL2L6Interpolation.palatini_eLpNorm'_interpolation",
+      "RenewalGeometry/Grand/StrongInterpolationConvergenceExact.lean:RenewalGeometry.StrongInterpolationConvergence.tendsto_of_norm_interpolation",
+      "RenewalGeometry/Grand/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.curvature_pairing_tendsto_of_coframe_interpolation",
+      "RenewalGeometry/Grand/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.palatini_and_holst_pairings_tendsto",
+      "RenewalGeometry/Grand/PalatiniDeterminantVolumeExact.lean:RenewalGeometry.PalatiniDeterminantVolume.determinantVolume_tendsto_of_coframe_interpolation"
+    ],
+    "note": "Partial: the L^2-L^6 Holder interpolation to L^q for 2 < q < 6 (with the p > 3/2 exponent arithmetic) is proved concretely at eLpNorm level, and the passage strong coframe -> strong wedge product -> pairing with norm-bounded weakly convergent curvature, plus the four-linear volume-density limit, are proved on abstract normed spaces with the interpolation bound as hypothesis ; missing: the instantiation on L^p(K) fields (Holder boundedness of the wedge L^{2p'} x L^{2p'} -> L^{p'}, weak L^p as weak-space convergence), the coframe-variation clause, and the connection-Euler pairing caveat."
   },
   "prop:improvement": {
     "env": "proposition",
     "title": "An assembled strong--weak improvement criterion",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: nonminimal xi |H|^2 R, improvement tensor, W^{2,p} weak metric convergence, assembled distributional limit."
   },
   "lem:half-ricci": {
     "env": "lemma",
     "title": "Twisted half-Ricci contraction",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: Clifford contraction, half-Ricci identity, first Bianchi, twisted curvature."
   },
   "prop:spinor-prolongation": {
     "env": "proposition",
     "title": "Residual-sensitive tangential spinor prolongation",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: tangential spinor prolongation, commuted Dirac operator, normal jet algebraic relation."
   },
   "prop:actual-jet-writer": {
     "env": "proposition",
     "title": "Block-symmetric actual-jet equation",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: actual-jet symmetric system, harmonic reduction, Maxwell blocks, temporal gauge."
   },
   "prop:coupled-bootstrap": {
     "env": "theorem",
     "title": "Coupled actual-jet stability and first-exit closure",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: coupled actual-jet stability, commutator estimate, H^k algebra, first-exit bootstrap."
   },
   "thm:generated-dynamics": {
     "env": "theorem",
     "title": "Fully finite approximation branch",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: midpoint recursion, Fourier projection P_N, CFL condition, cubic Hermite reconstruction, discrete energy identity; the corpus midpoint/Galerkin hits (Lorentz/CovariantConsistency, Grand/StructurePreservingResponseExact) are unrelated."
   },
   "prop:generated-initial": {
     "env": "proposition",
     "title": "Constructive constrained initial data",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: conformal method, Lichnerowicz equation, L_* = -8 Delta + mu_*, Banach contraction, Gauss and vector constraints."
   },
   "lem:generated-physical-identification": {
     "env": "lemma",
     "title": "Physical identification of the symmetric extension",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: analytic germ, Cauchy-Kovalevskaya, symmetric system uniqueness, Sobolev limit identification."
   },
   "lem:native-plaquette": {
     "env": "lemma",
     "title": "Regularity of the plaquette map",
     "status": "conditional_interface",
-    "lean": [],
-    "note": ""
+    "lean": [
+      "RenewalGeometry/Grand/CovariantPlaquetteExpansion.lean:RenewalGeometry.CovariantPlaquette.norm_plaquette_sub_secondOrder_le",
+      "RenewalGeometry/Grand/CovariantPlaquetteExpansion.lean:RenewalGeometry.CovariantPlaquette.plaquette_sub_secondOrder_isBigO_right"
+    ],
+    "note": "Partial: for the unshifted case a = b = 0 the four-exponential plaquette equals 1 + h^2 [X,Y] + O(h^3) in a Banach algebra, with an explicit cubic bound under contraction hypotheses ; missing: the shifted arguments a, b, the logarithm quotient Phi(h) = h^{-2} log(...), its analytic extension through h = 0 with Phi(0) = a - b + [X,Y], and uniform bounds on parameter derivatives."
   },
   "lem:native-scaling": {
     "env": "lemma",
     "title": "Differential-order scaling",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: amplitude-preserving rescaling xi = Kx, rho = hK, nu = 1/K, K^2 bosonic and K Dirac stencil factors."
   },
   "lem:native-tail-transfer": {
     "env": "lemma",
     "title": "Finite-order tail bounds",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: finite Fourier tail derivative bounds, |l^alpha| <= K^{|alpha|}(1+|l|_1/K)^j, mean-value Euler-row tail transfer."
   },
   "lem:log-source-upgrade": {
     "env": "lemma",
     "title": "Logarithmic derivative upgrade for a band-limited source",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: holomorphic strip a/K, contour shift, Plancherel low/high frequency split, logarithmic factor."
   },
   "prop:native-rounding": {
     "env": "proposition",
     "title": "A sufficient nodal-accuracy condition",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: nodal rounding tolerance, discrete Parseval, O(h^{-4}) modes, (hK)^{-j} weight bound."
   },
   "lem:native-firstjet-normal-form": {
     "env": "lemma",
     "title": "Shifted-first-jet normal form of the unchanged local action",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: shifted first-jet normal form, discrete summation by parts, exact lattice divergence, collar functional; Grand/BoundaryCorner.lean and Grand/OpenPathWassersteinDualityExact.lean use summation by parts in unrelated settings."
   },
   "lem:native-action-Hessian": {
     "env": "lemma",
     "title": "Uniform upper Hessian scale of the local action",
     "status": "conditional_interface",
     "lean": [],
-    "note": ""
+    "note": "No Lean counterpart found; searched: uniform upper Hessian scale K_0 h^{-2}, inverse estimate ||delta^+ u|| <= 2 h^{-1} ||u||, action oscillation bound."
   }
 }

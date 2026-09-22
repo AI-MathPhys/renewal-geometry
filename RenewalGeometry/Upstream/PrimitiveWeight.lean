@@ -7,8 +7,6 @@ import Mathlib.Analysis.Matrix.HermitianFunctionalCalculus
 import Mathlib.Analysis.Matrix.PosDef
 import Mathlib.Topology.Instances.Matrix
 
-open NCG
-
 /-!
 # The primitive transfer selects a unique faithful stationary weight
 

@@ -9,8 +9,6 @@ import Mathlib.Algebra.Polynomial.AlgebraMap
 import Mathlib.Topology.Algebra.InfiniteSum.Basic
 import Mathlib.Analysis.SpecificLimits.Basic
 
-open NCG
-
 /-!
 # Banach-algebra idempotentization below the quarter threshold
 

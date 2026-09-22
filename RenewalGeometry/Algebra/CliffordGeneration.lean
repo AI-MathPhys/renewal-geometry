@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Upstream.CommonOriginUCP
-
-open NCG
 /-!
 # Clifford generation partials for the common-origin factor
 

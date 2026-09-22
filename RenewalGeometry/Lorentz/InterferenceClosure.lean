@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Lorentz.VolumeElement
-
-open NCG
 /-!
 # Oriented interference closure and the `d = 3` selection
 

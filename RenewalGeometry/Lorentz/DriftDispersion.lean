@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Drift hull versus dispersion ellipsoid (Minkowski-sum core)
 

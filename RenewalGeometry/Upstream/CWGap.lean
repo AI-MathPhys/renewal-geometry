@@ -7,8 +7,6 @@ import Mathlib.Analysis.SpecialFunctions.Artanh
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 import Mathlib.Analysis.Calculus.MeanValue
 
-open NCG
-
 /-!
 # The Curie–Weiss gap equation and dynamical branch selection
 

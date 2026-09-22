@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Objectivity from redundant records
   (`prop:objectivity`, wavefunction)

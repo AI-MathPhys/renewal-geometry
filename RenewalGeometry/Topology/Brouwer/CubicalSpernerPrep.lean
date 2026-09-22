@@ -9,8 +9,6 @@ import Mathlib.Combinatorics.Enumerative.DoubleCounting
 import Mathlib.Algebra.BigOperators.Ring.Nat
 import Mathlib.Tactic
 
-open NCG
-
 open Classical
 
 

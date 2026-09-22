@@ -8,8 +8,6 @@ import RenewalGeometry.Upstream.PrimitiveWeight
 import Mathlib.Analysis.Matrix.Normed
 import Mathlib.Topology.MetricSpace.Algebra
 
-open NCG
-
 /-!
 # The ordered cone of finite Hermitian matrices
 

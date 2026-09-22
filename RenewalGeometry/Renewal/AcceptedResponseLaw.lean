@@ -5,8 +5,6 @@ Authors: Aurelien Pelissier
 -/
 import RenewalGeometry.Renewal.GeometricRandomSum
 import RenewalGeometry.Grand.AcceptedResponse
-
-open NCG
 /-!
 # The accepted-response waiting law
 

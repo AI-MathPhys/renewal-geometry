@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Metric reconstruction, the 3+1 endpoint, marked data, affine modular
 

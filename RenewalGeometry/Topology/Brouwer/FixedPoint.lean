@@ -10,8 +10,6 @@ import RenewalGeometry.Topology.Brouwer.ApplyCubicalSperner
 import RenewalGeometry.Topology.Brouwer.ConvexHomeomorphisms
 import Mathlib.Dynamics.FixedPoints.Basic
 
-open NCG
-
 
 
 /- Brouwer fixed-point theorem:

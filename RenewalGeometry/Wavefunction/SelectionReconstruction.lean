@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Selection–reconstruction duality
   (`prop:selection-reconstruction`, wavefunction)

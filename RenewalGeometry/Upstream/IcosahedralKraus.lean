@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # The coherent Kraus source of the twenty-four-outcome metric instrument
   (`thm:flagship-kraus-source-master`, flagship)

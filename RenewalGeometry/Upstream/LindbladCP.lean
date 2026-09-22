@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Upstream.SemigroupLimit
 import RenewalGeometry.Algebra.ChoiCriterion
-
-open NCG
 /-!
 # Complete positivity of the Lindblad semigroup
 

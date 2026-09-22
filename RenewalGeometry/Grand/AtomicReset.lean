@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Atomic-reset characterization
   (`thm:atomic-reset-characterization`,

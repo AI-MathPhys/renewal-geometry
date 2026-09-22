@@ -6,8 +6,6 @@ Authors: Aurelien Pelissier
 import Mathlib
 import Mathlib.Topology.MetricSpace.Lipschitz
 
-open NCG
-
 /-!
 # Approximation singular values
 

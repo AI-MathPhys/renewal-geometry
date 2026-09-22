@@ -9,8 +9,6 @@ see LICENSES/FixedPointTheorems-MIT.txt.
 import Mathlib.Analysis.Convex.Intrinsic
 import Mathlib.Topology.Defs.Basic
 import RenewalGeometry.Topology.Brouwer.CubicalSperner
-
-open NCG
 open Classical
 
 /-

@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Hodge cycle observability and the BSD jet-nullity dictionary
   (`thm:Hodge-master`, `thm:BSD-jet-master`, flagship)

@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Dimension.EvenRank
-
-open NCG
 /-!
 # The parity-correct accessible modular rank
 

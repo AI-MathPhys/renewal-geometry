@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Grand-core transfer and the regulated neutral mass criterion
   (`thm:grand-core-transfer`, `thm:YM-regulated-master`, flagship)

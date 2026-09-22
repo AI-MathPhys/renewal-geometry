@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Lorentz.DiscreteCartan
 import RenewalGeometry.Lorentz.StationaryExchange
-
-open NCG
 /-!
 # The channel-composition torsion theorem, revised hypotheses
 

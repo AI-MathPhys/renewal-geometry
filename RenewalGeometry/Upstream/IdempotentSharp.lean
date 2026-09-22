@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib.Analysis.InnerProductSpace.Spectrum
 
-open NCG
-
 /-!
 # The sharp self-adjoint idempotentization bound
 

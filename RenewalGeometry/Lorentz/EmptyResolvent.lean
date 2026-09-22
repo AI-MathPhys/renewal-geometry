@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Empty resolvent of the covariant Lorentzian Dirac symbol
 

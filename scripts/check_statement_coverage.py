@@ -299,7 +299,7 @@ def init_paper(name: str) -> int:
     ordered = {r["key"]: status_map[r["key"]] for r in records}
     status_file.write_text(
         json.dumps(ordered, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
+        encoding="utf-8", newline="\n",
     )
     print(f"Initialized {name}/statements.json: {added} records added, "
           f"{len(ordered)} total.")

@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Even rank of nondegenerate alternating forms: no 2+1 spacetime
 

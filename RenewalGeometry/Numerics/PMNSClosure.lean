@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Numerics.IntervalKit
-
-open NCG
 /-!
 # The dimensionless PMNS closure certificate
   (`cert:pmns-closure-main`, SM_emergence)

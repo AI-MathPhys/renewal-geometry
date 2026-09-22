@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Upstream.CommonOriginUCP
 import RenewalGeometry.Lorentz.PositiveAveraging
-
-open NCG
 /-!
 # The common-origin spatial frame: second moment and deck character
 

@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Upstream.PrimitiveWeight
 import RenewalGeometry.Upstream.PathLaw
-
-open NCG
 /-!
 # Conditional predictive quotients and reference renewal
 

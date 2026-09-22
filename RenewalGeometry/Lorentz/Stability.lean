@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Stability of the rounded Lorentzian endpoint (perturbation cores)
 

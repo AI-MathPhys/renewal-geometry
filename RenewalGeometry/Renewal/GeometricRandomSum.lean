@@ -7,8 +7,6 @@ import Mathlib.Probability.Distributions.Geometric
 import Mathlib.Probability.ProbabilityMassFunction.Constructions
 import Mathlib.Probability.ProbabilityMassFunction.Monad
 
-open NCG
-
 /-!
 # Geometric random sums of discrete waiting times
 

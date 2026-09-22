@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Record-algebra structures of the renewal collapse account
   (`definition:record-algebra`, `definition:regenerative-record`,

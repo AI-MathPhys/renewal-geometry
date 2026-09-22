@@ -1,202 +1,179 @@
-# Noncommutative & Renewal Geometry in Lean 4
+# Renewal Geometry in Lean 4
 
-This repository is a [Lean 4](https://lean-lang.org/) / [Mathlib](https://github.com/leanprover-community/mathlib4)
-library formalizing **noncommutative geometry** (NCG) in [Alain Connes'
-spectral-triple](https://en.wikipedia.org/wiki/Spectral_triple) formulation together with **renewal spectral geometry** — the
-operational framework in which spacetime structure (Krein signature, Clifford
-blocks, Lorentzian continuum limits, `3+1` dimension selection) *emerges* from
-the predictive structure of renewal processes and completely positive channel
-monoids.
+A [Lean 4](https://lean-lang.org/) / [Mathlib](https://github.com/leanprover-community/mathlib4)
+formalization of **Renewal Geometry**, the programme in which spacetime,
+spectral (noncommutative) geometry and Standard-Model internal structure are
+reconstructed as effective descriptions of a common finite predictive
+structure, together with the generic **noncommutative-geometry** machinery
+that Mathlib does not yet contain.
 
-Mathlib contains no formalization of noncommutative geometry — no spectral
-triples, no Krein spaces, no completely positive map monoids. This library
-builds that foundation from first principles and uses it to formalize, and
-prove, the theorems of [companion research manuscripts](#related-manuscripts).
+The repository is the proof backend of four companion papers (see
+[Papers](#papers)). Every named statement of every paper is tracked in a
+machine-checked ledger that says exactly what is proved, what is merely
+encoded, and what is still open.
 
-**Verification guarantees.**
+## Two libraries
 
-- **Sorry-free**: the library contains no `sorry`; `lake build` kernel-checks
-  all ~52,000 lines across 194 files.
-- **No additional axioms**: every theorem depends only on Lean's three
-  standard axioms (`propext`, `Classical.choice`, `Quot.sound`) — the same
-  foundation as all of Mathlib. This is verified with `#print axioms` on the
-  headline theorems; no `sorryAx`, no `native_decide`, no custom axioms.
-- **Pinned toolchain**: the exact Lean and Mathlib versions are pinned in
+| Library | Role | Size |
+|---|---|---|
+| **`NCG`** | Generic noncommutative geometry, stated with no reference to renewal processes: completely positive maps and channel monoids, Schwarz/Choi theory, Clifford and Jordan algebra, spectral triples, Krein spaces and signed sectors classified by `H¹(G, ℤ/2)`, graph cohomology and covers, and a complete Perron–Frobenius theorem. Candidate material for Mathlib. | 55 files, ~10k lines |
+| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 785 files, ~198k lines |
+
+`NCG` never imports `RenewalGeometry`; this is enforced by
+[`scripts/check_layering.py`](scripts/check_layering.py) in CI.
+
+### Verification guarantees
+
+- **Sorry-free.** `lake build` kernel-checks all 840 files; there is no `sorry`.
+- **Standard axioms only.** Every Lean declaration cited as *proved* in a
+  paper ledger is audited with `#print axioms` by
+  [`scripts/audit_axioms.py`](scripts/audit_axioms.py): only `propext`,
+  `Classical.choice` and `Quot.sound` may appear (no `sorryAx`, no
+  `native_decide`, no custom axioms).
+- **Pinned toolchain.** Lean and Mathlib versions are fixed in
   [`lean-toolchain`](lean-toolchain) and
-  [`lake-manifest.json`](lake-manifest.json), so builds are reproducible.
+  [`lake-manifest.json`](lake-manifest.json); Mathlib is the only dependency.
+- **Faithfulness over coverage.** A ledger record is *proved* only when the
+  Lean theorem covers the paper's claim in the generality stated; any scoped
+  hypothesis is spelled out in the record's note. Partial results (a special
+  case, one direction, a finite model) stay *open* and say what is missing.
 
-## What is implemented
+## What is in `NCG`
 
-| Layer | Contents |
+| Folder | Contents |
 |---|---|
-| **CP-map / channel algebra** (`NCG/Algebra`) | Positive and completely positive maps, the unital channel monoid, Schwarz maps, the Kadison–Schwarz inequality, Choi's multiplicative domain, projective defects and 2-cocycles, Clifford/Jordan generation, spin factors, Euclidean Jordan rank-two faces, radical–centre structure, symplectic forms |
-| **Renewal structures** (`NCG/Renewal`) | Renewal memories, the predictive quotient monoid and its length, predictive posets, Bowen-pressure calibration, Dirichlet/zeta abscissas, renewal Weyl dichotomy, Ehrhart interval growth, crystal counting, spectral and metric dimensions, graded automata |
-| **Graph cohomology & covers** (`NCG/Graph`) | Directed multigraphs, sign cocycles, principal `ℤ/2`-covers with deck actions, `H¹(G, ℤ/2)` and `ℤ/4` cohomology, Betti numbers, record orientation, condensation and decimation |
-| **Krein geometry** (`NCG/Krein`) | Fundamental symmetries, Krein forms and the positivity obstruction, the irreducible no-go, signed covers as Krein data, the canonical temporal row, the signed modular Dirac operator, enrichment classification via `H¹(G, ℤ/2)` (with naturality and minimality), amplitude lifts |
-| **Spectral triples** (`NCG/SpectralTriple`, `NCG/Operator`) | Spectral triples, diagonal/length operators, clock scaling, fibre dichotomy |
-| **Lorentzian emergence** (`NCG/Lorentz`) | Discrete Cartan calculus (Levi–Civita derived, not assumed), Clifford rounding, operator-level and band-limited norm-resolvent continuum limits, curved strong-resolvent limits, frame universality, marked-torus classification, a complete **Perron–Frobenius theorem** (see below), Perron pressure and modular-exponent selection, heat-bath convergence/primitivity, Dobrushin mixing, interference closure and `3+1` selection, polyhedral obstructions, 2d Minkowski emergence |
-| **Dimension selection** (`NCG/Dimension`) | Access-efficiency selection of `3+1`, even-rank theorems, isotropy dimension-blindness, engineering power counting |
-| **Operational / statistical-mechanics program** (`NCG/Upstream`) | The operational process system and UCP bridge, sharp purification, Petz retrodiction and KMS duality, record algebras and pointer selection, complete positivity of the Lindblad semigroup `e^{tℒ}` (full Euler–Trotter proof), the symmetric monoidal quotient category, Curie–Weiss phases, and the **2d Ising phase-coexistence suite**: Peierls bound with the *proved* planar circuit count `4n·3^{n−1}`, infinite-volume Gibbs states with the DLR property, phase separation `±203/216`, and Dobrushin uniqueness at high temperature |
+| `NCG/Algebra` | Positive and completely positive maps, the unital channel monoid, Schwarz maps, Choi's multiplicative domain, projective defects and 2-cocycles, Clifford/Jordan generation, spin factors, Euclidean Jordan rank-two faces, radical–centre structure, symplectic forms |
+| `NCG/SpectralTriple`, `NCG/Operator` | Spectral triples `(𝒜, ℋ, D)`, diagonal/length operators, clock scaling, fibre dichotomy |
+| `NCG/Krein` | Fundamental symmetries, Krein forms and the positivity obstruction, the irreducible no-go, signed covers as Krein data, the canonical temporal row, the signed modular Dirac operator, enrichment classification via `H¹(G, ℤ/2)`, amplitude lifts |
+| `NCG/Graph` | Directed multigraphs, sign cocycles, principal `ℤ/2`-covers with deck actions, `H¹(G, ℤ/2)` and `ℤ/4` cohomology, Betti numbers, record orientation, condensation and decimation |
+| `NCG/PerronFrobenius` | The Perron–Frobenius theorem for irreducible nonnegative matrices, stated in the `Matrix` namespace against Mathlib's `Matrix.IsIrreducible` (see below) |
 
-### Highlight: a complete, Mathlib-ready Perron–Frobenius theorem
+### Highlight: a Mathlib-ready Perron–Frobenius theorem
 
-Mathlib defines irreducible nonnegative matrices (`Matrix.IsIrreducible`)
-but has **no Perron–Frobenius theorem**. This library proves the full
-package, stated in the `Matrix` namespace over an arbitrary finite index
-type, directly against Mathlib's definitions and ready for upstreaming:
+Mathlib defines irreducible nonnegative matrices but has no Perron–Frobenius
+theorem. `NCG` proves the full package over an arbitrary finite index type:
 
 - **Existence & positivity**
-  ([`PerronExistence.lean`](NCG/Lorentz/PerronExistence.lean)): every
-  irreducible nonnegative real matrix has a strictly positive eigenvalue
-  with an entrywise positive right (and left) eigenvector
+  ([`PerronExistence.lean`](NCG/PerronFrobenius/PerronExistence.lean)): every
+  irreducible nonnegative real matrix has a strictly positive eigenvalue with
+  an entrywise positive right (and left) eigenvector
   (`Matrix.IsIrreducible.exists_pos_eigenvector`), by the Collatz–Wielandt
-  variational argument — no fixed-point theorem. Key stepping stone:
-  `1 + A` is primitive (`Matrix.IsIrreducible.isPrimitive_one_add`).
-- **Uniqueness & simplicity**: the Perron eigenvalue is the only
-  eigenvalue with a positive eigenvector, and its eigenspace is
-  one-dimensional
-  (`Matrix.IsIrreducible.exists_eq_smul_of_mulVec_eq_smul`).
+  variational argument. Key stepping stone: `1 + A` is primitive.
+- **Uniqueness & simplicity**: the Perron eigenvalue is the only eigenvalue
+  with a positive eigenvector and its eigenspace is one-dimensional.
 - **Spectral-radius characterization**
-  ([`PerronPressure.lean`](NCG/Lorentz/PerronPressure.lean)): the Perron
-  eigenvalue equals the Gelfand–Fekete growth rate of the matrix powers
-  (`NCG.exists_pRad_eigenvector_of_isIrreducible`), connecting the
-  eigenvector theory to the eigenvector-free pressure calculus used by the
-  manuscripts.
+  ([`PerronPressure.lean`](NCG/PerronFrobenius/PerronPressure.lean)): the
+  Perron eigenvalue equals the Gelfand–Fekete growth rate of the matrix
+  powers, connecting eigenvector theory to the eigenvector-free pressure
+  calculus used by the papers.
 
-## Related manuscripts
+## What is in `RenewalGeometry`
 
-The library is the proof backend for several companion papers. Each has a
-dedicated folder containing the LaTeX source, a machine-checked statement
-inventory (`statements.json`) mapping every named statement of the paper to
-the Lean identifiers that prove it, and a README with the
-full verification summary.
+| Folder | Contents |
+|---|---|
+| `Renewal` | Renewal memories, the predictive quotient monoid and its length, predictive posets, Bowen-pressure calibration, Dirichlet/zeta abscissas, renewal Weyl dichotomy, Ehrhart growth, crystal counting, spectral and metric dimensions, graded automata |
+| `Upstream` | The operational process system and UCP bridge, sharp purification, Petz retrodiction and KMS duality, record algebras and pointer selection, complete positivity of the Lindblad semigroup, the symmetric monoidal quotient category, Curie–Weiss phases, and the 2d Ising phase-coexistence suite (Peierls with the proved planar circuit count, DLR Gibbs states, Dobrushin uniqueness) |
+| `Lorentz`, `Dimension` | Discrete Cartan calculus, Clifford rounding, norm-resolvent and curved strong-resolvent continuum limits, frame universality, marked-torus classification, pressure and modular-exponent selection, heat-bath convergence, Dobrushin mixing, interference closure and `3+1` selection, access-efficiency and even-rank dimension theorems |
+| `Algebra`, `Krein` | The parts of the algebra and Krein theory that need renewal inputs (Kadison–Schwarz for channels, Jordan faces of sharp purifications, ordered cones of atomic resets, cone positivity) |
+| `Topology`, `Analysis`, `Numerics`, `Complexity`, `Wavefunction` | Brouwer/Sperner fixed points, singular-value approximation, rational certificates, finite Boolean circuits, pointer records and Born weights |
+| `Grand`, `Flagship`, `Gravity`, `Matter`, `Arithmetic` | The finite spectralization functor and its essential image, graph Hodge–Dirac spectral fibres, A₃ Connes-distance convergence, commutant/double-centralizer duality, Howe certificates, the structural Standard-Model carrier, hypercharge from anomaly cancellation, K₄ selectors and determining kernels, common-action reconstruction and stationarity, relational ADM and de Sitter branches, Mosco/collective-compactness transport, and the finite common-action interface. Only the files reachable from a paper ledger are included; the private development tree is larger. |
 
-### 1. Renewal Spectral Geometry and the Emergence of Lorentzian Spacetime
+## Papers
 
-**→ [`manuscripts/lorentzian_emergence/`](manuscripts/lorentzian_emergence/)**
-· [PDF](manuscripts/lorentzian_emergence/lorentzian_emergence.pdf)
+Each paper has a folder under [`papers/`](papers/) with the LaTeX source, the
+PDF, a `paper.json` manifest, the ledger `statements.json` mapping **every**
+theorem/proposition/lemma/corollary/definition environment to its status and
+Lean declarations, and a generated README listing every record.
 
-From a renewal process and its channel monoid to a predictive
-spectral triple; the positivity obstruction forcing a *signed* (Krein) sector
-classified by `H¹(G, ℤ/2)`; the canonical signed modular Dirac operator;
-operator-level Lorentzian continuum limits (flat, curved, band-limited,
-self-averaged); and the selection of `3+1` dimensions.
-**210 tracked statements — 193 proved, 17 faithfully encoded definitions,
-0 conditional, 0 sorry.**
+| Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) |
+|---|---:|---:|---:|---:|---:|
+| [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 68 | 10 | 3 | 25 | 30 |
+| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 140 | 41 | 5 | 30 | 64 |
+| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 68 | 1 | 0 | 12 | 55 |
+| [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 93 | 25 | 9 | 27 | 32 |
+| **Total** | **369** | **77** | **17** | **94** | **181** |
 
-### 2. From Operational Prediction to Signed Renewal Memory
+How to read this table:
 
-**→ [`manuscripts/renewal_emergence/`](manuscripts/renewal_emergence/)**
-· [PDF](manuscripts/renewal_emergence/renewal_emergence.pdf)
-
-The upstream operational paper: why predictive compression of an operational
-process forces renewal memory, complex predictive algebras, retrodictive
-(Petz/KMS) structure, signed orientation covers, stable pointer records — and
-the statistical-mechanics endgame: torsion-free and torsional stationary
-phases genuinely coexist (a full 2d Ising Peierls + DLR + Dobrushin
-formalization), so torsion freedom is a *selection principle*, not a theorem.
-**123 tracked statements — 93 proved, 30 faithfully encoded definitions,
-0 conditional, 0 sorry.**
+- *Proved* means the Lean theorem proves the paper's claim as stated
+  (scoped hypotheses disclosed in the record note). *Encoded* means the
+  object is faithfully defined in Lean with no proof content claimed.
+- *Open (partial Lean)* records point to Lean that proves a special case, one
+  direction or a finite model; the note says exactly what is missing. *Open
+  (none)* records have no counterpart in the library yet.
+- Coverage is strongest for the finite algebraic content: the finite
+  spectralization functor and essential image, the graph and A₃ metric
+  results, the commutant-duality and Howe-certificate theorems, the
+  structural Standard-Model carrier and hypercharge, the K₄ selectors,
+  determining kernels and common-action reconstruction. The analytic
+  continuum results (Sobolev compactness, distributional Einstein–Yang–Mills
+  limits, open `3+1` writers, law-space robustness) are largely open, and the
+  Einstein–Standard-Model closure paper explicitly asserts no machine-checked
+  formalization of its analytic theorems.
 
 ## Installation
-
-Lean projects are built with **`lake`** (installed automatically with the
-Lean toolchain via **`elan`**).
-
-### 1. Install elan (the Lean toolchain manager)
-
-**Windows (PowerShell):**
-
-```powershell
-Invoke-WebRequest https://elan.lean-lang.org/elan-init.ps1 -OutFile elan-init.ps1
-powershell -ExecutionPolicy Bypass -f elan-init.ps1
-```
-
-**Linux / macOS:**
-
-```bash
-curl https://elan.lean-lang.org/elan-init.sh -sSf | sh
-```
-
-Restart your shell so that `~/.elan/bin` is on your `PATH`. `elan` downloads
-the exact Lean version pinned in `lean-toolchain` on first build.
-
-### 2. Clone and build
 
 ```bash
 git clone https://github.com/AI-MathPhys/renewal-geometry
 cd renewal-geometry
-lake exe cache get   # prebuilt Mathlib cache (avoids compiling Mathlib)
-lake build           # build and kernel-check the whole library
+lake exe cache get   # prebuilt Mathlib oleans
+lake build           # kernel-checks NCG and RenewalGeometry
 ```
 
-A successful `lake build` means every definition and theorem in the library
-has been checked by the Lean kernel.
+`lake` comes with the Lean toolchain manager
+[`elan`](https://github.com/leanprover/elan); the pinned Lean version is
+downloaded on first build. In VS Code, install the Lean 4 extension and open
+this folder.
 
-### 3. Editor
-
-Install the **Lean 4 extension** in VS Code and open this folder. Hover any
-theorem to see its statement; `Ctrl+Click` jumps to Mathlib definitions.
-
-## Verifying the manuscript coverage
-
-Every named statement environment of each manuscript is tracked and checked:
+## Verifying the claims yourself
 
 ```bash
-python scripts/check_statement_coverage.py                       # both papers
-python scripts/check_statement_coverage.py lorentzian_emergence  # only paper 1
-python scripts/check_statement_coverage.py renewal_emergence     # only paper 2
+python scripts/check_layering.py               # NCG independent of RenewalGeometry; all modules registered
+python scripts/check_statement_coverage.py     # every paper statement has a record; every cited Lean declaration exists
+python scripts/check_statement_coverage.py emergent_spacetime --list proved
+python scripts/audit_axioms.py                 # #print axioms on every proved declaration (needs a build)
+python scripts/render_paper_readmes.py         # regenerate the per-paper READMEs from the ledgers
 ```
 
-The checker fails if a manuscript statement has no status record, if a record
-went stale, or if a cited Lean identifier disappears from `NCG/`. Use
-`--list proved` (etc.) to enumerate a category. See the per-manuscript
-READMEs for the axiom audit and the headline-theorem guide.
+The coverage checker fails on a missing or stale record, on a title/environment
+mismatch with the manuscript, on a Lean reference that is not of the form
+`<path>.lean:<declaration>`, or on a declaration that does not exist in the
+cited file. CI runs all of the above on every push.
 
-## Library structure
+## Repository layout
 
 ```
-NCG/
-├── Basic.lean          -- library overview
-├── Algebra/            -- CP maps, Schwarz/Kadison–Schwarz, Choi, Clifford & Jordan algebra, projective defects
-├── Renewal/            -- renewal memories, predictive quotients, pressure calibration, zeta/Weyl, dimensions
-├── Graph/              -- multigraphs, sign cocycles, ℤ/2- and ℤ/4-cohomology, signed covers
-├── Operator/           -- diagonal/length operators, rigidity, fibre dichotomy
-├── Krein/              -- fundamental symmetries, signed Dirac, enrichment classification H¹(G,ℤ/2)
-├── SpectralTriple/     -- spectral triples
-├── Lorentz/            -- discrete Cartan, continuum limits, pressure selection, 3+1 interference closure
-├── Dimension/          -- access-efficiency and even-rank dimension selection
-└── Upstream/           -- operational program, Lindblad CP, monoidal quotients,
-                        --   2d Ising: Peierls + circuit count + DLR + Dobrushin uniqueness
-manuscripts/
-├── lorentzian_emergence/   -- paper 1: source, statement inventory, verification README
-├── renewal_emergence/      -- paper 2: source, statement inventory, verification README
-└── faithfulness_audit_2026-07-22.md  -- the adversarial statement-by-statement audit
+NCG/                    -- generic noncommutative geometry (library `NCG`)
+├── Algebra/  Graph/  Krein/  Operator/  PerronFrobenius/  SpectralTriple/  Basic.lean
+RenewalGeometry/        -- the programme (library `RenewalGeometry`, depends on NCG)
+├── Renewal/  Upstream/  Lorentz/  Dimension/  Algebra/  Krein/  Topology/  Analysis/
+├── Numerics/  Complexity/  Wavefunction/  Grand/  Flagship/  Gravity/  Matter/  Arithmetic/
+papers/
+├── predictive_spectral_geometry/   -- .tex, .pdf, paper.json, statements.json, README.md
+├── emergent_spacetime/
+├── einstein_sm_action_closure/
+└── spacetime_gauge_duality/
 scripts/
-└── check_statement_coverage.py       -- the coverage checker
+├── check_statement_coverage.py     -- ledger checker (--init, --list, --summary)
+├── check_layering.py               -- import-layering and registration check
+├── audit_axioms.py                 -- axiom audit of every proved declaration
+└── render_paper_readmes.py         -- per-paper README generator
 ```
 
 ## Design principles
 
-1. **General definitions, concrete models.** Definitions are stated at the
-   manuscripts' level of generality (arbitrary channel monoids, arbitrary
-   Hilbert spaces, `LinearPMap` Dirac operators). Operator identities are
-   proved first in concrete algebraic models where they are exact, then
-   upgraded analytically.
-2. **Sorry-free, axiom-clean.** No `sorry` anywhere; no axioms beyond
-   Mathlib's standard three. Anything not yet formalized is recorded as such
-   in the statement inventories — never assumed silently.
-3. **Faithfulness over coverage.** An adversarial audit
-   ([`manuscripts/faithfulness_audit_2026-07-22.md`](manuscripts/faithfulness_audit_2026-07-22.md))
-   compared every record against the manuscript text; every mismatch was
-   either re-proved in full or honestly downgraded and disclosed in the
-   record's note. Scoped hypotheses (e.g. the upward-escape hypothesis of the
-   circuit count, satisfied by all boxes) are stated in the theorem and in
-   the record note, never hidden.
-4. **Mathlib conventions.** Naming, style, and universe polymorphism follow
-   Mathlib so that mature parts (e.g. the symmetric monoidal quotient
-   category, the Banach-algebra exponential remainder bound) can be
-   upstreamed.
+1. **A generic core.** Anything that makes sense without renewal processes
+   lives in `NCG`, follows Mathlib naming and universe conventions, and is
+   meant to be upstreamed.
+2. **General definitions, concrete models.** Definitions are stated at the
+   papers' level of generality; operator identities are proved first in
+   concrete algebraic models where they are exact, then upgraded.
+3. **Sorry-free, axiom-clean, honestly scoped.** Nothing is assumed silently:
+   what is not formalized is recorded as open in the ledgers, and every
+   scoped hypothesis is disclosed in the record note.
+4. **Ledgers are the source of truth.** The per-paper READMEs are generated
+   from the ledgers and the checker runs in CI, so the README numbers cannot
+   drift from what the Lean tree actually contains.
 
 ## License
 

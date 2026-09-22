@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # The derivative of the determinant and Liouville's formula
   (missing Mathlib machinery; `prop:invariant-response`, GR_emergence)

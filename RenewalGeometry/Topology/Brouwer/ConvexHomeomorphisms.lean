@@ -8,8 +8,6 @@ see LICENSES/FixedPointTheorems-MIT.txt.
 import Mathlib.Analysis.Convex.Intrinsic
 import Mathlib.Analysis.Convex.GaugeRescale
 
-open NCG
-
 
 /-
 some helper lemmas involving homeomorphisms.

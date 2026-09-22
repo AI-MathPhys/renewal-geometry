@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Upstream.StablePointer
 import RenewalGeometry.Upstream.ShrunkEffects
-
-open NCG
 /-!
 # The monitoring semigroup converges to the stable conditional expectation
 

@@ -7,8 +7,6 @@ import RenewalGeometry.Upstream.CWGap
 import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
 import Mathlib.Analysis.Convex.Deriv
 
-open NCG
-
 /-!
 # The exact Curie–Weiss orientation phase diagram
 

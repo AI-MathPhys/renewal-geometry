@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # The volume-dual degree map `⋀²V ≃ ⋀^{d−2}V`
 

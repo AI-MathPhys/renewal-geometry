@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # The exact scalar path law (`cor:predictive-reference-path-law`)
 

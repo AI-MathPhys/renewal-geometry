@@ -5,8 +5,6 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 
-open NCG
-
 /-!
 # Exact canonical chronology leakage
   (`thm:canonical-chronology-leakage-master`, flagship)

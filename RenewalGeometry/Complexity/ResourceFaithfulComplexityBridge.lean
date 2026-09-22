@@ -4,8 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurelien Pelissier
 -/
 import RenewalGeometry.Complexity.FiniteBooleanCircuits
-
-open NCG
 /-!
 # Resource-faithful circuit-complexity bridge
 
