@@ -1,0 +1,982 @@
+{
+  "prop:readable-relational-completion": {
+    "env": "proposition",
+    "title": "Conservative readable completion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "mt:grand-tensor": {
+    "env": "theorem",
+    "title": "Canonical predictive Grand-Tensor reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:main-regular-graph-k4": {
+    "env": "proposition",
+    "title": "Endpoint--cycle balance selects $K_4$ without an alternating form",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:main-alternating-k4": {
+    "env": "proposition",
+    "title": "Alternating/minimal-source simplex selector",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:main-signature-minimality": {
+    "env": "proposition",
+    "title": "Minimal one-sign extension has Lorentzian inertia",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "mt:adm": {
+    "env": "theorem",
+    "title": "Minimal faithful $3+1$ ADM reconstruction from either finite selector",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-determining-kernel": {
+    "env": "theorem",
+    "title": "Determining-field and accepted-kernel reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-action-reconstruction": {
+    "env": "theorem",
+    "title": "Renewal-pressure action reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-common-action": {
+    "env": "theorem",
+    "title": "Finite common-action exactness",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-action-stationarity": {
+    "env": "theorem",
+    "title": "Accepted action gap controls interior stationarity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-spatial-screen": {
+    "env": "theorem",
+    "title": "Cut margin and compact-screen alternative",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-gravitational-classification": {
+    "env": "theorem",
+    "title": "Lorentz-natural classification of the generic gravitational score",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-curvature-propagation": {
+    "env": "theorem",
+    "title": "Initial-energy curvature propagation certificate",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-discrete-curvature": {
+    "env": "theorem",
+    "title": "Fully discrete initial-energy curvature certificate",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:main-action-current": {
+    "env": "proposition",
+    "title": "Sharp differentiated action-current certificate",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-curvature-compactness": {
+    "env": "theorem",
+    "title": "Identified curvature compactness after propagation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-open-3plus1": {
+    "env": "theorem",
+    "title": "Open nonsymmetric $3+1$ renewal--Einstein population",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-open-law-basin": {
+    "env": "theorem",
+    "title": "Open renewal-law basin with action-prepared finite seeds",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-exact-action-response": {
+    "env": "theorem",
+    "title": "Exact-action response and prepared-branch structure",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:main-exact-action-tangency": {
+    "env": "proposition",
+    "title": "Exact-action tangency obstruction and upstream deformability",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-renewal-einstein": {
+    "env": "theorem",
+    "title": "General renewal-to-Einstein certification",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-einstein-alternative": {
+    "env": "theorem",
+    "title": "General vacuum Einstein-or-obstruction certification",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-homogeneous-friedmann": {
+    "env": "theorem",
+    "title": "Vacuum Friedmann equations in renewal coordinates",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:main-derived-desitter-rates": {
+    "env": "corollary",
+    "title": "Flat and de Sitter rates are stationary renewal solutions",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-finite-homogeneous-stationarity": {
+    "env": "theorem",
+    "title": "Finite stationary classification and de Sitter convergence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-operational-action-matching": {
+    "env": "theorem",
+    "title": "Measured acceptance reconstructs the finite action",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-explicit-operational-family": {
+    "env": "theorem",
+    "title": "Finite positive operational family with an Einstein limit",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-no-blocking-attractor": {
+    "env": "theorem",
+    "title": "No transverse matching attraction under conservative blocking",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:main-optimizer-composition": {
+    "env": "proposition",
+    "title": "Optimizer composition characterizes action--law matching",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-gowdy-regulator": {
+    "env": "theorem",
+    "title": "Nonlinear two-polarization renewal regulator",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:main-safe-access": {
+    "env": "proposition",
+    "title": "Finite proposal-access certificate",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "mt:vacuum": {
+    "env": "theorem",
+    "title": "Stationary flat and de Sitter renewal regulators",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:supp-event-grammar": {
+    "env": "definition",
+    "title": "Finite typed event grammar",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:supp-operational-datum": {
+    "env": "definition",
+    "title": "Finite conditional operational renewal law",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:supp-future-signature": {
+    "env": "definition",
+    "title": "Complete predictive future signature",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-right-congruence": {
+    "env": "theorem",
+    "title": "History-level right congruence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:supp-predictive-state": {
+    "env": "definition",
+    "title": "Minimum predictive state",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-derived-state-machine": {
+    "env": "corollary",
+    "title": "Derived predictive state machine",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:supp-predictive-realization": {
+    "env": "definition",
+    "title": "Deterministic predictive realization",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-minimal-record": {
+    "env": "theorem",
+    "title": "Canonical minimum predictive realization",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-persistence-derived": {
+    "env": "theorem",
+    "title": "Persistence derived from composition",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-future-operational-transfer": {
+    "env": "corollary",
+    "title": "Future-operational transfer",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-readable-relational-completion": {
+    "env": "theorem",
+    "title": "Conservativity and future minimality of the readable packet",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-hankel": {
+    "env": "theorem",
+    "title": "Canonical typed Hankel realization",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-comb-tomography": {
+    "env": "theorem",
+    "title": "Finite process-comb tomography",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-contextual-ideal": {
+    "env": "lemma",
+    "title": "Contextual nullity is a two-sided $*$-ideal",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-word-flatness": {
+    "env": "theorem",
+    "title": "Finite flat word reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-relative-primitive-floor": {
+    "env": "theorem",
+    "title": "Relative primitive-basis minimality for the paper-level entrance",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-calibration-fibre": {
+    "env": "theorem",
+    "title": "Exact calibration fibre and minimum anchor bank",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "ass:supp-relational-branch": {
+    "env": "assumption",
+    "title": "Minimal faithful predictive relation branch",
+    "status": "statement_encoded",
+    "lean": [],
+    "note": "Non-theorem environment (declaration/bookkeeping); formal counterparts are the hypothesis arguments of the proved theorems referencing it."
+  },
+  "lem:supp-pair-completion": {
+    "env": "lemma",
+    "title": "Pair-homogeneous completion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-cut-cycle": {
+    "env": "theorem",
+    "title": "Cut--cycle decomposition",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-k4-selector": {
+    "env": "theorem",
+    "title": "Minimal faithful $K_4$ selector on the alternating simplex branch",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-regular-graph-k4": {
+    "env": "theorem",
+    "title": "Alternating-free endpoint--cycle selector",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-root-frame": {
+    "env": "lemma",
+    "title": "Root dyadics span $\\Sym_3$",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-race-score": {
+    "env": "lemma",
+    "title": "Winner--waiting score is faithful",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-adm-frame": {
+    "env": "theorem",
+    "title": "Complete finite ADM frame",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-fast-clock": {
+    "env": "lemma",
+    "title": "Fast-clock lower bound",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-positive-krein-distinct": {
+    "env": "lemma",
+    "title": "Positive geometry and Krein signature are distinct layers",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-signature-minimality": {
+    "env": "theorem",
+    "title": "Irreducible sign and Lorentzian inertia before Clifford realization",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-clifford-cell": {
+    "env": "lemma",
+    "title": "Depth-two Lorentzian Clifford cell",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-lorentzian-square": {
+    "env": "corollary",
+    "title": "Lorentzian principal square",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-determining-kernel": {
+    "env": "theorem",
+    "title": "Terminating determining-field and accepted-kernel compiler",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-reward-pressure": {
+    "env": "theorem",
+    "title": "Table-derived renewal pressure and action-slope reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-pressure-jet": {
+    "env": "corollary",
+    "title": "Pressure-jet reconstruction of mixed action blocks",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-common-action": {
+    "env": "theorem",
+    "title": "Finite common-action exactness",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-action-stationarity": {
+    "env": "theorem",
+    "title": "Quantitative accepted-action stationarity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:supp-physical-test-stationarity": {
+    "env": "proposition",
+    "title": "Cutoff-aware stationarity on the determining test core",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-gibbs-gap": {
+    "env": "corollary",
+    "title": "Finite Gibbs/KL certificate",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:supp-spatial-dirichlet": {
+    "env": "definition",
+    "title": "Spatial Dirichlet normalization",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-half-volume-sobolev": {
+    "env": "lemma",
+    "title": "Cut inequality implies the half-volume $L^1$ Sobolev bound",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-l6-poincare": {
+    "env": "lemma",
+    "title": "Discrete $L^6$ Sobolev and Poincar\\'e inequalities",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-nash-counting": {
+    "env": "lemma",
+    "title": "Nash inequality, ultracontractivity, and spectral counting",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-spatial-screen": {
+    "env": "theorem",
+    "title": "Operational Sobolev, Poincar\\'e, and compact-screen bounds",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:supp-compact-upgrade": {
+    "env": "proposition",
+    "title": "Compact positive-screen upgrade",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-face-linearization": {
+    "env": "theorem",
+    "title": "Derivative-free renewal face linearization",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-memory-short": {
+    "env": "theorem",
+    "title": "Complete resolved-memory subtraction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-palatini-torsion": {
+    "env": "theorem",
+    "title": "Connection stationarity and the torsion alternative",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-coframe-interpolation": {
+    "env": "lemma",
+    "title": "Strong interpolation for the reconstructed coframes",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-curvature-propagation": {
+    "env": "theorem",
+    "title": "Finite curvature-energy propagation from initial data",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-discrete-curvature": {
+    "env": "theorem",
+    "title": "Midpoint propagation with the physical Gram transfer",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:supp-sharp-current-transfer": {
+    "env": "proposition",
+    "title": "Exact amplification of the differentiated action current",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:supp-current-derivative-loss": {
+    "env": "proposition",
+    "title": "Sharp grid-scale source amplification",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-stochastic-curvature": {
+    "env": "corollary",
+    "title": "Expected curvature energy and a sufficient pathwise upgrade",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-curvature-compactness": {
+    "env": "theorem",
+    "title": "Weak curvature compactness with an identified connection limit",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-interface-lifting": {
+    "env": "lemma",
+    "title": "Interface lifting and its distributional error",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-interface-curvature": {
+    "env": "theorem",
+    "title": "Constructive connection-and-interface curvature criterion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-weak-strong-palatini": {
+    "env": "lemma",
+    "title": "Weak--strong curvature pairing and volume convergence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-renewal-palatini": {
+    "env": "theorem",
+    "title": "Localized renewal--Palatini handoff",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-renewal-einstein": {
+    "env": "corollary",
+    "title": "Vacuum equation from certified accepted-action variations",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-open-parity": {
+    "env": "lemma",
+    "title": "Root-parity obstruction and a minimal execution connector",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-open-calculus": {
+    "env": "lemma",
+    "title": "Exact shifted product rule and uniform Sobolev calculus",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:supp-open-locality": {
+    "env": "proposition",
+    "title": "Locality and continuum consistency of the writer",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-open-energy": {
+    "env": "theorem",
+    "title": "All-component shifted nonlinear energy",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-open-lifespan": {
+    "env": "corollary",
+    "title": "Common nonlinear time and forced stability",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-open-subsidiary": {
+    "env": "lemma",
+    "title": "Subsidiary control on the common interval",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-open-einstein": {
+    "env": "theorem",
+    "title": "Whole-sequence nonsymmetric vacuum limit",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-open-direct-route": {
+    "env": "corollary",
+    "title": "Direct constructive Einstein limit",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-open-finite-words": {
+    "env": "theorem",
+    "title": "Finite local successor words",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-law-multiplier": {
+    "env": "lemma",
+    "title": "Uniform fourth-order multiplier bounds",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-law-stability": {
+    "env": "theorem",
+    "title": "Fixed-radius propagation on an open writer ball",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-law-einstein": {
+    "env": "theorem",
+    "title": "Uniform Einstein limit for the whole coefficient family",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:supp-law-switching": {
+    "env": "proposition",
+    "title": "Rapid switching is not included",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-law-cost-control": {
+    "env": "lemma",
+    "title": "A stopped physical cost controls the whole word",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-law-row-neighbourhood": {
+    "env": "theorem",
+    "title": "A chronological law neighborhood with the same Einstein limit",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:supp-law-transport": {
+    "env": "proposition",
+    "title": "Physical profile transport certifies a row neighborhood",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-initial-calculus": {
+    "env": "lemma",
+    "title": "Uniform original-action constraint calculus",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-initial-range": {
+    "env": "lemma",
+    "title": "Range inverse and four missing means",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-initial-balance": {
+    "env": "lemma",
+    "title": "Exact four-mode mean calibration",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-action-prepared-chart": {
+    "env": "theorem",
+    "title": "Exact finite preparation from free initial records",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-action-prepared-einstein": {
+    "env": "corollary",
+    "title": "Action-prepared inputs populate the open law family",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-exact-constraint-rank": {
+    "env": "theorem",
+    "title": "Finite characteristic quotient on a regular one-null branch",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-exact-transverse": {
+    "env": "theorem",
+    "title": "Exact all-cutoff transverse rank and natural-order bounds",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:supp-exact-transverse-elimination": {
+    "env": "corollary",
+    "title": "Lossless elimination of the transverse source columns",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-exact-scalar-reconstruction": {
+    "env": "theorem",
+    "title": "Exact scalar--trace response reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-exact-time-hierarchy": {
+    "env": "theorem",
+    "title": "Derivative hierarchy in scalar--trace coordinates",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:supp-exact-clock-test": {
+    "env": "proposition",
+    "title": "Necessary lapse--shift clock condition for harmonic shadowing",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-exact-rational-detuning": {
+    "env": "lemma",
+    "title": "Finite rational detuning",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-exact-active-regular": {
+    "env": "theorem",
+    "title": "All-cutoff regular active source",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-exact-neutral-preparation": {
+    "env": "theorem",
+    "title": "Exact source-neutral finite preparation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-exact-direct-transverse": {
+    "env": "theorem",
+    "title": "Actual direct transverse geometric suppression",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-exact-scalar-flux": {
+    "env": "theorem",
+    "title": "Exact positive scalar energy",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-exact-initial-layer": {
+    "env": "theorem",
+    "title": "Initial-layer obstruction on an exactly prepared branch",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-exact-upstream-deformation": {
+    "env": "theorem",
+    "title": "The fixed-first-jet tangency obstruction is deformable",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-homogeneous-euler-control": {
+    "env": "lemma",
+    "title": "Full finite variation controlled by the residual energy",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:supp-three-costs": {
+    "env": "proposition",
+    "title": "Three-cost identification and rank defect",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-entropy-energy": {
+    "env": "lemma",
+    "title": "History-level entropy--energy estimate",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-two-edge-schur": {
+    "env": "lemma",
+    "title": "Two-edge Schur identity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-gowdy-momentum": {
+    "env": "theorem",
+    "title": "Exact staggered momentum under symmetric splitting",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:supp-gowdy-residual-control": {
+    "env": "proposition",
+    "title": "Residual and constraint control",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-gowdy-full-curvature": {
+    "env": "theorem",
+    "title": "Pathwise full-curvature control on the Gowdy alphabet",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-executed-proposal-floor": {
+    "env": "lemma",
+    "title": "A finite execution certificate for the proposal floor",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-a3-second-moment": {
+    "env": "lemma",
+    "title": "$A_3$ second-moment identity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-flat-symbol": {
+    "env": "lemma",
+    "title": "Fourier symbol and flat generator limit",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:supp-periodic-screens": {
+    "env": "lemma",
+    "title": "Uniform spatial screens for the periodic $A_3$ graph",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "con:supp-flat-regulator": {
+    "env": "construction",
+    "title": "Flat periodic renewal regulator",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-flat-vacuum": {
+    "env": "theorem",
+    "title": "Flat ADM and vacuum limit",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-desitter-adm": {
+    "env": "theorem",
+    "title": "Reconstructed de Sitter ADM packet",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-desitter-einstein": {
+    "env": "theorem",
+    "title": "Cartan curvature and the vacuum Einstein equation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:supp-finite-defects": {
+    "env": "theorem",
+    "title": "First-order consistency of the exact-link regulator",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  }
+}

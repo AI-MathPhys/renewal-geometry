@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build, statement coverage, axiom audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Static checks (no toolchain needed)
+        run: |
+          python3 scripts/check_layering.py
+          python3 scripts/check_statement_coverage.py
+
+      - name: Build NCG and RenewalGeometry
+        uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
+          build-args: "--wfail"
+
+      - name: Axiom audit of every cited declaration
+        run: python3 scripts/audit_axioms.py
+
+      - name: Coverage summary
+        run: python3 scripts/check_statement_coverage.py --summary

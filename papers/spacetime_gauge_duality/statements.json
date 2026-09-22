@@ -1,0 +1,653 @@
+{
+  "def:joint-packet": {
+    "env": "definition",
+    "title": "Finite source-complete joint packet",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:action-algebra": {
+    "env": "definition",
+    "title": "Joint typed action algebra",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:record-nonidentifiability": {
+    "env": "countertheorem",
+    "title": "Classical record data do not determine the system algebra",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:pullback-reconstruction": {
+    "env": "theorem",
+    "title": "Identity-pivot reconstruction of the system action",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:finite-system-export": {
+    "env": "corollary",
+    "title": "Finite coherent system export",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:word-module-recognition": {
+    "env": "theorem",
+    "title": "Word-module recognition of historical internal actions",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:word-module-defect": {
+    "env": "proposition",
+    "title": "Exact module and symmetry defects",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:word-multiplicity-firewall": {
+    "env": "corollary",
+    "title": "Word-space multiplicity firewall",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:word-native-shadow": {
+    "env": "definition",
+    "title": "Word-native linear shadow",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:inserted-word-moments": {
+    "env": "theorem",
+    "title": "Inserted word-moment compiler",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:table-native-ancestry": {
+    "env": "corollary",
+    "title": "Table-native ancestry short",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:external-shadow-no-go": {
+    "env": "countertheorem",
+    "title": "Word moments cannot manufacture an external shadow",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:factor-obstruction": {
+    "env": "theorem",
+    "title": "Factor-commutant obstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:trinity": {
+    "env": "theorem",
+    "title": "External--internal--multiplicity decomposition",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:typed-multiplicity": {
+    "env": "definition",
+    "title": "Typed multiplicity algebra",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:multiplicity-factorization": {
+    "env": "lemma",
+    "title": "Multiplicity-one incidence factorization",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:edge-commutant": {
+    "env": "theorem",
+    "title": "Exact edge-commutant reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:polar-edge": {
+    "env": "lemma",
+    "title": "Singular polar-edge equivalence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:support-polar": {
+    "env": "definition",
+    "title": "Support-polar action algebra",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:support-polar": {
+    "env": "theorem",
+    "title": "Exact support-polar duality",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:multiplicity-quiver": {
+    "env": "definition",
+    "title": "Multiplicity quiver",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:quiver": {
+    "env": "theorem",
+    "title": "Noncommuting-support quiver theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:polar-holonomy": {
+    "env": "theorem",
+    "title": "Polar metric--holonomy commutant",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:polar-extremes": {
+    "env": "corollary",
+    "title": "Flat and irreducible extremes",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:main-duality": {
+    "env": "theorem",
+    "title": "Joint action--multiplicity double-centralizer theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:reciprocal-wedderburn": {
+    "env": "corollary",
+    "title": "Reciprocal Wedderburn structure and common centre",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:incidence-polymatroid": {
+    "env": "theorem",
+    "title": "Incidence rank polymatroid",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:minimal-incidence-skeleton": {
+    "env": "corollary",
+    "title": "Finite source-minimal incidence skeleton",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:geometry-short": {
+    "env": "theorem",
+    "title": "Universal geometry short and active residual",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:active-isotypic": {
+    "env": "theorem",
+    "title": "External isotypic algebra and multiplicity census",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:degree-one-colour-no-go": {
+    "env": "countertheorem",
+    "title": "Degree-one internal-colour obstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:flat-depth-colour": {
+    "env": "theorem",
+    "title": "Flat-depth multiplicity-birth obstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:connected-router": {
+    "env": "theorem",
+    "title": "Connected-router full-matrix theorem",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:one-router-minimality": {
+    "env": "corollary",
+    "title": "One-router source minimality",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:weak-M2": {
+    "env": "lemma",
+    "title": "Weak multiplicity router",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:colour-bridge": {
+    "env": "theorem",
+    "title": "Necessary and sufficient colour-bridge criterion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:reciprocal-return": {
+    "env": "theorem",
+    "title": "Finite reciprocal-return criterion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:reciprocal-return-force": {
+    "env": "corollary",
+    "title": "Port-relative reachability forces colour",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:central-separation": {
+    "env": "theorem",
+    "title": "Central separation of the landed internal blocks",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:internal-seed-saturation": {
+    "env": "theorem",
+    "title": "Relative-commutant saturation",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:internal-deficit-alternatives": {
+    "env": "theorem",
+    "title": "Exact internal-algebra deficit alternatives",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:generic-router-saturation": {
+    "env": "corollary",
+    "title": "Generic saturation at fixed multiplicity census",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:main-det-incidence": {
+    "env": "proposition",
+    "title": "Canonical determinant incidence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "definition:determinant-seed": {
+    "env": "definition",
+    "title": "Determinant seed",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:gauge-group": {
+    "env": "theorem",
+    "title": "Gauge-group reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:operational-determinant-source": {
+    "env": "proposition",
+    "title": "Positive operational source criterion for the determinant group",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:faithful-SM-quotient": {
+    "env": "proposition",
+    "title": "Faithful matter realization of the determinant quotient",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:hypercharge": {
+    "env": "theorem",
+    "title": "Anomaly-forced central weights",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:clifford-matter": {
+    "env": "definition",
+    "title": "Clifford matter margin",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:clifford-occurrence": {
+    "env": "proposition",
+    "title": "Clifford occurrence test",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:generation-carrier": {
+    "env": "proposition",
+    "title": "Endpoint generation carrier",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "definition:odd-provenance-completeness": {
+    "env": "definition",
+    "title": "Odd provenance completeness",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:finite-dirac": {
+    "env": "proposition",
+    "title": "Canonical finite Dirac operator",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:structural-SM": {
+    "env": "theorem",
+    "title": "Structural Standard-Model classification from a landed multiplicity packet",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:historical-typed-compilation": {
+    "env": "corollary",
+    "title": "Historical typed-compilation criterion",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:commutant-laplacian": {
+    "env": "definition",
+    "title": "Commutant Laplacian",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:commutant-audit": {
+    "env": "theorem",
+    "title": "Terminating commutant audit",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:howe-gram": {
+    "env": "definition",
+    "title": "Relative Howe Gram",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:howe-certificate": {
+    "env": "theorem",
+    "title": "Positive certificate for the exact multiplicity algebra",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:howe-discriminant": {
+    "env": "theorem",
+    "title": "Howe enhancement discriminant and generic rigidity",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:howe-nullity": {
+    "env": "corollary",
+    "title": "Determinantal nullity filtration",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:finite-anchor": {
+    "env": "theorem",
+    "title": "Finite-anchor stability",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:transported-mosco": {
+    "env": "definition",
+    "title": "Transported Mosco convergence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "def:asymptotic-compactness": {
+    "env": "definition",
+    "title": "Asymptotic form compactness",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:compact-mosco-resolvent": {
+    "env": "proposition",
+    "title": "Compact Mosco convergence implies norm-resolvent convergence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:cofinal-duality": {
+    "env": "theorem",
+    "title": "Compact-Mosco cofinal spacetime--gauge duality",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:coupled-schur": {
+    "env": "theorem",
+    "title": "Universal coupled source quotient",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:classical-compatibility": {
+    "env": "proposition",
+    "title": "Classical compatibility of the stabilized dual branch",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:flat-word-span": {
+    "env": "lemma",
+    "title": "Flat extension of a finite word span",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:flat-multiplicity-obstruction": {
+    "env": "corollary",
+    "title": "Terminating multiplicity obstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:router-failure-locus": {
+    "env": "proposition",
+    "title": "Algebraic structure of the router failure set",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:bridge-router-residuals": {
+    "env": "proposition",
+    "title": "Minimal bridge and weak-router residuals",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:finite-internal-landing-alternative": {
+    "env": "theorem",
+    "title": "Finite internal landing alternative",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:det-incidence": {
+    "env": "proposition",
+    "title": "Determinant-incidence line",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:finite-action-identities": {
+    "env": "theorem",
+    "title": "Finite Ward, BRST, and stress identities",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "cor:internal-vacuum": {
+    "env": "corollary",
+    "title": "Stationary internal vacuum",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:mosco-strong-resolvent": {
+    "env": "lemma",
+    "title": "Mosco convergence gives strong transported resolvents",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:collective-compactness": {
+    "env": "lemma",
+    "title": "Asymptotic compactness gives collective compactness",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:collective-norm": {
+    "env": "lemma",
+    "title": "Collectively compact self-adjoint convergence is norm convergence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:app-compact-mosco": {
+    "env": "proposition",
+    "title": "Proof of compact Mosco resolvent convergence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "lem:low-spectrum-convergence": {
+    "env": "lemma",
+    "title": "Low-spectrum convergence",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:protected-kernel-locking": {
+    "env": "proposition",
+    "title": "Protected-kernel locking",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:one-gen-incidence": {
+    "env": "proposition",
+    "title": "Incidence reduces the one-generation commutant",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:incidence-determinant": {
+    "env": "theorem",
+    "title": "Positive incidence determinant and sufficient supports",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:deletion-margin": {
+    "env": "proposition",
+    "title": "Exact simultaneous-deletion margin",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:word-space-inflation": {
+    "env": "proposition",
+    "title": "Invariant word-space inflation without an internal $M_3$",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:subdirect-classification": {
+    "env": "theorem",
+    "title": "Finite subdirect matrix-algebra classification",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:all-excursion-return": {
+    "env": "proposition",
+    "title": "All-excursion return alternative",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "thm:determinant-arity-floor": {
+    "env": "theorem",
+    "title": "Sharp five-slot determinant-mode floor",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:five-kraus-freedom": {
+    "env": "proposition",
+    "title": "Five-Kraus freedom behind the six-edge normalization",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:record-witness": {
+    "env": "proposition",
+    "title": "Record-complete nonidentifiability witness",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:ten-panel-reconstruction": {
+    "env": "proposition",
+    "title": "Explicit ten-panel reconstruction",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  },
+  "prop:reconstruction-error": {
+    "env": "proposition",
+    "title": "Robust commutant stopping test",
+    "status": "conditional_interface",
+    "lean": [],
+    "note": ""
+  }
+}
