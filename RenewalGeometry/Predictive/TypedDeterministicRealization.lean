@@ -98,7 +98,3 @@ theorem branch_eq_of_stateOf_eq {x y : Cut} {h h' : History x}
 end TypedDeterministicRealization
 
 end RenewalGeometry
--- AXIOMCHECK
-#print axioms RenewalGeometry.TypedDeterministicRealization.update_isSome_of_occurs
-#print axioms RenewalGeometry.TypedDeterministicRealization.rate_eq_branch
-#print axioms RenewalGeometry.TypedDeterministicRealization.branch_eq_of_stateOf_eq

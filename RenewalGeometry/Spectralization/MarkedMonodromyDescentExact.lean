@@ -259,11 +259,12 @@ theorem detCharacter_descends_but_monodromy_does_not (θ : ℝ)
   constructor
   · intro x _
     rw [MonoidHom.mem_ker, oneCycleMonodromy_det_trivial]
+    rfl
   · intro h
     apply oneCycleMonodromy_ne_one θ hθ
     refine MonoidHom.ext fun x => ?_
     have hx : x ∈ oneCycleCollapse.ker := by
-      rw [MonoidHom.mem_ker]; rfl
+      rw [MonoidHom.mem_ker]
     have := h hx
     rw [MonoidHom.mem_ker] at this
     rw [this]

@@ -23,7 +23,7 @@ duality manuscript on the finite Hilbert--Schmidt carrier
   joint commutator source, hence Hermitian and positive semidefinite.
 -/
 
-open scoped InnerProductSpace
+open scoped InnerProductSpace ComplexOrder
 
 noncomputable section
 
@@ -65,7 +65,9 @@ theorem adCLM_matrixL2 {n : Type*} [Fintype n] {s : ℕ}
     (c : Fin s → Matrix n n ℂ) (j : Fin s) (X : Matrix n n ℂ) :
     adCLM c j (matrixL2 X) = matrixL2 (c j * X - X * c j) := by
   ext ij
-  simp [adCLM, jointCommutatorL2, matrixL2]
+  change (c j * l2Matrix (matrixL2 X) - l2Matrix (matrixL2 X) * c j) ij.1 ij.2
+    = (c j * X - X * c j) ij.1 ij.2
+  rw [l2Matrix_matrixL2]
 
 /-- The stacked joint commutator source has the derivations as its blocks. -/
 theorem stackCoordCLM_jointCommutatorCLM {n : Type*} [Fintype n] {s : ℕ}
@@ -86,12 +88,12 @@ theorem commutantLaplacianCLM_eq_sum_adjoint_comp {n : Type*} [Fintype n] {s : �
     (c : Fin s → Matrix n n ℂ) :
     commutantLaplacianCLM c =
       ∑ j, ContinuousLinearMap.adjoint (adCLM c j) ∘L adCLM c j := by
-  ext x
+  refine ContinuousLinearMap.ext fun x => ?_
   apply ext_inner_left ℂ
   intro y
   rw [commutantLaplacianCLM, ContinuousLinearMap.comp_apply,
     ContinuousLinearMap.adjoint_inner_right, inner_jointCommutatorCLM,
-    ContinuousLinearMap.sum_apply, inner_sum]
+    _root_.sum_apply, inner_sum]
   refine Finset.sum_congr rfl fun j _ => ?_
   rw [ContinuousLinearMap.comp_apply, ContinuousLinearMap.adjoint_inner_right]
 
@@ -162,7 +164,10 @@ theorem relativeHoweGram_eq_conjTranspose_mul_self {n : Type*} [Fintype n] {s : 
   ext a b
   simp only [relativeHoweGram_apply, Matrix.mul_apply, Matrix.conjTranspose_apply,
     relativeHoweSynthesis, Matrix.of_apply, PiLp.inner_apply, matrixL2,
-    WithLp.ofLp_toLp, RCLike.inner_apply, Fintype.sum_prod_type]
+    RCLike.inner_apply, Fintype.sum_prod_type]
+  refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun i _ =>
+    Finset.sum_congr rfl fun k _ => ?_
+  rw [Complex.star_def, mul_comm]
 
 /-- The relative Howe Gram is Hermitian. -/
 theorem relativeHoweGram_isHermitian {n : Type*} [Fintype n] {s : ℕ}

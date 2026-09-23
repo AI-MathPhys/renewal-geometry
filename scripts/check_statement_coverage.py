@@ -97,7 +97,8 @@ DECL_RE = re.compile(
     r"\s+((?:[A-Za-z0-9_'.]|[^\x00-\x7F])+)",
     re.M,
 )
-NAMESPACE_RE = re.compile(r"^\s*(namespace|end)\s+([A-Za-z0-9_.]+)?", re.M)
+# `[ \t]` rather than `\s`: an unnamed `end` must not swallow the next line's token.
+NAMESPACE_RE = re.compile(r"^[ \t]*(namespace|end)(?:[ \t]+([A-Za-z0-9_.']+))?[ \t]*$", re.M)
 
 
 # --------------------------------------------------------------------------
@@ -256,8 +257,8 @@ def check_paper(name: str, index: dict[str, set[str]]) -> int:
                 errors.append(f"{key}: invalid difficulty {diff!r} "
                               f"(expected one of {DIFFICULTIES})")
             if "--require-difficulty" in sys.argv and diff is None \
-                    and entry.get("env") not in ("assumption",):
-                errors.append(f"{key}: non-proved record without a difficulty estimate")
+                    and status == "conditional_interface":
+                errors.append(f"{key}: open record without a difficulty estimate")
         for ident in lean:
             module, sep, decl = ident.partition(":")
             if not sep or not module.endswith(".lean") or not decl:

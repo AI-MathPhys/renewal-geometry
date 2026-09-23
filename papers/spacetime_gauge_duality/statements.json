@@ -13,13 +13,18 @@
   "def:action-algebra": {
     "env": "definition",
     "title": "Joint typed action algebra",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:RenewalGeometry.GraphLoadedEdgeCommutant.CommutesWithLoadedEdges"
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.jointActionAlgebra",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.starAdjoin",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.jointActionAlgebra_starClosed",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.jointActionAlgebra_le",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.ext_subset_jointActionAlgebra",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.int_subset_jointActionAlgebra",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.incidence_mem_jointActionAlgebra",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.incidence_conjTranspose_mem_jointActionAlgebra"
     ],
-    "note": "Partial: generator sets exist for a two-vertex incidence family (vertex projection plus edges F_j, F_j^*) and loaded edges D_e (x) F_e on a graph are represented; missing: a Lean definition of the generated joint C*-algebra C*(A_ext, A_int, Y_e, Y_e^*) on a general packet.",
-    "difficulty": "easy",
-    "plan": "Direct definition: on a packet with carrier Matrix n n C, set actionAlgebra := Algebra.adjoin C (A_ext ∪ A_int ∪ range Y ∪ range (fun e => (Y e)ᴴ)) and prove star-closure (adjoint of a generator is a generator, then Algebra.adjoin_induction), so that it satisfies the action_starClosed field of RenewalGeometry/Commutant/LoadedHoweDualityPacketExact.lean:SourceCompleteJointDualityPacket. Existing generator-set pattern: RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:CommutesWithLoadedEdges and RenewalGeometry/StandardModel/InternalAssemblyExact.lean:gens7. Missing: only the definition and the star-closure lemma."
+    "note": "jointActionAlgebra Aext Aint Y : Subalgebra C (Matrix n n C) is C*(A_ext, A_int, Y_e, Y_e^* : e in E) on a common finite carrier, defined as starAdjoin (the unital *-subalgebra generated, i.e. the finite-dimensional C*-algebra generated) of A_ext ∪ A_int ∪ range Y with Y_e represented as matrices on the common carrier (extended by zero off the source/target blocks). Proved: A_ext, A_int, every Y_e and every Y_e^* lie in it, it is star-closed (so it fills the action_starClosed field of SourceCompleteJointDualityPacket), and it is the least star-closed unital subalgebra containing these generators (jointActionAlgebra_le), which characterises it as the C*-algebra of eq:joint-action-algebra. The typed packet data (J1)-(J5) are not re-encoded: Aext, Aint are taken as arbitrary sets of matrices."
   },
   "thm:record-nonidentifiability": {
     "env": "countertheorem",
@@ -33,11 +38,19 @@
   "thm:pullback-reconstruction": {
     "env": "theorem",
     "title": "Identity-pivot reconstruction of the system action",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: complementary channel, Heisenberg pullback C(z)^*C(w), identity pivot, isometry/environment basis, StinespringDilationExact, ProtectedRecordMapStinespringHull.",
-    "difficulty": "easy",
-    "plan": "Pure Algebra.adjoin argument. Define C z := sum_nu conj(z nu) • C nu for a finite family C : nu -> Matrix n n C and the pullback set {C(z)ᴴ * C(w)}. Show (i) every C(z)ᴴ C(w) lies in Algebra.adjoin C (range C) by bilinearity, and (ii) with C z0 = alpha • 1 and C zj = beta j • A j, the element (conj alpha * beta j)⁻¹ • C(z0)ᴴ C(zj) = A j, so the generators lie in the pullback algebra; conclude equality of the adjoins and, via RenewalGeometry/Commutant/Bicommutant.lean:matCommutant congruence, equality of commutants. Missing: only the definitions of C(z) and of the pullback algebra; no analytic content (the Stinespring isometry V and the complementary channel can be left implicit, as C(z) is defined directly from the coefficient family)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.pullback_reconstruction",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.pullback_commutant_eq",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.coeffField",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.pullbackSet",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.pullbackImage",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.pullbackAlgebra",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.pivot_pullback_eq",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.generator_mem_pullbackAlgebra",
+      "RenewalGeometry/Commutant/JointTypedActionAlgebra.lean:RenewalGeometry.pullbackAlgebra_le"
+    ],
+    "note": "Proved in full generality on a finite carrier Matrix n n C with a finite environment basis nu. coeffField C z = sum_nu conj(z_nu) C_nu is C(z) = (I ⊗ <z|)V; pullbackSet = {C(z)^* C(w)} are the pullbacks P^*(|z><w|) (eq:complementary-pullback is taken as the definition of the pullback, the isometry V and the complementary channel are left implicit); pullbackImage = their span = P^*(B(E)); pullbackAlgebra = C^*(P^*(B(E))). Hypotheses: Asys = starAdjoin (range C) = starAdjoin (range A) (i.e. A_sys = C*(C_nu) = C*(A_1..A_s)), C(z_0) = alpha • 1, C(z_j) = beta_j • A_j, alpha ≠ 0, beta_j ≠ 0. Conclusion: pullbackAlgebra C = Asys and matCommutant (pullbackAlgebra C) = matCommutant Asys, both clauses of eq:pullback-reconstruction. Axioms: propext, Classical.choice, Quot.sound only."
   },
   "cor:finite-system-export": {
     "env": "corollary",
@@ -51,11 +64,19 @@
   "thm:word-module-recognition": {
     "env": "theorem",
     "title": "Word-module recognition of historical internal actions",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: regular word carrier L^2(A,tau_reg), left/right multiplication commutant R(A)' = L(A), invariant elements A^G, word module. Only the normalized regular trace itself is defined (NCG/Grand/IntrinsicRegularTrace.lean: normalizedRegularTrace), not the module recognition theorem.",
-    "difficulty": "easy",
-    "plan": "Purely algebraic; tau_reg is not needed. For a finite-dimensional unital C-algebra A take W := A, R b := LinearMap.mulRight C b, L a := LinearMap.mulLeft C a, and a group action alpha : G ->* (A ≃ₐ[C] A) with U g := (alpha g).toLinearMap. Prove: T commutes with every mulRight b iff T = mulLeft (T 1) (T b = T (1 * b) = (T 1) * b), and mulLeft a commutes with every U g iff a is fixed by every alpha g (U g ∘ L a ∘ (U g)⁻¹ = L (alpha g a) and mulLeft is injective on a unital algebra). Uniqueness: the coefficient is T 1. Assemble into the two-sided commutant identity R(A)' ∩ U(G)' = L(A^G) as sets of Module.End C A. Missing: only these lemmas (Mathlib supplies LinearMap.mulLeft/mulRight and LinearMap.mulLeft_injective)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.word_module_recognition",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.word_module_recognition_iff",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.word_module_recognition_coefficient",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.rightMultiplications",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.symmetryOperators",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.invariantElements",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.symmetry_mul_mulLeft",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.eq_mulLeft_of_mem_centralizer_rightMultiplications",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.mulLeft_mem_centralizer_symmetry_iff"
+    ],
+    "note": "Proved, and more generally than stated: for any unital C-algebra A (no finite-dimensionality, C*-structure or Wedderburn form needed; the statement is purely algebraic) and any family of algebra automorphisms alpha : G → (A ≃ₐ[C] A) (no group structure or finiteness of G needed), on the regular word carrier W = A with L_a = LinearMap.mulLeft, R_b = LinearMap.mulRight, U_g = (alpha g).toLinearMap: word_module_recognition states R(A)' ∩ U(G)' = L(A^G) as an equality of subsets of Module.End C A (commutants are Set.centralizer, A^G = invariantElements alpha = {a | ∀ g, alpha g a = a}, which is the fixed-point form of A ∩ {u_g}' for alpha_g = Ad(u_g)); word_module_recognition_iff is the 'equivalently' clause (T commutes with every R_b and every U_g iff T is left multiplication by a unique invariant element) and word_module_recognition_coefficient gives the coefficient T 1. The Hilbert-space structure of L^2(A, tau_reg) plays no role in the theorem and is not encoded (the carrier is the underlying vector space)."
   },
   "prop:word-module-defect": {
     "env": "proposition",
@@ -78,42 +99,68 @@
   "def:word-native-shadow": {
     "env": "definition",
     "title": "Word-native linear shadow",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: word-native, shadow map sum c A X B, finite compression/conjugation/group-average shadow.",
-    "difficulty": "easy",
-    "plan": "Direct predicate on Module.End C A (A a finite-dimensional C-algebra): IsWordNative L := ∃ (m : ℕ) (c : Fin m → C) (A B : Fin m → A), L = ∑ α, c α • (LinearMap.mulLeft C (A α)).comp (LinearMap.mulRight C (B α)). Add closure lemmas (sums, scalar multiples, compositions are word native; compressions X ↦ p X p, conjugations, finite group averages are instances). No supporting structure is missing."
+    "status": "statement_encoded",
+    "lean": [
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.WordNativeShadow",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.WordNativeShadow.toLinearMap",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.WordNativeShadow.toLinearMap_apply",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.IsWordNative",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.isWordNative_iff",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.isWordNative_compression",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.isWordNative_conjugation",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.isWordNative_groupAverage",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.IsWordNative.add",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.IsWordNative.smul",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.isWordNative_sum"
+    ],
+    "note": "WordNativeShadow A records the declared data (m, c_alpha, A_alpha, B_alpha) and toLinearMap is the map X ↦ sum_alpha c_alpha A_alpha X B_alpha (toLinearMap_apply is eq:word-native-shadow pointwise); IsWordNative T := ∃ L, T = L.toLinearMap, with isWordNative_iff the explicit existential form. The inclusion clause of the definition is proved: finite compressions X ↦ p X p, conjugations X ↦ u X u⁻¹ by units, finite group averages of such conjugations, sums, scalar multiples and finite sums of word-native maps are word native. Finite functional-calculus operations are not separately encoded (they are polynomial/finite-sum instances of the sum and scalar closures once the calculus is expressed in A)."
   },
   "thm:inserted-word-moments": {
     "env": "theorem",
     "title": "Inserted word-moment compiler",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: inserted moments, word-native Gram blocks, cyclicity of tau_reg, inserted panel (InsertedPanelCertificate.inserted_panel_certificate is an unrelated unitary-intertwining statement).",
-    "difficulty": "easy",
-    "plan": "With the tau_reg inner product ⟨y,x⟩ := tau(yᴴ x) (tau = RenewalGeometry/Commutant/IntrinsicRegularTrace.lean:normalizedRegularTrace on a star-closed matrix subalgebra) and def:word-native-shadow, eq:inserted-one-moment is substitution plus linearity of tau. eq:inserted-two-moments additionally uses cyclicity (regularTraceIntrinsic_mul_comm, exists) and one small new lemma tau(aᴴ) = conj(tau a) (star-trace property; prove via the Wedderburn form or via LinearMap.trace of the adjoint of mulLeft a with respect to the HS inner product restricted to A). The closing flatness remark is a corollary of RenewalGeometry/Predictive/GeneratedAlgebraFlatness.lean:flat_exhausts_generated_algebra_exact and need not be a separate clause."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.inserted_one_moment",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.inserted_two_moments",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.inserted_one_moment_mem_span",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.inserted_two_moments_mem_span",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.regularWordInner",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.wordInner",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.wordInner_shadow",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.wordInner_shadow_shadow"
+    ],
+    "note": "Proved for a star C-algebra A ([Ring A] [Algebra C A] [StarRing A], plus [StarModule C A] for the two-insertion identity) with the tau_reg inner product regularWordInner y x = normalizedRegularTrace A (star y * x): inserted_one_moment is eq:inserted-one-moment and inserted_two_moments is eq:inserted-two-moments (coefficients star(c_alpha) * d_beta, i.e. conj(c_alpha) d_beta, and the word B_alpha^* x^* A_alpha^* C_beta z D_beta exactly as displayed). Both identities are also proved for an arbitrary linear functional tau (wordInner_shadow, wordInner_shadow_shadow); no cyclicity is needed for the displayed formulas. The 'hence' clause (every ordinary-shadow and shadow-shadow Gram block is a finite linear combination of ordinary word moments tau_reg(w)) is inserted_one_moment_mem_span / inserted_two_moments_mem_span. The closing remark about flatness reducing inserted products in the multiplication table is interpretive (it is RenewalGeometry/Predictive/GeneratedAlgebraFlatness.lean:flat_exhausts_generated_algebra_exact applied to the words above) and is not a separate clause."
   },
   "cor:table-native-ancestry": {
     "env": "corollary",
     "title": "Table-native ancestry short",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: table-native, ancestry short R_{T|S}=H-C^*G^+C, K^{00}/K^{0L}/K^{LL} panels (CanonicalMinimalFiniteEmergence.TableNativePredictor is a Hankel-realization predicate, not this short).",
-    "difficulty": "easy",
-    "plan": "Pure matrix identities: with S = W_r * B_S and T = L(W_r) * B_T (L a linear map applied columnwise, or a matrix acting on the word carrier) we get Sᴴ S = B_Sᴴ (W_rᴴ W_r) B_S, Sᴴ T = B_Sᴴ (W_rᴴ L W_r) B_T, Tᴴ T = B_Tᴴ (W_rᴴ Lᴴ L W_r) B_T by Matrix.conjTranspose_mul and associativity; then define the short with the pseudo-inverse of RenewalGeometry/Predictive/ExactSourceSchurResidual.lean:sourceGramPseudoinverse / sourceSchurResidual. Missing: only the three-line assembly and a definition of K^{00}, K^{0L}, K^{LL}; 'deterministic function' is by construction."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.table_native_GCH",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.table_native_ancestry_short",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.table_native_ancestry_short_determined_by_panels",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.tableNativeShort",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.panelK00",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.panelK0L",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.panelKLL",
+      "RenewalGeometry/Predictive/WordModuleRecognition.lean:RenewalGeometry.sourceGramPseudoinverse_congr"
+    ],
+    "note": "Proved at the matrix level: W_r : Matrix (Fin h) (Fin r) C is the synthesized word bank, the word-native compiler is a matrix L on the carrier, S = W_r B_S, T = L W_r B_T, and panelK00/panelK0L/panelKLL are K^{00}, K^{0L}, K^{LL}. table_native_GCH is eq:table-native-GCH (G = S^*S = B_S^* K^{00} B_S, C = S^*T = B_S^* K^{0L} B_T, H = T^*T = B_T^* K^{LL} B_T); table_native_ancestry_short identifies the ancestry short R_{T|S} = H - C^* G^† C (with G^† the Moore-Penrose inverse sourceGramPseudoinverse) with the existing exact source Schur residual sourceSchurResidual S T (eq:table-native-short); table_native_ancestry_short_determined_by_panels is the 'deterministic function' clause: two banks (even on carriers of different dimension) with the same three panels and the same B_S, B_T have the same short, using sourceGramPseudoinverse_congr (the pseudo-inverse depends on S only through S^*S). The reduction of the panels themselves to word moments and the multiplication table is thm:inserted-word-moments and is not re-bridged from the abstract algebra to the matrix carrier; flatness of the word bank is not needed for these identities."
   },
   "thm:external-shadow-no-go": {
     "env": "countertheorem",
     "title": "Word moments cannot manufacture an external shadow",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/StandardModel/ConservativeResolvedGradingExtensions.lean:RenewalGeometry.bareOperationalTensor_has_even_and_odd_conservativeExtensions",
-      "RenewalGeometry/StandardModel/ConservativeResolvedGradingExtensions.lean:RenewalGeometry.conservativeResolvedGrading_word",
-      "RenewalGeometry/StandardModel/ConservativeResolvedGradingExtensions.lean:RenewalGeometry.gradingOddProcessExtension_crossBlock_ne_zero"
+      "RenewalGeometry/Predictive/ExternalShadowNoGo.lean:RenewalGeometry.external_shadow_no_go",
+      "RenewalGeometry/Predictive/ExternalShadowNoGo.lean:RenewalGeometry.extendedOldWord_even_eq_odd",
+      "RenewalGeometry/Predictive/ExternalShadowNoGo.lean:RenewalGeometry.extensionWordGram_even",
+      "RenewalGeometry/Predictive/ExternalShadowNoGo.lean:RenewalGeometry.extensionWordGram_odd",
+      "RenewalGeometry/Predictive/ExternalShadowNoGo.lean:RenewalGeometry.gradingCrossBlock_even",
+      "RenewalGeometry/Predictive/ExternalShadowNoGo.lean:RenewalGeometry.gradingCrossBlock_odd",
+      "RenewalGeometry/StandardModel/ConservativeResolvedGradingExtensions.lean:RenewalGeometry.bareOperationalTensor_has_even_and_odd_conservativeExtensions"
     ],
-    "note": "Partial: for an arbitrary finite old letter process, two conservative extensions by a two-level spectator are constructed (grading-even via clockZ, grading-odd via clockX); every old word is recovered exactly after normalized grading discard, the even extension commutes with the grading (zero cross block), and the odd extension has a nonzero left-to-right cross block. Missing: the explicit clauses that the complete word-Gram hierarchy and the resolved classical cylinder probabilities coincide (only implicit through old-word recovery).",
-    "difficulty": "easy",
-    "plan": "Extend RenewalGeometry/StandardModel/ConservativeResolvedGradingExtensions.lean: add explicit clauses that for the even (clockZ) and odd (clockX) extensions every word Gram entry Tr(w_1ᴴ w_2) of extended old words equals a fixed multiple (factor 2 from the spectator) of the old Gram entry, and that the resolved cylinder probabilities (products of old letter effects) coincide; both follow from conservativeResolvedGrading_word / resolvedGradingEmbed_word by Matrix.trace_kronecker-type computations. The nonzero cross block is already gradingOddProcessExtension_crossBlock_ne_zero. Missing: only these two clauses and a packaging statement quantifying over the proposed cross block."
+    "note": "Proved as a countermodel for an arbitrary finite old letter process K (h x Fin 2 resolved carrier, spectator two-level system, h nonempty). external_shadow_no_go packages: (i) both the even (clockZ) and odd (clockX) extensions recover every old word after normalized grading discard (conservative); (ii) the historical word algebras coincide literally (every extended old word is the same matrix), hence identical multiplication tables; (iii) the complete word-Gram hierarchies Tr(w1^H w2) coincide and equal twice the old Gram (trace_kronecker); (iv) all resolved entries of every historical word coincide (resolved cylinder data); (v) the proposed left-to-right grading cross block is 0 in the even extension and nonzero in the odd one; (vi)/(vii) no function of the historical word data, and no function of the word-Gram hierarchy, returns the cross block of both extensions. Scope: the grading-changing variant of the cross block is the instance exhibited (the theorem is existential, so one instance suffices); the typed-incidence variant is not separately modelled."
   },
   "thm:factor-obstruction": {
     "env": "theorem",
@@ -144,12 +191,15 @@
     "title": "Typed multiplicity algebra",
     "status": "statement_encoded",
     "lean": [
+      "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.typedMultiplicityAlgebra",
+      "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.mem_typedMultiplicityAlgebra",
+      "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.typedMultiplicityAction",
+      "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.typedMultiplicityAction_mul",
+      "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.typedMultiplicityAction_star",
       "RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:RenewalGeometry.GraphLoadedEdgeCommutant.TypedMultiplicityCommutant",
       "RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:RenewalGeometry.GraphLoadedEdgeCommutant.MultiplicityBlocks"
     ],
-    "note": "Definition encoded: MultiplicityBlocks is the family (R_lambda) and TypedMultiplicityCommutant is the pair of intertwining equations R_mu F_e = F_e R_lambda, R_lambda F_e^* = F_e^* R_mu on every edge of a SimpleGraph with per-orientation edge data (undirected graph, orientation-pointwise).",
-    "difficulty": "easy",
-    "plan": "Already encoded as RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:TypedMultiplicityCommutant / MultiplicityBlocks. Remaining polish: package the solution set as a star-closed Subalgebra of the product Π v, Matrix (M v) (M v) C (closed under +, *, star by the two intertwining equations) and define its action on the full carrier as the block-diagonal map ⊕ I_{C^4 (x) V_lam} (x) R_lam (Matrix.kroneckerMap with 1). One short file."
+    "note": "Definition encoded in full: typedMultiplicityAlgebra is the StarSubalgebra of the product Pi v, Matrix (M v) (M v) C whose carrier is exactly the pair of intertwining equations R_mu F_e = F_e R_lambda, R_lambda F_e^H = F_e^H R_mu on every oriented edge of the incidence SimpleGraph (closure under +, *, 1, scalars and star proved; mem_typedMultiplicityAlgebra is the membership characterization). typedMultiplicityAction R v = I_{Fin 4 x B v} kronecker R v is the block-diagonal action on the full carrier, proved multiplicative, unital, additive and star-preserving. Scope: undirected graph with orientation-pointwise edge data, as in the existing assembly file."
   },
   "lem:multiplicity-factorization": {
     "env": "lemma",
@@ -187,11 +237,21 @@
   "def:support-polar": {
     "env": "definition",
     "title": "Support-polar action algebra",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "DOWNGRADED 2026-09-22: the cited file(s) SingularSupportPolarGeneratedAlgebra.lean do not compile against the pinned Mathlib and are excluded from the public tree; pending repair. Original assessment: Definition encoded as the generator set {vertex projection, F_j^*F_j support metrics, polar partial isometries U_j} whose StarAlgebra.adjoin is O_F^sup; scoped to a family of parallel edges between one source carrier Fin e and one target carrier Fin h.",
-    "difficulty": "easy",
-    "plan": "Repair the excluded file SingularSupportPolarGeneratedAlgebra.lean against the pinned Mathlib (rename pitfalls only): generator set {vertex projections Z_lam, F_eᴴ F_e, U_e, U_eᴴ} with U_e from RenewalGeometry/Commutant/SingularPolarData.lean:exists_singular_polar_data, and O_F^sup := Algebra.adjoin of that set (star-closed since the set is star-closed). Then restate over the graph-indexed edge data of RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean instead of one source/target pair. No new mathematics."
+    "status": "statement_encoded",
+    "lean": [
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.supportPolarAlgebra",
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.supportPolarGenerators",
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.vertexProjection",
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.supportMetric",
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.polarOp",
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.blockEmbed",
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.polarIsometry",
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.polarIsometry_spec",
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.exists_singular_polar_data_general",
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.sum_vertexProjection",
+      "RenewalGeometry/Commutant/SupportPolarActionAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.incidenceOp_eq_polar_mul"
+    ],
+    "note": "Fresh definition on graph-indexed edge data (no copy of the excluded private file). Total carrier = Sigma v, M v over a finite vertex type; vertexProjection v = Z_v (orthogonal projections summing to 1, proved); blockEmbed places a rectangular block F_e : M_u -> M_v on the (v,u) corner; supportMetric = F_e^H F_e on the carrier; polarIsometry F is the canonical polar partial isometry U with F = U P, P psd, P^2 = F^H F, U U^H U = U and U^H U = supp P (existence transported from exists_singular_polar_data to arbitrary finite column types via Fintype.equivFin, then chosen); polarOp = U_e on the carrier; supportPolarAlgebra = StarAlgebra.adjoin of {Z_lambda, F_e^H F_e, U_e, U_e^H}. In finite dimension the algebraic star hull is the C*-hull, so this is O_F^sup. Scoped: SimpleGraph with orientation-pointwise edge data, as in GraphLoadedEdgeCommutantAssembly."
   },
   "thm:support-polar": {
     "env": "theorem",
@@ -211,12 +271,17 @@
     "title": "Multiplicity quiver",
     "status": "statement_encoded",
     "lean": [
+      "RenewalGeometry/Commutant/MultiplicityQuiverArrows.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.functionalSlice",
+      "RenewalGeometry/Commutant/MultiplicityQuiverArrows.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.blockSlice",
+      "RenewalGeometry/Commutant/MultiplicityQuiverArrows.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.arrowSpace",
+      "RenewalGeometry/Commutant/MultiplicityQuiverArrows.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.arrowSpace_eq_span_blockSlice",
+      "RenewalGeometry/Commutant/MultiplicityQuiverArrows.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.QuiverEnd",
+      "RenewalGeometry/Commutant/MultiplicityQuiverArrows.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.mem_quiverEnd_iff",
+      "RenewalGeometry/Commutant/MultiplicityQuiverArrows.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.quiverEndEquivEndomorphism",
       "RenewalGeometry/Commutant/SMSTQuiverCommutantAssemblyExact.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.QuiverEndomorphism",
       "RenewalGeometry/Commutant/SMSTQuiverCommutantAssemblyExact.lean:RenewalGeometry.SMSTQuiverCommutantAssembly.AmbientCommutant"
     ],
-    "note": "Definition encoded: vertex spaces N_a, arrows given by coefficient blocks B_j(v_b,v_a) in Hilbert-Schmidt bases of B(V_a,V_b), End Q = families (X_a) with X_b B = B X_a. Scoped: the arrow blocks are supplied as data rather than derived from the isotypic decomposition of S_F.",
-    "difficulty": "easy",
-    "plan": "Already encoded (RenewalGeometry/Commutant/SMSTQuiverCommutantAssemblyExact.lean:QuiverEndomorphism, AmbientCommutant) with arrow blocks as data. Optional refinement: define B_ba(T) := span of the slices (φ (x) id)(T_ba) over the Hilbert-Schmidt basis of B(V_a,V_b), i.e. the matrices (fun n m => T ((va, n), (vb, m))) for fixed va vb, exactly the B j vb va blocks used in RenewalGeometry/Commutant/SMSTCommutant.lean:finite_typed_quiver_form_kernel; then Q_F(T) is the QuiverEndomorphism of that family. Direct definition."
+    "note": "Definition refined so that the arrow spaces are derived from the generator blocks rather than supplied as data: functionalSlice phi T = (phi (x) id)(T_ba) for a functional phi on B(V_a,V_b); blockSlice T vb va = the Hilbert-Schmidt basis slices; arrowSpace j = span of all functional slices of T_j (= B_ba); QuiverEnd = families (X_a) with X_b B = B X_a for every B in the arrow space (= End Q_F). Proved: the arrow space equals the span of the finitely many entry slices (arrowSpace_eq_span_blockSlice), membership in QuiverEnd reduces to the finitely many coefficient equations (mem_quiverEnd_iff), and QuiverEnd is equivalent to the data-supplied QuiverEndomorphism with B j vb va := blockSlice (quiverEndEquivEndomorphism). Still scoped: the isotypic decomposition M = (+) V_a (x) N_a of S_F is inherited as the indexing data (V, N); the family T is one generator block per arrow index j (a finite star-closed family is encoded by listing each member and its adjoint as separate indices)."
   },
   "thm:quiver": {
     "env": "theorem",
@@ -343,15 +408,24 @@
   "thm:flat-depth-colour": {
     "env": "theorem",
     "title": "Flat-depth multiplicity-birth obstruction",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Predictive/FutureWordSaturationExact.lean:RenewalGeometry.FutureWordSaturation.futureKernel_eq_iff_invariant",
-      "RenewalGeometry/Predictive/FutureWordSaturationExact.lean:RenewalGeometry.FutureWordSaturation.futureKernel_eq_of_stable",
-      "RenewalGeometry/Predictive/GeneratedAlgebraFlatness.lean:RenewalGeometry.flat_exhausts_generated_algebra_exact"
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.invariants",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.trivialMultiplicity",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.m0",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.colourBirthDepth",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.trivialBlock",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.no_M3_of_trivialMultiplicity_le_two",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.flat_depth_colour_obstruction",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.flat_depth_colour_obstruction_of_gram_rank",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.sourceWordMatrix",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.sourceWordGram",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.span_cols_sourceWordMatrix",
+      "RenewalGeometry/Predictive/FlatDepthColourObstruction.lean:RenewalGeometry.FlatDepthColour.flat_depth_colour_obstruction_of_word_gram",
+      "RenewalGeometry/Predictive/FlatWordSpan.lean:RenewalGeometry.flat_word_span",
+      "RenewalGeometry/Predictive/FlatWordSpan.lean:RenewalGeometry.wordSpan"
     ],
-    "note": "Partial: flatness-implies-stabilization is proved for the dual future-kernel chain (K_{r+1} = K_r iff K_r is letter-invariant, and then K_m = K_r for all m >= r) and for generated-algebra word filtrations; missing: the Gram-rank formulation rank K_r = rank K_{r+1} => V_s = V_r on the reachable physical carrier and the conclusion m_0 <= 2 => no external-trivial M_3 factor, r_col^birth = infinity.",
-    "difficulty": "easy",
-    "plan": "Assemble: define the depth filtration V_r := span of words of length ≤ r applied to the source vectors (Submodule chain with V_{r+1} = V_r ⊔ ⨆_letters map L V_r, cf. RenewalGeometry/Predictive/KrylovLocalizerFlatnessExact.lean:krylov_succ_eq_sup_map and FutureWordSaturationExact.lean); Gram-rank equality ⇒ finrank equality (rank of a Gram = rank of the synthesizing matrix: Matrix.rank_conjTranspose_mul_self) ⇒ V_{r+1} = V_r by Submodule.eq_of_le_of_finrank_le ⇒ letter invariance ⇒ V_s = V_r for all s ≥ r (KrylovLocalizerFlatnessExact.lean:krylov_stable_of_eq / FutureWordSaturationExact.lean:futureKernel_eq_of_stable patterns; GeneratedAlgebraFlatness.lean:flat_exhausts_generated_algebra_exact). The M_3 exclusion: an external-trivial internal operator is supported on the S_4-fixed subspace of V_r, whose dimension is m_0 ≤ 2, and End of a ≤2-dimensional space (dim ≤ 4) admits no injective linear image of M_3 (dim 9) — same dimension count as EdgeCommutantDimensionExact.lean:no_M3_embedding. One day of assembly."
+    "note": "Proved in full generality on a finite-dimensional carrier E with represented source letters L, seed space V0 (or sources s with V0 = span s), and an arbitrary family of external symmetry operators rho (the S_4 action is a special case). V_r = wordSpan L V0 r (Predictive/FlatWordSpan.lean); m_{0,r} := finrank (V_r inf E^rho) (fixed vectors of V_r in E, equal to dim Hom_G(1,V_r) when V_r is rho-stable); r_col^birth := inf {s : m_{0,s} >= 3} in ENat; the external-trivial block of the relative commutant is End(V_s inf E^rho) (= M_{m_{0,s}}(C)). flat_depth_colour_obstruction: finrank V_{r+1} <= finrank V_r and m_{0,r} <= 2 give V_s = V_r for all s >= r, m_{0,s} <= 2 for every s, no injective linear map M_3(C) -> End(V_s inf E^rho) for any s (the thm:active-isotypic dimension clause 4 < 9), and colourBirthDepth = top. flat_depth_colour_obstruction_of_gram_rank: same with the literal hypothesis rank K_r = rank K_{r+1} for Grams K = C^H C of labelled spanning families of V_r, V_{r+1}. flat_depth_colour_obstruction_of_word_gram: same with K_r = W_r^H W_r the labelled source-word Gram itself (columns (w, j) = word w applied to source s_j, |w| <= r; span_cols_sourceWordMatrix identifies its column span with V_r). Scope: finite N coordinate carrier and finite alphabet/source label types for the Gram forms; 'no external-trivial M_3 factor' is formalised as no injective C-linear map of M_3(C) into the trivial-isotypic commutant block (stronger than no unital *-embedding). Standard axioms only."
   },
   "thm:connected-router": {
     "env": "theorem",
@@ -368,11 +442,17 @@
   "cor:one-router-minimality": {
     "env": "corollary",
     "title": "One-router source minimality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: cyclic nonnormal router, one-router minimality, commutative generated algebra without off-diagonal word (only the n=3 colour-corner instance internal_seed_dichotomy exists, see thm:colour-bridge).",
-    "difficulty": "easy",
-    "plan": "Instantiate with a concrete cyclic router: the cyclic shift permutation matrix S on Fin n (Equiv.Perm.permMatrix of finRotate) is nonnormal-free of issue here since p i * S * p (i+1) = single i (i+1) 1; products of consecutive units and adjoints give every single i j 1, hence Algebra.adjoin (range p ∪ {S, Sᴴ}) = ⊤ by RenewalGeometry/StandardModel/WeakResetGenerationExact.lean:top_of_units (no need for the general thm:connected-router). Second clause: Algebra.adjoin of a set of pairwise commuting diagonal matrices is commutative (Mathlib: Algebra.adjoin_induction with Commute, or Algebra.adjoinCommSemiringOfComm). One day."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Commutant/OneRouterMinimality.lean:RenewalGeometry.OneRouter.one_router_source_minimality",
+      "RenewalGeometry/Commutant/OneRouterMinimality.lean:RenewalGeometry.OneRouter.cyclicRouter_generates",
+      "RenewalGeometry/Commutant/OneRouterMinimality.lean:RenewalGeometry.OneRouter.cyclicRouter_not_normal",
+      "RenewalGeometry/Commutant/OneRouterMinimality.lean:RenewalGeometry.OneRouter.diagonal_generated_commutative",
+      "RenewalGeometry/Commutant/OneRouterMinimality.lean:RenewalGeometry.OneRouter.cyclicRouter",
+      "RenewalGeometry/Commutant/OneRouterMinimality.lean:RenewalGeometry.OneRouter.diagProj",
+      "RenewalGeometry/Commutant/OneRouterMinimality.lean:RenewalGeometry.OneRouter.routerAlgebra"
+    ],
+    "note": "Proved with an explicit router on an n-dimensional carrier Fin n with diagonal minimal projections p_i = E_ii: the nilpotent cyclic shift N (N_{i,i+1} = 1, support graph the path 1-2-...-n) satisfies (i) StarAlgebra.adjoin C {p_i, N} = top = M_n(C) for every n (cyclicRouter_generates; matrix units built from p_i N p_{i+1} along the path, adjoints for the reverse direction, then WeakReset.top_of_units); (ii) N is nonnormal for n >= 2 (cyclicRouter_not_normal, N N^H != N^H N); (iii) the star algebra generated by any set of diagonal matrices, in particular by the p_i alone (no off-diagonal word), is commutative (diagonal_generated_commutative via Algebra.commute_of_mem_adjoin_of_forall_mem_commute). one_router_source_minimality packages (i)-(iii) for n = m + 2. Scope: the manuscript's 'cyclic nonnormal router' is instantiated by this nilpotent shift (sufficiency is an existential claim, so one router instance suffices); the general connected-router criterion is thm:connected-router, not needed here."
   },
   "lem:weak-M2": {
     "env": "lemma",
@@ -407,10 +487,15 @@
     "env": "corollary",
     "title": "Port-relative reachability forces colour",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: reciprocal return margin, kappa lower bound, two-leg colour return, port-relative reachability.",
-    "difficulty": "easy",
-    "plan": "Given the mass identity of thm:reciprocal-return (take it as hypothesis if that theorem is not yet formalized): W_A ⪰ κ I ⇒ Tr(rho_B W_A) ≥ κ Tr rho_B = κ ||B||_HS^2 (Matrix.PosSemidef trace monotonicity: Tr(rho_B (W_A - κ I)) ≥ 0 for PSD rho_B, use Matrix.PosSemidef.trace_mul_nonneg or the sqrt factorization), and max_{g,k} ||r_{g,k}||^2 ≥ (|G| n)⁻¹ ∑ = m_ret/n by Finset.exists_le_of_sum_le / average ≤ max. One day."
+    "lean": [
+      "RenewalGeometry/StandardModel/ReciprocalReturnMargin.lean:RenewalGeometry.ReciprocalReturn.reciprocalReturn_margin",
+      "RenewalGeometry/StandardModel/ReciprocalReturnMargin.lean:RenewalGeometry.ReciprocalReturn.trace_partialGram_mul_ge",
+      "RenewalGeometry/StandardModel/ReciprocalReturnMargin.lean:RenewalGeometry.ReciprocalReturn.trace_partialGram",
+      "RenewalGeometry/StandardModel/ReciprocalReturnMargin.lean:RenewalGeometry.ReciprocalReturn.partialGram_posSemidef"
+    ],
+    "note": "Partial: ReciprocalReturnMargin.lean proves the margin bounds and positivity, but takes the boxed mass identity of thm:reciprocal-return (itself unformalised) as an explicit hypothesis; so the Lean proves 'theorem => corollary', not the corollary unconditionally. Concrete partial trace rho_B = Tr_V(B B^*) built and proved PSD with Tr rho_B = |B|^2_HS. Scoped: V, G nonempty, n > 0.",
+    "difficulty": "medium",
+    "plan": "Formalise thm:reciprocal-return's mass identity (Schur-twirl lemma, medium); then instantiate reciprocalReturn_margin with it to close this corollary."
   },
   "thm:central-separation": {
     "env": "theorem",
@@ -476,11 +561,13 @@
     "status": "statement_encoded",
     "lean": [
       "RenewalGeometry/StandardModel/DeterminantIncidenceExact.lean:RenewalGeometry.DetIncidence.theta",
-      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.determinantProductHom"
+      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.determinantProductHom",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.theta_unit_normalized",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.determinantSeedStabilizer",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.determinantSeedStabilizer_eq_SMGaugeGroup",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.determinantSeedStabilizer_phase"
     ],
-    "note": "Definition encoded: theta tau is the normalized alternating seed shadow on C^3 (x) C^2 (x) C^2 -> Lambda^2 C^3, and determinantProductHom (A,B) |-> det A det B is the character whose kernel is the seed stabilizer.",
-    "difficulty": "easy",
-    "plan": "Already encoded: RenewalGeometry/StandardModel/DeterminantIncidenceExact.lean:theta (normalized alternating seed) and RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:determinantProductHom (the character whose kernel is the stabilizer). Optional: add the normalization clause ||theta tau||^2 = 6 |tau|^2 = 1 for |tau| = 1/sqrt 6 (DetIncidence.theta_norm exists) and the remark that the stabilizer is phase independent (ker of a character is unchanged by scaling the seed). Nothing substantive missing."
+    "note": "Definition encoded: theta tau is the normalized alternating seed shadow and determinantProductHom (A,B) |-> det A det B the character whose kernel is the seed stabilizer. Added the normalization clause theta_unit_normalized (||Theta_tau||^2 = 1 iff |tau|^2 = 1/6), the stabilizer determinantSeedStabilizer tau = {(A,B) : det A det B tau = tau} with determinantSeedStabilizer_eq_SMGaugeGroup (tau != 0 => stabilizer = S(U(3) x U(2)) = SMGaugeGroup) and the paper's remark determinantSeedStabilizer_phase (multiplying tau by any nonzero scalar, in particular a phase, leaves the stabilizer unchanged)."
   },
   "thm:gauge-group": {
     "env": "theorem",
@@ -498,11 +585,17 @@
   "prop:operational-determinant-source": {
     "env": "proposition",
     "title": "Positive operational source criterion for the determinant group",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: h_det, Choi cross block J_01, character sectors 1 and chi^-1, stabilizer of marked positive subpacket (StandardModelHiggsStabilizerExact concerns the Higgs vacuum stabilizer, not this criterion).",
-    "difficulty": "easy",
-    "plan": "Reformulate abstractly and prove in a few lines: for a group G, a character χ : G →* unitary C and a G-module in which G acts on the cross block J by g • J = χ(g)⁻¹ • J (this transformation law is the mathematical content of 'two marked sectors with characters 1 and χ⁻¹'), Stab(J) = ker χ when J ≠ 0 and Stab(J) = G when J = 0 (h_det := ||J||_HS^2 > 0 iff J ≠ 0). Instantiate with G = SMGaugeU3 × SMGaugeU2 and χ = RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:determinantProductHom, whose kernel is SMGaugeGroup = S(U(3) × U(2)). One day including the concrete cross-block model J_01 : Matrix with the (A,B)-action A (x) B acting by det(A)⁻¹ det(B)⁻¹."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.operational_determinant_source",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.MarkedSectorPacket",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.packetAction",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.hDet",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.packetStabilizer_eq_ker_of_hDet_pos",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.packetStabilizer_eq_top_of_hDet_zero",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.SMGaugeGroup_ne_top"
+    ],
+    "note": "Proved. The marked positive subpacket is MarkedSectorPacket (two diagonal Choi blocks J00, J11 and the Choi cross block J01 : Matrix p q C); the hypothesis 'the group acts on the two sectors by the characters 1 and chi^{-1}' is encoded as the action packetAction (diagonal blocks invariant, cross block J01 |-> chi(g)^{-1} J01), and h_det := ||J01||_HS^2 (hDet). For a general group G and unitary character chi: h_det > 0 => stabilizer of the packet = ker chi; h_det = 0 => stabilizer = whole group. operational_determinant_source instantiates G = U(3) x U(2), chi = determinantProductHom: h_det > 0 => stabilizer = SMGaugeGroup = S(U(3) x U(2)); h_det = 0 => stabilizer = top and top != SMGaugeGroup (witness (-I_3, I_2), SMGaugeGroup_ne_top), i.e. the diagonal masses alone do not imply the determinant subgroup. Disclosed modelling choice: the character transformation law of the cross block is the definition of the action rather than derived from a Choi-matrix construction."
   },
   "prop:faithful-SM-quotient": {
     "env": "proposition",
@@ -543,25 +636,22 @@
       "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.cliffordProbability",
       "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.axisOccurrence",
       "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.axisCrossBlock",
-      "RenewalGeometry/StandardModel/CliffordOccurrencePressureAssembly.lean:RenewalGeometry.CliffordOccurrencePressure.probability"
+      "RenewalGeometry/StandardModel/CliffordOccurrenceTest.lean:RenewalGeometry.CliffordTwirlMatterAudit.cliffordProbability_eq_paper",
+      "RenewalGeometry/StandardModel/CliffordOccurrenceTest.lean:RenewalGeometry.CliffordTwirlMatterAudit.cliffordProbability_nonneg"
     ],
-    "note": "Definition encoded: axisCrossBlock J σ = P_- σ P_+ with P_± = (1±J)/2, axisOccurrence = its squared Hilbert–Schmidt norm, and cliffordProbability J σ = (1/4)·Σ_μ (2/dim H)·axisOccurrence = (1/(2 dim H)) Σ_{μ=0}^{3} ‖P_- σ_μ P_+‖²_HS, i.e. exactly p_Cl (complex-valued, real part taken in CliffordOccurrencePressure.probability).",
-    "difficulty": "easy",
-    "plan": "Already encoded: RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:cliffordProbability (complex) and CliffordOccurrencePressureAssembly.lean:CliffordOccurrencePressure.probability (real part). Nothing new is needed beyond a one-line lemma unfolding cliffordProbability to (1/(2·card n))·Σ_μ ‖P₋σ_μP₊‖²_HS in the paper's normalisation (axisOccurrence_probability_formulas already does the per-axis step)."
+    "note": "Definition encoded: axisCrossBlock J sigma = P_- sigma P_+ with P_+- = (1 +- J)/2, axisOccurrence its squared Hilbert-Schmidt norm, and cliffordProbability_eq_paper unfolds cliffordProbability J sigma to the paper's normalisation (2 dim H)^{-1} sum_{mu=0}^{3} ||P_- sigma_mu P_+||_HS^2 (eq:clifford-matter); cliffordProbability_nonneg records p_Cl >= 0."
   },
   "prop:clifford-occurrence": {
     "env": "proposition",
     "title": "Clifford occurrence test",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.axisOccurrence_eq_zero_iff_commute",
-      "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.axisOccurrence_nonnegative",
-      "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.axisCrossBlock_eq_zero_iff_commute",
-      "RenewalGeometry/StandardModel/CliffordOccurrencePressureAssembly.lean:RenewalGeometry.CliffordOccurrencePressure.probability_mem_unitInterval"
+      "RenewalGeometry/StandardModel/CliffordOccurrenceTest.lean:RenewalGeometry.CliffordTwirlMatterAudit.clifford_occurrence_test",
+      "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.cliffordProbability_eq_zero_iff_commutes",
+      "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.noMatter_branch",
+      "RenewalGeometry/StandardModel/CliffordTwirlMatterAudit.lean:RenewalGeometry.CliffordTwirlMatterAudit.representedAxis_commutant_iff"
     ],
-    "note": "Partial: each axis occurrence is nonnegative and vanishes exactly when the Hermitian axis commutes with the grading involution J (no grading-changing corner), so p_Cl>0 iff some represented axis changes the grading and p_Cl=0 iff the grading reduces every axis; p_Cl∈[0,1] is proved. Missing: the clause that on the p_Cl=0 branch the residual Clifford action lies in the normal multiplicity commutant.",
-    "difficulty": "easy",
-    "plan": "Assemble on the represented carrier CliffordCarrier m: CliffordTwirlMatterAudit.lean:axisOccurrence_eq_zero_iff_commute + axisOccurrence_nonnegative give p_Cl>0 ↔ ∃ μ, J does not commute with representedAxis μ; the missing p_Cl=0 clause is already proved as noMatter_branch (p_Cl=0 ↔ J = 1 ⊗ B with B a Hermitian involution) together with representedAxis_commutant_iff (the Clifford commutant is exactly 1 ⊗ Block m, i.e. the normal multiplicity commutant). Only a wrapper theorem stating both clauses in the paper's form is missing."
+    "note": "Proved on the represented carrier C^4 (x) M (CliffordCarrier m, any finite nonempty multiplicity type m) with the faithful Clifford axes gamma_mu (x) 1 and a Hermitian involutive protected grading J: clifford_occurrence_test gives (i) p_Cl > 0 iff some represented axis fails to commute with J (changes the grading), and (ii) if p_Cl = 0 then J commutes with every axis (the grading reduces the external Clifford action), J = 1 (x) B with B a Hermitian involution of the multiplicity factor, and the commutant of the Clifford action is exactly the normal multiplicity commutant 1 (x) M_m(C). Scoped: axes are the represented ones gamma_mu (x) 1 (the paper's 'represented Clifford axis'); p_Cl is compared in the complex order (it is real and nonnegative)."
   },
   "prop:generation-carrier": {
     "env": "proposition",
@@ -580,11 +670,11 @@
     "status": "statement_encoded",
     "lean": [
       "RenewalGeometry/StandardModel/OneDoubletOddTangentClassification.lean:RenewalGeometry.oddProvenanceDefect",
-      "RenewalGeometry/StandardModel/OneDoubletOddTangentClassification.lean:RenewalGeometry.oddProvenanceDefect_eq_zero_iff_rangeIncluded"
+      "RenewalGeometry/StandardModel/OneDoubletOddTangentClassification.lean:RenewalGeometry.oddProvenanceDefect_eq_zero_iff_rangeIncluded",
+      "RenewalGeometry/StandardModel/CliffordOccurrenceTest.lean:RenewalGeometry.OddProvenanceComplete",
+      "RenewalGeometry/StandardModel/CliffordOccurrenceTest.lean:RenewalGeometry.oddProvenanceComplete_iff_rangeIncluded"
     ],
-    "note": "Definition encoded as the odd provenance defect: the trace of the source Schur residual of the complete odd coefficient block against the selected (finite-Dirac) block, proved to vanish exactly when every complete odd coefficient lies in the selected range — the paper's 'orthogonal odd innovation Gram vanishes' clause. The label does not occur in the .tex (unlabelled definition at line 2584).",
-    "difficulty": "easy",
-    "plan": "Already encoded as OneDoubletOddTangentClassification.lean:oddProvenanceDefect with oddProvenanceDefect_eq_zero_iff_rangeIncluded. At most add a Prop abbreviation OddProvenanceComplete := oddProvenanceDefect = 0 so downstream statements (prop:finite-dirac) can quote it; the label is absent from the .tex (unlabelled definition at line 2584), so the ledger key should be recorded as a synthetic label."
+    "note": "Definition encoded as the Prop OddProvenanceComplete selected complete := oddProvenanceDefect selected complete = 0 (vanishing orthogonal odd innovation Gram, the trace of the source Schur residual of the complete odd coefficient block against the selected finite-Dirac block), with oddProvenanceComplete_iff_rangeIncluded proving the paper's 'equivalently' clause: completeness holds exactly when every complete odd coefficient lies in the selected (finite-Dirac) range. The label does not occur in the .tex (unlabelled definition after eq:finite-dirac); the ledger key is synthetic."
   },
   "prop:finite-dirac": {
     "env": "proposition",
@@ -633,13 +723,13 @@
     "status": "statement_encoded",
     "lean": [
       "RenewalGeometry/Commutant/JointCommutatorContinuousOperator.lean:RenewalGeometry.commutantLaplacianCLM",
-      "RenewalGeometry/Commutant/JointCommutatorContinuousOperator.lean:RenewalGeometry.jointCommutatorCLM",
-      "RenewalGeometry/Commutant/FiniteCommutantPoincareGap.lean:RenewalGeometry.jointCommutatorL2",
-      "RenewalGeometry/Commutant/FiniteCommutantPoincareGap.lean:RenewalGeometry.jointCommutatorL2_norm_sq"
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.adCLM",
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.adCLM_matrixL2",
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.commutantLaplacianCLM_eq_sum_adjoint_comp",
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.commutantLaplacianCLM_inner_self",
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.commutantLaplacianCLM_inner_self_matrixL2"
     ],
-    "note": "Definition encoded on finite Hilbert–Schmidt carriers: jointCommutatorL2 c is the stacked map X ↦ ([c_j,X])_j on EuclideanSpace ℂ (n×n) and commutantLaplacianCLM c = (jointCommutatorCLM c)† ∘ jointCommutatorCLM c = Σ_j ad_{c_j}^* ad_{c_j}; its quadratic form is proved to be Σ_j ‖[c_j,X]‖²_HS. Scoped: matrix generators on a finite carrier (the spanning/unital ∗-algebra framing is not needed).",
-    "difficulty": "easy",
-    "plan": "Already encoded: Commutant/JointCommutatorContinuousOperator.lean:commutantLaplacianCLM = (jointCommutatorCLM c)† ∘ jointCommutatorCLM c with quadratic form Σ_j ‖[c_j,X]‖²_HS (jointCommutatorCLM_norm_sq). Optionally add the one-line identity commutantLaplacianCLM c = Σ_j ad_{c_j}† ∘ ad_{c_j} as a sum over j to match the boxed display."
+    "note": "Definition encoded on the finite Hilbert-Schmidt carrier EuclideanSpace C (n x n) with matrix generators c : Fin s -> Matrix n n C. adCLM c j is the continuous derivation X |-> [c_j, X] (adCLM_matrixL2), and the boxed display is proved verbatim: commutantLaplacianCLM c = sum_j (adCLM c j)^dagger o adCLM c j (commutantLaplacianCLM_eq_sum_adjoint_comp). Quadratic form: <X, L X> = sum_j ||[c_j, X]||^2_HS in the trace convention (commutantLaplacianCLM_inner_self_matrixL2). Scoped: finite carrier; the 'c_j span a unital *-algebra' framing is not needed for the definition."
   },
   "thm:commutant-audit": {
     "env": "theorem",
@@ -658,13 +748,15 @@
     "title": "Relative Howe Gram",
     "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/Commutant/RelativeHoweGramSpectralCertificateExact.lean:RenewalGeometry.RelativeHoweSpectralMargin",
-      "RenewalGeometry/Commutant/FiniteCommutantPoincareGap.lean:RenewalGeometry.jointCommutatorL2",
-      "RenewalGeometry/Commutant/RelativeHoweCertificate.lean:RenewalGeometry.smstCommutatorSource"
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.relativeHoweGram",
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.IsHSOrthonormalBasisOf",
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.relativeHoweGram_eq_inner_jointCommutatorCLM",
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.relativeHoweGram_eq_conjTranspose_mul_self",
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.relativeHoweGram_isHermitian",
+      "RenewalGeometry/Commutant/CommutantLaplacianHoweGram.lean:RenewalGeometry.relativeHoweGram_posSemidef",
+      "RenewalGeometry/Commutant/RelativeHoweGramSpectralCertificateExact.lean:RenewalGeometry.RelativeHoweSpectralMargin"
     ],
-    "note": "Encoded as the quadratic form x ↦ ‖jointCommutatorL2 c x‖² = Σ_j ‖[c_j,x]‖²_HS restricted to the orthogonal complement of the proposed algebra M; RelativeHoweSpectralMargin exhibits the restricted Gram as an explicit positive-definite matrix with attained least eigenvalue. The basis-indexed matrix G_Howe(c|M)_{ab} itself is not a named definition.",
-    "difficulty": "easy",
-    "plan": "Define relativeHoweGram (c : Fin s → Matrix n n ℂ) (E : Basis of Mᗮ, HS-orthonormal) : Matrix r r ℂ := fun a b => Σ_j ⟪jointCommutatorL2 c (E a), jointCommutatorL2 c (E b)⟫ and prove it is the Gram of the restricted quadratic form via Commutant/FiniteCommutantPoincareGap.lean:jointCommutatorL2_norm_sq; RelativeHoweGramSpectralCertificateExact.lean:RelativeHoweSpectralMargin already exhibits the restricted form, so only the basis-indexed matrix and its polarisation identity are missing."
+    "note": "The basis-indexed matrix G_Howe(c|M)_{ab} = sum_j <[c_j,E_a],[c_j,E_b]>_HS is now a named definition relativeHoweGram c E (Matrix (Fin r) (Fin r) C) for a labelled family E : Fin r -> Matrix n n C; the hypothesis 'E is an HS-orthonormal basis of M^perp' is the separate predicate IsHSOrthonormalBasisOf M E (Orthonormal + span = M^perp). Proved: polarisation identity with the stacked joint-commutator source (relativeHoweGram_eq_inner_jointCommutatorCLM), Gram form A^H A (relativeHoweGram_eq_conjTranspose_mul_self), Hermitian and positive semidefinite. Scoped: finite matrix carrier."
   },
   "thm:howe-certificate": {
     "env": "theorem",
@@ -714,26 +806,29 @@
     "title": "Transported Mosco convergence",
     "status": "statement_encoded",
     "lean": [
+      "RenewalGeometry/OperatorLimits/TransportedMoscoAsymptoticCompactness.lean:RenewalGeometry.VaryingHilbert.System.TransportedMoscoConverges",
+      "RenewalGeometry/OperatorLimits/TransportedMoscoAsymptoticCompactness.lean:RenewalGeometry.VaryingHilbert.extendByTop",
+      "RenewalGeometry/OperatorLimits/TransportedMoscoAsymptoticCompactness.lean:RenewalGeometry.VaryingHilbert.System.TransportedMoscoConverges.moscoConverges_extendByTop",
+      "RenewalGeometry/OperatorLimits/TransportedMoscoAsymptoticCompactness.lean:RenewalGeometry.VaryingHilbert.System.MoscoConverges.transported_recovery",
       "RenewalGeometry/OperatorLimits/VaryingHilbertMosco.lean:RenewalGeometry.VaryingHilbert.System.MoscoConverges",
       "RenewalGeometry/OperatorLimits/VaryingHilbertMosco.lean:RenewalGeometry.VaryingHilbert.System.WeaklyConverges",
-      "RenewalGeometry/OperatorLimits/VaryingHilbertMosco.lean:RenewalGeometry.VaryingHilbert.System.StronglyConverges",
-      "RenewalGeometry/OperatorLimits/ENNRealMoscoResolventConvergence.lean:RenewalGeometry.VaryingHilbert.System.CofinalMoscoConverges"
+      "RenewalGeometry/OperatorLimits/VaryingHilbertMosco.lean:RenewalGeometry.VaryingHilbert.System.StronglyConverges"
     ],
-    "note": "Definition encoded: a System bundles isometric embeddings J_X of the stage Hilbert spaces into a common carrier; MoscoConverges records (M1) the weak-liminf inequality q_∞(B) ≤ liminf q_X(A_X) for weakly convergent transported sequences and (M2) strong recovery sequences with limsup q_X(A_X) ≤ q_∞(A), for extended nonnegative forms (q_∞ = +∞ off the limit range replaces the 'B ∈ J_∞H_∞' clause). CofinalMoscoConverges is the reindexing-stable variant used downstream.",
-    "difficulty": "easy",
-    "plan": "Already encoded: OperatorLimits/VaryingHilbertMosco.lean:VaryingHilbert.System.MoscoConverges (M1 weak liminf, M2 strong recovery) and the cofinal variant in ENNRealMoscoResolventConvergence.lean. Nothing further required."
+    "note": "Definition now encoded with an explicit limit stage exactly as in the paper: System.TransportedMoscoConverges Jlim q qlim has (M1) every transported weak limit B lies in Jlim Hlim, B = Jlim A, with qlim A <= liminf q_X(A_X); (M2) every A in D(qlim) (qlim A != infinity) has a recovery sequence with J_X A_X -> Jlim A strongly and q_X(A_X) -> qlim A. Bridge to the earlier common-carrier encoding: given asymptotic density it implies System.MoscoConverges q (extendByTop Jlim qlim) (limit form extended by +infinity off Jlim Hlim), and conversely that encoding yields the (M2) clause with the explicit limit stage. Forms are extended nonnegative (ENNReal), D(q) = {q < infinity}."
   },
   "def:asymptotic-compactness": {
     "env": "definition",
     "title": "Asymptotic form compactness",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/OperatorLimits/VaryingHilbertCollectiveCompactness.lean:RenewalGeometry.VaryingHilbert.System.CollectivelyCompact",
-      "RenewalGeometry/OperatorLimits/CompactScreenCollectiveCompactness.lean:RenewalGeometry.VaryingHilbert.System.collectivelyCompact_of_compactOperator_screens"
+      "RenewalGeometry/OperatorLimits/TransportedMoscoAsymptoticCompactness.lean:RenewalGeometry.VaryingHilbert.System.AsymptoticallyCompact",
+      "RenewalGeometry/OperatorLimits/TransportedMoscoAsymptoticCompactness.lean:RenewalGeometry.VaryingHilbert.LimitFormCompact",
+      "RenewalGeometry/OperatorLimits/TransportedMoscoAsymptoticCompactness.lean:RenewalGeometry.VaryingHilbert.limitFormCompact_iff",
+      "RenewalGeometry/OperatorLimits/TransportedMoscoAsymptoticCompactness.lean:RenewalGeometry.VaryingHilbert.AsymptoticallyCompactFamily",
+      "RenewalGeometry/OperatorLimits/TransportedMoscoAsymptoticCompactness.lean:RenewalGeometry.VaryingHilbert.System.asymptoticallyCompact_of_subset_compact",
+      "RenewalGeometry/OperatorLimits/VaryingHilbertCollectiveCompactness.lean:RenewalGeometry.VaryingHilbert.System.CollectivelyCompact"
     ],
-    "note": "Partial: the corpus defines collective compactness of transported operator families (all embedded stage unit-ball images inside one compact set) and a compact-screen sufficient condition (uniformly small tails under compact screens); missing: the paper's form-level definition (every sequence with sup(‖A_X‖²+q_X(A_X))<∞ has a strongly convergent transported subsequence) is not itself a Lean definition. Searched: asymptotically compact, asymptotic compactness, form compact.",
-    "difficulty": "easy",
-    "plan": "Write the form-level definition directly on VaryingHilbert.System (OperatorLimits/VaryingHilbertMosco.lean): AsymptoticallyCompact q := ∀ A : ∀ n, Hn n, (∃ C, ∀ n, ‖A n‖² + q n (A n) ≤ C) → ∃ φ strictly monotone, ∃ B, Tendsto (fun k => J.embedding (φ k) (A (φ k))) atTop (nhds B), with the same clause for the limiting form; relate it to the existing CollectivelyCompact only in lem:collective-compactness."
+    "note": "The paper's form-level definition is now a Lean definition on VaryingHilbert.System: AsymptoticallyCompact q := every dependent sequence with sup_X (||A_X||^2 + q_X(A_X)) < infinity (bounded by a finite ENNReal) has a strictly monotone subsequence whose embedded vectors converge in the common carrier. 'The same requirement imposed on the limiting form' is LimitFormCompact Jlim qlim, literally the same predicate for the constant system embedded by Jlim (unfolded in limitFormCompact_iff); AsymptoticallyCompactFamily bundles both clauses. asymptoticallyCompact_of_subset_compact is the compact-container sufficient condition. Not encoded: the paper's remark 'in particular (L_inf + I)^{-1} is compact' (a consequence, not part of the definition); the relation to CollectivelyCompact is left to lem:collective-compactness."
   },
   "prop:compact-mosco-resolvent": {
     "env": "proposition",
@@ -762,14 +857,16 @@
   "thm:coupled-schur": {
     "env": "theorem",
     "title": "Universal coupled source quotient",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "RenewalGeometry/Action/UniversalCoupledActionCarrier.lean:RenewalGeometry.coupledSourceSchur_factorization",
+      "RenewalGeometry/Action/CoupledSchurFaithfulness.lean:RenewalGeometry.coupledSourceSchur_faithful_iff",
+      "RenewalGeometry/Action/CoupledSchurFaithfulness.lean:RenewalGeometry.coupledSourceGram_eq_conjTranspose_mul_self",
+      "RenewalGeometry/Action/CoupledSchurFaithfulness.lean:RenewalGeometry.posDef_fromBlocks_diag_iff",
+      "RenewalGeometry/Action/CoupledSchurFaithfulness.lean:RenewalGeometry.posDef_conjTranspose_mul_self_iff",
       "RenewalGeometry/Action/UniversalCoupledActionCarrier.lean:RenewalGeometry.sourceMinimalInternalVariation"
     ],
-    "note": "Partial: coupledSourceSchur_factorization (Action/UniversalCoupledActionCarrier.lean) proves the Schur factorization clauses; missing: clause (i) joint positive-definiteness <-> Schur positive-definiteness (Mathlib Matrix.PosDef.fromBlocks). The original full proof cited CoupledSourceSchurNaturality.lean, which does not compile against the pinned Mathlib and is excluded.",
-    "difficulty": "easy",
-    "plan": "Action/UniversalCoupledActionCarrier.lean compiles and is imported by RenewalGeometry.lean: coupledSourceSchur_factorization gives the boxed residual identity, LDL* factorization, PSD and the rank identity (ii); sourceMinimalInternalVariation gives (iii). Missing only clause (i): joint Gram PosDef ↔ G_{i|g} PosDef — assemble from Mathlib's Matrix.PosDef.fromBlocks₁₁ (LinearAlgebra/Matrix/SchurComplement.lean) with hGg. The ledger downgrade refers to a removed file CoupledSourceSchurNaturality.lean; re-point the record to the surviving declarations."
+    "note": "All clauses now proved for finite source syntheses Sg : Matrix (Fin h) (Fin eg) C, Si : Matrix (Fin h) (Fin ei) C with the gravitational bank faithful (hGg : (Sg^H Sg).PosDef, the paper's standing assumption). coupledSourceSchur_factorization gives the boxed residual identity G_{i|g} = G_i - C G_g^{-1} C^* = S_i^*(I - P_g)S_i, the block LDL^* factorization, PSD of the residual and the rank identity (ii). Clause (i) is coupledSourceSchur_faithful_iff: the joint Gram [[G_g, C^*],[C, G_i]] is positive definite iff G_{i|g} is positive definite, and equivalently the joint synthesis (S_g | S_i) is injective (joint carrier faithful) iff G_{i|g} > 0 (proved via the LDL^* factorization and Matrix.IsUnit.posDef_star_left_conjugate_iff; Mathlib only has the PosSemidef Schur lemma). Clause (iii) is the definition sourceMinimalInternalVariation = E_i / Ker G_{i|g}. Scoped: finite index types Fin h, Fin eg, Fin ei."
   },
   "prop:classical-compatibility": {
     "env": "proposition",
@@ -785,14 +882,17 @@
   "lem:flat-word-span": {
     "env": "lemma",
     "title": "Flat extension of a finite word span",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Predictive/CharacterLeakage.lean:RenewalGeometry.krylov_stabilization",
-      "RenewalGeometry/Spectralization/SaturatedFiniteDiracGenerator.lean:RenewalGeometry.finiteKrylovChain_firstStabilization"
+      "RenewalGeometry/Predictive/FlatWordSpan.lean:RenewalGeometry.wordSpan",
+      "RenewalGeometry/Predictive/FlatWordSpan.lean:RenewalGeometry.wordSpan_eq_span_wordImage",
+      "RenewalGeometry/Predictive/FlatWordSpan.lean:RenewalGeometry.flat_word_span",
+      "RenewalGeometry/Predictive/FlatWordSpan.lean:RenewalGeometry.flat_word_span_of_gram_rank",
+      "RenewalGeometry/Predictive/FlatWordSpan.lean:RenewalGeometry.flat_word_span_multiplicity_constant",
+      "RenewalGeometry/Predictive/FlatWordSpan.lean:RenewalGeometry.gram_rank_eq_finrank_span_cols",
+      "RenewalGeometry/Predictive/CharacterLeakage.lean:RenewalGeometry.krylov_stabilization"
     ],
-    "note": "Partial: for a nested Krylov chain K_r under one operator T, rank K_{r+1} ≤ rank K_r forces K_{r+1} = K_r and, given T-invariance of K_r, K_s = K_r for all s ≥ r; the first plateau of a forward-mapped chain is proved T-invariant. Missing: the multi-letter word-span version (every letter of the alphabet preserves V_r at any flat depth, not only the first plateau) and the constancy of external isotypic multiplicities.",
-    "difficulty": "easy",
-    "plan": "Generalise Predictive/CharacterLeakage.lean:krylov_stabilization to a finite letter alphabet: define V (r+1) = V r ⊔ ⨆_ℓ Submodule.map ℓ (V r) over ℓ ∈ 𝓛 (finite family of linear maps); rank K_r = finrank V_r via saturation_rank (Gram rank = span rank); Submodule.eq_of_le_of_finrank_le gives V_{r+1}=V_r, hence map ℓ (V r) ≤ V r for every letter and V_s = V_r by induction (same pattern as krylov_stabilization). Constancy of external isotypic multiplicities is immediate from V_s = V_r as submodules."
+    "note": "Multi-letter version proved. wordSpan L V0 r is defined recursively (V_{r+1} = V_r + sum_l l V_r over the letters L : iota -> E ->l[C] E) and identified with the paper's span of all words of length <= r applied to V_0 (wordSpan_eq_span_wordImage). flat_word_span: on a finite-dimensional carrier, finrank V_{r+1} <= finrank V_r implies V_{r+1} = V_r, every letter preserves V_r, and V_s = V_r for all s >= r. flat_word_span_of_gram_rank states the hypothesis literally as rank K_r = rank K_{r+1} for Grams K = C^H C of labelled spanning families (columns) of V_r, V_{r+1} in a coordinate carrier N -> C, via gram_rank_eq_finrank_span_cols (saturation_rank + Matrix.rank_eq_finrank_span_cols). The 'consequently' clause (external isotypic multiplicities constant for s >= r) is flat_word_span_multiplicity_constant: any function of the subspace V_s is constant for s >= r (disclosed: multiplicities are taken as functions of the subspace, not tied to a specific representation datum). Scoped: finite-dimensional E, arbitrary letter index type."
   },
   "cor:flat-multiplicity-obstruction": {
     "env": "corollary",

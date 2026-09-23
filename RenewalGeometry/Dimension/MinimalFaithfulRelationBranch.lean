@@ -87,8 +87,3 @@ theorem minimal_identified_iff (a b : A) :
 end MinimalFaithfulRelationBranch
 
 end RenewalGeometry
--- AXIOMCHECK
-#print axioms RenewalGeometry.MinimalFaithfulRelationBranch.skeleton_complete
-#print axioms RenewalGeometry.MinimalFaithfulRelationBranch.reverse_pair
-#print axioms RenewalGeometry.MinimalFaithfulRelationBranch.minimal_identified_iff
-#print axioms RenewalGeometry.MinimalFaithfulRelationBranch.exists_offDiag_relation

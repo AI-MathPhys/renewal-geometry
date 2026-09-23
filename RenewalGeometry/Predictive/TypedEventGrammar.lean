@@ -151,10 +151,10 @@ def History.snoc {x y : G.CutType} (h : G.History x) (a : G.Letter x y)
     (ha : G.Admissible h.word a) : G.History y :=
   ⟨h.1, ⟨h.word.snoc a, ha⟩⟩
 
+variable (G) in
 /-- The conditional-probability clause of `def:supp-operational-datum`: a finite
 conditional operational renewal law `p_X(a | h)` (`eq:supp-one-step-law`), with
 non-admissible letters carrying probability `0`. -/
-variable (G) in
 structure ConditionalLaw where
   /-- `p_X(a | h)`. -/
   prob : ∀ {s x y : G.CutType}, TypedWord G.Letter s x → G.Letter x y → ℝ

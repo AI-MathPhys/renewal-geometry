@@ -73,12 +73,11 @@ def render(name: str) -> str:
                  "`scripts/check_statement_coverage.py` and audited for axioms by "
                  "`scripts/audit_axioms.py` (CI).\n")
 
-    unproved = [(k, r) for k, r in ledger.items()
-                if r["status"] not in ("proved", "computer_certified")]
+    unproved = [(k, r) for k, r in ledger.items() if r["status"] == "conditional_interface"]
     diff_counts = Counter(r.get("difficulty", "unrated") for _, r in unproved)
     if unproved:
         lines.append("## How far is the library from the rest?\n")
-        lines.append("Every unproved record carries an estimate of the effort needed with the "
+        lines.append("Every open record carries an estimate of the effort needed with the "
                      "existing machinery: **easy** (≤ 1 day: assembly of existing lemmas or a "
                      "direct definition), **medium** (days: new lemmas inside the existing "
                      "finite/algebraic framework), **hard** (research or infrastructure level: "

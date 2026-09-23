@@ -44,13 +44,16 @@
   "prop:source-bound": {
     "env": "proposition",
     "title": "Scaled source control of physical stationarity",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Certificates/GTProtectedRiesz.lean:RenewalGeometry.gt_protected_riesz"
+      "RenewalGeometry/Action/ScaledSourceStationarity.lean:RenewalGeometry.source_bound",
+      "RenewalGeometry/Action/ScaledSourceStationarity.lean:RenewalGeometry.source_bound_pointwise",
+      "RenewalGeometry/Action/ScaledSourceStationarity.lean:RenewalGeometry.source_bound_riesz",
+      "RenewalGeometry/Action/ScaledSourceStationarity.lean:RenewalGeometry.source_bound_tendsto",
+      "RenewalGeometry/Action/ScaledSourceStationarity.lean:RenewalGeometry.stationarityDefect",
+      "RenewalGeometry/Action/ScaledSourceStationarity.lean:RenewalGeometry.stationarityDefect_nonneg_of_bound"
     ],
-    "note": "Partial: gt_protected_riesz proves the Gram Cauchy-Schwarz bound <Lu,v>^2 <= <u,Lu><v,Lv> for a range source e = Lu on a real inner-product space, i.e. |a[w]| <= ||a||_{G^{-1}} ||w||_G ; missing: the assembly eps_h(K) <= L_h sqrt(R_h) + e_h with the test-lift bound ||v_h(v)||_G <= L_h ||v|| and the identification error e_h.",
-    "difficulty": "easy",
-    "plan": "Pure finite-dimensional Cauchy-Schwarz assembly. State on a real inner-product space with a positive-definite Gram G (or its induced inner product): from |a[w]| <= ||a||_{G^{-1}} ||w||_G (RenewalGeometry/Certificates/GTProtectedRiesz.lean:gt_protected_riesz gives the range-source form <Lu,v>^2 <= <u,Lu><v,Lv>), the lift bound ||v_h(v)||_G <= L_h ||v||, and the identification error e_h ||v||, derive sup_{||v||<=1} |D S_h[I_h v]| <= L_h sqrt(R_h) + e_h. Only the triangle inequality, Real.sqrt monotonicity and csSup/iSup bound are needed; define eps_h as an iSup over the unit ball of an abstract normed test space."
+    "note": "Proved. The positive source space with Gram G_h is a real inner-product space W (its norm is the G_h norm); the finite action covector a_h is a continuous linear functional a : W ->L[R] R whose operator norm is the dual norm ||a_h||_{G_h^{-1}} (source_bound), equivalently the G_h-norm of its Riesz representative alpha (source_bound_riesz, using innerSL_apply_norm). The test space V is any real normed space (the C^{r_0} norm), v_h : V -> W the source lift, and Phi v = D S_h(z_h^d)[I_h v]. stationarityDefect Phi := iSup over the unit ball of |Phi v| encodes eps_h(K) of eq:stationarity. From ||a||^2 <= R_h, ||v_h(v)|| <= L_h ||v|| and |Phi v - a(v_h v)| <= e_h ||v||, source_bound_pointwise gives |Phi v| <= (L_h sqrt R_h + e_h)||v|| (Cauchy-Schwarz = ContinuousLinearMap.le_opNorm, sqrt monotonicity, triangle inequality) and source_bound gives eps_h(K) <= L_h sqrt R_h + e_h (ciSup_le over the nonempty unit ball). The 'in particular' clause is source_bound_tendsto: along a regulator sequence, L_h sqrt R_h + e_h -> 0 forces eps_h(K) -> 0 (squeeze_zero with stationarityDefect_nonneg_of_bound). Scoped hypotheses disclosed: the constants L_h, e_h are taken nonnegative (needed only to pass from the ||v||-scaled bound to the unit-ball supremum); the lift v_h need not be linear; the earlier pointer gt_protected_riesz was not needed."
   },
   "prop:native-consistency": {
     "env": "proposition",

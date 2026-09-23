@@ -28,7 +28,7 @@ Two ingredients of the paper's proof are formalized.
   coefficient, which does not enter the identity.
 
 The physical premise "first-jet shadowing forces `‖λ_t‖ → 0`" is taken as
-the hypothesis `hλ` of `lapse_shift_clock_condition`; it is the paper's
+the hypothesis `hl` of `lapse_shift_clock_condition`; it is the paper's
 identification of the multiplier rate `λ_t` with the lapse--shift first
 jet, which the ADM identities express.
 -/
@@ -59,12 +59,14 @@ theorem admMetric00_hasDerivAt (N : ℝ → ℝ) (γ : ℝ → Fin 3 → Fin 3 �
     HasDerivAt (admMetric00 N γ β) (-2 * N') t₀ := by
   have hsq : HasDerivAt (fun t => -(N t) ^ 2) (-(2 * N t₀ * N')) t₀ := by
     have := (hN.pow 2).neg
-    simpa using this
+    refine this.congr_deriv ?_
+    push_cast
+    ring
   have hsum : HasDerivAt (fun t => ∑ i, ∑ j, γ t i j * β t i * β t j)
       (∑ i, ∑ j, ((γ' i j * β t₀ i + γ t₀ i j * β' i) * β t₀ j +
         γ t₀ i j * β t₀ i * β' j)) t₀ := by
-    refine HasDerivAt.sum fun i _ => ?_
-    refine HasDerivAt.sum fun j _ => ?_
+    refine HasDerivAt.fun_sum fun i _ => ?_
+    refine HasDerivAt.fun_sum fun j _ => ?_
     exact ((hγ i j).mul (hβ i)).mul (hβ j)
   have h := hsq.add hsum
   refine h.congr_deriv ?_
@@ -81,7 +83,7 @@ theorem admMetric0i_hasDerivAt (γ : ℝ → Fin 3 → Fin 3 → ℝ)
     HasDerivAt (admMetric0i γ β i) (∑ j, γ t₀ i j * β' j) t₀ := by
   have hsum : HasDerivAt (fun t => ∑ j, γ t i j * β t j)
       (∑ j, (γ' i j * β t₀ j + γ t₀ i j * β' j)) t₀ := by
-    refine HasDerivAt.sum fun j _ => ?_
+    refine HasDerivAt.fun_sum fun j _ => ?_
     exact (hγ i j).mul (hβ j)
   refine hsum.congr_deriv ?_
   simp only [hβ0, mul_zero, zero_add]
@@ -91,13 +93,13 @@ theorem admMetric0i_hasDerivAt (γ : ℝ → Fin 3 → Fin 3 → ℝ)
 /-- If `‖λ‖² = (‖u_A‖/a)² + (‖u_W‖/a²)²` and `‖λ‖ → 0`, then both graded
 components tend to zero (`eq:supp-exact-rate-necessary`). -/
 theorem rate_norm_components_tendsto_zero {ι : Type*} (l : Filter ι)
-    (a nA nW nλ : ι → ℝ)
-    (hnorm : ∀ n, nλ n ^ 2 = (nA n / a n) ^ 2 + (nW n / a n ^ 2) ^ 2)
-    (hλ : Filter.Tendsto nλ l (𝓝 0)) :
+    (a nA nW nl : ι → ℝ)
+    (hnorm : ∀ n, nl n ^ 2 = (nA n / a n) ^ 2 + (nW n / a n ^ 2) ^ 2)
+    (hl : Filter.Tendsto nl l (𝓝 0)) :
     Filter.Tendsto (fun n => nA n / a n) l (𝓝 0) ∧
     Filter.Tendsto (fun n => nW n / a n ^ 2) l (𝓝 0) := by
-  have habs : Filter.Tendsto (fun n => |nλ n|) l (𝓝 0) := by
-    simpa using hλ.abs
+  have habs : Filter.Tendsto (fun n => |nl n|) l (𝓝 0) := by
+    simpa using hl.abs
   constructor
   · refine squeeze_zero_norm (fun n => ?_) habs
     rw [Real.norm_eq_abs, ← sq_le_sq]
@@ -114,13 +116,13 @@ shadowing (`‖λ_t‖ → 0`) forces `a(h)⁻¹ ‖(u_{a(h)})_A‖ → 0` and
 `a(h)⁻² ‖(u_{a(h)})_W‖ → 0`.  The instantaneous electric coefficient does
 not appear. -/
 theorem lapse_shift_clock_condition {ι : Type*} (l : Filter ι)
-    (a nA nW nλ : ι → ℝ)
-    (hnorm : ∀ n, nλ n ^ 2 = (a n)⁻¹ ^ 2 * nA n ^ 2 + (a n)⁻¹ ^ 4 * nW n ^ 2)
-    (hλ : Filter.Tendsto nλ l (𝓝 0)) :
+    (a nA nW nl : ι → ℝ)
+    (hnorm : ∀ n, nl n ^ 2 = (a n)⁻¹ ^ 2 * nA n ^ 2 + (a n)⁻¹ ^ 4 * nW n ^ 2)
+    (hl : Filter.Tendsto nl l (𝓝 0)) :
     Filter.Tendsto (fun n => (a n)⁻¹ * nA n) l (𝓝 0) ∧
     Filter.Tendsto (fun n => (a n)⁻¹ ^ 2 * nW n) l (𝓝 0) := by
-  have h := rate_norm_components_tendsto_zero l a nA nW nλ
-    (fun n => by rw [hnorm n]; ring) hλ
+  have h := rate_norm_components_tendsto_zero l a nA nW nl
+    (fun n => by rw [hnorm n]; ring) hl
   refine ⟨?_, ?_⟩
   · refine h.1.congr fun n => ?_
     ring

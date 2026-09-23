@@ -88,6 +88,16 @@ def packetAutomorphisms (P : CoordinateFiniteRealEvenSpectralPacket A K) :
             rw [mulVec_mulVec, h1, one_mulVec]
         _ = star (U : Matrix K K ℂ) *ᵥ P.realOperation x := by rw [← h3]
 
+/-- Membership in `packetAutomorphisms` unfolded. -/
+theorem mem_packetAutomorphisms_iff {P : CoordinateFiniteRealEvenSpectralPacket A K}
+    {U : Matrix.unitaryGroup K ℂ} :
+    U ∈ packetAutomorphisms P ↔
+      (U : Matrix K K ℂ) * P.dirac = P.dirac * U ∧
+        (U : Matrix K K ℂ) * P.grading = P.grading * U ∧
+        ∀ x : K → ℂ, P.realOperation ((U : Matrix K K ℂ) *ᵥ x) =
+          (U : Matrix K K ℂ) *ᵥ P.realOperation x :=
+  Iff.rfl
+
 /-- The two declared algebra automorphism conventions: a packet automorphism
 either fixes the represented algebra pointwise (`pointwise`) or normalises it
 as a set (`setwise`). -/
@@ -197,9 +207,9 @@ theorem MarkedFiniteSpectralPacket.mem_autGroup_iff (S : MarkedFiniteSpectralPac
           (U : Matrix K K ℂ) *ᵥ S.packet.realOperation x) ∧
       U ∈ algebraConventionSubgroup S.packet S.convention ∧
       U • S.mark = S.mark := by
-  simp only [MarkedFiniteSpectralPacket.autGroup, Subgroup.mem_inf, MulAction.mem_stabilizer_iff,
-    and_assoc]
-  exact Iff.rfl
+  simp only [MarkedFiniteSpectralPacket.autGroup, Subgroup.mem_inf, MulAction.mem_stabilizer_iff]
+  exact ⟨fun h => ⟨mem_packetAutomorphisms_iff.mp h.1.1, h.1.2, h.2⟩,
+    fun h => ⟨⟨mem_packetAutomorphisms_iff.mpr h.1, h.2.1⟩, h.2.2⟩⟩
 
 end Packet
 

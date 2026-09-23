@@ -61,16 +61,21 @@
   "prop:main-signature-minimality": {
     "env": "proposition",
     "title": "Minimal one-sign extension has Lorentzian inertia",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.gt_signed_haynsworth",
-      "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.posInertia_fromBlocks_diag",
-      "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.sylvester_inertia",
-      "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.posInertia_eq_card_of_eigenbasis"
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.oneLineSignedExtension",
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.quadForm_oneLineSignedExtension",
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.exists_lapse_of_neg",
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.oneLineSignedExtension_inertia",
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.neg_oneLineSignedExtension_inertia",
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.oneLineSignedExtension_inertia_congruence",
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.oneLineSignedExtension_inertia_lorentz",
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.quadForm_lorentz_boxed",
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.posInertia_of_posDef",
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.negInertia_of_posDef",
+      "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.sylvester_inertia"
     ],
-    "note": "Partial: inertia (positive/negative/null) is defined variationally and proved additive under block-diagonal / Haynsworth congruence and Sylvester-invariant, which yields inertia(diag(-N^-2, g)) = (1,3) as an instance; missing: no theorem states the (1,3) conclusion for the one-line signed extension of a positive 3-form, nor the \"every minimal nondegenerate orthogonal signed extension is this form up to overall sign\" clause. Searched: inertia, signature, (1,3), one-sign, Lorentzian inertia, TemporalPartner.",
-    "difficulty": "easy",
-    "plan": "Formalize the 'minimal nondegenerate orthogonal signed extension' as the block form fromBlocks (-N^-2) 0 0 g on Fin 1 ⊕ Fin 3 with g PosDef (real symmetric mapped to ℂ), then apply Krein/SignedHaynsworthInertia.lean:posInertia_fromBlocks_diag together with posInertia_eq_card_of_eigenbasis to get posInertia = 3, negInertia = 1, nullInertia = 0; the 'up to overall sign' clause is the same computation for -q (inertia (3,1)). Missing only the small lemma 'posInertia of a PosDef matrix = card, negInertia = 0' and the 1x1 negative block instance."
+    "note": "Proved. The spatial form is a positive definite Hermitian matrix D on the spatial module W (W = Fin 3 in the Lorentz statement), the minimal orthogonal signed extension is oneLineSignedExtension c D = fromBlocks (diag c) 0 0 D on Fin 1 ⊕ W with quadratic form c τ² + g(w,w) (quadForm_oneLineSignedExtension); the adjoined line is nondegenerate (c ≠ 0) with the sign opposite to g (c < 0), and c = -N⁻² for a unique lapse normalization N > 0 (exists_lapse_of_neg), which is the boxed form (quadForm_lorentz_boxed). oneLineSignedExtension_inertia gives (neg, pos, null) = (1, dim W, 0) for any c < 0 and positive definite D, oneLineSignedExtension_inertia_lorentz specializes to inertia (1,3) with the overall-sign clause (neg_oneLineSignedExtension_inertia: the negated form has inertia (3,1)), and oneLineSignedExtension_inertia_congruence transports the count through every invertible change of basis (Sylvester). Inertia is the variational posInertia/negInertia/nullInertia of Krein/SignedHaynsworthInertia; no Clifford representation is used. Scoped hypotheses: the positive spatial form is encoded as a complex Hermitian positive definite matrix (the real form complexified), and 'signed extension' is taken as the paper's orthogonal one-line block extension with nonzero coefficient."
   },
   "mt:adm": {
     "env": "theorem",
@@ -295,14 +300,24 @@
     "title": "Flat and de Sitter rates are stationary renewal solutions",
     "status": "conditional_interface",
     "lean": [
-      "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.rootRate",
-      "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.vertexMass",
-      "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.adm_variables_exact",
-      "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.conductance_exact"
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.renewalDensity",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.renewalConductance",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.homogeneousRootRate",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.homogeneousVertexMass",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.hubble_eq_sign",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.scale_factor_of_hubble_const",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.stationary_scale_factor_desitter",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.stationary_scale_factor_flat",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.stationary_solution_empty_of_neg",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.renewalTime_sub_eq_of_lapse_one",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.expanding_scale_factor_of_lapse_one",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.desitter_regulator_rates",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.desitter_regulator_rates_eq_branch"
     ],
-    "note": "Partial: the displayed expanding de Sitter regulator (eq:desitter-regulator-main with a_0 = 1, t_0 = 0, N = 1) is encoded explicitly as rootRate H h t = exp(-2Ht)/(8h^2) and vertexMass = exp(3Ht) h^3, and its ADM variables/conductance are computed; missing: the classification of all positive connected stationary solutions of eq:main-renewal-rate-action (a = a_0 exp(sigma H_0 tau)), the sigma = -1 branch, the Lambda = 0 constant branch and the Lambda < 0 nonexistence.",
-    "difficulty": "easy",
-    "plan": "Take stationarity in its Friedmann form 3H^2 = Λ, D_τ H = 0 (the output of thm:main-homogeneous-friedmann) as hypothesis. Then H = ±H_0 with constant sign on a connected interval (continuous function into {−H_0,H_0} is constant), d/dt(log a − σH_0 τ) = N(H − σH_0) = 0 so Mathlib constant_of_derivWithin_zero / is_const_of_deriv_eq_zero gives a = a_0 e^{σH_0(τ−τ_0)}; ϱ = a^3, κ = N^2/a^2 are the definitions eq:main-isotropic-renewal-map, and with N = 1 the regulator rates are exactly Gravity/RelationalDeSitterBranch.lean:rootRate / vertexMass (generalize a_0, t_0). Λ = 0 gives H = 0 hence a constant; Λ < 0 contradicts 3H^2 ≥ 0. Only the sign-connectedness lemma and the general (a_0,t_0) rates are new."
+    "note": "Partial: StationaryHomogeneousRenewalRates.lean derives the boxed de Sitter rates (Lambda>0 exponential branches with sign sigma, Lambda=0 constant, Lambda<0 empty) and matches RelationalDeSitterBranch.rootRate/vertexMass, but takes the Friedmann constraint 3H^2 = Lambda (the conclusion of the still-open thm:main-homogeneous-friedmann) as the stationarity hypothesis; so the Lean proves 'theorem => corollary', not the corollary from variational stationarity.",
+    "difficulty": "medium",
+    "plan": "Formalise thm:main-homogeneous-friedmann (medium: artanh remainder bound and the homogeneous first variation); then this corollary closes by instantiating the existing file."
   },
   "thm:main-finite-homogeneous-stationarity": {
     "env": "theorem",
@@ -343,11 +358,23 @@
   "prop:main-optimizer-composition": {
     "env": "proposition",
     "title": "Optimizer composition characterizes action--law matching",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: optimizer, cosh theta + rho sinh theta, r_theta, composition defect sinh sinh, Delta_rel. The cosh/sinh files (MediumProved03, CurieWeiss, DeSitterChart) are unrelated.",
-    "difficulty": "easy",
-    "plan": "Pure real algebra: y ↦ E_{μ,θ,C}(x,y) is a quadratic with leading coefficient μ coth θ + C > 0 (since |ρ| ≤ 1 and cosh θ > |sinh θ|), so the unique minimizer over y > 0 is y = x/(cosh θ + ρ sinh θ) (complete the square; positivity of the minimizer for x > 0); the defect identity r_{θ+φ}^{-1} − r_θ^{-1}r_φ^{-1} = (1−ρ^2) sinh θ sinh φ is Real.cosh_add / Real.sinh_add plus ring, and the 'one pair at one x > 0 suffices' clause is sinh θ sinh φ > 0. On Δ_rel = 0, cosh θ ± sinh θ = e^{±θ} (Real.cosh_add_sinh). No library dependencies beyond Mathlib."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.hyperbolicCost",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.optimizerRatio",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.optimizerMap",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.relativeDefect",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.hyperbolicCost_sub_optimizer",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.optimizerMap_isMin",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.optimizerMap_unique",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.optimizerMap_pos",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.optimizerRatio_inv_add_sub",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.optimizerMap_comp_iff",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.relativeDefect_eq_zero_iff_comp",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.relativeDefect_eq_zero_iff_mul_eq_sq",
+      "RenewalGeometry/Action/HyperbolicCostOptimizerComposition.lean:RenewalGeometry.HyperbolicCostOptimizer.optimizerRatio_of_relativeDefect_eq_zero"
+    ],
+    "note": "Proved in the paper's generality. hyperbolicCost is eq:main-hyperbolic-cost (coth = cosh/sinh, csch = 1/sinh). For μ > 0, |C| ≤ μ (i.e. |ρ| ≤ 1, ρ = C/μ) and θ > 0: hyperbolicCost_sub_optimizer gives E(x,y) - E(x, m_θ x) = (μ coth θ + C)(y - m_θ x)^2 with m_θ x = r_θ x, r_θ = (cosh θ + ρ sinh θ)^{-1}, hence optimizerMap_isMin / optimizerMap_unique (unique minimizer over all real y, in particular over y > 0) and optimizerMap_pos (m_θ x > 0 for x > 0): eq:main-optimizer-map. optimizerRatio_inv_add_sub is eq:main-optimizer-defect for all θ, φ, ρ. optimizerMap_comp_iff: for one positive pair (θ, φ) and one x > 0, m_{θ+φ} x = m_φ (m_θ x) iff Δ_rel = 0; relativeDefect_eq_zero_iff_comp packages both the every-positive-pair and the one-pair-at-one-x equivalences; relativeDefect_eq_zero_iff_mul_eq_sq identifies Δ_rel = 0 with AB = C^2 for μ = sqrt(AB), A, B > 0; optimizerRatio_of_relativeDefect_eq_zero gives ρ = ±1 and r_θ = exp(-ρ θ) on the matched branch. Scoped: the standing positivity |C| ≤ μ of the measured cost is a hypothesis; the local-Lipschitz stability remark of the appendix proof is not formalized (not part of the proposition)."
   },
   "thm:main-gowdy-regulator": {
     "env": "theorem",
@@ -390,14 +417,15 @@
   "def:supp-event-grammar": {
     "env": "definition",
     "title": "Finite typed event grammar",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem",
-      "RenewalGeometry/Predictive/GeneratedMinimalRecord.lean:RenewalGeometry.WordRecordMachine.MinimalRecordExact"
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.TypedWord",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.History",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.Admissible",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw"
     ],
-    "note": "Partial: the closest carriers are PredictiveSystem (History, Letter, step) and WordRecordMachine (letters, records, Read alphabet); missing: cut types, typed letters a : x -> y, prefix-closed typed histories, preparation/intervention/terminal-Read alphabets and the protected binary orientation record are not encoded as one grammar structure. Searched: grammar, cut type, typed history, orientation record.",
-    "difficulty": "easy",
-    "plan": "Write a structure directly: a Fintype of cut types O, letter sets Σ : O → O → Type with Fintype, typed histories as a prefix-closed predicate on lists of dependent letters (or a Quiver-path type) ending at each cut type, finite preparation/intervention/terminal-Read alphabets and port types as extra Fintype fields, and the orientation record as a Bool-valued field with a policy predicate separating its two values. Nothing analytic; only the typed history type (dependent list / Quiver.Path over O) is new relative to Predictive/DerivedPredictiveCarrierUniversalExact.lean:PredictiveSystem and Predictive/GeneratedMinimalRecord.lean:WordRecordMachine."
+    "note": "FiniteTypedEventGrammar encodes (E1) Fintype CutType; (E2) Letter : CutType → CutType → Type with Fintype fibres; (E3) a Reachable predicate on typed words (TypedWord, snoc-built, with typed concatenation TypedWord.append and empty words TypedWord.nil) containing the empty words and prefix-closed (reachable_of_snoc); (E4) Fintype Preparation / InterventionOutcome / TerminalRead / Port alphabets; (E5) a distinguished terminal Read orientationRead with outcome set ≃ ℤˣ (the two values ±1) whose two values receive different verdicts under the declared readPolicy (orientation_separated). History x = Σ s, {h : TypedWord Letter s x // Reachable h} is H_{X,x}; Admissible h a is a ∈ Σ_{X,h}. ConditionalLaw (auxiliary, the conditional-probability clause of def:supp-operational-datum) carries p(a|h) ≥ 0, p(a|h) = 0 off Σ_{X,h}, and normalization over the admissible letters after every reachable history. Modelling choice disclosed: the Read policy is a verdict map on Read outcomes; no state label, metric, scheduler or spacetime datum is attached to histories, as the definition demands."
   },
   "def:supp-operational-datum": {
     "env": "definition",
@@ -416,13 +444,14 @@
     "title": "Complete predictive future signature",
     "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.FutureEquivalent",
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.futureSetoid",
-      "RenewalGeometry/Certificates/CertificateRecordBatch02.lean:RenewalGeometry.futureSignatureSetoid"
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.wordProb",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.futureSignature",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.FutureEquivalent",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.futureSetoid",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.futureEquivalent_iff_futureSignature",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.futureEquivalent_snoc"
     ],
-    "note": "FutureEquivalent h h' := forall w, probability h w = probability h' w encodes eq:supp-future-equivalence with the future bank = all finite letter words; the setoid is the quotient relation. Scoped: a single history type per PredictiveSystem, so cut typing is handled fibrewise (histories of different types live in different systems) rather than by an explicit type check.",
-    "difficulty": "easy",
-    "plan": "Already encoded fibrewise by PredictiveSystem.FutureEquivalent / futureSetoid. To match the typed statement, index histories by cut type (History : O → Type) so that h ∼ h' is only defined for the same x, and restrict the test bank to the finite future bank F_{X,x} (a Finset of admissible typed words) instead of all lists; this is a direct definitional refinement once def:supp-event-grammar exists."
+    "note": "Typed encoding over FiniteTypedEventGrammar: wordProb is the chain law eq:supp-chain-law; futureSignature h = (p(w|h))_w indexed by the complete bank of typed future words starting at the cut type of h (eq:supp-future-signature); FutureEquivalent h h' for histories of the same cut type x (eq:supp-future-equivalence) is agreement of all future-word probabilities, and futureEquivalent_iff_futureSignature shows it is equality of signatures; futureSetoid x is ∼_X on H_{X,x}. Histories of different cut type live in different fibres and are never identified. futureEquivalent_snoc additionally proves thm:supp-right-congruence on the positive-probability branch. Scoped: the bank is all typed future words (non-admissible words have probability 0 by the law's off-admissible clause, so this is the admissible bank). The earlier fibrewise untyped encoding PredictiveSystem.FutureEquivalent / futureSetoid in Predictive/DerivedPredictiveCarrierUniversalExact.lean remains valid."
   },
   "thm:supp-right-congruence": {
     "env": "theorem",
@@ -440,15 +469,15 @@
     "title": "Minimum predictive state",
     "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.MinimalCarrier",
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.minimalUpdate",
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.minimalBranch",
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.minimalUpdate_mk_of_occurs",
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.minimalBranch_mk"
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.MinimalState",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.project",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.project_surjective",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.weight",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.weight_project",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.transition",
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.transition_project"
     ],
-    "note": "MinimalCarrier = Quotient futureSetoid encodes Z^min with the canonical projection Quotient.mk; minimalBranch a [h] = branch h a (definitional) and minimalUpdate a [h] = [step h a] on occurring branches (minimalUpdate_mk_of_occurs; off-branch it uses a canonical effective step). Definition faithfully encoded, fibrewise in cut type.",
-    "difficulty": "easy",
-    "plan": "Already encoded by PredictiveSystem.MinimalCarrier, minimalUpdate, minimalBranch (Predictive/DerivedPredictiveCarrierUniversalExact.lean) with minimalUpdate_mk_of_occurs giving T_a([h]) = [ha] on occurring branches. Typed version: quotient each fibre H_{X,x} separately and let T_{X,a} : Z_x → Z_y for a : x → y; direct definition over the typed grammar."
+    "note": "Typed encoding: MinimalState x = Quotient (futureSetoid x) is Z^min_{X,x} = H_{X,x}/∼_X with the canonical surjection project = q_{X,x} (project_surjective); weight a = κ_{X,a}, with weight_project : κ_{X,a}([h]) = p(a|h) (well defined by the one-letter case); transition a z hz = T_{X,a} defined on the positive-probability branch 0 < κ_{X,a}(z) through a representative, and transition_project proves T_{X,a}([h]) = [h a] there, using the right congruence futureEquivalent_snoc. Scoped: T_{X,a} is defined only where p(a|h) > 0, which is exactly where the paper's cor:supp-derived-state-machine asserts well-definedness. The earlier untyped fibrewise encoding (PredictiveSystem.MinimalCarrier, minimalUpdate, minimalBranch) remains valid."
   },
   "cor:supp-derived-state-machine": {
     "env": "corollary",
@@ -469,11 +498,13 @@
     "title": "Deterministic predictive realization",
     "status": "statement_encoded",
     "lean": [
+      "RenewalGeometry/Predictive/TypedDeterministicRealization.lean:RenewalGeometry.TypedPredictiveLaw",
+      "RenewalGeometry/Predictive/TypedDeterministicRealization.lean:RenewalGeometry.TypedDeterministicRealization",
+      "RenewalGeometry/Predictive/TypedDeterministicRealization.lean:RenewalGeometry.TypedDeterministicRealization.update_isSome_of_occurs",
+      "RenewalGeometry/Predictive/TypedDeterministicRealization.lean:RenewalGeometry.TypedDeterministicRealization.rate_eq_branch",
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization"
     ],
-    "note": "Realization State bundles stateOf : History -> State, update, rate with reachability (stateOf surjective), state_step (s(ha) = u_a(s(h))) and branch_factor (p(a|h) = r_a(s(h))). Scoped: updates are total functions rather than partial maps, an extra futureLaw field with future_factor is carried, and finiteness of the state sets is not required.",
-    "difficulty": "easy",
-    "plan": "PredictiveSystem.Realization (Predictive/DerivedPredictiveCarrierUniversalExact.lean) already has stateOf, update, rate with reachability, state_step and branch_factor. Missing only cosmetic refinements: finiteness [Fintype (S x)] per cut type, typed partial updates u_a : S x → Option (S y) (or total maps on occurring branches), and dropping the extra futureLaw field; write the typed structure directly."
+    "note": "Literally typed encoding: TypedPredictiveLaw (cut-typed histories H x, letters Letter x y, deterministic extension step, branch law p(a|h)) and TypedDeterministicRealization with finite state sets (Finite (State x) for every cut type x), history maps stateOf, Option-valued partial updates u_a : S x -> Option (S y), branch functions r_a with values in [0,1], reachability (stateOf surjective at every cut type), s_y(ha) = u_a(s_x(h)) on every occurring branch (p(a|h) != 0, where the update is defined) and p(a|h) = r_a(s_x(h)) on every branch. The earlier untyped Realization (total updates, extra futureLaw field) remains as the variant used by the universal-property file."
   },
   "thm:supp-minimal-record": {
     "env": "theorem",
@@ -609,32 +640,30 @@
   "thm:supp-calibration-fibre": {
     "env": "theorem",
     "title": "Exact calibration fibre and minimum anchor bank",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Action/CalibrationFibreAnchorBank.lean:RenewalGeometry.calibration_fibre_anchor_bank",
+      "RenewalGeometry/Action/CalibrationFibreAnchorBank.lean:RenewalGeometry.anchor_bank_necessary",
+      "RenewalGeometry/Action/CalibrationFibreAnchorBank.lean:RenewalGeometry.anchor_bank_sufficient",
+      "RenewalGeometry/Action/CalibrationFibreAnchorBank.lean:RenewalGeometry.race_waiting_time_mean",
       "RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean:RenewalGeometry.OrientationCalibrationResidual.affineFibre_eq_kernelTranslate",
-      "RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean:RenewalGeometry.OrientationCalibrationResidual.calibration_kernel_dimension",
-      "RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean:RenewalGeometry.OrientationCalibrationResidual.anchor_bank_lower_bound",
-      "RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean:RenewalGeometry.OrientationCalibrationResidual.exists_minimal_anchor_bank",
-      "RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean:RenewalGeometry.OrientationCalibrationResidual.PhysicalResidual",
       "RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean:RenewalGeometry.OrientationCalibrationResidual.physicalResidual_dimension",
       "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.relational_scheduler_ADM"
     ],
-    "note": "Partial: (K1) the solution set of Lx=b is x0 + ker L with dim = dim V - rank L (finite-dimensional V), (K2) every injective linear anchor bank on ker L has at least dim ker L coordinates and a bijective bank with exactly dim ker L exists, (K3) the residual ker L / Im U has dimension N - rank L - d for injective U, and the winner-law invariance under common rescaling of (K4) (clause A3' of relational_scheduler_ADM) are proved; missing: the anchor count stated on the quotient K_L^phys itself and the clause that the waiting-time scale separates the common-rate direction.",
-    "difficulty": "easy",
-    "plan": "(K1)-(K3 dimension) are proved in RenewalGeometry/Certificates/OrientationCalibrationResidualExact.lean. Missing pieces are routine: (i) re-run anchor_bank_lower_bound / exists_minimal_anchor_bank with the domain replaced by the finite-dimensional quotient PhysicalResidual L J hLJ (Module.Finite instance for Submodule.Quotient is automatic), giving 'one anchor per quotient direction is necessary and sufficient'; (ii) encode (K4) as: for k : Fin 6 -> R positive, the pair (winner law k_b / sum k, total rate sum k) determines k (k_b = p_b * sum k), while the common rescaling clause is already clause A3' of RenewalGeometry/Gravity/RelationalSchedulerADM.lean:relational_scheduler_ADM; the exponential waiting-time law with rate sum k can be cited from the same file's race-moment integrals."
+    "note": "calibration_fibre_anchor_bank, for L : R^N -> R^M, b, a solution x0, and injective unit conventions U : R^d -> R^N with LU = 0: (K1) {x | Lx = b} = x0 + ker L and dim ker L = N - rank L; (K2) every injective linear anchor bank ker L -> R^k has k >= dim ker L and a bijective bank with exactly dim ker L anchors exists; (K3) dim (ker L / Im U) = N - rank L - d and the same necessary-and-sufficient anchor count on the quotient PhysicalResidual L U; (K4) for a six-root race with positive rates: the winner law k_b / sum k is invariant under common rescaling, the total rate is multiplied by the rescaling constant (so a nontrivial rescaling changes it), the exponential waiting time of total rate K has mean 1/K, and winner law times total rate recovers every rate. Scoped/disclosed: 'anchor bank' = linear map to R^k, 'determines one calibration' = injectivity; (K3) assumes U injective (d = rank U) as in the earlier partial file; (K4) is stated for the Fin 6 root alphabet."
   },
   "ass:supp-relational-branch": {
     "env": "assumption",
     "title": "Minimal faithful predictive relation branch",
     "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/Dimension/DimensionPairwiseCompletionExact.lean:RenewalGeometry.FutureMinimalSerialCell",
-      "RenewalGeometry/Dimension/DimensionPairwiseCompletionExact.lean:RenewalGeometry.FutureMinimalSerialCell.futureSetoid",
-      "RenewalGeometry/Dimension/DimensionPairwise.lean:RenewalGeometry.dimension_pairwise_completion"
+      "RenewalGeometry/Dimension/MinimalFaithfulRelationBranch.lean:RenewalGeometry.MinimalFaithfulRelationBranch",
+      "RenewalGeometry/Dimension/MinimalFaithfulRelationBranch.lean:RenewalGeometry.MinimalFaithfulRelationBranch.skeleton_complete",
+      "RenewalGeometry/Dimension/MinimalFaithfulRelationBranch.lean:RenewalGeometry.MinimalFaithfulRelationBranch.reverse_pair",
+      "RenewalGeometry/Dimension/MinimalFaithfulRelationBranch.lean:RenewalGeometry.MinimalFaithfulRelationBranch.minimal_identified_iff",
+      "RenewalGeometry/Dimension/DimensionPairwiseCompletionExact.lean:RenewalGeometry.FutureMinimalSerialCell"
     ],
-    "note": "Encoded as a definition (assumption, no proof obligation): the one-source/one-target serial relation cell with involutive reversal swapping endpoints and a complete future signature is the structure NCG.FutureMinimalSerialCell, future-minimal identification is the quotient by future-signature equality (futureSetoid), and invariance under a group transitive on unordered endpoint pairs plus nonemptiness are the hypotheses htrans/hRinv/hne of dimension_pairwise_completion.",
-    "difficulty": "easy",
-    "plan": "Assumption, already encoded as RenewalGeometry/Dimension/DimensionPairwiseCompletionExact.lean:FutureMinimalSerialCell with futureSetoid and the transitivity/reversal/nonemptiness hypotheses of RenewalGeometry/Dimension/DimensionPairwise.lean:dimension_pairwise_completion. Nothing to prove; if a single named object is wanted, bundle the four clauses (one source/one target, involutive reversal, future-minimal quotient, transitive invariance + nonempty) into one structure extending FutureMinimalSerialCell."
+    "note": "Single named object: MinimalFaithfulRelationBranch X A F extends FutureMinimalSerialCell (one source, one target, distinct; involutive reversal swapping endpoints; complete future signature whose equality is the future-minimal identification, minimal_identified_iff) by a symmetry subgroup of Perm X transitive on unordered pairs of distinct endpoints, a relation set of unordered endpoint pairs containing every letter's pair and invariant under the group, and nonemptiness of the letter alphabet. Consequences proved: the relation set has an off-diagonal pair, reversal keeps the unordered pair, and lem:supp-pair-completion (skeleton_complete: every unordered pair of distinct endpoints is a relation)."
   },
   "lem:supp-pair-completion": {
     "env": "lemma",
@@ -701,15 +730,13 @@
   "thm:supp-adm-frame": {
     "env": "theorem",
     "title": "Complete finite ADM frame",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.relational_scheduler_ADM",
-      "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.a3ShiftMap",
-      "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.a3Cycle"
+      "RenewalGeometry/Gravity/ADMFrameUniqueness.lean:RenewalGeometry.adm_frame_complete",
+      "RenewalGeometry/Gravity/ADMFrameUniqueness.lean:RenewalGeometry.adm_inversion_unique",
+      "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.relational_scheduler_ADM"
     ],
-    "note": "Partial: (A1) the six root dyadics are a basis of Sym_3, (A2) the rate-difference map is onto R^3 with kernel exactly the span of the three tetrahedral face-cycle vectors (finrank 3), and (A4) the displayed inversion g = ϱ^{2/3}(det B)^{1/3}B^{-1}, N = ϱ^{1/3}(det B)^{1/6} satisfies √det g = ϱ and N^2 g^{-1} = B for every ϱ > 0 and det B > 0 are proved; missing: uniqueness of the solution of B = N^2 g^{-1}, ϱ = √det g (only existence via the explicit formula is checked).",
-    "difficulty": "easy",
-    "plan": "(A1),(A2),(A4 existence) are clauses of RenewalGeometry/Gravity/RelationalSchedulerADM.lean:relational_scheduler_ADM. Missing only uniqueness: for B with det B > 0, rho > 0, N > 0 and g with det g > 0 satisfying B = N^2 g^{-1} and rho = sqrt(det g), take determinants (Matrix.det_smul, Matrix.det_nonsing_inv) to get N^6 = rho^2 det B, so N = (rho^2 det B)^(1/6) by injectivity of x -> x^6 on positives (pow_left_injOn / Real.rpow_natCast), then g = N^2 B^{-1}. Add the theorem as a new clause next to (A4); one afternoon of matrix algebra with rpow arithmetic."
+    "note": "adm_frame_complete bundles: (A1) the six root dyadics r_a r_a^T are a basis of Sym_3 (rate sums <-> B_h); (A2) the rate-difference map is onto R^3 with kernel exactly the span of the three tetrahedral face cycles, of dimension 3; existence: the boxed formula g = rho^{2/3}(det B)^{1/3} B^{-1}, N = rho^{1/3}(det B)^{1/6} satisfies sqrt(det g) = rho and N^2 g^{-1} = B; uniqueness (adm_inversion_unique, new): every N > 0, g with det g > 0 solving B = N^2 g^{-1}, rho = sqrt(det g) equals the boxed pair (determinants give N^6 = rho^2 det B, positivity fixes N, then g = N^2 B^{-1}). Scoped: 'B succ 0' is used only through det B > 0 (the positive-definite hypothesis implies it); positivity of g is used through det g > 0."
   },
   "lem:supp-fast-clock": {
     "env": "lemma",
@@ -723,14 +750,18 @@
   "lem:supp-positive-krein-distinct": {
     "env": "lemma",
     "title": "Positive geometry and Krein signature are distinct layers",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "NCG/Krein/FundamentalSymmetry.lean:NCG.IsFundamentalSymmetry.eq_one_of_krein_nonneg",
-      "NCG/Krein/FundamentalSymmetry.lean:NCG.kreinForm"
+      "RenewalGeometry/Krein/PositiveKreinDistinct.lean:RenewalGeometry.positive_krein_distinct_layers",
+      "RenewalGeometry/Krein/PositiveKreinDistinct.lean:RenewalGeometry.wordGram",
+      "RenewalGeometry/Krein/PositiveKreinDistinct.lean:RenewalGeometry.wordGram_positive",
+      "RenewalGeometry/Krein/PositiveKreinDistinct.lean:RenewalGeometry.wordGram_adjoin_positive",
+      "RenewalGeometry/Krein/PositiveKreinDistinct.lean:RenewalGeometry.rootBracket_nonneg",
+      "RenewalGeometry/Krein/PositiveKreinDistinct.lean:RenewalGeometry.eq_one_of_involution_nonneg",
+      "RenewalGeometry/Krein/PositiveKreinDistinct.lean:RenewalGeometry.kreinForm_indefinite",
+      "NCG/Krein/FundamentalSymmetry.lean:NCG.IsFundamentalSymmetry.eq_one_of_krein_nonneg"
     ],
-    "note": "Partial: eq_one_of_krein_nonneg proves that a fundamental symmetry J (self-adjoint involution) whose Krein form ⟨x, Jx⟩ is positive semidefinite must be J = 1, i.e. positive Gram data cannot supply a nontrivial sign involution and a genuine Krein form needs both eigenspaces; missing: positivity of the word-Gram hierarchy after adjoining the orientation record and the statement about positive combinations of the A_3 root dyadics.",
-    "difficulty": "easy",
-    "plan": "The Krein half is NCG/Krein/FundamentalSymmetry.lean:eq_one_of_krein_nonneg. Missing statements are direct: (i) any positive combination sum c_a r_a r_a^T (c_a > 0) of the root dyadics a3SchedulerRoot from RenewalGeometry/Gravity/RelationalSchedulerADM.lean is PosSemidef via Mathlib Matrix.posSemidef_vecMulVec_self_star + PosSemidef.smul + posSemidef_sum, hence has no negative direction (no v with v^T S v < 0); (ii) a Gram matrix of any word set (including the adjoined orientation record) is PosSemidef via Matrix.posSemidef_conjTranspose_mul_self; (iii) combine with eq_one_of_krein_nonneg to state 'no PSD form is a nontrivial fundamental symmetry'. Assemble in a new short file citing GeneratedAlgebraFlatness for the word-Gram."
+    "note": "positive_krein_distinct_layers: for a positive functional tau (tau(a* a) >= 0 in real part) on a complex *-algebra, the word Gram K(v,w) = tau(v* w) of any word family with the orientation record theta adjoined (index type iota + Unit) is positive semidefinite and its old block is unchanged (wordGram_adjoin_positive, via sum conj(c_v) c_w K(v,w) = tau(a* a)); every positive combination sum c_a r_a r_a^T of the A_3 root dyadics a3SchedulerRoot has no negative direction (its quadratic form is sum c_a (r_a.v)^2) and, if it is an involution, it is the identity (eq_one_of_involution_nonneg) - so it cannot replace the Krein involution; the Krein form <u, Ju> is positive on the +1 eigenspace and negative on the -1 eigenspace (indefinite when both are nonzero), and a positive Krein form forces J = 1. Scoped: the word-Gram hierarchy is modelled abstractly as the Gram of a word family for a positive functional (the paper's proof), not tied to a specific finite history algebra."
   },
   "thm:supp-signature-minimality": {
     "env": "theorem",
@@ -761,14 +792,17 @@
   "cor:supp-lorentzian-square": {
     "env": "corollary",
     "title": "Lorentzian principal square",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Lorentz/KreinClifford.lean:RenewalGeometry.KreinCliffordDatum.symbol_square",
+      "RenewalGeometry/Lorentz/LorentzianPrincipalSquare.lean:RenewalGeometry.lorentzian_symbol_square",
+      "RenewalGeometry/Lorentz/LorentzianPrincipalSquare.lean:RenewalGeometry.anchor_lorentzian_symbol_square",
+      "RenewalGeometry/Lorentz/LorentzianPrincipalSquare.lean:RenewalGeometry.signed_symbol_square",
+      "RenewalGeometry/Lorentz/LorentzianPrincipalSquare.lean:RenewalGeometry.coframe_square",
+      "RenewalGeometry/Lorentz/LorentzianPrincipalSquare.lean:RenewalGeometry.lorentzCharForm",
+      "RenewalGeometry/Lorentz/LorentzianPrincipalSquare.lean:RenewalGeometry.lorentzCharForm_inertia",
       "RenewalGeometry/Lorentz/AnchorClifford.lean:RenewalGeometry.anchor_external_clifford"
     ],
-    "note": "Partial: symbol_square proves the abstract Clifford square (ξ0 γ^0 + Σ a_i γ_i)^2 = (q ξ0^2 + Σ a_i^2)·1 with q = (γ^0)^2 for any Krein-Clifford datum, and the concrete γ^μ satisfy the Clifford relations; missing: the lapse/shift/coframe substitution a = E_h ξ, ξ0 ↦ N_h^{-1}(ξ0 - β_h·ξ) with E_h E_h^T = g_h^{-1} that yields eq. dirac-square-main, and the inertia (1,3) statement.",
-    "difficulty": "easy",
-    "plan": "RenewalGeometry/Lorentz/KreinClifford.lean:symbol_square gives (xi0 g0 + sum a_i g_i)^2 = (q xi0^2 + sum a_i^2) 1 and RenewalGeometry/Lorentz/AnchorClifford.lean supplies the concrete gammas with q = -1. Missing is only the substitution lemma: with xi0' := N^{-1}(xi0 - beta . xi) and a := E^T xi (a_a = sum_i E_a^i xi_i), sum_a a_a^2 = xi . ((E E^T) xi) = xi . (g^{-1} xi) whenever E E^T = g^{-1} (Matrix.dotProduct_mulVec / vecMul_mulVec rewriting), which yields eq. dirac-square-main verbatim. The inertia (1,3) sentence is inherited from thm:supp-signature-minimality (congruence by the invertible map (xi0,xi) -> (N^{-1}(xi0 - beta.xi), xi) plus sylvester_inertia)."
+    "note": "lorentzian_symbol_square: for any generators with (gamma^0)^2 = -1, gamma^0 anticommuting with the gamma^a and {gamma^a, gamma^b} = 2 delta, and any coframe E with E E^T = g^{-1}, the symbol sigma = N^{-1}(xi_0 - beta.xi) gamma^0 + sum_a (sum_i E_{ia} xi_i) gamma^a satisfies sigma^2 = [-(N^{-1}(xi_0 - beta.xi))^2 + xi.(g^{-1} xi)] 1 (eq:dirac-square-main); anchor_lorentzian_symbol_square instantiates it with the concrete eq:clifford-main matrices gamma0, gammaDir = (gamma1, gamma2, gamma3) of AnchorClifford.lean. Inertia clause (lorentzCharForm_inertia): for N > 0 and g^{-1} positive definite, the characteristic form is carried by the invertible substitution xi_0 = N eta_0 + beta.eta, xi = eta (inverse displayed) to the Sylvester block form -eta_0^2 + eta^T g^{-1} eta, the time line (1,0) is negative and the form is positive definite on the 3-dimensional graph subspace {(beta.xi, xi)}: inertia (1,3) in the convention (-,+,+,+). Disclosed: inertia is expressed by this explicit Sylvester normal form rather than through the posInertia/negInertia indices of SignedHaynsworthInertia.lean; 'g succ 0' is used as positive definiteness of g^{-1}."
   },
   "thm:supp-determining-kernel": {
     "env": "theorem",
@@ -875,13 +909,17 @@
     "lean": [
       "RenewalGeometry/DiscreteAnalysis/FiniteWeightedGraphHeatKernel.lean:RenewalGeometry.FiniteWeightedGraph",
       "RenewalGeometry/DiscreteAnalysis/FiniteWeightedGraphHeatKernel.lean:RenewalGeometry.FiniteWeightedGraph.symmetricLaplacian",
+      "RenewalGeometry/DiscreteAnalysis/FiniteWeightedGraphHeatKernel.lean:RenewalGeometry.FiniteWeightedGraph.laplacianApply",
       "RenewalGeometry/DiscreteAnalysis/FiniteWeightedGraphHeatKernel.lean:RenewalGeometry.FiniteWeightedGraph.eigenvalue",
       "RenewalGeometry/DiscreteAnalysis/FiniteWeightedGraphHeatKernel.lean:RenewalGeometry.FiniteWeightedGraph.heatApply",
-      "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylExact.lean:RenewalGeometry.finiteSpatialEnergy"
+      "RenewalGeometry/DiscreteAnalysis/FiniteWeightedGraphHeatKernel.lean:RenewalGeometry.FiniteWeightedGraph.symmetricLaplacian_quadraticForm",
+      "RenewalGeometry/DiscreteAnalysis/FiniteWeightedGraphHeatKernel.lean:RenewalGeometry.FiniteWeightedGraph.heatApply_weightedL1_le",
+      "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylExact.lean:RenewalGeometry.finiteSpatialEnergy",
+      "RenewalGeometry/DiscreteAnalysis/SpatialDirichletContraction.lean:RenewalGeometry.FiniteWeightedGraph.laplacianApply_dirichletForm",
+      "RenewalGeometry/DiscreteAnalysis/SpatialDirichletContraction.lean:RenewalGeometry.FiniteWeightedGraph.heatApply_weightedLq_le",
+      "RenewalGeometry/DiscreteAnalysis/SpatialDirichletContraction.lean:RenewalGeometry.FiniteWeightedGraph.heatApply_sup_le"
     ],
-    "note": "Definition encoded: NCG.FiniteWeightedGraph bundles positive vertex masses and symmetric nonnegative conductances; finiteSpatialEnergy c f = (1/2) ΣΣ c_uv (f u - f v)^2 is the ordered-pair form of E^sp; the mass-weighted Laplacian, its eigenvalues and the heat semigroup e^{-tΔ} are FiniteWeightedGraph.symmetricLaplacian / eigenvalue / heatApply. The L^q-contractivity remark is not encoded.",
-    "difficulty": "easy",
-    "plan": "Definition already encoded (RenewalGeometry/DiscreteAnalysis/FiniteWeightedGraphHeatKernel.lean:FiniteWeightedGraph, symmetricLaplacian, eigenvalue, heatApply; OperationalSobolevWeylExact.lean:finiteSpatialEnergy). Only the remark on L^q-contractivity of e^{-t Delta} is not encoded: the L^2 contraction follows from OperationalSobolevWeylFiniteGraph.lean:heatApply_spectralExpansion with nonnegative eigenvalues; the L^1/L^infinity (Markov) contraction needs entrywise nonnegativity of the semigroup (write Delta = D - C with C >= 0 entrywise and use exp(-tD) exp(tC) Trotter or the resolvent (I + tDelta/n)^{-n} limit), a separate medium-size lemma that is not required for the definition itself."
+    "note": "Definition encoded: FiniteWeightedGraph bundles positive vertex masses and symmetric nonnegative conductances; finiteSpatialEnergy c f = (1/2) sum_u sum_v c_uv (f u - f v)^2 is the ordered-pair form of E^sp; the mass-weighted Laplacian in function coordinates is laplacianApply (symmetric coordinates: symmetricLaplacian), eigenvalues and heat semigroup are eigenvalue / heatApply. The normalization identity <f, Delta^sp f>_{L^2(mu)} = E^sp(f) (eq:supp-spatial-dirichlet) is now proved in function coordinates (laplacianApply_dirichletForm; symmetric-coordinate form symmetricLaplacian_quadraticForm). The Markov-semigroup remark is fully encoded: L^q(mu) contraction of e^{-t Delta} for every real q >= 1 (heatApply_weightedLq_le, Jensen on the stochastic rows plus detailed balance), L^1 (heatApply_weightedL1_le) and L^infinity (heatApply_sup_le). The mean-zero projection P_0 and T(t) = e^{-t Delta} P_0 have no separate name; they are used inline in OperationalSobolevWeylFiniteGraph.lean (positiveHeatColumn)."
   },
   "lem:supp-half-volume-sobolev": {
     "env": "lemma",
@@ -925,16 +963,29 @@
   "thm:supp-spatial-screen": {
     "env": "theorem",
     "title": "Operational Sobolev, Poincar\\'e, and compact-screen bounds",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Renewal/RenewalSpatialPositiveScreen.lean:RenewalGeometry.FiniteWeightedGraph.renewalSpatialPositiveScreen",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.setMass",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.IsHalfVolumeCut",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.cutRatio",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.cutConstant",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.efficientCutConstant",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.spatialCutConstant",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.cutConstant_le_cutRatio",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.exists_minimizing_cut",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.cutConstant_comparison",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.spatialCutMargin_of_le",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.spatialCutConstant_ge_of_efficient",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.renewalSpatialPositiveScreen_of_efficientCut",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.cutDemand",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.neckPotential",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.neck_witness",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.FiniteWeightedGraph.neck_witness_of_minimizing_cut",
+      "RenewalGeometry/Renewal/EfficientCutConstantScreen.lean:RenewalGeometry.tendsto_inv_atTop_of_tendsto_zero",
       "RenewalGeometry/Renewal/RenewalSpatialPositiveScreen.lean:RenewalGeometry.FiniteWeightedGraph.RenewalSpatialPositiveScreen",
-      "RenewalGeometry/Renewal/RenewalSpatialPositiveScreen.lean:RenewalGeometry.FiniteWeightedGraph.SpatialCutMargin",
-      "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylFiniteGraph.lean:RenewalGeometry.FiniteWeightedGraph.eigenfunction_spectralTail_bound"
+      "RenewalGeometry/Renewal/RenewalSpatialPositiveScreen.lean:RenewalGeometry.FiniteWeightedGraph.renewalSpatialPositiveScreen"
     ],
-    "note": "Partial: from a SpatialCutMargin (I^sp > 0), the degree bound and μ(V) ≤ V*, renewalSpatialPositiveScreen assembles the Sobolev and Poincaré bounds (C_P = 128 D V*^{2/3}/I^2), the positive spectral floor, the Weyl counting law and the screen tail Σ_{λ_j > R} |⟨f, φ_j⟩|^2 ≤ R^{-1} E(f) (eq. supp-screen-count-tail); missing: the conversion I^sp ≥ I^eff/a_+ from the capacity-conductance comparison and the neck-obstruction dual witness of eq. main-neck-obstruction.",
-    "difficulty": "easy",
-    "plan": "The Sobolev/Poincare/Weyl/screen-tail package is RenewalGeometry/Renewal/RenewalSpatialPositiveScreen.lean:renewalSpatialPositiveScreen from a SpatialCutMargin. Missing: (i) define I^eff and I^sp as finite minima over half-volume cuts using finiteCutCapacity from RenewalGeometry/DiscreteAnalysis/FinitePressureFlowMaxCut.lean with the two edge weights u_e and h c_e, and prove from the per-edge comparison a_- h c_e <= u_e <= a_+ h c_e (summed over the cut edges) that a_- I^sp <= I^eff <= a_+ I^sp, so I^eff >= I_* gives a SpatialCutMargin with constant I_*/a_+; (ii) the neck witness: phi = cutIndicator A / u(boundary A) has sum_e u_e |d phi(e)| = 1 and demandPairing b_A phi = mu(A)^{2/3}/u(boundary A) = (I^eff)^{-1} for a minimizing cut (two Finset sum computations with the mean-zero demand b_A of eq. main-cut-demand). All finite; one day of assembly."
+    "note": "Proved on a finite weighted graph (masses m_v > 0, symmetric nonnegative conductances c, cell scale h > 0, efficient capacities u). The cut constants of eq:main-cut-constant are encoded as cutConstant w = sInf of the finite family of half-volume cut ratios w(∂A)/μ(A)^{2/3} (efficientCutConstant u = I^eff, spatialCutConstant h = I^sp with weights h c; the infimum is attained, exists_minimizing_cut, and equals 0 when no half-volume cut exists). cutConstant_comparison derives a₋ I^sp ≤ I^eff ≤ a₊ I^sp (eq:main-cut-comparison) from the edgewise comparison a₋ h c ≤ u ≤ a₊ h c; spatialCutConstant_ge_of_efficient gives I^sp ≥ I_*/a₊ from I^eff ≥ I_*; spatialCutMargin_of_le converts I^sp ≥ I into the two-sided cut margin I·min(μ(A), μ(Aᶜ))^{2/3} ≤ h c(∂A) for every A (eq:supp-cut-isoperimetry, complement case by cut-capacity symmetry). The main theorem renewalSpatialPositiveScreen_of_efficientCut then assembles, under μ(V) ≤ V_*, the weighted degree bound h² Σ_u c_uv ≤ D m_v, the comparison and I^eff ≥ I_* > 0, the full RenewalSpatialPositiveScreen package with constant I_*/a₊: L⁶ Sobolev (C_S = 128 D/(I_*/a₊)²), Poincaré (C_P = V_*^{2/3} C_S), positive spectral floor C_P⁻¹, Weyl count N(R) ≤ 1 + 4 e^{3/2} V_* (C_S R)^{3/2}, and the compact-screen tail Σ_{λ_j > R} |⟨φ_j, f⟩|² ≤ R⁻¹ 𝓔(f) (eq:supp-screen-count-tail, the spectral-coefficient form of ‖(I − P_R) f‖² ≤ R⁻¹ 𝓔(f)). Neck obstruction: neck_witness shows that for a half-volume cut of positive capacity the potential φ = 1_A/u(∂A) has ordered-pair total variation (1/2)ΣΣ u |dφ| = 1 and pairs with the demand b_A of eq:main-cut-demand to μ(A)^{2/3}/u(∂A); neck_witness_of_minimizing_cut gives exactly (I^eff)⁻¹ for a minimizing cut, and tendsto_inv_atTop_of_tendsto_zero sends it to +∞ along any family with I^eff → 0⁺ (eq:main-neck-obstruction). The 'zero-capacity cut retained as disconnected support' clause is a definitional remark and is not formalized separately. Scoped hypotheses: 0 ≤ a₋, 0 < a₊, 0 < D, V_*, h."
   },
   "prop:supp-compact-upgrade": {
     "env": "proposition",
@@ -1036,11 +1087,20 @@
   "prop:supp-current-derivative-loss": {
     "env": "proposition",
     "title": "Sharp grid-scale source amplification",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: central difference on a periodic grid, Fourier multiplier i sin(2πk/m)/h, ‖D_h‖ = h^{-1}, grid-scale amplification.",
-    "difficulty": "easy",
-    "plan": "No Lean, but fully explicit. Define D_h on ZMod m -> R (or Fin m) by (D u)_i = (u_{i+1} - u_{i-1})/(2h) with norm h sum u_i^2. Upper bound ||D_h u|| <= ||u||/h by the triangle inequality on the two shifts (shift invariance of Finset sums over ZMod via Equiv.addRight). Lower bound/sharpness: for 4 | m the explicit witness v_i = 0,1,0,-1 periodic (v_i = sin(pi i/2)) satisfies (D v)_i = v_i shifted by one index scaled by 1/h, so ||D_h v||^2 = ||v||^2/h^2, which gives equality without Fourier analysis (avoids ZMod.dft/Parseval). The last sentence is the vector a_h = h^{1/2} v_h/||v_h|| with ||a_h||^2 = h and ||D_h a_h||^2 = h^{-1}."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/DiscreteAnalysis/PeriodicCentralDifferenceNorm.lean:RenewalGeometry.periodicCentralDifference",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicCentralDifferenceNorm.lean:RenewalGeometry.gridNormSq",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicCentralDifferenceNorm.lean:RenewalGeometry.gridNormSq_centralDifference_le",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicCentralDifferenceNorm.lean:RenewalGeometry.quarterWave",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicCentralDifferenceNorm.lean:RenewalGeometry.centralDifference_quarterWave",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicCentralDifferenceNorm.lean:RenewalGeometry.gridNormSq_centralDifference_quarterWave",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicCentralDifferenceNorm.lean:RenewalGeometry.centralDifferenceRayleighSet",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicCentralDifferenceNorm.lean:RenewalGeometry.centralDifference_isGreatest",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicCentralDifferenceNorm.lean:RenewalGeometry.centralDifference_opNormSq",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicCentralDifferenceNorm.lean:RenewalGeometry.exists_vanishing_norm_diverging_current"
+    ],
+    "note": "Proved. Grid = ZMod m (m != 0), norm ||u||^2 = h sum u_i^2, (D_h u)_i = (u_{i+1}-u_{i-1})/(2h). centralDifference_opNormSq: for 4 | m and h > 0, sSup { ||D_h u||^2 : ||u||^2 = 1 } = h^{-2} (eq:supp-current-derivative-loss), via centralDifference_isGreatest (upper bound gridNormSq_centralDifference_le for every m, attainment by the explicit period-four vector quarterWave = 0,1,0,-1,... which D_h maps to its own shift over h). exists_vanishing_norm_diverging_current gives the witness a_h with ||a_h||^2 = h and ||D_h a_h||^2 = h^{-1}. The paper's Fourier-multiplier argument is replaced by the real vector at frequency k = m/4; no complex DFT is used."
   },
   "cor:supp-stochastic-curvature": {
     "env": "corollary",
@@ -1235,11 +1295,26 @@
   "prop:supp-law-switching": {
     "env": "proposition",
     "title": "Rapid switching is not included",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: rapid switching, quarter-period transfer matrix, oscillator dispersion Omega_sigma, exp(cT/h) amplification (NCG/Grand/EasyExact03.lean transfer matrix is a two-state CTMC, unrelated)",
-    "difficulty": "easy",
-    "plan": "Scope as an explicit finite statement: for the scalar oscillator q'' = -Omega^2 q the quarter-period map is the 2x2 matrix [[0, 1/Omega],[-Omega, 0]] (Mathlib Real.cos/sin at pi/2), the product of two such maps is diag(-Omega_1/Omega_2, -Omega_2/Omega_1), and with Omega_sigma^2 = l(1+sigma h^2 l) at the corner h^2 l = 12 the ratio Omega_1/Omega_2 = sqrt((1+12 sigma_1)/(1+12 sigma_2)) differs from 1 when sigma_1 != sigma_2. Growth of the n-th power of the diagonal matrix gives the exp(cT/h) amplification with n ~ T/h. All Fin 2 matrix algebra plus a few real inequalities; nothing in the library to reuse beyond Mathlib (the ledger's transfer-matrix pointer NCG/Grand/EasyExact03 is unrelated)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.oscillatorSolution",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.oscillatorVelocity",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.oscillatorSolution_hasDerivAt",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.oscillatorVelocity_hasDerivAt",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.quarterPeriodTransfer",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.quarterPeriodTransfer_mulVec",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.quarterPeriodTransfer_two_step",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.two_step_hasEigenvalue",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.two_step_hasEigenvalue_reciprocal",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.cornerFrequencySq",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.corner_frequency_ratio_sq",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.corner_frequency_ratio_ne_one",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.corner_frequency_sqrt_ratio_ne_one",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.two_step_pow_entry_abs",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.switching_modulus_gt_one",
+      "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.switching_amplification"
+    ],
+    "note": "Proved as the explicit finite statement the proposition makes about the scalar corner mode. The oscillator q'' = -Omega^2 q with data (q0,p0) is the explicit trajectory oscillatorSolution (verified by HasDerivAt); its quarter-period state map is the matrix [[0,1/Omega],[-Omega,0]] (quarterPeriodTransfer_mulVec); the two-law product is diag(-Omega_1/Omega_2, -Omega_2/Omega_1) with those eigenvalues (Module.End.HasEigenvalue of toLin'); with the dispersion eq:supp-law-dispersion Omega^2 = l(1 + sigma h^2 l) at the corner h^2 l = 12 the ratio Omega_1^2/Omega_2^2 = (1+12 sigma_1)/(1+12 sigma_2) != 1 for sigma_1 != sigma_2 in the admissible interval 1+12 sigma_i > 0; after n switching cycles the diagonal entries have modulus (Omega_1/Omega_2)^{+-n} and with n >= T/(K h) cycles of duration <= K h this is >= exp((log rho / K) T/h), rho = max ratio > 1. Scoping disclosed: the identification of the resolved corner mode with a scalar oscillator (the paper's first sentence of the proof) is the modelling input, and the transfer matrix is defined from the explicit solution rather than through ODE uniqueness."
   },
   "lem:supp-law-cost-control": {
     "env": "lemma",
@@ -1362,10 +1437,17 @@
     "env": "proposition",
     "title": "Necessary lapse--shift clock condition for harmonic shadowing",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: lapse-shift clock condition, harmonic shadowing, active/weak amplitude grading, rate norm",
-    "difficulty": "easy",
-    "plan": "Scope to the analytic content: if ||lambda_t||^2 = a^{-2}||u_A||^2 + a^{-4}||u_W||^2 (eq:supp-exact-rate-norm taken as hypothesis) and ||lambda_t|| -> 0 along a(h) -> 0, then both a^{-1}||u_A|| -> 0 and a^{-2}||u_W|| -> 0; this is squeeze on nonnegative summands (Mathlib tendsto_of_tendsto_of_tendsto_of_le_of_le, sqrt continuity). The ADM identities partial_t g_00 = -2 partial_t N, partial_t g_0i = gamma_ij partial_t beta^j at N=1, beta=0 can be recorded as an algebraic lemma on Matrix (Fin 4) built like Gravity/RelationalDeSitterBranch.lean:lorentzMetric. One short file."
+    "lean": [
+      "RenewalGeometry/Gravity/LapseShiftClockTest.lean:RenewalGeometry.admMetric00",
+      "RenewalGeometry/Gravity/LapseShiftClockTest.lean:RenewalGeometry.admMetric0i",
+      "RenewalGeometry/Gravity/LapseShiftClockTest.lean:RenewalGeometry.admMetric00_hasDerivAt",
+      "RenewalGeometry/Gravity/LapseShiftClockTest.lean:RenewalGeometry.admMetric0i_hasDerivAt",
+      "RenewalGeometry/Gravity/LapseShiftClockTest.lean:RenewalGeometry.rate_norm_components_tendsto_zero",
+      "RenewalGeometry/Gravity/LapseShiftClockTest.lean:RenewalGeometry.lapse_shift_clock_condition"
+    ],
+    "note": "Unchanged in wave 2 (re-assessed, not upgraded). Analytic content proved in the first wave: lapse_shift_clock_condition shows that along any regulator filter, if ‖λ_t‖² = a⁻²‖u_A‖² + a⁻⁴‖u_W‖² (eq:supp-exact-rate-norm) and ‖λ_t‖ → 0 then a⁻¹‖u_A‖ → 0 and a⁻²‖u_W‖ → 0 (eq:supp-exact-rate-necessary), with no assumption on the electric coefficient or on a(h); the ADM first-jet identities ∂_t g_00 = −2 ∂_t N and ∂_t g_0i = γ_ij ∂_t β^j at N = 1, β = 0 are proved (admMetric00_hasDerivAt, admMetric0i_hasDerivAt). Still an interface: the premise that first-jet harmonic shadowing with matched initial lapse/shift forces ‖λ_t‖ → 0 (the identification of the multiplier rate λ_t with the lapse–shift first jet through the exact-action multiplier solve) is the hypothesis hl of lapse_shift_clock_condition, not a theorem.",
+    "difficulty": "medium",
+    "plan": "Not a one-file task: it needs the exact-action multiplier structure of the surrounding section (thm:supp-exact-time-sources, the grading S_a = diag(a I_A, a² I_W) and the normalized source coefficient u_a entering the multiplier solve) formalized first. Then (i) define λ_t as the lapse–shift component of the multiplier rate and prove eq:supp-exact-rate-norm from the grading, (ii) define the first-jet shadowing topology (convergence of the initial ∂_t g_00, ∂_t g_0i of the exact-action metric to those of the harmonic metric with equal initial N, β, γ) and prove via admMetric00_hasDerivAt / admMetric0i_hasDerivAt that it forces ‖λ_t‖ → 0, (iii) compose with lapse_shift_clock_condition."
   },
   "lem:supp-exact-rational-detuning": {
     "env": "lemma",
@@ -1442,11 +1524,21 @@
   "prop:supp-three-costs": {
     "env": "proposition",
     "title": "Three-cost identification and rank defect",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: three-cost identification, measured quadratic cost E_s, rank-one compatibility AB-C^2, completed square",
-    "difficulty": "easy",
-    "plan": "With E_s(x,y) = A(y-x)^2/s + B s ((x+y)/2)^2 + C(y^2-x^2) (eq:main-measured-quadratic-cost) as a Lean definition over reals, the three identification formulas and the completed-square identity eq:supp-cost-completion are field_simp/ring identities under s > 0, u != v, A > 0; the statement 'D = 0 iff rank-one' is the observation that the second term vanishes exactly when nu = 0. No library dependency; similar one-file algebraic records exist in Action/EdgeActionPythagoras.lean."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.measuredQuadraticCost",
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.rankDefect",
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.rankDefect_eq_det",
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.rankDefect_nonneg_of_posSemidef",
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.measuredQuadraticCost_identify_B",
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.measuredQuadraticCost_identify_C",
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.measuredQuadraticCost_identify_A",
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.measuredQuadraticCost_three_cost_identification",
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.measuredQuadraticCost_completion",
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.rankDefect_eq_zero_iff_rankOne",
+      "RenewalGeometry/Gravity/ThreeCostIdentification.lean:RenewalGeometry.completion_second_term_eq_zero_iff"
+    ],
+    "note": "Proved. measuredQuadraticCost A B C s x y = A(y-x)^2/s + B s ((x+y)/2)^2 + C(y^2-x^2) (eq:main-measured-quadratic-cost). measuredQuadraticCost_three_cost_identification: for s > 0 and distinct u, v > 0 the three boxed formulas of eq:supp-three-cost-identification hold (B from E(u,u), C from the reversal difference, A from the reversal sum). measuredQuadraticCost_completion: eq:supp-cost-completion with c = -C/A and nu = D/A for A != 0, s != 0. rankDefect D = AB - C^2 equals det [[A,C],[C,B]] (rankDefect_eq_det), is nonnegative on the declared PSD class (rankDefect_nonneg_of_posSemidef), and D = 0 iff the coefficient form A x^2 + 2Cxy + B y^2 is the perfect square A (x + (C/A) y)^2, i.e. rank one (rankDefect_eq_zero_iff_rankOne); the completed-square second term vanishes identically iff D = 0 (completion_second_term_eq_zero_iff)."
   },
   "lem:supp-entropy-energy": {
     "env": "lemma",
@@ -1460,13 +1552,18 @@
   "lem:supp-two-edge-schur": {
     "env": "lemma",
     "title": "Two-edge Schur identity",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/StandardModel/K4Core.lean:RenewalGeometry.schur_series_step"
+      "RenewalGeometry/DiscreteAnalysis/TwoEdgeSchurBlocking.lean:RenewalGeometry.two_edge_schur",
+      "RenewalGeometry/DiscreteAnalysis/TwoEdgeSchurBlocking.lean:RenewalGeometry.twoEdgeSchur_completed_square",
+      "RenewalGeometry/DiscreteAnalysis/TwoEdgeSchurBlocking.lean:RenewalGeometry.twoEdgeSchur_minimizer_pos",
+      "RenewalGeometry/DiscreteAnalysis/TwoEdgeSchurBlocking.lean:RenewalGeometry.twoEdgeSchur_blocked_le",
+      "RenewalGeometry/DiscreteAnalysis/TwoEdgeSchurBlocking.lean:RenewalGeometry.twoEdgeSchur_eq_iff",
+      "RenewalGeometry/DiscreteAnalysis/TwoEdgeSchurBlocking.lean:RenewalGeometry.twoEdgeSchur_determinant",
+      "RenewalGeometry/DiscreteAnalysis/TwoEdgeSchurBlocking.lean:RenewalGeometry.edgeQuadratic",
+      "RenewalGeometry/DiscreteAnalysis/TwoEdgeSchurBlocking.lean:RenewalGeometry.schurMinimizer"
     ],
-    "note": "Partial: only the degenerate special case p_i=q_i=r_i (weighted two-edge path Laplacian, d_i=0) is proved as a series-conductance Schur step; missing: the general positive-quadratic two-edge blocking with the coefficient formulas p',q',r', the positive minimizer, and the boxed determinant identity p'r'-q'^2=(r_2 d_1+p_1 d_2)/(r_1+p_2).",
-    "difficulty": "easy",
-    "plan": "Extend StandardModel/K4Core.lean:schur_series_step to the general quadratic: minimize E_1(x,z)+E_2(z,y) in z, giving z_* = (q_1 x + q_2 y)/(r_1+p_2) > 0 for x,y > 0 (positivity), the coefficient formulas p', q', r' by completing the square (field_simp; ring), and the determinant identity p'r' - q'^2 = (r_2 d_1 + p_1 d_2)/(r_1+p_2) by ring after substituting d_i = p_i r_i - q_i^2. Also record that the blocked quadratic equals the minimum value (a quadratic-in-z minimization lemma, e.g. via the completed square). One short file."
+    "note": "Fully proved in the paper's generality. edgeQuadratic p q r x y = p x^2 - 2 q x y + r y^2; for p_i,q_i,r_i > 0 with d_i = p_i r_i - q_i^2 >= 0: (i) the minimizer z_* = (q_1 x + q_2 y)/(r_1+p_2) is positive on positive endpoints (twoEdgeSchur_minimizer_pos); (ii) the exact completed square E_1(x,z)+E_2(z,y) = E'(x,y) + (r_1+p_2)(z - z_*)^2 with the blocked coefficients p',q',r' of eq:supp-schur-coefficients (twoEdgeSchur_completed_square), hence E' is the minimum in z (twoEdgeSchur_blocked_le) attained exactly at z_* (twoEdgeSchur_eq_iff); (iii) the boxed determinant identity p'r' - q'^2 = (r_2 d_1 + p_1 d_2)/(r_1+p_2) (twoEdgeSchur_determinant, eq:supp-schur-determinant). two_edge_schur packages all clauses plus the byproduct p'r'-q'^2 >= 0. The identities only need r_1 + p_2 != 0; the d_i >= 0 hypotheses are carried for faithfulness."
   },
   "thm:supp-gowdy-momentum": {
     "env": "theorem",
@@ -1498,11 +1595,14 @@
   "lem:supp-executed-proposal-floor": {
     "env": "lemma",
     "title": "A finite execution certificate for the proposal floor",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: launch race, predictor-marked launch, first-launch decomposition, execution certificate, proposal floor q_* rho_* (1-e^{-A_*})",
-    "difficulty": "easy",
-    "plan": "Finite probability arithmetic: with S_l = prod_{i<=l}(1-a_i), the telescoping identity sum_{l=1}^J S_{l-1} a_l = 1 - S_J (Finset.sum_range_succ induction), the lower bound sum S_{l-1} f_l >= rho_* (1 - S_J) from f_l >= rho_* a_l, then 1 - S_J >= 1 - e^{-A_*} from -log S_J >= A_* (Real.exp_le_exp, Real.exp_log), and multiplication by the conditional execution probability q_*. Model the launch race as explicit real numbers; a conditional-probability product statement can be phrased directly on the numbers. Telescoping-product patterns already appear in MarkovChains/ClassicalAffinity.lean and Analysis/GeometricThresholdBankExact.lean."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/ExecutedProposalFloor.lean:RenewalGeometry.executed_proposal_floor",
+      "RenewalGeometry/Action/ExecutedProposalFloor.lean:RenewalGeometry.proposal_floor_arith",
+      "RenewalGeometry/Action/ExecutedProposalFloor.lean:RenewalGeometry.survivalProduct_telescope",
+      "RenewalGeometry/Action/ExecutedProposalFloor.lean:RenewalGeometry.survivalProduct"
+    ],
+    "note": "Proved on an abstract probability space (MeasureTheory.Measure with IsProbabilityMeasure), bins 0..J-1 (the paper's 1..J shifted). The launch race is modelled by the decreasing no-earlier-launch events N l (N 0 = univ) and the predictor-marked first-launch events P l, a subset of N l \\ N (l+1) (so they are automatically pairwise disjoint); the conditional probabilities 'given no earlier launch' are rendered in product form mu(N l \\ N(l+1)) = a_l mu(N l), mu(P l) = f_l mu(N l), and the conditional execution floor as mu(G cap P l) >= q_* mu(P l). Under f_l >= rho_* a_l, -log S_J >= A_* > 0, 0 < rho_* <= 1, q_* > 0, executed_proposal_floor gives mu(G) >= q_* rho_* (1 - e^{-A_*}) (boxed eq:supp-executed-proposal-floor). The proof derives mu(N l) = S_l by induction, sums the disjoint events G cap P l (measure_biUnion_finset), and applies the arithmetic certificate proposal_floor_arith (telescoping survivalProduct_telescope: sum S_l a_l = 1 - S_J, then S_J <= e^{-A_*} via exp_log). Disclosed: the hypotheses A_* > 0 and rho_* <= 1 are carried but not needed (the bound holds without them); the events are assumed measurable."
   },
   "lem:supp-a3-second-moment": {
     "env": "lemma",

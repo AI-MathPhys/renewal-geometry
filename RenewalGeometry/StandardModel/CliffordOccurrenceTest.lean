@@ -44,6 +44,7 @@ noncomputable section
 
 variable {n : Type*} [Fintype n] [DecidableEq n] [Nonempty n]
 
+omit [Nonempty n] in
 /-- **`def:clifford-matter`** in the manuscript's normalisation:
 `p_Cl = (2 dim H)⁻¹ ∑_μ ‖P₋ σ_μ P₊‖²_HS`. -/
 theorem cliffordProbability_eq_paper (J : Block n) (σ : Fin 4 → Block n) :
@@ -93,7 +94,8 @@ theorem clifford_occurrence_test (J : Block (CliffordCarrier m))
     fun X => representedAxis_commutant_iff X⟩⟩
   have hnonneg := cliffordProbability_nonneg J (representedAxis (m := m))
   constructor
-  · intro hpos μall
+  · intro hpos
+    by_contra μall
     have hall : ∀ μ, J * representedAxis μ = representedAxis μ * J := by
       intro μ
       by_contra hμ

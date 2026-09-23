@@ -56,15 +56,17 @@ noncomputable def oscillatorSolution (Ω q₀ p₀ t : ℝ) : ℝ :=
 noncomputable def oscillatorVelocity (Ω q₀ p₀ t : ℝ) : ℝ :=
   -q₀ * Ω * Real.sin (Ω * t) + p₀ * Real.cos (Ω * t)
 
+theorem hasDerivAt_const_mul_id (Ω t : ℝ) :
+    HasDerivAt (fun t : ℝ => Ω * t) Ω t :=
+  ((hasDerivAt_id' t).const_mul Ω).congr_deriv (mul_one Ω)
+
 theorem hasDerivAt_cos_mul (Ω t : ℝ) :
-    HasDerivAt (fun t => Real.cos (Ω * t)) (-Real.sin (Ω * t) * Ω) t := by
-  have := (Real.hasDerivAt_cos (Ω * t)).comp t ((hasDerivAt_id t).const_mul Ω)
-  simpa using this
+    HasDerivAt (fun t => Real.cos (Ω * t)) (-Real.sin (Ω * t) * Ω) t :=
+  (hasDerivAt_const_mul_id Ω t).cos
 
 theorem hasDerivAt_sin_mul (Ω t : ℝ) :
-    HasDerivAt (fun t => Real.sin (Ω * t)) (Real.cos (Ω * t) * Ω) t := by
-  have := (Real.hasDerivAt_sin (Ω * t)).comp t ((hasDerivAt_id t).const_mul Ω)
-  simpa using this
+    HasDerivAt (fun t => Real.sin (Ω * t)) (Real.cos (Ω * t) * Ω) t :=
+  (hasDerivAt_const_mul_id Ω t).sin
 
 /-- `q' = oscillatorVelocity`. -/
 theorem oscillatorSolution_hasDerivAt (Ω q₀ p₀ t : ℝ) (hΩ : Ω ≠ 0) :
@@ -74,7 +76,7 @@ theorem oscillatorSolution_hasDerivAt (Ω q₀ p₀ t : ℝ) (hΩ : Ω ≠ 0) :
   refine h.congr_deriv ?_
   unfold oscillatorVelocity
   field_simp
-  ring
+  try ring
 
 /-- `q'' = -Ω² q`: the trajectory is the flat scalar oscillator. -/
 theorem oscillatorVelocity_hasDerivAt (Ω q₀ p₀ t : ℝ) :
@@ -224,12 +226,8 @@ theorem two_step_pow_entry_abs (Ω₁ Ω₂ : ℝ) (h₁ : 0 < Ω₁) (h₂ : 0 
     |((quarterPeriodTransfer Ω₂ * quarterPeriodTransfer Ω₁) ^ n) 1 1| =
         (Ω₂ / Ω₁) ^ n := by
   rw [quarterPeriodTransfer_two_step, Matrix.diagonal_pow]
-  simp only [Matrix.diagonal_apply_eq]
-  constructor
-  · simp only [Pi.pow_apply, Matrix.cons_val_zero, abs_pow, abs_neg]
-    rw [abs_of_pos (div_pos h₁ h₂)]
-  · simp only [Pi.pow_apply, Matrix.cons_val_one, Matrix.head_cons, abs_pow, abs_neg]
-    rw [abs_of_pos (div_pos h₂ h₁)]
+  simp [abs_pow, abs_of_pos h₁, abs_of_pos h₂, abs_of_pos (div_pos h₁ h₂),
+    abs_of_pos (div_pos h₂ h₁)]
 
 /-- The larger modulus `ρ = max(Ω₁/Ω₂, Ω₂/Ω₁)` exceeds one when the two
 frequencies differ. -/
@@ -247,11 +245,13 @@ theorem switching_amplification (ρ T K h : ℝ) (hρ : 1 < ρ) (hK : 0 < K)
     Real.exp (Real.log ρ / K * (T / h)) ≤ ρ ^ n := by
   have hlog : 0 < Real.log ρ := Real.log_pos hρ
   have hρpos : 0 < ρ := by linarith
-  rw [← Real.exp_log hρpos, ← Real.exp_nat_mul]
+  have key : ρ ^ n = Real.exp (n * Real.log ρ) := by
+    rw [Real.exp_nat_mul, Real.exp_log hρpos]
+  rw [key]
   apply Real.exp_le_exp.mpr
   have : Real.log ρ / K * (T / h) = Real.log ρ * (T / (K * h)) := by
     field_simp
-  rw [this]
+  rw [this, mul_comm (n : ℝ)]
   exact mul_le_mul_of_nonneg_left hn hlog.le
 
 end RenewalGeometry

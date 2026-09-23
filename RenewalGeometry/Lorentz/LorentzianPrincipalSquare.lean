@@ -240,3 +240,9 @@ theorem lorentzCharForm_inertia {d : ℕ} (N : ℝ) (hN : 0 < N)
 end Inertia
 
 end RenewalGeometry
+-- AXIOMCHECK
+#print axioms RenewalGeometry.lorentzian_symbol_square
+#print axioms RenewalGeometry.anchor_lorentzian_symbol_square
+#print axioms RenewalGeometry.signed_symbol_square
+#print axioms RenewalGeometry.coframe_square
+#print axioms RenewalGeometry.lorentzCharForm_inertia

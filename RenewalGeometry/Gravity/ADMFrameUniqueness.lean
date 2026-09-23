@@ -124,6 +124,3 @@ theorem adm_frame_complete :
     adm_inversion_unique B g ϱ N hϱ hB hN hg hBN hϱg⟩
 
 end RenewalGeometry
--- AXIOMCHECK
-#print axioms RenewalGeometry.adm_frame_complete
-#print axioms RenewalGeometry.adm_inversion_unique

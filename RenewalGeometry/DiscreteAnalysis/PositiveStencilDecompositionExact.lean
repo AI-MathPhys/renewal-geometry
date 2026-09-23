@@ -59,6 +59,7 @@ omit [Fintype ι] in
 theorem stencilUnit_apply (i k : ι) : stencilUnit i k = if k = i then 1 else 0 := by
   simp [stencilUnit, Pi.single_apply]
 
+omit [Fintype ι] in
 theorem stencilPairTerm_apply (A : Matrix ι ι ℝ) (η : ℝ) (i j k l : ι) :
     stencilPairTerm A η i j k l =
       if i < j then
@@ -74,6 +75,7 @@ theorem stencilPairTerm_apply (A : Matrix ι ι ℝ) (η : ℝ) (i j k l : ι) :
     ring
   · simp only [if_neg h, Matrix.zero_apply]
 
+omit [Fintype ι] in
 /-- Entrywise form of the pair sum on the diagonal. -/
 theorem stencilPairTerm_apply_diag (A : Matrix ι ι ℝ) (η : ℝ) (i j k : ι) :
     stencilPairTerm A η i j k k =
@@ -82,8 +84,9 @@ theorem stencilPairTerm_apply_diag (A : Matrix ι ι ℝ) (η : ℝ) (i j k : ι
   rw [stencilPairTerm_apply]
   unfold stencilPlusWeight stencilMinusWeight
   split_ifs <;> subst_vars <;>
-    first | (exact absurd ‹_ < _› (lt_irrefl _)) | ring1 | simp_all
+    first | (exact absurd ‹_ < _› (lt_irrefl _)) | ring1
 
+omit [Fintype ι] in
 /-- Entrywise form of the pair sum off the diagonal (uses `k ≠ l`). -/
 theorem stencilPairTerm_apply_offDiag (A : Matrix ι ι ℝ) (η : ℝ) (i j k l : ι)
     (hkl : k ≠ l) :
@@ -93,7 +96,7 @@ theorem stencilPairTerm_apply_offDiag (A : Matrix ι ι ℝ) (η : ℝ) (i j k l
   rw [stencilPairTerm_apply]
   unfold stencilPlusWeight stencilMinusWeight
   split_ifs <;> subst_vars <;>
-    first | (exact absurd rfl hkl) | (exact absurd ‹_ < _› (lt_irrefl _)) | ring1 | simp_all
+    first | (exact absurd rfl hkl) | (exact absurd ‹_ < _› (lt_irrefl _)) | ring1
 
 /-- Counting the directions through `k`: `#{j : k < j} + #{i : i < k} = d - 1`,
 in real-valued indicator form. -/
@@ -117,16 +120,26 @@ weighted stencil sum reproduces `A`; no window hypothesis is needed for the
 identity itself. -/
 theorem stencilDecomposition_eq (A : Matrix ι ι ℝ) (η : ℝ) (hA : A.IsSymm) :
     stencilDecomposition A η = A := by
+  have e1 : ∀ (g : ι → ι → ℝ) (k : ι),
+      ∑ x, ∑ y, (if k = x then g x y else 0) = ∑ y, g k y := by
+    intro g k
+    rw [Finset.sum_comm]
+    simp
+  have e2 : ∀ (g : ι → ι → ℝ) (k : ι),
+      ∑ x, ∑ y, (if k = y then g x y else 0) = ∑ x, g x k := by
+    intro g k
+    simp
   ext k l
-  unfold stencilDecomposition
-  rw [Matrix.add_apply, Matrix.sum_apply, Matrix.sum_apply]
-  simp_rw [Matrix.sum_apply]
-  have hdiag : ∑ i, (stencilDiagonalWeight A η i • vecMulVec (stencilUnit i) (stencilUnit i)) k l
+  have hpair : (∑ i, ∑ j, stencilPairTerm A η i j) k l
+      = ∑ i, ∑ j, stencilPairTerm A η i j k l := by
+    simp [Matrix.sum_apply]
+  have hdiag : (∑ i, stencilDiagonalWeight A η i • vecMulVec (stencilUnit i) (stencilUnit i)) k l
       = if k = l then stencilDiagonalWeight A η k else 0 := by
+    rw [Matrix.sum_apply]
     simp only [Matrix.smul_apply, vecMulVec_apply, stencilUnit_apply, smul_eq_mul]
     by_cases hkl : k = l
     · subst hkl
-      simp [Finset.sum_ite_eq']
+      simp
     · rw [if_neg hkl]
       apply Finset.sum_eq_zero
       intro i _
@@ -134,24 +147,25 @@ theorem stencilDecomposition_eq (A : Matrix ι ι ℝ) (η : ℝ) (hA : A.IsSymm
       · subst hk
         simp [Ne.symm hkl]
       · simp [hk]
-  rw [hdiag]
+  unfold stencilDecomposition
+  rw [Matrix.add_apply, hdiag, hpair]
   by_cases hkl : k = l
   · subst hkl
-    simp_rw [stencilPairTerm_apply_diag]
     rw [if_pos rfl]
-    simp_rw [Finset.sum_add_distrib]
-    simp only [Finset.sum_ite_eq', Finset.mem_univ, if_true, Finset.sum_ite_eq]
+    simp_rw [stencilPairTerm_apply_diag, Finset.sum_add_distrib]
+    simp only [e1, e2, Finset.sum_ite_eq, Finset.mem_univ, ite_true]
     rw [sum_lt_indicator_add]
     unfold stencilDiagonalWeight
     ring
   · rw [if_neg hkl, zero_add]
-    simp_rw [stencilPairTerm_apply_offDiag A η _ _ k l hkl]
-    simp_rw [Finset.sum_add_distrib]
-    simp only [Finset.sum_ite_eq', Finset.mem_univ, if_true, Finset.sum_ite_eq]
+    simp_rw [stencilPairTerm_apply_offDiag A η _ _ k l hkl, Finset.sum_add_distrib]
+    simp only [e1, e2]
+    simp only [Finset.sum_ite_eq, Finset.mem_univ, ite_true]
     rcases lt_or_gt_of_ne hkl with h | h
     · simp [h, not_lt.mpr h.le]
     · simp [h, not_lt.mpr h.le, hA.apply k l]
 
+omit [LinearOrder ι] in
 /-- Diagonal weights are positive in the stencil window. -/
 theorem stencilDiagonalWeight_pos (A : Matrix ι ι ℝ) (η : ℝ)
     (hdiag : ∀ i, ((Fintype.card ι : ℝ) - 1) * η < A i i) (i : ι) :
@@ -159,6 +173,7 @@ theorem stencilDiagonalWeight_pos (A : Matrix ι ι ℝ) (η : ℝ)
   unfold stencilDiagonalWeight
   linarith [hdiag i]
 
+omit [Fintype ι] [LinearOrder ι] in
 /-- Off-diagonal `+` weights are positive in the stencil window. -/
 theorem stencilPlusWeight_pos (A : Matrix ι ι ℝ) (η : ℝ)
     (hoff : ∀ i j, i ≠ j → |A i j| < η) (i j : ι) (hij : i ≠ j) :
@@ -167,6 +182,7 @@ theorem stencilPlusWeight_pos (A : Matrix ι ι ℝ) (η : ℝ)
   have := (abs_lt.mp (hoff i j hij)).1
   linarith
 
+omit [Fintype ι] [LinearOrder ι] in
 /-- Off-diagonal `−` weights are positive in the stencil window. -/
 theorem stencilMinusWeight_pos (A : Matrix ι ι ℝ) (η : ℝ)
     (hoff : ∀ i j, i ≠ j → |A i j| < η) (i j : ι) (hij : i ≠ j) :

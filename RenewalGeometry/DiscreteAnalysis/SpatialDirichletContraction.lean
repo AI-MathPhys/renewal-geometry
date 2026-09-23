@@ -44,10 +44,12 @@ theorem laplacianApply_dirichletForm (f : V → ℝ) :
   have hcancel : ∀ v, G.mass v * (f v * ((∑ u, G.conductance v u * (f v - f u)) /
       G.mass v)) = ∑ u, G.conductance v u * (f v * (f v - f u)) := by
     intro v
-    rw [Finset.mul_sum]
     have hm : G.mass v ≠ 0 := (G.mass_pos v).ne'
-    field_simp
-    rw [Finset.sum_mul]
+    have hdiv : G.mass v * (f v * ((∑ u, G.conductance v u * (f v - f u)) /
+        G.mass v)) = f v * ∑ u, G.conductance v u * (f v - f u) := by
+      field_simp
+      try ring
+    rw [hdiv, Finset.mul_sum]
     refine Finset.sum_congr rfl fun u _ => ?_
     ring
   simp_rw [hcancel]

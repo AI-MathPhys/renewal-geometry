@@ -23,7 +23,7 @@ letter is either the grading read `Z` (even extension) or the grading flip
 both extensions, every historical word coincides *literally*
 (`extendedOldWord_even_eq_odd`), so every word moment, the Gram hierarchy,
 the multiplication table and all resolved cylinder entries agree; both Gram
-hierarchies are twice the old Gram (`wordGram_even`, `wordGram_odd`).  The
+hierarchies are twice the old Gram (`extensionWordGram_even`, `extensionWordGram_odd`).  The
 proposed left-to-right cross block is zero in the even extension and nonzero
 in the odd one.  The final clause states the no-go: no function of the old
 word data (or of the word Gram hierarchy) returns the cross block of both
@@ -44,7 +44,7 @@ def extendedOldWord (P : ι ⊕ Unit → Matrix (h × Fin 2) (h × Fin 2) ℂ)
 
 /-- The complete word-Gram hierarchy of an extended process, restricted to
 historical words: `Tr(w₁ᴴ w₂)`. -/
-noncomputable def wordGram (P : ι ⊕ Unit → Matrix (h × Fin 2) (h × Fin 2) ℂ)
+noncomputable def extensionWordGram (P : ι ⊕ Unit → Matrix (h × Fin 2) (h × Fin 2) ℂ)
     (w₁ w₂ : List ι) : ℂ :=
   Matrix.trace ((extendedOldWord P w₁)ᴴ * extendedOldWord P w₂)
 
@@ -90,17 +90,17 @@ theorem trace_embed_gram (A B : Matrix h h ℂ) :
   norm_num
 
 /-- The even word-Gram hierarchy is twice the old word-Gram hierarchy. -/
-theorem wordGram_even (K : ι → Matrix h h ℂ) (w₁ w₂ : List ι) :
-    wordGram (gradingEvenProcessExtension K) w₁ w₂ =
+theorem extensionWordGram_even (K : ι → Matrix h h ℂ) (w₁ w₂ : List ι) :
+    extensionWordGram (gradingEvenProcessExtension K) w₁ w₂ =
       2 * Matrix.trace ((representedWord K w₁)ᴴ * representedWord K w₂) := by
-  unfold wordGram
+  unfold extensionWordGram
   rw [extendedOldWord_even, extendedOldWord_even, trace_embed_gram]
 
 /-- The odd word-Gram hierarchy is twice the old word-Gram hierarchy. -/
-theorem wordGram_odd (K : ι → Matrix h h ℂ) (w₁ w₂ : List ι) :
-    wordGram (gradingOddProcessExtension K) w₁ w₂ =
+theorem extensionWordGram_odd (K : ι → Matrix h h ℂ) (w₁ w₂ : List ι) :
+    extensionWordGram (gradingOddProcessExtension K) w₁ w₂ =
       2 * Matrix.trace ((representedWord K w₁)ᴴ * representedWord K w₂) := by
-  unfold wordGram
+  unfold extensionWordGram
   rw [extendedOldWord_odd, extendedOldWord_odd, trace_embed_gram]
 
 /-- The even extension has vanishing grading-changing cross block. -/
@@ -141,9 +141,9 @@ theorem external_shadow_no_go [Nonempty h] (K : ι → Matrix h h ℂ) :
       extendedOldWord (gradingEvenProcessExtension K) w =
         extendedOldWord (gradingOddProcessExtension K) w) ∧
     (∀ w₁ w₂ : List ι,
-      wordGram (gradingEvenProcessExtension K) w₁ w₂ =
-        wordGram (gradingOddProcessExtension K) w₁ w₂ ∧
-      wordGram (gradingEvenProcessExtension K) w₁ w₂ =
+      extensionWordGram (gradingEvenProcessExtension K) w₁ w₂ =
+        extensionWordGram (gradingOddProcessExtension K) w₁ w₂ ∧
+      extensionWordGram (gradingEvenProcessExtension K) w₁ w₂ =
         2 * Matrix.trace ((representedWord K w₁)ᴴ * representedWord K w₂)) ∧
     (∀ (w : List ι) (x y : h × Fin 2),
       extendedOldWord (gradingEvenProcessExtension K) w x y =
@@ -157,17 +157,17 @@ theorem external_shadow_no_go [Nonempty h] (K : ι → Matrix h h ℂ) :
       Φ (extendedOldWord (gradingOddProcessExtension K)) =
           gradingCrossBlock (gradingOddProcessExtension K)) ∧
     (¬ ∃ Φ : (List ι → List ι → ℂ) → Matrix (h × Fin 2) (h × Fin 2) ℂ,
-      Φ (wordGram (gradingEvenProcessExtension K)) =
+      Φ (extensionWordGram (gradingEvenProcessExtension K)) =
           gradingCrossBlock (gradingEvenProcessExtension K) ∧
-      Φ (wordGram (gradingOddProcessExtension K)) =
+      Φ (extensionWordGram (gradingOddProcessExtension K)) =
           gradingCrossBlock (gradingOddProcessExtension K)) := by
   have hwords : extendedOldWord (gradingEvenProcessExtension K) =
       extendedOldWord (gradingOddProcessExtension K) :=
     funext (extendedOldWord_even_eq_odd K)
-  have hgram : wordGram (gradingEvenProcessExtension K) =
-      wordGram (gradingOddProcessExtension K) := by
+  have hgram : extensionWordGram (gradingEvenProcessExtension K) =
+      extensionWordGram (gradingOddProcessExtension K) := by
     funext w₁ w₂
-    rw [wordGram_even, wordGram_odd]
+    rw [extensionWordGram_even, extensionWordGram_odd]
   refine ⟨?_, extendedOldWord_even_eq_odd K, ?_, ?_, gradingCrossBlock_even K,
     gradingCrossBlock_odd K, ?_, ?_⟩
   · intro w
@@ -175,7 +175,7 @@ theorem external_shadow_no_go [Nonempty h] (K : ι → Matrix h h ℂ) :
     · rw [extendedOldWord_even, discardResolvedGrading_embed]
     · rw [extendedOldWord_odd, discardResolvedGrading_embed]
   · intro w₁ w₂
-    exact ⟨by rw [wordGram_even, wordGram_odd], wordGram_even K w₁ w₂⟩
+    exact ⟨by rw [extensionWordGram_even, extensionWordGram_odd], extensionWordGram_even K w₁ w₂⟩
   · intro w x y
     rw [extendedOldWord_even_eq_odd]
   · rintro ⟨Φ, hΦe, hΦo⟩

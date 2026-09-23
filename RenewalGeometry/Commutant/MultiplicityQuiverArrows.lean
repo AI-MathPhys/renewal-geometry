@@ -48,12 +48,13 @@ def blockSlice (T : Matrix (Vb × Nb) (Va × Na) ℂ) (vb : Vb) (va : Va) :
     Matrix Nb Na ℂ :=
   fun n m => T (vb, n) (va, m)
 
+omit [Fintype Va] [Fintype Vb] [DecidableEq Va] [DecidableEq Vb] in
 /-- The entry slice is the functional slice along the entry functional. -/
 theorem blockSlice_eq_functionalSlice (T : Matrix (Vb × Nb) (Va × Na) ℂ)
     (vb : Vb) (va : Va) :
     blockSlice T vb va = functionalSlice (Matrix.entryLinearMap ℂ ℂ vb va) T := by
   funext n m
-  simp [blockSlice, functionalSlice]
+  rfl
 
 /-- Every functional slice is a linear combination of the entry slices. -/
 theorem functionalSlice_eq_sum (φ : Matrix Vb Va ℂ →ₗ[ℂ] ℂ)
@@ -92,6 +93,7 @@ the span of the functional slices of `T_j` (`def:multiplicity-quiver`). -/
 def arrowSpace (j : J) : Submodule ℂ (Matrix (N (dst j)) (N (src j)) ℂ) :=
   Submodule.span ℂ (sliceSpace V N src dst T j)
 
+omit [Fintype J] [∀ a, Fintype (N a)] in
 /-- The arrow space is spanned by the finitely many entry slices. -/
 theorem arrowSpace_eq_span_blockSlice (j : J) :
     arrowSpace V N src dst T j =
@@ -100,7 +102,8 @@ theorem arrowSpace_eq_span_blockSlice (j : J) :
   apply le_antisymm
   · rw [arrowSpace, Submodule.span_le]
     rintro _ ⟨φ, rfl⟩
-    rw [SetLike.mem_coe, functionalSlice_eq_sum]
+    show functionalSlice φ (T j) ∈ _
+    rw [functionalSlice_eq_sum]
     refine Submodule.sum_mem _ fun vb _ => Submodule.sum_mem _ fun va _ => ?_
     exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨(vb, va), rfl⟩)
   · rw [Submodule.span_le]
