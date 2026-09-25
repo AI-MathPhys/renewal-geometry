@@ -89,11 +89,14 @@
       "RenewalGeometry/Dimension/DimensionCofinal3Plus1.lean:RenewalGeometry.DimensionCofinal.cofinal_dimension_selection",
       "RenewalGeometry/Lorentz/ClockDischarge.lean:RenewalGeometry.lorentzian_principal_symbol",
       "RenewalGeometry/Lorentz/KreinClifford.lean:RenewalGeometry.KreinCliffordDatum.symbol_square",
-      "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.gt_signed_haynsworth"
+      "RenewalGeometry/Krein/SignedHaynsworthInertia.lean:RenewalGeometry.gt_signed_haynsworth",
+      "RenewalGeometry/Krein/OneLineSignedExtensionInertia.lean:RenewalGeometry.oneLineSignedExtension_inertia_lorentz",
+      "RenewalGeometry/Gravity/ADMPacketPersistenceExact.lean:RenewalGeometry.admPacket_continuousAt",
+      "RenewalGeometry/Gravity/ADMPacketPersistenceExact.lean:RenewalGeometry.adm_packet_persists_of_summable_defects"
     ],
-    "note": "Partial: (i) K4/A3 selection by either selector is proved; (ii)-(iv) relational_scheduler_ADM proves the six A3 dyadics span Sym_3, the rank-3 shift map with 3-dimensional circulation kernel, faithfulness of the winner-waiting exponential-race score frame (winner-only loses the common scale), the exact ADM inversion eq:adm-inversion-main and the h^-2 total-rate bound for a nondegenerate bracket; (vi) the Clifford symbol square with signature (1,3); (vii) rank persistence of endpoint/edge Grams under cofinal convergence with margin/tail witnesses. Missing: (v) the Lorentzian-inertia statement for the one-sign extension is only available as inertia additivity, \"summably correctable\" defects and the ADM-packet persistence on the canonical limit quotient are not formalized, and there is no single assembled theorem.",
+    "note": "Partial (unchanged clauses as before): (i) K4/A3 selection by either selector; (ii)-(iv) relational_scheduler_ADM (six A3 dyadics span Sym_3, rank-3 shift map with 3-dimensional circulation kernel, faithful winner-waiting score frame with winner-only losing the common scale, exact ADM inversion eq:adm-inversion-main, h^-2 total-rate bound); (vi) Clifford symbol square with signature (1,3); (vii-rank) rank persistence under cofinal convergence. NEW this pass: (v) the Lorentzian-inertia statement of prop:main-signature-minimality is already available as Krein/OneLineSignedExtensionInertia.lean:oneLineSignedExtension_inertia_lorentz (inertia (1,3) of -N^-2 tau^2 + g(w,w) on the 3-dimensional spatial module, and (3,1) for its negative, i.e. up to overall sign) and is now cited; (vii-ADM) Gravity/ADMPacketPersistenceExact.lean: the ADM inversion (admMetric, admLapse = the boxed eq:adm-inversion-main expressions) is continuous on the nondegenerate cone det B > 0 (admPacket_continuousAt), and brackets/speed densities with summable successive defects converge with the reconstructed ADM metric and lapse converging to the ADM packet of a nondegenerate limit (adm_packet_persists_of_summable_defects). Still missing: the single assembled theorem stating the seven clauses on one common carrier (the canonical cofinal limit quotient of mt:grand-tensor), and the persistence of the pair gap and signed inertia along that quotient.",
     "difficulty": "medium",
-    "plan": "Clauses (i)-(iv),(vi),(vii-rank) exist: Dimension/DimensionRegularGraphExact.lean, Dimension/DimensionK4Classification.lean:dimension_K4_selector_complete, Gravity/RelationalSchedulerADM.lean:relational_scheduler_ADM, Lorentz/KreinClifford.lean:KreinCliffordDatum.symbol_square, Dimension/DimensionCofinal3Plus1.lean:exact_rank_persistence / cofinal_dimension_selection. Missing: (v) the (1,3) inertia lemma (see prop:main-signature-minimality, easy via Krein/SignedHaynsworthInertia.lean), (vii) persistence of the ADM packet under summable bracket/speed defects (continuity of the ADM inversion eq:adm-inversion-main in the bracket, i.e. continuity of Matrix.inv at units plus DimensionCofinal3Plus1.lean:margin_persists), and one bundling structure/theorem that states the seven clauses as a conjunction on a common carrier."
+    "plan": "Remaining work is assembly, not new mathematics: (1) define a carrier structure bundling a K4/A3 selection witness (Dimension/DimensionK4Classification.lean), a positive scheduler-separated root-race datum (Gravity/RelationalSchedulerADM.lean: rates k : Fin 6 -> R, speed density rho > 0, bracket B = h^2 sum k_a alpha_a alpha_a^T), the protected orientation sign, and the Clifford datum (Lorentz/KreinClifford.lean); (2) prove one theorem on that structure whose seven conjuncts are instances of relational_scheduler_ADM (A1-A5), oneLineSignedExtension_inertia_lorentz (v), KreinCliffordDatum.symbol_square (vi), and for (vii) DimensionCofinal3Plus1.lean:exact_rank_persistence / margin_persists together with ADMPacketPersistenceExact.lean:adm_packet_persists_of_summable_defects (feed the summable mixed-Gram/refinement defects as the entrywise summable bracket/speed defects; the signed-inertia persistence follows from oneLineSignedExtension_inertia_lorentz applied at the limit since the inertia only depends on positivity of the limit spatial form, i.e. det B_lim > 0). What blocked a full proof now: the manuscript's 'canonical cofinal limit quotient' is not formalised anywhere in the public tree, so clause (vii) can only be stated for convergent bracket sequences rather than on that quotient."
   },
   "thm:main-determining-kernel": {
     "env": "theorem",
@@ -177,40 +180,67 @@
   "thm:main-gravitational-classification": {
     "env": "theorem",
     "title": "Lorentz-natural classification of the generic gravitational score",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.gravitational_score_classification",
+      "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.lorentz_natural_pairing_classification",
+      "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.lorentz_natural_operator_classification",
+      "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.pairing_coefficients_unique",
+      "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.alternating_four_form_eq_smul_det",
+      "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.inducedBivectorAction",
+      "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.IsProperLorentz",
+      "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.boost4_isProperLorentz",
+      "RenewalGeometry/Lorentz/BivectorRotationCommutantExact.lean:RenewalGeometry.BivectorRotationCommutant.rotation_commutant_scalar_blocks",
       "RenewalGeometry/Gravity/PalatiniInsertion.lean:RenewalGeometry.holst_palatini_coefficients_unique"
     ],
-    "note": "DOWNGRADED 2026-09-22: the cited file(s) LorentzBivectorCommutantExact.lean, LorentzInvariantDensityClassificationExact.lean do not compile against the pinned Mathlib and are excluded from the public tree; pending repair. Original assessment: Finite-dimensional classification: a real bilinear pairing on the coframe-bivector carrier invariant under all proper time-oriented Lorentz matrices (Lorentz naturality, defined by the actual induced bivector action) is uniquely a * (metric pairing) + b * (wedge pairing), i.e. the Palatini and Holst contractions; a Lorentz-natural operator on the bivector carrier is uniquely a + b Hodge (scalar residual commutant); a Lorentz-invariant alternating scalar of the coframe is c * det (the volume term); the three coefficients are unique. Scoped: the bulk term is modelled as a bivector/curvature pairing plus a coframe-alternating scalar (first order); no Palatini/Holst/Einstein action is assumed.",
-    "difficulty": "medium",
-    "plan": "Model the statement finite-dimensionally as in the downgraded original: bilinear pairings on the bivector carrier Fin 2 × Fin 3 (E,B) commuting with the induced action of explicit proper Lorentz generators. Lorentz/BivectorRotationCommutantExact.lean:rotation_commutant_scalar_blocks already reduces the commutant to 2x2 scalar blocks under two rotations; add one explicit boost matrix acting on (E,B) to cut the 2x2 block down to span{I, Hodge J}, giving the a + b*Hodge commutant and the a*metric + b*wedge pairing classification; the volume term is Mathlib AlternatingMap.eq_smul_basis_det (any alternating 4-form on ℝ^4 is c·det); finish with Gravity/PalatiniInsertion.lean:holst_palatini_coefficients_unique for uniqueness of (α,β,λ). Also repair the excluded LorentzBivectorCommutantExact / LorentzInvariantDensityClassificationExact files if their content is still wanted."
+    "note": "Proved in the finite-dimensional model (rebuilt from Lorentz/BivectorRotationCommutantExact.lean; replaces the excluded LorentzBivectorCommutantExact / LorentzInvariantDensityClassificationExact files). The bivector carrier is Fin 2 x Fin 3 = (E,B); Lorentz naturality is invariance under the ACTUAL induced bivector action inducedBivectorAction Lambda (2x2 minors of Lambda) of every proper orthochronous Lorentz matrix (IsProperLorentz: Lambda^T eta Lambda = eta, det = 1, Lambda_00 > 0). Results: (i) eq:supp-lorentz-commutant End_{SO+(1,3)}(Lambda^2 R^{1,3}) = span{I, star}: every operator commuting with all induced actions is p I + q star (only two rotations and one explicit boost of cosh = 5/4 are used, so the hypothesis is weaker than full naturality); (ii) every invariant real bilinear pairing is a (metric pairing = Holst internal eta-contraction) + b (epsilon pairing = Palatini internal epsilon-contraction = eta star), coefficients unique; (iii) every alternating coframe four-form is lambda det (Mathlib AlternatingMap.eq_smul_basis_det); (iv) gravitational_score_classification: the pair (invariant pairing, alternating four-form) has a UNIQUE coefficient triple (alpha, beta, lambda), i.e. eq:main-phv-coefficients / eq:main-phv-classification. Scoped modelling disclosed: the first-order bulk term is modelled as a Lorentz-invariant pairing of the coframe bivector with curvature (both in Lambda^2 R^{1,3}; the spacetime two-form part is fixed by the wedge) plus an alternating coframe four-form; the manuscript hypotheses 'scalar residual typed commutant' and 'represented determinant volume' are the assumptions of this model. No Palatini/Holst/Einstein action is assumed."
   },
   "thm:main-curvature-propagation": {
     "env": "theorem",
     "title": "Initial-energy curvature propagation certificate",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: Gronwall, Duhamel, curvature energy, initial-energy, propagation certificate, z_X, interpolation, lapse bound. NCG/Gravity/GrowthComparison.volterra_gronwall_zero and NCG/Grand/DuhamelDefectBound are unrelated zero-Gronwall / semigroup-defect bounds.",
-    "difficulty": "medium",
-    "plan": "First box: a finite-dimensional ODE y' = (K+L)y + f with M-skew K; differentiate z^2 = y^T M y (Mathlib HasDerivAt for bilinear forms), get (z^2)' ≤ 2 a z^2 + 2 z ‖f‖_M, and prove a time-dependent Gronwall comparison z(t) ≤ e^{∫a}[z(0)+∫e^{-∫a}‖f‖] via Mathlib image_le_of_liminf_slope_right_lt_deriv_boundary' (Mathlib's gronwallBound is constant-coefficient only, so this is one genuinely new lemma; regularize sqrt(z^2+δ) to avoid z = 0). Second box: abstract ‖R‖_{L^2(K)}^2 = ∫_0^{T*} N(t)‖R(t)‖^2_{L^2(Σ_t)} dt as a hypothesis on real-valued functions; then it is Cauchy–Schwarz plus sup z ≤ e^{A*}(Z*+F*). No library counterpart exists (search confirmed); no new infrastructure beyond Mathlib real analysis is needed."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/CurvatureEnergyPropagationExact.lean:RenewalGeometry.curvature_energy_propagation",
+      "RenewalGeometry/Gravity/CurvatureEnergyPropagationExact.lean:RenewalGeometry.gramEnergy",
+      "RenewalGeometry/Gravity/CurvatureEnergyPropagationExact.lean:RenewalGeometry.gram_inner_le",
+      "RenewalGeometry/Gravity/CurvatureEnergyPropagationExact.lean:RenewalGeometry.gramEnergySq_deriv_le",
+      "RenewalGeometry/Gravity/CurvatureEnergyPropagationExact.lean:RenewalGeometry.regularised_energy_deriv_le",
+      "RenewalGeometry/Gravity/CurvatureEnergyPropagationExact.lean:RenewalGeometry.curvature_energy_uniform_bound",
+      "RenewalGeometry/Gravity/CurvatureEnergyPropagationExact.lean:RenewalGeometry.derived_l2_curvature_bound"
+    ],
+    "note": "Proved. First box eq:main-curvature-energy-propagation on a finite-dimensional real inner-product space with a differentiable symmetric positive Gram M(t): for the writer y' = (K+L)y + f with M-skew K (<M x, K x> = 0) and any growth function a >= 0 with <x, (M' + M L + L^T M) x> <= 2 a <x, M x> (the manuscript's a_X = (1/2) max{0, lambda_max[...]} is the least such function, so the theorem applies to it), z(t) <= exp(int_0^t a) [z(0) + int_0^t exp(-int_0^s a) |f(s)|_{M(s)} ds] for t >= 0 (curvature_energy_propagation): energy differential inequality (z^2)' <= 2 a z^2 + 2 z |f|_M via exact skew cancellation and the Cauchy-Schwarz inequality of the positive form (gram_inner_le, discriminant argument), then the integrating-factor/monotonicity argument on sqrt(z^2 + eps^2) and eps -> 0 (a genuinely time-dependent Gronwall bound; Mathlib's gronwallBound is constant-coefficient). Budgets: z <= exp(A*)(Z* + F*) on [0,T*] (curvature_energy_uniform_bound). Second box eq:main-derived-l2-curvature (derived_l2_curvature_bound): with slice norms rho(t) = |I y(t)|_{L^2(Sigma_t)} <= C_I z(t), lapse 0 <= N <= N*, and |R|_{L^2(K)} <= sqrt(int_0^{T*} N rho^2) + C_zeta, one gets |R|_{L^2(K)} <= C_I sqrt(N* T*) exp(A*)(Z* + F*) + C_zeta. Scoped/disclosed: the writer hypotheses are stated for all real times (only [0,t] is used), y and M differentiable, f and a continuous; the slice decomposition of L^2(K) (|g|^2_{L^2(K)} = int N |g(t)|^2_{Sigma_t}), the triangle inequality in L^2(K) and |zeta|_{L^2(K)} <= C_zeta are abstracted into the single hypothesis |R|_{L^2(K)} <= sqrt(int N rho^2) + C_zeta."
   },
   "thm:main-discrete-curvature": {
     "env": "theorem",
     "title": "Fully discrete initial-energy curvature certificate",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: discrete curvature, implicit step, (1-b), sqrt(T D), discrete Gronwall, perturbed_euler_gronwall (NCG/Grand/FastFeedback, a different linear recursion bound).",
-    "difficulty": "medium",
-    "plan": "Purely finite-dimensional: unique solvability of (I - (s_j/2)(K_j+L_j))Y_{j+1} = ... from coercivity ⟨x,(I-(s/2)(K+L))x⟩ ≥ (1-b)|x|^2 (skew part drops, symmetric part ≤ b); energy identity by pairing the update with the midpoint gives (1 - s_ja_j/2)‖Y_{j+1}‖ ≤ (1 + s_ja_j/2)e^{d_j}‖Y_j‖ + ‖ε_j‖; then Mathlib Analysis/ODE/DiscreteGronwall.lean:discrete_gronwall_prod_general with c_j = e^{d_j}(1+s a/2)/(1-s a/2) ≤ e^{d_j + s_ja_j/(1-b)} and Cauchy–Schwarz Σ‖ε_j‖ ≤ sqrt(T_X D_X). New lemmas needed: the midpoint energy identity and the (1+x)/(1-x) ≤ e^{2x/(1-b)} bound. The final L^2(K) sentence should be scoped out (analytic, same abstraction as thm:main-curvature-propagation)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/DiscreteCurvatureCertificateExact.lean:RenewalGeometry.discrete_curvature_certificate",
+      "RenewalGeometry/Gravity/DiscreteCurvatureCertificateExact.lean:RenewalGeometry.implicit_step_bijective",
+      "RenewalGeometry/Gravity/DiscreteCurvatureCertificateExact.lean:RenewalGeometry.discrete_energy_step",
+      "RenewalGeometry/Gravity/DiscreteCurvatureCertificateExact.lean:RenewalGeometry.discrete_step_bound",
+      "RenewalGeometry/Gravity/DiscreteCurvatureCertificateExact.lean:RenewalGeometry.one_add_div_one_sub_le_exp",
+      "RenewalGeometry/Gravity/DiscreteCurvatureCertificateExact.lean:RenewalGeometry.sum_norm_le_sqrt_weighted"
+    ],
+    "note": "Proved on a finite-dimensional real inner-product space (the normalized record space): for the recorded midpoint update eq:main-discrete-curvature-update with K_j skew (encoded <K x, y> = -<x, K y>), (L_j+L_j^T)/2 <= a_j I (encoded <x, L x> <= a_j |x|^2), |T_j|_op <= e^{d_j}, a_j, d_j >= 0, s_j > 0 and s_j a_j/2 <= b < 1 (all for j < M), each recorded linear step w - (s_j/2)(K_j+L_j)w = r is uniquely solvable and the boxed eq:main-discrete-curvature-bound holds for every j <= M (i.e. for max_j): |Y_j| <= exp(D + A/(1-b)) (|Y_0| + sqrt(T D_X)/(1-b)) with the budgets eq:main-discrete-curvature-budgets. The skew part cancels by pairing with the midpoint before norms are taken; no restriction on s_j |K_j|_op is used. Scoped out (disclosed): the final sentence (uniform L^2(K) curvature bound from stable interval interpolation, lapse bound and reconstruction error) is the same analytic interpolation abstraction as thm:main-curvature-propagation and is not formalised."
   },
   "prop:main-action-current": {
     "env": "proposition",
     "title": "Sharp differentiated action-current certificate",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: action current, amplification, Gamma_X, opNorm H^{1/2} T G^{1/2}, source budget, sqrt(2 T).",
-    "difficulty": "medium",
-    "plan": "First box is finite matrix algebra: with H, G PosDef, write a = G^{1/2} b (CFC.sqrt on Matrix n n ℂ or any factorization G = Lᴴ L), so ‖T a‖_H = |H^{1/2} T G^{1/2} b| ≤ ‖H^{1/2}TG^{1/2}‖_op |b| and the operator norm is the least constant (Mathlib matrix L2 operator norm via Matrix.toEuclideanLin / ContinuousLinearMap.opNorm). Second box needs Hölder/Cauchy–Schwarz on [0,T*] (MeasureTheory.integral_mul_le_Lp_mul_Lq with integrability hypotheses) after ‖f‖^2 ≤ 2(ΓCΔ + ‖r‖^2); the discrete counterpart D_X ≤ 2Σ s_j(...) is a finite sum. No library counterpart; the finite part alone would be easy."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/ActionCurrentCertificateExact.lean:RenewalGeometry.sharp_current_transfer",
+      "RenewalGeometry/Action/ActionCurrentCertificateExact.lean:RenewalGeometry.amplification",
+      "RenewalGeometry/Action/ActionCurrentCertificateExact.lean:RenewalGeometry.normalizedTransfer",
+      "RenewalGeometry/Action/ActionCurrentCertificateExact.lean:RenewalGeometry.GramSqrt",
+      "RenewalGeometry/Action/ActionCurrentCertificateExact.lean:RenewalGeometry.dualNormSq_eq",
+      "RenewalGeometry/Action/ActionCurrentCertificateExact.lean:RenewalGeometry.GramSqrt.gramInv_apply_gram",
+      "RenewalGeometry/Action/ActionCurrentCertificateExact.lean:RenewalGeometry.source_gramNormSq_le",
+      "RenewalGeometry/Action/ActionCurrentCertificateExact.lean:RenewalGeometry.sq_integral_le_measure_mul_integral_sq",
+      "RenewalGeometry/Action/ActionCurrentCertificateExact.lean:RenewalGeometry.action_source_budget",
+      "RenewalGeometry/Action/ActionCurrentCertificateExact.lean:RenewalGeometry.discrete_source_budget"
+    ],
+    "note": "Proved on finite-dimensional real inner-product spaces with the positive Grams supplied through self-adjoint invertible square roots R = G^{1/2}, S = H^{1/2} (GramSqrt; the manuscript's H^{1/2}, G^{1/2}), Gram norm |x|_H^2 = <x, H x> = |H^{1/2} x|^2 and action dual norm |a|_{G^{-1}}^2 = <a, G^{-1} a> with G^{-1} = G^{-1/2} G^{-1/2} shown to invert G. First box eq:main-sharp-current-transfer: with Gamma = |H^{1/2} T G^{1/2}|_op^2 (Mathlib operator norm of the composed CLM), |T a|_H^2 <= Gamma |a|_{G^{-1}}^2 for all a, and Gamma is the least nonnegative constant with this property (sharp_current_transfer). Pointwise budget |f|_H^2 <= 2(Gamma C Delta + |r|_H^2) for f = T a + r (source_gramNormSq_le). Second box eq:main-action-source-budget: int_0^{T*} |f|_H <= sqrt(2 T* int_0^{T*} (Gamma C Delta + |r|_H^2)) by the elementary time Cauchy-Schwarz (int g)^2 <= |mu| int g^2 (action_source_budget; scoped: |f|_H square-integrable on [0,T*] and the right-hand integrand integrable, i.e. finite budgets). Discrete counterpart D_X <= 2 sum_j s_j (Gamma_j C_j Delta_j + |r_j|_{H_j}^2) for eps_j/s_j = T_j a_j + r_j (discrete_source_budget, with |eps_j| measured in the H_j Gram). Not formalised (not part of the boxed claims): the sharpness example Gamma = h^{-2} for a centered grid derivative and the expected-energy version."
   },
   "thm:main-curvature-compactness": {
     "env": "theorem",
@@ -289,53 +319,91 @@
   "thm:main-homogeneous-friedmann": {
     "env": "theorem",
     "title": "Vacuum Friedmann equations in renewal coordinates",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found for the renewal-coordinate action S[kappa,varrho], its Euler expressions E_u, E_v, or the equivalence with 3H^2 = Lambda, D_tau H = 0; searched: Friedmann, FLRW action, lapse Euler, varrho, kappa, Hubble. NCG/Gravity/FLRWReduction and CurvedFLRW concern a different (pure-deficiency) FLRW constraint.",
-    "difficulty": "medium",
-    "plan": "No library counterpart (Gravity/CurvedFLRW.lean is the pure-deficiency FLRW constraint). Define the Lagrangian L(u,v,u',v') = -(2/3)ϱ'^2/(ϱ^{4/3}√κ) - 2Λϱ^{4/3}√κ with κ = e^u, ϱ = e^v, define the Euler expressions E_u = ∂L/∂u - d/dt ∂L/∂u', E_v likewise (Mathlib deriv / HasDerivAt), and verify the two boxed formulas by chain-rule bookkeeping under a = ϱ^{1/3}, N = ϱ^{1/3}κ^{1/2}, H = a'/(N a); then stationarity ⇔ (3H^2 = Λ ∧ D_τ H = 0) is algebra using N a^3 > 0. The derivation of eq:main-renewal-rate-action from S[a,N] is a substitution identity (easy). Only the identification δS = ∫(E_u δu + E_v δv) via integration by parts (intervalIntegral.integral_mul_deriv_eq_deriv_mul with compactly supported variations) is a small extra lemma."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.renewalRateLagrangian",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.renewalRateLagrangian_eq_homogeneous",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.eulerU",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.eulerV",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.eulerU_eq",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.eulerV_eq",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.renewal_stationary_iff_friedmann",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.firstVariation_integrand_eq",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.momentum_boundary_term_integral_eq_zero"
+    ],
+    "note": "Proved. eq:main-renewal-rate-action: the boxed renewal-rate Lagrangian -(2 rho'^2)/(3 rho^{4/3} sqrt kappa) - 2 Lambda rho^{4/3} sqrt kappa equals the reduced Lagrangian -6 a a'^2/N - 2 Lambda N a^3 under rho = a^3, kappa = N^2/a^2 (renewalRateLagrangian_eq_homogeneous). With u = log kappa, v = log rho the Euler expressions E_u = dL/du - d/dt dL/du', E_v = dL/dv - d/dt dL/dv' (partial derivatives are Mathlib `deriv`s of the one-variable sections, the time derivative is `deriv`) equal the boxed eq:main-renewal-euler E_u = N a^3 (3H^2 - Lambda), E_v = N a^3 [4 D_tau H + (8/3)(3H^2 - Lambda)] with H = a'/(N a), D_tau = N^{-1} d/dt (eulerU_eq needs no differentiability; eulerV_eq needs u, v, v' differentiable at the evaluation time). Stationarity E_u = E_v = 0 is equivalent to 3H^2 = Lambda and D_tau H = 0 (renewal_stationary_iff_friedmann, eq:main-vacuum-friedmann). The identification delta S = int (E_u delta u + E_v delta v) is supplied as the pointwise first-variation identity d/d eps L = E_u delta u + E_v delta v + d/dt(p_v delta v) (firstVariation_integrand_eq) plus vanishing of the integrated exact term for endpoint-fixed delta v (momentum_boundary_term_integral_eq_zero); differentiation under the integral sign is not formalised (standard for smooth paths on a compact interval). The Einstein-component identification in the appendix (G_00, G_ij) is not formalised (not part of the theorem's boxed claims)."
   },
   "cor:main-derived-desitter-rates": {
     "env": "corollary",
     "title": "Flat and de Sitter rates are stationary renewal solutions",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.renewalDensity",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.renewalConductance",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.homogeneousRootRate",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.homogeneousVertexMass",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.hubble_eq_sign",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.scale_factor_of_hubble_const",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.IsStationaryRenewalSolution",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.IsStationaryRenewalSolution.friedmann",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.IsStationaryRenewalSolution.toStationaryHomogeneousSolution",
+      "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.IsStationaryRenewalSolution.derived_desitter_rates",
       "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.stationary_scale_factor_desitter",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.stationary_scale_factor_flat",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.stationary_solution_empty_of_neg",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.renewalTime_sub_eq_of_lapse_one",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.expanding_scale_factor_of_lapse_one",
       "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.desitter_regulator_rates",
-      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.desitter_regulator_rates_eq_branch"
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.stationary_scale_factor_flat",
+      "RenewalGeometry/Gravity/StationaryHomogeneousRenewalRates.lean:RenewalGeometry.IsStationaryHomogeneousSolution.stationary_solution_empty_of_neg"
     ],
-    "note": "Partial: StationaryHomogeneousRenewalRates.lean derives the boxed de Sitter rates (Lambda>0 exponential branches with sign sigma, Lambda=0 constant, Lambda<0 empty) and matches RelationalDeSitterBranch.rootRate/vertexMass, but takes the Friedmann constraint 3H^2 = Lambda (the conclusion of the still-open thm:main-homogeneous-friedmann) as the stationarity hypothesis; so the Lean proves 'theorem => corollary', not the corollary from variational stationarity.",
-    "difficulty": "medium",
-    "plan": "Formalise thm:main-homogeneous-friedmann (medium: artanh remainder bound and the homogeneous first variation); then this corollary closes by instantiating the existing file."
+    "note": "Proved (hypothesis discharged). IsStationaryRenewalSolution is a positive connected stationary solution of eq:main-renewal-rate-action in the literal sense E_u = E_v = 0 (Euler expressions of RenewalFriedmannExact.lean with u = log(N^2/a^2), v = log a^3); its lapse Euler equation gives the Friedmann constraint 3H^2 = Lambda (IsStationaryRenewalSolution.friedmann), hence the interface IsStationaryHomogeneousSolution of StationaryHomogeneousRenewalRates.lean, and derived_desitter_rates bundles: Lambda > 0 gives a = a(t0) exp(sigma H0 (tau - tau(t0))), sigma in {1,-1}; proper-time gauge on the expanding branch gives the boxed regulator rates eq:desitter-regulator-main; Lambda = 0 gives constant a; Lambda < 0 gives no positive solution. Scoped: open connected time set, a, N positive, a and tau differentiable with continuous derivative data (smooth homogeneous ansatz)."
   },
   "thm:main-finite-homogeneous-stationarity": {
     "env": "theorem",
     "title": "Finite stationary classification and de Sitter convergence",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: discrete homogeneous action, lapse constraint, stationary recurrence (1 + sigma omega s/2)/(1 - sigma omega s/2), second-order logarithmic error, omega^3 T h_t^2.",
-    "difficulty": "medium",
-    "plan": "No library counterpart. Encode S_d = -Σ_j [A_0 (q_{j+1}-q_j)^2/s_j + B_0 s_j q̄_j^2] as a function on (Fin (M+1) → ℝ) × (Fin M → ℝ) and compute its partial derivatives (Mathlib HasDerivAt on finite sums) to get eq:main-discrete-lapse-constraint and eq:main-discrete-scale-euler; the lapse constraint gives v_j = σ_j ω q̄_j, the scale equation forces σ_j = σ_{j−1} for positive q, yielding the rational recurrence; the converse is substitution. The error bound uses log((1+x)/(1−x)) = 2 artanh x (Mathlib Analysis/SpecialFunctions/Artanh.lean:artanh_eq_half_log) and a new lemma 0 ≤ artanh x − x ≤ x^3/(3(1−b^2)) for 0 ≤ x ≤ b < 1 (monotonicity via derivative x^2/(1−x^2)), summed with Σ s_j^3 ≤ T h_t^2."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.discreteAction",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.lapseEuler",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.scaleEuler",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.hasDerivAt_discreteAction_lapse",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.hasDerivAt_discreteAction_scale",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.IsFiniteStationary",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.IsPositivePath",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.SatisfiesRecurrence",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.stationary_recurrence_of_pos",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.stationary_of_recurrence",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.stationary_const_of_B_zero",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.no_positive_stationary_of_B_neg",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.log_ratio_sub_two_mul_le",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.log_ratio_eq_two_artanh",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.renewalTime",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.log_profile_error_le",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.scale_factor_log_error_le",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.density_log_error_le",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.conductance_log_error_le"
+    ],
+    "note": "Proved. Euler equations: the partial derivatives (HasDerivAt) of S_d = -sum_{j<M}[A_0 (q_{j+1}-q_j)^2/s_j + B_0 s_j qbar_j^2] in s_j (j<M) and in the interior node q_j (1<=j<M, endpoints fixed) are exactly eq:main-discrete-lapse-constraint and eq:main-discrete-scale-euler. Classification: for A_0,B_0>0, omega = sqrt(B_0/A_0), every positive stationary path (both Euler expressions vanish) has one common sign sigma in {+-1} with q_{j+1} = q_j (1+sigma omega s_j/2)/(1-sigma omega s_j/2) and 0<omega s_j/2<1; converse proved; Lambda=0 forces constant q, Lambda<0 has no positive stationary path. Convergence: with tau_j = sum_{i<j} s_i, T = sum_{j<M} s_j, s_j <= h_t, 0 <= omega h_t/2 <= b < 1: |log(q_j/q_0) - sigma omega tau_j| <= omega^3 T h_t^2/(12(1-b^2)) for all j<=M, via 0 <= log((1+x)/(1-x)) - 2x <= 2x^3/(3(1-b^2)) on [0,b] (= 2 artanh x remainder, proved by derivative monotonicity), and the induced (2/3, 2, 4/3)-scaled logarithmic errors for a_j = q_j^{2/3} (drift sigma H_0, H_0 = 2 omega/3), rho_j = q_j^2, kappa_j = q_j^{-4/3}. Scoped: sequences on N with indices j<=M; 0 <= b added (automatic when M>=1); the identification with the continuum profiles of cor:main-derived-desitter-rates is the displayed exponential bound (no separate limit statement)."
   },
   "thm:main-operational-action-matching": {
     "env": "theorem",
     "title": "Measured acceptance reconstructs the finite action",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: accept/reject, trial table, log Z_s, observed writer, off-shell action match, Lambda_act, Lambda_geom, rank-one cost. NCG/Grand/AcceptanceLikelihood and NCG/Renewal/AcceptedResponseLaw are unrelated.",
-    "difficulty": "medium",
-    "plan": "eq:main-observed-cost is immediate from the definitions Z_s, Q_s (same shape as Action/FiniteGibbsActionGap.lean:gibbsRow / gibbsPartition with η = 1/ε and c = E_s; cf. log_ratio_gibbsRow). eq:main-offshell-action-match is a telescoping finite sum of C(q_{j+1}^2 − q_j^2) against C(q_M^2 − q_0^2) (Finset.sum_range_sub). The mismatch box needs (a) the one-step minimizer of y ↦ E_s(x,y) and its s → 0 drift c = −C/A (a limit of a rational function), and (b) the de Sitter Einstein tensor identity G + Λ_geom g = 0 from Gravity/RelationalDeSitterBranch.lean:einstein_cosmological_vacuum with H = 2C/(3A)... so that G + Λ_act g = (Λ_act − Λ_geom) g = 4𝔇/(3A^2) g by algebra. Parts (a)-(b) are the new medium lemmas; the first two boxes are easy."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.stageAcceptance",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.stageNormalizer",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.stageAcceptedRow",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.observed_cost",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.observedWriter",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.bulkAction",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.observedWriter_eq_bulkAction",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.minimizerRatio",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.minimizerRatio_isMin",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.amplitudeDrift",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.tendsto_log_minimizerRatio_div",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.minimizer_skeleton_tendsto",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.actionLambda",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.geomLambda",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.skeletonHubble",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.geomLambda_eq_three_hubble_sq",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.bulkAction_eq_discrete_rescaled",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.actionLambda_sub_geomLambda",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.einsteinTensor",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.einstein_measured_mismatch",
+      "RenewalGeometry/Action/OperationalActionMatchingExact.lean:RenewalGeometry.OperationalActionMatching.einstein_matched_iff_rankDefect_zero"
+    ],
+    "note": "Proved. eq:main-observed-cost: E_s(x,y) = -eps log(Z_s Q_s/p_s) for finite alphabets F (Finset R) with positive proposal weights, eps != 0. eq:main-offshell-action-match: for every path with q_{j+1} in the stage alphabet the observed writer equals the bulk action identically (C terms telescope, Finset.sum_range_sub); the first-variation clause is read as this pointwise off-shell identity on the whole parametric domain (no separate derivative statement). Mismatch box: y -> E_s(x,y) is minimised at y = r(s) x with r(s) = (A - Bs^2/4)/(A + Bs^2/4 + Cs) (scoped: A,B,s>0, Bs^2 < 4A, C^2 <= AB), log r(s)/s -> c = -C/A as s -> 0 (HasDerivAt at s = 0), the n-step skeleton with step tau/n converges to q_0 e^{c tau}; Lambda_act = 4B/(3A) is the B_0/2 of the A/A_0-rescaled discrete action (A_0 = 8/3), Lambda_geom = 4C^2/(3A^2) = 3H^2 with H = 2c/3 (q = a^{3/2}); using RelationalDeSitterBranch.einstein_cosmological_vacuum for the de Sitter metric with Hubble rate H: G + Lambda_act g = (4 D/(3A^2)) g as 4x4 matrices, and the residual vanishes iff D = AB - C^2 = 0."
   },
   "thm:main-explicit-operational-family": {
     "env": "theorem",
@@ -350,10 +418,24 @@
     "env": "theorem",
     "title": "No transverse matching attraction under conservative blocking",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: blocking, hyperbolic composition E_{mu,theta,C}, AB = mu^2, Delta_rel, midpoint interval map, twist C. NCG/Grand/BlockingGap concerns spectral blocking of a projection and is unrelated.",
-    "difficulty": "medium",
-    "plan": "The core is finite algebra with hyperbolic functions (Mathlib Real.cosh_add/sinh_add): E_1(x,z)+E_2(z,y) is a quadratic in z with leading coefficient μ(coth θ_1 + coth θ_2) > 0 whose minimizer z* = (csch θ_1 x + csch θ_2 y)/(coth θ_1+coth θ_2) is positive for x,y > 0, so the inf over z > 0 is attained (complete the square; ciInf over Ioi 0), and substituting gives E_{μ,θ_1+θ_2,C} via coth/csch addition formulas. The (A',B',C') block map and invariance of AB, C, 𝔇, Δ_rel then follow from the dictionary A/s ± Bs/4 = μ coth θ, μ csch θ (Mathlib Artanh.lean for θ = 2 artanh). The final sentence (finite amplitude alphabets, low-temperature/grid limit recovering Δ_rel) is an analytic Laplace-method claim and should be split off as a separate (hard) record."
+    "lean": [
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.conservativeBlock",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.twoEdgeCost_add_eq",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.conservativeBlock_eq_of_sq",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.hyperbolicCost_add_eq",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.hyperbolicCost_conservativeBlock",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.hyperbolicCost_foldl_conservativeBlock",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.hyperbolic_blocking_invariants",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.measuredQuadraticCost_conservativeBlock_self",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.blockMap_invariants",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.blockMap_relativeDefect_pos",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.relative_defect_unit_invariant",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.midpoint_dictionary",
+      "RenewalGeometry/Action/ConservativeBlockingHyperbolicCost.lean:RenewalGeometry.ConservativeBlocking.measuredQuadraticCost_eq_hyperbolicCost"
+    ],
+    "note": "All displayed claims are proved: eq:main-hyperbolic-blocking (E_{mu,theta1,C} *_0 E_{mu,theta2,C} = E_{mu,theta1+theta2,C} as an exact inf over z>0, attained at the positive Schur minimizer; two-edge Schur identity lem:supp-two-edge-schur), invariance of mu^2=AB, C, D=AB-C^2 and Delta_rel under every finite sequence (List.foldl) of homogeneous blockings, the block map eq:main-homogeneous-block-map (A'=A+Bs^2/4, B'=AB/(A+Bs^2/4), C'=C) as the exact conservative block of two identical midpoint intervals under 0<s sqrt(B/A)<2, Delta_rel>0 preserved, invariance of C^2/(AB) under unit changes and common action rescaling, and the dictionary A/s +- Bs/4 = mu coth theta, mu csch theta with theta = 2 artanh((s/2)sqrt(B/A)). Scoped hypotheses: mu>0, theta_i>0, amplitudes x,y>0 (the paper's positive amplitude domain). NOT formalised: the closing sentence (finite positive amplitude alphabets with symmetric untwisted trial kernel: exact twist retention eq:supp-finite-twist-read and the low-temperature/grid limit eq:supp-finite-block-error); status kept open only for that sentence.",
+    "difficulty": "hard",
+    "plan": "Split the closing operational sentence into a separate record. Its first half (twist retention: L_C = D_C L_0 D_C^{-1} with L_0 symmetric gives eps/(2(x^2-y^2)) log(L_C^n(x,y)/L_C^n(y,x)) = C) is an easy finite Matrix induction; the second half (grid/low-temperature Laplace bound eq:supp-finite-block-error and continuity of the three-probe reconstruction) is hard analysis."
   },
   "prop:main-optimizer-composition": {
     "env": "proposition",
@@ -389,16 +471,34 @@
     "env": "proposition",
     "title": "Finite proposal-access certificate",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: proposal access, retry, KL >= -log p(G), exp(-R mu e^{-c/eps}), Gibbs acceptance rule with indicator.",
-    "difficulty": "medium",
-    "plan": "Finite probability: Z_j = Σ_y p_j(y) 1_G(y) e^{−E_j(y)/ε_j} gives μ_j e^{−c_j/ε_j} ≤ Z_j ≤ p_j(G) by termwise bounds (Finset.sum_le_sum), the KL bound D_KL(Q_j‖p_j) ≥ −log p_j(G) follows from the log-sum inequality / Jensen with Mathlib convexOn_mul_log (or Mathlib InformationTheory/KullbackLeibler data processing) applied to the partition {G, G^c}, building on Action/FiniteGibbsActionGap.lean:finiteKL / gibbsRow; the retry bound is (1−Z_j)^{R_j} ≤ exp(−R_j Z_j) with a union bound over stages under an independent-retries model (finite product measure, Real.add_one_le_exp). The last two sentences (inheritance from thm:main-gowdy-regulator, a.s. along refinements) are conditional on the hard Gowdy theorem plus Borel–Cantelli (MeasureTheory.measure_limsup_eq_zero) and should be stated as a separate conditional clause."
+    "lean": [
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.safeAcceptance",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.safeNormalizer",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.safeAcceptedRow",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.proposalMass",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.safeNormalizer_bounds",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.finiteKL_ge_neg_log_mass",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.safeAcceptedRow_finiteKL_ge",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.safeNormalizer_pos",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.stage_failure_le",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.retry_failure_bound",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.retry_failure_bound_of_floor",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.retry_cap_sufficient",
+      "RenewalGeometry/Action/SafeProposalAccessExact.lean:RenewalGeometry.SafeProposalAccess.ae_eventually_no_failure"
+    ],
+    "note": "All displayed bounds are proved: eq:main-safe-proposal-bounds (mu e^{-c/eps} <= Z <= p(G) for the rule 1_G exp(-E/eps) with 0<=E<=c on G, eps>0, p(G)>=mu; D_KL(Q||p) >= -log p(G) for every probability row Q supported on G with Q<<p, in particular for the accepted row, using finiteKL from Action/FiniteGibbsActionGap), eq:main-safe-retry-bound on a measure space (independent reset attempts per stage, each failing with probability <= 1 - Z_j; Pr(some stage j<J fails) <= sum_j exp(-R_j Z_j) <= sum_j exp(-R_j mu_j e^{-c_j/eps_j})), the sufficient cap eq:supp-safe-retry-cap giving total failure <= delta, and the Borel-Cantelli clause (summable failure probabilities along a refinement => a.s. only finitely many refinements fail, no independence between refinements). Retries are modelled by independent failure events (ProbabilityTheory.iIndepSet) with a per-attempt bound, which is the 'genuine reset' hypothesis. NOT formalised: 'every successful history inherits the pathwise curvature and independent action-test estimates of thm:main-gowdy-regulator' (that theorem is hard and absent from the library); status kept open only for this inheritance clause.",
+    "difficulty": "hard",
+    "plan": "Split off the inheritance clause: once thm:main-gowdy-regulator (hard) has a Lean statement of its pathwise curvature/action-test bounds on admissible supports, the inheritance is the trivial observation that successful histories lie in the admissible product set; the remaining displayed content of this proposition is already proved here."
   },
   "mt:vacuum": {
     "env": "theorem",
     "title": "Stationary flat and de Sitter renewal regulators",
     "status": "conditional_interface",
     "lean": [
+      "RenewalGeometry/Gravity/VacuumRegulatorAssembly.lean:RenewalGeometry.VacuumRegulatorAssembly.vacuum_regulator_assembly",
+      "RenewalGeometry/Gravity/VacuumRegulatorAssembly.lean:RenewalGeometry.VacuumRegulatorAssembly.omega_of_hubble",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.stationary_recurrence_of_pos",
+      "RenewalGeometry/Gravity/FiniteHomogeneousStationarityExact.lean:RenewalGeometry.FiniteHomogeneousStationarity.scale_factor_log_error_le",
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.adm_variables_exact",
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.spatialMetric_posDef",
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.slab_spatial_constants_common_lower",
@@ -410,9 +510,9 @@
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.compact_desitter_global_slicing_certificate",
       "RenewalGeometry/Gravity/RelationalFlatVacuum.lean:RenewalGeometry.relational_flat_vacuum"
     ],
-    "note": "Partial: (ii) the A3 root law reconstructs the displayed ADM variables (flat: tight-frame identity and h/8 conductance; de Sitter: lapse 1, shift 0, metric exp(2Ht) I); (iii) the de Sitter metric equals the FLRW metric and satisfies Ric - (R/2) g + Lambda g = 0 with Lambda = 3H^2 and R = 12H^2; (iv) one positive slab margin bounds the cut, Poincare, counting and screen constants uniformly on |t| <= T; (v) the curvature tensor is the explicit constant-curvature tensor (flat: zero), bounded on slabs; (vi) along h_n = 2^{-n^2} the time transport is metric-unitary and the normalized torsion/curvature/Palatini defects are O(h_n) and summable. Missing: (i) the lapse-varied Euler system and the finite-to-continuum stationary limit, the actual h -> 0 convergence of the regulator sequence to the metric (only the explicit continuum objects are checked), and the operational accept/reject realization. Legacy: thm:relational-deSitter-branch proved, cor:relational-flat-vacuum audited SLICE_THIN.",
-    "difficulty": "medium",
-    "plan": "Clauses (ii)-(vi) are proved in Gravity/RelationalDeSitterBranch.lean (adm_variables_exact, einstein_cosmological_vacuum, slab_spatial_constants_common_lower, cartan_constant_sectional_curvature, timeTransport_metric_unitary, explicit_geometric_defects_summable) and Gravity/RelationalFlatVacuum.lean:relational_flat_vacuum. Missing for (i): the Friedmann Euler system (thm:main-homogeneous-friedmann, medium) and the finite-to-continuum limit (thm:main-finite-homogeneous-stationarity, medium); the 'h → 0 convergence of the regulator sequence' is trivial on this branch since rootRate/vertexMass give h-independent ADM variables (adm_variables_exact). Then one assembly theorem. The closing sentence about the accept/reject realization depends on thm:main-explicit-operational-family (hard) and should be split off."
+    "note": "Partial, extended. New assembly theorem vacuum_regulator_assembly (Gravity/VacuumRegulatorAssembly.lean) conjoins for the de Sitter branch with Hubble rate H>=0 (Lambda = 3H^2; H = 0 is the flat branch): the finite-to-continuum half of (i) (the finite common-sign stationary recurrence of thm:main-finite-homogeneous-stationarity with omega = 3H/2 converges with second-order logarithmic error to a_0 e^{sigma H tau}, from the new FiniteHomogeneousStationarityExact.lean), (ii) ADM variables from the A3 root law (speed density e^{3Ht}, metric e^{2Ht} I, lapse 1, shift 0; flat tight-frame identity and h/8 conductance), (iii) Ric - (R/2)g + Lambda g = 0 with Lambda = 3H^2, (iv) uniform slab margins, (v) explicit constant-curvature tensor (zero for H = 0), (vi) metric-unitary time transport and summable normalised torsion/curvature/Palatini defects along h_n = 2^{-n^2}. Still missing: the first half of (i), that the profiles solve the lapse-varied Euler system of thm:main-homogeneous-friedmann (being proved concurrently in Gravity/RenewalFriedmannExact.lean: IsStationaryRenewalSolution.friedmann / derived_desitter_rates; deliberately not imported here), and the closing sentence (accept/reject realisation of thm:main-explicit-operational-family, hard).",
+    "difficulty": "hard",
+    "plan": "Once Gravity/RenewalFriedmannExact.lean is stable, add one clause to vacuum_regulator_assembly: the de Sitter profile a = a_0 exp(H tau), N = 1 is an IsStationaryRenewalSolution (eulerU = eulerV = 0), closing clause (i). Then split the closing sentence (thm:main-explicit-operational-family, hard: finite grids, temperature schedule, entropy-energy estimate, retry bound, Borel-Cantelli) into its own record; without it mt:vacuum stays conditional."
   },
   "def:supp-event-grammar": {
     "env": "definition",

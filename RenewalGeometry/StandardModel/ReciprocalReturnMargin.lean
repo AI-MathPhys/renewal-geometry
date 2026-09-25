@@ -143,9 +143,10 @@ variable [DecidableEq V] [DecidableEq N]
 variable (v : G → Matrix V V ℂ) (h : Matrix N N ℂ) (A : Matrix (V × N) T ℂ)
   (B : Matrix (V × N) H ℂ)
 
-/-- The returned word `r_{g,k} = B^* (v_g ⊗ h^k) A : T → H_priv`. -/
+/-- The returned word `r_{g,k} = B^* (v_g ⊗ h^k) A : T → H_priv`.  (Mathlib's `⊗ₖ`
+binds tighter than `^`, so the inner parentheses around `h ^ k` are essential.) -/
 def returnWord (g : G) (k : ℕ) : Matrix H T ℂ :=
-  Bᴴ * (v g ⊗ₖ h ^ k) * A
+  Bᴴ * (v g ⊗ₖ (h ^ k)) * A
 
 /-- The reciprocal-return mass
 `m_ret = |G|⁻¹ ∑_g ∑_{k<n} ‖r_{g,k}‖²_HS`. -/
