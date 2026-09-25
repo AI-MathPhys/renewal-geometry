@@ -2,15 +2,18 @@
   "def:finite-interface": {
     "env": "definition",
     "title": "Finite classical Einstein--Standard-Model interface",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/StandardModel/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.RegulatedSMConfiguration",
-      "RenewalGeometry/StandardModel/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.explicitRegulatedStandardModelAction",
+      "RenewalGeometry/StandardModel/FiniteEinsteinStandardModelInterface.lean:RenewalGeometry.FiniteInterface",
+      "RenewalGeometry/StandardModel/FiniteEinsteinStandardModelInterface.lean:RenewalGeometry.CoefficientBank",
+      "RenewalGeometry/StandardModel/FiniteEinsteinStandardModelInterface.lean:RenewalGeometry.higgsRep",
+      "RenewalGeometry/StandardModel/FiniteEinsteinStandardModelInterface.lean:RenewalGeometry.FiniteInterface.action",
+      "RenewalGeometry/StandardModel/FiniteEinsteinStandardModelInterface.lean:RenewalGeometry.FiniteInterface.metric_det_neg",
+      "RenewalGeometry/StandardModel/FiniteEinsteinStandardModelInterface.lean:RenewalGeometry.FiniteInterface.gaugeGroupPresentation",
+      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.SMGaugeGroup",
       "RenewalGeometry/StandardModel/SMGroup.lean:RenewalGeometry.sm_group"
     ],
-    "note": "Partial: RegulatedSMConfiguration/explicitRegulatedStandardModelAction encode a finite link/vertex Standard-Model configuration with the four-term (Euclidean) matter action of (I2)-(I4), and sm_group proves the quotient presentation S(U(3)xU(2)) = (SU(3)xSU(2)xU(1))/Z_6 of eq:gauge-group ; missing: the Lorentzian carrier and coframe variables (I1), the common gravity+matter action with its relative normalization (I4, gravity part), the positive source geometry (I5), and any single structure bundling (I1)-(I5).",
-    "difficulty": "medium",
-    "plan": "Write a Lean structure FiniteInterface bundling: a finite-dimensional real vector space Q_h (configuration chart), a differentiable common action S_h = S_g + S_SM : Q_h -> R (fields for both pieces plus the relative normalization constant), a coefficient bank record theta, the finite Dirac/Yukawa incidence operator, and a positive-definite Gram on the retained variation directions (I5). Reuse RenewalGeometry/StandardModel/ExplicitRegulatedStandardModelActionExact.lean:RegulatedSMConfiguration / explicitRegulatedStandardModelAction for the matter part and SMGroup.lean:sm_group for (I2). Missing: the Lorentzian carrier/coframe fields (I1) can only be carried as an abstract field (a coframe map plus an oriented signature predicate, cf. Lorentz/Reconstruction.lean:MarkedDiracDatum) since no manifold reconstruction exists; the gravity action must be an abstract differentiable functional. Definition only, no theorem."
+    "note": "Encoded: the structure FiniteInterface h bundles (I1) a finite site set, a finite-dimensional real inner-product configuration chart Q_h and local coframe variables e(x) in GL(4,R) with orientation (det e > 0, so the reconstructed metric e^T eta e is a nondegenerate Lorentzian metric: metric_det_neg) and time orientation; (I2) the fixed gauge group SMGaugeGroup = S(U(3)xU(2)) with its Z_6 presentation (gaugeGroupPresentation = smGaugeQuotientEquiv, eq:gauge-group), one retained chiral fermion representation of one generation with an equivariant chirality involution, the rank-three generation factor (spinor fields Site -> Fin 3 -> OneGeneration), the Higgs doublet with the weak U(2) action higgsRep, and an optional neutral/Majorana block type; (I3) a gauge-covariant finite Dirac/Yukawa incidence operator and the coefficient bank CoefficientBank = (kappa, Lambda, g1, g2, g3, lambda_H, v_H, Yukawa 3x3 matrices per sector); (I4) the differentiable common action S = S_g + nu S_SM with one positive relative normalization and finite local gauge invariance; (I5) a symmetric PSD Gram operator on Q_h, positive definite on the retained variation directions. Disclosed: the smooth comparison cylinder M and reconstruction are not encoded (only the finite coframe reader); the gravity and matter actions are abstract differentiable functionals (the lattice realisation explicitRegulatedStandardModelAction is not enforced); relabeling covariance is not included."
   },
   "prop:renewal-interface": {
     "env": "proposition",
@@ -94,29 +97,49 @@
   "thm:source-selection": {
     "env": "theorem",
     "title": "Same-record selection from the actual signed action drift",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: stopped action drift, legal-edge mask, telescoping subprobability masses, Markov inequality selection score, exit probability.",
-    "difficulty": "medium",
-    "plan": "Finite-state, finite-horizon probability. Model: Fintype state X, sub-stochastic legal kernels K_j (nonneg rows summing to <= 1; cf. MarkovChains/FiniteMarkovHeatKernel.lean RowStochastic/EntrywiseNonnegative), surviving masses mu_{j+1} = mu_j K_j, actions a_h : X -> [A^-, A^+]. Prove (i) the telescoping identity sum_j sum_x mu_j(x) d_{h,j}(x) = sum_x mu_J(x) a(x) - a(x_0) - (killed mass credited at last legal value) >= -D_h^A, hence eq:source-slope-occupation from the drift inequality; (ii) build the finite path measure of the stopped chain (product of kernels on Fin (J+1) -> X, a Finset-weighted PMF) and apply Markov's inequality to the mean score to get eq:source-selection-failure. Missing: the finite path-measure construction with killing and the deterministic min-score argument; all finite sums, several days."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/SameRecordSourceSelectionExact.lean:RenewalGeometry.SourceSelection.FiniteAcceptedProcess.selection_failure_le",
+      "RenewalGeometry/Action/SameRecordSourceSelectionExact.lean:RenewalGeometry.SourceSelection.FiniteAcceptedProcess.slope_occupation",
+      "RenewalGeometry/Action/SameRecordSourceSelectionExact.lean:RenewalGeometry.SourceSelection.FiniteAcceptedProcess.mass_drift_eq",
+      "RenewalGeometry/Action/SameRecordSourceSelectionExact.lean:RenewalGeometry.SourceSelection.FiniteAcceptedProcess.sum_mass_drift_ge",
+      "RenewalGeometry/Action/SameRecordSourceSelectionExact.lean:RenewalGeometry.SourceSelection.FiniteAcceptedProcess",
+      "RenewalGeometry/Action/SameRecordSourceSelectionExact.lean:RenewalGeometry.SourceSelection.FiniteAcceptedProcess.actionDrift",
+      "RenewalGeometry/Action/SameRecordSourceSelectionExact.lean:RenewalGeometry.SourceSelection.FiniteAcceptedProcess.stoppedAction"
+    ],
+    "note": "Fully finite formalisation: FiniteAcceptedProcess = probability weights on a finite outcome space (no Markov assumption; the outcome carries the whole past), records X_j, decreasing legal surviving sets S_j from the legal-edge mask; survivingMass mu_j(x), legalKernel K^leg_j(x,y) = P(S_{j+1}, X_j=x, X_{j+1}=y)/mu_j(x), actionDrift eq:source-action-drift, stoppedAction Z_j retaining the last legal value, exitProbability = 1 - sum_x mu_J(x), occupation averages. mass_drift_eq proves eq:app-stopped-drift (sum_x mu_j d_j = E[Z_{j+1}-Z_j]), sum_mass_drift_ge the telescope >= -D^A, slope_occupation proves eq:source-slope-occupation from the drift inequality on active rows (mu_j(x) > 0), and selection_failure_le proves the boxed eq:source-selection-failure for any selection rule returning, on each surviving outcome, an index < J minimising the score eq:source-score. Disclosed: W_h = (i+gamma)^2 is carried as one nonnegative readout with threshold W <= alpha^2; g, V >= 0 and A^- <= a <= A^+ assumed on the whole legal state space; probabilities are finite weighted sums."
   },
   "prop:native-reader": {
     "env": "proposition",
     "title": "Exact native-energy to physical-tail certificate",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: affine reader, weighted high-frequency coefficient map, kernel condition T ker Q = 0, Moore-Penrose square root pinv, weighted ell^1 duality.",
-    "difficulty": "medium",
-    "plan": "Finite-dimensional linear algebra. State with H_src = EuclideanSpace R n, Q positive semidefinite (Matrix.PosSemidef), T : H_src -> (block index -> R^d) linear, weight w_l > 0, and tau as the weighted block-l^1 norm. Prove: a constant c with sum_l w_l ||T_l xi|| <= c <xi,Q xi>^{1/2} for all xi exists iff T (ker Q) = 0 (necessity: kernel vectors have zero energy; sufficiency: restrict to (ker Q)^perp where Q is definite, finite-dimensional norm equivalence). The optimal-constant formula needs Q^{dagger/2}: build it from Analysis/HermitianMoorePenroseInverse.lean:hermitianMoorePenroseInverse combined with Matrix.PosSemidef.sqrt (or diagonalize once via Matrix.IsHermitian.spectral_theorem) and then it is the operator norm of T Q^{dagger/2} from l^2 to weighted l^1 (a finite sup). Affine offset by triangle inequality."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/NativeReaderCertificateExact.lean:RenewalGeometry.NativeReader.exists_readerConstant_iff_kernel",
+      "RenewalGeometry/Action/NativeReaderCertificateExact.lean:RenewalGeometry.NativeReader.readerConstant_isLeast",
+      "RenewalGeometry/Action/NativeReaderCertificateExact.lean:RenewalGeometry.NativeReader.affine_reader_tail",
+      "RenewalGeometry/Action/NativeReaderCertificateExact.lean:RenewalGeometry.NativeReader.readerConstant",
+      "RenewalGeometry/Action/NativeReaderCertificateExact.lean:RenewalGeometry.NativeReader.IsReaderConstant",
+      "RenewalGeometry/Action/NativeReaderCertificateExact.lean:RenewalGeometry.NativeReader.KernelCondition",
+      "RenewalGeometry/Action/NativeReaderCertificateExact.lean:RenewalGeometry.NativeReader.SpectralDiag.pinvSqrt",
+      "RenewalGeometry/Action/NativeReaderCertificateExact.lean:RenewalGeometry.NativeReader.SpectralDiag.Q_pinvSq_Q",
+      "RenewalGeometry/Action/NativeReaderCertificateExact.lean:RenewalGeometry.NativeReader.SpectralDiag.pinvSq_Q_pinvSq"
+    ],
+    "note": "Finite-dimensional linear algebra, fully proved. Source space H = finite-dimensional real inner-product space, native energy Q symmetric with <xi,Q xi> >= 0, weighted coefficient map T : H -> (modes -> F) linear, positive weights w, tail tau_w(v) = sum_l w_l ||v_l||. exists_readerConstant_iff_kernel: a finite c with tau_w(T xi) <= c <xi,Q xi>^{1/2} for all xi exists iff T(ker Q) = 0 (eq:source-reader-kernel). readerConstant := ||T Q^{dagger/2}||_{2->l^1(w)} = sup_{||y||<=1} tau_w(T Q^{dagger/2} y), where Q^{dagger/2} = SpectralDiag.pinvSqrt is built from Mathlib's finite spectral theorem (diagonal in the eigenbasis with lambda_i^{-1/2} on the nonzero spectrum, 0 on the kernel); it is symmetric, positive, and its square satisfies the Penrose identities Q Q^dagger Q = Q and Q^dagger Q Q^dagger = Q^dagger (Q_pinvSq_Q, pinvSq_Q_pinvSq), so it is the positive square root of the Moore-Penrose inverse. readerConstant_isLeast: under the kernel condition this constant is admissible and is the least nonnegative admissible constant (eq:source-reader-constant). affine_reader_tail: the affine reader u = u^soft + R xi inherits eq:source-reader-tail with the offset tau(u^soft) by the triangle inequality. Disclosed: T is any linear coefficient map (its identification with the |l|_inf > K Fourier coefficients of R is carried abstractly); optimality is stated among nonnegative constants."
   },
   "cor:native-reader-sobolev": {
     "env": "corollary",
     "title": "Sobolev positive-form reader criterion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: Sobolev positive-form reader, diagonal multiplier (1+|l|^2)^{1/2}, dyadic shell count O(R^4), K^{2-q} tail.",
-    "difficulty": "medium",
-    "plan": "Two finite pieces: (a) from R^* L^{2q} R <= C_R Q and ||u_soft||_{H^q} <= C_R deduce ||u_h(x)||_{H^q} <= C(1+sqrt V) with H^q the weighted l^2 norm sum (1+|l|^2)^q |u_hat(l)|^2 on the finite mode set, a Loewner-order inequality on finite matrices (easy); (b) the lattice-sum bound A_{N,K,m,q}^2 = sum_{K<|l|_inf<=N} (1+|l|_1/K)^{2m} (1+|l|_2^2)^{-q} <= C K^{4-2q} for q > m+2, via dyadic shells in Z^4 with O(R^4) points (needs a counting lemma #{l in Z^4 : |l|_inf <= R} <= (2R+1)^4 and comparisons |l|_1 <= 4|l|_inf, |l|_2 >= |l|_inf) and Cauchy-Schwarz (Parseval on the finite Fourier index set). Missing: the shell-counting/geometric-sum estimate and the identification of tau_{h,j} with the weighted l^1 tail; all finite sums, several days. Sharpness clause optional."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.sobolev_reader_criterion",
+      "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.tail_le_sobolev",
+      "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.latticeSum_le",
+      "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.tail_le_sqrt_latticeSum_mul_sobolev",
+      "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.card_shell_le",
+      "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.tail",
+      "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.sobolevSq"
+    ],
+    "note": "Proved on the concrete four-dimensional mode lattice (modes l : Fin 4 -> Z, |l|_inf natural, |l|_1 and |l|_2^2 real, coefficients in a normed space F, mode set Lambda any finite set inside the box |l|_inf <= N, 1 <= K <= N): tail_le_sqrt_latticeSum_mul_sobolev is Parseval-Cauchy-Schwarz eq:app-exact-tail-sum with tau_{h,j}(K;u) = sum_{|l|_inf>K} (1+|l|_1/K)^j |u_hat(l)| and ||u||_{H^q}^2 = sum (1+|l|_2^2)^q |u_hat(l)|^2; card_shell_le is the shell count #{|l|_inf = R} <= 80 R^3; latticeSum_le is A^2 <= 80 25^j/(2q-2j-4) K^{4-2q} for q > j+2 via shells and the integral comparison sum_{K<R<=N} R^{-s} <= K^{1-s}/(s-1); tail_le_sobolev is eq:app-sharp-tail tau_{h,j}(K;u) <= C_{q,j} K^{2-q} ||u||_{H^q} with the explicit C_{q,j} = sqrt(80 25^j/(2q-2j-4)). sobolev_reader_criterion is eq:source-reader-Sobolev: with the positive-form inequality R^* L^{2q} R <= C_R Q rendered as ||R xi||_{H^q}^2 <= C_R <xi,Q xi> and ||u^soft||_{H^q} <= C_R, every record with <xi,Q xi> <= V has ||u_h(x)||_{H^q} <= max(C_R, sqrt C_R)(1+sqrt V) and, for every j with q > j+2, tau_{h,j}(K;u_h(x)) <= C_{q,j} max(C_R, sqrt C_R) K^{2-q} (1 + sqrt V) (the paper's 0 <= j <= m < q-2). Disclosed: the sharpness clause (shell-supported examples, logarithmic divergence at q = m+2) and the composition threshold q > k+5 are not formalised; the normalisation by h of the periodic box is absorbed in the mode indexing."
   },
   "thm:native-selected-closure": {
     "env": "theorem",
@@ -148,23 +171,25 @@
   "thm:prefix-stationarity": {
     "env": "theorem",
     "title": "Alternative finite-prefix stationarity criterion",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.descent_upper",
-      "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.bregman_floor"
+      "RenewalGeometry/Action/FinitePrefixStationarityExact.lean:RenewalGeometry.PrefixStationarity.prefix_average",
+      "RenewalGeometry/Action/FinitePrefixStationarityExact.lean:RenewalGeometry.PrefixStationarity.prefix_selected",
+      "RenewalGeometry/Action/FinitePrefixStationarityExact.lean:RenewalGeometry.PrefixStationarity.step_bound",
+      "RenewalGeometry/Action/FinitePrefixStationarityExact.lean:RenewalGeometry.PrefixStationarity.descent_lower_on",
+      "RenewalGeometry/Action/FinitePrefixStationarityExact.lean:RenewalGeometry.PrefixStationarity.prefixBalance"
     ],
-    "note": "Partial: descent_upper proves the Taylor descent inequality f(a+v) <= f(a) + <grad f(a),v> + (Lambda/2)||v||^2 used in eq:prefix-descent1, and bregman_floor the strong-convexity floor (m/2)||v||^2 <= D_Psi used for the potential Psi_h ; missing: the balance residual b_j, the telescoped prefix average eq:prefix-average with the h^{-2} Hessian-scale constants, and the selected-slope conclusion eq:prefix-selected (the legacy file instead treats a stationary law of an accepted kernel).",
-    "difficulty": "medium",
-    "plan": "Finite-dimensional descent calculation on an inner-product space E (the mass norm). Take eq:prefix-Fisher and eq:prefix-Hessian as hypotheses (Hessian bound as a Lipschitz bound on the gradient: ||grad A(x)-grad A(y)|| <= K_0 h^{-2}||x-y||, strong convexity of Psi as (grad Psi(y)-grad Psi(x), y-x) >= g_* ||y-x||^2 and Lipschitz g^*). Reuse RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:descent_upper (Taylor descent inequality eq:prefix-descent1) and bregman_floor; then the algebra of app:prefix-stationarity (Young's inequality, E(x) = b_j - upsilon^{-1}(p(y)-p(x)) + (E(x)-E(y)), squaring, summing, telescoping A(theta_0)-A(theta_J) <= D_0, taking the min of a finite list) is elementary Finset.sum manipulation. Missing: only this assembly with explicit constants C_0, D_1; the file's later stationary-law material is not needed."
+    "note": "Proved on an abstract real inner-product space E whose norm is the mass norm: on a convex chart Theta where the local action has gradient E_h with the Hessian scale eq:prefix-Hessian rendered as the Lipschitz bound ||E_h x - E_h y|| <= K0 h^-2 ||x-y|| and oscillation <= D0, and the operational potential enters through its gradient p with eq:prefix-Fisher rendered as g_* ||y-x||^2 <= <p y - p x, y - x> and ||p y - p x|| <= g^* ||y-x||, with upsilon_h = upsilon0 h^2 and upsilon0 K0 < g_*/2, prefix_average gives eq:prefix-average for every finite sequence theta_0..theta_J in Theta with the explicit constants C0 = 4 l0^2/a0, D1 = 2 + 2 l0^2/a0^2 (a0 = g_*/upsilon0 - K0/2, l0 = g^*/upsilon0 + K0), and prefix_selected gives eq:prefix-selected as ||E_h(theta_j*)|| <= sqrt(C0) h^-1 sqrt(D0/J) + sqrt(D1) (J^-1 sum ||b_j||^2)^{1/2} for a minimising index (the paper's C = max(sqrt C0, sqrt D1)). Chart-restricted Taylor/descent inequality eq:prefix-descent1 proved from scratch (descent_lower_on). The lattice-specific identification of the finite field chart and of ||.||_{0,h} with h^4 sum |v(x)|^2 is not encoded (E abstract)."
   },
   "cor:prefix-table": {
     "env": "corollary",
     "title": "Finite-table certification for the prefix-balance entrance",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: finite-table certification, safe set, exit probability, balance sum, Markov inequality, dyadic Borel-Cantelli.",
-    "difficulty": "medium",
-    "plan": "Needs a finite-horizon path measure for the tabled transitions (same construction as thm:source-selection), the pathwise inequality of thm:prefix-stationarity on the safe event G, Markov's inequality (MeasureTheory.mul_meas_ge_le_lintegral) to get eq:prefix-table-probability, and the first Borel-Cantelli lemma (MeasureTheory.measure_limsup_eq_zero) along a dyadic cutoff family on a common probability space. Missing: the path measure with safe-set indicator and the Markov step; several days once thm:prefix-stationarity is done."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/FinitePrefixStationarityExact.lean:RenewalGeometry.PrefixStationarity.prefix_table_probability",
+      "RenewalGeometry/Action/FinitePrefixStationarityExact.lean:RenewalGeometry.PrefixStationarity.eventually_certified_of_summable"
+    ],
+    "note": "prefix_table_probability: on a probability space (Omega,P) carrying the accepted record theta_j : Omega -> E, a measurable safe event G on which the prefix stays in the chart (all hypotheses of thm:prefix-stationarity assumed on the chart), and integrable safe-indicated squared slopes/balances (finite tables), the probability that omega is unsafe or every observed slope exceeds h^alpha is <= P(G^c) + C0 D0/(J h^{2+2 alpha}) + D1 h^{-2 alpha} Q^bal with Q^bal = (1/J) sum_j E[1_G ||b_j||^2] (Markov's inequality on the safe-indicated pathwise average; holds for every real alpha, in particular 0 < alpha <= 1). eventually_certified_of_summable: the dyadic Borel-Cantelli clause (summable failure bounds on a common probability space => a.s. eventually certified, no independence). Disclosed: the fixed constant in the O(h^alpha) bound is taken as 1 (rescale h^alpha for another constant); D0 >= 0 assumed explicitly."
   },
   "cor:generated-nonempty": {
     "env": "corollary",
@@ -428,11 +453,14 @@
   "prop:monotonicity": {
     "env": "proposition",
     "title": "A sufficient Euclidean defect-removal mechanism",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: strongly monotone operator, coercive Euclidean Higgs operator, weak-to-strong V cap L^4.",
-    "difficulty": "medium",
-    "plan": "Abstract Hilbert-space monotone-operator argument. State: V real Hilbert space with a second norm ||.||_4 (continuous embedding), A_h : V -> V' (or V -> V via Riesz) satisfying the strong monotonicity inequality, H_h weakly convergent to H (WeaklyConverges as in OperatorLimits/VaryingHilbertWeakStrongPairing.lean, or Mathlib's WeakSpace), A_h(H_h) = J_h -> J and A_h(H) -> J strongly in V'. Then <J_h - A_h(H), H_h - H> -> 0 by strong-times-bounded-weak pairing (Continuum/WeakStrongBilinearPairingExact.lean:tendsto_of_strong_of_bounded_weak; boundedness of weakly convergent sequences via Banach-Steinhaus), so c_1||H_h-H||_V^2 + c_2||H_h-H||_4^4 -> 0. Missing: only the assembly with a dual-space formulation; the 'covariant H^1 norm' clause should be read as V's norm. Several days."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Continuum/MonotoneDefectRemovalExact.lean:RenewalGeometry.MonotoneDefectRemoval.tendsto_of_monotone",
+      "RenewalGeometry/Continuum/MonotoneDefectRemovalExact.lean:RenewalGeometry.MonotoneDefectRemoval.norm_bounded_of_weak_tendsto",
+      "RenewalGeometry/Continuum/MonotoneDefectRemovalExact.lean:RenewalGeometry.MonotoneDefectRemoval.pairing_tendsto_zero",
+      "RenewalGeometry/Continuum/MonotoneDefectRemovalExact.lean:RenewalGeometry.MonotoneDefectRemoval.tendsto_zero_of_pow_tendsto_zero"
+    ],
+    "note": "Proved abstractly: V a real normed space (the Hilbert structure is not used), n4 : V -> R a nonnegative second norm (the L^4 norm; the continuous embedding V -> L^4 is not needed for the argument), A_n : V -> V' = StrongDual R V with c1 ||u-v||^2 + c2 n4(u-v)^4 <= <A_n u - A_n v, u - v>, c1, c2 > 0. If H_n converges weakly to H (every continuous linear functional converges), A_n(H_n) -> J and A_n(H) -> J in the dual norm, then H_n -> H in V and n4(H_n - H) -> 0 (tendsto_of_monotone). Norm boundedness of the weakly convergent sequence is derived (Banach-Steinhaus through the isometric double-dual embedding, norm_bounded_of_weak_tendsto), the pairing <J_n - A_n H, H_n - H> -> 0 is the strong-dual times bounded estimate (pairing_tendsto_zero), and each nonnegative left-hand term is squeezed. Sequences are indexed by N (the cutoff sequence h_n). Not formalised: the closing remark that strong V cap L^4 convergence makes both Higgs defect measures vanish (interpretation in terms of the paper's defect objects)."
   },
   "thm:hyperbolic": {
     "env": "theorem",
@@ -464,11 +492,17 @@
   "prop:critical-shadowing": {
     "env": "proposition",
     "title": "Nondegenerate critical-point shadowing",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: Newton shadowing, frozen-Newton contraction, uniformly invertible linearized Euler map; the only ContractingWith uses (Grand/RenewalStateTransportCompleteMetricExact.lean) concern state transport, not a Newton map.",
-    "difficulty": "medium",
-    "plan": "Self-contained finite-dimensional frozen-Newton contraction. State on a finite-dimensional (or complete) normed space X with F : X -> X, B = (DF(x0))^{-1} with ||B|| <= M, DF Lipschitz with constant L on a ball, ||F(x0)|| <= C_0 h. Show T(x) = x - B F(x) maps the closed ball of radius rho = 2 M C_0 h into itself and is a contraction with constant M L rho < 1/2 for small h (mean-value inequality Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le applied to x -> x - B F(x), whose derivative is B(DF(x0) - DF(x))), then Mathlib's ContractingWith.exists_fixedPoint on the complete ball; conclude F(x*) = 0 and the reconstruction bound from the Lipschitz hypothesis (S4). Missing: everything but Mathlib primitives; no library file has this Newton argument (ContractingWith appears only in Grand/RenewalStateTransportCompleteMetricExact.lean for state transport). The final 'd_K(R_h x*, z_*) = O(h)' clause needs prop:smooth-sampling and should be kept as a hypothesis."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/CriticalShadowingExact.lean:RenewalGeometry.CriticalShadowing.exists_unique_zero_in_newton_ball",
+      "RenewalGeometry/Action/CriticalShadowingExact.lean:RenewalGeometry.CriticalShadowing.reconstruction_dist_le",
+      "RenewalGeometry/Action/CriticalShadowingExact.lean:RenewalGeometry.CriticalShadowing.Hypotheses",
+      "RenewalGeometry/Action/CriticalShadowingExact.lean:RenewalGeometry.CriticalShadowing.newtonMap",
+      "RenewalGeometry/Action/CriticalShadowingExact.lean:RenewalGeometry.CriticalShadowing.newtonMap_mapsTo",
+      "RenewalGeometry/Action/CriticalShadowingExact.lean:RenewalGeometry.CriticalShadowing.newtonMap_dist_le",
+      "RenewalGeometry/Action/CriticalShadowingExact.lean:RenewalGeometry.CriticalShadowing.hasFDerivAt_newtonMap"
+    ],
+    "note": "Proved on an arbitrary complete real normed space X (the finite slice with its positive slice norm): under (S1) ||F x0|| <= C0 h, (S2) B a two-sided inverse of DF(x0) with ||B|| <= M, (S3) ||DF x - DF y|| <= L ||x - y|| on closedBall x0 r, and the explicit smallness conditions rho := 2 M C0 h <= r and M L rho <= 1/2 (the meaning of 'for sufficiently small h'), the frozen-Newton map T x = x - B F x contracts the Newton ball into itself (mean-value inequality; derivative B(DF x0 - DF x)), so there is exactly one zero of F in closedBall x0 (2 M C0 h) (exists_unique_zero_in_newton_ball, eq:critical-shadowing; existence by Mathlib's ContractingWith.exists_fixedPoint', uniqueness by the contraction estimate). Reconstruction clause: with (S4) dist(R_h x, R_h y) <= C_R ||x - y|| on the ball and the O(h) sampling distance dist(R_h x0, z_*) <= C_S h inherited from prop:smooth-sampling (kept as a hypothesis), every zero in the Newton ball satisfies dist(R_h x_*, z_*) <= (2 C_R M C0 + C_S) h (reconstruction_dist_le). Disclosed: uniqueness is proved in the Newton ball (the paper's 'unique ... in the Newton ball'), not in the larger B_r(x0); the closing sentence about nondegenerate Einstein-SM solutions is the interpretation of the theorem."
   },
   "prop:homogeneous": {
     "env": "proposition",
@@ -527,11 +561,17 @@
   "lem:half-ricci": {
     "env": "lemma",
     "title": "Twisted half-Ricci contraction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: Clifford contraction, half-Ricci identity, first Bianchi, twisted curvature.",
-    "difficulty": "medium",
-    "plan": "Purely algebraic identity in a Clifford algebra with a curvature tensor satisfying antisymmetry and the first Bianchi identity. State: c_a in a Clifford algebra (Mathlib CliffordAlgebra with quadratic form eta, or explicit 4x4 gamma matrices) with c_a c_b + c_b c_a = -2 eta_ab, R_{abcd} a real tensor with R_{abcd} = -R_{bacd} = -R_{abdc} and the cyclic identity, R^S_{ab} = (1/4) sum R_{abcd} c^c c^d, Ric_ab = sum_c eps_c R_{cacb}; prove sum_b eps_b c_b R^S_{ba} = (1/2) sum_b eps_b Ric_ab c_b using the triple-product decomposition c_b c_c c_d = c_[b c_c c_d] - eta_bc c_d + eta_bd c_c - eta_cd c_b and Bianchi. Missing: everything (no curvature tensor structure with Bianchi identity in the library; Lorentz/AnchorClifford.lean has gamma matrices but no curvature). With explicit Fin 4 sums and Matrix gamma matrices this is a finite computation (Finset.sum over Fin 4, heavy but decidable after ring normalization); the twisting term is additive bookkeeping. Several days."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/TwistedHalfRicciContractionExact.lean:RenewalGeometry.TwistedHalfRicci.twisted_half_ricci_contraction",
+      "RenewalGeometry/Gravity/TwistedHalfRicciContractionExact.lean:RenewalGeometry.TwistedHalfRicci.half_ricci_contraction",
+      "RenewalGeometry/Gravity/TwistedHalfRicciContractionExact.lean:RenewalGeometry.TwistedHalfRicci.half_ricci_contraction_opposite",
+      "RenewalGeometry/Gravity/TwistedHalfRicciContractionExact.lean:RenewalGeometry.TwistedHalfRicci.CliffordFrame",
+      "RenewalGeometry/Gravity/TwistedHalfRicciContractionExact.lean:RenewalGeometry.TwistedHalfRicci.spinorCurvature",
+      "RenewalGeometry/Gravity/TwistedHalfRicciContractionExact.lean:RenewalGeometry.TwistedHalfRicci.twistedCurvature",
+      "RenewalGeometry/Gravity/TwistedHalfRicciContractionExact.lean:RenewalGeometry.TwistedHalfRicci.ricciOf"
+    ],
+    "note": "Proved as a pointwise algebraic identity: for a Clifford frame (generators c_a in any associative real algebra, signs eps_a = +-1, c_a c_b + c_b c_a = -2 eps_a delta_ab over any finite index type) and any curvature array R_abcd antisymmetric in both pairs and satisfying the first Bianchi identity R_abcd + R_acdb + R_adbc = 0, sum_b eps_b c_b R^nabla_ba = 1/2 sum_b eps_b Ric_ab c_b + sum_b eps_b c_b rho(F_ba) with R^S_ab = 1/4 sum eps_c eps_d R_abcd c_c c_d and R^nabla = R^S + rho(F) (twisted_half_ricci_contraction; untwisted core half_ricci_contraction via the cyclic triple-product rearrangement c_b c_c c_d = c_c c_d c_b + 2 eta_bd c_c - 2 eta_bc c_d and Bianchi). Disclosed convention: the paper fixes neither the Ricci contraction nor the curvature sign; the identity holds verbatim with Ric_ab = sum_c eps_c R_cabc (= R^c_abc), while with the contraction R^c_acb = sum_c eps_c R_cacb the right side acquires a minus sign (half_ricci_contraction_opposite). The geometric identification of R with the Riemann tensor of the torsion-free spin connection and of rho(F) with the gauge curvature on the twisting factor is the lemma's convention, not part of the algebraic claim."
   },
   "prop:spinor-prolongation": {
     "env": "proposition",
