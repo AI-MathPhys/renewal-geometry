@@ -19,6 +19,7 @@ import RenewalGeometry.Action.HoeffdingSupport
 import RenewalGeometry.Action.HyperbolicCostOptimizerComposition
 import RenewalGeometry.Action.K4BridgeTransparency
 import RenewalGeometry.Action.MatterLegendre2
+import RenewalGeometry.Action.NativeDensitiesExact
 import RenewalGeometry.Action.NativeReaderCertificateExact
 import RenewalGeometry.Action.NativeScalingBlocksExact
 import RenewalGeometry.Action.NativeScalingRegularityExact
@@ -158,6 +159,7 @@ import RenewalGeometry.Commutant.PolarEdgeSingular
 import RenewalGeometry.Commutant.PolarFlatIrreducibleLimits
 import RenewalGeometry.Commutant.PolarHolonomy
 import RenewalGeometry.Commutant.PolarMetricHolonomy
+import RenewalGeometry.Commutant.ReciprocalWedderburnKronecker
 import RenewalGeometry.Commutant.RegularTrace
 import RenewalGeometry.Commutant.RelativeHoweCertificate
 import RenewalGeometry.Commutant.RelativeHoweGramSpectralCertificateExact
@@ -849,6 +851,7 @@ import RenewalGeometry.StandardModel.DeterminantIncidenceExact
 import RenewalGeometry.StandardModel.EdgeResolvedOccurrenceEndpointClosure
 import RenewalGeometry.StandardModel.EndpointGenerationCarrierExact
 import RenewalGeometry.StandardModel.ExplicitRegulatedStandardModelActionExact
+import RenewalGeometry.StandardModel.ExternalIsotypicKroneckerExact
 import RenewalGeometry.StandardModel.FaithfulSMQuotientExact
 import RenewalGeometry.StandardModel.FiniteEinsteinStandardModelInterface
 import RenewalGeometry.StandardModel.FiniteInternalLandingExact
