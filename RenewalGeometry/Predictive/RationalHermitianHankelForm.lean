@@ -19,8 +19,8 @@ and `Q(∞) = 0` is the strict properness of the expansion).  Rationality is
 encoded, following Kronecker's theorem, as finiteness of the Hankel rank:
 the Pontryagin state space below is finite dimensional.
 
-* `hankelColumn M j h = (M_{j+r} h)_{r ≥ 0}` is a Hankel column and
-  `hankelColumnSpace M` is the span `𝒦_Q` of all Hankel columns.
+* `hermitianHankelColumn M j h = (M_{j+r} h)_{r ≥ 0}` is a Hankel column and
+  `hermitianHankelColumnSpace M` is the span `𝒦_Q` of all Hankel columns.
 * `hankelForm M` is the indefinite Hankel form
   `[c_i(u), c_j(v)]_Q = ⟪u, M_{i+j} v⟫` (`eq:supp-Hankel-form`), extended
   sesquilinearly to formal column combinations `ℕ →₀ H`
@@ -51,49 +51,49 @@ noncomputable def laurentDynamicFunction [FiniteDimensional ℂ H]
 
 /-- The Hankel column `c_j(h) = (M_{j+r} h)_{r ≥ 0}` of
 `def:supp-rational-Hermitian`. -/
-def hankelColumn (M : ℕ → H →ₗ[ℂ] H) (j : ℕ) (h : H) : ℕ → H :=
+def hermitianHankelColumn (M : ℕ → H →ₗ[ℂ] H) (j : ℕ) (h : H) : ℕ → H :=
   fun r => M (j + r) h
 
 /-- The column `c_j` as a linear map `H → (ℕ → H)`. -/
-def hankelColumnLinear (M : ℕ → H →ₗ[ℂ] H) (j : ℕ) : H →ₗ[ℂ] (ℕ → H) :=
+def hermitianHankelColumnLinear (M : ℕ → H →ₗ[ℂ] H) (j : ℕ) : H →ₗ[ℂ] (ℕ → H) :=
   LinearMap.pi fun r => M (j + r)
 
-@[simp] theorem hankelColumnLinear_apply (M : ℕ → H →ₗ[ℂ] H) (j : ℕ) (h : H) :
-    hankelColumnLinear M j h = hankelColumn M j h := rfl
+@[simp] theorem hermitianHankelColumnLinear_apply (M : ℕ → H →ₗ[ℂ] H) (j : ℕ) (h : H) :
+    hermitianHankelColumnLinear M j h = hermitianHankelColumn M j h := rfl
 
 /-- The formal-to-literal column map: a formal combination `∑_j c_j(u_j)`
 (an element of `ℕ →₀ H`) is sent to the sequence `∑_j c_j(u_j) ∈ ℕ → H`. -/
-noncomputable def hankelColumnMap (M : ℕ → H →ₗ[ℂ] H) :
+noncomputable def hermitianHankelColumnMap (M : ℕ → H →ₗ[ℂ] H) :
     (ℕ →₀ H) →ₗ[ℂ] (ℕ → H) :=
-  Finsupp.lsum ℂ fun j => hankelColumnLinear M j
+  Finsupp.lsum ℂ fun j => hermitianHankelColumnLinear M j
 
-@[simp] theorem hankelColumnMap_single (M : ℕ → H →ₗ[ℂ] H) (j : ℕ) (h : H) :
-    hankelColumnMap M (Finsupp.single j h) = hankelColumn M j h := by
-  simp [hankelColumnMap, Finsupp.lsum_single]
+@[simp] theorem hermitianHankelColumnMap_single (M : ℕ → H →ₗ[ℂ] H) (j : ℕ) (h : H) :
+    hermitianHankelColumnMap M (Finsupp.single j h) = hermitianHankelColumn M j h := by
+  simp [hermitianHankelColumnMap, Finsupp.lsum_single]
 
 /-- `𝒦_Q`: the span of all Hankel columns (the range of the column map). -/
-noncomputable def hankelColumnSpace (M : ℕ → H →ₗ[ℂ] H) : Submodule ℂ (ℕ → H) :=
-  LinearMap.range (hankelColumnMap M)
+noncomputable def hermitianHankelColumnSpace (M : ℕ → H →ₗ[ℂ] H) : Submodule ℂ (ℕ → H) :=
+  LinearMap.range (hermitianHankelColumnMap M)
 
-theorem hankelColumn_mem_hankelColumnSpace (M : ℕ → H →ₗ[ℂ] H) (j : ℕ) (h : H) :
-    hankelColumn M j h ∈ hankelColumnSpace M :=
-  ⟨Finsupp.single j h, hankelColumnMap_single M j h⟩
+theorem hermitianHankelColumn_mem_hankelColumnSpace (M : ℕ → H →ₗ[ℂ] H) (j : ℕ) (h : H) :
+    hermitianHankelColumn M j h ∈ hermitianHankelColumnSpace M :=
+  ⟨Finsupp.single j h, hermitianHankelColumnMap_single M j h⟩
 
 /-- The span of the Hankel columns is the range of the column map. -/
-theorem hankelColumnSpace_eq_span (M : ℕ → H →ₗ[ℂ] H) :
-    hankelColumnSpace M =
-      Submodule.span ℂ (Set.range fun p : ℕ × H => hankelColumn M p.1 p.2) := by
+theorem hermitianHankelColumnSpace_eq_span (M : ℕ → H →ₗ[ℂ] H) :
+    hermitianHankelColumnSpace M =
+      Submodule.span ℂ (Set.range fun p : ℕ × H => hermitianHankelColumn M p.1 p.2) := by
   apply le_antisymm
   · rintro _ ⟨u, rfl⟩
     induction u using Finsupp.induction_linear with
     | zero => simp
     | add u v hu hv => rw [map_add]; exact Submodule.add_mem _ hu hv
     | single j h =>
-        rw [hankelColumnMap_single]
+        rw [hermitianHankelColumnMap_single]
         exact Submodule.subset_span ⟨(j, h), rfl⟩
   · rw [Submodule.span_le]
     rintro _ ⟨p, rfl⟩
-    exact hankelColumn_mem_hankelColumnSpace M p.1 p.2
+    exact hermitianHankelColumn_mem_hankelColumnSpace M p.1 p.2
 
 /-- One conjugate-linear slice of the Hankel form:
 `u ↦ (v ↦ ∑_j ⟪u, M_{i+j} v_j⟫)`. -/
@@ -127,15 +127,15 @@ column sequence against the formal coefficients:
 theorem hankelForm_eq_column_pairing (M : ℕ → H →ₗ[ℂ] H)
     (hM : ∀ n, (M n).IsSymmetric) (u v : ℕ →₀ H) :
     hankelForm M u v =
-      Finsupp.lsum ℂ (fun j => innerₛₗ ℂ (hankelColumnMap M u j)) v := by
+      Finsupp.lsum ℂ (fun j => innerₛₗ ℂ (hermitianHankelColumnMap M u j)) v := by
   induction u using Finsupp.induction_linear with
   | zero => simp [hankelForm, Finsupp.sum]
   | add u u' hu hu' =>
       rw [map_add, LinearMap.add_apply, hu, hu', map_add]
       have : (Finsupp.lsum ℂ fun j =>
-          innerₛₗ ℂ ((hankelColumnMap M u + hankelColumnMap M u') j)) =
-          (Finsupp.lsum ℂ fun j => innerₛₗ ℂ (hankelColumnMap M u j)) +
-          (Finsupp.lsum ℂ fun j => innerₛₗ ℂ (hankelColumnMap M u' j)) := by
+          innerₛₗ ℂ ((hermitianHankelColumnMap M u + hermitianHankelColumnMap M u') j)) =
+          (Finsupp.lsum ℂ fun j => innerₛₗ ℂ (hermitianHankelColumnMap M u j)) +
+          (Finsupp.lsum ℂ fun j => innerₛₗ ℂ (hermitianHankelColumnMap M u' j)) := by
         apply Finsupp.lhom_ext
         intro j h
         simp [Finsupp.lsum_single]
@@ -145,8 +145,8 @@ theorem hankelForm_eq_column_pairing (M : ℕ → H →ₗ[ℂ] H)
       | zero => simp
       | add v v' hv hv' => rw [map_add, map_add, hv, hv']
       | single j y =>
-          rw [hankelForm_single_single, hankelColumnMap_single]
-          simp [Finsupp.lsum_single, hankelColumn, hM (i + j) x y]
+          rw [hankelForm_single_single, hermitianHankelColumnMap_single]
+          simp [Finsupp.lsum_single, hermitianHankelColumn, hM (i + j) x y]
 
 /-- The null space of the Hankel form (its left radical). -/
 noncomputable def hankelNull (M : ℕ → H →ₗ[ℂ] H) : Submodule ℂ (ℕ →₀ H) :=
@@ -164,13 +164,13 @@ formal combination is null for the Hankel form exactly when its literal
 column sequence vanishes, so "quotienting the null space" identifies the
 Pontryagin state space with the literal column span `𝒦_Q`. -/
 theorem hankelNull_eq_ker (M : ℕ → H →ₗ[ℂ] H) (hM : ∀ n, (M n).IsSymmetric) :
-    hankelNull M = LinearMap.ker (hankelColumnMap M) := by
+    hankelNull M = LinearMap.ker (hermitianHankelColumnMap M) := by
   ext u
   rw [mem_hankelNull_iff, LinearMap.mem_ker]
   constructor
   · intro h
     funext j
-    have hj := h (Finsupp.single j (hankelColumnMap M u j))
+    have hj := h (Finsupp.single j (hermitianHankelColumnMap M u j))
     rw [hankelForm_eq_column_pairing M hM] at hj
     simp only [Finsupp.lsum_single, innerₛₗ_apply_apply] at hj
     exact inner_self_eq_zero.mp hj
@@ -185,9 +185,9 @@ abbrev hankelState (M : ℕ → H →ₗ[ℂ] H) := (ℕ →₀ H) ⧸ hankelNul
 /-- The state space is canonically the literal column span `𝒦_Q`. -/
 noncomputable def hankelStateEquivColumnSpace (M : ℕ → H →ₗ[ℂ] H)
     (hM : ∀ n, (M n).IsSymmetric) :
-    hankelState M ≃ₗ[ℂ] hankelColumnSpace M :=
+    hankelState M ≃ₗ[ℂ] hermitianHankelColumnSpace M :=
   (Submodule.quotEquivOfEq _ _ (hankelNull_eq_ker M hM)).trans
-    (hankelColumnMap M).quotKerEquivRange
+    (hermitianHankelColumnMap M).quotKerEquivRange
 
 /-- The Hankel form is Hermitian symmetric for Hermitian coefficients. -/
 theorem hankelForm_conj_symm (M : ℕ → H →ₗ[ℂ] H) (hM : ∀ n, (M n).IsSymmetric)
@@ -239,13 +239,13 @@ noncomputable def hankelFormalShift : (ℕ →₀ H) →ₗ[ℂ] (ℕ →₀ H) 
 
 /-- The literal column of a shifted formal combination is the sequence shift:
 `c(shift u)_r = c(u)_{r+1}`. -/
-theorem hankelColumnMap_shift (M : ℕ → H →ₗ[ℂ] H) (u : ℕ →₀ H) (r : ℕ) :
-    hankelColumnMap M (hankelFormalShift u) r = hankelColumnMap M u (r + 1) := by
+theorem hermitianHankelColumnMap_shift (M : ℕ → H →ₗ[ℂ] H) (u : ℕ →₀ H) (r : ℕ) :
+    hermitianHankelColumnMap M (hankelFormalShift u) r = hermitianHankelColumnMap M u (r + 1) := by
   induction u using Finsupp.induction_linear with
   | zero => simp
   | add u v hu hv => simp [hu, hv]
   | single j h =>
-      simp only [hankelFormalShift_single, hankelColumnMap_single, hankelColumn]
+      simp only [hankelFormalShift_single, hermitianHankelColumnMap_single, hermitianHankelColumn]
       rw [Nat.add_assoc, Nat.add_comm 1 r]
 
 /-- The formal shift preserves the null space (Hankel structure
@@ -256,7 +256,7 @@ theorem hankelFormalShift_null_le (M : ℕ → H →ₗ[ℂ] H) (hM : ∀ n, (M 
   rw [hankelNull_eq_ker M hM, LinearMap.mem_ker] at hu
   rw [Submodule.mem_comap, hankelNull_eq_ker M hM, LinearMap.mem_ker]
   funext r
-  rw [hankelColumnMap_shift, hu]
+  rw [hermitianHankelColumnMap_shift, hu]
   rfl
 
 /-- **`A_Q`**: the shift `A_Q c_j(h) = c_{j+1}(h)` on the Pontryagin state
@@ -336,7 +336,7 @@ noncomputable def source : H →ₗ[ℂ] Q.State := hankelSource Q.coeff
 instance : FiniteDimensional ℂ Q.State := Q.finiteRank
 
 /-- The state space is the literal span of the Hankel columns. -/
-noncomputable def stateEquivColumnSpace : Q.State ≃ₗ[ℂ] hankelColumnSpace Q.coeff :=
+noncomputable def stateEquivColumnSpace : Q.State ≃ₗ[ℂ] hermitianHankelColumnSpace Q.coeff :=
   hankelStateEquivColumnSpace Q.coeff Q.coeff_symmetric
 
 theorem form_shift_pow_source (i j : ℕ) (u v : H) :
