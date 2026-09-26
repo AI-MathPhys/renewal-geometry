@@ -1456,5 +1456,706 @@ theorem unit_mul {M : ℕ}
 
 end Assembly
 
+section Corner
+
+/-- **The star bridge, corner form** (`cor:reciprocal-wedderburn`): the
+conclusion of `star_matrix_units` together with the nonvanishing of every
+diagonal projection and the corner minimality `p_j S p_j = ℂ p_j`.
+Original docstring: **The star bridge**: from an Artin–Wedderburn unit
+system of a star-closed subalgebra, construct the
+self-adjoint projection family, the connecting partial
+isometries, and the central block projections — the
+star-compatible matrix units `f_{jk} = v_j v_k*` follow. -/
+theorem star_matrix_units_corner {M : ℕ} (blk : Fin M → ℕ)
+    (U : Fin M → Fin M → Matrix n n ℂ)
+    (hstar : ∀ a ∈ S, aᴴ ∈ S)
+    (hUmul : UnitLaw blk U)
+    (hUS : ∀ j k, U j k ∈ S)
+    (hUsum : ∑ j, U j j = 1)
+    (hUne : ∀ j k, blk j = blk k → U j k ≠ 0)
+    (hspan : ∀ x ∈ S, x ∈ Submodule.span ℂ
+      {y | ∃ j k, blk j = blk k ∧ y = U j k}) :
+    ∃ (p v : Fin M → Matrix n n ℂ)
+      (base : Fin M → Fin M),
+      (∀ j, blk (base j) = blk j)
+      ∧ (∀ j k, blk j = blk k → base j = base k)
+      ∧ (∀ j, p j ∈ S) ∧ (∀ j, (p j)ᴴ = p j)
+      ∧ (∀ j, p j * p j = p j)
+      ∧ (∀ j k, j ≠ k → p j * p k = 0)
+      ∧ (∑ j, p j = 1)
+      ∧ (∀ j, v j ∈ S)
+      ∧ (∀ j k, (v j)ᴴ * v k
+          = if j = k then p (base j) else 0)
+      ∧ (∀ j, v j * (v j)ᴴ = p j)
+      ∧ (∀ b : ℕ, ∀ x ∈ S,
+          (∑ j ∈ Finset.univ.filter
+            (fun j => blk j = b), p j) * x
+          = x * ∑ j ∈ Finset.univ.filter
+            (fun j => blk j = b), p j)
+      ∧ (∀ j, p j ≠ 0)
+      ∧ (∀ j, ∀ a ∈ S, ∃ c : ℂ, p j * (a * p j) = c • p j) := by
+  classical
+  -- Step 1: orthogonalize the diagonal idempotents.
+  obtain ⟨p, hslot, horthp, hsump⟩ :=
+    ordered_orthogonalization S (fun i => U i i) hstar
+      (fun i => hUS i i)
+      (fun i => by
+        show U i i * U i i = U i i
+        rw [hUmul i i i i, if_pos ⟨rfl, rfl, rfl⟩])
+      (fun i k h => by
+        show U i i * U k k = 0
+        rw [hUmul i i k k, if_neg fun hc => h hc.1])
+      hUsum
+  -- Step 2: base point of each block.
+  obtain ⟨base, hbase_blk, hbase_le⟩ :
+      ∃ base : Fin M → Fin M,
+        (∀ j, blk (base j) = blk j)
+        ∧ ∀ j i, blk i = blk j → base j ≤ i := by
+    have hne : ∀ j : Fin M,
+        ((Finset.univ.filter (fun i => blk i = blk j)) :
+          Finset (Fin M)).Nonempty :=
+      fun j => ⟨j, Finset.mem_filter.mpr
+        ⟨Finset.mem_univ j, rfl⟩⟩
+    refine ⟨fun j => (Finset.univ.filter
+        (fun i => blk i = blk j)).min' (hne j),
+      fun j => ?_, fun j i hi => ?_⟩
+    · exact (Finset.mem_filter.mp
+        (Finset.min'_mem _ (hne j))).2
+    · exact Finset.min'_le _ i
+        (Finset.mem_filter.mpr ⟨Finset.mem_univ i, hi⟩)
+  have hbase_eq : ∀ j k, blk j = blk k → base j = base k := by
+    intro j k hjk
+    refine le_antisymm
+      (hbase_le j (base k) ?_) (hbase_le k (base j) ?_)
+    · rw [hbase_blk k, ← hjk]
+    · rw [hbase_blk j, hjk]
+  -- Step 3: reduced multiplication facts.
+  have hpr : ∀ j : Fin M, p j * (∑ i ∈ Finset.univ.filter
+      (fun i => i < j), p i) = 0 := by
+    intro j
+    rw [Finset.mul_sum]
+    exact Finset.sum_eq_zero fun i hi =>
+      horthp j i (Finset.mem_filter.mp hi).2.ne'
+  have hUkill : ∀ (X : Matrix n n ℂ) (m : Fin M),
+      (∀ i : Fin M, i.val < m.val → X * U i i = 0) →
+      X * (∑ i ∈ Finset.univ.filter
+        (fun i => i < m), p i) = 0 := by
+    intro X m hX
+    rw [Finset.mul_sum]
+    exact Finset.sum_eq_zero fun i hi =>
+      kill_general S (fun i => U i i) p
+        (fun i _ => hslot i) X hX i.val i rfl
+        ((Finset.mem_filter.mp hi).2)
+  have hgr : ∀ j : Fin M, U j j * (∑ i ∈ Finset.univ.filter
+      (fun i => i < j), p i) = 0 := by
+    intro j
+    refine hUkill (U j j) j fun i hi => ?_
+    rw [hUmul j j i i, if_neg]
+    rintro ⟨rfl, -, -⟩
+    exact lt_irrefl _ hi
+  have hUbr : ∀ j : Fin M,
+      U j (base j) * (∑ i ∈ Finset.univ.filter
+        (fun i => i < base j), p i) = 0 := by
+    intro j
+    refine hUkill (U j (base j)) (base j) fun i hi => ?_
+    rw [hUmul j (base j) i i, if_neg]
+    rintro ⟨rfl, -, -⟩
+    exact lt_irrefl _ hi
+  have hcompeq : ∀ j : Fin M,
+      compIdem (fun i => U i i) p j
+        = U j j - (∑ i ∈ Finset.univ.filter
+          (fun i => i < j), p i) * U j j := by
+    intro j
+    simp only [compIdem]
+    rw [Matrix.sub_mul, Matrix.one_mul]
+  have hpU : ∀ j : Fin M,
+      p j * U j j = compIdem (fun i => U i i) p j := by
+    intro j
+    have h1 := (hslot j).2.2.2.2.1
+    rw [hcompeq j, Matrix.mul_sub, ← Matrix.mul_assoc,
+      hpr j, Matrix.zero_mul, sub_zero] at h1
+    rw [hcompeq j]
+    exact h1
+  have hcompne : ∀ j : Fin M,
+      compIdem (fun i => U i i) p j ≠ 0 := by
+    intro j h0
+    rw [hcompeq j, sub_eq_zero] at h0
+    have h3 : U j j * U j j
+        = U j j * ((∑ i ∈ Finset.univ.filter
+          (fun i => i < j), p i) * U j j) := by
+      rw [← h0]
+    rw [← Matrix.mul_assoc, hgr j, Matrix.zero_mul] at h3
+    refine hUne j j rfl ?_
+    calc U j j = U j j * U j j := by
+          rw [hUmul j j j j, if_pos ⟨rfl, rfl, rfl⟩]
+      _ = 0 := h3
+  have hpne : ∀ j : Fin M, p j ≠ 0 := by
+    intro j hp0
+    have h := (hslot j).2.2.2.2.1
+    rw [hp0, Matrix.zero_mul] at h
+    exact hcompne j h.symm
+  -- Step 4: corner minimality.
+  have hgcorner : ∀ (j : Fin M), ∀ a ∈ S, ∃ c : ℂ,
+      U j j * (a * U j j) = c • U j j := by
+    intro j a ha
+    have ha' := hspan a ha
+    clear ha
+    induction ha' using Submodule.span_induction with
+    | mem y hy =>
+      obtain ⟨l, m', hlm, rfl⟩ := hy
+      by_cases hm : m' = j
+      · rw [hUmul l m' j j, if_pos ⟨hm, hlm, rfl⟩]
+        by_cases hl : j = l
+        · refine ⟨1, ?_⟩
+          rw [hUmul j j l j,
+            if_pos ⟨hl, rfl, (congrArg blk hl).symm⟩,
+            one_smul]
+        · exact ⟨0, by
+            rw [hUmul j j l j, if_neg fun hc => hl hc.1,
+              zero_smul]⟩
+      · exact ⟨0, by
+          rw [hUmul l m' j j, if_neg fun hc => hm hc.1,
+            Matrix.mul_zero, zero_smul]⟩
+    | zero =>
+      exact ⟨0, by
+        rw [Matrix.zero_mul, Matrix.mul_zero, zero_smul]⟩
+    | add y z _ _ ihy ihz =>
+      obtain ⟨c1, h1⟩ := ihy
+      obtain ⟨c2, h2⟩ := ihz
+      exact ⟨c1 + c2, by
+        rw [Matrix.add_mul, Matrix.mul_add, h1, h2,
+          add_smul]⟩
+    | smul t y _ ihy =>
+      obtain ⟨c, hc⟩ := ihy
+      exact ⟨t * c, by
+        rw [smul_mul_assoc, mul_smul_comm, hc, smul_smul]⟩
+  have hecorner : ∀ (j : Fin M), ∀ a ∈ S, ∃ c : ℂ,
+      compIdem (fun i => U i i) p j
+          * (a * compIdem (fun i => U i i) p j)
+        = c • compIdem (fun i => U i i) p j := by
+    intro j a ha
+    have hrS : (∑ i ∈ Finset.univ.filter
+        (fun i => i < j), p i) ∈ S :=
+      Subalgebra.sum_mem S fun i _ => (hslot i).1
+    obtain ⟨c, hc⟩ := hgcorner j
+      (a * (1 - ∑ i ∈ Finset.univ.filter
+        (fun i => i < j), p i))
+      (S.mul_mem ha (S.sub_mem S.one_mem hrS))
+    refine ⟨c, ?_⟩
+    have hunfold : compIdem (fun i => U i i) p j
+        = (1 - ∑ i ∈ Finset.univ.filter
+          (fun i => i < j), p i) * U j j := by
+      simp only [compIdem]
+    rw [hunfold, Matrix.mul_assoc,
+      ← Matrix.mul_assoc a
+        (1 - ∑ i ∈ Finset.univ.filter
+          (fun i => i < j), p i) (U j j),
+      hc, mul_smul_comm]
+  have hpcorner : ∀ (j : Fin M), ∀ a ∈ S, ∃ c : ℂ,
+      p j * (a * p j) = c • p j := by
+    intro j a ha
+    have hsS : p j * (a * p j) ∈ S :=
+      S.mul_mem (hslot j).1 (S.mul_mem ha (hslot j).1)
+    obtain ⟨c, hc⟩ := hecorner j _ hsS
+    refine ⟨c, ?_⟩
+    have he'p : compIdem (fun i => U i i) p j * p j = p j :=
+      (hslot j).2.2.2.2.2
+    have hes : compIdem (fun i => U i i) p j
+        * (p j * (a * p j)) = p j * (a * p j) := by
+      rw [← Matrix.mul_assoc, he'p]
+    have hsp : (p j * (a * p j)) * p j = p j * (a * p j) := by
+      rw [Matrix.mul_assoc, Matrix.mul_assoc,
+        (hslot j).2.2.1]
+    calc p j * (a * p j)
+        = compIdem (fun i => U i i) p j
+            * (p j * (a * p j)) := hes.symm
+      _ = compIdem (fun i => U i i) p j
+            * ((p j * (a * p j)) * p j) := by rw [hsp]
+      _ = compIdem (fun i => U i i) p j
+            * ((p j * (a * p j))
+              * (compIdem (fun i => U i i) p j * p j)) := by
+          rw [he'p]
+      _ = (compIdem (fun i => U i i) p j
+            * ((p j * (a * p j))
+              * compIdem (fun i => U i i) p j)) * p j := by
+          rw [Matrix.mul_assoc (compIdem (fun i => U i i) p j)
+              (p j * (a * p j) * compIdem (fun i => U i i) p j)
+              (p j),
+            Matrix.mul_assoc (p j * (a * p j))
+              (compIdem (fun i => U i i) p j) (p j)]
+      _ = (c • compIdem (fun i => U i i) p j) * p j := by
+          rw [hc]
+      _ = c • p j := by rw [smul_mul_assoc, he'p]
+  -- Step 5: connecting elements and their nonvanishing.
+  have hUcomp : ∀ j : Fin M,
+      U j (base j) * compIdem (fun i => U i i) p (base j)
+        = U j (base j) := by
+    intro j
+    rw [hcompeq (base j), Matrix.mul_sub,
+      ← Matrix.mul_assoc, hUbr j, Matrix.zero_mul,
+      sub_zero, hUmul j (base j) (base j) (base j),
+      if_pos ⟨rfl, (hbase_blk j).symm, rfl⟩]
+  have hpx : ∀ j : Fin M,
+      p j * (p j * (U j (base j) * p (base j)))
+        = p j * (U j (base j) * p (base j)) := by
+    intro j
+    rw [← Matrix.mul_assoc, (hslot j).2.2.1]
+  have hxne : ∀ j : Fin M,
+      p j * (U j (base j) * p (base j)) ≠ 0 := by
+    intro j hx0
+    have hpeb : p (base j)
+        * compIdem (fun i => U i i) p (base j)
+        = compIdem (fun i => U i i) p (base j) :=
+      (hslot (base j)).2.2.2.2.1
+    have hu : p j * U j (base j) = 0 := by
+      calc p j * U j (base j)
+          = p j * (U j (base j)
+              * compIdem (fun i => U i i) p (base j)) := by
+            rw [hUcomp j]
+        _ = p j * (U j (base j)
+              * (p (base j)
+                * compIdem (fun i => U i i) p (base j))) := by
+            rw [hpeb]
+        _ = (p j * (U j (base j) * p (base j)))
+              * compIdem (fun i => U i i) p (base j) := by
+            rw [Matrix.mul_assoc
+                (p j) (U j (base j) * p (base j))
+                (compIdem (fun i => U i i) p (base j)),
+              Matrix.mul_assoc (U j (base j)) (p (base j))
+                (compIdem (fun i => U i i) p (base j))]
+        _ = 0 := by rw [hx0, Matrix.zero_mul]
+    have h2 : (p j * U j (base j)) * U (base j) j
+        = compIdem (fun i => U i i) p j := by
+      rw [Matrix.mul_assoc, hUmul j (base j) (base j) j,
+        if_pos ⟨rfl, (hbase_blk j).symm, hbase_blk j⟩,
+        hpU j]
+    rw [hu, Matrix.zero_mul] at h2
+    exact hcompne j h2.symm
+  -- Step 6: normalized partial isometries.
+  have hmain : ∀ j : Fin M, ∃ v : Matrix n n ℂ, v ∈ S
+      ∧ vᴴ * v = p (base j)
+      ∧ v * vᴴ = p j
+      ∧ ∃ s : ℂ,
+          v = s • (p j * (U j (base j) * p (base j))) := by
+    intro j
+    set x := p j * (U j (base j) * p (base j)) with hxdef
+    have hxS : x ∈ S := S.mul_mem (hslot j).1
+      (S.mul_mem (hUS j (base j)) (hslot (base j)).1)
+    have hxx : xᴴ * x
+        = p (base j) * (((U j (base j))ᴴ
+          * (p j * U j (base j))) * p (base j)) := by
+      rw [hxdef]
+      simp only [Matrix.conjTranspose_mul, Matrix.mul_assoc,
+        (hslot j).2.1, (hslot (base j)).2.1]
+      rw [← Matrix.mul_assoc (p j) (p j), (hslot j).2.2.1]
+    have haS : ((U j (base j))ᴴ * (p j * U j (base j))) ∈ S :=
+      S.mul_mem (hstar _ (hUS j (base j)))
+        (S.mul_mem (hslot j).1 (hUS j (base j)))
+    obtain ⟨c, hc⟩ := hpcorner (base j) _ haS
+    have hxxc : xᴴ * x = c • p (base j) := by
+      rw [hxx]; exact hc
+    have hcne : c ≠ 0 := by
+      intro hc0
+      rw [hc0, zero_smul] at hxxc
+      have hx0 : x = 0 :=
+        Matrix.conjTranspose_mul_self_eq_zero.mp hxxc
+      rw [hxdef] at hx0
+      exact hxne j hx0
+    -- trace bookkeeping: the corner scalar is a positive real
+    have ht1 : (0:ℂ) ≤ (xᴴ * x).trace :=
+      (Matrix.posSemidef_conjTranspose_mul_self x).trace_nonneg
+    have ht2eq : (p (base j)).trace
+        = ((p (base j))ᴴ * p (base j)).trace := by
+      rw [(hslot (base j)).2.1]
+      conv_lhs => rw [← (hslot (base j)).2.2.1]
+    have ht2 : (0:ℂ) ≤ (p (base j)).trace := by
+      rw [ht2eq]
+      exact (Matrix.posSemidef_conjTranspose_mul_self
+        (p (base j))).trace_nonneg
+    have ht2ne : (p (base j)).trace ≠ 0 := by
+      rw [ht2eq]
+      intro h0
+      exact hpne (base j)
+        (Matrix.conjTranspose_mul_self_eq_zero.mp
+          ((Matrix.posSemidef_conjTranspose_mul_self
+            (p (base j))).trace_eq_zero_iff.mp h0))
+    have htr : (xᴴ * x).trace = c * (p (base j)).trace := by
+      rw [hxxc, Matrix.trace_smul, smul_eq_mul]
+    have ht1ne : (xᴴ * x).trace ≠ 0 := by
+      rw [htr]
+      exact mul_ne_zero hcne ht2ne
+    obtain ⟨h1re, h1im⟩ := Complex.nonneg_iff.mp ht1
+    obtain ⟨h2re, h2im⟩ := Complex.nonneg_iff.mp ht2
+    have ht1c : (xᴴ * x).trace = ((xᴴ * x).trace.re : ℂ) :=
+      Complex.ext (Complex.ofReal_re _).symm
+        (by rw [Complex.ofReal_im]; exact h1im.symm)
+    have ht2c : (p (base j)).trace
+        = ((p (base j)).trace.re : ℂ) :=
+      Complex.ext (Complex.ofReal_re _).symm
+        (by rw [Complex.ofReal_im]; exact h2im.symm)
+    have ht2repos : 0 < (p (base j)).trace.re := by
+      rcases lt_or_eq_of_le h2re with h | h
+      · exact h
+      · exact absurd
+          (by rw [ht2c, ← h, Complex.ofReal_zero]) ht2ne
+    have ht1repos : 0 < (xᴴ * x).trace.re := by
+      rcases lt_or_eq_of_le h1re with h | h
+      · exact h
+      · exact absurd
+          (by rw [ht1c, ← h, Complex.ofReal_zero]) ht1ne
+    have hcval : c = (((xᴴ * x).trace.re
+        / (p (base j)).trace.re : ℝ) : ℂ) := by
+      rw [Complex.ofReal_div,
+        eq_div_iff (Complex.ofReal_ne_zero.mpr
+          ht2repos.ne')]
+      rw [← ht2c, ← ht1c, htr]
+    have hcRpos : 0 < (xᴴ * x).trace.re
+        / (p (base j)).trace.re :=
+      div_pos ht1repos ht2repos
+    set cR : ℝ := (xᴴ * x).trace.re / (p (base j)).trace.re
+      with hcRdef
+    have hscal : ((((Real.sqrt cR)⁻¹ : ℝ)) : ℂ)
+        * ((((Real.sqrt cR)⁻¹ : ℝ)) : ℂ) * c = 1 := by
+      rw [hcval, ← Complex.ofReal_mul, ← Complex.ofReal_mul,
+        ← mul_inv, Real.mul_self_sqrt hcRpos.le,
+        inv_mul_cancel₀ hcRpos.ne', Complex.ofReal_one]
+    have hstars : star ((((Real.sqrt cR)⁻¹ : ℝ)) : ℂ)
+        = ((((Real.sqrt cR)⁻¹ : ℝ)) : ℂ) := by
+      rw [Complex.star_def]
+      exact Complex.conj_ofReal _
+    -- the reversed product carries the same scalar
+    have hxxH : x * xᴴ
+        = p j * ((U j (base j)
+          * (p (base j) * (U j (base j))ᴴ)) * p j) := by
+      rw [hxdef]
+      simp only [Matrix.conjTranspose_mul, Matrix.mul_assoc,
+        (hslot j).2.1, (hslot (base j)).2.1]
+      rw [← Matrix.mul_assoc (p (base j)) (p (base j)),
+        (hslot (base j)).2.2.1]
+    have ha'S : (U j (base j)
+        * (p (base j) * (U j (base j))ᴴ)) ∈ S :=
+      S.mul_mem (hUS j (base j))
+        (S.mul_mem (hslot (base j)).1
+          (hstar _ (hUS j (base j))))
+    obtain ⟨c', hc'⟩ := hpcorner j _ ha'S
+    have hxxHc : x * xᴴ = c' • p j := by
+      rw [hxxH]; exact hc'
+    have hA : (xᴴ * x) * (xᴴ * x)
+        = (c * c) • p (base j) := by
+      rw [hxxc, smul_mul_assoc, mul_smul_comm, smul_smul,
+        (hslot (base j)).2.2.1]
+    have hB : (xᴴ * x) * (xᴴ * x)
+        = (c' * c) • p (base j) := by
+      calc (xᴴ * x) * (xᴴ * x)
+          = xᴴ * ((x * xᴴ) * x) := by
+            simp only [Matrix.mul_assoc]
+        _ = xᴴ * ((c' • p j) * x) := by rw [hxxHc]
+        _ = c' • (xᴴ * (p j * x)) := by
+            rw [smul_mul_assoc, mul_smul_comm]
+        _ = c' • (xᴴ * x) := by rw [hxdef, hpx j]
+        _ = (c' * c) • p (base j) := by
+            rw [hxxc, smul_smul]
+    have hcc : c' = c := by
+      by_contra hne
+      have h12 : (c * c - c' * c) • p (base j) = 0 := by
+        rw [sub_smul, ← hA, ← hB, sub_self]
+      have hs0 : c * c - c' * c ≠ 0 := by
+        intro h
+        exact hne
+          (mul_right_cancel₀ hcne (sub_eq_zero.mp h)).symm
+      have hp0 : p (base j) = 0 := by
+        have h13 := congrArg
+          (fun t => (c * c - c' * c)⁻¹ • t) h12
+        simpa [smul_smul, inv_mul_cancel₀ hs0] using h13
+      exact hpne (base j) hp0
+    refine ⟨((((Real.sqrt cR)⁻¹ : ℝ)) : ℂ) • x,
+      S.smul_mem hxS _, ?_, ?_, ⟨_, rfl⟩⟩
+    · rw [Matrix.conjTranspose_smul, hstars,
+        smul_mul_assoc, mul_smul_comm, smul_smul, hxxc,
+        smul_smul, hscal, one_smul]
+    · rw [Matrix.conjTranspose_smul, hstars,
+        smul_mul_assoc, mul_smul_comm, smul_smul, hxxHc,
+        hcc, smul_smul, hscal, one_smul]
+  choose v hvS hv1 hv2 hvs using hmain
+  -- Step 7: cross-orthogonality of the isometries.
+  have hxorth : ∀ j k : Fin M, j ≠ k →
+      (p j * (U j (base j) * p (base j)))ᴴ
+        * (p k * (U k (base k) * p (base k))) = 0 := by
+    intro j k hjk
+    simp only [Matrix.conjTranspose_mul, Matrix.mul_assoc,
+      (hslot j).2.1, (hslot (base j)).2.1]
+    rw [← Matrix.mul_assoc (p j) (p k), horthp j k hjk,
+      Matrix.zero_mul, Matrix.mul_zero, Matrix.mul_zero]
+  have hlaw : ∀ j k : Fin M,
+      (v j)ᴴ * v k = if j = k then p (base j) else 0 := by
+    intro j k
+    by_cases hjk : j = k
+    · subst hjk
+      rw [if_pos rfl]
+      exact hv1 j
+    · rw [if_neg hjk]
+      obtain ⟨sj, hsj⟩ := hvs j
+      obtain ⟨sk, hsk⟩ := hvs k
+      rw [hsj, hsk, Matrix.conjTranspose_smul,
+        smul_mul_assoc, mul_smul_comm, smul_smul,
+        hxorth j k hjk, smul_zero]
+  -- Step 8: centrality of the block projections.
+  have hcent : ∀ b : ℕ, ∀ x ∈ S,
+      (∑ j ∈ Finset.univ.filter (fun j => blk j = b), p j)
+          * x
+        = x * ∑ j ∈ Finset.univ.filter
+            (fun j => blk j = b), p j := by
+    intro b
+    have hUE : ∀ j : Fin M,
+        U j j * (∑ k ∈ Finset.univ.filter
+          (fun k => blk k = b), U k k)
+          = if blk j = b then U j j else 0 := by
+      intro j
+      rw [Finset.mul_sum]
+      by_cases hb : blk j = b
+      · rw [Finset.sum_eq_single_of_mem j
+          (Finset.mem_filter.mpr ⟨Finset.mem_univ j, hb⟩)
+          (fun k _ hkj => by
+            rw [hUmul j j k k,
+              if_neg fun hc => hkj hc.1.symm]),
+          hUmul j j j j, if_pos ⟨rfl, rfl, rfl⟩,
+          if_pos hb]
+      · rw [Finset.sum_eq_zero fun k hk => by
+            rw [hUmul j j k k, if_neg]
+            rintro ⟨rfl, -, -⟩
+            exact hb (Finset.mem_filter.mp hk).2,
+          if_neg hb]
+    have hpE : ∀ j : Fin M,
+        p j * (∑ k ∈ Finset.univ.filter
+          (fun k => blk k = b), U k k)
+          = if blk j = b then p j else 0 := by
+      intro j
+      obtain ⟨w, hwS, hw⟩ := (hslot j).2.2.2.1
+      have hcw : (∑ k ∈ Finset.univ.filter
+          (fun k => blk k = b), U k k) * w
+          = w * ∑ k ∈ Finset.univ.filter
+            (fun k => blk k = b), U k k :=
+        blockSum_central S blk U hUmul hspan b w hwS
+      have hkey : compIdem (fun i => U i i) p j
+          * (∑ k ∈ Finset.univ.filter
+            (fun k => blk k = b), U k k)
+          = if blk j = b
+            then compIdem (fun i => U i i) p j else 0 := by
+        rw [hcompeq j, Matrix.sub_mul, hUE j,
+          Matrix.mul_assoc, hUE j]
+        by_cases hb : blk j = b
+        · rw [if_pos hb, if_pos hb]
+        · rw [if_neg hb, if_neg hb, Matrix.mul_zero,
+            sub_zero]
+      calc p j * (∑ k ∈ Finset.univ.filter
+            (fun k => blk k = b), U k k)
+          = (compIdem (fun i => U i i) p j * w)
+              * ∑ k ∈ Finset.univ.filter
+                (fun k => blk k = b), U k k := by rw [hw]
+        _ = compIdem (fun i => U i i) p j
+              * ((∑ k ∈ Finset.univ.filter
+                (fun k => blk k = b), U k k) * w) := by
+            rw [Matrix.mul_assoc, ← hcw]
+        _ = (if blk j = b
+              then compIdem (fun i => U i i) p j else 0)
+              * w := by
+            rw [← Matrix.mul_assoc, hkey]
+        _ = if blk j = b then p j else 0 := by
+            by_cases hb : blk j = b
+            · rw [if_pos hb, if_pos hb, ← hw]
+            · rw [if_neg hb, if_neg hb, Matrix.zero_mul]
+    have hPE : (∑ j ∈ Finset.univ.filter
+          (fun j => blk j = b), p j)
+        = ∑ j ∈ Finset.univ.filter
+          (fun j => blk j = b), U j j := by
+      calc (∑ j ∈ Finset.univ.filter
+            (fun j => blk j = b), p j)
+          = ∑ j, if blk j = b then p j else 0 :=
+            Finset.sum_filter _ _
+        _ = ∑ j, p j * ∑ k ∈ Finset.univ.filter
+              (fun k => blk k = b), U k k :=
+            Finset.sum_congr rfl fun j _ => (hpE j).symm
+        _ = (∑ j, p j) * ∑ k ∈ Finset.univ.filter
+              (fun k => blk k = b), U k k :=
+            (Finset.sum_mul _ _ _).symm
+        _ = ∑ k ∈ Finset.univ.filter
+              (fun k => blk k = b), U k k := by
+            rw [hsump, Matrix.one_mul]
+    intro x hx
+    rw [hPE]
+    exact blockSum_central S blk U hUmul hspan b x hx
+  exact ⟨p, v, base, hbase_blk, hbase_eq,
+    fun j => (hslot j).1, fun j => (hslot j).2.1,
+    fun j => (hslot j).2.2.1, horthp, hsump,
+    hvS, hlaw, hv2, hcent, hpne, hpcorner⟩
+
+/-- **Star unit system, corner form** (`cor:reciprocal-wedderburn`): the
+conclusion of `star_unit_system` together with `p_j ≠ 0` and the corner
+minimality `p_j S p_j = ℂ p_j` for every slot; these two clauses are what
+the reciprocal Kronecker form needs.  Original docstring: **Star unit system**: every star-closed subalgebra of a
+finite complex matrix algebra carries a self-adjoint central
+unit system inside itself — pairwise-orthogonal self-adjoint
+projections `p` summing to `1`, block-constant base points,
+partial isometries `v` with `v_j* v_k = δ_{jk} p_{base j}` and
+`v_j v_j* = p_j` (so the matrix units are `f_{jk} = v_j v_k*`),
+and central block projections `∑_{blk = b} p_j`.  This is the
+bridge from the abstract Artin–Wedderburn equivalence
+(`matrixBlockDecomposition`) demanded by
+`thm:commutant-decomposition`. -/
+theorem star_unit_system_corner
+    (hstar : ∀ a ∈ S, aᴴ ∈ S) :
+    ∃ (M : ℕ) (blk : Fin M → ℕ)
+      (p v : Fin M → Matrix n n ℂ) (base : Fin M → Fin M),
+      (∀ j, blk (base j) = blk j)
+      ∧ (∀ j k, blk j = blk k → base j = base k)
+      ∧ (∀ j, p j ∈ S) ∧ (∀ j, (p j)ᴴ = p j)
+      ∧ (∀ j, p j * p j = p j)
+      ∧ (∀ j k, j ≠ k → p j * p k = 0)
+      ∧ (∑ j, p j = 1)
+      ∧ (∀ j, v j ∈ S)
+      ∧ (∀ j k, (v j)ᴴ * v k
+          = if j = k then p (base j) else 0)
+      ∧ (∀ j, v j * (v j)ᴴ = p j)
+      ∧ (∀ b : ℕ, ∀ x ∈ S,
+          (∑ j ∈ Finset.univ.filter
+            (fun j => blk j = b), p j) * x
+          = x * ∑ j ∈ Finset.univ.filter
+            (fun j => blk j = b), p j)
+      ∧ (∀ j, p j ≠ 0)
+      ∧ (∀ j, ∀ a ∈ S, ∃ c : ℂ, p j * (a * p j) = c • p j) := by
+  classical
+  obtain ⟨r, d, _, ⟨e⟩⟩ :=
+    FiniteStarSubalgebraMutualCommutant.matrixBlockDecomposition
+      S hstar
+  set σ : Fin (Fintype.card ((i : Fin r) × Fin (d i)))
+      ≃ (i : Fin r) × Fin (d i) :=
+    (Fintype.equivFin ((i : Fin r) × Fin (d i))).symm
+    with hσdef
+  set blk : Fin (Fintype.card ((i : Fin r) × Fin (d i))) → ℕ :=
+    fun j => ((σ j).1 : ℕ) with hblkdef
+  set U : Fin (Fintype.card ((i : Fin r) × Fin (d i)))
+      → Fin (Fintype.card ((i : Fin r) × Fin (d i)))
+      → Matrix n n ℂ :=
+    fun j k =>
+      ((e.symm (blockUnit d (σ j) (σ k)) : S) : Matrix n n ℂ)
+    with hUdef
+  have hUmul : UnitLaw blk U := by
+    intro j k l m'
+    simp only [hUdef]
+    rw [← MulMemClass.coe_mul, ← map_mul, blockUnit_mul]
+    by_cases hcond : k = l ∧ blk j = blk k ∧ blk l = blk m'
+    · obtain ⟨rfl, hc2, hc3⟩ := hcond
+      rw [if_pos ⟨rfl, Fin.val_injective hc2,
+          Fin.val_injective hc3⟩,
+        if_pos ⟨rfl, hc2, hc3⟩]
+    · rw [if_neg hcond, if_neg]
+      · rw [map_zero, ZeroMemClass.coe_zero]
+      · intro hσc
+        exact hcond ⟨σ.injective hσc.1,
+          congrArg Fin.val hσc.2.1,
+          congrArg Fin.val hσc.2.2⟩
+  have hUS : ∀ j k, U j k ∈ S := fun j k =>
+    SetLike.coe_mem (e.symm (blockUnit d (σ j) (σ k)))
+  have hUsum : ∑ j, U j j = 1 := by
+    simp only [hUdef]
+    rw [← AddSubmonoidClass.coe_finsetSum, ← map_sum]
+    have hreindex :
+        ∑ j : Fin (Fintype.card ((i : Fin r) × Fin (d i))),
+          blockUnit d (σ j) (σ j)
+        = ∑ js : (i : Fin r) × Fin (d i), blockUnit d js js :=
+      Equiv.sum_comp σ (fun js => blockUnit d js js)
+    rw [hreindex, blockUnit_diag_sum, map_one,
+      OneMemClass.coe_one]
+  have hUne : ∀ j k, blk j = blk k → U j k ≠ 0 := by
+    intro j k hjk h0
+    simp only [hUdef] at h0
+    simp only [hblkdef] at hjk
+    have h1 : e.symm (blockUnit d (σ j) (σ k)) = 0 :=
+      Subtype.ext
+        (h0.trans (ZeroMemClass.coe_zero S).symm)
+    have h2 : blockUnit d (σ j) (σ k) = 0 := by
+      have h3 := congrArg e h1
+      rwa [AlgEquiv.apply_symm_apply, map_zero] at h3
+    exact blockUnit_ne_zero d (Fin.val_injective hjk) h2
+  have hspan : ∀ x ∈ S, x ∈ Submodule.span ℂ
+      {y | ∃ j k, blk j = blk k ∧ y = U j k} := by
+    intro x hx
+    have hxeq : (⟨x, hx⟩ : S) = e.symm (e ⟨x, hx⟩) :=
+      (AlgEquiv.symm_apply_apply e _).symm
+    set z := e (⟨x, hx⟩ : S) with hzdef
+    have hsingle : ∀ (b : Fin r) (α β : Fin (d b)),
+        (z b α β) • blockUnit d ⟨b, α⟩ ⟨b, β⟩
+          = Pi.single b (Matrix.single α β (z b α β)) := by
+      intro b α β
+      rw [blockUnit_same, ← Pi.single_smul,
+        Matrix.smul_single, smul_eq_mul, mul_one]
+    have hcollapse : ∀ b : Fin r,
+        ∑ α : Fin (d b), ∑ β : Fin (d b),
+          Pi.single b (Matrix.single α β (z b α β))
+        = (Pi.single b (z b) :
+            ∀ i, Matrix (Fin (d i)) (Fin (d i)) ℂ) := by
+      intro b
+      funext i
+      by_cases hib : i = b
+      · subst hib
+        simp only [Finset.sum_apply, Pi.single_eq_same]
+        exact (Matrix.matrix_eq_sum_single (z i)).symm
+      · simp only [Finset.sum_apply,
+          Pi.single_eq_of_ne hib, Finset.sum_const_zero]
+    have hzsum : z = ∑ b : Fin r, ∑ α : Fin (d b),
+        ∑ β : Fin (d b),
+        (z b α β) • blockUnit d ⟨b, α⟩ ⟨b, β⟩ := by
+      calc z = ∑ b : Fin r, Pi.single b (z b) :=
+            (Finset.univ_sum_single z).symm
+        _ = ∑ b : Fin r, ∑ α : Fin (d b), ∑ β : Fin (d b),
+              Pi.single b (Matrix.single α β (z b α β)) :=
+            Finset.sum_congr rfl fun b _ => (hcollapse b).symm
+        _ = ∑ b : Fin r, ∑ α : Fin (d b), ∑ β : Fin (d b),
+              (z b α β) • blockUnit d ⟨b, α⟩ ⟨b, β⟩ :=
+            Finset.sum_congr rfl fun b _ =>
+              Finset.sum_congr rfl fun α _ =>
+                Finset.sum_congr rfl fun β _ =>
+                  (hsingle b α β).symm
+    have hS : (⟨x, hx⟩ : S) = ∑ b : Fin r, ∑ α : Fin (d b),
+        ∑ β : Fin (d b),
+        (z b α β) • e.symm (blockUnit d ⟨b, α⟩ ⟨b, β⟩) := by
+      rw [hxeq]
+      conv_lhs => rw [hzsum]
+      rw [map_sum]
+      refine Finset.sum_congr rfl fun b _ => ?_
+      rw [map_sum]
+      refine Finset.sum_congr rfl fun α _ => ?_
+      rw [map_sum]
+      refine Finset.sum_congr rfl fun β _ => ?_
+      rw [map_smul]
+    have hxval : x = ∑ b : Fin r, ∑ α : Fin (d b),
+        ∑ β : Fin (d b),
+        (z b α β) • ((e.symm (blockUnit d ⟨b, α⟩ ⟨b, β⟩) : S)
+          : Matrix n n ℂ) := by
+      have h4 := congrArg
+        (fun t : S => (t : Matrix n n ℂ)) hS
+      simp only [AddSubmonoidClass.coe_finsetSum,
+        Subalgebra.coe_smul] at h4
+      exact h4
+    rw [hxval]
+    refine Submodule.sum_mem _ fun b _ =>
+      Submodule.sum_mem _ fun α _ =>
+        Submodule.sum_mem _ fun β _ =>
+          Submodule.smul_mem _ _ (Submodule.subset_span ?_)
+    refine ⟨σ.symm ⟨b, α⟩, σ.symm ⟨b, β⟩, ?_, ?_⟩
+    · show ((σ (σ.symm ⟨b, α⟩)).1 : ℕ)
+        = ((σ (σ.symm ⟨b, β⟩)).1 : ℕ)
+      rw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+    · simp only [hUdef]
+      rw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+  obtain ⟨p, v, base, h1, h2, h3, h4, h5, h6, h7,
+    h8, h9, h10, h11, h12, h13⟩ :=
+    star_matrix_units_corner S blk U hstar hUmul hUS hUsum hUne hspan
+  exact ⟨_, blk, p, v, base, h1, h2, h3, h4, h5, h6, h7,
+    h8, h9, h10, h11, h12, h13⟩
+
+
+end Corner
+
 end StarUnits
 end RenewalGeometry
