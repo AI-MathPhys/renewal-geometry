@@ -53,29 +53,48 @@
   "thm:summary-metric": {
     "env": "theorem",
     "title": "Independent metric reconstruction and stable compact-spin convergence",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Spectralization/SummaryMetricReconstructionExact.lean:RenewalGeometry.SummaryMetric.summary_metric",
       "RenewalGeometry/Spectralization/CanonicalGraphSpectralizationExact.lean:RenewalGeometry.CanonicalGraphSpectralization.canonical_graph_spectralization",
       "RenewalGeometry/Spectralization/A3ConnesFlatUniformConvergenceExact.lean:RenewalGeometry.A3ConnesFlatUniformConvergence.tendsto_distanceError_zero",
+      "RenewalGeometry/Spectralization/UniversalOneFormDiracKernelGrowthExact.lean:RenewalGeometry.UniversalOneFormDiracKernelGrowth.extensive_universal_oneform_kernel",
+      "RenewalGeometry/Spectralization/CellularModularHodgeExact.lean:RenewalGeometry.CellularModularHodge.cellular_modular_hodge",
+      "RenewalGeometry/Spectralization/PeriodicTorusCubicalHarmonicExact.lean:RenewalGeometry.PeriodicTorusCubical.finrank_harmonicSpace_eq_three",
+      "RenewalGeometry/DiscreteAnalysis/CoframeDirichletFormLimitExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.tendsto_dirichletForm_metric",
+      "RenewalGeometry/DiscreteAnalysis/FrozenWilsonSymbolExact.lean:RenewalGeometry.FrozenWilsonSymbol.frozenSymbol_eq_zero_iff",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.variable_garding",
+      "RenewalGeometry/DiscreteAnalysis/CovariantWilsonCoreConsistencyExact.lean:RenewalGeometry.CovariantWilsonCoreConsistency.norm_covariantWilson_sample_sub_densitySymmetricDirac_le",
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas.compactSpinMain_norm_resolvent",
+      "RenewalGeometry/Spectralization/CompactSpinMainAssemblyExact.lean:RenewalGeometry.compactSpinMain",
+      "RenewalGeometry/Spectralization/CompactSpinMainAssemblyExact.lean:RenewalGeometry.compactSpinMain_exists_metricHeads",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.exists_meshSequence",
       "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong"
     ],
-    "note": "Partial: clause (i) is proved (graph Hodge-Dirac square/commutator identities and uniform convergence of the A3 Connes distance to the flat torus quotient metric); for (iv) only the abstract collectively-compact strong-plus-adjoint to norm-resolvent upgrade is proved. Missing: (ii) relation-adapted cellular completion and its compact limit, (iii) covariant Wilson species/graph estimates, the atlas-based norm-resolvent theorem, and (v) the global metric head.",
-    "difficulty": "hard",
-    "plan": "Aggregate of five clauses; (i) is proved (CanonicalGraphSpectralizationExact, A3ConnesFlatUniformConvergenceExact). (ii)-(v) depend on the cellular completion continuum limit, the Wilson species/Garding estimates (thm:supp-general-Wilson-ellipticity), the atlas norm-resolvent theorem (thm:supp-compact-spin-resolvent) and the global metric head (thm:supp-global-metric), all of which need unbounded self-adjoint operators, Sobolev/Rellich compactness and Riemannian geodesic approximation absent from Mathlib. Only the abstract collectively-compact step (OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean) exists; cannot be assembled before those components."
+    "note": "Assembled as one theorem summary_metric (Spectralization/SummaryMetricReconstructionExact.lean) conjoining the five clauses, each proved by its component record. (i) canonical_graph_spectralization (eq:summary-graph-identities, thm:supp-A3-finite: Dirac square, commutator seminorm = local carre-du-champ, constant kernel) and tendsto_distanceError_zero (eq:summary-A3-distance: sup over all vertex pairs of |d_h^Connes - d_g| -> 0 for the periodic A3 approximants, thm:supp-A3-distance, with d_g the flat quotient metric reconstructed independently). (ii) rendered by the proved records behind it: the one-step universal graph calculus has the extensive one-form kernel dim Ker D = 2e - n + 2, = 11n + 2 on periodic A3 root graphs and unbounded (cth:supp-extensive-kernel, extensive_universal_oneform_kernel), whereas the relation-adapted cellular completion carries the cellular Hodge decomposition a = d0 phi + h_a + d1* psi of thm:supp-modular-Hodge (cellular_modular_hodge) with a finite harmonic one-form space, of dimension b1 = 3 on the periodic three-torus (finrank_harmonicSpace_eq_three) - this is the removal of the extensive kernel; the 'expected continuum limit' clause is rendered by the proved Dirichlet-form limit of the coframe renewal packet on the torus, -<f, L_h f> -> int (1/2) g^{ij} d_i f d_j f rho (eq:supp-general-form-limit, tendsto_dirichletForm_metric), i.e. the quadratic form of the Dirac square converging to the Riemannian energy. (iii) the covariant Wilson construction has one low-energy species: the frozen symbol vanishes only at theta = 0 on the Brillouin torus (frozenSymbol_eq_zero_iff), satisfies the local uniform graph estimate eq:supp-general-Garding with variable coefficients on the periodic lattice torus (variable_garding, thm:supp-general-Wilson-ellipticity, closed in this batch), and is consistent with the density-symmetric Dirac operator on the smooth core (lem:supp-general-core). (iv) for a compatible stable spin discretisation in the sense of def:stable-spin-atlas (the abstract atlas CompatibleStableAtlas: a Hilbert space with the doubled Dirac operator given by self-adjoint resolvent data, a core, a compact Sobolev embedding, finite stages with isometries and the axioms (A1)-(A3)), ||W_h (D_h - z)^{-1} W_h^* - (D_hat - z)^{-1}|| -> 0 for every non-real z (compactSpinMain_norm_resolvent, eq:summary-spin-resolvent, thm:supp-compact-spin-resolvent / thm:compact-spin-main). (v) every compact metric space with the chain property (the closed Riemannian manifold with its geodesic distance, Hopf-Rinow rendered as HasChains) admits finite metric triples on refining meshes, with positive edge lengths and pure-state Connes distance equal to the graph distance, whose distances converge uniformly to the metric: an error sequence -> 0 bounds |d_h^met(x,y) - d_g(x,y)| over all vertex pairs (compactSpinMain_exists_metricHeads, eq:summary-global-metric, thm:supp-global-metric). Inherited surrogate disclosures: no manifold, spinor bundle or Riemannian distance objects (Mathlib lacks them) - the spin side is the abstract atlas and the metric side a compact chain metric space; the Wilson estimates live on the periodic torus (the paper's fixed periodic extension); clause (ii)'s compact-resolvent operator limit of the cellular Hodge-Dirac operator is not a supplement theorem and is represented by the Dirichlet-form limit; real and grading structures are not encoded."
   },
   "thm:summary-universality": {
     "env": "theorem",
     "title": "Universality fibres and coarse graining",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Spectralization/SummaryUniversalityFibresExact.lean:RenewalGeometry.SummaryUniversality.summary_universality",
+      "RenewalGeometry/Spectralization/StationaryRenewalGraphCurrentFibreExact.lean:RenewalGeometry.StationaryRenewalGraphFibre.SimpleOrientation.stationary_markov_realization_fibre",
+      "RenewalGeometry/Spectralization/NonlinearAffinityHodgeExact.lean:RenewalGeometry.NonlinearAffinityHodge.affinityClass_bijOn",
+      "RenewalGeometry/Spectralization/ModularAffinityReversalPacketExact.lean:RenewalGeometry.ModularAffinityReversalPacket.current_eq_of_affinity_class_eq",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkUniquenessExact.lean:RenewalGeometry.OperatorTailMeasure.naimark_realization_unitary",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.canonical_isCyclic",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.canonical_markov",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.PontryaginRealization.existsUnique_sourceFixing_unitary",
+      "RenewalGeometry/Spectralization/MarkedSpectralBundleDescentExact.lean:RenewalGeometry.MarkedBundle.gaugeEquivalent_iff_holonomy_conj",
+      "RenewalGeometry/Predictive/UniversalityPacketFunctorExact.lean:RenewalGeometry.UniversalityPacket.universality_packet_functor",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.finite_stratified_exhaustion",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem.completedEquivSections",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem.nonempty_completed_iff_stableImage",
       "RenewalGeometry/Spectralization/FiniteGraphSpectralUniversalityFibreExact.lean:RenewalGeometry.FiniteGraphSpectralUniversalityFibre.graph_spectral_universality_fibre",
-      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankel_minimalRealizations_uniquelySimilar",
-      "NCG/Graph/Cohomology.lean:NCG.Multigraph.H1.mk_eq_zero_of_holonomy_eq_zero",
-      "RenewalGeometry/MarkovChains/CoarseAndHiddenEntropyProduction.lean:RenewalGeometry.CoarseAndHiddenEntropyProduction.coarse_and_hidden_entropy_production"
+      "RenewalGeometry/Spectralization/FiniteSpectralUniversalityExact.lean:RenewalGeometry.FiniteSpectralUniversality.finite_spectral_universality"
     ],
-    "note": "Partial: (i) the current fibre (open conductance box in ker B, dimension b_1, entropy zero iff j=0) is proved but not the modular-class recovery of the generator; (ii) only Hankel-rank minimal realization and unique similarity (no Stieltjes measure classification, no Pontryagin index); (iii) only the Z/2 special case (holonomy separates H^1(Gamma;Z/2)); (iv) only b_1 monotonicity and a lumpable entropy split; (v) nothing.",
-    "difficulty": "hard",
-    "plan": "Aggregate: (i) needs thm:supp-graph-realization + thm:supp-nonlinear-Hodge (finite, feasible), (ii) needs the operator-valued Stieltjes dilation (con:supp-Naimark-tail, hard) and the Pontryagin realization (thm:supp-complete-rational-Krein, hard), (iii) needs general-G monodromy classification (thm:supp-marked-bundle, medium), (iv) the coarse-graining functors (thm:supp-fibre-RG, hard), (v) the stratified exhaustion theorems (hard). Assemble only after the components; the finite graph/monodromy parts could be stated as a partial packet from FiniteGraphSpectralUniversalityFibreExact.lean and NCG/Graph/SignedCover.lean."
+    "note": "Assembled as one theorem summary_universality (Spectralization/SummaryUniversalityFibresExact.lean) conjoining the five clauses, each proved by its component record. (i) the stationary realization fibre of a metric graph triple is J(G,c): every stationary realization with masses m and conductances c is uniquely (c + j)/m with j in the closed current polytope, the open polytope is in bijection with the positive-edge stationary realizations and every member has the same Hodge-Dirac operator (stationary_markov_realization_fibre, thm:supp-graph-realization); the modular class recovers the complete directed generator: the affinity map j -> [artanh(j/c)] is a bijection J(G,c) -> H^1(G;R) (affinityClass_bijOn, thm:supp-nonlinear-Hodge) and two currents with the same class coincide (current_eq_of_affinity_class_eq, cor:supp-faithful-modular), so the class determines j and hence the rates (c +- j)/m. (ii) positive hidden memory is classified by its minimal operator-valued Stieltjes measure: the canonical dilation (K_mu, P_mu, V_mu) is a minimal realization and any two minimal realizations of mu are related by a unique unitary intertwining the spectral measures and the sources (naimark_realization_unitary, eq:supp-Naimark-unitary, thm:supp-Naimark-realization); finite rational Hermitian indefinite memory (Laurent data of finite Hankel rank, the strictly proper part) has the canonical source-minimal Pontryagin realization with the prescribed Markov parameters (canonical_isCyclic, canonical_markov), unique up to a source-fixing Pontryagin unitary (existsUnique_sourceFixing_unitary, thm:supp-complete-rational-Krein). (iii) locally identical marked packets glued over a connected graph are globally classified by the monodromy class: two flat marked bundle data are gauge equivalent iff their loop holonomies at a base vertex are conjugate by one element of G_S, i.e. [rho] in Hom(pi_1(Gamma), G_S)/G_S (gaugeEquivalent_iff_holonomy_conj, thm:supp-marked-bundle (B4)). (iv) current, memory and monodromy admit the canonical composable coarse-graining map eq:supp-U-map with the entropy contraction, source-rank and negative-squares monotonicity and exact monodromy descent (universality_packet_functor, thm:supp-fibre-RG, all seven clauses restated verbatim). (v) the fully reduced finite inverse fibre is the stratified stabilizer quotient (finite_stratified_exhaustion, thm:supp-finite-exhaustion, closed in this batch) and, for a completed finite-stage system with the separation, tightness, compact-strata and continuous-bonding hypotheses, the completed fibre is the inverse limit of the finite strata and is nonempty exactly when the stable-image system is (completedEquivSections, nonempty_completed_iff_stableImage, thm:supp-semifinite-exhaustion, closed in this batch). Inherited disclosures: the descriptor (pencil) part of the indefinite-memory classification (cor:supp-all-rational: polynomial part of a general rational Hermitian function, being worked on in the concurrent batch) is not part of the statement - clause (ii) covers the strictly proper Pontryagin part exactly as thm:supp-complete-rational-Krein; the retained factors of clause (v) enter as gauge-sets and the completed system's separation/tightness are structure fields; the finite index/packet types are taken in Type (universe 0) while the Hilbert spaces of clauses (ii) and the graph/group of (iii) are universe polymorphic; the fundamental group is presented by closed walks modulo backtracking as in thm:supp-marked-bundle."
   },
   "def:finite-real-differential": {
     "env": "definition",
@@ -287,13 +306,17 @@
   "lem:supp-A3-compactness": {
     "env": "lemma",
     "title": "Compactness of discrete unit-Lipschitz functions",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/DiscreteAnalysis/A3DiscreteUnitBallCompactnessExact.lean:RenewalGeometry.A3DiscreteUnitBallCompactness.exists_uniformly_convergent_extensions_on_ball"
+      "RenewalGeometry/Continuum/A3SharpLipschitzLimitExact.lean:RenewalGeometry.A3SharpLipschitzLimit.a3_limit_sharp_gradient_bound",
+      "RenewalGeometry/Continuum/A3SharpLipschitzLimitExact.lean:RenewalGeometry.A3SharpLipschitzLimit.abs_sub_le_connesDistance",
+      "RenewalGeometry/Continuum/A3SharpLipschitzLimitExact.lean:RenewalGeometry.A3SharpLipschitzLimit.tendsto_point_approxVertex",
+      "RenewalGeometry/Continuum/A3SharpLipschitzLimitExact.lean:RenewalGeometry.A3SharpLipschitzLimit.tendsto_flatDistance",
+      "RenewalGeometry/DiscreteAnalysis/A3DiscreteUnitBallCompactnessExact.lean:RenewalGeometry.A3DiscreteUnitBallCompactness.exists_uniformly_convergent_extensions_on_ball",
+      "RenewalGeometry/Continuum/LipschitzLimitGradientBoundExact.lean:RenewalGeometry.LipschitzLimitGradientBound.ae_differentiableAt_and_norm_fderiv_le",
+      "RenewalGeometry/Continuum/LipschitzLimitGradientBoundExact.lean:RenewalGeometry.LipschitzLimitGradientBound.a3_limit_ae_gradient_bound"
     ],
-    "note": "Partial: anchored discrete unit-ball functions admit 18-Lipschitz Euclidean extensions with a uniformly convergent subsequence on every closed ball; missing: the sharp limit bound |grad F| <= 1 a.e. and the W^{1,inf} identification (the Lean distance proof avoids this lemma by smoothing).",
-    "difficulty": "hard",
-    "plan": "The library has an 18-Lipschitz extension with uniformly convergent subsequence (A3DiscreteUnitBallCompactnessExact.lean:exists_uniformly_convergent_extensions_on_ball) but the sharp conclusion |∇F| <= 1 a.e. in W^{1,∞} is not reachable: it needs lower semicontinuity of the A3 seminorm under uniform limits of interpolants and the W^{1,∞} = Lipschitz identification. Reformulate as 'the limit F is 1-Lipschitz for the Euclidean metric' (then |∇F| <= 1 a.e. follows from Mathlib's Rademacher theorem LipschitzWith.ae_differentiableAt); even so the sharp constant 1 (rather than 18) requires a new interpolation argument (the Lean distance proof deliberately avoids this lemma by smoothing)."
+    "note": "Sharp constant proved. a3_limit_sharp_gradient_bound: for anchored discrete unit-ball sequences f_n on the periodic A3 graphs (graphLipschitz ≤ 1, f_n(0) = 0), the exact Euclidean Lipschitz extensions G_n converge uniformly on the closed ball of radius 6 (which contains all mesh vertices and the fundamental domain) along a subsequence to the restriction of F : Space → ℝ with (i) |F z − F z'| ≤ d_flat(z,z') for all z, z' in the fundamental parallelepiped of the period lattice, (ii) LipschitzOnWith 1 F there, and (iii) F differentiable with ‖∇F‖ ≤ 1 volume-a.e. on the parallelepiped (eq:supp-A3-limit-Lip). Proof: unit-ball functions are dominated by the finite Connes distance (abs_sub_le_connesDistance, sSup bound), the Connes distances converge uniformly to the flat torus distance (A3ConnesFlatUniformConvergenceExact), every point Σ t_i basis_i of the parallelepiped is the limit of mesh vertices (tendsto_point_approxVertex), the flat distance is jointly continuous (tendsto_flatDistance), and Rademacher (HasFDerivAt.le_of_lipschitzOn on the interior; the boundary of the convex parallelepiped is null). Disclosed gaps: the paper's periodic piecewise-affine interpolants on the torus M are replaced by Euclidean Lipschitz extensions, and M by the fundamental parallelepiped (the torus as a set, up to the null boundary); the weak-* / tight-frame route of the paper's proof is replaced by the metric (Connes-distance) route."
   },
   "thm:supp-A3-distance": {
     "env": "theorem",
@@ -323,14 +346,16 @@
   "thm:compact-spin-main": {
     "env": "theorem",
     "title": "Norm-resolvent convergence criterion under atlas stability",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong",
-      "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.norm_tendsto_zero_of_collectivelyCompact_of_adjointStrong"
+      "RenewalGeometry/Spectralization/CompactSpinMainAssemblyExact.lean:RenewalGeometry.compactSpinMain",
+      "RenewalGeometry/Spectralization/CompactSpinMainAssemblyExact.lean:RenewalGeometry.compactSpinMain_exists_metricHeads",
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas.compactSpinMain_norm_resolvent",
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.MeshSequence.exists_error_tendsto_zero_of_compactSpace",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.exists_meshSequence"
     ],
-    "note": "Partial: the abstract analytic step of the proof (strong convergence of a collectively compact family and of its adjoints implies operator-norm convergence, with compact limit) is proved; missing: the Wilson operators, the atlas hypotheses, Rellich compactness of embedded resolvents, identification of the limit with (D-z)^{-1}, and the metric-head convergence.",
-    "difficulty": "hard",
-    "plan": "Identical to thm:supp-compact-spin-resolvent plus thm:supp-global-metric. Only OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong exists. Missing: Wilson operators, the atlas definition (needs H^1 spinor Sobolev space), Rellich compactness, unbounded self-adjoint D̂ with a smooth core and identification of the strong limit with (D̂ - z)^{-1}, and the geodesic metric convergence; all outside Mathlib's current reach."
+    "note": "Both convergence clauses proved in the abstract surrogate and assembled in compactSpinMain. Spin clause eq:compact-spin-resolvent-main: for a CompatibleStableAtlas (the surrogate of def:stable-spin-atlas: finite Hilbert spaces, self-adjoint stage operators, isometries, a smooth core with consistency, stability and reconstruction hypotheses on a fixed Hilbert space carrying the doubled Dirac operator as resolvent data) ‖W_h(D_h−z)^{-1}W_h^* − (D̂−z)^{-1}‖ → 0 for every non-real z (compactSpinMain_norm_resolvent). Metric clause eq:compact-spin-distance-main: the closed Riemannian manifold is a compact metric space with the chain property (geodesic partitioning, see thm:supp-global-metric); for every refining mesh sequence of finite metric triples sup_{x,y∈V_h}|d_h^met − d_g| → 0 (error sequence form), and compactSpinMain_exists_metricHeads gives the existence form: every compact chain metric space admits finite metric triples (finite vertex/edge sets, positive edge lengths, Connes distance = graph distance) on refining meshes with uniform convergence. Not encoded: the remark that real and grading structures are retained when intertwined as in def:stable-spin-atlas (the atlas surrogate carries no real/grading structure), and the concrete Wilson operators are not tied to the atlas fields (the hypothesis 'the finite covariant Wilson operators form a compatible stable spin discretization' is the atlas structure itself)."
   },
   "def:supp-current-polytope": {
     "env": "definition",
@@ -539,37 +564,60 @@
   "con:supp-Naimark-tail": {
     "env": "construction",
     "title": "Canonical minimal Stieltjes dilation",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [
-      "RenewalGeometry/Spectralization/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkIsometry",
-      "RenewalGeometry/Spectralization/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkProjection"
+      "RenewalGeometry/Analysis/OperatorMeasureL2Completion.lean:RenewalGeometry.OperatorMeasureL2.PosOperatorMeasure.form",
+      "RenewalGeometry/Analysis/OperatorMeasureL2Completion.lean:RenewalGeometry.OperatorMeasureL2.PosOperatorMeasure.form_indicator_const",
+      "RenewalGeometry/Analysis/OperatorMeasureL2Completion.lean:RenewalGeometry.OperatorMeasureL2.PosOperatorMeasure.re_form_self_nonneg",
+      "RenewalGeometry/Analysis/OperatorMeasureL2Completion.lean:RenewalGeometry.OperatorMeasureL2.L2",
+      "RenewalGeometry/Analysis/OperatorMeasureL2Completion.lean:RenewalGeometry.OperatorMeasureL2.L2.mul",
+      "RenewalGeometry/Analysis/OperatorMeasureL2Completion.lean:RenewalGeometry.OperatorMeasureL2.L2.proj",
+      "RenewalGeometry/Analysis/OperatorMeasureL2Completion.lean:RenewalGeometry.OperatorMeasureL2.L2.hasSum_proj",
+      "RenewalGeometry/Analysis/OperatorMeasureL2Completion.lean:RenewalGeometry.OperatorMeasureL2.L2.embed",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.kSpace",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.spectralProj",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.embedV",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.compressB",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.resolventOp",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.heatOp",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.isSpectralMeasure_spectralProj"
     ],
-    "note": "Partial: the finite-outcome Naimark dilation (stacked square-root isometry and coordinate projections) is constructed; missing: the simple-function Hilbert space K_mu, the projection-valued measure P_mu, C_mu = int lambda dP_mu and B_mu = V_mu^* for a Borel operator measure.",
-    "difficulty": "hard",
-    "plan": "Requires the Hilbert-space completion of H-valued simple functions under ⟨·,·⟩_μ (equivalently L^2(Tr μ; H) with the matrix-density weight ρ = dμ/dTr μ), the projection-valued measure P_μ(E) = multiplication by 1_E, and the unbounded self-adjoint multiplication operator C_μ = ∫ λ dP_μ on an unbounded support. Mathlib has L^2 spaces and MeasureTheory.Lp but no spectral-measure calculus or unbounded multiplication operators packaged as self-adjoint operators; infrastructure-level. A bounded-support version (C_μ bounded, K_μ = Lp with weighted inner product) is a large but finite-analysis project."
+    "note": "Construction encoded, with its defining properties proved. Analysis/OperatorMeasureL2Completion.lean builds, for any positive-semidefinite-valued vector measure μ with finite variation (PosOperatorMeasure; PositiveTailMeasure.toPosOperatorMeasure), the pre-Hilbert space PreL2 μ of bounded measurable H-valued functions with the semi-inner product ⟨f,g⟩_μ = ∫⟨f, dμ g⟩ (form; on indicators it is the paper's ∑⟨ξ_j, μ(E_j ∩ F_k) η_k⟩, form_indicator_const; positivity for simple functions by SimpleFunc.induction and for bounded measurable functions by dominated convergence, re_form_self_nonneg), the Hilbert space K_μ = L2 μ := Completion (SeparationQuotient (PreL2 μ)) (quotient by the null space, completed) with dense embedding L2.mk, the bounded multipliers L2.mul g (‖g f‖_μ ≤ sup|g| ‖f‖_μ from positivity applied to √(sup|g|²−|g|²) f; multiplicative, unital, additive, adjoint = conj), the projection-valued measure P_μ(E) = L2.proj (multiplication by 1_E: self-adjoint idempotents, P(E∩F)=P(E)P(F), P(univ)=1, finitely additive, strongly σ-additive hasSum_proj), and V_μ ξ = [1 ξ] = L2.embed with B_μ = V_μ^* (compressB). The unbounded operator C_μ = ∫λ dP_μ is not defined as a LinearPMap (no spectral theorem in Mathlib); it is represented by its bounded functional calculus: resolventOp z = multiplication by (λ−z)^{-1} (the resolvent (C_μ−z)^{-1}, z ∉ [0,∞)) and heatOp t = multiplication by e^{-tλ} (e^{-tC_μ}); these multipliers are set to 0 on the μ-null set (−∞,0] so that they are bounded. Disclosed surrogate: the pre-Hilbert space uses bounded measurable functions instead of simple functions (the simple functions are dense in it, mk_mem_closure_sourceSpan), which yields the same completion."
   },
   "thm:supp-Naimark-realization": {
     "env": "theorem",
     "title": "Operator-measure realization and minimality",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Spectralization/FiniteNaimarkDilation.lean:RenewalGeometry.finiteNaimarkDilation"
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.naimark_realization",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.stieltjesSelfEnergy_eq_compress",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.minimal",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.toVectorMeasure_eq_compress",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.IsSpectralMeasure.ofSpectralMeasure",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.IsSpectralMeasure.stieltjesSelfEnergy_ofSpectralMeasure",
+      "RenewalGeometry/Analysis/OperatorMeasureL2Completion.lean:RenewalGeometry.OperatorMeasureL2.L2.topologicalClosure_sourceSpan",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkUniquenessExact.lean:RenewalGeometry.OperatorTailMeasure.IsMinimalRealization",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkUniquenessExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.isMinimalRealization_canonical",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkUniquenessExact.lean:RenewalGeometry.OperatorTailMeasure.IsMinimalRealization.existsUnique_unitary",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkUniquenessExact.lean:RenewalGeometry.OperatorTailMeasure.naimark_realization_unitary",
+      "RenewalGeometry/Analysis/GramDeterminedIsometry.lean:RenewalGeometry.GramIsometry.existsUnique_linearIsometryEquiv"
     ],
-    "note": "Partial: for a finite-outcome POVM the dilation is isometric, the outcomes are orthogonal projections resolving one, and compression recovers every effect; missing: the resolvent identity Sigma_mu(z) = B(C-z)^{-1}B^*, the minimality span, the converse from (C,B) and the unique intertwining unitary between minimal realizations.",
-    "difficulty": "hard",
-    "plan": "Depends on con:supp-Naimark-tail. Needs the resolvent of the unbounded multiplication operator C_μ, the identity Σ_μ(z) = B_μ (C_μ - z)^{-1} B_μ^*, minimality of the cyclic span, the converse from a spectral measure E_C (spectral theorem for unbounded self-adjoint operators, absent from Mathlib) and uniqueness of the intertwining unitary between minimal realizations. Only the finite-outcome case is proved (FiniteNaimarkDilation.lean:finiteNaimarkDilation), where it could be stated as: for finite atomic μ = Σ Q_i δ_{λ_i}, Σ_μ(z) = B (C - z)^{-1} B^* with C = diag(λ_i) — that finite-atomic version would be medium."
+    "note": "All four clauses proved. (1) eq:supp-Naimark-realization Σ_μ(z) = B_μ (C_μ−z)^{-1} B_μ^* for z ∉ [0,∞) (stieltjesSelfEnergy_eq_compress) and μ(E) = B_μ P_μ(E) B_μ^*; (2) eq:supp-Naimark-minimal (minimal); (3) the converse for a spectral measure P supported in (0,∞) (IsSpectralMeasure, the spectral measure E_C of the nonnegative self-adjoint C — Mathlib has no unbounded spectral theorem, so C is represented by its spectral measure and its resolvent by any operator acting as the spectral integral of (λ−z)^{-1} on source vectors) and B = V^*: ofSpectralMeasure, stieltjesSelfEnergy_ofSpectralMeasure; (4) eq:supp-Naimark-unitary, new in this pass: IsMinimalRealization μ P V bundles a spectral measure P on a Hilbert space K, ⟨Vξ, P(E) Vη⟩ = ⟨ξ, μ(E) η⟩ (μ(E) = B P(E) B^*) and K = closed span {P(E) V ξ}; the canonical (K_μ, P_μ, V_μ) is one (isMinimalRealization_canonical), and for any two minimal realizations there is a unique unitary U : K₁ ≃ₗᵢ K₂ with U P₁(E) = P₂(E) U for every Borel E (the spectral-measure form of U C₁ = C₂ U) and U V₁ = V₂ (= U B₁^* = B₂^*) (existsUnique_unitary, packaged with the canonical case in naimark_realization_unitary). Reusable infrastructure: GramIsometry.existsUnique_linearIsometryEquiv — generating families of two Hilbert spaces with equal Gram data are related by a unique unitary (Analysis/GramDeterminedIsometry.lean)."
   },
   "thm:supp-dynamic-jets": {
     "env": "theorem",
     "title": "Static shadows, inverse moments, and positive Euclidean memory",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Miscellany/AssortedFiniteRecords03.lean:RenewalGeometry.ResistanceClock.zeroResponse",
-      "RenewalGeometry/Miscellany/AssortedFiniteRecords03.lean:RenewalGeometry.ResistanceClock.timeMemory"
+      "RenewalGeometry/Spectralization/OperatorTailMeasureDynamicJetsExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.dynamic_jets",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureIntegralCalculus.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.posSemidef_matrixIm_stieltjesSelfEnergy",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureDynamicJetsExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.tendsto_stieltjesSelfEnergy_neg_iff",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureDynamicJetsExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.iteratedDerivWithin_stieltjesSelfEnergy_zero",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureDynamicJetsExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.stieltjesSelfEnergy_neg_eq_integral_euclideanMemoryKernel",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureNaimarkRealizationExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.euclideanMemoryKernel_eq_compress",
+      "RenewalGeometry/Analysis/VectorMeasureParametricIntegral.lean:RenewalGeometry.VectorMeasureCalculus.hasDerivWithinAt_integral_of_dominated"
     ],
-    "note": "Partial: the Herglotz sign is proved in the finite atomic case (Im of the matrix Stieltjes transform is a Poisson-kernel weighted sum of psd spectral weights), and the zero-mass response int lambda^{-1} dSigma and Euclidean memory int e^{-t lambda} dSigma are defined for scalar measures with scaling laws; missing: general operator measures, the inverse-moment boundary jets, and the Laplace relation Sigma(-s) = int e^{-st} K(t) dt.",
-    "difficulty": "hard",
-    "plan": "As stated for general operator measures it needs def:supp-POVM plus dominated convergence for entrywise integrals, the inverse-moment boundary jets (r-th derivative of s ↦ ∫ (λ + s)^{-1} dμ under the integral sign) and the Laplace/Fubini relation Σ_μ(-s) = ∫_0^∞ e^{-st} K_μ(t) dt (MeasureTheory.integral_prod / Fubini with e^{-t(λ+s)}). Mathlib has the scalar tools (integral_Ioi_exp_neg, hasDerivAt_integral_of_dominated_loc_of_deriv_le), but the operator-measure layer is missing. The finite-atomic case (already partially in Miscellany/AssortedFiniteRecords03.lean:ResistanceClock) reduces every clause to finite sums and would be medium."
+    "note": "Proved for general positive operator-valued tail measures (def:supp-POVM, PositiveTailMeasure), packaged in dynamic_jets: (i) eq:supp-Herglotz-sign: Im Σ_μ(z) := (Σ-Σᴴ)/(2i) = (Im z) ∫|λ-z|^{-2} dμ ⪰ 0 for Im z > 0; (ii) eq:supp-static-inverse-moment: lim_{s↓0} Σ_μ(-s) exists iff ∫ λ^{-1} dTr μ < ∞ (both directions; necessity via monotone convergence of the trace), and then the limit is ∫ λ^{-1} dμ; (iii) eq:supp-dynamic-jet: if ∫ λ^{-(r+1)} dTr μ < ∞ then the r-th one-sided derivative of x ↦ Σ_μ(x) within (-∞,0] at 0 equals r! ∫ λ^{-(r+1)} dμ (derivatives taken entrywise, i.e. in the normed space H → H → ℂ via Matrix.of.symm, since Matrix carries no global norm); (iv) K_μ(t) = ∫ e^{-tλ} dμ ⪰ 0 for t ≥ 0, the Laplace relation Σ_μ(-s) = ∫_0^∞ e^{-st} K_μ(t) dt for s > 0 (Bochner integral of the entries; Tonelli on the scalarisations + polarisation), and the dilation form K_μ(t) = B_μ e^{-tC_μ} B_μ^* (euclideanMemoryKernel_eq_compress in the Naimark file, with e^{-tC_μ} the multiplication operator by e^{-tλ} on K_μ). Scoped choices disclosed: the jets are stated for the restriction of Σ_μ to the real axis (the paper's Σ^{(r)}_{μ,-}(0)), and the Laplace relation for s > 0. New reusable infrastructure: differentiation under the vector-measure integral sign (VectorMeasureCalculus.hasDerivWithinAt_integral_of_dominated), adjoint/Hermitian/psd calculus for operator integrals (OperatorTailMeasureIntegralCalculus), Laplace/Stieltjes Fubini relation (StieltjesLaplaceScalar)."
   },
   "thm:supp-memory-determinacy": {
     "env": "theorem",
@@ -597,20 +645,30 @@
   "cth:supp-moment-indeterminate": {
     "env": "proposition",
     "title": "All integer moments can miss the dynamic self-energy",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: lognormal, sin(2 pi log x), indeterminate, Stieltjes transform injectivity. The nearest witness, NCG.ResistanceClock.mass_moment_not_determine_response in NCG/Grand/EasyExact03.lean, shows only that mass and first moment fail to determine the zero response for a two-card family.",
-    "difficulty": "hard",
-    "plan": "Two analytic pieces absent from the library: (a) the moment identity ∫ x^n [1 + ε sin(2π log x)] lognormal dx = e^{n^2/2}, via the substitution x = e^y (Mathlib integral_comp_exp / change of variables), Gaussian integrals (integral_gaussian, completing the square e^{ny - y^2/2} = e^{n^2/2} e^{-(y-n)^2/2}) and the vanishing ∫ e^{-(y-n)^2/2} sin(2π y) dy = 0 by the shift y ↦ y + n (sin is 2π-periodic) and oddness — medium on its own; (b) that ε ≠ ε' gives different Stieltjes transforms, which needs injectivity of the Stieltjes transform on finite signed measures on (0,∞) (Stieltjes inversion, or Stone-Weierstrass density of span{(λ - z)^{-1}} in C_0) — a genuinely new analytic lemma. Together research-level effort inside Mathlib's reach only with substantial work."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Spectralization/LognormalMomentIndeterminacyExact.lean:RenewalGeometry.LognormalIndeterminacy.moment_indeterminate",
+      "RenewalGeometry/Spectralization/LognormalMomentIndeterminacyExact.lean:RenewalGeometry.LognormalIndeterminacy.integral_zpow_lognormalMeasure",
+      "RenewalGeometry/Spectralization/LognormalMomentIndeterminacyExact.lean:RenewalGeometry.LognormalIndeterminacy.exists_isOpen_stieltjesTransform_ne",
+      "RenewalGeometry/Analysis/StieltjesLaplaceScalar.lean:RenewalGeometry.StieltjesLaplace.measure_eq_of_forall_integral_inv_add_eq"
+    ],
+    "note": "Proved. lognormalMeasure ε encodes eq:supp-lognormal-family as the measure [1+ε sin(2π log x)] e^{-(log x)^2/2}/(x√(2π)) dx on (0,∞). integral_zpow_lognormalMeasure: ∫ x^n dμ_ε = e^{n^2/2} for every n ∈ ℤ and |ε| ≤ 1 (substitution x = e^y via integral_image_eq_integral_abs_deriv_smul, completing the square, shift y ↦ y+n and oddness). exists_isOpen_stieltjesTransform_ne: for ε ≠ ε' the scalar Stieltjes transforms differ on a nonempty open subset of ℂ∖[0,∞); it rests on the new reusable injectivity theorem StieltjesLaplace.measure_eq_of_forall_integral_inv_add_eq (finite measures on [0,∞) with equal Stieltjes transform on the negative axis coincide), proved exactly as in the paper: Fubini relation ∫(λ+s)^{-1}dν = ∫_0^∞ e^{-st}L_ν(t)dt and two applications of Laplace uniqueness (Laplace uniqueness at the integers is derived from the library's compact moment determinacy by pushing forward under x ↦ e^{-x}). The 'consequently' clause (positive moments, inverse moments, Hankel panels agree) is the n ∈ ℤ moment identity, since each of those quantities is a function of the integer moment sequence."
   },
   "thm:supp-contact-escape": {
     "env": "theorem",
     "title": "High-energy memory escape and instantaneous contact terms",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: escape, one-point compactification, weak-* compactness, contact term, delta_0, tail measure. NCG/Grand/EscapeHeadConcentrationExact.lean concerns finite operator escape estimates of a different theorem.",
-    "difficulty": "hard",
-    "plan": "Needs weak-* (Prokhorov) compactness of bounded operator-valued measures on the one-point compactification [m,∞], locally uniform convergence of Stieltjes transforms of the ν_n, and distributional convergence of the Euclidean kernels. Mathlib has Prokhorov for probability measures on Polish spaces (MeasureTheory/Measure/Prokhorov.lean) and Portmanteau, but not for matrix-valued measures nor on compactifications, and the locally uniform resolvent limit requires an equicontinuity argument; infrastructure-level."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Spectralization/OperatorTailMeasureContactEscapeExact.lean:RenewalGeometry.OperatorTailMeasure.contact_escape",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureContactEscapeExact.lean:RenewalGeometry.OperatorTailMeasure.tendstoLocallyUniformlyOn_stieltjesSelfEnergy",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureContactEscapeExact.lean:RenewalGeometry.OperatorTailMeasure.tendsto_integral_smul_euclideanMemoryKernel",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureContactEscapeExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.escapeMeasure",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureContactEscapeExact.lean:RenewalGeometry.OperatorTailMeasure.finitePart",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureContactEscapeExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.integral_smul_integral_kernel",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureContactEscapeExact.lean:RenewalGeometry.OperatorMeasureL2.tendstoUniformlyOn_of_lipschitzOnWith",
+      "RenewalGeometry/Analysis/OperatorMeasureWeakCompactness.lean:RenewalGeometry.OperatorMeasureL2.exists_subseq_tendsto_posOperatorMeasure"
+    ],
+    "note": "Proved (contact_escape). Hypotheses: mu n : PositiveTailMeasure H supported in [m,infty) (IsSupportedAbove m, m > 0) and Re Tr Sigma_n(0) <= C for all n (Sigma_n(0) = nu_n([m,infty)) with nu_n = lambda^{-1} d mu_n, escapeMeasure_univ). Conclusion: a strictly increasing phi and a positive operator-valued measure nulim on the one-point compactification [m,infty] realised as EscapeSpace m = Icc 0 (1/m) via y = 1/lambda (infinity = y = 0) such that (i) the push-forwards escapeMeasure of lambda^{-1} d mu_{phi n} converge weakly to nulim against every bounded continuous g; (ii) Q_esc := nulim({infty}) is psd and nu_fin := finitePart nulim (the restriction of nulim to (0,1/m] pulled back to [m,infty), a PositiveTailMeasure supported in [m,infty), with the explicit set identity nu_fin(s) = nulim(s^{-1} cap {infty}^c), i.e. nulim = nu_fin + Q_esc delta_infty); (iii) eq:supp-contact-selfenergy: Sigma_{phi n}(z) -> Q_esc + int lambda/(lambda - z) d nu_fin locally uniformly on C minus [m,infty) (TendstoLocallyUniformlyOn on escapeDomain m); (iv) eq:supp-contact-kernel: for every bounded continuous test function psi, int_0^infty psi(t) K_{phi n}(t) dt -> psi(0) Q_esc + int_0^infty psi(t) K_fin(t) dt with K_fin(t) = int lambda e^{-lambda t} d nu_fin(lambda) (distributional convergence K_n dt -> Q_esc delta_0 + K_fin dt), proved through the test function h_psi(y) = int psi(s y) e^{-s} ds on the compactification and a Fubini lemma for operator-valued Euclidean kernels (integral_smul_integral_kernel). Infrastructure built: scalarisation bridge for positive operator-valued measures on a general measurable space (traceMeasure, quadForm_integral), real/imaginary splitting of complex operator integrals, change of variables y = 1/lambda for lambda^{-1} d mu (integral_escapeMeasure, via Mathlib's VectorMeasure.withDensity and VectorMeasure.map), uniform Lipschitz bounds on compacta and an epsilon/3-net lemma (tendstoUniformlyOn_of_lipschitzOnWith). Only propext/Classical.choice/Quot.sound."
   },
   "cth:supp-contact-static": {
     "env": "proposition",
@@ -765,11 +823,29 @@
   "thm:supp-fibre-RG": {
     "env": "theorem",
     "title": "Functorial principal universality packet",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: universality packet, coarse-graining functor, Pontryagin index monotonicity, dilation rank. Only the component partials of thm:supp-current-chain exist.",
-    "difficulty": "hard",
-    "plan": "Composite functoriality statement over three fibres plus monotonicity claims for minimal dilation rank and Pontryagin negative-square index under isometric compression, which require the operator-measure dilation (con:supp-Naimark-tail) and the Pontryagin realization theory (thm:supp-complete-rational-Krein), neither available. The current and monodromy components are covered by thm:supp-current-chain and thm:supp-monodromy-descent (medium/easy) and the memory component by thm:supp-memory-RG (medium), but 'canonical and composes strictly' needs a bundled category-style definition of the packet and its morphisms; statement needs reformulation before encoding."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Predictive/UniversalityPacketFunctorExact.lean:RenewalGeometry.UniversalityPacket",
+      "RenewalGeometry/Predictive/UniversalityPacketFunctorExact.lean:RenewalGeometry.UniversalityPacket.CoarseGraining",
+      "RenewalGeometry/Predictive/UniversalityPacketFunctorExact.lean:RenewalGeometry.UniversalityPacket.CoarseGraining.image",
+      "RenewalGeometry/Predictive/UniversalityPacketFunctorExact.lean:RenewalGeometry.UniversalityPacket.CoarseGraining.comp",
+      "RenewalGeometry/Predictive/UniversalityPacketFunctorExact.lean:RenewalGeometry.UniversalityPacket.CoarseGraining.image_comp",
+      "RenewalGeometry/Predictive/UniversalityPacketFunctorExact.lean:RenewalGeometry.UniversalityPacket.CoarseGraining.headFunction_image",
+      "RenewalGeometry/Predictive/UniversalityPacketFunctorExact.lean:RenewalGeometry.UniversalityPacket.universality_packet_functor",
+      "RenewalGeometry/Predictive/UniversalityPacketFunctorExact.lean:RenewalGeometry.CurrentChain.VertexQuotient.comp",
+      "RenewalGeometry/Predictive/UniversalityPacketFunctorExact.lean:RenewalGeometry.CurrentChain.VertexQuotient.fibresConnected_comp",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureCompressionExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.compress",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureCompressionExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.rg_compress",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureCompressionExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.sourceRank",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureCompressionExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.sourceRank_compress_le",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureCompressionExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.sourceRank_cutoff_le",
+      "RenewalGeometry/Spectralization/OperatorTailMeasureCompressionExact.lean:RenewalGeometry.OperatorTailMeasure.IsMinimalRealization.finrank_range_eq",
+      "RenewalGeometry/Predictive/NevanlinnaKernelCompression.lean:RenewalGeometry.PontryaginRealization.negSquares_compress_le",
+      "RenewalGeometry/Predictive/MemoryCutoffSemigroupMeasureExact.lean:RenewalGeometry.OperatorTailMeasure.PositiveTailMeasure.memory_rg_semigroup",
+      "RenewalGeometry/Spectralization/CurrentChainFunctorExact.lean:RenewalGeometry.CurrentChain.VertexQuotient.entropyProduction_edgeSum_le",
+      "RenewalGeometry/Spectralization/MarkedMonodromyDescentExact.lean:RenewalGeometry.monodromy_descends_iff"
+    ],
+    "note": "Proved as one composite theorem (universality_packet_functor) over the bundled packet. UniversalityPacket = (oriented graph with positive conductances, (A, μ) with μ a positive tail measure, marked monodromy ρ : F →* G) (eq:supp-U-packet); CoarseGraining = (vertex quotient with connected fibres retaining inter-fibre edge classes, threshold Λ > 0, isometric head map W with Wᴴ W = 1, surjective contraction q_* with ker q_* ≤ ker ρ); CoarseGraining.image is eq:supp-U-map componentwise (Q_E Curr, (W^*(A − Q_{>Λ})W, W^* μ|_{(0,Λ]} W), ρ̄ = monodromyDescent). Clauses: (1) canonical — ρ̄ is the unique factorisation ρ = ρ̄ ∘ q_* (the other components are explicit formulas); (2) composes strictly — CoarseGraining.comp (VertexQuotient.comp with fibresConnected_comp/retains, W₁W₂, q₂∘q₁, threshold Λ₂) satisfies (d₁.comp d₂).image = d₂.image for nested thresholds Λ₂ ≤ Λ₁ (image_comp, from edgeMatrix_comp, rg_rg + rg_compress + compress_compress, monodromyDescent_comp_surjective); (3) currents map to currents and entropy production cannot increase; (4) zero-energy Schur complement preserved before compression (dynamicFunction_rg_zero, assuming λ⁻¹ μ-integrable as in thm:supp-memory-RG); (5) minimal dilation rank cannot increase: formalised as the SOURCE RANK rank μ((0,∞)) = rank B_μ^* of the minimal dilation (IsMinimalRealization.finrank_range_eq shows it is the rank of the source map V = B^* of every minimal realization, including the canonical K_μ), monotone under compression (sourceRank_compress_le) and cutoff (sourceRank_cutoff_le) — this is what the paper's proof sentence 'compression of a positive minimal memory dilation carrier cannot increase source rank' asserts; (6) negative squares: for every head function Q with bounded Gram inertia on D, negSquares (W^* Q W) ≤ negSquares Q (negSquares_compress_le), and the image head function is W^* F_{RG_Λ(A,μ)} W (headFunction_image, using dynamicFunction_compress for isometric W); (7) monodromy descends exactly when ker q_* ≤ ker ρ (monodromy_descends_iff). New infrastructure: PositiveTailMeasure.compress (W^* μ W) with integral/self-energy/head-correction/cutoff commutation (Spectralization/OperatorTailMeasureCompressionExact.lean)."
   },
   "lem:supp-positive-decomposition": {
     "env": "lemma",
@@ -788,86 +864,164 @@
   "thm:supp-general-renewal-process": {
     "env": "theorem",
     "title": "Reversible coframe Renewal process",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: coframe renewal process, predictable bracket, Laplace-Beltrami, Dirichlet form convergence, reversible packet on h Z^d.",
-    "difficulty": "hard",
-    "plan": "Needs a variable-coefficient lattice generator on a chart, its bracket formula (finite, could be medium), O(h^2 ‖f‖_{C^4}) consistency with the Laplace-Beltrami operator (multivariate Taylor with uniform remainders and the divergence-form identity ρ^{-1} ∂_i(ρ g^{ij} ∂_j f)), and Dirichlet-form convergence (Riemann sums of ρ g^{ij} ∂_i f ∂_j f to the integral). The library has only flat A3 consistency (DiscreteAnalysis/A3FiniteDifferenceConsistencyExact.lean, UniformFiniteDifferenceRemainderExact.lean); reversibility and the exact bracket identity are finite and could be split off as an easy/medium sub-lemma, but the analytic clauses are hard."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket",
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.detailed_balance",
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.bracket_eq",
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.abs_bracket_sub_inverseMetric_le",
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.inverseMetric_eq_of_decomposition",
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.abs_generator_sub_laplaceBeltrami_le",
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.divergenceLaplacian_eq_laplaceBeltrami",
+      "RenewalGeometry/DiscreteAnalysis/CoframeDirichletFormLimitExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.dirichletForm",
+      "RenewalGeometry/DiscreteAnalysis/CoframeDirichletFormLimitExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.dirichletForm_eq_energySum",
+      "RenewalGeometry/DiscreteAnalysis/CoframeDirichletFormLimitExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.abs_energySum_sub_riemannSum_le",
+      "RenewalGeometry/DiscreteAnalysis/CoframeDirichletFormLimitExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.tendsto_dirichletForm",
+      "RenewalGeometry/DiscreteAnalysis/CoframeDirichletFormLimitExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.energyDensity_eq_metricDensity",
+      "RenewalGeometry/DiscreteAnalysis/CoframeDirichletFormLimitExact.lean:RenewalGeometry.CoframeRenewalPacket.CoframePacket.tendsto_dirichletForm_metric",
+      "RenewalGeometry/DiscreteAnalysis/CoframeDirichletFormLimitExact.lean:RenewalGeometry.CoframeRenewalPacket.sum_torus_add_latticeStep",
+      "RenewalGeometry/Analysis/UnitCubeRiemannSum.lean:RenewalGeometry.UnitCubeRiemannSum.tendsto_riemannSum",
+      "RenewalGeometry/Analysis/LineTaylorRemainderBound.lean:RenewalGeometry.LineTaylorRemainderBound.symmetric_product_expansion_bound"
+    ],
+    "note": "All five clauses proved on the chart / torus. Clauses (1)-(4) as before (CoframeRenewalPacketExact: detailed balance, exact bracket eq:supp-general-bracket, bracket error eq:supp-general-bracket-error entrywise O(h^2), generator consistency eq:supp-general-generator with explicit constant linear in the C^4 bounds of f, for 0 < h ≤ 1, d ≥ 2, ρ ≠ 0). Clause (5), eq:supp-general-form-limit (new, CoframeDirichletFormLimitExact): the packet is placed on the torus Q_h = hℤ^d/ℤ^d, h = 1/M, vertices k/M with k ∈ (ℤ/Mℤ)^d, for ℤ^d-periodic f, coefficients a_r and density ρ and integer lattice directions r (IntegerDirections; the paper's R_d^+ ⊂ ℤ^d). dirichletForm_eq_energySum is the exact summation by parts −⟨f, L_h f⟩_{m_h} = Σ_x Σ_r c_h(x,r)|f(x+hr) − f(x)|² (torus translation invariance sum_torus_add_latticeStep via the bijection k ↦ k + r on (ℤ/Mℤ)^d); abs_energySum_sub_riemannSum_le shows the finite energy equals the Riemann sum h^d Σ_x ½Σ_r a_r(x)(∂_r f(x))² up to h·Σ_r K_r (K_r explicit from the C^2 bounds F1, F2 of f and the C^0/C^1 bounds A0, A1 of a_r); tendsto_dirichletForm gives −⟨f, L_h f⟩_{m_h} → ∫_{[0,1]^d} ½ Σ_r a_r (∂_r f)² dx as h = 1/(n+1) → 0, and tendsto_dirichletForm_metric rewrites the limit as ½∫ g^{ij} ∂_i f ∂_j f ρ dx under the positive decomposition ρ g^{-1} = Σ_r a_r r rᵀ (energyDensity_eq_metricDensity). Reusable infrastructure: Analysis/UnitCubeRiemannSum.lean (left-endpoint Riemann sums of continuous functions on the unit cube converge to the Lebesgue integral: tendsto_riemannSum, cell decomposition of [0,1)^d). Scoped hypotheses disclosed: f real-valued (∂_j \\bar f = ∂_j f), f ∈ C² with global derivative bounds (the paper's smooth periodic extension), coefficients C¹ with global bounds and periodic, density periodic and nonvanishing, 2 ≤ d (the conductance exponent h^{d−2}), integer directions; the paper's uniform convergence is stated as convergence along the mesh sequence h = 1/(n+1)."
   },
   "cth:supp-metric-no-coframe": {
     "env": "proposition",
     "title": "The metric bracket does not select the spin marking",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: coframe, spin structure, spin lift, SO(d) rotation, Z_2 spin holonomy.",
-    "difficulty": "hard",
-    "plan": "Needs spin structures, spin connections and Z_2 spin holonomy, none of which exist in Mathlib or the library; not statable faithfully. The one finite piece — a coframe e and e·R (R ∈ SO(d)) give the same g^{-1} = e eᵀ and hence the same bracket/generator — is a trivial matrix lemma (R Rᵀ = 1) and could be recorded as a partial; the spin-holonomy invisibility claim needs reformulation as a statement about a Z/2 cover datum not determined by a metric (cf. NCG/Graph/SignedCover.lean) if it is to be encoded at all."
+    "status": "statement_encoded",
+    "lean": [
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.coframeInverseMetric_rotate",
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.packet_of_metric_rotate",
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.exists_distinct_coframes_same_metric",
+      "RenewalGeometry/DiscreteAnalysis/CoframeRenewalPacketExact.lean:RenewalGeometry.CoframeRenewalPacket.planeFlip_mem_specialOrthogonalGroup"
+    ],
+    "note": "Finite surrogate encoded and proved; the spin-structure clauses are not encodable. coframeInverseMetric_rotate: a frame rotation E ↦ R E with R orthogonal (in particular R ∈ SO(d), a smooth rotation applied pointwise) leaves g⁻¹ = EᵀE unchanged; packet_of_metric_rotate: hence anything built from g⁻¹ — the positive stencil decomposition, the coefficients a_r, the density, the bracket and the scalar Renewal generator of CoframePacket (which take (g⁻¹, ρ) as their only input) — is unchanged, i.e. the metric bracket does not select the coframe. exists_distinct_coframes_same_metric: E ↦ g⁻¹ is not injective (witness: the identity and the SO(d) plane rotation by π, planeFlip, d ≥ 2). Not encoded: spin lifts, global spin structures, the spin connection change under R(x), and the invisibility of a nontrivial ℤ₂ spin holonomy (Mathlib has no spin structures)."
   },
   "lem:supp-density-symmetric": {
     "env": "lemma",
     "title": "Exact density-symmetric Dirac identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: density symmetric, rho^{1/2}, sqrt det g, spin connection, Clifford contraction.",
-    "difficulty": "hard",
-    "plan": "A continuum identity between first-order differential operators on spinor sections (Clifford multiplication, spin connection Ω_j, density ρ^{1/2}); Mathlib lacks Dirac operators on spinor bundles. Could only be encoded as a formal symbolic identity in an abstract algebra of differential operators (derivations with multiplication operators satisfying [∇_j, M_f] = M_{∂_j f}) — a reformulation; even then requires setting up that algebra (medium after reformulation, hard as stated)."
+    "status": "statement_encoded",
+    "lean": [
+      "RenewalGeometry/Algebra/DensitySymmetricDiracExact.lean:RenewalGeometry.DensitySymmetricDirac.CliffordModuleDerivationData.densitySymmetric_identity",
+      "RenewalGeometry/Algebra/DensitySymmetricDiracExact.lean:RenewalGeometry.DensitySymmetricDirac.CliffordModuleDerivationData.conj_sum_eq",
+      "RenewalGeometry/Algebra/DensitySymmetricDiracExact.lean:RenewalGeometry.DensitySymmetricDirac.CliffordModuleDerivationData"
+    ],
+    "note": "Formal surrogate, proved for the surrogate. The continuum objects (spinor bundle over a chart, Levi-Civita spin connection Ω_j, D_g on L²(Q,S_d;ρdx)) are replaced by the abstract algebra the paper's proof manipulates (structure CliffordModuleDerivationData): a commutative ℂ-algebra F of scalar functions with derivations ∂_j (Mathlib Derivation), an operator ring A with multiplication operators M : F →+* A, covariant derivatives ∇_j with [∇_j, M_f] = M_{∂_j f}, Clifford coefficients c^j commuting with scalar multiplication operators, a unit σ = ρ^{1/2} with ρ = σ², and the paper's contracted metric-compatibility identity Σ_j [∇_j, c^j] = -Σ_j c^j M_{ρ⁻¹∂_jρ} taken as a structure hypothesis (it is a property of the Levi-Civita spin connection, derived in the paper from ∂_j c^k + [Ω_j,c^k] + Γ^k_{jl} c^l = 0 and Γ^j_{jl} = ∂_l log ρ). densitySymmetric_identity then proves eq:supp-density-symmetric: M_σ (-iΣ c^j∇_j) M_σ⁻¹ = -(i/2) Σ (c^j∇_j + ∇_j c^j). Not encoded: that the geometric data (spin connection of a Riemannian metric) satisfy the hypotheses."
   },
   "thm:supp-general-Wilson-ellipticity": {
     "env": "theorem",
     "title": "Frozen symbol, unique species, and uniform graph estimate",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: Wilson term, Brillouin, doubler, species, frozen symbol, Garding. The Wilson files in NCG/Gravity and NCG/Grand concern Wilson loops/Wilsonian flows; NCG/Lorentz/AliasingObstruction.lean records only the centered-difference aliasing zero that the Wilson term is designed to remove.",
-    "difficulty": "hard",
-    "plan": "The frozen-symbol formula and its square are finite Clifford computations (ĉ^j ĉ^k + ĉ^k ĉ^j = 2 g^{jk}, Γ_⊥ anticommuting; NCG/Algebra/CliffordConcrete.lean supplies concrete Clifford matrices) and 'only zero at θ = 0' is elementary (g positive definite ⇒ sin θ_j = 0 and Σ(1 - cos θ_j) = 0 ⇒ θ = 0 on the torus) — those two clauses are medium. The cutoff-independent discrete Garding estimate ‖u‖_{1,h} <= C(‖D u‖_h + ‖u‖_h) on a periodic extension with variable coefficients is a discrete elliptic-regularity theorem (freezing coefficients, commutator estimates) with no library support; hard as stated."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/DiscreteAnalysis/FrozenWilsonSymbolExact.lean:RenewalGeometry.FrozenWilsonSymbol.frozenWilson_planeWave",
+      "RenewalGeometry/DiscreteAnalysis/FrozenWilsonSymbolExact.lean:RenewalGeometry.FrozenWilsonSymbol.frozenSymbol_sq",
+      "RenewalGeometry/DiscreteAnalysis/FrozenWilsonSymbolExact.lean:RenewalGeometry.FrozenWilsonSymbol.frozenSymbol_eq_zero_iff",
+      "RenewalGeometry/DiscreteAnalysis/FrozenWilsonSymbolExact.lean:RenewalGeometry.FrozenWilsonSymbol.frozenSymbolScalar_bounds",
+      "RenewalGeometry/DiscreteAnalysis/FrozenWilsonGardingExact.lean:RenewalGeometry.FrozenWilsonGarding.h1NormSq_le",
+      "RenewalGeometry/DiscreteAnalysis/FrozenWilsonGardingExact.lean:RenewalGeometry.FrozenWilsonGarding.sum_gridNormSq_forwardDifference_le",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.varWilson",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.varWilson_const",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.gridNormSq_eq_norm_eucl_sq",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.varWilson_cutoff",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.norm_eucl_cutoffCommutator_le",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.norm_eucl_symmetricDifference_le",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.varWilson_sub_frozen",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.norm_eucl_freezeDifference_le",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.absorb_aux",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.patch_estimate",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.sum_norm_forwardDifference_sq_le",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.gardingConstant",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.variable_garding",
+      "RenewalGeometry/DiscreteAnalysis/VariableWilsonGardingExact.lean:RenewalGeometry.VariableWilsonGarding.varWilson_symmetric"
+    ],
+    "note": "All clauses now proved on the periodic lattice torus (ℤ/nℤ)^d with mesh h. Frozen symbol eq:supp-general-frozen-symbol, its square eq:supp-general-frozen-square, the unique zero on the Brillouin torus and the uniform ellipticity eq:frozen-uniform-ellipticity (FrozenWilsonSymbolExact); the frozen graph estimate by Fourier transformation (FrozenWilsonGardingExact.h1NormSq_le, eq:discrete-H1-norm). New in this pass (DiscreteAnalysis/VariableWilsonGardingExact.lean): the variable-coefficient doubled Wilson operator D̃ = ½Σ_j(M_{ĉ^j}P_j + P_j M_{ĉ^j}) + ϖΓ_⊥W with sampled coefficients ĉ^j(x) (varWilson; equal to the frozen operator for constant fields, varWilson_const), the discrete ℓ² norm realised as the Euclidean norm of the section so that the triangle inequality is available (gridNormSq_eq_norm_eucl_sq), the shift-commutator identities P_j M_δ = M_δ P_j + [P_j,M_δ], W M_δ = M_δ W + [W,M_δ] with the commutators containing δ(x+e_j) − δ(x), the cutoff commutator identity D̃(χu) = χ D̃u + [D̃,M_χ]u (varWilson_cutoff) and the bound eq:local-cutoff-commutator ‖[D̃,M_χ]u‖_h ≤ dK(B + |ϖ|‖Γ_⊥‖)‖u‖_h for |χ(x+he_j) − χ(x)| ≤ hK (norm_eucl_cutoffCommutator_le; the h^{-1} of the differences cancels against the O(h) cutoff increment exactly as in the paper), ‖P_j v‖ ≤ ‖h^{-1}(S_j − I)v‖, the freezing identity (D̃ − D̃_{x₀})v = ½Σ_j(M_{δ_j}P_j v + P_j M_{δ_j}v), δ_j = ĉ^j − ĉ^j(x₀), and the freezing bound ‖(D̃ − D̃_{x₀})(χu)‖_h ≤ ω Σ_j‖h^{-1}(S_j−I)(χu)‖_h + (dL/2)‖χu‖_h on a patch where ‖ĉ^j(x) − ĉ^j(x₀)‖ ≤ ω (the modulus of continuity ω_c(r)) with Lipschitz coefficients ‖ĉ^j(x+he_j) − ĉ^j(x)‖ ≤ hL (the paper's Cω_c(r)‖·‖_{1,h} + C_r‖·‖_h). Main theorem variable_garding = eq:supp-general-Garding: for a lattice partition of unity Σ_αχ_α² = 1 (m patches, cutoff gradients ≤ K), frozen points x_α with Hermitian uniformly elliptic doubled Clifford data (λ,Λ), Hermitian Γ_⊥ with ‖Γ_⊥‖ ≤ G, ϖ ≠ 0, coefficient bound B, Lipschitz bound L, modulus of continuity ω on the one-step enlarged patches with the absorption condition 4dω² max(1,min(λ,ϖ²)^{-1}) ≤ 1 (the paper's 'choose r once so that the first term is absorbed'), every torus section satisfies ‖u‖²_{1,h} ≤ C(‖D̃u‖_h² + ‖u‖_h²) with the explicit constant C = gardingConstant d m λ ϖ K L B G, which depends only on the dimension, the number of patches and finitely many coefficient bounds, not on h or n (the absorption arithmetic is absorb_aux, the per-patch estimate patch_estimate, the discrete product rule for the partition sum_norm_forwardDifference_sq_le). The self-adjointness remark: with Hermitian ĉ^j(x) and Γ_⊥ the symmetric placement makes D̃ symmetric for the grid inner product (varWilson_symmetric). Scoped disclosures: the 'fixed smooth periodic extension' with sections localized in the chart interior is rendered as the periodic torus itself (every section admissible, the partition lives on the torus); coefficient bounds are operator-norm bounds through euclNormSq; the ordinary coordinate shifts are used, the O(h) difference T^Ω_j − S_j of the spin links being absorbed into the Lipschitz/derivative constant L as in the paper's proof; the clause that the doubled Clifford convention supplies the declared real and grading structures is not encoded (as in the other records of this paper)."
   },
   "lem:supp-general-core": {
     "env": "lemma",
     "title": "Smooth-core consistency and the Wilson term",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: smooth core consistency, cell average, piecewise constant reconstruction, Wilson core smallness, H^3.",
-    "difficulty": "hard",
-    "plan": "Consistency estimate in H^3/H^2 Sobolev norms for the lattice Wilson operator against the continuum Dirac operator with cell-average sampling; requires Sobolev spaces on charts and multivariate Taylor remainders in L^2, absent from Mathlib. A C^3-norm (sup-norm) version on a periodic torus could be attempted with the tools of DiscreteAnalysis/UniformFiniteDifferenceRemainderExact.lean but still needs the Wilson operator and Clifford structure; hard."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/DiscreteAnalysis/CovariantWilsonCoreConsistencyExact.lean:RenewalGeometry.CovariantWilsonCoreConsistency.covariantWilson",
+      "RenewalGeometry/DiscreteAnalysis/CovariantWilsonCoreConsistencyExact.lean:RenewalGeometry.CovariantWilsonCoreConsistency.densitySymmetricDirac",
+      "RenewalGeometry/DiscreteAnalysis/CovariantWilsonCoreConsistencyExact.lean:RenewalGeometry.CovariantWilsonCoreConsistency.LinkExpansion",
+      "RenewalGeometry/DiscreteAnalysis/CovariantWilsonCoreConsistencyExact.lean:RenewalGeometry.CovariantWilsonCoreConsistency.ConnectionBounds",
+      "RenewalGeometry/DiscreteAnalysis/CovariantWilsonCoreConsistencyExact.lean:RenewalGeometry.CovariantWilsonCoreConsistency.norm_covSymmetricDifference_sample_sub_le",
+      "RenewalGeometry/DiscreteAnalysis/CovariantWilsonCoreConsistencyExact.lean:RenewalGeometry.CovariantWilsonCoreConsistency.norm_covWilsonTerm_sample_le",
+      "RenewalGeometry/DiscreteAnalysis/CovariantWilsonCoreConsistencyExact.lean:RenewalGeometry.CovariantWilsonCoreConsistency.norm_covariantWilson_sample_sub_densitySymmetricDirac_le",
+      "RenewalGeometry/DiscreteAnalysis/FrozenWilsonCoreConsistencyExact.lean:RenewalGeometry.FrozenWilsonCoreConsistency.norm_frozenWilson_sample_sub_frozenDirac_le",
+      "RenewalGeometry/DiscreteAnalysis/FrozenWilsonCoreConsistencyExact.lean:RenewalGeometry.FrozenWilsonCoreConsistency.norm_wilsonTerm_sample_le",
+      "RenewalGeometry/Analysis/VectorLineTaylorRemainderBound.lean:RenewalGeometry.VectorLineTaylor.norm_centered_difference_sub_deriv_le"
+    ],
+    "note": "Proved in the chart surrogate with variable coefficients and spin links (C^k/pointwise form). CovariantWilsonCoreConsistencyExact defines the covariant doubled Wilson operator of eq:supp-general-Wilson on lattice sections ℤ^d → ℂ^N: covariant shifts T^Ω_j ψ(x) = U_j(x)ψ(x+e_j) with spin links U_j, their adjoints U_j(x−e_j)^*ψ(x−e_j), covariant symmetric differences P^Ω_j = (T−T^*)/(2ih), Wilson term W^Ω = (2h)^{-1}Σ_j(2 − T − T^*) (eq:supp-covariant-differences), sampled variable coefficients M_{ĉ^j_h}ψ(x) = ĉ^j(hx)ψ(x), and D̃^W_h = ½Σ_j(M P^Ω_j + P^Ω_j M) + ϖΓ_⊥W^Ω. The continuum operator is the density-symmetric form of lem:supp-density-symmetric, U_ρ D̂_g U_ρ^{-1} = −(i/2)Σ_j(M_{ĉ^j}∇_j + ∇_j M_{ĉ^j}) with ∇_j = ∂_j + Ω_j (densitySymmetricDirac; the density conjugation enters only through this identity, proved separately in Algebra/DensitySymmetricDiracExact). Hypotheses: links are parallel transports to second order, U_j(x) = I + hΩ_j(hx) + O(h²) and U_j(x)^* = I − hΩ_j(hx) + O(h²) (LinkExpansion, constant C_U; Ω anti-Hermitian to leading order), Ω_j bounded by B0 and Lipschitz with constant B1 (ConnectionBounds), matBound(ĉ^j) ≤ C0, ψ ∈ C³ with sup bounds M0..M3 and the products ĉ^jψ ∈ C³ with bounds M'0, M'1, M'3. Results for 0 < h ≤ 1: norm_covSymmetricDifference_sample_sub_le ‖P^Ω_j S_hψ(x) − (−i∇_jψ)(hx)‖ ≤ h(M3/2 + B0M1 + B1M0/2 + C_U M0); norm_covWilsonTerm_sample_le (eq:Wilson-core-smallness) ‖W^Ω_h S_hψ(x)‖ ≤ d h (M2 + B0M1 + B1M0/2 + C_UM0); norm_covariantWilson_sample_sub_densitySymmetricDirac_le (eq:supp-general-core) ‖(D̃^W_h S_hψ)(x) − (U_ρD̂_gU_ρ^{-1}ψ)(hx)‖ ≤ h·coreConstant with coreConstant = (dC0Kψ + dK_{cψ})/2 + |ϖ|‖Γ‖dW explicit. Disclosed gaps versus the paper: Sobolev norms H³/H² replaced by C³/C² sup bounds (and the C³ bounds of the products ĉ^jψ are taken as hypotheses instead of being derived by Leibniz from those of ĉ^j and ψ); the L² norm replaced by the pointwise sup norm at lattice points (on a periodic box with h^d cell weights the ℓ²_h bound follows immediately from the uniform pointwise bound); cell-average sampling S_h = (J_h^0)^* and the reconstruction J_h^0 replaced by point sampling; the support condition is vacuous on the whole-space lattice; the link expansion is a hypothesis rather than derived from exact parallel transport."
   },
   "def:stable-spin-atlas": {
     "env": "definition",
     "title": "Compatible stable spin discretization",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: stable spin discretization, atlas, reconstruction estimate, global graph estimate, sampled spinor core.",
-    "difficulty": "hard",
-    "plan": "Presupposes L^2(M; S ⊗ C^2) and H^1(M; S ⊗ C^2) on a closed spin manifold and the unbounded operator D̂; missing analytic objects. An abstract surrogate is easy and sufficient for the resolvent theorem: a fixed Hilbert space ℋ, a normed space V with a compact embedding V → ℋ playing H^1, finite Hilbert spaces ℋ_h with isometries W_h, discrete norms and reconstructions I_h : ℋ_h → V satisfying (A1)-(A3) verbatim, and a densely defined symmetric D̂ with a core; record that abstraction (cf. OperatorLimits/VaryingHilbertWeakSubsequenceCompactness.lean setting) rather than the spin-manifold version."
+    "status": "statement_encoded",
+    "lean": [
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas",
+      "RenewalGeometry/OperatorLimits/UnboundedSelfAdjointResolvent.lean:RenewalGeometry.SelfAdjointResolventData",
+      "RenewalGeometry/OperatorLimits/UnboundedSelfAdjointResolvent.lean:RenewalGeometry.SelfAdjointResolventData.isSelfAdjoint_op",
+      "RenewalGeometry/OperatorLimits/UnboundedSelfAdjointResolvent.lean:RenewalGeometry.SelfAdjointResolventData.ofBounded"
+    ],
+    "note": "Abstract surrogate encoded (structure CompatibleStableAtlas). Continuum objects replaced as follows: L^2(M; S ⊗ C^2) -> a complex Hilbert space H; D̂ = D ⊗ σ_1 -> an unbounded self-adjoint operator given as SelfAdjointResolventData (a symmetric LinearPMap `op` with, for every non-real z, a bounded two-sided inverse of op − z; isSelfAdjoint_op proves this is self-adjoint in Mathlib's LinearPMap sense, dense_domain that its domain is dense, ofBounded that every bounded self-adjoint operator is an instance); smooth doubled spinors -> a subspace `core` ≤ domain with the field `core_dense` stating that it is a core (graph-dense), which the paper's proof of thm:supp-compact-spin-resolvent uses as a known fact about smooth spinors; H^1(M; S ⊗ C^2) -> a Banach space V with a compact linear embedding `sobolev : V → H` (Rellich as a hypothesis); finite Hilbert spaces ℋ_h -> finite-dimensional complex inner product spaces Hn n with self-adjoint stage operators `stage n` (D_h) and linear isometries `embed n` (W_h). (A1)–(A3) are fields verbatim: W_h W_h^* → I strongly; discrete first-order norms with ‖I_h u‖_V ≤ C ‖u‖_{1,h} and ‖I_h u − W_h u‖ ≤ ε_h ‖u‖_{1,h}, ε_h → 0; the assembled graph estimate ‖u‖_{1,h} ≤ C(‖D_h u‖ + ‖u‖); samples S_h ψ of core vectors with W_h S_h ψ → ψ and W_h D_h S_h ψ → D̂ψ. Scoped disclosures: the constants C, ε_h and the discrete norms are required nonnegative; the optional clause on real and grading structures intertwining the reconstructions is not encoded."
   },
   "thm:supp-compact-spin-resolvent": {
     "env": "theorem",
     "title": "Norm-resolvent convergence for compatible stable atlases",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong",
-      "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.norm_tendsto_zero_of_collectivelyCompact_of_adjointStrong"
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas.tendsto_norm_embeddedResolvent_sub",
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas.tendsto_embeddedResolvent",
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas.isCompactOperator_and_tendsto_embeddedResolvent",
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas.tendsto_embeddedResolvent_apply",
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas.dense_core_shifted_range",
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas.collectivelyCompact_embeddedResolvent",
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas.adjoint_embeddedResolvent",
+      "RenewalGeometry/OperatorLimits/CompatibleStableAtlasNormResolvent.lean:RenewalGeometry.CompatibleStableAtlas.circleRieszProjection_embeddedResolvent_tendsto",
+      "RenewalGeometry/OperatorLimits/UnboundedSelfAdjointResolvent.lean:RenewalGeometry.SelfAdjointResolventData.norm_resolvent_le",
+      "RenewalGeometry/OperatorLimits/UnboundedSelfAdjointResolvent.lean:RenewalGeometry.SelfAdjointResolventData.adjoint_resolvent",
+      "RenewalGeometry/OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean:RenewalGeometry.VaryingHilbert.System.tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong"
     ],
-    "note": "Partial: the compactness upgrade used in the proof (a collectively compact sequence converging strongly together with its adjoints converges in operator norm, with compact limit) is proved for a fixed Hilbert space; missing: the atlas hypotheses (A1)-(A3), Rellich compactness of the embedded resolvents, identification of the limit as (D-z)^{-1} via the smooth core, the periodic-extension statement and the spectral-projection consequences.",
-    "difficulty": "hard",
-    "plan": "The norm upgrade is proved (OperatorLimits/CollectivelyCompactStrongAdjointToNorm.lean). Missing: strong resolvent convergence from the core condition (A3), which needs an unbounded self-adjoint D̂ with domain, its resolvent, and the argument 'weak limit of R_h(z) f satisfies (D̂ - z)u = f distributionally hence u = R(z) f' — unbounded operator theory not in Mathlib; Rellich compactness of embedded resolvents from (A1)-(A2) needs the compact embedding H^1 → L^2 (abstractable as a hypothesis, see def:stable-spin-atlas); spectral-projection convergence needs Riesz projections. Hard even in the abstract surrogate because of the unbounded self-adjoint limit."
+    "note": "Proved in the abstract surrogate of def:stable-spin-atlas (see that record for the object replacements), following the paper's proof step by step: eq:uniform-resolvent-bounds (norm_resolvent_le, for D̂ and for each D_h through ofBounded); strong resolvent convergence W_h(D_h−z)^{-1}W_h^* f → (D̂−z)^{-1} f for every f from (A3) by the core argument (tendsto_embeddedResolvent_core on (D̂−z)(core) via (D_h−z)^{-1}W_h^*(D̂−z)ψ − S_hψ = (D_h−z)^{-1}[W_h^*(D̂ψ − W_hD_hS_hψ) − z W_h^*(ψ − W_hS_hψ)], density of (D̂−z)(core) from the core hypothesis and surjectivity of D̂−z, then the uniform-bound dense-source extension of DenseSourceStrongConvergence); strong convergence of the adjoints via R_h(z)^* = R_h(z̄), R(z)^* = R(z̄) (adjoint_embeddedResolvent, adjoint_resolvent); collective compactness (the Rellich step) from (A1)–(A2), the compact embedding and finite-dimensionality of the stages (collectivelyCompact_embeddedResolvent); norm upgrade by tendsto_operatorNorm_of_collectivelyCompact_of_adjointStrong. Main clause eq:supp-global-norm-resolvent = tendsto_norm_embeddedResolvent_sub for every z with Im z ≠ 0, together with compactness of the limit resolvent. Spectral-projection clause: circleRieszProjection_embeddedResolvent_tendsto gives operator-norm convergence of the Riesz projections of the compressed resolvents on every circle contained in the resolvent set of (D̂−z)^{-1} (isolated bounded-energy clusters of D̂ correspond to such circles under λ ↦ (λ−z)^{-1}; this identification is not formalised). The periodic-extension clause eq:supp-local-norm-resolvent is the same abstract theorem applied to the periodic-extension atlas; the local estimates that supply its (A1)–(A3) are the separate records lem:supp-general-Garding / lem:supp-general-core. Not encoded: retention of real and grading structures."
   },
   "thm:supp-global-metric": {
     "env": "theorem",
     "title": "Exact finite metric head and geodesic convergence",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: shortest path, graph distance, geodesic, endpoint block, mesoscopic scale, Kantorovich. The finite Connes distance metric laws in NCG/Grand/FiniteConnesDistanceMetricExact.lean do not identify the distance with a shortest-path metric.",
-    "difficulty": "hard",
-    "plan": "Clause 1 (edge-Lipschitz formula for the direct sum of endpoint blocks) and clause 2 (pure-state Connes distance = weighted shortest-path metric on a finite graph) are finite: define the weighted graph distance as an inf over walks and prove the two inequalities (d(x,·)/ℓ is 1-Lipschitz edgewise; any 1-Lipschitz f has |f(x) - f(y)| <= path length) — medium, building on Spectralization/FiniteConnesDistanceAttainmentExact.lean and FiniteConnesDistanceMetricExact.lean. Clause 3 (uniform convergence of d_h^met to the Riemannian distance on every closed manifold along mesoscopic meshes) needs Riemannian distance, geodesic approximation by short curves and a mesh construction — beyond Mathlib. Split: encode clauses 1-2 as a finite theorem; clause 3 remains hard."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Spectralization/EndpointBlockMetricHeadExact.lean:RenewalGeometry.EndpointBlockMetricHead.norm_commutator_eq_edgeLipschitz",
+      "RenewalGeometry/Spectralization/EndpointBlockMetricHeadExact.lean:RenewalGeometry.EndpointBlockMetricHead.edgeLipschitz_eq_sup'",
+      "RenewalGeometry/Spectralization/EndpointBlockMetricHeadExact.lean:RenewalGeometry.EndpointBlockMetricHead.edgeConnesDistance_eq_graphDistance",
+      "RenewalGeometry/Spectralization/EndpointBlockMetricHeadExact.lean:RenewalGeometry.EndpointBlockMetricHead.sSup_commutator_unit_ball_eq_graphDistance",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.HasChains",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.hasChains_of_normedSpace",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.MeshGraph",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.MeshGraph.dist_le_graphDistance",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.MeshGraph.graphDistance_le_dist_add",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.MeshSequence",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.MeshSequence.exists_error_tendsto_zero",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.MeshSequence.exists_error_tendsto_zero_of_compactSpace",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.MeshSequence.eventually_forall_abs_lt",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.MeshSequence.tendsto_edgeLipschitz",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.exists_meshSequence",
+      "RenewalGeometry/Spectralization/MeshGraphDistanceConvergenceExact.lean:RenewalGeometry.MeshGraphDistanceConvergence.a3_flat_error_tendsto_zero"
+    ],
+    "note": "All clauses proved, clauses 3-4 in a metric-space surrogate (Mathlib has no Riemannian distance). Clauses 1-2 (eq:supp-edge-lip, Connes distance = graph shortest-path metric) as before (EndpointBlockMetricHeadExact). Clause 3 (eq:supp-global-metric-convergence): the closed Riemannian manifold (M, d_g) is replaced by a compact (pseudo)metric space X with the chain property HasChains X (every pair is joined at every scale ρ by a chain of at most d/ρ+1 points with steps ≤ ρ (≥ ρ/2 when d ≥ ρ) of total length ≤ d — exactly what partitioning a minimising geodesic gives via Hopf–Rinow; proved for real normed spaces in hasChains_of_normedSpace). A finite metric triple on a mesh is a MeshGraph: an EdgeGraph placed in X forming an h-net, edge lengths ≥ endpoint distance (edge = actual curve), and distinct vertices within ρ+2h joined by an edge of length ≤ distance + κ (κ = 0 for minimising curves). dist_le_graphDistance gives d_g ≤ d_h^met and graphDistance_le_dist_add gives d_h^met ≤ d_g + (d_g/ρ + 1)(2h + κ), the paper's d_g + C(ρ + h/ρ) bound via geodesic partitioning. For a MeshSequence (h/ρ → 0, κ/ρ → 0, ρ → 0, e.g. ρ = h^{1/2}) exists_error_tendsto_zero(_of_compactSpace) gives an explicit error sequence → 0 bounding |d_h^met(x,y) − d_g(x,y)| for all n and all x, y ∈ V_h (sup convergence); exists_meshSequence shows every compact metric space carries such a sequence with finite vertex/edge sets and positive edge lengths (finite nets from compactness). Clause 4 (smooth seminorm limit): tendsto_edgeLipschitz proves L_h^met(f|V_h) → L for every L-Lipschitz f whose optimal Lipschitz constant is L (witnessed by pairs with |f x − f y| ≥ (L−ε)d(x,y)); for smooth f on a closed Riemannian manifold L = ‖∇_g f‖_∞ is the standard identification, not formalisable in Mathlib and disclosed as the gap. The concrete flat A3 case is instantiated in the same error-sequence form (a3_flat_error_tendsto_zero, from A3ConnesFlatUniformConvergenceExact). Scoped hypotheses: PseudoMetricSpace/CompactSpace X, HasChains X, positive edge lengths and connectedness (implied by the mesh axioms) for the Connes identity."
   },
   "cor:supp-compact-spin-image": {
     "env": "corollary",
     "title": "Conditional stable compact-spin approximation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: compact spin approximation, essential surjectivity, spin manifold. Depends on thm:supp-compact-spin-resolvent and thm:supp-global-metric, neither compiled.",
-    "difficulty": "hard",
-    "plan": "Conjunction of thm:supp-compact-spin-resolvent and thm:supp-global-metric plus an 'essential surjectivity' phrasing that needs the marked spin-manifold target category to be defined; nothing to assemble until those are encoded."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Spectralization/CompactSpinMainAssemblyExact.lean:RenewalGeometry.ConvergentMarkedSpinDiscretization",
+      "RenewalGeometry/Spectralization/CompactSpinMainAssemblyExact.lean:RenewalGeometry.ConvergentMarkedSpinDiscretization.approximation",
+      "RenewalGeometry/Spectralization/CompactSpinMainAssemblyExact.lean:RenewalGeometry.ConvergentMarkedSpinDiscretization.toMarkedSpinDiscretization",
+      "RenewalGeometry/Spectralization/CompactSpinMainAssemblyExact.lean:RenewalGeometry.ConvergentMarkedSpinDiscretization.isCompactOperator_limit_resolvent",
+      "RenewalGeometry/Spectralization/CompactSpinMainAssemblyExact.lean:RenewalGeometry.convergentStableCompactSpinApproximation_forall",
+      "RenewalGeometry/Spectralization/StableCompactSpinApproximationExact.lean:RenewalGeometry.MarkedSpinDiscretization.stableCompactSpinApproximation"
+    ],
+    "note": "Assembled in the abstract surrogate with the convergence clause now included. ConvergentMarkedSpinDiscretization renders 'a closed marked Riemannian spin manifold admitting a compatible stable spin discretization with independent metric heads': a CompatibleStableAtlas for the doubled Dirac operator, a compact chain metric space X (the manifold with its geodesic distance) and a MeshSequence of finite endpoint metric heads with positive edge lengths. approximation gives (i) norm-resolvent approximation of the doubled spin operator by the finite stage operators for every non-real z (thm:supp-compact-spin-resolvent / thm:compact-spin-main), (ii) exactness of every metric head (pure-state Connes distance = graph shortest-path metric), and (iii) convergence of the independent metric heads: an error sequence → 0 bounds |d_h^met(x,y) − d_g(x,y)| over all vertex pairs (thm:supp-global-metric, clause 3). convergentStableCompactSpinApproximation_forall is the essential-surjectivity clause: supplying such data for every target in a family yields the approximation for every member. toMarkedSpinDiscretization links to the earlier partial structure. Surrogate gaps as in the parents (no manifold/spinor objects; real/grading retention not encoded)."
   },
   "def:supp-rational-Hermitian": {
     "env": "definition",
@@ -893,33 +1047,163 @@
   "thm:supp-complete-rational-Krein": {
     "env": "theorem",
     "title": "Complete normalized rational generalized-Nevanlinna realization",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.finiteOperatorHankelRank_realization",
-      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankelRank_le_realizationDimension",
-      "RenewalGeometry/Predictive/OperatorHankelCanonicalRealization.lean:RenewalGeometry.operatorHankel_minimalRealizations_uniquelySimilar"
+      "RenewalGeometry/Predictive/PontryaginRationalRealization.lean:RenewalGeometry.PontryaginRealization",
+      "RenewalGeometry/Predictive/PontryaginRationalRealization.lean:RenewalGeometry.PontryaginRealization.transfer_eq_laurent",
+      "RenewalGeometry/Predictive/PontryaginRationalRealization.lean:RenewalGeometry.PontryaginRealization.markov_adjoint",
+      "RenewalGeometry/Predictive/PontryaginRationalRealization.lean:RenewalGeometry.PontryaginRealization.inner_nevanlinnaKernel",
+      "RenewalGeometry/Predictive/PontryaginRationalRealization.lean:RenewalGeometry.negIndex",
+      "RenewalGeometry/Predictive/PontryaginRationalRealization.lean:RenewalGeometry.negIndex_pullback_le",
+      "RenewalGeometry/Predictive/PontryaginRationalRealization.lean:RenewalGeometry.PontryaginRealization.negInertia_kernelGram_le_negIndex",
+      "RenewalGeometry/Predictive/PontryaginRationalRealization.lean:RenewalGeometry.PontryaginRealization.resolventSourceSpan_eq_top",
+      "RenewalGeometry/Predictive/PontryaginRationalRealization.lean:RenewalGeometry.PontryaginRealization.negSquares",
+      "RenewalGeometry/Predictive/PontryaginRationalRealization.lean:RenewalGeometry.PontryaginRealization.negSquares_transfer_eq_negIndex",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.canonical",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.canonical_markov",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.canonical_transfer_eq_toFun",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.canonical_isCyclic",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.finrank_carrier",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.mcMillanDegree_eq_finrank_columnSpace",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.mcMillanDegree_le_realization",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.canonical_form_eq",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.negIndex_canonical_form",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.negSquares_canonical_transfer_eq",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.negSquares_toFun_eq_negIndex",
+      "RenewalGeometry/Predictive/RationalKreinCanonicalRealization.lean:RenewalGeometry.PontryaginRealization.existsUnique_sourceFixing_unitary",
+      "RenewalGeometry/Analysis/ResolventNeumannSeries.lean:RenewalGeometry.inverse_sub_algebraMap_eq_neg_tsum",
+      "RenewalGeometry/Analysis/ResolventNeumannSeries.lean:RenewalGeometry.resolvent_sub_resolvent"
     ],
-    "note": "Partial: the canonical Hankel realization reproduces every coefficient M_n = output A^n source, is reachable and observable with dimension equal to the stabilized Hankel rank, every realization has at least that dimension, and two minimal realizations are uniquely similar; missing: the resolvent formula Q(z) = Gamma^+ (A-z)^{-1} Gamma, the Pontryagin form and negative index, the Nevanlinna-kernel negative-square count, and unitarity of the intertwiner for the indefinite form.",
-    "difficulty": "hard",
-    "plan": "Beyond the definite Hankel realization (operatorHankel_minimalRealizations_uniquelySimilar, finiteOperatorHankelRank_realization): needs the resolvent identity Q(z) = Γ^+ (A - z)^{-1} Γ as an identity of rational functions from the Laurent coefficients, the Pontryagin (indefinite) inner product on the quotient with negative index = inertia of the Hankel form (Krein/SignedHaynsworthInertia.lean supplies Sylvester inertia), the count of negative squares of the Nevanlinna kernel N_Q(z,w), and uniqueness up to a source-fixing Pontryagin unitary. Research-level finite indefinite realization theory (Krein-Langer) with no library support beyond inertia; hard."
+    "note": "Proved for Q encoded as in def:supp-rational-Hermitian (Hermitian Laurent coefficients M_n at infinity with finite Hankel rank; H finite dimensional). A finite Pontryagin realization (PontryaginRealization) is a finite-dimensional Hilbert majorant N with an invertible self-adjoint Gram operator J (form [x,y] = <x,Jy>; a fundamental symmetry J^2 = 1 is the special case of a suitably normalised majorant, and the negative index does not depend on the majorant), a J-self-adjoint state operator A and a source Gamma; output Gamma^+ = Gamma^* J, Markov parameters M_n = Gamma^* J A^n Gamma (Hermitian: markov_adjoint), transfer function Q(z) = Gamma^* J (A-z)^{-1} Gamma. The canonical construction (Hankel state space on its Euclidean carrier, Hankel form as Gram operator, shift A_Q, source Gamma_Q) is NormalizedRationalHermitianData.canonical with: canonical_markov (L_Q A_Q^n Gamma_Q = M_n); canonical_transfer_eq_toFun = eq:supp-rational-realization, Q(z) = Gamma_Q^+ (A_Q - z)^{-1} Gamma_Q, proved as an identity of functions on the region ||A_Q|| < |z| where the Laurent series defining Q converges (both sides are rational, so this is the paper's rational continuation; the resolvent Neumann series is the reusable Analysis/ResolventNeumannSeries.lean); finrank_carrier and mcMillanDegree_eq_finrank_columnSpace = eq:supp-rational-degree (dimension = stabilized Hankel rank = dim of the Hankel column span), with mcMillanDegree_le_realization (every linear realization L A^n Gamma = M_n has at least that dimension) and canonical_isCyclic (source minimality); canonical_form_eq / negIndex_canonical_form (the Pontryagin form is the Hankel form and the negative index is its inertia, negIndex = largest dimension of a negative definite subspace); negSquares_toFun_eq_negIndex: the Nevanlinna kernel N_Q(z,w) = (Q(z)-Q(w)^*)/(z - conj w) (eq:supp-Nevanlinna-kernel) has exactly negIndex negative squares (sup of the negative inertia of finite kernel Grams) on every upper half-plane neighbourhood of infinity {Im z > 0, |z| > rho}, rho >= ||A_Q||, and negSquares_canonical_transfer_eq on the whole upper half-plane part of the resolvent set of the realization; mechanism: inner_nevanlinnaKernel (kernel Gram = Pontryagin Gram of the resolvent-source vectors), negIndex_pullback_le (a compression cannot increase the index) and resolventSourceSpan_eq_top (resolvent-source span = power-cyclic span, via the limit -w(A-w)^{-1} -> 1). Uniqueness: PontryaginRealization.existsUnique_sourceFixing_unitary: any two source-cyclic finite Pontryagin realizations with the same Laurent coefficients are related by a unique linear isomorphism fixing the source, intertwining the state operators and preserving the indefinite forms (the source-fixing Pontryagin unitary). Scoped: 'minimal' is read as source-cyclic (the paper's source minimality; observability is automatic from nondegeneracy, futureRead_separating)."
   },
   "thm:supp-pole-Hankel": {
     "env": "theorem",
     "title": "Pole--Hankel invariants",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: principal part, McMillan degree, Jordan block, local Pontryagin inertia, conjugate pole pair, Sylvester inertia.",
-    "difficulty": "hard",
-    "plan": "Local pole analysis of rational matrix functions: principal parts, Jordan block sizes from shifted principal-part Hankel ranks, local Pontryagin inertia at real poles, neutral pairing at conjugate poles, and additivity to the global negative index. Requires the Jordan/primary decomposition of the realization pencil and the indefinite theory of thm:supp-complete-rational-Krein; Mathlib has Jordan-Chevalley but not the Hankel-rank/Jordan-size correspondence. Hard."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.NormalizedRationalHermitianData.poleHankelInvariants",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.transfer_eq_principalPart_add_regularPart",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.continuousAt_regularPart",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.localCoeff",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.principalPart",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.regularPart",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.finrank_range_localHankelMap",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.finrank_range_localHankelMap_zero",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.range_localCtrlMap",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.ker_localObsMap",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.gram_localKrylov_of_real",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.subNegIndex_rootSpace_eq_negInertia_localHankelGram",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.subPosIndex_rootSpace_eq_posInertia_localHankelGram",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.subNegIndex_add_subPosIndex_rootSpace_of_real",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.rieszProj",
+      "RenewalGeometry/Predictive/PoleHankelLocalRealization.lean:RenewalGeometry.PontryaginRealization.rieszProj_A",
+      "RenewalGeometry/Algebra/RootSubspaceProjection.lean:RenewalGeometry.RootProjection.rootProj",
+      "RenewalGeometry/Algebra/RootSubspaceProjection.lean:RenewalGeometry.RootProjection.rootProj_comm",
+      "RenewalGeometry/Algebra/RootSubspaceProjection.lean:RenewalGeometry.RootProjection.isUnit_regularPencil",
+      "RenewalGeometry/Algebra/RootSubspaceProjection.lean:RenewalGeometry.RootProjection.pow_sub_algebraMap_rootProj",
+      "RenewalGeometry/Predictive/PoleHankelInvariants.lean:RenewalGeometry.PontryaginRealization.subNegIndex_poleBlock_of_pos",
+      "RenewalGeometry/Predictive/PoleHankelInvariants.lean:RenewalGeometry.PontryaginRealization.negSquares_eq_sum_localIndex",
+      "RenewalGeometry/Algebra/NilpotentHankelJordan.lean:RenewalGeometry.NilpotentHankel.card_chains_ge_eq_finrank_sub"
+    ],
+    "note": "PROVED as NormalizedRationalHermitianData.poleHankelInvariants for the canonical minimal realization P = Q.canonical of a normalized rational Hermitian Q (its transfer function Gamma^+ (A - z)^{-1} Gamma is the rational continuation of Q, eq:supp-rational-realization). New infrastructure: Algebra/RootSubspaceProjection.lean (Riesz projection rootProj f mu onto the root subspace R_mu = maxGenEigenspace along the sum of the other root subspaces, for any endomorphism of a finite-dimensional space over an algebraically closed field: commutes with f, idempotent, (f - mu)^dim kills its range, and the regular pencil (f - mu)(1 - pi) + pi is invertible). Predictive/PoleHankelLocalRealization.lean: principal-part coefficients C_k = Gamma^* J (A - lam)^k pi_lam Gamma and the PRINCIPAL-PART DECOMPOSITION transfer_eq_principalPart_add_regularPart: for every z != lam in the resolvent set, Q(z) = -sum_{k < dim N} (z - lam)^{-k-1} C_k + R_lam(z), where R_lam(z) = Gamma^* J ((A - z)(1 - pi) + pi)^{-1} (1 - pi) Gamma is continuous at z = lam (continuousAt_regularPart), so the C_k are the principal part of Q at lam (for a non-pole lam they vanish). (P1) finrank_range_localHankelMap: local controllability (range_localCtrlMap) and observability (ker_localObsMap) of the local realization ((A - lam)|R_lam, pi_lam Gamma, Gamma^* J|R_lam) follow from source cyclicity and nondegeneracy, so rank [C_{i+j+s}]_{i,j < dim N} = rank ((A - lam)|R_lam)^s for every shift s; s = 0 gives the local McMillan degree dim R_lam; by NilpotentHankel.card_chains_ge_eq_finrank_sub the differences of these ranks are the numbers of Jordan chains of each length. (P2) at a real lam the Gram of the local Krylov family is the principal-part Hankel Gram [<e_k, C_{i+j} e_l>] (gram_localKrylov_of_real), so neg(R_lam) = negInertia, pos(R_lam) = posInertia (subNegIndex/subPosIndex_rootSpace_eq_..._localHankelGram) and neg + pos = dim R_lam (nondegeneracy). (P3), (P4) as before (subNegIndex_poleBlock_of_pos, negSquares_eq_sum_localIndex). Scoped/disclosed: 'pole' is rendered as an arbitrary point lam (the statements are trivial when R_lam = 0); the uniqueness of a principal-part decomposition (that C_k is determined by Q alone, a textbook Laurent fact) is not separately formalised; the Jordan block sizes are rendered as the rank sequence of the nilpotent local state operator, and the count lemma takes the existence of a Jordan chain basis as a hypothesis (not in Mathlib); the Hankel operators use blocks of size dim N (any size >= the nilpotency index works)."
   },
   "cor:supp-all-rational": {
     "env": "corollary",
     "title": "All finite rational Hermitian dynamics",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: descriptor realization, infinity chain, polynomial jet, regular pencil, Pontryagin descriptor.",
-    "difficulty": "hard",
-    "plan": "Descriptor (pencil) realizations with nilpotent infinity chains and their minimality/uniqueness; depends on thm:supp-complete-rational-Krein and thm:supp-pole-Hankel plus a regular-pencil primary decomposition (Weierstrass canonical form), none available. Hard."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.cor_supp_all_rational",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.FiniteRationalHermitianData.descriptor_isMinimal",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.FiniteRationalHermitianData.eventually_descriptor_transfer_eq_toFun",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.IsMinimal",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.resolventSourceSpan",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.toData",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.eventually_toData_toFun_eq_transfer",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.toData_coeff_eq_of_transfer_eventuallyEq",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.weierstrassDescriptor",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.weierstrassForm",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.isSourceFixingUnitary_weierstrass",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.weierstrassForm_transfer",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.isMinimal_iff_weierstrassForm_isMinimal",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.existsUnique_sourceFixing_unitary_weierstrassForm_descriptor",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.existsUnique_sourceFixing_unitary_weierstrassForm",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.finrank_eq_of_isMinimal",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.mcMillanDegree_add_le_finrank",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.eventually_isUnit_pencil_ofReal",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.DescriptorRealization.isMinimal_rightMul_iff",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PrimaryDescriptor.IsSourceFixingUnitary.transfer_eq",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PrimaryDescriptor.IsSourceFixingUnitary.isMinimal",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PrimaryDescriptor.IsSourceFixingUnitary.symm",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PrimaryDescriptor.toDescriptor_isMinimal_iff",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PrimaryDescriptor.inlL_A_pow_Γ_mem_resolventSourceSpan",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.Γ_mem_resolventSourceSpan_real",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.resolventSourceSpan_realRay_eq_top",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.compressToSub",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.weierstrassMul",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.isUnit_weierstrassMul",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.J_mul_weierstrassMul",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.J_mul_rootProjL",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.weierstrassInf",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.weierstrassFin",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.weierstrassInf_A_pow_finrank",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.weierstrassPrimary",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.primaryEquiv",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.isSourceFixingUnitary_primaryEquiv",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.PontryaginRealization.mcMillanDegree_le_finrank",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.compressGram_isUnit",
+      "RenewalGeometry/Predictive/DescriptorWeierstrassForm.lean:RenewalGeometry.compressGram_mul_restrictL",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PontryaginRealization.markov_eq_of_transfer_eventuallyEq",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PontryaginRealization.tendsto_transfer_atTop",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PrimaryDescriptor.markov_eq_of_transfer_eventuallyEq",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PrimaryDescriptor.existsUnique_sourceFixing_unitary_of_transfer",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PrimaryDescriptor.existsUnique_sourceFixing_unitary_of_transfer_eq",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.FiniteRationalHermitianData.coeff_eq_of_toFun_eventuallyEq",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.FiniteRationalHermitianData.coeff_eq_of_toFun_eq",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PontryaginRealization.finiteDimensional_hankelState_markov",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PontryaginRealization.markovData",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PontryaginRealization.markovData_toFun",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PrimaryDescriptor.toData",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PrimaryDescriptor.toData_toFun",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.PrimaryDescriptor.existsUnique_sourceFixing_unitary_toData_primary",
+      "RenewalGeometry/Predictive/DescriptorLaurentUniqueness.lean:RenewalGeometry.FiniteRationalHermitianData.toData_primary_coeff",
+      "RenewalGeometry/Analysis/PolynomialVanishingAtInfinity.lean:RenewalGeometry.coeff_eq_zero_of_tendsto_zero",
+      "RenewalGeometry/Analysis/PolynomialVanishingAtInfinity.lean:RenewalGeometry.tendsto_smul_inverse_sub_algebraMap",
+      "RenewalGeometry/Analysis/PolynomialVanishingAtInfinity.lean:RenewalGeometry.tendsto_inverse_sub_algebraMap",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.inverse_mul_of_isUnit",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.DescriptorRealization.rightMul",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.DescriptorRealization.rightMul_transfer",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.DescriptorRealization.J_mul_resolventAt",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.DescriptorRealization.anchored",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.DescriptorRealization.pencil_mul_resolventAt",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.DescriptorRealization.transfer_eq_anchored",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.DescriptorRealization.anchoredDescriptor",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.DescriptorRealization.anchoredDescriptor_A",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.DescriptorRealization.anchoredDescriptor_transfer",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.exists_real_regular_of_isUnit",
+      "RenewalGeometry/Predictive/DescriptorAnchoredPencil.lean:RenewalGeometry.DescriptorRealization.exists_real_regular",
+      "RenewalGeometry/Predictive/DescriptorPrimaryDecomposition.lean:RenewalGeometry.PontryaginRealization.form_eq_zero_of_mem_rootSpace_zero_of_mem_rootComplement",
+      "RenewalGeometry/Predictive/DescriptorPrimaryDecomposition.lean:RenewalGeometry.PontryaginRealization.rootProjL",
+      "RenewalGeometry/Predictive/DescriptorPrimaryDecomposition.lean:RenewalGeometry.PontryaginRealization.rootProjL_comm_inverse",
+      "RenewalGeometry/Predictive/DescriptorPrimaryDecomposition.lean:RenewalGeometry.PontryaginRealization.form_eq_rootProj_add",
+      "RenewalGeometry/Predictive/DescriptorPrimaryDecomposition.lean:RenewalGeometry.PontryaginRealization.pow_finrank_rootProjL",
+      "RenewalGeometry/Predictive/DescriptorPrimaryDecomposition.lean:RenewalGeometry.PontryaginRealization.inverse_one_sub_smul_rootProjL",
+      "RenewalGeometry/Predictive/DescriptorPrimaryDecomposition.lean:RenewalGeometry.DescriptorRealization.inner_transfer_eq_rootProj_add",
+      "RenewalGeometry/Predictive/DescriptorPrimaryDecomposition.lean:RenewalGeometry.DescriptorRealization.anchored_form_rootProj_inverse_eq_sum",
+      "RenewalGeometry/Predictive/PrimaryDescriptorRealization.lean:RenewalGeometry.PrimaryDescriptor",
+      "RenewalGeometry/Predictive/PrimaryDescriptorRealization.lean:RenewalGeometry.PrimaryDescriptor.toDescriptor",
+      "RenewalGeometry/Predictive/PrimaryDescriptorRealization.lean:RenewalGeometry.PrimaryDescriptor.IsMinimal",
+      "RenewalGeometry/Predictive/PrimaryDescriptorRealization.lean:RenewalGeometry.PrimaryDescriptor.toDescriptor_transfer",
+      "RenewalGeometry/Predictive/PrimaryDescriptorRealization.lean:RenewalGeometry.PrimaryDescriptor.IsSourceFixingUnitary",
+      "RenewalGeometry/Predictive/PrimaryDescriptorRealization.lean:RenewalGeometry.PrimaryDescriptor.existsUnique_sourceFixing_unitary",
+      "RenewalGeometry/Predictive/PrimaryDescriptorRealization.lean:RenewalGeometry.FiniteRationalHermitianData.primary",
+      "RenewalGeometry/Predictive/PrimaryDescriptorRealization.lean:RenewalGeometry.FiniteRationalHermitianData.primary_isMinimal",
+      "RenewalGeometry/Predictive/DescriptorDirectSum.lean:RenewalGeometry.FiniteRationalHermitianData.descriptor_transfer",
+      "RenewalGeometry/Predictive/DescriptorDirectSum.lean:RenewalGeometry.FiniteRationalHermitianData.finrank_descriptor_state",
+      "RenewalGeometry/Predictive/DescriptorRealization.lean:RenewalGeometry.DescriptorRealization",
+      "RenewalGeometry/Predictive/DescriptorRealization.lean:RenewalGeometry.DescriptorRealization.transfer",
+      "RenewalGeometry/Predictive/DescriptorRealization.lean:RenewalGeometry.FiniteRationalHermitianData"
+    ],
+    "note": "PROVED (sorry-free, standard axioms only). New file Predictive/DescriptorWeierstrassForm.lean (1511 lines) closes the general (non-primary) side and assembles the corollary; bundled statement RenewalGeometry.cor_supp_all_rational. Setting: H, N finite-dimensional complex Hilbert spaces (the paper's finite setting); a regular Pontryagin descriptor realization is DescriptorRealization (E, A, Gamma, J) with regular pencil; a finite rational Hermitian dynamic function is FiniteRationalHermitianData Q = P + Q_0 (eq:supp-rational-split). (1) WEIERSTRASS REDUCTION: for any regular D and any real regular point t_0 (exists_real_regular), with T = E (A - t_0 E)^{-1}, pi_0 the Riesz projection onto the root subspace R_0 of T at 0 and W its root complement, the Weierstrass multiplier M = (1 + t_0 T) pi_0 + T (1 - pi_0) is an invertible J-self-adjoint operator commuting with T and pi_0 (weierstrassMul, isUnit_weierstrassMul, J_mul_weierstrassMul; pi_0 is J-self-adjoint, J_mul_rootProjL); the infinity block is the compression of (T M^{-1}, pi_0 Gamma, J M^{-1}) to R_0 (nilpotent, weierstrassInf_A_pow_finrank) and the finite block the compression of ((1 + t_0 T) M^{-1}, (1 - pi_0) Gamma, J M^{-1}) to W (PontryaginRealization.compress: compression of a Gram operator to a subspace on which its form is nondegenerate, compressGram_isUnit); D.weierstrassForm is the resulting PrimaryDescriptor and isSourceFixingUnitary_weierstrass verifies IsSourceFixingUnitary (D.rightMul (K M^{-1})) (D.weierstrassForm).toDescriptor S with S x = (pi_0 x, x - pi_0 x) (primaryEquiv), exactly as planned. weierstrassForm_transfer: the primary form has the same transfer function as D at every regular point (a source-fixing unitary preserves the transfer function, IsSourceFixingUnitary.transfer_eq). (2) MINIMALITY of general descriptor realizations: DescriptorRealization.IsMinimal := the resolvent-source vectors (A - zE)^{-1} Gamma h over the regular points z span the state space (the paper's source minimality of thm:supp-complete-rational-Krein). It is invariant under right multiplication (isMinimal_rightMul_iff) and source-fixing unitaries (IsSourceFixingUnitary.isMinimal, .symm), and on a primary form it is exactly PrimaryDescriptor.IsMinimal, i.e. both blocks source-cyclic (toDescriptor_isMinimal_iff; the Laurent/Vandermonde step is inlL_A_pow_Gamma_mem_resolventSourceSpan via coeff_eq_zero_of_tendsto_zero for the polynomial part and the real-ray resolvent limit Gamma_mem_resolventSourceSpan_real / resolventSourceSpan_realRay_eq_top for the strictly proper part). Hence D.IsMinimal <-> (D.weierstrassForm t_0).IsMinimal (isMinimal_iff_weierstrassForm_isMinimal). (3) THE EQUIVALENCE eq:supp-all-rational-equivalence: existence: Q.descriptor (primary direct sum of the infinity chain of P and the canonical realization of Q_0) is a minimal regular descriptor realization of Q (FiniteRationalHermitianData.descriptor_isMinimal, eventually_descriptor_transfer_eq_toFun); every minimal regular D realizes the finite rational Hermitian datum D.toData (eventually_toData_toFun_eq_transfer), whose coefficients are determined by the transfer function (toData_coeff_eq_of_transfer_eventuallyEq); uniqueness: a minimal D realizing Q is equivalent to Q.descriptor by reduction to Weierstrass primary form followed by a UNIQUE source-fixing descriptor Pontryagin unitary (existsUnique_sourceFixing_unitary_weierstrassForm_descriptor), and any two minimal realizations with the same dynamic function have Weierstrass forms related by a unique source-fixing unitary (existsUnique_sourceFixing_unitary_weierstrassForm). Dimension: every regular realization of Q has dim N >= McM(P) + McM(Q_0) (mcMillanDegree_add_le_finrank) and every minimal one has dim N = McM(P) + McM(Q_0) (finrank_eq_of_isMinimal): the minimal realizations attain the minimum state dimension. DISCLOSED RENDERINGS: (a) 'same dynamic function' is rendered as equality of transfer functions for all large real t (a neighbourhood of infinity on the real axis; rational functions agreeing there agree everywhere); (b) the paper's 'unique descriptor equivalence' between non-primary realizations is read as reduction to Weierstrass primary form (the right multiplication (E, A, Gamma, J) -> (EV, AV, Gamma, JV) by the J-self-adjoint unit V = (A - t_0 E)^{-1} M^{-1}, which preserves the transfer function, followed by the source-fixing unitary x -> (pi_0 x, x - pi_0 x)) followed by the unique source-fixing unitary between the primary forms; the primary form and D.toData depend on the chosen real regular point t_0, but the Laurent coefficients do not; (c) the negative-index part of 'attains both minimum ... indices' is not formalised here (the index statements are the separately ledgered thm:supp-complete-rational-Krein / thm:supp-pole-Hankel results); (d) minimality is source minimality (resolvent-source span = whole space), as in the paper's proof of thm:supp-complete-rational-Krein."
   },
   "thm:supp-common-source": {
     "env": "theorem",
@@ -962,19 +1246,58 @@
   "thm:supp-finite-exhaustion": {
     "env": "theorem",
     "title": "Finite stratified inverse-fibre exhaustion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: stratified, stabilizer quotient, inverse fibre, fully reduced, separating functionals, calibration class.",
-    "difficulty": "hard",
-    "plan": "The left side ℛeal^{♯,min}(S) is not defined independently of the right side; the theorem is a classification of 'fully reduced finite realizations' under simultaneous equivalence in five factors, each of which (J_X from thm:supp-graph-realization, M_X from the Stieltjes/Pontryagin realizations, P_X markings, C_X calibration, R_X monodromy) must first exist as a Lean object and the equivalence relation on realizations defined; three of the five (memory, calibration, Pontryagin) are hard. Needs reformulation into a bundled realization structure before a faithful statement is possible; as stated it is an assembly of currently unavailable classifications."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.instMulActionGaugeGroupCorr",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.mem_orbit_iff_gaugeAct",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.mem_stabilizer_iff_jointGram",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.FullyReducedRealization",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.RealizationSpace",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.gramMap",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.gramFibreEquiv",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.StratifiedQuotient",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.stratifiedExhaustion",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.stratifiedExhaustion_fst",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.finite_stratified_exhaustion",
+      "RenewalGeometry/Algebra/EquivariantOrbitDecomposition.lean:RenewalGeometry.EquivariantOrbit.EquivariantMap",
+      "RenewalGeometry/Algebra/EquivariantOrbitDecomposition.lean:RenewalGeometry.EquivariantOrbit.EquivariantMap.fibre",
+      "RenewalGeometry/Algebra/EquivariantOrbitDecomposition.lean:RenewalGeometry.EquivariantOrbit.EquivariantMap.orbitDecomposition",
+      "RenewalGeometry/Algebra/EquivariantOrbitDecomposition.lean:RenewalGeometry.EquivariantOrbit.EquivariantMap.orbitDecomposition_fst",
+      "RenewalGeometry/Algebra/EquivariantOrbitDecomposition.lean:RenewalGeometry.EquivariantOrbit.orbitRelQuotientCongr",
+      "RenewalGeometry/Spectralization/JointGramClassificationExact.lean:RenewalGeometry.JointGram.joint_gram_classification"
+    ],
+    "note": "Proved in the reformulation the paper's proof establishes. A fully reduced finite realization of the completed target is rendered by its retained data (FullyReducedRealization): a joint Gram point K in Corr_X (thm:supp-common-source, JointGram.CorrelationSpectrahedron) together with points of the five retained fibres J_X x M_X x P_X x C_X^cal x R_X, which enter as sets with an action of the gauge group G_X = Prod_a U(E_a); the gauge group acts on Corr_X by the block congruence of thm:supp-common-source (instMulActionGaugeGroupCorr; gaugeAct is a right action, composed with inversion to a left action with the same orbits, mem_orbit_iff_gaugeAct, and the same stabilizers, which are the residual gauge groups Stab_{G_X}(K) of thm:supp-common-source, mem_stabilizer_iff_jointGram). Real_X^{sharp,min}(S) is defined as the set of fully reduced realizations modulo simultaneous gauge equivalence (RealizationSpace, the orbit space). The theorem finite_stratified_exhaustion is eq:supp-finite-fibre: an explicit bijection stratifiedExhaustion : Real_X^{sharp,min}(S) = Sigma_{[K] in Corr_X/G_X} (J_X x M_X x P_X x C_X^cal x R_X)/Stab_{G_X}(K) sending the class of a realization into the stratum of the gauge orbit of its joint Gram point (stratifiedExhaustion_fst), with the strata indexed by the block-congruence orbits and each stratum quotiented by its residual gauge group; the quotient is stratified, not a product, exactly as the paper says. The general mechanism is the new reusable infrastructure Algebra/EquivariantOrbitDecomposition.lean: for a G-equivariant map pi : X -> Y, X/G = Sigma_{omega in Y/G} pi^{-1}(y_omega)/Stab(y_omega) (EquivariantMap.orbitDecomposition, with the fibre carrying the stabilizer action and orbitRelQuotientCongr transporting orbit spaces along equivariant bijections). Disclosures: the five factor classifications that the paper composes (graph inverse theorem for J_X = thm:supp-graph-realization, positive/Pontryagin memory classification for M_X = thm:supp-Naimark-realization and thm:supp-complete-rational-Krein, marked bundle descent for R_X = thm:supp-marked-bundle, all proved records) are cited, not re-derived: the factors are G_X-sets here, and the full-reduction hypotheses (null quotients taken, minimal Gram blocks, the finite separating family with trivial common kernel) are what justifies taking the retained data as the realization set; they are not themselves formalised, so the left side is defined as the orbit space of the retained data rather than derived from a Grand-tensor realization notion. The descriptor (pencil) part of the memory factor (cor:supp-all-rational) remains open in the concurrent batch and does not affect this statement."
   },
   "thm:supp-semifinite-exhaustion": {
     "env": "theorem",
     "title": "Completed quasilocal/semifinite inverse-fibre theorem",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: inverse limit, semifinite weight, quasilocal, tightness, stable images, finite intersection property. The inverse-limit files in NCG/Grand concern CTMC/quantum cylinder projective limits, not inverse fibres.",
-    "difficulty": "hard",
-    "plan": "Inverse limit over stages of the stratified quotients with tightness, semifinite normal weights, bonding maps onto stable images and a cofinal separating family; requires thm:supp-finite-exhaustion at every stage plus projective-limit and von Neumann/semifinite-weight infrastructure absent from Mathlib (the library's inverse-limit files concern CTMC/quantum cylinder limits only). Not provable as stated; would need a complete reformulation as an abstract 'inverse limit of nonempty finite sets with surjective bonding maps is nonempty' shell (Mathlib has nonempty_sections_of_finite_inverse_system) attached to the yet-to-be-defined finite strata."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem.thread",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem.completedEquivSections",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem.completedEquivStableSections",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem.coordinate_mem_stableImage",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem.bond_stableImage_surjective",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem.nonempty_completed_iff_stableImage",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem.nonempty_completed_iff_fibre",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.CompletedStageSystem.completedEquivStratifiedSections",
+      "RenewalGeometry/Spectralization/StratifiedInverseFibreExhaustionExact.lean:RenewalGeometry.StratifiedInverseFibre.weightLimit_lowerSemicontinuous",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.Sections",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.stableImage",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.mem_stableImage_of_sections",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.sectionsEquivStable",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.exists_mem_stableImage_bond_eq",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.stableImage_nonempty",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.nonempty_sections_iff_stableImage",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.nonempty_sections_iff_fibre",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.nonempty_sections_iff_fibre_of_finite",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.sectionsEquivOfStageEquiv",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.transport",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.InverseSystem.sectionsEquivTransport",
+      "RenewalGeometry/Topology/FiniteInverseSystemStableImage.lean:RenewalGeometry.nonempty_iInter_of_antitone_of_isClosed"
+    ],
+    "note": "Proved in the abstract projective-limit form the paper's proof uses, with the finite fibres supplied by thm:supp-finite-exhaustion. A completed finite-stage system (CompletedStageSystem) is an N-inverse system of stage fibres F_n (the fully reduced finite fibres) which are compact Hausdorff with continuous bonding maps (the paper's nonempty compact finite strata), together with the completed realization set Real_infty, its stage coordinates compatible with the bonding maps, the cofinal separating family rendered as joint injectivity of the stage coordinates (trivial common kernel on the quotient by the finite-stage coordinates: no additional retained quasilocal direction) and tightness rendered as: every compatible thread of finite-stage data is realized. Then eq:supp-semifinite-fibre: completedEquivSections gives Real_infty^{sharp,min}(S) = varprojlim_n F_n; completedEquivStableSections shows the inverse limit is taken over the stable images (every thread lies in the stable images, Topology/FiniteInverseSystemStableImage.lean: stableImage n = Inter_k extendable k n, sectionsEquivStable); bond_stableImage_surjective is the Mittag-Leffler surjectivity of the bonding maps onto the stable images, proved (not assumed) from compactness through the finite-intersection property of a decreasing chain of nonempty closed sets (nonempty_iInter_of_antitone_of_isClosed); nonempty_completed_iff_stableImage is the clause nonempty exactly when the stable-image system is nonempty (compatible threads are built by successive lifting, InverseSystem.stableThread), equivalently when every stage fibre is nonempty (for finite fibres this is Koenig's lemma, nonempty_sections_iff_fibre_of_finite); completedEquivStratifiedSections identifies every stage fibre with its stratified stabilizer quotient of thm:supp-finite-exhaustion (stagewise bijections e_n, bonding maps transported along them, InverseSystem.transport / sectionsEquivTransport) so that the completed fibre is literally the inverse limit of the stratified forms Sigma_{[K_n]} (J_n x M_n x P_n x C_n x R_n)/Stab(K_n). The semifinite-weight clause is weightLimit_lowerSemicontinuous: compatible increasing stage weights tau_n have the pointwise supremum as unique monotone limit (tendsto_atTop_iSup), which is lower semicontinuous when the tau_n are (lowerSemicontinuous_iSup). Disclosures: the resolvent clause (compatible resolvents determine one closed self-adjoint operator) and the normality of the limit weight (von Neumann semifinite normal weights) are not encoded; the weight clause is stated in its monotone-convergence/lower-semicontinuity form on ENNReal-valued functions; compatible bundle transport is part of the stage data; separation and tightness are structure fields (the paper lists them as hypotheses of the completed system) and the injectivity/surjectivity they yield is what the bijection uses, so the substantive content proved is the stable-image reduction, the Mittag-Leffler surjectivity and the nonemptiness by the finite-intersection property; the topologies on the stage quotients are hypotheses (compact Hausdorff strata, continuous bonding), not constructed from the realization data."
   }
 }
