@@ -90,11 +90,15 @@
   "cor:finite-system-export": {
     "env": "corollary",
     "title": "Finite coherent system export",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: six-edge normalization, Helmert frame, ten quadratures, 2*sqrt(2) commutator-map bound, protected commutant complement least singular value.",
-    "difficulty": "hard",
-    "plan": "Needs reformulation before it can be stated: 'independently verified protected commutant complement', 'measured least singular value' and 'no additional commutant direction' are not mathematical objects in the paper; a faithful version is: (a) the ten-panel identities of prop:ten-panel-reconstruction (C(u) = sqrt(h/12) I, C(r_mu) = sqrt(theta)/2 D_mu (x) I, D_mu = 2 sqrt 3/sqrt(theta h) (X_mu + i Y_mu)) and (b) a perturbation bound: if hatK_e = K_e + E_e with (sum ||E_e||_HS^2)^{1/2} <= e_K then the stacked commutator map D(X) = (([K_e,X],[K_e^*,X]))_e satisfies ||hatD - D||_{2->2} <= 2 sqrt 2 e_K, hence sigma_min(hatD restricted to a subspace) > 2 sqrt 2 e_K implies sigma_min(D) > 0 there. Part (a) is finite matrix algebra over the Helmert frame (sqrt normalizations, eigenvectors of M_theta = theta I + (1-theta) c c^*); part (b) needs an operator-norm/least-singular-value perturbation lemma (sigma_min(A+E) >= sigma_min(A) - ||E||) that Mathlib lacks (no SVD; would go through the Rayleigh quotient of AᴴA via Matrix.IsHermitian.eigenvalues) and HS-vs-operator norm comparisons. Build on thm:pullback-reconstruction and RenewalGeometry/StandardModel/InternalCommutantNumericalExact.lean:hsNormSq."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Predictive/FiniteSystemExportExact.lean:RenewalGeometry.finite_system_export",
+      "RenewalGeometry/Predictive/FiniteSystemExportExact.lean:RenewalGeometry.jointCommutatorCLM_opNorm_sub_le",
+      "RenewalGeometry/Predictive/FiniteSystemExportExact.lean:RenewalGeometry.no_additional_commutant_direction",
+      "RenewalGeometry/Predictive/TenPanelReconstructionExact.lean:RenewalGeometry.TenPanel.ten_panel_reconstruction",
+      "RenewalGeometry/Predictive/TenPanelReconstructionExact.lean:RenewalGeometry.TenPanel.reconstruction_error"
+    ],
+    "note": "Proved as the assembled theorem finite_system_export: for the normalized six-edge source class (sum K_e = sqrt2 I, sum Q_a = I, 0<theta<1, Helmert frame O^T O = I, O^T 1 = 0, O O^T = I - 11^T/6) (1) the ten quadratures reconstruct all six coefficients on the acted-on carrier E x R (D_mu (x) I = (2 sqrt3/sqrt(theta h))(P*(X_mu) + i P*(Y_mu)), K_e = I/sqrt18 + sum_mu O_{e mu} D_mu); (2) the linear reconstruction from measured panels with HS errors eps_X, eps_Y has HS coefficient error <= e_K = (2 sqrt3/sqrt(theta h)) (sum (eps_X+eps_Y)^2)^{1/2}; (3) the star-closed stacked commutator maps satisfy ||D_hat - D||_{2->2} <= 2 sqrt2 e_K as an operator-norm inequality of continuous linear maps; (4) stopping test. Disclosed renderings of the paper's informal phrases: 'independently verified protected commutant' = a subspace M of the Hilbert-Schmidt space with M <= ker D (true map); its 'protected complement' = M-perp; 'measured least singular value s_hat' = the bound s_hat ||x|| <= ||D_hat x|| on M-perp; 'no additional commutant direction' = ker D = M exactly, equivalently every matrix commuting with all K_e (x) I and their adjoints lies in M. The true coefficient is compared as K_e (x) I_R on the common carrier."
   },
   "thm:word-module-recognition": {
     "env": "theorem",
@@ -885,30 +889,40 @@
   "thm:structural-SM": {
     "env": "theorem",
     "title": "Structural Standard-Model classification from a landed multiplicity packet",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/StandardModel/ActiveFiniteStructuralStandardModelExact.lean:RenewalGeometry.activeFiniteStructuralStandardModel",
-      "RenewalGeometry/StandardModel/ActiveFiniteStructuralStandardModelExact.lean:RenewalGeometry.ActiveFiniteStructuralStandardModelPacket",
-      "RenewalGeometry/StandardModel/InternalAssemblyExact.lean:RenewalGeometry.InternalAssembly.assembled_dichotomy",
+      "RenewalGeometry/StandardModel/StructuralStandardModelPacketExact.lean:RenewalGeometry.LandedMultiplicityPacket",
+      "RenewalGeometry/StandardModel/StructuralStandardModelPacketExact.lean:RenewalGeometry.LandedMultiplicityPacket.structural_standard_model",
+      "RenewalGeometry/StandardModel/StructuralStandardModelPacketExact.lean:RenewalGeometry.LandedMultiplicityPacket.shortedGram",
+      "RenewalGeometry/StandardModel/StructuralStandardModelPacketExact.lean:RenewalGeometry.LandedMultiplicityPacket.shortedGram_posSemidef",
+      "RenewalGeometry/StandardModel/InternalSeedSaturationExact.lean:RenewalGeometry.InternalSeedSaturation.internal_seed_saturation_of_unitary",
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.determinantSeedStabilizer_eq_SMGaugeGroup",
       "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.smGaugeQuotientEquiv",
-      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.SMGaugeGroup",
       "RenewalGeometry/StandardModel/AnomalyForcedWeights.lean:RenewalGeometry.anomaly_forced_weights",
-      "RenewalGeometry/StandardModel/SMActiveStructural.lean:RenewalGeometry.SMActive.generation_rank",
-      "RenewalGeometry/StandardModel/WeakResetGenerationExact.lean:RenewalGeometry.WeakReset.two_lines_generate",
-      "RenewalGeometry/StandardModel/DeterminantIncidenceExact.lean:RenewalGeometry.DetIncidence.mdet_pos_iff"
+      "RenewalGeometry/StandardModel/EndpointGenerationCarrierExact.lean:RenewalGeometry.EndpointGenerationCarrier.endpoint_generation_carrier",
+      "RenewalGeometry/StandardModel/CliffordOccurrenceTest.lean:RenewalGeometry.CliffordTwirlMatterAudit.clifford_occurrence_test",
+      "RenewalGeometry/Spectralization/SaturatedFiniteDiracGenerator.lean:RenewalGeometry.zeroOddProvenance_fixesFiniteDiracProjection",
+      "RenewalGeometry/StandardModel/OneDoubletOddTangentClassification.lean:RenewalGeometry.zeroOddProvenance_commonWeakLine_rankOne"
     ],
-    "note": "Partial: an explicit-carrier assembly proves all six conclusions in one packet — (i) generated ∗-algebra on C^3⊕C^2⊕C⊕C equals M3⊕M2⊕C⊕C when the colour corner weight is positive, (ii) S(U(3)×U(2)) (kernel of the product determinant) ≅ (SU(3)×SU(2)×U(1))/Z6, (iii) anomaly classification 3a+2b=0, (iv) three-dimensional generation carrier, (v) normalized self-adjoint grading-odd Dirac seed with tight odd orbit and nonzero determinant seed, (vi) two independent non-orthogonal weak lines generate M2. Missing: the paper's abstract hypotheses (positive geometry short, multiplicity census/internal landing of thm:internal-seed-saturation, nonzero fully alternating incidence projection, positivity of the shorted endpoint Gram, odd-provenance completeness) are replaced by concrete matrix hypotheses on a fixed 7-dimensional carrier, and the no-go/deficit branches are not part of this theorem.",
-    "difficulty": "hard",
-    "plan": "The explicit-carrier packet StandardModel/ActiveFiniteStructuralStandardModelExact.lean:activeFiniteStructuralStandardModel proves all six clauses under concrete matrix hypotheses on a fixed 7-dimensional carrier. A faithful version needs Lean definitions of the abstract hypothesis packet — positive geometry short (thm:geometry-short, only the Schur residual exists in Predictive/ExactSourceSchurResidual.lean), multiplicity census / internal landing (thm:internal-seed-saturation, only InternalAssemblyExact.assembled_dichotomy exists), odd-provenance completeness, and the shorted endpoint Gram — all currently conditional_interface, plus the no-go branches. This is a global assembly whose hypotheses must first be formalised as structures; do it after prop:generation-carrier, prop:finite-dirac, prop:bridge-router-residuals and thm:finite-internal-landing-alternative are closed, by bundling them into a structure that specialises to ActiveFiniteStructuralStandardModelPacket."
+    "note": "Proved on the abstract packet. LandedMultiplicityPacket n G h e1 e = a finite source-complete joint packet on one represented carrier C^n: the unitary external action rho of a finite group and the complete spacetime source S_ST and accepted internal source S_int on a common source carrier; the positive geometry short G_{int|ST} = S_int^*(I-P_ST)S_int is shortedGram (exact source Schur residual), positive semidefinite by thm:source-Schur (shortedGram_posSemidef), so the packet satisfies thm:geometry-short automatically. structural_standard_model proves the six implications on that packet: (i) with the isotypic data (iota,I,J,W) of thm:active-isotypic furnished for rho, census (3,2,1,1) as a labelling e : iota ~ Fin 4 with |J(e^{-1} k)| = (3,2,1,1), and (I1)-(I4) as represented generators (colour-supported word with omega_col>0 or ReciprocalBridge, Router h, scalar sectors/central supports) => explicit isomorphism M3+M2+C+C ~ A'_ext, generated algebra = A'_ext, dim 15, centre 4, sectors 9 and 4 (internal_seed_saturation_of_unitary); (ii) for any represented incidence shadow T with nonzero alternating projection alt T != 0: the seed tau = alt T is retracted by Theta, its unitary stabilizer in U(3)xU(2) is S(U(3)xU(2)) = SMGaugeGroup, and S(U(3)xU(2)) ~ (SU(3)xSU(2)xU(1))/Z6 with kernel {(z^2 I3, z^-3 I2, z): z^6=1}; (iii) anomaly vanishing iff 3a+2b=0, primitive solutions +-(-2,3), weights (1,4,-2,-3,-6,3) (anomaly_forced_weights, the anomaly trace evaluations taken as displayed); (iv) if shortedGram is strictly positive on a rank-three block W_- of the internal carrier then dim of its supported image in E/Ker G is 3, and the sign-twisted triplet admits no invertible intertwiner (loop provenance); (v) p_Cl > 0 iff a represented Clifford axis changes the grading J on C^4 (x) M (clifford_occurrence_test), and on an odd-provenance-complete branch (vanishing odd provenance defect) the complete odd generator is fixed by the finite-Dirac projector and factors through the represented range of D_F (unique source-minimal finite Dirac operator); (vi) a source-complete primitive weak one-leg sector over one weak Schmidt line has complete coefficient map of rank <= 1 (exactly one primitive doublet) and rank > 1 forces a nonzero odd provenance defect (nonzero orthogonal source innovation). Disclosed gaps: the incidence shadow, Clifford grading, finite-Dirac and weak one-leg data of clauses (ii),(v),(vi) are quantified universally inside the clauses instead of being packet fields (stronger than the paper's 'on that packet' reading); the Yukawa/Majorana typed-contraction clause of (v) is deterministic postprocessing and is not a separate Lean object; the no-go/deficit branches quoted at the end are other theorems and not part of this statement. Axioms: propext, Classical.choice, Quot.sound only (the earlier explicit-carrier file ActiveFiniteStructuralStandardModelExact.lean uses native_decide and is not imported)."
   },
   "cor:historical-typed-compilation": {
     "env": "corollary",
     "title": "Historical typed-compilation criterion",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: historical, typed compilation, typed shadow, word native, ancestry Gram, Schur ancestry residual, alternating determinant shadow, cross-Hankel.",
-    "difficulty": "hard",
-    "plan": "No Lean counterpart and the prerequisite objects (def:word-native-shadow, historical word hierarchy, Grand-Tensor word Gram with multiplication table, Store–Clifford and matter-incidence shadows, thm:external-shadow-no-go) are all conditional_interface with no definitions. The mathematical core is finite: if every typing projector/router is a polynomial in represented words, then compressed Grams ⟨pwp, pw'p⟩ are polynomial functions of the word Gram and structure constants. Formalising it requires a new 'labelled word algebra with Gram and multiplication table' structure (nearest material: Predictive/TypedHankelRealization.lean, Predictive/FiniteMomentKrylovSourceDuality.lean) before the corollary can even be stated faithfully."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Predictive/HistoricalTypedCompilationExact.lean:RenewalGeometry.HistoricalTypedCompilation.historical_typed_compilation",
+      "RenewalGeometry/Predictive/HistoricalTypedCompilationExact.lean:RenewalGeometry.HistoricalTypedCompilation.historical_typed_compilation_determined",
+      "RenewalGeometry/Predictive/HistoricalTypedCompilationExact.lean:RenewalGeometry.HistoricalTypedCompilation.external_shadow_not_compilable",
+      "RenewalGeometry/Predictive/HistoricalTypedCompilationExact.lean:RenewalGeometry.HistoricalTypedCompilation.FlatWordTable",
+      "RenewalGeometry/Predictive/HistoricalTypedCompilationExact.lean:RenewalGeometry.HistoricalTypedCompilation.TableNativeShadow",
+      "RenewalGeometry/Predictive/HistoricalTypedCompilationExact.lean:RenewalGeometry.HistoricalTypedCompilation.TableNativeShadow.eval_compile",
+      "RenewalGeometry/Predictive/HistoricalTypedCompilationExact.lean:RenewalGeometry.HistoricalTypedCompilation.TableNativeShadow.comp_apply",
+      "RenewalGeometry/Predictive/HistoricalTypedCompilationExact.lean:RenewalGeometry.HistoricalTypedCompilation.TableNativeShadow.groupAverage_apply",
+      "RenewalGeometry/Predictive/HistoricalTypedCompilationExact.lean:RenewalGeometry.HistoricalTypedCompilation.ancestryShort",
+      "RenewalGeometry/Predictive/ExternalShadowNoGo.lean:RenewalGeometry.external_shadow_no_go"
+    ],
+    "note": "Proved as the criterion the paper's proof establishes. A flat historical word hierarchy is a FlatWordTable: a finite word bank of the historical *-algebra A with its multiplication table w_i w_j = sum_k t_ijk w_k and flatness (the bank spans A, so represented elements and finite functional-calculus elements p(a) are bank combinations); the word Gram is G_ij = tau(w_i^* w_j) for the inner product <y,x> = tau(y^* x) (tau = tau_reg gives the Grand-Tensor Gram). Typed shadows are TableNativeShadow: word-native maps X -> sum c_a A_a X B_a (def:word-native-shadow) whose insertions are declared in the bank; compressions by represented typing projectors, finite symmetry/router averages and compositions are table native (compression, groupAverage, comp). The compiler `compile` reduces every inserted product in the table (eval_compile). historical_typed_compilation: (1) the ordinary, ordinary-shadow and shadow-shadow blocks of the complete mixed ancestry Gram equal explicit functions gramForm of the word Gram, the table and the declared data; (2) the Schur ancestry residual H - C^* G^dagger C (ancestryShort, spectral Moore-Penrose inverse, the display eq:table-native-short) equals its compiled form; (3) the alternating determinant shadow DetIncidence.alt of an incidence tensor compiled entrywise from typed Gram blocks equals its value on compiled entries. historical_typed_compilation_determined: two hierarchies on different algebras with the same table, Gram and declared data give the same Gram, residual and alternating shadow (no independent cross-Hankel row). Converse: external_shadow_not_compilable restates thm:external-shadow-no-go (no function of the word-Gram hierarchy returns the external cross block). Disclosed renderings: 'represented or functional-calculus elements' = bank combinations; the Store-Clifford and matter-incidence shadows = arbitrary table-native shadows; the incidence tensor entering the alternating shadow is taken entrywise from typed Gram blocks."
   },
   "def:commutant-laplacian": {
     "env": "definition",
@@ -966,11 +980,24 @@
   "thm:howe-discriminant": {
     "env": "theorem",
     "title": "Howe enhancement discriminant and generic rigidity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "pending",
-    "difficulty": "hard",
-    "plan": "pending"
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Commutant/HoweDiscriminantExact.lean:RenewalGeometry.HoweDiscriminant.howe_discriminant",
+      "RenewalGeometry/Commutant/HoweDiscriminantExact.lean:RenewalGeometry.HoweDiscriminant.howe_discriminant_analytic",
+      "RenewalGeometry/Commutant/HoweDiscriminantExact.lean:RenewalGeometry.HoweDiscriminant.stackedCommutator",
+      "RenewalGeometry/Commutant/HoweDiscriminantExact.lean:RenewalGeometry.HoweDiscriminant.howeDiscriminant",
+      "RenewalGeometry/Commutant/HoweDiscriminantExact.lean:RenewalGeometry.HoweDiscriminant.stackedCommutator_mulVec_eq_zero_iff",
+      "RenewalGeometry/Commutant/HoweDiscriminantExact.lean:RenewalGeometry.HoweDiscriminant.howeDiscriminant_eq_zero_iff",
+      "RenewalGeometry/Commutant/HoweDiscriminantExact.lean:RenewalGeometry.HoweDiscriminant.howeDiscriminant_eq_eval",
+      "RenewalGeometry/Commutant/HoweDiscriminantExact.lean:RenewalGeometry.HoweDiscriminant.totalDegree_gramPoly_det_le",
+      "RenewalGeometry/Commutant/HoweDiscriminantExact.lean:RenewalGeometry.HoweDiscriminant.analyticOnNhd_howeDiscriminant",
+      "RenewalGeometry/Commutant/RectangularCauchyBinet.lean:RenewalGeometry.CauchyBinet.det_conjTranspose_mul_eq_sum_minors",
+      "RenewalGeometry/Commutant/RectangularCauchyBinet.lean:RenewalGeometry.CauchyBinet.det_conjTranspose_mul_eq_sum_normSq_minors",
+      "RenewalGeometry/Analysis/PolynomialZeroSetNull.lean:RenewalGeometry.volume_mvPolynomial_zeroSet_eq_zero",
+      "RenewalGeometry/Analysis/PolynomialZeroSetNull.lean:RenewalGeometry.interior_mvPolynomial_zeroSet_eq_empty",
+      "RenewalGeometry/Analysis/PolynomialZeroSetNull.lean:RenewalGeometry.mvPolynomial_nonzeroSet_open_dense_full_measure"
+    ],
+    "note": "Proved. Rendering: the family c_j(theta) in M_n(C), theta in R^p, has entries given by complex polynomials P_{jab} (MvPolynomial (Fin p) C) of total degree <= d evaluated at real points; the protected algebra M is a subspace commuting with every c_j(theta); K is a complement of M (IsCompl; the paper's K = M^perp is one such complement) with basis E_1..E_r; the stacked commutator map is the matrix D(theta) with rows (j,a,b) and entries [c_j(theta),E_k]_{ab}; G = D^H D, Delta = det G (howeDiscriminant). howe_discriminant proves: (1) Delta is a nonnegative real polynomial of degree <= 2dr (an explicit Q in MvPolynomial (Fin p) R with Delta(theta) = Q(theta), Q >= 0; built from the polynomial Gram gramPoly and its determinant); (2) eq:howe-minor-sos: Delta(theta) = sum over r-element row sets I of |det D_I(theta)|^2, for any choice of enumeration of each I (new infrastructure RectangularCauchyBinet: det(A^H A) = sum_{|I|=r} |det A_I|^2, derived from the symmetrised identity in IncidenceDeterminantCoefficients by grouping the r! injective row choices of each I; non-injective choices vanish); (3) eq:howe-enhancement-locus: {Delta = 0} = {theta : some X commuting with all c_j(theta) lies outside M}, i.e. C*(c(theta))' strictly contains M (kernel of D(theta) = additional commutant inside K, howeDiscriminant_eq_zero_iff); (4) if Delta(theta_0) != 0 at one point then the enhancement locus is Lebesgue-null with empty interior and for every open U the exact set {theta in U : Delta != 0} is open, dense in U (U subset of its closure) and of full measure in U (new infrastructure PolynomialZeroSetNull: the zero set of a nonzero real polynomial on R^p is null, by induction on p with Fubini (Measure.measure_prod_null) and finiteness of roots of one-variable polynomials; empty interior via IsOpenPosMeasure). howe_discriminant_analytic proves the real-analytic clause: for entries AnalyticOnNhd R on an open preconnected U containing an exact point, interior{Delta=0} meets U trivially and the exact set is open and dense in U (identity theorem; Delta analytic via analyticOnNhd_det). Scoping disclosed: C*(c)' strictly containing M is rendered through the algebraic complement K spanned by E (the paper's orthonormal basis of M^perp is the special case); the paper's 'analytic component' is rendered as an open preconnected region; degrees are total degrees of the complex coefficient polynomials."
   },
   "cor:howe-nullity": {
     "env": "corollary",
@@ -1179,18 +1206,48 @@
   "thm:finite-action-identities": {
     "env": "theorem",
     "title": "Finite Ward, BRST, and stress identities",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.finite_action_identities",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.finiteStandardModelAction",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.finiteStandardModelAction_gaugeInvariant",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.FiniteSpacetimeComplex",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.SMGaugeRepresentations",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.SMGaugeRepresentations.YukawaEquivariant",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.smGaugeTransform",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.smGaugeTransform_mul",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.curvatureNormSq",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.curvatureNormSq_conj",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.smFaceEnergy_gaugeLinks",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.higgsEdgeDifference",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.higgsEdgeDifference_gauge",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.smEdgeEnergy_gauge",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.finiteDiracYukawa",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.finiteDiracYukawa_gauge",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.smFermionEnergy_gauge",
+      "RenewalGeometry/StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean:RenewalGeometry.yukawaMap_equivariant",
+      "RenewalGeometry/GaugeTheory/LatticeHolonomyGaugeCovariance.lean:RenewalGeometry.LatticeWalk",
+      "RenewalGeometry/GaugeTheory/LatticeHolonomyGaugeCovariance.lean:RenewalGeometry.LatticeWalk.holonomy",
+      "RenewalGeometry/GaugeTheory/LatticeHolonomyGaugeCovariance.lean:RenewalGeometry.gaugeLinks",
+      "RenewalGeometry/GaugeTheory/LatticeHolonomyGaugeCovariance.lean:RenewalGeometry.LatticeWalk.holonomy_gaugeLinks",
+      "RenewalGeometry/GaugeTheory/LatticeHolonomyGaugeCovariance.lean:RenewalGeometry.LatticeWalk.holonomy_gaugeLinks_closed",
+      "RenewalGeometry/Algebra/SeriesLogUnitConjugation.lean:RenewalGeometry.unitConjCLE",
+      "RenewalGeometry/Algebra/SeriesLogUnitConjugation.lean:RenewalGeometry.tsum_unit_conj",
+      "RenewalGeometry/Algebra/SeriesLogUnitConjugation.lean:RenewalGeometry.ShiftedPlaquette.logOneAdd_unit_conj",
+      "RenewalGeometry/Algebra/SeriesLogUnitConjugation.lean:RenewalGeometry.ShiftedPlaquette.logOneAdd_conj_of_mul_eq_one",
+      "RenewalGeometry/Algebra/SeriesLogUnitConjugation.lean:RenewalGeometry.frobSq",
+      "RenewalGeometry/Algebra/SeriesLogUnitConjugation.lean:RenewalGeometry.frobSq_conj_of_mul",
+      "RenewalGeometry/Gravity/FiniteActionBRSTGhostExact.lean:RenewalGeometry.finite_action_brst",
+      "RenewalGeometry/Gravity/FiniteActionBRSTGhostExact.lean:RenewalGeometry.FiniteGhostBRST",
+      "RenewalGeometry/Gravity/FiniteActionBRSTGhostExact.lean:RenewalGeometry.FiniteGhostBRST.brst_nilpotent",
+      "RenewalGeometry/Gravity/FiniteActionBRSTGhostExact.lean:RenewalGeometry.FiniteGhostBRST.brst_action_closed",
+      "RenewalGeometry/Algebra/GhostSuperalgebra.lean:RenewalGeometry.SuperDerivation",
+      "RenewalGeometry/Algebra/GhostSuperalgebra.lean:RenewalGeometry.SuperDerivation.square_eq_zero_on_adjoin",
       "RenewalGeometry/StandardModel/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.explicitRegulatedStandardModelAction_gaugeInvariant",
-      "RenewalGeometry/StandardModel/ExplicitRegulatedStandardModelActionExact.lean:RenewalGeometry.explicit_regulated_standard_model_action_exact",
       "RenewalGeometry/Gravity/FiniteActionWardBRSTStressEinsteinExact.lean:RenewalGeometry.FiniteActionWardBRSTStressEinstein.gauge_ward_divergence",
-      "RenewalGeometry/Gravity/FiniteActionWardBRSTStressEinsteinExact.lean:RenewalGeometry.FiniteActionWardBRSTStressEinstein.relabeling_stress_transfer",
-      "RenewalGeometry/Gravity/FiniteActionWardBRSTStressEinsteinExact.lean:RenewalGeometry.FiniteActionWardBRSTStressEinstein.finiteBRST2_nilpotent",
-      "RenewalGeometry/Gravity/FiniteBRSTWardEinstein.lean:RenewalGeometry.finite_action_Einstein"
+      "RenewalGeometry/Gravity/FiniteActionWardBRSTStressEinsteinExact.lean:RenewalGeometry.FiniteActionWardBRSTStressEinstein.relabeling_stress_transfer"
     ],
-    "note": "Partial: the four-term face/edge/vertex action is defined with definitional one-cell locality, its exact gauge invariance is derived from covariance of the cell densities (taken as hypotheses), the Ward identity D_U^*J + R^*E = 0 and the stress transfer L_q^*T = 2L_Φ^*E are derived by the chain rule from invariance of a generic finite action along gauge/relabeling flows, and a finite (group-cochain) BRST differential is proved nilpotent through ghost degree two. Missing: gauge covariance of the concrete Yang–Mills–Higgs–Dirac–Yukawa densities is assumed, the ghost-field BRST operator s (sc=−c², sU=c_tU−Uc_s, ...) with s²=0 in all degrees and sS=0 is not the formalized object, and the cutoff-independence of the support radius is only the definitional locality.",
-    "difficulty": "hard",
-    "plan": "Ward and stress identities are derived abstractly (Gravity/FiniteActionWardBRSTStressEinsteinExact.lean:gauge_ward_divergence, relabeling_stress_transfer) and gauge invariance of the four-term action follows from covariance hypotheses (StandardModel/ExplicitRegulatedStandardModelActionExact.lean:explicitRegulatedStandardModelAction_gaugeInvariant). Missing: (1) proving covariance of the concrete Yang–Mills/Higgs/Dirac/Yukawa cell densities under U_e ↦ g_t U_e g_s⁻¹ etc. (finite, medium: trace cyclicity and unitary invariance on lattice cells); (2) the ghost BRST operator s with sc=−c², sU=c_tU−Uc_s, s²=0 in all ghost degrees and sS=0 — the library only has the group-cochain differential (finiteBRST2_nilpotent), and a faithful encoding needs a Grassmann-graded field algebra (ExteriorAlgebra-valued ghosts and a graded derivation), a new structure whose statement must be reformulated before it can be proved. Rated hard for the BRST clause; the covariance clause alone is medium."
+    "note": "Gauge covariance of the concrete cell densities of eq:finite-SM-action is now PROVED, discharging the last open clause. StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean defines the concrete action finiteStandardModelAction on a finite oriented complex X=(V,E,F,src,tgt, based closed boundary walk per plaquette) for any group G with typed unitary representations rho_i (gauge-metric factors, coefficients kappa_i = g_i^-2), rho_H (Higgs fibre), rho_Psi (matter fibre): face density star2(p) * sum_i kappa_i ||log rho_i(P_p)||_F^2 with P_p the plaquette holonomy and log the principal series logarithm ShiftedPlaquette.logOneAdd(rho_i(P)-1); edge density star1(e) ||H_t - rho_H(U_e) H_s||_F^2; vertex potential m_v lambda_H (||H_v||^2 - v_H^2)^2; Dirac/Yukawa density star0(v) Re tr(Psibar_v ((D^U_sp + Gamma (x) D_F(H)) Psi)_v) with D^U_sp = forward hops rho_Psi(U_e) Psi_s gamma+_e, backward hops rho_Psi(U_e^-1) Psi_t gamma-_e, on-site Psi_v gamma0_v, Yukawa D_F(H_v) Psi_v Gamma_Cl, and an independent dual amplitude transforming contragrediently. Proved: (a) plaquette holonomy conjugates by g_base (GaugeTheory/LatticeHolonomyGaugeCovariance.lean: LatticeWalk, holonomy_gaugeLinks: hol(g.U) = g_b hol(U) g_a^-1), the series logarithm is conjugation-equivariant for every argument (Algebra/SeriesLogUnitConjugation.lean: logOneAdd_unit_conj via ContinuousLinearEquiv.map_tsum, no convergence hypothesis) and the Frobenius norm Re tr(M^H M) is unitarily invariant, so curvatureNormSq is a class function (curvatureNormSq_conj); (b) the covariant Higgs edge difference maps to rho_H(g_t) (H_t - rho_H(U_e) H_s) (higgsEdgeDifference_gauge); (c) the finite Dirac/Yukawa operator intertwines the representations, D^{g.U}(g.Psi) + Yukawa = rho_Psi(g_v) (D^U Psi + Yukawa)_v (finiteDiracYukawa_gauge), hence the fermion density is invariant (smFermionEnergy_gauge). finiteStandardModelAction_gaugeInvariant instantiates explicitRegulatedStandardModelAction_gaugeInvariant with these four covariance lemmas: exact gauge invariance of eq:finite-SM-action for every local gauge transformation g : V -> G. finite_action_identities assembles: (i) one-cell locality (cutoff-independent support radius, definitional), (ii) exact gauge invariance, (iii) the Ward identity in differentiated form (derivative of S along every gauge flow t -> g(t) vanishes; its divergence/pairing form d_U^*E_U + R_H^*E_H + R_Psi^*E_Psi + R_Psibar^*E_Psibar = 0 is the chain-rule theorem gauge_ward_divergence), (iv) finite group-cochain BRST closure and nilpotency of the concrete action (finiteBRST0/1, via the proved group-action law smGaugeTransform_mul), (v) the ghost BRST clause eq:brst on the same lattice (s^2 = 0 on the field-ghost algebra and s S = 0 for infinitesimally gauge-invariant S; finite_action_brst, superalgebra setting of the previous pass). Scoped/disclosed: the gauge group is any group with unitary typed representations (S(U(3)xU(2)) with its three gauge-metric factors is an instance); the Yukawa map D_F is a parameter with the intertwining property D_F(rho_H(g)H) = rho_Psi(g) D_F(H) rho_Psi(g)^-1 that the paper's proof invokes (YukawaEquivariant; yukawaMap_equivariant shows linear Yukawa couplings A H B + h.c. built from intertwiners satisfy it); the stress identity eq:stress-identity is the chain-rule theorem relabeling_stress_transfer, the matter stress tensor defined by Hodge-weight variation being the cell-density covector of clause (i) (the action is linear in star0, star1, star2, m); the ghost operator s acts in an ambient superalgebra (free supercommutative extension not constructed) and s S = 0 is derived from infinitesimal gauge invariance, the differentiated form of (ii). All new declarations use only propext/Classical.choice/Quot.sound. Also (house-policy repair, no statement changed): ActiveFiniteStructuralStandardModelExact.lean hyperchargeTable proof native_decide replaced by kernel-checked decide; file and its importer FiniteStandardModelSourceNativeEmergenceExact recompile, axioms of activeFiniteStructuralStandardModel are propext/Classical.choice/Quot.sound only."
   },
   "cor:internal-vacuum": {
     "env": "corollary",

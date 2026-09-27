@@ -125,7 +125,7 @@ theorem activeFiniteStructuralStandardModel
       gaugeCoverSurjective := smGaugeHom_surjective
       anomalyClassification := by
         simpa [SMAnomalyClassification] using anomaly_forced_weights
-      hyperchargeTable := by native_decide
+      hyperchargeTable := by decide
       generationRank := SMActive.generation_rank
       weakDoubletGenerated := WeakReset.two_lines_generate t h hind hover
       diracSelfAdjoint := hself

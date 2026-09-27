@@ -56,23 +56,23 @@ variable {n : Type*} [Fintype n] [DecidableEq n]
 
 /-- The stacked commutator map of a coefficient tuple as a continuous linear map between the
 Hilbert–Schmidt spaces (finite dimension). -/
-def jointCommutatorCLM {s : ℕ} (c : Fin s → Matrix n n ℂ) :
+def exportJointCommutatorCLM {s : ℕ} (c : Fin s → Matrix n n ℂ) :
     EuclideanSpace ℂ (n × n) →L[ℂ] EuclideanSpace ℂ (Fin s × (n × n)) :=
   LinearMap.toContinuousLinearMap (jointCommutatorL2 c)
 
-@[simp] theorem jointCommutatorCLM_apply {s : ℕ} (c : Fin s → Matrix n n ℂ)
-    (x : EuclideanSpace ℂ (n × n)) : jointCommutatorCLM c x = jointCommutatorL2 c x := rfl
+@[simp] theorem exportJointCommutatorCLM_apply {s : ℕ} (c : Fin s → Matrix n n ℂ)
+    (x : EuclideanSpace ℂ (n × n)) : exportJointCommutatorCLM c x = jointCommutatorL2 c x := rfl
 
 /-- **`eq:appendix-commutator-error` in operator-norm form.**  If the Hilbert–Schmidt
 coefficient error of `K̂` relative to `K` is at most `e_K`, the star-closed stacked commutator
 maps satisfy `‖𝒟̂ − 𝒟‖_{2→2} ≤ 2√2 e_K`. -/
 theorem jointCommutatorCLM_opNorm_sub_le {s : ℕ} (K' K : Fin s → Matrix n n ℂ)
     (eK : ℝ) (he : hsCoefficientError K' K ≤ eK) :
-    ‖jointCommutatorCLM (starClosedStack K') - jointCommutatorCLM (starClosedStack K)‖
+    ‖exportJointCommutatorCLM (starClosedStack K') - exportJointCommutatorCLM (starClosedStack K)‖
       ≤ 2 * Real.sqrt 2 * eK := by
   have heK : 0 ≤ eK := (hsCoefficientError_nonneg K' K).trans he
   refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun x => ?_
-  rw [_root_.sub_apply, jointCommutatorCLM_apply, jointCommutatorCLM_apply]
+  rw [_root_.sub_apply, exportJointCommutatorCLM_apply, exportJointCommutatorCLM_apply]
   exact starClosedStack_commutator_perturbation K' K eK he x
 
 /-- **No additional commutant direction.**  Let `M` be an independently verified protected
@@ -136,8 +136,8 @@ theorem finite_system_export {ϑ : ℝ} (hϑ : 0 < ϑ) (hϑ1 : ϑ < 1)
     ∧ hsCoefficientError (reconstructedCoefficient ϑ O X' Y')
         (fun e => K e ⊗ₖ (1 : Matrix R R ℂ)) ≤ panelErrorBudget ϑ εX εY
     -- (3) operator-norm change of the star-closed stacked commutator map
-    ∧ ‖jointCommutatorCLM (starClosedStack (reconstructedCoefficient ϑ O X' Y'))
-        - jointCommutatorCLM (starClosedStack fun e => K e ⊗ₖ (1 : Matrix R R ℂ))‖
+    ∧ ‖exportJointCommutatorCLM (starClosedStack (reconstructedCoefficient ϑ O X' Y'))
+        - exportJointCommutatorCLM (starClosedStack fun e => K e ⊗ₖ (1 : Matrix R R ℂ))‖
         ≤ 2 * Real.sqrt 2 * panelErrorBudget ϑ εX εY
     -- (4) the stopping test: no additional commutant direction
     ∧ ∀ (M : Submodule ℂ (EuclideanSpace ℂ ((E × R) × (E × R)))),
