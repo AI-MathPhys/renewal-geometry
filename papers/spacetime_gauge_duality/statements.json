@@ -968,9 +968,9 @@
     "title": "Howe enhancement discriminant and generic rigidity",
     "status": "conditional_interface",
     "lean": [],
-    "note": "No Lean counterpart found; searched: discriminant, Cauchy–Binet, minors, enhancement locus, polynomial family, open dense, measure zero, generic rigidity, real-analytic.",
+    "note": "pending",
     "difficulty": "hard",
-    "plan": "Three missing infrastructure pieces: (1) Cauchy–Binet det(D*D) = Σ_{|I|=r}|det D_I|² for rectangular matrices — absent from Mathlib (only Matrix.det_mul for square), a genuinely new lemma; (2) 'a nonzero real polynomial on ℝ^p has zero set of Lebesgue measure zero and empty interior' — empty interior follows from MvPolynomial.funext-style arguments, but measure zero needs a Fubini induction not in Mathlib; (3) the real-analytic clause needs 'zero set of a non-identically-zero analytic function on a connected domain is null', also absent. The enhancement-locus identity itself is easy: det G(θ)=0 ↔ ¬PosDef (Matrix.PosSemidef + det) ↔ commutant enlargement via Commutant/FiniteCommutantPoincareGap.lean:matrix_commutant_least_eigenvalue_gap / RelativeHoweCertificate.lean:relative_howe_certificate_exact; polynomiality of entries and degree bound via RingHom.map_det over MvPolynomial ℝ. Recommend splitting: prove the polynomial/locus clauses (medium) and leave the measure-zero and analytic clauses as separate infrastructure."
+    "plan": "pending"
   },
   "cor:howe-nullity": {
     "env": "corollary",
@@ -1032,15 +1032,19 @@
   "prop:compact-mosco-resolvent": {
     "env": "proposition",
     "title": "Compact Mosco convergence implies norm-resolvent convergence",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/OperatorLimits/OperatorGraphMoscoLowSpectrumConvergence.lean:RenewalGeometry.VaryingHilbert.System.operatorGraphMosco_lowSpectrumConvergence_of_graphScreens",
+      "RenewalGeometry/OperatorLimits/LowSpectrumConvergence.lean:RenewalGeometry.LowSpectrum.orderedEigenvalues_spec_of_compact_isPositive",
+      "RenewalGeometry/OperatorLimits/LowSpectrumConvergence.lean:RenewalGeometry.LowSpectrum.orderedEigenvalue",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.courantValue",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.tendsto_courantValue",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.finrank_eigenspace_eq_ncard",
       "RenewalGeometry/OperatorLimits/OperatorGraphMoscoKernelSpectralConsequencesFromGraphScreens.lean:RenewalGeometry.VaryingHilbert.System.operatorGraphMosco_kernelSpectralConsequences_of_graphScreens",
       "RenewalGeometry/OperatorLimits/GraphScreenCompressedResolventNormConvergence.lean:RenewalGeometry.VaryingHilbert.System.compressedOperator_tendsto_operatorNorm_of_graphScreens",
       "RenewalGeometry/OperatorLimits/NearbyProjectionRankStability.lean:RenewalGeometry.ProjectionStability.eventually_finrank_range_eq_of_tendsto"
     ],
-    "note": "Partial: under cofinal Mosco convergence of operator-graph energies with weak resolvent equations and a compact graph-screen tail (the rendering of asymptotic compactness), the transported resolvents converge in operator norm, the limit resolvent is compact, the kernel-cluster Riesz projections converge in norm and their ranks are eventually equal (also for any isolated nonzero cluster via the one-shift spectral-gap file). Missing: the ordered eigenvalue convergence λ_{k,X} → λ_{k,∞} with multiplicity for every fixed index is not formalized.",
-    "difficulty": "hard",
-    "plan": "Norm-resolvent convergence, compactness of R_∞, Riesz-projection norm convergence and eventual rank equality are proved (OperatorLimits/OperatorGraphMoscoKernelSpectralConsequencesFromGraphScreens.lean, GraphScreenCompressedResolventNormConvergence.lean, NearbyProjectionRankStability.lean). Missing: ordered eigenvalue convergence λ_{k,X} → λ_{k,∞} with multiplicity for every fixed k, which needs an ordered eigenvalue enumeration (min–max / Courant–Fischer) for compact self-adjoint operators on infinite-dimensional Hilbert space and its Lipschitz dependence on the operator norm — Mathlib only has eigenvalues_antitone in finite dimension and the Rayleigh existence results. Infrastructure-level; alternatively reformulate the clause via isolated clusters (already proved) and leave the full enumeration open."
+    "note": "Proved. Under cofinal Mosco convergence of the operator-graph energies with weak resolvent equations, asymptotic density and a compact graph-screen tail (the rendering of asymptotic form compactness), operatorGraphMosco_lowSpectrumConvergence_of_graphScreens gives: operator-norm convergence of the transported resolvents J_n R_n J_n^* -> R_b (eq:norm-resolvent), compactness and positivity of the limit resolvent, norm convergence of the kernel-cluster Riesz projections with eventually equal ranks (isolated-cluster clause; any isolated nonzero cluster via the existing one-shift spectral-gap files), and the ordered eigenvalue convergence mu_{k,X} -> mu_{k,infty} for every fixed k together with lambda_{k,X} = 1/mu_{k,X} - b -> lambda_{k,infty} whenever mu_{k,infty} > 0 (eq:eigenvalue-convergence). The ordered eigenvalues are the Courant-Fischer min-max values courantValue R k = sup_{dim V = k+1} inf_{x in V, |x|=1} re<Rx,x>; orderedEigenvalues_spec_of_compact_isPositive proves that for a compact positive operator these form a nonnegative antitone sequence, that for every lam > 0 the number of k with mu_k = lam equals the dimension of the lam-eigenspace, that every positive value is an eigenvalue and every positive eigenvalue occurs, i.e. (mu_k) is exactly the enumeration of the positive eigenvalues in decreasing order repeated with multiplicity (padded by 0 beyond the rank). Scope as in the earlier partial: the resolvent is taken at a positive shift b (R_b = (L + b)^{-1}, so lambda = 1/mu - b; the paper's b = 1), the stage resolvents are transported by the varying-Hilbert system J, and the Hilbert carrier is separable."
   },
   "thm:cofinal-duality": {
     "env": "theorem",
@@ -1254,15 +1258,27 @@
   "lem:low-spectrum-convergence": {
     "env": "lemma",
     "title": "Low-spectrum convergence",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/OperatorLimits/LowSpectrumConvergence.lean:RenewalGeometry.LowSpectrum.lowSpectrumConvergence",
+      "RenewalGeometry/OperatorLimits/LowSpectrumConvergence.lean:RenewalGeometry.LowSpectrum.tendsto_orderedEigenvalue",
+      "RenewalGeometry/OperatorLimits/LowSpectrumConvergence.lean:RenewalGeometry.LowSpectrum.tendsto_shiftedInverse_orderedEigenvalue",
+      "RenewalGeometry/OperatorLimits/LowSpectrumConvergence.lean:RenewalGeometry.LowSpectrum.abs_orderedEigenvalue_sub_le",
+      "RenewalGeometry/OperatorLimits/LowSpectrumConvergence.lean:RenewalGeometry.LowSpectrum.orderedEigenvalues_spec_of_compact_isPositive",
+      "RenewalGeometry/OperatorLimits/LowSpectrumConvergence.lean:RenewalGeometry.LowSpectrum.orderedEigenvalue",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.courantValue",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.abs_courantValue_sub_le",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.finrank_eigenspace_eq_ncard",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.hasEigenvalue_of_courantValue_pos",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.exists_courantValue_eq_of_hasEigenvalue",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.courantValue_antitone_of_isPositive",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.exists_orthonormal_eigenvectors",
+      "RenewalGeometry/Analysis/CompactSelfAdjointMinMax.lean:RenewalGeometry.CourantFischer.exists_unit_eigenvector_of_sup_rayleigh",
       "RenewalGeometry/OperatorLimits/RieszProjectionStability.lean:RenewalGeometry.ResolventStability.circleRieszProjection_tendsto",
       "RenewalGeometry/OperatorLimits/RieszProjectionStability.lean:RenewalGeometry.ResolventStability.circleRieszProjection",
       "RenewalGeometry/OperatorLimits/NearbyProjectionRankStability.lean:RenewalGeometry.ProjectionStability.eventually_finrank_range_eq_of_tendsto"
     ],
-    "note": "Partial: the circle-contour Riesz projections Π_X(Γ) = (2πi)^{-1}∮_Γ (z−R_X)^{-1}dz converge in operator norm under norm convergence R_X → R_∞ with uniform resolvent bounds on Γ, and norm-convergent finite-rank idempotents have eventually equal range dimension. Missing: the ordered eigenvalue convergence μ_{k,X} → μ_{k,∞}, λ_{k,X} → λ_{k,∞} for every fixed index is not formalized.",
-    "difficulty": "hard",
-    "plan": "The Riesz-projection and rank clauses are proved (OperatorLimits/RieszProjectionStability.lean:circleRieszProjection_tendsto, NearbyProjectionRankStability.lean:eventually_finrank_range_eq_of_tendsto). Missing: ordered eigenvalue convergence μ_{k,X} → μ_{k,∞} for compact self-adjoint operators under norm convergence, which requires an ordered enumeration of eigenvalues with multiplicity and a min–max/Weyl perturbation inequality in infinite dimension — not in Mathlib (only finite-dimensional eigenvalues_antitone and Analysis/ApproximationSingularValues.lean:approximationNumber_weyl for approximation numbers). One route: prove μ_k equals the k-th approximation number for compact positive self-adjoint operators (needs the spectral theorem for compact self-adjoint operators, absent), then use approximationNumber_weyl. Infrastructure-level."
+    "note": "Proved. New infrastructure (Analysis/CompactSelfAdjointMinMax.lean): the Courant-Fischer min-max values courantValue T k = sup_{dim V = k+1} inf_{x in V, |x|=1} re<Tx,x> of a bounded operator on an inner product space over R or C; the min-max principle gives |mu_k(A) - mu_k(B)| <= |A - B| (abs_courantValue_sub_le) and hence mu_k(R_X) -> mu_k(R_infty) under norm-resolvent convergence, exactly the paper's argument. Identification with the eigenvalues, proved without any spectral theorem: for a compact symmetric operator, a generalised Cauchy-Schwarz inequality for positive operators plus compactness produce a top eigenvector (exists_unit_eigenvector_of_sup_rayleigh), a greedy orthonormal eigenvector family e_i with T e_i = mu_i e_i and the quadratic form bounded by mu_n on the complement (exists_orthonormal_eigenvectors), and finally, for every lam > 0, #{k : mu_k = lam} = dim eigenspace(lam) (finrank_eigenspace_eq_ncard), every positive mu_k is an eigenvalue and every positive eigenvalue is some mu_k; for positive T the sequence is antitone and nonnegative. Thus mu_k is the k-th positive eigenvalue repeated with multiplicity (zero-indexed, padded by 0 beyond the rank of a finite-rank operator). lowSpectrumConvergence packages, for compact symmetric R_X -> R_infty in norm: mu_{k,X} -> mu_{k,infty} for every k; lambda_{k,X} = 1/mu_{k,X} - 1 -> lambda_{k,infty} whenever mu_{k,infty} > 0 (the limiting eigenvalue is finite); for every circle contour avoiding 0, in the resolvent set of R_infty and eventually of R_X, with uniform resolvent bounds on the contour, the Riesz projections Pi_X(Gamma) -> Pi_infty(Gamma) in operator norm and their ranks are eventually equal. Scope: the contour is a circle (the isolated finite cluster is the spectrum inside it), and the uniform resolvent bound on the contour is taken as a hypothesis as in the earlier partial."
   },
   "prop:protected-kernel-locking": {
     "env": "proposition",
@@ -1374,11 +1390,16 @@
   "thm:subdirect-classification": {
     "env": "theorem",
     "title": "Finite subdirect matrix-algebra classification",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: subdirect, surjective coordinate projection, diagonal embedding up to inner automorphism, equal matrix size classes (GrandWedderburn.lean covers block commutants on a fixed decomposed carrier, not the subdirect-product classification).",
-    "difficulty": "hard",
-    "plan": "Requires the Wedderburn structure of a finite-dimensional unital *-subalgebra of ⊕ M_{n_i}(ℂ) (semisimplicity from *-closedness, then Mathlib's Wedderburn–Artin for semisimple rings together with 'finite-dimensional division algebra over ℂ is ℂ'), the fact that a surjective *-homomorphism onto a simple factor kills all but one intrinsic summand, and Skolem–Noether (NCG/Algebra/CanonicalReductions.lean:matrix_algEquiv_inner covers M_n(K) automorphisms). The library's Commutant/GrandWedderburn.lean and StarMatrixUnits.lean:star_matrix_units work on a fixed decomposed carrier, not on an abstract subalgebra; building the intrinsic decomposition of an arbitrary *-subalgebra is infrastructure-level."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Commutant/SubdirectMatrixClassification.lean:RenewalGeometry.SubdirectClassification.finite_subdirect_classification",
+      "RenewalGeometry/Commutant/SubdirectMatrixClassification.lean:RenewalGeometry.SubdirectClassification.exists_wedderburn_pi_matrix",
+      "RenewalGeometry/Commutant/SubdirectMatrixClassification.lean:RenewalGeometry.SubdirectClassification.exists_factor_algEquiv_of_surjective",
+      "RenewalGeometry/Commutant/SubdirectMatrixClassification.lean:RenewalGeometry.SubdirectClassification.algEquiv_matrix_size_eq",
+      "RenewalGeometry/Commutant/SubdirectMatrixClassification.lean:RenewalGeometry.SubdirectClassification.piMatrixBlockDiagonalAlgHom",
+      "RenewalGeometry/Commutant/SubdirectMatrixClassification.lean:RenewalGeometry.SubdirectClassification.imageStarSubalgebra"
+    ],
+    "note": "Proved (finite_subdirect_classification). Setting: B a unital star-closed subalgebra (Subalgebra + star_mem hypothesis) of the product ring Pi_{i<r} M_{n_i}(C), n_i >= 1, all coordinate projections surjective. Conclusion: there are k classes with sizes d_beta >= 1, a surjective class function cls : Fin r -> Fin k with n_i = d_{cls i} (coordinates in one class have equal matrix size; distinct sizes are never identified), and invertible V_i in M_{n_i}(C) such that x in B iff exists Y in Pi_beta M_{d_beta}(C) with x_i = V_i Y_{cls i} V_i^{-1} for all i (Y_{cls i} read in M_{n_i} through n_i = d_{cls i} via Matrix.reindex (finCongr _)); i.e. B is the diagonal embedding of one independent full matrix algebra per class, up to the inner automorphisms Ad(V_i). Infrastructure built: exists_wedderburn_pi_matrix (intrinsic Wedderburn decomposition B = Pi_beta M_{d_beta}(C) for any star-closed subalgebra of Pi_i M_{n_i}(C): transport along the block-diagonal embedding to FiniteComplexStarSubalgebraSemisimplicity.starSubalgebra_isSemisimpleRing, then Mathlib's IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed), exists_factor_algEquiv_of_surjective (a surjective unital hom Pi_beta M_{d_beta} -> M_n kills all summands but one and is an isomorphism on it: images of the central units are scalar idempotents summing to 1; RingHom.injective out of the simple ring M_d), algEquiv_matrix_size_eq (isomorphic full matrix algebras have equal size), and NCG.matrix_algEquiv_inner (Skolem-Noether) for the inner form. Scoping: n_i >= 1 (paper's implicit nondegeneracy of the displayed factors); C*(B) is rendered as the unital *-closed subalgebra; 'up to inner automorphisms' is rendered with invertible (not necessarily unitary) conjugators V_i, which is what the paper's proof (Skolem-Noether) supplies."
   },
   "prop:all-excursion-return": {
     "env": "proposition",
@@ -1442,34 +1463,30 @@
   "prop:record-witness": {
     "env": "proposition",
     "title": "Record-complete nonidentifiability witness",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.clifford_record_data",
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.CliffordFamily",
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.cliffordH",
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.cliffordHq",
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.cliffordH_mul_self",
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.cliffordH_sum",
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.cliffordH_gram",
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.cliffordHq_gram_four",
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.CliffordFamily.sum_smul_mul_self",
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.CliffordFamily.trace_eq_zero",
-      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.CliffordFamily.trace_mul",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.record_witness",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.Kc",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.Kq",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.kronOneAlgHom",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.mem_kronOne_range",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.adjoin_cliffordHq_eq_kronOne",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.adjoin_completion_cliffordHq",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.choiVec_kraus",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.coeffMat_mul_conjTranspose",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.hsGram_accepted",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.coeffGram_mul_gram24",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.charpoly_choiCore",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.choi_charpoly_kraus",
+      "RenewalGeometry/StandardModel/RecordWitnessProposition.lean:RenewalGeometry.RecordWitness.choiSpectrumPoly",
+      "RenewalGeometry/StandardModel/RecordWitnessInstrument.lean:RenewalGeometry.RecordWitness.record_word_effect",
       "RenewalGeometry/StandardModel/RecordWitnessCommutingFamily.lean:RenewalGeometry.RecordWitness.commuting_record_data",
-      "RenewalGeometry/StandardModel/RecordWitnessCommutingFamily.lean:RenewalGeometry.RecordWitness.Hc",
       "RenewalGeometry/StandardModel/RecordWitnessCommutingFamily.lean:RenewalGeometry.RecordWitness.adjoin_Hc_eq_diagonal",
-      "RenewalGeometry/StandardModel/RecordWitnessCommutingFamily.lean:RenewalGeometry.RecordWitness.adjoin_Hc_commutative",
-      "RenewalGeometry/StandardModel/RecordWitnessCommutingFamily.lean:RenewalGeometry.RecordWitness.finrank_adjoin_Hc",
-      "RenewalGeometry/StandardModel/RecordWitnessNormalization.lean:RenewalGeometry.RecordWitness.completion",
-      "RenewalGeometry/StandardModel/RecordWitnessNormalization.lean:RenewalGeometry.RecordWitness.completion_conjTranspose_mul_self",
-      "RenewalGeometry/StandardModel/RecordWitnessNormalization.lean:RenewalGeometry.RecordWitness.sqrt_six_completion_unitary",
-      "RenewalGeometry/StandardModel/RecordWitnessNormalization.lean:RenewalGeometry.RecordWitness.sum_completion",
-      "RenewalGeometry/StandardModel/RecordWitnessNormalization.lean:RenewalGeometry.RecordWitness.sum_conjTranspose_mul_completion",
-      "RenewalGeometry/StandardModel/RecordWitnessNormalization.lean:RenewalGeometry.RecordWitness.trace_conjTranspose_mul_completion_gram"
+      "RenewalGeometry/StandardModel/RecordWitnessCliffordFamily.lean:RenewalGeometry.RecordWitness.clifford_record_data",
+      "RenewalGeometry/StandardModel/RecordWitnessConcrete.lean:RenewalGeometry.RecordWitness.helmert",
+      "RenewalGeometry/StandardModel/RecordWitnessConcrete.lean:RenewalGeometry.RecordWitness.cliffordSMST4"
     ],
-    "note": "Partial (first two claims of the proposition now proved for BOTH families; the rest open). Commuting family (RecordWitnessCommutingFamily, previous batch): H^c_e = diagonal sign involutions on the 20 three-subsets; K^c_e = I/sqrt18 + (i/3)H^c_e satisfy eq:six-edge-normalization and eq:matching-record-data (commuting_record_data), and the unital algebra generated by the H^c_e is the diagonal algebra C^20 (adjoin_Hc_eq_diagonal), i.e. C*(K^c) = C^20 (the K's and the H's generate the same unital algebra; this last trivial step is not written out). Clifford family (new, RecordWitnessCliffordFamily): for ANY five pairwise anticommuting Hermitian involutions Gamma_mu on a d-dimensional space (structure CliffordFamily) and ANY Helmert frame O (FiveKraus.HelmertFrame, eq:helmert-frame), H_e = sqrt(6/5) sum_mu O_{e mu} Gamma_mu is a Hermitian involution (rows of sqrt(6/5)O are unit vectors; (sum a_mu Gamma_mu)^2 = (sum a_mu^2) I by anticommutation), traceless, with zero sum and Gram Tr(H_e H_f) = d / -d/5; tensoring with I_5 gives H^q_e with Gram 5d / -d, i.e. 20 / -4 for d = 4 (the same Gram as the commuting family), and clifford_record_data proves that the completions K^q_e satisfy eq:six-edge-normalization and eq:matching-record-data on the 20-dimensional carrier. Missing: (a) instantiation of CliffordFamily (Fin 4) and of a concrete HelmertFrame (the library has the gamma matrices in CliffordTwirlMatterAudit but no pairwise-anticommuting Fin 5 family packaged, and no concrete Helmert frame); (b) C*(K^q) = M_4(C) tensor I_5 (eq:inequivalent-system-algebras, Clifford half); (c) the word effects eq:record-word-effect; (d) the Choi spectrum eq:matching-Choi-spectrum.",
-    "difficulty": "hard",
-    "plan": "(a) Build a CliffordFamily (Fin 4) from explicit 4x4 gamma matrices (entries in {0, +-1, +-i}; anticommutation and involution by decide over Z[i]-like integer matrices or by norm_num on entries) and a concrete HelmertFrame (e.g. the standard Helmert rows with entries 1/sqrt(k(k+1)); orthogonality by norm_num/field_simp). (b) C*(K^q) = M_4 tensor I_5: the 16 products Gamma_S (S subset of Fin 4, using Gamma_5 = product of the first four up to a phase) span M_4(C) - show the 16 products are linearly independent via the trace form Tr(Gamma_S Gamma_T) = 4 delta_{ST} (from CliffordFamily.trace_mul-type lemmas generalised to products), so the generated algebra has dimension 16 = dim M_4, and tensor with I_5 via Algebra.adjoin of Kronecker products. (c) Word effects: define letters L_0 = sqrt(1-theta) I, L_{e,a} = sqrt(theta) K_e tensor Q_a with orthogonal projections Q_a summing to I; prove by induction on the word that L_w^* L_w = (1-theta)^{n_0} (theta/6)^m I tensor Q_a for a common accepted record a and 0 otherwise, using sqrt_six_completion_unitary ((sqrt6 K_e)^* (sqrt6 K_e) = I) and Q_a Q_b = delta_{ab} Q_a. (d) Choi spectrum: assemble the 24 accepted Choi vectors, Gram G_24 = G_6 tensor I_4 with G_6 = (8/3) I + (2/3) 11^T from trace_conjTranspose_mul_completion_gram, and the coefficient matrix M_theta = theta I + (1-theta) c c^*; eigenvalues by explicit eigenvectors (uniform edge direction, edge contrasts). Each of (b)-(d) is a separate afternoon; (d) needs a Choi-matrix formalisation not yet in the library."
+    "note": "Proved (record_witness), for the two concrete lists K^c (on C^S, |S| = 20 three-subsets) and K^q (on C^4 x C^5, concrete Helmert frame `helmert`, concrete Clifford family `cliffordSMST4`) of eq:two-system-completions, any record projectors Q_a (a in a 4-element type) that are Hermitian, mutually orthogonal, sum to I and have trace 1 (the paper's nonzero orthogonal projections on H_R = C^4 summing to I), and any 0 <= theta <= 1: (i) eq:six-edge-normalization for both lists (completeness, coherent sum sqrt2 I, linear independence); (ii) eq:matching-record-data for both (K^*K = I/6, Tr K_e^* K_f = 10/3 / 2/3); (iii) eq:inequivalent-system-algebras: C*(K^c) = the diagonal subalgebra C^20 and C*(K^q) = M_4(C) tensor I_5 (adjoin_cliffordHq_eq_kronOne, via NCG.CommonOrigin.gamma_generates; C*(K) is rendered as the unital algebra generated by the K_e, which equals the *-algebra since K_e = I/sqrt18 + (i/3)H_e with H_e Hermitian); (iv) eq:record-word-effect in both realizations: a word with n_0 no-response and m accepted letters and one common accepted record type a has effect (1-theta)^{n_0}(theta/6)^m I_20 tensor Q_a, zero if the record types disagree (record_word_effect); (v) eq:matching-Choi-spectrum: both Choi matrices of the resolved instrument (25 Kraus operators L_0, L_{e,a} on H_E tensor H_R) have characteristic polynomial X^{(20 dim H_R)^2 - 24} (X - (20/3)(12-11 theta)) (X - 20 theta/3)^3 (X - 8 theta/3)^20, i.e. the same nonzero Choi spectrum {(20/3)(12-11theta)^(1), (20theta/3)^(3), (8theta/3)^(20)} (choi_charpoly_kraus, proved for any family with the shared record data via the factorization J = B M_theta B^* and Matrix.charpoly_mul_comm'). Scoping: theta in [0,1] instead of (0,1); the trace-one hypothesis on Q_a is what the paper's H_R = C^4 forces; the two realizations live on their own 20-dimensional carriers (the transported common-carrier version of the nonidentifiability statement is thm:record-nonidentifiability, RecordWitnessInstrument.lean:record_nonidentifiability)."
   },
   "prop:ten-panel-reconstruction": {
     "env": "proposition",
