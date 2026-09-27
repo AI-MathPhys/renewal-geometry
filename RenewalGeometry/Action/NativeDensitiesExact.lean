@@ -107,6 +107,7 @@ theorem det_metric_ne_zero {e : Mat} (he : e.det ≠ 0) : (metric e).det ≠ 0 :
   rw [det_metric]
   simpa using he
 
+@[fun_prop]
 theorem contDiff_metric {k : WithTop ℕ∞} : ContDiff ℝ k (fun e : Mat => metric e) := by
   refine contDiff_pi.mpr fun i => contDiff_pi.mpr fun j => ?_
   simp only [metric, Matrix.mul_apply, Matrix.transpose_apply]
@@ -394,7 +395,7 @@ theorem Data.ρSL_apply (A : 𝔄) : D.ρSL A = D.ρS A := rfl
 noncomputable def potential (H : 𝓗) : ℝ := D.lamH * (D.hermH H H - D.vH ^ 2) ^ 2
 
 /-- `γ^μ(e) = (e⁻¹)^μ_a γ^a`. -/
-noncomputable def gammaMu (e : Mat) (μ : Fin 4) : Spin 𝓢 := ∑ a, invEntry μ a e • D.γ a
+noncomputable def gammaMu (μ : Fin 4) (e : Mat) : Spin 𝓢 := ∑ a, invEntry μ a e • D.γ a
 
 variable {n : ℕ} [NeZero n]
 
@@ -493,8 +494,8 @@ noncomputable def diracDiffBar (h : ℝ) (y : Grid n → Field 𝔄 𝓗 𝓢) (
 `𝓛_{D,h} = v(e) Re{ (i/2)[Ψ̄ γ^μ(e) ∇^h_μ Ψ - (∇^{h,∨}_μ Ψ̄) γ^μ(e) Ψ] - Ψ̄ 𝓜_𝐘(H) Ψ }`. -/
 noncomputable def diracDensity (h : ℝ) (y : Grid n → Field 𝔄 𝓗 𝓢) (x : Grid n) : ℝ :=
   volume (coframe y x) *
-    (Complex.I / 2 * ∑ μ, (psiBar y x (gammaMu D (coframe y x) μ (diracDiff D h y x μ)) -
-        diracDiffBar D h y x μ (gammaMu D (coframe y x) μ (psi y x))) -
+    (Complex.I / 2 * ∑ μ, (psiBar y x (gammaMu D μ (coframe y x) (diracDiff D h y x μ)) -
+        diracDiffBar D h y x μ (gammaMu D μ (coframe y x) (psi y x))) -
       psiBar y x (D.yukawa (higgs y x) (psi y x))).re
 
 /-- The full local density `𝓛_h = 𝓛_{g,h} + 𝓛_{YM,h} + 𝓛_{H,h} + 𝓛_{D,h}` of
@@ -545,7 +546,7 @@ noncomputable def nuDiracDiffBar (ρ ν : ℝ) (om : Mat) (A : 𝔄) (Ψbp dΨb 
 
 /-- The normalised coframe connection at the base node, `ω̃_μ = Ω_μ(e, δ⁺_ρ e)`, as a function of
 the shifted first jet of the record. -/
-noncomputable def jetOmega (ξ : Jet (Field 𝔄 𝓗 𝓢)) (μ : Fin 4) : Mat :=
+noncomputable def jetOmega (μ : Fin 4) (ξ : Jet (Field 𝔄 𝓗 𝓢)) : Mat :=
   readerOmega (ξ.1 none).1 (fun lam => (ξ.2 (none, lam)).1) μ
 
 /-- The normalised Cartan curvature `Φ(ρ; ω̃_μ, ω̃_ν, δ⁺_μ ω̃_ν, δ⁺_ν ω̃_μ)` as a function of
@@ -567,12 +568,12 @@ noncomputable def nuHiggsLinkJet (μ : Fin 4) (p : ℝ × ℝ × Jet (Field 𝔄
 
 /-- The normalised Dirac difference as a function of `(ρ, ν, jet of the record)`. -/
 noncomputable def nuDiracDiffJet (μ : Fin 4) (p : ℝ × ℝ × Jet (Field 𝔄 𝓗 𝓢)) : 𝓢 :=
-  nuDiracDiff D p.1 p.2.1 (jetOmega p.2.2 μ) ((p.2.2.1 none).2.1 μ)
+  nuDiracDiff D p.1 p.2.1 (jetOmega μ p.2.2) ((p.2.2.1 none).2.1 μ)
     (p.2.2.1 (some (true, μ))).2.2.2.1 (p.2.2.2 (none, μ)).2.2.2.1
 
 /-- The normalised transported co-spinor difference as a function of `(ρ, ν, jet of the record)`. -/
 noncomputable def nuDiracDiffBarJet (μ : Fin 4) (p : ℝ × ℝ × Jet (Field 𝔄 𝓗 𝓢)) : CoSpinor 𝓢 :=
-  nuDiracDiffBar D p.1 p.2.1 (jetOmega p.2.2 μ) ((p.2.2.1 none).2.1 μ)
+  nuDiracDiffBar D p.1 p.2.1 (jetOmega μ p.2.2) ((p.2.2.1 none).2.1 μ)
     (p.2.2.1 (some (true, μ))).2.2.2.2 (p.2.2.2 (none, μ)).2.2.2.2
 
 /-- The normalised Cartan sector: `v(e)/(2κ) e_a^μ e^{bν} Φ(ρ; ω̃_μ, ω̃_ν, δ⁺_μ ω̃_ν, δ⁺_ν ω̃_μ)^a_b
@@ -604,9 +605,9 @@ noncomputable def normB (p : ℝ × ℝ × (Jet (Field 𝔄 𝓗 𝓢) × Jet Co
 `v(e) Re{(i/2)[Ψ̄ γ^μ(e) ∇̃_μ Ψ - (∇̃^∨_μ Ψ̄) γ^μ(e) Ψ] - ν Ψ̄ 𝓜_𝐘(H) Ψ}`. -/
 noncomputable def normD (p : ℝ × ℝ × Jet (Field 𝔄 𝓗 𝓢)) : ℝ :=
   volume (p.2.2.1 none).1 *
-    (Complex.I / 2 * ∑ μ, ((p.2.2.1 none).2.2.2.2 (gammaMu D (p.2.2.1 none).1 μ
+    (Complex.I / 2 * ∑ μ, ((p.2.2.1 none).2.2.2.2 (gammaMu D μ (p.2.2.1 none).1
           (nuDiracDiffJet D μ p)) -
-        nuDiracDiffBarJet D μ p (gammaMu D (p.2.2.1 none).1 μ (p.2.2.1 none).2.2.2.1)) -
+        nuDiracDiffBarJet D μ p (gammaMu D μ (p.2.2.1 none).1 (p.2.2.1 none).2.2.2.1)) -
       (p.2.1 : ℂ) * (p.2.2.1 none).2.2.2.2 (D.yukawa (p.2.2.1 none).2.2.1 (p.2.2.1 none).2.2.2.1)).re
 
 /-- The normalised coframe connection field `x ↦ (μ ↦ ω̃_{μ,ρ}(x))`. -/
@@ -660,7 +661,7 @@ theorem fwdDiff_matToOp (h : ℝ) (μ : Fin 4) (f : Grid n → Mat) (x : Grid n)
 
 /-- The normalised connection at the base node is the reader of the jet of the record. -/
 theorem jetOmega_stencil (ρ : ℝ) (y : Grid n → Field 𝔄 𝓗 𝓢) (x : Grid n) (μ : Fin 4) :
-    jetOmega (stencil ρ (shiftVec n) x y) μ = omegaLink ρ (coframe y) x μ := by
+    jetOmega μ (stencil ρ (shiftVec n) x y) = omegaLink ρ (coframe y) x μ := by
   simp only [jetOmega, stencil_fst, stencil_snd, shiftVec_none, add_zero, fwdDiff_coframe,
     omegaLink, coframe]
 
@@ -912,6 +913,205 @@ theorem fderiv_localAction_eq_scaled {h K : ℝ} (hh : h ≠ 0) (hK : K ≠ 0)
       K ^ 2 • fderiv ℝ (normActionB D h K) y + K • fderiv ℝ (normActionD D h K) y := by
   rw [localAction_eq_scaled_fun D hh hK]
   exact ((hB.hasFDerivAt.const_mul (K ^ 2)).add (hD.hasFDerivAt.const_mul K)).fderiv
+
+/-! ### Regularity of the normalised densities (`lem:native-scaling`, regularity clause) -/
+
+@[fun_prop]
+theorem ContDiff.complex_ofReal {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    {k : WithTop ℕ∞} {f : E → ℝ} (hf : ContDiff ℝ k f) : ContDiff ℝ k (fun x => ((f x : ℝ) : ℂ)) :=
+  Complex.ofRealCLM.contDiff.comp hf
+
+@[fun_prop]
+theorem ContDiffAt.complex_ofReal {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    {k : WithTop ℕ∞} {f : E → ℝ} {x : E} (hf : ContDiffAt ℝ k f x) :
+    ContDiffAt ℝ k (fun x => ((f x : ℝ) : ℂ)) x :=
+  Complex.ofRealCLM.contDiff.contDiffAt.comp x hf
+
+@[fun_prop]
+theorem contDiff_potential {k : WithTop ℕ∞} : ContDiff ℝ k (potential D) := by
+  unfold potential
+  fun_prop
+
+@[fun_prop]
+theorem contDiffAt_gammaMu (μ : Fin 4) {k : WithTop ℕ∞} {e : Mat} (he : e.det ≠ 0) :
+    ContDiffAt ℝ k (gammaMu D μ) e := by
+  unfold gammaMu
+  fun_prop (disch := assumption)
+
+/-- `Φ ∘ g` is smooth wherever `g` is smooth and its mesh coordinate vanishes. -/
+theorem contDiffAt_jointLogPlaquette_comp {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    {𝔅 : Type*} [NormedRing 𝔅] [NormedAlgebra ℝ 𝔅] [CompleteSpace 𝔅] [NormOneClass 𝔅]
+    {g : E → ℝ × 𝔅 × 𝔅 × 𝔅 × 𝔅} {z : E} (hg : ContDiffAt ℝ ∞ g z) (h0 : (g z).1 = 0) :
+    ContDiffAt ℝ ∞ (fun z => jointLogPlaquette (g z)) z := by
+  refine ContDiffAt.comp z (analyticAt_jointLogPlaquette ?_).contDiffAt hg
+  simp [h0]
+
+/-- `F̃ ∘ g` is smooth wherever `g` is smooth and its mesh coordinate vanishes. -/
+theorem contDiffAt_jointNuLogPlaquette_comp {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    {𝔅 : Type*} [NormedRing 𝔅] [NormedAlgebra ℝ 𝔅] [CompleteSpace 𝔅] [NormOneClass 𝔅]
+    {g : E → ℝ × ℝ × 𝔅 × 𝔅 × 𝔅 × 𝔅} {z : E} (hg : ContDiffAt ℝ ∞ g z) (h0 : (g z).1 = 0) :
+    ContDiffAt ℝ ∞ (fun z => jointNuLogPlaquette (g z)) z := by
+  refine ContDiffAt.comp z (analyticAt_jointNuLogPlaquette ?_).contDiffAt hg
+  simp [h0]
+
+theorem contDiffAt_nuCartanCurv (μ ν : Fin 4) {p : ℝ × ℝ × (Jet (Field 𝔄 𝓗 𝓢) × Jet Conn)}
+    (hp : p.1 = 0) : ContDiffAt ℝ ∞ (nuCartanCurv μ ν) p := by
+  unfold nuCartanCurv
+  refine contDiffAt_jointLogPlaquette_comp ?_ hp
+  simp only [← matToOpL_apply]
+  fun_prop
+
+theorem contDiffAt_nuFieldStrength (μ ν : Fin 4) {p : ℝ × ℝ × Jet (Field 𝔄 𝓗 𝓢)} (hp : p.1 = 0) :
+    ContDiffAt ℝ ∞ (nuFieldStrength μ ν) p := by
+  unfold nuFieldStrength
+  refine contDiffAt_jointNuLogPlaquette_comp ?_ hp
+  fun_prop
+
+@[fun_prop]
+theorem contDiff_nuHiggsLinkJet (μ : Fin 4) {k : WithTop ℕ∞} : ContDiff ℝ k (nuHiggsLinkJet D μ) := by
+  unfold nuHiggsLinkJet nuHiggsLink
+  fun_prop
+
+theorem contDiffAt_readerOmega_entry (μ a b : Fin 4) {q : Mat × (Fin 4 → Mat)} (hq : q.1.det ≠ 0) :
+    ContDiffAt ℝ ∞ (fun q : Mat × (Fin 4 → Mat) => readerOmega q.1 q.2 μ a b) q := by
+  have hm : (metric q.1).det ≠ 0 := det_metric_ne_zero hq
+  simp only [readerOmega, NativeScaling.readerGamma, NativeScaling.readerG, Matrix.add_apply,
+    Matrix.mul_apply, Matrix.transpose_apply, ← invEntry_apply]
+  fun_prop (disch := assumption)
+
+theorem contDiffAt_jetOmega (μ : Fin 4) {ξ : Jet (Field 𝔄 𝓗 𝓢)} (he : (ξ.1 none).1.det ≠ 0) :
+    ContDiffAt ℝ ∞ (jetOmega μ) ξ := by
+  unfold jetOmega
+  have h1 : ContDiffAt ℝ ∞ (fun ξ : Jet (Field 𝔄 𝓗 𝓢) =>
+      ((ξ.1 none).1, fun lam => (ξ.2 (none, lam)).1)) ξ := by fun_prop
+  refine contDiffAt_pi.mpr fun a => contDiffAt_pi.mpr fun b => ?_
+  exact (contDiffAt_readerOmega_entry μ a b (q := ((ξ.1 none).1, fun lam => (ξ.2 (none, lam)).1))
+    he).comp ξ h1
+
+theorem contDiffAt_nuDiracDiffJet (μ : Fin 4) {p : ℝ × ℝ × Jet (Field 𝔄 𝓗 𝓢)}
+    (he : (p.2.2.1 none).1.det ≠ 0) : ContDiffAt ℝ ∞ (nuDiracDiffJet D μ) p := by
+  have hΩ : ContDiffAt ℝ ∞ (jetOmega μ) p.2.2 := contDiffAt_jetOmega μ he
+  unfold nuDiracDiffJet nuDiracDiff nuSpinQuot
+  fun_prop
+
+theorem contDiffAt_nuDiracDiffBarJet (μ : Fin 4) {p : ℝ × ℝ × Jet (Field 𝔄 𝓗 𝓢)}
+    (he : (p.2.2.1 none).1.det ≠ 0) : ContDiffAt ℝ ∞ (nuDiracDiffBarJet D μ) p := by
+  have hΩ : ContDiffAt ℝ ∞ (jetOmega μ) p.2.2 := contDiffAt_jetOmega μ he
+  unfold nuDiracDiffBarJet nuDiracDiffBar nuSpinQuotInv
+  fun_prop
+
+/-- The normalised Cartan sector is smooth at `ρ = 0` on the nondegenerate chart. -/
+theorem contDiffAt_normCartan {p : ℝ × ℝ × (Jet (Field 𝔄 𝓗 𝓢) × Jet Conn)} (hp : p.1 = 0)
+    (he : (p.2.2.1.1 none).1.det ≠ 0) : ContDiffAt ℝ ∞ (normCartan D) p := by
+  have hR : ∀ μ ν, ContDiffAt ℝ ∞ (nuCartanCurv μ ν) p := fun μ ν => contDiffAt_nuCartanCurv μ ν hp
+  unfold normCartan
+  fun_prop (disch := assumption)
+
+/-- The normalised Yang–Mills density is smooth at `ρ = 0` on the nondegenerate chart. -/
+theorem contDiffAt_normYM {p : ℝ × ℝ × Jet (Field 𝔄 𝓗 𝓢)} (hp : p.1 = 0)
+    (he : (p.2.2.1 none).1.det ≠ 0) : ContDiffAt ℝ ∞ (normYM D) p := by
+  have hF : ∀ μ ν, ContDiffAt ℝ ∞ (nuFieldStrength μ ν) p := fun μ ν =>
+    contDiffAt_nuFieldStrength μ ν hp
+  unfold normYM
+  fun_prop (disch := assumption)
+
+/-- The normalised Higgs density is smooth on the nondegenerate chart. -/
+theorem contDiffAt_normHiggs {p : ℝ × ℝ × Jet (Field 𝔄 𝓗 𝓢)}
+    (he : (p.2.2.1 none).1.det ≠ 0) : ContDiffAt ℝ ∞ (normHiggs D) p := by
+  unfold normHiggs
+  fun_prop (disch := assumption)
+
+/-- **`lem:native-scaling`, regularity clause (bosonic sector):** the normalised bosonic density
+`𝓛̃^B` is smooth in `(ρ, ν, jet)` at every point with `ρ = 0`, every `ν`, and nondegenerate
+coframe. -/
+theorem contDiffAt_normB {p : ℝ × ℝ × (Jet (Field 𝔄 𝓗 𝓢) × Jet Conn)} (hp : p.1 = 0)
+    (he : (p.2.2.1.1 none).1.det ≠ 0) : ContDiffAt ℝ ∞ (normB D) p := by
+  have h1 := contDiffAt_normCartan D hp he
+  have hproj : ContDiffAt ℝ ∞ (fun p : ℝ × ℝ × (Jet (Field 𝔄 𝓗 𝓢) × Jet Conn) =>
+      (p.1, p.2.1, p.2.2.1)) p := by fun_prop
+  have h2 := ContDiffAt.comp (g := normYM D)
+    (f := fun p : ℝ × ℝ × (Jet (Field 𝔄 𝓗 𝓢) × Jet Conn) => (p.1, p.2.1, p.2.2.1)) p
+    (contDiffAt_normYM D (p := (p.1, p.2.1, p.2.2.1)) hp he) hproj
+  have h3 := ContDiffAt.comp (g := normHiggs D)
+    (f := fun p : ℝ × ℝ × (Jet (Field 𝔄 𝓗 𝓢) × Jet Conn) => (p.1, p.2.1, p.2.2.1)) p
+    (contDiffAt_normHiggs D (p := (p.1, p.2.1, p.2.2.1)) he) hproj
+  simp only [Function.comp_def] at h2 h3
+  show ContDiffAt ℝ ∞ (fun p : ℝ × ℝ × (Jet (Field 𝔄 𝓗 𝓢) × Jet Conn) =>
+    normCartan D p + normYM D (p.1, p.2.1, p.2.2.1) + normHiggs D (p.1, p.2.1, p.2.2.1)) p
+  refine ContDiffAt.add (ContDiffAt.add ?_ h2) h3
+  exact h1
+
+/-- **`lem:native-scaling`, regularity clause (Dirac sector):** the normalised Dirac density
+`𝓛̃^D` is smooth in `(ρ, ν, jet)` on the nondegenerate chart (for every `ρ`). -/
+theorem contDiffAt_normD {p : ℝ × ℝ × Jet (Field 𝔄 𝓗 𝓢)} (he : (p.2.2.1 none).1.det ≠ 0) :
+    ContDiffAt ℝ ∞ (normD D) p := by
+  have h1 : ∀ μ, ContDiffAt ℝ ∞ (nuDiracDiffJet D μ) p := fun μ => contDiffAt_nuDiracDiffJet D μ he
+  have h2 : ∀ μ, ContDiffAt ℝ ∞ (nuDiracDiffBarJet D μ) p := fun μ =>
+    contDiffAt_nuDiracDiffBarJet D μ he
+  have hγ : ∀ μ, ContDiffAt ℝ ∞ (gammaMu D μ) (p.2.2.1 none).1 := fun μ => contDiffAt_gammaMu D μ he
+  unfold normD
+  fun_prop (disch := assumption)
+
+/-- Uniform bounds on a compact set from pointwise smoothness at `ρ = 0` (tube-lemma argument). -/
+theorem exists_uniform_bound_of_contDiffAt {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [NormedAddCommGroup F] [NormedSpace ℝ F] {f : ℝ × E → F} (k : ℕ) {K : Set E}
+    (hK : IsCompact K) (hf : ∀ ξ ∈ K, ContDiffAt ℝ k f (0, ξ)) :
+    ∃ ρ₀ > 0, ∃ C : ℝ, ∀ ρ : ℝ, |ρ| ≤ ρ₀ → ∀ ξ ∈ K,
+      ContDiffAt ℝ k f (ρ, ξ) ∧ ‖iteratedFDeriv ℝ k f (ρ, ξ)‖ ≤ C := by
+  set U := {p : ℝ × E | ContDiffAt ℝ k f p} with hU
+  have hUo : IsOpen U := by
+    rw [isOpen_iff_mem_nhds]
+    intro p hp
+    exact (show ContDiffAt ℝ k f p from hp).eventually (by exact_mod_cast ENat.coe_ne_top k)
+  have hsub : ({(0 : ℝ)} : Set ℝ) ×ˢ K ⊆ U := by
+    rintro ⟨ρ, ξ⟩ ⟨hρ, hξ⟩
+    rw [Set.mem_singleton_iff] at hρ
+    subst hρ
+    exact hf ξ hξ
+  obtain ⟨u, v, huo, -, hu0, hKv, huv⟩ := generalized_tube_lemma isCompact_singleton hK hUo hsub
+  obtain ⟨ρ₀, hρ₀, hball⟩ := Metric.isOpen_iff.mp huo 0 (hu0 rfl)
+  refine ⟨ρ₀ / 2, by positivity, ?_⟩
+  have hSc : IsCompact (Metric.closedBall (0 : ℝ) (ρ₀ / 2) ×ˢ K) :=
+    (isCompact_closedBall _ _).prod hK
+  have hSU : Metric.closedBall (0 : ℝ) (ρ₀ / 2) ×ˢ K ⊆ U := fun p hp =>
+    huv ⟨hball (Metric.closedBall_subset_ball (half_lt_self hρ₀) hp.1), hKv hp.2⟩
+  have hcont : ContinuousOn (iteratedFDeriv ℝ k f) U := fun p hp =>
+    ((show ContDiffAt ℝ k f p from hp).continuousAt_iteratedFDeriv le_rfl).continuousWithinAt
+  obtain ⟨C, hC⟩ := hSc.exists_bound_of_continuousOn (hcont.mono hSU)
+  refine ⟨C, fun ρ hρ ξ hξ => ?_⟩
+  have hmem : (ρ, ξ) ∈ Metric.closedBall (0 : ℝ) (ρ₀ / 2) ×ˢ K := by
+    refine ⟨?_, hξ⟩
+    rw [Metric.mem_closedBall, dist_zero_right, Real.norm_eq_abs]
+    exact hρ
+  exact ⟨hSU hmem, hC (ρ, ξ) hmem⟩
+
+/-- The `(ρ, ν)`-version: bounds uniform for `|ρ| ≤ ρ₀`, `0 ≤ ν ≤ 1` and jets in a compact set. -/
+theorem exists_uniform_bound_nu {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [NormedAddCommGroup F] [NormedSpace ℝ F] {f : ℝ × ℝ × E → F} (k : ℕ) {K : Set E}
+    (hK : IsCompact K) (hf : ∀ ν ∈ Set.Icc (0 : ℝ) 1, ∀ ξ ∈ K, ContDiffAt ℝ k f (0, ν, ξ)) :
+    ∃ ρ₀ > 0, ∃ C : ℝ, ∀ ρ : ℝ, |ρ| ≤ ρ₀ → ∀ ν ∈ Set.Icc (0 : ℝ) 1, ∀ ξ ∈ K,
+      ‖iteratedFDeriv ℝ k f (ρ, ν, ξ)‖ ≤ C := by
+  obtain ⟨ρ₀, hρ₀, C, hC⟩ := exists_uniform_bound_of_contDiffAt (f := f) k (isCompact_Icc.prod hK)
+    (fun q hq => hf q.1 hq.1 q.2 hq.2)
+  exact ⟨ρ₀, hρ₀, C, fun ρ hρ ν hν ξ hξ => (hC ρ hρ (ν, ξ) ⟨hν, hξ⟩).2⟩
+
+/-- **`lem:native-scaling`, uniform regularity of `𝓛̃^B`:** all fixed-order derivatives of the
+normalised bosonic density are bounded uniformly for `|ρ| ≤ ρ₀`, `0 ≤ ν ≤ 1` and jets in any
+compact subset of the nondegenerate chart. -/
+theorem exists_uniform_bound_normB (k : ℕ) {K : Set (Jet (Field 𝔄 𝓗 𝓢) × Jet Conn)}
+    (hK : IsCompact K) (hKe : ∀ q ∈ K, (q.1.1 none).1.det ≠ 0) :
+    ∃ ρ₀ > 0, ∃ C : ℝ, ∀ ρ : ℝ, |ρ| ≤ ρ₀ → ∀ ν ∈ Set.Icc (0 : ℝ) 1, ∀ q ∈ K,
+      ‖iteratedFDeriv ℝ k (normB D) (ρ, ν, q)‖ ≤ C :=
+  exists_uniform_bound_nu k hK fun ν _ q hq =>
+    (contDiffAt_normB D (p := (0, ν, q)) rfl (hKe q hq)).of_le (by exact_mod_cast le_top)
+
+/-- **`lem:native-scaling`, uniform regularity of `𝓛̃^D`.** -/
+theorem exists_uniform_bound_normD (k : ℕ) {K : Set (Jet (Field 𝔄 𝓗 𝓢))}
+    (hK : IsCompact K) (hKe : ∀ ξ ∈ K, (ξ.1 none).1.det ≠ 0) :
+    ∃ ρ₀ > 0, ∃ C : ℝ, ∀ ρ : ℝ, |ρ| ≤ ρ₀ → ∀ ν ∈ Set.Icc (0 : ℝ) 1, ∀ ξ ∈ K,
+      ‖iteratedFDeriv ℝ k (normD D) (ρ, ν, ξ)‖ ≤ C :=
+  exists_uniform_bound_nu k hK fun ν _ ξ hξ =>
+    (contDiffAt_normD D (p := (0, ν, ξ)) (hKe ξ hξ)).of_le (by exact_mod_cast le_top)
 
 end NativeDensity
 end RenewalGeometry

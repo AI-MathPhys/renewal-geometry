@@ -20,6 +20,7 @@ import RenewalGeometry.Action.HyperbolicCostOptimizerComposition
 import RenewalGeometry.Action.K4BridgeTransparency
 import RenewalGeometry.Action.MatterLegendre2
 import RenewalGeometry.Action.NativeDensitiesExact
+import RenewalGeometry.Action.NativeFirstJetNormalFormExact
 import RenewalGeometry.Action.NativeReaderCertificateExact
 import RenewalGeometry.Action.NativeScalingBlocksExact
 import RenewalGeometry.Action.NativeScalingRegularityExact
@@ -159,6 +160,7 @@ import RenewalGeometry.Commutant.PolarEdgeSingular
 import RenewalGeometry.Commutant.PolarFlatIrreducibleLimits
 import RenewalGeometry.Commutant.PolarHolonomy
 import RenewalGeometry.Commutant.PolarMetricHolonomy
+import RenewalGeometry.Commutant.PrivateLineCommutantWedderburnExact
 import RenewalGeometry.Commutant.ReciprocalWedderburnKronecker
 import RenewalGeometry.Commutant.RegularTrace
 import RenewalGeometry.Commutant.RelativeHoweCertificate
@@ -827,6 +829,7 @@ import RenewalGeometry.Spectralization.UniversalOneFormDiracKernelGrowthExact
 import RenewalGeometry.Spectralization.WeightedGraphHodgeLaplacianCoordinatesExact
 import RenewalGeometry.Spectralization.WeightedGraphOrthonormalCoordinatesExact
 import RenewalGeometry.StandardModel.ActiveFiniteStructuralStandardModelExact
+import RenewalGeometry.StandardModel.ActiveIsotypicExact
 import RenewalGeometry.StandardModel.ActiveResidualAlgebra
 import RenewalGeometry.StandardModel.ActiveResidualCensusExact
 import RenewalGeometry.StandardModel.AllExcursionReturnExact
@@ -869,6 +872,7 @@ import RenewalGeometry.StandardModel.InternalAssemblyExact
 import RenewalGeometry.StandardModel.InternalCommutantNumericalExact
 import RenewalGeometry.StandardModel.InternalCommutantSeedExact
 import RenewalGeometry.StandardModel.InternalDeficitAlternativesExact
+import RenewalGeometry.StandardModel.InternalSeedSaturationExact
 import RenewalGeometry.StandardModel.K4Carrier
 import RenewalGeometry.StandardModel.K4Core
 import RenewalGeometry.StandardModel.MonoidalCAR
