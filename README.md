@@ -185,9 +185,11 @@ The removable part is concentrated in the foundation of the *earlier* papers
 of the programme rather than the four tracked here: `Lorentz` (50 of 59
 modules), `Operational` (28), `Renewal` (25), `Dimension` (20), `StatMech`
 (20), `NCG/Algebra` (19 of 24) and `NCG/Krein` (13 of 14). They are kept
-because they are the generic layer (and the backend of the Lorentzian-emergence
-and operational-prediction papers), but nothing in the four current ledgers
-depends on them. Folders that the four papers lean on almost entirely are
+deliberately: they are the generic noncommutative-geometry layer (Krein
+classification, signed Dirac operators, Perron–Frobenius, the Lindblad and
+Ising suites) that earlier stages of the programme were built on, verified to
+the same standard, and available for future noncommutative-geometry work; but
+nothing in the four current ledgers depends on them. Folders that the four papers lean on almost entirely are
 `Commutant`, `StandardModel`, `Spectralization`, `Gravity`, `DiscreteAnalysis`
 and `Action`; `OperatorLimits` is mostly structural (116 of 151 modules are
 imported but not used by any cited proof).
