@@ -106,17 +106,27 @@ Lean declarations, and a generated README listing every record.
 | Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | Easy | Medium | Hard |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 68 | 57 | 11 | 0 | 0 | 0 | 0 | 0 |
-| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 140 | 85 | 8 | 15 | 32 | 0 | 0 | 47 |
-| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 68 | 18 | 1 | 5 | 44 | 0 | 0 | 49 |
-| [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 93 | 80 | 13 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **369** | **240** | **33** | **20** | **76** | **0** | **0** | **96** |
+| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 197 | 77 | 12 | 23 | 85 | 11 | 14 | 83 |
+| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 19 | 3 | 14 | 98 | 11 | 8 | 93 |
+| [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 56 | 10 | 38 | 15 | 18 | 30 | 5 |
+| **Total** | **518** | **209** | **36** | **75** | **198** | **40** | **52** | **181** |
 
-Six proving passes (September 2026) took the ledgers from 75 to 240 proved
-statements and from 16 to 33 encoded definitions: the first pass closed every
-record rated *easy*, three more worked through the 115 records rated *medium*,
-and two further passes built the missing infrastructure for the *hard*
-records of the duality paper and of the predictive-spectral-geometry paper.
-**Both of those papers are now completely formalized** (80 + 13 and 57 + 11
+Three of the four manuscripts were revised on 30 September 2026 (new
+theorems, refactored statements, relabelled records; the tracked statement
+count grew from 369 to 518). Every record whose statement text changed was
+re-verified against its cited Lean, and 12 previously proved records were
+honestly downgraded because the theorems were strengthened (for instance the
+main duality now asserts the commutant identity for arbitrary operator-Schmidt
+rank, and the structural Standard-Model theorem gained new hypotheses and
+conclusions). Every new record was triaged and, where open, rated.
+
+Before that revision, six proving passes (September 2026) had taken the
+ledgers from 75 to 240 proved statements and from 16 to 33 encoded
+definitions: the first pass closed every record rated *easy*, three more
+worked through the 115 records rated *medium*, and two further passes built
+the missing infrastructure for the *hard* records of the duality paper and of
+the predictive-spectral-geometry paper. The predictive-spectral-geometry
+paper, unchanged in the revision, remains **completely formalized** (57 + 11
 records, nothing open). The infrastructure those passes added is reusable and
 absent from Mathlib: a Courant–Fischer min–max for compact self-adjoint
 operators, rectangular Cauchy–Binet, Lebesgue-null zero sets of polynomials,
@@ -131,9 +141,12 @@ norm-resolvent convergence for compatible stable atlases, and mesh-graph
 distance convergence on compact metric spaces. Where the paper's objects are
 continuum ones Mathlib lacks (spin manifolds, spinor Sobolev spaces,
 Riemannian distance), the record is proved for the disclosed abstract
-surrogate that the paper's own proof uses. What remains open in the other two
-papers is rated *hard* and names its missing infrastructure (Sobolev
-compactness, continuum PDE, ODE-flow composition). Corollaries
+surrogate that the paper's own proof uses. After the revision, the open
+records of the three revised papers split into 40 *easy* (assembly of
+existing lemmas for the new wording), 52 *medium* (new finite lemmas), and
+181 *hard*, the last group naming its missing infrastructure (Sobolev
+compactness, continuum PDE, a uniform 4D discrete Sobolev inequality,
+ODE-flow composition). Corollaries
 whose Lean proofs take an unproved parent theorem's
 conclusion as a hypothesis are kept *open* by policy (a proof of "theorem
 implies corollary" is not a proof of the corollary) and close when the parent
@@ -176,9 +189,9 @@ finer question by walking the proof terms of every ledger-cited declaration:
 
 | | Modules |
 |---|---:|
-| Used by at least one cited declaration | 446 |
-| Never used, but imported by a used module (structurally required) | 358 |
-| Never used and imported by nothing used (removable without loss) | 271 |
+| Used by at least one cited declaration | 441 |
+| Never used, but imported by a used module (structurally required) | 349 |
+| Never used and imported by nothing used (removable without loss) | 285 |
 | **Total** | **1075** |
 
 The removable part is concentrated in the foundation of the *earlier* papers
@@ -191,7 +204,7 @@ Ising suites) that earlier stages of the programme were built on, verified to
 the same standard, and available for future noncommutative-geometry work; but
 nothing in the four current ledgers depends on them. Folders that the four papers lean on almost entirely are
 `Commutant`, `StandardModel`, `Spectralization`, `Gravity`, `DiscreteAnalysis`
-and `Action`; `OperatorLimits` is mostly structural (116 of 151 modules are
+and `Action`; `OperatorLimits` is mostly structural (117 of 151 modules are
 imported but not used by any cited proof).
 
 ## Installation
