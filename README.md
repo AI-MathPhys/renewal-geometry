@@ -106,10 +106,10 @@ Lean declarations, and a generated README listing every record.
 | Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | Easy | Medium | Hard |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 68 | 57 | 11 | 0 | 0 | 0 | 0 | 0 |
-| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 197 | 92 | 14 | 23 | 68 | 0 | 1 | 90 |
-| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 34 | 5 | 10 | 85 | 0 | 1 | 94 |
+| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 197 | 89 | 14 | 26 | 68 | 0 | 1 | 93 |
+| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 32 | 5 | 12 | 85 | 0 | 1 | 96 |
 | [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 100 | 12 | 5 | 2 | 0 | 0 | 7 |
-| **Total** | **518** | **283** | **42** | **38** | **155** | **0** | **2** | **191** |
+| **Total** | **518** | **278** | **42** | **43** | **155** | **0** | **2** | **196** |
 
 Three of the four manuscripts were revised on 30 September 2026 (new
 theorems, refactored statements, relabelled records; the tracked statement
@@ -174,9 +174,12 @@ an earlier pass, cited gap-convergence theorems whose hypotheses turned out
 to be contradictory (a bounded limit with compact graph screens forces a
 finite-dimensional carrier, while the theorems also assume an
 infinite-dimensional one). The contradiction is now proved in Lean, those
-theorems are no longer cited, and the record is open again.
+theorems are no longer cited, and the record is open again. For consistency
+the same rule was then applied to five records proved in earlier passes,
+each of which had one clause resting on an open statement of its paper; they
+are open again, with everything else they prove kept as partial Lean.
 
-The open records now split into 2 *medium* and 191 *hard*, the latter
+The open records now split into 2 *medium* and 196 *hard*, the latter
 naming their missing infrastructure (Sobolev compactness, continuum PDE, a
 uniform 4D discrete Sobolev inequality, ODE-flow composition,
 unbounded-limit spectral convergence, or an open parent theorem). Corollaries

@@ -708,11 +708,31 @@
   "thm:weak-copy-census": {
     "env": "proposition",
     "title": "Positive weak-copy census",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean. The statement needs the normalized Haar average over SU(W_2) of (g (x) I) J_H (g^* (x) I), the identity J~_H = (1/2) I (x) Tr_{W_2} J_H, the gauge-cyclic carrier K_H^occ = W_2 (x) Ran B_H, g_H^occ = rank B_H and the one-doublet test m_H > 0, p_H = m_H^2 - Tr(B_H^2) = 0. Mathlib has no usable Haar integration of matrix-valued functions over Matrix.specialUnitaryGroup (Fin 2) C nor Schur orthogonality for its defining representation.",
-    "difficulty": "hard",
-    "plan": "Reformulate to avoid the Haar integral: (a) prove the twirl identity for a finite unitary 2-design (e.g. the 24-element binary tetrahedral subgroup of SU(2)) by explicit finite computation, which reproduces the Haar average of the degree-(1,1) polynomial g J g^*; or (b) define J~_H as the orthogonal projection of J_H onto the commutant of SU(2) (x) I in the Hilbert-Schmidt space and prove that commutant is I (x) M_{M_H}(C) by an explicit Schur argument with the Pauli generators (commuting with sigma_x (x) I, sigma_z (x) I forces the I (x) B form; cf. CommonOrigin.left_factor_commutant used in Commutant/GrandFactorObstruction.lean). Then K_H^occ = span of the SU(2)-orbit of Ran J_H = W_2 (x) Ran B_H by the same generator argument, rank B_H = number of copies, and the trace test p_H = 0 iff rank <= 1 for a PSD matrix (eigenvalue sum of squares). Files: new StandardModel/WeakCopyCensusExact.lean; reuse Operational/SpectatorProduct.lean partialTraceRight for Tr_{W_2}."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.weak_copy_census",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.weakGram",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.weakTwirl",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.occCarrier",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.weakTensor",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.weakGram_posSemidef",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.weakTwirl_eq",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.weakTwirl_haar_eq",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.occCarrier_eq_weakTensor",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.range_weakTwirl_eq",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.finrank_occCarrier",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.rank_eq_one_iff",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.rank_eq_one_iff_of_posSemidef",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.weakGram_basis_change",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.census_basis_invariant",
+      "RenewalGeometry/Analysis/CompactGroupHaarTwirl.lean:RenewalGeometry.HaarTwirl.suHaar",
+      "RenewalGeometry/Analysis/CompactGroupHaarTwirl.lean:RenewalGeometry.HaarTwirl.suHaar_isProbabilityMeasure",
+      "RenewalGeometry/Analysis/CompactGroupHaarTwirl.lean:RenewalGeometry.HaarTwirl.haar_schur_twirl",
+      "RenewalGeometry/Analysis/CompactGroupHaarTwirl.lean:RenewalGeometry.HaarTwirl.su2_haar_twirl",
+      "RenewalGeometry/Analysis/CompactGroupHaarTwirl.lean:RenewalGeometry.HaarTwirl.su2_commutant_scalar",
+      "RenewalGeometry/Analysis/CompactGroupHaarTwirl.lean:RenewalGeometry.HaarTwirl.range_le_range_of_ker_le_ker"
+    ],
+    "note": "Proved with the genuine Haar integral (no finite design, no commutant-projection surrogate). New infrastructure Analysis/CompactGroupHaarTwirl.lean: SU(n) = Matrix.specialUnitaryGroup n C is made a compact topological group with Borel sigma-algebra (closed + entries bounded by 1), suHaar n := haarMeasure top is the normalized Haar probability measure, and haar_schur_twirl proves the compact-group Schur average  int v(g) Y v(g)^* dmu = (Tr Y/dim) I for any continuous unitary representation with scalar commutant and ANY left-invariant probability measure (left invariance => conjugation invariance => scalar by Schur; trace fixes the scalar); su2_commutant_scalar is Schur for the defining SU(2) rep (iσ_z, iσ_x suffice). WeakCopyCensusExact.weak_copy_census: for J >= 0 on Fin 2 x M (M finite), B := Tr_{W2} J (ReciprocalReturnMass.partialTrace) is PSD; the entrywise Bochner twirl int (g (x) I) J (g^* (x) I) dmu(g) = (1/2) I (x) B for every left-invariant probability measure mu on SU(2) (weakTwirl_haar_eq: with suHaar (Fin 2)); K^occ := span{(g (x) I)v : g in SU(2), v in Ran J} = Ran Jbar = W2 (x) Ran B (W2 (x) R rendered as the span of elementary tensors e (x) w, w in R; proved equal to the slice subspace); dim K^occ = 2 rank B (g_H^occ = rank B copies of the doublet); rank B = 1 iff Tr B > 0 and (Tr B)^2 - Tr(B^2) = 0 (eigenvalue argument, ComplexOrder on C). Independence: census_basis_invariant shows rank B, Tr B, Tr B^2 unchanged under a unitary change of basis of M_H; Kraus-coordinate/phase independence is structural since every object is defined from J alone. Disclosed renderings: W2 = C^2 with index Fin 2; the twirl is an entrywise integral of matrix entries; the theorem is stated for every left-invariant Borel probability measure, which includes (and by uniqueness equals) normalized Haar measure. The appendix rank-one example is not formalised (not part of the statement). Axioms: propext, Classical.choice, Quot.sound."
   },
   "def:finite-dirac-relation-space": {
     "env": "definition",
@@ -757,27 +777,33 @@
   "thm:structural-SM": {
     "env": "corollary",
     "title": "Structural synthesis",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/StandardModel/StructuralStandardModelPacketExact.lean:RenewalGeometry.LandedMultiplicityPacket",
-      "RenewalGeometry/StandardModel/StructuralStandardModelPacketExact.lean:RenewalGeometry.LandedMultiplicityPacket.structural_standard_model",
-      "RenewalGeometry/StandardModel/StructuralStandardModelPacketExact.lean:RenewalGeometry.LandedMultiplicityPacket.shortedGram",
-      "RenewalGeometry/StandardModel/StructuralStandardModelPacketExact.lean:RenewalGeometry.LandedMultiplicityPacket.shortedGram_posSemidef",
+      "RenewalGeometry/StandardModel/StructuralSynthesisExact.lean:RenewalGeometry.StructuralSynthesis.structural_synthesis",
+      "RenewalGeometry/StandardModel/StructuralSynthesisExact.lean:RenewalGeometry.StructuralSynthesis.structural_synthesis_charged_count",
+      "RenewalGeometry/StandardModel/StructuralSynthesisExact.lean:RenewalGeometry.StructuralSynthesis.inventoryMultiplicities",
+      "RenewalGeometry/StandardModel/StructuralSynthesisExact.lean:RenewalGeometry.StructuralSynthesis.Witness.wInv",
+      "RenewalGeometry/StandardModel/StructuralSynthesisExact.lean:RenewalGeometry.StructuralSynthesis.Witness.wInv_inventory_zero",
+      "RenewalGeometry/StandardModel/StructuralSynthesisExact.lean:RenewalGeometry.StructuralSynthesis.Witness.wInv_deltaLin",
       "RenewalGeometry/StandardModel/InternalSeedSaturationExact.lean:RenewalGeometry.InternalSeedSaturation.internal_seed_saturation_of_unitary",
-      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.determinantSeedStabilizer_eq_SMGaugeGroup",
-      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.smGaugeQuotientEquiv",
+      "RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean:RenewalGeometry.OperationalDeterminantSource.gauge_group_phase_sensitive",
       "RenewalGeometry/StandardModel/AnomalyForcedWeights.lean:RenewalGeometry.anomaly_forced_weights",
-      "RenewalGeometry/StandardModel/EndpointGenerationCarrierExact.lean:RenewalGeometry.EndpointGenerationCarrier.endpoint_generation_carrier",
-      "RenewalGeometry/StandardModel/CliffordOccurrenceTest.lean:RenewalGeometry.CliffordTwirlMatterAudit.clifford_occurrence_test",
-      "RenewalGeometry/Spectralization/SaturatedFiniteDiracGenerator.lean:RenewalGeometry.zeroOddProvenance_fixesFiniteDiracProjection",
-      "RenewalGeometry/StandardModel/OneDoubletOddTangentClassification.lean:RenewalGeometry.zeroOddProvenance_commonWeakLine_rankOne",
       "RenewalGeometry/StandardModel/FaithfulSMQuotientExact.lean:RenewalGeometry.FaithfulSMQuotient.faithful_quotient",
-      "RenewalGeometry/StandardModel/FaithfulSMQuotientExact.lean:RenewalGeometry.FaithfulSMQuotient.commonKernel_eq_smGaugeHom_ker",
-      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.determinantSeedStabilizer_eq_SMGaugeGroup"
+      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.smGaugeQuotientEquiv",
+      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.mem_smGaugeHom_ker_iff_centralZ6",
+      "RenewalGeometry/StandardModel/EndpointAncestryAllocationExact.lean:RenewalGeometry.EndpointAncestryAllocation.endpoint_allocation",
+      "RenewalGeometry/StandardModel/EndpointAncestryAllocationExact.lean:RenewalGeometry.EndpointAncestryAllocation.endpoint_allocation_anomaly_excess",
+      "RenewalGeometry/StandardModel/EndpointGenerationCarrierExact.lean:RenewalGeometry.EndpointGenerationCarrier.endpoint_generation_carrier",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.linear_anomaly_rigidity",
+      "RenewalGeometry/StandardModel/CanonicalChiralProjectorsExact.lean:RenewalGeometry.CanonicalChiralProjectors.inventory_split",
+      "RenewalGeometry/StandardModel/CanonicalChiralProjectorsExact.lean:RenewalGeometry.CanonicalChiralProjectors.rank_projector",
+      "RenewalGeometry/StandardModel/CanonicalChiralProjectorsExact.lean:RenewalGeometry.CanonicalChiralProjectors.evalMatrix_unitary",
+      "RenewalGeometry/StandardModel/TypedMatterLiftExact.lean:RenewalGeometry.TypedMatterLift.typed_matter_lift",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.weak_copy_census",
+      "RenewalGeometry/StandardModel/WeakCopyCensusExact.lean:RenewalGeometry.WeakCopyCensus.rank_eq_one_iff",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.nonzero_admitted_of_relationDefect_zero"
     ],
-    "note": "DOWNGRADED 30 Sep 2026 (was proved). The corollary was rewritten: it now assumes a same-source Clifford-compatible packet with the census/internal-landing hypotheses, a global group obtained by the determinant route (thm:gauge-group) or the anomaly route (cor:anomaly-faithful-group), and, on the complete source-minimal fermion carrier, the faithful endpoint occurrence and complete typed synthesis of thm:endpoint-allocation with Delta_inv^F = Delta_lin = a_{f0|G} = 0, and concludes A_int^word = M_3 + M_2 + C + C, G_phys = S(U(3) x U(2)) = (SU(3) x SU(2) x U(1))/Z_6 and K_{F,gch}^min = 3Q + 3u + 3d + 3L + 3e, plus the general-duality, weak-copy (m_H > 0, p_H = 0 => one reached weak doublet) and fixed-generator (Delta_F^rel = 0, ||D_F^can|| > 0 => admitted nonzero finite Dirac) clauses. Partial: LandedMultiplicityPacket.structural_standard_model proves on the abstract packet the internal saturation clause (i) (M_3 + M_2 + C + C = A'_ext, dim 15) and both global-group routes (determinant seed stabilizer = SMGaugeGroup = S(U(3) x U(2)), smGaugeQuotientEquiv with kernel Z_6; anomaly route: anomaly_forced_weights plus FaithfulSMQuotient.faithful_quotient with commonKernel_eq_smGaugeHom_ker), and the earlier endpoint (dim G_gen = 3), Clifford-occurrence and one-doublet clauses. Missing: the charged-copy count K_{F,gch}^min = 3Q + 3u + 3d + 3L + 3e from thm:endpoint-allocation + thm:linear-anomaly-rigidity (both open), the typing-algebra/general-duality clause (prop:typed-matter-lift + thm:main-duality, open), the weak-copy census test (thm:weak-copy-census, open: Haar twirl), and the fixed-generator test in its new relative-defect form; the new hypothesis packet (fermion carrier, endpoint synthesis, Delta_inv^F, Delta_lin) is not a Lean structure.",
-    "difficulty": "hard",
-    "plan": "Depends on unformalized new records. Order: (a) thm:linear-anomaly-rigidity (easy, new file StandardModel/LinearAnomalyRigidityExact.lean); (b) thm:endpoint-allocation on top of Predictive/ExactSourceSchurResidual.lean; (c) cor:anomaly-faithful-group is already an assembly of AnomalyForcedWeights + FaithfulSMQuotientExact + SMGaugeQuotientExact; (d) extend StandardModel/StructuralStandardModelPacketExact.lean by a new structure (packet + fermion synthesis data S_f, T_f, Delta_inv^F = 0, Delta_lin = 0, a_{f0|G} = 0) in a new file StandardModel/StructuralSynthesisExact.lean and conclude the three displayed isomorphisms; (e) the weak-copy clause requires thm:weak-copy-census (hard: replace the SU(2) Haar twirl by a finite unitary 2-design or by the commutant projection) and should be stated as a separate clause with the twirl identity as hypothesis until that record closes."
+    "note": "Proved (StructuralSynthesis.structural_synthesis), all parents now proved in the ledger (internal-seed-saturation, gauge-group, cor:anomaly-faithful-group, endpoint-allocation, linear-anomaly-rigidity, canonical-chiral-projectors, endpoint-generation carrier, typed-matter-lift, main-duality, prop:finite-dirac) plus thm:weak-copy-census proved in this batch. Hypotheses taken explicitly: a canonical charged inventory D (CanonicalChiralProjectors.Inventory on the saturated fermion carrier C^iota, five target types indexed Fin 5 in the order (Q,u,d,L,e)), the positive endpoint branch (Gm >= 0, dim W- = 3, Gm strictly positive on W-), for one charged type f0 a complete typed synthesis S : E -> N_f0 (surjective) and a faithful endpoint occurrence T : G_gen -> N_f0 (T^*T > 0, G_gen = supported Gm W-), and Delta_inv^F = Tr(P_gch - P_SM) = 0, Delta_lin = 0, a_{f0|G} = Tr A_{f0|G} = 0. Conclusions: (1) for every unitary external action with its isotypic data, census + internal landing give A_int^word = M3+M2+C+C (algebra iso, dim 15, centre 4, sectors 9 and 4 entries); (2) global group by either route: h_det > 0 <-> packet stabilizer = S(U(3)xU(2)) (determinant route), primitive anomaly-free weights +-(-2,3), jointRep.ker = ker(cover -> S(U3xU2)) with faithful descended representation and G_phys = cover/jointRep.ker ≃* S(U(3)xU(2)) (anomaly route), and S(U(3)xU(2)) ≃* (SU3xSU2xU1)/Z6 with explicit central kernel; (3) charged count (structural_synthesis_charged_count): dim G_gen = 3, a = 0 => A = 0, endpoint_allocation_anomaly_excess => n = (3,3,3,3,3); Delta_inv = 0 => P_gch = sum_f P_{f,eps_f}; each P_{f,eps_f} has rank 3 dim V_f and the evaluation map V_f (x) C^3 -> P_f K is unitary, i.e. K_{F,gch}^min = 3Q+3u+3d+3L+3e; (4) the full typed_matter_lift statement (typing algebra = intAlgebra, commutes with the Clifford algebra, block sizes 6,3,3,2,1,1, and the main duality for every represented incidence family of arbitrary coefficient rank); (5) J_H >= 0, m_H > 0, p_H = 0 => rank B_H = 1 and dim K_H^occ = 2 (one reached weak doublet); (6) Delta_F^rel = 0, ||D_F^can|| > 0 => admitted nonzero finite-Dirac operator. Non-vacuity: Witness.wInv (toy carrier C^{5x3}, five 1-dim types of weights 1..5, three copies each) with Gm = I_3, W- = C^3, S = I, T the coordinate isometry discharges every hypothesis (example at the end of the file). Disclosed renderings: the same-source packet is not one Lean structure; the internal, group, duality, weak-copy and fixed-generator clauses are stated for every packet satisfying their own ingredient hypotheses (a strengthening), while the charged-count clause uses the explicit fermion-carrier hypotheses above; the identification of the inventory's abstract target types Vf with the SM modules Q,u,d,L,e is by the Fin 5 labelling (their representation data are supplied by the inventory); N_f0 and G_gen are written in orthonormal coordinates Fin (n f0) and Fin (dim supported). Axioms: propext, Classical.choice, Quot.sound."
   },
   "thm:howe-certificate": {
     "env": "theorem",
@@ -1041,17 +1067,21 @@
   "thm:certified-support-stratum": {
     "env": "proposition",
     "title": "Certified support stratum from a singular-value gap",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue",
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_weyl",
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_lower_perturbation",
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_eq_zero_of_rank_le",
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_antitone"
+      "RenewalGeometry/Analysis/CertifiedSupportStratumExact.lean:RenewalGeometry.CertifiedSupportStratum.certified_support_stratum",
+      "RenewalGeometry/Analysis/CertifiedSupportStratumExact.lean:RenewalGeometry.CertifiedSupportStratum.certified_support_stratum_hilbertSchmidt",
+      "RenewalGeometry/Analysis/CertifiedSupportStratumExact.lean:RenewalGeometry.CertifiedSupportStratum.certified_support_stratum_of_le",
+      "RenewalGeometry/Analysis/CertifiedSupportStratumExact.lean:RenewalGeometry.CertifiedSupportStratum.rightSingularProjector",
+      "RenewalGeometry/Analysis/CertifiedSupportStratumExact.lean:RenewalGeometry.CertifiedSupportStratum.leftSingularProjector",
+      "RenewalGeometry/Analysis/CertifiedSupportStratumExact.lean:RenewalGeometry.CertifiedSupportStratum.supportProjection",
+      "RenewalGeometry/Analysis/SingularSubspacePerturbation.lean:RenewalGeometry.SingularSubspace.support_projector_perturbation",
+      "RenewalGeometry/Analysis/SingularSubspacePerturbation.lean:RenewalGeometry.SingularSubspace.abs_singularValues_sub_le",
+      "RenewalGeometry/Analysis/HermitianSpectralProjectorPerturbation.lean:RenewalGeometry.HermitianSpectral.norm_starProjection_sub_le",
+      "RenewalGeometry/Analysis/HermitianSpectralProjectorPerturbation.lean:RenewalGeometry.HermitianSpectral.norm_starProjection_orthogonal_sq_le_of_finrank_eq",
+      "RenewalGeometry/Analysis/HermitianSpectralProjectorPerturbation.lean:RenewalGeometry.HermitianSpectral.spectralSubspace"
     ],
-    "note": "Partial: singular values are available only as approximation numbers σ_{k+1}(F) = dist(F, rank ≤ k) on EuclideanOperator m n with the sharp Weyl perturbation |σ_k(A) − σ_k(B)| ≤ ‖A − B‖_op (approximationSingularValue_weyl, _lower_perturbation) and 'rank ≤ k ⟹ σ_{k+1} = 0' (approximationSingularValue_eq_zero_of_rank_le); these give the rank-certificate clause (rank F ≤ r and σ̂_r > 2ε > ε ⟹ σ_r(F) ≥ σ̂_r − ε > 0 ⟹ rank F ≥ r, hence = r) after a short assembly. Missing: the support projector bound eq:certified-support-stratum ‖p − p̂_r‖_op, ‖q − q̂_r‖_op ≤ ε/(σ̂_r − 2ε) (a Wedin / Davis–Kahan sin-Θ estimate: Mathlib has no singular-value decomposition, no singular projectors, and the tree has no spectral-projector perturbation bound of this kind), and the HS-norm variant.",
-    "difficulty": "hard",
-    "plan": "Rank clause: new file RenewalGeometry/Analysis/CertifiedRankStratumExact.lean assembling ApproximationSingularValues.lean (σ_k(F) > 0 ⟹ rank F ≥ k by contraposition of _eq_zero_of_rank_le; the converse 'rank ≥ k ⟹ σ_k > 0' needs closedness of {rank ≤ k−1} in finite dimension, provable via lower-semicontinuity of rank / Matrix.rank of limits). Projector clause: needs infrastructure — define the singular projectors through the spectral theorem for the Hermitian matrices FᴴF, FFᴴ (Matrix.IsHermitian.eigenvectorBasis), prove the Davis–Kahan sin-Θ theorem for the top-r spectral projector under a Hermitian perturbation (gap δ = σ̂_r² − ..., with ‖FᴴF − F̂ᴴF̂‖ ≤ ε(‖F‖ + ‖F̂‖)) and derive the displayed bound; alternatively prove Wedin's theorem via the Hermitian dilation [[0,F],[F^*,0]] and a Riesz-projection contour argument (OperatorLimits/RieszProjectionStability.lean, NearbyProjectionRankStability.lean give rank stability but not the quantitative bound). HS variant: ‖·‖_op ≤ ‖·‖_HS (matrixL2 vs L2Operator)."
+    "note": "Proved in full. certified_support_stratum: for F, F^ : E ->L H between finite-dimensional inner product spaces over any RCLike field, ||F^ - F||_op <= eps, rank F <= r, r >= 1 and sigma^_r > 2 eps (sigma^_r = Mathlib LinearMap.singularValues (r-1), zero-indexed), it proves rank F = r, rank p^_r = rank q^_r = r, and ||supp(F*F) - p^_r||, ||supp(FF*) - q^_r|| <= eps/(sigma^_r - 2 eps). certified_support_stratum_hilbertSchmidt gives the same under sum_i ||(F^-F) b_i||^2 <= eps^2 for an orthonormal basis b (HS norm), via opNorm_le_of_sum_norm_sq_le. Encodings (disclosed): supp(A) = orthogonal projection onto Ran A; the right/left singular projector of F^ for its r largest singular values = spectral projector of F^*F^ (resp. F^F^*) onto [sigma^_r^2, inf) (HermitianSpectral.spectralSubspace = sup of eigenspaces); the theorem proves these have rank exactly r, so they coincide with the projectors onto the top-r singular vectors (well-defined since the gap forces sigma^_{r+1} <= eps < sigma^_r). Proof route: new infrastructure — spectral subspaces of symmetric operators with eigen-coordinate bounds, the two-projection sin-Theta reduction (norm_starProjection_sub_le), the equal-rank transfer lemma, and a Wedin-type support-projector bound for low-rank targets (support_projector_perturbation, applied to F and to F* with W = F^(V)); intermediate bound eps/sqrt(sigma^2 - eps^2) <= eps/(sigma - 2 eps). Non-vacuity example (F = F^ = id on C, eps = 0, r = 1) included. Standard axioms only."
   },
   "def:multiplicity-quiver": {
     "env": "definition",
@@ -2116,15 +2146,23 @@
   "thm:incidence-slice-cluster": {
     "env": "proposition",
     "title": "Stable dominant coefficient space under incidence error",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_weyl",
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_lower_perturbation",
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_upper_perturbation"
+      "RenewalGeometry/Commutant/IncidenceSliceClusterExact.lean:RenewalGeometry.IncidenceSliceCluster.incidence_slice_cluster",
+      "RenewalGeometry/Commutant/IncidenceSliceClusterExact.lean:RenewalGeometry.IncidenceSliceCluster.schmidtCoeff",
+      "RenewalGeometry/Commutant/IncidenceSliceClusterExact.lean:RenewalGeometry.IncidenceSliceCluster.sliceMap",
+      "RenewalGeometry/Commutant/IncidenceSliceClusterExact.lean:RenewalGeometry.IncidenceSliceCluster.sliceGramOp",
+      "RenewalGeometry/Commutant/IncidenceSliceClusterExact.lean:RenewalGeometry.IncidenceSliceCluster.sliceGramOp_eq",
+      "RenewalGeometry/Commutant/IncidenceSliceClusterExact.lean:RenewalGeometry.IncidenceSliceCluster.norm_sliceMap_apply_le",
+      "RenewalGeometry/Commutant/IncidenceSliceClusterExact.lean:RenewalGeometry.IncidenceSliceCluster.finrank_range_sliceMap",
+      "RenewalGeometry/Commutant/IncidenceSliceClusterExact.lean:RenewalGeometry.IncidenceSliceCluster.finrank_range_sliceMap_schmidt",
+      "RenewalGeometry/Analysis/HermitianSpectralProjectorPerturbation.lean:RenewalGeometry.HermitianSpectral.hermitian_cluster_projector_perturbation",
+      "RenewalGeometry/Analysis/HermitianSpectralProjectorPerturbation.lean:RenewalGeometry.HermitianSpectral.spectralProjector",
+      "RenewalGeometry/Analysis/HermitianSpectralProjectorPerturbation.lean:RenewalGeometry.HermitianSpectral.spectralSubspace",
+      "RenewalGeometry/Analysis/SingularSubspacePerturbation.lean:RenewalGeometry.SingularSubspace.abs_singularValues_sub_le",
+      "RenewalGeometry/Analysis/SingularSubspacePerturbation.lean:RenewalGeometry.SingularSubspace.norm_apply_le_singularValues_zero"
     ],
-    "note": "Partial: eq:incidence-Schmidt-Weyl, |sigma~_k - sigma_k| <= ||Y~ - Y||, is the Weyl inequality for approximation numbers (approximationSingularValue_weyl and the two perturbation bounds), once the operator-Schmidt coefficients of Y are identified with the singular values of its realignment (the slice Gram H_Y of prop:incidence-slice-Gram, not yet encoded). Missing: the r-dimensional dominant cluster separation for epsilon < s/2, the slice-Gram perturbation ||H_Y~ - H_Y|| <= eta = (2L + epsilon) epsilon, and the spectral projector bound rank P~ = r, ||P~ - P||_op <= eta/(s^2 - eta) for the spectral projectors of the Hermitian slice Grams (a Davis-Kahan / Riesz-projection perturbation estimate).",
-    "difficulty": "hard",
-    "plan": "Needs a Hermitian spectral-projector perturbation lemma that Mathlib lacks: for Hermitian H with spectrum split by a gap and a perturbation of norm eta smaller than half the gap, the spectral projections onto the two clusters satisfy ||P~ - P|| <= eta/(gap - eta) (Riesz contour integral of the resolvent difference, or the Davis-Kahan sin-theta theorem). Build it on the finite-dimensional Riesz projection infrastructure of OperatorLimits/CircleRieszProjectionOrthogonality.lean and Commutant/ContinuumHoweProtectedCommutantExact.lean (circle Riesz projections and their norm convergence) in a new file Analysis/HermitianSpectralProjectorPerturbation.lean; then the proposition in Commutant/IncidenceSliceClusterExact.lean: realignment of Y : Matrix (Vb x Nb) (Va x Na) (as in MultiplicityQuiverArrows.blockSlice) gives the slice Gram H_Y = R^H R with singular values of R the Schmidt coefficients; Weyl for R; ||H_Y~ - H_Y|| <= (||R~|| + ||R||) ||R~ - R|| <= (2L + epsilon) epsilon; apply the projector lemma with gap s^2 and threshold s^2/2."
+    "note": "Proved in full. incidence_slice_cluster: for Y, Y~ : Matrix (Kt x Mt) (Ks x Ms) C with operator-Schmidt rank r (= rank of the slice map S_Y = realign Y in HS-orthonormal matrix-unit coordinates), nonzero Schmidt coefficients >= s > 0, all coefficients <= L, and ||Y~ - Y||_HS <= eps (sum of squared entry moduli <= eps^2), it proves (1) |sigma~_k - sigma_k| <= eps for all k (eq:incidence-Schmidt-Weyl, via a new Weyl inequality for Mathlib singular values and ||S_D||_op <= ||D||_HS); (2) if eps < s/2, exactly the first r coefficients of Y~ exceed s/2 (the r-dimensional dominant cluster); (3) ||H_Y~ - H_Y||_op <= eta = (2L + eps) eps; (4) if eta < s^2/2, with P = 1_(0,inf)(H_Y) and P~ = 1_[s^2/2,inf)(H_Y~) (spectral projectors of the slice Grams, H_Y = sliceGram Y = S_Y S_Y*), rank P~ = r and ||P~ - P||_op <= eta/(s^2 - eta) (eq:incidence-slice-projector). Renderings (disclosed): Schmidt coefficients are defined intrinsically as the singular values (Mathlib LinearMap.singularValues, zero-indexed) of the slice map, the standard operator-Schmidt/realignment characterisation; finrank_range_sliceMap_schmidt checks that for Y = sum_k sigma_k D_k (x) F_k with orthonormal families the rank is the number of terms; s and L are taken as a lower bound on the nonzero coefficients and an upper bound on all coefficients (the paper's exact smallest/largest values are a special case). The projector bound comes from the new reusable Davis-Kahan/Riesz-type theorem hermitian_cluster_projector_perturbation (spectrum of H in {0} u [g,inf), ||H~ - H|| <= eta < g/2 => rank 1_[g/2,inf)(H~) = rank 1_(0,inf)(H) and ||difference|| <= eta/(g - eta)), proved with the paper's resolvent identity Q P~ = Q (H~ - H) P~ (H~|)^-1 on one side and a fixed-point estimate on the other, plus dimension counting for the eigenvalue localisation. Non-vacuity example included. Standard axioms only."
   },
   "cor:incidence-one-sided-rank": {
     "env": "corollary",
