@@ -787,19 +787,43 @@
     "env": "proposition",
     "title": "Rooted same-record gauge certificate",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: rooted spanning tree gauge, tree gauge, Wilson seed B^T_h, site-gauge invariance of the certificate, invariance of the finite action sectors and of the covector norm. The gauge covariance of lattice holonomies is in GaugeTheory/LatticeHolonomyGaugeCovariance.lean, but neither the rooted-tree seed, the admissible logarithm chart nor the gauge invariance of the native action sectors is formalised.",
+    "lean": [
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.rootedPath",
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.rootedWord",
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.rootedPath_gaugeLinks",
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.rootedWord_gaugeLinks",
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.classFunction_rootedWord_gaugeLinks",
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.rootedWord_eq_gaugeLinks",
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.rootedWord_eq_one_of_tree_edge",
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.rootedWord_central_gauge"
+    ],
+    "note": "Partial: the endpoint-cancellation algebra is proved for any group and any family of walks to the root (a rooted spanning tree in particular): RootedWilson.rootedPath_gaugeLinks C_x(U^k) = k_o C_x(U) k_x^{-1}; rootedWord_gaugeLinks W(U^k) = k_o W(U) k_o^{-1}; every class function of the rooted words is site-gauge invariant (classFunction_rootedWord_gaugeLinks); the tree representative is an exact gauge transform (rootedWord_eq_gaugeLinks) and trivial on tree edges; central root gauges leave rooted words unchanged. Missing: conjugation equivariance of the logarithm on a conjugation-invariant chart (needed to turn W-covariance into invariance of ||B^T||_4 + ||F||_2; the entrywise pairChart is not unitarily invariant, a Frobenius-ball chart is), the clause that the tree gauge followed by thm:finite-Coulomb-normalization gives exact small Coulomb gauge (open, hard), and the sector-by-sector invariance (a)-(c) of the finite common action, matter packets and covector norm.",
     "difficulty": "hard",
-    "plan": "The invariance clauses (a)-(c) are medium finite algebra once the native action sectors are shown gauge invariant (Action/NativeDensitiesExact.lean defines the densities but proves no gauge invariance; GaugeTheory/LatticeHolonomyGaugeCovariance.lean gives holonomy covariance) and the rooted tree gauge is constructed (walk products along a spanning tree). The clause that the tree gauge followed by thm:finite-Coulomb-normalization yields exact small discrete Coulomb gauge inherits the hard uniform discrete Sobolev / FP-inverse machinery of lem:native-FP-inverse. Hard overall; split off the pure invariance clauses as medium."
+    "plan": "(1) Log equivariance: on a Frobenius ball (unitarily invariant, inside the entrywise injectivity ball of MatrixDetExp.exists_injOn_exp_entry_ball) exp(g L g^-1) = g exp(L) g^-1 and injectivity give Log(gPg^-1) = g Log(P) g^-1; with the Ad-invariant norm this yields certificate invariance from rootedWord_gaugeLinks. (2) Clauses (a)-(c): gauge invariance of the native action sectors (Action/NativeDensitiesExact.lean, StandardModel/FiniteStandardModelActionGaugeCovarianceExact.lean) and the isometry of the tangent map. (3) The Coulomb clause inherits thm:finite-Coulomb-normalization (hard)."
   },
   "lem:determinant-screen-flux": {
     "env": "lemma",
     "title": "Determinant compactness, admissibility, and flux",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: determinant screen, adjoint Wilson modulus, coordinate-plane flux, integer flux 2 pi m, translation modulus. The flux-integer clause (the sum of log-phases over a periodic coordinate 2-torus is 2 pi times an integer because the product of the plaquette holonomies telescopes to 1) is finite algebra with no library counterpart; AffinityCohomology.lean handles real (additive) cycle affinities on graphs, not U(1) phases modulo 2 pi.",
+    "lean": [
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.determinant_screen_flux_exact",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.cube_plaquette_prod",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.cubeSum_eq_zero",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.plane_plaquette_prod",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.planeFlux_integer",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.planeFlux_shift",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.planeFlux_const",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.sum_phase_eq_flux",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.mean_curvature_eq_flux",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.two_pi_flux_sq_le",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.two_pi_abs_flux_le",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.ellC_eq_arg_smChi",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.smChi_eq_exp_ellC",
+      "RenewalGeometry/Analysis/MatrixDetExp.lean:RenewalGeometry.MatrixDetExp.det_exp_eq_complex_exp_trace"
+    ],
+    "note": "Partial: all exact finite clauses are proved. DeterminantFlux.determinant_screen_flux_exact, for G_SM links U on (Z/n)^4 with principal determinant arguments phi = Arg chi(P_U) (eq:determinant-real-curvature): (1) f_h = l_c(F_h): every logarithm L of a full plaquette with entries <= c, 2c < min(pairChart, pi), has l_c(L) = phi (uses det exp = exp tr, MatrixDetExp); (2) if max|phi| < pi/3 then d_h f_h = 0 exactly (cubeSum_eq_zero: the six cube plaquettes multiply to one, the argument sum is 2 pi k with |.| < 2 pi); (3) every periodic coordinate-plane flux is 2 pi m, m integer (planeFlux_integer, telescoping product); (4) it is independent of the transverse base point (planeFlux_shift, planeFlux_const); (5) n^2 sum_x phi = n^4 2 pi m, i.e. mean curvature = 2 pi m / L^2 (sum_phase_eq_flux, mean_curvature_eq_flux); (6) 2 pi |m_{mu nu}| <= ||f_{mu nu}||_{2,h} (two_pi_abs_flux_le, Cauchy-Schwarz). Missing: the analytic clauses: max_x |phi_h| -> 0 and admissibility for small h from bounded curvature with vanishing adjoint Wilson modulus (thm:native-Wilson-compactness, open/hard), the modulus transfer omega_h(f) <= C Omega_h(F) and L^2 precompactness of R_h^0 f_h (lem:native-discrete-KR, open/hard), and the (elementary) constant subsequence of the bounded integer vectors m_h.",
     "difficulty": "hard",
-    "plan": "The flux clause eq:determinant-flux is a medium standalone lemma on ZMod grids (telescoping product of U(1) plaquettes on a periodic plane, Complex.exp periodicity, the bound 2 pi |m| <= ||f||_{2,h} by Cauchy-Schwarz); the determinant map ell_c, the modulus transfer omega_h(f) <= C Omega_h(F) and the L^2 precompactness of R_h^0 f_h (Kolmogorov-Riesz) need the Wilson-modulus/reconstruction infrastructure absent from the library. Hard overall."
+    "plan": "Remaining: prove eventual uniform smallness of h^2 F_h from the scalar-magnitude part of thm:native-Wilson-compactness, the transfer of the adjoint Wilson difference through the Ad-invariant functional l_c, and Kolmogorov-Riesz precompactness (lem:native-discrete-KR); then combine with determinant_screen_flux_exact. The subsequence clause: bounded integer vectors (2 pi |m_h| <= ||f_h|| <= C) take finitely many values, pigeonhole."
   },
   "lem:determinant-Hodge-stability": {
     "env": "lemma",
@@ -814,10 +838,19 @@
     "env": "proposition",
     "title": "Zero-flux Abelian normalization with unrestricted flat holonomy",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: Abelian normalization, Hodge primitive, flat residual holonomy, periodic site gauge, cycle holonomies.",
+    "lean": [
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.periodic_abelian_normalization",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.pureGauge_of_flat",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.cycProd_const",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.cycProd_add_unitStep",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.cycProd_gaugeAct",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.gPlaq_gaugeAct",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.gridDiv_add_const",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.gPlaq_circleExp"
+    ],
+    "note": "Partial: the exact gauge construction (eq:determinant-Abelian-normalization) is proved given the primitive. DeterminantFlux.periodic_abelian_normalization: for periodic U(1) (Circle) links u on (Z/n)^iota and a real a0 with h*h(d_h a0) = Arg p_u (i.e. d_h a0 = f), there are constants c_mu with L c_mu in (-pi, pi] (L = n h) equal to the principal argument of the (base-point independent) cycle holonomy of the flat residual u e^{-iha0}, and real site phases t with e^{it(x)} u_mu(x) e^{-it(x+mu)} = e^{ih(a0+c)_mu(x)}, delta_h(a0+c) = delta_h a0; no smallness of f, a0 or the cycle phases is used. Infrastructure: for any commutative group, flat cycle holonomies are base-point independent (cycProd_add_unitStep, cycProd_const), gauges preserve plaquettes and cycle holonomies, and a flat field with trivial cycle holonomies is pure gauge (pureGauge_of_flat, by successive line gauges). Missing: (i) the existence of the Hodge primitive a0 = delta_h Delta_h^dagger f_h with d_h a0 = f_h, delta_h a0 = 0 for closed zero-flux f (finite linear algebra, absent); (ii) the raw L^4 / L^2 / H^1 precompactness of the coordinates and h||a_h||_inf -> 0 (continuum; needs lem:determinant-Hodge-stability and lem:determinant-screen-flux, both open).",
     "difficulty": "hard",
-    "plan": "Needs the discrete periodic Hodge/Poisson solver for the Abelian primitive (finite linear algebra, medium: DiscreteAnalysis/LatticeTorusPlancherel.lean gives the Fourier diagonalisation), the site-gauge construction with the four cycle constants, and then raw L^4 / L^2 / H^1 precompactness of the coordinates and their reconstructions (continuum, absent). Hard."
+    "plan": "(1) Discrete Hodge theory on (Z/n)^4: define d_h, delta_h on k-forms, Delta_h; via LatticeTorusPlancherel show ker Delta_h on 2-forms = constant forms, Delta_h^dagger, and d_h delta_h Delta_h^dagger f = f for closed zero-mean f (zero mean follows from zero flux by sum_phase_eq_flux); plug into periodic_abelian_normalization (hypothesis hprim). (2) The precompactness clauses inherit the hard continuum machinery of lem:determinant-Hodge-stability (strong L^2 convergence of Fourier tails, reconstruction identification) and of lem:determinant-screen-flux. Hard overall."
   },
   "prop:native-determinant-split": {
     "env": "proposition",
@@ -839,11 +872,33 @@
       "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.piSS_entry_le",
       "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.splitLinks_lift_change",
       "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.zSix_components",
-      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.zSix_mem_ss_pow_six"
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.zSix_mem_ss_pow_six",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.native_determinant_split_of_primitive",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.native_determinant_split_of_small_logs",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.smChi_eq_exp_ellC",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.arg_smChi_eq_ellC",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.ellC_eq_arg_smChi",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.pairChart",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.pairChart_pos",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.pairChart_injOn",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.skew_snd_of_mem_pairBall",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.smChi_plaq_gaugeTr",
+      "RenewalGeometry/GaugeTheory/DeterminantFluxExact.lean:RenewalGeometry.DeterminantFlux.plaq_gaugeTr_centralElem",
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.splitLinks_rootedWord_lift_change",
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.splitLinks_plaq_lift_change",
+      "RenewalGeometry/GaugeTheory/RootedWilsonSeedExact.lean:RenewalGeometry.RootedWilson.rootedWord_central_gauge",
+      "RenewalGeometry/Analysis/MatrixDetExp.lean:RenewalGeometry.MatrixDetExp.det_exp_eq_exp_trace",
+      "RenewalGeometry/Analysis/MatrixDetExp.lean:RenewalGeometry.MatrixDetExp.hasDerivAt_det_exp_smul",
+      "RenewalGeometry/Analysis/MatrixDetExp.lean:RenewalGeometry.MatrixDetExp.detDerivAt_one",
+      "RenewalGeometry/Analysis/MatrixDetExp.lean:RenewalGeometry.MatrixDetExp.hasDerivAt_det_of_entries",
+      "RenewalGeometry/Analysis/MatrixDetExp.lean:RenewalGeometry.MatrixDetExp.exists_openPartialHomeomorph_exp",
+      "RenewalGeometry/Analysis/MatrixDetExp.lean:RenewalGeometry.MatrixDetExp.exists_injOn_exp_nhds",
+      "RenewalGeometry/Analysis/MatrixDetExp.lean:RenewalGeometry.MatrixDetExp.exists_injOn_exp_entry_ball",
+      "RenewalGeometry/Analysis/MatrixDetExp.lean:RenewalGeometry.MatrixDetExp.det_exp_eq_complex_exp_trace"
     ],
-    "note": "Partial (all of the proposition's own group algebra is proved; its analytic inputs come from open records). native_determinant_split_core: on any lattice with G_SM = S(U(3) x U(2)) links U, real site lifts t and potential a, assuming (i) the Abelian normalization e^{it(x)} chi(U_mu(x)) e^{-it(x+mu)} = e^{iha_mu(x)} and h(d_h a) = h^2 f (the conclusions of prop:periodic-determinant-normalization), (ii) logarithms L of the full plaquettes of U' in an injectivity chart Omega of the exponential with l_c(L) = h^2 f and Pi_ss L in Omega (the admissibility and the identity f_h = l_c(F_h) of lem:determinant-screen-flux): V = e^{-haZ_c} U^{e^{tZ_c}} has chi(V) = 1, det V_3 = det V_2 = 1 (V in G_ss exactly); P_{U'} = e^{h^2 f Z_c} P_V exactly; every chart logarithm of P_V equals Pi_ss L (eq:determinant-semisimple-curvature after division by h^2); Ad V = Ad U' (also on the Lie algebra, ad_matrix_splitLinks); changing t by 2 pi k(x) changes V by the central G_ss site gauge z6^{k(x)}, z6 = e^{2 pi Z_c} = (e^{-2 pi i/3} I3, -I2), chi(z6) = 1, z6^6 = 1. Also: e^{tZ_c} central one-parameter subgroup with chi(e^{tZ_c}) = e^{it} and exp(sZ_c) = e^{sZ_c} (matrix exponential), l_c(Z_c) = 1, Pi_ss linear idempotent, entrywise ||Pi_ss X|| <= 2||X|| (inherited semisimple screen up to a fixed constant). Missing: the inputs (i)-(ii) themselves (prop:periodic-determinant-normalization, lem:determinant-screen-flux, both open), and certificate invariance of the central lift change (prop:rooted-gauge-certificate, open).",
-    "difficulty": "medium",
-    "plan": "Close by instantiation once the parents are proved: (1) prop:periodic-determinant-normalization supplies t, a with hypothesis hN and d_h a = f (hcurl); (2) lem:determinant-screen-flux supplies, for small h, admissible logarithms of the full plaquettes with f_h = l_c(F_h) (this step needs chi(e^X) = e^{i l_c(X)}, i.e. det exp = exp tr for 2x2 matrices, absent from Mathlib (TODO in Analysis/Normed/Algebra/MatrixExponential.lean); for anti-Hermitian X it can be proved by unitary diagonalisation) and an injectivity chart for the matrix exponential (local inverse from HasStrictFDerivAt of exp at 0); (3) prop:rooted-gauge-certificate gives certificate invariance under the central G_ss site gauge z6^{k(x)} produced by splitLinks_lift_change. The G_SM covariance of the matter record and action is FiniteStandardModelActionGaugeCovarianceExact.lean:finiteStandardModelAction_gaugeInvariant."
+    "note": "Partial; corollary policy (its parents prop:periodic-determinant-normalization and lem:determinant-screen-flux remain open). New infrastructure: det(exp X) = exp(tr X) for square matrices over R or C (MatrixDetExp.det_exp_eq_exp_trace, Liouville ODE argument; MatrixDetExp.det_exp_eq_complex_exp_trace), and the local injectivity chart of the matrix exponential (exists_openPartialHomeomorph_exp, exists_injOn_exp_entry_ball). With them: chi(e^X) = e^{i l_c(X)} (smChi_eq_exp_ellC); a fixed injectivity radius pairChart of the pair exponential (pairChart_injOn); logarithms of G_SM elements in the chart are anti-Hermitian, so l_c is real and, for entries <= c with 2c < min(pairChart, pi), l_c(L) = Arg chi(P) (ellC_eq_arg_smChi: f_h = l_c(F_h)). native_determinant_split_of_small_logs discharges the abstract chart Omega and the identity l_c(L) = h^2 f of native_determinant_split_core: f is now the principal-argument curvature h^-2 Arg chi(P_U) of eq:determinant-real-curvature, the logs only need to be small. native_determinant_split_of_primitive (periodic grid (Z/n)^iota): from a real primitive a0 of the determinant curvature (h*h(d_h a0) = Arg chi(P_U)) and small logarithms of the full plaquettes, it constructs (periodic_abelian_normalization) constants c_mu in (-pi/L, pi/L] and real site lifts t with e^{it} chi(U) e^{-it(x+mu)} = e^{ih(a0+c)}, delta(a0+c) = delta a0, and then all conclusions: V in G_ss exactly, P_{U'} = e^{h^2 f Z_c} P_V, chart log of P_V = Pi_ss L (eq:determinant-semisimple-curvature), Ad V = Ad U', central lift changes; P_{U'} = P_U (plaq_gaugeTr_centralElem). Certificate clause proved directly without prop:rooted-gauge-certificate: the lift change t -> t + 2 pi k acts by the central G_ss gauge z6^k, which leaves every rooted word W^T of V and every plaquette of V unchanged (RootedWilson.splitLinks_rootedWord_lift_change, splitLinks_plaq_lift_change), hence the rooted certificate. Non-vacuity: example with trivial links in DeterminantFluxExact.lean. Missing inputs (open parents): the existence of the Hodge primitive a0 = delta_h Delta_h^dagger f_h with d_h a0 = f_h (finite linear algebra, part of lem:determinant-Hodge-stability / prop:periodic-determinant-normalization), and the eventual smallness of the scaled full curvature from the Wilson screen (lem:determinant-screen-flux via thm:native-Wilson-compactness).",
+    "difficulty": "hard",
+    "plan": "Close by instantiating native_determinant_split_of_primitive once (1) the discrete Hodge primitive exists: for a closed (cubeSum_eq_zero) zero-flux real 2-form f on (Z/n)^4, a0 = delta_h Delta_h^dagger f satisfies d_h a0 = f, delta_h a0 = 0 (needs: ker Delta_h on 2-forms = constants via DiscreteAnalysis/LatticeTorusPlancherel.lean Fourier diagonalisation, closed + zero-mean => no harmonic part); (2) lem:determinant-screen-flux supplies, for h small, logarithms of the full plaquettes with entries <= c, 2c < min(pairChart, pi) (eventual uniform smallness of h^2 F_h from thm:native-Wilson-compactness); and (3) prop:periodic-determinant-normalization / lem:determinant-screen-flux are closed in the ledger (their remaining clauses are the continuum precompactness statements). No further group algebra is needed; the certificate clause is already proved via the central-gauge invariance of rooted words."
   },
   "lem:flat-semisimple-normalization": {
     "env": "lemma",
