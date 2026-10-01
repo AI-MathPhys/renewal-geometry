@@ -73,19 +73,31 @@
   "def:typed-multiplicity": {
     "env": "definition",
     "title": "Typed multiplicity algebra",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.sliceLinearMap",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.coefficientSpace",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.mem_coefficientSpace_iff",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.coefficientSpace_eq_span_blockSlice",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.IsTypedMultiplicity",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.isTypedMultiplicity_iff_blockSlice",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.typedMultiplicityAlgebra",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.mem_typedMultiplicityAlgebra",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.multiplicityAction",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.multiplicityAction_mul",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.multiplicityAction_one",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.multiplicityAction_conjTranspose",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.multiplicityAction_injective",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.coefficientGenerators",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.coefficientActionAlgebra",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.vertexProjection_mem_coefficientActionAlgebra",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.blockEmbed_mem_coefficientActionAlgebra",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.blockEmbed_conjTranspose_mem_coefficientActionAlgebra",
+      "RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean:RenewalGeometry.RepresentedJointPacket.coefficientActionAlgebra_le_iff",
       "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.typedMultiplicityAlgebra",
-      "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.mem_typedMultiplicityAlgebra",
-      "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.typedMultiplicityAction",
-      "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.typedMultiplicityAction_mul",
-      "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.typedMultiplicityAction_star",
-      "RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:RenewalGeometry.GraphLoadedEdgeCommutant.TypedMultiplicityCommutant",
-      "RenewalGeometry/Commutant/GraphLoadedEdgeCommutantAssembly.lean:RenewalGeometry.GraphLoadedEdgeCommutant.MultiplicityBlocks"
+      "RenewalGeometry/Commutant/TypedMultiplicityAlgebra.lean:RenewalGeometry.GraphLoadedEdgeCommutant.typedMultiplicityAction"
     ],
-    "note": "Partial: the single-slice (rank-one incidence Y_e = D_e ⊗ F_e) typed multiplicity algebra {(R_λ) : R_μ F_e = F_e R_λ, R_λ F_e^* = F_e^* R_μ} is encoded as the StarSubalgebra typedMultiplicityAlgebra of Π_v Matrix (M v) (M v) C (mem_typedMultiplicityAlgebra; closure under +, *, 1, scalars, star) together with its faithful block-diagonal representation ι = typedMultiplicityAction (multiplicative, unital, star-preserving). Missing: the NEW definition quantifies the intertwining equations over the whole intrinsic coefficient space 𝔅_e of def:incidence-coefficients (every slice B ∈ 𝔅_e, not one chosen F_e), and the multiplicity coefficient action algebra O_Y = C*(Z_λ, B, B^* : B ∈ 𝔅_e) (eq:coefficient-action-algebra) is not defined at all.",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/Commutant/IntrinsicCoefficientQuiver.lean: define the slice space 𝔅_e as the Submodule.span of the coefficient family F_{e,a} of eq:general-incidence-expansion (equivalently the image of Y_e under the slice maps (φ_D ⊗ id) in Kronecker coordinates, Matrix (n × g') (m × g) ↦ Matrix g' g); define M_type as the StarSubalgebra cut out by R_μ B = B R_λ ∧ R_λ Bᴴ = Bᴴ R_μ for all B ∈ 𝔅_e (the closure proofs of TypedMultiplicityAlgebra.lean go through verbatim with a ∀ B ∈ 𝔅_e quantifier); keep ι = typedMultiplicityAction; define O_Y := starAdjoin ({Z_λ} ∪ ⋃_e 𝔅_e) with JointTypedActionAlgebra.starAdjoin and prove it is the least star-closed unital subalgebra containing the vertex projections and the slices."
+    "note": "Encoded for a represented joint packet P (RepresentedJointPacket, def:joint-packet) with incidences Y_e : K_{s(e)} x M_{s(e)} -> K_{t(e)} x M_{t(e)}, K_lambda = C^4 x V_lambda. (i) def:incidence-coefficients: the intrinsic coefficient space B_e = {(phi (x) id)(Y_e) : phi in B(K_s, K_t)^*} is coefficientSpace P e, the range of the slice map phi |-> (phi (x) id)(Y_e) (sliceLinearMap, linear in phi), hence a linear operator space and not a single residue; mem_coefficientSpace_iff is literally the set of eq:intrinsic-incidence-coefficients and coefficientSpace_eq_span_blockSlice is eq:general-incidence-expansion (B_e = span of the HS-basis coefficient blocks F_{e,a}). (ii) eq:typed-multiplicity: M_type = typedMultiplicityAlgebra P, the StarSubalgebra of Pi_lambda Matrix (M lambda) (M lambda) C cut out by R_mu B = B R_lambda and R_lambda B^H = B^H R_mu for EVERY B in B_e and every edge e (IsTypedMultiplicity; closure under +, *, 1, scalars, star proved); isTypedMultiplicity_iff_blockSlice reduces the quantifier over B_e to the finitely many coefficient-block equations. As a star-closed unital subalgebra of a finite-dimensional matrix algebra it is a unital C*-algebra on the total multiplicity carrier. (iii) iota((R_lambda)) = (+)_lambda I_{K_lambda} (x) R_lambda on the full carrier Sigma lambda, (Fin 4 x V lambda) x M lambda is multiplicityAction (multiplicative, unital, star-preserving, faithful when every V_lambda is nonempty). (iv) eq:coefficient-action-algebra: O_Y = C*(Z_lambda, B, B^* : B in B_e, e in E) on the total multiplicity carrier Sigma lambda, M lambda is coefficientActionAlgebra P := StarAlgebra.adjoin of the vertex projections Z_lambda (vertexProjection) and the corner-embedded slices blockEmbed B; it contains the generators and their adjoints and coefficientActionAlgebra_le_iff states it is the least star-closed unital subalgebra containing them (in finite dimension the algebraic star hull is the C*-hull). The earlier single-slice encoding (TypedMultiplicityAlgebra.lean) is kept as the rank-one special case."
   },
   "thm:main-duality": {
     "env": "theorem",
@@ -412,26 +424,26 @@
   "thm:gauge-group": {
     "env": "theorem",
     "title": "Gauge-group reconstruction and the phase-sensitive criterion",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/StandardModel/SMGroup.lean:RenewalGeometry.sm_group",
-      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.smGaugeHom_surjective",
-      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.mem_smGaugeHom_ker_iff_centralZ6",
-      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.smGaugeQuotientEquiv",
-      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.SMGaugeGroup",
-      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.determinantSeedStabilizer",
+      "RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean:RenewalGeometry.OperationalDeterminantSource.gauge_group_phase_sensitive",
+      "RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean:RenewalGeometry.OperationalDeterminantSource.determinant_phase_rigidity",
+      "RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean:RenewalGeometry.OperationalDeterminantSource.packetAction_toMatrix_sub_hsNormSq",
+      "RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean:RenewalGeometry.OperationalDeterminantSource.hDet_pos_iff_packetStabilizer_eq_ker",
+      "RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean:RenewalGeometry.OperationalDeterminantSource.extendedStabilizer",
+      "RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean:RenewalGeometry.OperationalDeterminantSource.mem_extendedStabilizer_iff",
+      "RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean:RenewalGeometry.OperationalDeterminantSource.extendedStabilizer_eq_ker_iff",
+      "RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean:RenewalGeometry.OperationalDeterminantSource.MarkedSectorPacket.toMatrix",
+      "RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean:RenewalGeometry.OperationalDeterminantSource.hsNormSq",
       "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.determinantSeedStabilizer_eq_SMGaugeGroup",
       "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.operational_determinant_source",
-      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.MarkedSectorPacket",
-      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.packetAction",
-      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.hDet",
       "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.packetStabilizer_eq_ker_of_hDet_pos",
       "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.packetStabilizer_eq_top_of_hDet_zero",
-      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.SMGaugeGroup_ne_top"
+      "RenewalGeometry/StandardModel/OperationalDeterminantSource.lean:RenewalGeometry.OperationalDeterminantSource.SMGaugeGroup_ne_top",
+      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.smGaugeQuotientEquiv",
+      "RenewalGeometry/StandardModel/SMGroup.lean:RenewalGeometry.sm_group"
     ],
-    "note": "Partial: (i) eq:SM-gauge-group — the unitary stabilizer of a nonzero phase-sensitive seed τ is S(U(3)×U(2)) = ker(det A det B) = SMGaugeGroup (determinantSeedStabilizer_eq_SMGaugeGroup) and SMGaugeGroup ≅ (SU(3)×SU(2)×U(1))/Z_6 (sm_group, smGaugeHom_surjective, mem_smGaugeHom_ker_iff_centralZ6, smGaugeQuotientEquiv); (ii) eq:operational-determinant-group (the former prop:operational-determinant-source, now merged here): for the marked packet J = (J_00, J_0D; J_0D^*, J_DD) acted on by 1 and χ^{-1} (MarkedSectorPacket, packetAction) with h_det = ‖J_0D‖²_HS (hDet): h_det > 0 ⟹ Stab(J) = ker χ, and h_det = 0 ⟹ Stab(J) = U(3)×U(2) ≠ ker χ even when J_DD ≠ 0 (operational_determinant_source, packetStabilizer_eq_ker_of_hDet_pos, packetStabilizer_eq_top_of_hDet_zero, SMGaugeGroup_ne_top). Missing: the phase-rigidity identity eq:determinant-phase-rigidity ‖R(g) J R(g)^* − J‖²_HS = 8 h_det sin²(φ/2) for χ(g) = e^{iφ}, and the closing remark that a larger marked packet has this stabilizer only when its other components are ker χ-invariant (intersection of stabilizers).",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/StandardModel/DeterminantPhaseRigidityExact.lean building on OperationalDeterminantSource.lean: packetAction χ g P differs from P only in the cross block, scaled by χ(g)⁻¹, so the HS distance squared of the full Hermitian packet (cross block and its adjoint) is 2 |χ(g)⁻¹ − 1|² · hDet P; with χ(g) = exp(iφ) (Circle/unitary ℂ), |e^{-iφ} − 1|² = 2 − 2cos φ = 4 sin²(φ/2) (Real.cos_sq_half / cos double angle), giving 8 hDet P sin²(φ/2). Add the packet-extension clause as: the stabilizer of a packet carrying extra components is the inf of the componentwise stabilizers, and equals ker χ iff each extra component is ker χ-invariant."
+    "note": "Proved in full for chi(A,B) = det A det B on U(3) x U(2) (gauge_group_phase_sensitive), with each clause also proved for an arbitrary group with a unitary character chi. (1) eq:SM-gauge-group: the stabilizer of a nonzero phase-sensitive seed tau is S(U(3)xU(2)) = ker chi = SMGaugeGroup (determinantSeedStabilizer_eq_SMGaugeGroup) and SMGaugeGroup is isomorphic to (SU(3)xSU(2)xU(1))/Z_6 (smGaugeQuotientEquiv, sm_group). (2) eq:operational-determinant-group in BOTH directions: h_det > 0 <-> Stab(J) = ker chi (hDet_pos_iff_packetStabilizer_eq_ker, the reverse direction using ker chi != U(3)xU(2), SMGaugeGroup_ne_top); if h_det = 0 the whole group fixes the marked packet, whatever the diagonal block J_DD (packetStabilizer_eq_top_of_hDet_zero, operational_determinant_source). (3) eq:determinant-phase-rigidity: for the full Hermitian packet J = (J_00, J_0D; J_0D^*, J_DD) (MarkedSectorPacket.toMatrix) acted on by 1 on V_0 and chi^{-1} on S_nat (packetAction), ||R(g) J R(g)^* - J||^2_HS = 2 |chi(g)^{-1} - 1|^2 h_det (packetAction_toMatrix_sub_hsNormSq) = 8 h_det sin^2(phi/2) when chi(g) = e^{i phi} (determinant_phase_rigidity). (4) Packet extension: for a larger marked packet carrying further retained components x_i with any G-action, the stabilizer is the intersection Stab(J) meet inf_i Stab(x_i) (extendedStabilizer, mem_extendedStabilizer_iff), and when h_det > 0 it equals ker chi iff every x_i is ker chi-invariant (extendedStabilizer_eq_ker_iff). Scoping disclosed: the HS norm on the packet is the entrywise sum of |.|^2 (hsNormSq), matching hDet; the 'positive packet' hypothesis is not needed for any clause and is omitted."
   },
   "thm:hypercharge": {
     "env": "proposition",
@@ -528,15 +540,25 @@
   "thm:linear-anomaly-rigidity": {
     "env": "proposition",
     "title": "Linear anomaly rigidity of the charged multiplicities",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/StandardModel/AnomalyForcedWeights.lean:RenewalGeometry.anomaly_forced_weights",
-      "RenewalGeometry/StandardModel/TensorExteriorAnomalyPacket.lean:RenewalGeometry.tensorExteriorAnomalyPacket_vanishes_iff",
-      "RenewalGeometry/StandardModel/GeneratedMatterAnomalyCancellationExact.lean:RenewalGeometry.GeneratedMatterAnomalyCancellation.sm_generated_packet_anomaly_cancellation"
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.linear_anomaly_rigidity",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.ChargedMultiplicities",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.r3",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.r3Y",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.r2Y",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.rgY",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.deltaLin",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.deltaLin_eq_zero_iff",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.multiplicityCubicAnomaly",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.multiplicityCubicAnomaly_common",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.multiplicityCubicAnomaly_eq_zero_of_common",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.weakDoubletCount_eq",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.deltaLin_ge_one_of_ne_zero",
+      "RenewalGeometry/StandardModel/LinearAnomalyRigidityExact.lean:RenewalGeometry.LinearAnomalyRigidity.charged_carrier_eq_three_of_certified",
+      "RenewalGeometry/StandardModel/TensorExteriorAnomalyPacket.lean:RenewalGeometry.cubicCentralAnomaly_trace"
     ],
-    "note": "Partial: the one-generation anomaly coefficients and their vanishing (anomaly_forced_weights, tensorExteriorAnomalyPacket_vanishes_iff) and the generated-packet cancellation (sm_generated_packet_anomaly_cancellation) supply the 'cubic anomaly of g equal copies is g times the vanishing one-generation cubic anomaly' step. Missing: the multiplicity-level statement itself: the four linear rows r_3, r_3Y, r_2Y, r_gY of eq:linear-anomaly-rows in nonnegative integers n_Q,...,n_e, Delta_lin = 0 iff all five equal g > 0 (given n_Q > 0), the doublet count 4g, the integer gap Delta_lin != 0 => Delta_lin >= 1, and the tail (Delta_inv^F = 0 and one multiplicity = 3 => 3Q + 3u + 3d + 3L + 3e).",
-    "difficulty": "easy",
-    "plan": "New file StandardModel/LinearAnomalyRigidityExact.lean: define the rows over Z, Delta_lin as a sum of squares, prove the iff by omega (r_3 = r_3Y = 0 => n_u = n_d = n_Q, then n_L, n_e), the cubic anomaly as g * (one-generation cubic anomaly) using smCentralWeights (-2) 3 from AnomalyForcedWeights.lean, doublet count 3g + g, and Delta_lin >= 1 from integrality of a nonzero sum of squares. Render the tail as: all n_f = 3 gives the charged multiplicity vector (3,3,3,3,3), with the exotic-sector exclusion disclosed as the inventory hypothesis Delta_inv^F = 0 of thm:canonical-chiral-projectors."
+    "note": "Proved (linear_anomaly_rigidity). The four rows r_3, r_3Y, r_2Y, r_gY of eq:linear-anomaly-rows and Delta_lin of eq:linear-anomaly-residual are defined over Z on the charged multiplicity vector (n_Q, n_u, n_d, n_L, n_e). For n_Q > 0: Delta_lin = 0 <-> all five multiplicities equal a common g > 0 (deltaLin_eq_zero_iff, eq:linear-anomaly-common-count; nonnegativity of the other multiplicities is not needed and is omitted); on that branch the cubic U(1)^3 anomaly of the packet (multiplicityCubicAnomaly: sum_f n_f dim(f) y_f^3 with the anomaly-forced weights (a,b) = (-2,3)) equals g times the one-generation cubic anomaly cubicCentralAnomaly (-2) 3 of thm:hypercharge and hence vanishes (multiplicityCubicAnomaly_common, _eq_zero_of_common); the weak-doublet count 3 n_Q + n_L equals 4g and is even (weakDoubletCount_eq); Delta_lin != 0 -> Delta_lin >= 1 (deltaLin_ge_one_of_ne_zero, eq:linear-anomaly-integer-gap); and on the Delta_lin = 0 branch one multiplicity certified as 3 forces the charged multiplicity vector (3,3,3,3,3), i.e. the charged carrier 3Q+3u+3d+3L+3e (charged_carrier_eq_three_of_certified). Rendering disclosed: the tail's 'no future-visible charged mirror or exotic sector' is the inventory hypothesis Delta_inv^F = 0 of thm:canonical-chiral-projectors (the future-visible nontrivial gauge carrier consists of the five target chiral types), under which the charged carrier is exactly the multiplicity vector; it is not re-encoded here. Gauge-trivial singlets are not part of the vector."
   },
   "thm:endpoint-ancestry-compiler": {
     "env": "proposition",
@@ -594,33 +616,42 @@
   "def:finite-dirac-relation-space": {
     "env": "definition",
     "title": "Finite-Dirac relation space",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.relationSpace",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.mem_relationSpace_iff",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.relationSpace_star_mem",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.instFiniteDimensional_relationSpace",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.relationProjection",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.canonicalFiniteDiracL2",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.canonicalFiniteDirac",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.relationDefect",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.canonicalFiniteDiracL2_mem",
       "RenewalGeometry/Spectralization/CanonicalFiniteDiracExact.lean:RenewalGeometry.CanonicalFiniteDirac.finiteDirac",
       "RenewalGeometry/Spectralization/CanonicalFiniteDiracExact.lean:RenewalGeometry.CanonicalFiniteDirac.finiteDirac_odd",
       "RenewalGeometry/Spectralization/CanonicalFiniteDiracExact.lean:RenewalGeometry.CanonicalFiniteDirac.finiteDirac_conjTranspose"
     ],
-    "note": "Partial: only the input D̃_F = P_-AP_+ + P_+AP_- (eq:finite-dirac) is encoded (finiteDirac, odd and self-adjoint). Missing: the relation space 𝔇_F (star-closed subspace of grading-odd operators whose typed blocks are supported on the represented fermionic Yukawa incidence relations, with the Majorana relation when the neutral/charge-conjugate sectors are represented), the HS orthogonal projection Π_F^D onto it, and D_F^can = Π D̃_F, Δ_F^rel = ‖(I − Π) D̃_F‖²_HS (eq:finite-dirac-relation-defect).",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean: given a typed resolution of the identity P : τ → Matrix n n ℂ (as in typed_contractions) and a declared symmetric relation set Rel : Finset (τ × τ), define 𝔇_F := {X : Γ X Γ = −X ∧ ∀ (t,t') ∉ Rel, P t * X * P t' = 0} as a Submodule of EuclideanSpace ℂ (n × n) via matrixL2, prove star-closure (Rel symmetric) and finite dimensionality; Π := Submodule.starProjection 𝔇_F (Mathlib); D_F^can := Π (matrixL2 D̃), Δ := ‖(1 − Π)(matrixL2 D̃)‖². Then prop:finite-dirac follows from Mathlib's projection lemmas (see that record's plan)."
+    "note": "Encoded. On the carrier C^n with grading Gamma and typed resolution of the identity (P_t)_t, the represented relations are a declared set Rel of typed pairs (the fermionic Yukawa incidence relations determined by the matter packet, plus the declared Majorana pair when the neutral/charge-conjugate sectors are represented; Rel is packet data, required only to be symmetric). D_F := relationSpace Gamma P Rel is the Submodule of the Hilbert-Schmidt space EuclideanSpace C (n x n) (realized via matrixL2 / l2Matrix) of grading-odd operators Gamma X Gamma = -X whose typed blocks P_t X P_t' vanish for (t,t') not in Rel; it is star-closed for self-adjoint Gamma, P_t and symmetric Rel (relationSpace_star_mem) and finite-dimensional (instFiniteDimensional_relationSpace). Pi_F^D := relationProjection = Submodule.starProjection D_F (the HS orthogonal projection), D_F^can := canonicalFiniteDirac = l2Matrix (Pi (matrixL2 D~_F)) and Delta_F^rel := relationDefect = ||matrixL2 D~_F - Pi (matrixL2 D~_F)||^2 (eq:finite-dirac-relation-defect), with D~_F = finiteDirac Gamma A of eq:finite-dirac."
   },
   "prop:finite-dirac": {
     "env": "proposition",
     "title": "Fixed-generator finite-Dirac closure",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.fixed_generator_finite_dirac_closure",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.finiteDirac_eq_canonical_iff",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.relationDefect_eq_zero_iff_mem",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.infDist_finiteDirac_relationSpace",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.nonzero_admitted_of_relationDefect_zero",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.canonicalFiniteDirac_typed_blocks",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.relationSpace",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.canonicalFiniteDirac",
+      "RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean:RenewalGeometry.CanonicalFiniteDirac.relationDefect",
       "RenewalGeometry/Spectralization/CanonicalFiniteDiracExact.lean:RenewalGeometry.CanonicalFiniteDirac.canonical_finite_dirac",
       "RenewalGeometry/Spectralization/CanonicalFiniteDiracExact.lean:RenewalGeometry.CanonicalFiniteDirac.finiteDirac",
-      "RenewalGeometry/Spectralization/CanonicalFiniteDiracExact.lean:RenewalGeometry.CanonicalFiniteDirac.finiteDirac_unique_of_zero_innovation",
-      "RenewalGeometry/Spectralization/CanonicalFiniteDiracExact.lean:RenewalGeometry.CanonicalFiniteDirac.oddPart_unique",
-      "RenewalGeometry/Spectralization/CanonicalFiniteDiracExact.lean:RenewalGeometry.CanonicalFiniteDirac.typed_contractions",
-      "RenewalGeometry/Spectralization/CanonicalFiniteDiracExact.lean:RenewalGeometry.CanonicalFiniteDirac.finiteDirac_odd",
-      "RenewalGeometry/Spectralization/SaturatedFiniteDiracGenerator.lean:RenewalGeometry.zeroOddProvenance_fixesFiniteDiracProjection",
-      "RenewalGeometry/Spectralization/SaturatedFiniteDiracGenerator.lean:RenewalGeometry.stabilizedIsometricCarrier_reduces"
+      "RenewalGeometry/Spectralization/CanonicalFiniteDiracExact.lean:RenewalGeometry.CanonicalFiniteDirac.typed_contractions"
     ],
-    "note": "Partial: the fixed-generator odd component D̃_F = P_- A P_+ + P_+ A P_- = (A − JAJ)/2 (eq:finite-dirac) is finiteDirac Γ A with self-adjointness, grading-oddness, the (A − ΓAΓ)/2 identity and uniqueness of the odd summand of any even/odd decomposition proved (canonical_finite_dirac, finiteDirac_eq_oddPart, oddPart_unique, finiteDirac_odd), plus typed contractions onto a typed resolution of the identity (typed_contractions) and the old source-minimality clause for a range projector (finiteDirac_unique_of_zero_innovation). Missing (the NEW statement is entirely about the relation space): the finite-Dirac relation space 𝔇_F, its Hilbert–Schmidt projection Π_F^D, D_F^can = Π D̃_F and Δ_F^rel = ‖(I − Π) D̃_F‖² (def:finite-dirac-relation-space is not encoded), hence eq:finite-dirac-exact-relation (D̃_F = D_F^can ⟺ Δ_F^rel = 0), the distance formula eq:finite-dirac-distance dist_HS(D̃_F, 𝔇_F) = √Δ_F^rel, the 'nonzero admitted finite-Dirac operator' clause, and the (prose) generation-frame clauses referring to thm:common-generation-factor.",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/Spectralization/FiniteDiracRelationSpaceExact.lean: encode 𝔇_F as a Submodule ℂ (EuclideanSpace ℂ (n × n)) via FiniteCommutantPoincareGap.matrixL2 (star-closed, grading-odd, block-supported on a declared relation set of typed pairs), Π := Submodule.starProjection / orthogonalProjection onto it; then D̃ ∈ 𝔇 ⟺ D̃ = Π D̃ ⟺ ‖D̃ − Π D̃‖² = 0 (Submodule.starProjection_eq_self_iff, norm_eq_zero) and Mathlib's Submodule.norm_sub_orthogonalProjection / orthogonalProjection_minimal give Metric.infDist (D̃) 𝔇 = ‖(I − Π) D̃‖ = √Δ. Build on CanonicalFiniteDiracExact.lean for D̃_F."
+    "note": "Proved (fixed_generator_finite_dirac_closure) for the relation space of def:finite-dirac-relation-space: (a) eq:finite-dirac-exact-relation D~_F = D_F^can <-> Delta_F^rel = 0 (finiteDirac_eq_canonical_iff), equivalently D~_F in D_F (relationDefect_eq_zero_iff_mem); (b) eq:finite-dirac-distance dist_HS(D~_F, D_F) = sqrt(Delta_F^rel) with Metric.infDist in the Hilbert-Schmidt space (infDist_finiteDirac_relationSpace, from Submodule.starProjection_minimal); (c) if Delta_F^rel = 0 and ||D_F^can||_HS > 0 then the complete odd component D~_F equals D_F^can, lies in the relation space and is nonzero, i.e. is a nonzero admitted finite-Dirac operator (nonzero_admitted_of_relationDefect_zero); (d) the typed coefficient blocks P_t D_F^can P_t' recover D_F^can from the typed resolution, vanish off the declared relations, and D_F^can is grading-odd (canonicalFiniteDirac_typed_blocks). No odd-provenance completeness hypothesis appears, as the statement says. Disclosed gap: the two prose sentences referring to thm:common-generation-factor ('in any generation factorization the typed blocks are ordinary generation matrices; under the common-ancestry conditions they are expressed in the common frame') are cross-references to that proposition's coordinate identification and are not restated here beyond exhibiting the typed blocks as matrices; the earlier partial file (self-adjointness, oddness, uniqueness of the odd summand, typed contractions of D~_F) is reused."
   },
   "thm:structural-SM": {
     "env": "corollary",
@@ -711,18 +742,24 @@
   "thm:finite-anchor": {
     "env": "proposition",
     "title": "Finite-anchor stability and generator-scale control",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Commutant/FiniteAnchorGeneratorScaleExact.lean:RenewalGeometry.finite_anchor_stability",
+      "RenewalGeometry/Commutant/FiniteAnchorGeneratorScaleExact.lean:RenewalGeometry.finiteAnchorHowe_generatorScale",
+      "RenewalGeometry/Commutant/FiniteAnchorGeneratorScaleExact.lean:RenewalGeometry.jointCommutatorL2_generatorScale_floor",
+      "RenewalGeometry/Commutant/FiniteAnchorGeneratorScaleExact.lean:RenewalGeometry.jointCommutatorL2_generatorScale_sq_floor",
+      "RenewalGeometry/Commutant/FiniteAnchorGeneratorScaleExact.lean:RenewalGeometry.AnchorCondition",
+      "RenewalGeometry/Commutant/FiniteAnchorGeneratorScaleExact.lean:RenewalGeometry.AnchorConclusion",
+      "RenewalGeometry/Commutant/FiniteAnchorGeneratorScaleExact.lean:RenewalGeometry.anchorConclusion_of_anchorCondition",
+      "RenewalGeometry/Commutant/FiniteAnchorGeneratorScaleExact.lean:RenewalGeometry.finiteAnchorHowe_tail",
+      "RenewalGeometry/Commutant/FiniteAnchorGeneratorScaleExact.lean:RenewalGeometry.finiteAnchorHowe_eventually",
       "RenewalGeometry/Commutant/FiniteAnchorOperatorNormExact.lean:RenewalGeometry.finiteAnchorHowe_operatorNormData",
-      "RenewalGeometry/Commutant/FiniteAnchorOperatorNormExact.lean:RenewalGeometry.jointCommutatorL2_sq_perturbation",
-      "RenewalGeometry/Commutant/FiniteAnchorOperatorNormExact.lean:RenewalGeometry.matrixL2_commutator_le",
+      "RenewalGeometry/Commutant/FiniteAnchorOperatorNormExact.lean:RenewalGeometry.jointCommutatorL2_sub_norm_le",
       "RenewalGeometry/Commutant/FiniteAnchorOperatorNormExact.lean:RenewalGeometry.opNormBudget",
       "RenewalGeometry/Commutant/FiniteAnchorOperatorNormExact.lean:RenewalGeometry.opNormDisplacement",
       "RenewalGeometry/Commutant/FiniteAnchorHoweActualExact.lean:RenewalGeometry.finiteAnchorHowe_actualJointCommutator"
     ],
-    "note": "Partial: the operator-norm anchor clause is proved on a common finite screened carrier: with M commuting with both tuples, G_Howe(c_{X0}|M) ⪰ γ0 on M^⊥ and 4(C_X + C_{X0}) ε_{X,X0} < γ0 (eq:anchor-tail; opNormBudget, opNormDisplacement in the ℓ² operator norm), C*(c_X)' = M and λ⁺_min(L_X) ≥ γ0 − 4(C_X + C_{X0}) ε (eq:anchor-lock; finiteAnchorHowe_operatorNormData via jointCommutatorL2_sq_perturbation and finiteAnchorHowe_actualJointCommutator). Missing (new): the alternative generator-scale condition 2 ε_{X,X0} < √γ0 ⟹ C*(c_X)' = M and λ⁺_min(L_X) ≥ (√γ0 − 2 ε_{X,X0})² (eq:generator-scale-gap, no bound on the generator norm), and the 'throughout the tail' restatement (∀ᶠ over later cutoffs).",
-    "difficulty": "easy",
-    "plan": "Extend at the end of RenewalGeometry/Commutant/FiniteAnchorOperatorNormExact.lean or a new file FiniteAnchorGeneratorScaleExact.lean: for x ∈ M^⊥, ‖∂_c x‖ ≥ ‖∂_{c0} x‖ − ‖(∂_c − ∂_{c0}) x‖ ≥ (√γ0 − 2ε)‖x‖ using jointCommutatorL2_sub_norm_le and Real.sqrt of the anchor floor; square (√γ0 − 2ε > 0) to get the quadratic floor, then reuse the kernel identification and RelativeHoweSpectralMargin assembly of finiteAnchorHowe_actualJointCommutator (FiniteAnchorHoweActualExact.lean); state the tail clause with Filter.Eventually atTop over a cutoff family."
+    "note": "Proved (finite_anchor_stability). On a common finite screened carrier C^n with a fixed algebra M commuting with the anchor tuple c_{X0} and the later tuple c_X, C_X and eps_{X,X0} in the l2 operator norm (opNormBudget, opNormDisplacement), and the anchor floor G_Howe(c_{X0}|M) >= gamma0 on M^perp: (1) eq:anchor-tail 4(C_X + C_X0) eps < gamma0 => eq:anchor-lock C*(c_X)' = M (HS-kernel and matrix-commutant forms) and lambda+_min(L_X) >= gamma0 - 4(C_X+C_X0) eps (finiteAnchorHowe_operatorNormData, from the earlier partial); (2) NEW eq:generator-scale-gap: 2 eps_{X,X0} < sqrt(gamma0) => C*(c_X)' = M and lambda+_min(L_X) >= (sqrt(gamma0) - 2 eps)^2, with no bound on the generator norm (finiteAnchorHowe_generatorScale, via the triangle inequality on M^perp: ||d_c x|| >= ||d_c0 x|| - ||(d_c - d_c0) x|| >= (sqrt gamma0 - 2 eps)||x||, jointCommutatorL2_generatorScale_floor, then the Howe certificate and RelativeHoweSpectralMargin); (3) NEW tail clause: for a cutoff family c_X anchored at X0, if either condition (AnchorCondition) holds for every later X >= X0 the conclusion (AnchorConclusion: exact commutant, positive quadratic floor on M^perp, matrix-commutant identification, attained least positive eigenvalue) holds throughout the tail (finiteAnchorHowe_tail), and likewise eventually along atTop (finiteAnchorHowe_eventually). The spectral-gap conclusion is rendered as the quadratic floor on M^perp = (ker L_X)^perp together with RelativeHoweSpectralMargin, as in the earlier partial."
   },
   "def:transported-mosco": {
     "env": "definition",
@@ -742,13 +779,19 @@
   "lem:protected-basis-transport": {
     "env": "lemma",
     "title": "Finite protected basis transport",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Commutant/ContinuumHoweProtectedCommutantExact.lean:RenewalGeometry.VaryingHilbert.System.jointCommutator_protectedCommutant_tendsto_of_denseSources_of_graphScreens"
+      "RenewalGeometry/OperatorLimits/ProtectedBasisTransport.lean:RenewalGeometry.VaryingHilbert.System.protectedBasisTransport_exact",
+      "RenewalGeometry/OperatorLimits/ProtectedBasisTransport.lean:RenewalGeometry.VaryingHilbert.norm_rankOne_self_sub_le",
+      "RenewalGeometry/OperatorLimits/ProtectedBasisTransport.lean:RenewalGeometry.VaryingHilbert.norm_transportedProjection_sub_le",
+      "RenewalGeometry/OperatorLimits/ProtectedBasisTransport.lean:RenewalGeometry.VaryingHilbert.transportedProjection_eq_conj_starProjection",
+      "RenewalGeometry/OperatorLimits/ProtectedBasisTransport.lean:RenewalGeometry.VaryingHilbert.System.protectedProjection",
+      "RenewalGeometry/OperatorLimits/ProtectedBasisTransport.lean:RenewalGeometry.VaryingHilbert.System.basisTransportDefect",
+      "RenewalGeometry/OperatorLimits/ProtectedBasisTransport.lean:RenewalGeometry.VaryingHilbert.protectedAlgebraTransport",
+      "RenewalGeometry/OperatorLimits/ProtectedBasisTransport.lean:RenewalGeometry.VaryingHilbert.protectedAlgebraTransport_mul",
+      "RenewalGeometry/OperatorLimits/ProtectedBasisTransport.lean:RenewalGeometry.VaryingHilbert.protectedAlgebraTransport_star"
     ],
-    "note": "No direct Lean. The cited theorem proves norm convergence of protected commutant projections under compact-screen hypotheses (a different route); the lemma's elementary estimate ||P^_X - P^_infty||_op <= 2 m eta_X from the transported orthonormal bases is not formalized, nor the *-isomorphism transport remark.",
-    "difficulty": "easy",
-    "plan": "New file OperatorLimits/ProtectedBasisTransport.lean on VaryingHilbert.System (isometric embeddings J_X : H_X -> H). Prove for unit vectors u, v of a Hilbert space that the rank-one projections satisfy ||u u^* - v v^*||_op <= 2 ||u - v|| (write |u><u| - |v><v| = |u-v><u| + |v><u-v| and bound each term by ||u - v||), then sum over the m transported basis vectors of the orthogonal projections P_{M_X} = sum_a |e_{a,X}><e_{a,X}| to get 2 m eta_X, and Tendsto from eta_X -> 0. State the *-isomorphism clause as the transport of products and adjoints along the given unital star algebra isomorphisms (trivial)."
+    "note": "Proved on a VaryingHilbert.System J (isometric embeddings J_X : H_X -> H) with a finite index type iota (m = card iota), bases e_X : iota -> H_X of unit vectors (only the unit-vector property enters the estimate; orthonormality is used in the identification lemma), a limiting isometry J_inf : E_inf -> H with unit vectors e_inf, and eta_X := sup_a ||J_X e_{a,X} - J_inf e_{a,inf}|| (basisTransportDefect, the paper's max over the finite index). protectedBasisTransport_exact: ||P^_X - P^_inf|| <= 2 m eta_X for every X (eq:protected-projection-transport) and eta_X -> 0 implies ||P^_X - P^_inf|| -> 0. Here P^_X = protectedProjection = sum_a |J_X e_{a,X}><J_X e_{a,X}| (Mathlib InnerProductSpace.rankOne); transportedProjection_eq_conj_starProjection identifies this with J_X P_{M_X} J_X^* (starProjection of a submodule M with orthonormal basis e spanning M, conjugated by the adjoint of the linear isometry), so the transported orthogonal projections of the paper are exactly these sums. Ingredients as in the paper's proof: norm_rankOne_self_sub_le (||u u^* - v v^*|| <= 2||u - v|| for unit vectors via |u><u| - |v><v| = |u-v><u| + |v><u-v|) and the sum over m basis vectors (norm_transportedProjection_sub_le). The final *-isomorphism clause is protectedAlgebraTransport phi_X phi_inf = phi_inf . phi_X^{-1} : M_X ~=* M_inf, a unital star-algebra isomorphism (protectedAlgebraTransport_mul/_star/_one identify products, adjoints and units across cutoffs)."
   },
   "thm:cofinal-duality": {
     "env": "theorem",
@@ -785,15 +828,17 @@
     "title": "Compact spectral upgrade",
     "status": "conditional_interface",
     "lean": [
+      "RenewalGeometry/Commutant/CofinalSpectralUpgradeExact.lean:RenewalGeometry.VaryingHilbert.System.cofinalSpectralUpgrade_exact",
+      "RenewalGeometry/Commutant/CofinalSpectralUpgradeExact.lean:RenewalGeometry.VaryingHilbert.System.protectedGap",
       "RenewalGeometry/Commutant/CoerciveContinuumHoweDualityExact.lean:RenewalGeometry.VaryingHilbert.System.coerciveContinuumHoweDuality_exact",
       "RenewalGeometry/Commutant/JointCommutatorFirstPositiveEigenvalueConvergenceFromDenseSourcesAndGraphScreens.lean:RenewalGeometry.VaryingHilbert.System.jointCommutator_firstPositiveEigenvalue_tendsto_of_denseSources_of_graphScreens",
       "RenewalGeometry/OperatorLimits/OperatorGraphMoscoLowSpectrumConvergence.lean:RenewalGeometry.VaryingHilbert.System.operatorGraphMosco_lowSpectrumConvergence_of_graphScreens",
       "RenewalGeometry/OperatorLimits/GraphScreenCompressedResolventNormConvergence.lean:RenewalGeometry.VaryingHilbert.System.compressedOperator_tendsto_operatorNorm_of_graphScreens",
       "RenewalGeometry/OperatorLimits/TransportedMoscoAsymptoticCompactness.lean:RenewalGeometry.VaryingHilbert.System.AsymptoticallyCompact"
     ],
-    "note": "Partial (this corollary is the spectral half of the OLD thm:cofinal-duality, whose Lean rendering carries over): in the varying-Hilbert graph-screen rendering (transported finite joint-commutator families with dense sources, strong resolvent convergence and a compact screen tail as the rendering of asymptotic form compactness, protected star-projections P_X of the limiting kernel rank), coerciveContinuumHoweDuality_exact gives norm convergence of the transported kernel projections Π_X → Π_∞ (eq:cofinal-spectral-upgrade, second clause), eventually range Π_X = Ker L_X = C*(c_X)', a strictly positive limit gap μ_∞ > 0 with the attained first positive eigenvalues λ⁺_min(L_X) = λ_{m+1}(L_X) → μ_∞ (first clause; jointCommutator_firstPositiveEigenvalue_tendsto_of_denseSources_of_graphScreens), and the late-cutoff coercivity at the level μ_∞/2 (eq:cofinal-coercivity for the specific γ0 = μ_∞/2); operator-norm resolvent convergence eq:cofinal-norm-resolvent is compressedOperator_tendsto_operatorNorm_of_graphScreens / operatorGraphMosco_lowSpectrumConvergence_of_graphScreens (prop:compact-mosco-resolvent). Missing: the quantitative bound eq:limit-gap γ_∞ ≥ γ_* in terms of the uniform late-cutoff gap constant γ_* of thm:cofinal-duality (D3) — the Lean derives positivity of the limit gap from compactness and the protected rank, not from (D3) — and the coercivity clause for EVERY 0 < γ0 < γ_∞ (only μ_∞/2 is displayed; any γ0 < μ_∞ follows from the Tendsto clause but is not stated); the hypotheses are the graph-screen packet rather than (D1)–(D3) + def:asymptotic-compactness literally.",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/Commutant/CofinalSpectralUpgradeExact.lean assembling the cited theorems: from Tendsto (gap_X) → μ_∞ and hγ0 : γ0 < μ_∞ obtain ∀ᶠ X, γ0 ≤ gap_X (Filter.Tendsto.eventually_gt_atTop / eventually_ge of order_topology) and feed it into the residual/energy clause of coerciveContinuumHoweDuality_exact to get q_X(A) ≥ γ0 ‖(I − P_{M_X})A‖² for all late X; for γ_∞ ≥ γ_*, add the (D3) hypothesis ∀ᶠ X, ∀ x ⊥ range P_X, γ_* ‖x‖² ≤ q_X(x) and pass to the limit along the transported eigenvectors (the paper's proof, using the Mosco liminf inequality of TransportedMoscoAsymptoticCompactness.lean and the eigenvalue convergence) to conclude μ_∞ ≥ γ_*."
+    "note": "Partial, now with every displayed clause of the corollary closed in the graph-screen rendering; kept conditional_interface only because the parent thm:cofinal-duality is open (corollary policy) and the hypotheses are the graph-screen packet (transported finite joint-commutator families with dense sources, strong resolvent convergence, a compact screen tail as the rendering of asymptotic form compactness, protected star-projections P_X of the limiting kernel rank, infinite-dimensional limit space = nonzero complement to M_inf) rather than (D1)-(D3) + def:asymptotic-compactness literally. cofinalSpectralUpgrade_exact re-exports from coerciveContinuumHoweDuality_exact: norm convergence Pi_X -> Pi_inf of the transported kernel projections and eventual range Pi_X = Ker L_X (eq:cofinal-spectral-upgrade second clause, eq:cofinal-kernel), a strictly positive limit gap gamma_inf = mu_lim with lambda_{m+1}(L_X) = protectedGap c J b P X -> gamma_inf (first clause), and the identification of protectedGap X as the least positive eigenvalue of the commutant Laplacian L_X; NEW: eq:limit-gap gamma_inf >= gamma_* under the rendering of (D3) as `for all late cutoffs, gamma_* <= lambda_{m+1}(L_X)` (at a finite cutoff with Ker L_X = M_X the uniform gap q_X(A) >= gamma_* ||(I - P_{M_X})A||^2 is exactly this eigenvalue bound; proved by ge_of_tendsto), and eq:cofinal-coercivity for EVERY 0 < gamma_0 < gamma_inf: for all late cutoffs and every energy/residual pair dominated by the cutoff gap (energy_X(x) >= lambda_{m+1}(L_X) residual_X(x), residual >= 0), energy_X(x) >= gamma_0 residual_X(x). Operator-norm resolvent convergence eq:cofinal-norm-resolvent remains compressedOperator_tendsto_operatorNorm_of_graphScreens / operatorGraphMosco_lowSpectrumConvergence_of_graphScreens (prop:compact-mosco-resolvent, proved).",
+    "difficulty": "medium",
+    "plan": "Nothing further is provable at the corollary level: upgrade to proved once thm:cofinal-duality is proved in its (D1)-(D3) form; then derive the (D3) hypothesis hD3 of cofinalSpectralUpgrade_exact from the parent's uniform late-cutoff gap via the finite-cutoff spectral theorem (commutant_audit_gap_exact / matrixL2_mem_jointCommutator_ker_iff in FiniteCommutantPoincareGap.lean give the coercivity <-> least-positive-eigenvalue equivalence when Ker L_X = M_X) and bridge (D1) + def:asymptotic-compactness to the graph-screen packet (TransportedMoscoAsymptoticCompactness.lean)."
   },
   "cor:typing-coordinate-canonicality": {
     "env": "corollary",
@@ -811,29 +856,35 @@
   "prop:typing-refinement": {
     "env": "proposition",
     "title": "Order reversal and represented typing refinement",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Commutant/TypingRefinementExact.lean:RenewalGeometry.typingRefinement_exact",
+      "RenewalGeometry/Commutant/TypingRefinementExact.lean:RenewalGeometry.starClosed_le_iff_matCommutant_subset",
+      "RenewalGeometry/Commutant/TypingRefinementExact.lean:RenewalGeometry.starClosed_eq_iff_matCommutant_eq",
+      "RenewalGeometry/Commutant/TypingRefinementExact.lean:RenewalGeometry.jointActionAlgebra_mono_int",
+      "RenewalGeometry/Commutant/TypingRefinementExact.lean:RenewalGeometry.jointActionAlgebra_refined_le",
       "RenewalGeometry/Commutant/ReciprocalWedderburnKronecker.lean:RenewalGeometry.matCommutant_anti",
-      "RenewalGeometry/Commutant/Bicommutant.lean:RenewalGeometry.double_commutant",
-      "RenewalGeometry/Commutant/Bicommutant.lean:RenewalGeometry.matCommutant",
-      "RenewalGeometry/Commutant/MainDuality.lean:RenewalGeometry.smst_main_duality"
+      "RenewalGeometry/Commutant/Bicommutant.lean:RenewalGeometry.double_commutant"
     ],
-    "note": "Partial: the two ingredients of the second half exist — the matrix commutant is antitone (matCommutant_anti: A ⊆ B ⟹ B' ⊆ A') and the finite bicommutant theorem for star-closed unital subalgebras (double_commutant, smst_main_duality). Missing: the Galois clause eq:incidence-closure-galois O_Y ⊆ O_Ỹ ⟺ M_type(Ỹ) ⊆ M_type(Y) (needs the slice-space encoding of O_Y and M_type), and the typing-refinement statement itself: for A_type^(1) ⊆ A_type^(2) ⊆ A_Cl', A_i = C*(A_Cl, A_type^(i), Y, Y^*), M_i = A_i': A_1 ⊆ A_2, M_2 ⊆ M_1 (eq:typing-refinement-monotone) and M_1 = M_2 ⟺ A_1 = A_2 ⟺ A_type^(2) ⊆ A_1.",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/Commutant/TypingRefinementExact.lean: A_1 ≤ A_2 from monotonicity of starAdjoin (JointTypedActionAlgebra.jointActionAlgebra_le with the generators of A_1 inside A_2); M_2 ⊆ M_1 by matCommutant_anti; M_1 = M_2 ⟹ A_1 = A_1'' = M_1' = M_2' = A_2'' = A_2 by double_commutant (both star-closed, jointActionAlgebra_starClosed); A_1 = A_2 ⟺ A_type^(2) ⊆ A_1 because A_2 is the least star-closed subalgebra containing A_Cl ∪ A_type^(2) ∪ range Y and A_1 already contains A_Cl ∪ range Y (jointActionAlgebra_le, int_subset_jointActionAlgebra). The Galois clause follows the same way once O_Y, M_type are encoded with slices (def:typed-multiplicity plan): M_type = O_Y' and O_Y = M_type' give O_Y ⊆ O_Ỹ ⟺ M(Ỹ) ⊆ M(Y) via matCommutant_anti twice."
+    "note": "Proved. Galois clause eq:incidence-closure-galois: starClosed_le_iff_matCommutant_subset states, for two star-closed unital subalgebras O_1, O_2 of a finite matrix algebra (the closed coefficient-action algebras O_Y, O_Ytilde, which are C*-algebras by definition eq:coefficient-action-algebra) and M_type := commutant (eq:coefficient-quiver-duality M_type = O_Y'), O_1 <= O_2 <-> O_2' subset O_1' -- exactly the paper's proof (commutants reverse inclusions: matCommutant_anti; finite bicommutant closure reverses them back: double_commutant); starClosed_eq_iff_matCommutant_eq is the 'Thus' clause (equality of closed coefficient-action algebras <-> equality of exact multiplicity algebras). Typing refinement: typingRefinement_exact, for A_type^(1) subset A_type^(2), A_i = jointActionAlgebra A_Cl A_type^(i) Y = C*(A_Cl, A_type^(i), Y, Y^*) and M_i = matCommutant A_i, gives A_1 <= A_2, M_2 subset M_1 (eq:typing-refinement-monotone), M_1 = M_2 <-> A_1 = A_2, and A_1 = A_2 <-> A_type^(2) subset A_1 (using A_2 = C*(A_1, A_type^(2)) = jointActionAlgebra_refined_le). Scoped: the paper's hypothesis A_type^(i) subset A_Cl' is not needed and not assumed; carrier index n : Type (universe 0, inherited from matCommutant_anti); the Galois clause is stated for abstract star-closed O_Y rather than through a slice encoding of O_Y (the slice encoding is def:typed-multiplicity's record; M_type = O_Y' is thm:main-duality)."
   },
   "lem:multiplicity-factorization": {
     "env": "lemma",
     "title": "Multiplicity-one incidence factorization",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Commutant/EquivariantMultiplicityFactorization.lean:RenewalGeometry.equivariantOperator_unique_kroneckerFactorization",
-      "RenewalGeometry/Commutant/EquivariantMultiplicityFactorization.lean:RenewalGeometry.multiplicityOneTypedLink_exact",
-      "RenewalGeometry/Commutant/EquivariantMultiplicityFactorization.lean:RenewalGeometry.tensorEquivariance_multiplicityCarrierBlock"
+      "RenewalGeometry/Commutant/CarrierSliceFactorization.lean:RenewalGeometry.carrierCoefficientSpace",
+      "RenewalGeometry/Commutant/CarrierSliceFactorization.lean:RenewalGeometry.multiplicityOne_incidenceFactorization_exact",
+      "RenewalGeometry/Commutant/CarrierSliceFactorization.lean:RenewalGeometry.carrierCoefficientSpace_le_of_equivariance",
+      "RenewalGeometry/Commutant/CarrierSliceFactorization.lean:RenewalGeometry.multiplicityOne_incidenceFactorization_of_equivariance",
+      "RenewalGeometry/Commutant/CarrierSliceFactorization.lean:RenewalGeometry.multiplicitySliceSpan",
+      "RenewalGeometry/Commutant/CarrierSliceFactorization.lean:RenewalGeometry.multiplicitySliceSpan_kronecker",
+      "RenewalGeometry/Commutant/CarrierSliceFactorization.lean:RenewalGeometry.typedMultiplicity_line_reduction",
+      "RenewalGeometry/Commutant/CarrierSliceFactorization.lean:RenewalGeometry.typedMultiplicity_carrier_reduction",
+      "RenewalGeometry/Commutant/CarrierSliceFactorization.lean:RenewalGeometry.carrierCoefficientSpace_eq_of_kronecker",
+      "RenewalGeometry/Commutant/EquivariantMultiplicityFactorization.lean:RenewalGeometry.equivariantOperator_unique_kroneckerFactorization"
     ],
-    "note": "Partial: the 'in particular' clause is proved — under a declared equivariance (L_q ⊗ 1) Y = Y (R_q ⊗ 1) whose carrier intertwiner space is the line ℂD (every intertwiner is uniquely c • D) there is a unique F with Y = D ⊗ₖ F (equivariantOperator_unique_kroneckerFactorization, multiplicityOneTypedLink_exact, tensorEquivariance_multiplicityCarrierBlock). Missing: the NEW primary hypothesis is intrinsic — 'the prescribed carrier coefficient space of the edge is the line ℂD_e, D_e ≠ 0' (all carrier slices of Y_e are multiples of D_e) ⟹ unique factorization Y_e = D_e ⊗ F_e relative to D_e — and the reduction of eq:typed-multiplicity to R_μ F_e = F_e R_λ, R_λ F_e^* = F_e^* R_μ on this branch.",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/Commutant/CarrierSliceFactorization.lean: define the carrier slice space of Y : Matrix (n × g') (m × g) ℂ as the span of the slices (i,j) ↦ Y (i,a) (j,b) over (a,b); if every slice is a scalar multiple of D ≠ 0, define F a b as that scalar (Classical.choose / unique via D ≠ 0) and check Y = D ⊗ₖ F entrywise (kroneckerMap_apply); uniqueness by kronecker_left_cancel (GraphLoadedEdgeCommutantAssembly.lean); derive the equivariance clause from equivariantOperator_unique_kroneckerFactorization; the reduction clause is loadedEdgeCommutant_iff_typed specialised to the slice space ℂF_e once def:typed-multiplicity is encoded with slices."
+    "note": "Proved. Y_e : K_lambda (x) M_lambda -> K_mu (x) M_mu is a matrix on product index types; its prescribed carrier coefficient space is carrierCoefficientSpace Y = span of the carrier slices (i,j) -> Y (i,a) (j,b) = all (id (x) psi)(Y). Primary clause: multiplicityOne_incidenceFactorization_exact -- if this space lies in the line C D with D != 0 (weaker than 'is the line', so the theorem is stronger; carrierCoefficientSpace_eq_of_kronecker shows equality holds for Y != 0), there is a unique F with Y = D (x)_k F (eq:incidence-factorization), uniqueness relative to D by kronecker_left_cancel. 'In particular' clause: carrierCoefficientSpace_le_of_equivariance / multiplicityOne_incidenceFactorization_of_equivariance -- a declared equivariance (L_q (x) 1) Y = Y (R_q (x) 1) (trivial on the multiplicity factors) whose carrier intertwiners are multiples of D forces the carrier coefficient space into C D. Reduction clause: multiplicitySliceSpan_kronecker shows that on this branch the intrinsic coefficient space B_e (local encoding multiplicitySliceSpan = span of the multiplicity slices (a,b) -> Y (i,a) (j,b), i.e. of all (phi (x) id)(Y), def:incidence-coefficients) equals the line C F; typedMultiplicity_line_reduction: the equations of eq:typed-multiplicity over B_e = C F (R_mu B = B R_lambda, R_lambda B^* = B^* R_mu for all B in C F) are equivalent to R_mu F = F R_lambda and R_lambda F^* = F^* R_mu; typedMultiplicity_carrier_reduction gives the same reduction at carrier level (commutation of 1 (x) R with D (x) F and its adjoint). Scoped: finite index types; multiplicitySliceSpan is a local matrix-coordinate encoding of B_e, to be identified with the def:typed-multiplicity encoding by the coordinator (not modified here to avoid clashing with the concurrent batch)."
   },
   "lem:polar-edge": {
     "env": "lemma",
@@ -1472,13 +1523,17 @@
   "thm:rectangular-normalization-kernel": {
     "env": "proposition",
     "title": "Exact rectangular normalization kernel",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Operational/RectangularNormalizationKernelExact.lean:RenewalGeometry.rectangularNormalization",
+      "RenewalGeometry/Operational/RectangularNormalizationKernelExact.lean:RenewalGeometry.rectangularNormalization_surjective",
+      "RenewalGeometry/Operational/RectangularNormalizationKernelExact.lean:RenewalGeometry.rectangularNormalization_finrank_ker",
+      "RenewalGeometry/Operational/RectangularNormalizationKernelExact.lean:RenewalGeometry.rectangularNormalization_finrank_ker_add",
+      "RenewalGeometry/Operational/RectangularNormalizationKernelExact.lean:RenewalGeometry.rectangularNormalization_injective_iff",
+      "RenewalGeometry/Operational/RectangularNormalizationKernelExact.lean:RenewalGeometry.partialTraceRight_kronecker_one",
       "RenewalGeometry/Operational/SpectatorProduct.lean:RenewalGeometry.partialTraceRight"
     ],
-    "note": "No Lean for the statement; partialTraceRight (partial trace over a tensor factor) is the building block Tr_{T_a}. Missing: the normalization map Gamma_rect((X_a)) = (+)_s sum_{a : s(a) = s} Tr_{T_a} X_a, its surjectivity onto (+)_s M_{p_s}(C) when every source sector occurs in a branch, the nullity formula sum_s p_s^2 (sum_{a:s(a)=s} q_a^2 - 1), and the injectivity criterion.",
-    "difficulty": "easy",
-    "plan": "New file Operational/RectangularNormalizationKernelExact.lean. Index branches a : A with sector s : A -> S, dimensions q a, p s; domain Pi a, Matrix (Fin (q a) x Fin (p (s a))) (Fin (q a) x Fin (p (s a))) C, codomain Pi s, Matrix (Fin (p s)) (Fin (p s)) C; define Gamma_rect as a LinearMap using partialTraceRight (reindexed); surjectivity: given Y, put X_a = (1/q_a) (1 (x) Y_{s a}) on one chosen branch per sector (Kronecker trace: partialTraceRight (1 (x) Y) = q_a Y) and 0 elsewhere; nullity = finrank domain - finrank codomain by LinearMap.finrank_range_add_finrank_ker with Module.finrank of Pi/Matrix types (Module.finrank_pi, Module.finrank_matrix); injectivity iff nullity 0 iff each sector has exactly one branch with q_a = 1 (sum of nonnegative terms zero)."
+    "note": "Proved. Encoding: recorded branches are grouped by source sector (Br sigma = branches with source A_sigma, i.e. the fibres of s : A -> S; this is the Sigma-type form of the source map and avoids dependent casts), p_sigma = card (Src sigma), q_b = card (T sigma b); the amplitude coefficient matrices X_b live on Src sigma x T sigma b (source (x) target order) and Tr_{T_b} is partialTraceRight. rectangularNormalization is the linear map Gamma_rect((X_b)) = (+)_sigma sum_{b : Br sigma} Tr_{T_b} X_b (eq:rectangular-normalization-map; the map is taken as the definition, as in the paper's first sentence of proof, since the matrix-unit product identity B^*_{a,i alpha} B_{a,j beta} = delta_{ij} |e_alpha><e_beta| is the coefficient convention fixed in the preceding text). rectangularNormalization_surjective: surjective onto (+)_sigma M_{p_sigma}(C) when every source sector occurs in a branch with nonzero-dimensional target (lift q^{-1} Y (x) 1_T on one branch, partialTraceRight_kronecker_one). rectangularNormalization_finrank_ker: dim_C Ker = sum_sigma p_sigma^2 (sum_{b} q_b^2 - 1) (eq:rectangular-normalization-nullity, natural-number subtraction, well defined since sum_b q_b^2 >= 1; the subtraction-free rank-nullity form is rectangularNormalization_finrank_ker_add), via LinearMap.finrank_range_add_finrank_ker and Module.finrank_pi_fintype/finrank_matrix. rectangularNormalization_injective_iff: with positive sector and target dimensions and every sector occurring (the paper's implicit 'all q_a are positive integers'), injective <-> every sector has exactly one branch (card (Br sigma) = 1) and that branch has one-dimensional target."
   },
   "prop:schur-incidence-envelope": {
     "env": "proposition",
@@ -1501,11 +1556,20 @@
   "lem:weak-naturality-spectrum": {
     "env": "lemma",
     "title": "Weak defect spectrum",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart: the weak defect operator H_W = L_+L_- + L_-L_+ with L_± = F_{12/21} ⊗ I + I ⊗ F_{12/21} on ℂ^2 ⊗ ℂ^2 (dual-space version) and its spectrum {0^(1), 2^(2), 4^(1)} with the alternating covector line as kernel are not formalised (no naturality-defect operators in the tree).",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean: define F_12, F_21 : Matrix (Fin 2) (Fin 2) ℂ, L_± and H_W : Matrix (Fin 2 × Fin 2) (Fin 2 × Fin 2) ℂ explicitly (kroneckerMap); exhibit the orthonormal eigenbasis w1⊗w1, (w1⊗w2 + w2⊗w1)/√2, w2⊗w2, (w1⊗w2 − w2⊗w1)/√2 with H_W v = 2v, 4v, 2v, 0 by explicit mulVec computation (simp/norm_num on Fin cases), state the spectrum as 'H_W is unitarily diagonal with diagonal (2,4,2,0)' or via Matrix.IsHermitian.eigenvalues multiset, and identify the kernel with the alternating line (rank of H_W = 3 via the eigenbasis). The 'dual-space version' is the transpose, which has the same spectrum (Matrix.charpoly_transpose)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean:RenewalGeometry.weakDefect",
+      "RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean:RenewalGeometry.weakLPlus",
+      "RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean:RenewalGeometry.weakLMinus",
+      "RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean:RenewalGeometry.weakDefect_charpoly",
+      "RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean:RenewalGeometry.weakDefect_mulVec_eq_zero_iff",
+      "RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean:RenewalGeometry.weakDefect_transpose_charpoly",
+      "RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean:RenewalGeometry.weakDefect_isHermitian",
+      "RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean:RenewalGeometry.weakAlternating",
+      "RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean:RenewalGeometry.weakLPlus_mulVec_alternating",
+      "RenewalGeometry/StandardModel/WeakNaturalitySpectrumExact.lean:RenewalGeometry.weakLMinus_mulVec_alternating"
+    ],
+    "note": "Proved. F_12 = |w_1><w_2|, F_21 = |w_2><w_1| are the 2x2 matrix units in the orthonormal basis (w_1, w_2) (eq:six-naturality-generators), L_+/- = F_{12/21} (x) I + I (x) F_{12/21} on C^2 (x) C^2 (Kronecker on Fin 2 x Fin 2), H_W = L_+ L_- + L_- L_+ (weakDefect). weakDefect_charpoly: the characteristic polynomial is X (X - 2)^2 (X - 4), i.e. spec H_W = {0^(1), 2^(2), 4^(1)} with multiplicities (eq:weak-naturality-spectrum); weakDefect_isHermitian (so the algebraic multiplicities are the spectral ones). weakDefect_mulVec_eq_zero_iff: the zero eigenspace is exactly the alternating weak covector line C (w_1 (x) w_2 - w_2 (x) w_1) (weakAlternating; both ladders annihilate it, weakLPlus/LMinus_mulVec_alternating). The 'dual-space version' is the transpose: weakDefect_transpose shows H_W^T = H_W and weakDefect_transpose_charpoly gives the same spectrum. The computation goes through the explicit product-basis matrix diag(2, [[2,2],[2,2]], 2) (weakDefect_apply, charpoly_reindex)."
   },
   "prop:exact-naturality-spectrum": {
     "env": "proposition",
@@ -1540,14 +1604,19 @@
   "prop:determinant-normalization-isolation": {
     "env": "proposition",
     "title": "Alternating-sector isolation fixes the branch weight",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/StandardModel/DeterminantNormalizationIsolationExact.lean:RenewalGeometry.DeterminantNormalization.compressed_normalization",
+      "RenewalGeometry/StandardModel/DeterminantNormalizationIsolationExact.lean:RenewalGeometry.DeterminantNormalization.branch_weight_eq_one",
+      "RenewalGeometry/StandardModel/DeterminantNormalizationIsolationExact.lean:RenewalGeometry.DeterminantNormalization.branch_weight_eq_one_of_amplitude",
+      "RenewalGeometry/StandardModel/DeterminantNormalizationIsolationExact.lean:RenewalGeometry.DeterminantNormalization.competing_branch_weights_sum_eq_one",
+      "RenewalGeometry/StandardModel/DeterminantNormalizationIsolationExact.lean:RenewalGeometry.DeterminantNormalization.scalarNormalizationKernel",
+      "RenewalGeometry/StandardModel/DeterminantNormalizationIsolationExact.lean:RenewalGeometry.DeterminantNormalization.sub_mem_scalarNormalizationKernel",
+      "RenewalGeometry/StandardModel/DeterminantNormalizationIsolationExact.lean:RenewalGeometry.DeterminantNormalization.finrank_scalarNormalizationKernel",
       "RenewalGeometry/StandardModel/DeterminantIncidenceExact.lean:RenewalGeometry.DetIncidence.theta",
       "RenewalGeometry/StandardModel/DeterminantIncidenceExact.lean:RenewalGeometry.DetIncidence.theta_norm"
     ],
-    "note": "Partial only: the determinant line theta tau and its norm (T_0 = theta tau / sqrt 2 for unit tau). Missing: the instrument-normalization argument: for a normalized instrument (sum_branches K^* K = I) with one branch effect x P_alt (eq:naturality-ray with the partial-isometry normalization T_0^* T_0 = P_alt) and all other Kraus amplitudes annihilating P_alt, x = 1; and for k branches on the same ray, sum x_a = 1 with a (k-1)-dimensional scalar normalization kernel.",
-    "difficulty": "easy",
-    "plan": "New file StandardModel/DeterminantNormalizationIsolationExact.lean: for a finite family of Kraus matrices K_b on the port with sum_b K_b^H K_b = 1, a distinguished branch with K_0^H K_0 = x • P_alt (P_alt a nonzero projection, e.g. 1 (x) |a><a|), and K_b P_alt = 0 for b != 0: compress 1 = sum K_b^H K_b by P_alt on both sides to get x P_alt = P_alt, hence x = 1 (P_alt != 0). For k branches with K_a^H K_a = x_a P_alt, the same compression gives (sum x_a) P_alt = P_alt; the solution set {x : sum x_a = 1} is an affine space of dimension k - 1 (finrank of the kernel of the sum functional)."
+    "note": "Proved. A normalized instrument is a finite Kraus family with sum_b K_b^H K_b = 1 and P_alt is any nonzero idempotent matrix (the paper's I_C (x) |a><a| = T_0^H T_0 is one). branch_weight_eq_one: if the distinguished branch has effect x . P_alt (eq:naturality-ray with the partial-isometry normalization) and every other amplitude satisfies K P_alt = 0, then x = 1 (right-compression of the trace-preservation identity by P_alt); branch_weight_eq_one_of_amplitude gives the amplitude form K_0 = c T_0, |c|^2 = 1. competing_branch_weights_sum_eq_one: for a set S of branches with effects x_a . P_alt and all others annihilating P_alt, sum_{a in S} x_a = 1. finrank_scalarNormalizationKernel: the linear scalar normalization kernel {x : sum x_a = 0} of k >= 1 branches has dimension k - 1, and sub_mem_scalarNormalizationKernel shows the solution set of sum x_a = 1 is a coset of it. Scoped: x taken in C (the paper's x >= 0 is a special case); positivity x_a >= 0 is a remark in the proof, not a claim."
   },
   "thm:determinant-arity-floor": {
     "env": "proposition",
@@ -1569,11 +1638,18 @@
   "prop:naturality-compilation": {
     "env": "proposition",
     "title": "Finite functional and word-moment realization",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart: the contextual-functional determinacy (if H_nat and I lie in the real span of the tested functionals F_ℓ then Tr(H_nat J_D) and Tr J_D are determined by the numbers Tr(F_ℓ J_D) without J_D), its 'modulo functionals constant on the feasible class' refinement, and the word-moment expansion eq:word-naturality-defect of d_nat as a sum of inserted word moments are not formalised.",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/StandardModel/NaturalityCompilationExact.lean: state the determinacy as: for H ∈ Submodule.span ℝ (range F) (Hermitian matrices), there are reals a_ℓ with Tr(H J) = Σ a_ℓ Tr(F_ℓ J) for every J (Submodule.mem_span_range_iff_exists_fun + trace linearity), hence Tr(H J) = Tr(H J') whenever Tr(F_ℓ J) = Tr(F_ℓ J') for all ℓ; the 'modulo constants on the feasible class' version adds functionals c with Tr(c J) = Tr(c J') on the class. The word-moment route: define R_X(T) = [X, T]-type insertions and S_Y(T) = Y T − T Y and show d_nat = Σ_a Σ ‖R_X(T_a)‖² + Σ ‖S_Y(T_a)‖² is a finite sum of HS moments (matrixL2 norms), which is definitional once H_nat is encoded (thm:determinant-skeleton-population plan)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/StandardModel/NaturalityCompilationExact.lean:RenewalGeometry.NaturalityCompilation.trace_determined_of_mem_span",
+      "RenewalGeometry/StandardModel/NaturalityCompilationExact.lean:RenewalGeometry.NaturalityCompilation.naturality_defect_and_trace_determined",
+      "RenewalGeometry/StandardModel/NaturalityCompilationExact.lean:RenewalGeometry.NaturalityCompilation.trace_determined_modulo_constants",
+      "RenewalGeometry/StandardModel/NaturalityCompilationExact.lean:RenewalGeometry.NaturalityCompilation.naturalityOperator",
+      "RenewalGeometry/StandardModel/NaturalityCompilationExact.lean:RenewalGeometry.NaturalityCompilation.amplitudeChoi",
+      "RenewalGeometry/StandardModel/NaturalityCompilationExact.lean:RenewalGeometry.NaturalityCompilation.naturalityDefect",
+      "RenewalGeometry/StandardModel/NaturalityCompilationExact.lean:RenewalGeometry.NaturalityCompilation.trace_gram_mul_vecMulVec",
+      "RenewalGeometry/StandardModel/NaturalityCompilationExact.lean:RenewalGeometry.NaturalityCompilation.word_naturality_defect"
+    ],
+    "note": "Proved. Contextual route: trace_determined_of_mem_span shows that for H in the real span of the tested functionals F_l, Tr(F_l J) = Tr(F_l J') for all l implies Tr(H J) = Tr(H J') (span induction; J_D itself is never used, so the bank determines the functional without determining the Choi operator); naturality_defect_and_trace_determined applies it to H_nat and I giving d_nat and Tr J_D; trace_determined_modulo_constants is the refinement with H = H_0 + c, H_0 in the span and c constant on the declared feasible class. Word-moment route: with H_nat = sum_X R_X^H R_X + sum_Y S_Y^H S_Y (eq:naturality-operator) and J_D = sum_a |T_a>><<T_a| (amplitudeChoi), word_naturality_defect proves d_nat = Tr(H_nat J_D) = sum_a (sum_X ||R_X T_a||^2_HS + sum_Y ||S_Y T_a||^2_HS) (eq:word-naturality-defect). Scoped rendering: the port is a finite coordinate space p -> C (the amplitude space in Hilbert-Schmidt coordinates), the inserted actions R_X, S_Y are matrices on it, and ||.||^2_HS is the coordinate sum of normSq. The sentences 'at flatness their multiplication table computes it exactly' (thm:inserted-word-moments, already proved) and the trace-convention remarks are interpretive and not restated."
   },
   "cth:zero-hypercharge-exotic": {
     "env": "proposition",
@@ -1590,16 +1666,21 @@
   "prop:fermion-source-completeness": {
     "env": "proposition",
     "title": "Finite certificate for completeness of the retained fermion source",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/StandardModel/FermionSourceCompletenessExact.lean:RenewalGeometry.FermionSourceCompleteness.carrier",
+      "RenewalGeometry/StandardModel/FermionSourceCompletenessExact.lean:RenewalGeometry.FermionSourceCompleteness.sourceRange",
+      "RenewalGeometry/StandardModel/FermionSourceCompletenessExact.lean:RenewalGeometry.FermionSourceCompleteness.completenessResidual",
+      "RenewalGeometry/StandardModel/FermionSourceCompletenessExact.lean:RenewalGeometry.FermionSourceCompleteness.completenessResidual_posSemidef",
+      "RenewalGeometry/StandardModel/FermionSourceCompletenessExact.lean:RenewalGeometry.FermionSourceCompleteness.completenessResidual_eq_zero_iff",
+      "RenewalGeometry/StandardModel/FermionSourceCompletenessExact.lean:RenewalGeometry.FermionSourceCompleteness.sourceRange_le_carrier_iff_invariant",
+      "RenewalGeometry/StandardModel/FermionSourceCompletenessExact.lean:RenewalGeometry.FermionSourceCompleteness.completenessResidual_trace",
+      "RenewalGeometry/StandardModel/FermionSourceCompletenessExact.lean:RenewalGeometry.FermionSourceCompleteness.completenessResidual_rank_add",
+      "RenewalGeometry/StandardModel/FermionSourceCompletenessExact.lean:RenewalGeometry.FermionSourceCompleteness.fermion_source_completeness",
       "RenewalGeometry/Predictive/ExactSourceSchurResidual.lean:RenewalGeometry.sourceSchurResidual_eq_orthogonalResidual",
-      "RenewalGeometry/Predictive/ExactSourceSchurResidual.lean:RenewalGeometry.sourceSchurResidual_posSemidef",
-      "RenewalGeometry/Predictive/ExactSourceSchurResidual.lean:RenewalGeometry.sourceSchurResidual_eq_zero_iff_rangeIncluded",
       "RenewalGeometry/Predictive/ExactSourceSchurResidual.lean:RenewalGeometry.exact_source_schur_residual"
     ],
-    "note": "Partial: with K rendered as the range of a spanning matrix S_1, the Gram C = U^*(I − P_K)U is the exact source Schur residual sourceSchurResidual S_1 U = Uᴴ (1 − P_{S_1}) U (sourceSchurResidual_eq_orthogonalResidual), which is PSD, vanishes iff Ran U ⊆ Ran S_1 = K (sourceSchurResidual_eq_zero_iff_rangeIncluded) and satisfies the rank increment rank[S_1 U] − rank S_1 = rank C (exact_source_schur_residual), i.e. rank C = dim(Ran U + K) − dim K = dim Ran U − dim(Ran U ∩ K). Missing: the statement in the paper's form (K an A_F-reducing subspace containing the retained bank, P_K its projector), the clause Ran U ⊆ K ⟺ A_F Ran U ⊆ K (invariance of K, 1 ∈ A_F), the trace identity Tr C = ‖(I − P_K)U‖²_HS, and the closing remark that the rank need not equal the cyclic-closure dimension.",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/StandardModel/FermionSourceCompletenessExact.lean: take P_K as a Hermitian idempotent (or K a Submodule with Submodule.starProjection), define C := Uᴴ (1 − P_K) U; C = ((1 − P_K)U)ᴴ((1 − P_K)U) gives PSD, Tr C = ‖(1 − P_K)U‖²_HS (matrixL2_norm_sq) and C = 0 ⟺ (1 − P_K)U = 0 ⟺ Ran U ⊆ K (conjTranspose_mul_self_eq_zero); A_F-invariance of K plus 1 ∈ A_F gives the third equivalence; rank C = rank((1 − P_K)U) = dim Ran U − dim(Ran U ∩ K) by rank–nullity for the restriction of 1 − P_K to Ran U (LinearMap.finrank_range_add_finrank_ker), or reuse exact_source_schur_residual with S_1 a spanning matrix of K."
+    "note": "Proved in the paper's form. With P_K a Hermitian idempotent (P^2 = P, P^H = P) and K = Ran P_K (carrier), C_{F|K} := U^H (1 - P_K) U (completenessResidual): fermion_source_completeness bundles C = ((1-P)U)^H ((1-P)U) >= 0 (PSD); C = 0 <=> Ran U <= K (eq:fermion-source-completeness-zero, first equivalence); Ran U <= K <=> for all A in A_F, A(Ran U) <= K for any set A_F containing I and leaving K invariant (second equivalence, sourceRange_le_carrier_iff_invariant); Tr C = ||(1-P_K)U||^2_HS (completenessResidual_trace, HS norm as sum of normSq); and rank C + dim(Ran U ∩ K) = dim Ran U (completenessResidual_rank_add, by rank-nullity for (1-P)|_{Ran U} and rank(V^H V) = rank V), which is eq:fermion-source-completeness-rank. Scoped: the ambient space is N -> C; 'independently complete' is not used; the closing remark about the cyclic-closure dimension is a remark, not a claim."
   },
   "lem:complete-typed-source": {
     "env": "lemma",
@@ -1622,14 +1703,23 @@
   "cor:endpoint-allocation-compiler": {
     "env": "corollary",
     "title": "Same-source coefficient formula",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Predictive/ExactSourceSchurResidual.lean:RenewalGeometry.sourceSchurResidual",
-      "RenewalGeometry/Predictive/ExactSourceSchurResidual.lean:RenewalGeometry.sourceGramPseudoinverse"
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.allocationResidual",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.sameSourceResidual",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.allocationResidual_eq_sameSource",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.allocationResidual_eq_sameSource_of_posDef",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.allocationResidual_trace_eq",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.allocationResidual_rank_eq",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.allocationResidual_congr_gram",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.subsourceProjector",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.allocationResidual_eq_orthogonal",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.allocationResidual_posSemidef",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.allocationResidual_trace_hs",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.rank_eq_card_add_rank_allocationResidual",
+      "RenewalGeometry/StandardModel/EndpointAllocationCompilerExact.lean:RenewalGeometry.EndpointAllocationCompiler.allocationResidual_zero_iff"
     ],
-    "note": "Partial only: the residual and pseudo-inverse objects. Missing: with T_f = S_f J_fG and J^* G_f J > 0, the substitution identity A_{f|G} = G_f - G_f J (J^* G_f J)^{-1} J^* G_f (eq:endpoint-allocation-compiler) and the remark that residual, trace and excess rank are then functions of G_f and J alone.",
-    "difficulty": "easy",
-    "plan": "In StandardModel/EndpointAllocationExact.lean (with thm:endpoint-allocation): A_f = T^H T = J^H S^H S J = J^H G J and C_f = T^H S = J^H G, so G - C^H A^{-1} C = G - G J (J^H G J)^{-1} J^H G by rewriting; the 'same typed source Gram' clause is the statement that the right-hand side depends only on (G, J); the word-native remark is interpretive (cor:historical-typed-compilation)."
+    "note": "Proved, together with the matrix content of the parent thm:endpoint-allocation (corollary policy). Corollary: with A_{f|G} := G_f - C_f^H A_f^{-1} C_f (allocationResidual, eq:endpoint-allocation-short) and T_f = S_f J, allocationResidual_eq_sameSource proves A_{f|G} = G_f - G_f J (J^H G_f J)^{-1} J^H G_f (eq:endpoint-allocation-compiler); allocationResidual_trace_eq / _rank_eq / _congr_gram express that residual, trace and excess rank are functions of (G_f, J) alone (no mixed Gram). The identity is an algebraic rewriting valid for every J (Mathlib's Matrix.inv is total); the paper's J^H G_f J > 0 is recorded in allocationResidual_eq_sameSource_of_posDef. Parent (same file, section Parent, hypothesis A_f = T^H T positive definite, P_fG := T A_f^{-1} T^H): allocationResidual_eq_orthogonal / _posSemidef / _trace_hs give A_{f|G} = S^H (1 - P_fG) S >= 0 and a_{f|G} = Tr A = ||(1 - P_fG) S||^2_HS (eq:endpoint-allocation-positive); rank_eq_card_add_rank_allocationResidual gives, for a specified endpoint subsource T = S J (Ran T <= Ran S), n_f = rank G_f = dim G_gen + rank A_{f|G} (eq:endpoint-generation-excess, dim G_gen = 3 in the paper); allocationResidual_zero_iff gives a = 0 <=> A = 0 <=> (1 - P_fG) S = 0 <=> n_f = dim G_gen (eq:endpoint-allocation-zero; (1 - P_fG) S = 0 is Ran S <= Ran T, i.e. Ran T = Ran S = N_f for a complete synthesis). The 'word native at flat depth' sentence is interpretive (thm:inserted-word-moments) and not formalised. The coordinator may wish to cite the Parent-section declarations on thm:endpoint-allocation as well."
   },
   "thm:coupled-schur": {
     "env": "proposition",
@@ -1684,14 +1774,18 @@
   "thm:active-odd-lift-invariance": {
     "env": "proposition",
     "title": "Spectator-lift invariance of active grading change",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Operational/SpectatorProduct.lean:RenewalGeometry.renewal_spectator_product",
-      "RenewalGeometry/Operational/SpectatorProduct.lean:RenewalGeometry.partialTraceRight"
+      "RenewalGeometry/Operational/ActiveOddLiftInvarianceExact.lean:RenewalGeometry.ActiveOddLift.kroneckerLift",
+      "RenewalGeometry/Operational/ActiveOddLiftInvarianceExact.lean:RenewalGeometry.ActiveOddLift.kroneckerLift_kronecker",
+      "RenewalGeometry/Operational/ActiveOddLiftInvarianceExact.lean:RenewalGeometry.ActiveOddLift.spectator_lift_trace",
+      "RenewalGeometry/Operational/ActiveOddLiftInvarianceExact.lean:RenewalGeometry.ActiveOddLift.gradingPlus",
+      "RenewalGeometry/Operational/ActiveOddLiftInvarianceExact.lean:RenewalGeometry.ActiveOddLift.gradingMinus",
+      "RenewalGeometry/Operational/ActiveOddLiftInvarianceExact.lean:RenewalGeometry.ActiveOddLift.activeCrossSignMass",
+      "RenewalGeometry/Operational/ActiveOddLiftInvarianceExact.lean:RenewalGeometry.ActiveOddLift.active_odd_lift_invariance",
+      "RenewalGeometry/Operational/SpectatorProduct.lean:RenewalGeometry.renewal_spectator_product"
     ],
-    "note": "Partial: renewal_spectator_product proves that the partial trace over a spectator collapses elementary tensors, partialTraceRight (A (x) B) = Tr(B) A, and commutes with any trace-preserving spectator map on them, partialTraceRight ((Phi A) (x) (Psi B)) = Phi (partialTraceRight (A (x) B)); this is the mechanism of the lift invariance. Missing: the product lift Phi~ = Phi (x) Psi as a map on the joint carrier, the active reads P_-+ (x) I, and the displayed identity Tr[(P_- (x) I) Phi~(P_+ (x) sigma)] + Tr[(P_+ (x) I) Phi~(P_- (x) sigma)] = mu_Z^act(Phi) = Tr[P_- Phi(P_+)] + Tr[P_+ Phi(P_-)] for a state sigma (Tr sigma = 1) and trace-preserving Psi; the non-identifiability remark refers to app:microscopic-odd-lift and is not part of the claim.",
-    "difficulty": "easy",
-    "plan": "New file Operational/ActiveOddLiftInvarianceExact.lean: define the Kronecker lift of linear maps on elementary tensors (Phi (x) Psi)(A (x) B) = Phi A (x) Psi B (as the unique linear map on Matrix (dA x dK) via the Kronecker basis, or state the identity for the elementary tensor P_+- (x) sigma only, which is all the proposition uses); then Tr[(P (x) I)(Phi P' (x) Psi sigma)] = Tr(P Phi P') Tr(Psi sigma) = Tr(P Phi P') by Matrix.trace_kronecker and hPsi; sum the two terms. Define mu_Z^act(Phi) := Tr[P_- Phi(P_+)] + Tr[P_+ Phi(P_-)]."
+    "note": "Proved. kroneckerLift Phi Psi is the product lift Phi (x) Psi as a genuine linear map on the joint carrier Matrix (dA x dK) (dA x dK) C (defined through the matrix-unit basis), with kroneckerLift_kronecker proving (Phi (x) Psi)(A (x) B) = Phi A (x) Psi B. activeCrossSignMass Z Phi := Tr[P_- Phi(P_+)] + Tr[P_+ Phi(P_-)] with P_± = (1 ± Z)/2 (eq:active-cross-sign-mass). active_odd_lift_invariance proves eq:active-odd-lift-invariance: Tr[(P_- (x) I)(Phi (x) Psi)(P_+ (x) sigma)] + Tr[(P_+ (x) I)(Phi (x) Psi)(P_- (x) sigma)] = mu_Z^act(Phi) for any trace-preserving Psi and any sigma with Tr sigma = 1 (spectator_lift_trace is the single-term collapse via Matrix.trace_kronecker). Scoped generalisation disclosed: complete positivity of Phi, Psi, positivity of sigma and the grading relations Z = Z^* = Z^{-1} are not needed and not assumed. The non-identifiability remark refers to app:microscopic-odd-lift and is not part of the claim."
   },
   "cth:microscopic-odd-lift": {
     "env": "proposition",
@@ -1786,17 +1880,23 @@
   "cor:incidence-one-sided-rank": {
     "env": "corollary",
     "title": "One-sided operator--Schmidt rank certificate",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean:RenewalGeometry.OneSidedRank.hsNorm",
+      "RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean:RenewalGeometry.OneSidedRank.sliceMatrix",
+      "RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean:RenewalGeometry.OneSidedRank.sliceOperator",
+      "RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean:RenewalGeometry.OneSidedRank.schmidtCoefficient",
+      "RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean:RenewalGeometry.OneSidedRank.schmidtRank",
+      "RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean:RenewalGeometry.OneSidedRank.opNorm_euclideanOperatorOfMatrix_le_hsNorm",
+      "RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean:RenewalGeometry.OneSidedRank.norm_sliceOperator_sub_le",
+      "RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean:RenewalGeometry.OneSidedRank.schmidtCoefficient_lower",
+      "RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean:RenewalGeometry.OneSidedRank.schmidtRank_lower",
+      "RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean:RenewalGeometry.OneSidedRank.incidence_one_sided_rank",
       "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue",
       "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_lower_perturbation",
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_eq_zero_of_rank_le",
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_antitone",
-      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_nonneg"
+      "RenewalGeometry/Analysis/ApproximationSingularValues.lean:RenewalGeometry.approximationSingularValue_eq_zero_of_rank_le"
     ],
-    "note": "Partial: in the approximation-number rendering of singular values (σ_{k+1}(A) = dist_op(A, rank ≤ k) on EuclideanOperator m n), the one-sided perturbation σ_k(Y) ≥ σ_k(Ŷ) − ‖Ŷ − Y‖_op (approximationSingularValue_lower_perturbation) and 'rank Y ≤ k ⟹ σ_{k+1}(Y) = 0' (approximationSingularValue_eq_zero_of_rank_le, hence σ_{k+1}(Y) > 0 ⟹ rank Y ≥ k+1) are proved; with antitonicity these give rank Y ≥ #{k : σ̂_k > ε} once ‖Ŷ − Y‖_op ≤ ‖Ŷ − Y‖_HS ≤ ε. Missing: the assembled statement eq:incidence-one-sided-rank itself, the positive-part form (σ̂_k − ε)_+ (σ_k ≥ 0 is approximationSingularValue_nonneg), the HS-to-operator-norm step, and the identification of the operator–Schmidt coefficients of an incidence Y with the singular values of its realigned slice map S_Y (prop:incidence-slice-Gram encoding).",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/Analysis/OneSidedRankCertificateExact.lean: apply approximationSingularValue_lower_perturbation to A = S_Y, B = S_Ŷ as EuclideanOperators (Matrix.toEuclideanLin), bound ‖S_Ŷ − S_Y‖_op ≤ ‖Ŷ − Y‖_HS (operator norm ≤ Frobenius norm: FiniteAnchorOperatorNormExact.matrixL2_mul_le with a unit vector, or Matrix.l2_opNorm_le_frobenius-type lemma), take max with 0; for the rank count, if K = #{k : σ̂_k > ε} then by antitonicity σ̂_K > ε so σ_K(Y) > 0 and approximationSingularValue_eq_zero_of_rank_le (contrapositive) gives rank S_Y ≥ K; rank S_Y is the operator–Schmidt rank (realignment preserves rank, prop:incidence-slice-Gram). Disclose the approximation-number rendering of σ_k."
+    "note": "Proved, in the approximation-number rendering of singular values. An incidence Y in B(K_s,K_t) (x) B(M_s,M_t) is a matrix Y : Matrix (Kt x Mt) (Ks x Ms) C; its slice map S_Y (prop:incidence-slice-Gram) is the realigned matrix sliceMatrix Y as a Euclidean operator (sliceOperator), sigma_{k+1}(Y) := approximationSingularValue (S_Y) k (Eckart-Young rendering: operator-norm distance to rank <= k) and rank Y := rank of S_Y (the operator-Schmidt rank). incidence_one_sided_rank: if hsNorm (Yhat - Y) <= eps (||.||_HS = sqrt of the sum of |entries|^2) then for all k, max(sigmahat_k - eps, 0) <= sigma_k(Y), and for every N, #{k < N : sigmahat_k > eps} <= rank Y (eq:incidence-one-sided-rank). Ingredients proved here: the operator norm of a matrix is at most its Hilbert-Schmidt norm (row-wise Cauchy-Schwarz, opNorm_euclideanOperatorOfMatrix_le_hsNorm), realignment preserves the HS norm, hence ||S_Yhat - S_Y||_op <= ||Yhat - Y||_HS (norm_sliceOperator_sub_le); the count uses antitonicity of the approximation numbers and 'rank <= k => sigma_{k+1} = 0'. The final caveat (a coefficient below the error floor cannot certify absence) is a remark, not a claim; the identification of the approximation numbers with the classical singular values of the SVD is the disclosed rendering (shared with thm:incidence-slice-cluster)."
   },
   "prop:compact-mosco-resolvent": {
     "env": "proposition",

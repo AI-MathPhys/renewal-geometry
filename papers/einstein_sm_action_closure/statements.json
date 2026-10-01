@@ -153,11 +153,14 @@
   "def:critical-curvature-ui": {
     "env": "definition",
     "title": "Uniformly integrable critical curvature energy",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: uniformly integrable curvature energy, UnifIntegrable, small-measure sets, internal-gauge invariance. Mathlib's MeasureTheory.UnifIntegrable (F h) 2 (volume.restrict K) is exactly eq:critical-curvature-ui (sup over h and over measurable E of measure <= delta of the L^2 norm of the indicator), but no library declaration instantiates it for curvature families.",
-    "difficulty": "easy",
-    "plan": "New file Continuum/CriticalCurvatureUniformIntegrabilityExact.lean: define the property as MeasureTheory.UnifIntegrable (fun h => fun x => F h x) 2 (volume.restrict K) (equivalently, unfold to the paper's sup-over-small-sets form via eLpNorm of indicators) and prove the internal-gauge invariance clause from pointwise invariance of the fibre norm |F|_r under unitary conjugation (Algebra/SeriesLogUnitConjugation.lean:frobSq_conj_of_mul). Definition plus one lemma, <= 1 day."
+    "status": "statement_encoded",
+    "lean": [
+      "RenewalGeometry/Continuum/CriticalCurvatureUniformIntegrabilityExact.lean:RenewalGeometry.CriticalCurvatureUI",
+      "RenewalGeometry/Continuum/CriticalCurvatureUniformIntegrabilityExact.lean:RenewalGeometry.criticalCurvatureSmallSetEnergy",
+      "RenewalGeometry/Continuum/CriticalCurvatureUniformIntegrabilityExact.lean:RenewalGeometry.criticalCurvatureUI_iff",
+      "RenewalGeometry/Continuum/CriticalCurvatureUniformIntegrabilityExact.lean:RenewalGeometry.criticalCurvatureUI_gauge_invariant"
+    ],
+    "note": "CriticalCurvatureUI mu K F encodes eq:critical-curvature-ui literally: criticalCurvatureSmallSetEnergy delta = sup_h sup_{E subset K measurable, mu E <= delta} lintegral_E |F_h|^2 (ENNReal lower integral, so no integrability presupposed) tends to 0 as delta -> 0+. The curvature fibre norm |.|_r is the norm of an abstract normed space V (disclosed). criticalCurvatureUI_iff gives the equivalent epsilon-delta form; criticalCurvatureUI_gauge_invariant proves the 'internal-gauge invariant' clause for any fibrewise norm-preserving gauge action (adjoint action of unitary gauge transformations; cf. frobSq_conj_of_mul in Algebra/SeriesLogUnitConjugation.lean for the matrix Frobenius case)."
   },
   "thm:critical-quotient-defect": {
     "env": "theorem",
@@ -196,11 +199,15 @@
   "def:exact-initial-reduction": {
     "env": "definition",
     "title": "Exact finite-dimensional constraint reduction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: exact constraint reduction, correction family, constraint factorization, reader Lipschitz constant, normalized initial record. The object is an abstract C^1 family with a factorization identity and a Lipschitz bound; nothing in Action/ or Gravity/ encodes it.",
-    "difficulty": "easy",
-    "plan": "New file Action/ExactInitialConstraintReductionExact.lean: a structure over abstract normed spaces X_k (the state space with its H^k norm), Y_k^con (constraint target) and R^m with fields iota : R^m -> X_k (C^1 on the closed ball of radius r_*), j : R^m ->L Y_k^con injective, Phi : R^m -> R^m (C^1), basepoint iota 0 = U(z_h)(0), factorization C_k (iota lam) = j (Phi lam) on the ball, and the Lipschitz bound eq:exact-initial-reader-Lipschitz; record the splitting remark as a lemma (complementary component zero on the family). Disclose that H^k is an abstract norm. Definition only, <= 1 day; it is the input of prop:initial-constraint-retraction."
+    "status": "statement_encoded",
+    "lean": [
+      "RenewalGeometry/Action/ExactInitialConstraintReductionExact.lean:RenewalGeometry.ExactInitialConstraintReduction",
+      "RenewalGeometry/Action/ExactInitialConstraintReductionExact.lean:RenewalGeometry.exactInitial_factorization_iff_split",
+      "RenewalGeometry/Action/ExactInitialConstraintReductionExact.lean:RenewalGeometry.ExactInitialConstraintReduction.split",
+      "RenewalGeometry/Action/ExactInitialConstraintReductionExact.lean:RenewalGeometry.exactInitial_factorization_of_split",
+      "RenewalGeometry/Action/ExactInitialConstraintReductionExact.lean:RenewalGeometry.ExactInitialConstraintReduction.constraint_zero_iff"
+    ],
+    "note": "Structure ExactInitialConstraintReduction Ck x0 m r B with fields: correction family corr : R^m (EuclideanSpace) -> X, C^1 on closedBall 0 r_*; injective linear embed j : R^m ->l Y; C^1 retained map Phi on the ball; basepoint corr 0 = x0 (eq:exact-initial-basepoint); factorization Ck (corr l) = j (Phi l) on the ball (eq:exact-initial-factorization); Lipschitz bound ||corr l - corr l'|| <= B |l - l'| on the ball (eq:exact-initial-reader-Lipschitz). Scoped: X (=script X_k with H^k norm) is an abstract real normed space, Y an abstract real vector space, the constraint map Ck abstract, and the normalized record enters only through the datum x0 = U(hat z_h)(0) and the fixed record x_h (C^1 is in lambda). The 'equivalently, a splitting ...' sentence is proved (exactInitial_factorization_iff_split / .split / exactInitial_factorization_of_split), plus constraint_zero_iff (exact constraint zero set = zero set of Phi, by injectivity of j)."
   },
   "thm:aposteriori-physical-shadow": {
     "env": "theorem",
@@ -214,14 +221,16 @@
   "thm:abstract-closure": {
     "env": "lemma",
     "title": "First-variation closure",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Action/ScaledSourceStationarity.lean:RenewalGeometry.stationarityDefect",
-      "RenewalGeometry/Gravity/EinsteinHandoff.lean:RenewalGeometry.one_sequence_limit"
+      "RenewalGeometry/Action/AbstractFirstVariationClosureExact.lean:RenewalGeometry.abstract_first_variation_closure",
+      "RenewalGeometry/Action/AbstractFirstVariationClosureExact.lean:RenewalGeometry.abstract_first_variation_closure_single",
+      "RenewalGeometry/Action/AbstractFirstVariationClosureExact.lean:RenewalGeometry.abstract_first_variation_closure_stationary",
+      "RenewalGeometry/Action/AbstractFirstVariationClosureExact.lean:RenewalGeometry.abstract_first_variation_closure_accumulation",
+      "RenewalGeometry/Action/AbstractFirstVariationClosureExact.lean:RenewalGeometry.abstract_first_variation_closure_exists_stationary",
+      "RenewalGeometry/Action/AbstractFirstVariationClosureExact.lean:RenewalGeometry.abstract_first_variation_closure_defect"
     ],
-    "note": "Partial: the finite-action stationarity defect epsilon_h(K) = sup_{||v||<=1} |D S_h(z_h^d)[I_h v]| is stationarityDefect (Action/ScaledSourceStationarity.lean), and the final clause (a sequentially precompact family whose residual is bounded by vanishing defects has stationary accumulation points) has the abstract counterpart one_sequence_limit (compact container, continuous residual bounded by vanishing defects, subsequence converging to a zero-residual point) ; missing: the triangle-inequality estimate eq:abstract-closure ||DS(z)|| <= epsilon_h + c_h + omega_h in the dual norm of the test Banach space, the vanishing clause DS(z) = 0, and the accumulation-point clause in the paper's form (hypotheses along every convergent subsequence, no continuity of DS assumed).",
-    "difficulty": "easy",
-    "plan": "New file Action/AbstractFirstVariationClosureExact.lean: for a normed test space V and functionals DS z, DS z_h, DS_h in the dual (V ->L[R] R, or V -> R bounded on the unit ball), prove |DS z v| <= |DS z v - DS z_h v| + |DS z_h v - DS_h (I v)| + |DS_h (I v)| <= (omega_h + c_h + epsilon_h) ||v|| and take the sup over the unit ball (ContinuousLinearMap.opNorm_le_bound), reuse stationarityDefect for epsilon_h; deduce DS z = 0 when c_h + epsilon_h -> 0 (omega_h -> 0 given), and the accumulation-point clause by applying the estimate along each convergent subsequence of a sequentially precompact family. Pure functional analysis, <= 1 day."
+    "note": "Full lemma. Test space V a real normed space (completeness not needed, so more general than Banach), DS : X -> V ->L[R] R with operator norm as dual norm, finite actions S_h on normed spaces W_h with first variation fderiv (S_h)(z_h^d), linear lifts I_h, z_h = R_h z_h^d. abstract_first_variation_closure proves eq:abstract-closure ||DS z|| <= eps_h + c_h + omega_h from the budgets eq:abstract-budgets (stated as bounds on the unit ball); _stationary: omega_h -> 0 and c_h + eps_h -> 0 give DS z = 0; _accumulation: for an arbitrary specified sequential convergence relation conv, every limit of a convergent subsequence is stationary when omega -> 0 and c + eps -> 0 hold along every convergent subsequence (no continuity of DS assumed); _exists_stationary adds sequential precompactness; _defect takes eps_h to be the supremum (stationarityDefect form)."
   },
   "lem:products": {
     "env": "lemma",
@@ -541,20 +550,34 @@
   "prop:positive-Higgs-envelope": {
     "env": "proposition",
     "title": "Positive kinetic envelope and the $L^{8/3}$ endpoint",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: positive Higgs kinetic envelope, L^{4/3}-L^{8/3} equivalence, cell mass comparison, positive companion writer. The cellwise envelope is immediate from eq:positive-Higgs-Hodge-comparison, but no Lean declaration states it.",
-    "difficulty": "medium",
-    "plan": "The envelope c_0|K_h^H|^2 <= e_h^{H,+} <= C_0|K_h^H|^2 and the discrete norm equivalence eq:positive-Higgs-L43-L83 are finite algebra on the grid (new file Action/PositiveHiggsEnvelopeExact.lean; easy part, build on the grid norms of Action/NativeDensitiesExact.lean). The identification with the continuum bound for D_{A_h}H_h through prop:mesh-consistency and the strong L^1_loc convergence of e_h^{H,+} after reconstruction need the reconstruction operators and L^2 -> L^1 bilinear passage (Continuum/StrongInterpolationConvergenceExact.lean:tendsto_diagonal_bilinear); medium overall."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsEnvelopeExact.lean:RenewalGeometry.PositiveHiggsEnvelope.positive_higgs_envelope",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsEnvelopeExact.lean:RenewalGeometry.PositiveHiggsEnvelope.lpNorm_equiv",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsEnvelopeExact.lean:RenewalGeometry.PositiveHiggsEnvelope.lpNorm83_sub_le",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsEnvelopeExact.lean:RenewalGeometry.PositiveHiggsEnvelope.tendsto_density_lintegral",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsEnvelopeExact.lean:RenewalGeometry.PositiveHiggsEnvelope.no_automatic_upgrade",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsEnvelopeExact.lean:RenewalGeometry.PositiveHiggsEnvelope.abs_density_sub_le",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsEnvelopeExact.lean:RenewalGeometry.PositiveHiggsEnvelope.amp",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggs_envelope",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggsDensity",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggsLpNorm"
+    ],
+    "note": "All clauses formalised. positive_higgs_envelope (family of cutoffs h, finite cells, packets K h x : D -> F, F a real inner-product space = Higgs fibre with Re of its Hermitian product, comparison c_r|xi|^2 <= r^{mu nu}<xi_mu,xi_nu> <= C_r|xi|^2 with cutoff-independent 0 < c_r <= C_r, masses m >= 0): (1) eq:positive-Higgs-envelope with c_0 = c_r, C_0 = C_r on every cell; (2) the boxed eq:positive-Higgs-L43-L83 as the explicit two-sided bound c_r^{1/2} ||K||_{L_h^{8/3}} <= ||e||_{L_h^{4/3}}^{1/2} <= C_r^{1/2} ||K||_{L_h^{8/3}} (lpNorm_equiv); (3) continuum identification rendered as: for any comparison packet K'_h (the sampled D_{A_h}H_h) the two L_h^{8/3} criteria differ by at most ||K_h - K'_h||_{L_h^{8/3}} (weighted Minkowski, lpNorm83_sub_le), so with a uniformly bounded consistency error (what prop:mesh-consistency supplies on smooth bounded families; that estimate itself is not re-proved here) sup_h ||K_h||_{8/3} < infinity iff sup_h ||K'_h||_{8/3} < infinity. Strong L^1 clause (tendsto_density_lintegral): on an arbitrary measure space (restrict the measure to a compact set for L^1_loc), if the reconstructed packets satisfy int |K_h - K|^2 -> 0 with int |K|^2 < infinity and the reconstructed comparison metrics r_h -> r uniformly with r bounded, then int |e_h - e| -> 0 (amplitudes of K_h - K assumed a.e.-measurable). Sharpness (no_automatic_upgrade): on the side-(n+1) unit-box grid with masses h^4 and Euclidean comparison metric, K_h = h^{-7/4} e_0 on one cell has ||K_h||_{L_h^2} -> 0 and ||e_h||_{L_h^1} -> 0 while ||e_h||_{L_h^{4/3}} = h^{-1/2} -> infinity and ||K_h||_{L_h^{8/3}} = h^{-1/4} -> infinity (the discrete form of the paper's Y_n family; the continuum Y_n computation is not separately formalised). Only m_h >= 0 of the mass comparison is used."
   },
   "cor:positive-Higgs-amplitude-criterion": {
     "env": "corollary",
     "title": "A positive amplitude--energy compiler",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: positive Higgs amplitude, L^1/L^inf to L^{4/3} interpolation, L^{8/3} Higgs kinetic writer. The content is the finite weighted-sum inequality sum_x m_h (e^{H,+})^{4/3} <= ||e^{H,+}||_inf^{1/3} ||e^{H,+}||_1 followed by the pointwise envelope c_0 |K^H_h|^2 <= e^{H,+}_h <= C_0 |K^H_h|^2 of prop:positive-Higgs-envelope.",
-    "difficulty": "easy",
-    "plan": "One-day assembly on a finite grid: for nonnegative cell values e and masses m, sum m e^{4/3} <= (sup e)^{1/3} sum m e (Real.rpow monotonicity), then with the pointwise envelope hypothesis c_0 |K|^2 <= e (prop:positive-Higgs-envelope, taken as a hypothesis) sum m |K|^{8/3} <= c_0^{-4/3} sum m e^{4/3}. Build on the finite Holder pattern of DiscreteAnalysis/SobolevWeyl.lean (holder_l2_l6_cube) and the grid norms of DiscreteAnalysis/NodalRoundingTailExact.lean; disclose the envelope inequality as a scoped hypothesis."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggs_amplitude_criterion",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggs_envelope",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggs_L43_interpolation",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggs_L83_le_L43",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggsLpNorm",
+      "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggsDensity"
+    ],
+    "note": "positiveHiggs_amplitude_criterion: for any family of finite cell sets, packets K h x : D -> F (F real inner product space = Higgs fibre with Re of its Hermitian product), metrics r h x and masses m h x >= 0, with the lower comparison c_r |xi|^2 <= r^{mu nu} Re<xi_mu, xi_nu> (c_r > 0 cutoff-independent, eq:positive-Higgs-Hodge-comparison), uniform L^1_h and L^inf_h bounds on e_h^{H,+} give uniform L_h^{4/3} bounds on e_h^{H,+} and L_h^{8/3} bounds on |K_h^H| = sqrt(sum_mu |K_mu|^2), norms as in eq:positive-discrete-Lp. The parent's needed content (pointwise envelope eq:positive-Higgs-envelope with c_0 = c_r, C_0 = C_r) is proved here as positiveHiggs_envelope from the comparison, so the corollary does not rest on an open parent. Scoped: L^inf_h = max over cells (equal to the mass-weighted ess sup for positive masses); only m >= 0 and the lower comparison constant are used; the sentence about microscopic mechanisms is interpretive. positiveHiggs_envelope can also be cited for the pointwise part of prop:positive-Higgs-envelope."
   },
   "prop:renewal-interface": {
     "env": "proposition",
@@ -570,15 +593,23 @@
   "lem:SM-descent": {
     "env": "lemma",
     "title": "Descent and covariant Yukawa blocks",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/StandardModel/FiniteEinsteinStandardModelInterface.lean:RenewalGeometry.higgsRep",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.sm_descent_yukawa",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.sm_descent",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.higgsConj_mulVec",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.yukawaMin_covariant",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.yukawaExt_covariant",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.bilinear_invariant",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.yukawaExt_affine",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.yukawa_bound",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.yukawaExt",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.yukawaMin",
+      "RenewalGeometry/StandardModel/SMDescentYukawaBlocksExact.lean:RenewalGeometry.SMDescentYukawa.YukawaBank",
       "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.smGaugeQuotientEquiv",
-      "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.mem_smGaugeHom_ker_iff_centralZ6"
+      "RenewalGeometry/StandardModel/FaithfulSMQuotientExact.lean:RenewalGeometry.FaithfulSMQuotient.z6_mem_smGaugeHom_ker"
     ],
-    "note": "Partial: the target group G_SM of eq:gauge-group is realised as S(U(3) x U(2)) with the explicit presentation (SU(3) x SU(2) x U(1)) / Z_6 (smGaugeQuotientEquiv, kernel identified as the central sixth roots of unity in mem_smGaugeHom_ker_iff_centralZ6), and the Higgs doublet with its weak U(2) action is a representation of G_SM itself (higgsRep), so its descent is by construction ; missing: the fermion representations of tab:SM-representations with their hypercharges and the verification that the central Z_6 acts trivially on each (the descent clause proper), the explicit Yukawa blocks eq:explicit-Yukawa-blocks with the conjugate doublet i sigma_2 conj(H), the neutral/Majorana extension, affinity of M_Y(H) in real Higgs coordinates and the bound eq:yukawa-bound on bounded coefficient banks.",
-    "difficulty": "medium",
-    "plan": "Build on StandardModel/SMGaugeQuotientExact.lean and StandardModel/FiniteEinsteinStandardModelInterface.lean: define the one-generation table representations on the cover SU(3) x SU(2) x U(1) with the hypercharge phases, prove the Z_6 kernel acts trivially (a finite root-of-unity computation per row, e.g. exp(2 pi i (n/3 - m/2 + Y)) = 1 for the table's Y), hence descent through smGaugeQuotientEquiv; define M_Y(H) as the block bilinear map with Y_u, Y_d, Y_e in M_3(C), prove affinity in Re/Im H and the operator-norm bound eq:yukawa-bound by the triangle inequality. Days of finite representation algebra."
+    "note": "Descent (sm_descent): the seven rows of tab:SM-representations (Q_L, u_R, d_R, L_L, e_R, optional nu_R, H) are defined on G_SM = S(U(3) x U(2)) as U3 (x) U2, det U2 * U3, U3, (det U2)^{-1} U2, (det U2)^{-1}, 1, U2, and each composed with the covering map (g3,g2,z) -> (z^{-2}g3, z^3 g2) equals the cover representation with its colour/weak factor and U(1) weight 6Y (FaithfulSMQuotient.charged 1/4/-2/-3/-6/0/3); hence the Z_6 generator z6 = (e^{2 pi i/3} I3, -I2, e^{i pi/3}) acts trivially on each row; with smGaugeQuotientEquiv this is descent to the quotient. Yukawa blocks: higgsConj = i sigma_2 conj(H) with higgsConj_mulVec (i sigma_2 conj(UH) = conj(det U) U i sigma_2 conj(H) for U in U(2)); the mass map assembled from Qbar Htilde Y_u u_R + Qbar H Y_d d_R + Lbar H Y_e e_R + h.c. (yukawaMin) and, on the neutral extension, Lbar Htilde Y_nu nu_R + h.c. plus the constant symmetric Majorana block (M_R^T = M_R) on nu_R + nu_R^c (yukawaExt), on the carrier (Q_L + L_L) + (u_R + d_R + e_R) [+ (nu_R + nu_R^c)] tensored with the generation factor C^3; covariance rho(g) M(H) = M(rho_H(g) H) rho(g) for the unitary fermion representation (yukawaMin_covariant, yukawaExt_covariant), hence invariance of the Hermitian mass bilinear Psi^dagger M Psi (bilinear_invariant). Affinity in real Higgs coordinates: M(H) = M(0) + L(H) with L real-linear and M(0) the Majorana block (yukawaExt_affine). eq:yukawa-bound on a bank with all Yukawa/Majorana entries <= R: entries of M(H) <= R(1+|H|), M(H+eta) - M(H) = L(eta) with entries <= R|eta| (yukawa_bound). Renderings: the bound is entrywise (finite-dimensional norm equivalence gives the operator-norm form up to a dimension constant), |H| is the sup norm on C^2; the spacetime-chirality column of the table and the Dirac gamma structure are not part of this internal statement."
   },
   "lem:Whitney": {
     "env": "lemma",
@@ -682,11 +713,16 @@
   "lem:native-discrete-Hodge": {
     "env": "lemma",
     "title": "Exact periodic discrete Hodge identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: discrete Hodge identity, periodic forward differences, discrete exterior derivative d_h^+, discrete codifferential delta_h, discrete H^1 norm. The periodic grid, forward/backward differences and summation by parts exist (Action/NativeFirstJetNormalFormExact.lean: NativeDensity.sum_mul_fwdDiff; Action/ShiftedFirstJetNormalFormExact.lean: ShiftedFirstJet.bwdDiff, sum_bwdDiff) but the identity is not stated.",
-    "difficulty": "easy",
-    "plan": "New file DiscreteAnalysis/PeriodicDiscreteHodgeIdentityExact.lean on the periodic grid Grid n of Action/ShiftedJetActionHessianExact.lean: define d_h^+ A (mu nu) = D^+_mu A_nu - D^+_nu A_mu and delta_h A = - sum_mu D^-_mu A_mu, expand ||d^+ A||^2 = 2 sum_{mu,nu} ||D_mu A_nu||^2 - 2 sum_{mu,nu} <D_mu A_nu, D_nu A_mu>, and show sum_{mu,nu} <D^+_mu A_nu, D^+_nu A_mu> = sum_{mu,nu} <D^-_mu A_mu, D^-_nu A_nu> = ||delta A||^2 by two summations by parts (NativeDensity.sum_mul_fwdDiff / ShiftedFirstJet.sum_bwdDiff) and commutation of shifts; the H^1 bound is then the triangle inequality. Finite algebra, <= 1 day."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/DiscreteAnalysis/PeriodicForwardDifferenceHodgeIdentityExact.lean:RenewalGeometry.periodicHodge_identity",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicForwardDifferenceHodgeIdentityExact.lean:RenewalGeometry.periodicHodge_H1_bound",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicForwardDifferenceHodgeIdentityExact.lean:RenewalGeometry.periodicHodge_identity_unscaled",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicForwardDifferenceHodgeIdentityExact.lean:RenewalGeometry.periodicHodge_shift_pairing",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicForwardDifferenceHodgeIdentityExact.lean:RenewalGeometry.periodicHodgeCodiff",
+      "RenewalGeometry/DiscreteAnalysis/PeriodicForwardDifferenceHodgeIdentityExact.lean:RenewalGeometry.periodicHodgeExtDNormSq"
+    ],
+    "note": "periodicHodge_identity: on any finite additive commutative group X (the periodic grid, e.g. (ZMod N)^4) with lattice steps e_mu, directions a finite linearly ordered type (Fin 4), values in a real inner product space (Lie algebra with invariant inner product), and every mesh h, sum_{mu,nu} ||D^+_mu A_nu||^2_{2,h} = ||d_h^+ A||^2_{2,h} + ||delta_h A||^2_{2,h}, with ||u||^2_{2,h} = h^{dim} sum_x |u(x)|^2, D^+ forward difference, delta_h A = -sum_mu D^-_mu A_mu (eq:native-discrete-divergence), ||d^+A||^2 = sum_{mu<nu} ||D^+_mu A_nu - D^+_nu A_mu||^2. Proof in position space (translation invariance of periodic sums) rather than Fourier. periodicHodge_H1_bound: for h >= 0, ||A||_{1,h} <= 1*(||d^+A|| + ||delta A|| + ||A||_{2,h}) with ||A||^2_{1,h} = sum_nu ||A_nu||^2 + sum_{mu,nu} ||D^+_mu A_nu||^2 (C = 1, uniform in h)."
   },
   "thm:native-discrete-Coulomb": {
     "env": "theorem",
@@ -764,10 +800,27 @@
     "env": "proposition",
     "title": "Exact determinant normalization and semisimple remainder",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: determinant normalization, semisimple remainder, central generator Z_c = (-i/3 I_3, i/2 I_2), site lift t_h, Pi_ss projection of the curvature, adjoint Wilson transport. Finite lattice-gauge algebra in S(U(3) x U(2)) with a central U(1) factor.",
+    "lean": [
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.native_determinant_split_core",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.centralElem",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.smChi_centralElem",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.exp_Zc_fst",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.exp_Zc_snd",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.splitLinks",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.smChi_splitLinks",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.plaq_split",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.ad_splitLinks",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.ad_matrix_splitLinks",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.exp_piSS",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.chartLog_piSS",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.piSS_entry_le",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.splitLinks_lift_change",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.zSix_components",
+      "RenewalGeometry/GaugeTheory/DeterminantSemisimpleSplitExact.lean:RenewalGeometry.DeterminantSplit.zSix_mem_ss_pow_six"
+    ],
+    "note": "Partial (all of the proposition's own group algebra is proved; its analytic inputs come from open records). native_determinant_split_core: on any lattice with G_SM = S(U(3) x U(2)) links U, real site lifts t and potential a, assuming (i) the Abelian normalization e^{it(x)} chi(U_mu(x)) e^{-it(x+mu)} = e^{iha_mu(x)} and h(d_h a) = h^2 f (the conclusions of prop:periodic-determinant-normalization), (ii) logarithms L of the full plaquettes of U' in an injectivity chart Omega of the exponential with l_c(L) = h^2 f and Pi_ss L in Omega (the admissibility and the identity f_h = l_c(F_h) of lem:determinant-screen-flux): V = e^{-haZ_c} U^{e^{tZ_c}} has chi(V) = 1, det V_3 = det V_2 = 1 (V in G_ss exactly); P_{U'} = e^{h^2 f Z_c} P_V exactly; every chart logarithm of P_V equals Pi_ss L (eq:determinant-semisimple-curvature after division by h^2); Ad V = Ad U' (also on the Lie algebra, ad_matrix_splitLinks); changing t by 2 pi k(x) changes V by the central G_ss site gauge z6^{k(x)}, z6 = e^{2 pi Z_c} = (e^{-2 pi i/3} I3, -I2), chi(z6) = 1, z6^6 = 1. Also: e^{tZ_c} central one-parameter subgroup with chi(e^{tZ_c}) = e^{it} and exp(sZ_c) = e^{sZ_c} (matrix exponential), l_c(Z_c) = 1, Pi_ss linear idempotent, entrywise ||Pi_ss X|| <= 2||X|| (inherited semisimple screen up to a fixed constant). Missing: the inputs (i)-(ii) themselves (prop:periodic-determinant-normalization, lem:determinant-screen-flux, both open), and certificate invariance of the central lift change (prop:rooted-gauge-certificate, open).",
     "difficulty": "medium",
-    "plan": "Days of finite algebra: define the central one-parameter subgroup g = exp(t Z_c) in the Standard-Model gauge group (StandardModel/SMGaugeQuotientExact.lean:SMGaugeGroup, StandardModel/SMGroup.lean), the gauge-transformed and centrally rescaled links V = exp(-h a Z_c) U^g, prove det-normalisation V in G_ss from the Abelian normalization of prop:periodic-determinant-normalization (taken as hypothesis), show that central factors commute with the plaquette so that log-plaquettes split as Pi_ss F(U') plus a central part (DiscreteAnalysis/ShiftedPlaquetteLogarithmUniformExact.lean, Action/NativeScalingBlocksExact.lean:gaugePlaquette), and that Ad(V) = Ad(U') since Z_c is central. Build on GaugeTheory/LatticeHolonomyGaugeCovariance.lean for the gauge action on links."
+    "plan": "Close by instantiation once the parents are proved: (1) prop:periodic-determinant-normalization supplies t, a with hypothesis hN and d_h a = f (hcurl); (2) lem:determinant-screen-flux supplies, for small h, admissible logarithms of the full plaquettes with f_h = l_c(F_h) (this step needs chi(e^X) = e^{i l_c(X)}, i.e. det exp = exp tr for 2x2 matrices, absent from Mathlib (TODO in Analysis/Normed/Algebra/MatrixExponential.lean); for anti-Hermitian X it can be proved by unitary diagonalisation) and an injectivity chart for the matrix exponential (local inverse from HasStrictFDerivAt of exp at 0); (3) prop:rooted-gauge-certificate gives certificate invariance under the central G_ss site gauge z6^{k(x)} produced by splitLinks_lift_change. The G_SM covariance of the matter record and action is FiniteStandardModelActionGaugeCovarianceExact.lean:finiteStandardModelAction_gaugeInvariant."
   },
   "lem:flat-semisimple-normalization": {
     "env": "lemma",
@@ -819,20 +872,27 @@
   "lem:translation-Kato": {
     "env": "lemma",
     "title": "Translation Kato inequality",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: Kato inequality, translation modulus, reverse triangle inequality with unitary transport. The statement is | ||Y(x+s e_mu)|| - ||Y(x)|| | <= ||T^A Y(x) - Y(x)|| for a norm-preserving covariant translation T^A (parallel transport is a fibre isometry), i.e. abs_norm_sub_norm_le after ||T^A Y(x)|| = ||Y(x+s e_mu)||.",
-    "difficulty": "easy",
-    "plan": "One lemma: for a family of linear isometries P_x (the parallel transports of a unitary representation) and T Y (x) = P_x (Y (x + s e_mu)), prove |‖Y (x + s e_mu)‖ - ‖Y x‖| ≤ ‖T Y x - Y x‖ from LinearIsometry.norm_map and abs_norm_sub_norm_le; add the summed L^2 form (sum of squares monotone). New file in DiscreteAnalysis/ or GaugeTheory/ next to GaugeTheory/LatticeHolonomyGaugeCovariance.lean (which supplies the link-transport conventions)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/GaugeTheory/TranslationKatoInequalityExact.lean:RenewalGeometry.translation_kato",
+      "RenewalGeometry/GaugeTheory/TranslationKatoInequalityExact.lean:RenewalGeometry.translation_kato_eLpNorm",
+      "RenewalGeometry/GaugeTheory/TranslationKatoInequalityExact.lean:RenewalGeometry.translation_kato_modulus_tendsto",
+      "RenewalGeometry/GaugeTheory/TranslationKatoInequalityExact.lean:RenewalGeometry.katoCovariantTranslation",
+      "RenewalGeometry/GaugeTheory/TranslationKatoInequalityExact.lean:RenewalGeometry.translation_kato_of_isometry"
+    ],
+    "note": "translation_kato: for a Hilbert fibre H over R or C, any representation rho : G -> H ->L H with values in unitary (H ->L H), parallel transports P x : G and displacement a (= s e_mu) in an additive group of points, | |Y(x+a)| - |Y(x)| | <= |T Y(x) - Y(x)| with T Y(x) = rho(P x)(Y(x+a)) (eq:continuum-covariant-translation). The 'thus' clause: translation_kato_eLpNorm (the L^p, in particular L^2, ordinary translation modulus of |Y| is bounded by the covariant one, any measure) and translation_kato_modulus_tendsto (vanishing covariant modulus forces vanishing ordinary modulus)."
   },
   "lem:compact-magnitude-ui": {
     "env": "lemma",
     "title": "Compact scalar magnitude implies energy uniform integrability",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: relatively compact in L^2 implies uniform integrability, TotallyBounded with UnifIntegrable, epsilon-net uniform integrability. Mathlib has UnifIntegrable for finite families (unifIntegrable_finite) and for L^p-convergent sequences but not for totally bounded families; the library uses UnifIntegrable only in Continuum/GaussianKernelVitaliExact.lean (domination transfer).",
-    "difficulty": "easy",
-    "plan": "New file Continuum/CompactFamilyUniformIntegrabilityExact.lean: for a finite measure mu and a family f : iota -> Lp E 2 mu with TotallyBounded (range f), prove UnifIntegrable f 2 mu (which is eq:compact-magnitude-ui: sup over small sets of the L^2 norm of the indicator, i.e. of int_E |f|^2) by choosing a finite epsilon-net, applying MeasureTheory.unifIntegrable_finite to the net and the triangle inequality eLpNorm (indicator (f i)) <= eLpNorm (indicator (f i - g)) + eLpNorm (indicator g) <= epsilon + epsilon. <= 1 day."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Continuum/CompactMagnitudeUniformIntegrabilityExact.lean:RenewalGeometry.compactMagnitude_ui",
+      "RenewalGeometry/Continuum/CompactMagnitudeUniformIntegrabilityExact.lean:RenewalGeometry.compactMagnitude_ui_of_isCompact_closure",
+      "RenewalGeometry/Continuum/CompactMagnitudeUniformIntegrabilityExact.lean:RenewalGeometry.compactMagnitude_unifIntegrable",
+      "RenewalGeometry/Continuum/CompactMagnitudeUniformIntegrabilityExact.lean:RenewalGeometry.compactMagnitude_setLIntegral_eq"
+    ],
+    "note": "Proved. For a family F : ι → Lp V 2 (μ.restrict K) (V any normed group) that is relatively compact (compactMagnitude_ui_of_isCompact_closure: IsCompact (closure (range F))) or totally bounded (compactMagnitude_ui), eq:compact-magnitude-ui holds in the form CriticalCurvatureUI μ K F of Continuum/CriticalCurvatureUniformIntegrabilityExact.lean: sup_f sup_{E ⊆ K measurable, μ E ≤ δ} ∫⁻_E ‖f‖² → 0 as δ ↓ 0. Proof as in the paper: finite L² net of radius ε/2, MeasureTheory.unifIntegrable_finite for the net (absolute continuity), and the triangle inequality ‖1_E f‖₂ ≤ ‖f − f_j‖₂ + ‖1_E f_j‖₂ (compactMagnitude_unifIntegrable gives UnifIntegrable F 2 μ in Mathlib's sense). The finite-measure hypothesis on K is not needed and is not assumed (strictly more general)."
   },
   "prop:Wilson-screen-compactness": {
     "env": "proposition",
@@ -984,14 +1044,13 @@
   "prop:initial-constraint-retraction": {
     "env": "proposition",
     "title": "Uniform initial-constraint retraction",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Action/CriticalShadowingExact.lean:RenewalGeometry.CriticalShadowing.exists_unique_zero_in_newton_ball",
-      "RenewalGeometry/Action/CriticalShadowingExact.lean:RenewalGeometry.CriticalShadowing.Hypotheses"
+      "RenewalGeometry/Action/InitialConstraintRetractionExact.lean:RenewalGeometry.initialConstraintRetraction_derivAtZero",
+      "RenewalGeometry/Action/InitialConstraintRetractionExact.lean:RenewalGeometry.initialConstraintRetraction",
+      "RenewalGeometry/Action/ExactInitialConstraintReductionExact.lean:RenewalGeometry.ExactInitialConstraintReduction"
     ],
-    "note": "Partial: the unique-zero clause is the frozen-Newton contraction of exists_unique_zero_in_newton_ball (unique zero of a C^1 map in the Newton ball around a small residual, given an inverse of the base derivative), proved there under a Lipschitz-derivative hypothesis (S3) with M L rho <= 1/2 rather than the paper's uniform derivative margin ||D Phi(lambda) - A|| <= gamma_*/2 on |lambda| <= r_*, and with the inverse bound ||B|| <= M in place of sigma_min(A_h) >= gamma_* ; missing: the statement with the paper's margin hypotheses and radius 2 gamma_*^{-1} beta_h, the corrected datum d_h = iota_h(x_h, lambda_h), its membership in C_k via the exact factorization eq:exact-initial-factorization, and the H^k bound eq:initial-data-retraction from the reader Lipschitz constant B_*.",
-    "difficulty": "easy",
-    "plan": "New file Action/InitialConstraintRetractionExact.lean, reusing the mean-value argument of Action/CriticalShadowingExact.lean: on R^m with A invertible and ||A^{-1}|| <= gamma_*^{-1} (sigma_min >= gamma_*), the map T lambda = lambda - A^{-1} Phi(lambda) has derivative A^{-1}(A - D Phi(lambda)) of norm <= 1/2 on the ball, so it is a 1/2-contraction mapping the closed ball of radius 2 gamma_*^{-1} beta_h into itself (||T lambda|| <= |lambda|/2 + gamma_*^{-1} beta_h); Banach fixed point gives the unique zero lambda_h. Then d_h := iota_h(x_h, lambda_h) satisfies C_k(d_h) = j Phi(lambda_h) = 0 (structure of def:exact-initial-reduction) and eq:initial-data-retraction from the Lipschitz field. <= 1 day."
+    "note": "Proved on the structure ExactInitialConstraintReduction (def:exact-initial-reduction). initialConstraintRetraction_derivAtZero is the literal statement: with A_h := D_λΦ_h(0) (fderivWithin on the closed ball |λ| ≤ r_*, where Φ_h is C¹), σ_min(A_h) ≥ γ_* rendered as γ_*‖v‖ ≤ ‖A_h v‖ ∀v (the definition of the smallest singular value in the Euclidean norm), the margin ‖DΦ_h(λ) − A_h‖ ≤ γ_*/2 on |λ| ≤ r_*, |Φ_h(0)| ≤ β_h and 2γ_*⁻¹β_h ≤ r_*: there is a unique zero λ_h of Φ_h in the closed ball of radius 2γ_*⁻¹β_h, and every such zero gives d_h = ι_h(λ_h) with 𝔠_k(d_h) = 0 (exact factorization, not the contraction) and ‖d_h − 𝒰(ẑ_h)(0)‖ ≤ 2B_*γ_*⁻¹β_h. initialConstraintRetraction is the same for an arbitrary linear A with these margins. Proof as in the paper: invertibility of A from the lower bound (finite dimension), mean-value inequality for N = Φ − A, the frozen-inverse map T = λ − A⁻¹Φ is a 1/2-contraction of the ball into itself, Banach fixed point (ContractingWith) on the complete closed ball. Scoped hypothesis disclosed: 0 ≤ B_* (implicit for a Lipschitz constant). The closing remarks (only the initial datum is corrected; tube membership separate) are commentary, not formalized."
   },
   "cor:validated-initial-retraction": {
     "env": "corollary",
@@ -1056,11 +1115,23 @@
   "lem:harmonic-defect-forcing": {
     "env": "lemma",
     "title": "Exact harmonic-defect forcing identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: harmonic defect C^mu = g^{ab} Gamma^mu_{ab}, reduced Einstein tensor, trace reversal, metric wave operator -1/2 g^{ab} d_a d_b g_{mu nu} + Q(g, dg). Gravity/CoordinateCurvature.lean has Christoffel symbols and Ricci/scalar curvature from pointwise metric/connection jets (FLRW case evaluated), but not the general reduced-Ricci decomposition.",
-    "difficulty": "medium",
-    "plan": "Days of finite index algebra over Fin 4 at a point: with the metric second jet (g, dg, d^2 g), define C^mu = g^{ab} Gamma^mu_{ab}, C_nu = g_{nu mu} C^mu, the tensor H_{mu nu} = nabla_(mu C_nu) - 1/2 g_{mu nu} nabla_a C^a, and prove Ric_{mu nu} = -1/2 g^{ab} d_a d_b g_{mu nu} + 1/2 (d_mu C_nu + d_nu C_mu) + Q'_{mu nu}(g, dg) with Q' explicit (Ricci in terms of Christoffel derivatives from Gravity/CoordinateCurvature.lean:ricci, christoffel), then the trace-reversed identities eq:harmonic-residual-trace-reversal and eq:off-harmonic-metric-wave. Existence of Q as a first-order expression is witnessed by the explicit remainder; the pointwise symbolic identity is checkable by expanding sums over Fin 4 (simp/ring), which is the heavy part."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.reducedEinstein_eq",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.harmonic_residual_trace_reversal",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.trG_defectTensor",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.ricci_sub_symDefect",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.principal_part",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.qRem",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.qRem_smul",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.qRem_contDiff",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.ricci_trace_reversal",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.off_harmonic_metric_wave",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.dginv_unique",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.defectTensor",
+      "RenewalGeometry/Gravity/HarmonicDefectForcingExact.lean:RenewalGeometry.HarmonicDefect.reducedEinstein"
+    ],
+    "note": "Proved as an exact pointwise identity on the metric 2-jet (the jet convention of Gravity/CoordinateCurvature.lean), over any finite index type with Fintype.card n = 4 where traces enter. Data at a point: g, its inverse gi (g gi = 1, gi symmetric), dg = dg_{mu nu}/dx^alpha, ddg (symmetric in the two derivative and in the two metric indices); the derived jets are those of the product rule: d(g^{-1}) = -g^{-1} dg g^{-1} (dginv, and dginv_unique shows it is forced by differentiating g g^{-1} = 1), Gamma = chr, dGamma = dchr1 + dchr2, C^mu = g^{ab}Gamma^mu_{ab}, nabla_mu C_nu = d_mu(g_{nu l} C^l) - Gamma^l_{mu nu} C_l, nabla_a C^a := g^{ab} nabla_a C_b (metric compatibility). Results: reducedEinstein_eq (hat G = G - H, eq:reduced-Einstein/eq:harmonic-defect-tensor), trG_defectTensor (tr_g H = -nabla_a C^a in 4D), harmonic_residual_trace_reversal (eq:harmonic-residual-trace-reversal, any T, Lambda, kappa), ricci_sub_symDefect (Ric - nabla_(mu C_nu) = -1/2 g^{ab} d_a d_b g_{mu nu} + Q_{mu nu} with the explicit remainder qRem(g, g^{-1}, dg) containing no second derivatives; principal-part cancellation in principal_part), qRem_smul (Q quadratic: Q(t dg) = t^2 Q(dg)), qRem_contDiff (Q is C^infinity, polynomial in (g, g^{-1}, dg)), ricci_trace_reversal (eq:trace-reversal-residual), off_harmonic_metric_wave (eq:off-harmonic-metric-wave). Rendering disclosed: the identity is stated on 2-jets at a point (which is what 'every smooth field tuple satisfies' means pointwise); the passage from a smooth metric field to its jets (that the jet formulas are the actual derivatives) is the product rule and is not re-derived with fderiv, except for the inverse-metric jet (dginv_unique)."
   },
   "prop:actual-jet-writer": {
     "env": "proposition",
@@ -1332,11 +1403,14 @@
   "prop:component-reader": {
     "env": "proposition",
     "title": "Assembly of full-reader bounds from component certificates",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: component reader, block assembly of reader constants, tuple Fourier tail, Cauchy-Schwarz in the block index. Action/NativeReaderCertificateExact.lean (weighted tail, reader constants) and Action/SobolevReaderCriterionExact.lean (tail tau_{h,m}) define the reader tail for a single coefficient space but not the block assembly.",
-    "difficulty": "easy",
-    "plan": "One-day assembly: for a tuple-valued coefficient map, the Euclidean norm of each Fourier coefficient is at most the sum of the block norms, so the weighted tail tau(u) <= sum_b tau(u^(b)) (Finset.sum_le_sum with the nonnegative weights of Action/SobolevReaderCriterionExact.lean:SobolevReader.tail or Action/NativeReaderCertificateExact.lean); apply the component bounds t_b + c_b sqrt(V_b) and Cauchy-Schwarz sum_b c_b sqrt(V_b) <= (sum c_b^2)^{1/2} (sum V_b)^{1/2} (Finset.inner_mul_le_norm_mul_norm / Real.inner_mul_le_norm_mul_norm on EuclideanSpace). Disclose the fixed norm-equivalence constants as an explicit factor."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/ComponentReaderAssemblyExact.lean:RenewalGeometry.SobolevReader.componentReader_assembly",
+      "RenewalGeometry/Action/ComponentReaderAssemblyExact.lean:RenewalGeometry.SobolevReader.componentReader_assembly_euclidean",
+      "RenewalGeometry/Action/ComponentReaderAssemblyExact.lean:RenewalGeometry.SobolevReader.componentReader_tail_le_sum",
+      "RenewalGeometry/Action/ComponentReaderAssemblyExact.lean:RenewalGeometry.SobolevReader.componentReader_sum_le"
+    ],
+    "note": "Proved for the reader tail τ_{h,m}(K;u) = Σ_{ℓ∈Λ,|ℓ|_∞>K}(1+|ℓ|₁/K)^m‖û(ℓ)‖ (SobolevReader.tail of Action/SobolevReaderCriterionExact.lean) and a finite block index β with blocks in arbitrary normed spaces F b. componentReader_assembly: if the tuple coefficient norm satisfies ‖û(ℓ)‖ ≤ κ Σ_b ‖û^{(b)}(ℓ)‖ (the fixed norm-equivalence constant κ ≥ 0 of the component norms, the paper's 'up to the fixed equivalence constants') and τ(u^{(b)}) ≤ t_b + c_b√V_b, then τ(u) ≤ κ(Σ_b t_b + (Σ_b c_b²)^{1/2}√V), V = Σ_b V_b. componentReader_assembly_euclidean: for the Euclidean block norm (u : Mode → PiLp 2 F) κ = 1 and eq:component-reader holds verbatim. Proof as in the paper: coefficient norm ≤ sum of block norms, nonnegative tail weights, Cauchy–Schwarz in the block index. Scoped hypothesis disclosed: V_b ≥ 0 (energies); c_b of any sign. The S(U(3)×U(2)) gauge-identification clauses are disclaimers, not formalized."
   },
   "lem:native-firstjet-normal-form": {
     "env": "lemma",
@@ -1397,21 +1471,27 @@
   "prop:normal-source": {
     "env": "proposition",
     "title": "Tangential stationarity and the missing normal row",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: tangential stationarity, normal row, right inverse of the constraint derivative, projector I - B DC, kernel-restricted stationarity. Pure finite-dimensional linear algebra with no library counterpart (Action/ScaledSourceStationarity.lean bounds the same supremum by a different mechanism).",
-    "difficulty": "easy",
-    "plan": "New file Action/NormalSourceBoundExact.lean: on a finite-dimensional real inner-product space X_h with DC : X_h ->L Z_h, a right inverse B (DC B = id) and P = id - B DC, prove P w in ker DC for every w and w = P w + B (DC w); hence |DS[I v]| <= |DS[P I v]| + |DS[B (DC (I v))]| <= a_h ||P I v|| + b_h ||DC I v|| <= a_h L^tan + b_h L^nor for unit tests, and take the sup (reuse Action/ScaledSourceStationarity.lean:stationarityDefect). Surjectivity of DC is implied by the right inverse and need not be assumed separately. <= 1 day."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/ConstraintNormalRowExact.lean:RenewalGeometry.normalSource_iSup_bound",
+      "RenewalGeometry/Action/ConstraintNormalRowExact.lean:RenewalGeometry.normalSource_bound",
+      "RenewalGeometry/Action/ConstraintNormalRowExact.lean:RenewalGeometry.normalSource_counterexample",
+      "RenewalGeometry/Action/ConstraintNormalRowExact.lean:RenewalGeometry.constraintNormalProjector_mem_ker",
+      "RenewalGeometry/Action/ConstraintNormalRowExact.lean:RenewalGeometry.constraintNormalProjector_decomp",
+      "RenewalGeometry/Action/ConstraintNormalRowExact.lean:RenewalGeometry.constraintNormal_surjective"
+    ],
+    "note": "Proved, on arbitrary real normed spaces X_h, Z_h, P (more general than the finite Hilbert space of the paper), with S_h : X_h → ℝ, C_h : X_h → Z_h, DS_h(x_h) = fderiv ℝ S x, DC_h(x_h) = fderiv ℝ C x, B_h a right inverse of DC_h(x_h) (surjectivity follows, constraintNormal_surjective), P_h = I − B_h DC_h (constraintNormalProjector) and a continuous linear lift I_h. normalSource_bound / normalSource_iSup_bound: under ‖P_h I_h v‖ ≤ L^tan, ‖DC_h I_h v‖ ≤ L^nor for ‖v‖ ≤ 1, |DS_h[w]| ≤ a_h‖w‖ on ker DC_h and |DS_h[B_h q]| ≤ b_h‖q‖, one has sup_{‖v‖≤1} |DS_h(x_h)[I_h v]| ≤ a_h L^tan + b_h L^nor (eq:normal-source-bound), via P_h w ∈ ker DC_h and w = P_h w + B_h DC_h w. normalSource_counterexample: S(x,y) = x² + y, C(x,y) = y — DS(0,0) vanishes on ker DC(0,0) (restricted stationarity) but DS(0,0)[(0,1)] = 1, the 'In particular' clause. Scoped hypotheses disclosed: a_h, b_h ≥ 0 (implicit constants of the covector bounds)."
   },
   "prop:constraint-extension": {
     "env": "proposition",
     "title": "Residual-preserving extension of a constrained identity",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Gravity/CurvatureEnergyPropagationExact.lean:RenewalGeometry.curvature_energy_propagation"
+      "RenewalGeometry/Action/ConstraintNormalRowExact.lean:RenewalGeometry.constraintExtension_ftc",
+      "RenewalGeometry/Action/ConstraintNormalRowExact.lean:RenewalGeometry.constraintTracking",
+      "RenewalGeometry/Action/ConstraintNormalRowExact.lean:RenewalGeometry.constraintTracking_le",
+      "RenewalGeometry/Action/ConstraintNormalRowExact.lean:RenewalGeometry.constraintExtension_matrix_estimate"
     ],
-    "note": "Partial: the Gronwall-type propagation bound with a time-dependent growth rate is proved in Gravity/CurvatureEnergyPropagationExact.lean:curvature_energy_propagation (z(t) <= exp(int_0^t a) [z(0) + int_0^t exp(-int_0^s a) ||f(s)|| ds] for y' = (K+L) y + f with <x,(M'+ML+L^T M)x> <= 2a<x,Mx>; with M = id, K = 0, L = A(t), a = ||A(t)||, f = r this is eq:constraint-tracking up to the crude bound exp(-int a) <= 1) ; missing: the fundamental-theorem identity eq:constraint-extension for a C^1 matrix-valued map along the normal segment t |-> (s, t c), the assembly sup ||c_a|| <= C e^M a^p from ||c_a(0)|| + ||r_a||_{L^1} <= C a^p, and the O(a^p) matrix estimate for J(s,c) - J(s,0) under a uniform D_c J bound.",
-    "difficulty": "easy",
-    "plan": "One-day assembly in a new Action/ or Analysis/ file: (i) eq:constraint-extension from intervalIntegral.integral_eq_sub_of_hasDerivAt applied to t |-> J(s, t c) with the chain rule (HasFDerivAt.comp; pattern Action/ShiftedFirstJetNormalFormExact.lean:122); (ii) eq:constraint-tracking by instantiating Gravity/CurvatureEnergyPropagationExact.lean:curvature_energy_propagation with M = fun _ => id, K = 0, L = A, a = fun t => ||A t||, f = r (scoped hypotheses to disclose: A, r continuous, c differentiable, i.e. the tracking equation holds classically) and bounding exp(-int a) <= 1, exp(int_0^t a) <= exp M; (iii) the matrix estimate ||J(s,c) - J(s,0)|| <= sup ||D_c J|| ||c|| from (i) by norm_integral_le_of_norm_le_const."
+    "note": "Proved. Chart (s,c) ∈ E_s × E_c (real normed spaces), J : E_s × E_c → F C¹ into a complete normed space F (matrix-valued maps: F = matrices with any norm), D_cJ(s,c) = fderiv of c' ↦ J(s,c'). constraintExtension_ftc: eq:constraint-extension J(s,c) = J(s,0) + ∫₀¹ D_cJ(s,tc)[c] dt (FTC along the normal segment). constraintTracking: for ċ = A(t)c + r(t) on [0,T] with ∫₀ᵀ‖A‖ ≤ M and ‖c(0)‖ + ∫₀ᵀ‖r‖ ≤ C a^p, ‖c(t)‖ ≤ C e^M a^p for all t ∈ [0,T] (eq:constraint-tracking), from the Gronwall bound constraintTracking_le ‖c(t)‖ ≤ e^M(‖c(0)‖ + ∫₀ᵀ‖r‖), proved by an ε-perturbed comparison function e^{∫₀ᵗ‖A‖}(‖c(0)‖ + ε + ∫₀ᵗ‖r‖ + εt) and Mathlib's image_norm_le_of_norm_deriv_right_lt_deriv_boundary. constraintExtension_matrix_estimate: ‖D_cJ‖ ≤ L uniformly gives ‖J(s(t),c(t)) − J(s(t),0)‖ ≤ L·C e^M a^p on [0,T] (the O(a^p) matrix estimate). Scoped hypotheses disclosed: the tracking equation holds classically (c continuous on [0,T] with right derivative A(t)c(t) + r(t) on [0,T), A and r continuous on [0,T]) rather than in the Carathéodory/L¹ sense. The closing caveat (no estimate for an independent state-only source f(s,c); constant J counterexample) is commentary and not formalized."
   }
 }

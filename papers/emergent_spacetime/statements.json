@@ -146,7 +146,7 @@
   "thm:main-common-action": {
     "env": "theorem",
     "title": "Finite common-action exactness",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "RenewalGeometry/Action/FiniteVariationCanonicalHodgeExact.lean:RenewalGeometry.finiteCommonActionExactness_canonicalHodge",
       "RenewalGeometry/Action/FiniteVariationCanonicalHodgeExact.lean:RenewalGeometry.finiteVariationComplex_canonicalHodgeDecomposition",
@@ -154,11 +154,17 @@
       "RenewalGeometry/Action/FiniteVariationComplexExactness.lean:RenewalGeometry.finiteVariationComplex_commonAction_anchor_unique",
       "RenewalGeometry/Action/FiniteVariationComplexExactness.lean:RenewalGeometry.finitePathIntegral_coboundary",
       "RenewalGeometry/Action/FiniteVariationComplexExactness.lean:RenewalGeometry.finiteVariationComplex_hodge_distance_bound",
-      "RenewalGeometry/Action/FiniteVariationComplexExactness.lean:RenewalGeometry.FirstHomologyRepresentativeCertificate"
+      "RenewalGeometry/Action/FiniteVariationComplexExactness.lean:RenewalGeometry.FirstHomologyRepresentativeCertificate",
+      "RenewalGeometry/Action/FiniteVariationComponentAnchorExact.lean:RenewalGeometry.finiteVariationComplex_commonAction_anchor_unique_components",
+      "RenewalGeometry/Action/FiniteVariationComponentAnchorExact.lean:RenewalGeometry.finiteVariationComplex_commonAction_anchored_existsUnique",
+      "RenewalGeometry/Action/FiniteVariationComponentAnchorExact.lean:RenewalGeometry.edgeCoboundary",
+      "RenewalGeometry/Action/FiniteVariationComponentAnchorExact.lean:RenewalGeometry.incidenceGraph",
+      "RenewalGeometry/Action/FiniteVariationComponentAnchorExact.lean:RenewalGeometry.edgeCoboundary_eq_zero_iff",
+      "RenewalGeometry/Action/FiniteVariationComponentAnchorExact.lean:RenewalGeometry.edgeCoboundary_anchor_unique_components",
+      "RenewalGeometry/Action/FiniteVariationComponentAnchorExact.lean:RenewalGeometry.edgeCoboundary_anchored_existsUnique",
+      "RenewalGeometry/Action/FiniteVariationComponentAnchorExact.lean:RenewalGeometry.edgeCoboundary_anchor_unique_of_preconnected"
     ],
-    "note": "Partial: all boxed clauses proved (Action/ files cited); the new version states the uniqueness clause with one anchor per connected component of the complex, while the Lean proves it for connected complexes (ker d0 = constants). Re-verified against the new text. On a finite-dimensional real inner-product variation complex d1 d0 = 0: alpha = d0 S iff d1 alpha = 0 and alpha pairs to zero with a certified family of cycle representatives spanning cycles mod boundaries (FirstHomologyRepresentativeCertificate over R; real coefficients see exactly the free part of H_1(V;Z), which is what the new text now asks for); S is reconstructed by telescoping path integration; the canonical Hodge decomposition and coexact singular-value floor give dist(alpha, Ran d0)^2 <= ||P_har alpha||^2 + sigma^-2 ||d1 alpha||^2 exactly as displayed. Scoped: the uniqueness clause (finiteVariationComplex_commonAction_anchor_unique) is proved for a connected complex (ker d0 = constants, one anchor); the new per-component wording ('one anchor on each connected component') is its componentwise application and is not separately stated in Lean.",
-    "difficulty": "easy",
-    "plan": "Generalise the anchor-uniqueness clause to one anchor per connected component: ker d0 = locally constant functions (one per component), then the existing argument componentwise; ~half a day on the cited Action files."
+    "note": "Proved. On a finite-dimensional real inner-product variation complex d1 d0 = 0: alpha = d0 S iff d1 alpha = 0 and alpha pairs to zero with a certified family of cycle representatives spanning cycles mod boundaries (finiteVariationComplex_commonAction_exactness with FirstHomologyRepresentativeCertificate over R: real coefficients see exactly the free part of H_1(V;Z)); S is reconstructed by telescoping path integration (finitePathIntegral_coboundary); the canonical Hodge decomposition and the coexact singular-value floor give dist(alpha, Ran d0)^2 <= ||P_har alpha||^2 + sigma^-2 ||d1 alpha||^2 (finiteCommonActionExactness_canonicalHodge). Per-component anchor clause (new, FiniteVariationComponentAnchorExact.lean): abstractly, if ker d0 consists of functions constant on each fibre of a component labelling, two common actions with the same coboundary agreeing at one anchor per component are equal, and with the converse inclusion every exact alpha has exactly one common action with prescribed anchor values (finiteVariationComplex_commonAction_anchor_unique_components / _anchored_existsUnique); concretely, on the one-skeleton with oriented edges src, tgt : E -> V and (d0 S) e = S(tgt e) - S(src e) (edgeCoboundary), ker d0 is exactly the functions constant on the SimpleGraph.ConnectedComponent of the incidence graph (edgeCoboundary_eq_zero_iff), so one anchor vertex on each connected component makes S unique (edgeCoboundary_anchor_unique_components) and every exact alpha has a unique anchored common action (edgeCoboundary_anchored_existsUnique); the connected case recovers the old one-anchor clause (edgeCoboundary_anchor_unique_of_preconnected). Scoped: the coexact singular-value floor sigma_coex is an explicit hypothesis (hcoexactFloor), as before."
   },
   "thm:main-action-stationarity": {
     "env": "theorem",
@@ -176,16 +182,22 @@
   "def:main-gravitational-class": {
     "env": "definition",
     "title": "Local curvature-linear gravitational class",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [
       "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.gravitational_score_classification",
       "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.inducedBivectorAction",
       "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.metricPairing",
-      "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.epsilonPairing"
+      "RenewalGeometry/Lorentz/LorentzNaturalBivectorClassificationExact.lean:RenewalGeometry.epsilonPairing",
+      "RenewalGeometry/Lorentz/GravitationalClassDensity.lean:RenewalGeometry.GravitationalClassDensity",
+      "RenewalGeometry/Lorentz/GravitationalClassDensity.lean:RenewalGeometry.GravitationalClassDensity.IsLorentzNatural",
+      "RenewalGeometry/Lorentz/GravitationalClassDensity.lean:RenewalGeometry.GravitationalClassDensity.ofCoefficients",
+      "RenewalGeometry/Lorentz/GravitationalClassDensity.lean:RenewalGeometry.holstDensity",
+      "RenewalGeometry/Lorentz/GravitationalClassDensity.lean:RenewalGeometry.palatiniDensity",
+      "RenewalGeometry/Lorentz/GravitationalClassDensity.lean:RenewalGeometry.volumeDensity",
+      "RenewalGeometry/Lorentz/GravitationalClassDensity.lean:RenewalGeometry.GravitationalClassDensity.classification",
+      "RenewalGeometry/Lorentz/GravitationalClassDensity.lean:RenewalGeometry.GravitationalClassDensity.coefficients_unique"
     ],
-    "note": "Partial: the class is present only implicitly, as the hypothesis shape of gravitational_score_classification (a real bilinear pairing A of the coframe bivector with the curvature on the carrier BivectorIndex = Fin 2 × Fin 3, i.e. the bidegree-(2,1) part, together with an alternating coframe four-form ω, i.e. the degree-four curvature-free part), with metricPairing / epsilonPairing the η- and ε-contractions and the volume as λ·det. Missing: a named Lean definition of the class itself (spacetime-constant real coefficients, admitted internal contractions η / ε / scalar multiplicity commutant, exclusion of inverse coframe, torsion polynomials, curvature derivatives, background tensors and matter, comparison modulo exact terms on compactly supported bulk tests, separate boundary functionals).",
-    "difficulty": "easy",
-    "plan": "Add to Lorentz/ (new file next to LorentzNaturalBivectorClassificationExact.lean) a structure GravitationalClassDensity with fields pairing : Matrix BivectorIndex BivectorIndex ℝ (the (2,1) coefficient tensor of e∧e ⊗ R) and volume : (Fin 4 → ℝ) [⋀^Fin 4]→ₗ[ℝ] ℝ (the degree-four part), a predicate IsLorentzNatural (invariance of pairing under inducedBivectorAction Λ for all IsProperLorentz Λ), and a lemma that gravitational_score_classification is the classification of this structure; document that the exclusions of the definition are the shape of the structure (no inverse-coframe/torsion/curvature-derivative slots) and that comparison modulo exact terms is not modelled at the pointwise algebraic level."
+    "note": "Statement encoded (GravitationalClassDensity.lean). GravitationalClassDensity is the named class: a member is a spacetime-constant real bilinear pairing of the coframe bivector e^e with the curvature R on the bivector carrier BivectorIndex = Fin 2 x Fin 3 (the bidegree-(2,1) coefficient tensor c_{IJKL} e^I ^ e^J ^ R^{KL}; the spacetime four-form part of a (2,1) term is fixed by the wedge) together with an alternating four-form of the coframe (the curvature-free degree-four part). The exclusions of the definition are the shape of the structure -- no slot for an inverse coframe, torsion polynomial, curvature derivative, background tensor or matter field, and constant rather than spacetime-dependent coefficients. IsLorentzNatural encodes the admitted internal contractions (Lorentz metric, oriented volume tensor, scalars): invariance of the pairing under the induced action inducedBivectorAction of every proper Lorentz matrix; the scalar residual multiplicity commutant is the absence of any further internal index on the carrier. holstDensity / palatiniDensity / volumeDensity are the three densities of eq:main-phv-densities (eta-contraction metricPairing, epsilon-contraction epsilonPairing, det), and classification restates thm:main-gravitational-classification on the named class: every Lorentz-natural member is ofCoefficients alpha beta lambda with unique coefficients (coefficients_unique). Not modelled (disclosed): comparison of densities modulo exact terms whose variations vanish on compactly supported bulk tests and the separate retention of boundary functionals, which concern the variational use of the densities rather than the pointwise algebraic class; the converse naturality of the three named densities under all proper Lorentz matrices is not stated in Lean (the classification file verifies invariance only on the generators it uses)."
   },
   "thm:main-gravitational-classification": {
     "env": "theorem",
@@ -446,17 +458,22 @@
   "def:supp-event-grammar": {
     "env": "definition",
     "title": "Finite typed event grammar",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [
       "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.TypedWord",
       "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar",
       "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.History",
       "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.Admissible",
-      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw"
+      "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw",
+      "RenewalGeometry/Predictive/TypedEventGrammarHorizon.lean:RenewalGeometry.FiniteHorizonTypedEventGrammar",
+      "RenewalGeometry/Predictive/TypedEventGrammarHorizon.lean:RenewalGeometry.FiniteHorizonTypedEventGrammar.finite_history",
+      "RenewalGeometry/Predictive/TypedEventGrammarHorizon.lean:RenewalGeometry.FiniteHorizonTypedEventGrammar.finite_minimalState",
+      "RenewalGeometry/Predictive/TypedEventGrammarHorizon.lean:RenewalGeometry.FiniteIndexTypedEventGrammar",
+      "RenewalGeometry/Predictive/TypedEventGrammarHorizon.lean:RenewalGeometry.FiniteTypedEventGrammar.HistoryFinitenessCertificate",
+      "RenewalGeometry/Predictive/TypedEventGrammarHorizon.lean:RenewalGeometry.CertifiedFiniteTypedEventGrammar",
+      "RenewalGeometry/Predictive/TypedEventGrammarHorizon.lean:RenewalGeometry.TypedWord.finite_of_horizon"
     ],
-    "note": "Partial (downgraded on re-verification): FiniteTypedEventGrammar encodes (E1) Fintype CutType; (E2) Letter : CutType -> CutType -> Type with Fintype fibres; the prefix-closed reachable typed-history family of (E3) (TypedWord, typed concatenation TypedWord.append, empty words TypedWord.nil, reachable_nil / reachable_of_snoc); (E4) Fintype Preparation / InterventionOutcome / TerminalRead / Port; (E5) the protected binary orientation Read separated by the Read policy; History x = H_{X,x}, Admissible and ConditionalLaw as before. Missing: the new (E3) finiteness clause -- either 'finite-horizon, with the remaining horizon included in the cut type' (so that the reachable histories at each cut type form a finite family) or the alternative 'unbounded family with a separately certified finite-index future congruence' -- is not carried by the structure, whose Reachable is an arbitrary prefix-closed predicate.",
-    "difficulty": "easy",
-    "plan": "Add (new file RenewalGeometry/Predictive/TypedEventGrammarHorizon.lean, importing Predictive/TypedEventGrammar.lean) a structure FiniteHorizonTypedEventGrammar extends FiniteTypedEventGrammar with a field horizon : CutType -> Nat and horizon_lt : forall {x y} (a : Letter x y), horizon y < horizon x (the remaining horizon is part of the cut type), derive Finite (History x) (every reachable word at x has length <= horizon x; finitely many typed words of bounded length over finite letter sets), and a second structure for the unbounded branch carrying a ConditionalLaw together with Finite (Quotient (futureSetoid ...)) (the certified finite-index future congruence of def:supp-future-signature). Re-cite both as the (E3) alternatives."
+    "note": "Statement encoded. FiniteTypedEventGrammar (TypedEventGrammar.lean) carries (E1) Fintype CutType; (E2) Letter : CutType -> CutType -> Type with Fintype fibres; the prefix-closed reachable typed-history family of (E3) with typed concatenation (TypedWord.append) and empty words (TypedWord.nil); (E4) Fintype Preparation / InterventionOutcome / TerminalRead / Port; (E5) the protected binary orientation Read separated by the Read policy. New (TypedEventGrammarHorizon.lean): the finiteness clause of (E3) in both admitted forms -- FiniteHorizonTypedEventGrammar extends the grammar by the remaining horizon horizon : CutType -> Nat carried by the cut type and strictly decreasing along every letter, and finite_history proves that the reachable histories H_{X,x} at every cut type then form a finite family (typed words are determined by their letter sequence, TypedWord.toList_injective, and have at most horizon x - horizon y letters, TypedWord.length_add_horizon_le, hence TypedWord.finite_of_horizon); finite_minimalState shows every conditional law on it has a finite-index future congruence. FiniteIndexTypedEventGrammar is the alternative branch: an unbounded grammar with a conditional law whose future congruence (def:supp-future-signature, ConditionalLaw.futureSetoid) is certified to have finite index at every cut type. HistoryFinitenessCertificate is the disjunction of the two certificates and CertifiedFiniteTypedEventGrammar = grammar + certificate is the full definition. Admissible letters Sigma_{X,h} = Admissible, conditional law = ConditionalLaw as before."
   },
   "def:supp-operational-datum": {
     "env": "definition",
@@ -823,18 +840,32 @@
   "prop:supp-source-equivalence": {
     "env": "proposition",
     "title": "Faithful orientation-twisted source equivalence",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "RenewalGeometry/Dimension/StandardRepresentationTwistedExteriorSquare.lean:RenewalGeometry.StandardTwistedExteriorTensor",
       "RenewalGeometry/Dimension/StandardRepresentationTwistedExteriorSquare.lean:RenewalGeometry.standardTwistedExteriorTensor_zero_of_ne_four",
       "RenewalGeometry/Dimension/K4TwistedExteriorSquareMultiplicity.lean:RenewalGeometry.k4TwistedHodgeMatrix_intertwines",
       "RenewalGeometry/Dimension/K4TwistedExteriorSquareMultiplicity.lean:RenewalGeometry.k4TwistedHodgeMatrix_det",
       "RenewalGeometry/Dimension/K4TwistedExteriorSquareMultiplicity.lean:RenewalGeometry.k4TwistedExteriorSquare_intertwiner_unique",
-      "RenewalGeometry/Dimension/DimensionK4Classification.lean:RenewalGeometry.dimensionK4_twistedExteriorSquare_classification"
+      "RenewalGeometry/Dimension/DimensionK4Classification.lean:RenewalGeometry.dimensionK4_twistedExteriorSquare_classification",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4StandardGram",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4ExteriorSquareGram",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4StandardGram_apply",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4ExteriorSquareGram_eq_induced",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4StandardGram_invariant_transposition",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4StandardGram_invariant_fourCycle",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4ExteriorSquareGram_invariant_transposition",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4ExteriorSquareGram_invariant_fourCycle",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4TwistedHodgeMatrixReal_intertwines",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4TwistedHodgeMatrixReal_gram",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4TwistedHodgeMatrixReal_det",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4TwistedExteriorSquare_real_intertwiner_unique",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.IsK4TwistedIsometry",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.isK4TwistedIsometry_smul_iff",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4TwistedExteriorSquare_isometric_iff",
+      "RenewalGeometry/Dimension/K4TwistedExteriorSquareIsometry.lean:RenewalGeometry.k4TwistedExteriorSquare_isometric_intertwiner_unique_up_to_sign"
     ],
-    "note": "Partial (this is the relabelled Hom-space clause eq:main-oriented-copy of the old proved record prop:main-alternating-k4, now stated on its own with an added isometry clause). Proved: in ambient centred coefficient coordinates every S_N-equivariant tensor Λ²W_N → W_N ⊗ sgn vanishes for N ≠ 4 (standardTwistedExteriorTensor_zero_of_ne_four, so no equivariant isomorphism exists there since Λ²W_N ≠ 0 for N ≥ 3), and at N = 4 the intertwiner space is one-dimensional, spanned by the explicit integral Hodge matrix (det = -16 ≠ 0, so an equivariant isomorphism exists) — uniqueness is tested on the S_4 generators transposition and four-cycle (k4TwistedExteriorSquare_intertwiner_unique), all over ℂ. Missing: the last clause 'with the standard invariant Euclidean forms, an isometric choice is unique up to sign' (the Lean works over ℂ where isometric scalings form a circle; the real-isometry normalization α·H with α = ±α₀ is not proved).",
-    "difficulty": "easy",
-    "plan": "Extend in a new Dimension/ file: write the invariant Euclidean Gram matrices of Λ²W_4 (wedge basis 01,02,12) and of W_4 ⊗ sgn (standard triplet basis) in the coordinates of K4TwistedExteriorSquareMultiplicity.lean, verify Hᵀ G_W H = c · G_{Λ²} for the explicit k4TwistedHodgeMatrix with an explicit c > 0 (Fin 3 matrix computation, norm_num/decide-free simp), and conclude over ℝ that α·H is isometric iff α² c = 1, i.e. α = ±c^{-1/2}; combine with the existing N ≠ 4 vanishing and N = 4 uniqueness."
+    "note": "Proved. Clause 1 (existence iff N = 4): in ambient centred coefficient coordinates every S_N-equivariant tensor Lambda^2 W_N -> W_N (x) sgn vanishes for N != 4 (standardTwistedExteriorTensor_zero_of_ne_four; Lambda^2 W_N != 0 for N >= 3 so no equivariant isomorphism exists), and at N = 4 the explicit integral Hodge matrix is an equivariant isomorphism (k4TwistedHodgeMatrix_intertwines, det = -16). Clause 2 (one-dimensional at N = 4): k4TwistedExteriorSquare_intertwiner_unique over C, now also over R (k4TwistedExteriorSquare_real_intertwiner_unique, transported through Complex.ofRealHom). Clause 3 (new, K4TwistedExteriorSquareIsometry.lean): with the standard invariant Euclidean forms -- the Gram matrix <f_i,f_j> = delta_ij + 1 of W_4 in the basis f_i = e_i - e_3 (k4StandardGram_apply) and the induced form <u^v,u'^v'> = <u,u'><v,v'> - <u,v'><v,u'> on the wedge basis of Lambda^2 W_4 (k4ExteriorSquareGram_eq_induced), both verified S_4-invariant on the generators -- the Hodge matrix satisfies H^T G_W H = 4 G_{Lambda^2} (k4TwistedHodgeMatrixReal_gram), so a real equivariant map B is an isometry B^T G_W B = G_{Lambda^2} iff B = +-(1/2) H (k4TwistedExteriorSquare_isometric_iff); the bundled statement k4TwistedExteriorSquare_isometric_intertwiner_unique_up_to_sign exhibits the nonsingular isometric equivariant identification B_0 = (1/2) H and shows every isometric equivariant map is +-B_0. Scoped: S_4-equivariance is tested on the generating transposition (01) and four-cycle (0123) in the explicit coordinates of K4CutCycleIsotypicSchur.lean / K4TwistedExteriorSquareMultiplicity.lean; the N != 4 vanishing is over C (which implies the real statement)."
   },
   "lem:supp-root-frame": {
     "env": "lemma",
@@ -967,18 +998,28 @@
   "prop:supp-nonstationary-action-gap": {
     "env": "proposition",
     "title": "Action-gap control for nonstationary marginals",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.action_bregman_le_gap",
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.resid_sq_le",
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.grad_action_sq_le_gap",
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.integral_bregman_le",
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.integral_stationarity_form_le",
-      "RenewalGeometry/Action/PhysicalTestStationarityExact.lean:RenewalGeometry.BregmanStationarity.inner_sq_le_of_gram_budget"
+      "RenewalGeometry/Action/PhysicalTestStationarityExact.lean:RenewalGeometry.BregmanStationarity.inner_sq_le_of_gram_budget",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.actionDrop",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.actionDrop_eq_zero_of_marginals_eq",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.actionDrop_eq_integral",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.integrable_bregmanD_coupling",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.integral_bregmanD_le_coupling",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.integrable_sq_coupling",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.integral_sq_le_coupling",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.integrable_grad_action_sq_coupling",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.integral_stationarity_form_le_coupling",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.proximal_constant_le_paper",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.integral_stationarity_form_le_coupling_paper",
+      "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.physical_test_nonstationary"
     ],
-    "note": "Partial: the pointwise convex-analysis layer of thm:supp-action-stationarity is proved on the same chart -- action_bregman_le_gap (A(y) - A(y*) + eta^{-1} D_Psi(y,theta) bounded by the gap, which is the integrand of eq:supp-nonstationary-gap before integration against the coupling), resid_sq_le / grad_action_sq_le_gap (the stationarity form bounded by the gap with the constants C_1 = 4 Lambda_Phi^2/(m mu_Phi), C_2 = 4M^2(1+eta l)^2/(m^2 eta)), and inner_sq_le_of_gram_budget (the lift-bound duality |D A[v(k)]|^2 <= B(k)^2 m^{-1} ||grad A||^2 of eq:supp-nonstationary-test); the integrated statements exist only for a stationary law (integral_bregman_le, integral_stationarity_form_le use K o nu = nu to cancel the action difference). Missing: integration of the pointwise bounds against an arbitrary coupling pi with source alpha and target beta, retaining the action difference d_A = E_alpha A - E_beta A (and its positive part), and the test clause with (C_1 + C_2) Delta-bar_pi + C_2 (d_A)_+.",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/Action/NonstationaryActionGapExact.lean importing Action/AcceptedBregmanStationarityExact.lean: for a finite measure pi on E x E with marginals alpha, beta (Measure.map Prod.fst / Prod.snd) integrate action_bregman_le_gap to get E_pi D_Psi <= eta (E_pi Delta_Psi + E_alpha A - E_beta A) (the two integrals of A are the marginal integrals), integrate grad_action_sq_le_gap / resid_sq_le to get E_alpha S <= (C_1 + C_2) Delta-bar_pi + C_2 d_A, enlarge d_A to its positive part, and multiply by B(k)^2 through inner_sq_le_of_gram_budget for the test clause. Integrability hypotheses as in the stationary file (integrable_bregmanD, integrable_grad_action_sq patterns)."
+    "note": "Proved (NonstationaryActionGapExact.lean, importing the pointwise layer of the stationary theorem). On the convex chart of thm:supp-action-stationarity (Psi with m I <= Hess Psi <= M I and A with -lambda G <= D^2 A <= L G rendered through gradients, proximal minimizer y*_theta, gap Delta_Psi) and for ANY measure pi on E x E with source marginal alpha = pi o fst^-1 and target beta = pi o snd^-1 (no invariant law), with Delta-bar_pi = E_pi Delta_Psi and d_A = E_alpha A - E_beta A (actionDrop): E_pi D_Psi(y,theta) <= eta (Delta-bar_pi + d_A) (integral_bregmanD_le_coupling, first bound of eq:supp-nonstationary-gap); E_pi ||y - theta||^2 <= (2 eta/m)(Delta-bar_pi + d_A) (integral_sq_le_coupling); for any stationarity form 0 <= S <= m^-1 ||grad A||^2, E_alpha S <= (4 Lambda_Phi/m + C_2) Delta-bar_pi + C_2 d_A with the sharp proximal constant (integral_stationarity_form_le_coupling) and, since 4 Lambda_Phi/m <= C_1 = 4 Lambda_Phi^2/(m mu_Phi) when mu_Phi = (eta^-1 - lambda) m > 0 and m <= M (proximal_constant_le_paper), E_alpha S <= (C_1 + C_2) Delta-bar_pi + C_2 (d_A)_+ with the displayed constants and the positive part (integral_stationarity_form_le_coupling_paper, second bound); for a represented physical test lift v with Gram budget <v, G v> <= b = B(k)^2 on the positive chart Gram G >= m I, E_alpha |D A[v(k)]|^2 <= B(k)^2 [(C_1 + C_2) Delta-bar_pi + C_2 (d_A)_+] (physical_test_nonstationary, eq:supp-nonstationary-test); equal marginals give d_A = 0 and recover the stationary estimates (actionDrop_eq_zero_of_marginals_eq). Scoped hypotheses as in the stationary record: integrability of A under both marginals and of the gap under pi; the interiority hypothesis enters as mu_Phi > 0 and m <= M (automatic when E != 0)."
   },
   "prop:supp-physical-test-stationarity": {
     "env": "proposition",
@@ -1056,11 +1097,16 @@
   "lem:supp-variation-transfer": {
     "env": "lemma",
     "title": "Transfer of a classified variational representative",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: variation transfer, classified variation, first-variation reduction / remainder r_X, complete action variation, common realized subsequence. Gravity/PalatiniWeakStrongLimitExact.lean proves convergence of the classified curvature/volume pairings from weak-strong hypotheses but does not state the transfer to the complete variation.",
-    "difficulty": "easy",
-    "plan": "Abstract limit transfer: on any index filter (the cutoff sequence, or a realized subsequence), if the classified variation delta_cl X [k] tends to L on each test k and the remainder r_X[k] = delta_complete X [k] - delta_cl X [k] tends to 0 (eq:main-first-variation-reduction), then delta_complete X [k] tends to L (Filter.Tendsto.add), and if delta_complete X [k] tends to 0 then L = 0 (tendsto_nhds_unique). State it in a new file RenewalGeometry/Gravity/VariationTransferExact.lean with the complete variation written as classified variation plus remainder (eq:main-action-variation-remainder) and an almost-sure version along a common realized subsequence (pointwise on the probability space, as in Action/PhysicalTestStationarityExact.lean:exists_subseq_ae_tendsto_of_meanSquare)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/VariationTransferExact.lean:RenewalGeometry.classifiedVariationRemainder",
+      "RenewalGeometry/Gravity/VariationTransferExact.lean:RenewalGeometry.completeVariation_eq_classified_add_remainder",
+      "RenewalGeometry/Gravity/VariationTransferExact.lean:RenewalGeometry.tendsto_completeVariation_of_classified",
+      "RenewalGeometry/Gravity/VariationTransferExact.lean:RenewalGeometry.classifiedVariation_limit_eq_zero_of_complete",
+      "RenewalGeometry/Gravity/VariationTransferExact.lean:RenewalGeometry.ae_tendsto_completeVariation_of_classified_subseq",
+      "RenewalGeometry/Gravity/VariationTransferExact.lean:RenewalGeometry.ae_classifiedVariation_limit_eq_zero_of_complete_subseq"
+    ],
+    "note": "Proved. The complete first variation on a test is written as the classified representative plus the remainder r_X of eq:main-action-variation-remainder (classifiedVariationRemainder, completeVariation_eq_classified_add_remainder). On any index filter (the cutoff sequence or a realized subsequence): if the classified Holst/Palatini/volume variations converge on the test, the three calibrated coefficients alpha_X, beta_X, lambda_X converge, and r_X -> 0 (eq:main-first-variation-reduction), then the complete variation converges to the limiting classified variation a L_H + b L_P + c L_V (tendsto_completeVariation_of_classified); if the complete variation tends to zero, the limiting classified variation vanishes (classifiedVariation_limit_eq_zero_of_complete, tendsto_nhds_unique). Stochastic clause: on one probability space carrying all cutoff records, along one common strictly increasing realized subsequence phi of cutoffs on which the hypotheses hold almost surely for every determining test, both conclusions hold almost surely for every test (ae_tendsto_completeVariation_of_classified_subseq, ae_classifiedVariation_limit_eq_zero_of_complete_subseq); the deterministic transfer is applied pointwise after the common subsequence is selected, no independent subsequences are combined. Scoped: the coefficients are deterministic sequences in the cutoff (as in eq:main-phv-coefficients); the tests are an arbitrary index type."
   },
   "thm:supp-palatini-torsion": {
     "env": "theorem",
@@ -1282,11 +1328,14 @@
   "lem:supp-connection-hodge": {
     "env": "lemma",
     "title": "Exact periodic discrete Hodge identity",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: discrete Hodge identity, curl/divergence on the periodic grid, D_i^+ A_j - D_j^+ A_i, sum of squared forward differences. The periodic grid with forward/backward differences D_i^+, D_i^- and grid norms exists (Gravity/SupplementLawMultiplierExact.lean: LawMultiplier.forwardDiff, backwardDiff, gridNormSq, PeriodicGrid; Gravity/SupplementLawMultiplierOrders.lean: forwardDiff_comm), but the identity itself is not proved.",
-    "difficulty": "easy",
-    "plan": "New file RenewalGeometry/Gravity/PeriodicDiscreteHodgeIdentity.lean building on Gravity/SupplementLawMultiplierExact.lean and SupplementLawMultiplierOrders.lean: prove summation by parts <D_i^+ u, v>_h = -<u, D_i^- v>_h (translation invariance of the sum over the finite abelian group, as in sum_norm_sq_sub), ||D_i^- v||_h = ||D_i^+ v||_h, and <D_i^+ A_j, D_j^+ A_i>_h = <D_i^- A_i, D_j^- A_j>_h (summation by parts twice plus forwardDiff_comm); then expand sum_{i<j} ||D_i^+ A_j - D_j^+ A_i||^2 + ||sum_i D_i^- A_i||^2 and match sum_{i,j} ||D_i^+ A_j||^2 term by term (real inner product space values, F an InnerProductSpace R)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/PeriodicConnectionHodgeIdentity.lean:RenewalGeometry.PeriodicHodge.discrete_hodge_identity",
+      "RenewalGeometry/Gravity/PeriodicConnectionHodgeIdentity.lean:RenewalGeometry.PeriodicHodge.periodic_discrete_hodge_identity",
+      "RenewalGeometry/Gravity/PeriodicConnectionHodgeIdentity.lean:RenewalGeometry.PeriodicHodge.sum_inner_backwardDiff",
+      "RenewalGeometry/Gravity/PeriodicConnectionHodgeIdentity.lean:RenewalGeometry.PeriodicHodge.hodge_algebra"
+    ],
+    "note": "eq:supp-discrete-hodge-identity proved exactly: sum_{i,j} ||D_i^+ A_j||_h^2 = sum_{i<j} ||D_i^+ A_j - D_j^+ A_i||_h^2 + ||sum_i D_i^- A_i||_h^2, with D^+/D^- and ||.||_h the library's LawMultiplier.forwardDiff/backwardDiff/gridNormSq, for any finite additive group G (periodic grid), any finite linearly ordered set of directions with steps e i, any h, and A with values in any real inner product space (the 'same positive inner product'; a complex coefficient space is covered via its underlying real inner product, which has the same norm). periodic_discrete_hodge_identity is the paper's (hZ/Z)^3 = PeriodicGrid N instance with unit steps. Proof is physical-space (summation by parts from translation invariance, sum_inner_backwardDiff: sum <D_i^- u, D_j^- v> = sum <D_j^+ u, D_i^+ v>), not the paper's Fourier/Parseval route; same statement."
   },
   "prop:supp-connection-screens": {
     "env": "proposition",
@@ -1762,11 +1811,16 @@
   "lem:supp-same-cylinder-transfer": {
     "env": "lemma",
     "title": "Variance-sensitive source-preserving transfer",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: same-cylinder transfer, Thomson coupling R + h, occupation energy E_occ, ||h||_{R^{-1}}, variance V_R(c), Ah = 0. Neighbouring records thm:supp-chronological-thomson and prop:supp-same-cylinder-link-budget are also without Lean.",
-    "difficulty": "easy",
-    "plan": "Finite-sum Cauchy-Schwarz in a new file RenewalGeometry/Action/SameCylinderTransferExact.lean: on a finite product index set with a positive reference coupling R, ||h||_{R^{-1}}^2 = sum h^2/R and V_R(c) = sum R (c - m)^2 with m = E_R c; if the marginal map A kills h (row and column sums of h vanish, in particular sum h = 0) then sum h c = sum h (c - m) and |sum h (c - m)| <= ||h||_{R^{-1}} V_R(c)^{1/2} (Finset.inner_mul_le_norm_mul_norm / Real.sum_mul_le_sqrt_mul_sqrt); the Thomson clause is the instance h = h_*, E_occ = ||h_*||^2_{R^{-1}}; the last clause V_R(c) <= B m for 0 <= c <= B is sum R (c - m)^2 = sum R c^2 - m^2 <= B m."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/SameCylinderTransferExact.lean:RenewalGeometry.SameCylinderTransfer.abs_sum_mul_le_of_source_null",
+      "RenewalGeometry/Action/SameCylinderTransferExact.lean:RenewalGeometry.SameCylinderTransfer.thomson_transfer",
+      "RenewalGeometry/Action/SameCylinderTransferExact.lean:RenewalGeometry.SameCylinderTransfer.variance_le_bound_mul_mean",
+      "RenewalGeometry/Action/SameCylinderTransferExact.lean:RenewalGeometry.SameCylinderTransfer.thomsonCorrection_source_null",
+      "RenewalGeometry/Action/SameCylinderTransferExact.lean:RenewalGeometry.SameCylinderTransfer.invWeightNormSq_thomsonCorrection",
+      "RenewalGeometry/Action/SameCylinderTransferExact.lean:RenewalGeometry.SameCylinderTransfer.occurrence_energy_well_defined"
+    ],
+    "note": "Finite X, Y; edge arrays are functions on X x Y supported where R > 0 (the admitted support), ||h||^2_{R^-1} = sum h^2/R (Lean t/0 = 0 makes this the sum over the support), V_R(c) = sum R (c - Qc(x))^2. (1) abs_sum_mul_le_of_source_null: A h = 0 (row sums zero), R >= 0, h supported in {R > 0} => |sum h c| <= ||h||_{R^-1} V_R(c)^{1/2} (eq:supp-same-cylinder-transfer), for arbitrary R, Q. (2) thomson_transfer: with R = alpha Q (alpha >= 0, Q >= 0 stochastic rows), L = diag(rho) - Q^T diag(alpha) Q (eq:main-thomson-operator) and h_* = R (u(y) - Qu(x)) for any u with L u = d, |E_{R+h_*} c - E_R c| <= sqrt(<d,u> V_R(c)); along the way A h_* = 0 and ||h_*||^2_{R^-1} = <u, L u> are proved. Scoped encoding disclosed: E_occ = <d, L^+ d> is taken as <d,u> for the solution u = L^+ d of L u = d (d in Ran L); Mathlib has no matrix Moore-Penrose inverse, so the one fact L L^+ d = d for d in Ran L is the definition-level link; occurrence_energy_well_defined proves <d,u> is independent of the chosen solution. (3) variance_le_bound_mul_mean: 0 <= c <= B => V_R(c) <= B E_R c. Leverage/nonnegativity of R + h_* is not needed for the inequality and is not formalised."
   },
   "prop:supp-same-cylinder-link-budget": {
     "env": "proposition",
@@ -2155,20 +2209,23 @@
   "prop:supp-exact-action-acceleration": {
     "env": "proposition",
     "title": "Original-action multiplier acceleration",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: multiplier acceleration, M r' = -D_Q B[V] - D_Q M[V] r, normalized slice, directional derivative of the finite action.",
-    "difficulty": "easy",
-    "plan": "Abstract chain-rule statement in a new file RenewalGeometry/Gravity/MultiplierAccelerationExact.lean: for differentiable Q : R -> E, B : E -> F, M : E -> (F -> F) (matrix-valued) with B(Q(t)) + M(Q(t)) r(t) = 0 and M(Q(t)) invertible, differentiate (HasDerivAt.add, HasFDerivAt.comp, product rule for M(Q(t)) r(t)) to get M r' = -DB[V] - (DM[V]) r with V = Q'(t) (eq:supp-exact-action-acceleration). The clause 'computable from a directional derivative of the unchanged finite action together with the amplitude-graded decoder' is the interpretation of B and M as derivatives of the finite action (disclose as parameters)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/MultiplierAccelerationExact.lean:RenewalGeometry.MultiplierAcceleration.multiplier_acceleration",
+      "RenewalGeometry/Gravity/MultiplierAccelerationExact.lean:RenewalGeometry.MultiplierAcceleration.multiplier_acceleration_solve"
+    ],
+    "note": "Abstract chain-rule form, normed spaces over R: if B(Q(s)) + M(Q(s)) r(s) = 0 for s near t (eq:supp-exact-original-consistency along the exact solution), Q'(t) = V, r'(t) = rdot, and B, M (operator-valued) are Frechet differentiable at Q(t), then M(Q t) rdot = -DB[V] - DM[V] r(t) (eq:supp-exact-action-acceleration); multiplier_acceleration_solve gives rdot = -M^{-1}(DB[V] + DM[V] r) when M(Q t) is a continuous linear equivalence. The paper's V = (F^can, r) is the velocity of the exact solution (hypothesis hQ). The interpretive sentence ('computable from a directional derivative of the unchanged finite action with the amplitude-graded decoder, not a prescribed target rate') is the reading of B, M as derivatives of the finite action, which enter as parameters; no additional mathematical content."
   },
   "prop:supp-finite-acc-schur": {
     "env": "proposition",
     "title": "Exact elimination of the active acceleration",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: multiplier mass, Schur (only unrelated PsdBlockSchur / two-edge Schur files), a² A(a), effective source χ(a), λ_tt elimination. Pure finite block-matrix algebra with the paper's scaled mass M_a.",
-    "difficulty": "easy",
-    "plan": "In Gravity/ (new file): with M_a = fromBlocks (a²•A) (a³•L) (a³•Lᵀ) (a⁴•C) on Fin nA ⊕ Fin nW, A(a), D(a) = C - Lᵀ A⁻¹ L invertible (hypotheses; the paper's 'A(0), D(0) invertible' gives this for small a by continuity of det — either disclose the small-a hypothesis or add det-continuity), and the multiplier equation M_a *ᵥ (λ_tt,A, λ_tt,W) = -(S_A, S_W) (the defining relation of the physical accelerations, to be disclosed), derive eq:supp-finite-acc-elimination by block elimination: from the first row λ_A = -a^{-2}A⁻¹S_A - a A⁻¹ L λ_W, substitute into the second, obtain a⁴ D λ_W = -(S_W - a Lᵀ A⁻¹ S_A) = -χ(a), i.e. λ_W = -a^{-4} D⁻¹ χ = -a^{-4} v(a). Use Matrix.fromBlocks_mulVec, Matrix.mul_nonsing_inv and Algebra/PsdBlockSchurExact.lean for the Schur complement lemmas; one day."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/MultiplierAccelerationExact.lean:RenewalGeometry.MultiplierAcceleration.finite_acc_schur_eventually",
+      "RenewalGeometry/Gravity/MultiplierAccelerationExact.lean:RenewalGeometry.MultiplierAcceleration.finite_acc_schur_elimination",
+      "RenewalGeometry/Gravity/MultiplierAccelerationExact.lean:RenewalGeometry.MultiplierAcceleration.schur_blocks_eventually_invertible"
+    ],
+    "note": "Block types arbitrary finite m (active), n (weak). finite_acc_schur_elimination: for a != 0 with A, D = C - L^T A^-1 L invertible, every solution (l_A, l_W) of fromBlocks(a^2 A, a^3 L, a^3 L^T, a^4 C) (l_A, l_W) = -(S_A, S_W) satisfies l_W = -a^-4 v, l_A = -a^-2 A^-1 S_A + a^-3 A^-1 L v with chi = S_W - a L^T A^-1 S_A, v = D^-1 chi (eq:supp-finite-acc-elimination). finite_acc_schur_eventually: from the paper's hypothesis A(0), D(0) invertible plus continuity of A, L, C at a = 0 (the paper's family is analytic), the elimination holds for all sufficiently small a != 0 (invertibility of A(a), D(a) near 0 via det M = det A det D and continuity of det). Disclosed: the acceleration equation M_a lambda_tt = -S_a (the paper's proof's starting point, i.e. prop:supp-exact-action-acceleration with S_a of eq:supp-finite-acc-source) is the hypothesis defining the physical accelerations; the result is stated for small nonzero amplitude, which is the only regime where the paper's invertibility assumption at a = 0 gives meaning to A(a)^-1, D(a)^-1."
   },
   "thm:supp-finite-acc-coefficients": {
     "env": "theorem",
@@ -2264,10 +2321,14 @@
     "env": "corollary",
     "title": "Cokernel obstruction",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: cokernel obstruction, ker C_g^T, Q_can(c), q_{0,can} not in Ran C_g.",
-    "difficulty": "easy",
-    "plan": "Abstract corollary of the factorization eq:supp-exact-rank-two-factorization (take it as hypothesis): if Q_can(c) = q_0 + C_g w(c) for some map w (the linear and quadratic harmonic-slope coefficients factor through C_g), then for lambda with C_g^T lambda = 0, lambda . Q_can(c) = lambda . q_0 (Matrix.dotProduct_mulVec / vecMul_transpose), and if q_0 is not in Ran C_g there is such a lambda with lambda . q_0 != 0 (orthogonal complement of the range in finite dimension: Submodule.orthogonal, or LinearMap.range_eq_top via annihilator), hence Q_can(c) != 0 for every c. New small file in RenewalGeometry/Algebra/."
+    "lean": [
+      "RenewalGeometry/Algebra/SlopeCokernelObstruction.lean:RenewalGeometry.SlopeCokernel.cokernel_pairing_constant",
+      "RenewalGeometry/Algebra/SlopeCokernelObstruction.lean:RenewalGeometry.SlopeCokernel.no_root_of_not_mem_range",
+      "RenewalGeometry/Algebra/SlopeCokernelObstruction.lean:RenewalGeometry.SlopeCokernel.exists_cokernel_covector"
+    ],
+    "note": "Conditional wrapper (corollary policy): the parent thm:supp-exact-rank-two-factorization (Q_can(c) = q_0 - C_g A_g^-1 R(c)) is not formalised and enters as the hypothesis hfact. Given it, both clauses are proved: cokernel_pairing_constant (lambda in ker C_g^T => lambda.Q_can(c) = lambda.q_0 for all c, eq:supp-exact-cokernel-constant) and no_root_of_not_mem_range (q_0 not in Ran C_g => Q_can(c) != 0, eq:supp-exact-cokernel-no-root); exists_cokernel_covector gives the obstructing covector (lambda in ker C_g^T, lambda.q_0 != 0) via the Euclidean orthogonal complement.",
+    "difficulty": "medium",
+    "plan": "Promote to proved once thm:supp-exact-rank-two-factorization is formalised: instantiate hfact of the SlopeCokernel lemmas with that theorem's conclusion (Cg = C_g, Ag = A_g, R = script R). No further work on the corollary itself."
   },
   "thm:supp-exact-two-equation-slope": {
     "env": "theorem",

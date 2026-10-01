@@ -1,51 +1,51 @@
 # Library usage by the papers
 
-Roots: 2476 cited declarations.
+Roots: 2745 cited declarations.
 
 | Paper | Cited decls | Modules used | Folders used |
 |---|---:|---:|---|
-| einstein_sm_action_closure | 206 | 42 | RenewalGeometry/Action (12), RenewalGeometry/Continuum (8), RenewalGeometry/Gravity (7), RenewalGeometry/StandardModel (6), RenewalGeometry/DiscreteAnalysis (4), RenewalGeometry/Analysis (2), RenewalGeometry/Spectralization (1), RenewalGeometry/OperatorLimits (1), RenewalGeometry/Predictive (1) |
-| emergent_spacetime | 847 | 148 | RenewalGeometry/Gravity (42), RenewalGeometry/Predictive (26), RenewalGeometry/DiscreteAnalysis (15), RenewalGeometry/Action (14), RenewalGeometry/Dimension (13), RenewalGeometry/Renewal (6), RenewalGeometry/Lorentz (6), RenewalGeometry/Continuum (4), RenewalGeometry/Krein (4), RenewalGeometry/Operational (4), RenewalGeometry/Certificates (3), RenewalGeometry/OperatorLimits (3), RenewalGeometry/Commutant (2), RenewalGeometry/StatMech (2), RenewalGeometry/Algebra (1), RenewalGeometry/MarkovChains (1), NCG/Krein (1), RenewalGeometry/Spectralization (1) |
-| predictive_spectral_geometry | 711 | 123 | RenewalGeometry/Spectralization (53), RenewalGeometry/DiscreteAnalysis (20), RenewalGeometry/Predictive (18), RenewalGeometry/Analysis (11), RenewalGeometry/OperatorLimits (7), RenewalGeometry/Algebra (4), RenewalGeometry/Krein (2), RenewalGeometry/Continuum (2), NCG/Graph (1), RenewalGeometry/Operational (1), RenewalGeometry/Gravity (1), NCG/SpectralTriple (1), RenewalGeometry/Topology/FiniteInverseSystemStableImage (1), RenewalGeometry/Commutant (1) |
-| spacetime_gauge_duality | 728 | 162 | RenewalGeometry/Commutant (58), RenewalGeometry/StandardModel (47), RenewalGeometry/OperatorLimits (28), RenewalGeometry/Predictive (12), RenewalGeometry/Spectralization (4), RenewalGeometry/Analysis (3), RenewalGeometry/Algebra (2), RenewalGeometry/Action (2), NCG/Algebra (2), RenewalGeometry/Operational (2), RenewalGeometry/Lorentz (1), RenewalGeometry/Dimension (1) |
+| einstein_sm_action_closure | 257 | 51 | RenewalGeometry/Action (17), RenewalGeometry/Continuum (10), RenewalGeometry/StandardModel (6), RenewalGeometry/DiscreteAnalysis (6), RenewalGeometry/Gravity (6), RenewalGeometry/Analysis (2), RenewalGeometry/OperatorLimits (1), RenewalGeometry/Spectralization (1), RenewalGeometry/Predictive (1), RenewalGeometry/GaugeTheory (1) |
+| emergent_spacetime | 922 | 158 | RenewalGeometry/Gravity (45), RenewalGeometry/Predictive (27), RenewalGeometry/Action (17), RenewalGeometry/DiscreteAnalysis (15), RenewalGeometry/Dimension (14), RenewalGeometry/Lorentz (7), RenewalGeometry/Renewal (6), RenewalGeometry/Krein (4), RenewalGeometry/Operational (4), RenewalGeometry/Continuum (4), RenewalGeometry/Certificates (3), RenewalGeometry/OperatorLimits (3), RenewalGeometry/Commutant (2), RenewalGeometry/Algebra (2), RenewalGeometry/StatMech (2), NCG/Krein (1), RenewalGeometry/Spectralization (1), RenewalGeometry/MarkovChains (1) |
+| predictive_spectral_geometry | 711 | 123 | RenewalGeometry/Spectralization (53), RenewalGeometry/DiscreteAnalysis (20), RenewalGeometry/Predictive (18), RenewalGeometry/Analysis (11), RenewalGeometry/OperatorLimits (7), RenewalGeometry/Algebra (4), RenewalGeometry/Krein (2), RenewalGeometry/Continuum (2), RenewalGeometry/Topology/FiniteInverseSystemStableImage (1), RenewalGeometry/Operational (1), RenewalGeometry/Gravity (1), RenewalGeometry/Commutant (1), NCG/Graph (1), NCG/SpectralTriple (1) |
+| spacetime_gauge_duality | 869 | 177 | RenewalGeometry/Commutant (62), RenewalGeometry/StandardModel (53), RenewalGeometry/OperatorLimits (29), RenewalGeometry/Predictive (12), RenewalGeometry/Spectralization (5), RenewalGeometry/Analysis (4), RenewalGeometry/Operational (4), NCG/Algebra (2), RenewalGeometry/Action (2), RenewalGeometry/Algebra (2), RenewalGeometry/Lorentz (1), RenewalGeometry/Dimension (1) |
 
 | Folder | Modules | Used by a paper | Import-only | Unused & removable |
 |---|---:|---:|---:|---:|
-| RenewalGeometry/OperatorLimits | 151 | 34 | 117 | 0 |
-| RenewalGeometry/Predictive | 100 | 54 | 34 | 12 |
-| RenewalGeometry/Commutant | 88 | 59 | 26 | 3 |
-| RenewalGeometry/StandardModel | 81 | 49 | 20 | 12 |
-| RenewalGeometry/Spectralization | 77 | 55 | 21 | 1 |
-| RenewalGeometry/Lorentz | 59 | 7 | 2 | 50 |
-| RenewalGeometry/Gravity | 57 | 46 | 6 | 5 |
-| RenewalGeometry/DiscreteAnalysis | 53 | 35 | 17 | 1 |
-| RenewalGeometry/Operational | 53 | 6 | 18 | 29 |
-| RenewalGeometry/Action | 42 | 28 | 10 | 4 |
-| RenewalGeometry/Dimension | 38 | 13 | 5 | 20 |
+| RenewalGeometry/OperatorLimits | 152 | 35 | 117 | 0 |
+| RenewalGeometry/Predictive | 101 | 55 | 34 | 12 |
+| RenewalGeometry/Commutant | 93 | 63 | 27 | 3 |
+| RenewalGeometry/StandardModel | 88 | 55 | 21 | 12 |
+| RenewalGeometry/Spectralization | 78 | 56 | 21 | 1 |
+| RenewalGeometry/Gravity | 60 | 49 | 6 | 5 |
+| RenewalGeometry/Lorentz | 60 | 8 | 2 | 50 |
+| RenewalGeometry/Operational | 55 | 8 | 18 | 29 |
+| RenewalGeometry/DiscreteAnalysis | 55 | 37 | 17 | 1 |
+| RenewalGeometry/Action | 50 | 36 | 10 | 4 |
+| RenewalGeometry/Dimension | 39 | 14 | 5 | 20 |
+| RenewalGeometry/Algebra | 38 | 8 | 17 | 13 |
 | RenewalGeometry/Renewal | 38 | 6 | 7 | 25 |
-| RenewalGeometry/Algebra | 37 | 7 | 17 | 13 |
 | RenewalGeometry/StatMech | 34 | 2 | 12 | 20 |
 | NCG/Algebra | 24 | 2 | 3 | 19 |
-| RenewalGeometry/Analysis | 20 | 14 | 5 | 1 |
-| RenewalGeometry/Continuum | 16 | 11 | 5 | 0 |
-| RenewalGeometry/Measurement | 14 | 0 | 3 | 11 |
+| RenewalGeometry/Analysis | 21 | 15 | 5 | 1 |
+| RenewalGeometry/Continuum | 18 | 13 | 5 | 0 |
 | NCG/Krein | 14 | 1 | 0 | 13 |
+| RenewalGeometry/Measurement | 14 | 0 | 3 | 11 |
 | RenewalGeometry/Certificates | 13 | 3 | 9 | 1 |
 | RenewalGeometry/MarkovChains | 10 | 1 | 4 | 5 |
 | RenewalGeometry/Krein | 10 | 5 | 1 | 4 |
 | NCG/Graph | 10 | 1 | 0 | 9 |
 | RenewalGeometry/Miscellany | 6 | 0 | 2 | 4 |
 | RenewalGeometry/Topology/Brouwer | 6 | 0 | 0 | 6 |
-| RenewalGeometry/GaugeTheory | 5 | 0 | 1 | 4 |
+| RenewalGeometry/GaugeTheory | 6 | 1 | 1 | 4 |
 | RenewalGeometry/Arithmetic | 4 | 0 | 3 | 1 |
 | RenewalGeometry/Numerics | 4 | 0 | 0 | 4 |
-| RenewalGeometry/Complexity | 3 | 0 | 1 | 2 |
 | NCG/Operator | 3 | 0 | 0 | 3 |
+| RenewalGeometry/Complexity | 3 | 0 | 1 | 2 |
 | NCG/PerronFrobenius | 2 | 0 | 0 | 2 |
 | NCG | 1 | 0 | 0 | 1 |
 | RenewalGeometry/Topology/FiniteInverseSystemStableImage | 1 | 1 | 0 | 0 |
 | NCG/SpectralTriple | 1 | 1 | 0 | 0 |
-| **Total** | 1075 | 441 | 349 | 285 |
+| **Total** | 1112 | 476 | 351 | 285 |
 
 ## Modules no cited declaration uses and no used module imports
 
