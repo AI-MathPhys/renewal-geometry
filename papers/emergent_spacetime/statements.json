@@ -606,37 +606,41 @@
   "prop:supp-finite-prediction": {
     "env": "proposition",
     "title": "Finite predictive reconstruction with an explicit horizon convention",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Predictive/DeterminingFieldAcceptedKernelCompiler.lean:RenewalGeometry.DeterminingFieldAcceptedKernelCompiler.strictRefinementRounds_le_card_sub_one",
-      "RenewalGeometry/Predictive/MinimalRecordPartitionRefinementExact.lean:RenewalGeometry.MinimalRecordPartitionRefinement.refinement_stabilizes",
-      "RenewalGeometry/Predictive/MinimalRecordPartitionRefinementExact.lean:RenewalGeometry.MinimalRecordPartitionRefinement.stable_eq_wordEqv",
-      "RenewalGeometry/Predictive/GeneratedMinimalRecord.lean:RenewalGeometry.WordRecordMachine.MinimalRecordExact",
-      "RenewalGeometry/Predictive/GeneratedMinimalRecord.lean:RenewalGeometry.WordRecordMachine.minimal_record_exact"
+      "RenewalGeometry/Predictive/TypedFinitePredictionExact.lean:RenewalGeometry.FiniteHorizonTypedEventGrammar.typedFinitePrediction_horizon",
+      "RenewalGeometry/Predictive/TypedFinitePredictionExact.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.TypedFinitePresentation",
+      "RenewalGeometry/Predictive/TypedFinitePredictionExact.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.TypedFinitePresentation.typedFinitePrediction_refinement",
+      "RenewalGeometry/Predictive/TypedFinitePredictionExact.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.TypedFinitePresentation.stable_round_futureEquivalent",
+      "RenewalGeometry/Predictive/TypedFinitePredictionExact.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.futureEquivalent_of_typedPredictionBisimulation",
+      "RenewalGeometry/Predictive/TypedFinitePredictionExact.lean:RenewalGeometry.TypedFinitePredictionCountermodel.typedFinitePrediction_countermodel",
+      "RenewalGeometry/Predictive/TypedEventGrammarHorizon.lean:RenewalGeometry.FiniteHorizonTypedEventGrammar.finite_history",
+      "RenewalGeometry/Predictive/MinimalRecordPartitionRefinementExact.lean:RenewalGeometry.MinimalRecordPartitionRefinement.refinement_stabilizes"
     ],
-    "note": "Partial, reusing the Lean of the removed record thm:supp-determining-kernel: for an unbounded-horizon protocol with a reachable finite presentation with m records, the coarsest predictive partition is reached after at most m-1 strict refinements (strictRefinementRounds_le_card_sub_one; refinement_stabilizes on the (out,u) record automaton bounds every strict round below |R|-1), and a stable finite partition is exactly all-future word equivalence, so it is sufficient for equality of all finite futures (stable_eq_wordEqv); the future quotient is a right congruence through which every update factors (MinimalRecordExact / minimal_record_exact on a WordRecordMachine). Missing: the finite-horizon clause (horizon included in the cut type, finiteness of the future quotient and right congruence on every nonterminal positive-probability branch) on the typed grammar, and the closing negative claim (finite alphabets without a horizon bound or a finite-index hypothesis do not imply a finite quotient), for which no countermodel is formalized.",
-    "difficulty": "medium",
-    "plan": "Build on Predictive/TypedEventGrammar.lean (FutureEquivalent, futureEquivalent_snoc gives the typed right congruence) and the horizon extension planned for def:supp-event-grammar: with horizon y < horizon x along every letter, History x is finite, hence Quotient futureSetoid is finite -- the finite-horizon clause. Re-export the m-1 bound and stability from MinimalRecordPartitionRefinementExact.lean / DeterminingFieldAcceptedKernelCompiler.lean. For the negative clause, formalize one explicit countermodel: a law on the binary alphabet whose conditional probability of the next letter depends on the history length (e.g. p(1 | history of length n) = 1/(n+2)), whose future signatures are pairwise distinct, so the future quotient is infinite (Infinite (Quotient futureSetoid))."
+    "note": "All four clauses proved on the typed grammar of def:supp-event-grammar (FiniteTypedEventGrammar.ConditionalLaw). (1) Finite horizon: typedFinitePrediction_horizon — on a FiniteHorizonTypedEventGrammar (remaining horizon carried by the cut type, strictly decreasing along letters; complete bank of typed continuations) the future quotient MinimalState x is finite at every cut type, future equivalence is a right congruence on every positive-probability branch and T_a[h]=[ha]. (2) Unbounded horizon: TypedFinitePresentation = reachable finite presentation with m = card Record records (cut type per record, history map, branch functions, partial updates required only on positive-probability branches); refineOut/refineUpdate encode the refinement of the proof (initialized by cut type and branch probabilities/domains, successor blocks required for positive-probability letters; zero-probability letters totalized by the identity, which does not change the partition). typedFinitePrediction_refinement: every strict round k satisfies k < m-1 and every round j >= m-1 equals round m-1; round m-1 identifies the records of two histories iff they are future equivalent; and round m-1 identifies two records iff they represent future-equivalent same-type histories (= coarsest predictive partition). (3) stable_round_futureEquivalent: any stable round is sufficient for equality of all finite futures (via the bisimulation principle futureEquivalent_of_typedPredictionBisimulation, induction on word length with the chain rule). (4) Negative clause: typedFinitePrediction_countermodel — the binary renewal law with renewal probability 1/(n+2) after n nonrenewals on a grammar with one cut type and alphabet Bool: finite cut types and letter sets, no strictly decreasing horizon function exists, and Infinite (MinimalState ()). Renderings: terminal Reads are event letters of the typed grammar (def:supp-operational-datum allows reads as terminal event outcomes), so 'immediate read values' are part of the branch probabilities; record counts m are total over all cut types."
   },
   "prop:supp-predictive-category": {
     "env": "proposition",
     "title": "Terminality and naturality of predictive reduction",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.derived_predictive_relation_carrier",
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_unique",
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_surjective",
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_branch",
-      "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_update_of_occurs",
-      "RenewalGeometry/Predictive/Realization.lean:RenewalGeometry.Upstream.RealizationHom",
-      "RenewalGeometry/Predictive/Realization.lean:RenewalGeometry.Upstream.canonicalRealization",
-      "RenewalGeometry/Predictive/Realization.lean:RenewalGeometry.Upstream.toCanonical",
-      "RenewalGeometry/Predictive/Realization.lean:RenewalGeometry.Upstream.toCanonical_unique",
-      "RenewalGeometry/Predictive/Retract.lean:RenewalGeometry.Upstream.RealizationHom.comp"
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.TypedOperationalLaw",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.Presentation",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.Hom",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.instCategoryPresentation",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.minimal",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.minimal_isTerminal",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.toMinimal_spec",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.TypedLawIso",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.TypedLawIso.futureEquivalent_iff",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.TypedLawIso.minimalStateEquiv",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.TypedLawIso.minimalStateEquiv_weight",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.TypedLawIso.minimalStateEquiv_transition",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.TypedLawIso.minimalStateEquiv_read",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.TypedLawIso.minimalStateEquiv_refl",
+      "RenewalGeometry/Predictive/TypedPredictiveCategoryExact.lean:RenewalGeometry.TypedPredictiveCategory.TypedLawIso.minimalStateEquiv_trans"
     ],
-    "note": "Partial: terminality is proved in two adjacent models but not in the typed probabilistic setting of the statement. (1) Untyped probabilistic model (DerivedPredictiveCarrierUniversalExact): for every reachable deterministic realization S of the complete future law, toMinimal : S → Z^min is surjective, preserves branch probabilities (toMinimal_branch), intertwines every occurring (positive-probability) update (toMinimal_update_of_occurs), and toMinimal_unique shows that any map f with f ∘ s = [·] (the paper's condition s' = f ∘ s) equals toMinimal — i.e. Z^min is terminal; no reads and no cut types. (2) Typed deterministic operational model (Predictive/Realization.lean, Retract.lean): a category of realizations with morphisms RealizationHom preserving encodings, transitions and reads (outputs), composition RealizationHom.comp, and the canonical quotient realization canonicalRealization terminal (toCanonical, toCanonical_unique); no branch probabilities. Missing: the single typed statement combining cut types, reads and branch probabilities (the typed objects exist: FiniteTypedEventGrammar.ConditionalLaw.MinimalState / project / weight / transition in Predictive/TypedEventGrammar.lean and TypedDeterministicRealization in Predictive/TypedDeterministicRealization.lean), and the naturality clause: isomorphisms of typed laws induce isomorphisms of the predictive quotients, functorially in composition.",
-    "difficulty": "medium",
-    "plan": "In Predictive/ (new file building on TypedDeterministicRealization.lean and TypedEventGrammar.lean): define TypedRealizationHom between two TypedDeterministicRealizations of the same TypedPredictiveLaw (state maps per cut type with f ∘ stateOf = stateOf', rate preserved, update intertwined on occurring branches, terminal reads preserved once a read field is added), prove the minimal quotient (MinimalState with project/weight/transition) is a realization and that project ∘ representative is the unique morphism into it (copy the toMinimal_* proofs of DerivedPredictiveCarrierUniversalExact.lean fibrewise). For naturality define an isomorphism of typed laws (bijections of cut types, histories and letters commuting with step and branch), show it maps future-equivalent histories to future-equivalent ones (transport of futureSignature), hence induces a bijection of MinimalState fibres, and check compatibility with composition (Equiv.trans)."
+    "note": "Proved in the typed probabilistic setting with reads. TypedOperationalLaw = finite typed event grammar + conditional law (FiniteTypedEventGrammar.ConditionalLaw) + terminal Reads of histories, which belong to the declared future test bank and are therefore constant on future classes (read_congr; scoped hypothesis, needed for Z^min to carry reads at all). Presentation = reachable predictive presentation (state sets per cut type, history maps, reads, branch functions, partial updates on positive-probability branches); Hom = maps with s' = f o s, preserving reads and branch probabilities and intertwining every positive-probability successor; instCategoryPresentation is the category (thin by reachability). minimal = Z^min (MinimalState/project/weight/transition, reads descended) as a presentation; minimal_isTerminal : IsTerminal (minimal L) (Mathlib CategoryTheory), via futureEquivalent_of_stateOf_eq (same record => same complete futures, by the bisimulation principle of TypedFinitePredictionExact); toMinimal_spec: the unique map sends s(h) to [h] and is surjective. Naturality: TypedLawIso (bijections of cut types, letters, reachable histories and read values commuting with extension, preserving branch probabilities and reads) with refl/trans; futureEquivalent_iff (equal future signatures carried to equal ones and reflected); minimalStateEquiv : Z^min_x ≃ Z'^min_(e x), preserving weights, transitions and reads; minimalStateEquiv_refl and minimalStateEquiv_trans give compatibility with identities and composition. Rendering: state sets are not required finite (the category contains the finite presentations of def:supp-predictive-realization as a full subcategory, in which Z^min is terminal whenever it is finite, e.g. finite horizon or certified finite index); the [0,1] bound on branch functions is automatic at reachable states."
   },
   "thm:supp-hankel": {
     "env": "theorem",
@@ -754,10 +758,30 @@
     "env": "proposition",
     "title": "Tensorial covariance and independent composition",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: Gram congruence C^* K C, record-preserving unitary equivalence of realizations, product/independent processes, Z_12^min = Z_1^min x Z_2^min, history algebra tensor product, Kronecker Gram of word pairs, reassociation/interchange. Predictive/GTMonoidalTransport.lean and WordBasisMonoidalTransport.lean concern the monoidal residual of a single transport (unit/star/product defects), not composition of two independent processes.",
+    "lean": [
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.gram_coordinate_change",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.regTrace",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.regTrace_algEquiv",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.regTrace_tmul",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.wordGram_starAlgEquiv",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.wordGram_tensor",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.wordGram_tensor_comm",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.wordGram_tensor_assoc",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.indepProduct",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.indepProduct_futureEquivalent_iff",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.indepProductMinimalEquiv",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.indepProductMinimalEquiv_branch",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.contextualIdeal",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.historyAlgebra_starAlgEquiv",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.productContexts_null_iff",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.mem_compositeNullIdeal",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.compositeHistoryAlgebraEquiv",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.compositeHistoryAlgebraEquiv_mk_tmul",
+      "RenewalGeometry/Predictive/GrandTensorMonoidalExact.lean:RenewalGeometry.GrandTensorMonoidal.compositeHistoryMoment"
+    ],
+    "note": "Substantial partial; every individual identification of the proposition is proved, but in an abstract rendering and without the full reassociation/interchange coherence. Proved: (1) gram_coordinate_change: c = C c~ turns the Gram form into K~ = C^H K C. (2) regTrace = normalized regular trace Tr(L_a)/dim A (eq:supp-regular-trace), invariant under algebra isomorphisms (regTrace_algEquiv) and multiplicative on tensor products (regTrace_tmul). (3) Unitary covariance: historyAlgebra_starAlgEquiv — raw represented algebra with a context family closed under two-sided insertion; contextualIdeal is the two-sided null ideal (largest invisible ideal, le_contextualIdeal), HistoryAlgebra = raw / null ideal; a *-isomorphism of raw algebras carrying contexts to contexts (the abstraction of a record-preserving unitary conjugation of the support-minimal realization) induces an isomorphism of history algebras [r] -> [Phi r], compatible with the involution, preserving every word moment tau_reg([v]^*[w]); wordGram_starAlgEquiv is the same for abstract *-algebras. (4) Z12^min = Z1^min x Z2^min: indepProduct (product preparations/histories = product reachability, joint local operations (a,b), factorized future probabilities) with IdentityOperation on both factors; indepProduct_futureEquivalent_iff and indepProductMinimalEquiv ([(h1,h2)] -> ([h1],[h2])), branch laws factor (indepProductMinimalEquiv_branch); stated for the untyped predictive systems of DerivedPredictiveCarrierUniversalExact. (5) A12^hist = A1^hist (x) A2^hist: with composite raw algebra R1 (x) R2 (generated by a(x)1, 1(x)b) and product contexts phi1 (x) phi2, productContexts_null_iff shows there is no further contextual ideal (null set = kernel of R1(x)R2 -> A1(x)A2, via contextual separation: descended contexts span the dual, products span the joint dual, dualDistribEquiv), compositeHistoryAlgebraEquiv is the algebra isomorphism, [r1(x)r2] -> [r1](x)[r2]. (6) Gram product eq:supp-grand-gram-product: compositeHistoryMoment (in the composite history algebra) and wordGram_tensor (K12 = K1 (x)_Kronecker K2); interchange/reassociation of the Gram identity (wordGram_tensor_comm, wordGram_tensor_assoc).",
     "difficulty": "medium",
-    "plan": "Four finite statements. (1) The Gram congruence K~ = C^* K C under c = C c~ is one line on Matrix (conjTranspose_mul). (2) The *-isomorphism of history algebras induced by a record-preserving unitary equivalence, preserving word moments: build on Predictive/WordBasisMonoidalTransport.lean (residual vanishing gives the star-algebra equivalence). (3) Product of processes: define the product of two WordRecordMachine (Predictive/GeneratedMinimalRecord.lean) on R_1 x R_2 with letter alphabet A_1 (+) A_2 (independent local operations, identity operations) and product future signatures; prove futureSig (r1,r2) = futureSig r1 x futureSig r2 under joint-reachability = product, hence MinRec of the product = product of MinRecs; the history-algebra tensor product is Matrix.kroneckerMap of the represented word operators. (4) Gram product on a rectangular bank: kronecker of Gram matrices (Matrix.kroneckerMap_mul, conjTranspose of Kronecker). Reassociation/interchange are the Kronecker associativity lemmas. State the scoped hypotheses (product preparations, independent tests, product contextual family) as structure fields."
+    "plan": "Remaining for 'proved': (a) iterate the composite: relax ContextClosed to span-closedness (phi o (x . y) in span C) — contextualIdeal still works — and prove productContexts is span-closed (reduce to elementary x, y by TensorProduct.induction_on), so the composite history algebra is literally HistoryAlgebra (productContexts C1 C2); then prove the naturality squares of compositeHistoryAlgebraEquiv with Algebra.TensorProduct.comm / Algebra.TensorProduct.assoc (both sides agree on elementary classes [r1(x)r2(x)r3], which span the quotient) and of indepProductMinimalEquiv with Equiv.prodComm / Equiv.prodAssoc (agree on representatives, Quotient.ind). (b) Typed version of (4): product of two FiniteTypedEventGrammar laws (cut types O1 x O2, letters pairs with identity letters) reusing indepProduct_futureEquivalent_iff fibrewise; or record the untyped rendering as acceptable. (c) Optional concreteness: identify the generated subalgebra of operators on H1 (x) H2 with R1 (x) R2 (injectivity of the Kronecker embedding of a tensor product of subalgebras over a field) and instantiate Phi as Unitary.conjStarAlgAut restricted to the generated subalgebras."
   },
   "thm:supp-relative-primitive-floor": {
     "env": "theorem",
@@ -1340,13 +1364,15 @@
   "prop:supp-connection-screens": {
     "env": "proposition",
     "title": "Transported-screen version of connection compactness",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/OperatorLimits/CompactScreenCollectiveCompactness.lean:RenewalGeometry.VaryingHilbert.totallyBounded_of_compact_approximations"
+      "RenewalGeometry/OperatorLimits/TransportedScreenCompactnessExact.lean:RenewalGeometry.TransportedScreenCompactness.connectionScreens_L2",
+      "RenewalGeometry/OperatorLimits/TransportedScreenCompactnessExact.lean:RenewalGeometry.TransportedScreenCompactness.transportedScreen_relativelyCompact",
+      "RenewalGeometry/OperatorLimits/TransportedScreenCompactnessExact.lean:RenewalGeometry.TransportedScreenCompactness.totallyBounded_range_of_screens",
+      "RenewalGeometry/OperatorLimits/TransportedScreenCompactnessExact.lean:RenewalGeometry.TransportedScreenCompactness.totallyBounded_of_coefficients",
+      "RenewalGeometry/OperatorLimits/TransportedScreenCompactnessExact.lean:RenewalGeometry.TransportedScreenCompactness.compLp_sub_norm_le"
     ],
-    "note": "Partial: the abstract principle of the proof — a subset of a metric space that is uniformly approximable to every accuracy by compact sets is totally bounded — is totallyBounded_of_compact_approximations. Missing: the instantiation in L²(0,T;ℋ): the screened family P_R Ω_X is relatively compact because its coefficients in a fixed finite basis of Ran P_R are relatively compact in L²(0,T), the tail (I - P_{X,R})Ω_X is uniformly small (eq:supp-connection-screen-tail), and ‖P_{X,R} - P_R‖_op → 0 with the uniform bound on Ω_X controls the difference P_{X,R}Ω_X - P_R Ω_X (finitely many X handled by compactness of finite sets).",
-    "difficulty": "medium",
-    "plan": "Work in MeasureTheory.Lp ℋ 2 (volume on Icc 0 T) or abstractly in any complete metric/normed space E with bounded linear 'screens': state it for a bounded family (Ω_X) ⊂ E, finite-rank operators P_R with ranges spanned by a fixed finite basis, coefficient maps continuous linear E → L²(0,T) (Lp ℝ 2), relatively compact coefficient families (IsCompact (closure ...)), and the two tail/operator-norm hypotheses; prove TotallyBounded (range Ω) via totallyBounded_of_compact_approximations with the compact sets C_R = closure of the finite-basis reconstruction of the coefficient families (image of a compact set under a continuous linear map, IsCompact.image), then closure compact by completeness (TotallyBounded.isCompact_closure). Build in OperatorLimits/ next to CompactScreenCollectiveCompactness.lean and SMSTPositiveScreenExact.lean."
+    "note": "Proved. connectionScreens_L2: in Lp H 2 (volume.restrict (Ioc 0 T)) with H a complete inner-product space over an RCLike field, for Omega : N -> L^2(0,T;H) with sup_X ||Omega_X|| <= B, time-independent operators P X R, P0 R : H ->L H acting pointwise in time (ContinuousLinearMap.compLp) with ||P X R - P0 R||_op -> 0 as X -> infinity for every R, the tail condition eq:supp-connection-screen-tail in the form 'for every eps>0, eventually in R, ||Omega_X - P_{X,R} Omega_X|| < eps for all X', and P_R Omega_X = sum_i c_i(R,X) e_i(R) in a fixed finite family of vectors with each coefficient family {c_i(R,X)}_X relatively compact in L^2(0,T), the closure of {Omega_X} is compact. transportedScreen_relativelyCompact is the same statement for any measure space, any 1 <= p and any index type with the cofinite filter. Proof = the paper's: screen differences controlled by the operator norm and the uniform bound (compLp_sub_norm_le), finitely many exceptional X absorbed as a finite set, screened families totally bounded as continuous images of the compact product of coefficient closures (totallyBounded_of_coefficients), total boundedness by uniform approximation (totallyBounded_range_of_screens), compact closure by completeness. Scoped renderings: the finite family e_i(R) need not be a basis of Ran P_R and finite rank of P_{X,R}, P_R is not used (both only weaken the hypotheses); relative compactness of the coefficient family is stated coordinatewise (equivalent to relative compactness of the vector family in L^2(0,T)^n)."
   },
   "thm:supp-curvature-compactness": {
     "env": "theorem",
@@ -1776,10 +1802,18 @@
     "env": "lemma",
     "title": "Consistency survives a uniformly regular elimination",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: preconditioner, ‖I - A D_zF‖ ≤ κ, eliminated variable, C¹ consistency, ass:supp-initial-consistency. Renewal/ChaosLocalization.lean has Neumann-type ‖x‖/(1-ρ) bounds for a different (linear corrector) setting and does not apply.",
-    "difficulty": "medium",
-    "plan": "Core estimate eq:supp-initial-elimination-error in Banach spaces: from F(x,z) = 0, ‖F(x,z_cmp)‖ ≤ ε, ‖A‖ bounded and ‖I - A ∘ D_zF‖ ≤ κ < 1 on a convex comparison ball, write A F(x,z_cmp) = (z_cmp - z) - ∫ (I - A D_zF)(z_cmp - z) via the mean value inequality Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le applied to G(z) = z - A F(x,z) (which has derivative I - A D_zF of norm ≤ κ), giving ‖z - z_cmp‖ ≤ ‖A‖ε/(1-κ) — one day in a new DiscreteAnalysis/ or Analysis/ file. The C¹-consistency transfer (eliminated map z_h(x_h) is C¹ consistent when F_h and its derivatives are) is the implicit-function derivative formula D z = -(D_zF)^{-1} D_xF with the Neumann bound for (D_zF)^{-1} = (I - (I - A D_zF))^{-1} A (Analysis/ResolventNeumannSeries.lean); encode ass:supp-initial-consistency as a hypothesis structure rather than proving the composed finite phase-difference/Legendre chain."
+    "lean": [
+      "RenewalGeometry/Analysis/InitialEliminationConsistencyExact.lean:RenewalGeometry.InitialElimination.elimination_error",
+      "RenewalGeometry/Analysis/InitialEliminationConsistencyExact.lean:RenewalGeometry.InitialElimination.elimination_C1_consistency",
+      "RenewalGeometry/Analysis/InitialEliminationConsistencyExact.lean:RenewalGeometry.InitialElimination.implicit_derivative_formula",
+      "RenewalGeometry/Analysis/InitialEliminationConsistencyExact.lean:RenewalGeometry.InitialElimination.symm_norm_le_of_preconditioner",
+      "RenewalGeometry/Analysis/InitialEliminationConsistencyExact.lean:RenewalGeometry.InitialElimination.inverse_comp_difference_le",
+      "RenewalGeometry/Analysis/InitialEliminationConsistencyExact.lean:RenewalGeometry.InitialElimination.comp_consistency",
+      "RenewalGeometry/Analysis/InitialEliminationConsistencyExact.lean:RenewalGeometry.InitialElimination.comp_deriv_consistency"
+    ],
+    "note": "First two sentences proved in arbitrary real normed spaces (the Sobolev/grid spaces after the common identification). elimination_error is eq:supp-initial-elimination-error exactly: F(z) = 0, ||F(z_cmp)|| <= eps, F has derivative DF on a convex comparison set containing both points with ||I - A DF|| <= kappa < 1 imply ||z - z_cmp|| <= ||A|| eps/(1-kappa) (the paper's contraction argument, via the mean value inequality). C^1 clause (elimination_C1_consistency): implicit derivative D z = -(D_zF)^-1 D_xF (implicit_derivative_formula), inverse-block bound ||(D_zF)^-1|| <= ||A||/(1-kappa) from the preconditioner (symm_norm_le_of_preconditioner), transfer through the inverse difference identity (inverse_comp_difference_le). Scoped hypotheses: value consistency eps of F_h vs F at the comparison point, derivative consistency eps_1 plus a Lipschitz modulus Lambda of the derivative (the 'uniformly regular' hypothesis), one common preconditioner for both z-blocks. Conclusion ||Dz_h - Dz|| <= M delta + M^2 K delta with delta = eps_1 + Lambda ||A|| eps/(1-kappa). Composition closure of value and derivative consistency is also proved (comp_consistency, comp_deriv_consistency). Not proved: the third sentence as applied to the paper's concrete blocks (phase differences, pointwise analytic coefficient maps, Legendre solves on the H^s / P_h^{s+2} scales). It needs uniform Lipschitz/Moser bounds for analytic coefficient maps and the phase-difference symbol comparison in Sobolev norms (lem:supp-open-interpolation, open/hard).",
+    "difficulty": "hard",
+    "plan": "Remaining: instantiate the proved abstract closure (elimination_C1_consistency + comp_consistency/comp_deriv_consistency) on the paper's spaces. Missing infrastructure: Sobolev H^s(T^3) / grid norms with the algebra (Moser) property giving uniform Lipschitz bounds for pointwise analytic coefficient maps on bounded sets, and the difference-symbol consistency 2h^-1 sin(pi h k) vs 2 pi k (lem:supp-open-interpolation, hard). Once those exist, the third sentence is a finite iteration of the proved lemmas."
   },
   "prop:supp-initial-cofinal-preparation": {
     "env": "proposition",
@@ -1802,11 +1836,23 @@
   "thm:supp-chronological-thomson": {
     "env": "theorem",
     "title": "Chronological source-shorted Thomson correction",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: Thomson (only a Riesz–Thomson docstring in Miscellany/AssortedFiniteRecords00.lean, different object), source-shorted, diag(ρ) - Qᵀ diag(α) Q, variance identity, minimum R^{-1}-norm solution, marginals. Analysis/HermitianMoorePenroseInverse.lean supplies a Moore–Penrose inverse for Hermitian matrices, usable for L^†, but no part of the statement is proved.",
-    "difficulty": "medium",
-    "plan": "Finite linear algebra on edge arrays indexed by a finite set E ⊆ X × Y with R > 0: define A, B (row/column sums), the R^{-1} inner product, P_s = I - Aᵀ diag(α)^{-1} A (orthogonal projection onto ker A in the R^{-1} geometry), L = B P_s Bᵀ; prove eq:supp-thomson-L by expanding (diag ρ = B R-weights, Qᵀ diag α Q from A) and the variance identity eq:supp-thomson-variance (Σ_x α(x) Var_{Q(x,·)}(u) = Σ α u² weighted minus squares of conditional means) which gives L ⪰ 0; solvability Ah = 0, Bh = d ⇔ d ∈ Ran L via the projection; the minimum-norm solution h_* = R(u(y) - (Qu)(x)) with u = L^† d (use Analysis/HermitianMoorePenroseInverse.lean: exists_hermitian_moorePenroseInverse for the symmetric PSD L) and ‖h_*‖²_{R^{-1}} = ⟨d, L^† d⟩; the leverage clause max|u(y) - (Qu)(x)| ≤ 1/2 ⇒ R + h_* ≥ 0 with marginals α, β is pointwise. Build in Action/ or MarkovChains/ (marginal bookkeeping as in Certificates/MarginalsOrientation.lean)."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.thm_supp_chronological_thomson",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.thomson_L_eq",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.thomsonMatrix_posSemidef",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.thomson_variance_identity",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.thomson_solvable_iff",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.thomson_min_norm",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.thomson_leverage",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.sourceShort_isOrthogonalProjection",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.inner_srcAdj",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.inner_tgtAdj",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.thomsonPinv_isPenroseInverse",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.IsPenroseInverse.unique",
+      "RenewalGeometry/Action/ChronologicalThomsonExact.lean:RenewalGeometry.ChronologicalThomson.exists_isPenroseInverse"
+    ],
+    "note": "Finite X, Y; faithful alpha > 0; Q >= 0 with unit row sums; R = alpha Q; admitted support E = {Q > 0} = {R > 0} (the only support on which ||.||_{R^-1} is defined and on which Q lives); edge arrays = functions X -> Y -> R vanishing off E (SupportedOn). Built on SameCylinderTransferExact (thomsonOperator, thomsonCorrection, invWeightNormSq). Proved: weighted adjoints A* f = R f(x), B* g = R g(y) (inner_srcAdj, inner_tgtAdj); P_s = I - A* diag(alpha)^-1 A is the R^-1-orthogonal projection onto ker A (sourceShort_isOrthogonalProjection); B P_s B* = diag(rho) - Q^T diag(alpha) Q as operator and matrix (thomson_L_eq) and it is PosSemidef (eq:supp-thomson-L); <u, L u> = sum_x alpha(x) Var_{Q(x,.)}(u) (eq:supp-thomson-variance); A h = 0, B h = d solvable by an edge array iff d in Ran L (Penrose projector I - L L^+ plus orthogonality of feasible d to ker L); L^+ = thomsonPinv, the real Moore-Penrose inverse built from the real spectral theorem, satisfying all four Penrose equations, and IsPenroseInverse.unique shows it is THE Moore-Penrose inverse; with u = L^+ d, h_* = R(u(y) - Qu(x)) is feasible, every feasible h has ||h||^2 = ||h_*||^2 + ||h - h_*||^2, so h_* is the unique minimum-R^-1-norm solution (eq:supp-thomson-hstar), and ||h_*||^2 = <d, L^+ d> (eq:supp-thomson-energy); if |u(y) - Qu(x)| <= 1/2 on E then R + h_* >= 0 everywhere with source marginal alpha and target marginal beta, d = beta - rho. Axioms: propext, Classical.choice, Quot.sound."
   },
   "lem:supp-same-cylinder-transfer": {
     "env": "lemma",
@@ -2174,10 +2220,21 @@
     "env": "proposition",
     "title": "First correction and initial slow tangency",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: first correction, Phi_0 xi_1 + Phi_1(xi_0) = 0, cokernel projection m(xi_0), right inverse R_0, initial slow tangency.",
-    "difficulty": "medium",
-    "plan": "Abstract form with the maps as parameters (as in Gravity/SupplementExactConstraintRankExact.lean): for a linear map Phi_0 on finite-dimensional spaces with a right inverse R_0 on its range and a cokernel projection p_H, the equation Phi_0 xi_1 = -Phi_1(xi_0) is solvable iff p_H Phi_1(xi_0) = 0 (this is the definition of m), with the particular solution -R_0 Phi_1(xi_0) unique modulo ker Phi_0 (LinearMap.range / ker, Submodule.Quotient); the tangency identity eq:supp-exact-slow-first-tangency is the chain rule (HasFDerivAt.comp) applied to the identities of thm:supp-exact-five-compatibility along a C^1 path with xi_0(0) = 0. Identification with the actual Phi_0, Phi_1, C_sl of the exact action is not possible yet (undefined objects)."
+    "lean": [
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.leadingConstraint",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.WeakDecomposition",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.range_leadingConstraint",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.slowMean",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.slowGradient",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.slowConstraint",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.slow_correction_solvable_iff",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.slow_correction_particular",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.slow_correction_solution_set",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.slow_first_tangency"
+    ],
+    "note": "Abstract form with the paper's matrices as parameters (as for thm:supp-exact-constraint-rank), real normed spaces. Phi_0(x,z)=C_red x + B z (leadingConstraint); the decomposition R^29 = Ran B (+) Z_g (+) H with insertions J_g,J_H and projections p_g,p_H annihilating Ran B (WeakDecomposition, eq:supp-exact-weak-decomposition) and the coupling tests p_H C_red = 0, p_g C_red onto Z_g are hypotheses; from them range_leadingConstraint proves Ran Phi_0 = ker p_H (the fact the paper's proof takes from prop:supp-exact-slow-rank). slow_correction_solvable_iff: Phi_0 xi_1 + Phi_1(xi_0) = 0 is solvable iff m(xi_0) = p_H Phi_1(xi_0) = 0, for arbitrary Phi_1 and every xi_0 (so in particular xi_0 in ker Phi_0). slow_correction_particular / slow_correction_solution_set: for any right inverse R_0 of Phi_0 on its range, xi_1 = -R_0 Phi_1(xi_0) is a solution and the solution set is -R_0 Phi_1(xi_0) + ker Phi_0. slow_first_tangency (eq:supp-exact-slow-first-tangency): C_sl(xi) = (p_g C_red(b_s + Sigma_0 xi), p_H Phi_1 xi) has derivative (p_g C_red DSigma_0(0), p_H DPhi_1(0)) at 0, and for a path xi_0 on [0,T] with xi_0(0)=0, one-sided derivative b at 0 (weaker than C^1 at zero) and C_sl(xi_0(tau)) = 0 on [0,T] (the five identities of thm:supp-exact-five-compatibility, the only property of the limiting path the proof uses), (p_g C_red DSigma_0(0)[b], p_H DPhi_1(0)[b]) = 0. Sigma_0, Phi_1 are only required differentiable at 0 (they are polynomials in the paper). The Taylor remark O(a^2) in the proof is not part of the statement. [Coordinator 30 Sep 2026] Kept open under the corollary policy: the tangency clause uses the conclusion of the open thm:supp-exact-five-compatibility.",
+    "difficulty": "hard",
+    "plan": "Blocked only on thm:supp-exact-five-compatibility (hard): the first two clauses (solvability iff m(xi_0)=0, solution -R_0 Phi_1(xi_0) modulo ker Phi_0) are proved unconditionally from the stated weak decomposition and coupling tests; the tangency clause eq:supp-exact-slow-first-tangency takes C_sl(xi_0(tau)) = 0 along the limiting path, the conclusion of thm:supp-exact-five-compatibility, as a hypothesis (slow_first_tangency). Closes by instantiation once that theorem is formalized."
   },
   "thm:supp-exact-initial-gate": {
     "env": "theorem",
@@ -2200,11 +2257,15 @@
   "prop:supp-exact-initial-counterexample": {
     "env": "proposition",
     "title": "Analytic preparation does not imply the two-row cancellation",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: counterexample Lagrangian ½α²(z')², upper homological row, analytic preparation, bounded first derivatives. Nothing encodes the two-row/homological-row notion.",
-    "difficulty": "medium",
-    "plan": "Explicit ODE: the Euler–Lagrange equations of eq:supp-exact-counterexample-L are α' = 0 (so α ≡ a), a² z'' = -(z - a) (harmonic oscillator of frequency 1/a) and λ' = a (z')² + (z - a); with z(0) - a = O(a) and z'(0) bounded, z = a + A cos(t/a) + B sin(t/a) with A, B = O(a) has bounded z', z'' on every fixed interval and λ' bounded, giving analytic-in-a initial records (Real.cos/sin, ring identities). The 'analogue of the upper homological row' must be encoded from the appendix (the O(a^{-1}) coefficient of the multiplier row); state it as an explicit nonvanishing coefficient of this concrete family. New file in Gravity/ using Mathlib's ODE solution formulas (HasDerivAt computations) — days of concrete calculus, no missing infrastructure."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/ExactInitialCounterexampleExact.lean:RenewalGeometry.ExactInitialCounterexample.prop_supp_exact_initial_counterexample",
+      "RenewalGeometry/Gravity/ExactInitialCounterexampleExact.lean:RenewalGeometry.ExactInitialCounterexample.counterexample_euler_lagrange_partials",
+      "RenewalGeometry/Gravity/ExactInitialCounterexampleExact.lean:RenewalGeometry.ExactInitialCounterexample.counterexample_euler_lagrange",
+      "RenewalGeometry/Gravity/ExactInitialCounterexampleExact.lean:RenewalGeometry.ExactInitialCounterexample.counterexample_first_derivative_bounds",
+      "RenewalGeometry/Gravity/ExactInitialCounterexampleExact.lean:RenewalGeometry.ExactInitialCounterexample.counterexample_jet_family_defect"
+    ],
+    "note": "The polynomial Lagrangian L = 1/2 alpha^2 z'^2 - 1/2 (z - alpha)^2 + lambda alpha' (eq:supp-exact-counterexample-L) is encoded with all six partial derivatives proved (lagrangian_hasDerivAt_*). For every a > 0 the explicit solution alpha = a, z = a(1 - cos(tau/a)), lambda = int_0^tau (a z'^2 + z - a) (eq:supp-exact-counterexample-solution, multiplier solved by integration) satisfies all three Euler-Lagrange equations d/dtau dL/dq' = dL/dq at every time. Initial records alpha(0) = a, z(0) = 0, lambda(0) = 0 and velocities alpha'(0) = 0, z'(0) = 0, lambda'(0) = -a are polynomial (analytic, bounded) in a. First derivatives are uniformly bounded: |z'| <= 1, |lambda'| <= 2a, alpha' = 0. But a z''(0) = 1 for every a, so the scaled acceleration defect tends to 1 != 0 as a -> 0+. Rendering disclosed: 'the analogue of the upper homological row is nonzero' is encoded, as in the paper's proof, as the one-row reduction a z''(0) = 1 (right-hand side of eq:supp-exact-initial-acceleration-defect with no source term). Bonus: the d-family after prop:supp-finite-acc-invariance (z'(0) = a^2 d, a z''(0) = 1 for every d) is counterexample_jet_family_defect."
   },
   "prop:supp-exact-action-acceleration": {
     "env": "proposition",
@@ -2240,19 +2301,42 @@
     "env": "proposition",
     "title": "Dependence on preparation jets",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: preparation jets, Δ_g, determining tuple, D_d Δ_g, total response. The defect Δ_g and the slow-source chart are not encoded.",
-    "difficulty": "medium",
-    "plan": "Encode Δ_g as the explicit function of the determining tuple (κ, b, s_0, Df(0), Dg(0), C_red, p_g) from the appendix (Δ_g = p_g{C_red Df(0) κ + C_red s_0 + Dg(0) b} up to the appendix's constants); then the first clause is functional dependence (rfl) and eq:supp-finite-acc-total-response is the chain rule for a differentiable family d ↦ (κ(d), s_0(d), b(d)) with the last four maps fixed (HasFDerivAt.comp, linearity of p_g, C_red, Df(0), Dg(0)); the consequences are immediate. Days of bookkeeping in a new Gravity/ file; needs the appendix's definition of Δ_g to be transcribed faithfully."
+    "lean": [
+      "RenewalGeometry/Gravity/FiniteAccInvarianceExact.lean:RenewalGeometry.FiniteAccInvariance.same_tuple_same_defect",
+      "RenewalGeometry/Gravity/FiniteAccInvarianceExact.lean:RenewalGeometry.FiniteAccInvariance.total_response",
+      "RenewalGeometry/Gravity/FiniteAccInvarianceExact.lean:RenewalGeometry.FiniteAccInvariance.source_derivative_not_certificate",
+      "RenewalGeometry/Gravity/ExactInitialCounterexampleExact.lean:RenewalGeometry.ExactInitialCounterexample.counterexample_jet_family_defect"
+    ],
+    "note": "Wrapper conditional on the initial verdict eq:supp-finite-acc-initial-verdict (Delta_g = p_g{C_red Df(0) kappa + C_red s_0 + Dg(0) b}, encoded as initialVerdict). The paper's proof applies this verdict, which comes from thm:supp-exact-initial-gate / thm:supp-finite-acc-coefficients (both open, hard). Given the verdict as a hypothesis: same determining tuple implies same Delta_g (same_tuple_same_defect). For a family d -> (kappa, s_0, b) differentiable at d_0 with the four maps fixed, Delta_g is differentiable with derivative p_g o (C_red Df(0) D kappa + C_red D s_0 + Dg(0) D b) (total_response = eq:supp-finite-acc-total-response, arbitrary real normed spaces). A nonzero D s_0 does not force a nonzero D Delta_g (source_derivative_not_certificate, explicit scalar instance). The illustrating d-family (a z''(0) = 1 for every d) is in ExactInitialCounterexampleExact. Corollary policy: the parent is open, so the record stays conditional.",
+    "difficulty": "hard",
+    "plan": "Close by formalizing thm:supp-exact-initial-gate (the g-row limit identity lim a p_g{z''(0) - dh/dtau} = p_g{C_red Df(0) kappa + C_red s_0 + Dg(0) b} from the differentiated pole identity eq:supp-exact-initial-differentiated-pole and the jet hypotheses eq:supp-exact-initial-jets-corrected), then discharge the hypothesis hverdict of total_response / same_tuple_same_defect with it. No further work on this record itself is needed."
   },
   "thm:supp-exact-three-row": {
     "env": "theorem",
     "title": "Lyapunov--Schmidt reduction of the initial gate",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: Lyapunov-Schmidt, three-row / five-row solvability, rank L_0 = 2 + rank H_x, Ran H_x, defect feedback. Algebra/LosslessColumnElimination.lean has block-rank identities for a partitioned source, not the block-lower-triangular solvability criterion.",
-    "difficulty": "medium",
-    "plan": "Abstract block form with the maps as parameters (as in Gravity/SupplementExactConstraintRankExact.lean): L_0 = [[A_g, 0], [C_g, H_x]] on Z_g (+) X with A_g invertible (dim Z_g = 2); solvability of L_0 kappa = -f iff f_H - C_g A_g^{-1} f_g in Ran H_x (solve the first row, substitute), rank L_0 = rank A_g + rank H_x (block triangular with invertible diagonal block: LinearMap.range of fromBlocks, or Matrix.rank via Matrix.fromBlocks and the unimodular column operation of Algebra/LosslessColumnElimination.lean:blockUnit), surjectivity iff rank H_x = dim H = 3, and the defect-feedback identity eq:supp-exact-defect-feedback by direct substitution of kappa_* = J_g z_* + E_x x_*. Identification with the actual L_0 of the exact action remains open."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.blockAg",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.blockBx",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.blockCg",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.blockDx",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.reducedHx",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.map_split_eq_blocks",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.initialGateMap",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.initialForcing",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.initialGateOnKernel",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.kernelInsertion",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.three_row_solvable_iff",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.ker_blockMap_eq_map",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.three_row_rank",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.three_row_rank_two",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.three_row_surjective_iff",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.three_row_defect_feedback",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.three_row_exists_iff_defect",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.initialGate_blocks",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.initial_gate_three_row"
+    ],
+    "note": "Abstract block form over real vector spaces: L_0 : K -> Z_g x H any linear map, K = J_g Z_g + E_x X_h (spanning; directness not needed), blocks A_g,B_x,C_g,D_x defined as the components of L_0(J_g z + E_x x) (eq:supp-exact-complete-LS-blocks, no vanishing of the upper block on the complement assumed), H_x = D_x - C_g A_g^{-1} B_x with A_g^{-1} passed as a two-sided inverse AgInv (the paper's invertibility of A_g from positivity of Q_g, eq:supp-exact-Qg-pivots, is this hypothesis). Proved: eq:supp-exact-hard-forcing (three_row_solvable_iff, for arbitrary f); rank L_0 = dim Z_g + rank H_x, = 2 + rank H_x when dim Z_g = 2 (three_row_rank, three_row_rank_two; finite-dimensional Z_g, X_h); five-row surjectivity iff rank H_x = 3 when dim Z_g = 2, dim H = 3 (three_row_surjective_iff); eq:supp-exact-defect-feedback for kappa_* = J_g z_* + E_x x_* with L_0 kappa_* + f_0 = (Delta_g, 0) (three_row_defect_feedback); existence of kappa~ with L_0 kappa~ = -f_0 iff C_g A_g^{-1} Delta_g in Ran H_x (three_row_exists_iff_defect). initial_gate_three_row instantiates the criterion and rank split for the actual initial gate map L_0 kappa = (p_g C_red Df(0) kappa, p_H Dg(0) kappa) of eq:supp-L0-definition restricted to K_0 = ker Phi_0, with vertical insertion z -> (0, J_g z) (B J_g = 0); Df(0), Dg(0), C_red, B, p_g, p_H remain abstract parameters."
   },
   "lem:supp-exact-two-row-elimination": {
     "env": "lemma",
@@ -2276,10 +2360,26 @@
     "env": "proposition",
     "title": "Slope coefficients from the original compatibility rows",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: slope jets, harmonic row convention, 𝒬_can, Ê, b_*, a_*, D²𝔠_H(0). The reduced functions eq:supp-exact-reduced-functions are not encoded.",
-    "difficulty": "medium",
-    "plan": "Once the reduced constraint rows 𝔠_H, 𝔠_g (twice differentiable maps), the injections E, J_g, J_H, the solve 𝒜_g and L_X Df(0) are encoded as data, eq:supp-exact-original-slope-jets is a second-order chain-rule computation: the constant coefficient is D𝔠_H(0) applied to the second-order direction a_* plus the quadratic terms D²𝔠_H(0)[b,b] corrected by the g-row elimination -𝒞_g 𝒜_g^{-1} D²𝔠_g(0)[b,b] (from lem:supp-exact-two-row-elimination's γ). Mathlib's iteratedFDeriv/second-derivative calculus (HasFDerivAt of compositions, symmetric bilinear second derivative) is adequate but laborious; the row-convention transformation clause is linear algebra. Days of work after encoding."
+    "lean": [
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.sndDeriv",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.sndDeriv_comp",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.reducedChart",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.reducedDrift",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.reducedHarmonic",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.slopePolynomial",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.hatE",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.slopeBase",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.slopeDirection",
+      "RenewalGeometry/Gravity/ExactSlowBranchData.lean:RenewalGeometry.ExactSlowBranch.slopeAccel",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.reducedChart_sndDeriv",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.original_slope_jets",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.sndDeriv_clm_comp",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.slopePolynomial_rowConvention",
+      "RenewalGeometry/Gravity/ExactSlowGateExact.lean:RenewalGeometry.ExactSlowGate.original_slope_jets_rowConvention"
+    ],
+    "note": "Real normed spaces, maps as parameters. Xi(r,y) = E r + J_g gamma(r,y) + J_H y (reducedChart) with gamma the two-row elimination graph of lem:supp-exact-two-row-elimination, entered as data with its defining properties: gamma C^2 at 0 (the lemma gives analytic), gamma(0)=0, c_g(Xi(r,y)) = 0 near 0. Further hypotheses: c_g, c_H C^2 at 0, f differentiable at 0, the slope-entrance identity Dc_g(0) J_H = 0 (eq:supp-exact-slope-entrance), and a left inverse AgInv of A_g = Dc_g(0) J_g; C_g := Dc_H(0) J_g. Q(c) = H_r F_r v + H_rr[v,v] + 2 H_ry[v,c] + H_yy[c,c] (slopePolynomial; partials read off DH(0), D^2H(0) along (v,0),(0,c)) for F = L_X f o Xi, H = c_H o Xi. original_slope_jets proves eq:supp-exact-original-slope-jets: Q(c) = Dc_H(0) a_* + D^2c_H(0)[b(c),b(c)] - C_g A_g^{-1} D^2c_g(0)[b(c),b(c)] with Ehat = E - J_g A_g^{-1} Dc_g(0) E, b_* = Ehat v, b(c) = b_* + J_H c, a_* = Ehat L_X Df(0) b_*, for every v (in particular v = F(0,0)) and every c. Proof is the paper's: implicit differentiation of c_g o Xi = 0 to first and second order (via the second-order chain rule sndDeriv_comp) and symmetry of the second derivatives of c_g, c_H. The row-convention sentence: slopePolynomial_rowConvention and original_slope_jets_rowConvention show that for c_H' = T o c_H (T a fixed linear row map) the slope polynomial is T applied to the whole right-hand side, i.e. Q, Dc_H, D^2c_H, C_g (hence q_0 = Q(0)) transform together. Q_can = Q in the physical convention is a naming convention. [Coordinator 30 Sep 2026] Kept open: the slope-entrance harmonic identities used as hypotheses are proved in the paper only from thm:supp-exact-harmonic-q4-zero, which is open.",
+    "difficulty": "hard",
+    "plan": "Blocked only on thm:supp-exact-harmonic-q4-zero (hard): the harmonic identities of eq:supp-exact-slope-entrance (D c_g(0) J_H = D c_H(0) J_H = 0) and the harmonic-row annihilation are consequences of that theorem's coefficient audit. The Lean result proved here takes them as hypotheses; under the corollary policy the record closes by instantiation once that theorem is formalized."
   },
   "thm:supp-exact-slope-gate": {
     "env": "theorem",
@@ -2312,23 +2412,35 @@
     "env": "theorem",
     "title": "Canonical rank-two factorization",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: rank-two factorization, 𝒬_can(c) = q_0 - 𝒞ℛ(c), record-preserving native lift, rank 𝒞_g ≤ 2. Not encoded.",
-    "difficulty": "medium",
-    "plan": "Encode the record-preserving branch data: the slope map 𝒬_can : ℝ³ → ℝ³, the constant q_{0,can}, the 3×2 matrix 𝒞 (built from 𝒞_g of rank ≤ 2) and the quadratic map ℛ : ℝ³ → ℝ²; the factorization eq:supp-exact-rank-two-factorization follows from prop:supp-exact-original-slope-jets by collecting the terms that factor through the two g-rows — this derivation is the real content and needs those reduced functions. Given the factorization, D𝒬_can(c) = -𝒞 Dℛ(c) is the chain rule and rank D𝒬 ≤ rank 𝒞 ≤ 2 is LinearMap.rank_comp_le_left / Matrix.rank_mul_le. Days once the slope map is defined."
+    "lean": [
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.slopeCan",
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.HarmonicAnnihilation",
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.harmonicAnnihilation_sndDeriv",
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.reducedChart_fderiv_zero",
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.slopeCan_rank_two_factorization_of_hessian",
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.slopeCan_rank_two_factorization",
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.slopeCan_hasFDerivAt",
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.slopeCan_rank_le",
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.slopeCan_rank_le_two"
+    ],
+    "note": "Everything except the Ward input is proved, reusing ExactSlowBranchData and ExactSlowGate.original_slope_jets (same scoped hypotheses as prop:supp-exact-original-slope-jets: gamma C^2, gamma(0)=0, c_g o Xi = 0 near 0, c_g, c_H C^2, f differentiable, Dc_g(0)J_H = 0, AgInv a left inverse of A_g; C_g = Dc_H(0)J_g; Q_can = slopeCan, q_0 = slopeCan v 0). Expanding original_slope_jets at c and at 0 shows Q_can(c) - q_0 + C R(c) = 2 D^2c_H(0)[b_*,J_H c] + D^2c_H(0)[J_H c,J_H c]. slopeCan_rank_two_factorization_of_hessian proves eq:supp-exact-rank-two-factorization once those two harmonic-row Hessian terms vanish. slopeCan_rank_two_factorization derives that vanishing from HarmonicAnnihilation (Dc_H(Xi(q))[J_H c] = 0 for every base Xi(q) near 0 on the elimination graph), which is how thm:supp-exact-harmonic-q4-zero is encoded: differentiating along base directions DXi(0)(v,0) = b_* and DXi(0)(0,c') = J_H c' (harmonicAnnihilation_sndDeriv, reducedChart_fderiv_zero) gives exactly the paper's 'derivative with respect to any admissible second-record base direction'. eq:supp-exact-rank-two-bound: slopeCan_hasFDerivAt (DQ_can(c) = -C DR(c)), slopeCan_rank_le (rank DQ_can(c) <= rank C_g), slopeCan_rank_le_two (rank C_g <= 2 when finrank Z_g = 2). The record stays open because the decisive input, thm:supp-exact-harmonic-q4-zero (ledger: hard, needs the explicit finite action), is a hypothesis. Its identification with the derivative of c_H in harmonic directions (the paper's 'quartic constant-row contribution' is the harmonic-row Hessian) is also informal. If the ledger counts Ward identities of the branch as branch data, the way it did for the slope-entrance identity Dc_g(0)J_H = 0 in prop:supp-exact-original-slope-jets, this is a full proof under that hypothesis. [Coordinator 30 Sep 2026] Kept open: the slope-entrance harmonic identities used as hypotheses are proved in the paper only from thm:supp-exact-harmonic-q4-zero, which is open.",
+    "difficulty": "hard",
+    "plan": "Blocked only on thm:supp-exact-harmonic-q4-zero (hard): the harmonic identities of eq:supp-exact-slope-entrance (D c_g(0) J_H = D c_H(0) J_H = 0) and the harmonic-row annihilation are consequences of that theorem's coefficient audit. The Lean result proved here takes them as hypotheses; under the corollary policy the record closes by instantiation once that theorem is formalized."
   },
   "cor:supp-exact-slope-cokernel": {
     "env": "corollary",
     "title": "Cokernel obstruction",
     "status": "conditional_interface",
     "lean": [
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.slopeCan_cokernel_constant",
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.slopeCan_no_root",
       "RenewalGeometry/Algebra/SlopeCokernelObstruction.lean:RenewalGeometry.SlopeCokernel.cokernel_pairing_constant",
       "RenewalGeometry/Algebra/SlopeCokernelObstruction.lean:RenewalGeometry.SlopeCokernel.no_root_of_not_mem_range",
       "RenewalGeometry/Algebra/SlopeCokernelObstruction.lean:RenewalGeometry.SlopeCokernel.exists_cokernel_covector"
     ],
-    "note": "Conditional wrapper (corollary policy): the parent thm:supp-exact-rank-two-factorization (Q_can(c) = q_0 - C_g A_g^-1 R(c)) is not formalised and enters as the hypothesis hfact. Given it, both clauses are proved: cokernel_pairing_constant (lambda in ker C_g^T => lambda.Q_can(c) = lambda.q_0 for all c, eq:supp-exact-cokernel-constant) and no_root_of_not_mem_range (q_0 not in Ran C_g => Q_can(c) != 0, eq:supp-exact-cokernel-no-root); exists_cokernel_covector gives the obstructing covector (lambda in ker C_g^T, lambda.q_0 != 0) via the Euclidean orthogonal complement.",
-    "difficulty": "medium",
-    "plan": "Promote to proved once thm:supp-exact-rank-two-factorization is formalised: instantiate hfact of the SlopeCokernel lemmas with that theorem's conclusion (Cg = C_g, Ag = A_g, R = script R). No further work on the corollary itself."
+    "note": "Corollary policy. The parent factorization is now instantiated rather than assumed: slopeCan_cokernel_constant (any linear functional lam with lam o C_g = 0, i.e. lam in ker C_g^T, gives lam(Q_can(c)) = lam(q_0) for every c, eq:supp-exact-cokernel-constant) and slopeCan_no_root (q_0 not in Ran C_g implies Q_can(c) != 0, eq:supp-exact-cokernel-no-root). Both are derived from ExactSlowRankTwo.slopeCan_rank_two_factorization, so the corollary depends only on the branch hypotheses plus HarmonicAnnihilation, the encoded conclusion of thm:supp-exact-harmonic-q4-zero. The matrix-form wrappers in SlopeCokernelObstruction.lean (hypothesis hfact) remain valid, and exists_cokernel_covector supplies the obstructing covector. [Coordinator 30 Sep 2026] Kept open: the slope-entrance harmonic identities used as hypotheses are proved in the paper only from thm:supp-exact-harmonic-q4-zero, which is open.",
+    "difficulty": "hard",
+    "plan": "Blocked only on thm:supp-exact-harmonic-q4-zero (hard): the harmonic identities of eq:supp-exact-slope-entrance (D c_g(0) J_H = D c_H(0) J_H = 0) and the harmonic-row annihilation are consequences of that theorem's coefficient audit. The Lean result proved here takes them as hypotheses; under the corollary policy the record closes by instantiation once that theorem is formalized."
   },
   "thm:supp-exact-two-equation-slope": {
     "env": "theorem",
@@ -2342,20 +2454,46 @@
   "prop:supp-exact-slope-contraction": {
     "env": "proposition",
     "title": "Two-dimensional contraction certificate",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: two-dimensional contraction certificate, quadratic Taylor F(y+q) = F(y) + Jq + B[q,q], eta / theta / beta / q_*, unique zero in the radius-r ball, analytic root curve. Action/CriticalShadowingExact.lean proves a frozen-Newton contraction with a Lipschitz derivative hypothesis, not this explicit quadratic-polynomial certificate.",
-    "difficulty": "medium",
-    "plan": "New file RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean: for F(y+q) = F(y) + J q + B[q,q] exactly (a quadratic polynomial map on a finite-dimensional normed space; R^2 in the paper) and an invertible M, the map T(q) = q - M F(y+q) satisfies ||T q - T q'|| <= (theta + beta r) ||q - q'|| on the closed r-ball (mean value bound with ||I - MJ|| = theta, ||2 M B|| = beta) and ||T 0|| = eta, so q_* < 1 and eta + q_* r < r give a self-map contraction; Banach fixed point (ContractingWith.exists_fixedPoint' / Metric.closedBall completeness) gives the unique zero, interior since ||q|| <= eta + q_* r < r; build on the contraction pattern of Action/CriticalShadowingExact.lean. The continuation clause (slice roots continue to a local root curve when the 2 x 2 derivative stays invertible) is Mathlib's implicit function theorem for C^1 maps (HasStrictFDerivAt.implicitFunction); analyticity of the root curve is not available in Mathlib and should be disclosed."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean:RenewalGeometry.QuadraticNewton.compBilin",
+      "RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean:RenewalGeometry.QuadraticNewton.newtonMap",
+      "RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean:RenewalGeometry.QuadraticNewton.newtonMap_eq",
+      "RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean:RenewalGeometry.QuadraticNewton.norm_newtonMap_sub_le",
+      "RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean:RenewalGeometry.QuadraticNewton.quadratic_contraction_certificate",
+      "RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean:RenewalGeometry.QuadraticNewton.analytic_root_continuation",
+      "RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean:RenewalGeometry.QuadraticNewton.scriptR_contDiff",
+      "RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean:RenewalGeometry.QuadraticNewton.sliceMap",
+      "RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean:RenewalGeometry.QuadraticNewton.sliceMap_contDiff",
+      "RenewalGeometry/Analysis/QuadraticNewtonCertificate.lean:RenewalGeometry.QuadraticNewton.slope_contraction_certificate"
+    ],
+    "note": "slope_contraction_certificate is the proposition for the slice map F_s(y) = R(c_* + E y + s n) - y_0 (sliceMap, with R = ExactSlowBranch.scriptR), on any real Banach space P (the paper uses R^2). Hypotheses: an exact quadratic Taylor identity F_{s0}(ybar+q) = F_{s0}(ybar) + J q + B[q,q]; M injective (equivalent to invertible in finite dimension); r > 0; eta = ||M F_{s0}(ybar)||, theta = ||I - M J||, beta = 2||M B|| (operator norm of the bilinear map compBilin M B), q_* = theta + beta r; q_* < 1 and eta + q_* r < r. Conclusion: a zero y_* in the closed r-ball that lies in the open ball and is the unique zero in the closed ball. Proof: the Lipschitz bound ||Tq - Tq'|| <= q_*||q - q'|| on the ball (norm_newtonMap_sub_le; symmetry of B is not needed), T maps the closed ball into the open ball, and Banach's theorem (ContractingWith.exists_fixedPoint'). Continuation clause: if the y-derivative of (s,y) -> F_s(y) at (s0, y_*) is invertible, there is a root curve psi with psi(s0) = y_*, analytic at every s near s0, F_s(psi(s)) = 0 near s0, and near (s0, y_*) the zero set is exactly graph psi. This uses Mathlib's ContDiffAt.implicitFunction in class omega (analytic), applied because the slice map is polynomial (sliceMap_contDiff). It needs invertibility only at the root, which is weaker than the paper's product-neighbourhood condition. quadratic_contraction_certificate and analytic_root_continuation are the general forms."
   },
   "thm:supp-finite-range-test": {
     "env": "theorem",
     "title": "All-rank range test and sharp affine obstruction",
     "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: range test, rank(C q) = rank C, affine obstruction, e_* = (I - C C^†) q, cross product distance |det(c_1,c_2,q)|/‖c_1 × c_2‖. Mathlib's crossProduct is used in Dimension/DimensionK4Selector.lean but for a different statement; Analysis/HermitianMoorePenroseInverse.lean covers Hermitian matrices only.",
-    "difficulty": "medium",
-    "plan": "Finite linear algebra in ℝ³ with C_* : Matrix (Fin 3) (Fin 2) ℝ: replace C_* C_*^† by the orthogonal projection onto the column span (Submodule.starProjection / orthogonalProjection in EuclideanSpace ℝ (Fin 3)), prove q ∈ Ran C ⇔ rank (C | q) = rank C (Matrix.rank via LinearMap.range of the augmented matrix, Submodule.span_insert) ⇔ e_* = 0; the floor ‖𝒬_can(c)‖ ≥ ‖e_*‖ is the distance from q_* - 𝒞ℛ(c) ∈ q_* - Ran C to 0 being ≥ the orthogonal residual (take 𝒬_can(c) = q_* - C_* ℛ(c) as hypothesis from thm:supp-exact-rank-two-factorization); for rank two use crossProduct c_1 c_2 as a normal vector (cross_dot_self lemmas) and |nᵀq|/‖n‖ = |det(c_1,c_2,q)| / ‖c_1 × c_2‖ via triple_product_eq_det; rank one: u × q = 0 ⇔ q ∈ span u (cross product vanishing iff parallel, small lemma), rank zero trivial. Days of work in a new Algebra/ or Gravity/ file."
+    "lean": [
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.IsRangeProjector",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.isRangeProjector_of_isUnit",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.residual",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.eNorm",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.range_test",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.rank_augmented_eq_iff",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.mem_range_iff_residual_eq_zero",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.residual_dot_range",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.residual_isLeast",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.slope_floor",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.residual_norm_rank_two",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.normal_ne_zero_of_rank_two",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.normal_dot_eq_det",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.mem_range_iff_cross_eq_zero_of_rank_one",
+      "RenewalGeometry/Algebra/FiniteRangeTestExact.lean:RenewalGeometry.FiniteRangeTest.mem_range_iff_eq_zero_of_rank_zero",
+      "RenewalGeometry/Gravity/ExactSlowRankTwoExact.lean:RenewalGeometry.ExactSlowRankTwo.slopeCan_floor"
+    ],
+    "note": "Proved in orthonormal coordinates: dot-product inner product, eNorm v = sqrt(v.v), C : Matrix m k R (Fin 3 x Fin 2 for the cross-product clauses). Mathlib has no rectangular Moore-Penrose inverse, so C^dagger is any D satisfying the two Penrose identities C D C = C and (C D)^T = C D (IsRangeProjector; the true C^dagger satisfies them, and isRangeProjector_of_isUnit gives (C^T C)^-1 C^T for full column rank); e_* = (I - C D) q (residual). Proved unconditionally: range_test (q in Ran C <-> rank(fromCols C (replicateCol Unit q)) = rank C <-> e_* = 0, eq:supp-finite-range-test); residual_isLeast (||e_*|| is the exact distance from 0 to q - Ran C, attained at D q); residual_norm_rank_two (rank C = 2 and n = c_1 x c_2 give ||e_*|| = |n.q|/||n|| = |det(c_1,c_2,q)|/||c_1 x c_2||, eq:supp-finite-range-distance); mem_range_iff_cross_eq_zero_of_rank_one (rank one with a nonzero column u: membership iff u x q = 0); mem_range_iff_eq_zero_of_rank_zero. The floor ||Q_can(c)|| >= ||e_*|| (eq:supp-finite-range-floor) is proved given the factorization: slope_floor takes Q_can(c) = q - (C A) R(c) as hypothesis hfact, and ExactSlowRankTwo.slopeCan_floor proves the abstract inner-product form from slopeCan_rank_two_factorization, i.e. conditional on HarmonicAnnihilation (thm:supp-exact-harmonic-q4-zero). The record stays open for that clause only. The 'Certification with enclosing errors' paragraph lies outside the theorem and is not formalised. [Coordinator 30 Sep 2026] Kept open: the slope-entrance harmonic identities used as hypotheses are proved in the paper only from thm:supp-exact-harmonic-q4-zero, which is open.",
+    "difficulty": "hard",
+    "plan": "Blocked only on thm:supp-exact-harmonic-q4-zero (hard): the harmonic identities of eq:supp-exact-slope-entrance (D c_g(0) J_H = D c_H(0) J_H = 0) and the harmonic-row annihilation are consequences of that theorem's coefficient audit. The Lean result proved here takes them as hypotheses; under the corollary policy the record closes by instantiation once that theorem is formalized."
   },
   "prop:supp-finite-range-pfaffian": {
     "env": "proposition",

@@ -80,7 +80,7 @@
 \begin{abstract}
 We prove an exact action--multiplicity duality for finite gravity--matter systems in which spacetime, internal typing, and matter incidence are represented on a common carrier. The complete represented action and the residual matter multiplicity determine one another as mutual commutants. The result applies to arbitrary incidence maps, including singular and rank-deficient ones, and admits intrinsic support, quiver, rigidity, and cofinal-stability formulations.
 %
-On a certified structural branch, this duality reconstructs the Standard-Model internal algebra. Finite naturality and anomaly conditions then recover the global Standard-Model gauge group and hypercharge ratios. A source-minimal fermion analysis, together with a positive endpoint-allocation criterion, yields exactly three complete charged copies while excluding future-visible charged exotic and mirror sectors. The construction is finite and operator algebraic; it does not depend on a particular microscopic realization. Renewal Geometry provides one realization of the required joint carrier.
+On a certified structural branch, this duality reconstructs the Standard-Model internal algebra. Finite naturality selects the $S(\U(3)\times\U(2))\cong[\SU(3)\times\SU(2)\times\U(1)]/\Z_6$ global form, while, within the fixed tensor-type central embedding, anomaly conditions recover the same primitive abelian direction and the usual hypercharge ratios. A source-minimal fermion analysis, together with a positive endpoint-allocation criterion, yields exactly three complete charged copies while excluding future-visible charged exotic and mirror sectors. The construction is finite and operator algebraic; it does not depend on a particular microscopic realization. Renewal Geometry provides one realization of the required joint carrier.
 All selection statements retain explicit occurrence and compatibility hypotheses; absent source data are not supplied by algebraic completion.
 \end{abstract}
 
@@ -102,7 +102,9 @@ matter representations, a scalar sector, and Yukawa couplings.  Under the
 usual assumptions on an ordinary relativistic $S$-matrix, the
 Coleman--Mandula theorem sharply constrains attempts to combine continuous
 spacetime and internal Lie symmetries into a larger nontrivial symmetry group
-\cite{ColemanMandula1967}.
+\cite{ColemanMandula1967}; the graded extension is characterized by the
+Haag--\L opusza\'nski--Sohnius theorem, which admits supersymmetry
+\cite{HaagLopuszanskiSohnius1975}.
 
 This separation does not imply that spacetime action, internal symmetry, and
 matter multiplicity must be algebraically unrelated.  They may instead occur
@@ -143,7 +145,9 @@ vanDenDungenVanSuijlekom2012}, and modified spectral assumptions can lead to
 larger internal symmetries such as Pati--Salam models
 \cite{ChamseddineConnesVanSuijlekom2013}.  Lorentzian and twisted
 formulations address the corresponding indefinite geometric structures
-\cite{Barrett2007,DevastatoEtAl2018}.
+\cite{Barrett2007,DevastatoEtAl2018}.  Related algebraic reformulations of
+the finite Standard-Model data and quantum gauge-symmetry constructions are
+developed in \cite{BoyleFarnsworth2018,BhowmickEtAl2014}.
 
 Particularly relevant here are constructions in which internal information is
 encoded by commutants or centralizers.  Morita formulations of the
@@ -157,12 +161,40 @@ symmetry from algebraic or representation-theoretic data also appears in
 algebraic quantum field theory
 \cite{DoplicherRoberts1989,DoplicherRoberts1990,Todorov2010}.
 
+At the purely representation-theoretic level, mutual-centralizer
+decompositions are classical: a finite-dimensional semisimple algebra and
+the endomorphism algebra of its multiplicity module satisfy the usual
+double-centralizer theorem \cite{EtingofEtAl2011}.  The new point pursued
+here is therefore not the abstract bicommutant implication by itself.  It is
+the intrinsic identification of the first commutant from a physically
+represented, typed incidence packet, including arbitrary operator--Schmidt
+rank, singular and rectangular incidences, together with the source, support,
+quiver, and stability consequences developed below.  Once the first
+commutant has been identified, the reverse equality is the classical finite
+bicommutant step.
+
 A complementary class of approaches seeks Standard-Model structure inside
 larger Clifford, division, or exceptional algebras
 \cite{TraylingBaylis2001,Daviau2017,Gresnigt2020,Krasnov2021,
 BaezSchwahn2026,FureyRoadmap2025}.  These constructions typically identify
 a distinguished centralizer, stabilizer, or subalgebra inside a prescribed
 ambient algebra.
+
+A separate literature seeks an algebraic explanation for fermion
+triplication.  Three-generation structures have been obtained from
+complex-octonionic and Clifford-algebra constructions
+\cite{Furey2018,Gresnigt2026}, from exceptional-algebraic structures
+\cite{Baez2026}, and from extensions of noncommutative geometry
+\cite{YuMa2018}.  More recently, categorical coherence obstructions have
+been proposed as a mechanism in which the order of an associator cocycle
+fixes the minimal family replication \cite{Patrascu2026}.  In the standard
+almost-commutative construction, by contrast, the number of generations is
+an input \cite{ChamseddineConnes2008}.  These mechanisms are logically
+distinct from the one used below: here three first appears as the rank of a
+source-minimal tetrahedral endpoint residual and becomes a physical charged
+family count only after a represented same-carrier ancestry occurrence, a
+positive allocation test, complete charged inventory, and the anomaly
+relations have all been imposed.
 
 The logical structure considered here is different.  The primitive datum for
 the main theorem is not a larger unifying algebra and is not a preassigned
@@ -217,10 +249,14 @@ require no one-dimensional intertwiner assumption.  Support-polar data give a su
 incidence operators; noncommuting supports lead to a multiplicity quiver; and
 on connected invertible branches the same residual algebra is described by
 positive polar metrics and cycle holonomies.  This is a finite double-centralizer duality, without assuming a classical
-reductive dual pair.
+reductive dual pair.  Its reciprocal equality uses the classical finite
+bicommutant theorem \cite{EtingofEtAl2011}; the constructive content is the
+coefficient-space identification of the first commutant from the represented
+incidence packet.
 
 The incidence family itself has a finite minimality theory.  A submodular
-rank function measures how much each represented incidence removes from the
+rank function, in the standard polymatroid sense \cite{Fujishige2005},
+measures how much each represented incidence removes from the
 residual commutant, yielding inclusion-minimal incidence skeletons.  This
 makes it possible to distinguish structural incidence data from redundant
 generators and to identify precisely when deleting one physical incidence
@@ -229,12 +265,17 @@ enlarges the multiplicity algebra.
 
 \paragraph{One upstream realization: Renewal Geometry.}
 
-Predictive-state approaches provide one route to finite structure without
-introducing a manifold or field configuration at the outset: state is
-characterized by the information required for future prediction rather than
-by an independently postulated hidden coordinate
-\cite{ShaliziCrutchfield2001}.  Multitime operational descriptions with
-memory provide a related framework for intervention-dependent processes
+Predictive and observable-state approaches provide one route to finite
+structure without introducing a manifold or field configuration at the
+outset.  Computational mechanics identifies states through equivalence of
+conditional future statistics \cite{ShaliziCrutchfield2001}; finite-rank
+realization theory, observable operator models, predictive-state
+representations, and multiplicity automata encode related stochastic
+processes through finite operator or Hankel representations and predictions
+of observable future experiments
+\cite{CarlylePaz1971,Jaeger2000,SinghJamesRudary2004,ThonJaeger2015}.
+Multitime operational descriptions with memory provide a related framework
+for intervention-dependent quantum processes
 \cite{ChiribellaEtAl2009,PollockEtAl2018}.  One predictive realization of the finite joint-carrier input is developed
 through the Lorentzian and spectral Renewal Geometry constructions
 \cite{PelissierSpacetime2026,PelissierSpectral2026}, while the
@@ -295,20 +336,24 @@ S(\U(3)\times\U(2))
 \frac{\SU(3)\times\SU(2)\times\U(1)}{\Z_6}.}
 \label{eq:intro-gauge-group}
 \end{equation}
-The determinant-source route therefore obtains the global quotient at the
-level of represented incidence rather than from the Lie algebra alone
+The determinant-source route therefore selects this $\Z_6$ global form at
+the level of represented incidence rather than from the Lie algebra alone
 \cite{Hucks1991,Tong2017}.  Before that naturality test is applied, a finite
 commutator residual certifies that the represented colour and two weak factor
 actions occupy mutually commuting tensor slots on one carrier.  Once this
 factor skeleton is fixed, the naturality operator and its determinant projector
 are defined independently of any matter-source population; positive source mass
 and vanishing naturality defect are separate occurrence and purity tests.
-Independently, once the tensor types are fixed, anomaly cancellation determines
-the same primitive central embedding and, together with the faithful matter
-kernel, reconstructs the same global group without assuming determinant-source
-occurrence.  It also gives the usual Standard-Model hypercharge ratios
+Independently, once the displayed tensor types and their two-parameter central
+action are fixed, anomaly cancellation determines the same primitive central
+embedding and, together with the faithful matter kernel, reconstructs the same
+global group without assuming determinant-source occurrence.  It also gives
+the usual Standard-Model hypercharge ratios
 \cite{GengMarshak1989,MinahanRamondWarner1990,
-AlvarezGraciaBondiaMartin1995}.
+AlvarezGraciaBondiaMartin1995}.  This uniqueness is conditional on that fixed
+tensor-type embedding: anomaly cancellation for more general matter
+inventories or abelian charge assignments need not determine a unique
+$\U(1)$ direction \cite{GripaiosNguyen2026}.
 
 At the process level, a Kraus-independent cross-sign Choi mass tests primitive
 grading-changing occurrence before a coherent odd representative is chosen.
@@ -329,7 +374,11 @@ gives an abstract common generation factor; common endpoint ancestry is needed
 only when a particular source-determined relative generation frame is claimed.
 A separate positive weak-copy Gram counts actual weak-doublet copies, while a
 finite relation-space defect tests the allowed Yukawa and optional Majorana
-blocks of a specified grading-odd generator.  These statements are structural
+blocks of a specified grading-odd generator.  This endpoint-allocation route
+should be distinguished from octonionic, Clifford, exceptional, extended-NCG,
+categorical, and discrete-flavour mechanisms for family replication
+\cite{Furey2018,Gresnigt2026,Baez2026,YuMa2018,Patrascu2026,AltarelliFeruglio2010}.
+These statements are structural
 rather than numerical: they do not fix fermion masses or mixing parameters,
 gauge couplings, Higgs parameters, or renormalization-group data.
 
@@ -759,6 +808,7 @@ the simultaneous blocks and their common centre.
 The coefficient spaces also have a canonical positive realization.  This is
 useful later because it separates exact algebraic information from the
 stability of its numerical presentation.
+The operator--Schmidt terminology used below is standard \cite{Tyson2003}.
 
 \begin{proposition}[Slice Gram and operator--Schmidt spectrum]
 \label{prop:incidence-slice-Gram}
@@ -912,7 +962,8 @@ $V=\mathcal A_0'\cap\M^\perp$, with $n=\dim_\C V$.  For $X\in V$ let
  \qquad G_S=\sum_{e\in S}G_e.
  \label{eq:incidence-forms}
 \end{equation}
-The full bank is exact precisely when $G_E\succ0$ on $V$.
+The full bank is exact precisely when $G_E\succ0$ on $V$.  The set function
+below is a representable polymatroid rank function \cite{Fujishige2005}.
 
 \begin{proposition}[Incidence rank polymatroid]
 \label{thm:incidence-polymatroid}
@@ -1061,6 +1112,8 @@ G_{\rm int}=S_{\rm int}^*S_{\rm int},
 C=S_{\rm int}^*S_{\rm ST},
 \]
 and let $P_{\rm ST}$ be the orthogonal projection onto $\Ran S_{\rm ST}$.
+The positive residual below is the finite-dimensional shorted-operator/Schur-
+complement construction in the sense of \cite{Anderson1971,AndersonTrapp1975}.
 
 \begin{proposition}[Universal geometry short and active residual]
 \label{thm:geometry-short}
@@ -1219,6 +1272,11 @@ carrier.  Proposition~\ref{prop:typed-matter-lift} makes this handoff explicit.
 The external tetrahedral action is inherited from the Lorentzian relational
 carrier of \cite{PelissierSpacetime2026}, while the internal gauge action
 reconstructed below must be kept on the opposite side of the centralizer.
+This tetrahedral $S_4$ is not a postulated $S_4$ flavour symmetry of the type
+used in discrete-flavour model building \cite{AltarelliFeruglio2010}: it acts
+first as an external relabeling symmetry of the relational carrier, and the
+endpoint triplet acquires a generation interpretation only after the separate
+same-carrier ancestry and allocation tests.
 Let $\mathcal V_r$ be the future-minimal
 reachable--observable residual \emph{physical carrier} spanned by represented
 source words of length at most $r$, after the complete spacetime and
@@ -1275,6 +1333,10 @@ $(2,0,2,1,1)$ and the commutant to
  \label{eq:degree-one-private-commutant}
 \end{equation}
 Neither carrier supports a commuting internal colour $M_3(\C)$.
+Classical matrix-algebra length theory gives quantitative bounds on the word
+length needed to span a generated matrix algebra \cite{Shitov2019}; the
+flatness test below has a different role, namely to certify stabilization of
+the particular source-generated physical carrier.
 
 For the proposed assignment of the colour, weak, and scalar blocks to the
 trivial, standard, sign-twisted-standard, and two-dimensional sectors,
@@ -1508,7 +1570,8 @@ requires additional source-completeness and endpoint-allocation hypotheses.
 \label{sec:determinant-naturality}
 
 The global form of the Standard-Model gauge group is not fixed by its Lie
-algebra alone \cite{Hucks1991,Tong2017}.  We first identify a determinant
+algebra alone \cite{Hucks1991,Tong2017}; the construction below selects the
+$S(\U(3)\times\U(2))$ or $\Z_6$ quotient on the stated branch.  We first identify a determinant
 incidence by finite equations on the landed matrix factors, then distinguish
 its operator ray from the phase-sensitive datum that selects a subgroup.
 Throughout, $C\cong\C^3$ and $W_2\cong\C^2$ are the actual internal
@@ -1792,8 +1855,11 @@ Their central weights are
 
 \begin{proposition}[Anomaly-forced central weights]
 \label{thm:hypercharge}
-Write right-handed fermions as left-handed conjugates when computing chiral
-anomalies.  The local
+The following statement is made within the fixed tensor types
+\eqref{eq:SM-types} and the two-parameter central action above; broader
+abelian charge problems can possess additional anomaly-free solutions
+\cite{GripaiosNguyen2026}.  Write right-handed fermions as left-handed
+conjugates when computing chiral anomalies.  The local
 $\SU(3)^2\U(1)$,
 $\SU(2)^2\U(1)$,
 gravitational--$\U(1)$,
@@ -1902,8 +1968,7 @@ kernel of Proposition~\ref{prop:faithful-SM-quotient}, this gives
 \]
 This reconstruction does not assume occurrence or phase coherence of a
 historical determinant-incidence source.  When such a source is represented,
-Theorem~\ref{thm:gauge-group} and
-Theorem~\ref{thm:gauge-group} give the independent
+Theorem~\ref{thm:gauge-group} gives the independent
 fixed-tensor and marked-source stabilizer statements.
 \end{corollary}
 
@@ -3099,7 +3164,12 @@ geometry enter a spectral triple and its spectral action
 \cite{ConnesGravityMatter1996,ChamseddineConnes1997,
 ChamseddineConnesMarcolli2007,ChamseddineConnes2008,
 vanDenDungenVanSuijlekom2012}.  The comparison is between resulting
-structures, not an identification of the underlying finite geometries.
+structures, not an identification of the underlying finite geometries.  In
+particular, the standard almost-commutative construction reproduces the
+one-generation representation structure while retaining the number of
+generations as an input \cite{ChamseddineConnes2008}; the endpoint-allocation
+argument here addresses that residual multiplicity on the stated structural
+branch.
 
 The determinant and anomaly routes agree on the global quotient but make
 different source assumptions.  A determinant ray is phase blind; a fixed
@@ -3117,8 +3187,12 @@ and anomaly tests control all charged types.  Zero excess then proves three
 complete charged copies.  Equal multiplicities already give an abstract
 common factor; common ancestry additionally supplies a physical relative
 frame.  Without a cross-component datum, the quark--lepton relative frame is
-a presentation freedom, not an extra observable.  None of these statements
-fixes numerical masses, mixing parameters, or couplings.
+a presentation freedom, not an extra observable.  The mechanism is therefore
+different from family triplication obtained from prescribed octonionic,
+Clifford, exceptional, extended-NCG, categorical, or discrete-flavour
+structures \cite{Furey2018,Gresnigt2026,Baez2026,YuMa2018,Patrascu2026,AltarelliFeruglio2010}.
+None of these statements fixes numerical masses, mixing parameters, or
+couplings.
 
 
 \subsection{Source identification and continuum scope}
@@ -3778,6 +3852,8 @@ and their commutants are different.  The displayed Gram and Choi identities in
 Proposition~\ref{prop:record-witness} complete the finite witness.
 \end{proof}
 
+We use the standard Stinespring, Kraus, and Choi representations of completely
+positive maps throughout this reconstruction \cite{Stinespring1955,Kraus1983,Choi1975}.
 Let $V:\Hh\to\Hh\otimes\mathcal E$ be an isometry and choose an orthonormal
 environment basis $(|\nu\rangle)$.  Write
 \[
@@ -6514,12 +6590,17 @@ $\C e_n$, which converge weakly to zero and have no nonzero transported limit.
 
 
 \begin{thebibliography}{99}
-
 \bibitem{ColemanMandula1967}
 S.~Coleman and J.~Mandula,
 \newblock All possible symmetries of the $S$ matrix,
 \newblock \emph{Physical Review} \textbf{159} (1967), 1251--1256.
 \newblock doi:10.1103/PhysRev.159.1251.
+
+\bibitem{HaagLopuszanskiSohnius1975}
+R.~Haag, J.~T.~\L opusza\'nski, and M.~Sohnius,
+\newblock All possible generators of supersymmetries of the $S$-matrix,
+\newblock \emph{Nuclear Physics B} \textbf{88} (1975), 257--274.
+\newblock doi:10.1016/0550-3213(75)90279-5.
 
 \bibitem{Connes1994}
 A.~Connes,
@@ -6602,12 +6683,6 @@ unification,
 no.~11, 132.
 \newblock doi:10.1007/JHEP11(2013)132.
 
-\bibitem{BoyleFarnsworth2018}
-L.~Boyle and S.~Farnsworth,
-\newblock A new algebraic structure in the standard model of particle physics,
-\newblock \emph{Journal of High Energy Physics} \textbf{2018} (2018), no.~6, 071.
-\newblock doi:10.1007/JHEP06(2018)071.
-
 \bibitem{Barrett2007}
 J.~W.~Barrett,
 \newblock A Lorentzian version of the non-commutative geometry of the standard
@@ -6621,6 +6696,19 @@ A.~Devastato, S.~Farnsworth, F.~Lizzi, and P.~Martinetti,
 \newblock \emph{Journal of High Energy Physics} \textbf{2018} (2018),
 no.~3, 89.
 \newblock doi:10.1007/JHEP03(2018)089.
+
+\bibitem{BoyleFarnsworth2018}
+L.~Boyle and S.~Farnsworth,
+\newblock A new algebraic structure in the standard model of particle physics,
+\newblock \emph{Journal of High Energy Physics} \textbf{2018} (2018), no.~6, 071.
+\newblock doi:10.1007/JHEP06(2018)071.
+
+\bibitem{BhowmickEtAl2014}
+J.~Bhowmick, F.~D'Andrea, B.~Das, and L.~Dabrowski,
+\newblock Quantum gauge symmetries in noncommutative geometry,
+\newblock \emph{Journal of Noncommutative Geometry} \textbf{8} (2014),
+433--471.
+\newblock doi:10.4171/JNCG/161.
 
 \bibitem{DAndreaDabrowski2016}
 F.~D'Andrea and L.~Dabrowski,
@@ -6673,6 +6761,12 @@ I.~Todorov,
 Article ID 509538, 12 pages.
 \newblock doi:10.1155/2010/509538.
 
+\bibitem{EtingofEtAl2011}
+P.~Etingof, O.~Golberg, S.~Hensel, T.~Liu, A.~Schwendner, D.~Vaintrob, and E.~Yudovina,
+\newblock \emph{Introduction to Representation Theory},
+\newblock Student Mathematical Library, vol.~59, American Mathematical Society,
+Providence, RI, 2011.
+
 \bibitem{TraylingBaylis2001}
 G.~Trayling and W.~E.~Baylis,
 \newblock A geometric basis for the standard-model gauge group,
@@ -6710,11 +6804,77 @@ N.~Furey,
 \newblock \emph{Annalen der Physik} \textbf{537} (2025), 2400323.
 \newblock doi:10.1002/andp.202400323.
 
+\bibitem{Furey2018}
+C.~Furey,
+\newblock Three generations, two unbroken gauge symmetries, and one
+eight-dimensional algebra,
+\newblock \emph{Physics Letters B} \textbf{785} (2018), 84--89.
+\newblock doi:10.1016/j.physletb.2018.08.032.
+
+\bibitem{Gresnigt2026}
+N.~G.~Gresnigt,
+\newblock Three fermion generations and an untriplicated gauge sector with
+$S_3$ family symmetry,
+\newblock \emph{Physics Letters B} \textbf{880} (2026), 140782.
+\newblock doi:10.1016/j.physletb.2026.140782.
+
+\bibitem{Baez2026}
+J.~C.~Baez,
+\newblock Three generations in $E_7$,
+\newblock arXiv:2608.06271 [math-ph], 2026.
+
+\bibitem{YuMa2018}
+H.~Yu and B.-Q.~Ma,
+\newblock Origin of fermion generations from extended noncommutative geometry,
+\newblock \emph{International Journal of Modern Physics A} \textbf{33} (2018),
+no.~29, 1850168.
+\newblock doi:10.1142/S0217751X18501683.
+
+\bibitem{Patrascu2026}
+A.~T.~Patrascu,
+\newblock Coherence obstructions and family triplication: a categorical mechanism
+for three fermion generations,
+\newblock \emph{European Physical Journal C} \textbf{86} (2026), 703.
+\newblock doi:10.1140/epjc/s10052-026-15900-z.
+
+\bibitem{Fujishige2005}
+S.~Fujishige,
+\newblock \emph{Submodular Functions and Optimization},
+\newblock 2nd ed., Annals of Discrete Mathematics, vol.~58, Elsevier, Amsterdam,
+2005.
+
 \bibitem{ShaliziCrutchfield2001}
 C.~R.~Shalizi and J.~P.~Crutchfield,
 \newblock Computational mechanics: Pattern and prediction, structure and simplicity,
 \newblock \emph{Journal of Statistical Physics} \textbf{104} (2001), 817--879.
 \newblock doi:10.1023/A:1010388907793.
+
+\bibitem{CarlylePaz1971}
+J.~W.~Carlyle and A.~Paz,
+\newblock Realizations by stochastic finite automata,
+\newblock \emph{Journal of Computer and System Sciences} \textbf{5} (1971),
+no.~1, 26--40.
+\newblock doi:10.1016/S0022-0000(71)80005-3.
+
+\bibitem{Jaeger2000}
+H.~Jaeger,
+\newblock Observable operator models for discrete stochastic time series,
+\newblock \emph{Neural Computation} \textbf{12} (2000), no.~6, 1371--1398.
+\newblock doi:10.1162/089976600300015411.
+
+\bibitem{SinghJamesRudary2004}
+S.~Singh, M.~R.~James, and M.~R.~Rudary,
+\newblock Predictive state representations: a new theory for modeling dynamical
+systems,
+\newblock in \emph{Proceedings of the 20th Conference on Uncertainty in
+Artificial Intelligence (UAI 2004)}, 512--519, 2004.
+
+\bibitem{ThonJaeger2015}
+M.~Thon and H.~Jaeger,
+\newblock Links between multiplicity automata, observable operator models and
+predictive state representations: a unified learning framework,
+\newblock \emph{Journal of Machine Learning Research} \textbf{16} (2015),
+103--147.
 
 \bibitem{ChiribellaEtAl2009}
 G.~Chiribella, G.~M.~D'Ariano, and P.~Perinotti,
@@ -6774,29 +6934,46 @@ NCG,
 \newblock \emph{Physics Letters B} \textbf{364} (1995), 33--40.
 \newblock doi:10.1016/0370-2693(95)01051-3.
 
-\bibitem{Furey2018}
-C.~Furey,
-\newblock Three generations, two unbroken gauge symmetries, and one
-eight-dimensional algebra,
-\newblock \emph{Physics Letters B} \textbf{785} (2018), 84--89.
-\newblock doi:10.1016/j.physletb.2018.08.032.
+\bibitem{GripaiosNguyen2026}
+B.~Gripaios and K.~L.~N.~Nguyen,
+\newblock Anomaly cancellation for a $U(1)$ factor,
+\newblock \emph{Journal of High Energy Physics} \textbf{2026} (2026), no.~1, 055.
+\newblock doi:10.1007/JHEP01(2026)055.
 
-\bibitem{Gresnigt2026}
-N.~G.~Gresnigt,
-\newblock Three fermion generations and an untriplicated gauge sector with
-$S_3$ family symmetry,
-\newblock \emph{Physics Letters B} \textbf{880} (2026), 140782.
-\newblock doi:10.1016/j.physletb.2026.140782.
+\bibitem{AltarelliFeruglio2010}
+G.~Altarelli and F.~Feruglio,
+\newblock Discrete flavor symmetries and models of neutrino mixing,
+\newblock \emph{Reviews of Modern Physics} \textbf{82} (2010), 2701--2729.
+\newblock doi:10.1103/RevModPhys.82.2701.
 
-\bibitem{Baez2026}
-J.~C.~Baez,
-\newblock Three generations in $E_7$,
-\newblock arXiv:2608.06271 [math-ph], 2026.
+\bibitem{Tyson2003}
+J.~E.~Tyson,
+\newblock Operator--Schmidt decompositions and the Fourier transform, with
+applications to the operator--Schmidt numbers of unitaries,
+\newblock \emph{Journal of Physics A: Mathematical and General} \textbf{36}
+(2003), 10101--10114.
+\newblock doi:10.1088/0305-4470/36/39/309.
 
-\bibitem{Schiffler2014}
-R.~Schiffler,
-\newblock \emph{Quiver Representations},
-\newblock CMS Books in Mathematics, Springer, Cham, 2014.
+\bibitem{Anderson1971}
+W.~N.~Anderson, Jr.,
+\newblock Shorted operators,
+\newblock \emph{SIAM Journal on Applied Mathematics} \textbf{20} (1971),
+no.~3, 520--525.
+\newblock doi:10.1137/0120053.
+
+\bibitem{AndersonTrapp1975}
+W.~N.~Anderson, Jr. and G.~E.~Trapp,
+\newblock Shorted operators. II,
+\newblock \emph{SIAM Journal on Applied Mathematics} \textbf{28} (1975),
+no.~1, 60--71.
+\newblock doi:10.1137/0128007.
+
+\bibitem{Shitov2019}
+Y.~Shitov,
+\newblock An improved bound for the lengths of matrix algebras,
+\newblock \emph{Algebra \& Number Theory} \textbf{13} (2019), no.~6,
+1501--1507.
+\newblock doi:10.2140/ant.2019.13.1501.
 
 \bibitem{KuwaeShioya2003}
 K.~Kuwae and T.~Shioya,
@@ -6806,26 +6983,31 @@ its applications to spectral geometry,
 599--673.
 \newblock doi:10.4310/CAG.2003.v11.n4.a1.
 
-\bibitem{BhowmickEtAl2014}
-J.~Bhowmick, F.~D'Andrea, B.~Das, and L.~Dabrowski,
-\newblock Quantum gauge symmetries in noncommutative geometry,
-\newblock \emph{Journal of Noncommutative Geometry} \textbf{8} (2014),
-433--471.
-\newblock doi:10.4171/JNCG/161.
+\bibitem{Schiffler2014}
+R.~Schiffler,
+\newblock \emph{Quiver Representations},
+\newblock CMS Books in Mathematics, Springer, Cham, 2014.
 
-\bibitem{Maldacena1998}
-J.~M.~Maldacena,
-\newblock The large $N$ limit of superconformal field theories and supergravity,
-\newblock \emph{Advances in Theoretical and Mathematical Physics} \textbf{2}
-(1998), 231--252.
-\newblock doi:10.4310/ATMP.1998.v2.n2.a1.
+\bibitem{Stinespring1955}
+W.~F.~Stinespring,
+\newblock Positive functions on $C^*$-algebras,
+\newblock \emph{Proceedings of the American Mathematical Society} \textbf{6}
+(1955), no.~2, 211--216.
+\newblock doi:10.1090/S0002-9939-1955-0069403-4.
 
-\bibitem{Witten1998}
-E.~Witten,
-\newblock Anti de Sitter space and holography,
-\newblock \emph{Advances in Theoretical and Mathematical Physics} \textbf{2}
-(1998), 253--290.
-\newblock doi:10.4310/ATMP.1998.v2.n2.a2.
+\bibitem{Kraus1983}
+K.~Kraus,
+\newblock \emph{States, Effects, and Operations: Fundamental Notions of Quantum
+Theory},
+\newblock Lecture Notes in Physics, vol.~190, Springer-Verlag, Berlin, 1983.
+\newblock doi:10.1007/3-540-12732-1.
+
+\bibitem{Choi1975}
+M.-D.~Choi,
+\newblock Completely positive linear maps on complex matrices,
+\newblock \emph{Linear Algebra and its Applications} \textbf{10} (1975),
+no.~3, 285--290.
+\newblock doi:10.1016/0024-3795(75)90075-0.
 
 \end{thebibliography}
 

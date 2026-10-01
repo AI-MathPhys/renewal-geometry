@@ -149,29 +149,56 @@ itself, but it still begins with a differentiable manifold carrying a
 Lorentzian metric.  Most subsequent approaches to quantum gravity likewise
 replace some part of the classical geometric description while retaining
 another part as primitive.  Causal-set theory begins with a locally finite
-causal order \cite{bombelli-sorkin,surya}; graph, simplicial, and group-field
-approaches begin with combinatorial incidence data whose collective phases are
-expected to approximate geometry
-\cite{konopkamarkopouloseverini2008,ambjornjurkiewiczloll2009,oriti2009};
-and noncommutative geometry replaces the underlying space by spectral and
-operator-algebraic data \cite{Connes1994}.  Other programmes seek gravitational
-dynamics from thermodynamics, entropy, or quantum information
-\cite{jacobson1995,verlinde2011,vanraamsdonk2010}.  These approaches differ
-profoundly in their microscopic assumptions, yet they share a central
-difficulty: the mathematical language used to reconstruct spacetime often
-already contains some analogue of geometry, locality, causal order, dimension,
-or temporal structure.
+causal order \cite{bombelli-sorkin,surya}; in addition to stochastic sequential
+growth laws \cite{RideoutSorkin2000}, its order-theoretic programme includes
+dimension estimators \cite{Myrheim1978,Meyer1989} and discrete
+curvature/action constructions \cite{BenincasaDowker2010}.  Regge calculus
+approximates curved manifolds by simplicial data \cite{Regge1961}, while causal
+dynamical triangulations exhibit a dynamically generated macroscopic
+four-dimensional phase and scale-dependent spectral dimension
+\cite{AmbjornJurkiewiczLoll2004,AmbjornJurkiewiczLoll2005,
+ambjornjurkiewiczloll2009}.  Quantum graphity, spin-foam and group-field
+approaches instead begin from graph, simplicial, representation-theoretic or
+field-theoretic quanta whose collective regimes are intended to recover
+continuum geometry
+\cite{konopkamarkopouloseverini2008,Perez2013,oriti2009,
+GielenOritiSindoni2013,GielenSindoni2016}.  Noncommutative geometry replaces
+the underlying space by spectral and operator-algebraic data \cite{Connes1994}.
 
-The question pursued here is more primitive.  We ask whether the structures
-normally used to define spacetime can instead arise from the organization of
-\emph{predictive histories}.  The microscopic object is not a point of a
-manifold, a simplex, a causal element, or a prescribed spectral triple.  It is
-an operational renewal event: an intervention occurs, a finite outcome is
+Operational approaches have also weakened the amount of causal structure
+assumed in advance.  Quantum causal histories place matrix algebras and
+completely positive evolution on a discrete causal pre-spacetime
+\cite{HawkinsMarkopoulouSahlmann2003}; Hardy's causaloid programme formulates
+operational probabilities without imposing a fixed background causal
+structure \cite{Hardy2005}; and process-matrix methods admit quantum
+correlations without a predefined global causal order
+\cite{OreshkovCostaBrukner2012}.  Other programmes seek gravitational dynamics
+or geometry from thermodynamics, entropy, or quantum information
+\cite{jacobson1995,verlinde2011,vanraamsdonk2010,
+LashkariMcDermottVanRaamsdonk2014,Jacobson2016,
+CaoCarrollMichalakis2017}.  These approaches differ profoundly in their
+microscopic assumptions, but together they make clear that ``emergence of
+spacetime'' can mean several mathematically distinct things: estimating
+continuum dimension from discrete order, recovering geometry from quantum
+correlations, deriving gravitational field equations from a variational or
+entropic principle, or obtaining a continuum phase from combinatorial quantum
+data.
+
+The question pursued here differs in its operational starting point.  We ask
+whether the structures normally used to define spacetime can arise from the
+organization of \emph{predictive histories} without taking a causal order,
+adjacency relation, simplicial complex, spectral triple, metric, or persistent
+state space as the initial geometric object.  The microscopic datum is an
+operational renewal event: an intervention occurs, a finite outcome is
 registered, some distinctions remain capable of influencing later operations,
 and the process may subsequently renew.  At this level a history is simply a
 sequence of operational events.  It has no assigned position, distance, metric,
 connection, curvature, or spacetime dimension, and its ordering is not yet
-interpreted as motion through a pre-existing geometry.
+interpreted as motion through a pre-existing geometry.  The claim below is
+therefore not priority for operational or pregeometric descriptions as such;
+it is the particular reconstruction chain by which predictive persistence,
+positive history structure, relational dimension, Lorentzian geometry and a
+certified Einstein limit are connected.
 
 \paragraph{Prediction before geometry.}
 This choice of starting point is motivated by a simple observation.  Physical
@@ -180,15 +207,19 @@ detail.  What matters operationally is which distinctions in that history can
 still affect a future experiment.  Two past histories that produce exactly the
 same statistics under every admissible continuation are therefore physically
 indistinguishable for all subsequent purposes.  Identifying such histories is
-a predictive rather than a geometric reduction.  It is closely related in
-spirit to causal-state constructions in computational mechanics, where pasts
-are quotiented by equality of their conditional futures
-\cite{shalizicrutchfield,TraversCrutchfield2014}, and to continuous-time
+a predictive rather than a geometric reduction.  It is closely related to
+causal-state constructions in computational mechanics, where pasts are
+quotiented by equality of their conditional futures
+\cite{shalizicrutchfield,TraversCrutchfield2014}, to continuous-time
 predictive representations of stochastic processes
-\cite{MarzenCrutchfield2017,JurgensCrutchfield2021}.  The difference is that
-the present construction retains the complete operational intervention data
-and the positive process structure required for the subsequent algebraic and
-geometric reconstruction.
+\cite{MarzenCrutchfield2017,JurgensCrutchfield2021}, and to observable-operator
+and predictive-state realizations in which dynamical state is encoded through
+future observations and, in the controlled setting, action-conditioned future
+predictions \cite{Jaeger2000,LittmanSuttonSingh2002}.  The predictive
+minimality used here is therefore not by itself the claimed novelty.  The
+distinction is that complete intervention-conditioned future equivalence is
+used as the canonical pregeometric carrier on which the positive process
+structure and the later relational-geometric reconstruction are built.
 
 Because future equivalence is preserved under admissible continuation, the
 quotient is not merely a compressed description of the past.  It carries a
@@ -204,10 +235,14 @@ regenerate, or lose part of their past.  They underlie classical results in
 probability and statistical mechanics \cite{feller}, while non-Markovian
 renewal processes include heavy-tailed and infinite-mean regimes with
 qualitatively different long-time behavior
-\cite{garsialamperti1962,erickson1970,caravennadoney2019}.  In conventional
-applications, however, renewal occurs \emph{inside} an already given time and
-state space.  Waiting times are measured by an external clock, and the process
-evolves on a previously specified collection of states.
+\cite{garsialamperti1962,erickson1970,caravennadoney2019}.  Renewal and
+semi-Markov ideas have also been lifted to completely positive quantum
+dynamics, including quantum semi-Markov and quantum renewal processes
+\cite{BreuerVacchini2008,Vacchini2020}.  In these conventional classical and
+quantum constructions, however, renewal occurs \emph{inside} an already given
+time and state space: waiting times are measured by an external temporal
+parameter and the process acts on a previously specified classical or quantum
+state carrier.
 
 Here we reverse that logical order.  Renewal is not placed in spacetime;
 renewal belongs to the microscopic organization from which spacetime is
@@ -369,13 +404,16 @@ This places the construction near noncommutative and spectral geometry, but
 with a different starting point.  In ordinary spectral geometry an algebra,
 Hilbert-space representation, and Dirac operator are supplied as geometric
 data \cite{Connes1994}.  Lorentzian variants enrich this structure with an
-indefinite inner product, fundamental symmetry, temporal datum, or twist
+indefinite inner product, fundamental symmetry, temporal datum, time
+orientation, or twist
 \cite{strohmaier,franco,franco-eckstein,
-vandendungenpaschkerennie2013,vandendungen2016,
+vandendungenpaschkerennie2013,vandendungen2016,BesnardBizi2018,
 DevastatoFarnsworthLizziMartinetti2018,
 DevastatoFilaciMartinettiSingh2020}.  Recent work has also examined the
 emergence of temporal and Lorentzian structures within twisted
-almost-commutative settings \cite{nieuviarts2026a,nieuviarts2026b}.  The
+almost-commutative settings \cite{nieuviarts2026a,nieuviarts2026b}.  In
+particular, spectral-spacetime approaches relate Lorentzian signature to a
+Krein product together with time-orientation data \cite{BesnardBizi2018}.  The
 present construction operates one level upstream.  Neither spectral geometry
 nor a Krein structure is taken as the initial object.  The positive history
 algebra is reconstructed from operational renewal statistics, while the
@@ -425,10 +463,24 @@ ansatz.
 
 \paragraph{From kinematics to Einstein dynamics.}
 Producing Lorentzian kinematics is not yet a derivation of gravitational
-dynamics.  In particular, prescribing a renewal-rate history whose
-reconstructed metric is de~Sitter would establish only realizability of one
-Einstein solution.  The dynamical part therefore begins instead from the
-complete accepted physical cylinder.  Future refinement reconstructs the
+dynamics.  There are important precedents in which gravitational field
+equations arise from thermodynamic or entanglement variational statements:
+Jacobson's equation-of-state argument \cite{jacobson1995}, holographic
+entanglement first-law derivations of linearized Einstein equations
+\cite{LashkariMcDermottVanRaamsdonk2014}, and entanglement-equilibrium
+arguments for the semiclassical Einstein equation \cite{Jacobson2016}.  Causal
+sets provide a different discrete precedent in which order-theoretic
+operators reconstruct scalar curvature and an approximately local action
+\cite{BenincasaDowker2010}.  The route here is distinct from each of these: the
+finite action is reconstructed from marked renewal reward--duration statistics,
+its exactness is tested independently, and the actually accepted dynamics is
+then tested for stationarity before any gravitational representative is
+classified.
+
+In particular, prescribing a renewal-rate history whose reconstructed metric
+is de~Sitter would establish only realizability of one Einstein solution.  The
+dynamical part therefore begins instead from the complete accepted physical
+cylinder.  Future refinement reconstructs the
 minimum determining-field quotient and the accepted transition kernel acting
 on it.  On the same resolved history, a protected vector reward together with
 physical duration determines an analytic renewal pressure.  Its first
@@ -791,7 +843,11 @@ The positive structural Renewal Grand Tensor is
  \label{eq:grand-tensor-main}
 \end{equation}
 The term \emph{Grand Tensor} denotes this algebra-valued positive moment
-object, not a tensor field on a manifold. Each word-Gram form is a covariant
+object, not a tensor field on a manifold.  Likewise, the term \emph{history
+algebra} here refers to the represented $C^*$-algebra generated by operational
+history maps; it should not be confused with the history-group/decoherent-
+histories constructions of generalized quantum theory
+\cite{IshamLinden1995}. Each word-Gram form is a covariant
 sesquilinear tensor on the finite word space. Under independent composition
 with independently accessible operations, the predictive quotient, history
 algebra and word moments factor as in
@@ -877,6 +933,19 @@ A secondary criterion in the pair-homogeneous simplex category combines
 alternating parity with an explicit minimum-source rule. That criterion
 selects the same cell, but its minimality requirement is a selection
 hypothesis, not a consequence of predictive compression.
+
+Dimension has a different status in several neighboring emergent-geometry
+programmes.  In causal-set theory, Myrheim--Meyer-type statistics estimate the
+dimension of an order assumed to be manifoldlike
+\cite{Myrheim1978,Meyer1989,surya}; in causal dynamical triangulations the
+macroscopic and spectral dimensions are measured properties of the generated
+ensemble \cite{AmbjornJurkiewiczLoll2004,AmbjornJurkiewiczLoll2005}; and in
+entanglement-based reconstruction a best-fit spatial dimensionality can be
+inferred from quantum-correlation data \cite{CaoCarrollMichalakis2017}.  The
+claims below are of a different type: they are finite classification results
+inside explicitly declared relational categories, not estimators of an
+already manifoldlike sample and not measurements of a scale-dependent
+effective dimension.
 
 \begin{proposition}[Endpoint--cycle balance selects $K_4$ without an alternating form]
 \label{prop:main-regular-graph-k4}
@@ -1456,7 +1525,11 @@ first-order linear functional on its exact or summably stable branch, and
 subtraction of the complete resolved cut-memory log-partition.  Denote the
 resulting generic first-order gravitational score by $A^{\rm grav}_{X,\rm sh}$.
 For later reference, write the three Lorentz-natural first-order densities (up
-to the overall normalization convention) as
+to the overall normalization convention) as follows.  The Palatini--Holst
+family and its boundary/topological extensions are standard first-order
+gravity structures \cite{Holst1996,CorichiReview}; the point of the theorem
+below is the restricted invariant classification of the reconstructed score,
+not the introduction of these densities themselves:
 \begin{align}
  L_{\rm Palatini}
  &=\frac12\epsilon_{IJKL}e^I\wedge e^J\wedge R^{KL},\\
@@ -1790,9 +1863,13 @@ uses this same regulator.
 \label{subsec:main-literal-link-compactness}
 
 We next identify the nonlinear curvature from the original link record.
-Unlike a compactness assumption on the full connection, this route requires
-strong convergence only of the spatial coefficients; the temporal
-coefficient may remain weakly convergent. On the periodic branch let
+Link variables, plaquette holonomies and curvature extracted from small loops
+are standard ingredients of lattice gauge theory \cite{Wilson1974}.  What is
+specific here is the anisotropic compactness statement in the original common
+trivialization and its use in the renewal-to-Palatini passage.  Unlike a
+compactness assumption on the full connection, this route requires strong
+convergence only of the spatial coefficients; the temporal coefficient may
+remain weakly convergent. On the periodic branch let
 \begin{equation}
  U_{i,h}=\exp(hA_{i,h}),\qquad
  Z_{i,h}=\frac{U_{i,h}-I}{h},
@@ -1997,6 +2074,17 @@ For the declared local harmonic law, these bounds are proved directly on
 a fixed Sobolev neighbourhood; the five recognition conditions are not
 assumed as its definition. The law is not identified with the raw finite
 Euler flow of the reconstructed action.
+
+The continuum analytic target in this subsection is the standard harmonic
+reduction of the Einstein equations.  Local Sobolev well-posedness for broad
+classes of quasilinear hyperbolic systems, including the reduced Einstein
+system, belongs to the classical theory \cite{HughesKatoMarsden1977}; harmonic
+and generalized-harmonic formulations and their stability theory are also well
+established \cite{LindbladRodnianski2010,Lindblom2006}.  The new assertion here
+is therefore not a replacement for continuum Einstein well-posedness.  It is
+the cutoff-uniform discrete writer, its genuinely finite renewal realization,
+and the quantitative convergence of that realization to the harmonic vacuum
+development on the stated common Sobolev neighbourhood.
 
 We use the odd periodic regulator and the forward, backward and centred
 differences of \eqref{eq:main-open-differences}.
@@ -2483,6 +2571,15 @@ an exact discrete momentum invariant. Their special hypotheses are not
 substitutes for the general certification conditions.
 \subsection{Homogeneous renewal coordinates and the full lapse constraint}
 \label{subsec:homogeneous-renewal-main}
+
+Effective homogeneous and Friedmann-type dynamics have also been extracted
+from microscopic quantum-geometric models, notably group-field-theory
+condensates \cite{GielenOritiSindoni2013,GielenSindoni2016}.  The role of the
+present sector is different: the homogeneous geometry is first reconstructed
+from renewal rate and density variables, and the lapse is retained as an
+independent variational degree of freedom before the stationary equations are
+solved.  The comparison is therefore one of emergent cosmological dynamics,
+not an identification of the underlying microscopic variables.
 
 On the $A_3$ root-symmetric branch write
 \begin{equation}
@@ -3021,7 +3118,11 @@ important both conceptually and mathematically: the predictive quotient does
 not already contain a Lorentzian metric, Lorentzian kinematics does not
 already imply Einstein dynamics, and the existence of a reconstructed action
 does not imply that an arbitrary microscopic evolution is stationary for
-that action.
+that action.  In this respect the proposal should be compared componentwise
+with causal sets, operational causal frameworks, predictive-state methods,
+quantum renewal processes and information-theoretic emergence programmes,
+rather than understood as a claim that those neighboring literatures lack
+pregeometric or emergent-spacetime constructions.
 
 
 % -----------------------------------------------------------------------------
@@ -3053,7 +3154,14 @@ select the tetrahedral relation cell $K_4$.  The endpoint--cycle balance
 criterion does so among connected simple regular relations without invoking
 an alternating form, while the stronger pair-homogeneous simplex criterion
 selects the same cell from minimal faithful alternating completion.  Both
-lead to the three-dimensional $A_3$ standard module.
+lead to the three-dimensional $A_3$ standard module.  This differs from
+Myrheim--Meyer causal-set dimension estimators
+\cite{Myrheim1978,Meyer1989,surya}, from the measured spectral dimension of
+causal dynamical triangulations \cite{AmbjornJurkiewiczLoll2005}, and from
+best-fit dimensional reconstruction using entanglement data
+\cite{CaoCarrollMichalakis2017}: the present result is a uniqueness statement
+inside specified finite source categories, rather than an estimator applied
+to a geometry-bearing ensemble.
 
 The endpoint--cycle balance argument is the primary result and does not
 depend on the parity argument. The orientation-twisted source equivalence
@@ -3100,7 +3208,12 @@ representation.  The gamma matrices therefore realize an already determined
 Lorentzian quadratic form; they are not responsible for selecting its
 signature.  In particular, the Lorentzian direction is neither obtained by
 analytic continuation of a positive diffusion form nor inserted through a
-choice of Dirac matrices.
+choice of Dirac matrices.  This signature question is also logically distinct
+from Lorentz invariance of a discrete substrate: for example, Poisson
+sprinklings in causal-set theory can remain Lorentz invariant without
+selecting a preferred frame \cite{BombelliHensonSorkin2009}.  Here the issue is
+instead how one negative geometric direction enters after a positive
+predictive-history reconstruction.
 
 
 % -----------------------------------------------------------------------------
@@ -13012,6 +13125,149 @@ sign, nor that de~Sitter is a universal attractor under coarse graining.
 
 
 \begin{thebibliography}{99}
+
+\bibitem{Regge1961}
+T.~Regge,
+\newblock General relativity without coordinates,
+\newblock \emph{Il Nuovo Cimento} \textbf{19} (1961), 558--571.
+
+\bibitem{RideoutSorkin2000}
+D.~P.~Rideout and R.~D.~Sorkin,
+\newblock Classical sequential growth dynamics for causal sets,
+\newblock \emph{Physical Review D} \textbf{61} (2000), 024002.
+
+\bibitem{Myrheim1978}
+J.~Myrheim,
+\newblock Statistical geometry,
+\newblock CERN preprint CERN-TH-2538 (1978).
+
+\bibitem{Meyer1989}
+D.~A.~Meyer,
+\newblock \emph{The Dimension of Causal Sets},
+\newblock Ph.D. thesis, Massachusetts Institute of Technology, 1989.
+
+\bibitem{BenincasaDowker2010}
+D.~M.~T.~Benincasa and F.~Dowker,
+\newblock Scalar curvature of a causal set,
+\newblock \emph{Physical Review Letters} \textbf{104} (2010), 181301.
+
+\bibitem{BombelliHensonSorkin2009}
+L.~Bombelli, J.~Henson, and R.~D.~Sorkin,
+\newblock Discreteness without symmetry breaking: a theorem,
+\newblock \emph{Modern Physics Letters A} \textbf{24} (2009), 2579--2587.
+
+\bibitem{AmbjornJurkiewiczLoll2004}
+J.~Ambj{\o}rn, J.~Jurkiewicz, and R.~Loll,
+\newblock Emergence of a 4D world from causal quantum gravity,
+\newblock \emph{Physical Review Letters} \textbf{93} (2004), 131301.
+
+\bibitem{AmbjornJurkiewiczLoll2005}
+J.~Ambj{\o}rn, J.~Jurkiewicz, and R.~Loll,
+\newblock The spectral dimension of the universe is scale dependent,
+\newblock \emph{Physical Review Letters} \textbf{95} (2005), 171301.
+
+\bibitem{Perez2013}
+A.~Perez,
+\newblock The spin-foam approach to quantum gravity,
+\newblock \emph{Living Reviews in Relativity} \textbf{16} (2013), 3.
+
+\bibitem{HawkinsMarkopoulouSahlmann2003}
+E.~Hawkins, F.~Markopoulou, and H.~Sahlmann,
+\newblock Evolution in quantum causal histories,
+\newblock \emph{Classical and Quantum Gravity} \textbf{20} (2003), 3839--3854.
+
+\bibitem{Hardy2005}
+L.~Hardy,
+\newblock Probability theories with dynamic causal structure: a new framework
+for quantum gravity,
+\newblock arXiv:gr-qc/0509120 (2005).
+
+\bibitem{OreshkovCostaBrukner2012}
+O.~Oreshkov, F.~Costa, and {\v C}.~Brukner,
+\newblock Quantum correlations with no causal order,
+\newblock \emph{Nature Communications} \textbf{3} (2012), 1092.
+
+\bibitem{Jaeger2000}
+H.~Jaeger,
+\newblock Observable operator models for discrete stochastic time series,
+\newblock \emph{Neural Computation} \textbf{12} (2000), 1371--1398.
+
+\bibitem{LittmanSuttonSingh2002}
+M.~L.~Littman, R.~S.~Sutton, and S.~Singh,
+\newblock Predictive representations of state,
+\newblock in \emph{Advances in Neural Information Processing Systems 14},
+MIT Press, Cambridge, MA, 2002, pp.~1555--1561.
+
+\bibitem{BreuerVacchini2008}
+H.-P.~Breuer and B.~Vacchini,
+\newblock Quantum semi-Markov processes,
+\newblock \emph{Physical Review Letters} \textbf{101} (2008), 140402.
+
+\bibitem{Vacchini2020}
+B.~Vacchini,
+\newblock Quantum renewal processes,
+\newblock \emph{Scientific Reports} \textbf{10} (2020), 5592.
+
+\bibitem{GielenOritiSindoni2013}
+S.~Gielen, D.~Oriti, and L.~Sindoni,
+\newblock Cosmology from group field theory formalism for quantum gravity,
+\newblock \emph{Physical Review Letters} \textbf{111} (2013), 031301.
+
+\bibitem{GielenSindoni2016}
+S.~Gielen and L.~Sindoni,
+\newblock Quantum cosmology from group field theory condensates: a review,
+\newblock \emph{SIGMA} \textbf{12} (2016), 082.
+
+\bibitem{LashkariMcDermottVanRaamsdonk2014}
+N.~Lashkari, M.~B.~McDermott, and M.~Van Raamsdonk,
+\newblock Gravitational dynamics from entanglement ``thermodynamics'',
+\newblock \emph{Journal of High Energy Physics} \textbf{2014} (2014), no.~4,
+195.
+
+\bibitem{Jacobson2016}
+T.~Jacobson,
+\newblock Entanglement equilibrium and the Einstein equation,
+\newblock \emph{Physical Review Letters} \textbf{116} (2016), 201101.
+
+\bibitem{CaoCarrollMichalakis2017}
+C.~Cao, S.~M.~Carroll, and S.~Michalakis,
+\newblock Space from Hilbert space: recovering geometry from bulk entanglement,
+\newblock \emph{Physical Review D} \textbf{95} (2017), 024031.
+
+\bibitem{Holst1996}
+S.~Holst,
+\newblock Barbero's Hamiltonian derived from a generalized Hilbert--Palatini
+action,
+\newblock \emph{Physical Review D} \textbf{53} (1996), 5966--5969.
+
+\bibitem{BesnardBizi2018}
+F.~Besnard and N.~Bizi,
+\newblock On the definition of spacetimes in noncommutative geometry: Part I,
+\newblock \emph{Journal of Geometry and Physics} \textbf{123} (2018), 292--309.
+
+\bibitem{HughesKatoMarsden1977}
+T.~J.~R.~Hughes, T.~Kato, and J.~E.~Marsden,
+\newblock Well-posed quasi-linear second-order hyperbolic systems with
+applications to nonlinear elastodynamics and general relativity,
+\newblock \emph{Archive for Rational Mechanics and Analysis} \textbf{63}
+(1977), 273--294.
+
+\bibitem{LindbladRodnianski2010}
+H.~Lindblad and I.~Rodnianski,
+\newblock The global stability of Minkowski space-time in harmonic gauge,
+\newblock \emph{Annals of Mathematics} \textbf{171} (2010), 1401--1477.
+
+\bibitem{Wilson1974}
+K.~G.~Wilson,
+\newblock Confinement of quarks,
+\newblock \emph{Physical Review D} \textbf{10} (1974), 2445--2459.
+
+\bibitem{IshamLinden1995}
+C.~J.~Isham and N.~Linden,
+\newblock Continuous histories and the history group in generalized quantum
+ theory,
+\newblock \emph{Journal of Mathematical Physics} \textbf{36} (1995),
+5392--5408.
 
 \bibitem{bombelli-sorkin}
 L.~Bombelli, J.~Lee, D.~Meyer, and R.~D.~Sorkin,

@@ -460,13 +460,19 @@
   "lem:defect-conservation-transport": {
     "env": "lemma",
     "title": "Covariant conservation under a strong connection limit",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Continuum/WeakStrongBilinearPairingExact.lean:RenewalGeometry.WeakStrongBilinearPairing.tendsto_of_strong_of_bounded_weak"
+      "RenewalGeometry/Gravity/DefectConservationTransportExact.lean:RenewalGeometry.DefectConservationTransport.defect_conservation_transport",
+      "RenewalGeometry/Gravity/DefectConservationTransportExact.lean:RenewalGeometry.DefectConservationTransport.defect_conservation_split",
+      "RenewalGeometry/Gravity/DefectConservationTransportExact.lean:RenewalGeometry.DefectConservationTransport.tendsto_covSym",
+      "RenewalGeometry/Gravity/DefectConservationTransportExact.lean:RenewalGeometry.DefectConservationTransport.covSym_apply",
+      "RenewalGeometry/Gravity/DefectConservationTransportExact.lean:RenewalGeometry.DefectConservationTransport.covSym",
+      "RenewalGeometry/Gravity/DefectConservationTransportExact.lean:RenewalGeometry.DefectConservationTransport.symCovDeriv",
+      "RenewalGeometry/Gravity/DefectConservationTransportExact.lean:RenewalGeometry.DefectConservationTransport.christoffel",
+      "RenewalGeometry/Gravity/DefectConservationTransportExact.lean:RenewalGeometry.DefectConservationTransport.tendsto_inv_entry",
+      "RenewalGeometry/Gravity/DefectConservationTransportExact.lean:RenewalGeometry.DefectConservationTransport.tendsto_apply_of_bounded_weakStar"
     ],
-    "note": "Partial: the limit passage is a weak-strong pairing (test tensor fields grad^{(mu}X^{nu)}_{g_h} converging uniformly against uniformly bounded, weak-* convergent measures T_h), whose abstract form on normed spaces is tendsto_of_strong_of_bounded_weak (bounded bilinear pairing, strong x bounded-weak) ; missing: the instantiation with finite signed matrix-valued Radon measures paired against continuous compactly supported tensor fields, the uniform convergence of the symmetrized covariant derivative from C^1 convergence of the metrics (Christoffel symbols), and the splitting clause T = T(z) dV_g + S.",
-    "difficulty": "medium",
-    "plan": "Instantiate Continuum/WeakStrongBilinearPairingExact.lean:tendsto_of_strong_of_bounded_weak with E = continuous compactly supported symmetric tensor fields on the chart (sup norm) and F = the finite matrix-valued measures with the total-variation norm (VectorMeasure with variation, as in Analysis/OperatorMeasureL2Completion.lean), weak-* convergence being convergence of the pairing; prove uniform convergence of grad^{(mu}X^{nu)}_{g_h} from C^1 convergence of g_h and uniform inverse bounds (Christoffel symbols are rational in g and its first derivatives; Analysis/ has no Christoffel infrastructure, so this is the main new finite/algebraic lemma). The splitting clause is linearity. Days of work, no missing Mathlib infrastructure."
+    "note": "Proved on a compact chart K in R^n (Fin n -> R): metrics g_h, g with C^1 components on R^n, C^1 convergence on K (uniform convergence of the components and of all first partials on K), limit g nondegenerate on K; X any C^1 vector field. covSym K g X mu nu is the coordinate formula nabla^{(mu}X^{nu)} = 1/2(g^{mu a}(d_a X^nu + Gamma^nu_{ab} X^b) + (mu<->nu)), Gamma^nu_{ab} = 1/2 g^{nu l}(d_a g_{lb} + d_b g_{la} - d_l g_{ab}), computed in the Banach algebra C(K,R) (inverse metric = matrix inverse over C(K,R)); covSym_apply shows it evaluates at every x in K to the same formula with (g x)^{-1} and the real partials. tendsto_covSym: B_h(X) -> B(X) uniformly on K (det g is a unit of C(K,R), inversion is continuous at units of a complete normed ring, the rest is polynomial). defect_conservation_transport: uniformly bounded, weak-* convergent T_h with sum_{mu nu} T_{h,mu nu}(B_h(X)) -> 0 give sum T_{mu nu}(B(X)) = 0, via |T_h(B_h - B)| <= C ||B_h - B||_inf. defect_conservation_split: T = T_reg + S with the identity for T_reg gives it for S. Renderings disclosed: finite signed Radon measures on the compact chart are encoded by the Riesz identification as continuous linear functionals on C(K,R) (dual norm = total variation, weak-* = convergence against every continuous function on K); metrics are C^1 maps on R^n (only values/first partials on K enter); the uniform inverse bounds on g_h are replaced by nondegeneracy of the limit g on K (which they imply; the g_h are then automatically eventually nondegenerate), symmetry of T and compact support of X are not needed (stronger statement, per C^1 test field)."
   },
   "prop:YM-defect": {
     "env": "proposition",
@@ -491,13 +497,28 @@
   "lem:positive-packet-defect": {
     "env": "lemma",
     "title": "Covariance measure of a weak quadratic packet",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
-      "RenewalGeometry/Analysis/OperatorMeasureWeakCompactness.lean:RenewalGeometry.OperatorMeasureL2.exists_subseq_tendsto_posOperatorMeasure"
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.positive_packet_defect",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.exists_packetDefect",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.posSemidef",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.isSymm",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.tendsto_trace",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.traceMeasure_nonneg",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.traceMeasure_eq_zero_iff",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.eq_zero_iff_tendsto",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.tendsto_contraction",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.abs_contraction_le",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.quadCLM",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.quadCLM_apply_eq",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.inner_matAct",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.PosSemidef",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.IsSymm",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.IsPacketDefect",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.traceMeasure",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.WeakTendsto"
     ],
-    "note": "Partial: the extraction step (a sequence of positive matrix-valued measures with uniformly bounded trace mass on a compact metrizable base has a subsequence converging weakly against bounded continuous functions to a positive matrix-valued measure) is exists_subseq_tendsto_posOperatorMeasure, which applies to Y_h (x) Y_h dV_0 since its trace mass is ||Y_h||_{L^2}^2 ; missing: realising Y_h (x) Y_h dV_0 as a PosOperatorMeasure (withDensity), positivity of the defect Q_Y = lim - Y (x) Y dV_0 through weak L^2 convergence of Y_h (cross terms), mu_Y = tr Q_Y, the equivalences eq:positive-defect-equivalence (mu_Y = 0 iff Q_Y = 0 iff strong L^2 convergence, using the constant test function on the compact domain), the contraction eq:defect-contraction with uniformly convergent continuous bilinear coefficients, and realification of complex packets.",
-    "difficulty": "medium",
-    "plan": "Build on Analysis/OperatorMeasureWeakCompactness.lean (exists_subseq_tendsto_posOperatorMeasure, PosOperatorMeasure.formMeasure) and Analysis/OperatorMeasureL2Completion.lean (PosOperatorMeasure): define the density measure of an L^2 section Y on the compact domain K, show trace mass = ||Y||_2^2, extract the limit, prove positivity of the defect from int phi (Y_h - Y)(x)(Y_h - Y) >= 0 for continuous phi >= 0 and weak L^2 convergence (Mathlib Lp weak convergence via inner products), then the trace/zero equivalences and the bilinear-contraction bound |B : Q_Y| <= C_B mu_Y from operator-norm bounds on PSD matrices. Days of measure-theoretic assembly; no missing Mathlib infrastructure."
+    "note": "Proved for Y_h -> Y weakly in L^2(K, V0; R^r) (WeakTendsto: every continuous linear functional converges), K a compact metric space with any Borel measure V0. positive_packet_defect: there are a subsequence sigma and a matrix-valued measure Q_Y with Y_h (x) Y_h dV0 ->* Y (x) Y dV0 + Q_Y against every continuous coefficient field P in C(K, R^{r x r}) (IsPacketDefect; quadCLM_apply_eq/inner_matAct: the pairing is int sum_ab Y_a P_ab Y_b dV0), Q_Y positive semidefinite and symmetric, |Y_h|^2 dV0 ->* |Y|^2 dV0 + mu_Y with mu_Y = tr Q_Y >= 0, mu_Y = 0 <-> Q_Y = 0 <-> Y_h -> Y in L^2 along the subsequence (eq:positive-defect-equivalence), and for B_h -> B uniformly B_h(Y_h,Y_h) dV0 ->* B(Y,Y) dV0 + B:Q_Y with |B:Q_Y| <= C_B mu_Y, C_B = sup_x ||B(x)||_op (eq:defect-contraction, tested on phi >= 0). Proof: uniform L^2 bound by Banach-Steinhaus; extraction by sequential Banach-Alaoglu in the dual of the separable space C(K, R^{r x r}); positivity by expanding int (Y_h - Y)^T P (Y_h - Y) >= 0 and passing the cross terms by weak convergence (the paper's lower-semicontinuity step); domination by positivity of Q on c I +- B; equivalences via the constant test and the Hilbert identity. Renderings disclosed: matrix-valued Radon measures on the compact domain are encoded (Riesz identification) as continuous linear functionals on C(K, R^{r x r}); PSD = nonnegative on pointwise-PSD continuous fields, symmetric = invariant under transposition, weak-* = convergence against every continuous field (entrywise: P = phi E_ab); the bundle is written in an orthonormal frame as K x R^r (the paper works in a finite atlas; a general metric bundle embeds isometrically in a trivial one over the compact base, and weak L^2 convergence in the subbundle implies it in the trivial bundle); complex packets are covered by realification (R^{2r}); the domination |B:Q| <= C_B mu is stated against nonnegative test functions (equivalent to the total-variation form)."
   },
   "lem:equivariant-tests": {
     "env": "lemma",
@@ -550,7 +571,7 @@
   "prop:positive-Higgs-envelope": {
     "env": "proposition",
     "title": "Positive kinetic envelope and the $L^{8/3}$ endpoint",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/DiscreteAnalysis/PositiveHiggsEnvelopeExact.lean:RenewalGeometry.PositiveHiggsEnvelope.positive_higgs_envelope",
       "RenewalGeometry/DiscreteAnalysis/PositiveHiggsEnvelopeExact.lean:RenewalGeometry.PositiveHiggsEnvelope.lpNorm_equiv",
@@ -563,7 +584,9 @@
       "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggsDensity",
       "RenewalGeometry/DiscreteAnalysis/PositiveHiggsAmplitudeCompilerExact.lean:RenewalGeometry.positiveHiggsLpNorm"
     ],
-    "note": "All clauses formalised. positive_higgs_envelope (family of cutoffs h, finite cells, packets K h x : D -> F, F a real inner-product space = Higgs fibre with Re of its Hermitian product, comparison c_r|xi|^2 <= r^{mu nu}<xi_mu,xi_nu> <= C_r|xi|^2 with cutoff-independent 0 < c_r <= C_r, masses m >= 0): (1) eq:positive-Higgs-envelope with c_0 = c_r, C_0 = C_r on every cell; (2) the boxed eq:positive-Higgs-L43-L83 as the explicit two-sided bound c_r^{1/2} ||K||_{L_h^{8/3}} <= ||e||_{L_h^{4/3}}^{1/2} <= C_r^{1/2} ||K||_{L_h^{8/3}} (lpNorm_equiv); (3) continuum identification rendered as: for any comparison packet K'_h (the sampled D_{A_h}H_h) the two L_h^{8/3} criteria differ by at most ||K_h - K'_h||_{L_h^{8/3}} (weighted Minkowski, lpNorm83_sub_le), so with a uniformly bounded consistency error (what prop:mesh-consistency supplies on smooth bounded families; that estimate itself is not re-proved here) sup_h ||K_h||_{8/3} < infinity iff sup_h ||K'_h||_{8/3} < infinity. Strong L^1 clause (tendsto_density_lintegral): on an arbitrary measure space (restrict the measure to a compact set for L^1_loc), if the reconstructed packets satisfy int |K_h - K|^2 -> 0 with int |K|^2 < infinity and the reconstructed comparison metrics r_h -> r uniformly with r bounded, then int |e_h - e| -> 0 (amplitudes of K_h - K assumed a.e.-measurable). Sharpness (no_automatic_upgrade): on the side-(n+1) unit-box grid with masses h^4 and Euclidean comparison metric, K_h = h^{-7/4} e_0 on one cell has ||K_h||_{L_h^2} -> 0 and ||e_h||_{L_h^1} -> 0 while ||e_h||_{L_h^{4/3}} = h^{-1/2} -> infinity and ||K_h||_{L_h^{8/3}} = h^{-1/4} -> infinity (the discrete form of the paper's Y_n family; the continuum Y_n computation is not separately formalised). Only m_h >= 0 of the mass comparison is used."
+    "note": "All clauses formalised. positive_higgs_envelope (family of cutoffs h, finite cells, packets K h x : D -> F, F a real inner-product space = Higgs fibre with Re of its Hermitian product, comparison c_r|xi|^2 <= r^{mu nu}<xi_mu,xi_nu> <= C_r|xi|^2 with cutoff-independent 0 < c_r <= C_r, masses m >= 0): (1) eq:positive-Higgs-envelope with c_0 = c_r, C_0 = C_r on every cell; (2) the boxed eq:positive-Higgs-L43-L83 as the explicit two-sided bound c_r^{1/2} ||K||_{L_h^{8/3}} <= ||e||_{L_h^{4/3}}^{1/2} <= C_r^{1/2} ||K||_{L_h^{8/3}} (lpNorm_equiv); (3) continuum identification rendered as: for any comparison packet K'_h (the sampled D_{A_h}H_h) the two L_h^{8/3} criteria differ by at most ||K_h - K'_h||_{L_h^{8/3}} (weighted Minkowski, lpNorm83_sub_le), so with a uniformly bounded consistency error (what prop:mesh-consistency supplies on smooth bounded families; that estimate itself is not re-proved here) sup_h ||K_h||_{8/3} < infinity iff sup_h ||K'_h||_{8/3} < infinity. Strong L^1 clause (tendsto_density_lintegral): on an arbitrary measure space (restrict the measure to a compact set for L^1_loc), if the reconstructed packets satisfy int |K_h - K|^2 -> 0 with int |K|^2 < infinity and the reconstructed comparison metrics r_h -> r uniformly with r bounded, then int |e_h - e| -> 0 (amplitudes of K_h - K assumed a.e.-measurable). Sharpness (no_automatic_upgrade): on the side-(n+1) unit-box grid with masses h^4 and Euclidean comparison metric, K_h = h^{-7/4} e_0 on one cell has ||K_h||_{L_h^2} -> 0 and ||e_h||_{L_h^1} -> 0 while ||e_h||_{L_h^{4/3}} = h^{-1/2} -> infinity and ||K_h||_{L_h^{8/3}} = h^{-1/4} -> infinity (the discrete form of the paper's Y_n family; the continuum Y_n computation is not separately formalised). Only m_h >= 0 of the mass comparison is used. [Coordinator 30 Sep 2026] Kept open under the corollary policy: the continuum-identification clause uses the estimate of the open prop:mesh-consistency.",
+    "difficulty": "hard",
+    "plan": "Blocked only on prop:mesh-consistency (hard): the pointwise envelope, the L^{4/3}/L^{8/3} equivalence, the strong L^1_loc clause and the no-automatic-upgrade example are proved unconditionally; the continuum-identification sentence uses the consistency estimate of prop:mesh-consistency, which enters lpNorm83_sub_le-based statements as a hypothesis. Closes by instantiation once prop:mesh-consistency is formalized."
   },
   "cor:positive-Higgs-amplitude-criterion": {
     "env": "corollary",
@@ -995,11 +1018,17 @@
   "lem:nodal-source-transfer": {
     "env": "lemma",
     "title": "From nodal Euler bounds to a physical source norm",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: nodal source transfer, piecewise-constant reconstruction I_h^0 S_h f, L^2 norm versus nodal mass norm, O(h ||partial f||_inf) sampling error. A C^1 function differs from its cell-nodal sample by at most h ||partial f||_inf on each cell, so ||f||_{L^2(Q)} <= C ||S_h f||_{0,h;Q'} + C h ||partial f||_{L^inf(Q')}.",
-    "difficulty": "medium",
-    "plan": "Days of finite/measure assembly: mean-value bound |f(x) - f(x_cell)| <= h ||Df||_inf on each cell (DiscreteAnalysis/UniformFiniteDifferenceRemainderExact.lean, Mathlib Convex.norm_image_sub_le_of_norm_fderiv_le), the cell decomposition of the Lebesgue integral over the cells meeting Q (pattern: Analysis/UnitCubeRiemannSum.lean, as used in DiscreteAnalysis/CoframeDirichletFormLimitExact.lean), and (a+b)^2 <= 2a^2 + 2b^2 to obtain ||f||_2 <= sqrt 2 ||S_h f||_{0,h} + sqrt(2|Q|) h ||Df||_inf. The O(h K^3) clause is then a direct substitution of eq:growing-derivatives."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.eLpNorm_le_nodalNorm",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.lintegral_sq_le_nodalMassSq",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.eLpNorm_le_nodalNorm_growing",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.nodalMassSq",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.cell",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.node",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.enorm_sq_le_on_cell"
+    ],
+    "note": "Proved eq:nodal-source-transfer in general dimension d (paper: d = 4) for f with values in any real normed space: on the lattice h Z^d with half-open cells C_k = prod_i [h k_i, h k_i + h), if every cell meeting Q lies in Q' (the buffer condition that 'Q compactly inside Q', h sufficiently small' provides; stated as an explicit hypothesis) and f has Frechet derivative (within Q') bounded by L on Q', then int_Q |f|^2 <= 2 ||S_h f||_{0,h;Q'}^2 + 2|Q'|(hL)^2 (lintegral_sq_le_nodalMassSq) and ||f||_{L^2(Q)} <= sqrt2 ||S_h f||_{0,h;Q'} + sqrt2 |Q'|^{1/2} h L (eLpNorm_le_nodalNorm; C = sqrt2 max(1,|Q'|^{1/2}), finite when |Q'| < oo), with the nodal mass norm h^d sum_{x_k in Q'} |f(x_k)|^2 as in the paper (eq. at line 7049). Proof as in the paper: mean-value inequality on each convex cell, |f(y)|^2 <= 2|f(x_k)|^2 + 2(hL)^2, cellwise integration with exact cell mass h^d, disjointness of cells for the volume bound. Norms: sup norm on R^d (operator norm of the derivative w.r.t. it; equivalent to Euclidean up to a dimensional constant absorbed in C). The O(hK^3) clause is eLpNorm_le_nodalNorm_growing: substitution of a derivative bound ||D E_0(y)|| <= C_E K^3 on Q'; that bound itself (chain rule for an Euler density of differential degree <= 2 under eq:growing-derivatives, the concrete Einstein-SM density not being encoded in Lean) is taken as the input, exactly as the paper's proof uses it."
   },
   "lem:native-tail-transfer": {
     "env": "lemma",
@@ -1055,11 +1084,12 @@
   "cor:validated-initial-retraction": {
     "env": "corollary",
     "title": "Validated constraint evaluation with an explicit error budget",
-    "status": "conditional_interface",
-    "lean": [],
-    "note": "No Lean counterpart found; searched: validated constraint evaluation, evaluated reduced map, sigma_min margin gamma_*, effective residual beta^eff, retraction with derivative perturbation. A finite-dimensional Newton/contraction argument for a C^1 map R^m -> R^m (or rectangular with a right inverse) whose derivative is within gamma_*/2 of an evaluated matrix with least singular value >= gamma_*.",
-    "difficulty": "medium",
-    "plan": "Build on Action/CriticalShadowingExact.lean (CriticalShadowing.exists_unique_zero_in_newton_ball: frozen-Newton contraction with a two-sided inverse B of norm <= M and a Lipschitz derivative) replacing the Lipschitz hypothesis by the uniform derivative margins eq:validated-initial-margins (sup ||D Phi - A_tilde|| <= gamma_*/2 on the ball) and the inverse by a right inverse of A_tilde with ||A_tilde^+|| <= 1/gamma_* (least singular value; Analysis/ApproximationSingularValues.lean has singular values), and the residual by |Phi_tilde(x,0)| + zeta_0. Then the zero lies in the ball of radius 2 gamma_*^{-1} beta^eff and the displacement bound follows from the Lipschitz correction family (hypothesis). Depends on the (rv1) record prop:initial-constraint-retraction; the two should share one file."
+    "status": "proved",
+    "lean": [
+      "RenewalGeometry/Action/ValidatedInitialRetractionExact.lean:RenewalGeometry.validatedInitialRetraction",
+      "RenewalGeometry/Action/InitialConstraintRetractionExact.lean:RenewalGeometry.initialConstraintRetraction"
+    ],
+    "note": "Proved by instantiating the (proved) parent prop:initial-constraint-retraction (initialConstraintRetraction) with the frozen matrix A~_h = D Phi~_h(0) applied to the exact retained map R.retained: the two derivative margins of eq:validated-initial-margins give ||D Phi_h - A~_h|| <= gamma_*/2 on the correction ball by the triangle inequality, and |Phi_h(0)| <= |Phi~_h(0)| + zeta_0 = beta^eff. Conclusion: unique zero of the exact reduced map in the closed ball of radius 2 gamma_*^{-1} beta^eff, corrected datum in the exact constraint set, displacement <= 2 B_* gamma_*^{-1} beta^eff. Renderings: sigma_min(A~) >= gamma_* as gamma_* ||v|| <= ||A~ v|| for all v (Euclidean definition of the least singular value); derivatives are fderivWithin on the closed correction ball |lambda| <= r_* where the maps are C^1; scoped hypothesis 0 <= B_* (Lipschitz constant). The 'in every shadow estimate beta_h is replaced by beta^eff' sentence is the bookkeeping consequence of the same conclusion."
   },
   "prop:shadow-residual-upgrade": {
     "env": "proposition",

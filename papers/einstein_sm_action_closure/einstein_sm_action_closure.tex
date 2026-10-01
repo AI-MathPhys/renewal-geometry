@@ -163,25 +163,39 @@ classification \cite{Krajewski1998}, and the spectral action produces
 gravitational, Yang--Mills, Higgs, and fermionic terms from one spectral datum
 \cite{ChamseddineConnes1997}.  The almost-commutative construction was later
 extended to include neutrino mixing and Majorana masses
-\cite{ChamseddineConnesMarcolli2007}.  Causal fermion systems provide a
-different finite or microscopic entrance in which effective gauge and
-gravitational dynamics arise from a causal action principle
-\cite{Finster2016}.
+\cite{ChamseddineConnesMarcolli2007}; Lorentzian formulations of the
+noncommutative Standard-Model geometry have also been investigated, including
+the fermionic and doubling issues specific to indefinite signature
+\cite{Barrett2007}.  Causal fermion systems provide a different finite or
+microscopic entrance in which effective gauge and gravitational dynamics
+arise from a causal action principle \cite{Finster2016}.
 
 A complementary literature concerns the preservation of geometric and
-variational structure under discretization.  Wilson lattice gauge theory
-retains exact finite gauge invariance \cite{Wilson1974}; discrete variational
-field theories preserve action-derived multisymplectic and Noether structures
-\cite{MarsdenPatrickShkoller1998}; piecewise-flat geometry admits convergent
-curvature measures \cite{CheegerMullerSchrader1984}; finite element exterior
-calculus provides stable discrete differential complexes
-\cite{ArnoldFalkWinther2006,ArnoldFalkWinther2010}; and simplicial gauge
-actions can combine finite gauge invariance, consistency, and discrete Noether
-identities \cite{ChristiansenHalvorsen2012}.  In these approaches the
-continuum geometric or gauge structure is typically specified before the
-discretization.  The formulation used here is instead designed to apply to
-any finite gravity--matter interface satisfying the stated structural and
-analytic hypotheses, irrespective of how that interface was obtained.
+variational structure under discretization.  Regge calculus initiated a
+simplicial treatment of gravitational curvature \cite{Regge1961};
+piecewise-flat curvature measures were subsequently shown to converge under
+refinement \cite{CheegerMullerSchrader1984}, and more recent work has placed
+linearized Regge calculus, densitized scalar curvature, and the Einstein
+tensor in rigorous finite-element and distributional frameworks
+\cite{ChristiansenRegge2011,ChristiansenRegge2024,
+GawlikNeunteufelScalar2025,GawlikNeunteufelEinstein2026}.  Wilson lattice
+gauge theory retains exact finite gauge invariance \cite{Wilson1974}, while
+discrete variational field theories preserve action-derived multisymplectic
+and Noether structures \cite{MarsdenPatrickShkoller1998}.  Finite element
+exterior calculus provides stable discrete differential complexes
+\cite{ArnoldFalkWinther2006,ArnoldFalkWinther2010}.  Gauge-invariant
+Maxwell and Maxwell--Klein--Gordon discretizations give complementary
+scheme-specific consistency and convergence results
+\cite{ChristiansenHalvorsen2009,ChristiansenHalvorsen2011,
+ChristiansenHalvorsenScheid2023}, and simplicial gauge actions can combine
+finite gauge invariance, consistency, and discrete Noether identities
+\cite{ChristiansenHalvorsen2012}.  In these approaches the continuum
+geometric or gauge structure is specified before the discretization.  The
+formulation used here instead isolates structural, compactness,
+first-variation consistency and stationarity hypotheses that can be checked
+for different finite gravity--matter realizations.  It is therefore
+complementary to, rather than a replacement for, scheme-specific stability
+and convergence analyses.
 
 \paragraph{One upstream realization: Renewal Geometry.}
 
@@ -233,15 +247,26 @@ Weak convergence of the primitive fields can therefore fail to determine the
 limit of the quantities that gravitate.
 
 This issue is familiar from several directions.  Gauge compactness requires
-careful control of both gauge choice and curvature \cite{Uhlenbeck1982};
-critical Sobolev embeddings permit concentration phenomena
-\cite{Lions1985}; and weak high-frequency limits in general relativity can
-produce an effective stress tensor rather than the naively substituted field
-equation \cite{Burnett1989,HuneauLuk2024}.  Spinors introduce an additional
-metric-dependence through the spin bundle and Dirac operator, whose variation
-can be organized using the metric-spinor constructions of
-Bourguignon--Gauduchon \cite{BourguignonGauduchon1992} and the universal
-spinor-bundle framework of M\"uller--Nowaczyk
+careful control of both gauge choice and curvature \cite{Uhlenbeck1982}, and
+at the critical four-dimensional Yang--Mills energy scale minimizing
+sequences can develop curvature concentration and bubbling
+\cite{Sedlacek1982}.  Critical Sobolev embeddings likewise permit
+concentration phenomena \cite{Lions1985}.  More generally, weak limits of
+nonlinear PDEs can retain oscillation or concentration information through
+measure-valued and microlocal descriptions, including DiPerna--Majda
+measures, generalized Young measures, H-measures and microlocal defect
+measures \cite{DiPernaMajda1987,AlibertBouchitte1997,Tartar1990,Gerard1991}.
+The covariance measures used below are deliberately coarser: they remain in
+physical space and retain only the quadratic information needed by the
+Yang--Mills and Higgs metric variations.  In general relativity,
+high-frequency gravitational waves already produce an effective averaged
+stress tensor in the Isaacson expansion \cite{Isaacson1968}; Burnett's weak
+limit formulation and its modern developments give a rigorous continuation
+of this effective-stress perspective \cite{Burnett1989,HuneauLuk2024}.
+Spinors introduce an additional metric-dependence through the spin bundle and
+Dirac operator, whose variation can be organized using the metric-spinor
+constructions of Bourguignon--Gauduchon \cite{BourguignonGauduchon1992} and
+the universal spinor-bundle framework of M\"uller--Nowaczyk
 \cite{MullerNowaczyk2017}.  We work throughout on a torsion-free metric
 branch; independently varying the Cartan connection would instead lead
 generically to Einstein--Cartan dynamics in the presence of spin current
@@ -1265,10 +1290,16 @@ This property is internal-gauge invariant.
 
 Uniform integrability of critical curvature energy supplies a common
 small-energy cover and local Coulomb representatives by
-\Cref{prop:critical-uhlenbeck}. Positive covariant graph bounds then give
-ordinary $H^1$ bounds for the matter variables in those representatives
-(\Cref{lem:critical-positive-graph}). The resulting theorem concerns the
-gauge quotient; it does not select a canonical representative.
+\Cref{prop:critical-uhlenbeck}.  This supplements the classical critical
+four-dimensional Yang--Mills compactness picture, where curvature
+concentration and bubbling can occur even for bounded-energy sequences
+\cite{Uhlenbeck1982,Sedlacek1982}: uniform integrability rules out such
+concentration on the chosen compact chart, while a separate compactness
+mechanism is still needed to remove quadratic stress oscillation.  Positive
+covariant graph bounds then give ordinary $H^1$ bounds for the matter
+variables in those representatives (\Cref{lem:critical-positive-graph}). The
+resulting theorem concerns the gauge quotient; it does not select a canonical
+representative.
 
 \begin{theorem}[Critical-energy quotient defect closure]
 \label{thm:critical-quotient-defect}
@@ -1383,9 +1414,14 @@ Throughout the native finite-packet statements below we use
 for finite $p$, with the usual maximum norm for $p=\infty$.
 
 Fix, independently of the record, a rooted spanning tree $\mathfrak T_h$ of
-the periodic comparison grid.  For a vertex $x$, let $C_x(U)$ be the ordered
-product of the actual internal links along the tree path from the root to
-$x$, with inverses on reversed edges, and define the root-based closed words
+the periodic comparison grid.  Spanning- or maximal-tree gauges are standard
+tools for eliminating redundant lattice link variables
+\cite{LigterinkWaletBishop2000}.  The role of the tree here is more specific:
+it produces a gauge-invariant same-record logarithmic seed whose smallness can
+be fed into the exact finite Coulomb normalization below.  For a vertex $x$,
+let $C_x(U)$ be the ordered product of the actual internal links along the tree
+path from the root to $x$, with inverses on reversed edges, and define the
+root-based closed words
 \begin{equation}
  W^{\mathfrak T}_\mu(x)
  =C_x(U)U_\mu(x)C_{x+h e_\mu}(U)^{-1},
@@ -1884,6 +1920,24 @@ family.  The Einstein--Standard-Model equations arise here from the
 simultaneous control of these ingredients rather than being built into the
 definition of the finite interface.
 
+Several neighboring convergence theories should therefore be distinguished
+from the present statement.  Rigorous Regge and finite-element results control
+distributional scalar or Einstein curvature for specified approximating
+metrics \cite{CheegerMullerSchrader1984,ChristiansenRegge2024,
+GawlikNeunteufelScalar2025,GawlikNeunteufelEinstein2026}, while
+gauge-invariant Maxwell--Klein--Gordon schemes establish convergence for
+specific discretizations by combining discrete symmetry, energy estimates and
+compactness \cite{ChristiansenHalvorsen2011,
+ChristiansenHalvorsenScheid2023}.  Those results provide stronger
+scheme-specific stability information than is assumed abstractly here.  The
+present closure theorem addresses a different question: conditional on
+compactness, first-variation consistency and physically scaled stationarity,
+it passes the complete coupled Lorentzian gravity--gauge--Higgs--spinor
+variation to the limit and records any unresolved bosonic quadratic products
+as explicit stress defects.  Thus regulator independence is obtained by
+stating the analytic hypotheses explicitly, not by asserting that every
+finite regulator satisfies them.
+
 \subsection{Closure, quantitative comparison and uniqueness}
 
 The natural convergence object is the complete physical first variation.
@@ -2115,15 +2169,20 @@ for the last assertion.
 \end{proof}
 
 This principle concerns convergence of critical configurations, rather than
-only convergence of minimum problems.  In particular, convergence of action
-values, even when formulated as $\Gamma$-convergence
-\cite{DalMaso1993,Braides2002}, does not supply
-\eqref{eq:abstract-continuity} or \eqref{eq:abstract-budgets}.
-The elementary oscillatory example following \Cref{def:regulator} already
-separates uniform action convergence from first-variation convergence.
-Variational convergence of gradient flows also requires additional control
-of slopes and dissipation \cite{SandierSerfaty2004}; no gradient-flow law for
-the Lorentzian common action is assumed here.
+only convergence of minimum problems.  Plain $\Gamma$-convergence of the
+action functionals \cite{DalMaso1993,Braides2002} does not by itself supply
+\eqref{eq:abstract-continuity} or \eqref{eq:abstract-budgets}.  There are
+stronger variational frameworks for critical points: for example,
+Jerrard--Sternberg obtain critical points of $\Gamma$-converging functionals
+near suitable nondegenerate critical points \cite{JerrardSternberg2009}, and
+Mosco/Attouch-type theories relate variational convergence to convergence of
+subdifferentials in convex settings \cite{Attouch1984}.  Those results use
+additional structure not assumed for the nonconvex Lorentzian gauge system
+here.  The elementary oscillatory example following \Cref{def:regulator}
+already separates uniform action convergence from first-variation
+convergence.  Variational convergence of gradient flows also requires
+additional control of slopes and dissipation \cite{SandierSerfaty2004}; no
+gradient-flow law for the Lorentzian common action is assumed here.
 
 \subsection{Products and bounded geometric coefficients}
 
@@ -2335,7 +2394,15 @@ Exterior Stokes proves the identity for smooth compactly supported data. The ter
 
 For $e,e^{-1}\in L^\infty$ with $e\in H^1$, the Levi--Civita connection $\omega(e)$ is in $L^2$. Every term on the right of \eqref{eq:Palatini-IBP} is integrable, and its derivative in the lift \eqref{eq:metric-lift} is bounded by a constant times $\norm k_{C^1}$. This defines the local Einstein first-variation distribution. Different choices of $\chi$ give the same functional on tests supported in their common unit region. On smooth metrics the distribution is $(\Eins(g)+\Lambda g)\dV_g/(2\kappa)$.
 
-This definition keeps the derivative of the connection in divergence form. It is consistent with the distributional-curvature framework for locally bounded metrics with locally square-integrable first derivatives and bounded inverse \cite{LeFlochMardare2007}. It does not assert a pointwise curvature tensor or an unqualified product of a rough coefficient with an arbitrary distribution.
+This definition keeps the derivative of the connection in divergence form.
+The need to specify a regularity class in which nonlinear curvature is a
+well-defined distribution is classical in general relativity
+\cite{GerochTraschen1987}; the representative used here is consistent with
+the stability framework for locally bounded metrics with locally
+square-integrable first derivatives and bounded inverse developed by
+LeFloch--Mardare \cite{LeFlochMardare2007}.  It does not assert a pointwise
+curvature tensor or an unqualified product of a rough coefficient with an
+arbitrary distribution.
 
 \subsubsection{A weaker curvature passage}
 
@@ -6474,7 +6541,7 @@ budget. This constructs a calibration family, not a microscopic selector.
 \subsection{Generated finite dynamics from constrained data}
 \label{app:generated-dynamics}
 
-This subsection gives an independent nonemptiness construction for the controlled finite class.  It is local in time and deliberately high-regularity; sharp thresholds are not claimed.  Its role is not to replace the native source theorem of \Cref{thm:native-selected-closure}, but to show that the quantitative hypotheses admit a fully finite realization generated from constrained finite initial data.  The construction uses the positive symmetric actual-jet system of \Cref{app:coupled-stability} and the standard conformal strategy for the Einstein constraints \cite{ChoquetBruhatIsenbergPollack2007,IsenbergMaxwell2021}.
+This subsection gives an independent nonemptiness construction for the controlled finite class.  It is local in time and deliberately high-regularity; sharp thresholds are not claimed.  Its role is not to replace the native source theorem of \Cref{thm:native-selected-closure}, but to show that the quantitative hypotheses admit a fully finite realization generated from constrained finite initial data.  The construction uses the positive symmetric actual-jet system of \Cref{app:coupled-stability} and the standard conformal strategy for the Einstein constraints \cite{ChoquetBruhatIsenbergPollack2007,IsenbergMaxwell2025}.
 
 \begin{assumption}[Compatible elliptic and conformal initial solver]
 \label{ass:constrained-initial-solver}
@@ -7599,12 +7666,54 @@ Gravity and the standard model with neutrino mixing,
 \emph{Adv. Theor. Math. Phys.} \textbf{11} (2007), 991--1089.
 \href{https://doi.org/10.4310/ATMP.2007.v11.n6.a3}{doi:10.4310/ATMP.2007.v11.n6.a3}.
 
+\bibitem{Barrett2007}
+J.~W.~Barrett,
+A Lorentzian version of the non-commutative geometry of the standard model of particle physics,
+\emph{J. Math. Phys.} \textbf{48} (2007), 012303.
+\href{https://doi.org/10.1063/1.2408400}{doi:10.1063/1.2408400}.
+
 \bibitem{Finster2016}
 F.~Finster,
 \emph{The Continuum Limit of Causal Fermion Systems:
 From Planck Scale Structures to Macroscopic Physics},
 Springer, Cham, 2016.
 \href{https://doi.org/10.1007/978-3-319-42067-7}{doi:10.1007/978-3-319-42067-7}.
+
+\bibitem{Regge1961}
+T.~Regge,
+General relativity without coordinates,
+\emph{Nuovo Cimento} \textbf{19} (1961), 558--571.
+\href{https://doi.org/10.1007/BF02733251}{doi:10.1007/BF02733251}.
+
+\bibitem{CheegerMullerSchrader1984}
+J.~Cheeger, W.~M\"uller, and R.~Schrader,
+On the curvature of piecewise flat spaces,
+\emph{Commun. Math. Phys.} \textbf{92} (1984), 405--454.
+\href{https://doi.org/10.1007/BF01210729}{doi:10.1007/BF01210729}.
+
+\bibitem{ChristiansenRegge2011}
+S.~H.~Christiansen,
+On the linearization of Regge calculus,
+\emph{Numer. Math.} \textbf{119} (2011), 613--640.
+\href{https://doi.org/10.1007/s00211-011-0394-z}{doi:10.1007/s00211-011-0394-z}.
+
+\bibitem{ChristiansenRegge2024}
+S.~H.~Christiansen,
+On the definition of curvature in Regge calculus,
+\emph{IMA J. Numer. Anal.} \textbf{44} (2024), 2698--2715.
+\href{https://doi.org/10.1093/imanum/drad095}{doi:10.1093/imanum/drad095}.
+
+\bibitem{GawlikNeunteufelScalar2025}
+E.~S.~Gawlik and M.~Neunteufel,
+Finite element approximation of scalar curvature in arbitrary dimension,
+\emph{Math. Comp.} \textbf{94} (2025), 2685--2722.
+\href{https://doi.org/10.1090/mcom/4038}{doi:10.1090/mcom/4038}.
+
+\bibitem{GawlikNeunteufelEinstein2026}
+E.~S.~Gawlik and M.~Neunteufel,
+Finite element approximation of the Einstein tensor,
+\emph{IMA J. Numer. Anal.} \textbf{46} (2026), 500--539.
+\href{https://doi.org/10.1093/imanum/draf004}{doi:10.1093/imanum/draf004}.
 
 \bibitem{Wilson1974}
 K.~G.~Wilson,
@@ -7618,12 +7727,6 @@ Multisymplectic geometry, variational integrators, and nonlinear PDEs,
 \emph{Commun. Math. Phys.} \textbf{199} (1998), 351--395.
 \href{https://doi.org/10.1007/s002200050505}{doi:10.1007/s002200050505}.
 
-\bibitem{CheegerMullerSchrader1984}
-J.~Cheeger, W.~M\"uller, and R.~Schrader,
-On the curvature of piecewise flat spaces,
-\emph{Commun. Math. Phys.} \textbf{92} (1984), 405--454.
-\href{https://doi.org/10.1007/BF01210729}{doi:10.1007/BF01210729}.
-
 \bibitem{ArnoldFalkWinther2006}
 D.~N.~Arnold, R.~S.~Falk, and R.~Winther,
 Finite element exterior calculus, homological techniques, and applications,
@@ -7635,6 +7738,24 @@ D.~N.~Arnold, R.~S.~Falk, and R.~Winther,
 Finite element exterior calculus: from Hodge theory to numerical stability,
 \emph{Bull. Amer. Math. Soc.} \textbf{47} (2010), 281--354.
 \href{https://doi.org/10.1090/S0273-0979-10-01278-4}{doi:10.1090/S0273-0979-10-01278-4}.
+
+\bibitem{ChristiansenHalvorsen2009}
+S.~H.~Christiansen and T.~G.~Halvorsen,
+Convergence of lattice gauge theory for Maxwell's equations,
+\emph{BIT Numer. Math.} \textbf{49} (2009), 645--667.
+\href{https://doi.org/10.1007/s10543-009-0242-z}{doi:10.1007/s10543-009-0242-z}.
+
+\bibitem{ChristiansenHalvorsen2011}
+S.~H.~Christiansen and T.~G.~Halvorsen,
+Discretizing the Maxwell--Klein--Gordon equation by the lattice gauge theory formalism,
+\emph{IMA J. Numer. Anal.} \textbf{31} (2011), 1--24.
+\href{https://doi.org/10.1093/imanum/drp019}{doi:10.1093/imanum/drp019}.
+
+\bibitem{ChristiansenHalvorsenScheid2023}
+S.~H.~Christiansen, T.~G.~Halvorsen, and C.~Scheid,
+Convergence of a discretization of the Maxwell--Klein--Gordon equation based on finite element methods and lattice gauge theory,
+\emph{Numer. Methods Partial Differential Equations} \textbf{39} (2023), 3271--3308.
+\href{https://doi.org/10.1002/num.23008}{doi:10.1002/num.23008}.
 
 \bibitem{ChristiansenHalvorsen2012}
 S.~H.~Christiansen and T.~G.~Halvorsen,
@@ -7679,17 +7800,17 @@ A.~Pelissier,
 \newblock HAL preprint hal-05755429, 2026.
 \newblock \url{https://hal.science/hal-05755429}
 
-\bibitem{Luscher1999}
-M.~L\"uscher,
-Abelian chiral gauge theories on the lattice with exact gauge invariance,
-\emph{Nucl. Phys. B} \textbf{549} (1999), 295--334.
-\href{https://doi.org/10.1016/S0550-3213(99)00115-7}{doi:10.1016/S0550-3213(99)00115-7}.
-
 \bibitem{Uhlenbeck1982}
 K.~K.~Uhlenbeck,
 Connections with $L^p$ bounds on curvature,
 \emph{Commun. Math. Phys.} \textbf{83} (1982), 31--42.
 \href{https://doi.org/10.1007/BF01947069}{doi:10.1007/BF01947069}.
+
+\bibitem{Sedlacek1982}
+S.~Sedlacek,
+A direct method for minimizing the Yang--Mills functional over $4$-manifolds,
+\emph{Commun. Math. Phys.} \textbf{86} (1982), 515--527.
+\href{https://doi.org/10.1007/BF01214887}{doi:10.1007/BF01214887}.
 
 \bibitem{Lions1985}
 P.-L.~Lions,
@@ -7697,6 +7818,35 @@ The concentration-compactness principle in the calculus of variations.
 The limit case, Part~1,
 \emph{Rev. Mat. Iberoam.} \textbf{1} (1985), no.~1, 145--201.
 \href{https://doi.org/10.4171/RMI/6}{doi:10.4171/RMI/6}.
+
+\bibitem{DiPernaMajda1987}
+R.~J.~DiPerna and A.~J.~Majda,
+Oscillations and concentrations in weak solutions of the incompressible fluid equations,
+\emph{Commun. Math. Phys.} \textbf{108} (1987), 667--689.
+\href{https://doi.org/10.1007/BF01214424}{doi:10.1007/BF01214424}.
+
+\bibitem{AlibertBouchitte1997}
+J.~J.~Alibert and G.~Bouchitt\'e,
+Non-uniform integrability and generalized Young measure,
+\emph{J. Convex Anal.} \textbf{4} (1997), 129--147.
+
+\bibitem{Tartar1990}
+L.~Tartar,
+H-measures, a new approach for studying homogenisation, oscillations and concentration effects in partial differential equations,
+\emph{Proc. Roy. Soc. Edinburgh Sect. A} \textbf{115} (1990), 193--230.
+\href{https://doi.org/10.1017/S0308210500020606}{doi:10.1017/S0308210500020606}.
+
+\bibitem{Gerard1991}
+P.~G\'erard,
+Microlocal defect measures,
+\emph{Comm. Partial Differential Equations} \textbf{16} (1991), 1761--1794.
+\href{https://doi.org/10.1080/03605309108820822}{doi:10.1080/03605309108820822}.
+
+\bibitem{Isaacson1968}
+R.~A.~Isaacson,
+Gravitational radiation in the limit of high frequency. II. Nonlinear terms and the effective stress tensor,
+\emph{Phys. Rev.} \textbf{166} (1968), 1272--1280.
+\href{https://doi.org/10.1103/PhysRev.166.1272}{doi:10.1103/PhysRev.166.1272}.
 
 \bibitem{Burnett1989}
 G.~A.~Burnett,
@@ -7733,42 +7883,22 @@ General relativity with spin and torsion: Foundations and prospects,
 \emph{Rev. Mod. Phys.} \textbf{48} (1976), 393--416.
 \href{https://doi.org/10.1103/RevModPhys.48.393}{doi:10.1103/RevModPhys.48.393}.
 
-\bibitem{Simon1986}
-J.~Simon,
-Compact sets in the space $L^p(0,T;B)$,
-\emph{Ann. Mat. Pura Appl.} \textbf{146} (1986), 65--96.
-\href{https://doi.org/10.1007/BF01762360}{doi:10.1007/BF01762360}.
-% The publisher's issue metadata gives December 1986; the work is often cited as 1987.
+\bibitem{NielsenNinomiya1981}
+H.~B.~Nielsen and M.~Ninomiya,
+A no-go theorem for regularizing chiral fermions,
+\emph{Phys. Lett. B} \textbf{105} (1981), 219--223.
+\href{https://doi.org/10.1016/0370-2693(81)91026-1}{doi:10.1016/0370-2693(81)91026-1}.
 
-\bibitem{Kato1975}
-T.~Kato,
-The Cauchy problem for quasi-linear symmetric hyperbolic systems,
-\emph{Arch. Ration. Mech. Anal.} \textbf{58} (1975), 181--205.
-\href{https://doi.org/10.1007/BF00280740}{doi:10.1007/BF00280740}.
+\bibitem{Friedan1982}
+D.~Friedan,
+A proof of the Nielsen--Ninomiya theorem,
+\emph{Commun. Math. Phys.} \textbf{85} (1982), 481--490.
 
-\bibitem{FriedrichRendall2000}
-H.~Friedrich and A.~D.~Rendall,
-The Cauchy problem for the Einstein equations,
-in B.~G.~Schmidt (ed.), \emph{Einstein's Field Equations and Their Physical Implications},
-Lecture Notes in Physics \textbf{540}, Springer, Berlin, 2000, pp.~127--223.
-\href{https://arxiv.org/abs/gr-qc/0002074}{arXiv:gr-qc/0002074}.
-
-\bibitem{LeFlochMardare2007}
-P.~G.~LeFloch and C.~Mardare,
-Definition and stability of Lorentzian manifolds with distributional curvature,
-\emph{Portugaliae Math.} \textbf{64} (2007), 535--573.
-\href{https://doi.org/10.4171/PM/1794}{doi:10.4171/PM/1794}.
-
-\bibitem{ChoquetBruhatIsenbergPollack2007}
-Y.~Choquet-Bruhat, J.~Isenberg, and D.~Pollack,
-The constraint equations for the Einstein--scalar field system on compact manifolds,
-\emph{Class. Quantum Grav.} \textbf{24} (2007), 809--828.
-\href{https://arxiv.org/abs/gr-qc/0610045}{arXiv:gr-qc/0610045}.
-
-\bibitem{IsenbergMaxwell2021}
-J.~Isenberg and D.~Maxwell,
-A phase space approach to the conformal construction of non-vacuum initial data sets in general relativity,
-\href{https://arxiv.org/abs/2106.15027}{arXiv:2106.15027}, 2021.
+\bibitem{LigterinkWaletBishop2000}
+N.~E.~Ligterink, N.~R.~Walet, and R.~F.~Bishop,
+Toward a many-body treatment of Hamiltonian lattice $\mathrm{SU}(N)$ gauge theory,
+\emph{Ann. Phys.} \textbf{284} (2000), 215--262.
+\href{https://doi.org/10.1006/aphy.2000.6070}{doi:10.1006/aphy.2000.6070}.
 
 \bibitem{DalMaso1993}
 G.~Dal Maso,
@@ -7784,11 +7914,41 @@ Oxford Lecture Series in Mathematics and Its Applications, vol.~22,
 Oxford University Press, Oxford, 2002.
 \href{https://doi.org/10.1093/acprof:oso/9780198507840.001.0001}{doi:10.1093/acprof:oso/9780198507840.001.0001}.
 
+\bibitem{JerrardSternberg2009}
+R.~L.~Jerrard and P.~Sternberg,
+Critical points via $\Gamma$-convergence: general theory and applications,
+\emph{J. Eur. Math. Soc.} \textbf{11} (2009), 705--753.
+\href{https://doi.org/10.4171/JEMS/164}{doi:10.4171/JEMS/164}.
+
+\bibitem{Attouch1984}
+H.~Attouch,
+\emph{Variational Convergence for Functions and Operators},
+Applicable Mathematics Series, Pitman, Boston, 1984.
+
 \bibitem{SandierSerfaty2004}
 E.~Sandier and S.~Serfaty,
 Gamma-convergence of gradient flows with applications to Ginzburg--Landau,
 \emph{Comm. Pure Appl. Math.} \textbf{57} (2004), 1627--1672.
 \href{https://doi.org/10.1002/cpa.20046}{doi:10.1002/cpa.20046}.
+
+\bibitem{Simon1986}
+J.~Simon,
+Compact sets in the space $L^p(0,T;B)$,
+\emph{Ann. Mat. Pura Appl.} \textbf{146} (1986), 65--96.
+\href{https://doi.org/10.1007/BF01762360}{doi:10.1007/BF01762360}.
+% The publisher's issue metadata gives December 1986; the work is often cited as 1987.
+
+\bibitem{GerochTraschen1987}
+R.~Geroch and J.~Traschen,
+Strings and other distributional sources in general relativity,
+\emph{Phys. Rev. D} \textbf{36} (1987), 1017--1031.
+\href{https://doi.org/10.1103/PhysRevD.36.1017}{doi:10.1103/PhysRevD.36.1017}.
+
+\bibitem{LeFlochMardare2007}
+P.~G.~LeFloch and C.~Mardare,
+Definition and stability of Lorentzian manifolds with distributional curvature,
+\emph{Portugaliae Math.} \textbf{64} (2007), 535--573.
+\href{https://doi.org/10.4171/PM/1794}{doi:10.4171/PM/1794}.
 
 \bibitem{ErlerFreitas2024}
 J.~Erler and A.~Freitas,
@@ -7797,17 +7957,36 @@ in S.~Navas et al. (Particle Data Group), Review of Particle Physics,
 \emph{Phys. Rev. D} \textbf{110} (2024), 030001, Sec.~10.
 \url{https://pdg.lbl.gov/2024/reviews/rpp2024-rev-standard-model.pdf}.
 
-\bibitem{NielsenNinomiya1981}
-H.~B.~Nielsen and M.~Ninomiya,
-A no-go theorem for regularizing chiral fermions,
-\emph{Phys. Lett. B} \textbf{105} (1981), 219--223.
-\href{https://doi.org/10.1016/0370-2693(81)91026-1}{doi:10.1016/0370-2693(81)91026-1}.
+\bibitem{Luscher1999}
+M.~L\"uscher,
+Abelian chiral gauge theories on the lattice with exact gauge invariance,
+\emph{Nucl. Phys. B} \textbf{549} (1999), 295--334.
+\href{https://doi.org/10.1016/S0550-3213(99)00115-7}{doi:10.1016/S0550-3213(99)00115-7}.
 
-\bibitem{Friedan1982}
-D.~Friedan,
-A proof of the Nielsen--Ninomiya theorem,
-\emph{Commun. Math. Phys.} \textbf{85} (1982), 481--490.
+\bibitem{FriedrichRendall2000}
+H.~Friedrich and A.~D.~Rendall,
+The Cauchy problem for the Einstein equations,
+in B.~G.~Schmidt (ed.), \emph{Einstein's Field Equations and Their Physical Implications},
+Lecture Notes in Physics \textbf{540}, Springer, Berlin, 2000, pp.~127--223.
+\href{https://arxiv.org/abs/gr-qc/0002074}{arXiv:gr-qc/0002074}.
 
+\bibitem{Kato1975}
+T.~Kato,
+The Cauchy problem for quasi-linear symmetric hyperbolic systems,
+\emph{Arch. Ration. Mech. Anal.} \textbf{58} (1975), 181--205.
+\href{https://doi.org/10.1007/BF00280740}{doi:10.1007/BF00280740}.
+
+\bibitem{ChoquetBruhatIsenbergPollack2007}
+Y.~Choquet-Bruhat, J.~Isenberg, and D.~Pollack,
+The constraint equations for the Einstein--scalar field system on compact manifolds,
+\emph{Class. Quantum Grav.} \textbf{24} (2007), 809--828.
+\href{https://arxiv.org/abs/gr-qc/0610045}{arXiv:gr-qc/0610045}.
+
+\bibitem{IsenbergMaxwell2025}
+J.~Isenberg and D.~Maxwell,
+A phase space approach to the conformal construction of non-vacuum initial data sets in general relativity,
+\emph{Ann. Henri Poincar\'e} \textbf{26} (2025), 2505--2555.
+\href{https://doi.org/10.1007/s00023-024-01492-5}{doi:10.1007/s00023-024-01492-5}.
 \end{thebibliography}
 
 
