@@ -8,7 +8,28 @@ import RenewalGeometry.Continuum.CoefficientAubinLionsCompactness
 import RenewalGeometry.DiscreteAnalysis.PeriodicGridInterpolation
 
 /-!
-# Test
+# Grid Aubin–Lions–Simon compactness for periodic trigonometric interpolants
+  (infrastructure for `thm:main-hodge-connection` and `thm:main-literal-link-compactness`;
+  emergent-spacetime manuscript)
+
+Time-dependent arrays on the periodic grids `(ℤ/N)³` (`N` arbitrary, varying along the family)
+are mapped to space-time fields by trigonometric interpolation `(t, x) ↦ 𝓘_h u(t)(x)` on
+`(0,T] × 𝕋³` (`field`, with the product measure `cylMeasure T` of Lebesgue measure and the
+normalized Haar measure on the unit torus).
+
+* `IsGridW12Rep`: every grid value is `W^{1,2}(0,T)` with weak time derivative `g`;
+  the Fourier coefficients of the interpolants inherit the representation
+  (`IsGridW12Rep.coeff`).
+* `trigNegSq s`: the trigonometric `H^{-s}(𝕋³)` norm `Σ_n (1 + 4π²|n|²)^{-s} |f̂(n)|²`.
+* `sum_tW_le`: uniformly in `N`, `‖𝓘_h u‖²_{H¹} ≤ 3 (‖u‖_h² + Σ_i ‖D_i⁺u‖_h²)`.
+* `aubinLions_coefficients_continuous`: `CoefficientAubinLions.aubinLions_coefficients` with
+  continuous limit coefficients.
+* `gridAubinLions_coeff`: Aubin–Lions–Simon in coefficient form for grid families bounded in
+  `L²_t H¹_h` with interpolated time derivatives bounded in `L²_t H^{-s}_x`.
+* `memLp_field`, `integral_field_sub` (Parseval on `𝕋³` + Tonelli: the space-time `L²` distance
+  of two interpolants equals the `L²_t ℓ²_n` distance of their coefficients),
+* `gridAubinLions`, `gridAubinLions_limit`: the space-time form — a subsequence of the
+  interpolants is Cauchy in `L²((0,T] × 𝕋³)` and converges there to a limit `Ω`.
 -/
 
 open MeasureTheory Filter Topology Set

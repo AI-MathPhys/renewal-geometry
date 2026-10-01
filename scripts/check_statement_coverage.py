@@ -172,7 +172,8 @@ def declarations_in(path: Path) -> set[str]:
     for m in NAMESPACE_RE.finditer(text):
         events.append((m.start(), "ns", m.group(1), m.group(2)))
     for m in DECL_RE.finditer(text):
-        events.append((m.start(), "decl", m.group(1), None))
+        # a universe annotation `name.{u}` leaves a trailing dot in the capture
+        events.append((m.start(), "decl", m.group(1).rstrip("."), None))
     for _, kind, a, b in sorted(events):
         if kind == "ns":
             if a == "namespace" and b:

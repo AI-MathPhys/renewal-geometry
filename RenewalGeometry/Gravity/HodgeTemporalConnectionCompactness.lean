@@ -9,7 +9,23 @@ import RenewalGeometry.Gravity.PeriodicConnectionHodgeIdentity
 
 /-!
 # Finite Hodge–temporal criterion for connection compactness
-  (`thm:main-hodge-connection`, `ass:main-connection-compactness`; emergent-spacetime manuscript)
+  (`thm:main-hodge-connection`, `ass:main-connection-compactness`, `lem:supp-connection-hodge`;
+  emergent-spacetime manuscript)
+
+On the periodic regulator `(ℤ/N)³` (`h = 1/N`) a finite connection has a temporal coefficient
+`A_0` and spatial coefficients `A_i`, each with `d` real-or-complex internal coordinates of a
+positive coefficient inner product, in one common trivialization.
+
+* `hodge_identity`: the exact discrete Hodge identity `eq:supp-discrete-hodge-identity` in the
+  `PeriodicGridSobolev` calculus (from `PeriodicHodge.periodic_discrete_hodge_identity`).
+* `energy_le_of_incidence`: the incidence `d_h A = R - 𝒬 + ε` and the Hodge identity bound the
+  spatial `H¹_h` energy of `(A_0, A)` by the budget quantities.
+* `hodge_connection_compactness` (`thm:main-hodge-connection`): under the incidence, the product
+  bound `‖𝒬‖ ≤ C ‖A‖²_{L⁴}` and the budget `eq:main-connection-hodge-budget`, the interpolated full
+  connections are relatively compact in `L²((0,T] × 𝕋³)`.
+* `HodgeTemporalBudget` (bundled hypotheses), `exists_strictMono_forall_of_diag` (diagonal
+  extraction), `hodge_connection_exhaustion` (`ass:main-connection-compactness`: one common
+  subsequence on a countable family of cylinders).
 -/
 
 open MeasureTheory Filter Topology Set
@@ -450,10 +466,10 @@ theorem exists_strictMono_forall_of_diag (P : ℕ → (ℕ → ℕ) → Prop)
     refine htail j (seq j).1 _ (hP j) ⟨σ, ?_, ?_⟩
     · refine tendsto_atTop_mono' atTop ?_ tendsto_id
       filter_upwards [eventually_ge_atTop j] with n hn
-      simp only [σ, dif_pos hn, id]
+      simp only [σ, dite_eq_left hn, id]
       exact (Classical.choose_spec (hex n hn)).1
     · filter_upwards [eventually_ge_atTop j] with n hn
-      simp only [σ, dif_pos hn]
+      simp only [σ, dite_eq_left hn]
       exact (Classical.choose_spec (hex n hn)).2
 
 /-- **`thm:main-hodge-connection` with `ass:main-connection-compactness`** (common subsequence on
@@ -488,19 +504,32 @@ theorem hodge_connection_exhaustion {N : ℕ → ℕ} [∀ m, NeZero (N m)] {T C
     rw [hn]
 
 /-- Non-vacuity of the hypothesis packet: the zero connection on any grid sequence satisfies it
-with any `C_K ≥ 0`. -/
+with `C_K = 0`. -/
 example (T : ℝ) : HodgeTemporalBudget (d := 1) (N := fun _ => 3) T 0 0
-    (fun _ _ _ _ => 0) (fun _ _ _ _ => 0) (fun _ _ _ _ _ => 0) (fun _ _ _ _ _ => 0)
-    (fun _ _ _ _ _ _ => 0) (fun _ _ _ _ _ _ => 0) (fun _ _ _ _ _ _ => 0) where
+    (fun _ _ _ => 0) (fun _ _ _ => 0) (fun _ _ _ _ => 0) (fun _ _ _ _ => 0)
+    (fun _ _ _ _ _ => 0) (fun _ _ _ _ _ => 0) (fun _ _ _ _ _ => 0) where
   w12_temporal _ _ _ := ⟨MemLp.zero', fun t _ => by simp⟩
   w12_spatial _ _ _ _ := ⟨MemLp.zero', fun t _ => by simp⟩
   incidence _ _ _ _ _ _ _ := by simp [curl]
-  integrable_R _ := by simp [twoFormSq, PeriodicGridSobolev.gridNormSq]
-  integrable_Q _ := by simp [twoFormSq, PeriodicGridSobolev.gridNormSq]
-  integrable_E _ := by simp [twoFormSq, PeriodicGridSobolev.gridNormSq]
+  integrable_R _ := by
+    have h0 : twoFormSq (N := 3) (d := 1) (fun _ _ _ _ => 0) = fun _ => 0 := by
+      funext t; simp [twoFormSq, PeriodicGridSobolev.gridNormSq]
+    rw [h0]; exact integrableOn_zero
+  integrable_Q _ := by
+    have h0 : twoFormSq (N := 3) (d := 1) (fun _ _ _ _ => 0) = fun _ => 0 := by
+      funext t; simp [twoFormSq, PeriodicGridSobolev.gridNormSq]
+    rw [h0]; exact integrableOn_zero
+  integrable_E _ := by
+    have h0 : twoFormSq (N := 3) (d := 1) (fun _ _ _ _ => 0) = fun _ => 0 := by
+      funext t; simp [twoFormSq, PeriodicGridSobolev.gridNormSq]
+    rw [h0]; exact integrableOn_zero
   product _ := by simp [l2t, twoFormSq, PeriodicGridSobolev.gridNormSq]
   budget _ := by
+    have hi : interp (0 : Grid 3 → ℂ) = 0 := by
+      simp only [interp, LatticeTorusPlancherel.dft, Pi.zero_apply, smul_zero,
+        Finset.sum_const_zero]
+      exact Finset.sum_eq_zero fun k _ => by ext x; simp
     simp [l2t, l4Sq, connSq, twoFormSq, codiffSq, codiff, gradTemporalSq, dtNegSq, trigNegSq,
-      PeriodicGridSobolev.gridNormSq]
+      PeriodicGridSobolev.gridNormSq, hi, UnitAddTorus.mFourierCoeff]
 
 end RenewalGeometry.HodgeConnection
