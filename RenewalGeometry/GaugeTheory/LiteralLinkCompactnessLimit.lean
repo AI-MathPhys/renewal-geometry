@@ -23,10 +23,14 @@ complex `n × n` matrix link histories `U_{i}(t,x) = exp(h A_i(t,x))` on the ide
   `𝓘_h F_{ij} ⇀ F_{ij}` weakly in `L²` (`eq:main-link-convergence`);
 * the weak limits are the components of `R(ω) = dω + ω ∧ ω`, `ω = A₀ dt + Σ A_i dx^i`
   (`eq:main-link-curvature-limit`):
-  `E_i = ∂ₜA_i − ∂_iA₀ − [A_i, A₀]` (`eq:supp-literal-electric-limit`) and
+  `∂ₜA_i = E_i + ∂_iA₀ + A_iA₀ − A₀A_i` (`eq:supp-literal-electric-limit`) and
   `F_{ij} = ∂_iA_j − ∂_jA_i + [A_i, A_j]` (`eq:supp-literal-magnetic-limit`), in distributions on
   `(0,T) × 𝕋³`, tested against the total family `ψ(t,x) = χ(t) e_k(x)` (`χ ∈ C¹_c(0,T)`,
-  `k ∈ ℤ³`; for the magnetic identity any continuous `χ`).
+  `k ∈ ℤ³`), whose span is dense in `C^∞_c((0,T) × 𝕋³)`.
+
+Regularity conventions: `A_i` continuous in time, the links `U_i` of class `C¹` in time (entrywise
+`HasDerivAt` with continuous derivative `U'_i`), `A₀`, `E_i`, `F_{ij}` measurable in time.  The
+electric record uses the normalization of `LiteralLink.electricRecord`.
 
 No Coulomb condition, gauge smallness, temporal-mean, `D⁺A₀` or `∂ₜA₀` bound is used; `A₀` is only
 weakly convergent.
@@ -647,5 +651,477 @@ theorem magnetic_identity (hodd : ∀ m, Odd (Nm m)) (hN : Tendsto Nm atTop atTo
   linear_combination huniq
 
 end Identities
+
+
+/-! ### Strong compactness of the spatial coefficients -/
+
+section Strong
+
+variable {n : ℕ} {T : ℝ} {Nm : ℕ → ℕ} [∀ m, NeZero (Nm m)]
+
+theorem negSobNorm2_nonneg {N : ℕ} [NeZero N] (u : MatArr N n) : 0 ≤ negSobNorm2 u :=
+  Real.sSup_nonneg fun _ ⟨_, _, h⟩ => h ▸ norm_nonneg _
+
+theorem matNorm_sq_eq {N : ℕ} [NeZero N] (u : MatArr N n) : matNorm u ^ 2 = matNormSq u :=
+  Real.sq_sqrt (matNormSq_nonneg u)
+
+/-- Pointwise: the trigonometric `H⁻²` budget of the entries of a matrix array is controlled by the
+dual grid norm (as in `LiteralLinkCompactness.matArr_aubinLions`). -/
+theorem sum_trigNegSq_entries_le {N : ℕ} [NeZero N] (W : MatArr N n) :
+    ∑ ab : Fin n × Fin n, trigNegSq 2 (interp (entry W ab.1 ab.2)) ≤
+      ((multiIndices 2).card : ℝ) * negSobNorm2 W ^ 2 := by
+  refine le_trans (Finset.sum_le_sum fun ab _ => trigNegSq_two_interp_le _) ?_
+  rw [← Finset.mul_sum]
+  refine mul_le_mul_of_nonneg_left ?_ card_multiIndices_two_pos.le
+  rw [Fintype.sum_prod_type]
+  exact sum_inv_gridWeight_le_negSobNorm2_sq W
+
+theorem continuous_linkZ_entry (A : ∀ m, ℝ → Fin 3 → MatArr (Nm m) n)
+    (U' : ∀ m, ℝ → Fin 3 → MatArr (Nm m) n)
+    (hU' : ∀ m i x a b t, HasDerivAt (fun s => linkU (A m s i) x a b) (U' m t i x a b) t)
+    (m : ℕ) (i : Fin 3) (x : Grid (Nm m)) (a b : Fin n) :
+    Continuous fun t => linkZ (A m t i) x a b := by
+  simp only [entry_linkZ]
+  exact continuous_const.mul ((continuous_iff_continuousAt.2 fun t =>
+    (hU' m i x a b t).continuousAt).sub continuous_const)
+
+theorem hasDerivAt_linkZ_entry (A : ∀ m, ℝ → Fin 3 → MatArr (Nm m) n)
+    (U' : ∀ m, ℝ → Fin 3 → MatArr (Nm m) n)
+    (hU' : ∀ m i x a b t, HasDerivAt (fun s => linkU (A m s i) x a b) (U' m t i x a b) t)
+    (m : ℕ) (i : Fin 3) (x : Grid (Nm m)) (a b : Fin n) (t : ℝ) :
+    HasDerivAt (fun s => linkZ (A m s i) x a b) ((((Nm m : ℝ)⁻¹)⁻¹ • U' m t i x) a b) t := by
+  have h := ((hU' m i x a b t).sub_const ((1 : Matrix (Fin n) (Fin n) ℂ) a b)).const_mul
+    ((Nm m : ℂ))
+  rw [entry_smul_U']
+  exact h.congr_of_eventuallyEq (Eventually.of_forall fun s => entry_linkZ _ _ _ _)
+
+set_option maxHeartbeats 1000000 in
+/-- **Strong compactness of the literal-link coordinates and of the spatial coefficients**
+(first half of `eq:main-link-convergence`): under the identity chart and the anisotropic energy
+bound, along a subsequence the entry interpolants of `Z_i = (e^{hA_i} − I)/h` and of `A_i`
+converge strongly in `L²((0,T] × 𝕋³)` to the same limit. -/
+theorem exists_strong_link_limits (hT : 0 < T) (hN : Tendsto Nm atTop atTop) {δ B : ℝ}
+    (A : ∀ m, ℝ → Fin 3 → MatArr (Nm m) n) (A₀ : ∀ m, ℝ → MatArr (Nm m) n)
+    (U' : ∀ m, ℝ → Fin 3 → MatArr (Nm m) n)
+    (hAc : ∀ m i x a b, Continuous fun t => A m t i x a b)
+    (hU' : ∀ m i x a b t, HasDerivAt (fun s => linkU (A m s i) x a b) (U' m t i x a b) t)
+    (hU'c : ∀ m i x a b, Continuous fun t => U' m t i x a b)
+    (hchart : ∀ m t i x, (Nm m : ℝ)⁻¹ * ‖A m t i x‖ ≤ δ)
+    (hAinf : ∀ m, ∀ t ∈ Set.Ioc 0 T, ∀ i, matNormSq (A m t i) ≤ B)
+    (hAH1 : ∀ m, ∫ t in Set.Ioc 0 T,
+      ∑ i, (matNormSq (A m t i) + ∑ j, matNormSq (matDp j (A m t i))) ≤ B)
+    (hA₀int : ∀ m, IntegrableOn (fun t => matNormSq (A₀ m t)) (Set.Ioc 0 T))
+    (hA₀ : ∀ m, ∫ t in Set.Ioc 0 T, matNormSq (A₀ m t) ≤ B)
+    (hEint : ∀ m i, IntegrableOn
+      (fun t => matNormSq (elecRec i (A m t i) (U' m t i) (A₀ m t))) (Set.Ioc 0 T))
+    (hE : ∀ m i, ∫ t in Set.Ioc 0 T, matNormSq (elecRec i (A m t i) (U' m t i) (A₀ m t)) ≤ B) :
+    ∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ Ω : Fin 3 → Fin n → Fin n → ℝ × UnitAddTorus (Fin 3) → ℂ,
+      (∀ i a b, StrongSeq (fun m => Nm (φ m)) T (fun m t => entry (A (φ m) t i) a b) (Ω i a b)) ∧
+      (∀ i a b, StrongSeq (fun m => Nm (φ m)) T (fun m t => entry (linkZ (A (φ m) t i)) a b)
+        (Ω i a b)) := by
+  set Cκ : ℝ := kappa (Matrix (Fin n) (Fin n) ℂ) ^ 2 * Real.exp δ with hCκ
+  have hCκ0 : 0 ≤ Cκ := by have := kappa_pos (𝔸 := Matrix (Fin n) (Fin n) ℂ); positivity
+  set B' : ℝ := B ⊔ 0
+  have hB' : 0 ≤ B' := le_sup_right
+  -- the `H¹` integrand and its continuity
+  set H : ∀ m, ℝ → ℝ := fun m t =>
+    ∑ l, (matNormSq (A m t l) + ∑ j', matNormSq (matDp j' (A m t l)))
+  have hHc : ∀ m, Continuous (H m) := fun m =>
+    continuous_finset_sum _ fun l _ => (continuous_matNormSq (hAc m l)).add
+      (continuous_finset_sum _ fun j' _ => continuous_matNormSq (continuous_matDp_entry (hAc m l) j'))
+  have hHint : ∀ m, IntegrableOn (H m) (Set.Ioc 0 T) := fun m => integrableOn_Ioc_of_continuous (hHc m)
+  have hH1 : ∀ m t l, matNormSq (A m t l) + ∑ j', matNormSq (matDp j' (A m t l)) ≤ H m t :=
+    fun m t l => Finset.single_le_sum (f := fun l => matNormSq (A m t l) +
+      ∑ j', matNormSq (matDp j' (A m t l)))
+      (fun _ _ => add_nonneg (matNormSq_nonneg _)
+        (Finset.sum_nonneg fun _ _ => matNormSq_nonneg _)) (Finset.mem_univ l)
+  have hH0 : ∀ m t, 0 ≤ H m t := fun m t => Finset.sum_nonneg fun l _ => add_nonneg
+    (matNormSq_nonneg _) (Finset.sum_nonneg fun _ _ => matNormSq_nonneg _)
+  -- Aubin–Lions for `Z`
+  set U : ∀ m, ℝ → Fin 3 × Fin n × Fin n → Grid (Nm m) → ℂ :=
+    fun m t c => entry (linkZ (A m t c.1)) c.2.1 c.2.2
+  set G : ∀ m, ℝ → Fin 3 × Fin n × Fin n → Grid (Nm m) → ℂ :=
+    fun m t c => entry (fun x => ((Nm m : ℝ)⁻¹)⁻¹ • U' m t c.1 x) c.2.1 c.2.2
+  have hW : ∀ m c, IsGridW12Rep T (fun t => U m t c) (fun t => G m t c) := fun m c =>
+    isGridW12Rep_of_hasDerivAt (fun x t => hasDerivAt_linkZ_entry A U' hU' m c.1 x c.2.1 c.2.2 t)
+      (fun x => by
+        simp only [G, entry, entry_smul_U']
+        exact continuous_const.mul (hU'c m c.1 x c.2.1 c.2.2))
+  have hZc : ∀ m i a b x, Continuous fun t => entry (linkZ (A m t i)) a b x :=
+    fun m i a b x => continuous_linkZ_entry A U' hU' m i x a b
+  have hsumZ : ∀ m t, ∑ c, (gridNormSq (U m t c) + coordForm (U m t c)) =
+      ∑ l, (matNormSq (linkZ (A m t l)) + ∑ j, matNormSq (matDp j (linkZ (A m t l)))) := by
+    intro m t
+    rw [Fintype.sum_prod_type]
+    refine Finset.sum_congr rfl fun l _ => ?_
+    simp only [U]
+    rw [Finset.sum_add_distrib, sum_entry_gridNormSq, sum_entry_coordForm]
+  have hZbd : ∀ m t, ∑ l, (matNormSq (linkZ (A m t l)) + ∑ j, matNormSq (matDp j (linkZ (A m t l))))
+      ≤ Cκ ^ 2 * H m t := by
+    intro m t
+    rw [Finset.mul_sum]
+    refine Finset.sum_le_sum fun l _ => ?_
+    rw [mul_add, Finset.mul_sum]
+    exact add_le_add (matNormSq_linkZ_le _ (hchart m t l))
+      (Finset.sum_le_sum fun j _ => matNormSq_matDp_linkZ_le _ (hchart m t l) j)
+  have hB : ∀ m, ∫ t in Set.Ioc 0 T, ∑ c, (gridNormSq (U m t c) + coordForm (U m t c)) ≤
+      Cκ ^ 2 * B := by
+    intro m
+    calc _ ≤ ∫ t in Set.Ioc 0 T, Cκ ^ 2 * H m t :=
+          integral_mono_of_nonneg (ae_of_all _ fun t => Finset.sum_nonneg fun c _ =>
+            add_nonneg (gridNormSq_nonneg _) (coordForm_nonneg _)) ((hHint m).const_mul _)
+            (ae_of_all _ fun t => (hsumZ m t).le.trans (hZbd m t))
+      _ = Cκ ^ 2 * ∫ t in Set.Ioc 0 T, H m t := integral_const_mul _ _
+      _ ≤ Cκ ^ 2 * B := mul_le_mul_of_nonneg_left (hAH1 m) (by positivity)
+  -- the negative-norm budget
+  set C' : ℝ := timeConst (kappa (Matrix (Fin n) (Fin n) ℂ) * Real.exp δ)
+  set K : ℝ := Cκ * Real.sqrt B'
+  have hK : 0 ≤ K := by positivity
+  set card : ℝ := ((multiIndices 2).card : ℝ)
+  have hcard : 0 ≤ card := card_multiIndices_two_pos.le
+  set Maj : ∀ m, ℝ → ℝ := fun m t => card * ∑ l : Fin 3, 2 * C' ^ 2 *
+    (matNormSq (elecRec l (A m t l) (U' m t l) (A₀ m t)) + (1 + K) ^ 2 * matNormSq (A₀ m t))
+  have hMajint : ∀ m, IntegrableOn (Maj m) (Set.Ioc 0 T) := fun m =>
+    (integrable_finset_sum _ fun l _ => ((hEint m l).add ((hA₀int m).const_mul _)).const_mul _
+      ).const_mul _
+  have hZnorm : ∀ m, ∀ t ∈ Set.Ioc 0 T, ∀ l, matNorm (linkZ (A m t l)) ≤ K := by
+    intro m t ht l
+    have h1 := matNormSq_linkZ_le (A m t l) (hchart m t l)
+    have h2 := (hAinf m t ht l).trans (le_sup_left : B ≤ B')
+    rw [matNorm]
+    calc Real.sqrt (matNormSq (linkZ (A m t l))) ≤ Real.sqrt (Cκ ^ 2 * B') :=
+          Real.sqrt_le_sqrt (h1.trans (mul_le_mul_of_nonneg_left h2 (by positivity)))
+      _ = K := by rw [Real.sqrt_mul (by positivity), Real.sqrt_sq hCκ0]
+  have hptW : ∀ m, ∀ t ∈ Set.Ioc 0 T, ∑ c, trigNegSq 2 (interp (G m t c)) ≤ Maj m t := by
+    intro m t ht
+    rw [Fintype.sum_prod_type]
+    simp only [Maj, Finset.mul_sum]
+    refine Finset.sum_le_sum fun l _ => ?_
+    show ∑ ab : Fin n × Fin n, trigNegSq 2
+        (interp (entry (fun x => ((Nm m : ℝ)⁻¹)⁻¹ • U' m t l x) ab.1 ab.2)) ≤ _
+    refine (sum_trigNegSq_entries_le (fun x => ((Nm m : ℝ)⁻¹)⁻¹ • U' m t l x)).trans ?_
+    refine mul_le_mul_of_nonneg_left ?_ hcard
+    have hneg := negSobNorm2_linkTime l (A m t l) (U' m t l) (A₀ m t) (hchart m t l)
+    have hn0 := negSobNorm2_nonneg (fun x => ((Nm m : ℝ)⁻¹)⁻¹ • U' m t l x)
+    have hC'0 : 0 ≤ C' := le_trans zero_le_one ((le_max_left _ _).trans (le_max_right _ _))
+    set e := matNorm (elecRec l (A m t l) (U' m t l) (A₀ m t))
+    set z := matNorm (linkZ (A m t l))
+    set a0 := matNorm (A₀ m t)
+    have he : 0 ≤ e := matNorm_nonneg _
+    have hz : 0 ≤ z := matNorm_nonneg _
+    have ha : 0 ≤ a0 := matNorm_nonneg _
+    have hzK : z ≤ K := hZnorm m t ht l
+    have hsq : negSobNorm2 (fun x => ((Nm m : ℝ)⁻¹)⁻¹ • U' m t l x) ^ 2 ≤
+        (C' * (e + (1 + z) * a0)) ^ 2 := pow_le_pow_left₀ hn0 hneg 2
+    have h2 : (C' * (e + (1 + z) * a0)) ^ 2 ≤ 2 * C' ^ 2 * (e ^ 2 + (1 + K) ^ 2 * a0 ^ 2) := by
+      have h3 : (1 + z) * a0 ≤ (1 + K) * a0 := mul_le_mul_of_nonneg_right (by linarith) ha
+      have h4 : 0 ≤ (1 + z) * a0 := by positivity
+      have h5 : ((1 + z) * a0) ^ 2 ≤ ((1 + K) * a0) ^ 2 := pow_le_pow_left₀ h4 h3 2
+      have h6 : (e + (1 + z) * a0) ^ 2 ≤ 2 * (e ^ 2 + ((1 + z) * a0) ^ 2) := by
+        nlinarith [sq_nonneg (e - (1 + z) * a0)]
+      calc (C' * (e + (1 + z) * a0)) ^ 2 = C' ^ 2 * (e + (1 + z) * a0) ^ 2 := by ring
+        _ ≤ C' ^ 2 * (2 * (e ^ 2 + ((1 + K) * a0) ^ 2)) := by
+            refine mul_le_mul_of_nonneg_left (h6.trans ?_) (sq_nonneg _)
+            linarith
+        _ = _ := by ring
+    rw [show (matNormSq (elecRec l (A m t l) (U' m t l) (A₀ m t))) = e ^ 2 from
+      (matNorm_sq_eq _).symm, show matNormSq (A₀ m t) = a0 ^ 2 from (matNorm_sq_eq _).symm]
+    exact hsq.trans h2
+  set B1 : ℝ := card * ∑ l : Fin 3, 2 * C' ^ 2 * (B + (1 + K) ^ 2 * B)
+  have hB1 : ∀ m, ∫ t in Set.Ioc 0 T, ∑ c, trigNegSq 2 (interp (G m t c)) ≤ B1 := by
+    intro m
+    calc _ ≤ ∫ t in Set.Ioc 0 T, Maj m t :=
+          integral_mono_of_nonneg (ae_of_all _ fun t => Finset.sum_nonneg fun c _ =>
+            trigNegSq_nonneg _ _) (hMajint m)
+            ((ae_restrict_iff' measurableSet_Ioc).2 (ae_of_all _ (hptW m)))
+      _ ≤ B1 := by
+          simp only [Maj]
+          rw [integral_const_mul]
+          refine mul_le_mul_of_nonneg_left ?_ hcard
+          have iE : ∀ l : Fin 3, Integrable (fun t => 2 * C' ^ 2 *
+              (matNormSq (elecRec l (A m t l) (U' m t l) (A₀ m t)) +
+                (1 + K) ^ 2 * matNormSq (A₀ m t))) (volume.restrict (Set.Ioc 0 T)) := fun l =>
+            ((hEint m l).add ((hA₀int m).const_mul _)).const_mul _
+          rw [integral_finset_sum _ fun l _ => iE l]
+          refine Finset.sum_le_sum fun l _ => ?_
+          have a1 : Integrable (fun t => matNormSq (elecRec l (A m t l) (U' m t l) (A₀ m t)))
+              (volume.restrict (Set.Ioc 0 T)) := hEint m l
+          have a2 : Integrable (fun t => (1 + K) ^ 2 * matNormSq (A₀ m t))
+              (volume.restrict (Set.Ioc 0 T)) := (hA₀int m).const_mul _
+          rw [integral_const_mul, integral_add a1 a2, integral_const_mul]
+          refine mul_le_mul_of_nonneg_left ?_ (by positivity)
+          exact add_le_add (hE m l) (mul_le_mul_of_nonneg_left (hA₀ m) (by positivity))
+  obtain ⟨φ, hφ, Ω', hΩ'⟩ := gridAubinLions_limit hT U G hW 2 hB hB1
+  have hδ : 0 ≤ δ := le_trans (by positivity) (hchart 0 0 0 0)
+  have hhm : ∀ m, (0 : ℝ) ≤ (Nm m : ℝ)⁻¹ := fun m => inv_nonneg.2 (Nat.cast_nonneg _)
+  -- integral bounds by the `H¹` integrand
+  have hbdH : ∀ m (f : ℝ → ℝ) (c : ℝ), 0 ≤ c → (∀ t, 0 ≤ f t) → (∀ t, f t ≤ c * H m t) →
+      ∫ t in Set.Ioc 0 T, f t ≤ c * B := by
+    intro m f c hc hf0 hf
+    calc ∫ t in Set.Ioc 0 T, f t ≤ ∫ t in Set.Ioc 0 T, c * H m t :=
+          integral_mono_of_nonneg (ae_of_all _ hf0) ((hHint m).const_mul _) (ae_of_all _ hf)
+      _ = c * ∫ t in Set.Ioc 0 T, H m t := integral_const_mul _ _
+      _ ≤ c * B := mul_le_mul_of_nonneg_left (hAH1 m) hc
+  have hgA : ∀ m t i a b, gridNormSq (entry (A m t i) a b) ≤ 1 * H m t := fun m t i a b => by
+    rw [one_mul]
+    exact (gridNormSq_entry_le _ a b).trans (le_trans (le_add_of_nonneg_right
+      (Finset.sum_nonneg fun _ _ => matNormSq_nonneg _)) (hH1 m t i))
+  have hcA : ∀ m t i a b, coordForm (entry (A m t i) a b) ≤ 1 * H m t := fun m t i a b => by
+    rw [one_mul]
+    exact (coordForm_entry_le _ a b).trans (le_trans (le_add_of_nonneg_left
+      (matNormSq_nonneg _)) (hH1 m t i))
+  have hgZ : ∀ m t i a b, gridNormSq (entry (linkZ (A m t i)) a b) ≤ Cκ ^ 2 * H m t :=
+    fun m t i a b => (gridNormSq_entry_le _ a b).trans ((matNormSq_linkZ_le _ (hchart m t i)).trans
+      (mul_le_mul_of_nonneg_left (le_trans (le_add_of_nonneg_right
+        (Finset.sum_nonneg fun _ _ => matNormSq_nonneg _)) (hH1 m t i)) (by positivity)))
+  have hcZ : ∀ m t i a b, coordForm (entry (linkZ (A m t i)) a b) ≤ Cκ ^ 2 * H m t := by
+    intro m t i a b
+    refine (coordForm_entry_le _ a b).trans ?_
+    calc ∑ j, matNormSq (matDp j (linkZ (A m t i))) ≤ ∑ j, Cκ ^ 2 * matNormSq (matDp j (A m t i)) :=
+          Finset.sum_le_sum fun j _ => matNormSq_matDp_linkZ_le _ (hchart m t i) j
+      _ = Cκ ^ 2 * ∑ j, matNormSq (matDp j (A m t i)) := by rw [Finset.mul_sum]
+      _ ≤ Cκ ^ 2 * H m t := mul_le_mul_of_nonneg_left (le_trans (le_add_of_nonneg_left
+          (matNormSq_nonneg _)) (hH1 m t i)) (by positivity)
+  -- the logarithmic chart error
+  set KA : ℝ := Cκ ^ 2 * δ * ((n : ℝ) * Real.sqrt Kprod) * Real.sqrt B'
+  have hKA : 0 ≤ KA := by positivity
+  have hdiff : ∀ m, ∀ t ∈ Set.Ioc 0 T, ∀ i a b,
+      gridNormSq (entry (A m t i) a b - entry (linkZ (A m t i)) a b) ≤
+        (Nm m : ℝ)⁻¹ * KA * H m t := by
+    intro m t ht i a b
+    have e : gridNormSq (entry (A m t i) a b - entry (linkZ (A m t i)) a b) =
+        gridNormSq (entry (fun x => linkZ (A m t i) x - A m t i x) a b) := by
+      simp only [gridNormSq, entry, Pi.sub_apply, Matrix.sub_apply, norm_sub_rev]
+    rw [e]
+    refine (gridNormSq_entry_le _ a b).trans ((matNormSq_linkZ_sub_le _ (hchart m t i)).trans ?_)
+    rw [sum_sobSq_one_eq]
+    have hm : matNorm (A m t i) ≤ Real.sqrt B' :=
+      Real.sqrt_le_sqrt ((hAinf m t ht i).trans le_sup_left)
+    have hS := hH1 m t i
+    have hS0 : 0 ≤ matNormSq (A m t i) + ∑ j, matNormSq (matDp j (A m t i)) :=
+      add_nonneg (matNormSq_nonneg _) (Finset.sum_nonneg fun _ _ => matNormSq_nonneg _)
+    have hc0 : 0 ≤ Cκ ^ 2 * δ * (Nm m : ℝ)⁻¹ * ((n : ℝ) * Real.sqrt Kprod) := by
+      have := hhm m; positivity
+    calc Cκ ^ 2 * δ * (Nm m : ℝ)⁻¹ * ((n : ℝ) * Real.sqrt Kprod) * matNorm (A m t i) *
+          (matNormSq (A m t i) + ∑ j, matNormSq (matDp j (A m t i)))
+        ≤ Cκ ^ 2 * δ * (Nm m : ℝ)⁻¹ * ((n : ℝ) * Real.sqrt Kprod) * Real.sqrt B' * H m t :=
+          mul_le_mul (mul_le_mul_of_nonneg_left hm hc0) hS hS0 (by positivity)
+      _ = _ := by simp only [KA]; ring
+  refine ⟨φ, hφ, fun i a b => Ω' (i, a, b), fun i a b => ?_, fun i a b => ?_⟩
+  · -- strong convergence of `A`
+    have hAl : ∀ m, IsL2Grid T (fun t => entry (A (φ m) t i) a b) := fun m =>
+      isL2Grid_of_continuous fun x => hAc (φ m) i x a b
+    have hZl : ∀ m, IsL2Grid T (fun t => entry (linkZ (A (φ m) t i)) a b) := fun m =>
+      isL2Grid_of_continuous fun x => hZc (φ m) i a b x
+    have hZt : Tendsto (fun m => ∫ p, ‖field (fun t => entry (linkZ (A (φ m) t i)) a b) p -
+        Ω' (i, a, b) p‖ ^ 2 ∂cylMeasure T) atTop (𝓝 0) := (hΩ' (i, a, b)).2
+    refine ⟨hAl, (hΩ' (i, a, b)).1, ?_, fun m => integrableOn_coordForm_of_continuous
+      fun x => hAc (φ m) i x a b, ⟨1 * B, fun m => hbdH (φ m) _ 1 zero_le_one
+        (fun _ => coordForm_nonneg _) fun t => hcA (φ m) t i a b⟩,
+      ⟨1 * B, fun m => hbdH (φ m) _ 1 zero_le_one (fun _ => gridNormSq_nonneg _)
+        fun t => hgA (φ m) t i a b⟩⟩
+    have hd : ∀ m, ∫ p, ‖field (fun t => entry (A (φ m) t i) a b) p -
+        field (fun t => entry (linkZ (A (φ m) t i)) a b) p‖ ^ 2 ∂cylMeasure T ≤
+        (Nm (φ m) : ℝ)⁻¹ * KA * B := by
+      intro m
+      have e := integral_norm_field_sq ((hAl m).sub (hZl m))
+      rw [field_sub] at e
+      rw [e]
+      calc ∫ t in Set.Ioc 0 T, gridNormSq (entry (A (φ m) t i) a b -
+            entry (linkZ (A (φ m) t i)) a b)
+          ≤ ∫ t in Set.Ioc 0 T, (Nm (φ m) : ℝ)⁻¹ * KA * H (φ m) t :=
+            integral_mono_of_nonneg (ae_of_all _ fun _ => gridNormSq_nonneg _)
+              ((hHint (φ m)).const_mul _)
+              ((ae_restrict_iff' measurableSet_Ioc).2 (ae_of_all _ fun t ht =>
+                hdiff (φ m) t ht i a b))
+        _ = (Nm (φ m) : ℝ)⁻¹ * KA * ∫ t in Set.Ioc 0 T, H (φ m) t := integral_const_mul _ _
+        _ ≤ _ := mul_le_mul_of_nonneg_left (hAH1 (φ m)) (mul_nonneg (hhm _) hKA)
+    have h0 : Tendsto (fun m => 2 * ((Nm (φ m) : ℝ)⁻¹ * KA * B) +
+        2 * ∫ p, ‖field (fun t => entry (linkZ (A (φ m) t i)) a b) p -
+          Ω' (i, a, b) p‖ ^ 2 ∂cylMeasure T) atTop (𝓝 0) := by
+      have h1 : Tendsto (fun m => ((Nm (φ m) : ℝ))⁻¹) atTop (𝓝 0) :=
+        tendsto_inv_atTop_zero.comp (tendsto_natCast_atTop_atTop.comp
+          (hN.comp hφ.tendsto_atTop))
+      simpa using (((h1.mul_const KA).mul_const B).const_mul 2).add (hZt.const_mul 2)
+    refine squeeze_zero (fun m => integral_nonneg fun _ => by positivity) (fun m => ?_) h0
+    have htri := integral_norm_sub_sq_le (memLp_field_of_isL2Grid (hAl m))
+      (memLp_field_of_isL2Grid (hZl m)) (hΩ' (i, a, b)).1
+    linarith [hd m]
+  · -- strong convergence of `Z`
+    refine ⟨fun m => isL2Grid_of_continuous fun x => hZc (φ m) i a b x, (hΩ' (i, a, b)).1,
+      (hΩ' (i, a, b)).2, fun m => integrableOn_coordForm_of_continuous fun x => hZc (φ m) i a b x,
+      ⟨Cκ ^ 2 * B, fun m => hbdH (φ m) _ _ (by positivity) (fun _ => coordForm_nonneg _)
+        fun t => hcZ (φ m) t i a b⟩,
+      ⟨Cκ ^ 2 * B, fun m => hbdH (φ m) _ _ (by positivity) (fun _ => gridNormSq_nonneg _)
+        fun t => hgZ (φ m) t i a b⟩⟩
+
+end Strong
+
+
+/-! ### The theorem -/
+
+section Main
+
+variable {n : ℕ}
+
+/-- **Gauge-free anisotropic literal-link compactness** (`thm:main-literal-link-compactness`,
+emergent-spacetime manuscript).
+
+Setting (odd periodic regulator): odd grids `(ℤ/N_m)³`, `h_m = 1/N_m → 0`; complex `n × n` matrix
+spatial coefficients `A_i(t)` with links `U_i = exp(h A_i)` (`linkU`), continuous in time with
+continuous time derivative `U'_i = ∂ₜU_i`; a measurable temporal coefficient `A₀(t)`; the literal
+electric records `E_i = elecRec i A_i U'_i A₀` (`E_iU_i = (∂ₜU_i + A₀U_i − U_iS_iA₀)/h`) and the
+literal magnetic records `F_{ij} = magRec i j A_i A_j` (`h⁻²` logarithmic plaquette
+coefficients).  Hypotheses: the identity chart `h‖A_i‖ ≤ δ ≤ 1/16` (`eq:main-link-chart`) and the
+anisotropic energy bound `eq:main-link-energy` with constant `B`:
+`‖A(t)‖_h² ≤ B` on `(0,T]`, `∫₀ᵀ Σ_i ‖A_i‖²_{1,h} ≤ B`, `∫₀ᵀ ‖A₀‖_h² ≤ B`, `∫₀ᵀ ‖E_i‖_h² ≤ B`,
+`∫₀ᵀ ‖F_{ij}‖_h² ≤ B` (with the corresponding measurability / integrability).
+
+Conclusion: along a subsequence, `𝓘_h A_i → A_i^∞` strongly in `L²((0,T] × 𝕋³)` (entrywise),
+`𝓘_h A₀ ⇀ A₀^∞`, `𝓘_h E_i ⇀ E_i^∞`, `𝓘_h F_{ij} ⇀ F_{ij}^∞` weakly in `L²`, and the weak limits
+are the components of `R(ω) = dω + ω ∧ ω`, `ω = A₀^∞ dt + Σ A_i^∞ dx^i`:
+`E_i^∞ = ∂ₜA_i^∞ − ∂_iA₀^∞ + [A₀^∞, A_i^∞]` and `F_{ij}^∞ = ∂_iA_j^∞ − ∂_jA_i^∞ + [A_i^∞, A_j^∞]` in
+distributions on `(0,T) × 𝕋³`, tested against `ψ = χ(t) e_k(x)` (`χ ∈ C¹_c(0,T)`, `k ∈ ℤ³`; these
+tests span a dense subspace of `C^∞_c((0,T) × 𝕋³)`). -/
+theorem literal_link_compactness {T δ B : ℝ} (hT : 0 < T) (hδ : δ ≤ 1 / 16)
+    {Nm : ℕ → ℕ} [∀ m, NeZero (Nm m)] (hodd : ∀ m, Odd (Nm m)) (hN : Tendsto Nm atTop atTop)
+    (A : ∀ m, ℝ → Fin 3 → MatArr (Nm m) n) (A₀ : ∀ m, ℝ → MatArr (Nm m) n)
+    (U' : ∀ m, ℝ → Fin 3 → MatArr (Nm m) n)
+    (hAc : ∀ m i x a b, Continuous fun t => A m t i x a b)
+    (hU' : ∀ m i x a b t, HasDerivAt (fun s => linkU (A m s i) x a b) (U' m t i x a b) t)
+    (hU'c : ∀ m i x a b, Continuous fun t => U' m t i x a b)
+    (hA₀m : ∀ m x a b, AEStronglyMeasurable (fun t => A₀ m t x a b)
+      (volume.restrict (Set.Ioc 0 T)))
+    (hEm : ∀ m i x a b, AEStronglyMeasurable
+      (fun t => elecRec i (A m t i) (U' m t i) (A₀ m t) x a b) (volume.restrict (Set.Ioc 0 T)))
+    (hFm : ∀ m i j x a b, AEStronglyMeasurable
+      (fun t => magRec i j (A m t i) (A m t j) x a b) (volume.restrict (Set.Ioc 0 T)))
+    (hchart : ∀ m t i x, (Nm m : ℝ)⁻¹ * ‖A m t i x‖ ≤ δ)
+    (hAinf : ∀ m, ∀ t ∈ Set.Ioc 0 T, ∀ i, matNormSq (A m t i) ≤ B)
+    (hAH1 : ∀ m, ∫ t in Set.Ioc 0 T,
+      ∑ i, (matNormSq (A m t i) + ∑ j, matNormSq (matDp j (A m t i))) ≤ B)
+    (hA₀int : ∀ m, IntegrableOn (fun t => matNormSq (A₀ m t)) (Set.Ioc 0 T))
+    (hA₀ : ∀ m, ∫ t in Set.Ioc 0 T, matNormSq (A₀ m t) ≤ B)
+    (hEint : ∀ m i, IntegrableOn
+      (fun t => matNormSq (elecRec i (A m t i) (U' m t i) (A₀ m t))) (Set.Ioc 0 T))
+    (hE : ∀ m i, ∫ t in Set.Ioc 0 T, matNormSq (elecRec i (A m t i) (U' m t i) (A₀ m t)) ≤ B)
+    (hFint : ∀ m i j, IntegrableOn
+      (fun t => matNormSq (magRec i j (A m t i) (A m t j))) (Set.Ioc 0 T))
+    (hF : ∀ m i j, ∫ t in Set.Ioc 0 T, matNormSq (magRec i j (A m t i) (A m t j)) ≤ B) :
+    ∃ φ : ℕ → ℕ, StrictMono φ ∧
+    ∃ (Alim : Fin 3 → Fin n → Fin n → ℝ × UnitAddTorus (Fin 3) → ℂ)
+      (A₀lim : Fin n → Fin n → ℝ × UnitAddTorus (Fin 3) → ℂ)
+      (Elim : Fin 3 → Fin n → Fin n → ℝ × UnitAddTorus (Fin 3) → ℂ)
+      (Flim : Fin 3 → Fin 3 → Fin n → Fin n → ℝ × UnitAddTorus (Fin 3) → ℂ),
+      (∀ i a b, MemLp (Alim i a b) 2 (cylMeasure T) ∧
+        Tendsto (fun m => ∫ p, ‖field (fun t => entry (A (φ m) t i) a b) p - Alim i a b p‖ ^ 2
+          ∂cylMeasure T) atTop (𝓝 0)) ∧
+      (∀ a b, MemLp (A₀lim a b) 2 (cylMeasure T) ∧
+        WeakL2 (cylMeasure T) (fun m => field (fun t => entry (A₀ (φ m) t) a b)) (A₀lim a b)) ∧
+      (∀ i a b, MemLp (Elim i a b) 2 (cylMeasure T) ∧
+        WeakL2 (cylMeasure T) (fun m => field (fun t =>
+          entry (elecRec i (A (φ m) t i) (U' (φ m) t i) (A₀ (φ m) t)) a b)) (Elim i a b)) ∧
+      (∀ i j a b, MemLp (Flim i j a b) 2 (cylMeasure T) ∧
+        WeakL2 (cylMeasure T) (fun m => field (fun t =>
+          entry (magRec i j (A (φ m) t i) (A (φ m) t j)) a b)) (Flim i j a b)) ∧
+      (∀ i a b (k : Fin 3 → ℤ) (χ : ℝ → ℝ), ContDiff ℝ 1 χ → tsupport χ ⊆ Set.Ioo 0 T →
+        -cylPair T (deriv χ) k (Alim i a b) =
+          cylPair T χ k (Elim i a b)
+          + ∑ c, cylPair T χ k (fun p => Alim i a c p * A₀lim c b p)
+          - ∑ c, cylPair T χ k (fun p => A₀lim a c p * Alim i c b p)
+          - 2 * Real.pi * Complex.I * k i * cylPair T χ k (A₀lim a b)) ∧
+      (∀ i j a b (k : Fin 3 → ℤ) (χ : ℝ → ℝ), ContDiff ℝ 1 χ → tsupport χ ⊆ Set.Ioo 0 T →
+        cylPair T χ k (Flim i j a b) =
+          -(2 * Real.pi * Complex.I * k i) * cylPair T χ k (Alim j a b)
+          + 2 * Real.pi * Complex.I * k j * cylPair T χ k (Alim i a b)
+          + ∑ c, cylPair T χ k (fun p => Alim i a c p * Alim j c b p)
+          - ∑ c, cylPair T χ k (fun p => Alim j a c p * Alim i c b p)) := by
+  obtain ⟨φ₁, hφ₁, Ω, hSA, hSZ⟩ := exists_strong_link_limits hT hN A A₀ U' hAc hU' hU'c hchart
+    hAinf hAH1 hA₀int hA₀ hEint hE
+  obtain ⟨φ₂, hφ₂, G₀, hG₀⟩ := exists_weakSeq_entries (Nm := fun m => Nm (φ₁ m)) (ι := Unit)
+    (fun _ m t => A₀ (φ₁ m) t) (fun _ m => hA₀m (φ₁ m)) (fun _ m => hA₀int (φ₁ m))
+    (fun _ m => hA₀ (φ₁ m))
+  obtain ⟨φ₃, hφ₃, GE, hGE⟩ := exists_weakSeq_entries (Nm := fun m => Nm (φ₁ (φ₂ m)))
+    (ι := Fin 3)
+    (fun i m t => elecRec i (A (φ₁ (φ₂ m)) t i) (U' (φ₁ (φ₂ m)) t i) (A₀ (φ₁ (φ₂ m)) t))
+    (fun i m => hEm (φ₁ (φ₂ m)) i) (fun i m => hEint (φ₁ (φ₂ m)) i)
+    (fun i m => hE (φ₁ (φ₂ m)) i)
+  obtain ⟨φ₄, hφ₄, GF, hGF⟩ := exists_weakSeq_entries (Nm := fun m => Nm (φ₁ (φ₂ (φ₃ m))))
+    (ι := Fin 3 × Fin 3)
+    (fun ij m t => magRec ij.1 ij.2 (A (φ₁ (φ₂ (φ₃ m))) t ij.1) (A (φ₁ (φ₂ (φ₃ m))) t ij.2))
+    (fun ij m => hFm (φ₁ (φ₂ (φ₃ m))) ij.1 ij.2) (fun ij m => hFint (φ₁ (φ₂ (φ₃ m))) ij.1 ij.2)
+    (fun ij m => hF (φ₁ (φ₂ (φ₃ m))) ij.1 ij.2)
+  set Φ : ℕ → ℕ := fun m => φ₁ (φ₂ (φ₃ (φ₄ m))) with hΦdef
+  have hΦ : StrictMono Φ := hφ₁.comp (hφ₂.comp (hφ₃.comp hφ₄))
+  have hψ : StrictMono fun m => φ₂ (φ₃ (φ₄ m)) := hφ₂.comp (hφ₃.comp hφ₄)
+  have hψ' : StrictMono fun m => φ₃ (φ₄ m) := hφ₃.comp hφ₄
+  have hNΦ : Tendsto (fun m => Nm (Φ m)) atTop atTop := hN.comp hΦ.tendsto_atTop
+  have hoddΦ : ∀ m, Odd (Nm (Φ m)) := fun m => hodd (Φ m)
+  have SA : ∀ i a b, StrongSeq (fun m => Nm (Φ m)) T (fun m t => entry (A (Φ m) t i) a b)
+      (Ω i a b) := fun i a b => (hSA i a b).comp hψ
+  have SZ : ∀ i a b, StrongSeq (fun m => Nm (Φ m)) T
+      (fun m t => entry (linkZ (A (Φ m) t i)) a b) (Ω i a b) := fun i a b => (hSZ i a b).comp hψ
+  have W₀ : ∀ a b, WeakSeq (fun m => Nm (Φ m)) T (fun m t => entry (A₀ (Φ m) t) a b)
+      (G₀ () a b) := fun a b => (hG₀ () a b).2.comp hψ'
+  have WE : ∀ i a b, WeakSeq (fun m => Nm (Φ m)) T
+      (fun m t => entry (elecRec i (A (Φ m) t i) (U' (Φ m) t i) (A₀ (Φ m) t)) a b) (GE i a b) :=
+    fun i a b => (hGE i a b).2.comp hφ₄
+  have WF : ∀ i j a b, WeakSeq (fun m => Nm (Φ m)) T
+      (fun m t => entry (magRec i j (A (Φ m) t i) (A (Φ m) t j)) a b) (GF (i, j) a b) :=
+    fun i j a b => (hGF (i, j) a b).2
+  refine ⟨Φ, hΦ, Ω, fun a b => G₀ () a b, GE, fun i j => GF (i, j),
+    fun i a b => ⟨(SA i a b).memLp, (SA i a b).tendsto⟩,
+    fun a b => ⟨(hG₀ () a b).1, (W₀ a b).weak⟩,
+    fun i a b => ⟨(hGE i a b).1, (WE i a b).weak⟩,
+    fun i j a b => ⟨(hGF (i, j) a b).1, (WF i j a b).weak⟩, ?_, ?_⟩
+  · intro i a b k χ hχ hsupp
+    exact electric_identity hT hoddΦ hNΦ (fun m => A (Φ m)) (fun m => A₀ (Φ m))
+      (fun m => U' (Φ m)) (fun m => hU' (Φ m)) (fun m => hU'c (Φ m)) SZ W₀ WE i a b k hχ hsupp
+  · intro i j a b k χ hχ hsupp
+    exact magnetic_identity hoddΦ hNΦ (fun m => A (Φ m)) (fun m => hAc (Φ m))
+      (fun m t i x => (hchart (Φ m) t i x).trans hδ) (fun m => hAinf (Φ m)) (fun m => hAH1 (Φ m))
+      SA WF i j a b k hχ hsupp
+
+/-- Odd grids `N_m = 2m + 1`. -/
+instance oddGrid_neZero (m : ℕ) : NeZero (2 * m + 1) := ⟨by omega⟩
+
+theorem elecRec_zero {N : ℕ} [NeZero N] (i : Fin 3) :
+    elecRec i (0 : MatArr N n) 0 0 = 0 := by
+  funext x
+  simp [elecRec, electricRecord]
+
+theorem magRec_zero {N : ℕ} [NeZero N] (i j : Fin 3) :
+    magRec i j (0 : MatArr N n) 0 = 0 := by
+  funext x
+  simp [magRec, LogBCH.PlaquetteBCH.plaquetteRecord, LogBCH.expProd]
+  right
+  unfold LogBCH.logOnePlus LogBCH.logTerm
+  simp
+
+/-- Non-vacuity of `literal_link_compactness`: the vacuum history `A = 0`, `A₀ = 0` on the odd
+grids `N_m = 2m + 1` satisfies every hypothesis (`δ = 0`, `B = 0`, `T = 1`). -/
+example : True := by
+  have := literal_link_compactness (n := 2) (T := 1) (δ := 0) (B := 0) one_pos (by norm_num)
+    (Nm := fun m => 2 * m + 1) (fun m => ⟨m, rfl⟩)
+    (tendsto_atTop_mono (fun m => show m ≤ 2 * m + 1 by omega) tendsto_id)
+    (fun _ _ _ => 0) (fun _ _ => 0) (fun _ _ _ => 0)
+    (fun _ _ _ _ _ => continuous_const)
+    (fun m i x a b t => by simp [linkU]; exact hasDerivAt_const _ _)
+    (fun _ _ _ _ _ => continuous_const)
+    (fun _ _ _ _ => aestronglyMeasurable_const)
+    (fun _ _ _ _ _ => aestronglyMeasurable_const)
+    (fun _ _ _ _ _ _ => aestronglyMeasurable_const)
+    (fun _ _ _ _ => by simp)
+    (fun _ _ _ _ => by simp [matNormSq, entry, gridNormSq])
+    (fun _ => by simp [matNormSq, entry, gridNormSq, matDp, LiteralLink.fwdDiff])
+    (fun _ => integrableOn_const (by simp) (by simp))
+    (fun _ => by simp [matNormSq, entry, gridNormSq])
+    (fun _ _ => integrableOn_const (by simp) (by simp))
+    (fun _ i => by simp [elecRec_zero, matNormSq, entry, gridNormSq])
+    (fun _ _ _ => integrableOn_const (by simp) (by simp))
+    (fun _ i j => by simp [magRec_zero, matNormSq, entry, gridNormSq])
+  trivial
+
+end Main
 
 end RenewalGeometry.LiteralLinkLimit
