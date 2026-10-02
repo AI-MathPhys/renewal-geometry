@@ -17,14 +17,14 @@ encoded, and what is still open.
 | Library | Role | Size |
 |---|---|---|
 | **`NCG`** | Generic noncommutative geometry, stated with no reference to renewal processes: completely positive maps and channel monoids, Schwarz/Choi theory, Clifford and Jordan algebra, spectral triples, Krein spaces and signed sectors classified by `H¹(G, ℤ/2)`, graph cohomology and covers, and a complete Perron–Frobenius theorem. Candidate material for Mathlib. | 55 files, ~10k lines |
-| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 1217 files, ~363k lines |
+| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 1232 files, ~373k lines |
 
 `NCG` never imports `RenewalGeometry`; this is enforced by
 [`scripts/check_layering.py`](scripts/check_layering.py) in CI.
 
 ### Verification guarantees
 
-- **Sorry-free.** `lake build` kernel-checks all 1272 files; there is no `sorry`.
+- **Sorry-free.** `lake build` kernel-checks all 1287 files; there is no `sorry`.
 - **Standard axioms only.** Every Lean declaration cited as *proved* in a
   paper ledger is audited with `#print axioms` by
   [`scripts/audit_axioms.py`](scripts/audit_axioms.py): only `propext`,
@@ -86,14 +86,14 @@ paper ledger are included; the private development tree is larger.
 | `Commutant` | 106 | Commutant and double-centralizer theory: Wedderburn and factor normal forms, bicommutants, polar edges and holonomy, quiver commutants, typed multiplicity, Howe duality certificates, cofinal/coercive duality, commutant gaps |
 | `StandardModel` | 103 | The gauge group `S(U(3)×U(2))`, hypercharge from anomaly cancellation, generations, Yukawa/Majorana sectors, Clifford matter, structural Standard-Model carriers, SM descent, determinant incidence and routers |
 | `Action` | 55 | Finite action reconstruction: common action, stationarity and jets, K₄ selectors, determining kernels, reward pressure and Gibbs gaps, score control, exact finite actions, the finite common-action interface |
-| `Gravity` | 107 | Relational ADM (lapse, shift, metric), de Sitter and flat vacuum branches, FLRW, the Einstein handoff, Palatini/Holst, curvature reconstruction, Einstein regulators |
+| `Gravity` | 119 | Relational ADM (lapse, shift, metric), de Sitter and flat vacuum branches, FLRW, the Einstein handoff, Palatini/Holst, curvature reconstruction, Einstein regulators |
 | `OperatorLimits` | 157 | Convergence of operators on varying Hilbert spaces: Mosco convergence, strong/norm resolvent limits, collective compactness, compact screens, operator-graph energies, semigroups and Duhamel bounds, spectral convergence and Riesz projections |
 | `DiscreteAnalysis` | 68 | Analysis on finite graphs and lattices: finite torus Fourier symbols, covariant symbols, plaquette expansions, coercive Hodge operators, A₃ periodic sampling, graph Poincaré/Weyl/Nash/Sobolev bounds, Loomis–Whitney, flows and cuts |
-| `Continuum` | 27 | Continuum function-space analysis: Sobolev compactness, interpolation, Vitali and Gaussian kernel estimates, weak–strong pairings, Volterra/Mittag-Leffler |
+| `Continuum` | 28 | Continuum function-space analysis: Sobolev compactness, interpolation, Vitali and Gaussian kernel estimates, weak–strong pairings, Volterra/Mittag-Leffler |
 | `Certificates` | 14 | The certificate and provenance calculus: typed compilation, provenance compilers, executable statuses, Toeplitz screen obstructions, orientation calibration residuals |
 | `GaugeTheory` | 11 | Lattice Yang–Mills records: slab gaps, Wilson separators, Creutz ratios, regulated mass criteria |
 | `Algebra`, `Krein` | 52 | Finite-dimensional algebra and Krein-space results that need renewal inputs: Kadison–Schwarz for channels, Choi criteria, Jordan faces, Loewner/PSD calculus, Schur block toolkits, cone positivity, enrichment minimality |
-| `Topology`, `Analysis`, `Numerics`, `Complexity`, `Arithmetic` | 74 | Brouwer/Sperner fixed points, singular-value approximation and Gram least squares, rational certificates, finite Boolean circuits, arithmetic loading |
+| `Topology`, `Analysis`, `Numerics`, `Complexity`, `Arithmetic` | 76 | Brouwer/Sperner fixed points, singular-value approximation and Gram least squares, rational certificates, finite Boolean circuits, arithmetic loading |
 | `Miscellany` | 6 | Batches of assorted finite records and conditional panels that span several of the topics above |
 
 ## Papers
@@ -106,10 +106,10 @@ Lean declarations, and a generated README listing every record.
 | Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | Easy | Medium | Hard |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 68 | 57 | 11 | 0 | 0 | 0 | 0 | 0 |
-| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 197 | 123 | 14 | 42 | 18 | 0 | 0 | 60 |
+| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 197 | 126 | 14 | 39 | 18 | 0 | 0 | 57 |
 | [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 32 | 5 | 15 | 82 | 0 | 0 | 97 |
 | [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 107 | 12 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **518** | **319** | **42** | **57** | **100** | **0** | **0** | **157** |
+| **Total** | **518** | **322** | **42** | **54** | **100** | **0** | **0** | **154** |
 
 Three of the four manuscripts were revised on 30 September 2026 (new
 theorems, refactored statements, relabelled records; the tracked statement
@@ -192,7 +192,9 @@ det(exp X) = exp(tr X), but each of its three parents needs an open analytic
 result.
 
 A hard campaign on the emergent-spacetime paper (1 October 2026) built general
-machinery and closed 34 of its 93 *hard* records. The machinery includes a
+machinery and closed 37 of its 93 *hard* records, among them the
+constructive nonsymmetric 3+1 vacuum limit (whole-sequence convergence of the
+grid harmonic-gauge writer with rates, and G(g) = 0 by constraint propagation). The machinery includes a
 uniform discrete Sobolev calculus on the periodic grid (Plancherel, product and
 commutator bounds, Moser composition, sampling and interpolation); the grid
 harmonic-gauge Einstein writer with its energy inequality, lifespan,
@@ -210,7 +212,7 @@ be closed from the paper as written. The campaign also found six places where
 the manuscript needs a correction or clarification; each affected record states
 the reading it proves.
 
-The open records are now all rated *hard* (157), the latter
+The open records are now all rated *hard* (154), the latter
 naming their missing infrastructure (Sobolev compactness, continuum PDE, a
 uniform 4D discrete Sobolev inequality, ODE-flow composition,
 unbounded-limit spectral convergence, or an open parent theorem). Corollaries
@@ -256,10 +258,10 @@ finer question by walking the proof terms of every ledger-cited declaration:
 
 | | Modules |
 |---|---:|
-| Used by at least one cited declaration | 620 |
+| Used by at least one cited declaration | 635 |
 | Never used, but imported by a used module (structurally required) | 331 |
 | Never used and imported by nothing used (removable without loss) | 321 |
-| **Total** | **1272** |
+| **Total** | **1287** |
 
 The removable part is concentrated in the foundation of the *earlier* papers
 of the programme rather than the four tracked here: `Lorentz` (50 of 60

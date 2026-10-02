@@ -39,7 +39,10 @@ certificate `eq:supp-gowdy-curvature-certificate`.
   `eq:supp-gowdy-curvature-certificate`**): the metric reconstructed from the readout satisfies,
   on every cell, `‖g_h - g_*‖ + ‖Dg_h - Dg_*‖ ≤ C h²`, `‖D²g_h - D²g_*‖ ≤ C h`,
   `‖Riem(g_h) - Riem(g_*)‖ ≤ C h`, `‖Riem(g_h)‖ ≤ C`, and `‖Ric(g_h)‖ ≤ C h` wherever the
-  reference is Ricci flat.
+  reference is Ricci flat.  (That the reference metric is Ricci flat, i.e. that the frame system
+  with constraints is the vacuum system for `eq:supp-gowdy-metric`, is not formalised here.)
+* `zeroReference`, `zeroReference_pathwiseHistory`: non-vacuity of the reference structure and of
+  the pathwise hypothesis packet.
 -/
 
 open Set Finset
@@ -1818,6 +1821,111 @@ def zeroReference (t₀ t₁ : ℝ) : GowdySmoothReference t₀ t₁ where
   constraint_P _ _ := by simp [dΘ]
   constraint_Q _ _ := by simp [dΘ]
   constraint_lam _ _ := by simp [dΘ]
+
+
+/-- The grid state `U = 0, P = Q = λ = 0` at time `τ`. -/
+def zeroState (N : ℕ) (τ : ℝ) : GridState N :=
+  ⟨fun _ => ⟨0, 0, 0, τ⟩, fun _ => 0⟩
+
+theorem zeroReference_sample (t₀ t₁ τ : ℝ) :
+    (zeroReference t₀ t₁).sample N τ = zeroState N τ := by
+  simp only [GowdyFrameSolution.sample, zeroState, GowdyFrameSolution.Z, LocalState.ofVec]
+  congr
+  funext j
+  congr 1
+  funext i
+  simp [GowdyFrameSolution.fr, zeroReference]
+  fin_cases i <;> simp
+
+theorem isSourceStep_zeroState (σ τ : ℝ) :
+    IsSourceStep σ (zeroState N τ) (zeroState N (τ + σ)) := by
+  refine ⟨fun j => ⟨?_, ?_, ?_, ?_⟩, rfl⟩ <;>
+    simp [zeroState, localField, midpoint, sourceField]
+  funext i; fin_cases i <;> rfl
+
+theorem transport_zeroState (ℓ τ : ℝ) : transport ℓ (zeroState N τ) = zeroState N τ := by
+  simp only [transport, zeroState]
+  congr
+  · funext j
+    congr 1
+    funext i
+    fin_cases i <;> simp [recombine, wPlus, wMinus]
+  · funext j
+    simp [gPlus, gMinus, wPlus, wMinus]
+
+theorem charDist_self (X : GridState N) : charDist X X = 0 :=
+  le_antisymm (charDist_le (fun j => by simp [charNorm]) (fun j => by simp))
+    (charDist_nonneg X X)
+
+theorem crNorm_errArr_self (ℓ : ℝ) (X : GridState N) :
+    PeriodicGridResidual.crNorm 1 ℓ (errArr X X) = 0 := by
+  have h0 : errArr X X = 0 := by funext j; simp [errArr]
+  have hi : ∀ k, (PeriodicGridResidual.fwdDiff ℓ)^[k] (errArr X X) = 0 := by
+    intro k
+    induction k with
+    | zero => exact h0
+    | succ k ih =>
+      rw [Function.iterate_succ_apply', ih]
+      funext j; simp [PeriodicGridResidual.fwdDiff]
+  refine le_antisymm (Finset.sup'_le _ _ fun k _ => by rw [hi k]; simp)
+    (PeriodicGridResidual.crNorm_nonneg _ _ _)
+
+/-- **Non-vacuity of `PathwiseHistory`**: for the zero reference, the exact history
+`X_n = zeroState (τ₀ + nh)` with the exact split stages satisfies all pathwise hypotheses (split
+steps in the envelope of any radius `R ≥ t₁`, zero offsets, zero `C¹_h` error). -/
+theorem zeroReference_pathwiseHistory {t₀ t₁ : ℝ} (h0 : 0 < t₀) (N : ℕ) [NeZero N] (τ₀ : ℝ)
+    (n₀ : ℕ) (hτ₀ : t₀ ≤ τ₀) (hn₀ : τ₀ + n₀ * (2 * Real.pi / N) ≤ t₁) {R c₀ C₁ : ℝ}
+    (hR : t₁ ≤ R) (hc₀ : 0 ≤ c₀) (hC₁ : 0 ≤ C₁) :
+    ∃ X A B : ℕ → GridState N,
+      (zeroReference t₀ t₁).PathwiseHistory h0 R c₀ C₁ N τ₀ n₀ X A B := by
+  set ℓ := 2 * Real.pi / N with hℓdef
+  have hℓ : 0 < ℓ := by
+    have : (0 : ℝ) < N := Nat.cast_pos.2 (Nat.pos_of_ne_zero (NeZero.ne N))
+    positivity
+  refine ⟨fun n => zeroState N (τ₀ + n * ℓ), fun n => zeroState N (τ₀ + n * ℓ + ℓ / 2),
+    fun n => zeroState N (τ₀ + n * ℓ + ℓ / 2 + ℓ / 2), ⟨hτ₀, hn₀, fun n hn => ?_, fun n _ => ?_,
+    fun n _ => ?_⟩⟩
+  · have hτn : τ₀ + n * ℓ + ℓ ≤ t₁ := by
+      have hm' : ((n + 1 : ℕ) : ℝ) ≤ n₀ := by exact_mod_cast hn
+      have := mul_le_mul_of_nonneg_right hm' hℓ.le
+      push_cast at this
+      linarith
+    have hn0 : 0 ≤ (n : ℝ) * ℓ := by positivity
+    refine ⟨⟨isSourceStep_zeroState _ _, ?_⟩, fun j => ⟨?_, ?_, ?_⟩⟩
+    · rw [transport_zeroState]; exact isSourceStep_zeroState _ _
+    · refine ⟨?_, fun i => ?_, ?_⟩ <;>
+        simp [zeroState, LocalState.toVec] <;> linarith
+    · have hR0 : 0 ≤ R := by linarith
+      refine norm_stateVec_le hR0 (fun i => ?_) ?_ ?_ ?_
+      · simp [zeroState, LocalState.toVec]; exact hR0
+      · simp [zeroState, LocalState.toVec]; exact hR0
+      · simp [zeroState, LocalState.toVec]; exact hR0
+      · simp only [zeroState, LocalState.toVec]
+        rw [abs_of_nonneg (by linarith)]
+        linarith
+    · rw [transport_zeroState]
+      refine ⟨?_, fun i => ?_, ?_⟩ <;>
+        simp [zeroState, LocalState.toVec] <;> linarith
+  · have e : τ₀ + ((n + 1 : ℕ) : ℝ) * ℓ = τ₀ + n * ℓ + ℓ / 2 + ℓ / 2 := by push_cast; ring
+    show charDist (zeroState N (τ₀ + ((n + 1 : ℕ) : ℝ) * ℓ))
+      (zeroState N (τ₀ + n * ℓ + ℓ / 2 + ℓ / 2)) ≤ c₀ * ℓ ^ 4
+    rw [e, charDist_self]
+    positivity
+  · show PeriodicGridResidual.crNorm 1 ℓ (errArr (zeroState N (τ₀ + n * ℓ))
+      ((zeroReference t₀ t₁).sample N (τ₀ + n * ℓ))) ≤ C₁ * ℓ ^ 2
+    rw [zeroReference_sample, crNorm_errArr_self]
+    positivity
+
+
+/-- Non-vacuity of the hypothesis packet of `GowdySmoothReference.readout_second_jet` and
+`readout_full_curvature`: an envelope radius `R ≥ chartRadius` and a history satisfying
+`PathwiseHistory` exist (zero reference, exact history). -/
+example {t₀ t₁ : ℝ} (h0 : 0 < t₀) (N : ℕ) [NeZero N] (τ₀ : ℝ) (n₀ : ℕ) (hτ₀ : t₀ ≤ τ₀)
+    (hn₀ : τ₀ + n₀ * (2 * Real.pi / N) ≤ t₁) :
+    ∃ R, (zeroReference t₀ t₁).chartRadius h0 ≤ R ∧ ∃ X A B : ℕ → GridState N,
+      (zeroReference t₀ t₁).PathwiseHistory h0 R 0 0 N τ₀ n₀ X A B :=
+  ⟨max t₁ ((zeroReference t₀ t₁).chartRadius h0), le_max_right _ _,
+    zeroReference_pathwiseHistory h0 N τ₀ n₀ hτ₀ hn₀ (le_max_left _ _) le_rfl le_rfl⟩
 
 end
 
