@@ -533,6 +533,9 @@ import RenewalGeometry.Gravity.OpenWriterDifferenceEstimate
 import RenewalGeometry.Gravity.OpenWriterEnergyEstimate
 import RenewalGeometry.Gravity.OpenWriterEnergyIdentity
 import RenewalGeometry.Gravity.OpenWriterFiniteWords
+import RenewalGeometry.Gravity.OpenWriterFiniteWordsCurvature
+import RenewalGeometry.Gravity.OpenWriterFiniteWordsEinstein
+import RenewalGeometry.Gravity.OpenWriterFiniteWordsUniform
 import RenewalGeometry.Gravity.OpenWriterForcedEnergy
 import RenewalGeometry.Gravity.OpenWriterGridBridge
 import RenewalGeometry.Gravity.OpenWriterHarmonicChart
@@ -551,6 +554,7 @@ import RenewalGeometry.Gravity.OpenWriterRateLift
 import RenewalGeometry.Gravity.OpenWriterRateLiftCutMargin
 import RenewalGeometry.Gravity.OpenWriterRateLiftUniform
 import RenewalGeometry.Gravity.OpenWriterReducedResidual
+import RenewalGeometry.Gravity.OpenWriterReducedResidualDeriv
 import RenewalGeometry.Gravity.OpenWriterSubsidiaryRate
 import RenewalGeometry.Gravity.OpenWriterTimeJets
 import RenewalGeometry.Gravity.OpenWriterVacuumLimit
