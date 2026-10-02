@@ -105,11 +105,11 @@ Lean declarations, and a generated README listing every record.
 
 | Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | Easy | Medium | Hard |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 68 | 57 | 11 | 0 | 0 | 0 | 0 | 0 |
+| [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 88 | 51 | 10 | 24 | 3 | 13 | 12 | 2 |
 | [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 197 | 141 | 14 | 25 | 17 | 0 | 0 | 42 |
 | [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 32 | 5 | 15 | 82 | 0 | 0 | 97 |
 | [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 107 | 12 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **518** | **337** | **42** | **40** | **99** | **0** | **0** | **139** |
+| **Total** | **538** | **331** | **41** | **64** | **102** | **13** | **12** | **141** |
 
 Three of the four manuscripts were revised on 30 September 2026 (new
 theorems, refactored statements, relabelled records; the tracked statement
@@ -126,7 +126,7 @@ definitions: the first pass closed every record rated *easy*, three more
 worked through the 115 records rated *medium*, and two further passes built
 the missing infrastructure for the *hard* records of the duality paper and of
 the predictive-spectral-geometry paper. The predictive-spectral-geometry
-paper, unchanged in the revision, remains **completely formalized** (57 + 11
+paper, unchanged in that revision, was then **completely formalized** (57 + 11
 records, nothing open). The infrastructure those passes added is reusable and
 absent from Mathlib: a Courant–Fischer min–max for compact self-adjoint
 operators, rectangular Cauchy–Binet, Lebesgue-null zero sets of polynomials,
@@ -217,11 +217,22 @@ not give: 29 concern the explicit N = 3 exact action, 7 the original-action
 Hamiltonian behind the initial constraint map, 4 a regularity amendment for the
 first Bianchi identity in the Palatini handoff (a uniform spatial L^3 connection
 bound, which both concrete routes supply), and 2 the same-cylinder Cartan
-reconstruction. The predictive-spectral-geometry manuscript was revised again on
-1 October 2026; its ledger above still reflects the previous version and is
-pending migration.
+reconstruction.
 
-The open records are now all rated *hard* (139), the latter
+The predictive-spectral-geometry manuscript was revised by the author on
+1 October 2026 (88 statements, from 68: 26 new records, 28 reworded, 2
+relabelled, 6 removed). Every reworded record was re-verified against its Lean
+and nine were downgraded because the new wording claims more (for instance
+meshes whose edge lengths may underestimate the metric, normalised Hodge
+potentials, the compact inverse-limit fibre, HS-orthonormal commutant
+coordinates, and a reconstruction category that keeps no generator germ).
+Eight of the new records were matched to existing Lean, mostly the refactored
+finite Hodge–Dirac packet and edge-relative modular identities; the other 18
+were rated. The paper now stands at 51 proved and 10 encoded, with 27 open:
+13 *easy*, 12 *medium* and 2 *hard* (a compatible stable atlas for the flat
+torus).
+
+The other open records are all rated *hard* (139), the latter
 naming their missing infrastructure (Sobolev compactness, continuum PDE, a
 uniform 4D discrete Sobolev inequality, ODE-flow composition,
 unbounded-limit spectral convergence, or an open parent theorem). Corollaries
@@ -267,9 +278,9 @@ finer question by walking the proof terms of every ledger-cited declaration:
 
 | | Modules |
 |---|---:|
-| Used by at least one cited declaration | 679 |
-| Never used, but imported by a used module (structurally required) | 331 |
-| Never used and imported by nothing used (removable without loss) | 321 |
+| Used by at least one cited declaration | 683 |
+| Never used, but imported by a used module (structurally required) | 324 |
+| Never used and imported by nothing used (removable without loss) | 324 |
 | **Total** | **1331** |
 
 The removable part is concentrated in the foundation of the *earlier* papers
