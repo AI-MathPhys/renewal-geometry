@@ -21,6 +21,17 @@ Pointwise metric-jet functionals on the space-time 2-jet space `PJet`:
 All three are analytic at the flat jet (`analyticAt_gaugeOf`, `analyticAt_dtGaugeOf`,
 `analyticAt_einOf`), so the Lipschitz continuum Moser estimate applies to them
 (`pjet_moser_fin`).
+
+Main results:
+
+* `writer_jet_rates` — the interpolant 2-jet fields converge to the limit 2-jet at the rate
+  `O(h ε)` in `H^{s-3}` (1-jets in `H^{s-2}`), with uniform sizes;
+* `interpJet_time_derivs`, `gauge_hasDerivWithinAt` — the jet slots are actual derivatives and
+  `dtGaugeOf` is the time derivative of `c(g_h)`;
+* `supp_open_subsidiary` — **`lem:supp-open-subsidiary`**:
+  `‖c(g_h)‖_{H^{s-2}} + ‖∂ₜc(g_h)‖_{H^{s-3}} + ‖G(g_h)‖_{H^{s-3}} ≤ C h ε` on `[0, T_s]`
+  (comparison with the limit, where `c = ∂ₜc = G = 0`);
+* `supp_open_initial_gauge` — **`lem:supp-open-initial-gauge`** (the case `t = 0`).
 -/
 
 open Finset Filter Topology UnitAddTorus
@@ -660,6 +671,46 @@ theorem gauge_hasDerivWithinAt {T : ℝ} {q v : ℝ → Grid N → MetricRec}
 
 end TimeDeriv
 
+/-! ### Nondegeneracy of small interpolant metrics -/
+
+theorem norm_interpRec_le_interpJet {N : ℕ} [NeZero N] (q v : Grid N → MetricRec) (y : T3) :
+    ‖interpRec q y‖ ≤ ‖interpJet q v y‖ := by
+  have h := norm_fst_le (interpJet q v y)
+  exact h
+
+/-- **Small interpolant jets have nondegenerate metrics**: there is `δ > 0` such that
+`H^{s-3}`-small interpolant jet fields have `det(η + 𝓘_h q)(y) ≠ 0` at every point. -/
+theorem interp_det_ne_of_small (s : ℕ) (hs : 5 ≤ s) :
+    ∃ δ > 0, ∀ (N : ℕ) [NeZero N] (q v : Grid N → MetricRec),
+      (∀ j, MemH (s - 3) ⇑(ccoord bPJ (interpJet q v) j)) →
+      ccoordSum (s - 3) bPJ (interpJet q v) ≤ δ → ∀ y,
+      (Matrix.of (minkowski + interpRec q y)).det ≠ 0 := by
+  obtain ⟨r₁, hr₁, hinv⟩ := exists_inv_chart
+  set B : ℝ := 1 + ∑ j, ‖bPJ j‖
+  have hB : ∀ j, ‖bPJ j‖ ≤ B := fun j => by
+    have := single_le_sum (f := fun j => ‖bPJ j‖) (fun _ _ => norm_nonneg _) (mem_univ j)
+    linarith
+  have hB0 : 0 ≤ B := by
+    have : 0 ≤ ∑ j, ‖bPJ j‖ := sum_nonneg fun _ _ => norm_nonneg _
+    linarith
+  have hpos : 0 < 2 * (B * Real.sqrt cEmb + 1) := by positivity
+  refine ⟨r₁ / (2 * (B * Real.sqrt cEmb + 1)), div_pos hr₁ hpos, fun N _ q v hm hδ y => ?_⟩
+  have h1 := norm_interpRec_le_interpJet q v y
+  have h2 := norm_le_ccoordSum (s - 3) (by omega) bPJ hB (interpJet q v) hm y
+  have h3 : B * (Real.sqrt cEmb * ccoordSum (s - 3) bPJ (interpJet q v)) ≤
+      B * (Real.sqrt cEmb * (r₁ / (2 * (B * Real.sqrt cEmb + 1)))) :=
+    mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hδ (Real.sqrt_nonneg _)) hB0
+  have h4 : B * (Real.sqrt cEmb * (r₁ / (2 * (B * Real.sqrt cEmb + 1)))) < r₁ := by
+    have e : B * (Real.sqrt cEmb * (r₁ / (2 * (B * Real.sqrt cEmb + 1)))) =
+        r₁ * (B * Real.sqrt cEmb / (2 * (B * Real.sqrt cEmb + 1))) := by ring
+    rw [e]
+    have : B * Real.sqrt cEmb / (2 * (B * Real.sqrt cEmb + 1)) < 1 := by
+      rw [div_lt_one hpos]; nlinarith [Real.sqrt_nonneg cEmb]
+    nlinarith
+  have hsm : ‖(minkowski + interpRec q y) - minkowski‖ < r₁ := by
+    rw [add_sub_cancel_left]; linarith
+  exact (hinv _ hsm).1
+
 /-! ### The subsidiary bounds -/
 
 set_option maxHeartbeats 8000000 in
@@ -704,14 +755,7 @@ theorem supp_open_subsidiary (s : ℕ) (hs : 6 ≤ s) :
     (fun b : Fin 4 => fun z => dtGaugeOf z b) analyticAt_dtGaugeOf
   obtain ⟨δE, hδE, CE, hCE, hEm⟩ := pjet_moser_fin (s - 3) (by omega)
     (fun p : Fin 4 × Fin 4 => fun z => einOf z p.1 p.2) (fun p => analyticAt_einOf p.1 p.2)
-  obtain ⟨r₁, hr₁, hinv⟩ := exists_inv_chart
-  set B : ℝ := 1 + ∑ j, ‖bPJ j‖
-  have hB : ∀ j, ‖bPJ j‖ ≤ B := fun j => by
-    have := single_le_sum (f := fun j => ‖bPJ j‖) (fun _ _ => norm_nonneg _) (mem_univ j)
-    linarith
-  have hB0 : 0 ≤ B := by
-    have : 0 ≤ ∑ j, ‖bPJ j‖ := sum_nonneg fun _ _ => norm_nonneg _
-    linarith
+  obtain ⟨δI, hδI, hdetI⟩ := interp_det_ne_of_small s (by omega)
   set Cp : ℝ := 1 + CM
   have hCp : 0 ≤ Cp := by positivity
   set Cε : ℝ := (1 + CL * CS) * Cp
@@ -719,7 +763,7 @@ theorem supp_open_subsidiary (s : ℕ) (hs : 6 ≤ s) :
   have hCpε : Cp ≤ Cε := by
     have : 0 ≤ CL * CS * Cp := by positivity
     simp only [Cε]; nlinarith
-  set δJ : ℝ := min (min δG δD) (min δE (r₁ / (2 * (B * Real.sqrt cEmb + 1))))
+  set δJ : ℝ := min (min δG δD) (min δE δI)
   have hδJ : 0 < δJ := by positivity
   set Z0 : ℝ := Real.exp (K * TL) * (1 + TL) * Cε
   have hZ0 : 0 ≤ Z0 := by positivity
@@ -968,6 +1012,7 @@ theorem supp_open_subsidiary (s : ℕ) (hs : 6 ≤ s) :
   have hδJG : δJ ≤ δG := (min_le_left _ _).trans (min_le_left _ _)
   have hδJD : δJ ≤ δD := (min_le_left _ _).trans (min_le_right _ _)
   have hδJE : δJ ≤ δE := (min_le_right _ _).trans (min_le_left _ _)
+  have hδJI : δJ ≤ δI := (min_le_right _ _).trans (min_le_right _ _)
   refine ⟨fun b => ?_, fun b => ?_, fun μ ν => ?_, fun y b => ?_⟩
   · -- the gauge covector in `H^{s-2}`
     obtain ⟨G, hG, hGm, hGs⟩ := hGm b (interpJet1 (q n t) (v n t))
@@ -995,24 +1040,48 @@ theorem supp_open_subsidiary (s : ℕ) (hs : 6 ≤ s) :
     have := congrFun (congrFun (hein0 t ht y) μ) ν
     rw [this, Matrix.zero_apply, sub_zero]
   · -- the time derivative is the actual derivative
-    have hsmall : ‖interpRec (q n t) y‖ < r₁ := by
-      have h1' : ‖interpRec (q n t) y‖ ≤ ‖interpJet (q n t) (v n t) y‖ := by
-        convert norm_fst_le (interpJet (q n t) (v n t) y) using 1
-      have h2' := norm_le_ccoordSum (s - 3) (by omega) bPJ hB (interpJet (q n t) (v n t)) hJnm y
-      have h3 : B * (Real.sqrt cEmb * ccoordSum (s - 3) bPJ (interpJet (q n t) (v n t))) ≤
-          B * (Real.sqrt cEmb * δJ) := by
-        gcongr
-        exact hJnS.trans hSδ
-      have h4 : B * (Real.sqrt cEmb * δJ) < r₁ := by
-        have hδ4 : δJ ≤ r₁ / (2 * (B * Real.sqrt cEmb + 1)) :=
-          (min_le_right _ _).trans (min_le_right _ _)
-        have hpos : 0 < 2 * (B * Real.sqrt cEmb + 1) := by positivity
-        rw [le_div_iff₀ hpos] at hδ4
-        nlinarith [Real.sqrt_nonneg cEmb]
-      linarith
-    have hdet : (Matrix.of (minkowski + interpRec (q n t) y)).det ≠ 0 :=
-      (hinv (minkowski + interpRec (q n t) y) (by rwa [add_sub_cancel_left])).1
-    exact gauge_hasDerivWithinAt (hsol n) ht y hdet b
+    exact gauge_hasDerivWithinAt (hsol n) ht y
+      (hdetI (n + 1) (q n t) (v n t) hJnm ((hJnS.trans hSδ).trans hδJI) y) b
+
+/-- **`lem:supp-open-initial-gauge`** (initial harmonic and normal-constraint errors), for `s ≥ 6`:
+for `(γ, K) ∈ D_s(ε)` with the harmonic initialization `V₀ = prepFun` and its sampled preparation
+`q_h(0) = 𝓢_h Q₀`, `v_h(0) = 𝓢_h V₀`, the interpolated metric `g_h(0) = η + 𝓘_h𝓢_h Q₀` with the
+actual finite acceleration `𝓘_h(∂ₜv_h)(0)` satisfies
+`‖c(g_h)(0)‖_{H^{s-2}} + ‖∂ₜ c(g_h)(0)‖_{H^{s-3}} ≤ C h ε` (componentwise), where `∂ₜ c(g_h)(0)`
+is the one-sided time derivative of `τ ↦ c(g_h)(τ, y)` at `0` along the writer solution
+(`eq:supp-open-initial-gauge-bound`). -/
+theorem supp_open_initial_gauge (s : ℕ) (hs : 6 ≤ s) :
+    ∃ εs > 0, ∃ TL > 0, ∃ C ≥ 0, ∀ (Q₀ Kr : C(T3, MetricRec))
+      (Qd Kd : Fin 3 → C(T3, MetricRec)) (Qdd : Fin 3 → Fin 3 → C(T3, MetricRec)) (ε : ℝ),
+      DsData s Q₀ Kr Qd Kd Qdd → dataSize s Q₀ Kr ≤ ε → ε ≤ εs →
+      ∃ V₀ : C(T3, MetricRec), ⇑V₀ = prepFun ⇑Q₀ ⇑Kr (fun i => ⇑(Qd i)) ∧
+      ∃ q v : ∀ n : ℕ, ℝ → Grid (n + 1) → MetricRec,
+        (∀ n, IsWriterSolution TL (q n) (v n) ∧ q n 0 = sampleRec (n + 1) ⇑Q₀ ∧
+          v n 0 = sampleRec (n + 1) ⇑V₀) ∧
+        ∀ n,
+          (∀ b, ∃ F : CT, (∀ y, F y = ((gaugeOf (interpJet (sampleRec (n + 1) ⇑Q₀)
+              (sampleRec (n + 1) ⇑V₀) y) b : ℝ) : ℂ)) ∧
+            MemH (s - 2) ⇑F ∧ sn (s - 2) ⇑F ≤ C * ε * ((n : ℝ) + 1)⁻¹) ∧
+          (∀ b, ∃ F : CT, (∀ y, F y = ((dtGaugeOf (interpJet (sampleRec (n + 1) ⇑Q₀)
+              (sampleRec (n + 1) ⇑V₀) y) b : ℝ) : ℂ)) ∧
+            MemH (s - 3) ⇑F ∧ sn (s - 3) ⇑F ≤ C * ε * ((n : ℝ) + 1)⁻¹) ∧
+          ∀ y b, HasDerivWithinAt (fun τ => gaugeOf (interpJet (q n τ) (v n τ) y) b)
+            (dtGaugeOf (interpJet (sampleRec (n + 1) ⇑Q₀) (sampleRec (n + 1) ⇑V₀) y) b)
+            (Set.Icc 0 TL) 0 := by
+  obtain ⟨εs, hεs, TL, hTL, C, hC, h⟩ := supp_open_subsidiary s hs
+  refine ⟨εs, hεs, TL, hTL, C, hC, fun Q₀ Kr Qd Kd Qdd ε hD hsz hε => ?_⟩
+  obtain ⟨V₀, hV₀, q, v, hsol, -, hb⟩ := h Q₀ Kr Qd Kd Qdd ε hD hsz hε
+  refine ⟨V₀, hV₀, q, v, hsol, fun n => ?_⟩
+  have h0 : (0 : ℝ) ∈ Set.Icc 0 TL := ⟨le_rfl, hTL.le⟩
+  obtain ⟨b1, b2, -, b4⟩ := hb n 0 h0
+  rw [(hsol n).2.1, (hsol n).2.2] at b1 b2 b4
+  exact ⟨b1, b2, b4⟩
+
+/-- Non-vacuity of the hypothesis packet of `supp_open_subsidiary` and `supp_open_initial_gauge`:
+the flat data `γ = I`, `K = 0` lie in `D_s(0)`. -/
+theorem subsidiary_data_nonvacuous (s : ℕ) :
+    DsData s 0 0 (fun _ => 0) (fun _ => 0) (fun _ _ => 0) ∧ dataSize s 0 0 ≤ 0 :=
+  ⟨dsData_zero s, by simp [dataSize, ccoordSum_zero_rec]⟩
 
 end
 
