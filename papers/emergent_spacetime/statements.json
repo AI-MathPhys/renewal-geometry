@@ -106,7 +106,7 @@
   "mt:adm": {
     "env": "theorem",
     "title": "Minimal faithful $3+1$ ADM reconstruction from either finite selector",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/ADMReconstructionAssembly.lean:RenewalGeometry.ADMReconstruction.adm_reconstruction",
       "RenewalGeometry/Gravity/ADMReconstructionAssembly.lean:RenewalGeometry.ADMReconstruction.clauseI",
@@ -138,7 +138,9 @@
       "RenewalGeometry/Krein/SignatureMinimalityOrientationFloor.lean:RenewalGeometry.supp_signature_minimality_with_floor",
       "RenewalGeometry/Predictive/OperationalEntranceCategory.lean:RenewalGeometry.OperationalEntrance.relative_primitive_floor"
     ],
-    "note": "Proved as an assembly (Gravity/ADMReconstructionAssembly.lean): adm_reconstruction : clauseI and ... and clauseVII, each clause a transparent Prop. (i) regular-graph route (dimension_regular_graph_exact: k-regular simple graph on v>=2 vertices with equal endpoint/cycle source ranks is K4), alternating/minimal-source route (nondegenerate alternating form => even dimension; even N>=3 has ranks >=3,6 with equality iff N=4, dimension_K4_selector_complete), spatial module W_4 = ker(sum) on R^4 has dimension 3 (finrank_a3SpatialModule). (ii) race score covariance delta_bc k_b/K and loss of common scale by winners only (relational_scheduler_ADM A3/A3'). (iii) six root dyadics a basis of Sym_3, shift map rank 3 with circulation kernel, boxed eq:adm-inversion-main exists and is the unique positive solution (adm_frame_complete). (iv) h^-2 scheduler bound (A5). (v) orientation reversal is an anchored separating pair of the operational entrance (thm:supp-relative-primitive-floor, proved this batch) and every one-line signed extension c<0 of a positive definite D on Fin 3 has inertia (1,3,0), (3,1,0) for -q, Sylvester-invariant (prop:main-signature-minimality / thm:supp-signature-minimality). (vi) the explicit cell eq:clifford-main satisfies the (-,+,+,+) Clifford relations and generates M_4(C), the principal symbol squares to eq:dirac-square-main, and the characteristic form has inertia (1,3) (anchor_external_clifford, anchor_lorentzian_symbol_square, lorentzCharForm_inertia). (vii) NEW adm_cofinal_persistence: rendered as the finite-dimensional core of the cofinal limit, which is what the paper's proof establishes ('this is the finite-dimensional core of the common-screen limit used here'): corrected (harmonically transported) packets on a protected finite screen with summable successive defects -- PSD source forms with uniform margins on an r-dim witness and vanishing tails on a complementary null witness, symmetric brackets with uniform coercivity c>0, speed densities >= rho_0>0 -- converge; the limit source form is PSD (posSemidef_of_tendsto) with rank exactly r; the pair gap persists (limit bracket keeps margin c, is PosDef); the ADM metric/lapse converge to the ADM packet of the limit, which is a PosDef metric with positive lapse; the limit signed extension -N^-2 tau^2 + g(w,w) of the complexified limit metric (posDef_map_ofReal) has inertia (1,3,0) and (3,1,0) up to sign; persisted endpoint/edge ranks 3,6 of an even cell give N=4 and 1+3 (cofinal_dimension_selection). Disclosed rendering: the 'canonical cofinal limit quotient' is represented by the limits of the corrected finite packets on a fixed protected screen; the summable mixed-Gram/refinement defects (eq:supp-summable-refinement) are taken as summable successive defects of those corrected packets, and the separated-rank / pair-gap hypotheses as uniform margins (as the paper's 'separated threshold rank, positive pair gap'). The clause statements are closed (universally quantified) facts, hence hold on the branch hypotheses of the theorem. Non-vacuity example for the clause (vii) hypotheses (constant packets) included. Standard axioms."
+    "note": "Partial: adm_reconstruction proves clauseI..clauseVII as transparent Props. (i) regular-graph route (dimension_regular_graph_exact), alternating/minimal-source rank arithmetic (dimension_K4_selector_complete, as in prop:main-alternating-k4), finrank W_4 = 3; (iii) adm_frame_complete (thm:supp-adm-frame); (iv) h^-2 scheduler bound (relational_scheduler_ADM A5, lem:supp-fast-clock); (v) orientation reversal is an anchored separating pair surviving conservative refinement (separating_reverseOrientation, proved directly; it does not depend on the open thm:supp-relative-primitive-floor) and the one-line signed extension of a PosDef D on Fin 3 has inertia (1,3,0), Sylvester-invariant; (vi) Clifford cell, symbol square, characteristic inertia; (vii) adm_cofinal_persistence (finite-dimensional core of the cofinal limit, renderings as before). Missing: clause (ii) for the actual root race. The paper races the twelve oriented roots with rates k_a^pm, but clauseII states the score Gram identity E[s_b s_c] = delta_bc k_b/K and the scale loss of the winner law only for six rates (Fin 6). This is the open content of lem:supp-race-score (arbitrary finite index set / Fin 12, winner covariance diag(p) - pp^T).",
+    "difficulty": "easy",
+    "plan": "Closes by instantiation once lem:supp-race-score is proved: generalise relational_scheduler_ADM (A3), (A3') to an arbitrary Fintype index (only race_exp_moment and sum k = K are used), instantiate at the twelve oriented roots, and restate clauseII over Fin 12 (or the oriented-root type). Also correct the clause (v) note: the floor record is open, but clause (v) does not use it."
   },
   "thm:main-determining-kernel": {
     "env": "theorem",
@@ -152,7 +154,7 @@
       "RenewalGeometry/Predictive/GeneratedMinimalRecord.lean:RenewalGeometry.WordRecordMachine.MinimalRecordExact",
       "RenewalGeometry/Predictive/GeneratedMinimalRecord.lean:RenewalGeometry.WordRecordMachine.minimal_record_exact"
     ],
-    "note": "The all-future quotient of a WordRecordMachine is the coarsest record through which every read future and every primitive step factors (MinimalRecordExact M1-M4, with the unique surjection from any future-sufficient presentation); termination of partition refinement is encoded as the bound k <= N-1 on strictly refining rounds; the accepted kernel K([r],q') = sum_a p(r,a) 1[step a r]=q' is well defined on the quotient and is the unique table with that row formula. Scoped: finite letter alphabet, branch rows assumed future-measurable (or read off selected Reads); \"reproducing all selected post-accepted futures\" is encoded as the row formula itself."
+    "note": "The all-future quotient of a WordRecordMachine is the coarsest record through which every read future and every primitive step factors (MinimalRecordExact M1-M4: right congruence, unique descended updates, unique factorization of every future Read, unique surjection from every future-sufficient surjective presentation) (determiningFieldAcceptedKernelCompiler). The accepted kernel is rendered as the grouped branch table K([r],q') = sum_a p(r,a) 1[[step a r] = q'] (acceptedDeterminingKernel): its existence on the quotient (well-definedness, using fibre-constancy of p, automatic when p is read off selected Reads: _fromSelectedReads) is proved, and uniqueness is uniqueness of the table satisfying this row formula. Disclosed renderings: (a) the kernel is the unnormalized numerator of eq:main-accepted-kernel (p is taken to be the accepted-branch probabilities; division by p_acc on the positive acceptance domain is not formalized); (b) 'reproducing all selected post-accepted futures' is encoded as the row formula itself; (c) termination of partition refinement is rendered by the generic bound k <= N-1 on any injective choice of fresh blocks Fin (k+1) -> Fin N (strictRefinementRounds_le_card_sub_one), not by a formalized refinement procedure. Finite letter alphabet."
   },
   "thm:main-action-reconstruction": {
     "env": "theorem",
@@ -176,7 +178,7 @@
   "thm:main-common-action": {
     "env": "theorem",
     "title": "Finite common-action exactness",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Action/FiniteVariationCanonicalHodgeExact.lean:RenewalGeometry.finiteCommonActionExactness_canonicalHodge",
       "RenewalGeometry/Action/FiniteVariationCanonicalHodgeExact.lean:RenewalGeometry.finiteVariationComplex_canonicalHodgeDecomposition",
@@ -194,7 +196,9 @@
       "RenewalGeometry/Action/FiniteVariationComponentAnchorExact.lean:RenewalGeometry.edgeCoboundary_anchored_existsUnique",
       "RenewalGeometry/Action/FiniteVariationComponentAnchorExact.lean:RenewalGeometry.edgeCoboundary_anchor_unique_of_preconnected"
     ],
-    "note": "Proved. On a finite-dimensional real inner-product variation complex d1 d0 = 0: alpha = d0 S iff d1 alpha = 0 and alpha pairs to zero with a certified family of cycle representatives spanning cycles mod boundaries (finiteVariationComplex_commonAction_exactness with FirstHomologyRepresentativeCertificate over R: real coefficients see exactly the free part of H_1(V;Z)); S is reconstructed by telescoping path integration (finitePathIntegral_coboundary); the canonical Hodge decomposition and the coexact singular-value floor give dist(alpha, Ran d0)^2 <= ||P_har alpha||^2 + sigma^-2 ||d1 alpha||^2 (finiteCommonActionExactness_canonicalHodge). Per-component anchor clause (new, FiniteVariationComponentAnchorExact.lean): abstractly, if ker d0 consists of functions constant on each fibre of a component labelling, two common actions with the same coboundary agreeing at one anchor per component are equal, and with the converse inclusion every exact alpha has exactly one common action with prescribed anchor values (finiteVariationComplex_commonAction_anchor_unique_components / _anchored_existsUnique); concretely, on the one-skeleton with oriented edges src, tgt : E -> V and (d0 S) e = S(tgt e) - S(src e) (edgeCoboundary), ker d0 is exactly the functions constant on the SimpleGraph.ConnectedComponent of the incidence graph (edgeCoboundary_eq_zero_iff), so one anchor vertex on each connected component makes S unique (edgeCoboundary_anchor_unique_components) and every exact alpha has a unique anchored common action (edgeCoboundary_anchored_existsUnique); the connected case recovers the old one-anchor clause (edgeCoboundary_anchor_unique_of_preconnected). Scoped: the coexact singular-value floor sigma_coex is an explicit hypothesis (hcoexactFloor), as before."
+    "note": "Partial: finiteVariationComplex_commonAction_exactness (alpha = d0 S iff d1 alpha = 0 and alpha pairs to zero with a certified real basis of cycles mod boundaries -- equivalent to vanishing periods on an integral basis of the free part of H_1), finitePathIntegral_coboundary (telescoping reconstruction), and the per-component anchor clause (finiteVariationComplex_commonAction_anchor_unique_components / _anchored_existsUnique; concretely edgeCoboundary_eq_zero_iff, edgeCoboundary_anchor_unique_components, edgeCoboundary_anchored_existsUnique on the incidence graph) are proved. Missing: eq:main-common-action-obstruction with the harmonic projection. finiteCommonActionExactness_canonicalHodge states the bound for an existentially quantified closed component har that is not required to be orthogonal to Ran d0, so the exported inequality is weaker than dist^2 <= ||P_har alpha||^2 + sigma_coex^-2 ||d1 alpha||^2 (the construction does produce P_har alpha, but the statement does not say so). The coexact singular-value floor is an explicit hypothesis hcoexactFloor (satisfied by the paper's sigma_coex).",
+    "difficulty": "easy",
+    "plan": "In finiteVariationComplex_canonicalHodgeDecomposition add the conclusion (forall x : C0, <har, d0 x> = 0) (true by construction: rem is orthogonal to Ran d0 and coex is orthogonal to ker d1 which contains Ran d0, so har = rem - coex is orthogonal to Ran d0), propagate it to finiteCommonActionExactness_canonicalHodge, and optionally state har = orthogonalProjection onto (ker d1 inf (Ran d0)^perp) of alpha; then restore status proved."
   },
   "thm:main-action-stationarity": {
     "env": "theorem",
@@ -207,7 +211,7 @@
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.resid_sq_le",
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.grad_action_sq_le"
     ],
-    "note": "With Psi strongly convex/smooth (m, M, Lipschitz gradient), the action gradient Lipschitz-dominated (L, lam), proximal minimizers y*(theta) global (interiority), and nu stationary for the accepted kernel K, the represented stationarity functional S <= m^-1 ||grad A||^2 integrates to int S dnu <= C * int gap d(nu (x) K) with the explicit constant C = 4((eta^-1+L)M)/m + 4M^2(1+eta max(lam,L))^2/(m^2 eta); zero integrated gap forces grad A = 0 nu-a.e. Real inner-product-space setting, hypotheses spelled out as above."
+    "note": "Proved in a global rendering: on a real inner-product space E with gradients gPsi, gA continuous, m||a-b||^2 <= <gPsi a - gPsi b, a-b> <= M||a-b||^2, gPsi M-Lipschitz (Fisher bounds mI <= G <= MI), <gA a - gA b, a-b> <= L <gPsi a - gPsi b, a-b> and gA (max(lam,L) M)-Lipschitz (rendering of -lam G <= D^2 A <= L G), proximal minimizers ystar theta minimizing Phi_theta over ALL of E (rendering of interiority), and nu invariant for the accepted kernel K (equivalent to invariance for the lazy kernel (1-theta)I + theta K^acc), any S with 0 <= S <= m^-1 ||grad A||^2 (this covers frak S = grad A^* G^-1 grad A) satisfies int S dnu <= C int Delta d(nu (x) K) with C = 4((eta^-1+L)M)/m + 4M^2(1+eta max(lam,L))^2/(m^2 eta) (integral_stationarity_form_le); zero integrated gap forces grad A = 0 nu-a.e. (vanishing_gap_forces_stationarity). Disclosed scope: the hypotheses are global on E rather than on a compact convex chart; transferring the paper's chart hypotheses requires a convex C^{1,1} extension of Psi, A preserving the constants, which is not formalized; eta lambda < 1 and uniqueness of the minimizer are not used."
   },
   "def:main-gravitational-class": {
     "env": "definition",
@@ -250,7 +254,7 @@
   "thm:main-spatial-screen": {
     "env": "theorem",
     "title": "Cut margin and compact-screen alternative",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylExact.lean:RenewalGeometry.finite_meanZero_L6_sobolev",
       "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylExact.lean:RenewalGeometry.finite_meanZero_poincare",
@@ -263,7 +267,9 @@
       "RenewalGeometry/Dimension/GlobalSpatialCompiler.lean:RenewalGeometry.GlobalSpatialCompiler.finite_cut_ratio_min_attained",
       "RenewalGeometry/Dimension/GlobalSpatialCompiler.lean:RenewalGeometry.GlobalSpatialCompiler.vanishing_cut_ratio_obstruction"
     ],
-    "note": "On a finite weighted graph with total mass <= V*, degree bound h^2 sum_u c_uv <= D m_v and spatial cut margin I * min(mu(A),mu(A^c))^{2/3} <= h c(dA): mean-zero L^6 Sobolev with C_S = 128 D / I^2, Poincare with C_P = V*^{2/3} C_S, Weyl count N(R) <= 1 + 4 e^{3/2} V* (C_S R)^{3/2} (via a Nash heat-trace argument), the R^-1 spectral tail bound and the positive eigenvalue floor; the normalized cut potential of a minimizing cut satisfies sum u|dphi| = 1 with |<b_A,phi>| = scale/cap(A), and a vanishing cut ratio forces divergence. Scoped: the Lean theorem takes the analytic cut margin I^sp directly as hypothesis -- the a_+/- comparison I^sp >= I^eff/a_+ of eq:main-cut-comparison and the zero-capacity remark are not formalized."
+    "note": "Partial: on a finite weighted graph with volume <= V*, degree bound h^2 sum_u c_uv <= D m_v and a SPATIAL cut margin I * min(mu(A),mu(A^c))^{2/3} <= h c(dA) (FiniteWeightedGraph.SpatialCutMargin), renewalSpatialPositiveScreen gives the mean-zero L^6 Sobolev bound with C_S = 128 D / I^2 (finite_meanZero_L6_sobolev), Poincare with C_P = V*^{2/3} C_S (finite_meanZero_poincare), the Weyl count N(R) <= 1 + 4 e^{3/2} V* (C_S R)^{3/2} (eigenvalueCount_bound, Nash heat-trace argument), the R^-1 spectral tail and the positive eigenvalue floor; GlobalSpatialCompiler gives attainment of the minimizing cut, the normalized cut potential with sum u|dphi| = 1 and |<b_A,phi>| = scale/cap(A) (normalized_macroscopic_neck_obstruction), and divergence of the reciprocal of a vanishing cut ratio. Missing: the efficient capacities u_e, the comparison a_- h c_e <= u_e <= a_+ h c_e, and the derivation of the spatial margin I^sp >= I^eff/a_+ (and a_- I^sp <= I^eff <= a_+ I^sp) from inf I^eff > 0 -- the Lean takes the spatial margin as hypothesis, so the stated implication from the efficient-capacity margin is not proved. The zero-capacity remark is prose.",
+    "difficulty": "easy",
+    "plan": "Add to GlobalSpatialCompiler (or RenewalSpatialPositiveScreen) a lemma: for capacities u and conductances c with a_- h c_e <= u_e <= a_+ h c_e on every edge, u(dA) and h c(dA) satisfy a_- h c(dA) <= u(dA) <= a_+ h c(dA) for every cut, hence a_- I^sp <= I^eff <= a_+ I^sp (min over the same admissible cuts) and, if I^eff >= I_* > 0, a SpatialCutMargin with constant I_*/a_+. Compose with renewalSpatialPositiveScreen into one theorem whose hypotheses are the paper's (volume, degree, comparison, efficient margin); apply the neck obstruction to the efficient capacities u."
   },
   "thm:main-curvature-propagation": {
     "env": "theorem",
@@ -325,7 +331,7 @@
       "RenewalGeometry/GaugeTheory/LiteralLinkLimitDensity.lean:RenewalGeometry.LiteralLinkLimit.cylPair_eq_integral_modeCoeff",
       "RenewalGeometry/GaugeTheory/LiteralLinkLimitDensity.lean:RenewalGeometry.LiteralLinkLimit.modeCoeff"
     ],
-    "note": "fC3b (coordinator review): downgraded from proved. What is proved: LiteralLinkLimit.literal_link_compactness (GaugeTheory/LiteralLinkCompactnessLimit.lean) gives everything in the statement EXCEPT that the two curvature identities are proved only against the product tests psi = chi(t) e_k(x) (chi in C^1_c(0,T), k in Z^3). It does not prove them against all test functions in D((0,T) x T^3). The density step was attempted (GaugeTheory/LiteralLinkLimitDensity.lean). Its separation half is proved: ae_eq_zero_of_cylPair_eq_zero shows that an L^2((0,T] x T^3) function annihilated by every chi(t) e_k(x) vanishes a.e. (fundamental lemma in t: ae_modeCoeff_eq_zero via IsOpen.ae_eq_zero_of_integral_contDiff_smul_eq_zero; Fourier uniqueness/Parseval in x: hasSum_sq_mFourierCoeff). ae_eq_of_cylPair_eq then shows that E_i^inf and F_ij^inf are the unique L^2 functions satisfying the tested identities. This does not upgrade the identities themselves to all test functions or to a.e. equalities, because they are not identities between L^2 functions: they contain the distributional derivatives d_t A_i, d_i A_0 and d_i A_j. Extending them requires showing that the product family is dense in D((0,T) x T^3) in the C^1 topology, which is missing (see plan). Earlier note (still accurate for the Lean content): PROVED (fC3, 1 Oct 2026) as LiteralLinkLimit.literal_link_compactness (GaugeTheory/LiteralLinkCompactnessLimit.lean; standard axioms only; non-vacuity example with the vacuum history A = A0 = 0 on N_m = 2m+1). Setting and renderings (disclosed): odd periodic grids (Z/N_m)^3, h_m = 1/N_m -> 0; complex n x n matrix coefficients with the Frobenius norm (the 'fixed positive Euclidean matrix norm'); links U_i = exp(h A_i) with A_i continuous in t and U_i C^1 in t (entrywise HasDerivAt with continuous derivative U'_i, needed to define E); A0 only measurable; E_i = elecRec, the literal record E_i U_i = (d_tU_i + A0 U_i - U_i S_i A0)/h (LiteralLink.electricRecord, the normalization under which eq:supp-literal-Z-equation holds, as already disclosed for lem:supp-literal-link-evolution); F_ij = magRec, the h^-2 logarithmic plaquette coefficient (PlaquetteBCH.plaquetteRecord); E, F measurable in t (part of 'in L^2'). Hypotheses: the chart h|A_i| <= delta <= 1/16 (delta_* fixed and small, made explicit) and eq:main-link-energy with one constant B: ||A(t)||_h^2 <= B on (0,T], int_0^T sum_i (||A_i||_h^2 + sum_j ||D_j^+A_i||_h^2) <= B, and int ||A0||_h^2, int ||E_i||_h^2, int ||F_ij||_h^2 <= B (with integrability). No Coulomb, gauge-smallness, temporal-mean, D^+A0 or d_tA0 hypothesis. Conclusion: after extraction the entrywise trigonometric interpolants I_h A_i -> A_i strongly in L^2((0,T] x T^3); I_h A0, I_h E_i, I_h F_ij converge weakly in L^2 (WeakL2, complex L^2 tests); and the weak limits are the components of R(omega) = d omega + omega^omega: d_t A_i = E_i + d_i A0 + A_i A0 - A0 A_i (eq:supp-literal-electric-limit) and F_ij = d_i A_j - d_j A_i + [A_i, A_j] (eq:supp-literal-magnetic-limit) in distributions on (0,T) x T^3, tested against the total family psi = chi(t) e_k(x), chi in C^1_c(0,T), k in Z^3 (their span is dense in C^infty_c((0,T) x T^3); the identities are written with cylPair). Proof as in the manuscript: (a) Z = (U-I)/h is bounded in L^2_t H^1_h with d_tZ bounded in L^2_t H_h^-2 (negSobNorm2_linkTime); Aubin-Lions (gridAubinLions_limit) gives strong convergence of Z, and the log-chart error ||Z-A||_h^2 <= C h ||A||_h ||A||_{1,h}^2 (an L^3/L^4 interpolation in place of the paper's L^{10/3}) transfers it to A (exists_strong_link_limits); (b) weak extraction of A0, E, F (exists_weakSeq_entries); (c) the exact tested electric identity (gp_linkTime: E U = E + h E Z, summation by parts D^+ -> N(conj zeta - 1) -> -2 pi i k_i, the shift S_i moved onto the strong factor), integrated by parts in time against chi (electric_grid_identity) and passed to the limit by the weak-strong lemma tendsto_pairing_modChar (exact bilinear Parseval on odd grids, integral_interp_mul, plus the modulation/aliasing estimate integral_norm_interp_mul_modChar_sub_le) (electric_identity); (d) the tested plaquette decomposition (gp_magRec) with the summed second-order BCH remainder h^3 sum ||R|| <= h C(||A||_{1,h}^2 + ||A||_{L^3_h}^3) -> 0 (sum_norm_magRem_le, magnetic_identity). [Coordinator 1 Oct 2026] Accepted as proved with disclosure: the electric and magnetic limit identities are proved tested against the family chi(t)e_k(x) (chi in C^1_c(0,T), k in Z^3), i.e. in the Fourier characterization of distributions on (0,T)xT^3; L^2 separation by that family is proved (ae_eq_of_cylPair_eq). The equivalence with testing against all of C_c^inf((0,T)xT^3) is the standard density of these products in the test-function space, which is not formalized (needs partial derivatives / Fourier differentiation rule on UnitAddTorus (Fin 3))."
+    "note": "PROVED (fC3, 1 Oct 2026; accepted with disclosure) as LiteralLinkLimit.literal_link_compactness (GaugeTheory/LiteralLinkCompactnessLimit.lean; standard axioms only; non-vacuity example with the vacuum history A = A0 = 0 on N_m = 2m+1). Setting (disclosed): odd periodic grids (Z/N_m)^3, h_m = 1/N_m -> 0; complex n x n matrix coefficients with the Frobenius norm; links U_i = exp(h A_i) with A_i continuous in t and U_i C^1 in t (entrywise derivative U'_i, needed to define E); A0 only measurable; E_i = elecRec (literal record E_i U_i = (d_t U_i + A0 U_i - U_i S_i A0)/h), F_ij = magRec (h^-2 logarithmic plaquette coefficient); E, F measurable in t. Hypotheses: chart h|A_i| <= delta <= 1/16 and eq:main-link-energy with one constant B (sup_t ||A(t)||_h^2, int (||A||_h^2 + sum_j ||D_j^+ A||_h^2), int ||A0||^2, int ||E||^2, int ||F||^2 <= B). No Coulomb, gauge-smallness, temporal-mean, D^+A0 or d_t A0 hypothesis. Conclusion: after extraction, I_h A_i -> A_i strongly in L^2((0,T] x T^3); I_h A0, I_h E_i, I_h F_ij converge weakly in L^2 (WeakL2); the limits satisfy d_t A_i = E_i + d_i A0 + A_i A0 - A0 A_i and F_ij = d_i A_j - d_j A_i + [A_i, A_j], tested against every chi(t) e_k(x), chi in C^1_c(0,T), k in Z^3 (cylPair), i.e. in the Fourier characterization of distributions on (0,T) x T^3; E^inf and F^inf are the unique L^2 functions with these tested identities (ae_eq_of_cylPair_eq, via ae_eq_zero_of_cylPair_eq_zero). Proof: Aubin-Lions for Z = (U-I)/h (negSobNorm2_linkTime, gridAubinLions_limit) and the log-chart transfer to A (exists_strong_link_limits); weak extraction (exists_weakSeq_entries); exact tested electric identity (gp_linkTime, electric_grid_identity) and weak-strong passage (tendsto_pairing_modChar, electric_identity); plaquette decomposition with summed BCH remainder -> 0 (gp_magRec, sum_norm_magRem_le, magnetic_identity). Not formalized (disclosed, standard): density of span{chi(t) e_k(x)} in C_c^infty((0,T) x T^3) in the C^1 topology, which converts the tested identities into identities against all test functions."
   },
   "thm:main-renewal-einstein": {
     "env": "theorem",
@@ -518,7 +524,7 @@
   "thm:main-homogeneous-friedmann": {
     "env": "theorem",
     "title": "Vacuum Friedmann equations in renewal coordinates",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.renewalRateLagrangian",
       "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.renewalRateLagrangian_eq_homogeneous",
@@ -530,7 +536,9 @@
       "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.firstVariation_integrand_eq",
       "RenewalGeometry/Gravity/RenewalFriedmannExact.lean:RenewalGeometry.momentum_boundary_term_integral_eq_zero"
     ],
-    "note": "Proved. eq:main-renewal-rate-action: the boxed renewal-rate Lagrangian -(2 rho'^2)/(3 rho^{4/3} sqrt kappa) - 2 Lambda rho^{4/3} sqrt kappa equals the reduced Lagrangian -6 a a'^2/N - 2 Lambda N a^3 under rho = a^3, kappa = N^2/a^2 (renewalRateLagrangian_eq_homogeneous). With u = log kappa, v = log rho the Euler expressions E_u = dL/du - d/dt dL/du', E_v = dL/dv - d/dt dL/dv' (partial derivatives are Mathlib `deriv`s of the one-variable sections, the time derivative is `deriv`) equal the boxed eq:main-renewal-euler E_u = N a^3 (3H^2 - Lambda), E_v = N a^3 [4 D_tau H + (8/3)(3H^2 - Lambda)] with H = a'/(N a), D_tau = N^{-1} d/dt (eulerU_eq needs no differentiability; eulerV_eq needs u, v, v' differentiable at the evaluation time). Stationarity E_u = E_v = 0 is equivalent to 3H^2 = Lambda and D_tau H = 0 (renewal_stationary_iff_friedmann, eq:main-vacuum-friedmann). The identification delta S = int (E_u delta u + E_v delta v) is supplied as the pointwise first-variation identity d/d eps L = E_u delta u + E_v delta v + d/dt(p_v delta v) (firstVariation_integrand_eq) plus vanishing of the integrated exact term for endpoint-fixed delta v (momentum_boundary_term_integral_eq_zero); differentiation under the integral sign is not formalised (standard for smooth paths on a compact interval). The Einstein-component identification in the appendix (G_00, G_ij) is not formalised (not part of the theorem's boxed claims)."
+    "note": "Partial: renewalRateLagrangian_eq_homogeneous (eq:main-renewal-rate-action equals -6 a a'^2/N - 2 Lambda N a^3 under rho = a^3, kappa = N^2/a^2); eulerU_eq / eulerV_eq (eq:main-renewal-euler, with u = log kappa, v = log rho, Euler expressions built from Mathlib derivatives of the one-variable sections); renewal_stationary_iff_friedmann (E_u = E_v = 0 iff 3H^2 = Lambda and D_tau H = 0, eq:main-vacuum-friedmann); firstVariation_integrand_eq and momentum_boundary_term_integral_eq_zero (delta S = int (E_u du + E_v dv) as a pointwise first-variation identity plus vanishing of the exact term for endpoint-fixed dv; differentiation under the integral is not formalised). Missing: the clause identifying eq:main-vacuum-friedmann with the complete vacuum Einstein equation G + Lambda g = 0 for g = -N(t)^2 dt^2 + a(t)^2 delta_ij dx^i dx^j (00 component = lapse constraint, ij components = D_tau H equation given the constraint); only the de Sitter special case is in the library (RelationalDeSitterBranch.einstein_cosmological_vacuum).",
+    "difficulty": "medium",
+    "plan": "Using the coordinate-curvature machinery of Gravity/CoordinateCurvature.lean and Gravity/CurvedFLRW.lean (k = 0), compute the Christoffel jets of g = diag(-N(t)^2, a(t)^2, a(t)^2, a(t)^2), obtain G_00 = 3 a'^2/a^2 and G_ij = -(2 a a''/N^2 - 2 a a' N'/N^3 + a'^2/N^2) delta_ij, rewrite them as N^2(3H^2) and -a^2(2 D_tau H + 3H^2) with H = a'/(N a), and prove (G + Lambda g = 0) iff (3H^2 = Lambda and D_tau H = 0) for a, N > 0; combine with renewal_stationary_iff_friedmann."
   },
   "cor:main-derived-desitter-rates": {
     "env": "corollary",
@@ -771,7 +779,7 @@
   "def:supp-operational-datum": {
     "env": "definition",
     "title": "Finite conditional operational renewal law",
-    "status": "statement_encoded",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Predictive/OperationalRenewalLawDatum.lean:RenewalGeometry.FiniteTypedEventGrammar.FiniteConditionalOperationalRenewalLaw",
       "RenewalGeometry/Predictive/OperationalRenewalLawDatum.lean:RenewalGeometry.FiniteTypedEventGrammar.FiniteConditionalOperationalRenewalLaw.multitimeProb",
@@ -790,7 +798,9 @@
       "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.wordProb",
       "RenewalGeometry/Predictive/FiniteProcessCombTomography.lean:RenewalGeometry.PhysicalChoiTomographyFrame"
     ],
-    "note": "Encoded. FiniteConditionalOperationalRenewalLaw G extends the typed-grammar ConditionalLaw (one-step law p(a|h) >= 0, zero off admissible letters, row sum 1 after every reachable history = eq:supp-one-step-law; p(a|h) <= 1 is prob_le_one; chain law eq:supp-chain-law = ConditionalLaw.wordProb) with: per-port input/output legs In p, Out p so the exposed Hermitian Choi space is the Hermitian part of Matrix (In p x Out p); a finite physical CP frame (PhysicalChoiTomographyFrame: positive trace-normalized probes, Hermitian duals) on every port whose real span contains every Hermitian matrix (frame_spans) and whose probes are (injectively) intervention letters of the grammar (interventionLetter); the multitime layer as a family tensor ps of Choi tensors on the Kronecker index SlotIndex of each chronological list of ports (newest slot first, as CombCarrier) with the finite process-comb conditions of thm:supp-comb-tomography (eq:supp-comb-conditions): tensor_posSemidef (R^(N) >= 0, finite positivity), tensor_nil (R^(0) = 1, normalization), tensor_causal (partial trace over the newest output leg = identity on the newest input leg tensor the prefix tensor: causality under deterministic discard and prefix compatibility); the multitime probability of a tuple of slot Choi matrices is the trace pairing multitimeProb, frameProb its restriction to frame probes; multitimeProb_add / multitimeProb_smul / multitimeProb_convex prove additivity under coarse graining and affinity under randomization (newest slot), multitimeProb_nil the empty-sequence normalization; terminal Reads as terminal event outcomes are the rows readProb (nonneg, sum 1 after reachable histories). Disclosed modelling choice: the affinity/additivity/normalization/causality/prefix clauses are carried by the representing tensor family (the equivalent form established by the proved thm:supp-comb-tomography) rather than as separate axioms on a bare probability table; the identity 'probability of a deterministic-discard newest slot equals the prefix probability' is a consequence of tensor_causal and is not separately proved."
+    "note": "Partial: FiniteConditionalOperationalRenewalLaw G extends the typed ConditionalLaw (p(a|h) >= 0, zero off admissible letters, row sum 1 after every reachable history = eq:supp-one-step-law; p <= 1 is prob_le_one; chain law eq:supp-chain-law = ConditionalLaw.wordProb) and carries, per exposed port, input/output legs, a finite physical CP frame (PhysicalChoiTomographyFrame) whose real span contains every Hermitian matrix (frame_spans), an injective labelling of probes by intervention outcomes, a family of Choi tensors tensor ps on chronological port lists with the comb conditions of thm:supp-comb-tomography (tensor_posSemidef, tensor_nil, tensor_causal), the trace-pairing multitime probability multitimeProb with additivity/affinity/normalization lemmas (multitimeProb_add, _smul, _convex, _nil), and terminal-Read rows readProb. Missing: the compatibility axiom making the multitime frame probabilities INDUCED by the conditional law -- for every reachable history and every chronological tuple of frame probes realized as intervention letters, frameProb of the tuple equals the chain-law probability p(w|h) of the corresponding intervention word (and readProb equals the law of the corresponding terminal events). Without it the tensor family and the event law are unrelated data. The identity 'deterministic-discard newest slot = prefix probability' is a consequence of tensor_causal and is not separately proved.",
+    "difficulty": "medium",
+    "plan": "Make intervention events grammar letters: add a map from (port, probe) to G.Letter x y (or a typed intervention-letter predicate) and a field `frameProb_eq_chain : forall h (reachable) ps probes, frameProb ps probes = P.wordProb h (interventionWord ps probes)` (with the declared slot order), plus `readProb_eq_chain` identifying terminal Read rows with terminal-event letters; prove a non-vacuity instance (one port, one cut type, trivial comb R^(N) = I-normalized product tensor with the induced i.i.d. intervention law) and check that thm:supp-comb-tomography's reconstruction applies to the induced table."
   },
   "def:supp-future-signature": {
     "env": "definition",
@@ -815,7 +825,7 @@
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.step_futureEquivalent",
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.futureEquivalent_equivalence"
     ],
-    "note": "Future equivalence is an equivalence; equivalent histories have equal one-letter branch probabilities (eq:supp-one-letter-equality) and, whenever branch h a != 0 (the positive-probability branch), h a ~ h' a. Exactly the paper statement, fibrewise in cut type."
+    "note": "Typed rendering (TypedEventGrammar.lean, over FiniteTypedEventGrammar.ConditionalLaw): future equivalence of histories of the same cut type is an equivalence (futureEquivalent_equivalence); equivalent histories have equal one-letter probabilities p(a|h) = p(a|h') (prob_eq_of_futureEquivalent, eq:supp-one-letter-equality); on the positive-probability branch 0 < p(a|h) the extensions are admissible and h a ~ h' a (futureEquivalent_snoc, eq:supp-right-congruence), by cancellation in the chain law. The untyped PredictiveSystem versions (branch_eq_of_futureEquivalent, step_futureEquivalent, futureEquivalent_equivalence in DerivedPredictiveCarrierUniversalExact.lean, total steps, histories not typed) remain as the variant used by the universal-property file."
   },
   "def:supp-predictive-state": {
     "env": "definition",
@@ -871,7 +881,7 @@
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_update_of_occurs",
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.generated_ledger_is_compiled_presentation"
     ],
-    "note": "For every reachable deterministic realization there is a unique map pi : State -> Z^min with pi o stateOf = q (toMinimal_unique), it is surjective, intertwines updates on occurring branches (pi(u_a s) = T_a(pi s) when rate s a != 0) and branch functions (kappa_a o pi = r_a); hence any ledger/hidden-state presentation has a unique quotient onto Z^min, and two ledger states are identified iff all their future laws agree. Fibrewise in cut type."
+    "note": "Proved in TypedPredictiveCategoryExact (typed, partial updates). Presentation = def:supp-predictive-realization (state sets per cut type, history maps, branch functions r_a with p(a|h) = r_a(s(h)), partial updates Option-valued, required only on positive-probability branches; plus reads, take ReadValue = Unit to drop them). futureEquivalent_of_stateOf_eq DERIVES 'same record => equal complete futures' from these data (bisimulation principle, induction on word length). minimal = Z^min_X as a presentation (the quotient is itself a realization: weight = kappa, transition = T on positive branches, transition_project). toMinimal S : Hom S (minimal L) with toMinimal_spec: q_x = pi_x s_x, pi_x surjective at every cut type, and any two morphisms to Z^min coincide (uniqueness by reachability); Hom fields give r_a = kappa_a pi_x and pi_y u_a = T_a pi_x on every positive-probability successor; minimal_isTerminal: Z^min is terminal, i.e. the unique coarsest reachable realization, so a generated ledger/hidden-state presentation has a unique quotient onto it. Renderings: state sets not required finite (generalization); branch functions real-valued (the [0,1] bound is automatic at reachable states). The older untyped DerivedPredictiveCarrierUniversal file is kept as a partial pointer only: its Realization assumes future_factor and total updates."
   },
   "thm:supp-persistence-derived": {
     "env": "theorem",
@@ -883,7 +893,7 @@
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_unique",
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.Realization.toMinimal_surjective"
     ],
-    "note": "eq:supp-persistence is the instance minimalUpdate_mk_of_occurs with h = H_n and a = A_{n+1}: on any realized (positive-probability) branch [H_n A_{n+1}] = T_{A_{n+1}}([H_n]); the derived packet (Z_n, A_{n+1}, Z_{n+1}) is therefore a function of the event process, and every other deterministic persistent packet maps uniquely onto it by toMinimal_unique/surjective. Not stated as a separate named theorem in Lean; it is a direct instance of the cited results."
+    "note": "eq:supp-persistence: ConditionalLaw.transition_project (typed) / untyped minimalUpdate_mk_of_occurs, with h = H_n, a = A_{n+1}: on every realized (positive-probability) branch Z_{n+1} = [H_n A_{n+1}] = T_{A_{n+1}}(Z_n), and right congruence futureEquivalent_snoc makes T well defined; hence the packet (Z_n, A_{n+1}, Z_{n+1}) is a function of the event process. 'Every other deterministic persistent predictive packet maps uniquely onto it': any reachable presentation S (TypedPredictiveCategory.Presentation, partial updates on positive branches) has the unique morphism toMinimal S (toMinimal_spec, minimal_isTerminal) with pi(s(h)) = [h], which intertwines the realized updates (Hom.map_update) at consecutive cuts, so it carries (s(H_n), A_{n+1}, s(H_{n+1})) to (Z_n, A_{n+1}, Z_{n+1}). Not a separately named Lean theorem; a direct instance of the cited results."
   },
   "cor:supp-future-operational-transfer": {
     "env": "corollary",
@@ -894,7 +904,7 @@
       "RenewalGeometry/Certificates/CertificateRecordBatch02.lean:RenewalGeometry.minimalPredictiveQuotient",
       "RenewalGeometry/Certificates/CertificateRecordBatch02.lean:RenewalGeometry.minimalPredictiveProjection"
     ],
-    "note": "For any state space with future-signature map sigma and any readout D constant on equal signatures, there is a unique Dbar on the minimal predictive quotient with D = Dbar o pi (exists-unique factorization), exactly eq:supp-compiler-factorization."
+    "note": "upstream_compiler_transfer: for any state set with complete declared future-signature map sigma and any readout D with sigma s = sigma t => D s = D t, there is a unique Dbar on minimalPredictiveQuotient sigma (= State modulo equal signatures) with D = Dbar o minimalPredictiveProjection sigma (exists-unique), i.e. eq:supp-compiler-factorization. Rendering: Z^min is taken as the signature quotient of the candidate states; for a reachable realization this quotient is Z^min_X = H/~ with pi = the universal surjection, because two states are erased to the same minimal state iff all their future laws agree (DerivedPredictiveCarrierUniversal toMinimal_eq_iff_futureLaw_eq; typed: TypedPredictiveCategory.toMinimal_spec)."
   },
   "prop:supp-finite-prediction": {
     "env": "proposition",
@@ -938,7 +948,7 @@
   "thm:supp-hankel": {
     "env": "theorem",
     "title": "Canonical typed Hankel realization",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Predictive/TypedHankelRealization.lean:RenewalGeometry.typed_hankel_realization",
       "RenewalGeometry/Predictive/HankelMinimality.lean:RenewalGeometry.hankel_minimality",
@@ -946,12 +956,14 @@
       "RenewalGeometry/Predictive/HankelMinimality.lean:RenewalGeometry.hankelCoreEquiv",
       "RenewalGeometry/Predictive/HankelMinimality.lean:RenewalGeometry.minimalRealizationSimilarity_unique"
     ],
-    "note": "For a typed table tbl : F -> P -> C with compatible past/future re-indexings, the transition A_a is a linear map sending the Hankel column of p to that of a o p, given by pullback of futures, and is unique on the span of the columns (eq:supp-hankel-transition/evaluation); for any other linear realization the reachable-modulo-unobservable quotient is isomorphic to the Hankel core, so dim N >= dim M with equality exactly for reachable future-separated realizations (hankel_minimality, hankel_minimality_finrank_eq). Typing is by arbitrary index types per cut/state."
+    "note": "Partial: typed_hankel_realization gives the linear transition A_a with A_a h_p = h_{a o p} (pullback of futures), lambda_f A_a = lambda_{f o a}, unique on the span of the Hankel columns; hankel_minimality gives N^reach/N^unobs ~= M_{x,z} (span of columns) and dim N >= dim M for every linear realization (states n_p, effects lambda_f with lambda_f(n_p) = P(f,p)); hankel_minimality_finrank_eq / hankelCoreEquiv: reachable and future-separated => N ~= M, dim N = dim M; minimalRealizationSimilarity_unique. Field C instead of R (harmless). Missing: the converse 'dim N = dim M => the realization is reachable and future separated' (needed for 'equality exactly on the reachable future-separated branch'); the statement that M itself is reachable and future separated is immediate but not stated.",
+    "difficulty": "easy",
+    "plan": "From hankel_minimality: finrank N = finrank M and finrank(reach/unobs) = finrank M force finrank reach = finrank N (so span = top) and finrank unobs∩reach = 0 (so separated); add hankel_minimality_finrank_eq_iff : finrank N = finrank M <-> (span (range nst) = top and separated), plus a one-line lemma that M (columns, evaluation functionals) is reachable and separated."
   },
   "thm:supp-comb-tomography": {
     "env": "theorem",
     "title": "Finite process-comb tomography",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Predictive/FiniteProcessCombTomography.lean:RenewalGeometry.reconstructChoiTensor_pairing",
       "RenewalGeometry/Predictive/FiniteProcessCombTomography.lean:RenewalGeometry.reconstructChoiTensor_frame_independent",
@@ -962,12 +974,14 @@
       "RenewalGeometry/Predictive/FiniteProcessCombTomography.lean:RenewalGeometry.causalCombPrefixes_unique_from_terminal",
       "RenewalGeometry/Predictive/FiniteProcessCombTomography.lean:RenewalGeometry.finiteCombPrefix_minimalPurification_unique"
     ],
-    "note": "Re-verified against the new text. Positive trace-normalized physical probes separate Hermitian Choi tensors, so the tensor reconstructed from the frame probabilities is the unique Hermitian representative and is frame independent. The conditions R^(0) = 1, R^(k) >= 0 and the nested output-trace recursion (IsDeterministicCombThrough) construct canonical linked minimal-rank square-root factors obeying the same causal recursion; support minimality in the new sense (minimal Stinespring dilation of every prefix channel) is exactly the memory dimension finrank (CanonicalPrefixMemory J) = rank J of finiteCombPrefix_minimalPurification_unique, and any other prefix-support-minimal factor differs by a unique inner-product-preserving memory gauge (the unitary U_k). Scoped: the converse 'realization implies conditions' holds because FiniteDeterministicComb carries the conditions as a field; the link isometries V_k are represented by the linked factors rather than as explicit maps H_{2k-2} (x) A_{k-1} -> H_{2k-1} (x) A_k; the final memory discard, the transport of 'named operators retained in the compared record realization' by the same unitaries (a consequence of uniqueness of U_k, not a separate theorem) and the closing remark on the classical predictive quotient are not separately formalized."
+    "note": "Partial: physicalChoiBranches_separate_hermitian (positive trace-normalized probes separate Hermitian tensors, so the representing Hermitian tensor is unique); reconstructChoiTensor_pairing (the dual-frame tensor reproduces every frame entry); reconstructChoiTensor_frame_independent (two reconstructions representing the same functional on physical probes coincide); linkedCombPurificationCertificate_exists (R^(0)=1, R^(k) >= 0 and the nested output-trace recursion give canonical minimal-rank square-root factors obeying the same causal Gram recursion); causalCombPrefixes_unique_from_terminal (prefix combs determined by the terminal tensor); finiteCombPrefix_minimalPurification_unique (memory dimension = rank R^(k), any other factor of the same prefix related by a unique inner-product-preserving gauge). Missing: an independent definition of a finite sequential (isometric) quantum process and the necessity direction (its comb satisfies positivity + causal recursion), the construction of the link isometries V_k and the realization of R^(N) by sequential link + final discard, the sequential uniqueness relation eq:supp-comb-unitary for prefix-support-minimal isometric realizations, transport of retained named operators, and the representation lemma (dual-frame tensor represents ALL multilinear probabilities when the frame spans).",
+    "difficulty": "medium",
+    "plan": "1) Define SequentialIsometricComb (memories A_k, isometries V_k as matrices with V^H V = 1) and its realized Choi tensors by link product + final partial trace; prove they satisfy IsDeterministicCombThrough (necessity). 2) From the canonical linked factors build V_k by minimal-purification uniqueness of R^(k-1) (x) I vs R^(k) (Schmidt/polar step, reuse CanonicalPrefixPurificationUniqueness) and show the sequential realization reproduces R^(N). 3) For two prefix-support-minimal realizations, take the prefix gauges U_k and prove V'_k = (I (x) U_k) V_k (I (x) U_{k-1}^*) by contracting with spanning prefix vectors. 4) Add the spanning-basis lemma: if {F_a} is a basis of the Hermitian space with trace-dual {D^a} then Tr(R M) = p(M) for every M, for the tensor built from p(F_a)."
   },
   "lem:supp-contextual-ideal": {
     "env": "lemma",
     "title": "Contextual nullity is a two-sided $*$-ideal",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Predictive/ContextualFutureNullIdeal.lean:RenewalGeometry.contextualFutureNullIdeal",
       "RenewalGeometry/Predictive/ContextualFutureNullIdeal.lean:RenewalGeometry.contextualFutureNullIdeal_isTwoSided",
@@ -978,7 +992,9 @@
       "RenewalGeometry/Predictive/ContextualEnvelope.lean:RenewalGeometry.contextual_null_absorption",
       "RenewalGeometry/Predictive/ContextualEnvelope.lean:RenewalGeometry.contextual_envelope_universal"
     ],
-    "note": "The set of elements invisible in every admitted context (u q v and u q* v annihilated by all Reads) is a two-sided star-closed ideal (hence the largest such ideal), the quotient map has exactly this kernel and is surjective, and contextual_envelope_universal proves the universal property: every context-preserving quotient factors uniquely through it and separated envelopes are injective images (minimum context-preserving separated envelope). Finite matrix-block model realized with a C*-algebra structure."
+    "note": "Partial: contextualFutureNullIdeal (q with R(u q v) = 0 AND R(u q* v) = 0 for all u, v, all Reads) is a two-sided star ideal (contextualFutureNullIdeal_isTwoSided, _star_mem), and it is the largest invisible *-ideal by construction; in a finite matrix-block model the restriction to surviving blocks is a surjective *-homomorphism onto a C*-algebra with kernel exactly this ideal (contextualHistoryBlockRepresentation_ker/_surjective); for the star-free null set contextualNull: two-sided ideal (contextual_null_absorption) and the universal property of the quotient (kernel inclusion, factorization, injectivity on separated quotients; contextual_envelope_universal). Missing: that the paper's star-free null set is star-closed (equivalently equals contextualFutureNull) under the hypothesis that admitted contexts/Reads are closed under adjoint (R_k(x*) = conj R_k(x) with reversed contexts), and the universal property stated for *-homomorphisms on the same set.",
+    "difficulty": "easy",
+    "plan": "Add the hypothesis hR : forall k x, R k (star x) = conj (R k x) (Hermitian Reads; contexts u, v range over the whole *-algebra so reversal is automatic) and prove contextualNull R = contextualFutureNull R (q null => q* null via R(u q* v) = conj R(v* q u*)); then restate contextual_envelope_universal for StarAlgHom and the star-closed ideal, giving 'largest two-sided *-ideal' and 'unique minimum context-preserving separated envelope' for one and the same set."
   },
   "thm:supp-word-flatness": {
     "env": "theorem",
@@ -1112,7 +1128,7 @@
   "thm:supp-relative-primitive-floor": {
     "env": "theorem",
     "title": "Relative primitive-basis minimality for the paper-level entrance",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Predictive/OperationalEntranceCategory.lean:RenewalGeometry.OperationalEntrance.AnchoredGrammar",
       "RenewalGeometry/Predictive/OperationalEntranceCategory.lean:RenewalGeometry.OperationalEntrance.Model",
@@ -1143,7 +1159,9 @@
       "RenewalGeometry/Predictive/OperationalEntranceCategory.lean:RenewalGeometry.OperationalEntrance.orientation_absorption",
       "RenewalGeometry/Predictive/OperationalEntranceCategory.lean:RenewalGeometry.OperationalEntrance.relative_primitive_floor"
     ],
-    "note": "Proved on a new formal category (Predictive/OperationalEntranceCategory.lean). The 'fixed category of finite typed operational-predictive models': AnchoredGrammar = fixed finite typed event grammar (def:supp-event-grammar) + finite named potential events/writers/Reads + named axes of an anchored Euclidean space (orthonormal named basis, Gram I); Model = the four rows (occurs : Set of actual potential events = O; law : conditional operational law on the grammar = P+; orientation : Mathlib Orientation (ray of a unit alternating form) of the anchored space = Theta; calibration > 0 = physical duration scale T = Lambda S = Lambda). RowIso keep M N = anchored isomorphism retaining the rows in keep (linear automorphism of the anchored space fixing every named axis, linear change of time unit fixing the anchored unit, named events/letters/outcomes fixed); Entrance G keep is a Mathlib Groupoid, forgetRow r the reduct functor. (R1) typedLaw_minimal_isTerminal (the predictive row alone gives Z^min as terminal presentation, prop:supp-predictive-category, invariant along anchored isos), calibration_eq_inv_sum_absoluteRate (absolute rates k_a = p_a/Lambda recover Lambda = (sum k)^-1 and p as projective part), orientation_eq_or_eq_neg_anchor (Theta is one of the two torsor sections); the remaining sufficiency content of R1 is, as in the paper's proof, the conjunction of the cited reconstruction theorems, all proved in this ledger (thm:supp-right-congruence, thm:supp-minimal-record, cor:supp-derived-state-machine, thm:supp-comb-tomography, lem:supp-contextual-ideal, thm:supp-word-flatness, lem:supp-race-score, thm:supp-adm-frame, lem:supp-fast-clock, lem:supp-positive-krein-distinct, lem:supp-clifford-cell, cor:supp-lorentzian-square). (R2) separating_pairs (general: any model, any non-actual writer W, any second law) and entrance_separating_mechanisms (the manuscript's exact pairs on entranceGrammar: Bernoulli Pr(a)=1/4 vs 3/4; writer W actual in one model only with equal law; same plane with Gram I_2 and det_e(e)=+1 vs (-det_e)(e)=-1, i.e. omega(e1,e2)=+-1; T=S vs T=2S with equal winner law, absolute rates 1/2 vs 1/4 and survival e^{-t/Lambda} different): reducts isomorphic in Entrance (forgetting r), full models not isomorphic. (R3) ConservativeRefinement (refinement functorial on every reduct + discard functorial on full models undoing it): refinement_preserves_separation, no_reconstruction_after_refinement, no_functorial_reconstruction (no functor Rec with forgetRow r >> Rec iso identity), spectatorRefinement / cofinal_spectator_tower_separating (tensoring both members with the same spectator S_n at every cutoff n: separating at every cutoff, no full iso on any cofinal tail, no reconstruction at any cutoff). (R4) orientation_absorption: with an actual named Read and a decoder Z^x ~ sections, section and Read value determine one another; decoders are exactly d and its global reversal (decoder_eq_or_eq_reverse), so the choice is relocated, not reduced; without decoder no map from (occurrence set, Read value, law, calibration) to sections is correct. Bundled: relative_primitive_floor. Disclosed renderings: P+ is the conditional law (the comb positivity / causal-recursion data are functions of the probability table by thm:supp-comb-tomography and are not needed by any separating pair); the independent tensor with a spectator is rendered as the pair (M, S) with componentwise anchored isomorphisms (identified with the independent composite by prop:supp-grand-monoidal); a cofinal limit object is covered as any further ConservativeRefinement; the waiting law of T = Lambda S, S ~ Exp(1), is represented by its survival function. Standard axioms only."
+    "note": "Partial: (R1, own content) typedLaw_minimal_isTerminal (predictive row gives Z^min as terminal presentation), calibration_eq_inv_sum_absoluteRate (absolute rates recover Lambda), orientation_eq_or_eq_neg_anchor (Theta is one of the two sections); (R2) separating_pairs and entrance_separating_mechanisms (the manuscript's exact pairs for O, P+, Theta, Lambda: isomorphic reducts, non-isomorphic full models in the anchored groupoid Entrance); (R3) refinement_preserves_separation, no_reconstruction_after_refinement, no_functorial_reconstruction, cofinal_spectator_tower_separating; (R4) orientation_absorption with decoder_eq_or_eq_reverse; bundled in relative_primitive_floor. Disclosed renderings as before (P+ = conditional law; spectator composite = componentwise pair). Missing: the remaining sufficiency content of R1 is the conjunction of thm:supp-right-congruence, thm:supp-minimal-record, cor:supp-derived-state-machine, thm:supp-comb-tomography, lem:supp-contextual-ideal, thm:supp-word-flatness, lem:supp-race-score, thm:supp-adm-frame, lem:supp-fast-clock, lem:supp-positive-krein-distinct, lem:supp-clifford-cell, cor:supp-lorentzian-square; of these thm:supp-comb-tomography, lem:supp-contextual-ideal and lem:supp-race-score are conditional_interface after this audit.",
+    "difficulty": "medium",
+    "plan": "No new floor-specific Lean is needed: close thm:supp-comb-tomography (sequential isometric realization and its uniqueness), lem:supp-contextual-ideal (Hermitian-Read star-closure) and lem:supp-race-score (general finite index set incl. the twelve oriented branches, winner covariance), then re-promote this record citing them."
   },
   "thm:supp-calibration-fibre": {
     "env": "theorem",
@@ -1182,30 +1200,34 @@
       "RenewalGeometry/Dimension/DimensionPairwiseCompletionExact.lean:RenewalGeometry.FutureMinimalSerialCell.dimension_pairwise_completion_exact",
       "RenewalGeometry/Dimension/DimensionPairwiseCompletionExact.lean:RenewalGeometry.FutureMinimalSerialCell.boundary_is_oriented_edge"
     ],
-    "note": "dimension_pairwise_completion proves that a relation set R of unordered pairs invariant under a permutation group transitive on off-diagonal pairs and containing one off-diagonal pair contains every off-diagonal pair, i.e. the colour-free skeleton is K_N; the exact version adds the +1/-1 oriented-edge incidence of each primitive relation and the future-minimal parallel-label alternative. Scoped: the assumption's clauses enter as hypotheses on (Gamma, R)."
+    "note": "MinimalFaithfulRelationBranch.skeleton_complete derives lem:supp-pair-completion from the encoded assumption (ass:supp-relational-branch): the off-diagonal pair of any letter (exists_offDiag_relation, from source != target) and transitivity of the symmetry group on unordered distinct pairs plus invariance put every unordered pair of distinct endpoints in the relation set, i.e. the colour-free skeleton is K_N (dimension_pairwise_completion). dimension_pairwise_completion_exact adds the +1/-1 oriented-edge incidence of each relation and the future-minimal alternative for parallel labels (future-minimality removes only parallel labels, not endpoint pairs)."
   },
   "thm:supp-cut-cycle": {
     "env": "theorem",
     "title": "Cut--cycle decomposition",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Dimension/DimensionCutCycle.lean:RenewalGeometry.dimension_cut_cycle",
       "RenewalGeometry/Dimension/CompleteGraphCutCycleDecompositionExact.lean:RenewalGeometry.CompleteGraphCutCycle.dimension_cut_cycle_decomposition_exact",
       "RenewalGeometry/Dimension/CompleteGraphCutCycleDecompositionExact.lean:RenewalGeometry.CompleteGraphCutCycle.wedge_orthogonal_cycle"
     ],
-    "note": "Signed-edge (antisymmetric-matrix) rendering of Lambda^2 R^N with boundary = row sums: d(x∧y) = (Σy)x - (Σx)y, d(u0∧w) = -√N w for mean-zero w (opposite sign convention), Ran d = mean-zero subspace W_N, and the canonical orthogonal decomposition A = cutPart + cyclePart with d(cyclePart) = 0 and dA = 0 iff cutPart = 0 (Ker d = boundary-free currents = Lambda^2 W_N). Scoped: the dimension counts N-1 and C(N-1,2) appear as Ran d = W_N and the arithmetic identity N(N-1)/2 - (N-1) = (N-1)(N-2)/2, not as finrank statements."
+    "note": "Partial: dimension_cut_cycle (signed-edge rendering: Lambda^2 R^N = antisymmetric matrices, x^y = x y^T - y x^T, d = row sums, opposite sign convention): d(x^y) = (sum y)x - (sum x)y, d(u0 ^ w) = -sqrt N w for mean-zero w, every antisymmetric boundary is mean-zero and every mean-zero vector is a boundary (Ran d = W_N); dimension_cut_cycle_decomposition_exact: A = cutPart A + cyclePart A with cutPart = u0 ^ (cut vector in W_N), d(cyclePart) = 0, the two parts orthogonal for the edge inner product (wedge_orthogonal_cycle), and dA = 0 iff cutPart A = 0. Missing: Ker d = Lambda^2 W_N (span of wedges of mean-zero vectors), u0 ^ W_N as a subspace isomorphic to W_N, and finrank (Ran d) = N - 1, finrank (Ker d) = C(N-1,2).",
+    "difficulty": "easy",
+    "plan": "Prove finrank of the mean-zero hyperplane = N-1 and of antisymmetric N x N matrices = N(N-1)/2 (Mathlib skew-symmetric basis or explicit E_ij - E_ji basis); rank-nullity on d restricted to antisymmetric matrices gives finrank Ker = C(N-1,2); show Ker d = span {wedge w w' | sum w = sum w' = 0} (projection P = I - u0 u0^T: A = P A P for boundary-free antisymmetric A, expand in the wedge basis)."
   },
   "thm:supp-k4-selector": {
     "env": "theorem",
     "title": "Minimal faithful $K_4$ selector on the alternating simplex branch",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Dimension/DimensionK4Selector.lean:RenewalGeometry.dimension_K4_selector",
       "RenewalGeometry/Dimension/DimensionK4Classification.lean:RenewalGeometry.dimension_K4_selector_complete",
       "RenewalGeometry/Dimension/DimensionK4Classification.lean:RenewalGeometry.dimensionK4_twistedExteriorSquare_classification",
       "RenewalGeometry/Dimension/DimensionPairwise.lean:RenewalGeometry.dimension_pairwise_completion"
     ],
-    "note": "dimension_K4_selector proves (i) a nondegenerate alternating form forces even dimension (D1 with dim R t ⊕ W_N = N), (ii) for even N ≥ 3 (nonzero cycle source, D3) N ≥ 4 with r0 = N-1 ≥ 3, r1 = C(N,2) ≥ 6 and equality iff N = 4 (D4 minimality), (iii) the N = 4 oriented Hodge intertwiner; dimension_K4_selector_complete adds the coordinate form of eq. supp-oriented-copy (all sign-covariant alternating tensors vanish for N ≠ 4, unique scalar intertwiner at N = 4). Scoped: the faithful source ranks are encoded by the formulas N-1 and C(N,2) rather than derived from Gram faithfulness (D2); G_rel = K_4 is dimension_pairwise_completion and dim W_4 = 3 is not restated."
+    "note": "Partial: dimension_K4_selector: (i) a nondegenerate alternating real form forces even dimension; (ii) for even N >= 3: N >= 4, N-1 >= 3, C(N,2) >= 6 with equality of both iff N = 4 (the minimization); (iii) the N = 4 Hodge covariance A v x A w = det A A(v x w); dimension_K4_selector_complete adds the coordinate DS.6 classification; G_rel = K_4 is dimension_pairwise_completion. Missing: a theorem from the hypotheses themselves (alternating nondegenerate form on R t (+) W_N, faithful endpoint/edge Grams, nonzero cycle source, minimal source innovation) to N = 4, r0 = N-1, r1 = C(N,2), W_sp = W_4 with finrank 3.",
+    "difficulty": "easy",
+    "plan": "State dimension_K4_selector_from_hypotheses: given N, a nondegenerate alternating form on Fin 1 (+) W_N (finrank N, from finrank W_N = N-1), a nonzero boundary-free antisymmetric current (=> N >= 3 via finrank Ker d = C(N-1,2)), faithful (PosDef) endpoint and edge Grams (rank = finrank W_N = N-1 and finrank of antisymmetric matrices = C(N,2)), and minimality of (r0, r1) over admissible N, conclude N = 4, ranks (3, 6), skeleton K_4 (skeleton_complete) and finrank W_4 = 3. Reuses the finrank lemmas planned for thm:supp-cut-cycle."
   },
   "prop:supp-source-equivalence": {
     "env": "proposition",
@@ -1250,11 +1272,13 @@
   "lem:supp-race-score": {
     "env": "lemma",
     "title": "Winner--waiting score is faithful",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.relational_scheduler_ADM"
     ],
-    "note": "Clause (A3) integrates the race law k_a e^{-Kt} dt against s_b s_c with s_b = 1_{A=b} - k_b T and proves E[s_b s_c] = δ_bc k_b/K; clause (A3') proves the winner law k_b/K is invariant under a common rescaling of all rates. Scoped: the index set is the six root classes Fin 6 with rates k_a (not the twelve oriented branches; the computation is index-generic), and the covariance formula diag(p) - pp^T of the winner indicator is not stated (only the scale loss)."
+    "note": "Partial: relational_scheduler_ADM (A3): for six positive rates k_a, integrating the race density k_a e^{-Kt} against s_b s_c with s_b = 1_{A=b} - k_b T gives E[s_b s_c] = delta_bc k_b / K (diagonal positive Gram); (A3'): winner law k_b/K invariant under common rescaling. Missing: the same identity for an arbitrary finite index set (in particular Fin 12, the oriented branches b), and the winner-indicator covariance E[(1_{A=b} - p_b)(1_{A=c} - p_c)] = delta_bc p_b - p_b p_c with kernel containing the all-ones rate direction.",
+    "difficulty": "easy",
+    "plan": "Re-prove the (A3) integral identity for k : iota -> R over any Fintype iota (the computation only uses the exponential moments race_exp_moment and sum_a k_a = K), instantiate at Fin 12; add the finite covariance identity sum_a p_a (1_{a=b} - p_b)(1_{a=c} - p_c) = delta_bc p_b - p_b p_c and show the rate-derivative of p in the direction k is zero (scale loss)."
   },
   "thm:supp-adm-frame": {
     "env": "theorem",
@@ -1309,7 +1333,7 @@
       "RenewalGeometry/Predictive/OperationalEntranceCategory.lean:RenewalGeometry.OperationalEntrance.separating_reverseOrientation",
       "RenewalGeometry/Predictive/OperationalEntranceCategory.lean:RenewalGeometry.OperationalEntrance.relative_primitive_floor"
     ],
-    "note": "Proved. supp_signature_minimality_with_floor (Krein/SignatureMinimalityOrientationFloor.lean) bundles (a) the independence premise, now a theorem rather than a hypothesis: for every finite typed operational-predictive model M over any anchored grammar (Predictive/OperationalEntranceCategory.lean), reversing the protected orientation keeps occurrence, complete predictive law and calibration, is an anchored separating pair for the orientation row, and stays separating under every common conservative refinement (thm:supp-relative-primitive-floor, now proved as relative_primitive_floor); (b) the positive packet has no negative direction (quadForm D >= 0, negInertia D = 0); (c) the one-line signed extension (def:main-signed-extension: negative-definite line form c < 0 adjoined orthogonally to the positive spatial form D on W_4 = Fin 3) has c = -a^2 for a unique a > 0, q(tau t + w) = -a^2 tau^2 + g(w,w), inertia (1,3,0), (3,1,0) for -q, and Sylvester invariance under every invertible change of basis (supp_signature_minimality, unchanged). No gamma matrices are used. Non-vacuity example with c = -1, D = 1 included. The previous corollary-policy block (open thm:supp-relative-primitive-floor) is lifted since that record is now proved in this batch."
+    "note": "Proved. supp_signature_minimality_with_floor (Krein/SignatureMinimalityOrientationFloor.lean) bundles (a) the independence premise, now a theorem rather than a hypothesis: for every finite typed operational-predictive model M over any anchored grammar (Predictive/OperationalEntranceCategory.lean), reversing the protected orientation keeps occurrence, complete predictive law and calibration, is an anchored separating pair for the orientation row, and stays separating under every common conservative refinement (the orientation separating pair of the proof of thm:supp-relative-primitive-floor, proved directly as separating_reverseOrientation + refinement_preserves_separation; the rest of that open record, in particular its R1 sufficiency content, is not used); (b) the positive packet has no negative direction (quadForm D >= 0, negInertia D = 0); (c) the one-line signed extension (def:main-signed-extension: negative-definite line form c < 0 adjoined orthogonally to the positive spatial form D on W_4 = Fin 3) has c = -a^2 for a unique a > 0, q(tau t + w) = -a^2 tau^2 + g(w,w), inertia (1,3,0), (3,1,0) for -q, and Sylvester invariance under every invertible change of basis (supp_signature_minimality, unchanged). No gamma matrices are used. Non-vacuity example with c = -1, D = 1 included. thm:supp-relative-primitive-floor itself is conditional_interface (open R1 sufficiency), but the theorem uses only the orientation separating pair, which is proved here directly."
   },
   "lem:supp-clifford-cell": {
     "env": "lemma",
@@ -1357,7 +1381,7 @@
   "thm:supp-action-stationarity": {
     "env": "theorem",
     "title": "Quantitative accepted-action stationarity",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.integral_bregman_le",
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.integral_sq_le",
@@ -1366,12 +1390,14 @@
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.resid_sq_le",
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.grad_action_sq_le"
     ],
-    "note": "Kernel-integrated conclusions for a stationary law K∘ν = ν of the accepted kernel: ∫D_Ψ ≤ η Δ̄, ∫‖y-θ‖^2 ≤ (2η/m) Δ̄, and ∫S dν ≤ (4Λ_Φ/m + 4M^2(1+ηℓ)^2/(m^2 η)) Δ̄ for every 0 ≤ S ≤ m^{-1}‖∇A‖^2 (the G^{-1} ⪯ m^{-1}I rendering of the stationarity form); the Lean constant 4Λ_Φ/m is ≤ the paper's 4Λ_Φ^2/(m μ_Φ) because Λ_Φ ≥ μ_Φ, so the paper's admissible constant follows. Scoped: the Hessian bounds are rendered by gradient monotonicity/Lipschitz inequalities, y*_θ is assumed a global minimizer of Φ_θ, and integrability of A and of the gap under ν⊗K is assumed."
+    "note": "Partial (whole-space chart Theta = E): with m||a-b||^2 <= <grad Psi a - grad Psi b, a-b> <= M||a-b||^2, grad Psi M-Lipschitz, relative upper bound <grad A a - grad A b, a - b> <= L <grad Psi a - grad Psi b, a-b>, grad A (max(lambda,L) M)-Lipschitz, ystar a global minimizer of Phi_theta and K o nu = nu: integral_bregman_le (int D_Psi <= eta Deltabar), integral_sq_le (int ||y-theta||^2 <= (2 eta/m) Deltabar), integral_stationarity_form_le (int S dnu <= (4 Lambda_Phi/m + 4M^2(1+eta l)^2/(m^2 eta)) Deltabar for every 0 <= S <= m^{-1}||grad A||^2, which implies the paper's constant), vanishing_gap_forces_stationarity. Missing: the statement on a compact convex chart Theta (hypotheses only on Theta, interior minimizers), where the descent-lemma route is unavailable, and the derivation nu K^acc = nu from the lazy kernel.",
+    "difficulty": "medium",
+    "plan": "Restate the pointwise layer on a convex set Theta in E (all gradient/monotonicity hypotheses for a, b in Theta, Psi and A differentiable on a neighbourhood), ystar theta in Theta minimizing Phi_theta over Theta with interiority encoded as gradient Phi_theta(ystar theta) = 0, kernel/coupling supported in Theta x Theta; prove ||y - y*||^2 <= 2 Delta / mu_Phi (strong convexity, mu_Phi = (eta^-1 - lambda) m) and ||grad Phi(y)||^2 <= Lambda_Phi^2 ||y - y*||^2, giving the paper's C_1 = 4 Lambda_Phi^2/(m mu_Phi) without the whole-space descent lemma; derive nu K^acc = nu from stationarity of the lazy kernel (1-theta) I + theta K^acc. The integral layers then go through unchanged."
   },
   "prop:supp-nonstationary-action-gap": {
     "env": "proposition",
     "title": "Action-gap control for nonstationary marginals",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.action_bregman_le_gap",
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.resid_sq_le",
@@ -1392,12 +1418,14 @@
       "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.integral_stationarity_form_le_coupling_paper",
       "RenewalGeometry/Action/NonstationaryActionGapExact.lean:RenewalGeometry.BregmanStationarity.physical_test_nonstationary"
     ],
-    "note": "Proved (NonstationaryActionGapExact.lean, importing the pointwise layer of the stationary theorem). On the convex chart of thm:supp-action-stationarity (Psi with m I <= Hess Psi <= M I and A with -lambda G <= D^2 A <= L G rendered through gradients, proximal minimizer y*_theta, gap Delta_Psi) and for ANY measure pi on E x E with source marginal alpha = pi o fst^-1 and target beta = pi o snd^-1 (no invariant law), with Delta-bar_pi = E_pi Delta_Psi and d_A = E_alpha A - E_beta A (actionDrop): E_pi D_Psi(y,theta) <= eta (Delta-bar_pi + d_A) (integral_bregmanD_le_coupling, first bound of eq:supp-nonstationary-gap); E_pi ||y - theta||^2 <= (2 eta/m)(Delta-bar_pi + d_A) (integral_sq_le_coupling); for any stationarity form 0 <= S <= m^-1 ||grad A||^2, E_alpha S <= (4 Lambda_Phi/m + C_2) Delta-bar_pi + C_2 d_A with the sharp proximal constant (integral_stationarity_form_le_coupling) and, since 4 Lambda_Phi/m <= C_1 = 4 Lambda_Phi^2/(m mu_Phi) when mu_Phi = (eta^-1 - lambda) m > 0 and m <= M (proximal_constant_le_paper), E_alpha S <= (C_1 + C_2) Delta-bar_pi + C_2 (d_A)_+ with the displayed constants and the positive part (integral_stationarity_form_le_coupling_paper, second bound); for a represented physical test lift v with Gram budget <v, G v> <= b = B(k)^2 on the positive chart Gram G >= m I, E_alpha |D A[v(k)]|^2 <= B(k)^2 [(C_1 + C_2) Delta-bar_pi + C_2 (d_A)_+] (physical_test_nonstationary, eq:supp-nonstationary-test); equal marginals give d_A = 0 and recover the stationary estimates (actionDrop_eq_zero_of_marginals_eq). Scoped hypotheses as in the stationary record: integrability of A under both marginals and of the gap under pi; the interiority hypothesis enters as mu_Phi > 0 and m <= M (automatic when E != 0)."
+    "note": "Partial (whole-space chart): for any coupling pi with marginals alpha, beta: E_pi D_Psi <= eta (Deltabar_pi + d_A) (integral_bregmanD_le_coupling), E_pi ||y-theta||^2 <= (2 eta/m)(Deltabar_pi + d_A), E_alpha S <= (C_1 + C_2) Deltabar_pi + C_2 (d_A)_+ with the paper's displayed constants (integral_stationarity_form_le_coupling_paper, via proximal_constant_le_paper), the physical-test estimate eq:supp-nonstationary-test (physical_test_nonstationary), and equal marginals => d_A = 0 (actionDrop_eq_zero_of_marginals_eq). Missing: the same on the compact convex chart Theta with interior minimizers (hypotheses restricted to Theta, coupling supported in Theta x Theta).",
+    "difficulty": "medium",
+    "plan": "Restate the pointwise layer on a convex set Theta in E (all gradient/monotonicity hypotheses for a, b in Theta, Psi and A differentiable on a neighbourhood), ystar theta in Theta minimizing Phi_theta over Theta with interiority encoded as gradient Phi_theta(ystar theta) = 0, kernel/coupling supported in Theta x Theta; prove ||y - y*||^2 <= 2 Delta / mu_Phi (strong convexity, mu_Phi = (eta^-1 - lambda) m) and ||grad Phi(y)||^2 <= Lambda_Phi^2 ||y - y*||^2, giving the paper's C_1 = 4 Lambda_Phi^2/(m mu_Phi) without the whole-space descent lemma; derive nu K^acc = nu from stationarity of the lazy kernel (1-theta) I + theta K^acc. The integral layers then go through unchanged. Then rewire NonstationaryActionGapExact to the chart pointwise layer."
   },
   "prop:supp-physical-test-stationarity": {
     "env": "proposition",
     "title": "Cutoff-aware stationarity on the determining test core",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Action/PhysicalTestStationarityExact.lean:RenewalGeometry.BregmanStationarity.physical_test_stationarity",
       "RenewalGeometry/Action/PhysicalTestStationarityExact.lean:RenewalGeometry.BregmanStationarity.inner_sq_le_of_gram_budget",
@@ -1409,12 +1437,14 @@
       "RenewalGeometry/Action/PhysicalTestStationarityExact.lean:RenewalGeometry.physical_test_stationarity_core",
       "RenewalGeometry/Action/AcceptedBregmanStationarityExact.lean:RenewalGeometry.BregmanStationarity.integral_stationarity_form_le"
     ],
-    "note": "Proved as three theorems matching the three claims. (1) eq:main-physical-stationarity (physical_test_stationarity): in the chart setting of thm:supp-action-stationarity (AcceptedBregmanStationarityExact: Fisher potential, common action, accepted Markov kernel with stationary probability law nu, all the chart constants), with the positive chart Gram G(theta) >= m I and a represented test lift v with budget <v,G v> <= b = B_{X,K}(k)^2 (eq:main-test-lift-budget; the sup over supp nu is encoded as a bound at every field value) and measurable first variation <grad A, v>, one gets E_nu <grad A(theta), v(theta)>^2 <= b * C_X * Delta-bar with C_X the boxed constant of integral_stationarity_form_le; the duality step is inner_sq_le_of_gram_budget (|<g,v>|^2 <= m^{-1}|g|^2 <v,Gv>). (2) mean-square convergence on the core under eq:supp-scaled-test-gap: tendsto_meanSquare_of_scaled_gap (squeeze). (3) common coupling: on one measure space carrying the cutoff variables Y X m (cutoff X : N, core test m : N) with E[(Y X m)^2] <= b X m -> 0 in X for every m, exists_subseq_ae_tendsto_of_meanSquare / _of_integral_sq_le produce a strictly increasing deterministic cutoff sequence phi along which a.e. every Y (phi j) m -> 0; proof = the paper's diagonal choice b(phi j, m) <= 2^-j for m <= j (exists_strictMono_diagonal), Tonelli (lintegral_tsum) + ae_lt_top' for the a.s. finite sum, terms -> 0, and ae_all_iff over the countable core; no independence used. physical_test_stationarity_core bundles (2)+(3). Disclosed: (1) and (2)-(3) are separate theorems (the coupling is abstracted as second-moment bounds b X m, which (1) supplies cutoff by cutoff); the remark on extending zero from the core to all determining tests by uniform continuity is not formalised (it is not part of the statement)."
+    "note": "Partial: physical_test_stationarity (whole-space chart): E_nu <grad A, v>^2 <= b C_X Deltabar via inner_sq_le_of_gram_budget and integral_stationarity_form_le; tendsto_meanSquare_of_scaled_gap (squeeze); exists_subseq_ae_tendsto_of_meanSquare / _of_integral_sq_le with exists_strictMono_diagonal (deterministic strictly increasing cutoffs, Tonelli, countable core, no independence); bundled physical_test_stationarity_core. Missing: clause 1 on the compact convex chart of thm:supp-action-stationarity (inherits that record's gap).",
+    "difficulty": "medium",
+    "plan": "After the chart version of thm:supp-action-stationarity exists, re-derive physical_test_stationarity from it (the duality step inner_sq_le_of_gram_budget and clauses 2-3 are unchanged); optionally restrict the budget to theta in supp nu."
   },
   "cor:supp-gibbs-gap": {
     "env": "corollary",
     "title": "Finite Gibbs/KL certificate",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Action/FiniteGibbsActionGap.lean:RenewalGeometry.finite_gibbs_action_gap_exact",
       "RenewalGeometry/Action/FiniteGibbsActionGap.lean:RenewalGeometry.entropyProximalObjective_gap",
@@ -1422,7 +1452,9 @@
       "RenewalGeometry/Action/FiniteGibbsActionGap.lean:RenewalGeometry.finiteKL",
       "RenewalGeometry/Action/FiniteGibbsActionGap.lean:RenewalGeometry.stationary_gibbs_gap_eq_zero_iff"
     ],
-    "note": "For a strictly positive finite reference row p, cost c and η > 0, the Gibbs row q* of eq. main-gibbs-row is a strictly positive probability row, uniquely minimizes Σ q c + η^{-1} KL(q‖p), and the excess objective of any row q equals exactly η^{-1} KL(q‖q*) (zero iff q = q*). Scoped: the compared row (K^acc(·|θ)) must be strictly positive."
+    "note": "Partial: finite_gibbs_action_gap_exact: for p > 0, eta > 0 the Gibbs row q* = p e^{-eta c}/Z is a strictly positive probability row, and for every strictly positive probability row q: Obj(q) - Obj(q*) = eta^{-1} KL(q || q*), Obj(q*) <= Obj(q), equality iff q = q* (entropyProximalObjective_gap gives Obj(q) = eta^{-1} KL(q||q*) - eta^{-1} log Z); stationary_gibbs_gap_eq_zero_iff for strictly positive kernels. Missing: the same for probability rows with zero entries (0 log 0 = 0, which finiteKL already implements since Real.log 0 = 0), hence uniqueness of q* over the full simplex and the gap identity for accepted rows with zeros.",
+    "difficulty": "easy",
+    "plan": "Extend log_ratio_gibbsRow / entropyProximalObjective_gap to q >= 0 by splitting the sum over supp q (terms with q y = 0 vanish on both sides because Real.log 0 = 0 and 0 * x = 0); prove Gibbs' inequality finiteKL q r >= 0 with equality iff q = r for q >= 0, r > 0 (e.g. via Real.add_pow_le_pow_mul_pow_of_add_eq_one or klFun with q/r >= 0); restate finite_gibbs_action_gap_exact with (forall y, 0 <= q y)."
   },
   "thm:supp-face-linearization": {
     "env": "theorem",
@@ -1484,7 +1516,7 @@
   "thm:supp-palatini-torsion": {
     "env": "theorem",
     "title": "Connection stationarity and the torsion alternative",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/PotentialPalatini.lean:RenewalGeometry.palatini_torsion_core",
       "RenewalGeometry/Gravity/PalatiniConnectionVariationExact.lean:RenewalGeometry.PalatiniConnectionVariation.connectionAction_increment",
@@ -1493,7 +1525,9 @@
       "RenewalGeometry/Gravity/CartanInjectivityExact.lean:RenewalGeometry.CartanInjectivity.cartan_injective",
       "RenewalGeometry/Gravity/CartanInjectivityExact.lean:RenewalGeometry.CartanInjectivity.spinless_torsion_zero"
     ],
-    "note": "palatini_torsion_core proves the two-sided inverse of αI + β⋆ from ⋆^2 = -1 (the Lean names the ⋆-coefficient α, same identity as eq. supp-palatini-inverse) and ‖T‖ ≤ κ^{-1}‖w‖ from a singular-value floor; connection_stationarity_euler derives -D(PB) - Σ = 0 from stationarity against every perturbation, given the covariant integration-by-parts identity as a hypothesis; cartan_injective proves injectivity of K_e(T) = T^I∧e^J - e^I∧T^J by the coefficient index chase on Fin 4; the packet combines these into T = 0. Scoped: the identification of the Euler source with P_{α,β} K_e(T) enters as a hypothesis (hCartanStationary), and injectivity is passed to the packet as a hypothesis discharged by cartan_injective."
+    "note": "Partial: palatini_torsion_core proves the two-sided inverse (alpha I + beta star)^{-1} from star^2 = -1 (Lean's coefficient names are swapped relative to eq:supp-palatini-inverse) and ||T|| <= kappa^{-1}||K T|| from a singular-value floor; connection_stationarity_euler derives -D(PB) - Sigma = 0 from stationarity of an affine-in-the-connection functional <deltaR(omega), PB> - <omega, Sigma> given the covariant integration-by-parts identity as a hypothesis; cartan_injective proves injectivity of K_e(T)^{IJ} = T^I wedge e^J - e^I wedge T^J by the coefficient index chase in the coframe basis on Fin 4. Missing: (i) the identity D(P_{alpha,beta} B) = P_{alpha,beta} K_e(T) (Leibniz rule D(e^I wedge e^J) = T^I wedge e^J - e^I wedge T^J), so 'connection stationarity implies T = 0' is not proved: the packet takes P(K T) = P(K z) as hypothesis hCartanStationary, unrelated to the derived Euler equation; (ii) the actual Palatini-Holst action (curvature quadratic in the connection) is replaced by an affine functional; (iii) the finite-cutoff estimate controls ||T|| by ||K_e T|| instead of by the connection Euler residual (no ||P^{-1}|| composition); (iv) reduction from a general nondegenerate coframe to the coordinate coframe is not formalised.",
+    "difficulty": "medium",
+    "plan": "In a coefficient model on Fin 4 (forms as alternating coefficient arrays, connection one-form omega^{IJ}_mu, coframe e^I_mu invertible), define the exterior covariant derivative of Lambda^2-valued two-forms and prove D(e^I wedge e^J) = T^I wedge e^J - e^I wedge T^J with T = De; derive D(P B) = P K_e(T) for constant P; combine with connection_stationarity_euler (spin = 0) so that stationarity gives P K_e(T) = 0, then cartan_injective (after change of basis by the invertible coframe) and P^{-1} give T = 0; state the cutoff bound ||T|| <= kappa^{-1} ||P^{-1}|| ||Euler residual|| with ||P^{-1}|| = (alpha^2+beta^2)^{-1/2} for the isometric star."
   },
   "def:supp-spatial-dirichlet": {
     "env": "definition",
@@ -1542,7 +1576,7 @@
   "lem:supp-nash-counting": {
     "env": "lemma",
     "title": "Nash inequality, ultracontractivity, and spectral counting",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylExact.lean:RenewalGeometry.finite_nash_from_sobolev",
       "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylExact.lean:RenewalGeometry.FiniteHeatColumn.l2_decay",
@@ -1551,7 +1585,9 @@
       "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylFiniteGraph.lean:RenewalGeometry.FiniteWeightedGraph.positiveHeatTrace_bound",
       "RenewalGeometry/DiscreteAnalysis/OperationalSobolevWeylFiniteGraph.lean:RenewalGeometry.FiniteWeightedGraph.eigenvalueCount_bound"
     ],
-    "note": "Nash: (Σ μ f^2)^{5/3} ≤ C_S E(f) (Σ μ|f|)^{4/3} from the L^6 Sobolev bound; the heat differential inequality is integrated (FiniteHeatColumn.l2_decay) to ‖T(t)f‖_2^2 ≤ ‖f‖_1^2 (3C_S/(4t))^{3/2}, giving Tr T(t) ≤ 4V*(3C_S/(2t))^{3/2} on the actual weighted-graph spectrum and N(R) ≤ 1 + 4e^{3/2} V* (C_S R)^{3/2} at t = 3/(2R). Scoped: the ultracontractive bound is formalized through the mean-zero heat columns ‖T(t/2)δ_v‖ and the diagonal trace identity rather than as an explicit L^1→L^∞ operator norm."
+    "note": "Partial: finite_nash_from_sobolev gives (sum mu f^2)^{5/3} <= C_S E(f) (sum mu|f|)^{4/3} from the L^6 Sobolev bound (combined with finite_meanZero_L6_sobolev for mean-zero f); FiniteHeatColumn.l2_decay integrates the Nash differential inequality to ||T(t)f||_2^2 <= ||f||_1^2 (3C_S/(4t))^{3/2}; positiveHeatTrace_bound gives Tr T(t) <= 4V*(3C_S/(2t))^{3/2} on the actual weighted-graph spectrum through the mean-zero heat columns T(t/2)delta_v (l1 <= 2) and the diagonal trace identity; eigenvalueCount_bound gives N(R) <= 1 + 4e^{3/2} V*(C_S R)^{3/2}. Missing: eq:supp-ultracontractive, the L^1 -> L^infinity operator-norm bound of T_X(t) (equivalently sup_{v,w} |K_t^0(v,w)| <= 4(3C_S/(2t))^{3/2}), is not stated.",
+    "difficulty": "easy",
+    "plan": "In OperationalSobolevWeylFiniteGraph.lean define the mu-kernel K_t^0(v,w) of T(t) = e^{-t Delta}P_0, show K_t^0(v,w) = <col_v(t/2), col_w(t/2)>_mu by the semigroup property and self-adjointness (positiveHeatColumn identities already exist), bound it by Cauchy-Schwarz with the proved column bound ||col_v(t/2)||^2 <= 4(3C_S/(2t))^{3/2}, and conclude sup_x |T(t)f(x)| <= 4(3C_S/(2t))^{3/2} sum mu|f| for all f."
   },
   "thm:supp-spatial-screen": {
     "env": "theorem",
@@ -1583,13 +1619,15 @@
   "prop:supp-compact-upgrade": {
     "env": "proposition",
     "title": "Compact positive-screen upgrade",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/OperatorLimits/SMSTPositiveScreenExact.lean:RenewalGeometry.SMSTChannel.screen_strong_convergence",
       "RenewalGeometry/OperatorLimits/SMSTPositiveScreenExact.lean:RenewalGeometry.SMSTChannel.strong_convergence_transfer",
       "RenewalGeometry/OperatorLimits/SMSTPositiveScreenExact.lean:RenewalGeometry.SMSTChannel.WeakTendsto"
     ],
-    "note": "screen_strong_convergence: a norm-bounded weakly convergent sequence Z_n ⇀ Z with screens S_{n,R} → S_R in operator norm, S_R completely continuous (the Hilbert-space form of compactness) and uniformly small tails converges strongly (the explicit four-term split); strong_convergence_transfer passes strong convergence through a uniformly bounded strongly convergent operator family (A_X^{-1/2} → A^{-1/2}), giving Y_X → Y. Scoped: boundedness of Z_n is a hypothesis rather than derived from weak convergence, and the final L^1 convergence of bounded quadratic insertions is not restated."
+    "note": "Partial: screen_strong_convergence: a norm-bounded weakly convergent Z_n -> Z with S_{n,R} -> S_R in operator norm, S_R completely continuous (Hilbert-space form of compactness) and uniformly small tails converges strongly (four-term split); strong_convergence_transfer passes strong convergence through a uniformly bounded strongly convergent operator family (A_X^{-1/2} -> A^{-1/2}), giving A_X^{-1/2}Z_X -> A^{-1/2}Z. Missing: (i) the clause 'every bounded quadratic insertion in Y_X converges in L^1' (||B(Y_X,Y_X) - B(Y,Y)||_1 <= C||Y_X - Y||_2(||Y_X||_2 + ||Y||_2)) is not formalised; (ii) sup_n ||Z_n|| < infinity is a hypothesis instead of being derived from weak convergence (uniform boundedness); (iii) the limit A^{-1/2}Z is not identified with the weak limit Y of Y_X, and the coercivity mI <= A_X <= MI is replaced by a bare operator-norm bound.",
+    "difficulty": "easy",
+    "plan": "Derive boundedness of a weakly convergent sequence from Banach-Steinhaus (Mathlib banach_steinhaus / WeakSpace boundedness); conclude Y = A^{-1/2}Z by uniqueness of weak limits (strong convergence implies weak); derive ||A_X^{-1/2}|| <= m^{-1/2} from mI <= A_X; add the corollary for a bounded bilinear B : H x H -> L^1 (or pointwise bilinear with Holder) giving B(Y_X,Y_X) -> B(Y,Y) by the split B(Y_X - Y, Y_X) + B(Y, Y_X - Y)."
   },
   "lem:supp-coframe-interpolation": {
     "env": "lemma",
@@ -1619,7 +1657,7 @@
       "RenewalGeometry/Gravity/DiscreteCurvatureCertificateExact.lean:RenewalGeometry.one_add_div_one_sub_le_exp",
       "RenewalGeometry/Gravity/DiscreteCurvatureCertificateExact.lean:RenewalGeometry.sum_norm_le_sqrt_weighted"
     ],
-    "note": "Proved on a finite-dimensional real inner-product space (the normalized record space): for the recorded midpoint update eq:main-discrete-curvature-update with K_j skew (encoded <K x, y> = -<x, K y>), (L_j+L_j^T)/2 <= a_j I (encoded <x, L x> <= a_j |x|^2), |T_j|_op <= e^{d_j}, a_j, d_j >= 0, s_j > 0 and s_j a_j/2 <= b < 1 (all for j < M), each recorded linear step w - (s_j/2)(K_j+L_j)w = r is uniquely solvable and the boxed eq:main-discrete-curvature-bound holds for every j <= M (i.e. for max_j): |Y_j| <= exp(D + A/(1-b)) (|Y_0| + sqrt(T D_X)/(1-b)) with the budgets eq:main-discrete-curvature-budgets. The skew part cancels by pairing with the midpoint before norms are taken; no restriction on s_j |K_j|_op is used. Scoped out (disclosed): the final sentence (uniform L^2(K) curvature bound from stable interval interpolation, lapse bound and reconstruction error) is the same analytic interpolation abstraction as thm:main-curvature-propagation and is not formalised."
+    "note": "Proved on a finite-dimensional real inner-product space (the normalized record space): for the recorded midpoint update eq:main-discrete-curvature-update with K_j skew (<K x, y> = -<x, K y>), (L_j+L_j^T)/2 <= a_j I (<x, L x> <= a_j |x|^2), |T_j|_op <= e^{d_j}, a_j, d_j >= 0, s_j > 0 and s_j a_j/2 <= b < 1 (all j < M), each recorded linear step w - (s_j/2)(K_j+L_j)w = r is uniquely solvable and eq:main-discrete-curvature-bound holds for every j <= M: |Y_j| <= exp(D + A/(1-b)) (|Y_0| + sqrt(T D_X)/(1-b)) (discrete_curvature_certificate). The skew part cancels by pairing with the midpoint; no restriction on s_j |K_j|_op is used. Final sentence: supplement_discrete_curvature restates the certificate for raw records with the Gram transfer T_j = M_{j+1}^{1/2} T_j M_j^{-1/2} (gramTransfer) and, with stable interval interpolation rho(t) <= C_I |Y_{j(t)}|, lapse 0 <= N <= N_* and the slice/reconstruction budget |R_X|_{L^2(K)} <= sqrt(int N rho^2) + C_zeta supplied as hypotheses (the same abstraction as derived_l2_curvature_bound for thm:main-curvature-propagation), gives |R_X|_{L^2(K)} <= C_I sqrt(N_* T_X) e^{D_X + A_X/(1-b)}(|Y_0| + sqrt(T_X D_X)/(1-b)) + C_zeta, hence sup_X |R_X|_{L^2(K)} < infinity under uniform budgets."
   },
   "prop:main-action-current": {
     "env": "proposition",
@@ -1660,7 +1698,7 @@
   "cor:supp-stochastic-curvature": {
     "env": "corollary",
     "title": "Expected curvature energy and a sufficient pathwise upgrade",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/SupplementStochasticCurvature.lean:RenewalGeometry.expected_curvature_energy_bound",
       "RenewalGeometry/Gravity/SupplementStochasticCurvature.lean:RenewalGeometry.expected_curvature_energy_bound_of_writer",
@@ -1671,7 +1709,9 @@
       "RenewalGeometry/Gravity/SupplementStochasticCurvature.lean:RenewalGeometry.lintegral_gramNormSq_source_le",
       "RenewalGeometry/Gravity/CurvatureEnergyPropagationExact.lean:RenewalGeometry.curvature_energy_uniform_bound"
     ],
-    "note": "Proved. Expectations are Lebesgue integrals ∫⁻ ofReal(·) of the nonnegative energies (no integrability in ω assumed). expected_curvature_energy_bound: from the pathwise estimate sup_t z ≤ e^{A_*}(z(0)+∫‖f‖_H), the incidence f = 𝖳𝔞 + r with deterministic bound Γ_X(ω,t) ≤ Γ̄(t) and 𝔼‖𝔞(t)‖²_{G⁻¹} ≤ C(t)Δ(t), derives eq:supp-expected-curvature 𝔼 sup z² ≤ 2e^{2A_*}[𝔼 z(0)² + 2T_*∫Γ̄CΔ + 2T_* 𝔼∫‖r‖²_H] (squaring, time Cauchy–Schwarz, eq:supp-curvature-source-budget, Tonelli via lintegral_lintegral_swap). expected_curvature_energy_bound_of_writer derives the pathwise estimate from the finite propagation equation holding pathwise (curvature_energy_uniform_bound = thm:main-curvature-propagation, ∫a ≤ A_* deterministic), so no unproved parent is assumed. pathwise_curvature_upgrade: eq:supp-pathwise-source-budget (sup_X z_X(0) < ∞ a.s., Σ_X 𝔼∫‖f_X‖² < ∞) gives via lintegral_tsum + ae_lt_top' a.s. uniform bounds sup_X sup_t z_X(t) < ∞; pathwise_l2_curvature_upgrade adds the pathwise interpolation/lapse/boundary budgets (derived_l2_curvature_bound abstraction) and gives sup_X ‖R_X‖_{L²(K)} < ∞ a.s. Scoped: Gram square roots as data; per path ‖f‖_H ∈ L²[0,T_*]; a.e.-measurability of Γ̄(t)‖𝔞(ω,t)‖²_{G⁻¹} on Ω×[0,T_*] and in t, of the initial energy, and of the integrated source energies; μ s-finite. The middle sentence (uniform expected L² curvature norm) is the same interpolation abstraction as derived_l2_curvature_bound and is not restated in expectation."
+    "note": "Partial: expected_curvature_energy_bound proves eq:supp-expected-curvature, E sup z^2 <= 2e^{2A*}[E z(0)^2 + 2T* int Gamma_bar C Delta + 2T* E int ||r||_H^2] (expectations as lintegrals, deterministic Gamma_X(omega,t) <= Gamma_bar(t), E||a(t)||^2_{G^{-1}} <= C(t)Delta(t), Tonelli), and expected_curvature_energy_bound_of_writer derives its pathwise input from the finite propagation equation (curvature_energy_uniform_bound, int a <= A* deterministic); pathwise_curvature_upgrade gives a.s. sup_X sup_t z_X(t) < infinity from eq:supp-pathwise-source-budget (lintegral_tsum, ae_lt_top'), and pathwise_l2_curvature_upgrade gives a.s. sup_X ||R_X||_{L^2(K)} < infinity with the interpolation/lapse/reconstruction budgets in the derived_l2_curvature_bound abstraction. Scoped: Gram square roots as data, per-path ||f||_H in L^2[0,T*], a.e.-measurability hypotheses, mu s-finite. Missing: the sentence 'together with the stable interpolation and lapse bounds, uniformity of these budgets gives a uniform expected squared spacetime curvature norm' (sup_X E||R_X||^2_{L^2(K)} < infinity) is not stated.",
+    "difficulty": "easy",
+    "plan": "In SupplementStochasticCurvature.lean square derived_l2_curvature_bound pathwise (||R_X||^2 <= 2 C_I^2 N* T* sup_t z_X^2 + 2C_zeta^2), integrate in omega (lintegral_mono) and combine with expected_curvature_energy_bound to get E||R_X||^2_{L^2(K)} <= 2C_I^2 N* T* (RHS of eq:supp-expected-curvature) + 2C_zeta^2, uniform in X under uniform budgets."
   },
   "lem:supp-literal-link-evolution": {
     "env": "lemma",
@@ -1696,7 +1736,7 @@
     "title": "Connection compactness on a common physical cylinder",
     "status": "statement_encoded",
     "lean": [],
-    "note": "Non-theorem environment (declaration/bookkeeping); formal counterparts are the hypothesis arguments of the proved theorems referencing it."
+    "note": "Assumption (no theorem content). Formal counterparts: the property asserted (a single strictly increasing subsequence along which the interpolated full connections converge in L^2((0,T_j] x T^3) on every cylinder of a countable family, all in one common trivialization) is the conclusion of HodgeConnection.hodge_connection_exhaustion (thm:main-hodge-connection realizes it from the finite Hodge-temporal budget); where the assumption is consumed (thm:supp-curvature-compactness, thm:supp-interface-curvature) it enters as the hypothesis DistributionalCurvature.StrongL2LocTendsto (strong L^2 convergence on every compact subset of int K). The clauses on frame identifications, overlap control and absence of unrecorded gauge transformations are bookkeeping conventions with no separate formal content (one common trivialization is used throughout)."
   },
   "thm:main-hodge-connection": {
     "env": "theorem",
@@ -1816,7 +1856,7 @@
   "lem:supp-weak-strong-palatini": {
     "env": "lemma",
     "title": "Weak--strong curvature pairing and volume convergence",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.curvature_pairing_tendsto_of_coframe_interpolation",
       "RenewalGeometry/Gravity/PalatiniWeakStrongLimitExact.lean:RenewalGeometry.PalatiniWeakStrongLimit.palatini_and_holst_pairings_tendsto",
@@ -1824,7 +1864,9 @@
       "RenewalGeometry/Gravity/PalatiniDeterminantVolumeExact.lean:RenewalGeometry.PalatiniDeterminantVolume.tendsto_diagonal_fourLinear",
       "RenewalGeometry/Gravity/PalatiniDeterminantVolumeExact.lean:RenewalGeometry.PalatiniDeterminantVolume.determinantVolume_tendsto_of_coframe_interpolation"
     ],
-    "note": "Abstract normed-space form of the lemma: for a bounded bilinear pairing B (the coefficient tensor Φ, with or without an internal Hodge star), strong convergence of the coframe bivector wedge(e_i, e_i) (obtained from the interpolation estimate ‖e_i - e‖ ≤ C·low_i^θ with low_i → 0) and norm-bounded weak (WeakSpace) convergence R_i ⇀ R give B(e_i∧e_i)(R_i) → B(e∧e)(R); the fourfold volume density converges as the diagonal of a bounded 4-linear map. Scoped: L^p(K) spaces are abstracted to normed spaces, ‖R_i‖ ≤ C is assumed rather than derived from weak convergence, and the coframe interpolation estimate is an input (its Hölder form is FiniteMeasureL2L6InterpolationExact)."
+    "note": "Partial: curvature_pairing_tendsto_of_coframe_interpolation / palatini_and_holst_pairings_tendsto: for abstract normed spaces, a bounded bilinear 'wedge' E x E -> Biv, bounded pairings Biv x Curv -> K, coframes with ||e_i - e|| <= C low_i^theta (low_i -> 0) and norm-bounded weakly (WeakSpace) convergent R_i, the pairings converge; tendsto_diagonal_fourLinear / determinantVolume_tendsto_of_coframe_interpolation: the diagonal of a bounded 4-linear map converges along a convergent sequence. The concrete L^{p'} bivector convergence is separately proved in CoframeStrongInterpolationExact.coframe_bivector_strong. Missing: the lemma's actual statements on K: (i) int_K <Phi(e_X wedge e_X), R_X> -> int_K <Phi(e wedge e), R> for R_X weakly convergent in L^p(K) (tested against L^{p'}), with or without internal star; (ii) e_X^{wedge 4} -> e^{wedge 4} strongly in L^1(K). The abstract lemmas are never instantiated with Lebesgue spaces and pointwise exterior products (no bounded bilinear map L^{2p'} x L^{2p'} -> L^{p'} or 4-linear map (L^4)^4 -> L^1 is constructed), the hypothesis eq:supp-coframe-l2-l6 is replaced by an abstract interpolation-rate hypothesis, and the uniform L^p bound is assumed rather than derived from weak convergence.",
+    "difficulty": "easy",
+    "plan": "Prove the concrete statement directly in a new lemma next to CoframeStrongInterpolationExact: with B_X = Phi(e_X wedge e_X) -> B in L^{p'} from coframe_bivector_strong, split int<B_X,R_X> - int<B,R> = int<B_X - B, R_X> + int<B, R_X - R>, bound the first by Holder (eLpNorm'_bilinear_le / integral_mul_le_Lp_mul_Lq) and the uniform L^p bound (taken from thm:supp-curvature-compactness's hypothesis or derived via Banach-Steinhaus), the second by the weak-convergence definition used in curvature_weak_compactness; for the volume, expand the fourfold pointwise product one factor at a time and use coframe_strong_Lq at q = 4 with the generalized Holder inequality."
   },
   "thm:supp-renewal-palatini": {
     "env": "theorem",
@@ -2638,7 +2680,7 @@
   "prop:supp-law-switching": {
     "env": "proposition",
     "title": "Rapid switching is not included",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.oscillatorSolution",
       "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.oscillatorVelocity",
@@ -2657,7 +2699,9 @@
       "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.switching_modulus_gt_one",
       "RenewalGeometry/Gravity/RapidLawSwitching.lean:RenewalGeometry.switching_amplification"
     ],
-    "note": "Proved as the explicit finite statement the proposition makes about the scalar corner mode. The oscillator q'' = -Omega^2 q with data (q0,p0) is the explicit trajectory oscillatorSolution (verified by HasDerivAt); its quarter-period state map is the matrix [[0,1/Omega],[-Omega,0]] (quarterPeriodTransfer_mulVec); the two-law product is diag(-Omega_1/Omega_2, -Omega_2/Omega_1) with those eigenvalues (Module.End.HasEigenvalue of toLin'); with the dispersion eq:supp-law-dispersion Omega^2 = l(1 + sigma h^2 l) at the corner h^2 l = 12 the ratio Omega_1^2/Omega_2^2 = (1+12 sigma_1)/(1+12 sigma_2) != 1 for sigma_1 != sigma_2 in the admissible interval 1+12 sigma_i > 0; after n switching cycles the diagonal entries have modulus (Omega_1/Omega_2)^{+-n} and with n >= T/(K h) cycles of duration <= K h this is >= exp((log rho / K) T/h), rho = max ratio > 1. Scoping disclosed: the identification of the resolved corner mode with a scalar oscillator (the paper's first sentence of the proof) is the modelling input, and the transfer matrix is defined from the explicit solution rather than through ODE uniqueness."
+    "note": "Partial: for the abstract oscillator q'' = -Omega^2 q: quarter-period transfer matrices, two-step product diag(-Omega_1/Omega_2, -Omega_2/Omega_1) with those eigenvalues, ratio != 1 at h^2 l = 12 for distinct sigma_i with 1 + 12 sigma_i > 0, and rho^n >= exp(c T/h) for n >= T/(K h) cycles (RapidLawSwitching.lean); missing: the first clause: that a resolved corner Fourier mode of the (linearised flat) law family eq:supp-law-family with B = sigma I evolves as q'' = -Omega_{sigma,h}(k)^2 q with Omega^2 = l_h(k)(1 + sigma h^2 l_h(k)) (cornerFrequencySq is defined to be this formula); the identification of the transfer matrix with the actual mode solution map; and separation of the ratio from one for the actual grid corner modes (h^2 l_h(k) -> 12, never = 12 on odd grids)",
+    "difficulty": "easy",
+    "plan": "Use the Fourier symbol of Lambda_h (symbol_bounds in SupplementLawMultiplierExact.lean: Lambda_h e_k = l_h(k) e_k) to show the linear flat law q_tt = -Lambda_h q - sigma h^2 Lambda_h^2 q acts on e_k with Omega^2 = l_h(k)(1 + sigma h^2 l_h(k)); state the transfer matrix as the solution map of that mode ODE (uniqueness); replace hcorner by h^2 l_h(k_corner) >= 12 - delta with a uniform separation bound for the ratio near the corner."
   },
   "lem:supp-law-cost-control": {
     "env": "lemma",
@@ -2794,7 +2838,7 @@
   "lem:supp-initial-balance": {
     "env": "lemma",
     "title": "Exact four-mode mean calibration",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/SupplementInitialBalanceExact.lean:RenewalGeometry.InitialBalance.sum_sin_sq",
       "RenewalGeometry/Gravity/SupplementInitialBalanceExact.lean:RenewalGeometry.InitialBalance.sum_grid_sinMode_sq",
@@ -2814,7 +2858,9 @@
       "RenewalGeometry/Gravity/SupplementInitialBalanceExact.lean:RenewalGeometry.InitialBalance.jacobian_jacobianInv",
       "RenewalGeometry/Gravity/SupplementInitialBalanceExact.lean:RenewalGeometry.InitialBalance.jacobianInv_apply_bound"
     ],
-    "note": "Genuine odd-grid computation on Fin 3 -> Fin N, N >= 3: roots-of-unity sums (sum_{a<N} e^{2 pi i m a/N} = 0 for N not dividing m, hence sum sin^2(2 pi a/N) = N/2 and the 3D orthogonality of the unit modes), explicit T_i (off-diagonal 1/sqrt2 entries) with frob(T_i,T_j) = delta_ij, frob(I,T_i) = 0, tr T_i = 0, the seed u_* = sum T_i cos(2 pi x_i), p = -(2/3) kappa I + sum b_i T_i sin(2 pi x_i), the quadratic Hamiltonian H^{[2]}(u,pi;N,beta) = N(||pi||_h^2 - 1/2||tr pi||_h^2 + 1/4 sum ||delta_i u||_h^2) + sum beta^i <pi, delta_i u>_h exactly as displayed in the paper's proof (affine in lapse/shift, quadHam_eq_affine), and meanJet_seed = eq:supp-initial-quadratic-mean: Q_h(theta) = (2/3 kappa^2 - 1/2 sum b_i^2 - 3/8 omega_h^2, -omega_h b_i/2). Root theta* = (3 omega_h/4, 0) and the second branch -(3 omega_h/4); Jacobian diag(omega_h, -omega_h/2, -omega_h/2, -omega_h/2) proved as HasFDerivAt (Qh_hasFDerivAt) plus the exact quadratic expansion; omega_h = 2h^{-1} sin(pi h) >= 4 for h <= 1/2 and the inverse Jacobian has entries bounded by 1/2 (uniform invertibility). Scoping disclosed: (i) H^{[2]} is taken as the definition (the paper's assertion that it is the quadratic jet of the full retained action, with cubic link remainder, is the input of its proof and is not formalised); (ii) the odd phase derivative delta_i enters through its symbol action on the unit modes, packaged as the hypothesis delta_i u_* = -omega_h sin(2 pi x_i) T_i (this is the definition eq:supp-initial-phase-derivative evaluated on the unit modes; the DFT is not formalised)."
+    "note": "Partial: for the displayed quadratic Hamiltonian H^[2](u,pi;N,beta) on the odd grid (roots-of-unity orthogonality, explicit T_i, seed u_*, p(theta)), meanJet_seed computes Q_h(theta) of eq:supp-initial-quadratic-mean given delta_i u_* = -omega sin(2 pi x_i) T_i; exact roots +-(3 omega/4, 0, 0, 0), Jacobian diag(omega, -omega/2, -omega/2, -omega/2) (Qh_hasFDerivAt), omega_h >= 4 for h <= 1/2 and uniformly bounded inverse (SupplementInitialBalanceExact.lean); missing: that H^[2] is the quadratic (mean-coefficient) jet of the full retained reconstructed action at flat data (cubic order of the link remainder) - the retained action is not formalised anywhere in the library (and per the ledger the finite action is only described, not written, in the paper); and the derivation of delta_i u_* = -omega_h sin(2 pi x_i) T_i from the DFT definition eq:supp-initial-phase-derivative (hypothesis hdelta, omega a free real)",
+    "difficulty": "hard",
+    "plan": "(1) Easy part: define delta_i by its Fourier symbol i kappa_i(k) on the odd grid (or the explicit trigonometric stencil) and prove hdelta with omega = 2h^{-1} sin(pi h). (2) Hard part: encode the retained canonical Hamiltonian H_h (coframe/link formulas) and prove that its second-order coefficient about flat data, with spatially constant lapse/shift, equals quadHam; this requires the action, which the paper only describes."
   },
   "thm:supp-action-prepared-chart": {
     "env": "theorem",
@@ -2939,7 +2985,7 @@
   "thm:supp-exact-constraint-rank": {
     "env": "theorem",
     "title": "Finite characteristic quotient on a regular one-null branch",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/SupplementExactConstraintRankExact.lean:RenewalGeometry.ExactConstraintRank.diracMatrix",
       "RenewalGeometry/Gravity/SupplementExactConstraintRankExact.lean:RenewalGeometry.ExactConstraintRank.bracket_mul_lambda_eq_source",
@@ -2949,7 +2995,9 @@
       "RenewalGeometry/Gravity/SupplementExactConstraintRankExact.lean:RenewalGeometry.ExactConstraintRank.finrank_range_diracMatrix_of_dim",
       "RenewalGeometry/Gravity/SupplementExactConstraintRankExact.lean:RenewalGeometry.ExactConstraintRank.characteristic_quotient_dim"
     ],
-    "note": "Abstract block-matrix formulation with the paper's objects as parameters: Lambda a finite-dimensional real multiplier space, M = D_lambda P_h, A = the constraint bracket, B = the consistency source, lambda the multiplier. diracMatrix M A (r,s) = (-M s, M r + A s) is eq:supp-exact-dirac-matrix. Under ker M = span{lambda}, lambda != 0, A lambda = B (the homogeneity identity; bracket_mul_lambda_eq_source records its derivation D_X P (J (D_X P)^* lambda) = D_X P F^can once F^can = J (D_X P)^* lambda) and solvability of the first consistency condition (some r0 with M r0 = B, e.g. r0 = M^dagger B), ker_diracMatrix gives ker D = span{(lambda,0), (-r0, lambda)}, finrank_ker = 2, rank D = 2 dim Lambda - 2 = 8V - 2 for dim Lambda = 4V, and the characteristic-quotient count 20V - 8V - 2 = 12V - 2. Disclosed gap: the identification of M, A, B with derivatives of the actual reconstructed finite action, and the count of 8V independent constraints from 'D_X P_h onto', are not formalised (they enter as the parameters/arithmetic), exactly as in the paper's proof which uses only the listed algebraic facts."
+    "note": "Partial: for linear maps M, A on a finite-dimensional Lambda with ker M = span{lambda}, lambda != 0, A lambda = B and M r0 = B: ker D = span{(lambda,0), (-r0, lambda)}, finrank ker D = 2, rank D = 2 dim Lambda - 2 (= 8V - 2 when dim Lambda = 4V) (SupplementExactConstraintRankExact.lean); missing: (i) derivation of A_h lambda = B_h from H_h(X, c lambda) = c H_h(X, lambda), P_h = grad_lambda H_h, F^can = J grad_X H_h (bracket_mul_lambda_eq_source assumes F^can = J (D_XP)^* lambda instead of deriving it from Euler homogeneity); (ii) the local characteristic quotient of dimension 12V - 2: the linearised constraint surface in the 20V-dimensional extended phase with 8V independent constraints (from D_X P_h onto) and its quotient by the 2-dimensional characteristic kernel - currently only the identity 20V - 8V - 2 = 12V - 2",
+    "difficulty": "medium",
+    "plan": "Model H_h : R^{12V} x R^{4V} -> R differentiable and positively 1-homogeneous in lambda; prove Euler's identity H = <lambda, P> and grad_X H = (D_XP)^* lambda, hence A lambda = B. For the quotient, define the linearised extended constraint map on R^{20V} of rank 8V (from D_X P_h onto and the M-block), show its kernel has dimension 12V and contains the two characteristic directions, and compute finrank of the quotient = 12V - 2."
   },
   "thm:supp-exact-transverse": {
     "env": "theorem",
@@ -3045,7 +3093,7 @@
   "prop:supp-exact-clock-test": {
     "env": "proposition",
     "title": "Necessary lapse--shift clock condition for harmonic shadowing",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/ExactMultiplierGradingClockTest.lean:RenewalGeometry.exact_clock_test",
       "RenewalGeometry/Gravity/ExactMultiplierGradingClockTest.lean:RenewalGeometry.AmplitudeGrading",
@@ -3070,7 +3118,9 @@
       "RenewalGeometry/Gravity/LapseShiftFirstJetShadowing.lean:RenewalGeometry.first_jet_shadowing_lapse_shift_rate",
       "RenewalGeometry/Gravity/LapseShiftFirstJetShadowing.lean:RenewalGeometry.clock_test_of_first_jet_shadowing"
     ],
-    "note": "Proved (new file Gravity/ExactMultiplierGradingClockTest.lean, compiled, standard axioms). exact_clock_test is prop:supp-exact-clock-test: along a regulator family i -> a(i) != 0, if at every site x of a finite site set V the exact-action ADM metric (N,beta,gamma) shadows a small harmonic ADM metric (N',beta', same gamma) in the initial first time derivatives of g_00 and g_0i (differences -> 0), with the same lapse N = 1, shift beta = 0 and spatial metric at the initial cut, uniformly coercive spatial metrics and a small harmonic first jet, then for every active/weak amplitude grading G of the 4V-dimensional multiplier space, with the multiplier rate lambda_t = lapseShiftJet (d_t N, d_t beta) and the normalized source coefficient u_a = S_a lambda_t, one has a^{-1} ||(u_a)_A|| -> 0 and a^{-2} ||(u_a)_W|| -> 0 (eq:supp-exact-rate-necessary); the electric coefficient does not enter. The two former interface hypotheses are discharged: (i) AmplitudeGrading Lambda is an orthogonal active/weak decomposition (weak subspace W with orthogonal projection, active = W-perp), scale a = S_a = diag(a I_A, a^2 I_W), normalizedSource a lambda_t = S_a lambda_t, and eq:supp-exact-rate-norm ||lambda_t||^2 = a^{-2}||(u_a)_A||^2 + a^{-4}||(u_a)_W||^2 is the theorem AmplitudeGrading.rate_norm (Pythagoras norm_sq_eq + (u_a)_A = a lambda_A, (u_a)_W = a^2 lambda_W); (ii) the multiplier rate is the lapse-shift first jet (the ADM multipliers are lapse and shift), lapseShiftJet in EuclideanSpace R (V x Fin 4) with ||lambda_t||^2 = sum_x ((d_t N_x)^2 + sum_j (d_t beta_x^j)^2) (lapseShiftJet_norm_sq); the proof composes the per-site geometric step first_jet_shadowing_lapse_shift_rate (ADM identities d_t g_00 = -2 d_t N, d_t g_0i = gamma_ij d_t beta^j + Cauchy-Schwarz) with lapse_shift_clock_condition. Disclosed renderings: 'multiplier solve' is encoded by its output relation lambda_t = S_a^{-1} u_a (equivalently u_a := S_a lambda_t), the only property of u_a the paper uses; the grading is an arbitrary orthogonal active/weak decomposition of the site multiplier space (the paper does not specify it further); 'small harmonic metric' = small lapse-shift first jet with a uniformly coercive shared spatial metric; the shadowing topology = initial first time derivative of g_00, g_0i at each site; a(i) != 0 along the family (the paper's a(h) -> 0 is not needed for the necessity statement)."
+    "note": "Partial: exact_clock_test: on a fixed finite site set, per-site first-jet shadowing of d_t g_00, d_t g_0i at N = 1, beta = 0, common coercive gamma, plus a small harmonic first jet, forces a^{-1}||(u_a)_A|| -> 0 and a^{-2}||(u_a)_W|| -> 0 for every orthogonal active/weak grading with u_a = S_a lambda_t (AmplitudeGrading.rate_norm proves eq:supp-exact-rate-norm); missing: the statement for h-dependent site sets V_h with the shadowing hypothesis and the conclusion in the aggregate grid norm (per-site convergence does not sum over growing site sets)",
+    "difficulty": "easy",
+    "plan": "Re-state exact_clock_test with index-dependent site types V i (as in response_tendsto_zero_iff), hypotheses ||d_t g_00 - d_t g'_00||_h -> 0 and ||d_t g_0i - d_t g'_0i||_h -> 0 in the summed norm with a uniform coercivity constant c and a small harmonic jet in the same norm, and conclude ||lambda_t||_h -> 0 from the per-site identities d_t g_00 = -2 d_t N, |d_t beta| <= c^{-1}|gamma d_t beta| summed over sites; the grading step is unchanged."
   },
   "lem:supp-exact-rational-detuning": {
     "env": "lemma",
@@ -3169,7 +3219,7 @@
     "title": "Amplitude-graded exact-action chart",
     "status": "statement_encoded",
     "lean": [],
-    "note": "Non-theorem environment (declaration/bookkeeping); formal counterparts are the hypothesis arguments of the proved theorems referencing it."
+    "note": "Assumption (no theorem). Formal counterparts are hypothesis arguments: (C1)-(C2) in ExactNormalCoordinates.supp_exact_normal_coordinates (divided map P((a,w),n) analytic with P((a,0),0) = 0, P((0,w),n) = C0 Jc n with C0 Jc an isomorphism, analytic divisibilities D_qP = a Pq, D_pP = a^2 Pp, analytic prepared record X0_a, C0 E = 0, E onto ker C0, Lambda E = I, Lambda Jc = 0, and the row-division relation P_h(Theta) = 0 <-> P = 0 for a != 0) on abstract Banach spaces; the multiplier count 108 = 1 + 78 + 29 is ExactThreeSite.multiplier_count; the (C3) unbalanced field eq:supp-exact-unbalanced-field with the graded remainder bounds eq:supp-exact-graded-remainders enters ExactSlowExpansion.slow_expansion. Not encoded: the (C3) exponential dichotomy eq:supp-exact-dichotomy and transport identity, and (C4) (canonical field and readout derivative orders); these enter only open records (thm:supp-exact-boundary, prop:supp-exact-sweep-accuracy)."
   },
   "lem:supp-exact-normal-coordinates": {
     "env": "lemma",
@@ -3379,7 +3429,7 @@
     "title": "Two-scale invariant-graph and normal-factor certificate",
     "status": "statement_encoded",
     "lean": [],
-    "note": "Non-theorem environment (declaration/bookkeeping); formal counterparts are the hypothesis arguments of the proved theorems referencing it."
+    "note": "Assumption (no theorem). Formal counterparts are hypothesis arguments of ExactNormalResidence.exact_normal_growth / exact_normal_rapid_growth / exact_normal_slow_growth / main_exact_residence: (N1) v' = N(s)v in rapid time with ||N(s) - J_u|| <= eps, J_u with complex spectrum in the open right half-plane; (N2) omega_tau = (lambda_+(a) + r) omega with |lambda_+(a) - gamma| <= K a, |r| <= gamma/4, gamma > 0; physical normal displacement comparable to a|v|, a|omega| (upper comparison at the initial cut); bounded chart radius. Not encoded: existence, dimensions (312, 311) and local invariance of the graphs S_a, D_a on the 323-dimensional leaf (carried in prose as part of the certificate)."
   },
   "prop:supp-exact-normal-growth": {
     "env": "proposition",
@@ -3871,7 +3921,7 @@
   "lem:supp-entropy-energy": {
     "env": "lemma",
     "title": "History-level entropy--energy estimate",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/StatMech/HistoryEntropyEnergyEstimate.lean:RenewalGeometry.HistoryEntropyEnergy.prevState",
       "RenewalGeometry/StatMech/HistoryEntropyEnergyEstimate.lean:RenewalGeometry.HistoryEntropyEnergy.markovLaw",
@@ -3885,7 +3935,9 @@
       "RenewalGeometry/StatMech/HistoryEntropyEnergyEstimate.lean:RenewalGeometry.HistoryEntropyEnergy.neg_log_stageZ_le",
       "RenewalGeometry/StatMech/HistoryEntropyEnergyEstimate.lean:RenewalGeometry.HistoryEntropyEnergy.entropy_energy_estimate"
     ],
-    "note": "Proved at the path level. Finite horizon M, finite state space X, fixed initial value x0; paths are Fin M -> X. The accepted rows Q_j(x,.) = p_j(x,.) exp(-E_j(x,.)/eps)/Z_j(x) reuse gibbsRow/gibbsPartition of Action/FiniteGibbsActionGap.lean; Q is their Markov product law (acceptedPathLaw), P is any nonnegative probability row on paths (memory allowed; P << Q automatically since Q > 0; same initial value by construction). entropy_energy_estimate is eq:supp-entropy-energy: E_P sum_j E_j <= sum_j e_j + eps [sum_j log(1/p_{*,j}) + D_KL(P||Q)] under the hypothesis that at each stage j and source x some proposal y has E_j(x,y) <= e_j and p_j(x,y) >= p_{*,j} > 0 (weaker than the paper's 'every proposal weight >= p_*'; nonnegativity of E is not needed). Instead of iterating the chain rule over prefixes, the proof uses the exact identity finiteKL_acceptedPathLaw: eps D(P||Q) = eps D(P||P_ref) + E_P E + eps E_P sum_j log Z_j(x_j) with P_ref = markovLaw x0 p the reference product law (markovLaw_sum_one), Gibbs' inequality D(P||P_ref) >= 0, and the candidate bound Z_j(x) >= p_* exp(-e_j/eps). Disclosed scoping: reference rows and costs are functions of the current state (Markov Q), as in the paper's product-of-rows law."
+    "note": "Partial: entropy_energy_estimate proves eq:supp-entropy-energy at the path level for Markov products of Gibbs-accepted rows Q_j = p_j e^{-E_j/eps}/Z_j with an arbitrary (memory-allowed) path law P with the same initial value, under the weaker candidate hypothesis that each row has some proposal with cost <= e_j and weight >= p_{*,j} > 0 (exact identity finiteKL_acceptedPathLaw + Gibbs inequality + Z_j >= p_* e^{-e_j/eps}). Missing: the hypothesis hp : forall j x y, 0 < p j x y makes every reference row have full support on X. The paper's rows are finite proposal rows that may vanish off the proposal set, with P << Q as a genuine hypothesis. That case is not covered.",
+    "difficulty": "easy",
+    "plan": "Replace hp by 0 <= p j x y and add the absolute-continuity hypothesis (P w > 0 -> acceptedPathLaw w > 0). Redo finiteKL_acceptedPathLaw and the Gibbs inequality as sums over the support of P (0 log 0 = 0 terms drop). Z_j > 0 still follows from the candidate with p >= p_* > 0."
   },
   "lem:supp-two-edge-schur": {
     "env": "lemma",
@@ -4228,7 +4280,7 @@
   "mt:vacuum": {
     "env": "theorem",
     "title": "Stationary flat and de Sitter renewal regulators",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/ExplicitOperationalFamily.lean:RenewalGeometry.ExplicitOperationalFamily.vacuum_regulators_with_operational_realization",
       "RenewalGeometry/Gravity/ExplicitOperationalFamily.lean:RenewalGeometry.ExplicitOperationalFamily.explicit_operational_family",
@@ -4252,7 +4304,9 @@
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.compact_desitter_global_slicing_certificate",
       "RenewalGeometry/Gravity/RelationalFlatVacuum.lean:RenewalGeometry.relational_flat_vacuum"
     ],
-    "note": "Proved (es10b1, 1 Oct 2026). Clauses (i)-(vi) were already formalized (VacuumRegulatorStationarity.vacuum_regulator_assembly_with_stationarity for (i)-(iii),(vi); VacuumRegulatorAssembly.vacuum_regulator_assembly for (iv) slab margins and (v) curvature). The closing sentence is now closed: ExplicitOperationalFamily.vacuum_regulators_with_operational_realization H (H > 0) conjoins vacuum_regulator_assembly_with_stationarity H with, for every T, q₀ > 0, ExplicitOperationalFamilyStatement T (3H/2) q₀ 1 (thm:main-explicit-operational-family, proved in the same file) and the identity 2·1·(3H/2)/3 = H, i.e. the explicit finite positive accept/reject realization on the expanding branch σ = 1, ω = 3H/2, whose accepted dynamics (ℰ_M → 0, H¹ and uniform convergence) and action first variations (O(M^-2)) converge to the same expanding stationary branch, with regulators converging to the de Sitter branch of Hubble rate H; the measured-action identity itself is thm:main-operational-action-matching (proved, Action/OperationalActionMatchingExact.lean). The flat branch (H = 0) has no operational realization in the paper either (the sentence refers to the expanding branch)."
+    "note": "Partial: vacuum_regulator_assembly_with_stationarity proves that the de Sitter/flat profile solves the stationary renewal Euler system (IsStationaryRenewalSolution, Lambda = 3H^2), and that the finite stationary recurrence converges to it with an explicit O(h^2) log error (clause (i)). It also gives the Einstein equation for the limit metric; the genuine Christoffel computation is in coordinate_desitter_einstein_space (clause (iii), limit only). Also proved: the A_3 tight-frame identity, metric-unitary time transport, and summability of the cited normalized defects. vacuum_regulators_with_operational_realization conjoins the explicit operational family (thm:main-explicit-operational-family). Missing / wrong: (ii) speedDensity H t := e^{3Ht} and spatialMetric H t := e^{2Ht} I are definitions (adm_variables_exact is rfl-level), and no normalized finite A_3 renewal law for each cutoff is constructed in the cited assembly. (iii) The convergence of the flat and curved regulator sequences to the limits is not stated. (iv) slabSpatialCommonLower only rescales arbitrary positive inputs cutMargin, ..., screenMargin by e^{Ht}; these are not the regulator's cut/Poincare/counting/screen constants and nothing is uniform in h. (v) constantCurvatureTensor is defined as H^2(delta delta - delta delta), and the initial-energy/propagation budgets of thm:main-curvature-propagation are not verified. (vi) normalizedTorsion/Curvature/PalatiniDefect are scalar Taylor remainders of e^{Hh}, not the defects of the reconstructed Levi-Civita links.",
+    "difficulty": "medium",
+    "plan": "Re-assemble from genuine results already in the repo. (ii) desitter_adm_packet / flat_adm_vacuum (bracket from the root law via predictableBracket_eq, ADM inversion) plus a normalized A_3 event law per cutoff, as in flatPeriodicRegulator, for every H. (iv) desitter_slab_screens_unconditional and periodic_screens_unconditional (constants uniform in h and t). (v) DeSitterCartan.desitter_cartan_einstein (derived curvature) plus a check of the hypotheses of thm:main-curvature-propagation. (vi) DeSitterExactLink.Palatini.finiteDefects_full_diagonal / finiteDefects_flat_full (actual link defects, h_n = 2^{-n^2}). (iii) Add a convergence statement for the regulator data: rates/masses at mesh h -> continuum ADM fields, and the generator limit (lem:supp-flat-symbol)."
   },
   "lem:supp-a3-second-moment": {
     "env": "lemma",
@@ -4365,7 +4419,7 @@
       "RenewalGeometry/DiscreteAnalysis/A3FlatGeneratorLimitExact.lean:RenewalGeometry.A3FlatGenerator.gen_modeFn",
       "RenewalGeometry/DiscreteAnalysis/A3FlatGeneratorLimitExact.lean:RenewalGeometry.A3FlatGenerator.tendsto_flatSymbol"
     ],
-    "note": "All clauses proved. Finite ADM packet and continuum (flat_adm_vacuum): B_h = I (tight frame), ρ_h = 1, g_h = I and N_h = 1 derived from the ADM inversion formula, β_h = 0 from reversal symmetry, conductance h/8 per undirected root edge; Lorentzian continuum Minkowski diag(-1,1,1,1) = -dt^2 + dx^2 (lorentzMetric_zero_eq_minkowski), vanishing Christoffel symbols, Riemann, Ric, R and G (minkowski_riemann_zero); Cartan torsion and curvature of the constant coframe vanish (DeSitterCartan components at H = 0); the one-cell torsion / face-curvature / Palatini remainders vanish identically. Generator clause 'the spatial generators converge to (1/2)Δ_{T^3_{A3}}': now proved as lem:supp-flat-symbol in A3FlatGeneratorLimitExact (flat_resolvent_strong: strong resolvent convergence for every z > 0, flat_semigroup_strong: strong semigroup convergence for every t ≥ 0, along the natural piecewise-constant embeddings of the flat regulator with mass h^3 and rates 1/(8h^2); see that record for the encoding: root-basis coordinates, (1/2)Δ as the Fourier multiplier -2π^2|k|^2 on L^2 of the coordinate torus). flat_slab_screens_unconditional additionally gives the uniform screen constants. Disclosed rendering (unchanged): 'any face-based finite Cartan and Palatini writer constructed from these exact constant data is identically zero' is rendered by the repo's one-cell remainders (torsionCellRemainder, curvatureCellRemainder, palatiniCellRemainder of RelationalDeSitterBranch at H = 0), not by a general writer."
+    "note": "Proved. flat_adm_vacuum: B_h = I (root law + tight frame), rho_h = 1 (speedDensity at H = 0; the mass density h^3/h^3), g_h = I and N_h = 1 derived via the ADM inversion formula, beta_h = 0 from reversal symmetry, and conductance h/8 per undirected root edge. Lorentzian continuum: Minkowski diag(-1,1,1,1) (lorentzMetric_zero_eq_minkowski), with Christoffel symbols, Riemann, Ric, R and G vanishing (minkowski_riemann_zero); Cartan torsion and curvature of the constant coframe vanish (DeSitterCartan at H = 0). Generator clause: lem:supp-flat-symbol (flat_resolvent_strong for every z > 0, flat_semigroup_strong for every t >= 0, along the natural piecewise-constant embeddings; (1/2)Delta as the Fourier multiplier -2 pi^2|k|^2). Finite residuals: DeSitterExactLink.Palatini.finiteDefects_flat_full (DeSitterPalatiniFirstVariation.lean) proves that, for the flat regulator, the exact-link curvature and torsion defects of every closed loop and the Palatini midpoint-quadrature first-variation defect (c_V = 0) vanish identically. The one-cell scalar remainders of RelationalDeSitterBranch at H = 0 (also in flat_adm_vacuum) are a weaker surrogate. flat_slab_screens_unconditional gives the uniform screen constants."
   },
   "thm:supp-desitter-adm": {
     "env": "theorem",
@@ -4390,7 +4444,7 @@
   "thm:supp-desitter-einstein": {
     "env": "theorem",
     "title": "Cartan curvature and the vacuum Einstein equation",
-    "status": "proved",
+    "status": "conditional_interface",
     "lean": [
       "RenewalGeometry/Gravity/DeSitterCartanComponentsExact.lean:RenewalGeometry.DeSitterCartan.desitter_cartan_einstein",
       "RenewalGeometry/Gravity/DeSitterCartanComponentsExact.lean:RenewalGeometry.DeSitterCartan.torsion_free",
@@ -4403,7 +4457,9 @@
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.coordinate_desitter_einstein_space",
       "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.compact_desitter_global_slicing_certificate"
     ],
-    "note": "Cartan structure equations formalised in orthonormal-frame components (the coframe theta^0=dt, theta^a=e^{Ht}dx^a enters through its structure coefficients d theta^a = H theta^0 ^ theta^a and the connection omega^a_0 = omega^0_a = H theta^a through constant frame coefficients, exactly as in the paper's proof): the connection is metric (omega_{AB} = -omega_{BA}), torsion-free (T^A = d theta^A + omega^A_B ^ theta^B = 0, all 64 components), and is the UNIQUE metric torsion-free connection of the coframe (via cartan_uniqueness); the curvature d omega + omega ^ omega equals H^2 eta_B (delta_{AD} delta_{BE} - delta_{AE} delta_{BD}), i.e. Omega^A_B = H^2 theta^A ^ theta_B (256 components); Ric_{AB} = 3H^2 eta_{AB}, R = 12 H^2, G + 3H^2 eta = 0 in the frame, and pulled back with the coframe matrix (theta^T eta theta = g_H proved) Ric = 3H^2 g, G + 3H^2 g = 0 for g_H = -dt^2 + e^{2Ht} dx^2; the independent coordinate Christoffel computation (coordinate_desitter_einstein_space) agrees. Disclosed scope: the final global-hyperbolicity sentence is rendered as the existing coordinate Cauchy-slicing certificate (nondegenerate metric, spacelike compact t=const slices, unique time parameter along curves); Lorentzian causality theory (inextendible causal curves) is not formalised."
+    "note": "Partial: desitter_cartan_einstein proves that the connection eq:supp-desitter-cartan is metric, torsion-free (all components) and the unique such connection of the coframe. It also proves Omega^A_B = H^2 theta^A ^ theta_B, Ric = 3H^2 g, R = 12H^2 and G + 3H^2 g = 0, both in the frame and in coordinates (theta^T eta theta = g_H; independent Christoffel check coordinate_desitter_einstein_space). It further proves the metric is nondegenerate, the t-slices are spacelike (causal_zero_time_iff) and the spatial quotient is the compact 3-torus. Missing: the Cauchy property of the t = const slices and global hyperbolicity. compact_desitter_global_slicing_certificate's last component (global_time_slice_unique) is tautological for curves already parametrized by t, and no statement about causal curves (each inextendible causal curve meets every slice exactly once) is proved.",
+    "difficulty": "medium",
+    "plan": "For the explicit metric g_H on R x T^3, define (piecewise) C^1 causal curves with g_H(gamma',gamma') <= 0 and gamma' != 0. Prove that t o gamma is strictly monotone (causal_zero_time_iff plus continuity), so each slice is met at most once. Then prove that an inextendible causal curve has t o gamma onto R (|dx/dt| <= e^{-Ht} bounds the spatial speed, so bounded t-range plus compact T^3 gives an endpoint, contradicting inextendibility). No general Lorentzian causality library is needed."
   },
   "thm:supp-finite-defects": {
     "env": "theorem",
