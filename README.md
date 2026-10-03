@@ -322,10 +322,10 @@ finer question by walking the proof terms of every ledger-cited declaration:
 
 | | Modules |
 |---|---:|
-| Used by at least one cited declaration | 708 |
-| Never used, but imported by a used module (structurally required) | 325 |
-| Never used and imported by nothing used (removable without loss) | 324 |
-| **Total** | **1357** |
+| Used by at least one cited declaration | 752 |
+| Never used, but imported by a used module (structurally required) | 334 |
+| Never used and imported by nothing used (removable without loss) | 330 |
+| **Total** | **1416** |
 
 The removable part is concentrated in the foundation of the *earlier* papers
 of the programme rather than the four tracked here: `Lorentz` (50 of 60
@@ -337,7 +337,7 @@ Ising suites) that earlier stages of the programme were built on, verified to
 the same standard, and available for future noncommutative-geometry work; but
 nothing in the four current ledgers depends on them. Folders that the four papers lean on almost entirely are
 `Commutant`, `StandardModel`, `Spectralization`, `Gravity`, `DiscreteAnalysis`
-and `Action`; `OperatorLimits` is mostly structural (101 of 157 modules are
+and `Action`; `OperatorLimits` is mostly structural (103 of 160 modules are
 imported but not used by any cited proof).
 
 ## Installation

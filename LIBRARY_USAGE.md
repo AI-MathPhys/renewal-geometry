@@ -1,53 +1,53 @@
 # Library usage by the papers
 
-Roots: 5267 cited declarations.
+Roots: 6067 cited declarations.
 
 | Paper | Cited decls | Modules used | Folders used |
 |---|---:|---:|---|
-| einstein_sm_action_closure | 386 | 61 | RenewalGeometry/Action (18), RenewalGeometry/Continuum (10), RenewalGeometry/Gravity (8), RenewalGeometry/DiscreteAnalysis (8), RenewalGeometry/StandardModel (8), RenewalGeometry/GaugeTheory (5), RenewalGeometry/Analysis (2), RenewalGeometry/Predictive (1), RenewalGeometry/OperatorLimits (1) |
-| emergent_spacetime | 2522 | 325 | RenewalGeometry/Gravity (124), RenewalGeometry/Analysis (40), RenewalGeometry/DiscreteAnalysis (34), RenewalGeometry/Predictive (31), RenewalGeometry/Action (21), RenewalGeometry/Dimension (14), RenewalGeometry/Continuum (14), RenewalGeometry/Lorentz (7), RenewalGeometry/GaugeTheory (7), RenewalGeometry/Renewal (6), RenewalGeometry/Algebra (6), RenewalGeometry/Krein (5), RenewalGeometry/Certificates (3), RenewalGeometry/OperatorLimits (3), RenewalGeometry/Operational (3), RenewalGeometry/StatMech (2), RenewalGeometry/Commutant (2), RenewalGeometry/MarkovChains (1), RenewalGeometry/Spectralization (1), NCG/Krein (1) |
-| predictive_spectral_geometry | 1143 | 174 | RenewalGeometry/Spectralization (63), RenewalGeometry/Predictive (36), RenewalGeometry/DiscreteAnalysis (22), RenewalGeometry/Analysis (11), RenewalGeometry/OperatorLimits (10), RenewalGeometry/Operational (6), RenewalGeometry/Algebra (6), RenewalGeometry/Certificates (5), RenewalGeometry/Continuum (4), RenewalGeometry/Commutant (3), RenewalGeometry/Krein (2), RenewalGeometry/Gravity (1), RenewalGeometry/Topology/FiniteInverseSystemStableImage (1), RenewalGeometry/Topology/InverseLimitOrbitQuotient (1), RenewalGeometry/Topology/FiniteInverseSystemPruning (1), NCG/Graph (1), NCG/SpectralTriple (1) |
-| spacetime_gauge_duality | 1259 | 200 | RenewalGeometry/Commutant (70), RenewalGeometry/StandardModel (64), RenewalGeometry/OperatorLimits (32), RenewalGeometry/Predictive (11), RenewalGeometry/Analysis (9), RenewalGeometry/Operational (5), RenewalGeometry/Action (2), RenewalGeometry/Algebra (2), NCG/Algebra (2), RenewalGeometry/Spectralization (2), RenewalGeometry/Lorentz (1) |
+| einstein_sm_action_closure | 444 | 67 | RenewalGeometry/Action (19), RenewalGeometry/Continuum (12), RenewalGeometry/StandardModel (9), RenewalGeometry/DiscreteAnalysis (9), RenewalGeometry/Gravity (9), RenewalGeometry/GaugeTheory (5), RenewalGeometry/Analysis (2), RenewalGeometry/Predictive (1), RenewalGeometry/OperatorLimits (1) |
+| emergent_spacetime | 2910 | 348 | RenewalGeometry/Gravity (133), RenewalGeometry/Analysis (41), RenewalGeometry/Predictive (37), RenewalGeometry/DiscreteAnalysis (35), RenewalGeometry/Action (24), RenewalGeometry/Continuum (14), RenewalGeometry/Dimension (14), RenewalGeometry/Algebra (7), RenewalGeometry/GaugeTheory (7), RenewalGeometry/Renewal (7), RenewalGeometry/Lorentz (5), RenewalGeometry/Krein (5), RenewalGeometry/OperatorLimits (4), RenewalGeometry/StatMech (4), RenewalGeometry/Certificates (3), RenewalGeometry/Operational (3), RenewalGeometry/Commutant (2), RenewalGeometry/MarkovChains (1), NCG/Krein (1), RenewalGeometry/Spectralization (1) |
+| predictive_spectral_geometry | 1407 | 176 | RenewalGeometry/Spectralization (71), RenewalGeometry/Predictive (31), RenewalGeometry/DiscreteAnalysis (22), RenewalGeometry/Analysis (11), RenewalGeometry/OperatorLimits (10), RenewalGeometry/Algebra (6), RenewalGeometry/Continuum (4), RenewalGeometry/Certificates (4), RenewalGeometry/Operational (4), NCG/Graph (3), RenewalGeometry/Commutant (3), RenewalGeometry/Krein (2), RenewalGeometry/Topology/FiniteInverseSystemStableImage (1), RenewalGeometry/Topology/InverseLimitOrbitQuotient (1), RenewalGeometry/Gravity (1), RenewalGeometry/Topology/FiniteInverseSystemPruning (1), NCG/SpectralTriple (1) |
+| spacetime_gauge_duality | 1394 | 208 | RenewalGeometry/Commutant (74), RenewalGeometry/StandardModel (67), RenewalGeometry/OperatorLimits (32), RenewalGeometry/Predictive (12), RenewalGeometry/Analysis (9), RenewalGeometry/Operational (5), RenewalGeometry/Algebra (3), RenewalGeometry/Spectralization (2), RenewalGeometry/Action (2), NCG/Algebra (2) |
 
 | Folder | Modules | Used by a paper | Import-only | Unused & removable |
 |---|---:|---:|---:|---:|
-| RenewalGeometry/OperatorLimits | 157 | 41 | 101 | 15 |
-| RenewalGeometry/Gravity | 140 | 129 | 6 | 5 |
-| RenewalGeometry/Predictive | 111 | 61 | 36 | 14 |
-| RenewalGeometry/Commutant | 106 | 71 | 17 | 18 |
-| RenewalGeometry/StandardModel | 103 | 67 | 21 | 15 |
-| RenewalGeometry/Spectralization | 89 | 65 | 21 | 3 |
-| RenewalGeometry/DiscreteAnalysis | 77 | 58 | 17 | 2 |
-| RenewalGeometry/Analysis | 67 | 62 | 4 | 1 |
-| RenewalGeometry/Lorentz | 60 | 8 | 2 | 50 |
-| RenewalGeometry/Operational | 60 | 12 | 18 | 30 |
-| RenewalGeometry/Action | 55 | 41 | 10 | 4 |
-| RenewalGeometry/Algebra | 44 | 13 | 18 | 13 |
-| RenewalGeometry/Dimension | 39 | 14 | 5 | 20 |
-| RenewalGeometry/Renewal | 38 | 6 | 7 | 25 |
-| RenewalGeometry/StatMech | 34 | 2 | 12 | 20 |
-| RenewalGeometry/Continuum | 30 | 24 | 6 | 0 |
+| RenewalGeometry/OperatorLimits | 160 | 42 | 103 | 15 |
+| RenewalGeometry/Gravity | 151 | 138 | 8 | 5 |
+| RenewalGeometry/Predictive | 118 | 68 | 34 | 16 |
+| RenewalGeometry/Commutant | 114 | 75 | 21 | 18 |
+| RenewalGeometry/StandardModel | 109 | 71 | 21 | 17 |
+| RenewalGeometry/Spectralization | 98 | 73 | 21 | 4 |
+| RenewalGeometry/DiscreteAnalysis | 80 | 60 | 18 | 2 |
+| RenewalGeometry/Analysis | 68 | 63 | 4 | 1 |
+| RenewalGeometry/Operational | 60 | 11 | 18 | 31 |
+| RenewalGeometry/Lorentz | 60 | 5 | 4 | 51 |
+| RenewalGeometry/Action | 59 | 45 | 10 | 4 |
+| RenewalGeometry/Algebra | 44 | 14 | 17 | 13 |
+| RenewalGeometry/Dimension | 41 | 14 | 5 | 22 |
+| RenewalGeometry/Renewal | 39 | 7 | 7 | 25 |
+| RenewalGeometry/StatMech | 35 | 4 | 11 | 20 |
+| RenewalGeometry/Continuum | 32 | 26 | 6 | 0 |
 | NCG/Algebra | 24 | 2 | 3 | 19 |
 | RenewalGeometry/GaugeTheory | 16 | 12 | 1 | 3 |
 | RenewalGeometry/Certificates | 15 | 7 | 6 | 2 |
-| RenewalGeometry/Measurement | 14 | 0 | 3 | 11 |
+| RenewalGeometry/Measurement | 14 | 0 | 2 | 12 |
 | NCG/Krein | 14 | 1 | 0 | 13 |
+| NCG/Graph | 11 | 3 | 3 | 5 |
 | RenewalGeometry/Krein | 11 | 6 | 1 | 4 |
-| NCG/Graph | 10 | 1 | 0 | 9 |
 | RenewalGeometry/MarkovChains | 10 | 1 | 4 | 5 |
-| RenewalGeometry/Miscellany | 6 | 0 | 2 | 4 |
 | RenewalGeometry/Topology/Brouwer | 6 | 0 | 0 | 6 |
-| RenewalGeometry/Numerics | 4 | 0 | 0 | 4 |
+| RenewalGeometry/Miscellany | 6 | 0 | 2 | 4 |
 | RenewalGeometry/Arithmetic | 4 | 0 | 3 | 1 |
-| RenewalGeometry/Complexity | 3 | 0 | 1 | 2 |
+| RenewalGeometry/Numerics | 4 | 0 | 0 | 4 |
 | NCG/Operator | 3 | 0 | 0 | 3 |
+| RenewalGeometry/Complexity | 3 | 0 | 1 | 2 |
 | NCG/PerronFrobenius | 2 | 0 | 0 | 2 |
-| NCG | 1 | 0 | 0 | 1 |
 | RenewalGeometry/Topology/FiniteInverseSystemPruning | 1 | 1 | 0 | 0 |
 | RenewalGeometry/Topology/InverseLimitOrbitQuotient | 1 | 1 | 0 | 0 |
-| RenewalGeometry/Topology/FiniteInverseSystemStableImage | 1 | 1 | 0 | 0 |
 | NCG/SpectralTriple | 1 | 1 | 0 | 0 |
-| **Total** | 1357 | 708 | 325 | 324 |
+| NCG | 1 | 0 | 0 | 1 |
+| RenewalGeometry/Topology/FiniteInverseSystemStableImage | 1 | 1 | 0 | 0 |
+| **Total** | 1416 | 752 | 334 | 330 |
 
 ## Modules no cited declaration uses and no used module imports
 
@@ -71,15 +71,11 @@ Roots: 5267 cited declarations.
 - `NCG.Algebra.Symplectic`
 - `NCG.Algebra.UnitalStationary`
 - `NCG.Basic`
-- `NCG.Graph.BettiNumber`
-- `NCG.Graph.Cohomology`
 - `NCG.Graph.CohomologyZ4`
 - `NCG.Graph.Condensation`
 - `NCG.Graph.Decimation`
 - `NCG.Graph.Displacement`
 - `NCG.Graph.RecordOrientation`
-- `NCG.Graph.SignCocycle`
-- `NCG.Graph.SignedCover`
 - `NCG.Krein.AmplitudeLift`
 - `NCG.Krein.CoverModel`
 - `NCG.Krein.EnrichmentClassification`
@@ -145,6 +141,8 @@ Roots: 5267 cited declarations.
 - `RenewalGeometry.Dimension.Circulation`
 - `RenewalGeometry.Dimension.Controllability`
 - `RenewalGeometry.Dimension.CovarianceRank`
+- `RenewalGeometry.Dimension.DimensionLockedK4`
+- `RenewalGeometry.Dimension.DimensionLockedK4DecompositionExact`
 - `RenewalGeometry.Dimension.DivisionSelection`
 - `RenewalGeometry.Dimension.EvenRank`
 - `RenewalGeometry.Dimension.GradedGram`
@@ -178,6 +176,7 @@ Roots: 5267 cited declarations.
 - `RenewalGeometry.Lorentz.BlockRadius`
 - `RenewalGeometry.Lorentz.CalculusClause`
 - `RenewalGeometry.Lorentz.ChannelTorsion`
+- `RenewalGeometry.Lorentz.ClockDischarge`
 - `RenewalGeometry.Lorentz.CoreResolvent`
 - `RenewalGeometry.Lorentz.CovariantConsistency`
 - `RenewalGeometry.Lorentz.CovariantL2`
@@ -231,6 +230,7 @@ Roots: 5267 cited declarations.
 - `RenewalGeometry.Measurement.BornWeight`
 - `RenewalGeometry.Measurement.Definiteness`
 - `RenewalGeometry.Measurement.NoSignalling`
+- `RenewalGeometry.Measurement.OddRead`
 - `RenewalGeometry.Measurement.PointerAlgebra`
 - `RenewalGeometry.Measurement.PointerBorn`
 - `RenewalGeometry.Measurement.RecordStructures`
@@ -270,6 +270,7 @@ Roots: 5267 cited declarations.
 - `RenewalGeometry.Operational.OrderedState`
 - `RenewalGeometry.Operational.PathClock`
 - `RenewalGeometry.Operational.PetzBranch`
+- `RenewalGeometry.Operational.PredictiveRN`
 - `RenewalGeometry.Operational.ProcessCompleteness`
 - `RenewalGeometry.Operational.RecordAlgebra`
 - `RenewalGeometry.Operational.RecordParity`
@@ -305,6 +306,8 @@ Roots: 5267 cited declarations.
 - `RenewalGeometry.Predictive.Realization`
 - `RenewalGeometry.Predictive.Retract`
 - `RenewalGeometry.Predictive.SealedProvenanceQuotient`
+- `RenewalGeometry.Predictive.StoreFrequencyCount`
+- `RenewalGeometry.Predictive.StoreFrequencyPencil`
 - `RenewalGeometry.Predictive.SuccessorRefinement`
 - `RenewalGeometry.Renewal.AcceptedResponse`
 - `RenewalGeometry.Renewal.AcceptedResponseLaw`
@@ -331,6 +334,7 @@ Roots: 5267 cited declarations.
 - `RenewalGeometry.Renewal.SpectralDimension`
 - `RenewalGeometry.Renewal.WeylDichotomy`
 - `RenewalGeometry.Renewal.ZetaAbscissa`
+- `RenewalGeometry.Spectralization.AnalyticPolar`
 - `RenewalGeometry.Spectralization.FiniteNaimarkDilation`
 - `RenewalGeometry.Spectralization.FiniteSpectralUniversalityExact`
 - `RenewalGeometry.Spectralization.SummaryUniversalityFibresExact`
@@ -345,6 +349,8 @@ Roots: 5267 cited declarations.
 - `RenewalGeometry.StandardModel.K4Core`
 - `RenewalGeometry.StandardModel.OneGenerationAudit`
 - `RenewalGeometry.StandardModel.OneGenerationIncidenceAudit`
+- `RenewalGeometry.StandardModel.SMActiveResidual`
+- `RenewalGeometry.StandardModel.SMActiveResidualExact`
 - `RenewalGeometry.StandardModel.SMSTUnitWriter`
 - `RenewalGeometry.StandardModel.SMYMColourRestrictionExact`
 - `RenewalGeometry.StandardModel.StructuralStandardModelPacketExact`
