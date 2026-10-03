@@ -2,8 +2,32 @@
   "def:finite-interface": {
     "env": "definition",
     "title": "Finite classical Einstein--Standard-Model interface",
-    "status": "conditional_interface",
+    "status": "statement_encoded",
     "lean": [
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.TabulatedFiniteInterface",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.TabulatedFiniteInterface.ofTable",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.TabulatedFiniteInterface.fermionRep_eq_table",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.TabulatedFiniteInterface.chirality_eq_table",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.TabulatedFiniteInterface.chirality_eq_self_iff",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.TabulatedFiniteInterface.finrank_oneGeneration_minimal",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.TabulatedFiniteInterface.finrank_oneGeneration_neutrino",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.TabulatedFiniteInterface.trivialGeometryInterface",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.NeutrinoBranch",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.TableRow",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.RightRow",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.neutralRows",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.blockSumHom",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.repLeft",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.repRightMin",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.repRight",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.tableRep",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.tableChirality",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.tableRepresentation",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.tableChirality_mul_self",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.tableChirality_commute",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.tableChirality_mulVec",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.card_tableRow_minimal",
+      "RenewalGeometry/StandardModel/FiniteInterfaceRepresentationTable.lean:RenewalGeometry.FiniteInterfaceTable.card_tableRow_neutrino",
       "RenewalGeometry/StandardModel/FiniteEinsteinStandardModelInterface.lean:RenewalGeometry.FiniteInterface",
       "RenewalGeometry/StandardModel/FiniteEinsteinStandardModelInterface.lean:RenewalGeometry.CoefficientBank",
       "RenewalGeometry/StandardModel/FiniteEinsteinStandardModelInterface.lean:RenewalGeometry.higgsRep",
@@ -13,9 +37,7 @@
       "RenewalGeometry/StandardModel/SMGaugeQuotientExact.lean:RenewalGeometry.SMGaugeGroup",
       "RenewalGeometry/StandardModel/SMGroup.lean:RenewalGeometry.sm_group"
     ],
-    "note": "Partial: FiniteInterface h encodes (I1) finite sites, finite-dimensional real inner-product chart Q_h, coframes with det e > 0 and e^0_0 > 0 (metric_det_neg: det(e^T eta e) < 0); (I2) gauge group SMGaugeGroup = S(U(3)xU(2)) with the Z_6 presentation gaugeGroupPresentation = smGaugeQuotientEquiv (eq:gauge-group), Higgs doublet with the weak U(2) action higgsRep, rank-three generation factor, an optional neutral block type; (I3) gauge-covariant Dirac/Yukawa operator and CoefficientBank; (I4) differentiable S_g + nu S_SM with nu > 0 and gauge invariance; (I5) symmetric PSD Gram, positive definite on retained directions. Missing: the fermion representation is not tied to tab:SM-representations (fermionRep is an arbitrary representation, chirality an arbitrary equivariant involution; the Q_L,u_R,d_R,L_L,e_R[,nu_R] rows and their chirality assignment are not imposed); also undisclosed-but-minor: relabeling covariance and the smooth comparison cylinder/reconstruction are absent (disclosed).",
-    "difficulty": "easy",
-    "plan": "Add a field fermionRep_iso : OneGeneration ≃ₗ[ℂ] (carrier of rhoMin / rhoExt per generation) intertwining fermionRep with the table rows repQL, repUR, repDR, repLL, repER (and repNR on the neutral extension) from SMDescentYukawaBlocksExact.lean, with chirality = +1 on Q_L, L_L and -1 on the right-handed rows; tie NeutralBlock to the nu_R row; re-check that existing users of FiniteInterface still compile."
+    "note": "Encoded (FiniteInterfaceRepresentationTable.lean extends the (I1)-(I5) record FiniteInterface of FiniteEinsteinStandardModelInterface.lean). TabulatedFiniteInterface h adds the declared branch (minimal | neutrino), a linear equivalence tableEquiv : OneGeneration ~= C^{TableRow b} that INTERTWINES fermionRep with tableRep b, the block-diagonal sum of the table rows repQL, repLL (left) and repUR, repDR, repER (right), plus repNR on the neutrino branch, all taken from SMDescentYukawaBlocksExact.lean, and chirality with tableChirality b = diag(+1 on Q_L, L_L; -1 on u_R, d_R, e_R(, nu_R)) read off the chirality column of tab:SM-representations; the declared neutral blocks are identified with the neutral rows of the branch (neutralEquiv). Derived consequences: fermionRep and chirality are determined by the table (fermionRep_eq_table, chirality_eq_table), one generation has dimension 15 / 16 (finrank_oneGeneration_minimal / _neutrino), and v is left-handed iff its right-row components vanish (chirality_eq_self_iff). Constructor from data: ofTable builds the record from the (I1), (I3)-(I5) data and the branch, producing the fermion carrier, representation, chirality and the involution/equivariance fields from the table (tableChirality_mul_self, tableChirality_commute). Non-vacuity: trivialGeometryInterface (one site, flat coframe, Gram = id), whose G_SM action is nontrivial (example in the file: the cover element (1, 1, e^{i pi/6}) acts by -1 on e_R). Still disclosed (accepted as minor by the audit): relabeling covariance and the smooth comparison cylinder / reconstruction map of (I1) are not encoded; the Majorana charge-conjugate doubling concerns the bilinear, not the representation rows. Checklist (b): the fermion representation is tied to the table and constructed from it."
   },
   "def:tests": {
     "env": "definition",
@@ -277,8 +299,14 @@
   "prop:weak-palatini": {
     "env": "proposition",
     "title": "Weak-curvature Palatini passage",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Gravity/WeakPalatiniVolumeVariationExact.lean:RenewalGeometry.WeakPalatiniPassage.weak_palatini_passage_lp",
+      "RenewalGeometry/Gravity/WeakPalatiniVolumeVariationExact.lean:RenewalGeometry.WeakPalatiniPassage.weak_palatini_passage_with_volume_variation",
+      "RenewalGeometry/Gravity/WeakPalatiniVolumeVariationExact.lean:RenewalGeometry.WeakPalatiniPassage.eLpNorm_volume_variation_tendsto_zero",
+      "RenewalGeometry/Gravity/WeakPalatiniVolumeVariationExact.lean:RenewalGeometry.WeakPalatiniPassage.eLpNorm_multilinear_four_tendsto_zero",
+      "RenewalGeometry/Gravity/WeakPalatiniVolumeVariationExact.lean:RenewalGeometry.WeakPalatiniPassage.norm_multilinear_four_sub_le",
+      "RenewalGeometry/Gravity/WeakPalatiniVolumeVariationExact.lean:RenewalGeometry.WeakPalatiniPassage.eLpNorm'_four_sum_le",
       "RenewalGeometry/Gravity/WeakPalatiniPassageExact.lean:RenewalGeometry.WeakPalatiniPassage.weak_palatini_passage",
       "RenewalGeometry/Gravity/WeakPalatiniPassageExact.lean:RenewalGeometry.WeakPalatiniPassage.eLpNorm'_wedge_tendsto_zero",
       "RenewalGeometry/Gravity/WeakPalatiniPassageExact.lean:RenewalGeometry.WeakPalatiniPassage.integral_pairing_tendsto",
@@ -291,9 +319,7 @@
       "RenewalGeometry/Continuum/PalatiniWedgeHolderExact.lean:RenewalGeometry.PalatiniWedgeHolder.eLpNorm_wedge_sub_le_interpolation",
       "RenewalGeometry/Continuum/FiniteMeasureL2L6InterpolationExact.lean:RenewalGeometry.FiniteMeasureL2L6Interpolation.palatini_eLpNorm'_interpolation"
     ],
-    "note": "Partial: weak_palatini_passage proves on a finite measure space, for e_h -> e in L^2 with L^6 bounds (limit bound assumed, Fatou not derived), p > 3/2 and R_h bounded in L^p with all pairings ∫pr(φ)R_h -> ∫pr(φ)R (φ ∈ L^{p'}): (1) ||w e_h e_h - w e e||_{p'} -> 0; (2) Palatini pairings converge; (3) ||vol(e_h^4) - vol(e^4)||_1 -> 0; (4) for variations k_h -> k in L^2 with L^6 bounds, ||w e_h k_h - w e k||_{p'} -> 0 and the Palatini variation pairings converge. Missing: convergence of the volume (cosmological-term) coframe variation vol(k_h,e_h,e_h,e_h) -> vol(k,e,e,e) in L^1, part of 'their coframe first variations also converge'. The identification of R with the limiting curvature is a hypothesis of the proposition and the connection-Euler sentence is a caveat (no formal content needed).",
-    "difficulty": "easy",
-    "plan": "Add a mixed four-linear lemma in Gravity/WeakPalatiniPassageExact.lean: telescoping vol(k_h,e_h,e_h,e_h) - vol(k,e,e,e) into four differences, each bounded by eLpNorm_fourFactor_le with L^4 norms, using eLpNorm'_four_tendsto_zero for e_h - e and k_h - k; add it as a fifth conjunct of weak_palatini_passage."
+    "note": "weak_palatini_passage_with_volume_variation proves every clause with formal content on a finite measure space (the compact region) with concrete L^p seminorms (eLpNorm/eLpNorm'): under eq:Palatini-hypotheses (e_h -> e in L^2, ||e_h||_6, ||e||_6 <= M, p > 3/2, R_h bounded in L^p with all pairings against L^{p'} tests converging): (1) B(e_h) -> B(e) in L^{p'}; (2) Palatini pairings converge; (3) volume densities vol(e_h^4) -> vol(e^4) in L^1; (4) for coframe variations k_h -> k in L^2 bounded in L^6, the Palatini first-variation pairings converge and (5) NEW: the volume (cosmological-term) variation densities vol(k_h,e_h,e_h,e_h) -> vol(k,e,e,e) in L^1 (eLpNorm_volume_variation_tendsto_zero, via the general four-factor passage eLpNorm_multilinear_four_tendsto_zero: L^4 convergence of each slot with uniform L^4 bounds gives L^1 convergence of any bounded four-linear density, telescoping bound norm_multilinear_four_sub_le + four-factor Hoelder eLpNorm_fourFactor_le; L^4 convergence of k_h and e_h by L^2-L^6 interpolation). The full volume variation is a sum of four such slot terms with permuted vol. Non-vacuity example included (constant fields on [0,1]). weak_palatini_passage_lp states the same five conclusions from the literal hypotheses for cutoff sequences (index N): R_h in Lp(K) converging weakly (every continuous linear functional on Lp converges, WeakStrongPalatiniLebesgue.LpWeakTendsto), with the uniform L^p bound derived by Banach-Steinhaus (lp_norm_bounded_of_weakTendsto), the L^{p'} pairing convergence derived from the Hoelder pairing functional (lpPairingCLM), and the limit L^6 bounds of e and k derived by Fatou (CoframeInterpolation.eLpNorm'_limit_le_of_tendsto_L2); the filter-indexed weak_palatini_passage_with_volume_variation keeps the older rendering (bound + pairings). 'compatible supports' is implicit in working on one finite measure space; the identification of R and the connection-Euler sentence are hypotheses/caveats without formal content."
   },
   "prop:orlicz": {
     "env": "proposition",
@@ -556,16 +582,23 @@
   "prop:monotonicity": {
     "env": "proposition",
     "title": "A sufficient Euclidean defect-removal mechanism",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Continuum/MonotoneHiggsDefectVanishingExact.lean:RenewalGeometry.MonotoneHiggsDefect.monotone_higgs_defects_vanish",
+      "RenewalGeometry/Continuum/MonotoneHiggsDefectVanishingExact.lean:RenewalGeometry.MonotoneHiggsDefect.tendsto_integral_mul_norm_pow_four",
+      "RenewalGeometry/Continuum/MonotoneHiggsDefectVanishingExact.lean:RenewalGeometry.MonotoneHiggsDefect.tendsto_integral_abs_norm_pow_four_sub",
+      "RenewalGeometry/Continuum/MonotoneHiggsDefectVanishingExact.lean:RenewalGeometry.MonotoneHiggsDefect.abs_norm_pow_four_sub_le",
+      "RenewalGeometry/Continuum/MonotoneHiggsDefectVanishingExact.lean:RenewalGeometry.MonotoneHiggsDefect.isPacketDefect_zero_of_tendsto",
+      "RenewalGeometry/Continuum/MonotoneHiggsDefectVanishingExact.lean:RenewalGeometry.MonotoneHiggsDefect.weakTendsto_of_tendsto",
       "RenewalGeometry/Continuum/MonotoneDefectRemovalExact.lean:RenewalGeometry.MonotoneDefectRemoval.tendsto_of_monotone",
       "RenewalGeometry/Continuum/MonotoneDefectRemovalExact.lean:RenewalGeometry.MonotoneDefectRemoval.norm_bounded_of_weak_tendsto",
       "RenewalGeometry/Continuum/MonotoneDefectRemovalExact.lean:RenewalGeometry.MonotoneDefectRemoval.pairing_tendsto_zero",
-      "RenewalGeometry/Continuum/MonotoneDefectRemovalExact.lean:RenewalGeometry.MonotoneDefectRemoval.tendsto_zero_of_pow_tendsto_zero"
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.eq_zero_iff_tendsto",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.tendsto_contraction",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.IsPacketDefect",
+      "RenewalGeometry/Analysis/PositivePacketDefectExact.lean:RenewalGeometry.PositivePacketDefect.quadCLM"
     ],
-    "note": "Partial: tendsto_of_monotone (with norm_bounded_of_weak_tendsto, pairing_tendsto_zero) proves: V real normed space, A_n : V -> V' with c1||u-v||^2 + c2 n4(u-v)^4 ≤ <A_n u - A_n v, u - v>, H_n ⇀ H, A_n(H_n) -> J and A_n(H) -> J in V' give H_n -> H in V and n4(H_n - H) -> 0. Missing: the closing clause that, when V controls the covariant H^1 norm, the kinetic and quartic Higgs defect measures of thm:higgs-defect vanish.",
-    "difficulty": "easy",
-    "plan": "State the defects as in lem:positive-packet-defect: with V ↪ L^2 for the covariant gradient Y_h = D_{A_h}H_h, strong convergence gives Q_Y = 0 via PositivePacketDefect.eq_zero_iff_tendsto; for the quartic defect prove |H_h|^4 -> |H|^4 in L^1 from L^4 convergence (product estimate as in eLpNorm_fourFactor_le); bundle with tendsto_of_monotone."
+    "note": "monotone_higgs_defects_vanish proves the whole proposition including the closing sentence. Setting: K compact metric with Borel measure V0; V a real normed space with a continuous linear embedding iota4 : V ->L L^4(K;F) (V into L^4; the L^4 norm in the monotonicity inequality is ||iota4(u-v)||); operators A_h : V -> V' with c1||u-v||^2 + c2||u-v||_4^4 <= <A_h u - A_h v, u-v>; H_h weakly convergent in V (every functional), A_h(H_h) -> J, A_h(H) -> J in V'. Conclusions: H_h -> H in V and in L^4 (tendsto_of_monotone, Banach-Steinhaus boundedness derived). 'V controls the covariant H^1 norm' is rendered as: realified covariant gradients D_h : V ->L L^2(K;R^r) with ||D_h|| <= C_D and D_h H -> D H in L^2 (covers fixed D_A, and A_h -> A in L^4 via ||(D_{A_h}-D_A)u||_2 <= ||A_h-A||_4||u||_4); then Y_h = D_h H_h -> D H in L^2, so (i) the packet defect Q_Y of lem:positive-packet-defect vanishes (eq_zero_iff_tendsto), (ii) every kinetic stress defect K defined by the weak-star relation B_h(Y_h,Y_h) dV0 ->* B(Y,Y) dV0 + K, for continuous coefficient fields B_h -> B uniformly (the components of eq:kinetic-defect with the metric/volume coefficients), is zero (isPacketDefect_zero_of_tendsto + tendsto_contraction + uniqueness of limits), and (iii) the quartic defect nu_H defined by |H_h|^4 rho_h dV0 ->* |H|^4 rho dV0 + nu_H (eq:quartic-defect, volume densities rho_h -> rho uniformly) is zero, via the L^4 -> L^1 estimate || |f_h|^4 - |f|^4 ||_1 <= ||f_h - f||_4 (||f_h||_4 + ||f||_4)^3 (abs_norm_pow_four_sub_le + four-factor Hoelder eLpNorm_fourFactor_le; tendsto_integral_mul_norm_pow_four). The defects are characterised by their defining weak-star relations, so no conclusion of the open records thm:higgs-defect / lem:critical-cubic is assumed (any functional satisfying the defining relation is shown to vanish). Measures are functionals on C(K) as in PositivePacketDefectExact. Non-vacuity example included (V = R, A_h u = 2u)."
   },
   "prop:improvement": {
     "env": "proposition",
@@ -1081,8 +1114,17 @@
   "lem:nodal-source-transfer": {
     "env": "lemma",
     "title": "From nodal Euler bounds to a physical source norm",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceJetChainExact.lean:RenewalGeometry.NodalSourceTransfer.eLpNorm_euler_density_le_nodalNorm",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceJetChainExact.lean:RenewalGeometry.NodalSourceTransfer.euler_density_derivative_bound",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceJetChainExact.lean:RenewalGeometry.NodalSourceTransfer.norm_le_card_pow_mul_of_basis",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceJetChainExact.lean:RenewalGeometry.NodalSourceTransfer.Jet2",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceJetChainExact.lean:RenewalGeometry.NodalSourceTransfer.jet2",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceJetChainExact.lean:RenewalGeometry.NodalSourceTransfer.jet2Deriv",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceJetChainExact.lean:RenewalGeometry.NodalSourceTransfer.hasFDerivAt_jet2",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceJetChainExact.lean:RenewalGeometry.NodalSourceTransfer.norm_jet2Deriv_le",
+      "RenewalGeometry/DiscreteAnalysis/NodalSourceJetChainExact.lean:RenewalGeometry.NodalSourceTransfer.norm_jet2Deriv_le_growing",
       "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.eLpNorm_le_nodalNorm",
       "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.lintegral_sq_le_nodalMassSq",
       "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.eLpNorm_le_nodalNorm_growing",
@@ -1091,9 +1133,7 @@
       "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.node",
       "RenewalGeometry/DiscreteAnalysis/NodalSourceTransferExact.lean:RenewalGeometry.NodalSourceTransfer.enorm_sq_le_on_cell"
     ],
-    "note": "Partial: lintegral_sq_le_nodalMassSq / eLpNorm_le_nodalNorm prove ||f||_{L^2(Q)} ≤ sqrt2 ||S_h f||_{0,h;Q'} + sqrt2 |Q'|^{1/2} h L for f with Fréchet derivative bounded by L on Q', cells meeting Q contained in Q' (explicit hypothesis), nodal mass norm h^d sum |f(x_k)|^2. Missing: the O(hK^3) clause; eLpNorm_le_nodalNorm_growing only substitutes an assumed bound ||D E_0|| ≤ C_E K^3, which is the content of that clause (chain rule for an Euler density of differential degree ≤ 2 under eq:growing-derivatives).",
-    "difficulty": "medium",
-    "plan": "Model the Euler density as E_0 = F ∘ (j^2 y) with F C^1 on a compact jet chart (bounded derivative M) and y satisfying ||∂^α y||_∞ ≤ C_q K^{|α|} for |α| ≤ 3; prove ||D(E_0)|| ≤ M·C(K + K^2 + K^3) ≤ C' K^3 for K ≥ 1 by the chain rule, then feed it into eLpNorm_le_nodalNorm_growing; optionally instantiate F with the concrete densities of NativeDensitiesExact."
+    "note": "Proved. First clause (NodalSourceTransferExact.lean): ||f||_{L2(Q)} <= sqrt2 ||S_h f||_{0,h;Q'} + sqrt2 |Q'|^{1/2} h L for f with derivative bounded by L on Q', cells meeting Q contained in Q' (the buffer condition provided by Q compactly inside Q' and small h). The O(hK^3) clause is now DERIVED (NodalSourceJetChainExact.lean), not assumed: as in the paper's proof (differential degree <= 2), the Euler density is E_0 = F o j^2 y with j^2 y = (y, Dy, D^2 y) (jet2) and F C^1 on an open set containing a compact jet chart in which the jet of y stays on Q'; y is C^3 near Q' and satisfies eq:growing-derivatives literally on coordinate partial derivatives, ||D^n y(x)(e_{a1}, ..., e_{an})|| <= C K^n for 1 <= n <= 3 (only |alpha| <= 3 of the paper's |alpha| <= q, q >= 5 is used). Partial-derivative bounds give ||D^n y|| <= d^n C K^n (norm_le_card_pow_mul_of_basis), the chain rule gives ||D(j^2 y)|| <= d^3 C K^3 for K >= 1 (norm_jet2Deriv_le_growing), and compactness gives M >= 0 depending only on F and the chart with ||D E_0|| <= M d^3 C K^3 (euler_density_derivative_bound); hence ||E_0||_{L2(Q)} <= sqrt2 ||S_h E_0||_{0,h;Q'} + sqrt2 |Q'|^{1/2} (M d^3 C) h K^3 (eLpNorm_euler_density_le_nodalNorm). Disclosed: F is a general C^1 function of the 2-jet (the concrete Einstein-SM densities are instances); the final 'bounded invertible algebraic change to physical rows' (a fixed bounded linear map) is not formalised; sup norm on R^d. Checklist (l): the derivative bound is no longer a hypothesis; (h): F only C^1 near a compact chart."
   },
   "lem:native-tail-transfer": {
     "env": "lemma",
@@ -1402,8 +1442,22 @@
   "cor:native-reader-sobolev": {
     "env": "corollary",
     "title": "Sobolev positive-form reader criterion",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.sobolev_tail_exponent_sharp",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.shellField_tail_ge",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.shellField",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.dyadicShell",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.card_dyadicShell",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.card_dyadicShell_ge",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.shellField_sobolevSq_le",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.shellField_tail_ge_card",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.shellField_sobolevSq_pos",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.sharpConst",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.l2sq_le_four_mul_sq_linf",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.forcing_tail_le",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.tendsto_rpow_forcing_exponent",
+      "RenewalGeometry/Action/SobolevReaderSharpnessExact.lean:RenewalGeometry.SobolevReader.forcing_tail_not_small",
       "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.sobolev_reader_criterion",
       "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.tail_le_sobolev",
       "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.latticeSum_le",
@@ -1412,9 +1466,7 @@
       "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.tail",
       "RenewalGeometry/Action/SobolevReaderCriterionExact.lean:RenewalGeometry.SobolevReader.sobolevSq"
     ],
-    "note": "Partial: sobolev_reader_criterion proves, for modes in the box |l|_∞ ≤ N, 1 ≤ K ≤ N, the LMI ||Rξ||_{H^q}^2 ≤ C_R<ξ,Qξ> and ||u^soft||_{H^q} ≤ C_R: every record with <ξ,Qξ> ≤ V has ||u||_{H^q} ≤ max(C_R,√C_R)(1+√V) and τ_{h,j}(K;u) ≤ C_{q,j} max(C_R,√C_R) K^{2-q}(1+√V) for j+2 < q, with C_{q,j} = sqrt(80·25^j/(2q-2j-4)) (tail_le_sobolev, latticeSum_le, card_shell_le, tail_le_sqrt_latticeSum_mul_sobolev). Missing: the sharpness of K^{2-q} (shell-supported extremisers showing sup over the unit H^q ball of τ_{h,j}(K;·) ≥ c K^{2-q}) and hence the stated necessity of q > k+5 for the composition without extra cancellation.",
-    "difficulty": "medium",
-    "plan": "In Action/SobolevReaderCriterionExact.lean construct, for each K ≤ N/2, the uniform-coefficient field on the dyadic shell K < |l|_∞ ≤ 2K: lower-bound its shell cardinality by c K^4 (complement of card_shell_le), compute ||u||_{H^q} ≤ C K^{2+q} a and τ_{h,j}(K;u) ≥ c K^4 a, giving τ ≥ c' K^{2-q} ||u||_{H^q}; then derive the q > k+5 threshold from m = k+2 in eq:native-forcing-budget as a remark-level corollary."
+    "note": "Proved. Upper bounds (SobolevReaderCriterionExact.lean): sobolev_reader_criterion gives eq:source-reader-Sobolev, ||u||_{H^q} <= max(C_R, sqrt C_R)(1 + sqrt V) and tau_{h,j}(K;u) <= C_{q,j} max(C_R, sqrt C_R) K^{2-q}(1 + sqrt V) for j + 2 < q, 1 <= K <= N, modes in |l|_inf <= N. Sharpness (SobolevReaderSharpnessExact.lean): the dyadic shell K < |l|_inf <= 2K has (4K+1)^4 - (2K+1)^4 >= 175 K^4 points (card_dyadicShell_ge); the uniform-coefficient shell field satisfies c_q K^{2-q} ||u||_{H^q} <= tau_{h,j}(K;u), c_q = sqrt175 * 17^{-q/2}, for every j, q >= 0 and every mode set containing the shell (shellField_tail_ge); hence any bound tau <= C K^p ||u||_{H^q} valid for all K >= 1 on the box |l|_inf <= 2K forces p >= 2 - q (sobolev_tail_exponent_sharp). Threshold, with m = k + 2 in eq:native-forcing-budget: the measured tails enter as K^{k+1} * K^2 tau_{h,2} (inside eps_{c,h} K^{k+1} L^{k+1}, L >= 1) and K^{k+2} tau_{h,m}. Necessity (the stated claim): if q <= k + 5 the shell extremiser has K^{k+3} tau_{h,2}(K;u_K) >= c_q ||u_K||_{H^q} for every K >= 1, so the route gives no decay without extra cancellation (forcing_tail_not_small). Sufficiency of the tail part: for q > k + 5, K^{k+3} tau_2 + K^{k+2} tau_{k+2} <= (C_{q,2} + C_{q,k+2}) K^{k+5-q} ||u||_{H^q} -> 0 (forcing_tail_le, tendsto_rpow_forcing_exponent). Disclosed: the logarithmic factor L_{h,k}^{k+1} enters only through L >= 1; the positive-form inequality R^* L^{2q} R <= C_R Q is rendered as ||R xi||_{H^q}^2 <= C_R <xi, Q xi>."
   },
   "cor:source-selected-shadow-budgets": {
     "env": "corollary",

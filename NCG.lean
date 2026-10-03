@@ -34,6 +34,7 @@ import NCG.Graph.Multigraph
 import NCG.Graph.RecordOrientation
 import NCG.Graph.SignCocycle
 import NCG.Graph.SignedCover
+import NCG.Graph.SpanningTree
 import NCG.Krein.AmplitudeLift
 import NCG.Krein.CoverModel
 import NCG.Krein.EnrichmentClassification
