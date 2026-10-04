@@ -17,14 +17,14 @@ encoded, and what is still open.
 | Library | Role | Size |
 |---|---|---|
 | **`NCG`** | Generic noncommutative geometry, stated with no reference to renewal processes: completely positive maps and channel monoids, Schwarz/Choi theory, Clifford and Jordan algebra, spectral triples, Krein spaces and signed sectors classified by `H¹(G, ℤ/2)`, graph cohomology and covers, and a complete Perron–Frobenius theorem. Candidate material for Mathlib. | 56 files, ~11k lines |
-| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 1383 files, ~457k lines |
+| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 1392 files, ~464k lines |
 
 `NCG` never imports `RenewalGeometry`; this is enforced by
 [`scripts/check_layering.py`](scripts/check_layering.py) in CI.
 
 ### Verification guarantees
 
-- **Sorry-free.** `lake build` kernel-checks all 1439 files; there is no `sorry`.
+- **Sorry-free.** `lake build` kernel-checks all 1448 files; there is no `sorry`.
 - **Standard axioms only.** Every Lean declaration cited as *proved* in a
   paper ledger is audited with `#print axioms` by
   [`scripts/audit_axioms.py`](scripts/audit_axioms.py): only `propext`,
@@ -106,10 +106,10 @@ Lean declarations, and a generated README listing every record.
 | Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | Easy | Medium | Hard |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 88 | 77 | 11 | 0 | 0 | 0 | 0 | 0 |
-| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 197 | 139 | 14 | 27 | 17 | 0 | 0 | 44 |
+| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 197 | 144 | 14 | 24 | 15 | 0 | 0 | 39 |
 | [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 31 | 5 | 16 | 82 | 0 | 0 | 98 |
 | [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 107 | 12 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **538** | **354** | **42** | **43** | **99** | **0** | **0** | **142** |
+| **Total** | **538** | **359** | **42** | **40** | **97** | **0** | **0** | **137** |
 
 How to read the table:
 
@@ -154,14 +154,21 @@ content is proved (the ADM and grand-tensor reconstructions, the K₄ and A₃
 selectors, the grid harmonic-gauge Einstein writer with its constructive
 nonsymmetric 3+1 vacuum limit, the Gowdy regulator, the de Sitter and flat
 vacuum regulators, the explicit operational family, the Hodge–temporal and
-literal-link compactness theorems). Its 44 open records all need input the
-manuscript does not give: 29 concern the explicit N = 3 exact finite action,
-which the paper describes only in words, 7 the original-action Hamiltonian
-behind the initial constraint map, 4 the Palatini handoff (the first Bianchi
-identity at the stated L² regularity needs an additional uniform spatial L³
-bound on the connection, and the Euler equation of the Palatini–Holst action
-is only sketched), 2 the same-cylinder Cartan reconstruction, and 2 the
-certification procedure of the Einstein alternative. The Einstein–Standard-Model
+literal-link compactness theorems, and the renewal-to-Einstein certification
+chain: connection stationarity of the Palatini–Holst action, the localized
+renewal–Palatini handoff, the vacuum equation from certified variations, the
+general certification theorem and the Einstein-or-failed-certificate
+alternative). One disclosed amendment enters that chain: the first Bianchi
+identity used to make the Holst variation inert does not follow at the
+manuscript's L² connection regularity, so the handoff hypotheses carry an
+additional uniform spatial L³ bound on the connection interpolants (supplied
+by both concrete connection routes of the paper); the field is named
+`spatialConnectionL3Bound` and flagged in every affected record. The 39 open
+records all need input the manuscript does not give: 29 concern the explicit
+N = 3 exact finite action, which the paper describes only in words, 8 the
+original-action Hamiltonian behind the initial constraint map, and 2 the
+same-cylinder theorem (its clause (ii) is proved; the finite-cutoff Cartan
+reconstruction behind the literal-link budget is never written down). The Einstein–Standard-Model
 closure paper is formalized in its finite and algebraic parts (the gauge
 descent and Yukawa blocks, the determinant identities, the initial-constraint
 retraction, the abstract first-variation closure, the discrete Hodge and Kato
