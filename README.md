@@ -202,14 +202,14 @@ finer question by walking the proof terms of every ledger-cited declaration:
 
 | | Modules |
 |---|---:|
-| Used by at least one cited declaration | 771 |
-| Never used, but imported by a used module (structurally required) | 338 |
+| Used by at least one cited declaration | 778 |
+| Never used, but imported by a used module (structurally required) | 340 |
 | Never used and imported by nothing used (removable without loss) | 330 |
-| **Total** | **1439** |
+| **Total** | **1448** |
 
 The removable part is concentrated in the foundation of the *earlier* papers
-of the programme rather than the four tracked here: `Lorentz` (50 of 60
-modules), `Operational` (30), `Renewal` (25), `Dimension` (20), `StatMech`
+of the programme rather than the four tracked here: `Lorentz` (51 of 60
+modules), `Operational` (31), `Renewal` (25), `Dimension` (22), `StatMech`
 (20), `NCG/Algebra` (19 of 24) and `NCG/Krein` (13 of 14). They are kept
 deliberately: they are the generic noncommutative-geometry layer (Krein
 classification, signed Dirac operators, Perron–Frobenius, the Lindblad and
