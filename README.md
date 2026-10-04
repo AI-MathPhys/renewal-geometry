@@ -111,223 +111,81 @@ Lean declarations, and a generated README listing every record.
 | [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 107 | 12 | 0 | 0 | 0 | 0 | 0 |
 | **Total** | **538** | **354** | **42** | **43** | **99** | **0** | **0** | **142** |
 
-Three of the four manuscripts were revised on 30 September 2026 (new
-theorems, refactored statements, relabelled records; the tracked statement
-count grew from 369 to 518). Every record whose statement text changed was
-re-verified against its cited Lean, and 12 previously proved records were
-honestly downgraded because the theorems were strengthened (for instance the
-main duality now asserts the commutant identity for arbitrary operator-Schmidt
-rank, and the structural Standard-Model theorem gained new hypotheses and
-conclusions). Every new record was triaged and, where open, rated.
+How to read the table:
 
-Before that revision, six proving passes (September 2026) had taken the
-ledgers from 75 to 240 proved statements and from 16 to 33 encoded
-definitions: the first pass closed every record rated *easy*, three more
-worked through the 115 records rated *medium*, and two further passes built
-the missing infrastructure for the *hard* records of the duality paper and of
-the predictive-spectral-geometry paper. The predictive-spectral-geometry
-paper, unchanged in that revision, was then **completely formalized** (57 + 11
-records, nothing open). The infrastructure those passes added is reusable and
-absent from Mathlib: a Courant–Fischer min–max for compact self-adjoint
-operators, rectangular Cauchy–Binet, Lebesgue-null zero sets of polynomials,
-the intrinsic Wedderburn form of star-subalgebras of block matrix algebras, a
-ghost superalgebra for BRST, lattice holonomy gauge covariance, the
-L²(μ; H) completion and Naimark dilation of positive operator-valued measures
-with Stieltjes injectivity and weak-* compactness, finite Pontryagin
-realizations of rational Hermitian functions with pole–Hankel invariants and
-Weierstrass descriptor forms, lattice-torus Plancherel with a variable-coefficient
-Gårding estimate, an unbounded self-adjoint resolvent surrogate with
-norm-resolvent convergence for compatible stable atlases, and mesh-graph
-distance convergence on compact metric spaces. Where the paper's objects are
-continuum ones Mathlib lacks (spin manifolds, spinor Sobolev spaces,
-Riemannian distance), the record is proved for the disclosed abstract
-surrogate that the paper's own proof uses.
-
-The revision left 40 open records rated *easy* (assembly of existing lemmas
-for the new wording). A seventh pass (30 September 2026) closed all of them:
-32 are now proved, 6 definitions are encoded, and 2 corollaries stay open
-(rated *medium*) because their parent theorem is not yet formalized. It added
-37 files, among them a per-component anchor for the finite common action, the
-S₄-equivariant isometry between W₄ and its twisted exterior square, a
-periodic discrete Hodge identity on arbitrary finite grids, a
-nonstationary action-gap bound for arbitrary couplings, a variance-sensitive
-Thomson transfer bound, a Banach-fixed-point retraction onto the exact
-initial constraints, and the translation Kato inequality. That left 54
-records rated *medium* (new finite lemmas) and 181 rated *hard*.
-
-An eighth pass (30 September 2026) worked through the 54 *medium* records.
-43 are now proved, among them both main theorems of the duality paper: the
-commutant identity for incidences of arbitrary operator-Schmidt rank, and the
-cofinal derived-kernel duality. Nine were re-rated *hard*. Seven of them are
-proved in Lean from the conclusion of an open hard theorem of the same paper
-and close by instantiation once that theorem is formalized; two need Sobolev
-composition bounds or an unbounded-limit spectral chain. Two stay *medium*.
-The pass added 46 files, including a real Moore–Penrose inverse with the
-four Penrose equations, unitary implementation of *-isomorphisms between
-full matrix algebras, the explicit naturality spectra of the determinant
-skeleton, and canonical chiral projectors. It also corrected two records.
-One revised statement, the universal property in
-`cor:reciprocal-wedderburn`, is false as literally written for algebras that
-are not closed under adjoints; the record proves the C*-algebra version the
-paper's proof uses and says so. And `prop:protected-kernel-locking`, proved in
-an earlier pass, cited gap-convergence theorems whose hypotheses turned out
-to be contradictory (a bounded limit with compact graph screens forces a
-finite-dimensional carrier, while the theorems also assume an
-infinite-dimensional one). The contradiction is now proved in Lean, those
-theorems are no longer cited, and the record is open again. For consistency
-the same rule was then applied to five records proved in earlier passes,
-each of which had one clause resting on an open statement of its paper; they
-are open again, with everything else they prove kept as partial Lean.
-
-A hard pass (1 October 2026) then finished the duality paper. Its last open
-records are proved in the paper's generality: the structural Standard-Model
-synthesis (built on a genuine Haar twirl over SU(2)), the weak-copy census,
-Davis–Kahan and Wedin perturbation bounds for the incidence-slice and
-certified-support theorems, the compact spectral upgrade and protected kernel
-locking with an unbounded limit and a general transported Mosco limit, and the
-Schur envelope for arbitrary groups. At that point the spacetime–gauge duality
-paper had no open record (107 proved, 12 encoded). The determinant split of
-the Einstein–Standard-Model paper was re-rated *hard*: Lean now proves
-det(exp X) = exp(tr X), but each of its three parents needs an open analytic
-result.
-
-A hard campaign on the emergent-spacetime paper (1 October 2026) built general
-machinery and closed 51 of its 93 *hard* records, among them the
-constructive nonsymmetric 3+1 vacuum limit (whole-sequence convergence of the
-grid harmonic-gauge writer with rates, and G(g) = 0 by constraint propagation). The machinery includes a
-uniform discrete Sobolev calculus on the periodic grid (Plancherel, product and
-commutator bounds, Moser composition, sampling and interpolation); the grid
-harmonic-gauge Einstein writer with its energy inequality, lifespan,
-difference estimates, law family, time jets and local jets; the continuum limit
-of the grid solutions with rates and uniqueness; L^p duality and weak
-compactness; distributional curvature identification; a grid Aubin–Lions
-theorem; cubical interface lifting with a proved jump formula; an analytic
-implicit function theorem; Lyapunov growth bounds; two-point Hermite
-interpolation; path-ordered exponentials with a BCH bound; characteristic
-Strang splitting for the Gowdy scheme; and a faithful encoding of the explicit
-operational family. About 25 of the remaining records concern the explicit
-N = 3 exact finite action, which the paper describes only in words (external
-formulas, irrational seed data, untabulated certificate matrices); they cannot
-be closed from the paper as written. The campaign also found six places where
-the manuscript needs a correction or clarification; each affected record states
-the reading it proves.
-
-The 42 emergent-spacetime records still open all need input the manuscript does
-not give: 29 concern the explicit N = 3 exact action, 7 the original-action
-Hamiltonian behind the initial constraint map, 4 a regularity amendment for the
-first Bianchi identity in the Palatini handoff (a uniform spatial L^3 connection
-bound, which both concrete routes supply), and 2 the same-cylinder Cartan
-reconstruction.
-
-The predictive-spectral-geometry manuscript was revised by the author on
-1 October 2026 (88 statements, from 68: 26 new records, 28 reworded, 2
-relabelled, 6 removed). Every reworded record was re-verified against its Lean
-and nine were downgraded because the new wording claims more (for instance
-meshes whose edge lengths may underestimate the metric, normalised Hodge
-potentials, the compact inverse-limit fibre, HS-orthonormal commutant
-coordinates, and a reconstruction category that keeps no generator germ).
-Eight of the new records were matched to existing Lean, mostly the refactored
-finite Hodge–Dirac packet and edge-relative modular identities; the other 18
-were rated as 13 *easy*, 12 *medium* and 2 *hard*. A ninth pass (2 October
-2026) then closed every easy and medium record: the commutant fibre for actual
-matrix triples, the three reconstruction classes with their essential images
-(strong line via spectral projection sequences, norm line equal to spectral
-quasidiagonality, strictness by a Toeplitz triple), the operational
-realization and recognition theorems on a new matrix Kraus/Stinespring layer,
-the process-history representation on a free star algebra, the compact
-inverse-fibre completion (inverse limits commute with compact-group
-quotients), the Kuhn–Freudenthal A₃ interpolant with its compactness and
-smoothing lemmas, and the normalised Hodge potentials. The paper now stands at
-72 proved and 13 encoded, with 3 open records rated *hard*: the global metric
-theorem needs the bridge from the library's chain-metric model to genuine
-Riemannian manifolds, and the two spin records need a compatible stable atlas
-for the flat torus.
-
-A faithfulness audit (2 October 2026) then re-read every one of the 396 proved
-or encoded records against the current manuscripts, with the cited Lean open
-beside each statement, looking for tautologies, vacuous hypothesis packets,
-hidden assumptions of the conclusion, and missing clauses. It moved 71 records
-back to *open* (35 *easy*, 30 *medium*, 6 *hard*) and corrected the
-renderings described in 29 notes. The recurring defects were: an algebra or set
-defined to be the claimed answer instead of proved equal to it; a structure
-that stores a theorem's conclusions as fields and is never constructed from
-the input data; "exactly when" clauses that hold by definition; a bound with
-"some positive constant" where the paper names an eigenvalue; hypotheses
-stronger than the paper's named definition with no lemma deriving them; global
-bounds where the paper works on a compact chart; a lemma proved for a fixed
-small index set; and typeclass combinations that no nontrivial object
-satisfies. The audit also found several places where the manuscripts need
-correction, recorded in the affected records' notes. Every open record now
-carries the audit's plan for closing it.
-
-A repair pass (2 October 2026) then worked through the 65 records the audit had
-rated *easy* or *medium*, against a checklist built from those defect patterns,
-and closed 64 of them: the internal seed saturation now holds for actual
-represented words under a fixed isomorphism; the quiver commutant is proved
-rather than defined; the finite Hodge–Dirac packet is constructed from a
-differential datum and a faithful tracial state with every field derived; the
-sequential isometric combs are built and the deterministic characterization
-proved from their Choi tensors; the stationarity results live on a compact
-convex chart with the paper's constant; the vacuum regulator theorem is
-re-assembled from derived results; the de Sitter Cauchy slices are proved for
-explicit causal curves; and the marked-bundle classification rests on a new
-spanning-tree library for multigraphs. The one record left open, the Palatini
-torsion theorem, is re-rated *hard* because the Euler equation of the
-quadratic Palatini–Holst action is only sketched in the paper. The duality
-paper again has no open record.
-
-A final pass (3 October 2026) closed the seven *hard* records of the
-predictive-spectral-geometry paper, so that paper is again **completely
-formalized** (77 proved, 11 encoded). It added: a pseudo-resolvent theorem
-(a strongly convergent symmetric pseudo-resolvent family is the resolvent of a
-unique self-adjoint operator) and suprema of normal weights, which make the
-completed retained fibre a concrete object; the bridge from the library's
-chain-metric model to genuine Riemannian manifolds in Mathlib's sense, with
-the optimal Lipschitz constant of a C¹ function identified with the supremum
-of its gradient in both directions; a full stable spin atlas on the flat torus
-built from Fourier multipliers; the L² form of the covariant Wilson core
-estimate with cell-average sampling; and a self-adjoint variable-coefficient
-Dirac operator on the torus, constructed from the discrete Gårding and
-consistency estimates rather than assumed, with norm-resolvent and
-spectral-projection convergence of its lattice stages.
-
-The remaining open records are all rated *hard* (142), the latter
-naming their missing infrastructure (Sobolev compactness, continuum PDE, a
-uniform 4D discrete Sobolev inequality, ODE-flow composition,
-unbounded-limit spectral convergence, or an open parent theorem). Corollaries
-whose Lean proofs take an unproved parent theorem's
-conclusion as a hypothesis are kept *open* by policy (a proof of "theorem
-implies corollary" is not a proof of the corollary) and close when the parent
-is formalized, as several did during the second pass. Every *proved* record
-discloses its rendering choices in the note, for instance a finite-dimensional
-model where the paper's statement is continuum, or a Fourier-mode
-representation where the paper works on the grid.
-
-How to read this table:
-
-- *Proved* means the Lean theorem proves the paper's claim as stated
-  (scoped hypotheses disclosed in the record note). *Encoded* means the
-  object is faithfully defined in Lean with no proof content claimed.
+- *Proved* means the Lean theorem proves the paper's claim as stated, in the
+  generality stated; every scoped hypothesis or rendering choice (a
+  finite-dimensional surrogate where the paper's object is a continuum one, a
+  Fourier-mode representation where the paper works on the grid, a Sobolev
+  order 6 where the paper says 11) is disclosed in the record's note.
+  *Encoded* means the object is faithfully defined in Lean, with its defining
+  conditions and a constructor from the paper's input data, and no proof
+  content is claimed.
 - *Open (partial Lean)* records point to Lean that proves a special case, one
-  direction or a finite model; the note says exactly what is missing. *Open
-  (none)* records have no counterpart in the library yet.
-- *Easy / Medium / Hard* estimate, for every unproved record, how far the
-  existing machinery is from a proof: **easy** is at most a day of assembling
-  existing lemmas or writing a direct definition; **medium** is several days
-  of new lemmas inside the existing finite/algebraic framework; **hard** needs
-  infrastructure that neither this library nor Mathlib has (function-space
-  compactness, unbounded operators, continuum PDE) or a reformulation before
-  the statement can be stated faithfully. Each record's `plan` field says what
-  is missing and which files to build on; the per-paper READMEs list them.
-- Coverage is strongest for the finite algebraic content: the finite
-  spectralization functor and essential image, the graph and A₃ metric
-  results, the commutant-duality and Howe-certificate theorems, the
-  structural Standard-Model carrier and hypercharge, the K₄ selectors,
-  determining kernels and common-action reconstruction. The analytic
-  continuum results (Sobolev compactness, distributional Einstein–Yang–Mills
-  limits, open `3+1` writers, law-space robustness) are largely open, and the
-  Einstein–Standard-Model closure paper explicitly asserts no machine-checked
-  formalization of its analytic theorems.
+  direction or some clauses; the note says exactly what is missing. *Open
+  (none)* records have no counterpart in the library yet. Every open record
+  carries a `difficulty` (easy: a day of assembly; medium: days of new finite
+  lemmas; hard: infrastructure neither this library nor Mathlib has, or a
+  reformulation) and a `plan` naming the missing piece and the files to build
+  on.
+- Corollaries whose Lean proof takes the conclusion of an unproved parent
+  theorem as a hypothesis are kept *open* by policy: a proof of "theorem
+  implies corollary" is not a proof of the corollary. The same rule applies to
+  a single clause resting on an open statement.
+- Every record marked proved has passed a faithfulness audit that reads the
+  current manuscript statement and the cited Lean side by side, checking for
+  tautologies (an object defined to be the claimed answer, a structure that
+  stores the conclusion as a field, an "exactly when" that holds by
+  definition), vacuous hypothesis packets, hidden assumptions of the
+  conclusion, hypotheses stronger than the paper's named definitions, and
+  missing clauses. Where a manuscript statement is ambiguous or false as
+  literally written, the record proves the reading the paper's own proof uses
+  and says so; these points are collected in the records' notes for the
+  author.
+
+Two papers are completely formalized: the predictive-spectral-geometry paper
+and the spacetime–gauge duality paper (every record proved or encoded,
+including the main duality for incidences of arbitrary operator-Schmidt rank,
+the cofinal derived-kernel duality, the structural Standard-Model synthesis,
+the finite Hodge–Dirac reconstruction and its essential images, and the
+compact-spin norm-resolvent theorems on genuine Riemannian manifolds in
+Mathlib's sense). Of the emergent-spacetime paper, the finite and discrete
+content is proved (the ADM and grand-tensor reconstructions, the K₄ and A₃
+selectors, the grid harmonic-gauge Einstein writer with its constructive
+nonsymmetric 3+1 vacuum limit, the Gowdy regulator, the de Sitter and flat
+vacuum regulators, the explicit operational family, the Hodge–temporal and
+literal-link compactness theorems). Its 44 open records all need input the
+manuscript does not give: 29 concern the explicit N = 3 exact finite action,
+which the paper describes only in words, 7 the original-action Hamiltonian
+behind the initial constraint map, 4 the Palatini handoff (the first Bianchi
+identity at the stated L² regularity needs an additional uniform spatial L³
+bound on the connection, and the Euler equation of the Palatini–Holst action
+is only sketched), 2 the same-cylinder Cartan reconstruction, and 2 the
+certification procedure of the Einstein alternative. The Einstein–Standard-Model
+closure paper is formalized in its finite and algebraic parts (the gauge
+descent and Yukawa blocks, the determinant identities, the initial-constraint
+retraction, the abstract first-variation closure, the discrete Hodge and Kato
+inequalities, the covariance and packet-defect lemmas); its 98 open records
+are the analytic continuum theorems (Sobolev compactness, distributional
+Einstein–Yang–Mills limits, the certificate packet, the generated dynamics),
+for which the paper itself asserts no machine-checked formalization.
+
+The infrastructure built for these ledgers is general and absent from Mathlib,
+among it: a Courant–Fischer min–max for compact self-adjoint operators; a real
+Moore–Penrose inverse with the four Penrose equations; Davis–Kahan and Wedin
+perturbation bounds; a pseudo-resolvent theorem producing a self-adjoint
+operator from strongly convergent resolvents; transported Mosco convergence
+with norm-resolvent and spectral-projection limits; a uniform discrete Sobolev
+calculus on the periodic grid (Plancherel, product and commutator bounds,
+Moser composition, sampling, Kuhn–Freudenthal interpolation); L^p duality and
+weak compactness; a grid Aubin–Lions theorem; a Riemannian chain-metric bridge
+identifying the optimal Lipschitz constant with the gradient supremum;
+self-adjoint variable-coefficient Dirac operators on the torus built from
+their lattice stages; Haar twirls over SU(2); a matrix Kraus/Stinespring layer;
+free star algebras; spanning trees for multigraphs; Pfaffians; path-ordered
+exponentials with a BCH bound; two-point Hermite interpolation; the
+contracted Bianchi identity and harmonic-gauge constraint propagation at jet
+level; and the Perron–Frobenius theorem of `NCG`.
 
 ## Which machinery do the papers actually use?
 
@@ -350,10 +208,11 @@ deliberately: they are the generic noncommutative-geometry layer (Krein
 classification, signed Dirac operators, Perron–Frobenius, the Lindblad and
 Ising suites) that earlier stages of the programme were built on, verified to
 the same standard, and available for future noncommutative-geometry work; but
-nothing in the four current ledgers depends on them. Folders that the four papers lean on almost entirely are
-`Commutant`, `StandardModel`, `Spectralization`, `Gravity`, `DiscreteAnalysis`
-and `Action`; `OperatorLimits` is mostly structural (103 of 170 modules are
-imported but not used by any cited proof).
+nothing in the four current ledgers depends on them. Folders that the four
+papers lean on almost entirely are `Commutant`, `StandardModel`,
+`Spectralization`, `Gravity`, `DiscreteAnalysis` and `Action`;
+`OperatorLimits` is mostly structural (103 of 170 modules are imported but not
+used by any cited proof).
 
 ## Installation
 
