@@ -66,7 +66,8 @@ variable
 variable (I) in
 /-- On a Riemannian manifold (`IsRiemannianManifold`), the extended distance is the
 Riemannian distance `riemannianEDist`, the infimum of the lengths of `C¹` paths. -/
-theorem edist_eq_riemannianEDist (x y : M) : edist x y = riemannianEDist I x y := IsRiemannianManifold.out x y
+theorem edist_eq_riemannianEDist (x y : M) : edist x y = riemannianEDist I x y :=
+  IsRiemannianManifold.out x y
 
 variable (I) in
 include I in
@@ -111,10 +112,12 @@ variable (I) in
 /-- The differential `df_p` of a real function, as a continuous linear functional on the tangent
 space `T_pM` carrying its Riemannian norm.  Its operator norm `‖df_p‖` is the Riemannian length
 of the gradient (`norm_gradient`). -/
-noncomputable def differential (f : M → ℝ) (p : M) : TangentSpace I p →L[ℝ] ℝ := mfderiv I 𝓘(ℝ, ℝ) f p
+noncomputable def differential (f : M → ℝ) (p : M) : TangentSpace I p →L[ℝ] ℝ :=
+  mfderiv I 𝓘(ℝ, ℝ) f p
 
 /-- Chain rule along a curve: `(f ∘ γ)'(t) = df_{γ t}(γ'(t))`. -/
-theorem deriv_comp_eq_differential {f : M → ℝ} {γ : ℝ → M} {t : ℝ} (hf : MDifferentiableAt I 𝓘(ℝ, ℝ) f (γ t))
+theorem deriv_comp_eq_differential {f : M → ℝ} {γ : ℝ → M} {t : ℝ}
+    (hf : MDifferentiableAt I 𝓘(ℝ, ℝ) f (γ t))
     (hγ : MDifferentiableAt 𝓘(ℝ, ℝ) I γ t) :
     deriv (f ∘ γ) t = differential I f (γ t) (mfderiv 𝓘(ℝ, ℝ) I γ t 1) := by
   rw [← fderiv_apply_one_eq_deriv, ← mfderiv_eq_fderiv, mfderiv_comp t hf hγ]
@@ -123,7 +126,8 @@ theorem deriv_comp_eq_differential {f : M → ℝ} {γ : ℝ → M} {t : ℝ} (h
 /-- **Mean-value inequality along near-minimising paths.** If `‖df_p‖ ≤ L` everywhere, then
 `|f y - f x| ≤ L (d(x,y) + δ)` for every `δ > 0` (integrate `|(f ∘ γ)'| ≤ L ‖γ'‖` along a `C¹`
 path of length `< d(x,y) + δ`). -/
-theorem abs_sub_le_of_norm_differential_le {f : M → ℝ} (hf : ContMDiff I 𝓘(ℝ, ℝ) 1 f) {L : ℝ} (hL : 0 ≤ L)
+theorem abs_sub_le_of_norm_differential_le {f : M → ℝ} (hf : ContMDiff I 𝓘(ℝ, ℝ) 1 f) {L : ℝ}
+    (hL : 0 ≤ L)
     (hb : ∀ p, ‖differential I f p‖ ≤ L) (x y : M) {δ : ℝ} (hδ : 0 < δ) :
     |f y - f x| ≤ L * (dist x y + δ) := by
   have hlt : riemannianEDist I x y < ENNReal.ofReal (dist x y + δ) := by
@@ -158,12 +162,14 @@ theorem abs_sub_le_of_norm_differential_le {f : M → ℝ} (hf : ContMDiff I �
 
 /-- **Lipschitz constant ≤ `sup ‖∇f‖`.** A `C¹` function with `‖df_p‖ ≤ L` at every point is
 `L`-Lipschitz for the Riemannian distance. -/
-theorem lipschitzWith_of_norm_differential_le {f : M → ℝ} (hf : ContMDiff I 𝓘(ℝ, ℝ) 1 f) {L : NNReal}
+theorem lipschitzWith_of_norm_differential_le {f : M → ℝ} (hf : ContMDiff I 𝓘(ℝ, ℝ) 1 f)
+    {L : NNReal}
     (hb : ∀ p, ‖differential I f p‖ ≤ L) : LipschitzWith L f := by
   refine LipschitzWith.of_dist_le_mul fun x y => ?_
   rw [Real.dist_eq, abs_sub_comm]
   refine le_of_forall_pos_le_add fun ε hε => ?_
-  have h := abs_sub_le_of_norm_differential_le hf L.coe_nonneg hb x y (δ := ε / ((L : ℝ) + 1)) (by positivity)
+  have h := abs_sub_le_of_norm_differential_le hf L.coe_nonneg hb x y
+    (δ := ε / ((L : ℝ) + 1)) (by positivity)
   refine h.trans ?_
   rw [mul_add]
   gcongr
@@ -255,7 +261,8 @@ theorem chartLine_mfderiv (p : M) (u : E) {t : ℝ}
     exact (extChartAt I p).map_target ht
   have hinv : extChartAt I p (chartLine (I := I) p u t) = extChartAt I p p + t • u :=
     (extChartAt I p).right_inv ht
-  have e1 : chartLine (I := I) p u = (extChartAt I p).symm ∘ (fun t : ℝ => extChartAt I p p + t • u) :=
+  have e1 : chartLine (I := I) p u =
+      (extChartAt I p).symm ∘ (fun t : ℝ => extChartAt I p p + t • u) :=
     rfl
   rw [TangentBundle.symmL_trivializationAt hsrc, hinv, I.range_eq_univ, mfderivWithin_univ, e1,
     mfderiv_comp t hsymm hline]
@@ -267,9 +274,11 @@ theorem chartLine_mfderiv (p : M) (u : E) {t : ℝ}
 Riemannian metric, if `f` is differentiable at `p` and `0 < ε < ‖df_p‖`, there is a point `y ≠ p`
 with `(‖df_p‖ - ε) d(p,y) ≤ |f y - f p|`.  One moves a short time `s` along the chart line in a
 direction `u` where `df_p(u)` almost attains `‖df_p‖`; near `p` the line has Riemannian speed
-`< r`, with `r > 1` arbitrarily close to `1` (`eventually_norm_symmL_trivializationAt_comp_self_lt`),
-so `d(p,σ s) ≤ r s`, while `f(σ s) - f p ≥ s(‖df_p‖ - ε/2)` by differentiability. -/
-theorem exists_sub_mul_dist_le_abs_sub (p : M) {f : M → ℝ} (hf : MDifferentiableAt I 𝓘(ℝ, ℝ) f p) {ε : ℝ}
+`< r`, with `r > 1` arbitrarily close to `1`
+(`eventually_norm_symmL_trivializationAt_comp_self_lt`), so `d(p,σ s) ≤ r s`, while
+`f(σ s) - f p ≥ s(‖df_p‖ - ε/2)` by differentiability. -/
+theorem exists_sub_mul_dist_le_abs_sub (p : M) {f : M → ℝ} (hf : MDifferentiableAt I 𝓘(ℝ, ℝ) f p)
+    {ε : ℝ}
     (hε : 0 < ε) (hεN : ε < ‖differential I f p‖) :
     ∃ y : M, 0 < dist p y ∧ (‖differential I f p‖ - ε) * dist p y ≤ |f y - f p| := by
   set D := differential I f p with hD
@@ -302,7 +311,8 @@ theorem exists_sub_mul_dist_le_abs_sub (p : M) {f : M → ℝ} (hf : MDifferenti
     have h1 : ContinuousAt (extChartAt I p).symm (η 0) := by
       rw [hη0]; exact continuousAt_extChartAt_symm p
     exact h1.comp hηc.continuousAt
-  have hA : η ⁻¹' (extChartAt I p).target ∩ σ ⁻¹' {y | ‖(trivializationAt E (TangentSpace I) p).symmL ℝ y ∘L
+  have hA : η ⁻¹' (extChartAt I p).target ∩
+      σ ⁻¹' {y | ‖(trivializationAt E (TangentSpace I) p).symmL ℝ y ∘L
       (trivializationAt E (TangentSpace I) p).continuousLinearMapAt ℝ p‖ < r} ∈ 𝓝 (0 : ℝ) := by
     refine Filter.inter_mem ?_ ?_
     · refine ((isOpen_extChartAt_target p).preimage hηc).mem_nhds ?_

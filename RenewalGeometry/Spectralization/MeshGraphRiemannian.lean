@@ -37,7 +37,7 @@ space only; each Riemannian ingredient is instantiated non-trivially on the Eucl
 -/
 
 open Filter Topology Set Manifold Bundle
-open scoped ContDiff
+open scoped ContDiff Matrix.Norms.L2Operator
 open RenewalGeometry.EndpointBlockMetricHead RenewalGeometry.RiemannianDistanceLipschitz
 
 namespace RenewalGeometry.MeshGraphDistanceConvergence
@@ -113,6 +113,7 @@ theorem norm_differential_le_iSup {f : M → ℝ} (hf : ContMDiff I 𝓘(ℝ, �
     ‖differential I f p‖ ≤ ⨆ q, ‖differential I f q‖ :=
   le_ciSup (bddAbove_norm_differential hf) p
 
+omit [CompactSpace M] in
 /-- **`‖∇_g f‖_∞` is the optimal Lipschitz constant** (lower half): if `‖∇_g f‖_∞ > 0`, then for
 every `ε > 0` there are points `x ≠ y` with `(‖∇_g f‖_∞ - ε) d(x,y) ≤ |f x - f y|`. -/
 theorem exists_sub_mul_dist_le_abs_sub_of_iSup {f : M → ℝ} (hf : ContMDiff I 𝓘(ℝ, ℝ) 1 f)
@@ -214,6 +215,52 @@ theorem ApproxMeshSequence.global_metric_riemannian {Vh Eh : ℕ → Type*}
 end Packaged
 
 end Compact
+
+/-! ### Closed connected Riemannian manifolds in Mathlib's standard setting -/
+
+/-- On a connected emetric space (e.g. a connected Riemannian manifold), the metric space
+structure with finite distance `(edist · ·).toReal` has the same extended distance (hence the same
+topology and the same `IsRiemannianManifold` structure). -/
+theorem toMetricSpace_toEMetricSpace_of_connectedSpace {X : Type*} [EMetricSpace X]
+    [ConnectedSpace X] :
+    (EMetricSpace.toMetricSpace (edist_ne_top_of_connectedSpace (X := X))).toEMetricSpace =
+      ‹EMetricSpace X› := rfl
+
+section Connected
+
+variable {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
+  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ F H}
+  {M : Type*} [EMetricSpace M] [ConnectedSpace M] [ChartedSpace H M] [IsManifold I 1 M]
+  [RiemannianBundle (fun x : M ↦ TangentSpace I x)] [IsRiemannianManifold I M]
+  [I.Boundaryless] [IsContinuousRiemannianBundle F (fun x : M ↦ TangentSpace I x)]
+  [CompactSpace M]
+
+/-- **`thm:supp-global-metric` on a closed connected Riemannian manifold** in Mathlib's standard
+setting (`EMetricSpace M` with `IsRiemannianManifold I M`, compact, connected, boundaryless model,
+continuous metric).  The Riemannian distance is finite (`edist_ne_top_of_connectedSpace`), and
+`d_g = (edist ·  ·).toReal` is the distance of `EMetricSpace.toMetricSpace`; for every refining
+sequence of approximate meshes the four clauses of `ApproxMeshSequence.global_metric_riemannian`
+hold. -/
+theorem ApproxMeshSequence.global_metric_riemannian_of_connectedSpace {Vh Eh : ℕ → Type*}
+    [∀ n, Fintype (Eh n)] [∀ n, DecidableEq (Eh n)] :
+    letI := EMetricSpace.toMetricSpace (edist_ne_top_of_connectedSpace (X := M))
+    ∀ S : ApproxMeshSequence M Vh Eh,
+    (∀ n (g : Vh n → ℝ),
+      ‖metricDirac (S.mesh n).graph * endpointRepresentation (S.mesh n).graph g -
+        endpointRepresentation (S.mesh n).graph g * metricDirac (S.mesh n).graph‖ =
+        edgeLipschitz (S.mesh n).graph g) ∧
+    (∀ᶠ n in atTop, ∀ x y : Vh n,
+      edgeConnesDistance (S.mesh n).graph x y = graphDistance (S.mesh n).graph x y) ∧
+    (∃ err : ℕ → ℝ, Tendsto err atTop (𝓝 0) ∧
+      ∀ᶠ n in atTop, ∀ x y : Vh n, |graphDistance (S.mesh n).graph x y -
+        (edist ((S.mesh n).point x) ((S.mesh n).point y)).toReal| ≤ err n) ∧
+    (∀ f : M → ℝ, ContMDiff I 𝓘(ℝ, ℝ) 1 f →
+      Tendsto (fun n => edgeLipschitz (S.mesh n).graph (f ∘ (S.mesh n).point)) atTop
+        (𝓝 (⨆ p, ‖differential I f p‖))) := by
+  letI := EMetricSpace.toMetricSpace (edist_ne_top_of_connectedSpace (X := M))
+  exact fun S => S.global_metric_riemannian
+
+end Connected
 
 /-! ### Instantiation of the full packet -/
 

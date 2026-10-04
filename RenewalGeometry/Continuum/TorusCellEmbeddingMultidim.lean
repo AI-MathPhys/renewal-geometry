@@ -281,7 +281,6 @@ theorem mFourier_sub_sample_le (κ : Fin d → ℤ) (y : UnitAddTorus (Fin d)) :
       _ ≤ 2 * π * |(κ i : ℝ)| * (1 / n) := by gcongr
       _ = 2 * π * |(κ i : ℝ)| / n := by ring
   simp only [mFourier, ContinuousMap.coe_mk]
-  push_cast
   refine (norm_prod_sub_prod_le univ _ _ (fun i => Circle.norm_coe _)
     (fun i => Circle.norm_coe _)).trans ?_
   calc ∑ i, ‖(fourier (κ i) (y i) : ℂ) - fourier (κ i) (samplePt (index n y) i)‖
@@ -611,7 +610,7 @@ theorem dft_inversion' {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ
     ring
   simp only [hrow, sum_latticeChar, sub_eq_zero]
   rw [Finset.sum_eq_single x]
-  · rw [if_pos rfl, inv_mul_cancel₀ hn, one_smul]
+  · rw [ite_eq_left rfl, inv_mul_cancel₀ hn, one_smul]
   · intro y _ hy
     simp [Ne.symm hy]
   · simp
@@ -706,17 +705,17 @@ theorem inner_modeSample (k κ : Fin d → ℤ) :
   rw [hexp, hsum, sum_latticeChar]
   by_cases h : zcast n k = zcast n κ
   · have h' : zcast n κ - zcast n k = 0 := by rw [h, sub_self]
-    rw [if_pos h', if_pos h, hsq]
+    rw [ite_eq_left h', ite_eq_left h, hsq]
     exact inv_mul_cancel₀ (pow_ne_zero _ (Nat.cast_ne_zero.mpr (NeZero.ne n)))
   · have h' : zcast n κ - zcast n k ≠ 0 := fun e => h (sub_eq_zero.1 e).symm
-    rw [if_neg h', if_neg h, mul_zero]
+    rw [ite_eq_right h', ite_eq_right h, mul_zero]
 
 /-- **Aliasing**: `⟪e_k, 𝒥 (modeSample κ)⟫ = 0` unless `k ≡ κ (mod n)`. -/
 theorem inner_mode_pcEmbedding_modeSample_eq_zero (k κ : Fin d → ℤ)
     (h : zcast n k ≠ zcast n κ) :
     ⟪mFourierLp 2 k, pcEmbedding d n (modeSample n κ)⟫_ℂ = 0 := by
   rw [← LinearIsometry.coe_toContinuousLinearMap, ← ContinuousLinearMap.adjoint_inner_left,
-    pcEmbedding_adjoint_mode, inner_smul_left, inner_modeSample, if_neg h, mul_zero]
+    pcEmbedding_adjoint_mode, inner_smul_left, inner_modeSample, ite_eq_right h, mul_zero]
 
 /-- The signed representative `ℓ̃ ∈ (-n/2, n/2]ᵈ` of a grid frequency. -/
 def signedRep (ℓ : Grid d n) : Fin d → ℤ := fun i => (ℓ i).valMinAbs
@@ -750,14 +749,14 @@ theorem inner_modeError_eq_zero {ℓ ℓ' : Grid d n} (h : ℓ ≠ ℓ') :
   have h1 : ⟪mFourierLp 2 (signedRep ℓ), mFourierLp 2 (signedRep ℓ')⟫_ℂ = 0 := by
     have := orthonormal_mFourier (d := Fin d)
     rw [orthonormal_iff_ite] at this
-    rw [this, if_neg hk]
+    rw [this, ite_eq_right hk]
   have h2 := inner_mode_pcEmbedding_modeSample_eq_zero (n := n) _ _ hz
   have h3 : ⟪pcEmbedding d n (modeSample n (signedRep ℓ)),
       mFourierLp 2 (signedRep ℓ')⟫_ℂ = 0 := by
     rw [← inner_conj_symm, inner_mode_pcEmbedding_modeSample_eq_zero _ _ (Ne.symm hz), map_zero]
   have h4 : ⟪pcEmbedding d n (modeSample n (signedRep ℓ)),
       pcEmbedding d n (modeSample n (signedRep ℓ'))⟫_ℂ = 0 := by
-    rw [LinearIsometry.inner_map_map, inner_modeSample, if_neg hz]
+    rw [LinearIsometry.inner_map_map, inner_modeSample, ite_eq_right hz]
   rw [modeError, modeError, inner_sub_left, inner_sub_right, inner_sub_right, h1, h2, h3, h4]
   simp
 

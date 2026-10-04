@@ -141,9 +141,11 @@ theorem isCompactOperator_finsum_rankOne (m : ι → ℂ) (F : Finset ι) :
     simp only [Finset.sum_insert hi]
     exact (isCompactOperator_rankOne i (m i)).add ih
 
+omit [DecidableEq ι] in
 /-- A finitely supported diagonal multiplier is compact. -/
 theorem isCompactOperator_mulCLM_finite (m : ι → ℂ) {C : ℝ} (hm : ∀ i, ‖m i‖ ≤ C)
     (F : Finset ι) (hF : ∀ i, i ∉ F → m i = 0) : IsCompactOperator (mulCLM m hm) := by
+  classical
   have heq : ⇑(mulCLM m hm) = fun a => ∑ i ∈ F, (m i * a i) • lp.single 2 i (1 : ℂ) := by
     funext a
     ext j
@@ -165,10 +167,12 @@ theorem isCompactOperator_mulCLM_finite (m : ι → ℂ) {C : ℝ} (hm : ∀ i, 
   rw [heq]
   exact isCompactOperator_finsum_rankOne m F
 
+omit [DecidableEq ι] in
 /-- **Abstract Rellich lemma.** A diagonal multiplier on `ℓ²(ι)` whose entries tend to zero
 along the cofinite filter is a compact operator. -/
 theorem isCompactOperator_mulCLM (m : ι → ℂ) {C : ℝ} (hm : ∀ i, ‖m i‖ ≤ C)
     (hlim : Tendsto m cofinite (𝓝 0)) : IsCompactOperator (mulCLM m hm) := by
+  classical
   have hclosed := isClosed_setOfPred_isCompactOperator (𝕜₁ := ℂ) (𝕜₂ := ℂ)
     (σ₁₂ := RingHom.id ℂ) (M₁ := ℓ²(ι, ℂ)) (M₂ := ℓ²(ι, ℂ))
   refine hclosed.closure_subset (Metric.mem_closure_iff.2 fun ε hε => ?_)
@@ -236,7 +240,8 @@ def opLinear : domain b lam →ₗ[ℂ] H where
   map_add' f g := by
     rw [← map_add]; congr 1; ext i
     simp only [scaledCoeff, lp.coeFn_add, Pi.add_apply, Submodule.coe_add, map_add]
-    change (lam i : ℂ) * (b.repr f i + b.repr g i) = (lam i : ℂ) * b.repr f i + (lam i : ℂ) * b.repr g i
+    change (lam i : ℂ) * (b.repr f i + b.repr g i) =
+      (lam i : ℂ) * b.repr f i + (lam i : ℂ) * b.repr g i
     ring
   map_smul' c f := by
     rw [RingHom.id_apply, ← map_smul]; congr 1; ext i
@@ -314,7 +319,8 @@ theorem repr_diagResolvent {z : ℂ} (hz : z.im ≠ 0) (f : H) (i : ι) :
     b.repr (diagResolvent b lam z hz f) i = resMult lam z i * b.repr f i := by
   simp [diagResolvent]
 
-theorem diagResolvent_mem {z : ℂ} (hz : z.im ≠ 0) (f : H) : diagResolvent b lam z hz f ∈ domain b lam := by
+theorem diagResolvent_mem {z : ℂ} (hz : z.im ≠ 0) (f : H) :
+    diagResolvent b lam z hz f ∈ domain b lam := by
   rw [mem_domain_iff]
   have h := memℓp_two_mul (norm_lam_mul_resMult_le lam hz) (b.repr f)
   convert h using 1
@@ -337,7 +343,8 @@ def data : SelfAdjointResolventData H where
     apply b.repr.injective
     ext i
     rw [repr_sub_smul, repr_diagOp]
-    change (lam i : ℂ) * b.repr (diagResolvent b lam z hz f) i - z * b.repr (diagResolvent b lam z hz f) i
+    change (lam i : ℂ) * b.repr (diagResolvent b lam z hz f) i -
+      z * b.repr (diagResolvent b lam z hz f) i
       = b.repr f i
     have h := ofReal_sub_ne_zero (lam i) hz
     rw [repr_diagResolvent, ← sub_mul, ← mul_assoc, resMult, mul_inv_cancel₀ h, one_mul]
@@ -350,7 +357,8 @@ def data : SelfAdjointResolventData H where
 
 @[simp] theorem data_op : (data b lam).op = diagOp b lam := rfl
 
-theorem data_resolvent {z : ℂ} (hz : z.im ≠ 0) : (data b lam).resolvent z hz = diagResolvent b lam z hz :=
+theorem data_resolvent {z : ℂ} (hz : z.im ≠ 0) :
+    (data b lam).resolvent z hz = diagResolvent b lam z hz :=
   rfl
 
 /-! ### The core of finite combinations -/
@@ -358,7 +366,8 @@ theorem data_resolvent {z : ℂ} (hz : z.im ≠ 0) : (data b lam).resolvent z hz
 /-- Finite linear combinations of the basis vectors. -/
 def core : Submodule ℂ H := Submodule.span ℂ (Set.range b)
 
-theorem basis_mem_domain [DecidableEq ι] (i : ι) : b i ∈ domain b lam := by
+theorem basis_mem_domain (i : ι) : b i ∈ domain b lam := by
+  classical
   rw [mem_domain_iff, b.repr_self]
   have : (fun j => (lam j : ℂ) * (lp.single 2 i (1 : ℂ) : ℓ²(ι, ℂ)) j) =
       ⇑(lp.single 2 i ((lam i : ℂ)) : ℓ²(ι, ℂ)) := by
@@ -377,8 +386,9 @@ theorem core_le_domain : core b ≤ domain b lam := by
   exact basis_mem_domain b lam i
 
 /-- `diagOp (b i) = lam_i b i`. -/
-theorem diagOp_basis [DecidableEq ι] (i : ι) :
+theorem diagOp_basis (i : ι) :
     diagOp b lam ⟨b i, basis_mem_domain b lam i⟩ = (lam i : ℂ) • b i := by
+  classical
   apply b.repr.injective
   ext j
   rw [repr_diagOp, map_smul, lp.coeFn_smul, Pi.smul_apply, smul_eq_mul]
@@ -389,9 +399,10 @@ theorem diagOp_basis [DecidableEq ι] (i : ι) :
   · simp
 
 /-- `diagOp` on a finite combination of basis vectors. -/
-theorem diagOp_finsum [DecidableEq ι] (s : Finset ι) (c : ι → ℂ)
+theorem diagOp_finsum (s : Finset ι) (c : ι → ℂ)
     (hmem : (∑ i ∈ s, c i • b i) ∈ domain b lam) :
     diagOp b lam ⟨∑ i ∈ s, c i • b i, hmem⟩ = ∑ i ∈ s, ((lam i : ℂ) * c i) • b i := by
+  classical
   apply b.repr.injective
   ext j
   rw [repr_diagOp]

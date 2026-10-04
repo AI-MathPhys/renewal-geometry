@@ -24,10 +24,12 @@ steps, of total length `≤ d(x,y) + δ`.
   distances `i d(x,y)/n` from `x` (intermediate value theorem).  This is how a Riemannian
   manifold is handled (`Analysis/RiemannianDistanceChains`).
 * All results of the two surrogate files are re-proved under `HasApproxChains` (the additive
-  `δ` is removed by letting `δ → 0` for a fixed mesh): `MeshGraph.graphDistance_le_dist_add_of_approx`,
-  `ApproxMeshSequence.exists_error_tendsto_zero_of_approx` (**`eq:supp-global-metric-convergence`**),
-  `MeshSequence.tendsto_edgeLipschitz_of_approx`, `ApproxMeshSequence.tendsto_edgeLipschitz_of_approx`
-  and the packaged `ApproxMeshSequence.global_metric_of_approx`.
+  `δ` is removed by letting `δ → 0` for a fixed mesh):
+  `MeshGraph.graphDistance_le_dist_add_of_approx`,
+  `ApproxMeshSequence.exists_error_tendsto_zero_of_approx`
+  (**`eq:supp-global-metric-convergence`**), `MeshSequence.tendsto_edgeLipschitz_of_approx`,
+  `ApproxMeshSequence.tendsto_edgeLipschitz_of_approx` and the packaged
+  `ApproxMeshSequence.global_metric_of_approx`.
 -/
 
 open Filter Topology Set
