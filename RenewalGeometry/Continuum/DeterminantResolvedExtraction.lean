@@ -919,6 +919,36 @@ theorem combined_criterion_core (D₀ : Data 𝔄 (EuclideanSpace ℝ (Fin rH)) 
 
 end Criterion
 
+/-! ### Non-vacuity -/
+
+section NonVacuity
+
+open ShiftedJetAction (Grid)
+
+attribute [local instance 2000] instMeasureSpaceUnitAddCircle
+
+/-- **Non-vacuity of the background hypotheses, with a large background**: a constant real
+potential `a ≡ c` (for any `c`, e.g. with `|c| ‖Z‖` far above the critical ball) satisfies the
+strong `L⁴` / first-difference hypotheses of `combined_extraction_core` (limits `c` and `0`). -/
+theorem const_background_hyps (n : ℕ → ℕ) [∀ k, NeZero (n k)] (c : ℝ) :
+    (∀ _μ : Fin 4, LpTendsto volume 4 (fun k => pc (fun _ : Grid (n k) => c)) (fun _ : 𝕋 => c)) ∧
+    (∀ μ ν : Fin 4, LpTendsto volume 2
+      (fun k => pc (NativeHiggs.DpV μ (fun _ : Grid (n k) => c))) (fun _ : 𝕋 => (0 : ℝ))) := by
+  refine ⟨fun _ => (LpTendsto.const (memLp_const c)).congr (fun k => Eventually.of_forall
+    fun z => rfl) (Eventually.of_forall fun z => rfl), fun μ _ => ?_⟩
+  refine (LpTendsto.const (memLp_const (0 : ℝ))).congr (fun k => Eventually.of_forall
+    fun z => ?_) (Eventually.of_forall fun z => rfl)
+  simp [pc, NativeHiggs.DpV]
+
+/-- Non-vacuity of the semisimple hypotheses: the zero semisimple part (constant, commuting,
+bounded) has the compactness property `BCompact` (`bCompact_of_const`). -/
+example (n : ℕ → ℕ) [∀ k, NeZero (n k)] (hn : Tendsto n atTop atTop) :
+    BCompact (𝔄 := ℂ) n (fun k μ (_ : Grid (n k)) => (fun (_ : ℕ) (_ : Fin 4) => (0 : ℂ)) k μ) :=
+  (bCompact_of_const n hn (fun _ _ => (0 : ℂ)) (fun _ _ _ => Commute.zero_left _)
+    (Mβ := 0) (fun _ _ => by simp)).2.2
+
+end NonVacuity
+
 end
 
 end RenewalGeometry.DeterminantResolved

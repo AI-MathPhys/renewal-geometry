@@ -9,6 +9,8 @@ import RenewalGeometry.Analysis.PeriodicCubeCalculus
 import RenewalGeometry.Analysis.LipschitzRiemannSumError
 import RenewalGeometry.Continuum.ContEulerDerivativeBounds
 import RenewalGeometry.Continuum.NativeTailTransferBounds
+import RenewalGeometry.Continuum.NativeLinkCovectorNorm
+import RenewalGeometry.Continuum.DeterminantResolvedExtraction
 
 /-!
 # The consistency budget of the equivariant native first variation
@@ -612,7 +614,7 @@ def covSb (D : Data 𝔄 𝓗 𝓢) (Y v : R4 → Field 𝔄 𝓗 𝓢) (y : R4)
 box: `‖k‖_{W^{1,∞}} + ‖a‖_∞ + ‖D_A a‖_2 + ‖η_H‖_∞ + ‖D_A η_H‖_2 + ‖η_Ψ‖_∞ + ‖∇^{ref,A}η_Ψ‖_2 +
 ‖η_Ψ̄‖_∞ + ‖∇^{ref,A}η_Ψ̄‖_2`. -/
 def testSize (D : Data 𝔄 𝓗 𝓢) (Y v : R4 → Field 𝔄 𝓗 𝓢) : ℝ :=
-  supN (fun y => (v y).1) + supN (fderiv ℝ (fun y => (v y).1)) +
+  supN (fun y => (v y).1) + supN (fun y μ => fderiv ℝ (fun y => (v y).1) y (evec μ)) +
     supN (fun y => (v y).2.1) + l2N (covA Y v) +
     supN (fun y => (v y).2.2.1) + l2N (covH D Y v) +
     supN (fun y => (v y).2.2.2.1) + l2N (covS D Y v) +
@@ -621,7 +623,7 @@ def testSize (D : Data 𝔄 𝓗 𝓢) (Y v : R4 → Field 𝔄 𝓗 𝓢) : ℝ
 theorem testSize_nonneg (D : Data 𝔄 𝓗 𝓢) (Y v : R4 → Field 𝔄 𝓗 𝓢) : 0 ≤ testSize D Y v := by
   unfold testSize l2N
   have := supN_nonneg (fun y => (v y).1)
-  have := supN_nonneg (fderiv ℝ (fun y => (v y).1))
+  have := supN_nonneg (fun y μ => fderiv ℝ (fun y => (v y).1) y (evec μ))
   have := supN_nonneg (fun y => (v y).2.1)
   have := supN_nonneg (fun y => (v y).2.2.1)
   have := supN_nonneg (fun y => (v y).2.2.2.1)
@@ -660,20 +662,25 @@ theorem exists_liftM_bound_mat {Ke : Set Mat} (hKe : IsCompact Ke) :
     have h1 := hKb _ hmem
     rw [Real.norm_eq_abs, abs_of_nonneg (norm_nonneg _)] at h1
     have e2 : NativeGravityFirstJet.liftM e k = ‖k‖ • NativeGravityFirstJet.liftM e (‖k‖⁻¹ • k) := by
-      simp only [NativeGravityFirstJet.liftM, Matrix.mul_smul, Matrix.smul_mul, smul_smul,
-        mul_inv_cancel₀ hkpos.ne', one_smul]
-      rw [smul_comm]
+      simp only [NativeGravityFirstJet.liftM, Matrix.mul_smul, Matrix.smul_mul, smul_smul]
+      rw [show ‖k‖ * (-(1 / 2) * ‖k‖⁻¹) = -(1 / 2 : ℝ) by field_simp]
     rw [e2, norm_smul, norm_norm, mul_comm]
     exact mul_le_mul_of_nonneg_right (h1.trans (le_max_left _ _)) (norm_nonneg _)
 
 theorem contDiff_liftTest {Y v : R4 → Field 𝔄 𝓗 𝓢} (hY : ContDiff ℝ 1 Y) (hv : ContDiff ℝ 1 v) :
     ContDiff ℝ 1 (liftTest Y v) := by
-  unfold liftTest NativeGravityFirstJet.liftM NativeScaling.metric
+  unfold liftTest
   refine ContDiff.prodMk ?_ (contDiff_snd.comp hv)
   have he : ContDiff ℝ 1 (fun y => (Y y).1) := contDiff_fst.comp hY
   have hk : ContDiff ℝ 1 (fun y => (v y).1) := contDiff_fst.comp hv
-  refine ContDiff.const_smul _ ?_
-  exact (he.mul hk).mul ((he.matrix_transpose.mul contDiff_const).mul he)
+  have hg : ContDiff ℝ 1 (fun y => NativeScaling.metric (Y y).1) :=
+    NativeDensity.contDiff_metric.comp he
+  have hent : ∀ {f : R4 → Mat}, ContDiff ℝ 1 f → ∀ i j, ContDiff ℝ 1 (fun y => f y i j) :=
+    fun hf i j => contDiff_pi.mp (contDiff_pi.mp hf i) j
+  refine contDiff_pi.mpr fun a => contDiff_pi.mpr fun μ => ?_
+  simp only [NativeGravityFirstJet.liftM_apply]
+  refine contDiff_const.mul (ContDiff.sum fun α _ => ContDiff.sum fun β _ => ?_)
+  exact ((hent he a α).mul (hent hg μ β)).mul (hent hk α β)
 
 theorem isZPeriodic_liftTest {Y v : R4 → Field 𝔄 𝓗 𝓢} (hY : PeriodicCube.IsZPeriodic Y)
     (hv : PeriodicCube.IsZPeriodic v) : PeriodicCube.IsZPeriodic (liftTest Y v) := fun k x => by
@@ -698,7 +705,7 @@ theorem norm_liftTest_le {Ke : Set Mat} {Kl : ℝ} (hKl0 : 0 ≤ Kl)
     ((continuous_snd.comp (continuous_snd.comp (continuous_snd.comp continuous_snd))).comp hv) hy
   have hl := hKl _ (hYe y) (v y).1
   have hS := testSize_nonneg D Y v
-  have hD1 := supN_nonneg (fderiv ℝ (fun y => (v y).1))
+  have hD1 := supN_nonneg (fun y μ => fderiv ℝ (fun y => (v y).1) y (evec μ))
   have hL1 : 0 ≤ l2N (covA Y v) := ENNReal.toReal_nonneg
   have hL2 : 0 ≤ l2N (covH D Y v) := ENNReal.toReal_nonneg
   have hL3 : 0 ≤ l2N (covS D Y v) := ENNReal.toReal_nonneg
@@ -730,5 +737,247 @@ theorem norm_liftTest_le {Ke : Set Mat} {Kl : ℝ} (hKl0 : 0 ≤ Kl)
   linarith
 
 end Paper
+
+/-! ### `prop:equivariant-native-budgets` -/
+
+section Budgets
+
+open NativeScaling (Mat)
+open NativeDensity NativeGauge NativeLinkCov
+open DiscreteEulerConsistency (limDensity samp IsPeriodic)
+
+attribute [local instance] Matrix.normedAddCommGroup Matrix.normedSpace
+
+variable {𝔄 : Type*} [NormedRing 𝔄] [NormedAlgebra ℝ 𝔄] [CompleteSpace 𝔄] [NormOneClass 𝔄]
+  [Nontrivial 𝔄] [FiniteDimensional ℝ 𝔄]
+variable {𝓗 : Type*} [NormedAddCommGroup 𝓗] [NormedSpace ℝ 𝓗] [CompleteSpace 𝓗] [Nontrivial 𝓗]
+  [FiniteDimensional ℝ 𝓗]
+variable {𝓢 : Type*} [NormedAddCommGroup 𝓢] [NormedSpace ℝ 𝓢] [CompleteSpace 𝓢] [Nontrivial 𝓢]
+  [FiniteDimensional ℝ 𝓢]
+
+theorem measureReal_cell {n : ℕ} [NeZero n] (k : Fin 4 → Fin n) :
+    volume.real (cell n k) = ((n : ℝ)⁻¹) ^ 4 := by
+  have hn : (0 : ℝ) < n := npos
+  rw [measureReal_def, cell, Real.volume_pi_Ico]
+  have e : ∀ i, ((k i : ℝ) + 1) / n - (k i : ℝ) / n = (n : ℝ)⁻¹ := fun i => by
+    field_simp; ring
+  simp only [e, Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+  rw [ENNReal.toReal_pow, ENNReal.toReal_ofReal (inv_nonneg.2 hn.le)]
+
+/-- `‖Q_h v(x_k)‖ ≤ m` if `‖v‖ ≤ m` on the cell. -/
+theorem norm_cellAvg_le_of_le {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V]
+    {n : ℕ} [NeZero n] {v : R4 → V} (k : Fin 4 → Fin n) {m : ℝ}
+    (hm : ∀ y ∈ cell n k, ‖v y‖ ≤ m) : ‖cellAvg n v k‖ ≤ m := by
+  have hn : (0 : ℝ) < n := npos
+  have h1 := norm_cellAvg_le (v := v) k
+  have h2 : ∫ y in cell n k, ‖v y‖ ≤ m * ((n : ℝ)⁻¹) ^ 4 := by
+    have := norm_setIntegral_le_of_norm_le_const (s := cell n k) (f := fun y => ‖v y‖) (C := m)
+      (UnitCubeRiemannSum.volume_cell_lt_top (Nat.pos_of_ne_zero (NeZero.ne n)) k)
+      fun y hy => by rw [Real.norm_eq_abs, abs_of_nonneg (norm_nonneg _)]; exact hm y hy
+    rw [measureReal_cell, Real.norm_eq_abs] at this
+    exact (le_abs_self _).trans this
+  have h3 : ((n : ℝ)⁻¹) ^ 4 * ‖cellAvg n v k‖ ≤ ((n : ℝ)⁻¹) ^ 4 * m := by linarith
+  exact le_of_mul_le_mul_left h3 (by positivity)
+
+/-- The first variation along a line is the Fréchet derivative. -/
+theorem deriv_line_eq_fderiv {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] {f : E → ℝ}
+    {y : E} (hd : DifferentiableAt ℝ f y) (w : E) :
+    deriv (fun s : ℝ => f (y + s • w)) 0 = fderiv ℝ f y w := by
+  have hl : HasDerivAt (fun s : ℝ => y + s • w) w 0 := by
+    simpa using ((hasDerivAt_id (0 : ℝ)).smul_const w).const_add y
+  have := (by simpa using hd.hasFDerivAt : HasFDerivAt f (fderiv ℝ f y) (y + (0 : ℝ) • w))
+  exact (this.comp_hasDerivAt (0 : ℝ) hl).deriv
+
+set_option maxHeartbeats 1600000 in
+-- the assembly of the two budgets
+/-- **`prop:equivariant-native-budgets`** (unit periodic box `[0,1]⁴`, grid `(ℤ/n)⁴`, mesh
+`h = 1/n`; flat positive comparison connection on the coordinate bundles, flat reference spin
+connection; periodic `C¹` physical tests).  For a covariant data packet `C`, fixed positive
+link/matter mass metrics `M`, a compact oriented coframe chart `K_e`, an amplitude bound `A` and a
+band constant `B`, there are `C₀ ≥ 0` and `c_res > 0` such that for every `K ≥ 1` and `n` with
+`hK ≤ c_res`, every smooth periodic field tuple `z = Y` with coframes in `K_e`, `|Y| ≤ A` and the
+growing-band bounds `‖D^j Y‖ ≤ B K^j` (`j ≤ 3`, `eq:eq-growing-band`), and every periodic `C¹`
+physical test `v = (k, a, η_H, η_Ψ, η_Ψ̄)`, the unchanged local action and the covariant
+cell-average physical test lift `𝓘_h^cov v = Q_h ṽ_z` (`Icov`, `ṽ_z` the symmetric coframe lift
+`liftTest`) satisfy
+* `eq:eq-native-consistency`: `|D S_h^{loc}[𝓘_h^cov v] - D𝒮(z)[v]| ≤ C₀ h K³ 𝔫_z(v)`, and
+* `eq:eq-native-stationarity`: `|D S_h^{loc}[𝓘_h^cov v]| ≤ C₀ σ_h^{link} 𝔫_z(v)`,
+where `D𝒮(z)[v] = ∫ DL₀(J¹z)(ṽ_z, ∂ṽ_z)` is the first variation of the continuum
+Einstein–Standard-Model action along the physical test (`contVar`), `𝔫_z(v)` is the equivariant
+test size `eq:equivariant-test-size` (`testSize`), and `σ_h^{link}` is the dual norm of the
+complete action covector in the link/matter mass metric (`NativeLinkCov.covNormP`).  Hence the
+budgets `eq:equivariant-consistency`–`eq:equivariant-stationarity` hold with
+`c_h^{eq} ≤ C₀ h K³`, `ε_h^{eq} ≤ C₀ σ_h^{link}` (`eq:eq-native-budgets`); the exact site-gauge
+invariance of `σ_h^{link}` is `NativeLinkCov.covNormP_record_gauge`. -/
+theorem equivariant_native_budgets (C : CovData 𝔄 𝓗 𝓢) (M : MassMetric 𝔄 𝓗) {Ke : Set Mat}
+    (hKe : IsCompact Ke) (hdet : ∀ e ∈ Ke, 0 < e.det) (A B : ℝ) :
+    ∃ C₀ c_res : ℝ, 0 ≤ C₀ ∧ 0 < c_res ∧ ∀ K : ℝ, 1 ≤ K → ∀ (n : ℕ) [NeZero n],
+      (n : ℝ)⁻¹ * K ≤ c_res →
+      ∀ Y : R4 → Field 𝔄 𝓗 𝓢, ContDiff ℝ ∞ Y → PeriodicCube.IsZPeriodic Y →
+      (∀ z, (Y z).1 ∈ Ke) → (∀ z, ‖Y z‖ ≤ A) →
+      (∀ z, ‖iteratedFDeriv ℝ 1 Y z‖ ≤ B * K) → (∀ z, ‖iteratedFDeriv ℝ 2 Y z‖ ≤ B * K ^ 2) →
+      (∀ z, ‖iteratedFDeriv ℝ 3 Y z‖ ≤ B * K ^ 3) →
+      ∀ v : R4 → Field 𝔄 𝓗 𝓢, ContDiff ℝ 1 v → PeriodicCube.IsZPeriodic v →
+      |fderiv ℝ (localAction C.toData (n : ℝ)⁻¹) (samp (n : ℝ)⁻¹ Y : Grid n → Field 𝔄 𝓗 𝓢)
+          (Icov n Y v) - contVar (L0 C.toData) Y (liftTest Y v)| ≤
+        C₀ * (n : ℝ)⁻¹ * K ^ 3 * testSize C.toData Y v ∧
+      |fderiv ℝ (localAction C.toData (n : ℝ)⁻¹) (samp (n : ℝ)⁻¹ Y : Grid n → Field 𝔄 𝓗 𝓢)
+          (Icov n Y v)| ≤
+        C₀ * covNormP C M (n : ℝ)⁻¹ (toLinks (n : ℝ)⁻¹ (samp (n : ℝ)⁻¹ Y : Grid n → Field 𝔄 𝓗 𝓢)) *
+          testSize C.toData Y v := by
+  obtain ⟨C₁, c₁, hC₁, hc₁, hbud⟩ := native_consistency_budget C.toData hKe hdet A B
+  obtain ⟨C₂, c₂, hc₂, hcons⟩ := NativeEulerConsistency.native_consistency C.toData hKe hdet A B
+  obtain ⟨Kl, hKl0, hKl⟩ := exists_liftM_bound_mat hKe
+  set Ap := max A 0 with hAp
+  set c_res := min c₁ (min c₂ (1 / (512 * (Ap + 1)))) with hcres
+  have hcres0 : 0 < c_res := lt_min hc₁ (lt_min hc₂ (by positivity))
+  set Lm := max Kl 1 with hLm
+  set sK := Real.sqrt (1 + 4 * ‖M.gm‖ + ‖M.hm‖) * Real.sqrt 8 with hsK
+  refine ⟨C₁ * Lm + sK * Lm, c_res, by positivity, hcres0, ?_⟩
+  intro K hK n _ hnK Y hY hYp hYe hYA h1 h2 h3 v hv hvp
+  have hK0 : 0 < K := lt_of_lt_of_le one_pos hK
+  set h : ℝ := (n : ℝ)⁻¹ with hh
+  have hpos : 0 < h := inv_pos.2 npos
+  have hh1 : h ≤ c_res := by
+    calc h = h * 1 := (mul_one h).symm
+      _ ≤ h * K := mul_le_mul_of_nonneg_left hK hpos.le
+      _ ≤ c_res := hnK
+  -- the lifted test
+  set vt := liftTest Y v with hvt
+  have hvt1 : ContDiff ℝ 1 vt := contDiff_liftTest (hY.of_le (by simp)) hv
+  have hvtp : PeriodicCube.IsZPeriodic vt := isZPeriodic_liftTest hYp hvp
+  set m := Lm * testSize C.toData Y v with hm
+  have hm0 : 0 ≤ m := mul_nonneg (by positivity) (testSize_nonneg _ _ _)
+  have hvtm : ∀ y ∈ Icc (0 : R4) 1, ‖vt y‖ ≤ m := fun y hy =>
+    norm_liftTest_le hKl0 hKl C.toData hYe hv.continuous hy
+  have hL1 : ∫ y in Icc (0 : R4) 1, ‖vt y‖ ≤ m := by
+    have := norm_setIntegral_le_of_norm_le_const (s := Icc (0 : R4) 1) (f := fun y => ‖vt y‖)
+      (C := m) (by rw [PeriodicCube.volume_cube]; exact ENNReal.one_lt_top)
+      fun y hy => by rw [Real.norm_eq_abs, abs_of_nonneg (norm_nonneg _)]; exact hvtm y hy
+    rw [measureReal_def, PeriodicCube.volume_cube, ENNReal.toReal_one, mul_one,
+      Real.norm_eq_abs] at this
+    exact (le_abs_self _).trans this
+  refine ⟨?_, ?_⟩
+  · -- consistency
+    have hb := hbud K hK n (hnK.trans (min_le_left _ _)) Y hY hYp hYe hYA h1 h2 h3 vt hvt1 hvtp
+    refine hb.trans ?_
+    have hn0 : 0 ≤ C₁ * h * K ^ 3 := by positivity
+    calc C₁ * h * K ^ 3 * ∫ y in Icc (0 : R4) 1, ‖vt y‖ ≤ C₁ * h * K ^ 3 * m :=
+          mul_le_mul_of_nonneg_left hL1 hn0
+      _ ≤ (C₁ * Lm + sK * Lm) * h * K ^ 3 * testSize C.toData Y v := by
+          have := testSize_nonneg C.toData Y v
+          have : 0 ≤ sK * Lm * h * K ^ 3 * testSize C.toData Y v := by positivity
+          rw [hm]; nlinarith
+  · -- stationarity
+    set y0 : Grid n → Field 𝔄 𝓗 𝓢 := samp h Y with hy0
+    obtain ⟨hdet', hlog, -⟩ := hcons K hK h hpos (hnK.trans ((min_le_right _ _).trans
+      (min_le_left _ _))) n Y (hY.of_le (ContEulerBounds.natCast_le_infty 3))
+      (by rw [hh, mul_inv_cancel₀ npos.ne']; exact isPeriodic_one_of_isZPeriodic hYp)
+      hYe hYA h1 h2 h3
+    have hgA : ∀ μ x, h * ‖NativeDensity.gauge y0 μ x‖ ≤ 1 / 512 := by
+      intro μ x
+      have hg : ‖NativeDensity.gauge y0 μ x‖ ≤ Ap := by
+        change ‖(Y (DiscreteEulerConsistency.pos h x)).2.1 μ‖ ≤ Ap
+        refine (norm_le_pi_norm _ μ).trans ((norm_fst_le _).trans ((norm_snd_le _).trans
+          ((hYA _).trans (le_max_left _ _))))
+      have hc3 : h ≤ 1 / (512 * (Ap + 1)) := hh1.trans ((min_le_right _ _).trans (min_le_right _ _))
+      calc h * ‖NativeDensity.gauge y0 μ x‖ ≤ 1 / (512 * (Ap + 1)) * Ap :=
+            mul_le_mul hc3 hg (norm_nonneg _) (by positivity)
+        _ ≤ 1 / 512 := by
+            rw [div_mul_eq_mul_div, one_mul, div_le_div_iff₀ (by positivity) (by norm_num)]
+            nlinarith [le_max_right A 0]
+    have hs : ∀ μ x, ‖(n : ℝ)⁻¹ • NativeDensity.gauge y0 μ x‖ < 1 / 32 := by
+      intro μ x
+      rw [norm_smul, Real.norm_of_nonneg hpos.le]
+      linarith [hgA μ x]
+    have hd : DifferentiableAt ℝ (localAction C.toData (n : ℝ)⁻¹) y0 :=
+      NativeFrechet.differentiableAt_localAction _ hpos.ne' (fun x => (hdet' x).ne')
+        (fun x μ ν _ => hlog x μ ν)
+        (fun x μ ν _ => (DeterminantResolved.norm_gaugePlaquette_sub_one_le
+          (NativeDensity.gauge y0) (fun μ x => hgA μ x) x μ ν).trans_lt (by norm_num))
+    have hst := abs_deriv_localAction_le C M hs hd (Icov n Y v)
+    rw [deriv_line_eq_fderiv hd] at hst
+    refine hst.trans ?_
+    -- the nodal mass of the averaged test
+    have hQ : ∀ x, ‖Icov n Y v x‖ ≤ m := by
+      intro x
+      refine norm_cellAvg_le_of_le _ fun y hy => hvtm y
+        (UnitCubeRiemannSum.cell_subset_Icc (Nat.pos_of_ne_zero (NeZero.ne n)) _ hy)
+    have hnod : nodalL2Sq (n : ℝ)⁻¹ (Icov n Y v) ≤ 8 * m ^ 2 := by
+      unfold nodalL2Sq
+      have hpt : ∀ x, ‖(Icov n Y v x).1‖ ^ 2 + ∑ μ, ‖(Icov n Y v x).2.1 μ‖ ^ 2 +
+          ‖(Icov n Y v x).2.2.1‖ ^ 2 + ‖(Icov n Y v x).2.2.2.1‖ ^ 2 +
+          ‖(Icov n Y v x).2.2.2.2‖ ^ 2 ≤ 8 * m ^ 2 := by
+        intro x
+        set w := Icov n Y v x
+        have hw := hQ x
+        have c1 : ‖w.1‖ ≤ m := (norm_fst_le w).trans hw
+        have c2 : ∀ μ, ‖w.2.1 μ‖ ≤ m := fun μ =>
+          (norm_le_pi_norm _ μ).trans ((norm_fst_le _).trans ((norm_snd_le w).trans hw))
+        have c3 : ‖w.2.2.1‖ ≤ m :=
+          (norm_fst_le _).trans ((norm_snd_le _).trans ((norm_snd_le w).trans hw))
+        have c4 : ‖w.2.2.2.1‖ ≤ m := (norm_fst_le _).trans ((norm_snd_le _).trans
+          ((norm_snd_le _).trans ((norm_snd_le w).trans hw)))
+        have c5 : ‖w.2.2.2.2‖ ≤ m := (norm_snd_le _).trans ((norm_snd_le _).trans
+          ((norm_snd_le _).trans ((norm_snd_le w).trans hw)))
+        have s2 : ∑ μ, ‖w.2.1 μ‖ ^ 2 ≤ ∑ _μ : Fin 4, m ^ 2 := Finset.sum_le_sum fun μ _ =>
+          pow_le_pow_left₀ (norm_nonneg _) (c2 μ) 2
+        simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul] at s2
+        have p1 := pow_le_pow_left₀ (norm_nonneg _) c1 2
+        have p3 := pow_le_pow_left₀ (norm_nonneg _) c3 2
+        have p4 := pow_le_pow_left₀ (norm_nonneg _) c4 2
+        have p5 := pow_le_pow_left₀ (norm_nonneg _) c5 2
+        push_cast at s2
+        linarith
+      calc ((n : ℝ)⁻¹) ^ 4 * ∑ x, (‖(Icov n Y v x).1‖ ^ 2 + ∑ μ, ‖(Icov n Y v x).2.1 μ‖ ^ 2 +
+            ‖(Icov n Y v x).2.2.1‖ ^ 2 + ‖(Icov n Y v x).2.2.2.1‖ ^ 2 +
+            ‖(Icov n Y v x).2.2.2.2‖ ^ 2)
+          ≤ ((n : ℝ)⁻¹) ^ 4 * ∑ _x : Grid n, 8 * m ^ 2 :=
+            mul_le_mul_of_nonneg_left (Finset.sum_le_sum fun x _ => hpt x) (by positivity)
+        _ = 8 * m ^ 2 := by
+            rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+            have hc : (Fintype.card (Grid n) : ℝ) = (n : ℝ) ^ 4 := by simp [ZMod.card]
+            rw [hc, ← mul_assoc, ← mul_pow, inv_mul_cancel₀ npos.ne', one_pow, one_mul]
+    have hcov0 : 0 ≤ covNormP C M (n : ℝ)⁻¹ (toLinks (n : ℝ)⁻¹ y0) :=
+      Real.sSup_nonneg fun _ ⟨_, _, hr⟩ => hr ▸ abs_nonneg _
+    have hsq : Real.sqrt (nodalL2Sq (n : ℝ)⁻¹ (Icov n Y v)) ≤ Real.sqrt 8 * m := by
+      calc Real.sqrt (nodalL2Sq (n : ℝ)⁻¹ (Icov n Y v)) ≤ Real.sqrt (8 * m ^ 2) :=
+            Real.sqrt_le_sqrt hnod
+        _ = Real.sqrt 8 * m := by rw [Real.sqrt_mul (by norm_num), Real.sqrt_sq hm0]
+    have hS := testSize_nonneg C.toData Y v
+    calc covNormP C M (n : ℝ)⁻¹ (toLinks (n : ℝ)⁻¹ y0) *
+          (Real.sqrt (1 + 4 * ‖M.gm‖ + ‖M.hm‖) * Real.sqrt (nodalL2Sq (n : ℝ)⁻¹ (Icov n Y v)))
+        ≤ covNormP C M (n : ℝ)⁻¹ (toLinks (n : ℝ)⁻¹ y0) *
+          (Real.sqrt (1 + 4 * ‖M.gm‖ + ‖M.hm‖) * (Real.sqrt 8 * m)) :=
+          mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hsq (Real.sqrt_nonneg _)) hcov0
+      _ = sK * Lm * covNormP C M (n : ℝ)⁻¹ (toLinks (n : ℝ)⁻¹ y0) * testSize C.toData Y v := by
+          rw [hm, hsK]; ring
+      _ ≤ (C₁ * Lm + sK * Lm) * covNormP C M (n : ℝ)⁻¹ (toLinks (n : ℝ)⁻¹ y0) *
+            testSize C.toData Y v := by
+          have : 0 ≤ C₁ * Lm * covNormP C M (n : ℝ)⁻¹ (toLinks (n : ℝ)⁻¹ y0) *
+            testSize C.toData Y v := by positivity
+          nlinarith
+
+end Budgets
+
+/-! ### Non-vacuity -/
+
+section NonVacuity
+
+open NativeDensity
+attribute [local instance] Matrix.normedAddCommGroup Matrix.normedSpace
+
+/-- Non-vacuity of the field hypotheses of `equivariant_native_budgets`: a constant field tuple is
+smooth, `ℤ⁴`-periodic and satisfies the growing-band bounds with `B = 0` (all derivatives of order
+`≥ 1` vanish); with `K_e = {e₀}`, `det e₀ > 0`, the chart and amplitude conditions hold. -/
+theorem const_field_hyps {𝔄 𝓗 𝓢 : Type*} [NormedRing 𝔄] [NormedAlgebra ℝ 𝔄]
+    [NormedAddCommGroup 𝓗] [NormedSpace ℝ 𝓗] [NormedAddCommGroup 𝓢] [NormedSpace ℝ 𝓢]
+    (w : Field 𝔄 𝓗 𝓢) :
+    ContDiff ℝ ∞ (fun _ : R4 => w) ∧ PeriodicCube.IsZPeriodic (fun _ : R4 => w) ∧
+      ∀ j : ℕ, 1 ≤ j → ∀ z, ‖iteratedFDeriv ℝ j (fun _ : R4 => w) z‖ = 0 := by
+  refine ⟨contDiff_const, fun _ _ => rfl, fun j hj z => ?_⟩
+  rw [iteratedFDeriv_const_of_ne (by omega), Pi.zero_apply, norm_zero]
+
+end NonVacuity
 
 end RenewalGeometry.EquivariantBudgets

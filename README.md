@@ -17,14 +17,14 @@ encoded, and what is still open.
 | Library | Role | Size |
 |---|---|---|
 | **`NCG`** | Generic noncommutative geometry, stated with no reference to renewal processes: completely positive maps and channel monoids, Schwarz/Choi theory, Clifford and Jordan algebra, spectral triples, Krein spaces and signed sectors classified by `H¹(G, ℤ/2)`, graph cohomology and covers, and a complete Perron–Frobenius theorem. Candidate material for Mathlib. | 56 files, ~11k lines |
-| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 1392 files, ~464k lines |
+| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 1692 files, ~644k lines |
 
 `NCG` never imports `RenewalGeometry`; this is enforced by
 [`scripts/check_layering.py`](scripts/check_layering.py) in CI.
 
 ### Verification guarantees
 
-- **Sorry-free.** `lake build` kernel-checks all 1448 files; there is no `sorry`.
+- **Sorry-free.** `lake build` kernel-checks all 1748 files; there is no `sorry`.
 - **Standard axioms only.** Every Lean declaration cited as *proved* in a
   paper ledger is audited with `#print axioms` by
   [`scripts/audit_axioms.py`](scripts/audit_axioms.py): only `propext`,
@@ -106,10 +106,10 @@ Lean declarations, and a generated README listing every record.
 | Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | Easy | Medium | Hard |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 88 | 77 | 11 | 0 | 0 | 0 | 0 | 0 |
-| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 197 | 144 | 14 | 24 | 15 | 0 | 0 | 39 |
-| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 31 | 5 | 16 | 82 | 0 | 0 | 98 |
+| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 198 | 144 | 14 | 24 | 16 | 0 | 0 | 40 |
+| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 111 | 11 | 12 | 0 | 0 | 0 | 12 |
 | [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 107 | 12 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **538** | **359** | **42** | **40** | **97** | **0** | **0** | **137** |
+| **Total** | **539** | **439** | **48** | **36** | **16** | **0** | **0** | **52** |
 
 How to read the table:
 
@@ -163,22 +163,51 @@ identity used to make the Holst variation inert does not follow at the
 manuscript's L² connection regularity, so the handoff hypotheses carry an
 additional uniform spatial L³ bound on the connection interpolants (supplied
 by both concrete connection routes of the paper); the field is named
-`spatialConnectionL3Bound` and flagged in every affected record. The 39 open
+`spatialConnectionL3Bound` and flagged in every affected record. The 40 open
 records all need input the manuscript does not give: 29 concern the explicit
-N = 3 exact finite action, which the paper describes only in words, 8 the
-original-action Hamiltonian behind the initial constraint map, and 2 the
-same-cylinder theorem (its clause (ii) is proved; the finite-cutoff Cartan
-reconstruction behind the literal-link budget is never written down). The Einstein–Standard-Model
-closure paper is formalized in its finite and algebraic parts (the gauge
-descent and Yukawa blocks, the determinant identities, the initial-constraint
-retraction, the abstract first-variation closure, the discrete Hodge and Kato
-inequalities, the covariance and packet-defect lemmas); its 98 open records
-are the analytic continuum theorems (Sobolev compactness, distributional
-Einstein–Yang–Mills limits, the certificate packet, the generated dynamics),
-for which the paper itself asserts no machine-checked formalization.
+N = 3 exact finite action, which the paper describes only in words (a revision
+adding it is in progress; one new theorem of that revision is recorded but not
+yet assessed), 8 the original-action Hamiltonian behind the initial constraint
+map, and 2 the same-cylinder theorem (its clause (ii) is proved; the
+finite-cutoff Cartan reconstruction behind the literal-link budget is never
+written down). The Einstein–Standard-Model closure paper is now formalized in
+its analytic core as well: the reduced variational closure theorem, the
+continuity and Lipschitz estimates of the complete first variation, the
+compactness certificates and strong-packet limit, the defect-measure
+identities and zero-defect characterization, the critical Coulomb/Kato
+estimates, the whole native lattice chain (Coulomb normalization for
+S(U(3)×U(2)), Wilson compactness, reconstruction identification, all-sector
+consistency, the finite Wilson zero-defect closure and its determinant-resolved
+form), the common-slab hyperbolic stability, Dirac stability, the actual-jet
+writer with its coupled bootstrap, the a-posteriori shadows and the
+constrained initial data. Its 12 open records fall into four groups: Uhlenbeck's
+small-energy gauge theorem for the structure group S(U(3)×U(2)) (2 records,
+isolated as one named proposition from which the rest is derived); the
+analytic-germ (Cauchy–Kovalevskaya) existence behind the physical
+identification (1); the bridge identifying the native Euler rows with the
+field-equation residuals of the bootstrap model, on which the quantitative
+closure theorem and its five corollaries rest (6, a general Euler–Lagrange ↔
+Einstein-tensor calculus not yet in the library); the readout clauses of the
+generated finite dynamics (2); and the gauge-robust reader certificate, whose
+causal temporal gauge is not time-periodic although the paper applies a
+periodic Fourier reader to it (1, an author query). Every rendering choice
+(spatial sections rendered as 𝕋³, compact charts as coordinate boxes,
+trivialised bundles) is disclosed in the records' notes.
 
 The infrastructure built for these ledgers is general and absent from Mathlib,
-among it: a Courant–Fischer min–max for compact self-adjoint operators; a real
+among it: Sobolev spaces on open sets of ℝ^d by weak derivatives with cutoff,
+reflection extension on boxes, local Rellich compactness and the critical
+Sobolev embedding H¹ ↪ L⁴ in four dimensions; Fourier Sobolev spaces on 𝕋^d
+with the C^r, L^p and Rellich embeddings and interpolation; Kolmogorov–Riesz
+compactness on the torus and its charts; de la Vallée-Poussin/Vitali strong
+convergence; weak-* compactness of bounded signed and tensor-valued measures;
+uniform discrete Sobolev, Poincaré and Loomis–Whitney inequalities and Hodge
+theory on periodic grids; the derivative of the matrix exponential and
+logarithm; symmetric-hyperbolic L² and H^k energy estimates, Kato local
+existence by spectral Galerkin with explicit CFL midpoint schemes, quasilinear
+slab stability with the shifted energy multiplier; Whitney forms on simplicial
+meshes; strip-holomorphic and Gevrey Fourier decay; and, from the earlier
+papers, a Courant–Fischer min–max for compact self-adjoint operators; a real
 Moore–Penrose inverse with the four Penrose equations; Davis–Kahan and Wedin
 perturbation bounds; a pseudo-resolvent theorem producing a self-adjoint
 operator from strongly convergent resolvents; transported Mosco convergence
@@ -202,14 +231,14 @@ finer question by walking the proof terms of every ledger-cited declaration:
 
 | | Modules |
 |---|---:|
-| Used by at least one cited declaration | 778 |
-| Never used, but imported by a used module (structurally required) | 340 |
-| Never used and imported by nothing used (removable without loss) | 330 |
-| **Total** | **1448** |
+| Used by at least one cited declaration | 1080 |
+| Never used, but imported by a used module (structurally required) | 354 |
+| Never used and imported by nothing used (removable without loss) | 314 |
+| **Total** | **1748** |
 
 The removable part is concentrated in the foundation of the *earlier* papers
 of the programme rather than the four tracked here: `Lorentz` (51 of 60
-modules), `Operational` (31), `Renewal` (25), `Dimension` (22), `StatMech`
+modules), `Operational` (29), `Renewal` (25), `Dimension` (22), `StatMech`
 (20), `NCG/Algebra` (19 of 24) and `NCG/Krein` (13 of 14). They are kept
 deliberately: they are the generic noncommutative-geometry layer (Krein
 classification, signed Dirac operators, Perron–Frobenius, the Lindblad and
@@ -217,7 +246,8 @@ Ising suites) that earlier stages of the programme were built on, verified to
 the same standard, and available for future noncommutative-geometry work; but
 nothing in the four current ledgers depends on them. Folders that the four
 papers lean on almost entirely are `Commutant`, `StandardModel`,
-`Spectralization`, `Gravity`, `DiscreteAnalysis` and `Action`;
+`Spectralization`, `Gravity`, `Continuum`, `Analysis`, `DiscreteAnalysis` and
+`Action`;
 `OperatorLimits` is mostly structural (103 of 170 modules are imported but not
 used by any cited proof).
 

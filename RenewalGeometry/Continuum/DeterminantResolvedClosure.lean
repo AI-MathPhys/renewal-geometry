@@ -1674,6 +1674,15 @@ theorem determinant_resolved_closure_flat_SM (C₀ : CovData SMAlg (EuclideanSpa
 end MainSM
 
 
+/-! ### Non-vacuity -/
+
+/-- Non-vacuity of the split data: for trivial links, zero potential and zero phases, the
+remainder is identically `1` (in `G_ss`, flat, with trivial rooted words and certificate `0`). -/
+theorem splitVg_trivial {N : ℕ} [NeZero N] (h : ℝ) (e : ShiftedJetAction.Grid N × Fin 4) :
+    splitVg star_Zc h (fun _ => 0) (fun _ _ => 0) (fun _ => (1 : unitary SMAlg)) e = 1 := by
+  apply Subtype.ext
+  simp [splitVg, coe_cUg]
+
 end
 
 end RenewalGeometry.DeterminantResolvedSM

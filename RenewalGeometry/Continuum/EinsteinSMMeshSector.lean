@@ -233,6 +233,194 @@ theorem exists_sm_estimate [Nonempty FC.C] (θ : CoefficientBank Ysec) {Ke : Set
     (fun k j => hnode (nodePt N k j)) hcell).trans (le_of_eq ?_)
   ring
 
+
+/-! ### The gravitational sector (exact integration) -/
+
+/-- The coframe projection `R ↦ (e, ∂e, 0, …, 0)` of jets. -/
+def gproj : RJet FC.C →L[ℝ] RJet FC.C :=
+  (πe (C := FC.C)).prod ((πde (C := FC.C)).prod 0)
+
+theorem gravPt_gproj (θ : CoefficientBank Ysec) (R : RJet FC.C) :
+    gravPt (C := FC.C) θ (gproj FC R) = gravPt θ R := rfl
+
+/-- The coframe jet `(e, ∂e)` of a field tuple at a point. -/
+def gjet (z : FieldTuple FC.C) (x : E4) : RJet FC.C :=
+  RJet.mk (z.e x) (eJet z.e x) 0 0 0 0 0 0 0 0
+
+theorem gproj_redJet (z : FieldTuple FC.C) (x : E4) : gproj FC (redJet z x) = gjet FC z x := rfl
+
+theorem gjet_mem_jetGL {z : FieldTuple FC.C} {x : E4} (hx : z.e x ∈ coframeGL) :
+    gjet FC z x ∈ jetGL FC.C := hx
+
+/-- The derivative of the first-order gravitational density sees only the coframe jet. -/
+theorem fderiv_gravPt_gproj (θ : CoefficientBank Ysec) {R : RJet FC.C} (hR : R ∈ jetGL FC.C)
+    (T' : RJet FC.C) :
+    fderiv ℝ (gravPt θ) R T' = fderiv ℝ (gravPt θ) (gproj FC R) (gproj FC T') := by
+  have hR' : gproj FC R ∈ jetGL FC.C := hR
+  have hd : DifferentiableAt ℝ (gravPt (C := FC.C) θ) (gproj FC R) :=
+    ((contDiffOn_gravPt θ (n := 1)).contDiffAt (isOpen_jetGL.mem_nhds hR')).differentiableAt
+      one_ne_zero
+  have e : gravPt (C := FC.C) θ = gravPt θ ∘ gproj FC := funext fun R => (gravPt_gproj FC θ R).symm
+  conv_lhs => rw [e]
+  rw [fderiv_comp R hd (gproj FC).differentiableAt, ContinuousLinearMap.comp_apply,
+    ContinuousLinearMap.fderiv]
+
+/-- The coframe jet of the complete variation `v̂ = (ė(k), …)` is the coframe part of `redVar`. -/
+theorem gproj_redVar {z v : FieldTuple FC.C} {x : E4} (hz : DifferentiableAt ℝ z.e x)
+    (hv : DifferentiableAt ℝ v.e x) :
+    gproj FC (redVar (redJet z x) (testJet v x)) = gjet FC (variationDirection z v) x := by
+  refine RJet.ext' rfl ?_ rfl rfl rfl rfl rfl rfl rfl rfl
+  funext μ
+  exact (pd_metricLift hz hv μ).symm
+
+theorem gjet_line {z W : FieldTuple FC.C} {x : E4} (hz : DifferentiableAt ℝ z.e x)
+    (hW : DifferentiableAt ℝ W.e x) (t : ℝ) :
+    gjet FC (z + t • W) x = gjet FC z x + t • gjet FC W x := by
+  refine RJet.ext' rfl ?_ (by simp [gjet]) (by simp [gjet]) (by simp [gjet]) (by simp [gjet])
+    (by simp [gjet]) (by simp [gjet]) (by simp [gjet]) (by simp [gjet])
+  funext i
+  exact pd_line hz hW t i
+
+theorem gjet_sub {d₁ d₂ : FieldTuple FC.C} {x : E4} (h₁ : DifferentiableAt ℝ d₁.e x)
+    (h₂ : DifferentiableAt ℝ d₂.e x) : gjet FC d₁ x - gjet FC d₂ x = gjet FC (d₁ - d₂) x := by
+  have hj : eJet d₁.e x - eJet d₂.e x = eJet (d₁ - d₂).e x :=
+    funext fun i => (pd_sub_fun h₁ h₂ i).symm
+  simp only [gjet, rjet_mk_sub FC, sub_self, hj]
+  rfl
+
+theorem norm_gjet_le {d : FieldTuple FC.C} {x : E4} {s : ℝ} (hs : PtSmall FC d x s) :
+    ‖gjet FC d x‖ ≤ s := by
+  have hs0 := hs.nonneg
+  exact norm_rjet_le FC hs.e ((norm_eJet_le_fderiv x).trans hs.de) (by simpa using hs0)
+    (by simpa using hs0) (by simpa using hs0) (by simpa using hs0) (by simpa using hs0)
+    (by simpa using hs0) (by simpa using hs0) (by simpa using hs0)
+
+theorem FieldC11.bl_gjet {z : FieldTuple FC.C} {B : ℝ} (hz : FieldC11 FC z B) :
+    BL (gjet FC z) (B + B + 0 + 0 + 0 + 0 + 0 + 0 + 0 + 0) :=
+  BL.rjet FC hz.e.bl (BL.pi hz.nonneg fun i => hz.e.bl_pd i) BL.zero BL.zero BL.zero BL.zero
+    BL.zero BL.zero BL.zero BL.zero
+
+/-- **The gravitational sector estimate of `eq:mesh-C1`** (exact integration, no quadrature):
+uniformly over `C^{1,1}` reconstructed coframes in a compact chart set and reconstructed
+directions with `W - v̂ = O(h)` in `C¹`, the finite first variation of the integrated first-order
+comparison action is the box integral of the continuum density variation up to `O(h)`. -/
+theorem exists_grav_estimate (θ : CoefficientBank Ysec) {Ke : Set CoframeFibre}
+    (hKe : IsCompact Ke) (hKeGL : Ke ⊆ coframeGL) {B : ℝ} (hB : 0 ≤ B) {κ : ℝ} (hκ : 0 ≤ κ)
+    (P : ℕ) : ∃ C : ℝ, ∀ (N : ℕ) (q w : (Fin 4 → ℤ) → FieldVal FC.C)
+      (v : FieldTuple FC.C), 0 < N →
+      FieldC11 FC (reconFields FC (1 / N) q) B → FieldC11 FC (reconFields FC (1 / N) w) B →
+      FieldC11 FC v B → (∀ y, (reconFields FC (1 / N) q).e y ∈ Ke) →
+      (∀ y, PtSmall FC (reconFields FC (1 / N) w - v) y (κ * (1 / N))) →
+      |finiteVar (gravAction FC θ P N) q w - ∫ x in compBox P, fderiv ℝ (gravPt θ)
+        (gjet FC (reconFields FC (1 / N) q) x) (gjet FC v x)| ≤ C * (1 / N) := by
+  set Cg := B + B + 0 + 0 + 0 + 0 + 0 + 0 + 0 + 0
+  set Kg : Set (RJet FC.C) := {R | R.e ∈ Ke} ∩ closedBall 0 Cg
+  have hKg : IsCompact Kg :=
+    (isCompact_closedBall (0 : RJet FC.C) Cg).inter_left
+      (hKe.isClosed.preimage (πe (C := FC.C)).continuous)
+  have hKgGL : Kg ⊆ jetGL FC.C := fun R hR => hKeGL hR.1
+  obtain ⟨δ, hδ, hδU⟩ := hKg.exists_cthickening_subset_open isOpen_jetGL hKgGL
+  have hKg' : IsCompact (cthickening δ Kg) := hKg.cthickening
+  have hD1 : ContDiffOn ℝ 1 (fderiv ℝ (gravPt (C := FC.C) θ)) (jetGL FC.C) :=
+    (contDiffOn_gravPt θ (n := 2)).fderiv_of_isOpen isOpen_jetGL (by norm_num)
+  obtain ⟨LD, MD, hLD, hMD, hMDb, -⟩ := exists_C1_on_compact isOpen_jetGL hD1 hKg' hδU
+  have hcont : ContinuousOn (gravPt (C := FC.C) θ) (jetGL FC.C) :=
+    (contDiffOn_gravPt θ (n := 0)).continuousOn
+  have hdcont : ContinuousOn (fderiv ℝ (gravPt (C := FC.C) θ)) (jetGL FC.C) :=
+    hD1.continuousOn
+  have hvol : volume.real (compBox P) = P := by
+    rw [Measure.real, compBox, Real.volume_Icc_pi_toReal]
+    · rw [Fin.prod_univ_four]; simp
+    · intro i; by_cases hi : i = 0 <;> simp [hi]
+  refine ⟨P * (MD * κ), fun N q w v hN hz hW hv hzK hsm => ?_⟩
+  set h : ℝ := 1 / N with hhdef
+  have hh : 0 < h := by positivity
+  set z := reconFields FC h q
+  set W := reconFields FC h w
+  set J := gjet FC z
+  set V := gjet FC W
+  have hJ : BL J Cg := hz.bl_gjet FC
+  have hV : BL V Cg := hW.bl_gjet FC
+  have hJK : ∀ x, J x ∈ Kg := fun x => ⟨hzK x, mem_closedBall_zero_iff.mpr (hJ.bound x)⟩
+  set ε := δ / (Cg + 1)
+  have hCg : 0 ≤ Cg := hJ.nonneg
+  have hε : 0 < ε := by positivity
+  have hmem : ∀ x, ∀ t ∈ ball (0 : ℝ) ε, J x + t • V x ∈ cthickening δ Kg := by
+    intro x t ht
+    refine mem_cthickening_of_dist_le _ (J x) δ Kg (hJK x) ?_
+    rw [dist_eq_norm, add_sub_cancel_left, norm_smul, Real.norm_eq_abs]
+    rw [mem_ball, dist_zero_right, Real.norm_eq_abs] at ht
+    calc |t| * ‖V x‖ ≤ ε * (Cg + 1) :=
+          mul_le_mul ht.le ((hV.bound x).trans (by linarith)) (norm_nonneg _) hε.le
+      _ = δ := by simp only [ε]; field_simp
+  have hGL : ∀ x, ∀ t ∈ ball (0 : ℝ) ε, J x + t • V x ∈ jetGL FC.C := fun x t ht =>
+    hδU (hmem x t ht)
+  have hcJ := hJ.continuous
+  have hcV := hV.continuous
+  -- the line of actions
+  have e : (fun t : ℝ => gravAction FC θ P N (q + t • w)) =
+      fun t => ∫ x in compBox P, gravPt θ (J x + t • V x) := by
+    funext t
+    simp only [gravAction]
+    rw [reconFields_add_smul FC (show (0 : ℝ) < 1 / N by positivity)]
+    refine setIntegral_congr_fun measurableSet_Icc fun x _ => ?_
+    show gravPt θ (redJet (z + t • W) x) = gravPt θ (gjet FC z x + t • gjet FC W x)
+    rw [← gravPt_gproj FC θ (redJet (z + t • W) x), gproj_redJet, gjet_line FC (hz.e.differentiable x)
+      (hW.e.differentiable x)]
+  have hbox : volume (compBox P) < ⊤ := isCompact_Icc.measure_lt_top
+  have hint : ∀ f : E4 → ℝ, Continuous f → Integrable f (volume.restrict (compBox P)) :=
+    fun f hf => hf.continuousOn.integrableOn_compact isCompact_Icc
+  set μb : Measure E4 := volume.restrict (compBox P)
+  haveI : IsFiniteMeasure μb := isFiniteMeasure_restrict.mpr hbox.ne
+  have hF_meas : ∀ᶠ t in 𝓝 (0 : ℝ), AEStronglyMeasurable
+      (fun x => gravPt (C := FC.C) θ (J x + t • V x)) μb :=
+    Filter.eventually_of_mem (ball_mem_nhds 0 hε) fun t ht =>
+      (hcont.comp_continuous (hcJ.add (hcV.const_smul t)) fun x => hGL x t ht).aestronglyMeasurable
+  have hF_int : Integrable (fun x => gravPt (C := FC.C) θ (J x + (0 : ℝ) • V x)) μb :=
+    hint _ (hcont.comp_continuous (hcJ.add (hcV.const_smul (0 : ℝ))) fun x =>
+      hGL x 0 (mem_ball_self hε))
+  have hF'_meas : AEStronglyMeasurable
+      (fun x => fderiv ℝ (gravPt (C := FC.C) θ) (J x + (0 : ℝ) • V x) (V x)) μb :=
+    ((hdcont.comp_continuous (hcJ.add (hcV.const_smul (0 : ℝ))) fun x =>
+      hGL x 0 (mem_ball_self hε)).clm_apply hcV).aestronglyMeasurable
+  have h_bound : ∀ᵐ x ∂μb, ∀ t ∈ ball (0 : ℝ) ε,
+      ‖fderiv ℝ (gravPt (C := FC.C) θ) (J x + t • V x) (V x)‖ ≤ MD * Cg :=
+    Filter.Eventually.of_forall fun x t ht =>
+      ((fderiv ℝ (gravPt θ) (J x + t • V x)).le_opNorm _).trans
+        (mul_le_mul (hMDb _ (hmem x t ht)) (hV.bound x) (norm_nonneg _) hMD)
+  have h_diff : ∀ᵐ x ∂μb, ∀ t ∈ ball (0 : ℝ) ε,
+      HasDerivAt (fun s : ℝ => gravPt (C := FC.C) θ (J x + s • V x))
+        (fderiv ℝ (gravPt θ) (J x + t • V x) (V x)) t :=
+    Filter.Eventually.of_forall fun x t ht => by
+      have hd : DifferentiableAt ℝ (gravPt (C := FC.C) θ) (J x + t • V x) :=
+        ((contDiffOn_gravPt θ (n := 1)).contDiffAt
+          (isOpen_jetGL.mem_nhds (hGL x t ht))).differentiableAt one_ne_zero
+      have hl : HasDerivAt (fun s : ℝ => J x + s • V x) (V x) t := by
+        simpa using ((hasDerivAt_id t).smul_const (V x)).const_add (J x)
+      exact hd.hasFDerivAt.comp_hasDerivAt t hl
+  have key := hasDerivAt_integral_of_dominated_loc_of_deriv_le (ball_mem_nhds 0 hε) hF_meas
+    hF_int hF'_meas h_bound (integrable_const (MD * Cg)) h_diff
+  have hFV : finiteVar (gravAction FC θ P N) q w =
+      ∫ x in compBox P, fderiv ℝ (gravPt θ) (J x) (V x) := by
+    unfold finiteVar
+    rw [e]
+    simpa using key.2.deriv
+  rw [hFV]
+  -- compare the two integrands
+  have hcG : Continuous fun x => fderiv ℝ (gravPt (C := FC.C) θ) (J x) (gjet FC v x) :=
+    (hdcont.comp_continuous hcJ fun x => hKgGL (hJK x)).clm_apply (hv.bl_gjet FC).continuous
+  have hcG' : Continuous fun x => fderiv ℝ (gravPt (C := FC.C) θ) (J x) (V x) :=
+    (hdcont.comp_continuous hcJ fun x => hKgGL (hJK x)).clm_apply hcV
+  rw [← integral_sub (hint _ hcG') (hint _ hcG), ← Real.norm_eq_abs]
+  have hpt : ∀ x ∈ compBox P, ‖fderiv ℝ (gravPt (C := FC.C) θ) (J x) (V x) -
+      fderiv ℝ (gravPt θ) (J x) (gjet FC v x)‖ ≤ MD * (κ * h) := by
+    intro x _
+    rw [← map_sub, gjet_sub FC (hW.e.differentiable x) (hv.e.differentiable x)]
+    exact ((fderiv ℝ (gravPt θ) (J x)).le_opNorm _).trans (mul_le_mul
+      (hMDb _ (self_subset_cthickening _ (hJK x))) (norm_gjet_le FC (hsm x)) (norm_nonneg _) hMD)
+  refine (norm_setIntegral_le_of_norm_le_const hbox hpt).trans (le_of_eq ?_)
+  rw [hvol]; ring
+
 end Comparison
 end EinsteinSM
 end RenewalGeometry

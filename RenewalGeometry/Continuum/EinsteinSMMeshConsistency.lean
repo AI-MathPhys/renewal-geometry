@@ -731,7 +731,7 @@ theorem integral_compBox {g : E4 → F} (hg : Continuous g) (P : ℕ) :
 /-- The integral over the open chart slab equals the integral over the comparison box, for
 densities vanishing outside the time interval `[t₀, t₁]`. -/
 theorem integral_slab_eq_compBox {g : E4 → F} {T t₀ t₁ : ℝ} (h0 : 0 < t₀) (h01 : t₀ < t₁)
-    (h1 : t₁ < T) {P : ℕ} (hTP : T ≤ P) (hsupp : ∀ x : E4, x 0 ∉ Icc t₀ t₁ → g x = 0) :
+    (h1 : t₁ < T) {P : ℕ} (hTP : T ≤ P) (hsupp : ∀ x ∈ compBox P, x 0 ∉ Icc t₀ t₁ → g x = 0) :
     ∫ x in (slabChart t₀ t₁ h0 h01 h1 (T := T)).set, g x = ∫ x in compBox P, g x := by
   set a : E4 := Fin.cons t₀ 0
   set b : E4 := Fin.cons t₁ 1
@@ -749,7 +749,7 @@ theorem integral_slab_eq_compBox {g : E4 → F} {T t₀ t₁ : ℝ} (h0 : 0 < t�
       · have := hx.2 0; simp [b, compBox] at this ⊢; linarith
       · have := hx.2 j.succ; simpa [b, compBox] using this
   · intro x hx
-    refine hsupp x fun ht => hx.2 ⟨fun i => ?_, fun i => ?_⟩
+    refine hsupp x hx.1 fun ht => hx.2 ⟨fun i => ?_, fun i => ?_⟩
     · refine Fin.cases ?_ (fun j => ?_) i
       · simpa [a] using ht.1
       · have := hx.1.1 j.succ; simpa [a] using this

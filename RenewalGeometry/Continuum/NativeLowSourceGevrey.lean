@@ -396,6 +396,277 @@ theorem analyticOnNhd_G1D : AnalyticOnNhd ℝ (G1D D) chartU := fun _ hq =>
 theorem analyticOnNhd_ellD' (μ : Fin 4) : AnalyticOnNhd ℝ (ellD D μ) chartW := fun _ hr =>
   NativeAnalytic.analyticAt_ellD D μ hr
 
+theorem rb_line {K : ℝ} (hK0 : 0 < K) {Y : R4 → FF} (hY : ContDiff ℝ ∞ Y)
+    (hch : ∀ ξ, ((K⁻¹, jet1 (resc K Y) ξ) : ℝ × FJ) ∈ chartU) (x v : R4) :
+    (fun s : ℝ => RB D Y (x + s • v)) =
+      fun s => (K ^ 2) • ContEulerBounds.preL (ιB (𝓢 := 𝓢))
+        (phiE (Gd D) (gamE K⁻¹ (resc K Y) (K • x + s • (K • v)))) := by
+  have hYt : ContDiff ℝ ∞ (resc K Y) := hY.comp (contDiff_const_smul K⁻¹)
+  funext s
+  rw [RB_fun_scale D hK0.ne' Y hch]
+  beta_reduce
+  rw [eulerOp_eq_phiE hYt ((NativeAnalytic.analyticAt_Gd D (hch _)).differentiableAt),
+    smul_add, smul_comm K s v]
+
+theorem rd_line {K : ℝ} (hK0 : 0 < K) {Y : R4 → FF} (hY : ContDiff ℝ ∞ Y)
+    (hch : ∀ ξ, ((K⁻¹, jet1 (resc K Y) ξ) : ℝ × FJ) ∈ chartU) (x v : R4) :
+    (fun s : ℝ => RD D Y (x + s • v)) =
+      fun s => K • ContinuousLinearMap.id ℝ (ContEulerBounds.NCLM (𝓢 × CoSpinor 𝓢) ℝ)
+        (phiF (G1D D) (fun μ => ellD D μ) (gamF K⁻¹ (resc K Y) (K • x + s • (K • v)))) := by
+  have hYt : ContDiff ℝ ∞ (resc K Y) := hY.comp (contDiff_const_smul K⁻¹)
+  funext s
+  rw [RD_fun_scale D hK0 Y hY hch]
+  beta_reduce
+  rw [foOp_eq_phiF hYt (fun μ =>
+      (NativeAnalytic.analyticAt_ellD D μ (hch _)).differentiableAt), smul_add, smul_comm K s v]
+
+theorem gamE_low_mem {n : ℕ} [NeZero n] (u : (Fin 4 → ZMod n) → FF) {K : ℝ} (hK : 1 ≤ K)
+    {Ke : Set Mat} {A : ℝ} (hKe : ∀ x, (TrigInterp.reconLow n K u x).1 ∈ Ke)
+    (hA : ∀ y, ‖TrigInterp.reconLow n K u y‖ ≤ A) (ξ : R4) :
+    gamE K⁻¹ (resc K (TrigInterp.reconLow n K u)) ξ ∈
+      jetSet (𝔄 := 𝔄) (𝓗 := 𝓗) (𝓢 := 𝓢) Ke A (240 * A) ×ˢ
+        closedBall (0 : Fin 4 → ℝ × FJ) (5 * 240 ^ 2 * A) := by
+  have hYt : ContDiff ℝ ∞ (resc K (TrigInterp.reconLow n K u)) :=
+    (contDiff_reconLow u K).comp (contDiff_const_smul K⁻¹)
+  refine ⟨jetP_resc_low_mem u hK hKe hA ξ, ?_⟩
+  have hA0 : 0 ≤ A := (norm_nonneg _).trans (hA 0)
+  rw [mem_closedBall, dist_zero_right, pi_norm_le_iff_of_nonneg (by positivity)]
+  intro μ
+  have h1 := ContEulerBounds.norm_iteratedFDeriv_fderiv_apply_le (n := 0)
+    ((ContEulerBounds.contDiff_jetP_infty K⁻¹ hYt).of_le (ContEulerBounds.natCast_le_infty _))
+    (evec μ) ξ
+  rw [norm_iteratedFDeriv_zero, norm_evec, mul_one] at h1
+  have h2 := ContEulerBounds.norm_iteratedFDeriv_jetP_le (n := 1) one_ne_zero K⁻¹
+    (hYt.of_le (ContEulerBounds.natCast_le_infty _)) ξ
+  have h3 := jet1_resc_low_bound u hK hA 1 ξ
+  have e : (5 : ℝ) * 240 ^ (1 + 1) * A = 5 * 240 ^ 2 * A := by norm_num
+  rw [e] at h3
+  exact h1.trans (h2.trans h3)
+
+theorem gamF_low_mem {n : ℕ} [NeZero n] (u : (Fin 4 → ZMod n) → FF) {K : ℝ} (hK : 1 ≤ K)
+    {Ke : Set Mat} {A : ℝ} (hKe : ∀ x, (TrigInterp.reconLow n K u x).1 ∈ Ke)
+    (hA : ∀ y, ‖TrigInterp.reconLow n K u y‖ ≤ A) (ξ : R4) :
+    gamF K⁻¹ (resc K (TrigInterp.reconLow n K u)) ξ ∈
+      jetSet (𝔄 := 𝔄) (𝓗 := 𝓗) (𝓢 := 𝓢) Ke A (240 * A) ×ˢ
+        (valSet (𝔄 := 𝔄) (𝓗 := 𝓗) (𝓢 := 𝓢) Ke A ×ˢ closedBall (0 : Fin 4 → ℝ × FF) (240 * A)) := by
+  have hYt : ContDiff ℝ ∞ (resc K (TrigInterp.reconLow n K u)) :=
+    (contDiff_reconLow u K).comp (contDiff_const_smul K⁻¹)
+  refine ⟨jetP_resc_low_mem u hK hKe hA ξ, jetQ_resc_low_mem u hK hKe hA ξ, ?_⟩
+  have hA0 : 0 ≤ A := (norm_nonneg _).trans (hA 0)
+  rw [mem_closedBall, dist_zero_right, pi_norm_le_iff_of_nonneg (by positivity)]
+  intro μ
+  have h1 := ContEulerBounds.norm_iteratedFDeriv_fderiv_apply_le (n := 0)
+    ((ContEulerBounds.contDiff_jetQ_infty K⁻¹ hYt).of_le (ContEulerBounds.natCast_le_infty _))
+    (evec μ) ξ
+  rw [norm_iteratedFDeriv_zero, norm_evec, mul_one] at h1
+  have h2 := ContEulerBounds.norm_iteratedFDeriv_jetQ_le (n := 1) one_ne_zero K⁻¹
+    (hYt.of_le (ContEulerBounds.natCast_le_infty _)) ξ
+  have h3 := resc_reconLow_bound u hK hA 1 ξ
+  rw [pow_one] at h3
+  exact h1.trans (h2.trans h3)
+
+theorem gamE_low_deriv {n : ℕ} [NeZero n] (u : (Fin 4 → ZMod n) → FF) {K : ℝ} (hK : 1 ≤ K)
+    {A : ℝ} (hA : ∀ y, ‖TrigInterp.reconLow n K u y‖ ≤ A) (ξ w : R4) {m : ℕ} (hm : 1 ≤ m) :
+    ‖iteratedDeriv m (fun s : ℝ => gamE K⁻¹ (resc K (TrigInterp.reconLow n K u)) (ξ + s • w)) 0‖ ≤
+      25 * 240 ^ 2 * A * (240 * ‖w‖) ^ m := by
+  have hYt : ContDiff ℝ ∞ (resc K (TrigInterp.reconLow n K u)) :=
+    (contDiff_reconLow u K).comp (contDiff_const_smul K⁻¹)
+  have hA0 : 0 ≤ A := (norm_nonneg _).trans (hA 0)
+  refine (norm_iteratedDeriv_line_le (contDiff_gamE (θ := K⁻¹) hYt) ξ w m).trans ?_
+  have h1 := norm_iteratedFDeriv_gamE_le (θ := K⁻¹) hYt (m := m) (by omega) ξ
+  have h2 := jet1_resc_low_bound u hK hA m ξ
+  have h3 := jet1_resc_low_bound u hK hA (m + 1) ξ
+  have hP : (0 : ℝ) ≤ 240 ^ m := by positivity
+  have hc : 5 * 240 ^ (m + 1) * A + 4 * (5 * 240 ^ (m + 1 + 1) * A) ≤
+      25 * 240 ^ 2 * A * 240 ^ m := by
+    have e1 : (240 : ℝ) ^ (m + 1) = 240 * 240 ^ m := by ring
+    have e2 : (240 : ℝ) ^ (m + 1 + 1) = 240 ^ 2 * 240 ^ m := by ring
+    rw [e1, e2]; nlinarith
+  calc ‖iteratedFDeriv ℝ m (gamE K⁻¹ (resc K (TrigInterp.reconLow n K u))) ξ‖ * ‖w‖ ^ m
+      ≤ (25 * 240 ^ 2 * A * 240 ^ m) * ‖w‖ ^ m := by
+        gcongr
+        exact h1.trans (by linarith)
+    _ = 25 * 240 ^ 2 * A * (240 * ‖w‖) ^ m := by rw [mul_pow]; ring
+
+theorem gamF_low_deriv {n : ℕ} [NeZero n] (u : (Fin 4 → ZMod n) → FF) {K : ℝ} (hK : 1 ≤ K)
+    {A : ℝ} (hA : ∀ y, ‖TrigInterp.reconLow n K u y‖ ≤ A) (ξ w : R4) {m : ℕ} (hm : 1 ≤ m) :
+    ‖iteratedDeriv m (fun s : ℝ => gamF K⁻¹ (resc K (TrigInterp.reconLow n K u)) (ξ + s • w)) 0‖ ≤
+      25 * 240 ^ 2 * A * (240 * ‖w‖) ^ m := by
+  have hYt : ContDiff ℝ ∞ (resc K (TrigInterp.reconLow n K u)) :=
+    (contDiff_reconLow u K).comp (contDiff_const_smul K⁻¹)
+  have hA0 : 0 ≤ A := (norm_nonneg _).trans (hA 0)
+  refine (norm_iteratedDeriv_line_le (contDiff_gamF (θ := K⁻¹) hYt) ξ w m).trans ?_
+  have h1 := norm_iteratedFDeriv_gamF_le (θ := K⁻¹) hYt (m := m) (by omega) ξ
+  have h2 := jet1_resc_low_bound u hK hA m ξ
+  have h3 := resc_reconLow_bound u hK hA m ξ
+  have h4 := resc_reconLow_bound u hK hA (m + 1) ξ
+  have hP : (0 : ℝ) ≤ 240 ^ m := by positivity
+  have hc : 5 * 240 ^ (m + 1) * A + (240 ^ m * A + 4 * (240 ^ (m + 1) * A)) ≤
+      25 * 240 ^ 2 * A * 240 ^ m := by
+    have e1 : (240 : ℝ) ^ (m + 1) = 240 * 240 ^ m := by ring
+    rw [e1]; nlinarith
+  calc ‖iteratedFDeriv ℝ m (gamF K⁻¹ (resc K (TrigInterp.reconLow n K u))) ξ‖ * ‖w‖ ^ m
+      ≤ (25 * 240 ^ 2 * A * 240 ^ m) * ‖w‖ ^ m := by
+        gcongr
+        exact h1.trans (by linarith)
+    _ = 25 * 240 ^ 2 * A * (240 * ‖w‖) ^ m := by rw [mul_pow]; ring
+
+
+theorem analyticAt_PhiDir {p : (ℝ × FJ) × ((ℝ × FF) × (Fin 4 → ℝ × FF))} (hp1 : p.1 ∈ chartU)
+    (hp2 : p.2.1 ∈ chartW) : AnalyticAt ℝ (phiF (G1D D) (fun μ => ellD D μ)) p :=
+  analyticAt_phiF (V := FF) (Θ := ℝ) (S := 𝓢 × CoSpinor 𝓢) isOpen_chartW
+      (analyticOnNhd_G1D D) (fun μ => analyticOnNhd_ellD' D μ) hp1 hp2
+
+theorem exists_gevrey_PhiDir {S : Set ((ℝ × FJ) × ((ℝ × FF) × (Fin 4 → ℝ × FF)))}
+    (hS : IsCompact S) (hSU : ∀ y ∈ S, y.1 ∈ chartU ∧ y.2.1 ∈ chartW) :
+    ∃ C r : ℝ, 0 ≤ C ∧ 0 < r ∧ ∀ (γ : ℝ → (ℝ × FJ) × ((ℝ × FF) × (Fin 4 → ℝ × FF))) (s₀ : ℝ),
+      AnalyticAt ℝ γ s₀ → γ s₀ ∈ S →
+      ∀ B c : ℝ, 0 ≤ B → 0 ≤ c → (∀ m, 1 ≤ m → ‖iteratedDeriv m γ s₀‖ ≤ B * c ^ m) →
+        ∀ n, ‖iteratedDeriv n (phiF (G1D D) (fun μ => ellD D μ) ∘ γ) s₀‖ ≤
+          n ! * (C * (2 * c * max 1 (B / r)) ^ n) := by
+  have : CompleteSpace (ℝ × FF) := inferInstance
+  have : CompleteSpace (Fin 4 → ℝ × FF) := inferInstance
+  have : CompleteSpace ((ℝ × FF) × (Fin 4 → ℝ × FF)) := inferInstance
+  have : CompleteSpace (ℝ × FJ) := inferInstance
+  have : CompleteSpace ((ℝ × FJ) × ((ℝ × FF) × (Fin 4 → ℝ × FF))) := inferInstance
+  have : CompleteSpace (ContEulerBounds.NCLM (𝓢 × CoSpinor 𝓢) ℝ) := inferInstance
+  exact AnalyticGevrey.exists_gevrey_comp (E := (ℝ × FJ) × ((ℝ × FF) × (Fin 4 → ℝ × FF)))
+    (F := ContEulerBounds.NCLM (𝓢 × CoSpinor 𝓢) ℝ) (Φ := phiF (G1D D) (fun μ => ellD D μ)) hS
+    (fun y hy => analyticAt_PhiDir D (hSU y hy).1 (hSU y hy).2)
+
+theorem exists_gevrey_PhiBos {S : Set ((ℝ × FJ) × (Fin 4 → ℝ × FJ))}
+    (hS : IsCompact S) (hSU : ∀ y ∈ S, y.1 ∈ chartU) :
+    ∃ C r : ℝ, 0 ≤ C ∧ 0 < r ∧ ∀ (γ : ℝ → (ℝ × FJ) × (Fin 4 → ℝ × FJ)) (s₀ : ℝ),
+      AnalyticAt ℝ γ s₀ → γ s₀ ∈ S →
+      ∀ B c : ℝ, 0 ≤ B → 0 ≤ c → (∀ m, 1 ≤ m → ‖iteratedDeriv m γ s₀‖ ≤ B * c ^ m) →
+        ∀ n, ‖iteratedDeriv n (phiE (Gd D) ∘ γ) s₀‖ ≤
+          n ! * (C * (2 * c * max 1 (B / r)) ^ n) := by
+  have : CompleteSpace (ℝ × FJ) := inferInstance
+  have : CompleteSpace (Fin 4 → ℝ × FJ) := inferInstance
+  have : CompleteSpace ((ℝ × FJ) × (Fin 4 → ℝ × FJ)) := inferInstance
+  have : CompleteSpace (ContEulerBounds.CovV FF) := inferInstance
+  exact AnalyticGevrey.exists_gevrey_comp (E := (ℝ × FJ) × (Fin 4 → ℝ × FJ))
+    (F := ContEulerBounds.CovV FF) (Φ := phiE (Gd D)) hS
+    (fun y hy => analyticAt_phiE (V := FF) (Θ := ℝ) isOpen_chartU (analyticOnNhd_Gd' D) (hSU y hy))
+
+
+theorem iteratedDeriv_line_zero {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [NormedAddCommGroup F] [NormedSpace ℝ F] {f : E → F} (hf : ContDiff ℝ ∞ f) (x v : E) (n : ℕ) :
+    iteratedDeriv n (fun t : ℝ => f (x + t • v)) 0 = iteratedFDeriv ℝ n f x (fun _ => v) := by
+  rw [AnalyticGevrey.iteratedDeriv_line hf x v n 0, zero_smul, add_zero]
+
+/-- **Analytic growth of the low-frequency residual rows** (`thm:native-source`, strip step,
+real-variable form).  For a compact coframe chart `K_e ⊂ {det e > 0}` and an amplitude bound `A`
+there are `C ≥ 0`, `R > 0` (depending only on the chart, `A` and the coefficient bank) such that
+for every record `u_h`, every `K ≥ 1` with low head `z^lo = 𝓘_h^trig P_{≤K}u_h` in the chart and
+`|z^lo| ≤ A`, every point `x`, direction `‖v‖ ≤ 1` and order `p`,
+`‖Dᵖ𝓡_B(z^lo)(x)(v, …, v)‖ ≤ C K² p! (RK)ᵖ` and `‖Dᵖ𝓡_D(z^lo)(x)(v, …, v)‖ ≤ C K p! (RK)ᵖ`:
+the bosonic and Dirac source amplitudes `CK²`, `CK` with analytic radius `∼ 1/K`. -/
+theorem native_low_gevrey {Ke : Set Mat} (hKe : IsCompact Ke) (hdet : ∀ e ∈ Ke, 0 < e.det)
+    (A : ℝ) :
+    ∃ C R : ℝ, 0 ≤ C ∧ 0 < R ∧ ∀ (n : ℕ) [NeZero n] (u : (Fin 4 → ZMod n) → FF) (K : ℝ),
+      1 ≤ K → (∀ x, (TrigInterp.reconLow n K u x).1 ∈ Ke) →
+      (∀ x, ‖TrigInterp.reconLow n K u x‖ ≤ A) →
+      ∀ (x v : R4), ‖v‖ ≤ 1 → ∀ p : ℕ,
+        ‖iteratedFDeriv ℝ p (RB D (TrigInterp.reconLow n K u)) x (fun _ => v)‖ ≤
+            C * K ^ 2 * (p ! * (R * K) ^ p) ∧
+        ‖iteratedFDeriv ℝ p (RD D (TrigInterp.reconLow n K u)) x (fun _ => v)‖ ≤
+            C * K * (p ! * (R * K) ^ p) := by
+  obtain ⟨A', hA'0, hAA'⟩ : ∃ A' : ℝ, 0 ≤ A' ∧ A ≤ A' :=
+    ⟨max A 0, le_max_right _ _, le_max_left _ _⟩
+  have hB0 : (0 : ℝ) ≤ 25 * 240 ^ 2 * A' := by positivity
+  have hSB : IsCompact (jetSet (𝔄 := 𝔄) (𝓗 := 𝓗) (𝓢 := 𝓢) Ke A' (240 * A') ×ˢ
+      closedBall (0 : Fin 4 → ℝ × FJ) (5 * 240 ^ 2 * A')) :=
+    (isCompact_jetSet hKe _ _).prod (isCompact_closedBall _ _)
+  have hSD : IsCompact (jetSet (𝔄 := 𝔄) (𝓗 := 𝓗) (𝓢 := 𝓢) Ke A' (240 * A') ×ˢ
+      (valSet (𝔄 := 𝔄) (𝓗 := 𝓗) (𝓢 := 𝓢) Ke A' ×ˢ closedBall (0 : Fin 4 → ℝ × FF) (240 * A'))) :=
+    (isCompact_jetSet hKe _ _).prod ((isCompact_valSet hKe _).prod (isCompact_closedBall _ _))
+  obtain ⟨C₁, r₁, hC₁, hr₁, hG₁⟩ := exists_gevrey_PhiBos D hSB
+    (fun y hy => jetSet_subset hdet _ _ hy.1)
+  obtain ⟨C₂, r₂, hC₂, hr₂, hG₂⟩ := exists_gevrey_PhiDir D hSD
+    (fun y hy => ⟨jetSet_subset hdet _ _ hy.1, valSet_subset hdet _ hy.2.1⟩)
+  obtain ⟨M, hM1, hM₁, hM₂⟩ : ∃ M : ℝ, 1 ≤ M ∧ max 1 (25 * 240 ^ 2 * A' / r₁) ≤ M ∧
+      max 1 (25 * 240 ^ 2 * A' / r₂) ≤ M :=
+    ⟨max (max 1 (25 * 240 ^ 2 * A' / r₁)) (max 1 (25 * 240 ^ 2 * A' / r₂)),
+      (le_max_left _ _).trans (le_max_left _ _), le_max_left _ _, le_max_right _ _⟩
+  have hCC : 0 ≤ max C₁ C₂ := hC₁.trans (le_max_left _ _)
+  refine ⟨max C₁ C₂, 2 * 240 * M, hCC, by positivity, ?_⟩
+  intro n _ u K hK hKe' hA x v hv p
+  have hK0 : 0 < K := by linarith
+  have hA'' : ∀ y, ‖TrigInterp.reconLow n K u y‖ ≤ A' := fun y => (hA y).trans hAA'
+  have hY : ContDiff ℝ ∞ (TrigInterp.reconLow n K u) := contDiff_reconLow u K
+  have hYa : AnalyticOnNhd ℝ (resc K (TrigInterp.reconLow n K u)) univ :=
+    analyticOnNhd_resc_reconLow u K
+  have hch : ∀ ξ, ((K⁻¹, jet1 (resc K (TrigInterp.reconLow n K u)) ξ) : ℝ × FJ) ∈ chartU :=
+    fun ξ => jetSet_subset hdet _ _ (jetP_resc_low_mem u hK hKe' hA'' ξ)
+  have hKv : ‖K • v‖ ≤ K := by
+    rw [norm_smul, Real.norm_of_nonneg hK0.le]
+    exact mul_le_of_le_one_right hK0.le hv
+  have hscal : ∀ (C r : ℝ), 0 ≤ C → max 1 (25 * 240 ^ 2 * A' / r) ≤ M → C ≤ max C₁ C₂ →
+      C * (2 * (240 * ‖K • v‖) * max 1 (25 * 240 ^ 2 * A' / r)) ^ p ≤
+        max C₁ C₂ * (2 * 240 * M * K) ^ p := by
+    intro C r hC hr hCm
+    have h1 : 2 * (240 * ‖K • v‖) * max 1 (25 * 240 ^ 2 * A' / r) ≤ 2 * 240 * M * K := by
+      calc 2 * (240 * ‖K • v‖) * max 1 (25 * 240 ^ 2 * A' / r) ≤ 2 * (240 * K) * M := by
+            gcongr
+        _ = 2 * 240 * M * K := by ring
+    exact mul_le_mul hCm (pow_le_pow_left₀ (by positivity) h1 p) (by positivity) hCC
+  constructor
+  · have hRB : ContDiff ℝ ∞ (RB D (TrigInterp.reconLow n K u)) := contDiff_RB D hK0 hY hch
+    rw [← iteratedDeriv_line_zero hRB x v p, rb_line D hK0 hY hch x v]
+    have hγa : AnalyticAt ℝ (fun s : ℝ =>
+        gamE K⁻¹ (resc K (TrigInterp.reconLow n K u)) (K • x + s • (K • v))) 0 :=
+      AnalyticGevrey.analyticAt_line (analyticOnNhd_gamE K⁻¹ hYa _ (mem_univ _))
+    have hγS := gamE_low_mem u hK hKe' hA'' (K • x + (0 : ℝ) • (K • v))
+    have hG := hG₁ _ 0 hγa hγS _ _ hB0 (by positivity)
+      (fun m hm => gamE_low_deriv u hK hA'' (K • x) (K • v) hm) p
+    have hcd : ContDiffAt ℝ p (phiE (Gd D) ∘ fun s : ℝ =>
+        gamE K⁻¹ (resc K (TrigInterp.reconLow n K u)) (K • x + s • (K • v))) 0 :=
+      (AnalyticAt.comp (g := phiE (Gd D)) (f := fun s : ℝ =>
+        gamE K⁻¹ (resc K (TrigInterp.reconLow n K u)) (K • x + s • (K • v)))
+        (analyticAt_phiE (V := FF) (Θ := ℝ) isOpen_chartU (analyticOnNhd_Gd' D)
+        (jetSet_subset hdet _ _ hγS.1)) hγa).contDiffAt
+    refine (norm_iteratedDeriv_smul_clm_le _ _ hcd).trans ?_
+    rw [abs_of_nonneg (by positivity : (0 : ℝ) ≤ K ^ 2)]
+    calc K ^ 2 * ‖ContEulerBounds.preL (ιB (𝔄 := 𝔄) (𝓗 := 𝓗) (𝓢 := 𝓢))‖ *
+          ‖iteratedDeriv p (phiE (Gd D) ∘ fun s : ℝ =>
+            gamE K⁻¹ (resc K (TrigInterp.reconLow n K u)) (K • x + s • (K • v))) 0‖
+        ≤ K ^ 2 * 1 * (p ! * (C₁ * (2 * (240 * ‖K • v‖) *
+            max 1 (25 * 240 ^ 2 * A' / r₁)) ^ p)) := by
+          gcongr
+          exact norm_preL_ιB_le
+      _ ≤ K ^ 2 * 1 * (p ! * (max C₁ C₂ * (2 * 240 * M * K) ^ p)) := by
+          exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left
+            (hscal C₁ r₁ hC₁ hM₁ (le_max_left _ _)) (Nat.cast_nonneg _)) (by positivity)
+      _ = max C₁ C₂ * K ^ 2 * (p ! * (2 * 240 * M * K) ^ p) := by ring
+  · have hRD : ContDiff ℝ ∞ (RD D (TrigInterp.reconLow n K u)) := contDiff_RD D hK0 hY hch
+    rw [← iteratedDeriv_line_zero hRD x v p, rd_line D hK0 hY hch x v]
+    have hγa : AnalyticAt ℝ (fun s : ℝ =>
+        gamF K⁻¹ (resc K (TrigInterp.reconLow n K u)) (K • x + s • (K • v))) 0 :=
+      AnalyticGevrey.analyticAt_line (analyticOnNhd_gamF K⁻¹ hYa _ (mem_univ _))
+    have hγS := gamF_low_mem u hK hKe' hA'' (K • x + (0 : ℝ) • (K • v))
+    have hG := hG₂ _ 0 hγa hγS _ _ hB0 (by positivity)
+      (fun m hm => gamF_low_deriv u hK hA'' (K • x) (K • v) hm) p
+    have hcd : ContDiffAt ℝ p (phiF (G1D D) (fun μ => ellD D μ) ∘ fun s : ℝ =>
+        gamF K⁻¹ (resc K (TrigInterp.reconLow n K u)) (K • x + s • (K • v))) 0 :=
+      (AnalyticAt.comp (g := phiF (G1D D) (fun μ => ellD D μ)) (f := fun s : ℝ =>
+        gamF K⁻¹ (resc K (TrigInterp.reconLow n K u)) (K • x + s • (K • v)))
+        (analyticAt_PhiDir D (jetSet_subset hdet _ _ hγS.1)
+        (valSet_subset hdet _ hγS.2.1)) hγa).contDiffAt
+    refine (norm_iteratedDeriv_smul_clm_le _ _ hcd).trans ?_
+    rw [abs_of_nonneg hK0.le]
+    calc K * ‖ContinuousLinearMap.id ℝ (ContEulerBounds.NCLM (𝓢 × CoSpinor 𝓢) ℝ)‖ *
+          ‖iteratedDeriv p (phiF (G1D D) (fun μ => ellD D μ) ∘ fun s : ℝ =>
+            gamF K⁻¹ (resc K (TrigInterp.reconLow n K u)) (K • x + s • (K • v))) 0‖
+        ≤ K * 1 * (p ! * (C₂ * (2 * (240 * ‖K • v‖) *
+            max 1 (25 * 240 ^ 2 * A' / r₂)) ^ p)) := by
+          gcongr
+          exact norm_id_NCLM_le
+      _ ≤ K * 1 * (p ! * (max C₁ C₂ * (2 * 240 * M * K) ^ p)) := by
+          exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left
+            (hscal C₂ r₂ hC₂ hM₂ (le_max_right _ _)) (Nat.cast_nonneg _)) (by positivity)
+      _ = max C₁ C₂ * K * (p ! * (2 * 240 * M * K) ^ p) := by ring
+
 end Native
 
 end
