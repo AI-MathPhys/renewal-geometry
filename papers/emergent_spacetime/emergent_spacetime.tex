@@ -332,13 +332,21 @@ nonsymmetric $3+1$ classes and reach the Einstein equation by cutoff-uniform
 evolution, consistency and finite preparation estimates, whereas
 \Cref{thm:main-renewal-einstein} is a recognition theorem for arbitrary
 complete gravitational renewal cylinders.  Its five certificates are not the
-definition of the constructive population.  Nor is the stable law family
-silently identified with the raw exact finite Euler flow of the reconstructed
-action.  That stronger route is analyzed independently in
-\Cref{thm:main-exact-action-response,thm:supp-exact-initial-layer} and
-Appendix~\ref{supp:exact-action-audit}.  The exact-action analysis contains an all-cutoff regular transverse source
-block, an exact scalar--trace response decomposition, and source-neutral finite
-preparations.  On the amplitude-graded three-site chart the boundary argument is rank-free, and a same-event weak-Poisson certificate gives a five-dimensional weak kernel and the exact rapid split $(8,8,13)$.  Under the complete graded-chart conditions, the unchanged finite action has exactly constrained boundary-selected histories through the certified prepared event with $O(a)$ metric and link curvature on $0\le t\le ca^2$, where $a$ is field amplitude and the spatial cutoff is fixed.  The selector changes only higher preparation coefficients; it is not a forward Cauchy theorem for arbitrary prepared initial records.  Exact rapid and slow normal factorizations on their stated invariant chart give necessary local-residence widths $O(ae^{-\mu_rT/a^3})$ and $O(ae^{-\mu_sT/a})$ for a fixed physical horizon $T$.  On the intermediate scale $t=a\tau$, bounded rescaled rates require a five-component compatibility map on a $297$-dimensional leading critical sheet.  Exact initialization automatically satisfies the three constant-shift/Fredholm rows, while the remaining two initial rows are an explicit projected acceleration defect computable from the unchanged finite action.  For actual Lipschitz bounded-rate slow limits, exact elimination of the two generalized-zero rows yields a quadratic harmonic-slope gate.  On the literal record-preserving branch the harmonic quartic columns vanish, so this slope map factors through the two generalized-zero rows and has Jacobian rank at most two; a fixed cokernel condition precedes a two-equation quadratic root problem.  Positive-time nonlinear propagation of a compatible root branch and cutoff-uniform cofinal control remain open.
+definition of the constructive population.
+
+A separate question is whether the \emph{unchanged finite Euler flow} of the
+reconstructed action itself lies on the same branch.  We do not identify the
+constructive writer with that flow.  Instead Appendix~\ref{supp:exact-action-audit}
+writes the phase-compatible finite action explicitly, performs stationary
+connection and Legendre reduction, and analyzes the resulting canonical
+system.  Its regular-response theory gives exact finite preparations, while a
+same-event three-site certificate proves weak Poisson rank $24$, a
+five-dimensional weak kernel, and the semisimple rapid split $(8,8,13)$.
+Under the complete graded-chart hypotheses this exact system has a
+boundary-selected constrained history with $O(a)$ metric and link curvature on
+$0\le t\le ca^2$ at fixed spatial cutoff.  The complementary residence and
+slow-compatibility results identify why this does not yet yield a forward,
+cutoff-uniform exact-action Cauchy theorem.
 
 The homogeneous isotropic sector gives a complementary exact variational
 realization: arbitrary positive renewal variables yield the full lapse-varied
@@ -2266,19 +2274,39 @@ and, with unit cost assigned to a grammar or execution failure, define
 The cost is determined by the physical letter and its prefix, not by its
 probability.
 
-Finally let $\mathscr H_h(\gamma,\pi,N,\beta)$ be the canonical Hamiltonian
-obtained from the reconstructed phase-compatible action after stationary
-connection and Legendre elimination, and set
+For later use we also fix the canonical object coming from the
+\emph{original} phase-compatible finite action.  Appendix~\ref{supp:exact-action-audit}
+displays that action, its unique stationary connection on the retained small
+chart, and its Legendre map.  Write
+$\mathscr L_h^\circ(\gamma,V,N,\beta)$ for the stationary-connection-eliminated
+finite Lagrangian and let
+$V_h(\gamma,\pi,N,\beta)$ be the analytic inverse of
+\begin{equation}
+ \pi=D_V\mathscr L_h^\circ(\gamma,V,N,\beta)
+ \label{eq:main-action-legendre-map}
+\end{equation}
+on the nondegenerate Legendre chart.  The canonical Hamiltonian used below is
+therefore the displayed Legendre transform
+\begin{equation}
+ \boxed{
+ \mathscr H_h(\gamma,\pi,N,\beta)
+ =\langle\pi,V_h(\gamma,\pi,N,\beta)\rangle_h
+  -\mathscr L_h^\circ
+   \bigl(\gamma,V_h(\gamma,\pi,N,\beta),N,\beta\bigr).}
+ \label{eq:main-action-hamiltonian}
+\end{equation}
+Its original four lapse--shift rows are
 \begin{equation}
  \mathscr C_h(X)=
  \left(-\nabla_N\mathscr H_h,\ \nabla_\beta\mathscr H_h\right)
        \big|_{N=1,\,\beta=0}.
  \label{eq:main-action-initial-constraints}
 \end{equation}
-This is the original four-row finite initial constraint map; it is not the
-residual of the local evolution writer. Finite zero-set preparation and its
-transport to continuum Cauchy data are separate assertions. The latter uses
-comparison of the actual stationary/Legendre maps, made explicit in
+Thus $\mathscr C_h$ is not a residual of the local harmonic writer and
+\eqref{eq:main-action-hamiltonian} is not merely a characterization of an
+unnamed action.  Finite zero-set preparation and transport to continuum Cauchy
+data are separate assertions.  The latter uses comparison of the actual
+stationary/Legendre maps, made explicit in
 \Cref{ass:supp-initial-consistency,lem:supp-initial-elimination-consistency}.
 
 \begin{theorem}[Structurally stable renewal laws with action-prepared finite seeds]
@@ -2497,67 +2525,67 @@ correction is formed, while the writer-residual moments independently test
 whether that action-supported process remains in the constructive Einstein
 basin.
 
-\subsection{Exact finite-action dynamics: realization and remaining obstructions}
+\subsection{Exact finite-action dynamics: a certified compatibility test}
 \label{sec:main-exact-action}
 
 The constructive and chronological results do not identify their laws with
-the unchanged finite Euler flow. That stronger question has its own finite
-constraint geometry and its own limiting scales. We state the established
-conclusions together here, while retaining their different branch hypotheses.
-The detailed response and boundary arguments are in
-Appendix~\ref{supp:exact-action-audit}; slow compatibility and obstruction
-theory are in Appendix~\ref{supp:exact-action-slow}.
+the unchanged finite Euler flow.  The stronger exact-action question is kept
+separate because it has its own constraint geometry and singular time scales.
+The action itself is no longer left implicit: Appendix~\ref{supp:exact-action-audit}
+displays the finite phase-compatible action and the canonical Hamiltonian
+\eqref{eq:main-action-hamiltonian}.  The purpose of the exact-action analysis
+in this article is therefore precise: to test whether that concrete finite
+variational system has nontrivial prepared states and locally compatible
+constrained histories, without claiming a cutoff-uniform Euler-flow limit.
 
-\begin{theorem}[Summary of exact-action realization and compatibility]
+\begin{theorem}[Exact-action preparation and fixed-cutoff compatibility]
 \label{thm:main-exact-action-response}
 \label{thm:main-exact-action-summary}
-For the original finite action on the respective branches specified in
-Appendices~\ref{supp:exact-action-audit} and~\ref{supp:exact-action-slow}:
+For the phase-compatible finite action of
+\Cref{thm:supp-exact-action-provenance}, on the respective branches specified
+in Appendices~\ref{supp:exact-action-audit} and~\ref{supp:exact-action-slow}:
 \begin{enumerate}[label=\textup{(X\arabic*)},leftmargin=3em]
-\item The regular finite response admits lossless transverse elimination and
-an exact positive-reproduction/scalar--trace decomposition. Nontrivial
-source-neutral prepared families and the stated all-cutoff active families
-exist. These static results do not assert invariance under the exact flow.
-\item At the certified event on the three-site periodic regulator, the weak
-Poisson block has rank twenty-four and a five-dimensional kernel; the rapid
-generator has stable, unstable and centre dimensions eight, eight and
-thirteen. Under the complete amplitude-graded chart assumptions, the
-unchanged action admits an exactly constrained boundary-selected history
-on an interval of length proportional to the square of the amplitude.
-The first field and multiplier tilt are preserved, and both metric and
-literal-link curvatures are bounded by a constant times the amplitude.
-The constants here are fixed-cutoff constants.
-\item On the separate invariant normal-factor chart, residence through a
-fixed physical time requires the rapid and slow exponentially small normal
-widths of \Cref{thm:main-exact-residence}. This is a necessary local-residence
-condition, not a curvature-blowup statement.
-\item Under the stated initialization hypotheses, the three constant-shift
-compatibility rows are automatic. For slow limits with bounded rescaled rates, the remaining two
-initial rows are measured by the original-action acceleration defect.
-On the record-preserving branch, the subsequent necessary quadratic
-harmonic-slope map factors through a two-dimensional space. Its fixed
-cokernel obstruction must vanish before the two-equation root problem
-can be solved; a root alone does not establish a positive-time trajectory.
+\item The canonical constraint system and regular finite response are
+well-defined on an analytic stationary-connection/Legendre chart.  Transverse
+source elimination is lossless, the signed response has the exact
+positive-reproduction/scalar--trace decomposition, and nontrivial
+source-neutral and all-cutoff active prepared families exist.
+\item At the certified $N=3$, $h=1/3$ event, the weak first-Poisson block has
+exact rank $24$ and a five-dimensional kernel.  The reduced rapid spectrum has
+a semisimple double zero, and the full weak generator has
+\begin{equation}
+ (\dim E_+,\dim E_-,\dim E_0)=(8,8,13).
+ \label{eq:main-exact-8813}
+\end{equation}
+Under the complete amplitude-graded chart assumptions, the unchanged action
+admits an exactly constrained boundary-selected history on
+$0\le t\le ca^2$ whose first field and multiplier tilt agree with the prepared
+event and whose metric and literal-link curvatures are $O(a)$.
+\item These fixed-cutoff results do not give forward Cauchy stability.
+On the separate invariant normal-factor chart, residence through a fixed
+physical time requires the rapid and slow exponentially small widths of
+\Cref{thm:main-exact-residence}.  Bounded-rate slow limits additionally obey
+the acceleration and quadratic slope compatibility conditions of
+Appendix~\ref{supp:exact-action-slow}.  Positive-time propagation of a
+compatible slow branch, physical forward selection without terminal data, and
+uniform control under spatial refinement remain open.
 \end{enumerate}
-The assertions use their stated, potentially different, charts. They do not
-jointly supply a cutoff-uniform exact-action Cauchy theorem.
 \end{theorem}
 \begin{proof}
-The response and preparations are proved in
+The action and Hamiltonian provenance are
+\Cref{thm:supp-exact-action-provenance}.  The response and preparations are
 \Cref{thm:supp-exact-transverse,thm:supp-exact-scalar-reconstruction,thm:supp-exact-active-regular,thm:supp-exact-neutral-preparation}.
-The fixed-event spectrum and boundary history are
-\Cref{thm:supp-certified-weak-rank,thm:supp-certified-rapid-spectrum,thm:main-exact-boundary};
-\Cref{thm:main-exact-residence} proves the normal-width assertion under its
-separate assumptions. Finally,
-\Cref{thm:supp-exact-initial-gate,thm:supp-exact-slope-gate,thm:supp-exact-rank-two-factorization,thm:supp-exact-two-equation-slope}
-give the initial defect and the necessary slow-slope conditions.
+The same-event rank and spectral certificates are
+\Cref{thm:supp-certified-weak-rank,thm:supp-certified-rapid-spectrum}, and the
+boundary history is \Cref{thm:main-exact-boundary}.  The residence estimate is
+\Cref{thm:main-exact-residence}; the slow necessary conditions are
+\Cref{thm:supp-exact-initial-gate,thm:supp-exact-slope-gate,thm:supp-exact-rank-two-factorization,thm:supp-exact-two-equation-slope}.
 \end{proof}
 
 Boundary selection fixes unstable coordinates at a terminal cut and is
-therefore not a forward microscopic selection rule. The remaining problems
-are positive slow-time propagation, physical forward selection and uniform
-control under spatial refinement. They do not enter the constructive
-Einstein theorem above.
+therefore a compatibility construction rather than a microscopic forward
+selection rule.  None of the exact-action results is used as a hypothesis in
+the constructive Einstein theorem above.
 
 
 \section{Explicit vacuum sectors and operational diagnostics}
@@ -3304,34 +3332,28 @@ problem of microscopic selection and renormalization.
 \paragraph{The exact-action route.}
 
 A further distinction concerns the exact Euler flow of the reconstructed
-finite action.  The constructive local writer used in the open population
-theorem is action compatible, but it is not assumed to coincide with the raw
-finite Euler flow at every cutoff.  The exact-action analysis shows that this
-stronger identification is nontrivial.
+finite action.  The constructive local writer is action compatible but is not
+assumed to coincide with that raw finite flow.  Appendix~\ref{supp:exact-action-audit}
+therefore starts from the displayed phase-compatible action
+\eqref{eq:supp-exact-phase-action}, performs stationary connection and
+Legendre reduction, and asks a more limited question: does the unchanged
+finite system possess nontrivial prepared states and locally compatible
+constrained histories?
 
-The finite response problem has substantial regular structure: transverse
-source blocks can be eliminated exactly, the signed response separates into
-positive source reproduction and a scalar--trace correction, and nontrivial
-source-neutral prepared families exist.  On the certified fixed-cutoff event
-the weak first-Poisson block has exact rank twenty-four, the five-dimensional
-weak kernel splits into two generalized-zero and three constant-shift
-directions, and the rapid generator has the semisimple $(8,8,13)$
-stable--unstable--centre decomposition.  Under the full graded-chart conditions, the rank-free nonlinear two-point
-construction supplies an exactly constrained original-action
-history through that event with $O(a)$ curvature on an $O(a^2)$ physical
-interval while changing only higher preparation coefficients.  This does not
-give forward Cauchy stability: rapid and slow normal expansion on the separate
-normal-factor chart impose distinct exponential preparation scales for
-residence through a fixed physical time.  At the initial cut exact initialization automatically satisfies the three
-constant-shift/Fredholm rows, while the other two rows are measured by an
-explicit acceleration defect rather than inferred from amplitude analyticity.
-For bounded-rate positive-time limits, elimination of the generalized-zero
-rows produces a quadratic harmonic-slope condition.  The literal harmonic
-Ward structure forces its Jacobian to have rank at most two, yielding a
-cokernel obstruction and, when that obstruction vanishes, a two-equation
-root-curve problem.  The remaining problem is nonlinear propagation of a
-compatible slow branch, physical selection without future endpoint data, and
-regulator-uniform continuation under spatial refinement.
+The answer is positive but deliberately fixed-cutoff.  The finite response
+admits exact transverse elimination and source-neutral preparations.  At the
+certified $N=3$ event the weak first-Poisson block has rank $24$, its
+five-dimensional kernel consists of two generalized-zero and three
+constant-shift directions, and the rapid generator has the semisimple
+$(8,8,13)$ stable--unstable--centre split.  Under the complete graded-chart
+conditions a boundary-selected exact history exists for $O(a^2)$ physical
+time with $O(a)$ metric and literal-link curvature.  The same analysis also
+shows why this does not yet prove a cofinal Euler-flow theorem: forward
+residence requires exponentially thin normal preparation, while the slow
+system obeys additional acceleration and slope-compatibility conditions.
+Thus the exact-action results serve as a nontrivial compatibility test for the
+reconstructed variational system; cutoff-uniform forward selection and
+positive-time propagation remain open.
 
 
 % -----------------------------------------------------------------------------
@@ -3405,27 +3427,24 @@ Einstein dynamics.  The remaining problem is to understand how broadly
 microscopic physics selects and stabilizes that branch.
 
 
-\section*{Data and formalization availability}
-Source code for selected finite algebraic components is available at
-\url{https://github.com/AI-MathPhys/renewal-geometry}.  The fixed-cutoff
-exact-action rank and spectral statements above are finite computer-assisted
-certificates: the proof uses outward interval bounds, exact rational matrix
-checks, and finite-field/Pfaffian identities as described in
-Appendices~\ref{supp:exact-action-audit} and~\ref{supp:exact-action-slow}.
-The analytic estimates and conditional finite-chart theorems in this article
-are given as mathematical proofs. In particular the exact-action boundary
-theorem retains all of \Cref{ass:supp-graded-exact-chart}; its analytic
-divisibility, source and readout inequalities are not consequences of the
-rank or spectral certificate alone. Instantiation of a numerical finite-chart certificate requires its full
-coefficient data, same-root conventions, and validated inequalities; ranks,
-homogeneities and degree bounds alone are not executable coefficient data.
+\section*{Formalization and computational verification}
+The proof development is split between theorem-prover formalization and
+finite exact-arithmetic certificates.  The structural algebraic and analytic
+library is implemented in \texttt{Lean~4}/\texttt{Mathlib}; the fixed-cutoff
+root-box, interval-matrix, modular Pfaffian and rational-similarity statements
+are verified by companion exact-arithmetic certificate checkers generated
+from the displayed finite action.  The public source release records these two
+verification layers separately, so a floating-point eigensolver output is
+never used as a proof-bearing premise.  Source code, build configuration and
+documentation are available at
+\url{https://github.com/AI-MathPhys/renewal-geometry}.
 
 
 \clearpage
 \appendix
-\section*{Guide to the appendices}
+\section*{Appendices}
 \phantomsection
-\addcontentsline{toc}{section}{Appendices: guide to proofs}
+\addcontentsline{toc}{section}{Appendices}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
 The appendices retain the detailed constructions, quantitative constants
 and alternative sufficient criteria. Each has one mathematical purpose;
@@ -3443,8 +3462,8 @@ Appendix & Proofs and dependencies\\
 \ref{supp:continuum} & Noncollapse, propagation, connection alternatives, interfaces and the Einstein limit.\\
 \ref{supp:open-3plus1} & Uniform harmonic evolution and genuinely finite renewal realization.\\
 \ref{supp:open-law-basin} & Law-space robustness, finite constraint preparation and same-cylinder compatibility.\\
-\ref{supp:exact-action-audit} & Exact-action response, preparations, fixed-cutoff boundary histories and residence.\\
-\ref{supp:exact-action-slow} & Necessary slow compatibility, acceleration tests and the quadratic slope obstruction.\\
+\ref{supp:exact-action-audit} & Explicit phase-compatible finite action, canonical Hamiltonian, exact response, fixed-cutoff certificate and boundary histories.\\
+\ref{supp:exact-action-slow} & Supporting necessary slow-compatibility, acceleration and slope obstructions for the exact Euler route.\\
 \ref{supp:sectors} & Homogeneous matching, conservative blocking, Gowdy and flat/de Sitter regulators.\\
 \bottomrule
 \end{tabularx}
@@ -8626,12 +8645,214 @@ assumption.
 
 \section{Exact-action response, preparation and boundary realization}
 \label{supp:exact-action-audit}
-This appendix proves the response and fixed-cutoff realization assertions
-summarized in \Cref{thm:main-exact-action-summary}. It uses the original
-phase-compatible action, not the harmonic evolution law. Static all-cutoff
-results, the three-site graded boundary chart, and the separate invariant
-normal-factor chart keep their individual hypotheses and constants;
-Appendix~\ref{supp:exact-action-slow} treats the subsequent slow limit.
+This appendix makes the exact-action branch mathematically explicit.  It first
+writes the phase-compatible finite Palatini/link action, its stationary
+connection solve and the resulting canonical Hamiltonian.  It then proves the
+response and fixed-cutoff realization assertions summarized in
+\Cref{thm:main-exact-action-summary}.  These statements concern the original
+finite action, not the harmonic evolution writer.  Static all-cutoff results,
+the three-site certified event, the graded boundary chart and the separate
+normal-factor chart retain their individual hypotheses and constants;
+Appendix~\ref{supp:exact-action-slow} records the supporting necessary
+slow-compatibility conditions.
+
+
+\subsection{Explicit phase-compatible finite action and canonical Hamiltonian}
+\label{subsec:supp-exact-action-provenance}
+
+The exact-action statements below refer to one concrete finite variational
+object.  We record it here so that the canonical system is reconstructible
+from the article itself rather than from an external coefficient table.
+
+On the odd periodic cubic regulator let $e$ be the canonical ADM coframe,
+let $A_0$ be an independent temporal Lorentz connection, and let
+\begin{equation}
+ U_i=\exp(hA_i),\qquad A_\mu\in\mathfrak{so}(1,3).
+ \label{eq:supp-exact-links}
+\end{equation}
+On the retained logarithm branch define the literal electric and plaquette
+curvatures by
+\begin{align}
+ E_i&=h^{-1}\bigl(\dot U_iU_i^{-1}+A_0
+               -\operatorname{Ad}_{U_i}A_{0,+i}\bigr),\notag\\
+ B_{ij}&=h^{-2}\log
+ \bigl(U_iU_{j,+i}U_{i,+j}^{-1}U_j^{-1}\bigr).
+ \label{eq:supp-exact-link-curvatures}
+\end{align}
+Let $b$ be the fixed nondegenerate invariant pairing on
+$\mathfrak{so}(1,3)$.  The coframe coefficient arrays
+$\Pi_i(e),\Sigma_{ij}(e)$ are defined by the Palatini contraction
+\begin{equation}
+ \chi\det(e)\,r(e,F)
+ =\sum_i b(\Pi_i,E_i)+\sum_{i<j}b(\Sigma_{ij},B_{ij}),
+ \qquad \chi\ne0,
+ \label{eq:supp-exact-PiSigma}
+\end{equation}
+and
+\begin{equation}
+ \mathscr P_h^{\rm full}
+ =\int\left\langle\chi\det(e)\bigl(r(e,F)-2\Lambda\bigr),1
+       \right\rangle_h\,\dd t .
+ \label{eq:supp-exact-full-palatini}
+\end{equation}
+
+The link logarithms share edges, so the exact stationary-connection action
+contains compensating terms.  Put
+\begin{equation}
+ \mathcal J_ZV=\sum_{k\ge0}\frac{(\operatorname{ad}_Z)^kV}{(k+1)!}.
+ \label{eq:supp-exact-J}
+\end{equation}
+For an oriented $ij$ plaquette set
+$(X_1,X_2,X_3,X_4)=(A_i,A_{j,+i},-A_{i,+j},-A_j)$ and define
+\begin{align}
+ \mathcal K_h
+ &=\sum_i b\bigl(\Pi_i,(\mathcal J_{hA_i}-I)\dot A_i\bigr),\notag\\
+ q_h
+ &=-\sum_i b(\Pi_i,[A_i,A_{0,+i}])
+   +\frac12\sum_{i<j}\sum_{r<s}b(\Sigma_{ij},[X_r,X_s]),\notag\\
+ q
+ &=\sum_i b(\Pi_i,[A_0,A_i])
+   +\sum_{i<j}b(\Sigma_{ij},[A_i,A_j]).
+ \label{eq:supp-exact-compensators}
+\end{align}
+The completed signed action is
+\begin{equation}
+ \boxed{
+ \mathscr P_{h,D}^{\rm c}
+ =\mathscr P_h^{\rm full}
+ +\int\langle q-q_h-\mathcal K_h,1\rangle_h\,\dd t
+ -\left[\sum_i\langle b(\Pi_i,A_i),1\rangle_h\right]_0^T .}
+ \label{eq:supp-exact-completed-action}
+\end{equation}
+The kinetic subtraction is exact; it removes the time derivative of the
+connection from the stationary connection equation rather than truncating a
+link expansion.
+
+For the metric-compatible branch use the real commuting skew-adjoint phase
+derivatives
+\begin{equation}
+ \widehat{\delta_i u}(k)=i\kappa_i(k)\widehat u(k),
+ \qquad
+ \kappa_i(k)=\frac2h\sin(\pi hk_i),
+ \qquad -m\le k_i\le m,
+ \label{eq:supp-exact-phase-compatible-derivative}
+\end{equation}
+on $N=2m+1$ sites.  Exact summation by parts puts
+\eqref{eq:supp-exact-completed-action} in the connection normal form
+\begin{equation}
+ \mathscr P_{h,D}^{\rm c}
+ =\int\left\langle
+ -2\chi\Lambda\det e+f_h(e)\!\cdot\!A
+ +\frac12A^{\mathsf T}\mathsf C(e)A+r_h(e,A),1
+ \right\rangle_h\,\dd t,
+ \label{eq:supp-exact-connection-normal-form}
+\end{equation}
+where
+\begin{equation}
+ f_{h,0}=\mathsf H\sum_iD_i^-\Pi_i,\qquad
+ f_{h,i}=\mathsf H\left(
+ -\partial_t\Pi_i-\sum_{j\ne i}D_j^-\Sigma_{ji}\right).
+ \label{eq:supp-exact-connection-load}
+\end{equation}
+Replace only the spatial $D_i^-$ in this load by $\delta_i$, obtaining
+$f_h^\circ$, and define the phase-compatible action
+\begin{equation}
+ \boxed{
+ \mathscr P_{h,D}^{\circ}
+ =\mathscr P_{h,D}^{\rm c}
+ +\int\langle(f_h^\circ-f_h)\!\cdot\!A,1\rangle_h\,\dd t.}
+ \label{eq:supp-exact-phase-action}
+\end{equation}
+The quadratic connection matrix has inertia $(12,12)$ and, on the retained
+compact coframe chart, a uniform least singular value $c_*>0$.  Moreover,
+with $N_h=\partial_A r_h$,
+\begin{equation}
+ \|N_h(e,A)-N_h(e,\widetilde A)\|_{p,h}
+ \le C hR\|A-\widetilde A\|_{p,h}
+ \label{eq:supp-exact-connection-remainder}
+\end{equation}
+on $\|A\|_\infty,\|\widetilde A\|_\infty\le R$.  Hence for $hR$ sufficiently
+small the stationary row
+\begin{equation}
+ \gamma_h^\circ(e,A)
+ :=f_h^\circ(e)+\mathsf C(e)A+N_h(e,A)=0
+ \label{eq:supp-exact-stationary-connection}
+\end{equation}
+has a unique analytic solution $A=\mathscr A_h(e,\partial_t e)$ on the
+declared chart, with no Fourier mode removed.
+
+Substitute the canonical ADM coframe $e=e(\gamma,N,\beta)$ and the stationary
+connection $\mathscr A_h$ in \eqref{eq:supp-exact-phase-action}.  The resulting
+time-local reduced Lagrangian is denoted
+$\mathscr L_h^\circ(\gamma,V,N,\beta)$, $V=\dot\gamma$.  On the Legendre chart
+used in this article the velocity Hessian is nonsingular.  Thus
+\begin{equation}
+ \pi=D_V\mathscr L_h^\circ(\gamma,V,N,\beta)
+ \label{eq:supp-exact-legendre}
+\end{equation}
+has the unique analytic inverse $V_h(\gamma,\pi,N,\beta)$ and
+\begin{equation}
+ \boxed{
+ \mathscr H_h(\gamma,\pi,N,\beta)
+ =\langle\pi,V_h\rangle_h
+ -\mathscr L_h^\circ(\gamma,V_h,N,\beta).}
+ \label{eq:supp-exact-H}
+\end{equation}
+This is the Hamiltonian denoted $H_h$ below; its lapse and shift are
+multipliers, not evolved canonical coordinates.
+
+At the flat unit-lapse, zero-shift reference with $\Lambda=0$, write
+$X=(u,p)$, $t_u=\tr u$, $v_j=\delta_i u_{ij}$ and
+$\Delta_{\delta,h}=\sum_i\delta_i^2$.  The unit-multiplier quadratic
+Hamiltonian is
+\begin{align}
+ H_2(u,p)={}&\|p\|_h^2-\frac12\|\tr p\|_h^2
+ +\frac14\sum_i\|\delta_i u\|_h^2-\frac12\|v\|_h^2\notag\\
+ &+\frac12\langle v,\delta t_u\rangle_h
+ -\frac14\|\delta t_u\|_h^2.
+ \label{eq:supp-exact-H2}
+\end{align}
+The exact quadratic Ward identities follow because the phase derivatives
+commute; in particular the linear lapse--shift rows are precisely the
+Fierz--Pauli constraint rows used in
+\Cref{lem:supp-initial-calculus}.
+
+\begin{theorem}[Finite-action and canonical provenance]
+\label{thm:supp-exact-action-provenance}
+On the compact nondegenerate coframe chart and for sufficiently small $hR$:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.8em]
+\item \eqref{eq:supp-exact-phase-action} is an explicit analytic finite action
+in the coframe, temporal connection and spatial link variables;
+\item its stationary connection is the unique analytic solution of
+\eqref{eq:supp-exact-stationary-connection};
+\item stationary elimination followed by the nondegenerate Legendre transform
+gives the canonical Hamiltonian \eqref{eq:supp-exact-H}, equivalently
+\eqref{eq:main-action-hamiltonian};
+\item at flat data its quadratic canonical part is
+\eqref{eq:supp-exact-H2}, so the original initial constraint map has the
+linearization stated in \Cref{lem:supp-initial-calculus}.
+\end{enumerate}
+Consequently every exact-action matrix, source, Poisson bracket and
+finite-dimensional certificate used below is a derivative or basis
+restriction of one displayed finite action.
+\end{theorem}
+\begin{proof}
+Differentiation of the ordered link products gives
+\eqref{eq:supp-exact-connection-normal-form}.  The compensators
+\eqref{eq:supp-exact-compensators} remove the connection-velocity term exactly.
+The Cartan quadratic block is a coframe congruence of the invertible flat
+Cartan block, hence has the stated inertia and uniform singular-value margin.
+The analytic remainder estimate
+\eqref{eq:supp-exact-connection-remainder} makes
+\eqref{eq:supp-exact-stationary-connection} a contraction after multiplication
+by $\mathsf C(e)^{-1}$.  Analytic dependence follows from the finite-dimensional
+implicit-function theorem.  The Legendre statement is the same argument for
+the reduced velocity Hessian.  Expanding the phase-compatible action to
+second order and substituting the linear stationary connection gives
+\eqref{eq:supp-exact-H2}; commutation and skew-adjointness of the
+$\delta_i$ give the exact quadratic Ward identities and the displayed
+constraint linearization.
+\end{proof}
 
 \subsection{Canonical constraints and the finite characteristic quotient}
 
@@ -9287,11 +9508,104 @@ not an exact nonlinear root.
 
 The spectral input for the conditional fixed-cutoff boundary theorem is
 recorded at one prepared event of the unchanged $N=3$, $h=1/3$ action.
-The rank and spectral certificates in this subsection do not by themselves
-verify the complete graded-chart assumption used by that theorem.  The
-preparation equations define a regular finite root box $\mathcal B_*$ around
-$(Y_*,\ell_*)$; all statements in this subsection hold uniformly on that
-box.  The weak multiplier space splits as
+We specify that event rather than treating it as unnamed numerical data.
+
+Let $\Lambda_3=(\mathbb Z/3\mathbb Z)^3$,
+$\delta_i=3(S_i-S_i^{-1})$ and $\omega=3\sqrt3$.  For
+$i\in\{1,2,3\}$ let $T_i$ be the symmetric matrix with unit entries in the
+two off-diagonal positions transverse to axis $i$, let
+\begin{equation}
+ P_1=\diag(0,1,-1),\qquad
+ P_2=\diag(1,0,-1),\qquad
+ P_3=\diag(1,-1,0),
+ \label{eq:supp-certified-axial-polarizations}
+\end{equation}
+and put $f_i(n)=\cos(2\pi n_i/3)$.  For the four mixed wave vectors
+\begin{equation}
+ k_1=(1,1,0),\quad k_2=(1,0,1),\quad
+ k_3=(0,1,1),\quad k_4=(1,-1,0),
+ \label{eq:supp-certified-mixed-waves}
+\end{equation}
+if $i<j$ are the nonzero coordinate indices of $k$ and $m$ is the remaining
+index, set
+\begin{equation}
+ v_k=k_je_i-k_ie_j,\qquad w_k=e_m,\qquad
+ T_k=v_kw_k^{\mathsf T}+w_kv_k^{\mathsf T},\qquad
+ Q_k=v_kv_k^{\mathsf T}-2w_kw_k^{\mathsf T},
+ \label{eq:supp-certified-mixed-polarizations}
+\end{equation}
+and
+\begin{equation}
+ \phi_k(n)=\cos(2\pi k\!\cdot\!n/3)
+ +\frac1{\sqrt3}\sin(2\pi k\!\cdot\!n/3).
+ \label{eq:supp-certified-mixed-profile}
+\end{equation}
+Thus $f_i$ takes values $(1,-1/2,-1/2)$ along its axis and $\phi_k$ takes
+the exact values $(1,0,-1)$ along its wave coordinate.  The ten-profile
+first-field synthesis is
+\begin{align}
+ U&=\sum_{i=1}^3\alpha_iT_if_i
+       +\sum_{r=1}^4\xi_rT_{k_r}\phi_{k_r},\notag\\
+ p_R&=3\left(\diag(d_1,d_2,d_3)-(d_1+d_2+d_3)I\right)
+       +\frac32\sum_i\alpha_iP_if_i
+       +\frac32\sum_r\xi_rQ_{k_r}\phi_{k_r},
+ \qquad p=\sqrt3\,p_R.
+ \label{eq:supp-certified-ten-field}
+\end{align}
+Write $Y=(U,p_R)$.  Fix $\alpha_1=1$ and
+\begin{equation}
+ d_2=-\frac{43544048601}{5000000000},
+ \qquad
+ d_1(q)=
+ \frac{\frac14(1+\alpha_2^2+\alpha_3^2)
+ +\frac43\sum_{r=1}^4\xi_r^2-d_2d_3}{d_2+d_3},
+ \label{eq:supp-certified-calibration}
+\end{equation}
+with
+$q=(\xi_1,\xi_2,\xi_3,\xi_4,\alpha_2,\alpha_3,d_3)$.
+The rational centre is
+\begin{center}
+\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+coordinate & $q_{\rm c}$\\
+\midrule
+$\xi_1$ & $0.01400959084176856057974567007441966391629696585723$\\
+$\xi_2$ & $-0.06670489748267782012274481444791177741880525540001$\\
+$\xi_3$ & $-0.14112980566976204815602958227436097020231483266058$\\
+$\xi_4$ & $0.17215742625921464595401418943881609717177416130840$\\
+$\alpha_2$ & $1.18861735067592515913699417669956560893857219610030$\\
+$\alpha_3$ & $1.13194679076910720016041060163499890274825493906714$\\
+$d_3$ & $-7.81058367048738968959916622423363949380428649561582$\\
+\bottomrule
+\end{tabular}
+\end{center}
+where each terminating decimal denotes the corresponding exact rational.
+Put
+\begin{equation}
+ \mathcal B_*=\{q:\|q-q_{\rm c}\|_\infty\le10^{-40}\}.
+ \label{eq:supp-certified-root-box}
+\end{equation}
+The seven preparation/Fredholm equations have a unique exact root
+$q_*\in\mathcal B_*$ with
+\begin{equation}
+ \|q_*-q_{\rm c}\|_\infty<3.28\times10^{-49}.
+ \label{eq:supp-certified-root-error}
+\end{equation}
+We set $Y_*=Y(q_*)$.  The leading multiplier tilt $\ell_*$ is the
+mean-normalized solution of the exact quadratic preparation equation
+\begin{equation}
+ \mathbb K_1(Y_*)\ell_*+\widehat B_2(Y_*)=0,
+ \label{eq:supp-certified-leading-tilt}
+\end{equation}
+where $\widehat B_2$ is the complete quadratic consistency-drift coefficient
+obtained from the Hamiltonian \eqref{eq:supp-exact-H}.  Thus
+$(Y_*,\ell_*)$ and the root box are determined by the displayed finite action
+and exact rational data.  The interval rank and spectral certificates below
+do not by themselves verify the complete graded-chart assumption used by the
+boundary theorem.
+
+The weak multiplier space splits as
 \begin{equation}
  \mathbb R^{29}=\mathcal H\oplus\mathcal G,
  \qquad \dim\mathcal H=3,
@@ -9314,6 +9628,19 @@ mass certificate gives
  \operatorname{inertia}(D_{26})=(15,11,0).
  \label{eq:supp-certified-mass-inertia}
 \end{equation}
+
+\paragraph{Certificate convention.}
+The matrices in this subsection are not additional dynamical assumptions.
+They are obtained by differentiating \eqref{eq:supp-exact-H} on the carrier
+\eqref{eq:supp-certified-ten-field}, restricting to the displayed physical
+multiplier bases, and performing the stated Schur eliminations.  The
+proof-bearing numerical data consist of directed interval endpoints or exact
+rationals: the root-box preconditioner, the principal minor certificate, the
+four integral coefficient matrices in \eqref{eq:supp-certified-pencil}, and
+the rational similarity data used below.  High-precision floating
+eigenvectors are used only to choose rational candidate transforms; every
+inequality entering a theorem is rechecked by outward interval or exact
+integer/rational arithmetic.
 
 \begin{theorem}[Exact rank of the weak first-Poisson block]
 \label{thm:supp-certified-weak-rank}

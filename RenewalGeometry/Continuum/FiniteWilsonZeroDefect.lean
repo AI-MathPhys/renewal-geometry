@@ -4,9 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.NativeReconstructedConsistency
+import RenewalGeometry.Continuum.NativeTrigReconstructedFields
 import RenewalGeometry.GaugeTheory.NativeWilsonCompactness
-import RenewalGeometry.GaugeTheory.NativeActionGaugeInvariance
 import RenewalGeometry.Analysis.FirstVariationCalculus
 
 /-!
@@ -36,6 +35,20 @@ This file assembles **(ii)–(iv)** on the proved Lean theorems, after the norma
   strong `H¹` coframes, strong `L⁴` connections with strongly convergent first differences,
   `F_{A_h} → F_A`, the Higgs and spinor conclusions, `eq:native-all-sector-limit` with cutoff banks,
   the reconstructed-field consistency, and the Euler equations under native stationarity.
+
+* `finite_wilson_criterion` (**`thm:finite-Wilson-zero-defect` after normalization**): the chain
+  composed with `NativeTrigRec.native_reconstructed_closure_trig_bank` (reconstructed fields = the
+  trigonometric interpolants of the records): all of
+  `eq:Wilson-strong-convergence`, `eq:native-all-sector-limit` with cutoff banks, the consistency
+  relative to the reconstructed fields, the Euler equations under native stationarity, and strong
+  `L¹` convergence of the bosonic stress densities (`lpTendsto_chart_quadratic`,
+  `lpTendsto_potential_seq`).
+
+NOT covered here (missing bridges): the record-level glue of the normalization clause (i) (from
+the rooted certificate on the native links to the normalized same records, with the invariance of
+the packets, Wilson moduli and graph norms in the encodings used here); `(F5)` ⟹ native
+stationarity (v) (comparison of the physical link-tangent dual norm `NativeGauge.covNorm` with the
+native test family); the fermionic metric variation with varying Yukawa banks.
 
 Rendering: unit torus, mesh `h = 1/N`, as in the sector files; the Wilson screens are taken in
 the form of `NativeWilsonCompactness` (positive displacements `0 < mh ≤ ρ`) on the literal packets
@@ -912,28 +925,8 @@ theorem finite_wilson_criterion (D₀ : Data 𝔄 (EuclideanSpace ℝ (Fin rH)) 
       ∀ (Kθ : Set (ℝ × ℝ × ℝ × ℝ × (Fin J → ℝ) ×
           (EuclideanSpace ℝ (Fin rH) →L[ℝ] Spin 𝓢))), IsCompact Kθ →
       (∀ k, bankVec (θs k) ∈ Kθ) → (∀ v ∈ Kθ, v.1 ≠ 0 ∧ ∀ j, 0 ≤ v.2.2.2.2.1 j) →
-      -- the reconstructed fields
-      ∀ (f : ℕ → 𝕋 → M4), (∀ k z, f k z ∈ Ke) →
-      LpTendsto volume 2 (fun k => f k - pc (coframeM (y k))) 0 →
-      ∀ (g : ℕ → Fin 4 → 𝕋 → M4),
-      (∀ lam, LpTendsto volume 2 (fun k => g k lam - pc (qM (y k) lam)) 0) →
-      ∀ (Ar : ℕ → Fin 4 → 𝕋 → 𝔄),
-      (∀ μ, LpTendsto volume 4 (fun k => Ar k μ - pc (gauge (y k) μ)) 0) →
-      ∀ (dAr : ℕ → Fin 4 → Fin 4 → 𝕋 → 𝔄),
-      (∀ μ ν, LpTendsto volume 2
-        (fun k => dAr k μ ν - pc (NativeHiggs.DpV μ (gauge (y k) ν))) 0) →
-      ∀ (Hr : ℕ → 𝕋 → EuclideanSpace ℝ (Fin rH)),
-      LpTendsto volume 4 (fun k => Hr k - pc (higgs (y k))) 0 →
-      ∀ (dH : ℕ → Fin 4 → 𝕋 → EuclideanSpace ℝ (Fin rH)),
-      (∀ μ, LpTendsto volume 2 (fun k => dH k μ - pc (NativeHiggs.DpV μ (higgs (y k)))) 0) →
-      ∀ (Ψr : ℕ → 𝕋 → 𝓢), LpTendsto volume 2 (fun k => Ψr k - pc (psi (y k))) 0 →
-      ∀ (χr : ℕ → 𝕋 → CoSpinor 𝓢), LpTendsto volume 2 (fun k => χr k - pc (psiBar (y k))) 0 →
-      ∀ B4 : ℝ≥0∞, B4 ≠ ∞ → (∀ k, eLpNorm (Ψr k) 4 volume ≤ B4) →
-      (∀ k, eLpNorm (χr k) 4 volume ≤ B4) →
-      ∀ (ur : ℕ → 𝕋 → Dif 𝓢 (CoSpinor 𝓢)), (∀ k, MemLp (ur k) 2 volume) →
-      ∀ Cr : ℝ, (∀ k, (eLpNorm (ur k) 2 volume).toReal ≤ Cr) →
-      (∀ Gt : 𝕋 → Dif 𝓢 (CoSpinor 𝓢) →L[ℝ] ℝ, MemLp Gt 2 volume →
-        Tendsto (fun k => ∫ z, Gt z (ur k z - pc (difs (y k) (psiBar (y k))) z)) atTop (𝓝 0)) →
+      -- the complete unfiltered reconstructed coframes stay in the chart
+      (∀ k z, NativeTrigRec.recon (coframeM (y k)) z ∈ Ke) →
       ∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ H : CoHyp (fun k => n (φ k)) (fun k => y (φ k)),
       H.Ke = Ke ∧
       ∃ θ : Bank J (EuclideanSpace ℝ (Fin rH)) 𝓢, BankConv (fun k => θs (φ k)) θ ∧
@@ -964,9 +957,15 @@ theorem finite_wilson_criterion (D₀ : Data 𝔄 (EuclideanSpace ℝ (Fin rH)) 
         ∀ τ : DTest 𝔄 (EuclideanSpace ℝ (Fin rH)) 𝓢 (CoSpinor 𝓢), τ.norm ≤ M →
         |NativeAllSector.nativeVar (bankData D₀ Tj (θs (φ k))) (n (φ k)) (y (φ k))
             (testRec (κid 𝓢) (n (φ k)) (y (φ k)) τ) -
-          NativeReconstructed.recAllVar (bankData D₀ Tj θ) (κid 𝓢) (bankT Tj θ.w) (f (φ k))
-            (g (φ k)) (Ar (φ k)) (dAr (φ k)) (Hr (φ k)) (dH (φ k)) (Ψr (φ k)) (χr (φ k))
-            (ur (φ k)) τ| ≤ ε) ∧
+          NativeReconstructed.recAllVar (bankData D₀ Tj θ) (κid 𝓢) (bankT Tj θ.w)
+            (NativeTrigRec.recon (coframeM (y (φ k))))
+            (fun lam => NativeTrigRec.drecon lam (coframeM (y (φ k))))
+            (fun μ => NativeTrigRec.recon (gauge (y (φ k)) μ))
+            (fun μ ν => NativeTrigRec.drecon μ (gauge (y (φ k)) ν))
+            (NativeTrigRec.recon (higgs (y (φ k))))
+            (fun μ => NativeTrigRec.drecon μ (higgs (y (φ k))))
+            (NativeTrigRec.recon (psi (y (φ k)))) (NativeTrigRec.recon (psiBar (y (φ k))))
+            (NativeTrigRec.recJets (y (φ k))) τ| ≤ ε) ∧
       -- the Euler equations under native stationarity
       ((∀ ε > 0, ∀ᶠ k in atTop,
           ∀ τ : DTest 𝔄 (EuclideanSpace ℝ (Fin rH)) 𝓢 (CoSpinor 𝓢), τ.norm ≤ 1 →
@@ -992,27 +991,19 @@ theorem finite_wilson_criterion (D₀ : Data 𝔄 (EuclideanSpace ℝ (Fin rH)) 
             ΘV (H.e₀ z) * potential (bankData D₀ Tj θ) (P.H₀ z))) := by
   obtain ⟨εstar, hεs, hA⟩ := wilson_coulomb_extraction (J := J) D₀ T₀ hc0 hc
   refine ⟨εstar, hεs, fun n _ y θs hn hδ hs Ke hKe hpos hval cm hcm hmar hTBe hTBq hAd hUH hFb
-    hKb BH hHb hΩF hΩK hU B hΨ hKs hΨb hKbd Kθ hKθ hθK hphys f hfK hfc g hgc Ar hAc dAr hdAc Hr
-    hHc dH hdHc Ψr hΨc χr hχc B4 hB4 hΨ4 hχ4 ur hur Cr hurb hurw => ?_⟩
+    hKb BH hHb hΩF hΩK hU B hΨ hKs hΨb hKbd Kθ hKθ hθK hphys hfK => ?_⟩
   obtain ⟨φ, hφ, H, hHK, hHc', θ, hθ, hκ, hw, F, hF, G, hG, hFG, K₀, hK⟩ :=
     hA n y θs hn hδ hs Ke hKe hpos hval cm hcm hmar hTBe hTBq hAd hUH hFb hKb hΩF hΩK Kθ hKθ
       hθK hphys
   have hposH : ∀ M ∈ H.Ke, 0 < Matrix.det (show Mat from M) := by rw [hHK]; exact hpos
   have hcH : H.c ≤ 1 / 64 := by rw [hHc']; exact hcm
-  have hfKH : ∀ k z, f (φ k) z ∈ H.Ke := by rw [hHK]; exact fun k => hfK (φ k)
+  have hfKH : ∀ k z, NativeTrigRec.recon (coframeM (y (φ k))) z ∈ H.Ke := by
+    rw [hHK]; exact fun k => hfK (φ k)
   obtain ⟨ψ, hψ, P, S, u₀, hlim, -, hPK, hDH, hid1, -, htot, -, -, -, -⟩ :=
-    NativeReconstructed.native_reconstructed_closure_bank D₀ Tj hθ hκ hw Θ Θ' H hposH hcH hF
+    NativeTrigRec.native_reconstructed_closure_trig_bank D₀ Tj hθ hκ hw Θ Θ' H hposH hcH hF
       (fun k => hUH (φ k)) (BH := BH) (fun k => hHb (φ k)) hK (fun k => hU (φ k)) (B := B)
       (fun k => hΨ (φ k)) (fun k => hKs (φ k)) (fun k => hΨb (φ k)) (fun k => hKbd (φ k)) hG
-      (fun k => f (φ k)) hfKH (hfc.comp_strictMono hφ) (fun k => g (φ k))
-      (fun lam => (hgc lam).comp_strictMono hφ) (fun k => Ar (φ k))
-      (fun μ => (hAc μ).comp_strictMono hφ) (fun k => dAr (φ k))
-      (fun μ ν => (hdAc μ ν).comp_strictMono hφ) (fun k => Hr (φ k))
-      (hHc.comp_strictMono hφ) (fun k => dH (φ k)) (fun μ => (hdHc μ).comp_strictMono hφ)
-      (fun k => Ψr (φ k)) (hΨc.comp_strictMono hφ) (fun k => χr (φ k))
-      (hχc.comp_strictMono hφ) hB4 (fun k => hΨ4 (φ k)) (fun k => hχ4 (φ k))
-      (fun k => ur (φ k)) (fun k => hur (φ k)) (Cr := Cr) (fun k => hurb (φ k))
-      (fun Gt hGt => (hurw Gt hGt).comp hφ.tendsto_atTop)
+      hfKH
   have hφψ : StrictMono (fun k => φ (ψ k)) := hφ.comp hψ
   set H' := coHypSubseq H hψ with hH'
   have hθ' : BankConv (fun k => θs (φ (ψ k))) θ :=
@@ -1043,8 +1034,331 @@ theorem finite_wilson_criterion (D₀ : Data 𝔄 (EuclideanSpace ℝ (Fin rH)) 
       (Eventually.of_forall fun z => ?_)
     · simp only [Pi.add_apply, ContinuousLinearMap.mul_apply', potential, bankData]
     · simp only [Pi.add_apply, ContinuousLinearMap.mul_apply', potential, bankData]
+      rfl
 
 end Criterion
+
+
+/-! ### Bridge (c): the complete fermionic first variation with cutoff Yukawa banks -/
+
+section FermionBank
+
+open ShiftedJetAction (Grid)
+open NativeDensity
+open NativeBank (Bank BankConv bankData yBasis yukD yukD_sum)
+open NativeDirac (dAct dVar hasDerivAt_dAct)
+open NativeSpinorVariation (contDiracVar native_spinor_variation)
+open NativeDiracLimit (DTest testRec difs Dif)
+open NativeDiracConv (CoHyp)
+open NativeDiracConvergence (SpinHyp)
+open TorusPiecewiseConstantTranslation (pc)
+
+variable {𝔄 : Type*} [NormedRing 𝔄] [NormedAlgebra ℂ 𝔄] [CompleteSpace 𝔄] [NormOneClass 𝔄]
+  [FiniteDimensional ℝ 𝔄]
+variable {𝓗 : Type*} [NormedAddCommGroup 𝓗] [NormedSpace ℝ 𝓗] [CompleteSpace 𝓗] [Nontrivial 𝓗]
+  [FiniteDimensional ℝ 𝓗]
+variable {𝓢 : Type*} [NormedAddCommGroup 𝓢] [NormedSpace ℝ 𝓢] [CompleteSpace 𝓢] [Nontrivial 𝓢]
+  [FiniteDimensional ℝ 𝓢]
+variable {W' : Type*} [NormedAddCommGroup W'] [NormedSpace ℝ W'] [FiniteDimensional ℝ W']
+
+/-- The representation packet `D` with its Yukawa block replaced by `Y`. -/
+def withY (D : Data 𝔄 𝓗 𝓢) (Y : 𝓗 →L[ℝ] Spin 𝓢) : Data 𝔄 𝓗 𝓢 := { D with yukawa := Y }
+
+/-- The Dirac kinetic density (Yukawa independent). -/
+def kinD (D : Data 𝔄 𝓗 𝓢) {N : ℕ} [NeZero N] (h : ℝ) (y : Grid N → Field 𝔄 𝓗 𝓢) (x : Grid N) : ℝ :=
+  volume (coframe y x) *
+    (Complex.I / 2 * ∑ μ, (psiBar y x (gammaMu D μ (coframe y x) (diracDiff D h y x μ)) -
+        diracDiffBar D h y x μ (gammaMu D μ (coframe y x) (psi y x)))).re
+
+theorem diracDensity_withY (D : Data 𝔄 𝓗 𝓢) (Y : 𝓗 →L[ℝ] Spin 𝓢) {N : ℕ} [NeZero N] (h : ℝ)
+    (y : Grid N → Field 𝔄 𝓗 𝓢) (x : Grid N) :
+    diracDensity (withY D Y) h y x = diracDensity (withY D 0) h y x - yukD Y y x := by
+  have e : ∀ D' : Data 𝔄 𝓗 𝓢, diracDensity D' h y x =
+      kinD D' h y x - yukD D'.yukawa y x := fun D' => by
+    simp only [diracDensity, kinD, yukD, Complex.sub_re, mul_sub]
+  rw [e, e]
+  have hk : kinD (withY D Y) h y x = kinD (withY D 0) h y x := rfl
+  have h0 : yukD (withY D 0).yukawa y x = 0 := by
+    simp [withY, yukD]
+  rw [hk, h0, sub_zero]
+  rfl
+
+/-- **The Dirac–Yukawa action is affine in the Yukawa block.** -/
+theorem dAct_withY (D : Data 𝔄 𝓗 𝓢) (Y : 𝓗 →L[ℝ] Spin 𝓢) {N : ℕ} [NeZero N] (h : ℝ)
+    (y : Grid N → Field 𝔄 𝓗 𝓢) :
+    dAct (withY D Y) h y = dAct (withY D 0) h y +
+      ∑ i, (yBasis 𝓗 𝓢).repr Y i *
+        (dAct (withY D (yBasis 𝓗 𝓢 i)) h y - dAct (withY D 0) h y) := by
+  have hY : ∀ x, yukD Y y x = ∑ i, (yBasis 𝓗 𝓢).repr Y i * yukD (yBasis 𝓗 𝓢 i) y x := by
+    intro x
+    conv_lhs => rw [← (yBasis 𝓗 𝓢).sum_repr Y]
+    exact yukD_sum _ _ _ y x
+  have hB : ∀ i, dAct (withY D (yBasis 𝓗 𝓢 i)) h y - dAct (withY D 0) h y =
+      -(h ^ 4 * ∑ x, yukD (yBasis 𝓗 𝓢 i) y x) := by
+    intro i
+    simp only [dAct, diracDensity_withY D (yBasis 𝓗 𝓢 i), Finset.sum_sub_distrib]
+    ring
+  have hA : dAct (withY D Y) h y = dAct (withY D 0) h y -
+      ∑ i, (yBasis 𝓗 𝓢).repr Y i * (h ^ 4 * ∑ x, yukD (yBasis 𝓗 𝓢 i) y x) := by
+    simp only [dAct, diracDensity_withY D Y, hY, Finset.sum_sub_distrib, mul_sub]
+    congr 1
+    simp only [Finset.mul_sum]
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun x _ => by ring
+  rw [hA]
+  simp only [hB, mul_neg, Finset.sum_neg_distrib, sub_eq_add_neg]
+
+/-- **The Dirac–Yukawa first variation is affine in the Yukawa block.** -/
+theorem dVar_withY (D : Data 𝔄 𝓗 𝓢) (Y : 𝓗 →L[ℝ] Spin 𝓢) {N : ℕ} [NeZero N] (h : ℝ)
+    (y v : Grid N → Field 𝔄 𝓗 𝓢) (hdet : ∀ x, (coframe y x).det ≠ 0) :
+    dVar (withY D Y) h y v = dVar (withY D 0) h y v +
+      ∑ i, (yBasis 𝓗 𝓢).repr Y i *
+        (dVar (withY D (yBasis 𝓗 𝓢 i)) h y v - dVar (withY D 0) h y v) := by
+  have h0 := hasDerivAt_dAct (withY D 0) h y v hdet
+  have hi := fun i => hasDerivAt_dAct (withY D (yBasis 𝓗 𝓢 i)) h y v hdet
+  have hD := h0.add (HasDerivAt.fun_sum (u := Finset.univ) fun i _ =>
+    ((hi i).sub h0).const_mul ((yBasis 𝓗 𝓢).repr Y i))
+  have e : (fun t : ℝ => dAct (withY D Y) h (y + t • v)) = fun t =>
+      dAct (withY D 0) h (y + t • v) + ∑ i, (yBasis 𝓗 𝓢).repr Y i *
+        (dAct (withY D (yBasis 𝓗 𝓢 i)) h (y + t • v) - dAct (withY D 0) h (y + t • v)) :=
+    funext fun t => dAct_withY D Y h _
+  have hD' := hD.deriv
+  simp only [dVar]
+  rw [e]
+  refine hD'.trans ?_
+  rw [h0.deriv]
+  congr 1
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [(hi i).deriv]
+
+variable {n : ℕ → ℕ} [∀ k, NeZero (n k)] {y : ∀ k, Grid (n k) → Field 𝔄 𝓗 𝓢}
+
+/-- **The complete fermionic first variation with a varying Yukawa block** (the fermionic part of
+`thm:finite-Wilson-zero-defect`, `prop:weak-fermion` with cutoff Yukawa couplings).  Under the
+hypotheses of `NativeSpinorVariation.native_spinor_variation`, if the Yukawa blocks `Y_h → Y`,
+then the complete finite Dirac–Yukawa first variation at the cutoff blocks — including the metric
+variation of the coframe-derived spin connection and of the volume form — converges to the
+continuum Dirac–Yukawa covector at `Y`, uniformly in the dual `C²` test norm. -/
+theorem native_fermion_variation_yukawa (D : Data 𝔄 𝓗 𝓢) (κ : W' →L[ℝ] CoSpinor 𝓢)
+    (H : CoHyp n y) (S : SpinHyp κ y) {u₀ : 𝕋 → Dif 𝓢 W'} (hu₀ : MemLp u₀ 2 volume) {C : ℝ}
+    (hub : ∀ k, (eLpNorm (pc (difs (y k) (S.χ k))) 2 volume).toReal ≤ C)
+    (hw : ∀ g : 𝕋 → Dif 𝓢 W' →L[ℝ] ℝ, MemLp g 2 volume →
+      Tendsto (fun k => ∫ z, g z (pc (difs (y k) (S.χ k)) z)) atTop (𝓝 (∫ z, g z (u₀ z))))
+    {Ys : ℕ → 𝓗 →L[ℝ] Spin 𝓢} {Y : 𝓗 →L[ℝ] Spin 𝓢} (hY : Tendsto Ys atTop (𝓝 Y)) :
+    ∀ ε > 0, ∀ᶠ k in atTop, ∀ τ : DTest 𝔄 𝓗 𝓢 W',
+      |dVar (withY D (Ys k)) (n k : ℝ)⁻¹ (y k) (testRec κ (n k) (y k) τ) -
+        contDiracVar (withY D Y) κ H S u₀ τ| ≤ ε * τ.norm := by
+  intro ε hε
+  set b := yBasis 𝓗 𝓢
+  have hc : ∀ i, Tendsto (fun k => b.repr (Ys k) i) atTop (𝓝 (b.repr Y i)) := fun i =>
+    ((LinearMap.continuous_of_finiteDimensional (b.coord i)).tendsto Y).comp hY
+  obtain ⟨C0, hC0⟩ := NativeBank.abs_contDirac_le (withY D 0) κ H S hu₀
+  have hCi := fun i => NativeBank.abs_contDirac_le (withY D (b i)) κ H S hu₀
+  choose Ci hCi using hCi
+  set M : Fin (NativeBank.dY 𝓗 𝓢) → ℝ := fun i => 2 + |Ci i| + |C0|
+  have hsum : Tendsto (fun k => ∑ i, |b.repr (Ys k) i - b.repr Y i| * M i) atTop (𝓝 0) := by
+    have := tendsto_finsetSum (Finset.univ : Finset (Fin (NativeBank.dY 𝓗 𝓢))) fun i _ =>
+      (((hc i).sub_const (b.repr Y i)).abs.mul_const (M i))
+    simpa using this
+  have hsmall := (tendsto_order.1 hsum).2 (ε / 2) (by positivity)
+  have h0 := native_spinor_variation (withY D 0) κ H S hu₀ hub hw 1 one_pos
+  have hi : ∀ i, ∀ᶠ k in atTop, ∀ τ : DTest 𝔄 𝓗 𝓢 W',
+      |dVar (withY D (b i)) (n k : ℝ)⁻¹ (y k) (testRec κ (n k) (y k) τ) -
+        contDiracVar (withY D (b i)) κ H S u₀ τ| ≤ 1 * τ.norm := fun i =>
+    native_spinor_variation (withY D (b i)) κ H S hu₀ hub hw 1 one_pos
+  have hall := Filter.eventually_all.2 hi
+  have hY' := native_spinor_variation (withY D Y) κ H S hu₀ hub hw (ε / 2) (by positivity)
+  filter_upwards [hsmall, h0, hall, hY'] with k hks hk0 hki hkY τ
+  have hτ := τ.norm_nonneg
+  have hdet : ∀ x, (coframe (y k) x).det ≠ 0 := fun x => H.hKdet _ (H.hval k x)
+  set v := testRec κ (n k) (y k) τ
+  have hd : ∀ i, |dVar (withY D (b i)) (n k : ℝ)⁻¹ (y k) v - dVar (withY D 0) (n k : ℝ)⁻¹ (y k) v|
+      ≤ M i * τ.norm := by
+    intro i
+    have e1 := hki i τ
+    have e2 := hk0 τ
+    have e3 := hCi i τ
+    have e4 := hC0 τ
+    have a3 : |contDiracVar (withY D (b i)) κ H S u₀ τ| ≤ |Ci i| * τ.norm :=
+      e3.trans (mul_le_mul_of_nonneg_right (le_abs_self _) hτ)
+    have a4 : |contDiracVar (withY D 0) κ H S u₀ τ| ≤ |C0| * τ.norm :=
+      e4.trans (mul_le_mul_of_nonneg_right (le_abs_self _) hτ)
+    calc _ ≤ |dVar (withY D (b i)) (n k : ℝ)⁻¹ (y k) v - contDiracVar (withY D (b i)) κ H S u₀ τ|
+          + |contDiracVar (withY D (b i)) κ H S u₀ τ| + |contDiracVar (withY D 0) κ H S u₀ τ|
+          + |dVar (withY D 0) (n k : ℝ)⁻¹ (y k) v - contDiracVar (withY D 0) κ H S u₀ τ| := by
+            have := abs_sub_le (dVar (withY D (b i)) (n k : ℝ)⁻¹ (y k) v)
+              (contDiracVar (withY D (b i)) κ H S u₀ τ) (dVar (withY D 0) (n k : ℝ)⁻¹ (y k) v)
+            have h2 := abs_sub_le (contDiracVar (withY D (b i)) κ H S u₀ τ)
+              (contDiracVar (withY D 0) κ H S u₀ τ) (dVar (withY D 0) (n k : ℝ)⁻¹ (y k) v)
+            have h3 := abs_sub (contDiracVar (withY D (b i)) κ H S u₀ τ)
+              (contDiracVar (withY D 0) κ H S u₀ τ)
+            rw [abs_sub_comm (contDiracVar (withY D 0) κ H S u₀ τ)] at h2
+            linarith
+      _ ≤ 1 * τ.norm + |Ci i| * τ.norm + |C0| * τ.norm + 1 * τ.norm := by
+            gcongr
+      _ = M i * τ.norm := by simp only [M]; ring
+  have hdiff : dVar (withY D (Ys k)) (n k : ℝ)⁻¹ (y k) v - dVar (withY D Y) (n k : ℝ)⁻¹ (y k) v =
+      ∑ i, (b.repr (Ys k) i - b.repr Y i) *
+        (dVar (withY D (b i)) (n k : ℝ)⁻¹ (y k) v - dVar (withY D 0) (n k : ℝ)⁻¹ (y k) v) := by
+    rw [dVar_withY D (Ys k) _ _ _ hdet, dVar_withY D Y _ _ _ hdet]
+    simp only [sub_mul, Finset.sum_sub_distrib]
+    ring
+  have hb1 : |dVar (withY D (Ys k)) (n k : ℝ)⁻¹ (y k) v - dVar (withY D Y) (n k : ℝ)⁻¹ (y k) v| ≤
+      ε / 2 * τ.norm := by
+    rw [hdiff]
+    refine (Finset.abs_sum_le_sum_abs _ _).trans ?_
+    calc ∑ i, |(b.repr (Ys k) i - b.repr Y i) *
+          (dVar (withY D (b i)) (n k : ℝ)⁻¹ (y k) v - dVar (withY D 0) (n k : ℝ)⁻¹ (y k) v)|
+        ≤ ∑ i, |b.repr (Ys k) i - b.repr Y i| * (M i * τ.norm) := by
+          refine Finset.sum_le_sum fun i _ => ?_
+          rw [abs_mul]
+          exact mul_le_mul_of_nonneg_left (hd i) (abs_nonneg _)
+      _ = (∑ i, |b.repr (Ys k) i - b.repr Y i| * M i) * τ.norm := by
+          rw [Finset.sum_mul]
+          exact Finset.sum_congr rfl fun i _ => by ring
+      _ ≤ ε / 2 * τ.norm := mul_le_mul_of_nonneg_right hks.le hτ
+  have hb2 := hkY τ
+  calc _ ≤ |dVar (withY D (Ys k)) (n k : ℝ)⁻¹ (y k) v - dVar (withY D Y) (n k : ℝ)⁻¹ (y k) v| +
+        |dVar (withY D Y) (n k : ℝ)⁻¹ (y k) v - contDiracVar (withY D Y) κ H S u₀ τ| :=
+          abs_sub_le _ _ _
+    _ ≤ ε / 2 * τ.norm + ε / 2 * τ.norm := add_le_add hb1 hb2
+    _ = ε * τ.norm := by ring
+
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] {J : ℕ}
+
+/-- **The complete fermionic first variation with cutoff coefficient banks** (bridge (c) of
+`thm:finite-Wilson-zero-defect`): for banks `θ_h → θ` over a fixed representation packet `D₀`,
+the complete finite Dirac–Yukawa first variation at the cutoff banks (all tests; restricted to
+metric tests it is the complete fermionic metric variation) converges to the continuum
+Dirac–Yukawa covector at `θ`, uniformly in the dual `C²` test norm (hence in every dual `C^r`
+norm, `r ≥ 2`). -/
+theorem native_fermion_variation_bank (D₀ : Data 𝔄 𝓗 𝓢) (Tj : Fin J → 𝔄 →L[ℝ] E)
+    (κ : W' →L[ℝ] CoSpinor 𝓢) (H : CoHyp n y) (S : SpinHyp κ y) {u₀ : 𝕋 → Dif 𝓢 W'}
+    (hu₀ : MemLp u₀ 2 volume) {C : ℝ}
+    (hub : ∀ k, (eLpNorm (pc (difs (y k) (S.χ k))) 2 volume).toReal ≤ C)
+    (hw : ∀ g : 𝕋 → Dif 𝓢 W' →L[ℝ] ℝ, MemLp g 2 volume →
+      Tendsto (fun k => ∫ z, g z (pc (difs (y k) (S.χ k)) z)) atTop (𝓝 (∫ z, g z (u₀ z))))
+    {θs : ℕ → Bank J 𝓗 𝓢} {θ : Bank J 𝓗 𝓢} (hθ : BankConv θs θ) :
+    ∀ ε > 0, ∀ᶠ k in atTop, ∀ τ : DTest 𝔄 𝓗 𝓢 W',
+      |dVar (bankData D₀ Tj (θs k)) (n k : ℝ)⁻¹ (y k) (testRec κ (n k) (y k) τ) -
+        contDiracVar (bankData D₀ Tj θ) κ H S u₀ τ| ≤ ε * τ.norm :=
+  native_fermion_variation_yukawa D₀ κ H S hu₀ hub hw hθ.Y
+
+end FermionBank
+
+/-! ### Non-vacuity of the criterion -/
+
+section NonVacuityCriterion
+
+open TorusPiecewiseConstantTranslation
+open NativeDensity NativeDiracLimit NativeHiggsVar NativeDiracConvergence
+open NativeAllSectorGraph (exData2 exCoHyp2 exCoHyp2_pos flat2 frameC frameCo gauge_flat2)
+open NativeBank (Bank BankConv bankData bankT exTj exBank exBanks exBanks_conv)
+open NativeGravityFirstJet (flatRecord asM4 coframeM)
+open NativeSpinorGraph (κid spinGraph dualGraph)
+open NativeScaling (Mat)
+
+local instance : Nontrivial (CoSpinor ℂ) :=
+  ⟨⟨0, ContinuousLinearMap.id ℝ ℂ, fun h => by
+    have := congrArg (fun L : ℂ →L[ℝ] ℂ => L 1) h
+    simp at this⟩⟩
+
+local instance : NeZero (Module.finrank ℝ (CoSpinor ℂ)) := ⟨Module.finrank_pos.ne'⟩
+
+theorem flat2_gauge (k : ℕ) (μ : Fin 4) : gauge (flat2 (k + 1)) μ = fun _ => (0 : ℂ) := rfl
+
+theorem pcLp_const_range {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (u : ∀ k : ℕ, (Fin 4 → ZMod (k + 1)) → E) (c : E) (hu : ∀ k x, u k x = c) :
+    TotallyBounded (range fun k => pcLp (u k)) := by
+  refine ((Set.finite_singleton ((memLp_const c).toLp (fun _ : 𝕋 => c) :
+    Lp E 2 (volume : Measure 𝕋))).subset ?_).totallyBounded
+  rintro _ ⟨k, rfl⟩
+  simp only [Set.mem_singleton_iff, pcLp]
+  refine MemLp.toLp_congr _ _ (Eventually.of_forall fun z => ?_)
+  simp [pc, hu]
+
+theorem curvPacket_flat2 (k : ℕ) : curvPacket (k + 1) (flat2 (k + 1)) = 0 := by
+  funext x μ ν
+  change NativeScaling.fieldStrength _ (gauge (flat2 (k + 1))) x μ ν = 0
+  rw [gauge_flat2]
+  simp [NativeScaling.fieldStrength, NativeScaling.gaugePlaquette, ShiftedPlaquette.logOneAdd]
+
+theorem higgsPacket_flat2 (k : ℕ) : higgsPacket exData2 (k + 1) (flat2 (k + 1)) = 0 := by
+  funext x μ
+  change higgsLink exData2 _ (flat2 (k + 1)) x μ = 0
+  simp [higgsLink, NativeScaling.higgsLink, higgs, flat2, flatRecord]
+
+/-- **Non-vacuity of `finite_wilson_criterion`**: the flat records of the abelian
+Einstein–Higgs–Dirac packet, with genuinely varying cutoff banks `κ_h = 1 + 1/(k+1) → 1`, are in
+exact discrete Coulomb gauge with `‖A_h‖_{4,h} = 0 ≤ ε_*` and satisfy `(F1)` (the chart `{1}`,
+precompact coframes and first differences, zero margin, constant reconstructed coframe), `(F3)`
+(zero packets, vanishing Wilson screens) and `(F4)` (compact bank set
+`{θ} ∪ {θ_h}`); the criterion yields the extraction, the limit bank and
+`eq:native-all-sector-limit` with the cutoff banks. -/
+example : ∃ φ : ℕ → ℕ, StrictMono φ ∧
+    ∃ H : NativeDiracConv.CoHyp (fun k => φ k + 1) (fun k => flat2 (φ k + 1)),
+    ∃ θ : Bank 1 (EuclideanSpace ℝ (Fin 2)) ℂ, BankConv (fun k => exBanks (φ k)) θ ∧
+    ∃ F : Fin 4 → Fin 4 → 𝕋 → ℂ,
+    ∃ P : HiggsHyp (bankData exData2 exTj θ) (fun k => flat2 (φ k + 1)),
+    ∃ S : SpinHyp (κid ℂ) (fun k => flat2 (φ k + 1)), ∃ u₀ : 𝕋 → Dif ℂ (CoSpinor ℂ),
+      ∀ M : NNReal, ∀ ε > 0, ∀ᶠ k in atTop,
+        ∀ τ : DTest ℂ (EuclideanSpace ℝ (Fin 2)) ℂ (CoSpinor ℂ), τ.norm ≤ M →
+        |NativeAllSector.nativeVar (bankData exData2 exTj (exBanks (φ k))) (φ k + 1)
+            (flat2 (φ k + 1)) (testRec (κid ℂ) (φ k + 1) (flat2 (φ k + 1)) τ) -
+          NativeAllSector.contAllVar (bankData exData2 exTj θ) (κid ℂ) (bankT exTj θ.w) H F P S u₀
+            τ| ≤ ε := by
+  obtain ⟨εstar, hεs, hmain⟩ := finite_wilson_criterion (J := 1) exData2 exTj
+    (ContinuousLinearMap.id ℝ ℂ) (c₀ := 1) zero_le_one (fun X => by simp) frameC frameCo
+  obtain ⟨φ, hφ, H, -, θ, hθ, F, -, P, S, u₀, -, -, -, -, -, hlim, -⟩ := hmain (fun k => k + 1) (fun k => flat2 (k + 1)) exBanks (tendsto_add_atTop_nat 1)
+    (fun k => by
+      funext x
+      simp [NativeCoulomb.codiffT, NativeYMBridge.gaugeArr, NativeYMBridge.arr, flat2_gauge,
+        periodicHodgeCodiff, periodicHodgeBwd])
+    (fun k μ => by
+      simp [flat2_gauge, NativeCoulomb.g4, GridSobolev.gridL4Norm]
+      exact hεs.le)
+    {asM4 1} isCompact_singleton exCoHyp2_pos (fun k x => rfl) 0 (by norm_num)
+    (fun k x μ => by
+      have := exCoHyp2.hmar k x μ
+      simpa [exCoHyp2] using this)
+    (pcLp_const_range _ (asM4 1) fun k x => rfl)
+    (pcLp_const_range _ 0 fun k x => by
+      funext lam i j
+      change (((k + 1 : ℕ) : ℝ)⁻¹)⁻¹ * ((1 : Mat) i j - (1 : Mat) i j) = 0
+      ring)
+    (fun k x μ X => by simp [flat2_gauge])
+    (fun k x μ v => by rw [gauge_flat2]; simp)
+    ⟨0, fun k => by rw [curvPacket_flat2]; simp [gridNorm]⟩
+    ⟨0, fun k => by rw [higgsPacket_flat2]; simp [gridNorm]⟩
+    0 (fun k => by simp [gridNorm, higgs, flat2, flatRecord])
+    (fun ε hε => ⟨1, one_pos, Eventually.of_forall fun k μ m _ _ => by
+      rw [curvPacket_flat2]; simp [wilsonShiftR, gridNorm]; exact hε.le⟩)
+    (fun ε hε => ⟨1, one_pos, Eventually.of_forall fun k μ m _ _ => by
+      rw [higgsPacket_flat2]; simp [wilsonShiftR, gridNorm]; exact hε.le⟩)
+    (fun k x μ v => by rw [gauge_flat2]; simp)
+    0 (fun k => by simp [gridNorm, psi, flat2, flatRecord])
+    (fun k μ => by simp [gridNorm, spinGraph, psi, flat2, flatRecord])
+    (fun k => by simp [gridNorm, psiBar, flat2, flatRecord])
+    (fun k μ => by simp [gridNorm, dualGraph, psiBar, flat2, flatRecord])
+    (insert (bankVec exBank) (range fun k => bankVec (exBanks k)))
+    (by
+      have h := exBanks_conv
+      exact (h.κ.prodMk_nhds (h.Λ.prodMk_nhds (h.lamH.prodMk_nhds (h.vH.prodMk_nhds
+        ((tendsto_pi_nhds.2 h.w).prodMk_nhds h.Y))))).isCompact_insert_range)
+    (fun k => Set.mem_insert_of_mem _ ⟨k, rfl⟩)
+    (by
+      rintro v (rfl | ⟨k, rfl⟩)
+      · simp [bankVec, exBank]
+      · refine ⟨?_, fun j => ?_⟩
+        · simp only [bankVec, exBanks]
+          positivity
+        · simp [bankVec, exBanks])
+    (fun k z => by
+      change NativeTrigRec.recon (fun _ => asM4 (1 : Mat)) z ∈ ({asM4 1} : Set _)
+      rw [NativeTrigRec.recon_const]; rfl)
+  exact ⟨φ, hφ, H, θ, hθ, F, P, S, u₀, hlim⟩
+
+end NonVacuityCriterion
 
 end
 

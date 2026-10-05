@@ -281,13 +281,23 @@ theorem ucauchy_covDerivHiggs (hC1 : BosonicC1Cauchy Q z) :
   have hb := UCauchyOn.bilin higgsActL hC1.2.2.1 hC1.2.2.2.2.1 hCA hCH
   refine UCauchyOn.pi fun μ => ((hC1.2.2.2.2.2 μ).add (hb.component μ)).congr fun n x _ => rfl
 
+theorem UCauchyOn.ofReal {S : Set E4} {u : ℕ → E4 → ℝ} (h : UCauchyOn S u) :
+    UCauchyOn S (fun n x => ((u n x : ℝ) : ℂ)) := fun ε hε => by
+  obtain ⟨N, hN⟩ := h ε hε
+  refine ⟨N, fun m n hm hn x hx => ?_⟩
+  rw [← Complex.ofReal_sub, Complex.norm_real]
+  exact hN m n hm hn x hx
+
 theorem ucauchy_coframeC (hC1 : BosonicC1Cauchy Q z) :
     UCauchyOn Q.set (fun n => coframeC (z n).z.e) :=
-  UCauchyOn.pi fun p => hC1.1.clm (coframeEntryL p.1 p.2)
+  UCauchyOn.pi fun p => (((hC1.1.component p.1).component p.2).ofReal :
+    UCauchyOn Q.set (fun n x => (((z n).z.e x p.1 p.2 : ℝ) : ℂ)))
 
 theorem ucauchy_coframeGrad (hC1 : BosonicC1Cauchy Q z) :
     UCauchyOn Q.set (fun n => coframeGrad (z n).z.e) :=
-  UCauchyOn.pi fun i => UCauchyOn.pi fun p => (hC1.2.1 i).clm (coframeEntryL p.1 p.2)
+  UCauchyOn.pi fun i => UCauchyOn.pi fun p =>
+    ((((hC1.2.1 i).component p.1).component p.2).ofReal :
+      UCauchyOn Q.set (fun n x => ((pd (z n).z.e i x p.1 p.2 : ℝ) : ℂ)))
 
 theorem ucauchy_coframeJetPacket (hC1 : BosonicC1Cauchy Q z) :
     UCauchyOn Q.set (fun n => coframeJetPacket (z n).z.e) :=
@@ -318,12 +328,6 @@ theorem reducedCertificate_of_C1 {θ : ℕ → CoefficientBank Ysec} (hC1 : Boso
   have hsmA := fun n => (z n).smooth_A
   have hsmH := fun n => (z n).smooth_H
   have hsme := fun n => (z n).smooth_e
-  have mC : ∀ n, MemLp (coframeC (z n).z.e) 2 Q.μ := fun n => memLp_box Q
-    (continuousOn_pi.mpr fun p => ((coframeEntryL p.1 p.2).continuous.comp_continuousOn
-      (hsme n).continuousOn)) 2
-  have mG : ∀ n, MemLp (coframeGrad (z n).z.e) 2 Q.μ := fun n => memLp_box Q
-    (continuousOn_pi.mpr fun i => continuousOn_pi.mpr fun p =>
-      (coframeEntryL p.1 p.2).continuous.comp_continuousOn (continuousOn_pd_slab (hsme n) i)) 2
   have hH1 : H1Cauchy Q (fun n => coframeC (z n).z.e) (fun n => coframeGrad (z n).z.e) := by
     intro ε hε
     obtain ⟨N₁, h₁⟩ := lpCauchy_of_UCauchyOn Q (ucauchy_coframeC Q hC1) 2 (ε / 2) (by positivity)
@@ -332,21 +336,23 @@ theorem reducedCertificate_of_C1 {θ : ℕ → CoefficientBank Ysec} (hC1 : Boso
     exact ⟨max N₁ N₂, fun m hm n hn => add_half_le hε (h₁ m (le_of_max_le_left hm) n
       (le_of_max_le_left hn)) (h₂ m (le_of_max_le_right hm) n (le_of_max_le_right hn))⟩
   have mJ : ∀ n, MemLp (coframeJetPacket (z n).z.e) 2 Q.μ := fun n => memLp_box Q
-    (continuousOn_pi.mpr fun q => (coframeEntryL q.2.1 q.2.2).continuous.comp_continuousOn
-      (continuousOn_pd_slab (hsme n) q.1)) 2
+    (continuousOn_pi.mpr fun (q : Fin 4 × (Fin 4 × Fin 4)) => Complex.continuous_ofReal.comp_continuousOn
+      (((continuous_apply q.2.2).comp (continuous_apply q.2.1)).comp_continuousOn
+        (continuousOn_pd_slab (hsme n) q.1))) 2
   have mA4 : ∀ n, MemLp (z n).z.A 4 Q.μ := fun n => memLp_box Q (hsmA n).continuousOn 4
   have mF : ∀ n, MemLp (curvatureF (z n).z.A) 2 Q.μ := fun n =>
     memLp_box Q (continuousOn_curvatureF (hsmA n)) 2
   have mFP : ∀ n, MemLp (curvaturePacket (z n).z.A) 2 Q.μ := fun n => memLp_box Q
-    (continuousOn_pi.mpr fun q => (((((continuous_apply q.2.2.2).comp (continuous_apply q.2.2.1)).comp
+    (continuousOn_pi.mpr fun (q : Fin 4 × Fin 4 × Fin 5 × Fin 5) =>
+      (((((continuous_apply q.2.2.2).comp (continuous_apply q.2.2.1)).comp
       (continuous_apply q.2.1)).comp (continuous_apply q.1)).comp_continuousOn
         (continuousOn_curvatureF (hsmA n)))) 2
   have mH : ∀ n, MemLp (z n).z.H 2 Q.μ := fun n => memLp_box Q (hsmH n).continuousOn 2
   have mK : ∀ n, MemLp (covDerivHiggs (z n).z.A (z n).z.H) 2 Q.μ := fun n =>
     memLp_box Q (continuousOn_covDerivHiggs (hsmA n) (hsmH n)) 2
   have mKP : ∀ n, MemLp (covGradPacket (z n).z.A (z n).z.H) 2 Q.μ := fun n => memLp_box Q
-    (continuousOn_pi.mpr fun q => (((continuous_apply q.2).comp (continuous_apply q.1)).comp_continuousOn
-      (continuousOn_covDerivHiggs (hsmA n) (hsmH n)))) 2
+    (continuousOn_pi.mpr fun (q : Fin 4 × Fin 2) => (((continuous_apply q.2).comp
+      (continuous_apply q.1)).comp_continuousOn (continuousOn_covDerivHiggs (hsmA n) (hsmH n)))) 2
   have f1 : H1Bounded Q (fun n => coframeC (z n).z.e) (fun n => coframeGrad (z n).z.e) :=
     (H1Cauchy.strong (fun n => memH1_coframe_of_smooth Q Q.isCompact_closure
       Q.closure_subset_cylSlab (hsme n)) hH1).1
