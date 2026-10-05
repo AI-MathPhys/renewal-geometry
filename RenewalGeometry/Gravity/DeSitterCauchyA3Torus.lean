@@ -183,12 +183,12 @@ def W0 : Submodule ℝ (Fin 4 → ℝ) where
   carrier := {x | ∑ i, x i = 0}
   add_mem' := by
     intro a b ha hb
-    simp only [mem_setOf_eq, Pi.add_apply, Finset.sum_add_distrib] at *
+    simp only [Set.mem_ofPred_eq, Pi.add_apply, Finset.sum_add_distrib] at *
     rw [ha, hb, add_zero]
   zero_mem' := by simp
   smul_mem' := by
     intro c a ha
-    simp only [mem_setOf_eq, Pi.smul_apply, smul_eq_mul, ← Finset.mul_sum] at *
+    simp only [Set.mem_ofPred_eq, Pi.smul_apply, smul_eq_mul, ← Finset.mul_sum] at *
     rw [ha, mul_zero]
 
 /-- `Λ_{A₃} = W₀ ∩ ℤ⁴` (`eq:supp-a3-lattice`), as an additive subgroup of `W₀`. -/
@@ -269,9 +269,15 @@ theorem a3Embed_mem_lambdaA3_iff (x : Fin 3 → ℝ) :
     simp at h0 h1 h2 h3
     refine ⟨fun a => ?_, ⟨z0, by push_cast; linarith⟩⟩
     fin_cases a
-    · exact ⟨z0 + z1, by push_cast; simp; linarith⟩
-    · exact ⟨z0 + z2, by push_cast; simp; linarith⟩
-    · exact ⟨z0 + z3, by push_cast; simp; linarith⟩
+    · refine ⟨z0 + z1, ?_⟩
+      show x 0 = ((z0 + z1 : ℤ) : ℝ)
+      push_cast; linarith
+    · refine ⟨z0 + z2, ?_⟩
+      show x 1 = ((z0 + z2 : ℤ) : ℝ)
+      push_cast; linarith
+    · refine ⟨z0 + z3, ?_⟩
+      show x 2 = ((z0 + z3 : ℤ) : ℝ)
+      push_cast; linarith
   · rintro ⟨hz, m, hm⟩ i
     obtain ⟨z0, h0⟩ := hz 0
     obtain ⟨z1, h1⟩ := hz 1
@@ -288,13 +294,16 @@ in fact `a3Embed (a3Roots r)` are exactly the oriented roots `eᵢ − eⱼ` of
 theorem a3Embed_a3Roots_mem (r : Fin 12) :
     a3Embed (RenewalGeometry.a3Roots r) ∈ lambdaA3 := by
   rw [a3Embed_mem_lambdaA3_iff]
-  fin_cases r <;>
-    refine ⟨fun a => ?_, ?_⟩ <;>
-    first
-    | (fin_cases a <;> simp [RenewalGeometry.a3Roots] <;>
-        first | exact ⟨0, by simp⟩ | exact ⟨1, by simp⟩ | exact ⟨-1, by simp⟩)
-    | (simp [RenewalGeometry.a3Roots] <;>
-        first | exact ⟨0, by norm_num⟩ | exact ⟨1, by norm_num⟩ | exact ⟨-1, by norm_num⟩)
+  refine ⟨fun a => ?_, ?_⟩
+  · fin_cases r <;> fin_cases a <;> simp [RenewalGeometry.a3Roots] <;>
+      first
+      | (refine ⟨1, ?_⟩; norm_num; done)
+      | (refine ⟨-1, ?_⟩; norm_num; done)
+      | (refine ⟨0, ?_⟩; norm_num; done)
+  · fin_cases r <;> simp [RenewalGeometry.a3Roots] <;>
+      first
+      | (refine ⟨1, ?_⟩; norm_num; done)
+      | (refine ⟨-1, ?_⟩; norm_num; done)
 
 /-- `2ℤ³` lies in the kernel of the projection. -/
 theorem a3Embed_two_int_mem (k : Fin 3 → ℤ) :
@@ -317,10 +326,9 @@ theorem a3TorusProj_image_cube :
   · apply (QuotientAddGroup.eq_iff_sub_mem).mpr
     have : a3Embed (fun a => x a - 2 * (k a : ℝ)) - a3Embed x =
         -a3Embed (fun a => 2 * (k a : ℝ)) := by
-      rw [← a3Embed_sub, neg_eq_iff_eq_neg, ← a3Embed_sub]
-      congr 1
-      funext a
-      simp
+      apply Subtype.ext
+      funext i
+      fin_cases i <;> simp [a3Embed, a3EmbedFun] <;> ring
     show a3Embed (fun a => x a - 2 * (k a : ℝ)) - a3Embed x ∈ lambdaA3
     rw [this]
     exact neg_mem (a3Embed_two_int_mem k)
@@ -344,7 +352,7 @@ theorem desitter_globally_hyperbolic_slicing_A3 (H : ℝ) :
       Function.Injective τ) ∧
     (∀ (τ τ' : ℝ → ℝ) (x x' : ℝ → Fin 3 → ℝ), IsCausalCurve H τ τ' x x' →
       IsInextendibleVia a3TorusProj τ x → ∀ t, ∃! s, τ s = t) :=
-  ⟨lorentzMetric_inv_time H, fun t => isCompact_singleton.prod isCompact_univ,
+  ⟨lorentzMetric_inv_time H, fun _ => isCompact_singleton.prod isCompact_univ,
     causal_zero_time_iff H, fun _ _ _ _ hc => hc.time_injective,
     fun _ _ _ _ hc hi t => slice_cauchy_via continuous_a3TorusProj hc hi t⟩
 

@@ -149,8 +149,23 @@
   "thm:main-action-reconstruction": {
     "env": "theorem",
     "title": "Renewal-pressure action reconstruction",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.contDiff_laplace",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.contDiffAt_pressure",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.contDiff_pressure",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.analyticAt_pressure",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.pressure_jets_exist",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.pressure_unique_near",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.fderiv_pressure_zero",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.fderiv_pressure_zero_eq",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.logTilt",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.hasFDerivAt_logTilt",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.fderiv_logTilt",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.action_slope_reconstruction",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.pressure_hessian_eq",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.duration_jet",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.action_gram_reconstruction",
       "RenewalGeometry/Action/RewardPressure.lean:RenewalGeometry.RewardPressure.pressure_exists_unique",
       "RenewalGeometry/Action/RewardPressure.lean:RenewalGeometry.RewardPressure.pressure_hasDerivAt",
       "RenewalGeometry/Action/RewardPressure.lean:RenewalGeometry.RewardPressure.slope_reconstruction",
@@ -165,9 +180,7 @@
       "RenewalGeometry/Action/RewardPressure.lean:RenewalGeometry.RewardPressure.score_hasDerivAt",
       "RenewalGeometry/Action/RewardPressure.lean:RenewalGeometry.RewardPressure.pressureFn_zero"
     ],
-    "note": "Partial: on a finite marked cycle table with positive probabilities (summing to 1) and positive durations, the pressure P_X(q) is the unique root of L(q,P(q)) = 1 (pressure_exists_unique; defined globally from the table: pressureFn, P(0) = 0 by pressureFn_zero); it is differentiable along every line with slope -E g_v / E tau (pressure_hasDerivAt, and at every base point pressure_hasDerivAt_at); the score S_X v = -g_v - pi(v) tau is the derivative of the tilted log-likelihood (score_hasDerivAt), whence G_X = -S_X - T_X pi_X (slope_reconstruction) with the affine anchor pinned by centering (pressure_slope_anchor); the second line-derivative is tau_bar^-1 E[(S v)^2] >= 0 (pressure_second_deriv[_nonneg]) and the duration cross-jet is T*S (duration_slope), so by polarization and pressure_jet_gram the complete mixed action Gram G*G = S*S + delta*pi + pi*delta + m2 pi*pi is reconstructed. Missing: 'all finite jets' -- existence (C^infinity / analyticity) of the pressure and its jets beyond order two is not proved (only first and second derivatives along lines).",
-    "difficulty": "easy",
-    "plan": "For finite-dimensional E, prove ContDiff R top (pressureFn p tau G hp htau) (at least ContDiffAt at 0) with Mathlib's inverse function theorem: (q,r) |-> (q, L(q,r)) is C^infinity (finite sum of exponentials of affine maps) with invertible derivative because d_r L = -sum p tau e^{...} < 0; its local inverse is C^infinity (ContDiffAt.to_localInverse / PartialHomeomorph.contDiffAt_symm), and P(q) is the second component of the inverse at (q,1), identified with pressureFn by pressureFn_eq_of_root. Then every iteratedFDeriv of P at 0 is a function of the table (optionally AnalyticAt via the analytic inverse function theorem). Keep score_hasDerivAt in the citations."
+    "note": "Proved for a finite nonempty marked table (p > 0, sum p = 1, tau > 0) and a linear synthesis G : E ->l (Omega -> R) on a finite-dimensional normed real space E (the paper's finite variation space). The table-defined pressure pressureFn (unique global root of L(q,P(q)) = 1, P(0) = 0) is C^omega on all of E by the analytic implicit-function theorem (ContDiffAt.implicitFunction, with d_r L = -sum p tau e^{...} < 0 at every base point): contDiffAt_pressure / contDiff_pressure / analyticAt_pressure; hence all finite jets exist (pressure_jets_exist: C^k and the Frechet Taylor series up to every order k) and are functions of the table; pressure_unique_near gives uniqueness of the pressure near the origin. The real reconstruction identity action_slope_reconstruction is stated with the ACTUAL derivatives: pi_X = fderiv P 0 with pi_X(v) = -E g_v / taubar (fderiv_pressure_zero), S_X v(omega) = fderiv (q -> log p_{X,q}(omega)) 0 v (hasFDerivAt_logTilt / fderiv_logTilt; logTilt = log(p e^{-g_q - P(q) tau})), and g_v(omega) = -S_X v(omega) - pi_X(v) tau(omega), together with the centering E[S_X v] = 0 (affine anchor). The final sentence (Hessian and duration cross-jets reconstruct the full marginal and mixed Gram) is RewardPressureMixedJet.action_gram_reconstruction (cor:supp-pressure-jet, proved in this batch). Non-vacuity: two-point table example in RewardPressureAnalytic.lean. Earlier pointers retained."
   },
   "thm:main-common-action": {
     "env": "theorem",
@@ -950,8 +963,21 @@
   "cor:supp-derived-state-machine": {
     "env": "corollary",
     "title": "Derived predictive state machine",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.derived_state_machine",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.state_factorization",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.statePath_spec",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.statePath",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.stateFactors",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.step",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.factor",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.stateFactors_length",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.stateFactors_pos",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.transition_eq_of_project_eq",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.weight_eq_of_project_eq",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.wordProb_nonneg'",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.extendHistory",
       "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.weight",
       "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.weight_project",
       "RenewalGeometry/Predictive/TypedEventGrammar.lean:RenewalGeometry.FiniteTypedEventGrammar.ConditionalLaw.transition",
@@ -963,9 +989,7 @@
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.minimalUpdate_mk_of_occurs",
       "RenewalGeometry/Predictive/DerivedPredictiveCarrierUniversalExact.lean:RenewalGeometry.DerivedPredictiveCarrierUniversal.PredictiveSystem.minimalBranch_mk"
     ],
-    "note": "Partial: well-definedness of kappa_{X,a} on Z^min (ConditionalLaw.weight via Quotient.lift, weight_project) and of T_{X,a} on the positive-probability branch (ConditionalLaw.transition, transition_project, via futureEquivalent_snoc) are proved on the typed grammar law; untyped analogues effectiveStep_respects / minimalUpdate_mk_of_occurs. Missing: the state-path factorization eq:supp-state-factorization p_X(w|h) = prod_j kappa_{X,a_j}(z_{j-1}) with z_0 = q_X(h), z_j = T_{X,a_j}(z_{j-1}) as a statement on Z^min; probability_eq_pathWeight only restates the untyped chain-law field on history representatives. Manuscript note: T_{X,a} is well defined only on the positive-probability branch (the corollary's unrestricted 'well defined' should be restricted; the product formula needs the convention that the path stops / the product is 0 once a factor vanishes).",
-    "difficulty": "easy",
-    "plan": "In TypedEventGrammar.lean (or a new TypedStateFactorization.lean) define the partial quotient path along a typed word (Option-valued, stopping at the first zero-weight letter, or carrying the positivity proof) and prove by induction on the snoc-built word, using wordProb_snoc, weight_project, transition_project and typedPrediction_wordProb_nonneg, that wordProb h.word w equals the product of weight a_j (z_{j-1}) along the path (= 0 when the path stops). Cite it together with weight/transition; ask the author to add 'on the positive-probability branch' to the corollary and to eq:supp-predictive-transition."
+    "note": "Proved on the typed grammar law (FiniteTypedEventGrammar.ConditionalLaw) under the positive-probability-branch reading, disclosed: T_{X,a}([h]) = [ha] is only meaningful when kappa_{X,a}([h]) > 0 (otherwise ha need not be reachable and h ~ h' need not give ha ~ h'a). Well-definedness: kappa on Z^min (ConditionalLaw.weight; weight_eq_of_project_eq) and T on the positive-probability branch (transition_eq_of_project_eq; ConditionalLaw.transition_project). Product formula: the state path runs in Option Z^min (step/statePath: z_0 = q_X(h), z_j = T_{X,a_j}(z_{j-1}) while the weight is positive; it stops (none) at the first vanishing weight, which contributes the factor 0); stateFactors lists kappa_{X,a_j}(z_{j-1}), one per letter (stateFactors_length). state_factorization: p_X(w|h) = (stateFactors ...).prod for EVERY typed future word w, by induction on snoc words with wordProb_snoc, weight_project, transition_project; statePath_spec: on positive-probability words z_k = q_X(hw), on null words the path has stopped; stateFactors_pos: on positive words every factor is a positive weight of a non-stopped state. Bundled as derived_state_machine. Non-vacuity: binary renewal law 1/(n+2), product 1/6. Manuscript: ask the author to add 'on the positive-probability branch' to the corollary's 'well defined' and to eq:supp-predictive-transition, with the stopped-path convention for eq:supp-state-factorization."
   },
   "def:supp-predictive-realization": {
     "env": "definition",
@@ -1327,8 +1351,12 @@
   "thm:supp-relative-primitive-floor": {
     "env": "theorem",
     "title": "Relative primitive-basis minimality for the paper-level entrance",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Predictive/RelativePrimitiveFloorComplete.lean:RenewalGeometry.RelativePrimitiveFloorComplete.relative_primitive_floor_complete",
+      "RenewalGeometry/Predictive/TypedStateFactorization.lean:RenewalGeometry.TypedStateMachine.derived_state_machine",
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.fast_clock_bound",
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.fast_clock_collapse",
       "RenewalGeometry/Predictive/OperationalEntranceCategory.lean:RenewalGeometry.OperationalEntrance.relative_primitive_floor",
       "RenewalGeometry/Predictive/OperationalEntranceCategory.lean:RenewalGeometry.OperationalEntrance.Entrance",
       "RenewalGeometry/Predictive/OperationalEntranceCategory.lean:RenewalGeometry.OperationalEntrance.separating_pairs",
@@ -1346,9 +1374,7 @@
       "RenewalGeometry/Predictive/ContextualIdealHermitianReads.lean:RenewalGeometry.ContextualIdeal.contextual_ideal_hermitianReads",
       "RenewalGeometry/Predictive/ContextualIdealHermitianReads.lean:RenewalGeometry.ContextualIdeal.historyEnvelope_minimum"
     ],
-    "note": "Partial: (R2) separating_pairs / entrance_separating_mechanisms (the manuscript's Bernoulli 1/4 vs 3/4, adjoined writer W, opposite unit alternating forms with Gram I_2, T = S vs T = 2S), (R3) refinement_preserves_separation, no_reconstruction_after_refinement, no_functorial_reconstruction, cofinal_spectator_tower_separating, (R4) orientation_absorption + decoder_eq_or_eq_reverse, and the R1 'own part' (typedLaw_minimal_isTerminal, calibration_eq_inv_sum_absoluteRate, orientation_eq_or_eq_neg_anchor), all bundled in relative_primitive_floor over the anchored groupoid Entrance entranceGrammar. R1 inputs proved in the ledger: thm:supp-right-congruence, thm:supp-minimal-record, thm:supp-comb-tomography, lem:supp-contextual-ideal, thm:supp-word-flatness, lem:supp-race-score, thm:supp-adm-frame, lem:supp-fast-clock, lem:supp-positive-krein-distinct, lem:supp-clifford-cell, cor:supp-lorentzian-square. Missing: cor:supp-derived-state-machine (cited in the R1 proof) is conditional_interface (state-path factorisation on Z^min not proved), so R1 sufficiency is not closed under the strict corollary policy.",
-    "difficulty": "easy",
-    "plan": "Close cor:supp-derived-state-machine per its own ledger plan (Option-valued typed quotient path along a snoc-built word; induction with wordProb_snoc, weight_project, transition_project proving p_X(w|h) = prod_j kappa_{X,a_j}(z_{j-1}), product 0 once the path stops), then re-promote this record citing that theorem; no change to OperationalEntranceCategory.lean is needed."
+    "note": "(R2)-(R4) and the R1 own part as before (OperationalEntrance.relative_primitive_floor, unchanged). The two R1 inputs that were open are now proved in this batch: cor:supp-derived-state-machine (TypedStateMachine.derived_state_machine; positive-probability-branch reading disclosed there) and lem:supp-fast-clock (FastClock.fast_clock_bound / fast_clock_collapse, general roots). relative_primitive_floor_complete bundles the full relative_primitive_floor statement with, for every anchored grammar and every model M, the derived state machine of the predictive row M.law (kappa/T well defined, p_X(w|h) = prod_j kappa_{X,a_j}(z_{j-1})) and the fast-clock bound for every finite root family. The remaining R1 inputs (thm:supp-right-congruence, thm:supp-minimal-record, thm:supp-comb-tomography, lem:supp-contextual-ideal, thm:supp-word-flatness, lem:supp-race-score, thm:supp-adm-frame, lem:supp-positive-krein-distinct, lem:supp-clifford-cell, cor:supp-lorentzian-square) are proved in the ledger, so the strict corollary policy is satisfied."
   },
   "thm:supp-calibration-fibre": {
     "env": "theorem",
@@ -1538,13 +1564,20 @@
   "lem:supp-fast-clock": {
     "env": "lemma",
     "title": "Fast-clock lower bound",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.bracket",
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.bracket_apply",
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.bracket_trace",
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.fast_clock_bound",
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.fast_clock_bound_posSemidef",
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.fast_clock_bound_euclidean",
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.bracket_entry_le",
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.fast_clock_collapse",
+      "RenewalGeometry/Gravity/FastClockBound.lean:RenewalGeometry.FastClock.fast_clock_no_uniform_coercivity",
       "RenewalGeometry/Gravity/RelationalSchedulerADM.lean:RenewalGeometry.relational_scheduler_ADM"
     ],
-    "note": "Partial: relational_scheduler_ADM (A5): for k_a = k_a^+ + k_a^- >= 0, h > 0 and h^2 sum_a k_a r_a r_a^T >= c I_3 (quadratic-form inequality) on the concrete A_3 roots, 3c <= 2h^2 sum_a k_a. Missing: (i) the stated form sum_a(k_a^+ + k_a^-) >= 3c/(R^2 h^2) under ||r_a|| <= R (trace argument for general r_a, or the one-line deduction from R^2 >= 2 for the A_3 roots); (ii) the second clause: sum_a(k_a^+ + k_a^-) = O(h^{-1}) implies ||B_h|| <= R^2 h^2 sum_a(k_a^+ + k_a^-) = O(h) (collapse of the continuum bracket).",
-    "difficulty": "easy",
-    "plan": "Add to Gravity/RelationalSchedulerADM.lean (or a new FastClockBound.lean): (1) fast_clock_bound: for any vectors r_a with ||r_a||^2 <= R^2, R > 0, k^+- >= 0 and B_h = h^2 sum (k_a^+ + k_a^-) r_a r_a^T >= c I_3, sum_a (k_a^+ + k_a^-) >= 3c/(R^2 h^2) (trace: tr B_h >= 3c, tr(r r^T) = ||r||^2 <= R^2); (2) fast_clock_collapse: if sum_a (k_a^+ + k_a^-)(h) <= K/h then ||B_h|| <= R^2 K h, i.e. B_h = O(h) -> 0 (Asymptotics.IsBigO or explicit bound). A few lines each."
+    "note": "Proved for an arbitrary finite root family r : iota -> R^3 (not only the A3 roots), with B_h = h^2 sum_a (k_a^+ + k_a^-) r_a r_a^T (eq:bracket-drift-main; FastClock.bracket). fast_clock_bound: if ||r_a|| <= R (Euclidean: sum_i r_{a,i}^2 <= R^2), R > 0, h > 0, k^+- >= 0 and B_h >= c I_3 (quadratic form), then sum_a (k_a^+ + k_a^-) >= 3c/(R^2 h^2) (trace argument, bracket_trace); variants with the Loewner hypothesis (B_h - c I).PosSemidef (fast_clock_bound_posSemidef) and with roots in EuclideanSpace R (Fin 3), ||r_a|| <= R (fast_clock_bound_euclidean). Second clause, fast_clock_collapse: if the total rate is O(h^-1) as h -> 0+ (Asymptotics.IsBigO on nhdsWithin 0 (Ioi 0)), then every entry of B_h is O(h) and B_h -> 0 (collapsed continuum bracket); fast_clock_no_uniform_coercivity: no fixed c > 0 gives B_h >= c I along h -> 0+. Scoped implicit hypothesis: R > 0. Non-vacuity: sharp example with coordinate roots, B_1 = I_3, bound 3 <= 3 attained."
   },
   "lem:supp-positive-krein-distinct": {
     "env": "lemma",
@@ -1613,8 +1646,21 @@
   "cor:supp-pressure-jet": {
     "env": "corollary",
     "title": "Pressure-jet reconstruction of mixed action blocks",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.hessian",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.tiltedDuration",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.durationJet",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.hessian_line",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.hessian_diag",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.hessian_symm",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.pressure_hessian_eq",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.pressure_hessian_nonneg",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.duration_jet",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.action_gram_reconstruction",
+      "RenewalGeometry/Action/RewardPressureMixedJet.lean:RenewalGeometry.RewardPressureMixedJet.scoreS_add",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.contDiff_pressure",
+      "RenewalGeometry/Action/RewardPressureAnalytic.lean:RenewalGeometry.RewardPressureAnalytic.fderiv_pressure_zero",
       "RenewalGeometry/Action/RewardPressureJet.lean:RenewalGeometry.RewardPressureJet.pressure_second_deriv",
       "RenewalGeometry/Action/RewardPressureJet.lean:RenewalGeometry.RewardPressureJet.pressure_second_deriv_nonneg",
       "RenewalGeometry/Action/RewardPressureJet.lean:RenewalGeometry.RewardPressureJet.duration_slope",
@@ -1622,9 +1668,7 @@
       "RenewalGeometry/Action/RewardPressure.lean:RenewalGeometry.pressure_jet_gram",
       "RenewalGeometry/Action/RewardPressure.lean:RenewalGeometry.pressure_hessian_psd"
     ],
-    "note": "Partial: for a finite faithful marked table (p > 0, sum p = 1, tau > 0) and a linear synthesis G : E -> (Omega -> R): pressure_second_deriv proves the line second derivative d^2/dt^2 P(tv)|_0 = taubar^{-1} E[(S v)^2] (diagonal of D^2 P(0) = taubar^{-1} S*S) and pressure_second_deriv_nonneg its sign; duration_slope proves delta(v) = d/dt E_{tv}[tau]|_0 = E[tau S v] = T*S; pressure_jet_gram is the abstract algebraic identity G*G = S*S + (T*S)*pi + pi*(T*S) + m2 pi*pi for matrices with G = -S - T pi and T*T = m2; pressure_hessian_psd gives taubar^{-1} S*S >= 0. Missing: (i) the bilinear D^2 P(0)[u,v] (mixed blocks) for the actual pressure (twice differentiability of pressureFn on E, or polarization of the proved line jets stated as a theorem); (ii) eq:supp-pressure-jet-b for the actual objects: E_p[g_u g_v] = taubar D^2P(0)[u,v] + delta(u) pi(v) + pi(u) delta(v) + m2 pi(u) pi(v) with m2 = E tau^2, pi = slopeVal, delta = duration slope; the cited matrix identity takes G = -S - T pi (eq:main-action-slope-reconstruction, conclusion of the conditional thm:main-action-reconstruction) as an uninstantiated hypothesis.",
-    "difficulty": "easy",
-    "plan": "In RewardPressureJet.lean: (1) pressure_second_deriv_polar: for u v : E, (1/2)(f''_{u+v} - f''_u - f''_v)(0) = taubar^{-1} E[S u S v] (scoreS is linear in v, so this is algebra on the proved line jets), or prove ContDiff 2 of pressureFn via the implicit function theorem and identify the second Frechet derivative; (2) pressure_jet_gram_actual: for all u v, sum_w p_w (G u w)(G v w) = taubar * D2(u,v) + delta(u) * slopeVal v + slopeVal u * delta(v) + (sum_w p_w tau_w^2) * slopeVal u * slopeVal v, using slope_reconstruction (G v = -S v - pi(v) tau, already proved for the actual objects) and duration_slope; this removes the uninstantiated hypothesis. A few dozen lines."
+    "note": "Proved for the actual objects (finite faithful table p > 0, sum p = 1, tau > 0; linear G on finite-dimensional E). D^2P(0) := fderiv (fderiv pressureFn) 0 (hessian) exists because pressureFn is C^omega (RewardPressureAnalytic.contDiff_pressure). hessian_line identifies D^2P(0)[v,v] with the line second derivative, so hessian_diag (via pressure_second_deriv) gives taubar^-1 E[(S v)^2]; symmetry of the analytic Hessian (hessian_symm) and linearity of the score (scoreS_add) polarize to all mixed blocks: pressure_hessian_eq, D^2P(0)[u,v] = taubar^-1 E[S u S v] (eq:supp-pressure-jet-a, first identity). With taubar_X(q) = E_{X,q} tau (tiltedDuration) and delta_X = fderiv taubar_X 0 (durationJet), duration_jet: delta_X(v) = E[tau S_X v] = T*S (via duration_slope). action_gram_reconstruction (eq:supp-pressure-jet-b): sum_w p_w g_u(w) g_v(w) = taubar D^2P(0)[u,v] + delta(u) pi(v) + pi(u) delta(v) + m2 pi(u) pi(v), with pi = fderiv P 0 and m2 = E tau^2, using RewardPressure.slope_reconstruction for the actual objects -- no hypothesis G = -S - T pi. pressure_hessian_nonneg: D^2P(0) >= 0. Non-vacuity example: two-point table with non-constant reward and duration. Earlier pointers retained (the abstract matrix identities are no longer load-bearing)."
   },
   "thm:supp-action-stationarity": {
     "env": "theorem",
@@ -1751,22 +1795,27 @@
   "thm:supp-face-linearization": {
     "env": "theorem",
     "title": "Derivative-free renewal face linearization",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "RenewalGeometry/Renewal/FaceLinearization.lean:RenewalGeometry.renewal_face_linearization",
       "RenewalGeometry/Renewal/StableRenewalFaceLinearization.lean:RenewalGeometry.additive_locallyBounded_toContinuousLinearMap",
       "RenewalGeometry/Renewal/LocalizedRenewalFaceLinearizationExact.lean:RenewalGeometry.LocalizedRenewalFaceLinearizationExact.localized_renewal_face_linearization",
       "RenewalGeometry/Renewal/StableRenewalFaceLinearization.lean:RenewalGeometry.stable_renewal_face_linearization",
-      "RenewalGeometry/Renewal/StableRenewalFaceLinearization.lean:RenewalGeometry.stableRenewalFaceLimit"
+      "RenewalGeometry/Renewal/StableRenewalFaceLinearization.lean:RenewalGeometry.stableRenewalFaceLimit",
+      "RenewalGeometry/Renewal/FaceLinearizationBoundedNear.lean:RenewalGeometry.FaceLinearizationBoundedNear.renewal_face_linearization_boundedNear",
+      "RenewalGeometry/Renewal/FaceLinearizationBoundedNear.lean:RenewalGeometry.FaceLinearizationBoundedNear.renewal_face_linearization_balanced",
+      "RenewalGeometry/Renewal/FaceLinearizationBoundedNear.lean:RenewalGeometry.FaceLinearizationBoundedNear.linearMap_eq_of_eqOn_nhds",
+      "RenewalGeometry/Renewal/FaceLinearizationBoundedNear.lean:RenewalGeometry.FaceLinearizationBoundedNear.dyadic_identity",
+      "RenewalGeometry/Renewal/FaceLinearizationBoundedNear.lean:RenewalGeometry.FaceLinearizationBoundedNear.stable_branch_needs_regularity",
+      "RenewalGeometry/Renewal/FaceLinearizationBoundedNear.lean:RenewalGeometry.FaceLinearizationBoundedNear.not_linear_hamelCoord",
+      "RenewalGeometry/Renewal/FaceLinearizationBoundedNear.lean:RenewalGeometry.FaceLinearizationBoundedNear.hamelCoord"
     ],
-    "note": "Partial: (exact, global) renewal_face_linearization: halving symmetry on E plus |A(x+y)-A x-A y| <= H||x|| ||y|| on E give exact additivity, A 0 = 0, oddness; additive_locallyBounded_toContinuousLinearMap: additive + bounded on a neighbourhood of 0 gives a unique continuous linear functional; (exact, local) localized_renewal_face_linearization: U a neighbourhood of 0 closed under halving, halving identity on U, quasi-additivity on U within radius r, A bounded on U => unique continuous linear ell agreeing with A on U; (stable) stable_renewal_face_linearization: |L_{m+1} z - L_m z| <= eps_m ||z|| with eps summable, additivity defect <= eta_m ||x|| ||y|| with eta_m -> 0, and one L_{m0} continuous at 0 => unique continuous linear limit, uniform on bounded sets, with explicit tail bound. Missing: (i) the exact branch under the paper's hypothesis 'A bounded near zero' for a general (possibly unbounded) balanced convex U; (ii) the stable branch as stated is false without a regularity hypothesis on the approximants; the Lean's extra hypothesis (L_{m0} continuous at 0) must be added to the manuscript statement.",
-    "difficulty": "easy",
-    "plan": "(1) Manuscript: add to the stable branch 'and one renormalized score L_{m0} is bounded (or continuous) near zero', as in the exact branch. (2) Lean, LocalizedRenewalFaceLinearizationExact.lean: add localized_renewal_face_linearization_of_boundedNear: for U balanced (or halving-closed and star-shaped) with A bounded on some ball B(0,delta), apply localized_renewal_face_linearization to U' = U ∩ B(0,delta) (halving-closed, bounded image), then extend agreement to all of U by iterating A z = 2^n A(2^{-n} z) with 2^{-n} z ∈ U'. Optionally weaken the stable-branch hypothesis to 'L_{m0} bounded near 0'. Under an hour."
+    "note": "PROVED (stable branch under a disclosed NECESSARY manuscript correction). Exact branch, as stated: FaceLinearizationBoundedNear.renewal_face_linearization_balanced -- U a balanced convex neighbourhood of 0, A(0)=0, A(z)=2A(z/2) on U, A bounded on U ∩ V for some neighbourhood V of 0 (boundedness only near zero), |A(x+y)-Ax-Ay| <= H||x|| ||y|| for x, y, x+y in U ∩ W (near zero) => A|_U is the restriction of a unique real-linear functional (unique among ALL linear maps, not only continuous ones), which is moreover continuous; any real normed E (finite dimension not needed). Proof: renewal_face_linearization_boundedNear applies LocalizedRenewalFaceLinearizationExact.localized_renewal_face_linearization on U' = U ∩ B(0,delta) and extends the agreement to all of U through A z = 2^n A(2^-n z) (dyadic_identity); uniqueness by linearMap_eq_of_eqOn_nhds. Stable branch: the printed statement (summable adjacent-cutoff defects and additivity defect -> 0) is FALSE: stable_branch_needs_regularity takes A_m = a Q-linear Hamel coordinate c : R -> R; the renormalized scores L_m(z) = 2^m A_m(2^-m z) = c(z) have ZERO adjacent and additivity defects, yet no real-linear functional (continuous or not) is their pointwise limit (not_linear_hamelCoord, via irrationality of sqrt 2). MANUSCRIPT CORRECTION (to be disclosed, same policy as the L^3 amendment): add to the stable branch 'and one renormalized score L_{m0} is continuous at zero'. Under it, RenewalGeometry.stable_renewal_face_linearization gives the unique continuous linear limit, pointwise convergence, the tail bound |ell z - L_m z| <= (sum_{n>=m} eps_n)||z|| and uniform convergence on every bounded set (hence locally uniform). No sorry, standard axioms."
   },
   "thm:supp-memory-short": {
     "env": "theorem",
     "title": "Complete resolved-memory subtraction",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "RenewalGeometry/Renewal/RenewalMemoryCumulantExact.lean:RenewalGeometry.RenewalMemory.memoryLogPartition",
       "RenewalGeometry/Renewal/RenewalMemoryCumulantExact.lean:RenewalGeometry.RenewalMemory.memoryLogPartition_zero",
@@ -1775,11 +1824,29 @@
       "RenewalGeometry/Renewal/RenewalMemoryCumulantExact.lean:RenewalGeometry.RenewalMemory.memory_hessian",
       "RenewalGeometry/Renewal/RenewalMemoryCumulantExact.lean:RenewalGeometry.RenewalMemory.classical_summand_nonneg",
       "RenewalGeometry/Renewal/RenewalMemoryCumulantExact.lean:RenewalGeometry.RenewalMemory.quantum_summand_nonneg",
-      "RenewalGeometry/Renewal/RenewalMemoryCumulantExact.lean:RenewalGeometry.RenewalMemory.shortedScore_def"
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantExact.lean:RenewalGeometry.RenewalMemory.shortedScore_def",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.memory_short_blocks",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.directSumGenerator",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.directSumState",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.directSumPerturbation",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.exp_directSumGenerator",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.directSumGenerator_isHermitian",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.mixturePartition_eq_trace_exp",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.memoryLogPartition",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.memoryLogPartition_zero",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.memory_first_deriv_t",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.memory_first_deriv_u",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.memory_hessian",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.memory_hessian_diag_nonneg",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.classical_summand_nonneg",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.classical_summand_eq_zero_iff",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.quantum_summand_nonneg",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.quantum_branch_vanish_iff",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.shortedScore",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.shortedScore_def",
+      "RenewalGeometry/Renewal/RenewalMemoryCumulantBlocks.lean:RenewalGeometry.RenewalMemoryBlocks.exampleH_trace"
     ],
-    "note": "Partial: for a finite family of faithful blocks rho_omega = exp(H_omega) (H_omega Hermitian, Tr rho_omega = 1) on ONE common finite type n, weights p_omega > 0 summing to 1, and Hermitian perturbations Kx, Ky evaluated on the plane z = t x + u y: memoryLogPartition_zero (M_cq(0) = 0), memory_first_deriv_t/u (DM_cq(0) = 0), memory_hessian (mixed second derivative = classical branch covariance + sum_omega p_omega Re int_0^1 Tr(rho^s K~x rho^{1-s} K~y) ds), classical_summand_nonneg and quantum_summand_nonneg (both summands >= 0 on the diagonal), shortedScore_def (A_sh = A_coarse - M_cq). Missing: blocks of different dimensions (rho_cq = (+)_omega p_omega rho_omega on (+)_omega C^{d_omega}), which is the generality of the statement.",
-    "difficulty": "easy",
-    "plan": "Generalise RenewalMemoryCumulantExact.lean to a dependent family of block types n : Omega -> Type with [forall w, Fintype (n w)] [forall w, DecidableEq (n w)] [forall w, Nonempty (n w)] and H Kx Ky : (w : Omega) -> Matrix (n w) (n w) C. Every argument is branchwise (trace-exp derivative and Duhamel/BKM positivity of TraceExpDerivative are per block; the outer log-sum-exp is over Omega), so the proofs transfer with mechanical edits; keep the old statement as the constant-family special case."
+    "note": "PROVED for blocks of arbitrary, different dimensions (dependent family n : Omega -> Type; rho_cq acts on (+)_omega C^{d_omega}). RenewalMemoryBlocks.memory_short_blocks: faithful blocks rho_omega = exp(H_omega) (H_omega Hermitian, Tr rho_omega = 1; faithful <=> positive definite <=> Hermitian logarithm H_omega exists), weights p_omega > 0 summing to 1, Hermitian block perturbations Kx, Ky (blocks of K_cq(x), K_cq(y)) on the plane z = t x + u y. (i) Direct-sum presentation proved, not assumed: log rho_cq := (+)_omega (log p_omega 1 + H_omega) is Hermitian with exp(log rho_cq) = (+)_omega p_omega rho_omega (exp_directSumGenerator, via Matrix.exp_blockDiagonal'), and log Tr exp(log rho_cq + K_cq(z)) - mbar(z) is the block mixture M_cq (mixturePartition_eq_trace_exp: block exponential and trace split over the classical label); (ii) M_cq(0) = 0 and DM_cq(0) = 0; (iii) Hessian = classical branch covariance + branch-averaged centered Kubo-Mori/BKM form; (iv) both summands >= 0 on the diagonal, the whole form is PSD (memory_hessian_diag_nonneg), with vanishing clauses; (v) A_sh = A_coarse - M_cq. Scoped: Hessian = bilinear form (x,y) -> d_u d_t M_cq(tx+uy)|_0; nonemptiness of each block type is derived from Tr rho_omega = 1 (nonempty_of_trace_eq_one); Omega finite, nonempty, with decidable equality. Non-vacuity: blocks of sizes 1 and 2 (exampleH, exampleH_trace and an example). Single-block analytic lemmas reused from RenewalMemory. No sorry, standard axioms."
   },
   "prop:supp-restricted-classification": {
     "env": "proposition",
@@ -3535,7 +3602,7 @@
   "thm:supp-exact-time-hierarchy": {
     "env": "theorem",
     "title": "Derivative hierarchy in scalar--trace coordinates",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "RenewalGeometry/Gravity/ExactTimeHierarchy.lean:RenewalGeometry.ExactTimeHierarchy.traceOperator",
       "RenewalGeometry/Gravity/ExactTimeHierarchy.lean:RenewalGeometry.ExactTimeHierarchy.traceResponse",
@@ -3545,11 +3612,25 @@
       "RenewalGeometry/Gravity/ExactTimeHierarchy.lean:RenewalGeometry.ExactTimeHierarchy.hierarchy_eq_iteratedDeriv",
       "RenewalGeometry/Gravity/ExactTimeHierarchy.lean:RenewalGeometry.ExactTimeHierarchy.hierarchy_eq_neg_mul_iteratedDeriv",
       "RenewalGeometry/Gravity/ExactTimeHierarchy.lean:RenewalGeometry.ExactTimeHierarchy.deriv_traceResponse_eq",
-      "RenewalGeometry/Gravity/ExactTimeHierarchy.lean:RenewalGeometry.ExactTimeHierarchy.hasDerivAt_response"
+      "RenewalGeometry/Gravity/ExactTimeHierarchy.lean:RenewalGeometry.ExactTimeHierarchy.hasDerivAt_response",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.exact_time_hierarchy",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.hierarchyVec",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.hierarchyVec_eq_iteratedDeriv",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.colLin_hierarchyVec",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.contDiff_trResp",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.contDiff_gramInv",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.contDiff_sourceProj",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.contDiff_sourceResponse",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.contDiff_traceCompression",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.contDiff_traceSource",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.contDiff_traceResponseVec",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.contDiff_reconstructed",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.exF_signedGram",
+      "RenewalGeometry/Gravity/ExactTimeHierarchyMatrix.lean:RenewalGeometry.ExactTimeHierarchyMatrix.exF_rank",
+      "RenewalGeometry/Gravity/ExactScalarTraceReconstruction.lean:RenewalGeometry.ExactScalarReconstruction.signedGram_isUnit_iff",
+      "RenewalGeometry/Gravity/ExactScalarTraceReconstruction.lean:RenewalGeometry.ExactScalarReconstruction.response_eq"
     ],
-    "note": "Partial: in a complete normed R-algebra, for C, zeta of class C^r with H(t) = 2 - 3C(t) invertible for all t, the recursively defined chi_j (eq:supp-exact-time-sources) equal chi^{(j)} for j <= r (hierarchy_eq_iteratedDeriv; C^r regularity of chi = H^-1 zeta derived via contDiffAt_ringInverse and Leibniz); chi_j = -E^* v^{(j)} if v is C^r and E^* v = -chi at every time (hierarchy_eq_neg_mul_iteratedDeriv); the two formulas of eq:supp-exact-first-time-source (deriv_traceResponse_eq; hasDerivAt_response for differentiable Pi, w, chi). Missing: the theorem under the paper's hypotheses: C^r regularity of Pi(t) = F(F^*F)^-1F^*, w(t) = F(F^*F)^-1 b, C = E^*Pi E, zeta = E^*w and v = w - 3(I-Pi)E chi from F(t), b(t) C^r with full column rank; H(t) invertible from the regular signed Gram (via signedGram_isUnit_iff); E^* v(t) = -chi(t) from response_eq at every t; and the statement for the paper's vectors zeta, chi in R^V (only asserted to be the column-wise case of the algebra version). These are derived-form hypotheses, not derived in Lean.",
-    "difficulty": "easy",
-    "plan": "New file Gravity/ExactTimeHierarchyMatrix.lean: work in Matrix (Fin V) (Fin V) R with a local normed-algebra instance (Matrix.linftyOpNormedAlgebra); from F : R -> Matrix n m R and b of class C^r with IsUnit det(F^T F) at all t, get C^r of (F^T F)^-1 (contDiff of Ring.inverse / Matrix.inv), hence of Pi, w, C, zeta and v = reconstructed; get IsUnit H(t) from signedGram_isUnit_iff and E^T v(t) = -chi(t) from response_eq / reconstructed_isResponse; transfer the algebra hierarchy to vectors via Matrix.replicateCol (or restate the recursion for mulVec with the same Leibniz proof) and conclude chi_j = chi^{(j)} = -E^T v^{(j)} and eq:supp-exact-first-time-source for the actual objects."
+    "note": "PROVED under the manuscript's hypotheses (no derived-form hypotheses left). ExactTimeHierarchyMatrix.exact_time_hierarchy: F : R -> Matrix n m R and b : R -> R^m of class C^r with full column rank (det(F^T F) != 0) and regular signed Gram F^T K0^-1 F at every t, trace isometry E (E^T E = 1, the existing rendering of E tau = tau I/sqrt 3), and v(t) the physical response (IsResponse: F^T v = b and K0 v in Ran F). Derived in Lean: C^r of (F^T F)^-1 (contDiffAt_ringInverse), Pi, w, C, zeta, chi = H^-1 zeta and v (contDiff_gramInv ... contDiff_reconstructed); H(t) invertible (signedGram_isUnit_iff); v = w - 3(I-Pi)E chi and E^T v = -chi at every time (response_eq). Conclusions for the actual VECTORS: the recursion eq:supp-exact-time-sources (hierarchyVec, with mulVec) satisfies chi_j = chi^(j) = -E^T v^(j) for all j <= r (algebra theorem transferred through the column embedding colLin and its left inverse diagLin), and for r >= 1: chi' = H^-1(zeta' + 3C' chi) and v' = w' + 3 Pi' E chi - 3(I - Pi) E chi'. Scoped: C^r of matrix-valued maps w.r.t. the L-infinity operator norm (all norms equivalent in finite dimension). Non-vacuity: F(t) = (1, 1+t^2)^T, b = 1, E = e0 (exF_rank, exF_signedGram, example at order 2). No sorry, standard axioms."
   },
   "prop:supp-exact-clock-test": {
     "env": "proposition",
@@ -4946,7 +5027,7 @@
   "thm:supp-desitter-einstein": {
     "env": "theorem",
     "title": "Cartan curvature and the vacuum Einstein equation",
-    "status": "conditional_interface",
+    "status": "proved",
     "lean": [
       "RenewalGeometry/Gravity/DeSitterCauchySlices.lean:RenewalGeometry.DeSitterCauchy.desitter_cartan_einstein_cauchy",
       "RenewalGeometry/Gravity/DeSitterCauchySlices.lean:RenewalGeometry.DeSitterCauchy.desitter_globally_hyperbolic_slicing",
@@ -4976,11 +5057,26 @@
       "RenewalGeometry/Gravity/DeSitterCartanComponentsExact.lean:RenewalGeometry.DeSitterCartan.frameScalar_eq",
       "RenewalGeometry/Gravity/DeSitterCartanComponentsExact.lean:RenewalGeometry.DeSitterCartan.coordinate_einstein_cosmological",
       "RenewalGeometry/Gravity/DeSitterCartanComponentsExact.lean:RenewalGeometry.DeSitterCartan.coframe_pullback_metric",
-      "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.coordinate_desitter_einstein_space"
+      "RenewalGeometry/Gravity/RelationalDeSitterBranch.lean:RenewalGeometry.RelationalDeSitterBranch.coordinate_desitter_einstein_space",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.desitter_cartan_einstein_cauchy_A3",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.desitter_globally_hyperbolic_slicing_A3",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.slice_cauchy_via",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.time_surjective_of_inextendibleVia",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.tendsto_lift_of_time_bdd",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.IsInextendibleVia",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.W0",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.lambdaA3",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.TorusA3",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.a3Embed",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.a3Embed_normSq",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.a3Embed_surjective",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.a3TorusProj",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.a3Embed_mem_lambdaA3_iff",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.a3Embed_a3Roots_mem",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.compactSpace_torusA3",
+      "RenewalGeometry/Gravity/DeSitterCauchyA3Torus.lean:RenewalGeometry.DeSitterCauchyA3.comoving_isInextendibleVia_A3"
     ],
-    "note": "Partial: proved for every H: metric-compatible, torsion-free and unique spin connection of the coframe theta^0 = dt, theta^a = e^{Ht}dx^a (frame components, constant structure coefficients), Omega^A_B = H^2 theta^A ^ theta_B, Ric = 3H^2 g, R = 12H^2, G + 3H^2 g = 0 in frame and coordinates, coframe pull-back = g_H (DeSitterCartan.desitter_cartan_einstein); and, in Gravity/DeSitterCauchySlices.lean, for R x (R/Z)^3 (CompactSpatialQuotient, three unit circles): t has timelike gradient (g^tt = -1), slices are compact and spacelike, every causal curve (everywhere-differentiable lift to R x R^3, parametrized by R, nonzero causal velocity) meets each slice at most once and every inextendible one (no limit point of the projected curve at either end) exactly once (desitter_slice_cauchy, desitter_globally_hyperbolic_slicing, desitter_cartan_einstein_cauchy; non-vacuity: comoving observer). Missing: the Cauchy / global-hyperbolicity sentence for the manuscript's spatial quotient R x T^3_{A_3}, T^3_{A_3} = W_0/Lambda_{A_3} (isometric to R^3/D_3 in the D_3 realization a3Roots used by lem:supp-a3-second-moment), which is not isometric to the cubic unit torus; the Lean statement is about a different compact flat torus. The argument is lattice-independent (only continuity of the covering projection and compactness of the quotient are used), so the gap is purely one of statement.",
-    "difficulty": "easy",
-    "plan": "Generalize DeSitterCauchySlices.lean over an arbitrary full lattice Lambda in R^3: replace torusProj by the quotient map R^3 -> R^3 / span_Z(b) (QuotientAddGroup.mk, continuous; compactness of the quotient from ZSpan / a bounded fundamental domain), keep IsCausalCurve unchanged and define IsInextendible through the new projection; the proofs of tendsto_atTop_of_pos_of_bddAbove, endpoint_of_time_bdd, time_surjective_of_inextendible and desitter_slice_cauchy go through verbatim (they only compose the convergence in the covering with the continuous projection). Instantiate with the D_3 lattice spanned by the A_3 roots +-e_i+-e_j (the a3Roots realization), restate desitter_cartan_einstein_cauchy for R x R^3/D_3, keep the comoving non-vacuity example. Alternatively derive the D_3 statement from the cubic one through the 2-sheeted covering R^3/D_3 -> R^3/Z^3. About one hour."
+    "note": "PROVED on the manuscript's spatial quotient R x T^3_{A3}. Cartan/Einstein part as before (DeSitterCartan.desitter_cartan_einstein: metric, torsion-free, unique spin connection, Omega = H^2 theta^theta, Ric = 3H^2 g, R = 12H^2, G + 3H^2 g = 0, coframe pull-back = g_H). Cauchy clause now for T^3_{A3} = W0/Lambda_{A3} built literally as in eq:supp-a3-lattice: W0 = {x in R^4 : sum x_i = 0} (W0), Lambda_{A3} = W0 ∩ Z^4 (lambdaA3), TorusA3 = W0 / Lambda_{A3}; orthonormal coordinates x in R^3 -> a3Embed x in W0 (a3Embed_normSq: Euclidean isometry; a3Embed_surjective), covering projection a3TorusProj; its kernel is the D3 lattice {x in Z^3 : x0+x1+x2 even} (a3Embed_mem_lambdaA3_iff) and the 12 roots a3Roots map into Lambda_{A3} (a3Embed_a3Roots_mem); T^3_{A3} compact (compactSpace_torusA3, image of [0,2]^3). The Cauchy argument is generalized to any continuous spatial projection (IsInextendibleVia, time_surjective_of_inextendibleVia, slice_cauchy_via; covering-level convergence tendsto_lift_of_time_bdd; IsInextendibleVia torusProj is the cubic IsInextendible). desitter_cartan_einstein_cauchy_A3: t has timelike gradient (g^tt = -1), slices {t} x T^3_{A3} compact and spacelike, every causal curve meets each slice at most once and every inextendible one exactly once. Scoped rendering (unchanged, disclosed): causal curves are everywhere-differentiable curves parametrized by R, presented by a lift to R x R^3 (orthonormal W0 coordinates); inextendible = no endpoint of the projected curve in R x T^3_{A3}; global hyperbolicity certified by the Cauchy time function (the manuscript's criterion). Non-vacuity: comoving observer (comoving_isInextendibleVia_A3); T^3_{A3} is not a point. No sorry, standard axioms."
   },
   "thm:supp-finite-defects": {
     "env": "theorem",
