@@ -321,7 +321,7 @@ theorem hasDerivAt_ip_mv {u : ℝ → N → ℂ} {u' : N → ℂ} {x : ℝ} (B :
     have hm : HasDerivAt (fun s => ∑ j, B i j * u s j) (∑ j, B i j * u' j) x :=
       HasDerivAt.fun_sum fun j _ => (hc j).const_mul (B i j)
     exact (hc i).star.mul hm
-  have h2 := h1.complex_re
+  have h2 := hasDerivAt_re h1
   convert h2 using 1 <;> simp only [ip, mv, Finset.sum_add_distrib, Complex.add_re]
 
 section Dini
@@ -417,5 +417,357 @@ theorem hasDerivAt_frozen (h : SymHyp A w a t₀ t₁ b L Cb) {t : ℝ} (ht : t 
       (hball s hs))))
 
 end Dini
+
+section Dini2
+
+variable {A : Fin (d + 1) → (Fin (d + 1) → ℝ) → N → N → ℂ} {w : (Fin (d + 1) → ℝ) → N → ℂ}
+  {a t₀ t₁ b : ℝ} {L : ℝ≥0} {Cb : ℝ}
+
+theorem SymHyp.w_slice_cont (h : SymHyp A w a t₀ t₁ b L Cb) {t : ℝ} (ht : t ∈ Icc t₀ t₁) :
+    Continuous fun y : Fin d → ℝ => w (Fin.cons t y) :=
+  continuous_slice (h.w_cont.mono h.sub) ht
+
+/-- Freezing the coefficient costs at most `|N|² L (z - t) ‖w(z)‖²`. -/
+theorem energy_sub_frozen_le (h : SymHyp A w a t₀ t₁ b L Cb) {t z : ℝ} (ht : t ∈ Icc t₀ t₁)
+    (hz : z ∈ Icc t₀ t₁) (htz : t ≤ z) :
+    energy (A 0) w z - frozen (A 0) w t z ≤
+      (Fintype.card N : ℝ) ^ 2 * L * (z - t) * l2sq w z := by
+  have hwz := h.w_slice_cont hz
+  have hAz := continuous_slice (h.A_cont 0) hz
+  have hAt := continuous_slice (h.A_cont 0) ht
+  unfold energy frozen l2sq
+  rw [← integral_sub (integrableOn_cube_of_continuousOn
+      (continuous_ip' hwz (continuous_mv' hAz hwz)).continuousOn)
+    (integrableOn_cube_of_continuousOn
+      (continuous_ip' hwz (continuous_mv' hAt hwz)).continuousOn), ← integral_const_mul]
+  refine integral_mono (integrableOn_cube_of_continuousOn
+      ((continuous_ip' hwz (continuous_mv' hAz hwz)).sub
+        (continuous_ip' hwz (continuous_mv' hAt hwz))).continuousOn)
+    (integrableOn_cube_of_continuousOn
+      (continuous_const.mul ((hwz.norm).pow 2)).continuousOn) fun y => ?_
+  simp only
+  rw [← ip_sub_right, ← mv_sub_left]
+  have h1 := abs_ip_mv_le (A 0 (Fin.cons z y) - A 0 (Fin.cons t y)) (w (Fin.cons z y))
+    (w (Fin.cons z y))
+  have h2 : ‖A 0 (Fin.cons z y) - A 0 (Fin.cons t y)‖ ≤ L * (z - t) := by
+    have := (h.lip 0).norm_sub_le ((cons_mem_slab y).mpr hz) ((cons_mem_slab y).mpr ht)
+    refine this.trans ?_
+    gcongr
+    refine (norm_cons_sub_time z t y).trans ?_
+    rw [abs_of_nonneg (sub_nonneg.mpr htz)]
+  calc _ ≤ _ := (le_abs_self _).trans h1
+    _ ≤ (Fintype.card N : ℝ) ^ 2 * (L * (z - t)) * (‖w (Fin.cons z y)‖ * ‖w (Fin.cons z y)‖) := by
+        gcongr
+    _ = _ := by ring
+
+/-- The frozen derivative `2∫Re⟨A⁰∂ₜw, w⟩` is at most `2∫Re⟨Pw, w⟩ + d|N|²L‖w‖²`: the spatial
+terms of the principal part are controlled by the Lipschitz commutator lemma. -/
+theorem frozen_deriv_le (h : SymHyp A w a t₀ t₁ b L Cb) {t : ℝ} (ht : t ∈ Icc t₀ t₁) :
+    ∫ y in Icc (0 : Fin d → ℝ) 1,
+        2 * ip (mv (A 0 (Fin.cons t y)) (pd w 0 (Fin.cons t y))) (w (Fin.cons t y)) ≤
+      2 * (∫ y in Icc (0 : Fin d → ℝ) 1, ip (princ A w (Fin.cons t y)) (w (Fin.cons t y))) +
+        d * ((Fintype.card N : ℝ) ^ 2 * L * l2sq w t) := by
+  have hwt := h.w_slice_cont ht
+  have hAc : ∀ μ, Continuous fun y : Fin d → ℝ => A μ (Fin.cons t y) := fun μ =>
+    continuous_slice (h.A_cont μ) ht
+  have hpc : ∀ μ, Continuous fun y : Fin d → ℝ => pd w μ (Fin.cons t y) := fun μ =>
+    continuous_slice ((h.pd_cont μ).mono h.sub) ht
+  have hdiff : ∀ y : Fin d → ℝ, DifferentiableAt ℝ w (Fin.cons t y) := fun y =>
+    h.diff (h.sub ((cons_mem_slab y).mpr ht))
+  -- the spatial terms
+  have hspace : ∀ j : Fin d, -(2 * ∫ y in Icc (0 : Fin d → ℝ) 1,
+      ip (mv (A j.succ (Fin.cons t y)) (pd w j.succ (Fin.cons t y))) (w (Fin.cons t y))) ≤
+      (Fintype.card N : ℝ) ^ 2 * L * l2sq w t := by
+    intro j
+    have hc := neg_two_integral_ip_pd_le (A := fun y => A j.succ (Fin.cons t y))
+      (f := fun y => w (Fin.cons t y)) (L := L) j (h.slice_contDiff (h.mem_Ioo ht))
+      (h.wper.slice t) ((h.Aper j.succ).slice t) (fun y i k => h.herm j.succ _ i k)
+      (lipschitzWith_slice (h.lip j.succ) ht)
+    have he : ∫ y in Icc (0 : Fin d → ℝ) 1,
+        ip (mv (A j.succ (Fin.cons t y)) (pd (fun y => w (Fin.cons t y)) j y)) (w (Fin.cons t y)) =
+        ∫ y in Icc (0 : Fin d → ℝ) 1,
+          ip (mv (A j.succ (Fin.cons t y)) (pd w j.succ (Fin.cons t y))) (w (Fin.cons t y)) :=
+      integral_congr_ae (Eventually.of_forall fun y => by
+        simp only [pd_slice j (hdiff y)])
+    rw [he] at hc
+    exact hc
+  have hint : ∀ μ : Fin (d + 1), IntegrableOn (fun y : Fin d → ℝ =>
+      ip (mv (A μ (Fin.cons t y)) (pd w μ (Fin.cons t y))) (w (Fin.cons t y))) (Icc 0 1) :=
+    fun μ => integrableOn_cube_of_continuousOn
+      (continuous_ip' (continuous_mv' (hAc μ) (hpc μ)) hwt).continuousOn
+  have hsplit : ∀ y : Fin d → ℝ, ip (princ A w (Fin.cons t y)) (w (Fin.cons t y)) =
+      ip (mv (A 0 (Fin.cons t y)) (pd w 0 (Fin.cons t y))) (w (Fin.cons t y)) +
+        ∑ j : Fin d, ip (mv (A j.succ (Fin.cons t y)) (pd w j.succ (Fin.cons t y)))
+          (w (Fin.cons t y)) := by
+    intro y
+    simp only [princ, Fin.sum_univ_succ, ip_add_left]
+    congr 1
+    induction (Finset.univ : Finset (Fin d)) using Finset.induction_on with
+    | empty => simp [ip_zero_left]
+    | insert k s hk ih => rw [Finset.sum_insert hk, Finset.sum_insert hk, ip_add_left, ih]
+  have hP : ∫ y in Icc (0 : Fin d → ℝ) 1, ip (princ A w (Fin.cons t y)) (w (Fin.cons t y)) =
+      (∫ y in Icc (0 : Fin d → ℝ) 1,
+        ip (mv (A 0 (Fin.cons t y)) (pd w 0 (Fin.cons t y))) (w (Fin.cons t y))) +
+      ∑ j : Fin d, ∫ y in Icc (0 : Fin d → ℝ) 1,
+        ip (mv (A j.succ (Fin.cons t y)) (pd w j.succ (Fin.cons t y))) (w (Fin.cons t y)) := by
+    simp only [hsplit]
+    rw [integral_add (hint 0) (integrable_finsetSum _ fun (j : Fin d) _ => hint j.succ),
+      integral_finset_sum _ fun (j : Fin d) _ => hint j.succ]
+  rw [integral_const_mul, hP, mul_add]
+  have hsum : -(2 * ∑ j : Fin d, ∫ y in Icc (0 : Fin d → ℝ) 1,
+      ip (mv (A j.succ (Fin.cons t y)) (pd w j.succ (Fin.cons t y))) (w (Fin.cons t y))) ≤
+      d * ((Fintype.card N : ℝ) ^ 2 * L * l2sq w t) := by
+    rw [Finset.mul_sum, ← Finset.sum_neg_distrib]
+    calc _ ≤ ∑ _j : Fin d, (Fintype.card N : ℝ) ^ 2 * L * l2sq w t :=
+          Finset.sum_le_sum fun j _ => hspace j
+      _ = _ := by simp
+  linarith
+
+/-- **Right Dini bound for the energy.** -/
+theorem dini_energy (h : SymHyp A w a t₀ t₁ b L Cb) {t : ℝ} (ht : t ∈ Ico t₀ t₁) {r : ℝ}
+    (hr : ((d : ℝ) + 1) * ((Fintype.card N : ℝ) ^ 2 * L * l2sq w t) +
+      2 * (∫ y in Icc (0 : Fin d → ℝ) 1, ip (princ A w (Fin.cons t y)) (w (Fin.cons t y))) < r) :
+    ∀ᶠ z in 𝓝[>] t, slope (energy (A 0) w) t z < r := by
+  have ht' : t ∈ Icc t₀ t₁ := Ico_subset_Icc_self ht
+  set κL : ℝ := (Fintype.card N : ℝ) ^ 2 * L with hκL
+  have hG := hasDerivAt_frozen h ht'
+  have hG' := frozen_deriv_le h ht'
+  set G' := ∫ y in Icc (0 : Fin d → ℝ) 1,
+    2 * ip (mv (A 0 (Fin.cons t y)) (pd w 0 (Fin.cons t y))) (w (Fin.cons t y))
+  -- continuity of `‖w‖²` from the right
+  have hl2 : ContinuousOn (l2sq w) (Icc t₀ t₁) := by
+    unfold l2sq
+    exact continuousOn_sliceIntegral (Φ := fun x => ‖w x‖ ^ 2) h.h01.le
+      ((h.w_cont.mono h.sub).norm.pow 2)
+  have hl2r : Tendsto (l2sq w) (𝓝[>] t) (𝓝 (l2sq w t)) := by
+    have := (hl2 t ht').tendsto
+    refine this.mono_left ?_
+    rw [← nhdsWithin_Ioo_eq_nhdsGT ht.2]
+    exact nhdsWithin_mono _ fun z hz => ⟨ht.1.trans hz.1.le, hz.2.le⟩
+  have hslope : Tendsto (slope (frozen (A 0) w t) t) (𝓝[>] t) (𝓝 G') :=
+    (hasDerivAt_iff_tendsto_slope.mp hG).mono_left (nhdsGT_le_nhdsNE t)
+  have hlim := (hl2r.const_mul κL).add hslope
+  have hlt : κL * l2sq w t + G' < r := by
+    have : κL * l2sq w t + G' ≤ ((d : ℝ) + 1) * (κL * l2sq w t) +
+        2 * (∫ y in Icc (0 : Fin d → ℝ) 1, ip (princ A w (Fin.cons t y)) (w (Fin.cons t y))) := by
+      linarith
+    linarith
+  have hev := hlim (Iio_mem_nhds hlt)
+  filter_upwards [hev, Ioo_mem_nhdsGT ht.2] with z hz hzI
+  have hz' : z ∈ Icc t₀ t₁ := ⟨ht.1.trans hzI.1.le, hzI.2.le⟩
+  have hzt : 0 < z - t := sub_pos.mpr hzI.1
+  have hE := energy_sub_frozen_le h ht' hz' hzI.1.le
+  have hEt : energy (A 0) w t = frozen (A 0) w t t := rfl
+  simp only [mem_preimage, mem_Iio] at hz
+  rw [slope_def_field] at hz ⊢
+  refine lt_of_le_of_lt ?_ hz
+  rw [div_le_iff₀ hzt, add_mul, div_mul_cancel₀ _ hzt.ne', hEt]
+  have : κL * (z - t) * l2sq w z = κL * l2sq w z * (z - t) := by ring
+  linarith
+
+end Dini2
+
+/-! ### Gronwall: the `L²` energy estimate -/
+
+section Gronwall
+
+variable {A : Fin (d + 1) → (Fin (d + 1) → ℝ) → N → N → ℂ} {w : (Fin (d + 1) → ℝ) → N → ℂ}
+  {a t₀ t₁ b : ℝ} {L : ℝ≥0} {Cb : ℝ}
+
+theorem energy_continuousOn (h : SymHyp A w a t₀ t₁ b L Cb) :
+    ContinuousOn (energy (A 0) w) (Icc t₀ t₁) := by
+  unfold energy
+  exact continuousOn_sliceIntegral (Φ := fun x => ip (w x) (mv (A 0 x) (w x))) h.h01.le
+    (continuousOn_ip (h.w_cont.mono h.sub) (by
+      have h1 := h.A_cont 0
+      have h2 := h.w_cont.mono h.sub
+      unfold mv; fun_prop))
+
+theorem l2sq_le_energy (h : SymHyp A w a t₀ t₁ b L Cb) {c : ℝ}
+    (hpos : ∀ x ∈ slab t₀ t₁, ∀ ξ : N → ℂ, c * ∑ i, ‖ξ i‖ ^ 2 ≤ ip ξ (mv (A 0 x) ξ))
+    (hc : 0 ≤ c) {t : ℝ} (ht : t ∈ Icc t₀ t₁) : c * l2sq w t ≤ energy (A 0) w t := by
+  have hwt := h.w_slice_cont ht
+  have hAt := continuous_slice (h.A_cont 0) ht
+  unfold l2sq energy
+  rw [← integral_const_mul]
+  refine integral_mono (integrableOn_cube_of_continuousOn
+      (continuous_const.mul (hwt.norm.pow 2)).continuousOn)
+    (integrableOn_cube_of_continuousOn
+      (continuous_ip' hwt (continuous_mv' hAt hwt)).continuousOn) fun y => ?_
+  exact (mul_le_mul_of_nonneg_left (norm_sq_le_sum _) hc).trans
+    (hpos _ ((cons_mem_slab y).mpr ht) _)
+
+theorem energy_le_l2sq (h : SymHyp A w a t₀ t₁ b L Cb) {t : ℝ} (ht : t ∈ Icc t₀ t₁) :
+    energy (A 0) w t ≤ (Fintype.card N : ℝ) ^ 2 * Cb * l2sq w t := by
+  have hwt := h.w_slice_cont ht
+  have hAt := continuous_slice (h.A_cont 0) ht
+  unfold l2sq energy
+  rw [← integral_const_mul]
+  refine integral_mono (integrableOn_cube_of_continuousOn
+      (continuous_ip' hwt (continuous_mv' hAt hwt)).continuousOn)
+    (integrableOn_cube_of_continuousOn
+      (continuous_const.mul (hwt.norm.pow 2)).continuousOn) fun y => ?_
+  have h1 := abs_ip_mv_le (A 0 (Fin.cons t y)) (w (Fin.cons t y)) (w (Fin.cons t y))
+  have h2 := h.bound 0 _ ((cons_mem_slab y).mpr ht)
+  calc _ ≤ _ := (le_abs_self _).trans h1
+    _ ≤ (Fintype.card N : ℝ) ^ 2 * Cb * (‖w (Fin.cons t y)‖ * ‖w (Fin.cons t y)‖) := by gcongr
+    _ = _ := by ring
+
+/-- **The `L²` energy inequality for symmetric hyperbolic systems with `W^{1,∞}` coefficients**
+on `[t₀,t₁] × 𝕋^d` (generic form of `eq:dirac-L2-stability`).  If `A⁰ ≥ c > 0` on the slab and
+the principal part satisfies `‖Σ_μ A^μ∂_μw‖ ≤ m + K₀‖w‖` pointwise on the slab, `m` continuous,
+`K₀ ≥ 0`, then for every `t ∈ [t₀, t₁]`
+`c ‖w(t)‖²_{L²} ≤ e^{K(t₁-t₀)} (|N|² C_b ‖w(t₀)‖²_{L²} + |N| ∫_{t₀}^{t₁} ‖m(τ)‖²_{L²} dτ)`,
+`K = ((d+1)|N|²L + |N|(1 + 2K₀))/c + 1`. -/
+theorem l2_energy_estimate (h : SymHyp A w a t₀ t₁ b L Cb) {c K₀ : ℝ} (hc : 0 < c)
+    (hK₀ : 0 ≤ K₀)
+    (hpos : ∀ x ∈ slab t₀ t₁, ∀ ξ : N → ℂ, c * ∑ i, ‖ξ i‖ ^ 2 ≤ ip ξ (mv (A 0 x) ξ))
+    {m : (Fin (d + 1) → ℝ) → ℝ} (hm : ContinuousOn m (slab t₀ t₁))
+    (hF : ∀ x ∈ slab t₀ t₁, ‖princ A w x‖ ≤ m x + K₀ * ‖w x‖) :
+    ∀ t ∈ Icc t₀ t₁, c * l2sq w t ≤
+      Real.exp (((((d : ℝ) + 1) * ((Fintype.card N : ℝ) ^ 2 * L) +
+          Fintype.card N * (1 + 2 * K₀)) / c + 1) * (t₁ - t₀)) *
+        ((Fintype.card N : ℝ) ^ 2 * Cb * l2sq w t₀ +
+          Fintype.card N * ∫ τ in t₀..t₁, ∫ y in Icc (0 : Fin d → ℝ) 1, m (Fin.cons τ y) ^ 2) := by
+  set n : ℝ := (Fintype.card N : ℝ) with hn
+  have hn0 : 0 ≤ n := Nat.cast_nonneg _
+  set K1 : ℝ := (((d : ℝ) + 1) * (n ^ 2 * L) + n * (1 + 2 * K₀)) / c with hK1
+  have hK10 : 0 ≤ K1 := by rw [hK1]; positivity
+  set K : ℝ := K1 + 1 with hK
+  have hK0 : 0 ≤ K := by linarith
+  set e := energy (A 0) w with he
+  set S : ℝ → ℝ := fun τ => n * ∫ y in Icc (0 : Fin d → ℝ) 1, m (Fin.cons τ y) ^ 2 with hS
+  have hSc : ContinuousOn S (Icc t₀ t₁) :=
+    continuousOn_const.mul (continuousOn_sliceIntegral (Φ := fun x => m x ^ 2) h.h01.le
+      (hm.pow 2))
+  have h01 := h.h01.le
+  set P : ℝ → ℝ := fun τ => (projIcc t₀ t₁ h01 τ : ℝ) with hP
+  have hPc : Continuous P := continuous_subtype_val.comp continuous_projIcc
+  set St : ℝ → ℝ := fun τ => S (P τ) with hSt
+  have hStc : Continuous St :=
+    hSc.comp_continuous hPc fun τ => (projIcc t₀ t₁ h01 τ).2
+  have hSnn : ∀ τ, 0 ≤ S τ := fun τ => mul_nonneg hn0 (setIntegral_nonneg measurableSet_Icc
+    fun y _ => sq_nonneg _)
+  have hStnn : ∀ τ, 0 ≤ St τ := fun τ => hSnn _
+  have hStS : ∀ τ ∈ Icc t₀ t₁, St τ = S τ := fun τ hτ => by
+    simp only [hSt, hP, projIcc_of_mem h01 hτ]
+  -- pointwise bound for the Dini majorant
+  have hg : ∀ t ∈ Icc t₀ t₁, ((d : ℝ) + 1) * (n ^ 2 * L * l2sq w t) +
+      2 * (∫ y in Icc (0 : Fin d → ℝ) 1, ip (princ A w (Fin.cons t y)) (w (Fin.cons t y))) ≤
+      K1 * e t + S t := by
+    intro t ht
+    have hwt := h.w_slice_cont ht
+    have hPt : Continuous fun y : Fin d → ℝ => princ A w (Fin.cons t y) :=
+      continuous_slice h.princ_cont ht
+    have hmt : Continuous fun y : Fin d → ℝ => m (Fin.cons t y) := continuous_slice hm ht
+    have h2 : 2 * (∫ y in Icc (0 : Fin d → ℝ) 1, ip (princ A w (Fin.cons t y)) (w (Fin.cons t y)))
+        ≤ S t + n * (1 + 2 * K₀) * l2sq w t := by
+      simp only [hS, l2sq]
+      have c1 : Continuous fun y => n * m (Fin.cons t y) ^ 2 := continuous_const.mul (hmt.pow 2)
+      have c2 : Continuous fun y => n * (1 + 2 * K₀) * ‖w (Fin.cons t y)‖ ^ 2 :=
+        continuous_const.mul (hwt.norm.pow 2)
+      have c3 : Continuous fun y => 2 * ip (princ A w (Fin.cons t y)) (w (Fin.cons t y)) :=
+        continuous_const.mul (continuous_ip' hPt hwt)
+      rw [← integral_const_mul, ← integral_const_mul, ← integral_const_mul, ← integral_add
+        (integrableOn_cube_of_continuousOn c1.continuousOn)
+        (integrableOn_cube_of_continuousOn c2.continuousOn)]
+      refine integral_mono (integrableOn_cube_of_continuousOn c3.continuousOn)
+        (integrableOn_cube_of_continuousOn (c1.add c2).continuousOn) fun y => ?_
+      simp only
+      have hx := (cons_mem_slab (t₀ := t₀) (t₁ := t₁) y).mpr ht
+      have e1 := abs_ip_le (princ A w (Fin.cons t y)) (w (Fin.cons t y))
+      have e2 := hF _ hx
+      set p := ‖princ A w (Fin.cons t y)‖
+      set q := ‖w (Fin.cons t y)‖
+      set mm := m (Fin.cons t y)
+      have hq : 0 ≤ q := norm_nonneg _
+      have e3 : p * q ≤ (mm + K₀ * q) * q := mul_le_mul_of_nonneg_right e2 hq
+      have e4 : 2 * (mm * q) ≤ mm ^ 2 + q ^ 2 := by nlinarith [sq_nonneg (mm - q)]
+      have e5 : ip (princ A w (Fin.cons t y)) (w (Fin.cons t y)) ≤ n * (p * q) :=
+        (le_abs_self _).trans e1
+      have e6 : n * (p * q) ≤ n * ((mm + K₀ * q) * q) := mul_le_mul_of_nonneg_left e3 hn0
+      have e7 : n * (2 * (mm * q)) ≤ n * (mm ^ 2 + q ^ 2) := mul_le_mul_of_nonneg_left e4 hn0
+      nlinarith
+    have h3 : c * l2sq w t ≤ e t := l2sq_le_energy h hpos hc.le ht
+    have h4 : (((d : ℝ) + 1) * (n ^ 2 * L) + n * (1 + 2 * K₀)) * l2sq w t ≤ K1 * e t := by
+      rw [hK1, div_mul_eq_mul_div, le_div_iff₀ hc]
+      calc _ = (((d : ℝ) + 1) * (n ^ 2 * L) + n * (1 + 2 * K₀)) * l2sq w t * c := by ring
+        _ ≤ (((d : ℝ) + 1) * (n ^ 2 * L) + n * (1 + 2 * K₀)) * e t := by
+          rw [mul_assoc]
+          exact mul_le_mul_of_nonneg_left (by linarith) (by positivity)
+        _ = _ := by ring
+    nlinarith
+  -- comparison with `B_ε`
+  have hcomp : ∀ ε > (0 : ℝ), ∀ t ∈ Icc t₀ t₁,
+      e t ≤ Real.exp (K * (t - t₀)) * (e t₀ + ε + ∫ τ in t₀..t, St τ) := by
+    intro ε hε
+    have he0 : 0 ≤ e t₀ := (mul_nonneg hc.le (setIntegral_nonneg measurableSet_Icc
+      fun y _ => sq_nonneg _)).trans (l2sq_le_energy h hpos hc.le ⟨le_rfl, h01⟩)
+    have hBd : ∀ x, HasDerivAt (fun t => Real.exp (K * (t - t₀)) *
+        (e t₀ + ε + ∫ τ in t₀..t, St τ))
+        (K * (Real.exp (K * (x - t₀)) * (e t₀ + ε + ∫ τ in t₀..x, St τ)) +
+          Real.exp (K * (x - t₀)) * St x) x := by
+      intro x
+      have h1 : HasDerivAt (fun t => Real.exp (K * (t - t₀))) (Real.exp (K * (x - t₀)) * K) x := by
+        have := (((hasDerivAt_id x).sub_const t₀).const_mul K).exp
+        simpa using this
+      have h2 : HasDerivAt (fun t => e t₀ + ε + ∫ τ in t₀..t, St τ) (St x) x :=
+        ((hStc.integral_hasStrictDerivAt t₀ x).hasDerivAt).const_add _
+      exact (h1.mul h2).congr_deriv (by ring)
+    refine image_le_of_liminf_slope_right_lt_deriv_boundary' (energy_continuousOn h)
+      (f' := fun t => ((d : ℝ) + 1) * (n ^ 2 * L * l2sq w t) +
+        2 * (∫ y in Icc (0 : Fin d → ℝ) 1, ip (princ A w (Fin.cons t y)) (w (Fin.cons t y))))
+      (fun x hx r hr => (dini_energy h hx hr).frequently) ?_
+      (fun x _ => (hBd x).continuousAt.continuousWithinAt) (fun x _ => (hBd x).hasDerivWithinAt)
+      ?_
+    · simp
+      linarith
+    · intro x hx hex
+      have hx' : x ∈ Icc t₀ t₁ := Ico_subset_Icc_self hx
+      have hgx := hg x hx'
+      have hexp : 1 ≤ Real.exp (K * (x - t₀)) :=
+        Real.one_le_exp (mul_nonneg hK0 (sub_nonneg.mpr hx.1))
+      have hint0 : 0 ≤ ∫ τ in t₀..x, St τ :=
+        intervalIntegral.integral_nonneg hx.1 fun τ _ => hStnn τ
+      have hBpos : 0 < Real.exp (K * (x - t₀)) * (e t₀ + ε + ∫ τ in t₀..x, St τ) :=
+        mul_pos (Real.exp_pos _) (by linarith)
+      rw [hStS x hx'] at *
+      have hSx : S x ≤ Real.exp (K * (x - t₀)) * S x := le_mul_of_one_le_left (hSnn x) hexp
+      simp only [hn] at hgx ⊢
+      rw [← hex] at hBpos ⊢
+      nlinarith
+  intro t ht
+  have hct := l2sq_le_energy h hpos hc.le ht
+  have he0 := energy_le_l2sq h (t := t₀) ⟨le_rfl, h01⟩
+  have hexp : Real.exp (K * (t - t₀)) ≤ Real.exp (K * (t₁ - t₀)) :=
+    Real.exp_le_exp.mpr (mul_le_mul_of_nonneg_left (by linarith [ht.2]) hK0)
+  have hmono : ∫ τ in t₀..t, St τ ≤ ∫ τ in t₀..t₁, St τ :=
+    intervalIntegral.integral_mono_interval le_rfl ht.1 ht.2
+      (Eventually.of_forall fun τ => hStnn τ) (hStc.intervalIntegrable _ _)
+  have hint0 : 0 ≤ ∫ τ in t₀..t, St τ := intervalIntegral.integral_nonneg ht.1 fun τ _ => hStnn τ
+  have hSeq : ∫ τ in t₀..t₁, St τ =
+      n * ∫ τ in t₀..t₁, ∫ y in Icc (0 : Fin d → ℝ) 1, m (Fin.cons τ y) ^ 2 := by
+    rw [← intervalIntegral.integral_const_mul]
+    refine intervalIntegral.integral_congr fun τ hτ => ?_
+    rw [uIcc_of_le h01] at hτ
+    exact hStS τ hτ
+  rw [← hSeq]
+  have hE0 : 0 < Real.exp (K * (t₁ - t₀)) := Real.exp_pos _
+  refine le_of_forall_pos_le_add fun ε hε => ?_
+  have h1 := hcomp (ε / Real.exp (K * (t₁ - t₀))) (div_pos hε hE0) t ht
+  have hX : 0 ≤ e t₀ + ε / Real.exp (K * (t₁ - t₀)) + ∫ τ in t₀..t, St τ := by
+    have := (mul_nonneg hc.le (setIntegral_nonneg measurableSet_Icc
+      fun y _ => sq_nonneg _)).trans (l2sq_le_energy h hpos hc.le ⟨le_rfl, h01⟩)
+    positivity
+  calc c * l2sq w t ≤ e t := hct
+    _ ≤ Real.exp (K * (t - t₀)) * (e t₀ + ε / Real.exp (K * (t₁ - t₀)) + ∫ τ in t₀..t, St τ) := h1
+    _ ≤ Real.exp (K * (t₁ - t₀)) *
+        (n ^ 2 * Cb * l2sq w t₀ + ε / Real.exp (K * (t₁ - t₀)) + ∫ τ in t₀..t₁, St τ) := by
+      gcongr
+    _ = Real.exp (K * (t₁ - t₀)) * (n ^ 2 * Cb * l2sq w t₀ + ∫ τ in t₀..t₁, St τ) + ε := by
+      field_simp
+      ring
+
+end Gronwall
 
 end RenewalGeometry.SymHypEnergy

@@ -592,7 +592,7 @@ theorem neg_two_integral_ip_pd_le {N : Type*} [Fintype N] {A : (ι → ℝ) → 
   linarith
 
 /-- `Re` of a complex derivative. -/
-theorem _root_.HasDerivAt.complex_re {f : ℝ → ℂ} {f' : ℂ} {x : ℝ} (h : HasDerivAt f f' x) :
+theorem hasDerivAt_re {f : ℝ → ℂ} {f' : ℂ} {x : ℝ} (h : HasDerivAt f f' x) :
     HasDerivAt (fun x => (f x).re) f'.re x :=
   Complex.reCLM.hasFDerivAt.comp_hasDerivAt x h
 
@@ -628,7 +628,7 @@ theorem integral_norm_pd_sq_le {g : (ι → ℝ) → ℂ} (hg : ContDiff ℝ 2 g
       have hG := hasDerivAt_line (f := g) (x := x) j (s := 0) (hgd _)
       have hP := hasDerivAt_line (f := pd g j) (x := x) j (s := 0) (hpdd _)
       simp only [zero_smul, add_zero] at hG hP
-      have := (hG.star.mul hP).complex_re
+      have := hasDerivAt_re (hG.star.mul hP)
       simp only [zero_smul, add_zero] at this
       exact this
     simp only [zero_smul, add_zero] at h1

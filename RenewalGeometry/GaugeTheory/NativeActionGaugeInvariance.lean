@@ -52,8 +52,9 @@ links enter only through `U_μ(x) = e^{h A_μ(x)}` (and `U_μ(x)⁻¹ = e^{-h A_
     preserves the positive physical mass metric (`massSq`); hence the dual norm of the covector is
     unchanged.  No derivative of the normalizing gauge appears.
 
-Non-vacuity: the trivial packet (`𝔄 = ℝ`, trivial group) satisfies all covariance fields
-(`trivialCovData`), and the identity gauge is admissible.
+Non-vacuity: the trivial packet (`𝔄 = ℝ`, trivial group, `trivialCovData`) and the `U(1)` packet
+(`𝔄 = 𝓗 = 𝓢 = ℂ`, unitary units, `u1CovData`) satisfy all covariance fields; for the latter the
+action is shown invariant under a constant phase rotation of the Higgs field and the spinors.
 -/
 
 open NormedSpace Finset Filter Topology
@@ -858,7 +859,7 @@ theorem eventually_chart_curve (h : ℝ) {c : LinkConfig n 𝔄 𝓗 𝓢} (hu :
       ∀ᶠ t in 𝓝 (0 : ℝ), ‖plaq (curve h c τ t) x μ ν - 1‖ < 1 := by
     intro x μ ν hμν
     have h0 : curve h c τ 0 = c := by
-      ext1 <;> simp [curve]; funext x; ext v; simp
+      ext1 <;> simp [curve] <;> funext x <;> ext v <;> simp
     have hlt : ‖plaq (curve h c τ 0) x μ ν - 1‖ < 1 := by rw [h0]; exact hc x μ ν hμν
     exact ((hcont x μ ν).sub continuous_const).norm.continuousAt.eventually_lt
       continuousAt_const hlt
@@ -1002,20 +1003,82 @@ def trivialCovData : CovData ℝ ℝ ℝ where
   yukawa_cov g hg H := by simp
   ρS_isom g hg v := by rw [Subgroup.mem_bot] at hg; subst hg; simp
 
-/-- Non-vacuity of clause (a): the identity gauge is admissible on every record. -/
-example (h : ℝ) (y : Grid 2 → Field ℝ ℝ ℝ) (hc : Chart (toLinks h y)) :
-    localAction trivialCovData.toData h y = localAction trivialCovData.toData h y :=
-  localAction_gauge trivialCovData (g := fun _ => 1) ⟨fun _ => one_mem _, by
-    ext1
+/-- Multiplication `ℂ → End_ℝ(ℂ)`, the defining representation of `U(1) ⊂ ℂˣ`. -/
+def mulAlg : ℂ →ₐ[ℝ] (ℂ →L[ℝ] ℂ) where
+  toFun z := ContinuousLinearMap.lsmul ℝ ℂ z
+  map_one' := by ext; simp
+  map_mul' z w := by ext v; simp [mul_assoc]
+  map_zero' := by ext; simp
+  map_add' z w := by ext; simp
+  commutes' r := by ext; simp [Algebra.algebraMap_eq_smul_one]
+
+theorem mulAlg_apply (z v : ℂ) : mulAlg z v = z * v := rfl
+
+theorem norm_coe_of_mem_unitaryUnits {g : ℂˣ} (hg : g ∈ unitaryUnits ℂ) : ‖(g : ℂ)‖ = 1 := by
+  obtain ⟨u, rfl⟩ := hg
+  exact CStarRing.norm_of_mem_unitary u.2
+
+theorem conj_units_complex (g : ℂˣ) (X : ℂ) : (g : ℂ) * X * ↑g⁻¹ = X := by
+  rw [mul_comm (g : ℂ) X, mul_assoc, Units.mul_inv, mul_one]
+
+/-- **A `U(1)` covariant packet** (`𝔄 = 𝓗 = 𝓢 = ℂ`, gauge group the unitary units of `ℂ`, Higgs
+and spinor in the defining representation, real inner products as invariant forms): every
+covariance field holds with a nontrivial gauge group. -/
+def u1CovData : CovData ℂ ℂ ℂ where
+  κ := 1
+  Λ := 0
+  lamH := 1
+  vH := 1
+  ipA := innerSL ℝ
+  hermH := innerSL ℝ
+  ρH := mulAlg
+  ρH_cont := LinearMap.continuous_of_finiteDimensional mulAlg.toLinearMap
+  ρS := mulAlg
+  ρS_cont := LinearMap.continuous_of_finiteDimensional mulAlg.toLinearMap
+  σ := 0
+  γ := fun _ => 1
+  yukawa := 0
+  G := unitaryUnits ℂ
+  norm_conj g _ X := by rw [conj_units_complex]
+  ipA_conj g _ X Y := by rw [conj_units_complex, conj_units_complex]
+  hermH_inv g hg u v := by
+    have h1 := norm_coe_of_mem_unitaryUnits hg
+    show inner ℝ ((g : ℂ) * u) ((g : ℂ) * v) = inner ℝ u v
+    rw [Complex.inner, Complex.inner, map_mul,
+      show (g : ℂ) * v * ((starRingEnd ℂ) (g : ℂ) * (starRingEnd ℂ) u) =
+        ((g : ℂ) * (starRingEnd ℂ) (g : ℂ)) * (v * (starRingEnd ℂ) u) by ring,
+      Complex.mul_conj, Complex.normSq_eq_norm_sq, h1]
+    simp
+  σ_comm g _ m := by simp
+  γ_comm g _ a := by simp
+  yukawa_cov g _ H := by simp
+  ρS_isom g hg v := by rw [mulAlg_apply, norm_mul, norm_coe_of_mem_unitaryUnits hg, one_mul]
+
+/-- A record with vanishing connection. -/
+def flatGaugeRec {n : ℕ} (y : Grid n → Field ℂ ℂ ℂ) : Grid n → Field ℂ ℂ ℂ :=
+  fun x => (coframe y x, 0, higgs y x, psi y x, psiBar y x)
+
+/-- Its transform by a constant phase `u`: `H ↦ u H`, `Ψ ↦ u Ψ`, `Ψ̄ ↦ Ψ̄ u⁻¹`. -/
+def rotRec {n : ℕ} (u : ℂˣ) (y : Grid n → Field ℂ ℂ ℂ) : Grid n → Field ℂ ℂ ℂ :=
+  fun x => (coframe y x, 0, (u : ℂ) * higgs y x, (u : ℂ) * psi y x,
+    (psiBar y x).comp (mulAlg ↑u⁻¹))
+
+/-- **Non-vacuity of clause (a)** with a nontrivial gauge group: the native local action of the
+`U(1)` packet is unchanged by a constant phase rotation of the Higgs field and the spinors. -/
+example {n : ℕ} [NeZero n] (h : ℝ) (u : ℂˣ) (hu : u ∈ unitaryUnits ℂ)
+    (y : Grid n → Field ℂ ℂ ℂ) :
+    localAction u1CovData.toData h (rotRec u y) =
+      localAction u1CovData.toData h (flatGaugeRec y) := by
+  refine localAction_gauge u1CovData (g := fun _ => u) ⟨fun _ => hu, ?_⟩ ?_
+  · ext1
     · rfl
     · funext μ x
-      simp [gaugeAct]
-    · funext x
-      simp [gaugeAct]
-    · funext x
-      simp [gaugeAct]
-    · funext x
-      simp [gaugeAct, ContinuousLinearMap.one_def]⟩ hc
+      simp [toLinks, gaugeAct, rotRec, flatGaugeRec, NativeDensity.gauge, Units.ne_zero]
+    · rfl
+    · rfl
+    · rfl
+  · intro x μ ν _
+    simp [plaq, toLinks, flatGaugeRec, NativeDensity.gauge]
 
 end NonVacuity
 

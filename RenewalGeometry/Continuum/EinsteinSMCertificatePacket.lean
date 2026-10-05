@@ -31,7 +31,7 @@ gradients as data).  The conclusion is the literal `StrongPacket` of `def:strong
 `exists_reducedConvergence_allCharts`: if the reduced certificate holds on every chart box, every
 subsequence has a further subsequence with one limit `L`, `θ₀` and reduced convergence on **every**
 chart box (diagonal over the countably many rational boxes, patched limit, then every chart box by
-the subsequence principle `ReducedConvergence.of_subseq` and uniqueness on rational sub-boxes).
+the subsequence principle `ReducedConvergence.of_subseq_packet` and uniqueness on rational sub-boxes).
 This upgrades `exists_diagonal_reducedConvergence` (slab boxes only).
 
 ## The strong upgrade
@@ -294,7 +294,7 @@ variable {T : ℝ} {C : Type} [Fintype C] {left : C → Bool} {Ysec : Type} [Fin
 /-- **Subsequence principle for reduced convergence**: if every subsequence has a further
 subsequence converging in the reduced topology on `Q` to the fixed limit `(L, θ₀)`, and the reduced
 certificate holds on `Q`, the whole sequence converges. -/
-theorem ReducedConvergence.of_subseq {Q : ChartBox T} {z : ℕ → SmoothFields T left}
+theorem ReducedConvergence.of_subseq_packet {Q : ChartBox T} {z : ℕ → SmoothFields T left}
     {θ : ℕ → CoefficientBank Ysec} {L : LimitFields C} {θ₀ : CoefficientBank Ysec}
     (hc : ReducedCertificate Q z θ)
     (h : ∀ s : ℕ → ℕ, StrictMono s → ∃ φ : ℕ → ℕ, StrictMono φ ∧
@@ -386,7 +386,7 @@ theorem exists_reducedConvergence_allCharts (hT : 0 < T) {z : ℕ → SmoothFiel
   have hRm : ∀ m, ReducedConvergence (R m) (fun k => z (ns (D k))) (fun k => θ (ns (D k))) L
       (θm 0) := fun m => (hLm' m).congr_ae (hpatch m)
   refine ⟨D, hD, L, θm 0, fun Q => ?_⟩
-  refine ReducedConvergence.of_subseq ((hcert Q).comp (hns.comp hD)) fun s hs => ?_
+  refine ReducedConvergence.of_subseq_packet ((hcert Q).comp (hns.comp hD)) fun s hs => ?_
   obtain ⟨φ, hφ, L', θ', h'⟩ :=
     (hcert Q).exists_reducedConvergence (ns ∘ D ∘ s) (hns.comp (hD.comp hs))
   refine ⟨φ, hφ, ?_⟩

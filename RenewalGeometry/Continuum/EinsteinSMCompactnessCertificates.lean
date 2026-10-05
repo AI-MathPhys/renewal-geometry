@@ -402,11 +402,14 @@ first-order systems `A_h^μ ∂_μψ_h + B_hψ_h = r_h` (residual defined by the
 Hermitian (symmetric hyperbolic) `A_h^μ`, uniformly positive `A_h^0`,
 `sup_h(‖A_h^μ‖_{W^{1,∞}} + ‖B_h‖_{L^∞} + ‖ψ_h‖_{L^∞_tH²_x}) < ∞` (`W^{1,∞}` as bounded and
 Lipschitz on the slab), coefficients Cauchy in `L^∞`, initial data `ψ_h(t₀)` Cauchy in `L²(Σ)`,
-residuals Cauchy in `L²(I × Σ)`.  Coefficients are spatially periodic (sections over `I × 𝕋³`). -/
+residuals Cauchy in `L²(I × Σ)`.  Coefficients are spatially periodic (sections over `I × 𝕋³`).
+`B_h ∈ L^∞_{t,x}` is encoded literally: `B_h` is a.e.-strongly measurable on the slab and
+essentially bounded there. -/
 def DiracStabilityHyp (t₀ t₁ : ℝ) {N : Type} [Fintype N] (ψ : ℕ → E4 → N → ℂ) : Prop :=
   ∃ (Acoef : ℕ → Fin 4 → E4 → N → N → ℂ) (Bcoef : ℕ → E4 → N → N → ℂ),
     (∀ n μ k x, Acoef n μ (x + spatialShift k) = Acoef n μ x) ∧
     (∀ n k x, Bcoef n (x + spatialShift k) = Bcoef n x) ∧
+    (∀ n, AEStronglyMeasurable (Bcoef n) (volume.restrict (slab t₀ t₁))) ∧
     (∀ n μ x i j, Acoef n μ x j i = star (Acoef n μ x i j)) ∧
     (∃ c > (0 : ℝ), ∀ n, ∀ x ∈ slab t₀ t₁, ∀ ξ : N → ℂ,
       c * ∑ i, ‖ξ i‖ ^ 2 ≤ (∑ i, ∑ j, star (ξ i) * Acoef n 0 x i j * ξ j).re) ∧
@@ -817,7 +820,8 @@ theorem diracStabilityHyp_zero (t₀ t₁ : ℝ) {N : Type} [Fintype N] :
     DiracStabilityHyp t₀ t₁ (fun (_ : ℕ) (_ : E4) => (0 : N → ℂ)) := by
   classical
   refine ⟨fun _ μ _ i j => if μ = 0 ∧ i = j then 1 else 0, fun _ _ => 0, fun _ _ _ _ => rfl,
-    fun _ _ _ => rfl, ?_, ⟨1, one_pos, ?_⟩, ⟨1, fun n => ⟨fun μ => ⟨?_, ?_⟩, ?_, ?_⟩⟩, ?_, ?_, ?_⟩
+    fun _ _ _ => rfl, fun _ => aestronglyMeasurable_const, ?_, ⟨1, one_pos, ?_⟩,
+    ⟨1, fun n => ⟨fun μ => ⟨?_, ?_⟩, ?_, ?_⟩⟩, ?_, ?_, ?_⟩
   · intro n μ x i j
     by_cases h1 : μ = 0 <;> by_cases h2 : i = j <;> simp [h1, h2, eq_comm]
   · intro n x _ ξ

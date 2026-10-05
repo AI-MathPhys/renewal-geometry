@@ -101,6 +101,23 @@ theorem lpTendsto_tri (Θ : E →L[ℝ] A →L[ℝ] F →L[ℝ] W) {K : ℝ≥0}
     ENNReal.mul_ne_top (ENNReal.mul_ne_top ENNReal.coe_ne_top hB₁) hB₂
   exact WeakJetPairing.lpTendsto_bilin_two_one (ContinuousLinearMap.apply ℝ W) hC hv hfin hv2
 
+
+/-- The trilinear product `b(Φ, C w)` of a bilinear form with an operator coefficient. -/
+theorem lpTendsto_triB (b : E →L[ℝ] F →L[ℝ] ℝ) {K : ℝ≥0}
+    (hK : ∀ e w, ‖b e w‖ ≤ K * ‖e‖ * ‖w‖) {Φ : ℕ → 𝕋 → E} {Φ₀ : 𝕋 → E}
+    (hΦ : LpTendsto volume 2 Φ Φ₀) {B₁ : ℝ≥0∞} (hB₁ : B₁ ≠ ∞)
+    (hΦ4 : ∀ k, eLpNorm (Φ k) 4 volume ≤ B₁) {C : ℕ → 𝕋 → F →L[ℝ] F} {C₀ : 𝕋 → F →L[ℝ] F}
+    (hC : LpTendsto volume 2 C C₀) {w : ℕ → 𝕋 → F} {w₀ : 𝕋 → F} (hw : LpTendsto volume 2 w w₀)
+    {B₂ : ℝ≥0∞} (hB₂ : B₂ ≠ ∞) (hw4 : ∀ k, eLpNorm (w k) 4 volume ≤ B₂) :
+    LpTendsto volume 1 (fun k z => b (Φ k z) (C k z (w k z))) (fun z => b (Φ₀ z) (C₀ z (w₀ z))) := by
+  set Θ : E →L[ℝ] (F →L[ℝ] F) →L[ℝ] F →L[ℝ] ℝ := (ContinuousLinearMap.compL ℝ F F ℝ).comp b
+  have hΘ : ∀ e a w, ‖Θ e a w‖ ≤ K * ‖e‖ * ‖a‖ * ‖w‖ := fun e a w => by
+    show ‖b e (a w)‖ ≤ _
+    refine (hK e (a w)).trans ?_
+    rw [mul_assoc (↑K * ‖e‖)]
+    exact mul_le_mul_of_nonneg_left (a.le_opNorm w) (by positivity)
+  exact lpTendsto_tri Θ hΘ hΦ hB₁ hΦ4 hC hw hB₂ hw4
+
 /-- Pairs of sequences converging in measure converge in measure. -/
 theorem tendstoInMeasure_prod {f : ℕ → 𝕋 → E} {f₀ : 𝕋 → E} {g : ℕ → 𝕋 → F} {g₀ : 𝕋 → F}
     (hf : TendstoInMeasure volume f atTop f₀) (hg : TendstoInMeasure volume g atTop g₀) :
@@ -275,6 +292,13 @@ theorem norm_triL_le (c : ℂ) (Φ : CoSpinor 𝓢) (A : Spin 𝓢) (w : 𝓢) :
   refine (Φ.le_opNorm _).trans ?_
   exact mul_le_mul_of_nonneg_left (A.le_opNorm _) (norm_nonneg _)
 
+theorem norm_bForm_le (c : ℂ) (Φ : CoSpinor 𝓢) (w : 𝓢) :
+    ‖bForm c Φ w‖ ≤ ‖c‖₊ * ‖Φ‖ * ‖w‖ := by
+  rw [bForm_apply, Real.norm_eq_abs, coe_nnnorm]
+  refine (Complex.abs_re_le_norm _).trans ?_
+  rw [norm_mul, mul_assoc]
+  exact mul_le_mul_of_nonneg_left (Φ.le_opNorm _) (norm_nonneg _)
+
 /-- The coefficient on `Ψ̄ ⊗ T_μΨ`: `δΞ_μ[t] = dv γ W + v dγ W + v γ dW`. -/
 def c1 (S : Slots 𝔄 𝓗 𝓢 W') (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) : Spin 𝓢 :=
   (S.dv t • S.γ μ) * S.Wl μ + (S.v • S.dγ μ t) * S.Wl μ + (S.v • S.γ μ) * S.dWl μ t
@@ -307,30 +331,30 @@ def c10 (S : Slots 𝔄 𝓗 𝓢 W') : Spin 𝓢 := S.v • S.YH
 theorem spin_mul_apply' (A B : Spin 𝓢) (w : 𝓢) : (A * B) w = A (B w) := rfl
 
 theorem Gμ_eq_tri (S : Slots 𝔄 𝓗 𝓢 W') (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
-    Gμ κ S t μ = triL (Complex.I / 2) S.Ψb (c1 S t μ) (S.Ψp μ) -
-      triL (Complex.I / 2) (S.Ψbp μ) (c2 S t μ) S.Ψ +
-      triL (Complex.I / 2) (κ t.2.2.2.2.2.2.1) (c3 S μ) (S.Ψp μ) -
-      triL (Complex.I / 2) (κ (t.2.2.2.2.2.2.2 μ)) (c4 S μ) S.Ψ -
-      triL (Complex.I / 2) (κ t.2.2.2.2.2.2.1) (c5 S μ) S.Ψ +
-      triL (Complex.I / 2) S.Ψb (c6 S μ) (t.2.2.2.2.2.1 μ) +
-      triL (Complex.I / 2) S.Ψb (c3 S μ) t.2.2.2.2.1 -
-      triL (Complex.I / 2) (S.Ψbp μ) (c5 S μ) t.2.2.2.2.1 := by
+    Gμ κ S t μ = bForm (Complex.I / 2) S.Ψb ((c1 S t μ) (S.Ψp μ)) -
+      bForm (Complex.I / 2) (S.Ψbp μ) ((c2 S t μ) S.Ψ) +
+      bForm (Complex.I / 2) (κ t.2.2.2.2.2.2.1) ((c3 S μ) (S.Ψp μ)) -
+      bForm (Complex.I / 2) (κ (t.2.2.2.2.2.2.2 μ)) ((c4 S μ) S.Ψ) -
+      bForm (Complex.I / 2) (κ t.2.2.2.2.2.2.1) ((c5 S μ) S.Ψ) +
+      bForm (Complex.I / 2) S.Ψb ((c6 S μ) (t.2.2.2.2.2.1 μ)) +
+      bForm (Complex.I / 2) S.Ψb ((c3 S μ) t.2.2.2.2.1) -
+      bForm (Complex.I / 2) (S.Ψbp μ) ((c5 S μ) t.2.2.2.2.1) := by
   simp only [Gμ, triL_apply, c1, c2, c3, c4, c5, c6, bI, ContinuousLinearMap.add_apply,
     ContinuousLinearMap.smul_apply, spin_mul_apply', map_add, map_smul, smul_eq_mul]
   ring
 
 theorem G0_eq_tri (S : Slots 𝔄 𝓗 𝓢 W') (t : Jet 𝔄 𝓗 𝓢 W') :
-    G0 D κ S t = triL 1 S.Ψb (c9 D S t) S.Ψ + triL 1 (κ t.2.2.2.2.2.2.1) (c10 S) S.Ψ +
-      triL 1 S.Ψb (c10 S) t.2.2.2.2.1 := by
+    G0 D κ S t = bForm 1 S.Ψb ((c9 D S t) S.Ψ) + bForm 1 (κ t.2.2.2.2.2.2.1) ((c10 S) S.Ψ) +
+      bForm 1 S.Ψb ((c10 S) t.2.2.2.2.1) := by
   simp only [G0, triL_apply, c9, c10, bR, ContinuousLinearMap.add_apply,
     ContinuousLinearMap.smul_apply, map_add, map_smul, smul_eq_mul]
 
 theorem Λμ_eq_tri (S : Slots 𝔄 𝓗 𝓢 W') (t : Jet 𝔄 𝓗 𝓢 W') (u : Dif 𝓢 W') (μ : Fin 4) :
     Λμ κ S t u μ =
-      triL (Complex.I / 2) S.Ψb (S.dv t • S.γ μ + S.v • S.dγ μ t) (u.1 μ) -
-      triL (Complex.I / 2) (κ (u.2 μ)) (S.dv t • S.γ μ + S.v • S.dγ μ t) S.Ψ +
-      triL (Complex.I / 2) (κ t.2.2.2.2.2.2.1) (S.v • S.γ μ) (u.1 μ) -
-      triL (Complex.I / 2) (κ (u.2 μ)) (S.v • S.γ μ) t.2.2.2.2.1 := by
+      bForm (Complex.I / 2) S.Ψb ((S.dv t • S.γ μ + S.v • S.dγ μ t) (u.1 μ)) -
+      bForm (Complex.I / 2) (κ (u.2 μ)) ((S.dv t • S.γ μ + S.v • S.dγ μ t) S.Ψ) +
+      bForm (Complex.I / 2) (κ t.2.2.2.2.2.2.1) ((S.v • S.γ μ) (u.1 μ)) -
+      bForm (Complex.I / 2) (κ (u.2 μ)) ((S.v • S.γ μ) t.2.2.2.2.1) := by
   simp only [Λμ, triL_apply, bI, ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
     map_add, map_smul, smul_eq_mul]
   ring
@@ -520,22 +544,22 @@ def Γ4 (q : Spin 𝓢 × 𝔄) : M4 →L[ℝ] Spin 𝓢 :=
   (mulLeft (D.ρSL (exp (-q.2)))).comp ((fderiv ℝ exp (-q.1)).comp (-σL D))
 
 theorem continuous_Γ1 : Continuous (Γ1 D) :=
-  (continuous_mulRight.comp ((NormedSpace.exp_continuous).comp
+  (continuous_mulRight.comp ((contDiff_exp'.continuous).comp
     (D.ρSL.continuous.comp continuous_snd))).clm_comp
     ((continuous_fderiv_exp.comp continuous_fst).clm_comp continuous_const)
 
 theorem continuous_Γ2 (a : 𝔄) : Continuous (Γ2 D a) :=
-  (NormedSpace.exp_continuous.comp continuous_fst).mul
+  (contDiff_exp'.continuous.comp continuous_fst).mul
     (D.ρSL.continuous.comp ((continuous_fderiv_exp.comp continuous_snd).clm_apply
       continuous_const))
 
 theorem continuous_Γ3 (a : 𝔄) : Continuous (Γ3 D a) :=
   (D.ρSL.continuous.comp ((continuous_fderiv_exp.comp continuous_snd.neg).clm_apply
-      continuous_const)).mul (NormedSpace.exp_continuous.comp continuous_fst.neg)
+      continuous_const)).mul (contDiff_exp'.continuous.comp continuous_fst.neg)
 
 theorem continuous_Γ4 : Continuous (Γ4 D) :=
   (continuous_mulLeft.comp (D.ρSL.continuous.comp
-    (NormedSpace.exp_continuous.comp continuous_snd.neg))).clm_comp
+    (contDiff_exp'.continuous.comp continuous_snd.neg))).clm_comp
     ((continuous_fderiv_exp.comp continuous_fst.neg).clm_comp continuous_const)
 
 theorem Γ1_zero : Γ1 D 0 = σL D := by
@@ -549,8 +573,9 @@ theorem Γ3_zero (a : 𝔄) : Γ3 D a 0 = -D.ρSL a := by
   simp [Γ3, fderiv_exp_zero]
 
 theorem Γ4_zero : Γ4 D 0 = -σL D := by
+  have h1 : D.ρSL 1 = 1 := map_one D.ρS
   ext1 M
-  simp [Γ4, fderiv_exp_zero]
+  simp [Γ4, fderiv_exp_zero, h1]
 
 /-- `δW_μ[t] = Γ1(hσω, hA)(δω[t]) + Γ2(a_μ)(hσω, hA)` at every node. -/
 theorem dWl_eq {N : ℕ} [NeZero N] (y : Grid N → Field 𝔄 𝓗 𝓢) (x : Grid N) (μ : Fin 4)
@@ -570,8 +595,8 @@ theorem dWr_eq {N : ℕ} [NeZero N] (y : Grid N → Field 𝔄 𝓗 𝓢) (x : G
       Γ4 D ((N : ℝ)⁻¹ • σL D (ωM y μ x), (N : ℝ)⁻¹ • gauge y μ x)
         (δωL (coframeM y x) (fun lam => coframeM y (x + unitVec N lam)) (fun lam => qM y lam x) μ t) := by
   simp only [gridSlots, δWRL, Γ3, Γ4, ContinuousLinearMap.add_apply, ContinuousLinearMap.coe_comp',
-    Function.comp_apply, map_smul, mulLeft_apply, mulRight_apply, ContinuousLinearMap.proj_apply,
-    πa_apply, ContinuousLinearMap.neg_apply, map_neg, Data.ρSL_apply]
+    Function.comp_apply, mulLeft_apply, mulRight_apply, ContinuousLinearMap.proj_apply,
+    πa_apply, ContinuousLinearMap.neg_apply, map_neg, Data.ρSL_apply, neg_mul]
 
 /-- The scaled link arguments `(hσ(ω_{μ,h}), hA_{μ,h})` tend to `0` in measure and are
 uniformly bounded. -/
@@ -600,8 +625,8 @@ theorem lpTendsto_dWl (H : CoHyp n y) (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
     LpTendsto volume 2 (fun k => pc (fun x => (gridSlots (W' := W') D (y k) x).dWl μ t))
       (fun z => contdB D (H.e₀ z) (fun lam => H.p lam z) μ t) := by
   obtain ⟨hf, R, hR⟩ := linkArgs D H μ
-  obtain ⟨h1, M1, hM1⟩ := tendstoInMeasure_comp_ball hf hR
-    ((continuous_Γ1 D).continuousOn (s := closedBall 0 R))
+  obtain ⟨h1, M1, hM1⟩ := tendstoInMeasure_comp_ball (F := M4 →L[ℝ] Spin 𝓢) hf hR
+    (by exact (continuous_Γ1 D).continuousOn)
   obtain ⟨h2, M2, hM2⟩ := tendstoInMeasure_comp_ball hf hR
     ((continuous_Γ2 D (t.2.2.1 μ)).continuousOn (s := closedBall 0 R))
   have hA := LpProductContinuity.LpTendsto.coeff (p := 2) (by norm_num)
@@ -616,7 +641,6 @@ theorem lpTendsto_dWl (H : CoHyp n y) (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
     (Eventually.of_forall fun z => ?_)
   · simp only [Pi.add_apply, pc]
     rw [dWl_eq]
-    rfl
   · simp only [Pi.add_apply, Pi.zero_apply, Γ1_zero, Γ2_zero]
     rfl
 
@@ -627,8 +651,8 @@ theorem lpTendsto_dWr (H : CoHyp n y) (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
   obtain ⟨hf, R, hR⟩ := linkArgs D H μ
   obtain ⟨h3, M3, hM3⟩ := tendstoInMeasure_comp_ball hf hR
     ((continuous_Γ3 D (t.2.2.1 μ)).continuousOn (s := closedBall 0 R))
-  obtain ⟨h4, M4', hM4⟩ := tendstoInMeasure_comp_ball hf hR
-    ((continuous_Γ4 D).continuousOn (s := closedBall 0 R))
+  obtain ⟨h4, M4', hM4⟩ := tendstoInMeasure_comp_ball (F := M4 →L[ℝ] Spin 𝓢) hf hR
+    (by exact (continuous_Γ4 D).continuousOn)
   have hA := lpTendsto_of_bdd_tendstoInMeasure (p := 2) (by norm_num)
     (fun k => (stronglyMeasurable_pc (fun x => Γ3 D (t.2.2.1 μ) ((n k : ℝ)⁻¹ • σL D (ωM (y k) μ x),
       (n k : ℝ)⁻¹ • gauge (y k) μ x))).aestronglyMeasurable) h3
@@ -641,13 +665,385 @@ theorem lpTendsto_dWr (H : CoHyp n y) (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
     (Eventually.of_forall fun z => ?_)
   · simp only [Pi.add_apply, pc]
     rw [dWr_eq]
-    rfl
   · simp only [Pi.add_apply, Pi.zero_apply, Γ3_zero, Γ4_zero, contdB,
       ContinuousLinearMap.add_apply, ContinuousLinearMap.neg_apply, ContinuousLinearMap.coe_comp',
       Function.comp_apply, ContinuousLinearMap.proj_apply, πa_apply]
     abel
 
 end DeltaW
+
+/-! ### Field and coefficient convergence along the records -/
+
+section Fields
+
+open TorusPiecewiseConstantTranslation (pc stronglyMeasurable_pc)
+open ShiftedJetAction (Grid unitVec fwdDiff)
+open NativeScaling (Mat readerOmega omegaLink)
+open NativeGravityFirstJet (M4 asM4 coframeM liftM liftL dqLift dqLiftL)
+open NativeDensity NativeDirac NativeDiracConv NativeDiracLimit
+
+variable {𝔄 : Type*} [NormedRing 𝔄] [NormedAlgebra ℝ 𝔄] [CompleteSpace 𝔄] [NormOneClass 𝔄]
+  [FiniteDimensional ℝ 𝔄]
+variable {𝓗 : Type*} [NormedAddCommGroup 𝓗] [NormedSpace ℝ 𝓗] [CompleteSpace 𝓗] [Nontrivial 𝓗]
+  [FiniteDimensional ℝ 𝓗]
+variable {𝓢 : Type*} [NormedAddCommGroup 𝓢] [NormedSpace ℝ 𝓢] [CompleteSpace 𝓢] [Nontrivial 𝓢]
+  [FiniteDimensional ℝ 𝓢]
+variable {W' : Type*} [NormedAddCommGroup W'] [NormedSpace ℝ W'] [FiniteDimensional ℝ W']
+variable {n : ℕ → ℕ} [∀ k, NeZero (n k)] {y : ∀ k, Grid (n k) → Field 𝔄 𝓗 𝓢}
+
+/-- **The spinor, co-spinor and Higgs hypotheses** (along the extraction of the first assertion of
+`prop:native-spinor-variation`, `native_spinor_weak_compactness` / `native_spinor_pair_bilinear`):
+`R^0 Ψ_h → Ψ` and `R^0 χ_h → χ` strongly in `L²` with uniform `L⁴` bounds (covariant grid
+Sobolev), where `Ψ̄_h = κ χ_h` is read in the co-spinor frame `κ`, and `R^0 H_h → H` strongly in
+`L²` (`prop:native-Higgs-compactness`). -/
+structure SpinHyp (κ : W' →L[ℝ] CoSpinor 𝓢) (y : ∀ k, Grid (n k) → Field 𝔄 𝓗 𝓢) where
+  H₀ : 𝕋 → 𝓗
+  hH : LpTendsto volume 2 (fun k => pc (higgs (y k))) H₀
+  χ : ∀ k, Grid (n k) → W'
+  hχ : ∀ k, psiBar (y k) = fun x => κ (χ k x)
+  Ψ₀ : 𝕋 → 𝓢
+  hΨ : LpTendsto volume 2 (fun k => pc (psi (y k))) Ψ₀
+  χ₀ : 𝕋 → W'
+  hχ₀ : LpTendsto volume 2 (fun k => pc (χ k)) χ₀
+  B4 : ℝ≥0∞
+  hB4 : B4 ≠ ∞
+  hΨ4 : ∀ k, eLpNorm (pc (psi (y k))) 4 volume ≤ B4
+  hχ4 : ∀ k, eLpNorm (pc (χ k)) 4 volume ≤ B4
+
+variable (D : NativeDensity.Data 𝔄 𝓗 𝓢) (κ : W' →L[ℝ] CoSpinor 𝓢)
+
+/-- The raw reconstruction of the grid slots. -/
+def Sk (y : ∀ k, Grid (n k) → Field 𝔄 𝓗 𝓢) (k : ℕ) (z : 𝕋) : Slots 𝔄 𝓗 𝓢 W' :=
+  pc (fun x => gridSlots (W' := W') D (y k) x) z
+
+/-- The continuum slots of the limit fields. -/
+def S0 (H : CoHyp n y) (P : SpinHyp κ y) (z : 𝕋) : Slots 𝔄 𝓗 𝓢 W' :=
+  contSlots D κ (H.e₀ z) (fun lam => H.p lam z) (fun μ => H.A₀ μ z) (P.H₀ z) (P.Ψ₀ z) (P.χ₀ z)
+
+variable {D κ}
+
+namespace SpinHyp
+
+variable (H : CoHyp n y) (P : SpinHyp κ y)
+
+theorem fΨ : LpTendsto volume 2 (fun k z => (Sk (W' := W') D y k z).Ψ) (fun z => (S0 D κ H P z).Ψ) :=
+  P.hΨ
+
+theorem fΨp (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => (Sk (W' := W') D y k z).Ψp μ) (fun z => (S0 D κ H P z).Ψp μ) :=
+  NativeGravityFirstJet.lpTendsto_unitVec H.hn (by norm_num) P.hΨ μ
+
+theorem fΨb : LpTendsto volume 2 (fun k z => (Sk (W' := W') D y k z).Ψb)
+    (fun z => (S0 D κ H P z).Ψb) :=
+  (P.hχ₀.clm κ).congr (fun k => Eventually.of_forall fun z => by
+    simp only [Sk, pc, gridSlots, P.hχ k]) (Eventually.of_forall fun z => rfl)
+
+theorem fΨbp (μ : Fin 4) : LpTendsto volume 2 (fun k z => (Sk (W' := W') D y k z).Ψbp μ)
+    (fun z => (S0 D κ H P z).Ψbp μ) :=
+  ((NativeGravityFirstJet.lpTendsto_unitVec H.hn (by norm_num) P.hχ₀ μ).clm κ).congr
+    (fun k => Eventually.of_forall fun z => by simp only [Sk, pc, gridSlots, P.hχ k])
+    (Eventually.of_forall fun z => rfl)
+
+theorem bΨ (k : ℕ) : eLpNorm (fun z => (Sk (W' := W') D y k z).Ψ) 4 volume ≤ P.B4 := P.hΨ4 k
+
+theorem bΨp (k : ℕ) (μ : Fin 4) :
+    eLpNorm (fun z => (Sk (W' := W') D y k z).Ψp μ) 4 volume ≤ P.B4 := by
+  have := NativeGridLp.eLpNorm_pc_T (N := n k) μ (psi (y k)) 4
+  exact (le_of_eq this).trans (P.hΨ4 k)
+
+theorem bΨb (k : ℕ) :
+    eLpNorm (fun z => (Sk (W' := W') D y k z).Ψb) 4 volume ≤ ENNReal.ofReal ‖κ‖ * P.B4 := by
+  refine (eLpNorm_le_mul_eLpNorm_of_ae_le_mul (g := pc (P.χ k))
+    (Eventually.of_forall fun z => ?_) 4).trans (mul_le_mul_of_nonneg_left (P.hχ4 k) zero_le)
+  simp only [Sk, pc, gridSlots, P.hχ k]
+  exact κ.le_opNorm _
+
+theorem bΨbp (k : ℕ) (μ : Fin 4) :
+    eLpNorm (fun z => (Sk (W' := W') D y k z).Ψbp μ) 4 volume ≤ ENNReal.ofReal ‖κ‖ * P.B4 := by
+  have hT := NativeGridLp.eLpNorm_pc_T (N := n k) μ (P.χ k) 4
+  refine (eLpNorm_le_mul_eLpNorm_of_ae_le_mul
+    (g := pc (NativeYMIdentification.T μ (P.χ k))) (Eventually.of_forall fun z => ?_) 4).trans
+    (mul_le_mul_of_nonneg_left ((le_of_eq hT).trans (P.hχ4 k)) zero_le)
+  simp only [Sk, pc, gridSlots, P.hχ k]
+  exact κ.le_opNorm _
+
+theorem fYH : LpTendsto volume 2 (fun k z => (Sk (W' := W') D y k z).YH)
+    (fun z => (S0 D κ H P z).YH) :=
+  P.hH.clm D.yukawa
+
+theorem fWl (μ : Fin 4) : LpTendsto volume 2 (fun k z => (Sk (W' := W') D y k z).Wl μ)
+    (fun z => (S0 D κ H P z).Wl μ) :=
+  H.lpTendsto_wL D μ
+
+theorem fWr (μ : Fin 4) : LpTendsto volume 2 (fun k z => (Sk (W' := W') D y k z).Wr μ)
+    (fun z => (S0 D κ H P z).Wr μ) :=
+  H.lpTendsto_wR D μ
+
+theorem fdWl (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => (Sk (W' := W') D y k z).dWl μ t)
+      (fun z => (S0 D κ H P z).dWl μ t) :=
+  lpTendsto_dWl D H t μ
+
+theorem fdWr (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => (Sk (W' := W') D y k z).dWr μ t)
+      (fun z => (S0 D κ H P z).dWr μ t) :=
+  lpTendsto_dWr D H t μ
+
+end SpinHyp
+
+end Fields
+
+/-! ### Convergence of the coefficients and of the operator fields -/
+
+section Operators
+
+open TorusPiecewiseConstantTranslation (pc stronglyMeasurable_pc)
+open ShiftedJetAction (Grid unitVec fwdDiff)
+open NativeScaling (Mat readerOmega omegaLink)
+open NativeGravityFirstJet (M4 asM4 coframeM liftM liftL dqLift dqLiftL)
+open NativeDensity NativeDirac NativeDiracConv NativeDiracLimit
+
+variable {𝔄 : Type*} [NormedRing 𝔄] [NormedAlgebra ℝ 𝔄] [CompleteSpace 𝔄] [NormOneClass 𝔄]
+  [FiniteDimensional ℝ 𝔄]
+variable {𝓗 : Type*} [NormedAddCommGroup 𝓗] [NormedSpace ℝ 𝓗] [CompleteSpace 𝓗] [Nontrivial 𝓗]
+  [FiniteDimensional ℝ 𝓗]
+variable {𝓢 : Type*} [NormedAddCommGroup 𝓢] [NormedSpace ℝ 𝓢] [CompleteSpace 𝓢] [Nontrivial 𝓢]
+  [FiniteDimensional ℝ 𝓢]
+variable {W' : Type*} [NormedAddCommGroup W'] [NormedSpace ℝ W'] [FiniteDimensional ℝ W']
+variable {n : ℕ → ℕ} [∀ k, NeZero (n k)] {y : ∀ k, Grid (n k) → Field 𝔄 𝓗 𝓢}
+variable {D : NativeDensity.Data 𝔄 𝓗 𝓢} {κ : W' →L[ℝ] CoSpinor 𝓢}
+
+theorem lpTendsto_const' {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] (c : E) :
+    LpTendsto volume 2 (fun (_ : ℕ) (_ : 𝕋) => c) (fun _ => c) :=
+  LpTendsto.const (memLp_const c)
+
+namespace SpinHyp
+
+variable (H : CoHyp n y) (P : SpinHyp κ y)
+
+theorem cVG (μ : Fin 4) : ContinuousOn (fun M : M4 => chV M • chG D μ M) H.Ke :=
+  (continuousOn_chV H.hKdet).smul (continuousOn_chG D H.hKdet μ)
+
+theorem cDVG (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
+    ContinuousOn (fun M : M4 => chDV t M • chG D μ M) H.Ke :=
+  (continuousOn_chDV H.hKdet t).smul (continuousOn_chG D H.hKdet μ)
+
+theorem cVDG (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
+    ContinuousOn (fun M : M4 => chV M • chDG D t μ M) H.Ke :=
+  (continuousOn_chV H.hKdet).smul (continuousOn_chDG D H.hKdet t μ)
+
+theorem cc1 (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => c1 (Sk (W' := W') D y k z) t μ)
+      (fun z => c1 (S0 D κ H P z) t μ) :=
+  (((chart_bilin H (p := 2) (by norm_num) (cDVG H t μ) (ContinuousLinearMap.mul ℝ (Spin 𝓢))
+    (P.fWl H μ)).add (chart_bilin H (p := 2) (by norm_num) (cVDG H t μ)
+      (ContinuousLinearMap.mul ℝ (Spin 𝓢)) (P.fWl H μ))).add
+    (chart_bilin H (p := 2) (by norm_num) (cVG H μ) (ContinuousLinearMap.mul ℝ (Spin 𝓢))
+      (P.fdWl H t μ))).congr (fun k => Eventually.of_forall fun z => rfl)
+    (Eventually.of_forall fun z => rfl)
+
+theorem cc2 (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => c2 (Sk (W' := W') D y k z) t μ)
+      (fun z => c2 (S0 D κ H P z) t μ) :=
+  (((chart_bilin H (p := 2) (by norm_num) (cDVG H t μ)
+    (ContinuousLinearMap.mul ℝ (Spin 𝓢)).flip (P.fWr H μ)).add
+    (chart_bilin H (p := 2) (by norm_num) (cVG H μ) (ContinuousLinearMap.mul ℝ (Spin 𝓢)).flip
+      (P.fdWr H t μ))).add
+    (chart_bilin H (p := 2) (by norm_num) (cVDG H t μ) (ContinuousLinearMap.mul ℝ (Spin 𝓢)).flip
+      (P.fWr H μ))).congr (fun k => Eventually.of_forall fun z => rfl)
+    (Eventually.of_forall fun z => rfl)
+
+theorem cc3 (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => c3 (Sk (W' := W') D y k z) μ) (fun z => c3 (S0 D κ H P z) μ) :=
+  (chart_bilin H (p := 2) (by norm_num) (cVG H μ) (ContinuousLinearMap.mul ℝ (Spin 𝓢))
+    (P.fWl H μ)).congr (fun k => Eventually.of_forall fun z => rfl)
+    (Eventually.of_forall fun z => rfl)
+
+theorem cc5 (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => c5 (Sk (W' := W') D y k z) μ) (fun z => c5 (S0 D κ H P z) μ) :=
+  (chart_bilin H (p := 2) (by norm_num) (cVG H μ) (ContinuousLinearMap.mul ℝ (Spin 𝓢)).flip
+    (P.fWr H μ)).congr (fun k => Eventually.of_forall fun z => rfl)
+    (Eventually.of_forall fun z => rfl)
+
+theorem chartVG (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => (Sk (W' := W') D y k z).v • (Sk (W' := W') D y k z).γ μ)
+      (fun z => (S0 D κ H P z).v • (S0 D κ H P z).γ μ) :=
+  (lpTendsto_chart (p := 2) (by norm_num) H.hKe (cVG H μ)
+    (fun k => (stronglyMeasurable_pc (fun x => chV (coframeM (y k) x) • chG D μ (coframeM (y k) x)))
+      |>.aestronglyMeasurable) H.tendstoInMeasure_e (fun k z => H.hval k _) H.e₀_mem).congr
+    (fun k => Eventually.of_forall fun z => rfl) (Eventually.of_forall fun z => rfl)
+
+theorem cc4 (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => c4 (Sk (W' := W') D y k z) μ) (fun z => c4 (S0 D κ H P z) μ) :=
+  ((chartVG H P μ).add (lpTendsto_smul_zero H.tendsto_h (P.cc5 H μ))).congr
+    (fun k => Eventually.of_forall fun z => rfl)
+    (Eventually.of_forall fun z => by simp [c4, S0, contSlots])
+
+theorem cc6 (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => c6 (Sk (W' := W') D y k z) μ) (fun z => c6 (S0 D κ H P z) μ) :=
+  ((chartVG H P μ).add (lpTendsto_smul_zero H.tendsto_h (P.cc3 H μ))).congr
+    (fun k => Eventually.of_forall fun z => rfl)
+    (Eventually.of_forall fun z => by simp [c6, S0, contSlots])
+
+theorem cc9 (t : Jet 𝔄 𝓗 𝓢 W') :
+    LpTendsto volume 2 (fun k z => c9 D (Sk (W' := W') D y k z) t)
+      (fun z => c9 D (S0 D κ H P z) t) :=
+  ((chart_bilin H (p := 2) (by norm_num) (continuousOn_chDV H.hKdet t)
+    (ContinuousLinearMap.lsmul ℝ ℝ : ℝ →L[ℝ] Spin 𝓢 →L[ℝ] Spin 𝓢) (P.fYH H)).add
+    (lpTendsto_chart (p := 2) (by norm_num) H.hKe
+      ((continuousOn_chV H.hKdet).smul continuousOn_const (g := fun _ => D.yukawa t.2.2.2.1))
+      (fun k => (stronglyMeasurable_pc (fun x => chV (coframeM (y k) x) • D.yukawa t.2.2.2.1))
+        |>.aestronglyMeasurable) H.tendstoInMeasure_e (fun k z => H.hval k _) H.e₀_mem)).congr
+    (fun k => Eventually.of_forall fun z => rfl) (Eventually.of_forall fun z => rfl)
+
+theorem cc10 :
+    LpTendsto volume 2 (fun k z => c10 (Sk (W' := W') D y k z)) (fun z => c10 (S0 D κ H P z)) :=
+  (chart_bilin H (p := 2) (by norm_num) (continuousOn_chV H.hKdet)
+    (ContinuousLinearMap.lsmul ℝ ℝ : ℝ →L[ℝ] Spin 𝓢 →L[ℝ] Spin 𝓢) (P.fYH H)).congr
+    (fun k => Eventually.of_forall fun z => rfl) (Eventually.of_forall fun z => rfl)
+
+end SpinHyp
+
+end Operators
+
+/-! ### The operator fields converge -/
+
+section OperatorFields
+
+open TorusPiecewiseConstantTranslation (pc stronglyMeasurable_pc)
+open ShiftedJetAction (Grid unitVec fwdDiff)
+open NativeScaling (Mat readerOmega omegaLink)
+open NativeGravityFirstJet (M4 asM4 coframeM liftM liftL dqLift dqLiftL)
+open NativeDensity NativeDirac NativeDiracConv NativeDiracLimit
+
+variable {𝔄 : Type*} [NormedRing 𝔄] [NormedAlgebra ℝ 𝔄] [CompleteSpace 𝔄] [NormOneClass 𝔄]
+  [FiniteDimensional ℝ 𝔄]
+variable {𝓗 : Type*} [NormedAddCommGroup 𝓗] [NormedSpace ℝ 𝓗] [CompleteSpace 𝓗] [Nontrivial 𝓗]
+  [FiniteDimensional ℝ 𝓗]
+variable {𝓢 : Type*} [NormedAddCommGroup 𝓢] [NormedSpace ℝ 𝓢] [CompleteSpace 𝓢] [Nontrivial 𝓢]
+  [FiniteDimensional ℝ 𝓢]
+variable {W' : Type*} [NormedAddCommGroup W'] [NormedSpace ℝ W'] [FiniteDimensional ℝ W']
+variable {n : ℕ → ℕ} [∀ k, NeZero (n k)] {y : ∀ k, Grid (n k) → Field 𝔄 𝓗 𝓢}
+variable {D : NativeDensity.Data 𝔄 𝓗 𝓢} {κ : W' →L[ℝ] CoSpinor 𝓢}
+
+namespace SpinHyp
+
+variable (H : CoHyp n y) (P : SpinHyp κ y)
+
+theorem hBb : ENNReal.ofReal ‖κ‖ * P.B4 ≠ ∞ := ENNReal.mul_ne_top ENNReal.ofReal_ne_top P.hB4
+
+theorem bconst {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] (c : E) (k : ℕ) :
+    eLpNorm (fun _ : 𝕋 => c) 4 volume ≤ ‖c‖ₑ := eLpNorm_const_le c
+
+/-- The value-paired `μ`-summand converges strongly in `L¹`. -/
+theorem lpTendsto_Gμ (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
+    LpTendsto volume 1 (fun k z => Gμ κ (Sk (W' := W') D y k z) t μ)
+      (fun z => Gμ κ (S0 D κ H P z) t μ) := by
+  set c : ℂ := Complex.I / 2
+  have T1 := lpTendsto_triB (bForm c) (norm_bForm_le c) (P.fΨb (D := D) H) (P.hBb) (P.bΨb (D := D)) (P.cc1 (D := D) H t μ)
+    (P.fΨp (D := D) H μ) P.hB4 (fun k => P.bΨp (D := D) k μ)
+  have T2 := lpTendsto_triB (bForm c) (norm_bForm_le c) (P.fΨbp (D := D) H μ) (P.hBb) (fun k => P.bΨbp (D := D) k μ)
+    (P.cc2 (D := D) H t μ) (P.fΨ (D := D) H) P.hB4 (P.bΨ (D := D))
+  have T3 := lpTendsto_triB (bForm c) (norm_bForm_le c) (lpTendsto_const' (κ t.2.2.2.2.2.2.1))
+    enorm_ne_top (bconst _) (P.cc3 (D := D) H μ) (P.fΨp (D := D) H μ) P.hB4 (fun k => P.bΨp (D := D) k μ)
+  have T4 := lpTendsto_triB (bForm c) (norm_bForm_le c) (lpTendsto_const' (κ (t.2.2.2.2.2.2.2 μ)))
+    enorm_ne_top (bconst _) (P.cc4 (D := D) H μ) (P.fΨ (D := D) H) P.hB4 (P.bΨ (D := D))
+  have T5 := lpTendsto_triB (bForm c) (norm_bForm_le c) (lpTendsto_const' (κ t.2.2.2.2.2.2.1))
+    enorm_ne_top (bconst _) (P.cc5 (D := D) H μ) (P.fΨ (D := D) H) P.hB4 (P.bΨ (D := D))
+  have T6 := lpTendsto_triB (bForm c) (norm_bForm_le c) (P.fΨb (D := D) H) (P.hBb) (P.bΨb (D := D)) (P.cc6 (D := D) H μ)
+    (lpTendsto_const' (t.2.2.2.2.2.1 μ)) enorm_ne_top (bconst _)
+  have T7 := lpTendsto_triB (bForm c) (norm_bForm_le c) (P.fΨb (D := D) H) (P.hBb) (P.bΨb (D := D)) (P.cc3 (D := D) H μ)
+    (lpTendsto_const' t.2.2.2.2.1) enorm_ne_top (bconst _)
+  have T8 := lpTendsto_triB (bForm c) (norm_bForm_le c) (P.fΨbp (D := D) H μ) (P.hBb) (fun k => P.bΨbp (D := D) k μ)
+    (P.cc5 (D := D) H μ) (lpTendsto_const' t.2.2.2.2.1) enorm_ne_top (bconst _)
+  refine ((((((((T1.sub T2).add T3).sub T4).sub T5).add T6).add T7).sub T8)).congr
+    (fun k => Eventually.of_forall fun z => ?_) (Eventually.of_forall fun z => ?_)
+  · simp only [Pi.add_apply, Pi.sub_apply]
+    exact (Gμ_eq_tri κ (Sk (W' := W') D y k z) t μ).symm
+  · simp only [Pi.add_apply, Pi.sub_apply]
+    exact (Gμ_eq_tri κ (S0 D κ H P z) t μ).symm
+
+/-- The Yukawa part converges strongly in `L¹`. -/
+theorem lpTendsto_G0 (t : Jet 𝔄 𝓗 𝓢 W') :
+    LpTendsto volume 1 (fun k z => G0 D κ (Sk (W' := W') D y k z) t)
+      (fun z => G0 D κ (S0 D κ H P z) t) := by
+  have T1 := lpTendsto_triB (bForm 1) (norm_bForm_le 1) (P.fΨb (D := D) H) (P.hBb) (P.bΨb (D := D)) (P.cc9 (D := D) H t)
+    (P.fΨ (D := D) H) P.hB4 (P.bΨ (D := D))
+  have T2 := lpTendsto_triB (bForm 1) (norm_bForm_le 1) (lpTendsto_const' (κ t.2.2.2.2.2.2.1))
+    enorm_ne_top (bconst _) (P.cc10 (D := D) H) (P.fΨ (D := D) H) P.hB4 (P.bΨ (D := D))
+  have T3 := lpTendsto_triB (bForm 1) (norm_bForm_le 1) (P.fΨb (D := D) H) (P.hBb) (P.bΨb (D := D)) (P.cc10 (D := D) H)
+    (lpTendsto_const' t.2.2.2.2.1) enorm_ne_top (bconst _)
+  refine ((T1.add T2).add T3).congr
+    (fun k => Eventually.of_forall fun z => ?_) (Eventually.of_forall fun z => ?_)
+  · simp only [Pi.add_apply]
+    exact (G0_eq_tri D κ (Sk (W' := W') D y k z) t).symm
+  · simp only [Pi.add_apply]
+    exact (G0_eq_tri D κ (S0 D κ H P z) t).symm
+
+/-- **`Gop` converges strongly in `L¹`.** -/
+theorem lpTendsto_Gop :
+    LpTendsto volume 1 (fun k z => Gop D κ (Sk (W' := W') D y k z))
+      (fun z => Gop D κ (S0 D κ H P z)) := by
+  refine WeakJetPairing.lpTendsto_clm_of_apply fun t => ?_
+  have := (WeakJetPairing.lpTendsto_finset_sum_aux Finset.univ
+    fun μ _ => P.lpTendsto_Gμ (D := D) H t μ).sub (P.lpTendsto_G0 (D := D) H t)
+  exact this
+
+/-- The chart part `dv γ + v dγ` of the kinetic coefficient variation. -/
+theorem cK (t : Jet 𝔄 𝓗 𝓢 W') (μ : Fin 4) :
+    ContinuousOn (fun M : M4 => chDV t M • chG D μ M + chV M • chDG D t μ M) H.Ke :=
+  (cDVG H t μ).add (cVDG H t μ)
+
+/-- The difference-paired `μ`-summand converges strongly in `L²`. -/
+theorem lpTendsto_Λμ (t : Jet 𝔄 𝓗 𝓢 W') (u : Dif 𝓢 W') (μ : Fin 4) :
+    LpTendsto volume 2 (fun k z => Λμ κ (Sk (W' := W') D y k z) t u μ)
+      (fun z => Λμ κ (S0 D κ H P z) t u μ) := by
+  set c : ℂ := Complex.I / 2
+  -- `Re(c Ψ̄ (dv γ + v dγ) δ⁺Ψ-test)`: chart coefficient against the co-spinor field
+  have T1 := chart_bilin H (p := 2) (by norm_num)
+    (Φ := fun M : M4 => (bForm c).flip ((chDV t M • chG D μ M + chV M • chDG D t μ M) (u.1 μ)))
+    (by
+      exact (bForm c).flip.continuous.comp_continuousOn
+        ((cK (D := D) H t μ).clm_apply continuousOn_const))
+    (ContinuousLinearMap.id ℝ (CoSpinor 𝓢 →L[ℝ] ℝ)) (P.fΨb (D := D) H)
+  -- `Re(c (κδ⁺χ-test) (dv γ + v dγ) Ψ)`: chart coefficient against the spinor field
+  have T2 := chart_bilin H (p := 2) (by norm_num)
+    (Φ := fun M : M4 => (bForm c (κ (u.2 μ))).comp (chDV t M • chG D μ M + chV M • chDG D t μ M))
+    (by exact (continuous_const.clm_comp continuous_id).comp_continuousOn (cK (D := D) H t μ))
+    (ContinuousLinearMap.id ℝ (𝓢 →L[ℝ] ℝ)) (P.fΨ (D := D) H)
+  have T3 := lpTendsto_chart (p := 2) (by norm_num) H.hKe
+    (Φ := fun M : M4 => bForm c (κ t.2.2.2.2.2.2.1) ((chV M • chG D μ M) (u.1 μ)))
+    ((bForm c (κ t.2.2.2.2.2.2.1)).continuous.comp_continuousOn
+      ((cVG H μ).clm_apply continuousOn_const))
+    (fun k => (stronglyMeasurable_pc (fun x => bForm c (κ t.2.2.2.2.2.2.1)
+      ((chV (coframeM (y k) x) • chG D μ (coframeM (y k) x)) (u.1 μ)))).aestronglyMeasurable)
+    H.tendstoInMeasure_e (fun k z => H.hval k _) H.e₀_mem
+  have T4 := lpTendsto_chart (p := 2) (by norm_num) H.hKe
+    (Φ := fun M : M4 => bForm c (κ (u.2 μ)) ((chV M • chG D μ M) t.2.2.2.2.1))
+    ((bForm c (κ (u.2 μ))).continuous.comp_continuousOn
+      ((cVG H μ).clm_apply continuousOn_const))
+    (fun k => (stronglyMeasurable_pc (fun x => bForm c (κ (u.2 μ))
+      ((chV (coframeM (y k) x) • chG D μ (coframeM (y k) x)) t.2.2.2.2.1))).aestronglyMeasurable)
+    H.tendstoInMeasure_e (fun k z => H.hval k _) H.e₀_mem
+  refine (((T1.sub T2).add T3).sub T4).congr
+    (fun k => Eventually.of_forall fun z => ?_) (Eventually.of_forall fun z => ?_)
+  · simp only [Pi.add_apply, Pi.sub_apply]
+    rw [Λμ_eq_tri]; rfl
+  · simp only [Pi.add_apply, Pi.sub_apply]
+    rw [Λμ_eq_tri]; rfl
+
+/-- **`Λop` converges strongly in `L²`.** -/
+theorem lpTendsto_Λop :
+    LpTendsto volume 2 (fun k z => Λop κ (Sk (W' := W') D y k z))
+      (fun z => Λop κ (S0 D κ H P z)) := by
+  refine WeakJetPairing.lpTendsto_clm_of_apply fun t => ?_
+  refine WeakJetPairing.lpTendsto_clm_of_apply fun u => ?_
+  exact WeakJetPairing.lpTendsto_finset_sum_aux Finset.univ fun μ _ =>
+    P.lpTendsto_Λμ (D := D) H t u μ
+
+end SpinHyp
+
+end OperatorFields
 
 end
 
