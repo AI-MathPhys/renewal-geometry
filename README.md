@@ -106,10 +106,10 @@ Lean declarations, and a generated README listing every record.
 | Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | Easy | Medium | Hard |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 88 | 77 | 11 | 0 | 0 | 0 | 0 | 0 |
-| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 198 | 144 | 14 | 24 | 16 | 0 | 0 | 40 |
+| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 198 | 135 | 14 | 33 | 16 | 9 | 0 | 40 |
 | [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 111 | 11 | 12 | 0 | 0 | 0 | 12 |
 | [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 107 | 12 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **539** | **439** | **48** | **36** | **16** | **0** | **0** | **52** |
+| **Total** | **539** | **430** | **48** | **45** | **16** | **9** | **0** | **52** |
 
 How to read the table:
 
@@ -163,7 +163,14 @@ identity used to make the Holst variation inert does not follow at the
 manuscript's L² connection regularity, so the handoff hypotheses carry an
 additional uniform spatial L³ bound on the connection interpolants (supplied
 by both concrete connection routes of the paper); the field is named
-`spatialConnectionL3Bound` and flagged in every affected record. The 40 open
+`spatialConnectionL3Bound` and flagged in every affected record. A full
+re-audit against the 4 October revision (every proved and encoded record
+read against the current statement and the cited Lean) kept 126 records,
+corrected 24 notes and reopened 9 records as *easy* (a missing clause or a
+derived-form hypothesis, each with a concrete plan: the pressure jets, the
+quotient state-path factorization, the relative primitive floor, the fast
+clock, the face linearization, the short-memory blocks, the exact time
+hierarchy, the de Sitter Cauchy slices on the A₃ quotient). The 40 hard open
 records all need input the manuscript does not give: 29 concern the explicit
 N = 3 exact finite action, which the paper describes only in words (a revision
 adding it is in progress; one new theorem of that revision is recorded but not
