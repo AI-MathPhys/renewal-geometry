@@ -17,14 +17,14 @@ encoded, and what is still open.
 | Library | Role | Size |
 |---|---|---|
 | **`NCG`** | Generic noncommutative geometry, stated with no reference to renewal processes: completely positive maps and channel monoids, Schwarz/Choi theory, Clifford and Jordan algebra, spectral triples, Krein spaces and signed sectors classified by `H¹(G, ℤ/2)`, graph cohomology and covers, and a complete Perron–Frobenius theorem. Candidate material for Mathlib. | 56 files, ~11k lines |
-| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 1692 files, ~644k lines |
+| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 1767 files, ~675k lines |
 
 `NCG` never imports `RenewalGeometry`; this is enforced by
 [`scripts/check_layering.py`](scripts/check_layering.py) in CI.
 
 ### Verification guarantees
 
-- **Sorry-free.** `lake build` kernel-checks all 1748 files; there is no `sorry`.
+- **Sorry-free.** `lake build` kernel-checks all 1823 files; there is no `sorry`.
 - **Standard axioms only.** Every Lean declaration cited as *proved* in a
   paper ledger is audited with `#print axioms` by
   [`scripts/audit_axioms.py`](scripts/audit_axioms.py): only `propext`,
@@ -106,10 +106,10 @@ Lean declarations, and a generated README listing every record.
 | Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | Easy | Medium | Hard |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 88 | 77 | 11 | 0 | 0 | 0 | 0 | 0 |
-| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 198 | 135 | 14 | 33 | 16 | 9 | 0 | 40 |
+| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 198 | 157 | 14 | 25 | 2 | 0 | 0 | 27 |
 | [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 111 | 11 | 12 | 0 | 0 | 0 | 12 |
 | [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 107 | 12 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **539** | **430** | **48** | **45** | **16** | **9** | **0** | **52** |
+| **Total** | **1823** | **452** | **48** | **37** | **2** | **0** | **0** | **39** |
 
 How to read the table:
 
@@ -164,20 +164,27 @@ manuscript's L² connection regularity, so the handoff hypotheses carry an
 additional uniform spatial L³ bound on the connection interpolants (supplied
 by both concrete connection routes of the paper); the field is named
 `spatialConnectionL3Bound` and flagged in every affected record. A full
-re-audit against the 4 October revision (every proved and encoded record
-read against the current statement and the cited Lean) kept 126 records,
-corrected 24 notes and reopened 9 records as *easy* (a missing clause or a
-derived-form hypothesis, each with a concrete plan: the pressure jets, the
-quotient state-path factorization, the relative primitive floor, the fast
-clock, the face linearization, the short-memory blocks, the exact time
-hierarchy, the de Sitter Cauchy slices on the A₃ quotient). The 40 hard open
-records all need input the manuscript does not give: 29 concern the explicit
-N = 3 exact finite action, which the paper describes only in words (a revision
-adding it is in progress; one new theorem of that revision is recorded but not
-yet assessed), 8 the original-action Hamiltonian behind the initial constraint
-map, and 2 the same-cylinder theorem (its clause (ii) is proved; the
-finite-cutoff Cartan reconstruction behind the literal-link budget is never
-written down). The Einstein–Standard-Model closure paper is now formalized in
+re-audit against the 4 October revision (every proved and encoded record read
+against the current statement and the cited Lean) kept 126 records, corrected
+24 notes and reopened 9 records, all of which have since been re-proved (the
+face-linearization stable branch under a disclosed, necessary continuity
+hypothesis). The revision also wrote the explicit N = 3 phase-compatible finite
+action into the appendix; it is now encoded literally (links, literal
+curvatures, Palatini contraction, compensators, phase derivatives, connection
+normal form), with the analytic stationary connection, the Legendre transform
+and canonical Hamiltonian, the quadratic jet H₂, the initial-constraint map
+and its prepared chart, the Ward orders and the harmonic q₄ = 0 law all proved
+for the literal action (standing renderings: χ = 1, Λ = 0, the symmetric
+square-root triad, odd N). The 27 hard open records need input the manuscript
+still does not give: the certified N = 3 event (no triad fixed, no preparation
+equations, no certificate matrix tabulated — the rank-24, (8,8,13) and
+response operators are not computable from the text, though the generic rank,
+pencil and dichotomy reductions are proved), the graded-chart data (C1)–(C4)
+behind the boundary sweeps (the sweep contraction itself is proved), the c_H
+row identification of the slow branch (three unwritten bookkeeping
+identities; a Lean counterexample shows the uniform form of the Ward
+hypothesis is false), the continuum consistency budget of the cofinal
+preparation, and the same-cylinder Cartan reconstruction. The Einstein–Standard-Model closure paper is now formalized in
 its analytic core as well: the reduced variational closure theorem, the
 continuity and Lipschitz estimates of the complete first variation, the
 compactness certificates and strong-packet limit, the defect-measure
@@ -238,10 +245,10 @@ finer question by walking the proof terms of every ledger-cited declaration:
 
 | | Modules |
 |---|---:|
-| Used by at least one cited declaration | 1080 |
+| Used by at least one cited declaration | 1155 |
 | Never used, but imported by a used module (structurally required) | 354 |
 | Never used and imported by nothing used (removable without loss) | 314 |
-| **Total** | **1748** |
+| **Total** | **1823** |
 
 The removable part is concentrated in the foundation of the *earlier* papers
 of the programme rather than the four tracked here: `Lorentz` (51 of 60
