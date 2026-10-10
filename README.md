@@ -17,14 +17,14 @@ encoded, and what is still open.
 | Library | Role | Size |
 |---|---|---|
 | **`NCG`** | Generic noncommutative geometry, stated with no reference to renewal processes: completely positive maps and channel monoids, Schwarz/Choi theory, Clifford and Jordan algebra, spectral triples, Krein spaces and signed sectors classified by `H¹(G, ℤ/2)`, graph cohomology and covers, and a complete Perron–Frobenius theorem. Candidate material for Mathlib. | 56 files, ~11k lines |
-| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 1767 files, ~675k lines |
+| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 1802 files, ~693k lines |
 
 `NCG` never imports `RenewalGeometry`; this is enforced by
 [`scripts/check_layering.py`](scripts/check_layering.py) in CI.
 
 ### Verification guarantees
 
-- **Sorry-free.** `lake build` kernel-checks all 1823 files; there is no `sorry`.
+- **Sorry-free.** `lake build` kernel-checks all 1858 files; there is no `sorry`.
 - **Standard axioms only.** Every Lean declaration cited as *proved* in a
   paper ledger is audited with `#print axioms` by
   [`scripts/audit_axioms.py`](scripts/audit_axioms.py): only `propext`,
@@ -107,9 +107,9 @@ Lean declarations, and a generated README listing every record.
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 88 | 77 | 11 | 0 | 0 | 0 | 0 | 0 |
 | [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 198 | 157 | 14 | 25 | 2 | 0 | 0 | 27 |
-| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 111 | 11 | 12 | 0 | 0 | 0 | 12 |
+| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 112 | 11 | 11 | 0 | 0 | 0 | 11 |
 | [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 107 | 12 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **1823** | **452** | **48** | **37** | **2** | **0** | **0** | **39** |
+| **Total** | **539** | **453** | **48** | **36** | **2** | **0** | **0** | **38** |
 
 How to read the table:
 
@@ -194,19 +194,25 @@ S(U(3)×U(2)), Wilson compactness, reconstruction identification, all-sector
 consistency, the finite Wilson zero-defect closure and its determinant-resolved
 form), the common-slab hyperbolic stability, Dirac stability, the actual-jet
 writer with its coupled bootstrap, the a-posteriori shadows and the
-constrained initial data. Its 12 open records fall into four groups: Uhlenbeck's
-small-energy gauge theorem for the structure group S(U(3)×U(2)) (2 records,
-isolated as one named proposition from which the rest is derived); the
-analytic-germ (Cauchy–Kovalevskaya) existence behind the physical
-identification (1); the bridge identifying the native Euler rows with the
-field-equation residuals of the bootstrap model, on which the quantitative
-closure theorem and its five corollaries rest (6, a general Euler–Lagrange ↔
-Einstein-tensor calculus not yet in the library); the readout clauses of the
-generated finite dynamics (2); and the gauge-robust reader certificate, whose
-causal temporal gauge is not time-periodic although the paper applies a
-periodic Fourier reader to it (1, an author query). Every rendering choice
+constrained initial data, and the gauge-robust reader certificate (read after a
+smooth time cut-off, since the causal temporal gauge is not time-periodic).
+Its 11 open records fall into three groups: Uhlenbeck's small-energy gauge
+theorem for the structure group S(U(3)×U(2)) (2 records, isolated as one named
+proposition; the torus Coulomb gauge, its a-priori estimate and the linearised
+Coulomb isomorphism are proved, and the torus-to-ball transfer is formally
+refuted, so what remains is the Neumann problem on the ball); the physical
+identification of the generated finite dynamics and its two readout records
+(3: Cauchy–Kovalevskaya, the current Noether identity and Gauss propagation are
+proved, while harmonic and defining-jet propagation for the Kato solution are
+not; a formal counterexample shows propagation fails for general theory data
+without the Noether identities); and the bridge identifying the native Euler
+rows with the field-equation residuals of the bootstrap model, on which the
+quantitative closure theorem and its five corollaries rest (6: the gravity,
+matter and stress rows and the frame identification are proved, the source
+budget comparison and the final composition are not). Every rendering choice
 (spatial sections rendered as 𝕋³, compact charts as coordinate boxes,
-trivialised bundles) is disclosed in the records' notes.
+trivialised bundles, an adapted Lorentz gauge for the frame bridge) is
+disclosed in the records' notes.
 
 The infrastructure built for these ledgers is general and absent from Mathlib,
 among it: Sobolev spaces on open sets of ℝ^d by weak derivatives with cutoff,
@@ -245,10 +251,10 @@ finer question by walking the proof terms of every ledger-cited declaration:
 
 | | Modules |
 |---|---:|
-| Used by at least one cited declaration | 1155 |
-| Never used, but imported by a used module (structurally required) | 354 |
+| Used by at least one cited declaration | 1191 |
+| Never used, but imported by a used module (structurally required) | 353 |
 | Never used and imported by nothing used (removable without loss) | 314 |
-| **Total** | **1823** |
+| **Total** | **1858** |
 
 The removable part is concentrated in the foundation of the *earlier* papers
 of the programme rather than the four tracked here: `Lorentz` (51 of 60
