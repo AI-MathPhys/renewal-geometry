@@ -34,7 +34,7 @@ open HarmonicDefect EHJetVariation EHFieldVariation ActualJetSystem ActualJetRec
   ActualJetGauge ActualJetWriter ActualJetBridge ActualJetState GenMatVar GenFOAction FrameCurvature
   ActualJetFrame GenResMaps JetCurve GenDAlg GenDFJ GenDStress GenDiracCur SpinorProlongation
   GenDAct GenDEul GenNoether GenMatEuler PeriodicCube SlabWaveHk GenDFld GenCellVar GenCellBulk
-  ActualJetCompleteForcing GenCplCV
+  ActualJetCompleteForcing GenCplCV SymHypEnergy GenCell KatoGalerkin TwistedHalfRicci
 
 set_option linter.unusedSectionVars false
 set_option synthInstance.maxHeartbeats 400000
@@ -52,7 +52,7 @@ variable {SM : SMData (MatLie m) V S S'} (hP : DiracPairing SM)
 /-- **The Dirac flux on values** `B^γ = √(-det g) Σ_C e_C{}^γ(Fl_C(M, Ψ, Ψ̄) - ½ε_C⟨Ψ̄, c_Cφ⟩ +
 ½ε_C⟨φ̄, c_CΨ⟩)`, `M = ½(Λ - Λᵀ)` the local Lorentz part of the frame variation induced by `k`. -/
 def fluxDJ (γ : Fin 4) (g : Met) (ψ : S) (ψb : S') (k : Met) (φ : S) (φb : S') : ℝ :=
-  ∑ C, volM g * (frR g C γ * (Flx hP C (Mk g k) ψ ψb -
+  ∑ C, volM g * (frR g C γ * (Flx hP C (GenCplCV.Mk g k) ψ ψb -
     (1 / 2 : ℝ) * lorentzSign C * hP.P ψb (SM.D.Fr.c C φ) +
     (1 / 2 : ℝ) * lorentzSign C * hP.P φb (SM.D.Fr.c C ψ)))
 
@@ -73,7 +73,7 @@ theorem isSPeriodic_fluxD (z : Tuple m V S S') {k : ST 3 → Met} (hkp : IsSPeri
 theorem Lam_smul {g : Met} (hg : ChartM g) (t : ℝ) (k : Met) (A B : Fin 4) :
     Lam g (t • k) A B = t * Lam g k A B := by
   have e : edot g (t • k) A = t • edot g k A := funext fun μ => by
-    rw [edot_fderiv hg, edot_fderiv hg, map_smul]; rfl
+    rw [Pi.smul_apply, edot_fderiv hg, edot_fderiv hg, map_smul]
   unfold Lam ipg
   rw [e, Finset.mul_sum]
   refine Finset.sum_congr rfl fun μ _ => ?_
@@ -82,39 +82,43 @@ theorem Lam_smul {g : Met} (hg : ChartM g) (t : ℝ) (k : Met) (A B : Fin 4) :
   simp only [Pi.smul_apply, smul_eq_mul]
   ring
 
-theorem Lam_zero {g : Met} (hg : ChartM g) (A B : Fin 4) : Lam g 0 A B = 0 := by
-  have := Lam_smul hg 0 0 A B
-  simpa using this
+theorem edot_zero (g : Met) (A μ : Fin 4) : edot g 0 A μ = 0 := by
+  unfold edot deR ActualJetFrame.frameJet
+  have e : (fun γ l σ => dginv (ginvOf g) (fun _ => (0 : Met)) γ l σ) 0 = 0 := by
+    funext l σ; simp [dginv]
+  rw [e, map_zero]
+
+theorem Lam_zero (g : Met) (A B : Fin 4) : Lam g 0 A B = 0 := by
+  have e : edot g 0 A = 0 := funext fun μ => edot_zero g A μ
+  unfold Lam ipg
+  rw [e]
+  simp
 
 theorem Mk_smul {g : Met} (hg : ChartM g) (t : ℝ) (k : Met) :
-    Mk g (t • k) = fun A B => t * Mk g k A B := by
+    GenCplCV.Mk g (t • k) = fun A B => t * GenCplCV.Mk g k A B := by
   funext A B
-  unfold Mk
+  unfold GenCplCV.Mk
   rw [Lam_smul hg, Lam_smul hg]
   ring
 
-theorem Mk_zero {g : Met} (hg : ChartM g) : Mk g 0 = fun _ _ => 0 := by
+theorem Mk_zero (g : Met) : GenCplCV.Mk g 0 = fun _ _ => 0 := by
   funext A B
-  unfold Mk
-  rw [Lam_zero hg, Lam_zero hg]
+  unfold GenCplCV.Mk
+  rw [Lam_zero g, Lam_zero g]
   ring
 
-theorem spinPart_smul' {ι A : Type*} [Fintype ι] [Ring A] [Algebra ℝ A] (Fr : CliffordFrame ι A)
+theorem spinPart_smul' {ι A : Type*} [Fintype ι] [DecidableEq ι] [Ring A] [Algebra ℝ A] (Fr : CliffordFrame ι A)
     (t : ℝ) (W : ι → ι → ℝ) : spinPart Fr (fun a b => t * W a b) = t • spinPart Fr W := by
   unfold spinPart
-  rw [smul_comm, Finset.smul_sum]
-  congr 1
-  refine Finset.sum_congr rfl fun a _ => ?_
-  rw [Finset.smul_sum]
-  refine Finset.sum_congr rfl fun b _ => ?_
-  rw [smul_smul]
+  simp only [Finset.smul_sum, smul_smul]
+  refine Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => ?_
   congr 1
   ring
 
-theorem fluxDJ_zero {g : Met} (hg : ChartM g) (γ : Fin 4) (ψ : S) (ψb : S') :
+theorem fluxDJ_zero (γ : Fin 4) (g : Met) (ψ : S) (ψb : S') :
     fluxDJ hP γ g ψ ψb 0 0 0 = 0 := by
   unfold fluxDJ Flx
-  simp [Mk_zero hg]
+  simp [Mk_zero g]
 
 /-! ### The Dirac cell variation of a tuple -/
 
@@ -159,7 +163,7 @@ theorem cell_dirac (z : Tuple m V S S') {k : ST 3 → Met} (hk : ContDiff ℝ �
   have hcDγ : ∀ γ, ContinuousOn (pd (fluxD hP z k φ φb γ) γ) (openSlab (a - 1) (b + 1)) :=
     fun γ => (EHFieldVariation.contDiff_pd' (hF γ) γ).continuous.continuousOn
   have hcD : ContinuousOn D (openSlab (a - 1) (b + 1)) :=
-    continuousOn_finset_sum _ fun γ _ => hcDγ γ
+    continuousOn_finsetSum _ fun γ _ => hcDγ γ
   have hcL : ContinuousOn (fun x => fderiv ℝ (L1D SM hP.P) (jC z x) (jW k X η φ φb x))
       (openSlab (a - 1) (b + 1)) :=
     continuousOn_fderiv_jet isOpen_chart1C (contDiffOn_L1D SM hP.P) (continuous_jC z)
@@ -177,5 +181,93 @@ theorem cell_dirac (z : Tuple m V S S') {k : ST 3 → Met} (hk : ContDiff ℝ �
       cellInt_pd_succ_loc (hF _).contDiffOn (isSPeriodic_fluxD hP z hkp hφp hφbp _) ha hab hb i
     simp only [hz, Finset.sum_const_zero, add_zero]
   rw [hDi]
+
+theorem continuous_bulkD (z : Tuple m V S S') {k : ST 3 → Met} (hk : ContDiff ℝ ∞ k)
+    (hks : ∀ y μ ν, k y μ ν = k y ν μ) {X : ST 3 → Fin 4 → MatLie m}
+    (hX : ContDiff ℝ ∞ X) {η : ST 3 → V} (hη : ContDiff ℝ ∞ η) {φ : ST 3 → S}
+    (hφ : ContDiff ℝ ∞ φ) {φb : ST 3 → S'} (hφb : ContDiff ℝ ∞ φb) :
+    Continuous (bulkD hP z k X η φ φb) := by
+  have hF : ∀ γ, ContDiff ℝ ∞ (fluxD hP z k φ φb γ) := fun γ => contDiff_fluxD hP z hk hφ hφb γ
+  have hcD : Continuous fun x => ∑ γ, pd (fluxD hP z k φ φb γ) γ x :=
+    continuous_finsetSum _ fun γ _ => (EHFieldVariation.contDiff_pd' (hF γ) γ).continuous
+  have hcL : ContinuousOn (fun x => fderiv ℝ (L1D SM hP.P) (jC z x) (jW k X η φ φb x)) univ :=
+    continuousOn_fderiv_jet isOpen_chart1C (contDiffOn_L1D SM hP.P) (continuous_jC z)
+      (continuous_jW hk hX hη hφ hφb) fun x _ => ⟨GenCell.Tuple_det_neg z x, z.lor x⟩
+  refine ((continuousOn_univ.1 hcL).add hcD).congr fun x => ?_
+  show fderiv ℝ (L1D SM hP.P) (jC z x) (jW k X η φ φb x) + _ = _
+  rw [fderiv_L1D_field hP z hk hks X η hφ hφb x]
+  ring
+
+/-! ### The Dirac bulk rows on a compact set -/
+
+theorem contDiffAt_Lam_comp {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] {gf kf : E → Met}
+    {p : E} (hg : ContDiffAt ℝ ∞ gf p) (hk : ContDiffAt ℝ ∞ kf p)
+    (hdet : (Matrix.of (gf p)).det ≠ 0) (hlor : IsLorChart (ginvOf (gf p))) (A B : Fin 4) :
+    ContDiffAt ℝ ∞ (fun y => Lam (gf y) (kf y) A B) p := by
+  have hgi : ContDiffAt ℝ ∞ (fun y => ginvOf (gf y)) p := ContDiffAt.ginvOf_fun hg hdet
+  have hgij : ∀ a b, ContDiffAt ℝ ∞ (fun y => gf y a b) p := fun a b => by fun_prop
+  have hkij : ∀ a b, ContDiffAt ℝ ∞ (fun y => kf y a b) p := fun a b => by fun_prop
+  have hgi' : ∀ a b, ContDiffAt ℝ ∞ (fun y => ginvOf (gf y) a b) p := fun a b =>
+    contDiffAt_pi.1 (contDiffAt_pi.1 hgi a) b
+  have hdgi : ContDiffAt ℝ ∞ (fun y => fun (γ l σ : Fin 4) =>
+      dginv (ginvOf (gf y)) (fun _ => kf y) γ l σ) p := by
+    unfold dginv
+    rw [contDiffAt_pi]; intro γ; rw [contDiffAt_pi]; intro l; rw [contDiffAt_pi]; intro σ
+    fun_prop
+  have hed : ∀ a μ, ContDiffAt ℝ ∞ (fun y => edot (gf y) (kf y) a μ) p := fun a μ =>
+    ContDiffAt.frameJet hgi hdgi hlor 0 a μ
+  have hfr : ∀ a μ, ContDiffAt ℝ ∞ (fun y => frR (gf y) a μ) p := fun a μ =>
+    ContDiffAt.frU_comp hgi hlor a μ
+  unfold Lam ipg
+  fun_prop
+
+set_option maxHeartbeats 4000000 in
+/-- **The Dirac bulk rows are smooth** in their arguments at a chart metric. -/
+theorem contDiffAt_dirJ_comp {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] {p : E}
+    {gf kf : E → Met} {ψf φf : E → S} {ψbf φbf : E → S'} {rf : E → S × S'}
+    (hg : ContDiffAt ℝ ∞ gf p) (hk : ContDiffAt ℝ ∞ kf p) (hψ : ContDiffAt ℝ ∞ ψf p)
+    (hψb : ContDiffAt ℝ ∞ ψbf p) (hr : ContDiffAt ℝ ∞ rf p) (hφ : ContDiffAt ℝ ∞ φf p)
+    (hφb : ContDiffAt ℝ ∞ φbf p) (hch : ChartM (gf p)) :
+    ContDiffAt ℝ ∞ (fun q => dirJ hP (gf q) (kf q) (ψf q) (ψbf q) (rf q) (φf q) (φbf q)) p := by
+  have hM : ∀ a b, ContDiffAt ℝ ∞ (fun q => GenCplCV.Mk (gf q) (kf q) a b) p := fun a b => by
+    unfold GenCplCV.Mk
+    exact contDiffAt_const.mul ((contDiffAt_Lam_comp hg hk hch.1 hch.2.1 a b).sub
+      (contDiffAt_Lam_comp hg hk hch.1 hch.2.1 b a))
+  have hv : ContDiffAt ℝ ∞ (fun q => volM (gf q)) p := contDiffAt_volM hg (det_neg_R hch)
+  have hr1 : ContDiffAt ℝ ∞ (fun q => (rf q).1) p := contDiffAt_fst.comp p hr
+  have hr2 : ContDiffAt ℝ ∞ (fun q => (rf q).2) p := contDiffAt_snd.comp p hr
+  unfold dirJ spinPart
+  simp only [LinearMap.neg_apply, LinearMap.smul_apply, LinearMap.sum_apply,
+    Module.End.mul_apply, map_neg, map_smul, map_sum, smul_eq_mul]
+  fun_prop
+
+set_option maxHeartbeats 4000000 in
+/-- **The Dirac bulk rows are bounded on a compact set** of chart metrics and spinor values:
+`|dirJ(g, Ψ, Ψ̄; e_D^*c; L_k y, L_φ y, L_φ̄ y)| ≤ M ‖c‖ ‖y‖` for linear readouts of the
+variation. -/
+theorem exists_dirJ_bound {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [FiniteDimensional ℝ E] (Lk : E →L[ℝ] Met) (Lφ : E →L[ℝ] S) (Lφb : E →L[ℝ] S') {nD : ℕ}
+    (eDs : (Fin nD → ℝ) →L[ℝ] S × S') {Kh : Set (Met × S × S')} (hKh : IsCompact Kh)
+    (hch : ∀ h ∈ Kh, ChartM h.1) :
+    ∃ M ≥ 0, ∀ h ∈ Kh, ∀ (c : Fin nD → ℝ) (y : E),
+      |dirJ hP h.1 (Lk y) h.2.1 h.2.2 (eDs c) (Lφ y) (Lφb y)| ≤ M * ‖c‖ * ‖y‖ := by
+  refine GenCellBulk.exists_hom_bound
+    (fun h c y => dirJ hP h.1 (Lk y) h.2.1 h.2.2 (eDs c) (Lφ y) (Lφb y)) hKh ?_ ?_ ?_
+  · intro p hp
+    refine ContinuousAt.continuousWithinAt ?_
+    refine ContDiffAt.continuousAt (𝕜 := ℝ) (n := ∞) ?_
+    have hch' := hch p.1 hp.1
+    exact contDiffAt_dirJ_comp hP (gf := fun q : (Met × S × S') × (Fin nD → ℝ) × E => q.1.1)
+      (by fun_prop) (by fun_prop) (by fun_prop) (by fun_prop) (by fun_prop) (by fun_prop)
+      (by fun_prop) hch'
+  · intro h _ t c y
+    simp only [map_smul, dirJ, Prod.smul_fst, Prod.smul_snd, LinearMap.smul_apply, smul_eq_mul,
+      LinearMap.map_smul]
+    ring
+  · intro h hh t c y
+    have hch' := hch h hh
+    simp only [map_smul, dirJ, Mk_smul hch' t, spinPart_smul', LinearMap.smul_apply, smul_eq_mul,
+      LinearMap.map_smul, neg_smul, LinearMap.neg_apply, map_neg]
+    ring
 
 end RenewalGeometry.GenCplCD
