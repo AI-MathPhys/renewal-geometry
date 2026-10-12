@@ -77,12 +77,19 @@ a smooth time cut-off for the gauge-robust reader, shift-transported head rows
 in the subsidiary system, an adapted Lorentz gauge for the frame bridge,
 chart-local smoothness of the theory data).
 
-## Two libraries
+## Libraries and components
 
-| Library | Role | Size |
+| Library / component | Role | Size |
 |---|---|---|
-| **`MathPhys`** | Generic mathematical physics, analysis, algebra and geometry with no reference to the programme: known theorems from the literature (Uhlenbeck's Coulomb gauge theorem, Kato's local existence, Perron–Frobenius, Mosco convergence, Lichnerowicz's conformal method, …) and the general infrastructure behind the papers (Sobolev spaces on domains, grids and tori, symmetric-hyperbolic energy estimates, the continuum Einstein–Standard-Model field equations, finite-dimensional operator algebras, lattice gauge theory). Depends on Mathlib only. | 1340 files, ~484k lines |
 | **`RenewalGeometry`** | The programme itself, built on `MathPhys`: renewal memories and predictive quotients, the operational and statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, the finite spectralization, commutant-duality and Standard-Model synthesis, the explicit finite actions, records, certificates and regulator sequences of the four papers. | 797 files, ~317k lines |
+| **`MathPhys/NCG`** | Noncommutative geometry and operator theory: spectral triples, Krein spaces, graph Hodge–Dirac operators and Connes distances, compact quantum metric spaces, operator limits on varying Hilbert spaces (Mosco, resolvent convergence), finite-dimensional operator algebras, Perron–Frobenius. | 338 files, ~68k lines |
+| **`MathPhys/FieldTheory`** | Continuum analysis and classical field theory: Sobolev spaces and compactness, Uhlenbeck's Coulomb gauge theorem, symmetric-hyperbolic energy estimates and Kato's local existence, the continuum Einstein–Standard-Model equations with constraint propagation, general relativity (curvature, ADM, Gowdy, Palatini–Holst), lattice and continuum gauge theory, Lorentzian geometry, the Standard-Model gauge group. | 686 files, ~309k lines |
+| **`MathPhys/Lattice`** | Discrete analysis on periodic grids and lattices: grid Sobolev, Poincaré and Loomis–Whitney inequalities, grid Hodge theory, plaquette expansions, the A3 (FCC) lattice, finite-difference schemes, discrete variational calculus. | 96 files, ~36k lines |
+| **`MathPhys/Stochastics`** | Probability, statistical mechanics, quantum information and systems theory: Ising and Curie–Weiss, Markov chains, renewal sums, quantum relative entropy and channels, Kalman and Hankel realizations. | 119 files, ~45k lines |
+| **`MathPhys/Core`** | Shared algebra, combinatorics and topology: matrix exponential calculus, Pfaffians, completely positive maps, Clifford and Jordan algebra, graph cut–cycle decompositions, Brouwer and Sperner, inverse limits. | 101 files, ~23k lines |
+
+The five `MathPhys` components form one Lake library that depends on Mathlib
+only; `RenewalGeometry` is a second Lake library built on it.
 
 `MathPhys` never imports `RenewalGeometry`; this is enforced by
 [`scripts/check_layering.py`](scripts/check_layering.py) in CI.
@@ -191,14 +198,12 @@ scripts/
    from the ledgers and the checker runs in CI, so the README numbers cannot
    drift from what the Lean tree actually contains.
 
-## What is in `MathPhys`
+## What is in `MathPhys/NCG`
 
-Five thematic top-level folders, each organized by mathematical content; every
-file is generic and could be upstreamed.
+Noncommutative geometry and operator theory: spectral triples, Krein spaces, graph Hodge–Dirac operators and Connes distances, compact quantum metric spaces, operator limits on varying Hilbert spaces (Mosco, resolvent convergence), finite-dimensional operator algebras, Perron–Frobenius.
 
-| Theme / folder | Files | Contents |
+| Folder | Files | Contents |
 |---|---:|---|
-| **`NCG/`** | **338** | *Noncommutative geometry and operator theory* |
 | `NCG/OperatorLimits` | 167 | Convergence of operators on varying Hilbert spaces: Mosco convergence, strong and norm resolvent limits, the pseudo-resolvent theorem, collectively compact operators, Riesz projections, stable spin atlases, variable-coefficient Dirac operators on the torus |
 | `NCG/OperatorAlgebras` | 65 | Finite-dimensional C*- and von Neumann algebra theory: bicommutants, Wedderburn and factor normal forms, Tannaka and Schur, Cauchy–Binet, Howe duality packets, commutant Gram certificates, Peirce decompositions |
 | `NCG/SpectralGeometry` | 58 | Graph Connes distances, weighted graph Hodge–Dirac operators, the mesh-graph to Riemannian bridge, finite compact quantum metric spaces, Naimark dilation, operator-valued Stieltjes measures, flat and de Sitter comparisons on the A3 lattice |
@@ -207,23 +212,47 @@ file is generic and could be upstreamed.
 | `NCG/Graph` | 11 | Directed multigraphs, sign cocycles, principal ℤ/2-covers, H¹(G, ℤ/2) and ℤ/4 cohomology, Betti numbers, condensation and decimation |
 | `NCG/PerronFrobenius` | 2 | The Perron–Frobenius theorem for irreducible nonnegative matrices (existence, uniqueness, simplicity, Gelfand–Fekete spectral radius), stated against Mathlib's `Matrix.IsIrreducible` |
 | `NCG/NoncommutativeGeometry` | 1 | Spectral triples `(𝒜, ℋ, D)` |
-| **`FieldTheory/`** | **686** | *Continuum analysis, general relativity and gauge theory* |
+
+## What is in `MathPhys/FieldTheory`
+
+Continuum analysis and classical field theory: Sobolev spaces and compactness, Uhlenbeck's Coulomb gauge theorem, symmetric-hyperbolic energy estimates and Kato's local existence, the continuum Einstein–Standard-Model equations with constraint propagation, general relativity (curvature, ADM, Gowdy, Palatini–Holst), lattice and continuum gauge theory, Lorentzian geometry, the Standard-Model gauge group.
+
+| Folder | Files | Contents |
+|---|---:|---|
 | `FieldTheory/Continuum` | 281 | Continuum Einstein–Standard-Model field theory: field spaces and the variational framework, Noether identities, symmetric-hyperbolic L² and H^k energy estimates, Kato local existence by spectral Galerkin with midpoint schemes, the first-order actual-jet system with sector-wise constraint propagation (Dirac back-reaction included), the Lichnerowicz conformal method, Cauchy–Kovalevskaya, generated finite dynamics and their readouts, weak matter equations, torus Sobolev transfer and Aubin–Lions, critical quotient compactness with defect measures |
 | `FieldTheory/Analysis` | 227 | Sobolev spaces on open sets, boxes, balls and tori with the critical embedding H¹ ↪ L⁴, Rellich and Kolmogorov–Riesz compactness, Vitali and de la Vallée-Poussin, mollifiers, L^p duality and weak-* compactness of measures, Gevrey and strip-holomorphic Fourier decay, the analytic implicit function theorem, Lyapunov–Perron, Hermite interpolation; Uhlenbeck's small-energy Coulomb gauge theorem on the 4-ball (divergence theorem and Gaffney inequality on balls, Neumann regularity up to the boundary, Sobolev algebras, implicit-function openness, closedness, continuity method) and the cube/torus reflection theory |
 | `FieldTheory/Gravity` | 82 | Coordinate curvature, Christoffel and Bianchi jets, ADM decomposition, the harmonic-gauge Einstein writer on periodic grids with its continuum limit, Gowdy and de Sitter/flat vacuum solutions, Palatini–Holst variations, the actual-jet Einstein–SM system, contracted Bianchi identity and subsidiary constraint energies |
 | `FieldTheory/GaugeTheory` | 42 | Lattice Coulomb gauge, Wilson transport and holonomy gauge covariance, literal-link compactness, determinant flux and Hodge normalization, the Standard-Model gauge structure used by Uhlenbeck's theorem |
 | `FieldTheory/LorentzianGeometry` | 37 | Lorentz-group and bivector classification, Clifford rounding and signature facts, discrete Cartan calculus, covariant consistency |
 | `FieldTheory/GaugeGroups` | 17 | The gauge group S(U(3)×U(2)) and its ℤ₆ quotient, anomaly-forced hypercharges, Yukawa descent blocks, the Minkowski coframe metric and the Einstein–Standard-Model coefficient bank |
-| **`Lattice/`** | **96** | *Discrete analysis on grids and lattices* |
+
+## What is in `MathPhys/Lattice`
+
+Discrete analysis on periodic grids and lattices: grid Sobolev, Poincaré and Loomis–Whitney inequalities, grid Hodge theory, plaquette expansions, the A3 (FCC) lattice, finite-difference schemes, discrete variational calculus.
+
+| Folder | Files | Contents |
+|---|---:|---|
 | `Lattice/DiscreteAnalysis` | 76 | Lattice Fourier symbols, uniform periodic-grid Sobolev, Poincaré and Loomis–Whitney inequalities, grid Hodge theory, plaquette expansions and finite-difference remainders, analysis on the A3 (FCC) lattice, the harmonic-writer scheme |
 | `Lattice/Variational` | 20 | Discrete Euler consistency, finite variation complexes and Hodge projections, the analytic Legendre transform, Gibbs action gaps, Sobolev reader criteria |
-| **`Stochastics/`** | **119** | *Probability, statistical mechanics, quantum information and systems theory* |
+
+## What is in `MathPhys/Stochastics`
+
+Probability, statistical mechanics, quantum information and systems theory: Ising and Curie–Weiss, Markov chains, renewal sums, quantum relative entropy and channels, Kalman and Hankel realizations.
+
+| Folder | Files | Contents |
+|---|---:|---|
 | `Stochastics/QuantumInformation` | 38 | Quantum relative entropy with Lieb, Petz and BKM, Lindblad generators, unital completely positive maps and channel monoids, purification, resets, quantum combs, Born weights |
 | `Stochastics/SystemsTheory` | 33 | Descriptor/Weierstrass pencils, Hankel, Kalman and Pontryagin realizations, Moore–Penrose Schur shorts, comb tomography and dilation |
 | `Stochastics/StatMech` | 27 | Curie–Weiss, Ising with Peierls and Dobrushin, Cramér–Chernoff, Birkhoff, BKM forms, Kullback–Leibler chain rules |
 | `Stochastics/Probability` | 11 | Renewal and geometric random sums, calibration, face linearization, incidence zeta functions |
 | `Stochastics/MarkovChains` | 10 | Metzler generators, Doob transforms, absorbing classes, affinity cohomology, entropy production |
-| **`Core/`** | **101** | *Shared algebra, combinatorics and topology* |
+
+## What is in `MathPhys/Core`
+
+Shared algebra, combinatorics and topology: matrix exponential calculus, Pfaffians, completely positive maps, Clifford and Jordan algebra, graph cut–cycle decompositions, Brouwer and Sperner, inverse limits.
+
+| Folder | Files | Contents |
+|---|---:|---|
 | `Core/Algebra` | 69 | Matrix exponential and logarithm calculus, Pfaffians, free star algebras, completely positive maps and the Kraus/Stinespring layer, Jordan and Clifford algebra, certified weak pencils, canonical reductions |
 | `Core/Combinatorics` | 23 | Graph cut–cycle decompositions and exterior ranks, tight frames, K₄ representation theory, finite Boolean circuits |
 | `Core/Topology` | 9 | Brouwer and Sperner fixed points, finite inverse systems and their limits |

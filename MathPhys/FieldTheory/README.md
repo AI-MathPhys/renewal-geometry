@@ -1,0 +1,14 @@
+# `MathPhys/FieldTheory`
+
+Continuum analysis and classical field theory: Sobolev spaces and compactness, Uhlenbeck's Coulomb gauge theorem, symmetric-hyperbolic energy estimates and Kato's local existence, the continuum Einstein–Standard-Model equations with constraint propagation, general relativity (curvature, ADM, Gowdy, Palatini–Holst), lattice and continuum gauge theory, Lorentzian geometry, the Standard-Model gauge group.
+
+Part of the `MathPhys` library (generic mathematical physics, depends on Mathlib only); see the [top-level README](../../README.md).
+
+| Folder | Files | Contents |
+|---|---:|---|
+| `FieldTheory/Continuum` | 281 | Continuum Einstein–Standard-Model field theory: field spaces and the variational framework, Noether identities, symmetric-hyperbolic L² and H^k energy estimates, Kato local existence by spectral Galerkin with midpoint schemes, the first-order actual-jet system with sector-wise constraint propagation (Dirac back-reaction included), the Lichnerowicz conformal method, Cauchy–Kovalevskaya, generated finite dynamics and their readouts, weak matter equations, torus Sobolev transfer and Aubin–Lions, critical quotient compactness with defect measures |
+| `FieldTheory/Analysis` | 227 | Sobolev spaces on open sets, boxes, balls and tori with the critical embedding H¹ ↪ L⁴, Rellich and Kolmogorov–Riesz compactness, Vitali and de la Vallée-Poussin, mollifiers, L^p duality and weak-* compactness of measures, Gevrey and strip-holomorphic Fourier decay, the analytic implicit function theorem, Lyapunov–Perron, Hermite interpolation; Uhlenbeck's small-energy Coulomb gauge theorem on the 4-ball (divergence theorem and Gaffney inequality on balls, Neumann regularity up to the boundary, Sobolev algebras, implicit-function openness, closedness, continuity method) and the cube/torus reflection theory |
+| `FieldTheory/Gravity` | 82 | Coordinate curvature, Christoffel and Bianchi jets, ADM decomposition, the harmonic-gauge Einstein writer on periodic grids with its continuum limit, Gowdy and de Sitter/flat vacuum solutions, Palatini–Holst variations, the actual-jet Einstein–SM system, contracted Bianchi identity and subsidiary constraint energies |
+| `FieldTheory/GaugeTheory` | 42 | Lattice Coulomb gauge, Wilson transport and holonomy gauge covariance, literal-link compactness, determinant flux and Hodge normalization, the Standard-Model gauge structure used by Uhlenbeck's theorem |
+| `FieldTheory/LorentzianGeometry` | 37 | Lorentz-group and bivector classification, Clifford rounding and signature facts, discrete Cartan calculus, covariant consistency |
+| `FieldTheory/GaugeGroups` | 17 | The gauge group S(U(3)×U(2)) and its ℤ₆ quotient, anomaly-forced hypercharges, Yukawa descent blocks, the Minkowski coframe metric and the Einstein–Standard-Model coefficient bank |
