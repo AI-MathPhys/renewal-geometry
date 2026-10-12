@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Gravity.CoordinateCurvatureJetLipschitz
+import MathPhys.FieldTheory.Gravity.CoordinateCurvatureJetLipschitz
 import RenewalGeometry.Gravity.RenewalFriedmannExact
 open MathPhys
 

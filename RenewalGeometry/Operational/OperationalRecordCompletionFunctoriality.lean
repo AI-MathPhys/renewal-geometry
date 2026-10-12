@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.RecordCompletionOp
 import RenewalGeometry.Predictive.GeneratedMinimalRecord
-import MathPhys.SystemsTheory.CombTomography
+import MathPhys.Stochastics.SystemsTheory.CombTomography
 open MathPhys
 /-!
 # Functoriality of operational record completion

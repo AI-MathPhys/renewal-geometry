@@ -3,7 +3,7 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.LorentzianGeometry.VolumeElement
+import MathPhys.FieldTheory.LorentzianGeometry.VolumeElement
 open MathPhys
 /-!
 # Oriented interference closure and the `d = 3` selection

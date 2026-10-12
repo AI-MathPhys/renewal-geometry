@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeTrigReconstructedFields
-import MathPhys.GaugeTheory.NativeWilsonCompactness
-import MathPhys.Analysis.FirstVariationCalculus
+import MathPhys.FieldTheory.GaugeTheory.NativeWilsonCompactness
+import MathPhys.FieldTheory.Analysis.FirstVariationCalculus
 open MathPhys
 
 /-!

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Analysis.MatrixSpectralDecay
+import MathPhys.FieldTheory.Analysis.MatrixSpectralDecay
 open MathPhys
 
 /-!

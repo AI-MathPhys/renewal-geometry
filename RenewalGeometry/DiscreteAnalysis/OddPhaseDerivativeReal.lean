@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Gravity.InitialConstraintLinearRange
+import MathPhys.FieldTheory.Gravity.InitialConstraintLinearRange
 import RenewalGeometry.Action.ExactThreeSiteGrid
 open MathPhys
 

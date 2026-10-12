@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.EndpointAllocationCompilerExact
-import MathPhys.GaugeGroups.LinearAnomalyRigidityExact
-import MathPhys.OperatorAlgebras.EquivariantMultiplicityFactorization
+import MathPhys.FieldTheory.GaugeGroups.LinearAnomalyRigidityExact
+import MathPhys.NCG.OperatorAlgebras.EquivariantMultiplicityFactorization
 open MathPhys
 
 /-!

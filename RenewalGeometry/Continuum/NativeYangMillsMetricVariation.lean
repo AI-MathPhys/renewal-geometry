@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Continuum.NativeCoulombCompactness
-import MathPhys.Analysis.LpProductContinuity
+import MathPhys.FieldTheory.Continuum.NativeCoulombCompactness
+import MathPhys.FieldTheory.Analysis.LpProductContinuity
 import RenewalGeometry.StandardModel.FiniteEinsteinStandardModelInterface
 open MathPhys
 

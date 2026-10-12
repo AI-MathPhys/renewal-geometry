@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Algebra.OddChoiOccurrenceExact
+import MathPhys.Core.Algebra.OddChoiOccurrenceExact
 import RenewalGeometry.Operational.ActiveOddLiftInvarianceExact
-import MathPhys.QuantumInformation.SpectatorProduct
+import MathPhys.Stochastics.QuantumInformation.SpectatorProduct
 open MathPhys
 
 /-!

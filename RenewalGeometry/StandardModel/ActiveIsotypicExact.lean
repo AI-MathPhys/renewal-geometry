@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.GaugeGroups.ExternalIsotypicKroneckerExact
+import MathPhys.FieldTheory.GaugeGroups.ExternalIsotypicKroneckerExact
 import RenewalGeometry.StandardModel.ActiveResidualCensusExact
 import RenewalGeometry.Commutant.PrivateLineCommutantWedderburnExact
 open MathPhys

@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.CanonicalChiralProjectorsExact
-import MathPhys.GaugeGroups.FaithfulSMQuotientExact
+import MathPhys.FieldTheory.GaugeGroups.FaithfulSMQuotientExact
 open MathPhys
 
 /-!

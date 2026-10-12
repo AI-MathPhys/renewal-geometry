@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Analysis.FiniteMarkovPathSums
-import MathPhys.Analysis.PiecewiseAffineH1
+import MathPhys.FieldTheory.Analysis.FiniteMarkovPathSums
+import MathPhys.FieldTheory.Analysis.PiecewiseAffineH1
 import RenewalGeometry.Gravity.FiniteHomogeneousStationarityExact
 import RenewalGeometry.Gravity.VacuumRegulatorStationarity
 open MathPhys

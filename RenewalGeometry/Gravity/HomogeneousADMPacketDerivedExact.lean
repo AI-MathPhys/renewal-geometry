@@ -7,7 +7,7 @@ import Mathlib
 import RenewalGeometry.Gravity.RelationalSchedulerADM
 import RenewalGeometry.Gravity.RelationalDeSitterBranch
 import RenewalGeometry.Gravity.DeSitterCartanComponentsExact
-import MathPhys.DiscreteAnalysis.A3PeriodicScreensScalingExact
+import MathPhys.Lattice.DiscreteAnalysis.A3PeriodicScreensScalingExact
 open MathPhys
 
 /-!

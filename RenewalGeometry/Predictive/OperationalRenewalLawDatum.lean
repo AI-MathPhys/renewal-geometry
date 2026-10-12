@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Predictive.TypedEventGrammar
-import MathPhys.SystemsTheory.FiniteProcessCombTomography
+import MathPhys.Stochastics.SystemsTheory.FiniteProcessCombTomography
 open MathPhys
 
 /-!

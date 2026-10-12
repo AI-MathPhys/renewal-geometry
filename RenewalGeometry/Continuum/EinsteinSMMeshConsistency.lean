@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
 import RenewalGeometry.Continuum.EinsteinSMMeshStencils
-import MathPhys.Analysis.LipschitzRiemannSumError
+import MathPhys.FieldTheory.Analysis.LipschitzRiemannSumError
 open MathPhys
 
 /-!

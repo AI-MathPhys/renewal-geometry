@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.SupportPolarActionAlgebra
 import RenewalGeometry.Commutant.TypedMultiplicityAlgebra
-import MathPhys.OperatorAlgebras.Bicommutant
+import MathPhys.NCG.OperatorAlgebras.Bicommutant
 open MathPhys
 
 /-!

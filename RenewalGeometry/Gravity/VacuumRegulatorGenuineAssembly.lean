@@ -9,7 +9,7 @@ import RenewalGeometry.Gravity.DeSitterCauchySlices
 import RenewalGeometry.Gravity.HomogeneousADMSlabScreensUnconditional
 import RenewalGeometry.DiscreteAnalysis.A3FlatGeneratorLimitExact
 import RenewalGeometry.Gravity.DeSitterPalatiniFirstVariation
-import MathPhys.Gravity.CurvatureEnergyPropagationExact
+import MathPhys.FieldTheory.Gravity.CurvatureEnergyPropagationExact
 import RenewalGeometry.Gravity.ExplicitOperationalFamily
 open MathPhys
 

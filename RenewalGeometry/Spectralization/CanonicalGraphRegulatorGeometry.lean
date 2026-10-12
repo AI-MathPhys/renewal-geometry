@@ -5,10 +5,10 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.SMSTGraphRegulator
 import RenewalGeometry.Action.CorrectedDualMeasureCriterion
-import MathPhys.Algebra.GeometricMeanExact
-import MathPhys.QuantumInformation.RelEntropyInvarianceExact
-import MathPhys.StatMech.BkmScalingExact
-import MathPhys.Algebra.LoewnerSqrtExact
+import MathPhys.Core.Algebra.GeometricMeanExact
+import MathPhys.Stochastics.QuantumInformation.RelEntropyInvarianceExact
+import MathPhys.Stochastics.StatMech.BkmScalingExact
+import MathPhys.Core.Algebra.LoewnerSqrtExact
 import RenewalGeometry.Predictive.GTAtlasCompleteness
 import Mathlib.LinearAlgebra.ExteriorPower.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Map

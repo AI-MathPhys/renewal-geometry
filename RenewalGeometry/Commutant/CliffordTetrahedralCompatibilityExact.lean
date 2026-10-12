@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.OperatorAlgebras.ReciprocalWedderburnKronecker
+import MathPhys.NCG.OperatorAlgebras.ReciprocalWedderburnKronecker
 import RenewalGeometry.Commutant.JointTypedActionAlgebra
 import RenewalGeometry.StandardModel.InternalSeedSaturationExact
 open MathPhys

@@ -6,8 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.NativeEulerConsistency
 import RenewalGeometry.Continuum.NativeTailTransferBounds
-import MathPhys.DiscreteAnalysis.NodalSourceTransferExact
-import MathPhys.Analysis.PeriodicCubeSobolevInterpolation
+import MathPhys.Lattice.DiscreteAnalysis.NodalSourceTransferExact
+import MathPhys.FieldTheory.Analysis.PeriodicCubeSobolevInterpolation
 open MathPhys
 
 /-!

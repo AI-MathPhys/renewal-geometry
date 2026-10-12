@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Continuum.NativeSlabFourierBridge
+import MathPhys.FieldTheory.Continuum.NativeSlabFourierBridge
 import RenewalGeometry.Continuum.NativeEulerTail
-import MathPhys.DiscreteAnalysis.NodalSourceTransferExact
+import MathPhys.Lattice.DiscreteAnalysis.NodalSourceTransferExact
 import RenewalGeometry.Analysis.DyadicRateAsymptotics
 open MathPhys
 

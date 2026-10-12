@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.PredictiveRN
 import RenewalGeometry.Operational.MinimalNaturality
-import MathPhys.SystemsTheory.StoreFrequencyCount
+import MathPhys.Stochastics.SystemsTheory.StoreFrequencyCount
 import RenewalGeometry.Spectralization.AnalyticPolar
 import RenewalGeometry.Measurement.OddRead
 import RenewalGeometry.Lorentz.AnchorClifford

@@ -3,9 +3,9 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.OperatorLimits.CompatibleStableAtlasNormResolvent
-import MathPhys.SpectralGeometry.MeshGraphDistanceConvergenceExact
-import MathPhys.SpectralGeometry.StableCompactSpinApproximationExact
+import MathPhys.NCG.OperatorLimits.CompatibleStableAtlasNormResolvent
+import MathPhys.NCG.SpectralGeometry.MeshGraphDistanceConvergenceExact
+import MathPhys.NCG.SpectralGeometry.StableCompactSpinApproximationExact
 open MathPhys
 
 /-!

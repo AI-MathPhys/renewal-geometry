@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurelien Pelissier
 -/
 import RenewalGeometry.Certificates.ProvenancePythagoras
-import MathPhys.Variational.GramPinvRangeProjection
+import MathPhys.Lattice.Variational.GramPinvRangeProjection
 open MathPhys
 /-!
 # concrete same-history provenance Pythagoras

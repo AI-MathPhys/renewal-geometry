@@ -6,8 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Certificates.CofinalFailureWitness
 import RenewalGeometry.Gravity.RenewalEinsteinCertificationExact
-import MathPhys.Gravity.CurvatureEnergyPropagationExact
-import MathPhys.Gravity.DiscreteCurvatureCertificateExact
+import MathPhys.FieldTheory.Gravity.CurvatureEnergyPropagationExact
+import MathPhys.FieldTheory.Gravity.DiscreteCurvatureCertificateExact
 import RenewalGeometry.Renewal.EfficientCutConstantScreen
 import RenewalGeometry.Renewal.SpatialScreenCutMarginAlternative
 open MathPhys

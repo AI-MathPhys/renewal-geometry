@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Analysis.AnalyticSourceSobolevUpgrade
+import MathPhys.FieldTheory.Analysis.AnalyticSourceSobolevUpgrade
 import RenewalGeometry.Analysis.DyadicRateAsymptotics
-import MathPhys.Analysis.TrigonometricTailBounds
-import MathPhys.Continuum.TorusTrigReconstruction
+import MathPhys.FieldTheory.Analysis.TrigonometricTailBounds
+import MathPhys.FieldTheory.Continuum.TorusTrigReconstruction
 open MathPhys
 
 /-!

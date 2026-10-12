@@ -5,9 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.CurrentChainFunctorExact
-import MathPhys.SpectralGeometry.MarkedMonodromyDescentExact
+import MathPhys.NCG.SpectralGeometry.MarkedMonodromyDescentExact
 import RenewalGeometry.Spectralization.OperatorTailMeasureCompressionExact
-import MathPhys.SystemsTheory.NevanlinnaKernelCompression
+import MathPhys.Stochastics.SystemsTheory.NevanlinnaKernelCompression
 open MathPhys
 /-!
 # The functorial principal universality packet

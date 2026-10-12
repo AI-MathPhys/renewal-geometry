@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Predictive.MemoryCutoffSemigroupMeasureExact
-import MathPhys.SpectralGeometry.OperatorTailMeasureNaimarkUniquenessExact
+import MathPhys.NCG.SpectralGeometry.OperatorTailMeasureNaimarkUniquenessExact
 open MathPhys
 /-!
 # Head compression of positive tail measures and the source rank of the minimal dilation

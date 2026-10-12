@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.SMActiveStructural
-import MathPhys.Combinatorics.K4CutCycleIsotypicSchur
+import MathPhys.Core.Combinatorics.K4CutCycleIsotypicSchur
 open MathPhys
 
 /-!

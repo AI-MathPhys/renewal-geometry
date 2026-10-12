@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
 import RenewalGeometry.Continuum.EinsteinSMMeshPacket
-import MathPhys.Variational.CriticalShadowingExact
+import MathPhys.Lattice.Variational.CriticalShadowingExact
 open MathPhys
 
 /-!

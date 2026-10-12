@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Topology.FiniteInverseSystemPruning
-import MathPhys.Algebra.EquivariantOrbitDecomposition
-import MathPhys.SpectralGeometry.CompactGroupOrbitQuotient
+import MathPhys.Core.Topology.FiniteInverseSystemPruning
+import MathPhys.Core.Algebra.EquivariantOrbitDecomposition
+import MathPhys.NCG.SpectralGeometry.CompactGroupOrbitQuotient
 open MathPhys
 
 /-!

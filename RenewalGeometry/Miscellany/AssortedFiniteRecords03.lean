@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Miscellany.AssortedFiniteRecords02
-import MathPhys.StatMech.TraceExpDerivative
+import MathPhys.Stochastics.StatMech.TraceExpDerivative
 open MathPhys
 /-!
 # Easy exact records, batch 03 (Gran-Tensor manuscript)

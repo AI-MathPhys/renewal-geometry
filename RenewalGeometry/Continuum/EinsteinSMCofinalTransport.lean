@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMMainLimit
-import MathPhys.Continuum.EinsteinSMStrongPacketDistance
+import MathPhys.FieldTheory.Continuum.EinsteinSMStrongPacketDistance
 open MathPhys
 
 /-!

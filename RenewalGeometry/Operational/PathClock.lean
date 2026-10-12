@@ -3,8 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.OperatorTheory.Diagonal
-import MathPhys.Graph.Multigraph
+import MathPhys.NCG.OperatorTheory.Diagonal
+import MathPhys.NCG.Graph.Multigraph
 open MathPhys
 
 open MathPhys

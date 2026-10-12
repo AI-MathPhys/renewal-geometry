@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.DiscreteAnalysis.RootParityConnectorExact
-import MathPhys.DiscreteAnalysis.HarmonicWriterScheme
+import MathPhys.Lattice.DiscreteAnalysis.HarmonicWriterScheme
 open MathPhys
 
 /-!

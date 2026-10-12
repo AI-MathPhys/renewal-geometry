@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeScalingBlocksExact
-import MathPhys.DiscreteAnalysis.ShiftedPlaquetteLogarithmUniformExact
+import MathPhys.Lattice.DiscreteAnalysis.ShiftedPlaquetteLogarithmUniformExact
 open MathPhys
 
 /-!

@@ -6,8 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeFrameBridge
 import RenewalGeometry.Continuum.NativeModelExample
-import MathPhys.Continuum.NativeSlabFrameMargin
-import MathPhys.Gravity.ActualJetSmoothness
+import MathPhys.FieldTheory.Continuum.NativeSlabFrameMargin
+import MathPhys.FieldTheory.Gravity.ActualJetSmoothness
 open MathPhys
 
 /-!

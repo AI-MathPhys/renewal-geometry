@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.OperatorAlgebras.IncidencePolymatroidExact
+import MathPhys.NCG.OperatorAlgebras.IncidencePolymatroidExact
 open MathPhys
 
 /-!

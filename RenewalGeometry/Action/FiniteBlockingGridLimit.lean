@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Analysis.FiniteLaplaceSandwich
+import MathPhys.FieldTheory.Analysis.FiniteLaplaceSandwich
 import RenewalGeometry.Action.ConservativeBlockingHyperbolicCost
 import RenewalGeometry.Action.FiniteTwistRetention
 open MathPhys

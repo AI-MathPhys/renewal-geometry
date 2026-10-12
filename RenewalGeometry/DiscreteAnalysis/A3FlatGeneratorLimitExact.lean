@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Continuum.TorusPiecewiseConstantEmbedding
-import MathPhys.OperatorLimits.DenseSourceStrongConvergence
+import MathPhys.FieldTheory.Continuum.TorusPiecewiseConstantEmbedding
+import MathPhys.NCG.OperatorLimits.DenseSourceStrongConvergence
 import RenewalGeometry.Gravity.HomogeneousADMPacketDerivedExact
-import MathPhys.DiscreteAnalysis.A3PeriodicGraphSamplingExact
+import MathPhys.Lattice.DiscreteAnalysis.A3PeriodicGraphSamplingExact
 open MathPhys
 
 /-!

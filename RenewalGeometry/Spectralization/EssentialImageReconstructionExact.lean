@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.ReconstructionCategories
-import MathPhys.SpectralGeometry.SpectralCompressionsSequential
-import MathPhys.OperatorTheory.ToeplitzSpectralTripleExact
+import MathPhys.NCG.SpectralGeometry.SpectralCompressionsSequential
+import MathPhys.NCG.OperatorTheory.ToeplitzSpectralTripleExact
 
 open MathPhys
 /-!

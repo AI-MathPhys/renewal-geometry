@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactInitialCalculusConstraint
-import MathPhys.Analysis.LyapunovSchmidtRangeReduction
+import MathPhys.FieldTheory.Analysis.LyapunovSchmidtRangeReduction
 open MathPhys
 
 /-!

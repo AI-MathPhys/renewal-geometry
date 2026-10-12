@@ -6,8 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactInitialPreparedSeed
 import RenewalGeometry.Action.ExactInitialBalanceMeanJet
-import MathPhys.Analysis.RangeReductionUniformBounds
-import MathPhys.Analysis.HessianRayIdentification
+import MathPhys.FieldTheory.Analysis.RangeReductionUniformBounds
+import MathPhys.FieldTheory.Analysis.HessianRayIdentification
 open MathPhys
 
 /-!

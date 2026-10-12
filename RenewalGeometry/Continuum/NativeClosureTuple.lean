@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Continuum.CoupledBootstrapSlabModel
+import MathPhys.FieldTheory.Continuum.CoupledBootstrapSlabModel
 import RenewalGeometry.Continuum.AposterioriPhysicalShadow
 import RenewalGeometry.Analysis.DyadicRateAsymptotics
 open MathPhys

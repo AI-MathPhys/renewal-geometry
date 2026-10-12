@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Predictive.DerivedPredictiveCarrierUniversalExact
-import MathPhys.OperatorAlgebras.IntrinsicRegularTrace
+import MathPhys.NCG.OperatorAlgebras.IntrinsicRegularTrace
 import RenewalGeometry.Operational.MinimalNaturality
 open MathPhys
 

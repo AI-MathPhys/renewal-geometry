@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Analysis.HessianLoewnerGradientBounds
+import MathPhys.FieldTheory.Analysis.HessianLoewnerGradientBounds
 import RenewalGeometry.Action.NonstationaryActionGapExact
 open MathPhys
 

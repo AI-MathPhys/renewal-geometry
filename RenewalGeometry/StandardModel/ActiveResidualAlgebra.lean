@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.OperatorAlgebras.Bicommutant
-import MathPhys.OperatorAlgebras.FiniteStarSubalgebraMutualCommutant
-import MathPhys.OperatorAlgebras.StarMatrixUnits
+import MathPhys.NCG.OperatorAlgebras.Bicommutant
+import MathPhys.NCG.OperatorAlgebras.FiniteStarSubalgebraMutualCommutant
+import MathPhys.NCG.OperatorAlgebras.StarMatrixUnits
 open MathPhys
 /-!
 # Two-control reconstruction of the internal matrix factors

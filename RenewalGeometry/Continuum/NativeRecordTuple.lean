@@ -7,7 +7,7 @@ import Mathlib
 import RenewalGeometry.Continuum.NativeSlabData
 import RenewalGeometry.Continuum.NativeFieldScaling
 import RenewalGeometry.Continuum.NativePhysRows
-import MathPhys.Continuum.CoupledBootstrapSlabModel
+import MathPhys.FieldTheory.Continuum.CoupledBootstrapSlabModel
 import RenewalGeometry.Continuum.AposterioriPhysicalShadow
 open MathPhys
 

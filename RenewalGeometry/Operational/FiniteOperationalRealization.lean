@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.QuantumInformation.RankOneForcing
-import MathPhys.QuantumInformation.CompressionDefectDilation
+import MathPhys.Stochastics.QuantumInformation.RankOneForcing
+import MathPhys.Stochastics.QuantumInformation.CompressionDefectDilation
 import RenewalGeometry.Predictive.ContextualFutureNullIdeal
 import RenewalGeometry.Predictive.FiniteGrandTensorExact
-import MathPhys.OperatorAlgebras.ReciprocalWedderburnKronecker
+import MathPhys.NCG.OperatorAlgebras.ReciprocalWedderburnKronecker
 import RenewalGeometry.Spectralization.MarkedCommutantCoordinates
 open MathPhys
 /-!

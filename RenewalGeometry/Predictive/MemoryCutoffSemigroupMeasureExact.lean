@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.SystemsTheory.OperatorTailMeasureSesquilinear
+import MathPhys.Stochastics.SystemsTheory.OperatorTailMeasureSesquilinear
 import RenewalGeometry.Predictive.MemoryCutoffSemigroupExact
 open MathPhys
 /-!

@@ -3,10 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.OperatorAlgebras.EmbeddedJointCommutatorCommutant
-import MathPhys.OperatorAlgebras.JointCommutatorProtectedKernelRigidityFromDenseSourcesAndGraphScreens
-import MathPhys.OperatorLimits.ProtectedSpectralProjectionRigidity
-import MathPhys.OperatorLimits.CircleRieszProjectionOrthogonality
+import MathPhys.NCG.OperatorAlgebras.EmbeddedJointCommutatorCommutant
+import MathPhys.NCG.OperatorAlgebras.JointCommutatorProtectedKernelRigidityFromDenseSourcesAndGraphScreens
+import MathPhys.NCG.OperatorLimits.ProtectedSpectralProjectionRigidity
+import MathPhys.NCG.OperatorLimits.CircleRieszProjectionOrthogonality
 open MathPhys
 /-!
 # Exact protected commutants in the continuum Howe limit

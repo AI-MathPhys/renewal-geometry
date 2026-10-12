@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.HomogeneousADMPacketDerivedExact
-import MathPhys.DiscreteAnalysis.TorusCoordinateIsoperimetryExact
+import MathPhys.Lattice.DiscreteAnalysis.TorusCoordinateIsoperimetryExact
 open MathPhys
 
 /-!

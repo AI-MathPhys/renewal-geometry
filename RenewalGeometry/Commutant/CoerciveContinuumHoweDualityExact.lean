@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.ContinuumHoweProtectedCommutantExact
-import MathPhys.OperatorAlgebras.JointCommutatorFirstPositiveEigenvalueConvergenceFromDenseSourcesAndGraphScreens
-import MathPhys.OperatorLimits.ConvergentSpectralGapCoercivity
+import MathPhys.NCG.OperatorAlgebras.JointCommutatorFirstPositiveEigenvalueConvergenceFromDenseSourcesAndGraphScreens
+import MathPhys.NCG.OperatorLimits.ConvergentSpectralGapCoercivity
 import RenewalGeometry.Commutant.SMSTContinuumHoweExact
 open MathPhys
 /-!

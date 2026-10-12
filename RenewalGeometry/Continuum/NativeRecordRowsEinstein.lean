@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeRecordRowsGauge
-import MathPhys.Continuum.RicciJetSymmetry
+import MathPhys.FieldTheory.Continuum.RicciJetSymmetry
 open MathPhys
 
 /-!

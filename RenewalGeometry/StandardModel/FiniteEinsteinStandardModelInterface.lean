@@ -3,8 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.GaugeGroups.SMGaugeQuotientExact
-import MathPhys.GaugeGroups.CoframeMetricBank
+import MathPhys.FieldTheory.GaugeGroups.SMGaugeQuotientExact
+import MathPhys.FieldTheory.GaugeGroups.CoframeMetricBank
 open MathPhys
 
 /-!

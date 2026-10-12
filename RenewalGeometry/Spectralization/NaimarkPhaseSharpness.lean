@@ -6,12 +6,12 @@ Authors: Aurélien Pélissier
 import RenewalGeometry.Dimension.ContrastSpectrum
 import RenewalGeometry.Renewal.BoundaryDecoupling
 import RenewalGeometry.Predictive.FiniteCoreLedger
-import MathPhys.OperatorAlgebras.FrobeniusHolonomy
+import MathPhys.NCG.OperatorAlgebras.FrobeniusHolonomy
 import RenewalGeometry.Spectralization.GrandReconstruction
 import RenewalGeometry.Predictive.GrandCountermodels
-import MathPhys.OperatorAlgebras.RepresentationDimensions
+import MathPhys.NCG.OperatorAlgebras.RepresentationDimensions
 import RenewalGeometry.Complexity.PvsNPBridge
-import MathPhys.SpectralGeometry.HilbertSchmidtFrobenius
+import MathPhys.NCG.SpectralGeometry.HilbertSchmidtFrobenius
 open MathPhys
 /-!
 # Naimark, spectrum, and resolved-phase sharpness

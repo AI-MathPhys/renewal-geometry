@@ -7,7 +7,7 @@ import Mathlib
 import RenewalGeometry.Commutant.RepresentedJointPacket
 import RenewalGeometry.Commutant.MultiplicityQuiverArrows
 import RenewalGeometry.Commutant.GraphSupportPolarDuality
-import MathPhys.OperatorAlgebras.SliceLinearMap
+import MathPhys.NCG.OperatorAlgebras.SliceLinearMap
 open MathPhys
 
 /-!

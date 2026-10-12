@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMReducedClosure
-import MathPhys.Analysis.SobolevBoxCrEmbedding
+import MathPhys.FieldTheory.Analysis.SobolevBoxCrEmbedding
 open MathPhys
 
 /-!

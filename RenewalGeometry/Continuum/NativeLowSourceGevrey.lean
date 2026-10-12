@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeDensityAnalytic
-import MathPhys.Analysis.AnalyticCompositionGevrey
+import MathPhys.FieldTheory.Analysis.AnalyticCompositionGevrey
 open MathPhys
 
 /-!

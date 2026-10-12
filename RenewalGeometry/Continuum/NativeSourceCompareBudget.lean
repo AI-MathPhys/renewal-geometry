@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Analysis.DyadicRateAsymptotics
-import MathPhys.Analysis.PeriodicTrigInterpolation
+import MathPhys.FieldTheory.Analysis.PeriodicTrigInterpolation
 open MathPhys
 
 /-!

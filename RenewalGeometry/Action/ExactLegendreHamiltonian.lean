@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Analysis.AnalyticImplicitFunction
-import MathPhys.Variational.AnalyticLegendreTransform
+import MathPhys.FieldTheory.Analysis.AnalyticImplicitFunction
+import MathPhys.Lattice.Variational.AnalyticLegendreTransform
 import RenewalGeometry.Action.ExactPhaseCompatibleAnalytic
-import MathPhys.Gravity.InitialConstraintLinearRange
+import MathPhys.FieldTheory.Gravity.InitialConstraintLinearRange
 open MathPhys
 
 /-!

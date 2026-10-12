@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.CompactFiniteStageCompletion
-import MathPhys.OperatorLimits.PseudoResolventSelfAdjoint
-import MathPhys.OperatorLimits.NormalWeightSupremum
+import MathPhys.NCG.OperatorLimits.PseudoResolventSelfAdjoint
+import MathPhys.NCG.OperatorLimits.NormalWeightSupremum
 open MathPhys
 
 /-!

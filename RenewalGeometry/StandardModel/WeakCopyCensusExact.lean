@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurelien Pelissier
 -/
 import Mathlib
-import MathPhys.Analysis.CompactGroupHaarTwirl
+import MathPhys.FieldTheory.Analysis.CompactGroupHaarTwirl
 import RenewalGeometry.StandardModel.ReciprocalReturnMassExact
 open MathPhys
 

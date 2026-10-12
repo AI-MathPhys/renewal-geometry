@@ -3,8 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.Algebra.SeriesLogUnitConjugation
-import MathPhys.GaugeTheory.LatticeHolonomyGaugeCovariance
+import MathPhys.Core.Algebra.SeriesLogUnitConjugation
+import MathPhys.FieldTheory.GaugeTheory.LatticeHolonomyGaugeCovariance
 import RenewalGeometry.StandardModel.ExplicitRegulatedStandardModelActionExact
 import RenewalGeometry.Gravity.FiniteActionBRSTGhostExact
 open MathPhys

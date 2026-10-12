@@ -3,8 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.Algebra.PauliJordan
-import MathPhys.Algebra.CircleSelection
+import MathPhys.Core.Algebra.PauliJordan
+import MathPhys.Core.Algebra.CircleSelection
 import RenewalGeometry.Operational.SharpPurification
 open MathPhys
 

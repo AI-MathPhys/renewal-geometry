@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.StandardModel.SMCentralDescentSelector
-import MathPhys.GaugeGroups.SMGaugeQuotientExact
+import MathPhys.FieldTheory.GaugeGroups.SMGaugeQuotientExact
 open MathPhys
 /-!
 # Central-character descent through a cyclic quotient

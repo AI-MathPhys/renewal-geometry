@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeSlabSymmetric
-import MathPhys.Continuum.CoupledBootstrapFlatVacuum
+import MathPhys.FieldTheory.Continuum.CoupledBootstrapFlatVacuum
 open MathPhys
 
 /-!

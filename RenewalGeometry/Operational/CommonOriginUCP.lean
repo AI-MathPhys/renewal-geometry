@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.CommonOriginBalance
-import MathPhys.QuantumInformation.PrimitiveWeight
-import MathPhys.Algebra.ChoiCriterion
+import MathPhys.Stochastics.QuantumInformation.PrimitiveWeight
+import MathPhys.Core.Algebra.ChoiCriterion
 open MathPhys
 /-!
 # The common-origin resolved instrument: UCP law, marginal, deck

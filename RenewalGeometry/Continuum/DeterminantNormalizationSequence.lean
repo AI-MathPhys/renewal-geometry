@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Continuum.DeterminantHodgeStrongConvergence
-import MathPhys.Continuum.NativeCriticalGridCompactness
-import MathPhys.GaugeTheory.DeterminantScreenFluxClosure
+import MathPhys.FieldTheory.Continuum.DeterminantHodgeStrongConvergence
+import MathPhys.FieldTheory.Continuum.NativeCriticalGridCompactness
+import MathPhys.FieldTheory.GaugeTheory.DeterminantScreenFluxClosure
 open MathPhys
 
 /-!

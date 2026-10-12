@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Lorentz.DiscreteCartan
-import MathPhys.LorentzianGeometry.StationaryExchange
+import MathPhys.FieldTheory.LorentzianGeometry.StationaryExchange
 open MathPhys
 /-!
 # The channel-composition torsion theorem, revised hypotheses

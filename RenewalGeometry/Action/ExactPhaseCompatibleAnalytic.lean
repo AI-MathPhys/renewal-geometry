@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactPhaseCompatibleConnection
-import MathPhys.Analysis.LinkRemainderAnalytic
+import MathPhys.FieldTheory.Analysis.LinkRemainderAnalytic
 open MathPhys
 
 /-!

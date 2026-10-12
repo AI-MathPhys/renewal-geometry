@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.CanonicalGraphSpectralizationExact
-import MathPhys.SpectralGeometry.UniversalOneFormDiracKernelGrowthExact
-import MathPhys.SpectralGeometry.PeriodicTorusCubicalHarmonicExact
+import MathPhys.NCG.SpectralGeometry.UniversalOneFormDiracKernelGrowthExact
+import MathPhys.NCG.SpectralGeometry.PeriodicTorusCubicalHarmonicExact
 import RenewalGeometry.DiscreteAnalysis.CoframeDirichletFormLimitExact
-import MathPhys.DiscreteAnalysis.VariableWilsonGardingExact
-import MathPhys.DiscreteAnalysis.CovariantWilsonCoreConsistencyExact
+import MathPhys.Lattice.DiscreteAnalysis.VariableWilsonGardingExact
+import MathPhys.Lattice.DiscreteAnalysis.CovariantWilsonCoreConsistencyExact
 import RenewalGeometry.Spectralization.CompactSpinMainAssemblyExact
 open MathPhys
 

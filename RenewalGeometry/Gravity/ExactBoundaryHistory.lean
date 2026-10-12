@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Analysis.ForwardBackwardIdempotentDichotomy
+import MathPhys.FieldTheory.Analysis.ForwardBackwardIdempotentDichotomy
 import RenewalGeometry.Gravity.ExactBoundaryBalancedField
 open MathPhys
 

@@ -5,10 +5,10 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
-import MathPhys.Continuum.EinsteinSMVariationContinuity
-import MathPhys.Analysis.CardinalQuasiInterpolant
-import MathPhys.Analysis.TransportStencilVariation
-import MathPhys.Analysis.C11BoundsCalculus
+import MathPhys.FieldTheory.Continuum.EinsteinSMVariationContinuity
+import MathPhys.FieldTheory.Analysis.CardinalQuasiInterpolant
+import MathPhys.FieldTheory.Analysis.TransportStencilVariation
+import MathPhys.FieldTheory.Analysis.C11BoundsCalculus
 open MathPhys
 
 /-!

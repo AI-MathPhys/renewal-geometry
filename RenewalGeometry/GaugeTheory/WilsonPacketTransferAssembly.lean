@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.GaugeTheory.WilsonPacketConsistency
-import MathPhys.GaugeTheory.WilsonModulusTransfer
+import MathPhys.FieldTheory.GaugeTheory.WilsonModulusTransfer
 open MathPhys
 
 /-!

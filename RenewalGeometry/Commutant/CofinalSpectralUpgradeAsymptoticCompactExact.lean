@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.CofinalSpectralUpgradeUnboundedExact
-import MathPhys.OperatorLimits.CofinalAsymptoticCompactness
+import MathPhys.NCG.OperatorLimits.CofinalAsymptoticCompactness
 open MathPhys
 
 /-!

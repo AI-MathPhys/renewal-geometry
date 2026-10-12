@@ -3,8 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.Continuum.OUProcess
-import MathPhys.Probability.ChaosLocalization
+import MathPhys.FieldTheory.Continuum.OUProcess
+import MathPhys.Stochastics.Probability.ChaosLocalization
 import RenewalGeometry.OperatorLimits.GrandUniversal
 open MathPhys
 

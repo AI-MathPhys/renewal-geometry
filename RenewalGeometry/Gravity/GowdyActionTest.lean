@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.GowdyActionTestJetBounds
-import MathPhys.Gravity.GowdyHigherOrderStateError
+import MathPhys.FieldTheory.Gravity.GowdyHigherOrderStateError
 open MathPhys
 
 /-!

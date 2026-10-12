@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.OperatorAlgebras.IntrinsicRegularTrace
-import MathPhys.SystemsTheory.ExactSourceSchurResidual
+import MathPhys.NCG.OperatorAlgebras.IntrinsicRegularTrace
+import MathPhys.Stochastics.SystemsTheory.ExactSourceSchurResidual
 open MathPhys
 
 /-!

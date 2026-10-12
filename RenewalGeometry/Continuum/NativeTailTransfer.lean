@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeTailStructure
-import MathPhys.Analysis.PeriodicTrigInterpolation
-import MathPhys.Continuum.SpatialSobolevSlabNorm
+import MathPhys.FieldTheory.Analysis.PeriodicTrigInterpolation
+import MathPhys.FieldTheory.Continuum.SpatialSobolevSlabNorm
 open MathPhys
 
 /-!

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.ModularClock
-import MathPhys.QuantumInformation.KMSDual
+import MathPhys.Stochastics.QuantumInformation.KMSDual
 open MathPhys
 
 open MathPhys

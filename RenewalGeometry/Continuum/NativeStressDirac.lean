@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.EquivariantNativeBudgets
 import RenewalGeometry.Continuum.NativeStressCalculus
-import MathPhys.Continuum.ContEulerAlgebra
+import MathPhys.FieldTheory.Continuum.ContEulerAlgebra
 open MathPhys
 
 /-!

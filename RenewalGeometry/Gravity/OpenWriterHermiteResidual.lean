@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterLocalJets
-import MathPhys.Analysis.TaylorHermiteResidual
-import MathPhys.Analysis.TaylorHermitePrecision
+import MathPhys.FieldTheory.Analysis.TaylorHermiteResidual
+import MathPhys.FieldTheory.Analysis.TaylorHermitePrecision
 open MathPhys
 
 /-!

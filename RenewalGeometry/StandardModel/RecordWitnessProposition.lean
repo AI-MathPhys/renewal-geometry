@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.RecordWitnessInstrument
-import MathPhys.Algebra.CliffordGenerates
+import MathPhys.Core.Algebra.CliffordGenerates
 open MathPhys
 
 /-!

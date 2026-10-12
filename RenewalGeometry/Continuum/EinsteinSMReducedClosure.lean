@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMReducedExtraction
-import MathPhys.Continuum.EinsteinSMDiagonalSubsequence
+import MathPhys.FieldTheory.Continuum.EinsteinSMDiagonalSubsequence
 open MathPhys
 
 /-!

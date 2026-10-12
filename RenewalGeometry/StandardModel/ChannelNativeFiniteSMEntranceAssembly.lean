@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.SMSTChannelNativeEntranceExact
 import RenewalGeometry.Spectralization.SaturatedFiniteDiracGenerator
-import MathPhys.OperatorAlgebras.RelativeHoweGramSpectralCertificateExact
+import MathPhys.NCG.OperatorAlgebras.RelativeHoweGramSpectralCertificateExact
 import RenewalGeometry.StandardModel.TypedTransitionGeneratorAudit
 import RenewalGeometry.Commutant.SMSTCommutant
 open MathPhys

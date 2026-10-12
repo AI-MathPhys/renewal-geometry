@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
-import MathPhys.Continuum.SymmetricHyperbolicStability
+import MathPhys.FieldTheory.Continuum.SymmetricHyperbolicStability
 import RenewalGeometry.Continuum.EinsteinSMMainLimit
 open MathPhys
 

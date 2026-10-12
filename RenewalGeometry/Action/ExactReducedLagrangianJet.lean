@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactFlatLinearization
-import MathPhys.Variational.ExactLegendreSecondOrder
+import MathPhys.Lattice.Variational.ExactLegendreSecondOrder
 import RenewalGeometry.Action.ExactStationaryConnectionAnalytic
 open MathPhys
 

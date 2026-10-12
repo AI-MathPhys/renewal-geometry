@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Combinatorics.CutCycleExteriorFinrank
+import MathPhys.Core.Combinatorics.CutCycleExteriorFinrank
 import RenewalGeometry.Dimension.DimensionK4Selector
 import RenewalGeometry.Dimension.DimensionPairwise
 open MathPhys

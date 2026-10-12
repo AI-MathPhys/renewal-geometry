@@ -5,10 +5,10 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.PhysicalLiftVariationLimit
-import MathPhys.Gravity.MollifiedFirstBianchi
+import MathPhys.FieldTheory.Gravity.MollifiedFirstBianchi
 import RenewalGeometry.Gravity.VariationTransferExact
-import MathPhys.Gravity.PalatiniTorsionCoefficientModelExact
-import MathPhys.LorentzianGeometry.GravitationalClassDensity
+import MathPhys.FieldTheory.Gravity.PalatiniTorsionCoefficientModelExact
+import MathPhys.FieldTheory.LorentzianGeometry.GravitationalClassDensity
 open MathPhys
 
 /-!

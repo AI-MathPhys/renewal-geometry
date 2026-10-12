@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Dimension.DimensionK4Selector
-import MathPhys.Combinatorics.K4TwistedExteriorSquareMultiplicity
-import MathPhys.Combinatorics.StandardRepresentationTwistedExteriorSquare
+import MathPhys.Core.Combinatorics.K4TwistedExteriorSquareMultiplicity
+import MathPhys.Core.Combinatorics.StandardRepresentationTwistedExteriorSquare
 open MathPhys
 /-!
 # Complete dimension-four selector and twisted exterior-square classification

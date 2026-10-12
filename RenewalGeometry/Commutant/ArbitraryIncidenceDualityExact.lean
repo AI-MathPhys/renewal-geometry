@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.IntrinsicCoefficientQuiver
-import MathPhys.OperatorAlgebras.ReciprocalWedderburnKronecker
-import MathPhys.OperatorAlgebras.StarAdjoinKroneckerCommutant
+import MathPhys.NCG.OperatorAlgebras.ReciprocalWedderburnKronecker
+import MathPhys.NCG.OperatorAlgebras.StarAdjoinKroneckerCommutant
 open MathPhys
 
 /-!

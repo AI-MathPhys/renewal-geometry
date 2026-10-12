@@ -3,7 +3,7 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.OperatorAlgebras.Bicommutant
+import MathPhys.NCG.OperatorAlgebras.Bicommutant
 open MathPhys
 /-!
 # SM–spacetime loaded Howe duality

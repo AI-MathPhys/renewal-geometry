@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.GaugeTheory.TemporalGaugeMixedBounds
-import MathPhys.GaugeTheory.GaugeReaderSobolevTail
+import MathPhys.FieldTheory.GaugeTheory.TemporalGaugeMixedBounds
+import MathPhys.FieldTheory.GaugeTheory.GaugeReaderSobolevTail
 open MathPhys
 
 /-!

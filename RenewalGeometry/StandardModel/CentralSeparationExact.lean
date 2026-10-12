@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.InternalAssemblyExact
-import MathPhys.OperatorAlgebras.FiniteComplexStarSubalgebraSemisimplicity
+import MathPhys.NCG.OperatorAlgebras.FiniteComplexStarSubalgebraSemisimplicity
 open MathPhys
 
 /-!

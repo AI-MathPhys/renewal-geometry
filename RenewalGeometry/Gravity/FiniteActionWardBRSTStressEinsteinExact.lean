@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Gravity.FiniteBRSTWardEinstein
 import RenewalGeometry.Spectralization.SaturatedFiniteDiracGenerator
-import MathPhys.OperatorAlgebras.CenteredCommutantNormal
-import MathPhys.Algebra.SqrtPolar
+import MathPhys.NCG.OperatorAlgebras.CenteredCommutantNormal
+import MathPhys.Core.Algebra.SqrtPolar
 import RenewalGeometry.Gravity.FiniteLineValuedEinstein
 import RenewalGeometry.Action.MatterLegendre2
 import RenewalGeometry.Action.TypedMatterHamiltonianClosure

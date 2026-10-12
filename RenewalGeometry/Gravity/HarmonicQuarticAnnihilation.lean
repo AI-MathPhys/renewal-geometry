@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.ConstantShiftWardOrders
-import MathPhys.Analysis.AnalyticCauchyProductCoefficients
+import MathPhys.FieldTheory.Analysis.AnalyticCauchyProductCoefficients
 import RenewalGeometry.Gravity.ExactSlowRankTwoExact
 open MathPhys
 

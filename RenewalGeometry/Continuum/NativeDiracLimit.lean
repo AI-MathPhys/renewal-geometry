@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeDiracCoefficients
-import MathPhys.Continuum.NativeSpinorCompactness
+import MathPhys.FieldTheory.Continuum.NativeSpinorCompactness
 open MathPhys
 
 /-!

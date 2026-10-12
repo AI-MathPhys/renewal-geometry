@@ -5,10 +5,10 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeEulerConsistency
-import MathPhys.Continuum.LatticeEulerQuadrature
-import MathPhys.Analysis.PeriodicCubeCalculus
-import MathPhys.Analysis.LipschitzRiemannSumError
-import MathPhys.Continuum.ContEulerDerivativeBounds
+import MathPhys.FieldTheory.Continuum.LatticeEulerQuadrature
+import MathPhys.FieldTheory.Analysis.PeriodicCubeCalculus
+import MathPhys.FieldTheory.Analysis.LipschitzRiemannSumError
+import MathPhys.FieldTheory.Continuum.ContEulerDerivativeBounds
 import RenewalGeometry.Continuum.NativeTailTransferBounds
 import RenewalGeometry.Continuum.NativeLinkCovectorNorm
 import RenewalGeometry.Continuum.DeterminantResolvedExtraction

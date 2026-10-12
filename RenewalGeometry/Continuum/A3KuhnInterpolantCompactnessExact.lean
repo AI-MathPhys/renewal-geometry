@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Continuum.A3SharpLipschitzLimitExact
-import MathPhys.DiscreteAnalysis.A3KuhnInterpolationExact
-import MathPhys.Continuum.UniformLipschitzSubsequenceCompactnessExact
+import MathPhys.Lattice.DiscreteAnalysis.A3KuhnInterpolationExact
+import MathPhys.FieldTheory.Continuum.UniformLipschitzSubsequenceCompactnessExact
 open MathPhys
 
 /-!

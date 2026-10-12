@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.StandardModel.RegulatedStandardModelAction
-import MathPhys.GaugeGroups.StandardModelHiggsStabilizerExact
+import MathPhys.FieldTheory.GaugeGroups.StandardModelHiggsStabilizerExact
 open MathPhys
 /-!
 # The explicit regulated Standard-Model field and action packet

@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeLocalCalibrationClosed
 import RenewalGeometry.Continuum.NativeModelMap
-import MathPhys.Gravity.HomogeneousEinsteinHiggsExact
+import MathPhys.FieldTheory.Gravity.HomogeneousEinsteinHiggsExact
 open MathPhys
 
 /-!

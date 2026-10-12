@@ -5,9 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.EquivariantNativeBudgets
-import MathPhys.Gravity.EinsteinHilbertCurveVariation
+import MathPhys.FieldTheory.Gravity.EinsteinHilbertCurveVariation
 import RenewalGeometry.Action.NativeEulerConsistency
-import MathPhys.Continuum.ContEulerCalculus
+import MathPhys.FieldTheory.Continuum.ContEulerCalculus
 open MathPhys
 
 /-!

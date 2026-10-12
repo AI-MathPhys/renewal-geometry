@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.EdgeCommutantBasisExact
-import MathPhys.OperatorAlgebras.MatrixFactorNormalForm
+import MathPhys.NCG.OperatorAlgebras.MatrixFactorNormalForm
 open MathPhys
 
 /-!

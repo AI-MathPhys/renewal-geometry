@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterRateLiftCutMargin
-import MathPhys.Gravity.OpenWriterSubsidiaryRate
+import MathPhys.FieldTheory.Gravity.OpenWriterSubsidiaryRate
 import RenewalGeometry.Gravity.OpenWriterLawEinsteinLimit
 open MathPhys
 

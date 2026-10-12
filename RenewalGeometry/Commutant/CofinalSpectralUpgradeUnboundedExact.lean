@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.OperatorAlgebras.JointCommutatorUnboundedLimitGapChain
+import MathPhys.NCG.OperatorAlgebras.JointCommutatorUnboundedLimitGapChain
 import RenewalGeometry.Commutant.DerivedKernelCofinalDualityExact
-import MathPhys.OperatorLimits.ENNRealMoscoResolventConvergence
+import MathPhys.NCG.OperatorLimits.ENNRealMoscoResolventConvergence
 open MathPhys
 
 /-!

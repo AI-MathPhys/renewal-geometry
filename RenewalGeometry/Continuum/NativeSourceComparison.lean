@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeRecordDilate
-import MathPhys.Continuum.NativeSourceCompareGeneric
+import MathPhys.FieldTheory.Continuum.NativeSourceCompareGeneric
 open MathPhys
 
 /-!

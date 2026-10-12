@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.OperatorLimits.CompactResolventStrongCofinalMarkedRenewalLimitExact
-import MathPhys.SpectralGeometry.SpectralCompressionStrictQuasidiagonalEquivalenceExact
-import MathPhys.OperatorLimits.L2FiniteCoordinateScreensStrongConvergenceExact
-import MathPhys.OperatorTheory.ToeplitzFiniteRankDiagonalProjectionExact
-import MathPhys.OperatorTheory.ToeplitzNumberOperatorShiftCommutatorExact
+import MathPhys.NCG.SpectralGeometry.SpectralCompressionStrictQuasidiagonalEquivalenceExact
+import MathPhys.NCG.OperatorLimits.L2FiniteCoordinateScreensStrongConvergenceExact
+import MathPhys.NCG.OperatorTheory.ToeplitzFiniteRankDiagonalProjectionExact
+import MathPhys.NCG.OperatorTheory.ToeplitzNumberOperatorShiftCommutatorExact
 
 open MathPhys
 /-!

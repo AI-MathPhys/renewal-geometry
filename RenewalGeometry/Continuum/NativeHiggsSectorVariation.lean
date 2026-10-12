@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeSpinorVariation
-import MathPhys.Continuum.NativeHiggsCompactness
+import MathPhys.FieldTheory.Continuum.NativeHiggsCompactness
 open MathPhys
 
 /-!

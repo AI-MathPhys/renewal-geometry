@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeEulerConsistency
-import MathPhys.Continuum.ContEulerDerivativeBounds
+import MathPhys.FieldTheory.Continuum.ContEulerDerivativeBounds
 open MathPhys
 
 /-!

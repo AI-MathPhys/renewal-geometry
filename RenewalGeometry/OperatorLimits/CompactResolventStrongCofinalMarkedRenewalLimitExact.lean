@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.FiniteSpectralScreenMarkedRenewalRealizationExact
-import MathPhys.OperatorLimits.CompactResolventSpectralProjectionTransferExact
-import MathPhys.OperatorLimits.FiniteSpectralCompression
+import MathPhys.NCG.OperatorLimits.CompactResolventSpectralProjectionTransferExact
+import MathPhys.NCG.OperatorLimits.FiniteSpectralCompression
 
 open MathPhys
 /-!

@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactStationaryConnection
-import MathPhys.Analysis.AnalyticCoordinateDivision
+import MathPhys.FieldTheory.Analysis.AnalyticCoordinateDivision
 open MathPhys
 
 /-!

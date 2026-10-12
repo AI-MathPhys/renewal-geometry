@@ -7,8 +7,8 @@ import RenewalGeometry.StandardModel.InternalSeedSaturationExact
 import RenewalGeometry.StandardModel.EndpointGenerationCarrierExact
 import RenewalGeometry.StandardModel.CliffordOccurrenceTest
 import RenewalGeometry.StandardModel.OperationalDeterminantSource
-import MathPhys.GaugeGroups.AnomalyForcedWeights
-import MathPhys.GaugeGroups.SMGaugeQuotientExact
+import MathPhys.FieldTheory.GaugeGroups.AnomalyForcedWeights
+import MathPhys.FieldTheory.GaugeGroups.SMGaugeQuotientExact
 import RenewalGeometry.Spectralization.SaturatedFiniteDiracGenerator
 open MathPhys
 /-!

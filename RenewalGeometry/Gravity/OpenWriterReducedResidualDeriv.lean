@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterReducedResidual
 import RenewalGeometry.Gravity.OpenWriterTimeJets
-import MathPhys.DiscreteAnalysis.PeriodicGridTimeDifferentiatedConsistency
+import MathPhys.Lattice.DiscreteAnalysis.PeriodicGridTimeDifferentiatedConsistency
 open MathPhys
 
 /-!

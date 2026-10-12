@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.SMSTQuiverCommutantAssemblyExact
-import MathPhys.OperatorAlgebras.HilbertSchmidtSlices
+import MathPhys.NCG.OperatorAlgebras.HilbertSchmidtSlices
 open MathPhys
 
 /-!

@@ -7,7 +7,7 @@ import Mathlib
 import RenewalGeometry.Continuum.DeterminantResolvedExtraction
 import RenewalGeometry.Continuum.FiniteWilsonZeroDefectClosure
 import RenewalGeometry.Continuum.DeterminantNormalizationSequence
-import MathPhys.GaugeTheory.FlatSemisimpleNormalization
+import MathPhys.FieldTheory.GaugeTheory.FlatSemisimpleNormalization
 open MathPhys
 
 /-!

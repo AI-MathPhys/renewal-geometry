@@ -3,9 +3,9 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.Variational.ShiftedJetActionHessianExact
-import MathPhys.DiscreteAnalysis.ShiftedPlaquetteLogarithmExact
-import MathPhys.Variational.MatrixInverseSmoothness
+import MathPhys.Lattice.Variational.ShiftedJetActionHessianExact
+import MathPhys.Lattice.DiscreteAnalysis.ShiftedPlaquetteLogarithmExact
+import MathPhys.Lattice.Variational.MatrixInverseSmoothness
 open MathPhys
 
 /-!

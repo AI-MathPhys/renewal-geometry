@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterRateLift
-import MathPhys.DiscreteAnalysis.TorusCoordinateIsoperimetryExact
+import MathPhys.Lattice.DiscreteAnalysis.TorusCoordinateIsoperimetryExact
 import RenewalGeometry.Renewal.EfficientCutConstantScreen
 open MathPhys
 

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Analysis.NormedAlgebraLogBCH
+import MathPhys.FieldTheory.Analysis.NormedAlgebraLogBCH
 import RenewalGeometry.Gravity.RelationalDeSitterBranch
 open MathPhys
 

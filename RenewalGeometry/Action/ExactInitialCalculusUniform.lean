@@ -5,9 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactInitialCalculusFlatBlock
-import MathPhys.DiscreteAnalysis.PeriodicGridLocalAnalytic
+import MathPhys.Lattice.DiscreteAnalysis.PeriodicGridLocalAnalytic
 import RenewalGeometry.DiscreteAnalysis.PeriodicGridPhaseDerivativeSobolev
-import MathPhys.Analysis.UniformImplicitFunction
+import MathPhys.FieldTheory.Analysis.UniformImplicitFunction
 open MathPhys
 
 /-!

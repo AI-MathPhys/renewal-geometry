@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Analysis.MollifierLpConvergence
-import MathPhys.Continuum.CoframeStrongInterpolationExact
-import MathPhys.Gravity.LimitEinsteinInsertion
+import MathPhys.FieldTheory.Analysis.MollifierLpConvergence
+import MathPhys.FieldTheory.Continuum.CoframeStrongInterpolationExact
+import MathPhys.FieldTheory.Gravity.LimitEinsteinInsertion
 open MathPhys
 
 /-!

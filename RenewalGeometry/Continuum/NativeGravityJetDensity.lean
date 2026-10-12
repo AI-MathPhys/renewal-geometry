@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeFirstJetNormalFormExact
-import MathPhys.Analysis.PlaquetteBCHExpansion
+import MathPhys.FieldTheory.Analysis.PlaquetteBCHExpansion
 open MathPhys
 
 /-!

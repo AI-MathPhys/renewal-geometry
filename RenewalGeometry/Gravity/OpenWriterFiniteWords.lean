@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterHermiteResidual
 import RenewalGeometry.Gravity.OpenWriterLawCostControl
-import MathPhys.DiscreteAnalysis.PeriodicGridPointwisePrecision
+import MathPhys.Lattice.DiscreteAnalysis.PeriodicGridPointwisePrecision
 open MathPhys
 
 /-!

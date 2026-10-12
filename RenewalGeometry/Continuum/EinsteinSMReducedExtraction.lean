@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Continuum.EinsteinSMGravityFirstOrder
-import MathPhys.Analysis.ScreenSubsequenceExtraction
-import MathPhys.Analysis.W12CompactnessBox
-import MathPhys.Continuum.EinsteinSMChartBoxTools
+import MathPhys.FieldTheory.Continuum.EinsteinSMGravityFirstOrder
+import MathPhys.FieldTheory.Analysis.ScreenSubsequenceExtraction
+import MathPhys.FieldTheory.Analysis.W12CompactnessBox
+import MathPhys.FieldTheory.Continuum.EinsteinSMChartBoxTools
 import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 open MathPhys
 

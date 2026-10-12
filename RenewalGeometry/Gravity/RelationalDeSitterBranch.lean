@@ -6,9 +6,9 @@ Authors: Aurélien Pélissier
 import RenewalGeometry.Gravity.RelationalFlatVacuum
 import RenewalGeometry.Predictive.RelationalCompletion
 import RenewalGeometry.Dimension.GlobalSpatialCompiler
-import MathPhys.Gravity.CoordinateCurvature
-import MathPhys.Gravity.DeSitterChart
-import MathPhys.Analysis.ExponentialTaylorRemainder
+import MathPhys.FieldTheory.Gravity.CoordinateCurvature
+import MathPhys.FieldTheory.Gravity.DeSitterChart
+import MathPhys.FieldTheory.Analysis.ExponentialTaylorRemainder
 import Mathlib.Topology.Instances.AddCircle.Real
 open MathPhys
 

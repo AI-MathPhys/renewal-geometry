@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.StandardModel.InternalAssemblyExact
 import RenewalGeometry.StandardModel.InternalCommutantSeedExact
-import MathPhys.GaugeGroups.WeakResetGenerationExact
+import MathPhys.FieldTheory.GaugeGroups.WeakResetGenerationExact
 open MathPhys
 /-!
 # Numerical and word-filtration certificates for the active internal seed

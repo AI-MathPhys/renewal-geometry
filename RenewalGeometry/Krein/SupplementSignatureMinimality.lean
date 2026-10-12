@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Krein.OneLineSignedExtensionInertia
+import MathPhys.NCG.Krein.OneLineSignedExtensionInertia
 open MathPhys
 
 /-!

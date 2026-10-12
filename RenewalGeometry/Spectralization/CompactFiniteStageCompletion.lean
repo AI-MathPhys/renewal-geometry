@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.CompactFiniteStageSystem
-import MathPhys.Topology.InverseLimitOrbitQuotient
+import MathPhys.Core.Topology.InverseLimitOrbitQuotient
 open MathPhys
 
 /-!

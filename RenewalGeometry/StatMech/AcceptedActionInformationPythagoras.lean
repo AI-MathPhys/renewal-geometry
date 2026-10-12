@@ -3,8 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.Variational.FiniteGibbsActionGap
-import MathPhys.StatMech.FiniteKLPartitionChain
+import MathPhys.Lattice.Variational.FiniteGibbsActionGap
+import MathPhys.Stochastics.StatMech.FiniteKLPartitionChain
 open MathPhys
 /-!
 # Four-term accepted/action information Pythagoras

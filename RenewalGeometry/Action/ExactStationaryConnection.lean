@@ -6,9 +6,9 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactPhaseCompatibleConnection
 import RenewalGeometry.Action.ExactPhaseCompatibleAnalytic
-import MathPhys.Analysis.LinkRemainderAnalytic
-import MathPhys.Analysis.LocalSumGradient
-import MathPhys.Analysis.StationaryContractionAnalytic
+import MathPhys.FieldTheory.Analysis.LinkRemainderAnalytic
+import MathPhys.FieldTheory.Analysis.LocalSumGradient
+import MathPhys.FieldTheory.Analysis.StationaryContractionAnalytic
 open MathPhys
 
 /-!

@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeLocalActionFrechet
 import RenewalGeometry.GaugeTheory.NativeActionGaugeInvariance
-import MathPhys.Algebra.MatrixExpDerivative
+import MathPhys.Core.Algebra.MatrixExpDerivative
 open MathPhys
 
 /-!

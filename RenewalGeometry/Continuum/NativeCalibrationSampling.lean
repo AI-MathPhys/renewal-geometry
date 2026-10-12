@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Continuum.ActualJetStateConvergence
+import MathPhys.FieldTheory.Continuum.ActualJetStateConvergence
 import RenewalGeometry.Continuum.LocalCalibrationBudgets
 import RenewalGeometry.Continuum.NativeSampledSourcePhys
 import RenewalGeometry.Continuum.NativeClosureUnconditional

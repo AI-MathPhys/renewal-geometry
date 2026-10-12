@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterLawDifference
-import MathPhys.Analysis.TimeSobolevSupBound
-import MathPhys.Analysis.PiecewisePolynomialJetGluing
+import MathPhys.FieldTheory.Analysis.TimeSobolevSupBound
+import MathPhys.FieldTheory.Analysis.PiecewisePolynomialJetGluing
 open MathPhys
 
 /-!

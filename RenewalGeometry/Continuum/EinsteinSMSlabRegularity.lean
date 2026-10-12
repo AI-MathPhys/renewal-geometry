@@ -6,8 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMRegularityUpgrade
-import MathPhys.Continuum.EinsteinSMCovectorSmoothness
-import MathPhys.Analysis.PartialDerivativesC1
+import MathPhys.FieldTheory.Continuum.EinsteinSMCovectorSmoothness
+import MathPhys.FieldTheory.Analysis.PartialDerivativesC1
 open MathPhys
 
 /-!

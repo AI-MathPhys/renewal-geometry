@@ -7,7 +7,7 @@ import Mathlib
 import RenewalGeometry.Continuum.NativeHomogeneousLapse
 import RenewalGeometry.Continuum.NativeCalibrationWitness
 import RenewalGeometry.Continuum.NativeLocalCalibrationBackreacting
-import MathPhys.Gravity.HomogeneousEinsteinHiggsExact
+import MathPhys.FieldTheory.Gravity.HomogeneousEinsteinHiggsExact
 open MathPhys
 
 /-!

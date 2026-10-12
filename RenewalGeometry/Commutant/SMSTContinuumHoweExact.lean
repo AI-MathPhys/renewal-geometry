@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.OperatorAlgebras.SourceCoercivityInfluenceExact
+import MathPhys.NCG.OperatorAlgebras.SourceCoercivityInfluenceExact
 open MathPhys
 /-!
 # The continuum Howe coercivity: the per-cutoff spectral floor

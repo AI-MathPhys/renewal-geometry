@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.GowdyActionTestDensity
-import MathPhys.Analysis.RectangleIntegrationByParts
+import MathPhys.FieldTheory.Analysis.RectangleIntegrationByParts
 open MathPhys
 
 /-!

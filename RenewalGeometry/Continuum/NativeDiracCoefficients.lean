@@ -6,8 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeDiracVariation
 import RenewalGeometry.Continuum.NativeGravityFirstJet
-import MathPhys.Analysis.WeakJetPairing
-import MathPhys.Algebra.SeriesLogChart
+import MathPhys.FieldTheory.Analysis.WeakJetPairing
+import MathPhys.Core.Algebra.SeriesLogChart
 open MathPhys
 
 /-!

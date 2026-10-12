@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeGravityJetDensity
-import MathPhys.Continuum.TorusC2TestSampling
-import MathPhys.Analysis.HomogeneousJetVariationLimit
+import MathPhys.FieldTheory.Continuum.TorusC2TestSampling
+import MathPhys.FieldTheory.Analysis.HomogeneousJetVariationLimit
 open MathPhys
 
 /-!

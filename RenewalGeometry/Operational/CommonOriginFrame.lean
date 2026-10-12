@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.CommonOriginUCP
-import MathPhys.LorentzianGeometry.PositiveAveraging
+import MathPhys.FieldTheory.LorentzianGeometry.PositiveAveraging
 open MathPhys
 /-!
 # The common-origin spatial frame: second moment and deck character

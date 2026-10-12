@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.OperatorLimits.TransportedMoscoAsymptoticCompactness
-import MathPhys.OperatorLimits.ProtectedBasisTransport
-import MathPhys.OperatorAlgebras.JointCommutatorContinuousOperator
+import MathPhys.NCG.OperatorLimits.TransportedMoscoAsymptoticCompactness
+import MathPhys.NCG.OperatorLimits.ProtectedBasisTransport
+import MathPhys.NCG.OperatorAlgebras.JointCommutatorContinuousOperator
 import RenewalGeometry.Commutant.ArbitraryIncidenceDualityExact
 open MathPhys
 

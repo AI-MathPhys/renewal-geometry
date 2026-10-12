@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeScalingRegularityExact
-import MathPhys.Variational.MatrixInverseSmoothness
-import MathPhys.Variational.ShiftedFirstJetNormalFormExact
+import MathPhys.Lattice.Variational.MatrixInverseSmoothness
+import MathPhys.Lattice.Variational.ShiftedFirstJetNormalFormExact
 open MathPhys
 
 /-!

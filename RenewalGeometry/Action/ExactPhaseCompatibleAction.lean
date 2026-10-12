@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactActionLorentzAlgebra
-import MathPhys.Algebra.MatrixExpDerivative
-import MathPhys.Analysis.NormedAlgebraLogBCH
+import MathPhys.Core.Algebra.MatrixExpDerivative
+import MathPhys.FieldTheory.Analysis.NormedAlgebraLogBCH
 open MathPhys
 
 /-!

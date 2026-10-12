@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.GaugeTheory.NativeRecordNormalization
-import MathPhys.GaugeTheory.StandardModelCoulombNormalization
-import MathPhys.GaugeTheory.RootedCertificateInvariance
+import MathPhys.FieldTheory.GaugeTheory.StandardModelCoulombNormalization
+import MathPhys.FieldTheory.GaugeTheory.RootedCertificateInvariance
 open MathPhys
 
 /-!

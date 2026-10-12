@@ -5,9 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeScalingBlocksExact
-import MathPhys.Variational.ShiftedFirstJetNormalFormExact
-import MathPhys.Algebra.SeriesLogChart
-import MathPhys.GaugeTheory.DeterminantSemisimpleSplitExact
+import MathPhys.Lattice.Variational.ShiftedFirstJetNormalFormExact
+import MathPhys.Core.Algebra.SeriesLogChart
+import MathPhys.FieldTheory.GaugeTheory.DeterminantSemisimpleSplitExact
 open MathPhys
 
 /-!

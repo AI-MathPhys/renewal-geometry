@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.DiscreteAnalysis.AtlasIsoperimetry
-import MathPhys.DiscreteAnalysis.OperationalSobolevWeylFiniteGraph
+import MathPhys.Lattice.DiscreteAnalysis.OperationalSobolevWeylFiniteGraph
 open MathPhys
 /-!
 # Renewal-native spatial positive screen

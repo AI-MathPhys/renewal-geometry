@@ -6,8 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMLocalClosure
 import RenewalGeometry.Continuum.EinsteinSMDiracStability
-import MathPhys.Analysis.TorusC1Rellich
-import MathPhys.Analysis.TorusBoxRestriction
+import MathPhys.FieldTheory.Analysis.TorusC1Rellich
+import MathPhys.FieldTheory.Analysis.TorusBoxRestriction
 open MathPhys
 
 /-!

@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeSourceTheorem
-import MathPhys.Continuum.TrigInterpolationConvergence
+import MathPhys.FieldTheory.Continuum.TrigInterpolationConvergence
 open MathPhys
 
 /-!

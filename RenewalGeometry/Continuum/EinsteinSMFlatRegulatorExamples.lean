@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Continuum.EinsteinSMGravityFirstOrder
+import MathPhys.FieldTheory.Continuum.EinsteinSMGravityFirstOrder
 import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMWeakMatterEquations
-import MathPhys.Continuum.EinsteinSMJointDefect
-import MathPhys.Continuum.EinsteinSMVariationContinuity
+import MathPhys.FieldTheory.Continuum.EinsteinSMJointDefect
+import MathPhys.FieldTheory.Continuum.EinsteinSMVariationContinuity
 open MathPhys
 
 /-!

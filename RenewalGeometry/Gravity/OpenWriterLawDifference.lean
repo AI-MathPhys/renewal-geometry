@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterLawFamily
-import MathPhys.Gravity.OpenWriterAccelLipschitz
+import MathPhys.FieldTheory.Gravity.OpenWriterAccelLipschitz
 open MathPhys
 
 /-!

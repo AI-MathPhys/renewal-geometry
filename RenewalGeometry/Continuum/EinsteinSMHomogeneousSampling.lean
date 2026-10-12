@@ -6,8 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
 import RenewalGeometry.Continuum.EinsteinSMSmoothSampling
-import MathPhys.Gravity.HomogeneousEinsteinHiggsExact
-import MathPhys.Continuum.EinsteinSMDiagonalCoframe
+import MathPhys.FieldTheory.Gravity.HomogeneousEinsteinHiggsExact
+import MathPhys.FieldTheory.Continuum.EinsteinSMDiagonalCoframe
 open MathPhys
 
 /-!

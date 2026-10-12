@@ -5,9 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMRegulatorSequence
-import MathPhys.Analysis.SobolevBoxCompactness
-import MathPhys.OperatorLimits.SMSTPositiveScreenExact
-import MathPhys.Continuum.EinsteinSMReducedTopology
+import MathPhys.FieldTheory.Analysis.SobolevBoxCompactness
+import MathPhys.NCG.OperatorLimits.SMSTPositiveScreenExact
+import MathPhys.FieldTheory.Continuum.EinsteinSMReducedTopology
 open MathPhys
 
 /-!

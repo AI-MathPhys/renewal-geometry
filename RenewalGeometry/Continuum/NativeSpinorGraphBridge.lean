@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Continuum.CovariantGraphCompactness
+import MathPhys.FieldTheory.Continuum.CovariantGraphCompactness
 import RenewalGeometry.Continuum.NativeSpinorVariation
 open MathPhys
 

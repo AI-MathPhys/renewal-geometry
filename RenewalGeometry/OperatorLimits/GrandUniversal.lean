@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.OperatorLimits.MoscoResolvent
-import MathPhys.Continuum.OUProcess
-import MathPhys.QuantumInformation.ProjectiveState
+import MathPhys.FieldTheory.Continuum.OUProcess
+import MathPhys.Stochastics.QuantumInformation.ProjectiveState
 import RenewalGeometry.Commutant.UniversalCoercive
 import RenewalGeometry.GaugeTheory.YMSlabGap
 open MathPhys

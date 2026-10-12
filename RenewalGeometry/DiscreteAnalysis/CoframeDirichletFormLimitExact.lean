@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.DiscreteAnalysis.CoframeRenewalPacketExact
-import MathPhys.Analysis.UnitCubeRiemannSum
+import MathPhys.FieldTheory.Analysis.UnitCubeRiemannSum
 open MathPhys
 
 /-!

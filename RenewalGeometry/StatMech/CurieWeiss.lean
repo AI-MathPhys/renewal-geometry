@@ -3,8 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.MarkovChains.ClassicalAffinity
-import MathPhys.StatMech.CurieWeissMeasure
+import MathPhys.Stochastics.MarkovChains.ClassicalAffinity
+import MathPhys.Stochastics.StatMech.CurieWeissMeasure
 open MathPhys
 
 open MathPhys

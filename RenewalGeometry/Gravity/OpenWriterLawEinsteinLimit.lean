@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterLawJetLipschitz
-import MathPhys.Gravity.OpenWriterHarmonicPreparation
+import MathPhys.FieldTheory.Gravity.OpenWriterHarmonicPreparation
 import RenewalGeometry.Gravity.OpenWriterLawCostControl
 import RenewalGeometry.StatMech.SupplementLawRowNeighbourhoodExact
 open MathPhys

@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeFirstJetNormalFormExact
-import MathPhys.Algebra.SeriesLogChart
+import MathPhys.Core.Algebra.SeriesLogChart
 open MathPhys
 
 /-!

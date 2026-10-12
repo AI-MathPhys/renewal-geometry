@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.RapidLawSwitching
-import MathPhys.Gravity.SupplementLawMultiplierExact
+import MathPhys.FieldTheory.Gravity.SupplementLawMultiplierExact
 open MathPhys
 
 /-!

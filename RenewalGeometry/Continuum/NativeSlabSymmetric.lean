@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeClosureClosed
-import MathPhys.Continuum.ActualJetKatoRealization
+import MathPhys.FieldTheory.Continuum.ActualJetKatoRealization
 open MathPhys
 
 /-!

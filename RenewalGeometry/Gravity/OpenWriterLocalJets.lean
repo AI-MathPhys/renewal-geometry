@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterTimeJets
-import MathPhys.DiscreteAnalysis.PeriodicGridSobolevSpace
+import MathPhys.Lattice.DiscreteAnalysis.PeriodicGridSobolevSpace
 open MathPhys
 
 /-!

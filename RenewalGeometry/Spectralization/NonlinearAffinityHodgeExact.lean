@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Spectralization.ModularAffinityReversalPacketExact
 import RenewalGeometry.Spectralization.StationaryRenewalGraphCurrentFibreExact
-import MathPhys.DiscreteAnalysis.CycleProjector
+import MathPhys.Lattice.DiscreteAnalysis.CycleProjector
 open MathPhys
 /-!
 # Nonlinear Hodge theorem for stationary affinities

@@ -3,8 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import MathPhys.OperatorAlgebras.Bicommutant
-import MathPhys.Algebra.SqrtPolar
+import MathPhys.NCG.OperatorAlgebras.Bicommutant
+import MathPhys.Core.Algebra.SqrtPolar
 open MathPhys
 /-!
 # Polar metric–holonomy commutant theorem

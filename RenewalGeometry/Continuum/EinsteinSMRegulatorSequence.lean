@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import MathPhys.Continuum.EinsteinSMFieldSpaces
+import MathPhys.FieldTheory.Continuum.EinsteinSMFieldSpaces
 import RenewalGeometry.StandardModel.FiniteInterfaceRepresentationTable
-import MathPhys.Gravity.CoordinateCurvature
-import MathPhys.Analysis.SobolevOpenSet
-import MathPhys.Continuum.EinsteinSMContinuumAction
+import MathPhys.FieldTheory.Gravity.CoordinateCurvature
+import MathPhys.FieldTheory.Analysis.SobolevOpenSet
+import MathPhys.FieldTheory.Continuum.EinsteinSMContinuumAction
 open MathPhys
 
 /-!

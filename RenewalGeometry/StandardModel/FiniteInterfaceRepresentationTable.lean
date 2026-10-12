@@ -5,7 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.FiniteEinsteinStandardModelInterface
-import MathPhys.GaugeGroups.SMDescentYukawaBlocksExact
+import MathPhys.FieldTheory.GaugeGroups.SMDescentYukawaBlocksExact
 open MathPhys
 
 /-!

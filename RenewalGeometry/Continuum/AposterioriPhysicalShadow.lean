@@ -6,7 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.InitialConstraintRetractionExact
 import RenewalGeometry.Action.ValidatedInitialRetractionExact
-import MathPhys.Continuum.CoupledBootstrapSlabData
+import MathPhys.FieldTheory.Continuum.CoupledBootstrapSlabData
 open MathPhys
 
 /-!

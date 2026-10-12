@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.StationaryGraphSpectralizationExact
-import MathPhys.SpectralGeometry.A3DeSitterConnesConvergenceExact
+import MathPhys.NCG.SpectralGeometry.A3DeSitterConnesConvergenceExact
 open MathPhys
 /-!
 # Canonical graph Hodge--Dirac spectralization: complete manuscript theorem
