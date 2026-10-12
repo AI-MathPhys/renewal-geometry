@@ -3,8 +3,9 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Continuum.LipschitzLimitGradientBoundExact
-import RenewalGeometry.Spectralization.A3ConnesFlatUniformConvergenceExact
+import MathPhys.Continuum.LipschitzLimitGradientBoundExact
+import MathPhys.SpectralGeometry.A3ConnesFlatUniformConvergenceExact
+open MathPhys
 
 /-!
 # Sharp gradient bound for limits of discrete unit-Lipschitz functions on the `A₃` graphs
@@ -26,11 +27,11 @@ torus `M` by the fundamental parallelepiped (whose boundary is a null set).
 -/
 
 open Filter MeasureTheory Topology Set
-open RenewalGeometry.A3FiniteDifferenceConsistency RenewalGeometry.A3PeriodicGraphSampling
-open RenewalGeometry.FiniteWeightedGraphHodgeDirac RenewalGeometry.A3PeriodicSmoothEnergy
-open RenewalGeometry.A3FlatTorusMetric RenewalGeometry.FiniteConnesDistanceAttainment
-open RenewalGeometry.A3ConnesFlatUniformConvergence RenewalGeometry.LipschitzLimitGradientBound
-open RenewalGeometry.A3PeriodicConnesSmoothLowerBound RenewalGeometry.A3ConnesDistanceUniformBounds
+open MathPhys.A3FiniteDifferenceConsistency MathPhys.A3PeriodicGraphSampling
+open MathPhys.FiniteWeightedGraphHodgeDirac MathPhys.A3PeriodicSmoothEnergy
+open MathPhys.A3FlatTorusMetric MathPhys.FiniteConnesDistanceAttainment
+open MathPhys.A3ConnesFlatUniformConvergence MathPhys.LipschitzLimitGradientBound
+open MathPhys.A3PeriodicConnesSmoothLowerBound MathPhys.A3ConnesDistanceUniformBounds
 
 namespace RenewalGeometry.A3SharpLipschitzLimit
 

@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterFiniteWordsEinstein
 import RenewalGeometry.Gravity.OpenWriterRateLiftUniform
+open MathPhys
 
 /-!
 # The `(O3)` package along finite successor words (`thm:main-open-3plus1`, item (O4);

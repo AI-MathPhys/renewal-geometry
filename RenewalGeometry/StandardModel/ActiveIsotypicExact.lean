@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.StandardModel.ExternalIsotypicKroneckerExact
+import MathPhys.GaugeGroups.ExternalIsotypicKroneckerExact
 import RenewalGeometry.StandardModel.ActiveResidualCensusExact
 import RenewalGeometry.Commutant.PrivateLineCommutantWedderburnExact
+open MathPhys
 
 /-!
 # External isotypic algebra and multiplicity census (assembly)
@@ -37,7 +38,7 @@ clauses:
 
 open Matrix Kronecker Module RenewalGeometry.ActiveResidual RenewalGeometry.ActiveResidualCensus
   RenewalGeometry.DegreeOneColourNoGo RenewalGeometry.DegreeOneWedderburn
-  RenewalGeometry.PrivateLineWedderburn RenewalGeometry.ExternalIsotypic
+  RenewalGeometry.PrivateLineWedderburn MathPhys.ExternalIsotypic
 
 namespace RenewalGeometry
 namespace ActiveIsotypic

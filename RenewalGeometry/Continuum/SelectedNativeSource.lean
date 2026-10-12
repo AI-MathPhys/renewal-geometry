@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeSourceTheorem
 import RenewalGeometry.Action.NativeSelectedClosure
+open MathPhys
 
 /-!
 # `thm:native-source` with selected upper budgets (`thm:native-selected-closure`, source step)

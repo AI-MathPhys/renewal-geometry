@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Commutant.SourceCoercivityInfluenceExact
+import MathPhys.OperatorAlgebras.SourceCoercivityInfluenceExact
+open MathPhys
 /-!
 # The continuum Howe coercivity: the per-cutoff spectral floor
 
@@ -34,7 +35,7 @@ open scoped ComplexOrder
 namespace RenewalGeometry
 namespace ContinuumHowe
 
-open RenewalGeometry.GeometricThresholdBank RenewalGeometry.SourceCoercivityInfluence
+open MathPhys.GeometricThresholdBank MathPhys.SourceCoercivityInfluence
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 

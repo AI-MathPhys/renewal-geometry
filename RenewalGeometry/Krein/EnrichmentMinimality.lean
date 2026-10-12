@@ -3,11 +3,12 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Krein.ConePositive
-import NCG.Krein.EnrichmentClassification
-import NCG.Operator.Diagonal
+import MathPhys.Krein.ConePositive
+import MathPhys.Krein.EnrichmentClassification
+import MathPhys.OperatorTheory.Diagonal
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Minimality of the signed enrichment: the variable-rank derivation
 

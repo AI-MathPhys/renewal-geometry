@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Gravity.EinsteinHilbertCurveVariation
+import RenewalGeometry.Continuum.EquivariantNativeBudgets
+import MathPhys.Gravity.EinsteinHilbertCurveVariation
 import RenewalGeometry.Action.NativeEulerConsistency
-import RenewalGeometry.Continuum.ContEulerCalculus
+import MathPhys.Continuum.ContEulerCalculus
+open MathPhys
 
 /-!
 # The Euler rows of the native first-order Palatini density are the Einstein equations

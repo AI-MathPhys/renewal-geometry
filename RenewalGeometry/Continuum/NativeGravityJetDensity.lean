@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeFirstJetNormalFormExact
-import RenewalGeometry.Analysis.PlaquetteBCHExpansion
+import MathPhys.Analysis.PlaquetteBCHExpansion
+open MathPhys
 
 /-!
 # The literal gravitational density on coframe first jets: scaling, regularity, continuum limit

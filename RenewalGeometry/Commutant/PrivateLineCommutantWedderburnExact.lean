@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.DegreeOneCommutantWedderburnExact
+open MathPhys
 
 /-!
 # The private-line relative commutant is `M₂(ℂ) ⊕ M₂(ℂ) ⊕ ℂ ⊕ ℂ`

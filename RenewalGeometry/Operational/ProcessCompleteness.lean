@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.Operational
-import RenewalGeometry.Algebra.ChoiCriterion
+import MathPhys.Algebra.ChoiCriterion
+open MathPhys
 /-!
 # Process systems, parallel completeness, ancillary stability, roles
 
@@ -30,6 +31,7 @@ Encodes four definitional statements of `manuscripts/renewal_emergence/renewal_e
 -/
 
 namespace RenewalGeometry.Upstream
+open MathPhys.Upstream
 
 open CategoryTheory MonoidalCategory
 

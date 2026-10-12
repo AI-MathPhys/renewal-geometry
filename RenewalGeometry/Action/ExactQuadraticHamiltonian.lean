@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactFierzPauliQuadratic
+open MathPhys
 
 /-!
 # The quadratic canonical Hamiltonian `H₂` of the actual action and the Fierz–Pauli rows
@@ -44,6 +45,7 @@ noncomputable section
 set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry.ExactPhaseAction.QuadJet
+open MathPhys.ExactPhaseAction MathPhys.ExactPhaseAction.QuadJet
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

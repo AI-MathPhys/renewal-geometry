@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.ContinuumHoweProtectedCommutantExact
-import RenewalGeometry.Commutant.JointCommutatorFirstPositiveEigenvalueConvergenceFromDenseSourcesAndGraphScreens
-import RenewalGeometry.OperatorLimits.ConvergentSpectralGapCoercivity
+import MathPhys.OperatorAlgebras.JointCommutatorFirstPositiveEigenvalueConvergenceFromDenseSourcesAndGraphScreens
+import MathPhys.OperatorLimits.ConvergentSpectralGapCoercivity
 import RenewalGeometry.Commutant.SMSTContinuumHoweExact
+open MathPhys
 /-!
 # Coercive continuum Howe duality
 
@@ -22,7 +23,7 @@ open Complex Filter Set Topology
 
 noncomputable section
 
-namespace RenewalGeometry.VaryingHilbert.System
+namespace MathPhys.VaryingHilbert.System
 
 universe u v
 
@@ -40,9 +41,9 @@ zero-mode multiplicity and their numerical radii are auxiliary. -/
 theorem coerciveContinuumHoweDuality_exact
     {d : ℕ → Type u} [∀ cutoff, Fintype (d cutoff)] {s : ℕ}
     (c : ∀ cutoff, Fin s → Matrix (d cutoff) (d cutoff) ℂ)
-    (J : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := H)
+    (J : MathPhys.VaryingHilbert.System (K := ℂ) (H := H)
       (Hn := fun cutoff ↦ EuclideanSpace ℂ (d cutoff × d cutoff)))
-    (L : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := WithLp 2 (H × F))
+    (L : MathPhys.VaryingHilbert.System (K := ℂ) (H := WithLp 2 (H × F))
       (Hn := fun cutoff ↦ WithLp 2
         (EuclideanSpace ℂ (d cutoff × d cutoff) ×
           EuclideanSpace ℂ (Fin s × (d cutoff × d cutoff)))))
@@ -52,7 +53,7 @@ theorem coerciveContinuumHoweDuality_exact
     (source : H → ∀ cutoff, EuclideanSpace ℂ (d cutoff × d cutoff))
     (hsource : ∀ y ∈ D, J.StronglyConverges (source y) y)
     (hcore : ∀ y ∈ D, J.StronglyConverges
-      (fun cutoff ↦ RenewalGeometry.jointCommutatorResolventFamily c lam0 cutoff
+      (fun cutoff ↦ MathPhys.jointCommutatorResolventFamily c lam0 cutoff
         (source y cutoff))
       (boundedOperatorNormalResolventFamily A lam0 y))
     (a : ℝ) (ha : 0 < a)
@@ -61,16 +62,16 @@ theorem coerciveContinuumHoweDuality_exact
     (htail : ∀ ε > 0, ∃ screenIndex, ∀ y ∈ L.embeddedUnitBallOutputs
       (fun cutoff ↦ operatorGraphResolventHilbertGraph
         (⊤ : Submodule ℂ (EuclideanSpace ℂ (d cutoff × d cutoff)))
-        (boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM (c cutoff)))
-        (RenewalGeometry.jointCommutatorResolventFamily c a cutoff) a ha
-        (RenewalGeometry.jointCommutatorResolventFamily_resolventEquation c a ha cutoff)),
+        (boundedOperatorGraphMap (MathPhys.jointCommutatorCLM (c cutoff)))
+        (MathPhys.jointCommutatorResolventFamily c a cutoff) a ha
+        (MathPhys.jointCommutatorResolventFamily_resolventEquation c a ha cutoff)),
       ‖y - screen screenIndex y‖ < ε)
     (hfst : ∀ cutoff y, J.embedding cutoff y.fst = (L.embedding cutoff y).fst)
     (b : ℝ) (hb : 0 < b)
     (P : ℕ → H →L[ℂ] H)
     (hprotected : ∀ᶠ cutoff in atTop,
       LinearMap.range (P cutoff).toLinearMap ≤
-        (LinearMap.ker (RenewalGeometry.jointCommutatorCLM (c cutoff)).toLinearMap).map
+        (LinearMap.ker (MathPhys.jointCommutatorCLM (c cutoff)).toLinearMap).map
           (J.embedding cutoff).toLinearMap)
     (hprotectedRank : ∀ᶠ cutoff in atTop,
       Module.finrank ℂ (LinearMap.range (P cutoff).toLinearMap) =
@@ -81,16 +82,16 @@ theorem coerciveContinuumHoweDuality_exact
       0 < projectionRadius ∧
       (0 : ℂ) ∉ Metric.closedBall (((1 / b : ℝ) : ℂ)) projectionRadius ∧
       Tendsto P atTop
-        (nhds (RenewalGeometry.ResolventStability.circleRieszProjection
+        (nhds (MathPhys.ResolventStability.circleRieszProjection
           (boundedOperatorNormalResolventFamily A b)
           (((1 / b : ℝ) : ℂ)) projectionRadius)) ∧
       (∀ᶠ cutoff in atTop,
         LinearMap.range (P cutoff).toLinearMap =
-          (LinearMap.ker (RenewalGeometry.jointCommutatorCLM (c cutoff)).toLinearMap).map
+          (LinearMap.ker (MathPhys.jointCommutatorCLM (c cutoff)).toLinearMap).map
             (J.embedding cutoff).toLinearMap) ∧
       (∀ᶠ cutoff in atTop,
         ∀ X : Matrix (d cutoff) (d cutoff) ℂ,
-          J.embedding cutoff (RenewalGeometry.matrixL2 X) ∈
+          J.embedding cutoff (MathPhys.matrixL2 X) ∈
               LinearMap.range (P cutoff).toLinearMap ↔
             ∀ j, c cutoff j * X = X * c cutoff j) ∧
       0 < gapRadius ∧
@@ -98,31 +99,31 @@ theorem coerciveContinuumHoweDuality_exact
       0 < μlim ∧
       Tendsto
         (fun cutoff ↦
-          ‖RenewalGeometry.SpectralGap.complementCompression
-            (J.compressedOperator (RenewalGeometry.jointCommutatorResolventFamily c b) cutoff)
+          ‖MathPhys.SpectralGap.complementCompression
+            (J.compressedOperator (MathPhys.jointCommutatorResolventFamily c b) cutoff)
             (P cutoff)‖⁻¹ - b)
         atTop (nhds μlim) ∧
       (∀ᶠ cutoff in atTop,
-        let μ := ‖RenewalGeometry.SpectralGap.complementCompression
-          (J.compressedOperator (RenewalGeometry.jointCommutatorResolventFamily c b) cutoff)
+        let μ := ‖MathPhys.SpectralGap.complementCompression
+          (J.compressedOperator (MathPhys.jointCommutatorResolventFamily c b) cutoff)
           (P cutoff)‖⁻¹ - b
         0 < μ ∧
           Module.End.HasEigenvalue
-            (RenewalGeometry.commutantLaplacianCLM (c cutoff)).toLinearMap (μ : ℂ) ∧
+            (MathPhys.commutantLaplacianCLM (c cutoff)).toLinearMap (μ : ℂ) ∧
           ∀ ν : ℝ, 0 < ν →
             Module.End.HasEigenvalue
-              (RenewalGeometry.commutantLaplacianCLM (c cutoff)).toLinearMap (ν : ℂ) → μ ≤ ν) ∧
+              (MathPhys.commutantLaplacianCLM (c cutoff)).toLinearMap (ν : ℂ) → μ ≤ ν) ∧
       0 < μlim / 2 ∧
       (∀ᶠ cutoff in atTop,
         μlim / 2 ≤
-          ‖RenewalGeometry.SpectralGap.complementCompression
-            (J.compressedOperator (RenewalGeometry.jointCommutatorResolventFamily c b) cutoff)
+          ‖MathPhys.SpectralGap.complementCompression
+            (J.compressedOperator (MathPhys.jointCommutatorResolventFamily c b) cutoff)
             (P cutoff)‖⁻¹ - b) ∧
       ∀ (energy residual : ℕ → H → ℝ),
         (∀ cutoff x, 0 ≤ residual cutoff x) →
         (∀ cutoff x,
-          (‖RenewalGeometry.SpectralGap.complementCompression
-            (J.compressedOperator (RenewalGeometry.jointCommutatorResolventFamily c b) cutoff)
+          (‖MathPhys.SpectralGap.complementCompression
+            (J.compressedOperator (MathPhys.jointCommutatorResolventFamily c b) cutoff)
             (P cutoff)‖⁻¹ - b) * residual cutoff x ≤ energy cutoff x) →
         (∀ᶠ cutoff in atTop, ∀ x,
           μlim / 2 * residual cutoff x ≤ energy cutoff x) ∧
@@ -140,8 +141,8 @@ theorem coerciveContinuumHoweDuality_exact
       c L A lam0 hlam0 D hD source hsource hcore a ha screen hcompact htail hfst
         b hb P hprotected hprotectedRank hstarP hinfinite
   let gap : ℕ → ℝ := fun cutoff ↦
-    ‖RenewalGeometry.SpectralGap.complementCompression
-      (J.compressedOperator (RenewalGeometry.jointCommutatorResolventFamily c b) cutoff)
+    ‖MathPhys.SpectralGap.complementCompression
+      (J.compressedOperator (MathPhys.jointCommutatorResolventFamily c b) cutoff)
       (P cutoff)‖⁻¹ - b
   have hhalf : 0 < μlim / 2 := half_pos hμlim
   have hUniformGap : ∀ᶠ cutoff in atTop, μlim / 2 ≤ gap cutoff := by
@@ -155,10 +156,10 @@ theorem coerciveContinuumHoweDuality_exact
     have hCoercive' : ∀ cutoff x, gap cutoff * residual cutoff x ≤ energy cutoff x := by
       simpa only [gap] using hCoercive
     constructor
-    · exact RenewalGeometry.SpectralGap.eventually_uniform_coercivity_of_gap_tendsto
+    · exact MathPhys.SpectralGap.eventually_uniform_coercivity_of_gap_tendsto
         energy residual gap μlim hResidual hCoercive' hGap hμlim |>.2
     · intro xseq hEnergy
-      exact RenewalGeometry.SpectralGap.residual_tendsto_zero_of_gap_tendsto
+      exact MathPhys.SpectralGap.residual_tendsto_zero_of_gap_tendsto
         energy residual xseq gap μlim hResidual hCoercive' hGap hμlim hEnergy
 
-end RenewalGeometry.VaryingHilbert.System
+end MathPhys.VaryingHilbert.System

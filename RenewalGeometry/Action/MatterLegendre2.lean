@@ -3,7 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Algebra.SqrtPolar
+import MathPhys.Algebra.SqrtPolar
+open MathPhys
 /-!
 # Legendre structure of the emergent matter sector
   (`thm:SMST-matter-Legendre`, Gran-Tensor manuscript)
@@ -18,7 +19,7 @@ import RenewalGeometry.Algebra.SqrtPolar
       boxed stationary point `V = K⁻¹P` with value
       `H = PᴴK⁻¹P` (the second summand is a `K`-Gram square,
       nonpositive in the Loewner order by clause (b) of
-      `NCG.renormalization_cocycle`);
+      `MathPhys.renormalization_cocycle`);
   (b) the reciprocity certificate `D_P²H = K⁻¹`: a candidate
       inverse-Hessian `A` satisfies the vanishing of the
       two-sided Legendre defect

@@ -3,8 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Action.ShiftedJetActionHessianExact
-import RenewalGeometry.DiscreteAnalysis.ShiftedPlaquetteLogarithmExact
+import MathPhys.Variational.ShiftedJetActionHessianExact
+import MathPhys.DiscreteAnalysis.ShiftedPlaquetteLogarithmExact
+import MathPhys.Variational.MatrixInverseSmoothness
+open MathPhys
 
 /-!
 # Amplitude-preserving scaling of the native link data
@@ -42,6 +44,7 @@ open NormedSpace Finset Matrix
 
 namespace RenewalGeometry
 namespace NativeScaling
+open MathPhys.NativeScaling
 
 open ShiftedJetAction (Grid unitVec)
 
@@ -57,9 +60,6 @@ theorem fwdDiff_scale {V : Type*} [AddCommGroup V] [Module ℝ V] {h K : ℝ}
   field_simp
 
 /-! ### The algebraic Cartan reader `eq:native-LC-reader` -/
-
-/-- Real `4 × 4` matrices: coframes `e^a_μ` (row `a`, column `μ`) and jets. -/
-abbrev Mat := Matrix (Fin 4) (Fin 4) ℝ
 
 /-- The Minkowski metric `η = diag(-1, 1, 1, 1)`. -/
 def eta : Mat := Matrix.diagonal ![-1, 1, 1, 1]

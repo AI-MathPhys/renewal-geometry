@@ -5,7 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeScalingRegularityExact
-import RenewalGeometry.Action.ShiftedFirstJetNormalFormExact
+import MathPhys.Variational.MatrixInverseSmoothness
+import MathPhys.Variational.ShiftedFirstJetNormalFormExact
+open MathPhys
 
 /-!
 # The four native densities and their amplitude-preserving scaling
@@ -64,6 +66,7 @@ open scoped ContDiff
 
 namespace RenewalGeometry
 namespace NativeDensity
+open MathPhys.NativeDensity
 
 open ShiftedJetAction (Grid unitVec fwdDiff stencil)
 open NativeScaling (Mat eta metric readerOmega omegaLink)
@@ -72,31 +75,6 @@ open ShiftedPlaquette
 attribute [local instance] Matrix.normedAddCommGroup Matrix.normedSpace
 
 /-! ### Smooth coefficient functions of the coframe -/
-
-theorem contDiff_det {k : WithTop ℕ∞} : ContDiff ℝ k (fun M : Mat => M.det) := by
-  simp only [Matrix.det_apply']
-  fun_prop
-
-theorem contDiff_adjugate_entry (i j : Fin 4) {k : WithTop ℕ∞} :
-    ContDiff ℝ k (fun A : Mat => A.adjugate i j) := by
-  simp only [Matrix.adjugate_apply, Matrix.det_apply', Matrix.updateRow_apply]
-  refine ContDiff.sum fun σ _ => contDiff_const.mul (contDiff_prod fun k _ => ?_)
-  split_ifs <;> fun_prop
-
-/-- The `(i, j)` entry of the matrix inverse, as a named function. -/
-noncomputable def invEntry (i j : Fin 4) (e : Mat) : ℝ := e⁻¹ i j
-
-theorem invEntry_apply (i j : Fin 4) (e : Mat) : invEntry i j e = e⁻¹ i j := rfl
-
-@[fun_prop]
-theorem contDiffAt_invEntry (i j : Fin 4) {k : WithTop ℕ∞} {A : Mat} (hA : A.det ≠ 0) :
-    ContDiffAt ℝ k (invEntry i j) A := by
-  have : invEntry i j = fun M : Mat => (M.det)⁻¹ * M.adjugate i j := by
-    funext M
-    rw [invEntry, Matrix.inv_def, Matrix.smul_apply, Ring.inverse_eq_inv', smul_eq_mul]
-  rw [this]
-  exact ((contDiffAt_inv ℝ hA).comp A contDiff_det.contDiffAt).mul
-    (contDiff_adjugate_entry i j).contDiffAt
 
 theorem det_metric (e : Mat) : (metric e).det = -(e.det) ^ 2 := by
   simp [metric, Matrix.det_mul, Matrix.det_transpose, eta, Matrix.det_diagonal,

@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterRateLiftCutMargin
-import RenewalGeometry.Gravity.OpenWriterSubsidiaryRate
+import MathPhys.Gravity.OpenWriterSubsidiaryRate
 import RenewalGeometry.Gravity.OpenWriterLawEinsteinLimit
+open MathPhys
 
 /-!
 # Rate positivity, cut margin, noncollapse, curvature and subsidiary bounds along the writer

@@ -4,227 +4,333 @@ Roots: 11647 cited declarations.
 
 | Paper | Cited decls | Modules used | Folders used |
 |---|---:|---:|---|
-| einstein_sm_action_closure | 4953 | 659 | RenewalGeometry/Continuum (365), RenewalGeometry/Analysis (150), RenewalGeometry/GaugeTheory (42), RenewalGeometry/Gravity (37), RenewalGeometry/Action (25), RenewalGeometry/StandardModel (19), RenewalGeometry/DiscreteAnalysis (16), RenewalGeometry/Algebra (3), RenewalGeometry/Predictive (1), RenewalGeometry/OperatorLimits (1) |
-| emergent_spacetime | 3730 | 431 | RenewalGeometry/Gravity (153), RenewalGeometry/Action (63), RenewalGeometry/Analysis (55), RenewalGeometry/Predictive (39), RenewalGeometry/DiscreteAnalysis (38), RenewalGeometry/Dimension (14), RenewalGeometry/Continuum (14), RenewalGeometry/Algebra (9), RenewalGeometry/Renewal (9), RenewalGeometry/GaugeTheory (7), RenewalGeometry/Lorentz (5), RenewalGeometry/Krein (5), RenewalGeometry/Certificates (4), RenewalGeometry/OperatorLimits (4), RenewalGeometry/StatMech (4), RenewalGeometry/Operational (3), RenewalGeometry/Commutant (2), RenewalGeometry/MarkovChains (1), RenewalGeometry/Spectralization (1), NCG/Krein (1) |
-| predictive_spectral_geometry | 1661 | 194 | RenewalGeometry/Spectralization (75), RenewalGeometry/Predictive (31), RenewalGeometry/DiscreteAnalysis (23), RenewalGeometry/OperatorLimits (20), RenewalGeometry/Analysis (13), RenewalGeometry/Algebra (6), RenewalGeometry/Continuum (5), RenewalGeometry/Certificates (4), RenewalGeometry/Operational (4), RenewalGeometry/Commutant (3), NCG/Graph (3), RenewalGeometry/Krein (2), RenewalGeometry/Topology/InverseLimitOrbitQuotient (1), RenewalGeometry/Topology/FiniteInverseSystemStableImage (1), NCG/SpectralTriple (1), RenewalGeometry/Topology/FiniteInverseSystemPruning (1), RenewalGeometry/Gravity (1) |
-| spacetime_gauge_duality | 1394 | 208 | RenewalGeometry/Commutant (74), RenewalGeometry/StandardModel (67), RenewalGeometry/OperatorLimits (32), RenewalGeometry/Predictive (12), RenewalGeometry/Analysis (9), RenewalGeometry/Operational (5), RenewalGeometry/Algebra (3), NCG/Algebra (2), RenewalGeometry/Action (2), RenewalGeometry/Spectralization (2) |
+| einstein_sm_action_closure | 4953 | 672 | MathPhys/Continuum (256), MathPhys/Analysis (149), RenewalGeometry/Continuum (120), MathPhys/Gravity (35), MathPhys/GaugeTheory (35), RenewalGeometry/Action (16), RenewalGeometry/StandardModel (15), MathPhys/DiscreteAnalysis (12), MathPhys/Variational (10), RenewalGeometry/GaugeTheory (7), MathPhys/GaugeGroups (5), RenewalGeometry/DiscreteAnalysis (4), MathPhys/Algebra (3), RenewalGeometry/Gravity (2), RenewalGeometry/Analysis (1), MathPhys/OperatorLimits (1), RenewalGeometry/Predictive (1) |
+| emergent_spacetime | 3730 | 436 | RenewalGeometry/Gravity (100), RenewalGeometry/Action (56), MathPhys/Gravity (55), MathPhys/Analysis (53), MathPhys/DiscreteAnalysis (34), RenewalGeometry/Predictive (34), MathPhys/Continuum (14), MathPhys/Algebra (9), MathPhys/Variational (8), RenewalGeometry/Dimension (7), MathPhys/Combinatorics (7), MathPhys/GaugeTheory (7), RenewalGeometry/DiscreteAnalysis (6), MathPhys/SystemsTheory (5), RenewalGeometry/Renewal (5), MathPhys/Probability (4), RenewalGeometry/Certificates (4), MathPhys/OperatorLimits (4), RenewalGeometry/StatMech (3), RenewalGeometry/Krein (3), MathPhys/Krein (3), MathPhys/LorentzianGeometry (3), MathPhys/OperatorAlgebras (2), RenewalGeometry/Operational (2), RenewalGeometry/Lorentz (2), RenewalGeometry/Analysis (2), MathPhys/MarkovChains (1), MathPhys/SpectralGeometry (1), MathPhys/QuantumInformation (1), MathPhys/StatMech (1) |
+| predictive_spectral_geometry | 1661 | 198 | MathPhys/SpectralGeometry (45), RenewalGeometry/Spectralization (31), MathPhys/DiscreteAnalysis (21), MathPhys/OperatorLimits (20), MathPhys/SystemsTheory (17), RenewalGeometry/Predictive (15), MathPhys/Analysis (13), MathPhys/Algebra (6), MathPhys/OperatorTheory (4), MathPhys/OperatorAlgebras (3), MathPhys/QuantumInformation (3), MathPhys/Continuum (3), MathPhys/Graph (3), RenewalGeometry/DiscreteAnalysis (2), RenewalGeometry/Continuum (2), MathPhys/Krein (2), MathPhys/Gravity (1), RenewalGeometry/Gravity (1), MathPhys/Topology/FiniteInverseSystemPruning (1), MathPhys/NoncommutativeGeometry (1), MathPhys/Topology/InverseLimitOrbitQuotient (1), RenewalGeometry/Operational (1), RenewalGeometry/OperatorLimits (1), MathPhys/Topology/FiniteInverseSystemStableImage (1) |
+| spacetime_gauge_duality | 1394 | 213 | RenewalGeometry/StandardModel (56), RenewalGeometry/Commutant (41), MathPhys/OperatorAlgebras (37), MathPhys/OperatorLimits (32), RenewalGeometry/Predictive (11), MathPhys/GaugeGroups (11), MathPhys/Analysis (9), MathPhys/Algebra (5), RenewalGeometry/Operational (4), MathPhys/QuantumInformation (2), RenewalGeometry/Action (2), RenewalGeometry/Spectralization (2), MathPhys/SystemsTheory (1) |
 
 | Folder | Modules | Used by a paper | Import-only | Unused & removable |
 |---|---:|---:|---:|---:|
-| RenewalGeometry/Continuum | 390 | 376 | 14 | 0 |
-| RenewalGeometry/Analysis | 229 | 221 | 7 | 1 |
-| RenewalGeometry/Gravity | 194 | 179 | 12 | 3 |
-| RenewalGeometry/OperatorLimits | 170 | 52 | 103 | 15 |
-| RenewalGeometry/Predictive | 120 | 70 | 34 | 16 |
-| RenewalGeometry/StandardModel | 115 | 80 | 21 | 14 |
-| RenewalGeometry/Commutant | 114 | 75 | 23 | 16 |
-| RenewalGeometry/Spectralization | 104 | 77 | 23 | 4 |
-| RenewalGeometry/Action | 104 | 90 | 13 | 1 |
-| RenewalGeometry/DiscreteAnalysis | 87 | 67 | 18 | 2 |
-| RenewalGeometry/Operational | 60 | 11 | 20 | 29 |
-| RenewalGeometry/Lorentz | 60 | 5 | 4 | 51 |
-| RenewalGeometry/GaugeTheory | 53 | 49 | 1 | 3 |
-| RenewalGeometry/Algebra | 47 | 18 | 20 | 9 |
-| RenewalGeometry/Dimension | 41 | 14 | 5 | 22 |
-| RenewalGeometry/Renewal | 41 | 9 | 7 | 25 |
-| RenewalGeometry/StatMech | 35 | 4 | 11 | 20 |
-| NCG/Algebra | 24 | 2 | 3 | 19 |
-| RenewalGeometry/Certificates | 16 | 8 | 6 | 2 |
-| NCG/Krein | 14 | 1 | 0 | 13 |
-| RenewalGeometry/Measurement | 14 | 0 | 2 | 12 |
-| RenewalGeometry/Krein | 11 | 6 | 1 | 4 |
-| NCG/Graph | 11 | 3 | 3 | 5 |
-| RenewalGeometry/MarkovChains | 10 | 1 | 4 | 5 |
-| RenewalGeometry/Topology/Brouwer | 6 | 0 | 0 | 6 |
-| RenewalGeometry/Miscellany | 6 | 0 | 2 | 4 |
-| RenewalGeometry/Arithmetic | 4 | 0 | 3 | 1 |
-| RenewalGeometry/Numerics | 4 | 0 | 0 | 4 |
-| NCG/Operator | 3 | 0 | 0 | 3 |
-| RenewalGeometry/Complexity | 3 | 0 | 1 | 2 |
-| NCG/PerronFrobenius | 2 | 0 | 0 | 2 |
-| RenewalGeometry/Topology/FiniteInverseSystemPruning | 1 | 1 | 0 | 0 |
-| RenewalGeometry/Topology/FiniteInverseSystemStableImage | 1 | 1 | 0 | 0 |
-| RenewalGeometry/Topology/InverseLimitOrbitQuotient | 1 | 1 | 0 | 0 |
-| NCG/SpectralTriple | 1 | 1 | 0 | 0 |
-| NCG | 1 | 0 | 0 | 1 |
-| **Total** | 2097 | 1422 | 361 | 314 |
+| MathPhys/Continuum | 281 | 265 | 15 | 1 |
+| MathPhys/Analysis | 227 | 218 | 7 | 2 |
+| MathPhys/OperatorLimits | 167 | 52 | 100 | 15 |
+| RenewalGeometry/Continuum | 122 | 122 | 0 | 0 |
+| RenewalGeometry/Gravity | 115 | 102 | 10 | 3 |
+| RenewalGeometry/StandardModel | 99 | 68 | 18 | 13 |
+| RenewalGeometry/Predictive | 88 | 50 | 20 | 18 |
+| RenewalGeometry/Action | 87 | 74 | 7 | 6 |
+| MathPhys/Gravity | 82 | 79 | 2 | 1 |
+| MathPhys/DiscreteAnalysis | 76 | 57 | 16 | 3 |
+| MathPhys/Algebra | 69 | 20 | 23 | 26 |
+| MathPhys/OperatorAlgebras | 65 | 38 | 13 | 14 |
+| MathPhys/SpectralGeometry | 58 | 45 | 12 | 1 |
+| RenewalGeometry/Commutant | 57 | 41 | 7 | 9 |
+| RenewalGeometry/Spectralization | 48 | 33 | 10 | 5 |
+| MathPhys/GaugeTheory | 42 | 42 | 0 | 0 |
+| MathPhys/QuantumInformation | 38 | 6 | 14 | 18 |
+| MathPhys/LorentzianGeometry | 37 | 3 | 0 | 34 |
+| MathPhys/SystemsTheory | 33 | 21 | 8 | 4 |
+| RenewalGeometry/Operational | 31 | 6 | 6 | 19 |
+| RenewalGeometry/Renewal | 30 | 5 | 2 | 23 |
+| MathPhys/StatMech | 27 | 1 | 8 | 18 |
+| MathPhys/Combinatorics | 23 | 7 | 3 | 13 |
+| RenewalGeometry/Dimension | 23 | 7 | 1 | 15 |
+| RenewalGeometry/Lorentz | 23 | 2 | 4 | 17 |
+| MathPhys/Krein | 20 | 4 | 1 | 15 |
+| MathPhys/Variational | 20 | 18 | 2 | 0 |
+| MathPhys/GaugeGroups | 17 | 13 | 2 | 2 |
+| MathPhys/OperatorTheory | 13 | 4 | 5 | 4 |
+| RenewalGeometry/DiscreteAnalysis | 13 | 12 | 1 | 0 |
+| MathPhys/Graph | 11 | 3 | 3 | 5 |
+| RenewalGeometry/GaugeTheory | 11 | 7 | 0 | 4 |
+| MathPhys/Probability | 11 | 4 | 1 | 6 |
+| RenewalGeometry/StatMech | 10 | 3 | 1 | 6 |
+| MathPhys/MarkovChains | 10 | 1 | 4 | 5 |
+| RenewalGeometry/Measurement | 7 | 0 | 1 | 6 |
+| RenewalGeometry/Miscellany | 6 | 0 | 1 | 5 |
+| RenewalGeometry/Certificates | 6 | 4 | 0 | 2 |
+| MathPhys/Topology/Brouwer | 6 | 0 | 0 | 6 |
+| RenewalGeometry/Krein | 5 | 3 | 0 | 2 |
+| RenewalGeometry/Analysis | 4 | 3 | 0 | 1 |
+| RenewalGeometry/OperatorLimits | 4 | 1 | 1 | 2 |
+| RenewalGeometry/Numerics | 3 | 0 | 0 | 3 |
+| RenewalGeometry/Algebra | 2 | 0 | 0 | 2 |
+| MathPhys/PerronFrobenius | 2 | 0 | 0 | 2 |
+| MathPhys | 1 | 0 | 0 | 1 |
+| MathPhys/Topology/FiniteInverseSystemPruning | 1 | 1 | 0 | 0 |
+| RenewalGeometry/Arithmetic | 1 | 0 | 0 | 1 |
+| RenewalGeometry/Complexity | 1 | 0 | 0 | 1 |
+| MathPhys/Topology/FiniteInverseSystemStableImage | 1 | 1 | 0 | 0 |
+| MathPhys/Topology/InverseLimitOrbitQuotient | 1 | 1 | 0 | 0 |
+| RenewalGeometry/MarkovChains | 1 | 0 | 0 | 1 |
+| MathPhys/NoncommutativeGeometry | 1 | 1 | 0 | 0 |
+| **Total** | 2137 | 1448 | 329 | 360 |
 
 ## Modules no cited declaration uses and no used module imports
 
-- `NCG.Algebra.CPMap`
-- `NCG.Algebra.CircleSelection`
-- `NCG.Algebra.ExternalFactor`
-- `NCG.Algebra.FactorBlocks`
-- `NCG.Algebra.InternalComplement`
-- `NCG.Algebra.JordanWigner`
-- `NCG.Algebra.LuedersInstrument`
-- `NCG.Algebra.PauliJordan`
-- `NCG.Algebra.PhaseVelocity`
-- `NCG.Algebra.ProjectiveDefect`
-- `NCG.Algebra.RadicalCentre`
-- `NCG.Algebra.RealizedReversible`
-- `NCG.Algebra.RebitCounterexample`
-- `NCG.Algebra.RevisionCocycle`
-- `NCG.Algebra.RevisionDerived`
-- `NCG.Algebra.RevisionTwirl`
-- `NCG.Algebra.SpinFactor`
-- `NCG.Algebra.Symplectic`
-- `NCG.Algebra.UnitalStationary`
-- `NCG.Basic`
-- `NCG.Graph.CohomologyZ4`
-- `NCG.Graph.Condensation`
-- `NCG.Graph.Decimation`
-- `NCG.Graph.Displacement`
-- `NCG.Graph.RecordOrientation`
-- `NCG.Krein.AmplitudeLift`
-- `NCG.Krein.CoverModel`
-- `NCG.Krein.EnrichmentClassification`
-- `NCG.Krein.EnrichmentNaturality`
-- `NCG.Krein.FlatSector`
-- `NCG.Krein.InternalHolonomy`
-- `NCG.Krein.IrreducibleNoGo`
-- `NCG.Krein.ModularDirac`
-- `NCG.Krein.SheetRealization`
-- `NCG.Krein.SignedData`
-- `NCG.Krein.SignedDirac`
-- `NCG.Krein.TemporalRow`
-- `NCG.Krein.TimelikeGenerator`
-- `NCG.Operator.Diagonal`
-- `NCG.Operator.DiagonalRigidity`
-- `NCG.Operator.FibreDichotomy`
-- `NCG.PerronFrobenius.PerronExistence`
-- `NCG.PerronFrobenius.PerronPressure`
+- `MathPhys.Algebra.AtomicResetOrderedCone`
+- `MathPhys.Algebra.CircleSelection`
+- `MathPhys.Algebra.ExternalFactor`
+- `MathPhys.Algebra.FactorBlocks`
+- `MathPhys.Algebra.FiniteHermitianOrderedCone`
+- `MathPhys.Algebra.Frobenius`
+- `MathPhys.Algebra.GramHelpers`
+- `MathPhys.Algebra.InternalComplement`
+- `MathPhys.Algebra.JordanWigner`
+- `MathPhys.Algebra.KadisonSchwarz`
+- `MathPhys.Algebra.LuedersInstrument`
+- `MathPhys.Algebra.PauliJordan`
+- `MathPhys.Algebra.PhaseVelocity`
+- `MathPhys.Algebra.PositiveMatrixFunctional`
+- `MathPhys.Algebra.ProjectiveDefect`
+- `MathPhys.Algebra.PsdBlockSchurExact`
+- `MathPhys.Algebra.RadicalCentre`
+- `MathPhys.Algebra.RealizedReversible`
+- `MathPhys.Algebra.RebitCounterexample`
+- `MathPhys.Algebra.RevisionCocycle`
+- `MathPhys.Algebra.RevisionDerived`
+- `MathPhys.Algebra.RevisionTwirl`
+- `MathPhys.Algebra.SchwarzMap`
+- `MathPhys.Algebra.SpinFactor`
+- `MathPhys.Algebra.Symplectic`
+- `MathPhys.Algebra.UnitalStationary`
+- `MathPhys.Analysis.FiniteGramLeastSquares`
+- `MathPhys.Analysis.IntervalKit`
+- `MathPhys.Basic`
+- `MathPhys.Combinatorics.Controllability`
+- `MathPhys.Combinatorics.DivisionSelection`
+- `MathPhys.Combinatorics.EvenRank`
+- `MathPhys.Combinatorics.FiniteBooleanCircuits`
+- `MathPhys.Combinatorics.GradedGram`
+- `MathPhys.Combinatorics.HodgeDegree`
+- `MathPhys.Combinatorics.IsotropyInterference`
+- `MathPhys.Combinatorics.RGEigenvalue`
+- `MathPhys.Combinatorics.ResourceFaithfulComplexityBridge`
+- `MathPhys.Combinatorics.SMDescent`
+- `MathPhys.Combinatorics.SectorIndependence`
+- `MathPhys.Combinatorics.TemporalPartner`
+- `MathPhys.Combinatorics.TightFrame`
+- `MathPhys.Continuum.OUProcess`
+- `MathPhys.DiscreteAnalysis.AcceptedAffinityHodgeCompiler`
+- `MathPhys.DiscreteAnalysis.PositiveStencilCoverExact`
+- `MathPhys.DiscreteAnalysis.WalshBandWeightedOperator`
+- `MathPhys.GaugeGroups.GenericRouterSaturationExact`
+- `MathPhys.GaugeGroups.K4Core`
+- `MathPhys.Graph.CohomologyZ4`
+- `MathPhys.Graph.Condensation`
+- `MathPhys.Graph.Decimation`
+- `MathPhys.Graph.Displacement`
+- `MathPhys.Graph.RecordOrientation`
+- `MathPhys.Gravity.CurvedFLRW`
+- `MathPhys.Krein.AmplitudeLift`
+- `MathPhys.Krein.AmplitudeRoot`
+- `MathPhys.Krein.ConePositive`
+- `MathPhys.Krein.CoverModel`
+- `MathPhys.Krein.EnrichmentClassification`
+- `MathPhys.Krein.EnrichmentNaturality`
+- `MathPhys.Krein.FlatSector`
+- `MathPhys.Krein.InternalHolonomy`
+- `MathPhys.Krein.IrreducibleNoGo`
+- `MathPhys.Krein.ModularDirac`
+- `MathPhys.Krein.SheetRealization`
+- `MathPhys.Krein.SignedData`
+- `MathPhys.Krein.SignedDirac`
+- `MathPhys.Krein.TemporalRow`
+- `MathPhys.Krein.TimelikeGenerator`
+- `MathPhys.LorentzianGeometry.AliasingObstruction`
+- `MathPhys.LorentzianGeometry.BlockRadius`
+- `MathPhys.LorentzianGeometry.CalculusClause`
+- `MathPhys.LorentzianGeometry.CoreResolvent`
+- `MathPhys.LorentzianGeometry.CovariantConsistency`
+- `MathPhys.LorentzianGeometry.CovariantL2`
+- `MathPhys.LorentzianGeometry.CurvedResolvent`
+- `MathPhys.LorentzianGeometry.CycleRadius`
+- `MathPhys.LorentzianGeometry.DetCrossing`
+- `MathPhys.LorentzianGeometry.DoobConstruction`
+- `MathPhys.LorentzianGeometry.DriftDispersion`
+- `MathPhys.LorentzianGeometry.EmptyResolvent`
+- `MathPhys.LorentzianGeometry.FrameUniversality`
+- `MathPhys.LorentzianGeometry.IntegerStencil`
+- `MathPhys.LorentzianGeometry.MarkedTorus`
+- `MathPhys.LorentzianGeometry.ModelRounding`
+- `MathPhys.LorentzianGeometry.MultiplierResolvent`
+- `MathPhys.LorentzianGeometry.OperatorLimit`
+- `MathPhys.LorentzianGeometry.PathParity`
+- `MathPhys.LorentzianGeometry.PlancherelTransport`
+- `MathPhys.LorentzianGeometry.PolyhedralObstruction`
+- `MathPhys.LorentzianGeometry.PositiveAveraging`
+- `MathPhys.LorentzianGeometry.ResetDifference`
+- `MathPhys.LorentzianGeometry.SCCRadius`
+- `MathPhys.LorentzianGeometry.SecondMoment`
+- `MathPhys.LorentzianGeometry.SelfAveraging`
+- `MathPhys.LorentzianGeometry.Stability`
+- `MathPhys.LorentzianGeometry.StationaryExchange`
+- `MathPhys.LorentzianGeometry.StrongLawMoments`
+- `MathPhys.LorentzianGeometry.SubmatrixRadius`
+- `MathPhys.LorentzianGeometry.SymbolCone`
+- `MathPhys.LorentzianGeometry.SymmetryEllipticity`
+- `MathPhys.LorentzianGeometry.TaxicabLimit`
+- `MathPhys.LorentzianGeometry.VolumeElement`
+- `MathPhys.MarkovChains.AbsorbingClass`
+- `MathPhys.MarkovChains.AffinityCohomology`
+- `MathPhys.MarkovChains.CapacityFactorization`
+- `MathPhys.MarkovChains.ClassicalAffinity`
+- `MathPhys.MarkovChains.IndependenceClasses`
+- `MathPhys.OperatorAlgebras.EmbeddedJointCommutatorCommutant`
+- `MathPhys.OperatorAlgebras.FrobeniusHolonomy`
+- `MathPhys.OperatorAlgebras.GrandTannaka`
+- `MathPhys.OperatorAlgebras.IsotypicCommutantExact`
+- `MathPhys.OperatorAlgebras.JointCommutatorBoundedKernelSpectralConsequencesFromDenseSourcesAndGraphScreens`
+- `MathPhys.OperatorAlgebras.JointCommutatorCofinalMoscoFromOneStrongResolvent`
+- `MathPhys.OperatorAlgebras.JointCommutatorFirstPositiveEigenvalueConvergenceFromDenseSourcesAndGraphScreens`
+- `MathPhys.OperatorAlgebras.JointCommutatorHoweGapFromDenseSourcesAndGraphScreens`
+- `MathPhys.OperatorAlgebras.JointCommutatorKernelSpectralConsequencesFromDenseSourcesAndGraphScreens`
+- `MathPhys.OperatorAlgebras.JointCommutatorKernelSpectralConsequencesFromOneStrongResolventAndGraphScreens`
+- `MathPhys.OperatorAlgebras.JointCommutatorMoscoKernelSpectralConsequences`
+- `MathPhys.OperatorAlgebras.JointCommutatorProtectedKernelRigidityFromDenseSourcesAndGraphScreens`
+- `MathPhys.OperatorAlgebras.JointCommutatorResolventDenseSourceConvergence`
+- `MathPhys.OperatorAlgebras.RepresentationDimensions`
+- `MathPhys.OperatorLimits.BoundedOperatorNormalResolventInjectivity`
+- `MathPhys.OperatorLimits.CircleRieszProjectionOperatorGraphKernel`
+- `MathPhys.OperatorLimits.DiagonalMoscoRecovery`
+- `MathPhys.OperatorLimits.ENNRealBoundedOperatorCofinalNormalResolvent`
+- `MathPhys.OperatorLimits.IdempotentNormLimit`
+- `MathPhys.OperatorLimits.ProtectedGraphKernelRigidity`
+- `MathPhys.OperatorLimits.ProtectedGraphKernelRigidityFromCompactResolvents`
+- `MathPhys.OperatorLimits.ProtectedGraphKernelRigidityFromRieszConvergence`
+- `MathPhys.OperatorLimits.ResolventCoreMoscoRecovery`
+- `MathPhys.OperatorLimits.ResolventEnvelopeConvergence`
+- `MathPhys.OperatorLimits.ResolventEnvelopeFormLiminf`
+- `MathPhys.OperatorLimits.ResolventEnvelopeLiminf`
+- `MathPhys.OperatorLimits.ResolventMoscoConverse`
+- `MathPhys.OperatorLimits.VaryingHilbertAsymptoticDensityFromDenseSources`
+- `MathPhys.OperatorLimits.VaryingHilbertRealMosco`
+- `MathPhys.OperatorTheory.Diagonal`
+- `MathPhys.OperatorTheory.DiagonalRigidity`
+- `MathPhys.OperatorTheory.FibreDichotomy`
+- `MathPhys.OperatorTheory.GTProtectedRiesz`
+- `MathPhys.PerronFrobenius.PerronExistence`
+- `MathPhys.PerronFrobenius.PerronPressure`
+- `MathPhys.Probability.Calibration`
+- `MathPhys.Probability.ChaosLocalization`
+- `MathPhys.Probability.GeometricRandomSum`
+- `MathPhys.Probability.IncidenceZeta`
+- `MathPhys.Probability.ScalarPotential`
+- `MathPhys.Probability.SpectralDimension`
+- `MathPhys.QuantumInformation.AtomicReset`
+- `MathPhys.QuantumInformation.ClassicalReverse`
+- `MathPhys.QuantumInformation.Definiteness`
+- `MathPhys.QuantumInformation.IdempotentSharp`
+- `MathPhys.QuantumInformation.Idempotentization`
+- `MathPhys.QuantumInformation.KMSDual`
+- `MathPhys.QuantumInformation.LindbladCP`
+- `MathPhys.QuantumInformation.MonoidalQuotient`
+- `MathPhys.QuantumInformation.NoSignalling`
+- `MathPhys.QuantumInformation.PointerAlgebra`
+- `MathPhys.QuantumInformation.PointerBorn`
+- `MathPhys.QuantumInformation.ProjectiveState`
+- `MathPhys.QuantumInformation.RecordParity`
+- `MathPhys.QuantumInformation.RedundantObjectivity`
+- `MathPhys.QuantumInformation.SelectionReconstruction`
+- `MathPhys.QuantumInformation.SemigroupLimit`
+- `MathPhys.QuantumInformation.ShrunkEffects`
+- `MathPhys.QuantumInformation.StablePointer`
+- `MathPhys.SpectralGeometry.FiniteNaimarkDilation`
+- `MathPhys.StatMech.CWGap`
+- `MathPhys.StatMech.CWHypergeom`
+- `MathPhys.StatMech.CWLaplace`
+- `MathPhys.StatMech.CWPatterns`
+- `MathPhys.StatMech.CWPhases`
+- `MathPhys.StatMech.CWPressure`
+- `MathPhys.StatMech.ChernoffBound`
+- `MathPhys.StatMech.CircuitCount`
+- `MathPhys.StatMech.ConstraintCharacter`
+- `MathPhys.StatMech.CramerLower`
+- `MathPhys.StatMech.CurieWeissMeasure`
+- `MathPhys.StatMech.DobrushinUnique`
+- `MathPhys.StatMech.FiniteTargetProjectionAndQuotients`
+- `MathPhys.StatMech.GibbsDLR`
+- `MathPhys.StatMech.IsingContours`
+- `MathPhys.StatMech.MarkovChernoff`
+- `MathPhys.StatMech.PeierlsBound`
+- `MathPhys.StatMech.PointwiseErgodic`
+- `MathPhys.SystemsTheory.FutureWordSaturationExact`
+- `MathPhys.SystemsTheory.KrylovLocalizerFlatnessExact`
+- `MathPhys.SystemsTheory.StoreFrequencyCount`
+- `MathPhys.SystemsTheory.StoreFrequencyPencil`
+- `MathPhys.Topology.Brouwer.ApplyCubicalSperner`
+- `MathPhys.Topology.Brouwer.AxiomAudit`
+- `MathPhys.Topology.Brouwer.ConvexHomeomorphisms`
+- `MathPhys.Topology.Brouwer.CubicalSperner`
+- `MathPhys.Topology.Brouwer.CubicalSpernerPrep`
+- `MathPhys.Topology.Brouwer.FixedPoint`
+- `RenewalGeometry.Action.HoeffdingGramIdentification`
+- `RenewalGeometry.Action.HoeffdingSupport`
+- `RenewalGeometry.Action.SameHistoryProvenancePythagoras`
+- `RenewalGeometry.Action.ScoreContinuum`
 - `RenewalGeometry.Action.SupplementSharpCurrentTransfer`
-- `RenewalGeometry.Algebra.AtomicResetOrderedCone`
+- `RenewalGeometry.Action.SupportPrototype`
 - `RenewalGeometry.Algebra.CliffordGeneration`
-- `RenewalGeometry.Algebra.FiniteHermitianOrderedCone`
-- `RenewalGeometry.Algebra.Frobenius`
 - `RenewalGeometry.Algebra.JordanFace`
-- `RenewalGeometry.Algebra.KadisonSchwarz`
-- `RenewalGeometry.Algebra.PositiveMatrixFunctional`
-- `RenewalGeometry.Algebra.PsdBlockSchurExact`
-- `RenewalGeometry.Algebra.SchwarzMap`
-- `RenewalGeometry.Analysis.FiniteGramLeastSquares`
-- `RenewalGeometry.Arithmetic.SMDescent`
-- `RenewalGeometry.Certificates.GTProtectedRiesz`
+- `RenewalGeometry.Analysis.GeometricThresholdBankExact`
+- `RenewalGeometry.Arithmetic.BSDBridge`
+- `RenewalGeometry.Certificates.ProvenancePythagoras`
 - `RenewalGeometry.Certificates.RelativeUpstreamPrimitiveClosure`
 - `RenewalGeometry.Commutant.BoundedGraphScreenPacketFiniteDimensional`
 - `RenewalGeometry.Commutant.CoerciveContinuumHoweDualityExact`
 - `RenewalGeometry.Commutant.CofinalSpectralUpgradeExact`
 - `RenewalGeometry.Commutant.ContinuumHoweProtectedCommutantExact`
-- `RenewalGeometry.Commutant.EmbeddedJointCommutatorCommutant`
-- `RenewalGeometry.Commutant.IsotypicCommutantExact`
-- `RenewalGeometry.Commutant.JointCommutatorBoundedKernelSpectralConsequencesFromDenseSourcesAndGraphScreens`
-- `RenewalGeometry.Commutant.JointCommutatorCofinalMoscoFromOneStrongResolvent`
-- `RenewalGeometry.Commutant.JointCommutatorFirstPositiveEigenvalueConvergenceFromDenseSourcesAndGraphScreens`
-- `RenewalGeometry.Commutant.JointCommutatorHoweGapFromDenseSourcesAndGraphScreens`
-- `RenewalGeometry.Commutant.JointCommutatorKernelSpectralConsequencesFromDenseSourcesAndGraphScreens`
-- `RenewalGeometry.Commutant.JointCommutatorKernelSpectralConsequencesFromOneStrongResolventAndGraphScreens`
-- `RenewalGeometry.Commutant.JointCommutatorMoscoKernelSpectralConsequences`
-- `RenewalGeometry.Commutant.JointCommutatorProtectedKernelRigidityFromDenseSourcesAndGraphScreens`
-- `RenewalGeometry.Commutant.JointCommutatorResolventDenseSourceConvergence`
+- `RenewalGeometry.Commutant.PacketCommonCentre`
+- `RenewalGeometry.Commutant.PacketReciprocalWedderburn`
 - `RenewalGeometry.Commutant.SMSTContinuumHoweExact`
-- `RenewalGeometry.Complexity.FiniteBooleanCircuits`
-- `RenewalGeometry.Complexity.ResourceFaithfulComplexityBridge`
+- `RenewalGeometry.Commutant.SourceIdealSplit`
+- `RenewalGeometry.Commutant.UniversalCoercive`
+- `RenewalGeometry.Complexity.PvsNPBridge`
 - `RenewalGeometry.Dimension.AccessFixedPoint`
 - `RenewalGeometry.Dimension.AccessSelection`
 - `RenewalGeometry.Dimension.AccessibleRank`
 - `RenewalGeometry.Dimension.Circulation`
-- `RenewalGeometry.Dimension.Controllability`
+- `RenewalGeometry.Dimension.ContrastSpectrum`
 - `RenewalGeometry.Dimension.CovarianceRank`
+- `RenewalGeometry.Dimension.DimensionCliffordEasy`
 - `RenewalGeometry.Dimension.DimensionLockedK4`
 - `RenewalGeometry.Dimension.DimensionLockedK4DecompositionExact`
-- `RenewalGeometry.Dimension.DivisionSelection`
-- `RenewalGeometry.Dimension.EvenRank`
-- `RenewalGeometry.Dimension.GradedGram`
-- `RenewalGeometry.Dimension.HodgeDegree`
 - `RenewalGeometry.Dimension.IcosahedralKraus`
-- `RenewalGeometry.Dimension.IsotropyInterference`
 - `RenewalGeometry.Dimension.IsotropyNoGo`
 - `RenewalGeometry.Dimension.PowerCounting`
+- `RenewalGeometry.Dimension.PrimitiveHoeffdingCarrier`
 - `RenewalGeometry.Dimension.PrimitiveReduction`
-- `RenewalGeometry.Dimension.RGEigenvalue`
-- `RenewalGeometry.Dimension.SectorIndependence`
 - `RenewalGeometry.Dimension.SelectionCorollaries`
-- `RenewalGeometry.Dimension.TemporalPartner`
-- `RenewalGeometry.Dimension.TightFrame`
-- `RenewalGeometry.DiscreteAnalysis.AcceptedAffinityHodgeCompiler`
-- `RenewalGeometry.DiscreteAnalysis.PositiveStencilCoverExact`
 - `RenewalGeometry.GaugeTheory.LatticeYangMillsRecords04`
 - `RenewalGeometry.GaugeTheory.LatticeYangMillsRecords05`
 - `RenewalGeometry.GaugeTheory.LoewnerTransferAndRegulatedMass`
-- `RenewalGeometry.Gravity.CurvedFLRW`
+- `RenewalGeometry.GaugeTheory.YMSlabGap`
+- `RenewalGeometry.Gravity.PotentialPalatini`
 - `RenewalGeometry.Gravity.SupplementCurvatureGronwall`
 - `RenewalGeometry.Gravity.SupplementDiscreteCurvatureTransfer`
-- `RenewalGeometry.Krein.AmplitudeRoot`
-- `RenewalGeometry.Krein.ConePositive`
 - `RenewalGeometry.Krein.EnrichmentMinimality`
 - `RenewalGeometry.Krein.TwoCochains`
-- `RenewalGeometry.Lorentz.AliasingObstruction`
 - `RenewalGeometry.Lorentz.Assembly`
-- `RenewalGeometry.Lorentz.BlockRadius`
-- `RenewalGeometry.Lorentz.CalculusClause`
 - `RenewalGeometry.Lorentz.ChannelTorsion`
 - `RenewalGeometry.Lorentz.ClockDischarge`
-- `RenewalGeometry.Lorentz.CoreResolvent`
-- `RenewalGeometry.Lorentz.CovariantConsistency`
-- `RenewalGeometry.Lorentz.CovariantL2`
 - `RenewalGeometry.Lorentz.CurvedHamiltonian`
-- `RenewalGeometry.Lorentz.CurvedResolvent`
-- `RenewalGeometry.Lorentz.CycleRadius`
-- `RenewalGeometry.Lorentz.DetCrossing`
 - `RenewalGeometry.Lorentz.DobrushinMixing`
-- `RenewalGeometry.Lorentz.DoobConstruction`
-- `RenewalGeometry.Lorentz.DriftDispersion`
-- `RenewalGeometry.Lorentz.EmptyResolvent`
 - `RenewalGeometry.Lorentz.EntropyAffinity`
 - `RenewalGeometry.Lorentz.ExchangePressure`
-- `RenewalGeometry.Lorentz.FrameUniversality`
 - `RenewalGeometry.Lorentz.HeatBathConvergence`
 - `RenewalGeometry.Lorentz.HeatBathPrimitivity`
 - `RenewalGeometry.Lorentz.HyperbolicCore`
-- `RenewalGeometry.Lorentz.IntegerStencil`
 - `RenewalGeometry.Lorentz.InterferenceClosure`
-- `RenewalGeometry.Lorentz.MarkedTorus`
-- `RenewalGeometry.Lorentz.ModelRounding`
-- `RenewalGeometry.Lorentz.MultiplierResolvent`
-- `RenewalGeometry.Lorentz.OperatorLimit`
-- `RenewalGeometry.Lorentz.PathParity`
-- `RenewalGeometry.Lorentz.PlancherelTransport`
-- `RenewalGeometry.Lorentz.PolyhedralObstruction`
-- `RenewalGeometry.Lorentz.PositiveAveraging`
 - `RenewalGeometry.Lorentz.PressureGauge`
 - `RenewalGeometry.Lorentz.ProductOrder`
 - `RenewalGeometry.Lorentz.Reconstruction`
-- `RenewalGeometry.Lorentz.ResetDifference`
 - `RenewalGeometry.Lorentz.ResetField`
-- `RenewalGeometry.Lorentz.SCCRadius`
 - `RenewalGeometry.Lorentz.SMSTCliffordPressureMatterExact`
-- `RenewalGeometry.Lorentz.SecondMoment`
-- `RenewalGeometry.Lorentz.SelfAveraging`
-- `RenewalGeometry.Lorentz.Stability`
-- `RenewalGeometry.Lorentz.StationaryExchange`
 - `RenewalGeometry.Lorentz.StochasticPressure`
-- `RenewalGeometry.Lorentz.StrongLawMoments`
-- `RenewalGeometry.Lorentz.SubmatrixRadius`
-- `RenewalGeometry.Lorentz.SymbolCone`
-- `RenewalGeometry.Lorentz.SymmetryEllipticity`
-- `RenewalGeometry.Lorentz.TaxicabLimit`
-- `RenewalGeometry.Lorentz.VolumeElement`
-- `RenewalGeometry.MarkovChains.AbsorbingClass`
-- `RenewalGeometry.MarkovChains.AffinityCohomology`
-- `RenewalGeometry.MarkovChains.CapacityFactorization`
-- `RenewalGeometry.MarkovChains.ClassicalAffinity`
-- `RenewalGeometry.MarkovChains.IndependenceClasses`
+- `RenewalGeometry.MarkovChains.DiscreteClock`
 - `RenewalGeometry.Measurement.BornWeight`
-- `RenewalGeometry.Measurement.Definiteness`
-- `RenewalGeometry.Measurement.NoSignalling`
 - `RenewalGeometry.Measurement.OddRead`
-- `RenewalGeometry.Measurement.PointerAlgebra`
-- `RenewalGeometry.Measurement.PointerBorn`
 - `RenewalGeometry.Measurement.RecordStructures`
-- `RenewalGeometry.Measurement.RedundantObjectivity`
-- `RenewalGeometry.Measurement.SelectionReconstruction`
 - `RenewalGeometry.Measurement.TrineCofinalCompleteScreenExact`
 - `RenewalGeometry.Measurement.TrineComplexAcquisitionAndTransport`
 - `RenewalGeometry.Measurement.TrineTransportExtras`
@@ -232,26 +338,19 @@ Roots: 11647 cited declarations.
 - `RenewalGeometry.Miscellany.AssortedFiniteRecords01`
 - `RenewalGeometry.Miscellany.AssortedFiniteRecords02`
 - `RenewalGeometry.Miscellany.AssortedFiniteRecords03`
+- `RenewalGeometry.Miscellany.ConditionalRecordPanels2`
 - `RenewalGeometry.Numerics.CKMClosure`
-- `RenewalGeometry.Numerics.IntervalKit`
 - `RenewalGeometry.Numerics.ModularScalars`
 - `RenewalGeometry.Numerics.PMNSClosure`
-- `RenewalGeometry.Operational.AtomicReset`
-- `RenewalGeometry.Operational.ClassicalReverse`
 - `RenewalGeometry.Operational.CommonOriginBalance`
 - `RenewalGeometry.Operational.CommonOriginFrame`
 - `RenewalGeometry.Operational.CommonOriginKMS`
 - `RenewalGeometry.Operational.CommonOriginUCP`
 - `RenewalGeometry.Operational.CompletePositivity`
 - `RenewalGeometry.Operational.Current`
-- `RenewalGeometry.Operational.IdempotentSharp`
-- `RenewalGeometry.Operational.Idempotentization`
 - `RenewalGeometry.Operational.Instrument`
-- `RenewalGeometry.Operational.KMSDual`
-- `RenewalGeometry.Operational.LindbladCP`
 - `RenewalGeometry.Operational.ModularClock`
 - `RenewalGeometry.Operational.ModularSpectral`
-- `RenewalGeometry.Operational.MonoidalQuotient`
 - `RenewalGeometry.Operational.Operational`
 - `RenewalGeometry.Operational.OperationalModel`
 - `RenewalGeometry.Operational.OrderedState`
@@ -260,30 +359,18 @@ Roots: 11647 cited declarations.
 - `RenewalGeometry.Operational.PredictiveRN`
 - `RenewalGeometry.Operational.ProcessCompleteness`
 - `RenewalGeometry.Operational.RecordAlgebra`
-- `RenewalGeometry.Operational.RecordParity`
-- `RenewalGeometry.Operational.SemigroupLimit`
 - `RenewalGeometry.Operational.SharpPurification`
-- `RenewalGeometry.Operational.ShrunkEffects`
-- `RenewalGeometry.Operational.StablePointer`
-- `RenewalGeometry.OperatorLimits.BoundedOperatorNormalResolventInjectivity`
-- `RenewalGeometry.OperatorLimits.CircleRieszProjectionOperatorGraphKernel`
-- `RenewalGeometry.OperatorLimits.DiagonalMoscoRecovery`
-- `RenewalGeometry.OperatorLimits.ENNRealBoundedOperatorCofinalNormalResolvent`
-- `RenewalGeometry.OperatorLimits.IdempotentNormLimit`
-- `RenewalGeometry.OperatorLimits.ProtectedGraphKernelRigidity`
-- `RenewalGeometry.OperatorLimits.ProtectedGraphKernelRigidityFromCompactResolvents`
-- `RenewalGeometry.OperatorLimits.ProtectedGraphKernelRigidityFromRieszConvergence`
-- `RenewalGeometry.OperatorLimits.ResolventCoreMoscoRecovery`
-- `RenewalGeometry.OperatorLimits.ResolventEnvelopeConvergence`
-- `RenewalGeometry.OperatorLimits.ResolventEnvelopeFormLiminf`
-- `RenewalGeometry.OperatorLimits.ResolventEnvelopeLiminf`
-- `RenewalGeometry.OperatorLimits.ResolventMoscoConverse`
-- `RenewalGeometry.OperatorLimits.VaryingHilbertAsymptoticDensityFromDenseSources`
-- `RenewalGeometry.OperatorLimits.VaryingHilbertRealMosco`
+- `RenewalGeometry.Operational.TwoStateSpectatorStationary`
+- `RenewalGeometry.OperatorLimits.GrandUniversal`
+- `RenewalGeometry.OperatorLimits.MoscoResolvent`
+- `RenewalGeometry.Predictive.CanonicalFiniteExperimentQuotient`
+- `RenewalGeometry.Predictive.CanonicalLikelihoodRatioQuotient`
+- `RenewalGeometry.Predictive.ComparisonSignatureQuotient`
 - `RenewalGeometry.Predictive.ConditionalRenewal`
 - `RenewalGeometry.Predictive.FeedbackRealization`
-- `RenewalGeometry.Predictive.FutureWordSaturationExact`
-- `RenewalGeometry.Predictive.KrylovLocalizerFlatnessExact`
+- `RenewalGeometry.Predictive.FiniteCoreLedger`
+- `RenewalGeometry.Predictive.FiniteFutureSaturatedExperimentState`
+- `RenewalGeometry.Predictive.GrandCountermodels`
 - `RenewalGeometry.Predictive.LinearRetract`
 - `RenewalGeometry.Predictive.LinearStability`
 - `RenewalGeometry.Predictive.OperatorHankelCanonicalRealization`
@@ -293,13 +380,11 @@ Roots: 11647 cited declarations.
 - `RenewalGeometry.Predictive.Realization`
 - `RenewalGeometry.Predictive.Retract`
 - `RenewalGeometry.Predictive.SealedProvenanceQuotient`
-- `RenewalGeometry.Predictive.StoreFrequencyCount`
-- `RenewalGeometry.Predictive.StoreFrequencyPencil`
 - `RenewalGeometry.Predictive.SuccessorRefinement`
 - `RenewalGeometry.Renewal.AcceptedResponse`
 - `RenewalGeometry.Renewal.AcceptedResponseLaw`
 - `RenewalGeometry.Renewal.AcceptedResponsePressure`
-- `RenewalGeometry.Renewal.Calibration`
+- `RenewalGeometry.Renewal.BoundaryDecoupling`
 - `RenewalGeometry.Renewal.CausalSkeleton`
 - `RenewalGeometry.Renewal.CommutingGrowth`
 - `RenewalGeometry.Renewal.CrystalCount`
@@ -307,61 +392,39 @@ Roots: 11647 cited declarations.
 - `RenewalGeometry.Renewal.Dimensions`
 - `RenewalGeometry.Renewal.EhrhartCount`
 - `RenewalGeometry.Renewal.FibreClasses`
-- `RenewalGeometry.Renewal.GeometricRandomSum`
 - `RenewalGeometry.Renewal.GradedAutomaton`
-- `RenewalGeometry.Renewal.IncidenceZeta`
 - `RenewalGeometry.Renewal.Memory`
 - `RenewalGeometry.Renewal.MetricCollapse`
 - `RenewalGeometry.Renewal.NetCounting`
 - `RenewalGeometry.Renewal.Order`
 - `RenewalGeometry.Renewal.PredictiveQuotient`
+- `RenewalGeometry.Renewal.PrefixSupportMemory`
 - `RenewalGeometry.Renewal.RenewalMonoid`
 - `RenewalGeometry.Renewal.RenewalProfiles`
-- `RenewalGeometry.Renewal.ScalarPotential`
-- `RenewalGeometry.Renewal.SpectralDimension`
+- `RenewalGeometry.Renewal.TwoStateRenewal`
 - `RenewalGeometry.Renewal.WeylDichotomy`
 - `RenewalGeometry.Renewal.ZetaAbscissa`
 - `RenewalGeometry.Spectralization.AnalyticPolar`
-- `RenewalGeometry.Spectralization.FiniteNaimarkDilation`
 - `RenewalGeometry.Spectralization.FiniteSpectralUniversalityExact`
+- `RenewalGeometry.Spectralization.GrandReconstruction`
+- `RenewalGeometry.Spectralization.NaimarkPhaseSharpness`
 - `RenewalGeometry.Spectralization.SummaryUniversalityFibresExact`
 - `RenewalGeometry.StandardModel.AnomalyFreeFieldShellGaugeQuotientExact`
 - `RenewalGeometry.StandardModel.CliffordOccurrencePressureAssembly`
 - `RenewalGeometry.StandardModel.ConcreteStandardModelInvariantVacuum`
 - `RenewalGeometry.StandardModel.ConcreteStandardModelVacuumStationarity`
 - `RenewalGeometry.StandardModel.GeneratedMatterAnomalyCancellationExact`
-- `RenewalGeometry.StandardModel.GenericRouterSaturationExact`
 - `RenewalGeometry.StandardModel.InternalCommutantNumericalExact`
-- `RenewalGeometry.StandardModel.K4Core`
+- `RenewalGeometry.StandardModel.NativeGenerations`
 - `RenewalGeometry.StandardModel.OneGenerationAudit`
 - `RenewalGeometry.StandardModel.OneGenerationIncidenceAudit`
 - `RenewalGeometry.StandardModel.SMActiveResidual`
 - `RenewalGeometry.StandardModel.SMActiveResidualExact`
 - `RenewalGeometry.StandardModel.SMYMColourRestrictionExact`
 - `RenewalGeometry.StandardModel.StructuralStandardModelPacketExact`
-- `RenewalGeometry.StatMech.CWGap`
-- `RenewalGeometry.StatMech.CWHypergeom`
-- `RenewalGeometry.StatMech.CWLaplace`
-- `RenewalGeometry.StatMech.CWPatterns`
-- `RenewalGeometry.StatMech.CWPhases`
-- `RenewalGeometry.StatMech.CWPressure`
-- `RenewalGeometry.StatMech.ChernoffBound`
-- `RenewalGeometry.StatMech.CircuitCount`
-- `RenewalGeometry.StatMech.CramerLower`
 - `RenewalGeometry.StatMech.CurieWeiss`
 - `RenewalGeometry.StatMech.DeckSymmetry`
+- `RenewalGeometry.StatMech.DecoderInnovationConditionalInformation`
 - `RenewalGeometry.StatMech.DiamondProduct`
-- `RenewalGeometry.StatMech.DobrushinUnique`
-- `RenewalGeometry.StatMech.FiniteTargetProjectionAndQuotients`
-- `RenewalGeometry.StatMech.GibbsDLR`
-- `RenewalGeometry.StatMech.IsingContours`
-- `RenewalGeometry.StatMech.MarkovChernoff`
-- `RenewalGeometry.StatMech.PeierlsBound`
-- `RenewalGeometry.StatMech.PointwiseErgodic`
+- `RenewalGeometry.StatMech.NewAcceptedQuotient`
 - `RenewalGeometry.StatMech.PositiveCylinderAndTrine`
-- `RenewalGeometry.Topology.Brouwer.ApplyCubicalSperner`
-- `RenewalGeometry.Topology.Brouwer.AxiomAudit`
-- `RenewalGeometry.Topology.Brouwer.ConvexHomeomorphisms`
-- `RenewalGeometry.Topology.Brouwer.CubicalSperner`
-- `RenewalGeometry.Topology.Brouwer.CubicalSpernerPrep`
-- `RenewalGeometry.Topology.Brouwer.FixedPoint`

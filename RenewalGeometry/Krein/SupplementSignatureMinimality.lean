@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Krein.OneLineSignedExtensionInertia
+import MathPhys.Krein.OneLineSignedExtensionInertia
+open MathPhys
 
 /-!
 # Irreducible sign and Lorentzian inertia before Clifford realization

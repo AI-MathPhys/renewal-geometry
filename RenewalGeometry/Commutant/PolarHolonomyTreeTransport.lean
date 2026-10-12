@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.PolarHolonomy
 import RenewalGeometry.Commutant.SupportPolarEdgeBank
+open MathPhys
 
 /-!
 # Polar metric–holonomy commutant along a spanning tree (`thm:polar-holonomy`)

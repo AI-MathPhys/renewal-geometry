@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurelien Pelissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.CompactGroupHaarTwirl
+import MathPhys.Analysis.CompactGroupHaarTwirl
 import RenewalGeometry.StandardModel.ReciprocalReturnMassExact
+open MathPhys
 
 /-!
 # Positive weak-copy census (`thm:weak-copy-census`, spacetime_gauge_duality)

@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeDensityAnalytic
-import RenewalGeometry.Analysis.AnalyticCompositionGevrey
+import MathPhys.Analysis.AnalyticCompositionGevrey
+open MathPhys
 
 /-!
 # Analytic growth of the low-frequency physical residuals (`thm:native-source`)

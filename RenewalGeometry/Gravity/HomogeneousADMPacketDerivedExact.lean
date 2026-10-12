@@ -7,7 +7,8 @@ import Mathlib
 import RenewalGeometry.Gravity.RelationalSchedulerADM
 import RenewalGeometry.Gravity.RelationalDeSitterBranch
 import RenewalGeometry.Gravity.DeSitterCartanComponentsExact
-import RenewalGeometry.DiscreteAnalysis.A3PeriodicScreensScalingExact
+import MathPhys.DiscreteAnalysis.A3PeriodicScreensScalingExact
+open MathPhys
 
 /-!
 # Derived ADM packets of the flat and de Sitter renewal vacua

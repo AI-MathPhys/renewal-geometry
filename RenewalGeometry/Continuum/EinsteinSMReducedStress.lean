@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMReducedClosure
-import RenewalGeometry.Analysis.TorusSobolevDerivatives
+import MathPhys.Analysis.TorusSobolevDerivatives
+open MathPhys
 
 /-!
 # Stress and uniqueness consequences of the reduced closure
@@ -57,6 +59,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 
 open SobolevOpen (pd box IsTest MemW12)
 
@@ -107,7 +110,7 @@ theorem ymStress_tendsto {t₀ t₁ : ℝ} (h0 : 0 < t₀) (h01 : t₀ < t₁) (
     {z : ℕ → SmoothFields T left} {θ : ℕ → CoefficientBank Ysec} {L : LimitFields C}
     {θ₀ : CoefficientBank Ysec}
     (hRC : ReducedConvergence (slabChart t₀ t₁ h0 h01 h1 (T := T)) z θ L θ₀) :
-    RenewalGeometry.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
+    MathPhys.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
       (fun n x => ymStress (θ n) (redJet (z n).z x)) (fun x => ymStress θ₀ (limitJet L x)) := by
   set Q := slabChart t₀ t₁ h0 h01 h1 (T := T)
   have hcl := Q.isCompact_closure
@@ -115,7 +118,7 @@ theorem ymStress_tendsto {t₀ t₁ : ℝ} (h0 : 0 < t₀) (h01 : t₀ < t₁) (
   obtain ⟨Ke, hKe, hzKe, hLKe⟩ := hRC.coframe_chart
   obtain ⟨-, -, he⟩ := coframe_slab_data h0 h01 h1 hKe hzKe hLKe hRC.coframe_mem
     hRC.coframe_tendsto
-  have hF : RenewalGeometry.LpTendsto Q.μ 2 (fun n x => (redJet (z n).z x).F)
+  have hF : MathPhys.LpTendsto Q.μ 2 (fun n x => (redJet (z n).z x).F)
       (fun x => (limitJet L x).F) :=
     ⟨fun n => memLp_of_continuousOn_closure Q.isOpen hcl
       ((continuousOn_curvatureF (z n).smooth_A).mono hsub) 2, hRC.curv_mem, hRC.curv_tendsto⟩
@@ -133,7 +136,7 @@ theorem higgsStress_tendsto {t₀ t₁ : ℝ} (h0 : 0 < t₀) (h01 : t₀ < t₁
     {z : ℕ → SmoothFields T left} {θ : ℕ → CoefficientBank Ysec} {L : LimitFields C}
     {θ₀ : CoefficientBank Ysec}
     (hRC : ReducedConvergence (slabChart t₀ t₁ h0 h01 h1 (T := T)) z θ L θ₀) :
-    RenewalGeometry.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
+    MathPhys.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
       (fun n x => higgsStress (θ n) (redJet (z n).z x))
       (fun x => higgsStress θ₀ (limitJet L x)) := by
   set Q := slabChart t₀ t₁ h0 h01 h1 (T := T)
@@ -142,28 +145,28 @@ theorem higgsStress_tendsto {t₀ t₁ : ℝ} (h0 : 0 < t₀) (h01 : t₀ < t₁
   obtain ⟨Ke, hKe, hzKe, hLKe⟩ := hRC.coframe_chart
   obtain ⟨-, -, he⟩ := coframe_slab_data h0 h01 h1 hKe hzKe hLKe hRC.coframe_mem
     hRC.coframe_tendsto
-  have hK : RenewalGeometry.LpTendsto Q.μ 2 (fun n x => (redJet (z n).z x).K)
+  have hK : MathPhys.LpTendsto Q.μ 2 (fun n x => (redJet (z n).z x).K)
       (fun x => (limitJet L x).K) :=
     ⟨fun n => memLp_of_continuousOn_closure Q.isOpen hcl
       ((continuousOn_covDerivHiggs (z n).smooth_A (z n).smooth_H).mono hsub) 2, hRC.covgrad_mem,
       hRC.covgrad_tendsto⟩
   obtain ⟨-, -, -, hH4⟩ := hRC.higgs_strong
-  have hH : RenewalGeometry.LpTendsto Q.μ 4 (fun n x => (redJet (z n).z x).H)
+  have hH : MathPhys.LpTendsto Q.μ 4 (fun n x => (redJet (z n).z x).H)
       (fun x => (limitJet L x).H) :=
     ⟨fun n => memLp_of_continuousOn_closure Q.isOpen hcl ((z n).smooth_H.continuousOn.mono hsub) 4,
       hRC.higgs_strong.2.2.1, hH4⟩
   obtain ⟨-, hl, hv⟩ := bank_couplings_tendsto hRC.bank_compact hRC.bank_tendsto
   have h442 : ENNReal.HolderTriple 4 4 2 := SobolevOpen.holderTriple_four_four_two
   have h14 : Fact ((1 : ℝ≥0∞) ≤ 4) := ⟨by norm_num⟩
-  have hq : RenewalGeometry.LpTendsto Q.μ 2
+  have hq : MathPhys.LpTendsto Q.μ 2
       (fun n x => higgsQuad ((redJet (z n).z x).H) - (θ n).vH ^ 2)
       (fun x => higgsQuad ((limitJet L x).H) - θ₀.vH ^ 2) :=
-    (RenewalGeometry.LpTendsto.bilin (p := 4) (q := 4) (r := 2) hInnerReL hH hH).sub
+    (MathPhys.LpTendsto.bilin (p := 4) (q := 4) (r := 2) hInnerReL hH hH).sub
       (FirstVariationCalculus.LpTendsto.const_seq (μ := Q.μ) (p := 2) (X := E4) (hv.pow 2))
-  have hS : RenewalGeometry.LpTendsto Q.μ 1
+  have hS : MathPhys.LpTendsto Q.μ 1
       (fun n x => (higgsQuad ((redJet (z n).z x).H) - (θ n).vH ^ 2) ^ 2)
       (fun x => (higgsQuad ((limitJet L x).H) - θ₀.vH ^ 2) ^ 2) := by
-    have := RenewalGeometry.LpTendsto.bilin (p := 2) (q := 2) (r := 1)
+    have := MathPhys.LpTendsto.bilin (p := 2) (q := 2) (r := 1)
       (ContinuousLinearMap.mul ℝ ℝ) hq hq
     exact this.congr (fun n => Eventually.of_forall fun x => by
       simp only [ContinuousLinearMap.mul_apply', sq]) (Eventually.of_forall fun x => by
@@ -316,10 +319,10 @@ theorem reduced_stress (hT : 0 < T) (reg : RegulatorSequence T FC)
       (∀ t₀ t₁ (h0 : 0 < t₀) (h01 : t₀ < t₁) (h1 : t₁ < T),
         ReducedConvergence (slabChart t₀ t₁ h0 h01 h1) (fun k => reg.fields (ns (ψ k)))
           (fun k => reg.bank (ns (ψ k))) L θ₀ ∧
-        RenewalGeometry.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
+        MathPhys.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
           (fun k x => ymStress (reg.bank (ns (ψ k))) (redJet (reg.fields (ns (ψ k))).z x))
           (fun x => ymStress θ₀ (limitJet L x)) ∧
-        RenewalGeometry.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
+        MathPhys.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
           (fun k x => higgsStress (reg.bank (ns (ψ k))) (redJet (reg.fields (ns (ψ k))).z x))
           (fun x => higgsStress θ₀ (limitJet L x))) ∧
       (∀ (K : CylRegion T) t₀ t₁ (h0 : 0 < t₀) (h01 : t₀ < t₁) (h1 : t₁ < T),

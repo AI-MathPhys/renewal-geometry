@@ -5,9 +5,10 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.SMSTChannelNativeEntranceExact
 import RenewalGeometry.Spectralization.SaturatedFiniteDiracGenerator
-import RenewalGeometry.Commutant.RelativeHoweGramSpectralCertificateExact
+import MathPhys.OperatorAlgebras.RelativeHoweGramSpectralCertificateExact
 import RenewalGeometry.StandardModel.TypedTransitionGeneratorAudit
 import RenewalGeometry.Commutant.SMSTCommutant
+open MathPhys
 /-!
 # Channel-native finite Standard-Model entrance
 

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.RegulatedStandardModelAction
+open MathPhys
 /-!
 # Exact colour-vacuum restriction of the active Standard-Model action
 

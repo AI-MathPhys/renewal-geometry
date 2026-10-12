@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.SharpPurification
 import RenewalGeometry.Operational.CompletePositivity
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # The corrected operational model: determinism, dilation, and the
 UCP bridge
@@ -41,7 +42,7 @@ defects found by the 2026-07-21 audit:
 
 namespace RenewalGeometry.Upstream
 
-open NCG RenewalGeometry
+open MathPhys RenewalGeometry
 
 /-! ## Determinism marking and the corrected (SP1)–(SP4) package -/
 

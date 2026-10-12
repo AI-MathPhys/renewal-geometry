@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.PalatiniEulerIdentity
+open MathPhys
 
 /-!
 # Metric divergence calculus and the Euler row of a first-order density in one direction

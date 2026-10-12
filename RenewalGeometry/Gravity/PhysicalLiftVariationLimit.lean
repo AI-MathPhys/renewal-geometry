@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.MollifierLpConvergence
-import RenewalGeometry.Continuum.CoframeStrongInterpolationExact
-import RenewalGeometry.Gravity.LimitEinsteinInsertion
+import MathPhys.Analysis.MollifierLpConvergence
+import MathPhys.Continuum.CoframeStrongInterpolationExact
+import MathPhys.Gravity.LimitEinsteinInsertion
+open MathPhys
 
 /-!
 # Regulator-to-limit passage of the physical metric-test variations
@@ -70,7 +71,8 @@ variable {E F W : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 namespace LpTendsto
 
 /-- Continuous linear maps preserve strong `L^p` convergence. -/
-theorem clm_comp {p : ℝ≥0∞} (L : E →L[ℝ] F) {u : ℕ → X → E} {u' : X → E}
+theorem _root_.MathPhys.LpTendsto.clm_comp {p : ℝ≥0∞} (L : E →L[ℝ] F) {u : ℕ → X → E}
+    {u' : X → E}
     (hu : LpTendsto ν p u u') : LpTendsto ν p (fun n x => L (u n x)) (fun x => L (u' x)) := by
   refine ⟨fun n => L.comp_memLp' (hu.memLp n), L.comp_memLp' hu.memLp_lim, ?_⟩
   have hb : ∀ n, eLpNorm ((fun x => L (u n x)) - fun x => L (u' x)) p ν ≤
@@ -117,8 +119,8 @@ theorem unifIntegrable_of_dominated {p : ℝ≥0∞} (hp : 1 ≤ p) (hp' : p ≠
 and `u_n → u` in `L^p`, then `B(h_n, u_n) → B(h, u)` in `L^p` for every continuous bilinear `B`.
 The term `B(h_n - h, u)` is handled by Vitali's convergence theorem with the dominating function
 `2 M ‖B‖ ‖u‖`. -/
-theorem LpTendsto.bilin_of_bounded_ae [IsFiniteMeasure ν] {p : ℝ≥0∞} [Fact (1 ≤ p)]
-    (hp : p ≠ ∞) (B : E →L[ℝ] F →L[ℝ] W) {h : ℕ → X → E} {h' : X → E}
+theorem _root_.MathPhys.LpTendsto.bilin_of_bounded_ae [IsFiniteMeasure ν] {p : ℝ≥0∞}
+    [Fact (1 ≤ p)] (hp : p ≠ ∞) (B : E →L[ℝ] F →L[ℝ] W) {h : ℕ → X → E} {h' : X → E}
     (hm : ∀ n, AEStronglyMeasurable (h n) ν) {M : ℝ} (hb : ∀ n, ∀ᵐ x ∂ν, ‖h n x‖ ≤ M)
     (hae : ∀ᵐ x ∂ν, Tendsto (fun n => h n x) atTop (𝓝 (h' x))) {u : ℕ → X → F} {u' : X → F}
     (hu : LpTendsto ν p u u') :

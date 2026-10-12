@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeDensitiesExact
-import RenewalGeometry.Algebra.MatrixExpDerivative
+import MathPhys.Algebra.MatrixExpDerivative
+open MathPhys
 
 /-!
 # The finite Dirac–Yukawa sector of the native local action and its exact first variation

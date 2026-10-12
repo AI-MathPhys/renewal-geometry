@@ -16,16 +16,16 @@ This file formalises the algebraic layer of the continuum construction:
   (anti)commutation relations;
 * **the Clifford square** — `RenewalGeometry.clifford_square`:
   `(Σ aᵢ γᵢ)² = (Σ aᵢ²)·1`, so unit directions satisfy `γ(θ)² = 1`;
-* **Lemma `lem:symbol-square`** — `NCG.symbol_square`: the spacetime
+* **Lemma `lem:symbol-square`** — `MathPhys.symbol_square`: the spacetime
   symbol squares to the scalar quadratic form
   `(ξ₀γ⁰ + Σ aᵢγᵢ)² = (q·ξ₀² + Σ aᵢ²)·1`, `q = (γ⁰)²` — the emergent
   inverse metric `g = diag(−q, −κ²M²)` after the `i`-prefactor;
 * **Theorem `thm:signature-krein`, sign dichotomy** —
   `RenewalGeometry.signature_lorentzian_iff`: the timelike slot `−q` is positive iff
   `q = −1`; the spatial block is negative (semi)definite always;
-* **Lemma `lem:alpha-selfadjoint`, matrix part** — `NCG.alpha_star`,
-  `NCG.alpha_mul`, `NCG.alpha_cliff`, `NCG.multiplier_star`,
-  `NCG.multiplier_square`: the Dirac matrices `Aⁱ = γ⁰γⁱ` are Hermitian,
+* **Lemma `lem:alpha-selfadjoint`, matrix part** — `MathPhys.alpha_star`,
+  `MathPhys.alpha_mul`, `MathPhys.alpha_cliff`, `MathPhys.multiplier_star`,
+  `MathPhys.multiplier_square`: the Dirac matrices `Aⁱ = γ⁰γⁱ` are Hermitian,
   satisfy `{Aⁱ,Aʲ} = 2δ`, and the multiplier `h(ξ) = Σ aᵢAⁱ` is
   Hermitian with `h(ξ)² = |a|²·1`.  (The Sobolev-domain self-adjointness
   of the Fourier multiplier operator is not formalised.)

@@ -6,8 +6,9 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeDiracVariation
 import RenewalGeometry.Continuum.NativeGravityFirstJet
-import RenewalGeometry.Analysis.WeakJetPairing
-import RenewalGeometry.Algebra.SeriesLogChart
+import MathPhys.Analysis.WeakJetPairing
+import MathPhys.Algebra.SeriesLogChart
+open MathPhys
 
 /-!
 # Convergence of the spin–gauge link coefficients of the native Dirac–Yukawa sector

@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.HessianLoewnerGradientBounds
+import MathPhys.Analysis.HessianLoewnerGradientBounds
 import RenewalGeometry.Action.NonstationaryActionGapExact
+open MathPhys
 
 /-!
 # Accepted-action stationarity on a compact convex chart
@@ -25,7 +26,7 @@ reconstructed action `𝒜` have gradients `gΨ, g𝒜` on an open `U ⊇ Θ` an
 `λ, L ≥ 0`, `η > 0`, `ηλ < 1`.  Nothing else is assumed: the gradient-level inequalities
 (strong/upper monotonicity, Lipschitz bounds), the symmetry of the Hessians, the strong
 convexity `μ_Φ` and smoothness `Λ_Φ` of the proximal objective are *derived*
-(`RenewalGeometry.HessianBounds`).
+(`MathPhys.HessianBounds`).
 
 **The proximal minimizer.**  `Φ_θ(y) = 𝒜(y) + η⁻¹ D_Ψ(y, θ)` attains its minimum on `Θ`
 (`exists_isMinOn_prox`), and the minimizer is unique (`eq_of_isMinOn_prox`); `y*_θ` enters the

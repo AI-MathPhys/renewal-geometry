@@ -3,7 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Operational.SpectatorProduct
+import MathPhys.QuantumInformation.SpectatorProduct
+open MathPhys
 /-!
 # Compatibility with the operationally complete Grand Tensor
   (`thm:SM-completion-conservative`, Gran-Tensor manuscript)

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.CoerciveContinuumHoweDualityExact
+open MathPhys
 /-!
 # Compact spectral upgrade
 
@@ -30,7 +31,7 @@ open Complex Filter Set Topology
 
 noncomputable section
 
-namespace RenewalGeometry.VaryingHilbert.System
+namespace MathPhys.VaryingHilbert.System
 
 universe u v
 
@@ -44,11 +45,11 @@ variable {F : Type u} [NormedAddCommGroup F] [InnerProductSpace ℂ F]
 Laplacian, read off the complement-compressed transported resolvent at shift `b`. -/
 def protectedGap {d : ℕ → Type u} [∀ cutoff, Fintype (d cutoff)] {s : ℕ}
     (c : ∀ cutoff, Fin s → Matrix (d cutoff) (d cutoff) ℂ)
-    (J : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := H)
+    (J : MathPhys.VaryingHilbert.System (K := ℂ) (H := H)
       (Hn := fun cutoff ↦ EuclideanSpace ℂ (d cutoff × d cutoff)))
     (b : ℝ) (P : ℕ → H →L[ℂ] H) (cutoff : ℕ) : ℝ :=
-  ‖RenewalGeometry.SpectralGap.complementCompression
-    (J.compressedOperator (RenewalGeometry.jointCommutatorResolventFamily c b) cutoff)
+  ‖MathPhys.SpectralGap.complementCompression
+    (J.compressedOperator (MathPhys.jointCommutatorResolventFamily c b) cutoff)
     (P cutoff)‖⁻¹ - b
 
 /-- **Compact spectral upgrade (`cor:cofinal-spectral-upgrade`), graph-screen rendering.**
@@ -60,9 +61,9 @@ holds at all sufficiently late cutoffs. -/
 theorem cofinalSpectralUpgrade_exact
     {d : ℕ → Type u} [∀ cutoff, Fintype (d cutoff)] {s : ℕ}
     (c : ∀ cutoff, Fin s → Matrix (d cutoff) (d cutoff) ℂ)
-    (J : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := H)
+    (J : MathPhys.VaryingHilbert.System (K := ℂ) (H := H)
       (Hn := fun cutoff ↦ EuclideanSpace ℂ (d cutoff × d cutoff)))
-    (L : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := WithLp 2 (H × F))
+    (L : MathPhys.VaryingHilbert.System (K := ℂ) (H := WithLp 2 (H × F))
       (Hn := fun cutoff ↦ WithLp 2
         (EuclideanSpace ℂ (d cutoff × d cutoff) ×
           EuclideanSpace ℂ (Fin s × (d cutoff × d cutoff)))))
@@ -72,7 +73,7 @@ theorem cofinalSpectralUpgrade_exact
     (source : H → ∀ cutoff, EuclideanSpace ℂ (d cutoff × d cutoff))
     (hsource : ∀ y ∈ D, J.StronglyConverges (source y) y)
     (hcore : ∀ y ∈ D, J.StronglyConverges
-      (fun cutoff ↦ RenewalGeometry.jointCommutatorResolventFamily c lam0 cutoff
+      (fun cutoff ↦ MathPhys.jointCommutatorResolventFamily c lam0 cutoff
         (source y cutoff))
       (boundedOperatorNormalResolventFamily A lam0 y))
     (a : ℝ) (ha : 0 < a)
@@ -81,16 +82,16 @@ theorem cofinalSpectralUpgrade_exact
     (htail : ∀ ε > 0, ∃ screenIndex, ∀ y ∈ L.embeddedUnitBallOutputs
       (fun cutoff ↦ operatorGraphResolventHilbertGraph
         (⊤ : Submodule ℂ (EuclideanSpace ℂ (d cutoff × d cutoff)))
-        (boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM (c cutoff)))
-        (RenewalGeometry.jointCommutatorResolventFamily c a cutoff) a ha
-        (RenewalGeometry.jointCommutatorResolventFamily_resolventEquation c a ha cutoff)),
+        (boundedOperatorGraphMap (MathPhys.jointCommutatorCLM (c cutoff)))
+        (MathPhys.jointCommutatorResolventFamily c a cutoff) a ha
+        (MathPhys.jointCommutatorResolventFamily_resolventEquation c a ha cutoff)),
       ‖y - screen screenIndex y‖ < ε)
     (hfst : ∀ cutoff y, J.embedding cutoff y.fst = (L.embedding cutoff y).fst)
     (b : ℝ) (hb : 0 < b)
     (P : ℕ → H →L[ℂ] H)
     (hprotected : ∀ᶠ cutoff in atTop,
       LinearMap.range (P cutoff).toLinearMap ≤
-        (LinearMap.ker (RenewalGeometry.jointCommutatorCLM (c cutoff)).toLinearMap).map
+        (LinearMap.ker (MathPhys.jointCommutatorCLM (c cutoff)).toLinearMap).map
           (J.embedding cutoff).toLinearMap)
     (hprotectedRank : ∀ᶠ cutoff in atTop,
       Module.finrank ℂ (LinearMap.range (P cutoff).toLinearMap) =
@@ -103,12 +104,12 @@ theorem cofinalSpectralUpgrade_exact
       0 < projectionRadius ∧
       (0 : ℂ) ∉ Metric.closedBall (((1 / b : ℝ) : ℂ)) projectionRadius ∧
       Tendsto P atTop
-        (nhds (RenewalGeometry.ResolventStability.circleRieszProjection
+        (nhds (MathPhys.ResolventStability.circleRieszProjection
           (boundedOperatorNormalResolventFamily A b)
           (((1 / b : ℝ) : ℂ)) projectionRadius)) ∧
       (∀ᶠ cutoff in atTop,
         LinearMap.range (P cutoff).toLinearMap =
-          (LinearMap.ker (RenewalGeometry.jointCommutatorCLM (c cutoff)).toLinearMap).map
+          (LinearMap.ker (MathPhys.jointCommutatorCLM (c cutoff)).toLinearMap).map
             (J.embedding cutoff).toLinearMap) ∧
       0 < gapRadius ∧
       (0 : ℂ) ∉ Metric.closedBall (((1 / b : ℝ) : ℂ)) gapRadius ∧
@@ -117,11 +118,11 @@ theorem cofinalSpectralUpgrade_exact
       (∀ᶠ cutoff in atTop,
         0 < protectedGap c J b P cutoff ∧
           Module.End.HasEigenvalue
-            (RenewalGeometry.commutantLaplacianCLM (c cutoff)).toLinearMap
+            (MathPhys.commutantLaplacianCLM (c cutoff)).toLinearMap
             ((protectedGap c J b P cutoff : ℝ) : ℂ) ∧
           ∀ ν : ℝ, 0 < ν →
             Module.End.HasEigenvalue
-              (RenewalGeometry.commutantLaplacianCLM (c cutoff)).toLinearMap (ν : ℂ) →
+              (MathPhys.commutantLaplacianCLM (c cutoff)).toLinearMap (ν : ℂ) →
               protectedGap c J b P cutoff ≤ ν) ∧
       γstar ≤ μlim ∧
       ∀ γ0 : ℝ, 0 < γ0 → γ0 < μlim →
@@ -145,4 +146,4 @@ theorem cofinalSpectralUpgrade_exact
     exact (mul_le_mul_of_nonneg_right hcut.le (hResidual cutoff x)).trans
       (hCoercive cutoff x)
 
-end RenewalGeometry.VaryingHilbert.System
+end MathPhys.VaryingHilbert.System

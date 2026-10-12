@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.FiniteGraphSpectralUniversalityFibreExact
-import RenewalGeometry.MarkovChains.CoarseAndHiddenEntropyProduction
+import MathPhys.MarkovChains.CoarseAndHiddenEntropyProduction
+open MathPhys
 
 /-!
 # The current-chain functor of a vertex quotient

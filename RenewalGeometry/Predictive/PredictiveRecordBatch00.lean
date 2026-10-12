@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.GaugeTheory.LatticeYangMillsRecords05
+open MathPhys
 /-!
 # Medium exact records, batch 00 (Gran-Tensor manuscript, projective-head cluster)
 
@@ -50,7 +51,7 @@ Rendering conventions are described in the docstring of each section.
 -/
 
 open Matrix Finset Filter
-open RenewalGeometry.SourceCoercivityInfluence RenewalGeometry.GeometricThresholdBank RenewalGeometry.PsdBlockSchur
+open MathPhys.SourceCoercivityInfluence MathPhys.GeometricThresholdBank MathPhys.PsdBlockSchur
 open scoped ComplexOrder Topology
 
 -- decidability/fintype instances enter only through the spectral support calculus in proofs

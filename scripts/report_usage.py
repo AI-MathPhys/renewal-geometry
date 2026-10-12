@@ -5,7 +5,7 @@ Import closure says which files must be *compiled*; this script asks the finer
 question: which declarations are *used* (transitively, through the proof terms)
 by the Lean declarations cited in the paper ledgers.  It generates a Lean
 meta-program that walks `Expr.getUsedConstants` from every cited declaration,
-staying inside the `NCG`/`RenewalGeometry` modules, and reports
+staying inside the `MathPhys`/`RenewalGeometry` modules, and reports
 
 * per paper: the modules and folders it depends on;
 * library-wide: modules never used by any cited declaration, split into
@@ -30,7 +30,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PAPERS_DIR = ROOT / "papers"
-LIBS = ("NCG", "RenewalGeometry")
+LIBS = ("MathPhys", "RenewalGeometry")
 IMPORT_RE = re.compile(r"^import\s+([A-Za-z0-9_.']+)", re.M)
 
 LEAN_PROGRAM = r'''
@@ -42,7 +42,7 @@ def ourModule? (env : Environment) (c : Name) : Option Name := do
   let idx ← env.getModuleIdxFor? c
   let m := env.header.moduleNames[idx.toNat]!
   let s := m.toString
-  if s.startsWith "NCG." || s == "NCG" || s.startsWith "RenewalGeometry." || s == "RenewalGeometry"
+  if s.startsWith "MathPhys." || s == "MathPhys" || s.startsWith "RenewalGeometry." || s == "RenewalGeometry"
   then some m else none
 
 partial def collect (env : Environment) : List Name → NameSet → NameSet
@@ -167,7 +167,7 @@ def main() -> int:
                 stack.append(i)
     never_used = set(modules) - used_all
     removable = never_used - structural
-    root_modules = {m for m in modules if m in LIBS}  # NCG.lean / RenewalGeometry.lean roots
+    root_modules = {m for m in modules if m in LIBS}  # MathPhys.lean / RenewalGeometry.lean roots
     removable -= root_modules
 
     def by_folder(mods: set[str]) -> dict[str, int]:

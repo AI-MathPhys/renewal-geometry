@@ -3,7 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Lorentz.VolumeElement
+import MathPhys.LorentzianGeometry.VolumeElement
+open MathPhys
 /-!
 # Oriented interference closure and the `d = 3` selection
 
@@ -34,7 +35,7 @@ import RenewalGeometry.Lorentz.VolumeElement
   (`RenewalGeometry.vol3_sq`), the `ε`-identities `ΓᵢΓⱼ = ε_{ijk}·Vol·Γₖ`
   (`RenewalGeometry.vol3_gamma01` …), the Hodge bracket is the cross product and
   satisfies Jacobi (`RenewalGeometry.hodge_bracket_jacobi`); the temporal
-  anticommutation is `RenewalGeometry.temporal_anticomm_volume`. -/
+  anticommutation is `MathPhys.temporal_anticomm_volume`. -/
 
 namespace RenewalGeometry
 

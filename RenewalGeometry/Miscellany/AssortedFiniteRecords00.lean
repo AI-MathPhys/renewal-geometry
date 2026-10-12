@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Algebra.PsdBlockSchurExact
+import MathPhys.Algebra.PsdBlockSchurExact
 import RenewalGeometry.Predictive.GrandOrder
+open MathPhys
 /-!
 # Easy exact records, batch 00 (Gran-Tensor manuscript)
 
@@ -57,7 +58,7 @@ Rendering conventions are described in the docstring of each section.
 -/
 
 open Matrix Finset
-open RenewalGeometry.SourceCoercivityInfluence RenewalGeometry.GeometricThresholdBank RenewalGeometry.PsdBlockSchur
+open MathPhys.SourceCoercivityInfluence MathPhys.GeometricThresholdBank MathPhys.PsdBlockSchur
 open scoped ComplexOrder
 
 -- decidability/fintype instances enter only through the spectral support calculus in proofs

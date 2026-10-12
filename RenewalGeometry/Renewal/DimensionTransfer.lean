@@ -3,11 +3,12 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Renewal.SpectralDimension
+import MathPhys.Probability.SpectralDimension
 import RenewalGeometry.Renewal.WeylDichotomy
 import RenewalGeometry.Renewal.Dimensions
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # The limsup bookkeeping, proved
 
@@ -18,10 +19,10 @@ dimension *equalities* — is proved here:
 
 * `RenewalGeometry.log_ratio_tendsto_of_poly_bounds` — two-sided polynomial bounds
   `c·n^q ≤ N(n) ≤ C·n^q` force `log N(n)/log n → q` (by reflecting the
-  spectral-dimension squeeze `RenewalGeometry.return_exponent_limit`);
+  spectral-dimension squeeze `MathPhys.return_exponent_limit`);
 * `RenewalGeometry.limsup_log_ratio_of_poly_bounds` — hence the defining `limsup`
   *equals* `q`;
-* `NCG.algebraicDimension_eq_of_poly_bounds` — applied to the actual
+* `MathPhys.algebraicDimension_eq_of_poly_bounds` — applied to the actual
   `RenewalGeometry.RenewalMemory.algebraicDimension`: any renewal memory whose
   channel counting function is two-sidedly polynomially bounded has
   `q_alg = q` **as an equality of the defined limsup**, not merely

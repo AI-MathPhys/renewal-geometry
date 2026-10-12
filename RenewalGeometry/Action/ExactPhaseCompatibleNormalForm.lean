@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactPhaseCompatibleAction
+open MathPhys
 
 /-!
 # The connection normal form of the completed action (time integration by parts)

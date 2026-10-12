@@ -6,9 +6,10 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactPhaseCompatibleConnection
 import RenewalGeometry.Action.ExactPhaseCompatibleAnalytic
-import RenewalGeometry.Analysis.LinkRemainderAnalytic
-import RenewalGeometry.Analysis.LocalSumGradient
-import RenewalGeometry.Analysis.StationaryContractionAnalytic
+import MathPhys.Analysis.LinkRemainderAnalytic
+import MathPhys.Analysis.LocalSumGradient
+import MathPhys.Analysis.StationaryContractionAnalytic
+open MathPhys
 
 /-!
 # The stationary connection of the explicit phase-compatible action

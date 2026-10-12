@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactInitialCalculusRows
 import RenewalGeometry.Action.ExactQuadraticHamiltonian
+open MathPhys
 
 /-!
 # The flat block of the joint stationary/Legendre solve is a fixed site-wise isomorphism
@@ -33,6 +34,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.InitialCalculus
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

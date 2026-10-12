@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactLapseHomogeneity
 import RenewalGeometry.Action.ExactShiftWardEnvelope
+open MathPhys
 
 /-!
 # The quadratic mean jet of the actual action on the balancing seed
@@ -36,6 +37,7 @@ noncomputable section
 set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry.ExactPhaseAction.InitialMeanJet
+open MathPhys.ExactPhaseAction
 
 /-! ### A generic second-order uniqueness lemma -/
 

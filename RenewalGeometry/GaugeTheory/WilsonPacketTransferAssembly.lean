@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.GaugeTheory.WilsonPacketConsistency
-import RenewalGeometry.GaugeTheory.WilsonModulusTransfer
+import MathPhys.GaugeTheory.WilsonModulusTransfer
+open MathPhys
 
 /-!
 # Finite packet and open-link transfer for the literal curvature and Higgs packets

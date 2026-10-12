@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.StandardModel.FaithfulSMQuotientExact
+import MathPhys.GaugeGroups.FaithfulSMQuotientExact
 import RenewalGeometry.Commutant.ArbitraryIncidenceDualityExact
+open MathPhys
 
 /-!
 # Kinematic typing algebra on the represented matter carrier (`prop:typed-matter-lift`)

@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeScalingBlocksExact
-import RenewalGeometry.DiscreteAnalysis.ShiftedPlaquetteLogarithmUniformExact
+import MathPhys.DiscreteAnalysis.ShiftedPlaquetteLogarithmUniformExact
+open MathPhys
 
 /-!
 # Amplitude-preserving scaling: the ν-normalised plaquette is uniformly regular
@@ -40,6 +41,7 @@ open NormedSpace Filter Topology
 
 namespace RenewalGeometry
 namespace ShiftedPlaquette
+open MathPhys.ShiftedPlaquette
 
 variable {𝔄 : Type*} [NormedRing 𝔄] [NormedAlgebra ℝ 𝔄] [CompleteSpace 𝔄] [NormOneClass 𝔄]
 
@@ -171,6 +173,7 @@ theorem exists_uniform_nu_iteratedFDeriv_bound (k : ℕ) {K : Set (𝔄 × 𝔄 
 end ShiftedPlaquette
 
 namespace NativeScaling
+open MathPhys.NativeScaling
 
 open ShiftedJetAction (Grid unitVec)
 

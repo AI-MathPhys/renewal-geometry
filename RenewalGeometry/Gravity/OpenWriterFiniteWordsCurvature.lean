@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterFiniteWordsUniform
+open MathPhys
 
 /-!
 # Curvature convergence along the law family and along the finite successor words

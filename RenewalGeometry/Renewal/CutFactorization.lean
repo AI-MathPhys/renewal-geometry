@@ -3,7 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Measurement.ChronologyLeakage
+import MathPhys.QuantumInformation.ChronologyLeakage
+open MathPhys
 /-!
 # Complete renewal-cut factorization
   (`thm:complete-cut-factorization-master`,

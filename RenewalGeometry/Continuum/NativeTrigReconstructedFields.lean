@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeReconstructedConsistency
+open MathPhys
 
 /-!
 # The trigonometric reconstructions of the native fields and their first jets

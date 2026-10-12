@@ -8,6 +8,7 @@ import RenewalGeometry.Continuum.NativeSourceComparison
 import RenewalGeometry.Continuum.NativeSourceCompareBudget
 import RenewalGeometry.Continuum.NativeSourceTheorem
 import RenewalGeometry.Continuum.NativeSourcePhys
+open MathPhys
 
 /-!
 # The source-budget comparison for the actual tuple of a native record
@@ -43,6 +44,7 @@ open MeasureTheory Set Filter Topology Finset
 open scoped Real ContDiff Nat
 
 namespace RenewalGeometry.SourceCompare
+open MathPhys.SourceCompare
 
 open DiscreteEulerConsistency (R4)
 open NativeTail (dX sobXSq sobX spatialL)
@@ -217,6 +219,7 @@ end
 end RenewalGeometry.SourceCompare
 
 namespace RenewalGeometry.RecordTuple
+open MathPhys.RecordTuple
 
 open DiscreteEulerConsistency (R4 jet1 contEuler)
 open NativeScaling (Mat eta metric)

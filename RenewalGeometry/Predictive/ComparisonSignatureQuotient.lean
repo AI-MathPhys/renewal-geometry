@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.StatMech.NewAcceptedQuotient
 import RenewalGeometry.Miscellany.ConditionalRecordPanels2
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Canonical comparison signature quotient
 

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.SupportPolarActionAlgebra
 import RenewalGeometry.Commutant.JointTypedActionAlgebra
+open MathPhys
 
 /-!
 # Finite source-complete joint packets, represented

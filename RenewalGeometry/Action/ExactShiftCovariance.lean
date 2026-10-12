@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactQuadraticHamiltonian
+open MathPhys
 
 /-!
 # Constant-shift covariance of the phase-compatible action
@@ -37,6 +38,7 @@ noncomputable section
 set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry.ExactPhaseAction.ShiftWard
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

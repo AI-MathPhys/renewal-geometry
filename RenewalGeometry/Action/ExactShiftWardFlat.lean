@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactShiftCovariance
+open MathPhys
 
 /-!
 # The flat slice of the canonical Hamiltonian at arbitrary lapse and shift
@@ -34,6 +35,7 @@ noncomputable section
 set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry.ExactPhaseAction.ShiftWard
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

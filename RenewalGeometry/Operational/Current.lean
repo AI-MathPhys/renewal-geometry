@@ -3,9 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Operational.KMSDual
+import MathPhys.QuantumInformation.KMSDual
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Detailed balance, cancellation current, and composition defects
 
@@ -27,8 +28,9 @@ Covers, from `manuscripts/renewal_emergence/renewal_emergence.tex`:
 -/
 
 namespace RenewalGeometry.Upstream
+open MathPhys.Upstream
 
-open NCG RenewalGeometry
+open MathPhys RenewalGeometry
 
 variable {A : Type*} [Ring A] [PartialOrder A] [StarRing A]
   [StarOrderedRing A] [Algebra ℂ A] [StarModule ℂ A]

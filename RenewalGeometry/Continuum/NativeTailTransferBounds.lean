@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeTailTransfer
+open MathPhys
 
 /-!
 # The source-tail transfer for the record's reconstruction (`eq:native-source-tail`)
@@ -30,6 +31,7 @@ open Finset Filter Topology Metric Set NormedSpace MeasureTheory
 open scoped ContDiff
 
 namespace RenewalGeometry.NativeTail
+open MathPhys.NativeTail
 
 open ShiftedJetAction (Grid unitVec stencil action)
 open NativeScaling (Mat eta metric readerOmega omegaLink)

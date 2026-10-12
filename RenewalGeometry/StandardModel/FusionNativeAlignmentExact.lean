@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.StandardModel.EndpointAllocationCompilerExact
 import RenewalGeometry.StandardModel.TensorFactorAlignmentExact
+open MathPhys
 
 /-!
 # Fusion-native sufficient criterion for same-carrier alignment

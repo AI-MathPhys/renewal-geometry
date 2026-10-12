@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.StandardModel.CliffordTwirlMatterAudit
 import RenewalGeometry.Lorentz.SMSTCliffordPressureMatterExact
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Clifford occurrence to accepted-pressure assembly
 

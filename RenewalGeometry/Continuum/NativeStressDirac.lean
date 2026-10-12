@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EquivariantNativeBudgets
 import RenewalGeometry.Continuum.NativeStressCalculus
-import RenewalGeometry.Continuum.ContEulerAlgebra
+import MathPhys.Continuum.ContEulerAlgebra
+open MathPhys
 
 /-!
 # The Dirac stress: the coframe variation of the native Dirac density

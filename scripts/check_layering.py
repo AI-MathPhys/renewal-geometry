@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Layering check: the generic `NCG` library must never import `RenewalGeometry`,
+"""Layering check: `MathPhys` imports only Mathlib,
 and every `.lean` file must be reachable from its library's root module.
 
     python scripts/check_layering.py
@@ -21,7 +21,7 @@ def modules(lib: str) -> dict[str, Path]:
 
 def main() -> int:
     errors: list[str] = []
-    for lib in ("NCG", "RenewalGeometry"):
+    for lib in ("MathPhys", "RenewalGeometry"):
         mods = modules(lib)
         root = ROOT / f"{lib}.lean"
         registered = set(IMPORT_RE.findall(root.read_text("utf-8")))
@@ -30,9 +30,9 @@ def main() -> int:
             if name not in registered:
                 errors.append(f"{path.relative_to(ROOT)}: not imported by {lib}.lean")
             for imp in IMPORT_RE.findall(text):
-                if lib == "NCG" and imp.startswith("RenewalGeometry"):
-                    errors.append(f"{path.relative_to(ROOT)}: NCG must not import {imp}")
-                if imp.startswith(("NCG.", "RenewalGeometry.")):
+                if lib == "MathPhys" and imp.startswith("RenewalGeometry"):
+                    errors.append(f"{path.relative_to(ROOT)}: MathPhys must not import {imp}")
+                if imp.startswith(("MathPhys.", "RenewalGeometry.")):
                     target = ROOT / (imp.replace(".", "/") + ".lean")
                     if not target.exists():
                         errors.append(f"{path.relative_to(ROOT)}: import of missing module {imp}")
@@ -44,7 +44,7 @@ def main() -> int:
         for e in errors:
             print("  -", e)
         return 1
-    print("Layering check passed: NCG is independent of RenewalGeometry; "
+    print("Layering check passed: MathPhys depends on Mathlib only; "
           "all modules registered.")
     return 0
 

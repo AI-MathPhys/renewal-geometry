@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.Continuum.NativeSelectedClosed
 import RenewalGeometry.Continuum.NativeRateClosed
 import RenewalGeometry.Action.SelectedPolynomialRegime
+open MathPhys
 
 /-!
 # The selected closure on one record and the polynomial selected regime
@@ -35,6 +36,7 @@ open MeasureTheory Filter Topology Set Finset Asymptotics
 open scoped Real Nat ENNReal
 
 namespace RenewalGeometry.RecordTuple
+open MathPhys.RecordTuple
 
 open DiscreteEulerConsistency (R4)
 open NativeScaling (Mat)

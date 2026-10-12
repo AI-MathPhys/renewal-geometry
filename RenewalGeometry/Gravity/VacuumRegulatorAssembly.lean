@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.Gravity.RelationalDeSitterBranch
 import RenewalGeometry.Gravity.RelationalFlatVacuum
 import RenewalGeometry.Gravity.FiniteHomogeneousStationarityExact
+open MathPhys
 
 /-!
 # Stationary flat and de Sitter renewal regulators: assembly

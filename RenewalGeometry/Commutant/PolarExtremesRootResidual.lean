@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.PolarHolonomyTreeTransport
 import RenewalGeometry.Commutant.PolarFlatIrreducibleLimits
+open MathPhys
 
 /-!
 # Flat and irreducible extremes of the root residual algebra (`cor:polar-extremes`)

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeRecordStressDirac
+open MathPhys
 
 /-!
 # The Einstein residual of the actual tuple of a native field and the native coframe row
@@ -27,6 +28,7 @@ open Finset
 open scoped Matrix
 
 namespace RenewalGeometry.RecordTuple
+open MathPhys.RecordTuple
 
 open SobolevOpen (pd)
 open DiscreteEulerConsistency (R4 evec jet1 contEuler)

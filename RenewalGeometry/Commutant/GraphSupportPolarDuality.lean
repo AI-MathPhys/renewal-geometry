@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.SupportPolarActionAlgebra
 import RenewalGeometry.Commutant.TypedMultiplicityAlgebra
-import RenewalGeometry.Commutant.Bicommutant
+import MathPhys.OperatorAlgebras.Bicommutant
+open MathPhys
 
 /-!
 # Exact support-polar duality on a multi-vertex incidence graph

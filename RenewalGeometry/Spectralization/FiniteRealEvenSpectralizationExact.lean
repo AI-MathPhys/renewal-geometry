@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.FiniteDifferentialOccurrenceCompiler
-import RenewalGeometry.Spectralization.FiniteSpectralizationBlockNormExact
+import MathPhys.SpectralGeometry.FiniteSpectralizationBlockNormExact
+open MathPhys
 /-!
 # Canonical finite real even spectralization
 
@@ -141,7 +142,7 @@ the differential block norm. -/
 theorem commutator_norm_eq_B {a : A} (ha : star a = a) :
     ‖P.commutator P.dirac (P.representation a)‖ = ‖P.B a‖ := by
   rw [P.dirac_commutator_formula, ha]
-  exact RenewalGeometry.FiniteSpectralizationBlockNormExact.norm_offDiagonal (P.B a)
+  exact MathPhys.FiniteSpectralizationBlockNormExact.norm_offDiagonal (P.B a)
 
 /-- Vanishing of the Lipschitz block is equivalent to vanishing of the
 source-minimal differential vector. -/

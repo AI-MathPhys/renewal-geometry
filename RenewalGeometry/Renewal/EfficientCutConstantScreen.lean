@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Renewal.RenewalSpatialPositiveScreen
+open MathPhys
 
 /-!
 # Operational Sobolev, Poincaré and compact-screen bounds from the efficient
@@ -45,7 +46,7 @@ open scoped BigOperators Topology
 
 noncomputable section
 
-namespace RenewalGeometry
+namespace MathPhys
 namespace FiniteWeightedGraph
 
 variable {V : Type*} [Fintype V] [Nonempty V] [DecidableEq V]
@@ -414,6 +415,9 @@ theorem neck_witness_of_minimizing_cut (u : V → V → ℝ)
   rfl
 
 end FiniteWeightedGraph
+end MathPhys
+
+namespace RenewalGeometry
 
 /-- Along any family with positive cut constants tending to zero, the neck
 witnesses `(I^eff)⁻¹` tend to `+∞` (`eq:main-neck-obstruction`). -/

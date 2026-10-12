@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.GowdyActionTestDensity
-import RenewalGeometry.Analysis.RectangleIntegrationByParts
+import MathPhys.Analysis.RectangleIntegrationByParts
+open MathPhys
 
 /-!
 # The areal lift of a Gowdy solution is critical for the unreduced action
@@ -39,6 +40,7 @@ open Set Finset
 open scoped BigOperators ContDiff
 
 namespace RenewalGeometry.GowdyStaggered.ActionTest
+open MathPhys.GowdyStaggered
 
 noncomputable section
 

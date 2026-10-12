@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
 import RenewalGeometry.Continuum.EinsteinSMComparisonRegulator
+open MathPhys
 
 /-!
 # Uniform bounds for the comparison regulator (reconstructions, tests and lifts)
@@ -33,6 +35,7 @@ set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace Comparison
 
 open SobolevOpen (pd)

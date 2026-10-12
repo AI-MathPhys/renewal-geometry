@@ -9,8 +9,9 @@ import RenewalGeometry.Gravity.DeSitterCauchySlices
 import RenewalGeometry.Gravity.HomogeneousADMSlabScreensUnconditional
 import RenewalGeometry.DiscreteAnalysis.A3FlatGeneratorLimitExact
 import RenewalGeometry.Gravity.DeSitterPalatiniFirstVariation
-import RenewalGeometry.Gravity.CurvatureEnergyPropagationExact
+import MathPhys.Gravity.CurvatureEnergyPropagationExact
 import RenewalGeometry.Gravity.ExplicitOperationalFamily
+open MathPhys
 
 /-!
 # Stationary flat and de Sitter renewal regulators, re-assembled from derived results

@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Gravity.OpenWriterEnergyIdentity
+import MathPhys.Gravity.OpenWriterEnergyIdentity
+open MathPhys
 
 /-!
 # The positive `A₃ ≅ D₃` rate lift of a small metric

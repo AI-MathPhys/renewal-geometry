@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeDiracLimit
+open MathPhys
 
 /-!
 # Convergence of the Dirac–Yukawa slot fields (`prop:native-spinor-variation`)

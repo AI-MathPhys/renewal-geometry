@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.LocalCalibrationBudgets
 import RenewalGeometry.Continuum.NativeSourcePhys
+open MathPhys
 
 /-!
 # Sampled smooth solutions of the physical native Euler equations

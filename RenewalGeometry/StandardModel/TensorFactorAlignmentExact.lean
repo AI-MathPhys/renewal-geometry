@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Commutant.ReciprocalWedderburnKronecker
+import MathPhys.OperatorAlgebras.ReciprocalWedderburnKronecker
+open MathPhys
 
 /-!
 # Same-carrier tensor-factor alignment

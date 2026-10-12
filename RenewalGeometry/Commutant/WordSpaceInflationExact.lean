@@ -4,10 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.StandardModel.ConnectedRouterExact
+import MathPhys.GaugeGroups.ConnectedRouterExact
 import RenewalGeometry.StandardModel.ActiveResidualCensusExact
 import RenewalGeometry.Commutant.DegreeOneCommutantWedderburnExact
 import RenewalGeometry.Commutant.WordSpaceMultiplicityFirewall
+open MathPhys
 
 /-!
 # Invariant word-space inflation without an internal `M₃`

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.StandardModel.RenewalInterfaceRealization
 import RenewalGeometry.Continuum.EinsteinSMDiracStability
 import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
+open MathPhys
 
 /-!
 # Renewal Geometry realization (`cor:renewal-realization`, clause level)
@@ -40,6 +42,7 @@ noncomputable section
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 
 open RenewalRealization
 open ShiftedJetAction (Grid unitVec)

@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeFirstJetNormalFormExact
-import RenewalGeometry.Algebra.SeriesLogChart
+import MathPhys.Algebra.SeriesLogChart
+open MathPhys
 
 /-!
 # Fréchet differentiability of the native local action on its chart

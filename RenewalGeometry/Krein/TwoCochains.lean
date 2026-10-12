@@ -3,7 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Krein.ConePositive
+import MathPhys.Krein.ConePositive
+open MathPhys
 /-!
 # Rank two: structure group `{I,S}` and the two-cochains lemma
 
@@ -15,7 +16,7 @@ signed enrichments (Lemma `lem:minimal-rank-two`, Lemma
   rank-two renewal fibre, a cone-positive norm-preserving automorphism is
   the identity or the sheet swap on the distinguished basis — the
   structure group is `{I, S} ≅ ℤ/2`.  This specialises the cone-positive
-  permutation lemma (`RenewalGeometry.conePositive_perm`) to `n = 2`, where the only
+  permutation lemma (`MathPhys.conePositive_perm`) to `n = 2`, where the only
   permutations are `1` and the transposition.
 
 * **The two-cochain calculus** on the model fibre `R²` with

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMRegularBosonic
+open MathPhys
 
 /-!
 # The regular branch, bosonic part: `eq:regular-bosonic-bound` gives `C¹` convergence and the
@@ -34,6 +36,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace RegularBranch
 
 open SobolevOpen (pd box IsTest MemW12)
@@ -213,8 +216,8 @@ theorem continuousOn_pd_comp {F G : Type*} [NormedAddCommGroup F] [NormedSpace �
     (L : F →L[ℝ] G) (i : Fin 4) : ContinuousOn (fun x => pd (fun y => L (f y)) i x) (cylSlab T) :=
   continuousOn_pd_slab (L.contDiff.comp_contDiffOn hf) i
 
-theorem continuous_comm2 : Continuous fun p : LieFibre × LieFibre => comm p.1 p.2 := by
-  unfold comm mmul; fun_prop
+theorem continuous_comm2 : Continuous fun p : LieFibre × LieFibre => MathPhys.EinsteinSM.comm p.1 p.2 := by
+  unfold MathPhys.EinsteinSM.comm mmul; fun_prop
 
 theorem continuous_higgsAct2 : Continuous fun p : LieFibre × HiggsFibre => higgsAct p.1 p.2 := by
   refine continuous_pi fun i => ?_
@@ -228,7 +231,7 @@ theorem continuousOn_curvatureF {A : E4 → ConnFibre} (hA : ContDiffOn ℝ ∞ 
       hA
   have hc : ∀ ν : Fin 4, ContinuousOn (fun y => A y ν) (cylSlab T) := fun ν => (h1 ν).continuousOn
   have e : curvatureF A = fun x μ ν => pd (fun y => A y ν) μ x - pd (fun y => A y μ) ν x +
-      comm (A x μ) (A x ν) := rfl
+      MathPhys.EinsteinSM.comm (A x μ) (A x ν) := rfl
   rw [e]
   refine continuousOn_pi.mpr fun μ => continuousOn_pi.mpr fun ν => ?_
   have k1 := continuousOn_pd_slab (h1 ν) μ

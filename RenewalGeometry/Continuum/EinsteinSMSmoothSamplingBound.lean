@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMReducedClosure
+open MathPhys
 
 /-!
 # The stationarity–consistency triangle of `prop:smooth-sampling`
@@ -39,6 +41,7 @@ noncomputable section
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace SmoothSamplingBound
 
 variable {T : ℝ} {Ysec : Type} [Finite Ysec] {FC : FermionCarrier Ysec}

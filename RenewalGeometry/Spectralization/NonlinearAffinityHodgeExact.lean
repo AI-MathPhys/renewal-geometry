@@ -6,7 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Spectralization.ModularAffinityReversalPacketExact
 import RenewalGeometry.Spectralization.StationaryRenewalGraphCurrentFibreExact
-import RenewalGeometry.DiscreteAnalysis.CycleProjector
+import MathPhys.DiscreteAnalysis.CycleProjector
+open MathPhys
 /-!
 # Nonlinear Hodge theorem for stationary affinities
 
@@ -518,10 +519,10 @@ theorem nonlinear_hodge (hB : IsConnectedIncidence B) (hc : ∀ e, 0 < c e) (a�
 section Bridge
 
 /-- The real connected-incidence hypotheses follow from the complex predicate
-`RenewalGeometry.IsConnectedIncidence` of `DiscreteAnalysis/CycleProjector` applied to the
+`MathPhys.IsConnectedIncidence` of `DiscreteAnalysis/CycleProjector` applied to the
 complexified matrix `B.map ofReal`. -/
 theorem isConnectedIncidence_of_complex (B : Matrix V E ℝ)
-    (h : _root_.RenewalGeometry.IsConnectedIncidence (B.map ((↑) : ℝ → ℂ))) :
+    (h : _root_.MathPhys.IsConnectedIncidence (B.map ((↑) : ℝ → ℂ))) :
     IsConnectedIncidence B := by
   have hconj : (B.map ((↑) : ℝ → ℂ))ᴴ = Bᵀ.map ((↑) : ℝ → ℂ) := by
     rw [← Matrix.conjTranspose_map ((↑) : ℝ → ℂ) (fun r => by simp),

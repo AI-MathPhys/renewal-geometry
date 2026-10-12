@@ -7,7 +7,8 @@ import Mathlib
 import RenewalGeometry.Continuum.DeterminantResolvedExtraction
 import RenewalGeometry.Continuum.FiniteWilsonZeroDefectClosure
 import RenewalGeometry.Continuum.DeterminantNormalizationSequence
-import RenewalGeometry.GaugeTheory.FlatSemisimpleNormalization
+import MathPhys.GaugeTheory.FlatSemisimpleNormalization
+open MathPhys
 
 /-!
 # Determinant-resolved finite Wilson closure (`cor:determinant-resolved-closure`)

@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeYMDensityBridge
 import RenewalGeometry.Continuum.NativeHiggsSectorVariation
+open MathPhys
 
 /-!
 # All-sector native consistency without a growing band (`thm:native-firstvariation-no-band`)

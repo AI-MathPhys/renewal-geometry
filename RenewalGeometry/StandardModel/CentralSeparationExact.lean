@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.InternalAssemblyExact
-import RenewalGeometry.Commutant.FiniteComplexStarSubalgebraSemisimplicity
+import MathPhys.OperatorAlgebras.FiniteComplexStarSubalgebraSemisimplicity
+open MathPhys
 
 /-!
 # Central separation of the landed internal blocks

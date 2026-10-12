@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactInitialCalculusFinal
 import RenewalGeometry.Action.ExactActionProvenance
+open MathPhys
 
 /-!
 # `lem:supp-initial-range` on the grid Sobolev spaces, with cutoff-independent radii
@@ -34,6 +35,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.InitialRange
+open MathPhys.ExactPhaseAction
 
 set_option linter.unusedSectionVars false
 

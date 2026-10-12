@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Spectralization.StationaryRenewalGraphCurrentFibreExact
 import RenewalGeometry.Spectralization.NonlinearAffinityHodgeExact
+open MathPhys
 /-!
 # Affine dimension of the stationary current fibre
 

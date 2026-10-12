@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.CoupledBootstrapSlabModel
+import MathPhys.Continuum.CoupledBootstrapSlabModel
+import RenewalGeometry.Continuum.AposterioriPhysicalShadow
 import RenewalGeometry.Analysis.DyadicRateAsymptotics
+open MathPhys
 
 /-!
 # `thm:native-closure` and `cor:native-rate` in the actual-tuple model, from the source bound
@@ -39,6 +41,7 @@ open scoped BigOperators ContDiff
 noncomputable section
 
 namespace RenewalGeometry.CoupledBootstrap.NativeTuple
+open MathPhys.CoupledBootstrap
 
 open SobolevOpen (pd)
 open PeriodicCube SymHypEnergy SlabWaveHk SlabSobAlg QLEnergy QLDiff QLRecovery FrameCurvature

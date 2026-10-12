@@ -3,9 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Commutant.ReciprocalWedderburnKronecker
+import MathPhys.OperatorAlgebras.ReciprocalWedderburnKronecker
 import RenewalGeometry.Commutant.GraphSupportPolarDuality
 import RenewalGeometry.Commutant.SMSTCommutant
+open MathPhys
 
 /-!
 # The noncommuting-support quiver theorem (`thm:quiver`)

@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.GrandInterface2
-import RenewalGeometry.Predictive.KalmanRealization
+import MathPhys.SystemsTheory.KalmanRealization
+open MathPhys
 /-!
 # Terminating arithmetic–renewal source test
   (`corollary:terminating-arithmetic-renewal-source-test`,

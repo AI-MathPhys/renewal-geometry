@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Gravity.ADMReconstructionAssembly
 import RenewalGeometry.Gravity.RootRaceScoreGeneral
+open MathPhys
 
 /-!
 # `mt:adm` with clause (ii) on the twelve oriented roots (emergent-spacetime manuscript)

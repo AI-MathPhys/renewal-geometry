@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.GowdyActionTestEulerLagrange
+open MathPhys
 
 /-!
 # First-jet comparison for the midpoint/centered discretization on a periodic slab
@@ -29,6 +30,7 @@ open Set Finset
 open scoped BigOperators ContDiff
 
 namespace RenewalGeometry.GowdyStaggered.ActionTest
+open MathPhys.GowdyStaggered
 
 noncomputable section
 

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.ActiveResidualAlgebra
+open MathPhys
 /-!
 # The degree-one edge commutant has dimension seven
 

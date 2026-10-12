@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.ConstantShiftWardOrders
-import RenewalGeometry.Analysis.AnalyticCauchyProductCoefficients
+import MathPhys.Analysis.AnalyticCauchyProductCoefficients
 import RenewalGeometry.Gravity.ExactSlowRankTwoExact
+open MathPhys
 
 /-!
 # Base-uniform harmonic quartic annihilation from the constant-shift Ward packet

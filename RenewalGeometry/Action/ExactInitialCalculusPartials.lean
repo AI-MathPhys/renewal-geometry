@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.Action.ExactInitialCalculusRows
 import RenewalGeometry.Action.ExactShiftCovariance
 import RenewalGeometry.Action.ExactLapseHomogeneity
+open MathPhys
 
 /-!
 # Velocity, lapse and shift partial derivatives of the phase-compatible Lagrangian
@@ -36,6 +37,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.InitialCalculus
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

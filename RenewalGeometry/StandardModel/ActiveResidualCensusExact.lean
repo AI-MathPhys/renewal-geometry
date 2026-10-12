@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.StandardModel.ActiveResidualAlgebra
 import RenewalGeometry.StandardModel.GeometryShortQuotientExact
 import RenewalGeometry.Commutant.DegreeOneColourNoGoExact
+open MathPhys
 
 /-!
 # The `S₄ × ⟨ι⟩` census of the categorical residual, by characters

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Miscellany.AssortedFiniteRecords00
+open MathPhys
 /-!
 # Easy exact records, batch 01 (Gran-Tensor manuscript)
 
@@ -1262,7 +1263,7 @@ staged route. -/
 section SourceMetricTransport
 
 open scoped Matrix.Norms.Operator
-open RenewalGeometry.SourceCoercivityInfluence
+open MathPhys.SourceCoercivityInfluence
 
 namespace MetricTransport
 
@@ -2358,7 +2359,7 @@ equals `‖G‖` for the PSD supported Gram). -/
 
 section SourceActionCovariance
 
-open RenewalGeometry.SourceCoercivityInfluence RenewalGeometry.GeometricThresholdBank
+open MathPhys.SourceCoercivityInfluence MathPhys.GeometricThresholdBank
 
 namespace SourceAction
 
@@ -2971,7 +2972,7 @@ conclusion is strong convergence of `J_n Q_n v_n` to a nonzero limit. -/
 
 section LowIslandCofinal
 
-open RenewalGeometry.SourceCoercivityInfluence RenewalGeometry.GeometricThresholdBank
+open MathPhys.SourceCoercivityInfluence MathPhys.GeometricThresholdBank
 open scoped ComplexInnerProductSpace
 
 namespace LowIsland

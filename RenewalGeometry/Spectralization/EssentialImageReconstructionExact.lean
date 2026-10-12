@@ -5,10 +5,10 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.ReconstructionCategories
-import RenewalGeometry.Spectralization.SpectralCompressionsSequential
-import RenewalGeometry.Certificates.ToeplitzSpectralTripleExact
+import MathPhys.SpectralGeometry.SpectralCompressionsSequential
+import MathPhys.OperatorTheory.ToeplitzSpectralTripleExact
 
-open NCG
+open MathPhys
 /-!
 # Essential images of the reconstruction functors
 
@@ -54,9 +54,9 @@ noncomputable section
 namespace RenewalGeometry.EssentialImageReconstruction
 
 open RenewalGeometry.ReconstructionCategories
-open RenewalGeometry.SpectralCompressionsSequential
-open RenewalGeometry.CompactResolventDiracSpectralScreensExact
-open RenewalGeometry.CompactNormalFiniteSpectralScreensExact
+open MathPhys.SpectralCompressionsSequential
+open MathPhys.CompactResolventDiracSpectralScreensExact
+open MathPhys.CompactNormalFiniteSpectralScreensExact
 
 /-! ### Finite resolvent screens are spectral projections of `D` -/
 
@@ -596,7 +596,7 @@ end Reconcile
 
 section Toeplitz
 
-open RenewalGeometry.ToeplitzScreenObstruction
+open MathPhys.ToeplitzScreenObstruction
 
 /-- The Toeplitz smooth algebra `𝒜_D = alg(I, S, S*)`, used as coordinate algebra. -/
 abbrev ToeplitzSmoothAlgebra : Type :=

@@ -3,9 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import NCG.Algebra.CliffordConcrete
+import MathPhys.Algebra.CliffordConcrete
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # separate Clifford marginals do not decide matter
 -/
@@ -14,7 +15,7 @@ open Matrix Kronecker
 
 namespace RenewalGeometry
 
-open CommonOrigin NCG.CommonOrigin
+open CommonOrigin MathPhys.CommonOrigin
 
 abbrev SMST4 := Fin 2 × Fin 2
 abbrev SMST8 := SMST4 × Fin 2

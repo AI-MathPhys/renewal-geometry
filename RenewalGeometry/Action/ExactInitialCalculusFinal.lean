@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactInitialCalculusIdent
+open MathPhys
 
 /-!
 # `lem:supp-initial-calculus`: the uniform original-action constraint calculus
@@ -36,6 +37,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.InitialCalculus
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

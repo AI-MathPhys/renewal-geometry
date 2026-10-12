@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactInitialPreparedInverse
+open MathPhys
 
 /-!
 # `thm:supp-action-prepared-chart`: exact finite preparation from free initial records
@@ -28,6 +29,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.PreparedChart
+open MathPhys.ExactPhaseAction
 
 set_option linter.unusedSectionVars false
 
@@ -785,6 +787,7 @@ theorem supp_action_prepared_chart (r : ℕ) (hr : 2 ≤ r) :
 end RenewalGeometry.ExactPhaseAction.PreparedChart
 
 namespace RenewalGeometry.ExactPhaseAction.PreparedChart
+open MathPhys.ExactPhaseAction
 
 open InitialCalculus InitialRange
 

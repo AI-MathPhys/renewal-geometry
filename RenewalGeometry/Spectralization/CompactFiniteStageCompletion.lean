@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.CompactFiniteStageSystem
-import RenewalGeometry.Topology.InverseLimitOrbitQuotient
+import MathPhys.Topology.InverseLimitOrbitQuotient
+open MathPhys
 
 /-!
 # The completed retained-coordinate inverse fibre
@@ -39,6 +40,7 @@ open Filter Topology Set MulAction
 noncomputable section
 
 namespace RenewalGeometry.CompactFiniteStage
+open MathPhys.CompactFiniteStage
 
 universe u
 

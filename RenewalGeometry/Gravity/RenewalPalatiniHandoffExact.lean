@@ -5,10 +5,11 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.PhysicalLiftVariationLimit
-import RenewalGeometry.Gravity.MollifiedFirstBianchi
+import MathPhys.Gravity.MollifiedFirstBianchi
 import RenewalGeometry.Gravity.VariationTransferExact
-import RenewalGeometry.Gravity.PalatiniTorsionCoefficientModelExact
-import RenewalGeometry.Lorentz.GravitationalClassDensity
+import MathPhys.Gravity.PalatiniTorsionCoefficientModelExact
+import MathPhys.LorentzianGeometry.GravitationalClassDensity
+open MathPhys
 
 /-!
 # The localized renewal–Palatini handoff
@@ -256,7 +257,7 @@ variable {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddComm
 
 /-- A strong `L^p` limit (`1 ≤ p`) of almost-everywhere vanishing functions vanishes almost
 everywhere. -/
-theorem _root_.RenewalGeometry.LpTendsto.ae_eq_zero_of_ae_eq_zero {p : ℝ≥0∞} (hp : 1 ≤ p) {u : ℕ → X → E} {u' : X → E}
+theorem _root_.MathPhys.LpTendsto.ae_eq_zero_of_ae_eq_zero {p : ℝ≥0∞} (hp : 1 ≤ p) {u : ℕ → X → E} {u' : X → E}
     (hu : LpTendsto ν p u u') (h0 : ∀ n, u n =ᵐ[ν] 0) : u' =ᵐ[ν] 0 := by
   have heq : ∀ n, eLpNorm u' p ν = eLpNorm (u n - u') p ν := fun n => by
     rw [eLpNorm_sub_comm]
@@ -269,20 +270,20 @@ theorem _root_.RenewalGeometry.LpTendsto.ae_eq_zero_of_ae_eq_zero {p : ℝ≥0�
   exact (eLpNorm_eq_zero_iff hu.memLp_lim.1 (by positivity)).1 hz
 
 /-- Linear constraints holding almost everywhere pass to strong limits. -/
-theorem _root_.RenewalGeometry.LpTendsto.ae_map_eq_zero {p : ℝ≥0∞} (hp : 1 ≤ p) (L : E →L[ℝ] F) {u : ℕ → X → E}
+theorem _root_.MathPhys.LpTendsto.ae_map_eq_zero {p : ℝ≥0∞} (hp : 1 ≤ p) (L : E →L[ℝ] F) {u : ℕ → X → E}
     {u' : X → E} (hu : LpTendsto ν p u u') (h0 : ∀ n, ∀ᵐ x ∂ν, L (u n x) = 0) :
     ∀ᵐ x ∂ν, L (u' x) = 0 :=
   (hu.clm_comp L).ae_eq_zero_of_ae_eq_zero hp fun n => h0 n
 
 /-- Strong convergence is inherited by smaller measures. -/
-theorem _root_.RenewalGeometry.LpTendsto.mono_measure' {p : ℝ≥0∞} {ν' : Measure X} (hle : ν' ≤ ν) {u : ℕ → X → E}
+theorem _root_.MathPhys.LpTendsto.mono_measure' {p : ℝ≥0∞} {ν' : Measure X} (hle : ν' ≤ ν) {u : ℕ → X → E}
     {u' : X → E} (hu : LpTendsto ν p u u') : LpTendsto ν' p u u' :=
   ⟨fun n => (hu.memLp n).mono_measure hle, hu.memLp_lim.mono_measure hle,
     tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds hu.tendsto (fun n => bot_le)
       fun n => eLpNorm_mono_measure _ hle⟩
 
 /-- Strong convergence is preserved along sequences tending to infinity. -/
-theorem _root_.RenewalGeometry.LpTendsto.comp_tendsto {p : ℝ≥0∞} {u : ℕ → X → E} {u' : X → E} (hu : LpTendsto ν p u u')
+theorem _root_.MathPhys.LpTendsto.comp_tendsto {p : ℝ≥0∞} {u : ℕ → X → E} {u' : X → E} (hu : LpTendsto ν p u u')
     {ns : ℕ → ℕ} (hns : Tendsto ns atTop atTop) : LpTendsto ν p (fun n => u (ns n)) u' :=
   ⟨fun n => hu.memLp (ns n), hu.memLp_lim, hu.tendsto.comp hns⟩
 
@@ -516,7 +517,7 @@ def compatCLM : Matrix (Fin 4) (Fin 4) ℝ →L[ℝ] Matrix (Fin 4) (Fin 4) ℝ 
 theorem compatCLM_apply (M : Matrix (Fin 4) (Fin 4) ℝ) :
     compatCLM M = (minkowski * M)ᵀ + minkowski * M := rfl
 
-theorem _root_.RenewalGeometry.DistributionalTorsion.L2LocTendsto.lpTendsto {E : Type*} [NormedAddCommGroup E] {U : Opens (Fin 4 → ℝ)}
+theorem _root_.MathPhys.DistributionalTorsion.L2LocTendsto.lpTendsto {E : Type*} [NormedAddCommGroup E] {U : Opens (Fin 4 → ℝ)}
     {u : ℕ → Fin 4 → (Fin 4 → ℝ) → E} {u' : Fin 4 → (Fin 4 → ℝ) → E} (h : L2LocTendsto U u u')
     (a : Fin 4) {C : Set (Fin 4 → ℝ)} (hC : IsCompact C) (hCU : C ⊆ U) :
     LpTendsto (volume.restrict C) 2 (fun n => u n a) (u' a) :=
@@ -1259,19 +1260,19 @@ theorem epsilonPairing_invariant (Λ : Matrix (Fin 4) (Fin 4) ℝ) (hdet : Λ.de
     first | ring1 | linear_combination hdet | linear_combination -hdet
 
 /-- `L_Palatini` is Lorentz natural. -/
-theorem palatiniDensity_isLorentzNatural : RenewalGeometry.palatiniDensity.IsLorentzNatural :=
+theorem palatiniDensity_isLorentzNatural : MathPhys.palatiniDensity.IsLorentzNatural :=
   fun Λ hΛ => by
-    rw [RenewalGeometry.palatiniDensity_pairing]
+    rw [MathPhys.palatiniDensity_pairing]
     exact epsilonPairing_invariant Λ hΛ.det
 
-theorem holstCoeff_palatiniDensity : holstCoeff RenewalGeometry.palatiniDensity = 0 := by
+theorem holstCoeff_palatiniDensity : holstCoeff MathPhys.palatiniDensity = 0 := by
   simp [holstCoeff, epsilonPairing, scalarBlocks]
 
-theorem palatiniCoeff_palatiniDensity : palatiniCoeff RenewalGeometry.palatiniDensity = 1 := by
+theorem palatiniCoeff_palatiniDensity : palatiniCoeff MathPhys.palatiniDensity = 1 := by
   simp [palatiniCoeff, epsilonPairing, scalarBlocks]
 
-theorem volumeCoeff_palatiniDensity : volumeCoeff RenewalGeometry.palatiniDensity = 0 := by
-  simp [volumeCoeff, RenewalGeometry.palatiniDensity, GravitationalClassDensity.ofCoefficients]
+theorem volumeCoeff_palatiniDensity : volumeCoeff MathPhys.palatiniDensity = 0 := by
+  simp [volumeCoeff, MathPhys.palatiniDensity, GravitationalClassDensity.ofCoefficients]
 
 /-- The Cartan map at the basis coframe has a positive lower singular-value bound on
 antisymmetric torsion arrays (finite-dimensional injectivity, `cartan_injective_of_isUnit_det`). -/
@@ -1330,7 +1331,7 @@ theorem eLpNorm_zero_fun' {X E : Type*} [MeasurableSpace X] [NormedAddCommGroup 
 (flat Minkowski metric), the zero connection, curvature and torsion, and the Palatini score
 `L_Palatini` (`α = 0`, `β = 1`, `λ = 0`) satisfy every hypothesis, including the amendment. -/
 theorem renewalPalatiniHypotheses_flat :
-    RenewalPalatiniHypotheses ⊤ (fun _ => RenewalGeometry.palatiniDensity)
+    RenewalPalatiniHypotheses ⊤ (fun _ => MathPhys.palatiniDensity)
       (fun _ μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (fun _ _ _ => 0) (fun _ _ _ _ => 0)
       (fun _ _ _ _ => 0) (fun μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (fun _ _ => 0) 0 1 0 0 := by
   have hfin : ∀ C : Set (Fin 4 → ℝ), IsCompact C → IsFiniteMeasure (volume.restrict C) :=
@@ -1387,7 +1388,7 @@ example (K : Set (Fin 4 → ℝ)) : ∀ᵐ x ∂(volume.restrict K),
 /-- **Non-vacuity of `RenewalPalatiniLiteralLinkHypotheses`**: the flat data of
 `renewalPalatiniHypotheses_flat` with zero limiting curvature satisfy the literal-link packet. -/
 theorem renewalPalatiniLiteralLinkHypotheses_flat :
-    RenewalPalatiniLiteralLinkHypotheses ⊤ (fun _ => RenewalGeometry.palatiniDensity)
+    RenewalPalatiniLiteralLinkHypotheses ⊤ (fun _ => MathPhys.palatiniDensity)
       (fun _ μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (fun _ _ _ => 0) (fun _ _ _ _ => 0)
       (fun _ _ _ _ => 0) (fun μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (fun _ _ => 0)
       (fun _ _ _ => 0) 0 1 0 0 :=

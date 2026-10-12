@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeStressEulerRow
+open MathPhys
 
 /-!
 # Homogeneous native fields: curvature, stress and Euler rows of lapse-FLRW profiles

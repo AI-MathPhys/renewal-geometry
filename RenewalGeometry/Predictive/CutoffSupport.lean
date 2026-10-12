@@ -3,7 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Algebra.SqrtPolar
+import MathPhys.Algebra.SqrtPolar
+open MathPhys
 /-!
 # Canonical cutoff support, absorbing histories, and quotient
   transport
@@ -31,7 +32,7 @@ The converse sequential-isometry implication, word-level absorbing identity,
 strict corner composition, full-letter inflow defect, contextual quotient
 criterion, finite-block central trace density, and physical Gram compression
 are proved in the exact companion module
-`NCG.Grand.ExactCutoffCompatibility`.
+`MathPhys.Grand.ExactCutoffCompatibility`.
 -/
 
 open Matrix

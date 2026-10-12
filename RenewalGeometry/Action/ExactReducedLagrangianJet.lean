@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactFlatLinearization
-import RenewalGeometry.Action.ExactLegendreSecondOrder
+import MathPhys.Variational.ExactLegendreSecondOrder
 import RenewalGeometry.Action.ExactStationaryConnectionAnalytic
+open MathPhys
 
 /-!
 # The reduced Lagrangian of the actual action and its second-order jet at flat data
@@ -43,6 +44,7 @@ noncomputable section
 set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry.ExactPhaseAction.QuadJet
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.StationaryHomogeneousRenewalRates
+open MathPhys
 
 /-!
 # Vacuum Friedmann equations in renewal coordinates

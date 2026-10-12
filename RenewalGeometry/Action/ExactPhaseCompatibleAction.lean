@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactActionLorentzAlgebra
-import RenewalGeometry.Algebra.MatrixExpDerivative
-import RenewalGeometry.Analysis.NormedAlgebraLogBCH
+import MathPhys.Algebra.MatrixExpDerivative
+import MathPhys.Analysis.NormedAlgebraLogBCH
+open MathPhys
 
 /-!
 # The explicit completed finite Palatini/link action and its connection normal form

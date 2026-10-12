@@ -7,7 +7,8 @@ import Mathlib
 import RenewalGeometry.Continuum.NativeHomogeneousLapse
 import RenewalGeometry.Continuum.NativeCalibrationWitness
 import RenewalGeometry.Continuum.NativeLocalCalibrationBackreacting
-import RenewalGeometry.Gravity.HomogeneousEinsteinHiggsExact
+import MathPhys.Gravity.HomogeneousEinsteinHiggsExact
+open MathPhys
 
 /-!
 # The backreacting homogeneous Einstein–Higgs example in the native slab gauges

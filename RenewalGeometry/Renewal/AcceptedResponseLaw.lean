@@ -3,8 +3,9 @@ Copyright (c) 2026 Aurelien Pelissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurelien Pelissier
 -/
-import RenewalGeometry.Renewal.GeometricRandomSum
+import MathPhys.Probability.GeometricRandomSum
 import RenewalGeometry.Renewal.AcceptedResponse
+open MathPhys
 /-!
 # The accepted-response waiting law
 

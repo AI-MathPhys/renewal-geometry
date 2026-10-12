@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.StandardModel.WeakResetGenerationExact
+import MathPhys.GaugeGroups.WeakResetGenerationExact
 import RenewalGeometry.StandardModel.InternalCommutantSeedExact
+open MathPhys
 
 /-!
 # Minimal bridge and weak-router residuals

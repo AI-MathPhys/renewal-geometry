@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMReducedClosure
-import RenewalGeometry.Analysis.SobolevBoxCrEmbedding
+import MathPhys.Analysis.SobolevBoxCrEmbedding
+open MathPhys
 
 /-!
 # Negative-Sobolev stress convergence (`cor:reduced-stress`, `cor:stress-topology`,
@@ -56,6 +58,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace StressTopology
 
 /-! ### The `H^m` test norm -/

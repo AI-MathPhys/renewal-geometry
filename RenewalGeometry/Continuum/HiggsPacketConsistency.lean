@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.GaugeTheory.TransportPlaquetteConsistency
+import MathPhys.GaugeTheory.TransportPlaquetteConsistency
 import RenewalGeometry.DiscreteAnalysis.PositiveHiggsEnvelopeExact
+open MathPhys
 
 /-!
 # Consistency of the native Higgs edge packet on smooth bounded families

@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeAllSectorConsistency
 import RenewalGeometry.Continuum.NativeSpinorGraphBridge
+open MathPhys
 
 /-!
 # All-sector native consistency from the paper's hypotheses `(N1)–(N4)`

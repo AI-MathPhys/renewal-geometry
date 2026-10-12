@@ -5,10 +5,11 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.PredictiveRN
 import RenewalGeometry.Operational.MinimalNaturality
-import RenewalGeometry.Predictive.StoreFrequencyCount
+import MathPhys.SystemsTheory.StoreFrequencyCount
 import RenewalGeometry.Spectralization.AnalyticPolar
 import RenewalGeometry.Measurement.OddRead
 import RenewalGeometry.Lorentz.AnchorClifford
+open MathPhys
 /-!
 # Predictive Store–control finite closure and the reduced cell
   (`thm:predictive-clock-discharge`,

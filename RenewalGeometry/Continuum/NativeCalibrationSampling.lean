@@ -4,10 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.ActualJetStateConvergence
+import MathPhys.Continuum.ActualJetStateConvergence
 import RenewalGeometry.Continuum.LocalCalibrationBudgets
 import RenewalGeometry.Continuum.NativeSampledSourcePhys
 import RenewalGeometry.Continuum.NativeClosureUnconditional
+open MathPhys
 
 /-!
 # Sampled smooth solutions: convergence of the actual tuples of the reconstructions

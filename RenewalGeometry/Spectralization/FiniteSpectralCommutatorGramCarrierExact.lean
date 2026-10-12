@@ -3,7 +3,8 @@ Copyright (c) 2026 Aurelien Pelissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurelien Pelissier
 -/
-import RenewalGeometry.Predictive.SourceKernelMinimalUniqueness
+import MathPhys.SystemsTheory.SourceKernelMinimalUniqueness
+open MathPhys
 /-!
 # Positive source-minimal carrier of finite spectral commutators
 
@@ -73,7 +74,7 @@ theorem commutatorGram_sourceMinimal
       G = Sᴴ * S → G.rank ≤ Fintype.card C) ∧
     (CFC.sqrt G).rank = G.rank := by
   dsimp only
-  have h := RenewalGeometry.source_kernel_realization_minimal_unique
+  have h := MathPhys.source_kernel_realization_minimal_unique
     (commutatorGram D ρ) (commutatorGram_posSemidef D ρ)
   exact ⟨h.1, h.2.1, h.2.2.1⟩
 

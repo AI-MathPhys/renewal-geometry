@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.FiniteGraphSpectralUniversalityFibreExact
+open MathPhys
 /-!
 # Modular affinity of the current fibre and the finite modular-reversal packet
 

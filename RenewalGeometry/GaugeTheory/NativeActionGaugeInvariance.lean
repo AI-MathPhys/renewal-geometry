@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeDensitiesExact
-import RenewalGeometry.Algebra.SeriesLogChart
+import MathPhys.Algebra.SeriesLogChart
+open MathPhys
 
 /-!
 # Exact site-gauge invariance of the native local action, its packets and its covector norm

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.FiniteAnchorOperatorNormExact
+open MathPhys
 
 /-!
 # Finite-anchor stability: generator-scale control and the tail clause (`thm:finite-anchor`)

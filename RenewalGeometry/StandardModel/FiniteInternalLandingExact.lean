@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.Predictive.FlatMultiplicityObstruction
 import RenewalGeometry.StandardModel.BridgeRouterResidualsExact
 import RenewalGeometry.StandardModel.InternalDeficitAlternativesExact
+open MathPhys
 
 /-!
 # The finite internal landing alternative

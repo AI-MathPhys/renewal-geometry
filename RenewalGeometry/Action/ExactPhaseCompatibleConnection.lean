@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactPhaseCompatibleNormalForm
 import RenewalGeometry.DiscreteAnalysis.OddPhaseDerivativeReal
+open MathPhys
 
 /-!
 # The phase-compatible action, Lorentz coordinates and the Cartan operator

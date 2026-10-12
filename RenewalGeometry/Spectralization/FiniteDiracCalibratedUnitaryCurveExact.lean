@@ -6,6 +6,7 @@ Authors: Aurelien Pelissier
 import RenewalGeometry.Spectralization.FiniteRealEvenSpectralizationExact
 import Mathlib.Analysis.Calculus.Deriv.Star
 import Mathlib.Analysis.SpecialFunctions.Exponential
+open MathPhys
 
 /-!
 # Exact calibrated unitary curve for a finite Dirac operator

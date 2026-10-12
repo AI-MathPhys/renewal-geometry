@@ -3,10 +3,11 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Algebra.FiniteCStarAlgebraControlledUnitaryGenerationExact
+import MathPhys.Algebra.FiniteCStarAlgebraControlledUnitaryGenerationExact
 import RenewalGeometry.Predictive.FiniteControlledUnitaryProcessCombExact
 import RenewalGeometry.Spectralization.FiniteDiracCalibratedUnitaryCurveExact
 import RenewalGeometry.Spectralization.FiniteSpectralCommutatorGramCarrierExact
+open MathPhys
 /-!
 # Marked Renewal realization of an arbitrary coordinate finite spectral packet
 
@@ -28,7 +29,7 @@ noncomputable section
 
 universe u
 
-open RenewalGeometry.FiniteCStarAlgebraControlledUnitaryGenerationExact
+open MathPhys.FiniteCStarAlgebraControlledUnitaryGenerationExact
 open RenewalGeometry.FiniteDiracCalibratedUnitaryCurveExact
 open RenewalGeometry.FiniteSpectralCommutatorGramCarrierExact
 
@@ -117,7 +118,7 @@ packet. -/
 structure MarkedRenewalRealization
     (P : CoordinateFiniteSpectralPacket A K) where
   amplitude : MarkIndex K → ℂ
-  comb : RenewalGeometry.FiniteDeterministicComb
+  comb : MathPhys.FiniteDeterministicComb
     (RenewalGeometry.controlledUnitaryOneStepPrefixes amplitude
       (markedControlUnitary (K := K))) 1
   controlsSpan : Submodule.span ℂ (Set.range
@@ -147,7 +148,7 @@ spectral operation and the source-minimal one-form carrier. -/
 structure RealEvenMarkedRenewalRealization
     (P : CoordinateFiniteRealEvenSpectralPacket A K) where
   amplitude : MarkIndex K → ℂ
-  comb : RenewalGeometry.FiniteDeterministicComb
+  comb : MathPhys.FiniteDeterministicComb
     (RenewalGeometry.controlledUnitaryOneStepPrefixes amplitude
       (markedControlUnitary (K := K))) 1
   controlsSpan : Submodule.span ℂ (Set.range

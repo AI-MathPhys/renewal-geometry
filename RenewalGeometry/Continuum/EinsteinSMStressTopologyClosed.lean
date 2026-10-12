@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMStressTopology
 import RenewalGeometry.Continuum.EinsteinSMDiracStability
+open MathPhys
 
 /-!
 # `cor:stress-topology`, closed (Einstein–Standard-Model action-closure manuscript)
@@ -27,6 +29,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace StressTopology
 
 variable {T : ℝ} {Ysec : Type} [Fintype Ysec] {FC : FermionCarrier Ysec}

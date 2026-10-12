@@ -8,9 +8,10 @@ import RenewalGeometry.Gravity.ADMFrameUniqueness
 import RenewalGeometry.Gravity.ADMPacketPersistenceExact
 import RenewalGeometry.Lorentz.LorentzianPrincipalSquare
 import RenewalGeometry.Dimension.DimensionK4Classification
-import RenewalGeometry.Dimension.DimensionRegularGraphExact
+import MathPhys.Combinatorics.DimensionRegularGraphExact
 import RenewalGeometry.Dimension.DimensionCofinal3Plus1
 import RenewalGeometry.Krein.SignatureMinimalityOrientationFloor
+open MathPhys
 
 /-!
 # Minimal faithful `3+1` ADM reconstruction: assembly (`mt:adm`, emergent-spacetime manuscript)

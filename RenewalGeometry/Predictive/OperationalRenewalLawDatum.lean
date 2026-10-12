@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Predictive.TypedEventGrammar
-import RenewalGeometry.Predictive.FiniteProcessCombTomography
+import MathPhys.SystemsTheory.FiniteProcessCombTomography
+open MathPhys
 
 /-!
 # Finite conditional operational renewal law

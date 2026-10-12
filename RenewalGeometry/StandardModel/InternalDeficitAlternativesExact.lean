@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.StandardModel.InternalAssemblyExact
 import RenewalGeometry.StandardModel.CentralSeparationExact
+open MathPhys
 
 /-!
 # Exact internal-algebra deficit alternatives

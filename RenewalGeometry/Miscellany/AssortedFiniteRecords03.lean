@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Miscellany.AssortedFiniteRecords02
-import RenewalGeometry.StatMech.TraceExpDerivative
+import MathPhys.StatMech.TraceExpDerivative
+open MathPhys
 /-!
 # Easy exact records, batch 03 (Gran-Tensor manuscript)
 
@@ -35,7 +36,7 @@ Rendering conventions are described in the docstring of each section.
 -/
 
 open Matrix Finset
-open RenewalGeometry.SourceCoercivityInfluence
+open MathPhys.SourceCoercivityInfluence
 open scoped ComplexOrder ENNReal
 
 namespace RenewalGeometry
@@ -1732,7 +1733,7 @@ The witness bank is one-dimensional, `H_n = n` and `Ψ_n = 1`, with
 
 namespace HighEnergyEscape
 
-open Filter RenewalGeometry.TraceExp
+open Filter MathPhys.TraceExp
 
 /-- The rectangular adjoint move for dot products. -/
 theorem dot_adjoint_rect {k ι : Type} [Fintype k] [Fintype ι]

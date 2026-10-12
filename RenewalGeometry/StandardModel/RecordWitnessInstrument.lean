@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.RecordWitnessConcrete
+open MathPhys
 
 /-!
 # Classical record data do not determine the system algebra (`thm:record-nonidentifiability`)

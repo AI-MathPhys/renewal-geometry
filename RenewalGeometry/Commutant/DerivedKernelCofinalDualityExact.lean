@@ -4,10 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.OperatorLimits.TransportedMoscoAsymptoticCompactness
-import RenewalGeometry.OperatorLimits.ProtectedBasisTransport
-import RenewalGeometry.Commutant.JointCommutatorContinuousOperator
+import MathPhys.OperatorLimits.TransportedMoscoAsymptoticCompactness
+import MathPhys.OperatorLimits.ProtectedBasisTransport
+import MathPhys.OperatorAlgebras.JointCommutatorContinuousOperator
 import RenewalGeometry.Commutant.ArbitraryIncidenceDualityExact
+open MathPhys
 
 /-!
 # Derived-kernel cofinal action–multiplicity duality
@@ -37,7 +38,7 @@ open scoped ENNReal
 
 noncomputable section
 
-namespace RenewalGeometry.VaryingHilbert.System
+namespace MathPhys.VaryingHilbert.System
 
 section Abstract
 
@@ -199,30 +200,30 @@ variable {Hlim : Type*} [NormedAddCommGroup Hlim] [InnerProductSpace ℂ Hlim]
 commutator map `∂ A = ([c_j, A])_j`. -/
 theorem derivedKernel_mem_ker_commutantLaplacian_iff {n : Type*} [Fintype n] {s : ℕ}
     (c : Fin s → Matrix n n ℂ) (A : EuclideanSpace ℂ (n × n)) :
-    A ∈ LinearMap.ker (RenewalGeometry.commutantLaplacianCLM c).toLinearMap ↔
-      RenewalGeometry.jointCommutatorCLM c A = 0 := by
+    A ∈ LinearMap.ker (MathPhys.commutantLaplacianCLM c).toLinearMap ↔
+      MathPhys.jointCommutatorCLM c A = 0 := by
   simp only [LinearMap.mem_ker, ContinuousLinearMap.coe_coe]
   constructor
   · intro h
-    have h0 : inner ℂ (RenewalGeometry.commutantLaplacianCLM c A) A = 0 := by
+    have h0 : inner ℂ (MathPhys.commutantLaplacianCLM c A) A = 0 := by
       rw [h, inner_zero_left]
-    rw [RenewalGeometry.commutantLaplacianCLM, ContinuousLinearMap.comp_apply,
+    rw [MathPhys.commutantLaplacianCLM, ContinuousLinearMap.comp_apply,
       ContinuousLinearMap.adjoint_inner_left, inner_self_eq_zero] at h0
     exact h0
   · intro h
-    simp [RenewalGeometry.commutantLaplacianCLM, h]
+    simp [MathPhys.commutantLaplacianCLM, h]
 
 /-- The commutator energy `ofReal ‖∂ A‖²` vanishes exactly on the commutant-Laplacian
 kernel. -/
 theorem derivedKernel_commutatorEnergy_eq_zero_iff {n : Type*} [Fintype n] {s : ℕ}
     (c : Fin s → Matrix n n ℂ) (A : EuclideanSpace ℂ (n × n)) :
-    ennrealBoundedOperatorEnergy (RenewalGeometry.jointCommutatorCLM c) A = 0 ↔
-      A ∈ LinearMap.ker (RenewalGeometry.commutantLaplacianCLM c).toLinearMap := by
+    ennrealBoundedOperatorEnergy (MathPhys.jointCommutatorCLM c) A = 0 ↔
+      A ∈ LinearMap.ker (MathPhys.commutantLaplacianCLM c).toLinearMap := by
   rw [derivedKernel_mem_ker_commutantLaplacian_iff, ennrealBoundedOperatorEnergy,
     ENNReal.ofReal_eq_zero]
   constructor
   · intro h
-    have h2 : ‖RenewalGeometry.jointCommutatorCLM c A‖ ^ 2 = 0 :=
+    have h2 : ‖MathPhys.jointCommutatorCLM c A‖ ^ 2 = 0 :=
       le_antisymm h (sq_nonneg _)
     exact norm_eq_zero.mp (pow_eq_zero_iff (n := 2) (by norm_num) |>.mp h2)
   · intro h
@@ -232,14 +233,14 @@ theorem derivedKernel_commutatorEnergy_eq_zero_iff {n : Type*} [Fintype n] {s : 
 the joint commutator kernel (`thm:howe-certificate`, kernel clause). -/
 theorem derivedKernel_mem_matCommutant_iff {n : Type*} [Fintype n] [DecidableEq n] {s : ℕ}
     (c : Fin s → Matrix n n ℂ) (hstar : ∀ j, ∃ k, (c j)ᴴ = c k) (T : Matrix n n ℂ) :
-    T ∈ RenewalGeometry.matCommutant
+    T ∈ MathPhys.matCommutant
         ((StarAlgebra.adjoin ℂ (Set.range c) : StarSubalgebra ℂ (Matrix n n ℂ)) :
           Set (Matrix n n ℂ)) ↔
-      RenewalGeometry.matrixL2 T ∈
-        LinearMap.ker (RenewalGeometry.commutantLaplacianCLM c).toLinearMap := by
-  rw [RenewalGeometry.ArbitraryIncidenceDuality.mem_matCommutant_starAdjoin_iff,
+      MathPhys.matrixL2 T ∈
+        LinearMap.ker (MathPhys.commutantLaplacianCLM c).toLinearMap := by
+  rw [MathPhys.ArbitraryIncidenceDuality.mem_matCommutant_starAdjoin_iff,
     derivedKernel_mem_ker_commutantLaplacian_iff]
-  have hk := RenewalGeometry.matrixL2_mem_jointCommutatorCLM_ker_iff c T
+  have hk := MathPhys.matrixL2_mem_jointCommutatorCLM_ker_iff c T
   rw [LinearMap.mem_ker, ContinuousLinearMap.coe_coe] at hk
   rw [hk]
   constructor
@@ -270,13 +271,13 @@ theorem derivedKernelCofinalDuality_exact
     (J : System (K := ℂ) (H := H) (Hn := fun X => EuclideanSpace ℂ (d X × d X)))
     (Jlim : Hlim →ₗᵢ[ℂ] H) (qlim : Hlim → ℝ≥0∞)
     (hD1 : J.TransportedMoscoConverges Jlim
-      (fun X => ennrealBoundedOperatorEnergy (RenewalGeometry.jointCommutatorCLM (c X))) qlim)
+      (fun X => ennrealBoundedOperatorEnergy (MathPhys.jointCommutatorCLM (c X))) qlim)
     {ι : Type*} [Fintype ι]
     (M : ∀ X, Submodule ℂ (EuclideanSpace ℂ (d X × d X)))
     (e : ∀ X, ι → EuclideanSpace ℂ (d X × d X)) (he : ∀ X, Orthonormal ℂ (e X))
     (hspan : ∀ X, Submodule.span ℂ (Set.range (e X)) = M X)
     (hMker : ∀ X,
-      M X ≤ LinearMap.ker (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap)
+      M X ≤ LinearMap.ker (MathPhys.commutantLaplacianCLM (c X)).toLinearMap)
     (Mlim : Submodule ℂ Hlim) [Mlim.HasOrthogonalProjection]
     (elim : ι → Hlim) (helim : Orthonormal ℂ elim)
     (hspanlim : Submodule.span ℂ (Set.range elim) = Mlim)
@@ -284,14 +285,14 @@ theorem derivedKernelCofinalDuality_exact
     (γstar : ℝ) (hγ : 0 < γstar)
     (hD3 : ∀ᶠ X in atTop, ∀ A : EuclideanSpace ℂ (d X × d X),
       γstar * ‖A - (M X).starProjection A‖ ^ 2 ≤
-        ‖RenewalGeometry.jointCommutatorCLM (c X) A‖ ^ 2) :
+        ‖MathPhys.jointCommutatorCLM (c X) A‖ ^ 2) :
     (∀ᶠ X in atTop,
-      LinearMap.ker (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap = M X ∧
+      LinearMap.ker (MathPhys.commutantLaplacianCLM (c X)).toLinearMap = M X ∧
         ∀ T : Matrix (d X) (d X) ℂ,
-          T ∈ RenewalGeometry.matCommutant
+          T ∈ MathPhys.matCommutant
               ((StarAlgebra.adjoin ℂ (Set.range (c X)) :
                 StarSubalgebra ℂ (Matrix (d X) (d X) ℂ)) : Set (Matrix (d X) (d X) ℂ)) ↔
-            RenewalGeometry.matrixL2 T ∈ M X) ∧
+            MathPhys.matrixL2 T ∈ M X) ∧
       (∀ A : Hlim, ENNReal.ofReal (γstar * ‖A - Mlim.starProjection A‖ ^ 2) ≤ qlim A) ∧
       (∀ A : Hlim, qlim A = 0 ↔ A ∈ Mlim) := by
   obtain ⟨hfinite, hlimgap, hlimker⟩ :=
@@ -303,7 +304,7 @@ theorem derivedKernelCofinalDuality_exact
         exact ENNReal.ofReal_le_ofReal (hX A))
   refine ⟨?_, hlimgap, hlimker⟩
   filter_upwards [hfinite] with X hX
-  have hker : LinearMap.ker (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap = M X := by
+  have hker : LinearMap.ker (MathPhys.commutantLaplacianCLM (c X)).toLinearMap = M X := by
     ext A
     rw [← derivedKernel_commutatorEnergy_eq_zero_iff, hX A]
   refine ⟨hker, fun T => ?_⟩
@@ -311,4 +312,4 @@ theorem derivedKernelCofinalDuality_exact
 
 end Commutator
 
-end RenewalGeometry.VaryingHilbert.System
+end MathPhys.VaryingHilbert.System

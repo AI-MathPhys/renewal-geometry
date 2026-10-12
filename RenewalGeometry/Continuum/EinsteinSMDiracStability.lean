@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.SymmetricHyperbolicStability
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
+import MathPhys.Continuum.SymmetricHyperbolicStability
 import RenewalGeometry.Continuum.EinsteinSMMainLimit
+open MathPhys
 
 /-!
 # `prop:dirac-stability` and the closed (C4b) route of `thm:certificate-packet` /
@@ -44,6 +46,7 @@ noncomputable section
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace DiracStab
 
 open SymHypEnergy PeriodicCube

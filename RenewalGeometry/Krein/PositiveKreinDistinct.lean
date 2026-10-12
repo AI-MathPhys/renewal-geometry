@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Gravity.RelationalSchedulerADM
-import NCG.Krein.FundamentalSymmetry
+import MathPhys.Krein.FundamentalSymmetry
+open MathPhys
 
 /-!
 # Positive geometry and Krein signature are distinct layers
@@ -27,7 +28,7 @@ import NCG.Krein.FundamentalSymmetry
   it is indefinite as soon as both are nonzero;
 * `RenewalGeometry.positive_krein_distinct_layers` — the bundled lemma. -/
 
-open Matrix NCG
+open Matrix MathPhys
 open scoped ComplexInnerProductSpace
 
 namespace RenewalGeometry
@@ -103,7 +104,7 @@ theorem rootBracket_nonneg {m n : Type*} [Fintype m] [Fintype n]
 /-- A real involution `S² = 1` whose quadratic form is nonnegative is the
 identity: positive data cannot supply a nontrivial sign involution
 (`lem:supp-positive-krein-distinct`, real-matrix form of
-`NCG.IsFundamentalSymmetry.eq_one_of_krein_nonneg`). -/
+`MathPhys.IsFundamentalSymmetry.eq_one_of_krein_nonneg`). -/
 theorem eq_one_of_involution_nonneg {n : Type*} [Fintype n] [DecidableEq n]
     (S : Matrix n n ℝ) (hS : S * S = 1)
     (hpos : ∀ v : n → ℝ, 0 ≤ v ⬝ᵥ (S *ᵥ v)) : S = 1 := by

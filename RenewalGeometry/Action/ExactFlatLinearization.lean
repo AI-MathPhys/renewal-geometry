@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactSqrtTriad
 import RenewalGeometry.Action.ExactCartanFlatBlock
+open MathPhys
 
 /-!
 # Flat linearization of the Palatini coefficient arrays `Π_i(e)`, `Σ_ij(e)`
@@ -32,6 +33,7 @@ open Finset Matrix
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.QuadJet
+open MathPhys.ExactPhaseAction
 
 open PalatiniEinsteinAlgebra
 

@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Action.DiscreteEulerConsistency
+import MathPhys.Variational.DiscreteEulerConsistency
 import RenewalGeometry.Continuum.NativeGravityFirstJet
+open MathPhys
 
 /-!
 # Growing-band consistency of the native Euler row (`prop:native-consistency`)

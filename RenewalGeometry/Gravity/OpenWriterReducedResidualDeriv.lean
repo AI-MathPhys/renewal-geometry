@@ -6,7 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterReducedResidual
 import RenewalGeometry.Gravity.OpenWriterTimeJets
-import RenewalGeometry.DiscreteAnalysis.PeriodicGridTimeDifferentiatedConsistency
+import MathPhys.DiscreteAnalysis.PeriodicGridTimeDifferentiatedConsistency
+open MathPhys
 
 /-!
 # Time-differentiated consistency of the complete reduced residual

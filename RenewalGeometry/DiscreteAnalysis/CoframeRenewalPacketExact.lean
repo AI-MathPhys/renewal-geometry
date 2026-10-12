@@ -3,7 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Analysis.LineTaylorRemainderBound
+import MathPhys.Analysis.LineTaylorRemainderBound
+open MathPhys
 
 /-!
 # The reversible coframe Renewal packet on a chart
@@ -35,7 +36,7 @@ periodic torus `hℤ^d/ℤ^d` only affects the global summation).
 -/
 
 open Matrix Finset
-open RenewalGeometry.LineTaylorRemainderBound
+open MathPhys.LineTaylorRemainderBound
 
 namespace RenewalGeometry.CoframeRenewalPacket
 

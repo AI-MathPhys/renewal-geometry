@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.Continuum.NativeSlabSymmetric
 import RenewalGeometry.Continuum.NativeRefSetNonempty
 import RenewalGeometry.Continuum.NativeSelectedPolynomial
+open MathPhys
 
 /-!
 # `thm:native-closure`, `cor:native-rate`, `thm:native-selected-closure` without the symmetry

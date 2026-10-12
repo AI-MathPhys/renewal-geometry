@@ -4,12 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Operational.RankOneForcing
-import RenewalGeometry.Operational.CompressionDefectDilation
+import MathPhys.QuantumInformation.RankOneForcing
+import MathPhys.QuantumInformation.CompressionDefectDilation
 import RenewalGeometry.Predictive.ContextualFutureNullIdeal
 import RenewalGeometry.Predictive.FiniteGrandTensorExact
-import RenewalGeometry.Commutant.ReciprocalWedderburnKronecker
+import MathPhys.OperatorAlgebras.ReciprocalWedderburnKronecker
 import RenewalGeometry.Spectralization.MarkedCommutantCoordinates
+open MathPhys
 /-!
 # Finite operational realization and recognition with multiplicities
 

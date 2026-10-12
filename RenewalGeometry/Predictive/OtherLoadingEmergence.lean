@@ -1,6 +1,7 @@
-import RenewalGeometry.Predictive.JointSourceRangeUnitary
+import MathPhys.SystemsTheory.JointSourceRangeUnitary
 import RenewalGeometry.Predictive.LoadedSubhierarchy
 import RenewalGeometry.Predictive.GrandOtherLoadings
+open MathPhys
 /-!
 # emergence and compression of the other loadings
 

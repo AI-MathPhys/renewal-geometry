@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Gravity.CurvatureEnergyPropagationExact
+import MathPhys.Gravity.CurvatureEnergyPropagationExact
+open MathPhys
 
 /-!
 # Finite curvature-energy propagation from initial data

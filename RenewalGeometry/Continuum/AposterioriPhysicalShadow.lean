@@ -6,6 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.InitialConstraintRetractionExact
 import RenewalGeometry.Action.ValidatedInitialRetractionExact
+import MathPhys.Continuum.CoupledBootstrapSlabData
+open MathPhys
 
 /-!
 # A posteriori exact physical shadows
@@ -74,57 +76,13 @@ parameter `c > 0`, and the conclusion holds with the explicit constant
 open Metric Filter Topology
 
 namespace RenewalGeometry.AposterioriShadow
+open MathPhys.AposterioriShadow
 
 noncomputable section
 
 /-! ### The slab model, the Cauchy tube and the bootstrap conclusion -/
 
-/-- **The analytic slab model** (`subsec:aposteriori-shadow`, `prop:coupled-bootstrap`): actual
-field tuples `Z` on the slab, their initial actual-jet state in `𝒳_k` (`H^k` norm), the comparison
-observable `(𝒰, Riem, T^SM)` in the pseudometric space `O`, the residual and harmonic-defect norms,
-admissible approximate records and exact solutions. -/
-structure SlabModel (Z X O : Type*) [NormedAddCommGroup X] [PseudoMetricSpace O] where
-  /-- The initial actual-jet state `𝒰(z)(0) ∈ 𝒳_k`. -/
-  init : Z → X
-  /-- The comparison observable `(𝒰(z), Riem(g), T^SM(z))`; its distance is the left side of
-  `eq:aposteriori-physical-shadow`. -/
-  obs : Z → O
-  /-- `‖𝓡_B(z)‖_{L²_tH^k_x}` (Einstein, Yang–Mills and Higgs rows). -/
-  resB : Z → ℝ
-  /-- `‖𝓡_D(z)‖_{L²_tH^{k+1}_x}` (Dirac and dual-Dirac rows). -/
-  resD : Z → ℝ
-  /-- `‖C(g)‖_{L²_tH^{k+1}_x} + ‖∂_tC(g)‖_{L²_tH^k_x}`, `C^μ = g^{αβ}Γ^μ_{αβ}`. -/
-  harm : Z → ℝ
-  /-- Smooth actual field tuple on the slab and foliated chart, exact temporal internal gauge. -/
-  Admissible : Z → Prop
-  /-- Exact physical Einstein–Standard-Model solution in the declared gauge class. -/
-  IsExact : Z → Prop
-  resB_nonneg : ∀ z, 0 ≤ resB z
-  resD_nonneg : ∀ z, 0 ≤ resD z
-  harm_nonneg : ∀ z, 0 ≤ harm z
-  /-- An exact solution has vanishing physical rows. -/
-  exact_resB : ∀ z, IsExact z → resB z = 0
-  /-- An exact solution has vanishing Dirac rows. -/
-  exact_resD : ∀ z, IsExact z → resD z = 0
-  /-- An exact solution is in harmonic coordinates. -/
-  exact_harm : ∀ z, IsExact z → harm z = 0
-
 variable {Z X O : Type*} [NormedAddCommGroup X] [PseudoMetricSpace O]
-
-/-- The mismatch `d` of `prop:coupled-bootstrap`:
-`‖𝒰̂(0) - 𝒰_*(0)‖_{H^k} + ‖𝓡_B(ẑ)‖_{L²H^k} + ‖𝓡_D(ẑ)‖_{L²H^{k+1}} + (harmonic defect of ĝ)`;
-the reference has vanishing residuals. -/
-def SlabModel.mismatch (M : SlabModel Z X O) (zh zs : Z) : ℝ :=
-  ‖M.init zh - M.init zs‖ + M.resB zh + M.resD zh + M.harm zh
-
-/-- **The conclusion of `prop:coupled-bootstrap`** for the references in `Ref` with constants
-`(d_*, C_*)`: for every reference `z_* ∈ Ref` and every admissible approximate record `ẑ`,
-`d ≤ d_*` implies `‖𝒰̂ - 𝒰_*‖_{C_tH^k} + ‖Riem(ĝ) - Riem(g_*)‖_{L²H^{k-1}} +
-‖T^SM(ẑ) - T^SM(z_*)‖_{L²H^k} ≤ C_* d` (`eq:bootstrap-state`, `eq:bootstrap-curvature`).
-`prop:coupled-bootstrap` is open in the ledger; this predicate is used only as a hypothesis. -/
-def CoupledBootstrapConclusion (M : SlabModel Z X O) (Ref : Set Z) (dstar Cstar : ℝ) : Prop :=
-  ∀ zs ∈ Ref, ∀ zh, M.Admissible zh → M.mismatch zh zs ≤ dstar →
-    dist (M.obs zh) (M.obs zs) ≤ Cstar * M.mismatch zh zs
 
 /-- **`ass:physical-Cauchy-tube`** (verified physical Cauchy tube), for the constraint map
 `𝔠_k : 𝒳_k → 𝒴_k^con` (`Ck`): a declared regular compatible family `𝒞_k^reg ⊂ 𝒞_k = {𝔠_k = 0}`

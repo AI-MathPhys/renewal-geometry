@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.FiniteInterfaceRepresentationTable
+open MathPhys
 
 /-!
 # The finite Einstein–Standard-Model interface on an admissible chart, with a spinor fibre

@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.EdgeCommutantBasisExact
-import RenewalGeometry.Commutant.MatrixFactorNormalForm
+import MathPhys.OperatorAlgebras.MatrixFactorNormalForm
+open MathPhys
 
 /-!
 # The degree-one internal-colour obstruction

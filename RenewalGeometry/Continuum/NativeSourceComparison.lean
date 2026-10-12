@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeRecordDilate
-import RenewalGeometry.Continuum.NativeSourceCompareGeneric
+import MathPhys.Continuum.NativeSourceCompareGeneric
+open MathPhys
 
 /-!
 # The extraction maps as smooth continuous-linear-map fields of the coframe
@@ -28,6 +29,7 @@ open Finset Set
 open scoped Matrix ContDiff Real
 
 namespace RenewalGeometry.RecordTuple
+open MathPhys.RecordTuple
 
 open SobolevOpen (pd)
 open DiscreteEulerConsistency (R4 evec jet1 contEuler)

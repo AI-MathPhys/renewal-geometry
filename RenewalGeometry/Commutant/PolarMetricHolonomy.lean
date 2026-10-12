@@ -6,8 +6,9 @@ Authors: Aurelien Pelissier
 import RenewalGeometry.Commutant.PolarHolonomy
 import RenewalGeometry.Commutant.EdgeCommutantReconstruction
 import RenewalGeometry.Lorentz.GlobalFrameTransport
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # connected polar metric--holonomy assembly
 

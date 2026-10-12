@@ -5,9 +5,10 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactInitialCalculusFlatBlock
-import RenewalGeometry.DiscreteAnalysis.PeriodicGridLocalAnalytic
+import MathPhys.DiscreteAnalysis.PeriodicGridLocalAnalytic
 import RenewalGeometry.DiscreteAnalysis.PeriodicGridPhaseDerivativeSobolev
-import RenewalGeometry.Analysis.UniformImplicitFunction
+import MathPhys.Analysis.UniformImplicitFunction
+open MathPhys
 
 /-!
 # The joint stationary/Legendre residual on the grid Sobolev spaces, with mesh-uniform bounds
@@ -38,6 +39,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.InitialCalculus
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

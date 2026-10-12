@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact
+open MathPhys
 /-!
 # Marked spectral packets and the character shadow of frame holonomy
 

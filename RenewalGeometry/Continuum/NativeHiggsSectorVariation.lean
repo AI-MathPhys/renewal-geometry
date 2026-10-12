@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeSpinorVariation
-import RenewalGeometry.Continuum.NativeHiggsCompactness
+import MathPhys.Continuum.NativeHiggsCompactness
+open MathPhys
 
 /-!
 # The Higgs row of the native local action: first variation and its limit

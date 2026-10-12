@@ -19,7 +19,7 @@ import Mathlib
   `ℒ_{X₀} ⪰ γ₀I` on `ℳᗮ` together with the boxed smallness
   `4(C_X + C_{X₀})ε_{X,X₀} < γ₀` gives the later floor
   `λ⁺_min(ℒ_X) ≥ γ₀ - 4(C_X + C_{X₀})ε_{X,X₀} > 0`, hence
-  (with `RenewalGeometry.howe_certificate`) `C*(c_X)' = ℳ` at every
+  (with `MathPhys.howe_certificate`) `C*(c_X)' = ℳ` at every
   later cutoff.
 
 * `summable_tail_lock`: the boxed summable-tail criterion
@@ -31,7 +31,7 @@ import Mathlib
 The identification of `ℒ` with the commutant Laplacian
 `∂*∂` of the commutator derivation, and of its first
 positive eigenvalue with the Howe margin, is
-`RenewalGeometry.howe_certificate`.
+`MathPhys.howe_certificate`.
 -/
 
 open Filter

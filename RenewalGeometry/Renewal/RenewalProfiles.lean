@@ -31,7 +31,7 @@ import Mathlib
   `⟨φ̂, C₀1⟩_π = -20/(11√30)` — exactly the coefficients in the
   boxed blocks `A_θ, B_θ, C_θ`.  The operator blocks, returned-kernel
   series, sharp norm estimates, and uniform continuum limit are proved in
-  `NCG.Grand.AcceptedPhaseFeedbackExact`;
+  `MathPhys.Grand.AcceptedPhaseFeedbackExact`;
 * `profile_eigen` / `profile_variance` / `profile_two_cell`: the
   boxed continuum profile — `M₀φ = -(7/15)φ`,
   `Var_π(1_P) = 30/121`, and the two-cell Walsh eigenvalue

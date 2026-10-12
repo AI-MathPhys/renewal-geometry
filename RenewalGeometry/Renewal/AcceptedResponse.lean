@@ -21,7 +21,7 @@ import Mathlib
 The actual iid geometric-random-sum PMF, its first moment, strict-tail
 generating series, positive exponential moment, and the explicit
 regulator-uniform assumptions are proved in
-`NCG.Renewal.AcceptedResponseLaw`.  This module retains the reusable closed-form
+`MathPhys.Renewal.AcceptedResponseLaw`.  This module retains the reusable closed-form
 algebra and idempotent-channel identity.
 -/
 

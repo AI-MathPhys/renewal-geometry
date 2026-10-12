@@ -8,7 +8,8 @@ import RenewalGeometry.StandardModel.ConservativeResolvedGradingExtensions
 import RenewalGeometry.Predictive.GrandOrder
 import RenewalGeometry.Predictive.CutoffSupport
 import RenewalGeometry.Predictive.RecordSurvival
-import RenewalGeometry.Commutant.IntrinsicRegularTrace
+import MathPhys.OperatorAlgebras.IntrinsicRegularTrace
+open MathPhys
 /-!
 # Conservativity of the protected operational completion
 

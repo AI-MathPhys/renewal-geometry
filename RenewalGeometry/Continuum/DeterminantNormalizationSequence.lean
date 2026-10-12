@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.DeterminantHodgeStrongConvergence
-import RenewalGeometry.Continuum.NativeCriticalGridCompactness
-import RenewalGeometry.GaugeTheory.DeterminantScreenFluxClosure
+import MathPhys.Continuum.DeterminantHodgeStrongConvergence
+import MathPhys.Continuum.NativeCriticalGridCompactness
+import MathPhys.GaugeTheory.DeterminantScreenFluxClosure
+open MathPhys
 
 /-!
 # Precompactness of the zero-flux Abelian coordinates of a screened sequence

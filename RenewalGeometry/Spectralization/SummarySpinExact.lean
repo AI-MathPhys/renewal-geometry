@@ -3,8 +3,9 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.OperatorLimits.FlatTorusSpinAtlas
-import RenewalGeometry.Spectralization.DensitySymmetricSpinDiracExact
+import MathPhys.OperatorLimits.FlatTorusSpinAtlas
+import MathPhys.SpectralGeometry.DensitySymmetricSpinDiracExact
+open MathPhys
 
 /-!
 # Additional spin continuum results (assembly)
@@ -34,9 +35,9 @@ a compact Sobolev embedding and finite stages), exactly as in that record; in (i
 
 open Filter Topology Matrix
 open scoped lp
-open RenewalGeometry.FrozenWilsonSymbol RenewalGeometry.FrozenWilsonGarding
-  RenewalGeometry.VariableWilsonGarding RenewalGeometry.CovariantWilsonGarding
-  RenewalGeometry.LatticeTorusPlancherel RenewalGeometry.FlatTorusSpinAtlas
+open MathPhys.FrozenWilsonSymbol MathPhys.FrozenWilsonGarding
+  MathPhys.VariableWilsonGarding MathPhys.CovariantWilsonGarding
+  MathPhys.LatticeTorusPlancherel MathPhys.FlatTorusSpinAtlas
 
 namespace RenewalGeometry.SummarySpin
 
@@ -107,7 +108,7 @@ theorem summary_spin :
 
 section frame
 
-open RenewalGeometry.DensitySymmetricSpinDirac
+open MathPhys.DensitySymmetricSpinDirac
 
 variable {d M : ℕ}
 

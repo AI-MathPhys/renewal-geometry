@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactActionProvenance
 import RenewalGeometry.Gravity.SupplementInitialBalancePhase
+open MathPhys
 
 /-!
 # Exact lapse homogeneity of the phase-compatible action and of its canonical Hamiltonian;
@@ -50,6 +51,7 @@ noncomputable section
 set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry.ExactPhaseAction.LapseHomogeneity
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.ActiveResidualAlgebra
+open MathPhys
 /-!
 # Unconditional active finite structural Standard Model
   (`thm:SM-active-SM-I`, Gran-Tensor manuscript)

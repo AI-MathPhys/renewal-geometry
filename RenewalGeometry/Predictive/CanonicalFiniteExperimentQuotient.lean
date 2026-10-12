@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Predictive.CanonicalLikelihoodRatioQuotient
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Canonical finite-experiment quotient and common decoder
 

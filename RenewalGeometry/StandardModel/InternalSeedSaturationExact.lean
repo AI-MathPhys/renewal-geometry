@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.StandardModel.ExternalIsotypicKroneckerExact
+import MathPhys.GaugeGroups.ExternalIsotypicKroneckerExact
 import RenewalGeometry.StandardModel.InternalDeficitAlternativesExact
 import RenewalGeometry.StandardModel.ReciprocalReturnBankExact
 
-open NCG
+open MathPhys
 /-!
 # Relative-commutant saturation (`thm:internal-seed-saturation`)
 
@@ -68,7 +68,7 @@ not tracked (only the multiplicities are).
 open Matrix Kronecker Module
 open RenewalGeometry.InternalAssembly (blockOf blockAlgebra ColourSupported omega7)
 open RenewalGeometry.InternalDeficit (baseGens bridgeGens routerGen Router)
-open RenewalGeometry.ExternalIsotypic
+open MathPhys.ExternalIsotypic
 
 namespace RenewalGeometry
 namespace InternalSeedSaturation

@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Predictive.MemoryCutoffSemigroupMeasureExact
-import RenewalGeometry.Spectralization.OperatorTailMeasureNaimarkUniquenessExact
+import MathPhys.SpectralGeometry.OperatorTailMeasureNaimarkUniquenessExact
+open MathPhys
 /-!
 # Head compression of positive tail measures and the source rank of the minimal dilation
 
@@ -31,6 +32,7 @@ open scoped InnerProductSpace ComplexOrder Matrix
 
 namespace RenewalGeometry
 namespace OperatorTailMeasure
+open MathPhys.OperatorTailMeasure
 
 variable {H H' H'' : Type*} [Fintype H] [DecidableEq H] [Fintype H'] [DecidableEq H']
   [Fintype H''] [DecidableEq H'']
@@ -126,6 +128,16 @@ theorem mapRange_restrict {X F F' : Type*} [MeasurableSpace X] [NormedAddCommGro
     VectorMeasure.restrict_apply _ hs ht, mapRange_clm_apply]
 
 /-! ## Compressed positive tail measures -/
+
+end OperatorTailMeasure
+end RenewalGeometry
+
+namespace MathPhys
+namespace OperatorTailMeasure
+open RenewalGeometry.OperatorTailMeasure
+
+variable {H H' H'' : Type*} [Fintype H] [DecidableEq H] [Fintype H'] [DecidableEq H']
+  [Fintype H''] [DecidableEq H'']
 
 namespace PositiveTailMeasure
 
@@ -326,4 +338,4 @@ theorem PositiveTailMeasure.finrank_range_embedV (μ : PositiveTailMeasure H) :
   μ.isMinimalRealization_canonical.finrank_range_eq
 
 end OperatorTailMeasure
-end RenewalGeometry
+end MathPhys

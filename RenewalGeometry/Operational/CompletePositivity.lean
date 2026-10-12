@@ -3,9 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import NCG.Algebra.CPMap
+import MathPhys.Algebra.CPMap
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Context-stable positivity, the UCP renewal memory, and tomography
 
@@ -16,7 +17,7 @@ Covers, from `manuscripts/renewal_emergence/renewal_emergence.tex`:
   matrix-ancilla extension preserves the operationally realized
   positive cone; per `ass:operator-system` these cones are the
   canonical matrix cones of the operator-system realization,
-  formalized here by quadratic-form positivity (`NCG.MatrixQF`);
+  formalized here by quadratic-form positivity (`MathPhys.MatrixQF`);
 * `thm:context-stable-cp` — completely operationally positive maps
   are completely positive (and UCP when unital), and conversely;
 * `thm:emergent-ucp-memory` — the elementary renewal maps become
@@ -33,7 +34,7 @@ Covers, from `manuscripts/renewal_emergence/renewal_emergence.tex`:
 
 namespace RenewalGeometry.Upstream
 
-open NCG RenewalGeometry
+open MathPhys RenewalGeometry
 
 variable {S : Type*} [Ring S] [PartialOrder S] [StarRing S]
   [StarOrderedRing S] [Algebra ℂ S]

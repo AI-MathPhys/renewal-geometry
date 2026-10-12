@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.StatMech.TraceExpDerivative
+import MathPhys.StatMech.TraceExpDerivative
+open MathPhys
 /-!
 # Complete classical–quantum cut-memory short
   (`thm:renewal-memory-cumulant`)
@@ -27,7 +28,7 @@ This file proves, exactly:
      + ∑_ω p_ω ∫₀¹ Tr(ρ_ω^s K̃_ω(x) ρ_ω^{1−s} K̃_ω(y)) ds`,
   with `ρ^s = exp(sH)` and `K̃ = K − m·1` the centered
   perturbation, via the Duhamel/BKM machinery of
-  `NCG.Grand.TraceExpDerivative`;
+  `MathPhys.Grand.TraceExpDerivative`;
 * `classical_summand_nonneg` / `bkmIntegral_self_nonneg`
   (Kubo–Mori positivity): both summands are nonnegative;
 * `classical_summand_eq_zero_iff` /
@@ -39,7 +40,7 @@ This file proves, exactly:
   log-partition, not only its quadratic Taylor coefficient.
 -/
 
-open Matrix RenewalGeometry.TraceExp
+open Matrix MathPhys.TraceExp
 open scoped Matrix.Norms.Operator
 
 namespace RenewalGeometry

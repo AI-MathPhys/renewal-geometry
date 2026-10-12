@@ -6,16 +6,17 @@ Authors: Aurelien Pelissier
 import Mathlib
 import RenewalGeometry.StandardModel.InternalSeedSaturationExact
 import RenewalGeometry.StandardModel.DeterminantPhaseRigidityExact
-import RenewalGeometry.StandardModel.FaithfulSMQuotientExact
-import RenewalGeometry.StandardModel.SMGaugeQuotientExact
-import RenewalGeometry.StandardModel.AnomalyForcedWeights
+import MathPhys.GaugeGroups.FaithfulSMQuotientExact
+import MathPhys.GaugeGroups.SMGaugeQuotientExact
+import MathPhys.GaugeGroups.AnomalyForcedWeights
 import RenewalGeometry.StandardModel.EndpointAncestryAllocationExact
 import RenewalGeometry.StandardModel.EndpointGenerationCarrierExact
-import RenewalGeometry.StandardModel.LinearAnomalyRigidityExact
+import MathPhys.GaugeGroups.LinearAnomalyRigidityExact
 import RenewalGeometry.StandardModel.CanonicalChiralProjectorsExact
 import RenewalGeometry.StandardModel.TypedMatterLiftExact
 import RenewalGeometry.StandardModel.WeakCopyCensusExact
 import RenewalGeometry.Spectralization.FiniteDiracRelationSpaceExact
+open MathPhys
 
 /-!
 # Structural synthesis (`thm:structural-SM`, revised 30 Sep 2026)

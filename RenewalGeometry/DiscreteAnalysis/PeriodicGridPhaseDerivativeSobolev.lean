@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.DiscreteAnalysis.PeriodicGridSobolevSpace
+import MathPhys.DiscreteAnalysis.PeriodicGridSobolevSpace
 import RenewalGeometry.DiscreteAnalysis.OddPhaseDerivativeReal
-import RenewalGeometry.Gravity.InitialConstraintLinearRange
+import MathPhys.Gravity.InitialConstraintLinearRange
+open MathPhys
 
 /-!
 # The odd phase derivative and the lattice shifts on the grid Sobolev spaces

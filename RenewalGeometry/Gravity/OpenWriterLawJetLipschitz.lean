@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterLawJetComparison
 import RenewalGeometry.Gravity.OpenWriterTimeJets
+open MathPhys
 
 /-!
 # The full law jet comparison (`thm:supp-law-einstein`, `eq:supp-law-jet-comparison`)
@@ -31,6 +32,7 @@ open Set Metric Filter Topology Finset MeasureTheory
 open scoped NNReal BigOperators
 
 namespace RenewalGeometry.OpenWriterLifespan
+open MathPhys.OpenWriterLifespan
 
 open RootParityConnector OpenWriterGridBridge OpenWriterChart OpenWriterEnergy HarmonicWriter
   OpenWriterEnergyEstimate

@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.SMActiveStructural
-import RenewalGeometry.Dimension.K4CutCycleIsotypicSchur
+import MathPhys.Combinatorics.K4CutCycleIsotypicSchur
+open MathPhys
 
 /-!
 # Endpoint generation carrier (`prop:generation-carrier`)

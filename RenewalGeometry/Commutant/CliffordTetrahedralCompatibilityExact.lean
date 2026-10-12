@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Commutant.ReciprocalWedderburnKronecker
+import MathPhys.OperatorAlgebras.ReciprocalWedderburnKronecker
 import RenewalGeometry.Commutant.JointTypedActionAlgebra
 import RenewalGeometry.StandardModel.InternalSeedSaturationExact
+open MathPhys
 
 /-!
 # Clifford–tetrahedral compatibility and internal lift
@@ -241,7 +242,7 @@ theorem conj_commute_kron_of_commute (X : Matrix n n ℂ)
 theorem conj_eq_one_kron_of_commute (X : Matrix n n ℂ) (hX : ∀ i j, X * e i j = e i j * X) :
     (reductionUnitary e E)ᴴ * X * reductionUnitary e E =
       (1 : Matrix (Fin 4) (Fin 4) ℂ) ⊗ₖ (Eᴴ * X * E) := by
-  obtain ⟨B, hB⟩ := NCG.CommonOrigin.left_factor_commutant _
+  obtain ⟨B, hB⟩ := MathPhys.CommonOrigin.left_factor_commutant _
     (conj_commute_kron_of_commute he hE1 hE2 X hX)
   have hBid : B = Eᴴ * X * E := by
     ext a b
@@ -308,7 +309,7 @@ include he hE1 hE2 in
 theorem restrict_liftHom (x : Matrix J J ℂ) : Eᴴ * liftHom he hE1 hE2 x * E = x := by
   have hX : ∀ i j, liftHom he hE1 hE2 x * e i j = e i j * liftHom he hE1 hE2 x := by
     intro i j
-    have hc := NCG.CommonOrigin.kron_right_commutes (Matrix.single i j (1 : ℂ)) x
+    have hc := MathPhys.CommonOrigin.kron_right_commutes (Matrix.single i j (1 : ℂ)) x
     rw [liftHom_apply, ← conj_back he hE1 hE2 (e i j),
       reductionUnitary_conj_matrixUnit he hE1 hE2 i j]
     set U := reductionUnitary e E
@@ -350,7 +351,7 @@ include he hE1 hE2 in
 /-- Lifts commute with the Clifford matrix units. -/
 theorem liftHom_commute_matrixUnit (x : Matrix J J ℂ) (i j : Fin 4) :
     liftHom he hE1 hE2 x * e i j = e i j * liftHom he hE1 hE2 x := by
-  have hc := NCG.CommonOrigin.kron_right_commutes (Matrix.single i j (1 : ℂ)) x
+  have hc := MathPhys.CommonOrigin.kron_right_commutes (Matrix.single i j (1 : ℂ)) x
   rw [← conj_back he hE1 hE2 (e i j), reductionUnitary_conj_matrixUnit he hE1 hE2 i j,
     liftHom_apply]
   set U := reductionUnitary e E
@@ -566,8 +567,8 @@ theorem clifford_tetrahedral_converse {n J G β : Type*} [Fintype n] [DecidableE
           simp only [Matrix.mul_assoc]
       _ = U * (B * (Uᴴ * U) * A) * Uᴴ := by rw [hU, Matrix.mul_one, Matrix.mul_one, hAB]
       _ = U * B * Uᴴ * (U * A * Uᴴ) := by simp only [Matrix.mul_assoc]
-  refine ⟨fun g i j => key _ _ (NCG.CommonOrigin.kron_right_commutes _ _).symm,
-    fun k i j => key _ _ (NCG.CommonOrigin.kron_right_commutes _ _).symm,
+  refine ⟨fun g i j => key _ _ (MathPhys.CommonOrigin.kron_right_commutes _ _).symm,
+    fun k i j => key _ _ (MathPhys.CommonOrigin.kron_right_commutes _ _).symm,
     fun k g => key _ _ ?_⟩
   rw [← Matrix.mul_kronecker_mul, ← Matrix.mul_kronecker_mul, hbt]
 

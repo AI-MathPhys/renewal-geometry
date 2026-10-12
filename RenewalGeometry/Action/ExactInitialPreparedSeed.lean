@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactInitialRangeUniform
+open MathPhys
 
 /-!
 # The balancing seed in the grid Sobolev phase space
@@ -31,6 +32,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.PreparedSeed
+open MathPhys.ExactPhaseAction
 
 set_option linter.unusedSectionVars false
 

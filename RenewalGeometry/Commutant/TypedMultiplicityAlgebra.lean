@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.GraphLoadedEdgeCommutantAssembly
+open MathPhys
 
 /-!
 # The typed multiplicity algebra as a star subalgebra

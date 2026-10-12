@@ -7,6 +7,8 @@ import Mathlib
 import RenewalGeometry.Commutant.RepresentedJointPacket
 import RenewalGeometry.Commutant.MultiplicityQuiverArrows
 import RenewalGeometry.Commutant.GraphSupportPolarDuality
+import MathPhys.OperatorAlgebras.SliceLinearMap
+open MathPhys
 
 /-!
 # Intrinsic coefficient spaces, the typed multiplicity algebra and the coefficient action
@@ -44,30 +46,6 @@ open Matrix
 open scoped Kronecker
 
 namespace RenewalGeometry
-
-section SliceLinear
-
-open SMSTQuiverCommutantAssembly
-
-variable {Va Vb Na Nb : Type*} [Fintype Va] [Fintype Vb] [DecidableEq Va] [DecidableEq Vb]
-
-/-- The slice map `φ ↦ (φ ⊗ id)(T)`, linear in the functional `φ ∈ B(V_a, V_b)^*`. -/
-def sliceLinearMap (T : Matrix (Vb × Nb) (Va × Na) ℂ) :
-    (Matrix Vb Va ℂ →ₗ[ℂ] ℂ) →ₗ[ℂ] Matrix Nb Na ℂ where
-  toFun φ := functionalSlice φ T
-  map_add' φ ψ := by
-    funext n m
-    rfl
-  map_smul' a φ := by
-    funext n m
-    rfl
-
-omit [Fintype Va] [Fintype Vb] [DecidableEq Va] [DecidableEq Vb] in
-theorem sliceLinearMap_apply (T : Matrix (Vb × Nb) (Va × Na) ℂ) (φ : Matrix Vb Va ℂ →ₗ[ℂ] ℂ) :
-    sliceLinearMap T φ = functionalSlice φ T :=
-  rfl
-
-end SliceLinear
 
 namespace RepresentedJointPacket
 

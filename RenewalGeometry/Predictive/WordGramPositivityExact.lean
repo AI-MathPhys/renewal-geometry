@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Predictive.FlatWordReconstructionExact
 import RenewalGeometry.Krein.PositiveKreinDistinct
+open MathPhys
 
 /-!
 # Positivity and faithfulness of the regular trace; the word-Gram panels
@@ -16,7 +17,7 @@ import RenewalGeometry.Krein.PositiveKreinDistinct
 
 For a star-subalgebra `S` of `Matrix M M ℂ` (the represented history algebra
 `A^hist`), the normalized regular trace `τ̂_reg(a) = Tr_ℂ(L_a)/dim S`
-(`eq:supp-regular-trace`, `RenewalGeometry.normalizedRegularTrace`) is
+(`eq:supp-regular-trace`, `MathPhys.normalizedRegularTrace`) is
 computed through the Hilbert–Schmidt space: `matrixToHS` identifies matrices
 with `EuclideanSpace ℂ (M × M)`, `hsImage S` is the image of `S` and
 `hsEquiv S : S ≃ₗ hsImage S`; conjugating `L_z` to `hsImage S` and expanding

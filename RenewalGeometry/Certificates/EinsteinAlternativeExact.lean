@@ -6,10 +6,11 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Certificates.CofinalFailureWitness
 import RenewalGeometry.Gravity.RenewalEinsteinCertificationExact
-import RenewalGeometry.Gravity.CurvatureEnergyPropagationExact
-import RenewalGeometry.Gravity.DiscreteCurvatureCertificateExact
+import MathPhys.Gravity.CurvatureEnergyPropagationExact
+import MathPhys.Gravity.DiscreteCurvatureCertificateExact
 import RenewalGeometry.Renewal.EfficientCutConstantScreen
 import RenewalGeometry.Renewal.SpatialScreenCutMarginAlternative
+open MathPhys
 
 /-!
 # Einstein limit or failed certificate
@@ -1583,7 +1584,7 @@ theorem twoPointCut_margin (ε : ℝ) (hε : 0 ≤ ε) : (twoPointCut ε hε).ma
 Palatini score, constant inverse-metric tests, zero realized variations) with identity screens,
 the trivial discrete propagation route, and a given sequence of endpoint cut records. -/
 def flatProcedure (K : Set (Fin 4 → ℝ)) (hK : IsCompact K) (cut : ℕ → EndpointCutRecord) :
-    EinsteinCertificationProcedure ⊤ (fun _ => RenewalGeometry.palatiniDensity)
+    EinsteinCertificationProcedure ⊤ (fun _ => MathPhys.palatiniDensity)
       (fun _ μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (fun _ _ _ => 0) (fun _ _ _ _ => 0)
       (fun _ _ _ _ => 0) (fun _ _ _ _ => 0) 0 K (Test := Matrix (Fin 4) (Fin 4) ℝ)
       (fun k _ => k) Set.univ (fun k _ _ => metricTestGenerator minkowski 1 k)
@@ -1630,7 +1631,7 @@ passes every certificate. -/
 theorem flatProcedure_passes (K : Set (Fin 4 → ℝ)) (hK : IsCompact K) :
     (flatProcedure K hK fun _ => twoPointCut 1 zero_le_one).Passes := by
   have F := renewalEinsteinCertification_flat K hK
-  have hβ1 : palatiniCoeff RenewalGeometry.palatiniDensity = 1 :=
+  have hβ1 : palatiniCoeff MathPhys.palatiniDensity = 1 :=
     tendsto_const_nhds_iff.1 F.e3_palatini_tendsto
   refine ⟨fun i => ?_, Or.inl fun i => ?_⟩
   · cases i with

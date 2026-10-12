@@ -3,8 +3,9 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Commutant.Bicommutant
-import RenewalGeometry.Algebra.SqrtPolar
+import MathPhys.OperatorAlgebras.Bicommutant
+import MathPhys.Algebra.SqrtPolar
+open MathPhys
 /-!
 # Polar metric–holonomy commutant theorem
   (`thm:SMST-polar-holonomy`, Gran-Tensor manuscript)

@@ -7,6 +7,7 @@ import RenewalGeometry.Renewal.AcceptedResponseLaw
 import RenewalGeometry.Renewal.RenewalProfiles
 import Mathlib.Analysis.Calculus.DSlope
 import Mathlib.Topology.MetricSpace.Algebra
+open MathPhys
 
 /-!
 # Analytic pressure of the accepted-response renewal

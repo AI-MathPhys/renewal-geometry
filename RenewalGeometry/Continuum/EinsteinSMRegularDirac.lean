@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMRegularFields
+open MathPhys
 
 /-!
 # The regular branch, spinor part: the Dirac coefficient model gives the hypotheses of
@@ -36,6 +38,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace RegularBranch
 
 open SobolevOpen (pd box IsTest MemW12)

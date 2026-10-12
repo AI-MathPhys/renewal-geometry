@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeEulerConsistency
-import RenewalGeometry.Continuum.ContEulerDerivativeBounds
+import MathPhys.Continuum.ContEulerDerivativeBounds
+open MathPhys
 
 /-!
 # Structure of the continuum Einstein–Standard-Model Euler rows under the native scaling

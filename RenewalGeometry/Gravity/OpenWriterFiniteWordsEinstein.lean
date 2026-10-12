@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterFiniteWords
 import RenewalGeometry.Gravity.OpenWriterLawEinsteinLimit
+open MathPhys
 
 /-!
 # The Einstein limit of the finite local successor words (`thm:supp-open-finite-words`,

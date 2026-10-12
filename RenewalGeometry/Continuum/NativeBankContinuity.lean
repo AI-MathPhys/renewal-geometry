@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeAllSectorGraphClosure
+open MathPhys
 
 /-!
 # Varying coefficient banks in the native all-sector limit

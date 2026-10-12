@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMCertificatePacket
 import RenewalGeometry.Action.ScaledSourceStationarity
+open MathPhys
 
 /-!
 # Strong-packet refinement of variational closure (`thm:main-limit`, `cor:exact-critical`,
@@ -62,6 +64,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 
 open SobolevOpen (pd box IsTest MemW12)
 
@@ -118,7 +121,7 @@ theorem StrongPacketOn.toReduced {Q : ChartBox T} {z : ℕ → SmoothFields T le
     have hall : ∀ᵐ x ∂Q.μ, ∀ k, (z (σ k)).z.e x ∈ Ke := ae_all_iff.mpr fun k => hKn _
     filter_upwards [hae, hall] with x hx hxK
     exact hKe.1.isClosed.mem_of_tendsto hx (Eventually.of_forall hxK)
-  have hH4 : RenewalGeometry.LpTendsto Q.μ 4 (fun n => (z n).z.H) L.H :=
+  have hH4 : MathPhys.LpTendsto Q.μ 4 (fun n => (z n).z.H) L.H :=
     ⟨fun n => memLp_of_continuousOn_closure Q.isOpen hcl ((z n).smooth_H.continuousOn.mono hsub)
       4, h.higgs_mem, h.higgs_tendsto⟩
   have hH2 := hH4.mono (p := 2) (by norm_num) (by norm_num)

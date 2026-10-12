@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.EdgeCommutantDimensionExact
+open MathPhys
 /-!
 # The degree-one edge commutant has dimension exactly seven
 

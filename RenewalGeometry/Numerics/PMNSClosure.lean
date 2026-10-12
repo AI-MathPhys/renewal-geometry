@@ -3,7 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Numerics.IntervalKit
+import MathPhys.Analysis.IntervalKit
+open MathPhys
 /-!
 # The dimensionless PMNS closure certificate
   (`cert:pmns-closure-main`, SM_emergence)

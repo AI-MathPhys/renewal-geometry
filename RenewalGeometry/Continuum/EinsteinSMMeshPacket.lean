@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
 import RenewalGeometry.Continuum.EinsteinSMMeshMain
+open MathPhys
 
 /-!
 # Strong-packet convergence of the sampled reconstruction
@@ -32,6 +34,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace Comparison
 
 open SobolevOpen (pd)
@@ -53,7 +56,7 @@ theorem curvatureF_sub_apply {z f : FieldTuple FC.C} {x : E4} (hz : DiffAt FC z 
     (hf : DiffAt FC f x) (μ ν : Fin 4) :
     curvatureF z.A x μ ν - curvatureF f.A x μ ν =
       pd (fun y => (z - f).A y ν) μ x - pd (fun y => (z - f).A y μ) ν x +
-        (comm (z.A x μ - f.A x μ) (z.A x ν) + comm (f.A x μ) (z.A x ν - f.A x ν)) := by
+        (MathPhys.EinsteinSM.comm (z.A x μ - f.A x μ) (z.A x ν) + MathPhys.EinsteinSM.comm (f.A x μ) (z.A x ν - f.A x ν)) := by
   have h1 := pd_sub_fun (f := fun y => z.A y ν) (g := fun y => f.A y ν)
     (differentiableAt_comp_apply hz.A ν) (differentiableAt_comp_apply hf.A ν) μ
   have h2 := pd_sub_fun (f := fun y => z.A y μ) (g := fun y => f.A y μ)
@@ -94,10 +97,10 @@ theorem norm_contJet_sub_le {Ke : Set CoframeFibre} (hKeGL : Ke ⊆ coframeGL) {
   have hfA : ∀ μ, ‖f.A x μ‖ ≤ B := fun μ => (norm_le_pi_norm _ μ).trans (hf.A.norm_le x)
   have hdA : ∀ μ, ‖z.A x μ - f.A x μ‖ ≤ s := fun μ =>
     (norm_le_pi_norm (z.A x - f.A x) μ).trans hs.A
-  have hcomm : ∀ a b : LieFibre, ‖a‖ ≤ B → ‖b‖ ≤ s → ‖comm a b‖ ≤ 10 * B * s := fun a b ha hb =>
+  have hcomm : ∀ a b : LieFibre, ‖a‖ ≤ B → ‖b‖ ≤ s → ‖MathPhys.EinsteinSM.comm a b‖ ≤ 10 * B * s := fun a b ha hb =>
     (norm_comm_le a b).trans (by
       have := mul_le_mul ha hb (norm_nonneg b) hB; nlinarith)
-  have hcomm' : ∀ a b : LieFibre, ‖a‖ ≤ s → ‖b‖ ≤ B → ‖comm a b‖ ≤ 10 * B * s := fun a b ha hb =>
+  have hcomm' : ∀ a b : LieFibre, ‖a‖ ≤ s → ‖b‖ ≤ B → ‖MathPhys.EinsteinSM.comm a b‖ ≤ 10 * B * s := fun a b ha hb =>
     (norm_comm_le a b).trans (by
       have := mul_le_mul ha hb (norm_nonneg b) hs0; nlinarith)
   have hsp : ∀ μ, spinConnection FC z μ x = spinConnMap FC μ (sjetOf FC z μ x) := fun μ =>
@@ -134,10 +137,10 @@ theorem norm_contJet_sub_le {Ke : Set CoframeFibre} (hKeGL : Ke ⊆ coframeGL) {
     have c1 := hcomm' _ _ (hdA μ) (hzA ν)
     have c2 := hcomm _ _ (hfA μ) (hdA ν)
     have t1 := norm_add_le (pd (fun y => (z - f).A y ν) μ x - pd (fun y => (z - f).A y μ) ν x)
-      (comm (z.A x μ - f.A x μ) (z.A x ν) + comm (f.A x μ) (z.A x ν - f.A x ν))
+      (MathPhys.EinsteinSM.comm (z.A x μ - f.A x μ) (z.A x ν) + MathPhys.EinsteinSM.comm (f.A x μ) (z.A x ν - f.A x ν))
     have t2 := norm_sub_le (pd (fun y => (z - f).A y ν) μ x) (pd (fun y => (z - f).A y μ) ν x)
-    have t3 := norm_add_le (comm (z.A x μ - f.A x μ) (z.A x ν))
-      (comm (f.A x μ) (z.A x ν - f.A x ν))
+    have t3 := norm_add_le (MathPhys.EinsteinSM.comm (z.A x μ - f.A x μ) (z.A x ν))
+      (MathPhys.EinsteinSM.comm (f.A x μ) (z.A x ν - f.A x ν))
     refine t1.trans ((add_le_add t2 t3).trans ?_)
     linarith
   · exact hs.H.trans (by nlinarith)

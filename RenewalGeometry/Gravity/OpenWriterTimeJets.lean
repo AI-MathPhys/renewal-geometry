@@ -5,6 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterLawFamily
+import MathPhys.Gravity.OpenWriterAccelLipschitz
+open MathPhys
 
 /-!
 # Uniform physical time jets of the open writer and of the law family
@@ -29,6 +31,7 @@ open Set Metric Filter Topology Finset MeasureTheory
 open scoped NNReal BigOperators
 
 namespace RenewalGeometry.OpenWriterLifespan
+open MathPhys.OpenWriterLifespan
 
 open RootParityConnector OpenWriterGridBridge OpenWriterChart OpenWriterEnergy HarmonicWriter
   OpenWriterEnergyEstimate
@@ -344,29 +347,6 @@ theorem lawAccel_zero (q v : Grid N → MetricRec) :
 
 theorem isMark_zero : IsMark (1 / 48) (fun _ _ : Upper => (0 : ℝ)) :=
   ⟨fun _ _ => rfl, fun ξ η => by simp only [mul_zero, zero_mul, sum_const_zero, abs_zero]; positivity⟩
-
-theorem Xnorm_le_sum (r : ℕ) (Q V : Grid N → MetricRec) :
-    Xnorm r Q V ≤ ∑ κ : Upper, (PeriodicGridSobolev.sobNorm (r + 1) (cx (comp Q κ.1.1 κ.1.2)) +
-      PeriodicGridSobolev.sobNorm r (cx (comp V κ.1.1 κ.1.2))) := by
-  have h0 : 0 ≤ ∑ κ : Upper, (PeriodicGridSobolev.sobNorm (r + 1) (cx (comp Q κ.1.1 κ.1.2)) +
-      PeriodicGridSobolev.sobNorm r (cx (comp V κ.1.1 κ.1.2))) :=
-    sum_nonneg fun _ _ => add_nonneg (PeriodicGridSobolev.Moser.sobNorm_nonneg _ _)
-      (PeriodicGridSobolev.Moser.sobNorm_nonneg _ _)
-  unfold Xnorm
-  rw [Real.sqrt_le_left h0]
-  unfold Xsq
-  calc ∑ κ : Upper, (PeriodicGridSobolev.sobSq (r + 1) (cx (comp Q κ.1.1 κ.1.2)) +
-        PeriodicGridSobolev.sobSq r (cx (comp V κ.1.1 κ.1.2))) ≤
-        ∑ κ : Upper, (PeriodicGridSobolev.sobNorm (r + 1) (cx (comp Q κ.1.1 κ.1.2)) +
-          PeriodicGridSobolev.sobNorm r (cx (comp V κ.1.1 κ.1.2))) ^ 2 := by
-        refine sum_le_sum fun κ _ => ?_
-        rw [← PeriodicGridSobolev.sobNorm_sq, ← PeriodicGridSobolev.sobNorm_sq]
-        have := PeriodicGridSobolev.Moser.sobNorm_nonneg (r + 1) (cx (comp Q κ.1.1 κ.1.2))
-        have := PeriodicGridSobolev.Moser.sobNorm_nonneg r (cx (comp V κ.1.1 κ.1.2))
-        nlinarith
-    _ ≤ _ := Finset.sum_sq_le_sq_sum_of_nonneg fun κ _ =>
-        add_nonneg (PeriodicGridSobolev.Moser.sobNorm_nonneg _ _)
-          (PeriodicGridSobolev.Moser.sobNorm_nonneg _ _)
 
 theorem Xnorm_vel_le (s : ℕ) (q v : Grid N → MetricRec) :
     Xnorm (s - 1) v 0 ≤ Xnorm s q v ∨ s = 0 := by

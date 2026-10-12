@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeDiracConvergence
+open MathPhys
 
 /-!
 # The complete Dirac–Yukawa first variation converges (`prop:native-spinor-variation`)

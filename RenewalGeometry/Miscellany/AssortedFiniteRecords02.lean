@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Miscellany.AssortedFiniteRecords01
-import RenewalGeometry.StatMech.TraceExpDerivative
+import MathPhys.StatMech.TraceExpDerivative
+open MathPhys
 /-!
 # Easy exact records, batch 02 (Gran-Tensor manuscript)
 
@@ -67,7 +68,7 @@ Rendering conventions are described in the docstring of each section.
 -/
 
 open Matrix Finset
-open RenewalGeometry.SourceCoercivityInfluence RenewalGeometry.GeometricThresholdBank RenewalGeometry.PsdBlockSchur
+open MathPhys.SourceCoercivityInfluence MathPhys.GeometricThresholdBank MathPhys.PsdBlockSchur
 open scoped ComplexOrder
 
 -- decidability/fintype instances enter only through the spectral support calculus in proofs

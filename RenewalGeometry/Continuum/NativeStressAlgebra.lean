@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeModelMap
+open MathPhys
 
 /-!
 # Algebra of the coframe row: the Koszul cyclic identity, a Clifford anticommutator identity

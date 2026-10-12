@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.FiniteGraphSpectralUniversalityFibreExact
+open MathPhys
 
 /-!
 # Finite spectral universality

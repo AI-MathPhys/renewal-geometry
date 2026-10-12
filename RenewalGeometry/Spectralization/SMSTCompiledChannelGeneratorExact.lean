@@ -3,8 +3,9 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.OperatorLimits.ChannelEstimates
-import RenewalGeometry.Commutant.InnerDerivationConditioning
+import MathPhys.OperatorLimits.ChannelEstimates
+import MathPhys.OperatorAlgebras.InnerDerivationConditioning
+open MathPhys
 /-!
 # Compiled-channel generator convergence (exact)
 
@@ -23,14 +24,14 @@ theorems, derived from the `o(h)` input:
 
 * `compiled_generator_convergence`: the boxed
   `ℒ_h ⟶ -i·ad_D` limit, by splitting off the exponential
-  quadratic tail (`RenewalGeometry.ChannelEstimates.exp_sub_linear_bound`,
+  quadratic tail (`MathPhys.ChannelEstimates.exp_sub_linear_bound`,
   derived from the series) and squeezing
   `‖ℒ_h - ad_D‖ ≤ ε(h) + h·‖ad_D‖²e^{h‖ad_D‖} → 0`;
 * `compiled_generator_hs_bound`: the boxed quantitative HS
   estimate with the exact factor `√(2d)`, inverted through the
   **proved** inner-derivation norm identity
   `‖ad_H‖_HS = √(2d)·‖H‖_HS` on traceless Hermitians
-  (`RenewalGeometry.inner_derivation_traceless_norm`,
+  (`MathPhys.inner_derivation_traceless_norm`,
   `lem:SMST-inner-derivation-norm`);
 * `compiled_generator_hs_tendsto`: the boxed
   `H_h ⟶ D - (Tr D/d)·I` Hilbert–Schmidt limit.
@@ -83,7 +84,7 @@ theorem compiled_generator_convergence
     have h1 : ‖W h - 1 - h • adD‖
         ≤ ε h * h + h ^ 2 * ‖adD‖ ^ 2
             * Real.exp (h * ‖adD‖) := by
-      have ha := RenewalGeometry.ChannelEstimates.exp_sub_linear_bound
+      have ha := MathPhys.ChannelEstimates.exp_sub_linear_bound
         (h • adD)
       rw [hsn] at ha
       have hsplit : W h - 1 - h • adD

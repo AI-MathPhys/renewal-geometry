@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Predictive.OtherLoadingEmergence
 import RenewalGeometry.Predictive.GrandOrder
+open MathPhys
 /-!
 # Exact assembly of an admissibly loaded subhierarchy
 

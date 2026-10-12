@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
 import RenewalGeometry.Continuum.EinsteinSMMeshStencils
-import RenewalGeometry.Analysis.LipschitzRiemannSumError
+import MathPhys.Analysis.LipschitzRiemannSumError
+open MathPhys
 
 /-!
 # Smooth local action consistency (`prop:mesh-consistency`, `eq:mesh-C1`)
@@ -30,6 +32,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace Comparison
 
 open SobolevOpen (pd)
@@ -49,7 +52,7 @@ theorem norm_mmul_le (X Y : LieFibre) : ‖mmul X Y‖ ≤ 5 * ‖X‖ * ‖Y‖
           ((norm_le_pi_norm (Y k) j).trans (norm_le_pi_norm Y k)) (norm_nonneg _) (norm_nonneg _))
     _ = 5 * ‖X‖ * ‖Y‖ := by simp; ring
 
-theorem norm_comm_le (X Y : LieFibre) : ‖comm X Y‖ ≤ 10 * ‖X‖ * ‖Y‖ := by
+theorem norm_comm_le (X Y : LieFibre) : ‖MathPhys.EinsteinSM.comm X Y‖ ≤ 10 * ‖X‖ * ‖Y‖ := by
   refine (norm_sub_le _ _).trans ?_
   have := norm_mmul_le X Y; have := norm_mmul_le Y X
   nlinarith [norm_nonneg X, norm_nonneg Y]
@@ -103,14 +106,14 @@ theorem sjetOf_sub {d₁ d₂ : FieldTuple FC.C} {y : E4} (h₁ : Differentiable
   simp only [sjetOf, hj]
   rfl
 
-theorem comm_sub_right (X Y Y' : LieFibre) : comm X (Y - Y') = comm X Y - comm X Y' := by
+theorem comm_sub_right (X Y Y' : LieFibre) : MathPhys.EinsteinSM.comm X (Y - Y') = MathPhys.EinsteinSM.comm X Y - MathPhys.EinsteinSM.comm X Y' := by
   funext i j
-  simp only [comm, mmul, Pi.sub_apply, mul_sub, sub_mul, Finset.sum_sub_distrib]
+  simp only [MathPhys.EinsteinSM.comm, mmul, Pi.sub_apply, mul_sub, sub_mul, Finset.sum_sub_distrib]
   ring
 
-theorem comm_sub_left (Y Y' X : LieFibre) : comm (Y - Y') X = comm Y X - comm Y' X := by
+theorem comm_sub_left (Y Y' X : LieFibre) : MathPhys.EinsteinSM.comm (Y - Y') X = MathPhys.EinsteinSM.comm Y X - MathPhys.EinsteinSM.comm Y' X := by
   funext i j
-  simp only [comm, mmul, Pi.sub_apply, mul_sub, sub_mul, Finset.sum_sub_distrib]
+  simp only [MathPhys.EinsteinSM.comm, mmul, Pi.sub_apply, mul_sub, sub_mul, Finset.sum_sub_distrib]
   ring
 
 theorem higgsAct_sub_left (X X' : LieFibre) (v : HiggsFibre) :
@@ -147,7 +150,7 @@ theorem contJetDeriv_sub (z : FieldTuple FC.C) {d₁ d₂ : FieldTuple FC.C} {x 
     show curvDeriv z.A d₁.A x μ ν - curvDeriv z.A d₂.A x μ ν = curvDeriv z.A (d₁ - d₂).A x μ ν
     unfold curvDeriv
     rw [hAsub ν μ, hAsub μ ν]
-    show _ = _ - _ + comm (z.A x μ) (d₁.A x ν - d₂.A x ν) + comm (d₁.A x μ - d₂.A x μ) (z.A x ν)
+    show _ = _ - _ + MathPhys.EinsteinSM.comm (z.A x μ) (d₁.A x ν - d₂.A x ν) + MathPhys.EinsteinSM.comm (d₁.A x μ - d₂.A x μ) (z.A x ν)
     rw [comm_sub_right, comm_sub_left]
     abel
   case e_K =>
@@ -277,16 +280,16 @@ theorem norm_apply_unitE_le (L : E4 →L[ℝ] X) (μ : Fin 4) : ‖L (unitE μ)�
   (L.le_opNorm _).trans ((mul_le_mul_of_nonneg_left (norm_unitE_le μ) (norm_nonneg _)).trans
     (by rw [mul_one]))
 
-theorem _root_.RenewalGeometry.C11Calculus.IsC11.bl {f : E4 → X} {B : ℝ} (hf : IsC11 f B) : BL f B := ⟨hf.norm_le, hf.lipschitz⟩
+theorem _root_.MathPhys.C11Calculus.IsC11.bl {f : E4 → X} {B : ℝ} (hf : IsC11 f B) : BL f B := ⟨hf.norm_le, hf.lipschitz⟩
 
-theorem _root_.RenewalGeometry.C11Calculus.IsC11.bl_pd {f : E4 → X} {B : ℝ} (hf : IsC11 f B) (μ : Fin 4) :
+theorem _root_.MathPhys.C11Calculus.IsC11.bl_pd {f : E4 → X} {B : ℝ} (hf : IsC11 f B) (μ : Fin 4) :
     BL (fun y => pd f μ y) B :=
   ⟨fun y => (norm_pd_le f μ y).trans (hf.norm_fderiv_le y), fun y y' => by
     show ‖fderiv ℝ f y (unitE μ) - fderiv ℝ f y' (unitE μ)‖ ≤ _
     rw [← ContinuousLinearMap.sub_apply]
     exact (norm_apply_unitE_le _ μ).trans (hf.lip y y')⟩
 
-theorem _root_.RenewalGeometry.C11Calculus.IsC11.bl_pd_comp {f : E4 → Fin 4 → X} {B : ℝ} (hf : IsC11 f B) (ν μ : Fin 4) :
+theorem _root_.MathPhys.C11Calculus.IsC11.bl_pd_comp {f : E4 → Fin 4 → X} {B : ℝ} (hf : IsC11 f B) (ν μ : Fin 4) :
     BL (fun y => pd (fun y' => f y' ν) μ y) B := by
   have e : ∀ y, pd (fun y' => f y' ν) μ y = fderiv ℝ f y (unitE μ) ν := fun y => by
     rw [pd_eq_fderiv_unitE, fderiv_comp_apply (hf.differentiable y) ν]; rfl
@@ -301,7 +304,7 @@ theorem _root_.RenewalGeometry.C11Calculus.IsC11.bl_pd_comp {f : E4 → Fin 4 �
 end BLNormed
 
 theorem comm_sub4 (a a' b b' : LieFibre) :
-    comm a b - comm a' b' = comm (a - a') b + comm a' (b - b') := by
+    MathPhys.EinsteinSM.comm a b - MathPhys.EinsteinSM.comm a' b' = MathPhys.EinsteinSM.comm (a - a') b + MathPhys.EinsteinSM.comm a' (b - b') := by
   rw [comm_sub_left, comm_sub_right]; abel
 
 theorem higgsAct_sub4 (a a' : LieFibre) (b b' : HiggsFibre) :
@@ -309,7 +312,7 @@ theorem higgsAct_sub4 (a a' : LieFibre) (b b' : HiggsFibre) :
   rw [higgsAct_sub_left, higgsAct_sub_right]; abel
 
 theorem BL.comm {f g : E4 → LieFibre} {M M' : ℝ} (hf : BL f M) (hg : BL g M') :
-    BL (fun y => comm (f y) (g y)) (2 * 10 * M * M') :=
+    BL (fun y => MathPhys.EinsteinSM.comm (f y) (g y)) (2 * 10 * M * M') :=
   BL.bilin (by norm_num) norm_comm_le comm_sub4 hf hg
 
 theorem BL.higgsAct {f : E4 → LieFibre} {g : E4 → HiggsFibre} {M M' : ℝ} (hf : BL f M)
@@ -538,10 +541,10 @@ theorem norm_contJetDeriv_le {Ke : Set CoframeFibre} (hKeGL : Ke ⊆ coframeGL) 
   have hc0 : 0 ≤ (2 + 24 * B + M * B + M) * s := by positivity
   have hzA : ∀ μ, ‖z.A x μ‖ ≤ B := fun μ => (norm_le_pi_norm _ μ).trans (hz.A.norm_le x)
   have hdA : ∀ μ, ‖d.A x μ‖ ≤ s := fun μ => (norm_le_pi_norm _ μ).trans hs.A
-  have hcomm : ∀ a b : LieFibre, ‖a‖ ≤ B → ‖b‖ ≤ s → ‖comm a b‖ ≤ 10 * B * s := fun a b ha hb =>
+  have hcomm : ∀ a b : LieFibre, ‖a‖ ≤ B → ‖b‖ ≤ s → ‖MathPhys.EinsteinSM.comm a b‖ ≤ 10 * B * s := fun a b ha hb =>
     (norm_comm_le a b).trans (by
       have := mul_le_mul ha hb (norm_nonneg b) hB; nlinarith)
-  have hcomm' : ∀ a b : LieFibre, ‖a‖ ≤ s → ‖b‖ ≤ B → ‖comm a b‖ ≤ 10 * B * s := fun a b ha hb =>
+  have hcomm' : ∀ a b : LieFibre, ‖a‖ ≤ s → ‖b‖ ≤ B → ‖MathPhys.EinsteinSM.comm a b‖ ≤ 10 * B * s := fun a b ha hb =>
     (norm_comm_le a b).trans (by
       have := mul_le_mul ha hb (norm_nonneg b) hs0; nlinarith)
   have hspin : ∀ μ, ‖spinConnection FC z μ x‖ ≤ M := fun μ => by
@@ -565,15 +568,15 @@ theorem norm_contJetDeriv_le {Ke : Set CoframeFibre} (hKeGL : Ke ⊆ coframeGL) 
     (norm_pi2_le hc0 fun μ ν => ?_) ?_ (norm_pi1_le hc0 fun μ => ?_) ?_
     (norm_pi1_le hc0 fun μ => ?_) ?_ (norm_pi1_le hc0 fun μ => ?_)
   · exact hs.e.trans (by nlinarith)
-  · show ‖pd (fun y => d.A y ν) μ x - pd (fun y => d.A y μ) ν x + comm (z.A x μ) (d.A x ν) +
-      comm (d.A x μ) (z.A x ν)‖ ≤ _
+  · show ‖pd (fun y => d.A y ν) μ x - pd (fun y => d.A y μ) ν x + MathPhys.EinsteinSM.comm (z.A x μ) (d.A x ν) +
+      MathPhys.EinsteinSM.comm (d.A x μ) (z.A x ν)‖ ≤ _
     have p1 := (norm_pd_comp_le hd.A ν μ).trans hs.dA
     have p2 := (norm_pd_comp_le hd.A μ ν).trans hs.dA
     have c1 := hcomm _ _ (hzA μ) (hdA ν)
     have c2 := hcomm' _ _ (hdA μ) (hzA ν)
     refine norm_add₃_le.trans ?_
     have t := norm_add₃_le (a := pd (fun y => d.A y ν) μ x - pd (fun y => d.A y μ) ν x)
-      (b := comm (z.A x μ) (d.A x ν)) (c := comm (d.A x μ) (z.A x ν))
+      (b := MathPhys.EinsteinSM.comm (z.A x μ) (d.A x ν)) (c := MathPhys.EinsteinSM.comm (d.A x μ) (z.A x ν))
     have t2 := norm_sub_le (pd (fun y => d.A y ν) μ x) (pd (fun y => d.A y μ) ν x)
     nlinarith
   · exact hs.H.trans (by nlinarith)
@@ -617,9 +620,9 @@ theorem contJetDeriv_congr (z : FieldTuple FC.C) {d d' : FieldTuple FC.C} {x : E
       fderiv ℝ d'.e x (unitE i) by rw [he.fderiv_eq]) (congrFun hA.eq_of_nhds μ))
   have hcd : curvDeriv z.A d.A x = curvDeriv z.A d'.A x := by
     funext μ ν
-    show pd (fun y => d.A y ν) μ x - pd (fun y => d.A y μ) ν x + comm (z.A x μ) (d.A x ν) +
-        comm (d.A x μ) (z.A x ν) = pd (fun y => d'.A y ν) μ x - pd (fun y => d'.A y μ) ν x +
-        comm (z.A x μ) (d'.A x ν) + comm (d'.A x μ) (z.A x ν)
+    show pd (fun y => d.A y ν) μ x - pd (fun y => d.A y μ) ν x + MathPhys.EinsteinSM.comm (z.A x μ) (d.A x ν) +
+        MathPhys.EinsteinSM.comm (d.A x μ) (z.A x ν) = pd (fun y => d'.A y ν) μ x - pd (fun y => d'.A y μ) ν x +
+        MathPhys.EinsteinSM.comm (z.A x μ) (d'.A x ν) + MathPhys.EinsteinSM.comm (d'.A x μ) (z.A x ν)
     rw [pd_eq_fderiv_unitE, pd_eq_fderiv_unitE, pd_eq_fderiv_unitE, pd_eq_fderiv_unitE, hAν, hAν,
       hA.eq_of_nhds]
   have hhd : higgsDeriv z.A z.H d.A d.H x = higgsDeriv z.A z.H d'.A d'.H x := by

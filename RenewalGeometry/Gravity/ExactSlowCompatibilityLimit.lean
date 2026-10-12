@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.ExactSlowExpansion
 import RenewalGeometry.Gravity.ExactNormalCoordinatesChart
+open MathPhys
 
 /-!
 # Necessary slow compatibility of bounded-rate limits

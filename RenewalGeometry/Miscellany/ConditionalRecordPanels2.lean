@@ -3,11 +3,12 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Continuum.OUProcess
-import RenewalGeometry.Renewal.ChaosLocalization
+import MathPhys.Continuum.OUProcess
+import MathPhys.Probability.ChaosLocalization
 import RenewalGeometry.OperatorLimits.GrandUniversal
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Final conditional panels II: renewal, SMST-Clifford,
   accepted-table, and closure records (Gran-Tensor manuscript;

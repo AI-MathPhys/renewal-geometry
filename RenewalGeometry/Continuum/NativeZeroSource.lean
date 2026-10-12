@@ -4,10 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.NativeSlabFourierBridge
+import MathPhys.Continuum.NativeSlabFourierBridge
 import RenewalGeometry.Continuum.NativeEulerTail
-import RenewalGeometry.DiscreteAnalysis.NodalSourceTransferExact
+import MathPhys.DiscreteAnalysis.NodalSourceTransferExact
 import RenewalGeometry.Analysis.DyadicRateAsymptotics
+open MathPhys
 
 /-!
 # The zero-order physical source of the complete reconstruction (`eq:native-zero-source`)

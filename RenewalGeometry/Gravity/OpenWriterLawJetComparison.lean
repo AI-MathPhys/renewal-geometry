@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterLawDifference
+open MathPhys
 
 /-!
 # The `h`-gaining multiplier bound and the low jets of the law comparison
@@ -30,6 +31,7 @@ open Set Metric Filter Topology Finset MeasureTheory
 open scoped NNReal BigOperators
 
 namespace RenewalGeometry.OpenWriterLifespan
+open MathPhys.OpenWriterLifespan
 
 open RootParityConnector OpenWriterGridBridge OpenWriterChart OpenWriterEnergy HarmonicWriter
   OpenWriterEnergyEstimate

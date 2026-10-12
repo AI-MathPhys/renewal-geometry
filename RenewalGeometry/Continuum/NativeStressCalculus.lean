@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeStressAlgebra
+open MathPhys
 
 /-!
 # Coframe derivatives of the native matter densities (the Standard-Model stress)

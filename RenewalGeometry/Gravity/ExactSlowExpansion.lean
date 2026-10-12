@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.AnalyticRayExpansion
+import MathPhys.Analysis.AnalyticRayExpansion
 import RenewalGeometry.Gravity.ExactSlowBranchData
+open MathPhys
 
 /-!
 # Exact anisotropic slow expansion (`lem:supp-exact-slow-expansion`;

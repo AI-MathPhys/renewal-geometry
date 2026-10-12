@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.StandardModel.FiniteInterfaceGeneral
 import RenewalGeometry.StandardModel.RenewalLatticeCarrier
 import RenewalGeometry.GaugeTheory.NativeActionGaugeInvariance
+open MathPhys
 
 /-!
 # The Standard-Model representation packet of the native local action

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeRecordTuple
+open MathPhys
 
 /-!
 # The Dirac residuals of the actual tuple of a native field

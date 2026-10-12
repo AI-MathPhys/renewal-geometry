@@ -6,8 +6,9 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.NativeEulerConsistency
 import RenewalGeometry.Continuum.NativeTailTransferBounds
-import RenewalGeometry.DiscreteAnalysis.NodalSourceTransferExact
-import RenewalGeometry.Analysis.PeriodicCubeSobolevInterpolation
+import MathPhys.DiscreteAnalysis.NodalSourceTransferExact
+import MathPhys.Analysis.PeriodicCubeSobolevInterpolation
+open MathPhys
 
 /-!
 # Full-record residual interpolation (`prop:shadow-residual-upgrade`)

@@ -3,8 +3,9 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Commutant.FiniteMatrixBlockIdealDecomposition
+import MathPhys.OperatorAlgebras.FiniteMatrixBlockIdealDecomposition
 import Mathlib.Analysis.CStarAlgebra.CStarMatrix
+open MathPhys
 
 /-!
 # The complete contextual future-null ideal

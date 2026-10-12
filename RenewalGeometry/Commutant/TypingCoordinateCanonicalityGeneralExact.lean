@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.ArbitraryIncidenceDualityExact
+open MathPhys
 
 /-!
 # Canonicality under arbitrary Wedderburn coordinates (`cor:typing-coordinate-canonicality`)
@@ -32,6 +33,7 @@ open scoped Kronecker
 
 namespace RenewalGeometry
 namespace ArbitraryIncidenceDuality
+open MathPhys.ArbitraryIncidenceDuality
 
 open SMSTQuiverCommutantAssembly GraphLoadedEdgeCommutant RepresentedJointPacket
 

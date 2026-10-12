@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Renewal.EfficientCutConstantScreen
+open MathPhys
 
 /-!
 # Cut margin and compact-screen alternative (`thm:main-spatial-screen`,
@@ -35,7 +36,7 @@ open scoped BigOperators Topology
 
 noncomputable section
 
-namespace RenewalGeometry
+namespace MathPhys
 namespace FiniteWeightedGraph
 
 variable {V : Type*} [Fintype V] [Nonempty V] [DecidableEq V] (G : FiniteWeightedGraph V)
@@ -185,6 +186,9 @@ theorem zeroCapacity_cut_of_efficientCutConstant_eq_zero (u : V → V → ℝ)
   · exact absurd h hpos.ne'
 
 end FiniteWeightedGraph
+end MathPhys
+
+namespace RenewalGeometry
 
 /-! ### The collapsing branch -/
 

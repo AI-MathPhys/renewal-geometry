@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Gravity.OpenWriterDifferenceEstimate
+import MathPhys.Gravity.OpenWriterDifferenceEstimate
+open MathPhys
 
 /-!
 # The open law family `B` of local differential writers (`thm:supp-law-stability`)
@@ -32,6 +33,7 @@ open Set Metric Filter Topology Finset MeasureTheory
 open scoped NNReal BigOperators
 
 namespace RenewalGeometry.OpenWriterLifespan
+open MathPhys.OpenWriterLifespan
 
 open RootParityConnector OpenWriterGridBridge OpenWriterChart OpenWriterEnergy HarmonicWriter
   OpenWriterEnergyEstimate

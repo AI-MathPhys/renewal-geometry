@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.FiniteLaplaceSandwich
+import MathPhys.Analysis.FiniteLaplaceSandwich
 import RenewalGeometry.Action.ConservativeBlockingHyperbolicCost
 import RenewalGeometry.Action.FiniteTwistRetention
+open MathPhys
 
 /-!
 # Finite-grid, finite-temperature conservative blocking and its controlled limit
@@ -52,7 +53,7 @@ unnormalized counting sum the lower bound `0` fails.
 namespace RenewalGeometry.FiniteBlockingGrid
 
 open Real Filter Topology Matrix
-open RenewalGeometry.FiniteLaplace RenewalGeometry.ConservativeBlocking
+open MathPhys.FiniteLaplace RenewalGeometry.ConservativeBlocking
   RenewalGeometry.HyperbolicCostOptimizer
 
 /-! ### Finite blocking -/

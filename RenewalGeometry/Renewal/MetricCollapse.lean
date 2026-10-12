@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Renewal.NetCounting
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Metric collapse without non-collapse
 

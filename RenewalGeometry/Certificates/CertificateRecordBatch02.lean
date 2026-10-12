@@ -3,10 +3,11 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Predictive.ExactSourceSchurResidual
-import RenewalGeometry.Predictive.JointSourceUniversality
+import MathPhys.SystemsTheory.ExactSourceSchurResidual
+import MathPhys.SystemsTheory.JointSourceUniversality
 import RenewalGeometry.OperatorLimits.SchurRedheffer
 import Mathlib
+open MathPhys
 
 /-!
 # Brand-new easy records, batch 02

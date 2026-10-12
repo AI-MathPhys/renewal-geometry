@@ -34,7 +34,7 @@ import Mathlib
 The converse Hankel-to-realization construction
 (shift-quotient state space, unique similarity) is the
 abstract Kalman layer already proved in
-`RenewalGeometry.hankel_minimality` / `RenewalGeometry.typed_hankel_realization`;
+`MathPhys.hankel_minimality` / `RenewalGeometry.typed_hankel_realization`;
 the infinite-rank branches of the classification table use
 infinite-dimensional witnesses and are the manuscript's
 examples.

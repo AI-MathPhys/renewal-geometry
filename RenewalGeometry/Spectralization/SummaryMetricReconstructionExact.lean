@@ -4,12 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.CanonicalGraphSpectralizationExact
-import RenewalGeometry.Spectralization.UniversalOneFormDiracKernelGrowthExact
-import RenewalGeometry.Spectralization.PeriodicTorusCubicalHarmonicExact
+import MathPhys.SpectralGeometry.UniversalOneFormDiracKernelGrowthExact
+import MathPhys.SpectralGeometry.PeriodicTorusCubicalHarmonicExact
 import RenewalGeometry.DiscreteAnalysis.CoframeDirichletFormLimitExact
-import RenewalGeometry.DiscreteAnalysis.VariableWilsonGardingExact
-import RenewalGeometry.DiscreteAnalysis.CovariantWilsonCoreConsistencyExact
+import MathPhys.DiscreteAnalysis.VariableWilsonGardingExact
+import MathPhys.DiscreteAnalysis.CovariantWilsonCoreConsistencyExact
 import RenewalGeometry.Spectralization.CompactSpinMainAssemblyExact
+open MathPhys
 
 /-!
 # Independent metric reconstruction and stable compact-spin convergence (assembly)
@@ -52,14 +53,14 @@ supplement theorem and is rendered by the Dirichlet-form limit.
 -/
 
 open Filter Topology Matrix
-open RenewalGeometry.CanonicalGraphSpectralization RenewalGeometry.A3ConnesFlatUniformConvergence
-  RenewalGeometry.StationaryFluxAdjoint RenewalGeometry.FiniteWeightedGraphHodgeDirac
-  RenewalGeometry.UniversalOneFormDiracKernelGrowth RenewalGeometry.CellularModularHodge
-  RenewalGeometry.PeriodicTorusCubical RenewalGeometry.CoframeRenewalPacket
-  RenewalGeometry.FrozenWilsonSymbol RenewalGeometry.FrozenWilsonGarding
-  RenewalGeometry.VariableWilsonGarding RenewalGeometry.LatticeTorusPlancherel
-  RenewalGeometry.CovariantWilsonCoreConsistency RenewalGeometry.MeshGraphDistanceConvergence
-  RenewalGeometry.EndpointBlockMetricHead
+open RenewalGeometry.CanonicalGraphSpectralization MathPhys.A3ConnesFlatUniformConvergence
+  MathPhys.StationaryFluxAdjoint MathPhys.FiniteWeightedGraphHodgeDirac
+  MathPhys.UniversalOneFormDiracKernelGrowth MathPhys.CellularModularHodge
+  MathPhys.PeriodicTorusCubical RenewalGeometry.CoframeRenewalPacket
+  MathPhys.FrozenWilsonSymbol MathPhys.FrozenWilsonGarding
+  MathPhys.VariableWilsonGarding MathPhys.LatticeTorusPlancherel
+  MathPhys.CovariantWilsonCoreConsistency MathPhys.MeshGraphDistanceConvergence
+  MathPhys.EndpointBlockMetricHead
 
 namespace RenewalGeometry.SummaryMetric
 

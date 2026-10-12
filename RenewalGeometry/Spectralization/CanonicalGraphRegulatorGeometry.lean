@@ -5,14 +5,15 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.SMSTGraphRegulator
 import RenewalGeometry.Action.CorrectedDualMeasureCriterion
-import RenewalGeometry.Algebra.GeometricMeanExact
-import RenewalGeometry.Operational.RelEntropyInvarianceExact
-import RenewalGeometry.StatMech.BkmScalingExact
-import RenewalGeometry.Algebra.LoewnerSqrtExact
+import MathPhys.Algebra.GeometricMeanExact
+import MathPhys.QuantumInformation.RelEntropyInvarianceExact
+import MathPhys.StatMech.BkmScalingExact
+import MathPhys.Algebra.LoewnerSqrtExact
 import RenewalGeometry.Predictive.GTAtlasCompleteness
 import Mathlib.LinearAlgebra.ExteriorPower.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Map
 import Mathlib.LinearAlgebra.Dual.Defs
+open MathPhys
 
 /-!
 # Finite geometry of the canonical graph regulator

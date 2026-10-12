@@ -3,11 +3,12 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import NCG.Algebra.PauliJordan
-import NCG.Algebra.CircleSelection
+import MathPhys.Algebra.PauliJordan
+import MathPhys.Algebra.CircleSelection
 import RenewalGeometry.Operational.SharpPurification
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # The two-path complex face and the Jordan/operational assembly
 
@@ -48,7 +49,8 @@ The assembly layer of the Jordan cluster
 -/
 
 namespace RenewalGeometry.Jordan
-open NCG.Jordan
+open MathPhys.Jordan
+open MathPhys.Jordan
 
 open Module Matrix RealInnerProductSpace
 

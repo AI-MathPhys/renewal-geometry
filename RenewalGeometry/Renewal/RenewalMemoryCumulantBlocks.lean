@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Renewal.RenewalMemoryCumulantExact
+open MathPhys
 /-!
 # Complete resolved-memory subtraction with blocks of different sizes
   (`thm:supp-memory-short`)
@@ -38,7 +39,7 @@ bilinear form `(x, y) ↦ ∂_u ∂_t M_cq(tx + uy)|₀`.  The single-block anal
 `RenewalGeometry.RenewalMemory`, applied block by block.
 -/
 
-open Matrix RenewalGeometry.TraceExp
+open Matrix MathPhys.TraceExp
 open scoped Matrix.Norms.Operator
 
 namespace RenewalGeometry

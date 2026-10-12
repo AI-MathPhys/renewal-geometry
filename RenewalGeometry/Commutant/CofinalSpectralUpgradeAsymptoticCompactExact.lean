@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.CofinalSpectralUpgradeUnboundedExact
-import RenewalGeometry.OperatorLimits.CofinalAsymptoticCompactness
+import MathPhys.OperatorLimits.CofinalAsymptoticCompactness
+open MathPhys
 
 /-!
 # Compact spectral upgrade under asymptotic form compactness
@@ -34,7 +35,7 @@ open scoped ENNReal
 
 noncomputable section
 
-namespace RenewalGeometry.VaryingHilbert.System
+namespace MathPhys.VaryingHilbert.System
 
 universe u v w
 
@@ -51,12 +52,12 @@ theorem jointCommutator_collectivelyCompact_of_cofinallyAsymptoticallyCompact
     (J : System (K := ℂ) (H := H) (Hn := fun X ↦ EuclideanSpace ℂ (d X × d X)))
     (b : ℝ) (hb : 0 < b)
     (hac : J.CofinallyAsymptoticallyCompact
-      (fun X ↦ ennrealBoundedOperatorEnergy (RenewalGeometry.jointCommutatorCLM (c X)))) :
-    J.CollectivelyCompact (RenewalGeometry.jointCommutatorResolventFamily c b) := by
+      (fun X ↦ ennrealBoundedOperatorEnergy (MathPhys.jointCommutatorCLM (c X)))) :
+    J.CollectivelyCompact (MathPhys.jointCommutatorResolventFamily c b) := by
   apply collectivelyCompact_of_cofinallyAsymptoticallyCompact J
     (fun X ↦ (⊤ : Submodule ℂ (EuclideanSpace ℂ (d X × d X))))
-    (fun X ↦ boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM (c X))) b hb _
-    (fun X f ↦ RenewalGeometry.jointCommutatorResolventFamily_resolventEquation c b hb X f)
+    (fun X ↦ boundedOperatorGraphMap (MathPhys.jointCommutatorCLM (c X))) b hb _
+    (fun X f ↦ MathPhys.jointCommutatorResolventFamily_resolventEquation c b hb X f)
   simpa only [ennrealOperatorGraphEnergy_top] using hac
 
 /-- **Compact spectral gap chain for joint-commutator cutoffs with an unbounded limit on a
@@ -82,59 +83,59 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
       (𝓝 (transportedLimitOperator Jlim 1 g)))
     (D : Submodule ℂ Hlim) (A : D →ₗ[ℂ] F) (R : Hlim →L[ℂ] Hlim)
     (hmosco : J.TransportedMoscoConverges Jlim
-      (fun X ↦ ennrealBoundedOperatorEnergy (RenewalGeometry.jointCommutatorCLM (c X)))
+      (fun X ↦ ennrealBoundedOperatorEnergy (MathPhys.jointCommutatorCLM (c X)))
       (ennrealOperatorGraphEnergy D A))
     (hDdense : Dense (D : Set Hlim))
     (b : ℝ) (hb : 0 < b)
     (hlimitEquation : ∀ f : Hlim, OperatorGraphResolventEquation D A b f (R f))
-    (hcc : J.CollectivelyCompact (RenewalGeometry.jointCommutatorResolventFamily c b))
+    (hcc : J.CollectivelyCompact (MathPhys.jointCommutatorResolventFamily c b))
     (M : ∀ X, Submodule ℂ (EuclideanSpace ℂ (d X × d X)))
     (hMker : ∀ᶠ X in atTop,
-      M X ≤ LinearMap.ker (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap)
+      M X ≤ LinearMap.ker (MathPhys.commutantLaplacianCLM (c X)).toLinearMap)
     (Mlim : Submodule ℂ Hlim) [Mlim.HasOrthogonalProjection]
     (hMlim : operatorGraphKernel D A = Mlim)
     (hMrank : ∀ᶠ X in atTop, Module.finrank ℂ (M X) = Module.finrank ℂ Mlim)
     (hcompl : Mlim ≠ ⊤) :
     FiniteDimensional ℂ Mlim ∧
       (∀ᶠ X in atTop,
-        LinearMap.ker (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap = M X) ∧
+        LinearMap.ker (MathPhys.commutantLaplacianCLM (c X)).toLinearMap = M X) ∧
       IsCompactOperator R ∧
-      Tendsto (J.compressedOperator (RenewalGeometry.jointCommutatorResolventFamily c b))
+      Tendsto (J.compressedOperator (MathPhys.jointCommutatorResolventFamily c b))
         atTop (𝓝 (transportedLimitOperator Jlim R)) ∧
       Tendsto (J.compressedOperator
-          (fun X ↦ RenewalGeometry.jointCommutatorKernelProjection (c X)))
+          (fun X ↦ MathPhys.jointCommutatorKernelProjection (c X)))
         atTop (𝓝 (transportedLimitOperator Jlim Mlim.starProjection)) ∧
-      0 < RenewalGeometry.graphLimitComplementGap R Mlim b ∧
-      Tendsto (fun X ↦ RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b) atTop
-        (𝓝 (RenewalGeometry.graphLimitComplementGap R Mlim b)) ∧
+      0 < MathPhys.graphLimitComplementGap R Mlim b ∧
+      Tendsto (fun X ↦ MathPhys.jointCommutatorFirstPositiveGap (c X) b) atTop
+        (𝓝 (MathPhys.graphLimitComplementGap R Mlim b)) ∧
       (∀ᶠ X in atTop,
-        0 < RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b ∧
+        0 < MathPhys.jointCommutatorFirstPositiveGap (c X) b ∧
           Module.End.HasEigenvalue
-            (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap
-            ((RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b : ℝ) : ℂ) ∧
+            (MathPhys.commutantLaplacianCLM (c X)).toLinearMap
+            ((MathPhys.jointCommutatorFirstPositiveGap (c X) b : ℝ) : ℂ) ∧
           ∀ ν : ℝ, 0 < ν →
             Module.End.HasEigenvalue
-              (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap (ν : ℂ) →
-              RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b ≤ ν) ∧
+              (MathPhys.commutantLaplacianCLM (c X)).toLinearMap (ν : ℂ) →
+              MathPhys.jointCommutatorFirstPositiveGap (c X) b ≤ ν) ∧
       (∃ v : Hlim, ∃ hv : v ∈ D, v ≠ 0 ∧ v ∈ Mlimᗮ ∧
-        R v = (((RenewalGeometry.graphLimitComplementGap R Mlim b + b)⁻¹ : ℝ) : ℂ) • v ∧
-        ‖A ⟨v, hv⟩‖ ^ 2 = RenewalGeometry.graphLimitComplementGap R Mlim b * ‖v‖ ^ 2) ∧
+        R v = (((MathPhys.graphLimitComplementGap R Mlim b + b)⁻¹ : ℝ) : ℂ) • v ∧
+        ‖A ⟨v, hv⟩‖ ^ 2 = MathPhys.graphLimitComplementGap R Mlim b * ‖v‖ ^ 2) ∧
       (∀ v : Hlim, ∀ hv : v ∈ D,
-        RenewalGeometry.graphLimitComplementGap R Mlim b *
+        MathPhys.graphLimitComplementGap R Mlim b *
             ‖v - Mlim.starProjection v‖ ^ 2 ≤ ‖A ⟨v, hv⟩‖ ^ 2) ∧
-      (∀ γ0 : ℝ, γ0 < RenewalGeometry.graphLimitComplementGap R Mlim b →
+      (∀ γ0 : ℝ, γ0 < MathPhys.graphLimitComplementGap R Mlim b →
         ∀ᶠ X in atTop, ∀ B : EuclideanSpace ℂ (d X × d X),
           γ0 * ‖B - (M X).starProjection B‖ ^ 2 ≤
-            ‖RenewalGeometry.jointCommutatorCLM (c X) B‖ ^ 2) := by
+            ‖MathPhys.jointCommutatorCLM (c X) B‖ ^ 2) := by
   classical
-  set Rn := RenewalGeometry.jointCommutatorResolventFamily c b with hRndef
+  set Rn := MathPhys.jointCommutatorResolventFamily c b with hRndef
   have hstageEq : ∀ X f, OperatorGraphResolventEquation
       (⊤ : Submodule ℂ (EuclideanSpace ℂ (d X × d X)))
-      (boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM (c X))) b f (Rn X f) :=
-    fun X f ↦ RenewalGeometry.jointCommutatorResolventFamily_resolventEquation c b hb X f
+      (boundedOperatorGraphMap (MathPhys.jointCommutatorCLM (c X))) b f (Rn X f) :=
+    fun X f ↦ MathPhys.jointCommutatorResolventFamily_resolventEquation c b hb X f
   have hmosco' : J.TransportedMoscoConverges Jlim
       (fun X ↦ ennrealOperatorGraphEnergy (⊤ : Submodule ℂ (EuclideanSpace ℂ (d X × d X)))
-        (boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM (c X))))
+        (boundedOperatorGraphMap (MathPhys.jointCommutatorCLM (c X))))
       (ennrealOperatorGraphEnergy D A) := by
     simpa only [ennrealOperatorGraphEnergy_top] using hmosco
   -- norm-resolvent convergence
@@ -143,7 +144,7 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
   have hTconv : Tendsto T atTop (𝓝 Tlim) :=
     tendsto_compressedOperator_of_transportedMosco J Jlim
       (fun X ↦ (⊤ : Submodule ℂ (EuclideanSpace ℂ (d X × d X))))
-      (fun X ↦ boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM (c X)))
+      (fun X ↦ boundedOperatorGraphMap (MathPhys.jointCommutatorCLM (c X)))
       D A b hb Rn R hstageEq hlimitEquation hmosco' _ hcompat hcc
   have hstageCompact : ∀ X, IsCompactOperator (T X : H → H) := fun X ↦
     J.compressedOperator_isCompactOperator_of_finiteDimensional Rn X
@@ -184,46 +185,46 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
   have hcenter0 : center ≠ 0 := by
     rw [hcenter]; exact_mod_cast (one_div_pos.mpr hb).ne'
   obtain ⟨radius, hR, hzero, hlimitContour, hrangeEig⟩ :=
-    RenewalGeometry.ResolventStability.exists_circleRieszProjection_range_eq_eigenspace_of_compact_of_isSymmetric
+    MathPhys.ResolventStability.exists_circleRieszProjection_range_eq_eigenspace_of_compact_of_isSymmetric
       Tlim hTlimCompact hTlimSymm center hcenter0
   set Q : ℕ → H →L[ℂ] H := fun X ↦
-    RenewalGeometry.ResolventStability.circleRieszProjection (T X) center radius with hQdef
+    MathPhys.ResolventStability.circleRieszProjection (T X) center radius with hQdef
   set Qlim : H →L[ℂ] H :=
-    RenewalGeometry.ResolventStability.circleRieszProjection Tlim center radius with hQlimdef
+    MathPhys.ResolventStability.circleRieszProjection Tlim center radius with hQlimdef
   set Pi : ℕ → H →L[ℂ] H :=
-    J.compressedOperator (fun X ↦ RenewalGeometry.jointCommutatorKernelProjection (c X))
+    J.compressedOperator (fun X ↦ MathPhys.jointCommutatorKernelProjection (c X))
     with hPidef
   set Plim : Hlim →L[ℂ] Hlim := Mlim.starProjection with hPlimdef
   set Pilim : H →L[ℂ] H := transportedLimitOperator Jlim Plim with hPilimdef
   obtain ⟨Mb, hMb, hlimitBound⟩ :=
-    RenewalGeometry.ResolventStability.exists_circle_resolvent_norm_bound
+    MathPhys.ResolventStability.exists_circle_resolvent_norm_bound
       Tlim center radius hlimitContour
   obtain ⟨Nb, hNb, hstageBound⟩ :=
-    RenewalGeometry.ResolventStability.eventually_circle_resolvent_bound_of_tendsto
+    MathPhys.ResolventStability.eventually_circle_resolvent_bound_of_tendsto
       T Tlim hTconv center radius Mb hMb hlimitContour hlimitBound
   have hcontour : ∀ᶠ X in atTop, ∀ z ∈ Metric.sphere center radius,
       z ∈ resolventSet ℂ (T X) :=
     hstageBound.mono fun _ hn z hz ↦ (hn z hz).1
   have hQconv : Tendsto Q atTop (𝓝 Qlim) :=
-    RenewalGeometry.ResolventStability.circleRieszProjection_tendsto hTconv center radius hR.le
+    MathPhys.ResolventStability.circleRieszProjection_tendsto hTconv center radius hR.le
       Mb Nb hMb hlimitContour hlimitBound hcontour (hstageBound.mono fun _ hn z hz ↦ (hn z hz).2)
   have hfinite : ∀ᶠ X in atTop, Module.Finite ℂ (LinearMap.range (Q X).toLinearMap) := by
     filter_upwards [hcontour] with X hX
-    exact RenewalGeometry.ResolventStability.finiteDimensional_range_circleRieszProjection_of_compact_of_isSymmetric
+    exact MathPhys.ResolventStability.finiteDimensional_range_circleRieszProjection_of_compact_of_isSymmetric
       (T X) (hstageCompact X) (hstageSymmetric X) center radius hR hzero hX
   have hidemQ : ∀ᶠ X in atTop, IsIdempotentElem (Q X) := by
     filter_upwards [hcontour] with X hX
     exact ContinuousLinearMap.isIdempotentElem_toLinearMap_iff.mp
-      (RenewalGeometry.ResolventStability.circleRieszProjection_isIdempotentElem_of_compact_of_isSymmetric
+      (MathPhys.ResolventStability.circleRieszProjection_isIdempotentElem_of_compact_of_isSymmetric
         (T X) (hstageCompact X) (hstageSymmetric X) center radius hR hX)
   have hinsideB : (((b : ℝ) : ℂ)⁻¹) ∈ Metric.ball center radius := by
     simpa [hcenter, one_div] using (Metric.mem_ball_self hR : center ∈ Metric.ball center radius)
   have hkernelRiesz : ∀ᶠ X in atTop,
-      (LinearMap.ker (RenewalGeometry.jointCommutatorCLM (c X)).toLinearMap).map
+      (LinearMap.ker (MathPhys.jointCommutatorCLM (c X)).toLinearMap).map
           (J.embedding X).toLinearMap ≤ LinearMap.range (Q X).toLinearMap := by
     filter_upwards [hcontour] with X hX
     rw [← J.eigenspace_compressed_jointCommutatorResolventFamily c b hb X]
-    exact RenewalGeometry.ResolventStability.eigenspace_le_range_circleRieszProjection_of_mem_ball
+    exact MathPhys.ResolventStability.eigenspace_le_range_circleRieszProjection_of_mem_ball
       (T X) center (((b : ℝ) : ℂ)⁻¹) radius hinsideB hX
   -- the limiting Riesz range is the transported limiting kernel
   have hbinv : center = (((b : ℝ) : ℂ)⁻¹) := by
@@ -259,7 +260,7 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
   have hQlimRange : LinearMap.range Qlim.toLinearMap = Mlim.map Jlim.toLinearMap :=
     hrangeEig.trans heigMap
   have hstarQlim : IsStarProjection Qlim :=
-    RenewalGeometry.ResolventStability.circleRieszProjection_isStarProjection_of_compact_of_isSymmetric
+    MathPhys.ResolventStability.circleRieszProjection_isStarProjection_of_compact_of_isSymmetric
       Tlim hTlimCompact hTlimSymm center radius hR hlimitContour
   have hstarPilim : IsStarProjection Pilim :=
     (constantEmbeddingSystem Jlim).compressedOperator_isStarProjection (fun _ ↦ Plim) 0
@@ -271,10 +272,10 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
     change LinearMap.range Qlim.toLinearMap = LinearMap.range Pilim.toLinearMap
     rw [hQlimRange, hPilimRange]
   have hQlimCompact : IsCompactOperator (Qlim : H → H) :=
-    RenewalGeometry.ResolventStability.circleRieszProjection_isCompactOperator
+    MathPhys.ResolventStability.circleRieszProjection_isCompactOperator
       Tlim hTlimCompact center radius hR hzero hlimitContour
   letI hQlimFin : Module.Finite ℂ (LinearMap.range Qlim.toLinearMap) :=
-    RenewalGeometry.ResolventStability.finiteDimensional_range_of_compact_idempotent
+    MathPhys.ResolventStability.finiteDimensional_range_of_compact_idempotent
       Qlim hQlimCompact hstarQlim.isIdempotentElem
   have hmapFin : FiniteDimensional ℂ (Mlim.map Jlim.toLinearMap) := by
     rw [← hQlimRange]; exact hQlimFin
@@ -287,19 +288,19 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
   have hQrank : ∀ᶠ X in atTop,
       Module.finrank ℂ (LinearMap.range (Q X).toLinearMap) =
         Module.finrank ℂ (LinearMap.range Qlim.toLinearMap) :=
-    RenewalGeometry.ProjectionStability.eventually_finrank_range_eq_of_tendsto Q Qlim hQconv
+    MathPhys.ProjectionStability.eventually_finrank_range_eq_of_tendsto Q Qlim hQconv
       (hidemQ.mono fun _ hn ↦ ContinuousLinearMap.isIdempotentElem_toLinearMap_iff.mpr hn)
       (ContinuousLinearMap.isIdempotentElem_toLinearMap_iff.mpr hstarQlim.isIdempotentElem)
       hfinite
   -- kernel locking
   have hlock : ∀ᶠ X in atTop,
-      LinearMap.ker (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap = M X ∧
-        (LinearMap.ker (RenewalGeometry.jointCommutatorCLM (c X)).toLinearMap).map
+      LinearMap.ker (MathPhys.commutantLaplacianCLM (c X)).toLinearMap = M X ∧
+        (LinearMap.ker (MathPhys.jointCommutatorCLM (c X)).toLinearMap).map
           (J.embedding X).toLinearMap = LinearMap.range (Q X).toLinearMap := by
     filter_upwards [hMker, hMrank, hQrank, hfinite, hkernelRiesz] with X hMX hrX hQX hfinX hkerX
     letI : Module.Finite ℂ (LinearMap.range (Q X).toLinearMap) := hfinX
-    rw [RenewalGeometry.ker_commutantLaplacianCLM] at hMX ⊢
-    set K := LinearMap.ker (RenewalGeometry.jointCommutatorCLM (c X)).toLinearMap with hK
+    rw [MathPhys.ker_commutantLaplacianCLM] at hMX ⊢
+    set K := LinearMap.ker (MathPhys.jointCommutatorCLM (c X)).toLinearMap with hK
     have h1 : Module.finrank ℂ (K.map (J.embedding X).toLinearMap) = Module.finrank ℂ K :=
       (LinearEquiv.finrank_eq
         (Submodule.equivMapOfInjective _ (J.embedding X).injective K)).symm
@@ -314,19 +315,19 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
   -- projection convergence
   have hstarPi : ∀ X, IsStarProjection (Pi X) := fun X ↦
     J.compressedOperator_isStarProjection _ X
-      (RenewalGeometry.jointCommutatorKernelProjection_isStarProjection (c X))
+      (MathPhys.jointCommutatorKernelProjection_isStarProjection (c X))
   have hPiQ : ∀ᶠ X in atTop,
       LinearMap.range (Pi X).toLinearMap = LinearMap.range (Q X).toLinearMap := by
     filter_upwards [hlock] with X hX
     rw [hPidef, J.range_compressedOperator,
-      RenewalGeometry.range_jointCommutatorKernelProjection]
+      MathPhys.range_jointCommutatorKernelProjection]
     exact hX.2
   have hPiconv : Tendsto Pi atTop (𝓝 Qlim) :=
-    RenewalGeometry.ProjectionStability.starProjection_tendsto_of_idempotent_range_eq
+    MathPhys.ProjectionStability.starProjection_tendsto_of_idempotent_range_eq
       Pi Q Qlim (Eventually.of_forall hstarPi) hidemQ hstarQlim hPiQ hQconv
   -- commutation and nonvanishing on the limiting space
   have hcommuteT : Commute Tlim Qlim :=
-    RenewalGeometry.ResolventStability.circleRieszProjection_commute_of_compact_of_isSymmetric
+    MathPhys.ResolventStability.circleRieszProjection_commute_of_compact_of_isSymmetric
       Tlim hTlimCompact hTlimSymm center radius hR hlimitContour
   have hcommute : Commute R Plim := by
     apply ContinuousLinearMap.ext
@@ -349,91 +350,91 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
     have : Plim x = x := by rw [h1]; rfl
     rw [← this]
     exact Submodule.starProjection_apply_mem Mlim x
-  have hneLim : RenewalGeometry.SpectralGap.complementCompression R Plim ≠ 0 :=
-    RenewalGeometry.SpectralGap.complementCompression_ne_zero_of_injective_of_commute
+  have hneLim : MathPhys.SpectralGap.complementCompression R Plim ≠ 0 :=
+    MathPhys.SpectralGap.complementCompression_ne_zero_of_injective_of_commute
       R Plim (operatorGraphResolvent_injective D A b R hDdense hlimitEquation)
       isStarProjection_starProjection hcommute hPne
-  have hnormEq : ‖RenewalGeometry.SpectralGap.complementCompression Tlim Qlim‖ =
-      ‖RenewalGeometry.SpectralGap.complementCompression R Plim‖ := by
+  have hnormEq : ‖MathPhys.SpectralGap.complementCompression Tlim Qlim‖ =
+      ‖MathPhys.SpectralGap.complementCompression R Plim‖ := by
     rw [hQlimEq]
     exact (constantEmbeddingSystem Jlim).norm_complementCompression_compressedOperator
       (fun _ ↦ R) (fun _ ↦ Plim) 0
-  have hne : RenewalGeometry.SpectralGap.complementCompression Tlim Qlim ≠ 0 := by
+  have hne : MathPhys.SpectralGap.complementCompression Tlim Qlim ≠ 0 := by
     intro h0
     apply hneLim
     rw [← norm_eq_zero, ← hnormEq, h0, norm_zero]
-  have hgapEqLim : RenewalGeometry.graphLimitComplementGap R Mlim b =
-      ‖RenewalGeometry.SpectralGap.complementCompression Tlim Qlim‖⁻¹ - b := by
-    rw [RenewalGeometry.graphLimitComplementGap, hnormEq]
-  have hgapPos : 0 < ‖RenewalGeometry.SpectralGap.complementCompression Tlim Qlim‖⁻¹ - b :=
-    RenewalGeometry.SpectralGap.inverseNormGap_circleRieszProjection_pos
+  have hgapEqLim : MathPhys.graphLimitComplementGap R Mlim b =
+      ‖MathPhys.SpectralGap.complementCompression Tlim Qlim‖⁻¹ - b := by
+    rw [MathPhys.graphLimitComplementGap, hnormEq]
+  have hgapPos : 0 < ‖MathPhys.SpectralGap.complementCompression Tlim Qlim‖⁻¹ - b :=
+    MathPhys.SpectralGap.inverseNormGap_circleRieszProjection_pos
       Tlim hTlimCompact hTlimPos center radius hR hlimitContour b hb hinsideB
         hTlimNorm hne
   -- gap convergence
   have hgapTendsto0 : Tendsto
-      (fun X ↦ ‖RenewalGeometry.SpectralGap.complementCompression (T X) (Pi X)‖⁻¹ - b)
-      atTop (𝓝 (‖RenewalGeometry.SpectralGap.complementCompression Tlim Qlim‖⁻¹ - b)) :=
-    RenewalGeometry.SpectralGap.inverseNormGap_tendsto_of_idempotent_ranges
+      (fun X ↦ ‖MathPhys.SpectralGap.complementCompression (T X) (Pi X)‖⁻¹ - b)
+      atTop (𝓝 (‖MathPhys.SpectralGap.complementCompression Tlim Qlim‖⁻¹ - b)) :=
+    MathPhys.SpectralGap.inverseNormGap_tendsto_of_idempotent_ranges
       T Pi Q Tlim Qlim b hTconv hQconv (Eventually.of_forall hstarPi) hidemQ hstarQlim hPiQ
       (norm_ne_zero_iff.mpr hne)
   have hstageGapEq : ∀ X,
-      ‖RenewalGeometry.SpectralGap.complementCompression (T X) (Pi X)‖⁻¹ - b =
-        RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b := by
+      ‖MathPhys.SpectralGap.complementCompression (T X) (Pi X)‖⁻¹ - b =
+        MathPhys.jointCommutatorFirstPositiveGap (c X) b := by
     intro X
     rw [hTdef, hPidef, J.norm_complementCompression_compressedOperator]
     rfl
-  have hgapTendsto : Tendsto (fun X ↦ RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b)
-      atTop (𝓝 (RenewalGeometry.graphLimitComplementGap R Mlim b)) := by
+  have hgapTendsto : Tendsto (fun X ↦ MathPhys.jointCommutatorFirstPositiveGap (c X) b)
+      atTop (𝓝 (MathPhys.graphLimitComplementGap R Mlim b)) := by
     rw [hgapEqLim]
     simpa only [hstageGapEq] using hgapTendsto0
-  have hgapPos' : 0 < RenewalGeometry.graphLimitComplementGap R Mlim b := by
+  have hgapPos' : 0 < MathPhys.graphLimitComplementGap R Mlim b := by
     rw [hgapEqLim]; exact hgapPos
-  have hstagePos : ∀ᶠ X in atTop, 0 < RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b :=
+  have hstagePos : ∀ᶠ X in atTop, 0 < MathPhys.jointCommutatorFirstPositiveGap (c X) b :=
     hgapTendsto.eventually (Ioi_mem_nhds hgapPos')
   have hstageEigen : ∀ᶠ X in atTop,
-      0 < RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b ∧
+      0 < MathPhys.jointCommutatorFirstPositiveGap (c X) b ∧
         Module.End.HasEigenvalue
-          (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap
-          ((RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b : ℝ) : ℂ) ∧
+          (MathPhys.commutantLaplacianCLM (c X)).toLinearMap
+          ((MathPhys.jointCommutatorFirstPositiveGap (c X) b : ℝ) : ℂ) ∧
         ∀ ν : ℝ, 0 < ν →
           Module.End.HasEigenvalue
-            (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap (ν : ℂ) →
-            RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b ≤ ν := by
+            (MathPhys.commutantLaplacianCLM (c X)).toLinearMap (ν : ℂ) →
+            MathPhys.jointCommutatorFirstPositiveGap (c X) b ≤ ν := by
     filter_upwards [hstagePos] with X hX
-    exact ⟨hX, RenewalGeometry.jointCommutatorFirstPositiveGap_isLeastPositiveEigenvalue
+    exact ⟨hX, MathPhys.jointCommutatorFirstPositiveGap_isLeastPositiveEigenvalue
       (c X) b hb hX⟩
   -- late-cutoff coercivity
-  have hcoerciveKer : ∀ γ0 : ℝ, γ0 < RenewalGeometry.graphLimitComplementGap R Mlim b →
+  have hcoerciveKer : ∀ γ0 : ℝ, γ0 < MathPhys.graphLimitComplementGap R Mlim b →
       ∀ᶠ X in atTop, ∀ B : EuclideanSpace ℂ (d X × d X),
-        γ0 * ‖B - RenewalGeometry.jointCommutatorKernelProjection (c X) B‖ ^ 2 ≤
-          ‖RenewalGeometry.jointCommutatorCLM (c X) B‖ ^ 2 := by
+        γ0 * ‖B - MathPhys.jointCommutatorKernelProjection (c X) B‖ ^ 2 ≤
+          ‖MathPhys.jointCommutatorCLM (c X) B‖ ^ 2 := by
     intro γ0 hγ0
     filter_upwards [hgapTendsto.eventually (Ioi_mem_nhds hγ0)] with X hX
     intro B
-    have h := RenewalGeometry.jointCommutatorFirstPositiveGap_coercivity (c X) b hb B
-    have hX' : γ0 ≤ RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b := le_of_lt hX
-    nlinarith [sq_nonneg ‖B - RenewalGeometry.jointCommutatorKernelProjection (c X) B‖]
-  have hcoercive : ∀ γ0 : ℝ, γ0 < RenewalGeometry.graphLimitComplementGap R Mlim b →
+    have h := MathPhys.jointCommutatorFirstPositiveGap_coercivity (c X) b hb B
+    have hX' : γ0 ≤ MathPhys.jointCommutatorFirstPositiveGap (c X) b := le_of_lt hX
+    nlinarith [sq_nonneg ‖B - MathPhys.jointCommutatorKernelProjection (c X) B‖]
+  have hcoercive : ∀ γ0 : ℝ, γ0 < MathPhys.graphLimitComplementGap R Mlim b →
       ∀ᶠ X in atTop, ∀ B : EuclideanSpace ℂ (d X × d X),
         γ0 * ‖B - (M X).starProjection B‖ ^ 2 ≤
-          ‖RenewalGeometry.jointCommutatorCLM (c X) B‖ ^ 2 := by
+          ‖MathPhys.jointCommutatorCLM (c X) B‖ ^ 2 := by
     intro γ0 hγ0
     filter_upwards [hcoerciveKer γ0 hγ0, hlock] with X hX hlockX
     intro B
     have hproj : (M X).starProjection =
-        RenewalGeometry.jointCommutatorKernelProjection (c X) := by
+        MathPhys.jointCommutatorKernelProjection (c X) := by
       apply ContinuousLinearMap.IsStarProjection.ext isStarProjection_starProjection
-        (RenewalGeometry.jointCommutatorKernelProjection_isStarProjection (c X))
+        (MathPhys.jointCommutatorKernelProjection_isStarProjection (c X))
       rw [Submodule.range_starProjection]
       change M X = LinearMap.range
-        (RenewalGeometry.jointCommutatorKernelProjection (c X)).toLinearMap
-      rw [RenewalGeometry.range_jointCommutatorKernelProjection, ← hlockX.1,
-        RenewalGeometry.ker_commutantLaplacianCLM]
+        (MathPhys.jointCommutatorKernelProjection (c X)).toLinearMap
+      rw [MathPhys.range_jointCommutatorKernelProjection, ← hlockX.1,
+        MathPhys.ker_commutantLaplacianCLM]
     rw [hproj]
     exact hX B
   -- limit variational bound along recovery sequences
   have hvariational : ∀ v : Hlim, ∀ hv : v ∈ D,
-      RenewalGeometry.graphLimitComplementGap R Mlim b *
+      MathPhys.graphLimitComplementGap R Mlim b *
           ‖v - Mlim.starProjection v‖ ^ 2 ≤ ‖A ⟨v, hv⟩‖ ^ 2 := by
     intro v hv
     have hqfin : ennrealOperatorGraphEnergy D A v ≠ ∞ :=
@@ -451,20 +452,20 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
       rw [← hlimval]
       exact (hJx.sub hPiapply).norm
     have hresidEq : ∀ X, ‖J.embedding X (x X) - Pi X (J.embedding X (x X))‖ =
-        ‖x X - RenewalGeometry.jointCommutatorKernelProjection (c X) (x X)‖ := by
+        ‖x X - MathPhys.jointCommutatorKernelProjection (c X) (x X)‖ := by
       intro X
       have hPiJ : Pi X (J.embedding X (x X)) =
-          J.embedding X (RenewalGeometry.jointCommutatorKernelProjection (c X) (x X)) := by
+          J.embedding X (MathPhys.jointCommutatorKernelProjection (c X) (x X)) := by
         simp [hPidef, compressedOperator, J.adjointLift_embedding]
       rw [hPiJ, ← map_sub, LinearIsometry.norm_map]
-    have hqreal : Tendsto (fun X ↦ ‖RenewalGeometry.jointCommutatorCLM (c X) (x X)‖ ^ 2) atTop
+    have hqreal : Tendsto (fun X ↦ ‖MathPhys.jointCommutatorCLM (c X) (x X)‖ ^ 2) atTop
         (𝓝 (‖A ⟨v, hv⟩‖ ^ 2)) := by
       have h := (ENNReal.tendsto_toReal hqfin).comp hqx
       rw [ennrealOperatorGraphEnergy_toReal D A v hv] at h
       refine h.congr' (Eventually.of_forall fun X ↦ ?_)
       simp only [Function.comp_apply]
       rw [ennrealBoundedOperatorEnergy, ENNReal.toReal_ofReal (sq_nonneg _)]
-    have hγ0 : ∀ γ0 : ℝ, γ0 < RenewalGeometry.graphLimitComplementGap R Mlim b →
+    have hγ0 : ∀ γ0 : ℝ, γ0 < MathPhys.graphLimitComplementGap R Mlim b →
         γ0 * ‖v - Mlim.starProjection v‖ ^ 2 ≤ ‖A ⟨v, hv⟩‖ ^ 2 := by
       intro γ0 hlt
       refine le_of_tendsto_of_tendsto ((hresid.pow 2).const_mul γ0) hqreal ?_
@@ -475,7 +476,7 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
     · rw [hr, mul_zero]; exact sq_nonneg _
     have hrpos : 0 < ‖v - Mlim.starProjection v‖ ^ 2 :=
       lt_of_le_of_ne (sq_nonneg _) (Ne.symm hr)
-    have hle : RenewalGeometry.graphLimitComplementGap R Mlim b ≤
+    have hle : MathPhys.graphLimitComplementGap R Mlim b ≤
         ‖A ⟨v, hv⟩‖ ^ 2 / ‖v - Mlim.starProjection v‖ ^ 2 := by
       apply le_of_forall_lt_imp_le_of_dense
       intro γ0 hlt
@@ -484,12 +485,12 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
     rwa [le_div_iff₀ hrpos] at hle
   -- the attained limiting eigenvector, on the limiting space
   obtain ⟨w, hw0, hPw, hRw⟩ :=
-    RenewalGeometry.SpectralGap.exists_eigenvector_norm_complementCompression
+    MathPhys.SpectralGap.exists_eigenvector_norm_complementCompression
       R Plim hRcompact hRpos isStarProjection_starProjection hcommute hneLim
-  set t := ‖RenewalGeometry.SpectralGap.complementCompression R Plim‖ with htdef
+  set t := ‖MathPhys.SpectralGap.complementCompression R Plim‖ with htdef
   have htpos : 0 < t := norm_pos_iff.mpr hneLim
-  have hγt : RenewalGeometry.graphLimitComplementGap R Mlim b + b = t⁻¹ := by
-    rw [RenewalGeometry.graphLimitComplementGap]; ring
+  have hγt : MathPhys.graphLimitComplementGap R Mlim b + b = t⁻¹ := by
+    rw [MathPhys.graphLimitComplementGap]; ring
   have hwD : w ∈ D := by
     have hw : w = (((t⁻¹ : ℝ)) : ℂ) • R w := by
       rw [hRw, smul_smul, ← Complex.ofReal_mul, inv_mul_cancel₀ htpos.ne',
@@ -497,8 +498,8 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
     rw [hw]
     exact D.smul_mem _ (hlimitEquation w).mem
   have heig : ∃ v : Hlim, ∃ hv : v ∈ D, v ≠ 0 ∧ v ∈ Mlimᗮ ∧
-      R v = (((RenewalGeometry.graphLimitComplementGap R Mlim b + b)⁻¹ : ℝ) : ℂ) • v ∧
-      ‖A ⟨v, hv⟩‖ ^ 2 = RenewalGeometry.graphLimitComplementGap R Mlim b * ‖v‖ ^ 2 := by
+      R v = (((MathPhys.graphLimitComplementGap R Mlim b + b)⁻¹ : ℝ) : ℂ) • v ∧
+      ‖A ⟨v, hv⟩‖ ^ 2 = MathPhys.graphLimitComplementGap R Mlim b * ‖v‖ ^ 2 := by
     refine ⟨w, hwD, hw0, ?_, ?_, ?_⟩
     · rw [← Submodule.starProjection_apply_eq_zero_iff]
       exact hPw
@@ -520,7 +521,7 @@ theorem jointCommutator_unboundedLimitGapChain_of_collectivelyCompact
       have hw2 : (inner ℂ w w).re = ‖w‖ ^ 2 := by
         rw [← inner_self_eq_norm_sq (𝕜 := ℂ)]; rfl
       rw [hA2, hw2] at heul
-      have hγ : RenewalGeometry.graphLimitComplementGap R Mlim b = t⁻¹ - b := by
+      have hγ : MathPhys.graphLimitComplementGap R Mlim b = t⁻¹ - b := by
         linarith [hγt]
       rw [hγ]
       have h' : t * ‖A ⟨w, hwD⟩‖ ^ 2 = ‖w‖ ^ 2 - b * (t * ‖w‖ ^ 2) := by linarith
@@ -566,7 +567,7 @@ theorem cofinalSpectralUpgrade_asymptoticallyCompact_exact
       (𝓝 (transportedLimitOperator Jlim 1 g)))
     (D : Submodule ℂ Hlim) (A : D →ₗ[ℂ] F) (R : Hlim →L[ℂ] Hlim)
     (hD1 : J.TransportedMoscoConverges Jlim
-      (fun X ↦ ennrealBoundedOperatorEnergy (RenewalGeometry.jointCommutatorCLM (c X)))
+      (fun X ↦ ennrealBoundedOperatorEnergy (MathPhys.jointCommutatorCLM (c X)))
       (ennrealOperatorGraphEnergy D A))
     (hDdense : Dense (D : Set Hlim))
     (b : ℝ) (hb : 0 < b)
@@ -576,7 +577,7 @@ theorem cofinalSpectralUpgrade_asymptoticallyCompact_exact
     (e : ∀ X, ι → EuclideanSpace ℂ (d X × d X)) (he : ∀ X, Orthonormal ℂ (e X))
     (hspan : ∀ X, Submodule.span ℂ (Set.range (e X)) = M X)
     (hMker : ∀ X,
-      M X ≤ LinearMap.ker (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap)
+      M X ≤ LinearMap.ker (MathPhys.commutantLaplacianCLM (c X)).toLinearMap)
     (Mlim : Submodule ℂ Hlim) [Mlim.HasOrthogonalProjection]
     (elim : ι → Hlim) (helim : Orthonormal ℂ elim)
     (hspanlim : Submodule.span ℂ (Set.range elim) = Mlim)
@@ -584,52 +585,52 @@ theorem cofinalSpectralUpgrade_asymptoticallyCompact_exact
     (γstar : ℝ) (hγ : 0 < γstar)
     (hD3 : ∀ᶠ X in atTop, ∀ B : EuclideanSpace ℂ (d X × d X),
       γstar * ‖B - (M X).starProjection B‖ ^ 2 ≤
-        ‖RenewalGeometry.jointCommutatorCLM (c X) B‖ ^ 2)
+        ‖MathPhys.jointCommutatorCLM (c X) B‖ ^ 2)
     (hAC : CofinallyAsymptoticallyCompactFamily J Jlim
-      (fun X ↦ ennrealBoundedOperatorEnergy (RenewalGeometry.jointCommutatorCLM (c X)))
+      (fun X ↦ ennrealBoundedOperatorEnergy (MathPhys.jointCommutatorCLM (c X)))
       (ennrealOperatorGraphEnergy D A))
     (hcompl : Mlim ≠ ⊤) :
     (∀ᶠ X in atTop,
-      LinearMap.ker (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap = M X ∧
+      LinearMap.ker (MathPhys.commutantLaplacianCLM (c X)).toLinearMap = M X ∧
         ∀ T : Matrix (d X) (d X) ℂ,
-          T ∈ RenewalGeometry.matCommutant
+          T ∈ MathPhys.matCommutant
               ((StarAlgebra.adjoin ℂ (Set.range (c X)) :
                 StarSubalgebra ℂ (Matrix (d X) (d X) ℂ)) : Set (Matrix (d X) (d X) ℂ)) ↔
-            RenewalGeometry.matrixL2 T ∈ M X) ∧
+            MathPhys.matrixL2 T ∈ M X) ∧
       operatorGraphKernel D A = Mlim ∧
       FiniteDimensional ℂ Mlim ∧ Module.finrank ℂ Mlim = Fintype.card ι ∧
       -- eq:limit-gap
-      0 < γstar ∧ γstar ≤ RenewalGeometry.graphLimitComplementGap R Mlim b ∧
+      0 < γstar ∧ γstar ≤ MathPhys.graphLimitComplementGap R Mlim b ∧
       (∃ v : Hlim, ∃ hv : v ∈ D, v ≠ 0 ∧ v ∈ Mlimᗮ ∧
-        R v = (((RenewalGeometry.graphLimitComplementGap R Mlim b + b)⁻¹ : ℝ) : ℂ) • v ∧
-        ‖A ⟨v, hv⟩‖ ^ 2 = RenewalGeometry.graphLimitComplementGap R Mlim b * ‖v‖ ^ 2) ∧
+        R v = (((MathPhys.graphLimitComplementGap R Mlim b + b)⁻¹ : ℝ) : ℂ) • v ∧
+        ‖A ⟨v, hv⟩‖ ^ 2 = MathPhys.graphLimitComplementGap R Mlim b * ‖v‖ ^ 2) ∧
       (∀ v : Hlim, ∀ hv : v ∈ D,
-        RenewalGeometry.graphLimitComplementGap R Mlim b *
+        MathPhys.graphLimitComplementGap R Mlim b *
             ‖v - Mlim.starProjection v‖ ^ 2 ≤ ‖A ⟨v, hv⟩‖ ^ 2) ∧
       -- eq:cofinal-norm-resolvent
       IsCompactOperator R ∧
-      Tendsto (J.compressedOperator (RenewalGeometry.jointCommutatorResolventFamily c b))
+      Tendsto (J.compressedOperator (MathPhys.jointCommutatorResolventFamily c b))
         atTop (𝓝 (transportedLimitOperator Jlim R)) ∧
       -- eq:cofinal-spectral-upgrade
-      Tendsto (fun X ↦ RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b) atTop
-        (𝓝 (RenewalGeometry.graphLimitComplementGap R Mlim b)) ∧
+      Tendsto (fun X ↦ MathPhys.jointCommutatorFirstPositiveGap (c X) b) atTop
+        (𝓝 (MathPhys.graphLimitComplementGap R Mlim b)) ∧
       (∀ᶠ X in atTop,
-        0 < RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b ∧
+        0 < MathPhys.jointCommutatorFirstPositiveGap (c X) b ∧
           Module.End.HasEigenvalue
-            (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap
-            ((RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b : ℝ) : ℂ) ∧
+            (MathPhys.commutantLaplacianCLM (c X)).toLinearMap
+            ((MathPhys.jointCommutatorFirstPositiveGap (c X) b : ℝ) : ℂ) ∧
           ∀ ν : ℝ, 0 < ν →
             Module.End.HasEigenvalue
-              (RenewalGeometry.commutantLaplacianCLM (c X)).toLinearMap (ν : ℂ) →
-              RenewalGeometry.jointCommutatorFirstPositiveGap (c X) b ≤ ν) ∧
+              (MathPhys.commutantLaplacianCLM (c X)).toLinearMap (ν : ℂ) →
+              MathPhys.jointCommutatorFirstPositiveGap (c X) b ≤ ν) ∧
       Tendsto (J.compressedOperator
-          (fun X ↦ RenewalGeometry.jointCommutatorKernelProjection (c X)))
+          (fun X ↦ MathPhys.jointCommutatorKernelProjection (c X)))
         atTop (𝓝 (transportedLimitOperator Jlim Mlim.starProjection)) ∧
       -- eq:cofinal-coercivity
-      (∀ γ0 : ℝ, 0 < γ0 → γ0 < RenewalGeometry.graphLimitComplementGap R Mlim b →
+      (∀ γ0 : ℝ, 0 < γ0 → γ0 < MathPhys.graphLimitComplementGap R Mlim b →
         ∀ᶠ X in atTop, ∀ B : EuclideanSpace ℂ (d X × d X),
           γ0 * ‖B - (M X).starProjection B‖ ^ 2 ≤
-            ‖RenewalGeometry.jointCommutatorCLM (c X) B‖ ^ 2) := by
+            ‖MathPhys.jointCommutatorCLM (c X) B‖ ^ 2) := by
   -- the parent theorem
   obtain ⟨hcofinalKernel, hlimgap, hlimker⟩ :=
     derivedKernelCofinalDuality_exact c hstar J Jlim (ennrealOperatorGraphEnergy D A) hD1 M e he
@@ -651,7 +652,7 @@ theorem cofinalSpectralUpgrade_asymptoticallyCompact_exact
       hDdense b hb hlimitEquation hcc M (Eventually.of_forall hMker) Mlim hMlim
       (Eventually.of_forall fun X ↦ (hrankX X).trans hranklim.symm) hcompl
   -- eq:limit-gap: test the parent's limiting gap on the attained eigenvector
-  have hγle : γstar ≤ RenewalGeometry.graphLimitComplementGap R Mlim b := by
+  have hγle : γstar ≤ MathPhys.graphLimitComplementGap R Mlim b := by
     obtain ⟨v, hv, hv0, hvperp, -, henergy⟩ := hvec
     have hPv : Mlim.starProjection v = 0 :=
       (Submodule.starProjection_apply_eq_zero_iff (K := Mlim)).mpr hvperp
@@ -663,11 +664,11 @@ theorem cofinalSpectralUpgrade_asymptoticallyCompact_exact
   exact ⟨hcofinalKernel, hMlim, hfin, hranklim, hγ, hγle, hvec, hvar, hcompactR, hTconv,
     hgap, heig, hproj, fun γ0 _ hγ0 ↦ hcoer γ0 hγ0⟩
 
-end RenewalGeometry.VaryingHilbert.System
+end MathPhys.VaryingHilbert.System
 
 /-! ### Non-vacuity witness -/
 
-namespace RenewalGeometry.VaryingHilbert.System.UnboundedSpectralUpgradeWitness
+namespace MathPhys.VaryingHilbert.System.UnboundedSpectralUpgradeWitness
 
 /-- **Non-vacuity of `cofinalSpectralUpgrade_asymptoticallyCompact_exact`.**  All hypotheses
 (including (D1)–(D3) of `thm:cofinal-duality`, asymptotic form compactness of the cofinal
@@ -675,16 +676,16 @@ family and the nonzero complement) hold for the constant cutoffs `c_X = diag(1, 
 matrices, whose commutant is a proper subspace; the theorem then yields a positive limit gap and
 norm-resolvent convergence. -/
 theorem cofinalSpectralUpgrade_asymptoticallyCompact_nonvacuous :
-    0 < RenewalGeometry.graphLimitComplementGap Rw Kw 1 ∧
+    0 < MathPhys.graphLimitComplementGap Rw Kw 1 ∧
       Tendsto (Jw.compressedOperator
-          (RenewalGeometry.jointCommutatorResolventFamily (fun _ : ℕ ↦ gen) 1))
+          (MathPhys.jointCommutatorResolventFamily (fun _ : ℕ ↦ gen) 1))
         atTop (𝓝 (transportedLimitOperator LinearIsometry.id Rw)) := by
   obtain ⟨-, -, -, -, hγ, hγle, -, -, -, hT, -⟩ :=
     cofinalSpectralUpgrade_asymptoticallyCompact_exact (fun _ ↦ gen) hstar Jw LinearIsometry.id
-      hcompatW ⊤ (boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM gen)) Rw hmoscoT
+      hcompatW ⊤ (boundedOperatorGraphMap (MathPhys.jointCommutatorCLM gen)) Rw hmoscoT
       hDdense 1 one_pos hlimitEquation (fun _ ↦ Kw) (fun _ ↦ ew) (fun _ ↦ ew_orthonormal)
       (fun _ ↦ ew_span) (fun _ ↦ Kw_le_ker) Kw ew ew_orthonormal ew_span hη _ gap_pos hD3
       (cofinallyAsymptoticallyCompactFamily_of_properSpace Jw LinearIsometry.id _ _) Kw_ne_top
   exact ⟨hγ.trans_le hγle, hT⟩
 
-end RenewalGeometry.VaryingHilbert.System.UnboundedSpectralUpgradeWitness
+end MathPhys.VaryingHilbert.System.UnboundedSpectralUpgradeWitness

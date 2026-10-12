@@ -14,7 +14,7 @@ The regular word carrier `𝒲 = L²(A, τ_reg)` is encoded as a finite-dimensio
 normed star ring `A` carrying an inner product which is the regular-trace form
 `⟨x, y⟩ = τ_reg(x^* y)`, where `τ_reg(z) = D⁻¹ Tr_A(L_z)` is the normalised trace of
 left multiplication (`D = dim_ℂ A`; this is the same formula as
-`RenewalGeometry.normalizedRegularTrace`, and equals `D⁻¹ ∑_β n_β Tr(z_β)` in the
+`MathPhys.normalizedRegularTrace`, and equals `D⁻¹ ∑_β n_β Tr(z_β)` in the
 Wedderburn form `A ≅ ⊕_β M_{n_β}(ℂ)`).  The symmetries `U_g x = α_g(x)` are given by a
 group homomorphism `α : G →* (A ≃ₗᵢ[ℂ] A)` with `α_g(1) = 1`; the inner automorphisms
 `α_g = Ad(u_g)` by unitaries of the paper are a special case

@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.GowdyActionTestJetBounds
-import RenewalGeometry.Gravity.GowdyHigherOrderStateError
+import MathPhys.Gravity.GowdyHigherOrderStateError
+open MathPhys
 
 /-!
 # The independent action test of the Gowdy regulator
@@ -46,6 +47,7 @@ open Set Finset
 open scoped BigOperators ContDiff
 
 namespace RenewalGeometry.GowdyStaggered.ActionTest
+open MathPhys.GowdyStaggered
 
 noncomputable section
 

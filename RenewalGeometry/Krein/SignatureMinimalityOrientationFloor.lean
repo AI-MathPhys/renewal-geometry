@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Krein.SupplementSignatureMinimality
 import RenewalGeometry.Predictive.OperationalEntranceCategory
+open MathPhys
 
 /-!
 # Irreducible sign and Lorentzian inertia, with the orientation floor

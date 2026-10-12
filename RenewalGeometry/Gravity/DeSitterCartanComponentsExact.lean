@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Lorentz.DiscreteCartan
 import RenewalGeometry.Gravity.RelationalDeSitterBranch
+open MathPhys
 
 /-!
 # Cartan curvature of the homogeneous de Sitter branch in components

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
 import RenewalGeometry.Continuum.EinsteinSMMeshPacket
-import RenewalGeometry.Action.CriticalShadowingExact
+import MathPhys.Variational.CriticalShadowingExact
+open MathPhys
 
 /-!
 # Smooth sampling is a consistency realization (`prop:smooth-sampling`)
@@ -33,6 +35,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace Comparison
 
 open SobolevOpen (pd)
@@ -115,10 +118,10 @@ theorem packetBound_of_C11 (Q : ChartBox T) {Ke : Set CoframeFibre} (z : SmoothF
     have c1 := norm_comm_le (z.z.A x μ) (z.z.A x ν)
     have e1 := mul_le_mul (hzA x μ) (hzA x ν) (norm_nonneg _) hB
     have t1 := norm_add_le (pd (fun y => z.z.A y ν) μ x - pd (fun y => z.z.A y μ) ν x)
-      (comm (z.z.A x μ) (z.z.A x ν))
+      (MathPhys.EinsteinSM.comm (z.z.A x μ) (z.z.A x ν))
     have t2 := norm_sub_le (pd (fun y => z.z.A y ν) μ x) (pd (fun y => z.z.A y μ) ν x)
     show ‖pd (fun y => z.z.A y ν) μ x - pd (fun y => z.z.A y μ) ν x +
-      comm (z.z.A x μ) (z.z.A x ν)‖ ≤ c
+      MathPhys.EinsteinSM.comm (z.z.A x μ) (z.z.A x ν)‖ ≤ c
     simp only [c]
     nlinarith
   have hcov : ∀ x, ‖covDerivHiggs z.z.A z.z.H x‖ ≤ c := fun x => by

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Topology.FiniteInverseSystemPruning
-import RenewalGeometry.Algebra.EquivariantOrbitDecomposition
+import MathPhys.Topology.FiniteInverseSystemPruning
+import MathPhys.Algebra.EquivariantOrbitDecomposition
+import MathPhys.SpectralGeometry.CompactGroupOrbitQuotient
+open MathPhys
 
 /-!
 # Compact finite-stage inverse systems
@@ -13,7 +15,7 @@ import RenewalGeometry.Algebra.EquivariantOrbitDecomposition
 Paper `predictive_spectral_geometry`, `def:supp-compact-fibre-system` and
 `lem:supp-fibre-pruning`.
 
-* `CompactGroupQuotient`: a compact topological group acting continuously on a compact Hausdorff
+* `CompactGroupQuotient` (in `CompactGroupOrbitQuotient`): a compact topological group acting continuously on a compact Hausdorff
   space acts properly, so the orbit space is compact Hausdorff
   (`compactSpace_orbitQuotient`, `t2Space_orbitQuotient`).
 * `RestrictionSystem`: stages `F_n` with restriction maps `r_{m,n} : F_m → F_n` (`m ≥ n`),
@@ -45,31 +47,9 @@ open Filter Topology Set MulAction
 noncomputable section
 
 namespace RenewalGeometry.CompactFiniteStage
+open MathPhys.CompactFiniteStage
 
 universe u
-
-/-! ### Compact group quotients -/
-
-section CompactGroupQuotient
-
-variable {G X : Type*} [Group G] [TopologicalSpace G] [CompactSpace G]
-  [MulAction G X] [TopologicalSpace X] [CompactSpace X] [T2Space X] [ContinuousSMul G X]
-
-/-- A compact group acting continuously on a compact Hausdorff space acts properly. -/
-theorem properSMul_of_compactSpace : ProperSMul G X :=
-  ⟨(continuous_smul.prodMk continuous_snd).isProperMap⟩
-
-/-- The orbit space of a compact group acting continuously on a compact Hausdorff space is
-Hausdorff. -/
-theorem t2Space_orbitQuotient : T2Space (orbitRel.Quotient G X) := by
-  have := properSMul_of_compactSpace (G := G) (X := X)
-  exact t2Space_quotient_mulAction_of_properSMul
-
-/-- The orbit space of a compact space is compact. -/
-theorem compactSpace_orbitQuotient : CompactSpace (orbitRel.Quotient G X) :=
-  Quotient.compactSpace
-
-end CompactGroupQuotient
 
 /-! ### Restriction systems `r_{m,n}` -/
 
@@ -345,7 +325,7 @@ theorem fibre_pruning :
 
 /-! ### Orbit-type decomposition -/
 
-open RenewalGeometry.EquivariantOrbit
+open MathPhys.EquivariantOrbit
 
 /-- The equivariant projection `Factors_n → Corr_n`. -/
 def corrMap (n : ℕ) : EquivariantMap (S.G n) (S.Factors n) (S.Corr n) :=

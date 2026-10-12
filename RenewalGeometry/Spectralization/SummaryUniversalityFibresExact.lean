@@ -5,11 +5,12 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.StationaryRenewalGraphCurrentFibreExact
 import RenewalGeometry.Spectralization.NonlinearAffinityHodgeExact
-import RenewalGeometry.Spectralization.OperatorTailMeasureNaimarkUniquenessExact
-import RenewalGeometry.Predictive.RationalKreinCanonicalRealization
-import RenewalGeometry.Spectralization.MarkedSpectralBundleDescentExact
+import MathPhys.SpectralGeometry.OperatorTailMeasureNaimarkUniquenessExact
+import MathPhys.SystemsTheory.RationalKreinCanonicalRealization
+import MathPhys.SpectralGeometry.MarkedSpectralBundleDescentExact
 import RenewalGeometry.Predictive.UniversalityPacketFunctorExact
 import RenewalGeometry.Spectralization.StratifiedInverseFibreExhaustionExact
+open MathPhys
 
 /-!
 # Universality fibres and coarse graining (assembly)
@@ -118,7 +119,7 @@ theorem summary_universality :
         (∀ h, S (P₁.Γ h) = P₂.Γ h) ∧ (∀ x, S (P₁.A x) = P₂.A (S x)) ∧
           (∀ x y, P₂.form (S x) (S y) = P₁.form x y)) ∧
     -- (iii) global classification by the monodromy class
-    (∀ {G : NCG.Multigraph.{uV, uE}} {Γ : Type uΓ} [Group Γ] (U U' : G.E → Γ) {v₀ : G.V},
+    (∀ {G : MathPhys.Multigraph.{uV, uE}} {Γ : Type uΓ} [Group Γ] (U U' : G.E → Γ) {v₀ : G.V},
       G.ConnectedTo v₀ →
       (GaugeEquivalent U U' ↔
         ∃ c : Γ, ∀ p : G.Walk v₀ v₀, holonomy U' p = c⁻¹ * holonomy U p * c)) ∧

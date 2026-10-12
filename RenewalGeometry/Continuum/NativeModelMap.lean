@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeDiracEulerRows
+open MathPhys
 
 /-!
 # The native model map: physical representation data and the matter field equations

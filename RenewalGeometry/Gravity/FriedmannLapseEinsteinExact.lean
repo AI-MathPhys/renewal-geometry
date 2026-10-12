@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Gravity.CoordinateCurvatureJetLipschitz
+import MathPhys.Gravity.CoordinateCurvatureJetLipschitz
 import RenewalGeometry.Gravity.RenewalFriedmannExact
+open MathPhys
 
 /-!
 # The full lapse-varied vacuum Einstein equation of the homogeneous renewal sector

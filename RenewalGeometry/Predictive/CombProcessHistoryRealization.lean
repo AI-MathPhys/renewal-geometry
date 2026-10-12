@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Predictive.SequentialIsometricCombRealization
+import MathPhys.SystemsTheory.SequentialIsometricCombRealization
 import RenewalGeometry.Predictive.ProcessHistoryRepresentation
+open MathPhys
 
 /-!
 # Process-history representation of a sequential comb realization
@@ -57,6 +58,7 @@ open scoped ComplexOrder Kronecker
 
 namespace RenewalGeometry
 namespace SequentialComb
+open MathPhys.SequentialComb
 
 open ProcessHistory
 
@@ -146,6 +148,17 @@ theorem sum_combCarrier_succ {k : ℕ} {M : Type*} [AddCommMonoid M]
   refine Finset.sum_congr rfl fun o _ => ?_
   rw [Fintype.sum_prod_type]
   rfl
+
+end SequentialComb
+end RenewalGeometry
+
+namespace MathPhys
+namespace SequentialComb
+open RenewalGeometry.SequentialComb RenewalGeometry.ProcessHistory
+
+universe u
+
+variable {O I : Type u} [Fintype O] [Fintype I] [DecidableEq O] [DecidableEq I]
 
 namespace SequentialIsometricComb
 
@@ -278,6 +291,19 @@ def typedBranches {Arr : Type*} (slot : Arr → Fin N) {K : Type*} [Fintype K]
   ⟨fun a => MatrixKraus.krausMap fun ν => reducedKraus (C.link (slot a)) (kv a ν)⟩
 
 end SequentialIsometricComb
+
+end SequentialComb
+end MathPhys
+
+namespace RenewalGeometry
+namespace SequentialComb
+open MathPhys.SequentialComb
+
+open ProcessHistory
+
+universe u
+
+variable {O I : Type u} [Fintype O] [Fintype I] [DecidableEq O] [DecidableEq I]
 
 /-! ## The explicit Hilbert–Schmidt transport -/
 

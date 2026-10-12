@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeRecordRows
 import RenewalGeometry.Continuum.NativeTailTransferBounds
+open MathPhys
 
 /-!
 # From native records on the `2π` grid to actual field tuples of the slab model
@@ -35,6 +36,7 @@ open Finset Set
 open scoped Matrix ContDiff Real
 
 namespace RenewalGeometry.RecordTuple
+open MathPhys.RecordTuple
 
 open SobolevOpen (pd)
 open DiscreteEulerConsistency (R4 evec jet1 contEuler)

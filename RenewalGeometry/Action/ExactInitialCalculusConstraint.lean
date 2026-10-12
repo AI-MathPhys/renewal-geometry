@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactInitialCalculusSolve
 import RenewalGeometry.Action.ExactInitialCalculusPartials
+open MathPhys
 
 /-!
 # The four original lapse–shift rows on the grid Sobolev spaces, with mesh-uniform bounds
@@ -33,6 +34,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.InitialCalculus
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

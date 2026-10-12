@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMSlabRegularity
-import RenewalGeometry.Analysis.SobolevBoxCrEmbedding
+import MathPhys.Analysis.SobolevBoxCrEmbedding
+open MathPhys
 
 /-!
 # The slab Sobolev class `C_tH^s ∩ C¹_tH^{s-1} ∩ C²_tH^{s-2}` (`cor:strong-solution-upgrade`,
@@ -45,6 +47,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace SlabSob
 
 open SobolevOpen (pd)

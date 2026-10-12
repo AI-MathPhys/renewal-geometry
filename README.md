@@ -4,8 +4,8 @@ A [Lean 4](https://lean-lang.org/) / [Mathlib](https://github.com/leanprover-com
 formalization of **Renewal Geometry**, the programme in which spacetime,
 spectral (noncommutative) geometry and Standard-Model internal structure are
 reconstructed as effective descriptions of a common finite predictive
-structure, together with the generic **noncommutative-geometry** machinery
-that Mathlib does not yet contain.
+structure, together with the generic **mathematical-physics machinery** the
+proofs need and Mathlib does not yet contain.
 
 The repository is the proof backend of four companion papers (see
 [Papers](#papers)). Every named statement of every paper is tracked in a
@@ -16,15 +16,15 @@ encoded, and what is still open.
 
 | Library | Role | Size |
 |---|---|---|
-| **`NCG`** | Generic noncommutative geometry, stated with no reference to renewal processes: completely positive maps and channel monoids, Schwarz/Choi theory, Clifford and Jordan algebra, spectral triples, Krein spaces and signed sectors classified by `H¹(G, ℤ/2)`, graph cohomology and covers, and a complete Perron–Frobenius theorem. Candidate material for Mathlib. | 56 files, ~11k lines |
-| **`RenewalGeometry`** | The programme itself, built on `NCG`: renewal memories and predictive quotients, the operational/statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, and the finite spectralization, commutant-duality, action-reconstruction and Einstein-regulator results cited by the papers. | 2041 files, ~790k lines |
+| **`MathPhys`** | Generic mathematical physics, analysis, algebra and geometry with no reference to the programme: known theorems from the literature (Uhlenbeck's Coulomb gauge theorem, Kato's local existence, Perron–Frobenius, Mosco convergence, Lichnerowicz's conformal method, …) and the general infrastructure behind the papers (Sobolev spaces on domains, grids and tori, symmetric-hyperbolic energy estimates, the continuum Einstein–Standard-Model field equations, finite-dimensional operator algebras, lattice gauge theory). Depends on Mathlib only. | 1340 files, ~484k lines |
+| **`RenewalGeometry`** | The programme itself, built on `MathPhys`: renewal memories and predictive quotients, the operational and statistical-mechanics upstream layer, Lorentzian emergence and dimension selection, the finite spectralization, commutant-duality and Standard-Model synthesis, the explicit finite actions, records, certificates and regulator sequences of the four papers. | 797 files, ~317k lines |
 
-`NCG` never imports `RenewalGeometry`; this is enforced by
+`MathPhys` never imports `RenewalGeometry`; this is enforced by
 [`scripts/check_layering.py`](scripts/check_layering.py) in CI.
 
 ### Verification guarantees
 
-- **Sorry-free.** `lake build` kernel-checks all 2097 files; there is no `sorry`.
+- **Sorry-free.** `lake build` kernel-checks all 2137 files; there is no `sorry`.
 - **Standard axioms only.** Every Lean declaration cited as *proved* in a
   paper ledger is audited with `#print axioms` by
   [`scripts/audit_axioms.py`](scripts/audit_axioms.py): only `propext`,
@@ -35,66 +35,62 @@ encoded, and what is still open.
   [`lake-manifest.json`](lake-manifest.json); Mathlib is the only dependency.
 - **Faithfulness over coverage.** A ledger record is *proved* only when the
   Lean theorem covers the paper's claim in the generality stated; any scoped
-  hypothesis is spelled out in the record's note. Partial results (a special
-  case, one direction, a finite model) stay *open* and say what is missing.
+  hypothesis is spelled out in the record's note. Partial results stay *open*
+  and say what is missing.
 
-## What is in `NCG`
+## What is in `MathPhys`
 
-| Folder | Contents |
-|---|---|
-| `NCG/Algebra` | Positive and completely positive maps, the unital channel monoid, Schwarz maps, Choi's multiplicative domain, projective defects and 2-cocycles, Clifford/Jordan generation, spin factors, Euclidean Jordan rank-two faces, radical–centre structure, symplectic forms |
-| `NCG/SpectralTriple`, `NCG/Operator` | Spectral triples `(𝒜, ℋ, D)`, diagonal/length operators, clock scaling, fibre dichotomy |
-| `NCG/Krein` | Fundamental symmetries, Krein forms and the positivity obstruction, the irreducible no-go, signed covers as Krein data, the canonical temporal row, the signed modular Dirac operator, enrichment classification via `H¹(G, ℤ/2)`, amplitude lifts |
-| `NCG/Graph` | Directed multigraphs, sign cocycles, principal `ℤ/2`-covers with deck actions, `H¹(G, ℤ/2)` and `ℤ/4` cohomology, Betti numbers, record orientation, condensation and decimation |
-| `NCG/PerronFrobenius` | The Perron–Frobenius theorem for irreducible nonnegative matrices, stated in the `Matrix` namespace against Mathlib's `Matrix.IsIrreducible` (see below) |
-
-### Highlight: a Mathlib-ready Perron–Frobenius theorem
-
-Mathlib defines irreducible nonnegative matrices but has no Perron–Frobenius
-theorem. `NCG` proves the full package over an arbitrary finite index type:
-
-- **Existence & positivity**
-  ([`PerronExistence.lean`](NCG/PerronFrobenius/PerronExistence.lean)): every
-  irreducible nonnegative real matrix has a strictly positive eigenvalue with
-  an entrywise positive right (and left) eigenvector
-  (`Matrix.IsIrreducible.exists_pos_eigenvector`), by the Collatz–Wielandt
-  variational argument. Key stepping stone: `1 + A` is primitive.
-- **Uniqueness & simplicity**: the Perron eigenvalue is the only eigenvalue
-  with a positive eigenvector and its eigenspace is one-dimensional.
-- **Spectral-radius characterization**
-  ([`PerronPressure.lean`](NCG/PerronFrobenius/PerronPressure.lean)): the
-  Perron eigenvalue equals the Gelfand–Fekete growth rate of the matrix
-  powers, connecting eigenvector theory to the eigenvector-free pressure
-  calculus used by the papers.
-
-## What is in `RenewalGeometry`
-
-Folders are organized by mathematical content. Only files reachable from a
-paper ledger are included; the private development tree is larger.
+Folders are organized by mathematical content; every file is generic and
+could be upstreamed.
 
 | Folder | Files | Contents |
 |---|---:|---|
-| `Renewal` | 39 | Renewal memories, the predictive quotient monoid and its length, predictive posets, Bowen-pressure calibration, Dirichlet/zeta abscissas, renewal Weyl dichotomy, Ehrhart growth, spectral and metric dimensions, graded automata, renewal profiles and horizons |
-| `Predictive` | 118 | Reconstructing a process from its futures: derived state machines, right congruences, minimal records, readable relational completion, comb and Hankel tomography, source identifiability, word modules, accepted-bit kernels, predictive carriers |
-| `Operational` | 60 | Operational process systems, the UCP/channel bridge, sharp purification, Petz retrodiction and KMS duality, record algebras and pointer selection, complete positivity of the Lindblad semigroup, monoidal quotient categories, Uhlmann/Petz/BKM entropy programme |
-| `Measurement` | 14 | Pointer records, Born weights, Lüders/Kraus decompositions, apparent collapse, redundancy and objectivity |
-| `StatMech` | 35 | The 2d Ising phase-coexistence suite (Peierls with the proved planar circuit count, DLR Gibbs states, Dobrushin uniqueness), Curie–Weiss, large deviations, exponential tilts, SCGF/Legendre duals, Chernoff bounds, KL identities |
-| `MarkovChains` | 10 | Finite Markov chains and CTMCs: Metzler generators, Doob transforms, lumpability, rewards, affinity classes, Birkhoff ergodic theorem |
-| `Lorentz` | 60 | Lorentzian emergence: discrete Cartan calculus, Clifford rounding, Krein–Clifford signature, marked-torus classification, frame universality, pressure and modular-exponent selection, heat-bath convergence, Dobrushin mixing, interference closure, Lorentz-group invariants |
-| `Dimension` | 41 | Selection of `3+1` dimensions: access efficiency, even rank, isotropy, tight frames, power counting, cut–cycle dimension counts |
-| `Spectralization` | 104 | From predictive data to spectral geometry: the finite spectralization functor and its essential image, Hodge–Dirac packets and derivations, graph Hodge–Dirac spectral fibres, Connes distance, A₃ lattice metric convergence, Naimark dilation |
-| `Commutant` | 114 | Commutant and double-centralizer theory: Wedderburn and factor normal forms, bicommutants, polar edges and holonomy, quiver commutants, typed multiplicity, Howe duality certificates, cofinal/coercive duality, commutant gaps |
-| `StandardModel` | 109 | The gauge group `S(U(3)×U(2))`, hypercharge from anomaly cancellation, generations, Yukawa/Majorana sectors, Clifford matter, structural Standard-Model carriers, SM descent, determinant incidence and routers |
-| `Action` | 59 | Finite action reconstruction: common action, stationarity and jets, K₄ selectors, determining kernels, reward pressure and Gibbs gaps, score control, exact finite actions, the finite common-action interface |
-| `Gravity` | 151 | Relational ADM (lapse, shift, metric), de Sitter and flat vacuum branches, FLRW, the Einstein handoff, Palatini/Holst, curvature reconstruction, Einstein regulators |
-| `OperatorLimits` | 170 | Convergence of operators on varying Hilbert spaces: Mosco convergence, strong/norm resolvent limits, collective compactness, compact screens, operator-graph energies, semigroups and Duhamel bounds, spectral convergence and Riesz projections |
-| `DiscreteAnalysis` | 82 | Analysis on finite graphs and lattices: finite torus Fourier symbols, covariant symbols, plaquette expansions, coercive Hodge operators, A₃ periodic sampling, graph Poincaré/Weyl/Nash/Sobolev bounds, Loomis–Whitney, flows and cuts |
-| `Continuum` | 33 | Continuum function-space analysis: Sobolev compactness, interpolation, Vitali and Gaussian kernel estimates, weak–strong pairings, Volterra/Mittag-Leffler |
-| `Certificates` | 15 | The certificate and provenance calculus: typed compilation, provenance compilers, executable statuses, Toeplitz screen obstructions, orientation calibration residuals |
-| `GaugeTheory` | 16 | Lattice Yang–Mills records: slab gaps, Wilson separators, Creutz ratios, regulated mass criteria |
-| `Algebra`, `Krein` | 55 | Finite-dimensional algebra and Krein-space results that need renewal inputs: Kadison–Schwarz for channels, Choi criteria, Jordan faces, Loewner/PSD calculus, Schur block toolkits, cone positivity, enrichment minimality |
-| `Topology`, `Analysis`, `Numerics`, `Complexity`, `Arithmetic` | 92 | Brouwer/Sperner fixed points, singular-value approximation and Gram least squares, rational certificates, finite Boolean circuits, arithmetic loading |
+| `Continuum` | 281 | Continuum Einstein–Standard-Model field theory: field spaces and the variational framework, Noether identities, symmetric-hyperbolic L² and H^k energy estimates, Kato local existence by spectral Galerkin with midpoint schemes, the first-order actual-jet system with sector-wise constraint propagation (Dirac back-reaction included), the Lichnerowicz conformal method, Cauchy–Kovalevskaya, generated finite dynamics and their readouts, weak matter equations, torus Sobolev transfer and Aubin–Lions, critical quotient compactness with defect measures |
+| `Analysis` | 227 | Sobolev spaces on open sets, boxes, balls and tori with the critical embedding H¹ ↪ L⁴, Rellich and Kolmogorov–Riesz compactness, Vitali and de la Vallée-Poussin, mollifiers, L^p duality and weak-* compactness of measures, Gevrey and strip-holomorphic Fourier decay, the analytic implicit function theorem, Lyapunov–Perron, Hermite interpolation; Uhlenbeck's small-energy Coulomb gauge theorem on the 4-ball (divergence theorem and Gaffney inequality on balls, Neumann regularity up to the boundary, Sobolev algebras, implicit-function openness, closedness, continuity method) and the cube/torus reflection theory |
+| `OperatorLimits` | 167 | Convergence of operators on varying Hilbert spaces: Mosco convergence, strong and norm resolvent limits, the pseudo-resolvent theorem, collectively compact operators, Riesz projections, stable spin atlases, variable-coefficient Dirac operators on the torus |
+| `Gravity` | 82 | Coordinate curvature, Christoffel and Bianchi jets, ADM decomposition, the harmonic-gauge Einstein writer on periodic grids with its continuum limit, Gowdy and de Sitter/flat vacuum solutions, Palatini–Holst variations, the actual-jet Einstein–SM system, contracted Bianchi identity and subsidiary constraint energies |
+| `DiscreteAnalysis` | 76 | Lattice Fourier symbols, uniform periodic-grid Sobolev, Poincaré and Loomis–Whitney inequalities, grid Hodge theory, plaquette expansions and finite-difference remainders, analysis on the A3 (FCC) lattice, the harmonic-writer scheme |
+| `Algebra` | 69 | Matrix exponential and logarithm calculus, Pfaffians, free star algebras, completely positive maps and the Kraus/Stinespring layer, Jordan and Clifford algebra, certified weak pencils, canonical reductions |
+| `OperatorAlgebras` | 65 | Finite-dimensional C*- and von Neumann algebra theory: bicommutants, Wedderburn and factor normal forms, Tannaka and Schur, Cauchy–Binet, Howe duality packets, commutant Gram certificates, Peirce decompositions |
+| `SpectralGeometry` | 58 | Graph Connes distances, weighted graph Hodge–Dirac operators, the mesh-graph to Riemannian bridge, finite compact quantum metric spaces, Naimark dilation, operator-valued Stieltjes measures, flat and de Sitter comparisons on the A3 lattice |
+| `GaugeTheory` | 42 | Lattice Coulomb gauge, Wilson transport and holonomy gauge covariance, literal-link compactness, determinant flux and Hodge normalization, the Standard-Model gauge structure used by Uhlenbeck's theorem |
+| `QuantumInformation` | 38 | Quantum relative entropy with Lieb, Petz and BKM, Lindblad generators, unital completely positive maps and channel monoids, purification, resets, quantum combs, Born weights |
+| `LorentzianGeometry` | 37 | Lorentz-group and bivector classification, Clifford rounding and signature facts, discrete Cartan calculus, covariant consistency |
+| `SystemsTheory` | 33 | Descriptor/Weierstrass pencils, Hankel, Kalman and Pontryagin realizations, Moore–Penrose Schur shorts, comb tomography and dilation |
+| `StatMech` | 27 | Curie–Weiss, Ising with Peierls and Dobrushin, Cramér–Chernoff, Birkhoff, BKM forms, Kullback–Leibler chain rules |
+| `Combinatorics` | 23 | Graph cut–cycle decompositions and exterior ranks, tight frames, K₄ representation theory, finite Boolean circuits |
+| `Krein` | 20 | Krein spaces and fundamental symmetries, signed Dirac operators, cone positivity, enrichment classification |
+| `Variational` | 20 | Discrete Euler consistency, finite variation complexes and Hodge projections, the analytic Legendre transform, Gibbs action gaps, Sobolev reader criteria |
+| `GaugeGroups` | 17 | The gauge group S(U(3)×U(2)) and its ℤ₆ quotient, anomaly-forced hypercharges, Yukawa descent blocks, the Minkowski coframe metric and the Einstein–Standard-Model coefficient bank |
+| `OperatorTheory` | 13 | Diagonal operators and fibre dichotomy, Toeplitz operators and number-operator spectral triples, innovation decompositions |
+| `Graph` | 11 | Directed multigraphs, sign cocycles, principal ℤ/2-covers, H¹(G, ℤ/2) and ℤ/4 cohomology, Betti numbers, condensation and decimation |
+| `Probability` | 11 | Renewal and geometric random sums, calibration, face linearization, incidence zeta functions |
+| `MarkovChains` | 10 | Metzler generators, Doob transforms, absorbing classes, affinity cohomology, entropy production |
+| `Topology` | 9 | Brouwer and Sperner fixed points, finite inverse systems and their limits |
+| `PerronFrobenius` | 2 | The Perron–Frobenius theorem for irreducible nonnegative matrices (existence, uniqueness, simplicity, Gelfand–Fekete spectral radius), stated against Mathlib's `Matrix.IsIrreducible` |
+| `NoncommutativeGeometry` | 1 | Spectral triples `(𝒜, ℋ, D)` |
+
+## What is in `RenewalGeometry`
+
+| Folder | Files | Contents |
+|---|---:|---|
+| `Continuum` | 122 | Regulator sequences, compactness and reduced-topology certificates, strong packets and the main limit, the native lattice chain (records, sources, budgets, shadows, Wilson screens), the native-closure bridge |
+| `Gravity` | 115 | Relational ADM branches, the renewal–Palatini handoff and Einstein certification chain, open-writer law families, exact-action Ward identities and cosine defect spectra |
+| `StandardModel` | 99 | The programme's Standard-Model synthesis: internal assemblies, central descent selectors, generations and Yukawa descent, native generations |
+| `Predictive` | 88 | Reconstructing a process from its futures: derived state machines, right congruences, minimal records, readable relations, memory cut-offs and the memory RG semigroup |
+| `Action` | 87 | Finite action reconstruction: the explicit N = 3 phase-compatible action, stationarity and jets, K₄ selectors, determining kernels, native densities and Euler rows |
+| `Commutant` | 57 | Commutant duality of the programme: grand interfaces, loaded Howe packets, source ideals, SMST assemblies, incidence duality |
+| `Spectralization` | 48 | The finite spectralization functor and its essential image, the A3 twelve-root periodic graph chain, saturated Dirac generators, SMST graph regulators |
+| `Operational` | 31 | Operational process systems, the UCP/channel bridge, sharp purification, Petz retrodiction and KMS duality, record algebras |
+| `Renewal` | 30 | Renewal memories, the predictive quotient monoid and its length, predictive posets, Bowen-pressure calibration |
+| `Dimension` | 23 | Selection of `3+1` dimensions: access efficiency, even rank, isotropy, power counting, cut–cycle dimension |
+| `Lorentz` | 23 | Lorentzian emergence: Krein–Clifford signature selection, marked-torus classification, interference closure, pressure gauge |
+| `DiscreteAnalysis` | 13 | Root-parity connectors, coframe renewal packets, positive-Higgs envelopes |
+| `GaugeTheory` | 11 | Lattice Yang–Mills records of the programme: slab gaps, Wilson separators, Creutz ratios, regulated mass criteria, the gauge-robust reader |
+| `StatMech` | 10 | Accepted-action information geometry and the programme's Gibbs selections |
+| `Measurement` | 7 | Pointer records, Lüders/Kraus decompositions, apparent collapse, redundancy and objectivity |
 | `Miscellany` | 6 | Batches of assorted finite records and conditional panels that span several of the topics above |
+| `Certificates`, `Krein`, `Analysis`, `OperatorLimits`, `Numerics`, `Algebra`, `Arithmetic`, `Complexity`, `MarkovChains`, `Topology` | 27 | Small folders: The certificate and provenance calculus: typed compilation, executable statuses, cofinal failure witnesses; positive Krein distinctions and signed covers; threshold banks and Newton certificates; grand universal and marked renewal limits; numerical certificates; finite-dimensional algebra needing renewal inputs; arithmetic records; the P vs NP bridge; discrete clocks;  |
 
 ## Papers
 
@@ -103,13 +99,13 @@ PDF, a `paper.json` manifest, the ledger `statements.json` mapping **every**
 theorem/proposition/lemma/corollary/definition environment to its status and
 Lean declarations, and a generated README listing every record.
 
-| Paper | Statements | Proved | Encoded | Open (partial Lean) | Open (none) | Easy | Medium | Hard |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 88 | 77 | 11 | 0 | 0 | 0 | 0 | 0 |
-| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 198 | 157 | 14 | 25 | 2 | 0 | 0 | 27 |
-| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 123 | 11 | 0 | 0 | 0 | 0 | 0 |
-| [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 107 | 12 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **539** | **464** | **48** | **25** | **2** | **0** | **0** | **27** |
+| Paper | Statements | Proved | Encoded | Open |
+|---|---:|---:|---:|---:|
+| [From Predictive Dynamics to Spectral Geometry](papers/predictive_spectral_geometry/) | 88 | 77 | 11 | 0 |
+| [Renewal Geometry and the Emergence of Lorentzian Spacetime](papers/emergent_spacetime/) | 198 | 157 | 14 | 27 |
+| [Finite-Action Closure and Classical Einstein–Standard-Model Limits](papers/einstein_sm_action_closure/) | 134 | 123 | 11 | 0 |
+| [Spacetime–Gauge Commutant Duality: Finite Rigidity and Cofinal Stability](papers/spacetime_gauge_duality/) | 119 | 107 | 12 | 0 |
+| **Total** | **539** | **464** | **48** | **27** |
 
 How to read the table:
 
@@ -121,9 +117,8 @@ How to read the table:
   *Encoded* means the object is faithfully defined in Lean, with its defining
   conditions and a constructor from the paper's input data, and no proof
   content is claimed.
-- *Open (partial Lean)* records point to Lean that proves a special case, one
-  direction or some clauses; the note says exactly what is missing. *Open
-  (none)* records have no counterpart in the library yet. Every open record
+- *Open* records may point to Lean that proves a special case, one direction
+  or some clauses; the note says exactly what is missing. Every open record
   carries a `difficulty` (easy: a day of assembly; medium: days of new finite
   lemmas; hard: infrastructure neither this library nor Mathlib has, or a
   reformulation) and a `plan` naming the missing piece and the files to build
@@ -143,101 +138,24 @@ How to read the table:
   and says so; these points are collected in the records' notes for the
   author.
 
-Two papers are completely formalized: the predictive-spectral-geometry paper
-and the spacetime–gauge duality paper (every record proved or encoded,
-including the main duality for incidences of arbitrary operator-Schmidt rank,
-the cofinal derived-kernel duality, the structural Standard-Model synthesis,
-the finite Hodge–Dirac reconstruction and its essential images, and the
-compact-spin norm-resolvent theorems on genuine Riemannian manifolds in
-Mathlib's sense). Of the emergent-spacetime paper, the finite and discrete
-content is proved (the ADM and grand-tensor reconstructions, the K₄ and A₃
-selectors, the grid harmonic-gauge Einstein writer with its constructive
-nonsymmetric 3+1 vacuum limit, the Gowdy regulator, the de Sitter and flat
-vacuum regulators, the explicit operational family, the Hodge–temporal and
-literal-link compactness theorems, and the renewal-to-Einstein certification
-chain: connection stationarity of the Palatini–Holst action, the localized
-renewal–Palatini handoff, the vacuum equation from certified variations, the
-general certification theorem and the Einstein-or-failed-certificate
-alternative). One disclosed amendment enters that chain: the first Bianchi
-identity used to make the Holst variation inert does not follow at the
-manuscript's L² connection regularity, so the handoff hypotheses carry an
-additional uniform spatial L³ bound on the connection interpolants (supplied
-by both concrete connection routes of the paper); the field is named
-`spatialConnectionL3Bound` and flagged in every affected record. A full
-re-audit against the 4 October revision (every proved and encoded record read
-against the current statement and the cited Lean) kept 126 records, corrected
-24 notes and reopened 9 records, all of which have since been re-proved (the
-face-linearization stable branch under a disclosed, necessary continuity
-hypothesis). The revision also wrote the explicit N = 3 phase-compatible finite
-action into the appendix; it is now encoded literally (links, literal
-curvatures, Palatini contraction, compensators, phase derivatives, connection
-normal form), with the analytic stationary connection, the Legendre transform
-and canonical Hamiltonian, the quadratic jet H₂, the initial-constraint map
-and its prepared chart, the Ward orders and the harmonic q₄ = 0 law all proved
-for the literal action (standing renderings: χ = 1, Λ = 0, the symmetric
-square-root triad, odd N). The 27 hard open records need input the manuscript
-still does not give: the certified N = 3 event (no triad fixed, no preparation
-equations, no certificate matrix tabulated — the rank-24, (8,8,13) and
-response operators are not computable from the text, though the generic rank,
-pencil and dichotomy reductions are proved), the graded-chart data (C1)–(C4)
-behind the boundary sweeps (the sweep contraction itself is proved), the c_H
-row identification of the slow branch (three unwritten bookkeeping
-identities; a Lean counterexample shows the uniform form of the Ward
-hypothesis is false), the continuum consistency budget of the cofinal
-preparation, and the same-cylinder Cartan reconstruction. The Einstein–Standard-Model closure paper is now
-formalized in full: every one of its 134 records is proved or encoded, none
-is open. Beyond the reduced variational closure, the compactness certificates,
-the defect-measure identities, the native lattice chain, the hyperbolic and
-Dirac stability theory and the actual-jet writer with its coupled bootstrap,
-the last campaign added Uhlenbeck's small-energy Coulomb gauge theorem on the
-Euclidean 4-ball (proved from scratch: divergence theorem and Gaffney
-inequality on the ball, Neumann regularity up to the boundary through rotation
-vector fields, Sobolev algebra, implicit-function openness, closedness and the
-continuity method along dilations, instantiated for the structure group
-S(U(3)×U(2))), the critical quotient defect closure with its distributional
-matter equations and defect measures, the bridge identifying the native Euler
-rows with the field-equation residuals (gravity, Yang–Mills, Higgs, Dirac and
-stress rows, with the gauge sector in the Lie algebra 𝔤 as in the paper), and
-the generated finite dynamics: constraint propagation for the symmetric
-actual-jet system with Dirac back-reaction (Noether identities as hypotheses
-on the theory data with proved variational instances, a symmetriser for the
-coupled constraint subsystem), the physical identification of the Kato
-solution, the Hermite readouts and the stationarity of the collar-completed
-first-order action including its Dirac term. Every rendering choice (spatial
-sections rendered as 𝕋³, compact charts as coordinate boxes or balls,
-trivialised bundles, an adapted Lorentz gauge for the frame bridge, a smooth
-time cut-off for the gauge-robust reader, chart-local smoothness of the theory
-data, finite spectral data P_N U₀ in place of the constrained solver's output)
-is disclosed in the records' notes.
-
-The infrastructure built for these ledgers is general and absent from Mathlib,
-among it: Sobolev spaces on open sets of ℝ^d by weak derivatives with cutoff,
-reflection extension on boxes, local Rellich compactness and the critical
-Sobolev embedding H¹ ↪ L⁴ in four dimensions; Fourier Sobolev spaces on 𝕋^d
-with the C^r, L^p and Rellich embeddings and interpolation; Kolmogorov–Riesz
-compactness on the torus and its charts; de la Vallée-Poussin/Vitali strong
-convergence; weak-* compactness of bounded signed and tensor-valued measures;
-uniform discrete Sobolev, Poincaré and Loomis–Whitney inequalities and Hodge
-theory on periodic grids; the derivative of the matrix exponential and
-logarithm; symmetric-hyperbolic L² and H^k energy estimates, Kato local
-existence by spectral Galerkin with explicit CFL midpoint schemes, quasilinear
-slab stability with the shifted energy multiplier; Whitney forms on simplicial
-meshes; strip-holomorphic and Gevrey Fourier decay; and, from the earlier
-papers, a Courant–Fischer min–max for compact self-adjoint operators; a real
-Moore–Penrose inverse with the four Penrose equations; Davis–Kahan and Wedin
-perturbation bounds; a pseudo-resolvent theorem producing a self-adjoint
-operator from strongly convergent resolvents; transported Mosco convergence
-with norm-resolvent and spectral-projection limits; a uniform discrete Sobolev
-calculus on the periodic grid (Plancherel, product and commutator bounds,
-Moser composition, sampling, Kuhn–Freudenthal interpolation); L^p duality and
-weak compactness; a grid Aubin–Lions theorem; a Riemannian chain-metric bridge
-identifying the optimal Lipschitz constant with the gradient supremum;
-self-adjoint variable-coefficient Dirac operators on the torus built from
-their lattice stages; Haar twirls over SU(2); a matrix Kraus/Stinespring layer;
-free star algebras; spanning trees for multigraphs; Pfaffians; path-ordered
-exponentials with a BCH bound; two-point Hermite interpolation; the
-contracted Bianchi identity and harmonic-gauge constraint propagation at jet
-level; and the Perron–Frobenius theorem of `NCG`.
+Three of the four papers are completely formalized: every record of the
+predictive-spectral-geometry paper, the spacetime–gauge duality paper and the
+Einstein–Standard-Model closure paper is proved or encoded. The
+emergent-spacetime paper is formalized except for 27 hard records
+that need input the manuscript does not yet give (the certified N = 3 event
+with its triad, preparation equations and certificate matrices, the
+graded-chart data behind the boundary sweeps, the c_H row identification of
+the slow branch, the continuum consistency budget of the cofinal preparation,
+and the same-cylinder Cartan reconstruction); its finite and discrete content,
+the explicit phase-compatible finite action and the renewal-to-Einstein
+certification chain are proved. Standing rendering choices (spatial sections
+as 𝕋³, compact charts as coordinate boxes or balls, trivialised bundles,
+χ = 1, Λ = 0, odd N, the symmetric square-root triad) are disclosed in the
+records' notes, as are the few places where the Lean proof uses an amended
+reading of the manuscript (an extra spatial L³ bound in the Palatini handoff,
+a smooth time cut-off for the gauge-robust reader, shift-transported head rows
+in the subsidiary system, an adapted Lorentz gauge for the frame bridge,
+chart-local smoothness of the theory data).
 
 ## Which machinery do the papers actually use?
 
@@ -247,25 +165,13 @@ finer question by walking the proof terms of every ledger-cited declaration:
 
 | | Modules |
 |---|---:|
-| Used by at least one cited declaration | 1422 |
-| Never used, but imported by a used module (structurally required) | 361 |
-| Never used and imported by nothing used (removable without loss) | 314 |
-| **Total** | **2097** |
+| Used by at least one cited declaration | 1448 |
+| Never used, but imported by a used module (structurally required) | 329 |
+| Never used and imported by nothing used (removable without loss) | 360 |
+| **Total** | **2137** |
 
-The removable part is concentrated in the foundation of the *earlier* papers
-of the programme rather than the four tracked here: `Lorentz` (51 of 60
-modules), `Operational` (29), `Renewal` (25), `Dimension` (22), `StatMech`
-(20), `NCG/Algebra` (19 of 24) and `NCG/Krein` (13 of 14). They are kept
-deliberately: they are the generic noncommutative-geometry layer (Krein
-classification, signed Dirac operators, Perron–Frobenius, the Lindblad and
-Ising suites) that earlier stages of the programme were built on, verified to
-the same standard, and available for future noncommutative-geometry work; but
-nothing in the four current ledgers depends on them. Folders that the four
-papers lean on almost entirely are `Commutant`, `StandardModel`,
-`Spectralization`, `Gravity`, `Continuum`, `Analysis`, `DiscreteAnalysis` and
-`Action`;
-`OperatorLimits` is mostly structural (103 of 170 modules are imported but not
-used by any cited proof).
+The unused part is kept because it is developed to the same standard and
+available for future work; nothing in the four ledgers depends on it.
 
 ## Installation
 
@@ -273,7 +179,7 @@ used by any cited proof).
 git clone https://github.com/AI-MathPhys/renewal-geometry
 cd renewal-geometry
 lake exe cache get   # prebuilt Mathlib oleans
-lake build           # kernel-checks NCG and RenewalGeometry
+lake build           # kernel-checks MathPhys and RenewalGeometry
 ```
 
 `lake` comes with the Lean toolchain manager
@@ -284,7 +190,7 @@ this folder.
 ## Verifying the claims yourself
 
 ```bash
-python scripts/check_layering.py               # NCG independent of RenewalGeometry; all modules registered
+python scripts/check_layering.py               # MathPhys independent of RenewalGeometry; all modules registered
 python scripts/check_statement_coverage.py     # every paper statement has a record; every cited Lean declaration exists
 python scripts/check_statement_coverage.py emergent_spacetime --list proved
 python scripts/audit_axioms.py                 # #print axioms on every proved declaration (needs a build)
@@ -300,13 +206,15 @@ cited file. CI runs all of the above on every push.
 ## Repository layout
 
 ```
-NCG/                    -- generic noncommutative geometry (library `NCG`)
-├── Algebra/  Graph/  Krein/  Operator/  PerronFrobenius/  SpectralTriple/  Basic.lean
-RenewalGeometry/        -- the programme (library `RenewalGeometry`, depends on NCG)
-├── Renewal/  Predictive/  Operational/  Measurement/  StatMech/  MarkovChains/
-├── Lorentz/  Dimension/  Spectralization/  Commutant/  StandardModel/  Action/  Gravity/
-├── OperatorLimits/  DiscreteAnalysis/  Continuum/  Certificates/  GaugeTheory/
-├── Algebra/  Krein/  Topology/  Analysis/  Numerics/  Complexity/  Arithmetic/  Miscellany/
+MathPhys/               -- generic mathematical physics (library `MathPhys`, depends on Mathlib only)
+├── Analysis/  Continuum/  Gravity/  OperatorLimits/  DiscreteAnalysis/  Algebra/  OperatorAlgebras/
+├── SpectralGeometry/  GaugeTheory/  QuantumInformation/  LorentzianGeometry/  SystemsTheory/  StatMech/
+├── Combinatorics/  Krein/  Variational/  OperatorTheory/  Graph/  Probability/  MarkovChains/  Topology/
+├── PerronFrobenius/  NoncommutativeGeometry/
+RenewalGeometry/        -- the programme (library `RenewalGeometry`, depends on MathPhys)
+├── Renewal/  Predictive/  Operational/  Measurement/  StatMech/  Lorentz/  Dimension/
+├── Spectralization/  Commutant/  StandardModel/  Action/  Gravity/  Continuum/
+├── DiscreteAnalysis/  GaugeTheory/  Certificates/  OperatorLimits/  Krein/  Miscellany/  ...
 papers/
 ├── predictive_spectral_geometry/   -- .tex, .pdf, paper.json, statements.json, README.md
 ├── emergent_spacetime/
@@ -316,13 +224,14 @@ scripts/
 ├── check_statement_coverage.py     -- ledger checker (--init, --list, --summary)
 ├── check_layering.py               -- import-layering and registration check
 ├── audit_axioms.py                 -- axiom audit of every proved declaration
+├── report_usage.py                 -- proof-term usage report
 └── render_paper_readmes.py         -- per-paper README generator
 ```
 
 ## Design principles
 
-1. **A generic core.** Anything that makes sense without renewal processes
-   lives in `NCG`, follows Mathlib naming and universe conventions, and is
+1. **A generic core.** Anything that makes sense without the programme lives
+   in `MathPhys`, follows Mathlib naming and universe conventions, and is
    meant to be upstreamed.
 2. **General definitions, concrete models.** Definitions are stated at the
    papers' level of generality; operator identities are proved first in

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.NonlinearAffinityHodgeExact
+open MathPhys
 /-!
 # The affinity map is a diffeomorphism; strict convexity of the affinity functional
 

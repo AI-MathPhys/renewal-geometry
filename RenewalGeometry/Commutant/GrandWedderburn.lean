@@ -3,9 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Commutant.GrandMultSaturation
+import MathPhys.OperatorAlgebras.GrandMultSaturation
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Block commutant, bicommutant, and the edge commutant
   (`thm:commutant-decomposition`, `thm:SMST-trinity`,
@@ -30,7 +31,7 @@ algebra acting block-diagonally as `(g⊗1) ⊕ (h⊗1)`:
 
 Rendering disclosed: the reduction of an abstract
 finite-dimensional C*-algebra to this decomposed frame is the
-Artin–Wedderburn classification (`NCG.Matter.FiniteAlgebra`);
+Artin–Wedderburn classification (`MathPhys.Matter.FiniteAlgebra`);
 the general connected-incidence statement iterates the
 single-edge transport along a spanning tree.
 -/

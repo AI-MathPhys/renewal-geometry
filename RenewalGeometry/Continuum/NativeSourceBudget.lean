@@ -4,10 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.AnalyticSourceSobolevUpgrade
+import MathPhys.Analysis.AnalyticSourceSobolevUpgrade
 import RenewalGeometry.Analysis.DyadicRateAsymptotics
-import RenewalGeometry.Analysis.TrigonometricTailBounds
-import RenewalGeometry.Continuum.TorusTrigReconstruction
+import MathPhys.Analysis.TrigonometricTailBounds
+import MathPhys.Continuum.TorusTrigReconstruction
+open MathPhys
 
 /-!
 # Forcing-budget assembly and full-record residual interpolation

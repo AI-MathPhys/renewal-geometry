@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeBosonicEulerRows
+open MathPhys
 
 /-!
 # The Dirac identity of the coframe spin connection and the Dirac Euler rows

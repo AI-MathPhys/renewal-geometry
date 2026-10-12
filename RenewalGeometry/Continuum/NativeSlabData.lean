@@ -6,8 +6,9 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeFrameBridge
 import RenewalGeometry.Continuum.NativeModelExample
-import RenewalGeometry.Continuum.NativeSlabFrameMargin
-import RenewalGeometry.Gravity.ActualJetSmoothness
+import MathPhys.Continuum.NativeSlabFrameMargin
+import MathPhys.Gravity.ActualJetSmoothness
+open MathPhys
 
 /-!
 # The slab theory data of a native model (bridge step P2 of `thm:native-closure`)
@@ -60,6 +61,7 @@ open Finset
 open scoped ContDiff
 
 namespace RenewalGeometry.SlabData
+open MathPhys.SlabData
 
 open ActualJetSystem ActualJetSmooth NativeDensity NativeModel NativeFrameBridge
 open NativeScaling (Mat eta)

@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Action.FiniteGibbsActionGap
+import MathPhys.Variational.FiniteGibbsActionGap
+open MathPhys
 
 /-!
 # The path Gibbs entropy–energy bound of a finite positive offset/acceptance realization

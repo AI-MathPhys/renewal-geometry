@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.GraphSupportPolarDuality
 import RenewalGeometry.Commutant.IntrinsicCoefficientQuiver
+open MathPhys
 
 /-!
 # Support-polar duality for an arbitrary finite incidence bank

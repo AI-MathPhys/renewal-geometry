@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.InternalSeedSaturationExact
+open MathPhys
 
 /-!
 # The complete labelled `S₄` census (`eq:SM-complete-census`)

@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.GaugeTheory.TemporalGaugeMixedBounds
-import RenewalGeometry.GaugeTheory.GaugeReaderSobolevTail
+import MathPhys.GaugeTheory.TemporalGaugeMixedBounds
+import MathPhys.GaugeTheory.GaugeReaderSobolevTail
+open MathPhys
 
 /-!
 # The weak-sector reader certificate (`cor:gauge-robust-reader`, assembled)

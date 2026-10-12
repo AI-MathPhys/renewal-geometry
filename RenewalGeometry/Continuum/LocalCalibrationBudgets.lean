@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeSourceTheorem
-import RenewalGeometry.Continuum.TrigInterpolationConvergence
+import MathPhys.Continuum.TrigInterpolationConvergence
+open MathPhys
 
 /-!
 # Sampled smooth solutions: seam-local row bound and vanishing forcing budget

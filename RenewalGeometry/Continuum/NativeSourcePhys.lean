@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeSourceTheorem
 import RenewalGeometry.Continuum.NativePhysRows
+open MathPhys
 
 /-!
 # `thm:native-source` for the physical rows (gauge directions in `𝔤`)

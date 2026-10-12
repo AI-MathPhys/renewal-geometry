@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterTimeJets
-import RenewalGeometry.DiscreteAnalysis.PeriodicGridSobolevSpace
+import MathPhys.DiscreteAnalysis.PeriodicGridSobolevSpace
+open MathPhys
 
 /-!
 # Inverse-mesh vector-field bounds and time jets of the local finite writer

@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeGravityJetDensity
-import RenewalGeometry.Continuum.TorusC2TestSampling
-import RenewalGeometry.Analysis.HomogeneousJetVariationLimit
+import MathPhys.Continuum.TorusC2TestSampling
+import MathPhys.Analysis.HomogeneousJetVariationLimit
+open MathPhys
 
 /-!
 # Literal gravitational consistency from strong first jets (`prop:native-gravity-firstjet`)

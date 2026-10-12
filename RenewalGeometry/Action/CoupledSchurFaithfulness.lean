@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Action.UniversalCoupledActionCarrier
+open MathPhys
 /-!
 # Faithfulness clause of the universal coupled source quotient
 

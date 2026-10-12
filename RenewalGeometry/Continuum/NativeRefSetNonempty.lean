@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeSlabSymmetric
-import RenewalGeometry.Continuum.CoupledBootstrapFlatVacuum
+import MathPhys.Continuum.CoupledBootstrapFlatVacuum
+open MathPhys
 
 /-!
 # Regular reference solutions for the native closure: constant backgrounds

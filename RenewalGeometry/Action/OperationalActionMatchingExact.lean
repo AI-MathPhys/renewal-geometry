@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.ThreeCostIdentification
 import RenewalGeometry.Gravity.RelationalDeSitterBranch
+open MathPhys
 
 /-!
 # Measured acceptance reconstructs the finite action

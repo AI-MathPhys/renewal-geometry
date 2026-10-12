@@ -5,9 +5,10 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeScalingBlocksExact
-import RenewalGeometry.Action.ShiftedFirstJetNormalFormExact
-import RenewalGeometry.Algebra.SeriesLogChart
-import RenewalGeometry.GaugeTheory.DeterminantSemisimpleSplitExact
+import MathPhys.Variational.ShiftedFirstJetNormalFormExact
+import MathPhys.Algebra.SeriesLogChart
+import MathPhys.GaugeTheory.DeterminantSemisimpleSplitExact
+open MathPhys
 
 /-!
 # The determinant-combined connection `A_h = b_h + Z_c a_h` (`eq:determinant-combined-connection`)

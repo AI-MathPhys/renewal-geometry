@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.ExactTwoRowEliminationAnalytic
+open MathPhys
 
 /-!
 # The reduced three-constraint leading system

@@ -8,15 +8,16 @@ import RenewalGeometry.Predictive.TypedPredictiveCategoryExact
 import RenewalGeometry.Predictive.TypedFinitePredictionExact
 import RenewalGeometry.Predictive.DerivedPredictiveCarrierUniversalExact
 import RenewalGeometry.Predictive.TypedHankelRealization
-import RenewalGeometry.Predictive.HankelMinimality
-import RenewalGeometry.Predictive.FiniteProcessCombTomography
+import MathPhys.SystemsTheory.HankelMinimality
+import MathPhys.SystemsTheory.FiniteProcessCombTomography
 import RenewalGeometry.Predictive.ContextualFutureNullIdeal
 import RenewalGeometry.Predictive.ContextualEnvelope
-import RenewalGeometry.Commutant.IntrinsicRegularTrace
+import MathPhys.OperatorAlgebras.IntrinsicRegularTrace
 import RenewalGeometry.Predictive.FlatWordPanelReconstruction
 import RenewalGeometry.Predictive.RelationalCompletionProcessMorphismExact
 import RenewalGeometry.Predictive.RelationalCompletion
 import RenewalGeometry.Certificates.CertificateRecordBatch02
+open MathPhys
 
 /-!
 # Canonical predictive Grand-Tensor reconstruction: assembly

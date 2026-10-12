@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.CellQuadratureEstimate
+import MathPhys.Analysis.CellQuadratureEstimate
 import RenewalGeometry.Gravity.DeSitterExactLinkDefects
+open MathPhys
 
 /-!
 # Palatini–cosmological first variation and its midpoint quadrature on the de Sitter slab

@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeSourceCompareMain
 import RenewalGeometry.Continuum.NativeClosureTuple
+open MathPhys
 
 /-!
 # `thm:native-closure` and `cor:native-rate` for native records
@@ -47,6 +48,7 @@ open MeasureTheory Filter Topology Set Finset Asymptotics
 open scoped Real ContDiff Nat
 
 namespace RenewalGeometry.RecordTuple
+open MathPhys.RecordTuple
 
 open DiscreteEulerConsistency (R4)
 open NativeScaling (Mat)

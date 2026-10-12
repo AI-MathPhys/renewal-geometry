@@ -7,6 +7,7 @@ import RenewalGeometry.Spectralization.GeneratorProjections
 import RenewalGeometry.Predictive.MomentLeakage
 import RenewalGeometry.StandardModel.OneDoubletOddTangentClassification
 import RenewalGeometry.Predictive.CharacterLeakage
+open MathPhys
 /-!
 # Saturated finite-Dirac generator
 

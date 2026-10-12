@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Algebra.OddChoiOccurrenceExact
-import RenewalGeometry.Operational.SpectatorProduct
+import MathPhys.Algebra.OddChoiOccurrenceExact
+import RenewalGeometry.Operational.ActiveOddLiftInvarianceExact
+import MathPhys.QuantumInformation.SpectatorProduct
+open MathPhys
 
 /-!
 # Primitive odd alternative and the microscopic odd-lift ambiguity

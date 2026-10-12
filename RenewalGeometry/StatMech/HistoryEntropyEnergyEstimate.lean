@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Action.FiniteGibbsActionGap
+import MathPhys.Variational.FiniteGibbsActionGap
 import RenewalGeometry.StatMech.AcceptedActionInformationPythagoras
+open MathPhys
 
 /-!
 # History-level entropy--energy estimate

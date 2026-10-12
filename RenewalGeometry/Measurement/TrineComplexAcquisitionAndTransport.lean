@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.StatMech.PositiveCylinderAndTrine
-import RenewalGeometry.StatMech.FiniteTargetProjectionAndQuotients
+import MathPhys.StatMech.FiniteTargetProjectionAndQuotients
+open MathPhys
 /-!
 # Positive trine acquisition and complex-current transport
 

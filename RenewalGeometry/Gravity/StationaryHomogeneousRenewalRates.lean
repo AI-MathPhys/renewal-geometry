@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.RelationalDeSitterBranch
+open MathPhys
 
 /-!
 # Flat and de Sitter rates are the stationary homogeneous renewal solutions

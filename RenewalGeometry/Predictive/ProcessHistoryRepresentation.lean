@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Algebra.MatrixKrausExistence
-import RenewalGeometry.Predictive.FiniteProcessCombTomography
+import MathPhys.Algebra.MatrixKrausExistence
+import MathPhys.SystemsTheory.FiniteProcessCombTomography
+open MathPhys
 /-!
 # The represented process algebra of typed branches
 

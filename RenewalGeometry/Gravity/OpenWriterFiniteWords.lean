@@ -6,7 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterHermiteResidual
 import RenewalGeometry.Gravity.OpenWriterLawCostControl
-import RenewalGeometry.DiscreteAnalysis.PeriodicGridPointwisePrecision
+import MathPhys.DiscreteAnalysis.PeriodicGridPointwisePrecision
+open MathPhys
 
 /-!
 # Finite local successor words of the open writer (`thm:supp-open-finite-words`,

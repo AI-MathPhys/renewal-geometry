@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactLegendreHamiltonian
+open MathPhys
 
 /-!
 # The symmetric-square-root triad of the canonical ADM coframe
@@ -34,6 +35,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.QuadJet
+open MathPhys.ExactPhaseAction
 
 open AnalyticImplicit
 

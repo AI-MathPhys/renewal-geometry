@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.ModularClock
-import RenewalGeometry.Operational.KMSDual
+import MathPhys.QuantumInformation.KMSDual
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Modular eigenoperator criteria and the affine renewal clock
 
@@ -32,8 +33,9 @@ Covers, from `manuscripts/renewal_emergence/renewal_emergence.tex`:
 -/
 
 namespace RenewalGeometry.Upstream
+open MathPhys.Upstream
 
-open NCG RenewalGeometry
+open MathPhys RenewalGeometry
 
 variable {A : Type*} [Ring A] [Algebra ℂ A]
 

@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Lorentz.DobrushinMixing
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Convergence to the stationary state
 

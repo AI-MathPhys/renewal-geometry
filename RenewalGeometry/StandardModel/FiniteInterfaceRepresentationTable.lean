@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.FiniteEinsteinStandardModelInterface
-import RenewalGeometry.StandardModel.SMDescentYukawaBlocksExact
+import MathPhys.GaugeGroups.SMDescentYukawaBlocksExact
+open MathPhys
 
 /-!
 # The finite Einstein–Standard-Model interface with the tabulated fermion packet

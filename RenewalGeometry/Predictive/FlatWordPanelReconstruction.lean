@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Predictive.WordGramPositivityExact
+open MathPhys
 
 /-!
 # Finite flat word reconstruction: the panel through depth `r_X + 1` reconstructs

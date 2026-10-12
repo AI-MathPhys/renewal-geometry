@@ -6,8 +6,9 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactInitialPreparedSeed
 import RenewalGeometry.Action.ExactInitialBalanceMeanJet
-import RenewalGeometry.Analysis.RangeReductionUniformBounds
-import RenewalGeometry.Analysis.HessianRayIdentification
+import MathPhys.Analysis.RangeReductionUniformBounds
+import MathPhys.Analysis.HessianRayIdentification
+open MathPhys
 
 /-!
 # The quadratic jet of the reduced mean map on the balancing seed
@@ -36,6 +37,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.PreparedChart
+open MathPhys.ExactPhaseAction
 
 set_option linter.unusedSectionVars false
 

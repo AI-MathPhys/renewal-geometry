@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.AposterioriPhysicalShadow
+open MathPhys
 
 /-!
 # A transparent data-centred rate (`cor:aposteriori-shadow-rate`)

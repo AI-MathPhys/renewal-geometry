@@ -58,7 +58,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PAPERS_DIR = ROOT / "papers"
-LEAN_DIRS = (ROOT / "NCG", ROOT / "RenewalGeometry")
+LEAN_DIRS = (ROOT / "MathPhys", ROOT / "RenewalGeometry")
 
 ENVS = ("theorem", "proposition", "lemma", "corollary", "definition")
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.EinsteinSMHomogeneousCovector
+import MathPhys.Continuum.EinsteinSMHomogeneousCovector
+import RenewalGeometry.Continuum.EinsteinSMHomogeneousSampling
+open MathPhys
 
 /-!
 # The homogeneous Einstein–Higgs configuration is a critical point of the continuum action
@@ -42,6 +44,7 @@ set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace HomogeneousCritical
 
 open SobolevOpen (pd)
@@ -287,7 +290,7 @@ theorem redJet_homConfig_A (x : E4) : (redJet (homConfig FC hε a φ a₀ h₀) 
 theorem redJet_homConfig_F (x : E4) : (redJet (homConfig FC hε a φ a₀ h₀) x).F = 0 := by
   funext μ ν
   show curvatureF 0 x μ ν = 0
-  simp [curvatureF, pd, comm, mmul]
+  simp [curvatureF, pd, MathPhys.EinsteinSM.comm, mmul]
 
 theorem redJet_homConfig_H (x : E4) :
     (redJet (homConfig FC hε a φ a₀ h₀) x).H = bumpShift hε (ε / 2) φ 0 (x 0) • hvec h₀ := rfl

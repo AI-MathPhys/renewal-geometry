@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.ForwardBackwardIdempotentDichotomy
+import MathPhys.Analysis.ForwardBackwardIdempotentDichotomy
 import RenewalGeometry.Gravity.ExactBoundaryBalancedField
+open MathPhys
 
 /-!
 # The amplitude-scaled boundary contraction on a graded chart

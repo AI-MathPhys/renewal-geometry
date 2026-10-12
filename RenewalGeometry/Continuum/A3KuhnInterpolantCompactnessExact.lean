@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Continuum.A3SharpLipschitzLimitExact
-import RenewalGeometry.DiscreteAnalysis.A3KuhnInterpolationExact
-import RenewalGeometry.Continuum.UniformLipschitzSubsequenceCompactnessExact
+import MathPhys.DiscreteAnalysis.A3KuhnInterpolationExact
+import MathPhys.Continuum.UniformLipschitzSubsequenceCompactnessExact
+open MathPhys
 
 /-!
 # Compactness of the piecewise-affine interpolants of discrete `A₃` unit-ball functions

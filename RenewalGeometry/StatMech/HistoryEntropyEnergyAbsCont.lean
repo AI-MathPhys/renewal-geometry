@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StatMech.HistoryEntropyEnergyEstimate
+open MathPhys
 
 /-!
 # History-level entropy--energy estimate with vanishing proposal rows

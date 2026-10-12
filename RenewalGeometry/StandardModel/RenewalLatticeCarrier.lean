@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.StandardModel.FiniteInterfaceRepresentationTable
 import RenewalGeometry.Action.NativeDensitiesExact
+open MathPhys
 
 /-!
 # The lattice carrier of the renewal realization of the finite interface

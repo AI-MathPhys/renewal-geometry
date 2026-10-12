@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeClosureClosed
-import RenewalGeometry.Continuum.ActualJetKatoRealization
+import MathPhys.Continuum.ActualJetKatoRealization
+open MathPhys
 
 /-!
 # Symmetric principal matrices for the slab data of a native model

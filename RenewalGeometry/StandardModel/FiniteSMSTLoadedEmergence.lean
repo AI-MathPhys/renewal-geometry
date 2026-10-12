@@ -8,6 +8,7 @@ import RenewalGeometry.StandardModel.CompletionConservative
 import RenewalGeometry.Spectralization.SaturatedFiniteDiracGenerator
 import RenewalGeometry.Spectralization.SMSTChannelNativeEntranceExact
 import RenewalGeometry.StandardModel.SMTensorGeneration
+open MathPhys
 /-!
 # Finite SM--spacetime loaded emergence
 

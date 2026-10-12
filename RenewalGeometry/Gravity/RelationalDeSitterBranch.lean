@@ -6,10 +6,11 @@ Authors: Aurélien Pélissier
 import RenewalGeometry.Gravity.RelationalFlatVacuum
 import RenewalGeometry.Predictive.RelationalCompletion
 import RenewalGeometry.Dimension.GlobalSpatialCompiler
-import RenewalGeometry.Gravity.CoordinateCurvature
-import RenewalGeometry.Gravity.DeSitterChart
-import RenewalGeometry.Analysis.ExponentialTaylorRemainder
+import MathPhys.Gravity.CoordinateCurvature
+import MathPhys.Gravity.DeSitterChart
+import MathPhys.Analysis.ExponentialTaylorRemainder
 import Mathlib.Topology.Instances.AddCircle.Real
+open MathPhys
 
 /-!
 # Explicit conservative homogeneous curved-vacuum branch

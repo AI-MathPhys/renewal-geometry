@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterLawDifference
-import RenewalGeometry.Analysis.TimeSobolevSupBound
-import RenewalGeometry.Analysis.PiecewisePolynomialJetGluing
+import MathPhys.Analysis.TimeSobolevSupBound
+import MathPhys.Analysis.PiecewisePolynomialJetGluing
+open MathPhys
 
 /-!
 # Chronological words of the law family and the stopped physical cost
@@ -36,6 +37,7 @@ open Set Metric Filter Topology Finset MeasureTheory
 open scoped NNReal BigOperators
 
 namespace RenewalGeometry.OpenWriterLifespan
+open MathPhys.OpenWriterLifespan
 
 open RootParityConnector OpenWriterGridBridge OpenWriterChart OpenWriterEnergy HarmonicWriter
   OpenWriterEnergyEstimate

@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Analysis.DyadicRateAsymptotics
-import RenewalGeometry.Analysis.PeriodicTrigInterpolation
+import MathPhys.Analysis.PeriodicTrigInterpolation
+open MathPhys
 
 /-!
 # Composition bounds for record coefficients and monotonicity of the forcing budget

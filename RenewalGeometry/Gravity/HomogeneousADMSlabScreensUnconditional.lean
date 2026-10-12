@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.HomogeneousADMPacketDerivedExact
-import RenewalGeometry.DiscreteAnalysis.TorusCoordinateIsoperimetryExact
+import MathPhys.DiscreteAnalysis.TorusCoordinateIsoperimetryExact
+open MathPhys
 
 /-!
 # Unconditional slab screens of the de Sitter and flat renewal vacua

@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeStressEulerRow
+open MathPhys
 
 /-!
 # The native frame and the slab frame (bridge step P2 of `thm:native-closure`)

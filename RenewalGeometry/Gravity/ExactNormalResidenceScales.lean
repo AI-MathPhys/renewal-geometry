@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.MatrixSpectralDecay
+import MathPhys.Analysis.MatrixSpectralDecay
+open MathPhys
 
 /-!
 # Rapid Lyapunov growth, slow scalar growth and the two residence precision scales

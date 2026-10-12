@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.CoupledBootstrapSlabModel
+import MathPhys.Continuum.CoupledBootstrapSlabModel
+import RenewalGeometry.Continuum.AposterioriPhysicalShadow
 import RenewalGeometry.Continuum.AposterioriShadowRate
 import RenewalGeometry.Action.NativeSelectedShadow
+open MathPhys
 
 /-!
 # The a posteriori shadow cluster with `prop:coupled-bootstrap` discharged
@@ -37,6 +39,7 @@ open scoped BigOperators ContDiff
 noncomputable section
 
 namespace RenewalGeometry.CoupledBootstrap.ShadowClosed
+open MathPhys.CoupledBootstrap
 
 open SobolevOpen (pd)
 open PeriodicCube SymHypEnergy SlabWaveHk SlabSobAlg QLEnergy QLDiff QLRecovery FrameCurvature

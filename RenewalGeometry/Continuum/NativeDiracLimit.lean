@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeDiracCoefficients
-import RenewalGeometry.Continuum.NativeSpinorCompactness
+import MathPhys.Continuum.NativeSpinorCompactness
+open MathPhys
 
 /-!
 # The complete Dirac–Yukawa first variation of the native local action converges

@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.EndpointAllocationCompilerExact
-import RenewalGeometry.StandardModel.LinearAnomalyRigidityExact
-import RenewalGeometry.Commutant.EquivariantMultiplicityFactorization
+import MathPhys.GaugeGroups.LinearAnomalyRigidityExact
+import MathPhys.OperatorAlgebras.EquivariantMultiplicityFactorization
+open MathPhys
 
 /-!
 # Endpoint ancestry, endpoint allocation and the source-native three-count

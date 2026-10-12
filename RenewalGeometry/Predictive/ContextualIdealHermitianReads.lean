@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Predictive.ContextualFutureNullIdeal
 import RenewalGeometry.Predictive.ContextualEnvelope
+open MathPhys
 
 /-!
 # Contextual nullity under adjoint-closed Reads (`lem:supp-contextual-ideal`)

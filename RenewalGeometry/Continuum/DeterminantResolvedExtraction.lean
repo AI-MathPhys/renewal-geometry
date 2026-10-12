@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.FiniteWilsonZeroDefect
 import RenewalGeometry.GaugeTheory.DeterminantCombinedConnection
+open MathPhys
 
 /-!
 # The Wilson/Coulomb extraction with a convergent, non-small central background

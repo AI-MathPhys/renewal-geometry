@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.Continuum.NativeBosonicEulerRows
 import RenewalGeometry.Continuum.NativeDiracEulerRows
 import RenewalGeometry.Continuum.NativeTailTransfer
+open MathPhys
 
 /-!
 # Covariance of the native Euler rows under the dilation of the slab coordinates

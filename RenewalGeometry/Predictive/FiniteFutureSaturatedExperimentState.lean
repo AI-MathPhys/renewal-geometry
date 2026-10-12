@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.StatMech.DecoderInnovationConditionalInformation
 import Mathlib
+open MathPhys
 
-open NCG
+open MathPhys
 
 /-!
 # Finite future-saturated experiment state

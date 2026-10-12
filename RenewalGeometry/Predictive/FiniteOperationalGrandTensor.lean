@@ -8,6 +8,7 @@ import RenewalGeometry.Predictive.CombProcessHistoryRealization
 import RenewalGeometry.Predictive.ContextualFutureNullIdeal
 import RenewalGeometry.Predictive.FiniteGrandTensorExact
 import RenewalGeometry.Predictive.FlatWordPanelReconstruction
+open MathPhys
 
 /-!
 # The finite Renewal Grand Tensor of a finite operational process

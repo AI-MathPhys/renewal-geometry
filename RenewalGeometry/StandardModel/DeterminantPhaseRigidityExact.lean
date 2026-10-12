@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.OperationalDeterminantSource
+open MathPhys
 
 /-!
 # Determinant phase rigidity and the packet-extension clause (`thm:gauge-group`)

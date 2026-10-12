@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Spectralization.CanonicalFiniteDiracExact
 import RenewalGeometry.Commutant.FiniteAnchorOperatorNormExact
+open MathPhys
 
 /-!
 # Finite-Dirac relation space and fixed-generator closure

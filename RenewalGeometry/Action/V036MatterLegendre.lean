@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.StandardModel.GrandSMEasy
 import RenewalGeometry.Action.MatterLegendre2
+open MathPhys
 /-!
 # Corrected matter-coupling and Legendre theorem
   (`thm:master-matter-Legendre-v036`, flagship manuscript)

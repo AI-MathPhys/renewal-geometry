@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.OperatorLimits.CompactResolventStrongCofinalMarkedRenewalLimitExact
-import RenewalGeometry.Spectralization.SpectralCompressionStrictQuasidiagonalEquivalenceExact
-import RenewalGeometry.OperatorLimits.L2FiniteCoordinateScreensStrongConvergenceExact
-import RenewalGeometry.Certificates.ToeplitzFiniteRankDiagonalProjectionExact
-import RenewalGeometry.Certificates.ToeplitzNumberOperatorShiftCommutatorExact
+import MathPhys.SpectralGeometry.SpectralCompressionStrictQuasidiagonalEquivalenceExact
+import MathPhys.OperatorLimits.L2FiniteCoordinateScreensStrongConvergenceExact
+import MathPhys.OperatorTheory.ToeplitzFiniteRankDiagonalProjectionExact
+import MathPhys.OperatorTheory.ToeplitzNumberOperatorShiftCommutatorExact
 
-open NCG
+open MathPhys
 /-!
 # Essential-image trichotomy for Renewal spectralization
 
@@ -31,9 +31,9 @@ namespace RenewalGeometry.SpectralizationEssentialImageTrichotomyExact
 universe u v
 
 open RenewalGeometry.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact
-open RenewalGeometry.CompactResolventStrongCofinalMarkedRenewalLimitExact
-open RenewalGeometry.SpectralCompression
-open RenewalGeometry.ToeplitzScreenObstruction
+open RenewalGeometry.CompactResolventStrongCofinalMarkedRenewalLimitExact MathPhys.CompactResolventStrongCofinalMarkedRenewalLimitExact
+open MathPhys.SpectralCompression
+open MathPhys.ToeplitzScreenObstruction
 
 /-- The strict image is characterized by quasidiagonal corner decay, and its
 multiplicativity defect is exactly the SP.28 off-diagonal corner. -/
@@ -71,17 +71,17 @@ structure ToeplitzStrongNotStrictCertificate : Prop where
   compressionsStrong : ∀ (T : H →L[ℂ] H) (x : H),
     Tendsto
       (fun n : ℕ =>
-        RenewalGeometry.screenCompression
+        MathPhys.screenCompression
           (l2FinsetScreen (E := ℂ) (Finset.range n)) T x)
       atTop (𝓝 (T x))
   productDefectsStrong : ∀ (T U : H →L[ℂ] H) (x : H),
     Tendsto
       (fun n : ℕ =>
-        RenewalGeometry.screenCompression
+        MathPhys.screenCompression
             (l2FinsetScreen (E := ℂ) (Finset.range n)) T
-            (RenewalGeometry.screenCompression
+            (MathPhys.screenCompression
               (l2FinsetScreen (E := ℂ) (Finset.range n)) U x) -
-          RenewalGeometry.screenCompression
+          MathPhys.screenCompression
             (l2FinsetScreen (E := ℂ) (Finset.range n)) (T.comp U) x)
       atTop (𝓝 0)
   shiftCommutatorOnBasis : ∀ n,
@@ -110,12 +110,12 @@ theorem toeplitz_strong_not_strict : ToeplitzStrongNotStrictCertificate where
   denseDomain := numberOperator_dense_domain
   compactTwoSidedResolvent := numberOperator_compact_resolvent
   finiteScreensCompact := fun n =>
-    RenewalGeometry.l2FinsetScreen_isCompactOperator (E := ℂ) (Finset.range n)
-  screensStrong := RenewalGeometry.tendsto_l2FinsetScreen_range_apply
+    MathPhys.l2FinsetScreen_isCompactOperator (E := ℂ) (Finset.range n)
+  screensStrong := MathPhys.tendsto_l2FinsetScreen_range_apply
   compressionsStrong :=
-    RenewalGeometry.tendsto_screenCompression_l2FinsetScreen_range_apply
+    MathPhys.tendsto_screenCompression_l2FinsetScreen_range_apply
   productDefectsStrong :=
-    RenewalGeometry.tendsto_screenCompression_multiplicativity_defect_apply
+    MathPhys.tendsto_screenCompression_multiplicativity_defect_apply
   shiftCommutatorOnBasis :=
     numberOperator_comm_unilateralShift_basisVector
   strictObstruction := by

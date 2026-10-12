@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeTrigReconstructedFields
-import RenewalGeometry.GaugeTheory.NativeWilsonCompactness
-import RenewalGeometry.Analysis.FirstVariationCalculus
+import MathPhys.GaugeTheory.NativeWilsonCompactness
+import MathPhys.Analysis.FirstVariationCalculus
+open MathPhys
 
 /-!
 # The finite Wilson-screen zero-defect criterion: the Wilson/Coulomb extraction chain
@@ -125,7 +126,7 @@ theorem native_wilson_unifIntegrable_real (n : ℕ → ℕ) [∀ k, NeZero (n k)
     obtain ⟨ρ, hρ, hev⟩ := hΩ ε hε
     exact ⟨ρ, hρ, hev.mono fun k hk μ m hm hmρ =>
       (gridNorm_shift_magR_sub_le (V k) μ m (Y k)).trans (hk μ m hm hmρ)⟩
-  have hUI := RenewalGeometry.compactMagnitude_unifIntegrable _ hTB
+  have hUI := MathPhys.compactMagnitude_unifIntegrable _ hTB
   intro ε hε
   obtain ⟨δ, hδ, h⟩ := hUI hε
   refine ⟨δ, hδ, fun k s hs hμs => ?_⟩

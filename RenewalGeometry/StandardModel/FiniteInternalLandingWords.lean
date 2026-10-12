@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.StandardModel.FiniteInternalLandingExact
 import RenewalGeometry.StandardModel.InternalSeedSaturationWords
 import RenewalGeometry.StandardModel.LabelledCensusExact
+open MathPhys
 
 /-!
 # The finite internal landing alternative for actual represented words

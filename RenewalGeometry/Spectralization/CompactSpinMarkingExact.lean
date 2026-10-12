@@ -3,8 +3,9 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Spectralization.DensitySymmetricSpinDiracExact
+import MathPhys.SpectralGeometry.DensitySymmetricSpinDiracExact
 import RenewalGeometry.DiscreteAnalysis.CoframeRenewalPacketExact
+open MathPhys
 
 /-!
 # The metric bracket does not select the spin marking
@@ -55,7 +56,7 @@ the central extension `Spin(d) → SO(d)` with kernel `{±1}`):
 -/
 
 open Matrix Finset Filter Topology
-open RenewalGeometry.DensitySymmetricSpinDirac RenewalGeometry.FrozenWilsonCoreConsistency
+open MathPhys.DensitySymmetricSpinDirac MathPhys.FrozenWilsonCoreConsistency
 
 namespace RenewalGeometry.CompactSpinMarking
 

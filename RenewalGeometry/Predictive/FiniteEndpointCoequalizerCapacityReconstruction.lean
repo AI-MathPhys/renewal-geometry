@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Predictive.EndpointRefinementCoequalizer
-import RenewalGeometry.Predictive.ExactSourceSchurResidual
+import MathPhys.SystemsTheory.ExactSourceSchurResidual
+open MathPhys
 /-!
 # Finite endpoint coequalizer and capacity reconstruction
 

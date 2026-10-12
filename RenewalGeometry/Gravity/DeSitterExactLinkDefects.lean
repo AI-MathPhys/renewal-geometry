@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.NormedAlgebraLogBCH
+import MathPhys.Analysis.NormedAlgebraLogBCH
 import RenewalGeometry.Gravity.RelationalDeSitterBranch
+open MathPhys
 
 /-!
 # Exact links and finite Cartan defects of the de Sitter / flat regulator

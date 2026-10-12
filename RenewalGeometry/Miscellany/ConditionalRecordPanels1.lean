@@ -3,8 +3,9 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.DiscreteAnalysis.FlowDuality
+import MathPhys.DiscreteAnalysis.FlowDuality
 import RenewalGeometry.Gravity.BoundaryCorner
+open MathPhys
 /-!
 # Final conditional panels I: provenance, Möbius, hierarchy,
   endpoint, and Hodge records (Gran-Tensor manuscript;

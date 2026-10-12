@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Predictive.FiniteEndpointCoequalizerCapacityReconstruction
-import RenewalGeometry.DiscreteAnalysis.FinitePressureFlowMaxCut
-import RenewalGeometry.DiscreteAnalysis.OperationalSobolevWeylExact
-import RenewalGeometry.DiscreteAnalysis.OperationalSobolevWeylFiniteGraph
+import MathPhys.DiscreteAnalysis.FinitePressureFlowMaxCut
+import MathPhys.DiscreteAnalysis.OperationalSobolevWeylExact
+import MathPhys.DiscreteAnalysis.OperationalSobolevWeylFiniteGraph
+open MathPhys
 /-!
 # Finite global spatial compiler and exact obstruction
   (`thm:global-spatial-compiler`)

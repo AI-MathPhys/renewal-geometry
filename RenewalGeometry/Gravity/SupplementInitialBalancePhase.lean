@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.SupplementInitialBalanceExact
 import RenewalGeometry.DiscreteAnalysis.OddPhaseDerivativeReal
+open MathPhys
 
 /-!
 # The four-mode mean calibration with the actual odd phase derivative

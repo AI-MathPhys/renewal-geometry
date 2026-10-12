@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.DegreeOneColourNoGoExact
+open MathPhys
 
 /-!
 # The degree-one relative commutant is `ℂ ⊕ M₂(ℂ) ⊕ ℂ ⊕ ℂ`

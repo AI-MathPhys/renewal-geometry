@@ -3,10 +3,11 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Commutant.EmbeddedJointCommutatorCommutant
-import RenewalGeometry.Commutant.JointCommutatorProtectedKernelRigidityFromDenseSourcesAndGraphScreens
-import RenewalGeometry.OperatorLimits.ProtectedSpectralProjectionRigidity
-import RenewalGeometry.OperatorLimits.CircleRieszProjectionOrthogonality
+import MathPhys.OperatorAlgebras.EmbeddedJointCommutatorCommutant
+import MathPhys.OperatorAlgebras.JointCommutatorProtectedKernelRigidityFromDenseSourcesAndGraphScreens
+import MathPhys.OperatorLimits.ProtectedSpectralProjectionRigidity
+import MathPhys.OperatorLimits.CircleRieszProjectionOrthogonality
+open MathPhys
 /-!
 # Exact protected commutants in the continuum Howe limit
 
@@ -22,7 +23,7 @@ open Complex Filter Set Topology
 
 noncomputable section
 
-namespace RenewalGeometry.VaryingHilbert.System
+namespace MathPhys.VaryingHilbert.System
 
 universe u v
 
@@ -38,9 +39,9 @@ commutant projection. -/
 theorem jointCommutator_protectedCommutant_tendsto_of_denseSources_of_graphScreens
     {d : ℕ → Type u} [∀ cutoff, Fintype (d cutoff)] {s : ℕ}
     (c : ∀ cutoff, Fin s → Matrix (d cutoff) (d cutoff) ℂ)
-    (J : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := H)
+    (J : MathPhys.VaryingHilbert.System (K := ℂ) (H := H)
       (Hn := fun cutoff ↦ EuclideanSpace ℂ (d cutoff × d cutoff)))
-    (L : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := WithLp 2 (H × F))
+    (L : MathPhys.VaryingHilbert.System (K := ℂ) (H := WithLp 2 (H × F))
       (Hn := fun cutoff ↦ WithLp 2
         (EuclideanSpace ℂ (d cutoff × d cutoff) ×
           EuclideanSpace ℂ (Fin s × (d cutoff × d cutoff)))))
@@ -50,7 +51,7 @@ theorem jointCommutator_protectedCommutant_tendsto_of_denseSources_of_graphScree
     (source : H → ∀ cutoff, EuclideanSpace ℂ (d cutoff × d cutoff))
     (hsource : ∀ y ∈ D, J.StronglyConverges (source y) y)
     (hcore : ∀ y ∈ D, J.StronglyConverges
-      (fun cutoff ↦ RenewalGeometry.jointCommutatorResolventFamily c lam0 cutoff
+      (fun cutoff ↦ MathPhys.jointCommutatorResolventFamily c lam0 cutoff
         (source y cutoff))
       (boundedOperatorNormalResolventFamily A lam0 y))
     (a : ℝ) (ha : 0 < a)
@@ -59,16 +60,16 @@ theorem jointCommutator_protectedCommutant_tendsto_of_denseSources_of_graphScree
     (htail : ∀ ε > 0, ∃ screenIndex, ∀ y ∈ L.embeddedUnitBallOutputs
       (fun cutoff ↦ operatorGraphResolventHilbertGraph
         (⊤ : Submodule ℂ (EuclideanSpace ℂ (d cutoff × d cutoff)))
-        (boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM (c cutoff)))
-        (RenewalGeometry.jointCommutatorResolventFamily c a cutoff) a ha
-        (RenewalGeometry.jointCommutatorResolventFamily_resolventEquation c a ha cutoff)),
+        (boundedOperatorGraphMap (MathPhys.jointCommutatorCLM (c cutoff)))
+        (MathPhys.jointCommutatorResolventFamily c a cutoff) a ha
+        (MathPhys.jointCommutatorResolventFamily_resolventEquation c a ha cutoff)),
       ‖y - screen screenIndex y‖ < ε)
     (hfst : ∀ cutoff y, J.embedding cutoff y.fst = (L.embedding cutoff y).fst)
     (b : ℝ) (hb : 0 < b)
     (P : ℕ → H →L[ℂ] H)
     (hprotected : ∀ᶠ cutoff in atTop,
       LinearMap.range (P cutoff).toLinearMap ≤
-        (LinearMap.ker (RenewalGeometry.jointCommutatorCLM (c cutoff)).toLinearMap).map
+        (LinearMap.ker (MathPhys.jointCommutatorCLM (c cutoff)).toLinearMap).map
           (J.embedding cutoff).toLinearMap)
     (hprotectedRank : ∀ᶠ cutoff in atTop,
       Module.finrank ℂ (LinearMap.range (P cutoff).toLinearMap) =
@@ -77,16 +78,16 @@ theorem jointCommutator_protectedCommutant_tendsto_of_denseSources_of_graphScree
     ∃ radius : ℝ, 0 < radius ∧
       (0 : ℂ) ∉ Metric.closedBall (((1 / b : ℝ) : ℂ)) radius ∧
       Tendsto P atTop
-        (nhds (RenewalGeometry.ResolventStability.circleRieszProjection
+        (nhds (MathPhys.ResolventStability.circleRieszProjection
           (boundedOperatorNormalResolventFamily A b)
           (((1 / b : ℝ) : ℂ)) radius)) ∧
       (∀ᶠ cutoff in atTop,
         LinearMap.range (P cutoff).toLinearMap =
-          (LinearMap.ker (RenewalGeometry.jointCommutatorCLM (c cutoff)).toLinearMap).map
+          (LinearMap.ker (MathPhys.jointCommutatorCLM (c cutoff)).toLinearMap).map
             (J.embedding cutoff).toLinearMap) ∧
       (∀ᶠ cutoff in atTop,
         ∀ X : Matrix (d cutoff) (d cutoff) ℂ,
-          J.embedding cutoff (RenewalGeometry.matrixL2 X) ∈
+          J.embedding cutoff (MathPhys.matrixL2 X) ∈
               LinearMap.range (P cutoff).toLinearMap ↔
             ∀ j, c cutoff j * X = X * c cutoff j) := by
   obtain ⟨radius, hR, hzero, hlimitContour, hlimitCompact, _hlimitRange,
@@ -95,19 +96,19 @@ theorem jointCommutator_protectedCommutant_tendsto_of_denseSources_of_graphScree
       c L A lam0 hlam0 D hD source hsource hcore a ha screen hcompact htail hfst
         b hb P hprotected hprotectedRank
   let T : ℕ → H →L[ℂ] H :=
-    J.compressedOperator (RenewalGeometry.jointCommutatorResolventFamily c b)
+    J.compressedOperator (MathPhys.jointCommutatorResolventFamily c b)
   let Tlim : H →L[ℂ] H := boundedOperatorNormalResolventFamily A b
   let Q : ℕ → H →L[ℂ] H := fun cutoff ↦
-    RenewalGeometry.ResolventStability.circleRieszProjection
+    MathPhys.ResolventStability.circleRieszProjection
       (T cutoff) (((1 / b : ℝ) : ℂ)) radius
   let Qlim : H →L[ℂ] H :=
-    RenewalGeometry.ResolventStability.circleRieszProjection
+    MathPhys.ResolventStability.circleRieszProjection
       Tlim (((1 / b : ℝ) : ℂ)) radius
   obtain ⟨M, hM, hlimitBound⟩ :=
-    RenewalGeometry.ResolventStability.exists_circle_resolvent_norm_bound
+    MathPhys.ResolventStability.exists_circle_resolvent_norm_bound
       Tlim (((1 / b : ℝ) : ℂ)) radius hlimitContour
   obtain ⟨_N, _hN, hstageBound⟩ :=
-    RenewalGeometry.ResolventStability.eventually_circle_resolvent_bound_of_tendsto
+    MathPhys.ResolventStability.eventually_circle_resolvent_bound_of_tendsto
       T Tlim hTconv (((1 / b : ℝ) : ℂ)) radius M hM
         hlimitContour hlimitBound
   have hcontour : ∀ᶠ cutoff in atTop,
@@ -121,23 +122,23 @@ theorem jointCommutator_protectedCommutant_tendsto_of_denseSources_of_graphScree
     intro n
     exact operatorGraphResolvent_isSymmetric
       (⊤ : Submodule ℂ (EuclideanSpace ℂ (d n × d n)))
-      (boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM (c n))) b
-      (RenewalGeometry.jointCommutatorResolventFamily c b n)
-      (RenewalGeometry.jointCommutatorResolventFamily_resolventEquation c b hb n)
+      (boundedOperatorGraphMap (MathPhys.jointCommutatorCLM (c n))) b
+      (MathPhys.jointCommutatorResolventFamily c b n)
+      (MathPhys.jointCommutatorResolventFamily_resolventEquation c b hb n)
   have hstageCompact : ∀ cutoff, IsCompactOperator (T cutoff : H → H) := by
     intro cutoff
     exact J.compressedOperator_isCompactOperator_of_finiteDimensional
-      (RenewalGeometry.jointCommutatorResolventFamily c b) cutoff
+      (MathPhys.jointCommutatorResolventFamily c b) cutoff
   have hstarQ : ∀ᶠ cutoff in atTop, IsStarProjection (Q cutoff) := by
     filter_upwards [hcontour] with cutoff hn
-    exact RenewalGeometry.ResolventStability.circleRieszProjection_isStarProjection_of_compact_of_isSymmetric
+    exact MathPhys.ResolventStability.circleRieszProjection_isStarProjection_of_compact_of_isSymmetric
       (T cutoff) (hstageCompact cutoff) (hstageSymmetric cutoff)
         (((1 / b : ℝ) : ℂ)) radius hR hn
   have hPconv : Tendsto P atTop (nhds Qlim) :=
-    RenewalGeometry.ProjectionStability.protectedProjection_tendsto_of_eventually_range_eq
+    MathPhys.ProjectionStability.protectedProjection_tendsto_of_eventually_range_eq
       P Q Qlim hstarP hstarQ hPQ hQconv
   have hcommutant :=
     eventually_embeddedMatrix_mem_protectedRange_iff_commutes c J P hPKernel
   exact ⟨radius, hR, hzero, hPconv, hPKernel, hcommutant⟩
 
-end RenewalGeometry.VaryingHilbert.System
+end MathPhys.VaryingHilbert.System

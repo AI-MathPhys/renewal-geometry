@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Dimension.CutCycleExteriorFinrank
+import MathPhys.Combinatorics.CutCycleExteriorFinrank
 import RenewalGeometry.Dimension.DimensionK4Selector
 import RenewalGeometry.Dimension.DimensionPairwise
+open MathPhys
 
 /-!
 # The minimal faithful `K₄` selector from its hypotheses (`thm:supp-k4-selector`,

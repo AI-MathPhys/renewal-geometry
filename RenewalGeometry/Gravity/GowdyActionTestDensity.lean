@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Gravity.GowdyHermiteReadoutCurvature
+import MathPhys.Gravity.GowdyHermiteReadoutCurvature
+open MathPhys
 
 /-!
 # The unreduced Gowdy ADM density, its discretization and their first variations
@@ -42,6 +43,7 @@ open Set Finset
 open scoped BigOperators
 
 namespace RenewalGeometry.GowdyStaggered.ActionTest
+open MathPhys.GowdyStaggered
 
 noncomputable section
 

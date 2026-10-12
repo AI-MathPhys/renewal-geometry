@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Predictive.TerminatingSourceTest
-import RenewalGeometry.Predictive.JointSourceRangeUnitary
+import MathPhys.SystemsTheory.JointSourceRangeUnitary
 import RenewalGeometry.Predictive.PhysicalSourceMinimality
+open MathPhys
 /-!
 # Pointed tetrahedral source isometry and Krylov uniqueness
 

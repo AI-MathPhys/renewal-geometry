@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeMatterEulerRows
+open MathPhys
 
 /-!
 # The Yang–Mills and Higgs Euler rows of the native continuum Lagrangian

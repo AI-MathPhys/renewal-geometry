@@ -5,6 +5,7 @@ Authors: Aurelien Pelissier
 -/
 import RenewalGeometry.Dimension.PrimitiveHoeffdingCarrier
 import RenewalGeometry.Action.SupportPrototype
+open MathPhys
 /-!
 # four-cell Hoeffding Gram identification
 

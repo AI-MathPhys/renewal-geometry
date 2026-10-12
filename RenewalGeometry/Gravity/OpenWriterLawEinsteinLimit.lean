@@ -5,9 +5,10 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterLawJetLipschitz
-import RenewalGeometry.Gravity.OpenWriterHarmonicPreparation
+import MathPhys.Gravity.OpenWriterHarmonicPreparation
 import RenewalGeometry.Gravity.OpenWriterLawCostControl
 import RenewalGeometry.StatMech.SupplementLawRowNeighbourhoodExact
+open MathPhys
 
 /-!
 # The uniform Einstein limit of the law family (`thm:supp-law-einstein`) and of chronological
@@ -32,6 +33,7 @@ open Finset Filter Topology UnitAddTorus
 open scoped NNReal BigOperators Real
 
 namespace RenewalGeometry.OpenWriterLimitRegularity
+open MathPhys.OpenWriterLimitRegularity
 
 open TorusSobolevTransfer OpenWriterLifespan OpenWriterEnergyEstimate OpenWriterChart
   OpenWriterEnergy OpenWriterGridBridge RootParityConnector PeriodicGridSobolev.Composition

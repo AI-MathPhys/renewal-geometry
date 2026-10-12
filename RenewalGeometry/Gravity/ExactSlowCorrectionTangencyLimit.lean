@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.ExactSlowGateExact
 import RenewalGeometry.Gravity.ExactSlowCompatibilityLimit
+open MathPhys
 
 /-!
 # First slow correction and initial tangency of bounded-rate limits

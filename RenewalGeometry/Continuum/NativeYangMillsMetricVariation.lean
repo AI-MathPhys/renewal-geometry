@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.NativeCoulombCompactness
-import RenewalGeometry.Analysis.LpProductContinuity
+import MathPhys.Continuum.NativeCoulombCompactness
+import MathPhys.Analysis.LpProductContinuity
 import RenewalGeometry.StandardModel.FiniteEinsteinStandardModelInterface
+open MathPhys
 
 /-!
 # The complete finite Yang–Mills first variation with coframes

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMReducedClosure
+open MathPhys
 
 /-!
 # From distributional to pointwise Euler equations (`cor:strong-solution-upgrade`, regularity
@@ -45,6 +47,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 
 open SobolevOpen (pd box IsTest MemW12)
 

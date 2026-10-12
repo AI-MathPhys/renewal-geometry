@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.CommonOriginUCP
+open MathPhys
 /-!
 # KMS self-adjointness of the common-origin channel
 

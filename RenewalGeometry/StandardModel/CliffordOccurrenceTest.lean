@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.StandardModel.CliffordTwirlMatterAudit
 import RenewalGeometry.StandardModel.OneDoubletOddTangentClassification
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Clifford occurrence test and odd provenance completeness
 

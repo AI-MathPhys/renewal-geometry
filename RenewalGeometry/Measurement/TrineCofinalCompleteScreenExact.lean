@@ -1,4 +1,5 @@
 import RenewalGeometry.Measurement.TrineTransportExtras
+open MathPhys
 /-!
 # Cofinal trine transport on an arbitrary complete current screen
 

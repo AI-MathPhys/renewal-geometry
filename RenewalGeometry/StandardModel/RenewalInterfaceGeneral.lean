@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.StandardModel.NativeStandardModelPacket
 import RenewalGeometry.Continuum.NativeLocalActionFrechet
+open MathPhys
 
 /-!
 # Renewal realization of the finite interface by the native local action

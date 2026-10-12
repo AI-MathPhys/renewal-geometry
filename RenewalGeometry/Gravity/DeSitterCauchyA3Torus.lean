@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.DeSitterCauchySlices
 import RenewalGeometry.Gravity.RelationalFlatVacuum
+open MathPhys
 
 /-!
 # Compact Cauchy slices of de Sitter on `ℝ × T³_{A₃}` (`thm:supp-desitter-einstein`)
@@ -292,15 +293,15 @@ theorem a3Embed_mem_lambdaA3_iff (x : Fin 3 → ℝ) :
 in fact `a3Embed (a3Roots r)` are exactly the oriented roots `eᵢ − eⱼ` of
 `eq:supp-a3-oriented-roots`. -/
 theorem a3Embed_a3Roots_mem (r : Fin 12) :
-    a3Embed (RenewalGeometry.a3Roots r) ∈ lambdaA3 := by
+    a3Embed (MathPhys.a3Roots r) ∈ lambdaA3 := by
   rw [a3Embed_mem_lambdaA3_iff]
   refine ⟨fun a => ?_, ?_⟩
-  · fin_cases r <;> fin_cases a <;> simp [RenewalGeometry.a3Roots] <;>
+  · fin_cases r <;> fin_cases a <;> simp [MathPhys.a3Roots] <;>
       first
       | (refine ⟨1, ?_⟩; norm_num; done)
       | (refine ⟨-1, ?_⟩; norm_num; done)
       | (refine ⟨0, ?_⟩; norm_num; done)
-  · fin_cases r <;> simp [RenewalGeometry.a3Roots] <;>
+  · fin_cases r <;> simp [MathPhys.a3Roots] <;>
       first
       | (refine ⟨1, ?_⟩; norm_num; done)
       | (refine ⟨-1, ?_⟩; norm_num; done)

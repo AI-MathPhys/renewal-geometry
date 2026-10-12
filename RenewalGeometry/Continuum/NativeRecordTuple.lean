@@ -7,7 +7,9 @@ import Mathlib
 import RenewalGeometry.Continuum.NativeSlabData
 import RenewalGeometry.Continuum.NativeFieldScaling
 import RenewalGeometry.Continuum.NativePhysRows
-import RenewalGeometry.Continuum.CoupledBootstrapSlabModel
+import MathPhys.Continuum.CoupledBootstrapSlabModel
+import RenewalGeometry.Continuum.AposterioriPhysicalShadow
+open MathPhys
 
 /-!
 # The actual field tuple of a native field (bridge step P2 of `thm:native-closure`)

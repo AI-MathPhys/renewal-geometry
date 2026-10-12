@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Algebra.OddChoiOccurrenceExact
-import RenewalGeometry.Commutant.SourceCoercivityInfluenceExact
+import MathPhys.Algebra.OddChoiOccurrenceExact
+import MathPhys.OperatorAlgebras.SourceCoercivityInfluenceExact
+open MathPhys
 
 /-!
 # Type-central incidence graph Laplacian (`prop:type-central-graph-laplacian`)

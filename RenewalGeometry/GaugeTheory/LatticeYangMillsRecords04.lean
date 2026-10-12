@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Miscellany.AssortedFiniteRecords03
+open MathPhys
 /-!
 # Easy exact records, batch 04 (Gran-Tensor manuscript, YM cluster)
 
@@ -39,7 +40,7 @@ Rendering conventions are described in the docstring of each section.
 -/
 
 open Matrix Finset
-open RenewalGeometry.SourceCoercivityInfluence RenewalGeometry.GeometricThresholdBank
+open MathPhys.SourceCoercivityInfluence MathPhys.GeometricThresholdBank
 open scoped ComplexOrder
 
 -- decidability/fintype instances enter only through the dot-product calculus in proofs

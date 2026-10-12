@@ -3,10 +3,11 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Predictive.ExactSourceSchurResidual
-import RenewalGeometry.Action.EdgeActionPythagoras
+import MathPhys.SystemsTheory.ExactSourceSchurResidual
+import MathPhys.Variational.EdgeActionPythagoras
 import RenewalGeometry.Gravity.FiniteBRSTWardEinstein
 import RenewalGeometry.Action.K4BridgeTransparency
+open MathPhys
 /-!
 # Universal finite gravity--internal action carrier
 

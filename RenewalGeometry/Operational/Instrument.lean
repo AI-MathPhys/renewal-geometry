@@ -3,10 +3,11 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import NCG.Graph.Multigraph
+import MathPhys.Graph.Multigraph
 import Mathlib
+open MathPhys
 
-open NCG
+open MathPhys
 
 /-!
 # Edge-labelled instruments and multiplicative path weights
@@ -38,7 +39,7 @@ Covers, from `manuscripts/renewal_emergence/renewal_emergence.tex`:
 
 namespace RenewalGeometry.Upstream
 
-open NCG RenewalGeometry
+open MathPhys RenewalGeometry
 
 /-! ## Directed paths in a multigraph -/
 

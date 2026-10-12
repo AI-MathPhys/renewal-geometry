@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.FiniteAnchorHoweActualExact
+open MathPhys
 
 /-!
 # Finite-anchor stability from operator-norm data (`thm:finite-anchor`)

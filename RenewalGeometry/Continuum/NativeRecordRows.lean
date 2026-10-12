@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeRecordRowsEtr
+open MathPhys
 
 /-!
 # The slab residuals of a native field are algebraic images of its Euler rows
@@ -33,6 +34,7 @@ open Finset
 open scoped Matrix ContDiff
 
 namespace RenewalGeometry.RecordTuple
+open MathPhys.RecordTuple
 
 open SobolevOpen (pd)
 open DiscreteEulerConsistency (R4 evec jet1 contEuler)

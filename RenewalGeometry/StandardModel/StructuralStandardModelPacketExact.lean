@@ -7,9 +7,10 @@ import RenewalGeometry.StandardModel.InternalSeedSaturationExact
 import RenewalGeometry.StandardModel.EndpointGenerationCarrierExact
 import RenewalGeometry.StandardModel.CliffordOccurrenceTest
 import RenewalGeometry.StandardModel.OperationalDeterminantSource
-import RenewalGeometry.StandardModel.AnomalyForcedWeights
-import RenewalGeometry.StandardModel.SMGaugeQuotientExact
+import MathPhys.GaugeGroups.AnomalyForcedWeights
+import MathPhys.GaugeGroups.SMGaugeQuotientExact
 import RenewalGeometry.Spectralization.SaturatedFiniteDiracGenerator
+open MathPhys
 /-!
 # Structural Standard-Model classification from a landed multiplicity packet
   (`thm:structural-SM`)

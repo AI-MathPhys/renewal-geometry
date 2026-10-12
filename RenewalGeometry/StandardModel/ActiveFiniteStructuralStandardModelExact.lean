@@ -3,12 +3,13 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.StandardModel.AnomalyForcedWeights
+import MathPhys.GaugeGroups.AnomalyForcedWeights
 import RenewalGeometry.StandardModel.DeterminantIncidenceExact
 import RenewalGeometry.StandardModel.InternalAssemblyExact
-import RenewalGeometry.StandardModel.SMGaugeQuotientExact
+import MathPhys.GaugeGroups.SMGaugeQuotientExact
 import RenewalGeometry.StandardModel.SMActiveStructural
-import RenewalGeometry.StandardModel.WeakResetGenerationExact
+import MathPhys.GaugeGroups.WeakResetGenerationExact
+open MathPhys
 /-!
 # Active finite structural Standard Model: exact assembly
 

@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Algebra.OddChoiOccurrenceExact
+import MathPhys.Algebra.OddChoiOccurrenceExact
+open MathPhys
 
 /-!
 # Incidence–flavour factorization of the Howe certificate

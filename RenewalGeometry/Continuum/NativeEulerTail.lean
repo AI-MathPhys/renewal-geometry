@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Action.DiscreteEulerRowDifference
+import MathPhys.Variational.DiscreteEulerRowDifference
 import RenewalGeometry.Continuum.NativeTailTransferBounds
+open MathPhys
 
 /-!
 # The finite Euler-row tail transfer (`eq:native-Euler-tail`)
@@ -36,6 +37,7 @@ open Finset Filter Topology Metric Set NormedSpace MeasureTheory
 open scoped ContDiff
 
 namespace RenewalGeometry.NativeTail
+open MathPhys.NativeTail
 
 open ShiftedJetAction (Grid unitVec stencil action)
 open NativeScaling (Mat eta metric readerOmega omegaLink)

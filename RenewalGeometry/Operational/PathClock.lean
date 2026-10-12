@@ -3,10 +3,11 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import NCG.Operator.Diagonal
-import NCG.Graph.Multigraph
+import MathPhys.OperatorTheory.Diagonal
+import MathPhys.Graph.Multigraph
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # The graded path clock and its modular eigenoperators
 
@@ -36,7 +37,7 @@ The construction is carried on the finitely-supported core:
 
 namespace RenewalGeometry.Upstream
 
-open NCG RenewalGeometry
+open MathPhys RenewalGeometry
 
 /-- A **graded path system**: a path space `P` with weighted depth,
 edge depths `ℓ`, and partial edge creation raising depth by exactly

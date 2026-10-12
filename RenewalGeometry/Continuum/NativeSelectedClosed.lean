@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeClosureClosed
 import RenewalGeometry.Action.NativeSelectedClosure
+open MathPhys
 
 /-!
 # `thm:native-selected-closure` for native records
@@ -36,6 +37,7 @@ open MeasureTheory Filter Topology Set Finset
 open scoped Real Nat
 
 namespace RenewalGeometry.RecordTuple
+open MathPhys.RecordTuple
 
 open DiscreteEulerConsistency (R4)
 open NativeScaling (Mat)

@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactStationaryConnection
-import RenewalGeometry.Analysis.AnalyticCoordinateDivision
+import MathPhys.Analysis.AnalyticCoordinateDivision
+open MathPhys
 
 /-!
 # The link remainder of the explicit action as a spacing-analytic local operator

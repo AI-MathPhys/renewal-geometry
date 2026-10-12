@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.StandardModel.RenewalCommonAction
 import RenewalGeometry.StandardModel.FiniteStandardModelSourceNativeEmergenceExact
+open MathPhys
 
 /-!
 # Renewal realization of the finite Einstein–Standard-Model interface

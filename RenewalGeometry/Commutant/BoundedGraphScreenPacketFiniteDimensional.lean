@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.CofinalSpectralUpgradeExact
-import RenewalGeometry.Commutant.JointCommutatorBoundedKernelSpectralConsequencesFromDenseSourcesAndGraphScreens
+import MathPhys.OperatorAlgebras.JointCommutatorBoundedKernelSpectralConsequencesFromDenseSourcesAndGraphScreens
+open MathPhys
 
 /-!
 # The bounded-limit graph-screen packet forces a finite-dimensional carrier
@@ -27,7 +28,7 @@ open Complex Filter Set Topology
 
 noncomputable section
 
-namespace RenewalGeometry.VaryingHilbert.System
+namespace MathPhys.VaryingHilbert.System
 
 universe u v
 
@@ -41,9 +42,9 @@ variable {F : Type u} [NormedAddCommGroup F] [InnerProductSpace ℂ F]
 theorem boundedGraphScreenPacket_finiteDimensional
     {d : ℕ → Type u} [∀ cutoff, Fintype (d cutoff)] {s : ℕ}
     (c : ∀ cutoff, Fin s → Matrix (d cutoff) (d cutoff) ℂ)
-    (J : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := H)
+    (J : MathPhys.VaryingHilbert.System (K := ℂ) (H := H)
       (Hn := fun cutoff ↦ EuclideanSpace ℂ (d cutoff × d cutoff)))
-    (L : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := WithLp 2 (H × F))
+    (L : MathPhys.VaryingHilbert.System (K := ℂ) (H := WithLp 2 (H × F))
       (Hn := fun cutoff ↦ WithLp 2
         (EuclideanSpace ℂ (d cutoff × d cutoff) ×
           EuclideanSpace ℂ (Fin s × (d cutoff × d cutoff)))))
@@ -53,7 +54,7 @@ theorem boundedGraphScreenPacket_finiteDimensional
     (source : H → ∀ cutoff, EuclideanSpace ℂ (d cutoff × d cutoff))
     (hsource : ∀ y ∈ D, J.StronglyConverges (source y) y)
     (hcore : ∀ y ∈ D, J.StronglyConverges
-      (fun cutoff ↦ RenewalGeometry.jointCommutatorResolventFamily c lam0 cutoff
+      (fun cutoff ↦ MathPhys.jointCommutatorResolventFamily c lam0 cutoff
         (source y cutoff))
       (boundedOperatorNormalResolventFamily A lam0 y))
     (a : ℝ) (ha : 0 < a)
@@ -62,9 +63,9 @@ theorem boundedGraphScreenPacket_finiteDimensional
     (htail : ∀ ε > 0, ∃ screenIndex, ∀ y ∈ L.embeddedUnitBallOutputs
       (fun cutoff ↦ operatorGraphResolventHilbertGraph
         (⊤ : Submodule ℂ (EuclideanSpace ℂ (d cutoff × d cutoff)))
-        (boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM (c cutoff)))
-        (RenewalGeometry.jointCommutatorResolventFamily c a cutoff) a ha
-        (RenewalGeometry.jointCommutatorResolventFamily_resolventEquation c a ha cutoff)),
+        (boundedOperatorGraphMap (MathPhys.jointCommutatorCLM (c cutoff)))
+        (MathPhys.jointCommutatorResolventFamily c a cutoff) a ha
+        (MathPhys.jointCommutatorResolventFamily_resolventEquation c a ha cutoff)),
       ‖y - screen screenIndex y‖ < ε)
     (hfst : ∀ cutoff y, J.embedding cutoff y.fst = (L.embedding cutoff y).fst)
     (b : ℝ) (hb : 0 < b) :
@@ -91,9 +92,9 @@ a bounded limit forces `FiniteDimensional ℂ H` while the packet also assumes t
 theorem cofinalSpectralUpgrade_packet_false
     {d : ℕ → Type u} [∀ cutoff, Fintype (d cutoff)] {s : ℕ}
     (c : ∀ cutoff, Fin s → Matrix (d cutoff) (d cutoff) ℂ)
-    (J : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := H)
+    (J : MathPhys.VaryingHilbert.System (K := ℂ) (H := H)
       (Hn := fun cutoff ↦ EuclideanSpace ℂ (d cutoff × d cutoff)))
-    (L : RenewalGeometry.VaryingHilbert.System (K := ℂ) (H := WithLp 2 (H × F))
+    (L : MathPhys.VaryingHilbert.System (K := ℂ) (H := WithLp 2 (H × F))
       (Hn := fun cutoff ↦ WithLp 2
         (EuclideanSpace ℂ (d cutoff × d cutoff) ×
           EuclideanSpace ℂ (Fin s × (d cutoff × d cutoff)))))
@@ -103,7 +104,7 @@ theorem cofinalSpectralUpgrade_packet_false
     (source : H → ∀ cutoff, EuclideanSpace ℂ (d cutoff × d cutoff))
     (hsource : ∀ y ∈ D, J.StronglyConverges (source y) y)
     (hcore : ∀ y ∈ D, J.StronglyConverges
-      (fun cutoff ↦ RenewalGeometry.jointCommutatorResolventFamily c lam0 cutoff
+      (fun cutoff ↦ MathPhys.jointCommutatorResolventFamily c lam0 cutoff
         (source y cutoff))
       (boundedOperatorNormalResolventFamily A lam0 y))
     (a : ℝ) (ha : 0 < a)
@@ -112,9 +113,9 @@ theorem cofinalSpectralUpgrade_packet_false
     (htail : ∀ ε > 0, ∃ screenIndex, ∀ y ∈ L.embeddedUnitBallOutputs
       (fun cutoff ↦ operatorGraphResolventHilbertGraph
         (⊤ : Submodule ℂ (EuclideanSpace ℂ (d cutoff × d cutoff)))
-        (boundedOperatorGraphMap (RenewalGeometry.jointCommutatorCLM (c cutoff)))
-        (RenewalGeometry.jointCommutatorResolventFamily c a cutoff) a ha
-        (RenewalGeometry.jointCommutatorResolventFamily_resolventEquation c a ha cutoff)),
+        (boundedOperatorGraphMap (MathPhys.jointCommutatorCLM (c cutoff)))
+        (MathPhys.jointCommutatorResolventFamily c a cutoff) a ha
+        (MathPhys.jointCommutatorResolventFamily_resolventEquation c a ha cutoff)),
       ‖y - screen screenIndex y‖ < ε)
     (hfst : ∀ cutoff y, J.embedding cutoff y.fst = (L.embedding cutoff y).fst)
     (b : ℝ) (hb : 0 < b)
@@ -122,4 +123,4 @@ theorem cofinalSpectralUpgrade_packet_false
   hinfinite (boundedGraphScreenPacket_finiteDimensional c J L A lam0 hlam0 D hD source hsource
     hcore a ha screen hcompact htail hfst b hb)
 
-end RenewalGeometry.VaryingHilbert.System
+end MathPhys.VaryingHilbert.System

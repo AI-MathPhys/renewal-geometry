@@ -4,10 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.AnalyticCauchyProductCoefficients
+import MathPhys.Analysis.AnalyticCauchyProductCoefficients
 import RenewalGeometry.Gravity.ExactInitialAccelerationGate
 import RenewalGeometry.Gravity.FiniteAccInvarianceExact
 import RenewalGeometry.Gravity.MultiplierAccelerationExact
+open MathPhys
 
 /-!
 # The coefficient-complete acceleration certificate and its initial-data verdict

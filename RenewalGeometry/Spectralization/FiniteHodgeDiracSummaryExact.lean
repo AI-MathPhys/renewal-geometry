@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.FiniteHodgeDiracDatumExact
 import RenewalGeometry.Spectralization.EssentialImageReconstructionExact
+open MathPhys
 /-!
 # Finite Hodge--Dirac reconstruction and commutant coordinates (`thm:summary-finite`)
 

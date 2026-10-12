@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Lorentz.StochasticPressure
-import RenewalGeometry.Lorentz.StationaryExchange
+import MathPhys.LorentzianGeometry.StationaryExchange
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Primitivity and the unique stationary law of the heat-bath chain
 
@@ -334,7 +335,7 @@ theorem heatBath_stationary_unique [Nonempty ι] (D : IsingData ι)
     (hπ : ∀ β', ∑ β, π β * heatBathMatrix D ν β β' = π β')
     (hπ' : ∀ β', ∑ β, π' β * heatBathMatrix D ν β β' = π' β') :
     π = π' := by
-  refine RenewalGeometry.stationary_unique_of_pos
+  refine MathPhys.stationary_unique_of_pos
     (Q := fun β β' =>
       (heatBathMatrix D ν ^ Fintype.card ι) β β')
     (fun β β' => heatBathMatrix_pow_pos D ν hν β β')

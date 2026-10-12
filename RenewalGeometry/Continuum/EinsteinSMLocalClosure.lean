@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMMainLimit
+open MathPhys
 
 /-!
 # Localized variational closure on one compact subslab (towards `thm:regular-branch`)
@@ -34,6 +36,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 
 variable {T : ℝ} {Ysec : Type} [Fintype Ysec] (FC : FermionCarrier Ysec)
 

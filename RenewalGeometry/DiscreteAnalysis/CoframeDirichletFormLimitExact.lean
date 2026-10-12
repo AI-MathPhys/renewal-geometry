@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.DiscreteAnalysis.CoframeRenewalPacketExact
-import RenewalGeometry.Analysis.UnitCubeRiemannSum
+import MathPhys.Analysis.UnitCubeRiemannSum
+open MathPhys
 
 /-!
 # Dirichlet-form limit of the coframe renewal packet on the torus
@@ -31,7 +32,7 @@ the periodicity hypothesis here.
 -/
 
 open Finset Filter Topology MeasureTheory Set
-open RenewalGeometry.LineTaylorRemainderBound RenewalGeometry.UnitCubeRiemannSum
+open MathPhys.LineTaylorRemainderBound MathPhys.UnitCubeRiemannSum
 
 namespace RenewalGeometry.CoframeRenewalPacket
 

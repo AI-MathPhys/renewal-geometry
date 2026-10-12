@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Algebra.OddChoiOccurrenceExact
-import RenewalGeometry.Commutant.SingularPolarData
-import RenewalGeometry.Commutant.SourceCoercivityInfluenceExact
+import MathPhys.Algebra.OddChoiOccurrenceExact
+import MathPhys.OperatorAlgebras.SingularPolarData
+import MathPhys.OperatorAlgebras.SourceCoercivityInfluenceExact
+open MathPhys
 
 /-!
 # Exact singular polar-edge energy and support leakage (`prop:singular-polar-energy`)

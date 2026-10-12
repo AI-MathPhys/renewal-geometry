@@ -3,10 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import NCG.Krein.SignedDirac
-import NCG.Graph.Cohomology
+import MathPhys.Krein.SignedDirac
+import MathPhys.Graph.Cohomology
 
-open NCG
+open MathPhys
 /-!
 # Assembly of the kinematic Lorentzian predictive geometry
 
@@ -30,7 +30,7 @@ open NCG
   regime the four pillars are the proved statements: `q_alg = c`
   (`RenewalGeometry.latticeShellCard_le`/`le_latticeShellCard`), interval growth
   `τ^c` (`RenewalGeometry.card_interval`), non-removability of `J_χ` for a nonzero
-  class (`RenewalGeometry.Multigraph.nonremovable_of_class_ne_zero`), and the
+  class (`MathPhys.Multigraph.nonremovable_of_class_ne_zero`), and the
   assembled signed Dirac.
 
 * **Definition `def:rescaling`** — the calibrated rescaling
@@ -104,14 +104,15 @@ end KinematicLorentzianData
 (`thm:regular-lorentzian` (iii)) -/
 
 namespace Multigraph
-open NCG.Multigraph
+open MathPhys.Multigraph
+open MathPhys.Multigraph
 
-open NCG.Multigraph in
+open MathPhys.Multigraph in
 /-- **Theorem `thm:regular-lorentzian` (iii)**: a sign cocycle with
 nonzero class is not removable by a flat gauge (`cor:removability`
 contrapositive) — the fundamental symmetry of the signed cover is
 essential. -/
-theorem _root_.NCG.Multigraph.nonremovable_of_class_ne_zero {G : Multigraph}
+theorem _root_.MathPhys.Multigraph.nonremovable_of_class_ne_zero {G : Multigraph}
     {χ : G.E → ZMod 2} (h : H1.mk G χ ≠ 0) :
     ¬IsCoboundary (G := G) χ :=
   fun hc => h (H1.mk_eq_zero_iff.mpr hc)

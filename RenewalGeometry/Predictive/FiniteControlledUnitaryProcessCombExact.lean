@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.FiniteControlledUnitaryMarkedInstrumentExact
-import RenewalGeometry.Predictive.FiniteProcessCombTomography
+import MathPhys.SystemsTheory.FiniteProcessCombTomography
+open MathPhys
 /-!
 # Finite controlled-unitary process combs
 

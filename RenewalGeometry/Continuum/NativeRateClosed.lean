@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeClosureClosed
+open MathPhys
 
 /-!
 # `cor:native-rate` for native records: general rates, the example, residuals, dyadic chains
@@ -30,6 +31,7 @@ open MeasureTheory Filter Topology Set Finset Asymptotics
 open scoped Real ContDiff Nat
 
 namespace RenewalGeometry.RecordTuple
+open MathPhys.RecordTuple
 
 open DiscreteEulerConsistency (R4)
 open NativeScaling (Mat)

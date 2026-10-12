@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Lorentz.HeatBathPrimitivity
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Dobrushin contraction and exponential mixing
 

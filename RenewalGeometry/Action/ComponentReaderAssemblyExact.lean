@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Action.SobolevReaderCriterionExact
+import MathPhys.Variational.SobolevReaderCriterionExact
+open MathPhys
 
 /-!
 # Assembly of full-reader bounds from component certificates
@@ -37,6 +38,7 @@ open scoped BigOperators
 
 namespace RenewalGeometry
 namespace SobolevReader
+open MathPhys.SobolevReader
 
 variable {β : Type*} [Fintype β] {F : β → Type*} [∀ b, NormedAddCommGroup (F b)]
   [∀ b, NormedSpace ℝ (F b)]

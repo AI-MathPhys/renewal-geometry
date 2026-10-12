@@ -8,6 +8,7 @@ import RenewalGeometry.StandardModel.BridgeRouterResidualsExact
 import RenewalGeometry.StandardModel.CentralSeparationExact
 import RenewalGeometry.Commutant.JointTypedActionAlgebra
 import RenewalGeometry.StandardModel.InternalSeedSaturationWords
+open MathPhys
 
 /-!
 # Colour bridge, weak router, and central separation: the complete statement

@@ -5,8 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Gravity.FiniteBRSTWardEinstein
 import RenewalGeometry.Spectralization.SaturatedFiniteDiracGenerator
-import RenewalGeometry.Commutant.CenteredCommutantNormal
-import RenewalGeometry.Algebra.SqrtPolar
+import MathPhys.OperatorAlgebras.CenteredCommutantNormal
+import MathPhys.Algebra.SqrtPolar
 import RenewalGeometry.Gravity.FiniteLineValuedEinstein
 import RenewalGeometry.Action.MatterLegendre2
 import RenewalGeometry.Action.TypedMatterHamiltonianClosure
@@ -15,6 +15,7 @@ import RenewalGeometry.Operational.CoherentClosureQuantitativeEnvelope
 import RenewalGeometry.Commutant.SingularSupportPolarCommutantExactness
 import RenewalGeometry.StandardModel.SMSTUnitWriter
 import RenewalGeometry.StandardModel.ZeroModeSaturationExact
+open MathPhys
 /-!
 # Finite-action Ward, BRST, stress, and Einstein identities
 

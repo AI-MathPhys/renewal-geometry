@@ -3,11 +3,11 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.OperatorLimits.CompactResolventDiracSpectralScreensExact
+import MathPhys.OperatorLimits.CompactResolventDiracSpectralScreensExact
 import RenewalGeometry.Spectralization.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact
 import Mathlib.Analysis.InnerProductSpace.PiL2
 
-open NCG
+open MathPhys
 
 /-!
 # Marked realizations of compact-resolvent finite spectral screens
@@ -31,7 +31,7 @@ variable {A : Type*} [Ring A] [StarRing A] [Algebra ℂ A] [StarModule ℂ A]
 variable {H : Type u} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
   [CompleteSpace H]
 
-open RenewalGeometry.CompactResolventDiracSpectralScreensExact
+open MathPhys.CompactResolventDiracSpectralScreensExact
 open RenewalGeometry.CoordinateFiniteSpectralPacketMarkedRenewalRealizationExact
 
 abbrev ScreenSpace (S : SpectralTriple A H) (s : Finset ℂ) :=

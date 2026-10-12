@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.AustereUnitZeroModeExact
 import RenewalGeometry.Spectralization.FiniteSpectralizationFunctorScaleExact
+open MathPhys
 /-!
 # The finite Hodge--Dirac triple of a finite real differential datum
 

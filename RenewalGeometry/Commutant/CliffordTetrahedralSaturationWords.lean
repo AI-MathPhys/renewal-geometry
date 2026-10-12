@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Commutant.CliffordTetrahedralCompatibilityExact
 import RenewalGeometry.StandardModel.InternalSeedSaturationWords
+open MathPhys
 
 /-!
 # The saturation clause of `thm:clifford-tetrahedral-compatibility` for the actual bank

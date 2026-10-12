@@ -6,8 +6,9 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMLocalClosure
 import RenewalGeometry.Continuum.EinsteinSMDiracStability
-import RenewalGeometry.Analysis.TorusC1Rellich
-import RenewalGeometry.Analysis.TorusBoxRestriction
+import MathPhys.Analysis.TorusC1Rellich
+import MathPhys.Analysis.TorusBoxRestriction
+open MathPhys
 
 /-!
 # The regular Sobolev branch: `C¹` compactness of the bosonic fields and automatic screens
@@ -43,6 +44,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace RegularBranch
 
 open SobolevOpen (pd box IsTest MemW12)

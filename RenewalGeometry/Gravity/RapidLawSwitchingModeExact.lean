@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.RapidLawSwitching
-import RenewalGeometry.Gravity.SupplementLawMultiplierExact
+import MathPhys.Gravity.SupplementLawMultiplierExact
+open MathPhys
 
 /-!
 # Rapid switching is not included: the corner mode of the actual law family

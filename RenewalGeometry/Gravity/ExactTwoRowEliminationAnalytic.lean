@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.AnalyticImplicitFunction
+import MathPhys.Analysis.AnalyticImplicitFunction
 import RenewalGeometry.Gravity.ExactSlowBranchData
+open MathPhys
 
 /-!
 # Exact two-row elimination: linear critical coordinates and the analytic graph `γ`

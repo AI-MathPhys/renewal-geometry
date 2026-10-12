@@ -3,9 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import NCG.Algebra.CPMap
+import MathPhys.Algebra.CPMap
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Renewal memories
 
@@ -15,8 +16,8 @@ reset alphabet `E`, i.e. a family of channels `Φ_σ` indexed by `σ : E`.
 
 At this layer the channels take values in an arbitrary monoid `M`; the
 completely positive realization is obtained by instantiating
-`M := NCG.UCPMap A` (see `RenewalGeometry.CPRenewalMemory`).  All of the predictive
-quotient theory (`NCG.Renewal.PredictiveQuotient`) only uses the monoid
+`M := MathPhys.UCPMap A` (see `RenewalGeometry.CPRenewalMemory`).  All of the predictive
+quotient theory (`MathPhys.Renewal.PredictiveQuotient`) only uses the monoid
 structure, exactly as in the manuscript where the predictive quotient is a
 quotient of the free monoid of histories by a channel-kernel congruence.
 

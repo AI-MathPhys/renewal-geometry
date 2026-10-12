@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeStressDirac
+open MathPhys
 
 /-!
 # The coframe (Einstein) row of the native Lagrangian with the complete Standard-Model stress

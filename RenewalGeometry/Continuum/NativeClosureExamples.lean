@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeSelectedClosed
+open MathPhys
 
 /-!
 # Non-vacuity of the native-record hypotheses of `thm:native-closure`
@@ -27,6 +28,7 @@ open Finset Set
 open scoped Real
 
 namespace RenewalGeometry.RecordTuple
+open MathPhys.RecordTuple
 
 open NativeScaling (Mat eta metric)
 open ShiftedJetAction (Grid)

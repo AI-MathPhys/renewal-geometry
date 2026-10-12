@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import MathPhys.Gravity.A3RootVectors
+open MathPhys
 
 /-!
 # Explicit conservative flat-vacuum branch
@@ -29,12 +31,6 @@ frame identity.
 open Matrix Finset
 
 namespace RenewalGeometry
-
-/-- The twelve oriented `A₃` roots. -/
-def a3Roots : Fin 12 → (Fin 3 → ℝ) :=
-  ![![1, 1, 0], ![1, -1, 0], ![-1, 1, 0], ![-1, -1, 0],
-    ![1, 0, 1], ![1, 0, -1], ![-1, 0, 1], ![-1, 0, -1],
-    ![0, 1, 1], ![0, 1, -1], ![0, -1, 1], ![0, -1, -1]]
 
 /-- `cor:relational-flat-vacuum` (the RC.13 frame identity
 and the conductance arithmetic). -/

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Miscellany.ConditionalRecordPanels1
+open MathPhys
 /-!
 # New accepted-quotient/path/LDP records (2026-08-07 tex
   update): formal cores for the seventeen accepted-* records.

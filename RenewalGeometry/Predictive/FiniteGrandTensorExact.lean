@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Predictive.DerivedPredictiveCarrierUniversalExact
-import RenewalGeometry.Commutant.IntrinsicRegularTrace
+import MathPhys.OperatorAlgebras.IntrinsicRegularTrace
 import RenewalGeometry.Operational.MinimalNaturality
+open MathPhys
 
 /-!
 # The finite Renewal Grand Tensor and its canonical reconstruction
@@ -25,7 +26,7 @@ Paper `predictive_spectral_geometry`, labels `def:ncg-grand-tensor` and
 * `wordOp gen w` — the represented operator `[w]` of a finite history word.
 * `wordGram gen v w = τ̂_reg([v]^* [w])` — the word-Gram kernel
   `eq:ncg-word-gram`, with `τ̂_reg` the normalized regular trace
-  `eq:ncg-grand-regular-trace` of `A^hist` (`RenewalGeometry.normalizedRegularTrace`);
+  `eq:ncg-grand-regular-trace` of `A^hist` (`MathPhys.normalizedRegularTrace`);
   `wordGramLevel gen r` is its depth-`r` layer `K_{X,r}`.
 * `GrandTensor` — the bundle `(A^hist, {K_{X,r}}, Z^min)` of
   `eq:ncg-grand-tensor`, with `Z^min` the future-minimal carrier

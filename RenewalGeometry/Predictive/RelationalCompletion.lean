@@ -6,8 +6,9 @@ Authors: Aurélien Pélissier
 import RenewalGeometry.Operational.OperationalRecordCompletionFunctoriality
 import RenewalGeometry.Operational.OperationalCompletionConservativity
 import RenewalGeometry.Predictive.MinimalRecordAudit
-import RenewalGeometry.Predictive.SimultaneousNuisanceUniversalShort
-import RenewalGeometry.Predictive.JointSourceRangeUnitary
+import MathPhys.SystemsTheory.SimultaneousNuisanceUniversalShort
+import MathPhys.SystemsTheory.JointSourceRangeUnitary
+open MathPhys
 /-!
 # Conservative relational completion
 

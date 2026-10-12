@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.CovariantGraphCompactness
+import MathPhys.Continuum.CovariantGraphCompactness
 import RenewalGeometry.Continuum.NativeSpinorVariation
+open MathPhys
 
 /-!
 # The native spinor graph bridge (`prop:native-spinor-variation`, both assertions)

@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.FiniteWilsonZeroDefect
 import RenewalGeometry.GaugeTheory.NativeActionGaugeInvariance
+open MathPhys
 
 /-!
 # Transfer of the finite Wilson hypotheses along a site gauge

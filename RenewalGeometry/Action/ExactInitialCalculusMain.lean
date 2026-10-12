@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactInitialCalculusConstraint
-import RenewalGeometry.Analysis.LyapunovSchmidtRangeReduction
+import MathPhys.Analysis.LyapunovSchmidtRangeReduction
+open MathPhys
 
 /-!
 # The original-action constraint map on one mesh-independent ball
@@ -28,6 +29,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.InitialCalculus
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterLocalJets
-import RenewalGeometry.Analysis.TaylorHermiteResidual
-import RenewalGeometry.Analysis.TaylorHermitePrecision
+import MathPhys.Analysis.TaylorHermiteResidual
+import MathPhys.Analysis.TaylorHermitePrecision
+open MathPhys
 
 /-!
 # The complete Taylor–Hermite residual of the local finite writer

@@ -5,6 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMReducedExtraction
+import MathPhys.Continuum.EinsteinSMDiagonalSubsequence
+open MathPhys
 
 /-!
 # Reduced Einstein–Standard-Model variational closure (`thm:reduced-closure`)
@@ -47,6 +49,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 
 open SobolevOpen (pd box IsTest MemW12)
 
@@ -102,36 +105,41 @@ theorem ae_comp_of_ae {Q : ChartBox T} {u u' : E4 → ι' → ℂ} (h : u =ᵐ[Q
     (fun x => u x c) =ᵐ[Q.μ] fun x => u' x c :=
   h.mono fun x hx => by simp only [hx]
 
-theorem MemH1.congr_ae {Q : ChartBox T} {u u' : E4 → ι' → ℂ} {g g' : E4 → Fin 4 → ι' → ℂ}
+theorem _root_.MathPhys.EinsteinSM.MemH1.congr_ae {Q : ChartBox T} {u u' : E4 → ι' → ℂ}
+    {g g' : E4 → Fin 4 → ι' → ℂ}
     (h : MemH1 Q u g) (hu : u =ᵐ[Q.μ] u') (hg : g =ᵐ[Q.μ] g') : MemH1 Q u' g' := fun c =>
   memW12_congr_ae_box Q (h c) (ae_comp_of_ae hu c) fun i => hg.mono fun x hx => by simp only [hx]
 
-theorem MemH1.mono_box {Q Q' : ChartBox T} (hQ : Q.set ⊆ Q'.set) {u : E4 → ι' → ℂ}
+theorem _root_.MathPhys.EinsteinSM.MemH1.mono_box {Q Q' : ChartBox T} (hQ : Q.set ⊆ Q'.set)
+    {u : E4 → ι' → ℂ}
     {g : E4 → Fin 4 → ι' → ℂ} (h : MemH1 Q' u g) : MemH1 Q u g := fun c => memW12_mono_box hQ (h c)
 
 theorem eLpNorm_box_mono {F : Type*} [NormedAddCommGroup F] {Q Q' : ChartBox T}
     (hQ : Q.set ⊆ Q'.set) (f : E4 → F) (p : ℝ≥0∞) : eLpNorm f p Q.μ ≤ eLpNorm f p Q'.μ :=
   eLpNorm_mono_measure f (Measure.restrict_mono hQ le_rfl)
 
-theorem LpTendsto.mono_box {F : Type*} [NormedAddCommGroup F] {Q Q' : ChartBox T}
+theorem _root_.MathPhys.EinsteinSM.LpTendsto.mono_box {F : Type*} [NormedAddCommGroup F]
+    {Q Q' : ChartBox T}
     (hQ : Q.set ⊆ Q'.set) {p : ℝ≥0∞} {u : ℕ → E4 → F} {u₀ : E4 → F}
     (h : LpTendsto p Q'.μ u u₀) : LpTendsto p Q.μ u u₀ :=
   tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds h (fun n => zero_le)
     fun n => eLpNorm_box_mono hQ _ p
 
-theorem LpTendsto.congr_lim {F : Type*} [NormedAddCommGroup F] {μ : Measure E4} {p : ℝ≥0∞}
+theorem _root_.MathPhys.EinsteinSM.LpTendsto.congr_lim {F : Type*} [NormedAddCommGroup F]
+    {μ : Measure E4} {p : ℝ≥0∞}
     {u : ℕ → E4 → F} {u₀ u₀' : E4 → F} (h : LpTendsto p μ u u₀) (he : u₀ =ᵐ[μ] u₀') :
     LpTendsto p μ u u₀' :=
   h.congr fun n => eLpNorm_congr_ae (f := u n - u₀) (g := u n - u₀') (he.mono fun x hx => by
     simp only [Pi.sub_apply, hx])
 
-theorem H1Tendsto.mono_box {Q Q' : ChartBox T} (hQ : Q.set ⊆ Q'.set) {u : ℕ → E4 → ι' → ℂ}
+theorem _root_.MathPhys.EinsteinSM.H1Tendsto.mono_box {Q Q' : ChartBox T} (hQ : Q.set ⊆ Q'.set)
+    {u : ℕ → E4 → ι' → ℂ}
     {g : ℕ → E4 → Fin 4 → ι' → ℂ} {u₀ : E4 → ι' → ℂ} {g₀ : E4 → Fin 4 → ι' → ℂ}
     (h : H1Tendsto Q' u g u₀ g₀) : H1Tendsto Q u g u₀ g₀ :=
   tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds h (fun n => zero_le)
     fun n => add_le_add (eLpNorm_box_mono hQ _ 2) (eLpNorm_box_mono hQ _ 2)
 
-theorem H1Tendsto.congr_lim {Q : ChartBox T} {u : ℕ → E4 → ι' → ℂ}
+theorem _root_.MathPhys.EinsteinSM.H1Tendsto.congr_lim {Q : ChartBox T} {u : ℕ → E4 → ι' → ℂ}
     {g : ℕ → E4 → Fin 4 → ι' → ℂ} {u₀ u₀' : E4 → ι' → ℂ} {g₀ g₀' : E4 → Fin 4 → ι' → ℂ}
     (h : H1Tendsto Q u g u₀ g₀) (hu : u₀ =ᵐ[Q.μ] u₀') (hg : g₀ =ᵐ[Q.μ] g₀') :
     H1Tendsto Q u g u₀' g₀' :=
@@ -142,7 +150,7 @@ theorem H1Tendsto.congr_lim {Q : ChartBox T} {u : ℕ → E4 → ι' → ℂ}
       eLpNorm_congr_ae (f := g n - g₀) (g := g n - g₀') (hg.mono fun x hx => by
         simp only [Pi.sub_apply, hx])]
 
-theorem WeakH1Tendsto.mono_box {Q Q' : ChartBox T} (hQ : Q.set ⊆ Q'.set)
+theorem _root_.MathPhys.EinsteinSM.WeakH1Tendsto.mono_box {Q Q' : ChartBox T} (hQ : Q.set ⊆ Q'.set)
     {u : ℕ → E4 → ι' → ℂ} {g : ℕ → E4 → Fin 4 → ι' → ℂ} {u₀ : E4 → ι' → ℂ}
     {g₀ : E4 → Fin 4 → ι' → ℂ} (h : WeakH1Tendsto Q' u g u₀ g₀) : WeakH1Tendsto Q u g u₀ g₀ := by
   obtain ⟨h1, h2, ⟨B, hBt, hB⟩, h4, h5⟩ := h
@@ -150,7 +158,7 @@ theorem WeakH1Tendsto.mono_box {Q Q' : ChartBox T} (hQ : Q.set ⊆ Q'.set)
     (add_le_add (eLpNorm_box_mono hQ _ 2) (eLpNorm_box_mono hQ _ 2)).trans (hB n)⟩,
     fun φ hφ c => h4 φ (hφ.mono hQ) c, fun φ hφ i c => h5 φ (hφ.mono hQ) i c⟩
 
-theorem WeakH1Tendsto.congr_lim {Q : ChartBox T} {u : ℕ → E4 → ι' → ℂ}
+theorem _root_.MathPhys.EinsteinSM.WeakH1Tendsto.congr_lim {Q : ChartBox T} {u : ℕ → E4 → ι' → ℂ}
     {g : ℕ → E4 → Fin 4 → ι' → ℂ} {u₀ u₀' : E4 → ι' → ℂ} {g₀ g₀' : E4 → Fin 4 → ι' → ℂ}
     (h : WeakH1Tendsto Q u g u₀ g₀) (hu : u₀ =ᵐ[Q.μ] u₀') (hg : g₀ =ᵐ[Q.μ] g₀') :
     WeakH1Tendsto Q u g u₀' g₀' := by
@@ -198,7 +206,7 @@ theorem ae_eq_of_comp {Q : ChartBox T} {u u' : E4 → ι' → ℂ}
   exact funext hx
 
 /-- Weak `H¹` limits of one sequence agree a.e. (values and gradients). -/
-theorem WeakH1Tendsto.unique {Q : ChartBox T} {u : ℕ → E4 → ι' → ℂ}
+theorem _root_.MathPhys.EinsteinSM.WeakH1Tendsto.unique {Q : ChartBox T} {u : ℕ → E4 → ι' → ℂ}
     {g : ℕ → E4 → Fin 4 → ι' → ℂ} {u₀ u₀' : E4 → ι' → ℂ} {g₀ g₀' : E4 → Fin 4 → ι' → ℂ}
     (h : WeakH1Tendsto Q u g u₀ g₀) (h' : WeakH1Tendsto Q u g u₀' g₀') :
     u₀ =ᵐ[Q.μ] u₀' ∧ g₀ =ᵐ[Q.μ] g₀' := by
@@ -243,7 +251,8 @@ theorem spinorC_ae {Q : ChartBox T} {Ψ Ψ' : E4 → SpinorFibre C} (h : Ψ =ᵐ
   rw [hx]
 
 /-- **Reduced convergence is invariant under a.e. modification of the limit on the chart.** -/
-theorem ReducedConvergence.congr_ae {Q : ChartBox T} {z : ℕ → SmoothFields T left}
+theorem _root_.MathPhys.EinsteinSM.ReducedConvergence.congr_ae {Q : ChartBox T}
+    {z : ℕ → SmoothFields T left}
     {θ : ℕ → CoefficientBank Ysec} {L L' : LimitFields C} {θ₀ : CoefficientBank Ysec}
     (h : ReducedConvergence Q z θ L θ₀) (hL : LimitFields.AEEqOn Q L L') :
     ReducedConvergence Q z θ L' θ₀ := by
@@ -269,8 +278,8 @@ theorem ReducedConvergence.congr_ae {Q : ChartBox T} {z : ℕ → SmoothFields T
       cospinor_weak := h.cospinor_weak.congr_lim (spinorC_ae hL.Ψb) hL.dΨb
       bank_compact := h.bank_compact
       bank_tendsto := h.bank_tendsto }
-  · have e1 : ∫ x, ((φ x : ℝ) : ℂ) * (L'.F x μ ν i j - comm (L'.A x μ) (L'.A x ν) i j) =
-        ∫ x, ((φ x : ℝ) : ℂ) * (L.F x μ ν i j - comm (L.A x μ) (L.A x ν) i j) :=
+  · have e1 : ∫ x, ((φ x : ℝ) : ℂ) * (L'.F x μ ν i j - MathPhys.EinsteinSM.comm (L'.A x μ) (L'.A x ν) i j) =
+        ∫ x, ((φ x : ℝ) : ℂ) * (L.F x μ ν i j - MathPhys.EinsteinSM.comm (L.A x μ) (L.A x ν) i j) :=
       integral_congr_on Q.isOpen.measurableSet (fun x hx => by simp [test_eq_zero_off hφ hx])
         ((hL.F.and hL.A).mono fun x hx => by rw [hx.1, hx.2])
     have e2 : ∫ x, (((pd φ μ x : ℝ) : ℂ) * L'.A x ν i j - ((pd φ ν x : ℝ) : ℂ) * L'.A x μ i j) =
@@ -289,7 +298,7 @@ theorem ReducedConvergence.congr_ae {Q : ChartBox T} {z : ℕ → SmoothFields T
     rw [e1, e2]; exact h.covgrad_weak μ c φ hφ
 
 /-- **Reduced convergence restricts to sub-boxes.** -/
-theorem ReducedConvergence.mono {Q Q' : ChartBox T} (hQ : Q.set ⊆ Q'.set)
+theorem _root_.MathPhys.EinsteinSM.ReducedConvergence.mono {Q Q' : ChartBox T} (hQ : Q.set ⊆ Q'.set)
     {z : ℕ → SmoothFields T left} {θ : ℕ → CoefficientBank Ysec} {L : LimitFields C}
     {θ₀ : CoefficientBank Ysec} (h : ReducedConvergence Q' z θ L θ₀) :
     ReducedConvergence Q z θ L θ₀ := by
@@ -317,7 +326,8 @@ theorem ReducedConvergence.mono {Q Q' : ChartBox T} (hQ : Q.set ⊆ Q'.set)
       bank_tendsto := h.bank_tendsto }
 
 /-- **Reduced convergence passes to subsequences.** -/
-theorem ReducedConvergence.comp {Q : ChartBox T} {z : ℕ → SmoothFields T left}
+theorem _root_.MathPhys.EinsteinSM.ReducedConvergence.comp {Q : ChartBox T}
+    {z : ℕ → SmoothFields T left}
     {θ : ℕ → CoefficientBank Ysec} {L : LimitFields C} {θ₀ : CoefficientBank Ysec}
     (h : ReducedConvergence Q z θ L θ₀) {ψ : ℕ → ℕ} (hψ : Tendsto ψ atTop atTop) :
     ReducedConvergence Q (fun k => z (ψ k)) (fun k => θ (ψ k)) L θ₀ := by
@@ -344,14 +354,16 @@ theorem ReducedConvergence.comp {Q : ChartBox T} {z : ℕ → SmoothFields T lef
       bank_tendsto := h.bank_tendsto.comp hψ }
 
 /-- Replace the limiting bank by another limit of the same banks. -/
-theorem ReducedConvergence.with_bank {Q : ChartBox T} {z : ℕ → SmoothFields T left}
+theorem _root_.MathPhys.EinsteinSM.ReducedConvergence.with_bank {Q : ChartBox T}
+    {z : ℕ → SmoothFields T left}
     {θ : ℕ → CoefficientBank Ysec} {L : LimitFields C} {θ₀ θ₁ : CoefficientBank Ysec}
     (h : ReducedConvergence Q z θ L θ₀) (hθ : BankTendsto θ θ₁) :
     ReducedConvergence Q z θ L θ₁ :=
   { h with bank_tendsto := hθ }
 
 /-- **Limits in the reduced topology are unique a.e.** on the chart. -/
-theorem ReducedConvergence.unique {Q : ChartBox T} {z : ℕ → SmoothFields T left}
+theorem _root_.MathPhys.EinsteinSM.ReducedConvergence.unique {Q : ChartBox T}
+    {z : ℕ → SmoothFields T left}
     {θ : ℕ → CoefficientBank Ysec} {L L' : LimitFields C} {θ₀ θ₀' : CoefficientBank Ysec}
     (h : ReducedConvergence Q z θ L θ₀) (h' : ReducedConvergence Q z θ L' θ₀') :
     LimitFields.AEEqOn Q L L' := by
@@ -429,14 +441,16 @@ section Tail
 
 variable {T : ℝ} {C : Type} [Fintype C] {left : C → Bool} {Ysec : Type} [Fintype Ysec]
 
-theorem IsCompactCoframeSet.union {K₁ K₂ : Set CoframeFibre} (h₁ : IsCompactCoframeSet K₁)
+theorem _root_.MathPhys.EinsteinSM.IsCompactCoframeSet.union {K₁ K₂ : Set CoframeFibre}
+    (h₁ : IsCompactCoframeSet K₁)
     (h₂ : IsCompactCoframeSet K₂) : IsCompactCoframeSet (K₁ ∪ K₂) :=
   ⟨h₁.1.union h₂.1, union_subset h₁.2 h₂.2⟩
 
 /-- **Reduced convergence from a tail**: reduced convergence of a shifted sequence, together with
 the reduced certificate for the whole sequence, gives reduced convergence of the whole
 sequence. -/
-theorem ReducedConvergence.of_tail {Q : ChartBox T} {z : ℕ → SmoothFields T left}
+theorem _root_.MathPhys.EinsteinSM.ReducedConvergence.of_tail {Q : ChartBox T}
+    {z : ℕ → SmoothFields T left}
     {θ : ℕ → CoefficientBank Ysec} {L : LimitFields C} {θ₀ : CoefficientBank Ysec} (m : ℕ)
     (h : ReducedConvergence Q (fun k => z (k + m)) (fun k => θ (k + m)) L θ₀)
     (hc : ReducedCertificate Q z θ) : ReducedConvergence Q z θ L θ₀ := by
@@ -531,15 +545,6 @@ end Exhaustion
 section Diagonal
 
 variable {T : ℝ}
-
-/-- A strictly increasing sequence whose tail lies in the range of a strictly increasing `F` is a
-subsequence of `F` along its tail. -/
-theorem exists_strictMono_of_range {F D : ℕ → ℕ} (hF : StrictMono F) (hD : StrictMono D) (m : ℕ)
-    (h : ∀ k, D (k + m) ∈ range F) : ∃ χ : ℕ → ℕ, StrictMono χ ∧ ∀ k, D (k + m) = F (χ k) := by
-  choose χ hχ using h
-  refine ⟨χ, fun a b hab => ?_, fun k => (hχ k).symm⟩
-  have : F (χ a) < F (χ b) := by rw [hχ a, hχ b]; exact hD (by omega)
-  exact hF.lt_iff_lt.mp this
 
 /-- Patching: if `f j = f m` a.e. on `Q j` for all `j ≤ m`, and `k x ≤ m` with `x ∈ Q (k x)` on
 `Q m`, then `f (k x) x = f m x` a.e. on `Q m`. -/
@@ -668,7 +673,8 @@ def HiggsH1L4Convergence (Q : ChartBox T) (z : ℕ → SmoothFields T left) (L :
 /-- **`prop:covariant-higgs-endpoint` in the reduced class**: reduced convergence on a chart box
 upgrades the Higgs convergence to strong `H¹(Q) ∩ L⁴(Q)`, with limiting ordinary gradient
 `D_AH - ρ_H(A)H`. -/
-theorem ReducedConvergence.higgs_strong {Q : ChartBox T} {z : ℕ → SmoothFields T left}
+theorem _root_.MathPhys.EinsteinSM.ReducedConvergence.higgs_strong {Q : ChartBox T}
+    {z : ℕ → SmoothFields T left}
     {θ : ℕ → CoefficientBank Ysec} {L : LimitFields C} {θ₀ : CoefficientBank Ysec}
     (h : ReducedConvergence Q z θ L θ₀) : HiggsH1L4Convergence Q z L := by
   have hcl := Q.isCompact_closure
@@ -805,7 +811,8 @@ end Distributions
 /-- The carrier's Yukawa map depends continuously on the coefficient bank (in the manuscript the
 Yukawa/Majorana map is a fixed linear function of the bank's Yukawa matrices; the carrier
 encoding leaves this dependence abstract, so its continuity is stated). -/
-def FermionCarrier.YukawaContinuous {Ysec : Type} [Fintype Ysec] (FC : FermionCarrier Ysec) :
+def _root_.MathPhys.EinsteinSM.FermionCarrier.YukawaContinuous {Ysec : Type} [Fintype Ysec]
+    (FC : FermionCarrier Ysec) :
     Prop :=
   ∀ (θ : ℕ → CoefficientBank Ysec) (θ₀ : CoefficientBank Ysec), BankTendsto θ θ₀ →
     Tendsto (fun n => yukL FC (θ n)) atTop (𝓝 (yukL FC θ₀)) ∧
@@ -944,7 +951,8 @@ end Homogeneity
 
 /-! ### The limiting bank is physical -/
 
-theorem ReducedConvergence.bank_physical {T : ℝ} {C : Type} [Fintype C] {left : C → Bool}
+theorem _root_.MathPhys.EinsteinSM.ReducedConvergence.bank_physical {T : ℝ} {C : Type}
+    [Fintype C] {left : C → Bool}
     {Ysec : Type} [Fintype Ysec] {Q : ChartBox T} {z : ℕ → SmoothFields T left}
     {θ : ℕ → CoefficientBank Ysec} {L : LimitFields C} {θ₀ : CoefficientBank Ysec}
     (h : ReducedConvergence Q z θ L θ₀) : θ₀ ∈ physicalBanks := by

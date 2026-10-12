@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.Continuum.FiniteWilsonGaugeTransfer
 import RenewalGeometry.Continuum.NativeLinkCovectorNorm
 import RenewalGeometry.GaugeTheory.NativeRecordNormalizationSM
+open MathPhys
 
 /-!
 # The finite Wilson-screen zero-defect criterion (`thm:finite-Wilson-zero-defect`)

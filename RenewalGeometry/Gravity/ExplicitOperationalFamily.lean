@@ -4,10 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Analysis.FiniteMarkovPathSums
-import RenewalGeometry.Analysis.PiecewiseAffineH1
+import MathPhys.Analysis.FiniteMarkovPathSums
+import MathPhys.Analysis.PiecewiseAffineH1
 import RenewalGeometry.Gravity.FiniteHomogeneousStationarityExact
 import RenewalGeometry.Gravity.VacuumRegulatorStationarity
+open MathPhys
 
 /-!
 # The explicit finite accept/reject operational family with an Einstein limit

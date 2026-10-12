@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Continuum.EinsteinSMVariationContinuity
-import RenewalGeometry.Analysis.CardinalQuasiInterpolant
-import RenewalGeometry.Analysis.TransportStencilVariation
-import RenewalGeometry.Analysis.C11BoundsCalculus
+import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
+import MathPhys.Continuum.EinsteinSMVariationContinuity
+import MathPhys.Analysis.CardinalQuasiInterpolant
+import MathPhys.Analysis.TransportStencilVariation
+import MathPhys.Analysis.C11BoundsCalculus
+open MathPhys
 
 /-!
 # The smooth comparison regulator of `app:reconstruction`
@@ -71,6 +73,7 @@ set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace Comparison
 
 open SobolevOpen (pd)
@@ -126,8 +129,9 @@ theorem toYM_mmul (X Y : LieFibre) : toYM (mmul X Y) = toYM X * toYM Y := by
   simp only [mmul, toYM_apply, Finset.sum_mul, Finset.mul_sum, mul_assoc]
   exact Finset.sum_comm
 
-theorem toYM_comm (X Y : LieFibre) : toYM (comm X Y) = toYM X * toYM Y - toYM Y * toYM X := by
-  rw [comm, map_sub, toYM_mmul, toYM_mmul]
+theorem toYM_comm (X Y : LieFibre) :
+    toYM (MathPhys.EinsteinSM.comm X Y) = toYM X * toYM Y - toYM Y * toYM X := by
+  rw [MathPhys.EinsteinSM.comm, map_sub, toYM_mmul, toYM_mmul]
 
 /-! ### Connection operators -/
 

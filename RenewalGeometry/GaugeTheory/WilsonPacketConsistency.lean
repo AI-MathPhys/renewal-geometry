@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.GaugeTheory.TransportPlaquetteConsistency
-import RenewalGeometry.Analysis.NormedAlgebraLogBCH
+import MathPhys.GaugeTheory.TransportPlaquetteConsistency
+import MathPhys.Analysis.NormedAlgebraLogBCH
 import RenewalGeometry.Action.NativeScalingBlocksExact
+open MathPhys
 
 /-!
 # Literal Wilson packets versus the reconstructed connection (`eq:Wilson-packet-consistency`)

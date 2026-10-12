@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Commutant.FiniteAnchorHowe
-import RenewalGeometry.Commutant.RelativeHoweGramSpectralCertificateExact
+import MathPhys.OperatorAlgebras.RelativeHoweGramSpectralCertificateExact
+open MathPhys
 /-!
 # Finite-anchor locking for the actual Howe commutator source
 

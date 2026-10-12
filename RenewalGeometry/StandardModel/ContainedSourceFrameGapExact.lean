@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.EndpointAllocationCompilerExact
+open MathPhys
 
 /-!
 # Contained-source frame separation
@@ -100,7 +101,7 @@ theorem frameGap_rank_add (U : Matrix H E ℂ) {P : Matrix H H ℂ} (hPh : Pᴴ 
     (frameResidual U P).rank + P.rank = U.rank := by
   obtain ⟨J, hJ⟩ := exists_eq_mul_of_range_le U P hPU
   have hT2 : Pᵀ * Pᵀ = Pᵀ := by rw [← Matrix.transpose_mul, hPP]
-  have hstack := RenewalGeometry.stacked_rank_innovation Pᵀ Uᵀ Pᵀ hT2 hT2 rfl
+  have hstack := MathPhys.stacked_rank_innovation Pᵀ Uᵀ Pᵀ hT2 hT2 rfl
   have hrows : (Matrix.fromRows Pᵀ Uᵀ).rank = U.rank := by
     rw [← Matrix.transpose_fromCols, Matrix.rank_transpose, hJ,
       EndpointAllocationCompiler.rank_fromCols_mul_self]

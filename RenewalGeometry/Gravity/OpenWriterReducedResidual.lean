@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Gravity.OpenWriterLimitRegularity
+import MathPhys.Gravity.OpenWriterLimitRegularity
 import RenewalGeometry.Gravity.OpenWriterLawJetComparison
+open MathPhys
 
 /-!
 # The complete reduced residual of the interpolated writer state is `O(h)` in `H^{s-2}`

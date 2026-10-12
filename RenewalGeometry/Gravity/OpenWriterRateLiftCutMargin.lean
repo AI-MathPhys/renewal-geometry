@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.OpenWriterRateLift
-import RenewalGeometry.DiscreteAnalysis.TorusCoordinateIsoperimetryExact
+import MathPhys.DiscreteAnalysis.TorusCoordinateIsoperimetryExact
 import RenewalGeometry.Renewal.EfficientCutConstantScreen
+open MathPhys
 
 /-!
 # Cutoff-uniform cut margin of the `D₃` rate-lift graph on the odd periodic grid

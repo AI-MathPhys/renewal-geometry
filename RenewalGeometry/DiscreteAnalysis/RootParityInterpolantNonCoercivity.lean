@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.DiscreteAnalysis.PeriodicGridInterpolation
+import MathPhys.DiscreteAnalysis.PeriodicGridInterpolation
 import RenewalGeometry.DiscreteAnalysis.RootParityConnectorExact
+open MathPhys
 
 /-!
 # Root-parity non-coercivity against the interpolant gradient (`lem:supp-open-parity`)

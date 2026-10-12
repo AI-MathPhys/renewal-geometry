@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeCalibrationSampling
+open MathPhys
 
 /-!
 # `cor:local-calibration-nonempty`: the calibration class of `thm:native-closure` is non-empty

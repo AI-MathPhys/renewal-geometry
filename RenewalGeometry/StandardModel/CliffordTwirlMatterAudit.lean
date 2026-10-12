@@ -6,8 +6,9 @@ Authors: Aurélien Pélissier
 import RenewalGeometry.StandardModel.CliffordMarginalMatterNoGo
 import RenewalGeometry.Commutant.GrandWedderburn
 import RenewalGeometry.Measurement.NormalBranchPurityMargin
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # One-scalar Clifford-twirl matter audit
 
@@ -22,7 +23,7 @@ open scoped ComplexOrder
 namespace RenewalGeometry
 namespace CliffordTwirlMatterAudit
 
-open CommonOrigin NCG.CommonOrigin
+open CommonOrigin MathPhys.CommonOrigin
 
 noncomputable section
 

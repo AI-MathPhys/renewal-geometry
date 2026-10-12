@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurelien Pelissier
 -/
 import RenewalGeometry.Certificates.ProvenancePythagoras
+import MathPhys.Variational.GramPinvRangeProjection
+open MathPhys
 /-!
 # concrete same-history provenance Pythagoras
 
@@ -19,33 +21,6 @@ open scoped ComplexOrder
 namespace RenewalGeometry
 
 set_option maxHeartbeats 800000
-
-/-- The Moore--Penrose range formula is an orthogonal projector and fixes the
-joint synthesis.  Here `J` is the dagger of the Gram, represented by its
-Hermiticity, Penrose identities, and the equivalent synthesis-range identity. -/
-theorem gram_pinv_range_projection
-    {Y K : Type*} [Fintype Y] [Fintype K]
-    [DecidableEq Y] [DecidableEq K]
-    (B : Matrix Y K ℂ) (J : Matrix K K ℂ)
-    (hJH : Jᴴ = J)
-    (_hGJG : (Bᴴ * B) * J * (Bᴴ * B) = Bᴴ * B)
-    (hJGJ : J * (Bᴴ * B) * J = J)
-    (hBJG : B * J * (Bᴴ * B) = B) :
-    let P := B * J * Bᴴ
-    Pᴴ = P ∧ P * P = P ∧ P * B = B := by
-  dsimp only
-  have hPH : (B * J * Bᴴ)ᴴ = B * J * Bᴴ := by
-    rw [Matrix.conjTranspose_mul, Matrix.conjTranspose_mul,
-      Matrix.conjTranspose_conjTranspose, hJH]
-    simp only [Matrix.mul_assoc]
-  have hP2 : (B * J * Bᴴ) * (B * J * Bᴴ) = B * J * Bᴴ := by
-    calc
-      (B * J * Bᴴ) * (B * J * Bᴴ)
-          = B * (J * (Bᴴ * B) * J) * Bᴴ := by
-              simp only [Matrix.mul_assoc]
-      _ = B * J * Bᴴ := by rw [hJGJ]
-  refine ⟨hPH, hP2, ?_⟩
-  simpa only [Matrix.mul_assoc] using hBJG
 
 /-- Exact concrete panel decomposition from a retained reversal involution.
 The assumptions say that `P` is the pair-range projector and that the retained

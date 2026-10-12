@@ -3,7 +3,8 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Algebra.GramHelpers
+import MathPhys.Algebra.GramHelpers
+open MathPhys
 /-!
 # `S₄` prototype reduction, the intrinsic interaction
   hypergraph, and the four-cell orbit audit

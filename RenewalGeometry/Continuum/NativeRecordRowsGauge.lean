@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeRecordRowsDirac
+open MathPhys
 
 /-!
 # The Yang–Mills and Higgs residuals of the actual tuple of a native field

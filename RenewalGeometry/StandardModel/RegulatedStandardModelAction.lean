@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import RenewalGeometry.Gravity.FiniteBRSTWardEinstein
 import RenewalGeometry.Action.UniversalCoupledActionCarrier
 import Mathlib.InformationTheory.KullbackLeibler.Basic
+open MathPhys
 
 /-!
 # Explicit finite regulated Standard-Model action

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMReducedStress
 import RenewalGeometry.Continuum.EinsteinSMChartSobolev
+open MathPhys
 
 /-!
 # `cor:reduced-stress`, all clauses (Einstein–Standard-Model action-closure manuscript)
@@ -35,6 +37,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace StressTopology
 
 variable {T : ℝ} {Ysec : Type} [Fintype Ysec] {FC : FermionCarrier Ysec}
@@ -48,10 +51,10 @@ theorem reduced_stress_negSobolev (hT : 0 < T) (reg : RegulatorSequence T FC)
       (∀ t₀ t₁ (h0 : 0 < t₀) (h01 : t₀ < t₁) (h1 : t₁ < T),
         ReducedConvergence (slabChart t₀ t₁ h0 h01 h1) (fun k => reg.fields (ns (ψ k)))
           (fun k => reg.bank (ns (ψ k))) L θ₀ ∧
-        RenewalGeometry.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
+        MathPhys.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
           (fun k x => ymStress (reg.bank (ns (ψ k))) (redJet (reg.fields (ns (ψ k))).z x))
           (fun x => ymStress θ₀ (limitJet L x)) ∧
-        RenewalGeometry.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
+        MathPhys.LpTendsto (slabChart t₀ t₁ h0 h01 h1 (T := T)).μ 1
           (fun k x => higgsStress (reg.bank (ns (ψ k))) (redJet (reg.fields (ns (ψ k))).z x))
           (fun x => higgsStress θ₀ (limitJet L x))) ∧
       (∀ (K : CylRegion T) t₀ t₁ (h0 : 0 < t₀) (h01 : t₀ < t₁) (h1 : t₁ < T),

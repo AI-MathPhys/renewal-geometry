@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.ExactShiftWardFlat
 import RenewalGeometry.Gravity.HarmonicQuarticAnnihilation
+open MathPhys
 
 /-!
 # The literal constant-shift rows `P_c = ∂_λ𝓗_h[(0, c)]`
@@ -39,6 +40,7 @@ noncomputable section
 set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry.ExactPhaseAction.ShiftWard
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

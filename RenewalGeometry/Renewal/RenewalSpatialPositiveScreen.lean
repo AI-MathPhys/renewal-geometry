@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.DiscreteAnalysis.AtlasIsoperimetry
-import RenewalGeometry.DiscreteAnalysis.OperationalSobolevWeylFiniteGraph
+import MathPhys.DiscreteAnalysis.OperationalSobolevWeylFiniteGraph
+open MathPhys
 /-!
 # Renewal-native spatial positive screen
 
@@ -16,7 +17,7 @@ open scoped BigOperators
 
 noncomputable section
 
-namespace RenewalGeometry
+namespace MathPhys
 namespace FiniteWeightedGraph
 
 variable {V : Type*} [Fintype V] [Nonempty V] [DecidableEq V]
@@ -103,4 +104,4 @@ theorem renewalSpatialPositiveScreen
     exact G.eigenfunction_spectralTail_bound f R hR
 
 end FiniteWeightedGraph
-end RenewalGeometry
+end MathPhys

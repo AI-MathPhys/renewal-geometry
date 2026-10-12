@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeBankContinuity
+open MathPhys
 
 /-!
 # Consistency relative to the reconstructed fields

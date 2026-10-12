@@ -6,7 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeLocalActionFrechet
 import RenewalGeometry.GaugeTheory.NativeActionGaugeInvariance
-import RenewalGeometry.Algebra.MatrixExpDerivative
+import MathPhys.Algebra.MatrixExpDerivative
+open MathPhys
 
 /-!
 # The physical link-tangent covector norm of the native action

@@ -4,12 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.OperatorLimits.MoscoResolvent
-import RenewalGeometry.Continuum.OUProcess
-import RenewalGeometry.Operational.ProjectiveState
+import MathPhys.Continuum.OUProcess
+import MathPhys.QuantumInformation.ProjectiveState
 import RenewalGeometry.Commutant.UniversalCoercive
 import RenewalGeometry.GaugeTheory.YMSlabGap
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # The universal continuum assemblies
   (`thm:universal-physical-continuum`,

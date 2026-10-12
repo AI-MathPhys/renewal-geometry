@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactPhaseCompatibleConnection
-import RenewalGeometry.Analysis.LinkRemainderAnalytic
+import MathPhys.Analysis.LinkRemainderAnalytic
+open MathPhys
 
 /-!
 # Analyticity of the explicit phase-compatible finite action

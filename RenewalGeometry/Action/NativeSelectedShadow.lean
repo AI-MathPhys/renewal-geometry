@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Action.SameRecordSourceSelectionExact
 import RenewalGeometry.Continuum.AposterioriShadowRate
+open MathPhys
 
 /-!
 # Same-source selected exact physical shadow (`thm:native-selected-shadow`)

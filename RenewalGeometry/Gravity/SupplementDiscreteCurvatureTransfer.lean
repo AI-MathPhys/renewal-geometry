@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Gravity.DiscreteCurvatureCertificateExact
-import RenewalGeometry.Gravity.CurvatureEnergyPropagationExact
+import MathPhys.Gravity.DiscreteCurvatureCertificateExact
+import MathPhys.Gravity.CurvatureEnergyPropagationExact
 import RenewalGeometry.Action.ActionCurrentCertificateExact
+open MathPhys
 
 /-!
 # Midpoint propagation with the physical Gram transfer

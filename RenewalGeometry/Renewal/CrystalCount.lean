@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Renewal.DimensionTransfer
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # The spacetime-crystal counting function and `q_alg = 1 + b_eff`
 

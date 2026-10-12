@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactStationaryConnection
-import RenewalGeometry.Analysis.PlaquetteBCHExpansion
+import MathPhys.Analysis.PlaquetteBCHExpansion
+open MathPhys
 
 /-!
 # Analytic dependence of the stationary connection

@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.Gravity.RenewalPalatiniHandoffExact
 import RenewalGeometry.Gravity.SupplementVacuumEquationCore
 import RenewalGeometry.Action.PhysicalTestStationarityExact
+open MathPhys
 
 /-!
 # Vacuum equation from certified accepted-action variations, instantiated
@@ -570,7 +571,7 @@ whole space as core) has the constant lift `H = -½ k η` (bounded, trivially co
 zero realized first variation satisfies the remainder condition (the Palatini variation vanishes
 at zero curvature, and `α = λ = 0`). -/
 theorem certifiedMetricTests_flat (K : Set (Fin 4 → ℝ)) :
-    CertifiedMetricTests K (fun _ => RenewalGeometry.palatiniDensity)
+    CertifiedMetricTests K (fun _ => MathPhys.palatiniDensity)
       (fun _ μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (fun _ _ _ _ => 0)
       (fun μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (Test := Matrix (Fin 4) (Fin 4) ℝ)
       (fun k _ => k) Set.univ
@@ -617,7 +618,7 @@ flat packet (including the amendment), a countable core of constant tests `k_m =
 realized variations and zero scaled test gaps. -/
 example (K : Set (Fin 4 → ℝ)) (hK : IsCompact K) :=
   renewal_vacuum_equation_almost_surely (Measure.dirac ()) (Ω := ⊤)
-    (score := fun _ _ => RenewalGeometry.palatiniDensity)
+    (score := fun _ _ => MathPhys.palatiniDensity)
     (e := fun _ _ μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (ω := fun _ _ _ _ => 0)
     (R := fun _ _ _ _ _ => 0) (T := fun _ _ _ _ _ => 0)
     (eL := fun _ μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (ωL := fun _ _ _ => 0)

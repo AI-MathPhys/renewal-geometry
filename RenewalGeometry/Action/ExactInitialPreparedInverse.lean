@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactInitialPreparedJet
+open MathPhys
 
 /-!
 # The full right inverse at a prepared record (`eq:supp-initial-full-inverse`)
@@ -23,6 +24,7 @@ open scoped Topology
 noncomputable section
 
 namespace RenewalGeometry.ExactPhaseAction.PreparedChart
+open MathPhys.ExactPhaseAction
 
 set_option linter.unusedSectionVars false
 

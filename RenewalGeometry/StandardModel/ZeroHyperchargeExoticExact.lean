@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.CanonicalChiralProjectorsExact
-import RenewalGeometry.StandardModel.FaithfulSMQuotientExact
+import MathPhys.GaugeGroups.FaithfulSMQuotientExact
+open MathPhys
 
 /-!
 # Hypercharge support can miss a gauge-charged exotic (`cth:zero-hypercharge-exotic`)

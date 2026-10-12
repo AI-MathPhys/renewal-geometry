@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import NCG.SpectralTriple.Basic
+import MathPhys.NoncommutativeGeometry.Basic
 import RenewalGeometry.Spectralization.MarkedCommutantCoordinates
+open MathPhys
 /-!
 # Finite reconstruction and spectral-compression data
 
@@ -28,7 +29,7 @@ This file encodes `def:reconstruction-categories` of `predictive_spectral_geomet
 
 ## Compact-resolvent level
 
-* `MarkedCompactTriple A H ι`: an `NCG.SpectralTriple` with dense unital smooth
+* `MarkedCompactTriple A H ι`: an `MathPhys.SpectralTriple` with dense unital smooth
   `*`-subalgebra `𝒜_D` (density of `π(𝒜_D)` in `π(𝒜)` in operator norm), optional
   grading and real structure, and declared bounded marks.
 * `CompactUnitaryEquivalence`, `CompactMarkedObject A ι` (separable carriers) with the
@@ -353,13 +354,13 @@ structure HilbertRealStructure (H : Type*) [NormedAddCommGroup H] [InnerProductS
   diracSign : ℤˣ
   gradingSign : ℤˣ
 
-/-- A marked compact-resolvent spectral triple: an `NCG.SpectralTriple` (compact
+/-- A marked compact-resolvent spectral triple: an `MathPhys.SpectralTriple` (compact
 resolvent, distinguished unital smooth `*`-subalgebra `𝒜_D` with bounded commutators)
 whose smooth subalgebra is dense (`π(𝒜_D)` is operator-norm dense in `π(𝒜)`), with an
 optional grading, an optional real structure, and declared bounded marks. -/
 structure MarkedCompactTriple (A : Type*) [Ring A] [StarRing A] [Algebra ℂ A]
     [StarModule ℂ A] (H : Type*) [NormedAddCommGroup H] [InnerProductSpace ℂ H]
-    [CompleteSpace H] (ι : Type*) extends NCG.SpectralTriple A H where
+    [CompleteSpace H] (ι : Type*) extends MathPhys.SpectralTriple A H where
   smooth_dense : ∀ a : A, rep a ∈ closure (rep '' (smoothAlgebra : Set A))
   grading : Option (H →L[ℂ] H)
   grading_spec : ∀ g, grading = some g → IsSelfAdjoint g ∧ g * g = 1 ∧

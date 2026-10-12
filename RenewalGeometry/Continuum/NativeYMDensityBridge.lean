@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeYangMillsMetricVariation
 import RenewalGeometry.Continuum.NativeSpinorVariation
+open MathPhys
 
 /-!
 # The Yang–Mills row of the native local action and its first-variation limit along the nodal

@@ -6,7 +6,8 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeLocalCalibrationClosed
 import RenewalGeometry.Continuum.NativeModelMap
-import RenewalGeometry.Gravity.HomogeneousEinsteinHiggsExact
+import MathPhys.Gravity.HomogeneousEinsteinHiggsExact
+open MathPhys
 
 /-!
 # `cor:local-calibration-nonempty`, last sentence: the obstruction of the uncorrected encoding

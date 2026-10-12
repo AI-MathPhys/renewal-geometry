@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.Action.ExactShiftWardEnvelope
 import RenewalGeometry.Action.ExactActionProvenance
 import RenewalGeometry.Gravity.ShiftWardPacket
+open MathPhys
 
 /-!
 # The constant-shift Ward packet of the literal canonical Hamiltonian
@@ -48,6 +49,7 @@ noncomputable section
 set_option linter.unusedSectionVars false
 
 namespace RenewalGeometry.ExactPhaseAction.ShiftWard
+open MathPhys.ExactPhaseAction
 
 attribute [local instance] Matrix.linftyOpNormedRing Matrix.linftyOpNormedAlgebra
 

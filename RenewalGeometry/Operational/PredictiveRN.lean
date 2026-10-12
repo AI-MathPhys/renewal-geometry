@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Operational.MinimalNaturality
+open MathPhys
 /-!
 # Predictive Radon–Nikodym envelope
   (`thm:predictive-RN-master`, flagship manuscript)

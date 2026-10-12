@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeTailTransferBounds
+open MathPhys
 
 /-!
 # Real-analyticity of the normalised Einstein–Standard-Model density on the chart

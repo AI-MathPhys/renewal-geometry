@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.NativeModelMap
+open MathPhys
 
 /-!
 # A concrete native model and the flat vacuum (non-vacuity of the matter-row theorems)

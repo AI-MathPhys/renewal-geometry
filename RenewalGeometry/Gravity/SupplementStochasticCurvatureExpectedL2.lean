@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.SupplementStochasticCurvature
+open MathPhys
 
 /-!
 # Uniform expected squared spacetime curvature norm

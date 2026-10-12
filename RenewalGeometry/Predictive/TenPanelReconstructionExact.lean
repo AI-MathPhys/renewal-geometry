@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Commutant.FiniteAnchorOperatorNormExact
+open MathPhys
 
 /-!
 # Ten-panel reconstruction and the robust commutant stopping test

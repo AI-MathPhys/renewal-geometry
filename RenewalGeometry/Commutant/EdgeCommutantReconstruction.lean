@@ -5,8 +5,9 @@ Authors: Aurelien Pelissier
 -/
 import RenewalGeometry.Commutant.GrandWedderburn
 import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected
+open MathPhys
 
-open NCG
+open MathPhys
 
 /-!
 # connected edge-commutant reconstruction

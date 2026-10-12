@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Spectralization.FiniteGraphSpectralUniversalityFibreExact
 import RenewalGeometry.Spectralization.CanonicalGraphSpectralizationExact
+open MathPhys
 /-!
 # Stationary renewal graphs and the cycle-current realization fibre
 

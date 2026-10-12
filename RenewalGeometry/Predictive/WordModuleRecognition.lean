@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Commutant.IntrinsicRegularTrace
-import RenewalGeometry.Predictive.ExactSourceSchurResidual
+import MathPhys.OperatorAlgebras.IntrinsicRegularTrace
+import MathPhys.SystemsTheory.ExactSourceSchurResidual
+open MathPhys
 
 /-!
 # Word-module recognition, word-native shadows and inserted word moments

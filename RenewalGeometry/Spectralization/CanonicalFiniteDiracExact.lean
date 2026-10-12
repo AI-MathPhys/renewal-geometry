@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Spectralization.SaturatedFiniteDiracGenerator
+open MathPhys
 
 /-!
 # Canonical finite Dirac operator (`prop:finite-dirac`)

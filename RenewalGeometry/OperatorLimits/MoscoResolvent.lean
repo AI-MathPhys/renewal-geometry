@@ -3,9 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import NCG.Algebra.CliffordConcrete
+import MathPhys.Algebra.CliffordConcrete
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Mosco/resolvent machinery: form convergence, compact screens,
   and the continuum Howe core
@@ -118,9 +119,9 @@ Clifford generators is scalar (re-export of the proved
 irreducibility). -/
 theorem howe_finite_core
     (X : Matrix (Fin 2 × Fin 2) (Fin 2 × Fin 2) ℂ)
-    (hX : ∀ μ, X * NCG.CommonOrigin.gamma μ
-      = NCG.CommonOrigin.gamma μ * X) :
+    (hX : ∀ μ, X * MathPhys.CommonOrigin.gamma μ
+      = MathPhys.CommonOrigin.gamma μ * X) :
     ∃ c : ℂ, X = c • 1 :=
-  NCG.CommonOrigin.gamma_commutant X hX
+  MathPhys.CommonOrigin.gamma_commutant X hX
 
 end RenewalGeometry

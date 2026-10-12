@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.Commutant.Bicommutant
-import RenewalGeometry.Commutant.FiniteStarSubalgebraMutualCommutant
-import RenewalGeometry.Commutant.StarMatrixUnits
+import MathPhys.OperatorAlgebras.Bicommutant
+import MathPhys.OperatorAlgebras.FiniteStarSubalgebraMutualCommutant
+import MathPhys.OperatorAlgebras.StarMatrixUnits
+open MathPhys
 /-!
 # Two-control reconstruction of the internal matrix factors
   (`thm:SM-active-residual-algebra`, Gran-Tensor manuscript)

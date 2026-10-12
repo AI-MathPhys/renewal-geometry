@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.DeSitterCartanComponentsExact
+open MathPhys
 
 /-!
 # Compact Cauchy slices of the flat de Sitter quotient

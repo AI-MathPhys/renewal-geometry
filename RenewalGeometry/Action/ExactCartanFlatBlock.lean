@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.ExactPhaseCompatibleConnection
+open MathPhys
 
 /-!
 # The flat Cartan block: explicit inverse, sup-norm lower bound, inertia `(12,12)` and coframe

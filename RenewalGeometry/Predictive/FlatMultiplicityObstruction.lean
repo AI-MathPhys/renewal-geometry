@@ -5,7 +5,8 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Predictive.FlatWordSpan
-import RenewalGeometry.Commutant.MatrixFactorNormalForm
+import MathPhys.OperatorAlgebras.MatrixFactorNormalForm
+open MathPhys
 
 /-!
 # Terminating multiplicity obstruction (`cor:flat-multiplicity-obstruction`)

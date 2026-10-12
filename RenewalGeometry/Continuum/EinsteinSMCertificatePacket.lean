@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Continuum.EinsteinSMReducedClosure
+open MathPhys
 
 /-!
 # Finite compactness certificates produce the classical strong packet
@@ -83,66 +84,9 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 
 open SobolevOpen (pd box IsTest MemW12)
-
-/-! ### The subsequence principle and diagonal extraction -/
-
-section GenericSubseq
-
-/-- **Subsequence principle**: if every subsequence has a further subsequence converging to `x`,
-the sequence converges to `x`. -/
-theorem tendsto_of_forall_strictMono_subseq {X : Type*} [TopologicalSpace X] {f : ℕ → X} {x : X}
-    (h : ∀ s : ℕ → ℕ, StrictMono s → ∃ φ : ℕ → ℕ, StrictMono φ ∧
-      Tendsto (fun k => f (s (φ k))) atTop (𝓝 x)) : Tendsto f atTop (𝓝 x) := by
-  by_contra hf
-  obtain ⟨U, hU, hfreq⟩ := not_tendsto_iff_exists_frequently_notMem.mp hf
-  obtain ⟨s, hs, hsU⟩ := extraction_of_frequently_atTop hfreq
-  obtain ⟨φ, -, hφ⟩ := h s hs
-  obtain ⟨k, hk⟩ := (hφ.eventually hU).exists
-  exact hsU (φ k) hk
-
-/-- **Diagonal extraction** for countably many properties `P m` of subsequences that can always be
-achieved by further extraction, are stable under further extraction and are determined by tails:
-there is one subsequence satisfying all of them. -/
-theorem exists_diagonal_subseq (P : ℕ → (ℕ → ℕ) → Prop)
-    (hex : ∀ m (s : ℕ → ℕ), StrictMono s → ∃ ψ : ℕ → ℕ, StrictMono ψ ∧ P m (s ∘ ψ))
-    (hcomp : ∀ m (s ψ : ℕ → ℕ), StrictMono ψ → P m s → P m (s ∘ ψ))
-    (htail : ∀ m (s : ℕ → ℕ) (k : ℕ), StrictMono s → P m (fun j => s (j + k)) → P m s) :
-    ∃ D : ℕ → ℕ, StrictMono D ∧ ∀ m, P m D := by
-  choose ψ hψ hP using hex
-  let Φ : ℕ → {f : ℕ → ℕ // StrictMono f} := fun m => Nat.rec
-    ⟨ψ 0 id strictMono_id, hψ 0 id strictMono_id⟩
-    (fun m F => ⟨F.1 ∘ ψ (m + 1) F.1 F.2, F.2.comp (hψ _ _ _)⟩) m
-  have hΦs : ∀ m, (Φ (m + 1)).1 = (Φ m).1 ∘ ψ (m + 1) (Φ m).1 (Φ m).2 := fun m => rfl
-  have hPm : ∀ m, P m (Φ m).1 := by
-    intro m
-    cases m with
-    | zero => exact hP 0 id strictMono_id
-    | succ m => exact hP (m + 1) (Φ m).1 (Φ m).2
-  set D : ℕ → ℕ := fun k => (Φ k).1 k with hD
-  have hDs : StrictMono D := by
-    refine strictMono_nat_of_lt_succ fun k => ?_
-    show (Φ k).1 k < (Φ (k + 1)).1 (k + 1)
-    rw [hΦs k]
-    exact (Φ k).2.lt_iff_lt.mpr (Nat.lt_of_lt_of_le (Nat.lt_succ_self k)
-      ((hψ (k + 1) (Φ k).1 (Φ k).2).id_le (k + 1)))
-  have hrange : ∀ m k, m ≤ k → range (Φ k).1 ⊆ range (Φ m).1 := by
-    intro m k hmk
-    induction k, hmk using Nat.le_induction with
-    | base => exact le_rfl
-    | succ k _ ih =>
-      rw [hΦs k]
-      exact (range_comp_subset_range _ _).trans ih
-  refine ⟨D, hDs, fun m => ?_⟩
-  obtain ⟨χ, hχ, hχD⟩ := exists_strictMono_of_range (Φ m).2 hDs m
-    (fun k => hrange m (k + m) (by omega) ⟨k + m, rfl⟩)
-  refine htail m D m hDs ?_
-  have e : (fun j => D (j + m)) = (Φ m).1 ∘ χ := funext hχD
-  rw [e]
-  exact hcomp m (Φ m).1 χ hχ (hPm m)
-
-end GenericSubseq
 
 /-! ### Rational chart boxes -/
 
@@ -151,10 +95,11 @@ section RatBoxes
 variable {T : ℝ}
 
 /-- A chart box with rational corners. -/
-def ChartBox.IsRat (Q : ChartBox T) : Prop :=
+def _root_.MathPhys.EinsteinSM.ChartBox.IsRat (Q : ChartBox T) : Prop :=
   ∀ i, Q.a i ∈ range ((↑) : ℚ → ℝ) ∧ Q.b i ∈ range ((↑) : ℚ → ℝ)
 
-theorem ChartBox.ext_ab {Q Q' : ChartBox T} (ha : Q.a = Q'.a) (hb : Q.b = Q'.b) : Q = Q' := by
+theorem _root_.MathPhys.EinsteinSM.ChartBox.ext_ab {Q Q' : ChartBox T} (ha : Q.a = Q'.a)
+    (hb : Q.b = Q'.b) : Q = Q' := by
   cases Q; cases Q'; cases ha; cases hb; rfl
 
 /-- There are countably many rational chart boxes. -/
@@ -251,7 +196,7 @@ section Patch
 variable {T : ℝ} {C : Type} [Fintype C]
 
 /-- All ten components of a limit-field tuple at a point. -/
-def LimitFields.at (L : LimitFields C) (x : E4) :=
+def _root_.MathPhys.EinsteinSM.LimitFields.at (L : LimitFields C) (x : E4) :=
   (L.e x, L.de x, L.A x, L.F x, L.H x, L.K x, L.Ψ x, L.dΨ x, L.Ψb x, L.dΨb x)
 
 theorem LimitFields.AEEqOn.ae_at {Q : ChartBox T} {L L' : LimitFields C}
@@ -260,7 +205,8 @@ theorem LimitFields.AEEqOn.ae_at {Q : ChartBox T} {L L' : LimitFields C}
     x h1 h2 h3 h4 h5 h6 h7 h8 h9 h10
   simp only [LimitFields.at, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10]
 
-theorem LimitFields.aeEqOn_of_ae_at {Q : ChartBox T} {L L' : LimitFields C}
+theorem _root_.MathPhys.EinsteinSM.LimitFields.aeEqOn_of_ae_at {Q : ChartBox T}
+    {L L' : LimitFields C}
     (h : ∀ᵐ x ∂Q.μ, L.at x = L'.at x) : LimitFields.AEEqOn Q L L' := by
   have hc : ∀ x, L.at x = L'.at x → L.e x = L'.e x ∧ L.de x = L'.de x ∧ L.A x = L'.A x ∧
       L.F x = L'.F x ∧ L.H x = L'.H x ∧ L.K x = L'.K x ∧ L.Ψ x = L'.Ψ x ∧ L.dΨ x = L'.dΨ x ∧
@@ -274,13 +220,15 @@ theorem LimitFields.aeEqOn_of_ae_at {Q : ChartBox T} {L L' : LimitFields C}
     h.mono fun x hx => (hc x hx).2.2.2.2.2.2.2.2.1, h.mono fun x hx => (hc x hx).2.2.2.2.2.2.2.2.2⟩
 
 /-- Patching a family of limit-field tuples along an index function `k`. -/
-def LimitFields.patch (Lm : ℕ → LimitFields C) (k : E4 → ℕ) : LimitFields C :=
+def _root_.MathPhys.EinsteinSM.LimitFields.patch (Lm : ℕ → LimitFields C)
+    (k : E4 → ℕ) : LimitFields C :=
   ⟨fun x => (Lm (k x)).e x, fun x => (Lm (k x)).de x, fun x => (Lm (k x)).A x,
     fun x => (Lm (k x)).F x, fun x => (Lm (k x)).H x, fun x => (Lm (k x)).K x,
     fun x => (Lm (k x)).Ψ x, fun x => (Lm (k x)).dΨ x, fun x => (Lm (k x)).Ψb x,
     fun x => (Lm (k x)).dΨb x⟩
 
-theorem LimitFields.patch_at (Lm : ℕ → LimitFields C) (k : E4 → ℕ) (x : E4) :
+theorem _root_.MathPhys.EinsteinSM.LimitFields.patch_at (Lm : ℕ → LimitFields C) (k : E4 → ℕ)
+    (x : E4) :
     (LimitFields.patch Lm k).at x = (Lm (k x)).at x := rfl
 
 end Patch
@@ -294,7 +242,8 @@ variable {T : ℝ} {C : Type} [Fintype C] {left : C → Bool} {Ysec : Type} [Fin
 /-- **Subsequence principle for reduced convergence**: if every subsequence has a further
 subsequence converging in the reduced topology on `Q` to the fixed limit `(L, θ₀)`, and the reduced
 certificate holds on `Q`, the whole sequence converges. -/
-theorem ReducedConvergence.of_subseq_packet {Q : ChartBox T} {z : ℕ → SmoothFields T left}
+theorem _root_.MathPhys.EinsteinSM.ReducedConvergence.of_subseq_packet {Q : ChartBox T}
+    {z : ℕ → SmoothFields T left}
     {θ : ℕ → CoefficientBank Ysec} {L : LimitFields C} {θ₀ : CoefficientBank Ysec}
     (hc : ReducedCertificate Q z θ)
     (h : ∀ s : ℕ → ℕ, StrictMono s → ∃ φ : ℕ → ℕ, StrictMono φ ∧
@@ -409,11 +358,6 @@ section CoframeUpgrade
 
 variable {T : ℝ}
 
-theorem norm_coframeC_eq (f : CoframeFibre) :
-    ‖(fun p : Fin 4 × Fin 4 => ((f p.1 p.2 : ℝ) : ℂ))‖ = ‖f‖ := by
-  refine (norm_curry_eq (fun a μ => ((f a μ : ℝ) : ℂ))).trans ?_
-  exact norm_pi_congr fun a => norm_pi_congr fun μ => Complex.norm_real _
-
 /-- **`L^∞`-precompact coframes converging in `H¹` converge in `L^∞`** (the `L^∞` subsequential
 limits are identified with the `H¹` limit through convergence in measure). -/
 theorem coframe_Linfty_of_H1 {Q : ChartBox T} {e : ℕ → E4 → CoframeFibre}
@@ -517,7 +461,8 @@ theorem L2SubseqCompact.comp {Q : ChartBox T} {F : Type*} [NormedAddCommGroup F]
     {u : ℕ → E4 → F} (h : L2SubseqCompact Q u) {ψ : ℕ → ℕ} (hψ : StrictMono ψ) :
     L2SubseqCompact Q (fun k => u (ψ k)) := fun s hs => h (ψ ∘ s) (hψ.comp hs)
 
-theorem LpPrecompact.l2SubseqCompact {F : Type*} [NormedAddCommGroup F] [CompleteSpace F]
+theorem _root_.MathPhys.EinsteinSM.LpPrecompact.l2SubseqCompact {F : Type*}
+    [NormedAddCommGroup F] [CompleteSpace F]
     {Q : ChartBox T} {u : ℕ → E4 → F} (h : LpPrecompact 2 Q.μ u) : L2SubseqCompact Q u :=
   fun s _ => by
     have : Fact ((1 : ℝ≥0∞) ≤ 2) := ⟨by norm_num⟩
@@ -598,7 +543,8 @@ theorem lpPrecompact_of_cauchy {F : Type*} [NormedAddCommGroup F] {μ : Measure 
     exact (ENNReal.ofReal_lt_ofReal_iff hε).mpr (half_lt_self hε)
 
 /-- A precompact sequence in `L^p` is bounded in `L^p`. -/
-theorem LpPrecompact.lpBounded {F : Type*} [NormedAddCommGroup F] {μ : Measure E4}
+theorem _root_.MathPhys.EinsteinSM.LpPrecompact.lpBounded {F : Type*} [NormedAddCommGroup F]
+    {μ : Measure E4}
     {p : ℝ≥0∞} (hp : 1 ≤ p) {u : ℕ → E4 → F} (h : LpPrecompact p μ u) : LpBounded p μ u := by
   obtain ⟨hmem, hnet⟩ := h
   obtain ⟨s, hs⟩ := hnet 1 one_pos

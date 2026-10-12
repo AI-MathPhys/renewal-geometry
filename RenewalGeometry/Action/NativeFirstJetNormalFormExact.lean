@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Action.NativeDensitiesExact
+open MathPhys
 
 /-!
 # Shifted-first-jet normal form of the local action and its uniform Hessian scale
@@ -51,6 +52,7 @@ namespace RenewalGeometry
 /-! ### `L(z) = 1 + z L₁(z)` and the curl decomposition of the plaquette logarithm -/
 
 namespace ShiftedPlaquette
+open MathPhys.ShiftedPlaquette
 
 variable {𝔄 : Type*} [NormedRing 𝔄] [NormedAlgebra ℝ 𝔄] [CompleteSpace 𝔄]
 
@@ -212,6 +214,7 @@ end ShiftedPlaquette
 /-! ### The divided difference of the Palatini coefficient (`eq:native-C-firstjet`) -/
 
 namespace NativeDensity
+open MathPhys.NativeDensity
 
 open ShiftedJetAction (Grid unitVec fwdDiff stencil)
 open NativeScaling (Mat eta metric readerOmega omegaLink)

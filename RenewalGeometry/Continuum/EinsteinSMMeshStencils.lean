@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCofinalTransport
 import RenewalGeometry.Continuum.EinsteinSMComparisonBounds
+open MathPhys
 
 /-!
 # The Standard-Model comparison stencils and their first variations
@@ -32,6 +34,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace Comparison
 
 open SobolevOpen (pd)
@@ -169,7 +172,7 @@ def cospinConnDeriv (z d : FieldTuple FC.C) (μ : Fin 4) (y : E4) :
 
 /-- `Ḟ_{μν} = ∂_μa_ν - ∂_νa_μ + [A_μ,a_ν] + [a_μ,A_ν]`. -/
 def curvDeriv (A a : E4 → ConnFibre) (x : E4) : Fin 4 → ConnFibre := fun μ ν =>
-  pd (fun y => a y ν) μ x - pd (fun y => a y μ) ν x + comm (A x μ) (a x ν) + comm (a x μ) (A x ν)
+  pd (fun y => a y ν) μ x - pd (fun y => a y μ) ν x + MathPhys.EinsteinSM.comm (A x μ) (a x ν) + MathPhys.EinsteinSM.comm (a x μ) (A x ν)
 
 /-- `K̇_μ = ∂_μη + ρ_H(a_μ)H + ρ_H(A_μ)η`. -/
 def higgsDeriv (A : E4 → ConnFibre) (H : E4 → HiggsFibre) (a : E4 → ConnFibre)
@@ -205,10 +208,10 @@ theorem differentiableAt_comp_apply {F : Type*} [NormedAddCommGroup F] [NormedSp
 
 /-- Bilinearity of the commutator along lines. -/
 theorem comm_line (X Y X' Y' : LieFibre) (t : ℝ) :
-    comm (X + t • Y) (X' + t • Y') =
-      comm X X' + t • (comm X Y' + comm Y X') + t ^ 2 • comm Y Y' := by
+    MathPhys.EinsteinSM.comm (X + t • Y) (X' + t • Y') =
+      MathPhys.EinsteinSM.comm X X' + t • (MathPhys.EinsteinSM.comm X Y' + MathPhys.EinsteinSM.comm Y X') + t ^ 2 • MathPhys.EinsteinSM.comm Y Y' := by
   funext i j
-  simp only [comm, mmul, Pi.sub_apply, Pi.add_apply, Pi.smul_apply, Complex.real_smul]
+  simp only [MathPhys.EinsteinSM.comm, mmul, Pi.sub_apply, Pi.add_apply, Pi.smul_apply, Complex.real_smul]
   simp only [Finset.mul_sum, ← Finset.sum_add_distrib, ← Finset.sum_sub_distrib]
   refine Finset.sum_congr rfl fun k _ => ?_
   push_cast
@@ -218,7 +221,7 @@ theorem comm_line (X Y X' Y' : LieFibre) (t : ℝ) :
 theorem curvatureF_line {A a : E4 → ConnFibre} {x : E4} (hA : DifferentiableAt ℝ A x)
     (ha : DifferentiableAt ℝ a x) (t : ℝ) :
     curvatureF (A + t • a) x = curvatureF A x + t • curvDeriv A a x +
-      t ^ 2 • fun μ ν => comm (a x μ) (a x ν) := by
+      t ^ 2 • fun μ ν => MathPhys.EinsteinSM.comm (a x μ) (a x ν) := by
   funext μ ν
   have h1 := pd_line (differentiableAt_comp_apply hA ν) (differentiableAt_comp_apply ha ν) t μ
   have h2 := pd_line (differentiableAt_comp_apply hA μ) (differentiableAt_comp_apply ha μ) t ν
@@ -231,7 +234,7 @@ theorem hasDerivAt_curvatureF_line {A a : E4 → ConnFibre} {x : E4} (hA : Diffe
     (ha : DifferentiableAt ℝ a x) :
     HasDerivAt (fun t : ℝ => curvatureF (A + t • a) x) (curvDeriv A a x) 0 := by
   have h := ((hasDerivAt_id (0 : ℝ)).smul_const (curvDeriv A a x)).const_add (curvatureF A x)
-  have h2 := ((hasDerivAt_pow 2 (0 : ℝ)).smul_const (fun μ ν => comm (a x μ) (a x ν)))
+  have h2 := ((hasDerivAt_pow 2 (0 : ℝ)).smul_const (fun μ ν => MathPhys.EinsteinSM.comm (a x μ) (a x ν)))
   have := h.add h2
   norm_num at this
   refine this.congr_of_eventuallyEq (Eventually.of_forall fun t => ?_)
@@ -536,7 +539,7 @@ theorem fromYM_curvDeriv {A a : E4 → ConnFibre} {B : ℝ} (hA : IsC11 A B) (ha
   rw [fderiv_ymConn_apply ha, fderiv_ymConn_apply ha]
   have e : ymConn A μ x * ymConn a ν x + ymConn a μ x * ymConn A ν x -
       ymConn A ν x * ymConn a μ x - ymConn a ν x * ymConn A μ x =
-      toYM (comm (A x μ) (a x ν)) + toYM (comm (a x μ) (A x ν)) := by
+      toYM (MathPhys.EinsteinSM.comm (A x μ) (a x ν)) + toYM (MathPhys.EinsteinSM.comm (a x μ) (A x ν)) := by
     simp only [ymConn, toYM_comm]; abel
   rw [e]
   simp only [← map_sub, ← map_add, fromYM_toYM]
@@ -544,19 +547,19 @@ theorem fromYM_curvDeriv {A a : E4 → ConnFibre} {B : ℝ} (hA : IsC11 A B) (ha
 
 theorem curvatureF_antisymm (A : E4 → ConnFibre) (x : E4) (μ ν : Fin 4) :
     curvatureF A x ν μ = -curvatureF A x μ ν := by
-  simp only [curvatureF, comm]
+  simp only [curvatureF, MathPhys.EinsteinSM.comm]
   abel
 
 theorem curvatureF_diag (A : E4 → ConnFibre) (x : E4) (μ : Fin 4) : curvatureF A x μ μ = 0 := by
-  simp [curvatureF, comm]
+  simp [curvatureF, MathPhys.EinsteinSM.comm]
 
 theorem curvDeriv_antisymm (A a : E4 → ConnFibre) (x : E4) (μ ν : Fin 4) :
     curvDeriv A a x ν μ = -curvDeriv A a x μ ν := by
-  simp only [curvDeriv, comm]
+  simp only [curvDeriv, MathPhys.EinsteinSM.comm]
   abel
 
 theorem curvDeriv_diag (A a : E4 → ConnFibre) (x : E4) (μ : Fin 4) : curvDeriv A a x μ μ = 0 := by
-  simp only [curvDeriv, comm, sub_self, zero_add]
+  simp only [curvDeriv, MathPhys.EinsteinSM.comm, sub_self, zero_add]
   abel
 
 /-- Constants of the Yang–Mills stencil estimates. -/

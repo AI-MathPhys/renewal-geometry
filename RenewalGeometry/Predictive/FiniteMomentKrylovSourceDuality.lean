@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.Predictive.PointedTetrahedralSourceIsometryAndKrylovUniqueness
 import RenewalGeometry.StandardModel.K4Carrier
+open MathPhys
 /-!
 # Finite-moment Krylov source duality
 

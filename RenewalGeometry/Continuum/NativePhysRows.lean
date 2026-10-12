@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeFieldScaling
 import RenewalGeometry.Continuum.NativeTailTransferBounds
+open MathPhys
 
 /-!
 # The physical (gauge-Lie) Euler rows of the native action
@@ -40,6 +41,7 @@ open Finset
 open scoped ContDiff
 
 namespace RenewalGeometry.NativeTail
+open MathPhys.NativeTail
 
 open DiscreteEulerConsistency (R4 evec jet1 contEuler limDensity IsPeriodic)
 open NativeScaling (Mat)

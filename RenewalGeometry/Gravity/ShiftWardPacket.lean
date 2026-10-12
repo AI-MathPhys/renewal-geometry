@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.HarmonicQuarticAnnihilation
+open MathPhys
 
 /-!
 # The constant-shift Ward packet from a quadratic-plus-cubic shift structure

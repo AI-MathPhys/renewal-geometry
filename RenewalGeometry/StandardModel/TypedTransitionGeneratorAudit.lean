@@ -7,6 +7,7 @@ import RenewalGeometry.StandardModel.EdgeResolvedOccurrenceEndpointClosure
 import Mathlib.Analysis.Calculus.Deriv.Star
 import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
 import Mathlib.Analysis.SpecialFunctions.Exponential
+open MathPhys
 
 /-!
 # Unsplit-generator audit of typed transitions

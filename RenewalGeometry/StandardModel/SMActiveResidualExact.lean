@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import RenewalGeometry.StandardModel.SMActiveResidual
 import RenewalGeometry.StandardModel.ActiveResidualAlgebra
 import RenewalGeometry.Dimension.DimensionLockedK4DecompositionExact
+open MathPhys
 /-!
 # Exact active geometry short and residual census
 

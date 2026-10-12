@@ -5,8 +5,9 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.GaugeTheory.NativeRecordNormalization
-import RenewalGeometry.GaugeTheory.StandardModelCoulombNormalization
-import RenewalGeometry.GaugeTheory.RootedCertificateInvariance
+import MathPhys.GaugeTheory.StandardModelCoulombNormalization
+import MathPhys.GaugeTheory.RootedCertificateInvariance
+open MathPhys
 
 /-!
 # The rooted Coulomb normalization for `G_SM = S(U(3) × U(2))`, with its logarithm chart

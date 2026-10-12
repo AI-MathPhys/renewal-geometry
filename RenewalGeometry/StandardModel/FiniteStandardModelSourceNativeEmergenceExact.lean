@@ -11,6 +11,7 @@ import RenewalGeometry.StandardModel.ExplicitRegulatedStandardModelActionExact
 import RenewalGeometry.Spectralization.CanonicalGraphRegulatorGeometry
 import RenewalGeometry.Gravity.FiniteLineValuedEinstein
 import RenewalGeometry.Action.CorrectedDualMeasureCriterion
+open MathPhys
 /-!
 # Finite Standard-Model source-native emergence
 

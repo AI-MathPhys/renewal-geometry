@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.GaugeTheory.LatticeYangMillsRecords04
+open MathPhys
 /-!
 # Easy exact records, batch 05 (Gran-Tensor manuscript, final YM cluster)
 

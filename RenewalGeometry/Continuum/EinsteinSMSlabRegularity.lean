@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import RenewalGeometry.Continuum.EinsteinSMCompactnessCertificates
 import RenewalGeometry.Continuum.EinsteinSMRegularityUpgrade
-import RenewalGeometry.Continuum.EinsteinSMCovectorSmoothness
-import RenewalGeometry.Analysis.PartialDerivativesC1
+import MathPhys.Continuum.EinsteinSMCovectorSmoothness
+import MathPhys.Analysis.PartialDerivativesC1
+open MathPhys
 
 /-!
 # Regularity upgrade on a common slab: classical fields (`cor:strong-solution-upgrade`,
@@ -45,6 +47,7 @@ set_option synthInstance.maxSize 1024
 
 namespace RenewalGeometry
 namespace EinsteinSM
+open MathPhys.EinsteinSM
 namespace SlabReg
 
 open SobolevOpen (pd box IsTest MemW12 HasWeakPartial)
@@ -317,13 +320,13 @@ theorem contDiffOn_apply' {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
 
 theorem contDiffOn_comm {f g : E4 → LieFibre} {s : Set E4} {n : WithTop ℕ∞}
     (hf : ContDiffOn ℝ n f s) (hg : ContDiffOn ℝ n g s) :
-    ContDiffOn ℝ n (fun x => comm (f x) (g x)) s := by
+    ContDiffOn ℝ n (fun x => MathPhys.EinsteinSM.comm (f x) (g x)) s := by
   refine contDiffOn_pi.mpr fun i => contDiffOn_pi.mpr fun j => ?_
   have hfij : ∀ a b, ContDiffOn ℝ n (fun x => f x a b) s := fun a b =>
     contDiffOn_apply' (contDiffOn_apply' hf a) b
   have hgij : ∀ a b, ContDiffOn ℝ n (fun x => g x a b) s := fun a b =>
     contDiffOn_apply' (contDiffOn_apply' hg a) b
-  simp only [comm, mmul, Pi.sub_apply]
+  simp only [MathPhys.EinsteinSM.comm, mmul, Pi.sub_apply]
   exact (ContDiffOn.sum fun k _ => (hfij i k).mul (hgij k j)).sub
     (ContDiffOn.sum fun k _ => (hgij i k).mul (hfij k j))
 
@@ -601,10 +604,10 @@ theorem curv_ae_eq (hRC : ReducedConvergence (slabChart t₀ t₁ h0 h01 h1) z �
     fun κ κ' => locallyIntegrableOn_of_continuousOn_slab (continuousOn_pd_of_C1 (hu κ) κ')
   have hFm : MemLp (fun x => L.F x μ ν i j) 2 Q.μ :=
     memLp_pi_iff.mp (memLp_pi_iff.mp (memLp_pi_iff.mp (memLp_pi_iff.mp hRC.curv_mem μ) ν) i) j
-  have hcomm : ContinuousOn (fun x => comm (L.A x μ) (L.A x ν) i j) (cylSlab T) := by
+  have hcomm : ContinuousOn (fun x => MathPhys.EinsteinSM.comm (L.A x μ) (L.A x ν) i j) (cylSlab T) := by
     have := (contDiffOn_comm (contDiffOn_apply' hA μ) (contDiffOn_apply' hA ν)).continuousOn
     exact (continuous_apply j).comp_continuousOn ((continuous_apply i).comp_continuousOn this)
-  have hv : LocallyIntegrableOn (fun x => L.F x μ ν i j - comm (L.A x μ) (L.A x ν) i j) Q.set :=
+  have hv : LocallyIntegrableOn (fun x => L.F x μ ν i j - MathPhys.EinsteinSM.comm (L.A x μ) (L.A x ν) i j) Q.set :=
     (locallyIntegrableOn_of_memLp_chart hFm).sub (locallyIntegrableOn_of_continuousOn_slab hcomm)
   have hw : LocallyIntegrableOn (fun x => pd (fun y => ℓ ν (L.A y)) μ x -
       pd (fun y => ℓ μ (L.A y)) ν x) Q.set := (hlocP ν μ).sub (hlocP μ ν)

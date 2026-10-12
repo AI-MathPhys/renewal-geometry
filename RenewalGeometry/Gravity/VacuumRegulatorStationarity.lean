@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Gravity.RenewalFriedmannExact
 import RenewalGeometry.Gravity.VacuumRegulatorAssembly
+open MathPhys
 
 /-!
 # The flat and de Sitter regulator profiles solve the renewal Euler system

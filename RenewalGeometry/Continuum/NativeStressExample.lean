@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Continuum.NativeStressEulerRow
 import RenewalGeometry.Continuum.NativeModelExample
+open MathPhys
 
 /-!
 # Non-vacuity of the coframe row (bridge step P3-stress of `thm:native-closure`)

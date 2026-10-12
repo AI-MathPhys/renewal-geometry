@@ -18,7 +18,7 @@ jobs:
           python3 scripts/check_layering.py
           python3 scripts/check_statement_coverage.py
 
-      - name: Build NCG and RenewalGeometry
+      - name: Build MathPhys and RenewalGeometry
         uses: leanprover/lean-action@v1
         with:
           use-mathlib-cache: true

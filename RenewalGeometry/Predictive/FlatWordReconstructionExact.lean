@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import Mathlib
 import RenewalGeometry.Predictive.FlatWordSpan
 import RenewalGeometry.Predictive.FiniteGrandTensorExact
+open MathPhys
 
 /-!
 # Finite flat word reconstruction: least flat depth and exhaustion

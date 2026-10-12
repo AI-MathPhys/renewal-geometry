@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
-import RenewalGeometry.DiscreteAnalysis.NodalSourceTransferExact
+import MathPhys.DiscreteAnalysis.NodalSourceTransferExact
+open MathPhys
 
 /-!
 # The `O(hK³)` clause of the nodal source transfer
@@ -47,6 +48,7 @@ open scoped ENNReal
 namespace RenewalGeometry
 
 namespace NodalSourceTransfer
+open MathPhys.NodalSourceTransfer
 
 variable {d : ℕ}
 variable {Fy : Type*} [NormedAddCommGroup Fy] [NormedSpace ℝ Fy]

@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.StandardModel.InternalSeedSaturationExact
 import RenewalGeometry.StandardModel.FiniteInternalLandingExact
 import RenewalGeometry.Commutant.JointTypedActionAlgebra
+open MathPhys
 
 /-!
 # Relative-commutant saturation for actual represented words

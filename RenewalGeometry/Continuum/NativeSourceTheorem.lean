@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.Continuum.NativeZeroSource
 import RenewalGeometry.Continuum.NativeLowSourceGevrey
 import RenewalGeometry.Continuum.NativeSourceBudget
+open MathPhys
 
 /-!
 # The leakage-tolerant physical forcing estimate (`thm:native-source`)

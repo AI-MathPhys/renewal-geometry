@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
 import Mathlib
+import MathPhys.QuantumInformation.GradingCrossSignMass
+open MathPhys
 
 /-!
 # Spectator-lift invariance of active grading change
@@ -41,6 +43,7 @@ open scoped Kronecker
 
 namespace RenewalGeometry
 namespace ActiveOddLift
+open MathPhys.ActiveOddLift
 
 variable {dA dK : Type*} [Fintype dA] [Fintype dK] [DecidableEq dA] [DecidableEq dK]
 
@@ -58,21 +61,6 @@ noncomputable def kroneckerLift
   map_smul' c X := by
     simp only [Matrix.smul_apply, smul_eq_mul, RingHom.id_apply, Finset.smul_sum,
       smul_smul]
-
-/-- A matrix is the sum of its scaled matrix units. -/
-theorem eq_sum_smul_single {m n : Type*} [Fintype m] [Fintype n] [DecidableEq m]
-    [DecidableEq n] (A : Matrix m n ℂ) :
-    A = ∑ i, ∑ j, A i j • single i j (1 : ℂ) := by
-  conv_lhs => rw [matrix_eq_sum_single A]
-  refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => ?_
-  rw [smul_single, smul_eq_mul, mul_one]
-
-/-- A linear map on matrices is determined by its values on matrix units. -/
-theorem linearMap_apply_eq_sum {m : Type*} [Fintype m] [DecidableEq m]
-    (Φ : Matrix m m ℂ →ₗ[ℂ] Matrix m m ℂ) (A : Matrix m m ℂ) :
-    Φ A = ∑ i, ∑ j, A i j • Φ (single i j 1) := by
-  conv_lhs => rw [eq_sum_smul_single A]
-  simp only [map_sum, map_smul]
 
 /-- The product lift acts on elementary tensors by `(Φ ⊗ Ψ)(A ⊗ₖ B) = Φ A ⊗ₖ Ψ B`. -/
 theorem kroneckerLift_kronecker
@@ -104,20 +92,6 @@ theorem spectator_lift_trace
       = (P * Φ P').trace := by
   rw [kroneckerLift_kronecker, ← mul_kronecker_mul, trace_kronecker, one_mul, hΨ, hσ,
     mul_one]
-
-/-- The grading projector `P₊ = (1 + Z)/2`. -/
-noncomputable def gradingPlus (Z : Matrix dA dA ℂ) : Matrix dA dA ℂ :=
-  (2 : ℂ)⁻¹ • (1 + Z)
-
-/-- The grading projector `P₋ = (1 − Z)/2`. -/
-noncomputable def gradingMinus (Z : Matrix dA dA ℂ) : Matrix dA dA ℂ :=
-  (2 : ℂ)⁻¹ • (1 - Z)
-
-/-- The active cross-sign mass `μ_Z^act(Φ) = Tr[P₋ Φ(P₊)] + Tr[P₊ Φ(P₋)]`
-(`eq:active-cross-sign-mass`). -/
-noncomputable def activeCrossSignMass (Z : Matrix dA dA ℂ)
-    (Φ : Matrix dA dA ℂ →ₗ[ℂ] Matrix dA dA ℂ) : ℂ :=
-  (gradingMinus Z * Φ (gradingPlus Z)).trace + (gradingPlus Z * Φ (gradingMinus Z)).trace
 
 /-- **`thm:active-odd-lift-invariance`** (`eq:active-odd-lift-invariance`): for an unread
 spectator state `σ` and any trace-preserving spectator map `Ψ`, the product lift

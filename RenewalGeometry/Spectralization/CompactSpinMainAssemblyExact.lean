@@ -3,9 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.OperatorLimits.CompatibleStableAtlasNormResolvent
-import RenewalGeometry.Spectralization.MeshGraphDistanceConvergenceExact
-import RenewalGeometry.Spectralization.StableCompactSpinApproximationExact
+import MathPhys.OperatorLimits.CompatibleStableAtlasNormResolvent
+import MathPhys.SpectralGeometry.MeshGraphDistanceConvergenceExact
+import MathPhys.SpectralGeometry.StableCompactSpinApproximationExact
+open MathPhys
 
 /-!
 # Norm-resolvent convergence under atlas stability, with convergent metric heads
@@ -33,7 +34,7 @@ distance = graph distance) and uniform convergence of the metric heads to the di
 -/
 
 open Filter Topology
-open RenewalGeometry.EndpointBlockMetricHead RenewalGeometry.MeshGraphDistanceConvergence
+open MathPhys.EndpointBlockMetricHead MathPhys.MeshGraphDistanceConvergence
 
 noncomputable section
 

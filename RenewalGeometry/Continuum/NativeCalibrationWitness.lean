@@ -8,6 +8,7 @@ import RenewalGeometry.Continuum.NativeLocalCalibrationClosed
 import RenewalGeometry.Continuum.NativeDiracEulerRows
 import RenewalGeometry.Continuum.NativeGravityJetDensity
 import RenewalGeometry.Continuum.NativeStressDirac
+open MathPhys
 
 /-!
 # Non-vacuity of `cor:local-calibration-nonempty`: constant vacua solve the native Euler equations

@@ -5,6 +5,7 @@ Authors: Aurelien Pelissier
 -/
 import RenewalGeometry.Lorentz.FrameTransport
 import Mathlib.Analysis.CStarAlgebra.Unitary.Connected
+open MathPhys
 
 /-!
 # global frame transport assembly

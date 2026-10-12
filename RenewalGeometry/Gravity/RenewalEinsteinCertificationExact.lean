@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.Gravity.SupplementVacuumEquationInstantiated
+open MathPhys
 
 /-!
 # General renewal-to-Einstein certification
@@ -496,7 +497,7 @@ any compact `K`, the flat Minkowski coframe, the zero connection, curvature, tor
 writer, the Palatini score (`α = 0`, `β = 1`, `λ = 0`), the constant inverse-metric tests
 (test type `Matrix`, core = all of them) with lifts `-½ k η`, and zero realized variations. -/
 theorem renewalEinsteinCertification_flat (K : Set (Fin 4 → ℝ)) (hK : IsCompact K) :
-    RenewalEinsteinCertification ⊤ (fun _ => RenewalGeometry.palatiniDensity)
+    RenewalEinsteinCertification ⊤ (fun _ => MathPhys.palatiniDensity)
       (fun _ μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (fun _ _ _ => 0) (fun _ _ _ _ => 0)
       (fun _ _ _ _ => 0) (fun _ _ _ _ => 0) (fun μ _ => (Pi.single μ 1 : Fin 4 → ℝ))
       (fun _ _ => 0) 0 1 0 0 K (Test := Matrix (Fin 4) (Fin 4) ℝ) (fun k _ => k) Set.univ
@@ -538,7 +539,7 @@ theorem renewalEinsteinCertification_flat (K : Set (Fin 4 → ℝ)) (hK : IsComp
 /-- **Non-vacuity of `(E1)`–`(E5)`, literal-link route**: the same flat data with zero limiting
 curvature. -/
 theorem renewalEinsteinCertification_flat_literalLink (K : Set (Fin 4 → ℝ)) (hK : IsCompact K) :
-    RenewalEinsteinCertification ⊤ (fun _ => RenewalGeometry.palatiniDensity)
+    RenewalEinsteinCertification ⊤ (fun _ => MathPhys.palatiniDensity)
       (fun _ μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (fun _ _ _ => 0) (fun _ _ _ _ => 0)
       (fun _ _ _ _ => 0) (fun _ _ _ _ => 0) (fun μ _ => (Pi.single μ 1 : Fin 4 → ℝ))
       (fun _ _ => 0) 0 1 0 0 K (Test := Matrix (Fin 4) (Fin 4) ℝ) (fun k _ => k) Set.univ
@@ -583,7 +584,7 @@ def flatFieldCore (K : Set (Fin 4 → ℝ)) :
 
 /-- At the flat solution, every bounded measurable test field is certified. -/
 theorem certifiedMetricTests_flatFields (K : Set (Fin 4 → ℝ)) :
-    CertifiedMetricTests K (fun _ => RenewalGeometry.palatiniDensity)
+    CertifiedMetricTests K (fun _ => MathPhys.palatiniDensity)
       (fun _ μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (fun _ _ _ _ => 0)
       (fun μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) Prod.fst (flatFieldCore K)
       (fun τ _ x => metricTestGenerator minkowski 1 (τ.1 x)) Prod.snd (fun _ _ => 0) := by
@@ -615,7 +616,7 @@ theorem renewalEinsteinCertification_flat_ae (K : Set (Fin 4 → ℝ)) (hK : IsC
         (cfm (fun μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) x) (symmUnit i j) (rcf RL x) = 0 := by
   have F := renewalEinsteinCertification_flat K hK
   have C := certifiedMetricTests_flatFields K
-  have h : RenewalEinsteinCertification ⊤ (fun _ => RenewalGeometry.palatiniDensity)
+  have h : RenewalEinsteinCertification ⊤ (fun _ => MathPhys.palatiniDensity)
       (fun _ μ _ => (Pi.single μ 1 : Fin 4 → ℝ)) (fun _ _ _ => 0) (fun _ _ _ _ => 0)
       (fun _ _ _ _ => 0) (fun _ _ _ _ => 0) (fun μ _ => (Pi.single μ 1 : Fin 4 → ℝ))
       (fun _ _ => 0) 0 1 0 0 K Prod.fst (flatFieldCore K)

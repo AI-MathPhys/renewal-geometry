@@ -3,9 +3,10 @@ Copyright (c) 2026 Aurélien Pélissier. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Aurélien Pélissier
 -/
-import RenewalGeometry.Operational.KMSDual
+import MathPhys.QuantumInformation.KMSDual
+open MathPhys
 
-open NCG
+open MathPhys
 /-!
 # Branchwise Petz reversal on the predictive orbit
 
@@ -36,8 +37,9 @@ matrix realization).
 -/
 
 namespace RenewalGeometry.Upstream
+open MathPhys.Upstream
 
-open NCG RenewalGeometry
+open MathPhys RenewalGeometry
 
 variable {Ax Ay Az : Type*}
 variable [Ring Ax] [PartialOrder Ax] [StarRing Ax] [StarOrderedRing Ax]
@@ -50,7 +52,7 @@ variable [Ring Az] [PartialOrder Az] [StarRing Az] [StarOrderedRing Az]
 /-- Complete positivity for a linear map between two (possibly
 different) star-ordered algebras: every matrix amplification
 preserves quadratic-form positivity.  For `Ax = Ay` this is
-definitionally `NCG.IsCompletelyPositive`. -/
+definitionally `MathPhys.IsCompletelyPositive`. -/
 def IsCPBranchMap (φ : Ax →ₗ[ℂ] Ay) : Prop :=
   ∀ (k : ℕ) (M : Matrix (Fin k) (Fin k) Ax),
     MatrixQF M → MatrixQF (M.map φ)
@@ -70,7 +72,7 @@ theorem IsCPBranchMap.comp {φ : Ax →ₗ[ℂ] Ay} {ψ : Ay →ₗ[ℂ] Az}
 
 omit [StarModule ℂ Ax] [StarOrderedRing Ax] in
 /-- On a single algebra the branch notion coincides with
-`NCG.IsCompletelyPositive`. -/
+`MathPhys.IsCompletelyPositive`. -/
 theorem isCPBranchMap_iff_cp (φ : Ax →ₗ[ℂ] Ax) :
     IsCPBranchMap φ ↔ IsCompletelyPositive φ := Iff.rfl
 

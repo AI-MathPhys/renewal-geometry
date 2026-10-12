@@ -6,6 +6,7 @@ Authors: Aurélien Pélissier
 import RenewalGeometry.Predictive.WordModuleRecognition
 import RenewalGeometry.Predictive.ExternalShadowNoGo
 import RenewalGeometry.StandardModel.DeterminantIncidenceExact
+open MathPhys
 /-!
 # Historical typed-compilation criterion (`cor:historical-typed-compilation`)
 

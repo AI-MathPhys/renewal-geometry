@@ -7,6 +7,7 @@ import Mathlib
 import RenewalGeometry.StandardModel.RecordWitnessCommutingFamily
 import RenewalGeometry.StandardModel.RecordWitnessCliffordFamily
 import RenewalGeometry.StandardModel.CliffordMarginalMatterNoGo
+open MathPhys
 
 /-!
 # Record-complete nonidentifiability witness: concrete instances and the algebra contrast
@@ -17,7 +18,7 @@ duality paper.
 * `helmert`: a concrete Helmert frame `O` (`eq:helmert-frame`): `O_{eμ} = w_μ(e)/√(k(k+1))`,
   `k = μ + 1`, with the integer Helmert vectors `w_μ = (1, …, 1, −k, 0, …, 0)`;
 * `cliffordSMST4`: a concrete Clifford family on `ℂ⁴ = ℂ^{Fin 2 × Fin 2}`: the four axes
-  `gamma μ` of `NCG.CliffordConcrete` and the chirality `smstChirality`;
+  `gamma μ` of `MathPhys.CliffordConcrete` and the chirality `smstChirality`;
 * the algebra contrast behind `eq:inequivalent-system-algebras`: the unital algebra generated
   by the Clifford family `H^q_e` contains the `Γ_μ ⊗ I₅` (`gammaTensor_mem_adjoin`), hence is
   **not** commutative (`adjoin_cliffordHq_not_commutative`), and its commutant contains
@@ -35,7 +36,7 @@ open Matrix Kronecker
 namespace RenewalGeometry
 namespace RecordWitness
 
-open FiveKraus NCG.CommonOrigin
+open FiveKraus MathPhys.CommonOrigin
 
 /-! ### A concrete Helmert frame -/
 

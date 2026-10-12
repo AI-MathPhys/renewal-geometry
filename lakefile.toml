@@ -1,7 +1,7 @@
 name = "RenewalGeometry"
 version = "0.2.0"
 keywords = ["math", "noncommutative-geometry", "physics"]
-defaultTargets = ["NCG", "RenewalGeometry"]
+defaultTargets = ["MathPhys", "RenewalGeometry"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -14,10 +14,10 @@ name = "mathlib"
 scope = "leanprover-community"
 rev = "v4.34.0-rc1"
 
-# Generic noncommutative-geometry foundation (no reference to renewal processes).
+# Generic mathematical physics and analysis (known theorems and infrastructure; depends on Mathlib only).
 [[lean_lib]]
-name = "NCG"
+name = "MathPhys"
 
-# The Renewal Geometry programme, built on NCG.
+# The Renewal Geometry programme, built on MathPhys.
 [[lean_lib]]
 name = "RenewalGeometry"

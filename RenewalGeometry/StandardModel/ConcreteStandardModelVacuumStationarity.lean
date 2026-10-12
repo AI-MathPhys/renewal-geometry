@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import RenewalGeometry.StandardModel.ConcreteStandardModelInvariantVacuum
 import Mathlib.Analysis.Complex.RealDeriv
+open MathPhys
 
 /-!
 # Stationarity of the concrete finite Standard-Model vacuum

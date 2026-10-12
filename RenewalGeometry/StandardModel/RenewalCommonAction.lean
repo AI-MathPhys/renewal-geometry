@@ -5,6 +5,7 @@ Authors: Aurélien Pélissier
 -/
 import Mathlib
 import RenewalGeometry.StandardModel.RenewalLatticeCarrier
+open MathPhys
 
 /-!
 # The common gravity–matter finite action of the renewal realization
